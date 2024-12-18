@@ -50,6 +50,9 @@ class Search_Form extends \Tourfic\Core\Shortcodes {
 			$child_age_limit = '';
 		}
 
+		error_log(print_r($type, true));
+		$tf_tabs_class = (count( $type ) > 1 || $type[0] == 'all') ? ' tf-multiple-tabs' : '';
+
 		ob_start();
 		?>
 
@@ -59,8 +62,10 @@ class Search_Form extends \Tourfic\Core\Shortcodes {
             <div class="tf_custom-container">
             <div class="tf_custom-inner">
 
-		<?php endif; ?>
-		<div id="tf-booking-search-tabs" class="<?php echo esc_attr($classes) ?> <?php echo 2==$design ? esc_attr('tf-shortcode-design-2-tab') : ''; ?>">
+		<?php endif; 
+
+		?>
+		<div id="tf-booking-search-tabs" class="<?php echo esc_attr($classes) . 'tf-search-tabs__design--' . esc_attr($design) ?> <?php echo 2==$design ? esc_attr('tf-shortcode-design-2-tab') : ''; ?>">
 
 			<?php if ( $title ): ?>
 				<div class="tf_widget-title"><h2><?php echo esc_html( $title ); ?></h2></div>
@@ -70,8 +75,9 @@ class Search_Form extends \Tourfic\Core\Shortcodes {
 				<div class="tf_widget-subtitle"><p><?php echo esc_html( $subtitle ); ?></p></div>
 			<?php endif; ?>
 			<!-- Booking Form Tabs -->
-			<div class="tf-booking-form-tab <?php echo esc_attr('design-'.$design); ?>">
-				<?php do_action( 'tf_before_booking_form_tab', $type ) ?>
+			<div class="tf-booking-form-tab <?php echo esc_attr('design-'.$design . $tf_tabs_class); ?>">
+				
+				<?php do_action( 'tf_before_booking_form_tab', $type ); ?>
 
 				<?php if ( ! in_array( 'hotel', $disable_services ) && Helper::tf_is_search_form_tab_type( 'hotel', $type ) && ! Helper::tf_is_search_form_single_tab( $type ) ) : ?>
 					<button class="tf-tablinks btn-styled active" data-form-id="tf-hotel-booking-form"><?php esc_html_e( apply_filters("tf_hotel_search_form_tab_button_text", $hotel_tab_title) , 'tourfic' ); ?></button>

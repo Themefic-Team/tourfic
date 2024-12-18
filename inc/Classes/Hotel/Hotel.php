@@ -2231,7 +2231,7 @@ class Hotel
 								
 							</div>
 						</div>
-						<input type="hidden" name="check-in-out-date" class="tf-check-in-out-date" onkeypress="return false;" placeholder="<?php esc_attr_e('Check-in - Check-out', 'tourfic'); ?>" <?php echo Helper::tfopt('date_hotel_search') ? 'required' : ''; ?>>
+						<input type="hidden" name="check-in-out-date" class="tf-check-in-out-date tf-check-inout-hidden" onkeypress="return false;" placeholder="<?php esc_attr_e('Check-in - Check-out', 'tourfic'); ?>" <?php echo Helper::tfopt('date_hotel_search') ? 'required' : ''; ?>>
 					</div>
 					
 					<!-- Check-out -->
@@ -2265,6 +2265,7 @@ class Hotel
 				</div>
 				<div class="tf-search__form__fieldset__right">
 					<!-- Submit Button -->
+					<input type="hidden" name="type" value="tf_hotel" class="tf-post-type" />
 					<button type="submit" class="tf-search__form__submit mh-btn">
 						<?php esc_html_e(apply_filters("tf_hotel_search_form_submit_button_text", 'Search Now'), 'tourfic'); ?>
 						<svg class="tf-search__form__submit__icon" width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">

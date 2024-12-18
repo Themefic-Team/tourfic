@@ -2273,3 +2273,31 @@ function tfOpenForm(evt, formName) {
 function tf_load_rating() {
     jQuery('#commentform').show();
 }
+
+
+/**
+ * Update Max Width of Search Field
+ */
+function updateMaxWidth(inputField) {
+    let inputValue = inputField.val().trim();
+    let characterCount = inputValue.length;
+    let newMaxWidth = 132 + (Math.max(characterCount - 1, 0) * 40);
+    inputField.closest(".tf-search__form__field.tf-mx-width").css("max-width", newMaxWidth + "px");
+}
+
+// Input change
+jQuery(".tf-search__form__field__input").on("input", function() {
+    updateMaxWidth(jQuery(this));
+});
+
+// Increment button
+jQuery(".acr-inc").on("click", function() {
+    let inputField = jQuery(".tf-search__form__field__input");
+    inputField.trigger("input");
+});
+
+// Decrement button
+jQuery(".acr-dec").on("click", function() {
+    let inputField = jQuery(".tf-search__form__field__input");
+    inputField.trigger("input");
+});

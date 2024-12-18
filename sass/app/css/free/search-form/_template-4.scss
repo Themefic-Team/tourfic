@@ -1,7 +1,61 @@
-// travel form
+// tf seach form
+
+.tf-search-tabs__design--4 {
+  position: relative;
+  z-index: 1;
+  .tf-booking-form-tab.design-4 {
+    &.tf-multiple-tabs {
+      margin-top: -77px;
+      width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+      background: $color-light-yellow;
+      border-radius: 40px 40px 0 0;
+      position: relative;
+      .btn-styled {
+        background: transparent !important;
+        border: 0 !important;
+        color: #fff !important;
+        padding: 30px 50px !important;
+        &::after {
+          display: none;
+        }
+        &.active {
+          background-color: $color-secondary !important;
+          border-radius: 0 !important;
+        }
+        &:first-child {
+          &.active {
+            border-radius: 40px 0 0 0 !important;
+          }
+        }
+        &:last-child {
+          &.active {
+            border-radius: 0 40px 0 0 !important;
+          }
+        }
+      }
+    }
+
+    // &::after {
+    //   content: '';
+    //   position: absolute;
+    //   top: 0;
+    //   left: 0;
+    //   width: 100%;
+    //   height: 100%;
+    //   background: #FA6400;
+    //   z-index: 1;
+    //  transform: skewY(-3deg);
+    // }
+  }
+  .tf-booking-forms-wrapper {
+    margin-top: 0;
+  }
+}
 
 .tf-search__form {
-  padding: 72px 0;
+  padding: 72px 15px;
   background-color: $color-secondary;
   border-radius: 0;
   box-shadow: none;
@@ -24,7 +78,7 @@
     display: flex;
     @include align-items(center);
     @include justify-content(space-between);
-    gap: 70px;
+    gap: 60px;
     @media #{$max1366} {
       gap: 40px;
     }
@@ -111,10 +165,53 @@
       .tf-search__form__field.tf-mx-width {
         max-width: 132px;
       }
+      .tf-time-picker {
+        .tf-time-head {
+          font-size: 32px;
+          font-weight: 500;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          margin-bottom: 0;
+          cursor: pointer;
+          .tf-time-meridiem {
+            text-transform: lowercase;
+          }
+        }
+      }
     }
     &__right {
       max-width: 180px;
       flex: 1;
+    }
+    .tf_checkin_to_label {
+      color: $color-light-yellow;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 26px;
+      margin-left: 30px;
+    }
+   
+  }
+
+  &__car {
+    &__fieldset {
+      max-width: fit-content;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      & > div {
+        min-width: 250px;
+      }
+      &.tf-pick-drop-location.active{
+        .tf_pickup_location{
+          min-width: 500px;
+        }
+        .tf_dropoff_location{
+          display: none;
+        }
+      }
     }
   }
 
@@ -190,13 +287,13 @@
           position: absolute;
           right: 0;
           top: 5px;
-          &:last-child{
+          &:last-child {
             top: 38px;
           }
           svg {
-              &:hover {
-                fill: #3E64E0;
-              }
+            &:hover {
+              fill: #3e64e0;
+            }
           }
         }
       }
@@ -224,7 +321,9 @@
     .icon--location {
       position: absolute;
       top: 17px;
-      right: 22px;
+      right: 17px;
+      min-width: auto;
+      max-width: initial;
       @media #{$max767} {
         top: 12px;
         right: 16px;
@@ -235,23 +334,33 @@
         }
       }
     }
-    &__mthyr{
+    &__mthyr {
       display: flex;
       flex-direction: column;
     }
   }
 
-  .tf-check-in-out-date{
+  .tf-check-inout-hidden {
     visibility: hidden;
     position: absolute;
     height: 0;
     padding: 0;
   }
 
-  &__group{
+  &__group {
     padding: 0;
     border: 0;
     background: transparent;
+    &.tf_car_date_time_picker {
+      .tf-search__form__field {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        & > div {
+          cursor: pointer;
+        }
+      }
+    }
   }
   &__label {
     font-size: 20px;
@@ -318,6 +427,77 @@
       background: $color-blue;
       border-color: $color-blue;
       color: white;
+    }
+  }
+
+  .tf-driver-location {
+    max-width: 1678px;
+    display: flex;
+    color: white;
+    margin: auto;
+    margin-top: 20px;
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0px 32px;
+
+      label {
+        color: white;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 150%;
+        display: block;
+        position: relative;
+        padding-left: 30px;
+        margin-bottom: 0px;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        input {
+          position: absolute;
+          opacity: 0;
+          cursor: pointer;
+          height: 0;
+          width: 0;
+          &:checked{
+            ~ .checkmark{
+             &::after{
+               display: block;
+             }
+            }
+          }
+        }
+        .checkmark {
+          position: absolute;
+          top: 3px;
+          left: 0;
+          height: 18px;
+          width: 18px;
+          border: 1.5px solid white;
+          background-color: transparent;
+          border-radius: 3px;
+          &::after {
+            content: "";
+            position: absolute;
+            display: none;
+            left: 5px;
+            top: 1px;
+            width: 7px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+          }
+        }
+      }
     }
   }
 }
