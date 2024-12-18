@@ -21,8 +21,6 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
         'caps' => 'edit_tf_tourss',
 	);
 
-	// TODO: Need to change the Booked by field name tf_tour_booked_by to tf_tours_booked_by in js
-
 	function set_settings_fields() {
 		$this->settings = array(
 			'tf_booking_fields'          => array(
@@ -342,15 +340,15 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 		echo wp_json_encode( array(
 			'tour_type'                 => $tour_type,
 			'custom_avail'              => $custom_avail,
-			'cont_custom_date'          => $meta['cont_custom_date'],
-			'departure_date'            => $departure_date,
-			'return_date'               => $return_date,
-			'min_people'                => $min_people,
-			'max_people'                => $max_people,
+			'cont_custom_date'          => !empty( $meta['cont_custom_date'] ) ? $meta['cont_custom_date'] : '',
+			'departure_date'            => isset( $departure_date ) && !empty($departure_date) ? $departure_date : '',
+			'return_date'               => isset( $return_date ) && !empty($return_date) ? $return_date : '',
+			'min_people'                => isset( $min_people ) && !empty($min_people) ? $min_people : '',
+			'max_people'                => isset( $max_people ) && !empty($max_people) ? $max_people : '',
 			'disabled_day'              => $disabled_day,
 			'disable_range'             => $disable_range,
-			'disable_specific'          => $disable_specific,
-			'disable_specific2'         => explode( ',', $meta['disable_specific'] ),
+			'disable_specific'          => isset( $disable_specific ) && !empty($disable_specific) ? $disable_specific : '',
+			'disable_specific2'         => is_array($meta['disable_specific']) && !empty($meta['disable_specific']) ? explode( ',', $meta['disable_specific'] ) : '',
 			'disable_same_day'          => $disable_same_day,
 			'disable_adult_price'       => $disable_adult_price,
 			'disable_child_price'       => $disable_child_price,
