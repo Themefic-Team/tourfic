@@ -603,28 +603,34 @@
                         $('#tf-backend-apartment-book-btn').attr('disabled', 'disabled');
                     },
                     success: function (response) {
-                        if(!response.success){
-                            notyf.error(response.data)
-                        } else {
-                            var serviceSelect = $('[name="tf_apartment_additional_fees"]');
-
-                            serviceSelect.select2({multiple: true});
-
-                            //Additional fees auto selection
-                            serviceSelect.empty();
-
-                            if (response.data.additional_fees.length > 0) {
-                                $.each(response.data.additional_fees, function (key, value) {
-                                    serviceSelect.append('<option value="' + key + '">' + value.label + ' - ' + value.price + '</option>');
-                                });
-                            } else {
-                                serviceSelect.append('<option value="' + 1 + '">' + 'There are no additional fees' + '</option>');
+                        if( typeof response == "string") {
+                            response = JSON.parse(response);
+                            if( response.status == "security_error" ) {
+                                notyf.error(response.msg)
+                                $('#tf-backend-apartment-book-btn').attr('disabled', 'disabled');
+                                return;
                             }
-
-                            serviceSelect.find('option').prop('selected', true).trigger('change');
-
-                            $('#tf-backend-apartment-book-btn').removeAttr('disabled');
                         }
+                    
+                        var serviceSelect = $('[name="tf_apartment_additional_fees"]');
+
+                        serviceSelect.select2({multiple: true});
+
+                        //Additional fees auto selection
+                        serviceSelect.empty();
+
+                        if (response.data.additional_fees.length > 0) {
+                            $.each(response.data.additional_fees, function (key, value) {
+                                serviceSelect.append('<option value="' + key + '">' + value.label + ' - ' + value.price + '</option>');
+                            });
+                        } else {
+                            serviceSelect.append('<option value="' + 1 + '">' + 'There are no additional fees' + '</option>');
+                        }
+
+                        serviceSelect.find('option').prop('selected', true).trigger('change');
+
+                        $('#tf-backend-apartment-book-btn').removeAttr('disabled');
+
                     },
                     error: function (response) {
                         console.log(response);

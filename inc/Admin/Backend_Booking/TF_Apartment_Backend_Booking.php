@@ -103,13 +103,20 @@ class TF_Apartment_Backend_Booking extends TF_Backend_Booking {
 	}
 
 	public function tf_check_apartment_aditional_fees_callback() {
-		// Add nonce for security and authentication.
-		check_ajax_referer( 'updates', '_nonce' );
+
+		if ( ! check_ajax_referer( 'updates', '_nonce' ) ) {
+			$response['status'] = 'security_error';
+			$response['msg']    = esc_html__( 'Security error! Reload the page and try again.', 'tourfic' );
+			echo wp_json_encode( $response );
+			wp_die();
+		}
 
 		// Check if the current user has the required capability.
 		if (!current_user_can('manage_options')) {
-			wp_send_json_error(__('You do not have permission to access this resource.', 'tourfic'));
-			return;
+			$response['status'] = 'security_error';
+			$response['msg']    = esc_html__( 'Security error! Reload the page and try again.', 'tourfic' );
+			echo wp_json_encode( $response );
+			wp_die();
 		}
 
 		$apartment_id = isset( $_POST['apartment_id'] ) ? sanitize_text_field( $_POST['apartment_id'] ) : 0;
