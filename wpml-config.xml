@@ -13,6 +13,16 @@
                 <key name="itinerary-downloader-title"/>
                 <key name="itinerary-downloader-desc"/>
                 <key name="itinerary-downloader-button"/>
+                <key name="itinerary-field">
+					<key name="*">
+						<key name="sleep-mode-title" />
+					</key>
+				</key>
+				<key name="meals">
+					<key name="*">
+						<key name="meal" />
+					</key>
+				</key>
             </key>
             <key name="deposit-title"/>
             <key name="deposit-subtitle"/>
