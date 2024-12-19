@@ -1,6 +1,11 @@
 <wpml-config>
     <admin-texts>
         <key name="tf_settings">
+            <key name="book-confirm-field">
+                <key name="*">
+                    <key name="reg-field-label" />
+                </key>
+            </key>
             <key name="tf-week-day-flatpickr"/>
             <key name="rt-title"/>
             <key name="rt-description"/>
@@ -31,6 +36,16 @@
             <key name="tour_traveler_details_text"/>
             <key name="hotel_booking_form_button_text"/>
             <key name="hotel_booking_check_button_text"/>
+
+            <!-- <key name="*">
+                <key name="r-hotel">
+                    <key name="*">
+                        <key name="*" />
+                    </key>
+                </key>
+            </key> -->
+
         </key>
     </admin-texts>
+            
 </wpml-config>
