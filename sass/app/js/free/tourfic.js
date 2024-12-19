@@ -2281,7 +2281,19 @@ function tf_load_rating() {
 function updateMaxWidth(inputField) {
     let inputValue = inputField.val().trim();
     let characterCount = inputValue.length;
-    let newMaxWidth = 132 + (Math.max(characterCount - 1, 0) * 40);
+
+    // Get the window width
+    let windowWidth = jQuery(window).width();
+    
+    // Adjust max width based on window width
+    let newMaxWidth;
+    if (windowWidth < 992) {
+        newMaxWidth = 100 + (Math.max(characterCount - 1, 0) * 20); // Mobile: 100px + 20px per character
+    } else {
+        newMaxWidth = 132 + (Math.max(characterCount - 1, 0) * 40); // Desktop: 132px + 40px per character
+    }
+
+    // Apply the new max-width
     inputField.closest(".tf-search__form__field.tf-mx-width").css("max-width", newMaxWidth + "px");
 }
 

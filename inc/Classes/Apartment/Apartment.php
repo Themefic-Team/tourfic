@@ -749,7 +749,7 @@ class Apartment
 				})(jQuery);
 			</script>
 		<?php } elseif (!empty($design) && 4 == $design) { ?>
-			<form class="tf-archive-search-box-wrapper tf-search__form tf-shortcode-design-4 <?php echo esc_attr($classes); ?>"  id="tf_apartment_booking" method="get" autocomplete="off" action="<?php echo esc_url(Helper::tf_booking_search_action()); ?>">
+			<form class="tf-archive-search-box-wrapper tf-search__form tf-shortcode-design-4 <?php echo esc_attr($classes); ?>" id="tf_apartment_booking" method="get" autocomplete="off" action="<?php echo esc_url(Helper::tf_booking_search_action()); ?>">
 				<fieldset class="tf-search__form__fieldset">
 					<!-- Location -->
 					<div class="tf-search__form__fieldset__left">
@@ -872,7 +872,7 @@ class Apartment
 						<!-- Divider -->
 						<div class="tf-search__form__divider"></div>
 						<!-- Check-in -->
-						<div class="tf-search__form__group">
+						<div class="tf-search__form__group tf-checkin-group">
 							<div class="tf_apt_check_in_out_date">
 								<label for="tf-search__form-checkin" class="tf-search__form__label">
 									<?php echo esc_html_e('Check-In', 'tourfic'); ?>
@@ -897,16 +897,17 @@ class Apartment
 											<span class="year form--span"><?php echo esc_html(gmdate('Y')); ?></span>
 										</div>
 									</div>
-									<div class="tf_checkin_to_label">
-										<?php echo esc_html_e('To', 'tourfic'); ?>
-									</div>
+
 								</div>
 							</div>
 							<input type="hidden" name="check-in-out-date" class="tf-check-inout-hidden tf-apt-check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php esc_attr_e('Check-in - Check-out', 'tourfic'); ?>" <?php echo Helper::tfopt('date_apartment_search') ? 'required' : ''; ?>>
 						</div>
-
+						<!-- label to -->
+						<div class="tf_checkin_to_label">
+							<?php echo esc_html_e('To', 'tourfic'); ?>
+						</div>
 						<!-- Check-out -->
-						<div class="tf-search__form__group tf_apt_check_in_out_date">
+						<div class="tf-search__form__group tf_apt_check_in_out_date tf-checkout-group">
 							<label for="tf-search__form-checkout" class="tf-search__form__label">
 								<?php echo esc_html_e('Check-Out', 'tourfic'); ?>
 							</label>
@@ -938,7 +939,7 @@ class Apartment
 						<!-- Submit Button -->
 						<input type="hidden" name="type" value="tf_apartment" class="tf-post-type" />
 						<button type="submit" class="tf-search__form__submit mh-btn">
-							<?php esc_html_e(apply_filters("tf_apartment_search_form_submit_button_text", 'Search'), 'tourfic'); ?> 
+							<?php esc_html_e(apply_filters("tf_apartment_search_form_submit_button_text", 'Search'), 'tourfic'); ?>
 							<svg class="tf-search__form__submit__icon" width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 								<path d="M15.75 14.7188L11.5625 10.5312C12.4688 9.4375 12.9688 8.03125 12.9688 6.5C12.9688 2.9375 10.0312 0 6.46875 0C2.875 0 0 2.9375 0 6.5C0 10.0938 2.90625 13 6.46875 13C7.96875 13 9.375 12.5 10.5 11.5938L14.6875 15.7812C14.8438 15.9375 15.0312 16 15.25 16C15.4375 16 15.625 15.9375 15.75 15.7812C16.0625 15.5 16.0625 15.0312 15.75 14.7188ZM1.5 6.5C1.5 3.75 3.71875 1.5 6.5 1.5C9.25 1.5 11.5 3.75 11.5 6.5C11.5 9.28125 9.25 11.5 6.5 11.5C3.71875 11.5 1.5 9.28125 1.5 6.5Z" fill="white" />
 							</svg>
@@ -998,7 +999,7 @@ class Apartment
 					});
 				})(jQuery);
 			</script>
-	
+
 		<?php } else { ?>
 			<form class="tf_booking-widget <?php echo esc_attr($classes); ?>" id="tf_apartment_booking" method="get" autocomplete="off" action="<?php echo esc_url(Helper::tf_booking_search_action()); ?>">
 				<div class="tf_homepage-booking">

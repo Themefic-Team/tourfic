@@ -583,7 +583,7 @@ class Tour
 						<!-- Divider -->
 						<div class="tf-search__form__divider"></div>
 						<!-- Check-in -->
-						<div class="tf-search__form__group">
+						<div class="tf-search__form__group tf-checkin-group">
 							<div class="tf_tour_check_in_out_date">
 								<label for="tf-search__form-checkin" class="tf-search__form__label">
 									<?php echo esc_html_e('Check-In', 'tourfic'); ?>
@@ -608,16 +608,17 @@ class Tour
 											<span class="year form--span"><?php echo esc_html(gmdate('Y')); ?></span>
 										</div>
 									</div>
-									<div class="tf_checkin_to_label">
-										<?php echo esc_html_e('To', 'tourfic'); ?>
-									</div>
+
 								</div>
 							</div>
 							<input type="hidden" name="check-in-out-date" class="tf-tour-check-in-out-date tf-check-inout-hidden" id="check-in-out-date" onkeypress="return false;" placeholder="<?php esc_html_e('Select Date', 'tourfic'); ?>" <?php echo Helper::tfopt('date_tour_search') ? 'required' : ''; ?>>
 						</div>
-
+						<!-- label to -->
+						<div class="tf_checkin_to_label">
+							<?php echo esc_html_e('To', 'tourfic'); ?>
+						</div>
 						<!-- Check-out -->
-						<div class="tf-search__form__group tf_tour_check_in_out_date">
+						<div class="tf-search__form__group tf_tour_check_in_out_date tf-checkout-group">
 							<label for="tf-search__form-checkout" class="tf-search__form__label">
 								<?php echo esc_html_e('Check-Out', 'tourfic'); ?>
 							</label>
@@ -709,7 +710,7 @@ class Tour
 					});
 				})(jQuery);
 			</script>
-			
+
 
 		<?php } else { ?>
 			<form class="tf_booking-widget <?php echo esc_attr($classes); ?>" id="tf_tour_aval_check" method="get" autocomplete="off" action="<?php echo esc_url(Helper::tf_booking_search_action()); ?>">

@@ -538,9 +538,9 @@ class Car_Rental
             </script>
         <?php } elseif (!empty($design) && 4 == $design) { ?>
             <form class="tf-archive-search-box-wrapper tf-search__form tf-shortcode-design-4 <?php echo esc_attr($classes); ?>" id="tf_car_booking" method="get" autocomplete="off" action="<?php echo esc_url(Helper::tf_booking_search_action()); ?>">
-                <fieldset class="tf-search__form__fieldset">
+                <fieldset class="tf-search__form__fieldset tf-search__form__car__fieldset">
                     <!-- Pickup -->
-                    <div class="tf-search__form__fieldset__left tf-search__form__car__fieldset tf-pick-drop-location">
+                    <div class="tf-search__form__fieldset__left tf-pick-drop-location">
                         <div class="tf_pickup_location">
                             <label for="tf-search__form-pickup" class="tf-search__form__label">
                                 <?php echo esc_html_e("Pick-up", "tourfic"); ?>
@@ -729,6 +729,7 @@ class Car_Rental
                             enableTime: false,
                             dateFormat: "Y/m/d",
                             minDate: "today",
+                            disableMobile: "true",
                             <?php Helper::tf_flatpickr_locale(); ?>
                             onChange: function(selectedDates, dateStr) {
 
@@ -750,6 +751,7 @@ class Car_Rental
                             enableTime: false,
                             dateFormat: "Y/m/d",
                             minDate: "today",
+                            disableMobile: "true",
                             <?php Helper::tf_flatpickr_locale(); ?>
 
                             onChange: function(selectedDates, dateStr) {
@@ -769,7 +771,7 @@ class Car_Rental
                                         enableTime: true,
                                         noCalendar: true,
                                         dateFormat: "H:i K",
-
+                                        disableMobile: "true",
                                         onChange: function(selectedDates, dateStr) {
                                             const [time, meridiem] = dateStr.split(" ");
                                             document.querySelector(timeSelector).textContent = time;
@@ -804,7 +806,7 @@ class Car_Rental
                     });
                 })(jQuery);
             </script>
-           
+
         <?php } else { ?>
             <form class="tf_booking-widget <?php echo esc_attr($classes); ?>" id="tf_car_booking" method="get" autocomplete="off" action="<?php echo esc_url(Helper::tf_booking_search_action()); ?>">
                 <div class="tf_homepage-booking">
