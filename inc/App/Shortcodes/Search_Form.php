@@ -50,7 +50,6 @@ class Search_Form extends \Tourfic\Core\Shortcodes {
 			$child_age_limit = '';
 		}
 
-		error_log(print_r($type, true));
 		$tf_tabs_class = (count( $type ) > 1 || $type[0] == 'all') ? ' tf-multiple-tabs' : '';
 
 		ob_start();

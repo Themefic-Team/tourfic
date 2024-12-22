@@ -708,45 +708,8 @@ class Car_Rental
                         // flatpickr locale first day of Week
                         <?php Helper::tf_flatpickr_locale("root"); ?>
 
-                        // Function to update the date UI
-                        function updateDatePickerUI(dateStr, targetSelector) {
-                            const date = new Date(dateStr);
-                            const day = date.getDate();
-                            const month = date.toLocaleString("default", {
-                                month: "short"
-                            });
-                            const year = date.getFullYear();
 
-                            // Update the UI with the selected date
-                            document.querySelector(`${targetSelector} .date`).textContent = day;
-                            document.querySelector(`${targetSelector} .month`).textContent = month;
-                            document.querySelector(`${targetSelector} .year`).textContent = year;
-                            document.querySelector(`${targetSelector}_input`).value = dateStr;
-                        }
-
-                        // Pickup date pickers
-                        var pickupFlatpickr = $(".tf_pickup_date").flatpickr({
-                            enableTime: false,
-                            dateFormat: "Y/m/d",
-                            minDate: "today",
-                            disableMobile: "true",
-                            <?php Helper::tf_flatpickr_locale(); ?>
-                            onChange: function(selectedDates, dateStr) {
-
-                                // Update the UI for pickup and dropoff dates
-                                updateDatePickerUI(dateStr, ".tf_pickup_date");
-                                updateDatePickerUI(dateStr, ".tf_dropoff_date");
-
-                                // Set the minDate for dropoff date picker
-                                if (dropoffFlatpickr && dropoffFlatpickr.length > 0) {
-                                    dropoffFlatpickr.forEach(function(instance) {
-                                        instance.set('minDate', dateStr);
-                                    });
-                                }
-                            }
-                        });
-
-                        // Dropoff date picker
+                        // Initialize dropoff date picker
                         var dropoffFlatpickr = $(".tf_dropoff_date").flatpickr({
                             enableTime: false,
                             dateFormat: "Y/m/d",
@@ -754,11 +717,64 @@ class Car_Rental
                             disableMobile: "true",
                             <?php Helper::tf_flatpickr_locale(); ?>
 
-                            onChange: function(selectedDates, dateStr) {
-                                console.log("dropoffFlatpickr onChange triggered", selectedDates, dateStr);
-                                updateDatePickerUI(dateStr, ".tf_dropoff_date");
+                            onChange: function(selectedDates, dateStr, instance) {
+
+                                instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                                const date = new Date(selectedDates[0]);
+                                const day = date.getDate();
+                                const month = date.toLocaleString("default", {
+                                    month: "short"
+                                });
+                                const year = date.getFullYear();
+
+                                // Update the UI with the selected date
+                                document.querySelector(".tf_dropoff_date .date").textContent = day;
+                                document.querySelector(".tf_dropoff_date .month").textContent = month;
+                                document.querySelector(".tf_dropoff_date .year").textContent = year;
+                                document.querySelector(".tf_dropoff_date_input").value = dateStr;
                             }
                         });
+
+                        // Initialize pickup date picker
+                        var pickupFlatpickr = $(".tf_pickup_date").flatpickr({
+                            enableTime: false,
+                            dateFormat: "Y/m/d",
+                            minDate: "today",
+                            disableMobile: "true",
+                            <?php Helper::tf_flatpickr_locale(); ?>
+
+                            onChange: function(selectedDates, dateStr, instance) {
+                                instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                                const date = new Date(selectedDates[0]);
+                                const day = date.getDate();
+                                const month = date.toLocaleString("default", {
+                                    month: "short"
+                                });
+                                const year = date.getFullYear();
+
+                                // Update the UI with the selected date
+                                document.querySelector(".tf_pickup_date .date").textContent = day;
+                                document.querySelector(".tf_pickup_date .month").textContent = month;
+                                document.querySelector(".tf_pickup_date .year").textContent = year;
+                                document.querySelector(".tf_pickup_date_input").value = dateStr;
+
+                                // update the ui with the selected date for dropoff date
+                                document.querySelector(".tf_dropoff_date .date").textContent = day;
+                                document.querySelector(".tf_dropoff_date .month").textContent = month;
+                                document.querySelector(".tf_dropoff_date .year").textContent = year;
+                                document.querySelector(".tf_dropoff_date_input").value = dateStr;
+
+                                // Update the minDate for dropoffFlatpickr
+                                if (dropoffFlatpickr) {
+                                    console.log("Updating minDate for dropoff picker:", dateStr);
+                                    dropoffFlatpickr.set('minDate', dateStr); // Update the minDate directly
+                                } else {
+                                    console.error("dropoffFlatpickr is not initialized correctly.");
+                                }
+                            }
+                        });
+
+
 
                         // init time picker
                         function initializeTimePicker(triggerSelector, inputSelector, timeSelector, meridiemSelector) {
