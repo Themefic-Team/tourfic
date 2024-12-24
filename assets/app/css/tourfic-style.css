@@ -22334,7 +22334,12 @@ html {
 
 @media only screen and (max-width: 767.98px) {
   .tf-search-tabs__design--4 .tf-booking-form-tab.design-4.tf-multiple-tabs {
-    display: none;
+    width: 100%;
+    gap: 5px;
+    margin-top: -41px;
+    padding-bottom: 6px;
+    padding-left: 15px;
+    padding-right: 15px;
   }
 }
 
@@ -22361,6 +22366,20 @@ html {
   }
 }
 
+@media only screen and (max-width: 767.98px) {
+  .tf-search-tabs__design--4 .tf-booking-form-tab.design-4.tf-multiple-tabs .btn-styled {
+    min-width: auto;
+    flex: 1;
+    font-size: 15px !important;
+  }
+}
+
+@media only screen and (max-width: 360px) {
+  .tf-search-tabs__design--4 .tf-booking-form-tab.design-4.tf-multiple-tabs .btn-styled {
+    font-size: 14px !important;
+  }
+}
+
 .tf-search-tabs__design--4 .tf-booking-form-tab.design-4.tf-multiple-tabs .btn-styled:hover {
   box-shadow: 0px 3px 0px 0px #FA6400;
 }
@@ -22379,8 +22398,17 @@ html {
 
 .tf-search-tabs__design--4 .tf-booking-forms-wrapper {
   margin-top: 0;
-  overflow: hidden;
   position: relative;
+}
+
+@media only screen and (max-width: 1366px) {
+  .tf-search-tabs__design--4 .tf-booking-forms-wrapper {
+    overflow: hidden;
+  }
+}
+
+.tf-search-tabs__design--4 .tf-booking-form-tab-mobile {
+  display: none;
 }
 
 .tf-search__form {
@@ -22659,13 +22687,19 @@ html {
 
 @media only screen and (max-width: 991.98px) {
   .tf-search__form__car__fieldset .tf-search__form__fieldset__left .icon--location {
-    top: 8px;
+    top: 10px;
   }
 }
 
 @media only screen and (max-width: 767.98px) {
   .tf-search__form__car__fieldset .tf-search__form__fieldset__left .icon--location {
-    top: 17px;
+    top: 7px;
+  }
+}
+
+@media only screen and (max-width: 575.98px) {
+  .tf-search__form__car__fieldset .tf-search__form__fieldset__left .icon--location {
+    top: 6px;
   }
 }
 
@@ -22759,6 +22793,7 @@ html {
   color: white;
   position: relative;
   cursor: pointer;
+  line-height: 22px;
 }
 
 @media only screen and (max-width: 360px) {
@@ -22852,7 +22887,7 @@ html {
   }
 }
 
-@media only screen and (max-width: 360px) {
+@media only screen and (max-width: 400px) {
   .tf-search__form__field__incdec span.form--span {
     position: absolute;
     left: 5px;
@@ -22879,7 +22914,7 @@ html {
   }
 }
 
-@media only screen and (max-width: 360px) {
+@media only screen and (max-width: 400px) {
   .tf-search__form__field__incdec span.form--span:last-child {
     left: 35px;
     top: 100%;
@@ -22950,9 +22985,15 @@ html {
   max-width: initial;
 }
 
+@media only screen and (max-width: 991.98px) {
+  .tf-search__form__field .icon--location {
+    top: 10px;
+  }
+}
+
 @media only screen and (max-width: 767.98px) {
   .tf-search__form__field .icon--location {
-    top: 5px;
+    top: 6px;
     right: 16px;
   }
 }
@@ -23220,6 +23261,10 @@ html {
     margin-right: auto;
     margin-left: 4px;
   }
+}
+
+.flatpickr-calendar.open {
+  right: 0 !important;
 }
 
 

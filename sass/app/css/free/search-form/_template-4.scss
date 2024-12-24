@@ -3,7 +3,7 @@
 .tf-search-tabs__design--4 {
   position: relative;
   z-index: 1;
-  // overflow-x: hidden;
+
   .tf-booking-form-tab.design-4 {
     &.tf-multiple-tabs {
       margin-top: -77px;
@@ -13,12 +13,19 @@
       display: flex;
       gap: 8px;
       padding-bottom: 8px;
+      
       @media #{$max991} {
         margin-top: -43px;
       }
       @media #{$max767} {
-        display: none;
+        width: 100%;
+        gap: 5px;
+        margin-top: -41px;
+        padding-bottom: 6px;
+        padding-left: 15px;
+        padding-right: 15px;
       }
+     
       .btn-styled {
         background: $color-secondary !important;
         border: 0 !important;
@@ -37,6 +44,14 @@
           min-height: 35px;
           font-size: 16px !important;
         }
+        @media #{$max767} {
+          min-width: auto;
+          flex: 1;
+          font-size: 15px !important;
+        }
+        @media #{$max360} {
+          font-size: 14px !important;
+        }
         &:hover {
           box-shadow: 0px 3px 0px 0px $color-light-yellow;
         }
@@ -51,7 +66,7 @@
         }
       }
     }
-
+   
     // &::after {
     //   content: '';
     //   position: absolute;
@@ -66,8 +81,13 @@
   }
   .tf-booking-forms-wrapper {
     margin-top: 0;
-    overflow: hidden;
     position: relative;
+    @media #{$max1366} {
+      overflow: hidden;
+    }
+  }
+  .tf-booking-form-tab-mobile{
+    display: none;
   }
 }
 
@@ -174,6 +194,7 @@
       display: flex;
       @include align-items(center);
       @include justify-content(space-between);
+
       @media #{$max1366} {
         width: 100%;
       }
@@ -268,10 +289,13 @@
       }
       .icon--location {
         @media #{$max991} {
-          top: 8px;
+          top: 10px;
         }
         @media #{$max767} {
-          top: 17px;
+          top:7px;
+        }
+        @media #{$max575} {
+          top: 6px;
         }
       }
     }
@@ -348,6 +372,7 @@
     color: white;
     position: relative;
     cursor: pointer;
+    line-height: 22px;
     @media #{$max360} {
       align-items: self-start;
     }
@@ -417,7 +442,7 @@
             right: 8px;
             top: 0;
           }
-          @media #{$max360} {
+          @media #{$max400} {
             position: absolute;
             left: 5px;
             top: 100%;
@@ -433,7 +458,7 @@
               right: 8px;
               top: 24px;
             }
-            @media #{$max360} {
+            @media #{$max400} {
               left: 35px;
               top: 100%;
             }
@@ -486,10 +511,14 @@
       right: 17px;
       min-width: auto;
       max-width: initial;
+      @media #{$max991} {
+        top: 10px;
+      }
       @media #{$max767} {
-        top: 5px;
+        top: 6px;
         right: 16px;
       }
+
       svg {
         @media #{$max1366} {
           width: 12px;
@@ -726,4 +755,8 @@
       margin-left: 4px;
     }
   }
+}
+
+.flatpickr-calendar.open{
+  right: 0!important;
 }

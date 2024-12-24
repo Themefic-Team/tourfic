@@ -788,6 +788,7 @@ class Car_Rental
                                         noCalendar: true,
                                         dateFormat: "H:i K",
                                         disableMobile: "true",
+                                        position: "auto",
                                         onChange: function(selectedDates, dateStr) {
                                             const [time, meridiem] = dateStr.split(" ");
                                             document.querySelector(timeSelector).textContent = time;

@@ -586,7 +586,7 @@ class Tour
 						<div class="tf-search__form__group tf-checkin-group">
 							<div class="tf_tour_check_in_out_date">
 								<label for="tf-search__form-checkin" class="tf-search__form__label">
-									<?php echo esc_html_e('Check-In', 'tourfic'); ?>
+									<?php echo esc_html_e('Select Date', 'tourfic'); ?>
 								</label>
 								<div class="tf-search__form__field">
 									<div class="tf-search__form__field__icon">
@@ -619,8 +619,8 @@ class Tour
 						</div>
 						<!-- Check-out -->
 						<div class="tf-search__form__group tf_tour_check_in_out_date tf-checkout-group">
-							<label for="tf-search__form-checkout" class="tf-search__form__label">
-								<?php echo esc_html_e('Check-Out', 'tourfic'); ?>
+							<label for="tf-search__form-checkout" class="tf-search__form__label" style="visibility: hidden;">
+								<?php echo esc_html_e('Select Date', 'tourfic'); ?>
 							</label>
 							<div class="tf-search__form__field">
 								<div class="tf-search__form__field__icon">
