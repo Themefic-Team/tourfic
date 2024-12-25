@@ -242,7 +242,7 @@
             var checkin = checkedArr[0];
             var checkout = checkedArr[1];
             var posttype = $('.tf-post-type').val();
-            console.log(checkin);
+
 
             if ($.trim(checkin) === '' && tf_params.date_hotel_search && posttype === 'tf_hotel') {
 
@@ -2273,3 +2273,43 @@ function tfOpenForm(evt, formName) {
 function tf_load_rating() {
     jQuery('#commentform').show();
 }
+
+
+/**
+ * Update Max Width of Search Field
+ */
+function updateMaxWidth(inputField) {
+    let inputValue = inputField.val().trim();
+    let characterCount = inputValue.length;
+
+    // Get the window width
+    let windowWidth = jQuery(window).width();
+    
+    // Adjust max width based on window width
+    let newMaxWidth;
+    if (windowWidth < 992) {
+        newMaxWidth = 100 + (Math.max(characterCount - 1, 0) * 20); // Mobile: 100px + 20px per character
+    } else {
+        newMaxWidth = 132 + (Math.max(characterCount - 1, 0) * 40); // Desktop: 132px + 40px per character
+    }
+
+    // Apply the new max-width
+    inputField.closest(".tf-search__form__field.tf-mx-width").css("max-width", newMaxWidth + "px");
+}
+
+// Input change
+jQuery(".tf-search__form__field__input").on("input", function() {
+    updateMaxWidth(jQuery(this));
+});
+
+// Increment button
+jQuery(".acr-inc").on("click", function() {
+    let inputField = jQuery(".tf-search__form__field__input");
+    inputField.trigger("input");
+});
+
+// Decrement button
+jQuery(".acr-dec").on("click", function() {
+    let inputField = jQuery(".tf-search__form__field__input");
+    inputField.trigger("input");
+});
