@@ -878,8 +878,8 @@ class Tour
 						if ($author) { ?>
 							<input type="hidden" name="tf-author" value="<?php echo esc_attr($author); ?>" class="tf-post-type" />
 						<?php } ?>
-						<button class="tf_button tf-submit btn-styled" type="submit"><?php echo esc_html__(apply_filters("tf_tour_search_form_submit_button_text", 'Search'), 'tourfic'); ?></button>
-					</div>
+                        <button class="tf_button tf-submit btn-styled" type="submit"><?php echo esc_html(apply_filters("tf_tour_search_form_submit_button_text", esc_html__('Search', 'tourfic' ))); ?></button>
+                    </div>
 
 				</div>
 
@@ -2938,20 +2938,107 @@ class Tour
 									}
 									$lowest_price = wc_price($tf_tour_min_price);
 
-									if (! empty($tf_tour_min_discount)) {
-										echo esc_html__("From ", "tourfic") . " " . "<del>" . wp_kses_post(wp_strip_all_tags(wc_price($tf_tour_full_price))) . "</del>" . " " . wp_kses_post($lowest_price);
-									} else {
-										echo esc_html__("From ", "tourfic") . wp_kses_post($lowest_price) . " ";
-									}
-									?>
-								</span>
-							</div>
-						</div>
-						<a href="<?php echo esc_url($url); ?>" class="view-hotel"><?php esc_html_e("See Details", "tourfic"); ?></a>
-					</div>
-				</div>
-			</div>
-		<?php
+						if ( ! empty( $tf_tour_min_discount ) ) {
+							echo esc_html__( "From ", "tourfic" ) . " " . "<del>" . wp_kses_post( wp_strip_all_tags( wc_price( $tf_tour_full_price ) ) ) . "</del>" . " " . wp_kses_post( $lowest_price );
+						} else {
+							echo esc_html__( "From ", "tourfic" ) . wp_kses_post( $lowest_price ) . " ";
+						}
+						?>
+						</span>
+                            </div>
+                        </div>
+                        <a href="<?php echo esc_url( $url ); ?>" class="view-hotel"><?php esc_html_e( "See Details", "tourfic" ); ?></a>
+                    </div>
+                </div>
+            </div>
+			<?php
+		} elseif ( $tf_tour_arc_selected_template == "design-3" && function_exists( 'is_tf_pro' ) && is_tf_pro()) {
+			$first_gallery_image = explode( ',', $gallery );
+			?>
+            <div class="tf-archive-hotel" data-id="<?php echo esc_attr(get_the_ID()); ?>">
+                <div class="tf-archive-hotel-thumb">
+                    <a href="<?php echo esc_url( $url ); ?>">
+						<?php
+						if ( ! empty( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) ) {
+							the_post_thumbnail( 'full' );
+						} else {
+							echo '<img src="' . esc_url(TF_ASSETS_APP_URL . "images/feature-default.jpg") . '" class="attachment-full size-full wp-post-image">';
+						}
+						?>
+                    </a>
+
+	                <?php if ( ! empty( $tf_discount_type ) && $tf_discount_type != "none" && ! empty( $tf_discount_amount ) ) {?>
+                        <div class="tf-archive-hotel-discount">
+                            <?php echo $tf_discount_type == "percent" ? esc_attr( $tf_discount_amount ) . "%" : wp_kses_post( wc_price( $tf_discount_amount ) ); ?><?php esc_html_e( "Off", "tourfic" ); ?>
+                        </div>
+	                <?php } ?>
+                </div>
+                <div class="tf-archive-hotel-content">
+                    <div class="tf-archive-hotel-content-left">
+						<?php if ( ! empty( $location ) ) : ?>
+                            <div class="tf-title-location">
+                                <div class="location-icon">
+                                    <i class="ri-map-pin-fill"></i>
+                                </div>
+                                <span><?php echo wp_kses_post(Helper::tourfic_character_limit_callback( esc_html( $location ), 20 )); ?></span>
+                            </div>
+						<?php endif; ?>
+                        <h4 class="tf-section-title">
+                            <a href="<?php echo esc_url( $url ); ?>">
+								<?php echo wp_kses_post(Helper::tourfic_character_limit_callback( get_the_title(), 55 )); ?>
+                            </a>
+							<?php echo wp_kses_post(Helper::edit_link(get_the_ID())) ?>
+                        </h4>
+                        <ul class="features">
+                            <?php if ( ! empty( $group_size ) ) { ?>
+                                <li>
+                                    <i class="ri-team-line"></i> <?php esc_html_e( "Max", "tourfic" ); ?> <?php echo esc_html( $group_size ); ?> <?php esc_html_e( "people", "tourfic" ); ?>
+                                </li>
+                            <?php }
+                            if ( ! empty( $tour_duration ) ) { ?>
+                                <li>
+                                    <?php $tour_duration_time = $tour_duration > 1 ? $tour_duration_time . 's' : $tour_duration_time; ?>
+                                    <i class="ri-history-fill"></i> <?php echo esc_html( $tour_duration ); ?> <?php echo esc_html( $tour_duration_time ); ?>
+                                </li>
+                            <?php } ?>
+                            <?php
+                            if ( $features ) {
+                                foreach ( $features as $tfkey => $feature ) {
+                                    $feature_meta = get_term_meta( $feature, 'tour_features', true );
+                                    if ( ! empty( $feature_meta ) ) {
+                                        $f_icon_type = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
+                                    }
+                                    if ( ! empty( $f_icon_type ) && $f_icon_type == 'fa' ) {
+                                        $feature_icon = ! empty( $feature_meta['icon-fa'] ) ? '<i class="' . $feature_meta['icon-fa'] . '"></i>' : '';
+                                    } elseif ( ! empty( $f_icon_type ) && $f_icon_type == 'c' ) {
+                                        $feature_icon = ! empty( $feature_meta['icon-c'] ) ? '<img src="' . $feature_meta['icon-c'] . '" style="min-width: ' . $feature_meta['dimention'] . 'px; height: ' . $feature_meta['dimention'] . 'px;" />' : '';
+                                    }
+
+                                    $features_details = get_term( $feature );
+                                    if ( $tfkey < 4 ) {
+                                        ?>
+                                        <li>
+                                            <?php
+                                            if ( ! empty( $feature_icon ) ) {
+                                                echo wp_kses_post( $feature_icon );
+                                            } ?>
+                                            <?php echo ! empty( $features_details->name ) ? esc_html( $features_details->name ) : ''; ?>
+                                        </li>
+                                    <?php }
+                                }
+                            } ?>
+                        </ul>
+						<?php TF_Review::tf_archive_single_rating(); ?>
+                    </div>
+                    <div class="tf-archive-hotel-content-right">
+                        <div class="tf-archive-hotel-price">
+							<?php echo wp_kses_post(Pricing::instance( $post_id )->get_min_price_html()); ?>
+                        </div>
+                        <a href="<?php echo esc_url( $url ); ?>" class="view-hotel"><?php esc_html_e( "View Details", "tourfic" ); ?></a>
+                    </div>
+                </div>
+            </div>
+			<?php
 		} else {
 		?>
 			<div class="single-tour-wrap <?php echo $featured ? esc_attr('tf-featured') : '' ?>">
@@ -3723,12 +3810,11 @@ class Tour
     * Tour Expired Status Add
     * Author: Jahid
     */
-	function tf_tours_custom_status_creation()
-	{
-		register_post_status('expired', array(
-			'label'                     => _x('Expired', 'post'),
+	function tf_tours_custom_status_creation() {
+		register_post_status( 'expired', array(
+			'label'                     => _x( 'Expired', 'post', 'tourfic'),
 			/* translators: %s: number of posts */
-			'label_count'               => _n_noop('Expired <span class="count">(%s)</span>', 'Expired <span class="count">(%s)</span>'),
+			'label_count'               => _n_noop( 'Expired <span class="count">(%s)</span>', 'Expired <span class="count">(%s)</span>', 'tourfic'),
 			'public'                    => true,
 			'exclude_from_search'       => false,
 			'show_in_admin_all_list'    => true,
@@ -4514,12 +4600,34 @@ class Tour
 				$first_date = gmdate($format, strtotime($first_date));
 				$last_date  = gmdate($format, strtotime($last_date));
 
-				return "{$first_date} - {$last_date}";
-			} else {
-				return gmdate($format, strtotime($date));
+			    return "{$first_date} - {$last_date}";
+		    } else {
+			    return gmdate( $format, strtotime( $date ) );
+		    }
+	    } else {
+		    return;
+	    }
+    }
+
+	static function template( $type = 'archive', $post_id = '' ) {
+		$tour_template = '';
+		$post_id        = ! empty( $post_id ) ? $post_id : '';
+
+		if ( $type == 'archive' ) {
+			$tour_template = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['tour-archive'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['tour-archive'] : 'design-1';
+		} elseif ( $type == 'single' && $post_id ) {
+			$meta = get_post_meta( $post_id, 'tf_tours_opt', true );
+
+			$layout_conditions = ! empty( $meta['tf_single_tour_layout_opt'] ) ? $meta['tf_single_tour_layout_opt'] : 'global';
+			if ( "single" == $layout_conditions ) {
+				$single_template = ! empty( $meta['tf_single_tour_template'] ) ? $meta['tf_single_tour_template'] : 'design-1';
 			}
-		} else {
-			return;
+			$global_template = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour'] : 'design-1';
+			$tour_template  = ! empty( $single_template ) ? $single_template : $global_template;
+		} elseif ( $type == 'single' ) {
+			$tour_template = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour'] : 'design-1';
 		}
+
+		return $tour_template;
 	}
 }

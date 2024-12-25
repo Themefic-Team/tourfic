@@ -154,7 +154,11 @@ while ( have_posts() ) : the_post();
 		include TF_TEMPLATE_PART_PATH . 'hotel/design-1.php';
 	}elseif( $tf_hotel_selected_template == "design-2" ){
 		include TF_TEMPLATE_PART_PATH . 'hotel/design-2.php';
-	}else{
+	}
+//    elseif( $tf_hotel_selected_template == "design-3" ){
+//	    include TF_TEMPLATE_PART_PATH . 'hotel/design-3.php';
+//    }
+    else{
 		include TF_TEMPLATE_PART_PATH . 'hotel/design-default.php';
 	}
 endwhile;

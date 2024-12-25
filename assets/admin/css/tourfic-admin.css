@@ -5050,6 +5050,29 @@ a.tf-import-btn, a.tf-export-btn {
   border-radius: 5px;
 }
 
+.tf-image-radio-group li.tf-pro-item {
+  position: relative;
+}
+
+.tf-image-radio-group li.tf-pro-item span {
+  position: absolute;
+  top: -1px;
+  right: -2px;
+  background-color: #295BFF;
+  padding: 3px 10px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 13px;
+  border-radius: 3px;
+  z-index: 9;
+}
+
+.tf-image-radio-group li.tf-pro-item img {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
 .tf-apt-cal-wrap .fc-view-harness,
 .tf-room-cal-wrap .fc-view-harness {
   height: 395px !important;

@@ -55,7 +55,7 @@ class Room_CPT extends \Tourfic\Core\Post_Type {
 			$meta       = get_post_meta( $post_id, 'tf_room_opt', true );
 			$hotel_name = ! empty( $meta['tf_hotel'] ) ? esc_html( get_the_title( $meta['tf_hotel'] ) ) : '';
 			if ( ! empty( $hotel_name ) ) {
-				echo '<a href="' . admin_url() . 'post.php?post=' . $meta['tf_hotel'] . '&action=edit" target="_blank">' . $hotel_name . '</a>';
+				echo '<a href="' . esc_url(admin_url()) . 'post.php?post=' . esc_attr($meta['tf_hotel']) . '&action=edit" target="_blank">' . esc_html($hotel_name) . '</a>';
 			}
 		}
 

@@ -34,5 +34,28 @@
             border-color: #607085 !important;
             border-radius: 5px;
         }
+
+        &.tf-pro-item{
+            position: relative;
+
+            span{
+                position: absolute;
+                top: -1px;
+                right: -2px;
+                background-color: #295BFF;
+                padding: 3px 10px;
+                color: #fff;
+                font-size: 12px;
+                font-weight: 600;
+                line-height: 13px;
+                border-radius: 3px;
+                z-index: 9;
+            }
+
+            img{
+                opacity: .5;
+                cursor: not-allowed;
+            }
+        }
     }
 }

@@ -58,6 +58,8 @@ if ( Helper::tf_is_woo_active() ) {
 		include TF_TEMPLATE_PATH . 'tour/archive/design-1.php';
 	} elseif ( $tf_tour_arc_selected_template == "design-2" ) {
 		include TF_TEMPLATE_PATH . 'tour/archive/design-2.php';
+	} elseif ( $tf_tour_arc_selected_template == "design-3" && function_exists( 'is_tf_pro' ) && is_tf_pro()) {
+		include TF_TEMPLATE_PATH . 'tour/archive/design-3.php';
 	} else {
 		include TF_TEMPLATE_PATH . 'tour/archive/design-default.php';
 	}

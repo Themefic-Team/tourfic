@@ -417,11 +417,11 @@ if(!function_exists('tf_tour_date_format_changer')) {
 function tf_remove_order_ids_from_room() {
 	echo '
     <div class="csf-title">
-        <h4>' . __( "Reset Room Availability", "tourfic" ) . '</h4>
-        <div class="csf-subtitle-text">' . __( "Remove order ids linked with this room.<br><b style='color: red;'>Be aware! It is irreversible!</b>", "tourfic" ) . '</div>
+        <h4>' . esc_html__( "Reset Room Availability", "tourfic" ) . '</h4>
+        <div class="csf-subtitle-text">' . esc_html__( "Remove order ids linked with this room.<br><b style='color: red;'>Be aware! It is irreversible!</b>", "tourfic" ) . '</div>
     </div>
     <div class="csf-fieldset">
-        <button type="button" class="button button-large tf-order-remove remove-order-ids">' . __( "Reset", "tourfic" ) . '</button>
+        <button type="button" class="button button-large tf-order-remove remove-order-ids">' . esc_html__( "Reset", "tourfic" ) . '</button>
     </div>
     <div class="clear"></div>
     ';

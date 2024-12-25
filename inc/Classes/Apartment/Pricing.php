@@ -300,6 +300,44 @@ class Pricing {
 		);
 	}
 
+	function get_min_price( $period = '' ) {
+		$discounted_price = 0;
+		$meta             = $this->meta;
+		$min_max_price    = $this->get_min_max_price();
+		$discount_type    = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : '';
+		$discount_price   = ! empty( $meta['discount'] ) ? $meta['discount'] : '';
+
+		if ( ! empty( $discount_type ) && ! empty( $min_max_price['min'] ) && ! empty( $discount_price ) ) {
+			$discounted_price = $this->calculate_discount( $min_max_price['min'] );
+		}
+
+		return array(
+			'min_sale_price'      => $discounted_price ?? 0,
+			'min_regular_price'   => $min_max_price['min'] ?? 0,
+		);
+	}
+
+	/*
+	 * Get min price html
+	 */
+	function get_min_price_html($period = '') {
+		$min_max_price = $this->get_min_price($period);
+		$regular_price = $min_max_price['min_regular_price'];
+		$sale_price    = $min_max_price['min_sale_price'];
+
+		$price_html = '';
+		if ( ! empty( $min_max_price ) ) {
+			$price_html .= esc_html__( "From ", "tourfic" );
+			if ( $regular_price != 0 ) {
+				$price_html .= wc_format_sale_price( $regular_price, $sale_price );
+			} else {
+				$price_html .= wp_kses_post( wc_price( $sale_price ) ) . " ";
+			}
+		}
+
+		return $price_html;
+	}
+
 	public static function get_min_max_price_from_all_apartment() {
 		$min_max_price = array();
 		
