@@ -86,6 +86,10 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 							'title'			=> 'Design 2',
 							'url' 			=> TF_ASSETS_ADMIN_URL."images/template/design2-tour.jpg",
 						),
+//						'design-3' 				=> array(
+//							'title'			=> 'Design 3',
+//							'url' 			=> TF_ASSETS_ADMIN_URL."images/template/design3-tour.jpg",
+//						),
 						'default' 			=> array(
 							'title'			=> 'Defult',
 							'url' 			=> TF_ASSETS_ADMIN_URL."images/template/default-tour.jpg",

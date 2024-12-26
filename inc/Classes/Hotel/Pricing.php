@@ -151,7 +151,7 @@ class Pricing {
 						foreach ( $avail_date as $singleavailroom ) {
 							if ( ! empty( $this->period ) ) {
 								foreach ( $this->period as $date ) {
-									$singleavailroom_date = date( 'Y-m-d', $date->getTimestamp() );
+									$singleavailroom_date = gmdate( 'Y-m-d', $date->getTimestamp() );
 									if ( $singleavailroom['date'] == $singleavailroom_date ) {
 										if ( $pricing_by == 1 ) {
 											$room_meta_price = $singleavailroom['price'] ?? 0;
@@ -367,7 +367,7 @@ class Pricing {
 		);
 	}
 
-    function get_min_price($period = ''){
+    function get_min_price($period = []){
 	    $room_price = [];
 	    $tf_lowestAmount = 0;
 	    $tf_lowestAmount_items = null;
@@ -404,7 +404,7 @@ class Pricing {
 					    foreach ( $avail_date as $repval ) {
 						    if ( ! empty( $period ) ) {
 							    foreach ( $period as $date ) {
-								    $singleavailroom_date = date( 'Y-m-d', $date->getTimestamp() );
+								    $singleavailroom_date = gmdate( 'Y-m-d', $date->getTimestamp() );
 								    if ( strtotime( $repval['check_in'] ) == strtotime( $singleavailroom_date ) ) {
 									    if ( $pricing_by == 1 ) {
 										    if ( ! empty( $repval['price'] ) ) {
@@ -1042,6 +1042,7 @@ class Pricing {
 		$current_date  = strtotime( "today" );
 		$hotel_discount_type   = ! empty( $room_meta["discount_hotel_type"] ) ? $room_meta["discount_hotel_type"] : "none";
 		$hotel_discount_amount = ! empty( $room_meta["discount_hotel_price"] ) ? $room_meta["discount_hotel_price"] : 0;
+		$option_type = '';
 
 		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $avail_by_date == true) {
 			$repeat_by_date  = ! empty( $room_meta['avail_date'] ) ? json_decode( $room_meta['avail_date'], true ) : [];
@@ -1254,6 +1255,9 @@ class Pricing {
 		$multi_by_date       = $room_meta['price_multi_day'] ?? 0;
 		$hotel_discount_type = $room_meta['discount_hotel_type'] ?? 'none';
 
+		$room_options = ! empty( $room_meta['room-options'] ) ? $room_meta['room-options'] : [];
+		$option_price_type = ! empty( $room_options[$option_key]['option_pricing_type'] ) ? $room_options[$option_key]['option_pricing_type'] : 'per_room';
+
 		if ( $this->template == 'design-2' ) {
 			?>
             <span class="tf-price">
@@ -1284,18 +1288,34 @@ class Pricing {
 			<?php
 		} else {
 			if ( ! empty( $discount_price ) && $hotel_discount_type != "none" && ! empty( $hotel_discount_type ) ) {
-				echo '<span class="tf-price"><del>' . $price . '</del> ' . $discount_price . '</span>';
+				echo '<span class="tf-price"><del>' . wp_kses_post($price) . '</del> ' . wp_kses_post($discount_price) . '</span>';
 			} else if ( $hotel_discount_type == "none" ) {
-				echo '<span class="tf-price">' . $price . '</span>';
+				echo '<span class="tf-price">' . wp_kses_post($price) . '</span>';
 			}
 			?>
             <div class="price-per-night">
-				<?php
-				if ( $multi_by_date ) {
-					echo $pricing_by == 1 ? esc_html__( 'per night', 'tourfic' ) : esc_html__( 'per person/night', 'tourfic' );
-				} else {
-					echo $pricing_by == 1 ? esc_html__( 'per day', 'tourfic' ) : esc_html__( 'per person/day', 'tourfic' );
-				} ?>
+	            <?php
+	            if ( $multi_by_date ) {
+		            if ( $pricing_by == 1 ) {
+			            echo esc_html__( 'per night', 'tourfic' );
+		            } elseif ( $pricing_by == 2 ) {
+			            echo esc_html__( 'per person/night', 'tourfic' );
+		            } elseif ( $pricing_by == 3 && $option_price_type == 'per_room' ) {
+			            echo esc_html__( 'per night', 'tourfic' );
+		            } elseif ( $pricing_by == 3 && $option_price_type == 'per_person' ) {
+			            echo esc_html__( 'per person/night', 'tourfic' );
+		            }
+	            } else {
+		            if ( $pricing_by == 1 ) {
+			            echo esc_html__( 'per day', 'tourfic' );
+		            } elseif ( $pricing_by == 2 ) {
+			            echo esc_html__( 'per person/day', 'tourfic' );
+		            } elseif ( $pricing_by == 3 && $option_price_type == 'per_room' ) {
+			            echo esc_html__( 'per day', 'tourfic' );
+		            } elseif ( $pricing_by == 3 && $option_price_type == 'per_person' ) {
+			            echo esc_html__( 'per person/day', 'tourfic' );
+		            }
+	            } ?>
             </div>
 			<?php
 		}

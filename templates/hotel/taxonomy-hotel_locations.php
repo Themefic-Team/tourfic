@@ -3,7 +3,9 @@
  * Template: Hotel Location Archive
  */
 
- use \Tourfic\Classes\Helper;
+use \Tourfic\Classes\Helper;
+use \Tourfic\Classes\Hotel\Hotel;
+use \Tourfic\Classes\Hotel\Pricing;
 
  if(wp_is_block_theme()){
     wp_head();
@@ -118,6 +120,30 @@ if( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-1" ){
     </div>
     <!-- Hotel PopUp end -->  
 </div>
+<?php } elseif( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-3" ){ ?>
+    <div class="tf-hotel-template-4">
+
+        <div class="tf-content-wrapper">
+            <?php
+            do_action('tf_before_container');
+            $post_count = $GLOBALS['wp_query']->post_count;
+            $tf_map_settings = !empty(Helper::tfopt('google-page-option')) ? Helper::tfopt('google-page-option') : "default";
+            $tf_map_api = !empty(Helper::tfopt('tf-googlemapapi')) ? Helper::tfopt('tf-googlemapapi') : '';
+            ?>
+
+            <div class="tf-archive-search-form tf-booking-form-wrapper">
+                <div class="tf-container">
+                    <form action="<?php echo esc_url( Helper::tf_booking_search_action() ); ?>" method="get" autocomplete="off" class="tf_archive_search_result tf-hotel-side-booking tf-booking-form">
+                        <?php Helper::tf_archive_sidebar_search_form($post_type, $taxonomy, $taxonomy_name, $taxonomy_slug); ?>
+                    </form>
+                </div>
+            </div>
+
+            <?php require_once TF_TEMPLATE_PART_PATH . 'archive.php'; ?>
+        </div>
+        <!--Content section end -->
+
+    </div>
 
 <?php } else{ ?>
 <div class="tf-main-wrapper" data-fullwidth="true">

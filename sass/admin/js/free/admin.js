@@ -124,20 +124,6 @@
         });
 
         /**
-         * Hotel select in room post type
-         *
-         * show notyf error
-         */
-        $(document).on('click', '.post-type-tf_room #publish, .post-type-tf_room #save-post', function (e) {
-            if ($('[name="tf_room_opt[tf_hotel]"]').val().length === 0) {
-                e.preventDefault;
-                e.stopImmediatePropagation();
-                notyf.error(tf_admin_params.hotel_required_in_room);
-                return false;
-            }
-        });
-
-        /**
          * Ajax install
          *
          * @since 1.0

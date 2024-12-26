@@ -93,8 +93,8 @@ class TF_Setup_Wizard {
                         <img src="<?php echo esc_url( TF_ASSETS_ADMIN_URL ) . 'images/welcome.png' ?>" alt="<?php esc_attr_e( 'Welcome to Tourfic!', 'tourfic' ) ?>">
                     </div>
                     <div class="tf-setup-header-right">
-                        <span class="get-help-link"><?php esc_html_e( 'Having troubles?', 'tourfic' ) ?> <a class="" target="_blank"
-                                                                                                            href="https://portal.themefic.com/support/"><?php esc_html_e( 'Get help', 'torufic' ) ?></a></span>
+                        <span class="get-help-link"><?php esc_html_e( 'Having troubles?', 'tourfic' ) ?> 
+                        <a class="" target="_blank" href="https://portal.themefic.com/support/"><?php esc_html_e( 'Get help', 'tourfic' ) ?></a></span>
                     </div>
                 </div>
                 <form method="post" id="tf-setup-wizard-form" data-skip-steps="">
@@ -858,6 +858,17 @@ class TF_Setup_Wizard {
                                             </div>
                                         </label>
                                     </li>
+                                    <?php if(function_exists( 'is_tf_pro' ) && is_tf_pro()): ?>
+                                    <li>
+                                        <label class="tf-image-checkbox">
+                                            <input type="radio" name="tf_hotel_archive"
+                                                   value="design-3" <?php echo ! empty( $tf_hotel_archive_template ) && $tf_hotel_archive_template == "design-3" ? esc_attr( 'checked' ) : ''; ?> >
+                                            <div class="select-image-box">
+                                                <img src="<?php echo esc_url( TF_ASSETS_ADMIN_URL ); ?>images/template/hotel-archive-design3.jpg" alt="Design 3">
+                                            </div>
+                                        </label>
+                                    </li>
+                                    <?php endif; ?>
                                     <li>
                                         <label class="tf-image-checkbox">
                                             <input type="radio" name="tf_hotel_archive"
@@ -939,6 +950,17 @@ class TF_Setup_Wizard {
                                             </div>
                                         </label>
                                     </li>
+                                    <?php if(function_exists( 'is_tf_pro' ) && is_tf_pro()): ?>
+                                    <li>
+                                        <label class="tf-image-checkbox">
+                                            <input type="radio" name="tf_tour_archive"
+                                                   value="design-3" <?php echo ! empty( $tf_tour_archive_template ) && $tf_tour_archive_template == "design-3" ? esc_attr( 'checked' ) : ''; ?> >
+                                            <div class="select-image-box">
+                                                <img src="<?php echo esc_url( TF_ASSETS_ADMIN_URL ); ?>images/template/hotel-archive-design3.jpg" alt="Design 3">
+                                            </div>
+                                        </label>
+                                    </li>
+                                    <?php endif; ?>
                                     <li>
                                         <label class="tf-image-checkbox">
                                             <input type="radio" name="tf_tour_archive"
@@ -1012,6 +1034,17 @@ class TF_Setup_Wizard {
                                             </div>
                                         </label>
                                     </li>
+                                    <?php if(function_exists( 'is_tf_pro' ) && is_tf_pro()): ?>
+                                    <li>
+                                        <label class="tf-image-checkbox">
+                                            <input type="radio" name="tf_apartment_archive"
+                                                   value="design-2" <?php echo ! empty( $tf_apartment_archive_template ) && $tf_apartment_archive_template == "design-2" ? esc_attr( 'checked' ) : ''; ?> >
+                                            <div class="select-image-box">
+                                                <img src="<?php echo esc_url( TF_ASSETS_ADMIN_URL ); ?>images/template/hotel-archive-design3.jpg" alt="Defult">
+                                            </div>
+                                        </label>
+                                    </li>
+                                    <?php endif; ?>
                                 </ul>
                             </div>
                         </div>

@@ -663,10 +663,10 @@ $price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings'
                                                                 <i class="fas fa-male"></i>
                                                                 <i class="fas fa-female"></i>
                                                             </span>
-                                                            <span class="icon-text tf-d-b">x<?php echo $adult_number; ?></span>
+                                                            <span class="icon-text tf-d-b">x<?php echo esc_html($adult_number); ?></span>
                                                         </div>
                                                         <div class="tf-top">
-															<?php _e( 'Number of Adults', 'tourfic' ); ?>
+															<?php esc_html_e( 'Number of Adults', 'tourfic' ); ?>
                                                             <i class="tool-i"></i>
                                                         </div>
                                                     </div>
@@ -675,14 +675,15 @@ $price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings'
                                                     <div class="tf-tooltip tf-d-b">
                                                         <div class="room-detail-icon">
                                                             <span class="room-icon-wrap"><i class="fas fa-baby"></i></span>
-                                                            <span class="icon-text tf-d-b">x<?php echo $child_number; ?></span>
+                                                            <span class="icon-text tf-d-b">x<?php echo esc_html($child_number); ?></span>
                                                         </div>
                                                         <div class="tf-top">
 															<?php
 															if ( ! empty( $child_age_limit ) ) {
-																printf( __( 'Children Age Limit %s Years', 'tourfic' ), $child_age_limit );
+                                                                /* translators: Children age limit */
+																printf( esc_html__( 'Children Age Limit %s Years', 'tourfic' ), esc_html($child_age_limit) );
 															} else {
-																_e( 'Number of Children', 'tourfic' );
+																esc_html_e( 'Number of Children', 'tourfic' );
 															}
 															?>
                                                             <i class="tool-i"></i>
@@ -726,10 +727,10 @@ $price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings'
                                                     <div class="room-detail-icon">
                                                 <span class="room-icon-wrap"><i class="fas fa-male"></i><i
                                                             class="fas fa-female"></i></span>
-                                                        <span class="icon-text tf-d-b">x<?php echo $adult_number; ?></span>
+                                                        <span class="icon-text tf-d-b">x<?php echo esc_html($adult_number); ?></span>
                                                     </div>
                                                     <div class="tf-top">
-														<?php _e( 'Number of Adults', 'tourfic' ); ?>
+														<?php esc_html_e( 'Number of Adults', 'tourfic' ); ?>
                                                         <i class="tool-i"></i>
                                                     </div>
                                                 </div>
@@ -738,14 +739,15 @@ $price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings'
                                                 <div class="tf-tooltip tf-d-b">
                                                     <div class="room-detail-icon">
                                                         <span class="room-icon-wrap"><i class="fas fa-baby"></i></span>
-                                                        <span class="icon-text tf-d-b">x<?php echo $child_number; ?></span>
+                                                        <span class="icon-text tf-d-b">x<?php echo esc_html($child_number); ?></span>
                                                     </div>
                                                     <div class="tf-top">
 														<?php
 														if ( ! empty( $child_age_limit ) ) {
-															printf( __( 'Children Age Limit %s Years', 'tourfic' ), $child_age_limit );
+                                                            /* translators: Children age limit */
+															printf( esc_html__( 'Children Age Limit %s Years', 'tourfic' ), esc_html($child_age_limit) );
 														} else {
-															_e( 'Number of Children', 'tourfic' );
+															esc_html_e( 'Number of Children', 'tourfic' );
 														}
 														?>
                                                         <i class="tool-i"></i>
