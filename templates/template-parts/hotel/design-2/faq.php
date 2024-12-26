@@ -19,12 +19,12 @@
         <?php if(!empty($faqfirstArray)){ ?>
         <div class="tf-questions-col">
             <?php foreach ($faqfirstArray as $key => $faq) { ?>
-            <div class="tf-question <?php echo $key==1 ? esc_attr( 'tf-active' ) : ''; ?>">
+            <div class="tf-question">
                 <div class="tf-faq-head">
                     <span><?php echo esc_html( $faq['title'] ); ?>
                     <i class="fa-solid fa-chevron-down"></i></span>
                 </div>
-                <div class="tf-question-desc" style="<?php echo $key==1 ? esc_attr( 'display: block;' ) : ''; ?>">
+                <div class="tf-question-desc">
                 <?php echo wp_kses_post( $faq['description'] ); ?>
                 </div>
             </div>
