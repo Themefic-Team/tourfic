@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, room-booking, woocommerce-accommodation-booking
 Requires at least: 5.4
 Tested up to: 6.7
-Stable tag: 2.15.5
+Stable tag: 2.15.6
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -349,6 +349,18 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 23. Sync Booking with Google Calendar(Pro)
 
 == Changelog ==
+
+== 2.15.6 – 26 December 2024 ==
+
+- Introduced: New archive templates with map view for Hotel, Tour, and Apartment.
+- Added: Map view widget added for all templates.
+- Fixed: Room availability issue resolved.
+- Compatibility: WPML compatibility added for setting fields.
+- Improved: New design (Design-4) introduced for the search form shortcode.
+- Improved: Added card preloader in the Frontend Dashboard (Pro).
+- Fixed: Location selection issue resolved in the Frontend Dashboard (Pro).
+- Fixed: Room block issue resolved.
+- Improved: Updated license information text.
 
 = 2.15.5 - 17 December 2024 =
 
