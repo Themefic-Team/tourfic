@@ -21,12 +21,12 @@ if ( ! class_exists( 'TF_Backup' ) ) {
             $placeholder = ( ! empty( $this->field['placeholder'] ) ) ? 'placeholder="' . $this->field['placeholder'] . '"' : '';
             echo '<textarea class="tf-exp-imp-field" cols="50" rows="10" name="tf_import_option" id="' . esc_attr( $this->field_name() ) . '"' . esc_attr($placeholder) . ' '. wp_kses_post($this->field_attributes()) .'> </textarea>';
             // echo '<a href="' . $import_url . '" class="tf-import-btn button button-primary">' . __( 'Import', 'tourfic' ) . '</a>';
-            echo '<button type="submit" class="tf-import-btn tf-admin-btn tf-btn-secondary" data-option="'.esc_attr( $this->settings_id ).'" data-submit-type="tf_import_data">' . esc_html__( 'Import', 'ultimate-addons-cf7' ) . '</button>';
+            echo '<button type="submit" class="tf-import-btn tf-admin-btn tf-btn-secondary" data-option="'.esc_attr( $this->settings_id ).'" data-submit-type="tf_import_data">' . esc_html__( 'Import', 'tourfic' ) . '</button>';
             echo '<hr>';
             echo '<textarea cols="50" rows="10" class="tf-exp-imp-field"  name="tf_export_option" id="' . esc_attr( $this->field_name() ) . '"' . esc_attr($placeholder) . ' '. wp_kses_post($this->field_attributes()) .'disabled >' . wp_kses_post($current_settings) . '</textarea>';
             echo '<a href="#" class="tf-export-btn tf-admin-btn tf-btn-secondary">' . esc_html__( 'Export', 'tourfic' ) . '</a> </br>';
 			//warning message about full data export
-	        echo '<div class="tf-field-notice-inner tf-notice-info" style="display: inline-block">'.esc_html__('Note: Exporting full data may take time depending on the data size. Please be patient and do not close the browser until the process is complete. Your data size is: ', 'tourfic').'<strong>'.$data_size.'</strong></div>';
+	        echo '<div class="tf-field-notice-inner tf-notice-info" style="display: inline-block">'.esc_html__('Note: Exporting full data may take time depending on the data size. Please be patient and do not close the browser until the process is complete. Your data size is: ', 'tourfic').'<strong>'.esc_html($data_size).'</strong></div>';
         }
     }
 }

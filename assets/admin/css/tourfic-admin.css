@@ -2360,7 +2360,7 @@ Steps
   padding: 0px 20px 0px 40px;
 }
 
-@media only screen and (max-width: 1280px) {
+@media only screen and (max-width: 1200px) {
   .tf-settings-help-center .tf-help-center-banner {
     padding-top: 20px;
     padding-bottom: 20px;
@@ -5050,6 +5050,29 @@ a.tf-import-btn, a.tf-export-btn {
   border-radius: 5px;
 }
 
+.tf-image-radio-group li.tf-pro-item {
+  position: relative;
+}
+
+.tf-image-radio-group li.tf-pro-item span {
+  position: absolute;
+  top: -1px;
+  right: -2px;
+  background-color: #295BFF;
+  padding: 3px 10px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 13px;
+  border-radius: 3px;
+  z-index: 9;
+}
+
+.tf-image-radio-group li.tf-pro-item img {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
 .tf-apt-cal-wrap .fc-view-harness,
 .tf-room-cal-wrap .fc-view-harness {
   height: 395px !important;
@@ -6500,7 +6523,7 @@ a.tf-import-btn, a.tf-export-btn {
   gap: 24px;
 }
 
-@media only screen and (max-width: 1280px) {
+@media only screen and (max-width: 1200px) {
   .tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-details .details-box .tf-grid-box {
     grid-template-columns: 1fr;
   }
@@ -6556,7 +6579,7 @@ a.tf-import-btn, a.tf-export-btn {
   min-height: 220px;
 }
 
-@media only screen and (max-width: 1280px) {
+@media only screen and (max-width: 1200px) {
   .tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-details .details-box .tf-grid-box .tf-checkin-by {
     min-height: auto;
   }
@@ -6608,7 +6631,7 @@ a.tf-import-btn, a.tf-export-btn {
   grid-template-columns: 1fr 1fr 1fr;
 }
 
-@media only screen and (max-width: 1280px) {
+@media only screen and (max-width: 1200px) {
   .tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-details .details-box .tf-visitor-grid-box {
     grid-template-columns: 1fr;
   }
@@ -6622,7 +6645,7 @@ a.tf-import-btn, a.tf-export-btn {
   min-height: 415px;
 }
 
-@media only screen and (max-width: 1280px) {
+@media only screen and (max-width: 1200px) {
   .tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-details .details-box .tf-customer-details-boxs .tf-single-box {
     min-height: auto;
   }

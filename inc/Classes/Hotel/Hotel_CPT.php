@@ -101,7 +101,7 @@ class Hotel_CPT extends \Tourfic\Core\Post_Type {
 			if(!empty($rooms)){
 				echo '<ul style="margin: 0">';
 				foreach ($rooms as $room) {
-					echo '<li><a href="' . admin_url() . 'post.php?post=' . $room->ID . '&action=edit" target="_blank">' . $room->post_title . '</a></li>';
+					echo '<li><a href="' . esc_url(admin_url()) . 'post.php?post=' . esc_attr($room->ID) . '&action=edit" target="_blank">' . esc_html($room->post_title) . '</a></li>';
 				}
 				echo '</ul>';
 			}

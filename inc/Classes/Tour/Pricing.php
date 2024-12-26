@@ -91,6 +91,232 @@ class Pricing {
 		return $price;
 	}
 
+	function get_min_price( $period = '' ) {
+		$tour_price                       = [];
+		$meta                             = $this->meta;
+		$pricing_rule                     = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
+		$custom_pricing_by_rule           = ! empty( $meta['custom_pricing_by'] ) ? $meta['custom_pricing_by'] : '';
+		$disable_adult_price              = ! empty( $meta['disable_adult_price'] ) ? $meta['disable_adult_price'] : false;
+		$disable_child_price              = ! empty( $meta['disable_child_price'] ) ? $meta['disable_child_price'] : false;
+		$tour_archive_page_price_settings = ! empty( Helper::tfopt( 'tour_archive_price_minimum_settings' ) ) ? Helper::tfopt( 'tour_archive_price_minimum_settings' ) : 'all';
+
+
+		if ( $pricing_rule && $pricing_rule == 'group' ) {
+			if ( ! empty( $check_in_out ) ) {
+				if ( ! empty( $meta['type'] ) && $meta['type'] === 'continuous' ) {
+					$custom_availability = ! empty( $meta['custom_avail'] ) ? $meta['custom_avail'] : false;
+					if ( $custom_availability ) {
+						foreach ( $meta['cont_custom_date'] as $repval ) {
+							//Initial matching date array
+							$show_tour = [];
+							$dates     = $repval['date'];
+							// Check if any date range match with search form date range and set them on array
+							if ( ! empty( $period ) ) {
+								foreach ( $period as $date ) {
+									$show_tour[] = intval( strtotime( $date->format( 'Y-m-d' ) ) >= strtotime( $dates['from'] ) && strtotime( $date->format( 'Y-m-d' ) ) <= strtotime( $dates['to'] ) );
+								}
+							}
+							if ( ! in_array( 0, $show_tour ) ) {
+								if ( $custom_pricing_by_rule && $custom_pricing_by_rule == 'group' ) {
+									if ( ! empty( $repval['group_price'] ) ) {
+										$tour_price[] = $repval['group_price'];
+									}
+								}
+								if ( $custom_pricing_by_rule && $custom_pricing_by_rule == 'person' ) {
+									if ( $tour_archive_page_price_settings == "all" ) {
+										if ( ! empty( $repval['adult_price'] ) && ! $disable_adult_price ) {
+											$tour_price[] = $repval['adult_price'];
+										}
+										if ( ! empty( $repval['child_price'] ) && ! $disable_adult_price ) {
+											$tour_price[] = $repval['child_price'];
+										}
+									}
+									if ( $tour_archive_page_price_settings == "adult" ) {
+										if ( ! empty( $repval['adult_price'] ) && ! $disable_adult_price ) {
+											$tour_price[] = $repval['adult_price'];
+										}
+									}
+									if ( $tour_archive_page_price_settings == "child" ) {
+										if ( ! empty( $repval['child_price'] ) && ! $disable_adult_price ) {
+											$tour_price[] = $repval['child_price'];
+										}
+									}
+								}
+							}
+						}
+					} else {
+						if ( ! empty( $meta['group_price'] ) ) {
+							$tour_price[] = $meta['group_price'];
+						}
+					}
+				} else {
+					if ( ! empty( $meta['group_price'] ) ) {
+						$tour_price[] = $meta['group_price'];
+					}
+				}
+			} else {
+				if ( ! empty( $meta['group_price'] ) ) {
+					$tour_price[] = $meta['group_price'];
+				}
+			}
+		}
+		if ( $pricing_rule && $pricing_rule == 'person' ) {
+			if ( ! empty( $check_in_out ) ) {
+				if ( ! empty( $meta['type'] ) && $meta['type'] === 'continuous' ) {
+					$custom_availability = ! empty( $meta['custom_avail'] ) ? $meta['custom_avail'] : false;
+					if ( $custom_availability ) {
+						foreach ( $meta['cont_custom_date'] as $repval ) {
+							//Initial matching date array
+							$show_tour = [];
+							$dates     = $repval['date'];
+							// Check if any date range match with search form date range and set them on array
+							if ( ! empty( $period ) ) {
+								foreach ( $period as $date ) {
+									$show_tour[] = intval( strtotime( $date->format( 'Y-m-d' ) ) >= strtotime( $dates['from'] ) && strtotime( $date->format( 'Y-m-d' ) ) <= strtotime( $dates['to'] ) );
+								}
+							}
+							if ( ! in_array( 0, $show_tour ) ) {
+								if ( $custom_pricing_by_rule && $custom_pricing_by_rule == 'group' ) {
+									if ( ! empty( $repval['group_price'] ) ) {
+										$tour_price[] = $repval['group_price'];
+									}
+								}
+								if ( $custom_pricing_by_rule && $custom_pricing_by_rule == 'person' ) {
+									if ( ! empty( $repval['adult_price'] ) && ! $disable_adult_price ) {
+										if ( $tour_archive_page_price_settings == "all" ) {
+											if ( ! empty( $repval['adult_price'] ) && ! $disable_adult_price ) {
+												$tour_price[] = $repval['adult_price'];
+											}
+											if ( ! empty( $repval['child_price'] ) && ! $disable_adult_price ) {
+												$tour_price[] = $repval['child_price'];
+											}
+										}
+										if ( $tour_archive_page_price_settings == "adult" ) {
+											if ( ! empty( $repval['adult_price'] ) && ! $disable_adult_price ) {
+												$tour_price[] = $repval['adult_price'];
+											}
+										}
+										if ( $tour_archive_page_price_settings == "child" ) {
+											if ( ! empty( $repval['child_price'] ) && ! $disable_adult_price ) {
+												$tour_price[] = $repval['child_price'];
+											}
+										}
+									}
+								}
+							}
+						}
+					} else {
+						if ( $tour_archive_page_price_settings == "all" ) {
+							if ( ! empty( $meta['adult_price'] ) && ! $disable_adult_price ) {
+								$tour_price[] = $meta['adult_price'];
+							}
+							if ( ! empty( $meta['child_price'] ) && ! $disable_adult_price ) {
+								$tour_price[] = $meta['child_price'];
+							}
+						}
+
+						if ( $tour_archive_page_price_settings == "adult" ) {
+							if ( ! empty( $meta['adult_price'] ) && ! $disable_adult_price ) {
+								$tour_price[] = $meta['adult_price'];
+							}
+						}
+
+						if ( $tour_archive_page_price_settings == "child" ) {
+							if ( ! empty( $meta['child_price'] ) && ! $disable_adult_price ) {
+								$tour_price[] = $meta['child_price'];
+							}
+						}
+					}
+				} else {
+					if ( $tour_archive_page_price_settings == "all" ) {
+						if ( ! empty( $meta['adult_price'] ) && ! $disable_adult_price ) {
+							$tour_price[] = $meta['adult_price'];
+						}
+						if ( ! empty( $meta['child_price'] ) && ! $disable_adult_price ) {
+							$tour_price[] = $meta['child_price'];
+						}
+					}
+
+					if ( $tour_archive_page_price_settings == "adult" ) {
+						if ( ! empty( $meta['adult_price'] ) && ! $disable_adult_price ) {
+							$tour_price[] = $meta['adult_price'];
+						}
+					}
+
+					if ( $tour_archive_page_price_settings == "child" ) {
+						if ( ! empty( $meta['child_price'] ) && ! $disable_adult_price ) {
+							$tour_price[] = $meta['child_price'];
+						}
+					}
+				}
+			} else {
+				if ( $tour_archive_page_price_settings == "all" ) {
+					if ( ! empty( $meta['adult_price'] ) && ! $disable_adult_price ) {
+						$tour_price[] = $meta['adult_price'];
+					}
+					if ( ! empty( $meta['child_price'] ) && ! $disable_adult_price ) {
+						$tour_price[] = $meta['child_price'];
+					}
+				}
+				if ( $tour_archive_page_price_settings == "adult" ) {
+					if ( ! empty( $meta['adult_price'] ) && ! $disable_adult_price ) {
+						$tour_price[] = $meta['adult_price'];
+					}
+				}
+				if ( $tour_archive_page_price_settings == "child" ) {
+					if ( ! empty( $meta['child_price'] ) && ! $disable_adult_price ) {
+						$tour_price[] = $meta['child_price'];
+					}
+				}
+			}
+		}
+
+		//get the lowest price from all available room price
+		$tf_tour_min_price      = min( $tour_price );
+		$tf_tour_full_price     = min( $tour_price );
+		$tf_tour_discount_type  = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : '';
+		$tf_tour_discount_price = ! empty( $meta['discount_price'] ) ? $meta['discount_price'] : '';
+        $tf_tour_min_discount = 0;
+        if ( ! empty( $tf_tour_discount_type ) && ! empty( $tf_tour_min_price ) && ! empty( $tf_tour_discount_price ) ) {
+			if ( $tf_tour_discount_type == "percent" ) {
+				$tf_tour_min_discount = ( $tf_tour_min_price * $tf_tour_discount_price ) / 100;
+				$tf_tour_min_price    = $tf_tour_min_price - $tf_tour_min_discount;
+			}
+			if ( $tf_tour_discount_type == "fixed" ) {
+				$tf_tour_min_discount = $tf_tour_discount_price;
+				$tf_tour_min_price    = $tf_tour_min_price - $tf_tour_discount_price;
+			}
+		}
+
+		return array(
+			'min_regular_price' => $tf_tour_full_price,
+			'min_sale_price'    => $tf_tour_min_price,
+			'min_discount'      => $tf_tour_min_discount,
+		);
+	}
+
+	/*
+	 * Get min price html
+	 */
+	function get_min_price_html( $period = '' ) {
+		$min_max_price = $this->get_min_price( $period );
+		$regular_price = $min_max_price['min_regular_price'];
+		$sale_price    = $min_max_price['min_sale_price'];
+		$min_discount  = $min_max_price['min_discount'];
+
+		$price_html = '';
+		if ( ! empty( $min_max_price ) ) {
+			$price_html .= esc_html__( "From ", "tourfic" );
+			if ( ! empty( $min_discount ) ) {
+				$price_html .= wc_format_sale_price( $regular_price, $sale_price );
+			} else {
+				$price_html .= wp_kses_post( wc_price( $sale_price ) ) . " ";
+			}
+		}
+
+		return $price_html;
+	}
+
 	function get_total_price() {
 		$meta = $this->meta;
 
@@ -224,15 +450,15 @@ class Pricing {
 
 		# Set pricing based on pricing rule
 		if ( $pricing_rule == 'group' ) {
-			$total_price     = $group_price;
+			$total_price = $group_price;
 		} else {
-			$total_price     = ( $adult_price * $adult_count ) + ( $child_count * $children_price ) + ( $infant_count * $infant_price );
+			$total_price = ( $adult_price * $adult_count ) + ( $child_count * $children_price ) + ( $infant_count * $infant_price );
 		}
 
 		return $total_price;
 	}
 
-	static function get_min_max_price_from_all_tour(){
+	static function get_min_max_price_from_all_tour() {
 		$tf_tour_args = array(
 			'posts_per_page' => - 1,
 			'post_type'      => 'tf_tours',

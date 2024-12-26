@@ -365,27 +365,27 @@ class TF_Handle_Emails {
         if ( !empty($order_items['dropoff_time']) ) {
             $booking_details .= '<br><strong style="font-family:Work Sans,sans-serif;">Dropoff Time:</strong> ' . $order_items['dropoff_time'];
         }
-        
+
         if ( !empty($order_items['check_in']) ) {
             $booking_details .= '<br><strong style="font-family:Work Sans,sans-serif;">Check In:</strong> ' . $order_items['check_in'];
         }
-        
+
         if ( !empty($order_items['check_out']) ) {
             $booking_details .= '<br><strong style="font-family:Work Sans,sans-serif;">Check Out:</strong> ' . $order_items['check_out'];
         }
-        
+
         if ( !empty($order_items['children_ages']) ) {
             $booking_details .= '<br><strong style="font-family:Work Sans,sans-serif;">Children Ages:</strong> ' . $order_items['children_ages'];
         }
-        
+
         if ( !empty($order_items['airport_service_type']) && $order_items['airport_service_type'] != 'undefined' ) {
             $booking_details .= '<br><strong style="font-family:Work Sans,sans-serif;">Airport Service Type:</strong> ' . $order_items['airport_service_type'];
         }
-        
+
         if ( !empty($order_items['airport_service_fee']) ) {
             $booking_details .= '<br><strong style="font-family:Work Sans,sans-serif;">Airport Service Fee:</strong> ' . $order_items['airport_service_fee'];
         }
-        
+
         if ( !empty($order_items['due_price']) ) {
             $booking_details .= '<br><strong style="font-family:Work Sans,sans-serif;">Due Amount:</strong> ' . wc_price($order_items['due_price']);
         }
@@ -395,7 +395,7 @@ class TF_Handle_Emails {
         $booking_details .= '<td align="right">' . wc_price( $order_items['total_price'] ) . '</td>';
         $booking_details .= '</tr>';
 
-        
+
         $booking_details .= '</tbody>';
         $booking_details .= '<tfoot><tr><th colspan="2" align="left" style="padding-bottom:10px;padding-top:10px;">Subtotal</th>';
         $booking_details .= '<td align="right">' . wc_price( $order_items['total_price'] ) . '</td></tr>';
@@ -419,7 +419,7 @@ class TF_Handle_Emails {
         } else if( 'hotel'==$order_data['post_type'] ){
             $tf_booking_fields = !empty(Helper::tfopt( 'hotel-book-confirm-field' )) ? Helper::tf_data_types(Helper::tfopt( 'hotel-book-confirm-field' )) : '';
         }
-            
+
         $customer_details = '<table style="max-width: 600px;border-collapse: collapse; color: #5A5A5A; font-family: Inter,sans-serif;"><tbody><tr><td style="padding: 15px 0;text-align: left;">';
         if(!empty($tf_booking_fields)){
             foreach($tf_booking_fields as $single){
@@ -842,7 +842,7 @@ class TF_Handle_Emails {
                     $meta                    = get_post_meta( $admin_confirmation_template_id, 'tf_email_templates_metabox', true );
                     $brand_logo              = ! empty( $meta['brand_logo'] ) ? $meta['brand_logo'] : '';
                     $sale_notification_email = ! empty( $meta['sale_notification_email'] ) ? $meta['sale_notification_email'] : '';
-                    $email_subject           = ! empty( $meta['email_subject'] ) ? $meta['email_subject'] :  __( 'Your order confirmed', 'tourfic-pro' );;
+                    $email_subject           = ! empty( $meta['email_subject'] ) ? $meta['email_subject'] :  __( 'Your order confirmed', 'tourfic' );;
                     $email_from_name         = ! empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
                     $email_from_email        = ! empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
                     $order_email_heading     = ! empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';
@@ -891,7 +891,7 @@ class TF_Handle_Emails {
                         $meta                    = get_post_meta( $vendor_confirmation_template_id, 'tf_email_templates_metabox', true );
                         $brand_logo              = ! empty( $meta['brand_logo'] ) ? $meta['brand_logo'] : '';
                         $sale_notification_email = ! empty( $meta['sale_notification_email'] ) ? $meta['sale_notification_email'] : '';
-                        $email_subject           = ! empty( $meta['email_subject'] ) ? $meta['email_subject'] :  __( 'Your order confirmed', 'tourfic-pro' );;
+                        $email_subject           = ! empty( $meta['email_subject'] ) ? $meta['email_subject'] :  __( 'Your order confirmed', 'tourfic' );
                         $email_from_name         = ! empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
                         $email_from_email        = ! empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
                         $order_email_heading     = ! empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';
@@ -939,7 +939,7 @@ class TF_Handle_Emails {
                     $meta                    = get_post_meta( $customer_confirmation_template_id, 'tf_email_templates_metabox', true );
                     $brand_logo              = ! empty( $meta['brand_logo'] ) ? $meta['brand_logo'] : '';
                     $sale_notification_email = ! empty( $meta['sale_notification_email'] ) ? $meta['sale_notification_email'] : '';
-                    $email_subject           = ! empty( $meta['email_subject'] ) ? $meta['email_subject'] : __( 'Your order received', 'tourfic-pro' );
+                    $email_subject           = ! empty( $meta['email_subject'] ) ? $meta['email_subject'] : __( 'Your order received', 'tourfic' );
                     $email_from_name         = ! empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
                     $email_from_email        = ! empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
                     $order_email_heading     = ! empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';
@@ -1000,7 +1000,7 @@ class TF_Handle_Emails {
                     $meta                    = get_post_meta( $admin_cancellation_template_id, 'tf_email_templates_metabox', true );
                     $brand_logo              = ! empty( $meta['brand_logo'] ) ? $meta['brand_logo'] : '';
                     $sale_notification_email = ! empty( $meta['sale_notification_email'] ) ? $meta['sale_notification_email'] : get_bloginfo( 'admin_email' );
-                    $email_subject           = ! empty( $meta['email_subject'] ) ? $meta['email_subject'] :  __( 'Your order cancelled', 'tourfic-pro' );
+                    $email_subject           = ! empty( $meta['email_subject'] ) ? $meta['email_subject'] :  __( 'Your order cancelled', 'tourfic' );
                     $email_from_name         = ! empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
                     $email_from_email        = ! empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
                     $order_email_heading     = ! empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';
@@ -1038,7 +1038,7 @@ class TF_Handle_Emails {
                     $meta                    = get_post_meta( $vendor_cancellation_template_id, 'tf_email_templates_metabox', true );
                     $brand_logo              = ! empty( $meta['brand_logo'] ) ? $meta['brand_logo'] : '';
                     $sale_notification_email = ! empty( $meta['sale_notification_email'] ) ? $meta['sale_notification_email'] : '';
-                    $email_subject           = ! empty( $meta['email_subject'] ) ? $meta['email_subject'] :  __( 'Your order cancelled', 'tourfic-pro' );
+                    $email_subject           = ! empty( $meta['email_subject'] ) ? $meta['email_subject'] :  __( 'Your order cancelled', 'tourfic' );
                     $email_from_name         = ! empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
                     $email_from_email        = ! empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
                     $order_email_heading     = ! empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';
@@ -1077,7 +1077,7 @@ class TF_Handle_Emails {
                     $meta                    = get_post_meta( $customer_cancellation_template_id, 'tf_email_templates_metabox', true );
                     $brand_logo              = ! empty( $meta['brand_logo'] ) ? $meta['brand_logo'] : '';
                     $sale_notification_email = ! empty( $meta['sale_notification_email'] ) ? $meta['sale_notification_email'] : $order_billing_email;
-                    $email_subject           = ! empty( $meta['email_subject'] ) ? $meta['email_subject'] :  __( 'Your order cancelled', 'tourfic-pro' );
+                    $email_subject           = ! empty( $meta['email_subject'] ) ? $meta['email_subject'] :  __( 'Your order cancelled', 'tourfic' );
                     $email_from_name         = ! empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
                     $email_from_email        = ! empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
                     $order_email_heading     = ! empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';
@@ -1116,7 +1116,7 @@ class TF_Handle_Emails {
      */
     public function tf_offline_booking_confirmation_callback( $order_id, $order_data ){
         if( is_plugin_active( 'tourfic-pro/tourfic-pro.php' ) ) :
-            
+
             $order_billing_email    = !empty($order_data['shipping_details']['tf_email']) ? $order_data['shipping_details']['tf_email'] : '';
             //email body ended
             $email_template_settings           = $this::$tf_email_template_settings;
@@ -1133,11 +1133,11 @@ class TF_Handle_Emails {
                     //get the mail template content   
                     $admin_confirmation_email_template   = get_post( $admin_confirmation_template_id );
                     $admin_confirmation_template_content = !empty( $admin_confirmation_email_template->post_content ) ? $admin_confirmation_email_template->post_content : $this->get_email_template( 'order_confirmation', '', 'admin' );
-                    
+
                     $meta                    = get_post_meta( $admin_confirmation_template_id, 'tf_email_templates_metabox', true );
                     $brand_logo              = ! empty( $meta['brand_logo'] ) ? $meta['brand_logo'] : '';
                     $sale_notification_email = ! empty( $meta['sale_notification_email'] ) ? $meta['sale_notification_email'] : '';
-                    $email_subject           = ! empty( $meta['email_subject'] ) ? $meta['email_subject'] :  __( 'Your order confirmed', 'tourfic-pro' );;
+                    $email_subject           = ! empty( $meta['email_subject'] ) ? $meta['email_subject'] :  __( 'Your order confirmed', 'tourfic' );;
                     $email_from_name         = ! empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
                     $email_from_email        = ! empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
                     $order_email_heading     = ! empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';
@@ -1157,7 +1157,7 @@ class TF_Handle_Emails {
                     $admin_confirmation_template_content = $this->offline_replace_mail_tags( $admin_confirmation_template_content, $order_id, $order_data );
                     $email_body_close                    = $this->email_body_close();
                     $admin_email_booking_body_full       = $email_body_open . $admin_confirmation_template_content . $email_body_close;
-    
+
                     //send multiple emails to multiple admins
                     if ( strpos( $sale_notification_email, ',' ) !== false ) {
                         $sale_notification_email = explode( ',', $sale_notification_email );
@@ -1177,10 +1177,10 @@ class TF_Handle_Emails {
             if( ! empty ( $enable_offline_vendor_conf_email ) && $enable_offline_vendor_conf_email == 1 ){
                 //email settings metabox value
                 if( ! empty ( $vendor_confirmation_template_id ) ){
-                    //get the mail template content   
+                    //get the mail template content
                     $vendor_confirmation_email_template   = get_post( $vendor_confirmation_template_id );
                     $vendor_confirmation_template_content = !empty( $vendor_confirmation_email_template->post_content ) ? $vendor_confirmation_email_template->post_content : ' ';
-                    
+
                     $meta                    = get_post_meta( $vendor_confirmation_template_id, 'tf_email_templates_metabox', true );
                     $brand_logo              = ! empty( $meta['brand_logo'] ) ? $meta['brand_logo'] : '';
                     $sale_notification_email = ! empty( $meta['sale_notification_email'] ) ? $meta['sale_notification_email'] : '';
@@ -1203,7 +1203,7 @@ class TF_Handle_Emails {
                     $vendor_confirmation_template_content = $this->offline_replace_mail_tags( $vendor_confirmation_template_content, $order_id, $order_data );
                     $email_body_close                     = $this->email_body_close();
                     $vendor_email_booking_body_full       = $email_body_open . $vendor_confirmation_template_content . $email_body_close;
-                    
+
                     //send mail to vendor
                     $author_id = get_post_field ('post_author', $order_data['post_id']);
                     //get user role by id
@@ -1215,7 +1215,7 @@ class TF_Handle_Emails {
                     }
                 }
             }
-        
+
             //send customer confirmation email template
             if( ! empty ( $enable_offline_customer_conf_email ) && $enable_offline_customer_conf_email == 1 ){
                 //email settings metabox value
@@ -1227,7 +1227,7 @@ class TF_Handle_Emails {
                     $meta                    = get_post_meta( $customer_confirmation_template_id, 'tf_email_templates_metabox', true );
                     $brand_logo              = ! empty( $meta['brand_logo'] ) ? $meta['brand_logo'] : '';
                     $sale_notification_email = ! empty( $meta['sale_notification_email'] ) ? $meta['sale_notification_email'] : '';
-                    $email_subject           = ! empty( $meta['email_subject'] ) ? $meta['email_subject'] : __( 'Your order received', 'tourfic-pro' );
+                    $email_subject           = ! empty( $meta['email_subject'] ) ? $meta['email_subject'] : __( 'Your order received', 'tourfic' );
                     $email_from_name         = ! empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
                     $email_from_email        = ! empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
                     $order_email_heading     = ! empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';
@@ -1293,11 +1293,11 @@ class TF_Handle_Emails {
             $tf_db_order_arr['billing_details'] = !empty($tf_db_order_arr['billing_details']) ? json_decode($tf_db_order_arr['billing_details'], true) : '';
 
             if( is_plugin_active( 'tourfic-pro/tourfic-pro.php' ) ) {
-                
+
                 $email_template_settings           = $this::$tf_email_template_settings;
                 $enable_offline_vendor_conf_email  = !empty( $email_template_settings['enable_offline_vendor_conf_email'] ) ? $email_template_settings['enable_offline_vendor_conf_email'] : '';
                 $enable_offline_customer_conf_email = !empty( $email_template_settings['enable_offline_customer_conf_email'] ) ? $email_template_settings['enable_offline_customer_conf_email'] : '';
-                
+
                 $vendor_confirmation_template_id = !empty( $email_template_settings['vendor_offline_confirmation_email_template'] ) ? $email_template_settings['vendor_offline_confirmation_email_template'] : '';
                 $customer_confirmation_template_id = !empty( $email_template_settings['customer_offline_confirmation_email_template'] ) ? $email_template_settings['customer_offline_confirmation_email_template'] : '';
 
@@ -1311,7 +1311,7 @@ class TF_Handle_Emails {
                         //get the mail template content   
                         $vendor_confirmation_email_template   = get_post( $vendor_confirmation_template_id );
                         $vendor_confirmation_template_content = !empty( $vendor_confirmation_email_template->post_content ) ? $vendor_confirmation_email_template->post_content : ' ';
-                        
+
                         $meta                    = get_post_meta( $vendor_confirmation_template_id, 'tf_email_templates_metabox', true );
                         $brand_logo              = ! empty( $meta['brand_logo'] ) ? $meta['brand_logo'] : '';
                         $sale_notification_email = ! empty( $meta['sale_notification_email'] ) ? $meta['sale_notification_email'] : '';
@@ -1334,7 +1334,7 @@ class TF_Handle_Emails {
                         $vendor_confirmation_template_content = $this->offline_replace_mail_tags( $vendor_confirmation_template_content, $order_id, $tf_db_order_arr );
                         $email_body_close                     = $this->email_body_close();
                         $vendor_email_booking_body_full       = $email_body_open . $vendor_confirmation_template_content . $email_body_close;
-                        
+
                         //send mail to vendor
                         $author_id = get_post_field ('post_author', $tf_db_order_arr['post_id']);
                         //get user role by id
@@ -1383,7 +1383,7 @@ class TF_Handle_Emails {
                         wp_mail( $order_billing_email, $email_subject, $customer_email_booking_body_full, $headers );
                     }
                 }
-                   
+
             }
         }
 
@@ -1411,7 +1411,7 @@ class TF_Handle_Emails {
                         
                         $meta                    = get_post_meta( $vendor_confirmation_template_id, 'tf_email_templates_metabox', true );
                         $brand_logo              = ! empty( $meta['brand_logo'] ) ? $meta['brand_logo'] : '';
-                        $email_subject           = ! empty( $meta['email_subject'] ) ? $meta['email_subject'] :  __( 'Your order confirmed', 'tourfic-pro' );;
+                        $email_subject           = ! empty( $meta['email_subject'] ) ? $meta['email_subject'] :  __( 'Your order confirmed', 'tourfic' );;
                         $email_from_name         = ! empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
                         $email_from_email        = ! empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
                         $order_email_heading     = ! empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';
@@ -1459,7 +1459,7 @@ class TF_Handle_Emails {
                         $meta                    = get_post_meta( $customer_confirmation_template_id, 'tf_email_templates_metabox', true );
                         $brand_logo              = ! empty( $meta['brand_logo'] ) ? $meta['brand_logo'] : '';
                         $sale_notification_email = ! empty( $meta['sale_notification_email'] ) ? $meta['sale_notification_email'] : '';
-                        $email_subject           = ! empty( $meta['email_subject'] ) ? $meta['email_subject'] : __( 'Your order received', 'tourfic-pro' );
+                        $email_subject           = ! empty( $meta['email_subject'] ) ? $meta['email_subject'] : __( 'Your order received', 'tourfic' );
                         $email_from_name         = ! empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
                         $email_from_email        = ! empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
                         $order_email_heading     = ! empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';
