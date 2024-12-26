@@ -741,7 +741,15 @@
 
         if(tf_params.tour_form_data.tf_tour_selected_template === 'design-2') {
             $(".tours-check-in-out").flatpickr(tour_date_options);
-
+            if(tour_date_options.defaultDate){
+                const monthNames = [
+                    "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+                ];
+                const startDate = new Date(tour_date_options.defaultDate);
+                $(".tf-template-3 .tf-bottom-booking-bar .tf-booking-form-checkinout span.tf-booking-date").html(startDate.getDate());
+                $(".tf-template-3 .tf-bottom-booking-bar .tf-booking-form-checkinout span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
+            }
             function dateSetToFields(selectedDates, instance) {
                 if (selectedDates.length === 1) {
                     const monthNames = [

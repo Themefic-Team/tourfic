@@ -23,7 +23,7 @@ $tf_hotel_reserve_button_text   = ! empty( Helper::tfopt( 'hotel_booking_form_bu
 $room_options                   = ! empty( $room['room-options'] ) ? $room['room-options'] : [];
 
 if ( $tf_hotel_selected_template_check == "design-1" ) {
-	if ( empty( $tf_room_disable_date ) ) {
+	if ( empty( $tf_room_disable_date ) || !empty($tf_room_disable_date[$tf_enddate]) ) {
 		?>
         <tr>
         <td class="description" rowspan="<?php echo ( $pricing_by == '3' && ! empty( $room_options ) ) ? count( $room_options ) : 1; ?>">
@@ -613,7 +613,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 		endif;
 	}
 } elseif ( $tf_hotel_selected_template_check == "design-2" ) {
-	if ( empty( $tf_room_disable_date ) ) {
+	if ( empty( $tf_room_disable_date ) || !empty($tf_room_disable_date[$tf_enddate]) ) {
 		?>
         <div class="tf-available-room tf-desktop-room">
             <div class="tf-available-room-gallery">
@@ -2163,7 +2163,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 		<?php
 	}
 } else {
-	if ( empty( $tf_room_disable_date ) ) {
+	if ( empty( $tf_room_disable_date ) || !empty($tf_room_disable_date[$tf_enddate]) ) {
 		?>
         <tr>
         <td class="description" rowspan="<?php echo ( $pricing_by == '3' && ! empty( $room_options ) ) ? count( $room_options ) : 1; ?>">
