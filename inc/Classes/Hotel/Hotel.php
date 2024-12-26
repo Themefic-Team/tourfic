@@ -2026,8 +2026,251 @@ class Hotel {
 					});
                 })(jQuery);
             </script>
-		<?php
-		} else { ?>
+        <?php } elseif (!empty($design) && 4 == $design) { ?>
+            <form class="tf-archive-search-box-wrapper tf-search__form tf-shortcode-design-4 <?php echo esc_attr($classes); ?>" id="tf_hotel_aval_check" method="get" autocomplete="off" action="<?php echo esc_url(Helper::tf_booking_search_action()); ?>">
+                <fieldset class="tf-search__form__fieldset">
+                    <!-- Destination -->
+                    <div class="tf-search__form__fieldset__left">
+                        <label for="tf-search__form-destination" class="tf-search__form__label">
+                            <?php echo esc_html_e("Locations", "tourfic"); ?>
+                        </label>
+                        <div class="tf-search__form__field" id="locationField">
+                            <input type="text" name="place-name" <?php echo $hotel_location_field_required != 1 ? '' : 'required'; ?> id="tf-location" class="tf-search__form__input" placeholder="<?php esc_html_e('Where you wanna stay?', 'tourfic'); ?>" value="">
+                            <input type="hidden" name="place" id="tf-search-hotel" class="tf-place-input">
+                            <span class="tf-search__form__field__icon icon--location">
+							<svg width="12" height="17" viewBox="0 0 12 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M5.25 15.625C3.625 13.5938 0 8.75 0 6C0 2.6875 2.65625 0 6 0C9.3125 0 12 2.6875 12 6C12 8.75 8.34375 13.5938 6.71875 15.625C6.34375 16.0938 5.625 16.0938 5.25 15.625ZM6 8C7.09375 8 8 7.125 8 6C8 4.90625 7.09375 4 6 4C4.875 4 4 4.90625 4 6C4 7.125 4.875 8 6 8Z" fill="white" />
+							</svg>
+						</span>
+                        </div>
+                    </div>
+
+                    <div class="tf-search__form__fieldset__middle">
+
+
+                        <!-- Adult Person -->
+                        <div class="tf-search__form__group tf_selectperson-wrap">
+                            <label for="tf-search__form-adult" class="tf-search__form__label">
+                                <?php echo esc_html_e('Adult Person', 'tourfic'); ?>
+                            </label>
+                            <div class="tf-search__form__field tf-mx-width">
+                                <div class="tf-search__form__field__icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="41" height="40" viewBox="0 0 41 40" fill="none">
+                                        <path d="M20.2222 20C22.3439 20 24.3787 19.1571 25.879 17.6569C27.3793 16.1566 28.2222 14.1217 28.2222 12C28.2222 9.87827 27.3793 7.84344 25.879 6.34315C24.3787 4.84285 22.3439 4 20.2222 4C18.1004 4 16.0656 4.84285 14.5653 6.34315C13.065 7.84344 12.2222 9.87827 12.2222 12C12.2222 14.1217 13.065 16.1566 14.5653 17.6569C16.0656 19.1571 18.1004 20 20.2222 20ZM17.3659 23C11.2097 23 6.22217 27.9875 6.22217 34.1437C6.22217 35.1687 7.05342 36 8.07842 36H32.3659C33.3909 36 34.2222 35.1687 34.2222 34.1437C34.2222 27.9875 29.2347 23 23.0784 23H17.3659Z" fill="#3E64E0" />
+                                    </svg>
+                                </div>
+                                <div class="tf-search__form__field__incdec">
+                                    <input type="number" name="adults" id="adults" class="tf-search__form__field__input field--title" min="1" value="1">
+                                    <span class="tf-search__form__field__incdre__inc form--span acr-inc">
+									<svg xmlns="http://www.w3.org/2000/svg" width="33" height="25" viewBox="0 0 33 25" fill="none">
+										<rect x="1.25" y="1" width="31" height="23" rx="5.5" stroke="#3E64E0" />
+										<path d="M10.75 12.9998H22.4167M16.5833 7.1665V18.8332" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+									</svg>
+								</span>
+                                    <span class="tf-search__form__field__incdre__dec form--span acr-dec">
+									<svg xmlns="http://www.w3.org/2000/svg" width="33" height="24" viewBox="0 0 33 24" fill="none">
+										<rect x="0.722168" y="0.5" width="31" height="23" rx="5.5" stroke="#3E64E0" />
+										<path d="M10.2222 12.5H21.8888" stroke="white" stroke-width="2" stroke-linecap="round" stroke-line join="round" />
+									</svg>
+								</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Divider -->
+                        <div class="tf-search__form__divider"></div>
+
+                        <!-- Children -->
+                        <?php if (empty($disable_hotel_child_search)) : ?>
+                            <div class="tf-search__form__group tf_selectperson-wrap">
+                                <label for="tf-search__form-children" class="tf-search__form__label">
+                                    <?php echo esc_html_e('Children', 'tourfic'); ?>
+                                </label>
+                                <div class="tf-search__form__field tf-mx-width">
+                                    <div class="tf-search__form__field__icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="40" viewBox="0 0 26 40" fill="none">
+                                            <path d="M7.99873 5C7.99873 3.67392 8.52552 2.40215 9.4632 1.46447C10.4009 0.526784 11.6727 0 12.9987 0C14.3248 0 15.5966 0.526784 16.5343 1.46447C17.472 2.40215 17.9987 3.67392 17.9987 5C17.9987 6.32608 17.472 7.59785 16.5343 8.53553C15.5966 9.47322 14.3248 10 12.9987 10C11.6727 10 10.4009 9.47322 9.4632 8.53553C8.52552 7.59785 7.99873 6.32608 7.99873 5ZM11.7487 30V37.5C11.7487 38.8828 10.6315 40 9.24873 40C7.86592 40 6.74873 38.8828 6.74873 37.5V22.4844L5.11592 25.0781C4.38155 26.25 2.83467 26.5938 1.67061 25.8594C0.506547 25.125 0.147172 23.5859 0.881547 22.4219L3.99873 17.4766C5.94405 14.375 9.34248 12.5 12.9987 12.5C16.655 12.5 20.0534 14.375 21.9987 17.4688L25.1159 22.4219C25.8503 23.5938 25.4987 25.1328 24.3347 25.8672C23.1706 26.6016 21.6237 26.25 20.8894 25.0859L19.2487 22.4844V37.5C19.2487 38.8828 18.1315 40 16.7487 40C15.3659 40 14.2487 38.8828 14.2487 37.5V30H11.7487Z" fill="#3E64E0" />
+                                        </svg>
+                                    </div>
+                                    <div class="tf-search__form__field__incdec">
+                                        <input type="number" name="children" id="children" class="tf-search__form__field__input field--title" min="0" value="0">
+                                        <span class="tf-search__form__field__incdre__inc form--span acr-inc">
+										<svg xmlns="http://www.w3.org/2000/svg" width="33" height="25" viewBox="0 0 33 25" fill="none">
+											<rect x="1.25" y="1" width="31" height="23" rx="5.5" stroke="#3E64E0" />
+											<path d="M10.75 12.9998H22.4167M16.5833 7.1665V18.8332" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+										</svg>
+									</span>
+                                        <span class="tf-search__form__field__incdre__dec form--span acr-dec">
+										<svg xmlns="http://www.w3.org/2000/svg" width="33" height="24" viewBox="0 0 33 24" fill="none">
+											<rect x="0.722168" y="0.5" width="31" height="23" rx="5.5" stroke="#3E64E0" />
+											<path d="M10.2222 12.5H21.8888" stroke="white" stroke-width="2" stroke-linecap="round" stroke-line join="round" />
+										</svg>
+									</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Divider -->
+                            <div class="tf-search__form__divider"></div>
+                        <?php endif; ?>
+                        <!-- Rooms -->
+                        <div class="tf-search__form__group tf_selectperson-wrap">
+                            <label for="tf-search__form-rooms" class="tf-search__form__label">
+                                <?php echo esc_html_e('Rooms', 'tourfic'); ?>
+                            </label>
+                            <div class="tf-search__form__field tf-mx-width">
+                                <div class="tf-search__form__field__icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="41" height="40" viewBox="0 0 41 40" fill="none">
+                                        <path d="M38.99 19.9635C38.99 21.1586 38.0002 22.0947 36.8784 22.0947H34.7667L34.8129 32.7309C34.8129 32.9102 34.7997 33.0894 34.7799 33.2687V34.3443C34.7799 35.8116 33.5987 37 32.1403 37H31.0845C31.0119 37 30.9393 37 30.8668 36.9934C30.7744 37 30.682 37 30.5896 37L28.4449 36.9934H26.8612C25.4028 36.9934 24.2216 35.8049 24.2216 34.3376V32.7442V28.495C24.2216 27.3199 23.278 26.3704 22.11 26.3704H17.8867C16.7186 26.3704 15.775 27.3199 15.775 28.495V32.7442V34.3376C15.775 35.8049 14.5938 36.9934 13.1354 36.9934H11.5517H9.44663C9.34765 36.9934 9.24866 36.9867 9.14968 36.9801C9.07049 36.9867 8.9913 36.9934 8.91212 36.9934H7.85629C6.39792 36.9934 5.21672 35.8049 5.21672 34.3376V26.9016C5.21672 26.8418 5.21672 26.7754 5.22331 26.7157V22.0881H3.11166C1.92385 22.0881 1 21.1586 1 19.9568C1 19.3593 1.19797 18.8282 1.65989 18.3634L18.5729 3.53115C19.0349 3.06639 19.5628 3 20.0247 3C20.4866 3 21.0146 3.13279 21.4105 3.46475L38.2642 18.37C38.7921 18.8348 39.056 19.3659 38.99 19.9635Z" fill="#3E64E0" />
+                                    </svg>
+                                </div>
+                                <div class="tf-search__form__field__incdec">
+                                    <input type="number" name="room" id="room" class="tf-search__form__field__input field--title" min="1" value="1">
+                                    <span class="tf-search__form__field__incdre__inc form--span acr-inc">
+									<svg xmlns="http://www.w3.org/2000/svg" width="33" height="25" viewBox="0 0 33 25" fill="none">
+										<rect x="1.25" y="1" width="31" height="23" rx="5.5" stroke="#3E64E0" />
+										<path d="M10.75 12.9998H22.4167M16.5833 7.1665V18.8332" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+									</svg>
+								</span>
+                                    <span class="tf-search__form__field__incdre__dec form--span acr-dec">
+									<svg xmlns="http://www.w3.org/2000/svg" width="33" height="24" viewBox="0 0 33 24" fill="none">
+										<rect x="0.722168" y="0.5" width="31" height="23" rx="5.5" stroke="#3E64E0" />
+										<path d="M10.2222 12.5H21.8888" stroke="white" stroke-width="2" stroke-linecap="round" stroke-line join="round" />
+									</svg>
+								</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Divider -->
+                        <div class="tf-search__form__divider"></div>
+                        <!-- Check-in -->
+                        <div class="tf-search__form__group tf-checkin-group">
+                            <div class="tf_check_inout_dates">
+                                <label for="tf-search__form-checkin" class="tf-search__form__label">
+                                    <?php echo esc_html_e('Check-In', 'tourfic'); ?>
+                                </label>
+                                <div class="tf-search__form__field">
+                                    <div class="tf-search__form__field__icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="40" viewBox="0 0 36 40" fill="none">
+                                            <g clip-path="url(#clip0_2862_2140)">
+                                                <path d="M10.7778 0C12.1606 0 13.2778 1.11719 13.2778 2.5V5H23.2778V2.5C23.2778 1.11719 24.395 0 25.7778 0C27.1606 0 28.2778 1.11719 28.2778 2.5V5H32.0278C34.0981 5 35.7778 6.67969 35.7778 8.75V12.5H0.777832V8.75C0.777832 6.67969 2.45752 5 4.52783 5H8.27783V2.5C8.27783 1.11719 9.39502 0 10.7778 0ZM0.777832 15H35.7778V36.25C35.7778 38.3203 34.0981 40 32.0278 40H4.52783C2.45752 40 0.777832 38.3203 0.777832 36.25V15ZM5.77783 21.25V23.75C5.77783 24.4375 6.34033 25 7.02783 25H9.52783C10.2153 25 10.7778 24.4375 10.7778 23.75V21.25C10.7778 20.5625 10.2153 20 9.52783 20H7.02783C6.34033 20 5.77783 20.5625 5.77783 21.25ZM15.7778 21.25V23.75C15.7778 24.4375 16.3403 25 17.0278 25H19.5278C20.2153 25 20.7778 24.4375 20.7778 23.75V21.25C20.7778 20.5625 20.2153 20 19.5278 20H17.0278C16.3403 20 15.7778 20.5625 15.7778 21.25ZM27.0278 20C26.3403 20 25.7778 20.5625 25.7778 21.25V23.75C25.7778 24.4375 26.3403 25 27.0278 25H29.5278C30.2153 25 30.7778 24.4375 30.7778 23.75V21.25C30.7778 20.5625 30.2153 20 29.5278 20H27.0278ZM5.77783 31.25V33.75C5.77783 34.4375 6.34033 35 7.02783 35H9.52783C10.2153 35 10.7778 34.4375 10.7778 33.75V31.25C10.7778 30.5625 10.2153 30 9.52783 30H7.02783C6.34033 30 5.77783 30.5625 5.77783 31.25ZM17.0278 30C16.3403 30 15.7778 30.5625 15.7778 31.25V33.75C15.7778 34.4375 16.3403 35 17.0278 35H19.5278C20.2153 35 20.7778 34.4375 20.7778 33.75V31.25C20.7778 30.5625 20.2153 30 19.5278 30H17.0278ZM25.7778 31.25V33.75C25.7778 34.4375 26.3403 35 27.0278 35H29.5278C30.2153 35 30.7778 34.4375 30.7778 33.75V31.25C30.7778 30.5625 30.2153 30 29.5278 30H27.0278C26.3403 30 25.7778 30.5625 25.7778 31.25Z" fill="#3E64E0" />
+                                            </g>
+                                            <defs>
+                                                <clipPath id="clip0_2862_2140">
+                                                    <rect width="35" height="40" fill="white" transform="translate(0.777832)" />
+                                                </clipPath>
+                                            </defs>
+                                        </svg>
+                                    </div>
+                                    <div class="tf_checkin_dates tf-flex tf-flex-align-center">
+                                        <span class="date field--title"><?php echo esc_html(gmdate('d')); ?></span>
+                                        <div class="tf-search__form__field__mthyr">
+                                            <span class="month form--span"><?php echo esc_html(gmdate('M')); ?></span>
+                                            <span class="year form--span"><?php echo esc_html(gmdate('Y')); ?></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="hidden" name="check-in-out-date" class="tf-check-in-out-date tf-check-inout-hidden" onkeypress="return false;" placeholder="<?php esc_attr_e('Check-in - Check-out', 'tourfic'); ?>" <?php echo Helper::tfopt('date_hotel_search') ? 'required' : ''; ?>>
+                        </div>
+                        <!-- label to -->
+                        <div class="tf_checkin_to_label">
+                            <?php echo esc_html_e('To', 'tourfic'); ?>
+                        </div>
+                        <!-- Check-out -->
+                        <div class="tf-search__form__group tf_check_inout_dates tf-checkout-group">
+                            <label for="tf-search__form-checkout" class="tf-search__form__label">
+                                <?php echo esc_html_e('Check-Out', 'tourfic'); ?>
+                            </label>
+                            <div class="tf-search__form__field">
+                                <div class="tf-search__form__field__icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="40" viewBox="0 0 36 40" fill="none">
+                                        <g clip-path="url(#clip0_2862_2140)">
+                                            <path d="M10.7778 0C12.1606 0 13.2778 1.11719 13.2778 2.5V5H23.2778V2.5C23.2778 1.11719 24.395 0 25.7778 0C27.1606 0 28.2778 1.11719 28.2778 2.5V5H32.0278C34.0981 5 35.7778 6.67969 35.7778 8.75V12.5H0.777832V8.75C0.777832 6.67969 2.45752 5 4.52783 5H8.27783V2.5C8.27783 1.11719 9.39502 0 10.7778 0ZM0.777832 15H35.7778V36.25C35.7778 38.3203 34.0981 40 32.0278 40H4.52783C2.45752 40 0.777832 38.3203 0.777832 36.25V15ZM5.77783 21.25V23.75C5.77783 24.4375 6.34033 25 7.02783 25H9.52783C10.2153 25 10.7778 24.4375 10.7778 23.75V21.25C10.7778 20.5625 10.2153 20 9.52783 20H7.02783C6.34033 20 5.77783 20.5625 5.77783 21.25ZM15.7778 21.25V23.75C15.7778 24.4375 16.3403 25 17.0278 25H19.5278C20.2153 25 20.7778 24.4375 20.7778 23.75V21.25C20.7778 20.5625 20.2153 20 19.5278 20H17.0278C16.3403 20 15.7778 20.5625 15.7778 21.25ZM27.0278 20C26.3403 20 25.7778 20.5625 25.7778 21.25V23.75C25.7778 24.4375 26.3403 25 27.0278 25H29.5278C30.2153 25 30.7778 24.4375 30.7778 23.75V21.25C30.7778 20.5625 30.2153 20 29.5278 20H27.0278ZM5.77783 31.25V33.75C5.77783 34.4375 6.34033 35 7.02783 35H9.52783C10.2153 35 10.7778 34.4375 10.7778 33.75V31.25C10.7778 30.5625 10.2153 30 9.52783 30H7.02783C6.34033 30 5.77783 30.5625 5.77783 31.25ZM17.0278 30C16.3403 30 15.7778 30.5625 15.7778 31.25V33.75C15.7778 34.4375 16.3403 35 17.0278 35H19.5278C20.2153 35 20.7778 34.4375 20.7778 33.75V31.25C20.7778 30.5625 20.2153 30 19.5278 30H17.0278ZM25.7778 31.25V33.75C25.7778 34.4375 26.3403 35 27.0278 35H29.5278C30.2153 35 30.7778 34.4375 30.7778 33.75V31.25C30.7778 30.5625 30.2153 30 29.5278 30H27.0278C26.3403 30 25.7778 30.5625 25.7778 31.25Z" fill="#3E64E0" />
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip0_2862_2140">
+                                                <rect width="35" height="40" fill="white" transform="translate(0.777832)" />
+                                            </clipPath>
+                                        </defs>
+                                    </svg>
+                                </div>
+                                <div class="tf_checkout_dates tf-flex tf-flex-align-center">
+                                    <span class="date field--title"><?php echo esc_html(gmdate('d')); ?></span>
+                                    <div class="tf-search__form__field__mthyr">
+                                        <span class="month form--span"><?php echo esc_html(gmdate('M')); ?></span>
+                                        <span class="year form--span"><?php echo esc_html(gmdate('Y')); ?></span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tf-search__form__fieldset__right">
+                        <!-- Submit Button -->
+                        <input type="hidden" name="type" value="tf_hotel" class="tf-post-type" />
+                        <button type="submit" class="tf-search__form__submit mh-btn">
+                            <?php esc_html_e(apply_filters("tf_hotel_search_form_submit_button_text", 'Search Now'), 'tourfic'); ?>
+                            <svg class="tf-search__form__submit__icon" width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M15.75 14.7188L11.5625 10.5312C12.4688 9.4375 12.9688 8.03125 12.9688 6.5C12.9688 2.9375 10.0312 0 6.46875 0C2.875 0 0 2.9375 0 6.5C0 10.0938 2.90625 13 6.46875 13C7.96875 13 9.375 12.5 10.5 11.5938L14.6875 15.7812C14.8438 15.9375 15.0312 16 15.25 16C15.4375 16 15.625 15.9375 15.75 15.7812C16.0625 15.5 16.0625 15.0312 15.75 14.7188ZM1.5 6.5C1.5 3.75 3.71875 1.5 6.5 1.5C9.25 1.5 11.5 3.75 11.5 6.5C11.5 9.28125 9.25 11.5 6.5 11.5C3.71875 11.5 1.5 9.28125 1.5 6.5Z" fill="white" />
+                            </svg>
+                        </button>
+                    </div>
+                </fieldset>
+            </form>
+
+            <script>
+                (function($) {
+                    $(document).ready(function() {
+                        // flatpickr locale first day of Week
+                        <?php Helper::tf_flatpickr_locale("root"); ?>
+
+                        $(".tf_check_inout_dates").on("click", function() {
+                            $(".tf-check-in-out-date").trigger("click");
+                        });
+                        $(".tf-check-in-out-date").flatpickr({
+                            enableTime: false,
+                            mode: "range",
+                            dateFormat: "Y/m/d",
+                            minDate: "today",
+
+                            // flatpickr locale
+                            <?php Helper::tf_flatpickr_locale(); ?>
+
+                            onReady: function(selectedDates, dateStr, instance) {
+                                instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                                dateSetToFields(selectedDates, instance);
+                            },
+                            onChange: function(selectedDates, dateStr, instance) {
+                                instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                                dateSetToFields(selectedDates, instance);
+                            }
+                        });
+
+                        function dateSetToFields(selectedDates, instance) {
+                            console.log(selectedDates);
+                            if (selectedDates.length === 2) {
+                                const monthNames = [
+                                    "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                                    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+                                ];
+                                if (selectedDates[0]) {
+                                    const startDate = selectedDates[0];
+                                    $(".tf_checkin_dates span.date").html(startDate.getDate());
+                                    $(".tf_checkin_dates span.month").html(monthNames[startDate.getMonth()]);
+                                    $(".tf_checkin_dates span.year").html(startDate.getFullYear());
+                                }
+                                if (selectedDates[1]) {
+                                    const endDate = selectedDates[1];
+                                    $(".tf_checkout_dates span.date").html(endDate.getDate());
+                                    $(".tf_checkout_dates span.month").html(monthNames[endDate.getMonth()]);
+                                    $(".tf_checkout_dates span.year").html(endDate.getFullYear());
+                                }
+                            }
+                        }
+                    });
+                })(jQuery);
+            </script>
+        <?php } else { ?>
             <form class="tf_booking-widget <?php echo esc_attr( $classes ); ?>" id="tf_hotel_aval_check" method="get" autocomplete="off" action="<?php echo esc_url( Helper::tf_booking_search_action() ); ?>">
                 <div class="tf_homepage-booking">
 					<?php if ( Helper::tfopt( 'hide_hotel_location_search' ) != 1 || Helper::tfopt( 'required_location_hotel_search' ) ): ?>

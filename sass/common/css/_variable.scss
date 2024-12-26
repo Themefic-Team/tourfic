@@ -204,6 +204,8 @@ $purple80: #590ca6;
 $purple90: #400977;
 $purple100: #260547;
 
+$color-blue: #07245f;
+
 $box_shadow : 0px 2px 12px 0px rgba(20, 20, 28, 0.1);
 $button_black_shadow : 0 5px 15px 0 rgba(0, 0, 0, 0.5);
 
@@ -213,9 +215,12 @@ $min576: "only screen and (min-width: 576px)";
 $max1650: "only screen and (max-width: 1650px)";
 $max1600: "only screen and (max-width: 1600px)";
 $max1440: "only screen and (max-width: 1440px)";
+$max1500: "only screen and (max-width: 1500px)";
+$max1399: "only screen and (max-width: 1399px)";
 $max1366: "only screen and (max-width: 1366px)";
-$max1240: "only screen and (max-width: 1240px)";
-$max1200: "only screen and (max-width: 1280px)";
+$max1320: "only screen and (max-width: 1320px)";
+$max1280: "only screen and (max-width: 1280px)";
+$max1200: "only screen and (max-width: 1200px)";
 $max1199: "only screen and (max-width: 1199.98px)";
 $max1024: "only screen and (max-width: 1024px)";
 $max991: "only screen and (max-width: 991.98px)";
@@ -224,8 +229,13 @@ $max830: "only screen and (max-width: 830px)";
 $max767: "only screen and (max-width: 767.98px)";
 $max640: "only screen and (max-width: 640px)";
 $max575: "only screen and (max-width: 575.98px)";
+$max530: "only screen and (max-width: 530px)";
 $max480: "only screen and (max-width: 480px)";
+$max430: "only screen and (max-width: 430px)";
+$max400: "only screen and (max-width: 400px)";
 $max375: "only screen and (max-width: 375px)";
+$max360: "only screen and (max-width: 360px)";
+$max340: "only screen and (max-width: 340px)";
 $max320: "only screen and (max-width: 320px)";
 
 
@@ -251,6 +261,8 @@ $font-size-xs: 12px;
 
 //colors
 $color-primary: #686E7A;
+$color-light-yellow: #FA6400;
+$color-secondary: #0e3dd8;
 $color-theme: #0E3DD8;
 $color-theme-light: #E3E7F2;
 $color-gray-light: #F3F7FA;

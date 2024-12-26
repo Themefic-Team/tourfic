@@ -2360,7 +2360,7 @@ Steps
   padding: 0px 20px 0px 40px;
 }
 
-@media only screen and (max-width: 1280px) {
+@media only screen and (max-width: 1200px) {
   .tf-settings-help-center .tf-help-center-banner {
     padding-top: 20px;
     padding-bottom: 20px;
@@ -6523,7 +6523,7 @@ a.tf-import-btn, a.tf-export-btn {
   gap: 24px;
 }
 
-@media only screen and (max-width: 1280px) {
+@media only screen and (max-width: 1200px) {
   .tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-details .details-box .tf-grid-box {
     grid-template-columns: 1fr;
   }
@@ -6579,7 +6579,7 @@ a.tf-import-btn, a.tf-export-btn {
   min-height: 220px;
 }
 
-@media only screen and (max-width: 1280px) {
+@media only screen and (max-width: 1200px) {
   .tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-details .details-box .tf-grid-box .tf-checkin-by {
     min-height: auto;
   }
@@ -6631,7 +6631,7 @@ a.tf-import-btn, a.tf-export-btn {
   grid-template-columns: 1fr 1fr 1fr;
 }
 
-@media only screen and (max-width: 1280px) {
+@media only screen and (max-width: 1200px) {
   .tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-details .details-box .tf-visitor-grid-box {
     grid-template-columns: 1fr;
   }
@@ -6645,7 +6645,7 @@ a.tf-import-btn, a.tf-export-btn {
   min-height: 415px;
 }
 
-@media only screen and (max-width: 1280px) {
+@media only screen and (max-width: 1200px) {
   .tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-details .details-box .tf-customer-details-boxs .tf-single-box {
     min-height: auto;
   }
