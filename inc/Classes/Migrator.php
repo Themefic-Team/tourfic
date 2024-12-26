@@ -317,6 +317,111 @@ class Migrator {
 
 		}
 
+		//Hotel Template 4
+		if ( empty( get_option( 'tf_template_4_migrate_data' ) ) ||
+		     ( ! empty( get_option( 'tf_template_4_migrate_data' ) ) && get_option( 'tf_template_4_migrate_data' ) < 1 ) ) {
+
+			$options = ! empty( get_option( 'tf_settings' ) ) ? get_option( 'tf_settings' ) : array();
+
+			$options["tf-template"]["single-hotel-layout-3"] = array(
+				array(
+					"hotel-section"        => "Description",
+					"hotel-section-slug"   => "description",
+					"hotel-section-status" => "1"
+				),
+				array(
+					"hotel-section"        => "Room",
+					"hotel-section-slug"   => "rooms",
+					"hotel-section-status" => "1"
+				),
+				array(
+					"hotel-section"        => "Facilities",
+					"hotel-section-slug"   => "facilities",
+					"hotel-section-status" => "1"
+				),
+				array(
+					"hotel-section"        => "FAQ",
+					"hotel-section-slug"   => "faq",
+					"hotel-section-status" => "1"
+				),
+				array(
+					"hotel-section"        => "Review",
+					"hotel-section-slug"   => "review",
+					"hotel-section-status" => "1"
+				),
+				array(
+					"hotel-section"        => "Terms & Conditions",
+					"hotel-section-slug"   => "trams-condition",
+					"hotel-section-status" => "1"
+				)
+			);
+
+			/*$options["tf-template"]["single-tour-layout-3"] = array(
+				array(
+					"tour-section"        => "Gallery",
+					"tour-section-slug"   => "gallery",
+					"tour-section-status" => "1"
+				),
+				array(
+					"tour-section"        => "Price",
+					"tour-section-slug"   => "price",
+					"tour-section-status" => "1"
+				),
+				array(
+					"tour-section"        => "Description",
+					"tour-section-slug"   => "description",
+					"tour-section-status" => "1"
+				),
+				array(
+					"tour-section"        => "Information",
+					"tour-section-slug"   => "information",
+					"tour-section-status" => "1"
+				),
+				array(
+					"tour-section"        => "Highlights",
+					"tour-section-slug"   => "highlights",
+					"tour-section-status" => "1"
+				),
+				array(
+					"tour-section"        => "Include Exclude",
+					"tour-section-slug"   => "include-exclude",
+					"tour-section-status" => "1"
+				),
+				array(
+					"tour-section"        => "Itinerary",
+					"tour-section-slug"   => "itinerary",
+					"tour-section-status" => "1"
+				),
+				array(
+					"tour-section"        => "Map",
+					"tour-section-slug"   => "map",
+					"tour-section-status" => "1"
+				),
+				array(
+					"tour-section"        => "FAQ",
+					"tour-section-slug"   => "faq",
+					"tour-section-status" => "1"
+				),
+				array(
+					"tour-section"        => "Terms & Conditions",
+					"tour-section-slug"   => "trams-condition",
+					"tour-section-status" => "1"
+				),
+				array(
+					"tour-section"        => "Review",
+					"tour-section-slug"   => "review",
+					"tour-section-status" => "1"
+				)
+			);*/
+
+
+			update_option( 'tf_settings', $options );
+			wp_cache_flush();
+			flush_rewrite_rules( true );
+			update_option( 'tf_template_4_migrate_data', 1 );
+
+		}
+
 		// Car
 		if ( empty( get_option( 'tf_template_1_car_migrate_data' ) ) ) {
 

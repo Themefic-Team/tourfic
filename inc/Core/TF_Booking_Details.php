@@ -122,11 +122,11 @@ abstract Class TF_Booking_Details {
                 </div>
                 <div class="tf_booking_wrap_header">
                     <?php 
-                    $heading_title = sprintf(" %s %s", $this->booking_args['booking_title'], "Booking Details" );
+                    $heading_title = sprintf(" %s %s", $this->booking_args['booking_title'], esc_html__('Booking Details', 'tourfic') );
                     ?>
-                    <h1 class="wp-heading-inline"><?php esc_html_e(apply_filters( $this->booking_args["post_type"] . '_booking_details_main_title', $heading_title), 'tourfic'); ?></h1>
+                    <h1 class="wp-heading-inline"><?php echo esc_html(apply_filters( $this->booking_args["post_type"] . '_booking_details_main_title', $heading_title)); ?></h1>
                     <div class="tf_header_wrap_button">
-                        <?php 
+                        <?php
                         $_tf_integration_settings = get_option( '_tf_integration_settings' ) ? get_option( '_tf_integration_settings' ) : array();
                         if ( function_exists('is_tf_pro') && is_tf_pro() && !empty($_tf_integration_settings['google_calendar']['tf_google_calendar']['refresh_token']) && !empty( Helper::tf_data_types(Helper::tfopt( 'tf-integration' ))['tf-new-order-google-calendar'] ) && Helper::tf_data_types(Helper::tfopt( 'tf-integration' ))['tf-new-order-google-calendar']=="1" ){ ?>
                         <div class="tf-google-sync-button">
@@ -187,16 +187,16 @@ abstract Class TF_Booking_Details {
 
             <?php }
         }
-        
+
         do_action( 'tf_google_calendar_notice_box' );
-        
+
     }
 
     function tf_booking_details_list( $booking_type, $tf_order_details_result ) {
 		?>
         <div class="tf-booking-calendar-popup-box">
             <div class="tf-calendar-popup-box">
-                
+
             </div>
         </div>
 
@@ -653,7 +653,7 @@ abstract Class TF_Booking_Details {
 
 	                                    <?php if ( !empty($tf_tour_details->option) ) { ?>
                                             <tr>
-                                                <th><?php _e("Option", "tourfic"); ?></th>
+                                                <th><?php esc_html_e("Option", "tourfic"); ?></th>
                                                 <td>:</td>
                                                 <td><?php echo esc_html($tf_tour_details->option); ?></td>
                                             </tr>
@@ -699,7 +699,7 @@ abstract Class TF_Booking_Details {
                                             </td>
                                         </tr>
                                         <?php } ?>
-                                        
+
                                         <?php 
                                         $book_children  = !empty( $tf_tour_details->child ) ? $tf_tour_details->child : '';
                                         if(!empty($book_children)){
@@ -740,7 +740,7 @@ abstract Class TF_Booking_Details {
                                             </tr>
                                        <?php } ?>
 
-                                       <?php 
+                                       <?php
                                         $pickup_location  = !empty( $tf_tour_details->pickup_location ) ? $tf_tour_details->pickup_location : '';
                                         if(!empty($pickup_location)){
                                             ?>
@@ -748,12 +748,12 @@ abstract Class TF_Booking_Details {
                                                 <th><?php esc_html_e("Pickup Location", "tourfic"); ?></th>
                                                 <td>:</td>
                                                 <td>
-                                                    <?php echo esc_html($pickup_location); ?>    
+                                                    <?php echo esc_html($pickup_location); ?>
                                                 </td>
                                             </tr>
                                        <?php } ?>
 
-                                       <?php 
+                                       <?php
                                         $pickup_date  = !empty( $tf_tour_details->pickup_date ) ? $tf_tour_details->pickup_date : '';
                                         if(!empty($pickup_date)){
                                             ?>
@@ -761,12 +761,12 @@ abstract Class TF_Booking_Details {
                                                 <th><?php esc_html_e("Pickup Date", "tourfic"); ?></th>
                                                 <td>:</td>
                                                 <td>
-                                                    <?php echo esc_html($pickup_date); ?>    
+                                                    <?php echo esc_html($pickup_date); ?>
                                                 </td>
                                             </tr>
                                        <?php } ?>
 
-                                       <?php 
+                                       <?php
                                         $pickup_time  = !empty( $tf_tour_details->pickup_time ) ? $tf_tour_details->pickup_time : '';
                                         if(!empty($pickup_time)){
                                             ?>
@@ -774,12 +774,12 @@ abstract Class TF_Booking_Details {
                                                 <th><?php esc_html_e("Pickup Time", "tourfic"); ?></th>
                                                 <td>:</td>
                                                 <td>
-                                                    <?php echo esc_html($pickup_time); ?>    
+                                                    <?php echo esc_html($pickup_time); ?>
                                                 </td>
                                             </tr>
                                        <?php } ?>
 
-                                       <?php 
+                                       <?php
                                         $dropoff_location  = !empty( $tf_tour_details->dropoff_location ) ? $tf_tour_details->dropoff_location : '';
                                         if(!empty($dropoff_location)){
                                             ?>
@@ -787,12 +787,12 @@ abstract Class TF_Booking_Details {
                                                 <th><?php esc_html_e("Dropoff Location", "tourfic"); ?></th>
                                                 <td>:</td>
                                                 <td>
-                                                    <?php echo esc_html($dropoff_location); ?>    
+                                                    <?php echo esc_html($dropoff_location); ?>
                                                 </td>
                                             </tr>
                                        <?php } ?>
 
-                                       <?php 
+                                       <?php
                                         $dropoff_date  = !empty( $tf_tour_details->dropoff_date ) ? $tf_tour_details->dropoff_date : '';
                                         if(!empty($dropoff_date)){
                                             ?>
@@ -800,12 +800,12 @@ abstract Class TF_Booking_Details {
                                                 <th><?php esc_html_e("Dropoff Date", "tourfic"); ?></th>
                                                 <td>:</td>
                                                 <td>
-                                                    <?php echo esc_html($dropoff_date); ?>    
+                                                    <?php echo esc_html($dropoff_date); ?>
                                                 </td>
                                             </tr>
                                        <?php } ?>
 
-                                       <?php 
+                                       <?php
                                         $dropoff_time  = !empty( $tf_tour_details->dropoff_time ) ? $tf_tour_details->dropoff_time : '';
                                         if(!empty($dropoff_time)){
                                             ?>
@@ -813,12 +813,12 @@ abstract Class TF_Booking_Details {
                                                 <th><?php esc_html_e("Dropoff Time", "tourfic"); ?></th>
                                                 <td>:</td>
                                                 <td>
-                                                    <?php echo esc_html($dropoff_time); ?>    
+                                                    <?php echo esc_html($dropoff_time); ?>
                                                 </td>
                                             </tr>
                                        <?php } ?>
-                                       
-                                       <?php 
+
+                                       <?php
                                         $airport_type  = !empty( $tf_tour_details->airport_service_type ) ? $tf_tour_details->airport_service_type : '';
                                         if(!empty($airport_type) && $airport_type != 'undefined' && $airport_type != 'null'){
                                             ?>
@@ -826,7 +826,7 @@ abstract Class TF_Booking_Details {
                                                 <th><?php esc_html_e("Airport Service Type", "tourfic"); ?></th>
                                                 <td>:</td>
                                                 <td>
-                                                    <?php echo esc_html($airport_type); ?>    
+                                                    <?php echo esc_html($airport_type); ?>
                                                 </td>
                                             </tr>
                                        <?php } ?>
@@ -887,7 +887,7 @@ abstract Class TF_Booking_Details {
                                             </tr>
                                         <?php } ?>
 
-                                        <?php 
+                                        <?php
                                         if(!empty($tf_tour_details->total_price)){ ?>
                                         <tr>
                                             <th><?php esc_html_e("Total", "tourfic"); ?></th>
@@ -1264,13 +1264,13 @@ abstract Class TF_Booking_Details {
 
         // Check if the current user has the required capability.
         $user = wp_get_current_user();
-		if ((in_array( 'administrator', (array) $user->roles ) && !current_user_can('manage_options')) || 
-            (in_array( 'tf_vendor', (array) $user->roles ) && !current_user_can('tf_vendor_options')) || 
+		if ((in_array( 'administrator', (array) $user->roles ) && !current_user_can('manage_options')) ||
+            (in_array( 'tf_vendor', (array) $user->roles ) && !current_user_can('tf_vendor_options')) ||
             (in_array( 'tf_manager', (array) $user->roles ) && !current_user_can('tf_manager_options'))) {
 			wp_send_json_error(__('You do not have permission to access this resource.', 'tourfic'));
 			return;
 		}
-        
+
         // Order Id
         $tf_order_id = !empty($_POST['order_id']) ? $_POST['order_id'] : "";
         // status Value
@@ -1296,7 +1296,7 @@ abstract Class TF_Booking_Details {
 				 */
 				apply_filters( 'tf_after_booking_completed_calendar_data', $tf_order->order_id, $order_data='', '' );
 			}
-    
+
             // Woocommerce status
             $order = wc_get_order($tf_order->order_id);
             if (!empty($order)) {
@@ -1317,7 +1317,7 @@ abstract Class TF_Booking_Details {
 			wp_send_json_error(__('You do not have permission to access this resource.', 'tourfic'));
 			return;
 		}
-    
+
         // Order Id
         $tf_order_id = !empty($_POST['order_id']) ? $_POST['order_id'] : "";
         // Visitor Details
@@ -1344,13 +1344,13 @@ abstract Class TF_Booking_Details {
 
         // Check if the current user has the required capability.
         $user = wp_get_current_user();
-		if ((in_array( 'administrator', (array) $user->roles ) && !current_user_can('manage_options')) || 
-            (in_array( 'tf_vendor', (array) $user->roles ) && !current_user_can('tf_vendor_options')) || 
+		if ((in_array( 'administrator', (array) $user->roles ) && !current_user_can('manage_options')) ||
+            (in_array( 'tf_vendor', (array) $user->roles ) && !current_user_can('tf_vendor_options')) ||
             (in_array( 'tf_manager', (array) $user->roles ) && !current_user_can('tf_manager_options'))) {
 			wp_send_json_error(__('You do not have permission to access this resource.', 'tourfic'));
 			return;
 		}
-    
+
         // Order Id
         $tf_order_id = !empty($_POST['order_id']) ? $_POST['order_id'] : "";
         // Checkinout Value
@@ -1397,13 +1397,13 @@ abstract Class TF_Booking_Details {
 
         // Check if the current user has the required capability.
         $user = wp_get_current_user();
-		if ((in_array( 'administrator', (array) $user->roles ) && !current_user_can('manage_options')) || 
-            (in_array( 'tf_vendor', (array) $user->roles ) && !current_user_can('tf_vendor_options')) || 
+		if ((in_array( 'administrator', (array) $user->roles ) && !current_user_can('manage_options')) ||
+            (in_array( 'tf_vendor', (array) $user->roles ) && !current_user_can('tf_vendor_options')) ||
             (in_array( 'tf_manager', (array) $user->roles ) && !current_user_can('tf_manager_options'))) {
 			wp_send_json_error(__('You do not have permission to access this resource.', 'tourfic'));
 			return;
 		}
-        
+
         // Order Id
         $tf_orders = !empty($_POST['orders']) ? $_POST['orders'] : "";
         // status Value
@@ -1476,7 +1476,7 @@ abstract Class TF_Booking_Details {
             <div class="tf-content-single-box">
                 <h4><?php esc_html_e("Customer details", "tourfic"); ?></h4>
                 <div class="tf-content-box">
-                    <?php 
+                    <?php
                     foreach($tf_billing_details as $key=>$customer_info){ ?>
                         <?php if(!empty($customer_info)){ ?>
                         <div class="tf-single-content">
@@ -1534,11 +1534,11 @@ abstract Class TF_Booking_Details {
                         <p><?php echo esc_html($tf_tour_details->tour_time); ?></p>
                     </div>
                     <?php } ?>
-                    <?php 
+                    <?php
                     $book_adult  = !empty( $tf_tour_details->adult ) ? $tf_tour_details->adult : '';
                     if(!empty($book_adult)){
                         $tf_total_adult = explode( " × ", $book_adult );
-                    } 
+                    }
                     if(!empty($tf_total_adult[0])) {
                     ?>
                     <div class="tf-single-content">
@@ -1547,7 +1547,7 @@ abstract Class TF_Booking_Details {
                     </div>
                     <?php } ?>
 
-                    <?php 
+                    <?php
                     $book_children  = !empty( $tf_tour_details->child ) ? $tf_tour_details->child : '';
                     if(!empty($book_children)){
                         $tf_total_children = explode( " × ", $book_children );
@@ -1560,7 +1560,7 @@ abstract Class TF_Booking_Details {
                     </div>
                     <?php } ?>
 
-                    <?php 
+                    <?php
                     $book_infants  = !empty( $tf_tour_details->infants ) ? $tf_tour_details->infants : '';
                     if(!empty($book_infants)){
                         $tf_total_infants = explode( " × ", $book_infants );
@@ -1573,7 +1573,7 @@ abstract Class TF_Booking_Details {
                     </div>
                     <?php } ?>
 
-                    <?php 
+                    <?php
                     $pickup_location  = !empty( $tf_tour_details->pickup_location ) ? $tf_tour_details->pickup_location : '';
                     if(!empty($pickup_location)){
                         ?>
@@ -1583,7 +1583,7 @@ abstract Class TF_Booking_Details {
                         </div>
                     <?php } ?>
 
-                    <?php 
+                    <?php
                     $pickup_date  = !empty( $tf_tour_details->pickup_date ) ? $tf_tour_details->pickup_date : '';
                     if(!empty($pickup_date)){
                         ?>
@@ -1593,7 +1593,7 @@ abstract Class TF_Booking_Details {
                         </div>
                     <?php } ?>
 
-                    <?php 
+                    <?php
                     $pickup_time  = !empty( $tf_tour_details->pickup_time ) ? $tf_tour_details->pickup_time : '';
                     if(!empty($pickup_time)){
                         ?>
@@ -1603,7 +1603,7 @@ abstract Class TF_Booking_Details {
                         </div>
                     <?php } ?>
 
-                    <?php 
+                    <?php
                     $dropoff_location  = !empty( $tf_tour_details->dropoff_location ) ? $tf_tour_details->dropoff_location : '';
                     if(!empty($dropoff_location)){
                         ?>
@@ -1613,7 +1613,7 @@ abstract Class TF_Booking_Details {
                         </div>
                     <?php } ?>
 
-                    <?php 
+                    <?php
                     $dropoff_date  = !empty( $tf_tour_details->dropoff_date ) ? $tf_tour_details->dropoff_date : '';
                     if(!empty($dropoff_date)){
                         ?>
@@ -1623,7 +1623,7 @@ abstract Class TF_Booking_Details {
                         </div>
                     <?php } ?>
 
-                    <?php 
+                    <?php
                     $dropoff_time  = !empty( $tf_tour_details->dropoff_time ) ? $tf_tour_details->dropoff_time : '';
                     if(!empty($dropoff_time)){
                         ?>
@@ -1632,16 +1632,16 @@ abstract Class TF_Booking_Details {
                             <p><?php echo esc_html($dropoff_time); ?></p>
                         </div>
                     <?php } ?>
-                    
+
                 </div>
             </div>
 
         </div>
-       <?php 
+       <?php
         wp_die();
     }
 
-    // Booking Filter 
+    // Booking Filter
     function tf_booking_calendar_filter_function(){
         $response = [];
         // Add nonce for security and authentication.
@@ -1684,7 +1684,7 @@ abstract Class TF_Booking_Details {
 				);
 			}
 		}
-        
+
         $response['events'] = $tf_filters_orders;
         echo wp_json_encode( $response );
         wp_die();

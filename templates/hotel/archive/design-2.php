@@ -94,7 +94,7 @@
                                 echo '<div class="tf-nothing-found" data-post-count="0" >' .esc_html__("No Tours Found!", "tourfic"). '</div>';
                             }
                             ?>
-                            <?php 
+                            <?php
                             if(Helper::tourfic_posts_navigation()){ ?>
                             <div class="tf-pagination-bar">
                                 <?php Helper::tourfic_posts_navigation(); ?>

@@ -87,7 +87,7 @@ class Hotels extends \Tourfic\Core\Shortcodes {
 									<?php } ?>
 									<p><?php echo wp_kses_post( wp_trim_words( get_the_content(), 10 ) ); ?></p>
                                     <div class="tf-recent-room-price">
-                                        <?php echo Pricing::instance( $post_id )->get_min_price_html(); ?>
+                                        <?php echo wp_kses_post(Pricing::instance( $post_id )->get_min_price_html()); ?>
                                     </div>
 								</div>
 							</div>
