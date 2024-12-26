@@ -356,7 +356,7 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 - Added: Map view widget added for all templates.
 - Fixed: Room availability issue resolved.
 - Compatibility: WPML compatibility added for setting fields.
-- Improved: New design (Design-4) introduced for the search form shortcode.
+- Improved: New design (design-4) introduced for the search form shortcode.
 - Improved: Added card preloader in the Frontend Dashboard (Pro).
 - Fixed: Location selection issue resolved in the Frontend Dashboard (Pro).
 - Fixed: Room block issue resolved.
