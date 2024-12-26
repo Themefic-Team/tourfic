@@ -418,7 +418,7 @@ function tf_remove_order_ids_from_room() {
 	echo '
     <div class="csf-title">
         <h4>' . esc_html__( "Reset Room Availability", "tourfic" ) . '</h4>
-        <div class="csf-subtitle-text">' . esc_html__( "Remove order ids linked with this room.<br><b style='color: red;'>Be aware! It is irreversible!</b>", "tourfic" ) . '</div>
+        <div class="csf-subtitle-text">' . wp_kses_post( "Remove order ids linked with this room.<br><b style='color: red;'>Be aware! It is irreversible!</b>" ) . '</div>
     </div>
     <div class="csf-fieldset">
         <button type="button" class="button button-large tf-order-remove remove-order-ids">' . esc_html__( "Reset", "tourfic" ) . '</button>
