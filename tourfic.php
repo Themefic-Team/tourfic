@@ -50,7 +50,7 @@ final class Tourfic {
 	protected static $_instance = null;
 
 	/**
-	 * Main Tourfic Instance.
+	 * Main Tourfic Instance. 
 	 *
 	 * Ensures only one instance of Tourfic is loaded or can be loaded.
 	 *
