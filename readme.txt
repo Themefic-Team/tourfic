@@ -347,20 +347,22 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 21. Email Piping (Pro)
 22. Car Rental Service
 23. Sync Booking with Google Calendar(Pro)
+24. Map Template(Pro)
 
 == Changelog ==
 
-== 2.15.6 – 26 December 2024 ==
+== 2.15.6 – 28 December 2024 ==
 
-- Introduced: New archive templates with map view for Hotel, Tour, and Apartment.
-- Added: Map view widget added for all templates.
-- Fixed: Room availability issue resolved.
-- Compatibility: WPML compatibility added for setting fields.
+- Introduced: New archive and Search templates with map view for Hotel, Tour, and Apartment.
+- Introduced: Map view widget added for all templates.
 - Improved: New design (design-4) introduced for the search form shortcode.
 - Improved: Added card preloader in the Frontend Dashboard (Pro).
+- Improved: Updated license information label.
 - Fixed: Location selection issue resolved in the Frontend Dashboard (Pro).
 - Fixed: Room block issue resolved.
-- Improved: Updated license information text.
+- Fixed: Fixed FAQ display issue for hotels.
+- Fixed: Room availability issue resolved.
+- Compatibility: WPML compatibility added for setting fields.
 
 = 2.15.5 - 17 December 2024 =
 
