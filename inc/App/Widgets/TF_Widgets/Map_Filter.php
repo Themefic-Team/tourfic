@@ -68,43 +68,43 @@ class Map_Filter extends \WP_Widget {
             $button_title = !empty($instance['title']) ? apply_filters('tf_map_button_title', $instance['title']) : esc_html__('Show on Map', 'tourfic');
             echo wp_kses_post($before_widget);
             if (is_post_type_archive('tf_hotel')) {
-                $this->widget_html('tf_hotel', $button_title);
+                $this->widget_html($button_title, 'tf_hotel');
             }
             if (is_post_type_archive('tf_tours')) {
-                $this->widget_html('tf_tours', $button_title);
+                $this->widget_html($button_title, 'tf_tours');
             }
             if (is_post_type_archive('tf_apartment')) {
-                $this->widget_html('tf_apartment', $button_title);
+                $this->widget_html($button_title, 'tf_apartment');
             }
             if (!is_post_type_archive('tf_hotel') &&
                 !is_post_type_archive('tf_tours') &&
                 !is_post_type_archive('tf_apartment') &&
                 (!empty($tax_post_type) && $tax_post_type == "tf_hotel")) {
-                $this->widget_html('tf_hotel', $button_title);
+                $this->widget_html($button_title, 'tf_hotel');
             }
             if (!is_post_type_archive('tf_hotel') &&
                 !is_post_type_archive('tf_tours') &&
                 !is_post_type_archive('tf_apartment') &&
                 (!empty($tax_post_type) && $tax_post_type == "tf_tours")) {
-                $this->widget_html('tf_tours', $button_title);
+                $this->widget_html($button_title, 'tf_tours');
             }
             if (!is_post_type_archive('tf_hotel') &&
                 !is_post_type_archive('tf_tours') &&
                 !is_post_type_archive('tf_apartment') &&
                 (!empty($tax_post_type) && $tax_post_type == "tf_apartment")) {
-                $this->widget_html('tf_apartment', $button_title);
+                $this->widget_html($button_title, 'tf_apartment');
             }
         } else {
             extract($args);
             echo wp_kses_post($before_widget);
             if (!empty($_GET['type']) && $_GET['type'] == "tf_tours" && !empty($_GET['from']) && !empty($_GET['to'])) {
-                $this->widget_html($_GET['type'], $button_title);
+                $this->widget_html($button_title, $_GET['type']);
             }
             if (!empty($_GET['type']) && $_GET['type'] == "tf_hotel" && !empty($_GET['from']) && !empty($_GET['to'])) {
-                $this->widget_html($_GET['type'], $button_title);
+                $this->widget_html($button_title, $_GET['type']);
             }
             if (!empty($_GET['type']) && $_GET['type'] == "tf_apartment" && !empty($_GET['from']) && !empty($_GET['to'])) {
-                $this->widget_html($_GET['type'], $button_title);
+                $this->widget_html($button_title, $_GET['type']);
             }
         } ?>
         <!-- End Price Range widget -->
@@ -113,7 +113,7 @@ class Map_Filter extends \WP_Widget {
         echo wp_kses_post($after_widget);
     }
 
-    function widget_html($post_type = 'tf_hotel', $button_title) {
+    function widget_html($button_title, $post_type = 'tf_hotel') {
         $tf_map_settings = !empty(Helper::tfopt('google-page-option')) ? Helper::tfopt('google-page-option') : "default";
         $tf_map_api = !empty(Helper::tfopt('tf-googlemapapi')) ? Helper::tfopt('tf-googlemapapi') : '';
         $post_per_page = get_option( 'posts_per_page' );
