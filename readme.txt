@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, room-booking, woocommerce-accommodation-booking
 Requires at least: 5.4
 Tested up to: 6.7
-Stable tag: 2.15.6
+Stable tag: 2.15.7
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -351,7 +351,11 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
-== 2.15.6 – 28 December 2024 ==
+= 2.15.7 – 28 December 2024 =
+
+- Updated readme.txt
+
+= 2.15.6 – 28 December 2024 =
 
 - Introduced: New archive and Search templates with map view for Hotel, Tour, and Apartment.
 - Introduced: Map view widget added for all templates.
