@@ -3262,7 +3262,7 @@ class Hotel {
                                     <h4><?php echo __( "Billing details", "tourfic" ); ?></h4>
                                     <div class="traveller-info billing-details">
 										<?php
-										$confirm_book_fields = ! empty( tfopt( 'hotel-book-confirm-field' ) ) ? tf_data_types( tfopt( 'hotel-book-confirm-field' ) ) : '';
+										$confirm_book_fields = ! empty( Helper::tfopt( 'hotel-book-confirm-field' ) ) ? Helper::tf_data_types( Helper::tfopt( 'hotel-book-confirm-field' ) ) : '';
 
 										if ( empty( $confirm_book_fields ) ) {
 											?>
