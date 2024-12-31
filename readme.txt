@@ -1,6 +1,6 @@
-=== Tourfic – Ultimate Hotel Booking, Travel Booking & Apartment Booking WordPress Plugin | WooCommerce Booking ===
+=== Tourfic – Ultimate Hotel Booking, Travel Booking & Car Rental WordPress Plugin | WooCommerce Booking ===
 Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi, hasanet
-Tags: travel-booking, hotel-booking, tour-booking, room-booking, woocommerce-accommodation-booking
+Tags: travel-booking, hotel-booking, tour-booking, room-booking, car-rental
 Requires at least: 5.4
 Tested up to: 6.7
 Stable tag: 2.15.8
@@ -12,15 +12,17 @@ Ultimate Tour, Travel, Car, Accommodation & Hotel Booking WordPress plugin. Buil
 
 == Description ==
 
-## THE BEST HOTEL BOOKING, ACCOMMODATION BOOKING AND TOUR BOOKING PLUGIN FOR WORDPRESS - TOURFIC
+## THE BEST HOTEL BOOKING, APARTMENT BOOKING, TOUR BOOKING & CAR RENTAL PLUGIN FOR WORDPRESS - TOURFIC
 
-👉 Our Official Website: [Click Here](https://themefic.com/tourfic)
-👉 Live Demo Link: [Click Here](https://tourfic.com)
-👉 Need a WordPress Theme? Use [Travelfic](https://tourfic.site/travelfic/)
-👉 Buy Pro Version: [Click Here](https://themefic.com/tourfic/pricing)
-👉 Video Guide on [Youtube](https://www.youtube.com/playlist?list=PLY0rtvOwg0ylCl7NTwNHUPq-eY1qwUH_N).
-👉 Our [Documentation](https://themefic.com/docs/tourfic/).
-👉 Join Our [Facebook Group](https://www.facebook.com/groups/tourfic).
+👉 Our Official Website: [Click Here](https://themefic.com/tourfic/?utm_source=wp_readme&utm_medium=tourfic_top_slot&utm_campaign=website)
+👉 Live Demo Link: [Click Here](https://tourfic-demo.themefic.com/?utm_source=wp_readme&utm_medium=tourfic_top_slot&utm_campaign=demo_link)
+👉 Explore Pro: [Play with Backend Options](https://app.instawp.io/launch?t=tourfic-backend-demo&d=v2)
+👉 Need a WordPress Theme? Use [Travelfic](https://wordpress.org/themes/travelfic/)
+👉 Buy Pro Version: [Click Here](https://themefic.com/tourfic/pricing/?utm_source=wp_readme&utm_medium=tourfic_top_slot&utm_campaign=pro_link)
+👉 Video Guide on [Youtube](https://www.youtube.com/playlist?list=PLY0rtvOwg0ylCl7NTwNHUPq-eY1qwUH_N)
+👉 Our [Documentation](https://themefic.com/docs/tourfic/?utm_source=wp_readme&utm_medium=tourfic_top_slot&utm_campaign=plugin_docs)
+👉 Get Support: [Click Here](https://portal.themefic.com/support/?utm_source=wp_readme&utm_medium=tourfic_top_slot&utm_campaign=plugin_support)
+👉 Join Our [Facebook Group](https://www.facebook.com/groups/tourfic)
 
 Tourfic stands as the premier choice for building an Advanced Travel, Apartment, car Rental, and Hotel booking website on WordPress. Designed to integrate effortlessly with WooCommerce, this plugin offers a user-intuitive interface and sophisticated pricing function, enabling effective management of your online booking and payment systems.
 
@@ -29,7 +31,7 @@ This Hotel / Tour booking WordPress plugin empowers your customers to create acc
 As a comprehensive solution for travel booking on WordPress, Tourfic encompasses a broad range of functionalities, from basic to advanced, to meet all the requirements for your next project in the hotel, apartment, car rental, and travel sector. Here are some of the noteworthy features of Tourfic:
 
 = 🎉  A DEDICATED HOTEL & TRAVEL BOOKING WORDPRESS THEME =
-Our team has released a dedicated WordPress theme, [Travelfic](https://tourfic.site/travelfic/), exclusively for Tourfic users. It offers multiple demo versions for free. Check it [here](https://wordpress.org/themes/travelfic/).
+Our team has released a dedicated WordPress theme, [Travelfic](https://theme-demo.themefic.com/), exclusively for Tourfic users. It offers multiple demo versions for free. Check it [here](https://wordpress.org/themes/travelfic/).
 
 = 🎉  WORDPRESS HOTEL BOOKING & ROOM MANAGEMENT =
 * Add Unlimited Hotels
@@ -260,8 +262,13 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 
 * [Ultimate Before After Image Slider & Gallery - BEAF](https://wordpress.org/plugins/beaf-before-and-after-gallery)
 * [Ultimate Addons For Contact Form 7](https://wordpress.org/plugins/ultimate-addons-for-contact-form-7/)
-* [Onepage / Direct Checkout for WooCommerce - Instantio](https://wordpress.org/plugins/instantio)
+* [Instantio – WooCommerce Quick Checkout | Floating Cart, Side Cart & Popup Cart](https://wordpress.org/plugins/instantio)
 * [Hydra Booking – All in One Appointment Scheduling and Booking Calendar Solution](https://wordpress.org/plugins/hydra-booking)
+
+###  Our Themes
+
+* [Travelfic – Ultimate Travel Booking WordPress Theme](https://wordpress.org/themes/travelfic/)
+* [Ultimate Hotel Booking WordPress Theme](https://wordpress.org/themes/ultimate-hotel-booking/)
 
 == Installation ==
 
