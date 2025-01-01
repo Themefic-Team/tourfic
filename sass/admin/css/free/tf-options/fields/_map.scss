@@ -1,0 +1,49 @@
+.tf-field-map{
+    .tf--map-search{
+        width: 100%;
+        input{
+            width: 100%;
+            padding: 12px 8px 12px 12px;
+            border: 1px solid $slate20;
+            background-color: $blue0;
+            border-radius: 4px;
+            height: 48px;
+            color: #363e4a;
+            font-size: 14px;
+        }
+    }
+    .tf--map-osm-wrap{
+        border: 1px solid #ddd;
+        padding: 5px;
+        margin-top: 10px;
+        .tf--map-osm{
+            height: 250px !important; 
+        }
+    }
+    .tf--map-inputs{
+        display: flex;
+        justify-content: space-between;
+        .tf--map-input{
+            width: 48%;
+            label{
+                width: 100%;
+                display: block;
+                margin-bottom: 5px;
+                font-weight: 500;
+                font-size: 14px;
+                color: #607085;
+                margin-top: 15px;
+            }
+            input{
+                width: 100%;
+                padding: 12px 8px 12px 12px;
+                border: 1px solid $slate20;
+                background-color: $blue0;
+                border-radius: 4px;
+                height: 48px;
+                color: #363e4a;
+                font-size: 14px;
+            }
+        }
+    }
+}

@@ -1,0 +1,59 @@
+.tf-field-time {
+
+  .tf-fieldset {
+    position: relative;
+  }
+
+  input {
+    width: 100%;
+    padding: 12px 8px 12px 12px;
+    border: none;
+    background-color: $blue0;
+    border-radius: 4px;
+    height: 48px;
+    color: $slate80;
+    font-size: 14px;
+    border: 1px solid #c4cbd4;
+
+    &:focus {
+      background: #FFFFFF;
+      box-shadow: 0 0 0 2px $blue60;
+      border-radius: 4px;
+    }
+
+    &::-webkit-input-placeholder {
+      color: $slate30;
+    }
+
+    &::-ms-input-placeholder {
+      color: $slate30;
+    }
+
+    input:-ms-input-placeholder {
+      color: $slate30;
+    }
+
+    &::-moz-placeholder {
+      opacity: 1;
+      color: $slate30;
+    }
+
+    &:-moz-placeholder {
+      opacity: 1;
+      color: $slate30;
+    }
+
+    &::placeholder {
+      color: $slate30;
+    }
+  }
+
+  i{
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+    color: $slate30;
+    font-size: 16px;
+  }
+}

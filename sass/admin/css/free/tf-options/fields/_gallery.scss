@@ -1,0 +1,29 @@
+.tf-field-gallery {
+    .tf-fieldset {
+        .tf-fieldset-gallery-preview {
+            img{
+                height: 60px;
+                width: 60px;
+                border: 1px solid #ddd;
+                padding: 5px;
+                margin-right: 10px;
+            }
+        }
+        .tf-fieldset-gallery{
+            a.button-primary{
+                background-color: #003c79;
+                border-color: #003c79;
+            }
+            a.tf-gallery-edit{
+                margin-left: 5px;
+            }
+            a.button-warning{
+                border-color: #F44336;
+                background: #F44336;
+                margin-left: 5px;
+                color: #fff;
+                display: none;
+            }
+        }
+    }
+  }
