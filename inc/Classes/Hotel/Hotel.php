@@ -3146,7 +3146,7 @@ class Hotel {
                 <img src="<?php echo TF_ASSETS_APP_URL ?>images/thank-you.gif" alt="Thank You">
                 <h2>
 					<?php
-					$booking_confirmation_msg = ! empty( tfopt( 'hotel-booking-confirmation-msg' ) ) ? tfopt( 'hotel-booking-confirmation-msg' ) : esc_html__('Booked Successfully', 'tourfic');
+					$booking_confirmation_msg = ! empty( Helper::tfopt( 'hotel-booking-confirmation-msg' ) ) ? Helper::tfopt( 'hotel-booking-confirmation-msg' ) : esc_html__('Booked Successfully', 'tourfic');
 					echo wp_kses_post( $booking_confirmation_msg );
 					?>
                 </h2>
