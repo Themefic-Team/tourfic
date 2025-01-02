@@ -360,9 +360,9 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 = 2.15.9 – 02 January 2025 =
 
-- Fixed: Resolved minor bugs and issues.
-- Fixed: Resolved Frontend dashboard calendar issue.
-- Compatibility: Ensured compatibility with Elementor 3.26.3.
+- Fixed: Minor bugs and issues resolved.
+- Fixed: Frontend dashboard calendar issue addressed.
+- Compatibility: Now compatible with Elementor 3.26.3.
 
 = 2.15.8 – 31 December 2024 =
 
