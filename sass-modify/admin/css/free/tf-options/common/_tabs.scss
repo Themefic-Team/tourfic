@@ -1,0 +1,213 @@
+#tf_tours_opt .tf-admin-meta-box {
+  @media #{$max991}{
+    position: relative;
+    min-height: 660px;
+  }
+}
+.tf-admin-meta-box {
+  @include flexbox();
+  margin: -6px -12px -12px -12px;
+  z-index: 10;
+  position: relative;
+
+  @media #{$max991}{
+    position: relative;
+    min-height: 500px;
+  }
+
+  &.tf-taxonomy-metabox {
+    display: block;
+    margin: 0;
+    max-width: 95%;
+  }
+
+  .tf-admin-tab.active {
+    display: block;
+    position: absolute;
+    z-index: 99999;
+    top: 0;
+    bottom: 0;
+    @include transition(all, 0.3s, ease);
+  }
+
+  .tf-admin-tab {
+    border-right: 1px solid $slate10;
+    background-color: $slate0;
+    min-width: 280px;
+    @include transition(all, 0.3s, ease);
+    @media #{$max991}{
+      display: none;
+    }
+
+    a.tf-tablinks {
+      font-style: normal;
+      @include flexbox();
+      @include align-items(center);
+      text-decoration: none;
+      color: $slate80;
+      padding: 12px 16px;
+      text-align: left;
+      font-size: 16px;
+      line-height: 24px;
+      cursor: pointer;
+      @include transition(all, 0.3s, ease);
+
+      .tf-sec-icon {
+        margin-right: 10px;
+        color: $slate40;
+        min-width: 25px;
+        @include flexbox();
+        @include justify-content(center);
+        @include transition(all, 0.3s, ease);
+      }
+
+      &:hover {
+        background-color: #fff;
+        outline: none;
+      }
+
+      &:focus {
+        box-shadow: none;
+        outline: none;
+      }
+
+      &.active {
+        background-color: #003c79;
+        color: #fff;
+        position: relative;
+
+        @media #{$max991}{
+          position: static;
+        }
+
+        .tf-sec-icon {
+          color: #fff;
+        }
+
+        &::after {
+          position: absolute;
+          content: "";
+          height: 10px;
+          width: 10px;
+          background: #fff;
+          @include rotate(45);
+          right: -5px;
+          top: 50%;
+          margin-top: -5px;
+          @media #{$max991}{
+            position: static;
+            display: none;
+          }
+        }
+      }
+    }
+
+    ul.tf-submenu {
+      margin: 0;
+      display: none;
+
+      li {
+        margin-bottom: 0;
+
+        a.tf-tablinks {
+          padding: 0;
+
+          span.tf-tablinks-inner {
+            @include flexbox();
+            @include align-items(center);
+            padding: 12px 20px;
+            margin-left: 24px;
+            border-left: 1px solid $slate20;
+            position: relative;
+
+            &::after {
+              position: absolute;
+              content: "";
+              height: 25px;
+              width: 14px;
+              border-width: 0 0 1px 1px;
+              border-style: solid;
+              border-color: $slate20;
+              left: -1px;
+              top: 0;
+              border-bottom-left-radius: 8px;
+            }
+          }
+        }
+
+        &:last-child {
+          a.tf-tablinks {
+            span.tf-tablinks-inner {
+              border-left: none;
+
+              &::after {
+                left: 0;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .tf-tab-wrapper {
+    @include flex(0 0 calc(100% - 280px));
+    @media #{$max991}{
+      flex: 0 0 calc(100% - 0px);
+    }
+
+
+    .tf-tab-content {
+      display: none;
+      @include flex-wrap(wrap);
+      @include justify-content(space-between);
+      padding: 0 24px;
+
+      &.active {
+        @include flexbox();
+      }
+    }
+  }
+}
+
+.tf-option-wrapper {
+  .tf-option-footer {
+    position: relative;
+    padding: 15px 0px;
+    text-align: right;
+    button{
+      padding: 10px 25px;
+      font-size: 1rem;
+    }
+    span{
+      display: block;
+      font-size: 16px;
+      color: $slate40;
+      font-weight: 600;
+      margin-top: 5px;
+      a{
+        color: $slate40;
+        display: inline;
+        margin-left: 5px;
+        &:focus {
+          outline: none;
+          box-shadow: none;
+        }
+      }
+    }
+  }
+}
+
+.tf-option {
+  width: 100%;
+  margin: 0;
+
+  .tf-tab-wrapper {
+    @include flex(0 0 calc(100% - 281px));
+    background-color: #fff;
+    padding: 12px 0;
+    @media #{$max991}{
+      flex: 0 0 calc(100% - 0px);
+    }
+  }
+}

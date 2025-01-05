@@ -1,0 +1,1257 @@
+.tf-booking-form-tab{
+    .btn-styled{
+        background-color: #e6e6e6 !important;
+        border-color: #e6e6e6 !important;
+        color: #333 !important;
+
+        &.active{
+            background-color: #003162 !important;
+            border-color: #003162 !important;
+            color: #fff !important;
+        }
+    }
+    &.design-3{
+        display: flex;
+        gap: 8px;
+        justify-content: center;
+        @media #{$max767}{
+            display: none;
+        }
+        .btn-styled{
+            border-radius: 6px !important;
+            background: #FFF !important;
+            border: 4px solid #CDE5FE !important;
+            overflow: auto;
+            color: #27333f !important;
+            padding: 8px 16px !important;
+            position: static;
+            &::after{
+                position: static;
+                display: none;
+            }
+            &.active{
+                color: #0866C4 !important;
+            }
+        }
+    }
+}
+.tf_form-inner {
+    .autocomplete-items {
+        max-height: 120px;
+        overflow: scroll;
+        overflow-x: hidden;
+        position: absolute;
+        border: 1px solid #d4d4d4;
+        border-bottom: none;
+        border-top: none;
+        z-index: 99;
+        top: 100%;
+        left: 0;
+        right: 0;
+        div {
+            padding: 10px;
+            cursor: pointer;
+            background-color: #fff;
+            border-bottom: 1px solid #d4d4d4;
+            color: #444;
+            &:hover {
+                background-color: #e9e9e9;
+            }
+        }
+    }
+    .tf-hotel-locations{
+        display: none;
+        #ui-id-1 {
+            li {
+                i{
+                    margin-right: 10px;
+                }
+            }
+        }
+    }
+    .tf-locations-show{
+        display: block;
+    }
+
+    .tf-tour-results{
+        display: none;
+        #ui-id-2 {
+            li {
+                i{
+                    margin-right: 10px;
+                }
+            }
+        }
+    }
+    .tf-destination-show{
+        display: block;
+    }
+    .tf-hotel-results {
+        position: absolute;
+        border: 1px solid #d4d4d4;
+        border-bottom: none;
+        border-top: none;
+        z-index: 99;
+        top: 100%;
+        left: 0;
+        right: 0;
+        #ui-id-1 {
+            li {
+                padding: 10px;
+                cursor: pointer;
+                background-color: #fff;
+                border-bottom: 1px solid #d4d4d4;
+                color: #444;
+                border-left: 1px solid #d4d4d4;
+                border-right: 1px solid #d4d4d4;
+                text-transform: capitalize;
+                &:hover {
+                    background-color: #e9e9e9;
+                }
+            }
+        }
+        #ui-id-2 {
+            li {
+                padding: 10px;
+                cursor: pointer;
+                background-color: #fff;
+                border-bottom: 1px solid #d4d4d4;
+                color: #444;
+                border-left: 1px solid #d4d4d4;
+                border-right: 1px solid #d4d4d4;
+                text-transform: capitalize;
+                &:hover {
+                    background-color: #e9e9e9;
+                }
+            }
+        }
+        ul#ui-id-1 {
+            left: 0 !important;
+            width: 100% !important;
+            right: 0 !important;
+            margin: 0 !important;
+            list-style: none;
+            top: 100% !important;
+            max-height: 225px;
+            z-index: 99999;
+            overflow-y: scroll;
+            padding-left: 0px !important;
+        }
+        ul#ui-id-2 {
+            left: 0 !important;
+            width: 100% !important;
+            right: 0 !important;
+            margin: 0 !important;
+            list-style: none;
+            top: 100% !important;
+            max-height: 225px;
+            z-index: 99999;
+            overflow-y: scroll;
+            padding-left: 0px !important;
+        }
+    }
+}
+.tf_booking-widget {
+    .tf_form-row {
+        .tf_button {
+            padding: 15px 20px;
+            width: 100%;
+        }
+    }
+    #check-in-out-date {
+        font-size: 13px;
+        min-width: 150px;
+    }
+}
+.tf_submit-wrap {
+    border-right: 0;
+    border-radius: 0 8px 8px 0;
+    background: #003162;
+    width: 15%;
+
+    @media #{$max767} {
+        border-radius: 0 0 8px 8px;
+    }
+
+    button {
+        width: 100%;
+        height: 100%;
+        border-radius: 8px !important;
+    }
+    .btn-styled {
+        padding: 20px 20px;
+    }
+}
+.tf-tabcontent {
+    display: none;
+    border-top: none;
+}
+button.tf-tablinks.active {
+    background: #003162;
+    color: #f1f1f1;
+    outline: none;
+}
+button.tf-tablinks {
+    &:focus {
+        outline: none;
+    }
+}
+.tf_booking-widget.default-form {
+    padding: 0 !important;
+    background: none !important;
+    border: none;
+    .tf_form-inner {
+        padding: 0;
+        display: flex !important;
+        align-items: center;
+    }
+    .tf-label {
+        display: none;
+    }
+}
+.tf-widget-slider.recent-hotel-slider {
+    overflow: hidden;
+    width: 100%;
+}
+.tf-children-age-fields {
+    display: flex;
+    flex-wrap: wrap;
+}
+.tf-children-age {
+    flex-grow: 1;
+    width: 44%;
+    margin: 5px;
+    select {
+        width: 100%;
+        background-position-y: center;
+    }
+}
+.single_recomended_content {
+    height: 270px;
+    position: relative;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+.single_recomended_item {
+    box-sizing: border-box;
+    margin-bottom: 15px;
+    float: left;
+    width: 33%;
+    &:hover {
+        box-shadow: 0 0 1px #febb02;
+        .recomended_place_info_header {
+            background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(0, 27, 65, 0.85)), color-stop(100%, rgba(0, 27, 65, 0)));
+            background: linear-gradient(to bottom, rgba(0, 27, 65, 0.85) 0, rgba(0, 27, 65, 0) 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#00224F", endColorstr="#00001e47", GradientType=0);
+        }
+    }
+}
+.recomended_inner {
+    .single_recomended_item {
+        width: 32.33%;
+        float: left;
+        margin-right: 1%;
+        &:nth-child(3) {
+            margin-right: 0;
+        }
+    }
+}
+#recomended_section_wrapper {
+    overflow: hidden;
+    a {
+        text-decoration: none;
+        display: block;
+    }
+}
+.recomended_place_info_header {
+    h3 {
+        margin: 0px;
+        padding: 0px;
+        color: #fff;
+        font-weight: bold;
+        text-decoration: none;
+    }
+    p {
+        margin: 0px;
+        padding: 0px;
+        color: #fff;
+        text-decoration: none;
+    }
+    text-align: center;
+    padding: 10px 18px;
+    background: rgba(0, 0, 0, 0.65);
+    display: inline-block;
+    border-radius: 4px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 10px;
+}
+.tf_homepage-booking {
+    display: table;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    position: relative;
+    border: 1px solid #cccccc;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    font-size: 14px;
+    height: 55px;
+    margin: 24px 0 16px;
+    background: #fff;
+
+    .tf_selectperson-wrap {
+        .tf_person-icon {
+            margin-right: 8px;
+        }
+    }
+}
+.tf_destination-wrap {
+    border-left: 0;
+    min-width: 150px;
+    width: 25%;
+    .ui-menu-item {
+        &:before {
+            content: "\f3c5";
+            font-weight: 900;
+            font-family: "Font Awesome 5 Free";
+            float: left;
+            font-size: 15px;
+            line-height: 25px;
+            margin-right: 5px;
+        }
+    }
+}
+#tf_car_booking{
+    .tf_destination-wrap {
+        width: auto;
+    }
+}
+div#tf-locationautocomplete-list {
+    div {
+        &:before {
+            content: "\f3c5";
+            font-weight: 900;
+            font-family: "Font Awesome 5 Free";
+            float: left;
+            font-size: 15px;
+            margin-right: 5px;
+            line-height: 24px;
+        }
+    }
+}
+div#tf-destinationautocomplete-list {
+    div {
+        &:before {
+            content: "\f3c5";
+            font-weight: 900;
+            font-family: "Font Awesome 5 Free";
+            float: left;
+            font-size: 15px;
+            margin-right: 5px;
+            line-height: 24px;
+        }
+    }
+}
+.tf-widget-slider {
+    .tf-heading {
+        margin: 0 0 30px 0;
+    }
+}
+.recent-tour-slider {
+    a {
+        text-decoration: none !important;
+    }
+    h3 {
+        margin-bottom: 0 !important;
+    }
+    p {
+        margin-top: 7px;
+        margin-bottom: 0 !important;
+    }
+    .tf-slider-rating-star {
+        margin-top: 7px;
+        margin-bottom: 0 !important;
+        i {
+            color: #FFCD3D;
+        }
+    }
+}
+.recent-hotel-slider, .recent-apartment-slider {
+    a {
+        text-decoration: none !important;
+    }
+    h3 {
+        margin-bottom: 0 !important;
+    }
+    p {
+        margin-top: 7px;
+        margin-bottom: 0 !important;
+    }
+    .tf-slider-rating-star {
+        margin-top: 7px;
+        margin-bottom: 0 !important;
+        i {
+            color: #FFCD3D;
+        }
+    }
+}
+.tf-wishlists {
+    a {
+        text-decoration: none !important;
+    }
+    i {
+        padding-left: 10px;
+        color: #0054a8;
+    }
+    td {
+        display: flex;
+        align-items: center;
+        align-content: center;
+        justify-content: space-between;
+        padding: 15px;
+    }
+}
+.tf-recent-room-price {
+    .amount {
+        font-weight: bold;
+        margin-top: 5px;
+    }
+}
+.tf_more_info_selections {
+    position: relative;
+    cursor: pointer;
+}
+.tf-more-info {
+    position: absolute;
+    width: 620px;
+    padding: 15px 30px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .175);
+    border-radius: 0 0 4px 4px;
+    border-color: #dfdfdf;
+    margin-top: 0;
+    background: #fff;
+    right: 0;
+    top: 102%;
+    display: none;
+    z-index: 999;
+    .form-group.form-check {
+        width: 33%;
+        float: left;
+    }
+    span {
+        color: #333;
+        font-size: 16px;
+        font-weight: 600;
+        display: block;
+        margin-bottom: 10px;
+    }
+}
+.tf-more-info.show {
+    display: block;
+}
+.tf-filter-price-range {
+    .al-range-slider__track {
+        background: #EEE;
+        height: 10px;
+        box-shadow: none !important;
+        margin: 30px 0px 10px 0px;
+    }
+    .al-range-slider_dark {
+        padding: 0px !important;
+        .al-range-slider__bar {
+            background: #003162;
+            box-shadow: none !important;
+        }
+    }
+    .al-range-slider__knob {
+        background: #003162;
+        height: 15px;
+        width: 15px;
+        box-shadow: none !important;
+        border: 3px solid #003162;
+        &:first-child {
+            span {
+                left: 10px !important;
+            }
+        }
+    }
+    .al-range-slider__tooltip {
+        background: #003162;
+        border-radius: 5px;
+        box-shadow: none;
+        padding: 3px 10px;
+        color: #fff !important;
+        font-size: 13px !important;
+        margin-bottom: 0px !important;
+    }
+    .al-range-slider__input.js-al-range-slider__input {
+        display: none;
+    }
+}
+
+// Shortcode Form Design 2
+.tf-shortcode-design-2-tab{
+    .tf-booking-form-tab{
+        button{
+            border-radius: 0px;
+            padding: 15px 20px;
+            border: 0px solid;
+        }
+        button.active{
+            background-color: #b58e53;
+        }
+    }
+    .tf_homepage-booking{
+        border-radius: 0px;
+        .tf_submit-wrap {
+            background-color: #b58e53 !important;
+            .btn-styled{
+                background-color: #b58e53 !important;
+                border: 0px solid !important;
+            }
+        }
+    }
+
+    .tf_booking-widget-design-2{
+        background: rgba(48, 40, 28, 0.30);
+        backdrop-filter: blur(15px);
+        margin: 24px 0 16px;
+        .tf_hotel_searching{
+            .tf_form_innerbody{
+                display: flex;
+                justify-content: space-between;
+                @media #{$max830}{
+                    display: flow-root;
+                }
+                .autocomplete-items {
+                    max-height: 240px;
+                    position: absolute;
+                    background: #fcf4e8;
+                    box-shadow: 0px 20px 40px 0px rgba(0,0,0,.1);
+                    overflow: auto;
+                    scrollbar-width: thin;
+                    scrollbar-color: #aaa #eee;
+                    padding: 8px;
+                    z-index: 99;
+                    top: 100%;
+                    left: 0;
+                    right: auto;
+                    border: 0px solid;
+                    width: 276px;
+                    @media #{$max1024}{
+                        width: auto;
+                        right: 0;
+                    }
+                    @media #{$max767}{
+                        top: 97px !important;
+                    }
+                    &::-webkit-scrollbar{
+                        width: 5px;
+                    }
+                    &::-webkit-scrollbar-thumb {
+                        background-color: #aaa;
+                        border-radius: 4px;
+                    }
+                    &::-webkit-scrollbar-track {
+                        background-color: #eee;
+                    }
+                    div{
+                        padding: 10px;
+                        cursor: pointer;
+                        background-color: #fff;
+                        margin-bottom: 4px;
+                        color: #444;
+                        display: block;
+                        transition: .3s all ease;
+                        border-bottom: 0px solid;
+                        &:last-child{
+                            margin-bottom: 0px;
+                        }
+                        &:hover{
+                            background: #FAEEDC;
+                        }
+                        &::before{
+                            display: none;
+                        }
+                    }
+                }
+                .tf_form_fields{
+                    padding: 24px 40px;
+                    display: flex;
+                    width: calc(100% - 222px);
+                    @media #{$max1366}{
+                        padding: 24px 24px;
+                        width: calc(100% - 150px);
+                    }
+                    @media #{$max830}{
+                        width: 100%;
+                    }
+                    @media #{$max767}{
+                        display: flow-root;
+                    }
+                    .tf-label{
+                        font-size: 16px;
+                        font-style: normal;
+                        font-weight: 600;
+                        line-height: 130%;
+                        color: #D6D4D2;
+                        margin-bottom: 8px;
+                        display: block;
+                        @media #{$max1366}{
+                            font-size: 12px;
+                        }
+                    }
+                    .tf_destination_fields{
+                        width: 25%;
+                        padding-right: 40px;
+                        border-right: 1px solid rgba(153, 148, 141, 1);
+                        @media #{$max1366}{
+                            padding-right: 24px;
+                        }
+                        @media #{$max767}{
+                            width: 100%;
+                            padding-right: 0px;
+                            border-right: 0px solid;
+                            padding-bottom: 24px;
+                        }
+                        .tf_label_location{
+                            .tf_form_inners{
+                                border: .5px solid #FCF4E8;
+                                display: flex;
+                                align-items: center;
+                                padding: 8px 0px 8px 12px;
+                                svg{
+                                    float: left;
+                                }
+                                input{
+                                    float: left;
+                                    background-color: transparent;
+                                    border: 0px solid;
+                                    color: #D6D4D2;
+                                    width: 80%;
+                                    height: 30px;
+                                    &:focus{
+                                        outline: none;
+                                        box-shadow: 0px 0px 0px 0px;
+                                    }
+                                    &::placeholder{
+                                        color: #D6D4D2;
+                                        opacity: 1;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .tf_checkin_date{
+                        width: 22%;
+                        padding-left: 40px;
+                        padding-right: 40px;
+                        border-right: 1px solid rgba(153, 148, 141, 1);
+                        @media #{$max1366}{
+                            padding-left: 24px;
+                            padding-right: 24px;
+                        }
+                        @media #{$max767}{
+                            width: 30%;
+                            float: left;
+                            padding-left: 0px;
+                        }
+                        @media #{$max575}{
+                            width: 25%;
+                            padding-right: 5px;
+                            padding-left: 0px;
+                        }
+                        .tf-check-in-out-date,
+                        .tf-tour-check-in-out-date,
+                        .tf-apartment-check-in-out-date{
+                            visibility: hidden;
+                            height: 0px;
+                            padding: 0px !important;
+                            width: 0px;
+                            position: absolute;
+                        }
+                        label{
+                            display: block;
+                            cursor: pointer;
+                        }
+                        .tf_form_inners{
+                            .tf_checkin_dates,
+                            .tf_checkout_dates{
+                                display: flex;
+                                span.date{
+                                    font-size: 24px;
+                                    font-style: normal;
+                                    font-weight: 400;
+                                    line-height: 130%;
+                                    color: #FDF9F3;
+                                    margin-right: 16px;
+                                    @media #{$max1366}{
+                                        font-size: 20px;
+                                    }
+                                    @media #{$max575}{
+                                        margin-right: 8px;
+                                    }
+                                }
+                                span.month{
+                                    font-size: 16px;
+                                    font-style: normal;
+                                    font-weight: 400;
+                                    line-height: 130%;
+                                    color: #FDF9F3;
+                                    @media #{$max1366}{
+                                        font-size: 12px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .tf_checkin_date.tf_check_inout_dates{
+                        padding-left: 24px;
+                        @media #{$max575}{
+                            padding-left: 5px;
+                        }
+                    }
+                    .tf_guest_info{
+                        width: 31%;
+                        padding-left: 40px;
+                        border-right: 0px solid;
+                        padding-right: 0px;
+                        @media #{$max1366}{
+                            padding-left: 24px;
+                        }
+                        @media #{$max767}{
+                            width: 40%;
+                            float: left;
+                            border: 0px solid;
+                            padding-top: 0px !important;
+                            padding-bottom: 0px !important;
+                            padding-right: 0px !important;
+                        }
+                        @media #{$max575}{
+                            padding-left: 5px;
+                            width: 50%;
+                        }
+                        .tf_input-inner{
+                            display: flow-root;
+                            .tf_form_inners{
+                                display: inline-block;
+                                .tf_guest_calculation{
+                                    display: flex;
+                                    gap: 8px;
+                                    .tf_guest_number{
+                                        display: flex;
+                                        align-items: center;
+                                        span.guest,
+                                        span.room{
+                                            font-size: 24px;
+                                            font-style: normal;
+                                            font-weight: 400;
+                                            line-height: 130%;
+                                            color: #FDF9F3;
+                                            margin-right: 8px;
+                                            @media #{$max575}{
+                                                margin-right: 8px;
+                                            }
+                                        }
+                                        span.label{
+                                            font-size: 16px;
+                                            font-style: normal;
+                                            font-weight: 400;
+                                            line-height: 130%;
+                                            color: #FDF9F3;
+                                            @media #{$max1366}{
+                                                font-size: 12px;
+                                            }
+                                        }
+                                    }
+                                }
+                                .tf_check_arrow{
+                                    text-align: right;
+                                }
+                            }
+                        }
+                        .tf_acrselection-wrap {
+                            background: #FDF9F3;
+                            box-shadow: 0px 8px 40px 0px rgba(0, 0, 0, 0.10);
+                            top: 111%;
+                            border-radius: 0px;
+                            .acr-label{
+                                color: #595349;
+                                font-family: Josefin Sans;
+                                font-size: 16px;
+                                font-style: normal;
+                                font-weight: 600;
+                                line-height: 130%;
+                            }
+                            .acr-select{
+                                text-align: right;
+                                width: 96px;
+                                input[type=tel]{
+                                    width: 34px !important;
+                                    height: 48px;
+                                    border: 0.2px solid !important;
+                                    font-size: 16px;
+                                    font-style: normal;
+                                    font-weight: 600;
+                                    color: #595349 !important;
+                                    text-align: center;
+                                    padding-left: 0px !important;
+                                    padding-right: 0px !important;
+                                    border-radius: 20px;
+                                    background: #FCF4E8 !important;
+                                }
+                                .acr-dec,
+                                .acr-inc{
+                                    background: transparent;
+                                    border: none;
+                                    font-size: 31px;
+                                    font-weight: 400;
+                                    color: #595349;
+                                    padding: 0px !important;
+                                }
+                            }
+                        }
+                    }
+                }
+                .tf_availability_checker_box{
+                    width: 222px;
+                    background-color: #B58E53;
+                    display: flex;
+                    
+                    @media #{$max1366}{
+                        width: 150px;
+                    }
+                    @media #{$max830}{
+                        width: 100%;
+                    }
+                    button{
+                        background-color: #B58E53;
+                        color: #FDF9F3;
+                        font-size: 16px;
+                        font-style: normal;
+                        font-weight: 700;
+                        line-height: 150%;
+                        width: 100%;
+                        border: 0px solid;
+                        cursor: pointer;
+                        transition: .3s all ease;
+                        &:hover{
+                            background-color: #917242 !important;
+                        }
+                        @media #{$max1366}{
+                            font-size: 12px;
+                        }
+                        @media #{$max830}{
+                            padding: 15px 32px;
+                        }
+                    }
+                }
+            }
+        }
+        &#tf_car_booking{
+            .tf_form_innerbody{
+                @media #{$max991}{
+                    flex-wrap: wrap;
+                }
+                .autocomplete-items {
+                    @media #{$max767}{
+                        top: 47px !important;
+                    }
+                }
+                .tf_form_fields{
+                    width: calc(100% - 172px);
+                    padding: 24px 32px;
+                    @media #{$max991}{
+                        width: 100%;
+                        padding: 24px;
+                    }
+                    .tf_destination_fields{
+                        padding: 0 16px;
+                        &:first-child{
+                            padding-left: 0px;
+                        }
+                        @media #{$max767}{
+                            margin-bottom: 10px;
+                            padding: 0;
+                        }
+                        .tf_form_inners{
+                            position: relative;
+                        }
+                    }
+                    .tf_checkin_date{
+                        width: 25%;
+                        padding: 0 16px;
+                        &:last-child{
+                            padding-right: 0px;
+                            border-right: 0px solid;
+                        }
+                        @media #{$max767}{
+                            padding: 0;
+                            width: 100%;
+                            border-right: 0px solid;
+                        }
+                        .tf_form_inners{
+                            display: flex;
+                            gap: 16px;
+                            justify-content: space-between;
+                            input{
+                                height: 0;
+                                width: 0;
+                                padding: 0;
+                                border: 0;
+                            }
+                            .tf_checkin_dates{
+                                display: flow-root;
+                                .tf-select-date{
+                                    align-items: center;
+                                    cursor: pointer;
+                                    display: flex;
+                                }
+                                span.date{
+                                    margin-right: 8px;
+                                }
+                                span.month{
+                                    display: flex;
+                                    align-items: center;
+                                    gap: 8px;
+                                    .tf_check_arrow{
+                                        display: flex;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                .tf_availability_checker_box{
+                    width: 172px;
+                    @media #{$max991}{
+                        width: 100%;
+                    }
+                    button{
+                        @media #{$max991}{
+                            padding: 15px 32px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.tf_tf_booking-widget-wrap {
+    z-index: 999;
+}
+#tf-ask-question {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    background: transparent;
+    margin: auto;
+    overflow: auto scroll;
+}
+.tf-aq-overlay {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    background: #000;
+    opacity: 0.5;
+}
+.tf-aq-outer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    top: 20%;
+    width: 100%;
+    max-width: 428px;
+    background: #fff;
+    padding: 48px 40px 32px 40px;
+    border-radius: 16px;
+    transform: translate(0, 0);
+    @media #{$max640}{
+        width: 90%;
+    }
+}
+span.close-aq {
+    position: absolute;
+    right: 16px;
+    top: 16px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    z-index: 9999;
+}
+
+span.close-aq:hover {
+    scale: 1.2;
+}
+
+div.tf-aq-inner {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+
+    .tf-ask-question-head-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 24px;
+
+        h3 {
+            text-align: center;
+            font-family: Inter;
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 500;
+            margin: 0px !important;
+            line-height: 120%;
+        }
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+
+        .tf-ask-question-submit {
+            padding: 12px 32px;
+            border-radius: 4px;
+            background: #003C7A;
+            color:  #FFF;
+            font-family: inherit;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 150%;
+        }
+
+        .tf-ask-question-submit:hover {
+            background: #0A5AC2;
+        }
+    }
+}
+
+.tf-aq-field {
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+
+    label {
+        font-family: Inter;
+        font-size: 13px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        margin-bottom: 8px;
+    }
+
+    input, textarea {
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 12px 16px;
+        background-color: #fff;
+        color: $slate60;
+        font-size: 16px;
+        font-weight: 400;
+        transition: all 0.3s ease-in-out;
+
+        &:focus{
+            outline: none;
+            border-color: $blue60;
+        }
+    }
+
+    textarea{
+        height: 120px;
+    }
+
+    input::placeholder, textarea::placeholder {
+        font-family: Inter;
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+    
+}
+.tf-booking-form-tab-mobile {
+    display: none;
+}
+.tf-hotel-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    @media #{$max767}{
+        grid-template-columns: 1fr 1fr;
+    }
+    @media #{$max640}{
+        grid-template-columns: 1fr;
+    }
+}
+
+.post-section-one {
+    overflow: hidden;
+    display: flex;
+    .tf-single-item {
+        width: 32%;
+        float: left;
+        margin: 10px;
+        padding: 15px;
+        display: flex;
+        border-radius: 5px;
+        height: 400px;
+        object-fit: cover;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        position: relative;
+        z-index: 0;
+        &:before{
+            position: absolute;
+            content: "";
+            height: 100%;
+            width: 100%;
+            left: 0;
+            top: 0;
+            background-color: rgba(0, 0, 0, .5);
+            z-index: -1;
+            border-radius: 5px;
+        }
+    }
+}
+.tf-single-item {
+    width: 48%;
+    float: left;
+    margin: 11px;
+    padding: 15px;
+    display: flex;
+    border-radius: 5px;
+    height: 400px;
+    object-fit: cover;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    position: relative;
+    z-index: 0;
+    &:before{
+        position: absolute;
+        content: "";
+        height: 100%;
+        width: 100%;
+        left: 0;
+        top: 0;
+        background-color: rgba(0, 0, 0, .5);
+        z-index: -1;
+        border-radius: 5px;
+    }
+}
+.tf-post-content {
+    flex-grow: 1;
+    align-self: flex-end;
+}
+.tf-post-desc {
+    a {
+        color: #fff;
+        &:hover {
+            color: #ddd;
+        }
+    }
+    p {
+        color: #fff;
+    }
+}
+@media screen and (max-width: 767px) {
+    .tf_form-inner {
+        .autocomplete-items {
+            top: 70px !important;
+        }
+        .tf-hotel-results {
+            #ui-id-1 {
+                top: -255px !important;
+            }
+            #ui-id-2 {
+                top: -255px !important;
+            }
+        }
+    }
+    .tf-more-info {
+        width: 100%;
+    }
+    .tf_destination-wrap {
+        padding: 10px !important;
+        border-bottom: 1px solid #ccc;
+        width: 100%;
+        .tf_input-inner {
+            padding: 0 10px;
+        }
+    }
+    .tf_submit-wrap {
+        width: 100%;
+    }
+    .recomended_inner {
+        margin-left: -15px;
+        margin-right: -15px;
+        clear: both;
+        .single_recomended_item {
+            width: 49% !important;
+            float: left;
+            margin-right: 0;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+    }
+    .tf-booking-form-tab {
+        display: none;
+    }
+    .tf-booking-form-tab-mobile {
+        display: block;
+    }
+    select[name="tf-booking-form-tab-select"] {
+        width: 100%;
+        background: transparent;
+        height: 45px;
+        padding: 10px !important;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    .post-section-one {
+        flex-direction: column;
+        .tf-single-item {
+            width: 100%;
+            margin: unset;
+            margin-bottom: 10px;
+        }
+    }
+    .tf-single-item {
+        width: 100%;
+        margin: unset;
+        margin-bottom: 10px;
+    }
+    .tf-hotel-grid {
+        .tf-slider-item {
+            width: 100%;
+            float: left;
+        }
+    }
+}
+@media screen and (max-width: 450px) {
+    .recomended_inner {
+        .single_recomended_item {
+            width: 100% !important;
+            float: none;
+            margin-right: 0;
+            padding-left: 0;
+            padding-right: 0;
+        }
+    }
+}

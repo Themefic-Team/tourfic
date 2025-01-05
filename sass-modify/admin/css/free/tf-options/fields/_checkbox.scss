@@ -1,0 +1,80 @@
+.tf-field-checkbox {
+
+  .tf-fieldset {
+
+    ul {
+      li{
+        margin-bottom: 10px;
+      }
+
+      &.tf-inline {
+        li {
+          display: inline-block;
+          margin-right: 20px;
+        }
+      }
+    }
+    
+
+    input[type=checkbox] {
+      display: none;
+
+      & + label {
+        color: $slate60;
+        font-size: 16px;
+        position: relative;
+        padding-left: 30px;
+        @include transition(all, .3s, ease);
+
+        &:hover {
+          color: $slate70;
+
+          &::before {
+            border-color: $blue40;
+          }
+        }
+      }
+
+      & + label::before {
+        content: "";
+        display: inline-block;
+        width: 18px;
+        height: 18px;
+        border: 1px solid $slate40;
+        border-radius: 2px;
+        position: absolute;
+        top: 1px;
+        left: 0;
+        @include transition(all, .3s, ease);
+      }
+
+      & + label::after {
+        content: "";
+        background-image: url(../images/icons/check.svg);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 13px;
+        height: 18px;
+        width: 18px;
+        position: absolute;
+        top: 2px;
+        left: 1px;
+        opacity: 0;
+        @include scale(.5);
+        @include transition(all, .3s, ease);
+      }
+
+      &:checked {
+        & + label::after {
+          opacity: 1;
+          @include scale(1);
+        }
+
+        & + label:before {
+          background-color: #003c79;
+          border-color: #003c79;
+        }
+      }
+    }
+  }
+}

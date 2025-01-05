@@ -1,0 +1,49 @@
+.tf-tablist {
+
+    ul.tf-nav-tabs{
+        list-style: none;
+        margin-bottom: 0;
+        li.tf-tab-item{
+            display: inline-block;
+            padding: 8px 24px;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 24px; 
+            color: $slate60;
+            cursor: pointer;
+            transition: 0.4s; 
+            border-radius: 8px 8px 0px 0px;
+            border-bottom: 4px solid transparent;
+            margin-bottom: 0 !important;
+        }
+        li.show{
+            background-color: $slate5;;
+            border-bottom: 4px solid $slate60;
+            color: $neutral70;
+        }
+        li.tf-tab-item:hover{
+            background-color: $slate0;
+            border-bottom: 4px solid $slate0;
+        }
+        li.show:hover{
+            background-color: $slate5;;
+            border-bottom: 4px solid $slate60;
+            color: $neutral70;
+        }
+    }
+    .tf-tab-field-content{
+        .tf-tab-item-content{
+            border: 1px solid $slate5;
+            display: none;
+            visibility: hidden;
+            padding: 10px 24px;
+            @include flex-wrap(wrap);
+            @include justify-content(space-between);
+        }
+        .show{
+            @include flexbox();
+            visibility: visible;
+        }
+    }
+}
