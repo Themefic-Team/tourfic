@@ -32,9 +32,7 @@
                 h2{
                     color: #27333F;
                     font-size: 21px;
-                    font-style: normal;
                     font-weight: 700;
-                    line-height: 150%; /* 31.5px */
                     margin: 0;
                 }
                 p{
@@ -48,9 +46,7 @@
                 background: #0866c4;
                 color: #fff;
                 font-size: 16px;
-                font-style: normal;
                 font-weight: 700;
-                line-height: 150%;
                 cursor: pointer;
                 border: 0px solid;
                 transition: .3s all ease;
@@ -112,9 +108,7 @@
                     text-decoration: none;
                     color: #27333F;
                     font-size: 16px;
-                    font-style: normal;
                     font-weight: 400;
-                    line-height: 150%; /* 24px */
                     padding: 0 8px 8px 8px;
                     display: inline-block;
                 }
@@ -153,9 +147,7 @@
             h3{
                 color: #27333F;
                 font-size: 21px !important;
-                font-style: normal;
                 font-weight: 400;
-                line-height: 150%; /* 31.5px */
                 margin-bottom: 16px;
                 margin-top: 0px;
             }
@@ -164,9 +156,7 @@
                 h1{
                     color: #27333F;
                     font-size: 28px !important;
-                    font-style: normal;
                     font-weight: 600 !important;
-                    line-height: 120%; /* 33.6px */
                     margin-bottom: 10px;
                 }
                 .breadcrumb{
@@ -176,9 +166,7 @@
                         li{
                             color: #27333F;
                             font-size: 16px;
-                            font-style: normal;
                             font-weight: 400;
-                            line-height: 150%; /* 24px */
                             display: inline-block;
                             a{
                                 text-decoration: none;
@@ -217,9 +205,7 @@
                             border-radius: 8px;
                             color: #27333F;
                             font-size: 16px;
-                            font-style: normal;
                             font-weight: 400;
-                            line-height: 150%; /* 24px */
                             background: rgba(255, 255, 255, 0.24);
                             backdrop-filter: blur(32px);
                             span{
@@ -413,15 +399,11 @@
             .tf-full-description{
                 color: #566676;
                 font-size: 16px;
-                font-style: normal;
                 font-weight: 400;
-                line-height: 150%; /* 24px */
                 p{
                     color: #566676;
                     font-size: 16px;
-                    font-style: normal;
                     font-weight: 400;
-                    line-height: 150% !important; /* 24px */
                     margin: 0;
                     
                 }
@@ -447,9 +429,7 @@
                     li{
                         color: #566676;
                         font-size: 16px;
-                        font-style: normal;
                         font-weight: 400;
-                        line-height: 150%; /* 24px */
                         width: calc(25% - 8px);
                         border-radius: 8px;
                         border: 1px solid #DFE6ED;
@@ -527,9 +507,7 @@
                     li{
                         color: #566676;
                         font-size: 16px;
-                        font-style: normal;
                         font-weight: 400;
-                        line-height: 150%; /* 24px */
                         width: calc(50% - 8px);
                         @media #{$max575}{
                             width: 100%;
@@ -559,9 +537,7 @@
                                 padding: 8px 16px 8px 12px;
                                 color: #27333F;
                                 font-size: 16px;
-                                font-style: normal;
                                 font-weight: 400;
-                                line-height: 150%; /* 24px */
                                 i{
                                     color: #27BE69;
                                 }
@@ -592,9 +568,7 @@
                     li{
                         color: #566676;
                         font-size: 16px;
-                        font-style: normal;
                         font-weight: 400;
-                        line-height: 150%; /* 24px */
                         width: calc(50% - 8px);
                         border-bottom: 1px solid #DFE6ED;
                         span.label{
@@ -646,9 +620,7 @@
                         span{
                             color:#27333F;
                             font-size: 16px;
-                            font-style: normal;
                             font-weight: 400;
-                            line-height: 150%; /* 24px */
                             gap: 8px;
                             flex-wrap: nowrap;
                             i{
@@ -679,9 +651,7 @@
                 h2{
                     color: #27333F;
                     font-size: 28px;
-                    font-style: normal;
                     font-weight: 600;
-                    line-height: 120%; /* 33.6px */
                     margin-bottom: 8px;
                     del{
                         color: #566676;
@@ -691,18 +661,13 @@
                     small.pricing-type{
                         color: #566676;
                         font-size: 16px !important;
-                        font-style: normal;
                         font-weight: 400;
-                        line-height: 150%;
                         text-transform: capitalize;
                     }
                 }
                 p{
                     color: #566676;
                     font-size: 16px;
-                    font-style: normal;
-                    font-weight: 400;
-                    line-height: 150%; /* 24px */
                     margin: 0;
                 }
             }
@@ -716,9 +681,7 @@
                     h3{
                         color: #27333F;
                         font-size: 21px !important;
-                        font-style: normal !important;
                         font-weight: 400 !important;
-                        line-height: 150%; /* 31.5px */
                         margin: 0;
                     }
                     .tf-single-added-extra{
@@ -729,18 +692,14 @@
                         h4{
                             color: #27333F;
                             font-size: 16px !important;
-                            font-style: normal !important;
                             font-weight: 400 !important;
-                            line-height: 150% !important; /* 24px */
                             margin: 0;
                             width: calc(100% - 148px);
                         }
                         .qty-price{
                             color: #27333F;
                             font-size: 16px;
-                            font-style: normal;
                             font-weight: 400;
-                            line-height: 150%; /* 24px */
                             width: 140px;
                             span.price{
                                 margin-left: 10px;
@@ -820,9 +779,7 @@
                             h5{
                                 color: #27333F;
                                 font-size: 12px !important;
-                                font-style: normal !important;
                                 font-weight: 400 !important;
-                                line-height: 120% !important; /* 14.4px */
                                 margin-top: 0px;
                                 margin-bottom: 8px;
                             }
@@ -831,9 +788,7 @@
                                 width: 100% !important;
                                 color: #27333F;
                                 font-size: 16px;
-                                font-style: normal;
                                 font-weight: 400;
-                                line-height: 150%; /* 24px */
                                 border: 0px solid !important;
                                 padding: 0;
                                 &:focus{
@@ -850,9 +805,7 @@
                                 width: 100% !important;
                                 color: #27333F;
                                 font-size: 16px;
-                                font-style: normal;
                                 font-weight: 400;
-                                line-height: 150%; /* 24px */
                                 border: 0px solid !important;
                                 background-color: transparent;
                                 padding: 0;
@@ -923,9 +876,7 @@
                         background: #0866C4;
                         color: #FFF;
                         font-size: 16px;
-                        font-style: normal;
                         font-weight: 700;
-                        line-height: 150%; /* 24px */
                         cursor: pointer;
                         width: 100%;
                         border: 0px solid;
@@ -959,9 +910,7 @@
                     span{
                         color: #0866C4;
                         font-size: 16px;
-                        font-style: normal;
                         font-weight: 400;
-                        line-height: 150%; /* 24px */
                         margin: 0;
                         cursor: pointer;
                     }
@@ -993,9 +942,7 @@
                                         background: #21A159;
                                         color: #E5FAEE;
                                         font-size: 12px;
-                                        font-style: normal;
                                         font-weight: 400;
-                                        line-height: 120%; /* 14.4px */
                                         padding: 4px 8px;
                                         display: block;
                                         text-align: center;
@@ -1005,9 +952,7 @@
                                         background: #D69D00;
                                         color: #E5FAEE;
                                         font-size: 12px;
-                                        font-style: normal;
                                         font-weight: 400;
-                                        line-height: 120%; /* 14.4px */
                                         padding: 4px 8px;
                                         display: block;
                                         text-align: center;
@@ -1027,9 +972,7 @@
                                 li{
                                     color: #27333F;
                                     font-size: 12px;
-                                    font-style: normal;
                                     font-weight: 400;
-                                    line-height: 120%; /* 14.4px */
                                 }
                             }
                         }
@@ -1040,9 +983,7 @@
                         a{
                             color: #0866C4;
                             font-size: 16px;
-                            font-style: normal;
                             font-weight: 400;
-                            line-height: 150%; /* 24px */
                             text-decoration: none;
                             display: inline-block;
                         }
@@ -1068,9 +1009,7 @@
                     background: #0866C4;
                     color: #FFF;
                     font-size: 16px;
-                    font-style: normal;
                     font-weight: 700;
-                    line-height: 150%; /* 24px */
                     cursor: pointer;
                     width: 100%;
                     border: 0px solid;
@@ -1089,9 +1028,7 @@
                 h3{
                     color: #27333F;
                     font-size: 21px !important;
-                    font-style: normal !important;
                     font-weight: 400 !important;
-                    line-height: 150% !important; /* 31.5px */
                     margin-bottom: 16px;
                     margin-top: 0px;
                 }
@@ -1105,9 +1042,7 @@
                             h4{
                                 color: #27333F;
                                 font-size: 16px !important;
-                                font-style: normal !important;
                                 font-weight: 400 !important;
-                                line-height: 150% !important; /* 24px */
                                 margin-bottom: 8px;
                                 .tf-info-tooltip{
                                     position: relative;
@@ -1152,9 +1087,7 @@
                                             color: #FFF;
                                             text-align: center;
                                             font-size: 13px !important;
-                                            font-style: normal !important;
                                             font-weight: 600 !important;
-                                            line-height: 20px; /* 153.846% */
                                             margin: 0;
                                         }
                                     }
@@ -1194,9 +1127,7 @@
                             h4{
                                 color: #27333F;
                                 font-size: 21px !important;
-                                font-style: normal !important;
                                 font-weight: 400 !important;
-                                line-height: 150%; /* 24px */
                                 margin-bottom: 8px;
                                 small{
                                     display: block;
@@ -1215,9 +1146,7 @@
                             background: #EEF2F6;
                             color:#0866C4;
                             font-size: 16px;
-                            font-style: normal;
                             font-weight: 700;
-                            line-height: 150%; /* 24px */
                             cursor: pointer;
                             border: 1px solid #0866C4;
                             transition: .3s all ease;
@@ -1237,17 +1166,13 @@
                     h3{
                         color: #27333F;
                         font-size: 21px !important;
-                        font-style: normal !important;
                         font-weight: 400 !important;
-                        line-height: 150% !important; /* 31.5px */
                         margin: 0;
                     }
                     span{
                         color: #288FF6;
                         font-size: 16px !important;
-                        font-style: normal !important;
                         font-weight: 400 !important;
-                        line-height: 150% !important; /* 24px */
                         i{
                             color: #288FF6;
                         }
@@ -1265,17 +1190,13 @@
                         h4{
                             color: #27333F;
                             font-size: 16px !important;
-                            font-style: normal !important;
                             font-weight: 700 !important;
-                            line-height: 150% !important;
                             margin: 0;
                         }
                         p{
                             color: #27333F;
                             font-size: 16px !important;
-                            font-style: normal !important;
                             font-weight: 400 !important;
-                            line-height: 150% !important; /* 24px */
                             margin: 0;
                         }
                         
@@ -1296,9 +1217,7 @@
                                         }
                                         color: #566676;
                                         font-size: 16px;
-                                        font-style: normal;
                                         font-weight: 400;
-                                        line-height: 150%; /* 24px */
                                         display: inline-block;
                                         &:hover{
                                             .tf-tooltip-info{
@@ -1337,9 +1256,7 @@
                                                 color: #FFF;
                                                 text-align: center;
                                                 font-size: 12px !important;
-                                                font-style: normal !important;
                                                 font-weight: 400 !important;
-                                                line-height: 20px; /* 153.846% */
                                             }
                                             
                                         }
@@ -1363,9 +1280,7 @@
         h3{
             color: #27333F;
             font-size: 21px !important;
-            font-style: normal;
             font-weight: 400;
-            line-height: 150%; /* 31.5px */
             margin-bottom: 16px;
             margin-top: 0px;
         }
@@ -1396,9 +1311,7 @@
                     background: #0866c4 !important;
                     color: #fff !important;
                     font-size: 16px !important;
-                    font-style: normal;
                     font-weight: 700;
-                    line-height: 150%;
                     cursor: pointer;
                     border: 0px solid !important;
                 }
@@ -1410,9 +1323,7 @@
                 .avg-review{
                     color: #27333F;
                     font-size: 38px;
-                    font-style: normal;
                     font-weight: 700;
-                    line-height: 120%; /* 45.6px */
                     i{
                       font-size: 20px; 
                       color: #FFBF0F;
@@ -1422,9 +1333,7 @@
                     p{
                         color: #566676;
                         font-size: 16px;
-                        font-style: normal;
                         font-weight: 400;
-                        line-height: 150%; /* 24px */
                         margin: 0;
                     }
                 }
@@ -1473,9 +1382,7 @@
                     margin: 0;
                     color: #27333F;
                     font-size: 12px !important;
-                    font-style: normal;
                     font-weight: 400;
-                    line-height: 120%; /* 14.4px */
                     text-transform: capitalize;
                     &.feature-rating{
                         font-weight: 700;
@@ -1512,23 +1419,17 @@
                     .tf-reviews-meta{
                         color: #27333F;
                         font-size: 16px;
-                        font-style: normal;
                         font-weight: 700 !important;
-                        line-height: 150%; /* 24px */
                         span{
                             color:#566676;
                             font-size: 16px;
-                            font-style: normal;
                             font-weight: 400 !important;
-                            line-height: 150%; /* 24px */
                         }
                     }
                     p{
                         color: #566676;
                         font-size: 16px;
-                        font-style: normal;
                         font-weight: 400;
-                        line-height: 150%; /* 24px */
                         margin: 15px 0 0 0;
                     }
                 }
@@ -1545,9 +1446,7 @@
         h3{
             color: #27333F;
             font-size: 21px;
-            font-style: normal;
             font-weight: 400;
-            line-height: 150%; /* 31.5px */
             margin-bottom: 16px;
         }
         table{
@@ -1559,9 +1458,7 @@
                 th{
                     color: #27333F;
                     font-size: 16px;
-                    font-style: normal;
                     font-weight: 400;
-                    line-height: 150%; /* 24px */
                     border-right: 1px solid #DFE6ED;
                     border-bottom: 1px solid #DFE6ED;
                     padding: 16px;
@@ -1576,9 +1473,7 @@
                 td{
                     color: #566676;
                     font-size: 16px;
-                    font-style: normal;
                     font-weight: 400;
-                    line-height: 150%; /* 24px */
                     border-right: 1px solid #DFE6ED;
                     border-bottom: 1px solid #DFE6ED;
                     padding: 16px 40px;

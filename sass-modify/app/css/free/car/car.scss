@@ -28,9 +28,7 @@
                 h3{
                     color: #27333F;
                     font-size: 21px !important;
-                    font-style: normal !important;
                     font-weight: 700 !important;
-                    line-height: 150%; /* 31.5px */
                     margin: 0;
                 }
                 .tf-close-popup{
@@ -48,15 +46,12 @@
                     span{
                         color: #6B4F00;
                         font-size: 16px;
-                        font-style: normal;
                         font-weight: 400;
-                        line-height: 150%; /* 24px */
                         i{
                             color: #6B4F00;
                         }
                         b{
                             font-weight: 700;
-                            line-height: 150%; /* 24px */
                         }
                     }
                 }
@@ -68,9 +63,7 @@
                         li{
                             color: #27333f !important;
                             font-size: 16px !important;
-                            font-style: normal !important;
                             font-weight: 400 !important;
-                            line-height: 150% !important;
                             padding: 0 8px 8px 8px;
                             display: inline-block;
                             cursor: pointer;
@@ -111,9 +104,7 @@
                     p{
                         color: #27333F;
                         font-size: 16px;
-                        font-style: normal;
                         font-weight: 400;
-                        line-height: 150%; /* 24px */
                         margin: 0;
                     }
 
@@ -136,9 +127,7 @@
                                     border: 0px solid;
                                     color: #27333F;
                                     font-size: 16px;
-                                    font-style: normal;
                                     font-weight: 400;
-                                    line-height: 150%; /* 24px */
                                     padding: 0 0 16px 0px;
                                     @media #{$max767}{
                                         font-size: 12px;
@@ -162,9 +151,7 @@
                                     color: #27333F;
                                     border: 0px solid;
                                     font-size: 16px;
-                                    font-style: normal;
                                     font-weight: 700;
-                                    line-height: 150%; /* 24px */
                                     padding: 0 0 16px 0px;
                                     @media #{$max767}{
                                         font-size: 14px;
@@ -187,9 +174,7 @@
                                         label{
                                             color: #566676;
                                             font-size: 16px;
-                                            font-style: normal;
                                             font-weight: 400;
-                                            line-height: 150%; /* 24px */
                                             position: relative;
                                             margin-bottom: 0px;
                                             margin-right: 23px;
@@ -276,9 +261,7 @@
                                                 color: #FFF;
                                                 text-align: center;
                                                 font-size: 13px !important;
-                                                font-style: normal !important;
                                                 font-weight: 600 !important;
-                                                line-height: 20px; /* 153.846% */
                                             }
                                         }
                                     }
@@ -311,9 +294,7 @@
                             label{
                                 color: #566676;
                                 font-size: 12px !important;
-                                font-style: normal;
                                 font-weight: 700;
-                                line-height: 120%; /* 14.4px */
                                 margin-bottom: 8px;
                             }
                             input[type="text"],
@@ -324,9 +305,7 @@
                                 height: 40px;
                                 color: #566676;
                                 font-size: 16px;
-                                font-style: normal;
                                 font-weight: 400;
-                                line-height: 150%; /* 24px */
                                 width: 100%;
                             }
                             input[type="date"]{
@@ -336,9 +315,7 @@
                                 height: 40px;
                                 color: #566676;
                                 font-size: 16px;
-                                font-style: normal;
                                 font-weight: 400;
-                                line-height: 150%; /* 24px */
                                 width: 100%;
                                 text-transform: uppercase;
                             }
@@ -349,9 +326,7 @@
                                 height: 40px;
                                 color: #566676;
                                 font-size: 16px;
-                                font-style: normal;
                                 font-weight: 400;
-                                line-height: 150%; /* 24px */
                                 width: 100%;
                             }
                             .error-text.error-visible{
@@ -369,9 +344,7 @@
                             padding: 16px 32px;
                             border: 0px solid;
                             font-size: 16px;
-                            font-style: normal;
                             font-weight: 700;
-                            line-height: 150%; /* 24px */
                             cursor: pointer;
                             transition: .3s all ease;
                             &:hover{
@@ -391,9 +364,7 @@
                         border: 0px solid;
                         color: #566676;
                         font-size: 16px;
-                        font-style: normal;
                         font-weight: 700;
-                        line-height: 150%; /* 24px */
                         cursor: pointer;
                     }
                     button.with-charge{
@@ -438,9 +409,7 @@
                 h3{
                     color: #27333F;
                     font-size: 21px !important;
-                    font-style: normal !important;
                     font-weight: 700 !important;
-                    line-height: 150% !important;
                     margin: 0;
                     text-align: left;
                 }
@@ -476,9 +445,6 @@
                 p{
                     color: #27333F;
                     font-size: 16px;
-                    font-style: normal;
-                    font-weight: 400;
-                    line-height: 150%; /* 24px */
                 }
                 table{
                     margin-bottom: 0px;
@@ -498,18 +464,14 @@
                 color: #FFF;
                 text-align: center;
                 font-size: 38px;
-                font-style: normal;
                 font-weight: 700;
-                line-height: 120%; /* 45.6px */
             }
             .breadcrumb{
                 ul{
                     li{
                         color: #FFF;
                         font-size: 16px;
-                        font-style: normal;
                         font-weight: 400;
-                        line-height: 150%; /* 24px */
                         display: inline-block;
                         a{
                             text-decoration: none;
@@ -550,17 +512,13 @@
         h2{
             color:#27333F;
             font-size: 38px;
-            font-style: normal;
             font-weight: 400;
-            line-height: 120%; /* 45.6px */ 
             margin-bottom: 16px;
         }
         p{
             color: #566676;
             font-size: 16px;
-            font-style: normal;
             font-weight: 400;
-            line-height: 150%; /* 24px */
             margin-bottom: 56px;
         }
     }
@@ -599,9 +557,7 @@
                             padding: 0 8px;
                             color: #27333F;
                             font-size: 16px;
-                            font-style: normal;
                             font-weight: 400;
-                            line-height: 150%; /* 24px */
                             i{
                                 color: #FFBF0F;
                             }
@@ -620,9 +576,7 @@
                                 padding: 4px 8px;
                                 color: #382900;
                                 font-size: 16px;
-                                font-style: normal;
                                 font-weight: 400;
-                                line-height: 150%; /* 24px */
                                 margin-bottom: 8px;
                                 &:last-child{
                                     margin-bottom: 0px;
@@ -639,9 +593,7 @@
                     h3{
                         color:#27333F;
                         font-size: 21px !important;
-                        font-style: normal !important;
                         font-weight: 700 !important;
-                        line-height: 150% !important; /* 31.5px */
                         margin-top: 0px;
                     }
                 }
@@ -658,9 +610,7 @@
                     li{
                         color: #566676;
                         font-size: 15px;
-                        font-style: normal;
                         font-weight: 400;
-                        line-height: 150%; /* 24px */
                         display: flex;
                         width: calc(33.3333% - 8px);
                         @media #{$max1024}{
@@ -683,16 +633,12 @@
                         h3{
                             color: #27333F;
                             font-size: 28px !important;
-                            font-style: normal !important;
                             font-weight: 600 !important;
-                            line-height: 120%; /* 33.6px */
                             margin: 0;
                             small{
                                 color: #566676;
                                 font-size: 16px !important;
-                                font-style: normal;
                                 font-weight: 400;
-                                line-height: 150%; /* 24px */
                                 text-transform: capitalize;
                             }
                         }
@@ -704,9 +650,7 @@
                         padding: 12px 32px;
                         color: #0866C4;
                         font-size: 16px;
-                        font-style: normal;
                         font-weight: 700;
-                        line-height: 150%; /* 24px */
                         background-color: #fff;
                         cursor: pointer;
                         text-decoration: none;
@@ -889,9 +833,7 @@
                     h5{
                         color: #27333F;
                         font-size: 12px !important;
-                        font-style: normal !important;
                         font-weight: 400 !important;
-                        line-height: 120% !important; /* 14.4px */
                         margin-bottom: 8px;
                         margin-top: 0px;
                     }
@@ -900,9 +842,7 @@
                         width: 100% !important;
                         color: #27333F;
                         font-size: 16px;
-                        font-style: normal;
                         font-weight: 400;
-                        line-height: 150%; /* 24px */
                         border: 0px solid !important;
                         padding-left: 0px;
                         box-shadow: none;
@@ -920,9 +860,7 @@
                         width: 100% !important;
                         color: #27333F;
                         font-size: 16px;
-                        font-style: normal;
                         font-weight: 400;
-                        line-height: 150%; /* 24px */
                         border: 0px solid !important;
                         background-color: transparent;
                     }
@@ -984,9 +922,7 @@
                         .tf_input-inner > div{
                             color: #27333f;
                             font-size: 16px;
-                            font-style: normal;
                             font-weight: 400;
-                            line-height: 150%;
                         }
                         .tf_acrselection-wrap{
                             left: 0;
@@ -1041,9 +977,7 @@
                     label{
                         color: #566676;
                         font-size: 16px;
-                        font-style: normal;
                         font-weight: 400;
-                        line-height: 150%; /* 24px */
                         display: block;
                         position: relative;
                         padding-left: 35px;
@@ -1108,9 +1042,7 @@
                 padding: 16px 50px;
                 color: #FFF;
                 font-size: 16px;
-                font-style: normal;
                 font-weight: 700;
-                line-height: 150%; /* 24px */
                 border: 0px solid;
                 cursor: pointer;
                 transition: .3s all ease;
