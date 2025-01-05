@@ -1,0 +1,47 @@
+.tf-field-color {
+  > label{
+    margin-top: 15px;
+  }
+  > span.tf-field-sub-title{
+    margin-bottom: 30px;
+  }
+  .tf-fieldset {
+
+    ul.tf-inline {
+      li {
+        display: flex;
+        justify-content: space-between;
+        background-color: #fff;
+        margin: 10px 0px;
+        border-radius: 8px;
+        padding: 20px 30px 13px 30px;
+        @media #{$max767}{
+          display: flow-root;
+        }
+        > label{
+          font-weight: 600;
+          font-size: 16px;
+          color: #000;
+          width: 45%;
+          margin-top: 5px;
+          @media #{$max767}{
+            margin-top: 0px;
+            margin-bottom: 10px;
+            display: block;
+          }
+        }
+        .wp-picker-container{
+          display: block;
+          text-align: right;
+          @media #{$max767}{
+            text-align: left;
+            display: block;
+          }
+        }
+      }
+      li:last-child{
+        margin-bottom: 0px;
+      }
+    }
+  }
+}

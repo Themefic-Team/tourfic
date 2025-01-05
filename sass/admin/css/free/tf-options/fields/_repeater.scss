@@ -1,0 +1,125 @@
+.tf-repeater {
+  margin-bottom: 8px;
+
+  .tf-single-repeater-clone {
+    display: none;
+  }
+
+  .tf-repeater-header {
+    display: flex;
+    width: 100%;
+    padding: 8px 0;
+    background: #D8E6FF;
+    position: relative;
+    border-radius: 5px 5px 0px 0px;
+    align-items: center;
+    cursor: pointer;
+
+    .tf-repeater-icon {
+      padding: 8px;
+      cursor: pointer;
+      text-align: center;
+      display: inline-block;
+      border-radius: 4px;
+      font-size: 16px;
+      line-height: 24px;
+      height: 24px;
+      width: 24px;
+
+    }
+
+    .tf-repeater-icon-move {
+      color: $blue40;
+
+      &:hover {
+        background-color: $blue20;
+        transition: 0.4s;
+        color: $blue60;
+      }
+    }
+
+    .tf-repeater-icon-clone {
+      color: $blue40;
+
+      &:hover {
+        background-color: $blue20;
+        transition: 0.4s;
+        color: $blue60;
+      }
+    }
+
+    .tf-repeater-icon-delete {
+      color: $red40;
+
+      &:hover {
+        background-color: $red20;
+        transition: 0.4s;
+        color: $red60;
+      }
+    }
+
+    .tf-repeater-title {
+      display: inline-block;
+      width: 100%;
+      margin-right: 120px;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 24px;
+
+    }
+
+    .tf-repeater-icon-absulate {
+      position: absolute;
+      right: 8px;
+      top: 8px;
+    }
+
+  }
+
+  .tf-repeater-content-wrap {
+    border: 1px solid #F0F2F4;
+    background-color: #fff;
+    padding: 10px 24px;
+    box-shadow: 0px 5px 10px 1px #f5f5f5;
+    overflow: hidden;
+    @include flexbox();
+    @include flex-wrap(wrap);
+    @include justify-content(space-between);
+  }
+
+  //  .hide{
+  //     display: none;
+  //     visibility: hidden;
+  //  }
+
+  .tf-repeater-add {
+    .tf-repeater-icon {
+      padding: 8px 15px;
+      cursor: pointer;
+      text-align: center;
+      line-height: 0;
+      display: inline-block;
+      line-height: 24px;
+      background-color: #003c79;
+      border-radius: 4px;
+      font-size: 16px;
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: 0.5px;
+    }
+  }
+
+  .tf-single-repeater {
+    margin-bottom: 24px;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  .tf-field-notice-inner {
+    margin-bottom: 24px;
+  }
+}
+
+.tf-field-disable .tf-repeater {
+  pointer-events: none;
+}

@@ -1,0 +1,656 @@
+.tf_enquiry_details_wrap_header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    @media #{$max767}{
+        display: flow-root;
+    }
+    h1{
+        color: #1D2327;
+        font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
+        font-size: 32px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        padding: 0;
+    }
+
+    .tf_header_wrap_button{
+        display: flex;
+        gap: 16px;
+        .tf_booking_views_button{
+            border-radius: 8px;
+            border: 1px solid #EEF6F0;
+            background: #FFF;
+            padding: 4px 8px;
+            float: left;
+            height: 46px;
+            box-sizing: border-box;
+            ul{
+                margin: 0;
+                padding: 0;
+                display: flex;
+                gap: 8px;
+                li{
+                    height: 36px;
+                    width: 36px;
+                    margin: 0;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+                    i{
+                        font-size: 15px;
+                    }
+                    &.active{
+                        color: #f0f0f1;
+                        background-color: #004e9d;
+                        border-radius: 4px;
+                    }
+                }
+            }
+        }
+        a.tf-enquiry-export-btn{
+            padding: 10px 32px;
+            border-radius: 8px;
+            border: 1px solid #003C79;
+            background: #FFF;
+            margin: 0 !important;
+            color: #003C79;
+            font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 24px; /* 150% */
+            transition: .3s all ease;
+            &:hover{
+                color: #f0f0f1;
+                background-color: #003C79;
+            }
+        }            
+        a.tf-booking-btn,
+        .tf-google-sync-button button{
+            padding: 10px 32px;
+            border-radius: 8px;
+            border: 1px solid #003C79;
+            background: #003C79;
+            margin: 0;
+            box-shadow: 0px 8px 20px 0px rgba(29, 35, 39, 0.06);
+            font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 24px; /* 150% */
+            color: #F0F0F1;
+            transition: .3s all ease;
+            cursor: pointer;
+            &:hover{
+                color: #f0f0f1;
+                background-color: #004E9D;
+            }
+        }
+    }
+}
+
+
+.tf-enquiry-table {
+    display: block !important;
+    .tf-enquiry-unread th, .tf-enquiry-unread td {
+        background-color: #EDF2F7 !important;
+        border-bottom: 1px solid #F0F2F4 !important;
+        color: #1D2327 !important;
+        font-family: inherit !important;
+        font-size: 16px !important;
+        font-style: normal !important;
+        font-weight: 700 !important;
+
+        .tf-checkbox-listing {
+            background-color: #EDF2F7 !important;
+        }
+
+    }
+    .tf-enquiry-responded th, .tf-enquiry-responded td {
+        color: #1D2327 !important;
+        font-family: inherit !important;
+        font-size: 16px !important;
+        font-style: normal !important;
+        font-weight: 700 !important;
+
+    }
+    #cb {
+        width: 15%;
+        padding: 12px 24px;
+    }
+    #uemail {
+        width: 20%;
+        padding: 12px 24px;
+    }
+    #post_name {
+        width: 20%;
+        padding: 12px 24px;
+    }
+    #description {
+        width: 30%;
+        padding: 12px 24px;
+    }
+    #massage-date-time {
+        width: 15%;
+        padding: 12px 24px;
+    }
+    thead tr {
+        .tf-checkbox-listing {
+            gap: 12px;
+            margin: 12px 24px;
+        }
+    }
+
+    tbody .tf-enquiry-single-row {
+        cursor: pointer;
+        
+        .check-column {
+            .table-name-column {
+                display: inline-flex;
+                align-items: center;
+                gap: 12px; 
+                
+                .tf-checkbox-listing {
+                    width: 18px !important;
+                    justify-content: unset !important;
+                    justify-self: flex-start !important;
+                }
+            }
+        }
+
+        .time-n-date {
+            .email-time-date {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-start;
+                gap: 4px;
+
+                .email-date {
+                    color: #1D2327;
+                    font-family: inherit;
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 600;
+                    line-height: 1.12;
+                }
+
+                .email-time {
+                    color: #666D74;
+                    font-family: inherit;
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 1.12;
+                }
+            }
+        }
+    }
+
+    .pro-notice-row {
+        border-top: none;
+        .tf-pro-notice {
+            padding: 0px 0px;
+            .tf-fieldset {
+                margin-top: 0px;
+            }
+            .tf-field-notice-inner {
+                justify-content: center;
+
+                a {
+                    text-decoration: underline;
+                    color: #295BFF;
+
+                }
+            }
+        }
+    }
+}
+
+.tf-enquiry-details-header-filter {
+    display: flex !important;
+}
+
+.tf-enquiry-single-header-details {
+    padding: 16px 24px;
+    background-color: #fff;
+    width: 100%;
+    display: flex;
+    gap: 16px;
+    margin: -10px -20px 24px -20px;
+
+    img {
+        height: 100%;
+        width: 32px;
+        object-fit: contain;
+        padding: 3.2px;
+    }
+
+    h1 {
+        font-family: inherit;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 1.33;
+    }
+}
+
+hr.enqury-single-title-line {
+    border-color: #F0EEF6;
+    margin: 0px;
+    border-width: 0.5px;
+}
+
+.tf-single-enquiry-header-buttons {
+    margin-bottom: 24px;
+    display: flex;
+    gap: 12px;
+
+    .tf-enquiry-single-back-button{
+        padding: 8px 20px 8px 16px;
+        background-color: #fff;
+        max-width: 60px;
+        font-size: 15px;
+        color: #2C273F;
+        font-family: Inter;
+        font-style: normal;
+        font-weight: 400;
+        border-radius: 8px;
+        
+    
+       a {
+        color: #2C273F;
+        text-decoration: none;
+
+        i {
+            margin-right: 8px;
+        }
+    
+        &:focus {
+            outline: none;
+            box-shadow: none;
+        }
+       }
+    }
+
+    .tf-enquiry-single-sync {
+        max-width: 120px;
+        cursor: pointer;
+        background-color: #003c79;
+        border-color: #003c79;
+        color: #fff;
+        transition: all .3s ease-in-out;
+        user-select: none;
+
+        &:hover {
+            background-color: #001f3e;
+            border-color: #001f3e;
+            color: #fff;
+        }
+    }
+}
+
+.tf-enquiry-single-details-wrapper {
+    display: flex;
+    gap: 24px;
+    .tf-single-enquiry-left {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        width: 60%;
+        .tf-enquiry-details {
+            background-color: #fff;
+            padding: 16px 0px 24px 0px;
+            border-radius: 8px;
+            min-height: 286px;
+    
+            h2 {
+                font-family: inherit;
+                font-size: 17px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: 150%;
+                margin: 0px;
+            }
+    
+            .tf-enquiry-details-single-heading {
+                padding-bottom: 16px;
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+    
+            .tf-single-enquiry-details-content {
+                display: flex;
+                gap: 24px;
+                padding-top: 24px;
+                padding-left: 24px;
+                padding-right: 24px;
+                flex-direction: column;
+    
+                .tf-single-enquiry-details-name, .tf-single-enquiry-details-email, .tf-single-enquiry-details-message {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 8px;
+    
+                    .tf-single-enquiry-details-label {
+                        color: #5D5676;
+                        font-family: inherit;
+                        font-size: 13px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 1.5;
+                    }
+    
+                    .tf-single-enquiry-details-value {
+                        font-family: inherit;
+                        font-size: 15px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 1.6;
+    
+                        i {
+                            margin-left: 16px;
+                            cursor: pointer;
+                            font-size: 16px;
+                        }
+                    }
+                }
+
+                .tf-single-enquiry-reply-another-mail-button {
+                    padding: 8px 20px;
+                    background-color: #003c79;
+                    border-color: #003c79;
+                    border-radius: 8px;
+                    align-self: self-end;
+                    color: #fff;
+                    font-size: 15px;
+                    cursor: pointer;
+        
+                    &:hover {
+                        background-color: #001f3e;
+                        border-color: #001f3e;
+                        color: #fff;
+                    }
+        
+                    span {
+                        font-family: inherit;
+                        font-style: normal;
+                        font-weight: 600;
+                        line-height: 1.6;
+                        margin-right: 8px;
+                    }
+        
+                    i {
+                        font-size: 16px;
+                    }
+                }
+            }
+        }
+
+        .tf-single-enquiry-reply-mail-button {
+            padding: 8px 20px;
+            background-color: #003c79;
+            border-color: #003c79;
+            border-radius: 8px;
+            align-self: self-end;
+            color: #fff;
+            font-size: 15px;
+            cursor: pointer;
+
+            &:hover {
+                background-color: #001f3e;
+                border-color: #001f3e;
+                color: #fff;
+            }
+
+            span {
+                font-family: inherit;
+                font-style: normal;
+                font-weight: 600;
+                line-height: 1.6;
+                margin-right: 8px;
+            }
+
+            i {
+                font-size: 16px;
+            }
+
+        }
+
+        .tf-single-enquiry-reply-wrapper {
+            .tf-enquiry-details-single-heading {
+                .tf-single-enquiry-reply-mail {
+                    color: #2C273F;
+                    font-family: inherit;
+                    font-size: 17px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 150%;
+                }
+            }
+
+            .tf-single-enquiry-accordion {
+                margin-top: 24px;
+                padding-left: 24px;
+                padding-right: 24px;
+
+                .tf-single-enquiry-accordion-item {
+                    .tf-single-enquiry-accordion-head {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        cursor: pointer;
+                        user-select: none;
+
+                        .tf-single-enquiry-accordion-head-left {
+                            font-family: inherit;
+                            font-size: 15px;
+                            font-style: normal;
+                            font-weight: 600;
+                            line-height: 1.6;
+                            color: #2C273F;
+                            i {
+                                margin-right: 8px;
+                            }
+
+                            .tf-enquiry-response-user {
+                                display: inline-block;
+                                transform: scale(-1, -1);
+                            }
+                            .tf-single-accordion-dash {
+                                margin-left: 16px;
+                                margin-right: 16px;
+                            }
+                            .tf-single-accordion-subject {
+                                color: #5D5676;
+                            }
+                        }
+
+                        .tf-single-enquiry-accordion-head-right {
+                            color: #9089A9;
+                            font-family: inherit;
+                            font-size: 13px;
+                            font-style: normal;
+                            font-weight: 400;
+                            line-height: 20px;
+                        }
+                    }
+
+                    .tf-single-accordion-body {
+                        margin-top: 16px;
+                        color: #5D5676;
+                        font-family: inherit;
+                        font-size: 15px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 1.6;
+                        display: none;
+                    }
+                    
+                    
+                }
+
+                hr {
+                    margin-top: 24px;
+                    margin-bottom: 24px;
+                    border-color: #F0EEF6;
+                }
+            }
+        }
+
+        #tf-single-enquiry-reply-form {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+
+            textarea {
+                height: 100px;
+                padding: 16px;
+                border-radius: 8px;
+                border: 1px solid #E2DFED;
+
+                &::placeholder {
+                    color: #77708F;
+                    font-family: inherit;
+                    font-size: 15px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 1.6;
+                }
+            }
+
+            .tf-enquiry-reply-button {
+                align-self: flex-end;
+                padding: 8px 20px;
+                background-color: #003c79;
+                border-color: #003c79;
+                color: #fff;
+                font-family: inherit;
+                font-size: 15px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: 1.6;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+                border-color: transparent;
+                border-radius: 8px;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: #001f3e;
+                    border-color: #001f3e;
+                    color: #fff;
+                }
+            }
+        }
+    }
+
+    .tf-single-enquiry-right {
+        width: 40%;
+        .tf-enquiry-single-log-details {
+            background-color: #fff;
+            padding: 16px 0px 24px 0px;
+            border-radius: 8px;
+
+            .tf-singe-enquiry-log-details-heading {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding-bottom: 16px;
+                padding-right: 24px;
+                padding-left: 24px;
+
+                h2 {
+                    font-family: inherit;
+                    font-size: 17px;
+                    font-style: normal;
+                    font-weight: 600;
+                    line-height: 150%;
+                    margin: 0px;
+                }
+
+                .enquiry-details-status {
+                    padding: 4px 12px;
+                    background-color: #D0F5E1;
+                    border-radius: 16px;
+                    display: flex;
+                    align-items: center;
+                    gap: 4px;
+                    color: #21A159;
+                    font-family: Inter;
+                    font-style: normal;
+                    font-weight: 600;
+                    line-height: 1.45;
+                }
+            }
+            .tf-single-enquiry-log-details-content {
+                display: flex;
+                flex-direction: column;
+                gap: 24px;
+                padding-left: 24px;
+                padding-right: 24px;
+                padding-top: 24px;
+
+                .tf-single-enquiry-log-details-single {
+                    display: flex;
+                    gap: 8px;
+                    align-items: center;
+                    color: var(--UI-800, #2C273F);
+                    font-family: inherit;
+                    font-size: 15px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 1.6;
+
+                    i {
+                        margin-left: 8px;
+                        cursor: pointer;
+                        font-size: 16px;
+                    }
+                }
+
+            }
+            
+        }
+    }
+}
+
+.tf-enquiry-details-wrap .tf-booking-header-filter .tf-right-search-filter, .tf-enquiry-details-wrap .tf-booking-header-filter .tf-enquiry-right-search-filter {
+    width: 24%;
+    flex-direction: row-reverse;
+}
+
+.tf-enquiry-details-wrap .tf-booking-header-filter .tf-right-search-filter button, .tf-enquiry-details-wrap .tf-booking-header-filter .tf-enquiry-right-search-filter button {
+    padding: 0px;
+}
+
+.tf-enquiry-details-wrap p:first-child {
+    margin-top: 0px;
+}
+
+.tf-enquiry-details-wrap .tf-single-accordion-body p:last-child {
+    margin-bottom: 0px;
+}
+
+
+#tf-enquiry-reply-editor_ifr, #tf-enquiry-reply-editor {
+    height: 200px !important;
+}
+
+@media #{$max991}{
+    .tf-enquiry-details-wrap .tf-booking-header-filter .tf-bulk-action-form {
+        width: 100%;
+        gap: 12px;
+    }
+
+    .tf-enquiry-details-wrap .tf-booking-header-filter .tf-right-search-filter {
+        width: 200px;
+    }
+}
+
+
