@@ -1,0 +1,22 @@
+.tf-car-design-1{
+    .tf-car-benefits{
+        width: 100%;
+        ul{
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            gap: 16px 8px;
+            li{
+                color: #566676;
+                font-size: 16px;
+                font-weight: 400;
+                width: calc(50% - 8px);
+                @media #{$max575}{
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
