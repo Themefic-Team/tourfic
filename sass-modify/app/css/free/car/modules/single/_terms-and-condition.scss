@@ -1,0 +1,62 @@
+.tf-car-design-1{
+    .tf-car-conditions-section{
+        padding-bottom: 32px;
+        @media #{$max1199}{
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+        h3{
+            color: #27333F;
+            font-size: 21px;
+            font-weight: 400;
+            margin-bottom: 16px;
+        }
+        table{
+            border-left: 1px solid #DFE6ED;
+            border-top: 1px solid #DFE6ED;
+            margin: 0px;
+            border-radius: 16px;
+            tr{
+                th{
+                    color: #27333F;
+                    font-size: 16px;
+                    font-weight: 400;
+                    border-right: 1px solid #DFE6ED;
+                    border-bottom: 1px solid #DFE6ED;
+                    padding: 16px;
+                    vertical-align: baseline;
+                    text-align: left;
+                    width: 210px;
+                    @media #{$max767}{
+                        padding: 8px; 
+                        width: 33%;
+                    }
+                }
+                td{
+                    color: #566676;
+                    font-size: 16px;
+                    font-weight: 400;
+                    border-right: 1px solid #DFE6ED;
+                    border-bottom: 1px solid #DFE6ED;
+                    padding: 16px 40px;
+                    @media #{$max767}{
+                        padding: 8px; 
+                    }
+                }
+                &:first-child{
+                    td{
+                        border-radius: 0 16px 0 0;
+                    }
+                }
+                &:last-child{
+                    th{
+                        border-radius: 0 0 0 16px;
+                    }
+                    td{
+                        border-radius: 0 0 16px 0;
+                    }
+                }
+            }
+        }
+    }
+}

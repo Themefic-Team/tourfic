@@ -1,0 +1,42 @@
+.tf-car-design-1{
+    .tf-car-faq-section{
+        width: 100%;
+        .tf-faq-col{
+            margin-bottom: 16px;
+            &:last-child{
+                margin-bottom: 0px;
+            }
+            &.active{
+            .tf-faq-head{
+                span{
+                    i{
+                        transform: rotate(180deg);
+                    }
+                }
+            } 
+            }
+            .tf-faq-head{
+                border-radius: 8px;
+                background: #F8FAFC;
+                padding: 8px 16px;
+                cursor: pointer;
+                span{
+                    color:#27333F;
+                    font-size: 16px;
+                    font-weight: 400;
+                    gap: 8px;
+                    flex-wrap: nowrap;
+                    i{
+                        color: #566676;
+                    }
+                }
+            }
+            .tf-question-desc{
+                color:#27333F;
+                font-size: 15px;
+                padding: 8px 16px;
+                display: none;
+            }
+        }
+    }
+}
