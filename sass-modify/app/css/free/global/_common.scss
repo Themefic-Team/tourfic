@@ -736,14 +736,14 @@ h3.tf-sidebar-widget_title {
             &:hover~label {
                 &:before {
                     content: "\f005";
-                    color: #FFC314;
+                    color: $color-primary;
                     font-weight: 900;
                 }
             }
             &:hover {
                 &:before {
                     content: "\f005";
-                    color: #FFC314;
+                    color: $color-primary;
                     font-weight: 900;
                 }
             }
@@ -761,7 +761,7 @@ h3.tf-sidebar-widget_title {
             &:checked~label {
                 &:before {
                     content: "\f005";
-                    color: #FFC314;
+                    color: $color-primary;
                     font-weight: 900;
                 }
             }
@@ -775,14 +775,14 @@ h3.tf-sidebar-widget_title {
                 &:hover~label {
                     &:before {
                         content: "\f005";
-                        color: #FFC314;
+                        color: $color-primary;
                         font-weight: 900;
                     }
                 }
                 &:hover {
                     &:before {
                         content: "\f005";
-                        color: #FFC314;
+                        color: $color-primary;
                         font-weight: 900;
                     }
                 }

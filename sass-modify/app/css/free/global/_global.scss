@@ -74,7 +74,7 @@ Custom Modal
         width: 80%;
         max-width: 1080px;
         pointer-events: auto;
-        background-color: $blue0;
+        background-color: $color-light-bg;
         outline: 0;
         margin: 0 auto;
         border-radius: 10px;
@@ -210,14 +210,14 @@ Notice
 .tf-notice {
     @include flexbox();
     padding: 24px;
-    border: 1px solid $teal10;
+    border: 1px solid $color-border;
     border-radius: 8px;
-    background-color: $teal0;
+    background-color: $color-white;
 
     .tf-notice-icon {
         margin-right: 10px;
         font-size: 20px;
-        color: $teal60;
+        color: $color-primary;
     }
 
     .tf-notice-content {
@@ -238,24 +238,24 @@ Notice
     }
 
     &.tf-notice-success {
-        border-color: $green10;
-        background-color: $green0;
+        border-color: $color-border;
+        background-color: $color-light-bg;
 
         .tf-notice-icon {
             color: $color-success;
         }
     }
     &.tf-notice-warning {
-        border-color: $yellow10;
-        background-color: $yellow0;
+        border-color: $color-primary;
+        background-color: $color-border;
 
         .tf-notice-icon {
-            color: $yellow60;
+            color: $color-primary;
         }
     }
     &.tf-notice-danger {
-        border-color: $red10;
-        background-color: $red0;
+        border-color: #fddcda;
+        background-color: #fef2f1;
 
         .tf-notice-icon {
             color: $color-error;

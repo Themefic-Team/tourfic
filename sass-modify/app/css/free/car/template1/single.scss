@@ -30,20 +30,20 @@
             }
             .tf-price-header{
                 h2{
-                    color: #27333F;
+                    color: $color-primary;
                     font-size: 21px;
                     font-weight: 700;
                     margin: 0;
                 }
                 p{
-                    color: #566676;
+                    color: $color-text;
                     margin: 0;
                 }
             }
             button{
                 padding: 16px 32px;
                 border-radius: 8px;
-                background: #0866c4;
+                background: $color-primary;
                 color: $color-white;
                 font-size: 16px;
                 font-weight: 700;
@@ -51,7 +51,7 @@
                 border: 0px solid;
                 transition: .3s all ease;
                 &:hover{
-                    background: #094c90;
+                    background: $color-secondary;
                 }
             }
         }
@@ -69,7 +69,7 @@
             width: 100%;
         }
         &::before{
-            background: linear-gradient(90deg, rgba(217, 217, 217, 0.00) 0%, #F8FAFC 100%);
+            background: linear-gradient(90deg, rgba(217, 217, 217, 0.00) 0%, $color-light-bg 100%);
             position: absolute;
             content: "";
             right: 0;
@@ -85,20 +85,20 @@
             width: 100%;
             display: block ruby;
             scrollbar-width: thin;
-            scrollbar-color: #888 #f1f1f1;
+            scrollbar-color: $color-gray $color-light-bg;
             &::-webkit-scrollbar {
                 width: 4px;
             }
 
             &::-webkit-scrollbar-track {
-                background: #f1f1f1;
+                background: $color-light-bg;
             }
             &::-webkit-scrollbar-thumb {
-                background-color: #888;
+                background-color: $color-gray;
                 border-radius: 4px;
 
                 &:hover {
-                    background-color: #555;
+                    background-color: $color-gray-light;
                 }
             }
             li{
@@ -106,7 +106,7 @@
                 margin-right: 8px;
                 a{
                     text-decoration: none;
-                    color: #27333F;
+                    color: $color-text;
                     font-size: 16px;
                     font-weight: 400;
                     padding: 0 8px 8px 8px;
@@ -114,8 +114,8 @@
                 }
                 &.active{
                     a{
-                        color: #0866C4;
-                        border-bottom: 2px solid #0866C4;
+                        color: $color-primary;
+                        border-bottom: 2px solid $color-primary;
                     }
                 }
             }
@@ -145,7 +145,7 @@
                 width: 100%;
             }
             h3{
-                color: #27333F;
+                color: $color-heading;
                 font-size: 21px !important;
                 font-weight: 400;
                 margin-bottom: 16px;
@@ -154,7 +154,7 @@
 
             .tf-car-title{
                 h1{
-                    color: #27333F;
+                    color: $color-heading;
                     font-size: 28px !important;
                     font-weight: 600 !important;
                     margin-bottom: 10px;
@@ -164,13 +164,13 @@
                         margin: 0;
                         padding: 0;
                         li{
-                            color: #27333F;
+                            color: $color-text;
                             font-size: 16px;
                             font-weight: 400;
                             display: inline-block;
                             a{
                                 text-decoration: none;
-                                color: #27333F;
+                                color: $color-text;
                                 font-size: 16px;
                                 font-weight: 400;
                             }
@@ -203,18 +203,18 @@
                         a{
                             text-decoration: none;
                             border-radius: 8px;
-                            color: #27333F;
+                            color: $color-text;
                             font-size: 16px;
                             font-weight: 400;
-                            background: rgba(255, 255, 255, 0.24);
+                            background: $color-light-bg;
                             backdrop-filter: blur(32px);
                             span{
-                                color: #27333F;
+                                color: $color-text;
                                 font-size: 16px;
                                 font-style: normal;
                                 font-weight: 400;
                                 i{
-                                    color: #FFBF0F;
+                                    color: $color-primary;
                                     font-size: 18px;
                                 }
                             }
@@ -241,7 +241,7 @@
                             display: flex;
                             align-items: center;
                             justify-content: center;
-                            color: #27333F;
+                            color: $color-secondary;
                             cursor: pointer;
                             font-size: 24px;
                             text-decoration: none;
@@ -273,7 +273,7 @@
                                     padding: 16px 10px;
                                     width: 280px;
                                     text-align: center;
-                                    box-shadow: 0px 13px 30px 0px #e0e8ee;
+                                    box-shadow: 0px 13px 30px 0px $color-light-bg;
                                     position: absolute;
                                     min-width: 100%;
                                     top: 100%;
@@ -301,7 +301,7 @@
                                                 i{
                                                     font-size: 22px;
                                                 }
-                                                color: #0866c4;
+                                                color: $color-primary;
                                                 &:hover{
                                                     background: transparent !important;
                                                 }
@@ -312,10 +312,10 @@
                                                 border: 0px solid;
                                                 font-size: 22px !important;
                                                 cursor: pointer;
-                                                color: #0866c4;
+                                                color: $color-primary;
                                                 box-shadow: none;
                                                 span{
-                                                    color: #0866c4;
+                                                    color: $color-primary;
                                                 }
                                                 .share-center-copied-message {
                                                     display: none;
@@ -397,11 +397,11 @@
             }
             .tf-short-description,
             .tf-full-description{
-                color: #566676;
+                color: $color-text;
                 font-size: 16px;
                 font-weight: 400;
                 p{
-                    color: #566676;
+                    color: $color-text;
                     font-size: 16px;
                     font-weight: 400;
                     margin: 0;
@@ -409,7 +409,7 @@
                 }
                 span.tf-see-description,
                 span.tf-see-less-description{
-                    color: #27333F;
+                    color: $color-primary;
                     cursor: pointer;
                 }
             }
@@ -427,12 +427,12 @@
                     list-style: none;
                     gap: 16px 8px;
                     li{
-                        color: #566676;
+                        color: $color-text;
                         font-size: 16px;
                         font-weight: 400;
                         width: calc(25% - 8px);
                         border-radius: 8px;
-                        border: 1px solid #DFE6ED;
+                        border: 1px solid $color-light-bg;
                         padding: 8px;
                         position: relative;
                         i{
@@ -486,7 +486,7 @@
                                 z-index: -1;
                             }
                             span{
-                                color: #212121;
+                                color: $color-text;
                                 font-size: .875rem;
                                 line-height: 1.125rem;
                             }
@@ -505,7 +505,7 @@
                     list-style: none;
                     gap: 16px 8px;
                     li{
-                        color: #566676;
+                        color: $color-text;
                         font-size: 16px;
                         font-weight: 400;
                         width: calc(50% - 8px);
@@ -533,13 +533,13 @@
                             padding: 0;
                             li{
                                 border-radius: 6px;
-                                background: #EEF2F6;
+                                background: $color-light-bg;
                                 padding: 8px 16px 8px 12px;
-                                color: #27333F;
+                                color: $color-text;
                                 font-size: 16px;
                                 font-weight: 400;
                                 i{
-                                    color: #27BE69;
+                                    color: $color-success;
                                 }
                             }
                         }
@@ -548,7 +548,7 @@
                         ul{
                             li{
                                 i{
-                                    color: #E51030;
+                                    color: $color-denger;
                                 }
                             }
                         }
@@ -566,11 +566,11 @@
                     list-style: none;
                     gap: 16px;
                     li{
-                        color: #566676;
+                        color: $color-text;
                         font-size: 16px;
                         font-weight: 400;
                         width: calc(50% - 8px);
-                        border-bottom: 1px solid #DFE6ED;
+                        border-bottom: 1px solid $color-border;
                         span.label{
                             color: #27333F;
                             padding: 8px 16px;
@@ -590,7 +590,7 @@
                 width: 100%;
                 .tf-car-location-map{
                     border-radius: 8px;
-                    background: #EEF2F6;
+                    background: $color-light-bg;
                     height: 260px;
                     width: 100%;
                 }
@@ -614,22 +614,22 @@
                     }
                     .tf-faq-head{
                         border-radius: 8px;
-                        background: #F8FAFC;
+                        background: $color-light-bg;
                         padding: 8px 16px;
                         cursor: pointer;
                         span{
-                            color:#27333F;
+                            color: $color-text;
                             font-size: 16px;
                             font-weight: 400;
                             gap: 8px;
                             flex-wrap: nowrap;
                             i{
-                                color: #566676;
+                                color: $color-text;
                             }
                         }
                     }
                     .tf-question-desc{
-                        color:#27333F;
+                        color: $color-text;
                         font-size: 15px;
                         padding: 8px 16px;
                         display: none;
@@ -649,37 +649,37 @@
             .tf-price-header{
                 margin-bottom: 38px;
                 h2{
-                    color: #27333F;
+                    color: $color-heading;
                     font-size: 28px;
                     font-weight: 600;
                     margin-bottom: 8px;
                     del{
-                        color: #566676;
+                        color: $color-text;
                         text-decoration-line: strikethrough;
                         font-weight: 400 !important;
                     }
                     small.pricing-type{
-                        color: #566676;
+                        color: $color-text;
                         font-size: 16px !important;
                         font-weight: 400;
                         text-transform: capitalize;
                     }
                 }
                 p{
-                    color: #566676;
+                    color: $color-text;
                     font-size: 16px;
                     margin: 0;
                 }
             }
             .tf-extra-added-info{
                 border-radius: 16px;
-                background: #EEF2F6;
+                background: $color-light-bg;
                 padding: 16px 24px 24px 24px;
                 margin-bottom: 32px;
                 display: none;
                 .tf-extra-added-box{
                     h3{
-                        color: #27333F;
+                        color: $color-heading;
                         font-size: 21px !important;
                         font-weight: 400 !important;
                         margin: 0;
@@ -690,14 +690,14 @@
                         padding: 16px;
                         gap: 8px;
                         h4{
-                            color: #27333F;
+                            color: $color-heading;
                             font-size: 16px !important;
                             font-weight: 400 !important;
                             margin: 0;
                             width: calc(100% - 148px);
                         }
                         .qty-price{
-                            color: #27333F;
+                            color: $color-heading;
                             font-size: 16px;
                             font-weight: 400;
                             width: 140px;
@@ -705,7 +705,7 @@
                                 margin-left: 10px;
                             }
                             i{
-                                color: #566676;
+                                color: $color-text;
                                 font-size: 20px;
                             }
                             span.delete{
@@ -721,7 +721,7 @@
 
             .tf-date-select-box{
                 border-radius: 16px;
-                background:#EEF2F6;
+                background: $color-light-bg;
                 padding: 8px 8px 16px 8px;
                 margin-bottom: 32px;
                 @media #{$max767}{
@@ -764,20 +764,14 @@
                             flex-wrap: nowrap;
                         }
                         &:first-child{
-                            border-right: 1px solid #DFE6ED;
+                            border-right: 1px solid $color-border;
                         }
-                        
-                        .icon{
-                            svg{
-
-                            }
-                        }
-                        
+               
                         .info-select{
                             width: 100%;
                             position: relative;
                             h5{
-                                color: #27333F;
+                                color: $color-heading;
                                 font-size: 12px !important;
                                 font-weight: 400 !important;
                                 margin-top: 0px;
@@ -786,7 +780,7 @@
                             input{
                                 min-width: auto;
                                 width: 100% !important;
-                                color: #27333F;
+                                color: $color-text;
                                 font-size: 16px;
                                 font-weight: 400;
                                 border: 0px solid !important;
@@ -796,14 +790,14 @@
                                     box-shadow: none;
                                 }
                                 &::placeholder{
-                                    color: #27333F;
+                                    color: $color-text;
                                     opacity: 1;
                                 }
                             }
                             select{
                                 min-width: auto;
                                 width: 100% !important;
-                                color: #27333F;
+                                color: $color-text;
                                 font-size: 16px;
                                 font-weight: 400;
                                 border: 0px solid !important;
@@ -820,12 +814,12 @@
                                 max-height: 200px;
                                 overflow: auto;
                                 border-radius: 4px;
-                                background: #EEF2F6;
+                                background: $color-light-bg;
                                 box-shadow: 0px 4px 16px 0px rgba(2, 28, 53, 0.20);
                                 padding: 2px;
 
                                 scrollbar-width: thin;
-                                scrollbar-color: #9c9c9c $color-white;
+                                scrollbar-color: $color-gray $color-white;
             
                                 /* Chrome, Edge, and Safari */
                                 *::-webkit-scrollbar {
@@ -835,7 +829,7 @@
                                     background: $color-white;
                                 }
                                 &::-webkit-scrollbar-thumb {
-                                    background-color: #9c9c9c;
+                                    background-color: $color-gray;
                                     border-radius: 5px;
                                     border: 3px solid $color-white;
                                 }
@@ -854,7 +848,7 @@
                                         margin-bottom: 0px;
                                     }
                                     &:hover{
-                                        background-color: #F8FAFC;
+                                        background-color: $color-light-bg;
                                     }
                                 }
                             }
@@ -866,14 +860,14 @@
                     padding-top: 8px;
                     .error-notice{
                         text-align: center;
-                        color: red;
+                        color: $color-denger;
                         margin-bottom: 10px;
                         display: none;
                     }
                     button{
                         padding: 16px 32px;
                         border-radius: 8px;
-                        background: #0866C4;
+                        background: $color-primary;
                         color: $color-white;
                         font-size: 16px;
                         font-weight: 700;
@@ -882,16 +876,16 @@
                         border: 0px solid;
                         transition: .3s all ease;
                         &:hover{
-                            background: #094C90;
+                            background: $color-secondary;
                         }
                         &.tf-partial-button{
-                            border: 1px solid #0866C4;
+                            border: 1px solid $color-primary;
                             background: transparent;
-                            color: #0866C4;
+                            color: $color-primary;
                             transition: .3s all ease;
                             &:hover{
-                                border: 1px solid #0866C4;
-                                background: #0866C4;
+                                border: 1px solid $color-secondary;
+                                background: $color-secondary;
                                 color: $color-white;
                                 svg{
                                     path{
@@ -908,7 +902,7 @@
                     }
                     text-align: center;
                     span{
-                        color: #0866C4;
+                        color: $color-primary;
                         font-size: 16px;
                         font-weight: 400;
                         margin: 0;
@@ -926,21 +920,21 @@
                     }
                     .tf-cancellation-timeline{
                         margin-top: 12px;
-                        border-bottom: 1px solid #C0CCD8;
+                        border-bottom: 1px solid $color-border;
                         .tf-timeline{
                             ul{
                                 display: flex;
                                 margin: 0;
                                 list-style: none;
                                 li{
-                                    border-left: 1px dotted #27333F;
-                                    border-right: 1px dotted #27333F;
+                                    border-left: 1px dotted $color-border;
+                                    border-right: 1px dotted $color-border;
                                     width: 50%;
                                     padding: 4px;
                                     span.free{
                                         border-radius: 2px;
-                                        background: #21A159;
-                                        color: #E5FAEE;
+                                        background: $color-success;
+                                        color: $color-white;
                                         font-size: 12px;
                                         font-weight: 400;
                                         padding: 4px 8px;
@@ -949,8 +943,8 @@
                                     }
                                     span.paid{
                                         border-radius: 2px;
-                                        background: #D69D00;
-                                        color: #E5FAEE;
+                                        background: $color-secondary;
+                                        color: $color-white;
                                         font-size: 12px;
                                         font-weight: 400;
                                         padding: 4px 8px;
@@ -970,7 +964,7 @@
                                 padding: 0;
                                 list-style: none;
                                 li{
-                                    color: #27333F;
+                                    color: $color-text;
                                     font-size: 12px;
                                     font-weight: 400;
                                 }
@@ -981,7 +975,7 @@
                         text-align: center;
                         margin-top: 16px;
                         a{
-                            color: #0866C4;
+                            color: $color-primary;
                             font-size: 16px;
                             font-weight: 400;
                             text-decoration: none;
@@ -993,7 +987,7 @@
 
             .tf-mobile-booking-btn{
                 display: none;
-                background:#EEF2F6;
+                background: $color-light-bg;
                 padding: 8px;
                 @media #{$max767}{
                     display: block;
@@ -1006,7 +1000,7 @@
                 button{
                     padding: 16px 32px;
                     border-radius: 8px;
-                    background: #0866C4;
+                    background: $color-primary;
                     color: $color-white;
                     font-size: 16px;
                     font-weight: 700;
@@ -1015,18 +1009,18 @@
                     border: 0px solid;
                     transition: .3s all ease;
                     &:hover{
-                        background: #094C90;
+                        background: $color-secondary;
                     }
                 }
             }
 
             .tf-add-extra-section{
                 border-radius: 16px;
-                background: #EEF2F6;
+                background: $color-light-bg;
                 padding: 16px 24px 24px 24px;
                 margin-bottom: 32px;
                 h3{
-                    color: #27333F;
+                    color: $color-heading;
                     font-size: 21px !important;
                     font-weight: 400 !important;
                     margin-bottom: 16px;
@@ -1036,11 +1030,11 @@
                     .tf-car-single-extra{
                         padding: 12px 16px 16px 16px;
                         border-radius: 8px;
-                        background: #F8FAFC;
+                        background: $color-light-bg;
                         .tf-extra-title{
                             width: calc(100% - 95px);
                             h4{
-                                color: #27333F;
+                                color: $color-heading;
                                 font-size: 16px !important;
                                 font-weight: 400 !important;
                                 margin-bottom: 8px;
@@ -1095,7 +1089,7 @@
                             }
                             .acr-select{
                                 border-radius: 8px;
-                                background: #E6F2FE;
+                                background: $color-light-bg;
                                 padding: 4px 8px;
                                 width: auto;
                                 display: inline-flex;
@@ -1104,7 +1098,7 @@
                                 margin-top: 5px;
                                 .acr-dec,
                                 .acr-inc{
-                                    color: #0866C4;
+                                    color: $color-primary;
                                     border: 0px solid;
                                     background-color: transparent;
                                     width: auto;
@@ -1112,7 +1106,7 @@
                                     padding: 0;
                                 }
                                 input{
-                                    color: #566676;
+                                    color: $color-text;
                                     font-size: 16px;
                                     width: 18px !important;
                                     cursor: not-allowed;
@@ -1125,14 +1119,14 @@
                         .tf-extra-price{
                             text-align: right;
                             h4{
-                                color: #27333F;
+                                color: $color-heading;
                                 font-size: 21px !important;
                                 font-weight: 400 !important;
                                 margin-bottom: 8px;
                                 small{
                                     display: block;
                                     font-size: 16px !important;
-                                    color: #566676;
+                                    color: $color-text;
                                 }
                             }
                         }
@@ -1143,15 +1137,15 @@
                         button{
                             padding: 12px 32px;
                             border-radius: 8px;
-                            background: #EEF2F6;
-                            color:#0866C4;
+                            background: $color-light-bg;
+                            color:$color-primary;
                             font-size: 16px;
                             font-weight: 700;
                             cursor: pointer;
-                            border: 1px solid #0866C4;
+                            border: 1px solid $color-primary;
                             transition: .3s all ease;
                             &:hover{
-                                background: #0866C4;
+                                background: $color-primary;
                                 color: $color-white;
                             }
                         }
@@ -1160,7 +1154,7 @@
             }
             .tf-driver-details{
                 border-radius: 16px;
-                background: #EEF2F6;
+                background: $color-light-bg;
                 padding: 24px;
                 .tf-driver-details-header{
                     h3{
@@ -1170,11 +1164,11 @@
                         margin: 0;
                     }
                     span{
-                        color: #288FF6;
+                        color: $color-primary;
                         font-size: 16px !important;
                         font-weight: 400 !important;
                         i{
-                            color: #288FF6;
+                            color: $color-primary;
                         }
                     }
                 }
@@ -1188,20 +1182,20 @@
                     .tf-driver-info{
                         width: calc(100% - 72px);
                         h4{
-                            color: #27333F;
+                            color: $color-heading;
                             font-size: 16px !important;
                             font-weight: 700 !important;
                             margin: 0;
                         }
                         p{
-                            color: #27333F;
+                            color: $color-text;
                             font-size: 16px !important;
                             font-weight: 400 !important;
                             margin: 0;
                         }
                         
                         .tf-driver-contact-info{
-                            border-top: 1px solid #C0CCD8;
+                            border-top: 1px solid $color-border;
                             margin-top: 16px;
                             padding-top: 16px;
                             ul{
@@ -1215,7 +1209,7 @@
                                         i{
                                             font-size: 20px;
                                         }
-                                        color: #566676;
+                                        color: $color-text;
                                         font-size: 16px;
                                         font-weight: 400;
                                         display: inline-block;
@@ -1278,7 +1272,7 @@
             padding-right: 15px;
         }
         h3{
-            color: #27333F;
+            color: $color-heading;
             font-size: 21px !important;
             font-weight: 400;
             margin-bottom: 16px;
@@ -1308,7 +1302,7 @@
                 input[type="submit"]{
                     padding: 16px 32px !important;
                     border-radius: 8px !important;
-                    background: #0866c4 !important;
+                    background: $color-primary !important;
                     color: $color-white !important;
                     font-size: 16px !important;
                     font-weight: 700;
@@ -1321,17 +1315,17 @@
             margin-bottom: 32px;
             .tf-review-data-average{
                 .avg-review{
-                    color: #27333F;
+                    color: $color-text;
                     font-size: 38px;
                     font-weight: 700;
                     i{
                       font-size: 20px; 
-                      color: #FFBF0F;
+                      color: $color-primary;
                     }
                 }
                 .tf-review-all-info{
                     p{
-                        color: #566676;
+                        color: $color-text;
                         font-size: 16px;
                         font-weight: 400;
                         margin: 0;
@@ -1348,7 +1342,7 @@
             }
             .tf-progress-bar {
                 height: 5px;
-                background: #C0CCD8;
+                background: $color-light-bg;
                 border-radius: 32px;
             }
             
@@ -1366,7 +1360,7 @@
 
                 .percent-progress {
                     position: absolute;
-                    background: #0866C4;
+                    background: $color-primary;
                     top: 0;
                     left: 0;
                     bottom: 0;
@@ -1380,7 +1374,7 @@
                 justify-content: space-between;
                 p{
                     margin: 0;
-                    color: #27333F;
+                    color: $color-text;
                     font-size: 12px !important;
                     font-weight: 400;
                     text-transform: capitalize;
@@ -1405,7 +1399,7 @@
                     width: calc(100% - 62px);
                     .tf-review-rating{
                         font-size: 0;
-                        color: #FFBF0F;
+                        color: $color-primary;
                         display: flex;
                         margin-bottom: 8px;
                         >div{
@@ -1417,17 +1411,17 @@
                         }
                     }
                     .tf-reviews-meta{
-                        color: #27333F;
+                        color: $color-text;
                         font-size: 16px;
                         font-weight: 700 !important;
                         span{
-                            color:#566676;
+                            color:$color-text;
                             font-size: 16px;
                             font-weight: 400 !important;
                         }
                     }
                     p{
-                        color: #566676;
+                        color: $color-text;
                         font-size: 16px;
                         font-weight: 400;
                         margin: 15px 0 0 0;
@@ -1450,8 +1444,8 @@
             margin-bottom: 16px;
         }
         table{
-            border-left: 1px solid #DFE6ED;
-            border-top: 1px solid #DFE6ED;
+            border-left: 1px solid $color-border;
+            border-top: 1px solid $color-border;
             margin: 0px;
             border-radius: 16px;
             tr{
@@ -1459,8 +1453,8 @@
                     color: #27333F;
                     font-size: 16px;
                     font-weight: 400;
-                    border-right: 1px solid #DFE6ED;
-                    border-bottom: 1px solid #DFE6ED;
+                    border-right: 1px solid $color-border;
+                    border-bottom: 1px solid $color-border;
                     padding: 16px;
                     vertical-align: baseline;
                     text-align: left;
@@ -1471,11 +1465,11 @@
                     }
                 }
                 td{
-                    color: #566676;
+                    color: $color-text;
                     font-size: 16px;
                     font-weight: 400;
-                    border-right: 1px solid #DFE6ED;
-                    border-bottom: 1px solid #DFE6ED;
+                    border-right: 1px solid $color-border;
+                    border-bottom: 1px solid $color-border;
                     padding: 16px 40px;
                     @media #{$max767}{
                         padding: 8px; 
