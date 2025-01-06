@@ -29,7 +29,7 @@
       .btn-styled {
         background: $color-secondary !important;
         border: 0 !important;
-        color: #fff !important;
+        color: $color-white !important;
         padding: 0 !important;
         min-width: 150px;
         min-height: 46px;
@@ -53,13 +53,13 @@
           font-size: 14px !important;
         }
         &:hover {
-          box-shadow: 0px 3px 0px 0px $color-light-yellow;
+          box-shadow: 0px 3px 0px 0px $color-primary;
         }
         &::after {
           display: none;
         }
         &.active {
-          background: $color-light-yellow !important;
+          background: $color-primary !important;
           &:hover {
             box-shadow: none;
           }
@@ -150,7 +150,7 @@
         overflow: auto;
         padding: 8px;
         scrollbar-width: thin;
-        scrollbar-color: #9c9c9c #ffffff;
+        scrollbar-color: #9c9c9c $color-white;
         border-radius: 4px;
         background: #fef9f6;
         box-shadow: 0px 4px 16px 0px rgba(2, 28, 53, 0.2);
@@ -224,7 +224,7 @@
       flex: 1;
     }
     .tf_checkin_to_label {
-      color: $color-light-yellow;
+      color: $color-primary;
       font-size: 18px;
       font-style: normal;
       font-weight: 700;
@@ -343,7 +343,7 @@
   }
 
   &__divider {
-    background: #ffffff2e;
+    background: $color-white;
     width: 1px;
     height: 100px;
     &:last-child {
@@ -358,7 +358,7 @@
     display: flex;
     @include align-items(center);
     gap: 0;
-    color: white;
+    color: $color-white;
     position: relative;
     cursor: pointer;
     line-height: 22px;
@@ -381,13 +381,13 @@
       line-height: 70.2px;
       border: 0;
       background: transparent;
-      color: white;
+      color: $color-white;
       padding: 0;
       margin-left: 16px;
       margin-right: 8px;
 
       &:focus {
-        color: white;
+        color: $color-white;
       }
       @media #{$max1366} {
         font-size: 50px;
@@ -592,8 +592,8 @@
     -moz-appearance: none;
     appearance: none;
     width: 100%;
-    background: #2051f5;
-    color: white !important;
+    background: $color-primary;
+    color: $color-white !important;
     border: 0 !important;
     font-size: 16px;
     font-weight: 400;
@@ -605,14 +605,14 @@
       padding: 12px 16px 16px !important;
     }
     &::placeholder {
-      color: white;
+      color: $color-white;
     }
   }
 
   &__submit {
     background: #fa6400;
     border-color: #fa6400;
-    color: white;
+    color: $color-white;
     border-radius: 5px;
     gap: 15px;
     min-height: 58px;
@@ -634,14 +634,14 @@
     &:hover {
       background: #f17b2d;
       border-color: #f17b2d;
-      color: white;
+      color: $color-white;
     }
   }
 
   .tf-driver-location {
     max-width: 1678px;
     display: flex;
-    color: white;
+    color: $color-white;
     margin: auto;
     margin-top: 20px;
     ul {
@@ -653,7 +653,7 @@
       gap: 0px 32px;
 
       label {
-        color: white;
+        color: $color-white;
         font-size: 16px;
         font-style: normal;
         font-weight: 400;
@@ -687,7 +687,7 @@
           left: 0;
           height: 18px;
           width: 18px;
-          border: 1.5px solid white;
+          border: 1.5px solid $color-white;
           background-color: transparent;
           border-radius: 3px;
           &::after {
@@ -698,7 +698,7 @@
             top: 1px;
             width: 7px;
             height: 10px;
-            border: solid white;
+            border: solid $color-white;
             border-width: 0 2px 2px 0;
             -webkit-transform: rotate(45deg);
             -ms-transform: rotate(45deg);
@@ -721,7 +721,7 @@
     select[name="tf-booking-form-tab-select"] {
       @media #{$max767} {
         background: #fa6400;
-        color: white;
+        color: $color-white;
         border: 0;
         border-radius: 0;
         width: 100%;

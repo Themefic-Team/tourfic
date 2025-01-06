@@ -79,7 +79,7 @@
                     .checkmark {
                         border-radius: 3px;
                         border: 1px solid $t4-orange-200;
-                        background: #fff;
+                        background: $color-white;
                         height: 16px;
                         width: 16px;
 
@@ -90,7 +90,7 @@
                         &::after {
                             top: 1px;
                             left: 4px;
-                            border-color: #fff;
+                            border-color: $color-white;
                             border-width: 0 2px 2px 0;
                         }
                     }
@@ -160,7 +160,7 @@
                     height: 100%;
                     text-align: center;
                     line-height: 100px;
-                    background: #000;
+                    background: $color-heading;
                     border-radius: 4px;
                     opacity: .5;
                     cursor: pointer;
@@ -343,7 +343,7 @@
                         background-size: 10px;
                         background-position: 80% 49%;
                         border: 1px solid $t4-orange-200 !important;
-                        background: #fff !important;
+                        background: $color-white !important;
                         color: $t4-paragraph !important;
                         cursor: pointer;
                         outline: none;
@@ -425,7 +425,7 @@
             button,
             a.tf_air_service,
             a.availability {
-                color: #fff;
+                color: $color-white;
                 font-size: 14px;
                 line-height: 16px;
                 font-weight: 500;
@@ -465,7 +465,7 @@
         width: 1200px;
         max-width: 1200px;
         border-radius: 6px;
-        background: #FFF;
+        background: $color-white;
         box-shadow: 0 13px 25px 0 rgba(91, 96, 111, 0.10);
     }
 

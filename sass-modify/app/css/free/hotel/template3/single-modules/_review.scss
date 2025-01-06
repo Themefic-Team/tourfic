@@ -141,9 +141,9 @@
             }
             .tf-review-date{
                 li{
-                    color: $color-black;
+                    color: $color-heading;
                     i{
-                        color: $color-black;
+                        color: $color-heading;
                     }
                 }
             }
@@ -265,7 +265,7 @@
             textarea{
                 border-radius: 4px;
                 border: $t4-orange-200;
-                background: #fff;
+                background: $color-white;
                 padding: 8px 16px;
                 color: $t4-paragraph;
                 height: 112px;
@@ -281,7 +281,7 @@
             input{
                 border-radius: 4px;
                 border: $t4-orange-200;
-                background: #fff;
+                background: $color-white;
                 padding: 8px 16px;
                 color: $t4-paragraph;
                 font-size: 12px;

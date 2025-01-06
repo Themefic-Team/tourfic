@@ -59,7 +59,7 @@ $t4-main-color: #060D1C;
         height: 32px;
         width: 32px;
         border-radius: 50%;
-        background-color: #fff;
+        background-color: $color-white;
         text-align: center;
         line-height: 32px;
         cursor: pointer;
@@ -74,7 +74,7 @@ $t4-main-color: #060D1C;
         &:hover {
             @include rotate(0);
             background-color: #0E3DD8;
-            color: #fff;
+            color: $color-white;
         }
     }
 
@@ -199,7 +199,7 @@ $t4-main-color: #060D1C;
                         line-height: 14px;
                         padding: 8px 16px;
                         border-radius: 32px;
-                        background-color: #fff;
+                        background-color: $color-white;
                     }
                 }
 
@@ -258,7 +258,7 @@ $t4-main-color: #060D1C;
 
             .tf_map_price {
                 .tf_price_inner {
-                    background: #fff;
+                    background: $color-white;
                     border-radius: 30px;
                     text-align: center;
                     color: $t4-paragraph;
@@ -273,7 +273,7 @@ $t4-main-color: #060D1C;
                     &:hover,
                     &.active {
                         background: #0E3DD8;
-                        color: #fff;
+                        color: $color-white;
                     }
                 }
             }
@@ -288,7 +288,7 @@ $t4-main-color: #060D1C;
                 padding: 8px;
                 border-radius: 4px;
                 background-color: $t4-primary;
-                color: #fff;
+                color: $color-white;
                 text-decoration: none;
             }
 
@@ -330,7 +330,7 @@ $t4-main-color: #060D1C;
                     height: 32px;
                     line-height: 32px;
                     border-radius: 4px;
-                    background-color: #fff;
+                    background-color: $color-white;
                     text-align: center;
                     cursor: pointer;
                     @include transition();
@@ -399,7 +399,7 @@ $t4-main-color: #060D1C;
             @include transition();
 
             &:hover{
-                background: #fff;
+                background: $color-white;
                 box-shadow: 0px 4px 30px 0px rgba(255, 237, 225, 0.40);
 
                 .tf-archive-hotel-content .tf-archive-hotel-content-left .tf-section-title a{
@@ -535,7 +535,7 @@ $t4-main-color: #060D1C;
 
                         &:hover{
                             background-color: $t4-primary;
-                            color: #fff;
+                            color: $color-white;
                         }
                     }
                 }
@@ -577,7 +577,7 @@ $t4-main-color: #060D1C;
             left: -320px;
             width: 300px;
             height: 100vh;
-            background-color: #fff;
+            background-color: $color-white;
             box-shadow: 0px 4px 40px 0px rgba(80, 33, 0, 0.10);
             padding: 16px;
             z-index: 9999;
@@ -671,7 +671,7 @@ $t4-main-color: #060D1C;
                 border-radius: 5px;
                 box-shadow: none;
                 padding: 3px 10px;
-                color: #fff !important;
+                color: $color-white !important;
                 font-size: 13px !important;
                 margin-bottom: 0px !important;
             }
@@ -767,7 +767,7 @@ $t4-main-color: #060D1C;
                                     transform: translateY(-50%);
                                     height: 16px;
                                     width: 16px;
-                                    background-color: #fff;
+                                    background-color: $color-white;
                                     border-radius: 4px;
                                     border: 1px solid $t4-primary;
 

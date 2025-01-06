@@ -6,11 +6,9 @@
         background: #FCF4E8;
         padding: 24px 24px 28px 24px;
         h4{
-            color: #595349;
+            color: $color-heading;
             font-size: 20px !important;
-            font-style: normal !important;
             font-weight: 700 !important;
-            line-height: 130%; /* 26px */
             margin: 0 0 16px 0;
         }
         .slick-track{
@@ -35,20 +33,16 @@
                 a{
                     text-decoration: none;
                     span{
-                        color: #595349;
+                        color: $color-text;
                         font-size: 16px !important;
-                        font-style: normal !important;
                         font-weight: 600 !important;
-                        line-height: 130%; /* 20.8px */
                     }
                 }
                 p{
                     margin: 8px 0 0 0;
-                    color: #99948D;
+                    color: $color-text;
                     font-size: 16px !important;
-                    font-style: normal !important;
                     font-weight: 400 !important;
-                    line-height: 130%; /* 20.8px */
                 }
             }
         }
@@ -61,7 +55,7 @@
                 button {
                     background: transparent;
                     border-radius: 30px;
-                    border: 1px solid rgba(153, 148, 141, 1);
+                    border: 1px solid $color-gray;
                     height: 12px;
                     width: 12px;
 
@@ -70,7 +64,7 @@
                         font-size: 0;
                         width: 6px;
                         height: 6px;
-                        background: rgba(181, 142, 83, 1);
+                        background: $color-primary;
                         top: 50%;
                         left: 50%;
                         border-radius: 100%;
@@ -81,7 +75,7 @@
                 &.slick-active {
                     button {
                         background: transparent;
-                        border: 1px solid rgba(181, 142, 83, 1);
+                        border: 1px solid $color-primary;
                         height: 16px;
                         width: 16px;
                         &:before {

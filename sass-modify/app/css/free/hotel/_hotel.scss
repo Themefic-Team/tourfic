@@ -32,7 +32,7 @@
 
 .share-tour-content .tf-dropdown-content {
     margin: 0;
-    background: #fff;
+    background: $color-white;
     border-radius: 4px;
     overflow: hidden;
     min-width: 200px;
@@ -77,7 +77,7 @@
     white-space: nowrap;
     text-decoration: none;
     color: #333;
-    background-color: #fff;
+    background-color: $color-white;
     fill: #333;
     display: flex;
     align-items: center;
@@ -181,8 +181,8 @@ a.slick-slide-item-link {
     z-index: 9;
     top: 50%;
     transform: translateY(-50%);
-    color: #fff;
-    background-color: #000;
+    color: $color-white;
+    background-color: $color-heading;
     text-align: center;
     cursor: pointer;
     padding: 6px 13px 0px 12px;
@@ -267,7 +267,7 @@ a.slick-slide-item-link {
     padding: 10px 0;
     background-color: #003162;
     box-shadow: 0 5px 10px rgba(0,0,0,.1);
-    color: #fff;
+    color: $color-white;
     font: 700 18px/1 'Lato', sans-serif;
     text-shadow: 0 1px 1px rgba(0,0,0,.2);
     text-transform: uppercase;
@@ -297,7 +297,7 @@ a.slick-slide-item-link {
 
   .nearby-container {
     display: block;
-    background-color: #fff;
+    background-color: $color-white;
     margin-top: 20px;
     margin-bottom: 20px;
     padding: 20px 20px 10px 20px;
@@ -349,8 +349,8 @@ a.slick-slide-item-link {
     margin-right: 10px;
     padding: 6px 10px;
     border-radius: 4px;
-    border: 1px solid #0000002e;
-    box-shadow: -1px 1px 6px -1px #0000002e;
+    border: 1px solid $color-heading;
+    box-shadow: -1px 1px 6px -1px $color-heading;
     margin-top:10px;
 }
 
@@ -370,7 +370,7 @@ a.slick-slide-item-link {
 
 /**************** ROOMS ****************/
 .tf-room-filter .tf-room-checkbox, .tf-room-filter h3 {
-    color: #000;
+    color: $color-heading;
     list-style: none;
 }
 ul.tf-room-checkbox li {
@@ -408,7 +408,7 @@ ul.tf-room-checkbox label{
 
 .availability-table thead {
     background: #003162;
-    color: #fff;
+    color: $color-white;
 }
 
 .availability-table td,
@@ -430,7 +430,7 @@ ul.tf-room-checkbox label{
 }
 
 /*.tf-room-table .availability-table tbody tr:nth-child(odd) td {
-    background: #fff;
+    background: $color-white;
 }*/
 
 .hotel-room-wrap {
@@ -607,7 +607,7 @@ span.tf-price .amount {
         .tf-hotel-facilities-container {
             padding: 32px;
             border-radius: 6px;
-            background: #fff;
+            background: $color-white;
             // box-shadow: 0px 0px 24px 5px #E0E8EE;
     
             .tf-hotel-facilities-title-area {

@@ -186,7 +186,7 @@
                     $this.block({
                         message: null,
                         overlayCSS: {
-                            background: "#fff",
+                            background: "$color-white",
                             opacity: .5
                         }
                     });

@@ -1,4 +1,10 @@
+/*!************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[3]!./sass-modify/admin/css/free/tourfic-admin.scss ***!
+  \************************************************************************************************************************************************************************************************/
 @import url(https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&display=swap);
+/*!****************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[3]!./sass-modify/admin/css/free/tourfic-admin.scss (1) ***!
+  \****************************************************************************************************************************************************************************************************/
 /*
 Button
 */
@@ -7,7 +13,7 @@ Button
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
-  background-color: #fff;
+  background-color: #ffffff;
   color: #003c79;
   padding: 10px 25px;
   border: 1px solid #003c79;
@@ -29,20 +35,20 @@ Button
 
 .tf-admin-btn:hover {
   background-color: #003c79;
-  color: #fff;
+  color: #ffffff;
 }
 
 .tf-admin-btn.tf-btn-secondary {
   background-color: #003c79;
   border-color: #003c79;
-  color: #fff;
+  color: #ffffff;
   font-weight: 600;
 }
 
 .tf-admin-btn.tf-btn-secondary:hover {
   background-color: #001f3e;
   border-color: #001f3e;
-  color: #fff;
+  color: #ffffff;
 }
 
 .tf-admin-btn.disabled {
@@ -53,7 +59,7 @@ Button
 
 .tf-btn {
   font-size: 1rem;
-  color: #fff;
+  color: #ffffff;
   background-color: #003c79;
   border-radius: 5px;
   -webkit-border-radius: 5px;
@@ -74,7 +80,7 @@ Button
 
 .tf-btn:hover {
   background-color: #002f5e;
-  color: #fff;
+  color: #ffffff;
   border: none;
   box-shadow: none !important;
   outline: none;
@@ -211,7 +217,7 @@ Ajax Loader
   display: inline-block;
   width: 12px;
   height: 12px;
-  border: 2px solid #fff;
+  border: 2px solid #ffffff;
   border-left-color: transparent;
   border-radius: 50%;
   vertical-align: middle;
@@ -352,7 +358,7 @@ Fontawesome
   width: 18px;
   left: 2px;
   bottom: 1px;
-  background-color: white;
+  background: #ffffff;
   -webkit-transition: .4s;
   transition: .4s;
 }
@@ -406,7 +412,7 @@ Fontawesome
   padding: 1px 8px;
   border-radius: 10px;
   background: #333;
-  color: #fff;
+  color: #ffffff;
 }
 
 .tf-depend-hidden.tf-depend-on {
@@ -445,7 +451,7 @@ Fontawesome
 
 .tf-csf-badge .tf-upcoming {
   display: inline-block;
-  color: #fff;
+  color: #ffffff;
   padding: 3px 10px 3px 10px;
   border-radius: 3px;
   text-align: center;
@@ -459,7 +465,7 @@ Fontawesome
 
 .tf-csf-badge .tf-pro {
   display: inline-block;
-  color: #fff;
+  color: #ffffff;
   padding: 3px 10px 3px 10px;
   border-radius: 3px;
   text-align: center;
@@ -485,7 +491,7 @@ Fontawesome
 button.tf-order-remove {
   background: #f44336 !important;
   border: 1px solid #f44336 !important;
-  color: #fff !important;
+  color: #ffffff !important;
   padding: 2px 18px !important;
   font-family: 'lato';
   margin-top: 6px !important;
@@ -507,7 +513,7 @@ button.tf-order-remove {
 
 .document-button:hover {
   background: #135e96;
-  color: #fff;
+  color: #ffffff;
 }
 
 .tf-major-update-warning {
@@ -592,7 +598,7 @@ button.tf-order-remove {
 .tf-license-activate p.submit input {
   background-color: #003C79 !important;
   border-color: #003C79 !important;
-  color: #fff;
+  color: #ffffff;
   padding: 4px 25px;
   font-size: 1rem;
 }
@@ -608,7 +614,7 @@ button.tf-order-remove {
 .el-license-active-btn p.submit input {
   background-color: #003C79 !important;
   border-color: #003C79 !important;
-  color: #fff;
+  color: #ffffff;
   padding: 4px 25px;
   font-size: 1rem;
 }
@@ -656,7 +662,7 @@ body.tourfic-settings_page_tf-setup-wizard {
   cursor: pointer;
   border: 0px solid;
   padding: 12px 32px;
-  color: #FFF;
+  color: #ffffff;
   font-family: Inter;
   font-size: 15px;
   font-style: normal;
@@ -686,7 +692,7 @@ body.tourfic-settings_page_tf-setup-wizard {
 }
 
 .tf-quick-setup-btn:hover {
-  color: #FFF;
+  color: #ffffff;
   box-shadow: 0px 24px 20px 0px rgba(8, 20, 33, 0.08), 0px 8px 16px 0px rgba(8, 20, 33, 0.08), 0px 16px 8px 0px rgba(8, 20, 33, 0.04);
 }
 
@@ -730,7 +736,7 @@ body.tourfic-settings_page_tf-setup-wizard {
 
 .tf-link-skip-btn:hover {
   box-shadow: 0px 24px 20px 0px rgba(8, 20, 33, 0.08), 0px 8px 16px 0px rgba(8, 20, 33, 0.08), 0px 16px 8px 0px rgba(8, 20, 33, 0.04);
-  color: #FFF;
+  color: #ffffff;
 }
 
 .tf-link-skip-btn:hover::after {
@@ -869,7 +875,7 @@ Welcome Step
 
 .tf-setup-content-layout .setup-content-warper {
   border-radius: 16px;
-  background: #FFF;
+  background: #ffffff;
   text-align: center;
   padding: 104px 112px;
 }
@@ -963,7 +969,7 @@ Welcome Step
 
 .tf-setup-content-layout .tf-setup-finish-content {
   border-radius: 16px;
-  background: #FFF;
+  background: #ffffff;
   padding: 56px 32px 96px 32px;
   text-align: center;
 }
@@ -1169,7 +1175,7 @@ Steps
 .tf-setup-step-container .tf-setup-step-layout {
   padding: 56px 96px;
   border-radius: 16px;
-  background: var(--UI-0, #FFF);
+  background: var(--UI-0, #ffffff);
   text-align: center;
   display: -webkit-box;
   display: -moz-box;
@@ -1277,8 +1283,7 @@ Steps
 }
 
 .tf-setup-step-container .tf-select-service label:before {
-  background-color: white;
-  color: white;
+  background: #ffffff #ffffff;
   content: "";
   display: block;
   border-radius: 50%;
@@ -1318,7 +1323,7 @@ Steps
 
 .tf-setup-step-container .tf-select-service label .tf-inactive img:hover {
   border-radius: 12px;
-  background: #FFF;
+  background: #ffffff;
   box-shadow: 0px 10px 16px 0px rgba(0, 36, 72, 0.04), 0px 10px 20px 0px rgba(0, 36, 72, 0.04);
 }
 
@@ -1365,7 +1370,7 @@ Steps
 .tf-setup-step-container .setup-form-group {
   border-radius: 12px;
   border: 1px solid #EEF2F6;
-  background: #FFF;
+  background: #ffffff;
   padding: 16px 24px 24px 24px;
   display: flex;
   flex-direction: column;
@@ -1523,7 +1528,7 @@ Steps
 .tf-setup-step-container .setup-form-group .tf-setup-form-item-inline .tf-setup-form-item-input input[type="text"] {
   height: 32px;
   margin: 0;
-  background: #FFF;
+  background: #ffffff;
 }
 
 .tf-setup-step-container .setup-form-group .tf-field-imageselect {
@@ -1590,7 +1595,7 @@ Steps
 }
 
 .tf-setup-step-container .setup-form-group .tf-archive-imageselect-box .tf-image-checkbox .select-image-box {
-  background-color: #FFFAEB !important;
+  background-color: #ffffff !important;
 }
 
 .tf-setup-step-container .setup-form-group .tf-setup-permalink {
@@ -1700,7 +1705,7 @@ Steps
   display: inline-block;
   width: 12px;
   height: 12px;
-  border: 2px solid #fff;
+  border: 2px solid #ffffff;
   border-left-color: transparent;
   border-radius: 50%;
   vertical-align: middle;
@@ -1842,7 +1847,7 @@ Steps
 }
 
 .tf-admin-meta-box .tf-admin-tab a.tf-tablinks:hover {
-  background-color: #fff;
+  background-color: #ffffff;
   outline: none;
 }
 
@@ -1853,7 +1858,7 @@ Steps
 
 .tf-admin-meta-box .tf-admin-tab a.tf-tablinks.active {
   background-color: #003c79;
-  color: #fff;
+  color: #ffffff;
   position: relative;
 }
 
@@ -1864,7 +1869,7 @@ Steps
 }
 
 .tf-admin-meta-box .tf-admin-tab a.tf-tablinks.active .tf-sec-icon {
-  color: #fff;
+  color: #ffffff;
 }
 
 .tf-admin-meta-box .tf-admin-tab a.tf-tablinks.active::after {
@@ -1872,7 +1877,7 @@ Steps
   content: "";
   height: 10px;
   width: 10px;
-  background: #fff;
+  background: #ffffff;
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   -o-transform: rotate(45deg);
@@ -2007,7 +2012,7 @@ Steps
   -webkit-flex: 0 0 calc(100% - 281px);
   -ms-flex: 0 0 calc(100% - 281px);
   flex: 0 0 calc(100% - 281px);
-  background-color: #fff;
+  background-color: #ffffff;
   padding: 12px 0;
 }
 
@@ -2018,7 +2023,7 @@ Steps
 }
 
 .tf-setting-dashboard .tf-setting-top-bar {
-  background-color: #fff;
+  background-color: #ffffff;
   padding: 15px 40px;
   margin-left: -20px;
   margin-bottom: 30px;
@@ -2039,7 +2044,7 @@ Steps
 .tf-setting-dashboard .tf-setting-top-bar .version span {
   font-size: 11px;
   line-height: 11px;
-  color: #000;
+  color: #060D1C;
   font-weight: 700;
   border: 1px solid #003c79;
   border-radius: 4px;
@@ -2063,7 +2068,7 @@ Steps
   top: 60px;
   right: -10px;
   z-index: 1;
-  background-color: #fff;
+  background-color: #ffffff;
   padding: 30px;
   border-radius: 8px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -2090,7 +2095,7 @@ Steps
 .tf-setting-dashboard .tf-setting-top-bar .other-document .dropdown .list-item a {
   font-size: 15px;
   font-weight: 500;
-  color: #000;
+  color: #060D1C;
   display: flex;
   align-items: center;
   transition: all 0.2s ease;
@@ -2147,7 +2152,7 @@ Steps
 }
 
 .tf-setting-dashboard .tf-setting-banner .tf-setting-banner-content span {
-  color: #fff;
+  color: #ffffff;
   font-size: 38px;
   line-height: 1.2;
   font-weight: 200;
@@ -2187,7 +2192,7 @@ Steps
   font-size: 26px;
   font-weight: 600;
   line-height: 36px;
-  color: #000;
+  color: #060D1C;
   margin: 0 0 10px;
 }
 
@@ -2205,7 +2210,7 @@ Steps
 .tf-setting-dashboard .tf-setting-performace-section .tf-performance-grid .tf-single-performance-grid {
   padding: 20px;
   border-radius: 8px;
-  background-color: #fff;
+  background-color: #ffffff;
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 15px;
@@ -2278,7 +2283,7 @@ Steps
   margin: 0;
   font-size: 30px;
   font-weight: 700;
-  color: #000;
+  color: #060D1C;
   line-height: 0.8;
 }
 
@@ -2312,7 +2317,7 @@ Steps
 }
 
 .tf-setting-dashboard .tf-setting-performace-section .tf-order-report {
-  background: #fff;
+  background: #ffffff;
   padding: 20px;
   border-radius: 10px;
 }
@@ -2351,7 +2356,7 @@ Steps
 }
 
 .tf-settings-help-center .tf-help-center-banner {
-  background-color: #fff;
+  background-color: #ffffff;
   border-radius: 10px;
   margin: 40px 20px 40px 0;
   display: flex;
@@ -2397,7 +2402,7 @@ Steps
 }
 
 .tf-settings-help-center .tf-help-center-banner .tf-help-center-content h2 {
-  color: #000;
+  color: #060D1C;
   font-size: 34px;
   margin: 0;
 }
@@ -2440,7 +2445,7 @@ Steps
 }
 
 .tf-settings-help-center .tf-support-document .tf-single-support {
-  background-color: #fff;
+  background-color: #ffffff;
   border-radius: 10px;
   width: 24%;
   min-height: 270px;
@@ -2475,7 +2480,7 @@ Steps
 .tf-settings-help-center .tf-support-document .tf-single-support a h3 {
   font-size: 20px;
   margin: 0;
-  color: #000;
+  color: #060D1C;
   display: block;
   line-height: 24px;
 }
@@ -2497,12 +2502,12 @@ Steps
 
 .tf-settings-help-center .tf-support-document .tf-single-support a span:hover {
   background-color: #003c79;
-  color: #fff;
+  color: #ffffff;
 }
 
 .tf-settings-help-center .tf-settings-faq {
   margin: 40px 40px 40px 20px;
-  background-color: #fff;
+  background-color: #ffffff;
   border-radius: 10px;
   padding: 40px;
 }
@@ -2512,7 +2517,7 @@ Steps
   font-size: 24px;
   font-weight: 600;
   line-height: 28px;
-  color: #000;
+  color: #060D1C;
 }
 
 .tf-settings-help-center .tf-settings-faq .tf-accordion-wrapper {
@@ -2554,7 +2559,7 @@ Steps
 .tf-settings-help-center .tf-settings-faq .tf-accordion-wrapper .tf-single-faq .tf-faq-title i {
   font-size: 18px;
   margin-right: 10px;
-  color: #000;
+  color: #060D1C;
 }
 
 .tf-settings-help-center .tf-settings-faq .tf-accordion-wrapper .tf-single-faq .tf-faq-title h4 {
@@ -2602,7 +2607,7 @@ Steps
   text-decoration: none;
   font-weight: 600;
   position: relative;
-  background-color: #fff;
+  background-color: #ffffff;
   border-radius: 5px 5px 0px 0px;
 }
 
@@ -2611,7 +2616,7 @@ Steps
   content: "";
   width: 16px;
   height: 16px;
-  background-color: #fff;
+  background-color: #ffffff;
   bottom: -8px;
   left: -5px;
   transform: rotate(45deg);
@@ -2622,7 +2627,7 @@ Steps
   content: "";
   width: 16px;
   height: 16px;
-  background-color: #fff;
+  background-color: #ffffff;
   bottom: -8px;
   right: -5px;
   transform: rotate(45deg);
@@ -2631,7 +2636,7 @@ Steps
 .tf-setting-license .tf-setting-license-tabs ul li.active span {
   display: inline-block;
   padding: 14px 22px;
-  color: #000;
+  color: #060D1C;
   font-size: 18px;
   text-decoration: none;
 }
@@ -2641,7 +2646,7 @@ Steps
 }
 
 .tf-setting-license .tf-setting-license-field {
-  background-color: #fff;
+  background-color: #ffffff;
   border-radius: 8px;
   padding: 0px 20px;
 }
@@ -2653,7 +2658,7 @@ Steps
 .tf-setting-wrapper {
   max-width: 100%;
   margin: 30px 20px 30px 0px;
-  background-color: #fff;
+  background-color: #ffffff;
   border-radius: 10px;
   scroll-margin-top: 100px;
 }
@@ -2664,7 +2669,7 @@ Steps
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #fff;
+  background-color: #ffffff;
   border-radius: 10px 10px 0px 0px;
   position: sticky;
   top: 32px;
@@ -2725,7 +2730,7 @@ Steps
   left: 164px;
   right: 0;
   width: 379px;
-  background-color: #fff;
+  background-color: #ffffff;
   box-sizing: border-box;
   border-radius: 4px;
   min-height: 60px;
@@ -2759,7 +2764,7 @@ Steps
   border-radius: 4px;
   margin: 0;
   text-decoration: none;
-  color: #000;
+  color: #060D1C;
 }
 
 .tf-setting-wrapper .tourfic-settings-header .settings-header-left .tf-setting-search .tf-search-results ul a:focus {
@@ -2843,7 +2848,7 @@ Steps
   z-index: 99999;
   top: 0;
   bottom: 0;
-  background-color: #fff;
+  background-color: #ffffff;
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;
@@ -2875,7 +2880,7 @@ Steps
   -ms-flex-align: center;
   align-items: center;
   text-decoration: none;
-  color: #000;
+  color: #060D1C;
   padding: 18px 30px;
   font-size: 16px;
   text-align: left;
@@ -2905,7 +2910,7 @@ Steps
 }
 
 .tf-setting-wrapper .tf-option-form .tf-option .tf-admin-tab a.tf-tablinks:hover {
-  background-color: #fff;
+  background-color: #ffffff;
   outline: none;
 }
 
@@ -3022,7 +3027,7 @@ Steps
 }
 
 .tf-setting-wrapper .tf-option-form .tf-option .tf-tab-wrapper .tf-mobile-setting a i {
-  color: #000;
+  color: #060D1C;
   font-size: 22px;
 }
 
@@ -3048,7 +3053,7 @@ Steps
 }
 
 .tf-setting-wrapper .tf-option-form .tf-option .tf-tab-wrapper .tf-tab-content > .tf-field {
-  background-color: #fff;
+  background-color: #ffffff;
   margin: 5px 0px;
   border-radius: 8px;
   padding: 20px 30px;
@@ -3069,7 +3074,7 @@ Steps
 }
 
 .tf-shortcode-generator-section {
-  background-color: #fff;
+  background-color: #ffffff;
   padding: 30px;
   border-radius: 8px;
   margin-right: 20px;
@@ -3092,7 +3097,7 @@ Steps
   padding: 20px 30px;
   flex-wrap: wrap;
   flex-direction: row;
-  background-color: #fff;
+  background-color: #ffffff;
   padding: 20px 30px;
   align-items: center;
   border-radius: 5px;
@@ -3136,7 +3141,7 @@ Steps
   margin-left: 15px;
   height: 45px;
   background-color: #003c79;
-  color: #fff;
+  color: #ffffff;
   border: none;
   box-shadow: none !important;
   outline: none;
@@ -3174,7 +3179,7 @@ Steps
   width: 600px;
   margin: 30px auto;
   padding: 30px;
-  background-color: #fff;
+  background-color: #ffffff;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
   border-radius: 10px;
 }
@@ -3283,7 +3288,7 @@ Steps
   height: 36px;
   line-height: 36px;
   background: red;
-  color: #fff;
+  color: #ffffff;
   text-align: center;
   font-size: 20px;
   border-radius: 50%;
@@ -3303,7 +3308,7 @@ Steps
 .tf-shortcode-generator-section .tf-shortcode-generators .tf-sg-form-wrapper .tf-shortcode-generator-form input.tf-shortcode-value {
   width: 100%;
   height: 45px;
-  background: #fff;
+  background: #ffffff;
   padding: 10px 15px;
   border: 1px solid #ccc;
 }
@@ -3390,7 +3395,7 @@ Steps
   margin-bottom: 3px;
   font-weight: 600;
   font-size: 16px;
-  color: #000;
+  color: #060D1C;
   display: flex !important;
   align-items: center;
   line-height: 20px;
@@ -3463,8 +3468,8 @@ Steps
 .tf-field-ical input:focus,
 .tf-field-ical_export input:focus,
 .tf-field-text input:focus, .tf-field-password input:focus {
-  background: #FFFFFF;
-  box-shadow: 0 0 0 2px #2979ff;
+  background: #ffffff;
+  box-shadow: 0 0 0 2px #0E3DD8;
   border-radius: 4px;
 }
 
@@ -3533,8 +3538,8 @@ Steps
 }
 
 .tf-field-textarea textarea:focus {
-  background: #FFFFFF;
-  box-shadow: 0 0 0 2px #2979ff;
+  background: #ffffff;
+  box-shadow: 0 0 0 2px #0E3DD8;
   border-radius: 4px;
 }
 
@@ -3697,7 +3702,7 @@ Steps
 }
 
 .tf-field-select2 .tf-popup-box .tf-add-category-box .tf-add-category-box-header .tf-add-category-box-close i {
-  color: #fff;
+  color: #ffffff;
 }
 
 .tf-field-select2 .tf-popup-box .tf-add-category-box .tf-add-category-box-content {
@@ -3789,7 +3794,7 @@ Steps
   content: "";
   height: 14px;
   width: 14px;
-  background-color: #2979ff;
+  background-color: #0E3DD8;
   border-radius: 100%;
   position: absolute;
   top: 4px;
@@ -3814,7 +3819,7 @@ Steps
 }
 
 .tf-field-radio .tf-fieldset input[type=radio]:checked + label:before {
-  border-color: #2979ff;
+  border-color: #0E3DD8;
 }
 
 .tf-field-checkbox .tf-fieldset ul li {
@@ -3918,7 +3923,7 @@ Steps
   position: absolute;
   top: -10px;
   right: -10px;
-  background: #fff;
+  background: #ffffff;
   padding: 2px;
   cursor: pointer;
   border-radius: 50%;
@@ -3938,7 +3943,7 @@ Steps
 }
 
 .tf-field-image .tf-fieldset .tf-fieldset-media-preview:not(:empty) .tf-image-close img {
-  background: #fff;
+  background: #ffffff;
   width: 11px !important;
 }
 
@@ -3990,7 +3995,7 @@ Steps
   height: 48px;
   color: #363e4a;
   font-size: 14px;
-  background: #fff;
+  background: #ffffff;
   border: 1px solid #c4cbd4;
   white-space: nowrap;
   overflow: hidden;
@@ -4050,7 +4055,7 @@ Steps
   border-color: #F44336;
   background: #F44336;
   margin-left: 5px;
-  color: #fff;
+  color: #ffffff;
   display: none;
 }
 
@@ -4083,13 +4088,13 @@ Steps
   align-items: center;
   -webkit-justify-content: center;
   justify-content: center;
-  background-color: #2979ff;
-  color: #fff;
+  background-color: #0E3DD8;
+  color: #ffffff;
   border-radius: 4px;
 }
 
 .tf-field-heading .tf-field-heading-inner .tf-field-heading-content {
-  color: #000;
+  color: #060D1C;
   font-size: 14px;
   font-weight: 600;
 }
@@ -4144,7 +4149,7 @@ Steps
 }
 
 .tf-field-notice-inner.tf-notice-success .tf-field-notice-icon {
-  color: #43a047;
+  color: #198754;
 }
 
 .tf-field-notice-inner.tf-notice-warning {
@@ -4162,7 +4167,7 @@ Steps
 }
 
 .tf-field-notice-inner.tf-notice-danger .tf-field-notice-icon {
-  color: #f44336;
+  color: #dc3545;
 }
 
 .tour-option-itinerary-notice .tf-field-notice-content {
@@ -4182,7 +4187,7 @@ Steps
 }
 
 .tf-pro-notice .tf-field-notice-inner .tf-field-notice-content {
-  color: #000E3D;
+  color: #060D1C;
   font-size: 14px;
   line-height: 1.6;
   align-self: center;
@@ -4241,7 +4246,7 @@ Steps
 }
 
 .tf-field-switch .tf-switch-label .tf-switch-slider .tf-switch-on, .tf-field-switch .tf-switch-label .tf-switch-slider .tf-switch-off {
-  color: #fff;
+  color: #ffffff;
   position: absolute;
   -webkit-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
@@ -4271,7 +4276,7 @@ Steps
 .tf-field-switch .tf-switch-label input:checked + .tf-switch-slider:before {
   left: 100%;
   margin-left: -24px;
-  background-color: #fff;
+  background-color: #ffffff;
   filter: drop-shadow(0px 2px 4px rgba(12, 31, 49, 0.12));
 }
 
@@ -4313,8 +4318,8 @@ Steps
 }
 
 .tf-field-date input:focus {
-  background: #FFFFFF;
-  box-shadow: 0 0 0 2px #2979ff;
+  background: #ffffff;
+  box-shadow: 0 0 0 2px #0E3DD8;
   border-radius: 4px;
 }
 
@@ -4370,8 +4375,8 @@ Steps
 }
 
 .tf-field-time input:focus {
-  background: #FFFFFF;
-  box-shadow: 0 0 0 2px #2979ff;
+  background: #ffffff;
+  box-shadow: 0 0 0 2px #0E3DD8;
   border-radius: 4px;
 }
 
@@ -4448,7 +4453,7 @@ Steps
 .tf-repeater .tf-repeater-header .tf-repeater-icon-move:hover {
   background-color: #c4daff;
   transition: 0.4s;
-  color: #2979ff;
+  color: #0E3DD8;
 }
 
 .tf-repeater .tf-repeater-header .tf-repeater-icon-clone {
@@ -4458,7 +4463,7 @@ Steps
 .tf-repeater .tf-repeater-header .tf-repeater-icon-clone:hover {
   background-color: #c4daff;
   transition: 0.4s;
-  color: #2979ff;
+  color: #0E3DD8;
 }
 
 .tf-repeater .tf-repeater-header .tf-repeater-icon-delete {
@@ -4468,7 +4473,7 @@ Steps
 .tf-repeater .tf-repeater-header .tf-repeater-icon-delete:hover {
   background-color: #fccbc8;
   transition: 0.4s;
-  color: #f44336;
+  color: #dc3545;
 }
 
 .tf-repeater .tf-repeater-header .tf-repeater-title {
@@ -4489,7 +4494,7 @@ Steps
 
 .tf-repeater .tf-repeater-content-wrap {
   border: 1px solid #F0F2F4;
-  background-color: #fff;
+  background-color: #ffffff;
   padding: 10px 24px;
   box-shadow: 0px 5px 10px 1px #f5f5f5;
   overflow: hidden;
@@ -4516,7 +4521,7 @@ Steps
   border-radius: 4px;
   font-size: 16px;
   font-weight: 600;
-  color: #fff;
+  color: #ffffff;
   letter-spacing: 0.5px;
 }
 
@@ -4658,7 +4663,7 @@ Steps
 .tf-field-color .tf-fieldset ul.tf-inline li {
   display: flex;
   justify-content: space-between;
-  background-color: #fff;
+  background-color: #ffffff;
   margin: 10px 0px;
   border-radius: 8px;
   padding: 20px 30px 13px 30px;
@@ -4673,7 +4678,7 @@ Steps
 .tf-field-color .tf-fieldset ul.tf-inline li > label {
   font-weight: 600;
   font-size: 16px;
-  color: #000;
+  color: #060D1C;
   width: 45%;
   margin-top: 5px;
 }
@@ -4731,10 +4736,10 @@ Steps
   right: 0;
   width: 20px;
   height: 20px;
-  background: #FFFFFF;
+  background: #ffffff;
   box-shadow: 0px 8px 16px rgba(90, 91, 106, 0.08);
   border-radius: 8px;
-  color: #f44336;
+  color: #dc3545;
   font-size: 14px;
   text-align: center;
   line-height: 20px;
@@ -4758,7 +4763,7 @@ Steps
   max-width: 720px;
   padding: 12px 8px 12px 12px;
   border: none;
-  background: #fff;
+  background: #ffffff;
   border-radius: 4px;
   height: 48px;
   color: #363e4a;
@@ -4766,8 +4771,8 @@ Steps
 }
 
 #tf-icon-modal .tf-modal-content .tf-icon-search input.tf-icon-search-input:focus {
-  background: #FFFFFF;
-  box-shadow: 0 0 0 2px #2979ff;
+  background: #ffffff;
+  box-shadow: 0 0 0 2px #0E3DD8;
   border-radius: 4px;
 }
 
@@ -4830,8 +4835,8 @@ Steps
 }
 
 #tf-icon-modal .tf-modal-content .tf-icon-wrapper ul.tf-icon-tab-list li.active {
-  background: #2979ff;
-  color: #fff;
+  background: #0E3DD8;
+  color: #ffffff;
 }
 
 #tf-icon-modal .tf-modal-content .tf-icon-wrapper .tf-icon-tab-content {
@@ -4856,7 +4861,7 @@ Steps
 }
 
 #tf-icon-modal .tf-modal-content .tf-icon-wrapper .tf-icon-tab-content .tf-icon-tab-pane ul.tf-icon-list li {
-  background: #fff;
+  background: #ffffff;
   font-size: 24px;
   border-radius: 4px;
   cursor: pointer;
@@ -4900,7 +4905,7 @@ Steps
 }
 
 #tf-icon-modal .tf-modal-content .tf-icon-wrapper .tf-icon-tab-content .tf-icon-tab-pane ul.tf-icon-list li .tf-icon-inner span.check-icon i {
-  color: #fff;
+  color: #ffffff;
   opacity: 0;
   transition: all 0.3s ease;
 }
@@ -4918,8 +4923,8 @@ Steps
 }
 
 #tf-icon-modal .tf-modal-content .tf-icon-wrapper .tf-icon-tab-content .tf-icon-tab-pane ul.tf-icon-list li.active .tf-icon-inner span.check-icon {
-  border-color: #2979ff;
-  background-color: #2979ff;
+  border-color: #0E3DD8;
+  background-color: #0E3DD8;
   opacity: 1;
 }
 
@@ -4942,13 +4947,13 @@ Steps
 }
 
 #tf-icon-modal .tf-modal-content .tf-icon-wrapper .tf-icon-tab-content .tf-icon-tab-pane ul.tf-icon-list::-webkit-scrollbar-thumb:hover {
-  background: #2979ff;
+  background: #0E3DD8;
 }
 
 #tf-icon-modal .tf-modal-content .tf-modal-footer {
   padding: 24px;
   margin: 0 -30px -30px;
-  background: #FFFFFF;
+  background: #ffffff;
   border-top: 1px solid #e1e5ea;
   box-shadow: 0px -4px 16px rgba(137, 151, 169, 0.2);
   text-align: right;
@@ -4970,8 +4975,8 @@ Steps
 }
 
 .tf-field-number input:focus {
-  background: #FFFFFF;
-  box-shadow: 0 0 0 2px #2979ff;
+  background: #ffffff;
+  box-shadow: 0 0 0 2px #0E3DD8;
   border-radius: 4px;
 }
 
@@ -5060,7 +5065,7 @@ a.tf-import-btn, a.tf-export-btn {
   right: -2px;
   background-color: #295BFF;
   padding: 3px 10px;
-  color: #fff;
+  color: #ffffff;
   font-size: 12px;
   font-weight: 600;
   line-height: 13px;
@@ -5145,7 +5150,7 @@ a.tf-import-btn, a.tf-export-btn {
   display: inline-block;
   width: 18px;
   height: 18px;
-  border: 2px solid #000;
+  border: 2px solid #060D1C;
   border-left-color: transparent;
   border-radius: 50%;
   vertical-align: middle;
@@ -5198,7 +5203,7 @@ a.tf-import-btn, a.tf-export-btn {
 }
 
 .tf-backend-booking-card-wrap {
-  background: #fff;
+  background: #ffffff;
   margin-right: 20px;
   border-radius: 6px;
   margin-bottom: 30px;
@@ -5208,7 +5213,7 @@ a.tf-import-btn, a.tf-export-btn {
   margin: 0;
   padding: 15px 24px;
   background-color: #003c7a;
-  color: #fff;
+  color: #ffffff;
   border-radius: 6px 6px 0 0;
 }
 
@@ -5272,7 +5277,7 @@ a.tf-import-btn, a.tf-export-btn {
 .tf_booking_details_wrap .tf_booking_wrap_header .tf_header_wrap_button .tf_booking_views_button {
   border-radius: 8px;
   border: 1px solid #EEF6F0;
-  background: #FFF;
+  background: #ffffff;
   padding: 4px 8px;
   float: left;
   height: 46px;
@@ -5310,7 +5315,7 @@ a.tf-import-btn, a.tf-export-btn {
   padding: 10px 32px;
   border-radius: 8px;
   border: 1px solid #003C79;
-  background: #FFF;
+  background: #ffffff;
   margin: 0 !important;
   color: #003C79;
   font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
@@ -5368,7 +5373,7 @@ a.tf-import-btn, a.tf-export-btn {
 
 .tf_booking_details_wrap .tf-booking-calendar-popup-box .tf-calendar-popup-box {
   border-radius: 8px;
-  background: #FFF;
+  background: #ffffff;
   box-shadow: 0px 8px 30px 0px rgba(16, 40, 20, 0.1);
   padding: 16px 24px;
   width: 750px;
@@ -5443,7 +5448,7 @@ a.tf-import-btn, a.tf-export-btn {
 
 .tf_booking_details_wrap #tf-booking-calendar {
   border-radius: 16px;
-  background: #FFF;
+  background: #ffffff;
   padding: 24px;
   padding-top: 30px;
   position: relative;
@@ -5461,7 +5466,7 @@ a.tf-import-btn, a.tf-export-btn {
   width: 40px;
   border-radius: 8px;
   border: 0.2px solid #003c7929;
-  background: #FFF;
+  background: #ffffff;
   padding: 0;
   transition: .3s all ease;
 }
@@ -5477,7 +5482,7 @@ a.tf-import-btn, a.tf-export-btn {
 }
 
 .tf_booking_details_wrap #tf-booking-calendar .fc-header-toolbar .fc-toolbar-chunk:nth-child(1) > div button:hover span::before {
-  color: #fff;
+  color: #ffffff;
 }
 
 .tf_booking_details_wrap #tf-booking-calendar .fc-header-toolbar .fc-toolbar-chunk:nth-child(1) > div button span {
@@ -5520,14 +5525,14 @@ a.tf-import-btn, a.tf-export-btn {
 .tf_booking_details_wrap #tf-booking-calendar .fc-header-toolbar .fc-toolbar-chunk:nth-child(3) .fc-button-group {
   border-radius: 24px;
   border: 1px solid #003c7929;
-  background: #FFF;
+  background: #ffffff;
   padding: 4px;
   display: flex;
   gap: 8px;
 }
 
 .tf_booking_details_wrap #tf-booking-calendar .fc-header-toolbar .fc-toolbar-chunk:nth-child(3) .fc-button-group button {
-  background: #FFF;
+  background: #ffffff;
   color: #131c25;
   font-size: 15px;
   font-style: normal;
@@ -5919,7 +5924,7 @@ a.tf-import-btn, a.tf-export-btn {
 .tf_booking_details_wrap .tf-calendar-booking-header-filter .tf-left-search-filter .tf-filter-options span.select2 {
   height: 48px;
   border-radius: 6px;
-  background: #FFF;
+  background: #ffffff;
   box-shadow: 0px 8px 20px 0px rgba(29, 35, 39, 0.06);
   min-width: 160px !important;
 }
@@ -5970,7 +5975,7 @@ a.tf-import-btn, a.tf-export-btn {
   padding: 10px 32px;
   border-radius: 8px;
   border: 1px solid #003C79;
-  background: #FFF;
+  background: #ffffff;
   box-shadow: 0px 8px 20px 0px rgba(29, 35, 39, 0.06);
   color: #003C79;
   font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
@@ -6040,7 +6045,7 @@ a.tf-import-btn, a.tf-export-btn {
 .tf_booking_details_wrap .tf-calendar-booking-header-filter .tf-enquiry-right-search-filter {
   border-radius: 8px;
   border: 1px solid #87888B;
-  background: #FFF;
+  background: #ffffff;
   box-shadow: 0px 8px 20px 0px rgba(29, 35, 39, 0.06);
   padding: 8px 16px;
   display: flex;
@@ -6158,7 +6163,7 @@ a.tf-import-btn, a.tf-export-btn {
 }
 
 .tf_booking_details_wrap .tf-order-table-responsive .wp-list-table thead tr th .tf-checkbox-listing:hover input, .tf_booking_details_wrap .tf-order-table-responsive .wp-list-table thead tr td .tf-checkbox-listing:hover input {
-  background-color: #FFFFFF;
+  background-color: #ffffff;
 }
 
 .tf_booking_details_wrap .tf-order-table-responsive .wp-list-table thead tr th .tf-checkbox-listing input, .tf_booking_details_wrap .tf-order-table-responsive .wp-list-table thead tr td .tf-checkbox-listing input {
@@ -6182,7 +6187,7 @@ a.tf-import-btn, a.tf-export-btn {
   font-style: normal;
   font-weight: 600;
   line-height: 18px;
-  background-color: #fff;
+  background-color: #ffffff;
   border-bottom: 1px solid #F0F0F1;
   text-align: left;
 }
@@ -6205,7 +6210,7 @@ a.tf-import-btn, a.tf-export-btn {
 .tf_booking_details_wrap .tf-order-table-responsive .wp-list-table tbody tr th .tf-checkbox-listing, .tf_booking_details_wrap .tf-order-table-responsive .wp-list-table tbody tr td .tf-checkbox-listing {
   height: 28px;
   width: 28px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   border-radius: 8px;
   display: flex;
   align-items: center;
@@ -6218,7 +6223,7 @@ a.tf-import-btn, a.tf-export-btn {
 }
 
 .tf_booking_details_wrap .tf-order-table-responsive .wp-list-table tbody tr th .tf-checkbox-listing:hover input, .tf_booking_details_wrap .tf-order-table-responsive .wp-list-table tbody tr td .tf-checkbox-listing:hover input {
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   box-shadow: none;
 }
 
@@ -6245,13 +6250,13 @@ a.tf-import-btn, a.tf-export-btn {
 }
 
 .tf_booking_details_wrap .tf-order-table-responsive .wp-list-table tbody tr th .checkinout.checkout, .tf_booking_details_wrap .tf-order-table-responsive .wp-list-table tbody tr td .checkinout.checkout {
-  background: #FFFAEB;
+  background: #ffffff;
   color: #B54708;
 }
 
 .tf_booking_details_wrap .tf-order-table-responsive .wp-list-table tbody tr th a.tf_booking_details_view, .tf_booking_details_wrap .tf-order-table-responsive .wp-list-table tbody tr td a.tf_booking_details_view {
   border-radius: 8px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   display: inline-flex;
   padding: 10px;
   transition: .3s all ease;
@@ -6279,7 +6284,7 @@ a.tf-import-btn, a.tf-export-btn {
 
 .tf_booking_details_wrap .tf-order-table-responsive .wp-list-table tfoot tr th .tf-booking-details-pagination li {
   border-right: 1px solid #F0F0F1;
-  background: #FFF;
+  background: #ffffff;
 }
 
 .tf_booking_details_wrap .tf-order-table-responsive .wp-list-table tfoot tr th .tf-booking-details-pagination li a {
@@ -6319,7 +6324,7 @@ a.tf-import-btn, a.tf-export-btn {
 }
 
 .tf_booking_details_wrap .tf-order-table-responsive .wp-list-table tfoot tr th .tf-booking-details-pagination li.active a {
-  color: #fff;
+  color: #ffffff;
 }
 
 .select2-dropdown.tf-booking-filter-modal,
@@ -6362,8 +6367,8 @@ a.tf-import-btn, a.tf-export-btn {
   line-height: 24px;
   margin-bottom: 4px;
   padding: 8px 16px;
-  background-color: #fff;
-  background: #FFF;
+  background-color: #ffffff;
+  background: #ffffff;
   cursor: pointer;
   border-radius: 6px;
   transition: .3s all ease;
@@ -6385,7 +6390,7 @@ a.tf-import-btn, a.tf-export-btn {
 }
 
 .select2-dropdown.tf-booking-checkinout-filter-modal .select2-results ul li:last-child {
-  background: #FFFAEB;
+  background: #ffffff;
   color: #B54708;
 }
 
@@ -6488,7 +6493,7 @@ a.tf-import-btn, a.tf-export-btn {
 
 .tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-details .details-box {
   border-radius: 8px;
-  background: #FFF;
+  background: #ffffff;
   box-shadow: 0px 8px 20px 0px rgba(29, 35, 39, 0.1);
   padding: 24px;
   margin-top: 24px;
@@ -6659,7 +6664,7 @@ a.tf-import-btn, a.tf-export-btn {
   width: 268px;
   padding: 24px;
   border-radius: 8px;
-  background: #FFF;
+  background: #ffffff;
   margin-top: 24px;
 }
 
@@ -6722,8 +6727,8 @@ a.tf-import-btn, a.tf-export-btn {
   color: #1D2327;
   margin: 0px 8px 4px 8px;
   padding: 8px 16px;
-  background-color: #fff;
-  background: #FFF;
+  background-color: #ffffff;
+  background: #ffffff;
   cursor: pointer;
   font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
   font-size: 16px;
@@ -6749,7 +6754,7 @@ a.tf-import-btn, a.tf-export-btn {
 }
 
 .tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-actions .tf-filter-selection .tf-order-status-filter ul li.checkout {
-  background: #FFFAEB;
+  background: #ffffff;
   color: #B54708;
 }
 
@@ -6760,7 +6765,7 @@ a.tf-import-btn, a.tf-export-btn {
 .tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-actions .tf-filter-selection .tf-refund-btn a {
   border-radius: 8px;
   border: 1px solid #003C79;
-  background: #FFF;
+  background: #ffffff;
   box-shadow: 0px 8px 20px 0px rgba(29, 35, 39, 0.06);
   text-decoration: none;
   color: #003C79;
@@ -6796,7 +6801,7 @@ a.tf-import-btn, a.tf-export-btn {
 .visitor-details-edit-form .visitor-details-edit-popup {
   border-radius: 24px;
   border: 1px solid #f0f0f1;
-  background: #fff;
+  background: #ffffff;
   position: fixed;
   left: 50%;
   top: 25%;
@@ -6825,7 +6830,7 @@ a.tf-import-btn, a.tf-export-btn {
 .visitor-details-edit-form .visitor-details-edit-popup .tf-visitor-details-edit-header .tf-booking-times span {
   height: 24px;
   width: 24px;
-  background: #fff;
+  background: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -6950,7 +6955,7 @@ a.tf-import-btn, a.tf-export-btn {
 .tf-voucher-quick-view-box .voucher-quick-view {
   border-radius: 24px;
   border: 1px solid #f0f0f1;
-  background: #fff;
+  background: #ffffff;
   position: fixed;
   left: 50%;
   top: 25%;
@@ -6979,7 +6984,7 @@ a.tf-import-btn, a.tf-export-btn {
 .tf-voucher-quick-view-box .voucher-quick-view .tf-voucher-details-preview-header .tf-quick-view-times span {
   height: 24px;
   width: 24px;
-  background: #fff;
+  background: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -7156,7 +7161,7 @@ a.tf-import-btn, a.tf-export-btn {
 .tf_enquiry_details_wrap_header .tf_header_wrap_button .tf_booking_views_button {
   border-radius: 8px;
   border: 1px solid #EEF6F0;
-  background: #FFF;
+  background: #ffffff;
   padding: 4px 8px;
   float: left;
   height: 46px;
@@ -7194,7 +7199,7 @@ a.tf-import-btn, a.tf-export-btn {
   padding: 10px 32px;
   border-radius: 8px;
   border: 1px solid #003C79;
-  background: #FFF;
+  background: #ffffff;
   margin: 0 !important;
   color: #003C79;
   font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
@@ -7361,7 +7366,7 @@ a.tf-import-btn, a.tf-export-btn {
 
 .tf-enquiry-single-header-details {
   padding: 16px 24px;
-  background-color: #fff;
+  background-color: #ffffff;
   width: 100%;
   display: flex;
   gap: 16px;
@@ -7397,7 +7402,7 @@ hr.enqury-single-title-line {
 
 .tf-single-enquiry-header-buttons .tf-enquiry-single-back-button {
   padding: 8px 20px 8px 16px;
-  background-color: #fff;
+  background-color: #ffffff;
   max-width: 60px;
   font-size: 15px;
   color: #2C273F;
@@ -7426,7 +7431,7 @@ hr.enqury-single-title-line {
   cursor: pointer;
   background-color: #003c79;
   border-color: #003c79;
-  color: #fff;
+  color: #ffffff;
   transition: all .3s ease-in-out;
   user-select: none;
 }
@@ -7434,7 +7439,7 @@ hr.enqury-single-title-line {
 .tf-single-enquiry-header-buttons .tf-enquiry-single-sync:hover {
   background-color: #001f3e;
   border-color: #001f3e;
-  color: #fff;
+  color: #ffffff;
 }
 
 .tf-enquiry-single-details-wrapper {
@@ -7450,7 +7455,7 @@ hr.enqury-single-title-line {
 }
 
 .tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-enquiry-details {
-  background-color: #fff;
+  background-color: #ffffff;
   padding: 16px 0px 24px 0px;
   border-radius: 8px;
   min-height: 286px;
@@ -7515,7 +7520,7 @@ hr.enqury-single-title-line {
   border-color: #003c79;
   border-radius: 8px;
   align-self: self-end;
-  color: #fff;
+  color: #ffffff;
   font-size: 15px;
   cursor: pointer;
 }
@@ -7523,7 +7528,7 @@ hr.enqury-single-title-line {
 .tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-reply-another-mail-button:hover {
   background-color: #001f3e;
   border-color: #001f3e;
-  color: #fff;
+  color: #ffffff;
 }
 
 .tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-reply-another-mail-button span {
@@ -7544,7 +7549,7 @@ hr.enqury-single-title-line {
   border-color: #003c79;
   border-radius: 8px;
   align-self: self-end;
-  color: #fff;
+  color: #ffffff;
   font-size: 15px;
   cursor: pointer;
 }
@@ -7552,7 +7557,7 @@ hr.enqury-single-title-line {
 .tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-single-enquiry-reply-mail-button:hover {
   background-color: #001f3e;
   border-color: #001f3e;
-  color: #fff;
+  color: #ffffff;
 }
 
 .tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-single-enquiry-reply-mail-button span {
@@ -7670,7 +7675,7 @@ hr.enqury-single-title-line {
   padding: 8px 20px;
   background-color: #003c79;
   border-color: #003c79;
-  color: #fff;
+  color: #ffffff;
   font-family: inherit;
   font-size: 15px;
   font-style: normal;
@@ -7688,7 +7693,7 @@ hr.enqury-single-title-line {
 .tf-enquiry-single-details-wrapper .tf-single-enquiry-left #tf-single-enquiry-reply-form .tf-enquiry-reply-button:hover {
   background-color: #001f3e;
   border-color: #001f3e;
-  color: #fff;
+  color: #ffffff;
 }
 
 .tf-enquiry-single-details-wrapper .tf-single-enquiry-right {
@@ -7696,7 +7701,7 @@ hr.enqury-single-title-line {
 }
 
 .tf-enquiry-single-details-wrapper .tf-single-enquiry-right .tf-enquiry-single-log-details {
-  background-color: #fff;
+  background-color: #ffffff;
   padding: 16px 0px 24px 0px;
   border-radius: 8px;
 }

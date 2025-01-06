@@ -4,7 +4,7 @@ Button
 .tf-admin-btn {
     display: inline-flex;
     @include align-items(center);
-    background-color: #fff;
+    background-color: $color-white;
     padding: 7px 22px;
     border: 1px solid #003c79;
     border-radius: 4px;
@@ -20,7 +20,7 @@ Button
     &.tf-btn-secondary {
         background-color: #003c79;
         border-color: #003c79;
-        color: #fff;
+        color: $color-white;
         font-weight: 600;
     }
     //disabled
@@ -126,7 +126,7 @@ Custom Modal
                 text-align: center;
                 background-color: rgba(0, 0, 0, 0.6);
                 border-radius: 50%;
-                color: #fff;
+                color: $color-white;
             }
 
             /*&:hover{
@@ -179,7 +179,7 @@ Ajax Loader
     display: inline-block;
     width: 12px;
     height: 12px;
-    border: 2px solid #fff;
+    border: 2px solid $color-white;
     border-left-color: transparent;
     border-radius: 50%;
     vertical-align: middle;
@@ -226,7 +226,7 @@ Notice
         h6 {
             margin: 0;
             font-weight: 500;
-            color: $slate80;
+            color: $color-heading;
             font-size: 16px;
         }
 
@@ -242,7 +242,7 @@ Notice
         background-color: $green0;
 
         .tf-notice-icon {
-            color: $green60;
+            color: $color-success;
         }
     }
     &.tf-notice-warning {
@@ -258,7 +258,7 @@ Notice
         background-color: $red0;
 
         .tf-notice-icon {
-            color: $red60;
+            color: $color-error;
         }
     }
 
@@ -278,7 +278,7 @@ Notice
     display: none;
     .tf-refund-box-content{
         width: 450px;
-        background-color: #fff;
+        background-color: $color-white;
         padding: 24px;
         border-radius: 8px;
         text-align: center;
@@ -309,7 +309,7 @@ Notice
                 font-weight: 500;
                 line-height: 150%;
                 cursor: pointer;
-                color: #fff;
+                color: $color-white;
                 transition: .3s all ease;
                 &:hover{
                     background: #094C90;
@@ -319,7 +319,7 @@ Notice
                     color: #566676;
                     &:hover{
                         background: #0274be;
-                        color: #fff;
+                        color: $color-white;
                     }
                 }
             }

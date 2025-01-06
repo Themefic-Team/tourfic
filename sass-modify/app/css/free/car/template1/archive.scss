@@ -10,7 +10,7 @@
         .tf-banner-content{
             height: 100%;
             h1{
-                color: #FFF;
+                color: $color-white;
                 text-align: center;
                 font-size: 38px;
                 font-weight: 700;
@@ -56,7 +56,7 @@
                         &.active{
                             background-color: #0866C4;
                             i{
-                                color: #FFFFFF;
+                                color: $color-white;
                             }
                         }
                     }
@@ -230,7 +230,7 @@
                     .al-range-slider__knob{
                         border-radius: 12px;
                         border: 1.5px solid #C0CCD8 !important;
-                        background: #FFF !important;
+                        background: $color-white !important;
                         width: 24px;
                         height: 24px;
                     }
@@ -256,7 +256,7 @@
                                 li{
                                     width: calc(33% - 5px);
                                     label{
-                                        background: #FFF;
+                                        background: $color-white;
                                         border-radius: 8px;
                                         margin: 0;
                                         padding: 0;
@@ -270,7 +270,7 @@
                                     &.active{
                                         label{
                                             background: #0866C4;
-                                            color: #fff;
+                                            color: $color-white;
                                         }
                                     }
                                 }

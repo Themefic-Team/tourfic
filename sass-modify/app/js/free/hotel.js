@@ -195,7 +195,7 @@
                     $this.block({
                         message: null,
                         overlayCSS: {
-                            background: "#fff",
+                            background: "$color-white",
                             opacity: .5
                         }
                     });
@@ -690,7 +690,7 @@
                     $this.block({
                         message: null,
                         overlayCSS: {
-                            background: "#fff",
+                            background: "$color-white",
                             opacity: .5
                         }
                     });

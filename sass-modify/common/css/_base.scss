@@ -28,7 +28,7 @@ body{
 table.tf-table {
     border-collapse: collapse;
     width: 100%;
-    background-color: #fff;
+    background-color: $color-white;
     box-shadow: 0px 13px 30px 0px #E0E8EE;
     border-radius: $tf-brds-default;
     @media #{$tfmax767}{
@@ -58,8 +58,8 @@ table.tf-table {
 
 // Buttons
 .tf-btn-normal{
-    color: $color-theme !important;
-    background-color: #fff !important;
+    color: $color-primary !important;
+    background-color: $color-white !important;
     padding: 12px 24px;
     text-decoration: none;
     border-radius: $tf-brds-default;
@@ -71,24 +71,25 @@ table.tf-table {
     border: 0px !important;
     cursor: pointer;
     &:hover{
-        background: $color-hover-normal;
+        background: $color-primary;
+        color: $color-white;
     }
     &.btn-primary:hover{
-        background-color: $color-hover-primary;
-        color: #fff;
+        background-color: $color-secondary;
+        color: $color-white;
         transition: all .6s ease;
     }
     &.btn-secondary:hover{
-        background-color: $color-hover-secondary;
+        background-color: $color-primary;
     }
 }
 .btn-primary{
-    background-color: $color-theme !important;
-    color: #fff !important;
+    background-color: $color-primary !important;
+    color: $color-white !important;
 }
 .btn-secondary{
-    background-color: $color-theme-light !important;
-    color: $color-black !important;
+    background-color: $color-white !important;
+    color: $color-heading !important;
 }
 .tf-list {
     list-style: none;
@@ -97,7 +98,7 @@ table.tf-table {
         margin-top: 12px;
         list-style: none;
         i{
-            color: $color-theme;
+            color: $color-primary;
             width: 24px;
         }
     }
@@ -181,7 +182,7 @@ table.tf-table {
 
 //Tourfi Base classes
 .tf-box-wrapper{
-    background-color: #fff;
+    background-color: $color-white;
     border-radius: 5px;
 }
 .tf-box{

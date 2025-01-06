@@ -4,7 +4,7 @@ Button
 .tf-admin-btn {
   display: inline-flex;
   @include align-items(center);
-  background-color: #fff;
+  background-color: $color-white;
   color: #003c79;
   padding: 10px 25px;
   border: 1px solid #003c79;
@@ -22,19 +22,19 @@ Button
 
   &:hover {
     background-color: #003c79;
-    color: #fff;
+    color: $color-white;
   }
 
   &.tf-btn-secondary {
     background-color: #003c79;
     border-color: #003c79;
-    color: #fff;
+    color: $color-white;
     font-weight: 600;
 
     &:hover {
       background-color: #001f3e;
       border-color: #001f3e;
-      color: #fff;
+      color: $color-white;
     }
   }
 
@@ -47,7 +47,7 @@ Button
 }
 .tf-btn{
   font-size: 1rem;
-  color: #fff;
+  color: $color-white;
   background-color: #003c79;
   border-radius: 5px;
   -webkit-border-radius: 5px;
@@ -66,7 +66,7 @@ Button
   outline: none;
   &:hover{
     background-color: #002f5e;
-    color: #fff;
+    color: $color-white;
     border: none;
     box-shadow: none !important;
     outline: none;
@@ -176,7 +176,7 @@ Ajax Loader
   display: inline-block;
   width: 12px;
   height: 12px;
-  border: 2px solid #fff;
+  border: 2px solid $color-white;
   border-left-color: transparent;
   border-radius: 50%;
   vertical-align: middle;
@@ -308,7 +308,7 @@ Fontawesome
   width: 18px;
   left: 2px;
   bottom: 1px;
-  background-color: white;
+  background: $color-white;
   -webkit-transition: .4s;
   transition: .4s;
 }

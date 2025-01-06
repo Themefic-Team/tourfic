@@ -51,7 +51,7 @@
         content: "";
         height: 14px;
         width: 14px;
-        background-color: $blue60;
+        background-color: $color-primary;
         border-radius: 100%;
         position: absolute;
         top: 4px;
@@ -68,7 +68,7 @@
         }
 
         & + label:before {
-          border-color: $blue60;
+          border-color: $color-primary;
         }
       }
     }

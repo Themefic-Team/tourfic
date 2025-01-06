@@ -13,8 +13,8 @@
         font-size: 14px;
 
         &:focus {
-            background: #FFFFFF;
-            box-shadow: 0 0 0 2px $blue60;
+            background: $color-white;
+            box-shadow: 0 0 0 2px $color-primary;
             border-radius: 4px;
         }
 

@@ -71,7 +71,7 @@ h3.section-heading {
 }
 .fancybox-navigation .fancybox-button--arrow_left > div,
 .fancybox-navigation .fancybox-button--arrow_right > div{
-    background-color: #000;
+    background-color: $color-heading;
 }
 .tf-tooltip {
     position: relative;
@@ -80,7 +80,7 @@ h3.section-heading {
         left: 50%;
         transform: translate(-50%, -74%);
         padding: 10px 10px;
-        color: #FFFFFF;
+        color: $color-white;
         background-color: #333333;
         font-weight: normal;
         font-size: 12px;
@@ -125,7 +125,7 @@ h3.section-heading {
 }
 .tf_button {
     background: #003162;
-    color: #fff;
+    color: $color-white;
     text-decoration: none;
     display: inline-block;
     text-align: center;
@@ -134,20 +134,20 @@ h3.section-heading {
     padding: 10px 20px;
     &:hover {
         background: #0054a8;
-        color: #fff;
+        color: $color-white;
         text-decoration: none;
         border: 1px solid #006dda;
     }
 }
 .tf_button.btn-outline {
-    background: #fff;
+    background: $color-white;
     border-color: #333;
     color: #333;
 }
 .tf-btn-flip {
     opacity: 1;
     outline: 0;
-    color: #fff;
+    color: $color-white;
     position: relative;
     text-align: center;
     letter-spacing: 1px;
@@ -168,7 +168,7 @@ h3.section-heading {
         left: 0;
         opacity: 0;
         width: 100%;
-        color: #fff;
+        color: $color-white;
         display: block;
         transition: 0.5s;
         position: absolute;
@@ -182,7 +182,7 @@ h3.section-heading {
         top: 0;
         left: 0;
         opacity: 1;
-        color: #fff;
+        color: $color-white;
         display: block;
         transition: 0.5s;
         position: relative;
@@ -205,7 +205,7 @@ h3.section-heading {
     border-radius: 4px !important;
     overflow: hidden;
     position: relative;
-    color: #fff !important;
+    color: $color-white !important;
     cursor: pointer;
     position: relative;
     text-decoration: none;
@@ -215,7 +215,7 @@ h3.section-heading {
         z-index: 20;
     }
     &:after {
-        background: #fff;
+        background: $color-white;
         content: "";
         height: 155px;
         left: -75px;
@@ -227,7 +227,7 @@ h3.section-heading {
         width: 50px;
     }
     &:hover {
-        color: #fff;
+        color: $color-white;
         background: #838383;
         &:after {
             left: 120%;
@@ -237,7 +237,7 @@ h3.section-heading {
 }
 a.tf_button.btn-styled {
     &:focus {
-        color: #fff;
+        color: $color-white;
     }
 }
 .tf-sml-btn {
@@ -246,7 +246,7 @@ a.tf_button.btn-styled {
     white-space: nowrap;
     &:hover {
         background: #0054a8;
-        color: #fff;
+        color: $color-white;
         text-decoration: none;
         border: 1px solid #006dda;
     }
@@ -258,7 +258,7 @@ a.tf_button.btn-styled {
 .tf-title-left {
     span.post-type {
         background: #FA5535;
-        color: #fff;
+        color: $color-white;
         padding: 0 10px;
         font-size: 13px;
         border-radius: 25px;
@@ -294,7 +294,7 @@ a.tf_button.btn-styled {
     border: 1px solid rgba(255, 255, 255, 0.08);
     box-sizing: border-box;
     padding: 8px;
-    color: #fff;
+    color: $color-white;
     border-radius: 4px;
     position: relative;
     i {
@@ -412,17 +412,17 @@ a.tf_button.btn-styled {
 }
 ul.tf-sidebar-checkbox {
     display: block;
-    color: #000;
+    color: $color-heading;
     label {
         margin-left: 10px;
     }
 }
 .tf-sidebar-filter {
     .tf-sidebar-checkbox {
-        color: #fff;
+        color: $color-white;
     }
     h3 {
-        color: #fff;
+        color: $color-white;
     }
 }
 .tf_booking-widget {
@@ -444,7 +444,7 @@ ul.tf-sidebar-checkbox {
 }
 .hero-booking {
     .tf_booking-widget {
-        color: #fff;
+        color: $color-white;
     }
 }
 .tf-hotel-side-booking {
@@ -452,7 +452,7 @@ ul.tf-sidebar-checkbox {
         position: relative;
         display: grid;
         padding: 0 0 0 0;
-        background: #fff;
+        background: $color-white;
         grid-template-columns: 38px auto;
         align-items: center;
         justify-items: center;
@@ -475,7 +475,7 @@ h3.tf-sidebar-widget_title {
     top: 100%;
     right: 0;
     margin-top: 12px;
-    background: #fff;
+    background: $color-white;
     padding: 24px 24px 8px;
     min-width: 250px;
     border-radius: 4px;
@@ -497,7 +497,7 @@ h3.tf-sidebar-widget_title {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    background-color: #fff;
+    background-color: $color-white;
     color: #003162;
     border-color: #003162;
     border: 1px solid #003162;
@@ -530,7 +530,7 @@ h3.tf-sidebar-widget_title {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    background-color: #fff;
+    background-color: $color-white;
     color: #003162;
     border-color: #003162;
     border: 1px solid #003162;
@@ -664,7 +664,7 @@ h3.tf-sidebar-widget_title {
     min-width: 600px;
     padding: 0 !important;
     margin: 0 !important;
-    background: #fff !important;
+    background: $color-white !important;
     .logged-in-as {
         display: none;
     }
@@ -827,7 +827,7 @@ h3.tf-sidebar-widget_title {
         margin: 25px 0 0 0;
         input[type="submit"] {
             background: #003162;
-            color: #fff;
+            color: $color-white;
             text-decoration: none;
             display: inline-block;
             text-align: center;
@@ -836,7 +836,7 @@ h3.tf-sidebar-widget_title {
             padding: 10px 20px;
             &:hover {
                 background: #0054a8;
-                color: #fff;
+                color: $color-white;
                 text-decoration: none;
                 border: 1px solid #006dda;
             }
@@ -873,7 +873,7 @@ h3.tf-sidebar-widget_title {
                 justify-content: center;
                 align-items: center;
                 padding: 16px;
-                color: #FFFFFF;
+                color: $color-white;
                 font-weight: 600;
                 font-size: 24px;
                 line-height: 32px;
@@ -1014,7 +1014,7 @@ h3.tf-sidebar-widget_title {
     font-size: 16px;
     font-style: italic;
     font-weight: normal;
-    background: #FFF4A3;
+    background: $color-white;
     border-radius: 4px;
     padding: 10px 10px;
     color: #333;
@@ -1085,7 +1085,7 @@ h3.tf-sidebar-widget_title {
         transform: rotate(0deg);
     }
     .tf-faq-desc {
-        background-color: #FFFFFF;
+        background-color: $color-white;
         display: none;
         padding: 20px;
         color: #333333;
@@ -1099,11 +1099,11 @@ h3.tf-sidebar-widget_title {
 .tf-faq-title {
     h4 {
         width: 100%;
-        color: #000;
+        color: $color-heading;
     }
 }
 .tf-slider-item {
-    border: 12px solid #fff;
+    border: 12px solid $color-white;
     box-shadow: 0px 2px 4px rgba(90, 91, 106, 0.08);
     border-radius: 4px;
     height: 450px !important;
@@ -1124,12 +1124,12 @@ h3.tf-sidebar-widget_title {
     border-radius: 4px;
     width: 100%;
     padding: 15px;
-    color: #FFFFFF;
+    color: $color-white;
 }
 .tf-slider-desc {
     h3 {
         font-size: 20px;
-        color: #FFFFFF;
+        color: $color-white;
         span {
             font-size: 15px;
             line-height: 26px;
@@ -1139,7 +1139,7 @@ h3.tf-sidebar-widget_title {
         }
     }
     a {
-        color: #fff;
+        color: $color-white;
         text-decoration: none;
         &:hover {
             color: #FFCD3D;
@@ -1184,7 +1184,7 @@ h3.tf-sidebar-widget_title {
     i {
         background: rgba(26, 43, 72, .6);
         border-radius: 50%;
-        color: #fff;
+        color: $color-white;
         font-size: 18px;
         padding: 10px 9px 7px 10px;
         transition: 0.3s;
@@ -1202,7 +1202,7 @@ h3.tf-sidebar-widget_title {
     left: 0px;
     height: 15px;
     width: 15px;
-    background-color: #fff;
+    background-color: $color-white;
     border-radius: 2px;
     border: 1px solid #D2D2D6;
 }
@@ -1292,7 +1292,7 @@ li.filter-item {
         border-radius: 5px;
         box-shadow: none;
         padding: 3px 10px;
-        color: #fff !important;
+        color: $color-white !important;
         font-size: 13px !important;
         margin-bottom: 0px !important;
     }
@@ -1318,7 +1318,7 @@ Ajax Loader Booking Availability
     display: inline-block;
     width: 12px;
     height: 12px;
-    border: 2px solid #fff;
+    border: 2px solid $color-white;
     border-left-color: transparent;
     border-radius: 50%;
     vertical-align: middle;

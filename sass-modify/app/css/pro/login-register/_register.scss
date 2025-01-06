@@ -33,7 +33,7 @@
             margin: 0 0 5px 0;
             padding: 7px 10px 7px 10px;
             border-radius: 2px;
-            color: #fff;
+            color: $color-white;
 
             &:last-child{
                 margin-bottom: 15px;
@@ -45,7 +45,7 @@
             margin: 0 0 5px 0;
             padding: 7px 10px 7px 10px;
             border-radius: 2px;
-            color: #fff;
+            color: $color-white;
             line-height: 22px;
 
 
@@ -66,7 +66,7 @@
             margin: 0 0 5px 0;
             padding: 7px 10px 7px 10px;
             border-radius: 2px;
-            color: #fff;
+            color: $color-white;
         }
 
         .tf_success {
@@ -74,7 +74,7 @@
             margin: 0 0 5px 0;
             padding: 7px 10px 7px 10px;
             border-radius: 2px;
-            color: #fff;
+            color: $color-white;
         }
     }
 
@@ -159,7 +159,7 @@
         border-radius: 4px;
         overflow: hidden;
         position: relative;
-        color: #fff;
+        color: $color-white;
         cursor: pointer;
         text-decoration: none;
         background: #003162;

@@ -220,7 +220,7 @@
                         div{
                             padding: 10px;
                             cursor: pointer;
-                            background-color: #fff;
+                            background-color: $color-white;
                             margin-bottom: 4px;
                             color: #444;
                             display: block;
@@ -505,7 +505,7 @@
     .tf-booking-date-wrap {
         display: flex;
         flex-direction: row;
-        background: #fff;
+        background: $color-white;
         padding: 0 12px;
         max-width: 150px;
         margin-right: 40px;
@@ -837,7 +837,7 @@
                 top: 100%;
                 right: 0;
                 margin-top: 12px;
-                background: #fff;
+                background: $color-white;
                 padding: 24px 24px 8px;
                 min-width: 250px;
                 border-radius: 4px;

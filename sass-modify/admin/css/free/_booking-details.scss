@@ -22,7 +22,7 @@
             .tf_booking_views_button{
                 border-radius: 8px;
                 border: 1px solid #EEF6F0;
-                background: #FFF;
+                background: $color-white;
                 padding: 4px 8px;
                 float: left;
                 height: 46px;
@@ -55,7 +55,7 @@
                 padding: 10px 32px;
                 border-radius: 8px;
                 border: 1px solid #003C79;
-                background: #FFF;
+                background: $color-white;
                 margin: 0 !important;
                 color: #003C79;
                 font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
@@ -108,7 +108,7 @@
         display: none;
         .tf-calendar-popup-box{
             border-radius: 8px;
-            background: #FFF;
+            background: $color-white;
             box-shadow: 0px 8px 30px 0px rgba(16, 40, 20, 0.10);
             padding: 16px 24px;
             width: 750px;
@@ -174,7 +174,7 @@
     // Booking Calendar
     #tf-booking-calendar{
         border-radius: 16px;
-        background: #FFF;
+        background: $color-white;
         padding: 24px;
         padding-top: 30px;
         position: relative;
@@ -192,7 +192,7 @@
                             width: 40px;
                             border-radius: 8px;
                             border: 0.2px solid #003c7929;
-                            background: #FFF;
+                            background: $color-white;
                             padding: 0;
                             transition: .3s all ease;
                             &:focus{
@@ -204,7 +204,7 @@
                                 border-color: #003c79;
                                 span{
                                     &::before{
-                                        color: #fff;
+                                        color: $color-white;
                                     }
                                 }
                             }
@@ -247,12 +247,12 @@
                     .fc-button-group{
                         border-radius: 24px;
                         border: 1px solid #003c7929;
-                        background: #FFF;
+                        background: $color-white;
                         padding: 4px;
                         display: flex;
                         gap: 8px;
                         button{
-                            background: #FFF;
+                            background: $color-white;
                             color: #131c25;
                             font-size: 15px;
                             font-style: normal;
@@ -644,7 +644,7 @@
                 span.select2{
                     height: 48px;
                     border-radius: 6px;
-                    background: #FFF;
+                    background: $color-white;
                     box-shadow: 0px 8px 20px 0px rgba(29, 35, 39, 0.06);
                     min-width: 160px !important;
                     @media #{$max991}{
@@ -685,7 +685,7 @@
                 padding: 10px 32px;
                 border-radius: 8px;
                 border: 1px solid #003C79;
-                background: #FFF;
+                background: $color-white;
                 box-shadow: 0px 8px 20px 0px rgba(29, 35, 39, 0.06);
                 color: #003C79;
                 font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
@@ -742,7 +742,7 @@
         .tf-right-search-filter, .tf-enquiry-right-search-filter{
             border-radius: 8px;
             border: 1px solid #87888B;
-            background: #FFF;
+            background: $color-white;
             box-shadow: 0px 8px 20px 0px rgba(29, 35, 39, 0.06);
             padding: 8px 16px;
             display: flex;
@@ -825,7 +825,7 @@
                             &:hover{
                                 background-color: #F0F2F4;
                                 input{
-                                    background-color: #FFFFFF;
+                                    background-color: $color-white;
                                 }
                             }
                             input{
@@ -853,7 +853,7 @@
                         font-style: normal;
                         font-weight: 600;
                         line-height: 18px;
-                        background-color: #fff;
+                        background-color: $color-white;
                         border-bottom: 1px solid #F0F0F1;
                         text-align: left;
                         a{
@@ -871,7 +871,7 @@
                         .tf-checkbox-listing{
                             height: 28px;
                             width: 28px;
-                            background-color: #FFFFFF;
+                            background-color: $color-white;
                             border-radius: 8px;
                             display: flex;
                             align-items: center;
@@ -880,7 +880,7 @@
                             &:hover{
                                 background-color: #F0F2F4;
                                 input{
-                                    background-color: #FFFFFF;
+                                    background-color: $color-white;
                                     box-shadow: none;
                                 }
                             }
@@ -907,12 +907,12 @@
                             line-height: 18px;
                         }
                         .checkinout.checkout{
-                            background: #FFFAEB;
+                            background: $color-white;
                             color: #B54708;
                         }
                         a.tf_booking_details_view{
                             border-radius: 8px;
-                            background-color: #FFFFFF;
+                            background-color: $color-white;
                             display: inline-flex;
                             padding: 10px;
                             transition: .3s all ease;
@@ -954,7 +954,7 @@
                                     justify-content: center;
                                 }
                                 border-right: 1px solid #F0F0F1;
-                                background: #FFF;
+                                background: $color-white;
                                 &:last-child{
                                     border-right: 0px solid;
                                     border-radius: 0px 8px 8px 0px;
@@ -972,7 +972,7 @@
                             li.active{
                                 background-color: #003C79;
                                 a{
-                                    color: #fff;
+                                    color: $color-white;
                                 }
                             }
                         }
@@ -1014,8 +1014,8 @@
                 line-height: 24px;
                 margin-bottom: 4px;
                 padding: 8px 16px;
-                background-color: #fff;
-                background: #FFF;
+                background-color: $color-white;
+                background: $color-white;
                 cursor: pointer;
                 border-radius: 6px;
                 transition: .3s all ease;
@@ -1038,7 +1038,7 @@
                     color: #027A48; 
                 }
                 &:last-child{
-                    background: #FFFAEB;
+                    background: $color-white;
                     color: #B54708;; 
                 }
             }
@@ -1131,7 +1131,7 @@
             width: calc(100% - 260px);
             .details-box{
                 border-radius: 8px;
-                background: #FFF;
+                background: $color-white;
                 box-shadow: 0px 8px 20px 0px rgba(29, 35, 39, 0.10);
                 padding: 24px;
                 margin-top: 24px;
@@ -1280,7 +1280,7 @@
             width: 268px;
             padding: 24px;
             border-radius: 8px;
-            background: #FFF;
+            background: $color-white;
             margin-top: 24px;
             @media #{$max767}{
                 width: auto;
@@ -1329,8 +1329,8 @@
                             color: #1D2327;
                             margin: 0px 8px 4px 8px;
                             padding: 8px 16px;
-                            background-color: #fff;
-                            background: #FFF;
+                            background-color: $color-white;
+                            background: $color-white;
                             cursor: pointer;
                             font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
                             font-size: 16px;
@@ -1351,7 +1351,7 @@
                             color: #027A48;
                         }
                         li.checkout{
-                            background: #FFFAEB;
+                            background: $color-white;
                             color: #B54708;
                         }
                     }
@@ -1363,7 +1363,7 @@
                     a{
                         border-radius: 8px;
                         border: 1px solid #003C79;
-                        background: #FFF;
+                        background: $color-white;
                         box-shadow: 0px 8px 20px 0px rgba(29, 35, 39, 0.06);
                         text-decoration: none;
                         color: #003C79;
@@ -1405,7 +1405,7 @@
     .visitor-details-edit-popup{
         border-radius: 24px;
         border: 1px solid #f0f0f1;
-        background: #fff;
+        background: $color-white;
         position: fixed;
         left: 50%;
         top: 25%;
@@ -1430,7 +1430,7 @@
                 span{
                     height: 24px;
                     width: 24px;
-                    background: #fff;
+                    background: $color-white;
                     display: flex;
                     align-items: center;
                     justify-content: center;
@@ -1541,7 +1541,7 @@
     .voucher-quick-view{
         border-radius: 24px;
         border: 1px solid #f0f0f1;
-        background: #fff;
+        background: $color-white;
         position: fixed;
         left: 50%;
         top: 25%;
@@ -1566,7 +1566,7 @@
                 span{
                     height: 24px;
                     width: 24px;
-                    background: #fff;
+                    background: $color-white;
                     display: flex;
                     align-items: center;
                     justify-content: center;

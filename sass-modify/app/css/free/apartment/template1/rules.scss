@@ -4,11 +4,9 @@
         padding-right: 16px;
     }
     h2{
-        color: #595349;
+        color: $color-heading;
         font-size: 32px !important;
-        font-style: normal !important;
         font-weight: 700 !important;
-        line-height: 120%;
         margin-bottom: 24px !important;
         @media #{$max767}{
             font-size: 24px !important;
@@ -40,20 +38,15 @@
                     }
                     .rules-content{
                         span{
-                            color: #595349;
+                            color: $color-gray;
                             font-size: 16px !important;
-                            font-style: normal !important;
                             font-weight: 600 !important;
-                            line-height: 130% !important; /* 20.8px */
                             margin: 0 0 8px 0px;
                             display: block;
                         }
                         p{
-                            color: #99948D;
+                            color: $color-text;
                             font-size: 16px !important;
-                            font-style: normal !important;
-                            font-weight: 400 !important;
-                            line-height: 130% !important; /* 20.8px */
                             margin: 0;
                         }
                     }

@@ -17,7 +17,7 @@
         display: none;
         .tf-booking-popup-warp{
             border-radius: 16px;
-            background: #FFF;
+            background: $color-white;
             padding: 16px 24px;
             width: 850px;
             @media #{$max767}{
@@ -40,7 +40,7 @@
             .tf-booking-content-wraper{
                 .tf-cancellation-notice{
                     border-radius: 8px;
-                    background: #FFF8E5;
+                    background: $color-white;
                     padding: 16px;
                     margin-bottom: 24px;
                     span{
@@ -87,19 +87,19 @@
                     overflow: auto;
                     padding-right: 8px;
                     scrollbar-width: thin;
-                    scrollbar-color: #9c9c9c #ffffff;
+                    scrollbar-color: #9c9c9c $color-white;
    
                     /* Chrome, Edge, and Safari */
                     *::-webkit-scrollbar {
                         width: 5px;
                     }
                     *::-webkit-scrollbar-track {
-                        background: #ffffff;
+                        background: $color-white;
                     }
                     &::-webkit-scrollbar-thumb {
                         background-color: #9c9c9c;
                         border-radius: 5px;
-                        border: 3px solid #ffffff;
+                        border: 3px solid $color-white;
                     }
                     p{
                         color: #27333F;
@@ -258,7 +258,7 @@
                                                 z-index: -1;
                                             }
                                             p{
-                                                color: #FFF;
+                                                color: $color-white;
                                                 text-align: center;
                                                 font-size: 13px !important;
                                                 font-weight: 600 !important;
@@ -340,7 +340,7 @@
                         button{
                             border-radius: 8px;
                             background-color: #0866C4;
-                            color: #FFF;
+                            color: $color-white;
                             padding: 16px 32px;
                             border: 0px solid;
                             font-size: 16px;
@@ -369,7 +369,7 @@
                     }
                     button.with-charge{
                         background-color: #0866C4 !important;
-                        color: #FFF !important;
+                        color: $color-white !important;
                         transition: .3s all ease;
                         &:hover{
                             background: #094c90 !important;
@@ -396,7 +396,7 @@
         .tf-instraction-popup-warp,
         .tf-cancellation-popup-warp{
             border-radius: 16px;
-            background: #FFF;
+            background: $color-white;
             padding: 16px 24px;
             width: 850px;
             @media #{$max640}{
@@ -428,19 +428,19 @@
                 overflow: auto;
 
                 scrollbar-width: thin;
-                scrollbar-color: #9c9c9c #ffffff;
+                scrollbar-color: #9c9c9c $color-white;
 
                 /* Chrome, Edge, and Safari */
                 *::-webkit-scrollbar {
                     width: 5px;
                 }
                 *::-webkit-scrollbar-track {
-                    background: #ffffff;
+                    background: $color-white;
                 }
                 &::-webkit-scrollbar-thumb {
                     background-color: #9c9c9c;
                     border-radius: 5px;
-                    border: 3px solid #ffffff;
+                    border: 3px solid $color-white;
                 }
                 p{
                     color: #27333F;
@@ -461,7 +461,7 @@
         .tf-banner-content{
             height: 100%;
             h1{
-                color: #FFF;
+                color: $color-white;
                 text-align: center;
                 font-size: 38px;
                 font-weight: 700;
@@ -469,13 +469,13 @@
             .breadcrumb{
                 ul{
                     li{
-                        color: #FFF;
+                        color: $color-white;
                         font-size: 16px;
                         font-weight: 400;
                         display: inline-block;
                         a{
                             text-decoration: none;
-                            color: #FFF;
+                            color: $color-white;
                             font-size: 16px;
                             font-weight: 400;
                         }
@@ -651,7 +651,7 @@
                         color: #0866C4;
                         font-size: 16px;
                         font-weight: 700;
-                        background-color: #fff;
+                        background-color: $color-white;
                         cursor: pointer;
                         text-decoration: none;
                         transition: .3s all ease;
@@ -659,7 +659,7 @@
                         &:hover{
                             border: 1px solid #0866C4;
                             background: #0866C4;
-                            color: #fff;
+                            color: $color-white;
                         }
                     }
                     .tf-car-booking-popup{
@@ -751,7 +751,7 @@
             width: 100%;
             .page-numbers{
                 background: #0866c4;
-                color: #fff;
+                color: $color-white;
                 border-radius: 8px;
             }
             .page-numbers.current{
@@ -809,7 +809,7 @@
         }
         .tf-date-single-select{
             border-radius: 8px;
-            background: #FFF;
+            background: $color-white;
             padding: 16px;
             width: 33.33%;
             @media #{$max767}{
@@ -878,26 +878,26 @@
                         box-shadow: 0px 4px 16px 0px rgba(2, 28, 53, 0.20);
                         
                         scrollbar-width: thin;
-                        scrollbar-color: #9c9c9c #ffffff;
+                        scrollbar-color: #9c9c9c $color-white;
     
                         /* Chrome, Edge, and Safari */
                         *::-webkit-scrollbar {
                             width: 5px;
                         }
                         *::-webkit-scrollbar-track {
-                            background: #ffffff;
+                            background: $color-white;
                         }
                         &::-webkit-scrollbar-thumb {
                             background-color: #9c9c9c;
                             border-radius: 5px;
-                            border: 3px solid #ffffff;
+                            border: 3px solid $color-white;
                         }
                         
                         >div{
                             padding: 8px;
                             cursor: pointer;
                             border-radius: 4px;
-                            background: #FFF;
+                            background: $color-white;
                             text-transform: capitalize;
                             color: #27333F;
                             font-size: 16px;
@@ -1040,7 +1040,7 @@
                 border-radius: 8px;
                 background: #0866C4;
                 padding: 16px 50px;
-                color: #FFF;
+                color: $color-white;
                 font-size: 16px;
                 font-weight: 700;
                 border: 0px solid;

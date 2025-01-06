@@ -125,7 +125,7 @@
 
 span.percent-progress {
     height: 12px;
-    background: #99948d;
+    background: $color-gray;
     border-radius: 50px;
     display: inline-block;
 }
@@ -257,7 +257,7 @@ button.tf-review-open.button, .tf-reting-field button {
                 margin-top: 16px !important;
                 input#comment-submit{
                     background-color: #B58E53 !important;
-                    color: #fff;
+                    color: $color-white;
                     width: 100%;
                     font-size: 16px !important;
                     font-weight: 700;
@@ -324,7 +324,7 @@ span.tf-reting-stars {
 
 .tf-reting-field button {
     background-color: #B58E53;
-    color: #fff;
+    color: $color-white;
     width: 100%;
 }
 
@@ -448,7 +448,7 @@ span.tf-reting-stars {
         }
         label.tf-filter-location {
             display: flex;
-            background: #fff;
+            background: $color-white;
             padding: 12px;
             gap: 6px;
             input {

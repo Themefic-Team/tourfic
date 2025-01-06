@@ -1,6 +1,6 @@
 .tf-template-3 {
     background: #FDF9F3;
-    color: #99948D;
+    color: $color-gray;
     font-size: 16px;
     font-weight: 400;
     line-height: 20.80px;
@@ -62,7 +62,7 @@
     }
     .tf-section-title {
         margin-bottom: 32px;
-        color: #595349;
+        color: $color-heading;
     }
     img.tf-payment-card {
         width: 34px;
@@ -157,12 +157,10 @@
             background: #FDF9F3;
             border-radius: 0px;
             h4{
-                color: #595349;
+                color: $color-heading;
                 text-align: center;
                 font-size: 32px !important;
-                font-style: normal;
                 font-weight: 700 !important;
-                line-height: 120%;
                 margin-bottom: 32px;
             }
         }
@@ -173,9 +171,6 @@
                 color: #C1BFBB;
                 background-color: #fdf9f3;
                 font-size: 16px;
-                font-style: normal;
-                font-weight: 400;
-                line-height: 130%; /* 20.8px */
                 height: 45px;
                 padding: 12px 14px;;
                 border-radius: 0px;
@@ -189,9 +184,7 @@
                 background-color: #fdf9f3;
                 color: #C1BFBB;
                 font-size: 16px;
-                font-style: normal;
                 font-weight: 400;
-                line-height: 130%; /* 20.8px */
                 padding: 12px 14px;
                 border-radius: 0px;
                 &::placeholder{
@@ -199,25 +192,21 @@
                 }
             }
         }
-        // .tf-aq-outer .close-aq{
-        //     background: #B58E53 !important;
-        // }
+
         button{
-            background: #b58e53 !important;
-            border-color: #b58e53 !important;
+            background: $color-primary !important;
+            border-color: $color-primary !important;
             border-radius: 0px !important;
             padding: 12px 32px !important;
-            color: #fdf9f3 !important;
+            color: $color-white !important;
             font-size: 16px !important;
-            font-style: normal;
             font-weight: 700;
-            line-height: 150% !important;
             transition: .3s all ease;
             &::after{
                 position: static !important;
             }
             &:hover{
-                background: #917242 !important;
+                background: $color-secondary !important;
             }
         }
     }
@@ -228,32 +217,26 @@
             gap: 0px;
             .tf-hotel-services-text{
                 h3{
-                    color: #595349;
+                    color: $color-heading;
                     text-align: center;
                     font-size: 32px !important;
-                    font-style: normal;
                     font-weight: 700 !important;
-                    line-height: 120%; /* 38.4px */
                     margin-bottom: 8px;
                 }
                 p{
-                    color: #99948D;
+                    color: $color-text;
                     text-align: center;
                     font-size: 16px !important;
-                    font-style: normal;
                     font-weight: 400 !important;
-                    line-height: 130%; /* 20.8px */
                     margin-top: 0px;
                     margin-bottom: 32px;
                 }
             }
             .tf-hotel-service{
                 label{
-                    color: #595349;
+                    color: $color-text;
                     font-size: 16px;
-                    font-style: normal;
                     font-weight: 600;
-                    line-height: 130%;
                     margin-bottom: 6px;
                     display: block;
                 }
@@ -261,7 +244,7 @@
                     border-radius: 0px;
                     background: #FDF9F3;
                     height: 45px;
-                    border: 1px solid #595349;
+                    border: 1px solid $color-text;
                 }
             }
             .tf-airport-pickup-response{
@@ -270,19 +253,16 @@
             .tf_button_group{
                 height: auto;
                 button{
-                    background: #b58e53 !important;
-                    border-color: #b58e53 !important;
+                    background: $color-primary !important;
+                    border-color: $color-primary !important;
                     border-radius: 0px !important;
                     padding: 12px 32px !important;
-                    color: #fdf9f3 !important;
+                    color: $color-white !important;
                     font-size: 16px !important;
-                    font-style: normal;
                     font-weight: 700;
-                    line-height: 150% !important;
                     transition: .3s all ease;
-                    cursor: pointer;
                     &:hover{
-                        background: #917242 !important;
+                        background: $color-secondary !important;
                     }
                 }
             }

@@ -30,7 +30,7 @@
         }
         .tf-final-submission-form{
             position: absolute;
-            background-color: #fff;
+            background-color: $color-white;
             height: 100%;
             width: 100%;
             top: 0;
@@ -68,7 +68,7 @@
                         border: 1px solid #003C79;
                         color: #003C79;
                         font-weight: 500;
-                        background-color: #fff;
+                        background-color: $color-white;
                         width: 108px !important;
                         text-decoration: none;
                     }
@@ -90,7 +90,7 @@
         .tf-final-submission-feedback,
         .tf-final-error-feedback{
             position: absolute;
-            background-color: #fff;
+            background-color: $color-white;
             height: 100%;
             width: 100%;
             top: 0;
@@ -129,7 +129,7 @@
                         border: 1px solid #003C79;
                         color: #003C79;
                         font-weight: 500;
-                        background-color: #fff;
+                        background-color: $color-white;
                         width: 108px !important;
                         text-decoration: none;
                     }
@@ -157,7 +157,7 @@
         }
         .tf-scanner-preloader{
             position: absolute;
-            background-color: #fff;
+            background-color: $color-white;
             height: 100%;
             width: 100%;
             top: 0;

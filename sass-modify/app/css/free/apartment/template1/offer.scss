@@ -4,11 +4,10 @@
         padding-right: 16px;
     }
     h2{
-        color: #595349;
+        color: $color-heading;
         font-size: 32px !important;
         font-style: normal !important;
         font-weight: 700 !important;
-        line-height: 120%;
         margin-bottom: 24px !important;
         @media #{$max767}{
             font-size: 24px !important;
@@ -33,9 +32,8 @@
                 }
             }
             span{
-                color: #99948D;
+                color: $color-text;
                 font-size: 14px !important;
-                font-style: normal;
                 font-weight: 400 !important;
                 line-height: 13px;
             }

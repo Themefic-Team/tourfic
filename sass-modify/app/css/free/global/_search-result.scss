@@ -183,7 +183,7 @@
 
 a.page-numbers {
     background: #003162;
-    color: #fff;
+    color: $color-white;
     padding: 5px 15px;
     text-decoration: none;
 }
@@ -308,7 +308,7 @@ a.page-numbers {
     float: right;
     margin-bottom: 3px;
     font-size: 14px;
-    color: #FFFFFF;
+    color: $color-white;
     font-weight: bold;
 }
 
@@ -389,7 +389,7 @@ a.page-numbers {
 /* Search result sidebar  */
 .tf_widget {
     border: 1px solid #EDEDF0;
-    background: #fff;
+    background: $color-white;
     border-radius: 10px;
     margin-bottom: 20px;
     padding: 0px !important;
@@ -434,7 +434,7 @@ a.page-numbers {
         border-radius: 5px;
         box-shadow: none;
         padding: 3px 10px;
-        color: #fff !important;
+        color: $color-white !important;
         font-size: 13px !important;
         margin-bottom: 0px !important;
     }
@@ -526,7 +526,7 @@ a.page-numbers {
         left: 0px;
         height: 20px;
         width: 20px;
-        background-color: #fff;
+        background-color: $color-white;
         border-radius: 5px;
         border: 1px solid #D2D2D6;
     }

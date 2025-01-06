@@ -14,13 +14,13 @@
       @include flexbox();
       @include align-items(center);
       @include justify-content(center);
-      background-color: $blue60;
-      color: #fff;
+      background-color: $color-primary;
+      color: $color-white;
       border-radius: 4px
     }
 
     .tf-field-heading-content {
-      color: #000;
+      color: $color-heading;
       font-size: 14px;
       font-weight: 600;
       h3 {

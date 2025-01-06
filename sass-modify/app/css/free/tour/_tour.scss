@@ -26,7 +26,7 @@
 }
 .tf-hero-bottom-area {
     text-align: right;
-    color: #fff;
+    color: $color-white;
     font-size: 14px;
     margin-top: 20px;
 }
@@ -55,7 +55,7 @@ div#tf-contact-info {
     i {
         background: rgba(26, 43, 72, .6);
         border-radius: 50%;
-        color: #fff;
+        color: $color-white;
         font-size: 18px;
         height: 40px;
         width: 40px;
@@ -78,7 +78,7 @@ div#tf-contact-info {
     border-radius: 4px;
     padding: 10px;
     margin: 0 auto;
-    background: #FFFFFFF0;
+    background: $color-white;
     box-shadow: 0px 5px 10px rgba(0, 44, 102, 0.2);
     width: 80%;
     font-size: 16px;
@@ -150,7 +150,7 @@ div#tf-contact-info {
 #tour-extra {
     .fancybox-button.fancybox-close-small {
         &:hover {
-            color: #fff;
+            color: $color-white;
         }
     }
 }
@@ -160,16 +160,16 @@ div#tf-contact-info {
     left: 0%;
     right: 0;
     .tf_selectperson-wrap {
-        background: #fff;
+        background: $color-white;
         border-radius: 2px;
         padding: 9px 15px;
     }
     .tour-extra {
         i {
-            color: #fff;
+            color: $color-white;
         }
         a {
-            color: #fff;
+            color: $color-white;
         }
     }
     button[type="submit"] {
@@ -179,7 +179,7 @@ div#tf-contact-info {
         width: 55%;
     }
     .tf_form-inner {
-        background: #fff;
+        background: $color-white;
         border-radius: 2px;
     }
     .btn-styled {
@@ -352,7 +352,7 @@ div#tf-contact-info {
     flex: 0 0 49%;
     img {
         border-radius: 4px;
-        background: #fff;
+        background: $color-white;
         padding: 10px;
         box-shadow: 0px 2px 4px rgba(90, 91, 106, 0.08);
         width: 100%;
@@ -377,8 +377,8 @@ div#tf-contact-info {
         margin-right: 10px;
         padding: 6px 10px;
         border-radius: 4px;
-        border: 1px solid #0000002e;
-        box-shadow: -1px 1px 6px -1px #0000002e;
+        border: 1px solid $color-heading;
+        box-shadow: -1px 1px 6px -1px $color-heading;
         margin-top: 10px;
     }
     .tf-feature-list {
@@ -400,7 +400,7 @@ div#tf-contact-info {
     h4 {
         padding: 6px 0;
         margin-bottom: 10px;
-        color: #fff;
+        color: $color-white;
     }
     >* {
         flex: 1;
@@ -434,11 +434,11 @@ div#tf-contact-info {
     }
 }
 .tf-include-section {
-    background: #000000a3;
+    background: $color-heading;
     background-image: linear-gradient(to right, rgba(253, 97, 67, 0), rgb(0, 49, 98));
     border-radius: 4px;
     padding: 20px 30px 30px;
-    color: #fff;
+    color: $color-white;
     -webkit-backdrop-filter: blur(3px);
     backdrop-filter: blur(3px);
     ul {
@@ -450,11 +450,11 @@ div#tf-contact-info {
     }
 }
 .tf-exclude-section {
-    background: #000000a3;
+    background: $color-heading;
     background-image: linear-gradient(to right, rgba(253, 97, 67, 0), rgb(0, 49, 98));
     border-radius: 4px;
     padding: 20px 30px 30px;
-    color: #fff;
+    color: $color-white;
     -webkit-backdrop-filter: blur(3px);
     backdrop-filter: blur(3px);
     ul {
@@ -495,7 +495,7 @@ div#tf-contact-info {
         transition: 0.2s ease;
         display: flex;
         align-items: center;
-        background: #fff;
+        background: $color-white;
         box-shadow: 0px 2px 4px rgba(90, 91, 106, 0.08);
         border-radius: 4px;
         z-index: 1;
@@ -511,7 +511,7 @@ div#tf-contact-info {
         transform: rotate(0deg);
     }
     .tf-accordion-content {
-        background-color: #FFFFFF;
+        background-color: $color-white;
         display: none;
         padding: 20px 30px;
         color: #333333;
@@ -622,7 +622,7 @@ div#tf-contact-info {
             transition: 0.3s;
             &:hover {
                 background: #002C66;
-                color: #fff;
+                color: $color-white;
             }
         }
         button.owl-prev {
@@ -1169,7 +1169,7 @@ div#tf-contact-info {
                                 text-align: center;
                                 cursor: pointer;
                                 border-radius: 5px;
-                                background: #fff;
+                                background: $color-white;
                                 color: #003162;
                                 display: inline-flex;
                                 align-items: center;
@@ -1402,7 +1402,7 @@ div#tf-contact-info {
                         }
                         .tf-tooltip {
                             padding: 10px 10px;
-                            color: #FFFFFF;
+                            color: $color-white;
                             background-color: #333333;
                             font-weight: normal;
                             font-size: 13px;
@@ -1471,7 +1471,7 @@ div#tf-contact-info {
                             width: 18px;
                             left: 2px;
                             bottom: 1px;
-                            background-color: #fff;
+                            background-color: $color-white;
                             -webkit-transition: .4s;
                             transition: .4s;
                         }
@@ -1627,7 +1627,7 @@ div#tf-contact-info {
         }
     }
     .tf-slider-item {
-        border: 7px solid #fff;
+        border: 7px solid $color-white;
         height: 300px !important;
         padding: 15px;
         margin: 0 7px 15px !important;
@@ -1700,7 +1700,7 @@ div#tf-contact-info {
         margin: auto;
     }
     .tf-slider-item {
-        border: 7px solid #fff;
+        border: 7px solid $color-white;
         height: 250px !important;
         padding: 15px;
         margin: 0 7px 15px !important;

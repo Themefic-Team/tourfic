@@ -2,7 +2,7 @@
     background: inherit;
     .tf-single-head{
         .more-hotel{
-            color: $color-theme;
+            color: $color-primary;
             font-size: 16px;
             font-weight: 500;
             text-decoration: underline;
@@ -67,8 +67,8 @@
                    width: 80px;
                    text-align: center;
                    line-height: 80px;
-                   color: #fff; 
-                   background-color: $color-theme;
+                   color: $color-white; 
+                   background-color: $color-primary;
                    border-radius: 50%;
                    padding: 0;
                    font-size: 20px;
@@ -86,7 +86,7 @@
                 overflow-x: unset !important;
             }
             .tf-availability-table{
-                background-color: #fff;
+                background-color: $color-white;
                 box-shadow: 0px 13px 30px 0px rgba(224, 232, 238, 0.32);
                 border-radius: 5px;
                 margin-bottom: 0px;
@@ -94,11 +94,11 @@
                 width: 100%;
                 border-left: none !important;
                 &>thead{
-                    background-color: $color-theme;
+                    background-color: $color-primary;
                     tr{
                         th{
                             text-align: left;
-                            color: #fff;
+                            color: $color-white;
                             border: 0px solid;
                             border-radius: 5px 5px 0px 0px;
                             padding: 13px 30px;
@@ -136,7 +136,7 @@
                                     position: absolute;
                                     left: 0;
                                     top: 0;
-                                    color: #fff;
+                                    color: $color-white;
                                     font-size: 14px;
                                 }
                                 
@@ -152,7 +152,7 @@
                                     h3{
                                         font-size: 25px;
                                         a{
-                                            color: $color-black-light;
+                                            color: $color-heading;
                                             text-decoration: none;
                                         }
                                     }
@@ -175,7 +175,7 @@
                                     }
                                 }
                                 > a{
-                                    color: $color-theme;
+                                    color: $color-primary;
                                 }
                             }
                             .hotel-room-book{
@@ -202,7 +202,7 @@
                         td.reserve{
                             .hotel-room-availability,
                             .tf_air_service{
-                                color: $color-theme;
+                                color: $color-primary;
                             }
                             .room-selection-wrap{
                                 select{
@@ -235,7 +235,7 @@
             li{
                 display: inline-flex;
                 align-items: center;
-                background-color: #fff;
+                background-color: $color-white;
                 border-radius: 5px;
                 padding: 10px;
                 text-transform: capitalize;
@@ -262,7 +262,7 @@
             li{
                 display: inline-flex;
                 justify-content: space-between;
-                background-color: #fff;
+                background-color: $color-white;
                 border-radius: 5px;
                 padding: 10px;
                 text-transform: capitalize;
@@ -289,7 +289,7 @@
         .tf-hotel-facilities-container {
             padding: 32px;
             border-radius: 6px;
-            background: #fff;
+            background: $color-white;
             box-shadow: 0px 13px 30px 0px rgba(224, 232, 238, 0.32);
 
             .tf-hotel-facilities-title-area {
@@ -372,7 +372,7 @@
                 padding-right: 0px;
             }
             .tf-ask-enquiry{
-                background-color: #fff;
+                background-color: $color-white;
                 box-shadow: 0px 13px 30px 0px rgba(224, 232, 238, 0.32);
                 padding: 30px;
                 h3{
@@ -391,7 +391,7 @@
                     border-bottom: 0px solid;
                     .tf-faq-single-inner{
                         margin: 0px 0px 30px 0px;
-                        background: #FFFFFF;
+                        background: $color-white;
                         box-shadow: 0px 13px 30px 0px rgba(224, 232, 238, 0.32);
                         transition: .3s all ease;
                         &:hover{
@@ -425,7 +425,7 @@
             .tf-review-data{
                 flex-basis: 30%;
                 margin-right: 30px;
-                background-color: #fff;
+                background-color: $color-white;
                 box-shadow: 0px 13px 30px 0px rgba(224, 232, 238, 0.32);
                 padding: 30px;
                 @media #{$tfmax991}{
@@ -453,7 +453,7 @@
                 background: #ECF2FF;
                 text-align: center;
                 font-size: 30px !important;
-                color: $color-theme;
+                color: $color-primary;
                 font-weight: 600 !important;
                 border-radius: $tf-brds-default;
                 width: 100%;
@@ -464,20 +464,20 @@
             }
             .tf-review-data-label{
                 p{
-                    color: $color-black;
+                    color: $color-heading;
                     font-weight: $font-weight-medium;
                 }
             }
             .tf-review-all-info {
                 li {
                     font-size: 14px;
-                    color: $color-theme;
+                    color: $color-primary;
                 }
             }
     
             .tf-review-data-features {
                 flex-basis: 68%;
-                background-color: #fff;
+                background-color: $color-white;
                 box-shadow: 0px 13px 30px 0px rgba(224, 232, 238, 0.32);
                 padding: 30px;
 

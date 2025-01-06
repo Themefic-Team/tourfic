@@ -88,15 +88,15 @@ $t4-main-color: #060D1C;
         a.tf-share-toggle.actives,
         a.tf-wishlist.actives {
             background-color: $t4-primary;
-            color: #fff;
+            color: $color-white;
             box-shadow: 0px 4px 40px 0px rgba(80, 33, 0, 0.10);
 
             i {
-                color: #fff !important;
+                color: $color-white !important;
             }
 
             svg path {
-                fill: #fff !important;
+                fill: $color-white !important;
             }
         }
 
@@ -213,7 +213,7 @@ $t4-main-color: #060D1C;
                         &::before {
                             content: "View More → ";
                             position: absolute;
-                            color: #fff;
+                            color: $color-white;
                             @include flexbox();
                             @include align-items(center);
                             @include justify-content(center);
@@ -246,7 +246,7 @@ $t4-main-color: #060D1C;
                 @include flexbox();
                 border-radius: 4px;
                 border: 0.5px solid $t4-orange-light;
-                background: #fff;
+                background: $color-white;
                 box-shadow: 0px 4px 30px 0px rgba(255, 237, 225, 0.40);
                 gap: 8px;
                 line-height: 16px;
@@ -257,7 +257,7 @@ $t4-main-color: #060D1C;
                 &:hover {
                     background-color: $t4-primary;
                     border-color: $t4-primary;
-                    color: #fff;
+                    color: $color-white;
                 }
             }
         }
@@ -498,7 +498,7 @@ $t4-main-color: #060D1C;
                 }
                 select{
                     border: 1px solid $t4-orange-200;
-                    background: #fff;
+                    background: $color-white;
                     padding: 15px 16px;
                     color: $t4-paragraph;
                     font-size: 14px;
@@ -518,7 +518,7 @@ $t4-main-color: #060D1C;
                     border-radius: 6px;
                     background-color: $t4-primary !important;
                     border-color: $t4-primary !important;
-                    color: #fff !important;
+                    color: $color-white !important;
                     cursor: pointer;
 
                     &:hover {

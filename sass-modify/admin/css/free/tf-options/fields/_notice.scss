@@ -36,7 +36,7 @@
       background-color: $green0;
 
       .tf-field-notice-icon {
-        color: $green60;
+        color: $color-success;
       }
     }
     &.tf-notice-warning {
@@ -52,7 +52,7 @@
       background-color: $red0;
 
       .tf-field-notice-icon {
-        color: $red60;
+        color: $color-error;
       }
     }
 
@@ -77,7 +77,7 @@
       }
 
       .tf-field-notice-content {
-        color: #000E3D;
+        color: $color-heading;
         font-size: 14px;
         line-height: 1.6;
         align-self: center;
