@@ -1,6 +1,3 @@
-/*!****************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[3]!./sass-modify/app/css/free/tourfic.scss ***!
-  \****************************************************************************************************************************************************************************************/
 @charset "UTF-8";
 /*
 Button
@@ -4069,10 +4066,6 @@ body {
   color: #0E3DD8;
 }
 
-.tf-template-global .tf-container {
-  width: auto;
-}
-
 .tf-template-global h2 {
   font-size: 30px;
 }
@@ -4084,6 +4077,28 @@ body {
   padding: 0;
   vertical-align: middle;
   max-width: 100%;
+}
+
+.tf-template-global h1,
+.tf-template-global h2,
+.tf-template-global h3,
+.tf-template-global h4,
+.tf-template-global h5,
+.tf-template-global h6 {
+  font-family: inherit;
+  font-weight: 500;
+  color: #060D1C;
+  margin: 0px;
+  line-height: 1.3;
+}
+
+.tf-template-global p {
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: #0E3DD8;
+  margin: 0px;
 }
 
 table.tf-table {
@@ -4477,28 +4492,6 @@ table.tf-table tr:last-child {
   .tf-column-4 .tf-column {
     flex-basis: calc((100%/2) - 8px);
   }
-}
-
-.tf-template-global h1,
-.tf-template-global h2,
-.tf-template-global h3,
-.tf-template-global h4,
-.tf-template-global h5,
-.tf-template-global h6 {
-  font-family: inherit;
-  font-weight: 500;
-  color: #060D1C;
-  margin: 0px;
-  line-height: 1.3;
-}
-
-.tf-template-global p {
-  font-family: inherit;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1.6;
-  color: #0E3DD8;
-  margin: 0px;
 }
 
 /**************** TITLE ****************/

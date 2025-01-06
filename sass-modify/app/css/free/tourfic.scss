@@ -1,13 +1,12 @@
 //global css
-@import '../../../common/css/variable';
-@import '../../../common/css/mixin';
+@import '../../../common/variable';
+@import '../../../common/mixin';
 @import 'global/global';
 @import 'global/common';
 @import 'global/search-result';
 @import 'global/shortcode';
 //Base for templates
-@import '../../../common/css/base';
-@import '../../../common/css/typography';
+@import '../../../common/reset';
 
 @import 'hotel/hotel';
 @import 'tour/tour';
