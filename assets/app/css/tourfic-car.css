@@ -1,73 +1,4 @@
 @charset "UTF-8";
-.tf-car-design-1 {
-  margin: 0 auto;
-  width: 100%;
-}
-.tf-car-design-1 .tf-single-car-details-warper {
-  padding: 32px 0;
-  display: flex;
-  gap: 32px;
-}
-@media only screen and (max-width: 1199.98px) {
-  .tf-car-design-1 .tf-single-car-details-warper {
-    padding-left: 15px;
-    padding-right: 15px;
-  }
-}
-@media only screen and (max-width: 767.98px) {
-  .tf-car-design-1 .tf-single-car-details-warper {
-    flex-wrap: wrap;
-  }
-}
-.tf-car-design-1 .tf-single-car-details-warper .tf-car-details-column {
-  width: calc(100% - 472px);
-  display: flex;
-  gap: 32px;
-  flex-wrap: wrap;
-}
-@media only screen and (min-width: 767.99px) and (max-width: 991px) {
-  .tf-car-design-1 .tf-single-car-details-warper .tf-car-details-column {
-    width: calc(100% - 360px);
-  }
-}
-@media only screen and (max-width: 767.98px) {
-  .tf-car-design-1 .tf-single-car-details-warper .tf-car-details-column {
-    width: 100%;
-  }
-}
-.tf-car-design-1 .tf-single-car-details-warper .tf-car-details-column h3 {
-  color: #060D1C;
-  font-size: 21px !important;
-  font-weight: 400;
-  margin-bottom: 16px;
-  margin-top: 0px;
-}
-.tf-car-design-1 .tf-single-car-details-warper .tf-car-details-column .tf-car-title h1 {
-  color: #060D1C;
-  font-size: 28px !important;
-  font-weight: 600 !important;
-  margin-bottom: 10px;
-}
-.tf-car-design-1 .tf-single-car-details-warper .tf-car-details-column .tf-car-title .breadcrumb ul {
-  margin: 0;
-  padding: 0;
-}
-.tf-car-design-1 .tf-single-car-details-warper .tf-car-details-column .tf-car-title .breadcrumb ul li {
-  color: #686E7A;
-  font-size: 16px;
-  font-weight: 400;
-  display: inline-block;
-}
-.tf-car-design-1 .tf-single-car-details-warper .tf-car-details-column .tf-car-title .breadcrumb ul li a {
-  text-decoration: none;
-  color: #686E7A;
-  font-size: 16px;
-  font-weight: 400;
-}
-.tf-car-design-1 .tf-single-car-details-warper .tf-car-details-column .tf-template-part {
-  width: 100%;
-}
-
 .tf-car-design-1 .tf-car-hero-gallery {
   width: 100%;
 }
@@ -1445,26 +1376,6 @@
   font-weight: 400 !important;
 }
 
-.tf-archive-car-section {
-  margin: 0 auto;
-}
-.tf-archive-car-section .tf-archive-car-details-warper {
-  padding: 0px 0px 56px 0px;
-}
-@media only screen and (max-width: 1024px) {
-  .tf-archive-car-section .tf-archive-car-details-warper {
-    padding-left: 15px;
-    padding-right: 15px;
-  }
-}
-.tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box {
-  border-radius: 24px;
-  background: #f8f9fb;
-  padding: 8px;
-  position: relative;
-  top: -60px;
-}
-
 .tf-car-design-1 .tf-archive-car-banner {
   background: #607085;
   height: 350px;
@@ -2266,6 +2177,78 @@
   color: #ffffff;
 }
 
+.tf-car-design-1 {
+  margin: 0 auto;
+  width: 100%;
+}
+.tf-car-design-1 .tf-single-car-details-warper {
+  padding: 32px 0;
+  display: flex;
+  gap: 32px;
+}
+@media only screen and (max-width: 1199.98px) {
+  .tf-car-design-1 .tf-single-car-details-warper {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+@media only screen and (max-width: 767.98px) {
+  .tf-car-design-1 .tf-single-car-details-warper {
+    flex-wrap: wrap;
+  }
+}
+.tf-car-design-1 .tf-single-car-details-warper .tf-car-details-column {
+  width: calc(100% - 472px);
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+@media only screen and (min-width: 767.99px) and (max-width: 991px) {
+  .tf-car-design-1 .tf-single-car-details-warper .tf-car-details-column {
+    width: calc(100% - 360px);
+  }
+}
+@media only screen and (max-width: 767.98px) {
+  .tf-car-design-1 .tf-single-car-details-warper .tf-car-details-column {
+    width: 100%;
+  }
+}
+.tf-car-design-1 .tf-single-car-details-warper .tf-car-details-column h3 {
+  color: #060D1C;
+  font-size: 21px !important;
+  font-weight: 400;
+  margin-bottom: 16px;
+  margin-top: 0px;
+}
+.tf-car-design-1 .tf-single-car-details-warper .tf-car-details-column .tf-car-title h1 {
+  color: #060D1C;
+  font-size: 28px !important;
+  font-weight: 600 !important;
+  margin-bottom: 10px;
+}
+.tf-car-design-1 .tf-single-car-details-warper .tf-car-details-column .tf-car-title .breadcrumb ul {
+  margin: 0;
+  padding: 0;
+}
+.tf-car-design-1 .tf-single-car-details-warper .tf-car-details-column .tf-car-title .breadcrumb ul li {
+  color: #686E7A;
+  font-size: 16px;
+  font-weight: 400;
+  display: inline-block;
+}
+.tf-car-design-1 .tf-single-car-details-warper .tf-car-details-column .tf-car-title .breadcrumb ul li a {
+  text-decoration: none;
+  color: #686E7A;
+  font-size: 16px;
+  font-weight: 400;
+}
+.tf-car-design-1 .tf-single-car-details-warper .tf-car-details-column .tf-details-menu {
+  width: 100%;
+}
+.tf-car-design-1 .tf-single-car-details-warper .tf-car-details-column .tf-template-part {
+  width: 100%;
+}
+
 .tf-car-template-container {
   max-width: 1140px;
   margin: 0 auto;
@@ -2826,6 +2809,26 @@
   height: 100%;
   padding-left: 10px;
   padding-right: 10px;
+}
+
+.tf-archive-car-section {
+  margin: 0 auto;
+}
+.tf-archive-car-section .tf-archive-car-details-warper {
+  padding: 0px 0px 56px 0px;
+}
+@media only screen and (max-width: 1024px) {
+  .tf-archive-car-section .tf-archive-car-details-warper {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+.tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box {
+  border-radius: 24px;
+  background: #f8f9fb;
+  padding: 8px;
+  position: relative;
+  top: -60px;
 }
 
 /*# sourceMappingURL=tourfic-car.css.map*/

@@ -1,7 +1,96 @@
 @import '../../../../common/variable';
-//Car Templates
-@import 'single';
-@import 'archive';
+
+//Single Modules Start
+@import 'modules/single/_gallery';
+@import 'modules/single/_top-nav';
+@import 'modules/single/_car-info';
+@import 'modules/single/_description';
+@import 'modules/single/_benefits';
+@import 'modules/single/_inc-exc';
+@import 'modules/single/_location';
+@import 'modules/single/_faq';
+@import 'modules/single/_terms-and-condition';
+@import 'modules/single/_review';
+@import 'modules/single/_booking-form';
+@import 'modules/single/_sidebar';
+//Single Modules End
+
+//Archive Modules Start
+@import 'modules/archive/_hero';
+@import 'modules/archive/_search-form';
+@import 'modules/archive/_navs';
+@import 'modules/archive/_listing';
+@import 'modules/archive/_sidebar';
+//Archive Modules End
+
+.tf-car-design-1{
+    margin: 0 auto;
+    width: 100%;
+    .tf-single-car-details-warper{
+        padding: 32px 0;
+        display: flex;
+        gap: 32px;
+        @media #{$max1199}{
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+        @media #{$max767}{
+            flex-wrap: wrap;
+        }
+        .tf-car-details-column{
+            width: calc(100% - 472px);
+            display: flex;
+            gap: 32px;
+            flex-wrap: wrap;
+            @media #{$tfmax991}{
+                width: calc(100% - 360px);
+            }
+            @media #{$max767}{
+                width: 100%;
+            }
+            h3{
+                color: $color-heading;
+                font-size: 21px !important;
+                font-weight: 400;
+                margin-bottom: 16px;
+                margin-top: 0px;
+            }
+            .tf-car-title{
+                h1{
+                    color: $color-heading;
+                    font-size: 28px !important;
+                    font-weight: 600 !important;
+                    margin-bottom: 10px;
+                }
+                .breadcrumb{
+                    ul{
+                        margin: 0;
+                        padding: 0;
+                        li{
+                            color: $color-text;
+                            font-size: 16px;
+                            font-weight: 400;
+                            display: inline-block;
+                            a{
+                                text-decoration: none;
+                                color: $color-text;
+                                font-size: 16px;
+                                font-weight: 400;
+                            }
+                        }
+                    }
+                }
+            }
+            .tf-details-menu{
+                width: 100%;
+            }
+            .tf-template-part{
+                width: 100%;
+            }
+        }
+    }
+}
+
 
 .tf-car-template-container{
     max-width: 1140px;
@@ -490,6 +579,24 @@
                     padding-right: 10px;
                 }
             }
+        }
+    }
+}
+
+.tf-archive-car-section{
+    margin: 0 auto;
+    .tf-archive-car-details-warper{
+        padding: 0px 0px 56px 0px;
+        @media #{$max1024}{
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+        .tf-archive-search-box{
+            border-radius: 24px;
+            background: $color-light-bg;
+            padding: 8px;
+            position: relative;
+            top: -60px;
         }
     }
 }
