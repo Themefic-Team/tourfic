@@ -30,7 +30,7 @@
     min-height: 149px;
     padding: 20px;
     margin: 16px 0;
-    border: 1px solid #c6c6c6;
+    border: 1px solid $color-border;
     border-radius: 4px;
     box-sizing: border-box;
     cursor: default;
@@ -44,8 +44,8 @@
 
 .single-tour-wrap.tf-featured {
     .single-tour-inner {
-        background: #F5F9FF;
-        border-color: #dbedff;
+        background: $color-light-bg;
+        border-color: $color-border;
         box-shadow: 0px 2px 4px rgba(179, 180, 202, 0.48);
     }
 }
@@ -101,7 +101,7 @@
     padding-right: 2px;
 
     &:hover {
-        color: #003162;
+        color: $color-secondary;
     }
 }
 
@@ -145,13 +145,13 @@
 .tf_search_result {
     .tf-tour-desc {
         margin-top: 8px;
-        border-top: 1px solid #bdbdbd;
+        border-top: 1px solid $color-gray;
         padding-top: 8px;
     }
 }
 
 .room_details {
-    border-top: 1px solid #bdbdbd;
+    border-top: 1px solid $color-gray;
     padding-top: 8px;
 }
 
@@ -182,7 +182,7 @@
 }
 
 a.page-numbers {
-    background: #003162;
+    background: $color-primary;
     color: $color-white;
     padding: 5px 15px;
     text-decoration: none;
@@ -194,7 +194,7 @@ a.page-numbers {
 
 .tf_posts_navigation {
     .page-numbers.current {
-        background: #c9ddfa;
+        background: $color-light-bg;
         padding: 5px 15px;
     }
 }
@@ -222,7 +222,7 @@ a.page-numbers {
     margin: 0;
     padding: 0;
     i {
-        color: #549501;
+        color: $color-success;
         font-size: 15px;
         margin-bottom: 10px;
     }
@@ -256,8 +256,8 @@ a.page-numbers {
     justify-content: space-between;
     padding: 10px 0;
     margin-bottom: 15px;
-    border-bottom: 1px solid #ddd;
-    border-top: 1px solid #ddd;
+    border-bottom: 1px solid $color-border;
+    border-top: 1px solid $color-border;
     .tf-result-counter-info{
         display: flex;
         .tf-counter-title{
@@ -291,7 +291,7 @@ a.page-numbers {
         padding: 10px 30px 10px 10px;
         background-position: calc(100% - 8px) 54%;
         border-radius: 4px;
-        background-color: #F5F8FF;
+        background-color: $color-light-bg;
     }
 }
 
@@ -299,7 +299,7 @@ a.page-numbers {
     width: 40px;
     height: 40px;
     line-height: 1;
-    background: #003162;
+    background: $color-primary;
     border-radius: 4px;
     display: flex;
     flex-direction: row;
@@ -314,7 +314,7 @@ a.page-numbers {
 
 .tf-archive-rating-wrapper {
     h6 {
-        color: #737373;
+        color: $color-heading;
         font-weight: 400;
         text-transform: capitalize;
         font-size: 14px;
@@ -388,7 +388,7 @@ a.page-numbers {
 
 /* Search result sidebar  */
 .tf_widget {
-    border: 1px solid #EDEDF0;
+    border: 1px solid $color-border;
     background: $color-white;
     border-radius: 10px;
     margin-bottom: 20px;
@@ -405,7 +405,7 @@ a.page-numbers {
         font-weight: 500;
     }
     .al-range-slider__track {
-        background: #EEE;
+        background: $color-light-bg;
         height: 10px;
         box-shadow: none !important;
         margin: 30px 0px 10px 0px;
@@ -413,16 +413,16 @@ a.page-numbers {
     .al-range-slider_dark {
         padding: 0px !important;
         .al-range-slider__bar {
-            background: #003162 !important;
+            background: $color-primary !important;
             box-shadow: none !important;
         }
     }
     .al-range-slider__knob {
-        background: #003162 !important;
+        background: $color-primary !important;
         height: 15px;
         width: 15px;
         box-shadow: none !important;
-        border: 3px solid #003162 !important;
+        border: 3px solid $color-primary !important;
         &:first-child {
             span {
                 left: 10px !important;
@@ -430,7 +430,7 @@ a.page-numbers {
         }
     }
     .al-range-slider__tooltip {
-        background: #003162 !important;
+        background: $color-primary !important;
         border-radius: 5px;
         box-shadow: none;
         padding: 3px 10px;
@@ -447,8 +447,8 @@ a.page-numbers {
         align-items: center;
         padding: 10px;
         height: 48px;
-        background: #F5F8FF;
-        border: 1px solid #EDEDF0;
+        background: $color-light-bg;
+        border: 1px solid $color-border;
         border-radius: 8px 8px 0px 0px;
         justify-content: space-between;
 
@@ -471,7 +471,7 @@ a.page-numbers {
     }
 
     .filter-item.active {
-        background-color: #F5F8FF;
+        background-color: $color-light-bg;
     }
     ul{
         margin: 0;
@@ -528,7 +528,7 @@ a.page-numbers {
         width: 20px;
         background-color: $color-white;
         border-radius: 5px;
-        border: 1px solid #D2D2D6;
+        border: 1px solid $color-border;
     }
 
     input[type=checkbox] {
@@ -536,11 +536,11 @@ a.page-numbers {
     }
 
     label:hover input~.checkmark {
-        background-color: #ccc;
+        background-color: $color-gray;
     }
 
     label input:checked~.checkmark {
-        background-color: #2196F3;
+        background-color: $color-primary;
     }
 
     .checkmark:after {
@@ -559,7 +559,7 @@ a.page-numbers {
         top: 3px;
         width: 6px;
         height: 10px;
-        border: solid white;
+        border: solid $color-white;
         border-width: 0 3px 3px 0;
         -webkit-transform: rotate(45deg);
         -ms-transform: rotate(45deg);

@@ -6,7 +6,7 @@ Button
     @include align-items(center);
     background-color: $color-white;
     padding: 7px 22px;
-    border: 1px solid #003c79;
+    border: 1px solid $color-primary;
     border-radius: 4px;
     font-weight: 500;
     text-decoration: none;
@@ -18,8 +18,8 @@ Button
     }
 
     &.tf-btn-secondary {
-        background-color: #003c79;
-        border-color: #003c79;
+        background-color: $color-primary;
+        border-color: $color-primary;
         color: $color-white;
         font-weight: 600;
     }
@@ -83,7 +83,7 @@ Custom Modal
     }
 
     .tf-modal-close {
-        color: #003162;
+        color: $color-primary;
         cursor: pointer;
         font-size: 22px;
         position: absolute;
@@ -254,8 +254,8 @@ Notice
         }
     }
     &.tf-notice-danger {
-        border-color: #fddcda;
-        background-color: #fef2f1;
+        border-color: $color-border;
+        background-color: $color-light-bg;
 
         .tf-notice-icon {
             color: $color-error;
@@ -287,11 +287,11 @@ Notice
         }
         h3{
             margin: 10px 0;
-            color: rgb(39, 51, 63);
+            color: $color-heading;
             font-size: 20px;
         }
         p{
-            color: rgb(86, 102, 118);
+            color: $color-text;
             font-size: 16px;
             margin: 0 0 20px 0;
         }
@@ -301,7 +301,7 @@ Notice
             justify-content: center;
             button{
                 border-radius: 8px;
-                background: #0274be;
+                background: $color-primary;
                 padding: 8px 30px;
                 border: 0px solid;
                 font-size: 16px;
@@ -312,13 +312,13 @@ Notice
                 color: $color-white;
                 transition: .3s all ease;
                 &:hover{
-                    background: #094C90;
+                    background: $color-secondary;
                 }
                 &.tf-refund-cancel{
-                    background: #E6F2FE;
-                    color: #566676;
+                    background: $color-light-bg;
+                    color: $color-text;
                     &:hover{
-                        background: #0274be;
+                        background: $color-primary;
                         color: $color-white;
                     }
                 }
