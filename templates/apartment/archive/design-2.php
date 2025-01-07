@@ -307,11 +307,7 @@
                             <div class="tf-notice tf-mt-24 tf-mb-30">
                                 <?php
                                 if (current_user_can('administrator')) {
-                                    echo '<p>' . sprintf(
-                                            /* translators: Map settings url */
-                                            esc_html__('Google Maps is not selected. Please configure it <a href="%s" target="_blank">Map Settings</a>.', 'tourfic'),
-                                            esc_url(admin_url('admin.php?page=tf_settings#tab=map_settings'))
-                                        ) . '</p>';
+                                    echo '<p>' . esc_html__('Google Maps is not selected. Please configure it ', 'tourfic') . '<a href="' . esc_url(admin_url('admin.php?page=tf_settings#tab=map_settings')) . '" target="_blank">' . esc_html__('Map Settings', 'tourfic') . '</a></p>';
                                 } else {
                                     echo '<p>' . esc_html__('Access is restricted as Google Maps is not enabled. Please contact the site administrator', 'tourfic') . '</p>';
                                 }
