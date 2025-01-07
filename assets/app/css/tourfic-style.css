@@ -6774,21 +6774,21 @@ div#tf-contact-info {
   }
 }
 
-.tf-template-3.tf-apartment-single .tf-informations-secations .slick-dots {
+.tf-template-3 .tf-informations-secations .slick-dots {
   bottom: -32px;
 }
-.tf-template-3.tf-apartment-single .tf-informations-secations .slick-dots li {
+.tf-template-3 .tf-informations-secations .slick-dots li {
   width: 16px;
   height: 16px;
 }
-.tf-template-3.tf-apartment-single .tf-informations-secations .slick-dots li button {
+.tf-template-3 .tf-informations-secations .slick-dots li button {
   background: transparent;
   border-radius: 30px;
   border: 1px solid #808080;
   height: 12px;
   width: 12px;
 }
-.tf-template-3.tf-apartment-single .tf-informations-secations .slick-dots li button:before {
+.tf-template-3 .tf-informations-secations .slick-dots li button:before {
   opacity: 0;
   font-size: 0;
   width: 6px;
@@ -6799,76 +6799,77 @@ div#tf-contact-info {
   border-radius: 100%;
   transform: translate(-50%, -50%);
 }
-.tf-template-3.tf-apartment-single .tf-informations-secations .slick-dots li.slick-active button {
+.tf-template-3 .tf-informations-secations .slick-dots li.slick-active button {
   background: transparent;
   border: 1px solid #0E3DD8;
   height: 16px;
   width: 16px;
 }
-.tf-template-3.tf-apartment-single .tf-informations-secations .slick-dots li.slick-active button:before {
+.tf-template-3 .tf-informations-secations .slick-dots li.slick-active button:before {
   opacity: 1;
 }
-.tf-template-3.tf-apartment-single .tf-apartment-rooms-section {
+
+.tf-template-3 .tf-apartment-rooms-section {
   margin-left: 32px;
   margin-right: 32px;
 }
-.tf-template-3.tf-apartment-single .tf-apartment-rooms-section .tf-apartment-room-details {
+.tf-template-3 .tf-apartment-rooms-section .tf-apartment-room-details {
   border-radius: 4px;
   background: #FCF4E8;
   padding: 24px 24px 28px 24px;
 }
-.tf-template-3.tf-apartment-single .tf-apartment-rooms-section .tf-apartment-room-details h4 {
+.tf-template-3 .tf-apartment-rooms-section .tf-apartment-room-details h4 {
   color: #060D1C;
   font-size: 20px !important;
   font-weight: 700 !important;
   margin: 0 0 16px 0;
 }
-.tf-template-3.tf-apartment-single .tf-apartment-rooms-section .tf-apartment-room-details .slick-track {
+.tf-template-3 .tf-apartment-rooms-section .tf-apartment-room-details .slick-track {
   margin: 0 !important;
 }
-.tf-template-3.tf-apartment-single .tf-apartment-rooms-section .tf-apartment-room-details .slick-track .slick-slide {
+.tf-template-3 .tf-apartment-rooms-section .tf-apartment-room-details .slick-track .slick-slide {
   margin: 0px 5px !important;
 }
-.tf-template-3.tf-apartment-single .tf-apartment-rooms-section .tf-apartment-room-details .tf-apartment-room-item .tf-apartment-room-item-thumb a {
+.tf-template-3 .tf-apartment-rooms-section .tf-apartment-room-details .tf-apartment-room-item .tf-apartment-room-item-thumb a {
   text-decoration: none;
 }
-.tf-template-3.tf-apartment-single .tf-apartment-rooms-section .tf-apartment-room-details .tf-apartment-room-item .tf-apartment-room-item-thumb a img {
+.tf-template-3 .tf-apartment-rooms-section .tf-apartment-room-details .tf-apartment-room-item .tf-apartment-room-item-thumb a img {
   height: 200px;
   border-radius: 4px;
   object-fit: cover;
 }
-.tf-template-3.tf-apartment-single .tf-apartment-rooms-section .tf-apartment-room-details .tf-apartment-room-item .tf-apartment-room-item-content {
+.tf-template-3 .tf-apartment-rooms-section .tf-apartment-room-details .tf-apartment-room-item .tf-apartment-room-item-content {
   margin-top: 16px;
 }
-.tf-template-3.tf-apartment-single .tf-apartment-rooms-section .tf-apartment-room-details .tf-apartment-room-item .tf-apartment-room-item-content a {
+.tf-template-3 .tf-apartment-rooms-section .tf-apartment-room-details .tf-apartment-room-item .tf-apartment-room-item-content a {
   text-decoration: none;
 }
-.tf-template-3.tf-apartment-single .tf-apartment-rooms-section .tf-apartment-room-details .tf-apartment-room-item .tf-apartment-room-item-content a span {
+.tf-template-3 .tf-apartment-rooms-section .tf-apartment-room-details .tf-apartment-room-item .tf-apartment-room-item-content a span {
   color: #686E7A;
   font-size: 16px !important;
   font-weight: 600 !important;
 }
-.tf-template-3.tf-apartment-single .tf-apartment-rooms-section .tf-apartment-room-details .tf-apartment-room-item .tf-apartment-room-item-content p {
+.tf-template-3 .tf-apartment-rooms-section .tf-apartment-room-details .tf-apartment-room-item .tf-apartment-room-item-content p {
   margin: 8px 0 0 0;
   color: #686E7A;
   font-size: 16px !important;
   font-weight: 400 !important;
 }
-.tf-template-3.tf-apartment-single .tf-apartment-rooms-section .tf-apartment-room-details .slick-dots {
+.tf-template-3 .tf-apartment-rooms-section .tf-apartment-room-details .slick-dots {
   bottom: -36px;
 }
-.tf-template-3.tf-apartment-single .tf-apartment-rooms-section .tf-apartment-room-details .slick-dots li {
+.tf-template-3 .tf-apartment-rooms-section .tf-apartment-room-details .slick-dots li {
   width: 16px;
   height: 16px;
 }
-.tf-template-3.tf-apartment-single .tf-apartment-rooms-section .tf-apartment-room-details .slick-dots li button {
+.tf-template-3 .tf-apartment-rooms-section .tf-apartment-room-details .slick-dots li button {
   background: transparent;
   border-radius: 30px;
   border: 1px solid #808080;
   height: 12px;
   width: 12px;
 }
-.tf-template-3.tf-apartment-single .tf-apartment-rooms-section .tf-apartment-room-details .slick-dots li button:before {
+.tf-template-3 .tf-apartment-rooms-section .tf-apartment-room-details .slick-dots li button:before {
   opacity: 0;
   font-size: 0;
   width: 6px;
@@ -6879,50 +6880,51 @@ div#tf-contact-info {
   border-radius: 100%;
   transform: translate(-50%, -50%);
 }
-.tf-template-3.tf-apartment-single .tf-apartment-rooms-section .tf-apartment-room-details .slick-dots li.slick-active button {
+.tf-template-3 .tf-apartment-rooms-section .tf-apartment-room-details .slick-dots li.slick-active button {
   background: transparent;
   border: 1px solid #0E3DD8;
   height: 16px;
   width: 16px;
 }
-.tf-template-3.tf-apartment-single .tf-apartment-rooms-section .tf-apartment-room-details .slick-dots li.slick-active button:before {
+.tf-template-3 .tf-apartment-rooms-section .tf-apartment-room-details .slick-dots li.slick-active button:before {
   opacity: 1;
 }
+
 @media only screen and (max-width: 767.98px) {
-  .tf-template-3.tf-apartment-single .tf-aprtment-rules-section {
+  .tf-template-3 .tf-aprtment-rules-section {
     padding-left: 16px;
     padding-right: 16px;
   }
 }
-.tf-template-3.tf-apartment-single .tf-aprtment-rules-section h2 {
+.tf-template-3 .tf-aprtment-rules-section h2 {
   color: #060D1C;
   font-size: 32px !important;
   font-weight: 700 !important;
   margin-bottom: 24px !important;
 }
 @media only screen and (max-width: 767.98px) {
-  .tf-template-3.tf-apartment-single .tf-aprtment-rules-section h2 {
+  .tf-template-3 .tf-aprtment-rules-section h2 {
     font-size: 24px !important;
   }
 }
-.tf-template-3.tf-apartment-single .tf-aprtment-rules-section .aprtment-inc-exc {
+.tf-template-3 .tf-aprtment-rules-section .aprtment-inc-exc {
   display: flex;
   gap: 26px;
 }
 @media only screen and (max-width: 767.98px) {
-  .tf-template-3.tf-apartment-single .tf-aprtment-rules-section .aprtment-inc-exc {
+  .tf-template-3 .tf-aprtment-rules-section .aprtment-inc-exc {
     flex-wrap: wrap;
   }
 }
-.tf-template-3.tf-apartment-single .tf-aprtment-rules-section .aprtment-inc-exc .aprtment-single-rules {
+.tf-template-3 .tf-aprtment-rules-section .aprtment-inc-exc .aprtment-single-rules {
   width: 50%;
 }
 @media only screen and (max-width: 767.98px) {
-  .tf-template-3.tf-apartment-single .tf-aprtment-rules-section .aprtment-inc-exc .aprtment-single-rules {
+  .tf-template-3 .tf-aprtment-rules-section .aprtment-inc-exc .aprtment-single-rules {
     width: 100%;
   }
 }
-.tf-template-3.tf-apartment-single .tf-aprtment-rules-section .aprtment-inc-exc .aprtment-single-rules ul {
+.tf-template-3 .tf-aprtment-rules-section .aprtment-inc-exc .aprtment-single-rules ul {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -6930,35 +6932,36 @@ div#tf-contact-info {
   gap: 16px;
   flex-wrap: wrap;
 }
-.tf-template-3.tf-apartment-single .tf-aprtment-rules-section .aprtment-inc-exc .aprtment-single-rules ul li {
+.tf-template-3 .tf-aprtment-rules-section .aprtment-inc-exc .aprtment-single-rules ul li {
   display: flex;
   gap: 8px;
 }
-.tf-template-3.tf-apartment-single .tf-aprtment-rules-section .aprtment-inc-exc .aprtment-single-rules ul li .rules-icon {
+.tf-template-3 .tf-aprtment-rules-section .aprtment-inc-exc .aprtment-single-rules ul li .rules-icon {
   width: 16px;
 }
-.tf-template-3.tf-apartment-single .tf-aprtment-rules-section .aprtment-inc-exc .aprtment-single-rules ul li .rules-content span {
+.tf-template-3 .tf-aprtment-rules-section .aprtment-inc-exc .aprtment-single-rules ul li .rules-content span {
   color: #808080;
   font-size: 16px !important;
   font-weight: 600 !important;
   margin: 0 0 8px 0px;
   display: block;
 }
-.tf-template-3.tf-apartment-single .tf-aprtment-rules-section .aprtment-inc-exc .aprtment-single-rules ul li .rules-content p {
+.tf-template-3 .tf-aprtment-rules-section .aprtment-inc-exc .aprtment-single-rules ul li .rules-content p {
   color: #686E7A;
   font-size: 16px !important;
   margin: 0;
 }
-.tf-template-3.tf-apartment-single .tf-aprtment-rules-section .aprtment-inc-exc.tf-inc-exc-full .aprtment-single-rules {
+.tf-template-3 .tf-aprtment-rules-section .aprtment-inc-exc.tf-inc-exc-full .aprtment-single-rules {
   width: 100%;
 }
+
 @media only screen and (max-width: 767.98px) {
-  .tf-template-3.tf-apartment-single .tf-place-offer-section {
+  .tf-template-3 .tf-place-offer-section {
     padding-left: 16px;
     padding-right: 16px;
   }
 }
-.tf-template-3.tf-apartment-single .tf-place-offer-section h2 {
+.tf-template-3 .tf-place-offer-section h2 {
   color: #060D1C;
   font-size: 32px !important;
   font-style: normal !important;
@@ -6966,38 +6969,39 @@ div#tf-contact-info {
   margin-bottom: 24px !important;
 }
 @media only screen and (max-width: 767.98px) {
-  .tf-template-3.tf-apartment-single .tf-place-offer-section h2 {
+  .tf-template-3 .tf-place-offer-section h2 {
     font-size: 24px !important;
   }
 }
-.tf-template-3.tf-apartment-single .tf-place-offer-section .place-offer-items {
+.tf-template-3 .tf-place-offer-section .place-offer-items {
   display: grid;
   gap: 8px 16px;
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 @media only screen and (max-width: 767.98px) {
-  .tf-template-3.tf-apartment-single .tf-place-offer-section .place-offer-items {
+  .tf-template-3 .tf-place-offer-section .place-offer-items {
     grid-template-columns: 1fr 1fr;
   }
 }
-.tf-template-3.tf-apartment-single .tf-place-offer-section .place-offer-items .tf-apt-amenity {
+.tf-template-3 .tf-place-offer-section .place-offer-items .tf-apt-amenity {
   display: flex;
   gap: 9px;
   align-items: center;
 }
-.tf-template-3.tf-apartment-single .tf-place-offer-section .place-offer-items .tf-apt-amenity .tf-apt-amenity-icon {
+.tf-template-3 .tf-place-offer-section .place-offer-items .tf-apt-amenity .tf-apt-amenity-icon {
   line-height: 11px;
 }
-.tf-template-3.tf-apartment-single .tf-place-offer-section .place-offer-items .tf-apt-amenity .tf-apt-amenity-icon img {
+.tf-template-3 .tf-place-offer-section .place-offer-items .tf-apt-amenity .tf-apt-amenity-icon img {
   height: 16px !important;
   width: 16px !important;
 }
-.tf-template-3.tf-apartment-single .tf-place-offer-section .place-offer-items .tf-apt-amenity span {
+.tf-template-3 .tf-place-offer-section .place-offer-items .tf-apt-amenity span {
   color: #686E7A;
   font-size: 14px !important;
   font-weight: 400 !important;
   line-height: 13px;
 }
+
 .tf-template-3.tf-apartment-single #tf-apartment-booking .tf-apartment-form-fields .tf_booking-dates {
   flex-wrap: wrap;
   margin-bottom: 32px;
