@@ -4,7 +4,7 @@ use \Tourfic\App\TF_Review;
 use \Tourfic\Classes\Apartment\Apartment;
 ?>
 
-<div class="tf-main-wrapper tf-apartment-wrap tf-apartment">
+<div class="tf-main-wrapper tf-apartment-wrap tf-apartment tf-template-1">
 	<?php do_action( 'tf_before_container' ); ?>
 
     <div class="tf-title-area tf-apartment-title">

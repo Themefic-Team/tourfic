@@ -9,6 +9,7 @@
         .tf-date-select-box{
             padding: 8px;
             flex-wrap: nowrap;
+            margin-bottom: 0px;
             @media #{$max767}{
                 flex-wrap: wrap;
             }
