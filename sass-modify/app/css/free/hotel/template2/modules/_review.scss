@@ -1,7 +1,7 @@
 .tf-reviews-wrapper { 
     padding-bottom: 55px !important;
     .tf-section-title{
-        color: #595349;
+        color: $color-heading;
         font-size: 32px !important;
         font-style: normal !important;
         font-weight: 700 !important;
@@ -14,7 +14,7 @@
 	.tf-reviews-slider { 
 
 		.tf-reviews-item { 
-            background: #FDF9F3;
+            background: $color-light-bg;
             margin-right: 35px !important;
             padding: 24px;
             display: flex !important;
@@ -38,7 +38,7 @@
 			.tf-reviews-text { 
 
 				.tf-review-rating { 
-                    color: #595349;
+                    color: $color-primary;
                     font-size: 16px;
                     font-weight: 600;
                     line-height: 20.80px;
@@ -51,7 +51,7 @@
 				}
 
 				.tf-reviews-meta { 
-                    color: #99948D;
+                    color: $color-text;
                     margin-bottom: 16px;
                     display: inline-block;
 				}
@@ -76,7 +76,7 @@
             border: none;
             background: transparent;
             font-size: 30px;
-            color: #B58E53;
+            color: $color-primary;
             padding: 0px;
             cursor: pointer;
         }
@@ -91,7 +91,7 @@
 }
 .tf-questions-wrapper { 
     h2{
-        color: #595349;
+        color: $color-heading;
         font-size: 32px !important;
         font-style: normal !important;
         font-weight: 700 !important;
@@ -126,7 +126,7 @@
                     transition: 0.3s;
                 }
                 &.tf-active {
-                    background: #FDF9F3;
+                    background: $color-light-bg;
                     padding: 24px;
                     display: flex;
                     flex-direction: column;
@@ -139,7 +139,7 @@
                 }
 				.tf-faq-head{
                     span { 
-                        color: #595349;
+                        color: $color-text;
                         font-size: 16px !important;
                         font-weight: 600 !important;
                         line-height: 20.80px !important;
@@ -166,7 +166,7 @@
 
 .tf-policies-wrapper { 
     h2{
-        color: #595349;
+        color: $color-heading;
         font-size: 32px !important;
         font-style: normal !important;
         font-weight: 700 !important;
@@ -181,7 +181,7 @@
         flex-direction: column;
         gap: 16px;
         p{
-            color: #99948D;
+            color: $color-text;
             @media #{$max767}{
                 font-size: 14px !important;
             }
@@ -191,7 +191,7 @@
             gap: 16px;
             &>div {
                 padding: 24px;
-                background-color: #FDF9F3;
+                background-color: $color-light-bg;
             }
 			.tf-policy-title { 
                 min-width: 316px;

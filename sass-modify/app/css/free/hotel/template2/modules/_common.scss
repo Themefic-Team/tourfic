@@ -1,5 +1,5 @@
 .tf-template-3 {
-    background: #FDF9F3;
+    background: $color-white;
     color: $color-gray;
     font-size: 16px;
     font-weight: 400;
@@ -56,7 +56,7 @@
         outline: none;
     }
     .tf-section {
-        background: #FCF4E8;
+        background: $color-light-bg;
         padding: 32px;
         margin-bottom: 32px;
     }
@@ -93,11 +93,11 @@
         }
         /* Track */
         &::-webkit-scrollbar-track {
-            background: #D6D4D2;
+            background: $color-light-bg;
         }
         /* Handle */
         &::-webkit-scrollbar-thumb {
-            background: #595349;
+            background: $color-gray;
             border-radius: 50px;
             overflow: hidden;
         }
@@ -154,7 +154,7 @@
 
     #tf-ask-question{
         .tf-aq-outer{
-            background: #FDF9F3;
+            background: $color-light-bg;
             border-radius: 0px;
             h4{
                 color: $color-heading;
@@ -166,29 +166,29 @@
         }
         .tf-aq-field{
             input{
-                border: 1px solid #595349;
+                border: 1px solid $color-border;
                 box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
-                color: #C1BFBB;
-                background-color: #fdf9f3;
+                color: $color-text;
+                background-color: $color-light-bg;
                 font-size: 16px;
                 height: 45px;
                 padding: 12px 14px;;
                 border-radius: 0px;
                 &::placeholder{
-                    color: #C1BFBB;
+                    color: $color-text;
                 }
             }
             textarea{
-                border: 1px solid #595349;
+                border: 1px solid $color-border;
                 box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
-                background-color: #fdf9f3;
-                color: #C1BFBB;
+                background-color: $color-light-bg;
+                color: $color-text;
                 font-size: 16px;
                 font-weight: 400;
                 padding: 12px 14px;
                 border-radius: 0px;
                 &::placeholder{
-                    color: #C1BFBB;
+                    color: $color-text;
                 }
             }
         }
@@ -212,7 +212,7 @@
     }
     #tf-hotel-services{
         .tf-hotel-services{
-            background: #FDF9F3;
+            background: $color-light-bg;
             border-radius: 0px;
             gap: 0px;
             .tf-hotel-services-text{
@@ -242,7 +242,7 @@
                 }
                 select{
                     border-radius: 0px;
-                    background: #FDF9F3;
+                    background: $color-light-bg;
                     height: 45px;
                     border: 1px solid $color-text;
                 }

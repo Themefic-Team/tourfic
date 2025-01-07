@@ -5,7 +5,7 @@
     flex-direction: column;
     align-self: stretch;
     border-radius: 4px;
-    background: $t4-orange-100;
+    background: $color-light-bg;
 
     p {
         margin: 0;
@@ -14,18 +14,18 @@
     }
 
     .tf-short-description {
-        color: #99948D;
+        color: $color-text;
     }
 
     span.tf-see-description,
     span.tf-see-less-description {
-        color: #595349;
+        color: $color-text;
         cursor: pointer;
     }
 
     .tf-full-description {
         display: none;
-        color: #99948D;
+        color: $color-text;
     }
 
     .tf-hotel-description {

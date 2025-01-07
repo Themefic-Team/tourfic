@@ -1146,7 +1146,7 @@
                         font-size: 16px !important;
                         font-weight: 400 !important;
                         line-height: 1.6 !important;
-                        color: #686E7A;
+                        color: $color-text;
                         margin: 0px;
                         text-transform: capitalize !important;
                     }
@@ -1154,7 +1154,7 @@
                         margin-top: 8px;
                         label{
                             &:before{
-                            color: #686E7A;
+                            color: $color-primary;
                             font-size: 15px;
                             }
                         }

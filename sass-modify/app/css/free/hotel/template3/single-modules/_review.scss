@@ -2,7 +2,7 @@
 .tf-review-wrapper{
 
     .tf-section-title {
-        color: $t4-orange-1000;
+        color: $t4-orange-100;
         font-size: 18px !important;
         font-weight: 500 !important;
         line-height: 21px !important;
@@ -12,13 +12,13 @@
     .tf-review-box{
         padding: 24px;
         border-radius: 4px;
-        background: $t4-orange-100;
+        background: $color-light-bg;
     }
 
     .tf-review-data.tf-box {
         padding: 24px;
         border-radius: 4px;
-        background: $t4-orange-100;
+        background: $color-light-bg;
         box-shadow: none;
 
         .tf-review-data-inner{
@@ -59,7 +59,7 @@
             margin-top: 24px;
 
             span{
-                color: $t4-orange-1000;
+                color: $t4-orange-100;
                 font-size: 16px;
                 font-weight: 500;
                 line-height: 18px;
@@ -127,7 +127,7 @@
         border-bottom: none;
         padding: 24px;
         border-radius: 4px;
-        background: $t4-orange-100;
+        background: $color-light-bg;
         margin-top: 32px;
 
         .tf-review-details{
@@ -178,7 +178,7 @@
                 @include align-items(center);
 
                 h3{
-                    color: $t4-orange-1000;
+                    color: $t4-orange-100;
                     font-size: 14px !important;
                     font-weight: 500 !important;
                     line-height: 22px !important;
@@ -186,7 +186,7 @@
                 }
 
                 .tf-review-date{
-                    color: $t4-orange-1000;
+                    color: $t4-orange-100;
                     font-size: 14px;
                     font-weight: 400;
                     line-height: 16px;
@@ -219,7 +219,7 @@
         margin-top: 24px;
         padding: 24px;
         border-radius: 4px;
-        background: $t4-orange-100;
+        background: $color-light-bg;
 
         .tf-section-title {
             margin-bottom: 8px !important;
@@ -239,7 +239,7 @@
                 width: 196px;
 
                 &>label{
-                    color: $t4-orange-1000;
+                    color: $t4-orange-100;
                     font-size: 14px !important;
                     font-weight: 500 !important;
                     line-height: 22px !important;

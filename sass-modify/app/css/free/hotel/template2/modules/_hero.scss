@@ -46,21 +46,22 @@
                     height: 32px;
                     width: 32px;
                     border-radius: 100px;
-                    background: rgba(181, 142, 83, 0.50);
+                    background: $color-primary;
+                    opacity: .5;
                     box-shadow: 0px 14px 30px 0px rgba(0, 23, 100, 0.07);
                     text-align: center;
                     line-height: 32px;
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    color: #FDF9F3;
+                    color: $color-white;
                     cursor: pointer;
                     font-size: 16px;
                     text-decoration: none;
                 }
                 a.tf-share-toggle.actives,
                 a.tf-wishlist.actives {
-                    background: #B58E53;
+                    background: $color-primary;
                     box-shadow: 0px 14px 30px 0px rgba(0, 23, 100, 0.07);
                 }
                 
@@ -79,7 +80,7 @@
                                 text-decoration: none;
                                 i{
                                     font-size: 16px;
-                                    color: #FDF9F3;
+                                    color: $color-white;
                                 }
                             }
                             &:last-child{
@@ -97,7 +98,7 @@
                                 span{
                                     display: none;
                                     font-size: 13px;
-                                    color: #FDF9F3;
+                                    color: $color-white;
                                 }
                             }
                             #share_link_button.copied{
@@ -135,7 +136,7 @@
                     text-align: left;
                     width: 100%;
                     h1{
-                        color: #FDF9F3;
+                        color: $color-white;
                         margin-bottom: 16px;
                         @media #{$max1024}{
                             font-size: 32px !important;
@@ -155,7 +156,7 @@
                         font-size: 24px;
                         font-weight: 400;
                         line-height: 31px;
-                        color: #FDF9F3;
+                        color: $color-white;
                         display: flex;
                         gap: 8px;
                         width: 80%;
@@ -168,7 +169,7 @@
                             line-height: 130%; /* 18.2px */
                         }
                         a {
-                            color: #FDF9F3;
+                            color: $color-white;
                             text-decoration: none;
                             font-size: 24px;
                             font-weight: 400;
@@ -214,7 +215,7 @@
                         justify-content: center;
                         height: 100%;
                         width: 100%;
-                        color: #FDF9F3;
+                        color: $color-white;
 
                         svg {
                             @media #{$max1024}{
@@ -236,7 +237,7 @@
                 display: flex;
                 align-items: center;
                 gap: 32px;
-                color: #FDF9F3;
+                color: $color-white;
                 @media #{$max1024}{
                     display: flow-root;
                     padding: 0px 0 30px 0;
@@ -246,7 +247,7 @@
                     padding: 0px 16px 16px 16px;
                 }
                 h1{
-                    color: #FDF9F3;
+                    color: $color-white;
                     margin: 0px;
                     font-size: 40px !important;
                     @media #{$max767}{
@@ -262,7 +263,7 @@
                     margin-top: 6px;
                 }
                 p{ 
-                    color: #FDF9F3;
+                    color: $color-white;
                     margin: 0px;
                     font-size: 24px !important;
                     line-height: 1.3;

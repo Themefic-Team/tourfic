@@ -25,7 +25,7 @@
     }
     .tf-popup-inner {
         width: 1130px;
-        background: #FCF4E8;
+        background: $color-light-bg;
         padding: 24px;
         max-height: 695px;
         max-width: 80vw;
@@ -42,7 +42,7 @@
             grid-template-columns: 1fr 1fr 1fr;
             gap: 10px;
             scrollbar-width: thin;
-            scrollbar-color: #aaa #eee;
+            scrollbar-color: $color-gray $color-light-bg;
             @media #{$max767}{
                 grid-template-columns: 1fr 1fr;
                 max-height: 320px;
@@ -51,7 +51,7 @@
                 width: 5px; 
             }
             scrollbar-thumb {
-                background-color: #aaa;
+                background-color: $color-gray;
                 border-radius: 4px;
             }
             img.tf-popup-image {
@@ -66,12 +66,12 @@
         }
         
         .tf-popup-body::-webkit-scrollbar-thumb {
-            background-color: #aaa;
+            background-color: $color-gray;
             border-radius: 4px;
         }
         
         .tf-popup-body::-webkit-scrollbar-track {
-            background-color: #eee;
+            background-color: $color-light-bg;
         }
 
         .tf-popup-close {
@@ -82,21 +82,21 @@
             height: 30px;
             width: 30px;
             border-radius: 50%;
-            background: #fcf4e8;
+            background: $color-light-bg;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: .3s all ease;
             cursor: pointer;
             &:hover{
-                background: #FDF9F3;
+                background: $color-white;
             }
             &:focus{
-                background: #FAEEDC;
+                background: $color-white;
             }
         }
         .tf-popup-close i {
-            color: #595349;
+            color: $color-text;
             font-size: 18px;
         }
     }
@@ -127,7 +127,7 @@
             grid-template-columns: 3fr 1fr;
             gap: 10px;
             scrollbar-width: thin;
-            scrollbar-color: #aaa #eee;
+            scrollbar-color: $color-gray $color-light-bg;
             @media #{$max1024}{
                 grid-template-columns: 2fr 1fr;
             }
@@ -138,7 +138,7 @@
                 width: 5px; 
             }
             scrollbar-thumb {
-                background-color: #aaa;
+                background-color: $color-gray;
                 border-radius: 4px;
             }
             .tf-popup-left {
@@ -150,7 +150,7 @@
                 }
             }
             .tf-popup-right span {
-                color: #595349;
+                color: $color-text;
                 font-size: 16px !important;
                 font-weight: 600 !important;
                 line-height: 20.80px;
@@ -180,7 +180,7 @@
                 }
             }
             .tf-popup-right a {
-                color: #595349;
+                color: $color-primary;
                 font-size: 16px;
                 font-weight: 600;
                 line-height: 20.80px;

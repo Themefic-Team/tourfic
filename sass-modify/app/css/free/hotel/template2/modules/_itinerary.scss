@@ -18,13 +18,13 @@
     .section-title a {
         display: flex;
         flex-direction: row;
-        color: #595349;
+        color: $color-heading;
         font-size: 16px;
         font-weight: 700;
         line-height: 24px;
         word-wrap: break-word;
         border: none;
-        background: #FAEEDC;
+        background: $color-light-bg;
         min-width: 211px;
         height: fit-content;
         padding: 12px;
@@ -39,7 +39,7 @@
     .tf-itinerary-wrapper{
         padding: 0px;
         .tf-single-itinerary {
-            background: #FCF4E8;
+            background: $color-light-bg;
             padding: 16px 32px;
             display: flex;
             flex-direction: column;
@@ -57,7 +57,7 @@
             cursor: pointer;
             user-select: none;
             i{
-                color: #595349 ;
+                color: $color-text ;
             }
         }
         .tf-itinerary-title.active {
@@ -66,7 +66,7 @@
             }
         }
         .tf-itinerary-title span.tf-head-title {
-            color: #595349;
+            color: $color-text;
             font-size: 20px !important;
             font-weight: 400 !important;
             line-height: 26px !important;
@@ -81,7 +81,7 @@
             }
             span.tf-itinerary-time {
                 padding: 8px 16px;
-                background: #FAEEDC;
+                background: $color-light-bg;
                 margin-right: 16px;
             }
         }
@@ -116,7 +116,7 @@
                 gap: 15px;
                 .tf-itinerary-single-meta{
                     li{
-                        color: #99948D;
+                        color: $color-text;
                         font-size: 16px;
                         font-style: normal;
                         font-weight: 400;
@@ -127,7 +127,7 @@
                             font-size: 20px;
                         }
                         a{
-                            color: #99948D;
+                            color: $color-text;
                             font-size: 16px;
                             font-style: normal;
                             font-weight: 400;
@@ -160,7 +160,7 @@
     }
 
     .section-title h2 {
-        color: #595349;
+        color: $color-heading;
         font-size: 32px !important;
         font-style: normal !important;
         font-weight: 700 !important;

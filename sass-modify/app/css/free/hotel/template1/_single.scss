@@ -12,7 +12,7 @@
         margin: 0px !important;
         .tf_booking-dates{
             #check-in-out-date{
-                background-color: #F3F7FA !important;
+                background-color: $color-light-bg !important;
                 padding-top: 3px !important;
                 padding-bottom: 3px !important;
             }
@@ -23,7 +23,7 @@
                 b{
                     font-family: inherit;
                     font-weight: 500;
-                    color: red;
+                    color: $color-denger;
                 }
             }
         }
@@ -33,7 +33,7 @@
     }
     .tf-tour-booking-box{
         margin-bottom: 25px;
-        box-shadow: 0px 13px 30px 0px rgba(224, 232, 238, 0.32);
+        box-shadow: 0px 13px 30px 0px $color-gray;
     }
     .tf-hotel-location-map{
         #hotel-location{
@@ -45,7 +45,7 @@
         .tf-hotel-location-preview{
             position: relative;
             margin-bottom: 0px;
-            border: 1px solid #ddd;
+            border: 1px solid $color-border;
             @media #{$tfmax767}{
                 margin-bottom: 30px;
             }
@@ -87,7 +87,7 @@
             }
             .tf-availability-table{
                 background-color: $color-white;
-                box-shadow: 0px 13px 30px 0px rgba(224, 232, 238, 0.32);
+                box-shadow: 0px 13px 30px 0px $color-gray;
                 border-radius: 5px;
                 margin-bottom: 0px;
                 border-collapse: collapse;
@@ -105,14 +105,14 @@
                             font-size: 16px;
                             font-weight: 500;
                             font-family: inherit;
-                            border: 1px solid #ddd;
+                            border: 1px solid $color-border;
                         }
                     }
                 }
                 &>tbody{
                     tr{
                         td{
-                            border: 1px solid #ddd;
+                            border: 1px solid $color-border;
                             padding: 8px;
                             border-right: none;
                             .tf-room-preview-img{
@@ -130,7 +130,7 @@
                                 span{
                                     display: inline-block;
                                     font-weight: 500;
-                                    background: #FF6B00;
+                                    background: $color-primary;
                                     border-radius: 4px 0px 0px 0px;
                                     padding: 3px 14px;
                                     position: absolute;
@@ -162,7 +162,7 @@
                                     padding: 0;
                                     li{
                                         display: inline-block;
-                                        background: #F1F3F4;
+                                        background: $color-light-bg;
                                         border-radius: 5px;
                                         padding: 10px;
                                         margin: 5px 10px 5px 0px;
@@ -206,7 +206,7 @@
                             }
                             .room-selection-wrap{
                                 select{
-                                    border: 1px solid #ddd;
+                                    border: 1px solid $color-border;
                                 }
                             }
                         }
@@ -240,7 +240,7 @@
                 padding: 10px;
                 text-transform: capitalize;
                 margin: 5px 5px 5px 0px;
-                box-shadow: 0px 13px 30px 0px rgba(224, 232, 238, 0.32);
+                box-shadow: 0px 13px 30px 0px $color-gray;
                 font-size: 15px;
                 i{
                     margin-right: 8px;
@@ -267,7 +267,7 @@
                 padding: 10px;
                 text-transform: capitalize;
                 margin: 5px 5px 5px 0px;
-                box-shadow: 0px 13px 30px 0px rgba(224, 232, 238, 0.32);
+                box-shadow: 0px 13px 30px 0px $color-gray;
                 font-size: 15px;
                     i{
                         margin-right: 8px;
@@ -290,7 +290,7 @@
             padding: 32px;
             border-radius: 6px;
             background: $color-white;
-            box-shadow: 0px 13px 30px 0px rgba(224, 232, 238, 0.32);
+            box-shadow: 0px 13px 30px 0px $color-gray;
 
             .tf-hotel-facilities-title-area {
                 display: flex;
@@ -304,7 +304,7 @@
 
                 i {
                     font-size: 32px;
-                    color: #0E3DD8;
+                    color: $color-primary;
                 }
                 
                 .hotel-facilities-icon-down {
@@ -317,7 +317,7 @@
                 .hotel-facility-item {
                     margin-bottom: 24px;
                     .hotel-single-facility-title {
-                        color: #060D1C;
+                        color: $color-heading;
                         font-family: inherit;
                         font-size: 20px;
                         font-style: normal;
@@ -341,7 +341,7 @@
 
                         li {
                             display: flex;
-                            color: #686E7A;
+                            color: $color-text;
                             font-family: inherit;
                             font-size: 16px;
                             font-style: normal;
@@ -373,7 +373,7 @@
             }
             .tf-ask-enquiry{
                 background-color: $color-white;
-                box-shadow: 0px 13px 30px 0px rgba(224, 232, 238, 0.32);
+                box-shadow: 0px 13px 30px 0px $color-gray;
                 padding: 30px;
                 h3{
                     font-size: 25px;
@@ -392,11 +392,11 @@
                     .tf-faq-single-inner{
                         margin: 0px 0px 30px 0px;
                         background: $color-white;
-                        box-shadow: 0px 13px 30px 0px rgba(224, 232, 238, 0.32);
+                        box-shadow: 0px 13px 30px 0px $color-gray;
                         transition: .3s all ease;
                         &:hover{
-                            background: #F6F7FB;
-                            box-shadow: 0px 13px 30px 0px #E0E8EE;
+                            background: $color-light-bg;
+                            box-shadow: 0px 13px 30px 0px $color-light-bg;
                         }
                         h3{
                             font-size: 20px;
@@ -405,8 +405,8 @@
                 }
                 .tf-faq-single.active {
                     .tf-faq-single-inner{
-                        background: #F6F7FB;
-                            box-shadow: 0px 13px 30px 0px #E0E8EE;
+                        background: $color-light-bg;
+                            box-shadow: 0px 13px 30px 0px $color-light-bg;
                     }
                 }
             }
@@ -426,7 +426,7 @@
                 flex-basis: 30%;
                 margin-right: 30px;
                 background-color: $color-white;
-                box-shadow: 0px 13px 30px 0px rgba(224, 232, 238, 0.32);
+                box-shadow: 0px 13px 30px 0px $color-gray;
                 padding: 30px;
                 @media #{$tfmax991}{
                     flex-basis: 28%;
@@ -450,7 +450,7 @@
                 text-transform: capitalize;
             }
             .tf-review-data-average p {
-                background: #ECF2FF;
+                background: $color-light-bg;
                 text-align: center;
                 font-size: 30px !important;
                 color: $color-primary;
@@ -478,7 +478,7 @@
             .tf-review-data-features {
                 flex-basis: 68%;
                 background-color: $color-white;
-                box-shadow: 0px 13px 30px 0px rgba(224, 232, 238, 0.32);
+                box-shadow: 0px 13px 30px 0px $color-gray;
                 padding: 30px;
 
                 @media #{$tfmax767}{
@@ -497,7 +497,7 @@
                 }
                 .tf-progress-bar {
                     height: 7px;
-                    background: #EAEDF6;
+                    background: $color-light-bg;
                     border-radius: 7px;
                 }
                 
@@ -532,7 +532,7 @@
     .tf-details-qc-slider-nav {
         margin-top: 0px;
         .tf-details-qcs.is-active img {
-            border: 5px solid #1F2937;
+            border: 5px solid $color-primary;
         }
         .tf-details-qcs img {
             min-height: 50px;
@@ -560,21 +560,21 @@
                     border-radius: 5px;
                     padding: 5px 10px 5px 0px;
                     margin: 4px 5px 4px 0px;
-                    color: #6B7280 !important;
+                    color: $color-text !important;
                     font-size: 16px;
                     i{
-                        color: #6B7280 !important;
+                        color: $color-text !important;
                     }
                 }
             }
             p{
                 margin: 10px 0px;
-                color: #6B7280;
+                color: $color-text;
             }
             h4{
                 font-size: 20px;
                 margin: 15px 0px 10px 0px;
-                color: #1F2937;
+                color: $color-heading;
             }
         }
     }

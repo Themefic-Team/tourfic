@@ -150,12 +150,12 @@
         overflow: auto;
         padding: 8px;
         scrollbar-width: thin;
-        scrollbar-color: #9c9c9c $color-white;
+        scrollbar-color: $color-gray $color-white;
         border-radius: 4px;
-        background: #fef9f6;
+        background: $color-light-bg;
         box-shadow: 0px 4px 16px 0px rgba(2, 28, 53, 0.2);
         div {
-          color: #686e7a;
+          color: $color-text;
           font-size: 16px;
           font-style: normal;
           font-weight: 400;
