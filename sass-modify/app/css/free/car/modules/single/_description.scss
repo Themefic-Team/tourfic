@@ -1,0 +1,23 @@
+.tf-car-design-1{
+    .tf-short-description,
+    .tf-full-description{
+        color: #566676;
+        font-size: 16px;
+        font-weight: 400;
+        p{
+            color: #566676;
+            font-size: 16px;
+            font-weight: 400;
+            margin: 0;
+            
+        }
+        span.tf-see-description,
+        span.tf-see-less-description{
+            color: #27333F;
+            cursor: pointer;
+        }
+    }
+    .tf-full-description{
+        display: none;
+    }
+}
