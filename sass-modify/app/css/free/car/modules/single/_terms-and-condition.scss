@@ -12,8 +12,8 @@
             margin-bottom: 16px;
         }
         table{
-            border-left: 1px solid #DFE6ED;
-            border-top: 1px solid #DFE6ED;
+            border-left: 1px solid $color-border;
+            border-top: 1px solid $color-border;
             margin: 0px;
             border-radius: 16px;
             tr{
@@ -21,8 +21,8 @@
                     color: #27333F;
                     font-size: 16px;
                     font-weight: 400;
-                    border-right: 1px solid #DFE6ED;
-                    border-bottom: 1px solid #DFE6ED;
+                    border-right: 1px solid $color-border;
+                    border-bottom: 1px solid $color-border;
                     padding: 16px;
                     vertical-align: baseline;
                     text-align: left;
@@ -33,11 +33,11 @@
                     }
                 }
                 td{
-                    color: #566676;
+                    color: $color-text;
                     font-size: 16px;
                     font-weight: 400;
-                    border-right: 1px solid #DFE6ED;
-                    border-bottom: 1px solid #DFE6ED;
+                    border-right: 1px solid $color-border;
+                    border-bottom: 1px solid $color-border;
                     padding: 16px 40px;
                     @media #{$max767}{
                         padding: 8px; 

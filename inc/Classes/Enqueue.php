@@ -66,7 +66,8 @@ class Enqueue {
 		$slick_cdn        = ! empty( Helper::tfopt( 'slick_cdn' ) ) ? Helper::tfopt( 'slick_cdn' ) : false;
 		$fa_cdn           = ! empty( Helper::tfopt( 'fa_cdn' ) ) ? Helper::tfopt( 'fa_cdn' ) : false;
 		$min_css          = ! empty( Helper::tfopt( 'css_min' ) ) ? '.min' : '';
-		$min_js           = ! empty( Helper::tfopt( 'js_min' ) ) ? '.min' : '';
+		$min_js           = ! empty( Helper::tfopt( 'js_min' ) ) ? '.min' : '';		
+		$tf_disable_services = ! empty( Helper::tfopt( 'disable-services' ) ) ? Helper::tfopt( 'disable-services' ) : [];
 
 		/*
 		 * Ubuntu font load for hotel, tour, apartment template 3
@@ -95,6 +96,11 @@ class Enqueue {
 
 		//Updated CSS
 		wp_enqueue_style( 'tf-app-style', TF_ASSETS_URL . 'app/css/tourfic-style' . $min_css . '.css', null, TF_VERSION );
+
+		if ( !in_array('carrentals', $tf_disable_services) ){
+			wp_enqueue_style( 'tf-app-car', TF_ASSETS_URL . 'app/css/tourfic-car' . $min_css . '.css', null, TF_VERSION );
+		}
+
 		if ( get_post_type() == 'tf_tours' ) {
 
 			if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {

@@ -9,12 +9,12 @@
             list-style: none;
             gap: 16px 8px;
             li{
-                color: #566676;
+                color: $color-text;
                 font-size: 16px;
                 font-weight: 400;
                 width: calc(25% - 8px);
                 border-radius: 8px;
-                border: 1px solid #DFE6ED;
+                border: 1px solid $color-light-bg;
                 padding: 8px;
                 position: relative;
                 i{
@@ -68,7 +68,7 @@
                         z-index: -1;
                     }
                     span{
-                        color: #212121;
+                        color: $color-text;
                         font-size: .875rem;
                         line-height: 1.125rem;
                     }

@@ -10,37 +10,37 @@
         .tf-price-header{
             margin-bottom: 38px;
             h2{
-                color: #27333F;
+                color: $color-heading;
                 font-size: 28px;
                 font-weight: 600;
                 margin-bottom: 8px;
                 del{
-                    color: #566676;
+                    color: $color-text;
                     text-decoration-line: strikethrough;
                     font-weight: 400 !important;
                 }
                 small.pricing-type{
-                    color: #566676;
+                    color: $color-text;
                     font-size: 16px !important;
                     font-weight: 400;
                     text-transform: capitalize;
                 }
             }
             p{
-                color: #566676;
+                color: $color-text;
                 font-size: 16px;
                 margin: 0;
             }
         }
         .tf-extra-added-info{
             border-radius: 16px;
-            background: #EEF2F6;
+            background: $color-light-bg;
             padding: 16px 24px 24px 24px;
             margin-bottom: 32px;
             display: none;
             .tf-extra-added-box{
                 h3{
-                    color: #27333F;
+                    color: $color-heading;
                     font-size: 21px !important;
                     font-weight: 400 !important;
                     margin: 0;
@@ -51,14 +51,14 @@
                     padding: 16px;
                     gap: 8px;
                     h4{
-                        color: #27333F;
+                        color: $color-heading;
                         font-size: 16px !important;
                         font-weight: 400 !important;
                         margin: 0;
                         width: calc(100% - 148px);
                     }
                     .qty-price{
-                        color: #27333F;
+                        color: $color-heading;
                         font-size: 16px;
                         font-weight: 400;
                         width: 140px;
@@ -66,7 +66,7 @@
                             margin-left: 10px;
                         }
                         i{
-                            color: #566676;
+                            color: $color-text;
                             font-size: 20px;
                         }
                         span.delete{
@@ -78,11 +78,11 @@
         }
         .tf-add-extra-section{
             border-radius: 16px;
-            background: #EEF2F6;
+            background: $color-light-bg;
             padding: 16px 24px 24px 24px;
             margin-bottom: 32px;
             h3{
-                color: #27333F;
+                color: $color-heading;
                 font-size: 21px !important;
                 font-weight: 400 !important;
                 margin-bottom: 16px;
@@ -92,11 +92,11 @@
                 .tf-car-single-extra{
                     padding: 12px 16px 16px 16px;
                     border-radius: 8px;
-                    background: #F8FAFC;
+                    background: $color-light-bg;
                     .tf-extra-title{
                         width: calc(100% - 95px);
                         h4{
-                            color: #27333F;
+                            color: $color-heading;
                             font-size: 16px !important;
                             font-weight: 400 !important;
                             margin-bottom: 8px;
@@ -151,7 +151,7 @@
                         }
                         .acr-select{
                             border-radius: 8px;
-                            background: #E6F2FE;
+                            background: $color-light-bg;
                             padding: 4px 8px;
                             width: auto;
                             display: inline-flex;
@@ -160,7 +160,7 @@
                             margin-top: 5px;
                             .acr-dec,
                             .acr-inc{
-                                color: #0866C4;
+                                color: $color-primary;
                                 border: 0px solid;
                                 background-color: transparent;
                                 width: auto;
@@ -168,7 +168,7 @@
                                 padding: 0;
                             }
                             input{
-                                color: #566676;
+                                color: $color-text;
                                 font-size: 16px;
                                 width: 18px !important;
                                 cursor: not-allowed;
@@ -181,14 +181,14 @@
                     .tf-extra-price{
                         text-align: right;
                         h4{
-                            color: #27333F;
+                            color: $color-heading;
                             font-size: 21px !important;
                             font-weight: 400 !important;
                             margin-bottom: 8px;
                             small{
                                 display: block;
                                 font-size: 16px !important;
-                                color: #566676;
+                                color: $color-text;
                             }
                         }
                     }
@@ -199,15 +199,15 @@
                     button{
                         padding: 12px 32px;
                         border-radius: 8px;
-                        background: #EEF2F6;
-                        color:#0866C4;
+                        background: $color-light-bg;
+                        color:$color-primary;
                         font-size: 16px;
                         font-weight: 700;
                         cursor: pointer;
-                        border: 1px solid #0866C4;
+                        border: 1px solid $color-primary;
                         transition: .3s all ease;
                         &:hover{
-                            background: #0866C4;
+                            background: $color-primary;
                             color: $color-white;
                         }
                     }
@@ -216,7 +216,7 @@
         }
         .tf-driver-details{
             border-radius: 16px;
-            background: #EEF2F6;
+            background: $color-light-bg;
             padding: 24px;
             .tf-driver-details-header{
                 h3{
@@ -226,11 +226,11 @@
                     margin: 0;
                 }
                 span{
-                    color: #288FF6;
+                    color: $color-primary;
                     font-size: 16px !important;
                     font-weight: 400 !important;
                     i{
-                        color: #288FF6;
+                        color: $color-primary;
                     }
                 }
             }
@@ -244,20 +244,20 @@
                 .tf-driver-info{
                     width: calc(100% - 72px);
                     h4{
-                        color: #27333F;
+                        color: $color-heading;
                         font-size: 16px !important;
                         font-weight: 700 !important;
                         margin: 0;
                     }
                     p{
-                        color: #27333F;
+                        color: $color-text;
                         font-size: 16px !important;
                         font-weight: 400 !important;
                         margin: 0;
                     }
                     
                     .tf-driver-contact-info{
-                        border-top: 1px solid #C0CCD8;
+                        border-top: 1px solid $color-border;
                         margin-top: 16px;
                         padding-top: 16px;
                         ul{
@@ -271,7 +271,7 @@
                                     i{
                                         font-size: 20px;
                                     }
-                                    color: #566676;
+                                    color: $color-text;
                                     font-size: 16px;
                                     font-weight: 400;
                                     display: inline-block;
