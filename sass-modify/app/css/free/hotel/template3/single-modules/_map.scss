@@ -2,7 +2,7 @@
 #hotel-map-location{
     padding: 24px;
     border-radius: 8px;
-    background: $t4-orange-100;
+    background: $color-light-bg;
 
     #hotel-location,
     iframe{
@@ -15,7 +15,7 @@
         border-top: 1px solid $t4-orange-200;
 
         .tf-whats-around-title{
-            color: $t4-orange-1000;
+            color: $t4-orange-100;
             font-size: 14px;
             font-weight: 500;
             line-height: 16px;

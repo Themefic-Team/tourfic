@@ -1,13 +1,11 @@
-$t4-primary: #FF6B00;
+
 $t4-orange-background: #FEF9F6;
 $t4-orange-light: #FFEDE1;
-$t4-orange-100: #FBF4EF;
 $t4-orange-200: #F5E9E0;
 $t4-orange-500: #BF7540;
-$t4-orange-hover: #C15100;
 $t4-yellow: #FFC700;
 $t4-paragraph: #6E655E;
-$t4-orange-1000: #1A0B00;
+$t4-orange-100: #1A0B00;
 $t4-main-color: #060D1C;
 
 .tf-hotel-template-4,
@@ -79,7 +77,7 @@ $t4-main-color: #060D1C;
             @media #{$max1024} {
                 padding: 16px;
                 border-radius: 4px;
-                background: $t4-orange-100;
+                background: $color-light-bg;
             }
 
             .tf-search-field-icon {
@@ -94,7 +92,7 @@ $t4-main-color: #060D1C;
             }
 
             .tf-search-field-label {
-                color: $t4-orange-1000;
+                color: $t4-orange-100;
                 font-size: 16px;
                 line-height: 12px;
                 cursor: pointer;
@@ -123,7 +121,7 @@ $t4-main-color: #060D1C;
 
             @media #{$max1024} {
                 border-radius: 4px;
-                background: $t4-orange-100;
+                background: $color-light-bg;
             }
             @media #{$max575} {
                 gap: 8px;
@@ -192,7 +190,7 @@ $t4-main-color: #060D1C;
         div {
             padding: 4px 16px;
             cursor: pointer;
-            color: $t4-orange-1000;
+            color: $t4-orange-100;
             display: block;
             transition: .3s all ease;    
             font-weight: 400;
@@ -238,7 +236,7 @@ $t4-main-color: #060D1C;
         }
 
         .acr-label {
-            color: $t4-orange-1000;
+            color: $t4-orange-100;
             font-size: 16px;
             font-weight: 400;
             line-height: 175%;
@@ -256,7 +254,7 @@ $t4-main-color: #060D1C;
                 font-size: 16px;
                 font-style: normal;
                 font-weight: 600;
-                color: $t4-orange-1000 !important;
+                color: $t4-orange-100 !important;
                 text-align: center;
                 padding-left: 0px !important;
                 padding-right: 0px !important;
@@ -271,14 +269,14 @@ $t4-main-color: #060D1C;
                 border: none;
                 font-size: 31px;
                 font-weight: 400;
-                color: $t4-primary;
+                color: $color-primary;
                 padding: 0;
                 min-width: auto;
                 width: auto;
 
                 svg rect,
                 svg path{
-                    fill: $t4-primary;
+                    fill: $color-primary;
                 }
             }
         }
@@ -300,7 +298,7 @@ $t4-main-color: #060D1C;
 
         .btn-primary {
             border-radius: 4px;
-            background: $t4-primary !important;
+            background: $color-primary !important;
             box-shadow: 0 4px 30px 0 rgba(255, 237, 225, 0.40);
             font-size: 16px !important;
             padding: 13px 24px;
@@ -310,7 +308,7 @@ $t4-main-color: #060D1C;
             }
 
             &:hover{
-                background: $t4-orange-hover !important;
+                background: $color-secondary !important;
             }
         }
     }
@@ -458,7 +456,7 @@ $t4-main-color: #060D1C;
                             text-decoration: none;
 
                             &:hover {
-                                color: $t4-primary;
+                                color: $color-primary;
                             }
                         }
                     }
@@ -473,7 +471,7 @@ $t4-main-color: #060D1C;
                         .woocommerce-Price-amount {
                             font-size: 16px;
                             font-weight: 500;
-                            color: $t4-orange-1000;
+                            color: $t4-orange-100;
                         }
                     }
 
@@ -490,7 +488,7 @@ $t4-main-color: #060D1C;
                             font-weight: 400;
 
                             .tf-no-review-count{
-                                color: $t4-orange-1000;
+                                color: $t4-orange-100;
                             }
                         }
                     }
@@ -533,7 +531,7 @@ $t4-main-color: #060D1C;
                 gap: 8px;
                 padding: 8px;
                 border-radius: 4px;
-                background-color: $t4-primary;
+                background-color: $color-primary;
                 color: $color-white;
                 text-decoration: none;
             }
@@ -586,7 +584,7 @@ $t4-main-color: #060D1C;
                         background-color: $t4-orange-light;
 
                         svg path {
-                            stroke: $t4-primary;
+                            stroke: $color-primary;
                         }
                     }
                 }
@@ -618,7 +616,7 @@ $t4-main-color: #060D1C;
                         background-color: $t4-orange-light;
 
                         svg path {
-                            stroke: $t4-primary;
+                            stroke: $color-primary;
                         }
                     }
                 }
@@ -657,7 +655,7 @@ $t4-main-color: #060D1C;
 
         .tf-archive-hotel {
             border-radius: 4px;
-            background-color: $t4-orange-100;
+            background-color: $color-light-bg;
             @include flexbox();
             @include transition();
 
@@ -666,7 +664,7 @@ $t4-main-color: #060D1C;
                 box-shadow: 0px 4px 30px 0px rgba(255, 237, 225, 0.40);
 
                 .tf-archive-hotel-content .tf-archive-hotel-content-left .tf-section-title a{
-                    color: $t4-primary;
+                    color: $color-primary;
                 }
             }
 
@@ -687,13 +685,13 @@ $t4-main-color: #060D1C;
                     position: absolute;
                     top: 16px;
                     left: 16px;
-                    color: $t4-orange-1000;
+                    color: $t4-orange-100;
                     font-size: 12px;
                     font-weight: 700;
                     line-height: 14px;
                     padding: 8px 16px;
                     border-radius: 32px;
-                    background-color: $t4-orange-100;
+                    background-color: $color-light-bg;
                 }
             }
 
@@ -738,17 +736,17 @@ $t4-main-color: #060D1C;
                         text-transform: capitalize;
 
                         a {
-                            color: $t4-orange-1000;
+                            color: $t4-orange-100;
                             text-decoration: none;
 
                             &:hover {
-                                color: $t4-primary;
+                                color: $color-primary;
                             }
                         }
                         
                         .tf-edit-link{
                             font-size: 14px;
-                            color: $t4-primary;
+                            color: $color-primary;
                             text-decoration: underline;
                             margin-left: 6px;
                         }
@@ -805,7 +803,7 @@ $t4-main-color: #060D1C;
                             color: $t4-paragraph;
 
                             .tf-no-review-count{
-                                color: $t4-orange-1000;
+                                color: $t4-orange-100;
                             }
                         }
                     }
@@ -838,12 +836,12 @@ $t4-main-color: #060D1C;
                         .woocommerce-Price-amount {
                             font-size: 16px;
                             font-weight: 500;
-                            color: $t4-orange-1000;
+                            color: $t4-orange-100;
                         }
                     }
 
                     .view-hotel {
-                        color: $t4-primary;
+                        color: $color-primary;
                         font-size: 14px;
                         font-weight: 500;
                         line-height: 20px;
@@ -855,7 +853,7 @@ $t4-main-color: #060D1C;
                         @include transition();
 
                         &:hover{
-                            background-color: $t4-primary;
+                            background-color: $color-primary;
                             color: $color-white;
                         }
                     }
@@ -932,8 +930,8 @@ $t4-main-color: #060D1C;
         //margin-bottom: 24px;
 
         label input:checked ~ .checkmark{
-            background-color: $t4-primary !important;
-            border-color: $t4-primary !important;
+            background-color: $color-primary !important;
+            border-color: $color-primary !important;
         }
 
         .tf-archive-filter-sidebar {
@@ -971,7 +969,7 @@ $t4-main-color: #060D1C;
                 margin: 0;
                 padding: 0;
                 border: none;
-                color: $t4-primary;
+                color: $color-primary;
                 font-size: 16px;
                 font-weight: 700;
                 line-height: 28px;
@@ -1012,17 +1010,17 @@ $t4-main-color: #060D1C;
                 padding: 0px !important;
 
                 .al-range-slider__bar {
-                    background: $t4-primary !important;
+                    background: $color-primary !important;
                     box-shadow: none !important;
                 }
             }
 
             .al-range-slider__knob {
-                background: $t4-primary !important;
+                background: $color-primary !important;
                 height: 15px;
                 width: 15px;
                 box-shadow: none !important;
-                border: 3px solid $t4-primary !important;
+                border: 3px solid $color-primary !important;
 
                 &:first-child {
                     span {
@@ -1032,7 +1030,7 @@ $t4-main-color: #060D1C;
             }
 
             .al-range-slider__tooltip {
-                background: $t4-primary !important;
+                background: $color-primary !important;
                 border-radius: 5px;
                 box-shadow: none;
                 padding: 3px 10px;
@@ -1133,7 +1131,7 @@ $t4-main-color: #060D1C;
                                     width: 16px;
                                     background-color: $color-white;
                                     border-radius: 4px;
-                                    border: 1px solid $t4-primary;
+                                    border: 1px solid $color-primary;
 
                                     &:after{
                                         left: 4.5px;
@@ -1153,7 +1151,7 @@ $t4-main-color: #060D1C;
                     a.see-more,
                     a.see-less{
                         text-align: left;
-                        color: $t4-primary !important;
+                        color: $color-primary !important;
                         text-transform: capitalize;
                         font-weight: 400;
                         text-decoration: none;
@@ -1197,7 +1195,7 @@ $t4-main-color: #060D1C;
                 display: inline-block;
             }
             .page-numbers.current{
-                background: $t4-primary;
+                background: $color-primary;
                 color: $color-white !important;
             }
         }
@@ -1219,7 +1217,7 @@ $t4-main-color: #060D1C;
             display: inline-block;
         }
         .page-numbers.current{
-            background: $t4-primary;
+            background: $color-primary;
             color: $color-white !important;
         }
     }

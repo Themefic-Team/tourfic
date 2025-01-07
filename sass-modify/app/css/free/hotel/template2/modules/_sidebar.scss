@@ -71,24 +71,24 @@
         font-weight: 400 !important;
         line-height: 52px !important;
         word-wrap: break-word;
-        color: #99948D;
+        color: $color-text;
         @media #{$max1024}{
             font-size: 24px !important;
         }
         span {
-            color: #595349;
+            color: $color-text;
         }
     }
 }
 
 .tf-review-all-info {
-    color: #595349;
+    color: $color-text;
     font-size: 20px;
     line-height: 26px;
     p{
         font-size: 20px !important;
         span {
-            color: #99948D;
+            color: $color-text;
             font-size: 16px;
             line-height: 20.80px;
             display: block;
@@ -112,7 +112,7 @@
 .tf-progress-bar {
     width: 100%;
     height: 12px;
-    background: #D6D4D2;
+    background: $color-light-bg;
     border-radius: 50px;
     display: flex;
 }
@@ -131,18 +131,18 @@ span.percent-progress {
 }
 
 a.tf-all-reviews {
-    color: #595349;
+    color: $color-text;
     font-weight: 500;
     letter-spacing: 0.16px;
     text-decoration: none;
 }
 
 button.tf-review-open.button, .tf-reting-field button {
-    color: #595349;
+    color: $color-primary;
     font-size: 16px;
     font-weight: 700;
     line-height: 24px;
-    background: #FAEEDC;
+    background: $color-light-bg;
     width: 100%;
     border: none;
     padding: 12px 0;
@@ -162,12 +162,12 @@ button.tf-review-open.button, .tf-reting-field button {
 }
 
 .tour-external-booking-form {
-    background-color: #fcf4e8;
+    background-color: $color-light-bg;
     padding: 24px;
 
     .tf-tour-external-booking-button {
-        border: 1px solid #b58e53 !important;
-        background: #b58e53 !important;
+        border: 1px solid $color-primary !important;
+        background: $color-primary !important;
         padding: 12px 32px !important;
         justify-content: center;
         transition: .3s all ease;
@@ -176,7 +176,7 @@ button.tf-review-open.button, .tf-reting-field button {
 }
 
 .tf-tour-contact-informations {
-    background-color: #fcf4e8;
+    background-color: $color-light-bg;
     padding: 24px;
 
     .tf-contact-details-title {
@@ -195,11 +195,11 @@ button.tf-review-open.button, .tf-reting-field button {
             
             a {
                 text-decoration: none;
-                color: #99948d;
+                color: $color-primary;
             }
             i {
                 font-size: 20px;
-                color: #b58e53;
+                color: $color-primary;
             }
         }
         }
@@ -208,7 +208,7 @@ button.tf-review-open.button, .tf-reting-field button {
 }
 
 .tf-review-form-wrapper {
-    background: #FCF4E8;
+    background: $color-light-bg;
     padding: 24px;
     display: none;
     flex-direction: column;
@@ -219,7 +219,7 @@ button.tf-review-open.button, .tf-reting-field button {
 }
 
 .tf-review-form-wrapper h3 {
-    color: #595349;
+    color: $color-heading;
     font-size: 20px !important;
     font-weight: 700;
     line-height: 24px;
@@ -256,7 +256,7 @@ button.tf-review-open.button, .tf-reting-field button {
             .tf-review-submit{
                 margin-top: 16px !important;
                 input#comment-submit{
-                    background-color: #B58E53 !important;
+                    background-color: $color-primary !important;
                     color: $color-white;
                     width: 100%;
                     font-size: 16px !important;
@@ -267,12 +267,12 @@ button.tf-review-open.button, .tf-reting-field button {
                     border-radius: 0px !important;
                     transition: .3s all ease;
                     &:hover{
-                        background-color: #917242 !important;
+                        background-color: $color-secondary !important;
                     }
                 }
             }
             input,textarea{
-                border: 1px solid #595349;
+                border: 1px solid $color-border;
                 background: transparent;
                 padding: 8px;
                 color: #222;
@@ -294,7 +294,7 @@ button.tf-review-open.button, .tf-reting-field button {
 }
 
 span.tf-reting-title {
-    color: #595349;
+    color: $color-text;
     font-size: 14px;
     font-weight: 600;
     line-height: 18.20px;
@@ -303,15 +303,15 @@ span.tf-reting-title {
 span.tf-reting-stars {
     display: flex;
     gap: 6px;
-    color: #FFC700;
+    color: $color-primary;
 }
 
 .tf-review-form-wrapper form input,
 .tf-review-form-wrapper form textarea {
-    border: 1px solid #595349;
+    border: 1px solid $color-border;
     background: transparent;
     padding: 8px;
-    color: #C1BFBB;
+    color: $color-text;
     font-size: 12px;
 }
 
@@ -323,14 +323,14 @@ span.tf-reting-stars {
 }
 
 .tf-reting-field button {
-    background-color: #B58E53;
+    background-color: $color-primary;
     color: $color-white;
     width: 100%;
 }
 
 // Inquery Box
 .tf-send-inquiry{
-    background: #FCF4E8;
+    background: $color-light-bg;
     display: flex;
     padding: 56px 80px;
     flex-direction: column;
@@ -349,7 +349,7 @@ span.tf-reting-stars {
         font-size: 64px;
     }
     h3{
-        color: #595349;
+        color: $color-heading;
         font-size: 32px !important;
         font-style: normal !important;
         font-weight: 700 !important;
@@ -361,7 +361,7 @@ span.tf-reting-stars {
         }
     }
     p{
-        color: #99948D;
+        color: $color-text;
         text-align: center;
         font-size: 16px;
         font-style: normal;
@@ -375,9 +375,9 @@ span.tf-reting-stars {
     .tf-btn{
         width: auto;
         .tf-send-inquiry-btn{
-            background: #B58E53;
+            background: $color-primary;
             padding: 12px 32px;
-            color: #FDF9F3;
+            color: $color-white;
             font-size: 16px;
             font-style: normal;
             font-weight: 700;
@@ -387,7 +387,7 @@ span.tf-reting-stars {
             transition: .3s all ease;
             text-decoration: none;
             &:hover{
-                background-color: #917242;
+                background-color: $color-secondary;
             }
             @media #{$max1024}{
                 font-size: 12px;
@@ -421,7 +421,7 @@ span.tf-reting-stars {
             line-height: 1;
             border: none;
             background: unset;
-            color: #595349;
+            color: $color-primary;
             font-size: 16px;
             font-style: normal;
             font-weight: 700;
@@ -431,7 +431,7 @@ span.tf-reting-stars {
                 font-size: 12px !important;
             }
             &:hover{
-                color: #B58E53;
+                color: $color-primary;
             }
         }
         button.filter-reset-btn{
@@ -444,7 +444,7 @@ span.tf-reting-stars {
             font-size: 16px;
             font-weight: 600;
             line-height: 1.5;
-            color: #595349;
+            color: $color-heading;
         }
         label.tf-filter-location {
             display: flex;
@@ -458,7 +458,7 @@ span.tf-reting-stars {
             }
         }
         &.tf-filter-rating i {
-            color: #FFC700;
+            color: $color-primary;
         }
         .tf-filter-pricing-range {
             input.al-range-slider__input {
@@ -466,22 +466,22 @@ span.tf-reting-stars {
             }
             .al-range-slider__track {
                 box-shadow: none;
-                background: #D6D4D2;
+                background: $color-light-bg;
                 height: 8px;
                 margin: 10px 0 40px 0;
             }
             .al-range-slider__bar {
                 border: none;
                 box-shadow: none;
-                background: #99948D;
+                background: $color-gray;
             }
             .al-range-slider__knob {
                 display: flex;
                 width: 24px;
                 height: 24px;
                 border-radius: 12px;
-                border: 1.5px solid #595349;
-                background: #FDF9F3;
+                border: 1.5px solid $color-gray;
+                background: $color-light-bg;
                 box-shadow: none;
                 &:hover {
                     border-color: none;
@@ -495,8 +495,7 @@ span.tf-reting-stars {
                 box-shadow: none;
                 font-size: 16px;
                 padding: 0;
-                color: #595349;
-                ;
+                color: $color-text;
             }
             .al-range-slider {
                 padding: 0;
@@ -518,26 +517,26 @@ span.tf-reting-stars {
                     cursor: pointer;
                 }
                 input:checked+label:before {
-                    background: #B58E53
+                    background: $color-primary
                 }
                 label {
                     position: relative;
                     cursor: pointer;
-                    color: #99948D;
+                    color: $color-text;
                 }
                 label:before {
                     content: '';
                     background-color: transparent;
                     display: inline-block;
                     border-radius: 2px;
-                    border: 0.794px solid #917242;
-                    background: #FDF9F3;
+                    border: 0.794px solid $color-primary;
+                    background: $color-light-bg;
                     height: 12px;
                     width: 12px;
                     margin-right: 8px;
                 }
                 a.tf-filter-list-see-less {
-                    color: #595349;
+                    color: $color-primary;
                     text-decoration: none;
                 }
             }

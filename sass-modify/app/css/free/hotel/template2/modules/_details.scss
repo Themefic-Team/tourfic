@@ -33,7 +33,7 @@
                 gap: 16px;
             }
             .tf-details-menu {
-                background: #FCF4E8;
+                background: $color-light-bg;
                 padding: 16px 30px;
                 position: sticky;
                 left: 0;
@@ -52,7 +52,7 @@
                             font-size: 16px;
                             font-weight: 600;
                             line-height: 20.80px;
-                            color: #99948D;
+                            color: $color-primary;
                             border-bottom: 2px solid;
                             padding-bottom: 5px;
                             display: inline-block;
@@ -61,8 +61,8 @@
                                 font-size: 12px !important;
                             }
                             &.tf-hashlink {
-                                border-color: #595349;
-                                color: #595349;
+                                border-color: $color-primary;
+                                color: $color-primary;
                             }
                         }
                     }
@@ -76,7 +76,7 @@
                         padding: 0;
                     }
                     .tf-short-description{
-                        color: #99948D;
+                        color: $color-text;
                         font-size: 16px;
                         font-style: normal;
                         font-weight: 400;
@@ -99,7 +99,7 @@
                     }
                     .tf-full-description{
                         display: none;
-                        color: #99948D;
+                        color: $color-text;
                         font-size: 16px;
                         font-style: normal;
                         font-weight: 400;
@@ -111,7 +111,7 @@
                 }
                 .tf-overview-popular-facilities {
                     span.tf-popular-facilities-title {
-                        color: #595349;
+                        color: $color-text;
                         font-size: 16px !important;
                         display: block;
                         font-weight: 600 !important;
@@ -161,25 +161,25 @@
                         padding: 24px;
                         display: flex;
                         gap: 16px;
-                        background: #FCF4E8;
+                        background: $color-light-bg;
                         @media #{$max1024}{
                             padding: 16px !important;
                             gap: 8px;
                         }
                         i {
                             font-size: 24px;
-                            color: rgb(181, 142, 83);
+                            color: $color-primary;
                         }
                         .tf-feature-block-details {
                             h5 {
-                                color: #595349;
+                                color: $color-heading;
                                 font-size: 20px !important;
                                 font-style: normal !important;
                                 font-weight: 700 !important;
                                 line-height: 1.3;
                             }
                             p{
-                                color: #99948D;
+                                color: $color-text;
                                 font-size: 16px;
                                 font-style: normal;
                                 font-weight: 400;
@@ -200,31 +200,31 @@
                         padding: 24px;
                         display: flex;
                         gap: 16px;
-                        background: #FCF4E8;
+                        background: $color-light-bg;
                         @media #{$max1024}{
                             padding: 16px !important;
                             gap: 8px;
                         }
                         i {
                             font-size: 24px;
-                            color: rgb(181, 142, 83);
+                            color: $color-primary;
                         }
                         .tf-feature-block-details {
                             h5 {
-                                color: #595349;
+                                color: $color-heading;
                                 font-size: 20px !important;
                                 font-style: normal !important;
                                 font-weight: 700 !important;
                                 line-height: 1.3;
                             }
                             p{
-                                color: #99948D;
+                                color: $color-text;
                                 font-size: 16px;
                                 font-style: normal;
                                 font-weight: 400;
                                 line-height: 130%; /* 20.8px */
                                 span.show_sub_title{
-                                    color: #595349;
+                                    color: $color-text;
                                     font-size: 16px;
                                     font-style: normal;
                                     font-weight: 400;
@@ -242,7 +242,7 @@
                     display: flex;
                     gap: 24px;
                     padding: 32px 0;
-                    background: #FCF4E8;
+                    background: $color-light-bg;
                     margin-bottom: 16px;
                     border-radius: 0px;
                     box-shadow: none;
@@ -275,7 +275,7 @@
                             }
                         }
                         p{
-                            color: #99948D;
+                            color: $color-text;
                         }
                         ul { 
                             margin: 0px 0px 0px 13px;;
@@ -303,7 +303,7 @@
             }
 
             &.tf-archive-right{
-                background-color: #FCF4E8;
+                background-color: $color-light-bg;
                 padding: 32px;                
                 width: 480px;
                 margin-bottom: 56px;
@@ -338,7 +338,7 @@
                         font-size: 16px !important;
                         font-weight: 600 !important;
                         line-height: 1.5 !important;
-                        color: #595349 !important;
+                        color: $color-text !important;
                         @media #{$max1024}{
                             font-size: 12px !important;
                         }
@@ -357,7 +357,7 @@
                             font-style: normal;
                             font-weight: 400;
                             line-height: 130%;
-                            color: #99948D;
+                            color: $color-text;
                             background: transparent;
                             @media #{$max1024}{
                                 font-size: 12px !important;
@@ -367,17 +367,17 @@
                                 line-height: 16px;
                                 .checkmark{
                                     border-radius: 4px;
-                                    border: 1px solid #917242;
-                                    background: #FDF9F3;
+                                    border: 1px solid $color-primary;
+                                    background: $color-light-bg;
                                     height: 16px;
                                     width: 16px;
                                     &:hover{
-                                        border-color: #B58E53;
+                                        border-color: $color-secondary;
                                     }
                                     &::after{
                                         top: 1px;
                                         left: 4px;
-                                        border-color: rgb(145, 114, 66);
+                                        border-color: $color-primary;
                                         width: 6px;
                                         height: 9px;
                                     }
@@ -385,7 +385,7 @@
                             }
                             label input:checked~.checkmark {
                                 background-color: transparent !important;
-                                border-color: rgb(145, 114, 66);
+                                border-color: $color-primary;
                             }
                         }
                     }
@@ -394,7 +394,7 @@
                         text-align: left;
                         text-decoration: none;
                         text-transform: capitalize;
-                        color: #595349;
+                        color: $color-text;
                         font-size: 16px;
                         font-style: normal;
                         font-weight: 400;
@@ -416,7 +416,7 @@
                     margin-top: 10px;
                 }
                 .al-range-slider__track {
-                    background: #D6D4D2;
+                    background: $color-light-bg;
                     height: 10px;
                     box-shadow: none !important;
                     margin: 0px 0px 10px 0px;
@@ -424,16 +424,16 @@
                 .al-range-slider_dark {
                     padding: 0px !important;
                     .al-range-slider__bar {
-                        background: #99948D !important;
+                        background: $color-gray !important;
                         box-shadow: none !important;
                     }
                 }
                 .al-range-slider__knob {
-                    background: #FDF9F3 !important;
+                    background: $color-light-bg !important;
                     height: 24px;
                     width: 24px;
                     box-shadow: none !important;
-                    border: 3px solid #99948D !important;
+                    border: 3px solid $color-gray !important;
                     &:first-child {
                         span {
                             left: 10px !important;
@@ -446,7 +446,7 @@
                     padding: 3px 10px;
                     margin-bottom: 0px !important;
                     bottom: -40px;
-                    color: #595349 !important;
+                    color: $color-text !important;
                     font-size: 16px !important;
                     font-style: normal;
                     font-weight: 400;
@@ -475,6 +475,6 @@
 .tf-details-menu.tf-sticky-menu {
     position: fixed;
     top: 175px;
-    box-shadow: 0 0 20px #ddd;
+    box-shadow: 0 0 20px $color-border;
     z-index: 9;
 }

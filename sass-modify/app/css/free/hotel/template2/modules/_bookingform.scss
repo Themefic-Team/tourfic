@@ -1,7 +1,7 @@
 .tf-modify-search-btn{
-    background: #B58E53;
+    background: $color-primary;
     padding: 8px 32px;
-    color: #FDF9F3;
+    color: $color-white;
     text-align: center;
     font-size: 12px;
     font-style: normal;
@@ -16,7 +16,7 @@
     }
 }
 .tf-booking-form-wrapper {
-    background: #FAEEDC;
+    background: $color-light-bg;
     @media #{$max767}{
         display: none;
     }
@@ -33,7 +33,7 @@
             }
             &>div {
                 width: 32%;
-                border-right: 1px solid #D6D4D2;
+                border-right: 1px solid $color-border;
                 display: flex;
                 flex-direction: column;
                 position: relative;
@@ -72,7 +72,7 @@
             max-width: 155px;
         }
         .tf-booking-date {
-            color: #595349;
+            color: $color-text;
             font-size: 24px;
             font-weight: 400;
             line-height: 31.20px;
@@ -87,12 +87,13 @@
             font-weight: 600;
             line-height: 20.80px;
             margin-bottom: 8px;
+            color: $color-heading;
             @media #{$max1024}{
                 font-size: 14px;
             }
         }
         span.tf-booking-month {
-            color: #595349;
+            color: $color-text;
             font-size: 16px;
             display: flex;
             flex-direction: column;
@@ -110,7 +111,7 @@
         .tf_label-row{
             span#tf-required{
                 font-size: 12px;
-                color: red !important;
+                color: $color-denger !important;
             }
         }
         .tf-booking-guest-and-room-wrap {
@@ -134,10 +135,10 @@
             button {
                 height: 100%;
                 width: 100%;
-                background: #B58E53 !important;
+                background: $color-primary !important;
                 border: 0;
                 outline: none;
-                color: #FDF9F3 !important;
+                color: $color-white !important;
                 font-size: 16px !important;
                 font-weight: 700;
                 line-height: 24px !important;
@@ -145,7 +146,7 @@
                 border-radius: 0px;
                 transition: .3s all ease;
                 &:hover{
-                    background-color: #917242 !important;
+                    background-color: $color-secondary !important;
                 }
                 @media #{$max1024}{
                     font-size: 12px !important;
@@ -173,7 +174,7 @@
 				.tf-booking-location-wrap { 
                     display: flex;
                     flex-direction: row;
-                    background: #FDF9F3;
+                    background: $color-white;
                     padding: 0 12px;
                     width: 100%;
                     align-items: center;
@@ -186,9 +187,9 @@
                         background: transparent;
                         box-shadow: none;
                         font-size: 12px;
-                        color: #595349 !important;
+                        color: $color-text !important;
                         &::placeholder{
-                            color: #595349 !important;
+                            color: $color-text !important;
                         }
                     }
 
@@ -199,37 +200,37 @@
                         left: 0;
                         top: 100%;
                         width: 250px;
-                        background: #FCF4E8;
+                        background: $color-light-bg;
                         box-shadow: 0px 20px 40px 0px rgba(0, 0, 0, 0.10);
                         z-index: 999;
                         max-height: 200px;
                         overflow: auto;
                         scrollbar-width: thin;
-                        scrollbar-color: #aaa #eee;
+                        scrollbar-color: $color-light-bg $color-white;
                         padding: 8px;
                         &::-webkit-scrollbar{
                             width: 5px;
                         }
                         &::-webkit-scrollbar-thumb {
-                            background-color: #aaa;
+                            background-color: $color-gray;
                             border-radius: 4px;
                         }
                         &::-webkit-scrollbar-track {
-                            background-color: #eee;
+                            background-color: $color-light-bg;
                         }
                         div{
                             padding: 10px;
                             cursor: pointer;
                             background-color: $color-white;
                             margin-bottom: 4px;
-                            color: #444;
+                            color: $color-text;
                             display: block;
                             transition: .3s all ease;
                             &:last-child{
                                 margin-bottom: 0px;
                             }
                             &:hover{
-                                background: #FAEEDC;
+                                background: $color-light-bg;
                             }
                             &::before{
                                 display: none;
@@ -255,7 +256,7 @@
 				.tf-booking-form-guest-and-room-inner {
 					.tf-booking-guest-and-room-wrap.tf-archive-guest-info { 
                         margin-top: 8px;
-                        color: #595349;
+                        color: $color-text;
                         display: -webkit-box;
                         display: -ms-flexbox;
                         display: flex;
@@ -266,7 +267,7 @@
                         span{
                             font-size: 24px;
                             margin-bottom: -3px;
-                            color: #595349;
+                            color: $color-text;
                             display: -webkit-box;
                             display: -ms-flexbox;
                             display: flex;
@@ -298,7 +299,7 @@
                     span{
                         font-size: 24px;
                         margin: 0px 15px;
-                        color: #595349;
+                        color: $color-text;
                         @media #{$max1024}{
                             margin: 0px 5px;
                         }
@@ -328,10 +329,10 @@
     opacity: 0;
     visibility: hidden;
     transition: 0.3s;
-    background: #FDF9F3;
+    background: $color-white;
     box-shadow: 0px 8px 40px 0px rgba(0, 0, 0, 0.10);
     .acr-label{
-        color: #595349;
+        color: $color-text;
         font-size: 16px;
         font-style: normal;
         font-weight: 600;
@@ -347,12 +348,12 @@
             font-size: 16px;
             font-style: normal;
             font-weight: 600;
-            color: #595349 !important;
+            color: $color-text !important;
             text-align: center;
             padding-left: 0px !important;
             padding-right: 0px !important;
             border-radius: 20px;
-            background: #FCF4E8 !important;
+            background: $color-light-bg !important;
         }
         .acr-dec,
         .acr-inc{
@@ -360,7 +361,7 @@
             border: none;
             font-size: 31px;
             font-weight: 400;
-            color: #595349;
+            color: $color-text;
             padding: 0px;
         }
     }
@@ -380,7 +381,7 @@
     .tf-apartment-form-header{
         h3{
             span{
-                color: #B58E53 !important;
+                color: $color-primary !important;
                 font-size: 32px !important;
                 font-style: normal;
                 font-weight: 700 !important;
@@ -409,7 +410,7 @@
             .tf-check-in-out-date{
                 height: 53px;
                 padding: 16px 32px 16px 16px;
-                background: #FDF9F3;
+                background: $color-white;
                 margin-bottom: 32px;
                 .tf_label-row{
                     display: flex;
@@ -420,7 +421,7 @@
             .tf-aprtment-check-in-out-date{
                 height: 53px;
                 padding: 15px 32px 16px 16px;
-                background: #FDF9F3;
+                background: $color-white;
                 width: 100%;
                 box-sizing: border-box;
 
@@ -433,7 +434,7 @@
                         background-color: rgba(0,0,0,0);
                         padding: 0;
                         width: 100% !important;
-                        color: #607085;
+                        color: $color-text;
                         font-size: 16px;
                         text-align: left;
                         height: auto;
@@ -447,14 +448,14 @@
             }
         }
         .tf-apartment-guest-row{
-            border-top: 0px solid #e1e5ea;
+            border-top: 0px solid $color-border;
             padding: 0px;
             .tf_selectperson-wrap{
                 display: block;
                 .tf-form-title{
                     margin-bottom: 24px;
                     h3.tf-person-info-title{
-                        color: #595349;
+                        color: $color-text;
                         font-size: 32px !important;
                         font-style: normal;
                         font-weight: 700 !important;
@@ -479,10 +480,10 @@
     .tf-btn-booking{
         button,
         a{
-            border: 1px solid #B58E53;
-            background: #B58E53;
+            border: 1px solid $color-primary;
+            background: $color-primary;
             padding: 12px 32px;
-            color: #FDF9F3;
+            color: $color-white;
             font-size: 16px;
             font-style: normal;
             font-weight: 700;
@@ -492,14 +493,14 @@
             text-decoration: none;
             display: block;
             &:hover{
-                background-color: #917242;
+                background-color: $color-secondary;
             }
         }
     }
 }
 .tf-search-date-wrapper {
 
-    background: #FAEEDC;
+    background: $color-light-bg;
     padding: 24px;
 
     .tf-booking-date-wrap {
@@ -533,7 +534,7 @@
         border: none;
         font-size: 31px;
         font-weight: 400;
-        color: #595349;
+        color: $color-text;
         padding: 0px;
     }
 
@@ -544,12 +545,12 @@
         font-size: 16px;
         font-style: normal;
         font-weight: 600;
-        color: #595349 !important;
+        color: $color-text !important;
         text-align: center;
         padding-left: 0px !important;
         padding-right: 0px !important;
         border-radius: 20px;
-        background: #FCF4E8 !important;
+        background: $color-light-bg !important;
     }
 
     form {
@@ -577,7 +578,7 @@
     }
 
     .acr-label {
-        color: #595349;
+        color: $color-text;
         font-size: 16px;
         font-style: normal;
         font-weight: 600;
@@ -589,7 +590,7 @@
             margin-left: 5px;
             span{
                 display: inline-block;
-                color: #595349;
+                color: $color-text;
                 font-size: 16px;
                 font-style: normal;
                 font-weight: 600;
@@ -608,7 +609,7 @@
     }
 
     .acr-label span {
-        color: #99948D;
+        color: $color-text;
         font-size: 12px;
         font-style: normal;
         font-weight: 500;
@@ -616,7 +617,7 @@
     }
 
     span.tf-search-date-info {
-        color: #595349;
+        color: $color-text;
         font-size: 32px;
         font-weight: 700;
         line-height: 1;
@@ -626,7 +627,7 @@
 .tf_tours_booking{
     .tf-form-title{
         h3.tf-person-info-title{
-            color: #595349;
+            color: $color-text;
             font-size: 32px !important;
             font-style: normal !important;
             font-weight: 700 !important;
@@ -667,11 +668,11 @@
         .tf-field{
             padding: 15px 40px !important;
             width: 100% !important;
-            background-color: #FDF9F3 !important;
+            background-color: $color-white !important;
             border-radius: 0px !important;
-            color: #99948D !important;
+            color: $color-text !important;
             &::placeholder{
-                color: #99948D !important;
+                color: $color-text !important;
             }
         }
     }
@@ -680,21 +681,21 @@
     }
     .tf-tours-booking-btn.tf-booking-bttns{
         a{
-            border: 1px solid #B58E53 !important;
-            background: #B58E53 !important;
+            border: 1px solid $color-primary !important;
+            background: $color-primary !important;
             padding: 12px 32px !important;
             justify-content: center;
             transition: .3s all ease;
             border-radius: 0px;
             &:hover{
-                background-color: #917242 !important;
+                background-color: $color-secondary !important;
             }
         }
     }
 }
 .tf-mobile-booking-btn{
-    border: 1px solid #B58E53;
-    background: #B58E53;
+    border: 1px solid $color-primary;
+    background: $color-primary;
     padding: 12px 32px;
     text-align: center;
     cursor: pointer;
@@ -706,14 +707,14 @@
     display: none;
     transition: .3s all ease;
     &:hover{
-        background-color: #917242;
-        border-color: #917242;
+        background-color: $color-secondary;
+        border-color: $color-secondary;
     }
     @media #{$max1024}{
         display: block;
     }
     span{
-        color: #FDF9F3;
+        color: $color-white;
         font-size: 16px;
         font-style: normal;
         font-weight: 700;
@@ -722,7 +723,7 @@
 }
 .tf-bottom-booking-bar{
     width: 100% !important;
-    background: #FAEEDC;
+    background: $color-light-bg;
     box-shadow: none;
     gap: 24px;
     .tf-booking-form-fields{
@@ -731,7 +732,7 @@
             justify-content: center;
         }
         .tf-booking-form-checkinout{
-            border-right: 1px solid #D6D4D2;
+            border-right: 1px solid $color-border;
             flex-direction: column;
             position: relative;
             padding: 0px 38px;
@@ -754,7 +755,7 @@
                 justify-content: start;
             }
             .tf-booking-date {
-                color: #595349;
+                color: $color-text;
                 font-size: 24px;
                 font-weight: 400;
                 line-height: 31.2px;
@@ -762,7 +763,7 @@
                 margin-right: 5px;
             }
             span.tf-booking-month {
-                color: #595349;
+                color: $color-text;
                 font-size: 16px;
                 display: flex;
                 align-items: center;
@@ -782,12 +783,12 @@
                 border: 0px solid;
                 min-width: auto;
                 padding: 0px 38px;
-                color: #99948d;
+                color: $color-text;
                 font-size: 16px;
                 font-weight: 600;
                 line-height: 20.8px;
                 margin-bottom: 0px;
-                border-right: 1px solid #D6D4D2;
+                border-right: 1px solid $color-border;
                 border-radius: 0px !important;
                 background-image: none;
                 text-align: center;
@@ -807,7 +808,7 @@
                 font-weight: 600;
                 line-height: 20.8px;
                 margin-bottom: 0px;
-                color: #99948D;
+                color: $color-text;
             }
             .tf-booking-guest-and-room-wrap{
                 display: flex;
@@ -815,7 +816,7 @@
                 gap: 6px;
             }
             .tf-guest.tf-booking-date{
-                color: #595349;
+                color: $color-text;
                 font-size: 24px;
                 font-weight: 400;
                 line-height: 31.2px;
@@ -827,7 +828,7 @@
                 display: flex;
                 align-items: center;
                 span{
-                    color: #595349;
+                    color: $color-text;
                     font-size: 16px;
                     margin-right: 5px;
                 }
@@ -878,51 +879,51 @@
 
 .tf-withoutpayment-booking .tf-withoutpayment-popup, 
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup{
-    background-color: #FDF9F3;
+    background-color: $color-white;
     box-shadow: 0px 3px 60px 0px rgba(0, 0, 0, 0.10);
 }
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-tabs, 
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-tabs{
-    background-color: #FDF9F3;
-    border-bottom: 0.3px solid #CCCED1;
+    background-color: $color-white;
+    border-bottom: 0.3px solid $color-border;
 }
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul, .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul{
-    background-color: #595349;
+    background-color: $color-text;
 }
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li, .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li{
-    color: #FDF9F3;
+    color: $color-white;
 }
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.active, 
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.active{
-    background-color: #99948D;
+    background-color: $color-primary;
 }
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.active::before, 
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.active::before {
-    background-color: #99948D;
+    background-color: $color-primary;
 }
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .traveller-info .traveller-single-info input[type="text"],
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .traveller-info .traveller-single-info input[type="textarea"],
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .traveller-info .traveller-single-info input[type="date"],
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .traveller-info .traveller-single-info select{
-    background: #FCF4E8 !important;
+    background: $color-light-bg !important;
 }
 
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-pagination .tf-control-pagination button, .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-pagination .tf-control-pagination button{
-    background-color: #B58E53;
+    background-color: $color-primary;
 }
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-pagination .tf-control-pagination a.tf-back-control, .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-pagination .tf-control-pagination a.tf-back-control{
     background-color: transparent !important;
-    color: #B58E53;
+    color: $color-primary;
     padding: 0px !important;
     border: 0px solid !important;
 }
 
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.done, .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.done{
-    background-color: #99948D;
+    background-color: $color-light-bg;
 }
 
 .tf-single-tour-extra .tf_quantity-acrselection .quanity-acr-fields {
-    background-color: #f3f7fa !important;
+    background-color: $color-light-bg !important;
     padding: 15px 40px !important;
     margin-bottom: 10px !important;
     margin-left: 23px !important;

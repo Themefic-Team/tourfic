@@ -2,7 +2,7 @@
 .tf-send-inquiry{
     padding: 24px;
     border-radius: 8px;
-    background: $t4-orange-100;
+    background: $color-light-bg;
     @include flexbox();
     @include flex-direction(column);
     @include align-items(center);
@@ -23,7 +23,7 @@
     }
 
     h5{
-        color: $t4-orange-1000;
+        color: $t4-orange-100;
         font-size: 18px;
         font-weight: 500;
         line-height: 24px;

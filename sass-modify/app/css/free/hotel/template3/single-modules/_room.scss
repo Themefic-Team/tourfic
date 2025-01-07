@@ -2,7 +2,7 @@
 .tf-room-section {
     margin-top: 0;
     border-radius: 8px;
-    background: $t4-orange-100;
+    background: $color-light-bg;
     box-shadow: 0px 9px 12px 0px rgba(14, 19, 35, 0.02);
 
     .tf-available-rooms-head {
@@ -180,7 +180,7 @@
                 background: #FFC700;
                 font-size: 13px;
                 line-height: 15px;
-                color: $t4-orange-1000;
+                color: $t4-orange-100;
             }
         }
 
@@ -304,7 +304,7 @@
 
                     .tf-price {
                         .woocommerce-Price-amount{
-                            color: $t4-orange-1000;
+                            color: $t4-orange-100;
                             font-size: 24px;
                             font-weight: 500;
                             line-height: 28px;
@@ -359,7 +359,7 @@
                 width: 100%;
 
                 .tf-room-features-title{
-                    color: $t4-orange-1000;
+                    color: $t4-orange-100;
                     font-size: 14px;
                     line-height: 16px;
                     font-weight: 500;
@@ -448,7 +448,7 @@
         h4.tf-hotel-room-title{
             padding-bottom: 0;
             margin-bottom: 20px;
-            color: $t4-orange-1000;
+            color: $t4-orange-100;
             font-size: 20px;
             font-weight: 500;
             line-height: 28px;

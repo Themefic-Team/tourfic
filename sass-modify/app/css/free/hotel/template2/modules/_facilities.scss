@@ -4,7 +4,7 @@
         padding-right: 16px;
     }
     h2{
-        color: #595349;
+        color: $color-heading;
         font-size: 32px !important;
         font-style: normal !important;
         font-weight: 700 !important;
@@ -27,7 +27,7 @@
                 width: 50%;
             }
             span.single-facilities-title {
-                color: #595349;
+                color: $color-text;
                 font-weight: 600;
                 line-height: 20.80px;
                 margin-bottom: 16px;

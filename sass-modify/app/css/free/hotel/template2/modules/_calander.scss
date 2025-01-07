@@ -1,71 +1,13 @@
-.tf-tour-wrapper { 
-
-	.tf-section-title { 
-
-	}
-
-	.NavShow-true { 
-
-		.cld-main { 
-
-			.cld-datetime { 
-
-				.cld-rwd { 
-
-					svg { 
-
-						polyline { 
-
-						}
-					}
-				}
-
-				.today { 
-
-				}
-
-				.cld-fwd { 
-
-					svg { 
-
-						polyline { 
-
-						}
-					}
-				}
-			}
-
-			.cld-labels { 
-
-				.cld-label { 
-
-				}
-			}
-
-			.cld-days { 
-
-				.cld-day { 
-
-					.cld-number { 
-
-					}
-				}
-			}
-		}
-	}
-}
-
-
 .cld-main {
     width: fit-content;
-    background: #FCF4E8;
+    background: $color-light-bg;
     padding: 32px;
 }
 
 .cld-datetime {
     width: 100% !important;
     min-width: 100%;
-    background: #FAEEDC;
+    background: $color-light-bg;
     display: flex;
     justify-content: center;
     gap: 24px;
@@ -73,7 +15,14 @@
     align-items: center;
 }
 
-.cld-datetime .today {margin: unset;font-size: 24px;font-style: normal;font-weight: 400;margin-top: 7px;color: #595349;}
+.cld-datetime .today {
+    margin: unset;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    margin-top: 7px;
+    color: $color-text;
+}
 
 .cld-datetime>div {
     width: initial;
@@ -81,7 +30,7 @@
 }
 
 .cld-nav {
-    background: #B58E53;
+    background: $color-primary;
     padding: 6px 11px;
     line-height: 1;
     display: flex;
@@ -96,7 +45,7 @@
 }
 
 li.cld-day {
-    background: #FDF9F3;
+    background: $color-light-bg;
     padding: 16px;
     text-align: left;
     cursor: pointer;
@@ -108,8 +57,7 @@ ul.cld-days {
     flex-wrap: wrap;
     gap: 16px;
     padding: 16px;
-    color: #D6D4D2;
-/* Body/P1 */
+    color: $color-white;
     font-size: 24px;
     font-style: normal;
     font-weight: 400;
@@ -149,20 +97,23 @@ p.cld-number {
 .cld-number.eventday:hover {
     background: transparent;
 }
+
 li.cld-day.currMonth {
-    color: #99948D;
+    color: $color-text;
 }
 
-.cld-day.nextMonth, .cld-day.prevMonth {
+.cld-day.nextMonth,
+.cld-day.prevMonth {
     opacity: unset;
 }
 
 li.cld-day.currMonth a {
-    color: #B58E53;
+    color: $color-primary;
     pointer-events: none;
 }
+
 li.cld-label {
-    color: #595349;
+    color: $color-text;
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
@@ -186,6 +137,7 @@ ul.cld-days {
 li.cld-day {
     width: calc(100%/7 - 46px);
 }
+
 .cld-day.today .cld-number {
     background: transparent;
     color: inherit;
