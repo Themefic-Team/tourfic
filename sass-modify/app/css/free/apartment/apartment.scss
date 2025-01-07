@@ -43,7 +43,7 @@
             @include align-items(center);
 
             i {
-                color: $yellow60;
+                color: $color-primary;
                 font-size: 16px;
                 margin-top: -3px;
             }
@@ -163,7 +163,7 @@
                     font-size: 14px;
 
                     &:hover {
-                        background-color: #f5f5f5;
+                        background-color: $color-light-bg;
                     }
                 }
 
@@ -513,7 +513,7 @@
             svg {
                 padding: 8px;
                 border-radius: 50%;
-                border: 1px solid #E1E5EA;
+                border: 1px solid $color-border;
                 background: rgba(255, 255, 255, 0.70);
                 box-shadow: 0px 5px 10px 0px rgba(0, 44, 102, 0.20);
             }
@@ -637,8 +637,8 @@
 
         .tf-apartment-amenities-inner {
             border-radius: 8px;
-            border: 1px solid #F0F2F4;
-            background: var(--Slate-0, #F8F9FB);
+            border: 1px solid $color-border;
+            background: $color-light-bg;
             padding: 24px 40px;
         }
 
@@ -669,7 +669,6 @@
         }
 
         .tf-apartment-amenities-more {
-
             .tf-modal-btn {
                 @include flexbox();
                 @include align-items(center);
@@ -748,7 +747,7 @@
     background: $color-secondary;
     border-radius: 8px;
     padding: 24px;
-    border: 1px solid $blue5;
+    border: 1px solid $color-border;
     margin-bottom: 25px;
 
     .host-top {
@@ -762,7 +761,7 @@
             height: 80px;
             object-fit: cover;
             border-radius: 40px;
-            border: 1px solid $slate5;
+            border: 1px solid $color-border;
         }
     }
 
@@ -795,7 +794,7 @@
         }
 
         i {
-            color: #FFC314;
+            color: $color-primary;
         }
 
         span {
@@ -971,7 +970,7 @@
 
             li {
                 padding: 8px 0 8px 32px;
-                border-bottom: 1px solid $slate5;
+                border-bottom: 1px solid $color-border;
                 @include flexbox();
                 @include align-items(center);
                 @include justify-content(space-between);
@@ -994,8 +993,8 @@
         @include flex-wrap(wrap);
         gap: 30px;
         padding: 24px;
-        background-color: $slate0;
-        border: 1px solid $slate5;
+        background-color: $color-light-bg;
+        border: 1px solid $color-border;
         border-radius: 8px;
 
         .tf-not-included-house-rules,
@@ -1109,8 +1108,8 @@
     }
 
     .tf-faq-content-wrapper {
-        background: #F8F9FB;
-        border: 1px solid #F0F2F4;
+        background: $color-light-bg;
+        border: 1px solid $color-border;
         border-radius: 8px;
         padding: 40px;
     }
@@ -1320,7 +1319,7 @@
     .tf-toc-wrap {
         padding: 40px;
         border-radius: 4px;
-        border: 1px solid #F0F2F4;
+        border: 1px solid $color-border;
 
         @media #{$max767} {
             padding: 20px;
@@ -1353,9 +1352,9 @@
     }
 
     .tf-review-progress-bar {
-        background: #F8F9FB;
+        background: $color-light-bg;
         border-radius: 8px;
-        border: 1px solid #EBF2FF;
+        border: 1px solid $color-border;
         column-gap: 200px;
         row-gap: 16px;
         grid-template-columns: calc(50% - 100px) calc(50% - 100px);
@@ -1410,7 +1409,7 @@
 .show-all-review-wrap {
     padding: 8px 24px;
     border-radius: 4px;
-    background: #F5F8FF;
+    background: $color-light-bg;
     border: 1px solid $color-primary;
     width: 200px;
     margin: auto;
@@ -1533,7 +1532,7 @@
 }
 
 #tf-apartment-booking {
-    border: 1px solid $slate5;
+    border: 1px solid $color-border;
     box-shadow: 0px 2px 10px rgba(26, 156, 255, .2);
     border-radius: 8px;
     padding: 32px;
@@ -1586,7 +1585,7 @@
             @include align-items(center);
 
             i {
-                color: $yellow60;
+                color: $color-primary;
                 font-size: 16px;
                 margin-top: -3px;
             }
@@ -1601,8 +1600,8 @@
     }
 
     .tf-apartment-form-fields {
-        background: $blue0;
-        border: 1px solid #F0F2F4;
+        background: $color-light-bg;
+        border: 1px solid $color-border;
         border-radius: 8px;
         margin-bottom: 16px;
 
@@ -1672,7 +1671,7 @@
             }
 
             .tf-check-in-date {
-                border-right: 1px solid #F0F2F4;
+                border-right: 1px solid $color-border;
             }
 
             #check-in-out-date {
@@ -1684,7 +1683,7 @@
         }
 
         .tf-apartment-guest-row {
-            border-top: 1px solid #F0F2F4;
+            border-top: 1px solid $color-border;
             padding: 8px 16px;
 
             label {

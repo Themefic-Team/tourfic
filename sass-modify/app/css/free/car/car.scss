@@ -26,7 +26,7 @@
             .tf-booking-popup-header{
                 margin-bottom: 24px;
                 h3{
-                    color: #27333F;
+                    color: $color-heading;
                     font-size: 21px !important;
                     font-weight: 700 !important;
                     margin: 0;
@@ -44,11 +44,11 @@
                     padding: 16px;
                     margin-bottom: 24px;
                     span{
-                        color: #6B4F00;
+                        color: $color-denger;
                         font-size: 16px;
                         font-weight: 400;
                         i{
-                            color: #6B4F00;
+                            color: $color-denger;
                         }
                         b{
                             font-weight: 700;
@@ -61,7 +61,7 @@
                         margin: 0;
                         padding: 0;
                         li{
-                            color: #27333f !important;
+                            color: $color-text !important;
                             font-size: 16px !important;
                             font-weight: 400 !important;
                             padding: 0 8px 8px 8px;
@@ -69,8 +69,8 @@
                             cursor: pointer;
                             width: auto !important;
                             &.active{
-                                color: #0866C4;
-                                border-bottom: 2px solid #0866C4;
+                                color: $color-primary;
+                                border-bottom: 2px solid $color-primary;
                             }
                         }
                     }
@@ -87,7 +87,7 @@
                     overflow: auto;
                     padding-right: 8px;
                     scrollbar-width: thin;
-                    scrollbar-color: #9c9c9c $color-white;
+                    scrollbar-color: $color-gray $color-white;
    
                     /* Chrome, Edge, and Safari */
                     *::-webkit-scrollbar {
@@ -97,12 +97,12 @@
                         background: $color-white;
                     }
                     &::-webkit-scrollbar-thumb {
-                        background-color: #9c9c9c;
+                        background-color: $color-gray;
                         border-radius: 5px;
                         border: 3px solid $color-white;
                     }
                     p{
-                        color: #27333F;
+                        color: $color-text;
                         font-size: 16px;
                         font-weight: 400;
                         margin: 0;
@@ -110,7 +110,7 @@
 
                     .tf-protection-featured{
                         border-radius: 16px;
-                        border: 1px solid #C0CCD8;
+                        border: 1px solid $color-border;
                         padding: 24px;
                         @media #{$max991}{
                             width: 100%;
@@ -125,7 +125,7 @@
                             tr{
                                 td{
                                     border: 0px solid;
-                                    color: #27333F;
+                                    color: $color-text;
                                     font-size: 16px;
                                     font-weight: 400;
                                     padding: 0 0 16px 0px;
@@ -136,11 +136,6 @@
                                     span{
                                         font-weight: 600;
                                     }
-                                    &:nth-child(1){
-                                        @media #{$max767}{
-                                            // width: 100%;
-                                        }
-                                    }
                                     &:nth-child(2){
                                         @media #{$max767}{
                                             width: 90px;
@@ -148,7 +143,7 @@
                                     }
                                 }
                                 th{
-                                    color: #27333F;
+                                    color: $color-text;
                                     border: 0px solid;
                                     font-size: 16px;
                                     font-weight: 700;
@@ -172,7 +167,7 @@
                                             margin-top: 6px;
                                         }
                                         label{
-                                            color: #566676;
+                                            color: $color-text;
                                             font-size: 16px;
                                             font-weight: 400;
                                             position: relative;
@@ -191,14 +186,14 @@
                                                 display: block;
                                             }
                                             input:checked ~ .checkmark{
-                                                background-color: #F8FAFC;
+                                                background-color: $color-light-bg;
                                             }
                                             .checkmark {
                                                 position: absolute;
                                                 height: 15px;
                                                 width: 15px;
                                                 top: 0;
-                                                border: 2px solid #566676;
+                                                border: 2px solid $color-gray-light;
                                                 background-color: transparent;
                                                 border-radius: 5px;
                                                 &::after{
@@ -209,7 +204,7 @@
                                                     top: 1px;
                                                     width: 5px;
                                                     height: 8px;
-                                                    border: solid #566676;
+                                                    border: solid $color-gray-light;
                                                     border-width: 0 3px 3px 0;
                                                     -webkit-transform: rotate(45deg);
                                                     -ms-transform: rotate(45deg);
@@ -272,7 +267,7 @@
                                 margin-top: 16px;
                                 tr{
                                     th{
-                                        border-top: 1px solid #C0CCD8;
+                                        border-top: 1px solid $color-border;
                                         padding: 16px 0 0 0;
                                     }
                                 }
@@ -292,7 +287,7 @@
                                 width: calc(50% - 24px);
                             }
                             label{
-                                color: #566676;
+                                color: $color-text;
                                 font-size: 12px !important;
                                 font-weight: 700;
                                 margin-bottom: 8px;
@@ -300,20 +295,20 @@
                             input[type="text"],
                             input[type="email"]{
                                 border-radius: 8px;
-                                border: 1px solid #C0CCD8;
+                                border: 1px solid $color-border;
                                 padding: 8px 16px;
                                 height: 40px;
-                                color: #566676;
+                                color: $color-text;
                                 font-size: 16px;
                                 font-weight: 400;
                                 width: 100%;
                             }
                             input[type="date"]{
                                 border-radius: 8px;
-                                border: 1px solid #C0CCD8;
+                                border: 1px solid $color-border;
                                 padding: 0px 16px;
                                 height: 40px;
-                                color: #566676;
+                                color: $color-text;
                                 font-size: 16px;
                                 font-weight: 400;
                                 width: 100%;
@@ -321,16 +316,16 @@
                             }
                             select{
                                 border-radius: 8px;
-                                border: 1px solid #C0CCD8;
+                                border: 1px solid $color-border;
                                 padding: 0px 16px;
                                 height: 40px;
-                                color: #566676;
+                                color: $color-text;
                                 font-size: 16px;
                                 font-weight: 400;
                                 width: 100%;
                             }
                             .error-text.error-visible{
-                                color: red;
+                                color: $color-denger;
                             }
                         }
                     }
@@ -339,7 +334,7 @@
                         text-align: right;
                         button{
                             border-radius: 8px;
-                            background-color: #0866C4;
+                            background-color: $color-primary;
                             color: $color-white;
                             padding: 16px 32px;
                             border: 0px solid;
@@ -348,7 +343,7 @@
                             cursor: pointer;
                             transition: .3s all ease;
                             &:hover{
-                                background: #094c90 !important;
+                                background: $color-secondary !important;
                             }
                         }
                     }
@@ -359,20 +354,20 @@
                     justify-content: end;
                     button{
                         border-radius: 8px;
-                        background: #E6F2FE;
+                        background: $color-light-bg;
                         padding: 16px 32px;
                         border: 0px solid;
-                        color: #566676;
+                        color: $color-text;
                         font-size: 16px;
                         font-weight: 700;
                         cursor: pointer;
                     }
                     button.with-charge{
-                        background-color: #0866C4 !important;
+                        background-color: $color-primary !important;
                         color: $color-white !important;
                         transition: .3s all ease;
                         &:hover{
-                            background: #094c90 !important;
+                            background: $color-secondary !important;
                         }
                     }
                 }
@@ -407,7 +402,7 @@
                 margin-bottom: 24px;
                 flex-wrap: nowrap;
                 h3{
-                    color: #27333F;
+                    color: $color-heading;
                     font-size: 21px !important;
                     font-weight: 700 !important;
                     margin: 0;
@@ -420,7 +415,7 @@
             .tf-instraction-content-wraper,
             .tf-cancellation-content-wraper{
                 text-align: left;
-                color: #27333F;
+                color: $color-text;
                 font-size: 16px;
                 font-style: normal;
                 font-weight: 400;
@@ -428,7 +423,7 @@
                 overflow: auto;
 
                 scrollbar-width: thin;
-                scrollbar-color: #9c9c9c $color-white;
+                scrollbar-color: $color-gray $color-white;
 
                 /* Chrome, Edge, and Safari */
                 *::-webkit-scrollbar {
@@ -438,12 +433,12 @@
                     background: $color-white;
                 }
                 &::-webkit-scrollbar-thumb {
-                    background-color: #9c9c9c;
+                    background-color: $color-gray;
                     border-radius: 5px;
                     border: 3px solid $color-white;
                 }
                 p{
-                    color: #27333F;
+                    color: $color-text;
                     font-size: 16px;
                 }
                 table{
@@ -456,7 +451,7 @@
 .tf-single-car-section{
     
     .tf-single-car-banner{
-        background: #B8C5D2;
+        background: $color-light-bg;
         height: 350px;
         .tf-banner-content{
             height: 100%;
@@ -510,13 +505,13 @@
     .tf-heading{
         text-align: center;
         h2{
-            color:#27333F;
+            color: $color-heading;
             font-size: 38px;
             font-weight: 400;
             margin-bottom: 16px;
         }
         p{
-            color: #566676;
+            color: $color-text;
             font-size: 16px;
             font-weight: 400;
             margin-bottom: 56px;
@@ -526,7 +521,7 @@
         flex-wrap: wrap;
         .tf-single-car-view{
             border-radius: 16px;
-            background: #F8FAFC;
+            background: $color-light-bg;
             width: calc(50% - 16px);
             @media #{$max991}{
                 width: 100%;
@@ -559,7 +554,7 @@
                             font-size: 16px;
                             font-weight: 400;
                             i{
-                                color: #FFBF0F;
+                                color: $color-primary;
                             }
                         }
                     }
@@ -571,10 +566,10 @@
                             list-style: none;
                             li{
                                 border-radius: 8px;
-                                background: #FFBF0F;
+                                background: $color-primary;
                                 backdrop-filter: blur(32px);
                                 padding: 4px 8px;
-                                color: #382900;
+                                color: $color-white;
                                 font-size: 16px;
                                 font-weight: 400;
                                 margin-bottom: 8px;
@@ -591,7 +586,7 @@
                 a{
                     text-decoration: none;
                     h3{
-                        color:#27333F;
+                        color: $color-heading;
                         font-size: 21px !important;
                         font-weight: 700 !important;
                         margin-top: 0px;
@@ -608,7 +603,7 @@
                     flex-wrap: wrap;
                     gap: 16px 8px;
                     li{
-                        color: #566676;
+                        color: $color-text;
                         font-size: 15px;
                         font-weight: 400;
                         display: flex;
@@ -631,12 +626,12 @@
                     align-items: center;
                     .tf-price-info{
                         h3{
-                            color: #27333F;
+                            color: $color-heading;
                             font-size: 28px !important;
                             font-weight: 600 !important;
                             margin: 0;
                             small{
-                                color: #566676;
+                                color: $color-text;
                                 font-size: 16px !important;
                                 font-weight: 400;
                                 text-transform: capitalize;
@@ -646,9 +641,9 @@
                     button,
                     a.view-more{
                         border-radius: 8px;
-                        border: 1px solid #0866C4;
+                        border: 1px solid $color-primary;
                         padding: 12px 32px;
-                        color: #0866C4;
+                        color: $color-primary;
                         font-size: 16px;
                         font-weight: 700;
                         background-color: $color-white;
@@ -657,8 +652,8 @@
                         transition: .3s all ease;
                         
                         &:hover{
-                            border: 1px solid #0866C4;
-                            background: #0866C4;
+                            border: 1px solid $color-primary;
+                            background: $color-primary;
                             color: $color-white;
                         }
                     }
@@ -750,13 +745,13 @@
         .tf_posts_navigation{
             width: 100%;
             .page-numbers{
-                background: #0866c4;
+                background: $color-primary;
                 color: $color-white;
                 border-radius: 8px;
             }
             .page-numbers.current{
-                background: #e6f2fe;
-                color: #566676;
+                background: $color-light-bg;
+                color: $color-text;
             }
         }
     }
@@ -765,7 +760,7 @@
 // Search form
 .tf-archive-search-box-wrapper{
     border-radius: 16px;
-    background: #E6F2FE;
+    background: $color-light-bg;
     box-shadow: 0px 24px 60px 0px rgba(0, 15, 63, 0.16);
 
     .tf-date-selection-form{
@@ -818,11 +813,11 @@
             .tf-select-date{
                 width: calc(50% - 8px);
                 &:first-child{
-                    border-right: 1px solid #DFE6ED;
+                    border-right: 1px solid $color-border;
                 }
                 
                 i{
-                    color: #566676;
+                    color: $color-text;
                 }
                 .tf-flex{
                     flex-wrap: nowrap;
@@ -831,7 +826,7 @@
                     width: 100%;
                     position: relative;
                     h5{
-                        color: #27333F;
+                        color: $color-heading;
                         font-size: 12px !important;
                         font-weight: 400 !important;
                         margin-bottom: 8px;
@@ -840,7 +835,7 @@
                     input{
                         min-width: auto;
                         width: 100% !important;
-                        color: #27333F;
+                        color: $color-text;
                         font-size: 16px;
                         font-weight: 400;
                         border: 0px solid !important;
@@ -852,13 +847,13 @@
                             box-shadow: none;
                         }
                         &::placeholder{
-                            color: #27333F;
+                            color: $color-text;
                         }
                     }
                     select{
                         min-width: auto;
                         width: 100% !important;
-                        color: #27333F;
+                        color: $color-text;
                         font-size: 16px;
                         font-weight: 400;
                         border: 0px solid !important;
@@ -873,12 +868,12 @@
                         max-height: 200px;
                         overflow: auto;
                         border-radius: 4px;
-                        background: #EEF2F6;
+                        background: $color-light-bg;
                         padding: 2px;
                         box-shadow: 0px 4px 16px 0px rgba(2, 28, 53, 0.20);
                         
                         scrollbar-width: thin;
-                        scrollbar-color: #9c9c9c $color-white;
+                        scrollbar-color: $color-gray $color-white;
     
                         /* Chrome, Edge, and Safari */
                         *::-webkit-scrollbar {
@@ -888,7 +883,7 @@
                             background: $color-white;
                         }
                         &::-webkit-scrollbar-thumb {
-                            background-color: #9c9c9c;
+                            background-color: $color-gray;
                             border-radius: 5px;
                             border: 3px solid $color-white;
                         }
@@ -907,7 +902,7 @@
                                 margin-bottom: 0px;
                             }
                             &:hover{
-                                background-color: #F8FAFC;
+                                background-color: $color-light-bg;
                             }
                         }
                     }
@@ -920,7 +915,7 @@
                             text-align: center;
                         }
                         .tf_input-inner > div{
-                            color: #27333f;
+                            color: $color-text;
                             font-size: 16px;
                             font-weight: 400;
                         }
@@ -938,7 +933,7 @@
                 .tf-select-date{
                     width: 100%;
                     &:first-child{
-                        border-right: 0px solid #DFE6ED;
+                        border-right: 0px solid $color-border;
                     }
                     &:last-child{
                         display: none;
@@ -949,7 +944,7 @@
                 .tf-select-date{
                     width: 100%;
                     &:first-child{
-                        border-right: 0px solid #DFE6ED;
+                        border-right: 0px solid $color-border;
                     }
                 }
             }
@@ -975,7 +970,7 @@
                 gap: 0px 32px;
                 li{
                     label{
-                        color: #566676;
+                        color: $color-text;
                         font-size: 16px;
                         font-weight: 400;
                         display: block;
@@ -999,7 +994,7 @@
                             display: block;
                         }
                         input:checked ~ .checkmark{
-                            background-color: #F8FAFC;
+                            background-color: $color-light-bg;
                         }
                         .checkmark {
                             position: absolute;
@@ -1007,7 +1002,7 @@
                             left: 0;
                             height: 20px;
                             width: 20px;
-                            border: 2px solid #566676;
+                            border: 2px solid $color-gray;
                             background-color: transparent;
                             border-radius: 5px;
                             &::after{
@@ -1018,7 +1013,7 @@
                                 top: 2px;
                                 width: 7px;
                                 height: 10px;
-                                border: solid #566676;
+                                border: solid $color-gray;
                                 border-width: 0 3px 3px 0;
                                 -webkit-transform: rotate(45deg);
                                 -ms-transform: rotate(45deg);
@@ -1029,7 +1024,7 @@
                 }
             }
             span#tf-required{
-                color: red;
+                color: $color-denger;
             }
         }
         .tf-submit-button{
@@ -1038,7 +1033,7 @@
             }
             button{
                 border-radius: 8px;
-                background: #0866C4;
+                background: $color-primary;
                 padding: 16px 50px;
                 color: $color-white;
                 font-size: 16px;
@@ -1047,7 +1042,7 @@
                 cursor: pointer;
                 transition: .3s all ease;
                 &:hover{
-                    background: #094C90;
+                    background: $color-secondary;
                 }
                 i{
                     margin-left: 8px;
