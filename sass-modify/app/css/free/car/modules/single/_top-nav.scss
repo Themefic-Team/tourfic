@@ -1,0 +1,122 @@
+.tf-car-design-1{
+    .tf-single-booking-bar{
+        background: $color-white;
+        box-shadow: 0px 48px 64px 0px rgba(2, 12, 21, 0.05);
+        padding: 16px 0px;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        z-index: 9999;
+        display: none;
+        @media #{$max991}{
+            padding-left: 16px;
+            padding-right: 16px;
+        }
+        .tf-top-booking-bar{
+            @media #{$max991}{
+                gap: 16px;
+            }
+        }
+        .tf-top-bar-booking{
+            @media #{$max991}{
+                justify-content: space-between;
+                width: 100%;
+            }
+            @media #{$max767}{
+                display: none;
+            }
+            .tf-price-header{
+                h2{
+                    color: $color-primary;
+                    font-size: 21px;
+                    font-weight: 700;
+                    margin: 0;
+                }
+                p{
+                    color: $color-text;
+                    margin: 0;
+                }
+            }
+            button{
+                padding: 16px 32px;
+                border-radius: 8px;
+                background: $color-primary;
+                color: $color-white;
+                font-size: 16px;
+                font-weight: 700;
+                cursor: pointer;
+                border: 0px solid;
+                transition: .3s all ease;
+                &:hover{
+                    background: $color-secondary;
+                }
+            }
+        }
+        .tf-details-menu{
+            width: 668px;
+            @media #{$max991}{
+                width: 100%;
+            }
+        }
+    }
+
+    .tf-details-menu{
+        position: relative;
+        @media #{$max640}{
+            width: 100%;
+        }
+        &::before{
+            background: linear-gradient(90deg, rgba(217, 217, 217, 0.00) 0%, $color-light-bg 100%);
+            position: absolute;
+            content: "";
+            right: 0;
+            top: 0;
+            height: 100%;
+            width: 92px;
+            z-index: -1;
+        }
+        ul{
+            margin: 0;
+            padding: 0;
+            overflow-y: auto;
+            width: 100%;
+            display: block ruby;
+            scrollbar-width: thin;
+            scrollbar-color: $color-gray $color-light-bg;
+            &::-webkit-scrollbar {
+                width: 4px;
+            }
+
+            &::-webkit-scrollbar-track {
+                background: $color-light-bg;
+            }
+            &::-webkit-scrollbar-thumb {
+                background-color: $color-gray;
+                border-radius: 4px;
+
+                &:hover {
+                    background-color: $color-gray-light;
+                }
+            }
+            li{
+                display: inline-block;
+                margin-right: 8px;
+                a{
+                    text-decoration: none;
+                    color: $color-text;
+                    font-size: 16px;
+                    font-weight: 400;
+                    padding: 0 8px 8px 8px;
+                    display: inline-block;
+                }
+                &.active{
+                    a{
+                        color: $color-primary;
+                        border-bottom: 2px solid $color-primary;
+                    }
+                }
+            }
+        }
+    }
+}
