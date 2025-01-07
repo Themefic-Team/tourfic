@@ -1404,6 +1404,7 @@
 .tf-car-design-1 .tf-archive-search-box .tf-date-select-box {
   padding: 8px;
   flex-wrap: nowrap;
+  margin-bottom: 0px;
 }
 @media only screen and (max-width: 767.98px) {
   .tf-car-design-1 .tf-archive-search-box .tf-date-select-box {
