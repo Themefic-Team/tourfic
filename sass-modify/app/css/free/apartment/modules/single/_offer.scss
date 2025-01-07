@@ -42,3 +42,56 @@
         }
     }
 }
+
+.tf-template-1{
+    .tf-apartment-amenities-section {
+        margin-bottom: 80px;
+
+        .tf-apartment-amenities-inner {
+            border-radius: 8px;
+            border: 1px solid $color-border;
+            background: $color-light-bg;
+            padding: 24px 40px;
+        }
+
+        .tf-apartment-amenities {
+            @include flexbox();
+            @include flex-wrap(wrap);
+            gap: 16px;
+
+            .tf-apt-amenity {
+                @include flex(0 0 calc(100% / 2 - 11px));
+                @include flexbox();
+                gap: 16px;
+                margin-bottom: 5px;
+                color: $color-text;
+
+                .tf-apt-amenity-icon {
+                    @include flexbox();
+                    @include align-items(center);
+                    @include flex(0 0 24px);
+                    height: 24px;
+
+                    i {
+                        font-size: 24px;
+                        color: $color-text;
+                    }
+                }
+            }
+        }
+
+        .tf-apartment-amenities-more {
+            .tf-modal-btn {
+                @include flexbox();
+                @include align-items(center);
+                @include justify-content(flex-end);
+                gap: 4px;
+                font-size: 14px;
+                font-weight: 500;
+                color: $color-heading;
+                cursor: pointer;
+                text-decoration: none;
+            }
+        }
+    }
+}
