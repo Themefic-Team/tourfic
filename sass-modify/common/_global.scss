@@ -1,0 +1,581 @@
+/* 
+Container
+*/
+.tf-container {
+    margin: 0 auto;
+    padding: 0 15px;
+    max-width: 1200px;
+}
+.tf-car-template-container{
+    max-width: 1140px;
+    margin: 0 auto;
+}
+.tf-template-3 .tf-container {
+    margin: 0 auto;
+    max-width: 1520px;
+    padding: 0;
+}
+
+/*
+Button
+*/
+.tf-btn {
+    display: inline-flex;
+    @include align-items(center);
+    background-color: $color-primary;
+    padding: 7px 22px;
+    border: 1px solid $color-primary;
+    border-radius: 4px;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+
+    i {
+        margin-right: 8px;
+        font-size: 18px;
+    }
+
+    &.tf-btn-secondary {
+        background-color: $color-primary;
+        border-color: $color-primary;
+        color: $color-white;
+        font-weight: 600;
+    }
+
+    //disabled
+    &.disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+}
+
+//app->global->common.scss
+.tf_button {
+    background: $color-primary;
+    color: $color-white;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    border: 1px solid  $color-primary;
+    border-radius: 4px;
+    padding: 10px 20px;
+    &:hover {
+        background: $color-secondary;
+        color: $color-white;
+        text-decoration: none;
+        border: 1px solid $color-secondary;
+    }
+}
+.tf_button.btn-outline {
+    background: $color-white;
+    border-color: $color-text;
+    color: $color-text;
+}
+.tf-btn-flip {
+    opacity: 1;
+    outline: 0;
+    color: $color-white;
+    position: relative;
+    text-align: center;
+    letter-spacing: 1px;
+    display: inline-block;
+    text-decoration: none;
+    &:hover {
+        &:after {
+            opacity: 1;
+            transform: translateY(0) rotateX(0);
+        }
+        &:before {
+            opacity: 0;
+            transform: translateY(50%) rotateX(90deg);
+        }
+    }
+    &:after {
+        top: 0;
+        left: 0;
+        opacity: 0;
+        width: 100%;
+        color: $color-white;
+        display: block;
+        transition: 0.5s;
+        position: absolute;
+        background: $color-primary;
+        content: attr(data-back);
+        transform: translateY(-50%) rotateX(90deg);
+        border-radius: 4px;
+        padding: 6px 20px;
+    }
+    &:before {
+        top: 0;
+        left: 0;
+        opacity: 1;
+        color: $color-white;
+        display: block;
+        transition: 0.5s;
+        position: relative;
+        background: $color-primary;
+        content: attr(data-front);
+        transform: translateY(0) rotateX(0);
+        border-radius: 4px;
+        padding: 6px 20px;
+    }
+}
+.tf-btn {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    text-align: center;
+    width: 100%;
+}
+.btn-styled {
+    border: 1px solid $color-primary !important;
+    border-radius: 4px !important;
+    overflow: hidden;
+    position: relative;
+    color: $color-white !important;
+    cursor: pointer;
+    position: relative;
+    text-decoration: none;
+    background: $color-primary !important;
+    padding: 10px 18px !important;
+    span {
+        z-index: 20;
+    }
+    &:after {
+        background: $color-white;
+        content: "";
+        height: 155px;
+        left: -75px;
+        opacity: .25;
+        position: absolute;
+        top: -50px;
+        transform: rotate(35deg);
+        transition: all 1500ms cubic-bezier(0.19, 1, 0.22, 1);
+        width: 50px;
+    }
+    &:hover {
+        color: $color-white;
+        background: $color-gray;
+        &:after {
+            left: 120%;
+            transition: all 1500ms cubic-bezier(0.19, 1, 0.22, 1);
+        }
+    }
+}
+a.tf_button.btn-styled {
+    &:focus {
+        color: $color-white;
+    }
+}
+.tf-sml-btn {
+    font-size: 13px;
+    padding: 6px 12px;
+    white-space: nowrap;
+    &:hover {
+        background: $color-secondary;
+        color: $color-white;
+        text-decoration: none;
+        border: 1px solid $color-secondary;
+    }
+}
+//button end
+
+/*
+Custom Modal
+*/
+.tf-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999999;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    outline: 0;
+    visibility: hidden;
+    opacity: 0;
+    @include scale(.7);
+    @include transition(all, 0.3s, ease-in-out);
+
+    &.tf-modal-show {
+        opacity: 1;
+        visibility: visible;
+        transform: scale(1);
+    }
+
+    .tf-modal-dialog {
+        @include flexbox();
+        @include align-items(center);
+        min-height: calc(100% - 40px);
+        max-width: 100%;
+        position: relative;
+        pointer-events: none;
+
+        @media #{$min576} {
+            min-height: calc(100% - 40px);
+        }
+    }
+
+    .tf-modal-content {
+        position: relative;
+        @include flexbox();
+        @include flex-direction(column);
+        width: 80%;
+        max-width: 1080px;
+        pointer-events: auto;
+        background-color: $color-light-bg;
+        outline: 0;
+        margin: 0 auto;
+        border-radius: 10px;
+        padding: 30px;
+        overflow: hidden;
+    }
+
+    .tf-modal-close {
+        color: $color-primary;
+        cursor: pointer;
+        font-size: 22px;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        @include transition(all, 0.3s, ease-in-out);
+
+        &:hover {
+            @include rotate(180)
+        }
+    }
+
+    &.tf-modal-fullscreen {
+        .tf-modal-dialog {
+            min-height: 100%;
+        }
+
+        .tf-modal-content {
+            width: 100%;
+            max-width: 100%;
+            height: 100%;
+            border-radius: 0;
+            padding: 0;
+        }
+
+        .tf-modal-header {
+            min-height: 50px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+
+            .tf-modal-close {
+                right: 30px;
+                top: 20px;
+                height: 50px;
+                width: 50px;
+                margin-left: -25px;
+                line-height: 52px;
+                text-align: center;
+                background-color: rgba(0, 0, 0, 0.6);
+                border-radius: 50%;
+                color: $color-white;
+            }
+
+            /*&:hover{
+                .tf-modal-close {
+                    top: 10px;
+                }
+            }*/
+        }
+    }
+}
+
+body.tf-modal-open {
+    overflow: hidden;
+
+    .tf-modal {
+        overflow-x: hidden;
+        overflow-y: auto;
+
+        &.tf-modal-fullscreen {
+            overflow: hidden;
+        }
+    }
+
+    &:after {
+        content: "";
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        z-index: 99999;
+        background: rgba(0, 0, 0, 0.4);
+    }
+}
+
+/*
+Ajax Loader
+*/
+.tf-btn-loading {
+    padding-right: 40px;
+    position: relative;
+}
+
+.tf-btn-loading:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    margin-top: -7px;
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border: 2px solid $color-white;
+    border-left-color: transparent;
+    border-radius: 50%;
+    vertical-align: middle;
+    visibility: visible;
+    opacity: 1;
+    transition: opacity .2s ease, visibility .2s ease;
+    -webkit-animation: wd-rotate 450ms infinite linear;
+    animation: wd-rotate 450ms infinite linear;
+}
+
+@-webkit-keyframes wd-rotate {
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes wd-rotate {
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+/*
+Notice
+*/
+.tf-notice {
+    @include flexbox();
+    padding: 24px;
+    border: 1px solid $color-border;
+    border-radius: 8px;
+    background-color: $color-white;
+
+    .tf-notice-icon {
+        margin-right: 10px;
+        font-size: 20px;
+        color: $color-primary;
+    }
+
+    .tf-notice-content {
+        color: $slate40;
+
+        h6 {
+            margin: 0;
+            font-weight: 500;
+            color: $color-heading;
+            font-size: 16px;
+        }
+
+        &.has-content {
+            h6 {
+                margin-bottom: 5px;
+            }
+        }
+    }
+
+    &.tf-notice-success {
+        border-color: $color-border;
+        background-color: $color-light-bg;
+
+        .tf-notice-icon {
+            color: $color-success;
+        }
+    }
+    &.tf-notice-warning {
+        border-color: $color-primary;
+        background-color: $color-border;
+
+        .tf-notice-icon {
+            color: $color-primary;
+        }
+    }
+    &.tf-notice-danger {
+        border-color: $color-border;
+        background-color: $color-light-bg;
+
+        .tf-notice-icon {
+            color: $color-error;
+        }
+    }
+
+}
+
+/* 
+Tooltip
+*/
+.tf-tooltip {
+    position: relative;
+    .tf-top {
+        top: -20px;
+        left: 50%;
+        transform: translate(-50%, -74%);
+        padding: 10px 10px;
+        color: $color-white;
+        background-color: $color-text;
+        font-weight: normal;
+        font-size: 12px;
+        border-radius: 4px;
+        position: absolute;
+        z-index: 99999999;
+        box-sizing: border-box;
+        border: 1px solid $color-text;
+        box-shadow: 0 1px 8px transparent;
+        visibility: hidden;
+        opacity: 0;
+        text-align: center;
+        line-height: 1;
+        white-space: nowrap;
+        i.tool-i {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -12px;
+            width: 24px;
+            height: 12px;
+            overflow: hidden;
+            &::after {
+                content: '';
+                position: absolute;
+                width: 12px;
+                height: 12px;
+                left: 50%;
+                transform: translate(-50%, -50%) rotate(45deg);
+                background-color: $color-text;
+                border: 1px solid $color-text;
+                box-shadow: 0 1px 8px transparent;
+            }
+        }
+    }
+    &:hover {
+        .tf-top {
+            visibility: visible;
+            opacity: 1;
+        }
+    }
+}
+
+/* 
+Selections
+*/
+.tf_acrselection-wrap {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 12px;
+    background: $color-white;
+    padding: 24px 24px 8px;
+    min-width: 250px;
+    border-radius: 4px;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.15);
+    z-index: 9999;
+    width: 100%;
+    display: none;
+}
+.tf_acrselection {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+.acr-dec {
+    width: 30px;
+    height: 30px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: $color-white;
+    color: $color-primary;
+    border-color: $color-primary;
+    border: 1px solid $color-primary;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+    padding: 7px 15px;
+    cursor: pointer;
+    font-family: inherit;
+    text-decoration: none;
+    box-sizing: border-box;
+    vertical-align: middle;
+    position: relative;
+    min-height: 36px;
+    min-width: 36px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    &:hover {
+        color: $color-text;
+        border-color: $color-text;
+    }
+}
+.acr-inc {
+    width: 30px;
+    height: 30px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: $color-white;
+    color: $color-primary;
+    border-color: $color-primary;
+    border: 1px solid $color-primary;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+    padding: 7px 15px;
+    cursor: pointer;
+    font-family: inherit;
+    text-decoration: none;
+    box-sizing: border-box;
+    vertical-align: middle;
+    position: relative;
+    min-height: 36px;
+    min-width: 36px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    &:hover {
+        color: $color-text;
+        border-color: $color-text;
+    }
+}
+.acr-select {
+    display: flex;
+    align-items: center;
+    width: 125px;
+    input[type=number] {
+        width: 50px !important;
+        padding: 0px !important;
+        margin: 0px !important;
+        border: 0px !important;
+        box-shadow: none;
+        background: transparent !important;
+        text-align: center;
+        -moz-appearance: textfield !important;
+        &:focus {
+            outline: 0;
+        }
+    }
+}
+
+/* 
+Location/Desination Dropdown
+*/
