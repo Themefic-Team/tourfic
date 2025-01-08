@@ -10,7 +10,6 @@ $t4-orange-1000: #1A0B00;
 $t4-main-color: #060D1C;
 
 .tf-hotel-template-4.tf-hotel-single {
-    font-family: Ubuntu, sans-serif;
     font-size: 14px;
     line-height: 24px;
     background: var(--Orange-Background, #FEF9F6);
@@ -394,7 +393,6 @@ $t4-main-color: #060D1C;
 }
 
 .tf_template_4_single_hotel{
-    font-family: Ubuntu, sans-serif;
     font-size: 14px;
     line-height: 24px;
 
@@ -406,7 +404,6 @@ $t4-main-color: #060D1C;
                 color: #595349;
                 text-align: center;
                 font-size: 32px !important;
-                font-style: normal;
                 font-weight: 700 !important;
                 line-height: 120%;
                 margin-bottom: 32px;
@@ -419,9 +416,8 @@ $t4-main-color: #060D1C;
                 color: #C1BFBB;
                 background-color: #fdf9f3;
                 font-size: 16px;
-                font-style: normal;
                 font-weight: 400;
-                line-height: 130%; /* 20.8px */
+                line-height: 1.3;
                 height: 45px;
                 padding: 12px 14px;;
                 border-radius: 0px;
@@ -435,9 +431,8 @@ $t4-main-color: #060D1C;
                 background-color: #fdf9f3;
                 color: #C1BFBB;
                 font-size: 16px;
-                font-style: normal;
                 font-weight: 400;
-                line-height: 130%; /* 20.8px */
+                line-height: 1.3;
                 padding: 12px 14px;
                 border-radius: 0px;
                 &::placeholder{
@@ -455,9 +450,8 @@ $t4-main-color: #060D1C;
             padding: 12px 32px !important;
             color: #fdf9f3 !important;
             font-size: 16px !important;
-            font-style: normal;
             font-weight: 700;
-            line-height: 150% !important;
+            line-height: 1.5;
             transition: .3s all ease;
             &::after{
                 position: static !important;

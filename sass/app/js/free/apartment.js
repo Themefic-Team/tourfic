@@ -19,7 +19,7 @@
 
             // Executes when some one click in the search form location
             inp.addEventListener("focus", function () {
-                if (this.value == '' || !this.value) {
+                // if (this.value == '' || !this.value) {
                     // alert("Working....")
                     let a = document.createElement("DIV");
                     a.setAttribute("id", this.id + "autocomplete-list");
@@ -36,7 +36,7 @@
                         });
                         a.appendChild(b);
                     }
-                }
+                // }
             })
 
             var currentFocus;

@@ -8,7 +8,7 @@ $post_count = $GLOBALS['wp_query']->post_count;
 $tf_tour_arc_banner = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour_archive_design_3_bannar'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour_archive_design_3_bannar'] : '';
 $tf_map_settings = !empty(Helper::tfopt('google-page-option')) ? Helper::tfopt('google-page-option') : "default";
 $tf_map_api = !empty(Helper::tfopt('tf-googlemapapi')) ? Helper::tfopt('tf-googlemapapi') : '';
-
+$tf_map_marker = !empty(Helper::tfopt('map_template_marker')) ? Helper::tfopt('map_template_marker') : '';
 ?>
 
 <div class="tf-hotel-template-4 tf-tour-template-4">
@@ -228,7 +228,7 @@ $tf_map_api = !empty(Helper::tfopt('tf-googlemapapi')) ? Helper::tfopt('tf-googl
                                                 $lng = $map['longitude'];
                                                 ob_start();
                                                 ?>
-                                                <div class="tf-map-item" data-price="<?php //echo esc_attr( wc_price( $min_sale_price ) ); ?>">
+                                                <div class="tf-map-item">
                                                     <div class="tf-map-item-thumb">
                                                         <a href="<?php the_permalink(); ?>">
                                                             <?php
@@ -295,7 +295,7 @@ $tf_map_api = !empty(Helper::tfopt('tf-googlemapapi')) ? Helper::tfopt('tf-googl
                                     </svg>
                                     <span><?php echo esc_html__('List view', 'tourfic') ?></span>
                                 </a>
-                                <div id="map-marker" data-marker="<?php echo esc_url(TF_ASSETS_URL . 'app/images/cluster-marker.png'); ?>"></div>
+                                <div id="map-marker" data-marker="<?php echo !empty($tf_map_marker) ? esc_url($tf_map_marker) : esc_url(TF_ASSETS_URL . 'app/images/cluster-marker.png'); ?>"></div>
                                 <div class="tf-hotel-archive-map-wrap">
                                     <div id="tf-hotel-archive-map"></div>
                                 </div>
@@ -306,11 +306,7 @@ $tf_map_api = !empty(Helper::tfopt('tf-googlemapapi')) ? Helper::tfopt('tf-googl
                             <div class="tf-notice tf-mt-24 tf-mb-30">
                                 <?php
                                 if (current_user_can('administrator')) {
-                                    echo '<p>' . sprintf(
-                                            /* translators: Map settings url */
-                                            esc_html__('Google Maps is not selected. Please configure it <a href="%s" target="_blank">Map Settings</a>.', 'tourfic'),
-                                            esc_url(admin_url('admin.php?page=tf_settings#tab=map_settings'))
-                                        ) . '</p>';
+                                    echo '<p>' . esc_html__('Google Maps is not selected. Please configure it ', 'tourfic') . '<a href="' . esc_url(admin_url('admin.php?page=tf_settings#tab=map_settings')) . '" target="_blank">' . esc_html__('Map Settings', 'tourfic') . '</a></p>';
                                 } else {
                                     echo '<p>' . esc_html__('Access is restricted as Google Maps is not enabled. Please contact the site administrator', 'tourfic') . '</p>';
                                 }

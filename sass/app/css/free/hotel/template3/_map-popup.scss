@@ -244,7 +244,7 @@ $t4-main-color: #060D1C;
                         margin-top: 0;
 
                         .tf-review-items {
-                            display: none;
+                            color: #FFC700;
                         }
 
                         .tf-avarage-review {
@@ -420,17 +420,23 @@ $t4-main-color: #060D1C;
                     border-radius: 4px;
                 }
 
-                .tf-archive-hotel-discount {
+                .tf-tag-items{
                     position: absolute;
                     top: 16px;
                     left: 16px;
-                    color: $t4-orange-1000;
-                    font-size: 12px;
-                    font-weight: 700;
-                    line-height: 14px;
-                    padding: 8px 16px;
-                    border-radius: 32px;
-                    background-color: $t4-orange-100;
+                    @include flexbox();
+                    @include flex-direction(column);
+                    gap: 8px;
+
+                    .tf-tag-item {    
+                        color: $t4-orange-1000;
+                        font-size: 12px;
+                        font-weight: 700;
+                        line-height: 14px;
+                        padding: 8px 16px;
+                        border-radius: 32px;
+                        background-color: $t4-orange-100;
+                    }
                 }
             }
 
@@ -455,9 +461,9 @@ $t4-main-color: #060D1C;
                     }
 
                     .tf-section-title {
-                        font-size: 16px;
+                        font-size: 20px;
                         font-weight: 500;
-                        line-height: 20px;
+                        line-height: 24px;
                         margin-bottom: 0;
                         text-transform: capitalize;
 
@@ -753,7 +759,7 @@ $t4-main-color: #060D1C;
                                 color: #686E7A;
                                 font-size: 14px;
                                 font-weight: 500;
-                                line-height: 150%;
+                                line-height: 1.5;
                                 letter-spacing: 0.15px;
 
                                 input {
@@ -923,7 +929,6 @@ $t4-main-color: #060D1C;
                 &>span {
                     color: #FDF9F3;
                     font-size: 12px;
-                    font-style: normal;
                     font-weight: 500;
                     padding: 8px;
                     min-width: 84px;
@@ -1048,9 +1053,8 @@ $t4-main-color: #060D1C;
                         .discount-price{
                             color: #99948D;
                             font-size: 16px;
-                            font-style: normal;
                             font-weight: 400;
-                            line-height: 130%; /* 20.8px */
+                            line-height: 20.8px;
                             display: inline-flex;
                             gap: 2px;
                             .amount{
@@ -1176,9 +1180,8 @@ $t4-main-color: #060D1C;
                             .discount-price {
                                 color: #99948D;
                                 font-size: 16px;
-                                font-style: normal;
                                 font-weight: 400;
-                                line-height: 130%;
+                                line-height: 1.3;
                                 display: flex;
                                 gap: 2px;
                                 justify-content: end;
@@ -1230,9 +1233,8 @@ $t4-main-color: #060D1C;
                         .amount{
                             color: #595349;
                             font-size: 24px;
-                            font-style: normal;
                             font-weight: 600;
-                            line-height: 130%;
+                            line-height: 1.3;
                         }
                     }
                 }
@@ -1279,9 +1281,8 @@ $t4-main-color: #060D1C;
                 height: 40px;
                 color: #99948D;
                 font-size: 16px;
-                font-style: normal;
                 font-weight: 400;
-                line-height: 130%;
+                line-height: 1.3;
                 letter-spacing: 0.16px;
                 padding: 0px 20px;
                 text-decoration: none;

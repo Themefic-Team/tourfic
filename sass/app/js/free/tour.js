@@ -296,7 +296,7 @@
 
             // Executes when some one click in the search form location
             inp.addEventListener("focus", function () {
-                if (this.value == '' || !this.value) {
+                // if (this.value == '' || !this.value) {
                     // alert("Working....")
                     let a = document.createElement("DIV");
                     a.setAttribute("id", this.id + "autocomplete-list");
@@ -313,7 +313,7 @@
                         });
                         a.appendChild(b);
                     }
-                }
+                // }
             })
 
             var currentFocus;
@@ -513,11 +513,7 @@
 
         $('#tf-tour-location-adv').on("click", function (e) {
             var location = $(this).val();
-            if (location) {
-                $(".tf-tour-results").removeClass('tf-destination-show');
-            } else {
-                $(".tf-tour-results").addClass('tf-destination-show');
-            }
+            $(".tf-tour-results").addClass('tf-destination-show');
         });
         $('#tf-tour-location-adv').on("keyup", function (e) {
             var location = $(this).val();
