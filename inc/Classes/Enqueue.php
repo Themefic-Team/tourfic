@@ -516,6 +516,8 @@ class Enqueue {
 				'tf_car_min_price' => isset( $tf_car_min_max_price['min'] ) ? $tf_car_min_max_price['min'] : 0,
 				'tf_car_min_seat' =>  isset( $tf_car_min_max_price['min_seat'] ) ? $tf_car_min_max_price['min_seat'] : 0,
 				'tf_car_max_seat' =>  isset( $tf_car_min_max_price['max_seat'] ) ? $tf_car_min_max_price['max_seat'] : 0,
+				'map_marker_width' => !empty(Helper::tfopt( 'map_marker_width' )) ? Helper::tfopt( 'map_marker_width' ) : '35',
+				'map_marker_height' => !empty(Helper::tfopt( 'map_marker_height' )) ? Helper::tfopt( 'map_marker_height' ) : '45',
 			)
 		);
 
