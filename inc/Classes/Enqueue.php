@@ -105,6 +105,10 @@ class Enqueue {
 			wp_enqueue_style( 'tf-app-car', TF_ASSETS_URL . 'app/css/tourfic-car' . $min_css . '.css', null, TF_VERSION );
 		}
 
+		if ( !in_array('tour', $tf_disable_services) ){
+			wp_enqueue_style( 'tf-app-tour', TF_ASSETS_URL . 'app/css/tourfic-tour' . $min_css . '.css', null, TF_VERSION );
+		}
+
 		if ( get_post_type() == 'tf_tours' ) {
 
 			if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
