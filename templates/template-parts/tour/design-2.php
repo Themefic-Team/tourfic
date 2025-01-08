@@ -481,8 +481,8 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
 
 		if ( $tours->have_posts() ) {
 				?>
-                <!-- Tourfic related tours tours -->
-                <div class="tf-related-tours">
+                <!-- Tourfic related tours -->
+                <div class="tf-related-items-section">
                     <div class="tf-container">
                         <div class="tf-container-inner">
                             <div class="section-title">

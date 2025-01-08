@@ -10,7 +10,7 @@
 
 @import 'hotel/hotel';
 @import 'tour/tour';
-@import "apartment/apartment";
+// @import "apartment/apartment";
 
 //Tour Templates
 @import 'tour/template1/tour-search';
@@ -28,3 +28,6 @@
 
 // search form
 @import 'search-form/template-4';
+
+// Template 3 Global
+@import 'global/design-3/_design-3';

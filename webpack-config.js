@@ -45,6 +45,7 @@ const addonAppScss = glob.sync('./sass-modify/app/css/addon/tourfic-vendor.scss'
 const tfepAdminScss = glob.sync('./sass-modify/admin/css/addon/tourfic-addon/tourfic-email-piping.scss'); 
 const tfepAppScss = glob.sync('./sass-modify/app/css/addon/tourfic-email-piping.scss'); 
 const CarAppScss = glob.sync('./sass-modify/app/css/free/car/car.scss');
+const ApartmentAppScss = glob.sync('./sass-modify/app/css/free/apartment/apartment.scss');
 
 StyleEntryPoints['tourfic/assets/app/css/tourfic-style'] = appScss;
 StyleEntryPoints['tourfic-pro/assets/app/css/tourfic-pro'] = proAppScss;
@@ -55,6 +56,7 @@ StyleEntryPoints['/tourfic-vendor/public/assets/css/tourfic-vendor'] = addonAppS
 StyleEntryPoints['/tourfic-email-piping/assets/admin/css/tourfic-email-piping'] = tfepAdminScss;
 StyleEntryPoints['/tourfic-email-piping/assets/app/css/tourfic-email-piping'] = tfepAppScss;
 StyleEntryPoints['tourfic/assets/app/css/tourfic-car'] = CarAppScss;
+StyleEntryPoints['tourfic/assets/app/css/tourfic-apartment'] = ApartmentAppScss;
 
 
 const JSconfig = {

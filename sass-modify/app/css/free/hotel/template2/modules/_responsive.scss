@@ -286,7 +286,7 @@
 }
 
 @media only screen and (min-width: 768px) and (max-width: 970px) {
-    .tf-template-3 .tf-related-tours .tf-slider-item{
+    .tf-template-3 .tf-related-items-section .tf-slider-item{
         height: auto !important;
         padding: auto !important;
         margin: auto !important;
@@ -312,7 +312,7 @@
         .tf-bottom-booking-bar .tf-bottom-booking-field{
             width: auto !important;
         }
-        .tf-related-tours .tf-slider-item .tf-meta-info .tf-meta-title h2 a{
+        .tf-related-items-section .tf-slider-item .tf-meta-info .tf-meta-title h2 a{
             font-size: 20px;
         }
 
@@ -423,7 +423,7 @@
         #tf-tour-faq,
         #tf-tour-reviews,
         #tf-tour-policies,
-        .tf-related-tours{
+        .tf-related-items-section{
             padding-left: 16px;
             padding-right: 16px;
         }
@@ -432,7 +432,7 @@
             padding-top: 16px;
         }
         #tf-tour-policies,
-        .tf-related-tours{
+        .tf-related-items-section{
             padding-top: 16px;
             padding-bottom: 16px;
         }

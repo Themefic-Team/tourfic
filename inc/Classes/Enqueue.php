@@ -97,6 +97,10 @@ class Enqueue {
 		//Updated CSS
 		wp_enqueue_style( 'tf-app-style', TF_ASSETS_URL . 'app/css/tourfic-style' . $min_css . '.css', null, TF_VERSION );
 
+		if ( !in_array('apartment', $tf_disable_services) ){
+			wp_enqueue_style( 'tf-app-apartment', TF_ASSETS_URL . 'app/css/tourfic-apartment' . $min_css . '.css', null, TF_VERSION );
+		}
+
 		if ( !in_array('carrentals', $tf_disable_services) ){
 			wp_enqueue_style( 'tf-app-car', TF_ASSETS_URL . 'app/css/tourfic-car' . $min_css . '.css', null, TF_VERSION );
 		}
@@ -1838,7 +1842,7 @@ class Enqueue {
 		// Template 3 Global Colors
 		if ( ! empty( $tf_global_bg_clr_t3 ) ) {
 			$output .= '
-			.tf-template-3 .tf-related-tours .tf-slider-item .tf-meta-info,
+			.tf-template-3 .tf-related-items-section .tf-slider-item .tf-meta-info,
 			.tf-template-3 .tf-questions-wrapper .tf-questions .tf-questions-col .tf-question.tf-active,
 			.tf-template-3 .tf_tours_booking .tf-field-calander .tf-field,
 			.tf-template-3 .tf-search-date-wrapper .acr-select input[type=tel],
@@ -1858,7 +1862,7 @@ class Enqueue {
 			.tf-template-3 .tf-content-wrapper .tf-details .tf-details-right.tf-archive-right,
 			.tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-highlights-wrapper,
 			.tf-template-3 .tf-bottom-booking-bar,
-			.tf-template-3 .tf-related-tours,
+			.tf-template-3 .tf-related-items-section,
 			.tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-features-block-wrapper .tf-feature-block,
 			.tf-template-3 .tf-search-date-wrapper,
 			.tf-template-3 button.tf-review-open.button, .tf-template-3 .tf-reting-field button,

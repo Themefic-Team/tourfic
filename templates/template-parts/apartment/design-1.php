@@ -463,8 +463,8 @@ if ( $disable_related_sec !== '1' ) {
     );
     $related_apartment = new WP_Query( $args );
     if ( $related_apartment->have_posts() ) { ?>
-        <!-- Tourfic related tours tours -->
-        <div class="tf-related-tours">
+        <!-- Tourfic related -->
+        <div class="tf-related-items-section">
             <div class="tf-container">
                 <div class="tf-container-inner">
                     <div class="section-title">
