@@ -1,0 +1,97 @@
+.tf-template-3{
+    .tf-include-exclude-wrapper {
+        margin-bottom: 16px;
+        @media #{$max767}{
+            padding-left: 16px;
+            padding-right: 16px;
+        }
+        h2{
+            color: $color-heading;
+            font-size: 32px !important;
+            font-style: normal !important;
+            font-weight: 700 !important;
+            line-height: 120%; /* 38.4px */
+            margin-bottom: 24px;
+            @media #{$max1024}{
+                font-size: 24px !important;
+            }
+        }
+        .tf-include-exclude-innter {
+            display: flex;
+            gap: 40px;
+            @media #{$max767}{
+                flex-wrap: wrap;
+                gap: 24px;
+            }
+            &>div {
+                display: flex;
+                gap: 16px;
+                width: 50%;
+                @media #{$max767}{
+                    width: 100%;
+                }
+            }
+            ul {
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+                margin: 0;
+                padding: 0;
+                @media #{$max767}{
+                    gap: 8px;
+                }
+                li {
+                    display: flex;
+                    gap: 16px;
+                    img {
+                        width: 16px;
+                        height: 16px;
+                        object-fit: contain;
+                    }
+                }
+            }
+            .tf-include{
+                ul{
+                    li{
+                        i{
+                            color: $color-success;
+                        }
+                    }
+                }
+            }
+            .tf-exclude{
+                ul{
+                    li{
+                        i{
+                            color: $color-denger
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.tf-tour-design-1{
+    // Tourfic include exclude 
+    .tf-inex-wrapper {
+        .tf-inex {
+            width: 100%;
+            background: $color-white;
+            border-radius: $tf-brds-default;
+            box-shadow: 0px 0px 24px 5px #E0E8EE;
+            h3 {
+                font-size: $font-size-medium;
+            }
+            ul{
+                li{
+                    margin-top: 0px;
+                    margin-bottom: 12px;
+                    &:last-child{
+                        margin-bottom: 0px;
+                    }
+                }
+            }
+        }
+    }
+}

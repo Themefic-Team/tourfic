@@ -2,12 +2,6 @@ html {
   scroll-behavior: smooth;
 }
 .tf_template_3_global_layouts{
-  // .ast-container,
-  // .container,
-  // .col-full{
-  //   max-width: none !important;
-  //   padding: 0px !important;
-  // }
   .site-primary-header-wrap,
   .header-container.container,
   #footer .footer-bottom,
@@ -65,10 +59,7 @@ html {
   @import './modules/bookingform';
   @import './modules/facilities';
   @import './modules/review';
-  // Single Tour page
-  @import './modules/include';
-  @import './modules/itinerary';
-  @import './modules/calander';
+
   //SIngle Tour Page
   @import './modules/sidebar';
   @import './modules/popup';

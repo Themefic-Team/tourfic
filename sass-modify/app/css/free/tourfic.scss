@@ -13,8 +13,7 @@
 // @import "apartment/apartment";
 
 //Tour Templates
-@import 'tour/template1/tour-search';
-@import 'tour/template1/single';
+
 @import 'tour/template3/archive';
 @import 'tour/template3/single';
 
@@ -28,6 +27,9 @@
 
 // search form
 @import 'search-form/template-4';
+
+// Template 2 Global
+@import 'global/design-2/_design-2';
 
 // Template 3 Global
 @import 'global/design-3/_design-3';
