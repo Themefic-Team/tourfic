@@ -19,34 +19,69 @@ Container
 /*
 Button
 */
-.tf-btn {
-    display: inline-flex;
-    @include align-items(center);
-    background-color: $color-primary;
-    padding: 7px 22px;
-    border: 1px solid $color-primary;
-    border-radius: 4px;
-    font-weight: 500;
+.tf-btn-normal{
+    color: $color-primary !important;
+    background-color: $color-white !important;
+    padding: 12px 24px;
     text-decoration: none;
+    border-radius: $tf-brds-default;
+    font-weight: $font-weight-medium;
+    display: block;
+    text-align: center;
+    transition: all .6s ease;
+    border: 0px !important;
     cursor: pointer;
-
-    i {
-        margin-right: 8px;
-        font-size: 18px;
-    }
-
-    &.tf-btn-secondary {
-        background-color: $color-primary;
-        border-color: $color-primary;
+    
+    &:hover{
+        background: $color-primary;
         color: $color-white;
-        font-weight: 600;
     }
 
+    &.btn-primary{
+        background-color: $color-primary !important;
+        color: $color-white !important;
+
+        &:hover{
+            background-color: $color-secondary;
+            color: $color-white;
+            transition: all .6s ease;
+        }
+    }
+    
+    &.btn-secondary{
+        background-color: $color-white !important;
+        color: $color-heading !important;
+
+        &:hover{
+            background-color: $color-primary;
+        }
+    }
+
+    
     //disabled
     &.disabled {
         opacity: 0.5;
         cursor: not-allowed;
         pointer-events: none;
+    }
+}
+
+/*
+Button Group
+*/
+.tf_button_group {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 24px;
+    width: 576px;
+    height: 40px;
+    .tf_button {
+        width: fit-content;
+        height: 40px;
+        border-radius: 4px;
+        padding: 8px 12px;
     }
 }
 
@@ -579,3 +614,23 @@ Selections
 /* 
 Location/Desination Dropdown
 */
+.autocomplete-items {
+    max-height: 120px;
+    overflow: scroll;
+    overflow-x: hidden;
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    border-bottom: none;
+    border-top: none;
+    z-index: 99;
+    top: 100%;
+    left: 0;
+    right: 0;
+    div{
+        padding: 10px;
+        cursor: pointer;
+        background-color: $color-white;
+        border-bottom: 1px solid #d4d4d4;
+        color: #444;
+    }
+}
