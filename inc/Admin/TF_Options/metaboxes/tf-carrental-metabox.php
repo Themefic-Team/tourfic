@@ -845,7 +845,8 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 						array(
 							'id'    => 'protection_required',
 							'type'  => 'switch',
-							'label' => __( 'Required protection ?', 'tourfic' ),
+							'label' => __( 'Required protection?', 'tourfic' ),
+							'default' => 0
 						),
 					),
 				),
