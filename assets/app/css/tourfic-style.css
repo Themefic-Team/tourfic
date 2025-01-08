@@ -22148,16 +22148,6 @@ html {
   color: #FF6B00;
 }
 
-.tf-hotel-template-4 .tf-archive-details .tf-archive-hotel .tf-archive-hotel-content .tf-archive-hotel-content-left .tf-section-title .tf-edit-link,
-.tf_template_4_hotel_archive .tf-archive-details .tf-archive-hotel .tf-archive-hotel-content .tf-archive-hotel-content-left .tf-section-title .tf-edit-link,
-.tf_template_4_tour_archive .tf-archive-details .tf-archive-hotel .tf-archive-hotel-content .tf-archive-hotel-content-left .tf-section-title .tf-edit-link,
-.tf_template_4_apartment_archive .tf-archive-details .tf-archive-hotel .tf-archive-hotel-content .tf-archive-hotel-content-left .tf-section-title .tf-edit-link {
-  font-size: 14px;
-  color: #FF6B00;
-  text-decoration: underline;
-  margin-left: 6px;
-}
-
 @media only screen and (max-width: 575.98px) {
   .tf-hotel-template-4 .tf-archive-details .tf-archive-hotel .tf-archive-hotel-content .tf-archive-hotel-content-left .tf-section-title,
   .tf_template_4_hotel_archive .tf-archive-details .tf-archive-hotel .tf-archive-hotel-content .tf-archive-hotel-content-left .tf-section-title,
@@ -23265,7 +23255,7 @@ html {
 }
 
 .fancybox-container .tf-archive-details .tf-details-right .tf-map-item .tf-map-item-content .tf-reviews .tf-review-items {
-  display: none;
+  color: #FFC700;
 }
 
 .fancybox-container .tf-archive-details .tf-details-right .tf-map-item .tf-map-item-content .tf-reviews .tf-avarage-review {
@@ -23540,9 +23530,9 @@ html {
 }
 
 .fancybox-container .tf-archive-details .tf-archive-hotel .tf-archive-hotel-content .tf-archive-hotel-content-left .tf-section-title {
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 500;
-  line-height: 20px;
+  line-height: 24px;
   margin-bottom: 0;
   text-transform: capitalize;
 }
