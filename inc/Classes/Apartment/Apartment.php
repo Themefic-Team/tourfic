@@ -2168,13 +2168,19 @@ class Apartment {
 						?>
                     </a>
 
-					<?php
-					if ( ! empty( $apartment_discount_amount ) ) : ?>
-                        <div class="tf-archive-hotel-discount">
-							<?php echo $apartment_discount_type == "percent" ? wp_kses_post($apartment_discount_amount . '%') : wp_kses_post(wc_price( $apartment_discount_amount )) ?>
-							<?php esc_html_e( " Off", "tourfic" ); ?>
-                        </div>
-					<?php endif; ?>
+					<div class="tf-tag-items">
+						<?php if ( ! empty( $apartment_discount_amount ) ) : ?>
+							<div class="tf-tag-item">
+								<?php echo $apartment_discount_type == "percent" ? wp_kses_post($apartment_discount_amount . '%') : wp_kses_post(wc_price( $apartment_discount_amount )) ?>
+								<?php esc_html_e( " Off", "tourfic" ); ?>
+							</div>
+						<?php endif; ?>
+						<?php if ( $featured ): ?>
+							<div class="tf-tag-item">
+								<?php echo ! empty( $meta['featured_text'] ) ? esc_html( $meta['featured_text'] ) : esc_html( "HOT DEAL" ); ?>
+							</div>
+						<?php endif; ?>
+					</div>
                 </div>
                 <div class="tf-archive-hotel-content">
                     <div class="tf-archive-hotel-content-left">
@@ -2188,9 +2194,8 @@ class Apartment {
 						<?php endif; ?>
                         <h4 class="tf-section-title">
                             <a href="<?php echo esc_url( $url ); ?>">
-								<?php echo wp_kses_post(Helper::tourfic_character_limit_callback( get_the_title(), 55 )); ?>
+								<?php echo wp_kses_post(Helper::tourfic_character_limit_callback( get_the_title(), 45 )); ?>
                             </a>
-							<?php echo wp_kses_post(Helper::edit_link(get_the_ID())) ?>
                         </h4>
 						<?php if ( $features ) { ?>
                             <ul class="features">

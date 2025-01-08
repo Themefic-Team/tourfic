@@ -13,6 +13,7 @@
         $tf_apartment_arc_banner = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment_archive_design_2_bannar'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment_archive_design_2_bannar'] : '';
         $tf_map_settings = !empty(Helper::tfopt('google-page-option')) ? Helper::tfopt('google-page-option') : "default";
         $tf_map_api = !empty(Helper::tfopt('tf-googlemapapi')) ? Helper::tfopt('tf-googlemapapi') : '';
+        $tf_map_marker = !empty(Helper::tfopt('map_template_marker')) ? Helper::tfopt('map_template_marker') : '';
         ?>
 
         <div class="tf-archive-search-form tf-booking-form-wrapper" style="<?php echo !empty($tf_apartment_arc_banner) ? 'background-image: url('.esc_url($tf_apartment_arc_banner).')' : ''; ?>">
@@ -152,7 +153,7 @@
                                                 $lng = $map['longitude'];
                                                 ob_start();
                                                 ?>
-                                                <div class="tf-map-item" data-price="<?php //echo esc_attr( wc_price( $min_sale_price ) ); ?>">
+                                                <div class="tf-map-item">
                                                     <div class="tf-map-item-thumb">
                                                         <a href="<?php the_permalink(); ?>">
                                                             <?php
@@ -226,7 +227,7 @@
                                                 $lng = $map['longitude'];
                                                 ob_start();
                                                 ?>
-                                                <div class="tf-map-item" data-price="<?php //echo esc_attr( wc_price( $min_sale_price ) ); ?>">
+                                                <div class="tf-map-item">
                                                     <div class="tf-map-item-thumb">
                                                         <a href="<?php the_permalink(); ?>">
                                                             <?php
@@ -296,7 +297,7 @@
                                     </svg>
                                     <span><?php echo esc_html__('List view', 'tourfic') ?></span>
                                 </a>
-                                <div id="map-marker" data-marker="<?php echo esc_url(TF_ASSETS_URL . 'app/images/cluster-marker.png'); ?>"></div>
+                                <div id="map-marker" data-marker="<?php echo !empty($tf_map_marker) ? esc_url($tf_map_marker) : esc_url(TF_ASSETS_URL . 'app/images/cluster-marker.png'); ?>"></div>
                                 <div class="tf-hotel-archive-map-wrap">
                                     <div id="tf-hotel-archive-map"></div>
                                 </div>

@@ -116,6 +116,7 @@ class Map_Filter extends \WP_Widget {
     function widget_html($button_title, $post_type = 'tf_hotel') {
         $tf_map_settings = !empty(Helper::tfopt('google-page-option')) ? Helper::tfopt('google-page-option') : "default";
         $tf_map_api = !empty(Helper::tfopt('tf-googlemapapi')) ? Helper::tfopt('tf-googlemapapi') : '';
+        $tf_map_marker = !empty(Helper::tfopt('map_template_marker')) ? Helper::tfopt('map_template_marker') : '';
         $post_per_page = get_option( 'posts_per_page' );
         $paged          = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
 
@@ -252,7 +253,7 @@ class Map_Filter extends \WP_Widget {
                                                         $lng = $map['longitude'];
                                                         ob_start();
                                                         ?>
-                                                        <div class="tf-map-item" data-price="<?php //echo esc_attr( wc_price( $min_sale_price ) ); ?>">
+                                                        <div class="tf-map-item">
                                                             <div class="tf-map-item-thumb">
                                                                 <a href="<?php echo esc_url( get_the_permalink() ); ?>">
                                                                     <?php
@@ -472,7 +473,7 @@ class Map_Filter extends \WP_Widget {
                                                         $lng = $map['longitude'];
                                                         ob_start();
                                                         ?>
-                                                        <div class="tf-map-item" data-price="<?php //echo esc_attr( wc_price( $min_sale_price ) ); ?>">
+                                                        <div class="tf-map-item">
                                                             <div class="tf-map-item-thumb">
                                                                 <a href="<?php echo esc_url( get_the_permalink() ); ?>">
                                                                     <?php
@@ -545,7 +546,7 @@ class Map_Filter extends \WP_Widget {
                                                         $lng = $map['longitude'];
                                                         ob_start();
                                                         ?>
-                                                        <div class="tf-map-item" data-price="<?php //echo esc_attr( wc_price( $min_sale_price ) ); ?>">
+                                                        <div class="tf-map-item">
                                                             <div class="tf-map-item-thumb">
                                                                 <a href="<?php echo esc_url( get_the_permalink() ); ?>">
                                                                     <?php
@@ -616,7 +617,7 @@ class Map_Filter extends \WP_Widget {
                                                         $lng = $map['longitude'];
                                                         ob_start();
                                                         ?>
-                                                        <div class="tf-map-item" data-price="<?php //echo esc_attr( wc_price( $min_sale_price ) ); ?>">
+                                                        <div class="tf-map-item">
                                                             <div class="tf-map-item-thumb">
                                                                 <a href="<?php echo esc_url( get_the_permalink() ); ?>">
                                                                     <?php
@@ -676,7 +677,7 @@ class Map_Filter extends \WP_Widget {
                                 </div>
 
                                 <div class="tf-details-right tf-archive-right">
-                                    <div id="map-marker" data-marker="<?php echo esc_url(TF_ASSETS_URL . 'app/images/cluster-marker.png'); ?>"></div>
+                                <div id="map-marker" data-marker="<?php echo !empty($tf_map_marker) ? esc_url($tf_map_marker) : esc_url(TF_ASSETS_URL . 'app/images/cluster-marker.png'); ?>"></div>
                                     <div class="tf-hotel-archive-map-wrap">
                                         <div id="tf-hotel-archive-map"></div>
                                     </div>
