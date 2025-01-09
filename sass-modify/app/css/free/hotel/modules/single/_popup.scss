@@ -1,0 +1,59 @@
+.tf-hotel-design-1-popup{
+    padding: 0px !important;
+    .tf-details-qc-slider{
+        .tf-details-qcs{
+            img{
+                width: 100%;
+            }
+        }
+    }
+    .tf-details-qc-slider-nav {
+        margin-top: 0px;
+        .tf-details-qcs.is-active img {
+            border: 5px solid $color-primary;
+        }
+        .tf-details-qcs img {
+            min-height: 50px;
+            max-height: 50px;
+        }
+    }
+    .fancybox-button.fancybox-close-small{
+        right: 20px;
+    }
+    .tf-hotel-details-info{
+        padding-right: 25px;
+        @media #{$tfmax767}{
+            padding-right: 10px;
+            padding-left: 10px !important;
+            margin: 0 !important;
+            overflow: auto !important;
+            max-height: none !important;
+        }
+        .tf-template-1.tf-room-adv-info{
+            ul{
+                margin: 0;
+                padding: 0;
+                li{
+                    display: inline-block;
+                    border-radius: 5px;
+                    padding: 5px 10px 5px 0px;
+                    margin: 4px 5px 4px 0px;
+                    color: $color-text !important;
+                    font-size: 16px;
+                    i{
+                        color: $color-text !important;
+                    }
+                }
+            }
+            p{
+                margin: 10px 0px;
+                color: $color-text;
+            }
+            h4{
+                font-size: 20px;
+                margin: 15px 0px 10px 0px;
+                color: $color-heading;
+            }
+        }
+    }
+}

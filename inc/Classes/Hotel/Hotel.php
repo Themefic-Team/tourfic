@@ -4291,7 +4291,7 @@ class Hotel {
                             </script>
 
                         </div>
-                        <div class="tf-hotel-details-info" style="width:440px; padding-left: 35px;max-height: 470px;padding-top: 25px; overflow-y: scroll;">
+                        <div class="tf-hotel-details-info" style="width:440px; padding-left: 35px;max-height: 470px;padding-top: 25px; overflow-y: auto;">
 							<?php
 							$footage      = ! empty( $room['footage'] ) ? $room['footage'] : '';
 							$bed          = ! empty( $room['bed'] ) ? $room['bed'] : '';
