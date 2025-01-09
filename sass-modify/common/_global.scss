@@ -19,48 +19,42 @@ Container
 /*
 Button
 */
-.tf-btn-normal{
-    color: $color-primary !important;
-    background-color: $color-white !important;
+.tf-btn{
     padding: 12px 24px;
     text-decoration: none;
     border-radius: $tf-brds-default;
     font-weight: $font-weight-medium;
-    display: block;
+    display: inline-flex;
     text-align: center;
     transition: all .6s ease;
-    border: 0px !important;
+    border: 0px;
     cursor: pointer;
-    
-    &:hover{
-        background: $color-primary;
-        color: $color-white;
-    }
 
-    &.btn-primary{
-        background-color: $color-primary !important;
-        color: $color-white !important;
+    &_primary{
+        color: $color-white;
+        background-color: red;
 
         &:hover{
-            background-color: $color-secondary;
-            color: $color-white;
-            transition: all .6s ease;
+            background: $color-secondary;
         }
     }
-    
-    &.btn-secondary{
-        background-color: $color-white !important;
-        color: $color-heading !important;
+
+    &_secondary{
+        color: $color-white;
+        background-color: $color-secondary;
 
         &:hover{
             background-color: $color-primary;
         }
     }
 
-    
+    &_full{
+        width: 100%;
+    }
+
     //disabled
     &.disabled {
-        opacity: 0.5;
+        opacity: 0.7;
         cursor: not-allowed;
         pointer-events: none;
     }
@@ -69,7 +63,7 @@ Button
 /*
 Button Group
 */
-.tf_button_group {
+/* .tf_button_group {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
@@ -83,10 +77,10 @@ Button Group
         border-radius: 4px;
         padding: 8px 12px;
     }
-}
+} */
 
 //app->global->common.scss
-.tf_button {
+/* .tf_button {
     background: $color-primary;
     color: $color-white;
     text-decoration: none;
@@ -213,13 +207,13 @@ a.tf_button.btn-styled {
         text-decoration: none;
         border: 1px solid $color-secondary;
     }
-}
+} */
 //button end
 
 /*
 Custom Modal
 */
-.tf-modal {
+/* .tf-modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -313,12 +307,6 @@ Custom Modal
                 border-radius: 50%;
                 color: $color-white;
             }
-
-            /*&:hover{
-                .tf-modal-close {
-                    top: 10px;
-                }
-            }*/
         }
     }
 }
@@ -345,12 +333,12 @@ body.tf-modal-open {
         z-index: 99999;
         background: rgba(0, 0, 0, 0.4);
     }
-}
+} */
 
 /*
 Ajax Loader
 */
-.tf-btn-loading {
+/* .tf-btn-loading {
     padding-right: 40px;
     position: relative;
 }
@@ -387,12 +375,12 @@ Ajax Loader
         -webkit-transform: rotate(360deg);
         transform: rotate(360deg);
     }
-}
+} */
 
 /*
 Notice
 */
-.tf-notice {
+/* .tf-notice {
     @include flexbox();
     padding: 24px;
     border: 1px solid $color-border;
@@ -447,12 +435,12 @@ Notice
         }
     }
 
-}
+} */
 
 /* 
 Tooltip
 */
-.tf-tooltip {
+/* .tf-tooltip {
     position: relative;
     .tf-top {
         top: -20px;
@@ -501,12 +489,12 @@ Tooltip
             opacity: 1;
         }
     }
-}
+} */
 
 /* 
 Selections
 */
-.tf_acrselection-wrap {
+/* .tf_acrselection-wrap {
     position: absolute;
     top: 100%;
     right: 0;
@@ -609,12 +597,12 @@ Selections
             outline: 0;
         }
     }
-}
+} */
 
 /* 
 Location/Desination Dropdown
 */
-.autocomplete-items {
+/* .autocomplete-items {
     max-height: 120px;
     overflow: scroll;
     overflow-x: hidden;
@@ -633,4 +621,4 @@ Location/Desination Dropdown
         border-bottom: 1px solid #d4d4d4;
         color: #444;
     }
-}
+} */
