@@ -144,6 +144,9 @@ class Component extends \Tourfic\Core\Shortcodes {
                 </div>
             </div>
         </div>
+
+        <h2>Selections</h2>
+        
         <?php
 	}
 }

@@ -348,59 +348,6 @@ Notice
 }
 
 /* 
-Tooltip
-*/
-/* .tf-tooltip {
-    position: relative;
-    .tf-top {
-        top: -20px;
-        left: 50%;
-        transform: translate(-50%, -74%);
-        padding: 10px 10px;
-        color: $color-white;
-        background-color: $color-text;
-        font-weight: normal;
-        font-size: 12px;
-        border-radius: 4px;
-        position: absolute;
-        z-index: 99999999;
-        box-sizing: border-box;
-        border: 1px solid $color-text;
-        box-shadow: 0 1px 8px transparent;
-        visibility: hidden;
-        opacity: 0;
-        text-align: center;
-        line-height: 1;
-        white-space: nowrap;
-        i.tool-i {
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            margin-left: -12px;
-            width: 24px;
-            height: 12px;
-            overflow: hidden;
-            &::after {
-                content: '';
-                position: absolute;
-                width: 12px;
-                height: 12px;
-                left: 50%;
-                transform: translate(-50%, -50%) rotate(45deg);
-                background-color: $color-text;
-                border: 1px solid $color-text;
-                box-shadow: 0 1px 8px transparent;
-            }
-        }
-    }
-    &:hover {
-        .tf-top {
-            visibility: visible;
-            opacity: 1;
-        }
-    }
-} */
-/* 
 Selections
 */
 /* .tf_acrselection-wrap {
