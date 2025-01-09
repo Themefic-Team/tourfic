@@ -1,3 +1,12 @@
+@import './modules/single/_rooms';
+@import './modules/single/_nearby-place';
+@import './modules/single/_features';
+@import './modules/single/_facilities';
+@import './modules/single/_faq';
+@import './modules/single/_review';
+@import './modules/single/_map';
+@import './modules/single/_popup';
+
 /**************** TITLE ****************/
 .tf-map-link a.more-hotel {
     font-weight: bold;
@@ -710,6 +719,47 @@ html {
     padding-right: 32px !important;
 }
 }
+
+
+.tf-hotel-design-1{
+    background: inherit;
+    .tf-single-head{
+        .more-hotel{
+            color: $color-primary;
+            font-size: 16px;
+            font-weight: 500;
+            text-decoration: underline;
+        }
+    }
+    #tf-single-hotel-avail{
+        margin: 0px !important;
+        .tf_booking-dates{
+            #check-in-out-date{
+                background-color: $color-light-bg !important;
+                padding-top: 3px !important;
+                padding-bottom: 3px !important;
+            }
+            #tf-required {
+                text-align: center;
+                margin-top: 10px !important;
+                display: block;
+                b{
+                    font-family: inherit;
+                    font-weight: 500;
+                    color: $color-denger;
+                }
+            }
+        }
+        .tf-bttn-normal{
+            padding: 16px 24px;
+        }
+    }
+    .tf-tour-booking-box{
+        margin-bottom: 25px;
+        box-shadow: 0px 13px 30px 0px $color-gray;
+    }
+}
+
 
 .tf_template_3_single_hotel .flatpickr-calendar {
 left: 320px !important;
