@@ -360,7 +360,7 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 = 2.15.10 – 09 January 2025 =
 
-- Added: Protection Required option for car rentals (Free).
+- Added: Protection Required option for car rentals
 - Added: Option to customize the map marker on the Map Template (Pro).
 - Fixed: Issue with the Frontend Dashboard Metabox repeater (Pro).
 - Improved: Archive Map Template design (Pro).
