@@ -1,6 +1,3 @@
-/*!****************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[3]!./sass-modify/app/css/free/tourfic.scss ***!
-  \****************************************************************************************************************************************************************************************/
 @charset "UTF-8";
 /*
 Button
@@ -4508,7 +4505,7 @@ table.tf-table tr:last-child {
 
 .tf-hotel-design-1 .tf-rooms-sections .tf-rooms .tf-availability-table {
   background-color: #ffffff;
-  box-shadow: 0px 13px 30px 0px #808080;
+  box-shadow: 0px 13px 30px 0px rgba(224, 232, 238, 0.32);
   border-radius: 5px;
   margin-bottom: 0px;
   border-collapse: collapse;
@@ -4678,7 +4675,7 @@ table.tf-table tr:last-child {
   padding: 10px;
   text-transform: capitalize;
   margin: 5px 5px 5px 0px;
-  box-shadow: 0px 13px 30px 0px #808080;
+  box-shadow: 0px 13px 30px 0px rgba(224, 232, 238, 0.32);
   font-size: 15px;
 }
 
@@ -4711,7 +4708,7 @@ table.tf-table tr:last-child {
   padding: 10px;
   text-transform: capitalize;
   margin: 5px 5px 5px 0px;
-  box-shadow: 0px 13px 30px 0px #808080;
+  box-shadow: 0px 13px 30px 0px rgba(224, 232, 238, 0.32);
   font-size: 15px;
 }
 
@@ -4731,7 +4728,7 @@ table.tf-table tr:last-child {
   padding: 32px;
   border-radius: 6px;
   background: #ffffff;
-  box-shadow: 0px 13px 30px 0px #808080;
+  box-shadow: 0px 13px 30px 0px rgba(224, 232, 238, 0.32);
 }
 
 .tf-hotel-design-1 .tf-hotel-facilities-section .tf-hotel-facilities-container .tf-hotel-facilities-title-area {
@@ -4823,7 +4820,7 @@ table.tf-table tr:last-child {
 
 .tf-hotel-design-1 .tf-hotel-faqs-section .tf-hotel-enquiry .tf-ask-enquiry {
   background-color: #ffffff;
-  box-shadow: 0px 13px 30px 0px #808080;
+  box-shadow: 0px 13px 30px 0px rgba(224, 232, 238, 0.32);
   padding: 30px;
 }
 
@@ -4849,7 +4846,7 @@ table.tf-table tr:last-child {
 .tf-hotel-design-1 .tf-hotel-faqs-section .tf-hotel-faqs .tf-faq-wrapper .tf-faq-single .tf-faq-single-inner {
   margin: 0px 0px 30px 0px;
   background: #ffffff;
-  box-shadow: 0px 13px 30px 0px #808080;
+  box-shadow: 0px 13px 30px 0px rgba(224, 232, 238, 0.32);
   transition: .3s all ease;
 }
 
@@ -4883,7 +4880,7 @@ table.tf-table tr:last-child {
   flex-basis: 30%;
   margin-right: 30px;
   background-color: #ffffff;
-  box-shadow: 0px 13px 30px 0px #808080;
+  box-shadow: 0px 13px 30px 0px rgba(224, 232, 238, 0.32);
   padding: 30px;
 }
 
@@ -4943,7 +4940,7 @@ table.tf-table tr:last-child {
 .tf-hotel-design-1 .tf-review-wrapper .tf-review-data.tf-box .tf-review-data-features {
   flex-basis: 68%;
   background-color: #ffffff;
-  box-shadow: 0px 13px 30px 0px #808080;
+  box-shadow: 0px 13px 30px 0px rgba(224, 232, 238, 0.32);
   padding: 30px;
 }
 
