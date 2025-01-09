@@ -34,7 +34,7 @@ Button
 /*
 Custom Modal
 */
-.tf-modal {
+/* .tf-modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -128,12 +128,6 @@ Custom Modal
                 border-radius: 50%;
                 color: $color-white;
             }
-
-            /*&:hover{
-                .tf-modal-close {
-                    top: 10px;
-                }
-            }*/
         }
     }
 }
@@ -160,7 +154,7 @@ body.tf-modal-open {
         z-index: 99999;
         background: rgba(0, 0, 0, 0.4);
     }
-}
+} */
 
 /*
 Ajax Loader
