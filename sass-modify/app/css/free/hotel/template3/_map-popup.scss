@@ -8,6 +8,7 @@ $t4-yellow: #FFC700;
 $t4-paragraph: #6E655E;
 $t4-orange-100: #1A0B00;
 $t4-main-color: #060D1C;
+$t4-orange-1000: #1A0B00;
 
 /* map widget */
 .tf-map-preview{
@@ -231,12 +232,12 @@ $t4-main-color: #060D1C;
                         @include align-items(flex-end);
                         gap: 2px;
                         font-size: 14px;
-                        color: $t4-paragraph;
+                        color: $color-text;
 
                         .woocommerce-Price-amount {
                             font-size: 16px;
                             font-weight: 500;
-                            color: $t4-orange-1000;
+                            color: $color-heading;
                         }
                     }
 
@@ -261,7 +262,7 @@ $t4-main-color: #060D1C;
                     background: $color-white;
                     border-radius: 30px;
                     text-align: center;
-                    color: $t4-paragraph;
+                    color: $color-text;
                     padding: 8px 12px;
                     font-size: 14px;
                     line-height: 14px;
