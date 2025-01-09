@@ -90,9 +90,9 @@
     padding: 12px 16px;
     white-space: nowrap;
     text-decoration: none;
-    color: #333;
+    color: $color-text;
     background-color: $color-white;
-    fill: #333;
+    fill: $color-text;
     display: flex;
     align-items: center;
     font-weight: 400;
@@ -136,7 +136,7 @@
     width: auto !important;
     flex-grow: 1;
     margin: 0 8px;
-    background-color: #e6e6e6;
+    background-color: $color-light-bg;
     padding: 0;
     border: 2px solid rgba(118, 118, 118, 0.3);
 }
@@ -237,12 +237,12 @@ a.slick-slide-item-link {
 }
 
 .show-on-map .btn-styled {
-    background: linear-gradient(to bottom, #005cb9 0, #003162 100%);
+    background: linear-gradient(to bottom, $color-primary 0, $color-secondary 100%);
     border: none;
 }
 
 .show-on-map .btn-styled:hover {
-    background: linear-gradient(to bottom, #0071e3 0, #003162 100%);
+    background: linear-gradient(to bottom, #0071e3 0, $color-secondary 100%);
 }
 
 .show-on-map i {
@@ -270,7 +270,7 @@ a.slick-slide-item-link {
     z-index: -1;
     content: '';
     display: block;
-    border: 5px solid #003162;    
+    border: 5px solid $color-primary;    
     border-top-color: transparent;
     border-left-color: transparent;
   }
@@ -279,7 +279,7 @@ a.slick-slide-item-link {
     display: block;
     width: 225px;
     padding: 10px 0;
-    background-color: #003162;
+    background-color: $color-primary;
     box-shadow: 0 5px 10px rgba(0,0,0,.1);
     color: $color-white;
     font: 700 18px/1 'Lato', sans-serif;
@@ -352,7 +352,7 @@ a.slick-slide-item-link {
 }
 
 .tf_features i {
-    color: #549501;
+    color: $color-success;
 }
 
 .tf_features .single-feature-box {
@@ -421,31 +421,28 @@ ul.tf-room-checkbox label{
 }
 
 .availability-table thead {
-    background: #003162;
+    background: $color-primary;
     color: $color-white;
 }
 
 .availability-table td,
 .availability-table th {
-    border-left: 1px solid #c8e2fc;
-    border-bottom: 1px solid #c8e2fc;
+    border-left: 1px solid $color-border;
+    border-bottom: 1px solid $color-border;
     border-top: none;
     border-right: none;
 }
 .availability-table th{
-    border-top: 1px solid #c8e2fc;
+    border-top: 1px solid $color-border;
 }
 .availability-table td.reserve {
-    border-right: 1px solid #c8e2fc;
+    border-right: 1px solid $color-border;
 }
 
 .tf-hotel-deposit-hide {
     display: none;
 }
 
-/*.tf-room-table .availability-table tbody tr:nth-child(odd) td {
-    background: $color-white;
-}*/
 
 .hotel-room-wrap {
     width: 100%;
@@ -519,7 +516,7 @@ ul.tf-room-checkbox label{
 }
 
 .room-detail-icon .room-icon-wrap {
-    border: 1px solid #eaeef3;
+    border: 1px solid $color-border;
     border-radius: 4px;
     padding: 8px 10px 4px 10px;
     margin-right: 5px;
@@ -528,12 +525,12 @@ ul.tf-room-checkbox label{
 .room-detail-icon .room-icon-wrap i,
 .room-features i {
     font-size: 16px;
-    color: #5e6d77;
+    color: $color-text;
 }
 
 .room-detail-icon .icon-text {
     font-size: 14px;
-    color: #5e6d77;
+    color: $color-text;
 }
 
 .hotel-room-availability,
@@ -591,7 +588,7 @@ span.tf-price .amount {
     .tf-details-qc-slider-nav {
         margin-top: 0px;
         .tf-details-qcs.is-active img {
-            border: 5px solid #1F2937;
+            border: 5px solid $color-primary;
         }
         .tf-details-qcs img {
             min-height: 50px;
@@ -640,7 +637,7 @@ span.tf-price .amount {
     
                 i {
                     font-size: 32px;
-                    color: #0E3DD8;
+                    color: $color-primary;
                 }
                 
                 .hotel-facilities-icon-down {
@@ -653,7 +650,7 @@ span.tf-price .amount {
                 .hotel-facility-item {
                     margin-bottom: 24px;
                     .hotel-single-facility-title {
-                        color: #060D1C;
+                        color: $color-heading;
                         font-family: inherit;
                         font-size: 20px;
                         font-style: normal;
@@ -677,7 +674,7 @@ span.tf-price .amount {
     
                         li {
                             display: flex;
-                            color: #686E7A;
+                            color: $color-text;
                             font-family: inherit;
                             font-size: 16px;
                             font-style: normal;
@@ -751,7 +748,7 @@ html {
                 b{
                     font-family: inherit;
                     font-weight: 500;
-                    color: $color-denger;
+                    color: $color-danger;
                 }
             }
         }
@@ -761,7 +758,7 @@ html {
     }
     .tf-tour-booking-box{
         margin-bottom: 25px;
-        box-shadow: 0px 13px 30px 0px $color-gray;
+        box-shadow: 0px 13px 30px 0px rgba(224,232,238,0.32);
     }
 }
 

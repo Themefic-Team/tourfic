@@ -12,7 +12,7 @@
         margin-bottom: 32px;
         padding: 16px 24px;
         border-radius: 8px 8px 0px 0px;
-        background: $t4-orange-200;
+        background: $color-light-bg;
 
         @media #{$max1024}{
             margin-bottom: 24px;
@@ -38,7 +38,7 @@
         }
 
         .tf-filter {
-            color: $t4-primary;
+            color: $color-primary;
             cursor: pointer;
             padding: 0;
 
@@ -69,7 +69,7 @@
                 font-size: 14px;
                 font-weight: 400;
                 line-height: 16px;
-                color: $t4-paragraph;
+                color: $color-text;
 
                 label {
                     padding-left: 25px;
@@ -78,13 +78,13 @@
 
                     .checkmark {
                         border-radius: 3px;
-                        border: 1px solid $t4-orange-200;
+                        border: 1px solid $color-light-bg;
                         background: $color-white;
                         height: 16px;
                         width: 16px;
 
                         &:hover {
-                            border-color: $t4-primary;
+                            border-color: $color-primary;
                         }
 
                         &::after {
@@ -97,8 +97,8 @@
                 }
 
                 label input:checked ~ .checkmark {
-                    background-color: $t4-primary !important;
-                    border-color: $t4-primary;
+                    background-color: $color-primary !important;
+                    border-color: $color-primary;
                 }
             }
         }
@@ -115,7 +115,7 @@
         gap: 24px;
         padding-bottom: 40px;
         margin-bottom: 40px;
-        border-bottom: 4px solid $t4-orange-200;
+        border-bottom: 4px solid $color-light-bg;
 
         &:last-child {
             padding-bottom: 32px;
@@ -177,10 +177,10 @@
                 left: 0;
                 padding: 8px;
                 border-radius: 4px 0px;
-                background: #FFC700;
+                background: $color-secondary;
                 font-size: 13px;
                 line-height: 15px;
-                color: $t4-orange-100;
+                color: $color-heading;
             }
         }
 
@@ -218,7 +218,7 @@
             }
 
             .tf-room-options-content {
-                border-bottom: 1px solid #99948D;
+                border-bottom: 1px solid $color-gray;
                 padding-bottom: 24px;
                 margin-bottom: 24px;
 
@@ -258,7 +258,7 @@
 
                     li {
                         @include flexbox();
-                        color: $t4-paragraph;
+                        color: $color-text;
                         font-size: 14px;
                         font-weight: 400;
                         gap: 8px;
@@ -269,7 +269,7 @@
 
                         a {
                             margin-top: -12px;
-                            color: $t4-primary;
+                            color: $color-primary;
                             font-size: 14px;
                             font-weight: 400;
                             text-decoration: none;
@@ -278,7 +278,7 @@
                 }
 
                 span.tf-others-benefits-title {
-                    color: #595349;
+                    color: $color-text;
                     font-size: 16px !important;
                     font-weight: 600 !important;
                     margin-bottom: 16px;
@@ -304,23 +304,22 @@
 
                     .tf-price {
                         .woocommerce-Price-amount{
-                            color: $t4-orange-100;
+                            color: $color-heading;
                             font-size: 24px;
                             font-weight: 500;
                             line-height: 28px;
                         }
                         del{
                             display: block;
-
                             .woocommerce-Price-amount{
-                                color: $t4-paragraph;
+                                color: $color-text;
                                 font-size: 14px;
                                 font-weight: 400;
                             }
                         }
                     }
                     .price-per-night{
-                        color: $t4-primary;
+                        color: $color-primary;
                         font-size: 14px;
                         font-weight: 400;
                         line-height: 16px;
@@ -328,7 +327,7 @@
                 }
 
                 .tf-available-room-select {
-                    color: $t4-paragraph;
+                    color: $color-text;
                     font-size: 16px;
 
                     span{
@@ -342,9 +341,9 @@
                         padding: 6px 20px 6px 13px;
                         background-size: 10px;
                         background-position: 80% 49%;
-                        border: 1px solid $t4-orange-200 !important;
+                        border: 1px solid $color-light-bg !important;
                         background: $color-white !important;
-                        color: $t4-paragraph !important;
+                        color: $color-text !important;
                         cursor: pointer;
                         outline: none;
                         border-radius: 4px;
@@ -355,11 +354,11 @@
             .tf-available-room-content-bottom{
                 padding-top: 16px;
                 margin-top: 16px;
-                border-top: 1px solid $t4-orange-200;
+                border-top: 1px solid $color-light-bg;
                 width: 100%;
 
                 .tf-room-features-title{
-                    color: $t4-orange-100;
+                    color: $color-heading;
                     font-size: 14px;
                     line-height: 16px;
                     font-weight: 500;
@@ -378,7 +377,7 @@
                         @include flexbox();
                         @include align-items(center);
                         gap: 8px;
-                        color: $t4-paragraph;
+                        color: $color-text;
                         font-size: 14px;
                         font-weight: 400;
                         line-height: 20px;
@@ -388,7 +387,7 @@
                         }
 
                         .tf-room-modal-btn{
-                            color: $t4-primary;
+                            color: $color-primary;
                             font-size: 14px;
                             font-weight: 400;
                             text-decoration: none;
@@ -416,9 +415,9 @@
                 }
 
                 input[type=checkbox] {
-                    background: $t4-orange-500;
-                    border-color: $t4-orange-500;
-                    accent-color: $t4-orange-500;
+                    background: $color-secondary;
+                    border-color: $color-secondary;
+                    accent-color: $color-secondary;
                 }
             }
 
@@ -430,7 +429,7 @@
                 line-height: 16px;
                 font-weight: 500;
                 border-radius: 6px;
-                background: $t4-primary;
+                background: $color-primary;
                 box-shadow: 0px 4px 40px 0px rgba(80, 33, 0, 0.10);
                 border: none;
                 padding: 8px 16px;
@@ -440,7 +439,7 @@
                 transition: .3s all ease-in-out;
 
                 &:hover {
-                    background-color: $t4-orange-500;
+                    background-color: $color-secondary;
                 }
             }
         }
@@ -448,14 +447,14 @@
         h4.tf-hotel-room-title{
             padding-bottom: 0;
             margin-bottom: 20px;
-            color: $t4-orange-100;
+            color: $color-heading;
             font-size: 20px;
             font-weight: 500;
             line-height: 28px;
 
             .tf-edit-link{
                 font-size: 14px;
-                color: $t4-primary;
+                color: $color-primary;
                 text-decoration: underline;
                 margin-left: 6px;
             }
@@ -530,13 +529,13 @@
         .tf-room-title {
             font-size: 30px;
             line-height: 34px;
-            color: #060D1C;
+            color: $color-heading;
             font-weight: 500;
             margin-top: 20px;
         }
 
         .tf-room-modal-desc {
-            color: #686E7A;
+            color: $color-text;
             font-size: 16px;
             font-weight: 400;
             line-height: 26px;

@@ -138,11 +138,11 @@
                     padding: 16px;
                     margin-bottom: 24px;
                     span{
-                        color: $color-denger;
+                        color: $color-danger;
                         font-size: 16px;
                         font-weight: 400;
                         i{
-                            color: $color-denger;
+                            color: $color-danger;
                         }
                         b{
                             font-weight: 700;
@@ -419,7 +419,7 @@
                                 width: 100%;
                             }
                             .error-text.error-visible{
-                                color: $color-denger;
+                                color: $color-danger;
                             }
                         }
                     }

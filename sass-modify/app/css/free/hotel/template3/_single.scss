@@ -1,13 +1,4 @@
-$t4-primary: #FF6B00;
-$t4-orange-background: #FEF9F6;
-$t4-orange-light: #FFEDE1;
-$t4-orange-100: #FBF4EF;
-$t4-orange-200: #F5E9E0;
-$t4-orange-500: #BF7540;
-$t4-yellow: #FFC700;
-$t4-paragraph: #6E655E;
-$t4-orange-1000: #1A0B00;
-$t4-main-color: #060D1C;
+
 .tf-hotel-template-4.tf-hotel-single {
     font-family: Ubuntu, sans-serif;
     font-size: 14px;
@@ -47,7 +38,7 @@ $t4-main-color: #060D1C;
         }
 
         h1 {
-            color: $t4-orange-1000;
+            color: $color-heading;
             font-weight: 500;
             font-size: 36px;
             line-height: 41px;
@@ -55,7 +46,7 @@ $t4-main-color: #060D1C;
         }
 
         .tf-map-link {
-            color: $t4-primary;
+            color: $color-primary;
             font-size: 16px;
             line-height: 18px;
             @include flexbox();
@@ -75,18 +66,18 @@ $t4-main-color: #060D1C;
             width: 45px;
             line-height: 40px;
             border-radius: 100px;
-            border: 1px solid $t4-orange-200;
-            background: $t4-orange-100;
+            border: 1px solid $color-light-bg;
+            background: $color-heading;
             box-shadow: 0px 4px 40px 0px rgba(80, 33, 0, 0.10);
             text-align: center;
-            color: $t4-primary;
+            color: $color-primary;
             cursor: pointer;
             font-size: 18px;
         }
 
         a.tf-share-toggle.actives,
         a.tf-wishlist.actives {
-            background-color: $t4-primary;
+            background-color: $color-primary;
             color: $color-white;
             box-shadow: 0px 4px 40px 0px rgba(80, 33, 0, 0.10);
 
@@ -116,7 +107,7 @@ $t4-main-color: #060D1C;
 
                         i {
                             font-size: 18px;
-                            color: $t4-primary;
+                            color: $color-primary;
                         }
                     }
 
@@ -137,7 +128,7 @@ $t4-main-color: #060D1C;
                         span {
                             display: none;
                             font-size: 13px;
-                            color: $t4-primary;
+                            color: $color-primary;
                         }
                     }
 
@@ -244,18 +235,18 @@ $t4-main-color: #060D1C;
             a {
                 @include flexbox();
                 border-radius: 4px;
-                border: 0.5px solid $t4-orange-light;
+                border: 0.5px solid $color-light-bg;
                 background: $color-white;
                 box-shadow: 0px 4px 30px 0px rgba(255, 237, 225, 0.40);
                 gap: 8px;
                 line-height: 16px;
-                color: $t4-paragraph;
+                color: $color-text;
                 padding: 10px 12px;
                 @include transition();
 
                 &:hover {
-                    background-color: $t4-primary;
-                    border-color: $t4-primary;
+                    background-color: $color-primary;
+                    border-color: $color-primary;
                     color: $color-white;
                 }
             }
@@ -286,7 +277,7 @@ $t4-main-color: #060D1C;
 
             .tf-section-title {
                 margin-bottom: 8px;
-                color: $t4-orange-1000;
+                color: $color-heading;
                 font-size: 18px;
                 font-weight: 500;
             }
@@ -322,7 +313,7 @@ $t4-main-color: #060D1C;
         }
 
         .tf-details-menu {
-            background: $t4-orange-100;
+            background: $color-heading;
             padding: 24px 24px 0 24px;
             border-radius: 4px;
             position: sticky;
@@ -340,7 +331,7 @@ $t4-main-color: #060D1C;
 
                 li {
                     a {
-                        color: $t4-orange-1000;
+                        color: $color-heading;
                         font-weight: 500;
                         border-bottom: 2px solid;
                         padding-bottom: 16px;
@@ -348,7 +339,7 @@ $t4-main-color: #060D1C;
                         border-color: transparent;
 
                         &.active {
-                            border-color: $t4-primary;
+                            border-color: $color-primary;
                         }
                     }
                 }
@@ -360,7 +351,7 @@ $t4-main-color: #060D1C;
         .tf-section-toggle-icon{
             i {
                 font-size: 32px;
-                color: $t4-primary;
+                color: $color-primary;
                 margin-right: -8px;
             }
             .tf-toggle-icon-down{
@@ -402,7 +393,7 @@ $t4-main-color: #060D1C;
             background: #FDF9F3;
             border-radius: 0px;
             h4{
-                color: #595349;
+                color: $color-heading;
                 text-align: center;
                 font-size: 32px !important;
                 font-style: normal;
@@ -413,46 +404,37 @@ $t4-main-color: #060D1C;
         }
         .tf-aq-field{
             input{
-                border: 1px solid #595349;
+                border: 1px solid $color-gray;
                 box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
-                color: #C1BFBB;
+                color: $color-text;
                 background-color: #fdf9f3;
                 font-size: 16px;
-                font-style: normal;
-                font-weight: 400;
-                line-height: 130%; /* 20.8px */
                 height: 45px;
                 padding: 12px 14px;;
                 border-radius: 0px;
                 &::placeholder{
-                    color: #C1BFBB;
+                    color: $color-text;
                 }
             }
             textarea{
-                border: 1px solid #595349;
+                border: 1px solid $color-gray;
                 box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
                 background-color: #fdf9f3;
-                color: #C1BFBB;
+                color: $color-text;
                 font-size: 16px;
-                font-style: normal;
-                font-weight: 400;
-                line-height: 130%; /* 20.8px */
                 padding: 12px 14px;
                 border-radius: 0px;
                 &::placeholder{
-                    color: #C1BFBB;
+                    color: $color-text;
                 }
             }
         }
-        // .tf-aq-outer .close-aq{
-        //     background: #B58E53 !important;
-        // }
         button{
-            background: #b58e53 !important;
-            border-color: #b58e53 !important;
+            background: $color-primary !important;
+            border-color: $color-primary !important;
             border-radius: 0px !important;
             padding: 12px 32px !important;
-            color: #fdf9f3 !important;
+            color: $color-white !important;
             font-size: 16px !important;
             font-style: normal;
             font-weight: 700;
@@ -462,20 +444,20 @@ $t4-main-color: #060D1C;
                 position: static !important;
             }
             &:hover{
-                background: #917242 !important;
+                background: $color-secondary !important;
             }
         }
     }
 
     #tf-hotel-services{
         .tf-hotel-services{
-            background: $t4-orange-100;
+            background: $color-heading;
             border-radius: 4px;
             gap: 24px;
 
             .tf-hotel-services-text{
                 h3 {
-                    color: $t4-orange-1000;
+                    color: $color-heading;
                     font-weight: 500;
                     font-size: 18px;
                     line-height: 21px;
@@ -483,23 +465,23 @@ $t4-main-color: #060D1C;
                     margin-bottom: 8px;
                 }
                 p{
-                    color: $t4-paragraph;
+                    color: $color-text;
                     margin-top: 0;
                 }
             }
             .tf-hotel-service{
                 label{
-                    color: $t4-orange-1000;
+                    color: $color-heading;
                     font-size: 16px;
                     font-weight: 500;
                     margin-bottom: 8px;
                     display: inline-block;
                 }
                 select{
-                    border: 1px solid $t4-orange-200;
+                    border: 1px solid $color-light-bg;
                     background: $color-white;
                     padding: 15px 16px;
-                    color: $t4-paragraph;
+                    color: $color-text;
                     font-size: 14px;
                     line-height: 16px;
                     height: 48px;
@@ -515,14 +497,14 @@ $t4-main-color: #060D1C;
                 button{
                     padding: 16px;
                     border-radius: 6px;
-                    background-color: $t4-primary !important;
-                    border-color: $t4-primary !important;
+                    background-color: $color-primary !important;
+                    border-color: $color-primary !important;
                     color: $color-white !important;
                     cursor: pointer;
 
                     &:hover {
-                        background-color: $t4-orange-500 !important;
-                        border-color: $t4-orange-500 !important;
+                        background-color: $color-secondary !important;
+                        border-color: $color-secondary !important;
                     }
                 }
             }

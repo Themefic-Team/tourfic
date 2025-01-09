@@ -1880,7 +1880,7 @@ button.tf-review-open.button, .tf-reting-field button {
         .tf_label-row{
             span#tf-required{
                 font-size: 12px;
-                color: $color-denger !important;
+                color: $color-danger !important;
             }
         }
         .tf-booking-guest-and-room-wrap {
@@ -2307,7 +2307,7 @@ button.tf-review-open.button, .tf-reting-field button {
                         background: $color-primary;
                     }
                     span.tf-available-labels-featured {
-                        background: $color-denger;
+                        background: $color-danger;
                     }
                     span.tf-available-labels-visited {
                         background: $color-success;

@@ -12,10 +12,10 @@
     .tf-whats-around{
         margin-top: 24px;
         padding-top: 24px;
-        border-top: 1px solid $t4-orange-200;
+        border-top: 1px solid $color-light-bg;
 
         .tf-whats-around-title{
-            color: $t4-orange-100;
+            color: $color-heading;
             font-size: 14px;
             font-weight: 500;
             line-height: 16px;
@@ -33,7 +33,7 @@
                 @include flexbox();
                 @include justify-content(space-between);
                 gap: 24px;
-                color: $t4-paragraph;
+                color: $color-text;
                 font-size: 14px;
                 font-weight: 400;
                 line-height: 16px;

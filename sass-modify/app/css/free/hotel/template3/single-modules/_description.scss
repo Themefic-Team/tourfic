@@ -10,7 +10,7 @@
     p {
         margin: 0;
         padding: 0;
-        color: $t4-paragraph;
+        color: $color-text;
     }
 
     .tf-short-description {
@@ -43,7 +43,7 @@
 
             li {
                 @include flexbox();
-                color: $t4-paragraph;
+                color: $color-text;
 
                 i {
                     margin-right: 12px;

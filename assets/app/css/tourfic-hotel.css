@@ -1,3 +1,6 @@
+/*!********************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[3]!./sass-modify/app/css/free/hotel/hotel.scss ***!
+  \********************************************************************************************************************************************************************************************/
 @media only screen and (max-width: 767.98px) {
   .tf-hotel-design-1 .tf-rooms-sections .tf-rooms {
     overflow-x: scroll;
@@ -695,9 +698,9 @@
   padding: 12px 16px;
   white-space: nowrap;
   text-decoration: none;
-  color: #333;
+  color: #686E7A;
   background-color: #ffffff;
-  fill: #333;
+  fill: #686E7A;
   display: flex;
   align-items: center;
   font-weight: 400;
@@ -741,7 +744,7 @@
   width: auto !important;
   flex-grow: 1;
   margin: 0 8px;
-  background-color: #e6e6e6;
+  background-color: #f8f9fb;
   padding: 0;
   border: 2px solid rgba(118, 118, 118, 0.3);
 }
@@ -843,12 +846,12 @@ a.slick-slide-item-link {
 }
 
 .show-on-map .btn-styled {
-  background: linear-gradient(to bottom, #005cb9 0, #003162 100%);
+  background: linear-gradient(to bottom, #0E3DD8 0, #003C7A 100%);
   border: none;
 }
 
 .show-on-map .btn-styled:hover {
-  background: linear-gradient(to bottom, #0071e3 0, #003162 100%);
+  background: linear-gradient(to bottom, #0071e3 0, #003C7A 100%);
 }
 
 .show-on-map i {
@@ -879,7 +882,7 @@ a.slick-slide-item-link {
   z-index: -1;
   content: '';
   display: block;
-  border: 5px solid #003162;
+  border: 5px solid #0E3DD8;
   border-top-color: transparent;
   border-left-color: transparent;
 }
@@ -889,7 +892,7 @@ a.slick-slide-item-link {
   display: block;
   width: 225px;
   padding: 10px 0;
-  background-color: #003162;
+  background-color: #0E3DD8;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   color: #ffffff;
   font: 700 18px/1 'Lato', sans-serif;
@@ -970,7 +973,7 @@ a.slick-slide-item-link {
 }
 
 .tf_features i {
-  color: #549501;
+  color: #198754;
 }
 
 .tf_features .single-feature-box {
@@ -1046,33 +1049,30 @@ ul.tf-room-checkbox label {
 }
 
 .availability-table thead {
-  background: #003162;
+  background: #0E3DD8;
   color: #ffffff;
 }
 
 .availability-table td,
 .availability-table th {
-  border-left: 1px solid #c8e2fc;
-  border-bottom: 1px solid #c8e2fc;
+  border-left: 1px solid #f0f2f4;
+  border-bottom: 1px solid #f0f2f4;
   border-top: none;
   border-right: none;
 }
 
 .availability-table th {
-  border-top: 1px solid #c8e2fc;
+  border-top: 1px solid #f0f2f4;
 }
 
 .availability-table td.reserve {
-  border-right: 1px solid #c8e2fc;
+  border-right: 1px solid #f0f2f4;
 }
 
 .tf-hotel-deposit-hide {
   display: none;
 }
 
-/*.tf-room-table .availability-table tbody tr:nth-child(odd) td {
-    background: $color-white;
-}*/
 .hotel-room-wrap {
   width: 100%;
   overflow-x: auto;
@@ -1145,7 +1145,7 @@ ul.tf-room-checkbox label {
 }
 
 .room-detail-icon .room-icon-wrap {
-  border: 1px solid #eaeef3;
+  border: 1px solid #f0f2f4;
   border-radius: 4px;
   padding: 8px 10px 4px 10px;
   margin-right: 5px;
@@ -1154,12 +1154,12 @@ ul.tf-room-checkbox label {
 .room-detail-icon .room-icon-wrap i,
 .room-features i {
   font-size: 16px;
-  color: #5e6d77;
+  color: #686E7A;
 }
 
 .room-detail-icon .icon-text {
   font-size: 14px;
-  color: #5e6d77;
+  color: #686E7A;
 }
 
 .hotel-room-availability,
@@ -1216,7 +1216,7 @@ span.tf-price .amount {
 }
 
 .tf-hotel-details-qc-gallelry .tf-details-qc-slider-nav .tf-details-qcs.is-active img {
-  border: 5px solid #1F2937;
+  border: 5px solid #0E3DD8;
 }
 
 .tf-hotel-details-qc-gallelry .tf-details-qc-slider-nav .tf-details-qcs img {
@@ -1387,7 +1387,7 @@ html {
 
 .tf-hotel-design-1 .tf-tour-booking-box {
   margin-bottom: 25px;
-  box-shadow: 0px 13px 30px 0px #808080;
+  box-shadow: 0px 13px 30px 0px rgba(224, 232, 238, 0.32);
 }
 
 .tf_template_3_single_hotel .flatpickr-calendar {
