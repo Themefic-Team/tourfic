@@ -2149,7 +2149,7 @@ button.tf-review-open.button, .tf-reting-field button {
     #tf-required {
         text-align: center;
         width: 100% !important;
-        color: red !important;
+        color: $color-danger !important;
         display: block;
     }
     @media #{$tfmax767}{

@@ -107,7 +107,7 @@
     }
     a{
         text-decoration: none;
-        color: #686E7A;
+        color: $color-primary;
     }
 }
 
@@ -173,7 +173,7 @@
                 left: calc(0px - -15px);
             }
             .tf-single-rating{
-                background-color: #5F79A1;
+                background-color: $color-primary;
                 padding: 9px 8px !important;
                 font-size: 16px !important;
                 text-decoration: none;
@@ -278,7 +278,7 @@
             text-transform: capitalize;
         }
         .tf-review-data-average p {
-            background: #ECF2FF;
+            background: $color-light-bg;
             text-align: center;
             font-size: 30px !important;
             color: $color-primary;
@@ -327,7 +327,7 @@
             }
             .tf-progress-bar {
                 height: 7px;
-                background: #EAEDF6;
+                background: $color-light-bg;
                 border-radius: 7px;
             }
             
@@ -366,13 +366,13 @@
 
     //Tourfic review reply
     .tf-review-reply{
-        border-bottom: 1px solid #D3DDE5;
+        border-bottom: 1px solid $color-border;
         padding-bottom: 30px;
 
         .tf-review-details{
             .tf-review-ratings {
                 i {
-                    color: #FF6B00;
+                    color: $color-primary;
                 }
                 h3{
                     font-size: 20px;
@@ -463,12 +463,12 @@
                 display: flex;
                 textarea{
                     padding: 15px 20px;
-                    border: 1px solid #CDCFD0;
+                    border: 1px solid $color-border;
                     width: 100%;
-                    background-color: #F3F7FA;
+                    background-color: $color-light-bg;
                     border-radius: 5px;
                     font-size: 14px;
-                    color: #686E7A;
+                    color: $color-text;
                     font-family: inherit;
                     &::placeholder{
                         color: $color-heading;
@@ -480,12 +480,12 @@
                 div{
                     input{
                         padding: 15px 20px;
-                        border: 1px solid #CDCFD0;
+                        border: 1px solid $color-border;
                         width: 100%;
-                        background-color: #F3F7FA;
+                        background-color: $color-light-bg;
                         border-radius: 5px;
                         font-size: 14px;
-                        color: #686E7A;
+                        color: $color-text;
                         font-family: inherit;
                         &::placeholder{
                             color: $color-heading;
@@ -515,7 +515,7 @@
                     width: auto !important;
                     transition: .3s all ease;
                     &:hover{
-                        background-color: #0E2E96;
+                        background-color: $color-secondary;
                     }
                 }
             }
@@ -551,7 +551,7 @@
     text-align: center;
     i{
         text-align: center;
-        background-color: #ECF2FF;
+        background-color: $color-light-bg;
         border-radius: 50%;
         color: $color-primary;
         margin-bottom: 25px;
@@ -567,7 +567,7 @@
     }
     .tf-btn{
         a:hover{
-            background-color: #003C7A !important;
+            background-color: $color-secondary !important;
         }
     }
 }
@@ -663,7 +663,7 @@
                 overflow: scroll;
                 overflow-x: hidden;
                 position: absolute;
-                border: 1px solid #d4d4d4;
+                border: 1px solid $color-border;
                 border-bottom: none;
                 border-top: none;
                 z-index: 99;
@@ -674,8 +674,8 @@
                     padding: 10px;
                     cursor: pointer;
                     background-color: $color-white;
-                    border-bottom: 1px solid #d4d4d4;
-                    color: #444;
+                    border-bottom: 1px solid $color-border;
+                    color: $color-text;
                 }
             }
         }
@@ -699,7 +699,7 @@
             }
         }
         .tf-related-single{
-            border-top: 1px solid #EAEFF3;
+            border-top: 1px solid $color-border;
             margin-bottom: $tf-space-24;
             padding-top: $tf-space-24;
             
@@ -776,7 +776,7 @@
                 background: inherit;
                 border-radius: 0px;
                 margin-bottom: 26px;
-                border-bottom: 1px solid #E3E6F0;
+                border-bottom: 1px solid $color-border;
                 padding: 0px !important;
                 .tf-widget-title{
                     background-color: inherit;
@@ -821,7 +821,7 @@
                                     width: 20px;
                                     background-color: $color-white;
                                     border-radius: 5px;
-                                    border: 1px solid #D2D2D6;
+                                    border: 1px solid $color-border;
                                 }
                             }
                         }
@@ -886,7 +886,7 @@
                 font-weight: inherit;
                 color: inherit;
                 box-sizing: border-box;
-                border: 1px solid #e0e8ee;
+                border: 1px solid $color-border;
                 background-color: $color-white;
             }
         }
@@ -895,7 +895,7 @@
     .tf-icon {
         background-color: $color-white;
         border-radius: 5px;
-        border: 1px solid #e0e8ee;
+        border: 1px solid $color-border;
 
         &:hover {
         cursor: pointer;
@@ -1104,14 +1104,14 @@
                 padding: 0;
                 li{
                     display: inline-block;
-                    background-color: #F1F3F4;
+                    background-color: $color-light-bg;
                     padding: 6px 10px;
                     border-radius: 5px;
                     margin: 10px 10px 0px 0px;
                     font-size: 12px;
                     i{
                         margin-right: 5px;
-                        color: #686E7A;
+                        color: $color-text;
                     }
                     img{
                         margin-right: 5px;
@@ -1161,7 +1161,7 @@
         }
 
         .tf-post-footer {
-            border-top: 1px solid #ddd;
+            border-top: 1px solid $color-border;
             padding-top: 16px;
         }
     }
