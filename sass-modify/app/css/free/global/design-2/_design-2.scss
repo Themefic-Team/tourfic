@@ -572,6 +572,60 @@
     }
 }
 
+// FAQ
+.tf-faq-wrapper {
+    .tf-faq-inner{
+        .tf-faq-single{
+            border-bottom: 1px solid $color-border;
+        }
+        .active{
+            .tf-faq-single-inner{
+                background: $color-white;
+                border-radius: $tf-brds-default;
+                margin: 0px 0px 30px 0px;
+                box-shadow: 0px 0px 24px 5px #E0E8EE;
+                .tf-faq-collaps{
+                    .faq-icon{
+                    i.fa-plus{
+                        display: none;
+                    } 
+                    i.fa-minus{
+                        color: $color-primary;
+                        display: block;
+                    } 
+                    }
+                }
+            }
+        }
+        .tf-faq-single-inner{
+            .tf-faq-content{
+                display: none;
+            }
+        }
+    }
+    .tf-faq-single-inner{
+        .tf-faq-content{
+            padding: 0px 24px 24px 24px;
+        }
+        .tf-faq-collaps{
+            padding: 24px;
+            &:hover{
+                cursor: pointer;
+            }
+            .faq-icon{
+                i.fa-plus{
+                display: block;
+                } 
+                i.fa-minus{
+                display: none;
+                } 
+            }
+        }
+        h4{
+            line-height: 1.4;
+        }
+    }
+}
 
 // Archive Global Start
 

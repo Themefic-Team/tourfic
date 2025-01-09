@@ -530,44 +530,6 @@
   color: #0E3DD8;
 }
 
-.tf-tour-design-1 .tf-faq-wrapper .tf-faq-inner .tf-faq-single {
-  border-bottom: 1px solid #f0f2f4;
-}
-.tf-tour-design-1 .tf-faq-wrapper .tf-faq-inner .active .tf-faq-single-inner {
-  background: #ffffff;
-  border-radius: 5px;
-  margin: 0px 0px 30px 0px;
-  box-shadow: 0px 0px 24px 5px #E0E8EE;
-}
-.tf-tour-design-1 .tf-faq-wrapper .tf-faq-inner .active .tf-faq-single-inner .tf-faq-collaps .faq-icon i.fa-plus {
-  display: none;
-}
-.tf-tour-design-1 .tf-faq-wrapper .tf-faq-inner .active .tf-faq-single-inner .tf-faq-collaps .faq-icon i.fa-minus {
-  color: #0E3DD8;
-  display: block;
-}
-.tf-tour-design-1 .tf-faq-wrapper .tf-faq-inner .tf-faq-single-inner .tf-faq-content {
-  display: none;
-}
-.tf-tour-design-1 .tf-faq-wrapper .tf-faq-single-inner .tf-faq-content {
-  padding: 0px 24px 24px 24px;
-}
-.tf-tour-design-1 .tf-faq-wrapper .tf-faq-single-inner .tf-faq-collaps {
-  padding: 24px;
-}
-.tf-tour-design-1 .tf-faq-wrapper .tf-faq-single-inner .tf-faq-collaps:hover {
-  cursor: pointer;
-}
-.tf-tour-design-1 .tf-faq-wrapper .tf-faq-single-inner .tf-faq-collaps .faq-icon i.fa-plus {
-  display: block;
-}
-.tf-tour-design-1 .tf-faq-wrapper .tf-faq-single-inner .tf-faq-collaps .faq-icon i.fa-minus {
-  display: none;
-}
-.tf-tour-design-1 .tf-faq-wrapper .tf-faq-single-inner h4 {
-  line-height: 1.4;
-}
-
 .tf-tour-design-1 .upcomming-tours {
   padding-top: 120px;
   border-top: 1px solid #f0f2f4;
