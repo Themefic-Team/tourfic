@@ -2633,16 +2633,14 @@ class Tour {
 		}
 
 		$tf_tour_arc_selected_template = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['tour-archive'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['tour-archive'] : 'design-1';
+		$tf_discount_type   = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : '';
+		$tf_discount_amount = ! empty( $meta['discount_price'] ) ? $meta['discount_price'] : '';
 
 		if ( $tf_tour_arc_selected_template == "design-1" ) {
 			?>
             <div class="tf-item-card tf-flex">
                 <div class="tf-item-featured">
                     <div class="tf-tag-items">
-						<?php
-						$tf_discount_type   = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : '';
-						$tf_discount_amount = ! empty( $meta['discount_price'] ) ? $meta['discount_price'] : '';
-						?>
                         <div class="tf-features-box tf-flex">
 							<?php
 							if ( ! empty( $tf_discount_type ) && $tf_discount_type != "none" && ! empty( $tf_discount_amount ) ) {
@@ -2826,8 +2824,6 @@ class Tour {
                             </div>
                             <div class="tf-mobile tf-pricing-info">
 								<?php
-								$tf_discount_type   = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : '';
-								$tf_discount_amount = ! empty( $meta['discount_price'] ) ? $meta['discount_price'] : '';
 								if ( ! empty( $tf_discount_type ) && $tf_discount_type != "none" && ! empty( $tf_discount_amount ) ) {
 									?>
                                     <div class="tf-available-room-off">
@@ -2969,11 +2965,18 @@ class Tour {
 						?>
                     </a>
 
-	                <?php if ( ! empty( $tf_discount_type ) && $tf_discount_type != "none" && ! empty( $tf_discount_amount ) ) {?>
-                        <div class="tf-archive-hotel-discount">
-                            <?php echo $tf_discount_type == "percent" ? esc_attr( $tf_discount_amount ) . "%" : wp_kses_post( wc_price( $tf_discount_amount ) ); ?><?php esc_html_e( "Off", "tourfic" ); ?>
-                        </div>
-	                <?php } ?>
+					<div class="tf-tag-items">
+						<?php if ( ! empty( $tf_discount_type ) && $tf_discount_type != "none" && ! empty( $tf_discount_amount ) ) {?>
+							<div class="tf-tag-item">
+								<?php echo $tf_discount_type == "percent" ? esc_attr( $tf_discount_amount ) . "%" : wp_kses_post( wc_price( $tf_discount_amount ) ); ?><?php esc_html_e( " Off", "tourfic" ); ?>
+							</div>
+						<?php } ?>
+						<?php if ( $featured ): ?>
+							<div class="tf-tag-item">
+								<?php echo ! empty( $meta['featured_text'] ) ? esc_html( $meta['featured_text'] ) : esc_html( "HOT DEAL" ); ?>
+							</div>
+						<?php endif; ?>
+					</div>
                 </div>
                 <div class="tf-archive-hotel-content">
                     <div class="tf-archive-hotel-content-left">
@@ -2987,9 +2990,8 @@ class Tour {
 						<?php endif; ?>
                         <h4 class="tf-section-title">
                             <a href="<?php echo esc_url( $url ); ?>">
-								<?php echo wp_kses_post(Helper::tourfic_character_limit_callback( get_the_title(), 55 )); ?>
+								<?php echo wp_kses_post(Helper::tourfic_character_limit_callback( get_the_title(), 45 )); ?>
                             </a>
-							<?php echo wp_kses_post(Helper::edit_link(get_the_ID())) ?>
                         </h4>
                         <ul class="features">
                             <?php if ( ! empty( $group_size ) ) { ?>

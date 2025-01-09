@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, room-booking, car-rental
 Requires at least: 5.4
 Tested up to: 6.7
-Stable tag: 2.15.9
+Stable tag: 2.15.10
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -358,6 +358,14 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
+= 2.15.10 – 09 January 2025 =
+
+- Added: Protection Required option for car rentals (Free).
+- Added: Option to customize the map marker on the Map Template (Pro).
+- Fixed: Issue with the Frontend Dashboard Metabox repeater (Pro).
+- Improved: Archive Map Template design (Pro).
+- Improved: Overall system stability.
+
 = 2.15.9 – 02 January 2025 =
 
 - Fixed: Minor bugs and issues resolved.
@@ -423,17 +431,6 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 - Improvement: Improved user experience for the car rental feature.
 - Improvement: System stability is further enhanced.
 - Improvement: Updated label and logo on the frontend dashboard.
-
-= 2.15.1 - 24 November 2024 =
-
-- Compatibility: Fixed translation notice issue for compatibility with WordPress 6.7.1.
-- Fix: Resolved the tour time selection notice issue.
-
-= 2.15.0 - 23 November 2024 =
-
-- Introduced: Car Rental Service with advanced car rental features.
-- Fix: Resolved PDF-related issues.
-- Fix: Addressed and resolved a vulnerability issue.
 
 **Old Changelog can be found [here](https://themefic.com/tourfic/changelog/)**.
 

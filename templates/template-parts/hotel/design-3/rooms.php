@@ -149,7 +149,7 @@ $feature_filter = ! empty( Helper::tfopt( 'feature-filter' ) ) ? Helper::tfopt( 
 						<?php
 						if ( $pricing_by == '3' && ! empty( $room_options ) ):
 							echo '<div class="tf-available-room-contents">';
-							echo '<h4 class="tf-hotel-room-title">' . esc_html( get_the_title( $room_id ) ) . wp_kses_post(Helper::edit_link($room_id)) . '</h4>';
+							echo '<h4 class="tf-hotel-room-title">' . esc_html( get_the_title( $room_id ) ) . '</h4>';
 							foreach ( $room_options as $room_option_key => $room_option ):
 								?>
                                 <div class="tf-available-room-content tf-room-options-content">
@@ -245,7 +245,6 @@ $feature_filter = ! empty( Helper::tfopt( 'feature-filter' ) ) ? Helper::tfopt( 
                                     <div class="tf-available-room-content-left">
                                         <h4 class="tf-hotel-room-title">
                                             <?php echo esc_html( get_the_title( $room_id ) ); ?>
-                                            <?php echo wp_kses_post(Helper::edit_link($room_id)) ?>
                                         </h4>
                                         <ul class="tf-room-info-list">
 			                                <?php if ( $footage ) { ?>

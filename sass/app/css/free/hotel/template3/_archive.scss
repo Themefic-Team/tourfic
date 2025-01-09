@@ -14,7 +14,6 @@ $t4-main-color: #060D1C;
 .tf_template_4_hotel_archive,
 .tf_template_4_tour_archive,
 .tf_template_4_apartment_archive {
-    font-family: Ubuntu, sans-serif;
     width: 100%;
 
     * {
@@ -64,7 +63,7 @@ $t4-main-color: #060D1C;
 
     .tf-search-fields {
         @include flexbox();
-        gap: 48px;
+        gap: 16px;
 
         @media #{$max1024} {
             @include flex-direction(column);
@@ -94,25 +93,37 @@ $t4-main-color: #060D1C;
             }
 
             .tf-search-field-label {
-                color: $t4-orange-1000;
-                font-size: 16px;
-                line-height: 12px;
                 cursor: pointer;
+                color: $t4-paragraph;
+                font-size: 14px;
+                line-height: 1;
             }
 
             .tf-search-input {
                 background: transparent;
                 padding: 0;
                 border: none;
-                width: 90px;
-                color: $t4-paragraph;
-                font-size: 12px;
-                height: 14px;
+                width: 110px;
+                color: $t4-main-color;
+                font-size: 16px;
+                height: 20px;
                 outline: none;
+
+                &::placeholder {
+                    color: $t4-main-color;
+                }
+                &:-ms-input-placeholder {
+                    color: $t4-main-color;
+                }
+                &::-ms-input-placeholder {
+                    color: $t4-main-color;
+                }
             }
 
             .tf-archive-guest-info {
-                font-size: 12px;
+                font-size: 16px;
+                line-height: 20px;
+                color: $t4-main-color;
             }
         }
 
@@ -196,7 +207,7 @@ $t4-main-color: #060D1C;
             display: block;
             transition: .3s all ease;    
             font-weight: 400;
-            line-height: 175%; /* 28px */
+            line-height: 28px;
             letter-spacing: 0.15px;
             border-radius: 4px;
 
@@ -241,7 +252,7 @@ $t4-main-color: #060D1C;
             color: $t4-orange-1000;
             font-size: 16px;
             font-weight: 400;
-            line-height: 175%;
+            line-height:1.75;
             letter-spacing: 0.15px;
         }
 
@@ -254,7 +265,6 @@ $t4-main-color: #060D1C;
                 width: 34px !important;
                 height: 48px;
                 font-size: 16px;
-                font-style: normal;
                 font-weight: 600;
                 color: $t4-orange-1000 !important;
                 text-align: center;
@@ -481,7 +491,7 @@ $t4-main-color: #060D1C;
                         margin-top: 0;
 
                         .tf-review-items {
-                            display: none;
+                            color: #FFC700;
                         }
 
                         .tf-avarage-review {
@@ -683,17 +693,23 @@ $t4-main-color: #060D1C;
                     border-radius: 4px;
                 }
 
-                .tf-archive-hotel-discount {
+                .tf-tag-items{
                     position: absolute;
                     top: 16px;
                     left: 16px;
-                    color: $t4-orange-1000;
-                    font-size: 12px;
-                    font-weight: 700;
-                    line-height: 14px;
-                    padding: 8px 16px;
-                    border-radius: 32px;
-                    background-color: $t4-orange-100;
+                    @include flexbox();
+                    @include flex-direction(column);
+                    gap: 8px;
+
+                    .tf-tag-item {    
+                        color: $t4-orange-1000;
+                        font-size: 12px;
+                        font-weight: 700;
+                        line-height: 14px;
+                        padding: 8px 16px;
+                        border-radius: 32px;
+                        background-color: $t4-orange-100;
+                    }
                 }
             }
 
@@ -702,6 +718,7 @@ $t4-main-color: #060D1C;
                 @include flexbox();
                 @include justify-content(space-between);
                 padding: 16px;
+                gap: 16px;
 
                 @media #{$max575} {
                     width: 100%;
@@ -712,7 +729,7 @@ $t4-main-color: #060D1C;
                     @include flexbox();
                     @include flex-direction(column);
                     gap: 8px;
-                    width: calc(100% - 130px);
+                    width: calc(100% - 146px);
 
                     @media #{$max575} {
                         width: 100%;
@@ -731,9 +748,9 @@ $t4-main-color: #060D1C;
                     }
 
                     .tf-section-title {
-                        font-size: 16px;
+                        font-size: 20px;
                         font-weight: 500;
-                        line-height: 20px;
+                        line-height: 24px;
                         margin-bottom: 0;
                         text-transform: capitalize;
 
@@ -744,13 +761,6 @@ $t4-main-color: #060D1C;
                             &:hover {
                                 color: $t4-primary;
                             }
-                        }
-                        
-                        .tf-edit-link{
-                            font-size: 14px;
-                            color: $t4-primary;
-                            text-decoration: underline;
-                            margin-left: 6px;
                         }
 
                         @media #{$max575} {
@@ -879,6 +889,12 @@ $t4-main-color: #060D1C;
                     min-width: 100%;
                     max-width: 100%;
                     height: 165px;
+
+                    .tf-tag-items{
+                        width: calc(100% - 32px);
+                        @include flex-direction(row);
+                        @include justify-content(space-between);
+                    }
                 }
 
                 .tf-archive-hotel-content {
@@ -1117,7 +1133,7 @@ $t4-main-color: #060D1C;
                                 color: #686E7A;
                                 font-size: 14px;
                                 font-weight: 500;
-                                line-height: 150%;
+                                line-height: 1.5;
                                 letter-spacing: 0.15px;
 
                                 input {

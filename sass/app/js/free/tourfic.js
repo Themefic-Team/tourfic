@@ -2480,7 +2480,10 @@
                 var marker = new MarkerWithLabel({
                     position: new google.maps.LatLng(location['lat'], location['lng']),
                     map: hotelMap,
-                    icon: document.getElementById('map-marker').dataset.marker,
+                    icon: {
+                        url: document.getElementById('map-marker').dataset.marker,
+                        scaledSize: new google.maps.Size(tf_params.map_marker_width, tf_params.map_marker_height),
+                    },
                     labelContent: '<div class="tf_price_inner" data-post-id="' + location['id'] + '">' + window.atob(location['price']) + '</div>',
                     labelAnchor: new google.maps.Point(0, 0),
                     labelClass: "tf_map_price",

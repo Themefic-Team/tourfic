@@ -43,7 +43,7 @@
 
             // Executes when some one click in the search form location
             inp.addEventListener("focus", function () {
-                if (this.value == '' || !this.value) {
+                // if (this.value == '' || !this.value) {
                     // alert("Working....")
                     let a = document.createElement("DIV");
                     a.setAttribute("id", this.id + "autocomplete-list");
@@ -60,7 +60,7 @@
                         });
                         a.appendChild(b);
                     }
-                }
+                // }
             })
 
             var currentFocus;
@@ -357,6 +357,39 @@
             }
         }
 
+        const protectionValidation = (protections) => {
+
+            var attrCount = 0;
+            var response = [];
+
+            $(protections).each(function() {
+                attrCount += Array.from(this.attributes).filter( function(a) {
+                    return a.nodeName.startsWith('data-required');
+                }).length
+            })
+            
+            protections.each(function (i, protection) {
+
+                if ( $(protection).data("required") ) {
+                    
+                    if (! $(protection).is(':checked')) {
+                        response.push(true);
+                    } else {
+                       response.push(false);
+                    }
+                }
+            });
+
+            if( response.includes(true) ){
+                if( attrCount > 1 ){
+                    notyf.error('( * ) fields are required');
+                } else {
+                    notyf.error('( * ) field is required');
+                }
+                return true;
+            }
+        };
+
         $(document).on('click', '.tf-car-booking-form .booking-process', function (e) {
             let $this = $(this);
             
@@ -425,6 +458,15 @@
             var protection = $('input[name="protections[]"]:checked').map(function() {
                 return $(this).val();  // Get the value of each checked checkbox
             }).get();
+
+            let protections = $('input[name="protections[]"]');
+
+            
+            let validationProtections = protectionValidation(protections);
+
+            if( validationProtections ){
+                return;
+            }
 
             let partial_payment = $('#tf_partial_payment').val();
 
@@ -679,6 +721,15 @@
             var protection = $('input[name="protections[]"]:checked').map(function() {
                 return $(this).val();  // Get the value of each checked checkbox
             }).get();
+
+            let protections = $('input[name="protections[]"]');
+
+            
+            let validationProtections = protectionValidation(protections);
+
+            if( validationProtections ){
+                return;
+            }
 
             var data = {
                 action: 'tf_car_booking',

@@ -696,12 +696,12 @@ function tf_car_booking_pupup_callback() {
 								<div class="tf-protection-select">
 									<input id="tf_single_protection_price" type="hidden" value="<?php echo !empty($protection['price']) ? esc_attr($protection['price'] * $total_days) : 0; ?> ">
 									<label>
-										<input type="checkbox" class="protection-checkbox" name="protections[]" value="<?php echo esc_attr($pkey); ?>">
+										<input type="checkbox" class="protection-checkbox" name="protections[]" value="<?php echo esc_attr($pkey); ?>" <?php echo !empty($protection["protection_required"]) ? 'data-required=1' : '' ?>>
 										<span class="checkmark"></span>
 									</label>
 								</div>
 								<div class="tf-single-protection-title tf-flex">
-								<?php echo !empty($protection['title']) ? esc_html($protection['title']) : ''; ?> (<?php esc_html_e("Per "); ?><?php echo esc_html($protection['price_by']); ?>)
+								<?php echo !empty($protection['title']) ? esc_html($protection['title']) : ''; ?> (<?php esc_html_e("Per "); ?><?php echo esc_html($protection['price_by']); ?>) <?php echo !empty($protection["protection_required"]) ? esc_html('*') : ''; ?> 
 								<?php if(!empty($protection['content'])){ ?>
 								<div class="tf-info-tooltip">
 									<i class="ri-information-line"></i>

@@ -1102,7 +1102,7 @@ class Helper {
                             </defs>
                         </svg>
                     </div>
-                    <label for="tf-search-location" class="tf-search-field-content">
+                    <label for="<?php echo esc_attr( $place_input_id ) ?? ''; ?>" class="tf-search-field-content">
                         <span class="tf-search-field-label"><?php echo $post_type == 'tf_hotel' || $post_type == 'tf_apartment' ? esc_html__( 'Location', 'tourfic' ) : esc_html__( 'Destination', 'tourfic' ); ?></span>
 
                         <input type="text" id="<?php echo esc_attr( $place_input_id ) ?? ''; ?>" <?php echo $hotel_location_field_required == 1 ? 'required=""' : '' ?> class="tf-search-input" placeholder="<?php echo $post_type == 'tf_hotel' || $post_type == 'tf_apartment' ? esc_html__( 'Enter Location', 'tourfic' ) : esc_html__( 'Where are you going?', 'tourfic' ); ?>" value="<?php echo ! empty( $place_title ) ? esc_attr( $place_title ) : ''; ?>">
@@ -1152,10 +1152,10 @@ class Helper {
                                           fill="#6E655E"/>
                                 </svg>
                             </div>
-                            <div class="tf-search-field-content">
+                            <label class="tf-search-field-content" for="check-in-out-date">
                                 <span class="tf-search-field-label"><?php esc_html_e( "Select Date", "tourfic" ); ?></span>
                                 <input type="text" class="tf-search-input" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . esc_attr($check_in_out) . '"' : '' ?>>
-                            </div>
+                            </label>
                         </div>
                     </div>
 				<?php } ?>
@@ -2371,7 +2371,7 @@ class Helper {
                             </defs>
                         </svg>
                     </div>
-                    <label for="tf-location" class="tf-search-field-content">
+                    <label for="<?php echo esc_attr($place); ?>" class="tf-search-field-content">
                         <span class="tf-search-field-label"><?php echo $post_type == 'tf_hotel' || $post_type == 'tf_apartment' ? esc_html__( 'Location', 'tourfic' ) : esc_html__( 'Destination', 'tourfic' ); ?></span>
 
                         <input type="text" required="" id="<?php echo esc_attr($place); ?>" class="tf-search-input" placeholder="<?php echo $post_type == 'tf_hotel' || $post_type == 'tf_apartment' ? esc_html__( 'Enter Location', 'tourfic' ) : esc_html__( 'Where are you going?', 'tourfic' ); ?>" value="<?php echo ! empty( $taxonomy_name ) ? esc_attr($taxonomy_name) : ''; ?>">
@@ -2421,10 +2421,10 @@ class Helper {
                                           fill="#6E655E"/>
                                 </svg>
                             </div>
-                            <div class="tf-search-field-content">
+                            <label class="tf-search-field-content" for="check-in-out-date">
                                 <span class="tf-search-field-label"><?php esc_html_e( "Select Date", "tourfic" ); ?></span>
                                 <input type="text" class="tf-search-input" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . esc_attr($check_in_out) . '"' : '' ?>>
-                            </div>
+                            </label>
                         </div>
                     </div>
 				<?php } ?>
@@ -3049,19 +3049,5 @@ class Helper {
 		echo '<pre>';
 		var_dump( $var );
 		echo '</pre>';
-	}
-
-    /*
-     * Post edit link
-     * @author Foysal
-     */
-	static function edit_link( $post_id ) {
-		if ( current_user_can( 'administrator' ) && current_user_can( 'manage_options' ) ) {
-			$edit_link = get_edit_post_link( $post_id );
-
-			if ( $edit_link ) {
-				return '<a href="' . esc_url( $edit_link ) . '" target="_blank" class="tf-edit-link">' . esc_html__( 'Edit', 'tourfic' ) . '</a>';
-			}
-		}
 	}
 }

@@ -842,6 +842,12 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 							'type'  => 'number',
 							'label' => __( 'Plan Price', 'tourfic' ),
 						),
+						array(
+							'id'    => 'protection_required',
+							'type'  => 'switch',
+							'label' => __( 'Required protection?', 'tourfic' ),
+							'default' => 0
+						),
 					),
 				),
 				array(
