@@ -1,3 +1,7 @@
+@import '../../../../common/variable';
+@import '../../../../common/mixin';
+
+// Single Module Load Start
 @import './modules/single/_rooms';
 @import './modules/single/_nearby-place';
 @import './modules/single/_features';
@@ -6,6 +10,7 @@
 @import './modules/single/_review';
 @import './modules/single/_map';
 @import './modules/single/_popup';
+// Single Module Load End
 
 /**************** TITLE ****************/
 .tf-map-link a.more-hotel {
