@@ -6,7 +6,6 @@
 @import 'modules/single/_map';
 @import 'modules/single/_inc-exc';
 @import 'modules/single/_itinerary';
-@import 'modules/single/_faq';
 @import 'modules/single/_related-items';
 @import 'modules/single/_trip-info';
 @import 'modules/single/_footer-booking';
@@ -56,7 +55,7 @@
             margin: 0;
             a{
                 text-decoration: none;
-                color: #222;
+                color: $color-primary;
             }
         }   
     }
@@ -193,16 +192,16 @@ div#tf-contact-info {
         border-radius: 2px;
     }
     .btn-styled {
-        border: 1px solid #fb5a3b;
-        background: #fb5a3b;
+        border: 1px solid $color-primary;
+        background: $color-primary;
         width: 180px;
     }
 }
 .tf-tour-booking-wrap.tf-tours-fixed {
     width: 100%;
     z-index: 9999;
-    background-color: #003162eb;
-    border-top: 4px solid #FB5A3B;
+    background-color: $color-primary;
+    border-top: 4px solid $color-primary;
     padding: 8px 0;
     .tf_acrselection-wrap {
         position: absolute;
@@ -228,7 +227,7 @@ div#tf-contact-info {
         font-weight: 400;
         font-size: 16px;
         line-height: 1;
-        color: #9696A0;
+        color: $color-text;
         display: flex;
         align-items: center;
         margin: 0;
@@ -238,7 +237,7 @@ div#tf-contact-info {
             font-weight: 600;
             font-size: 24px;
             line-height: 1;
-            color: #003162;
+            color: $color-primary;
             margin: 0 8px 0 0;
         }
     }
@@ -248,11 +247,11 @@ div#tf-contact-info {
         line-height: 1;
         font-size: 14px;
         font-weight: 600;
-        color: #5A5B6A;
+        color: $color-text;
         flex-direction: row;
         justify-content: space-evenly;
         margin: 10px 0 0 0;
-        border: 1px solid #D8E6FF;
+        border: 1px solid $color-border;
         box-sizing: border-box;
         border-radius: 4px;
         cursor: pointer;
@@ -268,19 +267,19 @@ div#tf-contact-info {
             align-items: center;
             transition: 0.3s;
             &:hover {
-                color: #003162;
-                background-color: #D8E6FF;
+                color: $color-primary;
+                background-color: $color-light-bg;
             }
             &:nth-child(2) {
-                border-left: 1px solid #D8E6FF;
+                border-left: 1px solid $color-light-bg;
             }
             &:nth-child(3) {
-                border-left: 1px solid #D8E6FF;
+                border-left: 1px solid $color-light-bg;
             }
         }
         li.active {
-            color: #003162;
-            background: #D8E6FF;
+            color: $color-primary;
+            background: $color-light-bg;
         }
     }
 }
@@ -291,15 +290,15 @@ div#tf-contact-info {
 }
 .tf-single-square-block {
     width: 100%;
-    background: #FAFCFE;
+    background: $color-white;
     box-shadow: 0px 8px 16px rgba(90, 91, 106, 0.08);
     border-radius: 4px;
-    color: #003162;
-    border: 1px solid #F5F8FF;
+    color: $color-primary;
+    border: 1px solid $color-white;
     padding: 50px 20px;
     min-height: 100px;
     h4 {
-        color: #003162;
+        color: $color-heading;
     }
     img {
         display: block;
@@ -377,7 +376,7 @@ div#tf-contact-info {
         font-size: 13px;
     }
     i {
-        color: #549501;
+        color: $color-success;
     }
     .single-feature-box {
         display: flex;
@@ -451,13 +450,6 @@ div#tf-contact-info {
     color: $color-white;
     -webkit-backdrop-filter: blur(3px);
     backdrop-filter: blur(3px);
-    ul {
-        li {
-            &:before {
-                //background: url(../images/check.png);
-            }
-        }
-    }
 }
 .tf-exclude-section {
     background: $color-heading;
@@ -467,13 +459,6 @@ div#tf-contact-info {
     color: $color-white;
     -webkit-backdrop-filter: blur(3px);
     backdrop-filter: blur(3px);
-    ul {
-        li {
-            &:before {
-                //background: url(../images/x.png);
-            }
-        }
-    }
 }
 .tf-include-section.custom-inc-icon {
     ul {
@@ -524,7 +509,7 @@ div#tf-contact-info {
         background-color: $color-white;
         display: none;
         padding: 20px 30px;
-        color: #333333;
+        color: $color-text;
         margin-top: -2px;
         z-index: 999;
         position: relative;
@@ -533,7 +518,7 @@ div#tf-contact-info {
     }
 }
 .tf-travel-time {
-    background: #002C66;
+    background: $color-primary;
     border-radius: 4px 0px 0px 4px;
     width: 130px;
     height: 80px;
@@ -544,7 +529,7 @@ div#tf-contact-info {
     padding: 10px;
     span {
         font-size: 18px;
-        color: #FAFCFE;
+        color: $color-white;
     }
 }
 .tf-travel-itinerary-item {
@@ -555,12 +540,12 @@ div#tf-contact-info {
 .tf-accordion-head {
     h4 {
         font-size: 18px;
-        color: #3A3A44;
+        color: $color-heading;
         padding-left: 25px;
         width: 100%;
         margin-bottom: 0;
         &:hover {
-            color: #003162;
+            color: $color-primary;
         }
     }
 }
@@ -623,15 +608,15 @@ div#tf-contact-info {
             top: calc(50% - 25px);
             width: 50px;
             height: 50px;
-            background: #FAFCFE;
+            background: $color-white;
             box-shadow: 0px 5px 10px rgba(0, 44, 102, 0.2);
             border-radius: 4px;
             transform: matrix(1, 0, 0, -1, 0, 0);
-            color: #002C66;
+            color: $color-primary;
             font-size: 20px;
             transition: 0.3s;
             &:hover {
-                background: #002C66;
+                background: $color-primary;
                 color: $color-white;
             }
         }
@@ -653,7 +638,7 @@ div#tf-contact-info {
 }
 .tf-suggestion-rating {
     i {
-        color: #FFCD3D;
+        color: $color-primary;
     }
     display: flex;
     justify-content: space-between;
@@ -662,7 +647,7 @@ div#tf-contact-info {
 }
 
 .itn-gm-m {
-    background-color: #002C66 !important;
+    background-color: $color-primary !important;
 }
 
 .gm-style {
@@ -744,7 +729,7 @@ div#tf-contact-info {
 
                 .itinerary-map-popup-time-wrap {
                     padding: 8px 16px;
-                    background: #F3F4F6;
+                    background: $color-white;
                     width: 70px;
                     height: auto;
                     border-radius: 32px;
@@ -752,7 +737,7 @@ div#tf-contact-info {
                     margin-bottom: 4px;
 
                     .itinerary-map-popup-time {
-                        color: #454954;
+                        color: $color-text;
                         font-size: 12px;
                         font-style: normal;
                         font-weight: 700;
@@ -760,7 +745,7 @@ div#tf-contact-info {
                     }
 
                     .itinerary-map-popup-title {
-                        color: #818797;
+                        color: $color-heading;
                         font-size: 12px;
                         font-style: normal;
                         font-weight: 400;
@@ -769,7 +754,7 @@ div#tf-contact-info {
                 }
 
                 .itinerary-map-popup-desc {
-                    color: #818797;
+                    color: $color-text;
                     font-size: 12px;
                     font-style: normal;
                     font-weight: 400;
@@ -784,10 +769,10 @@ div#tf-contact-info {
 
                     .itinerary-map-popup-option {
                         padding: 4px 8px;
-                        border: 1px solid #F3F4F6;
+                        border: 1px solid $color-border;
                         border-radius: 32px;
                         font-weight: 400;
-                        color: #818797;
+                        color: $color-text;
 
                         .map-popup-option-icon {
                             margin-right: 4px;
@@ -806,7 +791,7 @@ div#tf-contact-info {
     button[title~=Close] {
        top: 8px !important;
        right: 8px !important;
-       background-color: #F3F4F6 !important;
+       background-color: $color-white !important;
        opacity: 1 !important;
        border-radius: 6px;
        height: 24px !important;
@@ -820,7 +805,7 @@ div#tf-contact-info {
     
     button:hover {
         border-radius: 24px;
-        border: 1px solid #8F94A3 !important;
+        border: 1px solid $color-gray !important;
        
     }
 
@@ -884,14 +869,14 @@ div#tf-contact-info {
         @media #{$max767}{
             width: 100%;
         }
-        background-color: #FCFDFF;
+        background-color: $color-light-bg;
         border-radius: 24px;
         position: relative;
         img{
             width: 320px;
         }
         h2{
-            color: #333D46;
+            color: $color-heading;
             font-family: inherit;
             font-size: 48px;
             font-style: normal;
@@ -913,15 +898,15 @@ div#tf-contact-info {
         @media #{$max767}{
             width: 100%;
         }
-        background-color: #FCFDFF;
+        background-color: $color-light-bg;
         border-radius: 24px;
         text-align: left;
 
         .tf-booking-tabs{
             padding: 24px;
-            border-bottom: 0.3px solid #CCCED1;
+            border-bottom: 0.3px solid $color-gray;
             border-radius: 24px;
-            background: #FCFDFF;
+            background: $color-light-bg;
             display: flex;
             justify-content: space-between;
             margin-bottom: 24px;
@@ -931,7 +916,7 @@ div#tf-contact-info {
                     padding: 0;
                     list-style: none;
                     border-radius: 8px;
-                    background: #C8D6E4;
+                    background: $color-light-bg;
                     display: flex;
                     @media #{$max767}{
                         display: inline-block;
@@ -941,38 +926,38 @@ div#tf-contact-info {
                         display: inline-block;
                         padding: 16px 32px;
                         cursor: pointer;
-                        color: #96AFCA;
+                        color: $color-text;
                         @media #{$max767}{
                             padding: 8px;
                             border-radius: 16px;
-                            border: 1px solid #CCCED1;
+                            border: 1px solid $color-gray;
                             font-size: 13px;
                             margin: 5px 0px;
                         }
                     }
                     li.done{
-                        background-color: #96AFCA; 
-                        color: #FCFDFF;
+                        background-color: $color-primary; 
+                        color: $color-white;
                         &:first-child{
                             border-radius: 8px 0px 0px 8px;
                             @media #{$max767}{
                                 border-radius: 16px !important;
-                                border: 1px solid #003C7A;
+                                border: 1px solid $color-primary;
                                 background-color: transparent;
-                                color: #003C7A;
+                                color: $color-primary;
                             }
                         }
                     }
                     li.active{
                         position: relative;
-                        background-color: #96AFCA;
+                        background-color: $color-light-bg;
                         color: #FCFDFF;
                         padding-right: 50px;
                         @media #{$max767}{
                             padding-right: 8px !important;
-                            border: 1px solid #003C7A;
+                            border: 1px solid $color-primary;
                             background-color: transparent;
-                            color: #003C7A;
+                            color: $color-primary;
                         }
                         &:first-child{
                             border-radius: 8px 0px 0px 8px;
@@ -985,7 +970,7 @@ div#tf-contact-info {
                             position: absolute;
                             height: 40px;
                             width: 40px;
-                            background: #96afca;
+                            background: $color-light-bg;
                             top: 50%;
                             right: -20px;
                             transform: rotate(45deg);
@@ -1002,9 +987,9 @@ div#tf-contact-info {
                             }
                             @media #{$max767}{
                                 border-radius: 16px !important;
-                                border: 1px solid #003C7A;
+                                border: 1px solid $color-primary;
                                 background-color: transparent;
-                                color: #003C7A;
+                                color: $color-primary;
                             }
                         }
                     }
@@ -1040,7 +1025,7 @@ div#tf-contact-info {
                     width: calc(100% - 0px);
                 }
                 p{
-                    color: #666D74;
+                    color: $color-text;
                     font-family: inherit;
                     font-size: 16px !important;
                     font-style: normal !important;
@@ -1054,7 +1039,7 @@ div#tf-contact-info {
                     height: 230px;
                     overflow-y: auto;
                     scrollbar-width: thin;
-                    scrollbar-color: #aaa #eee;
+                    scrollbar-color: $color-gray $color-light-bg;
                     margin-bottom: 20px;
                     padding-right: 10px;
                     @media #{$max767}{
@@ -1065,7 +1050,7 @@ div#tf-contact-info {
                         width: 5px; 
                     }
                     scrollbar-thumb {
-                        background-color: #aaa;
+                        background-color: $color-gray;
                         border-radius: 4px;
                     }
                     .tf-single-tour-extra{
@@ -1086,18 +1071,16 @@ div#tf-contact-info {
                                     position: absolute;
                                     top: 0px;
                                     left: 0px;
-                                    // height: 16px;
-                                    // width: 16px;
-                                    background-color: #FCFDFF;
+                                    background-color: $color-light-bg;
                                     border-radius: 5px;
-                                    border: 1px solid #666D74;
+                                    border: 1px solid $color-gray;
                                     cursor: pointer;
                                     &::after{
                                         left: 4px;
                                         top: 1px;
                                         width: 3px;
                                         height: 7px;
-                                        border: solid #003C7A;
+                                        border: solid $color-primary;
                                         border-width: 0 3px 3px 0;
                                         box-sizing: unset;
                                         -webkit-transform: rotate(45deg);
@@ -1108,7 +1091,7 @@ div#tf-contact-info {
                                 
                             
                                 input:checked~.checkmark {
-                                    border: 1px solid #003C7A;
+                                    border: 1px solid $color-primary;
                                 }
                             
                                 .checkmark:after {
@@ -1124,7 +1107,7 @@ div#tf-contact-info {
                             .tf-extra-content{
                                 padding-left: 5px;
                                 h5{
-                                    color: #666D74;
+                                    color: $color-heading;
                                     font-family: inherit;
                                     font-size: 16px !important;
                                     font-style: normal;
@@ -1136,7 +1119,7 @@ div#tf-contact-info {
                                     }
                                 }
                                 p{
-                                    color:  #666D74;                                
+                                    color:  $color-text;                                
                                     font-family: inherit;
                                     font-size: 16px !important;
                                     font-style: normal !important;
@@ -1174,13 +1157,13 @@ div#tf-contact-info {
                                 padding: 10px;
                                 user-select: none;
                                 height: auto;
-                                border: 1.2px solid #003162;
+                                border: 1.2px solid $color-primary;
                                 margin: 0px 0px;
                                 text-align: center;
                                 cursor: pointer;
                                 border-radius: 5px;
                                 background: $color-white;
-                                color: #003162;
+                                color: $color-primary;
                                 display: inline-flex;
                                 align-items: center;
                                 justify-content: center;
@@ -1198,7 +1181,7 @@ div#tf-contact-info {
                                 text-align: center;
                                 font-size: 16px;
                                 font-weight: 600;
-                                color: #686e7a !important;
+                                color: $color-text !important;
                             }
 
                             input::-webkit-outer-spin-button,
@@ -1211,7 +1194,7 @@ div#tf-contact-info {
                     .tf-single-tour-traveller{
                         padding-bottom: 16px;
                         h4{
-                            color: #333D46;
+                            color: $color-heading;
                             font-family: inherit;
                             font-size: 16px !important;
                             font-style: normal !important;
@@ -1228,20 +1211,18 @@ div#tf-contact-info {
                             .traveller-single-info{
                                 width: 100%;
                                 label{
-                                    color: #A4A4A4;
+                                    color: $color-text;
                                     font-family: inherit;
                                     font-size: 14px;
-                                    font-style: normal;
                                     font-weight: 500;
-                                    line-height: 20px; /* 142.857% */
                                 }
                                 input[type="text"],
                                 input[type="email"],
                                 input[type="date"],
                                 select{
                                     border-radius: 4px;
-                                    border: 0.5px solid #666D74;
-                                    background: #FCFDFF;
+                                    border: 0.5px solid $color-gray;
+                                    background: $color-light-bg;
                                     box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
                                     height: 32px;
                                     width: 100%;
@@ -1255,7 +1236,7 @@ div#tf-contact-info {
                                     margin: 0;
                                 }
                                 .error-text.error-visible {
-                                    color: red;
+                                    color: $color-danger;
                                     font-size: 13px;
                                 }
                             }
@@ -1280,7 +1261,7 @@ div#tf-contact-info {
                 }
                 .tf-booking-fixed-summery{
                     h5{
-                        color: #666D74;
+                        color: $color-heading;
                         font-family: inherit;
                         font-size: 16px !important;
                         font-style: normal !important;
@@ -1289,7 +1270,7 @@ div#tf-contact-info {
                         margin-bottom: 16px;
                     }
                     h4{
-                        color: #333D46;
+                        color: $color-heading;
                         font-family: inherit;
                         font-size: 20px !important;
                         font-style: normal !important;
@@ -1303,7 +1284,7 @@ div#tf-contact-info {
                     max-height: 230px;
                     overflow-y: auto;
                     scrollbar-width: thin;
-                    scrollbar-color: #aaa #eee;
+                    scrollbar-color: $color-gray $color-light-bg;
                     @media #{$max767}{
                         padding-right: 0px;
                         height: auto;
@@ -1312,11 +1293,11 @@ div#tf-contact-info {
                         width: 5px; 
                     }
                     scrollbar-thumb {
-                        background-color: #aaa;
+                        background-color: $color-gray;
                         border-radius: 4px;
                     }
                     h6{
-                        color: #666D74;
+                        color: $color-heading;
                         font-family: inherit;
                         font-size: 16px !important;
                         font-style: normal !important;
@@ -1329,10 +1310,9 @@ div#tf-contact-info {
                         thead{
                             tr{
                                 th{
-                                    color: #666D74;
+                                    color: $color-text;
                                     font-family: inherit;
                                     font-size: 14px;
-                                    font-style: normal;
                                     font-weight: 600;
                                     line-height: 28px;
                                     border: 0px solid;
@@ -1343,10 +1323,9 @@ div#tf-contact-info {
                         tbody{
                             tr{
                                 td{
-                                    color: #666D74;
+                                    color: $color-text;
                                     font-family: inherit;
                                     font-size: 14px;
-                                    font-style: normal;
                                     font-weight: 400;
                                     line-height: 26px;
                                     border: 0px solid;
@@ -1357,16 +1336,14 @@ div#tf-contact-info {
                         tfoot{
                             tr{
                                 th{
-                                    color: #333D46;
+                                    color: $color-text;
                                     font-family: inherit;
                                     font-size: 16px;
-                                    font-style: normal;
                                     font-weight: 700;
-                                    line-height: 20px; /* 125% */
                                     padding-top: 15px;
                                     margin-top: 15px;
                                     border: 0px solid;
-                                    border-top: .3px solid #CCCED1;
+                                    border-top: .3px solid $color-border;
                                     padding-left: 0px;
                                     padding-right: 0px;
                                 }
@@ -1391,7 +1368,7 @@ div#tf-contact-info {
                 h4{
                     margin: 0;
                     display: inline-block;
-                    color: #333D46;
+                    color: $color-heading;
                     font-family: inherit;
                     font-size: 16px !important;
                     font-style: normal !important;
@@ -1413,14 +1390,14 @@ div#tf-contact-info {
                         .tf-tooltip {
                             padding: 10px 10px;
                             color: $color-white;
-                            background-color: #333333;
+                            background-color: $color-gray;
                             font-weight: normal;
                             font-size: 13px;
                             border-radius: 4px;
                             position: absolute;
                             z-index: 99999999;
                             box-sizing: border-box;
-                            border: 1px solid #333333;
+                            border: 1px solid $color-gray;
                             box-shadow: 0 1px 8px transparent;
                             visibility: hidden;
                             transition: .3s all ease;
@@ -1448,7 +1425,7 @@ div#tf-contact-info {
                     content: "";
                     height: 12px;
                     width: 12px;
-                    background-color: #333333;
+                    background-color: $color-gray;
                     position: absolute;
                     top: 95%;
                     left: 50%;
@@ -1472,7 +1449,7 @@ div#tf-contact-info {
                         left: 0;
                         right: 0;
                         bottom: 0;
-                        background-color: #ccc;
+                        background-color: $color-gray;
                         transition: .4s;
                         &::before{
                             position: absolute;
@@ -1495,7 +1472,7 @@ div#tf-contact-info {
                 }
             }
             .tf-diposit-switcher input:checked + .switcher {
-                background-color: #002C66;
+                background-color: $color-primary;
             }
             
             .tf-diposit-switcher input:checked + .switcher::before {
@@ -1512,10 +1489,9 @@ div#tf-contact-info {
                     display: inline-block;
                 }
                 a.tf-back-control{
-                    color: #003C7A;
+                    color: $color-primary;
                     font-family: inherit;
                     font-size: 14px;
-                    font-style: normal;
                     font-weight: 700;
                     line-height: 20px;
                     margin-right: 24px;
@@ -1525,13 +1501,12 @@ div#tf-contact-info {
                 }
                 .tf-next-control{
                     border-radius: 4px;
-                    background: #003C7A;
+                    background: $color-primary;
                     box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
                     padding: 10px 0px;
-                    color: #FCFDFF;
+                    color: $color-white;
                     font-family: inherit;
                     font-size: 16px;
-                    font-style: normal;
                     font-weight: 500;
                     line-height: 20px;
                     width: 300px;
@@ -1542,13 +1517,12 @@ div#tf-contact-info {
                 }
                 button{
                     border-radius: 4px;
-                    background: #003C7A;
+                    background: $color-primary;
                     box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
                     padding: 10px 0px;
-                    color: #FCFDFF;
+                    color: $color-white;
                     font-family: inherit;
                     font-size: 16px;
-                    font-style: normal;
                     font-weight: 500;
                     line-height: 20px;
                     width: 300px;
@@ -1911,9 +1885,6 @@ body{
             grid-template-columns: repeat(auto-fit, 45%);
         } 
         
-        // @media #{$max1199} {
-        //     grid-template-columns: repeat(auto-fit, 45%);
-        // }
     }
     .repeat-dates {
         .repeat-date-list {
@@ -2045,11 +2016,11 @@ body{
         box-shadow: 0px 0px 24px 5px #E0E8EE;
     }
     .tf-booking-price{
-        border-bottom: 1px solid #EBF0F4;
+        border-bottom: 1px solid $color-border;
         p{
             font-size: $font-size-large !important;
             font-weight: $font-weight-medium !important;
-            color: $color-heading;
+            color: $color-text;
             span{
                 font-size: $font-size-small;
                 font-weight: $font-weight-normal;
@@ -2058,13 +2029,13 @@ body{
     }
     .tf-form-title{
         p{
-            color: $color-heading;
+            color: $color-text;
         }
     }
     .tf-form-title.tf-tour-extra{
         p{
             cursor: pointer;
-            background-color: #F3F7FA;
+            background-color: $color-light-bg;
             padding: 10px;
             border-radius: 5px;
             display: flex;
@@ -2090,7 +2061,7 @@ body{
         display: none;
         .tf-tour-extra {
             padding: 16px 24px;
-            border: 1px solid #EBF0F4;
+            border: 1px solid $color-border;
             border-radius: $tf-brds-default;
             .tf-tour-extra-price{
                 align-items: inherit;
@@ -2142,7 +2113,7 @@ body{
                 height: 38px;
                 width: 38px;
                 background: $color-white;
-                border: 1px solid #ECF0F3;
+                border: 1px solid $color-border;
                 box-shadow: 0px 9px 24px rgba(224, 235, 243, 0.75);
                 border-radius: $tf-brds-default;
                 display: flex;

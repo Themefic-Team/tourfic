@@ -118,20 +118,14 @@
                         li{
                             color: $color-text;
                             font-size: 16px;
-                            font-style: normal;
-                            font-weight: 400;
-                            line-height: 130%; /* 20.8px */
                             i{
                                 margin-right: 8px;
                                 width: 22px;
                                 font-size: 20px;
                             }
                             a{
-                                color: $color-text;
+                                color: $color-primary;
                                 font-size: 16px;
-                                font-style: normal;
-                                font-weight: 400;
-                                line-height: 130%; /* 20.8px */
                                 text-decoration: none;
                                 i{
                                     margin-right: 8px;
@@ -164,7 +158,6 @@
             font-size: 32px !important;
             font-style: normal !important;
             font-weight: 700 !important;
-            line-height: 120%; /* 38.4px */
             margin: 0;
             @media #{$max1024}{
                 font-size: 24px !important;
@@ -261,7 +254,7 @@
         }
         .tf-single-itinerary-item{
             padding-left: 40px;
-            border-bottom: 1px solid #EBF0F4;
+            border-bottom: 1px solid $color-border;
             padding-bottom: 24px;
             padding-top: 24px;
             .tf-itinerary-title{

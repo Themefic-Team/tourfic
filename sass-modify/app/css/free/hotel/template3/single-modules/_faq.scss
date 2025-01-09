@@ -11,7 +11,7 @@
         cursor: pointer;
 
         .tf-section-title {
-            color: $t4-orange-100;
+            color: $color-heading;
             font-size: 18px;
             font-weight: 500;
             line-height: 21px;
@@ -25,7 +25,7 @@
         .tf-faq-single {
             padding-bottom: 16px;
             margin-bottom: 16px;
-            border-bottom: 1px solid $t4-orange-200;
+            border-bottom: 1px solid $color-light-bg;
 
             &:last-child{
                 padding-bottom: 0;
@@ -40,7 +40,7 @@
                 cursor: pointer;
 
                 span.title{
-                    color: $t4-orange-100;
+                    color: $color-heading;
                     font-size: 16px;
                     font-weight: 500;
                     line-height: 18px;
@@ -48,7 +48,7 @@
 
                 .faq-icon{
                     font-size: 18px;
-                    color: $t4-orange-100;
+                    color: $color-heading;
 
                     i.fa-plus{
                         display: block;
@@ -61,7 +61,7 @@
 
             .tf-faq-content{
                 display: none;
-                color: $t4-paragraph;
+                color: $color-text;
                 font-size: 14px;
                 font-weight: 400;
                 line-height: 20px;

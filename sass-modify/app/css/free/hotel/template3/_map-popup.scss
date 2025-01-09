@@ -1,13 +1,4 @@
-$t4-primary: #FF6B00;
-$t4-orange-background: #FEF9F6;
-$t4-orange-light: #FFEDE1;
-$t4-orange-100: #FBF4EF;
-$t4-orange-200: #F5E9E0;
-$t4-orange-500: #BF7540;
-$t4-yellow: #FFC700;
-$t4-paragraph: #6E655E;
-$t4-orange-100: #1A0B00;
-$t4-main-color: #060D1C;
+
 
 /* map widget */
 .tf-map-preview{
@@ -193,7 +184,7 @@ $t4-main-color: #060D1C;
                         position: absolute;
                         top: 16px;
                         left: 16px;
-                        color: $t4-main-color;
+                        color: $color-heading;
                         font-size: 12px;
                         font-weight: 700;
                         line-height: 14px;
@@ -217,11 +208,11 @@ $t4-main-color: #060D1C;
                         text-transform: capitalize;
 
                         a {
-                            color: $t4-main-color;
+                            color: $color-heading;
                             text-decoration: none;
 
                             &:hover {
-                                color: $t4-primary;
+                                color: $color-primary;
                             }
                         }
                     }
@@ -231,12 +222,12 @@ $t4-main-color: #060D1C;
                         @include align-items(flex-end);
                         gap: 2px;
                         font-size: 14px;
-                        color: $t4-paragraph;
+                        color: $color-text;
 
                         .woocommerce-Price-amount {
                             font-size: 16px;
                             font-weight: 500;
-                            color: $t4-orange-1000;
+                            color: $color-heading;
                         }
                     }
 
@@ -249,7 +240,7 @@ $t4-main-color: #060D1C;
 
                         .tf-avarage-review {
                             line-height: 20px;
-                            color: $t4-main-color;
+                            color: $color-heading;
                             font-weight: 400;
                         }
                     }
@@ -261,7 +252,7 @@ $t4-main-color: #060D1C;
                     background: $color-white;
                     border-radius: 30px;
                     text-align: center;
-                    color: $t4-paragraph;
+                    color: $color-text;
                     padding: 8px 12px;
                     font-size: 14px;
                     line-height: 14px;
@@ -287,7 +278,7 @@ $t4-main-color: #060D1C;
                 gap: 8px;
                 padding: 8px;
                 border-radius: 4px;
-                background-color: $t4-primary;
+                background-color: $color-primary;
                 color: $color-white;
                 text-decoration: none;
             }
@@ -324,7 +315,7 @@ $t4-main-color: #060D1C;
 
                 li.tf-archive-filter-btn {
                     padding: 0 16px;
-                    color: $t4-paragraph;
+                    color: $color-text;
                     font-size: 14px;
                     font-weight: 500;
                     height: 32px;
@@ -334,7 +325,7 @@ $t4-main-color: #060D1C;
                     text-align: center;
                     cursor: pointer;
                     @include transition();
-                    border: 0.5px solid $t4-orange-light;
+                    border: 0.5px solid $color-light-bg;
                     box-shadow: 0px 4px 30px 0px rgba(255, 237, 225, 0.40);
 
                     i {
@@ -343,15 +334,15 @@ $t4-main-color: #060D1C;
 
                     &:hover {
                         border-radius: 4px;
-                        background: $t4-orange-light;
+                        background: $color-light-bg;
                         box-shadow: 0px 4px 30px 0px rgba(255, 237, 225, 0.40);
                     }
 
                     &.active {
-                        background-color: $t4-orange-light;
+                        background-color: $color-light-bg;
 
                         svg path {
-                            stroke: $t4-primary;
+                            stroke: $color-primary;
                         }
                     }
                 }
@@ -382,7 +373,7 @@ $t4-main-color: #060D1C;
             }
 
             &::-webkit-scrollbar-thumb {
-                background-color: $t4-paragraph;
+                background-color: $color-text;
                 border-radius: 32px;
             }
 
@@ -394,7 +385,7 @@ $t4-main-color: #060D1C;
 
         .tf-archive-hotel {
             border-radius: 4px;
-            background-color: $t4-orange-100;
+            background-color: $color-heading;
             @include flexbox();
             @include transition();
 
@@ -403,7 +394,7 @@ $t4-main-color: #060D1C;
                 box-shadow: 0px 4px 30px 0px rgba(255, 237, 225, 0.40);
 
                 .tf-archive-hotel-content .tf-archive-hotel-content-left .tf-section-title a{
-                    color: $t4-primary;
+                    color: $color-primary;
                 }
             }
 
@@ -424,13 +415,13 @@ $t4-main-color: #060D1C;
                     position: absolute;
                     top: 16px;
                     left: 16px;
-                    color: $t4-orange-1000;
+                    color: $color-heading;
                     font-size: 12px;
                     font-weight: 700;
                     line-height: 14px;
                     padding: 8px 16px;
                     border-radius: 32px;
-                    background-color: $t4-orange-100;
+                    background-color: $color-heading;
                 }
             }
 
@@ -449,7 +440,7 @@ $t4-main-color: #060D1C;
                     .tf-title-location {
                         @include flexbox();
                         gap: 8px;
-                        color: $t4-paragraph;
+                        color: $color-text;
                         font-size: 16px;
                         line-height: 20px;
                     }
@@ -462,17 +453,17 @@ $t4-main-color: #060D1C;
                         text-transform: capitalize;
 
                         a {
-                            color: $t4-orange-1000;
+                            color: $color-heading;
                             text-decoration: none;
 
                             &:hover {
-                                color: $t4-primary;
+                                color: $color-primary;
                             }
                         }
 
                         .tf-edit-link{
                             font-size: 14px;
-                            color: $t4-primary;
+                            color: $color-primary;
                             text-decoration: underline;
                             margin-left: 6px;
                         }
@@ -488,14 +479,14 @@ $t4-main-color: #060D1C;
                         margin-top: 8px;
 
                         .tf-review-items {
-                            color: $t4-yellow;
+                            color: $color-primary;
                             @include flexbox();
                             gap: 2px;
                         }
 
                         .tf-avarage-review {
                             line-height: 20px;
-                            color: $t4-paragraph;
+                            color: $color-text;
                         }
                     }
                 }
@@ -512,29 +503,29 @@ $t4-main-color: #060D1C;
                         @include align-items(flex-end);
                         gap: 2px;
                         font-size: 14px;
-                        color: $t4-paragraph;
+                        color: $color-text;
 
                         .woocommerce-Price-amount {
                             font-size: 16px;
                             font-weight: 500;
-                            color: $t4-orange-1000;
+                            color: $color-heading;
                         }
                     }
 
                     .view-hotel {
-                        color: $t4-primary;
+                        color: $color-primary;
                         font-size: 14px;
                         font-weight: 500;
                         line-height: 20px;
                         text-decoration: none;
                         border-radius: 4px;
-                        background-color: $t4-orange-light;
+                        background-color: $color-light-bg;
                         padding: 8px 24px;
                         text-align: center;
                         @include transition();
 
                         &:hover{
-                            background-color: $t4-primary;
+                            background-color: $color-primary;
                             color: $color-white;
                         }
                     }
@@ -567,8 +558,8 @@ $t4-main-color: #060D1C;
         //margin-bottom: 24px;
 
         label input:checked ~ .checkmark{
-            background-color: $t4-primary !important;
-            border-color: $t4-primary !important;
+            background-color: $color-primary !important;
+            border-color: $color-primary !important;
         }
 
         .tf-archive-filter-sidebar {
@@ -598,7 +589,7 @@ $t4-main-color: #060D1C;
                 padding: 0;
                 font-size: 16px;
                 font-weight: 500;
-                color: $t4-main-color;
+                color: $color-heading;
                 line-height: 24px;
             }
 
@@ -606,7 +597,7 @@ $t4-main-color: #060D1C;
                 margin: 0;
                 padding: 0;
                 border: none;
-                color: $t4-primary;
+                color: $color-primary;
                 font-size: 16px;
                 font-weight: 700;
                 line-height: 28px;
@@ -647,17 +638,17 @@ $t4-main-color: #060D1C;
                 padding: 0px !important;
 
                 .al-range-slider__bar {
-                    background: $t4-primary !important;
+                    background: $color-primary !important;
                     box-shadow: none !important;
                 }
             }
 
             .al-range-slider__knob {
-                background: $t4-primary !important;
+                background: $color-primary !important;
                 height: 15px;
                 width: 15px;
                 box-shadow: none !important;
-                border: 3px solid $t4-primary !important;
+                border: 3px solid $color-primary !important;
 
                 &:first-child {
                     span {
@@ -667,7 +658,7 @@ $t4-main-color: #060D1C;
             }
 
             .al-range-slider__tooltip {
-                background: $t4-primary !important;
+                background: $color-primary !important;
                 border-radius: 5px;
                 box-shadow: none;
                 padding: 3px 10px;
@@ -695,7 +686,7 @@ $t4-main-color: #060D1C;
             }
 
             &::-webkit-scrollbar-thumb {
-                background-color: $t4-paragraph;
+                background-color: $color-text;
                 border-radius: 32px;
             }
 
@@ -718,7 +709,7 @@ $t4-main-color: #060D1C;
                     border-radius: 0px;
                     height: auto;
                     pointer-events: none;
-                    color: $t4-main-color;
+                    color: $color-heading;
                     font-size: 16px;
                     font-weight: 500;
                     line-height: 24px;
@@ -750,7 +741,7 @@ $t4-main-color: #060D1C;
                                 width: 100%;
                                 display: inline-block;
                                 padding-left: 24px;
-                                color: #686E7A;
+                                color: $color-text;
                                 font-size: 14px;
                                 font-weight: 500;
                                 line-height: 150%;
@@ -769,7 +760,7 @@ $t4-main-color: #060D1C;
                                     width: 16px;
                                     background-color: $color-white;
                                     border-radius: 4px;
-                                    border: 1px solid $t4-primary;
+                                    border: 1px solid $color-primary;
 
                                     &:after{
                                         left: 4.5px;
@@ -789,7 +780,7 @@ $t4-main-color: #060D1C;
                     a.see-more,
                     a.see-less{
                         text-align: left;
-                        color: $t4-primary !important;
+                        color: $color-primary !important;
                         text-transform: capitalize;
                         font-weight: 400;
                         text-decoration: none;
@@ -887,7 +878,7 @@ $t4-main-color: #060D1C;
 
     /* Template - Design 2 */
     .tf-available-room {
-        background: #FDF9F3;
+        background: $color-light-bg;
         display: flex;
         .tf-available-room-gallery {
             display: flex;
@@ -921,7 +912,7 @@ $t4-main-color: #060D1C;
                 left: 16px;
                 gap: 8px;
                 &>span {
-                    color: #FDF9F3;
+                    color: $color-white;
                     font-size: 12px;
                     font-style: normal;
                     font-weight: 500;
@@ -931,13 +922,13 @@ $t4-main-color: #060D1C;
                     line-height: 1;
                 }
                 span.tf-available-labels-populer {
-                    background: #F97316;
+                    background: $color-primary;
                 }
                 span.tf-available-labels-featured {
-                    background: #3B82F6;
+                    background: $color-secondary;
                 }
                 span.tf-available-labels-visited {
-                    background: #84CC16;
+                    background: $color-success;
                 }
             }
             .tf-available-ratings {
@@ -948,7 +939,7 @@ $t4-main-color: #060D1C;
         .tf-available-room-contents{
             .tf-section-title {
                 margin-bottom: 0;
-                color: #595349;
+                color: $color-heading;
                 font-size: 16px;
             }
 
@@ -975,7 +966,7 @@ $t4-main-color: #060D1C;
                 }
             }
             .tf-room-options-content-inner{
-                border-bottom: 1px solid #99948D;
+                border-bottom: 1px solid $color-gray;
                 @include flexbox();
                 justify-content: space-between;
                 padding-bottom: 24px;
@@ -1038,7 +1029,7 @@ $t4-main-color: #060D1C;
                     gap: 4px;
                     margin-bottom: 58px;
                     .tf-price {
-                        color: #595349;
+                        color: $color-heading;
                         font-weight: 400;
                         line-height: 31.20px;
                         text-align: right;
@@ -1046,7 +1037,7 @@ $t4-main-color: #060D1C;
                             font-weight: 400 !important;
                         }
                         .discount-price{
-                            color: #99948D;
+                            color: $color-text;
                             font-size: 16px;
                             font-style: normal;
                             font-weight: 400;
@@ -1076,9 +1067,9 @@ $t4-main-color: #060D1C;
                     font-size: 12px;
                 }
                 input[type=checkbox]{
-                    background: #B58E53;
-                    border-color: #B58E53;
-                    accent-color: #B58E53;
+                    background: $color-primary;
+                    border-color: $color-primary;
+                    accent-color: $color-primary;
                 }
             }
             .roomselectissue{
@@ -1087,11 +1078,11 @@ $t4-main-color: #060D1C;
             button,
             a.tf_air_service,
             a.availability {
-                color: #FDF9F3;
+                color: $color-white;
                 font-size: 16px;
                 font-weight: 700;
                 line-height: 24px;
-                background: #B58E53;
+                background: $color-primary;
                 min-width: 166px;
                 border: none;
                 padding: 12px 32px;
@@ -1101,7 +1092,7 @@ $t4-main-color: #060D1C;
                 transition: .3s all ease;
                 border-radius: 0px;
                 &:hover{
-                    background-color: #917242;
+                    background-color: $color-secondary;
                 }
             }
             a.availability {
@@ -1170,11 +1161,11 @@ $t4-main-color: #060D1C;
                         flex-direction: column;
                         align-items: end;
                         .tf-price{
-                            color: #595349;
+                            color: $color-heading;
                             font-weight: 400;
                             line-height: 31.2px;
                             .discount-price {
-                                color: #99948D;
+                                color: $color-text;
                                 font-size: 16px;
                                 font-style: normal;
                                 font-weight: 400;
@@ -1228,7 +1219,7 @@ $t4-main-color: #060D1C;
                     text-align: right;
                     .tf-price-from{
                         .amount{
-                            color: #595349;
+                            color: $color-text;
                             font-size: 24px;
                             font-style: normal;
                             font-weight: 600;
@@ -1240,11 +1231,11 @@ $t4-main-color: #060D1C;
                     padding: 12px 20px;
                 }
                 a.view-hotel{
-                    color: #FDF9F3;
+                    color: $color-white;
                     font-size: 16px;
                     font-weight: 700;
                     line-height: 24px;
-                    background: #B58E53;
+                    background: $color-primary;
                     padding: 12px 32px;
                     text-decoration: none;
                     display: inline-block;
@@ -1252,7 +1243,7 @@ $t4-main-color: #060D1C;
                     transition: .3s all ease;
                     margin-top: auto;
                     &:hover{
-                        background-color: #917242;
+                        background-color: $color-secondary;
                     }
                     @media #{$max1366}{
                         padding: 12px 32px;
@@ -1274,10 +1265,10 @@ $t4-main-color: #060D1C;
             display: inline-flex;
             margin-top: 30px;
             .page-numbers{
-                border: 0.5px solid #99948D;
-                background: #FDF9F3;
+                border: 0.5px solid $color-gray;
+                background: $color-white;
                 height: 40px;
-                color: #99948D;
+                color: $color-text;
                 font-size: 16px;
                 font-style: normal;
                 font-weight: 400;
@@ -1289,8 +1280,8 @@ $t4-main-color: #060D1C;
                 align-items: center;
             }
             .page-numbers.current{
-                background: #FAEEDC;
-                color: #595349;
+                background: $color-light-bg;
+                color: $color-text;
             }
         }
     }

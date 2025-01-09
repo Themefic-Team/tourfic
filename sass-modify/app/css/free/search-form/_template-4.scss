@@ -35,7 +35,7 @@
         min-height: 46px;
         border-radius: 32px !important;
         font-size: 20px !important;
-        font-style: normal;
+        
         font-weight: 400;
         line-height: 150% !important;
         transition: all 0.2s linear;
@@ -82,7 +82,7 @@
 
 .tf-search__form {
   padding: 72px 15px;
-  background-color: $color-secondary;
+  background-color: $color-primary;
   border-radius: 0;
   box-shadow: none;
   @media #{$max1199} {
@@ -157,7 +157,7 @@
         div {
           color: $color-text;
           font-size: 16px;
-          font-style: normal;
+          
           font-weight: 400;
           line-height: 150%;
           padding: 8px;
@@ -169,8 +169,8 @@
             margin-right: 8px;
           }
           &:hover {
-            background: #ffede1;
-            color: #060d1c;
+            background: $color-light-bg;
+            color: $color-heading;
             text-overflow: ellipsis;
             overflow: hidden;
             white-space: nowrap;
@@ -224,9 +224,9 @@
       flex: 1;
     }
     .tf_checkin_to_label {
-      color: $color-primary;
+      color: $color-white;
       font-size: 18px;
-      font-style: normal;
+      
       font-weight: 700;
       line-height: 26px;
       margin-left: 0;
@@ -343,7 +343,7 @@
   }
 
   &__divider {
-    background: $color-white;
+    background: #ffffff2e;
     width: 1px;
     height: 100px;
     &:last-child {
@@ -454,7 +454,7 @@
           }
           svg {
             &:hover {
-              fill: #3e64e0;
+              fill: $color-secondary;
             }
             @media #{$max991} {
               width: 28px;
@@ -592,7 +592,7 @@
     -moz-appearance: none;
     appearance: none;
     width: 100%;
-    background: $color-primary;
+    background: $color-secondary;
     color: $color-white !important;
     border: 0 !important;
     font-size: 16px;
@@ -610,8 +610,8 @@
   }
 
   &__submit {
-    background: #fa6400;
-    border-color: #fa6400;
+    background: $color-secondary;
+    border-color: $color-secondary;
     color: $color-white;
     border-radius: 5px;
     gap: 15px;
@@ -632,9 +632,12 @@
       min-width: 160px;
     }
     &:hover {
-      background: #f17b2d;
-      border-color: #f17b2d;
-      color: $color-white;
+      background: $color-light-bg;
+      border-color: $color-light-bg;
+      color: $color-heading;
+      path{
+        fill: $color-heading;
+      }
     }
   }
 
@@ -655,9 +658,6 @@
       label {
         color: $color-white;
         font-size: 16px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 150%;
         display: block;
         position: relative;
         padding-left: 30px;
@@ -720,7 +720,7 @@
     }
     select[name="tf-booking-form-tab-select"] {
       @media #{$max767} {
-        background: #fa6400;
+        background: $color-primary;
         color: $color-white;
         border: 0;
         border-radius: 0;

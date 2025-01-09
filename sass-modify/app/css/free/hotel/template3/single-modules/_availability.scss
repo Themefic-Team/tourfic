@@ -17,10 +17,10 @@
             left: 16px;
         }
         .tf-field {
-            border: 1px solid $t4-orange-200 !important;
+            border: 1px solid $color-border !important;
             background: $color-white !important;
             padding: 15px 16px 15px 37px !important;
-            color: $t4-paragraph !important;
+            color: $color-text !important;
             font-size: 14px !important;
             line-height: 16px;
             height: 48px;
@@ -38,7 +38,7 @@
     }
 
     .tf-date-required .tf-field{
-        border-color: $color-denger !important;
+        border-color: $color-danger !important;
     }
 
     .tf_acrselection-child{
@@ -87,7 +87,7 @@
     .tf-hotel-error-msg{
         display: none;
         margin-top: 8px;
-        color: $color-denger;
+        color: $color-danger;
     }
 
     .tf-btn{
@@ -97,10 +97,10 @@
         margin-top: 0;
         padding: 16px;
         border-radius: 6px;
-        background-color: $t4-primary !important;
+        background-color: $color-primary !important;
 
         &:hover {
-            background-color: $t4-orange-500 !important;
+            background-color: $color-secondary !important;
         }
     }
 }

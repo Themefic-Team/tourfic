@@ -426,9 +426,9 @@ ul.tf-sidebar-checkbox {
     }
 }
 .tf_booking-widget {
-    background: #FA5535;
-    background: linear-gradient(to bottom, #FD6143 0, #FA5535 100%);
-    border-color: #FA5535;
+    background:$color-secondary;
+    background: linear-gradient(to bottom, $color-secondary 0, $color-secondary 100%);
+    border-color: $color-secondary;
     padding: 20px !important;
     border-radius: 4px;
     font-size: 14px;
@@ -692,7 +692,7 @@ h3.tf-sidebar-widget_title {
     }
     .tf-form-single-rating {
         .error {
-            color: $color-denger;
+            color: $color-danger;
         }
         .ratings-container {
             line-height: 1;
@@ -820,7 +820,7 @@ h3.tf-sidebar-widget_title {
             width: 100%;
         }
         .error {
-            color: $color-denger;
+            color: $color-danger;
         }
     }
     .tf-review-submit {
@@ -1191,7 +1191,7 @@ h3.tf-sidebar-widget_title {
     }
 }
 .tf-text-red {
-    color: $color-denger !important;
+    color: $color-danger !important;
 }
 .tf-filter {
     padding: 10px 10px;

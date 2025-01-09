@@ -5,7 +5,7 @@
 
     // trip info -
     .person-info.active {
-        background: #F3F7FA;
+        background: $color-light-bg;
     }
     ul {
         padding: 0;
@@ -24,7 +24,7 @@
     } 
     // trip person info
     .person-info {
-        border: 1px solid #E3E6F0;
+        border: 1px solid $color-border;
         border-radius: $tf-brds-default;
         box-shadow: 0px 9px 12px 0px #0e132305;
         display: flex;
@@ -59,7 +59,7 @@
             text-align: left;
         }
         .tf-price-amount {
-            color: #060D1C;
+            color: $color-heading;
             font-size: 26px;
             margin: 4px 0px;
             font-weight: $font-weight-medium;

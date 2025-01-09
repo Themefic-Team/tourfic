@@ -14,22 +14,22 @@
         line-height: 64px;
         text-align: center;
         border-radius: 50%;
-        background-color: $t4-orange-200;
+        background-color: $color-light-bg;
 
         i{
             font-size: 34px;
-            color: $t4-primary;
+            color: $color-primary;
         }
     }
 
     h5{
-        color: $t4-orange-100;
+        color: $color-heading;
         font-size: 18px;
         font-weight: 500;
         line-height: 24px;
     }
     p{
-        color: $t4-paragraph;
+        color: $color-text;
         font-size: 14px;
         font-weight: 400;
         line-height: 20px;
@@ -39,7 +39,7 @@
         width: auto;
         .tf-send-inquiry-btn{
             border-radius: 4px;
-            background: $t4-primary;
+            background: $color-primary;
             padding: 16px 32px;
             color: $color-white;
             font-size: 16px;
@@ -51,7 +51,7 @@
             text-decoration: none;
 
             &:hover {
-                background-color: $t4-paragraph;
+                background-color: $color-secondary;
             }
         }
     }

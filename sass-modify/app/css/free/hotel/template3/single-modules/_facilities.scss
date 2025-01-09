@@ -15,7 +15,7 @@
             cursor: pointer;
 
             .tf-section-title {
-                color: $t4-orange-100;
+                color: $color-heading;
                 font-size: 18px;
                 font-weight: 500;
                 line-height: 21px;
@@ -30,7 +30,7 @@
                 margin-bottom: 24px;
 
                 .hotel-single-facility-title {
-                    color: $t4-orange-100;
+                    color: $color-heading;
                     font-size: 16px;
                     font-weight: 400;
                     line-height: 18px;
@@ -57,7 +57,7 @@
                         @include align-items(center);
                         flex: 0 0 calc(33.333% - 8px);
                         gap: 8px;
-                        color: $t4-paragraph;
+                        color: $color-text;
                         font-size: 14px;
                         font-weight: 400;
                         line-height: 20px;

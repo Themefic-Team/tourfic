@@ -59,8 +59,6 @@
   font-size: 32px !important;
   font-style: normal !important;
   font-weight: 700 !important;
-  line-height: 120%;
-  /* 38.4px */
   margin-bottom: 24px;
 }
 
@@ -302,10 +300,6 @@
 .tf-template-3 .tf-itinerary-wrapper .tf-itinerary-wrapper .tf-itinerary-content-details .tf-itinerary-more-offer .tf-itinerary-single-meta li {
   color: #686E7A;
   font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 130%;
-  /* 20.8px */
 }
 
 .tf-template-3 .tf-itinerary-wrapper .tf-itinerary-wrapper .tf-itinerary-content-details .tf-itinerary-more-offer .tf-itinerary-single-meta li i {
@@ -315,12 +309,8 @@
 }
 
 .tf-template-3 .tf-itinerary-wrapper .tf-itinerary-wrapper .tf-itinerary-content-details .tf-itinerary-more-offer .tf-itinerary-single-meta li a {
-  color: #686E7A;
+  color: #0E3DD8;
   font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 130%;
-  /* 20.8px */
   text-decoration: none;
 }
 
@@ -348,8 +338,6 @@
   font-size: 32px !important;
   font-style: normal !important;
   font-weight: 700 !important;
-  line-height: 120%;
-  /* 38.4px */
   margin: 0;
 }
 
@@ -462,7 +450,7 @@
 
 .tf-tour-design-1 .tf-itinerary-wrapper .tf-single-itinerary-item {
   padding-left: 40px;
-  border-bottom: 1px solid #EBF0F4;
+  border-bottom: 1px solid #f0f2f4;
   padding-bottom: 24px;
   padding-top: 24px;
 }
@@ -643,57 +631,9 @@
   color: #0E3DD8;
 }
 
-.tf-tour-design-1 .tf-faq-wrapper .tf-faq-inner .tf-faq-single {
-  border-bottom: 1px solid #D1DAE0;
-}
-
-.tf-tour-design-1 .tf-faq-wrapper .tf-faq-inner .active .tf-faq-single-inner {
-  background: #ffffff;
-  border-radius: 5px;
-  margin: 0px 0px 30px 0px;
-  box-shadow: 0px 0px 24px 5px #E0E8EE;
-}
-
-.tf-tour-design-1 .tf-faq-wrapper .tf-faq-inner .active .tf-faq-single-inner .tf-faq-collaps .faq-icon i.fa-plus {
-  display: none;
-}
-
-.tf-tour-design-1 .tf-faq-wrapper .tf-faq-inner .active .tf-faq-single-inner .tf-faq-collaps .faq-icon i.fa-minus {
-  color: #0E3DD8;
-  display: block;
-}
-
-.tf-tour-design-1 .tf-faq-wrapper .tf-faq-inner .tf-faq-single-inner .tf-faq-content {
-  display: none;
-}
-
-.tf-tour-design-1 .tf-faq-wrapper .tf-faq-single-inner .tf-faq-content {
-  padding: 0px 24px 24px 24px;
-}
-
-.tf-tour-design-1 .tf-faq-wrapper .tf-faq-single-inner .tf-faq-collaps {
-  padding: 24px;
-}
-
-.tf-tour-design-1 .tf-faq-wrapper .tf-faq-single-inner .tf-faq-collaps:hover {
-  cursor: pointer;
-}
-
-.tf-tour-design-1 .tf-faq-wrapper .tf-faq-single-inner .tf-faq-collaps .faq-icon i.fa-plus {
-  display: block;
-}
-
-.tf-tour-design-1 .tf-faq-wrapper .tf-faq-single-inner .tf-faq-collaps .faq-icon i.fa-minus {
-  display: none;
-}
-
-.tf-tour-design-1 .tf-faq-wrapper .tf-faq-single-inner h4 {
-  line-height: 1.4;
-}
-
 .tf-tour-design-1 .upcomming-tours {
   padding-top: 120px;
-  border-top: 1px solid #D0E0EC;
+  border-top: 1px solid #f0f2f4;
 }
 
 @media only screen and (min-width: 767.99px) and (max-width: 991px) {
@@ -750,7 +690,7 @@
 
 .tf-tour-design-1 .upcomming-tours .tf-meta-title h2 a {
   text-decoration: none;
-  color: #060D1C;
+  color: #0E3DD8;
 }
 
 .tf-tour-design-1 .upcomming-tours .tf-upcomming-tours-list-outter .tf-slider-item {
@@ -772,7 +712,7 @@
 }
 
 .tf-trip-info .person-info.active {
-  background: #F3F7FA;
+  background: #f8f9fb;
 }
 
 .tf-trip-info ul {
@@ -794,7 +734,7 @@
 }
 
 .tf-trip-info .person-info {
-  border: 1px solid #E3E6F0;
+  border: 1px solid #f0f2f4;
   border-radius: 5px;
   box-shadow: 0px 9px 12px 0px #0e132305;
   display: flex;
@@ -1354,7 +1294,7 @@
 
 .tf-contact-info div p a {
   text-decoration: none;
-  color: #222;
+  color: #0E3DD8;
 }
 
 div#tf-contact-info {
@@ -1501,16 +1441,16 @@ div#tf-contact-info {
 }
 
 .tf-tours-fixed .btn-styled {
-  border: 1px solid #fb5a3b;
-  background: #fb5a3b;
+  border: 1px solid #0E3DD8;
+  background: #0E3DD8;
   width: 180px;
 }
 
 .tf-tour-booking-wrap.tf-tours-fixed {
   width: 100%;
   z-index: 9999;
-  background-color: #003162eb;
-  border-top: 4px solid #FB5A3B;
+  background-color: #0E3DD8;
+  border-top: 4px solid #0E3DD8;
   padding: 8px 0;
 }
 
@@ -1540,7 +1480,7 @@ div#tf-contact-info {
   font-weight: 400;
   font-size: 16px;
   line-height: 1;
-  color: #9696A0;
+  color: #686E7A;
   display: flex;
   align-items: center;
   margin: 0;
@@ -1552,7 +1492,7 @@ div#tf-contact-info {
   font-weight: 600;
   font-size: 24px;
   line-height: 1;
-  color: #003162;
+  color: #0E3DD8;
   margin: 0 8px 0 0;
 }
 
@@ -1562,11 +1502,11 @@ div#tf-contact-info {
   line-height: 1;
   font-size: 14px;
   font-weight: 600;
-  color: #5A5B6A;
+  color: #686E7A;
   flex-direction: row;
   justify-content: space-evenly;
   margin: 10px 0 0 0;
-  border: 1px solid #D8E6FF;
+  border: 1px solid #f0f2f4;
   box-sizing: border-box;
   border-radius: 4px;
   cursor: pointer;
@@ -1586,21 +1526,21 @@ div#tf-contact-info {
 }
 
 .tf-single-tour-pricing .tf-price-tab li:hover {
-  color: #003162;
-  background-color: #D8E6FF;
+  color: #0E3DD8;
+  background-color: #f8f9fb;
 }
 
 .tf-single-tour-pricing .tf-price-tab li:nth-child(2) {
-  border-left: 1px solid #D8E6FF;
+  border-left: 1px solid #f8f9fb;
 }
 
 .tf-single-tour-pricing .tf-price-tab li:nth-child(3) {
-  border-left: 1px solid #D8E6FF;
+  border-left: 1px solid #f8f9fb;
 }
 
 .tf-single-tour-pricing .tf-price-tab li.active {
-  color: #003162;
-  background: #D8E6FF;
+  color: #0E3DD8;
+  background: #f8f9fb;
 }
 
 .tf-square-block-content {
@@ -1611,17 +1551,17 @@ div#tf-contact-info {
 
 .tf-single-square-block {
   width: 100%;
-  background: #FAFCFE;
+  background: #ffffff;
   box-shadow: 0px 8px 16px rgba(90, 91, 106, 0.08);
   border-radius: 4px;
-  color: #003162;
-  border: 1px solid #F5F8FF;
+  color: #0E3DD8;
+  border: 1px solid #ffffff;
   padding: 50px 20px;
   min-height: 100px;
 }
 
 .tf-single-square-block h4 {
-  color: #003162;
+  color: #060D1C;
 }
 
 .tf-single-square-block img {
@@ -1710,7 +1650,7 @@ div#tf-contact-info {
 }
 
 .tf_features i {
-  color: #549501;
+  color: #198754;
 }
 
 .tf_features .single-feature-box {
@@ -1850,7 +1790,7 @@ div#tf-contact-info {
   background-color: #ffffff;
   display: none;
   padding: 20px 30px;
-  color: #333333;
+  color: #686E7A;
   margin-top: -2px;
   z-index: 999;
   position: relative;
@@ -1859,7 +1799,7 @@ div#tf-contact-info {
 }
 
 .tf-travel-time {
-  background: #002C66;
+  background: #0E3DD8;
   border-radius: 4px 0px 0px 4px;
   width: 130px;
   height: 80px;
@@ -1872,7 +1812,7 @@ div#tf-contact-info {
 
 .tf-travel-time span {
   font-size: 18px;
-  color: #FAFCFE;
+  color: #ffffff;
 }
 
 .tf-travel-itinerary-item {
@@ -1883,14 +1823,14 @@ div#tf-contact-info {
 
 .tf-accordion-head h4 {
   font-size: 18px;
-  color: #3A3A44;
+  color: #060D1C;
   padding-left: 25px;
   width: 100%;
   margin-bottom: 0;
 }
 
 .tf-accordion-head h4:hover {
-  color: #003162;
+  color: #0E3DD8;
 }
 
 .tf-travel-desc {
@@ -1948,17 +1888,17 @@ div#tf-contact-info {
   top: calc(50% - 25px);
   width: 50px;
   height: 50px;
-  background: #FAFCFE;
+  background: #ffffff;
   box-shadow: 0px 5px 10px rgba(0, 44, 102, 0.2);
   border-radius: 4px;
   transform: matrix(1, 0, 0, -1, 0, 0);
-  color: #002C66;
+  color: #0E3DD8;
   font-size: 20px;
   transition: 0.3s;
 }
 
 .tf-suggestion-wrapper .owl-nav button:hover {
-  background: #002C66;
+  background: #0E3DD8;
   color: #ffffff;
 }
 
@@ -1988,11 +1928,11 @@ div#tf-contact-info {
 }
 
 .tf-suggestion-rating i {
-  color: #FFCD3D;
+  color: #0E3DD8;
 }
 
 .itn-gm-m {
-  background-color: #002C66 !important;
+  background-color: #0E3DD8 !important;
 }
 
 .gm-style .marker-label {
@@ -2075,7 +2015,7 @@ div#tf-contact-info {
 
 .gm-style-iw .gm-style-iw-d .itinerary-map-popup .itinerary-map-popup-content .itinerary-map-popup-time-wrap {
   padding: 8px 16px;
-  background: #F3F4F6;
+  background: #ffffff;
   width: 70px;
   height: auto;
   border-radius: 32px;
@@ -2084,7 +2024,7 @@ div#tf-contact-info {
 }
 
 .gm-style-iw .gm-style-iw-d .itinerary-map-popup .itinerary-map-popup-content .itinerary-map-popup-time-wrap .itinerary-map-popup-time {
-  color: #454954;
+  color: #686E7A;
   font-size: 12px;
   font-style: normal;
   font-weight: 700;
@@ -2092,7 +2032,7 @@ div#tf-contact-info {
 }
 
 .gm-style-iw .gm-style-iw-d .itinerary-map-popup .itinerary-map-popup-content .itinerary-map-popup-time-wrap .itinerary-map-popup-title {
-  color: #818797;
+  color: #060D1C;
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
@@ -2100,7 +2040,7 @@ div#tf-contact-info {
 }
 
 .gm-style-iw .gm-style-iw-d .itinerary-map-popup .itinerary-map-popup-content .itinerary-map-popup-desc {
-  color: #818797;
+  color: #686E7A;
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
@@ -2117,10 +2057,10 @@ div#tf-contact-info {
 
 .gm-style-iw .gm-style-iw-d .itinerary-map-popup .itinerary-map-popup-content .itinerary-map-popup-options .itinerary-map-popup-option {
   padding: 4px 8px;
-  border: 1px solid #F3F4F6;
+  border: 1px solid #f0f2f4;
   border-radius: 32px;
   font-weight: 400;
-  color: #818797;
+  color: #686E7A;
 }
 
 .gm-style-iw .gm-style-iw-d .itinerary-map-popup .itinerary-map-popup-content .itinerary-map-popup-options .itinerary-map-popup-option .map-popup-option-icon {
@@ -2134,7 +2074,7 @@ div#tf-contact-info {
 .gm-style-iw button[title~=Close] {
   top: 8px !important;
   right: 8px !important;
-  background-color: #F3F4F6 !important;
+  background-color: #ffffff !important;
   opacity: 1 !important;
   border-radius: 6px;
   height: 24px !important;
@@ -2147,7 +2087,7 @@ div#tf-contact-info {
 
 .gm-style-iw button:hover {
   border-radius: 24px;
-  border: 1px solid #8F94A3 !important;
+  border: 1px solid #808080 !important;
 }
 
 @media only screen and (max-width: 480px) {
@@ -2195,7 +2135,7 @@ div#tf-contact-info {
   justify-content: center;
   flex-direction: column;
   width: 776px;
-  background-color: #FCFDFF;
+  background-color: #f8f9fb;
   border-radius: 24px;
   position: relative;
 }
@@ -2214,7 +2154,7 @@ div#tf-contact-info {
 
 .tf-withoutpayment-booking .tf-confirm-popup h2,
 .tf-withoutpayment-booking-confirm .tf-confirm-popup h2 {
-  color: #333D46;
+  color: #060D1C;
   font-family: inherit;
   font-size: 48px;
   font-style: normal;
@@ -2238,7 +2178,7 @@ div#tf-contact-info {
 .tf-withoutpayment-booking .tf-withoutpayment-popup,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup {
   width: 776px;
-  background-color: #FCFDFF;
+  background-color: #f8f9fb;
   border-radius: 24px;
   text-align: left;
 }
@@ -2253,9 +2193,9 @@ div#tf-contact-info {
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-tabs,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-tabs {
   padding: 24px;
-  border-bottom: 0.3px solid #CCCED1;
+  border-bottom: 0.3px solid #808080;
   border-radius: 24px;
-  background: #FCFDFF;
+  background: #f8f9fb;
   display: flex;
   justify-content: space-between;
   margin-bottom: 24px;
@@ -2267,7 +2207,7 @@ div#tf-contact-info {
   padding: 0;
   list-style: none;
   border-radius: 8px;
-  background: #C8D6E4;
+  background: #f8f9fb;
   display: flex;
 }
 
@@ -2284,7 +2224,7 @@ div#tf-contact-info {
   display: inline-block;
   padding: 16px 32px;
   cursor: pointer;
-  color: #96AFCA;
+  color: #686E7A;
 }
 
 @media only screen and (max-width: 767.98px) {
@@ -2292,7 +2232,7 @@ div#tf-contact-info {
   .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li {
     padding: 8px;
     border-radius: 16px;
-    border: 1px solid #CCCED1;
+    border: 1px solid #808080;
     font-size: 13px;
     margin: 5px 0px;
   }
@@ -2300,8 +2240,8 @@ div#tf-contact-info {
 
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.done,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.done {
-  background-color: #96AFCA;
-  color: #FCFDFF;
+  background-color: #0E3DD8;
+  color: #ffffff;
 }
 
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.done:first-child,
@@ -2313,16 +2253,16 @@ div#tf-contact-info {
   .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.done:first-child,
   .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.done:first-child {
     border-radius: 16px !important;
-    border: 1px solid #003C7A;
+    border: 1px solid #0E3DD8;
     background-color: transparent;
-    color: #003C7A;
+    color: #0E3DD8;
   }
 }
 
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.active,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.active {
   position: relative;
-  background-color: #96AFCA;
+  background-color: #f8f9fb;
   color: #FCFDFF;
   padding-right: 50px;
 }
@@ -2331,9 +2271,9 @@ div#tf-contact-info {
   .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.active,
   .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.active {
     padding-right: 8px !important;
-    border: 1px solid #003C7A;
+    border: 1px solid #0E3DD8;
     background-color: transparent;
-    color: #003C7A;
+    color: #0E3DD8;
   }
 }
 
@@ -2355,7 +2295,7 @@ div#tf-contact-info {
   position: absolute;
   height: 40px;
   width: 40px;
-  background: #96afca;
+  background: #f8f9fb;
   top: 50%;
   right: -20px;
   transform: rotate(45deg);
@@ -2384,9 +2324,9 @@ div#tf-contact-info {
   .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.active:last-child,
   .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.active:last-child {
     border-radius: 16px !important;
-    border: 1px solid #003C7A;
+    border: 1px solid #0E3DD8;
     background-color: transparent;
-    color: #003C7A;
+    color: #0E3DD8;
   }
 }
 
@@ -2438,7 +2378,7 @@ div#tf-contact-info {
 
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content p,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content p {
-  color: #666D74;
+  color: #686E7A;
   font-family: inherit;
   font-size: 16px !important;
   font-style: normal !important;
@@ -2455,7 +2395,7 @@ div#tf-contact-info {
   height: 230px;
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: #aaa #eee;
+  scrollbar-color: #808080 #f8f9fb;
   margin-bottom: 20px;
   padding-right: 10px;
 }
@@ -2481,7 +2421,7 @@ div#tf-contact-info {
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-traveller scrollbar-thumb,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-extra scrollbar-thumb,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-traveller scrollbar-thumb {
-  background-color: #aaa;
+  background-color: #808080;
   border-radius: 4px;
 }
 
@@ -2519,9 +2459,9 @@ div#tf-contact-info {
   position: absolute;
   top: 0px;
   left: 0px;
-  background-color: #FCFDFF;
+  background-color: #f8f9fb;
   border-radius: 5px;
-  border: 1px solid #666D74;
+  border: 1px solid #808080;
   cursor: pointer;
 }
 
@@ -2533,7 +2473,7 @@ div#tf-contact-info {
   top: 1px;
   width: 3px;
   height: 7px;
-  border: solid #003C7A;
+  border: solid #0E3DD8;
   border-width: 0 3px 3px 0;
   box-sizing: unset;
   -webkit-transform: rotate(45deg);
@@ -2545,7 +2485,7 @@ div#tf-contact-info {
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-traveller .tf-single-tour-extra label .tf-extra-check-box input:checked ~ .checkmark,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-extra .tf-single-tour-extra label .tf-extra-check-box input:checked ~ .checkmark,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-traveller .tf-single-tour-extra label .tf-extra-check-box input:checked ~ .checkmark {
-  border: 1px solid #003C7A;
+  border: 1px solid #0E3DD8;
 }
 
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-extra .tf-single-tour-extra label .tf-extra-check-box .checkmark:after,
@@ -2575,7 +2515,7 @@ div#tf-contact-info {
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-traveller .tf-single-tour-extra label .tf-extra-content h5,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-extra .tf-single-tour-extra label .tf-extra-content h5,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-traveller .tf-single-tour-extra label .tf-extra-content h5 {
-  color: #666D74;
+  color: #060D1C;
   font-family: inherit;
   font-size: 16px !important;
   font-style: normal;
@@ -2595,7 +2535,7 @@ div#tf-contact-info {
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-traveller .tf-single-tour-extra label .tf-extra-content p,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-extra .tf-single-tour-extra label .tf-extra-content p,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-traveller .tf-single-tour-extra label .tf-extra-content p {
-  color: #666D74;
+  color: #686E7A;
   font-family: inherit;
   font-size: 16px !important;
   font-style: normal !important;
@@ -2655,13 +2595,13 @@ div#tf-contact-info {
   padding: 10px;
   user-select: none;
   height: auto;
-  border: 1.2px solid #003162;
+  border: 1.2px solid #0E3DD8;
   margin: 0px 0px;
   text-align: center;
   cursor: pointer;
   border-radius: 5px;
   background: #ffffff;
-  color: #003162;
+  color: #0E3DD8;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -2682,7 +2622,7 @@ div#tf-contact-info {
   text-align: center;
   font-size: 16px;
   font-weight: 600;
-  color: #686e7a !important;
+  color: #686E7A !important;
 }
 
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-extra .tf-single-tour-extra .tf_quantity-acrselection input::-webkit-outer-spin-button,
@@ -2708,7 +2648,7 @@ div#tf-contact-info {
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-traveller .tf-single-tour-traveller h4,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-extra .tf-single-tour-traveller h4,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-traveller .tf-single-tour-traveller h4 {
-  color: #333D46;
+  color: #060D1C;
   font-family: inherit;
   font-size: 16px !important;
   font-style: normal !important;
@@ -2745,13 +2685,10 @@ div#tf-contact-info {
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-traveller .tf-single-tour-traveller .traveller-info .traveller-single-info label,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-extra .tf-single-tour-traveller .traveller-info .traveller-single-info label,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-traveller .tf-single-tour-traveller .traveller-info .traveller-single-info label {
-  color: #A4A4A4;
+  color: #686E7A;
   font-family: inherit;
   font-size: 14px;
-  font-style: normal;
   font-weight: 500;
-  line-height: 20px;
-  /* 142.857% */
 }
 
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-extra .tf-single-tour-traveller .traveller-info .traveller-single-info input[type="text"],
@@ -2771,8 +2708,8 @@ div#tf-contact-info {
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-traveller .tf-single-tour-traveller .traveller-info .traveller-single-info input[type="date"],
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-traveller .tf-single-tour-traveller .traveller-info .traveller-single-info select {
   border-radius: 4px;
-  border: 0.5px solid #666D74;
-  background: #FCFDFF;
+  border: 0.5px solid #808080;
+  background: #f8f9fb;
   box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
   height: 32px;
   width: 100%;
@@ -2801,7 +2738,7 @@ div#tf-contact-info {
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-traveller .tf-single-tour-traveller .traveller-info .traveller-single-info .error-text.error-visible,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-extra .tf-single-tour-traveller .traveller-info .traveller-single-info .error-text.error-visible,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-traveller .tf-single-tour-traveller .traveller-info .traveller-single-info .error-text.error-visible {
-  color: red;
+  color: #dc3545;
   font-size: 13px;
 }
 
@@ -2841,7 +2778,7 @@ div#tf-contact-info {
 
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-summery .tf-booking-fixed-summery h5,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-summery .tf-booking-fixed-summery h5 {
-  color: #666D74;
+  color: #060D1C;
   font-family: inherit;
   font-size: 16px !important;
   font-style: normal !important;
@@ -2852,7 +2789,7 @@ div#tf-contact-info {
 
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-summery .tf-booking-fixed-summery h4,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-summery .tf-booking-fixed-summery h4 {
-  color: #333D46;
+  color: #060D1C;
   font-family: inherit;
   font-size: 20px !important;
   font-style: normal !important;
@@ -2867,7 +2804,7 @@ div#tf-contact-info {
   max-height: 230px;
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: #aaa #eee;
+  scrollbar-color: #808080 #f8f9fb;
 }
 
 @media only screen and (max-width: 767.98px) {
@@ -2885,13 +2822,13 @@ div#tf-contact-info {
 
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-summery .tf-booking-traveller-info scrollbar-thumb,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-summery .tf-booking-traveller-info scrollbar-thumb {
-  background-color: #aaa;
+  background-color: #808080;
   border-radius: 4px;
 }
 
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-summery .tf-booking-traveller-info h6,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-summery .tf-booking-traveller-info h6 {
-  color: #666D74;
+  color: #060D1C;
   font-family: inherit;
   font-size: 16px !important;
   font-style: normal !important;
@@ -2907,10 +2844,9 @@ div#tf-contact-info {
 
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-summery .tf-booking-traveller-info table thead tr th,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-summery .tf-booking-traveller-info table thead tr th {
-  color: #666D74;
+  color: #686E7A;
   font-family: inherit;
   font-size: 14px;
-  font-style: normal;
   font-weight: 600;
   line-height: 28px;
   border: 0px solid;
@@ -2919,10 +2855,9 @@ div#tf-contact-info {
 
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-summery .tf-booking-traveller-info table tbody tr td,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-summery .tf-booking-traveller-info table tbody tr td {
-  color: #666D74;
+  color: #686E7A;
   font-family: inherit;
   font-size: 14px;
-  font-style: normal;
   font-weight: 400;
   line-height: 26px;
   border: 0px solid;
@@ -2931,17 +2866,14 @@ div#tf-contact-info {
 
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-summery .tf-booking-traveller-info table tfoot tr th,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-summery .tf-booking-traveller-info table tfoot tr th {
-  color: #333D46;
+  color: #686E7A;
   font-family: inherit;
   font-size: 16px;
-  font-style: normal;
   font-weight: 700;
-  line-height: 20px;
-  /* 125% */
   padding-top: 15px;
   margin-top: 15px;
   border: 0px solid;
-  border-top: .3px solid #CCCED1;
+  border-top: 0.3px solid #f0f2f4;
   padding-left: 0px;
   padding-right: 0px;
 }
@@ -2972,7 +2904,7 @@ div#tf-contact-info {
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-pagination .tf-diposit-switcher h4 {
   margin: 0;
   display: inline-block;
-  color: #333D46;
+  color: #060D1C;
   font-family: inherit;
   font-size: 16px !important;
   font-style: normal !important;
@@ -3004,14 +2936,14 @@ div#tf-contact-info {
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-pagination .tf-diposit-switcher .tooltip-box .tf-info-btn .tf-tooltip {
   padding: 10px 10px;
   color: #ffffff;
-  background-color: #333333;
+  background-color: #808080;
   font-weight: normal;
   font-size: 13px;
   border-radius: 4px;
   position: absolute;
   z-index: 99999999;
   box-sizing: border-box;
-  border: 1px solid #333333;
+  border: 1px solid #808080;
   box-shadow: 0 1px 8px transparent;
   visibility: hidden;
   transition: .3s all ease;
@@ -3041,7 +2973,7 @@ div#tf-contact-info {
   content: "";
   height: 12px;
   width: 12px;
-  background-color: #333333;
+  background-color: #808080;
   position: absolute;
   top: 95%;
   left: 50%;
@@ -3072,7 +3004,7 @@ div#tf-contact-info {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
+  background-color: #808080;
   transition: .4s;
 }
 
@@ -3101,7 +3033,7 @@ div#tf-contact-info {
 
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-pagination .tf-diposit-switcher input:checked + .switcher,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-pagination .tf-diposit-switcher input:checked + .switcher {
-  background-color: #002C66;
+  background-color: #0E3DD8;
 }
 
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-pagination .tf-diposit-switcher input:checked + .switcher::before,
@@ -3126,10 +3058,9 @@ div#tf-contact-info {
 
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-pagination .tf-control-pagination a.tf-back-control,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-pagination .tf-control-pagination a.tf-back-control {
-  color: #003C7A;
+  color: #0E3DD8;
   font-family: inherit;
   font-size: 14px;
-  font-style: normal;
   font-weight: 700;
   line-height: 20px;
   margin-right: 24px;
@@ -3143,13 +3074,12 @@ div#tf-contact-info {
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-pagination .tf-control-pagination .tf-next-control,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-pagination .tf-control-pagination .tf-next-control {
   border-radius: 4px;
-  background: #003C7A;
+  background: #0E3DD8;
   box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
   padding: 10px 0px;
-  color: #FCFDFF;
+  color: #ffffff;
   font-family: inherit;
   font-size: 16px;
-  font-style: normal;
   font-weight: 500;
   line-height: 20px;
   width: 300px;
@@ -3166,13 +3096,12 @@ div#tf-contact-info {
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-pagination .tf-control-pagination button,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-pagination .tf-control-pagination button {
   border-radius: 4px;
-  background: #003C7A;
+  background: #0E3DD8;
   box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
   padding: 10px 0px;
-  color: #FCFDFF;
+  color: #ffffff;
   font-family: inherit;
   font-size: 16px;
-  font-style: normal;
   font-weight: 500;
   line-height: 20px;
   width: 300px;
@@ -3704,13 +3633,13 @@ div#tf-contact-info {
 }
 
 .tf-tour-details-right .tf-booking-price {
-  border-bottom: 1px solid #EBF0F4;
+  border-bottom: 1px solid #f0f2f4;
 }
 
 .tf-tour-details-right .tf-booking-price p {
   font-size: 30px !important;
   font-weight: 500 !important;
-  color: #060D1C;
+  color: #686E7A;
 }
 
 .tf-tour-details-right .tf-booking-price p span {
@@ -3719,12 +3648,12 @@ div#tf-contact-info {
 }
 
 .tf-tour-details-right .tf-form-title p {
-  color: #060D1C;
+  color: #686E7A;
 }
 
 .tf-tour-details-right .tf-form-title.tf-tour-extra p {
   cursor: pointer;
-  background-color: #F3F7FA;
+  background-color: #f8f9fb;
   padding: 10px;
   border-radius: 5px;
   display: flex;
@@ -3754,7 +3683,7 @@ div#tf-contact-info {
 
 .tf-tour-details-right .tf-tour-extra-box .tf-tour-extra {
   padding: 16px 24px;
-  border: 1px solid #EBF0F4;
+  border: 1px solid #f0f2f4;
   border-radius: 5px;
 }
 
@@ -3811,7 +3740,7 @@ div#tf-contact-info {
   height: 38px;
   width: 38px;
   background: #ffffff;
-  border: 1px solid #ECF0F3;
+  border: 1px solid #f0f2f4;
   box-shadow: 0px 9px 24px rgba(224, 235, 243, 0.75);
   border-radius: 5px;
   display: flex;
