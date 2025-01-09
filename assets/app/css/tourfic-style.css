@@ -287,62 +287,66 @@ Ajax Loader
 /*
 Notice
 */
-/* .tf-notice {
-    @include flexbox();
-    padding: 24px;
-    border: 1px solid $color-border;
-    border-radius: 8px;
-    background-color: $color-white;
+.tf-notice {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  padding: 24px;
+  border-radius: 8px;
+  border: 1px solid #069697;
+  background-color: #f0fafa;
+}
 
-    .tf-notice-icon {
-        margin-right: 10px;
-        font-size: 20px;
-        color: $color-primary;
-    }
+.tf-notice .tf-notice-icon {
+  margin-right: 10px;
+  font-size: 20px;
+  color: #069697;
+}
 
-    .tf-notice-content {
-        color: $slate40;
+.tf-notice .tf-notice-content {
+  color: #8997a9;
+}
 
-        h6 {
-            margin: 0;
-            font-weight: 500;
-            color: $color-heading;
-            font-size: 16px;
-        }
+.tf-notice .tf-notice-content h6 {
+  margin: 0;
+  font-weight: 500;
+  color: #060D1C;
+  font-size: 16px;
+}
 
-        &.has-content {
-            h6 {
-                margin-bottom: 5px;
-            }
-        }
-    }
+.tf-notice .tf-notice-content.has-content h6 {
+  margin-bottom: 5px;
+}
 
-    &.tf-notice-success {
-        border-color: $color-border;
-        background-color: $color-light-bg;
+.tf-notice-success {
+  border-color: #198754;
+  background-color: #dceddd;
+}
 
-        .tf-notice-icon {
-            color: $color-success;
-        }
-    }
-    &.tf-notice-warning {
-        border-color: $color-primary;
-        background-color: $color-border;
+.tf-notice-success .tf-notice-icon {
+  color: #198754;
+}
 
-        .tf-notice-icon {
-            color: $color-primary;
-        }
-    }
-    &.tf-notice-danger {
-        border-color: $color-border;
-        background-color: $color-light-bg;
+.tf-notice-warning {
+  border-color: #ffc107;
+  background-color: #ffecb3;
+}
 
-        .tf-notice-icon {
-            color: $color-error;
-        }
-    }
+.tf-notice-warning .tf-notice-icon {
+  color: #ffc107;
+}
 
-} */
+.tf-notice-danger {
+  border-color: #ff6055;
+  background-color: #fddcda;
+}
+
+.tf-notice-danger .tf-notice-icon {
+  color: #ff6055;
+}
+
 /* 
 Tooltip
 */
@@ -730,66 +734,62 @@ Ajax Loader
 /*
 Notice
 */
-.tf-notice {
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  padding: 24px;
-  border: 1px solid #f0f2f4;
-  border-radius: 8px;
-  background-color: #ffffff;
-}
+/* .tf-notice {
+    @include flexbox();
+    padding: 24px;
+    border: 1px solid $color-border;
+    border-radius: 8px;
+    background-color: $color-white;
 
-.tf-notice .tf-notice-icon {
-  margin-right: 10px;
-  font-size: 20px;
-  color: #0E3DD8;
-}
+    .tf-notice-icon {
+        margin-right: 10px;
+        font-size: 20px;
+        color: $color-primary;
+    }
 
-.tf-notice .tf-notice-content {
-  color: #8997a9;
-}
+    .tf-notice-content {
+        color: $slate40;
 
-.tf-notice .tf-notice-content h6 {
-  margin: 0;
-  font-weight: 500;
-  color: #060D1C;
-  font-size: 16px;
-}
+        h6 {
+            margin: 0;
+            font-weight: 500;
+            color: $color-heading;
+            font-size: 16px;
+        }
 
-.tf-notice .tf-notice-content.has-content h6 {
-  margin-bottom: 5px;
-}
+        &.has-content {
+            h6 {
+                margin-bottom: 5px;
+            }
+        }
+    }
 
-.tf-notice.tf-notice-success {
-  border-color: #f0f2f4;
-  background-color: #f8f9fb;
-}
+    &.tf-notice-success {
+        border-color: $color-border;
+        background-color: $color-light-bg;
 
-.tf-notice.tf-notice-success .tf-notice-icon {
-  color: #198754;
-}
+        .tf-notice-icon {
+            color: $color-success;
+        }
+    }
+    &.tf-notice-warning {
+        border-color: $color-primary;
+        background-color: $color-border;
 
-.tf-notice.tf-notice-warning {
-  border-color: #0E3DD8;
-  background-color: #f0f2f4;
-}
+        .tf-notice-icon {
+            color: $color-primary;
+        }
+    }
+    &.tf-notice-danger {
+        border-color: $color-border;
+        background-color: $color-light-bg;
 
-.tf-notice.tf-notice-warning .tf-notice-icon {
-  color: #0E3DD8;
-}
+        .tf-notice-icon {
+            color: $color-error;
+        }
+    }
 
-.tf-notice.tf-notice-danger {
-  border-color: #f0f2f4;
-  background-color: #f8f9fb;
-}
-
-.tf-notice.tf-notice-danger .tf-notice-icon {
-  color: #dc3545;
-}
-
+} */
 .tf-refund-confirmation-box {
   background-color: rgba(0, 0, 0, 0.4);
   position: fixed;
@@ -1637,7 +1637,7 @@ h3.tf-sidebar-widget_title {
 }
 
 .tf-review-form-container .tf-form-single-rating .error {
-  color: #dc3545;
+  color: #ff6055;
 }
 
 .tf-review-form-container .tf-form-single-rating .ratings-container {
@@ -1764,7 +1764,7 @@ h3.tf-sidebar-widget_title {
 }
 
 .tf-review-form-container .tf-visitor-info .error {
-  color: #dc3545;
+  color: #ff6055;
 }
 
 .tf-review-form-container .tf-review-submit {
@@ -2174,7 +2174,7 @@ h3.tf-sidebar-widget_title {
 }
 
 .tf-text-red {
-  color: #dc3545 !important;
+  color: #ff6055 !important;
 }
 
 .tf-filter {
@@ -6366,7 +6366,7 @@ html {
 .tf-hotel-design-1 #tf-single-hotel-avail .tf_booking-dates #tf-required b {
   font-family: inherit;
   font-weight: 500;
-  color: #dc3545;
+  color: #ff6055;
 }
 
 .tf-hotel-design-1 #tf-single-hotel-avail .tf-bttn-normal {
@@ -7467,7 +7467,7 @@ html {
 }
 
 .tf-template-3 .tf-include-exclude-wrapper .tf-include-exclude-innter .tf-exclude ul li i {
-  color: #dc3545;
+  color: #ff6055;
 }
 
 .tf-tour-design-1 .tf-inex-wrapper .tf-inex {
@@ -10083,7 +10083,7 @@ div#tf-contact-info {
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-traveller .tf-single-tour-traveller .traveller-info .traveller-single-info .error-text.error-visible,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-extra .tf-single-tour-traveller .traveller-info .traveller-single-info .error-text.error-visible,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-traveller .tf-single-tour-traveller .traveller-info .traveller-single-info .error-text.error-visible {
-  color: #dc3545;
+  color: #ff6055;
   font-size: 13px;
 }
 
@@ -16588,7 +16588,7 @@ div#tf-contact-info {
 }
 
 .tf-hotel-template-4.tf-hotel-single .tf-hotel-availability-form .tf-date-required .tf-field {
-  border-color: #dc3545 !important;
+  border-color: #ff6055 !important;
 }
 
 .tf-hotel-template-4.tf-hotel-single .tf-hotel-availability-form .tf_acrselection-child {
@@ -16637,7 +16637,7 @@ div#tf-contact-info {
 .tf-hotel-template-4.tf-hotel-single .tf-hotel-availability-form .tf-hotel-error-msg {
   display: none;
   margin-top: 8px;
-  color: #dc3545;
+  color: #ff6055;
 }
 
 .tf-hotel-template-4.tf-hotel-single .tf-hotel-availability-form .tf-btn {
@@ -22039,7 +22039,7 @@ button.tf-review-open.button, .tf-reting-field button {
 
 .tf-booking-form-wrapper .tf-booking-form .tf_label-row span#tf-required {
   font-size: 12px;
-  color: #dc3545 !important;
+  color: #ff6055 !important;
 }
 
 .tf-booking-form-wrapper .tf-booking-form .tf-booking-guest-and-room-wrap {
@@ -22363,7 +22363,7 @@ button.tf-review-open.button, .tf-reting-field button {
 .tf-template-global #tf-required {
   text-align: center;
   width: 100% !important;
-  color: #dc3545 !important;
+  color: #ff6055 !important;
   display: block;
 }
 
@@ -22559,7 +22559,7 @@ button.tf-review-open.button, .tf-reting-field button {
 }
 
 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-gallery .tf-available-labels span.tf-available-labels-featured {
-  background: #dc3545;
+  background: #ff6055;
 }
 
 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-gallery .tf-available-labels span.tf-available-labels-visited {

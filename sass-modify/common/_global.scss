@@ -255,17 +255,17 @@ Ajax Loader
 /*
 Notice
 */
-/* .tf-notice {
+.tf-notice {
     @include flexbox();
     padding: 24px;
-    border: 1px solid $color-border;
     border-radius: 8px;
-    background-color: $color-white;
+    border: 1px solid $color-info;
+    background-color: $color-info-light;
 
     .tf-notice-icon {
         margin-right: 10px;
         font-size: 20px;
-        color: $color-primary;
+        color: $color-info;
     }
 
     .tf-notice-content {
@@ -285,32 +285,32 @@ Notice
         }
     }
 
-    &.tf-notice-success {
-        border-color: $color-border;
-        background-color: $color-light-bg;
+    &-success {
+        border-color: $color-success;
+        background-color: $color-success-light;
 
         .tf-notice-icon {
             color: $color-success;
         }
     }
-    &.tf-notice-warning {
-        border-color: $color-primary;
-        background-color: $color-border;
+    &-warning {
+        border-color: $color-warning;
+        background-color: $color-warning-light;
 
         .tf-notice-icon {
-            color: $color-primary;
+            color: $color-warning;
         }
     }
-    &.tf-notice-danger {
-        border-color: $color-border;
-        background-color: $color-light-bg;
+    &-danger {
+        border-color: $color-danger;
+        background-color: $color-danger-light;
 
         .tf-notice-icon {
-            color: $color-error;
+            color: $color-danger;
         }
     }
 
-} */
+}
 
 /* 
 Tooltip

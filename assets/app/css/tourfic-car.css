@@ -588,7 +588,7 @@
 }
 
 .tf-car-design-1 .tf-car-inc-exc-section .tf-inc-exe .tf-exc-list ul li i {
-  color: #dc3545;
+  color: #ff6055;
 }
 
 .tf-car-design-1 .tf-car-location {
@@ -1065,7 +1065,7 @@
 
 .tf-car-design-1 .tf-date-select-box .tf-form-submit-btn .error-notice {
   text-align: center;
-  color: #dc3545;
+  color: #ff6055;
   margin-bottom: 10px;
   display: none;
 }
@@ -1903,7 +1903,7 @@
 }
 
 .tf-car-design-1 .tf-archive-search-box .tf-driver-location-box .tf-driver-location span#tf-required {
-  color: #dc3545;
+  color: #ff6055;
 }
 
 @media only screen and (max-width: 767.98px) {
@@ -2693,13 +2693,13 @@
 }
 
 .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-cancellation-notice span {
-  color: #dc3545;
+  color: #ff6055;
   font-size: 16px;
   font-weight: 400;
 }
 
 .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-cancellation-notice span i {
-  color: #dc3545;
+  color: #ff6055;
 }
 
 .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-cancellation-notice span b {
@@ -3033,7 +3033,7 @@
 }
 
 .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-form-fields .tf-form-fields .tf-single-field .error-text.error-visible {
-  color: #dc3545;
+  color: #ff6055;
 }
 
 .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-form-fields .tf-booking-submission {

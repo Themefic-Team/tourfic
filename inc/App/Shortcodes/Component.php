@@ -104,6 +104,46 @@ class Component extends \Tourfic\Core\Shortcodes {
         <div class="tf_btn_group" style="margin-bottom: 30px">
             <button class="tf_btn tf-btn-loading">Button</button>
         </div>
+
+        <h2>Notice</h2>
+        <div class="" style="display: flex; flex-wrap: wrap; gap: 8px; width: 100%">
+            <div class="tf-notice">
+                <div class="tf-notice-icon">
+                    <i class="ri-information-fill"></i>
+                </div>
+                <div class="tf-notice-content has-content">
+                    <h6>Info Notice</h6>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                </div>
+            </div>
+            <div class="tf-notice tf-notice-success">
+                <div class="tf-notice-icon">
+                    <i class="ri-information-fill"></i>
+                </div>
+                <div class="tf-notice-content has-content">
+                    <h6>Success Notice</h6>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                </div>
+            </div>
+            <div class="tf-notice tf-notice-warning">
+                <div class="tf-notice-icon">
+                    <i class="ri-information-fill"></i>
+                </div>
+                <div class="tf-notice-content has-content">
+                    <h6>Info Notice</h6>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                </div>
+            </div>
+            <div class="tf-notice tf-notice-danger">
+                <div class="tf-notice-icon">
+                    <i class="ri-information-fill"></i>
+                </div>
+                <div class="tf-notice-content has-content">
+                    <h6>Danger Notice</h6>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                </div>
+            </div>
+        </div>
         <?php
 	}
 }
