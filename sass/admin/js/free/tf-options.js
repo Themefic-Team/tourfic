@@ -822,16 +822,21 @@
         */
         function roomOptionsArr(){
             var optionsArr = [];
-            $('.tf-repeater-wrap-room-options .tf-single-repeater-room-options').each(function(index){
-                let optionType = $('[name="tf_room_opt[room-options]['+index+'][option_pricing_type]"]').val();
-                let optionTitle = $('[name="tf_room_opt[room-options]['+index+'][option_title]"]').val();
+            $('.tf-repeater-wrap-room-options .tf-single-repeater-room-options').each(function(i){
+                // Get the dynamic index from the tf_repeater_count field
+                let index = $(this).find('[name="tf_repeater_count"]').val();
 
-                // Add the option title, option type, and index to the options array
-                optionsArr[index] = {
-                    index: index,
-                    title: optionTitle,
-                    type: optionType
-                };
+                // Extract the option title and type using the dynamic index
+                let optionType = $(this).find(`[name="tf_room_opt[room-options][${index}][option_pricing_type]"]`).val();
+                let optionTitle = $(this).find(`[name="tf_room_opt[room-options][${index}][option_title]"]`).val();
+
+                if (index !== undefined) {
+                    optionsArr[index] = {
+                        index: index,
+                        title: optionTitle,
+                        type: optionType
+                    };
+                }
             })
             return optionsArr;
         }
