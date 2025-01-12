@@ -1,38 +1,111 @@
 @charset "UTF-8";
+/* 
+Container
+*/
+.tf-container {
+  margin: 0 auto;
+  padding: 0 15px;
+  max-width: 1200px;
+}
+
+.tf-car-template-container {
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+.tf-template-3 .tf-container {
+  margin: 0 auto;
+  max-width: 1520px;
+  padding: 0;
+}
+
 /*
 Button
 */
-.tf-admin-btn {
-  display: inline-flex;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-  background-color: #ffffff;
-  padding: 7px 22px;
-  border: 1px solid #0E3DD8;
-  border-radius: 4px;
-  font-weight: 500;
-  text-decoration: none;
-  cursor: pointer;
-}
-.tf-admin-btn i {
-  margin-right: 8px;
-  font-size: 18px;
-}
-.tf-admin-btn.tf-btn-secondary {
+.tf_btn {
+  color: #ffffff;
   background-color: #0E3DD8;
   border-color: #0E3DD8;
-  color: #ffffff;
-  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.2;
+  padding: 12px 24px;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: 500;
+  display: inline-flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-transition: all 0.25s ease-in-out;
+  -moz-transition: all 0.25s ease-in-out;
+  -o-transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
+  border-width: 0;
+  cursor: pointer;
 }
-.tf-admin-btn.disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
+.tf_btn:hover {
+  color: #ffffff;
+  background-color: #003C7A;
+  border-color: #003C7A;
+}
+.tf_btn_secondary {
+  color: #ffffff;
+  background-color: #003C7A;
+  border-color: #003C7A;
+}
+.tf_btn_secondary:hover {
+  background-color: #0E3DD8;
+  border-color: #0E3DD8;
+}
+.tf_btn_white {
+  color: #0E3DD8;
+  background-color: #ffffff;
+  border-color: #ffffff;
+}
+.tf_btn_white:hover {
+  color: #ffffff;
+  background-color: #0E3DD8;
+  border-color: #0E3DD8;
+}
+.tf_btn_border {
+  border-width: 1px;
+  border-style: solid;
+  color: #0E3DD8;
+  background-color: transparent;
+}
+.tf_btn_full {
+  width: 100%;
+}
+.tf_btn_small {
+  padding: 8px 20px;
+}
+.tf_btn_large {
+  padding: 16px 32px;
+}
+.tf_btn:disabled, .tf_btn.disabled {
+  opacity: 0.7;
   pointer-events: none;
 }
 
 /*
-Custom Modal
+Button Group
+*/
+.tf_btn_group {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/*
+Modal
 */
 .tf-modal {
   position: fixed;
@@ -54,7 +127,7 @@ Custom Modal
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
-.tf-modal.tf-modal-show {
+.tf-modal-show {
   opacity: 1;
   visibility: visible;
   transform: scale(1);
@@ -88,7 +161,7 @@ Custom Modal
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  width: 80%;
+  width: 60%;
   max-width: 1080px;
   pointer-events: auto;
   background-color: #f8f9fb;
@@ -103,52 +176,27 @@ Custom Modal
   cursor: pointer;
   font-size: 22px;
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 12px;
+  right: 16px;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
-.tf-modal .tf-modal-close:hover {
-  -webkit-transform: rotate(180deg);
-  -ms-transform: rotate(180deg);
-  -o-transform: rotate(180deg);
-  transform: rotate(180deg);
+.tf-modal-small .tf-modal-content {
+  width: 50%;
 }
-.tf-modal.tf-modal-fullscreen .tf-modal-dialog {
-  min-height: 100%;
+.tf-modal-large .tf-modal-content {
+  width: 80%;
 }
-.tf-modal.tf-modal-fullscreen .tf-modal-content {
+.tf-modal-fullscreen .tf-modal-dialog {
+  min-height: 100vh;
+}
+.tf-modal-fullscreen .tf-modal-content {
   width: 100%;
   max-width: 100%;
-  height: 100%;
+  height: 100vh;
   border-radius: 0;
-  padding: 0;
-}
-.tf-modal.tf-modal-fullscreen .tf-modal-header {
-  min-height: 50px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  /*&:hover{
-      .tf-modal-close {
-          top: 10px;
-      }
-  }*/
-}
-.tf-modal.tf-modal-fullscreen .tf-modal-header .tf-modal-close {
-  right: 30px;
-  top: 20px;
-  height: 50px;
-  width: 50px;
-  margin-left: -25px;
-  line-height: 52px;
-  text-align: center;
-  background-color: rgba(0, 0, 0, 0.6);
-  border-radius: 50%;
-  color: #ffffff;
 }
 
 body.tf-modal-open {
@@ -222,14 +270,14 @@ Notice
   display: -webkit-flex;
   display: flex;
   padding: 24px;
-  border: 1px solid #f0f2f4;
   border-radius: 8px;
-  background-color: #ffffff;
+  border: 1px solid #069697;
+  background-color: #f0fafa;
 }
 .tf-notice .tf-notice-icon {
   margin-right: 10px;
   font-size: 20px;
-  color: #0E3DD8;
+  color: #069697;
 }
 .tf-notice .tf-notice-content {
   color: #8997a9;
@@ -243,28 +291,283 @@ Notice
 .tf-notice .tf-notice-content.has-content h6 {
   margin-bottom: 5px;
 }
-.tf-notice.tf-notice-success {
-  border-color: #f0f2f4;
-  background-color: #f8f9fb;
+.tf-notice-success {
+  border-color: #198754;
+  background-color: #dceddd;
 }
-.tf-notice.tf-notice-success .tf-notice-icon {
+.tf-notice-success .tf-notice-icon {
   color: #198754;
 }
-.tf-notice.tf-notice-warning {
-  border-color: #0E3DD8;
-  background-color: #f0f2f4;
+.tf-notice-warning {
+  border-color: #ffc107;
+  background-color: #ffecb3;
 }
-.tf-notice.tf-notice-warning .tf-notice-icon {
-  color: #0E3DD8;
+.tf-notice-warning .tf-notice-icon {
+  color: #ffc107;
 }
-.tf-notice.tf-notice-danger {
-  border-color: #f0f2f4;
-  background-color: #f8f9fb;
+.tf-notice-danger {
+  border-color: #ff6055;
+  background-color: #fddcda;
 }
-.tf-notice.tf-notice-danger .tf-notice-icon {
-  color: #dc3545;
+.tf-notice-danger .tf-notice-icon {
+  color: #ff6055;
 }
 
+/*
+Button
+*/
+.tf-admin-btn {
+  display: inline-flex;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 7px 22px;
+  border: 1px solid #0E3DD8;
+  border-radius: 4px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+}
+.tf-admin-btn i {
+  margin-right: 8px;
+  font-size: 18px;
+}
+.tf-admin-btn.tf-btn-secondary {
+  background-color: #0E3DD8;
+  border-color: #0E3DD8;
+  color: #ffffff;
+  font-weight: 600;
+}
+.tf-admin-btn.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/*
+Custom Modal
+*/
+/* .tf-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999999;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    outline: 0;
+    visibility: hidden;
+    opacity: 0;
+    @include scale(.7);
+    @include transition(all, 0.3s, ease-in-out);
+
+    &.tf-modal-show {
+        opacity: 1;
+        visibility: visible;
+        transform: scale(1);
+    }
+
+    .tf-modal-dialog {
+        @include flexbox();
+        @include align-items(center);
+        min-height: calc(100% - 40px);
+        max-width: 100%;
+        position: relative;
+        pointer-events: none;
+
+        @media only screen and (min-width: 576px) {
+            min-height: calc(100% - 40px);
+        }
+    }
+
+    .tf-modal-content {
+        position: relative;
+        @include flexbox();
+        @include flex-direction(column);
+        width: 80%;
+        max-width: 1080px;
+        pointer-events: auto;
+        background-color: $color-light-bg;
+        outline: 0;
+        margin: 0 auto;
+        border-radius: 10px;
+        padding: 30px;
+        overflow: hidden;
+    }
+
+    .tf-modal-close {
+        color: $color-primary;
+        cursor: pointer;
+        font-size: 22px;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        @include transition(all, 0.3s, ease-in-out);
+
+        &:hover {
+            @include rotate(180)
+        }
+    }
+
+    &.tf-modal-fullscreen {
+        .tf-modal-dialog {
+            min-height: 100%;
+        }
+
+        .tf-modal-content {
+            width: 100%;
+            max-width: 100%;
+            height: 100%;
+            border-radius: 0;
+            padding: 0;
+        }
+
+        .tf-modal-header {
+            min-height: 50px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+
+            .tf-modal-close {
+                right: 30px;
+                top: 20px;
+                height: 50px;
+                width: 50px;
+                margin-left: -25px;
+                line-height: 52px;
+                text-align: center;
+                background-color: rgba(0, 0, 0, 0.6);
+                border-radius: 50%;
+                color: $color-white;
+            }
+        }
+    }
+}
+
+body.tf-modal-open {
+    overflow: hidden;
+
+    .tf-modal {
+        overflow-x: hidden;
+        overflow-y: auto;
+
+        &.tf-modal-fullscreen {
+            overflow: hidden;
+        }
+    }
+
+    &:after {
+        content: "";
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        z-index: 99999;
+        background: rgba(0, 0, 0, 0.4);
+    }
+} */
+/*
+Ajax Loader
+*/
+.tf-btn-loading {
+  padding-right: 40px;
+  position: relative;
+}
+
+.tf-btn-loading:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  margin-top: -7px;
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border: 2px solid #ffffff;
+  border-left-color: transparent;
+  border-radius: 50%;
+  vertical-align: middle;
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  -webkit-animation: wd-rotate 450ms infinite linear;
+  animation: wd-rotate 450ms infinite linear;
+}
+
+@-webkit-keyframes wd-rotate {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes wd-rotate {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+/*
+Notice
+*/
+/* .tf-notice {
+    @include flexbox();
+    padding: 24px;
+    border: 1px solid $color-border;
+    border-radius: 8px;
+    background-color: $color-white;
+
+    .tf-notice-icon {
+        margin-right: 10px;
+        font-size: 20px;
+        color: $color-primary;
+    }
+
+    .tf-notice-content {
+        color: $slate40;
+
+        h6 {
+            margin: 0;
+            font-weight: 500;
+            color: $color-heading;
+            font-size: 16px;
+        }
+
+        &.has-content {
+            h6 {
+                margin-bottom: 5px;
+            }
+        }
+    }
+
+    &.tf-notice-success {
+        border-color: $color-border;
+        background-color: $color-light-bg;
+
+        .tf-notice-icon {
+            color: $color-success;
+        }
+    }
+    &.tf-notice-warning {
+        border-color: $color-primary;
+        background-color: $color-border;
+
+        .tf-notice-icon {
+            color: $color-primary;
+        }
+    }
+    &.tf-notice-danger {
+        border-color: $color-border;
+        background-color: $color-light-bg;
+
+        .tf-notice-icon {
+            color: $color-error;
+        }
+    }
+
+} */
 .tf-refund-confirmation-box {
   background-color: rgba(0, 0, 0, 0.4);
   position: fixed;
@@ -1058,7 +1361,7 @@ h3.tf-sidebar-widget_title {
   text-transform: capitalize !important;
 }
 .tf-review-form-container .tf-form-single-rating .error {
-  color: #dc3545;
+  color: #ff6055;
 }
 .tf-review-form-container .tf-form-single-rating .ratings-container {
   line-height: 1;
@@ -1166,7 +1469,7 @@ h3.tf-sidebar-widget_title {
   width: 100%;
 }
 .tf-review-form-container .tf-visitor-info .error {
-  color: #dc3545;
+  color: #ff6055;
 }
 .tf-review-form-container .tf-review-submit {
   margin: 25px 0 0 0;
@@ -1539,7 +1842,7 @@ h3.tf-sidebar-widget_title {
 }
 
 .tf-text-red {
-  color: #dc3545 !important;
+  color: #ff6055 !important;
 }
 
 .tf-filter {
@@ -5341,7 +5644,7 @@ html {
 .tf-hotel-design-1 #tf-single-hotel-avail .tf_booking-dates #tf-required b {
   font-family: inherit;
   font-weight: 500;
-  color: #dc3545;
+  color: #ff6055;
 }
 .tf-hotel-design-1 #tf-single-hotel-avail .tf-bttn-normal {
   padding: 16px 24px;
@@ -6349,7 +6652,7 @@ html {
   color: #198754;
 }
 .tf-template-3 .tf-include-exclude-wrapper .tf-include-exclude-innter .tf-exclude ul li i {
-  color: #dc3545;
+  color: #ff6055;
 }
 
 .tf-tour-design-1 .tf-inex-wrapper .tf-inex {
@@ -8651,7 +8954,7 @@ div#tf-contact-info {
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-traveller .tf-single-tour-traveller .traveller-info .traveller-single-info .error-text.error-visible,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-extra .tf-single-tour-traveller .traveller-info .traveller-single-info .error-text.error-visible,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-traveller .tf-single-tour-traveller .traveller-info .traveller-single-info .error-text.error-visible {
-  color: #dc3545;
+  color: #ff6055;
   font-size: 13px;
 }
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-extra .tf-single-tour-traveller .billing-details,
@@ -14408,7 +14711,7 @@ div#tf-contact-info {
   color: #0E3DD8;
 }
 .tf-hotel-template-4.tf-hotel-single .tf-hotel-availability-form .tf-date-required .tf-field {
-  border-color: #dc3545 !important;
+  border-color: #ff6055 !important;
 }
 .tf-hotel-template-4.tf-hotel-single .tf-hotel-availability-form .tf_acrselection-child {
   margin-bottom: 0;
@@ -14450,7 +14753,7 @@ div#tf-contact-info {
 .tf-hotel-template-4.tf-hotel-single .tf-hotel-availability-form .tf-hotel-error-msg {
   display: none;
   margin-top: 8px;
-  color: #dc3545;
+  color: #ff6055;
 }
 .tf-hotel-template-4.tf-hotel-single .tf-hotel-availability-form .tf-btn {
   margin-top: 24px;
@@ -19079,7 +19382,7 @@ button.tf-review-open.button, .tf-reting-field button {
 }
 .tf-booking-form-wrapper .tf-booking-form .tf_label-row span#tf-required {
   font-size: 12px;
-  color: #dc3545 !important;
+  color: #ff6055 !important;
 }
 .tf-booking-form-wrapper .tf-booking-form .tf-booking-guest-and-room-wrap {
   display: flex;
@@ -19362,7 +19665,7 @@ button.tf-review-open.button, .tf-reting-field button {
 .tf-template-global #tf-required {
   text-align: center;
   width: 100% !important;
-  color: #dc3545 !important;
+  color: #ff6055 !important;
   display: block;
 }
 @media only screen and (max-width: 767.98px) {
@@ -19532,7 +19835,7 @@ button.tf-review-open.button, .tf-reting-field button {
   background: #0E3DD8;
 }
 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-gallery .tf-available-labels span.tf-available-labels-featured {
-  background: #dc3545;
+  background: #ff6055;
 }
 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-gallery .tf-available-labels span.tf-available-labels-visited {
   background: #198754;

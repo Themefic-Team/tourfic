@@ -34,7 +34,7 @@ Button
 /*
 Custom Modal
 */
-.tf-modal {
+/* .tf-modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -128,12 +128,6 @@ Custom Modal
                 border-radius: 50%;
                 color: $color-white;
             }
-
-            /*&:hover{
-                .tf-modal-close {
-                    top: 10px;
-                }
-            }*/
         }
     }
 }
@@ -160,7 +154,7 @@ body.tf-modal-open {
         z-index: 99999;
         background: rgba(0, 0, 0, 0.4);
     }
-}
+} */
 
 /*
 Ajax Loader
@@ -207,7 +201,7 @@ Ajax Loader
 /*
 Notice
 */
-.tf-notice {
+/* .tf-notice {
     @include flexbox();
     padding: 24px;
     border: 1px solid $color-border;
@@ -262,7 +256,7 @@ Notice
         }
     }
 
-}
+} */
 
 .tf-refund-confirmation-box{
     background-color: rgba(0, 0, 0, 0.4);

@@ -1,6 +1,7 @@
 //global css
 @import '../../../common/variable';
 @import '../../../common/mixin';
+@import '../../../common/global';
 @import 'global/global';
 @import 'global/common';
 @import 'global/search-result';
@@ -13,7 +14,6 @@
 // @import "apartment/apartment";
 
 //Tour Templates
-
 @import 'tour/template3/archive';
 @import 'tour/template3/single';
 
