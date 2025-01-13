@@ -14,7 +14,7 @@ $tf_cars_slug = get_option('car_slug');
 ?>
 <div class="tf-single-car-section tf-car-design-1">
     <div class="tf-single-booking-bar">
-        <div class="tf-car-template-container">
+        <div class="tf-container">
             <div class="tf-top-booking-bar tf-flex tf-flex-space-bttn tf-flex-align-center">
                 <div class="tf-details-menu">
                     <ul>
@@ -87,7 +87,7 @@ $tf_cars_slug = get_option('car_slug');
         </div>
     </div>
     
-    <div class="tf-car-template-container">
+    <div class="tf-container">
         <div class="tf-container-inner">
             <div class="tf-single-car-details-warper">
                 <div class="tf-car-details-column">

@@ -9,7 +9,7 @@ $tf_car_arc_banner = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template'
         </div>
     </div>
 
-    <div class="tf-car-template-container">
+    <div class="tf-container">
         <div class="tf-container-inner">
             <div class="tf-archive-car-details-warper">
 
