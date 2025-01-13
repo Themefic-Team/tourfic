@@ -660,7 +660,7 @@ class Helper {
 						$ptype = esc_attr( $_GET['type'] ) ?? get_post_type();
 						?>
                         <input type="hidden" name="type" value="<?php echo esc_attr( $ptype ); ?>" class="tf-post-type"/>
-                        <button class="tf-btn-normal btn-primary tf-submit"
+                        <button class="tf_btn tf_btn_full tf-submit"
                                 type="submit"><?php esc_html_e( 'Check Availability', 'tourfic' ); ?></button>
                     </div>
                 </form>
@@ -948,7 +948,7 @@ class Helper {
 				$ptype = esc_attr( $_GET['type'] ) ?? get_post_type();
 				?>
                 <input type="hidden" name="type" value="<?php echo esc_attr( $ptype ); ?>" class="tf-post-type"/>
-                <button class="tf-btn-normal btn-primary tf-submit"><?php esc_html_e( 'Check Availability', 'tourfic' ); ?></button>
+                <button class="tf_btn tf_btn_full tf-submit"><?php esc_html_e( 'Check Availability', 'tourfic' ); ?></button>
             </div>
 			<?php if ( $post_type == 'tf_tours' ) { ?>
                 <script>
@@ -1306,7 +1306,7 @@ class Helper {
             <div class="tf-booking-form-submit">
 	            <?php $ptype = esc_attr( $_GET['type'] ) ?? get_post_type(); ?>
                 <input type="hidden" name="type" value="<?php echo esc_attr($ptype); ?>" class="tf-post-type"/>
-                <button class="tf-btn-normal btn-primary tf-submit"><?php esc_html_e( 'Search Now', 'tourfic' ); ?></button>
+                <button class="tf_btn tf_btn_full tf-submit"><?php esc_html_e( 'Search Now', 'tourfic' ); ?></button>
             </div>
 
 			<?php if ( $post_type == 'tf_hotel' || $post_type == 'tf_tours' || $post_type == 'tf_apartment' ) : ?>
@@ -1508,7 +1508,7 @@ class Helper {
 					$ptype = esc_attr( $_GET['type'] ) ?? get_post_type();
 					?>
                     <input type="hidden" name="type" value="<?php echo esc_attr( $ptype ); ?>" class="tf-post-type"/>
-                    <button class="tf_button tf-submit btn-styled"
+                    <button class="tf_btn tf_btn_full tf-submit"
                             type="submit"><?php esc_html_e( 'Check Availability', 'tourfic' ); ?></button>
                 </div>
 
@@ -1687,7 +1687,7 @@ class Helper {
                     </div>
                     <div class="tf-booking-bttns tf-mt-30">
                         <input type="hidden" name="type" value="<?php echo esc_attr( $post_type ); ?>" class="tf-post-type"/>
-                        <button class="tf-btn-normal btn-primary tf-submit"><?php esc_html_e( 'Check Availability', 'tourfic' ); ?></button>
+                        <button class="tf_btn tf_btn_full tf-submit"><?php esc_html_e( 'Check Availability', 'tourfic' ); ?></button>
                     </div>
                 </form>
             </div>
@@ -1965,7 +1965,7 @@ class Helper {
             </div>
             <div class="tf-booking-form-submit">
                 <input type="hidden" name="type" value="<?php echo esc_attr( $post_type ); ?>" class="tf-post-type"/>
-                <button class="tf-btn-normal btn-primary tf-submit"><?php echo esc_html__( 'Check Availability', 'tourfic' ); ?></button>
+                <button class="tf_btn tf_btn_full tf-submit"><?php echo esc_html__( 'Check Availability', 'tourfic' ); ?></button>
             </div>
 
 			<?php if ( $post_type == 'tf_tours' ) { ?>
@@ -2574,7 +2574,7 @@ class Helper {
             </div>
             <div class="tf-booking-form-submit">
                 <input type="hidden" name="type" value="<?php echo esc_attr($post_type); ?>" class="tf-post-type"/>
-                <button class="tf-btn-normal btn-primary tf-submit"><?php esc_html_e( 'Search Now', 'tourfic' ); ?></button>
+                <button class="tf_btn tf_btn_full tf-submit"><?php esc_html_e( 'Search Now', 'tourfic' ); ?></button>
             </div>
 
             <?php if ( $post_type == 'tf_hotel' || $post_type == 'tf_tours' || $post_type == 'tf_apartment' ) : ?>
@@ -2744,7 +2744,7 @@ class Helper {
 
                 <div class="tf_form-row">
                     <input type="hidden" name="type" value="<?php echo esc_attr( $post_type ); ?>" class="tf-post-type"/>
-                    <button class="tf_button tf-submit btn-styled"
+                    <button class="tf_btn tf_btn_full tf-submit"
                             type="submit"><?php esc_html_e( 'Check Availability', 'tourfic' ); ?></button>
                 </div>
 

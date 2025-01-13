@@ -1624,15 +1624,15 @@ class Apartment {
                 <input type="hidden" name="type" value="<?php echo esc_attr( $ptype); ?>" class="tf-post-type"/>
                 <input type="hidden" name="post_id" value="<?php echo esc_attr( get_the_ID() ); ?>"/>
 
-                <div class="tf-btn">
+                <div class="tf-btn-wrap">
 					<?php if ( ( $tf_booking_type == 2 && $tf_hide_booking_form !== '1' && $tf_ext_booking_type == 1 ) || $tf_booking_type == 1 ) : ?>
                         <?php if (!empty($apt_reserve_button_text)) : ?>
-							<button class="tf-btn-normal btn-primary tf-submit" type="submit"><?php echo esc_html( $apt_reserve_button_text ); ?></button>
+							<button class="tf_btn tf_btn_full tf_btn_large tf-submit" type="submit"><?php echo esc_html( $apt_reserve_button_text ); ?></button>
 						<?php endif; ?>
 					<?php elseif( $tf_booking_type == 2 && $tf_hide_booking_form == 1 ): ?>
 						<?php if (!empty($apt_reserve_button_text)) : ?>
 							<a href="<?php echo esc_url( $tf_booking_url ); ?>"
-							class="tf-btn-normal btn-primary tf-submit" <?php echo ! empty( $tf_booking_attribute ) ? esc_attr( $tf_booking_attribute ) : ''; ?> target="_blank"><?php echo esc_html( $apt_reserve_button_text ); ?></a>
+							class="tf_btn tf_btn_full tf_btn_large tf-submit" <?php echo ! empty( $tf_booking_attribute ) ? esc_attr( $tf_booking_attribute ) : ''; ?> target="_blank"><?php echo esc_html( $apt_reserve_button_text ); ?></a>
 						<?php endif; ?>
 					<?php endif; ?>
                 </div>

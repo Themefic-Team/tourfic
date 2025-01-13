@@ -24,6 +24,7 @@ Button
     text-decoration: none;
     border-radius: $tf-brds-default;
     font-weight: $font-weight-medium;
+    text-align: center;
     display: inline-flex;
     @include justify-content(center);
     @include transition();

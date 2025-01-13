@@ -82,7 +82,7 @@
                 type: 'post',
                 data: data,
                 beforeSend: function () {
-                    $("#tf-single-hotel-avail .btn-primary.tf-submit").addClass('tf-btn-booking-loading');
+                    $("#tf-single-hotel-avail .tf-submit").addClass('tf-btn-booking-loading');
                 },
                 success: function (data) {
                     if( $("#rooms").length > 0){
@@ -91,10 +91,10 @@
                         }, 500);
                         $("#rooms").html(data);
                         $('.tf-room-filter').show();
-                        $("#tf-single-hotel-avail .btn-primary.tf-submit").removeClass('tf-btn-booking-loading');
+                        $("#tf-single-hotel-avail .tf-submit").removeClass('tf-btn-booking-loading');
                      } else {
                          notyf.error(tf_params.no_room_found);
-                         $("#tf-single-hotel-avail .btn-primary.tf-submit").removeClass('tf-btn-booking-loading');
+                         $("#tf-single-hotel-avail .tf-submit").removeClass('tf-btn-booking-loading');
                      }
                  },
                 error: function (data) {
