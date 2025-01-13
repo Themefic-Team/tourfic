@@ -819,24 +819,4 @@ div.tf-aq-inner .tf-ask-question-head-content h3 {
             }
         }
     }
-    .tf-btn-booking{
-        button,
-        a{
-            border: 1px solid $color-primary;
-            background: $color-primary;
-            padding: 12px 32px;
-            color: $color-white;
-            font-size: 16px;
-            font-style: normal;
-            font-weight: 700;
-            line-height: 150%;
-            width: 100%;
-            transition: .3s all ease;
-            text-decoration: none;
-            display: block;
-            &:hover{
-                background-color: $color-secondary;
-            }
-        }
-    }
 }
