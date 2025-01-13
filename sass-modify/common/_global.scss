@@ -10,17 +10,6 @@ Container
         max-width: 100%;
     }
 }
-//to-do: remove all
-.tf-car-template-container{
-    max-width: 1140px;
-    margin: 0 auto;
-}
-.tf-template-3 .tf-container {
-    margin: 0 auto;
-    max-width: 1520px;
-    padding: 0;
-}
-//to-do: remove all
 
 /*
 Button
@@ -104,12 +93,12 @@ Button
 /*
 Button Group
 */
-/* .tf_btn_group {
+.tf_btn_group {
     @include flexbox();
     @include align-items(flex-start);
     @include flex-wrap();
     gap: 8px;
-} */
+}
 
 /*
 Modal
