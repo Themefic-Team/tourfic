@@ -24,6 +24,7 @@ Button
     text-decoration: none;
     border-radius: $tf-brds-default;
     font-weight: $font-weight-medium;
+    text-align: center;
     display: inline-flex;
     @include justify-content(center);
     @include transition();
@@ -216,26 +217,26 @@ Ajax Loader
 .tf-btn-loading {
     padding-right: 40px;
     position: relative;
-}
 
-.tf-btn-loading:before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    margin-top: -7px;
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-    border: 2px solid $color-white;
-    border-left-color: transparent;
-    border-radius: 50%;
-    vertical-align: middle;
-    visibility: visible;
-    opacity: 1;
-    transition: opacity .2s ease, visibility .2s ease;
-    -webkit-animation: wd-rotate 450ms infinite linear;
-    animation: wd-rotate 450ms infinite linear;
+    &:before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        margin-top: -7px;
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        border: 2px solid $color-white;
+        border-left-color: transparent;
+        border-radius: 50%;
+        vertical-align: middle;
+        visibility: visible;
+        opacity: 1;
+        transition: opacity .2s ease, visibility .2s ease;
+        -webkit-animation: wd-rotate 450ms infinite linear;
+        animation: wd-rotate 450ms infinite linear;
+    }
 }
 
 @-webkit-keyframes wd-rotate {
@@ -255,7 +256,6 @@ Ajax Loader
 /*
 Notice
 */
-//to-do: remove
 .tf-notice {
     @include flexbox();
     padding: 24px;

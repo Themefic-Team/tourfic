@@ -1,13 +1,13 @@
-body{
+/* body{
     margin: 0;
     padding: 0;
-}
+} */
 
 :root {
     --tf-base-font-size: 14px;
 }
 
-.tf-template-global {
+/* .tf-template-global {
     font-family: inherit;
     color: $color-text;
     // .tf-container{
@@ -46,9 +46,10 @@ body{
     color: $color-primary;
     margin: 0px;
 }
-
-// Table style 
-table.tf-table {
+ */
+// Table style
+// never used
+/* table.tf-table {
     border-collapse: collapse;
     width: 100%;
     background-color: $color-white;
@@ -77,7 +78,7 @@ table.tf-table {
     tr:last-child {
         border-bottom: 0px solid #ddd;
     }
-}
+} */
 
 // Buttons
 .tf-btn-normal{
@@ -201,23 +202,6 @@ table.tf-table {
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-//Tourfi Base classes
-.tf-box-wrapper{
-    background-color: $color-white;
-    border-radius: 5px;
-}
-.tf-box{
-    padding: $tf-space-30;
-    box-shadow: 0px 13px 30px 0px #e0e8ee;
-    
-    @media #{$tfmax767}{
-        padding: $tf-space-24;
-    }
-    @media #{$tfmax991}{
-        padding: $tf-space-24;
-    }
 }
 
 .tf-flex{

@@ -2689,8 +2689,8 @@ class Hotel {
                     <input type="hidden" name="post_id" value="<?php echo esc_attr( get_the_ID() ); ?>"/>
                     <input type="hidden" name="children_ages" value="<?php echo esc_attr( $children_ages ); ?>"/>
 
-                    <div class="tf-btn">
-                        <button class="tf-btn-normal btn-primary tf-submit"
+                    <div class="tf-btn-wrap">
+                        <button class="tf_btn tf_btn_full tf-submit"
                                 type="submit"><?php echo esc_html( $tf_hotel_book_avaibality_button_text ); ?></button>
                     </div>
 
@@ -2970,8 +2970,8 @@ class Hotel {
                     <input type="hidden" name="type" value="<?php echo esc_attr( $ptype ); ?>" class="tf-post-type"/>
                     <input type="hidden" name="post_id" value="<?php echo esc_attr( get_the_ID() ); ?>"/>
                     <input type="hidden" name="children_ages" value="<?php echo esc_attr( $children_ages ); ?>"/>
-                    <div class="tf-btn">
-                        <button class="tf-btn-normal btn-primary tf-submit" type="submit"><?php echo esc_html( $tf_hotel_book_avaibality_button_text ); ?></button>
+                    <div class="tf-btn-wrap">
+                        <button class="tf_btn tf_btn_full tf-submit" type="submit"><?php echo esc_html( $tf_hotel_book_avaibality_button_text ); ?></button>
                         <span class="tf-hotel-error-msg"><?php echo esc_html__('Please select check in and check out date', 'tourfic') ?></span>
                     </div>
                 </div>
@@ -3815,7 +3815,7 @@ class Hotel {
 							<?php echo wp_kses_post(Pricing::instance( $post_id )->get_min_price_html($period)); ?>
                         </div>
                         <div class="tf-booking-bttns">
-                            <a class="tf-btn-normal btn-secondary" href="<?php echo esc_url( $url ); ?>"><?php esc_html_e( "View Details", "tourfic" ); ?></a>
+                            <a class="tf_btn tf_btn_secondary" href="<?php echo esc_url( $url ); ?>"><?php esc_html_e( "View Details", "tourfic" ); ?></a>
                         </div>
                     </div>
                 </div>
