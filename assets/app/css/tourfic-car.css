@@ -2250,11 +2250,7 @@
   width: 100%;
 }
 
-.tf-car-template-container {
-  max-width: 1140px;
-  margin: 0 auto;
-}
-.tf-car-template-container .tf-car-booking-popup {
+.tf-car-booking-popup {
   position: fixed;
   left: 0;
   top: 0;
@@ -2267,55 +2263,55 @@
   justify-content: center;
   display: none;
 }
-.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp {
+.tf-car-booking-popup .tf-booking-popup-warp {
   border-radius: 16px;
   background: #ffffff;
   padding: 16px 24px;
   width: 850px;
 }
 @media only screen and (max-width: 767.98px) {
-  .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp {
+  .tf-car-booking-popup .tf-booking-popup-warp {
     padding: 24px 15px;
   }
 }
-.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-popup-header {
+.tf-car-booking-popup .tf-booking-popup-warp .tf-booking-popup-header {
   margin-bottom: 24px;
 }
-.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-popup-header h3 {
+.tf-car-booking-popup .tf-booking-popup-warp .tf-booking-popup-header h3 {
   color: #060D1C;
   font-size: 21px !important;
   font-weight: 700 !important;
   margin: 0;
 }
-.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-popup-header .tf-close-popup {
+.tf-car-booking-popup .tf-booking-popup-warp .tf-booking-popup-header .tf-close-popup {
   cursor: pointer;
   display: flex;
 }
-.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-cancellation-notice {
+.tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-cancellation-notice {
   border-radius: 8px;
   background: #ffffff;
   padding: 16px;
   margin-bottom: 24px;
 }
-.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-cancellation-notice span {
+.tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-cancellation-notice span {
   color: #ff6055;
   font-size: 16px;
   font-weight: 400;
 }
-.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-cancellation-notice span i {
+.tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-cancellation-notice span i {
   color: #ff6055;
 }
-.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-cancellation-notice span b {
+.tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-cancellation-notice span b {
   font-weight: 700;
 }
-.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-tabs {
+.tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-tabs {
   margin-bottom: 24px;
 }
-.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-tabs ul {
+.tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-tabs ul {
   margin: 0;
   padding: 0;
 }
-.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-tabs ul li {
+.tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-tabs ul li {
   color: #686E7A !important;
   font-size: 16px !important;
   font-weight: 400 !important;
@@ -2324,11 +2320,11 @@
   cursor: pointer;
   width: auto !important;
 }
-.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-tabs ul li.active {
+.tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-tabs ul li.active {
   color: #0E3DD8;
   border-bottom: 2px solid #0E3DD8;
 }
-.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content {
+.tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content {
   max-height: 360px;
   overflow: auto;
   padding-right: 8px;
@@ -2337,53 +2333,53 @@
   /* Chrome, Edge, and Safari */
 }
 @media only screen and (max-width: 1024px) {
-  .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content {
+  .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content {
     max-height: 260px;
   }
 }
 @media only screen and (max-width: 991.98px) {
-  .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content {
+  .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content {
     flex-direction: inherit;
   }
 }
-.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content *::-webkit-scrollbar {
+.tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content *::-webkit-scrollbar {
   width: 5px;
 }
-.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content *::-webkit-scrollbar-track {
+.tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content *::-webkit-scrollbar-track {
   background: #ffffff;
 }
-.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content::-webkit-scrollbar-thumb {
+.tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content::-webkit-scrollbar-thumb {
   background-color: #808080;
   border-radius: 5px;
   border: 3px solid #ffffff;
 }
-.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content p {
+.tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content p {
   color: #686E7A;
   font-size: 16px;
   font-weight: 400;
   margin: 0;
 }
-.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured {
+.tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured {
   border-radius: 16px;
   border: 1px solid #f0f2f4;
   padding: 24px;
 }
 @media only screen and (max-width: 991.98px) {
-  .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured {
+  .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured {
     width: 100%;
   }
 }
 @media only screen and (max-width: 767.98px) {
-  .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured {
+  .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured {
     padding: 20px 12px;
   }
 }
-.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table {
+.tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table {
   border: 0px solid;
   margin: 0;
   width: 100%;
 }
-.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr td {
+.tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr td {
   border: 0px solid;
   color: #686E7A;
   font-size: 16px;
@@ -2391,20 +2387,20 @@
   padding: 0 0 16px 0px;
 }
 @media only screen and (max-width: 767.98px) {
-  .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr td {
+  .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr td {
     font-size: 12px;
     vertical-align: top;
   }
 }
-.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr td span {
+.tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr td span {
   font-weight: 600;
 }
 @media only screen and (max-width: 767.98px) {
-  .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr td:nth-child(2) {
+  .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr td:nth-child(2) {
     width: 90px;
   }
 }
-.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th {
+.tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th {
   color: #686E7A;
   border: 0px solid;
   font-size: 16px;
@@ -2412,31 +2408,31 @@
   padding: 0 0 16px 0px;
 }
 @media only screen and (max-width: 767.98px) {
-  .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th {
+  .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th {
     font-size: 14px;
   }
 }
-.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-flex.tf-flex-align-center {
+.tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-flex.tf-flex-align-center {
   flex-wrap: nowrap;
 }
 @media only screen and (max-width: 767.98px) {
-  .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-flex.tf-flex-align-center {
+  .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-flex.tf-flex-align-center {
     align-items: flex-start;
   }
 }
-.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-single-protection-title {
+.tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-single-protection-title {
   text-align: left;
   flex-wrap: nowrap;
 }
-.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select {
+.tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select {
   height: 15px;
 }
 @media only screen and (max-width: 767.98px) {
-  .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select {
+  .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select {
     margin-top: 6px;
   }
 }
-.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label {
+.tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label {
   color: #686E7A;
   font-size: 16px;
   font-weight: 400;
@@ -2446,20 +2442,20 @@
   cursor: pointer;
   display: block;
 }
-.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label input {
+.tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label input {
   position: absolute;
   opacity: 0;
   cursor: pointer;
   height: 0;
   width: 0;
 }
-.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label input:checked ~ .checkmark:after {
+.tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label input:checked ~ .checkmark:after {
   display: block;
 }
-.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label input:checked ~ .checkmark {
+.tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label input:checked ~ .checkmark {
   background-color: #f8f9fb;
 }
-.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label .checkmark {
+.tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label .checkmark {
   position: absolute;
   height: 15px;
   width: 15px;
@@ -2468,7 +2464,7 @@
   background-color: transparent;
   border-radius: 5px;
 }
-.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label .checkmark::after {
+.tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label .checkmark::after {
   content: "";
   position: absolute;
   display: none;
@@ -2482,18 +2478,18 @@
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
-.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-info-tooltip {
+.tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-info-tooltip {
   position: relative;
   margin-left: 5px;
 }
-.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-info-tooltip i {
+.tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-info-tooltip i {
   font-weight: 400;
 }
-.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-info-tooltip:hover .tf-info-tooltip-content {
+.tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-info-tooltip:hover .tf-info-tooltip-content {
   visibility: visible;
   opacity: 1;
 }
-.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-info-tooltip .tf-info-tooltip-content {
+.tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-info-tooltip .tf-info-tooltip-content {
   visibility: hidden;
   opacity: 0;
   position: absolute;
@@ -2508,7 +2504,7 @@
   margin-left: -109px;
   transition: 0.3s all ease;
 }
-.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-info-tooltip .tf-info-tooltip-content::after {
+.tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-info-tooltip .tf-info-tooltip-content::after {
   position: absolute;
   content: "";
   height: 16px;
@@ -2521,41 +2517,41 @@
   bottom: -6px;
   z-index: -1;
 }
-.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-info-tooltip .tf-info-tooltip-content p {
+.tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-info-tooltip .tf-info-tooltip-content p {
   color: #ffffff;
   text-align: center;
   font-size: 13px !important;
   font-weight: 600 !important;
 }
-.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tfoot {
+.tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tfoot {
   margin-top: 16px;
 }
-.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tfoot tr th {
+.tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tfoot tr th {
   border-top: 1px solid #f0f2f4;
   padding: 16px 0 0 0;
 }
-.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-form-fields {
+.tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-form-fields {
   display: none;
 }
-.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-form-fields .tf-form-fields {
+.tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-form-fields .tf-form-fields {
   flex-wrap: wrap;
 }
-.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-form-fields .tf-form-fields .tf-single-field {
+.tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-form-fields .tf-form-fields .tf-single-field {
   width: calc(33% - 24px);
 }
 @media only screen and (max-width: 767.98px) {
-  .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-form-fields .tf-form-fields .tf-single-field {
+  .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-form-fields .tf-form-fields .tf-single-field {
     width: calc(50% - 24px);
   }
 }
-.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-form-fields .tf-form-fields .tf-single-field label {
+.tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-form-fields .tf-form-fields .tf-single-field label {
   color: #686E7A;
   font-size: 12px !important;
   font-weight: 700;
   margin-bottom: 8px;
 }
-.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-form-fields .tf-form-fields .tf-single-field input[type=text],
-.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-form-fields .tf-form-fields .tf-single-field input[type=email] {
+.tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-form-fields .tf-form-fields .tf-single-field input[type=text],
+.tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-form-fields .tf-form-fields .tf-single-field input[type=email] {
   border-radius: 8px;
   border: 1px solid #f0f2f4;
   padding: 8px 16px;
@@ -2565,7 +2561,7 @@
   font-weight: 400;
   width: 100%;
 }
-.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-form-fields .tf-form-fields .tf-single-field input[type=date] {
+.tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-form-fields .tf-form-fields .tf-single-field input[type=date] {
   border-radius: 8px;
   border: 1px solid #f0f2f4;
   padding: 0px 16px;
@@ -2576,7 +2572,7 @@
   width: 100%;
   text-transform: uppercase;
 }
-.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-form-fields .tf-form-fields .tf-single-field select {
+.tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-form-fields .tf-form-fields .tf-single-field select {
   border-radius: 8px;
   border: 1px solid #f0f2f4;
   padding: 0px 16px;
@@ -2586,14 +2582,14 @@
   font-weight: 400;
   width: 100%;
 }
-.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-form-fields .tf-form-fields .tf-single-field .error-text.error-visible {
+.tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-form-fields .tf-form-fields .tf-single-field .error-text.error-visible {
   color: #ff6055;
 }
-.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-form-fields .tf-booking-submission {
+.tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-form-fields .tf-booking-submission {
   margin-top: 24px;
   text-align: right;
 }
-.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-form-fields .tf-booking-submission button {
+.tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-form-fields .tf-booking-submission button {
   border-radius: 8px;
   background-color: #0E3DD8;
   color: #ffffff;
@@ -2604,14 +2600,14 @@
   cursor: pointer;
   transition: 0.3s all ease;
 }
-.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-form-fields .tf-booking-submission button:hover {
+.tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-form-fields .tf-booking-submission button:hover {
   background: #003C7A !important;
 }
-.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-bar {
+.tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-bar {
   margin-top: 24px;
   justify-content: end;
 }
-.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-bar button {
+.tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-bar button {
   border-radius: 8px;
   background: #f8f9fb;
   padding: 16px 32px;
@@ -2621,16 +2617,17 @@
   font-weight: 700;
   cursor: pointer;
 }
-.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-bar button.with-charge {
+.tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-bar button.with-charge {
   background-color: #0E3DD8 !important;
   color: #ffffff !important;
   transition: 0.3s all ease;
 }
-.tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-bar button.with-charge:hover {
+.tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-bar button.with-charge:hover {
   background: #003C7A !important;
 }
-.tf-car-template-container .tf-car-instraction-popup,
-.tf-car-template-container .tf-car-cancellation-popup {
+
+.tf-car-instraction-popup,
+.tf-car-cancellation-popup {
   position: fixed;
   left: 0;
   top: 0;
@@ -2643,66 +2640,66 @@
   justify-content: center;
   display: none;
 }
-.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp,
-.tf-car-template-container .tf-car-instraction-popup .tf-cancellation-popup-warp,
-.tf-car-template-container .tf-car-cancellation-popup .tf-instraction-popup-warp,
-.tf-car-template-container .tf-car-cancellation-popup .tf-cancellation-popup-warp {
+.tf-car-instraction-popup .tf-instraction-popup-warp,
+.tf-car-instraction-popup .tf-cancellation-popup-warp,
+.tf-car-cancellation-popup .tf-instraction-popup-warp,
+.tf-car-cancellation-popup .tf-cancellation-popup-warp {
   border-radius: 16px;
   background: #ffffff;
   padding: 16px 24px;
   width: 850px;
 }
 @media only screen and (max-width: 640px) {
-  .tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp,
-  .tf-car-template-container .tf-car-instraction-popup .tf-cancellation-popup-warp,
-  .tf-car-template-container .tf-car-cancellation-popup .tf-instraction-popup-warp,
-  .tf-car-template-container .tf-car-cancellation-popup .tf-cancellation-popup-warp {
+  .tf-car-instraction-popup .tf-instraction-popup-warp,
+  .tf-car-instraction-popup .tf-cancellation-popup-warp,
+  .tf-car-cancellation-popup .tf-instraction-popup-warp,
+  .tf-car-cancellation-popup .tf-cancellation-popup-warp {
     width: 100%;
   }
 }
-.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-popup-header,
-.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-cancellation-popup-header,
-.tf-car-template-container .tf-car-instraction-popup .tf-cancellation-popup-warp .tf-instraction-popup-header,
-.tf-car-template-container .tf-car-instraction-popup .tf-cancellation-popup-warp .tf-cancellation-popup-header,
-.tf-car-template-container .tf-car-cancellation-popup .tf-instraction-popup-warp .tf-instraction-popup-header,
-.tf-car-template-container .tf-car-cancellation-popup .tf-instraction-popup-warp .tf-cancellation-popup-header,
-.tf-car-template-container .tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-instraction-popup-header,
-.tf-car-template-container .tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-cancellation-popup-header {
+.tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-popup-header,
+.tf-car-instraction-popup .tf-instraction-popup-warp .tf-cancellation-popup-header,
+.tf-car-instraction-popup .tf-cancellation-popup-warp .tf-instraction-popup-header,
+.tf-car-instraction-popup .tf-cancellation-popup-warp .tf-cancellation-popup-header,
+.tf-car-cancellation-popup .tf-instraction-popup-warp .tf-instraction-popup-header,
+.tf-car-cancellation-popup .tf-instraction-popup-warp .tf-cancellation-popup-header,
+.tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-instraction-popup-header,
+.tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-cancellation-popup-header {
   margin-bottom: 24px;
   flex-wrap: nowrap;
 }
-.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-popup-header h3,
-.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-cancellation-popup-header h3,
-.tf-car-template-container .tf-car-instraction-popup .tf-cancellation-popup-warp .tf-instraction-popup-header h3,
-.tf-car-template-container .tf-car-instraction-popup .tf-cancellation-popup-warp .tf-cancellation-popup-header h3,
-.tf-car-template-container .tf-car-cancellation-popup .tf-instraction-popup-warp .tf-instraction-popup-header h3,
-.tf-car-template-container .tf-car-cancellation-popup .tf-instraction-popup-warp .tf-cancellation-popup-header h3,
-.tf-car-template-container .tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-instraction-popup-header h3,
-.tf-car-template-container .tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-cancellation-popup-header h3 {
+.tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-popup-header h3,
+.tf-car-instraction-popup .tf-instraction-popup-warp .tf-cancellation-popup-header h3,
+.tf-car-instraction-popup .tf-cancellation-popup-warp .tf-instraction-popup-header h3,
+.tf-car-instraction-popup .tf-cancellation-popup-warp .tf-cancellation-popup-header h3,
+.tf-car-cancellation-popup .tf-instraction-popup-warp .tf-instraction-popup-header h3,
+.tf-car-cancellation-popup .tf-instraction-popup-warp .tf-cancellation-popup-header h3,
+.tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-instraction-popup-header h3,
+.tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-cancellation-popup-header h3 {
   color: #060D1C;
   font-size: 21px !important;
   font-weight: 700 !important;
   margin: 0;
   text-align: left;
 }
-.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-popup-header .tf-close-popup,
-.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-cancellation-popup-header .tf-close-popup,
-.tf-car-template-container .tf-car-instraction-popup .tf-cancellation-popup-warp .tf-instraction-popup-header .tf-close-popup,
-.tf-car-template-container .tf-car-instraction-popup .tf-cancellation-popup-warp .tf-cancellation-popup-header .tf-close-popup,
-.tf-car-template-container .tf-car-cancellation-popup .tf-instraction-popup-warp .tf-instraction-popup-header .tf-close-popup,
-.tf-car-template-container .tf-car-cancellation-popup .tf-instraction-popup-warp .tf-cancellation-popup-header .tf-close-popup,
-.tf-car-template-container .tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-instraction-popup-header .tf-close-popup,
-.tf-car-template-container .tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-cancellation-popup-header .tf-close-popup {
+.tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-popup-header .tf-close-popup,
+.tf-car-instraction-popup .tf-instraction-popup-warp .tf-cancellation-popup-header .tf-close-popup,
+.tf-car-instraction-popup .tf-cancellation-popup-warp .tf-instraction-popup-header .tf-close-popup,
+.tf-car-instraction-popup .tf-cancellation-popup-warp .tf-cancellation-popup-header .tf-close-popup,
+.tf-car-cancellation-popup .tf-instraction-popup-warp .tf-instraction-popup-header .tf-close-popup,
+.tf-car-cancellation-popup .tf-instraction-popup-warp .tf-cancellation-popup-header .tf-close-popup,
+.tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-instraction-popup-header .tf-close-popup,
+.tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-cancellation-popup-header .tf-close-popup {
   cursor: pointer;
 }
-.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-content-wraper,
-.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-cancellation-content-wraper,
-.tf-car-template-container .tf-car-instraction-popup .tf-cancellation-popup-warp .tf-instraction-content-wraper,
-.tf-car-template-container .tf-car-instraction-popup .tf-cancellation-popup-warp .tf-cancellation-content-wraper,
-.tf-car-template-container .tf-car-cancellation-popup .tf-instraction-popup-warp .tf-instraction-content-wraper,
-.tf-car-template-container .tf-car-cancellation-popup .tf-instraction-popup-warp .tf-cancellation-content-wraper,
-.tf-car-template-container .tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-instraction-content-wraper,
-.tf-car-template-container .tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-cancellation-content-wraper {
+.tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-content-wraper,
+.tf-car-instraction-popup .tf-instraction-popup-warp .tf-cancellation-content-wraper,
+.tf-car-instraction-popup .tf-cancellation-popup-warp .tf-instraction-content-wraper,
+.tf-car-instraction-popup .tf-cancellation-popup-warp .tf-cancellation-content-wraper,
+.tf-car-cancellation-popup .tf-instraction-popup-warp .tf-instraction-content-wraper,
+.tf-car-cancellation-popup .tf-instraction-popup-warp .tf-cancellation-content-wraper,
+.tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-instraction-content-wraper,
+.tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-cancellation-content-wraper {
   text-align: left;
   color: #686E7A;
   font-size: 16px;
@@ -2714,57 +2711,57 @@
   scrollbar-color: #808080 #ffffff;
   /* Chrome, Edge, and Safari */
 }
-.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-content-wraper *::-webkit-scrollbar,
-.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-cancellation-content-wraper *::-webkit-scrollbar,
-.tf-car-template-container .tf-car-instraction-popup .tf-cancellation-popup-warp .tf-instraction-content-wraper *::-webkit-scrollbar,
-.tf-car-template-container .tf-car-instraction-popup .tf-cancellation-popup-warp .tf-cancellation-content-wraper *::-webkit-scrollbar,
-.tf-car-template-container .tf-car-cancellation-popup .tf-instraction-popup-warp .tf-instraction-content-wraper *::-webkit-scrollbar,
-.tf-car-template-container .tf-car-cancellation-popup .tf-instraction-popup-warp .tf-cancellation-content-wraper *::-webkit-scrollbar,
-.tf-car-template-container .tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-instraction-content-wraper *::-webkit-scrollbar,
-.tf-car-template-container .tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-cancellation-content-wraper *::-webkit-scrollbar {
+.tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-content-wraper *::-webkit-scrollbar,
+.tf-car-instraction-popup .tf-instraction-popup-warp .tf-cancellation-content-wraper *::-webkit-scrollbar,
+.tf-car-instraction-popup .tf-cancellation-popup-warp .tf-instraction-content-wraper *::-webkit-scrollbar,
+.tf-car-instraction-popup .tf-cancellation-popup-warp .tf-cancellation-content-wraper *::-webkit-scrollbar,
+.tf-car-cancellation-popup .tf-instraction-popup-warp .tf-instraction-content-wraper *::-webkit-scrollbar,
+.tf-car-cancellation-popup .tf-instraction-popup-warp .tf-cancellation-content-wraper *::-webkit-scrollbar,
+.tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-instraction-content-wraper *::-webkit-scrollbar,
+.tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-cancellation-content-wraper *::-webkit-scrollbar {
   width: 5px;
 }
-.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-content-wraper *::-webkit-scrollbar-track,
-.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-cancellation-content-wraper *::-webkit-scrollbar-track,
-.tf-car-template-container .tf-car-instraction-popup .tf-cancellation-popup-warp .tf-instraction-content-wraper *::-webkit-scrollbar-track,
-.tf-car-template-container .tf-car-instraction-popup .tf-cancellation-popup-warp .tf-cancellation-content-wraper *::-webkit-scrollbar-track,
-.tf-car-template-container .tf-car-cancellation-popup .tf-instraction-popup-warp .tf-instraction-content-wraper *::-webkit-scrollbar-track,
-.tf-car-template-container .tf-car-cancellation-popup .tf-instraction-popup-warp .tf-cancellation-content-wraper *::-webkit-scrollbar-track,
-.tf-car-template-container .tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-instraction-content-wraper *::-webkit-scrollbar-track,
-.tf-car-template-container .tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-cancellation-content-wraper *::-webkit-scrollbar-track {
+.tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-content-wraper *::-webkit-scrollbar-track,
+.tf-car-instraction-popup .tf-instraction-popup-warp .tf-cancellation-content-wraper *::-webkit-scrollbar-track,
+.tf-car-instraction-popup .tf-cancellation-popup-warp .tf-instraction-content-wraper *::-webkit-scrollbar-track,
+.tf-car-instraction-popup .tf-cancellation-popup-warp .tf-cancellation-content-wraper *::-webkit-scrollbar-track,
+.tf-car-cancellation-popup .tf-instraction-popup-warp .tf-instraction-content-wraper *::-webkit-scrollbar-track,
+.tf-car-cancellation-popup .tf-instraction-popup-warp .tf-cancellation-content-wraper *::-webkit-scrollbar-track,
+.tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-instraction-content-wraper *::-webkit-scrollbar-track,
+.tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-cancellation-content-wraper *::-webkit-scrollbar-track {
   background: #ffffff;
 }
-.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-content-wraper::-webkit-scrollbar-thumb,
-.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-cancellation-content-wraper::-webkit-scrollbar-thumb,
-.tf-car-template-container .tf-car-instraction-popup .tf-cancellation-popup-warp .tf-instraction-content-wraper::-webkit-scrollbar-thumb,
-.tf-car-template-container .tf-car-instraction-popup .tf-cancellation-popup-warp .tf-cancellation-content-wraper::-webkit-scrollbar-thumb,
-.tf-car-template-container .tf-car-cancellation-popup .tf-instraction-popup-warp .tf-instraction-content-wraper::-webkit-scrollbar-thumb,
-.tf-car-template-container .tf-car-cancellation-popup .tf-instraction-popup-warp .tf-cancellation-content-wraper::-webkit-scrollbar-thumb,
-.tf-car-template-container .tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-instraction-content-wraper::-webkit-scrollbar-thumb,
-.tf-car-template-container .tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-cancellation-content-wraper::-webkit-scrollbar-thumb {
+.tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-content-wraper::-webkit-scrollbar-thumb,
+.tf-car-instraction-popup .tf-instraction-popup-warp .tf-cancellation-content-wraper::-webkit-scrollbar-thumb,
+.tf-car-instraction-popup .tf-cancellation-popup-warp .tf-instraction-content-wraper::-webkit-scrollbar-thumb,
+.tf-car-instraction-popup .tf-cancellation-popup-warp .tf-cancellation-content-wraper::-webkit-scrollbar-thumb,
+.tf-car-cancellation-popup .tf-instraction-popup-warp .tf-instraction-content-wraper::-webkit-scrollbar-thumb,
+.tf-car-cancellation-popup .tf-instraction-popup-warp .tf-cancellation-content-wraper::-webkit-scrollbar-thumb,
+.tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-instraction-content-wraper::-webkit-scrollbar-thumb,
+.tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-cancellation-content-wraper::-webkit-scrollbar-thumb {
   background-color: #808080;
   border-radius: 5px;
   border: 3px solid #ffffff;
 }
-.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-content-wraper p,
-.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-cancellation-content-wraper p,
-.tf-car-template-container .tf-car-instraction-popup .tf-cancellation-popup-warp .tf-instraction-content-wraper p,
-.tf-car-template-container .tf-car-instraction-popup .tf-cancellation-popup-warp .tf-cancellation-content-wraper p,
-.tf-car-template-container .tf-car-cancellation-popup .tf-instraction-popup-warp .tf-instraction-content-wraper p,
-.tf-car-template-container .tf-car-cancellation-popup .tf-instraction-popup-warp .tf-cancellation-content-wraper p,
-.tf-car-template-container .tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-instraction-content-wraper p,
-.tf-car-template-container .tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-cancellation-content-wraper p {
+.tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-content-wraper p,
+.tf-car-instraction-popup .tf-instraction-popup-warp .tf-cancellation-content-wraper p,
+.tf-car-instraction-popup .tf-cancellation-popup-warp .tf-instraction-content-wraper p,
+.tf-car-instraction-popup .tf-cancellation-popup-warp .tf-cancellation-content-wraper p,
+.tf-car-cancellation-popup .tf-instraction-popup-warp .tf-instraction-content-wraper p,
+.tf-car-cancellation-popup .tf-instraction-popup-warp .tf-cancellation-content-wraper p,
+.tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-instraction-content-wraper p,
+.tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-cancellation-content-wraper p {
   color: #686E7A;
   font-size: 16px;
 }
-.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-content-wraper table,
-.tf-car-template-container .tf-car-instraction-popup .tf-instraction-popup-warp .tf-cancellation-content-wraper table,
-.tf-car-template-container .tf-car-instraction-popup .tf-cancellation-popup-warp .tf-instraction-content-wraper table,
-.tf-car-template-container .tf-car-instraction-popup .tf-cancellation-popup-warp .tf-cancellation-content-wraper table,
-.tf-car-template-container .tf-car-cancellation-popup .tf-instraction-popup-warp .tf-instraction-content-wraper table,
-.tf-car-template-container .tf-car-cancellation-popup .tf-instraction-popup-warp .tf-cancellation-content-wraper table,
-.tf-car-template-container .tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-instraction-content-wraper table,
-.tf-car-template-container .tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-cancellation-content-wraper table {
+.tf-car-instraction-popup .tf-instraction-popup-warp .tf-instraction-content-wraper table,
+.tf-car-instraction-popup .tf-instraction-popup-warp .tf-cancellation-content-wraper table,
+.tf-car-instraction-popup .tf-cancellation-popup-warp .tf-instraction-content-wraper table,
+.tf-car-instraction-popup .tf-cancellation-popup-warp .tf-cancellation-content-wraper table,
+.tf-car-cancellation-popup .tf-instraction-popup-warp .tf-instraction-content-wraper table,
+.tf-car-cancellation-popup .tf-instraction-popup-warp .tf-cancellation-content-wraper table,
+.tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-instraction-content-wraper table,
+.tf-car-cancellation-popup .tf-cancellation-popup-warp .tf-cancellation-content-wraper table {
   margin-bottom: 0px;
 }
 

@@ -27,5 +27,24 @@
         }
         }
     }
+}
 
+// Default Design
+.tf-contact-info{    
+    h3 {
+        margin-bottom: 30px;
+    }
+    div {
+        margin: 15px 0;
+        p {
+            margin: 0;
+            a{
+                text-decoration: none;
+                color: $color-primary;
+            }
+        }   
+    }
+}
+div#tf-contact-info {
+    border-radius: 8px;
 }

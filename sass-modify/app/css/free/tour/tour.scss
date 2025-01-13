@@ -2,6 +2,8 @@
 @import '../../../../common/mixin';
 
 //Single Modules Start
+@import 'modules/single/_hero';
+@import 'modules/single/_booking';
 @import 'modules/single/_information';
 @import 'modules/single/_withoutpayment';
 @import 'modules/single/_highlights';
@@ -14,78 +16,8 @@
 @import 'modules/single/_terms-and-condition';
 @import 'modules/single/_cta-info';
 @import 'modules/single/_sidebar';
+@import 'modules/single/_feature';
 //Single Modules End
-
-.tf-hero-content {
-    padding: 20px;
-    background-position: center center;
-    background-size: cover;
-    border-radius: 0 0 4px 4px;
-    min-height: 450px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 30px;
-
-    @media #{$max480}{
-        gap: 16px;
-    }
-}
-
-.tf-hero-top {
-    display: flex;
-    justify-content: space-between;
-    gap: 30px;
-}
-.tf-tours_search-wrap {
-    margin-top: 150px;
-    margin-bottom: 150px;
-}
-.tf-hero-bottom-area {
-    text-align: right;
-    color: $color-white;
-    font-size: 14px;
-    margin-top: 20px;
-}
- 
-.tf-contact-info{    
-    h3 {
-        margin-bottom: 30px;
-    }
-    div {
-        margin: 15px 0;
-        p {
-            margin: 0;
-            a{
-                text-decoration: none;
-                color: $color-primary;
-            }
-        }   
-    }
-}
-
-div#tf-contact-info {
-    border-radius: 8px;
-}
-.tf-hero-btm-icon {
-    display: inline-block;
-    i {
-        background: rgba(26, 43, 72, .6);
-        border-radius: 50%;
-        color: $color-white;
-        font-size: 18px;
-        height: 40px;
-        width: 40px;
-        text-align: center;
-        line-height: 40px;
-        transition: 0.3s;
-        cursor: pointer;
-        &:hover {
-            background: rgba(26, 43, 72, .8);
-        }
-    }
-}
-
 
 
 // UNFOLD Compatibily
@@ -311,19 +243,6 @@ body{
     }
 }
 
-.tf-template-global {
-    background-color: inherit;
-    padding: 60px 0px;
-    .tf-btn{
-        height: auto;
-    }
-    .tf-template-section:last-child{
-        margin-bottom: 0px !important;
-    }
-    .tf-section-title{
-        margin-bottom: 15px;
-    }
-}
 .tf-tour-single{
     margin-bottom: 50px;
     @media #{$tfmax991}{
@@ -336,42 +255,6 @@ body{
     padding: 0px 12px;
 }
 
-.tf-single-details-wrapper{
-    .tf-single-details-inner{
-        @media #{$tfmax991}{
-            justify-content: space-between;
-        }
-        .tf-tour-details-left {
-            flex-basis: 68%;
-            width: 68%;
-
-            @media #{$tfmax991}{
-                flex-basis: 58%;
-                width: 58%;
-            }
-
-            @media #{$tfmax767}{
-                flex-basis: 100%;
-                width: 58%;
-            }
-        }
-        
-        .tf-tour-details-right {
-            flex-basis: 32%;
-            width: 32%;
-            @media #{$tfmax991}{
-                flex-basis: 40%;
-                padding-left: $tf-space-12;
-                width: 40%;
-            }
-            @media #{$tfmax767}{
-                flex-basis: 100%;
-                width: 58%;
-                margin-top: 30px;
-            }
-        }
-    }
-}
 .tf-tour-design-1{
     .tf-single-details-wrapper{
         .tf-tour-details-right {
@@ -380,174 +263,6 @@ body{
             @media #{$tfmax767}{
                 position: static;
             }
-        }
-    }
-}
-.tf-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    li {
-        margin-top: 12px;
-        list-style: none;
-        display: flex;
-        align-items: baseline;
-        i{
-            color: $color-primary;
-            width: 24px;
-            margin-right: 5px;
-        }
-    }
-}
-
-.repeat-fixed-dates {
-    max-width: 100%;
-    min-height: 100px;
-    background-color: $color-white;
-    margin-bottom: 30px;
-    padding: 20px;
-    border-radius: $tf-brds-default;
-    box-shadow: 0px 0px 24px 5px #E0E8EE;
-
-    .repeated-title-section {
-        display: flex;
-        gap: 10px;
-        align-items: center;
-
-        i {
-            color: $color-primary;
-        }
-    }
-
-    .repeat-dates {
-        display: grid;
-        grid-template-columns: repeat(6, 15%);
-        padding-left: 0;
-        justify-content: space-around;
-        @media #{$tfmax991}{
-            grid-template-columns: repeat(4, 25%);
-        }
-        @media #{$tfmax767}{
-            grid-template-columns: repeat(auto-fit, 30%);
-        }
-        @media #{$max375} {
-            grid-template-columns: repeat(auto-fit, 45%);
-        } 
-        
-    }
-    .repeat-dates {
-        .repeat-date-list {
-            list-style: none;
-            display: inline-block;
-            background-color: $color-white;
-            padding: 8px 12px;
-            margin-top: 15px;
-            text-align: center;
-            border-radius: $tf-brds-default;
-            font-size: 16px;
-            box-shadow: 0px 0px 15px 2px #E0E8EE;
-        }
-    }
-
-}
-.tf-trip-feature-blocks{
-    .tf-feature-block {
-        background: $color-white;
-        box-shadow: 0px 0px 24px 5px #E0E8EE;
-        border-radius: $tf-brds-default;
-        padding: 20px;
-        width: 100%;
-        align-items: baseline;
-        @media #{$tfmax991}{
-            padding: 24px;
-        }
-        i{
-            color: $color-primary;
-            font-size: 20px;
-        }
-        h3{
-            font-size: $font-size-small;
-            color: $color-heading;
-        }
-        p{
-            font-size: $font-size-xs;
-            color: $color-primary;
-            margin-top: $tf-space-8;
-        }
-        .repeat-dates {
-            display: block;
-            padding-left: 0;
-            margin-bottom: 0;
-            margin-left: 0;
-            margin-top: 5px;
-
-            .repeat-date-list {
-                list-style: none;
-                background-color: $color-white;
-                padding: 0px 8px;
-                margin: 10px 5px;
-                text-align: center;
-                border-radius: $tf-brds-default;
-                font-size: 15px;
-                box-shadow: 0px 0px 8px 2px #E0E8EE;
-            }
-        }
-    }
-}
-
-.tf-features-block-inner {
-    flex-wrap: nowrap !important;
-
-    @media #{$tfmax991}{
-        flex-wrap: wrap !important;
-    }
-    @media #{$tfmax360}{
-        flex-wrap: wrap !important;
-    }
-    @media #{$tfmax767}{
-        flex-wrap: wrap !important;
-    }
-    .tf-column {
-        width: 100% !important;
-        flex-basis: auto;
-
-        @media #{$tfmax991}{
-            flex-basis: calc(50% - 16px) !important;
-        }
-        @media #{$tfmax767}{
-            flex-basis: calc(50% - 16px) !important;
-        }
-        @media #{$tfmax360}{
-            flex-basis: calc(100% - 16px) !important;
-        }
-    }
-}
-
-.tf-tour-features {
-    ul {
-        margin: 0;
-        padding: 0;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: flex-start;
-        list-style-type: none;
-        gap: 5px;
-
-        li{
-            display: inline-flex;
-            justify-content: flex-start;
-            background-color: $color-white;
-            border-radius: 5px;
-            padding: 10px 15px;
-            text-transform: capitalize;
-            margin: 5px 16px 10px 0px;
-            box-shadow: 0px 0px 24px 5px #E0E8EE;
-            font-size: 15px;
-            font-weight: 300;
-            
-            .tf-tour-features-icon {
-                margin-right: 8px;
-            } 
         }
     }
 }
