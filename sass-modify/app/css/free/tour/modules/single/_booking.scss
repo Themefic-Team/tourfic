@@ -1,0 +1,64 @@
+.tf-tour-booking-wrap {
+    border-radius: 4px;
+    padding: 10px;
+    margin: 0 auto;
+    background: $color-white;
+    box-shadow: 0px 5px 10px rgba(0, 44, 102, 0.2);
+    width: 80%;
+    font-size: 16px;
+    .btn-styled {
+        border-radius: 2px;
+        width: 160px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+    form.tf_tours_booking {
+        justify-content: space-evenly;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin: 0 !important;
+    }
+    .tf_selectperson-wrap {
+        color: #152B47;
+        font-weight: 500;
+        border: none;
+    }
+    .tf_form-row {
+        .tf_label-row {
+            margin-bottom: 0;
+        }
+        color: #152B47;
+    }
+    .tours-check-in-out {
+        color: #152B47;
+        padding: 0;
+    }
+    .tf_form-inner {
+        input[type="text"] {
+            background: transparent;
+            border: 1px solid #ccc;
+            padding: 5px 15px;
+            border-radius: 2px;
+        }
+        select {
+            background: transparent;
+            border: 1px solid #ccc;
+            padding: 5px 15px;
+            border-radius: 2px;
+            &:focus {
+                background: transparent;
+                border: 0;
+                outline: 0;
+            }
+        }
+        input[type=text] {
+            &:focus {
+                background: transparent;
+                border: 0;
+                outline: 0;
+            }
+        }
+    }
+}

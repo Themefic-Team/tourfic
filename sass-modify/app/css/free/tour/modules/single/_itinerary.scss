@@ -414,3 +414,109 @@
     }
 
 }
+
+// Default Design
+.tf-travel-itinerary-wrapper{
+    .tf-travel-itinerary-content {
+        h2 {
+            margin-bottom: 30px;
+        }
+    }
+    #tf-accordion-wrapper {
+        margin-bottom: 30px;
+        .tf-accordion-head {
+            cursor: pointer;
+            transition: 0.2s ease;
+            display: flex;
+            align-items: center;
+            background: $color-white;
+            box-shadow: 0px 2px 4px rgba(90, 91, 106, 0.08);
+            border-radius: 4px;
+            z-index: 1;
+            position: relative;
+            .tf-travel-time {
+                background: $color-primary;
+                border-radius: 4px 0px 0px 4px;
+                width: 130px;
+                height: 80px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0px 2px 4px rgba(90, 91, 106, 0.08);
+                padding: 10px;
+                span {
+                    font-size: 18px;
+                    color: $color-white;
+                }
+            }
+            h4 {
+                font-size: 18px;
+                color: $color-heading;
+                padding-left: 25px;
+                width: 100%;
+                margin-bottom: 0;
+                &:hover {
+                    color: $color-primary;
+                }
+            }
+            .arrow {
+                transition: 0.25s ease;
+                transform: rotate(-90deg);
+                font-size: 20px;
+                margin-right: 25px;
+                &.arrow-animate {
+                    transform: rotate(0deg);
+                }
+            }
+        }
+        .tf-accordion-content {
+            background-color: $color-white;
+            display: none;
+            padding: 20px 30px;
+            color: $color-text;
+            margin-top: -2px;
+            z-index: 999;
+            position: relative;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+            a {
+                &:focus {
+                    outline: none;
+                }
+            }
+            .tf-travel-desc {
+                display: flex;
+                padding-top: 20px;
+                gap: 20px;
+                flex-direction: row;
+                .tf-ititnerary-img {
+                    flex-basis: 30%;
+                    img {
+                        width: 100%;
+                        object-fit: cover;
+                    }
+                }
+                .trav-cont {
+                    display: flex;
+                    &.tf-travel-description {
+                        display: flow-root;
+                        flex-basis: 70%;
+                    }
+                }
+            }
+            .ininerary-other-gallery {
+                margin-bottom: 20px;
+                .ininerary-gallery-single {
+                    &.slick-slide.slick-active {
+                        height: 130px !important;
+                    }
+                    >a {
+                        img {
+                            height: 130px !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

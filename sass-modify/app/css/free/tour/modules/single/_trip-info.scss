@@ -78,3 +78,67 @@
         font-size: 30px;
     }
 }
+
+// Default Template
+.tf-single-tour-pricing {
+    width: 200px;
+    .tf-price {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 1;
+        color: $color-text;
+        display: flex;
+        align-items: center;
+        margin: 0;
+        padding: 0;
+        justify-content: center;
+        span.sale-price {
+            font-weight: 600;
+            font-size: 24px;
+            line-height: 1;
+            color: $color-primary;
+            margin: 0 8px 0 0;
+        }
+    }
+    .tf-price-tab {
+        list-style: none;
+        display: flex;
+        line-height: 1;
+        font-size: 14px;
+        font-weight: 600;
+        color: $color-text;
+        flex-direction: row;
+        justify-content: space-evenly;
+        margin: 10px 0 0 0;
+        border: 1px solid $color-border;
+        box-sizing: border-box;
+        border-radius: 4px;
+        cursor: pointer;
+        padding: 0;
+        li {
+            padding: 0;
+            width: 100%;
+            text-align: center;
+            height: 36px;
+            justify-content: center;
+            align-content: center;
+            display: flex;
+            align-items: center;
+            transition: 0.3s;
+            &:hover {
+                color: $color-primary;
+                background-color: $color-light-bg;
+            }
+            &:nth-child(2) {
+                border-left: 1px solid $color-light-bg;
+            }
+            &:nth-child(3) {
+                border-left: 1px solid $color-light-bg;
+            }
+        }
+        li.active {
+            color: $color-primary;
+            background: $color-light-bg;
+        }
+    }
+}
