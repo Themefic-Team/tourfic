@@ -24,20 +24,21 @@ class Component extends \Tourfic\Core\Shortcodes {
             <a href="#" class="tf_btn tf_btn_small">Button Small</a>
             <a href="#" class="tf_btn tf_btn_large">Button Large</a>
             <a href="#" class="tf_btn disabled">Button Disabled</a>
-            <button class="tf_btn tf_btn_secondary" disabled>Button Disabled</button>
+            <button class="tf_btn" disabled>Button Disabled</button>
             <a href="#" class="tf_btn tf_btn_full">Button Full</a>
+            <a href="#" class="tf_btn tf_btn_sharp">Button Sharp</a>
         </div>
         
         <h4>Button Border</h4>
         <div class="tf_btn_group" style="margin-bottom: 30px">
-            <a href="#" class="tf_btn tf_btn_border">Button Primary</a>
-            <a href="#" class="tf_btn tf_btn_secondary tf_btn_border">Button Secondery</a>
-            <a href="#" class="tf_btn tf_btn_white tf_btn_border">Button Secondery</a>
-            <a href="#" class="tf_btn tf_btn_small tf_btn_border">Button Small</a>
-            <a href="#" class="tf_btn tf_btn_large tf_btn_border">Button Large</a>
-            <a href="#" class="tf_btn tf_btn_border disabled">Button Disabled</a>
-            <button class="tf_btn tf_btn_secondary tf_btn_border" disabled>Button Disabled</button>
-            <a href="#" class="tf_btn tf_btn_full tf_btn_border">Button Full</a>
+            <a href="#" class="tf_btn tf_btn_outline">Button Primary</a>
+            <a href="#" class="tf_btn tf_btn_secondary tf_btn_outline">Button Secondery</a>
+            <a href="#" class="tf_btn tf_btn_white tf_btn_outline">Button Secondery</a>
+            <a href="#" class="tf_btn tf_btn_small tf_btn_outline">Button Small</a>
+            <a href="#" class="tf_btn tf_btn_large tf_btn_outline">Button Large</a>
+            <a href="#" class="tf_btn tf_btn_outline disabled">Button Disabled</a>
+            <button class="tf_btn tf_btn_secondary tf_btn_outline" disabled>Button Disabled</button>
+            <a href="#" class="tf_btn tf_btn_full tf_btn_outline">Button Full</a>
         </div>
 
         <h2>Modal</h2>
@@ -95,6 +96,69 @@ class Component extends \Tourfic\Core\Shortcodes {
                     </div>
                     <div class="tf-modal-body">
                         Fullscreen Modal
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
+numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
+optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis
+obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam
+nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,
+tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,
+quia. Quo neque error repudiandae fuga? Ipsa laudantium molestias eos 
+sapiente officiis modi at sunt excepturi expedita sint? Sed quibusdam
+recusandae alias error harum maxime adipisci amet laborum. Perspiciatis 
+minima nesciunt dolorem! Officiis iure rerum voluptates a cumque velit 
+quibusdam sed amet tempora. Sit laborum ab, eius fugit doloribus tenetur 
+fugiat, temporibus enim commodi iusto libero magni deleniti quod quam 
+consequuntur! Commodi minima excepturi repudiandae velit hic maxime
+doloremque. Quaerat provident commodi consectetur veniam similique ad 
+earum omnis ipsum saepe, voluptas, hic voluptates pariatur est explicabo 
+fugiat, dolorum eligendi quam cupiditate excepturi mollitia maiores labore 
+suscipit quas? Nulla, placeat. Voluptatem quaerat non architecto ab laudantium
+modi minima sunt esse temporibus sint culpa, recusandae aliquam numquam 
+totam ratione voluptas quod exercitationem fuga. Possimus quis earum veniam 
+quasi aliquam eligendi, placeat qui corporis!
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
+numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
+optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis
+obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam
+nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,
+tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,
+quia. Quo neque error repudiandae fuga? Ipsa laudantium molestias eos 
+sapiente officiis modi at sunt excepturi expedita sint? Sed quibusdam
+recusandae alias error harum maxime adipisci amet laborum. Perspiciatis 
+minima nesciunt dolorem! Officiis iure rerum voluptates a cumque velit 
+quibusdam sed amet tempora. Sit laborum ab, eius fugit doloribus tenetur 
+fugiat, temporibus enim commodi iusto libero magni deleniti quod quam 
+consequuntur! Commodi minima excepturi repudiandae velit hic maxime
+doloremque. Quaerat provident commodi consectetur veniam similique ad 
+earum omnis ipsum saepe, voluptas, hic voluptates pariatur est explicabo 
+fugiat, dolorum eligendi quam cupiditate excepturi mollitia maiores labore 
+suscipit quas? Nulla, placeat. Voluptatem quaerat non architecto ab laudantium
+modi minima sunt esse temporibus sint culpa, recusandae aliquam numquam 
+totam ratione voluptas quod exercitationem fuga. Possimus quis earum veniam 
+quasi aliquam eligendi, placeat qui corporis!
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
+numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
+optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis
+obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam
+nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,
+tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,
+quia. Quo neque error repudiandae fuga? Ipsa laudantium molestias eos 
+sapiente officiis modi at sunt excepturi expedita sint? Sed quibusdam
+recusandae alias error harum maxime adipisci amet laborum. Perspiciatis 
+minima nesciunt dolorem! Officiis iure rerum voluptates a cumque velit 
+quibusdam sed amet tempora. Sit laborum ab, eius fugit doloribus tenetur 
+fugiat, temporibus enim commodi iusto libero magni deleniti quod quam 
+consequuntur! Commodi minima excepturi repudiandae velit hic maxime
+doloremque. Quaerat provident commodi consectetur veniam similique ad 
+earum omnis ipsum saepe, voluptas, hic voluptates pariatur est explicabo 
+fugiat, dolorum eligendi quam cupiditate excepturi mollitia maiores labore 
+suscipit quas? Nulla, placeat. Voluptatem quaerat non architecto ab laudantium
+modi minima sunt esse temporibus sint culpa, recusandae aliquam numquam 
+totam ratione voluptas quod exercitationem fuga. Possimus quis earum veniam 
+quasi aliquam eligendi, placeat qui corporis!
                     </div>
                 </div>
             </div>
@@ -144,8 +208,6 @@ class Component extends \Tourfic\Core\Shortcodes {
                 </div>
             </div>
         </div>
-
-        <h2>Selections</h2>
         
         <?php
 	}

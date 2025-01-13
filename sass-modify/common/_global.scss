@@ -5,7 +5,12 @@ Container
     margin: 0 auto;
     padding: 0 15px;
     max-width: 1200px;
+
+    &-fluid{
+        max-width: 100%;
+    }
 }
+//to-do: remove all
 .tf-car-template-container{
     max-width: 1140px;
     margin: 0 auto;
@@ -15,6 +20,7 @@ Container
     max-width: 1520px;
     padding: 0;
 }
+//to-do: remove all
 
 /*
 Button
@@ -23,7 +29,7 @@ Button
     color: $color-white;
     background-color: $color-primary;
     border-color: $color-primary;
-    font-size: 14px;
+    font-size: var(--tf-base-font-size);
     line-height: 1.2;
     padding: 12px 24px;
     text-decoration: none;
@@ -64,11 +70,15 @@ Button
         }
     }
 
-    &_border{
+    &_outline{
         border-width: 1px;
         border-style: solid;
         color: $color-primary;
         background-color: transparent;
+    }
+
+    &_sharp{
+        border-radius: 0;
     }
 
     &_full{
@@ -80,6 +90,7 @@ Button
     }
     &_large{
         padding: 16px 32px;
+        font-size: calc(var(--tf-base-font-size) + 2px);
     }
 
     //disabled
@@ -93,12 +104,12 @@ Button
 /*
 Button Group
 */
-.tf_btn_group {
+/* .tf_btn_group {
     @include flexbox();
     @include align-items(flex-start);
     @include flex-wrap();
     gap: 8px;
-}
+} */
 
 /*
 Modal
@@ -140,7 +151,7 @@ Modal
         position: relative;
         @include flexbox();
         @include flex-direction(column);
-        width: 60%;
+        width: 100%;
         max-width: 1080px;
         pointer-events: auto;
         background-color: $color-light-bg;
@@ -174,13 +185,13 @@ Modal
 
     &-fullscreen {
         .tf-modal-dialog {
-            min-height: 100vh;
+            height: 100vh;
         }
 
         .tf-modal-content {
             width: 100%;
             max-width: 100%;
-            height: 100vh;
+            overflow-y: auto;
             border-radius: 0;
         }
     }
@@ -255,6 +266,7 @@ Ajax Loader
 /*
 Notice
 */
+//to-do: remove
 .tf-notice {
     @include flexbox();
     padding: 24px;

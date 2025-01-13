@@ -3,6 +3,10 @@ body{
     padding: 0;
 }
 
+:root {
+    --tf-base-font-size: 14px;
+}
+
 .tf-template-global {
     font-family: inherit;
     color: $color-text;
