@@ -23,3 +23,36 @@
         }
     }
 }
+
+// Default Design
+.tf_features {
+    padding: 5px 0 30px 0;
+    .tf-feature-list {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        .single-feature-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+            margin-right: 10px;
+            padding: 6px 10px;
+            border-radius: 4px;
+            border: 1px solid $color-heading;
+            box-shadow: -1px 1px 6px -1px #0000002e;
+            margin-top:10px;
+            i {
+                color: $color-success;
+            }
+            .feature-list-title {
+                margin: 0;
+                padding-left: 8px;
+                text-transform: capitalize;
+                letter-spacing: 0.5px;
+                font-size: 13px;
+            }
+        }
+    }
+}

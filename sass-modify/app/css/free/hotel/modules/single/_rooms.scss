@@ -155,19 +155,12 @@
 
 // Default Design
 .tf-room-section{
+    margin-top: -20px;
     .tf-room-filter .tf-room-checkbox, .tf-room-filter h3 {
         color: $color-heading;
         list-style: none;
     }
-    ul.tf-room-checkbox li {
-        float: left;
-        margin: 10px;
-        display: flex;
-        align-items: center;
-    }
-    ul.tf-room-checkbox li:first-child {
-        margin-left: 0;
-    }
+
     h3.tf-room-feature-title {
         font-size: 18px;
         font-weight: 600;
@@ -175,206 +168,172 @@
     }
     ul.tf-room-checkbox {
         margin-left: 0px;
+        li{
+            float: left;
+            margin: 10px;
+            display: flex;
+            align-items: center;
+            &:first-child{
+                margin-left: 0;
+            }
+        }
+        label{
+            margin-left: 5px;
+            line-height: 19px;
+        }
     }
-    ul.tf-room-checkbox label{
-        margin-left: 5px;
-        line-height: 19px;
-    }
-    .tf-room-filter {
-        padding: 0 0 15px 0;
-        overflow: hidden;
-    }
-    .tf-room-section {
-        margin-top: -20px;
-    }
-    .availability-table {
-        border: none;
-        margin-bottom: 0;
-    }
-
-    .availability-table thead {
-        background: $color-primary;
-        color: $color-white;
-    }
-
-    .availability-table td,
-    .availability-table th {
-        border-left: 1px solid $color-border;
-        border-bottom: 1px solid $color-border;
-        border-top: none;
-        border-right: none;
-    }
-    .availability-table th{
-        border-top: 1px solid $color-border;
-    }
-    .availability-table td.reserve {
-        border-right: 1px solid $color-border;
-    }
-
-    .tf-hotel-deposit-hide {
-        display: none;
-    }
-
 
     .hotel-room-wrap {
         width: 100%;
         overflow-x: auto;
     }
 
-    .room-selection-wrap select,
-    .room-selection-wrap .select2-container .select2-selection--single {
-        background-image: none;
-        padding: 10px;
-        width: 100%;
-        text-align: center;
-        -moz-appearance: auto;
+    .tf-room-filter {
+        padding: 0 0 15px 0;
+        overflow: hidden;
     }
 
-    .availability-table td.description {
-        padding: 25px;
-    }
-
-    .availability-table td.description h3 a,
-    .availability-table td.description h3 {
-        font-size: 20px;
-        line-height: 1.5;
-    }
-
-    .availability-table td.description h3 a {
-        text-decoration: underline !important;
-    }
-
-    .availability-table td.options{
-        ul{
-            list-style: none;
-            margin-left: 0;
-            margin-bottom: 0;
-            li{
-                margin-bottom: 4px;
-                .room-extra-icon{
+    .availability-table {
+        border: none;
+        margin-bottom: 0;
+        thead {
+            background: $color-primary;
+            color: $color-white;
+        }
+        td,
+        th {
+            border-left: 1px solid $color-border;
+            border-bottom: 1px solid $color-border;
+            border-top: none;
+            border-right: none;
+        }
+        th{
+            border-top: 1px solid $color-border;
+        }
+        td.description {
+            padding: 25px;
+            h3,a{
+                font-size: 20px;
+                line-height: 1.5;
+                text-decoration: underline !important;
+            }
+            .room-features {
+                margin-top: 15px;
+                h4 {
+                    font-size: 16px;
+                }
+                .room-feature-list {
+                    list-style: none;
+                    padding: 0;
+                    margin: 5px 0 0;
+                    li {
+                        display: inline-block;
+                        margin-right: 8px;
+                    }
+                }
+                i{
+                    font-size: 16px;
+                    color: $color-text;
+                }
+            }
+            .room-detail-icon {
+                text-align: center;
+                margin: 15px 0 0 0;
+                .room-icon-wrap {
+                    border: 1px solid $color-border;
+                    border-radius: 4px;
+                    padding: 8px 10px 4px 10px;
                     margin-right: 5px;
+                    i{
+                        font-size: 16px;
+                        color: $color-text;
+                    }
+                }
+                .icon-text {
+                    font-size: 14px;
+                    color: $color-text;
+                }
+            }
+            .bed-facilities {
+                margin: 8px 0;
+            }
+        }
+
+        td.pax {
+            min-width: 80px;
+            h4 {
+                font-size: 16px;
+            }
+        }
+    
+        td.options{
+            ul{
+                list-style: none;
+                margin-left: 0;
+                margin-bottom: 0;
+                li{
+                    margin-bottom: 4px;
+                    .room-extra-icon{
+                        margin-right: 5px;
+                    }
                 }
             }
         }
-    }
-
-    .room-features h4,
-    .pax h4 {
-        font-size: 16px;
-    }
-
-    .room-features {
-        margin-top: 15px;
-    }
-
-    .room-feature-list {
-        list-style: none;
-        padding: 0;
-        margin: 5px 0 0;
-    }
-
-    .room-feature-list li {
-        display: inline-block;
-        margin-right: 8px;
-    }
-
-    .tf-room-table td.pax {
-        min-width: 80px;
-    }
-
-    .room-detail-icon {
-        text-align: center;
-        margin: 15px 0 0 0;
-    }
-
-    .room-detail-icon .room-icon-wrap {
-        border: 1px solid $color-border;
-        border-radius: 4px;
-        padding: 8px 10px 4px 10px;
-        margin-right: 5px;
-    }
-
-    .room-detail-icon .room-icon-wrap i,
-    .room-features i {
-        font-size: 16px;
-        color: $color-text;
-    }
-
-    .room-detail-icon .icon-text {
-        font-size: 14px;
-        color: $color-text;
-    }
-
-    .hotel-room-availability,
-    .hotel-room-book {
-        white-space: nowrap;
-    }
-
-    .hotel-room-book {
-        margin-top: 15px;
-    }
-
-    #tour_room_details_loader {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(255, 255, 255, .8);
-        display: none;
-        z-index: 999999;
-    }
-
-    #tour-room-details-loader-img {
-        height: 100%;
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    span.tf-price .amount {
-        font-weight: bold;
-    }
-
-    .price-per-night {
-        font-size: 12px;
-        white-space: nowrap;
-    }
-
-    .bed-facilities {
-        margin: 8px 0;
-    }
-
-    .room-feature-list li {
-        margin-right: 15px;
-    }
-    .tf-hotel-details-qc-gallelry{
-        .tf-details-qc-slider{
-            .tf-details-qcs{
-                img{
+        td.price{
+            .tf-hotel-deposit-hide {
+                display: none;
+            }
+            span.tf-price .amount {
+                font-weight: bold;
+            }
+            .price-per-night {
+                font-size: 12px;
+                white-space: nowrap;
+            }
+        }
+        td.reserve {
+            border-right: 1px solid $color-border;
+            .room-selection-wrap{
+                select,
+                .select2-container .select2-selection--single{
+                    background-image: none;
+                    padding: 10px;
                     width: 100%;
+                    text-align: center;
+                    -moz-appearance: auto;
                 }
             }
-        }
-        .tf-details-qc-slider-nav {
-            margin-top: 0px;
-            .tf-details-qcs.is-active img {
-                border: 5px solid $color-primary;
+            #tour_room_details_loader {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(255, 255, 255, .8);
+                display: none;
+                z-index: 999999;
+                #tour-room-details-loader-img {
+                    height: 100%;
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
             }
-            .tf-details-qcs img {
-                min-height: 50px;
-                max-height: 50px;
+            #tf-hotel-services.tf-hotel-services-wrap{
+                display: none;
+            }
+            .tf-withoutpayment-booking{
+                text-align: left;
+            }
+            .hotel-room-availability,
+            .hotel-room-book {
+                white-space: nowrap;
+            }
+            .hotel-room-book {
+                margin-top: 15px;
             }
         }
     }
-
-    .tf-room{
-        .tf-withoutpayment-booking{
-            text-align: left;
-        }
-    }
-    #tf-hotel-services.tf-hotel-services-wrap{
-        display: none;
-    }
+    
 }

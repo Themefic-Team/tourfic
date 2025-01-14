@@ -318,6 +318,13 @@
     width: 100%;
   }
 }
+.tf-withoutpayment-booking .tf-withoutpayment-popup .tf-single-hotel-service label,
+.tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-single-hotel-service label {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-start;
+  gap: 8px;
+}
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-tabs,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-tabs {
   padding: 24px;
