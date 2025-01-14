@@ -577,7 +577,7 @@ class Helper {
 		if ( ( $post_type == "tf_tours" && $tf_tour_arc_selected_template == "design-1" ) ||
              ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template == "design-1" ) ) {
 			?>
-            <div class="tf-booking-form">
+            <div class="tf-box-wrapper tf-box tf-mrbottom-30">
                 <form class="widget tf-hotel-side-booking" method="get" autocomplete="off"
                       action="<?php echo esc_url( self::tf_booking_search_action() ); ?>" id="tf-widget-booking-search">
 
@@ -1611,7 +1611,7 @@ class Helper {
              ( $post_type == 'tf_hotel' && $tf_hotel_arc_selected_template == "design-1" ) ||
              ( $post_type == 'tf_tours' && $tf_tour_arc_selected_template == "design-1" ) ) {
 			?>
-            <div class="tf-booking-form">
+            <div class="tf-box-wrapper tf-box tf-mrbottom-30">
                 <form action="<?php echo esc_url( self::tf_booking_search_action() ); ?>" method="get" autocomplete="off" class="tf_archive_search_result tf-hotel-side-booking">
                     <div class="tf-field-group tf-destination-box" <?php echo ( $post_type == 'tf_hotel' && self::tfopt( "hide_hotel_location_search" ) == 1 && self::tfopt( "required_location_hotel_search" ) != 1 ) || ( $post_type == 'tf_tours' && self::tfopt( "hide_tour_location_search" ) == 1 && self::tfopt( "required_location_tour_search" ) != 1 ) ? 'style="display:none"' : '' ?>>
                         <i class="fa-solid fa-location-dot"></i>

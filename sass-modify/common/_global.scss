@@ -38,11 +38,12 @@ Button
     }
 
     &_secondary{
-        color: $color-white;
-        background-color: $color-secondary;
-        border-color: $color-secondary;
+        color: $color-text-dark;
+        background-color: $color-secondary-light;
+        border-color: $color-secondary-light;
 
         &:hover{
+            color: $color-white;
             background-color: $color-primary;
             border-color: $color-primary;
         }

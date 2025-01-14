@@ -128,12 +128,6 @@
     }
 }
 
-.tf-reserve-button {
-    
-    width: 100%;
-    margin-top: 15px;
-}
-
 //Tourfic forms
 .tf-field-group.tf_form-inner,
 .tf-field-group {
@@ -202,6 +196,23 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+//Tourfi Base classes
+.tf-box-wrapper{
+    background-color: #fff;
+    border-radius: 5px;
+}
+.tf-box{
+    padding: $tf-space-30;
+    box-shadow: 0px 13px 30px 0px #e0e8ee;
+    
+    @media #{$tfmax767}{
+        padding: $tf-space-24;
+    }
+    @media #{$tfmax991}{
+        padding: $tf-space-24;
+    }
 }
 
 .tf-flex{

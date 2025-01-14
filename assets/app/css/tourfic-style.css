@@ -41,11 +41,12 @@ Button
   border-color: #003C7A;
 }
 .tf_btn_secondary {
-  color: #ffffff;
-  background-color: #003C7A;
-  border-color: #003C7A;
+  color: #060D1C;
+  background-color: #E3E7F2;
+  border-color: #E3E7F2;
 }
 .tf_btn_secondary:hover {
+  color: #ffffff;
   background-color: #0E3DD8;
   border-color: #0E3DD8;
 }
@@ -625,26 +626,6 @@ Notice
 .tf-refund-confirmation-box .tf-refund-box-content .tf-refund-confirmation-button button.tf-refund-cancel:hover {
   background: #0E3DD8;
   color: #ffffff;
-}
-
-/* 
-Search Form / Booking Form
-*/
-.tf-booking-form {
-  background-color: #ffffff;
-  border-radius: 5px;
-  padding: 30px;
-  box-shadow: 0px 13px 30px 0px #e0e8ee;
-}
-@media only screen and (max-width: 767.98px) {
-  .tf-booking-form {
-    padding: 24px;
-  }
-}
-@media only screen and (min-width: 767.99px) and (max-width: 991px) {
-  .tf-booking-form {
-    padding: 24px;
-  }
 }
 
 .tf-main-wrapper {
@@ -4230,11 +4211,6 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   width: 24px;
 }
 
-.tf-reserve-button {
-  width: 100%;
-  margin-top: 15px;
-}
-
 .tf-field-group.tf_form-inner,
 .tf-field-group {
   position: relative;
@@ -4312,6 +4288,26 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.tf-box-wrapper {
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+.tf-box {
+  padding: 30px;
+  box-shadow: 0px 13px 30px 0px #e0e8ee;
+}
+@media only screen and (max-width: 767.98px) {
+  .tf-box {
+    padding: 24px;
+  }
+}
+@media only screen and (min-width: 767.99px) and (max-width: 991px) {
+  .tf-box {
+    padding: 24px;
+  }
 }
 
 .tf-flex {
