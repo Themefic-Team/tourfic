@@ -43,8 +43,27 @@
 }
 
 // Default Design
+.popupmap-for-mobile {
+    @media only screen and (min-width: 951px) {
+        display: none;
+    }
+    @media only screen and (max-width: 950px) {
+        margin-top: 15px;
+    }
+}
+.map-for-mobile {
+    @media only screen and (min-width: 831px) {
+        display: none;
+    }
+    @media only screen and (max-width: 830px) {
+        margin-top: 15px;
+    }
+}
 .show-on-map {
     margin-bottom: 20px;
+    @media only screen and (max-width: 830px) {
+        display: none;
+    }
     iframe {
         height: 130px;
     }

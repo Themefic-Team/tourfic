@@ -43,6 +43,9 @@
             border: 1px solid $color-heading;
             box-shadow: -1px 1px 6px -1px #0000002e;
             margin-top:10px;
+            @media only screen and (max-width: 767px) {
+                margin-bottom: 10px;
+            }
             i {
                 color: $color-success;
             }

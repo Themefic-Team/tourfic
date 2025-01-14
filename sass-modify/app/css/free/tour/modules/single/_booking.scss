@@ -6,11 +6,29 @@
     box-shadow: 0px 5px 10px rgba(0, 44, 102, 0.2);
     width: 80%;
     font-size: 16px;
+    @media only screen and (max-width: 1200px) {
+        width: 95%;
+    }
+    @media only screen and (max-width: 1025px) {
+        font-size: 14px;
+    }
+    @media only screen and (max-width: 767px) {
+        max-width: 450px;
+    }
+    &.tf-tours-fixed{
+        @media only screen and (max-width: 767px) {
+            max-width: 100%;
+        }
+    }
     .btn-styled {
         border-radius: 2px;
         width: 160px;
         font-weight: bold;
         text-transform: uppercase;
+        @media only screen and (max-width: 767px) {
+            width: 98%;
+            margin: auto;
+        }
     }
     form.tf_tours_booking {
         justify-content: space-evenly;
@@ -19,11 +37,20 @@
         align-items: center;
         gap: 15px;
         margin: 0 !important;
+        @media only screen and (max-width: 1200px) {
+            flex-wrap: wrap;
+        }
     }
     .tf_selectperson-wrap {
         color: #152B47;
         font-weight: 500;
         border: none;
+        @media only screen and (max-width: 767px) {
+            display: flex;
+            justify-content: center;
+            width: 95%;
+            padding: 10px !important;
+        }
     }
     .tf_form-row {
         .tf_label-row {
@@ -41,12 +68,24 @@
             border: 1px solid #ccc;
             padding: 5px 15px;
             border-radius: 2px;
+            @media only screen and (max-width: 1025px) {
+                font-size: 14px;
+            }
+            @media only screen and (max-width: 767px) {
+                max-width: 100%;
+            }
         }
         select {
             background: transparent;
             border: 1px solid #ccc;
             padding: 5px 15px;
             border-radius: 2px;
+            @media only screen and (max-width: 1025px) {
+                font-size: 14px;
+            }
+            @media only screen and (max-width: 767px) {
+                max-width: 100%;
+            }
             &:focus {
                 background: transparent;
                 border: 0;
@@ -61,4 +100,13 @@
             }
         }
     }
+    .btn-styled {
+        @media only screen and (min-width: 768px) and (max-width: 970px) {
+            width: 98%;
+            margin: auto;
+        }
+    }
+}
+.check-in-time-div{
+    display: none;
 }

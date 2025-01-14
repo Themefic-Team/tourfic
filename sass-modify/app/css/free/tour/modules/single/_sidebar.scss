@@ -1,7 +1,10 @@
 .tf-tour-details-right {
     padding-left: 30px;
+    top: 0;
+    align-self: flex-start;
     @media #{$tfmax767}{
         padding-left: 0px;
+        position: static;
     }
 
     .tf-tour-booking-box  {

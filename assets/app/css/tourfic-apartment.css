@@ -1659,9 +1659,6 @@
   margin-top: 5px;
 }
 
-.tf-map-link a.more-hotel {
-  font-weight: bold;
-}
 .tf-map-link p {
   margin-bottom: 0;
   font-size: 16px;
@@ -1726,6 +1723,11 @@
 }
 .tf-map-content-wrapper .tf-apartment-map iframe {
   border-radius: 8px;
+}
+@media only screen and (max-width: 480px) {
+  .tf-map-content-wrapper .tf-apartment-map iframe {
+    height: 320px;
+  }
 }
 .tf-map-content-wrapper .about-location {
   -webkit-flex: 0 0 calc(50% - 52px);

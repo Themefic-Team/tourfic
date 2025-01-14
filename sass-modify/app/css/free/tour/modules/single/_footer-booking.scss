@@ -162,6 +162,18 @@
             width: 100%;
         }
     }
+    
+    .tf-tours-booking-btn {
+        @media only screen and (min-width: 768px) and (max-width: 970px) {
+            width: 98%;
+            margin: auto;
+        }
+        @media only screen and (max-width: 767px) {
+            width: 98%;
+            margin: auto;
+        }
+
+    }
 }
 
 .tour-external-booking-form {
