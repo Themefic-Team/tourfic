@@ -320,19 +320,3 @@ Notice
         }
     }
 }
-
-/* 
-Search Form / Booking Form
-*/
-.tf-booking-form{
-    background-color: $color-white;
-    border-radius: 5px;
-    padding: $tf-space-30;
-    box-shadow: 0px 13px 30px 0px #e0e8ee;
-    @media #{$tfmax767}{
-        padding: $tf-space-24;
-    }
-    @media #{$tfmax991}{
-        padding: $tf-space-24;
-    }
-}

@@ -254,11 +254,11 @@ if ( $rooms ) :
 										Pricing::instance( get_the_ID(), $_room->ID )->get_per_price_html( $room_option_key );
 									} ?>
 									<?php if ( $tf_booking_type == 2 && ! empty( $tf_booking_url ) ): ?>
-                                        <a href="<?php echo esc_url( $tf_booking_url ); ?>" class="tf-btn-normal btn-secondary" target="_blank">
+                                        <a href="<?php echo esc_url( $tf_booking_url ); ?>" class="tf_btn tf_btn_secondary" target="_blank">
 											<?php esc_html_e( $tf_hotel_reserve_button_text, 'tourfic' ); ?>
                                         </a>
 									<?php else: ?>
-                                        <button class="hotel-room-availability tf-btn-normal btn-secondary" type="submit" style="margin: 0 auto;">
+                                        <button class="hotel-room-availability tf_btn tf_btn_secondary" type="submit" style="margin: 0 auto;">
 											<?php esc_html_e( 'Check Availability', 'tourfic' ); ?>
                                         </button>
 									<?php endif; ?>
@@ -319,11 +319,11 @@ if ( $rooms ) :
 										<?php esc_html_e( $tf_hotel_reserve_button_text, 'tourfic' ); ?>
                                     </a>
 								<?php elseif ( $tf_booking_type == 2 && $tf_ext_booking_type == 2 && ! empty( $tf_ext_booking_code ) ): ?>
-                                    <a href="<?php echo esc_url( "#tf-external-booking-embaded-form" ); ?>" class="tf-btn-normal btn-secondary" target="_blank">
+                                    <a href="<?php echo esc_url( "#tf-external-booking-embaded-form" ); ?>" class="tf_btn tf_btn_secondary" target="_blank">
 										<?php esc_html_e( $tf_hotel_reserve_button_text, 'tourfic' ); ?>
                                     </a>
 								<?php else: ?>
-                                    <button class="hotel-room-availability tf-btn-normal btn-secondary" type="submit" style="margin: 0 auto;">
+                                    <button class="hotel-room-availability tf_btn tf_btn_secondary" type="submit" style="margin: 0 auto;">
 										<?php esc_html_e( 'Check Availability', 'tourfic' ); ?>
                                     </button>
 								<?php endif; ?>
