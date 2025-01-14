@@ -41,3 +41,24 @@
         }
     }
 }
+
+// Default Design
+.show-on-map {
+    margin-bottom: 20px;
+    iframe {
+        height: 130px;
+    }
+    .btn-styled {
+        background: linear-gradient(to bottom, $color-primary 0, $color-secondary 100%);
+        border: none;
+        text-transform: uppercase;
+        font-weight: bold;
+        &:hover{
+            background: linear-gradient(to bottom, #0071e3 0, $color-secondary 100%);
+        }
+    }
+    i {
+        padding-right: 8px;
+        font-size: 15px;
+    }
+}

@@ -20,20 +20,17 @@ $color-info: #069697;
 $color-info-light: #f0fafa;
 
 //Fonts
-//to-do: remove all
-$font-primary: 'Jost', sans-serif; // to-do: remove
-$font-secondary: 'Ubuntu', sans-serif; // to-do: remove
+$font-primary: 'Jost', sans-serif;
+$font-secondary: 'Ubuntu', sans-serif;
 
 $font-weight-normal: 400;
 $font-weight-medium: 500;
-$font-weight-bold: 700;
 
 $font-size-large: 30px;
 $font-size-medium: 24px;
 $font-size-normal: 16px;
 $font-size-small: 14px;
 $font-size-xs: 12px;
-//to-do: remove all
 
 // Media Queries
 $min576: "only screen and (min-width: 576px)";
