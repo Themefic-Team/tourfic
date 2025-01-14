@@ -424,6 +424,9 @@
     }
     #tf-accordion-wrapper {
         margin-bottom: 30px;
+        @media only screen and (max-width: 480px) {
+            margin-bottom: 15px;
+        }
         .tf-accordion-head {
             cursor: pointer;
             transition: 0.2s ease;
@@ -444,9 +447,16 @@
                 justify-content: center;
                 box-shadow: 0px 2px 4px rgba(90, 91, 106, 0.08);
                 padding: 10px;
+                @media only screen and (max-width: 767px) {
+                    height: 60px;
+                }
                 span {
                     font-size: 18px;
                     color: $color-white;
+                    @media only screen and (max-width: 767px) {
+                        font-size: 15px;
+                        text-align: center;
+                    }
                 }
             }
             h4 {
@@ -457,6 +467,10 @@
                 margin-bottom: 0;
                 &:hover {
                     color: $color-primary;
+                }
+                @media only screen and (max-width: 767px) {
+                    font-size: 15px;
+                    padding-left: 20px;
                 }
             }
             .arrow {
@@ -489,11 +503,17 @@
                 padding-top: 20px;
                 gap: 20px;
                 flex-direction: row;
+                @media only screen and (max-width: 767px) {
+                    display: grid;
+                }
                 .tf-ititnerary-img {
                     flex-basis: 30%;
                     img {
                         width: 100%;
                         object-fit: cover;
+                        @media only screen and (max-width: 767px) {
+                            max-width: 100%;
+                        }
                     }
                 }
                 .trav-cont {

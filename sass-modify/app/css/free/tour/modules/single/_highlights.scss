@@ -36,6 +36,9 @@
         display: flex;
         gap: 30px;
         align-items: center;
+        @media only screen and (max-width: 767px) {
+            display: grid;
+        }
         .tf-highlight-text {
             flex: 0 0 49%;
             ul {

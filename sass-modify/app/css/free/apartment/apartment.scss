@@ -447,10 +447,6 @@
 }
 
 .tf-map-link {
-    a.more-hotel {
-        font-weight: bold;
-    }
-
     p {
         margin-bottom: 0;
         font-size: 16px;
@@ -508,6 +504,9 @@
 
         iframe {
             border-radius: 8px;
+            @media only screen and (max-width: 480px) {
+                height: 320px;
+            }
         }
     }
 

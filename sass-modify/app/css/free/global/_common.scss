@@ -138,6 +138,9 @@ h3.section-heading {
         text-decoration: none;
         border: 1px solid $color-secondary;
     }
+    @media only screen and (max-width: 1025px) {
+        font-size: 14px;
+    }
 }
 .tf_button.btn-outline {
     background: $color-white;
@@ -254,6 +257,13 @@ a.tf_button.btn-styled {
 .tf-title-wrap {
     display: flex;
     justify-content: space-between;
+    @media only screen and (max-width: 650px) {
+        display: block;
+    }
+    @media only screen and (max-width: 600px) {
+        display: block;
+    }
+    
 }
 .tf-title-left {
     span.post-type {
@@ -271,17 +281,38 @@ a.tf_button.btn-styled {
         font-size: 35px;
         margin-top: 0;
         margin-bottom: 6px;
+        @media only screen and (max-width: 767px){
+            font-size: 28px;
+        }
+    }
+    &.tf-tour-title {
+        @media only screen and (max-width: 650px) {
+            text-align: center;
+        }
     }
 }
 .tf-title-right {
     display: flex;
     align-items: center;
     column-gap: 5px;
+    @media only screen and (max-width: 600px) {
+        margin-top: 15px;
+        justify-content: end;
+    }
+    .tf-wishlist-button {
+        font-size: 24px;
+        cursor: pointer;
+        margin: 0 5px 0 0;
+        line-height: 1;
+    }
 }
 .tf-map-link {
     a {
         font-size: 14px;
         color: $color-text;
+        &.more-hotel {
+            font-weight: bold;
+        }
     }
 }
 .tf-single-rating {
@@ -432,6 +463,9 @@ ul.tf-sidebar-checkbox {
     padding: 20px !important;
     border-radius: 4px;
     font-size: 14px;
+    @media only screen and (max-width: 830px) {
+        margin-bottom: 0;
+    }
     #check-in-out-date {
         min-width: 150px;
     }
@@ -1023,6 +1057,9 @@ h3.tf-sidebar-widget_title {
 .tf-faq-sec-title {
     margin-bottom: 60px;
     text-align: center;
+    @media only screen and (max-width: 767px) {
+        margin-bottom: 20px;
+    }
     p {
         max-width: 480px;
         margin: auto;
@@ -1031,6 +1068,9 @@ h3.tf-sidebar-widget_title {
 .tf-faq-content-wrapper {
     display: flex;
     gap: 35px;
+    @media only screen and (max-width: 980px) {
+        display: grid;
+    }
 }
 .tf-ask-question {
     background: $color-light-bg;
@@ -1038,6 +1078,10 @@ h3.tf-sidebar-widget_title {
     border-radius: 4px;
     flex: 2;
     text-align: center;
+    @media only screen and (max-width: 767px) {
+        max-width: 450px;
+        margin: auto;
+    }
     .default-enquiry-title-section {
         display: flex;
         justify-content: center;
@@ -1115,6 +1159,18 @@ h3.tf-sidebar-widget_title {
     background-size: cover;
     background-position: center center;
     margin-left: 0 !important;
+    @media only screen and (min-width: 768px) and (max-width: 970px) {
+        border: 7px solid $color-white;
+        height: 300px !important;
+        padding: 15px;
+        margin: 0 7px 15px !important;
+    }
+    @media only screen and (max-width: 767px) {
+        border: 7px solid $color-white;
+        height: 250px !important;
+        padding: 15px;
+        margin: 0 7px 15px !important;
+    }
 }
 .tf-slider-content {
     background: rgba(0, 0, 0, 0.45);
@@ -1130,6 +1186,12 @@ h3.tf-sidebar-widget_title {
     h3 {
         font-size: 20px;
         color: $color-white;
+        @media only screen and (max-width: 980px) {
+            font-size: 18px;
+        }
+        @media only screen and (max-width: 480px) {
+            font-size: 16px;
+        }
         span {
             font-size: 15px;
             line-height: 26px;
@@ -1300,6 +1362,18 @@ li.filter-item {
         display: none;
     }
 } */
+
+.flatpickr-calendar {
+    @media only screen and (max-width: 1025px) {
+        font-size: 14px;
+    }
+}
+
+// UNFOLD Theme Compatibily
+#commentform label{
+    position: static !important;
+    display: inline-block !important;
+}
 
 /*
 Ajax Loader Booking Availability

@@ -166,10 +166,20 @@
         gap: 24px;
         width: 576px;
         height: 40px;
+        @media only screen and (max-width: 480px) {
+            display: block;
+        }
         .tf_button {
             height: 45px;
             border-radius: 4px;
             padding: unset;
+        }
+        button {
+            &:first-child {
+                @media only screen and (max-width: 480px) {
+                    margin-bottom: 10px;
+                }
+            }
         }
     }
 }
@@ -206,6 +216,9 @@
     padding: 35px 30px 20px 30px;
     cursor: auto;
     border-radius: 4px;
+    @media only screen and (max-width: 480px) {
+        padding: 10px;
+    }
 }
 .tour-extra-container {
     min-width: 300px;
@@ -323,6 +336,9 @@
 .tf-hotel-location-preview {
     position: relative;
     margin-bottom: 15px;
+    @media only screen and (max-width: 950px) {
+        display: none;
+    }
     a{
         text-decoration: none;
     }
@@ -341,6 +357,11 @@
             display: inline-block;
             text-align: center;
             border-radius: 0;
+        }
+    }
+    iframe{
+        @media only screen and (max-width: 950px) {
+            height: 200px;
         }
     }
 }

@@ -186,6 +186,10 @@
     .hotel-room-wrap {
         width: 100%;
         overflow-x: auto;
+        @media only screen and (max-width: 767px) {
+            width: auto;
+            overflow-x: auto;
+        }
     }
 
     .tf-room-filter {
@@ -212,6 +216,9 @@
         }
         td.description {
             padding: 25px;
+            @media only screen and (max-width: 767px) {
+                min-width: 300px;
+            }
             h3,a{
                 font-size: 20px;
                 line-height: 1.5;

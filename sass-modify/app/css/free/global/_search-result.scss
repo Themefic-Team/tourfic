@@ -384,6 +384,9 @@ a.page-numbers {
     .availability-btn-area.tour-search{
         text-align: left;
     }
+    .tf_posts_navigation {
+        grid-column: span 2;
+    }
 }
 
 /* Search result sidebar  */
