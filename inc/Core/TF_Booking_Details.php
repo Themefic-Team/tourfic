@@ -914,7 +914,7 @@ abstract Class TF_Booking_Details {
                                         <tr>
                                             <th><?php esc_html_e("Due Price", "tourfic"); ?></th>
                                             <td>:</td>
-                                            <td><?php echo wp_kses_post(wc_price($tf_tour_details->due_price)); ?></td>
+                                            <td><?php echo is_int($tf_tour_details->due_price) ? wp_kses_post(wc_price($tf_tour_details->due_price)) : wp_kses_post($tf_tour_details->due_price); ?></td>
                                         </tr>
                                         <?php } ?>
                                     </table>
