@@ -110,3 +110,29 @@
         }
     }
 }
+
+.single-tf_apartment {
+    #tf-ask-question {
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            border: 1px solid $color-gray;
+            border-radius: 4px;
+            padding: 12px 16px;
+            background-color: $color-white;
+            color: $color-gray-light;
+            font-size: 16px;
+            font-weight: 400;
+            transition: all 0.3s ease-in-out;
+
+            &:focus {
+                outline: none;
+                border-color: $color-primary;
+            }
+        }
+
+        textarea {
+            height: 120px;
+        }
+    }
+}
