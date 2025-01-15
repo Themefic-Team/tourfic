@@ -3,6 +3,7 @@
 
 // Single Apartment Modules Start
 @import './modules/single/_head';
+@import './modules/single/_description';
 @import './modules/single/_gallery';
 @import './modules/single/_informations';
 @import './modules/single/_rooms';
@@ -10,6 +11,7 @@
 @import './modules/single/_offer';
 @import './modules/single/_map';
 @import './modules/single/_faq';
+@import './modules/single/_amenities';
 @import './modules/single/_review';
 @import './modules/single/_related-items';
 @import './modules/single/_booking-form';
@@ -17,19 +19,8 @@
 @import './modules/single/_terms-and-condition';
 // Single Apartment Modules End
 
-.tf-template-3.tf-apartment-single {
-    #tf-apartment-booking .tf-apartment-form-fields .tf_booking-dates {
-        flex-wrap: wrap;
-        margin-bottom: 32px;
-
-        .tf_label-row {
-            margin-top: 8px;
-        }
-    }
-}
 
 .tf-apartment {
-
     .btn-primary {
         color: $color-white;
         font-size: 16px !important;
@@ -41,7 +32,6 @@
         background: $color-primary;
         box-shadow: 0px 1px 1px 0px rgba(0, 60, 121, 0.16);
     }
-
     .section-heading {
         font-weight: 600 !important;
         font-size: 24px !important;
@@ -49,8 +39,6 @@
         margin: 0 0 16px 0;
         color: $color-heading;
     }
-
-
     .tf-apartment-content-wrapper {
         @include flexbox();
         @include flex-wrap(wrap);
@@ -59,80 +47,19 @@
         @media #{$max991} {
             flex-direction: column-reverse;
         }
-    }
-
-    .tf-apartment-left {
-        width: calc(66.66% - 32px);
-
-        @media #{$max991} {
-            width: 100%;
+        .tf-apartment-left {
+            width: calc(66.66% - 32px);
+    
+            @media #{$max991} {
+                width: 100%;
+            }
+        }
+        .tf-apartment-right {
+            width: 33.33%;
+    
+            @media #{$max991} {
+                width: 100%;
+            }
         }
     }
-
-    .tf-apartment-right {
-        width: 33.33%;
-
-        @media #{$max991} {
-            width: 100%;
-        }
-    }
-
-    #tf-amenities-modal h2.section-heading {
-        margin-bottom: 24px;
-    }
-
-    .tf-apartment-amenity-cat {
-        border-bottom: 1px solid $color-gray;
-        margin-bottom: 24px;
-
-        &:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-        }
-
-        h3 {
-            font-size: 20px !important;
-            color: $color-heading;
-            margin-bottom: 16px;
-        }
-    }
-
-    .apt-description {
-        margin-bottom: 48px;
-
-        p {
-            margin: 0 0 20px 0;
-            color: $color-text;
-            font-size: 14px;
-            font-weight: 400;
-            line-height: 24px !important;
-            letter-spacing: 0.2px;
-        }
-    }
-}
-
-.admin-bar {
-
-    .fancybox-infobar,
-    .fancybox-toolbar {
-        top: 32px;
-    }
-}
-
-.tf-host-rating-wrapper {
-    @include flexbox();
-    @include align-items(center);
-    gap: 4px;
-
-    .tf-host-rating {
-        font-weight: 600;
-    }
-
-    h6 {
-        margin-bottom: 0;
-    }
-}
-
-div.tf-aq-inner .tf-ask-question-head-content h3 {
-    margin: 0px;
 }

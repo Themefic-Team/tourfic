@@ -164,7 +164,6 @@ if( $post_type == "tf_tours" && $tf_tour_arc_selected_template=="design-1" ){
 <?php
 }
 
-
 if(wp_is_block_theme()){
     wp_footer();
     block_footer_area();

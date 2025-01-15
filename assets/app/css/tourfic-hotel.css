@@ -1485,10 +1485,6 @@
   transform: rotate(-45deg);
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 .tf_template_3_global_layouts .site-primary-header-wrap,
 .tf_template_3_global_layouts .header-container.container,
 .tf_template_3_global_layouts #footer .footer-bottom,

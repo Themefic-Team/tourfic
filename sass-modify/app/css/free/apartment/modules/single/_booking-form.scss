@@ -245,6 +245,17 @@
     }
 }
 
+.tf-template-3.tf-apartment-single {
+    #tf-apartment-booking .tf-apartment-form-fields .tf_booking-dates {
+        flex-wrap: wrap;
+        margin-bottom: 32px;
+
+        .tf_label-row {
+            margin-top: 8px;
+        }
+    }
+}
+
 // Default Design
 #tf-apartment-booking{
     box-shadow: none;
