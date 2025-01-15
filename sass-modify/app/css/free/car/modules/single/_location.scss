@@ -1,11 +1,15 @@
-.tf-car-design-1{
-    .tf-car-location{
-        width: 100%;
-        .tf-car-location-map{
-            border-radius: 8px;
-            background: $color-light-bg;
-            height: 260px;
-            width: 100%;
+.single-tf_carrental{
+    .tf-single-template{
+        &__one{
+            .tf-car-location{
+                width: 100%;
+                .tf-car-location-map{
+                    border-radius: 8px;
+                    background: $color-light-bg;
+                    height: 260px;
+                    width: 100%;
+                }
+            }
         }
     }
 }

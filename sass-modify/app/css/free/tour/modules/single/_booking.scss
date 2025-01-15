@@ -1,112 +1,169 @@
-.tf-tour-booking-wrap {
-    border-radius: 4px;
-    padding: 10px;
-    margin: 0 auto;
-    background: $color-white;
-    box-shadow: 0px 5px 10px rgba(0, 44, 102, 0.2);
-    width: 80%;
-    font-size: 16px;
-    @media only screen and (max-width: 1200px) {
-        width: 95%;
-    }
-    @media only screen and (max-width: 1025px) {
-        font-size: 14px;
-    }
-    @media only screen and (max-width: 767px) {
-        max-width: 450px;
-    }
-    &.tf-tours-fixed{
-        @media only screen and (max-width: 767px) {
-            max-width: 100%;
-        }
-    }
-    .btn-styled {
-        border-radius: 2px;
-        width: 160px;
-        font-weight: bold;
-        text-transform: uppercase;
-        @media only screen and (max-width: 767px) {
-            width: 98%;
-            margin: auto;
-        }
-    }
-    form.tf_tours_booking {
-        justify-content: space-evenly;
-        width: 100%;
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        margin: 0 !important;
-        @media only screen and (max-width: 1200px) {
-            flex-wrap: wrap;
-        }
-    }
-    .tf_selectperson-wrap {
-        color: #152B47;
-        font-weight: 500;
-        border: none;
-        @media only screen and (max-width: 767px) {
-            display: flex;
-            justify-content: center;
-            width: 95%;
-            padding: 10px !important;
-        }
-    }
-    .tf_form-row {
-        .tf_label-row {
-            margin-bottom: 0;
-        }
-        color: #152B47;
-    }
-    .tours-check-in-out {
-        color: #152B47;
-        padding: 0;
-    }
-    .tf_form-inner {
-        input[type="text"] {
-            background: transparent;
-            border: 1px solid #ccc;
-            padding: 5px 15px;
-            border-radius: 2px;
-            @media only screen and (max-width: 1025px) {
-                font-size: 14px;
+.single-tf_tours{
+    .tf-single-template{
+        &__one{
+            .tf-tour-booking-wrap {
+                border-radius: 4px;
+                padding: 10px;
+                margin: 0 auto;
+                background: $color-white;
+                box-shadow: 0px 5px 10px rgba(0, 44, 102, 0.2);
+                width: 80%;
+                font-size: 16px;
+                @media only screen and (max-width: 1200px) {
+                    width: 95%;
+                }
+                @media only screen and (max-width: 1025px) {
+                    font-size: 14px;
+                }
+                @media only screen and (max-width: 767px) {
+                    max-width: 450px;
+                }
+                .btn-styled {
+                    border-radius: 2px;
+                    width: 160px;
+                    font-weight: bold;
+                    text-transform: uppercase;
+                    @media only screen and (max-width: 767px) {
+                        width: 98%;
+                        margin: auto;
+                    }
+                    @media only screen and (min-width: 768px) and (max-width: 970px) {
+                        width: 98%;
+                        margin: auto;
+                    }
+                }
+                form.tf_tours_booking {
+                    justify-content: space-evenly;
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    gap: 15px;
+                    margin: 0 !important;
+                    @media only screen and (max-width: 1200px) {
+                        flex-wrap: wrap;
+                    }
+                }
+                .tf_selectperson-wrap {
+                    color: #152B47;
+                    font-weight: 500;
+                    border: none;
+                    @media only screen and (max-width: 767px) {
+                        display: flex;
+                        justify-content: center;
+                        width: 95%;
+                        padding: 10px !important;
+                    }
+                }
+                .tf_form-row {
+                    .tf_label-row {
+                        margin-bottom: 0;
+                    }
+                    color: #152B47;
+                }
+                .tours-check-in-out {
+                    color: #152B47;
+                    padding: 0;
+                }
+                .tf_form-inner {
+                    input[type="text"] {
+                        background: transparent;
+                        border: 1px solid #ccc;
+                        padding: 5px 15px;
+                        border-radius: 2px;
+                        @media only screen and (max-width: 1025px) {
+                            font-size: 14px;
+                        }
+                        @media only screen and (max-width: 767px) {
+                            max-width: 100%;
+                        }
+                    }
+                    select {
+                        background: transparent;
+                        border: 1px solid #ccc;
+                        padding: 5px 15px;
+                        border-radius: 2px;
+                        @media only screen and (max-width: 1025px) {
+                            font-size: 14px;
+                        }
+                        @media only screen and (max-width: 767px) {
+                            max-width: 100%;
+                        }
+                        &:focus {
+                            background: transparent;
+                            border: 0;
+                            outline: 0;
+                        }
+                    }
+                    input[type=text] {
+                        &:focus {
+                            background: transparent;
+                            border: 0;
+                            outline: 0;
+                        }
+                    }
+                }
+
+                &.tf-tours-fixed{
+                    width: 100%;
+                    z-index: 9999;
+                    background-color: #003162eb;
+                    border-top: 4px solid #FB5A3B;
+                    padding: 8px 0;
+                    position: fixed;
+                    bottom: 0;
+                    left: 0%;
+                    right: 0;
+                    .tf_acrselection-wrap {
+                        position: absolute;
+                        top: unset !important;
+                        left: 0;
+                        right: auto;
+                        bottom: 100% !important;
+                    }
+                    .tf_tours_booking {
+                        width: 100%;
+                        max-width: 1200px;
+                        margin: auto;
+                        margin: 0 auto !important;
+                    }
+
+                    .tf_selectperson-wrap {
+                        background: #fff;
+                        border-radius: 2px;
+                        padding: 9px 15px;
+                    }
+                    .tour-extra {
+                        i {
+                            color: #fff;
+                        }
+                        a {
+                            color: #fff;
+                        }
+                    }
+                    button[type="submit"] {
+                        padding: 16px;
+                    }
+                    form.tf_tours_booking {
+                        width: 55%;
+                    }
+                    .tf_form-inner {
+                        background: #fff;
+                        border-radius: 2px;
+                    }
+                    .btn-styled {
+                        border: 1px solid #fb5a3b;
+                        background: #fb5a3b;
+                        width: 180px;
+                    }
+                    
+                    @media only screen and (max-width: 767px) {
+                        max-width: 100%;
+                    }
+                }
             }
-            @media only screen and (max-width: 767px) {
-                max-width: 100%;
-            }
-        }
-        select {
-            background: transparent;
-            border: 1px solid #ccc;
-            padding: 5px 15px;
-            border-radius: 2px;
-            @media only screen and (max-width: 1025px) {
-                font-size: 14px;
-            }
-            @media only screen and (max-width: 767px) {
-                max-width: 100%;
-            }
-            &:focus {
-                background: transparent;
-                border: 0;
-                outline: 0;
-            }
-        }
-        input[type=text] {
-            &:focus {
-                background: transparent;
-                border: 0;
-                outline: 0;
+            .check-in-time-div{
+                display: none;
             }
         }
     }
-    .btn-styled {
-        @media only screen and (min-width: 768px) and (max-width: 970px) {
-            width: 98%;
-            margin: auto;
-        }
-    }
-}
-.check-in-time-div{
-    display: none;
 }

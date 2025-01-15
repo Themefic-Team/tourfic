@@ -1,59 +1,63 @@
-.tf-car-design-1{
-    .tf-car-conditions-section{
-        padding-bottom: 32px;
-        @media #{$max1199}{
-            padding-left: 15px;
-            padding-right: 15px;
-        }
-        h3{
-            color: #27333F;
-            font-size: 21px;
-            font-weight: 400;
-            margin-bottom: 16px;
-        }
-        table{
-            border-left: 1px solid $color-border;
-            border-top: 1px solid $color-border;
-            margin: 0px;
-            border-radius: 16px;
-            tr{
-                th{
+.single-tf_carrental{
+    .tf-single-template{
+        &__one{
+            .tf-car-conditions-section{
+                padding-bottom: 32px;
+                @media #{$max1199}{
+                    padding-left: 15px;
+                    padding-right: 15px;
+                }
+                h3{
                     color: #27333F;
-                    font-size: 16px;
+                    font-size: 21px;
                     font-weight: 400;
-                    border-right: 1px solid $color-border;
-                    border-bottom: 1px solid $color-border;
-                    padding: 16px;
-                    vertical-align: baseline;
-                    text-align: left;
-                    width: 210px;
-                    @media #{$max767}{
-                        padding: 8px; 
-                        width: 33%;
-                    }
+                    margin-bottom: 16px;
                 }
-                td{
-                    color: $color-text;
-                    font-size: 16px;
-                    font-weight: 400;
-                    border-right: 1px solid $color-border;
-                    border-bottom: 1px solid $color-border;
-                    padding: 16px 40px;
-                    @media #{$max767}{
-                        padding: 8px; 
-                    }
-                }
-                &:first-child{
-                    td{
-                        border-radius: 0 16px 0 0;
-                    }
-                }
-                &:last-child{
-                    th{
-                        border-radius: 0 0 0 16px;
-                    }
-                    td{
-                        border-radius: 0 0 16px 0;
+                table{
+                    border-left: 1px solid $color-border;
+                    border-top: 1px solid $color-border;
+                    margin: 0px;
+                    border-radius: 16px;
+                    tr{
+                        th{
+                            color: #27333F;
+                            font-size: 16px;
+                            font-weight: 400;
+                            border-right: 1px solid $color-border;
+                            border-bottom: 1px solid $color-border;
+                            padding: 16px;
+                            vertical-align: baseline;
+                            text-align: left;
+                            width: 210px;
+                            @media #{$max767}{
+                                padding: 8px; 
+                                width: 33%;
+                            }
+                        }
+                        td{
+                            color: $color-text;
+                            font-size: 16px;
+                            font-weight: 400;
+                            border-right: 1px solid $color-border;
+                            border-bottom: 1px solid $color-border;
+                            padding: 16px 40px;
+                            @media #{$max767}{
+                                padding: 8px; 
+                            }
+                        }
+                        &:first-child{
+                            td{
+                                border-radius: 0 16px 0 0;
+                            }
+                        }
+                        &:last-child{
+                            th{
+                                border-radius: 0 0 0 16px;
+                            }
+                            td{
+                                border-radius: 0 0 16px 0;
+                            }
+                        }
                     }
                 }
             }

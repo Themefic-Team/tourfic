@@ -1,35 +1,39 @@
-.tf-tour-contact-informations {
-    background-color: $color-light-bg;
-    padding: 24px;
-
-    .tf-contact-details-title {
-        h3 {
-            font-weight: 700 !important;
-            font-size: 30px;
-            margin-bottom: 5px;
-        }
-    }
-    .tf-contact-details-items {
-        .tf-list {
-        li {
-            margin-top: 5px;
-            margin-bottom: 15px;
-            align-items: center;
+.single-tf_tours{
+    .tf-single-template{
+        &__three{
+            .tf-tour-contact-informations {
+                background-color: $color-light-bg;
+                padding: 24px;
             
-            a {
-                text-decoration: none;
-                color: $color-primary;
+                .tf-contact-details-title {
+                    h3 {
+                        font-weight: 700 !important;
+                        font-size: 30px;
+                        margin-bottom: 5px;
+                    }
+                }
+                .tf-contact-details-items {
+                    .tf-list {
+                    li {
+                        margin-top: 5px;
+                        margin-bottom: 15px;
+                        align-items: center;
+                        
+                        a {
+                            text-decoration: none;
+                            color: $color-primary;
+                        }
+                        i {
+                            font-size: 20px;
+                            color: $color-primary;
+                        }
+                    }
+                    }
+                }
             }
-            i {
-                font-size: 20px;
-                color: $color-primary;
-            }
-        }
         }
     }
 }
-
-// Default Design
 .tf-contact-info{    
     h3 {
         margin-bottom: 30px;
