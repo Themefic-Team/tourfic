@@ -244,3 +244,111 @@
         }
     }
 }
+
+// Default Design
+#tf-apartment-booking{
+    box-shadow: none;
+    padding: 0px;
+    margin: 0;
+    border: none;
+    border-radius: none;
+    .tf-apartment-form-header{
+        h3{
+            span{
+                color: $color-primary !important;
+                font-size: 32px !important;
+                font-style: normal;
+                font-weight: 700 !important;
+                line-height: 120%; /* 38.4px */
+                @media #{$max767}{
+                    font-size: 20px !important;
+                }
+                bdi{
+                    font-size: 32px !important;
+                    @media #{$max767}{
+                        font-size: 20px !important;
+                    }
+                }
+            }
+            span.per-pricing-type{
+                font-size: 18px !important;
+            }
+        }
+    }
+    .tf-apartment-form-fields{
+        background-color: transparent;
+        border: 0px solid;
+        margin: 0;
+        border-radius: none;
+        .tf_booking-dates{
+            .tf-check-in-out-date{
+                height: 53px;
+                padding: 16px 32px 16px 16px;
+                background: $color-white;
+                margin-bottom: 32px;
+                .tf_label-row{
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                }
+            }
+            .tf-aprtment-check-in-out-date{
+                height: 53px;
+                padding: 15px 32px 16px 16px;
+                background: $color-white;
+                width: 100%;
+                box-sizing: border-box;
+
+                .tf_label_rows{
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    input{
+                        border: none;
+                        background-color: rgba(0,0,0,0);
+                        padding: 0;
+                        width: 100% !important;
+                        color: $color-text;
+                        font-size: 16px;
+                        text-align: left;
+                        height: auto;
+
+                        &:focus{
+                            outline: none;
+                            box-shadow: none;
+                        }
+                    }
+                }
+            }
+        }
+        .tf-apartment-guest-row{
+            border-top: 0px solid $color-border;
+            padding: 0px;
+            .tf_selectperson-wrap{
+                display: block;
+                .tf-form-title{
+                    margin-bottom: 24px;
+                    h3.tf-person-info-title{
+                        color: $color-text;
+                        font-size: 32px !important;
+                        font-style: normal;
+                        font-weight: 700 !important;
+                        line-height: 120%;
+                        margin: 0px;
+                        @media #{$max767}{
+                            font-size: 20px !important;
+                        }
+                    }
+                }
+
+                .tf_acrselection{
+                    margin-bottom: 24px;
+
+                    &:last-child{
+                        margin-bottom: 0px;
+                    }
+                }
+            }
+        }
+    }
+}
