@@ -1,11 +1,11 @@
+<!-- Tour include exclude -->
 <?php if($inc || $exc){ ?>
-<!-- Include Exclude srart -->
-<div class="tf-include-exclude-wrapper">
-    <h2 class="tf-section-title"><?php esc_html_e("Include/Exclude", "tourfic"); ?></h2>
-    <div class="tf-include-exclude-innter">
+<div class="tf-inex-wrapper tf-mb-50 tf-template-section">
+    <div class="tf-inex-inner tf-flex tf-flex-gap-24">
         <?php if ( $inc ) { ?>
-        <div class="tf-include">
-            <ul>
+        <div class="tf-inex tf-tour-include tf-box">
+            <h3 class="tf-section-title"><?php esc_html_e( 'Included', 'tourfic' ); ?></h3>
+            <ul class="tf-list">
                 <?php
                 foreach ( $inc as $key => $val ) {
                 ?>
@@ -18,8 +18,9 @@
         </div>
         <?php } ?>
         <?php if ( $exc ) { ?>
-        <div class="tf-exclude">
-            <ul>
+        <div class="tf-inex tf-tour-exclude tf-box">
+            <h3 class="tf-section-title"><?php esc_html_e( 'Excluded', 'tourfic' ); ?></h3>
+            <ul class="tf-list">
                 <?php
                 foreach ( $exc as $key => $val ) {
                 ?>
@@ -33,5 +34,4 @@
         <?php } ?>
     </div>
 </div>
-<!-- Include Exclude End -->
 <?php } ?>

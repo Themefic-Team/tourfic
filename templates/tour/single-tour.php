@@ -261,20 +261,19 @@ while ( have_posts() ) : the_post();
 	$tour_lang_icon = ! empty( $meta['tf-tour-lang-icon'] ) ? $meta['tf-tour-lang-icon'] : 'ri-global-line';
 
 	if( $tf_tour_selected_template == "design-1" ){
-		include TF_TEMPLATE_PART_PATH . 'tour/design-1.php';
-	}elseif( $tf_tour_selected_template == "design-2" ){
 		include TF_TEMPLATE_PART_PATH . 'tour/design-2.php';
+	}elseif( $tf_tour_selected_template == "design-2" ){
+		include TF_TEMPLATE_PART_PATH . 'tour/design-3.php';
 	}else{
-		include TF_TEMPLATE_PART_PATH . 'tour/design-default.php';
+		include TF_TEMPLATE_PART_PATH . 'tour/design-1.php';
 	}
 	?>
 <?php
 endwhile;
-?>
-<?php
+
 if(wp_is_block_theme()){
     wp_footer();
     block_footer_area();
  }else{
 	get_footer();
- }
+}
