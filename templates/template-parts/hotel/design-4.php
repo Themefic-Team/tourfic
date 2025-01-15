@@ -16,7 +16,7 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 }
 ?>
 
-<div class="tf-hotel-template-4 tf-template-global tf-hotel-single">
+<div class="tf-hotel-template-4 tf-template-global tf-hotel-single tf-single-template__four">
     <div class="tf-title-area tf-hotel-title">
         <div class="tf-container">
             <div class="tf-title-wrap">

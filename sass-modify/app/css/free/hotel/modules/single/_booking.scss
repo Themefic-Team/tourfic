@@ -1,46 +1,50 @@
-.tf_template_3_single_hotel .flatpickr-calendar {
-    left: 320px !important;
-    @media only screen and (max-width: 1920px) {
-        left: 240px !important;
-    }
-    @media only screen and (max-width: 1280px) {
-        left: 100px !important;
-    }
-    @media only screen and (max-width: 1024px) {
-        left: 80px !important;
-    } 
-    @media only screen and (max-width: 660px) {
-        left: 20px !important;
-    }
-}
-
-// Design 1
-.tf-hotel-design-1{
-    #tf-single-hotel-avail{
-        margin: 0px !important;
-        .tf_booking-dates{
-            #check-in-out-date{
-                background-color: $color-light-bg !important;
-                padding-top: 3px !important;
-                padding-bottom: 3px !important;
+.single-tf_hotel{
+    .tf-single-template{
+        &__two{
+            #tf-single-hotel-avail{
+                margin: 0px !important;
+                .tf_booking-dates{
+                    #check-in-out-date{
+                        background-color: $color-light-bg !important;
+                        padding-top: 3px !important;
+                        padding-bottom: 3px !important;
+                    }
+                    #tf-required {
+                        text-align: center;
+                        margin-top: 10px !important;
+                        display: block;
+                        b{
+                            font-family: inherit;
+                            font-weight: 500;
+                            color: $color-danger;
+                        }
+                    }
+                }
+                .tf-bttn-normal{
+                    padding: 16px 24px;
+                }
             }
-            #tf-required {
-                text-align: center;
-                margin-top: 10px !important;
-                display: block;
-                b{
-                    font-family: inherit;
-                    font-weight: 500;
-                    color: $color-danger;
+            .tf-tour-booking-box{
+                margin-bottom: 25px;
+                box-shadow: 0px 13px 30px 0px rgba(224,232,238,0.32);
+            }
+        }
+        &__three{
+            .flatpickr-calendar {
+                left: 320px !important;
+                @media only screen and (max-width: 1920px) {
+                    left: 240px !important;
+                }
+                @media only screen and (max-width: 1280px) {
+                    left: 100px !important;
+                }
+                @media only screen and (max-width: 1024px) {
+                    left: 80px !important;
+                } 
+                @media only screen and (max-width: 660px) {
+                    left: 20px !important;
                 }
             }
         }
-        .tf-bttn-normal{
-            padding: 16px 24px;
-        }
-    }
-    .tf-tour-booking-box{
-        margin-bottom: 25px;
-        box-shadow: 0px 13px 30px 0px rgba(224,232,238,0.32);
     }
 }

@@ -1,76 +1,87 @@
-.tf-hotel-design-1{
-    .tf-hotel-facilities-section {
-        .active {
-            display: none;
-        }
-        .tf-hotel-facilities-container {
-            padding: 32px;
-            border-radius: 6px;
-            background: $color-white;
-            box-shadow: 0px 13px 30px 0px rgba(224,232,238,0.32);
-
-            .tf-hotel-facilities-title-area {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                cursor: pointer;
-
-                .tf-section-title {
-                    margin-bottom: 0px;
-                }
-
-                i {
-                    font-size: 32px;
-                    color: $color-primary;
-                }
-                
-                .hotel-facilities-icon-down {
+.single-tf_hotel{
+    .tf-single-template{
+        &__one{
+            .tf-container h2 {
+                margin-top: 0px;
+            }
+            .tf-hotel-facilities-section {
+                .active {
                     display: none;
                 }
-            }
-
-            .tf-hotel-facilities-content-area {
-                margin-top: 24px;
-                .hotel-facility-item {
-                    margin-bottom: 24px;
-                    .hotel-single-facility-title {
-                        color: $color-heading;
-                        font-family: inherit;
-                        font-size: 20px;
-                        font-style: normal;
-                        font-weight: 400;
-                        line-height: normal;
-                        margin-bottom: 16px;
-                    }
-
-                    ul {
+                .tf-hotel-facilities-container {
+                    padding: 32px;
+                    border-radius: 6px;
+                    background: $color-white;
+                    // box-shadow: 0px 0px 24px 5px #E0E8EE;
+            
+                    .tf-hotel-facilities-title-area {
                         display: flex;
-                        list-style: none;
-                        flex-wrap: wrap;
-                        vertical-align: baseline;
-                        gap: 16px;
-                        margin: 0px;
-                        padding: 0px;
+                        justify-content: space-between;
+                        align-items: center;
+                        cursor: pointer;
 
-                        @media #{$tfmax767} {
-                            flex-direction: column;
+                        .section-heading {
+                            margin-bottom: 0;
                         }
-
-                        li {
-                            display: flex;
-                            color: $color-text;
-                            font-family: inherit;
-                            font-size: 16px;
-                            font-style: normal;
-                            font-weight: 400;
-                            line-height: 125%;
-                            vertical-align: baseline;
-
-                            span {
-                                margin-right: 8px;
-
+            
+                        .tf-section-title {
+                            margin-bottom: 0px;
+                        }
+            
+                        i {
+                            font-size: 32px;
+                            color: $color-primary;
+                        }
+                        
+                        .hotel-facilities-icon-down {
+                            display: none;
+                        }
+                    }
+            
+                    .tf-hotel-facilities-content-area {
+                        margin-top: 24px;
+                        .hotel-facility-item {
+                            margin-bottom: 24px;
+                            .hotel-single-facility-title {
+                                color: $color-heading;
+                                font-family: inherit;
+                                font-size: 20px;
+                                font-style: normal;
+                                font-weight: 400;
+                                line-height: normal;
+                                margin-bottom: 16px;
+                            }
+            
+                            ul {
+                                display: flex;
+                                list-style: none;
+                                flex-wrap: wrap;
+                                vertical-align: baseline;
+                                gap: 16px;
+                                margin: 0px;
+                                padding: 0px;
+            
                                 @media #{$tfmax767} {
-                                    min-width: 16px;
+                                    flex-direction: column;
+                                }
+            
+                                li {
+                                    display: flex;
+                                    color: $color-text;
+                                    font-family: inherit;
+                                    font-size: 16px;
+                                    font-style: normal;
+                                    font-weight: 400;
+                                    line-height: 125%;
+                                    vertical-align: baseline;
+            
+                                    span {
+                                        margin-right: 8px;
+            
+                                        @media #{$tfmax767} {
+                                            min-width: 16px;
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -78,90 +89,81 @@
                 }
             }
         }
-    }
-}
-
-// Default Design
-.tf-main-wrapper {
-    .tf-container h2 {
-        margin-top: 0px;
-    }
-    .tf-hotel-facilities-section {
-        .active {
-            display: none;
-        }
-        .tf-hotel-facilities-container {
-            padding: 32px;
-            border-radius: 6px;
-            background: $color-white;
-            // box-shadow: 0px 0px 24px 5px #E0E8EE;
-    
-            .tf-hotel-facilities-title-area {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                cursor: pointer;
-
-                .section-heading {
-                    margin-bottom: 0;
-                }
-    
-                .tf-section-title {
-                    margin-bottom: 0px;
-                }
-    
-                i {
-                    font-size: 32px;
-                    color: $color-primary;
-                }
-                
-                .hotel-facilities-icon-down {
+        &__two{
+            .tf-hotel-facilities-section {
+                .active {
                     display: none;
                 }
-            }
-    
-            .tf-hotel-facilities-content-area {
-                margin-top: 24px;
-                .hotel-facility-item {
-                    margin-bottom: 24px;
-                    .hotel-single-facility-title {
-                        color: $color-heading;
-                        font-family: inherit;
-                        font-size: 20px;
-                        font-style: normal;
-                        font-weight: 400;
-                        line-height: normal;
-                        margin-bottom: 16px;
-                    }
-    
-                    ul {
+                .tf-hotel-facilities-container {
+                    padding: 32px;
+                    border-radius: 6px;
+                    background: $color-white;
+                    box-shadow: 0px 13px 30px 0px rgba(224,232,238,0.32);
+        
+                    .tf-hotel-facilities-title-area {
                         display: flex;
-                        list-style: none;
-                        flex-wrap: wrap;
-                        vertical-align: baseline;
-                        gap: 16px;
-                        margin: 0px;
-                        padding: 0px;
-    
-                        @media #{$tfmax767} {
-                            flex-direction: column;
+                        justify-content: space-between;
+                        align-items: center;
+                        cursor: pointer;
+        
+                        .tf-section-title {
+                            margin-bottom: 0px;
                         }
-    
-                        li {
-                            display: flex;
-                            color: $color-text;
-                            font-family: inherit;
-                            font-size: 16px;
-                            font-style: normal;
-                            font-weight: 400;
-                            line-height: 125%;
-                            vertical-align: baseline;
-    
-                            span {
-                                margin-right: 8px;
-    
+        
+                        i {
+                            font-size: 32px;
+                            color: $color-primary;
+                        }
+                        
+                        .hotel-facilities-icon-down {
+                            display: none;
+                        }
+                    }
+        
+                    .tf-hotel-facilities-content-area {
+                        margin-top: 24px;
+                        .hotel-facility-item {
+                            margin-bottom: 24px;
+                            .hotel-single-facility-title {
+                                color: $color-heading;
+                                font-family: inherit;
+                                font-size: 20px;
+                                font-style: normal;
+                                font-weight: 400;
+                                line-height: normal;
+                                margin-bottom: 16px;
+                            }
+        
+                            ul {
+                                display: flex;
+                                list-style: none;
+                                flex-wrap: wrap;
+                                vertical-align: baseline;
+                                gap: 16px;
+                                margin: 0px;
+                                padding: 0px;
+        
                                 @media #{$tfmax767} {
-                                    min-width: 16px;
+                                    flex-direction: column;
+                                }
+        
+                                li {
+                                    display: flex;
+                                    color: $color-text;
+                                    font-family: inherit;
+                                    font-size: 16px;
+                                    font-style: normal;
+                                    font-weight: 400;
+                                    line-height: 125%;
+                                    vertical-align: baseline;
+        
+                                    span {
+                                        margin-right: 8px;
+        
+                                        @media #{$tfmax767} {
+                                            min-width: 16px;
+                                        }
+                                    }
                                 }
                             }
                         }
