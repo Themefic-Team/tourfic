@@ -1262,7 +1262,7 @@ class Migrator {
 	 */
 
 	public function tf_migrate_tf_enquiry_data() {
-		if ( !empty( get_option( 'tf_enquiry_data_migration' ) ) ) {
+		if ( empty( get_option( 'tf_enquiry_data_migration' ) ) ) {
 			$this->add_enquiry_new_columns();
 			update_option( 'tf_enquiry_data_migration', 1 );
 		}
@@ -1276,12 +1276,13 @@ class Migrator {
     	$existing_columns = wp_list_pluck($columns, 'Field');
 
 		if (!in_array('enquiry_status', $existing_columns)) {
-			
 			$wpdb->query("ALTER TABLE $enquiry_table ADD COLUMN `enquiry_status` VARCHAR(255) NOT NULL DEFAULT 'read' AFTER `author_roles`");
 		}
+
 		if (!in_array('server_data', $existing_columns)) {
 			$wpdb->query("ALTER TABLE $enquiry_table ADD COLUMN `server_data` VARCHAR(255) NOT NULL DEFAULT '' AFTER `enquiry_status`");
 		}
+		
 		if (!in_array('reply_data', $existing_columns)) {
 			$wpdb->query("ALTER TABLE $enquiry_table ADD COLUMN `reply_data` LONGTEXT NOT NULL DEFAULT '' AFTER `server_data`");
 		}
