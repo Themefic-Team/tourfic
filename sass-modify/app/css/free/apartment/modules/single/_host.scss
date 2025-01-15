@@ -6,6 +6,20 @@
         border: 1px solid $color-border;
         margin-bottom: 25px;
     
+        .tf-host-rating-wrapper {
+            @include flexbox();
+            @include align-items(center);
+            gap: 4px;
+        
+            .tf-host-rating {
+                font-weight: 600;
+            }
+        
+            h6 {
+                margin-bottom: 0;
+            }
+        }
+        
         .host-top {
             @include flexbox();
             gap: 11px;
