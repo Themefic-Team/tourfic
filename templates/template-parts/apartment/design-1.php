@@ -615,7 +615,7 @@ use \Tourfic\Classes\Apartment\Apartment;
                     </div>
 					<?php if ( ! empty( $enquiry_section_button ) ) {?>
                         <div class="tf-btn">
-                            <a href="#" id="tf-ask-question-trigger" class="tf-btn-normal btn-primary">
+                            <a href="#" id="tf-ask-question-trigger" class="tf_btn tf_btn_large">
                                 <span><?php echo wp_kses_post( $enquiry_section_button ) ?></span>
                             </a>
                         </div>

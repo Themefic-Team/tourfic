@@ -3387,7 +3387,7 @@ class Hotel {
                 <div class="tf-booking-pagination tf-hotel-booking-pagination">
 					<?php if ( empty( $airport_service_type ) && 3 != $room_book_by && empty( $enable_guest_info ) ) { ?>
                         <div class="tf-control-pagination show">
-                            <button class="hotel-room-book" type="submit"><?php echo __( "Continue", "tourfic" ); ?></button>
+                            <button class="hotel-room-book tf_btn" type="submit"><?php echo __( "Continue", "tourfic" ); ?></button>
                         </div>
 						<?php
 					}
@@ -3395,7 +3395,7 @@ class Hotel {
                         <div class="tf-control-pagination show tf-pagination-content-1">
 							<?php
 							if ( 3 != $room_book_by && empty( $enable_guest_info ) ) { ?>
-                                <button type="submit" class="hotel-room-book"><?php echo !empty( tfopt( 'hotel_service_popup_action' ) ) ? tfopt( 'hotel_service_popup_action' ) : __( "Continue", "tourfic" ); ?></button>
+                                <button type="submit" class="hotel-room-book tf_btn"><?php echo !empty( tfopt( 'hotel_service_popup_action' ) ) ? tfopt( 'hotel_service_popup_action' ) : __( "Continue", "tourfic" ); ?></button>
 							<?php } else { ?>
                                 <a href="#" class="tf-next-control tf-tabs-control tf_btn"
                                    data-step="<?php echo 3 == $room_book_by && empty( $enable_guest_info ) ? esc_attr( "3" ) : esc_attr( "2" ); ?>"><?php echo !empty( tfopt( 'hotel_service_popup_action' ) ) ? tfopt( 'hotel_service_popup_action' ) : __( "Continue", "tourfic" ); ?></a>
@@ -3414,7 +3414,7 @@ class Hotel {
 								?>
                                 <a href="#" class="tf-next-control tf-tabs-control tf_btn tf-traveller-error" data-step="3"><?php echo __( "Continue", "tourfic" ); ?></a>
 							<?php } else { ?>
-                                <button type="submit" class="tf-traveller-error <?php echo !empty( $room_book_by ) && 3 != $room_book_by ? 'hotel-room-book' : '';  ?>"><?php echo __( "Continue", "tourfic" ); ?></button>
+                                <button type="submit" class="tf-traveller-error tf_btn <?php echo !empty( $room_book_by ) && 3 != $room_book_by ? 'hotel-room-book' : '';  ?>"><?php echo __( "Continue", "tourfic" ); ?></button>
 							<?php } ?>
                         </div>
 					<?php }
@@ -3427,7 +3427,7 @@ class Hotel {
 							if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ( $airport_service_type || $enable_guest_info ) ) { ?>
                                 <a href="#" class="tf-back-control tf-step-back" data-step="2"><i class="fa fa-angle-left"></i><?php echo __( "Back", "tourfic" ); ?></a>
 							<?php } ?>
-                            <button type="submit" class="tf-hotel-book-confirm-error"><?php echo __( "Continue", "tourfic" ); ?></button>
+                            <button type="submit" class="tf-hotel-book-confirm-error tf_btn"><?php echo __( "Continue", "tourfic" ); ?></button>
                         </div>
 					<?php } ?>
                 </div>
@@ -3815,7 +3815,7 @@ class Hotel {
 							<?php echo wp_kses_post(Pricing::instance( $post_id )->get_min_price_html($period)); ?>
                         </div>
                         <div class="tf-booking-bttns">
-                            <a class="tf_btn tf_btn_secondary" href="<?php echo esc_url( $url ); ?>"><?php esc_html_e( "View Details", "tourfic" ); ?></a>
+                            <a class="tf_btn tf_btn_gray" href="<?php echo esc_url( $url ); ?>"><?php esc_html_e( "View Details", "tourfic" ); ?></a>
                         </div>
                     </div>
                 </div>
@@ -4034,7 +4034,7 @@ class Hotel {
                         <div class="tf-archive-hotel-price">
 							<?php echo wp_kses_post(Pricing::instance( $post_id )->get_min_price_html()); ?>
                         </div>
-                        <a href="<?php echo esc_url( $url ); ?>" class="tf_btn tf_btn_secondary tf_btn_small"><?php esc_html_e( "View Details", "tourfic" ); ?></a>
+                        <a href="<?php echo esc_url( $url ); ?>" class="tf_btn tf_btn_gray tf_btn_small"><?php esc_html_e( "View Details", "tourfic" ); ?></a>
                     </div>
                 </div>
             </div>

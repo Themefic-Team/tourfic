@@ -19,7 +19,7 @@ class Component extends \Tourfic\Core\Shortcodes {
         <h2>Button</h2>
         <div class="tf_btn_group" style="margin-bottom: 30px">
             <a href="#" class="tf_btn">Button Primary</a>
-            <a href="#" class="tf_btn tf_btn_secondary">Button Secondery</a>
+            <a href="#" class="tf_btn tf_btn_gray">Button Secondery</a>
             <a href="#" class="tf_btn tf_btn_white">Button Secondery</a>
             <a href="#" class="tf_btn tf_btn_small">Button Small</a>
             <a href="#" class="tf_btn tf_btn_large">Button Large</a>
@@ -32,12 +32,12 @@ class Component extends \Tourfic\Core\Shortcodes {
         <h4>Button Border</h4>
         <div class="tf_btn_group" style="margin-bottom: 30px">
             <a href="#" class="tf_btn tf_btn_outline">Button Primary</a>
-            <a href="#" class="tf_btn tf_btn_secondary tf_btn_outline">Button Secondery</a>
+            <a href="#" class="tf_btn tf_btn_gray tf_btn_outline">Button Secondery</a>
             <a href="#" class="tf_btn tf_btn_white tf_btn_outline">Button Secondery</a>
             <a href="#" class="tf_btn tf_btn_small tf_btn_outline">Button Small</a>
             <a href="#" class="tf_btn tf_btn_large tf_btn_outline">Button Large</a>
             <a href="#" class="tf_btn tf_btn_outline disabled">Button Disabled</a>
-            <button class="tf_btn tf_btn_secondary tf_btn_outline" disabled>Button Disabled</button>
+            <button class="tf_btn tf_btn_gray tf_btn_outline" disabled>Button Disabled</button>
             <a href="#" class="tf_btn tf_btn_full tf_btn_outline">Button Full</a>
         </div>
 

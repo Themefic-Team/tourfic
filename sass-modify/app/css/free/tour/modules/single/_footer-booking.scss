@@ -143,17 +143,6 @@
         }
     }
 
-    .tf-btn-normal {
-        padding: 19px 32px;
-        font-size: 14px;
-        font-weight: 700;
-        border-radius: 8px;
-
-        @media #{$max767} {
-            padding: 12px 24px;
-        }
-    }
-
     @media #{$max767} {
         .tf-booking-popup-btn{
             display: none;

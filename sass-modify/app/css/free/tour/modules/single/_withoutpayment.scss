@@ -659,40 +659,6 @@
                         margin-right: 10px;
                     }
                 }
-                .tf-next-control{
-                    border-radius: 4px;
-                    background: $color-primary;
-                    box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
-                    padding: 10px 0px;
-                    color: $color-white;
-                    font-family: inherit;
-                    font-size: 16px;
-                    font-weight: 500;
-                    line-height: 20px;
-                    width: 300px;
-                    text-align: center;
-                    @media #{$max575}{
-                        width: 100%;
-                    }
-                }
-                button{
-                    border-radius: 4px;
-                    background: $color-primary;
-                    box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
-                    padding: 10px 0px;
-                    color: $color-white;
-                    font-family: inherit;
-                    font-size: 16px;
-                    font-weight: 500;
-                    line-height: 20px;
-                    width: 300px;
-                    text-align: center;
-                    border: 0px solid;
-                    cursor: pointer;
-                    @media #{$max575}{
-                        width: 100%;
-                    }
-                }
             }
             .tf-control-pagination.show{
                 display: flex;

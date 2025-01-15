@@ -1256,7 +1256,7 @@ class Tour {
                     <div class="tf-tours-booking-btn tf-booking-bttns tf-mt-30">
 						<?php if ( ! empty( $tf_tour_book_now_text ) ) : ?>
                             <div class="tf-btn-wrap">
-                                <a href="#" class="tf_btn tf_btn_full tf_btn_sharp tf-booking-popup-btn" type="submit"><?php echo esc_html( $tf_tour_book_now_text ); ?></a>
+                                <a href="#" class="tf_btn tf_btn_full tf-booking-popup-btn" type="submit"><?php echo esc_html( $tf_tour_book_now_text ); ?></a>
                             </div>
 						<?php endif; ?>
 						<?php
@@ -1419,8 +1419,8 @@ class Tour {
                         <div class="tf-tours-booking-btn tf-booking-bttns">
 							<?php if ( ! empty( $tf_tour_book_now_text ) ) : ?>
                                 <div class="tf-btn-wrap">
-                                    <a href="#" class="tf_btn tf_btn_sharp tf-booking-popup-btn" type="submit"><?php echo esc_html( $tf_tour_book_now_text ); ?></a>
-                                    <a href="#" class="tf_btn tf_btn_sharp tf-booking-mobile-btn"><?php echo esc_html( $tf_tour_book_now_text ); ?></a>
+                                    <a href="#" class="tf_btn tf-booking-popup-btn" type="submit"><?php echo esc_html( $tf_tour_book_now_text ); ?></a>
+                                    <a href="#" class="tf_btn tf-booking-mobile-btn"><?php echo esc_html( $tf_tour_book_now_text ); ?></a>
                                 </div>
 							<?php endif; ?>
                         </div>
@@ -1756,8 +1756,8 @@ class Tour {
                         <div class="tf-tours-booking-btn tf-booking-bttns">
 							<?php if ( ! empty( $tf_tour_book_now_text ) ) : ?>
                                 <div class="tf-btn-wrap">
-                                    <a href="#" class="tf_btn tf_btn_sharp tf-booking-popup-btn" type="submit"><?php echo esc_html( $tf_tour_book_now_text ); ?></a>
-                                    <a href="#" class="tf_btn tf_btn_sharp tf-booking-mobile-btn"><?php echo esc_html( $tf_tour_book_now_text ); ?></a>
+                                    <a href="#" class="tf_btn tf_btn_sharp tf_btn_large tf-booking-popup-btn" type="submit"><?php echo esc_html( $tf_tour_book_now_text ); ?></a>
+                                    <a href="#" class="tf_btn tf_btn_sharp tf_btn_large tf-booking-mobile-btn"><?php echo esc_html( $tf_tour_book_now_text ); ?></a>
                                 </div>
 							<?php endif; ?>
                         </div>
@@ -1928,7 +1928,7 @@ class Tour {
                         <div class="tf-tours-booking-btn">
 							<?php if ( ! empty( $tf_tour_book_now_text ) ) : ?>
                                 <div class="tf-btn-wrap">
-                                    <a href="#" class="tf_btn tf_btn_full tf_btn_sharp tf-booking-popup-btn"><?php echo esc_html( $tf_tour_book_now_text ); ?></a>
+                                    <a href="#" class="tf_btn tf_btn_full tf-booking-popup-btn"><?php echo esc_html( $tf_tour_book_now_text ); ?></a>
                                 </div>
 							<?php endif; ?>
                         </div>
@@ -2330,7 +2330,7 @@ class Tour {
 					<?php } ?>
 					<?php if ( empty( $tour_extras ) && 3 != $tf_booking_by && empty( $traveller_info_coll ) ) { ?>
                         <div class="tf-control-pagination show">
-                            <button type="submit"><?php echo esc_html__( "Continue", "tourfic" ); ?></button>
+                            <button type="submit" class="tf_btn"><?php echo esc_html__( "Continue", "tourfic" ); ?></button>
                         </div>
 						<?php
 					}
@@ -2338,9 +2338,9 @@ class Tour {
                         <div class="tf-control-pagination show tf-pagination-content-1">
 							<?php
 							if ( 3 != $tf_booking_by && empty( $traveller_info_coll ) ) { ?>
-                                <button type="submit"><?php echo esc_html__( "Continue", "tourfic" ); ?></button>
+                                <button type="submit" class="tf_btn"><?php echo esc_html__( "Continue", "tourfic" ); ?></button>
 							<?php } else { ?>
-                                <a href="#" class="tf-next-control tf-tabs-control"
+                                <a href="#" class="tf-next-control tf-tabs-control tf_btn"
                                    data-step="<?php echo 3 == $tf_booking_by && empty( $traveller_info_coll ) ? esc_attr( "3" ) : esc_attr( "2" ); ?>"><?php echo esc_html__( "Continue", "tourfic" ); ?></a>
 							<?php } ?>
                         </div>
@@ -2355,9 +2355,9 @@ class Tour {
 							<?php }
 							if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && 3 == $tf_booking_by ) {
 								?>
-                                <a href="#" class="tf-next-control tf-tabs-control tf-traveller-error" data-step="3"><?php echo esc_html__( "Continue", "tourfic" ); ?></a>
+                                <a href="#" class="tf-next-control tf-tabs-control tf_btn tf-traveller-error" data-step="3"><?php echo esc_html__( "Continue", "tourfic" ); ?></a>
 							<?php } else { ?>
-                                <button type="submit" class="tf-traveller-error"><?php echo esc_html__( "Continue", "tourfic" ); ?></button>
+                                <button type="submit" class="tf-traveller-error tf_btn"><?php echo esc_html__( "Continue", "tourfic" ); ?></button>
 							<?php } ?>
                         </div>
 					<?php }
@@ -2370,7 +2370,7 @@ class Tour {
 							if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ( $tour_extras || $traveller_info_coll ) ) { ?>
                                 <a href="#" class="tf-back-control tf-step-back" data-step="2"><i class="fa fa-angle-left"></i><?php echo esc_html__( "Back", "tourfic" ); ?></a>
 							<?php } ?>
-                            <button type="submit" class="tf-book-confirm-error"><?php echo esc_html__( "Continue", "tourfic" ); ?></button>
+                            <button type="submit" class="tf-book-confirm-error tf_btn"><?php echo esc_html__( "Continue", "tourfic" ); ?></button>
                         </div>
 					<?php } ?>
                 </div>
@@ -2743,7 +2743,7 @@ class Tour {
 
                         </div>
                         <div class="tf-booking-bttns">
-                            <a class="tf_btn tf_btn_secondary" href="<?php echo esc_url( $url ); ?>"><?php esc_html_e( "View Details", "tourfic" ); ?></a>
+                            <a class="tf_btn tf_btn_gray" href="<?php echo esc_url( $url ); ?>"><?php esc_html_e( "View Details", "tourfic" ); ?></a>
                         </div>
                     </div>
                 </div>
@@ -3036,7 +3036,7 @@ class Tour {
                         <div class="tf-archive-hotel-price">
 							<?php echo wp_kses_post(Pricing::instance( $post_id )->get_min_price_html()); ?>
                         </div>
-                        <a href="<?php echo esc_url( $url ); ?>" class="tf_btn tf_btn_secondary tf_btn_small"><?php esc_html_e( "View Details", "tourfic" ); ?></a>
+                        <a href="<?php echo esc_url( $url ); ?>" class="tf_btn tf_btn_gray tf_btn_small"><?php esc_html_e( "View Details", "tourfic" ); ?></a>
                     </div>
                 </div>
             </div>

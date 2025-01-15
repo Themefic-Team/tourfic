@@ -41,8 +41,20 @@ input[type="submit"].tf_btn,
 
     &_secondary{
         color: $color-text-dark;
-        background-color: $color-secondary-light;
-        border-color: $color-secondary-light;
+        background-color: $color-secondary;
+        border-color: $color-secondary;
+
+        &:hover{
+            color: $color-white;
+            background-color: $color-primary;
+            border-color: $color-primary;
+        }
+    }
+
+    &_gray{
+        color: $color-text-dark;
+        background-color: $color-light-bg2;
+        border-color: $color-light-bg2;
 
         &:hover{
             color: $color-white;

@@ -93,14 +93,4 @@
     .tf-btn{
         margin-top: 24px;
     }
-    .tf-btn-normal.btn-primary{
-        margin-top: 0;
-        padding: 16px;
-        border-radius: 6px;
-        background-color: $color-primary !important;
-
-        &:hover {
-            background-color: $color-secondary !important;
-        }
-    }
 }

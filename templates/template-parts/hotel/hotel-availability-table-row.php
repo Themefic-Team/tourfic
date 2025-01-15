@@ -371,7 +371,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 							$tour_hotel_service_type  = ! empty( $meta['airport_service_type'] ) ? $meta['airport_service_type'] : '';
 							if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $tour_hotel_service_avail ) && ! empty( $tour_hotel_service_type ) && ( $room_book_by != 2 || empty( $room_book_url ) ) ) {
 								?>
-                                <a class="tf_air_service tf_btn tf_btn_secondary tf-hotel-booking-popup-btn" href="javascript:;" data-room="<?php echo esc_attr( $room_id ); ?>"><?php esc_html_e( 'I\'ll reserve', 'tourfic' ); ?></a>
+                                <a class="tf_air_service tf_btn tf_btn_gray tf-hotel-booking-popup-btn" href="javascript:;" data-room="<?php echo esc_attr( $room_id ); ?>"><?php esc_html_e( 'I\'ll reserve', 'tourfic' ); ?></a>
 
 
                                 <div style="display: none;" id="tf-hotel-services" class="tf-hotel-services-wrap tf-hotel-service-design-1 tf-room" data-id="<?php echo esc_attr( $room_id ) ?>">
@@ -408,14 +408,14 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                                         </div>
                                         <div class="tf-airport-pickup-response"></div>
                                         <div class="tf_button_group">
-                                            <button class="hotel-room-book tf-btn-normal btn-primary" type="submit"
+                                            <button class="hotel-room-book tf_btn" type="submit"
                                                     style="width: 100%"><?php echo esc_html( Helper::tfopt( 'hotel_service_popup_action', esc_html__( 'Continue to booking', 'tourfic' ) ) ); ?></button>
                                         </div>
                                     </div>
                                 </div>
 
 							<?php } else { ?>
-                                <button class="hotel-room-book tf-btn-normal btn-primary" type="submit"><?php echo esc_html( $tf_hotel_reserve_button_text ); ?></button>
+                                <button class="hotel-room-book tf_btn" type="submit"><?php echo esc_html( $tf_hotel_reserve_button_text ); ?></button>
 							<?php } ?>
                         </div>
                         <div class="tf_desc"></div>
@@ -554,7 +554,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 						if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
                             if( ! empty( $tour_hotel_service_avail ) && ! empty( $tour_hotel_service_type ) && ( $room_book_by != 2 || empty( $room_book_url ) ) ) {
                                 ?>
-                                <a class="tf_air_service tf_btn tf_btn_secondary tf-hotel-booking-popup-btn" href="javascript:;" data-room="<?php echo esc_attr( $room_id ); ?>"><?php esc_html_e( 'I\'ll reserve', 'tourfic' ); ?></a>
+                                <a class="tf_air_service tf_btn tf_btn_gray tf-hotel-booking-popup-btn" href="javascript:;" data-room="<?php echo esc_attr( $room_id ); ?>"><?php esc_html_e( 'I\'ll reserve', 'tourfic' ); ?></a>
 
 
                                 <div style="display: none;" id="tf-hotel-services" class="tf-hotel-services-wrap tf-hotel-service-design-1 tf-room" data-id="<?php echo esc_attr( $room_id ) ?>">
@@ -1188,7 +1188,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 							?>
                                 <input type="hidden" id="hotel_room_depo" value="false">
                                 <div class="roomselectissue"></div>
-                                <a class="tf_air_service tf-hotel-booking-popup-btn" href="javascript:;" data-room="<?php echo esc_attr( $room_id ); ?>"><?php esc_html_e( 'Continue', 'tourfic' ); ?></a>
+                                <a class="tf_air_service tf-hotel-booking-popup-btn tf_btn tf_btn_large tf_btn_sharp" href="javascript:;" data-room="<?php echo esc_attr( $room_id ); ?>"><?php esc_html_e( 'Continue', 'tourfic' ); ?></a>
 
                                 <div style="display: none;" id="tf-hotel-services" class="tf-hotel-services-wrap tf-hotel-service-design-1 tf-room" data-id="<?php echo esc_attr( $room_id ) ?>">
                                     <div class="tf-hotel-services">
@@ -2483,7 +2483,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 
 							if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $tour_hotel_service_avail ) && ! empty( $tour_hotel_service_type ) && ( $room_book_by != 2 || empty( $room_book_url ) ) ) {
 								?>
-                                <a class="tf_air_service tf-sml-btn btn-styled tf-hotel-booking-popup-btn" href="javascript:;" data-room="<?php echo esc_attr( $room_id ); ?>"><?php echo esc_html( $tf_hotel_reserve_button_text ); ?></a>
+                                <a class="tf_air_service tf_btn tf-hotel-booking-popup-btn" href="javascript:;" data-room="<?php echo esc_attr( $room_id ); ?>"><?php echo esc_html( $tf_hotel_reserve_button_text ); ?></a>
 
                                 <div style="display: none;" id="tf-hotel-services" class="tf-hotel-services-wrap tf-room" data-id="<?php echo esc_attr( $room_id ) ?>">
                                     <div class="tf-hotel-services">
@@ -2519,14 +2519,14 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                                         </div>
                                         <div class="tf-airport-pickup-response"></div>
                                         <div class="tf_button_group">
-                                            <button class="hotel-room-book btn-styled"
+                                            <button class="hotel-room-book tf_btn"
                                                     type="submit"><?php echo esc_html( Helper::tfopt( 'hotel_service_popup_action', esc_html__( 'Continue to booking', 'tourfic' ) ) ); ?></button>
                                         </div>
                                     </div>
                                 </div>
 
 							<?php } else { ?>
-                                <button class="tf-reserve-button btn-styled tf-sml-btn tf-hotel-booking-popup-btn" type="submit"><?php echo esc_html( $tf_hotel_reserve_button_text ); ?></button>
+                                <button class="tf-reserve-button tf_btn tf-hotel-booking-popup-btn" type="submit"><?php echo esc_html( $tf_hotel_reserve_button_text ); ?></button>
 							<?php } ?>
                         </div>
                         <div class="tf_desc"></div>
@@ -2670,7 +2670,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 						if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
                             if( ! empty( $tour_hotel_service_avail ) && ! empty( $tour_hotel_service_type ) && ( $room_book_by != 2 || empty( $room_book_url ) )) {
 							?>
-                                <a class="tf_air_service tf-sml-btn btn-styled tf-hotel-booking-popup-btn" href="javascript:;" data-room="<?php echo esc_attr( $room_id ); ?>"><?php echo esc_html( $tf_hotel_reserve_button_text ); ?></a>
+                                <a class="tf_air_service tf_btn tf-hotel-booking-popup-btn" href="javascript:;" data-room="<?php echo esc_attr( $room_id ); ?>"><?php echo esc_html( $tf_hotel_reserve_button_text ); ?></a>
 
                                 <div style="display: none;" id="tf-hotel-services" class="tf-hotel-services-wrap tf-room" data-id="<?php echo esc_attr( $room_id ) ?>">
                                     <div class="tf-hotel-services">
@@ -2705,17 +2705,17 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                                         </div>
                                         <div class="tf-airport-pickup-response"></div>
                                         <div class="tf_button_group">
-                                            <button class="hotel-room-book btn-styled"
+                                            <button class="hotel-room-book tf_btn"
                                                     type="submit"><?php echo esc_html( Helper::tfopt( 'hotel_service_popup_action', esc_html__( 'Continue to booking', 'tourfic' ) ) ); ?></button>
                                         </div>
                                     </div>
                                 </div>
 
                             <?php } else { ?>
-                                <button class="tf-reserve-button btn-styled tf-sml-btn tf-hotel-booking-popup-btn" type="submit"><?php echo esc_html( $tf_hotel_reserve_button_text ); ?></button>
+                                <button class="tf-reserve-button tf_btn tf-hotel-booking-popup-btn" type="submit"><?php echo esc_html( $tf_hotel_reserve_button_text ); ?></button>
                             <?php } ?>
                         <?php } else { ?>
-                            <button class="hotel-room-book btn-styled tf-sml-btn" type="submit"><?php echo esc_html( $tf_hotel_reserve_button_text ); ?></button>
+                            <button class="hotel-room-book tf_btn" type="submit"><?php echo esc_html( $tf_hotel_reserve_button_text ); ?></button>
                         <?php } ?>
                     </div>
                     <div class="tf_desc"></div>
