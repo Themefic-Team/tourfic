@@ -1,346 +1,469 @@
-.tf-bottom-booking-bar {
-    position: fixed;
-    width: calc(100% - 64px);
-    bottom: 0;
-    left: 0;
-    padding: 32px;
-    background-color: rgba(255, 255, 255, .9);
-    //box-shadow: 0px 0px 24px 5px #e0e8ee;
-    z-index: 9999;
-    @include flexbox();
-    @include justify-content(center);
-    @include align-items(center);
-    gap: 24px;
-    transform-origin: bottom;
-    transform: rotateX(90deg);
-    transition: all 0.3s ease-in-out;
-
-    @media #{$max1199} {
-        @include flex-wrap();
-        padding: 16px;
-        gap: 8px;
-        width:calc(100% - 32px);
-    }
-
-    @media #{$max767} {
-        transform: rotateX(0);
-        z-index: 9999;
-        width: 100%;
-    }
-    &.active{
-        transform: rotateX(0deg);
-        width: 100%;
-    }
-
-    &.mobile-active{
-        .tf-bottom-booking-fields{
-            @include flexbox();
-        }
-
-        .tf-booking-popup-btn{
-            display: block;
-        }
-        .tf-booking-mobile-btn{
-            display: none;
-        }
-    }
-
-    .tf-bottom-booking-fields{
-        @include flexbox();
-        gap: 24px;
-
-        @media #{$max1199} {
-            width: 100%;
-            gap: 16px;
-            @include justify-content(center);
-        }
-
-        @media #{$max767} {
-            @include flex-wrap();
-            display: none;
-        }
-    }
-
-    .tf-bottom-booking-field{
-        @include flexbox();
-        gap: 8px;
-
-        @media #{$max767} {
-            width: 100%;
-        }
-
-        input.tf-field, select.tf-field {
-            border-radius: 8px;
-            border: 1px solid $color-primary;
-            padding: 0 16px;
-            background-color: $color-white;
-            outline: none;
-            min-width: 220px;
-            font-size: 16px;
-
-            @media #{$max767} {
-                flex-grow: 1;
-            }
-        }
-    }
-    .tf-bottom-booking-field.check-in-time-div{
-        display: none;
-    }
-
-    .tf-bottom-booking-field-icon{
-        height: 56px;
-        width: 56px;
-        line-height: 56px;
-        font-size: 24px;
-        border-radius: 8px;
-        background-color: $color-primary;
-        text-align: center;
-        color: $color-white;
-
-        @media #{$max767} {
-            height: 44px;
-            width: 44px;
-            line-height: 44px;
-            font-size: 18px;
-        }
-    }
-
-    .tf_selectperson-wrap{
-        border-right: none;
-        padding: 0;
-
-        @media #{$max767} {
-            border-bottom: none;
-            padding: 0 !important;
-        }
-
-        .tf_input-inner{
-            border-radius: 8px;
-            border: 1px solid $color-secondary;
-            padding: 0 16px;
-            background-color: $color-white;
-
-            @media #{$max767} {
-                flex-grow: 1;
-                width: 100%;
-            }
-        }
-    }
-
-    .tf_acrselection-wrap{
-        left: 64px;
-        right: auto;
-        top: unset;
-        bottom: 100%;
-        width: auto;
-    }
-
-    .tf-booking-mobile-btn{
-        display: none;
-
-        @media #{$max767} {
-            display: block;
-        }
-    }
-
-    .tf-btn-normal {
-        padding: 19px 32px;
-        font-size: 14px;
-        font-weight: 700;
-        border-radius: 8px;
-
-        @media #{$max767} {
-            padding: 12px 24px;
-        }
-    }
-
-    @media #{$max767} {
-        .tf-booking-popup-btn{
-            display: none;
-        }
-        .tf-tours-booking-btn{
-            width: 100%;
-        }
-    }
-    
-    .tf-tours-booking-btn {
-        @media only screen and (min-width: 768px) and (max-width: 970px) {
-            width: 98%;
-            margin: auto;
-        }
-        @media only screen and (max-width: 767px) {
-            width: 98%;
-            margin: auto;
-        }
-
-    }
-}
-
-.tour-external-booking-form {
-    background-color: $color-light-bg;
-    padding: 24px;
-
-    .tf-tour-external-booking-button {
-        border: 1px solid $color-primary !important;
-        background: $color-primary !important;
-        padding: 12px 32px !important;
-        justify-content: center;
-        transition: .3s all ease;
-        border-radius: 0px;
-    }
-}
-
-.tf-bottom-booking-bar{
-    width: 100% !important;
-    background: $color-light-bg;
-    box-shadow: none;
-    gap: 24px;
-    .tf-booking-form-fields{
-        display: flex;
-        @media #{$max640}{
-            justify-content: center;
-        }
-        .tf-booking-form-checkinout{
-            border-right: 1px solid $color-border;
-            flex-direction: column;
-            position: relative;
-            padding: 0px 38px;
-            display: flex;
-            @media #{$max640}{
-                padding: 0px 10px;
-            }
-            span.tf-booking-form-title {
-                font-size: 16px;
-                font-weight: 600;
-                line-height: 20.8px;
-                margin-bottom: 0px;
-            }
-            .tf-booking-date-wrap {
-                display: flex;
-                gap: 6px;
-                cursor: pointer;
-                background: transparent;
-                padding: 0px !important;
-                justify-content: start;
-            }
-            .tf-booking-date {
-                color: $color-text;
-                font-size: 24px;
-                font-weight: 400;
-                line-height: 31.2px;
-                text-align: right;
-                margin-right: 5px;
-            }
-            span.tf-booking-month {
-                color: $color-text;
-                font-size: 16px;
-                display: flex;
-                align-items: center;
-                span{
-                    margin-right: 5px;
-                }
-            }
-            input{
-                position: absolute;
-                height: 100%;
-                width: 100%;
-                opacity: 0;
-            }
-        }
-        .tf-bottom-booking-field.check-in-time-div{
-            select{
-                border: 0px solid;
-                min-width: auto;
-                padding: 0px 38px;
-                color: $color-text;
-                font-size: 16px;
-                font-weight: 600;
-                line-height: 20.8px;
-                margin-bottom: 0px;
-                border-right: 1px solid $color-border;
-                border-radius: 0px !important;
-                background-image: none;
-                text-align: center;
-                @media #{$max640}{
-                    padding: 0px 10px;
-                }
-            }
-        }
-        .tf-booking-form-guest-and-room{
-            position: relative;
-            padding: 0px 38px;
-            @media #{$max640}{
-                padding: 0px 10px;
-            }
-            .tf-booking-form-title{
-                font-size: 16px;
-                font-weight: 600;
-                line-height: 20.8px;
-                margin-bottom: 0px;
-                color: $color-text;
-            }
-            .tf-booking-guest-and-room-wrap{
-                display: flex;
-                align-items: center;
-                gap: 6px;
-            }
-            .tf-guest.tf-booking-date{
-                color: $color-text;
-                font-size: 24px;
-                font-weight: 400;
-                line-height: 31.2px;
-                min-width: none;
-                text-align: right;
-                margin-right: 5px;
-            }
-            .tf-booking-month{
-                display: flex;
-                align-items: center;
-                span{
-                    color: $color-text;
-                    font-size: 16px;
-                    margin-right: 5px;
-                }
-            }
-            .tf_acrselection-wrap {
-                position: absolute;
-                top: 100%;
-                right: 0;
-                margin-top: 12px;
-                background: $color-white;
-                padding: 24px 24px 8px;
-                min-width: 250px;
-                border-radius: 4px;
-                box-shadow: 0 2px 16px rgba(0, 0, 0, 0.15);
-                z-index: 9999;
-                width: 100%;
-                display: none;
-                .acr-select input[type="number"]{
-                    padding-left: 0px !important;
-                }
-            }
-            .tf_acrselection-wrap.tf-show{
+.single-tf_tours{
+    .tf-single-template{
+        &__two{
+            .tf-bottom-booking-bar {
+                position: fixed;
+                width: calc(100% - 64px);
+                bottom: 0;
                 left: 0;
-                right: auto;
-                width: auto;
-                visibility: visible;
-                opacity: 1;
-                top: 100%;
-                display: block !important;
-                margin-top: 0px;
-                bottom: 162%;
-                top: auto;
-                @media #{$max1199}{
-                    bottom: 131%;
+                padding: 32px;
+                background-color: rgba(255, 255, 255, .9);
+                //box-shadow: 0px 0px 24px 5px #e0e8ee;
+                z-index: 9999;
+                @include flexbox();
+                @include justify-content(center);
+                @include align-items(center);
+                gap: 24px;
+                transform-origin: bottom;
+                transform: rotateX(90deg);
+                transition: all 0.3s ease-in-out;
+            
+                @media #{$max1199} {
+                    @include flex-wrap();
+                    padding: 16px;
+                    gap: 8px;
+                    width:calc(100% - 32px);
                 }
-                @media #{$max640}{
-                    left: auto;
-                    right: 0;
+            
+                @media #{$max767} {
+                    transform: rotateX(0);
+                    z-index: 9999;
+                    width: 100%;
+                }
+                &.active{
+                    transform: rotateX(0deg);
+                    width: 100%;
+                }
+            
+                &.mobile-active{
+                    .tf-bottom-booking-fields{
+                        @include flexbox();
+                    }
+            
+                    .tf-booking-popup-btn{
+                        display: block;
+                    }
+                    .tf-booking-mobile-btn{
+                        display: none;
+                    }
+                }
+            
+                .tf-bottom-booking-fields{
+                    @include flexbox();
+                    gap: 24px;
+            
+                    @media #{$max1199} {
+                        width: 100%;
+                        gap: 16px;
+                        @include justify-content(center);
+                    }
+            
+                    @media #{$max767} {
+                        @include flex-wrap();
+                        display: none;
+                    }
+                }
+            
+                .tf-bottom-booking-field{
+                    @include flexbox();
+                    gap: 8px;
+            
+                    @media #{$max767} {
+                        width: 100%;
+                    }
+            
+                    input.tf-field, select.tf-field {
+                        border-radius: 8px;
+                        border: 1px solid $color-primary;
+                        padding: 0 16px;
+                        background-color: $color-white;
+                        outline: none;
+                        min-width: 220px;
+                        font-size: 16px;
+            
+                        @media #{$max767} {
+                            flex-grow: 1;
+                        }
+                    }
+                }
+                .tf-bottom-booking-field.check-in-time-div{
+                    display: none;
+                }
+            
+                .tf-bottom-booking-field-icon{
+                    height: 56px;
+                    width: 56px;
+                    line-height: 56px;
+                    font-size: 24px;
+                    border-radius: 8px;
+                    background-color: $color-primary;
+                    text-align: center;
+                    color: $color-white;
+            
+                    @media #{$max767} {
+                        height: 44px;
+                        width: 44px;
+                        line-height: 44px;
+                        font-size: 18px;
+                    }
+                }
+            
+                .tf_selectperson-wrap{
+                    border-right: none;
+                    padding: 0;
+            
+                    @media #{$max767} {
+                        border-bottom: none;
+                        padding: 0 !important;
+                    }
+            
+                    .tf_input-inner{
+                        border-radius: 8px;
+                        border: 1px solid $color-secondary;
+                        padding: 0 16px;
+                        background-color: $color-white;
+            
+                        @media #{$max767} {
+                            flex-grow: 1;
+                            width: 100%;
+                        }
+                    }
+                }
+            
+                .tf_acrselection-wrap{
+                    left: 64px;
+                    right: auto;
+                    top: unset;
+                    bottom: 100%;
+                    width: auto;
+                }
+            
+                .tf-booking-mobile-btn{
+                    display: none;
+            
+                    @media #{$max767} {
+                        display: block;
+                    }
+                }
+            
+                .tf-btn-normal {
+                    padding: 19px 32px;
+                    font-size: 14px;
+                    font-weight: 700;
+                    border-radius: 8px;
+            
+                    @media #{$max767} {
+                        padding: 12px 24px;
+                    }
+                }
+            
+                @media #{$max767} {
+                    .tf-booking-popup-btn{
+                        display: none;
+                    }
+                    .tf-tours-booking-btn{
+                        width: 100%;
+                    }
+                }
+                
+                .tf-tours-booking-btn {
+                    @media only screen and (min-width: 768px) and (max-width: 970px) {
+                        width: 98%;
+                        margin: auto;
+                    }
+                    @media only screen and (max-width: 767px) {
+                        width: 98%;
+                        margin: auto;
+                    }
+            
                 }
             }
         }
-    }
-    .tf-tours-booking-btn.tf-booking-bttns a{
-        padding: 16px 32px !important;
+        &__three{
+            .tf-bottom-booking-bar {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                padding: 32px;
+                z-index: 9999;
+                @include flexbox();
+                @include justify-content(center);
+                @include align-items(center);
+                gap: 24px;
+                transform-origin: bottom;
+                transform: rotateX(90deg);
+                transition: all 0.3s ease-in-out;
+                width: 100% !important;
+                background: $color-light-bg;
+                box-shadow: none;
+                @media #{$max1199} {
+                    @include flex-wrap();
+                    padding: 16px;
+                    gap: 8px;
+                    width:calc(100% - 32px);
+                }
+            
+                @media #{$max767} {
+                    transform: rotateX(0);
+                    z-index: 9999;
+                    width: 100%;
+                }
+                &.active{
+                    transform: rotateX(0deg);
+                    width: 100%;
+                }
+            
+                &.mobile-active{
+                    .tf-bottom-booking-fields{
+                        @include flexbox();
+                    }
+            
+                    .tf-booking-popup-btn{
+                        display: block;
+                    }
+                    .tf-booking-mobile-btn{
+                        display: none;
+                    }
+                }
+                
+                .tf-bottom-booking-field.check-in-time-div{
+                    display: none;
+                }
+            
+                .tf_selectperson-wrap{
+                    border-right: none;
+                    padding: 0;
+            
+                    @media #{$max767} {
+                        border-bottom: none;
+                        padding: 0 !important;
+                    }
+            
+                    .tf_input-inner{
+                        border-radius: 8px;
+                        border: 1px solid $color-secondary;
+                        padding: 0 16px;
+                        background-color: $color-white;
+            
+                        @media #{$max767} {
+                            flex-grow: 1;
+                            width: 100%;
+                        }
+                    }
+                }
+            
+                .tf_acrselection-wrap{
+                    left: 64px;
+                    right: auto;
+                    top: unset;
+                    bottom: 100%;
+                    width: auto;
+                }
+            
+                .tf-booking-mobile-btn{
+                    display: none;
+            
+                    @media #{$max767} {
+                        display: block;
+                    }
+                }
+            
+                .tf-btn-normal {
+                    padding: 19px 32px;
+                    font-size: 14px;
+                    font-weight: 700;
+                    border-radius: 8px;
+            
+                    @media #{$max767} {
+                        padding: 12px 24px;
+                    }
+                }
+            
+                @media #{$max767} {
+                    .tf-booking-popup-btn{
+                        display: none;
+                    }
+                    .tf-tours-booking-btn{
+                        width: 100%;
+                    }
+                }
+                
+                .tf-tours-booking-btn {
+                    @media only screen and (min-width: 768px) and (max-width: 970px) {
+                        width: 98%;
+                        margin: auto;
+                    }
+                    @media only screen and (max-width: 767px) {
+                        width: 98%;
+                        margin: auto;
+                    }
+                    &.tf-booking-bttns{
+                        a{
+                            padding: 16px 32px !important;
+                        }
+                    }
+                }
+
+                .tf-booking-form-fields{
+                    display: flex;
+                    @media #{$max640}{
+                        justify-content: center;
+                    }
+                    .tf-booking-form-checkinout{
+                        border-right: 1px solid $color-border;
+                        flex-direction: column;
+                        position: relative;
+                        padding: 0px 38px;
+                        display: flex;
+                        @media #{$max640}{
+                            padding: 0px 10px;
+                        }
+                        span.tf-booking-form-title {
+                            font-size: 16px;
+                            font-weight: 600;
+                            line-height: 20.8px;
+                            margin-bottom: 0px;
+                        }
+                        .tf-booking-date-wrap {
+                            display: flex;
+                            gap: 6px;
+                            cursor: pointer;
+                            background: transparent;
+                            padding: 0px !important;
+                            justify-content: start;
+                        }
+                        .tf-booking-date {
+                            color: $color-text;
+                            font-size: 24px;
+                            font-weight: 400;
+                            line-height: 31.2px;
+                            text-align: right;
+                            margin-right: 5px;
+                        }
+                        span.tf-booking-month {
+                            color: $color-text;
+                            font-size: 16px;
+                            display: flex;
+                            align-items: center;
+                            span{
+                                margin-right: 5px;
+                            }
+                        }
+                        input{
+                            position: absolute;
+                            height: 100%;
+                            width: 100%;
+                            opacity: 0;
+                        }
+                    }
+                    .tf-bottom-booking-field.check-in-time-div{
+                        select{
+                            border: 0px solid;
+                            min-width: auto;
+                            padding: 0px 38px;
+                            color: $color-text;
+                            font-size: 16px;
+                            font-weight: 600;
+                            line-height: 20.8px;
+                            margin-bottom: 0px;
+                            border-right: 1px solid $color-border;
+                            border-radius: 0px !important;
+                            background-image: none;
+                            text-align: center;
+                            @media #{$max640}{
+                                padding: 0px 10px;
+                            }
+                        }
+                    }
+                    .tf-booking-form-guest-and-room{
+                        position: relative;
+                        padding: 0px 38px;
+                        @media #{$max640}{
+                            padding: 0px 10px;
+                        }
+                        .tf-booking-form-title{
+                            font-size: 16px;
+                            font-weight: 600;
+                            line-height: 20.8px;
+                            margin-bottom: 0px;
+                            color: $color-text;
+                        }
+                        .tf-booking-guest-and-room-wrap{
+                            display: flex;
+                            align-items: center;
+                            gap: 6px;
+                        }
+                        .tf-guest.tf-booking-date{
+                            color: $color-text;
+                            font-size: 24px;
+                            font-weight: 400;
+                            line-height: 31.2px;
+                            min-width: none;
+                            text-align: right;
+                            margin-right: 5px;
+                        }
+                        .tf-booking-month{
+                            display: flex;
+                            align-items: center;
+                            span{
+                                color: $color-text;
+                                font-size: 16px;
+                                margin-right: 5px;
+                            }
+                        }
+                        .tf_acrselection-wrap {
+                            position: absolute;
+                            top: 100%;
+                            right: 0;
+                            margin-top: 12px;
+                            background: $color-white;
+                            padding: 24px 24px 8px;
+                            min-width: 250px;
+                            border-radius: 4px;
+                            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.15);
+                            z-index: 9999;
+                            width: 100%;
+                            display: none;
+                            .acr-select input[type="number"]{
+                                padding-left: 0px !important;
+                            }
+                        }
+                        .tf_acrselection-wrap.tf-show{
+                            left: 0;
+                            right: auto;
+                            width: auto;
+                            visibility: visible;
+                            opacity: 1;
+                            top: 100%;
+                            display: block !important;
+                            margin-top: 0px;
+                            bottom: 162%;
+                            top: auto;
+                            @media #{$max1199}{
+                                bottom: 131%;
+                            }
+                            @media #{$max640}{
+                                left: auto;
+                                right: 0;
+                            }
+                        }
+                    }
+                }
+                
+            }
+            .tour-external-booking-form {
+                background-color: $color-light-bg;
+                padding: 24px;
+            
+                .tf-tour-external-booking-button {
+                    border: 1px solid $color-primary !important;
+                    background: $color-primary !important;
+                    padding: 12px 32px !important;
+                    justify-content: center;
+                    transition: .3s all ease;
+                    border-radius: 0px;
+                }
+            }
+        }
     }
 }

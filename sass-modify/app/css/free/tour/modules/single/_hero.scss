@@ -1,44 +1,51 @@
-.tf-hero-content {
-    padding: 20px;
-    background-position: center center;
-    background-size: cover;
-    border-radius: 0 0 4px 4px;
-    min-height: 450px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 30px;
-
-    @media #{$max480}{
-        gap: 16px;
-    }
-}
-.tf-hero-top {
-    display: flex;
-    justify-content: space-between;
-    gap: 30px;
-}
-.tf-hero-bottom-area {
-    text-align: right;
-    color: $color-white;
-    font-size: 14px;
-    margin-top: 20px;
-}
-.tf-hero-btm-icon {
-    display: inline-block;
-    i {
-        background: rgba(26, 43, 72, .6);
-        border-radius: 50%;
-        color: $color-white;
-        font-size: 18px;
-        height: 40px;
-        width: 40px;
-        text-align: center;
-        line-height: 40px;
-        transition: 0.3s;
-        cursor: pointer;
-        &:hover {
-            background: rgba(26, 43, 72, .8);
+.single-tf_tours{
+    .tf-single-template{
+        &__one{
+            .tf-hero-wrapper{
+                .tf-hero-content {
+                    padding: 20px;
+                    background-position: center center;
+                    background-size: cover;
+                    border-radius: 0 0 4px 4px;
+                    min-height: 450px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    gap: 30px;
+                    @media #{$max480}{
+                        gap: 16px;
+                    }
+                    .tf-hero-top {
+                        display: flex;
+                        justify-content: space-between;
+                        gap: 30px;
+                    }
+                    .tf-hero-bottom-area {
+                        text-align: right;
+                        color: $color-white;
+                        font-size: 14px;
+                        margin-top: 20px;
+                        .tf-hero-btm-icon {
+                            display: inline-block;
+                            i {
+                                background: rgba(26, 43, 72, .6);
+                                border-radius: 50%;
+                                color: $color-white;
+                                font-size: 18px;
+                                height: 40px;
+                                width: 40px;
+                                text-align: center;
+                                line-height: 40px;
+                                transition: 0.3s;
+                                cursor: pointer;
+                                &:hover {
+                                    background: rgba(26, 43, 72, .8);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
