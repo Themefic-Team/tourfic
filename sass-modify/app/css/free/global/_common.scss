@@ -859,22 +859,6 @@ h3.tf-sidebar-widget_title {
     }
     .tf-review-submit {
         margin: 25px 0 0 0;
-        input[type="submit"] {
-            background: $color-primary;
-            color: $color-white;
-            text-decoration: none;
-            display: inline-block;
-            text-align: center;
-            border: 1px solid $color-primary;
-            border-radius: 4px;
-            padding: 10px 20px;
-            &:hover {
-                background: $color-secondary;
-                color: $color-white;
-                text-decoration: none;
-                border: 1px solid $color-secondary;
-            }
-        }
     }
 }
 #tourfic-rating {

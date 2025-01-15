@@ -1965,7 +1965,7 @@ class Helper {
             </div>
             <div class="tf-booking-form-submit">
                 <input type="hidden" name="type" value="<?php echo esc_attr( $post_type ); ?>" class="tf-post-type"/>
-                <button class="tf_btn tf_btn_full tf-submit"><?php echo esc_html__( 'Check Availability', 'tourfic' ); ?></button>
+                <button class="tf_btn tf_btn_full tf_btn_sharp tf-submit"><?php echo esc_html__( 'Check Availability', 'tourfic' ); ?></button>
             </div>
 
 			<?php if ( $post_type == 'tf_tours' ) { ?>
@@ -2574,7 +2574,7 @@ class Helper {
             </div>
             <div class="tf-booking-form-submit">
                 <input type="hidden" name="type" value="<?php echo esc_attr($post_type); ?>" class="tf-post-type"/>
-                <button class="tf_btn tf_btn_full tf-submit"><?php esc_html_e( 'Search Now', 'tourfic' ); ?></button>
+                <button class="tf_btn tf-submit"><?php esc_html_e( 'Search Now', 'tourfic' ); ?></button>
             </div>
 
             <?php if ( $post_type == 'tf_hotel' || $post_type == 'tf_tours' || $post_type == 'tf_apartment' ) : ?>

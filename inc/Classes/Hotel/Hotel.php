@@ -2820,7 +2820,7 @@ class Hotel {
                     <input type="hidden" name="type" value="<?php echo esc_html( $ptype ); ?>" class="tf-post-type"/>
                     <input type="hidden" name="post_id" value="<?php echo esc_html( get_the_ID() ); ?>"/>
                     <input type="hidden" name="children_ages" value="<?php echo esc_html( $children_ages ); ?>"/>
-                    <button type="submit" class="btn-primary tf-submit"><?php echo esc_html( $tf_hotel_book_avaibality_button_text ); ?></button>
+                    <button type="submit" class="tf_btn tf_btn_large tf_btn_sharp tf-submit"><?php echo esc_html( $tf_hotel_book_avaibality_button_text ); ?></button>
                 </div>
             </form>
 
@@ -3959,7 +3959,7 @@ class Hotel {
                             </span>
                             </div>
                         </div>
-                        <a href="<?php echo esc_url( $url ); ?>" class="view-hotel"><?php esc_html_e( "See details", "tourfic" ); ?></a>
+                        <a href="<?php echo esc_url( $url ); ?>" class="tf_btn tf_btn_large tf_btn_sharp"><?php esc_html_e( "See details", "tourfic" ); ?></a>
                     </div>
                 </div>
             </div>
@@ -4034,7 +4034,7 @@ class Hotel {
                         <div class="tf-archive-hotel-price">
 							<?php echo wp_kses_post(Pricing::instance( $post_id )->get_min_price_html()); ?>
                         </div>
-                        <a href="<?php echo esc_url( $url ); ?>" class="view-hotel"><?php esc_html_e( "View Details", "tourfic" ); ?></a>
+                        <a href="<?php echo esc_url( $url ); ?>" class="tf_btn tf_btn_secondary tf_btn_small"><?php esc_html_e( "View Details", "tourfic" ); ?></a>
                     </div>
                 </div>
             </div>

@@ -1223,14 +1223,14 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                                         </div>
                                         <div class="tf-airport-pickup-response"></div>
                                         <div class="tf_button_group">
-                                            <button class="tf-hotel-booking-popup-btn tf-reserve-button" type="submit"
+                                            <button class="tf-hotel-booking-popup-btn tf-reserve-button tf_btn tf_btn_large tf_btn_sharp" type="submit"
                                                     style="width: 100%"><?php echo esc_html( Helper::tfopt( 'hotel_service_popup_action', esc_html__( 'Continue to booking', 'tourfic' ) ) ); ?></button>
                                         </div>
                                     </div>
                                 </div>
 
                             <?php } else { ?>
-                                <button class="tf-hotel-booking-popup-btn tf-reserve-button" type="submit"><?php echo esc_html( $tf_hotel_reserve_button_text ); ?></button>
+                                <button class="tf-hotel-booking-popup-btn tf-reserve-button tf_btn tf_btn_large tf_btn_sharp" type="submit"><?php echo esc_html( $tf_hotel_reserve_button_text ); ?></button>
                             <?php } ?>
 						<?php } else { ?>
                             <button class="hotel-room-book" type="submit"><?php echo esc_html( $tf_hotel_reserve_button_text ); ?></button>

@@ -507,32 +507,6 @@
                     }
                 }
             }
-            .tf-review-submit{
-                input[type="submit"]{
-                    border-style: solid;
-                    border-top-width: 0;
-                    border-right-width: 0;
-                    border-left-width: 0;
-                    border-bottom-width: 0;
-                    color: $color-white;
-                    border-color: $color-primary !important;
-                    background: $color-primary !important;
-                    border-radius: 2px;
-                    padding-top: 15px;
-                    padding-right: 30px;
-                    padding-bottom: 15px;
-                    padding-left: 30px;
-                    font-family: inherit;
-                    font-weight: inherit;
-                    line-height: 1em;
-                    display: inline-block;
-                    width: auto !important;
-                    transition: .3s all ease;
-                    &:hover{
-                        background-color: $color-secondary;
-                    }
-                }
-            }
         }
     }
 }

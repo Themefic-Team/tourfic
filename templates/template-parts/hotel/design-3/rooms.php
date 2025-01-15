@@ -195,7 +195,7 @@ $feature_filter = ! empty( Helper::tfopt( 'feature-filter' ) ) ? Helper::tfopt( 
                                                 </div>
 											<?php endif; ?>
                                             <a href="<?php echo $tf_booking_type == 2 ? ( ! empty( $tf_booking_url ) && $tf_ext_booking_type == 1 ? esc_url( $tf_booking_url ) : ( $tf_ext_booking_type == 2 && ! empty( $tf_ext_booking_code ) ? esc_url( "#tf-external-booking-embaded-form" ) : '' ) ) : esc_url( '#room-availability' ) ?>"
-                                               class="availability"><?php $tf_booking_type == 2 ? ( ! empty( $tf_booking_url ) && ( $tf_hide_booking_form == 1 && $tf_ext_booking_type == 1 ) ? esc_html_e( 'Book Now', 'tourfic' ) : ( $tf_ext_booking_type == 2 && ! empty( $tf_ext_booking_code ) ? esc_html_e( "Book Now", "tourfic" ) : esc_html_e( "Check Availability", "tourfic" ) ) ) : esc_html_e( "Check Availability", "tourfic" ) ?></a>
+                                               class="tf_btn tf_btn_large tf_btn_sharp"><?php $tf_booking_type == 2 ? ( ! empty( $tf_booking_url ) && ( $tf_hide_booking_form == 1 && $tf_ext_booking_type == 1 ) ? esc_html_e( 'Book Now', 'tourfic' ) : ( $tf_ext_booking_type == 2 && ! empty( $tf_ext_booking_code ) ? esc_html_e( "Book Now", "tourfic" ) : esc_html_e( "Check Availability", "tourfic" ) ) ) : esc_html_e( "Check Availability", "tourfic" ) ?></a>
                                         </div>
                                     </div>
 									<?php if ( ! empty( $room['features'] ) ) : ?>
@@ -275,7 +275,7 @@ $feature_filter = ! empty( Helper::tfopt( 'feature-filter' ) ) ? Helper::tfopt( 
                                             </div>
 		                                <?php endif; ?>
                                         <a href="<?php echo $tf_booking_type == 2 ? ( ! empty( $tf_booking_url ) && $tf_ext_booking_type == 1 ? esc_url( $tf_booking_url ) : ( $tf_ext_booking_type == 2 && ! empty( $tf_ext_booking_code ) ? esc_url( "#tf-external-booking-embaded-form" ) : '' ) ) : esc_url( '#room-availability' ) ?>"
-                                           class="availability"><?php $tf_booking_type == 2 ? ( ! empty( $tf_booking_url ) && ( $tf_hide_booking_form == 1 && $tf_ext_booking_type == 1 ) ? esc_html_e( 'Book Now', 'tourfic' ) : ( $tf_ext_booking_type == 2 && ! empty( $tf_ext_booking_code ) ? esc_html_e( "Book Now", "tourfic" ) : esc_html_e( "Check Availability", "tourfic" ) ) ) : esc_html_e( "Check Availability", "tourfic" ) ?></a>
+                                           class="tf_btn tf_btn_large tf_btn_sharp"><?php $tf_booking_type == 2 ? ( ! empty( $tf_booking_url ) && ( $tf_hide_booking_form == 1 && $tf_ext_booking_type == 1 ) ? esc_html_e( 'Book Now', 'tourfic' ) : ( $tf_ext_booking_type == 2 && ! empty( $tf_ext_booking_code ) ? esc_html_e( "Book Now", "tourfic" ) : esc_html_e( "Check Availability", "tourfic" ) ) ) : esc_html_e( "Check Availability", "tourfic" ) ?></a>
                                     </div>
                                 </div>
                                 <?php if ( ! empty( $room['features'] ) ) : ?>

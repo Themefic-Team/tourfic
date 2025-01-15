@@ -311,28 +311,6 @@
             font-size: 14px !important;
         }
     }
-    .tf-btn{
-        width: auto;
-        .tf-send-inquiry-btn{
-            background: $color-primary;
-            padding: 12px 32px;
-            color: $color-white;
-            font-size: 16px;
-            font-style: normal;
-            font-weight: 700;
-            line-height: 150%;
-            display: inline-block;
-            text-align: center;
-            transition: .3s all ease;
-            text-decoration: none;
-            &:hover{
-                background-color: $color-secondary;
-            }
-            @media #{$max1024}{
-                font-size: 12px;
-            }
-        }
-    }
 }
 
 // Review Section
@@ -477,23 +455,8 @@ button.tf-review-open.button, .tf-reting-field button {
             }
             .tf-review-submit{
                 margin-top: 16px !important;
-                input#comment-submit{
-                    background-color: $color-primary !important;
-                    color: $color-white;
-                    width: 100%;
-                    font-size: 16px !important;
-                    font-weight: 700;
-                    line-height: 24px !important;
-                    border: none !important;
-                    padding: 12px 0 !important;
-                    border-radius: 0px !important;
-                    transition: .3s all ease;
-                    &:hover{
-                        background-color: $color-secondary !important;
-                    }
-                }
             }
-            input,textarea{
+            input[type="text"],textarea{
                 border: 1px solid $color-border;
                 background: transparent;
                 padding: 8px;
@@ -1906,7 +1869,8 @@ button.tf-review-open.button, .tf-reting-field button {
             button {
                 height: 100%;
                 width: 100%;
-                background: $color-primary !important;
+                @include align-items(center);
+                /* background: $color-primary !important;
                 border: 0;
                 outline: none;
                 color: $color-white !important;
@@ -1921,7 +1885,7 @@ button.tf-review-open.button, .tf-reting-field button {
                 }
                 @media #{$max1024}{
                     font-size: 12px !important;
-                }
+                } */
             }
         }
     }
@@ -2410,27 +2374,8 @@ button.tf-review-open.button, .tf-reting-field button {
                     button {
                         padding: 12px 20px;
                     }
-                    a.view-hotel{
-                        color: $color-light-bg;
-                        font-size: 16px;
-                        font-weight: 700;
-                        line-height: 24px;
-                        background: $color-primary;
-                        padding: 12px 32px;
-                        text-decoration: none;
-                        display: inline-block;
-                        text-align: center;
-                        transition: .3s all ease;
+                    a.tf_btn{
                         margin-top: auto;
-                        &:hover{
-                            background-color: $color-secondary;
-                        }
-                        @media #{$max1366}{
-                            padding: 12px 32px;
-                        }
-                        @media #{$max1200}{
-                            font-size: 12px !important;
-                        }
                     }
                 }
             }
@@ -3002,27 +2947,7 @@ button.tf-review-open.button, .tf-reting-field button {
             .roomselectissue{
                 text-align: right !important;
             }
-            button,
-            a.tf_air_service,
-            a.availability {
-                color: $color-white;
-                font-size: 16px;
-                font-weight: 700;
-                line-height: 24px;
-                background: $color-primary;
-                min-width: 166px;
-                border: none;
-                padding: 12px 32px;
-                display: inline-block;
-                text-decoration: none;
-                text-align: center;
-                transition: .3s all ease;
-                border-radius: 0px;
-                &:hover{
-                    background-color: $color-secondary;
-                }
-            }
-            a.availability {
+            a.tf_btn {
                 margin-top: auto;
             }
         }
