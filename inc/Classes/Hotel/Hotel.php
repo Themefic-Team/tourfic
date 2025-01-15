@@ -2466,7 +2466,7 @@ class Hotel {
 						if ( $author ) { ?>
                             <input type="hidden" name="tf-author" value="<?php echo esc_attr( $author ); ?>" class="tf-post-type"/>
 						<?php } ?>
-                        <button class="tf_button tf-submit btn-styled" type="submit"><?php echo esc_html(apply_filters("tf_hotel_search_form_submit_button_text", esc_html__('Search', 'tourfic' ))); ?></button>
+                        <button class="tf_btn tf-submit" type="submit"><?php echo esc_html(apply_filters("tf_hotel_search_form_submit_button_text", esc_html__('Search', 'tourfic' ))); ?></button>
                     </div>
 
                 </div>
@@ -3042,8 +3042,8 @@ class Hotel {
                     <input type="hidden" name="post_id" value="<?php echo esc_attr( get_the_ID() ); ?>"/>
                     <input type="hidden" name="children_ages" value="<?php echo esc_attr( $children_ages ); ?>"/>
 
-                    <div class="tf-btn">
-                        <button class="tf_button tf-submit btn-styled"
+                    <div class="tf-btn-wrap">
+                        <button class="tf_btn tf_btn_full tf-submit"
                                 type="submit"><?php echo esc_html( $tf_hotel_book_avaibality_button_text ); ?></button>
                     </div>
 
@@ -4142,7 +4142,7 @@ class Hotel {
 
                                                 <div class="roomPrice roomPrice_flex sr_discount" style="<?php echo empty( $features ) ? 'text-align:left' : ''; ?>">
                                                     <div class="availability-btn-area">
-                                                        <a href="<?php echo esc_url( $url ); ?>" class="tf_button btn-styled"><?php esc_html_e( 'View Details', 'tourfic' ); ?></a>
+                                                        <a href="<?php echo esc_url( $url ); ?>" class="tf_btn"><?php esc_html_e( 'View Details', 'tourfic' ); ?></a>
                                                     </div>
                                                     <!-- Show minimum price @author - Hena -->
                                                     <div class="tf-room-price-area">

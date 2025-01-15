@@ -36,6 +36,7 @@ input[type="submit"].tf_btn,
   transition: all 0.25s ease-in-out;
   border-width: 0;
   cursor: pointer;
+  gap: 4px;
 }
 
 input[type="submit"].tf_btn:hover,
@@ -54,6 +55,13 @@ input[type="submit"].tf_btn_secondary,
 
 input[type="submit"].tf_btn_secondary:hover,
 .tf_btn_secondary:hover {
+  color: #ffffff;
+  background-color: #0E3DD8;
+  border-color: #0E3DD8;
+}
+
+input[type="submit"].tf_btn_primary,
+.tf_btn_primary {
   color: #ffffff;
   background-color: #0E3DD8;
   border-color: #0E3DD8;
@@ -3035,16 +3043,10 @@ a.page-numbers {
   }
 }
 
-.tf-booking-form-tab .btn-styled {
-  background-color: #e6e6e6 !important;
-  border-color: #e6e6e6 !important;
-  color: #333 !important;
-}
-
-.tf-booking-form-tab .btn-styled.active {
-  background-color: #0E3DD8 !important;
-  border-color: #0E3DD8 !important;
-  color: #ffffff !important;
+.tf-booking-form-tab .tf_btn.active {
+  background-color: #0E3DD8;
+  border-color: #0E3DD8;
+  color: #ffffff;
 }
 
 .tf-booking-form-tab.design-3 {
@@ -3059,7 +3061,7 @@ a.page-numbers {
   }
 }
 
-.tf-booking-form-tab.design-3 .btn-styled {
+.tf-booking-form-tab.design-3 .tf_btn {
   border-radius: 6px !important;
   background: #ffffff !important;
   border: 4px solid #f0f2f4 !important;
@@ -3069,12 +3071,12 @@ a.page-numbers {
   position: static;
 }
 
-.tf-booking-form-tab.design-3 .btn-styled::after {
+.tf-booking-form-tab.design-3 .tf_btn::after {
   position: static;
   display: none;
 }
 
-.tf-booking-form-tab.design-3 .btn-styled.active {
+.tf-booking-form-tab.design-3 .tf_btn.active {
   color: #0E3DD8 !important;
 }
 
@@ -3220,9 +3222,6 @@ a.page-numbers {
   width: 100%;
   height: 100%;
   border-radius: 8px !important;
-}
-
-.tf_submit-wrap .btn-styled {
   padding: 20px 20px;
 }
 
@@ -19937,6 +19936,13 @@ button.tf-review-open.button, .tf-reting-field button {
 
 .tf-review-form-wrapper .tf-review-form-container form .tf-review-submit {
   margin-top: 16px !important;
+}
+
+.tf-review-form-wrapper .tf-review-form-container form .tf-review-submit .tf_btn {
+  width: 100%;
+  border-radius: 0;
+  padding: 16px 32px;
+  font-size: calc(var(--tf-base-font-size) + 2px);
 }
 
 .tf-review-form-wrapper .tf-review-form-container form input[type="text"], .tf-review-form-wrapper .tf-review-form-container form textarea {

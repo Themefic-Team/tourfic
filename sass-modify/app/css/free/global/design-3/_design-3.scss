@@ -455,6 +455,13 @@ button.tf-review-open.button, .tf-reting-field button {
             }
             .tf-review-submit{
                 margin-top: 16px !important;
+
+                .tf_btn{
+                    width: 100%;
+                    border-radius: 0;
+                    padding: 16px 32px;
+                    font-size: calc(var(--tf-base-font-size) + 2px);
+                }
             }
             input[type="text"],textarea{
                 border: 1px solid $color-border;

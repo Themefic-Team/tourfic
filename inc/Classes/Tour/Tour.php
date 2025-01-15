@@ -876,7 +876,7 @@ class Tour {
 						if ( $author ) { ?>
                             <input type="hidden" name="tf-author" value="<?php echo esc_attr( $author ); ?>" class="tf-post-type"/>
 						<?php } ?>
-                        <button class="tf_button tf-submit btn-styled" type="submit"><?php echo esc_html(apply_filters("tf_tour_search_form_submit_button_text", esc_html__('Search', 'tourfic' ))); ?></button>
+                        <button class="tf_btn tf-submit" type="submit"><?php echo esc_html(apply_filters("tf_tour_search_form_submit_button_text", esc_html__('Search', 'tourfic' ))); ?></button>
                     </div>
 
                 </div>

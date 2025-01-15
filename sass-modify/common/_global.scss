@@ -31,6 +31,7 @@ input[type="submit"].tf_btn,
     @include transition();
     border-width: 0;
     cursor: pointer;
+    gap: 4px;
 
     &:hover{
         color: $color-white;
@@ -48,6 +49,12 @@ input[type="submit"].tf_btn,
             background-color: $color-primary;
             border-color: $color-primary;
         }
+    }
+
+    &_primary{
+        color: $color-white;
+        background-color: $color-primary;
+        border-color: $color-primary;
     }
 
     &_white{

@@ -181,7 +181,7 @@ use \Tourfic\Classes\Apartment\Apartment;
 							<?php if ( count( $gallery_ids ) > 3 ): ?>
                                 <div class="gallery-all-photos">
                                     <a href="<?php echo esc_url( wp_get_attachment_image_url( $gallery_ids[3], 'full' ) ); ?>"
-                                       class="tf_button btn-styled" data-fancybox="hotel-gallery">
+                                       class="tf_btn" data-fancybox="hotel-gallery">
 										<?php esc_html_e( 'All Photos', 'tourfic' ) ?>
                                     </a>
 									<?php foreach ( $gallery_ids as $key => $item ) :
@@ -614,8 +614,8 @@ use \Tourfic\Classes\Apartment\Apartment;
                         </div>
                     </div>
 					<?php if ( ! empty( $enquiry_section_button ) ) {?>
-                        <div class="tf-btn">
-                            <a href="#" id="tf-ask-question-trigger" class="tf-btn-normal btn-primary">
+                        <div class="tf-btn-wrap">
+                            <a href="#" id="tf-ask-question-trigger" class="tf_btn tf_btn_full">
                                 <span><?php echo wp_kses_post( $enquiry_section_button ) ?></span>
                             </a>
                         </div>

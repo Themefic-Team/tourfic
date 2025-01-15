@@ -1136,7 +1136,7 @@ class Apartment {
 
                 <div class="tf_submit-wrap">
                     <input type="hidden" name="type" value="tf_apartment" class="tf-post-type"/>
-                    <button class="tf_button tf-submit btn-styled" type="submit"><?php echo esc_html(apply_filters("tf_apartment_search_form_submit_button_text", esc_html__('Search', 'tourfic' ))); ?></button>
+                    <button class="tf_btn tf-submit" type="submit"><?php echo esc_html(apply_filters("tf_apartment_search_form_submit_button_text", esc_html__('Search', 'tourfic' ))); ?></button>
                 </div>
 
             </div>
@@ -2330,7 +2330,7 @@ class Apartment {
 											<?php } ?>
                                             <div class="roomPrice roomPrice_flex sr_discount" style="<?php echo empty( $features ) ? 'text-align:left' : ''; ?>">
                                                 <div class="availability-btn-area">
-                                                    <a href="<?php echo esc_url( $url ); ?>" class="tf_button btn-styled"><?php esc_html_e( 'View Details', 'tourfic' ); ?></a>
+                                                    <a href="<?php echo esc_url( $url ); ?>" class="tf_btn"><?php esc_html_e( 'View Details', 'tourfic' ); ?></a>
                                                 </div>
                                                 <!-- Show minimum price @author - Hena -->
                                                 <div class="tf-room-price-area">

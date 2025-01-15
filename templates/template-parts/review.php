@@ -283,9 +283,9 @@ if ( ( get_post_type( $post_id ) == 'tf_tours' && $tf_tour_selected_template == 
 		$post_id = $post->ID;
 
 		if ( get_post_type( $post_id ) == "tf_apartment" && $tf_apartment_selected_template == "default" ) {
-			$btn_class = 'tf-btn-normal btn-primary';
+			$btn_class = 'tf_btn';
 		} else {
-			$btn_class = 'tf_button tf-submit btn-styled';
+			$btn_class = 'tf_btn tf-submit';
 		}
 
 		/**

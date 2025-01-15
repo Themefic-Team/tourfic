@@ -948,7 +948,7 @@ class Helper {
 				$ptype = esc_attr( $_GET['type'] ) ?? get_post_type();
 				?>
                 <input type="hidden" name="type" value="<?php echo esc_attr( $ptype ); ?>" class="tf-post-type"/>
-                <button class="tf_btn tf_btn_full tf-submit"><?php esc_html_e( 'Check Availability', 'tourfic' ); ?></button>
+                <button class="tf_btn tf_btn_large tf_btn_sharp tf-submit"><?php esc_html_e( 'Check Availability', 'tourfic' ); ?></button>
             </div>
 			<?php if ( $post_type == 'tf_tours' ) { ?>
                 <script>
