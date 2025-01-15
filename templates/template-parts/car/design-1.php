@@ -12,7 +12,7 @@ $tf_dropoff_time = !empty($_GET['dropoff_time']) ? $_GET['dropoff_time'] : '';
 $total_prices = Pricing::set_total_price($meta, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time); 
 $tf_cars_slug = get_option('car_slug');
 ?>
-<div class="tf-single-car-section tf-car-design-1">
+<div class="tf-single-car-section tf-car-design-1 tf-single-template__one">
     <div class="tf-single-booking-bar">
         <div class="tf-container">
             <div class="tf-top-booking-bar tf-flex tf-flex-space-bttn tf-flex-align-center">

@@ -1,212 +1,216 @@
-.tf-car-design-1{
-    .tf-car-hero-gallery{
-        width: 100%;
-        .tf-featured-car{
-            position: relative;
-            border-radius: 16px;
-            img{
-                border-radius: 16px;
-                height: 338px;
+.single-tf_carrental{
+    .tf-single-template{
+        &__one{
+            .tf-car-hero-gallery{
                 width: 100%;
-                object-fit: cover;
-                @media #{$max480}{
-                    height: 240px;
-                }
-            }
-            .tf-featured-reviews{
-                position: absolute;
-                top: 16px;
-                left: 16px;
-                a{
-                    text-decoration: none;
-                    border-radius: 8px;
-                    color: $color-text;
-                    font-size: 16px;
-                    font-weight: 400;
-                    background: $color-light-bg;
-                    backdrop-filter: blur(32px);
-                    span{
-                        color: $color-text;
-                        font-size: 16px;
-                        font-style: normal;
-                        font-weight: 400;
-                        i{
-                            color: $color-primary;
-                            font-size: 18px;
+                .tf-featured-car{
+                    position: relative;
+                    border-radius: 16px;
+                    img{
+                        border-radius: 16px;
+                        height: 338px;
+                        width: 100%;
+                        object-fit: cover;
+                        @media #{$max480}{
+                            height: 240px;
                         }
                     }
-                }
-            }
-            .tf-wish-and-share {
-                display: flex;
-                justify-content: flex-end;
-                align-items: center;
-                gap: 16px;
-                position: absolute;
-                right: 16px;
-                top: 16px;
-                
-                a.tf-share-toggle,
-                a.tf-wishlist {
-                    margin: 0;
-                    padding: 0;
-                    height: 32px;
-                    width: 32px;
-                    border-radius: 100px;
-                    text-align: center;
-                    line-height: 32px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    color: $color-secondary;
-                    cursor: pointer;
-                    font-size: 24px;
-                    text-decoration: none;
-                }
-                
-                .tf-off-canvas-share-box{
-                    display: inline-flex;
-                    align-items: center;
-                    .share-car-content{
-                        display: none;
-                        margin: 0;
-                        padding: 0;
-                        align-items: center;
-                        list-style: none;
-                        &.show{
-                            display: block;
-                        }
-                        @media #{$max640}{
-                            left: auto !important;
-                            right: 0px;
-                        }
-                        @media #{$max480}{
-                            left: 0 !important;
-                            right: auto !important;
-                        }
-                        .tf-dropdown-share-content{
-                            background: $color-white;
+                    .tf-featured-reviews{
+                        position: absolute;
+                        top: 16px;
+                        left: 16px;
+                        a{
+                            text-decoration: none;
                             border-radius: 8px;
-                            padding: 16px 10px;
-                            width: 280px;
-                            text-align: center;
-                            box-shadow: 0px 13px 30px 0px #e0e8ee;
-                            position: absolute;
-                            min-width: 100%;
-                            top: 100%;
-                            transform: translateY(8px);
-                            z-index: 9999;
-                            left: auto;
-                            right: 0;
-                            h4{
-                                font-size: 14px !important;
-                                color: $color-primary;
-                                font-weight: 600;
-                                margin-bottom: 10px;
-                                display: block;
+                            color: $color-text;
+                            font-size: 16px;
+                            font-weight: 400;
+                            background: $color-light-bg;
+                            backdrop-filter: blur(32px);
+                            span{
+                                color: $color-text;
+                                font-size: 16px;
+                                font-style: normal;
+                                font-weight: 400;
+                                i{
+                                    color: $color-primary;
+                                    font-size: 18px;
+                                }
                             }
-                            ul{
+                        }
+                    }
+                    .tf-wish-and-share {
+                        display: flex;
+                        justify-content: flex-end;
+                        align-items: center;
+                        gap: 16px;
+                        position: absolute;
+                        right: 16px;
+                        top: 16px;
+                        
+                        a.tf-share-toggle,
+                        a.tf-wishlist {
+                            margin: 0;
+                            padding: 0;
+                            height: 32px;
+                            width: 32px;
+                            border-radius: 100px;
+                            text-align: center;
+                            line-height: 32px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            color: $color-secondary;
+                            cursor: pointer;
+                            font-size: 24px;
+                            text-decoration: none;
+                        }
+                        
+                        .tf-off-canvas-share-box{
+                            display: inline-flex;
+                            align-items: center;
+                            .share-car-content{
+                                display: none;
                                 margin: 0;
                                 padding: 0;
+                                align-items: center;
                                 list-style: none;
-                                li{
-                                    display: inline-block;
-                                    a{
-                                        display: inline-block;
-                                        padding: 10px 9px;
+                                &.show{
+                                    display: block;
+                                }
+                                @media #{$max640}{
+                                    left: auto !important;
+                                    right: 0px;
+                                }
+                                @media #{$max480}{
+                                    left: 0 !important;
+                                    right: auto !important;
+                                }
+                                .tf-dropdown-share-content{
+                                    background: $color-white;
+                                    border-radius: 8px;
+                                    padding: 16px 10px;
+                                    width: 280px;
+                                    text-align: center;
+                                    box-shadow: 0px 13px 30px 0px #e0e8ee;
+                                    position: absolute;
+                                    min-width: 100%;
+                                    top: 100%;
+                                    transform: translateY(8px);
+                                    z-index: 9999;
+                                    left: auto;
+                                    right: 0;
+                                    h4{
+                                        font-size: 14px !important;
+                                        color: $color-primary;
+                                        font-weight: 600;
+                                        margin-bottom: 10px;
+                                        display: block;
+                                    }
+                                    ul{
                                         margin: 0;
-                                        i{
-                                            font-size: 22px;
-                                        }
-                                        color: $color-primary;
-                                        &:hover{
-                                            background: transparent !important;
-                                        }
-                                    }
-                                    button{
-                                        padding: 10px 8px !important;
-                                        background-color: transparent !important;
-                                        border: 0px solid;
-                                        font-size: 22px !important;
-                                        cursor: pointer;
-                                        color: $color-primary;
-                                        box-shadow: none;
-                                        span{
-                                            color: $color-primary;
-                                        }
-                                        .share-center-copied-message {
-                                            display: none;
-                                        }
-                                    }
-                                    
-                                    input{
-                                        @media #{$max640}{
-                                            display: contents !important;
-                                        }
                                         padding: 0;
-                                        width: 0;
+                                        list-style: none;
+                                        li{
+                                            display: inline-block;
+                                            a{
+                                                display: inline-block;
+                                                padding: 10px 9px;
+                                                margin: 0;
+                                                i{
+                                                    font-size: 22px;
+                                                }
+                                                color: $color-primary;
+                                                &:hover{
+                                                    background: transparent !important;
+                                                }
+                                            }
+                                            button{
+                                                padding: 10px 8px !important;
+                                                background-color: transparent !important;
+                                                border: 0px solid;
+                                                font-size: 22px !important;
+                                                cursor: pointer;
+                                                color: $color-primary;
+                                                box-shadow: none;
+                                                span{
+                                                    color: $color-primary;
+                                                }
+                                                .share-center-copied-message {
+                                                    display: none;
+                                                }
+                                            }
+                                            
+                                            input{
+                                                @media #{$max640}{
+                                                    display: contents !important;
+                                                }
+                                                padding: 0;
+                                                width: 0;
+                                            }
+                                        }
                                     }
                                 }
                             }
                         }
                     }
                 }
-            }
-        }
-        .tf-gallery{
-            margin-top: 15px;
-            a{
-                width: calc(25% - 12px);
-                display: none;
-                height: 122px;
-                @media #{$tfmax991}{
-                    height: 90px;
-                }
-                @media #{$max575}{
-                    height: 90px;
-                }
-                @media #{$max480}{
-                    height: 60px;
-                }
-
-                img{
-                    border-radius: 8px;
-                    object-fit: cover;
-                    height: 100%;
-                    width: 100%;
-                }
-                &.tf-gallery-more {
-                    position: relative;
-        
-                    &::before{
-                        border-radius: 8px;
-                        content: "View More → ";
-                        position: absolute;
-                        color: $color-white;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        top: 0;
-                        bottom: 0;
-                        left: 0;
-                        right: 0;
-                        width: 100%;
-                        z-index: 1;
-                        background: $color-heading;
-                        font-size: $font-size-normal;
-                        @media #{$tfmax767}{
-                            text-align: center;
-                            font-size: $font-size-xs;
+                .tf-gallery{
+                    margin-top: 15px;
+                    a{
+                        width: calc(25% - 12px);
+                        display: none;
+                        height: 122px;
+                        @media #{$tfmax991}{
+                            height: 90px;
                         }
-                    }
+                        @media #{$max575}{
+                            height: 90px;
+                        }
+                        @media #{$max480}{
+                            height: 60px;
+                        }
+
+                        img{
+                            border-radius: 8px;
+                            object-fit: cover;
+                            height: 100%;
+                            width: 100%;
+                        }
+                        &.tf-gallery-more {
+                            position: relative;
+                
+                            &::before{
+                                border-radius: 8px;
+                                content: "View More → ";
+                                position: absolute;
+                                color: $color-white;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                top: 0;
+                                bottom: 0;
+                                left: 0;
+                                right: 0;
+                                width: 100%;
+                                z-index: 1;
+                                background: $color-heading;
+                                font-size: $font-size-normal;
+                                @media #{$tfmax767}{
+                                    text-align: center;
+                                    font-size: $font-size-xs;
+                                }
+                            }
+                        }
+                        &:nth-child(1),
+                        &:nth-child(2),
+                        &:nth-child(3),
+                        &:nth-child(4){
+                            display: block;
+                        }
+                    }   
                 }
-                &:nth-child(1),
-                &:nth-child(2),
-                &:nth-child(3),
-                &:nth-child(4){
-                    display: block;
-                }
-            }   
+            }
         }
     }
 }
