@@ -1374,7 +1374,7 @@ class Enqueue {
 			.tf-template-global .tf-search-results-list #tf_posts_navigation_bar .page-numbers.current,
 			.tf-template-global .tf-archive-right .tf_widget .al-range-slider__tooltip,
 			.tf-template-global .tf-archive-right .tf_widget .al-range-slider_dark .al-range-slider__bar,
-			.tf-template-global .tf-btn .btn-primary,
+			.tf-template-global .tf_btn,
 			.tf-hotel-design-1 .tf-rooms-sections .tf-rooms .tf-availability-table>tbody tr td .hotel-room-book,
 			.tf-template-global .tf-archive-right .tf-booking-bttns button,
 			.tf-hotel-services-wrap.tf-hotel-service-design-1 .tf_button_group button,
@@ -1550,8 +1550,7 @@ class Enqueue {
 		// Global Button
 		if ( ! empty( $tf_global_button_size ) || ! empty( $tf_global_button_line_height ) ) {
 			$output .= '
-			.tf-btn-normal,
-			.btn-styled{
+			.tf_btn{
 				font-size: ' . $tf_global_button_size . 'px !important;
 				line-height: ' . $tf_global_button_line_height . ' !important;
 			}';

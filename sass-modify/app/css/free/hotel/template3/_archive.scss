@@ -287,22 +287,6 @@
         @media #{$max1024} {
             margin-left: 0;
         }
-
-        .btn-primary {
-            border-radius: 4px;
-            background: $color-primary !important;
-            box-shadow: 0 4px 30px 0 rgba(255, 237, 225, 0.40);
-            font-size: 16px !important;
-            padding: 13px 24px;
-
-            @media #{$max1024} {
-                width: 100%;
-            }
-
-            &:hover{
-                background: $color-secondary !important;
-            }
-        }
     }
 
     /* Hotel details */

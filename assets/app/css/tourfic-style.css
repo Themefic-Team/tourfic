@@ -4489,122 +4489,8 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   }
 }
 
-/* body{
-    margin: 0;
-    padding: 0;
-} */
 :root {
   --tf-base-font-size: 14px;
-}
-
-/* .tf-template-global {
-    font-family: inherit;
-    color: $color-text;
-    // .tf-container{
-    //     width: auto;
-    // }
-    
-    h2{
-        font-size: $font-size-large;
-    }
-    img {
-        display: inline-block;
-        border: none;
-        margin: 0;
-        padding: 0;
-        vertical-align: middle;
-        max-width: 100%;
-    }
-}
-.tf-template-global h1, 
-.tf-template-global h2, 
-.tf-template-global h3, 
-.tf-template-global h4, 
-.tf-template-global h5, 
-.tf-template-global h6{
-    font-family: inherit;
-    font-weight: $font-weight-medium;
-    color: $color-heading;
-    margin: 0px;
-    line-height: 1.3;
-}
-.tf-template-global p {
-    font-family: inherit;
-    font-size: 16px;
-    font-weight: $font-weight-normal;
-    line-height: 1.6;
-    color: $color-primary;
-    margin: 0px;
-}
- */
-/* table.tf-table {
-    border-collapse: collapse;
-    width: 100%;
-    background-color: $color-white;
-    box-shadow: 0px 13px 30px 0px #E0E8EE;
-    border-radius: $tf-brds-default;
-    @media only screen and (max-width: 767.98px){
-        font-size: $font-size-small;
-    }
-    td {
-        text-align: left;
-        padding: 25px;
-        line-height: 1.4;
-        @media only screen and (max-width: 767.98px){
-            padding: 10px;
-        }
-        @media only screen and (min-width: 767.99px) and (max-width: 991px){
-            padding: 16px;
-        }
-    }
-    td:nth-child(2) {
-        border-left: 1px solid #ddd;
-    }
-    tr {
-        border-bottom: 1px solid #ddd;
-    }
-    tr:last-child {
-        border-bottom: 0px solid #ddd;
-    }
-} */
-.tf-btn-normal {
-  color: #0E3DD8 !important;
-  background-color: #ffffff !important;
-  padding: 12px 24px;
-  text-decoration: none;
-  border-radius: 5px;
-  font-weight: 500;
-  display: block;
-  text-align: center;
-  transition: all .6s ease;
-  font-family: inherit;
-  border: 0px !important;
-  cursor: pointer;
-}
-
-.tf-btn-normal:hover {
-  background: #0E3DD8;
-  color: #ffffff;
-}
-
-.tf-btn-normal.btn-primary:hover {
-  background-color: #003C7A;
-  color: #ffffff;
-  transition: all .6s ease;
-}
-
-.tf-btn-normal.btn-secondary:hover {
-  background-color: #0E3DD8;
-}
-
-.btn-primary {
-  background-color: #0E3DD8 !important;
-  color: #ffffff !important;
-}
-
-.btn-secondary {
-  background-color: #003C7A !important;
-  color: #ffffff !important;
 }
 
 .tf-list {
@@ -4704,9 +4590,16 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 .tf-icon {
   height: 50px;
   width: 50px;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
-  align-items: center;
+  -webkit-justify-content: center;
   justify-content: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .tf-box-wrapper {
@@ -4799,10 +4692,6 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   gap: 32px;
 }
 
-.tf-flex-gap-64 {
-  gap: 64px;
-}
-
 .tf-mt-8 {
   margin-top: 8px;
 }
@@ -4841,74 +4730,6 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 
 .tf-mb-50 {
   margin-bottom: 50px;
-}
-
-.tf-pad-8 {
-  padding-top: 8px;
-}
-
-.tf-pad-16 {
-  padding-top: 16px;
-}
-
-.tf-pad-24 {
-  padding-top: 24px;
-}
-
-.tf-pad-30 {
-  padding: 30px;
-}
-
-.tf-padbtm-8 {
-  padding-bottom: 8px;
-}
-
-.tf-padbtm-12 {
-  padding-bottom: 12px;
-}
-
-.tf-padbtm-16 {
-  padding-bottom: 16px;
-}
-
-.tf-column-2 .tf-column {
-  flex-basis: calc((100%/2) - 16px);
-}
-
-.tf-column-3 {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.tf-column-3 .tf-column {
-  flex-basis: calc((100%/3) - 16px);
-}
-
-@media only screen and (max-width: 767.98px) {
-  .tf-column-3 .tf-column {
-    flex-basis: calc((100%/1) - 0px);
-  }
-}
-
-.tf-column-4 {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.tf-column-4 .tf-column {
-  flex-basis: calc((100%/4) - 16px);
-}
-
-@media only screen and (max-width: 767.98px) {
-  .tf-column-4 .tf-column {
-    flex-basis: calc((100%/2) - 8px);
-  }
-}
-
-@media only screen and (min-width: 767.99px) and (max-width: 991px) {
-  .tf-column-4 .tf-column {
-    flex-basis: calc((100%/2) - 8px);
-  }
 }
 
 .single-tf_hotel .tf-single-template__one .hero-section-wrap {
@@ -7499,6 +7320,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 .single-tf_tours .tf-single-template__two .tf-trip-feature-blocks .tf-features-block-inner {
+  display: flex;
   flex-wrap: nowrap !important;
 }
 
@@ -10315,19 +10137,6 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   }
 }
 
-.single-tf_tours .tf-single-template__three .tf-bottom-booking-bar .tf-btn-normal {
-  padding: 19px 32px;
-  font-size: 14px;
-  font-weight: 700;
-  border-radius: 8px;
-}
-
-@media only screen and (max-width: 767.98px) {
-  .single-tf_tours .tf-single-template__three .tf-bottom-booking-bar .tf-btn-normal {
-    padding: 12px 24px;
-  }
-}
-
 @media only screen and (max-width: 767.98px) {
   .single-tf_tours .tf-single-template__three .tf-bottom-booking-bar .tf-booking-popup-btn {
     display: none;
@@ -10621,6 +10430,7 @@ div#tf-contact-info {
 
 .single-tf_tours .tf-single-template__two .tf-tour-details-right .tf-booking-price {
   border-bottom: 1px solid #f0f2f4;
+  padding-bottom: 12px;
 }
 
 .single-tf_tours .tf-single-template__two .tf-tour-details-right .tf-booking-price p {
@@ -11921,33 +11731,6 @@ div#tf-contact-info {
   .tf_template_4_apartment_archive .tf-booking-form-submit {
     margin-left: 0;
   }
-}
-
-.tf-hotel-template-4 .tf-booking-form-submit .btn-primary,
-.tf_template_4_hotel_archive .tf-booking-form-submit .btn-primary,
-.tf_template_4_tour_archive .tf-booking-form-submit .btn-primary,
-.tf_template_4_apartment_archive .tf-booking-form-submit .btn-primary {
-  border-radius: 4px;
-  background: #0E3DD8 !important;
-  box-shadow: 0 4px 30px 0 rgba(255, 237, 225, 0.4);
-  font-size: 16px !important;
-  padding: 13px 24px;
-}
-
-@media only screen and (max-width: 1024px) {
-  .tf-hotel-template-4 .tf-booking-form-submit .btn-primary,
-  .tf_template_4_hotel_archive .tf-booking-form-submit .btn-primary,
-  .tf_template_4_tour_archive .tf-booking-form-submit .btn-primary,
-  .tf_template_4_apartment_archive .tf-booking-form-submit .btn-primary {
-    width: 100%;
-  }
-}
-
-.tf-hotel-template-4 .tf-booking-form-submit .btn-primary:hover,
-.tf_template_4_hotel_archive .tf-booking-form-submit .btn-primary:hover,
-.tf_template_4_tour_archive .tf-booking-form-submit .btn-primary:hover,
-.tf_template_4_apartment_archive .tf-booking-form-submit .btn-primary:hover {
-  background: #003C7A !important;
 }
 
 .tf-hotel-template-4 .tf-archive-details-wrap,

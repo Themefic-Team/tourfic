@@ -205,7 +205,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                         <!-- Tourfic Pricing Head -->
                                         <div class="tf-booking-form-data">
                                             <div class="tf-booking-block">
-                                                <div class="tf-booking-price tf-padbtm-12">
+                                                <div class="tf-booking-price">
                                                 <?php
                                                 $tour_price = [];
                                                 $tf_pricing_rule = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
@@ -466,7 +466,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                             <!-- Tourfic Pricing Head -->
                                             <div class="tf-booking-form-data">
                                                 <div class="tf-booking-block">
-                                                    <div class="tf-booking-price tf-padbtm-12">
+                                                    <div class="tf-booking-price">
 														<?php
 														$tour_price             = [];
 														$tf_pricing_rule        = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';

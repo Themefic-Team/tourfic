@@ -2306,18 +2306,6 @@
   margin-bottom: 0;
 }
 
-.tf-apartment .btn-primary {
-  color: #ffffff;
-  font-size: 16px !important;
-  font-weight: 500;
-  line-height: 24px !important;
-  letter-spacing: 0.5px;
-  padding: 12px 24px;
-  border-radius: 8px;
-  background: #0E3DD8;
-  box-shadow: 0px 1px 1px 0px rgba(0, 60, 121, 0.16);
-}
-
 .tf-apartment .section-heading {
   font-weight: 600 !important;
   font-size: 24px !important;

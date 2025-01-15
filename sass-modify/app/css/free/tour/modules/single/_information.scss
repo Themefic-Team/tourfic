@@ -80,6 +80,7 @@
         &__two{
             .tf-trip-feature-blocks{
                 .tf-features-block-inner {
+                    display: flex;
                     flex-wrap: nowrap !important;
                 
                     @media #{$tfmax991}{
