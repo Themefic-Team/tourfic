@@ -1,190 +1,193 @@
-.tf-inc-exc-wrapper {
-    background-position: center center;
-    background-size: cover;
-    background-attachment: fixed;
-    .tf-inc-exc-content {
-        display: flex;
-        margin: auto;
-        gap: 35px;
-        @media only screen and (max-width: 767px) {
-            gap: 15px;
-        }
-        @media only screen and (max-width: 480px) {
-            display: block;
-        }
-        h4 {
-            padding: 6px 0;
-            margin-bottom: 10px;
-            color: $color-white;
-        }
-        >* {
-            flex: 1;
-        }
-        ul {
-            margin: 0;
-            padding: 0;
-            list-style: none;
-            li {
-                padding-left: 0px;
-                position: relative;
-                margin-left: 0;
-                i {
-                    margin-right: 20px;
-                }
-                &:before {
-                    content: "";
-                    position: absolute;
-                    height: 16px;
-                    width: 16px;
-                    left: 0;
-                    background-size: contain;
-                    top: 8px;
-                }
-            }
-            i.fas {
-                float: left;
-                vertical-align: middle;
-                margin-top: 6px;
-            }
-        }
-    }
-    .tf-include-section {
-        background: $color-heading;
-        background-image: linear-gradient(to right, rgba(253, 97, 67, 0), rgb(0, 49, 98));
-        border-radius: 4px;
-        padding: 20px 30px 30px;
-        color: $color-white;
-        -webkit-backdrop-filter: blur(3px);
-        backdrop-filter: blur(3px);
-        @media only screen and (max-width: 767px) {
-            padding: 15px 20px 20px;
-        }
-        @media only screen and (max-width: 480px) {
-            margin-bottom: 15px;
-        }
-    }
-    .tf-exclude-section {
-        background: $color-heading;
-        background-image: linear-gradient(to right, rgba(253, 97, 67, 0), rgb(0, 49, 98));
-        border-radius: 4px;
-        padding: 20px 30px 30px;
-        color: $color-white;
-        -webkit-backdrop-filter: blur(3px);
-        backdrop-filter: blur(3px);
-        @media only screen and (max-width: 767px) {
-            padding: 15px 20px 20px;
-        }
-    }
-    .tf-include-section.custom-inc-icon {
-        ul {
-            li {
-                &:before {
-                    display: none;
-                }
-            }
-        }
-    }
-    .tf-exclude-section.custom-exc-icon {
-        ul {
-            li {
-                &:before {
-                    display: none;
-                }
-            }
-        }
-    }
-}
-
-.tf-template-3{
-    .tf-include-exclude-wrapper {
-        margin-bottom: 16px;
-        @media #{$max767}{
-            padding-left: 16px;
-            padding-right: 16px;
-        }
-        h2{
-            color: $color-heading;
-            font-size: 32px !important;
-            font-style: normal !important;
-            font-weight: 700 !important;
-            margin-bottom: 24px;
-            @media #{$max1024}{
-                font-size: 24px !important;
-            }
-        }
-        .tf-include-exclude-innter {
-            display: flex;
-            gap: 40px;
-            @media #{$max767}{
-                flex-wrap: wrap;
-                gap: 24px;
-            }
-            &>div {
-                display: flex;
-                gap: 16px;
-                width: 50%;
-                @media #{$max767}{
-                    width: 100%;
-                }
-            }
-            ul {
-                display: flex;
-                flex-direction: column;
-                gap: 16px;
-                margin: 0;
-                padding: 0;
-                @media #{$max767}{
-                    gap: 8px;
-                }
-                li {
+.single-tf_tours{
+    .tf-single-template{
+        &__one{
+            .tf-inc-exc-wrapper {
+                background-position: center center;
+                background-size: cover;
+                background-attachment: fixed;
+                .tf-inc-exc-content {
                     display: flex;
-                    gap: 16px;
-                    img {
-                        width: 16px;
-                        height: 16px;
-                        object-fit: contain;
+                    margin: auto;
+                    gap: 35px;
+                    @media only screen and (max-width: 767px) {
+                        gap: 15px;
                     }
-                }
-            }
-            .tf-include{
-                ul{
-                    li{
-                        i{
-                            color: $color-success;
+                    @media only screen and (max-width: 480px) {
+                        display: block;
+                    }
+                    h4 {
+                        padding: 6px 0;
+                        margin-bottom: 10px;
+                        color: $color-white;
+                    }
+                    >* {
+                        flex: 1;
+                    }
+                    ul {
+                        margin: 0;
+                        padding: 0;
+                        list-style: none;
+                        li {
+                            padding-left: 0px;
+                            position: relative;
+                            margin-left: 0;
+                            i {
+                                margin-right: 20px;
+                            }
+                            &:before {
+                                content: "";
+                                position: absolute;
+                                height: 16px;
+                                width: 16px;
+                                left: 0;
+                                background-size: contain;
+                                top: 8px;
+                            }
+                        }
+                        i.fas {
+                            float: left;
+                            vertical-align: middle;
+                            margin-top: 6px;
                         }
                     }
                 }
-            }
-            .tf-exclude{
-                ul{
-                    li{
-                        i{
-                            color: $color-danger
+                .tf-include-section {
+                    background: $color-heading;
+                    background-image: linear-gradient(to right, rgba(253, 97, 67, 0), rgb(0, 49, 98));
+                    border-radius: 4px;
+                    padding: 20px 30px 30px;
+                    color: $color-white;
+                    -webkit-backdrop-filter: blur(3px);
+                    backdrop-filter: blur(3px);
+                    @media only screen and (max-width: 767px) {
+                        padding: 15px 20px 20px;
+                    }
+                    @media only screen and (max-width: 480px) {
+                        margin-bottom: 15px;
+                    }
+                }
+                .tf-exclude-section {
+                    background: $color-heading;
+                    background-image: linear-gradient(to right, rgba(253, 97, 67, 0), rgb(0, 49, 98));
+                    border-radius: 4px;
+                    padding: 20px 30px 30px;
+                    color: $color-white;
+                    -webkit-backdrop-filter: blur(3px);
+                    backdrop-filter: blur(3px);
+                    @media only screen and (max-width: 767px) {
+                        padding: 15px 20px 20px;
+                    }
+                }
+                .tf-include-section.custom-inc-icon {
+                    ul {
+                        li {
+                            &:before {
+                                display: none;
+                            }
+                        }
+                    }
+                }
+                .tf-exclude-section.custom-exc-icon {
+                    ul {
+                        li {
+                            &:before {
+                                display: none;
+                            }
                         }
                     }
                 }
             }
         }
-    }
-}
-
-.tf-tour-design-1{
-    // Tourfic include exclude 
-    .tf-inex-wrapper {
-        .tf-inex {
-            width: 100%;
-            background: $color-white;
-            border-radius: $tf-brds-default;
-            box-shadow: 0px 0px 24px 5px #E0E8EE;
-            h3 {
-                font-size: $font-size-medium;
+        &__two{
+            .tf-inex-wrapper {
+                .tf-inex {
+                    width: 100%;
+                    background: $color-white;
+                    border-radius: $tf-brds-default;
+                    box-shadow: 0px 0px 24px 5px #E0E8EE;
+                    h3 {
+                        font-size: $font-size-medium;
+                    }
+                    ul{
+                        li{
+                            margin-top: 0px;
+                            margin-bottom: 12px;
+                            &:last-child{
+                                margin-bottom: 0px;
+                            }
+                        }
+                    }
+                }
             }
-            ul{
-                li{
-                    margin-top: 0px;
-                    margin-bottom: 12px;
-                    &:last-child{
-                        margin-bottom: 0px;
+        }
+        &__three{
+            .tf-include-exclude-wrapper {
+                margin-bottom: 16px;
+                @media #{$max767}{
+                    padding-left: 16px;
+                    padding-right: 16px;
+                }
+                h2{
+                    color: $color-heading;
+                    font-size: 32px !important;
+                    font-style: normal !important;
+                    font-weight: 700 !important;
+                    margin-bottom: 24px;
+                    @media #{$max1024}{
+                        font-size: 24px !important;
+                    }
+                }
+                .tf-include-exclude-innter {
+                    display: flex;
+                    gap: 40px;
+                    @media #{$max767}{
+                        flex-wrap: wrap;
+                        gap: 24px;
+                    }
+                    &>div {
+                        display: flex;
+                        gap: 16px;
+                        width: 50%;
+                        @media #{$max767}{
+                            width: 100%;
+                        }
+                    }
+                    ul {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 16px;
+                        margin: 0;
+                        padding: 0;
+                        @media #{$max767}{
+                            gap: 8px;
+                        }
+                        li {
+                            display: flex;
+                            gap: 16px;
+                            img {
+                                width: 16px;
+                                height: 16px;
+                                object-fit: contain;
+                            }
+                        }
+                    }
+                    .tf-include{
+                        ul{
+                            li{
+                                i{
+                                    color: $color-success;
+                                }
+                            }
+                        }
+                    }
+                    .tf-exclude{
+                        ul{
+                            li{
+                                i{
+                                    color: $color-danger
+                                }
+                            }
+                        }
                     }
                 }
             }

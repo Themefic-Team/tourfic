@@ -1,57 +1,61 @@
-.tf-hotel-design-1{
-    .tf-hotel-faqs-section{
-        .tf-hotel-enquiry{
-            flex-basis: 32%;
-            padding-right: 30px;
-            @media #{$tfmax767}{
-                flex-basis: 100%;
-                padding-right: 0px;
-            }
-            .tf-ask-enquiry{
-                background-color: $color-white;
-                box-shadow: 0px 13px 30px 0px rgba(224,232,238,0.32);
-                padding: 30px;
-                h3{
-                    font-size: 25px;
-                }
+.single-tf_hotel{
+    .tf-single-template{
+        &__one{
+            .hotel-faq .tf-faq-sec-title {
+                text-align: left;
+                margin-bottom: 20px;
             }
         }
-        .tf-hotel-faqs{
-            flex-basis: 68%;
-            @media #{$tfmax767}{
-                flex-basis: 100%;
-                margin-top: 30px;
-            }
-            .tf-faq-wrapper{
-                .tf-faq-single {
-                    border-bottom: 0px solid;
-                    .tf-faq-single-inner{
-                        margin: 0px 0px 30px 0px;
-                        background: $color-white;
+        &__two{
+            .tf-hotel-faqs-section{
+                .tf-hotel-enquiry{
+                    flex-basis: 32%;
+                    padding-right: 30px;
+                    @media #{$tfmax767}{
+                        flex-basis: 100%;
+                        padding-right: 0px;
+                    }
+                    .tf-ask-enquiry{
+                        background-color: $color-white;
                         box-shadow: 0px 13px 30px 0px rgba(224,232,238,0.32);
-                        transition: .3s all ease;
-                        &:hover{
-                            background: $color-light-bg;
-                            box-shadow: 0px 13px 30px 0px $color-light-bg;
-                        }
+                        padding: 30px;
                         h3{
-                            font-size: 20px;
+                            font-size: 25px;
                         }
                     }
                 }
-                .tf-faq-single.active {
-                    .tf-faq-single-inner{
-                        background: $color-light-bg;
-                            box-shadow: 0px 13px 30px 0px $color-light-bg;
+                .tf-hotel-faqs{
+                    flex-basis: 68%;
+                    @media #{$tfmax767}{
+                        flex-basis: 100%;
+                        margin-top: 30px;
+                    }
+                    .tf-faq-wrapper{
+                        .tf-faq-single {
+                            border-bottom: 0px solid;
+                            .tf-faq-single-inner{
+                                margin: 0px 0px 30px 0px;
+                                background: $color-white;
+                                box-shadow: 0px 13px 30px 0px rgba(224,232,238,0.32);
+                                transition: .3s all ease;
+                                &:hover{
+                                    background: $color-light-bg;
+                                    box-shadow: 0px 13px 30px 0px $color-light-bg;
+                                }
+                                h3{
+                                    font-size: 20px;
+                                }
+                            }
+                        }
+                        .tf-faq-single.active {
+                            .tf-faq-single-inner{
+                                background: $color-light-bg;
+                                    box-shadow: 0px 13px 30px 0px $color-light-bg;
+                            }
+                        }
                     }
                 }
             }
         }
     }
-}
-
-// Default Design
-.hotel-faq .tf-faq-sec-title {
-    text-align: left;
-    margin-bottom: 20px;
 }
