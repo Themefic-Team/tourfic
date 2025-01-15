@@ -338,7 +338,7 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
                                     <p><?php echo wp_kses_post( $tf_enquiry_section_cont ); ?></p>
 								<?php }
 								if ( ! empty( $tf_enquiry_section_button ) ) { ?>
-                                    <div class="tf-btn"><a href="#" id="tf-ask-question-trigger" class="tf-send-inquiry-btn"><span><?php echo esc_html( $tf_enquiry_section_button ); ?></span></a></div>
+                                    <div class="tf-btn-wrap"><a href="#" id="tf-ask-question-trigger" class="tf-send-inquiry-btn tf_btn"><span><?php echo esc_html( $tf_enquiry_section_button ); ?></span></a></div>
 								<?php } ?>
                             </div>
 						<?php } ?>

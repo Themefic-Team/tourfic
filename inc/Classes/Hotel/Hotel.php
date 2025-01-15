@@ -3397,7 +3397,7 @@ class Hotel {
 							if ( 3 != $room_book_by && empty( $enable_guest_info ) ) { ?>
                                 <button type="submit" class="hotel-room-book"><?php echo !empty( tfopt( 'hotel_service_popup_action' ) ) ? tfopt( 'hotel_service_popup_action' ) : __( "Continue", "tourfic" ); ?></button>
 							<?php } else { ?>
-                                <a href="#" class="tf-next-control tf-tabs-control"
+                                <a href="#" class="tf-next-control tf-tabs-control tf_btn"
                                    data-step="<?php echo 3 == $room_book_by && empty( $enable_guest_info ) ? esc_attr( "3" ) : esc_attr( "2" ); ?>"><?php echo !empty( tfopt( 'hotel_service_popup_action' ) ) ? tfopt( 'hotel_service_popup_action' ) : __( "Continue", "tourfic" ); ?></a>
 							<?php } ?>
                         </div>
@@ -3412,7 +3412,7 @@ class Hotel {
 							<?php }
 							if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && 3 == $room_book_by ) {
 								?>
-                                <a href="#" class="tf-next-control tf-tabs-control tf-traveller-error" data-step="3"><?php echo __( "Continue", "tourfic" ); ?></a>
+                                <a href="#" class="tf-next-control tf-tabs-control tf_btn tf-traveller-error" data-step="3"><?php echo __( "Continue", "tourfic" ); ?></a>
 							<?php } else { ?>
                                 <button type="submit" class="tf-traveller-error <?php echo !empty( $room_book_by ) && 3 != $room_book_by ? 'hotel-room-book' : '';  ?>"><?php echo __( "Continue", "tourfic" ); ?></button>
 							<?php } ?>

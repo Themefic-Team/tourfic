@@ -371,7 +371,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 							$tour_hotel_service_type  = ! empty( $meta['airport_service_type'] ) ? $meta['airport_service_type'] : '';
 							if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $tour_hotel_service_avail ) && ! empty( $tour_hotel_service_type ) && ( $room_book_by != 2 || empty( $room_book_url ) ) ) {
 								?>
-                                <a class="tf_air_service tf-btn-normal btn-secondary tf-hotel-booking-popup-btn" href="javascript:;" data-room="<?php echo esc_attr( $room_id ); ?>"><?php esc_html_e( 'I\'ll reserve', 'tourfic' ); ?></a>
+                                <a class="tf_air_service tf_btn tf_btn_secondary tf-hotel-booking-popup-btn" href="javascript:;" data-room="<?php echo esc_attr( $room_id ); ?>"><?php esc_html_e( 'I\'ll reserve', 'tourfic' ); ?></a>
 
 
                                 <div style="display: none;" id="tf-hotel-services" class="tf-hotel-services-wrap tf-hotel-service-design-1 tf-room" data-id="<?php echo esc_attr( $room_id ) ?>">
@@ -554,7 +554,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 						if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
                             if( ! empty( $tour_hotel_service_avail ) && ! empty( $tour_hotel_service_type ) && ( $room_book_by != 2 || empty( $room_book_url ) ) ) {
                                 ?>
-                                <a class="tf_air_service tf-btn-normal btn-secondary tf-hotel-booking-popup-btn" href="javascript:;" data-room="<?php echo esc_attr( $room_id ); ?>"><?php esc_html_e( 'I\'ll reserve', 'tourfic' ); ?></a>
+                                <a class="tf_air_service tf_btn tf_btn_secondary tf-hotel-booking-popup-btn" href="javascript:;" data-room="<?php echo esc_attr( $room_id ); ?>"><?php esc_html_e( 'I\'ll reserve', 'tourfic' ); ?></a>
 
 
                                 <div style="display: none;" id="tf-hotel-services" class="tf-hotel-services-wrap tf-hotel-service-design-1 tf-room" data-id="<?php echo esc_attr( $room_id ) ?>">
