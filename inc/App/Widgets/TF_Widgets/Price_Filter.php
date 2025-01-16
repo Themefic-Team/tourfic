@@ -5,6 +5,7 @@ namespace Tourfic\App\Widgets\TF_Widgets;
 // Exit if accessed directly.
 defined('ABSPATH') || exit;
 
+use \Tourfic\Classes\Hotel\Pricing as HotelPricing;
 
 /**
  * Hotel & Tour Price Filter
@@ -37,6 +38,7 @@ class Price_Filter extends \WP_Widget {
         ?>
 		<!-- Start Price Range widget -->
 		<?php 
+        $hotel_min_max_price = HotelPricing::get_min_max_price_from_all_hotel();
         $tf_query_taxonomy = !empty( get_taxonomy(get_queried_object()) ) ? get_taxonomy(get_queried_object()->taxonomy)->object_type : '' ;
         if( is_post_type_archive('tf_tours') || is_post_type_archive('tf_hotel') || is_post_type_archive('tf_apartment') || is_post_type_archive('tf_carrental') || ( !empty( $tf_query_taxonomy ) ) ){
             extract( $args );
@@ -47,7 +49,10 @@ class Price_Filter extends \WP_Widget {
                 <div class="tf-widget-title">
                     <span><?php esc_html_e("Hotel Price Range","tourfic"); ?> (<?php echo wp_kses_post(get_woocommerce_currency_symbol()); ?>)</span>
                 </div>
-                <div class="tf-hotel-result-price-range"></div>
+                <div class="tf-hotel-result-price-range" 
+                    data-hotel-min-price="<?php echo !empty($hotel_min_max_price) && !empty($hotel_min_max_price["min"]) ? esc_attr($hotel_min_max_price["min"]) : 0; ?>" 
+                    data-hotel-max-price="<?php echo !empty($hotel_min_max_price) && !empty($hotel_min_max_price["max"]) ? esc_attr($hotel_min_max_price["max"]) : 1; ?>">
+                </div>
             <?php
             } 
             if( is_post_type_archive('tf_tours') ){
