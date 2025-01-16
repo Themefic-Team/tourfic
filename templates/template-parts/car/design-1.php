@@ -189,7 +189,7 @@ $tf_cars_slug = get_option('car_slug');
                                             <li>
                                                 <div title="<?php esc_attr_e( 'Share this link', 'tourfic' ); ?>"
                                                     aria-controls="share_link_button">
-                                                    <button id="share_link_button" class="tf_button share-center-copy-cta" tabindex="0"
+                                                    <button id="share_link_button" class="tf_btn tf_btn_small share-center-copy-cta" tabindex="0"
                                                             role="button">
                                                         <i class="fa fa-link" aria-hidden="true"></i>
                                                         

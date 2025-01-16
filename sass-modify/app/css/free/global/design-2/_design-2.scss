@@ -12,6 +12,17 @@
     }
 }
 
+.single-tf_tours{
+    .tf-single-template{
+        &__two{
+            margin-bottom: 50px;
+            @media #{$tfmax991}{
+                margin-bottom: 60px;
+            }
+        }
+    }
+}
+
 // Header 
 .tf-single-head{
     .tf-head-info{

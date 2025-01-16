@@ -143,7 +143,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                                 <li>
                                                     <div title="<?php esc_attr_e( 'Share this link', 'tourfic' ); ?>"
                                                          aria-controls="share_link_button">
-                                                        <button id="share_link_button" class="tf_button share-center-copy-cta" tabindex="0"
+                                                        <button id="share_link_button" class="tf_btn tf_btn_small share-center-copy-cta" tabindex="0"
                                                                 role="button">
                                                             <i class="fa fa-link" aria-hidden="true"></i>
 
@@ -170,7 +170,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                 <!-- Single Tour Body details start -->
                 <div class="tf-single-details-wrapper tf-mt-30">
                     <div class="tf-single-details-inner tf-flex">
-                        <div class="tf-column tf-tour-details-left">
+                        <div class="tf-tour-details-left">
 
 							<?php
 							if ( ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour-layout'] ) ) {
@@ -196,7 +196,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                         </div>
 
                         <!-- SIdebar Tour single -->
-                        <div class="tf-column tf-tour-details-right">
+                        <div class="tf-tour-details-right">
                             <div class="tf-tour-booking-box tf-box">
 								<?php
 								$hide_price = !empty( Helper::tfopt( 't-hide-start-price' ) ) ? Helper::tfopt( 't-hide-start-price' ) : '';

@@ -2,12 +2,11 @@
 @import '../../../common/variable';
 @import '../../../common/mixin';
 @import '../../../common/global';
-@import 'global/global';
+@import '../../../common/reset';
 @import 'global/common';
 @import 'global/search-result';
 @import 'global/shortcode';
 //Base for templates
-@import '../../../common/reset';
 
 @import 'hotel/hotel';
 @import 'tour/tour';

@@ -1533,20 +1533,6 @@
   color: #060D1C;
 }
 
-.tf-template-3 img.tf-payment-card {
-  width: 34px;
-  height: 24px;
-  margin-right: 16px;
-}
-
-.tf-template-3 .tf-mobile {
-  display: none;
-}
-
-.tf-template-3 .tf-popup-buttons {
-  cursor: pointer;
-}
-
 .tf-template-3 .tf-scroll-bar {
   overflow: hidden;
   overflow-y: scroll;

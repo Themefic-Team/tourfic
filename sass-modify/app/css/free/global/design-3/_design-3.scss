@@ -1,4 +1,158 @@
 // Single Page Data Start 
+.single-tf_tours{
+    .tf-single-template{
+        &__three{
+            margin-bottom: 0;
+        }
+    }
+}
+
+.single-tf_apartment,
+.single-tf_hotel{
+    .tf-single-template{
+        &__three{
+            .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-checkin,
+            .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-checkout{
+                max-width: none;
+                padding-left: 83px;
+                padding-right: 83px;
+            } 
+        }
+    }
+}
+
+.single-tf_apartment,
+.single-tf_hotel,
+.single-tf_tours{
+    .tf-single-template{
+        &__three{
+            #tf-ask-question{
+                .tf-aq-outer{
+                    background: $color-light-bg;
+                    border-radius: 0px;
+                    h4{
+                        color: $color-heading;
+                        text-align: center;
+                        font-size: 32px !important;
+                        font-weight: 700 !important;
+                        margin-bottom: 32px;
+                    }
+                }
+                .tf-aq-field{
+                    input{
+                        border: 1px solid $color-border;
+                        box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+                        color: $color-text;
+                        background-color: $color-light-bg;
+                        font-size: 16px;
+                        height: 45px;
+                        padding: 12px 14px;;
+                        border-radius: 0px;
+                        &::placeholder{
+                            color: $color-text;
+                        }
+                    }
+                    textarea{
+                        border: 1px solid $color-border;
+                        box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+                        background-color: $color-light-bg;
+                        color: $color-text;
+                        font-size: 16px;
+                        font-weight: 400;
+                        padding: 12px 14px;
+                        border-radius: 0px;
+                        &::placeholder{
+                            color: $color-text;
+                        }
+                    }
+                }
+        
+                button{
+                    background: $color-primary !important;
+                    border-color: $color-primary !important;
+                    border-radius: 0px !important;
+                    padding: 12px 32px !important;
+                    color: $color-white !important;
+                    font-size: 16px !important;
+                    font-weight: 700;
+                    transition: .3s all ease;
+                    &::after{
+                        position: static !important;
+                    }
+                    &:hover{
+                        background: $color-secondary !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+.single-tf_hotel{
+    .tf-single-template{
+        &__three{
+            #tf-hotel-services{
+                .tf-hotel-services{
+                    background: $color-light-bg;
+                    border-radius: 0px;
+                    gap: 0px;
+                    .tf-hotel-services-text{
+                        h3{
+                            color: $color-heading;
+                            text-align: center;
+                            font-size: 32px !important;
+                            font-weight: 700 !important;
+                            margin-bottom: 8px;
+                        }
+                        p{
+                            color: $color-text;
+                            text-align: center;
+                            font-size: 16px !important;
+                            font-weight: 400 !important;
+                            margin-top: 0px;
+                            margin-bottom: 32px;
+                        }
+                    }
+                    .tf-hotel-service{
+                        label{
+                            color: $color-text;
+                            font-size: 16px;
+                            font-weight: 600;
+                            margin-bottom: 6px;
+                            display: block;
+                        }
+                        select{
+                            border-radius: 0px;
+                            background: $color-light-bg;
+                            height: 45px;
+                            border: 1px solid $color-text;
+                        }
+                    }
+                    .tf-airport-pickup-response{
+                        margin-top: 15px;
+                    }
+                    .tf_button_group{
+                        height: auto;
+                        button{
+                            background: $color-primary !important;
+                            border-color: $color-primary !important;
+                            border-radius: 0px !important;
+                            padding: 12px 32px !important;
+                            color: $color-white !important;
+                            font-size: 16px !important;
+                            font-weight: 700;
+                            transition: .3s all ease;
+                            &:hover{
+                                background: $color-secondary !important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 
 //  FAQ Section
 .tf-questions-wrapper { 
@@ -78,6 +232,7 @@
 
 //  Policies Section
 .tf-policies-wrapper { 
+    margin: 0;
     h2{
         color: $color-heading;
         font-size: 32px !important;
@@ -115,7 +270,12 @@
 		}
 	}
 }
-
+.tf-single-pb-56 {
+    padding-bottom: 56px !important;
+    @media #{$max767}{
+        padding-bottom: 32px;
+    }
+}
 // Related Section
 .tf-related-items-section{
     background-color: $color-light-bg;
@@ -936,7 +1096,6 @@ button.tf-review-open.button, .tf-reting-field button {
         }
     }
 }
-
 
 .tf-single-widgets h2 {
     margin-bottom: 0px;

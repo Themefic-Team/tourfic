@@ -1,96 +1,99 @@
-.tf-template-3{
-    .tf-place-offer-section{
-        @media #{$max767}{
-            padding-left: 16px;
-            padding-right: 16px;
-        }
-        h2{
-            color: $color-heading;
-            font-size: 32px !important;
-            font-style: normal !important;
-            font-weight: 700 !important;
-            margin-bottom: 24px !important;
-            @media #{$max767}{
-                font-size: 24px !important;
-            }
-        }
-        .place-offer-items{
-            display: grid;
-            gap: 8px 16px;
-            grid-template-columns: 1fr 1fr 1fr 1fr;
-            @media #{$max767}{
-                grid-template-columns: 1fr 1fr;
-            }
-            .tf-apt-amenity{
-                display: flex;
-                gap: 9px;
-                align-items: center;
-                .tf-apt-amenity-icon{
-                    line-height: 11px;
-                    img{
-                        height: 16px !important;
-                        width: 16px !important;
-                    }
+.single-tf_apartment{
+    .tf-single-template{
+        &__one{
+            .tf-apartment-amenities-section {
+                margin-bottom: 80px;
+
+                .tf-apartment-amenities-inner {
+                    border-radius: 8px;
+                    border: 1px solid $color-border;
+                    background: $color-light-bg;
+                    padding: 24px 40px;
                 }
-                span{
-                    color: $color-text;
-                    font-size: 14px !important;
-                    font-weight: 400 !important;
-                    line-height: 13px;
-                }
-            }
-        }
-    }
-}
 
-.tf-template-1{
-    .tf-apartment-amenities-section {
-        margin-bottom: 80px;
-
-        .tf-apartment-amenities-inner {
-            border-radius: 8px;
-            border: 1px solid $color-border;
-            background: $color-light-bg;
-            padding: 24px 40px;
-        }
-
-        .tf-apartment-amenities {
-            @include flexbox();
-            @include flex-wrap(wrap);
-            gap: 16px;
-
-            .tf-apt-amenity {
-                @include flex(0 0 calc(100% / 2 - 11px));
-                @include flexbox();
-                gap: 16px;
-                margin-bottom: 5px;
-                color: $color-text;
-
-                .tf-apt-amenity-icon {
+                .tf-apartment-amenities {
                     @include flexbox();
-                    @include align-items(center);
-                    @include flex(0 0 24px);
-                    height: 24px;
+                    @include flex-wrap(wrap);
+                    gap: 16px;
 
-                    i {
-                        font-size: 24px;
+                    .tf-apt-amenity {
+                        @include flex(0 0 calc(100% / 2 - 11px));
+                        @include flexbox();
+                        gap: 16px;
+                        margin-bottom: 5px;
                         color: $color-text;
+
+                        .tf-apt-amenity-icon {
+                            @include flexbox();
+                            @include align-items(center);
+                            @include flex(0 0 24px);
+                            height: 24px;
+
+                            i {
+                                font-size: 24px;
+                                color: $color-text;
+                            }
+                        }
+                    }
+                }
+
+                .tf-apartment-amenities-more {
+                    .tf-modal-btn {
+                        @include flexbox();
+                        @include align-items(center);
+                        @include justify-content(flex-end);
+                        gap: 4px;
+                        font-size: 14px;
+                        font-weight: 500;
+                        color: $color-heading;
+                        cursor: pointer;
+                        text-decoration: none;
                     }
                 }
             }
         }
-
-        .tf-apartment-amenities-more {
-            .tf-modal-btn {
-                @include flexbox();
-                @include align-items(center);
-                @include justify-content(flex-end);
-                gap: 4px;
-                font-size: 14px;
-                font-weight: 500;
-                color: $color-heading;
-                cursor: pointer;
-                text-decoration: none;
+        &__two{
+            .tf-place-offer-section{
+                @media #{$max767}{
+                    padding-left: 16px;
+                    padding-right: 16px;
+                }
+                h2{
+                    color: $color-heading;
+                    font-size: 32px !important;
+                    font-style: normal !important;
+                    font-weight: 700 !important;
+                    margin-bottom: 24px !important;
+                    @media #{$max767}{
+                        font-size: 24px !important;
+                    }
+                }
+                .place-offer-items{
+                    display: grid;
+                    gap: 8px 16px;
+                    grid-template-columns: 1fr 1fr 1fr 1fr;
+                    @media #{$max767}{
+                        grid-template-columns: 1fr 1fr;
+                    }
+                    .tf-apt-amenity{
+                        display: flex;
+                        gap: 9px;
+                        align-items: center;
+                        .tf-apt-amenity-icon{
+                            line-height: 11px;
+                            img{
+                                height: 16px !important;
+                                width: 16px !important;
+                            }
+                        }
+                        span{
+                            color: $color-text;
+                            font-size: 14px !important;
+                            font-weight: 400 !important;
+                            line-height: 13px;
+                        }
+                    }
+                }
             }
         }
     }

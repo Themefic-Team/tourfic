@@ -4,7 +4,7 @@ use \Tourfic\App\TF_Review;
 use \Tourfic\Classes\Apartment\Apartment;
 ?>
 
-<div class="tf-main-wrapper tf-apartment-wrap tf-apartment tf-template-1">
+<div class="tf-main-wrapper tf-apartment-wrap tf-apartment tf-template-1 tf-single-template__one">
 	<?php do_action( 'tf_before_container' ); ?>
 
     <div class="tf-title-area tf-apartment-title">
@@ -91,7 +91,7 @@ use \Tourfic\Classes\Apartment\Apartment;
                                             <input type="text" id="share_link_input"
                                                    class="share-center-url share-center-url-input"
                                                    value="<?php echo esc_attr( $share_link ); ?>" readonly>
-                                            <button id="share_link_button" class="tf_button share-center-copy-cta"
+                                            <button id="share_link_button" class="tf_btn tf_btn_small share-center-copy-cta"
                                                     tabindex="0" role="button">
                                                 <span class="tf-button-text share-center-copy-message"><?php esc_html_e( 'Copy link', 'tourfic' ); ?></span>
                                                 <span class="tf-button-text share-center-copied-message"><?php esc_html_e( 'Link Copied!', 'tourfic' ); ?></span>

@@ -272,8 +272,6 @@ class TF_Review {
 			'comment_notes_after'  => '',
 			//Submit Button ID
 			'id_submit'            => 'comment-submit',
-			// The comment submit element class attribute. Default 'submit'.
-			// 'class_submit' => 'tf_button',
 			//Submit Button html
 			'submit_button'        => '<input name="%1$s" type="submit" id="%2$s" class="tf_btn tf_btn_small" value="%4$s" />',
 			'submit_field'         => '<div class="tf-review-submit">%1$s %2$s</div>',
