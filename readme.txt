@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, room-booking, car-rental
 Requires at least: 5.4
 Tested up to: 6.7
-Stable tag: 2.15.10
+Stable tag: 2.15.11
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -358,6 +358,16 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
+= 2.15.11 – January 16, 2025 =
+
+- Fixed: The room availability date picker is not displaying selected dates.
+- Fixed: Incorrect room option pricing in the availability calendar.
+- Fixed: The Due price issue has been resolved.
+- Fixed: Database notices after demo import.
+- Improved: Compatibility with popular theme builders.
+- Improved: Tour and apartment design for a refined look.
+- Improved: Search Form Design 4 layout and functionality.
+
 = 2.15.10 – 09 January 2025 =
 
 - Added: Protection Required option for car rentals
@@ -418,19 +428,6 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 - Added: Car booking details now sync with Google Calendar.
 - Improvement: Backend calendar view for booking details.
 - Improvement: System stability is further optimized.
-
-= 2.15.2 - 27 November 2024 =
-
-- Added: Option to hide external booking for vendors.
-- Added: Rooms displayed in the hotel list on the frontend dashboard.
-- Added: Hotels displayed in the room list on the frontend dashboard.
-- Fixed: Resolved repeater field label issue.
-- Fixed: Addressed template issues in the Itinerary Builder.
-- Fixed: Widget loading issue resolved.
-- Improvement: Enhanced car rental Elementor widgets.
-- Improvement: Improved user experience for the car rental feature.
-- Improvement: System stability is further enhanced.
-- Improvement: Updated label and logo on the frontend dashboard.
 
 **Old Changelog can be found [here](https://themefic.com/tourfic/changelog/)**.
 
