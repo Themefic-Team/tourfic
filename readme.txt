@@ -348,13 +348,11 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 15. Tour Option Panel
 16. Elementor Compatibility
 17. SEO Plugin Compatibility
-18. Dashboard Booking Data
-19. Enquiry Form Data
-20. Our Support Channels
-21. Email Piping (Pro)
-22. Car Rental Service
-23. Sync Booking with Google Calendar(Pro)
-24. Map Template(Pro)
+18. Enquiry Form Data
+19. Email Piping (Pro)
+20. Car Rental Service
+21. Sync Booking with Google Calendar(Pro)
+22. Map Template(Pro)
 
 == Changelog ==
 
