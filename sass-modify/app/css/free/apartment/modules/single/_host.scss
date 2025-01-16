@@ -79,8 +79,6 @@
                     }
                 }
             }
-        }
-        &__two{
             .host-details {
                 background: $color-secondary;
                 border-radius: 8px;
@@ -223,6 +221,9 @@
                     }
                 }
             }
+        }
+        &__two{
+            
         }
     }
 }
