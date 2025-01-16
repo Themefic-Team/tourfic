@@ -255,10 +255,6 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
     </div>
     <!-- End title area -->
 
-    <div class="tf-container">
-        <div class="tf-divider"></div>
-    </div>
-
     <!-- Start description -->
     <div class="description-section sp-30">
         <div class="tf-container">
@@ -348,7 +344,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
     
     <?php if ( $highlights ) : ?>
     <!-- Highlight section Start -->
-    <div class="tf-highlight-wrapper gray-wrap sp-50">
+    <div class="tf-highlight-wrapper sp-50">
         <div class="tf-container">
             <div class="tf-highlight-content">
                 <div class="tf-highlight-item">
@@ -443,7 +439,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
         ?>
         <!-- Travel Itinerary section Start -->
         <?php if ( $itineraries ) { ?>
-            <div class="tf-travel-itinerary-wrapper gray-wrap sp-50">
+            <div class="tf-travel-itinerary-wrapper sp-50">
                 <div class="tf-container">
                     <div class="tf-travel-itinerary-content">
                         <h2 class="section-heading"><?php echo !empty($meta['itinerary-section-title']) ? esc_html($meta['itinerary-section-title']) : ''; ?></h2>
@@ -615,7 +611,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
 
     <!-- Start TOC Content -->
     <?php if ( $terms_and_conditions ) : ?>
-        <div class="toc-section gray-wrap sp-50">
+        <div class="toc-section sp-50">
             <div class="tf-container">
                 <div class="tf-toc-wrap">
                     <h2 class="section-heading"><?php echo !empty($meta['tc-section-title']) ? esc_html($meta['tc-section-title']) : ''; ?></h2>
@@ -690,7 +686,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
 
         if ( $tours->have_posts() ) {
             ?>
-            <div class="tf-suggestion-wrapper gray-wrap sp-50">
+            <div class="tf-suggestion-wrapper sp-50">
                 <div class="tf-container">
                     <div class="tf-slider-content-wrapper">
                         <div class="tf-suggestion-sec-head">

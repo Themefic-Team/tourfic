@@ -628,7 +628,7 @@ use \Tourfic\Classes\Apartment\Apartment;
 	<?php if ( ! empty( $meta['terms_and_conditions'] ) ) : ?>
         <div class="toc-section apartment-toc">
             <div class="tf-container">
-                <div class="tf-toc-wrap gray-wrap">
+                <div class="tf-toc-wrap">
 					<?php echo ! empty( $meta['terms_title'] ) ? '<h2 class="section-heading">' . esc_html( $meta['terms_title'] ) . '</h2>' : ''; ?>
                     <div class="tf-toc-inner">
 						<?php echo wp_kses_post( $meta['terms_and_conditions'] ); ?>

@@ -28,3 +28,18 @@
         flex-wrap: wrap;
     }
 }
+.tf-toc-wrap{
+    background-color: $color-light-bg;
+    td {
+        white-space: break-spaces;
+    }
+}
+.tf-highlight-wrapper{
+    background-color: $color-light-bg;
+}
+.tf-travel-itinerary-wrapper{
+    background-color: $color-light-bg;
+}
+.tf-suggestion-wrapper{
+    background-color: $color-light-bg;
+}
