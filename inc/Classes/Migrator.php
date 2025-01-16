@@ -1272,16 +1272,19 @@ class Migrator {
 		global $wpdb;
 		$enquiry_table = $wpdb->prefix . 'tf_enquiry_data';
 
-		$data = $wpdb->get_row( "SELECT * FROM $enquiry_table" );
+		$columns = $wpdb->get_results("SHOW COLUMNS FROM $enquiry_table", ARRAY_A);
+    	$existing_columns = wp_list_pluck($columns, 'Field');
 
-		if ( ! isset( $data->enquiry_status ) ) {
-			$wpdb->query( "ALTER TABLE $enquiry_table ADD COLUMN `enquiry_status` VARCHAR(255) NOT NULL DEFAULT 'read' AFTER `author_roles`" );
+		if (!in_array('enquiry_status', $existing_columns)) {
+			$wpdb->query("ALTER TABLE $enquiry_table ADD COLUMN `enquiry_status` VARCHAR(255) NOT NULL DEFAULT 'read' AFTER `author_roles`");
 		}
-		if ( ! isset( $data->server_data ) ) {
-			$wpdb->query( "ALTER TABLE $enquiry_table ADD COLUMN `server_data` VARCHAR(255) NOT NULL DEFAULT '' AFTER `enquiry_status`" );
+
+		if (!in_array('server_data', $existing_columns)) {
+			$wpdb->query("ALTER TABLE $enquiry_table ADD COLUMN `server_data` VARCHAR(255) NOT NULL DEFAULT '' AFTER `enquiry_status`");
 		}
-		if ( ! isset( $data->reply_data ) ) {
-			$wpdb->query( "ALTER TABLE $enquiry_table ADD COLUMN `reply_data` LONGTEXT NOT NULL DEFAULT '' AFTER `server_data`" );
+		
+		if (!in_array('reply_data', $existing_columns)) {
+			$wpdb->query("ALTER TABLE $enquiry_table ADD COLUMN `reply_data` LONGTEXT NOT NULL DEFAULT '' AFTER `server_data`");
 		}
 	}
 }

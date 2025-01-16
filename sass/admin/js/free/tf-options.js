@@ -822,16 +822,21 @@
         */
         function roomOptionsArr(){
             var optionsArr = [];
-            $('.tf-repeater-wrap-room-options .tf-single-repeater-room-options').each(function(index){
-                let optionType = $('[name="tf_room_opt[room-options]['+index+'][option_pricing_type]"]').val();
-                let optionTitle = $('[name="tf_room_opt[room-options]['+index+'][option_title]"]').val();
+            $('.tf-repeater-wrap-room-options .tf-single-repeater-room-options').each(function(i){
+                // Get the dynamic index from the tf_repeater_count field
+                let index = $(this).find('[name="tf_repeater_count"]').val();
 
-                // Add the option title, option type, and index to the options array
-                optionsArr[index] = {
-                    index: index,
-                    title: optionTitle,
-                    type: optionType
-                };
+                // Extract the option title and type using the dynamic index
+                let optionType = $(this).find(`[name="tf_room_opt[room-options][${index}][option_pricing_type]"]`).val();
+                let optionTitle = $(this).find(`[name="tf_room_opt[room-options][${index}][option_title]"]`).val();
+
+                if (index !== undefined) {
+                    optionsArr[index] = {
+                        index: index,
+                        title: optionTitle,
+                        type: optionType
+                    };
+                }
             })
             return optionsArr;
         }
@@ -991,7 +996,7 @@
 
         $('.tf-room-cal-wrap').each(function (index, el) {
             let checkIn = $(el).find('[name="tf_room_check_in"]').flatpickr({
-                dateFormat: 'Y-m-d',
+                dateFormat: tf_options.tf_admin_date_format || 'MM/DD/YYYY',
                 minDate: 'today',
                 altInput: true,
                 altFormat: tf_options.tf_admin_date_format,
@@ -1001,7 +1006,7 @@
             });
 
             let checkOut = $(el).find('[name="tf_room_check_out"]').flatpickr({
-                dateFormat: 'Y-m-d',
+                dateFormat: tf_options.tf_admin_date_format || 'MM/DD/YYYY',
                 minDate: 'today',
                 altInput: true,
                 altFormat: tf_options.tf_admin_date_format,

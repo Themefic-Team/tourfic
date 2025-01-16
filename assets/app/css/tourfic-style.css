@@ -12038,6 +12038,7 @@ div.tf-aq-inner .tf-ask-question-head-content h3 {
   outline: none;
   min-width: 220px;
   font-size: 16px;
+  flex: 1;
 }
 
 @media only screen and (max-width: 767.98px) {
@@ -30551,7 +30552,7 @@ html {
 }
 
 .tf-search__form__fieldset .tf_checkin_to_label {
-  color: #FA6400;
+  color: #fff;
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
