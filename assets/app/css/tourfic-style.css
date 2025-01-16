@@ -117,6 +117,57 @@ input[type=submit].tf_btn:disabled, input[type=submit].tf_btn.disabled,
 }
 
 /*
+Button Flip
+*/
+.tf-btn-flip {
+  opacity: 1;
+  outline: 0;
+  color: #ffffff;
+  position: relative;
+  text-align: center;
+  letter-spacing: 1px;
+  display: inline-block;
+  text-decoration: none;
+}
+.tf-btn-flip:hover:after {
+  opacity: 1;
+  transform: translateY(0) rotateX(0);
+}
+.tf-btn-flip:hover:before {
+  opacity: 0;
+  transform: translateY(50%) rotateX(90deg);
+}
+.tf-btn-flip:after {
+  top: 0;
+  left: 0;
+  opacity: 0;
+  width: 100%;
+  color: #ffffff;
+  display: block;
+  transition: 0.5s;
+  position: absolute;
+  background: #0E3DD8;
+  content: attr(data-back);
+  transform: translateY(-50%) rotateX(90deg);
+  border-radius: 4px;
+  padding: 6px 20px;
+}
+.tf-btn-flip:before {
+  top: 0;
+  left: 0;
+  opacity: 1;
+  color: #ffffff;
+  display: block;
+  transition: 0.5s;
+  position: relative;
+  background: #0E3DD8;
+  content: attr(data-front);
+  transform: translateY(0) rotateX(0);
+  border-radius: 4px;
+  padding: 6px 20px;
+}
+
+/*
 Button Group
 */
 /* .tf_btn_group {
@@ -695,142 +746,6 @@ h3.section-heading {
   opacity: 1;
 }
 
-.tf_button {
-  background: #0E3DD8;
-  color: #ffffff;
-  text-decoration: none;
-  display: inline-block;
-  text-align: center;
-  border: 1px solid #0E3DD8;
-  border-radius: 4px;
-  padding: 10px 20px;
-}
-.tf_button:hover {
-  background: #003C7A;
-  color: #ffffff;
-  text-decoration: none;
-  border: 1px solid #003C7A;
-}
-@media only screen and (max-width: 1025px) {
-  .tf_button {
-    font-size: 14px;
-  }
-}
-
-.tf_button.btn-outline {
-  background: #ffffff;
-  border-color: #686E7A;
-  color: #686E7A;
-}
-
-.tf-btn-flip {
-  opacity: 1;
-  outline: 0;
-  color: #ffffff;
-  position: relative;
-  text-align: center;
-  letter-spacing: 1px;
-  display: inline-block;
-  text-decoration: none;
-}
-.tf-btn-flip:hover:after {
-  opacity: 1;
-  transform: translateY(0) rotateX(0);
-}
-.tf-btn-flip:hover:before {
-  opacity: 0;
-  transform: translateY(50%) rotateX(90deg);
-}
-.tf-btn-flip:after {
-  top: 0;
-  left: 0;
-  opacity: 0;
-  width: 100%;
-  color: #ffffff;
-  display: block;
-  transition: 0.5s;
-  position: absolute;
-  background: #0E3DD8;
-  content: attr(data-back);
-  transform: translateY(-50%) rotateX(90deg);
-  border-radius: 4px;
-  padding: 6px 20px;
-}
-.tf-btn-flip:before {
-  top: 0;
-  left: 0;
-  opacity: 1;
-  color: #ffffff;
-  display: block;
-  transition: 0.5s;
-  position: relative;
-  background: #0E3DD8;
-  content: attr(data-front);
-  transform: translateY(0) rotateX(0);
-  border-radius: 4px;
-  padding: 6px 20px;
-}
-
-.tf-btn {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  text-align: center;
-  width: 100%;
-}
-
-.btn-styled {
-  border: 1px solid #0E3DD8 !important;
-  border-radius: 4px !important;
-  overflow: hidden;
-  position: relative;
-  color: #ffffff !important;
-  cursor: pointer;
-  position: relative;
-  text-decoration: none;
-  background: #0E3DD8 !important;
-  padding: 10px 18px !important;
-}
-.btn-styled span {
-  z-index: 20;
-}
-.btn-styled:after {
-  background: #ffffff;
-  content: "";
-  height: 155px;
-  left: -75px;
-  opacity: 0.25;
-  position: absolute;
-  top: -50px;
-  transform: rotate(35deg);
-  transition: all 1500ms cubic-bezier(0.19, 1, 0.22, 1);
-  width: 50px;
-}
-.btn-styled:hover {
-  color: #ffffff;
-  background: #808080;
-}
-.btn-styled:hover:after {
-  left: 120%;
-  transition: all 1500ms cubic-bezier(0.19, 1, 0.22, 1);
-}
-
-a.tf_button.btn-styled:focus {
-  color: #ffffff;
-}
-
-.tf-sml-btn {
-  font-size: 13px;
-  padding: 6px 12px;
-  white-space: nowrap;
-}
-.tf-sml-btn:hover {
-  background: #003C7A;
-  color: #ffffff;
-  text-decoration: none;
-  border: 1px solid #003C7A;
-}
-
 .tf-title-wrap {
   display: flex;
   justify-content: space-between;
@@ -1060,7 +975,7 @@ ul.tf-sidebar-checkbox label {
 .tf_booking-widget #check-in-out-date {
   min-width: 150px;
 }
-.tf_booking-widget .tf_form-row .tf_button {
+.tf_booking-widget .tf_form-row .tf_btn {
   padding: 15px 20px;
   width: 100%;
 }
@@ -2118,7 +2033,7 @@ Ajax Loader Booking Availability
     text-align: left;
     margin: 10px 0;
   }
-  .archive_ajax_result .availability-btn-area .tf_button {
+  .archive_ajax_result .availability-btn-area .tf_btn {
     width: 100%;
     margin-top: 15px;
   }
@@ -2212,7 +2127,7 @@ Ajax Loader Booking Availability
   padding-left: 15px;
 }
 
-.page-template-tf_search-result .tf_form-row .tf_button {
+.page-template-tf_search-result .tf_form-row .tf_btn {
   padding: 15px 20px;
   width: 100%;
 }
@@ -2527,7 +2442,7 @@ a.page-numbers {
   width: 100%;
   max-width: 100%;
 }
-.archive_ajax_result.tours-grid .availability-btn-area .tf_button {
+.archive_ajax_result.tours-grid .availability-btn-area .tf_btn {
   margin-top: 15px;
 }
 .archive_ajax_result.tours-grid .roomPrice.roomPrice_flex.sr_discount {
@@ -2909,7 +2824,7 @@ a.page-numbers {
   padding-left: 0px !important;
 }
 
-.tf_booking-widget .tf_form-row .tf_button {
+.tf_booking-widget .tf_form-row .tf_btn {
   padding: 15px 20px;
   width: 100%;
 }

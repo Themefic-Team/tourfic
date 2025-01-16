@@ -101,11 +101,10 @@
                         @include flexbox();
                         z-index: 2;
 
-                        a.tf_button {
+                        a.tf_btn {
                             max-width: 130px;
-                            border-radius: 4px !important;
-                            border: 1px solid rgba(255, 255, 255, 0.40) !important;
-                            background: rgba(255, 255, 255, 0.60) !important;
+                            border: 1px solid rgba(255, 255, 255, 0.40);
+                            background: rgba(255, 255, 255, 0.60);
                         }
                     }
 

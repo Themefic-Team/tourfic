@@ -113,6 +113,59 @@ input[type="submit"].tf_btn,
 }
 
 /*
+Button Flip
+*/
+.tf-btn-flip {
+    opacity: 1;
+    outline: 0;
+    color: $color-white;
+    position: relative;
+    text-align: center;
+    letter-spacing: 1px;
+    display: inline-block;
+    text-decoration: none;
+    &:hover {
+        &:after {
+            opacity: 1;
+            transform: translateY(0) rotateX(0);
+        }
+        &:before {
+            opacity: 0;
+            transform: translateY(50%) rotateX(90deg);
+        }
+    }
+    &:after {
+        top: 0;
+        left: 0;
+        opacity: 0;
+        width: 100%;
+        color: $color-white;
+        display: block;
+        transition: 0.5s;
+        position: absolute;
+        background: $color-primary;
+        content: attr(data-back);
+        transform: translateY(-50%) rotateX(90deg);
+        border-radius: 4px;
+        padding: 6px 20px;
+    }
+    &:before {
+        top: 0;
+        left: 0;
+        opacity: 1;
+        color: $color-white;
+        display: block;
+        transition: 0.5s;
+        position: relative;
+        background: $color-primary;
+        content: attr(data-front);
+        transform: translateY(0) rotateX(0);
+        border-radius: 4px;
+        padding: 6px 20px;
+    }
+}
+
+/*
 Button Group
 */
 /* .tf_btn_group {

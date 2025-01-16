@@ -346,11 +346,10 @@
   display: flex;
   z-index: 2;
 }
-.single-tf_apartment .tf-single-template__one .tf-apt-hero-section .tf-apt-hero-wrapper .gallery-all-photos a.tf_button {
+.single-tf_apartment .tf-single-template__one .tf-apt-hero-section .tf-apt-hero-wrapper .gallery-all-photos a.tf_btn {
   max-width: 130px;
-  border-radius: 4px !important;
-  border: 1px solid rgba(255, 255, 255, 0.4) !important;
-  background: rgba(255, 255, 255, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.6);
 }
 
 .single-tf_apartment .tf-single-template__one .tf-apt-highlights {
