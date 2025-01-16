@@ -1,4 +1,4 @@
-<div class="tf-hotel-template-4 tf-apartment-template-4">
+<div class="tf-hotel-template-4 tf-apartment-template-4 tf-archive-template__three">
 
     <div class="tf-content-wrapper">
 

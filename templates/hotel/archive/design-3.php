@@ -1,4 +1,4 @@
-<div class="tf-template-3">
+<div class="tf-template-3 tf-archive-template__three">
 
     <?php 
     use \Tourfic\Classes\Helper;

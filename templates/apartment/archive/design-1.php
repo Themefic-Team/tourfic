@@ -1,5 +1,5 @@
 
-<div class="tf-main-wrapper" data-fullwidth="true">
+<div class="tf-main-wrapper tf-archive-template__one" data-fullwidth="true">
 	<?php
 
 	use \Tourfic\Classes\Helper;
@@ -10,7 +10,6 @@
     do_action( 'tf_before_container' ); 
     ?>
 	<div class="tf-container">
-
 		<div class="search-result-inner">
 			<?php
 			$tf_defult_views = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment_archive_view'] ) ? Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment_archive_view'] : 'list';
