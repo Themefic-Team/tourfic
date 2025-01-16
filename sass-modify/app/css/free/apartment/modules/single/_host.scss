@@ -1,224 +1,228 @@
-.tf-template-1{
-    .host-details {
-        background: $color-secondary;
-        border-radius: 8px;
-        padding: 24px;
-        border: 1px solid $color-border;
-        margin-bottom: 25px;
-    
-        .tf-host-rating-wrapper {
-            @include flexbox();
-            @include align-items(center);
-            gap: 4px;
-        
-            .tf-host-rating {
-                font-weight: 600;
-            }
-        
-            h6 {
-                margin-bottom: 0;
-            }
-        }
-        
-        .host-top {
-            @include flexbox();
-            gap: 11px;
-            align-items: center;
-            margin-bottom: 24px;
-    
-            img {
-                width: 80px;
-                height: 80px;
-                object-fit: cover;
-                border-radius: 40px;
-                border: 1px solid $color-border;
-            }
-        }
-    
-        .host-meta {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-    
-            h4 {
-                font-size: 24px;
-                font-weight: 600;
-                line-height: 1.33;
-                color: $color-white;
-                margin: 0;
-            }
-    
-            .tf-apartment-joined-text {
-                font-size: 12px;
-                font-weight: 400;
-                line-height: 16px;
-                letter-spacing: 0.2px;
-                margin: 0;
-                color: $color-white;
-                @include flexbox();
-    
-                span {
-                    letter-spacing: 0.2px;
-                    padding-left: 8px;
+.single-tf_apartment{
+    .tf-single-template{
+        &__one{
+            .apartment-question {
+                background: transparent;
+                text-align: left;
+                padding-top: 0;
+                padding-bottom: 0;
+                margin-bottom: 80px;
+
+                @media #{$max767} {
+                    max-width: 100%;
+                    padding: 0;
                 }
-            }
-    
-            i {
-                color: $color-primary;
-            }
-    
-            span {
-                font-weight: bold;
-            }
-        }
-    
-        .host-bottom {
-            @include flexbox();
-            flex-direction: column;
-            gap: 8px;
-    
-            h5 {
-                font-size: 18px;
-                font-style: normal;
-                font-weight: 500;
-                line-height: 1.33;
-                letter-spacing: 0.5px;
-                color: $color-gray-light;
-                margin: 0;
-            }
-    
-            p {
-                color: $color-gray;
-                font-size: 16px;
-                font-weight: 400;
-                line-height: 24px;
-                letter-spacing: 0.2px;
-                margin: 0 !important;
-            }
-    
-            ul {
-                list-style: none;
-                margin: 0;
-                padding: 0;
-    
-                li {
-                    padding: 8px 0 !important;
-                    color: $color-gray;
-    
-                    span {
-                        text-align: right;
-                        float: right;
-                        font-weight: 500;
-                        font-size: 14px;
-                        line-height: 24px;
-                        letter-spacing: 0.5px;
+                h3 {
+                    &::before {
+                        display: none;
+                    }
+                }
+                .apartment-qa-wrapper {
+                    .btn-styled {
+                        display: inline-block;
+                    }
+                }
+                .tf-question-left {
+                    @include flexbox();
+                    @include align-items(center);
+                    gap: 16px;
+
+                    .tf-apartment-question-icon {
+                        @include flexbox();
+                    }
+
+                    i {
+                        align-self: flex-start;
+                        font-size: 40px;
+                    }
+
+                    .default-enquiry-title-section {
+                        justify-content: flex-start;
+                    }
+
+                    h4 {
+                        margin: 0;
+                        font-size: 20px !important;
+                        color: $color-heading;
+                        font-weight: 600 !important;
+                        line-height: 32px !important;
+                    }
+
+                    p {
                         color: $color-text;
+                        margin: 0;
+                        font-size: 14px !important;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 24px;
+                        letter-spacing: 0.2px;
                     }
-    
-                    &:last-child {
-                        margin-bottom: 0px;
+                }
+
+                .apartment-qa-wrapper {
+                    @include flexbox();
+                    @include flex-wrap(wrap);
+                    @include align-items(center);
+                    @include justify-content(space-between);
+                    gap: 30px;
+
+                    @media #{$max575} {
+                        @include flex-direction(column);
+                    }
+                }
+
+                .tf-btn {
+                    width: auto;
+
+                    @media #{$max575} {
+                        width: 100%;
                     }
                 }
             }
-    
-            .tf-apartment-contact-button {
-                padding: 11px 24px;
-                border-radius: 4px;
-                background-color: $color-white !important;
-                color: $color-primary !important;
-                border: 1px solid $color-primary;
-                text-decoration: none;
-                text-align: center;
-                transition: all 0.3s ease-in-out;
-                i {
-                    padding-right: 8px;
+        }
+        &__two{
+            .host-details {
+                background: $color-secondary;
+                border-radius: 8px;
+                padding: 24px;
+                border: 1px solid $color-border;
+                margin-bottom: 25px;
+            
+                .tf-host-rating-wrapper {
+                    @include flexbox();
+                    @include align-items(center);
+                    gap: 4px;
+                
+                    .tf-host-rating {
+                        font-weight: 600;
+                    }
+                
+                    h6 {
+                        margin-bottom: 0;
+                    }
                 }
-    
-                &:hover {
-                    background-color: $color-primary!important;
-                    color: $color-white!important;
+                
+                .host-top {
+                    @include flexbox();
+                    gap: 11px;
+                    align-items: center;
+                    margin-bottom: 24px;
+            
+                    img {
+                        width: 80px;
+                        height: 80px;
+                        object-fit: cover;
+                        border-radius: 40px;
+                        border: 1px solid $color-border;
+                    }
+                }
+            
+                .host-meta {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+            
+                    h4 {
+                        font-size: 24px;
+                        font-weight: 600;
+                        line-height: 1.33;
+                        color: $color-white;
+                        margin: 0;
+                    }
+            
+                    .tf-apartment-joined-text {
+                        font-size: 12px;
+                        font-weight: 400;
+                        line-height: 16px;
+                        letter-spacing: 0.2px;
+                        margin: 0;
+                        color: $color-white;
+                        @include flexbox();
+            
+                        span {
+                            letter-spacing: 0.2px;
+                            padding-left: 8px;
+                        }
+                    }
+            
+                    i {
+                        color: $color-primary;
+                    }
+            
+                    span {
+                        font-weight: bold;
+                    }
+                }
+            
+                .host-bottom {
+                    @include flexbox();
+                    flex-direction: column;
+                    gap: 8px;
+            
+                    h5 {
+                        font-size: 18px;
+                        font-style: normal;
+                        font-weight: 500;
+                        line-height: 1.33;
+                        letter-spacing: 0.5px;
+                        color: $color-gray-light;
+                        margin: 0;
+                    }
+            
+                    p {
+                        color: $color-gray;
+                        font-size: 16px;
+                        font-weight: 400;
+                        line-height: 24px;
+                        letter-spacing: 0.2px;
+                        margin: 0 !important;
+                    }
+            
+                    ul {
+                        list-style: none;
+                        margin: 0;
+                        padding: 0;
+            
+                        li {
+                            padding: 8px 0 !important;
+                            color: $color-gray;
+            
+                            span {
+                                text-align: right;
+                                float: right;
+                                font-weight: 500;
+                                font-size: 14px;
+                                line-height: 24px;
+                                letter-spacing: 0.5px;
+                                color: $color-text;
+                            }
+            
+                            &:last-child {
+                                margin-bottom: 0px;
+                            }
+                        }
+                    }
+            
+                    .tf-apartment-contact-button {
+                        padding: 11px 24px;
+                        border-radius: 4px;
+                        background-color: $color-white !important;
+                        color: $color-primary !important;
+                        border: 1px solid $color-primary;
+                        text-decoration: none;
+                        text-align: center;
+                        transition: all 0.3s ease-in-out;
+                        i {
+                            padding-right: 8px;
+                        }
+            
+                        &:hover {
+                            background-color: $color-primary!important;
+                            color: $color-white!important;
+                        }
+                    }
                 }
             }
-        }
-    }
-}
-
-// Default Design
-.apartment-question {
-    background: transparent;
-    text-align: left;
-    padding-top: 0;
-    padding-bottom: 0;
-    margin-bottom: 80px;
-
-    @media #{$max767} {
-        max-width: 100%;
-        padding: 0;
-    }
-    h3 {
-        &::before {
-            display: none;
-        }
-    }
-    .apartment-qa-wrapper {
-        .btn-styled {
-            display: inline-block;
-        }
-    }
-    .tf-question-left {
-        @include flexbox();
-        @include align-items(center);
-        gap: 16px;
-
-        .tf-apartment-question-icon {
-            @include flexbox();
-        }
-
-        i {
-            align-self: flex-start;
-            font-size: 40px;
-        }
-
-        .default-enquiry-title-section {
-            justify-content: flex-start;
-        }
-
-        h4 {
-            margin: 0;
-            font-size: 20px !important;
-            color: $color-heading;
-            font-weight: 600 !important;
-            line-height: 32px !important;
-        }
-
-        p {
-            color: $color-text;
-            margin: 0;
-            font-size: 14px !important;
-            font-style: normal;
-            font-weight: 400;
-            line-height: 24px;
-            letter-spacing: 0.2px;
-        }
-    }
-
-    .apartment-qa-wrapper {
-        @include flexbox();
-        @include flex-wrap(wrap);
-        @include align-items(center);
-        @include justify-content(space-between);
-        gap: 30px;
-
-        @media #{$max575} {
-            @include flex-direction(column);
-        }
-    }
-
-    .tf-btn {
-        width: auto;
-
-        @media #{$max575} {
-            width: 100%;
         }
     }
 }
