@@ -150,7 +150,7 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
                 <!-- Single Hotel Body details start -->
                 <div class="tf-single-details-wrapper tf-mt-30 tf-mb-40">
                     <div class="tf-single-details-inner tf-flex">
-                        <div class="tf-column tf-tour-details-left">
+                        <div class="tf-tour-details-left">
                             <!-- Hotel Gallery Section -->
                             <div class="tf-hero-gallery tf-mrbottom-30">
                             <div class="tf-gallery-featured <?php echo empty($gallery_ids) ? esc_attr('tf-without-gallery-featured') : ''; ?>">
@@ -207,7 +207,7 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
                         </div>
 
                         <!-- SIdebar Tour single -->
-                        <div class="tf-column tf-tour-details-right">
+                        <div class="tf-tour-details-right">
 	                        <?php if(($tf_booking_type == 2 && $tf_hide_booking_form !== '1' && $tf_ext_booking_type == 1) || ($tf_booking_type == 1) || $tf_booking_type == 3) :?>
                                 <div class="tf-tour-booking-box tf-box">
                                     <?php Hotel::tf_hotel_sidebar_booking_form(); ?>

@@ -44,7 +44,7 @@ if( $post_type == "tf_tours" && $tf_tour_arc_selected_template=="design-1" ){
         <div class="tf-row tf-archive-inner tf-flex">
 		<?php require_once TF_TEMPLATE_PART_PATH . 'archive.php'; ?>
 		<!-- SideBar-->
-		<div class="tf-column tf-sidebar tf-archive-right">
+		<div class="tf-sidebar tf-archive-right">
 			<?php Helper::tf_archive_sidebar_search_form($post_type, $taxonomy, $taxonomy_name, $taxonomy_slug); ?>
 		</div>
 		</div>

@@ -7,7 +7,7 @@ use \Tourfic\Classes\Helper;
         <div class="tf-row tf-archive-inner tf-flex">
             <?php echo do_shortcode("[tf_search_result]"); ?>
             <!-- SideBar-->
-            <div class="tf-column tf-sidebar tf-archive-right">
+            <div class=tf-sidebar tf-archive-right">
 
                 <?php Helper::tf_search_result_sidebar_form( 'archive' ); ?>
 
