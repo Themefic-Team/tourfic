@@ -82,7 +82,6 @@
                     list-style: none;
                 }
                 li {
-                    font-size: $font-size-small;
                     font-family: inherit;
                     color: $color-primary;
                     margin-top: $tf-space-8;
@@ -110,7 +109,6 @@
                     }
                     p {
                         font-size: 12px;
-                        font-weight: $font-weight-medium;
                         color: $color-heading;
                         margin: 0;
                     }
@@ -124,7 +122,6 @@
                     flex-direction: column;
                     text-align: right;
                     color: $color-primary;
-                    font-size: $font-size-small;
                     display: none;
                     @media #{$tfmax991}{
                         text-align: left;
@@ -133,7 +130,6 @@
                         color: $color-heading;
                         font-size: 26px;
                         margin: 4px 0px;
-                        font-weight: $font-weight-medium;
                         
                         @media #{$tfmax767}{
                             font-size: 22px;

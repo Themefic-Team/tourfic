@@ -195,10 +195,8 @@
                                 width: 100%;
                                 z-index: 1;
                                 background: $color-heading;
-                                font-size: $font-size-normal;
                                 @media #{$tfmax767}{
                                     text-align: center;
-                                    font-size: $font-size-xs;
                                 }
                             }
                         }

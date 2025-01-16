@@ -81,29 +81,29 @@
             .tf-trip-feature-blocks{
                 .tf-features-block-inner {
                     display: flex;
-                    flex-wrap: nowrap !important;
+                    flex-wrap: nowrap;
                 
                     @media #{$tfmax991}{
-                        flex-wrap: wrap !important;
+                        flex-wrap: wrap;
                     }
                     @media #{$tfmax360}{
-                        flex-wrap: wrap !important;
+                        flex-wrap: wrap;
                     }
                     @media #{$tfmax767}{
-                        flex-wrap: wrap !important;
+                        flex-wrap: wrap;
                     }
-                    .tf-column {
-                        width: 100% !important;
+                    .tf-feature-block {
+                        width: 100%;
                         flex-basis: auto;
                 
                         @media #{$tfmax991}{
-                            flex-basis: calc(50% - 16px) !important;
+                            flex-basis: calc(50% - 16px);
                         }
                         @media #{$tfmax767}{
-                            flex-basis: calc(50% - 16px) !important;
+                            flex-basis: calc(50% - 16px);
                         }
                         @media #{$tfmax360}{
-                            flex-basis: calc(100% - 16px) !important;
+                            flex-basis: calc(100% - 16px);
                         }
                     }
                 }
@@ -122,11 +122,9 @@
                         font-size: 20px;
                     }
                     h3{
-                        font-size: $font-size-small;
                         color: $color-heading;
                     }
                     p{
-                        font-size: $font-size-xs;
                         color: $color-primary;
                         margin-top: $tf-space-8;
                     }

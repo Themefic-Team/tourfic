@@ -751,10 +751,6 @@
             border-top: 1px solid $color-border;
             margin-bottom: $tf-space-24;
             padding-top: $tf-space-24;
-            
-            h2{
-                font-size: $font-size-normal;
-            }
             .tf-related-item-featured {
                 min-width: 100px;
                 height: 85px;
@@ -1079,7 +1075,6 @@
                 padding: 6px 12px;
                 border-radius: 50px;
                 font-size: 12px;
-                font-weight: $font-weight-medium;
                 color: $color-heading;
                 line-height: 1;
                 margin-right: 10px;
@@ -1089,7 +1084,6 @@
                 padding: 6px 12px;
                 border-radius: 50px;
                 font-size: 12px;
-                font-weight: $font-weight-medium;
                 color: $color-white;
                 line-height: 1;
                 margin-right: 5px;
@@ -1111,7 +1105,6 @@
                 padding: 6px 12px;
                 border-radius: 50px;
                 font-size: 12px;
-                font-weight: $font-weight-medium;
                 line-height: 1;
                 margin-top: 5px;
             }
@@ -1153,7 +1146,7 @@
                 padding: 0;
                 li{
                     display: inline-block;
-                    background-color: $color-light-bg;
+                    background-color: $color-gray-light;
                     padding: 6px 10px;
                     border-radius: 5px;
                     margin: 10px 10px 0px 0px;
@@ -1176,24 +1169,18 @@
 
         .tf-post-footer {
             .tf-pricing {
-            font-size: $font-size-xs;
-            font-weight: $font-weight-normal;
-            del{
-                font-size: 16px;
-                span {
+                del{
                     font-size: 16px;
+                    span {
+                        font-size: 16px;
+                    }
+                }
+                span {
+                    font-size: 20px;
+                    color: $color-primary;
                 }
             }
-            span {
-                font-size: 20px;
-                color: $color-primary;
-                font-weight: $font-weight-medium;
-            }
-            }
 
-            .bttn-secondary {
-            font-size: $font-size-small;
-            }
         }
 
         @media #{$max991} {

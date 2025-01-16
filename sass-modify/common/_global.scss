@@ -24,7 +24,6 @@ input[type="submit"].tf_btn,
     padding: 12px 24px;
     text-decoration: none;
     border-radius: $tf-brds-default;
-    font-weight: $font-weight-medium;
     text-align: center;
     display: inline-flex;
     @include justify-content(center);
@@ -40,7 +39,7 @@ input[type="submit"].tf_btn,
     }
 
     &_secondary{
-        color: $color-text-dark;
+        color: $btn-secondary-text;
         background-color: $color-secondary;
         border-color: $color-secondary;
 
@@ -52,9 +51,9 @@ input[type="submit"].tf_btn,
     }
 
     &_gray{
-        color: $color-text-dark;
-        background-color: $color-light-bg2;
-        border-color: $color-light-bg2;
+        color: $btn-secondary-text;
+        background-color: $btn-secondary-bg;
+        border-color: $btn-secondary-bg;
 
         &:hover{
             color: $color-white;
@@ -92,6 +91,10 @@ input[type="submit"].tf_btn,
         border-radius: 0;
     }
 
+    &_rounded{
+        border-radius: 50px;
+    }
+
     &_full{
         width: 100%;
     }
@@ -103,6 +106,7 @@ input[type="submit"].tf_btn,
         padding: 16px 32px;
         font-size: calc(var(--tf-base-font-size) + 2px);
     }
+  
 
     //disabled
     &:disabled,

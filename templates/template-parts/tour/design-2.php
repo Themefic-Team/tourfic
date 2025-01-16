@@ -170,7 +170,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                 <!-- Single Tour Body details start -->
                 <div class="tf-single-details-wrapper tf-mt-30">
                     <div class="tf-single-details-inner tf-flex">
-                        <div class="tf-column tf-tour-details-left">
+                        <div class="tf-tour-details-left">
 
 							<?php
 							if ( ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour-layout'] ) ) {
@@ -196,7 +196,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                         </div>
 
                         <!-- SIdebar Tour single -->
-                        <div class="tf-column tf-tour-details-right">
+                        <div class="tf-tour-details-right">
                             <div class="tf-tour-booking-box tf-box">
 								<?php
 								$hide_price = !empty( Helper::tfopt( 't-hide-start-price' ) ) ? Helper::tfopt( 't-hide-start-price' ) : '';
