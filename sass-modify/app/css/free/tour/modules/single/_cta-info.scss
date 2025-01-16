@@ -4,7 +4,12 @@
             .tf-tour-contact-informations {
                 background-color: $color-light-bg;
                 padding: 24px;
-            
+                @media only screen and (max-width: 767.98px) {
+                    margin-bottom: 32px;
+                    margin-top: 32px;
+                    margin-right: 16px;
+                    margin-left: 16px;
+                }
                 .tf-contact-details-title {
                     h3 {
                         font-weight: 700 !important;

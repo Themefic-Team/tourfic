@@ -2918,6 +2918,14 @@
   background-color: #faeedc;
   padding: 24px;
 }
+@media only screen and (max-width: 767.98px) {
+  .single-tf_tours .tf-single-template__three .tf-tour-contact-informations {
+    margin-bottom: 32px;
+    margin-top: 32px;
+    margin-right: 16px;
+    margin-left: 16px;
+  }
+}
 .single-tf_tours .tf-single-template__three .tf-tour-contact-informations .tf-contact-details-title h3 {
   font-weight: 700 !important;
   font-size: 30px;
