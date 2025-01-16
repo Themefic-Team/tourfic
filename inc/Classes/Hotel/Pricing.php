@@ -1076,9 +1076,9 @@ class Pricing {
                                 }
                             }
                         } else {
-                            if ( $data[ 'tf_room_option_' . $option_key ] == '1' && $data[ 'tf_option_pricing_type_' . $option_key ] == 'per_room' ) {
+                            if ( array_key_exists( 'tf_room_option_' . $option_key, $data) &&  $data[ 'tf_room_option_' . $option_key ] == '1' && $data[ 'tf_option_pricing_type_' . $option_key ] == 'per_room' ) {
                                 $option_price = $data[ 'tf_option_room_price_' . $option_key ] ?? 0;
-                            } else if ( $data[ 'tf_room_option_' . $option_key ] == '1' && $data[ 'tf_option_pricing_type_' . $option_key ] == 'per_person' ) {
+                            } else if ( array_key_exists( 'tf_room_option_' . $option_key, $data) && $data[ 'tf_room_option_' . $option_key ] == '1' && $data[ 'tf_option_pricing_type_' . $option_key ] == 'per_person' ) {
                                 $option_price = $data[ 'tf_option_adult_price_' . $option_key ] ?? 0;
                             }
                             if ( ! empty( $option_price ) ) {
