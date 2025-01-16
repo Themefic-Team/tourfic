@@ -1,12 +1,4 @@
-.tf-main-wrapper {
-    width: 100%;
-    padding: 30px 0;
-}
-.tf-container {
-    margin: 0 auto;
-    padding: 0 15px;
-    max-width: 1200px;
-}
+
 .tf-divider {
     background: $color-light-bg;
     height: 1px;
@@ -1298,6 +1290,68 @@ li.filter-item {
     gap: 15px;
 }
 
+.tf-refund-confirmation-box{
+    background-color: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: none;
+    .tf-refund-box-content{
+        width: 450px;
+        background-color: $color-white;
+        padding: 24px;
+        border-radius: 8px;
+        text-align: center;
+        i{
+            font-size: 32px;
+        }
+        h3{
+            margin: 10px 0;
+            color: $color-heading;
+            font-size: 20px;
+        }
+        p{
+            color: $color-text;
+            font-size: 16px;
+            margin: 0 0 20px 0;
+        }
+        .tf-refund-confirmation-button{
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            button{
+                border-radius: 8px;
+                background: $color-primary;
+                padding: 8px 30px;
+                border: 0px solid;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 150%;
+                cursor: pointer;
+                color: $color-white;
+                transition: .3s all ease;
+                &:hover{
+                    background: $color-secondary;
+                }
+                &.tf-refund-cancel{
+                    background: $color-light-bg;
+                    color: $color-text;
+                    &:hover{
+                        background: $color-primary;
+                        color: $color-white;
+                    }
+                }
+            }
+        }
+    }
+}
 /* .tf-box-wrapper {
     h4{
         margin-bottom: 20px !important;

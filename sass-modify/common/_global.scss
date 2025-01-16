@@ -115,12 +115,12 @@ input[type="submit"].tf_btn,
 /*
 Button Group
 */
-.tf_btn_group {
+/* .tf_btn_group {
     @include flexbox();
     @include align-items(flex-start);
     @include flex-wrap();
     gap: 8px;
-}
+} */
 
 /*
 Modal
