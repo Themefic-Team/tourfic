@@ -1358,6 +1358,7 @@ class Enqueue {
 
 		$output = '';
 
+		error_log(print_r($tf_template1_global_reg, true));
 		// Template 1 Global CSS
 		if ( ! empty( $tf_template1_global_reg ) ) {
 			$output .= '
@@ -1623,9 +1624,9 @@ class Enqueue {
 			.tf_template_3_global_layouts #tf-hotel-services .tf-hotel-services .tf_button_group button:hover{
 				color: ' . $tf_primary_color_reg . ' !important;
 			}
-			.tf-ask-question div i:before {
-				color: ' . $tf_primary_color_reg . ' !important;
-			}
+			// .tf-ask-question div i:before {
+			// 	color: ' . $tf_primary_color_reg . ' !important;
+			// }
 		';
 		}
 		if ( $tf_primary_color_hov ) {
