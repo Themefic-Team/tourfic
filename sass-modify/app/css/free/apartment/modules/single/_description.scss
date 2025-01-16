@@ -1,10 +1,16 @@
-.apt-description {
-    margin-bottom: 48px;
-    p {
-        margin: 0;
-        color: $color-text;
-        font-size: 14px;
-        font-weight: 400;
-        letter-spacing: 0.2px;
+.single-tf_apartment{
+    .tf-single-template{
+        &__one{
+            .apt-description {
+                margin-bottom: 48px;
+                p {
+                    margin: 0;
+                    color: $color-text;
+                    font-size: 14px;
+                    font-weight: 400;
+                    letter-spacing: 0.2px;
+                }
+            }
+        }
     }
 }
