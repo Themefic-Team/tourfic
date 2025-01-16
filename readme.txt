@@ -358,11 +358,11 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 = 2.15.11 – January 16, 2025 =
 
-- Fixed: The room availability date picker is not displaying selected dates.
+- Fixed: Room availability date picker issue has been resolved.
 - Fixed: Incorrect room option pricing in the availability calendar.
 - Fixed: The Due price issue has been resolved.
 - Fixed: Database notices after demo import.
-- Improved: Compatibility with popular theme builders.
+- Improved: Compatibility with theme builders.
 - Improved: Tour and apartment design for a refined look.
 - Improved: Search Form Design 4 layout and functionality.
 
