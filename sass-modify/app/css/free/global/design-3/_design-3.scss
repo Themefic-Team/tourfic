@@ -1,4 +1,73 @@
-// Single Page Data Start 
+.tf-single-template,
+.tf-archive-template {
+    &__three{
+        padding: 60px 0px;
+        width: 100%;
+        background: $color-white;
+        color: $color-gray;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 20.80px;
+        
+        #tf-required {
+            text-align: center;
+            width: 100% !important;
+            color: $color-danger !important;
+            display: block;
+        }
+        @media #{$tfmax767}{
+            padding-top: 0px;
+        }
+
+        select {
+            appearance: none;
+            background-position: center right;
+            padding-right: 22px;
+            padding-top: 4px;
+            background-repeat: no-repeat;
+            background-size: 20px;
+        }
+        select:focus {
+            outline: none;
+        }
+        .tf-section {
+            background: $color-light-bg;
+            padding: 32px;
+            margin-bottom: 32px;
+        }
+        .tf-section-title {
+            margin-bottom: 32px;
+            color: $color-heading;
+        }
+
+        .tf-scroll-bar {
+            overflow: hidden;
+            overflow-y: scroll;
+            height: inherit;
+            &::-webkit-scrollbar {
+                width: 8px;
+            }
+            /* Track */
+            &::-webkit-scrollbar-track {
+                background: $color-light-bg;
+            }
+            /* Handle */
+            &::-webkit-scrollbar-thumb {
+                background: $color-gray;
+                border-radius: 50px;
+                overflow: hidden;
+            }
+            .tf-popup-image {
+                width: calc(33.33% - 7px);
+                height: fit-content;
+                aspect-ratio: 1/1;
+                object-fit: cover;
+            }
+        }
+    }
+}
+
+// Single Global Start
 .single-tf_tours{
     .tf-single-template{
         &__three{
@@ -6,7 +75,6 @@
         }
     }
 }
-
 .single-tf_apartment,
 .single-tf_hotel{
     .tf-single-template{
@@ -87,7 +155,6 @@
         }
     }
 }
-
 .single-tf_hotel{
     .tf-single-template{
         &__three{
@@ -1842,9 +1909,9 @@
         }
     }
 }
-// Single Page Data End
+// Single Global End
 
-// Archive Page Data Start
+// Archive Global Start
 .tf-archive-template{
     &__three{
         .tf-hero-section-wrap {
@@ -2544,20 +2611,6 @@
     display: none;
     @media #{$max767}{
         display: block;
-    }
-}
-.tf-template-global {
-    background-color: inherit;
-    padding: 60px 0px;
-    width: 100%;
-    #tf-required {
-        text-align: center;
-        width: 100% !important;
-        color: $color-danger !important;
-        display: block;
-    }
-    @media #{$tfmax767}{
-        padding-top: 0px;
     }
 }
 .tf-booking-form-wrapper {
@@ -3386,7 +3439,7 @@
         margin-bottom: 54px;
     }
 }
-// Archive Page Data End
+// Archive Global End
 
 .tf-content-wrapper {
     .tf-details {

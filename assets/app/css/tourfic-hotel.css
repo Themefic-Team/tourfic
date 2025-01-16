@@ -1264,59 +1264,6 @@
   padding-right: 32px !important;
 }
 
-.tf-template-3 {
-  background: #ffffff;
-  color: #808080;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 20.8px;
-  width: 100%;
-}
-.tf-template-3 select {
-  appearance: none;
-  background-position: center right;
-  padding-right: 22px;
-  padding-top: 4px;
-  background-repeat: no-repeat;
-  background-size: 20px;
-}
-.tf-template-3 select:focus {
-  outline: none;
-}
-.tf-template-3 .tf-section {
-  background: #faeedc;
-  padding: 32px;
-  margin-bottom: 32px;
-}
-.tf-template-3 .tf-section-title {
-  margin-bottom: 32px;
-  color: #060D1C;
-}
-.tf-template-3 .tf-scroll-bar {
-  overflow: hidden;
-  overflow-y: scroll;
-  height: inherit;
-  /* Track */
-  /* Handle */
-}
-.tf-template-3 .tf-scroll-bar::-webkit-scrollbar {
-  width: 8px;
-}
-.tf-template-3 .tf-scroll-bar::-webkit-scrollbar-track {
-  background: #faeedc;
-}
-.tf-template-3 .tf-scroll-bar::-webkit-scrollbar-thumb {
-  background: #808080;
-  border-radius: 50px;
-  overflow: hidden;
-}
-.tf-template-3 .tf-scroll-bar .tf-popup-image {
-  width: calc(33.33% - 7px);
-  height: fit-content;
-  aspect-ratio: 1/1;
-  object-fit: cover;
-}
-
 @media only screen and (max-width: 1600px) {
   .tf-template-3.tf-hotel-single .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content {
     width: calc(100% - 230px);
