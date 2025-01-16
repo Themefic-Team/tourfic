@@ -23,663 +23,659 @@
     }
 }
 
-// Header 
-.tf-single-head{
-    .tf-head-info{
-        align-items: baseline;
-        .tf-icon {
-            height: 50px;
-            width: 50px;
-            background: $color-white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50px;
-        }
-        .tf-icon:hover {
-            cursor: pointer;
-        }
-        .tf-icon:hover i {
-            transform: scale(1.2);
-            color: $color-primary;
-        }
-        .tf-icon i {
-            transition: all .3s ease;
-            height: 50px;
-            width: 50px;
-            background: $color-white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50px;
-            box-shadow: 0px 0px 24px 5px #E0E8EE;
-        }
-        .tf-share{
-            a{
-                font-size: 16px;
-                text-decoration: none;
-            }
-        }
-        .share-tour-content{
-            @media #{$max640}{
-                left: auto !important;
-                right: 0px;
-            }
-            @media #{$max480}{
-                left: 0 !important;
-                right: auto !important;
-            }
-            .tf-dropdown-share-content{
-                background: $color-white;
-                border-radius: 8px;
-                padding: 16px 10px;
-                width: 280px;
-                text-align: center;
-                box-shadow: 0px 13px 30px 0px #e0e8ee;
-                h4{
-                    font-size: 14px !important;
-                    color: $color-primary;
-                    font-weight: 600;
-                    margin-bottom: 10px;
-                    display: block;
+.tf-single-template{
+    &__two{
+        // Header 
+        .tf-single-head{
+            .tf-head-info{
+                align-items: baseline;
+                .tf-icon {
+                    height: 50px;
+                    width: 50px;
+                    background: $color-white;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border-radius: 50px;
                 }
-                ul{
-                    margin: 0;
-                    padding: 0;
-                    list-style: none;
-                    li{
-                        display: inline-block;
-                        a{
-                            display: inline-block;
-                            padding: 10px 9px;
-                            i{
-                                font-size: 22px;
-                            }
-                            &:hover{
-                                background: transparent !important;
-                            }
+                .tf-icon:hover {
+                    cursor: pointer;
+                }
+                .tf-icon:hover i {
+                    transform: scale(1.2);
+                    color: $color-primary;
+                }
+                .tf-icon i {
+                    transition: all .3s ease;
+                    height: 50px;
+                    width: 50px;
+                    background: $color-white;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border-radius: 50px;
+                    box-shadow: 0px 0px 24px 5px #E0E8EE;
+                }
+                .tf-share{
+                    a{
+                        font-size: 16px;
+                        text-decoration: none;
+                    }
+                }
+                .share-tour-content{
+                    @media #{$max640}{
+                        left: auto !important;
+                        right: 0px;
+                    }
+                    @media #{$max480}{
+                        left: 0 !important;
+                        right: auto !important;
+                    }
+                    .tf-dropdown-share-content{
+                        background: $color-white;
+                        border-radius: 8px;
+                        padding: 16px 10px;
+                        width: 280px;
+                        text-align: center;
+                        box-shadow: 0px 13px 30px 0px #e0e8ee;
+                        h4{
+                            font-size: 14px !important;
+                            color: $color-primary;
+                            font-weight: 600;
+                            margin-bottom: 10px;
+                            display: block;
                         }
-                        button{
-                            padding: 10px 8px !important;
-                            background-color: transparent !important;
-                            border: 0px solid;
-                            font-size: 22px !important;
-                            cursor: pointer;
-                            span{
-                                color: $color-primary;
-                            }
-                        }
-                        input{
-                            @media #{$max640}{
-                                display: contents !important;
+                        ul{
+                            margin: 0;
+                            padding: 0;
+                            list-style: none;
+                            li{
+                                display: inline-block;
+                                a{
+                                    display: inline-block;
+                                    padding: 10px 9px;
+                                    i{
+                                        font-size: 22px;
+                                    }
+                                    &:hover{
+                                        background: transparent !important;
+                                    }
+                                }
+                                button{
+                                    padding: 10px 8px !important;
+                                    background-color: transparent !important;
+                                    border: 0px solid;
+                                    font-size: 22px !important;
+                                    cursor: pointer;
+                                    span{
+                                        color: $color-primary;
+                                    }
+                                }
+                                input{
+                                    @media #{$max640}{
+                                        display: contents !important;
+                                    }
+                                }
                             }
                         }
                     }
                 }
+                .tf-title-meta{
+                    align-items: baseline;
+                }
             }
-        }
-        .tf-title-meta{
-            align-items: baseline;
-        }
-    }
-    h1{
-        color: $color-heading;
-        font-size: 38px;
-        margin-bottom: 6px;
-    }
-    i{
-        color: $color-primary;
-    }
-    a{
-        text-decoration: none;
-        color: $color-primary;
-    }
-}
-
-// Gallery 
-.tf-hero-gallery{
-    width: 100%;
-    display: inline-block;
-
-    img{
-        width: 100%;
-        border-radius: 5px;
-        height: auto;
-    }
-    .tf-gallery-featured {
-        position: relative;
-        margin-bottom: 10px;
-        >img{
-            min-height: 474px; 
-            max-height: 474px; 
-            object-fit: cover;
-
-            @media #{$tfmax991}{
-                min-height: auto;
-                max-height: auto;
-            }
-        }
-        .featured-column {
-            background: $color-white;
-            border-radius: 5px;
-            a {
-                display: flex;
-                gap: 8px;
-                text-decoration: none;
+            h1{
                 color: $color-heading;
-                line-height: 1em;
-                padding: 10px 12px;
-                border-radius: 5px;
-                transition: all .6s ease;
-                &:hover{
-                    background-color: $color-primary;
-                    transition: all .6s ease;
-                }
+                font-size: 38px;
+                margin-bottom: 6px;
             }
-        }
-        .featured-meta-gallery-videos{
-            display: flex;
-            position: absolute;
-            top: calc(0px - -25px);
-            right: calc(0px - -25px);
-            gap: 24px;
-            @media #{$tfmax767}{
-                gap: 5px;
-                right: calc(0px - -15px);
+            i{
+                color: $color-primary;
             }
-        }
-        .tf-single-review-box{
-            position: absolute;
-            top: calc(0px - -25px);
-            left: calc(0px - -25px);
-            gap: 24px;
-            @media #{$tfmax767}{
-                gap: 5px;
-                left: calc(0px - -15px);
-            }
-            .tf-single-rating{
-                background-color: $color-primary;
-                padding: 9px 8px !important;
-                font-size: 16px !important;
+            a{
                 text-decoration: none;
-                span{
-                    font-weight: 600;
-                }
-                &:hover{
-                    color: $color-white;
-                }
-            }
-        }
-    }
-    .tf-without-gallery-featured{
-        >img{
-            min-height: 596px;
-            max-height: 596px;
-            @media #{$tfmax991}{
-                min-height: auto;
-                max-height: auto;
-            }
-        }
-    }
-    .tf-gallery{
-        display: flex;
-        gap: 10px;
-        a {
-            width: 20%;
-            display: inline-block;
-            float: left;
-            display: none;
-            position: relative;
-            img{
-                height: 100%;
-                min-height: 112px;
-                max-height: 112px;
-                object-fit: cover;
-            }
-        }
-        a.tf-gallery-more {
-            position: relative;
-
-            &::before{
-                content: "View More → ";
-                position: absolute;
-                color: $color-white;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                top: 0;
-                bottom: 0;
-                left: 0;
-                right: 0;
-                width: 100%;
-                z-index: 1;
-                background: $color-heading;
-                font-size: $font-size-normal;
-                @media #{$tfmax767}{
-                    text-align: center;
-                    font-size: $font-size-xs;
-                }
-            }
-        }
-    }
-
-    .tf-gallery a:nth-child(1) {
-        display: block;
-    }
-    .tf-gallery a:nth-child(2) {
-        display: block;
-    }
-    .tf-gallery a:nth-child(3) {
-        display: block;
-    }
-    .tf-gallery a:nth-child(4) {
-        display: block;
-    }
-    .tf-gallery a:nth-child(5) {
-        display: block;
-    }
-}
-
-// Review Section
-.tf-review-wrapper{
-    .tf-review-data.tf-box{
-        box-shadow: 0px 0px 24px 5px #E0E8EE;
-    }
-    .tf-review-data {
-        background: $color-white;
-        border-radius: $tf-brds-default;
-        flex-basis: 20%;
-
-        @media #{$tfmax991}{
-            flex-basis: 100%;
-        }
-        @media #{$tfmax767}{
-            flex-basis: 100%;
-        }
-        .tf-list{
-            margin-top: -8px;
-        }
-        p,li{
-            text-transform: capitalize;
-        }
-        .tf-review-data-average p {
-            background: $color-light-bg;
-            text-align: center;
-            font-size: 30px !important;
-            color: $color-primary;
-            font-weight: $font-weight-medium;
-            border-radius: $tf-brds-default;
-            width: 100px;
-            height: 75px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .tf-review-data-label{
-            p{
-                color: $color-heading;
-                font-weight: $font-weight-medium;
-            }
-        }
-        .tf-review-all-info {
-            li {
-                font-size: 14px;
                 color: $color-primary;
             }
         }
+        // Gallery 
+        .tf-hero-gallery{
+            width: 100%;
+            display: inline-block;
 
-        .tf-review-data-features {
-            flex-basis: 80%;
-
-            @media #{$tfmax991}{
-                flex-basis: 100%;
-                padding-left: 0px;
+            img{
+                width: 100%;
+                border-radius: 5px;
+                height: auto;
             }
-            @media #{$tfmax767}{
-                flex-basis: 100%;
-                padding-left: 0px;
-            }
-            
-            .tf-percent-progress{
-                column-gap: 70px;
-                flex-wrap: wrap;
-                @media #{$tfmax991}{
-                    column-gap: 24px;
-                }
-                @media #{$tfmax767}{
-                    column-gap: 16px;
-                }
-            }
-            .tf-progress-bar {
-                height: 7px;
-                background: $color-light-bg;
-                border-radius: 7px;
-            }
-            
-            .tf-progress-item {
-                width: 240px;
-                margin-bottom: 16px;
-
-                
-                @media #{$tfmax767}{
-                    width: 128px;
-                }
-                @media #{$tfmax360}{
-                    width: 110px;
-                }
-                @media #{$tfmax991}{
-                    width: 178px;
-                }
-                
-            }
-            
-            .tf-progress-bar {
+            .tf-gallery-featured {
                 position: relative;
-                margin-bottom: 4px;
-            }
-            
-            .percent-progress {
-                position: absolute;
-                background: $color-primary;
-                top: 0;
-                left: 0;
-                bottom: 0;
-                border-radius: 7px;
-            }
-        }
-    }
+                margin-bottom: 10px;
+                >img{
+                    min-height: 474px; 
+                    max-height: 474px; 
+                    object-fit: cover;
 
-    //Tourfic review reply
-    .tf-review-reply{
-        border-bottom: 1px solid $color-border;
-        padding-bottom: 30px;
-
-        .tf-review-details{
-            .tf-review-ratings {
-                i {
-                    color: $color-primary;
+                    @media #{$tfmax991}{
+                        min-height: auto;
+                        max-height: auto;
+                    }
                 }
-                h3{
-                    font-size: 20px;
-                }
-            }
-            .tf-review-date{
-                li{
-                    color: $color-heading;
-                    i{
+                .featured-column {
+                    background: $color-white;
+                    border-radius: 5px;
+                    a {
+                        display: flex;
+                        gap: 8px;
+                        text-decoration: none;
                         color: $color-heading;
+                        line-height: 1em;
+                        padding: 10px 12px;
+                        border-radius: 5px;
+                        transition: all .6s ease;
+                        &:hover{
+                            background-color: $color-primary;
+                            transition: all .6s ease;
+                        }
                     }
                 }
-            }
-        }
-        .tf-review-author {
-            max-width: 15%;
-            @media #{$max1199}{
-                max-width: 20%;
-            }
-            @media #{$max991}{
-                max-width: 30%;
-            }
-            img {
-                object-fit: cover;
-                width: 70px;
-                height: 70px;
-                border-radius: 50%;
-            }
-        }
-        .tf-review-details{
-            max-width: 85%;
-            @media #{$max1199}{
-                max-width: 80%;
-            }
-            @media #{$max991}{
-                max-width: 70%;
-            }
-            .tf-review-author-name{
-                h3{
-                    font-size: 1.17rem;
+                .featured-meta-gallery-videos{
+                    display: flex;
+                    position: absolute;
+                    top: calc(0px - -25px);
+                    right: calc(0px - -25px);
+                    gap: 24px;
+                    @media #{$tfmax767}{
+                        gap: 5px;
+                        right: calc(0px - -15px);
+                    }
                 }
-            }
-            .tf-review-message{
-                margin-top: 10px;
-            }
-            .tf-review-ratings{
-                display: flex;
-                div{
-                    margin-right: 5px;
-                }
-            }
-        }
-    }
-    .tf-review-form{
-        padding-bottom: 30px;
-        .tf-review-form-container{
-            background: transparent !important;
-            min-width: auto !important;
-            .tf-rating-wrapper{
-                column-gap: 40px;
-                flex-wrap: wrap;
-                row-gap: 24px;
-                margin: 20px 0 24px 0;
-                display: flex;
-                .tf-form-single-rating{
-                    display: initial;
-                    > label{
-                        font-family: inherit;
+                .tf-single-review-box{
+                    position: absolute;
+                    top: calc(0px - -25px);
+                    left: calc(0px - -25px);
+                    gap: 24px;
+                    @media #{$tfmax767}{
+                        gap: 5px;
+                        left: calc(0px - -15px);
+                    }
+                    .tf-single-rating{
+                        background-color: $color-primary;
+                        padding: 9px 8px !important;
                         font-size: 16px !important;
-                        font-weight: 400 !important;
-                        line-height: 1.6 !important;
-                        color: $color-text;
-                        margin: 0px;
-                        text-transform: capitalize !important;
+                        text-decoration: none;
+                        span{
+                            font-weight: 600;
+                        }
+                        &:hover{
+                            color: $color-white;
+                        }
                     }
-                    .ratings-container{
-                        margin-top: 8px;
-                        label{
-                            &:before{
+                }
+            }
+            .tf-without-gallery-featured{
+                >img{
+                    min-height: 596px;
+                    max-height: 596px;
+                    @media #{$tfmax991}{
+                        min-height: auto;
+                        max-height: auto;
+                    }
+                }
+            }
+            .tf-gallery{
+                display: flex;
+                gap: 10px;
+                a {
+                    width: 20%;
+                    display: inline-block;
+                    float: left;
+                    display: none;
+                    position: relative;
+                    img{
+                        height: 100%;
+                        min-height: 112px;
+                        max-height: 112px;
+                        object-fit: cover;
+                    }
+                }
+                a.tf-gallery-more {
+                    position: relative;
+
+                    &::before{
+                        content: "View More → ";
+                        position: absolute;
+                        color: $color-white;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        top: 0;
+                        bottom: 0;
+                        left: 0;
+                        right: 0;
+                        width: 100%;
+                        z-index: 1;
+                        background: $color-heading;
+                        font-size: $font-size-normal;
+                        @media #{$tfmax767}{
+                            text-align: center;
+                            font-size: $font-size-xs;
+                        }
+                    }
+                }
+            }
+
+            .tf-gallery a:nth-child(1) {
+                display: block;
+            }
+            .tf-gallery a:nth-child(2) {
+                display: block;
+            }
+            .tf-gallery a:nth-child(3) {
+                display: block;
+            }
+            .tf-gallery a:nth-child(4) {
+                display: block;
+            }
+            .tf-gallery a:nth-child(5) {
+                display: block;
+            }
+        }
+        // Review Section
+        .tf-review-wrapper{
+            .tf-review-data.tf-box{
+                box-shadow: 0px 0px 24px 5px #E0E8EE;
+            }
+            .tf-review-data {
+                background: $color-white;
+                border-radius: $tf-brds-default;
+                flex-basis: 20%;
+
+                @media #{$tfmax991}{
+                    flex-basis: 100%;
+                }
+                @media #{$tfmax767}{
+                    flex-basis: 100%;
+                }
+                .tf-list{
+                    margin-top: -8px;
+                }
+                p,li{
+                    text-transform: capitalize;
+                }
+                .tf-review-data-average p {
+                    background: $color-light-bg;
+                    text-align: center;
+                    font-size: 30px !important;
+                    color: $color-primary;
+                    font-weight: $font-weight-medium;
+                    border-radius: $tf-brds-default;
+                    width: 100px;
+                    height: 75px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+                .tf-review-data-label{
+                    p{
+                        color: $color-heading;
+                        font-weight: $font-weight-medium;
+                    }
+                }
+                .tf-review-all-info {
+                    li {
+                        font-size: 14px;
+                        color: $color-primary;
+                    }
+                }
+
+                .tf-review-data-features {
+                    flex-basis: 80%;
+
+                    @media #{$tfmax991}{
+                        flex-basis: 100%;
+                        padding-left: 0px;
+                    }
+                    @media #{$tfmax767}{
+                        flex-basis: 100%;
+                        padding-left: 0px;
+                    }
+                    
+                    .tf-percent-progress{
+                        column-gap: 70px;
+                        flex-wrap: wrap;
+                        @media #{$tfmax991}{
+                            column-gap: 24px;
+                        }
+                        @media #{$tfmax767}{
+                            column-gap: 16px;
+                        }
+                    }
+                    .tf-progress-bar {
+                        height: 7px;
+                        background: $color-light-bg;
+                        border-radius: 7px;
+                    }
+                    
+                    .tf-progress-item {
+                        width: 240px;
+                        margin-bottom: 16px;
+
+                        
+                        @media #{$tfmax767}{
+                            width: 128px;
+                        }
+                        @media #{$tfmax360}{
+                            width: 110px;
+                        }
+                        @media #{$tfmax991}{
+                            width: 178px;
+                        }
+                        
+                    }
+                    
+                    .tf-progress-bar {
+                        position: relative;
+                        margin-bottom: 4px;
+                    }
+                    
+                    .percent-progress {
+                        position: absolute;
+                        background: $color-primary;
+                        top: 0;
+                        left: 0;
+                        bottom: 0;
+                        border-radius: 7px;
+                    }
+                }
+            }
+
+            //Tourfic review reply
+            .tf-review-reply{
+                border-bottom: 1px solid $color-border;
+                padding-bottom: 30px;
+
+                .tf-review-details{
+                    .tf-review-ratings {
+                        i {
                             color: $color-primary;
-                            font-size: 15px;
+                        }
+                        h3{
+                            font-size: 20px;
+                        }
+                    }
+                    .tf-review-date{
+                        li{
+                            color: $color-heading;
+                            i{
+                                color: $color-heading;
+                            }
+                        }
+                    }
+                }
+                .tf-review-author {
+                    max-width: 15%;
+                    @media #{$max1199}{
+                        max-width: 20%;
+                    }
+                    @media #{$max991}{
+                        max-width: 30%;
+                    }
+                    img {
+                        object-fit: cover;
+                        width: 70px;
+                        height: 70px;
+                        border-radius: 50%;
+                    }
+                }
+                .tf-review-details{
+                    max-width: 85%;
+                    @media #{$max1199}{
+                        max-width: 80%;
+                    }
+                    @media #{$max991}{
+                        max-width: 70%;
+                    }
+                    .tf-review-author-name{
+                        h3{
+                            font-size: 1.17rem;
+                        }
+                    }
+                    .tf-review-message{
+                        margin-top: 10px;
+                    }
+                    .tf-review-ratings{
+                        display: flex;
+                        div{
+                            margin-right: 5px;
+                        }
+                    }
+                }
+            }
+            .tf-review-form{
+                padding-bottom: 30px;
+                .tf-review-form-container{
+                    background: transparent !important;
+                    min-width: auto !important;
+                    .tf-rating-wrapper{
+                        column-gap: 40px;
+                        flex-wrap: wrap;
+                        row-gap: 24px;
+                        margin: 20px 0 24px 0;
+                        display: flex;
+                        .tf-form-single-rating{
+                            display: initial;
+                            > label{
+                                font-family: inherit;
+                                font-size: 16px !important;
+                                font-weight: 400 !important;
+                                line-height: 1.6 !important;
+                                color: $color-text;
+                                margin: 0px;
+                                text-transform: capitalize !important;
+                            }
+                            .ratings-container{
+                                margin-top: 8px;
+                                label{
+                                    &:before{
+                                    color: $color-primary;
+                                    font-size: 15px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .review-desc{
+                        display: flex;
+                        textarea{
+                            padding: 15px 20px;
+                            border: 1px solid $color-border;
+                            width: 100%;
+                            background-color: $color-light-bg;
+                            border-radius: 5px;
+                            font-size: 14px;
+                            color: $color-text;
+                            font-family: inherit;
+                            &::placeholder{
+                                color: $color-heading;
+                            }
+                        }
+                    }
+                    .tf-visitor-info{
+                        margin-top: 24px;
+                        div{
+                            input{
+                                padding: 15px 20px;
+                                border: 1px solid $color-border;
+                                width: 100%;
+                                background-color: $color-light-bg;
+                                border-radius: 5px;
+                                font-size: 14px;
+                                color: $color-text;
+                                font-family: inherit;
+                                &::placeholder{
+                                    color: $color-heading;
+                                }
                             }
                         }
                     }
                 }
             }
-            .review-desc{
-                display: flex;
-                textarea{
-                    padding: 15px 20px;
-                    border: 1px solid $color-border;
-                    width: 100%;
-                    background-color: $color-light-bg;
-                    border-radius: 5px;
-                    font-size: 14px;
-                    color: $color-text;
-                    font-family: inherit;
-                    &::placeholder{
-                        color: $color-heading;
-                    }
+        }
+        // Booking Form
+        .tf-booking-form{
+            .tf-field-group{
+                #check-in-out-date {
+                    width: 100% !important;
                 }
             }
-            .tf-visitor-info{
-                margin-top: 24px;
-                div{
-                    input{
-                        padding: 15px 20px;
-                        border: 1px solid $color-border;
-                        width: 100%;
-                        background-color: $color-light-bg;
-                        border-radius: 5px;
-                        font-size: 14px;
-                        color: $color-text;
-                        font-family: inherit;
-                        &::placeholder{
-                            color: $color-heading;
+            .tf-booking-person{
+                .tf-field{
+                    align-items: center;
+                    justify-content: space-between;
+                    padding: 10px 20px !important;
+                    .acr-label{
+                        align-items: center;
+                        i{
+                            position: static;
+                            margin-right: 5px;
                         }
                     }
                 }
             }
         }
-    }
-}
-
-// Booking Form
-.tf-booking-form{
-    .tf-field-group{
-         #check-in-out-date {
-            width: 100% !important;
+        // Enquiry Box
+        .tf-ask-enquiry{
+            text-align: center;
+            i{
+                text-align: center;
+                background-color: $color-light-bg;
+                border-radius: 50%;
+                color: $color-primary;
+                margin-bottom: 25px;
+                font-size: 30px;
+                height: 80px;
+                width: 80px;
+                text-align: center;
+                line-height: 80px;
+            }
+            p{
+                margin-top: 5px;
+                margin-bottom: 25px;
+            }
+            .tf-btn{
+                a:hover{
+                    background-color: $color-secondary !important;
+                }
+            }
         }
-    }
-    .tf-booking-person{
-        .tf-field{
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px 20px !important;
-            .acr-label{
-                align-items: center;
+        // FAQ
+        .tf-faq-wrapper {
+            .tf-faq-inner{
+                .tf-faq-single{
+                    border-bottom: 1px solid $color-border;
+                }
+                .active{
+                    .tf-faq-single-inner{
+                        background: $color-white;
+                        border-radius: $tf-brds-default;
+                        margin: 0px 0px 30px 0px;
+                        box-shadow: 0px 0px 24px 5px #E0E8EE;
+                        .tf-faq-collaps{
+                            .faq-icon{
+                            i.fa-plus{
+                                display: none;
+                            } 
+                            i.fa-minus{
+                                color: $color-primary;
+                                display: block;
+                            } 
+                            }
+                        }
+                    }
+                }
+                .tf-faq-single-inner{
+                    .tf-faq-content{
+                        display: none;
+                    }
+                }
+            }
+            .tf-faq-single-inner{
+                .tf-faq-content{
+                    padding: 0px 24px 24px 24px;
+                }
+                .tf-faq-collaps{
+                    padding: 24px;
+                    &:hover{
+                        cursor: pointer;
+                    }
+                    .faq-icon{
+                        i.fa-plus{
+                        display: block;
+                        } 
+                        i.fa-minus{
+                        display: none;
+                        } 
+                    }
+                }
+                h4{
+                    line-height: 1.4;
+                }
+            }
+        }
+        .tf-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            li {
+                margin-top: 12px;
+                list-style: none;
+                display: flex;
+                align-items: baseline;
                 i{
-                    position: static;
+                    color: $color-primary;
+                    width: 24px;
                     margin-right: 5px;
                 }
             }
         }
-    }
-}
+        .tf-single-details-wrapper{
+            .tf-single-details-inner{
+                @media #{$tfmax991}{
+                    justify-content: space-between;
+                }
+                .tf-tour-details-left {
+                    flex-basis: 68%;
+                    width: 68%;
 
-// Enquiry Box
-.tf-ask-enquiry{
-    text-align: center;
-    i{
-        text-align: center;
-        background-color: $color-light-bg;
-        border-radius: 50%;
-        color: $color-primary;
-        margin-bottom: 25px;
-        font-size: 30px;
-        height: 80px;
-        width: 80px;
-        text-align: center;
-        line-height: 80px;
-    }
-    p{
-        margin-top: 5px;
-        margin-bottom: 25px;
-    }
-    .tf-btn{
-        a:hover{
-            background-color: $color-secondary !important;
-        }
-    }
-}
+                    @media #{$tfmax991}{
+                        flex-basis: 58%;
+                        width: 58%;
+                    }
 
-// FAQ
-.tf-faq-wrapper {
-    .tf-faq-inner{
-        .tf-faq-single{
-            border-bottom: 1px solid $color-border;
-        }
-        .active{
-            .tf-faq-single-inner{
-                background: $color-white;
-                border-radius: $tf-brds-default;
-                margin: 0px 0px 30px 0px;
-                box-shadow: 0px 0px 24px 5px #E0E8EE;
-                .tf-faq-collaps{
-                    .faq-icon{
-                    i.fa-plus{
-                        display: none;
-                    } 
-                    i.fa-minus{
-                        color: $color-primary;
-                        display: block;
-                    } 
+                    @media #{$tfmax767}{
+                        flex-basis: 100%;
+                        width: 58%;
+                    }
+                }
+                
+                .tf-tour-details-right {
+                    flex-basis: 32%;
+                    width: 32%;
+                    @media #{$tfmax991}{
+                        flex-basis: 40%;
+                        padding-left: $tf-space-12;
+                        width: 40%;
+                    }
+                    @media #{$tfmax767}{
+                        flex-basis: 100%;
+                        width: 58%;
+                        margin-top: 30px;
                     }
                 }
             }
         }
-        .tf-faq-single-inner{
-            .tf-faq-content{
-                display: none;
-            }
-        }
-    }
-    .tf-faq-single-inner{
-        .tf-faq-content{
-            padding: 0px 24px 24px 24px;
-        }
-        .tf-faq-collaps{
-            padding: 24px;
-            &:hover{
-                cursor: pointer;
-            }
-            .faq-icon{
-                i.fa-plus{
-                display: block;
-                } 
-                i.fa-minus{
-                display: none;
-                } 
-            }
-        }
-        h4{
-            line-height: 1.4;
-        }
     }
 }
-
-.tf-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    li {
-        margin-top: 12px;
-        list-style: none;
-        display: flex;
-        align-items: baseline;
-        i{
-            color: $color-primary;
-            width: 24px;
-            margin-right: 5px;
-        }
-    }
-}
-
-.tf-single-details-wrapper{
-    .tf-single-details-inner{
-        @media #{$tfmax991}{
-            justify-content: space-between;
-        }
-        .tf-tour-details-left {
-            flex-basis: 68%;
-            width: 68%;
-
-            @media #{$tfmax991}{
-                flex-basis: 58%;
-                width: 58%;
-            }
-
-            @media #{$tfmax767}{
-                flex-basis: 100%;
-                width: 58%;
-            }
-        }
-        
-        .tf-tour-details-right {
-            flex-basis: 32%;
-            width: 32%;
-            @media #{$tfmax991}{
-                flex-basis: 40%;
-                padding-left: $tf-space-12;
-                width: 40%;
-            }
-            @media #{$tfmax767}{
-                flex-basis: 100%;
-                width: 58%;
-                margin-top: 30px;
-            }
-        }
-    }
-}
-
 // Archive Global Start
 
 .tf-result-previews{
