@@ -109,6 +109,7 @@
         }
         .tf-title-meta{
             align-items: baseline;
+            color: $color-text;
         }
     }
     h1{
@@ -155,13 +156,14 @@
                 display: flex;
                 gap: 8px;
                 text-decoration: none;
-                color: $color-heading;
+                color: $color-text;
                 line-height: 1em;
                 padding: 10px 12px;
                 border-radius: 5px;
                 transition: all .6s ease;
                 &:hover{
                     background-color: $color-primary;
+                    color: $color-white;
                     transition: all .6s ease;
                 }
             }
@@ -243,10 +245,8 @@
                 width: 100%;
                 z-index: 1;
                 background: $color-heading;
-                font-size: $font-size-normal;
                 @media #{$tfmax767}{
                     text-align: center;
-                    font-size: $font-size-xs;
                 }
             }
         }
@@ -296,7 +296,6 @@
             text-align: center;
             font-size: 30px !important;
             color: $color-primary;
-            font-weight: $font-weight-medium;
             border-radius: $tf-brds-default;
             width: 100px;
             height: 75px;
@@ -307,7 +306,6 @@
         .tf-review-data-label{
             p{
                 color: $color-heading;
-                font-weight: $font-weight-medium;
             }
         }
         .tf-review-all-info {
@@ -479,7 +477,7 @@
                     padding: 15px 20px;
                     border: 1px solid $color-border;
                     width: 100%;
-                    background-color: $color-light-bg;
+                    background-color: $color-gray-light;
                     border-radius: 5px;
                     font-size: 14px;
                     color: $color-text;
@@ -539,7 +537,7 @@
     text-align: center;
     i{
         text-align: center;
-        background-color: $color-light-bg;
+        background-color: $color-gray-light;
         border-radius: 50%;
         color: $color-primary;
         margin-bottom: 25px;
@@ -744,10 +742,6 @@
             border-top: 1px solid $color-border;
             margin-bottom: $tf-space-24;
             padding-top: $tf-space-24;
-            
-            h2{
-                font-size: $font-size-normal;
-            }
             .tf-related-item-featured {
                 min-width: 100px;
                 height: 85px;
@@ -1072,7 +1066,6 @@
                 padding: 6px 12px;
                 border-radius: 50px;
                 font-size: 12px;
-                font-weight: $font-weight-medium;
                 color: $color-heading;
                 line-height: 1;
                 margin-right: 10px;
@@ -1082,7 +1075,6 @@
                 padding: 6px 12px;
                 border-radius: 50px;
                 font-size: 12px;
-                font-weight: $font-weight-medium;
                 color: $color-white;
                 line-height: 1;
                 margin-right: 5px;
@@ -1104,7 +1096,6 @@
                 padding: 6px 12px;
                 border-radius: 50px;
                 font-size: 12px;
-                font-weight: $font-weight-medium;
                 line-height: 1;
                 margin-top: 5px;
             }
@@ -1146,7 +1137,7 @@
                 padding: 0;
                 li{
                     display: inline-block;
-                    background-color: $color-light-bg;
+                    background-color: $color-gray-light;
                     padding: 6px 10px;
                     border-radius: 5px;
                     margin: 10px 10px 0px 0px;
@@ -1169,24 +1160,18 @@
 
         .tf-post-footer {
             .tf-pricing {
-            font-size: $font-size-xs;
-            font-weight: $font-weight-normal;
-            del{
-                font-size: 16px;
-                span {
+                del{
                     font-size: 16px;
+                    span {
+                        font-size: 16px;
+                    }
+                }
+                span {
+                    font-size: 20px;
+                    color: $color-primary;
                 }
             }
-            span {
-                font-size: 20px;
-                color: $color-primary;
-                font-weight: $font-weight-medium;
-            }
-            }
 
-            .bttn-secondary {
-            font-size: $font-size-small;
-            }
         }
 
         @media #{$max991} {

@@ -309,7 +309,7 @@ a.tf_button.btn-styled {
 .tf-map-link {
     a {
         font-size: 14px;
-        color: $color-text;
+        color: $color-primary;
         &.more-hotel {
             font-weight: bold;
         }
@@ -457,9 +457,9 @@ ul.tf-sidebar-checkbox {
     }
 }
 .tf_booking-widget {
-    background:$color-secondary;
-    background: linear-gradient(to bottom, $color-secondary 0, $color-secondary 100%);
-    border-color: $color-secondary;
+    background: $color-light-bg;
+    background: linear-gradient(to bottom, $color-light-bg 0, $color-light-bg 100%);
+    border-color: $color-light-bg;
     padding: 20px !important;
     border-radius: 4px;
     font-size: 14px;
@@ -825,7 +825,7 @@ h3.tf-sidebar-widget_title {
     }
     .review-desc {
         textarea {
-            background: $color-light-bg;
+            background: $color-gray-light;
             border: 1px solid $color-border;
             border-radius: 4px;
             padding: 16px 8px 16px 16px;
@@ -1057,7 +1057,7 @@ h3.tf-sidebar-widget_title {
     }
 }
 .tf-ask-question {
-    background: $color-light-bg;
+    background: $color-gray-light;
     padding: 30px;
     border-radius: 4px;
     flex: 2;

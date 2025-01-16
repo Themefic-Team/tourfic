@@ -25,7 +25,6 @@ input[type="submit"].tf_btn,
   padding: 12px 24px;
   text-decoration: none;
   border-radius: 5px;
-  font-weight: 500;
   text-align: center;
   display: inline-flex;
   -webkit-justify-content: center;
@@ -106,6 +105,11 @@ input[type="submit"].tf_btn_outline,
 input[type="submit"].tf_btn_sharp,
 .tf_btn_sharp {
   border-radius: 0;
+}
+
+input[type="submit"].tf_btn_rounded,
+.tf_btn_rounded {
+  border-radius: 50px;
 }
 
 input[type="submit"].tf_btn_full,
@@ -213,7 +217,7 @@ Modal
   width: 100%;
   max-width: 1080px;
   pointer-events: auto;
-  background-color: #f8f9fb;
+  background-color: #faeedc;
   outline: 0;
   margin: 0 auto;
   border-radius: 10px;
@@ -705,7 +709,7 @@ Notice
 }
 
 .tf-refund-confirmation-box .tf-refund-box-content .tf-refund-confirmation-button button.tf-refund-cancel {
-  background: #f8f9fb;
+  background: #faeedc;
   color: #686E7A;
 }
 
@@ -726,12 +730,12 @@ Notice
 }
 
 .tf-divider {
-  background: #f8f9fb;
+  background: #faeedc;
   height: 1px;
 }
 
 .gray-wrap {
-  background-color: #f8f9fb;
+  background-color: #faeedc;
 }
 
 .section-heading {
@@ -1076,7 +1080,7 @@ a.tf_button.btn-styled:focus {
 
 .tf-map-link a {
   font-size: 14px;
-  color: #686E7A;
+  color: #0E3DD8;
 }
 
 .tf-map-link a.more-hotel {
@@ -1244,9 +1248,9 @@ ul.tf-sidebar-checkbox label {
 }
 
 .tf_booking-widget {
-  background: #003C7A;
-  background: linear-gradient(to bottom, #003C7A 0, #003C7A 100%);
-  border-color: #003C7A;
+  background: #faeedc;
+  background: linear-gradient(to bottom, #faeedc 0, #faeedc 100%);
+  border-color: #faeedc;
   padding: 20px !important;
   border-radius: 4px;
   font-size: 14px;
@@ -1480,7 +1484,7 @@ h3.tf-sidebar-widget_title {
   content: "";
   position: absolute;
   height: 2px;
-  background: #f8f9fb;
+  background: #faeedc;
   width: 2px;
   left: 0;
   top: 0px;
@@ -1638,7 +1642,7 @@ h3.tf-sidebar-widget_title {
 }
 
 .tf-review-form-container .review-desc textarea {
-  background: #f8f9fb;
+  background: #F1F3F4;
   border: 1px solid #f0f2f4;
   border-radius: 4px;
   padding: 16px 8px 16px 16px;
@@ -1657,7 +1661,7 @@ h3.tf-sidebar-widget_title {
 }
 
 .tf-review-form-container .tf-visitor-info input {
-  background: #f8f9fb;
+  background: #faeedc;
   border: 1px solid #f0f2f4;
   box-sizing: border-box;
   border-radius: 4px;
@@ -1726,7 +1730,7 @@ h3.tf-sidebar-widget_title {
 }
 
 .tf-review-container .tf-review-progress-bar {
-  background: #f8f9fb;
+  background: #faeedc;
   display: grid;
   grid-template-columns: calc(50% - 20px) calc(50% - 20px);
   column-gap: 40px;
@@ -1757,7 +1761,7 @@ h3.tf-sidebar-widget_title {
 .tf-review-container .tf-review-progress-bar .tf-single .tf-p-bar {
   width: 100%;
   height: 7px;
-  background: #f8f9fb;
+  background: #faeedc;
   border-radius: 4px;
   position: relative;
   overflow: hidden;
@@ -1801,7 +1805,7 @@ h3.tf-sidebar-widget_title {
   display: grid;
   grid-template-columns: 56px calc(100% - 72px);
   column-gap: 16px;
-  background: #f8f9fb;
+  background: #faeedc;
   padding: 25px 25px 35px;
   border-radius: 4px;
 }
@@ -1897,7 +1901,7 @@ h3.tf-sidebar-widget_title {
 }
 
 .tf-ask-question {
-  background: #f8f9fb;
+  background: #F1F3F4;
   padding: 30px;
   border-radius: 4px;
   flex: 2;
@@ -2062,7 +2066,7 @@ h3.tf-sidebar-widget_title {
 }
 
 .wish-button {
-  background: #f8f9fb;
+  background: #faeedc;
   color: #686E7A;
   font-weight: 600;
   font-size: 12px;
@@ -2075,7 +2079,7 @@ h3.tf-sidebar-widget_title {
 
 .wish-button:hover {
   background: #686E7A;
-  color: #f8f9fb;
+  color: #faeedc;
 }
 
 .tf-wishlists .remove-wishlist {
@@ -2152,7 +2156,7 @@ li.filter-item {
   align-items: center;
   padding: 10px 16px;
   height: 48px;
-  background: #f8f9fb;
+  background: #faeedc;
   border: 1px solid #f0f2f4;
   border-radius: 8px 8px 0px 0px;
   justify-content: space-between;
@@ -2459,7 +2463,7 @@ Ajax Loader Booking Availability
 }
 
 .single-tour-wrap.tf-featured .single-tour-inner {
-  background: #f8f9fb;
+  background: #faeedc;
   border-color: #f0f2f4;
   box-shadow: 0px 2px 4px rgba(179, 180, 202, 0.48);
 }
@@ -2604,7 +2608,7 @@ a.page-numbers {
 }
 
 .tf_posts_navigation .page-numbers.current {
-  background: #f8f9fb;
+  background: #faeedc;
   padding: 5px 15px;
 }
 
@@ -2704,7 +2708,7 @@ a.page-numbers {
   padding: 10px 30px 10px 10px;
   background-position: calc(100% - 8px) 54%;
   border-radius: 4px;
-  background-color: #f8f9fb;
+  background-color: #F1F3F4;
 }
 
 .tf-archive-rating {
@@ -2820,7 +2824,7 @@ a.page-numbers {
 }
 
 .tf_widget .al-range-slider__track {
-  background: #f8f9fb;
+  background: #faeedc;
   height: 10px;
   box-shadow: none !important;
   margin: 30px 0px 10px 0px;
@@ -2866,7 +2870,7 @@ a.page-numbers {
   align-items: center;
   padding: 10px;
   height: 48px;
-  background: #f8f9fb;
+  background: #faeedc;
   border: 1px solid #f0f2f4;
   border-radius: 8px 8px 0px 0px;
   justify-content: space-between;
@@ -2890,7 +2894,7 @@ a.page-numbers {
 }
 
 .tf_widget .filter-item.active {
-  background-color: #f8f9fb;
+  background-color: #faeedc;
 }
 
 .tf_widget ul {
@@ -3117,7 +3121,7 @@ a.page-numbers {
 }
 
 .tf_form-inner .autocomplete-items div:hover {
-  background-color: #f8f9fb;
+  background-color: #faeedc;
 }
 
 .tf_form-inner .tf-hotel-locations {
@@ -3166,7 +3170,7 @@ a.page-numbers {
 }
 
 .tf_form-inner .tf-hotel-results #ui-id-1 li:hover {
-  background-color: #f8f9fb;
+  background-color: #faeedc;
 }
 
 .tf_form-inner .tf-hotel-results #ui-id-2 li {
@@ -3180,7 +3184,7 @@ a.page-numbers {
 }
 
 .tf_form-inner .tf-hotel-results #ui-id-2 li:hover {
-  background-color: #f8f9fb;
+  background-color: #faeedc;
 }
 
 .tf_form-inner .tf-hotel-results ul#ui-id-1 {
@@ -3530,7 +3534,7 @@ div#tf-destinationautocomplete-list div:before {
 }
 
 .tf-filter-price-range .al-range-slider__track {
-  background: #f8f9fb;
+  background: #faeedc;
   height: 10px;
   box-shadow: none !important;
   margin: 30px 0px 10px 0px;
@@ -3614,11 +3618,11 @@ div#tf-destinationautocomplete-list div:before {
 .tf-shortcode-design-2-tab .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .autocomplete-items {
   max-height: 240px;
   position: absolute;
-  background: #f8f9fb;
+  background: #faeedc;
   box-shadow: 0px 20px 40px 0px rgba(0, 0, 0, 0.1);
   overflow: auto;
   scrollbar-width: thin;
-  scrollbar-color: #808080 #f8f9fb;
+  scrollbar-color: #808080 #faeedc;
   padding: 8px;
   z-index: 99;
   top: 100%;
@@ -3651,7 +3655,7 @@ div#tf-destinationautocomplete-list div:before {
 }
 
 .tf-shortcode-design-2-tab .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .autocomplete-items::-webkit-scrollbar-track {
-  background-color: #f8f9fb;
+  background-color: #faeedc;
 }
 
 .tf-shortcode-design-2-tab .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .autocomplete-items div {
@@ -3670,7 +3674,7 @@ div#tf-destinationautocomplete-list div:before {
 }
 
 .tf-shortcode-design-2-tab .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .autocomplete-items div:hover {
-  background: #f8f9fb;
+  background: #faeedc;
 }
 
 .tf-shortcode-design-2-tab .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .autocomplete-items div::before {
@@ -3954,7 +3958,7 @@ div#tf-destinationautocomplete-list div:before {
 }
 
 .tf-shortcode-design-2-tab .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields .tf_guest_info .tf_acrselection-wrap {
-  background: #f8f9fb;
+  background: #faeedc;
   box-shadow: 0px 8px 40px 0px rgba(0, 0, 0, 0.1);
   top: 111%;
   border-radius: 0px;
@@ -3986,7 +3990,7 @@ div#tf-destinationautocomplete-list div:before {
   padding-left: 0px !important;
   padding-right: 0px !important;
   border-radius: 20px;
-  background: #f8f9fb !important;
+  background: #faeedc !important;
 }
 
 .tf-shortcode-design-2-tab .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields .tf_guest_info .tf_acrselection-wrap .acr-select .acr-dec,
@@ -4290,7 +4294,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   border-radius: 4px;
   padding: 12px 16px;
   background-color: #ffffff;
-  color: #607085;
+  color: #F1F3F4;
   font-size: 16px;
   font-weight: 400;
   transition: all 0.3s ease-in-out;
@@ -4403,7 +4407,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 .tf-post-desc a:hover {
-  color: #f8f9fb;
+  color: #faeedc;
 }
 
 .tf-post-desc p {
@@ -4520,6 +4524,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 .tf-field-group i {
   position: absolute;
   left: 18px;
+  color: #686E7A;
 }
 
 .tf-field-group.tf_form-inner .tf-field,
@@ -4527,11 +4532,11 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   border: none !important;
   padding: 15px 40px !important;
   width: 100% !important;
-  background-color: #F3F7FA !important;
+  background-color: #F1F3F4 !important;
   border-radius: 5px !important;
   font-size: 14px !important;
   margin: 0px !important;
-  color: #0E3DD8 !important;
+  color: #686E7A !important;
   font-family: inherit;
   background-image: none;
   -moz-appearance: auto !important;
@@ -4546,9 +4551,8 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 
 .tf-field-group.tf_form-inner input::placeholder,
 .tf-field-group input::placeholder {
-  font-weight: 16px;
   font-size: 14px;
-  color: #0E3DD8;
+  color: #686E7A;
 }
 
 .tf-page-content {
@@ -4816,7 +4820,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 .single-tf_hotel .tf-single-template__two #tf-single-hotel-avail .tf_booking-dates #check-in-out-date {
-  background-color: #f8f9fb !important;
+  background-color: #faeedc !important;
   padding-top: 3px !important;
   padding-bottom: 3px !important;
 }
@@ -4840,6 +4844,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 .single-tf_hotel .tf-single-template__two .tf-tour-booking-box {
   margin-bottom: 25px;
   box-shadow: 0px 13px 30px 0px rgba(224, 232, 238, 0.32);
+  background-color: #faeedc;
 }
 
 .single-tf_hotel .tf-single-template__three .flatpickr-calendar {
@@ -5009,7 +5014,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   width: auto !important;
   flex-grow: 1;
   margin: 0 8px;
-  background-color: #f8f9fb;
+  background-color: #faeedc;
   padding: 0;
   border: 2px solid rgba(118, 118, 118, 0.3);
 }
@@ -5219,6 +5224,10 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   margin: 8px 0;
 }
 
+.single-tf_hotel .tf-single-template__one .tf-room-section .availability-table td.description .bed-facilities p {
+  color: #686E7A;
+}
+
 .single-tf_hotel .tf-single-template__one .tf-room-section .availability-table td.pax {
   min-width: 80px;
 }
@@ -5405,7 +5414,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 
 .single-tf_hotel .tf-single-template__two .tf-rooms-sections .tf-rooms .tf-availability-table > tbody tr td .tf-features-infos ul li {
   display: inline-block;
-  background: #f8f9fb;
+  background: #F1F3F4;
   border-radius: 5px;
   padding: 10px;
   margin: 5px 10px 5px 0px;
@@ -5831,8 +5840,8 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 .single-tf_hotel .tf-single-template__two .tf-hotel-faqs-section .tf-hotel-faqs .tf-faq-wrapper .tf-faq-single .tf-faq-single-inner:hover {
-  background: #f8f9fb;
-  box-shadow: 0px 13px 30px 0px #f8f9fb;
+  background: #F1F3F4;
+  box-shadow: 0px 13px 30px 0px #F1F3F4;
 }
 
 .single-tf_hotel .tf-single-template__two .tf-hotel-faqs-section .tf-hotel-faqs .tf-faq-wrapper .tf-faq-single .tf-faq-single-inner h3 {
@@ -5840,8 +5849,8 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 .single-tf_hotel .tf-single-template__two .tf-hotel-faqs-section .tf-hotel-faqs .tf-faq-wrapper .tf-faq-single.active .tf-faq-single-inner {
-  background: #f8f9fb;
-  box-shadow: 0px 13px 30px 0px #f8f9fb;
+  background: #F1F3F4;
+  box-shadow: 0px 13px 30px 0px #F1F3F4;
 }
 
 .single-tf_hotel .tf-single-template__two .tf-review-wrapper .tf-review-data.tf-box {
@@ -5894,7 +5903,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 .single-tf_hotel .tf-single-template__two .tf-review-wrapper .tf-review-data.tf-box .tf-review-data-average p {
-  background: #f8f9fb;
+  background: #faeedc;
   text-align: center;
   font-size: 30px !important;
   color: #0E3DD8;
@@ -5909,7 +5918,6 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 
 .single-tf_hotel .tf-single-template__two .tf-review-wrapper .tf-review-data.tf-box .tf-review-data-label p {
   color: #060D1C;
-  font-weight: 500;
 }
 
 .single-tf_hotel .tf-single-template__two .tf-review-wrapper .tf-review-data.tf-box .tf-review-all-info li {
@@ -5949,7 +5957,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 
 .single-tf_hotel .tf-single-template__two .tf-review-wrapper .tf-review-data.tf-box .tf-review-data-features .tf-progress-bar {
   height: 7px;
-  background: #f8f9fb;
+  background: #faeedc;
   border-radius: 7px;
 }
 
@@ -6253,7 +6261,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 .tf-template-3 .tf-section {
-  background: #f8f9fb;
+  background: #faeedc;
   padding: 32px;
   margin-bottom: 32px;
 }
@@ -6290,7 +6298,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 .tf-template-3 .tf-scroll-bar::-webkit-scrollbar-track {
-  background: #f8f9fb;
+  background: #faeedc;
 }
 
 .tf-template-3 .tf-scroll-bar::-webkit-scrollbar-thumb {
@@ -6346,7 +6354,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 .tf_template_3_global_layouts #tf-ask-question .tf-aq-outer {
-  background: #f8f9fb;
+  background: #faeedc;
   border-radius: 0px;
 }
 
@@ -6362,7 +6370,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   border: 1px solid #f0f2f4;
   box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
   color: #686E7A;
-  background-color: #f8f9fb;
+  background-color: #faeedc;
   font-size: 16px;
   height: 45px;
   padding: 12px 14px;
@@ -6376,7 +6384,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 .tf_template_3_global_layouts #tf-ask-question .tf-aq-field textarea {
   border: 1px solid #f0f2f4;
   box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
-  background-color: #f8f9fb;
+  background-color: #faeedc;
   color: #686E7A;
   font-size: 16px;
   font-weight: 400;
@@ -6408,7 +6416,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 .tf_template_3_global_layouts #tf-hotel-services .tf-hotel-services {
-  background: #f8f9fb;
+  background: #faeedc;
   border-radius: 0px;
   gap: 0px;
 }
@@ -6440,7 +6448,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 
 .tf_template_3_global_layouts #tf-hotel-services .tf-hotel-services .tf-hotel-service select {
   border-radius: 0px;
-  background: #f8f9fb;
+  background: #faeedc;
   height: 45px;
   border: 1px solid #686E7A;
 }
@@ -7386,12 +7394,10 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 .single-tf_tours .tf-single-template__two .tf-trip-feature-blocks .tf-feature-block h3 {
-  font-size: 14px;
   color: #060D1C;
 }
 
 .single-tf_tours .tf-single-template__two .tf-trip-feature-blocks .tf-feature-block p {
-  font-size: 12px;
   color: #0E3DD8;
   margin-top: 8px;
 }
@@ -7442,7 +7448,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   justify-content: center;
   flex-direction: column;
   width: 776px;
-  background-color: #f8f9fb;
+  background-color: #faeedc;
   border-radius: 24px;
   position: relative;
 }
@@ -7485,7 +7491,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 .tf-withoutpayment-booking .tf-withoutpayment-popup,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup {
   width: 776px;
-  background-color: #f8f9fb;
+  background-color: #faeedc;
   border-radius: 24px;
   text-align: left;
 }
@@ -7510,7 +7516,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   padding: 24px;
   border-bottom: 0.3px solid #808080;
   border-radius: 24px;
-  background: #f8f9fb;
+  background: #faeedc;
   display: flex;
   justify-content: space-between;
   margin-bottom: 24px;
@@ -7522,7 +7528,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   padding: 0;
   list-style: none;
   border-radius: 8px;
-  background: #f8f9fb;
+  background: #faeedc;
   display: flex;
 }
 
@@ -7577,7 +7583,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.active,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.active {
   position: relative;
-  background-color: #f8f9fb;
+  background-color: #faeedc;
   color: #FCFDFF;
   padding-right: 50px;
 }
@@ -7610,7 +7616,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   position: absolute;
   height: 40px;
   width: 40px;
-  background: #f8f9fb;
+  background: #faeedc;
   top: 50%;
   right: -20px;
   transform: rotate(45deg);
@@ -7710,7 +7716,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   height: 230px;
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: #808080 #f8f9fb;
+  scrollbar-color: #808080 #faeedc;
   margin-bottom: 20px;
   padding-right: 10px;
 }
@@ -7774,7 +7780,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   position: absolute;
   top: 0px;
   left: 0px;
-  background-color: #f8f9fb;
+  background-color: #faeedc;
   border-radius: 5px;
   border: 1px solid #808080;
   cursor: pointer;
@@ -8024,7 +8030,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-traveller .tf-single-tour-traveller .traveller-info .traveller-single-info select {
   border-radius: 4px;
   border: 0.5px solid #808080;
-  background: #f8f9fb;
+  background: #faeedc;
   box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
   height: 32px;
   width: 100%;
@@ -8119,7 +8125,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   max-height: 230px;
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: #808080 #f8f9fb;
+  scrollbar-color: #808080 #faeedc;
 }
 
 @media only screen and (max-width: 767.98px) {
@@ -8775,10 +8781,6 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   box-shadow: 0px 0px 24px 5px #E0E8EE;
 }
 
-.single-tf_tours .tf-single-template__two .tf-inex-wrapper .tf-inex h3 {
-  font-size: 24px;
-}
-
 .single-tf_tours .tf-single-template__two .tf-inex-wrapper .tf-inex ul li {
   margin-top: 0px;
   margin-bottom: 12px;
@@ -9134,13 +9136,11 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   width: 100%;
   z-index: 1;
   background: #060D1C;
-  font-size: 16px;
 }
 
 @media only screen and (max-width: 767.98px) {
   .single-tf_tours .tf-single-template__two .tf-itinerary-wrapper .tf-single-itinerary-item .tf-itinerary-content-box .ininerary-other-gallery a.tf-gallery-more::before {
     text-align: center;
-    font-size: 12px;
   }
 }
 
@@ -9250,7 +9250,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   line-height: 24px;
   word-wrap: break-word;
   border: none;
-  background: #f8f9fb;
+  background: #faeedc;
   min-width: 211px;
   height: fit-content;
   padding: 12px;
@@ -9271,7 +9271,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 .single-tf_tours .tf-single-template__three .tf-itinerary-wrapper .tf-itinerary-wrapper .tf-single-itinerary {
-  background: #f8f9fb;
+  background: #faeedc;
   padding: 16px 32px;
   display: flex;
   flex-direction: column;
@@ -9322,7 +9322,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 
 .single-tf_tours .tf-single-template__three .tf-itinerary-wrapper .tf-itinerary-wrapper .tf-itinerary-title span.tf-head-title span.tf-itinerary-time {
   padding: 8px 16px;
-  background: #f8f9fb;
+  background: #faeedc;
   margin-right: 16px;
 }
 
@@ -9702,20 +9702,20 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 
 .single-tf_tours .tf-single-template__one .tf-single-tour-pricing .tf-price-tab li:hover {
   color: #0E3DD8;
-  background-color: #f8f9fb;
+  background-color: #faeedc;
 }
 
 .single-tf_tours .tf-single-template__one .tf-single-tour-pricing .tf-price-tab li:nth-child(2) {
-  border-left: 1px solid #f8f9fb;
+  border-left: 1px solid #faeedc;
 }
 
 .single-tf_tours .tf-single-template__one .tf-single-tour-pricing .tf-price-tab li:nth-child(3) {
-  border-left: 1px solid #f8f9fb;
+  border-left: 1px solid #faeedc;
 }
 
 .single-tf_tours .tf-single-template__one .tf-single-tour-pricing .tf-price-tab li.active {
   color: #0E3DD8;
-  background: #f8f9fb;
+  background: #faeedc;
 }
 
 .single-tf_tours .tf-single-template__two .tf-trip-info {
@@ -9725,7 +9725,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 .single-tf_tours .tf-single-template__two .tf-trip-info .person-info.active {
-  background: #f8f9fb;
+  background: #faeedc;
 }
 
 .single-tf_tours .tf-single-template__two .tf-trip-info ul {
@@ -9734,7 +9734,6 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 .single-tf_tours .tf-single-template__two .tf-trip-info li {
-  font-size: 14px;
   font-family: inherit;
   color: #0E3DD8;
   margin-top: 8px;
@@ -9766,7 +9765,6 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 
 .single-tf_tours .tf-single-template__two .tf-trip-info .person-info p {
   font-size: 12px;
-  font-weight: 500;
   color: #060D1C;
   margin: 0;
 }
@@ -9780,7 +9778,6 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   flex-direction: column;
   text-align: right;
   color: #0E3DD8;
-  font-size: 14px;
   display: none;
 }
 
@@ -9794,7 +9791,6 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   color: #060D1C;
   font-size: 26px;
   margin: 4px 0px;
-  font-weight: 500;
 }
 
 @media only screen and (max-width: 767.98px) {
@@ -10045,7 +10041,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   transform: rotateX(90deg);
   transition: all 0.3s ease-in-out;
   width: 100% !important;
-  background: #f8f9fb;
+  background: #faeedc;
   box-shadow: none;
 }
 
@@ -10344,7 +10340,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 .single-tf_tours .tf-single-template__three .tour-external-booking-form {
-  background-color: #f8f9fb;
+  background-color: #faeedc;
   padding: 24px;
 }
 
@@ -10362,7 +10358,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 .single-tf_tours .tf-single-template__three .tf-tour-contact-informations {
-  background-color: #f8f9fb;
+  background-color: #faeedc;
   padding: 24px;
 }
 
@@ -10434,14 +10430,7 @@ div#tf-contact-info {
 }
 
 .single-tf_tours .tf-single-template__two .tf-tour-details-right .tf-booking-price p {
-  font-size: 30px !important;
-  font-weight: 500 !important;
   color: #686E7A;
-}
-
-.single-tf_tours .tf-single-template__two .tf-tour-details-right .tf-booking-price p span {
-  font-size: 14px;
-  font-weight: 400;
 }
 
 .single-tf_tours .tf-single-template__two .tf-tour-details-right .tf-form-title p {
@@ -10450,7 +10439,7 @@ div#tf-contact-info {
 
 .single-tf_tours .tf-single-template__two .tf-tour-details-right .tf-form-title.tf-tour-extra p {
   cursor: pointer;
-  background-color: #f8f9fb;
+  background-color: #faeedc;
   padding: 10px;
   border-radius: 5px;
   display: flex;
@@ -10500,7 +10489,6 @@ div#tf-contact-info {
 
 .single-tf_tours .tf-single-template__two .tf-tour-details-right .tf-tour-extra-box .tf-tour-extra .tf-tour-extra-price p {
   line-height: 1.3;
-  font-size: 14px;
 }
 
 .single-tf_tours .tf-single-template__two .tf-tour-details-right .tf-tour-extra-box .tf-tour-extra .tf-tour-extra-price .tf-tour-extra-input > p {
@@ -10510,10 +10498,6 @@ div#tf-contact-info {
 .single-tf_tours .tf-single-template__two .tf-tour-details-right .tf-booking-bttns button {
   margin-top: 8px;
   padding: 16px 24px;
-}
-
-.single-tf_tours .tf-single-template__two .tf-tour-details-right .tf-data-info p {
-  font-size: 14px;
 }
 
 .single-tf_tours .tf-single-template__two .tf-tour-details-right .tf-tour-booking-advantages {
@@ -10688,7 +10672,7 @@ div#tf-contact-info {
   line-height: 40px;
   border-radius: 100px;
   border: 1px solid #f0f2f4;
-  background: #f8f9fb;
+  background: #faeedc;
   box-shadow: 0px 4px 40px 0px rgba(80, 33, 0, 0.1);
   text-align: center;
   color: #0E3DD8;
@@ -10957,7 +10941,7 @@ div#tf-contact-info {
 }
 
 .tf-tour-template-4.tf-tour-single .tf-details .tf-details-right.tf-archive-right {
-  background-color: #f8f9fb;
+  background-color: #faeedc;
   padding: 32px;
   width: 480px;
   margin-bottom: 56px;
@@ -10991,7 +10975,7 @@ div#tf-contact-info {
 }
 
 .tf-tour-template-4.tf-tour-single .tf-details .tf-details-menu {
-  background: #f8f9fb;
+  background: #faeedc;
   padding: 24px 24px 0 24px;
   border-radius: 4px;
   position: sticky;
@@ -11057,7 +11041,7 @@ div#tf-contact-info {
 }
 
 .tf_template_4_single_hotel #tf-ask-question .tf-aq-outer {
-  background: #f8f9fb;
+  background: #faeedc;
   border-radius: 0px;
 }
 
@@ -11122,7 +11106,7 @@ div#tf-contact-info {
 }
 
 .tf_template_4_single_hotel #tf-hotel-services .tf-hotel-services {
-  background: #f8f9fb;
+  background: #faeedc;
   border-radius: 4px;
   gap: 24px;
 }
@@ -11217,7 +11201,7 @@ div#tf-contact-info {
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
-  border-bottom: 0.5px solid #f8f9fb;
+  border-bottom: 0.5px solid #faeedc;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -11250,8 +11234,8 @@ div#tf-contact-info {
   -webkit-justify-content: center;
   justify-content: center;
   border-radius: 8px;
-  border: 0.5px solid #f8f9fb;
-  background-color: #f8f9fb;
+  border: 0.5px solid #faeedc;
+  background-color: #faeedc;
   padding: 24px 48px;
   max-width: 1050px;
   margin: 0 auto;
@@ -11316,7 +11300,7 @@ div#tf-contact-info {
   .tf_template_4_apartment_archive .tf-search-fields .tf-search-field {
     padding: 16px;
     border-radius: 4px;
-    background: #f8f9fb;
+    background: #faeedc;
   }
 }
 
@@ -11399,7 +11383,7 @@ div#tf-contact-info {
   .tf_template_4_tour_archive .tf-search-fields .tf-search-field-checkinout,
   .tf_template_4_apartment_archive .tf-search-fields .tf-search-field-checkinout {
     border-radius: 4px;
-    background: #f8f9fb;
+    background: #faeedc;
   }
 }
 
@@ -11568,7 +11552,7 @@ div#tf-contact-info {
 .tf_template_4_apartment_archive #tf-apartment-locationautocomplete-list div:hover,
 .tf_template_4_apartment_archive #tf-locationautocomplete-list div:hover,
 .tf_template_4_apartment_archive #tf-destinationautocomplete-list div:hover {
-  background: #f8f9fb;
+  background: #faeedc;
 }
 
 .tf-hotel-template-4 #tf-apartment-locationautocomplete-list div::before,
@@ -11667,7 +11651,7 @@ div#tf-contact-info {
   padding-right: 0px !important;
   border-radius: 4px;
   border: 0.2px solid #686E7A !important;
-  background: #f8f9fb !important;
+  background: #faeedc !important;
 }
 
 .tf-hotel-template-4 .tf_acrselection-wrap .acr-select .acr-dec,
@@ -12201,7 +12185,7 @@ div#tf-contact-info {
 .tf_template_4_hotel_archive .tf-archive-details .tf-archive-top .tf-archive-view li.tf-archive-view-item.active,
 .tf_template_4_tour_archive .tf-archive-details .tf-archive-top .tf-archive-view li.tf-archive-view-item.active,
 .tf_template_4_apartment_archive .tf-archive-details .tf-archive-top .tf-archive-view li.tf-archive-view-item.active {
-  background-color: #f8f9fb;
+  background-color: #faeedc;
 }
 
 .tf-hotel-template-4 .tf-archive-details .tf-archive-top .tf-archive-view li.tf-archive-view-item.active svg path,
@@ -12243,7 +12227,7 @@ div#tf-contact-info {
 .tf_template_4_tour_archive .tf-archive-details .tf-archive-top .tf-archive-view li.tf-archive-filter-btn:hover,
 .tf_template_4_apartment_archive .tf-archive-details .tf-archive-top .tf-archive-view li.tf-archive-filter-btn:hover {
   border-radius: 4px;
-  background: #f8f9fb;
+  background: #faeedc;
   box-shadow: 0px 4px 30px 0px rgba(255, 237, 225, 0.4);
 }
 
@@ -12251,7 +12235,7 @@ div#tf-contact-info {
 .tf_template_4_hotel_archive .tf-archive-details .tf-archive-top .tf-archive-view li.tf-archive-filter-btn.active,
 .tf_template_4_tour_archive .tf-archive-details .tf-archive-top .tf-archive-view li.tf-archive-filter-btn.active,
 .tf_template_4_apartment_archive .tf-archive-details .tf-archive-top .tf-archive-view li.tf-archive-filter-btn.active {
-  background-color: #f8f9fb;
+  background-color: #faeedc;
 }
 
 .tf-hotel-template-4 .tf-archive-details .tf-archive-top .tf-archive-view li.tf-archive-filter-btn.active svg path,
@@ -12324,7 +12308,7 @@ div#tf-contact-info {
 .tf_template_4_tour_archive .tf-archive-details .tf-archive-hotel,
 .tf_template_4_apartment_archive .tf-archive-details .tf-archive-hotel {
   border-radius: 4px;
-  background-color: #f8f9fb;
+  background-color: #faeedc;
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -12384,7 +12368,7 @@ div#tf-contact-info {
   line-height: 14px;
   padding: 8px 16px;
   border-radius: 32px;
-  background-color: #f8f9fb;
+  background-color: #faeedc;
 }
 
 .tf-hotel-template-4 .tf-archive-details .tf-archive-hotel .tf-archive-hotel-content,
@@ -12687,7 +12671,7 @@ div#tf-contact-info {
   line-height: 20px;
   text-decoration: none;
   border-radius: 4px;
-  background-color: #f8f9fb;
+  background-color: #faeedc;
   padding: 8px 24px;
   text-align: center;
   -webkit-transition: all 0.25s ease-in-out;
@@ -13703,7 +13687,7 @@ div#tf-contact-info {
   -moz-transition: all 0.25s ease-in-out;
   -o-transition: all 0.25s ease-in-out;
   transition: all 0.25s ease-in-out;
-  border: 0.5px solid #f8f9fb;
+  border: 0.5px solid #faeedc;
   box-shadow: 0px 4px 30px 0px rgba(255, 237, 225, 0.4);
 }
 
@@ -13713,12 +13697,12 @@ div#tf-contact-info {
 
 .fancybox-container .tf-archive-details .tf-archive-top .tf-archive-view li.tf-archive-filter-btn:hover {
   border-radius: 4px;
-  background: #f8f9fb;
+  background: #faeedc;
   box-shadow: 0px 4px 30px 0px rgba(255, 237, 225, 0.4);
 }
 
 .fancybox-container .tf-archive-details .tf-archive-top .tf-archive-view li.tf-archive-filter-btn.active {
-  background-color: #f8f9fb;
+  background-color: #faeedc;
 }
 
 .fancybox-container .tf-archive-details .tf-archive-top .tf-archive-view li.tf-archive-filter-btn.active svg path {
@@ -13950,7 +13934,7 @@ div#tf-contact-info {
   line-height: 20px;
   text-decoration: none;
   border-radius: 4px;
-  background-color: #f8f9fb;
+  background-color: #faeedc;
   padding: 8px 24px;
   text-align: center;
   -webkit-transition: all 0.25s ease-in-out;
@@ -14328,7 +14312,7 @@ div#tf-contact-info {
 }
 
 .fancybox-container .tf-available-room {
-  background: #f8f9fb;
+  background: #faeedc;
   display: flex;
 }
 
@@ -14803,7 +14787,7 @@ div#tf-contact-info {
 .tf_template_3_global_layouts .fancybox-container #tf_posts_navigation_bar .page-numbers.current,
 .tf_template_3_global_layouts .fancybox-container .tf_posts_ajax_navigation .page-numbers.current,
 .tf_template_3_global_layouts .fancybox-container .tf_posts_page_navigation .page-numbers.current {
-  background: #f8f9fb;
+  background: #faeedc;
   color: #686E7A;
 }
 
@@ -14926,7 +14910,7 @@ div#tf-contact-info {
   width: 45px;
   line-height: 40px;
   border-radius: 100px;
-  border: 1px solid #f8f9fb;
+  border: 1px solid #faeedc;
   background: #060D1C;
   box-shadow: 0px 4px 40px 0px rgba(80, 33, 0, 0.1);
   text-align: center;
@@ -15128,7 +15112,7 @@ div#tf-contact-info {
   display: -webkit-flex;
   display: flex;
   border-radius: 4px;
-  border: 0.5px solid #f8f9fb;
+  border: 0.5px solid #faeedc;
   background: #ffffff;
   box-shadow: 0px 4px 30px 0px rgba(255, 237, 225, 0.4);
   gap: 8px;
@@ -15299,7 +15283,7 @@ div#tf-contact-info {
   flex-direction: column;
   align-self: stretch;
   border-radius: 4px;
-  background: #f8f9fb;
+  background: #faeedc;
 }
 
 .tf-hotel-template-4.tf-hotel-single .tf-hotel-desc-section p {
@@ -15359,7 +15343,7 @@ div#tf-contact-info {
 .tf-hotel-template-4.tf-hotel-single .tf-room-section {
   margin-top: 0;
   border-radius: 8px;
-  background: #f8f9fb;
+  background: #faeedc;
   box-shadow: 0px 9px 12px 0px rgba(14, 19, 35, 0.02);
 }
 
@@ -15377,7 +15361,7 @@ div#tf-contact-info {
   margin-bottom: 32px;
   padding: 16px 24px;
   border-radius: 8px 8px 0px 0px;
-  background: #f8f9fb;
+  background: #faeedc;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -15461,7 +15445,7 @@ div#tf-contact-info {
 
 .tf-hotel-template-4.tf-hotel-single .tf-room-section .tf-room-filter ul li label .checkmark {
   border-radius: 3px;
-  border: 1px solid #f8f9fb;
+  border: 1px solid #faeedc;
   background: #ffffff;
   height: 16px;
   width: 16px;
@@ -15500,7 +15484,7 @@ div#tf-contact-info {
   gap: 24px;
   padding-bottom: 40px;
   margin-bottom: 40px;
-  border-bottom: 4px solid #f8f9fb;
+  border-bottom: 4px solid #faeedc;
   /* If room pricing type == option */
 }
 
@@ -15796,7 +15780,7 @@ div#tf-contact-info {
   padding: 6px 20px 6px 13px;
   background-size: 10px;
   background-position: 80% 49%;
-  border: 1px solid #f8f9fb !important;
+  border: 1px solid #faeedc !important;
   background: #ffffff !important;
   color: #686E7A !important;
   cursor: pointer;
@@ -15807,7 +15791,7 @@ div#tf-contact-info {
 .tf-hotel-template-4.tf-hotel-single .tf-room-section .tf-available-room .tf-available-room-content .tf-available-room-content-bottom {
   padding-top: 16px;
   margin-top: 16px;
-  border-top: 1px solid #f8f9fb;
+  border-top: 1px solid #faeedc;
   width: 100%;
 }
 
@@ -16018,7 +16002,7 @@ div#tf-contact-info {
 .tf-hotel-template-4.tf-hotel-single .tf-hotel-availability-form {
   padding: 24px;
   border-radius: 8px;
-  background: #f8f9fb;
+  background: #faeedc;
 }
 
 .tf-hotel-template-4.tf-hotel-single .tf-hotel-availability-form .tf-field-group {
@@ -16050,7 +16034,6 @@ div#tf-contact-info {
 }
 
 .tf-hotel-template-4.tf-hotel-single .tf-hotel-availability-form .tf-field-group input::placeholder {
-  font-weight: 16px;
   font-size: 14px;
   color: #0E3DD8;
 }
@@ -16093,7 +16076,7 @@ div#tf-contact-info {
 .tf-hotel-template-4.tf-hotel-single .tf-hotel-availability-form .acr-select input[type=number] {
   width: 56px !important;
   border-radius: 4px;
-  background-color: #f8f9fb !important;
+  background-color: #faeedc !important;
   font-size: 14px !important;
 }
 
@@ -16119,7 +16102,7 @@ div#tf-contact-info {
 .tf-hotel-template-4.tf-hotel-single .tf-hotel-facilities-section .tf-hotel-facilities-container {
   padding: 24px;
   border-radius: 4px;
-  background: #f8f9fb;
+  background: #faeedc;
 }
 
 .tf-hotel-template-4.tf-hotel-single .tf-hotel-facilities-section .tf-hotel-facilities-container .tf-hotel-facilities-title {
@@ -16210,7 +16193,7 @@ div#tf-contact-info {
 .tf-hotel-template-4.tf-hotel-single .tf-hotel-faqs-section {
   padding: 24px;
   border-radius: 4px;
-  background: #f8f9fb;
+  background: #faeedc;
 }
 
 .tf-hotel-template-4.tf-hotel-single .tf-hotel-faqs-section .tf-hotel-faq-title-area {
@@ -16240,7 +16223,7 @@ div#tf-contact-info {
 .tf-hotel-template-4.tf-hotel-single .tf-hotel-faqs-section .tf-hotel-faqs .tf-faq-single {
   padding-bottom: 16px;
   margin-bottom: 16px;
-  border-bottom: 1px solid #f8f9fb;
+  border-bottom: 1px solid #faeedc;
 }
 
 .tf-hotel-template-4.tf-hotel-single .tf-hotel-faqs-section .tf-hotel-faqs .tf-faq-single:last-child {
@@ -16311,13 +16294,13 @@ div#tf-contact-info {
 .tf-hotel-template-4.tf-hotel-single .tf-review-wrapper .tf-review-box {
   padding: 24px;
   border-radius: 4px;
-  background: #f8f9fb;
+  background: #faeedc;
 }
 
 .tf-hotel-template-4.tf-hotel-single .tf-review-wrapper .tf-review-data.tf-box {
   padding: 24px;
   border-radius: 4px;
-  background: #f8f9fb;
+  background: #faeedc;
   box-shadow: none;
 }
 
@@ -16335,7 +16318,7 @@ div#tf-contact-info {
 
 .tf-hotel-template-4.tf-hotel-single .tf-review-wrapper .tf-review-data.tf-box .tf-review-data-average p {
   padding: 16px 20px;
-  background: #f8f9fb;
+  background: #faeedc;
   font-size: 30px !important;
   line-height: 46px;
   color: #003C7A !important;
@@ -16409,7 +16392,7 @@ div#tf-contact-info {
 
 .tf-hotel-template-4.tf-hotel-single .tf-review-wrapper .tf-review-data.tf-box .tf-review-data-features .tf-progress-bar {
   height: 5px;
-  background: #f8f9fb;
+  background: #faeedc;
   border-radius: 32px;
   margin-bottom: 8px;
 }
@@ -16439,7 +16422,7 @@ div#tf-contact-info {
   border-bottom: none;
   padding: 24px;
   border-radius: 4px;
-  background: #f8f9fb;
+  background: #faeedc;
   margin-top: 32px;
 }
 
@@ -16544,7 +16527,7 @@ div#tf-contact-info {
   margin-top: 24px;
   padding: 24px;
   border-radius: 4px;
-  background: #f8f9fb;
+  background: #faeedc;
 }
 
 .tf-hotel-template-4.tf-hotel-single .tf-review-wrapper div.tf-review-form .tf-section-title {
@@ -16592,7 +16575,7 @@ div#tf-contact-info {
 
 .tf-hotel-template-4.tf-hotel-single .tf-review-wrapper div.tf-review-form .review-desc textarea {
   border-radius: 4px;
-  border: #f8f9fb;
+  border: #F1F3F4;
   background: #ffffff;
   padding: 8px 16px;
   color: #686E7A;
@@ -16609,7 +16592,7 @@ div#tf-contact-info {
 
 .tf-hotel-template-4.tf-hotel-single .tf-review-wrapper div.tf-review-form .tf-visitor-info input {
   border-radius: 4px;
-  border: #f8f9fb;
+  border: #faeedc;
   background: #ffffff;
   padding: 8px 16px;
   color: #686E7A;
@@ -16639,7 +16622,7 @@ div#tf-contact-info {
 .tf-hotel-template-4.tf-hotel-single .tf-toc-wrapper {
   padding: 24px;
   border-radius: 4px;
-  background: #f8f9fb;
+  background: #faeedc;
 }
 
 .tf-hotel-template-4.tf-hotel-single .tf-toc-wrapper .tf-hotel-toc-title-area {
@@ -16669,7 +16652,7 @@ div#tf-contact-info {
 .tf-hotel-template-4.tf-hotel-single #hotel-map-location {
   padding: 24px;
   border-radius: 8px;
-  background: #f8f9fb;
+  background: #faeedc;
 }
 
 .tf-hotel-template-4.tf-hotel-single #hotel-map-location #hotel-location,
@@ -16680,7 +16663,7 @@ div#tf-contact-info {
 .tf-hotel-template-4.tf-hotel-single #hotel-map-location .tf-whats-around {
   margin-top: 24px;
   padding-top: 24px;
-  border-top: 1px solid #f8f9fb;
+  border-top: 1px solid #faeedc;
 }
 
 .tf-hotel-template-4.tf-hotel-single #hotel-map-location .tf-whats-around .tf-whats-around-title {
@@ -16727,7 +16710,7 @@ div#tf-contact-info {
 .tf-hotel-template-4.tf-hotel-single .tf-send-inquiry {
   padding: 24px;
   border-radius: 8px;
-  background: #f8f9fb;
+  background: #faeedc;
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -16748,7 +16731,7 @@ div#tf-contact-info {
   line-height: 64px;
   text-align: center;
   border-radius: 50%;
-  background-color: #f8f9fb;
+  background-color: #faeedc;
 }
 
 .tf-hotel-template-4.tf-hotel-single .tf-send-inquiry .tf-enquiry-icon-wrap i {
@@ -16893,7 +16876,7 @@ div#tf-contact-info {
 }
 
 .tf_template_4_single_hotel #tf-hotel-services .tf-hotel-services .tf-hotel-service select {
-  border: 1px solid #f8f9fb;
+  border: 1px solid #faeedc;
   background: #ffffff;
   padding: 15px 16px;
   color: #686E7A;
@@ -16958,22 +16941,17 @@ div#tf-contact-info {
   }
 }
 
-.tf-search-tabs__design--4 .tf-booking-form-tab.design-4.tf-multiple-tabs .btn-styled {
-  background: #003C7A !important;
-  border: 0 !important;
-  color: #ffffff !important;
-  padding: 0 !important;
+.tf-search-tabs__design--4 .tf-booking-form-tab.design-4.tf-multiple-tabs .tf_btn {
   min-width: 150px;
   min-height: 46px;
-  border-radius: 32px !important;
-  font-size: 20px !important;
-  font-weight: 400;
-  line-height: 150% !important;
+  font-size: calc(var(--tf-base-font-size) + 6px);
   transition: all 0.2s linear;
+  align-items: center;
+  color: #ffffff;
 }
 
 @media only screen and (max-width: 991.98px) {
-  .tf-search-tabs__design--4 .tf-booking-form-tab.design-4.tf-multiple-tabs .btn-styled {
+  .tf-search-tabs__design--4 .tf-booking-form-tab.design-4.tf-multiple-tabs .tf_btn {
     min-width: 120px;
     min-height: 35px;
     font-size: 16px !important;
@@ -16981,7 +16959,7 @@ div#tf-contact-info {
 }
 
 @media only screen and (max-width: 767.98px) {
-  .tf-search-tabs__design--4 .tf-booking-form-tab.design-4.tf-multiple-tabs .btn-styled {
+  .tf-search-tabs__design--4 .tf-booking-form-tab.design-4.tf-multiple-tabs .tf_btn {
     min-width: auto;
     flex: 1;
     font-size: 15px !important;
@@ -16989,24 +16967,25 @@ div#tf-contact-info {
 }
 
 @media only screen and (max-width: 360px) {
-  .tf-search-tabs__design--4 .tf-booking-form-tab.design-4.tf-multiple-tabs .btn-styled {
+  .tf-search-tabs__design--4 .tf-booking-form-tab.design-4.tf-multiple-tabs .tf_btn {
     font-size: 14px !important;
   }
 }
 
-.tf-search-tabs__design--4 .tf-booking-form-tab.design-4.tf-multiple-tabs .btn-styled:hover {
+.tf-search-tabs__design--4 .tf-booking-form-tab.design-4.tf-multiple-tabs .tf_btn:hover {
+  background-color: #003C7A;
   box-shadow: 0px 3px 0px 0px #0E3DD8;
 }
 
-.tf-search-tabs__design--4 .tf-booking-form-tab.design-4.tf-multiple-tabs .btn-styled::after {
+.tf-search-tabs__design--4 .tf-booking-form-tab.design-4.tf-multiple-tabs .tf_btn::after {
   display: none;
 }
 
-.tf-search-tabs__design--4 .tf-booking-form-tab.design-4.tf-multiple-tabs .btn-styled.active {
+.tf-search-tabs__design--4 .tf-booking-form-tab.design-4.tf-multiple-tabs .tf_btn.active {
   background: #0E3DD8 !important;
 }
 
-.tf-search-tabs__design--4 .tf-booking-form-tab.design-4.tf-multiple-tabs .btn-styled.active:hover {
+.tf-search-tabs__design--4 .tf-booking-form-tab.design-4.tf-multiple-tabs .tf_btn.active:hover {
   box-shadow: none;
 }
 
@@ -17138,7 +17117,7 @@ div#tf-contact-info {
   scrollbar-width: thin;
   scrollbar-color: #808080 #ffffff;
   border-radius: 4px;
-  background: #f8f9fb;
+  background: #faeedc;
   box-shadow: 0px 4px 16px 0px rgba(2, 28, 53, 0.2);
 }
 
@@ -17159,7 +17138,7 @@ div#tf-contact-info {
 }
 
 .tf-search__form__fieldset__left .autocomplete-items div:hover {
-  background: #f8f9fb;
+  background: #faeedc;
   color: #060D1C;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -17762,8 +17741,8 @@ div#tf-contact-info {
 }
 
 .tf-search__form__submit:hover {
-  background: #f8f9fb;
-  border-color: #f8f9fb;
+  background: #faeedc;
+  border-color: #faeedc;
   color: #060D1C;
 }
 
@@ -18039,6 +18018,7 @@ div#tf-contact-info {
 
 .tf-single-head .tf-head-info .tf-title-meta {
   align-items: baseline;
+  color: #686E7A;
 }
 
 .tf-single-head h1 {
@@ -18094,7 +18074,7 @@ div#tf-contact-info {
   display: flex;
   gap: 8px;
   text-decoration: none;
-  color: #060D1C;
+  color: #686E7A;
   line-height: 1em;
   padding: 10px 12px;
   border-radius: 5px;
@@ -18103,6 +18083,7 @@ div#tf-contact-info {
 
 .tf-hero-gallery .tf-gallery-featured .featured-column a:hover {
   background-color: #0E3DD8;
+  color: #ffffff;
   transition: all .6s ease;
 }
 
@@ -18200,13 +18181,11 @@ div#tf-contact-info {
   width: 100%;
   z-index: 1;
   background: #060D1C;
-  font-size: 16px;
 }
 
 @media only screen and (max-width: 767.98px) {
   .tf-hero-gallery .tf-gallery a.tf-gallery-more::before {
     text-align: center;
-    font-size: 12px;
   }
 }
 
@@ -18261,11 +18240,10 @@ div#tf-contact-info {
 }
 
 .tf-review-wrapper .tf-review-data .tf-review-data-average p {
-  background: #f8f9fb;
+  background: #faeedc;
   text-align: center;
   font-size: 30px !important;
   color: #0E3DD8;
-  font-weight: 500;
   border-radius: 5px;
   width: 100px;
   height: 75px;
@@ -18276,7 +18254,6 @@ div#tf-contact-info {
 
 .tf-review-wrapper .tf-review-data .tf-review-data-label p {
   color: #060D1C;
-  font-weight: 500;
 }
 
 .tf-review-wrapper .tf-review-data .tf-review-all-info li {
@@ -18321,7 +18298,7 @@ div#tf-contact-info {
 
 .tf-review-wrapper .tf-review-data .tf-review-data-features .tf-progress-bar {
   height: 7px;
-  background: #f8f9fb;
+  background: #faeedc;
   border-radius: 7px;
 }
 
@@ -18486,7 +18463,7 @@ div#tf-contact-info {
   padding: 15px 20px;
   border: 1px solid #f0f2f4;
   width: 100%;
-  background-color: #f8f9fb;
+  background-color: #F1F3F4;
   border-radius: 5px;
   font-size: 14px;
   color: #686E7A;
@@ -18505,7 +18482,7 @@ div#tf-contact-info {
   padding: 15px 20px;
   border: 1px solid #f0f2f4;
   width: 100%;
-  background-color: #f8f9fb;
+  background-color: #faeedc;
   border-radius: 5px;
   font-size: 14px;
   color: #686E7A;
@@ -18541,7 +18518,7 @@ div#tf-contact-info {
 
 .tf-ask-enquiry i {
   text-align: center;
-  background-color: #f8f9fb;
+  background-color: #F1F3F4;
   border-radius: 50%;
   color: #0E3DD8;
   margin-bottom: 25px;
@@ -18750,10 +18727,6 @@ div#tf-contact-info {
   padding-top: 24px;
 }
 
-.tf-archive-design-1 .tf-archive-right .tf-related-single h2 {
-  font-size: 16px;
-}
-
 .tf-archive-design-1 .tf-archive-right .tf-related-single .tf-related-item-featured {
   min-width: 100px;
   height: 85px;
@@ -18777,7 +18750,7 @@ div#tf-contact-info {
 }
 
 .tf-archive-design-1 .tf-archive-right .tf_widget .al-range-slider__track {
-  background: #f8f9fb;
+  background: #faeedc;
   height: 10px;
   box-shadow: none !important;
   margin: 30px 0px 10px 0px;
@@ -19091,7 +19064,6 @@ div#tf-contact-info {
   padding: 6px 12px;
   border-radius: 50px;
   font-size: 12px;
-  font-weight: 500;
   color: #060D1C;
   line-height: 1;
   margin-right: 10px;
@@ -19102,7 +19074,6 @@ div#tf-contact-info {
   padding: 6px 12px;
   border-radius: 50px;
   font-size: 12px;
-  font-weight: 500;
   color: #ffffff;
   line-height: 1;
   margin-right: 5px;
@@ -19125,7 +19096,6 @@ div#tf-contact-info {
   padding: 6px 12px;
   border-radius: 50px;
   font-size: 12px;
-  font-weight: 500;
   line-height: 1;
   margin-top: 5px;
 }
@@ -19176,7 +19146,7 @@ div#tf-contact-info {
 
 .tf-search-results-list .tf-item-card .tf-item-details .tf-archive-features ul li {
   display: inline-block;
-  background-color: #f8f9fb;
+  background-color: #F1F3F4;
   padding: 6px 10px;
   border-radius: 5px;
   margin: 10px 10px 0px 0px;
@@ -19196,11 +19166,6 @@ div#tf-contact-info {
   line-height: 1.5;
 }
 
-.tf-search-results-list .tf-item-card .tf-item-details .tf-post-footer .tf-pricing {
-  font-size: 12px;
-  font-weight: 400;
-}
-
 .tf-search-results-list .tf-item-card .tf-item-details .tf-post-footer .tf-pricing del {
   font-size: 16px;
 }
@@ -19212,11 +19177,6 @@ div#tf-contact-info {
 .tf-search-results-list .tf-item-card .tf-item-details .tf-post-footer .tf-pricing span {
   font-size: 20px;
   color: #0E3DD8;
-  font-weight: 500;
-}
-
-.tf-search-results-list .tf-item-card .tf-item-details .tf-post-footer .bttn-secondary {
-  font-size: 14px;
 }
 
 @media only screen and (max-width: 991.98px) {
@@ -19344,7 +19304,7 @@ div#tf-contact-info {
 }
 
 .tf-questions-wrapper .tf-questions .tf-questions-col .tf-question.tf-active {
-  background: #f8f9fb;
+  background: #faeedc;
   padding: 24px;
   display: flex;
   flex-direction: column;
@@ -19422,7 +19382,7 @@ div#tf-contact-info {
 
 .tf-policies-wrapper .tf-policies .tf-policy-item > div {
   padding: 24px;
-  background-color: #f8f9fb;
+  background-color: #faeedc;
 }
 
 .tf-policies-wrapper .tf-policies .tf-policy-item .tf-policy-title {
@@ -19434,7 +19394,7 @@ div#tf-contact-info {
 }
 
 .tf-related-items-section {
-  background-color: #f8f9fb;
+  background-color: #faeedc;
   padding: 120px 0px;
 }
 
@@ -19498,7 +19458,7 @@ div#tf-contact-info {
   height: 100%;
   display: flex;
   flex-direction: column;
-  background: #f8f9fb;
+  background: #faeedc;
   justify-content: flex-start;
 }
 
@@ -19510,7 +19470,7 @@ div#tf-contact-info {
 
 .tf-related-items-section .tf-slider-item .tf-meta-info {
   padding: 16px 24px 24px 24px;
-  background-color: #f8f9fb;
+  background-color: #faeedc;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -19627,7 +19587,7 @@ div#tf-contact-info {
 }
 
 .tf-send-inquiry {
-  background: #f8f9fb;
+  background: #faeedc;
   display: flex;
   padding: 56px 80px;
   flex-direction: column;
@@ -19702,11 +19662,11 @@ div#tf-contact-info {
 }
 
 button.tf-review-open.button, .tf-reting-field button {
-  color: #0E3DD8;
+  color: #686E7A;
   font-size: 16px;
   font-weight: 700;
   line-height: 24px;
-  background: #f8f9fb;
+  background: #faeedc;
   width: 100%;
   border: none;
   padding: 12px 0;
@@ -19771,7 +19731,7 @@ button.tf-review-open.button, .tf-reting-field button {
 .tf-review-data-inner .tf-progress-bar {
   width: 100%;
   height: 12px;
-  background: #f8f9fb;
+  background: #faeedc;
   border-radius: 50px;
   display: flex;
 }
@@ -19797,7 +19757,7 @@ button.tf-review-open.button, .tf-reting-field button {
 }
 
 .tf-review-form-wrapper {
-  background: #f8f9fb;
+  background: #faeedc;
   padding: 24px;
   display: none;
   flex-direction: column;
@@ -19861,7 +19821,7 @@ button.tf-review-open.button, .tf-reting-field button {
 
 .tf-review-form-wrapper .tf-review-form-container form input[type="text"], .tf-review-form-wrapper .tf-review-form-container form textarea {
   border: 1px solid #f0f2f4;
-  background: transparent;
+  background: #F1F3F4;
   padding: 8px;
   color: #686E7A;
   font-size: 16px;
@@ -20316,7 +20276,7 @@ button.tf-review-open.button, .tf-reting-field button {
 }
 
 .tf-reviews-wrapper .tf-reviews-slider .tf-reviews-item {
-  background: #f8f9fb;
+  background: #F1F3F4;
   margin-right: 35px !important;
   padding: 24px;
   display: flex !important;
@@ -20513,7 +20473,7 @@ button.tf-review-open.button, .tf-reting-field button {
 
 .tf-popup-wrapper .tf-popup-inner {
   width: 1130px;
-  background: #f8f9fb;
+  background: #faeedc;
   padding: 24px;
   max-height: 695px;
   max-width: 80vw;
@@ -20531,7 +20491,7 @@ button.tf-review-open.button, .tf-reting-field button {
   grid-template-columns: 1fr 1fr 1fr;
   gap: 10px;
   scrollbar-width: thin;
-  scrollbar-color: #808080 #f8f9fb;
+  scrollbar-color: #808080 #faeedc;
 }
 
 @media only screen and (max-width: 767.98px) {
@@ -20567,7 +20527,7 @@ button.tf-review-open.button, .tf-reting-field button {
 }
 
 .tf-popup-wrapper .tf-popup-inner .tf-popup-body::-webkit-scrollbar-track {
-  background-color: #f8f9fb;
+  background-color: #faeedc;
 }
 
 .tf-popup-wrapper .tf-popup-inner .tf-popup-close {
@@ -20578,7 +20538,7 @@ button.tf-review-open.button, .tf-reting-field button {
   height: 30px;
   width: 30px;
   border-radius: 50%;
-  background: #f8f9fb;
+  background: #faeedc;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -20629,7 +20589,7 @@ button.tf-review-open.button, .tf-reting-field button {
   grid-template-columns: 3fr 1fr;
   gap: 10px;
   scrollbar-width: thin;
-  scrollbar-color: #808080 #f8f9fb;
+  scrollbar-color: #808080 #faeedc;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -20732,7 +20692,7 @@ button.tf-review-open.button, .tf-reting-field button {
 }
 
 .tf-search-date-wrapper {
-  background: #f8f9fb;
+  background: #faeedc;
   padding: 24px;
 }
 
@@ -20783,7 +20743,7 @@ button.tf-review-open.button, .tf-reting-field button {
   padding-left: 0px !important;
   padding-right: 0px !important;
   border-radius: 20px;
-  background: #f8f9fb !important;
+  background: #faeedc !important;
 }
 
 .tf-search-date-wrapper form {
@@ -21009,7 +20969,7 @@ button.tf-review-open.button, .tf-reting-field button {
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .traveller-info .traveller-single-info input[type="textarea"],
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .traveller-info .traveller-single-info input[type="date"],
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .traveller-info .traveller-single-info select {
-  background: #f8f9fb !important;
+  background: #faeedc !important;
 }
 
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-pagination .tf-control-pagination button, .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-pagination .tf-control-pagination button {
@@ -21024,11 +20984,11 @@ button.tf-review-open.button, .tf-reting-field button {
 }
 
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.done, .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.done {
-  background-color: #f8f9fb;
+  background-color: #faeedc;
 }
 
 .tf-single-tour-extra .tf_quantity-acrselection .quanity-acr-fields {
-  background-color: #f8f9fb !important;
+  background-color: #faeedc !important;
   padding: 15px 40px !important;
   margin-bottom: 10px !important;
   margin-left: 23px !important;
@@ -21075,7 +21035,7 @@ button.tf-review-open.button, .tf-reting-field button {
 }
 
 .tf-content-wrapper .tf-details .tf-details-left .tf-details-menu {
-  background: #f8f9fb;
+  background: #faeedc;
   padding: 16px 30px;
   position: sticky;
   left: 0;
@@ -21097,7 +21057,7 @@ button.tf-review-open.button, .tf-reting-field button {
   font-size: 16px;
   font-weight: 600;
   line-height: 20.80px;
-  color: #0E3DD8;
+  color: #686E7A;
   border-bottom: 2px solid;
   padding-bottom: 5px;
   display: inline-block;
@@ -21242,7 +21202,7 @@ button.tf-review-open.button, .tf-reting-field button {
   padding: 24px;
   display: flex;
   gap: 16px;
-  background: #f8f9fb;
+  background: #faeedc;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -21287,7 +21247,7 @@ button.tf-review-open.button, .tf-reting-field button {
   padding: 24px;
   display: flex;
   gap: 16px;
-  background: #f8f9fb;
+  background: #faeedc;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -21336,7 +21296,7 @@ button.tf-review-open.button, .tf-reting-field button {
   display: flex;
   gap: 24px;
   padding: 32px 0;
-  background: #f8f9fb;
+  background: #faeedc;
   margin-bottom: 16px;
   border-radius: 0px;
   box-shadow: none;
@@ -21413,7 +21373,7 @@ button.tf-review-open.button, .tf-reting-field button {
 }
 
 .tf-booking-form-wrapper {
-  background: #f8f9fb;
+  background: #faeedc;
 }
 
 @media only screen and (max-width: 767.98px) {
@@ -21652,13 +21612,13 @@ button.tf-review-open.button, .tf-reting-field button {
   left: 0;
   top: 100%;
   width: 250px;
-  background: #f8f9fb;
+  background: #faeedc;
   box-shadow: 0px 20px 40px 0px rgba(0, 0, 0, 0.1);
   z-index: 999;
   max-height: 200px;
   overflow: auto;
   scrollbar-width: thin;
-  scrollbar-color: #f8f9fb #ffffff;
+  scrollbar-color: #faeedc #ffffff;
   padding: 8px;
 }
 
@@ -21678,7 +21638,7 @@ button.tf-review-open.button, .tf-reting-field button {
 .tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-locationautocomplete-list::-webkit-scrollbar-track,
 .tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-destinationautocomplete-list::-webkit-scrollbar-track,
 .tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-apartment-locationautocomplete-list::-webkit-scrollbar-track {
-  background-color: #f8f9fb;
+  background-color: #faeedc;
 }
 
 .tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-locationautocomplete-list div,
@@ -21702,7 +21662,7 @@ button.tf-review-open.button, .tf-reting-field button {
 .tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-locationautocomplete-list div:hover,
 .tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-destinationautocomplete-list div:hover,
 .tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-apartment-locationautocomplete-list div:hover {
-  background: #f8f9fb;
+  background: #faeedc;
 }
 
 .tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-locationautocomplete-list div::before,
@@ -21840,7 +21800,7 @@ button.tf-review-open.button, .tf-reting-field button {
   padding-left: 0px !important;
   padding-right: 0px !important;
   border-radius: 20px;
-  background: #f8f9fb !important;
+  background: #faeedc !important;
 }
 
 .tf_acrselection-wrap .acr-select .acr-dec,
@@ -21937,7 +21897,7 @@ button.tf-review-open.button, .tf-reting-field button {
 }
 
 .tf-available-archive-hetels-wrapper {
-  background: #f8f9fb;
+  background: #faeedc;
   margin-bottom: 56px;
 }
 
@@ -21957,7 +21917,7 @@ button.tf-review-open.button, .tf-reting-field button {
 }
 
 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms-head .tf-archive-ordering #tf-orderby {
-  background-color: #f8f9fb;
+  background-color: #F1F3F4;
   color: #686E7A;
   padding: 15px 36px 15px 15px;
   height: 100%;
@@ -22211,7 +22171,7 @@ button.tf-review-open.button, .tf-reting-field button {
 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf_posts_ajax_navigation .page-numbers,
 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf_posts_page_navigation .page-numbers {
   border: 0.5px solid #808080;
-  background: #f8f9fb;
+  background: #faeedc;
   height: 40px;
   color: #808080;
   font-size: 16px;
@@ -22228,7 +22188,7 @@ button.tf-review-open.button, .tf-reting-field button {
 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms #tf_posts_navigation_bar .page-numbers.current,
 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf_posts_ajax_navigation .page-numbers.current,
 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf_posts_page_navigation .page-numbers.current {
-  background: #f8f9fb;
+  background: #faeedc;
   color: #686E7A;
 }
 
@@ -22257,7 +22217,7 @@ button.tf-review-open.button, .tf-reting-field button {
 }
 
 .tf-details-right.tf-archive-right {
-  background-color: #f8f9fb;
+  background-color: #faeedc;
   padding: 32px;
   width: 480px;
   margin-bottom: 56px;
@@ -22345,7 +22305,7 @@ button.tf-review-open.button, .tf-reting-field button {
 .tf-details-right .tf_widget .tf-filter ul li label .checkmark {
   border-radius: 4px;
   border: 1px solid #0E3DD8;
-  background: #f8f9fb;
+  background: #faeedc;
   height: 16px;
   width: 16px;
 }
@@ -22401,7 +22361,7 @@ button.tf-review-open.button, .tf-reting-field button {
 }
 
 .tf-details-right .tf_widget .al-range-slider__track {
-  background: #f8f9fb;
+  background: #faeedc;
   height: 10px;
   box-shadow: none !important;
   margin: 0px 0px 10px 0px;
@@ -22417,7 +22377,7 @@ button.tf-review-open.button, .tf-reting-field button {
 }
 
 .tf-details-right .tf_widget .al-range-slider__knob {
-  background: #f8f9fb !important;
+  background: #faeedc !important;
   height: 24px;
   width: 24px;
   box-shadow: none !important;
@@ -22466,7 +22426,7 @@ button.tf-review-open.button, .tf-reting-field button {
 }
 
 .tf-available-rooms-wrapper {
-  background: #f8f9fb;
+  background: #faeedc;
   padding: 32px;
   margin-bottom: 32px;
 }
@@ -22512,7 +22472,7 @@ button.tf-review-open.button, .tf-reting-field button {
 .tf-available-rooms-wrapper .tf-room-filter ul li label .checkmark {
   border-radius: 4px;
   border: 1px solid #0E3DD8;
-  background: #f8f9fb;
+  background: #faeedc;
   height: 16px;
   width: 16px;
 }
@@ -22555,7 +22515,7 @@ button.tf-review-open.button, .tf-reting-field button {
 }
 
 .tf-available-rooms-wrapper .tf-available-room {
-  background: #f8f9fb;
+  background: #F1F3F4;
   display: flex;
 }
 
@@ -22879,7 +22839,7 @@ button.tf-review-open.button, .tf-reting-field button {
   background-size: 10px;
   background-position: 80% 49%;
   text-align: center;
-  background-color: #f8f9fb;
+  background-color: #faeedc;
   border: none;
   cursor: pointer;
   font-weight: 700;
@@ -23164,7 +23124,7 @@ button.tf-review-open.button, .tf-reting-field button {
 
 .tf-filter-wrapper .tf-filter-list-item .tf-filter-pricing-range .al-range-slider__track {
   box-shadow: none;
-  background: #f8f9fb;
+  background: #faeedc;
   height: 8px;
   margin: 10px 0 40px 0;
 }
@@ -23181,7 +23141,7 @@ button.tf-review-open.button, .tf-reting-field button {
   height: 24px;
   border-radius: 12px;
   border: 1.5px solid #808080;
-  background: #f8f9fb;
+  background: #faeedc;
   box-shadow: none;
 }
 
@@ -23237,7 +23197,7 @@ button.tf-review-open.button, .tf-reting-field button {
   display: inline-block;
   border-radius: 2px;
   border: 0.794px solid #0E3DD8;
-  background: #f8f9fb;
+  background: #faeedc;
   height: 12px;
   width: 12px;
   margin-right: 8px;

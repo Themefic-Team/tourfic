@@ -1,14 +1,15 @@
 //colors
 $color-primary: #0E3DD8;
 $color-secondary: #003C7A;
+$btn-secondary-bg:#E3E7F2;
+$btn-secondary-text: #060D1C;
 $color-text: #686E7A;
-$color-text-dark: #060D1C; //need to discuss
 $color-heading: #060D1C;
 $color-gray: #808080;
-$color-gray-light: #607085;
+$color-gray-light: #F1F3F4;
 $color-border: #f0f2f4;
 $color-white: #ffffff;
-$color-light-bg: #f8f9fb;
+$color-light-bg: #faeedc;
 $color-light-bg2: #E3E7F2;
 $color-danger: #ff6055;
 $color-danger-light: #fddcda;
@@ -19,22 +20,10 @@ $color-success-light: #dceddd;
 $color-info: #069697;
 $color-info-light: #f0fafa;
 
-//Fonts
-$font-primary: 'Jost', sans-serif;
-$font-secondary: 'Ubuntu', sans-serif;
 
-$font-weight-normal: 400;
-$font-weight-medium: 500;
-
-$font-size-large: 30px;
-$font-size-medium: 24px;
-$font-size-normal: 16px;
-$font-size-small: 14px;
-$font-size-xs: 12px;
 
 // Media Queries
 $min576: "only screen and (min-width: 576px)";
-
 $max1650: "only screen and (max-width: 1650px)";
 $max1600: "only screen and (max-width: 1600px)";
 $max1440: "only screen and (max-width: 1440px)";

@@ -25,16 +25,17 @@
     i{
         position: absolute;
         left: 18px;
+        color: $color-text;
     }
     .tf-field {
         border: none !important;
         padding: 15px 40px !important;
         width: 100% !important;
-        background-color: #F3F7FA !important;
+        background-color: $color-gray-light !important;
         border-radius: 5px !important;
         font-size: 14px !important;
         margin: 0px !important;
-        color: $color-primary !important;
+        color: $color-text !important;
         font-family: inherit;
         background-image: none;
         -moz-appearance: auto !important;
@@ -46,9 +47,8 @@
         }
     }
     input::placeholder {
-        font-weight: $font-size-normal;
         font-size: 14px;
-        color: $color-primary;
+        color: $color-text;
     }
 }
 

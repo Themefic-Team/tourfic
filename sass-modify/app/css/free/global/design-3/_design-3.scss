@@ -324,7 +324,7 @@
     }
 }
 button.tf-review-open.button, .tf-reting-field button {
-    color: $color-primary;
+    color: $color-text;
     font-size: 16px;
     font-weight: 700;
     line-height: 24px;
@@ -465,7 +465,7 @@ button.tf-review-open.button, .tf-reting-field button {
             }
             input[type="text"],textarea{
                 border: 1px solid $color-border;
-                background: transparent;
+                background: $color-gray-light;
                 padding: 8px;
                 color: $color-text;
                 font-size: 16px;
@@ -822,7 +822,7 @@ button.tf-review-open.button, .tf-reting-field button {
 	.tf-reviews-slider { 
 
 		.tf-reviews-item { 
-            background: $color-light-bg;
+            background: $color-gray-light;
             margin-right: 35px !important;
             padding: 24px;
             display: flex !important;
@@ -1499,7 +1499,7 @@ button.tf-review-open.button, .tf-reting-field button {
                             font-size: 16px;
                             font-weight: 600;
                             line-height: 20.80px;
-                            color: $color-primary;
+                            color: $color-text;
                             border-bottom: 2px solid;
                             padding-bottom: 5px;
                             display: inline-block;
@@ -2187,7 +2187,7 @@ button.tf-review-open.button, .tf-reting-field button {
             padding: 12px 16px;
         }
        .tf-archive-ordering #tf-orderby {
-            background-color: $color-light-bg;
+            background-color: $color-gray-light;
             color: $color-text;
             padding: 15px 36px 15px 15px;
             height: 100%;
@@ -2671,7 +2671,7 @@ button.tf-review-open.button, .tf-reting-field button {
         }
     }
     .tf-available-room {
-        background: $color-light-bg;
+        background: $color-gray-light;
         display: flex;
         .tf-available-room-gallery {
             min-width: 230px;

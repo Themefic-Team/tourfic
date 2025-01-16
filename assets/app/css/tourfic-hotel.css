@@ -82,7 +82,7 @@
 }
 
 .single-tf_hotel .tf-single-template__two #tf-single-hotel-avail .tf_booking-dates #check-in-out-date {
-  background-color: #f8f9fb !important;
+  background-color: #faeedc !important;
   padding-top: 3px !important;
   padding-bottom: 3px !important;
 }
@@ -106,6 +106,7 @@
 .single-tf_hotel .tf-single-template__two .tf-tour-booking-box {
   margin-bottom: 25px;
   box-shadow: 0px 13px 30px 0px rgba(224, 232, 238, 0.32);
+  background-color: #faeedc;
 }
 
 .single-tf_hotel .tf-single-template__three .flatpickr-calendar {
@@ -275,7 +276,7 @@
   width: auto !important;
   flex-grow: 1;
   margin: 0 8px;
-  background-color: #f8f9fb;
+  background-color: #faeedc;
   padding: 0;
   border: 2px solid rgba(118, 118, 118, 0.3);
 }
@@ -485,6 +486,10 @@
   margin: 8px 0;
 }
 
+.single-tf_hotel .tf-single-template__one .tf-room-section .availability-table td.description .bed-facilities p {
+  color: #686E7A;
+}
+
 .single-tf_hotel .tf-single-template__one .tf-room-section .availability-table td.pax {
   min-width: 80px;
 }
@@ -671,7 +676,7 @@
 
 .single-tf_hotel .tf-single-template__two .tf-rooms-sections .tf-rooms .tf-availability-table > tbody tr td .tf-features-infos ul li {
   display: inline-block;
-  background: #f8f9fb;
+  background: #F1F3F4;
   border-radius: 5px;
   padding: 10px;
   margin: 5px 10px 5px 0px;
@@ -1097,8 +1102,8 @@
 }
 
 .single-tf_hotel .tf-single-template__two .tf-hotel-faqs-section .tf-hotel-faqs .tf-faq-wrapper .tf-faq-single .tf-faq-single-inner:hover {
-  background: #f8f9fb;
-  box-shadow: 0px 13px 30px 0px #f8f9fb;
+  background: #F1F3F4;
+  box-shadow: 0px 13px 30px 0px #F1F3F4;
 }
 
 .single-tf_hotel .tf-single-template__two .tf-hotel-faqs-section .tf-hotel-faqs .tf-faq-wrapper .tf-faq-single .tf-faq-single-inner h3 {
@@ -1106,8 +1111,8 @@
 }
 
 .single-tf_hotel .tf-single-template__two .tf-hotel-faqs-section .tf-hotel-faqs .tf-faq-wrapper .tf-faq-single.active .tf-faq-single-inner {
-  background: #f8f9fb;
-  box-shadow: 0px 13px 30px 0px #f8f9fb;
+  background: #F1F3F4;
+  box-shadow: 0px 13px 30px 0px #F1F3F4;
 }
 
 .single-tf_hotel .tf-single-template__two .tf-review-wrapper .tf-review-data.tf-box {
@@ -1160,7 +1165,7 @@
 }
 
 .single-tf_hotel .tf-single-template__two .tf-review-wrapper .tf-review-data.tf-box .tf-review-data-average p {
-  background: #f8f9fb;
+  background: #faeedc;
   text-align: center;
   font-size: 30px !important;
   color: #0E3DD8;
@@ -1175,7 +1180,6 @@
 
 .single-tf_hotel .tf-single-template__two .tf-review-wrapper .tf-review-data.tf-box .tf-review-data-label p {
   color: #060D1C;
-  font-weight: 500;
 }
 
 .single-tf_hotel .tf-single-template__two .tf-review-wrapper .tf-review-data.tf-box .tf-review-all-info li {
@@ -1215,7 +1219,7 @@
 
 .single-tf_hotel .tf-single-template__two .tf-review-wrapper .tf-review-data.tf-box .tf-review-data-features .tf-progress-bar {
   height: 7px;
-  background: #f8f9fb;
+  background: #faeedc;
   border-radius: 7px;
 }
 
@@ -1519,7 +1523,7 @@
 }
 
 .tf-template-3 .tf-section {
-  background: #f8f9fb;
+  background: #faeedc;
   padding: 32px;
   margin-bottom: 32px;
 }
@@ -1556,7 +1560,7 @@
 }
 
 .tf-template-3 .tf-scroll-bar::-webkit-scrollbar-track {
-  background: #f8f9fb;
+  background: #faeedc;
 }
 
 .tf-template-3 .tf-scroll-bar::-webkit-scrollbar-thumb {
@@ -1612,7 +1616,7 @@
 }
 
 .tf_template_3_global_layouts #tf-ask-question .tf-aq-outer {
-  background: #f8f9fb;
+  background: #faeedc;
   border-radius: 0px;
 }
 
@@ -1628,7 +1632,7 @@
   border: 1px solid #f0f2f4;
   box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
   color: #686E7A;
-  background-color: #f8f9fb;
+  background-color: #faeedc;
   font-size: 16px;
   height: 45px;
   padding: 12px 14px;
@@ -1642,7 +1646,7 @@
 .tf_template_3_global_layouts #tf-ask-question .tf-aq-field textarea {
   border: 1px solid #f0f2f4;
   box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
-  background-color: #f8f9fb;
+  background-color: #faeedc;
   color: #686E7A;
   font-size: 16px;
   font-weight: 400;
@@ -1674,7 +1678,7 @@
 }
 
 .tf_template_3_global_layouts #tf-hotel-services .tf-hotel-services {
-  background: #f8f9fb;
+  background: #faeedc;
   border-radius: 0px;
   gap: 0px;
 }
@@ -1706,7 +1710,7 @@
 
 .tf_template_3_global_layouts #tf-hotel-services .tf-hotel-services .tf-hotel-service select {
   border-radius: 0px;
-  background: #f8f9fb;
+  background: #faeedc;
   height: 45px;
   border: 1px solid #686E7A;
 }

@@ -178,7 +178,7 @@
 }
 
 .tf-apartment-title .tf-title-right .tf-share .share-tour-content .tf-dropdown-item:hover {
-  background-color: #f8f9fb;
+  background-color: #faeedc;
 }
 
 .tf-apartment-title .tf-title-right .tf-share .share-tour-content .share-center-copy-form {
@@ -236,7 +236,7 @@
 }
 
 .tf-apartment-title .tf-map-link .more-apartment {
-  color: #607085;
+  color: #0E3DD8;
   font-weight: 600;
 }
 
@@ -545,11 +545,11 @@
 .tf-template-1 .tf-apt-highlights .tf-apt-highlight .tf-apt-highlight-icon i {
   font-size: 24px;
   line-height: 1;
-  color: #607085;
+  color: #F1F3F4;
 }
 
 .tf-template-1 .tf-apt-highlights .tf-apt-highlight h4 {
-  color: #607085;
+  color: #F1F3F4;
   margin: 0;
   font-size: 20px !important;
   font-weight: 500 !important;
@@ -570,7 +570,7 @@
 
 .tf-template-3 .tf-apartment-rooms-section .tf-apartment-room-details {
   border-radius: 4px;
-  background: #f8f9fb;
+  background: #faeedc;
   padding: 24px 24px 28px 24px;
 }
 
@@ -889,7 +889,7 @@
   flex-wrap: wrap;
   gap: 30px;
   padding: 24px;
-  background-color: #f8f9fb;
+  background-color: #faeedc;
   border: 1px solid #f0f2f4;
   border-radius: 8px;
 }
@@ -1057,7 +1057,7 @@
 .tf-template-1 .tf-apartment-amenities-section .tf-apartment-amenities-inner {
   border-radius: 8px;
   border: 1px solid #f0f2f4;
-  background: #f8f9fb;
+  background: #faeedc;
   padding: 24px 40px;
 }
 
@@ -1302,7 +1302,7 @@
 }
 
 .tf-template-1 .tf-apartment-faq .tf-faq-content-wrapper {
-  background: #f8f9fb;
+  background: #faeedc;
   border: 1px solid #f0f2f4;
   border-radius: 8px;
   padding: 40px;
@@ -1398,7 +1398,7 @@
   border-radius: 4px;
   padding: 12px 16px;
   background-color: #ffffff;
-  color: #607085;
+  color: #F1F3F4;
   font-size: 16px;
   font-weight: 400;
   transition: all 0.3s ease-in-out;
@@ -1453,7 +1453,7 @@
 }
 
 .tf-template-1 .tf-apartment-review .tf-review-progress-bar {
-  background: #f8f9fb;
+  background: #faeedc;
   border-radius: 8px;
   border: 1px solid #f0f2f4;
   column-gap: 200px;
@@ -1507,7 +1507,7 @@
 .tf-template-1 .show-all-review-wrap {
   padding: 8px 24px;
   border-radius: 4px;
-  background: #f8f9fb;
+  background: #faeedc;
   border: 1px solid #0E3DD8;
   width: 200px;
   margin: auto;
@@ -1696,7 +1696,7 @@
 }
 
 .tf-template-1 #tf-apartment-booking .tf-apartment-form-fields {
-  background: #f8f9fb;
+  background: #faeedc;
   border: 1px solid #f0f2f4;
   border-radius: 8px;
   margin-bottom: 16px;
@@ -1813,7 +1813,7 @@
   padding: 0 !important;
   border: none;
   width: 100%;
-  color: #607085;
+  color: #F1F3F4;
 }
 
 .tf-template-1 #tf-apartment-booking .tf-apartment-form-fields .tf-apartment-guest-row .tf_selectperson-wrap .tf_acrselection-wrap {
@@ -1864,11 +1864,11 @@
   -webkit-justify-content: space-between;
   justify-content: space-between;
   margin-bottom: 8px;
-  color: #607085;
+  color: #F1F3F4;
 }
 
 .tf-template-1 #tf-apartment-booking .tf-apartment-price-list li .tf-price-list-label {
-  color: #607085;
+  color: #F1F3F4;
 }
 
 .tf-template-1 #tf-apartment-booking .tf-apartment-price-list li .tf-price-list-price {
@@ -2123,7 +2123,7 @@
   font-weight: 500;
   line-height: 1.33;
   letter-spacing: 0.5px;
-  color: #607085;
+  color: #F1F3F4;
   margin: 0;
 }
 
