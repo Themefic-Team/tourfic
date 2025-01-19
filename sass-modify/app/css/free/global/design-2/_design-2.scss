@@ -663,6 +663,10 @@
                 .tf-tour-details-right {
                     flex-basis: 32%;
                     width: 32%;
+                    padding-left: 30px;
+                    top: 0;
+                    align-self: flex-start;
+
                     @media #{$tfmax991}{
                         flex-basis: 40%;
                         padding-left: $tf-space-12;
@@ -672,6 +676,8 @@
                         flex-basis: 100%;
                         width: 58%;
                         margin-top: 30px;
+                        padding-left: 0px;
+                        position: static;
                     }
                 }
             }

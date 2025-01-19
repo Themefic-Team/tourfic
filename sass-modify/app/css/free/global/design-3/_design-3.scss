@@ -189,64 +189,6 @@
                     }
                 }
             }
-            #tf-hotel-services{
-                .tf-hotel-services{
-                    background: $color-light-bg;
-                    border-radius: 0px;
-                    gap: 0px;
-                    .tf-hotel-services-text{
-                        h3{
-                            color: $color-heading;
-                            text-align: center;
-                            font-size: 32px !important;
-                            font-weight: 700 !important;
-                            margin-bottom: 8px;
-                        }
-                        p{
-                            color: $color-text;
-                            text-align: center;
-                            font-size: 16px !important;
-                            font-weight: 400 !important;
-                            margin-top: 0px;
-                            margin-bottom: 32px;
-                        }
-                    }
-                    .tf-hotel-service{
-                        label{
-                            color: $color-text;
-                            font-size: 16px;
-                            font-weight: 600;
-                            margin-bottom: 6px;
-                            display: block;
-                        }
-                        select{
-                            border-radius: 0px;
-                            background: $color-light-bg;
-                            height: 45px;
-                            border: 1px solid $color-text;
-                        }
-                    }
-                    .tf-airport-pickup-response{
-                        margin-top: 15px;
-                    }
-                    .tf_button_group{
-                        height: auto;
-                        button{
-                            background: $color-primary !important;
-                            border-color: $color-primary !important;
-                            border-radius: 0px !important;
-                            padding: 12px 32px !important;
-                            color: $color-white !important;
-                            font-size: 16px !important;
-                            font-weight: 700;
-                            transition: .3s all ease;
-                            &:hover{
-                                background: $color-secondary !important;
-                            }
-                        }
-                    }
-                }
-            }
             .tf-available-rooms-wrapper{
                 @media only screen and (max-width: 1280px) {
                     padding: 16px;

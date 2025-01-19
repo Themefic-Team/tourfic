@@ -2,14 +2,6 @@
     .tf-single-template{
         &__two{
             .tf-tour-details-right {
-                padding-left: 30px;
-                top: 0;
-                align-self: flex-start;
-                @media #{$tfmax767}{
-                    padding-left: 0px;
-                    position: static;
-                }
-            
                 .tf-tour-booking-box  {
                     background: $color-light-bg;
                     border-radius: $tf-brds-default;
