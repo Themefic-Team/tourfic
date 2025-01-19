@@ -6425,12 +6425,18 @@ a.page-numbers {
 .post-type-archive-tf_tours .tf-archive-template__one .single-tour-wrap.tf-featured .single-tour-inner,
 .post-type-archive-tf_hotel .tf-archive-template__one .single-tour-wrap.tf-featured .single-tour-inner,
 .post-type-archive-tf_apartment .tf-archive-template__one .single-tour-wrap.tf-featured .single-tour-inner,
+.tax-hotel_location .tf-archive-template__one .single-tour-wrap.tf-featured .single-tour-inner,
+.tax-tour_destination .tf-archive-template__one .single-tour-wrap.tf-featured .single-tour-inner,
+.tax-apartment_location .tf-archive-template__one .single-tour-wrap.tf-featured .single-tour-inner,
 .page-template-tf-search .tf-archive-template__one .single-tour-wrap.tf-featured .single-tour-inner {
   position: relative;
 }
 .post-type-archive-tf_tours .tf-archive-template__one .single-tour-wrap.tf-featured .single-tour-inner .tf-featured-badge,
 .post-type-archive-tf_hotel .tf-archive-template__one .single-tour-wrap.tf-featured .single-tour-inner .tf-featured-badge,
 .post-type-archive-tf_apartment .tf-archive-template__one .single-tour-wrap.tf-featured .single-tour-inner .tf-featured-badge,
+.tax-hotel_location .tf-archive-template__one .single-tour-wrap.tf-featured .single-tour-inner .tf-featured-badge,
+.tax-tour_destination .tf-archive-template__one .single-tour-wrap.tf-featured .single-tour-inner .tf-featured-badge,
+.tax-apartment_location .tf-archive-template__one .single-tour-wrap.tf-featured .single-tour-inner .tf-featured-badge,
 .page-template-tf-search .tf-archive-template__one .single-tour-wrap.tf-featured .single-tour-inner .tf-featured-badge {
   width: 150px;
   height: 150px;
@@ -6444,6 +6450,12 @@ a.page-numbers {
 .post-type-archive-tf_hotel .tf-archive-template__one .single-tour-wrap.tf-featured .single-tour-inner .tf-featured-badge::after,
 .post-type-archive-tf_apartment .tf-archive-template__one .single-tour-wrap.tf-featured .single-tour-inner .tf-featured-badge::before,
 .post-type-archive-tf_apartment .tf-archive-template__one .single-tour-wrap.tf-featured .single-tour-inner .tf-featured-badge::after,
+.tax-hotel_location .tf-archive-template__one .single-tour-wrap.tf-featured .single-tour-inner .tf-featured-badge::before,
+.tax-hotel_location .tf-archive-template__one .single-tour-wrap.tf-featured .single-tour-inner .tf-featured-badge::after,
+.tax-tour_destination .tf-archive-template__one .single-tour-wrap.tf-featured .single-tour-inner .tf-featured-badge::before,
+.tax-tour_destination .tf-archive-template__one .single-tour-wrap.tf-featured .single-tour-inner .tf-featured-badge::after,
+.tax-apartment_location .tf-archive-template__one .single-tour-wrap.tf-featured .single-tour-inner .tf-featured-badge::before,
+.tax-apartment_location .tf-archive-template__one .single-tour-wrap.tf-featured .single-tour-inner .tf-featured-badge::after,
 .page-template-tf-search .tf-archive-template__one .single-tour-wrap.tf-featured .single-tour-inner .tf-featured-badge::before,
 .page-template-tf-search .tf-archive-template__one .single-tour-wrap.tf-featured .single-tour-inner .tf-featured-badge::after {
   position: absolute;
@@ -6457,6 +6469,9 @@ a.page-numbers {
 .post-type-archive-tf_tours .tf-archive-template__one .single-tour-wrap.tf-featured .single-tour-inner .tf-featured-badge::before,
 .post-type-archive-tf_hotel .tf-archive-template__one .single-tour-wrap.tf-featured .single-tour-inner .tf-featured-badge::before,
 .post-type-archive-tf_apartment .tf-archive-template__one .single-tour-wrap.tf-featured .single-tour-inner .tf-featured-badge::before,
+.tax-hotel_location .tf-archive-template__one .single-tour-wrap.tf-featured .single-tour-inner .tf-featured-badge::before,
+.tax-tour_destination .tf-archive-template__one .single-tour-wrap.tf-featured .single-tour-inner .tf-featured-badge::before,
+.tax-apartment_location .tf-archive-template__one .single-tour-wrap.tf-featured .single-tour-inner .tf-featured-badge::before,
 .page-template-tf-search .tf-archive-template__one .single-tour-wrap.tf-featured .single-tour-inner .tf-featured-badge::before {
   top: 0;
   right: 0;
@@ -6464,6 +6479,9 @@ a.page-numbers {
 .post-type-archive-tf_tours .tf-archive-template__one .single-tour-wrap.tf-featured .single-tour-inner .tf-featured-badge::after,
 .post-type-archive-tf_hotel .tf-archive-template__one .single-tour-wrap.tf-featured .single-tour-inner .tf-featured-badge::after,
 .post-type-archive-tf_apartment .tf-archive-template__one .single-tour-wrap.tf-featured .single-tour-inner .tf-featured-badge::after,
+.tax-hotel_location .tf-archive-template__one .single-tour-wrap.tf-featured .single-tour-inner .tf-featured-badge::after,
+.tax-tour_destination .tf-archive-template__one .single-tour-wrap.tf-featured .single-tour-inner .tf-featured-badge::after,
+.tax-apartment_location .tf-archive-template__one .single-tour-wrap.tf-featured .single-tour-inner .tf-featured-badge::after,
 .page-template-tf-search .tf-archive-template__one .single-tour-wrap.tf-featured .single-tour-inner .tf-featured-badge::after {
   bottom: 0;
   left: 0;
@@ -6471,6 +6489,9 @@ a.page-numbers {
 .post-type-archive-tf_tours .tf-archive-template__one .single-tour-wrap.tf-featured .single-tour-inner .tf-featured-badge span,
 .post-type-archive-tf_hotel .tf-archive-template__one .single-tour-wrap.tf-featured .single-tour-inner .tf-featured-badge span,
 .post-type-archive-tf_apartment .tf-archive-template__one .single-tour-wrap.tf-featured .single-tour-inner .tf-featured-badge span,
+.tax-hotel_location .tf-archive-template__one .single-tour-wrap.tf-featured .single-tour-inner .tf-featured-badge span,
+.tax-tour_destination .tf-archive-template__one .single-tour-wrap.tf-featured .single-tour-inner .tf-featured-badge span,
+.tax-apartment_location .tf-archive-template__one .single-tour-wrap.tf-featured .single-tour-inner .tf-featured-badge span,
 .page-template-tf-search .tf-archive-template__one .single-tour-wrap.tf-featured .single-tour-inner .tf-featured-badge span {
   position: absolute;
   display: block;
