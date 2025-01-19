@@ -19,6 +19,11 @@
 @import 'modules/single/_feature';
 //Single Modules End
 
+//Archive Modules Start
+@import 'modules/archive/_search-form';
+@import 'modules/archive/_listing';
+@import 'modules/archive/_sidebar';
+//Archive Modules End
 
 .tf-template-container {
     max-width: 1240px;
