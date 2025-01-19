@@ -147,7 +147,7 @@
         scrollbar-width: thin;
         scrollbar-color: $color-gray $color-white;
         border-radius: 4px;
-        background: $color-light-bg;
+        background: $color-white;
         box-shadow: 0px 4px 16px 0px rgba(2, 28, 53, 0.2);
         div {
           color: $color-text;
@@ -449,7 +449,7 @@
           }
           svg {
             &:hover {
-              fill: $color-secondary;
+              fill: $color-primary-light;
             }
             @media #{$max991} {
               width: 28px;
@@ -587,7 +587,7 @@
     -moz-appearance: none;
     appearance: none;
     width: 100%;
-    background: $color-secondary;
+    background: $color-primary-light;
     color: $color-white !important;
     border: 0 !important;
     font-size: 16px;

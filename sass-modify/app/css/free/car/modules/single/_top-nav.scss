@@ -69,7 +69,7 @@
                     width: 100%;
                 }
                 &::before{
-                    background: linear-gradient(90deg, rgba(217, 217, 217, 0.00) 0%, $color-light-bg 100%);
+                    background: linear-gradient(90deg, rgba(217, 217, 217, 0.00) 0%, $color-gray-light 100%);
                     position: absolute;
                     content: "";
                     right: 0;

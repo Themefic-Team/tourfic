@@ -33,7 +33,7 @@
   color: #686E7A;
   font-size: 16px;
   font-weight: 400;
-  background: #faeedc;
+  background: rgba(255, 255, 255, 0.24);
   backdrop-filter: blur(32px);
 }
 
@@ -339,7 +339,7 @@
 }
 
 .single-tf_carrental .tf-single-template__one .tf-details-menu::before {
-  background: linear-gradient(90deg, rgba(217, 217, 217, 0) 0%, #faeedc 100%);
+  background: linear-gradient(90deg, rgba(217, 217, 217, 0) 0%, #F1F3F4 100%);
   position: absolute;
   content: "";
   right: 0;
@@ -573,7 +573,7 @@
 .single-tf_carrental .tf-single-template__one .tf-car-inc-exc-section .tf-inc-exe .tf-inc-list ul li,
 .single-tf_carrental .tf-single-template__one .tf-car-inc-exc-section .tf-inc-exe .tf-exc-list ul li {
   border-radius: 6px;
-  background: #faeedc;
+  background: #F1F3F4;
   padding: 8px 16px 8px 12px;
   color: #686E7A;
   font-size: 16px;
@@ -618,7 +618,7 @@
 
 .single-tf_carrental .tf-single-template__one .tf-car-faq-section .tf-faq-col .tf-faq-head {
   border-radius: 8px;
-  background: #faeedc;
+  background: #F1F3F4;
   padding: 8px 16px;
   cursor: pointer;
 }
@@ -899,7 +899,7 @@
 
 .single-tf_carrental .tf-single-template__one .tf-date-select-box {
   border-radius: 16px;
-  background: #faeedc;
+  background: #F5FAFF;
   padding: 8px 8px 16px 8px;
   margin-bottom: 32px;
 }
@@ -1491,7 +1491,7 @@
 
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-driver-details {
   border-radius: 16px;
-  background: #faeedc;
+  background: #F1F3F4;
   padding: 24px;
 }
 
@@ -1940,7 +1940,7 @@
   width: 52px;
   display: flex;
   border-radius: 8px;
-  background: #faeedc;
+  background: #F5FAFF;
   align-items: center;
   justify-content: center;
   cursor: pointer;
@@ -2030,7 +2030,7 @@
 
 .post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view {
   border-radius: 16px;
-  background: #faeedc;
+  background: #f8fafc;
   width: calc(50% - 16px);
 }
 
@@ -2329,7 +2329,7 @@
 .post-type-archive-tf_carrental .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar {
   width: 358px;
   border-radius: 16px;
-  background: #faeedc;
+  background: #F5FAFF;
   padding: 32px;
 }
 
@@ -3228,7 +3228,7 @@
 
 .tf-archive-car-section .tf-archive-search-box-wrapper {
   border-radius: 16px;
-  background: #faeedc;
+  background: #F1F3F4;
   box-shadow: 0px 24px 60px 0px rgba(0, 15, 63, 0.16);
 }
 
@@ -3295,7 +3295,7 @@
 
 .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box {
   border-radius: 24px;
-  background: #faeedc;
+  background: #F1F3F4;
   padding: 8px;
   position: relative;
   top: -60px;
