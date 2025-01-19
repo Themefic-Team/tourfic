@@ -1,5 +1,6 @@
 .tf-single-template,
-.tf-archive-template {
+.tf-archive-template,
+.page-template-tf-search{
     &__three{
         padding: 60px 0px;
         width: 100%;
@@ -68,13 +69,6 @@
 }
 
 // Single Global Start
-.single-tf_tours{
-    .tf-single-template{
-        &__three{
-            margin-bottom: 0;
-        }
-    }
-}
 .single-tf_apartment,
 .single-tf_hotel{
     .tf-single-template{
@@ -431,6 +425,7 @@
 .single-tf_tours{
     .tf-single-template{
         &__three{
+            margin-bottom: 0;
             .tf-content-wrapper{
                 .tf-details{
                     @media only screen and (max-width: 767.98px) {
@@ -2267,7 +2262,8 @@
 // Single Global End
 
 // Archive Global Start
-.tf-archive-template{
+.tf-archive-template,
+.page-template-tf-search{
     &__three{
         .tf-hero-section-wrap {
             background-size: cover;
