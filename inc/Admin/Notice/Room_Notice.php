@@ -27,7 +27,7 @@ class Room_Notice extends \Tourfic\Core\TF_Notice {
 		if ( get_option( 'tf_dismiss_211' ) < 1 ) {
             ?>
                 <div class="tf-critical-update-notice notice notice-info is-dismissible">
-                    <p><?php echo wp_kses_post( __('<b">A Big Improvement to Tourfic Coming Soon: </b>We’re excited to announce that we’ve decided to take the <b>Rooms</b> for the <b>Tourfic Design Panel</b> to the next level! The existing design panel will be revamped into a cleaner, smarter, and more user-friendly interface. To learn more about the upcoming design panel <a href="https://themefic.com/tourfics-big-improvement-a-cleaner-smarter-design-panel/" target="_blank"><b>check this blog</b></a>.', "tourfic")); ?></p>
+                    <p><?php echo wp_kses_post( __('<b">A Major Improvement to Tourfic Is Coming Soon: </b>We’re excited to announce that we’ve decided to take the <b>Rooms</b> for the <b>Tourfic Design Panel</b> to the next level! The existing design panel will be revamped into a cleaner, smarter, and more user-friendly interface. To learn more about the upcoming design panel <a href="https://themefic.com/tourfics-big-improvement-a-cleaner-smarter-design-panel/" target="_blank"><b>check this blog</b></a>.', "tourfic")); ?></p>
                 </div>
 
                 <script>
