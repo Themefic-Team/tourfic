@@ -7,14 +7,6 @@
 @import 'global/shortcode';
 @import 'global/search/search';
 @import 'global/widgets/widgets';
-//Base for templates
-
-@import 'hotel/hotel';
-@import 'tour/tour';
-// @import "apartment/apartment";
-
-// search form
-@import 'search-form/template-4';
 
 // Template 1 Global
 @import 'global/design-1/design-1';
@@ -27,3 +19,8 @@
 
 // Template 4 Global
 @import 'global/design-4/design-4';
+
+//Base for templates
+@import 'hotel/hotel';
+@import 'tour/tour';
+// @import "apartment/apartment";
