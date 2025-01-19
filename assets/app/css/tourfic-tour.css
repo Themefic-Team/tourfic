@@ -3094,6 +3094,14 @@ div#tf-contact-info {
   margin-right: 8px;
 }
 
+.post-type-archive-tf_tours .tf-archive-template__four .tf-search-fields .tf-search-field .tf-search-input {
+  width: 120px;
+}
+.post-type-archive-tf_tours .tf-archive-template__four .tf-search-fields .tf-search-field-checkinout .tf-search-field .tf-search-input {
+  width: 180px;
+  cursor: pointer;
+}
+
 .tf-template-container {
   max-width: 1240px;
   margin: 0 auto;

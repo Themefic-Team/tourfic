@@ -167,7 +167,7 @@ class Map_Filter extends \WP_Widget {
                                 <ellipse cx="16" cy="42.5" rx="11" ry="2.5" fill="#141F43" fill-opacity="0.25"/>
                                 <path d="M14 41.0171C9.66667 35.6849 0 22.9696 0 15.7506C0 7.05494 7.08333 0 16 0C24.8333 0 32 7.05494 32 15.7506C32 22.9696 22.25 35.6849 17.9167 41.0171C16.9167 42.2476 15 42.2476 14 41.0171ZM16 21.0008C18.9167 21.0008 21.3333 18.7038 21.3333 15.7506C21.3333 12.8794 18.9167 10.5004 16 10.5004C13 10.5004 10.6667 12.8794 10.6667 15.7506C10.6667 18.7038 13 21.0008 16 21.0008Z" fill="#0E3DD8"/>
                             </svg>
-                            <span class="btn-styled tf-map-modal-btn"><?php echo esc_html($button_title); ?></span>
+                            <span class="tf_btn tf-map-modal-btn"><?php echo esc_html($button_title); ?></span>
                         </div>
                     </div>
 
