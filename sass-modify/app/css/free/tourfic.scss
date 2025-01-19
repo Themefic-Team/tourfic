@@ -4,21 +4,14 @@
 @import '../../../common/global';
 @import '../../../common/reset';
 @import 'global/common';
-@import 'global/search-result';
 @import 'global/shortcode';
+@import 'global/search/search';
+@import 'global/widgets/widgets';
 //Base for templates
 
 @import 'hotel/hotel';
 @import 'tour/tour';
 // @import "apartment/apartment";
-
-//Tour Templates
-@import 'tour/template3/archive';
-
-//Hotel Templates
-@import 'hotel/template3/archive';
-@import 'hotel/template3/map-popup';
-
 
 // search form
 @import 'search-form/template-4';
@@ -31,3 +24,6 @@
 
 // Template 3 Global
 @import 'global/design-3/design-3';
+
+// Template 4 Global
+@import 'global/design-4/design-4';
