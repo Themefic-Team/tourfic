@@ -44,7 +44,7 @@
 
         &:hover {
             @include rotate(0);
-            background-color: #0E3DD8;
+            background-color: $color-primary;
             color: $color-white;
         }
     }

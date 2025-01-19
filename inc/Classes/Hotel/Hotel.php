@@ -1865,7 +1865,6 @@ class Hotel {
             </script>
 		<?php }elseif( !empty($design) && 3==$design ){ ?>
 			<form class="tf-archive-search-box-wrapper <?php echo esc_attr( $classes ); ?>" id="tf_hotel_aval_check" method="get" autocomplete="off" action="<?php echo esc_url( Helper::tf_booking_search_action() ); ?>">
-
 				<div class="tf-date-selection-form">
 				<div class="tf-date-select-box tf-flex tf-flex-gap-8">
 					<div class="tf-date-single-select tf-flex tf-flex-gap-8 tf-flex-space-bttn tf-pick-drop-location full-width">

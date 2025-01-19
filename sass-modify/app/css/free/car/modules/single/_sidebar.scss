@@ -36,7 +36,7 @@
                 }
                 .tf-extra-added-info{
                     border-radius: 16px;
-                    background: $color-light-bg;
+                    background: $color-gray-light;
                     padding: 16px 24px 24px 24px;
                     margin-bottom: 32px;
                     display: none;
@@ -80,7 +80,7 @@
                 }
                 .tf-add-extra-section{
                     border-radius: 16px;
-                    background: $color-light-bg;
+                    background: $color-gray-light;
                     padding: 16px 24px 24px 24px;
                     margin-bottom: 32px;
                     h3{
@@ -94,7 +94,7 @@
                         .tf-car-single-extra{
                             padding: 12px 16px 16px 16px;
                             border-radius: 8px;
-                            background: $color-light-bg;
+                            background: $color-gray-light;
                             .tf-extra-title{
                                 width: calc(100% - 95px);
                                 h4{
@@ -153,7 +153,7 @@
                                 }
                                 .acr-select{
                                     border-radius: 8px;
-                                    background: $color-light-bg;
+                                    background: $color-gray-light;
                                     padding: 4px 8px;
                                     width: auto;
                                     display: inline-flex;
@@ -162,7 +162,7 @@
                                     margin-top: 5px;
                                     .acr-dec,
                                     .acr-inc{
-                                        color: $color-primary;
+                                        color: $color-secondary;
                                         border: 0px solid;
                                         background-color: transparent;
                                         width: auto;
@@ -201,7 +201,7 @@
                             button{
                                 padding: 12px 32px;
                                 border-radius: 8px;
-                                background: $color-light-bg;
+                                background: $color-gray-light;
                                 color:$color-primary;
                                 font-size: 16px;
                                 font-weight: 700;
