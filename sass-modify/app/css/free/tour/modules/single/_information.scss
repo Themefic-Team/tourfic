@@ -16,7 +16,7 @@
                         background: $color-white;
                         box-shadow: 0px 8px 16px rgba(90, 91, 106, 0.08);
                         border-radius: 4px;
-                        color: $color-primary;
+                        color: $color-text;
                         border: 1px solid $color-white;
                         padding: 50px 20px;
                         min-height: 100px;
@@ -125,7 +125,7 @@
                         color: $color-heading;
                     }
                     p{
-                        color: $color-primary;
+                        color: $color-text;
                         margin-top: $tf-space-8;
                     }
                     .repeat-dates {

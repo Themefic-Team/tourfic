@@ -62,7 +62,7 @@
                     }
                     li.active {
                         color: $color-primary;
-                        background: $color-light-bg;
+                        background: $color-gray-light;
                     }
                 }
             }
@@ -75,7 +75,7 @@
             
                 // trip info -
                 .person-info.active {
-                    background: $color-light-bg;
+                    background: $color-blue-light;
                 }
                 ul {
                     padding: 0;
@@ -83,7 +83,7 @@
                 }
                 li {
                     font-family: inherit;
-                    color: $color-primary;
+                    color: $color-text;
                     margin-top: $tf-space-8;
                     align-items: center;
                     i{
@@ -121,7 +121,7 @@
                 .tf-trip-pricing {
                     flex-direction: column;
                     text-align: right;
-                    color: $color-primary;
+                    color: $color-text;
                     display: none;
                     @media #{$tfmax991}{
                         text-align: left;

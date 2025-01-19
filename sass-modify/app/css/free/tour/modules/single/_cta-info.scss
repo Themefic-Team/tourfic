@@ -2,7 +2,7 @@
     .tf-single-template{
         &__three{
             .tf-tour-contact-informations {
-                background-color: $color-light-bg;
+                background-color: $color-yellow-thin;
                 padding: 24px;
                 @media only screen and (max-width: 767.98px) {
                     margin-bottom: 32px;
@@ -26,7 +26,7 @@
                         
                         a {
                             text-decoration: none;
-                            color: $color-primary;
+                            color: $color-text;
                         }
                         i {
                             font-size: 20px;
