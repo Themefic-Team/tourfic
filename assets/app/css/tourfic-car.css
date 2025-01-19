@@ -1,3 +1,6 @@
+/*!****************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[3]!./sass-modify/app/css/free/car/car.scss ***!
+  \****************************************************************************************************************************************************************************************/
 @charset "UTF-8";
 .single-tf_carrental .tf-single-template__one .tf-car-hero-gallery {
   width: 100%;
@@ -1940,7 +1943,7 @@
   width: 52px;
   display: flex;
   border-radius: 8px;
-  background: #faeedc;
+  background: #F5FAFF;
   align-items: center;
   justify-content: center;
   cursor: pointer;
@@ -2030,7 +2033,7 @@
 
 .post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view {
   border-radius: 16px;
-  background: #faeedc;
+  background: #f8fafc;
   width: calc(50% - 16px);
 }
 
@@ -2329,7 +2332,7 @@
 .post-type-archive-tf_carrental .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar {
   width: 358px;
   border-radius: 16px;
-  background: #faeedc;
+  background: #F5FAFF;
   padding: 32px;
 }
 
@@ -3228,7 +3231,7 @@
 
 .tf-archive-car-section .tf-archive-search-box-wrapper {
   border-radius: 16px;
-  background: #faeedc;
+  background: #E6F2FE;
   box-shadow: 0px 24px 60px 0px rgba(0, 15, 63, 0.16);
 }
 
@@ -3295,7 +3298,7 @@
 
 .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box {
   border-radius: 24px;
-  background: #faeedc;
+  background: #F1F3F4;
   padding: 8px;
   position: relative;
   top: -60px;

@@ -1,3 +1,6 @@
+/*!****************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[3]!./sass-modify/app/css/free/tourfic.scss ***!
+  \****************************************************************************************************************************************************************************************/
 @charset "UTF-8";
 /* 
 Container
@@ -486,6 +489,10 @@ Tooltip
 .tf-tooltip:hover .tf-top {
   visibility: visible;
   opacity: 1;
+}
+
+body {
+  color: #686E7A;
 }
 
 :root {
@@ -2294,7 +2301,7 @@ Ajax Loader Booking Availability
 }
 
 .single-tour-wrap.tf-featured .single-tour-inner {
-  background: #faeedc;
+  background: #F1F3F4;
   border-color: #f0f2f4;
   box-shadow: 0px 2px 4px rgba(179, 180, 202, 0.48);
 }
@@ -13591,7 +13598,7 @@ div#tf-contact-info {
   scrollbar-width: thin;
   scrollbar-color: #808080 #ffffff;
   border-radius: 4px;
-  background: #faeedc;
+  background: #ffffff;
   box-shadow: 0px 4px 16px 0px rgba(2, 28, 53, 0.2);
 }
 
@@ -13987,7 +13994,7 @@ div#tf-contact-info {
 }
 
 .tf-search__form__field__incdec span.form--span svg:hover {
-  fill: #003C7A;
+  fill: #2051f5;
 }
 
 @media only screen and (max-width: 991.98px) {
@@ -14166,7 +14173,7 @@ div#tf-contact-info {
   -moz-appearance: none;
   appearance: none;
   width: 100%;
-  background: #003C7A;
+  background: #2051f5;
   color: #ffffff !important;
   border: 0 !important;
   font-size: 16px;
@@ -15564,7 +15571,7 @@ div#tf-contact-info {
 .tf-archive-template__two .tf-search-results-list .tf-item-card {
   background-color: #ffffff;
   border-radius: 5px;
-  box-shadow: 0px 13px 30px #808080;
+  box-shadow: 0px 13px 30px #E0E8EE;
 }
 
 .tf-archive-template__two .tf-search-results-list .tf-item-card .tf-item-featured {
