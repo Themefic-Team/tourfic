@@ -3,7 +3,7 @@
     &__three{
         padding: 60px 0px;
         width: 100%;
-        background: $color-white;
+        background: $color-yellow-light;
         color: $color-gray;
         font-size: 16px;
         font-weight: 400;
@@ -2383,7 +2383,7 @@
                         .tf-booking-location-wrap {
                             display: flex;
                             flex-direction: row;
-                            background: $color-white;
+                            background: $color-yellow-light;
                             padding: 0 12px;
                             width: 100%;
                             align-items: center;
@@ -2664,7 +2664,7 @@
             opacity: 0;
             visibility: hidden;
             transition: 0.3s;
-            background: $color-white;
+            background: $color-yellow-light;
             box-shadow: 0px 8px 40px 0px rgba(0, 0, 0, 0.10);
             &.tf-show {
                 visibility: visible;
@@ -2675,7 +2675,6 @@
             .acr-label{
                 color: $color-text;
                 font-size: 16px;
-                font-style: normal;
                 font-weight: 600;
                 line-height: 130%;
             }
@@ -2726,7 +2725,7 @@
                     padding: 12px 16px;
                 }
                .tf-archive-ordering #tf-orderby {
-                    background-color: $color-light-bg;
+                    background-color: $color-yellow-light;
                     color: $color-text;
                     padding: 15px 36px 15px 15px;
                     height: 100%;
@@ -2983,11 +2982,9 @@
                     line-height: 1;
                     border: none;
                     background: unset;
-                    color: $color-primary;
+                    color: $color-text;
                     font-size: 16px;
-                    font-style: normal;
                     font-weight: 700;
-                    line-height: 150%; /* 24px */
                     transition: .3s all ease;
                     @media #{$max1024}{
                         font-size: 12px !important;
@@ -3196,7 +3193,7 @@
             font-weight: 600;
             line-height: 20.80px;
             margin-bottom: 8px;
-            color: $color-heading;
+            color: $color-text;
             @media #{$max1024}{
                 font-size: 14px;
             }
@@ -3320,7 +3317,7 @@
         }
     }
     .tf-available-room {
-        background: $color-gray-light;
+        background: $color-yellow-light;
         display: flex;
         .tf-available-room-gallery {
             min-width: 230px;
@@ -3766,7 +3763,7 @@
         gap: 16px;
     }
     &>span{
-        color: $color-heading;
+        color: $color-text;
         font-size: 24px !important;
         font-weight: 400 !important;
         line-height: 130% !important;
@@ -3812,7 +3809,7 @@
     }
 
     &.tf-archive-right{
-        background-color: $color-light-bg;
+        background-color: $color-yellow-thin;
         padding: 32px;
         width: 480px;
         margin-bottom: 56px;
@@ -3877,7 +3874,7 @@
                         .checkmark{
                             border-radius: 4px;
                             border: 1px solid $color-primary;
-                            background: $color-light-bg;
+                            background: $color-yellow-light;
                             height: 16px;
                             width: 16px;
                             &:hover{

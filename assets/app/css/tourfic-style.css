@@ -1,3 +1,6 @@
+/*!****************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[3]!./sass-modify/app/css/free/tourfic.scss ***!
+  \****************************************************************************************************************************************************************************************/
 @charset "UTF-8";
 /* 
 Container
@@ -490,6 +493,10 @@ Tooltip
 
 body {
   color: #686E7A;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #060D1C;
 }
 
 :root {
@@ -1117,9 +1124,9 @@ h3.tf-sidebar-widget_title {
   -ms-user-select: none;
   user-select: none;
   background-color: #ffffff;
-  color: #0E3DD8;
-  border-color: #0E3DD8;
-  border: 1px solid #0E3DD8;
+  color: #003C7A;
+  border-color: #003C7A;
+  border: 1px solid #003C7A;
   border-radius: 50%;
   display: inline-flex;
   align-items: center;
@@ -3793,7 +3800,7 @@ div#tf-destinationautocomplete-list div:before {
 }
 
 .tf-shortcode-design-2-tab .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields .tf_guest_info .tf_acrselection-wrap {
-  background: #faeedc;
+  background: #FDF9F3;
   box-shadow: 0px 8px 40px 0px rgba(0, 0, 0, 0.1);
   top: 111%;
   border-radius: 0px;
@@ -9946,7 +9953,7 @@ div#tf-contact-info {
   border: none;
   font-size: 31px;
   font-weight: 400;
-  color: #0E3DD8;
+  color: #003C7A;
   padding: 0;
   min-width: auto;
   width: auto;
@@ -15490,7 +15497,7 @@ div#tf-contact-info {
 .tf-archive-template__three {
   padding: 60px 0px;
   width: 100%;
-  background: #ffffff;
+  background: #FDF9F3;
   color: #808080;
   font-size: 16px;
   font-weight: 400;
@@ -18362,7 +18369,7 @@ div#tf-contact-info {
 .tf-archive-template__three .tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap {
   display: flex;
   flex-direction: row;
-  background: #ffffff;
+  background: #FDF9F3;
   padding: 0 12px;
   width: 100%;
   align-items: center;
@@ -18720,7 +18727,7 @@ div#tf-contact-info {
   opacity: 0;
   visibility: hidden;
   transition: 0.3s;
-  background: #ffffff;
+  background: #FDF9F3;
   box-shadow: 0px 8px 40px 0px rgba(0, 0, 0, 0.1);
 }
 
@@ -18734,7 +18741,6 @@ div#tf-contact-info {
 .tf-archive-template__three .tf_acrselection-wrap .acr-label {
   color: #686E7A;
   font-size: 16px;
-  font-style: normal;
   font-weight: 600;
   line-height: 130%;
 }
@@ -18794,7 +18800,7 @@ div#tf-contact-info {
 }
 
 .tf-archive-template__three .tf-available-archive-hetels-wrapper .tf-archive-available-rooms-head .tf-archive-ordering #tf-orderby {
-  background-color: #faeedc;
+  background-color: #FDF9F3;
   color: #686E7A;
   padding: 15px 36px 15px 15px;
   height: 100%;
@@ -19110,12 +19116,9 @@ div#tf-contact-info {
   line-height: 1;
   border: none;
   background: unset;
-  color: #0E3DD8;
+  color: #686E7A;
   font-size: 16px;
-  font-style: normal;
   font-weight: 700;
-  line-height: 150%;
-  /* 24px */
   transition: .3s all ease;
 }
 
@@ -19371,7 +19374,7 @@ div#tf-contact-info {
   font-weight: 600;
   line-height: 20.80px;
   margin-bottom: 8px;
-  color: #060D1C;
+  color: #686E7A;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -19530,7 +19533,7 @@ div#tf-contact-info {
 }
 
 .tf-available-rooms-wrapper .tf-available-room {
-  background: #F1F3F4;
+  background: #FDF9F3;
   display: flex;
 }
 
@@ -20096,7 +20099,7 @@ div#tf-contact-info {
 }
 
 .tf-available-rooms-head > span {
-  color: #060D1C;
+  color: #686E7A;
   font-size: 24px !important;
   font-weight: 400 !important;
   line-height: 130% !important;
@@ -20162,7 +20165,7 @@ div#tf-contact-info {
 }
 
 .tf-details-right.tf-archive-right {
-  background-color: #faeedc;
+  background-color: #FCF4E8;
   padding: 32px;
   width: 480px;
   margin-bottom: 56px;
@@ -20250,7 +20253,7 @@ div#tf-contact-info {
 .tf-details-right .tf_widget .tf-filter ul li label .checkmark {
   border-radius: 4px;
   border: 1px solid #0E3DD8;
-  background: #faeedc;
+  background: #FDF9F3;
   height: 16px;
   width: 16px;
 }

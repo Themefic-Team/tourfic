@@ -1,3 +1,6 @@
+/*!****************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[3]!./sass-modify/app/css/free/car/car.scss ***!
+  \****************************************************************************************************************************************************************************************/
 @charset "UTF-8";
 .single-tf_carrental .tf-single-template__one .tf-car-hero-gallery {
   width: 100%;
@@ -1433,7 +1436,7 @@
 
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-add-extra-section .tf-car-extra-infos .tf-car-single-extra .tf-extra-title .acr-select .acr-dec,
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-add-extra-section .tf-car-extra-infos .tf-car-single-extra .tf-extra-title .acr-select .acr-inc {
-  color: #0E3DD8;
+  color: #003C7A;
   border: 0px solid;
   background-color: transparent;
   width: auto;
@@ -2424,6 +2427,7 @@
 
 .post-type-archive-tf_carrental .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-category-lists ul li label {
   color: #F1F3F4;
+  color: #686E7A;
   font-size: 16px;
   font-weight: 400;
   display: block;
@@ -2450,7 +2454,7 @@
 }
 
 .post-type-archive-tf_carrental .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-category-lists ul li label input:checked ~ .checkmark {
-  background-color: #faeedc;
+  background-color: transparent;
 }
 
 .post-type-archive-tf_carrental .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-category-lists ul li label .checkmark {
@@ -2459,7 +2463,7 @@
   left: 0;
   height: 20px;
   width: 20px;
-  border: 2px solid #f0f2f4;
+  border: 2px solid #808080;
   background-color: transparent;
   border-radius: 5px;
 }
@@ -2472,7 +2476,7 @@
   top: 2px;
   width: 7px;
   height: 10px;
-  border: solid #F1F3F4;
+  border: solid #808080;
   border-width: 0 3px 3px 0;
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
@@ -2537,7 +2541,6 @@
   border-radius: 8px;
   margin: 0;
   padding: 0;
-  color: #F1F3F4;
   font-size: 16px;
   font-weight: 400;
   padding: 4px 8px;
@@ -2547,7 +2550,6 @@
 
 .post-type-archive-tf_carrental .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget.widget_tf_car_engine_filter .tf-category-lists ul li.active label {
   background: #0E3DD8;
-  color: #ffffff;
 }
 
 .tf-car-design-1 {
