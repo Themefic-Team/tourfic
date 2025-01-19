@@ -32,7 +32,7 @@
             outline: none;
         }
         .tf-section {
-            background: $color-light-bg;
+            background: $color-yellow-thin;
             padding: 32px;
             margin-bottom: 32px;
         }
@@ -582,7 +582,7 @@
                             transition: 0.3s;
                         }
                         &.tf-active {
-                            background: $color-light-bg;
+                            background: $color-yellow-light;
                             padding: 24px;
                             display: flex;
                             flex-direction: column;
@@ -668,7 +668,7 @@
         }
         // Related Section
         .tf-related-items-section{
-            background-color: $color-light-bg;
+            background-color: $color-yellow-thin;
             padding: 120px 0px;
 
             @media #{$max767}{
@@ -722,7 +722,7 @@
                     height: 100%;
                     display: flex;
                     flex-direction: column;
-                    background: $color-light-bg;
+                    background: $color-yellow-light;
                     justify-content: flex-start;
                 }
                 .tf-image-data{
@@ -734,7 +734,7 @@
                 }
                 .tf-meta-info{
                     padding: 16px 24px 24px 24px;
-                    background-color: $color-light-bg;
+                    background-color: $color-yellow-light;
                     display: flex;
                     flex-direction: column;
                     justify-content: space-between;
@@ -775,7 +775,7 @@
                             margin-bottom: 16px;
                             a{
                                 text-decoration: none;
-                                color: $color-primary;
+                                color: inherit;
                                 font-size: 20px;
                                 font-style: normal;
                                 font-weight: 700;
@@ -785,6 +785,9 @@
                                 }
                                 @media only screen and (max-width: 767.98px) {
                                     font-size: 20px;
+                                }
+                                &:hover{
+                                    color: $color-primary;
                                 }
                             }
                         }
@@ -832,7 +835,7 @@
 
         // Inquery Box
         .tf-send-inquiry{
-            background: $color-light-bg;
+            background: $color-yellow-thin;
             display: flex;
             padding: 56px 80px;
             flex-direction: column;
@@ -887,11 +890,11 @@
         }
         button.tf-review-open.button,
         .tf-reting-field button {
-            color: $color-primary;
+            color: $color-text;
             font-size: 16px;
             font-weight: 700;
             line-height: 24px;
-            background: $color-light-bg;
+            background: $color-yellow-thin;
             width: 100%;
             border: none;
             padding: 12px 0;
@@ -974,7 +977,7 @@
             }
         }
         .tf-review-form-wrapper{
-            background: $color-light-bg;
+            background: $color-yellow-thin;
             padding: 24px;
             display: none;
             flex-direction: column;
@@ -1028,7 +1031,6 @@
                     }
                     input[type="text"],textarea{
                         border: 1px solid $color-border;
-                        background: transparent;
                         padding: 8px;
                         color: $color-text;
                         font-size: 16px;
@@ -1364,7 +1366,7 @@
             .tf-reviews-slider {
 
                 .tf-reviews-item {
-                    background: $color-light-bg;
+                    background: $color-yellow-light;
                     margin-right: 35px !important;
                     padding: 24px;
                     display: flex !important;
@@ -1388,7 +1390,7 @@
                     .tf-reviews-text {
 
                         .tf-review-rating {
-                            color: $color-primary;
+                            color: $color-text;
                             font-size: 16px;
                             font-weight: 600;
                             line-height: 20.80px;
@@ -1867,7 +1869,7 @@
                 .tf-field{
                     padding: 15px 40px !important;
                     width: 100% !important;
-                    background-color: $color-white !important;
+                    background-color: $form-input-bg!important;
                     border-radius: 0px !important;
                     color: $color-text !important;
                     &::placeholder{
@@ -1988,7 +1990,7 @@
             .tf-details {
                 .tf-details-left {
                     .tf-details-menu {
-                        background: $color-light-bg;
+                        background: $color-yellow-thin;
                         padding: 16px 30px;
                         position: sticky;
                         left: 0;
@@ -2007,7 +2009,7 @@
                                     font-size: 16px;
                                     font-weight: 600;
                                     line-height: 20.80px;
-                                    color: $color-primary;
+                                    color: $color-text;
                                     border-bottom: 2px solid;
                                     padding-bottom: 5px;
                                     display: inline-block;
@@ -2119,7 +2121,7 @@
                                 padding: 24px;
                                 display: flex;
                                 gap: 16px;
-                                background: $color-light-bg;
+                                background: $color-yellow-thin;
                                 @media #{$max1024}{
                                     padding: 16px !important;
                                     gap: 8px;
@@ -2141,7 +2143,6 @@
                                         font-size: 16px;
                                         font-style: normal;
                                         font-weight: 400;
-                                        line-height: 130%; /* 20.8px */
                                     }
                                 }
                             }
@@ -2158,7 +2159,7 @@
                                 padding: 24px;
                                 display: flex;
                                 gap: 16px;
-                                background: $color-light-bg;
+                                background: $color-yellow-thin;
                                 @media #{$max1024}{
                                     padding: 16px !important;
                                     gap: 8px;
@@ -2200,7 +2201,7 @@
                             display: flex;
                             gap: 24px;
                             padding: 32px 0;
-                            background: $color-light-bg;
+                            background: $color-yellow-thin;
                             margin-bottom: 16px;
                             border-radius: 0px;
                             box-shadow: none;
@@ -3896,7 +3897,7 @@
                 text-align: left;
                 text-decoration: none;
                 text-transform: capitalize;
-                color: $color-text;
+                color: $color-primary;
                 font-size: 16px;
                 font-style: normal;
                 font-weight: 400;

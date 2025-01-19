@@ -103,7 +103,10 @@
                         line-height: 1.4;
                         a{
                             text-decoration: none;
-                            color: $color-primary;
+                            color: inherit;
+                            &:hover{
+                                color: $color-primary;
+                            }
                         }
                     }
                 }

@@ -241,7 +241,7 @@ ul.tf-sidebar-checkbox {
         position: relative;
         display: grid;
         padding: 0 0 0 0;
-        background: $color-white;
+        background: $form-input-bg;
         grid-template-columns: 38px auto;
         align-items: center;
         justify-items: center;
@@ -320,9 +320,9 @@ h3.tf-sidebar-widget_title {
     -ms-user-select: none;
     user-select: none;
     background-color: $color-white;
-    color: $color-primary;
-    border-color: $color-primary;
-    border: 1px solid $color-primary;
+    color: $color-secondary;
+    border-color: $color-secondary;
+    border: 1px solid $color-secondary;
     border-radius: 50%;
     display: inline-flex;
     align-items: center;
@@ -812,7 +812,7 @@ h3.tf-sidebar-widget_title {
     }
 }
 .tf-ask-question {
-    background: $color-gray-light;
+    background: $color-yellow-thin;
     padding: 30px;
     border-radius: 4px;
     flex: 2;
