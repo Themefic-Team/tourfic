@@ -54,34 +54,6 @@
             });
         });
 
-        // $(document).on("click", ".tf_air_service", function (e) {
-        //     e.preventDefault();
-        //     var $this = $(this);
-        //     var roomnumber = $(this).closest('.reserve').find('select[name=hotel_room_selected] option').filter(':selected').val();
-        //     var room_id = $(this).closest('.room-submit-wrap').find('input[name=room_id]').val();
-        //     var unique_id = $(this).closest('.room-submit-wrap').find('input[name=unique_id]').val();
-        //     var hotel_deposit = $(this).closest('.room-submit-wrap').find('input[name=make_deposit]').is(':checked');
-
-        //     if (roomnumber == 0) {
-        //         $(this).closest('.room-submit-wrap').find('.roomselectissue').html('<span style="color:red">' + tf_pro_params.select_room + '</span>');
-        //     } else {
-        //         $(this).closest('.room-submit-wrap').find('.roomselectissue').html('');
-        //         $("#hotel_room_number").val(roomnumber);
-        //         $("#hotel_roomid").val(room_id);
-        //         $("#hotel_room_uniqueid").val(unique_id);
-        //         $("#hotel_room_depo").val(hotel_deposit);
-        //         $.fancybox.open({
-        //             src: $(this).closest('.tf-room').find('.tf-hotel-services-wrap'),
-        //             type: 'inline',
-        //             afterClose: function () {
-        //                 $('#airport-service option:first').prop('selected', true);
-        //                 $('.tf-airport-pickup-response').html('');
-        //             }
-        //         });
-        //     }
-        // });
-
-
         /*
         * Affiliate booking form ajax
         * @author Foysal
