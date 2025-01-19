@@ -69,13 +69,6 @@
 }
 
 // Single Global Start
-.single-tf_tours{
-    .tf-single-template{
-        &__three{
-            margin-bottom: 0;
-        }
-    }
-}
 .single-tf_apartment,
 .single-tf_hotel{
     .tf-single-template{
@@ -432,6 +425,7 @@
 .single-tf_tours{
     .tf-single-template{
         &__three{
+            margin-bottom: 0;
             .tf-content-wrapper{
                 .tf-details{
                     @media only screen and (max-width: 767.98px) {

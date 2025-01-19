@@ -1,5 +1,6 @@
 .single-tf_hotel,
-.single-tf_tours{
+.single-tf_tours,
+.single-tf_apartment{
     .tf-single-template{
         &__one{
             .tf_features {
@@ -31,6 +32,21 @@
                     justify-content: flex-start;
                     flex-wrap: wrap;
                 }
+            }
+            .tf-toc-wrap{
+                background-color: $color-light-bg;
+                td {
+                    white-space: break-spaces;
+                }
+            }
+            .tf-highlight-wrapper{
+                background-color: $color-light-bg;
+            }
+            .tf-travel-itinerary-wrapper{
+                background-color: $color-light-bg;
+            }
+            .tf-suggestion-wrapper{
+                background-color: $color-light-bg;
             }
         }
     }
@@ -621,20 +637,4 @@
             }
         }
     }
-}
-
-.tf-toc-wrap{
-    background-color: $color-light-bg;
-    td {
-        white-space: break-spaces;
-    }
-}
-.tf-highlight-wrapper{
-    background-color: $color-light-bg;
-}
-.tf-travel-itinerary-wrapper{
-    background-color: $color-light-bg;
-}
-.tf-suggestion-wrapper{
-    background-color: $color-light-bg;
 }
