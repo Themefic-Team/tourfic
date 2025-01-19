@@ -1,3 +1,6 @@
+/*!****************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[3]!./sass-modify/app/css/free/tourfic.scss ***!
+  \****************************************************************************************************************************************************************************************/
 @charset "UTF-8";
 /* 
 Container
@@ -496,6 +499,10 @@ h1, h2, h3, h4, h5, h6 {
   color: #060D1C;
 }
 
+a {
+  color: #0E3DD8;
+}
+
 :root {
   --tf-base-font-size: 14px;
 }
@@ -535,7 +542,7 @@ h1, h2, h3, h4, h5, h6 {
   border: none !important;
   padding: 15px 40px !important;
   width: 100% !important;
-  background-color: #F1F3F4 !important;
+  background-color: #F3F7FA !important;
   border-radius: 5px !important;
   font-size: 14px !important;
   margin: 0px !important;
@@ -617,6 +624,7 @@ h1, h2, h3, h4, h5, h6 {
 .tf-box {
   padding: 30px;
   box-shadow: 0px 13px 30px 0px #e0e8ee;
+  background: #faeedc;
 }
 
 @media only screen and (max-width: 767.98px) {
@@ -1070,7 +1078,7 @@ ul.tf-sidebar-checkbox label {
   position: relative;
   display: grid;
   padding: 0 0 0 0;
-  background: #ffffff;
+  background: #F3F7FA;
   grid-template-columns: 38px auto;
   align-items: center;
   justify-items: center;
@@ -1156,9 +1164,9 @@ h3.tf-sidebar-widget_title {
   -ms-user-select: none;
   user-select: none;
   background-color: #ffffff;
-  color: #0E3DD8;
-  border-color: #0E3DD8;
-  border: 1px solid #0E3DD8;
+  color: #003C7A;
+  border-color: #003C7A;
+  border: 1px solid #003C7A;
   border-radius: 50%;
   display: inline-flex;
   align-items: center;
@@ -2416,6 +2424,8 @@ Ajax Loader Booking Availability
 .tf_booking-widget .tf_form-row .tf_btn {
   padding: 15px 20px;
   width: 100%;
+  background-color: #0E3DD8;
+  border-color: #0E3DD8;
 }
 
 .tf_booking-widget #check-in-out-date {
@@ -4141,7 +4151,7 @@ a.page-numbers {
   align-items: center;
   padding: 10px;
   height: 48px;
-  background: #faeedc;
+  background: #F1F3F4;
   border: 1px solid #f0f2f4;
   border-radius: 8px 8px 0px 0px;
   justify-content: space-between;
@@ -4186,6 +4196,7 @@ a.page-numbers {
   text-align: center;
   display: block;
   font-weight: 600;
+  color: #0E3DD8;
 }
 
 .tf_widget a.see-less.btn-link {
@@ -7283,7 +7294,7 @@ a.page-numbers {
   z-index: -1;
   content: '';
   display: block;
-  border: 5px solid #0E3DD8;
+  border: 5px solid #003C7A;
   border-top-color: transparent;
   border-left-color: transparent;
 }
@@ -7303,7 +7314,7 @@ a.page-numbers {
   display: block;
   width: 225px;
   padding: 10px 0;
-  background-color: #0E3DD8;
+  background-color: #003C7A;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   color: #ffffff;
   font: 700 18px/1 'Lato', sans-serif;
@@ -13824,7 +13835,7 @@ div#tf-contact-info {
   width: 20px;
   background-color: #ffffff;
   border-radius: 5px;
-  border: 1px solid #f0f2f4;
+  border: 1px solid #808080;
 }
 
 .tf-archive-template__two .tf-archive-right #tf__booking_sidebar .widget .tf-filter ul li.active {
@@ -18931,7 +18942,7 @@ div#tf-contact-info {
   text-align: left;
   text-decoration: none;
   text-transform: capitalize;
-  color: #686E7A;
+  color: #0E3DD8;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -19507,7 +19518,7 @@ div#tf-contact-info {
   border: none;
   font-size: 31px;
   font-weight: 400;
-  color: #0E3DD8;
+  color: #003C7A;
   padding: 0;
   min-width: auto;
   width: auto;
@@ -19517,7 +19528,7 @@ div#tf-contact-info {
 .tf-archive-template__four .tf_acrselection-wrap .acr-select .acr-dec svg path,
 .tf-archive-template__four .tf_acrselection-wrap .acr-select .acr-inc svg rect,
 .tf-archive-template__four .tf_acrselection-wrap .acr-select .acr-inc svg path {
-  fill: #0E3DD8;
+  fill: #003C7A;
 }
 
 .tf-archive-template__four .tf_acrselection-wrap.tf-show {

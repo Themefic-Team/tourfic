@@ -246,14 +246,14 @@
                     border: none;
                     font-size: 31px;
                     font-weight: 400;
-                    color: $color-primary;
+                    color: $color-secondary;
                     padding: 0;
                     min-width: auto;
                     width: auto;
 
                     svg rect,
                     svg path{
-                        fill: $color-primary;
+                        fill: $color-secondary;
                     }
                 }
             }

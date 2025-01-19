@@ -1,3 +1,6 @@
+/*!****************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[3]!./sass-modify/app/css/free/car/car.scss ***!
+  \****************************************************************************************************************************************************************************************/
 @charset "UTF-8";
 .single-tf_carrental .tf-single-template__one .tf-car-hero-gallery {
   width: 100%;
@@ -1626,7 +1629,7 @@
 
 .post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-search-box {
   border-radius: 24px;
-  background: #faeedc;
+  background: #E6F2FE;
   padding: 8px;
   position: relative;
   top: -60px;
