@@ -3889,10 +3889,15 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   vertical-align: middle;
 }
 
-.tf-room-checkbox {
+.tf-room-filter .tf-room-checkbox {
+  display: flex;
+  gap: 10px 30px;
+  list-style: none;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
   /* Style the checkmark/indicator */
 }
-.tf-room-checkbox label {
+.tf-room-filter .tf-room-checkbox label {
   position: relative;
   cursor: pointer;
   width: 100%;
@@ -3900,7 +3905,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   padding-left: 25px;
   font-weight: 400 !important;
 }
-.tf-room-checkbox .checkmark {
+.tf-room-filter .tf-room-checkbox .checkmark {
   position: absolute;
   top: 0px;
   left: 0px;
@@ -3910,24 +3915,24 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   border-radius: 5px;
   border: 1px solid #f0f2f4;
 }
-.tf-room-checkbox input[type=checkbox] {
+.tf-room-filter .tf-room-checkbox input[type=checkbox] {
   display: none !important;
 }
-.tf-room-checkbox label:hover input ~ .checkmark {
+.tf-room-filter .tf-room-checkbox label:hover input ~ .checkmark {
   background-color: #808080;
 }
-.tf-room-checkbox label input:checked ~ .checkmark {
+.tf-room-filter .tf-room-checkbox label input:checked ~ .checkmark {
   background-color: #0E3DD8;
 }
-.tf-room-checkbox .checkmark:after {
+.tf-room-filter .tf-room-checkbox .checkmark:after {
   content: "";
   position: absolute;
   display: none;
 }
-.tf-room-checkbox label input:checked ~ .checkmark:after {
+.tf-room-filter .tf-room-checkbox label input:checked ~ .checkmark:after {
   display: block;
 }
-.tf-room-checkbox label .checkmark:after {
+.tf-room-filter .tf-room-checkbox label .checkmark:after {
   left: 6px;
   top: 3px;
   width: 6px;
