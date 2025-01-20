@@ -176,6 +176,7 @@
                         transition: all .6s ease;
                         &:hover{
                             background-color: $color-primary;
+                            color: $color-white;
                             transition: all .6s ease;
                         }
                     }

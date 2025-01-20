@@ -121,6 +121,24 @@
                         h4 {
                             font-size: 16px;
                         }
+                        .room-detail-icon {
+                            text-align: center;
+                            margin: 15px 0 0 0;
+                            .room-icon-wrap {
+                                border: 1px solid $color-border;
+                                border-radius: 4px;
+                                padding: 8px 10px 4px 10px;
+                                margin-right: 5px;
+                                i{
+                                    font-size: 16px;
+                                    color: $color-text;
+                                }
+                            }
+                            .icon-text {
+                                font-size: 14px;
+                                color: $color-text;
+                            }
+                        }
                     }
                 
                     td.options{
@@ -313,6 +331,24 @@
                                     .tf-tooltip{
                                         @media #{$tfmax767}{
                                             width: 100px
+                                        }
+                                        .room-detail-icon {
+                                            text-align: center;
+                                            margin: 15px 0 0 0;
+                                            .room-icon-wrap {
+                                                border: 1px solid $color-border;
+                                                border-radius: 4px;
+                                                padding: 8px 10px 4px 10px;
+                                                margin-right: 5px;
+                                                i{
+                                                    font-size: 16px;
+                                                    color: $color-text;
+                                                }
+                                            }
+                                            .icon-text {
+                                                font-size: 14px;
+                                                color: $color-text;
+                                            }
                                         }
                                     }
                                 }
