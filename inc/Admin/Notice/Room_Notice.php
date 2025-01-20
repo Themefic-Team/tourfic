@@ -20,12 +20,14 @@ class Room_Notice extends \Tourfic\Core\TF_Notice {
         $this->type = 'admin_notice';
     }
 
+    // Red Color: style="color:#d63638;
+
     // License activation notice for Tourfic Pro
     function tf_plugin_admin_notice( ) { 
 		if ( get_option( 'tf_dismiss_211' ) < 1 ) {
             ?>
-                <div class="tf-critical-update-notice notice notice-error is-dismissible">
-                    <p><?php echo wp_kses_post( __('<b style="color:#d63638;">NOTICE: </b>To provide you with a better and improved experience for the coming days, we have introduced a new post type called <b>Rooms</b> for the <b>Hotel</b> post type in the upcoming update. This includes a complete restructuring of the <b>Room</b> section. If you added a room before, it will automatically migrate to the new post type. To learn more about the upcoming updates <a href="https://themefic.com/introducing-the-rooms-custom-post-type/" target="_blank"><b>check here</b></a>.', "tourfic")); ?></p>
+                <div class="tf-critical-update-notice notice notice-info is-dismissible">
+                    <p><?php echo wp_kses_post( __('<b>A Major Improvement to Tourfic Is Coming Soon: </b>We’re revamping the <b>Tourfic Design Panel</b> with a cleaner, smarter, and more user-friendly interface to take it to the next level. Learn more about this update in <a href="https://themefic.com/tourfics-big-improvement-a-cleaner-smarter-design-panel/" target="_blank"><b>our blog</b></a>.', "tourfic")); ?></p>
                 </div>
 
                 <script>

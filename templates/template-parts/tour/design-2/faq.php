@@ -1,5 +1,5 @@
 <?php if ( $faqs ): ?>
-<!-- Tour Questions Srart -->
+<!-- Hotel Questions Srart -->
 <div class="tf-questions-wrapper tf-section" id="tf-tour-faq">
     <h2 class="tf-section-title">
     <?php echo !empty($meta['faq-section-title']) ? esc_html($meta['faq-section-title']) : esc_html__( "Faq’s", 'tourfic' ); ?>
@@ -7,40 +7,46 @@
     <div class="tf-questions">
         
         <?php 
-        $faqs_itemsPerColumn = ceil(count($faqs) / 2);
-        ?>
-        <div class="tf-questions-col">
-            <?php 
-            for ($i = 0; $i < $faqs_itemsPerColumn; $i++) { ?>
-            <div class="tf-question <?php echo $i==0 ? esc_attr( 'tf-active' ) : ''; ?>">
-                <div class="tf-faq-head">
-                    <span><?php echo esc_html( $faqs[$i]['title'] ); ?>
-                    <i class="fa-solid fa-chevron-down"></i></span>
-                </div>
-                <div class="tf-question-desc" style="<?php echo $i==0 ? esc_attr( 'display: block;' ) : ''; ?>">
-                <?php echo wp_kses_post( $faqs[$i]['desc'] ); ?>
-                </div>
-            </div>
-            <?php } ?>
+        if (count($faqs) >= 2) {
+            $faqchunks = array_chunk($faqs, ceil(count($faqs) / 2), true);
+            $faqfirstArray = $faqchunks[0];
+            $faqsecondArray = $faqchunks[1];
             
-        </div>
+        }else{
+            $faqfirstArray = $faqs;
+        }
+        ?>
+        <?php if(!empty($faqfirstArray)){ ?>
         <div class="tf-questions-col">
-            <?php 
-            for ($i = $faqs_itemsPerColumn; $i < count($faqs); $i++) { ?>
+            <?php foreach ($faqfirstArray as $key => $faq) { ?>
             <div class="tf-question">
                 <div class="tf-faq-head">
-                    <span><?php echo esc_html( $faqs[$i]['title'] ); ?>
+                    <span><?php echo esc_html( $faq['title'] ); ?>
                     <i class="fa-solid fa-chevron-down"></i></span>
                 </div>
                 <div class="tf-question-desc">
-                <?php echo wp_kses_post( $faqs[$i]['desc'] ); ?>
+                <?php echo wp_kses_post( $faq['desc'] ); ?>
                 </div>
             </div>
             <?php } ?>
-            
         </div>
+        <?php } if(!empty($faqsecondArray)){ ?>
+        <div class="tf-questions-col">
+            <?php foreach ($faqsecondArray as $key => $faq) { ?>
+            <div class="tf-question">
+                <div class="tf-faq-head">
+                    <span><?php echo esc_html( $faq['title'] ); ?>
+                    <i class="fa-solid fa-chevron-down"></i></span>
+                </div>
+                <div class="tf-question-desc">
+                <?php echo wp_kses_post( $faq['desc'] ); ?>
+                </div>
+            </div>
+            <?php } ?>
+        </div>
+        <?php } ?>
     </div>
 </div>
 
-<!-- Tour Questions end -->
+<!-- Hotel Questions end -->
 <?php endif; ?>
