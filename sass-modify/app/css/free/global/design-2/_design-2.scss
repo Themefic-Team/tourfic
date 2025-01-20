@@ -893,7 +893,7 @@
                 box-shadow: 0px 13px 30px 0px #e0e8ee;
                 background-color: $color-white;
                 border-radius: 5px;
-                margin-top: 30px;
+                margin: 30px 0;
                 .widget{
                     border: 0px solid;
                     background: inherit;
@@ -1124,6 +1124,7 @@
                 }
                 p{
                     font-size: 12px !important;
+                    margin-bottom: 0;
                 }
                 .tf-title-meta{
                     align-items: baseline;
@@ -1156,6 +1157,10 @@
                             img{
                                 margin-right: 5px;
                             }
+                        }
+                        span{
+                            margin-top: 10px;
+                            display: inline-block;
                         }
                     }
                 }

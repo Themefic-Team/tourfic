@@ -600,7 +600,7 @@ class Helper {
 
                         <input type="hidden" name="place" id="tf-place" value="<?php echo esc_attr( $place_value ) ?? ''; ?> "/>
                     </div>
-                    <div class="tf-field-group tf-mt-8 tf_acrselection">
+                    <div class="tf-field-group tf-mt-16 tf_acrselection">
                         <div class="tf-field tf-flex">
                             <div class="acr-label tf-flex">
                                 <i class="fa-regular fa-user"></i>
@@ -655,7 +655,7 @@ class Helper {
                                placeholder="<?php esc_html_e( 'Select Date', 'tourfic' ); ?>" required value="<?php echo esc_attr( $date ) ?>">
                     </div>
 
-                    <div class="tf-booking-bttns tf-mt-30">
+                    <div class="tf-booking-bttns tf-mt-24">
 						<?php
 						$ptype = esc_attr( $_GET['type'] ) ?? get_post_type();
 						?>
@@ -1629,7 +1629,7 @@ class Helper {
                         <input type="hidden" id="tf-place" name="place" value="<?php echo ! empty( $taxonomy_slug ) ? esc_attr( $taxonomy_slug ) : ''; ?>"/>
 
                     </div>
-                    <div class="tf-field-group tf-mt-8 tf_acrselection">
+                    <div class="tf-field-group tf-mt-16 tf_acrselection">
                         <div class="tf-field tf-flex">
                             <div class="acr-label tf-flex">
                                 <i class="fa-regular fa-user"></i>
@@ -1685,7 +1685,7 @@ class Helper {
                     <div class="tf_booking-dates">
                         <div class="tf_label-row"></div>
                     </div>
-                    <div class="tf-booking-bttns tf-mt-30">
+                    <div class="tf-booking-bttns tf-mt-24">
                         <input type="hidden" name="type" value="<?php echo esc_attr( $post_type ); ?>" class="tf-post-type"/>
                         <button class="tf_btn tf_btn_full tf-submit"><?php esc_html_e( 'Check Availability', 'tourfic' ); ?></button>
                     </div>
