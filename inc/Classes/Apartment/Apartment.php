@@ -31,9 +31,43 @@ class Apartment {
 		add_action( 'wp_ajax_tf_apartments_search', array( $this, 'tf_apartments_search_ajax_callback' ) );
 		add_action( 'wp_ajax_nopriv_tf_apartments_search', array( $this, 'tf_apartments_search_ajax_callback' ) );
 
+		add_action("save_post_tf_apartment", array($this, 'tf_apartment_save_post'), 99, 2);
+
 		// apartmet CPT
 		Apartment_CPT::instance();
 	}
+
+	function tf_apartment_save_post($post_id, $post) {
+        if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+            return;
+        }
+
+		if( $post->post_type != 'tf_apartment' ) {
+			return;
+		}
+
+		$updated_min_max_price = array();
+
+		$existing_min_max_price = !empty( get_option('tf_apt_min_max_price') ) ? get_option('tf_apt_min_max_price') : array('min' => 0, 'max' => 1);
+
+		$min_max_price = Pricing::instance($post_id)->get_min_max_price();
+
+		// min price change
+		if( !empty($min_max_price['min']) && $min_max_price['min'] < $existing_min_max_price["min"] && $min_max_price['min'] > 1 ) {
+			$updated_min_max_price["min"] = $min_max_price['min'];
+		} else {
+			$updated_min_max_price["min"] = $existing_min_max_price["min"];
+		}
+		// max price change
+		if( !empty($min_max_price['max']) && $min_max_price['max'] > $existing_min_max_price["max"]) {
+			$updated_min_max_price["max"] = $min_max_price['max'];
+		} else {
+			$updated_min_max_price["max"] = $existing_min_max_price["max"];
+		}
+
+		update_option('tf_apt_min_max_price', $updated_min_max_price);
+
+    }
 
 	function tf_apartment_room_quick_view() {
 		// Check nonce security

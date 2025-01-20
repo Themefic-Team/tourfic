@@ -1881,11 +1881,6 @@ trait Action_Helper {
 		die();
 	}
 
-	/**
-	 * TODO: Tour Template 1, 2, 3 and Search Result Check
-	 * TODO: Hotel Template 1, 2, 3 and Search Result Check
-	 * TODO: Hotel Sorting Without Date
-	 */
 	private function tf_get_sorting_data($ordering_type, $results, $post_type) {
         global $wpdb;
         $sort_results = [];

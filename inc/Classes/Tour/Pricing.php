@@ -292,6 +292,7 @@ class Pricing {
 			'min_regular_price' => $tf_tour_full_price,
 			'min_sale_price'    => $tf_tour_min_price,
 			'min_discount'      => $tf_tour_min_discount,
+			'max_regular_price' => max( $tour_price ),
 		);
 	}
 

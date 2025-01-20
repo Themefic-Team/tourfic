@@ -39,7 +39,43 @@ class Hotel {
 		//add_filter( 'comment_form_fields', array($this, 'tf_move_comment_field') );
 		add_action( 'wp_after_insert_post', array( $this, 'tf_hotel_rooms_assign' ), 100, 3 );
 		add_action( 'wp_after_insert_post', array( $this, 'tf_room_assign_to_hotel' ), 100, 3 );
+
+		add_action("save_post_tf_hotel", array($this, 'tf_hotel_save_post'), 99, 2);
+
 	}
+
+
+	function tf_hotel_save_post($post_id, $post) {
+        if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+            return;
+        }
+
+		if( $post->post_type != 'tf_hotel' ) {
+			return;
+		}
+
+		$updated_min_max_price = array();
+
+		$existing_min_max_price = !empty( get_option('tf_hotel_min_max_price') ) ? get_option('tf_hotel_min_max_price') : array('min' => 0, 'max' => 1);
+
+		$min_max_price = Pricing::instance($post_id)->get_min_max_price();
+
+		// min price change
+		if( !empty($min_max_price['min']["regular_price"]) && $min_max_price['min']["regular_price"] < $existing_min_max_price["min"] && $min_max_price['min']["regular_price"] < $min_max_price['max']["regular_price"] ) {
+			$updated_min_max_price["min"] = $min_max_price['min']["regular_price"];
+		} else {
+			$updated_min_max_price["min"] = $existing_min_max_price["min"];
+		}
+		// max price change
+		if( !empty($min_max_price['max']["regular_price"]) && $min_max_price['max']["regular_price"] > $existing_min_max_price["max"]) {
+			$updated_min_max_price["max"] = $min_max_price['max']["regular_price"];
+		} else {
+			$updated_min_max_price["max"] = $existing_min_max_price["max"];
+		}
+
+		update_option('tf_hotel_min_max_price', $updated_min_max_price);
+
+    }
 
 	/**
 	 * Ajax hotel room availability
