@@ -1,8 +1,11 @@
 .tf-single-template,
 .tf-archive-template,
 .page-template-tf-search{
+    &__one{
+        padding: 40px 0px;
+    }
     &__three{
-        padding: 60px 0px;
+        // padding: 60px 0px;
         width: 100%;
         background: $color-yellow-light;
         color: $color-gray;

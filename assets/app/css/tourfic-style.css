@@ -4353,17 +4353,19 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
     align-items: self-start;
   }
 }
-.tf-search__form__field input[type=number]::-webkit-inner-spin-button,
 .tf-search__form__field input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
   margin: 0;
 }
+.tf-search__form__field input[type=number] {
+  -moz-appearance: textfield !important;
+}
 .tf-search__form__field .field--title {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
   font-size: 60px;
   font-weight: 500;
   line-height: 70.2px;
@@ -8122,7 +8124,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   box-shadow: 0px 13px 30px 0px #e0e8ee;
   background-color: #ffffff;
   border-radius: 5px;
-  margin-top: 30px;
+  margin: 30px 0;
 }
 .tf-archive-template__two .tf-archive-right #tf__booking_sidebar .widget {
   border: 0px solid;
@@ -8333,6 +8335,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 .tf-archive-template__two .tf-search-results-list .tf-item-card .tf-item-details p {
   font-size: 12px !important;
+  margin-bottom: 0;
 }
 .tf-archive-template__two .tf-search-results-list .tf-item-card .tf-item-details .tf-title-meta {
   align-items: baseline;
@@ -8363,6 +8366,10 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 .tf-archive-template__two .tf-search-results-list .tf-item-card .tf-item-details .tf-archive-features ul li img {
   margin-right: 5px;
+}
+.tf-archive-template__two .tf-search-results-list .tf-item-card .tf-item-details .tf-archive-features ul span {
+  margin-top: 10px;
+  display: inline-block;
 }
 .tf-archive-template__two .tf-search-results-list .tf-item-card .tf-item-details .tf-details p {
   line-height: 1.5;
@@ -8443,10 +8450,14 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   color: #ffffff !important;
 }
 
+.tf-single-template__one,
+.tf-archive-template__one,
+.page-template-tf-search__one {
+  padding: 40px 0px;
+}
 .tf-single-template__three,
 .tf-archive-template__three,
 .page-template-tf-search__three {
-  padding: 60px 0px;
   width: 100%;
   background: #FDF9F3;
   color: #808080;
