@@ -77,7 +77,7 @@ class Migrator {
 				update_option( 'tf_tours_min_max_price', $tour_min_max_price );
 			}
 
-			if( $current_apt_min_max_price ) {
+			if( empty( $current_apt_min_max_price ) ) {
 				$apartment_min_max_price = AptPricing::get_min_max_price_from_all_apartment();
 				update_option( 'tf_apt_min_max_price', $apartment_min_max_price );
 			}

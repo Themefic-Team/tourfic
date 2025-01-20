@@ -218,21 +218,22 @@ class Enqueue {
 		/**
 		 * Hotel Min and Max Price
 		 */
-		$hotel_min_max_price = get_option( 'tf_hotel_min_max_price' );
+
+		$hotel_min_max_price = !empty(get_option( 'tf_hotel_min_max_price' )) ? get_option( 'tf_hotel_min_max_price' ) : array('min' => 0, 'max' => 1);
 		// $hotel_min_max_price = HotelPricing::get_min_max_price_from_all_hotel();
 
 		/**
 		 * Tour Min and Max Price
 		 */
 		// $tour_min_max_price = TourPricing::get_min_max_price_from_all_tour();
-		$tour_min_max_price = get_option( 'tf_tours_min_max_price' );
+		$tour_min_max_price = !empty( get_option( 'tf_tours_min_max_price' ) ) ? get_option( 'tf_tours_min_max_price' ) : array('min' => 0, 'max' => 1);
 
 
 		/*
 		 * Apartment Min and Max Price
 		 */
 		// $tf_apartment_min_max_price = ApartmentPricing::get_min_max_price_from_all_apartment();
-		$tf_apartment_min_max_price = get_option( 'tf_apt_min_max_price' );
+		$tf_apartment_min_max_price = !empty( get_option( 'tf_apt_min_max_price' ) ) ? get_option( 'tf_apt_min_max_price' ) : array('min' => 0, 'max' => 1);
 		
 		/**
 		 * Cars Min and Max Price
