@@ -206,6 +206,7 @@
             align-items: center;
             gap: 8px;
             margin-bottom: 0;
+            color: $color-white;
             cursor: pointer;
             .tf-time-meridiem {
               text-transform: lowercase;
@@ -220,7 +221,6 @@
       .tf_checkin_to_label {
         color: $color-white;
         font-size: 18px;
-        
         font-weight: 700;
         line-height: 26px;
         margin-left: 0;
@@ -671,14 +671,14 @@
             height: 0;
             width: 0;
             &:checked {
-              ~ .checkmark {
+              ~ .tf-checkmark {
                 &::after {
                   display: block;
                 }
               }
             }
           }
-          .checkmark {
+          .tf-checkmark {
             position: absolute;
             top: 3px;
             left: 0;

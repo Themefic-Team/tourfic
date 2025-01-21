@@ -41,7 +41,7 @@ class Apartment_Locations extends \Tourfic\Core\Shortcodes {
 		ob_start();
 
 		if ( $locations ) { ?>
-			<section id="recomended_section_wrapper">
+			<section id="tf_recomended_section_wrapper">
 				<div class="recomended_inner">
 
 					<?php foreach ( $locations as $term ) {
