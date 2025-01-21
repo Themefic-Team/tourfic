@@ -1,6 +1,3 @@
-/*!****************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[3]!./sass-modify/app/css/free/tourfic.scss ***!
-  \****************************************************************************************************************************************************************************************/
 @charset "UTF-8";
 /* 
 Container
@@ -491,6 +488,13 @@ Tooltip
   opacity: 1;
 }
 
+/* 
+reviews
+*/
+.reviews .tf-review-container .tf-btn .tf_btn {
+  width: 100%;
+}
+
 body {
   color: #686E7A;
 }
@@ -614,6 +618,11 @@ a {
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
+}
+
+.tf-divider {
+  background: #E6F2FE;
+  height: 1px;
 }
 
 .tf-box-wrapper {
@@ -1442,19 +1451,19 @@ h3.section-heading {
   text-indent: 9999px;
   display: inline-block;
   content: "\f005";
-  color: #686E7A;
+  color: #ffc107;
   font-size: 18px;
 }
 
 .tf-review-form-container .ratings-container > input + label:hover ~ label:before {
   content: "\f005";
-  color: #0E3DD8;
+  color: #ffc107;
   font-weight: 900;
 }
 
 .tf-review-form-container .ratings-container > input + label:hover:before {
   content: "\f005";
-  color: #0E3DD8;
+  color: #ffc107;
   font-weight: 900;
 }
 
@@ -1471,24 +1480,24 @@ h3.section-heading {
 
 .tf-review-form-container .ratings-container > input:checked ~ label:before {
   content: "\f005";
-  color: #0E3DD8;
+  color: #ffc107;
   font-weight: 900;
 }
 
 .tf-review-form-container .ratings-container:hover > input + label:before {
   content: "\f005";
-  color: #686E7A;
+  color: #ffc107;
 }
 
 .tf-review-form-container .ratings-container:hover > input + label:hover ~ label:before {
   content: "\f005";
-  color: #0E3DD8;
+  color: #ffc107;
   font-weight: 900;
 }
 
 .tf-review-form-container .ratings-container:hover > input + label:hover:before {
   content: "\f005";
-  color: #0E3DD8;
+  color: #ffc107;
   font-weight: 900;
 }
 
@@ -1780,7 +1789,7 @@ h3.section-heading {
 }
 
 .tf-ask-question {
-  background: #FCF4E8;
+  background: #F5FAFF;
   padding: 30px;
   border-radius: 4px;
   flex: 2;
@@ -8851,7 +8860,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 .tf-single-template__two .tf-review-wrapper .tf-review-form .tf-review-form-container .tf-rating-wrapper .tf-form-single-rating .ratings-container label:before {
-  color: #0E3DD8;
+  color: #ffc107;
   font-size: 15px;
 }
 
@@ -10259,7 +10268,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 .tf-single-template__three .tf-available-rooms-wrapper,
 .tf-archive-template__three .tf-available-rooms-wrapper,
 .page-template-tf-search__three .tf-available-rooms-wrapper {
-  background: #faeedc;
+  background: #FCF4E8;
   padding: 32px;
   margin-bottom: 32px;
 }
@@ -12429,7 +12438,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   font-size: 16px;
   font-weight: 700;
   line-height: 24px;
-  background: #FCF4E8;
+  background: #faeedc;
   width: 100%;
   border: none;
   padding: 12px 0;
@@ -16216,7 +16225,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 .tf-archive-template__four .tf-archive-details .tf-archive-hotel .tf-archive-hotel-content .tf-archive-hotel-content-left .tf-reviews .tf-review-items {
-  color: #0E3DD8;
+  color: #ffc107;
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;

@@ -484,6 +484,10 @@ $price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings'
     </div>
     <!-- Hero End -->
 
+    <div class="tf-container">
+        <div class="tf-divider"></div>
+    </div>
+
 	<?php if ( $rooms ) :
 
 		//getting only selected features for rooms

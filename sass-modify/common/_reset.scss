@@ -94,6 +94,12 @@ a{
     @include flex-center();
 }
 
+.tf-divider {
+    background: $color-blue-light;
+    height: 1px;
+}
+
+
 //Tourfic Base classes
 .tf-box-wrapper{
     background-color: $color-white;

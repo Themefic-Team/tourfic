@@ -51,13 +51,13 @@
                         transition: 0.3s;
                         &:hover {
                             color: $color-primary;
-                            background-color: $color-light-bg;
+                            background-color: $color-gray-light;
                         }
                         &:nth-child(2) {
-                            border-left: 1px solid $color-light-bg;
+                            border-left: 1px solid $color-gray-light;
                         }
                         &:nth-child(3) {
-                            border-left: 1px solid $color-light-bg;
+                            border-left: 1px solid $color-gray-light;
                         }
                     }
                     li.active {
