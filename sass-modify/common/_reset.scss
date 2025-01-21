@@ -94,9 +94,9 @@ a{
     @include flex-center();
 }
 
-//Tourfi Base classes
+//Tourfic Base classes
 .tf-box-wrapper{
-    background-color: #fff;
+    background-color: $color-white;
     border-radius: 5px;
 }
 .tf-box{
