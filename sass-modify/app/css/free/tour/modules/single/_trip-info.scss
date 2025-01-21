@@ -51,13 +51,13 @@
                         transition: 0.3s;
                         &:hover {
                             color: $color-primary;
-                            background-color: $color-light-bg;
+                            background-color: $color-gray-light;
                         }
                         &:nth-child(2) {
-                            border-left: 1px solid $color-light-bg;
+                            border-left: 1px solid $color-gray-light;
                         }
                         &:nth-child(3) {
-                            border-left: 1px solid $color-light-bg;
+                            border-left: 1px solid $color-gray-light;
                         }
                     }
                     li.active {
@@ -70,8 +70,8 @@
         &__two{
             .tf-trip-info{
                 background-color: $color-white;
-                border-radius: $tf-brds-default;
-                box-shadow: 0px 0px 24px 5px #E0E8EE;
+                @include bd-radius(5px);;
+                box-shadow: 0px 0px 24px 5px $color-box-shadow;
             
                 // trip info -
                 .person-info.active {
@@ -94,7 +94,7 @@
                 // trip person info
                 .person-info {
                     border: 1px solid $color-border;
-                    border-radius: $tf-brds-default;
+                    @include bd-radius(5px);;
                     box-shadow: 0px 9px 12px 0px #0e132305;
                     display: flex;
                     align-items: center;

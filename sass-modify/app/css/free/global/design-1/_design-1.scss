@@ -667,7 +667,7 @@
 
 .tf-archive-search-box-wrapper{
     border-radius: 16px;
-    background: #E6F2FE;
+    background: $color-blue-light;
     box-shadow: 0px 24px 60px 0px rgba(0, 15, 63, 0.16);
 
     .tf-date-selection-form{
@@ -711,7 +711,7 @@
         }
         .tf-date-single-select{
             border-radius: 8px;
-            background: #FFF;
+            background: $color-white;
             padding: 16px;
             width: 33.33%;
             @media #{$max767}{
@@ -720,11 +720,11 @@
             .tf-select-date{
                 width: calc(50% - 8px);
                 &:first-child{
-                    border-right: 1px solid #DFE6ED;
+                    border-right: 1px solid $color-border;
                 }
                 
                 i{
-                    color: #566676;
+                    color: $color-text
                 }
                 .tf-flex{
                     flex-wrap: nowrap;
@@ -733,22 +733,17 @@
                     width: 100%;
                     position: relative;
                     h5{
-                        color: #27333F;
+                        color: $color-heading;
                         font-size: 12px !important;
-                        font-style: normal !important;
                         font-weight: 400 !important;
-                        line-height: 120% !important; /* 14.4px */
                         margin-bottom: 8px;
                         margin-top: 0px;
                     }
                     input{
                         min-width: auto;
                         width: 100% !important;
-                        color: #27333F;
+                        color: $color-text;
                         font-size: 16px;
-                        font-style: normal;
-                        font-weight: 400;
-                        line-height: 150%; /* 24px */
                         border: 0px solid !important;
                         padding-left: 0px;
                         box-shadow: none;
@@ -758,17 +753,14 @@
                             box-shadow: none;
                         }
                         &::placeholder{
-                            color: #27333F;
+                            color: $color-text;
                         }
                     }
                     select{
                         min-width: auto;
                         width: 100% !important;
-                        color: #27333F;
+                        color: $color-text;
                         font-size: 16px;
-                        font-style: normal;
-                        font-weight: 400;
-                        line-height: 150%; /* 24px */
                         border: 0px solid !important;
                         background-color: transparent;
                     }
@@ -781,33 +773,32 @@
                         max-height: 200px;
                         overflow: auto;
                         border-radius: 4px;
-                        background: #EEF2F6;
+                        background: $color-light-bg;
                         padding: 2px;
                         box-shadow: 0px 4px 16px 0px rgba(2, 28, 53, 0.20);
-                        
                         scrollbar-width: thin;
-                        scrollbar-color: #9c9c9c #ffffff;
+                        scrollbar-color: $color-gray $color-white;
     
                         /* Chrome, Edge, and Safari */
                         *::-webkit-scrollbar {
                             width: 5px;
                         }
                         *::-webkit-scrollbar-track {
-                            background: #ffffff;
+                            background: $color-white;
                         }
                         &::-webkit-scrollbar-thumb {
-                            background-color: #9c9c9c;
+                            background-color: $color-gray;
                             border-radius: 5px;
-                            border: 3px solid #ffffff;
+                            border: 3px solid $color-white;
                         }
                         
                         >div{
                             padding: 8px;
                             cursor: pointer;
                             border-radius: 4px;
-                            background: #FFF;
+                            background: $color-white;
                             text-transform: capitalize;
-                            color: #27333F;
+                            color: $color-text;
                             font-size: 16px;
                             margin-bottom: 2px;
                             transition: .3s all ease;
@@ -815,7 +806,7 @@
                                 margin-bottom: 0px;
                             }
                             &:hover{
-                                background-color: #F8FAFC;
+                                background-color: $color-white;
                             }
                         }
                     }
@@ -848,7 +839,7 @@
                 .tf-select-date{
                     width: 100%;
                     &:first-child{
-                        border-right: 0px solid #DFE6ED;
+                        border-right: 0px solid $color-border;
                     }
                     &:last-child{
                         display: none;
@@ -859,7 +850,7 @@
                 .tf-select-date{
                     width: 100%;
                     &:first-child{
-                        border-right: 0px solid #DFE6ED;
+                        border-right: 0px solid $color-border;
                     }
                 }
             }
@@ -885,11 +876,8 @@
                 gap: 0px 32px;
                 li{
                     label{
-                        color: #566676;
+                        color: $color-text;
                         font-size: 16px;
-                        font-style: normal;
-                        font-weight: 400;
-                        line-height: 150%; /* 24px */
                         display: block;
                         position: relative;
                         padding-left: 35px;
@@ -911,7 +899,7 @@
                             display: block;
                         }
                         input:checked ~ .tf-checkmark{
-                            background-color: #F8FAFC;
+                            background-color: $color-white;
                         }
                         .tf-checkmark {
                             position: absolute;
@@ -919,7 +907,7 @@
                             left: 0;
                             height: 20px;
                             width: 20px;
-                            border: 2px solid #566676;
+                            border: 2px solid $color-gray-info;
                             background-color: transparent;
                             border-radius: 5px;
                             &::after{
@@ -930,7 +918,7 @@
                                 top: 2px;
                                 width: 7px;
                                 height: 10px;
-                                border: solid #566676;
+                                border: solid $color-gray-info;
                                 border-width: 0 3px 3px 0;
                                 -webkit-transform: rotate(45deg);
                                 -ms-transform: rotate(45deg);
@@ -941,7 +929,7 @@
                 }
             }
             span#tf-required{
-                color: red;
+                color: $color-danger;
             }
         }
         .tf-submit-button{
@@ -950,9 +938,9 @@
             }
             button{
                 border-radius: 8px;
-                background: #0866C4;
+                background: $color-primary;
                 padding: 16px 50px;
-                color: #FFF;
+                color: $color-white;
                 font-size: 16px;
                 font-style: normal;
                 font-weight: 700;
@@ -961,11 +949,11 @@
                 cursor: pointer;
                 transition: .3s all ease;
                 &:hover{
-                    background: #094C90;
+                    background: $color-secondary;
                 }
                 i{
                     margin-left: 8px;
-                    color: #FFF;
+                    color: $color-white
                 }
             }
         }

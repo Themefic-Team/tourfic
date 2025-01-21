@@ -30,6 +30,8 @@ input[type="submit"].tf_btn,
   line-height: 1.2;
   padding: 12px 24px;
   text-decoration: none;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
   border-radius: 5px;
   text-align: center;
   display: inline-flex;
@@ -513,6 +515,13 @@ Tooltip
   opacity: 1;
 }
 
+/* 
+reviews
+*/
+.reviews .tf-review-container .tf-btn .tf_btn {
+  width: 100%;
+}
+
 body {
   color: #686E7A;
 }
@@ -638,8 +647,15 @@ a {
   align-items: center;
 }
 
+.tf-divider {
+  background: #E6F2FE;
+  height: 1px;
+}
+
 .tf-box-wrapper {
   background-color: #ffffff;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
   border-radius: 5px;
 }
 
@@ -1451,19 +1467,19 @@ h3.section-heading {
   text-indent: 9999px;
   display: inline-block;
   content: "\f005";
-  color: #686E7A;
+  color: #ffc107;
   font-size: 18px;
 }
 
 .tf-review-form-container .ratings-container > input + label:hover ~ label:before {
   content: "\f005";
-  color: #0E3DD8;
+  color: #ffc107;
   font-weight: 900;
 }
 
 .tf-review-form-container .ratings-container > input + label:hover:before {
   content: "\f005";
-  color: #0E3DD8;
+  color: #ffc107;
   font-weight: 900;
 }
 
@@ -1480,24 +1496,24 @@ h3.section-heading {
 
 .tf-review-form-container .ratings-container > input:checked ~ label:before {
   content: "\f005";
-  color: #0E3DD8;
+  color: #ffc107;
   font-weight: 900;
 }
 
 .tf-review-form-container .ratings-container:hover > input + label:before {
   content: "\f005";
-  color: #686E7A;
+  color: #ffc107;
 }
 
 .tf-review-form-container .ratings-container:hover > input + label:hover ~ label:before {
   content: "\f005";
-  color: #0E3DD8;
+  color: #ffc107;
   font-weight: 900;
 }
 
 .tf-review-form-container .ratings-container:hover > input + label:hover:before {
   content: "\f005";
-  color: #0E3DD8;
+  color: #ffc107;
   font-weight: 900;
 }
 
@@ -1767,7 +1783,7 @@ h3.section-heading {
 }
 
 .tf-ask-question {
-  background: #FCF4E8;
+  background: #F5FAFF;
   padding: 30px;
   border-radius: 4px;
   flex: 2;
@@ -2081,7 +2097,7 @@ li.tf-filter-item {
 }
 
 .tf-box-wrapper .al-range-slider__track {
-  background: #faeedc;
+  background: #F1F3F4;
   height: 10px;
   box-shadow: none !important;
   margin: 30px 0px 10px 0px;
@@ -2641,7 +2657,7 @@ div#tf-destinationautocomplete-list div:before {
 }
 
 .tf-filter-price-range .al-range-slider__track {
-  background: #faeedc;
+  background: #F1F3F4;
   height: 10px;
   box-shadow: none !important;
   margin: 30px 0px 10px 0px;
@@ -3448,20 +3464,17 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 .tf-aq-field label {
-  font-family: Inter;
   font-size: 13px;
-  font-style: normal;
   font-weight: 400;
-  line-height: normal;
   margin-bottom: 8px;
 }
 
 .tf-aq-field input, .tf-aq-field textarea {
-  border: 1px solid #f0f2f4;
+  border: 1px solid #808080 !important;
   border-radius: 4px;
-  padding: 12px 16px;
+  padding: 12px 16px !important;
   background-color: #ffffff;
-  color: #F1F3F4;
+  color: #686E7A;
   font-size: 16px;
   font-weight: 400;
   transition: all 0.3s ease-in-out;
@@ -4146,7 +4159,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 .tf_widget .al-range-slider__track {
-  background: #faeedc;
+  background: #F1F3F4;
   height: 10px;
   box-shadow: none !important;
   margin: 30px 0px 10px 0px;
@@ -4483,32 +4496,32 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   display: none;
 }
 
-.tf-search__form {
+.tf-booking-forms-wrapper .tf-search__form {
   padding: 72px 15px;
-  background-color: #0E3DD8;
+  background: #0E3DD8;
   border-radius: 0;
   box-shadow: none;
 }
 
 @media only screen and (max-width: 1199.98px) {
-  .tf-search__form {
+  .tf-booking-forms-wrapper .tf-search__form {
     padding: 60px 15px;
   }
 }
 
 @media only screen and (max-width: 991.98px) {
-  .tf-search__form {
+  .tf-booking-forms-wrapper .tf-search__form {
     padding: 50px 15px;
   }
 }
 
 @media only screen and (max-width: 767.98px) {
-  .tf-search__form {
+  .tf-booking-forms-wrapper .tf-search__form {
     padding: 40px 15px;
   }
 }
 
-.tf-search__form__fieldset {
+.tf-booking-forms-wrapper .tf-search__form__fieldset {
   max-width: 1678px;
   margin: 0 auto;
   background: transparent;
@@ -4524,13 +4537,13 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 @media only screen and (max-width: 1500px) {
-  .tf-search__form__fieldset {
+  .tf-booking-forms-wrapper .tf-search__form__fieldset {
     gap: 20px;
   }
 }
 
 @media only screen and (max-width: 1366px) {
-  .tf-search__form__fieldset {
+  .tf-booking-forms-wrapper .tf-search__form__fieldset {
     gap: 40px;
     margin: auto;
     flex-direction: column;
@@ -4541,7 +4554,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 @media only screen and (max-width: 767.98px) {
-  .tf-search__form__fieldset {
+  .tf-booking-forms-wrapper .tf-search__form__fieldset {
     max-width: 500px;
     margin: auto;
     gap: 30px;
@@ -4549,42 +4562,42 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 @media only screen and (max-width: 575.98px) {
-  .tf-search__form__fieldset {
+  .tf-booking-forms-wrapper .tf-search__form__fieldset {
     max-width: 100%;
   }
 }
 
 @media only screen and (max-width: 360px) {
-  .tf-search__form__fieldset {
+  .tf-booking-forms-wrapper .tf-search__form__fieldset {
     gap: 25px;
   }
 }
 
-.tf-search__form__fieldset__left {
+.tf-booking-forms-wrapper .tf-search__form__fieldset__left {
   max-width: 310px;
   flex: 1;
 }
 
 @media only screen and (max-width: 1500px) {
-  .tf-search__form__fieldset__left {
+  .tf-booking-forms-wrapper .tf-search__form__fieldset__left {
     max-width: 280px;
   }
 }
 
 @media only screen and (max-width: 1366px) {
-  .tf-search__form__fieldset__left {
+  .tf-booking-forms-wrapper .tf-search__form__fieldset__left {
     max-width: 300px;
   }
 }
 
 @media only screen and (max-width: 1366px) {
-  .tf-search__form__fieldset__left {
+  .tf-booking-forms-wrapper .tf-search__form__fieldset__left {
     max-width: 100%;
     width: 100%;
   }
 }
 
-.tf-search__form__fieldset__left .autocomplete-items {
+.tf-booking-forms-wrapper .tf-search__form__fieldset__left .autocomplete-items {
   position: absolute;
   z-index: 99;
   top: 100%;
@@ -4600,23 +4613,22 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   box-shadow: 0px 4px 16px 0px rgba(2, 28, 53, 0.2);
 }
 
-.tf-search__form__fieldset__left .autocomplete-items div {
+.tf-booking-forms-wrapper .tf-search__form__fieldset__left .autocomplete-items div {
   color: #686E7A;
   font-size: 16px;
   font-weight: 400;
-  line-height: 150%;
   padding: 8px;
   border-radius: 4px;
   cursor: pointer;
 }
 
-.tf-search__form__fieldset__left .autocomplete-items div::before {
+.tf-booking-forms-wrapper .tf-search__form__fieldset__left .autocomplete-items div::before {
   font-size: 14px;
   line-height: 26px;
   margin-right: 8px;
 }
 
-.tf-search__form__fieldset__left .autocomplete-items div:hover {
+.tf-booking-forms-wrapper .tf-search__form__fieldset__left .autocomplete-items div:hover {
   background: #faeedc;
   color: #060D1C;
   text-overflow: ellipsis;
@@ -4624,7 +4636,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   white-space: nowrap;
 }
 
-.tf-search__form__fieldset__middle {
+.tf-booking-forms-wrapper .tf-search__form__fieldset__middle {
   flex: 1;
   display: flex;
   -webkit-align-items: center;
@@ -4635,13 +4647,13 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 @media only screen and (max-width: 1366px) {
-  .tf-search__form__fieldset__middle {
+  .tf-booking-forms-wrapper .tf-search__form__fieldset__middle {
     width: 100%;
   }
 }
 
 @media only screen and (max-width: 767.98px) {
-  .tf-search__form__fieldset__middle {
+  .tf-booking-forms-wrapper .tf-search__form__fieldset__middle {
     display: flex;
     flex-wrap: wrap;
     gap: 16px;
@@ -4651,41 +4663,42 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 @media only screen and (max-width: 575.98px) {
-  .tf-search__form__fieldset__middle {
+  .tf-booking-forms-wrapper .tf-search__form__fieldset__middle {
     width: 100%;
   }
 }
 
-.tf-search__form__fieldset__middle .tf-search__form__field.tf-mx-width {
+.tf-booking-forms-wrapper .tf-search__form__fieldset__middle .tf-search__form__field.tf-mx-width {
   max-width: 132px;
 }
 
 @media only screen and (max-width: 991.98px) {
-  .tf-search__form__fieldset__middle .tf-search__form__field.tf-mx-width {
+  .tf-booking-forms-wrapper .tf-search__form__fieldset__middle .tf-search__form__field.tf-mx-width {
     max-width: 100px;
   }
 }
 
-.tf-search__form__fieldset__middle .tf-time-picker .tf-time-head {
+.tf-booking-forms-wrapper .tf-search__form__fieldset__middle .tf-time-picker .tf-time-head {
   font-size: 32px;
   font-weight: 500;
   display: flex;
   align-items: center;
   gap: 8px;
   margin-bottom: 0;
+  color: #ffffff;
   cursor: pointer;
 }
 
-.tf-search__form__fieldset__middle .tf-time-picker .tf-time-head .tf-time-meridiem {
+.tf-booking-forms-wrapper .tf-search__form__fieldset__middle .tf-time-picker .tf-time-head .tf-time-meridiem {
   text-transform: lowercase;
 }
 
-.tf-search__form__fieldset__right {
+.tf-booking-forms-wrapper .tf-search__form__fieldset__right {
   max-width: 180px;
   flex: 1;
 }
 
-.tf-search__form__fieldset .tf_checkin_to_label {
+.tf-booking-forms-wrapper .tf-search__form__fieldset .tf_checkin_to_label {
   color: #ffffff;
   font-size: 18px;
   font-weight: 700;
@@ -4695,7 +4708,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 @media only screen and (max-width: 767.98px) {
-  .tf-search__form__fieldset .tf_checkin_to_label {
+  .tf-booking-forms-wrapper .tf-search__form__fieldset .tf_checkin_to_label {
     margin-left: 0;
     margin-top: 20px;
     font-size: 16px;
@@ -4703,19 +4716,19 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 @media only screen and (max-width: 1366px) {
-  .tf-search__form__car__fieldset {
+  .tf-booking-forms-wrapper .tf-search__form__car__fieldset {
     flex-direction: row;
   }
 }
 
 @media only screen and (max-width: 1320px) {
-  .tf-search__form__car__fieldset {
+  .tf-booking-forms-wrapper .tf-search__form__car__fieldset {
     max-width: 800px;
     flex-direction: column;
   }
 }
 
-.tf-search__form__car__fieldset .tf-search__form__fieldset__left {
+.tf-booking-forms-wrapper .tf-search__form__car__fieldset .tf-search__form__fieldset__left {
   max-width: fit-content;
   display: flex;
   flex-wrap: wrap;
@@ -4724,137 +4737,137 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 @media only screen and (max-width: 1320px) {
-  .tf-search__form__car__fieldset .tf-search__form__fieldset__left {
+  .tf-booking-forms-wrapper .tf-search__form__car__fieldset .tf-search__form__fieldset__left {
     max-width: 100%;
     width: 100%;
   }
 }
 
-.tf-search__form__car__fieldset .tf-search__form__fieldset__left > div {
+.tf-booking-forms-wrapper .tf-search__form__car__fieldset .tf-search__form__fieldset__left > div {
   flex: 1;
 }
 
 @media only screen and (max-width: 360px) {
-  .tf-search__form__car__fieldset .tf-search__form__fieldset__left > div {
+  .tf-booking-forms-wrapper .tf-search__form__car__fieldset .tf-search__form__fieldset__left > div {
     flex: 100%;
   }
 }
 
-.tf-search__form__car__fieldset .tf-search__form__fieldset__left.tf-pick-drop-location.active .tf_pickup_location {
+.tf-booking-forms-wrapper .tf-search__form__car__fieldset .tf-search__form__fieldset__left.tf-pick-drop-location.active .tf_pickup_location {
   min-width: 500px;
 }
 
 @media only screen and (max-width: 767.98px) {
-  .tf-search__form__car__fieldset .tf-search__form__fieldset__left.tf-pick-drop-location.active .tf_pickup_location {
+  .tf-booking-forms-wrapper .tf-search__form__car__fieldset .tf-search__form__fieldset__left.tf-pick-drop-location.active .tf_pickup_location {
     min-width: auto;
     width: 100%;
   }
 }
 
-.tf-search__form__car__fieldset .tf-search__form__fieldset__left.tf-pick-drop-location.active .tf_dropoff_location {
+.tf-booking-forms-wrapper .tf-search__form__car__fieldset .tf-search__form__fieldset__left.tf-pick-drop-location.active .tf_dropoff_location {
   display: none;
 }
 
 @media only screen and (max-width: 991.98px) {
-  .tf-search__form__car__fieldset .tf-search__form__fieldset__left .icon--location {
+  .tf-booking-forms-wrapper .tf-search__form__car__fieldset .tf-search__form__fieldset__left .icon--location {
     top: 10px;
   }
 }
 
 @media only screen and (max-width: 767.98px) {
-  .tf-search__form__car__fieldset .tf-search__form__fieldset__left .icon--location {
+  .tf-booking-forms-wrapper .tf-search__form__car__fieldset .tf-search__form__fieldset__left .icon--location {
     top: 7px;
   }
 }
 
 @media only screen and (max-width: 575.98px) {
-  .tf-search__form__car__fieldset .tf-search__form__fieldset__left .icon--location {
+  .tf-booking-forms-wrapper .tf-search__form__car__fieldset .tf-search__form__fieldset__left .icon--location {
     top: 6px;
   }
 }
 
 @media only screen and (max-width: 767.98px) {
-  .tf-search__form__car__fieldset .tf-search__form__fieldset__middle {
+  .tf-booking-forms-wrapper .tf-search__form__car__fieldset .tf-search__form__fieldset__middle {
     row-gap: 25px;
   }
 }
 
 @media only screen and (max-width: 1600px) {
-  .tf-search__form__car__fieldset .tf-search__form__fieldset__middle .tf-search__form__divider {
+  .tf-booking-forms-wrapper .tf-search__form__car__fieldset .tf-search__form__fieldset__middle .tf-search__form__divider {
     margin: 0 20px;
   }
 }
 
 @media only screen and (max-width: 1199.98px) {
-  .tf-search__form__car__fieldset .tf-search__form__fieldset__middle .tf-search__form__divider {
+  .tf-booking-forms-wrapper .tf-search__form__car__fieldset .tf-search__form__fieldset__middle .tf-search__form__divider {
     margin: 0;
   }
 }
 
 @media only screen and (max-width: 1600px) {
-  .tf-search__form__car__fieldset .tf-search__form__fieldset__middle .tf-search__form__divider:first-child {
+  .tf-booking-forms-wrapper .tf-search__form__car__fieldset .tf-search__form__fieldset__middle .tf-search__form__divider:first-child {
     margin-left: 0;
   }
 }
 
 @media only screen and (max-width: 1320px) {
-  .tf-search__form__car__fieldset .tf-search__form__fieldset__middle .tf-search__form__divider:first-child {
+  .tf-booking-forms-wrapper .tf-search__form__car__fieldset .tf-search__form__fieldset__middle .tf-search__form__divider:first-child {
     display: none;
   }
 }
 
 @media only screen and (max-width: 767.98px) {
-  .tf-search__form__car__fieldset .tf-search__form__fieldset__middle .tf-search__form__group {
+  .tf-booking-forms-wrapper .tf-search__form__car__fieldset .tf-search__form__fieldset__middle .tf-search__form__group {
     flex-basis: calc(50% - 14px);
   }
 }
 
 @media only screen and (max-width: 530px) {
-  .tf-search__form__car__fieldset .tf-search__form__fieldset__middle .tf-search__form__group {
+  .tf-booking-forms-wrapper .tf-search__form__car__fieldset .tf-search__form__fieldset__middle .tf-search__form__group {
     flex-basis: 100%;
   }
 }
 
 @media only screen and (max-width: 991.98px) {
-  .tf-search__form__car__fieldset .tf-search__form__fieldset__middle .tf-search__form__group .tf-search__form__field {
+  .tf-booking-forms-wrapper .tf-search__form__car__fieldset .tf-search__form__fieldset__middle .tf-search__form__group .tf-search__form__field {
     gap: 10px;
   }
 }
 
 @media only screen and (max-width: 767.98px) {
-  .tf-search__form__car__fieldset .tf-search__form__fieldset__middle .tf-search__form__group .tf-time-head {
+  .tf-booking-forms-wrapper .tf-search__form__car__fieldset .tf-search__form__fieldset__middle .tf-search__form__group .tf-time-head {
     font-size: 20px;
   }
-  .tf-search__form__car__fieldset .tf-search__form__fieldset__middle .tf-search__form__group .tf-time-head svg {
+  .tf-booking-forms-wrapper .tf-search__form__car__fieldset .tf-search__form__fieldset__middle .tf-search__form__group .tf-time-head svg {
     width: 16px;
     height: auto;
   }
 }
 
 @media only screen and (max-width: 1320px) {
-  .tf-search__form__car__fieldset .tf-search__form__fieldset__right .tf-search__form__submit {
+  .tf-booking-forms-wrapper .tf-search__form__car__fieldset .tf-search__form__fieldset__right .tf-search__form__submit {
     position: absolute;
     bottom: 40px;
   }
 }
 
-.tf-search__form__divider {
+.tf-booking-forms-wrapper .tf-search__form__divider {
   background: #ffffff2e;
   width: 1px;
   height: 100px;
 }
 
-.tf-search__form__divider:last-child {
+.tf-booking-forms-wrapper .tf-search__form__divider:last-child {
   width: a;
 }
 
 @media only screen and (max-width: 767.98px) {
-  .tf-search__form__divider {
+  .tf-booking-forms-wrapper .tf-search__form__divider {
     display: none;
   }
 }
 
-.tf-search__form__field {
+.tf-booking-forms-wrapper .tf-search__form__field {
   display: flex;
   -webkit-align-items: center;
   -ms-flex-align: center;
@@ -4867,26 +4880,27 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 @media only screen and (max-width: 360px) {
-  .tf-search__form__field {
+  .tf-booking-forms-wrapper .tf-search__form__field {
     align-items: self-start;
   }
 }
 
-.tf-search__form__field input[type="number"]::-webkit-outer-spin-button {
+.tf-booking-forms-wrapper .tf-search__form__field input[type="number"]::-webkit-outer-spin-button,
+.tf-booking-forms-wrapper .tf-search__form__field input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
   margin: 0;
 }
 
-.tf-search__form__field input[type="number"] {
+.tf-booking-forms-wrapper .tf-search__form__field input[type="number"] {
   -moz-appearance: textfield !important;
 }
 
-.tf-search__form__field .field--title {
-  -webkit-appearance: none !important;
-  -moz-appearance: none !important;
-  appearance: none !important;
+.tf-booking-forms-wrapper .tf-search__form__field .field--title {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   font-size: 60px;
   font-weight: 500;
   line-height: 70.2px;
@@ -4898,19 +4912,19 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   margin-right: 8px;
 }
 
-.tf-search__form__field .field--title:focus {
+.tf-booking-forms-wrapper .tf-search__form__field .field--title:focus {
   color: #ffffff;
 }
 
 @media only screen and (max-width: 1366px) {
-  .tf-search__form__field .field--title {
+  .tf-booking-forms-wrapper .tf-search__form__field .field--title {
     font-size: 50px;
     line-height: 60.2px;
   }
 }
 
 @media only screen and (max-width: 991.98px) {
-  .tf-search__form__field .field--title {
+  .tf-booking-forms-wrapper .tf-search__form__field .field--title {
     font-size: 35px;
     line-height: 1;
     margin-left: 0;
@@ -4918,14 +4932,14 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 @media only screen and (max-width: 767.98px) {
-  .tf-search__form__field .field--title {
+  .tf-booking-forms-wrapper .tf-search__form__field .field--title {
     margin-left: 0;
     margin-right: 0;
     font-size: 30px;
   }
 }
 
-.tf-search__form__field__incdec {
+.tf-booking-forms-wrapper .tf-search__form__field__incdec {
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -4933,14 +4947,14 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 @media only screen and (max-width: 767.98px) {
-  .tf-search__form__field__incdec {
+  .tf-booking-forms-wrapper .tf-search__form__field__incdec {
     flex-direction: row;
     align-items: self-start;
     gap: 0;
   }
 }
 
-.tf-search__form__field__incdec span.form--span {
+.tf-booking-forms-wrapper .tf-search__form__field__incdec span.form--span {
   width: auto;
   height: auto;
   background: transparent;
@@ -4954,14 +4968,14 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 @media only screen and (max-width: 767.98px) {
-  .tf-search__form__field__incdec span.form--span {
+  .tf-booking-forms-wrapper .tf-search__form__field__incdec span.form--span {
     right: 8px;
     top: 0;
   }
 }
 
 @media only screen and (max-width: 400px) {
-  .tf-search__form__field__incdec span.form--span {
+  .tf-booking-forms-wrapper .tf-search__form__field__incdec span.form--span {
     position: absolute;
     left: 5px;
     top: 100%;
@@ -4969,18 +4983,18 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   }
 }
 
-.tf-search__form__field__incdec span.form--span:last-child {
+.tf-booking-forms-wrapper .tf-search__form__field__incdec span.form--span:last-child {
   top: 38px;
 }
 
 @media only screen and (max-width: 991.98px) {
-  .tf-search__form__field__incdec span.form--span:last-child {
+  .tf-booking-forms-wrapper .tf-search__form__field__incdec span.form--span:last-child {
     top: 31px;
   }
 }
 
 @media only screen and (max-width: 767.98px) {
-  .tf-search__form__field__incdec span.form--span:last-child {
+  .tf-booking-forms-wrapper .tf-search__form__field__incdec span.form--span:last-child {
     position: absolute;
     right: 8px;
     top: 24px;
@@ -4988,69 +5002,69 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 @media only screen and (max-width: 400px) {
-  .tf-search__form__field__incdec span.form--span:last-child {
+  .tf-booking-forms-wrapper .tf-search__form__field__incdec span.form--span:last-child {
     left: 35px;
     top: 100%;
   }
 }
 
-.tf-search__form__field__incdec span.form--span svg:hover {
+.tf-booking-forms-wrapper .tf-search__form__field__incdec span.form--span svg:hover {
   fill: #2051f5;
 }
 
 @media only screen and (max-width: 991.98px) {
-  .tf-search__form__field__incdec span.form--span svg {
+  .tf-booking-forms-wrapper .tf-search__form__field__incdec span.form--span svg {
     width: 28px;
     height: 20px;
   }
 }
 
 @media only screen and (max-width: 767.98px) {
-  .tf-search__form__field__incdec span.form--span svg {
+  .tf-booking-forms-wrapper .tf-search__form__field__incdec span.form--span svg {
     width: 25px;
   }
 }
 
-.tf-search__form__field__icon {
+.tf-booking-forms-wrapper .tf-search__form__field__icon {
   min-width: 40px;
   max-width: 40px;
   line-height: 0;
 }
 
 @media only screen and (max-width: 767.98px) {
-  .tf-search__form__field__icon {
+  .tf-booking-forms-wrapper .tf-search__form__field__icon {
     min-width: 35px;
     max-width: 35px;
   }
 }
 
 @media only screen and (max-width: 1366px) {
-  .tf-search__form__field__icon svg {
+  .tf-booking-forms-wrapper .tf-search__form__field__icon svg {
     width: 38px;
     height: auto;
   }
 }
 
 @media only screen and (max-width: 991.98px) {
-  .tf-search__form__field__icon svg {
+  .tf-booking-forms-wrapper .tf-search__form__field__icon svg {
     width: 35px;
     height: 30px;
   }
 }
 
 @media only screen and (max-width: 767.98px) {
-  .tf-search__form__field__icon svg {
+  .tf-booking-forms-wrapper .tf-search__form__field__icon svg {
     width: 30px;
   }
 }
 
 @media only screen and (max-width: 360px) {
-  .tf-search__form__field__icon svg {
+  .tf-booking-forms-wrapper .tf-search__form__field__icon svg {
     margin-top: 4px;
   }
 }
 
-.tf-search__form__field .icon--location {
+.tf-booking-forms-wrapper .tf-search__form__field .icon--location {
   position: absolute;
   top: 17px;
   right: 17px;
@@ -5059,87 +5073,87 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 @media only screen and (max-width: 991.98px) {
-  .tf-search__form__field .icon--location {
+  .tf-booking-forms-wrapper .tf-search__form__field .icon--location {
     top: 10px;
   }
 }
 
 @media only screen and (max-width: 767.98px) {
-  .tf-search__form__field .icon--location {
+  .tf-booking-forms-wrapper .tf-search__form__field .icon--location {
     top: 6px;
     right: 16px;
   }
 }
 
 @media only screen and (max-width: 1366px) {
-  .tf-search__form__field .icon--location svg {
+  .tf-booking-forms-wrapper .tf-search__form__field .icon--location svg {
     width: 12px;
   }
 }
 
-.tf-search__form__field__mthyr {
+.tf-booking-forms-wrapper .tf-search__form__field__mthyr {
   display: flex;
   flex-direction: column;
 }
 
 @media only screen and (max-width: 767.98px) {
-  .tf-search__form__field__mthyr {
+  .tf-booking-forms-wrapper .tf-search__form__field__mthyr {
     margin-left: 10px;
   }
-  .tf-search__form__field__mthyr span {
+  .tf-booking-forms-wrapper .tf-search__form__field__mthyr span {
     font-size: 15px;
     line-height: 20px;
   }
 }
 
-.tf-search__form .tf-check-inout-hidden {
+.tf-booking-forms-wrapper .tf-search__form .tf-check-inout-hidden {
   visibility: hidden;
   position: absolute;
   height: 0;
   padding: 0;
 }
 
-.tf-search__form__group {
+.tf-booking-forms-wrapper .tf-search__form__group {
   padding: 0 !important;
   border: 0;
   background: transparent;
 }
 
 @media only screen and (max-width: 767.98px) {
-  .tf-search__form__group {
+  .tf-booking-forms-wrapper .tf-search__form__group {
     flex-basis: calc(33.33% - 14px);
   }
 }
 
 @media only screen and (max-width: 767.98px) {
-  .tf-search__form__group:nth-child(5) {
+  .tf-booking-forms-wrapper .tf-search__form__group:nth-child(5) {
     max-width: fit-content;
   }
 }
 
-.tf-search__form__group.tf_car_date_time_picker .tf-search__form__field {
+.tf-booking-forms-wrapper .tf-search__form__group.tf_car_date_time_picker .tf-search__form__field {
   display: flex;
   align-items: center;
   gap: 16px;
 }
 
-.tf-search__form__group.tf_car_date_time_picker .tf-search__form__field > div {
+.tf-booking-forms-wrapper .tf-search__form__group.tf_car_date_time_picker .tf-search__form__field > div {
   cursor: pointer;
 }
 
 @media only screen and (max-width: 767.98px) {
-  .tf-search__form__group.tf-checkin-group, .tf-search__form__group.tf-checkout-group {
+  .tf-booking-forms-wrapper .tf-search__form__group.tf-checkin-group, .tf-booking-forms-wrapper .tf-search__form__group.tf-checkout-group {
     max-width: fit-content;
   }
 }
 
 @media only screen and (max-width: 575.98px) {
-  .tf-search__form__group.tf-checkin-group, .tf-search__form__group.tf-checkout-group {
+  .tf-booking-forms-wrapper .tf-search__form__group.tf-checkin-group, .tf-booking-forms-wrapper .tf-search__form__group.tf-checkout-group {
     flex-basis: calc(45% - 14px);
   }
 }
 
-.tf-search__form__label {
+.tf-booking-forms-wrapper .tf-search__form__label {
   font-size: 20px;
   font-weight: 400;
   line-height: 22.98px;
@@ -5149,27 +5163,27 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 @media only screen and (max-width: 991.98px) {
-  .tf-search__form__label {
+  .tf-booking-forms-wrapper .tf-search__form__label {
     font-size: 18px;
     margin-bottom: 18px;
   }
 }
 
 @media only screen and (max-width: 767.98px) {
-  .tf-search__form__label {
+  .tf-booking-forms-wrapper .tf-search__form__label {
     font-size: 16px;
     margin-bottom: 12px;
   }
 }
 
 @media only screen and (max-width: 360px) {
-  .tf-search__form__label {
+  .tf-booking-forms-wrapper .tf-search__form__label {
     font-size: 14px;
     margin-bottom: 8px;
   }
 }
 
-.tf-search__form__input {
+.tf-booking-forms-wrapper .tf-search__form__input {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -5185,17 +5199,17 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 @media only screen and (max-width: 767.98px) {
-  .tf-search__form__input {
+  .tf-booking-forms-wrapper .tf-search__form__input {
     font-size: 14px;
     padding: 12px 16px 16px !important;
   }
 }
 
-.tf-search__form__input::placeholder {
+.tf-booking-forms-wrapper .tf-search__form__input::placeholder {
   color: #ffffff;
 }
 
-.tf-search__form__submit {
+.tf-booking-forms-wrapper .tf-search__form__submit {
   background: #003C7A;
   border-color: #003C7A;
   color: #ffffff;
@@ -5215,24 +5229,24 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 @media only screen and (max-width: 767.98px) {
-  .tf-search__form__submit {
+  .tf-booking-forms-wrapper .tf-search__form__submit {
     min-height: 45px;
     font-size: 15px;
     min-width: 160px;
   }
 }
 
-.tf-search__form__submit:hover {
+.tf-booking-forms-wrapper .tf-search__form__submit:hover {
   background: #faeedc;
   border-color: #faeedc;
   color: #060D1C;
 }
 
-.tf-search__form__submit:hover path {
+.tf-booking-forms-wrapper .tf-search__form__submit:hover path {
   fill: #060D1C;
 }
 
-.tf-search__form .tf-driver-location {
+.tf-booking-forms-wrapper .tf-search__form .tf-driver-location {
   max-width: 1678px;
   display: flex;
   color: #ffffff;
@@ -5240,7 +5254,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   margin-top: 20px;
 }
 
-.tf-search__form .tf-driver-location ul {
+.tf-booking-forms-wrapper .tf-search__form .tf-driver-location ul {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -5249,7 +5263,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   gap: 0px 32px;
 }
 
-.tf-search__form .tf-driver-location ul label {
+.tf-booking-forms-wrapper .tf-search__form .tf-driver-location ul label {
   color: #ffffff;
   font-size: 16px;
   display: block;
@@ -5263,7 +5277,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   user-select: none;
 }
 
-.tf-search__form .tf-driver-location ul label input {
+.tf-booking-forms-wrapper .tf-search__form .tf-driver-location ul label input {
   position: absolute;
   opacity: 0;
   cursor: pointer;
@@ -5271,11 +5285,11 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   width: 0;
 }
 
-.tf-search__form .tf-driver-location ul label input:checked ~ .tf-checkmark::after {
+.tf-booking-forms-wrapper .tf-search__form .tf-driver-location ul label input:checked ~ .tf-checkmark::after {
   display: block;
 }
 
-.tf-search__form .tf-driver-location ul label .tf-checkmark {
+.tf-booking-forms-wrapper .tf-search__form .tf-driver-location ul label .tf-checkmark {
   position: absolute;
   top: 3px;
   left: 0;
@@ -5286,7 +5300,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   border-radius: 3px;
 }
 
-.tf-search__form .tf-driver-location ul label .tf-checkmark::after {
+.tf-booking-forms-wrapper .tf-search__form .tf-driver-location ul label .tf-checkmark::after {
   content: "";
   position: absolute;
   display: none;
@@ -5809,13 +5823,13 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   position: absolute;
   top: 16px;
   left: 16px;
-  color: #060D1C;
+  color: #ffffff;
   font-size: 12px;
   font-weight: 700;
   line-height: 14px;
   padding: 8px 16px;
   border-radius: 32px;
-  background-color: #060D1C;
+  background-color: #0E3DD8;
 }
 
 .fancybox-container .tf-archive-details .tf-archive-hotel .tf-archive-hotel-content {
@@ -6064,7 +6078,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 .fancybox-container .tf-archive-filter .tf_widget .al-range-slider__track {
-  background: #EEE;
+  background: #F1F3F4;
   height: 10px;
   box-shadow: none !important;
   margin: 30px 0px 10px 0px;
@@ -8108,7 +8122,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 
 .tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select {
   border-radius: 8px;
-  background: #FFF;
+  background: #ffffff;
   padding: 16px;
   width: 33.33%;
 }
@@ -8124,11 +8138,11 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 .tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date:first-child {
-  border-right: 1px solid #DFE6ED;
+  border-right: 1px solid #f0f2f4;
 }
 
 .tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date i {
-  color: #566676;
+  color: #686E7A;
 }
 
 .tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date .tf-flex {
@@ -8141,12 +8155,9 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 .tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date .info-select h5 {
-  color: #27333F;
+  color: #060D1C;
   font-size: 12px !important;
-  font-style: normal !important;
   font-weight: 400 !important;
-  line-height: 120% !important;
-  /* 14.4px */
   margin-bottom: 8px;
   margin-top: 0px;
 }
@@ -8154,12 +8165,8 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 .tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input {
   min-width: auto;
   width: 100% !important;
-  color: #27333F;
+  color: #686E7A;
   font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 150%;
-  /* 24px */
   border: 0px solid !important;
   padding-left: 0px;
   box-shadow: none;
@@ -8172,18 +8179,14 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 .tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input::placeholder {
-  color: #27333F;
+  color: #686E7A;
 }
 
 .tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date .info-select select {
   min-width: auto;
   width: 100% !important;
-  color: #27333F;
+  color: #686E7A;
   font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 150%;
-  /* 24px */
   border: 0px solid !important;
   background-color: transparent;
 }
@@ -8197,11 +8200,11 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   max-height: 200px;
   overflow: auto;
   border-radius: 4px;
-  background: #EEF2F6;
+  background: #faeedc;
   padding: 2px;
   box-shadow: 0px 4px 16px 0px rgba(2, 28, 53, 0.2);
   scrollbar-width: thin;
-  scrollbar-color: #9c9c9c #ffffff;
+  scrollbar-color: #808080 #ffffff;
   /* Chrome, Edge, and Safari */
 }
 
@@ -8214,7 +8217,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 .tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .autocomplete-items::-webkit-scrollbar-thumb {
-  background-color: #9c9c9c;
+  background-color: #808080;
   border-radius: 5px;
   border: 3px solid #ffffff;
 }
@@ -8223,9 +8226,9 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   padding: 8px;
   cursor: pointer;
   border-radius: 4px;
-  background: #FFF;
+  background: #ffffff;
   text-transform: capitalize;
-  color: #27333F;
+  color: #686E7A;
   font-size: 16px;
   margin-bottom: 2px;
   transition: .3s all ease;
@@ -8236,7 +8239,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 .tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .autocomplete-items > div:hover {
-  background-color: #F8FAFC;
+  background-color: #ffffff;
 }
 
 .tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap {
@@ -8272,7 +8275,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 .tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select.tf-pick-drop-location.active .tf-select-date:first-child {
-  border-right: 0px solid #DFE6ED;
+  border-right: 0px solid #f0f2f4;
 }
 
 .tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select.tf-pick-drop-location.active .tf-select-date:last-child {
@@ -8284,7 +8287,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 .tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select.tf-date-single-select.full-width .tf-select-date:first-child {
-  border-right: 0px solid #DFE6ED;
+  border-right: 0px solid #f0f2f4;
 }
 
 .tf-archive-search-box-wrapper .tf-driver-location-box {
@@ -8317,12 +8320,8 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 .tf-archive-search-box-wrapper .tf-driver-location-box .tf-driver-location ul li label {
-  color: #566676;
+  color: #686E7A;
   font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 150%;
-  /* 24px */
   display: block;
   position: relative;
   padding-left: 35px;
@@ -8347,7 +8346,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 .tf-archive-search-box-wrapper .tf-driver-location-box .tf-driver-location ul li label input:checked ~ .tf-checkmark {
-  background-color: #F8FAFC;
+  background-color: #ffffff;
 }
 
 .tf-archive-search-box-wrapper .tf-driver-location-box .tf-driver-location ul li label .tf-checkmark {
@@ -8356,7 +8355,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   left: 0;
   height: 20px;
   width: 20px;
-  border: 2px solid #566676;
+  border: 2px solid #F5FAFF;
   background-color: transparent;
   border-radius: 5px;
 }
@@ -8369,7 +8368,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   top: 2px;
   width: 7px;
   height: 10px;
-  border: solid #566676;
+  border: solid #F5FAFF;
   border-width: 0 3px 3px 0;
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
@@ -8377,7 +8376,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 .tf-archive-search-box-wrapper .tf-driver-location-box .tf-driver-location span#tf-required {
-  color: red;
+  color: #ff6055;
 }
 
 @media only screen and (max-width: 767.98px) {
@@ -8388,9 +8387,9 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 
 .tf-archive-search-box-wrapper .tf-driver-location-box .tf-submit-button button {
   border-radius: 8px;
-  background: #0866C4;
+  background: #0E3DD8;
   padding: 16px 50px;
-  color: #FFF;
+  color: #ffffff;
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
@@ -8402,12 +8401,12 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 .tf-archive-search-box-wrapper .tf-driver-location-box .tf-submit-button button:hover {
-  background: #094C90;
+  background: #003C7A;
 }
 
 .tf-archive-search-box-wrapper .tf-driver-location-box .tf-submit-button button i {
   margin-left: 8px;
-  color: #FFF;
+  color: #ffffff;
 }
 
 .tf-single-template__two,
@@ -8472,7 +8471,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   align-items: center;
   justify-content: center;
   border-radius: 50px;
-  box-shadow: 0px 0px 24px 5px #E0E8EE;
+  box-shadow: 0px 0px 24px 5px #e0e8ee;
 }
 
 .tf-single-template__two .tf-single-head .tf-head-info .tf-share a {
@@ -8716,13 +8715,13 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   width: 100%;
   z-index: 1;
   background: #060D1C;
-  font-size: 16px;
+  font-size: var(--tf-base-font-size2px);
 }
 
 @media only screen and (max-width: 767.98px) {
   .tf-single-template__two .tf-hero-gallery .tf-gallery a.tf-gallery-more::before {
     text-align: center;
-    font-size: 12px;
+    font-size: var(--tf-base-font-size-4px);
   }
 }
 
@@ -8747,11 +8746,13 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 .tf-single-template__two .tf-review-wrapper .tf-review-data.tf-box {
-  box-shadow: 0px 0px 24px 5px #E0E8EE;
+  box-shadow: 0px 0px 24px 5px #e0e8ee;
 }
 
 .tf-single-template__two .tf-review-wrapper .tf-review-data {
   background: #ffffff;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
   border-radius: 5px;
   flex-basis: 20%;
 }
@@ -8782,6 +8783,8 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   font-size: 30px !important;
   color: #0E3DD8;
   font-weight: 500;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
   border-radius: 5px;
   width: 100px;
   height: 75px;
@@ -8990,7 +8993,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 .tf-single-template__two .tf-review-wrapper .tf-review-form .tf-review-form-container .tf-rating-wrapper .tf-form-single-rating .ratings-container label:before {
-  color: #0E3DD8;
+  color: #ffc107;
   font-size: 15px;
 }
 
@@ -9083,9 +9086,11 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 
 .tf-single-template__two .tf-faq-wrapper .tf-faq-inner .active .tf-faq-single-inner {
   background: #ffffff;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
   border-radius: 5px;
   margin: 0px 0px 30px 0px;
-  box-shadow: 0px 0px 24px 5px #E0E8EE;
+  box-shadow: 0px 0px 24px 5px #e0e8ee;
 }
 
 .tf-single-template__two .tf-faq-wrapper .tf-faq-inner .active .tf-faq-single-inner .tf-faq-collaps .faq-icon i.fa-plus {
@@ -9103,6 +9108,10 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 
 .tf-single-template__two .tf-faq-wrapper .tf-faq-single-inner .tf-faq-content {
   padding: 0px 24px 24px 24px;
+}
+
+.tf-single-template__two .tf-faq-wrapper .tf-faq-single-inner .tf-faq-content p {
+  margin: 0;
 }
 
 .tf-single-template__two .tf-faq-wrapper .tf-faq-single-inner .tf-faq-collaps {
@@ -9356,6 +9365,8 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 .tf-archive-template__two .tf-archive-right .tf-related-single .tf-related-item-featured img {
   height: 100%;
   object-fit: cover;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
   border-radius: 5px;
 }
 
@@ -9371,7 +9382,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 .tf-archive-template__two .tf-archive-right .tf_widget .al-range-slider__track {
-  background: #faeedc;
+  background: #F1F3F4;
   height: 10px;
   box-shadow: none !important;
   margin: 30px 0px 10px 0px;
@@ -9595,7 +9606,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 .tf-archive-template__two .tf-search-results-list .tf-item-card {
   background-color: #ffffff;
   border-radius: 5px;
-  box-shadow: 0px 13px 30px #E0E8EE;
+  box-shadow: 0px 13px 30px #e0e8ee;
 }
 
 .tf-archive-template__two .tf-search-results-list .tf-item-card .tf-item-featured {
@@ -10081,6 +10092,12 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   }
 }
 
+.tf-single-template__three .tf-content-wrapper .tf-archive-details .tf-available-room .tf-available-room-content .tf-available-room-content-left .tf-card-heading-info .tf-mobile.tf-pricing-info,
+.tf-archive-template__three .tf-content-wrapper .tf-archive-details .tf-available-room .tf-available-room-content .tf-available-room-content-left .tf-card-heading-info .tf-mobile.tf-pricing-info,
+.page-template-tf-search__three .tf-content-wrapper .tf-archive-details .tf-available-room .tf-available-room-content .tf-available-room-content-left .tf-card-heading-info .tf-mobile.tf-pricing-info {
+  display: none;
+}
+
 @media only screen and (max-width: 767.98px) {
   .tf-single-template__three .tf-content-wrapper .tf-archive-details .tf-available-room .tf-available-room-content .tf-available-room-content-left .tf-card-heading-info .tf-mobile.tf-pricing-info,
   .tf-archive-template__three .tf-content-wrapper .tf-archive-details .tf-available-room .tf-available-room-content .tf-available-room-content-left .tf-card-heading-info .tf-mobile.tf-pricing-info,
@@ -10398,7 +10415,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 .tf-single-template__three .tf-available-rooms-wrapper,
 .tf-archive-template__three .tf-available-rooms-wrapper,
 .page-template-tf-search__three .tf-available-rooms-wrapper {
-  background: #faeedc;
+  background: #FCF4E8;
   padding: 32px;
   margin-bottom: 32px;
 }
@@ -11559,7 +11576,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 .tf-single-template__three .tf-details-right .tf_widget .al-range-slider__track,
 .tf-archive-template__three .tf-details-right .tf_widget .al-range-slider__track,
 .page-template-tf-search__three .tf-details-right .tf_widget .al-range-slider__track {
-  background: #faeedc;
+  background: #F1F3F4;
   height: 10px;
   box-shadow: none !important;
   margin: 0px 0px 10px 0px;
@@ -11619,6 +11636,153 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 .tf-archive-template__three .tf-details-right .tf_widget.widget_tf_price_filters,
 .page-template-tf-search__three .tf-details-right .tf_widget.widget_tf_price_filters {
   margin-bottom: 54px;
+}
+
+.tf-single-template__three .tf-popup-wrapper,
+.tf-archive-template__three .tf-popup-wrapper,
+.page-template-tf-search__three .tf-popup-wrapper {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999999999;
+  background: rgba(48, 40, 28, 0.301961);
+  backdrop-filter: blur(15px);
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tf-single-template__three .tf-popup-wrapper.tf-show,
+.tf-archive-template__three .tf-popup-wrapper.tf-show,
+.page-template-tf-search__three .tf-popup-wrapper.tf-show {
+  visibility: visible;
+  opacity: 1;
+  transform: scale(1);
+}
+
+.tf-single-template__three .tf-popup-wrapper.tf-show .tf-popup-inner,
+.tf-archive-template__three .tf-popup-wrapper.tf-show .tf-popup-inner,
+.page-template-tf-search__three .tf-popup-wrapper.tf-show .tf-popup-inner {
+  transform: scale(1);
+}
+
+.tf-single-template__three .tf-popup-wrapper .tf-popup-inner,
+.tf-archive-template__three .tf-popup-wrapper .tf-popup-inner,
+.page-template-tf-search__three .tf-popup-wrapper .tf-popup-inner {
+  width: 1130px;
+  background: #faeedc;
+  padding: 24px;
+  max-height: 695px;
+  max-width: 80vw;
+  position: relative;
+  transform: scale(0.9);
+  transition: 0.3s;
+}
+
+.tf-single-template__three .tf-popup-wrapper .tf-popup-inner .tf-popup-body,
+.tf-archive-template__three .tf-popup-wrapper .tf-popup-inner .tf-popup-body,
+.page-template-tf-search__three .tf-popup-wrapper .tf-popup-inner .tf-popup-body {
+  width: 100%;
+  max-height: 624px;
+  overflow: hidden;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  scrollbar-width: thin;
+  scrollbar-color: #808080 #faeedc;
+}
+
+@media only screen and (max-width: 767.98px) {
+  .tf-single-template__three .tf-popup-wrapper .tf-popup-inner .tf-popup-body,
+  .tf-archive-template__three .tf-popup-wrapper .tf-popup-inner .tf-popup-body,
+  .page-template-tf-search__three .tf-popup-wrapper .tf-popup-inner .tf-popup-body {
+    grid-template-columns: 1fr 1fr;
+    max-height: 320px;
+  }
+}
+
+.tf-single-template__three .tf-popup-wrapper .tf-popup-inner .tf-popup-body scrollbar,
+.tf-archive-template__three .tf-popup-wrapper .tf-popup-inner .tf-popup-body scrollbar,
+.page-template-tf-search__three .tf-popup-wrapper .tf-popup-inner .tf-popup-body scrollbar {
+  width: 5px;
+}
+
+.tf-single-template__three .tf-popup-wrapper .tf-popup-inner .tf-popup-body scrollbar-thumb,
+.tf-archive-template__three .tf-popup-wrapper .tf-popup-inner .tf-popup-body scrollbar-thumb,
+.page-template-tf-search__three .tf-popup-wrapper .tf-popup-inner .tf-popup-body scrollbar-thumb {
+  background-color: #808080;
+  border-radius: 4px;
+}
+
+.tf-single-template__three .tf-popup-wrapper .tf-popup-inner .tf-popup-body img.tf-popup-image,
+.tf-archive-template__three .tf-popup-wrapper .tf-popup-inner .tf-popup-body img.tf-popup-image,
+.page-template-tf-search__three .tf-popup-wrapper .tf-popup-inner .tf-popup-body img.tf-popup-image {
+  width: 100%;
+  height: fit-content;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+}
+
+.tf-single-template__three .tf-popup-wrapper .tf-popup-inner .tf-popup-body::-webkit-scrollbar,
+.tf-archive-template__three .tf-popup-wrapper .tf-popup-inner .tf-popup-body::-webkit-scrollbar,
+.page-template-tf-search__three .tf-popup-wrapper .tf-popup-inner .tf-popup-body::-webkit-scrollbar {
+  width: 5px;
+}
+
+.tf-single-template__three .tf-popup-wrapper .tf-popup-inner .tf-popup-body::-webkit-scrollbar-thumb,
+.tf-archive-template__three .tf-popup-wrapper .tf-popup-inner .tf-popup-body::-webkit-scrollbar-thumb,
+.page-template-tf-search__three .tf-popup-wrapper .tf-popup-inner .tf-popup-body::-webkit-scrollbar-thumb {
+  background-color: #808080;
+  border-radius: 4px;
+}
+
+.tf-single-template__three .tf-popup-wrapper .tf-popup-inner .tf-popup-body::-webkit-scrollbar-track,
+.tf-archive-template__three .tf-popup-wrapper .tf-popup-inner .tf-popup-body::-webkit-scrollbar-track,
+.page-template-tf-search__three .tf-popup-wrapper .tf-popup-inner .tf-popup-body::-webkit-scrollbar-track {
+  background-color: #faeedc;
+}
+
+.tf-single-template__three .tf-popup-wrapper .tf-popup-inner .tf-popup-close,
+.tf-archive-template__three .tf-popup-wrapper .tf-popup-inner .tf-popup-close,
+.page-template-tf-search__three .tf-popup-wrapper .tf-popup-inner .tf-popup-close {
+  position: absolute;
+  right: -15px;
+  top: -15px;
+  padding: 6px;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  background: #faeedc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: .3s all ease;
+  cursor: pointer;
+}
+
+.tf-single-template__three .tf-popup-wrapper .tf-popup-inner .tf-popup-close:hover,
+.tf-archive-template__three .tf-popup-wrapper .tf-popup-inner .tf-popup-close:hover,
+.page-template-tf-search__three .tf-popup-wrapper .tf-popup-inner .tf-popup-close:hover {
+  background: #ffffff;
+}
+
+.tf-single-template__three .tf-popup-wrapper .tf-popup-inner .tf-popup-close:focus,
+.tf-archive-template__three .tf-popup-wrapper .tf-popup-inner .tf-popup-close:focus,
+.page-template-tf-search__three .tf-popup-wrapper .tf-popup-inner .tf-popup-close:focus {
+  background: #ffffff;
+}
+
+.tf-single-template__three .tf-popup-wrapper .tf-popup-inner .tf-popup-close i,
+.tf-archive-template__three .tf-popup-wrapper .tf-popup-inner .tf-popup-close i,
+.page-template-tf-search__three .tf-popup-wrapper .tf-popup-inner .tf-popup-close i {
+  color: #686E7A;
+  font-size: 18px;
 }
 
 .single-tf_apartment .tf-single-template__three .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-checkin,
@@ -12568,7 +12732,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   font-size: 16px;
   font-weight: 700;
   line-height: 24px;
-  background: #FCF4E8;
+  background: #faeedc;
   width: 100%;
   border: none;
   padding: 12px 0;
@@ -13313,121 +13477,6 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   .tf-single-template__three .tf-single-widgets {
     gap: 16px;
   }
-}
-
-.tf-single-template__three .tf-popup-wrapper {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 9999999999;
-  background: rgba(48, 40, 28, 0.301961);
-  backdrop-filter: blur(15px);
-  visibility: hidden;
-  opacity: 0;
-  transition: 0.3s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.tf-single-template__three .tf-popup-wrapper.tf-show {
-  visibility: visible;
-  opacity: 1;
-  transform: scale(1);
-}
-
-.tf-single-template__three .tf-popup-wrapper.tf-show .tf-popup-inner {
-  transform: scale(1);
-}
-
-.tf-single-template__three .tf-popup-wrapper .tf-popup-inner {
-  width: 1130px;
-  background: #faeedc;
-  padding: 24px;
-  max-height: 695px;
-  max-width: 80vw;
-  position: relative;
-  transform: scale(0.9);
-  transition: 0.3s;
-}
-
-.tf-single-template__three .tf-popup-wrapper .tf-popup-inner .tf-popup-body {
-  width: 100%;
-  max-height: 624px;
-  overflow: hidden;
-  overflow-y: auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 10px;
-  scrollbar-width: thin;
-  scrollbar-color: #808080 #faeedc;
-}
-
-@media only screen and (max-width: 767.98px) {
-  .tf-single-template__three .tf-popup-wrapper .tf-popup-inner .tf-popup-body {
-    grid-template-columns: 1fr 1fr;
-    max-height: 320px;
-  }
-}
-
-.tf-single-template__three .tf-popup-wrapper .tf-popup-inner .tf-popup-body scrollbar {
-  width: 5px;
-}
-
-.tf-single-template__three .tf-popup-wrapper .tf-popup-inner .tf-popup-body scrollbar-thumb {
-  background-color: #808080;
-  border-radius: 4px;
-}
-
-.tf-single-template__three .tf-popup-wrapper .tf-popup-inner .tf-popup-body img.tf-popup-image {
-  width: 100%;
-  height: fit-content;
-  aspect-ratio: 1/1;
-  object-fit: cover;
-}
-
-.tf-single-template__three .tf-popup-wrapper .tf-popup-inner .tf-popup-body::-webkit-scrollbar {
-  width: 5px;
-}
-
-.tf-single-template__three .tf-popup-wrapper .tf-popup-inner .tf-popup-body::-webkit-scrollbar-thumb {
-  background-color: #808080;
-  border-radius: 4px;
-}
-
-.tf-single-template__three .tf-popup-wrapper .tf-popup-inner .tf-popup-body::-webkit-scrollbar-track {
-  background-color: #faeedc;
-}
-
-.tf-single-template__three .tf-popup-wrapper .tf-popup-inner .tf-popup-close {
-  position: absolute;
-  right: -15px;
-  top: -15px;
-  padding: 6px;
-  height: 30px;
-  width: 30px;
-  border-radius: 50%;
-  background: #faeedc;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: .3s all ease;
-  cursor: pointer;
-}
-
-.tf-single-template__three .tf-popup-wrapper .tf-popup-inner .tf-popup-close:hover {
-  background: #ffffff;
-}
-
-.tf-single-template__three .tf-popup-wrapper .tf-popup-inner .tf-popup-close:focus {
-  background: #ffffff;
-}
-
-.tf-single-template__three .tf-popup-wrapper .tf-popup-inner .tf-popup-close i {
-  color: #686E7A;
-  font-size: 18px;
 }
 
 .tf-single-template__three .tf-popup-video-item {
@@ -15316,7 +15365,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 .tf-archive-template__three .tf-filter-wrapper .tf-filter-list-item .tf-filter-pricing-range .al-range-slider__track,
 .page-template-tf-search__three .tf-filter-wrapper .tf-filter-list-item .tf-filter-pricing-range .al-range-slider__track {
   box-shadow: none;
-  background: #faeedc;
+  background: #F1F3F4;
   height: 8px;
   margin: 10px 0 40px 0;
 }
@@ -15418,7 +15467,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 
 .tf-archive-template__four .tf-archive-search-form {
   padding: 64px 0;
-  background-color: #FEF9F6;
+  background-color: #FCF4E8;
   background-image: url(../images/hotel-form-bg.png);
   background-repeat: no-repeat;
   background-position: center center;
@@ -15612,7 +15661,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   overflow: auto;
   padding: 4px;
   border-radius: 4px;
-  background: #FEF9F6;
+  background: #FCF4E8;
   box-shadow: 0px 4px 40px 0px rgba(80, 33, 0, 0.1);
 }
 
@@ -15677,7 +15726,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   transition: 0.3s;
   border-radius: 8px;
   padding: 16px;
-  background: #FEF9F6;
+  background: #FCF4E8;
   box-shadow: 0px 8px 40px 0px rgba(0, 0, 0, 0.1);
 }
 
@@ -15772,7 +15821,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
-  background: #FEF9F6;
+  background: #FCF4E8;
   position: relative;
 }
 
@@ -16078,7 +16127,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 .tf-archive-template__four .tf-archive-details .tf-archive-top .tf-archive-view li.tf-archive-view-item:hover {
-  background: #FEF9F6;
+  background: #faeedc;
   box-shadow: 0px 4px 40px 0px rgba(80, 33, 0, 0.1);
 }
 
@@ -16206,13 +16255,13 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   position: absolute;
   top: 16px;
   left: 16px;
-  color: #060D1C;
+  color: #ffffff;
   font-size: 12px;
   font-weight: 700;
   line-height: 14px;
   padding: 8px 16px;
   border-radius: 32px;
-  background-color: #faeedc;
+  background-color: #0E3DD8;
 }
 
 .tf-archive-template__four .tf-archive-details .tf-archive-hotel .tf-archive-hotel-content {
@@ -16355,7 +16404,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 .tf-archive-template__four .tf-archive-details .tf-archive-hotel .tf-archive-hotel-content .tf-archive-hotel-content-left .tf-reviews .tf-review-items {
-  color: #0E3DD8;
+  color: #ffc107;
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -16610,7 +16659,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 .tf-archive-template__four .tf-archive-filter .tf_widget .al-range-slider__track {
-  background: #EEE;
+  background: #F1F3F4;
   height: 10px;
   box-shadow: none !important;
   margin: 30px 0px 10px 0px;

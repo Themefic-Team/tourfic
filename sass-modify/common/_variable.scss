@@ -2,8 +2,6 @@
 $color-primary: #0E3DD8;
 $color-primary-light: #2051f5;
 $color-secondary: #003C7A;
-$btn-secondary-bg: #E3E7F2;
-$btn-secondary-text: #060D1C;
 $color-text: #686E7A;
 $color-heading: #060D1C;
 $color-gray: #808080;
@@ -20,19 +18,13 @@ $color-success: #198754;
 $color-success-light: #dceddd;
 $color-info: #069697;
 $color-info-light: #f0fafa;
-$form-input-bg: #F3F7FA;
 $color-blue-light: #E6F2FE;
 $color-yellow-light: #FDF9F3;
 $color-yellow-thin: #FCF4E8;
-
-
-$font-weight-normal: 400;
-$font-weight-medium: 500;
-$font-size-large: 30px;
-$font-size-medium: 24px;
-$font-size-normal: 16px;
-$font-size-small: 14px;
-$font-size-xs: 12px;
+$color-box-shadow: #e0e8ee;
+$form-input-bg: #F3F7FA;
+$btn-secondary-bg: #E3E7F2;
+$btn-secondary-text: #060D1C;
 
 // Media Queries
 $min576: "only screen and (min-width: 576px)";
@@ -71,8 +63,7 @@ $tf-space-24: 24px;
 $tf-space-30: 30px;
 
 //Border
-$tf-brds-default: 5px;
-$box-shadow-primary: 0px 13px 30px #E0E8EE;
+$box-shadow-primary: 0px 13px 30px $color-box-shadow;
 
 
 // admin colors

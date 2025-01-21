@@ -4,15 +4,16 @@
             .tf-tour-details-right {
                 .tf-tour-booking-box  {
                     background: $color-light-bg;
-                    border-radius: $tf-brds-default;
-                    box-shadow: 0px 0px 24px 5px #E0E8EE;
+                    @include bd-radius(5px);;
+                    box-shadow: 0px 0px 24px 5px $color-box-shadow;
                 }
                 .tf-booking-price{
-                    border-bottom: 1px solid $color-border;
+                    border-bottom: 1px solid $form-input-bg;
                     padding-bottom: 12px;
                     
                     p{
                         color: $color-text;
+                        margin-bottom: 0;
                     }
                 }
                 .tf-form-title{
@@ -50,7 +51,7 @@
                     .tf-tour-extra {
                         padding: 16px 24px;
                         border: 1px solid $color-border;
-                        border-radius: $tf-brds-default;
+                        @include bd-radius(5px);;
                         .tf-tour-extra-price{
                             align-items: inherit;
                             .tf-tour-extra-input{
@@ -85,8 +86,8 @@
                 }
                 .tf-tour-booking-advantages{
                     background-color: $color-white;
-                    border-radius: $tf-brds-default;
-                    box-shadow: 0px 0px 24px 5px #E0E8EE;
+                    @include bd-radius(5px);;
+                    box-shadow: 0px 0px 24px 5px $color-box-shadow;
                     ul{
                         margin: 0px;
                     }
@@ -101,7 +102,7 @@
                             background: $color-white;
                             border: 1px solid $color-border;
                             box-shadow: 0px 9px 24px rgba(224, 235, 243, 0.75);
-                            border-radius: $tf-brds-default;
+                            @include bd-radius(5px);;
                             display: flex;
                             align-items: center;
                             justify-content: center;

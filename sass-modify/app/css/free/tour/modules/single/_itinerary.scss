@@ -130,8 +130,8 @@
             .tf-itinerary-wrapper{
                 .tf-itinerary-box {
                     background: $color-white;
-                    border-radius: $tf-brds-default;
-                    box-shadow: 0px 0px 24px 5px #E0E8EE;
+                    @include bd-radius(5px);;
+                    box-shadow: 0px 0px 24px 5px $color-box-shadow;
                     @media #{$tfmax767}{
                         padding: 40px 24px;
                     }
@@ -255,9 +255,6 @@
                     .itinerary-day{
                         color: $color-primary;
                     }
-                    // .accordion-checke {
-                    //     position: relative;
-                    // }
                     .accordion-checke::before {
                         width: 20px;
                         height: 20px;
@@ -281,7 +278,7 @@
             .tf-itinerary-wrapper.tf-mb-50{
                 .tf-itinerary-downloader-option{
                     background-color: $color-primary;
-                    border-radius: $tf-brds-default;
+                    @include bd-radius(5px);;
                     .itinerary-downloader-left {
                         overflow: hidden;
                     }

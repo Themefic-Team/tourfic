@@ -44,7 +44,7 @@
                     }
                 }
                 .tf_selectperson-wrap {
-                    color: #152B47;
+                    color:$color-text;
                     font-weight: 500;
                     border: none;
                     @media only screen and (max-width: 767px) {
@@ -58,16 +58,16 @@
                     .tf_label-row {
                         margin-bottom: 0;
                     }
-                    color: #152B47;
+                    color: $color-text;
                 }
                 .tours-check-in-out {
-                    color: #152B47;
+                    color: $color-text;
                     padding: 0;
                 }
                 .tf_form-inner {
                     input[type="text"] {
                         background: transparent;
-                        border: 1px solid #ccc;
+                        border: 1px solid $color-gray;
                         padding: 5px 15px;
                         border-radius: 2px;
                         @media only screen and (max-width: 1025px) {
@@ -79,7 +79,7 @@
                     }
                     select {
                         background: transparent;
-                        border: 1px solid #ccc;
+                        border: 1px solid $color-gray;
                         padding: 5px 15px;
                         border-radius: 2px;
                         @media only screen and (max-width: 1025px) {
@@ -106,8 +106,8 @@
                 &.tf-tours-fixed{
                     width: 100%;
                     z-index: 9999;
-                    background-color: #003162eb;
-                    border-top: 4px solid #FB5A3B;
+                    background-color: $color-secondary;
+                    border-top: 4px solid $color-primary;
                     padding: 8px 0;
                     position: fixed;
                     bottom: 0;
@@ -128,16 +128,16 @@
                     }
 
                     .tf_selectperson-wrap {
-                        background: #fff;
+                        background: $color-white;
                         border-radius: 2px;
                         padding: 9px 15px;
                     }
                     .tour-extra {
                         i {
-                            color: #fff;
+                            color: $color-white;
                         }
                         a {
-                            color: #fff;
+                            color: $color-white;
                         }
                     }
                     button[type="submit"] {
@@ -147,12 +147,12 @@
                         width: 55%;
                     }
                     .tf_form-inner {
-                        background: #fff;
+                        background: $color-white;
                         border-radius: 2px;
                     }
                     .btn-styled {
-                        border: 1px solid #fb5a3b;
-                        background: #fb5a3b;
+                        border: 1px solid $color-primary;
+                        background: $color-primary;
                         width: 180px;
                     }
                     

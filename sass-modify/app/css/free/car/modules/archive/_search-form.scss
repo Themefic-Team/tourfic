@@ -87,7 +87,6 @@
                                     background: $color-light-bg;
                                     padding: 2px;
                                     box-shadow: 0px 4px 16px 0px rgba(2, 28, 53, 0.20);
-                                    
                                     scrollbar-width: thin;
                                     scrollbar-color: $color-gray $color-white;
                 
@@ -110,7 +109,7 @@
                                         border-radius: 4px;
                                         background: $color-white;
                                         text-transform: capitalize;
-                                        color: #27333F;
+                                        color: $color-text;
                                         font-size: 16px;
                                         margin-bottom: 2px;
                                         transition: .3s all ease;

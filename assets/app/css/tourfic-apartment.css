@@ -997,7 +997,7 @@
 .single-tf_apartment .tf-single-template__one .tf-apartment-amenities-section .tf-apartment-amenities-inner {
   border-radius: 8px;
   border: 1px solid #f0f2f4;
-  background: #faeedc;
+  background: #F5FAFF;
   padding: 24px 40px;
 }
 
@@ -1691,7 +1691,7 @@
 }
 
 .single-tf_apartment .tf-single-template__one #tf-apartment-booking .tf-apartment-form-fields {
-  background: #faeedc;
+  background: #F5FAFF;
   border: 1px solid #f0f2f4;
   border-radius: 8px;
   margin-bottom: 16px;

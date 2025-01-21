@@ -531,20 +531,20 @@ h3.section-heading {
                 text-indent: 9999px;
                 display: inline-block;
                 content: "\f005";
-                color: $color-text;
+                color: $color-warning;
                 font-size: 18px;
             }
             &:hover~label {
                 &:before {
                     content: "\f005";
-                    color: $color-primary;
+                    color: $color-warning;
                     font-weight: 900;
                 }
             }
             &:hover {
                 &:before {
                     content: "\f005";
-                    color: $color-primary;
+                    color: $color-warning;
                     font-weight: 900;
                 }
             }
@@ -562,7 +562,7 @@ h3.section-heading {
             &:checked~label {
                 &:before {
                     content: "\f005";
-                    color: $color-primary;
+                    color: $color-warning;
                     font-weight: 900;
                 }
             }
@@ -571,19 +571,19 @@ h3.section-heading {
             >input+label {
                 &:before {
                     content: "\f005";
-                    color: $color-text;
+                    color: $color-warning;
                 }
                 &:hover~label {
                     &:before {
                         content: "\f005";
-                        color: $color-primary;
+                        color: $color-warning;
                         font-weight: 900;
                     }
                 }
                 &:hover {
                     &:before {
                         content: "\f005";
-                        color: $color-primary;
+                        color: $color-warning;
                         font-weight: 900;
                     }
                 }
@@ -830,7 +830,7 @@ h3.section-heading {
 }
 
 .tf-ask-question {
-    background: $color-yellow-thin;
+    background: $color-gray-info;
     padding: 30px;
     border-radius: 4px;
     flex: 2;
@@ -1088,7 +1088,7 @@ li.tf-filter-item {
         font-size: 16px;
     }
     .al-range-slider__track {
-        background: $color-light-bg;
+        background: $color-gray-light;
         height: 10px;
         box-shadow: none !important;
         margin: 30px 0px 10px 0px;
