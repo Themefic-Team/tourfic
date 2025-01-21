@@ -1,3 +1,6 @@
+/*!******************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[3]!./sass-modify/app/css/free/tour/tour.scss ***!
+  \******************************************************************************************************************************************************************************************/
 @charset "UTF-8";
 .single-tf_tours .tf-single-template__one .tf-hero-wrapper .tf-hero-content {
   padding: 20px;
@@ -614,8 +617,8 @@
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.active,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.active {
   position: relative;
-  background-color: #faeedc;
-  color: #FCFDFF;
+  background-color: #0E3DD8;
+  color: #ffffff;
   padding-right: 50px;
 }
 
@@ -647,7 +650,7 @@
   position: absolute;
   height: 40px;
   width: 40px;
-  background: #faeedc;
+  background: #0E3DD8;
   top: 50%;
   right: -20px;
   transform: rotate(45deg);
@@ -1061,7 +1064,7 @@
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-traveller .tf-single-tour-traveller .traveller-info .traveller-single-info select {
   border-radius: 4px;
   border: 0.5px solid #808080;
-  background: #faeedc;
+  background: #F5FAFF;
   box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
   height: 32px;
   width: 100%;

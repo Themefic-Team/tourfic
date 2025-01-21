@@ -75,638 +75,640 @@
   }
 }
 
-.tf-search__form {
-  padding: 72px 15px;
-  background-color: $color-primary;
-  border-radius: 0;
-  box-shadow: none;
-  @media #{$max1199} {
-    padding: 60px 15px;
-  }
-  @media #{$max991} {
-    padding: 50px 15px;
-  }
-  @media #{$max767} {
-    padding: 40px 15px;
-  }
-
-  &__fieldset {
-    max-width: 1678px;
-    margin: 0 auto;
-    background: transparent;
-    border: 0;
-    padding: 0;
-    display: flex;
-    @include align-items(center);
-    @include justify-content(space-between);
-    gap: 60px;
-
-    @media #{$max1500} {
-      gap: 20px;
+.tf-booking-forms-wrapper{
+  .tf-search__form {
+    padding: 72px 15px;
+    background: $color-primary;
+    border-radius: 0;
+    box-shadow: none;
+    @media #{$max1199} {
+      padding: 60px 15px;
     }
-    @media #{$max1366} {
-      gap: 40px;
-      margin: auto;
-      flex-direction: column;
-      @include align-items(start);
+    @media #{$max991} {
+      padding: 50px 15px;
     }
-
     @media #{$max767} {
-      max-width: 500px;
-      margin: auto;
-      gap: 30px;
+      padding: 40px 15px;
     }
-    @media #{$max575} {
-      max-width: 100%;
-    }
-    @media #{$max360} {
-      gap: 25px;
-    }
-    &__left {
-      max-width: 310px;
-      flex: 1;
-      @media #{$max1500} {
-        max-width: 280px;
-      }
-      @media #{$max1366} {
-        max-width: 300px;
-      }
-      @media #{$max1366} {
-        max-width: 100%;
-        width: 100%;
-      }
-      .autocomplete-items {
-        position: absolute;
-        z-index: 99;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        max-height: 200px;
-        overflow: auto;
-        padding: 8px;
-        scrollbar-width: thin;
-        scrollbar-color: $color-gray $color-white;
-        border-radius: 4px;
-        background: $color-white;
-        box-shadow: 0px 4px 16px 0px rgba(2, 28, 53, 0.2);
-        div {
-          color: $color-text;
-          font-size: 16px;
-          
-          font-weight: 400;
-          line-height: 150%;
-          padding: 8px;
-          border-radius: 4px;
-          cursor: pointer;
-          &::before {
-            font-size: 14px;
-            line-height: 26px;
-            margin-right: 8px;
-          }
-          &:hover {
-            background: $color-light-bg;
-            color: $color-heading;
-            text-overflow: ellipsis;
-            overflow: hidden;
-            white-space: nowrap;
-          }
-        }
-      }
-    }
-    &__middle {
-      flex: 1;
+
+    &__fieldset {
+      max-width: 1678px;
+      margin: 0 auto;
+      background: transparent;
+      border: 0;
+      padding: 0;
       display: flex;
       @include align-items(center);
       @include justify-content(space-between);
+      gap: 60px;
 
-      @media #{$max1366} {
-        width: 100%;
+      @media #{$max1500} {
+        gap: 20px;
       }
+      @media #{$max1366} {
+        gap: 40px;
+        margin: auto;
+        flex-direction: column;
+        @include align-items(start);
+      }
+
       @media #{$max767} {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 16px;
-        row-gap: 40px;
-        width: 100%;
+        max-width: 500px;
+        margin: auto;
+        gap: 30px;
       }
       @media #{$max575} {
-        width: 100%;
-      }
-
-      .tf-search__form__field.tf-mx-width {
-        max-width: 132px;
-        @media #{$max991} {
-          max-width: 100px;
-        }
-      }
-      .tf-time-picker {
-        .tf-time-head {
-          font-size: 32px;
-          font-weight: 500;
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          margin-bottom: 0;
-          cursor: pointer;
-          .tf-time-meridiem {
-            text-transform: lowercase;
-          }
-        }
-      }
-    }
-    &__right {
-      max-width: 180px;
-      flex: 1;
-    }
-    .tf_checkin_to_label {
-      color: $color-white;
-      font-size: 18px;
-      
-      font-weight: 700;
-      line-height: 26px;
-      margin-left: 0;
-      margin-top: 45px;
-      @media #{$max767} {
-        margin-left: 0;
-        margin-top: 20px;
-        font-size: 16px;
-      }
-    }
-  }
-
-  &__car__fieldset {
-    @media #{$max1366} {
-      flex-direction: row;
-    }
-    @media #{$max1320} {
-      max-width: 800px; 
-      flex-direction: column;
-    }
-    .tf-search__form__fieldset__left {
-      max-width: fit-content;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 16px;
-      @media #{$max1320} {
         max-width: 100%;
-        width: 100%;
       }
-      & > div {
+      @media #{$max360} {
+        gap: 25px;
+      }
+      &__left {
+        max-width: 310px;
         flex: 1;
-       
-        @media #{$max360} {
-          flex: 100%;
+        @media #{$max1500} {
+          max-width: 280px;
         }
-      }
-      &.tf-pick-drop-location.active {
-        .tf_pickup_location {
-          min-width: 500px;
-          @media #{$max767} {
-            min-width: auto;
-            width: 100%;
+        @media #{$max1366} {
+          max-width: 300px;
+        }
+        @media #{$max1366} {
+          max-width: 100%;
+          width: 100%;
+        }
+        .autocomplete-items {
+          position: absolute;
+          z-index: 99;
+          top: 100%;
+          left: 0;
+          width: 100%;
+          max-height: 200px;
+          overflow: auto;
+          padding: 8px;
+          scrollbar-width: thin;
+          scrollbar-color: $color-gray $color-white;
+          border-radius: 4px;
+          background: $color-white;
+          box-shadow: 0px 4px 16px 0px rgba(2, 28, 53, 0.2);
+          div {
+            color: $color-text;
+            font-size: 16px;
+            
+            font-weight: 400;
+            line-height: 150%;
+            padding: 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            &::before {
+              font-size: 14px;
+              line-height: 26px;
+              margin-right: 8px;
+            }
+            &:hover {
+              background: $color-light-bg;
+              color: $color-heading;
+              text-overflow: ellipsis;
+              overflow: hidden;
+              white-space: nowrap;
+            }
           }
         }
-        .tf_dropoff_location {
-          display: none;
-        }
       }
-      .icon--location {
-        @media #{$max991} {
-          top: 10px;
+      &__middle {
+        flex: 1;
+        display: flex;
+        @include align-items(center);
+        @include justify-content(space-between);
+
+        @media #{$max1366} {
+          width: 100%;
         }
         @media #{$max767} {
-          top:7px;
+          display: flex;
+          flex-wrap: wrap;
+          gap: 16px;
+          row-gap: 40px;
+          width: 100%;
         }
         @media #{$max575} {
-          top: 6px;
+          width: 100%;
+        }
+
+        .tf-search__form__field.tf-mx-width {
+          max-width: 132px;
+          @media #{$max991} {
+            max-width: 100px;
+          }
+        }
+        .tf-time-picker {
+          .tf-time-head {
+            font-size: 32px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 0;
+            cursor: pointer;
+            .tf-time-meridiem {
+              text-transform: lowercase;
+            }
+          }
+        }
+      }
+      &__right {
+        max-width: 180px;
+        flex: 1;
+      }
+      .tf_checkin_to_label {
+        color: $color-white;
+        font-size: 18px;
+        
+        font-weight: 700;
+        line-height: 26px;
+        margin-left: 0;
+        margin-top: 45px;
+        @media #{$max767} {
+          margin-left: 0;
+          margin-top: 20px;
+          font-size: 16px;
         }
       }
     }
-    .tf-search__form__fieldset__middle {
-      @media #{$max767} {
-        row-gap: 25px;
+
+    &__car__fieldset {
+      @media #{$max1366} {
+        flex-direction: row;
       }
-      .tf-search__form__divider {
-        @media #{$max1600} {
-          margin: 0 20px;
+      @media #{$max1320} {
+        max-width: 800px; 
+        flex-direction: column;
+      }
+      .tf-search__form__fieldset__left {
+        max-width: fit-content;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 16px;
+        @media #{$max1320} {
+          max-width: 100%;
+          width: 100%;
         }
-        @media #{$max1199} {
-          margin: 0;
-        }
-        &:first-child{
-          @media #{$max1600} {
-            margin-left: 0;
+        & > div {
+          flex: 1;
+        
+          @media #{$max360} {
+            flex: 100%;
           }
-          @media #{$max1320} {
+        }
+        &.tf-pick-drop-location.active {
+          .tf_pickup_location {
+            min-width: 500px;
+            @media #{$max767} {
+              min-width: auto;
+              width: 100%;
+            }
+          }
+          .tf_dropoff_location {
             display: none;
           }
         }
-        
-      }
-      .tf-search__form__group {
-        @media #{$max767} {
-          flex-basis: calc(50% - 14px);
-        }
-        @media #{$max530} {
-          flex-basis: 100%;
-        }
-        .tf-search__form__field {
+        .icon--location {
           @media #{$max991} {
-            gap: 10px;
+            top: 10px;
           }
-        }
-        .tf-time-head {
           @media #{$max767} {
-            font-size: 20px;
-            svg {
-              width: 16px;
-              height: auto;
-            }
+            top:7px;
+          }
+          @media #{$max575} {
+            top: 6px;
           }
         }
       }
-    }
-    .tf-search__form__fieldset__right {
-      .tf-search__form__submit {
-        @media #{$max1320} {
-          position: absolute;
-          bottom: 40px;
-        }
-      }
-    }
-  }
-
-  &__divider {
-    background: #ffffff2e;
-    width: 1px;
-    height: 100px;
-    &:last-child {
-      width: a;
-    }
-    @media #{$max767} {
-      display: none;
-    }
-  }
-
-  &__field {
-    display: flex;
-    @include align-items(center);
-    gap: 0;
-    color: $color-white;
-    position: relative;
-    cursor: pointer;
-    line-height: 22px;
-    @media #{$max360} {
-      align-items: self-start;
-    }
-    input[type="number"]::-webkit-outer-spin-button {
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      appearance: none;
-      margin: 0;
-    } 
-    input[type="number"] {
-      -moz-appearance: textfield!important;
-    }
-    .field--title {
-      -webkit-appearance: none!important;
-      -moz-appearance: none!important;
-      appearance: none!important;
-      font-size: 60px;
-      font-weight: 500;
-      line-height: 70.2px;
-      border: 0;
-      background: transparent;
-      color: $color-white;
-      padding: 0;
-      margin-left: 16px;
-      margin-right: 8px;
-
-      &:focus {
-        color: $color-white;
-      }
-      @media #{$max1366} {
-        font-size: 50px;
-        line-height: 60.2px;
-      }
-      @media #{$max991} {
-        font-size: 35px;
-        line-height: 1;
-        margin-left: 0;
-      }
-      @media #{$max767} {
-        margin-left: 0;
-        margin-right: 0;
-        font-size: 30px;
-      }
-    }
-
-    &__incdec {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      width: 100%;
-      @media #{$max767} {
-        flex-direction: row;
-        align-items: self-start;
-        gap: 0;
-      }
-      span {
-        &.form--span {
-          width: auto;
-          height: auto;
-          background: transparent;
-          border: 0;
-          border-radius: 0;
-          padding: 0;
-          min-height: auto;
-          position: absolute;
-          right: 0;
-          top: 5px;
-          @media #{$max767} {
-            right: 8px;
-            top: 0;
-          }
-          @media #{$max400} {
-            position: absolute;
-            left: 5px;
-            top: 100%;
-            justify-content: start;
-          }
-          &:last-child {
-            top: 38px;
-            @media #{$max991} {
-              top: 31px;
-            }
-            @media #{$max767} {
-              position: absolute;
-              right: 8px;
-              top: 24px;
-            }
-            @media #{$max400} {
-              left: 35px;
-              top: 100%;
-            }
-          }
-          svg {
-            &:hover {
-              fill: $color-primary-light;
-            }
-            @media #{$max991} {
-              width: 28px;
-              height: 20px;
-            }
-            @media #{$max767} {
-              width: 25px;
-            }
-          }
-        }
-      }
-    }
-
-    &__icon {
-      min-width: 40px;
-      max-width: 40px;
-      line-height: 0;
-      @media #{$max767} {
-        min-width: 35px;
-        max-width: 35px;
-      }
-
-      svg {
-        @media #{$max1366} {
-          width: 38px;
-          height: auto;
-        }
-        @media #{$max991} {
-          width: 35px;
-          height: 30px;
-        }
+      .tf-search__form__fieldset__middle {
         @media #{$max767} {
-          width: 30px;
+          row-gap: 25px;
         }
-        @media #{$max360} {
-          margin-top: 4px;
+        .tf-search__form__divider {
+          @media #{$max1600} {
+            margin: 0 20px;
+          }
+          @media #{$max1199} {
+            margin: 0;
+          }
+          &:first-child{
+            @media #{$max1600} {
+              margin-left: 0;
+            }
+            @media #{$max1320} {
+              display: none;
+            }
+          }
+          
         }
-      }
-    }
-    .icon--location {
-      position: absolute;
-      top: 17px;
-      right: 17px;
-      min-width: auto;
-      max-width: initial;
-      @media #{$max991} {
-        top: 10px;
-      }
-      @media #{$max767} {
-        top: 6px;
-        right: 16px;
-      }
-
-      svg {
-        @media #{$max1366} {
-          width: 12px;
-        }
-      }
-    }
-    &__mthyr {
-      display: flex;
-      flex-direction: column;
-      @media #{$max767} {
-        margin-left: 10px;
-        span {
-          font-size: 15px;
-          line-height: 20px;
-        }
-      }
-    }
-  }
-
-  .tf-check-inout-hidden {
-    visibility: hidden;
-    position: absolute;
-    height: 0;
-    padding: 0;
-  }
-
-  &__group {
-    padding: 0 !important;
-    border: 0;
-    background: transparent;
-    @media #{$max767} {
-      flex-basis: calc(33.33% - 14px);
-    }
-    &:nth-child(5) {
-      @media #{$max767} {
-        max-width: fit-content;
-      }
-    }
-    &.tf_car_date_time_picker {
-      .tf-search__form__field {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        & > div {
-          cursor: pointer;
-        }
-      }
-    }
-    &.tf-checkin-group,
-    &.tf-checkout-group {
-      @media #{$max767} {
-        max-width: fit-content;
-      }
-      @media #{$max575} {
-        flex-basis: calc(45% - 14px);
-      }
-    }
-  }
-  &__label {
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 22.98px;
-    color: rgba(255, 255, 255, 0.55);
-    margin-bottom: 28px;
-    display: block;
-    @media #{$max991} {
-      font-size: 18px;
-      margin-bottom: 18px;
-    }
-    @media #{$max767} {
-      font-size: 16px;
-      margin-bottom: 12px;
-    }
-    @media #{$max360} {
-      font-size: 14px;
-      margin-bottom: 8px;
-    }
-  }
-
-  &__input {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    width: 100%;
-    background: $color-primary-light;
-    color: $color-white !important;
-    border: 0 !important;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: normal !important;
-    padding: 16px 24px !important;
-    border-radius: 5px !important;
-    @media #{$max767} {
-      font-size: 14px;
-      padding: 12px 16px 16px !important;
-    }
-    &::placeholder {
-      color: $color-white;
-    }
-  }
-
-  &__submit {
-    background: $color-secondary;
-    border-color: $color-secondary;
-    color: $color-white;
-    border-radius: 5px;
-    gap: 15px;
-    min-height: 58px;
-    min-width: 184px;
-    padding: 0;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 18.38px;
-    @media #{$max767} {
-      min-height: 45px;
-      font-size: 15px;
-      min-width: 160px;
-    }
-    &:hover {
-      background: $color-light-bg;
-      border-color: $color-light-bg;
-      color: $color-heading;
-      path{
-        fill: $color-heading;
-      }
-    }
-  }
-
-  .tf-driver-location {
-    max-width: 1678px;
-    display: flex;
-    color: $color-white;
-    margin: auto;
-    margin-top: 20px;
-    ul {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0px 32px;
-
-      label {
-        color: $color-white;
-        font-size: 16px;
-        display: block;
-        position: relative;
-        padding-left: 30px;
-        margin-bottom: 0px;
-        cursor: pointer;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-        input {
-          position: absolute;
-          opacity: 0;
-          cursor: pointer;
-          height: 0;
-          width: 0;
-          &:checked {
-            ~ .checkmark {
-              &::after {
-                display: block;
+        .tf-search__form__group {
+          @media #{$max767} {
+            flex-basis: calc(50% - 14px);
+          }
+          @media #{$max530} {
+            flex-basis: 100%;
+          }
+          .tf-search__form__field {
+            @media #{$max991} {
+              gap: 10px;
+            }
+          }
+          .tf-time-head {
+            @media #{$max767} {
+              font-size: 20px;
+              svg {
+                width: 16px;
+                height: auto;
               }
             }
           }
         }
-        .checkmark {
-          position: absolute;
-          top: 3px;
-          left: 0;
-          height: 18px;
-          width: 18px;
-          border: 1.5px solid $color-white;
-          background-color: transparent;
-          border-radius: 3px;
-          &::after {
-            content: "";
+      }
+      .tf-search__form__fieldset__right {
+        .tf-search__form__submit {
+          @media #{$max1320} {
             position: absolute;
-            display: none;
-            left: 5px;
-            top: 1px;
-            width: 7px;
-            height: 10px;
-            border: solid $color-white;
-            border-width: 0 2px 2px 0;
-            -webkit-transform: rotate(45deg);
-            -ms-transform: rotate(45deg);
-            transform: rotate(45deg);
+            bottom: 40px;
+          }
+        }
+      }
+    }
+
+    &__divider {
+      background: #ffffff2e;
+      width: 1px;
+      height: 100px;
+      &:last-child {
+        width: a;
+      }
+      @media #{$max767} {
+        display: none;
+      }
+    }
+
+    &__field {
+      display: flex;
+      @include align-items(center);
+      gap: 0;
+      color: $color-white;
+      position: relative;
+      cursor: pointer;
+      line-height: 22px;
+      @media #{$max360} {
+        align-items: self-start;
+      }
+      input[type="number"]::-webkit-outer-spin-button,
+      input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        margin: 0;
+      } 
+      input[type="number"] {
+        -moz-appearance: textfield!important;
+      }
+      .field--title {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        font-size: 60px;
+        font-weight: 500;
+        line-height: 70.2px;
+        border: 0;
+        background: transparent;
+        color: $color-white;
+        padding: 0;
+        margin-left: 16px;
+        margin-right: 8px;
+
+        &:focus {
+          color: $color-white;
+        }
+        @media #{$max1366} {
+          font-size: 50px;
+          line-height: 60.2px;
+        }
+        @media #{$max991} {
+          font-size: 35px;
+          line-height: 1;
+          margin-left: 0;
+        }
+        @media #{$max767} {
+          margin-left: 0;
+          margin-right: 0;
+          font-size: 30px;
+        }
+      }
+
+      &__incdec {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        width: 100%;
+        @media #{$max767} {
+          flex-direction: row;
+          align-items: self-start;
+          gap: 0;
+        }
+        span {
+          &.form--span {
+            width: auto;
+            height: auto;
+            background: transparent;
+            border: 0;
+            border-radius: 0;
+            padding: 0;
+            min-height: auto;
+            position: absolute;
+            right: 0;
+            top: 5px;
+            @media #{$max767} {
+              right: 8px;
+              top: 0;
+            }
+            @media #{$max400} {
+              position: absolute;
+              left: 5px;
+              top: 100%;
+              justify-content: start;
+            }
+            &:last-child {
+              top: 38px;
+              @media #{$max991} {
+                top: 31px;
+              }
+              @media #{$max767} {
+                position: absolute;
+                right: 8px;
+                top: 24px;
+              }
+              @media #{$max400} {
+                left: 35px;
+                top: 100%;
+              }
+            }
+            svg {
+              &:hover {
+                fill: $color-primary-light;
+              }
+              @media #{$max991} {
+                width: 28px;
+                height: 20px;
+              }
+              @media #{$max767} {
+                width: 25px;
+              }
+            }
+          }
+        }
+      }
+
+      &__icon {
+        min-width: 40px;
+        max-width: 40px;
+        line-height: 0;
+        @media #{$max767} {
+          min-width: 35px;
+          max-width: 35px;
+        }
+
+        svg {
+          @media #{$max1366} {
+            width: 38px;
+            height: auto;
+          }
+          @media #{$max991} {
+            width: 35px;
+            height: 30px;
+          }
+          @media #{$max767} {
+            width: 30px;
+          }
+          @media #{$max360} {
+            margin-top: 4px;
+          }
+        }
+      }
+      .icon--location {
+        position: absolute;
+        top: 17px;
+        right: 17px;
+        min-width: auto;
+        max-width: initial;
+        @media #{$max991} {
+          top: 10px;
+        }
+        @media #{$max767} {
+          top: 6px;
+          right: 16px;
+        }
+
+        svg {
+          @media #{$max1366} {
+            width: 12px;
+          }
+        }
+      }
+      &__mthyr {
+        display: flex;
+        flex-direction: column;
+        @media #{$max767} {
+          margin-left: 10px;
+          span {
+            font-size: 15px;
+            line-height: 20px;
+          }
+        }
+      }
+    }
+
+    .tf-check-inout-hidden {
+      visibility: hidden;
+      position: absolute;
+      height: 0;
+      padding: 0;
+    }
+
+    &__group {
+      padding: 0 !important;
+      border: 0;
+      background: transparent;
+      @media #{$max767} {
+        flex-basis: calc(33.33% - 14px);
+      }
+      &:nth-child(5) {
+        @media #{$max767} {
+          max-width: fit-content;
+        }
+      }
+      &.tf_car_date_time_picker {
+        .tf-search__form__field {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          & > div {
+            cursor: pointer;
+          }
+        }
+      }
+      &.tf-checkin-group,
+      &.tf-checkout-group {
+        @media #{$max767} {
+          max-width: fit-content;
+        }
+        @media #{$max575} {
+          flex-basis: calc(45% - 14px);
+        }
+      }
+    }
+    &__label {
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 22.98px;
+      color: rgba(255, 255, 255, 0.55);
+      margin-bottom: 28px;
+      display: block;
+      @media #{$max991} {
+        font-size: 18px;
+        margin-bottom: 18px;
+      }
+      @media #{$max767} {
+        font-size: 16px;
+        margin-bottom: 12px;
+      }
+      @media #{$max360} {
+        font-size: 14px;
+        margin-bottom: 8px;
+      }
+    }
+
+    &__input {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      width: 100%;
+      background: $color-primary-light;
+      color: $color-white !important;
+      border: 0 !important;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: normal !important;
+      padding: 16px 24px !important;
+      border-radius: 5px !important;
+      @media #{$max767} {
+        font-size: 14px;
+        padding: 12px 16px 16px !important;
+      }
+      &::placeholder {
+        color: $color-white;
+      }
+    }
+
+    &__submit {
+      background: $color-secondary;
+      border-color: $color-secondary;
+      color: $color-white;
+      border-radius: 5px;
+      gap: 15px;
+      min-height: 58px;
+      min-width: 184px;
+      padding: 0;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 18.38px;
+      @media #{$max767} {
+        min-height: 45px;
+        font-size: 15px;
+        min-width: 160px;
+      }
+      &:hover {
+        background: $color-light-bg;
+        border-color: $color-light-bg;
+        color: $color-heading;
+        path{
+          fill: $color-heading;
+        }
+      }
+    }
+
+    .tf-driver-location {
+      max-width: 1678px;
+      display: flex;
+      color: $color-white;
+      margin: auto;
+      margin-top: 20px;
+      ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0px 32px;
+
+        label {
+          color: $color-white;
+          font-size: 16px;
+          display: block;
+          position: relative;
+          padding-left: 30px;
+          margin-bottom: 0px;
+          cursor: pointer;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
+          input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+            &:checked {
+              ~ .checkmark {
+                &::after {
+                  display: block;
+                }
+              }
+            }
+          }
+          .checkmark {
+            position: absolute;
+            top: 3px;
+            left: 0;
+            height: 18px;
+            width: 18px;
+            border: 1.5px solid $color-white;
+            background-color: transparent;
+            border-radius: 3px;
+            &::after {
+              content: "";
+              position: absolute;
+              display: none;
+              left: 5px;
+              top: 1px;
+              width: 7px;
+              height: 10px;
+              border: solid $color-white;
+              border-width: 0 2px 2px 0;
+              -webkit-transform: rotate(45deg);
+              -ms-transform: rotate(45deg);
+              transform: rotate(45deg);
+            }
           }
         }
       }
     }
   }
 }
-
 .tf-search-tabs__design--4 {
   .tf-booking-form-tab-mobile {
     @media #{$max767} {
