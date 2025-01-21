@@ -103,8 +103,8 @@
                 .tf-inex {
                     width: 100%;
                     background: $color-white;
-                    border-radius: $tf-brds-default;
-                    box-shadow: 0px 0px 24px 5px #E0E8EE;
+                    @include bd-radius(5px);;
+                    box-shadow: 0px 0px 24px 5px $color-box-shadow;
                     ul{
                         li{
                             margin-top: 0px;

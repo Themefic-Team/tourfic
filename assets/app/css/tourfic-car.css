@@ -654,7 +654,7 @@
 }
 
 .single-tf_carrental .tf-single-template__one .tf-car-conditions-section h3 {
-  color: #27333F;
+  color: #060D1C;
   font-size: 21px;
   font-weight: 400;
   margin-bottom: 16px;
@@ -668,7 +668,7 @@
 }
 
 .single-tf_carrental .tf-single-template__one .tf-car-conditions-section table tr th {
-  color: #27333F;
+  color: #686E7A;
   font-size: 16px;
   font-weight: 400;
   border-right: 1px solid #f0f2f4;
@@ -1823,7 +1823,7 @@
   border-radius: 4px;
   background: #ffffff;
   text-transform: capitalize;
-  color: #27333F;
+  color: #686E7A;
   font-size: 16px;
   margin-bottom: 2px;
   transition: .3s all ease;

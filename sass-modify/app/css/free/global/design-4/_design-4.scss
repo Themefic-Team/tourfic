@@ -3,7 +3,7 @@
         /* Search form */
         .tf-archive-search-form {
             padding: 64px 0;
-            background-color: #FEF9F6;
+            background-color: $color-yellow-thin;
             background-image: url(../images/hotel-form-bg.png);
             background-repeat: no-repeat;
             background-position: center center;
@@ -147,7 +147,7 @@
             overflow: auto;
             padding: 4px;
             border-radius: 4px;
-            background: #FEF9F6;
+            background: $color-yellow-thin;
             box-shadow: 0px 4px 40px 0px rgba(80, 33, 0, 0.10);
 
             &::-webkit-scrollbar {
@@ -199,7 +199,7 @@
             transition: 0.3s;
             border-radius: 8px;
             padding: 16px;
-            background: #FEF9F6;
+            background: $color-yellow-thin;
             box-shadow: 0px 8px 40px 0px rgba(0, 0, 0, 0.10);
 
             .tf_acrselection-inner{
@@ -281,7 +281,7 @@
         
         .tf-archive-details {
             @include flexbox();
-            background: #FEF9F6;
+            background: $color-yellow-thin;
             position: relative;
 
             .tf-details-left {
@@ -537,7 +537,7 @@
                         @include transition();
 
                         &:hover {
-                            background: #FEF9F6;
+                            background: $color-light-bg;
                             box-shadow: 0px 4px 40px 0px rgba(80, 33, 0, 0.10);
                         }
 
@@ -942,10 +942,6 @@
                         font-size: 12px !important;
                     }
                 }
-
-                button.filter-reset-btn {
-                    //display: none;
-                }
             }
 
             .tf_widget {
@@ -961,7 +957,7 @@
                 }
 
                 .al-range-slider__track {
-                    background: #EEE;
+                    background: $color-gray-light;
                     height: 10px;
                     box-shadow: none !important;
                     margin: 30px 0px 10px 0px;

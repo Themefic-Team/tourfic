@@ -27,7 +27,7 @@ input[type="submit"].tf_btn,
     line-height: 1.2;
     padding: 12px 24px;
     text-decoration: none;
-    border-radius: $tf-brds-default;
+    @include bd-radius(5px);
     text-align: center;
     display: inline-flex;
     @include justify-content(center);
