@@ -1134,7 +1134,7 @@ class Tour {
                         <input type='text' name='check-in-out-date' id='check-in-out-date' class='tf-field tours-check-in-out' onkeypress="return false;" placeholder='<?php esc_html_e( "Select Date", "tourfic" ); ?>'
                                value='' required/>
                     </div>
-					<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_type != 'fixed' &&  !empty($allowed_times) ) { ?>
+					<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_type != 'fixed' &&  !empty( $allowed_times ) ) { ?>
                         <div class="tf-field-group check-in-time-div tf-mt-8" id="" style="display: none;">
                             <i class="fa-regular fa-clock"></i>
                             <select class="tf-field" name="check-in-time" id="" style="min-width: 100px;"></select>
@@ -1406,7 +1406,7 @@ class Tour {
                                 <input type="text" class="tf-field tours-check-in-out" placeholder="<?php esc_html_e( "Select Date", "tourfic" ); ?>" value="" required/>
                             </div>
 
-							<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_type != 'fixed' ) { ?>
+							<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_type != 'fixed' && !empty($allowed_times)) { ?>
                                 <div class="tf-bottom-booking-field check-in-time-div" id="" style="display: none;">
                                     <div class="tf-bottom-booking-field-icon">
                                         <i class="ri-time-line"></i>
@@ -1442,7 +1442,7 @@ class Tour {
                         <input type='text' name='check-in-out-date' id='check-in-out-date' class='tf-field tours-check-in-out' onkeypress="return false;" placeholder='<?php esc_html_e( "Select Date", "tourfic" ); ?>'
                                value='' required/>
                     </div>
-					<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_type != 'fixed' ) { ?>
+					<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_type != 'fixed' && !empty($allowed_times)) { ?>
                         <div class="tf-field-group check-in-time-div tf-mt-8 tf-field-calander" id="" style="display: none;">
                             <i class="fa-regular fa-clock"></i>
                             <select class="tf-field" name="check-in-time" id="" style="min-width: 100px;"></select>
@@ -1628,7 +1628,7 @@ class Tour {
                                 <input type="text" class="tf-field tours-check-in-out" placeholder="<?php esc_html_e( "Select Date", "tourfic" ); ?>" value="" required/>
 
                             </div>
-							<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_type != 'fixed' ) { ?>
+							<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_type != 'fixed' && !empty($allowed_times)) { ?>
                                 <div class="tf-bottom-booking-field check-in-time-div" id="" style="display: none;">
                                     <select class="tf-field" name="check-in-time" id=""></select>
                                 </div>
@@ -1913,7 +1913,7 @@ class Tour {
                             </label>
                         </div>
 
-						<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_type != 'fixed' ) { ?>
+						<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_type != 'fixed' && !empty($allowed_times)) { ?>
                             <div class='tf_form-row check-in-time-div' id="" style="display: none;">
                                 <label class='tf_label-row'>
                                     <div class='tf_form-inner'>

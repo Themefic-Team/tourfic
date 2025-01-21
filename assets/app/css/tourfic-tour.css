@@ -196,8 +196,8 @@
 .single-tf_tours .tf-single-template__one .tf-tour-booking-wrap.tf-tours-fixed {
   width: 100%;
   z-index: 9999;
-  background-color: #003C7A;
-  border-top: 4px solid #0E3DD8;
+  background-color: rgba(0, 60, 122, 0.9);
+  border-top: 4px solid #ff6055;
   padding: 8px 0;
   position: fixed;
   bottom: 0;
@@ -2595,7 +2595,7 @@
 }
 
 .single-tf_tours .tf-single-template__one .tf-suggestion-wrapper .tf-suggestion-rating i {
-  color: #0E3DD8;
+  color: #ffc107;
 }
 
 @media only screen and (max-width: 980px) {
