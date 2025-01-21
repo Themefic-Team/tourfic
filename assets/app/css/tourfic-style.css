@@ -361,6 +361,25 @@ Ajax Loader
   animation: tf-rotate 450ms infinite linear;
 }
 
+#tour_room_details_loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.8);
+  display: none;
+  z-index: 99999999;
+}
+
+#tour_room_details_loader #tour-room-details-loader-img {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 @-webkit-keyframes tf-rotate {
   100% {
     -webkit-transform: rotate(360deg);
@@ -5259,16 +5278,16 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 /* map widget */
-.tf-map-preview {
+.tf-map-widget-wrap .tf-map-preview {
   position: relative;
 }
 
-.tf-map-preview img {
+.tf-map-widget-wrap .tf-map-preview img {
   width: 100%;
   border-radius: 8px;
 }
 
-.tf-map-preview .tf-map-preview-content {
+.tf-map-widget-wrap .tf-map-preview .tf-map-preview-content {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -5290,7 +5309,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   gap: 20px;
 }
 
-.tf-map-popup-wrap {
+.tf-map-widget-wrap .tf-map-popup-wrap {
   display: none;
 }
 
@@ -6695,16 +6714,52 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   }
 }
 
-.tf_template_3_global_layouts .fancybox-container #tf_posts_navigation_bar,
-.tf_template_3_global_layouts .fancybox-container .tf_posts_ajax_navigation,
-.tf_template_3_global_layouts .fancybox-container .tf_posts_page_navigation {
+.tf-single-template__one .fancybox-container #tf_posts_navigation_bar,
+.tf-single-template__one .fancybox-container .tf_posts_ajax_navigation,
+.tf-single-template__one .fancybox-container .tf_posts_page_navigation, .tf-single-template__two .fancybox-container #tf_posts_navigation_bar,
+.tf-single-template__two .fancybox-container .tf_posts_ajax_navigation,
+.tf-single-template__two .fancybox-container .tf_posts_page_navigation, .tf-single-template__three .fancybox-container #tf_posts_navigation_bar,
+.tf-single-template__three .fancybox-container .tf_posts_ajax_navigation,
+.tf-single-template__three .fancybox-container .tf_posts_page_navigation, .tf-single-template__four .fancybox-container #tf_posts_navigation_bar,
+.tf-single-template__four .fancybox-container .tf_posts_ajax_navigation,
+.tf-single-template__four .fancybox-container .tf_posts_page_navigation,
+.tf-archive-template__one .fancybox-container #tf_posts_navigation_bar,
+.tf-archive-template__one .fancybox-container .tf_posts_ajax_navigation,
+.tf-archive-template__one .fancybox-container .tf_posts_page_navigation,
+.tf-archive-template__two .fancybox-container #tf_posts_navigation_bar,
+.tf-archive-template__two .fancybox-container .tf_posts_ajax_navigation,
+.tf-archive-template__two .fancybox-container .tf_posts_page_navigation,
+.tf-archive-template__three .fancybox-container #tf_posts_navigation_bar,
+.tf-archive-template__three .fancybox-container .tf_posts_ajax_navigation,
+.tf-archive-template__three .fancybox-container .tf_posts_page_navigation,
+.tf-archive-template__four .fancybox-container #tf_posts_navigation_bar,
+.tf-archive-template__four .fancybox-container .tf_posts_ajax_navigation,
+.tf-archive-template__four .fancybox-container .tf_posts_page_navigation {
   display: inline-flex;
   margin-top: 30px;
 }
 
-.tf_template_3_global_layouts .fancybox-container #tf_posts_navigation_bar .page-numbers,
-.tf_template_3_global_layouts .fancybox-container .tf_posts_ajax_navigation .page-numbers,
-.tf_template_3_global_layouts .fancybox-container .tf_posts_page_navigation .page-numbers {
+.tf-single-template__one .fancybox-container #tf_posts_navigation_bar .page-numbers,
+.tf-single-template__one .fancybox-container .tf_posts_ajax_navigation .page-numbers,
+.tf-single-template__one .fancybox-container .tf_posts_page_navigation .page-numbers, .tf-single-template__two .fancybox-container #tf_posts_navigation_bar .page-numbers,
+.tf-single-template__two .fancybox-container .tf_posts_ajax_navigation .page-numbers,
+.tf-single-template__two .fancybox-container .tf_posts_page_navigation .page-numbers, .tf-single-template__three .fancybox-container #tf_posts_navigation_bar .page-numbers,
+.tf-single-template__three .fancybox-container .tf_posts_ajax_navigation .page-numbers,
+.tf-single-template__three .fancybox-container .tf_posts_page_navigation .page-numbers, .tf-single-template__four .fancybox-container #tf_posts_navigation_bar .page-numbers,
+.tf-single-template__four .fancybox-container .tf_posts_ajax_navigation .page-numbers,
+.tf-single-template__four .fancybox-container .tf_posts_page_navigation .page-numbers,
+.tf-archive-template__one .fancybox-container #tf_posts_navigation_bar .page-numbers,
+.tf-archive-template__one .fancybox-container .tf_posts_ajax_navigation .page-numbers,
+.tf-archive-template__one .fancybox-container .tf_posts_page_navigation .page-numbers,
+.tf-archive-template__two .fancybox-container #tf_posts_navigation_bar .page-numbers,
+.tf-archive-template__two .fancybox-container .tf_posts_ajax_navigation .page-numbers,
+.tf-archive-template__two .fancybox-container .tf_posts_page_navigation .page-numbers,
+.tf-archive-template__three .fancybox-container #tf_posts_navigation_bar .page-numbers,
+.tf-archive-template__three .fancybox-container .tf_posts_ajax_navigation .page-numbers,
+.tf-archive-template__three .fancybox-container .tf_posts_page_navigation .page-numbers,
+.tf-archive-template__four .fancybox-container #tf_posts_navigation_bar .page-numbers,
+.tf-archive-template__four .fancybox-container .tf_posts_ajax_navigation .page-numbers,
+.tf-archive-template__four .fancybox-container .tf_posts_page_navigation .page-numbers {
   border: 0.5px solid #808080;
   background: #ffffff;
   height: 40px;
@@ -6720,15 +6775,41 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   align-items: center;
 }
 
-.tf_template_3_global_layouts .fancybox-container #tf_posts_navigation_bar .page-numbers.current,
-.tf_template_3_global_layouts .fancybox-container .tf_posts_ajax_navigation .page-numbers.current,
-.tf_template_3_global_layouts .fancybox-container .tf_posts_page_navigation .page-numbers.current {
+.tf-single-template__one .fancybox-container #tf_posts_navigation_bar .page-numbers.current,
+.tf-single-template__one .fancybox-container .tf_posts_ajax_navigation .page-numbers.current,
+.tf-single-template__one .fancybox-container .tf_posts_page_navigation .page-numbers.current, .tf-single-template__two .fancybox-container #tf_posts_navigation_bar .page-numbers.current,
+.tf-single-template__two .fancybox-container .tf_posts_ajax_navigation .page-numbers.current,
+.tf-single-template__two .fancybox-container .tf_posts_page_navigation .page-numbers.current, .tf-single-template__three .fancybox-container #tf_posts_navigation_bar .page-numbers.current,
+.tf-single-template__three .fancybox-container .tf_posts_ajax_navigation .page-numbers.current,
+.tf-single-template__three .fancybox-container .tf_posts_page_navigation .page-numbers.current, .tf-single-template__four .fancybox-container #tf_posts_navigation_bar .page-numbers.current,
+.tf-single-template__four .fancybox-container .tf_posts_ajax_navigation .page-numbers.current,
+.tf-single-template__four .fancybox-container .tf_posts_page_navigation .page-numbers.current,
+.tf-archive-template__one .fancybox-container #tf_posts_navigation_bar .page-numbers.current,
+.tf-archive-template__one .fancybox-container .tf_posts_ajax_navigation .page-numbers.current,
+.tf-archive-template__one .fancybox-container .tf_posts_page_navigation .page-numbers.current,
+.tf-archive-template__two .fancybox-container #tf_posts_navigation_bar .page-numbers.current,
+.tf-archive-template__two .fancybox-container .tf_posts_ajax_navigation .page-numbers.current,
+.tf-archive-template__two .fancybox-container .tf_posts_page_navigation .page-numbers.current,
+.tf-archive-template__three .fancybox-container #tf_posts_navigation_bar .page-numbers.current,
+.tf-archive-template__three .fancybox-container .tf_posts_ajax_navigation .page-numbers.current,
+.tf-archive-template__three .fancybox-container .tf_posts_page_navigation .page-numbers.current,
+.tf-archive-template__four .fancybox-container #tf_posts_navigation_bar .page-numbers.current,
+.tf-archive-template__four .fancybox-container .tf_posts_ajax_navigation .page-numbers.current,
+.tf-archive-template__four .fancybox-container .tf_posts_page_navigation .page-numbers.current {
   background: #faeedc;
   color: #686E7A;
 }
 
-.admin-bar .fancybox-container .tf-archive-details .tf-details-left,
+.admin-bar .fancybox-container .tf-archive-details .tf-details-left {
+  height: calc(100vh - 32px);
+}
+
 .admin-bar .fancybox-container .tf-archive-details .tf-details-right .tf-hotel-archive-map-wrap {
+  height: calc(100vh - 32px);
+}
+
+.admin-bar .fancybox-container .tf-archive-filter .tf-archive-filter-sidebar {
+  top: 32px;
   height: calc(100vh - 32px);
 }
 
@@ -6737,11 +6818,6 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 .admin-bar .tf-archive-details-fancy .fancybox-slide {
-  top: 32px;
-  height: calc(100vh - 32px);
-}
-
-.admin-bar .fancybox-container .tf-archive-filter .tf-archive-filter-sidebar {
   top: 32px;
   height: calc(100vh - 32px);
 }

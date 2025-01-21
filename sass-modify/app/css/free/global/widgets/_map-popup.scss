@@ -1,28 +1,25 @@
-
-
 /* map widget */
-.tf-map-preview{
-    position: relative;
-
-    img{
-        width: 100%;
-        border-radius: 8px;
+.tf-map-widget-wrap{
+    .tf-map-preview{
+        position: relative;
+        img{
+            width: 100%;
+            border-radius: 8px;
+        }
+        .tf-map-preview-content{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            @include translate(-50%, -50%);
+            @include flexbox();
+            @include flex-direction(column);
+            @include align-items(center);
+            gap: 20px;
+        }
     }
-
-    .tf-map-preview-content{
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        @include translate(-50%, -50%);
-        @include flexbox();
-        @include flex-direction(column);
-        @include align-items(center);
-        gap: 20px;
+    .tf-map-popup-wrap{
+        display: none;
     }
-}
-
-.tf-map-popup-wrap{
-    display: none;
 }
 
 .tf-archive-details-fancy{
@@ -1237,49 +1234,72 @@
     }
 }
 
-.tf_template_3_global_layouts{
-    .fancybox-container{
-        #tf_posts_navigation_bar,
-        .tf_posts_ajax_navigation,
-        .tf_posts_page_navigation{
-            display: inline-flex;
-            margin-top: 30px;
-            .page-numbers{
-                border: 0.5px solid $color-gray;
-                background: $color-white;
-                height: 40px;
-                color: $color-text;
-                font-size: 16px;
-                font-style: normal;
-                font-weight: 400;
-                line-height: 130%;
-                letter-spacing: 0.16px;
-                padding: 0px 20px;
-                text-decoration: none;
-                display: flex;
-                align-items: center;
-            }
-            .page-numbers.current{
-                background: $color-light-bg;
-                color: $color-text;
+.tf-single-template,
+.tf-archive-template{
+    &__one,
+    &__two,
+    &__three,
+    &__four{
+        .fancybox-container{
+            #tf_posts_navigation_bar,
+            .tf_posts_ajax_navigation,
+            .tf_posts_page_navigation{
+                display: inline-flex;
+                margin-top: 30px;
+                .page-numbers{
+                    border: 0.5px solid $color-gray;
+                    background: $color-white;
+                    height: 40px;
+                    color: $color-text;
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 130%;
+                    letter-spacing: 0.16px;
+                    padding: 0px 20px;
+                    text-decoration: none;
+                    display: flex;
+                    align-items: center;
+                }
+                .page-numbers.current{
+                    background: $color-light-bg;
+                    color: $color-text;
+                }
             }
         }
     }
 }
-.admin-bar .fancybox-container .tf-archive-details .tf-details-left,
-.admin-bar .fancybox-container .tf-archive-details .tf-details-right .tf-hotel-archive-map-wrap{
-    height: calc(100vh - 32px);
-}
-.admin-bar .tf-archive-details-fancy .tf-archive-details .tf-archive-hotels {
-    max-height: calc(100vh - 128px);
-}
-.admin-bar .tf-archive-details-fancy .fancybox-slide{
-    top: 32px;
-    height: calc(100vh - 32px);
-}
-.admin-bar .fancybox-container .tf-archive-filter .tf-archive-filter-sidebar{
-    top: 32px;
-    height: calc(100vh - 32px);
+
+.admin-bar{
+    .fancybox-container{
+        .tf-archive-details{
+            .tf-details-left{
+                height: calc(100vh - 32px);
+            }
+            .tf-details-right{
+                .tf-hotel-archive-map-wrap{
+                    height: calc(100vh - 32px);
+                }
+            }
+        }
+        .tf-archive-filter{
+            .tf-archive-filter-sidebar{
+                top: 32px;
+                height: calc(100vh - 32px);
+            }
+        }
+    }
+    .tf-archive-details-fancy {
+        .tf-archive-details{
+            .tf-archive-hotels {
+                max-height: calc(100vh - 128px);
+            }
+        }
+        .fancybox-slide{
+            top: 32px;
+            height: calc(100vh - 32px);
+        }
+    }
 }
 
 .tf_widget.widget_tf_map_filters {
