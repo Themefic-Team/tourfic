@@ -2115,7 +2115,7 @@ class Tour {
                                                     <div class="tf-extra-check-box">
                                                         <input type="checkbox" value="<?php echo esc_attr( $extrakey ); ?>" data-title="<?php echo esc_attr( $tour_extra['title'] ); ?>"
                                                                id="extra<?php echo esc_attr( $extrakey ); ?>" name="tf-tour-extra">
-                                                        <span class="checkmark"></span>
+                                                        <span class="tf-checkmark"></span>
                                                     </div>
                                                     <div class="tf-extra-content">
                                                         <h5><?php echo esc_html( $tour_extra['title'] ); ?> <?php echo $tour_extra_pricetype == "fixed" ? esc_html( "(Fixed Price)" ) : ( $tour_extra_pricetype == "person" ? esc_html( "(Per Person Price)" ) : esc_html( "(Per unit Price)" ) ); ?>

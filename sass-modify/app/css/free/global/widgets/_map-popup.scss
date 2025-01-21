@@ -537,7 +537,7 @@
     .tf-archive-filter {
         //margin-bottom: 24px;
 
-        label input:checked ~ .checkmark{
+        label input:checked ~ .tf-checkmark{
             background-color: $color-primary !important;
             border-color: $color-primary !important;
         }
@@ -731,7 +731,7 @@
                                     display: none;
                                 }
 
-                                .checkmark {
+                                .tf-checkmark {
                                     position: absolute;
                                     top: 50%;
                                     left: 0px;

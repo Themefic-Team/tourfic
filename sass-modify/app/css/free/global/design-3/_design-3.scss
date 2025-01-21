@@ -384,7 +384,7 @@
                             padding-left: 25px;
                             line-height: 16px;
                             margin-left: 0px;
-                            .checkmark{
+                            .tf-checkmark{
                                 border-radius: 4px;
                                 border: 1px solid $color-primary;
                                 background: $color-light-bg;
@@ -400,7 +400,7 @@
                                 }
                             }
                         }
-                        label input:checked~.checkmark {
+                        label input:checked~.tf-checkmark {
                             background-color: transparent !important;
                             border-color: $color-primary;
                         }
@@ -979,7 +979,7 @@
                             label{
                                 padding-left: 30px;
                                 line-height: 16px;
-                                .checkmark{
+                                .tf-checkmark{
                                     border-radius: 4px;
                                     border: 1px solid $color-primary;
                                     background: $color-yellow-light;
@@ -997,7 +997,7 @@
                                     }
                                 }
                             }
-                            label input:checked~.checkmark {
+                            label input:checked~.tf-checkmark {
                                 background-color: transparent !important;
                                 border-color: $color-primary;
                             }

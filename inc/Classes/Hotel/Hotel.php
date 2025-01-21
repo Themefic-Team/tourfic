@@ -4872,7 +4872,7 @@ class Hotel {
 						if ( $term ) {
 							echo '<li><label for="' . esc_attr( $term->slug ) . '">';
 							echo '<input type="checkbox" name="features" class="" value="' . esc_attr( $feature ) . '" id="' . esc_attr( $term->slug ) . '">';
-							echo "<span class='checkmark'></span>";
+							echo "<span class='tf-checkmark'></span>";
 							echo esc_html( $term->name ) . '</label>';
 							echo "</li>";
 						}

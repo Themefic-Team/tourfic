@@ -1439,7 +1439,7 @@
         $('a.see-more').on('click', function (e) {
             var $this = $(this);
             e.preventDefault();
-            $this.parent('.tf-filter').find('.filter-item').filter(function (index) {
+            $this.parent('.tf-filter').find('.tf-filter-item').filter(function (index) {
                 return index > 3;
             }).removeClass("hidden");
             $this.hide();
@@ -1452,7 +1452,7 @@
         $('a.see-less').on('click', function (e) {
             var $this = $(this);
             e.preventDefault();
-            $this.parent('.tf-filter').find('.filter-item').filter(function (index) {
+            $this.parent('.tf-filter').find('.tf-filter-item').filter(function (index) {
                 return index > 3;
             }).addClass("hidden");
             $this.hide();
@@ -1467,7 +1467,7 @@
                 $(this).find('.see-more').show();
             }
             //hide items if crossed showing limit
-            $(this).find('.filter-item').filter(function (index) {
+            $(this).find('.tf-filter-item').filter(function (index) {
                 return index > 3;
             }).addClass("hidden");
 
@@ -1481,7 +1481,7 @@
                 $(this).find('.see-more').show();
             }
             //hide items if crossed showing limit
-            $(this).find('.filter-item').filter(function (index) {
+            $(this).find('.tf-filter-item').filter(function (index) {
                 return index > 3;
             }).addClass("hidden");
 
@@ -1491,7 +1491,7 @@
         $('.tf-category-lists a.see-more').on('click', function (e) {
             var $this = $(this);
             e.preventDefault();
-            $this.parent('.tf-category-lists').find('.filter-item').filter(function (index) {
+            $this.parent('.tf-category-lists').find('.tf-filter-item').filter(function (index) {
                 return index > 3;
             }).removeClass("hidden");
             $this.hide();
@@ -1504,7 +1504,7 @@
         $('.tf-category-lists a.see-less').on('click', function (e) {
             var $this = $(this);
             e.preventDefault();
-            $this.parent('.tf-category-lists').find('.filter-item').filter(function (index) {
+            $this.parent('.tf-category-lists').find('.tf-filter-item').filter(function (index) {
                 return index > 3;
             }).addClass("hidden");
             $this.hide();

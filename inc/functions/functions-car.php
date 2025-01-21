@@ -697,7 +697,7 @@ function tf_car_booking_pupup_callback() {
 									<input id="tf_single_protection_price" type="hidden" value="<?php echo !empty($protection['price']) ? esc_attr($protection['price'] * $total_days) : 0; ?> ">
 									<label>
 										<input type="checkbox" class="protection-checkbox" name="protections[]" value="<?php echo esc_attr($pkey); ?>">
-										<span class="checkmark"></span>
+										<span class="tf-checkmark"></span>
 									</label>
 								</div>
 								<div class="tf-single-protection-title tf-flex">

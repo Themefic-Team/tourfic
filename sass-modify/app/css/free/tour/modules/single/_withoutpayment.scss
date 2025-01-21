@@ -227,7 +227,7 @@
                                     margin-right: 10px;
                                     display: none;
                                 }
-                                .checkmark{
+                                .tf-checkmark{
                                     position: absolute;
                                     top: 0px;
                                     left: 0px;
@@ -250,17 +250,17 @@
                                 }
                                 
                             
-                                input:checked~.checkmark {
+                                input:checked~.tf-checkmark {
                                     border: 1px solid $color-primary;
                                 }
                             
-                                .checkmark:after {
+                                .tf-checkmark:after {
                                     content: "";
                                     position: absolute;
                                     display: none;
                                 }
                             
-                                input:checked~.checkmark:after {
+                                input:checked~.tf-checkmark:after {
                                     display: block;
                                 }
                             }
