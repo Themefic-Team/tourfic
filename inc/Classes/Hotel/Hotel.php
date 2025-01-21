@@ -4102,7 +4102,7 @@ class Hotel {
                                             <p><?php echo esc_html( substr( wp_strip_all_tags( get_the_content() ), 0, 160 ) ) . '...'; ?></p>
                                         </div>
                                     </div>
-                                    <div class="roomNameInner">
+                                    <div class="tf_room_name_inner">
                                         <div class="room_link">
                                             <div class="roomrow_flex">
 

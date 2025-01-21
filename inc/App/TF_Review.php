@@ -133,7 +133,7 @@ class TF_Review {
     }
 
     function tf_comment_reply_link_filter( $content ) {
-        return '<div id="tourfic-rating" style="display: none">' . $content . '</div>';
+        return '<div id="tf-rating" style="display: none">' . $content . '</div>';
     }
 
     function tf_redirect_user_to_previous_url() {
