@@ -41,7 +41,7 @@ class Carrental_Locations extends \Tourfic\Core\Shortcodes {
 		ob_start();
 
 		if ( $brands ) { ?>
-			<section id="recomended_section_wrapper">
+			<section id="tf_recomended_section_wrapper">
 				<div class="recomended_inner">
 
 					<?php foreach ( $brands as $term ) {

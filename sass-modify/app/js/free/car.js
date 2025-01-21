@@ -860,7 +860,7 @@
         });        
 
         // Social Share
-        $('.tf-single-car-section .tf-share-toggle').on("click", function (e) {
+        $('.single-tf_carrental .tf-single-template__one .tf-share-toggle').on("click", function (e) {
             e.preventDefault();
             $('.tf-share-toggle').toggleClass('actives');
             $('.share-car-content').toggleClass('show');
