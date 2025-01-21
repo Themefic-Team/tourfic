@@ -160,7 +160,7 @@
     border-radius: 4px;
     font-size: 14px;
 
-    @media only screen and (max-width: 830px) {
+    @media #{$max830} {
         margin-bottom: 0;
     }
 
@@ -330,27 +330,7 @@ button.tf-tablinks {
         }
     }
 }
-.tf_destination-wrap {
-    border-left: 0;
-    min-width: 150px;
-    width: 25%;
-    .ui-menu-item {
-        &:before {
-            content: "\f3c5";
-            font-weight: 900;
-            font-family: "Font Awesome 5 Free";
-            float: left;
-            font-size: 15px;
-            line-height: 25px;
-            margin-right: 5px;
-        }
-    }
-}
-#tf_car_booking{
-    .tf_destination-wrap {
-        width: auto;
-    }
-}
+
 div#tf-locationautocomplete-list {
     div {
         &:before {
@@ -413,10 +393,6 @@ div#tf-destinationautocomplete-list {
         margin-top: 5px;
     }
 }
-.tf_more_info_selections {
-    position: relative;
-    cursor: pointer;
-}
 .tf-more-info {
     position: absolute;
     width: 620px;
@@ -430,6 +406,15 @@ div#tf-destinationautocomplete-list {
     top: 102%;
     display: none;
     z-index: 999;
+
+    &.show {
+        display: block;
+    }
+
+    @media #{$max767} {
+        width: 100%;
+    }
+
     .form-group.form-check {
         width: 33%;
         float: left;
@@ -441,9 +426,6 @@ div#tf-destinationautocomplete-list {
         display: block;
         margin-bottom: 10px;
     }
-}
-.tf-more-info.show {
-    display: block;
 }
 .tf-filter-price-range {
     .al-range-slider__track {
@@ -946,139 +928,137 @@ div#tf-destinationautocomplete-list {
     background: transparent;
     margin: auto;
     overflow: auto scroll;
-}
-.tf-aq-overlay {
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    height: 100%;
-    width: 100%;
-    background: $color-heading;
-    opacity: 0.5;
-}
-.tf-aq-outer {
-    position: absolute;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-    top: 20%;
-    width: 100%;
-    max-width: 428px;
-    background: $color-white;
-    padding: 48px 40px 32px 40px;
-    border-radius: 16px;
-    transform: translate(0, 0);
-    @media #{$max640}{
-        width: 90%;
+
+    .tf-aq-overlay {
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        height: 100%;
+        width: 100%;
+        background: $color-heading;
+        opacity: 0.5;
     }
-}
-span.close-aq {
-    position: absolute;
-    right: 16px;
-    top: 16px;
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-    z-index: 9999;
-}
+    .tf-aq-outer {
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        top: 20%;
+        width: 100%;
+        max-width: 428px;
+        background: $color-white;
+        padding: 48px 40px 32px 40px;
+        border-radius: 16px;
+        transform: translate(0, 0);
+        @media #{$max640}{
+            width: 90%;
+        }
+    }
+    span.close-aq {
+        position: absolute;
+        right: 16px;
+        top: 16px;
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+        z-index: 9999;
 
-span.close-aq:hover {
-    scale: 1.2;
-}
-
-div.tf-aq-inner {
-    @include flexbox();
-    flex-direction: column;
-    align-self: center;
-
-    .tf-ask-question-head-content {
+        &:hover {
+            scale: 1.2;
+        }
+    }
+    div.tf-aq-inner {
         @include flexbox();
         flex-direction: column;
-        align-items: center;
-        gap: 16px;
-        margin-bottom: 24px;
-
-        h3 {
-            text-align: center;
-            font-family: Inter;
-            font-size: 24px;
-            font-style: normal;
-            font-weight: 500;
-            margin: 0px !important;
-            line-height: 120%;
-        }
-    }
-
-    form {
-        @include flexbox();
-        flex-direction: column;
-        gap: 24px;
-
-        .tf-ask-question-submit {
-            padding: 12px 32px;
-            border-radius: 4px;
-            background: $color-primary;
-            color:  $color-white;
-            font-family: inherit;
-            font-size: 16px;
-            font-style: normal;
-            font-weight: 700;
-            line-height: 150%;
-        }
-
-        .tf-ask-question-submit:hover {
-            background: $color-secondary;
-        }
-    }
-}
-
-.tf-aq-field {
-    position: relative;
-    margin: 0;
-    overflow: hidden;
-    @include flexbox();
-    flex-direction: column;
-
-    label {
-        font-size: 13px;
-        font-weight: 400;
-        margin-bottom: 8px;
-    }
-
-    input, textarea {
-        border: 1px solid $color-gray!important;
-        border-radius: 4px;
-        padding: 12px 16px!important;
-        background-color: $color-white;
-        color: $color-text;
-        font-size: 16px;
-        font-weight: 400;
-        transition: all 0.3s ease-in-out;
-
-        &:focus{
-            outline: none;
-            border-color: $color-primary;
-        }
-    }
-
-    textarea{
-        height: 120px;
-    }
-
-    input::placeholder, textarea::placeholder {
-        font-family: Inter;
-        font-size: 15px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
-    }
+        align-self: center;
     
+        .tf-ask-question-head-content {
+            @include flexbox();
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+    
+            h3 {
+                text-align: center;
+                font-family: Inter;
+                font-size: 24px;
+                font-style: normal;
+                font-weight: 500;
+                margin: 0px !important;
+                line-height: 120%;
+            }
+        }
+    
+        form {
+            @include flexbox();
+            flex-direction: column;
+            gap: 24px;
+    
+            .tf-ask-question-submit {
+                padding: 12px 32px;
+                border-radius: 4px;
+                background: $color-primary;
+                color:  $color-white;
+                font-family: inherit;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 150%;
+            }
+    
+            .tf-ask-question-submit:hover {
+                background: $color-secondary;
+            }
+        }
+    }
+    .tf-aq-field {
+        position: relative;
+        margin: 0;
+        overflow: hidden;
+        @include flexbox();
+        flex-direction: column;
+    
+        label {
+            font-size: 13px;
+            font-weight: 400;
+            margin-bottom: 8px;
+        }
+    
+        input, textarea {
+            border: 1px solid $color-gray!important;
+            border-radius: 4px;
+            padding: 12px 16px!important;
+            background-color: $color-white;
+            color: $color-text;
+            font-size: 16px;
+            font-weight: 400;
+            transition: all 0.3s ease-in-out;
+    
+            &:focus{
+                outline: none;
+                border-color: $color-primary;
+            }
+        }
+    
+        textarea{
+            height: 120px;
+        }
+    
+        input::placeholder, textarea::placeholder {
+            font-family: Inter;
+            font-size: 15px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+        }
+    }
 }
 .tf-booking-form-tab-mobile {
     display: none;
-    @media screen and (max-width: 767px) {
+    @media #{$max830} {
         display: block;
     }
 }
@@ -1087,6 +1067,10 @@ div.tf-aq-inner {
     grid-template-columns: 1fr 1fr 1fr;
     @media #{$max767}{
         grid-template-columns: 1fr 1fr;
+        .tf-slider-item {
+            width: 100%;
+            float: left;
+        }
     }
     @media #{$max640}{
         grid-template-columns: 1fr;
@@ -1096,6 +1080,10 @@ div.tf-aq-inner {
 .post-section-one {
     overflow: hidden;
     @include flexbox();
+
+    @media #{$max767} {
+        flex-direction: column;
+    }
     .tf-single-item {
         width: 32%;
         float: left;
@@ -1120,63 +1108,31 @@ div.tf-aq-inner {
             z-index: -1;
             border-radius: 5px;
         }
-    }
-}
-.tf-single-item {
-    width: 48%;
-    float: left;
-    margin: 11px;
-    padding: 15px;
-    @include flexbox();
-    border-radius: 5px;
-    height: 400px;
-    object-fit: cover;
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    position: relative;
-    z-index: 0;
-    &:before{
-        position: absolute;
-        content: "";
-        height: 100%;
-        width: 100%;
-        left: 0;
-        top: 0;
-        background-color: rgba(0, 0, 0, .5);
-        z-index: -1;
-        border-radius: 5px;
-    }
-}
-.tf-post-content {
-    flex-grow: 1;
-    align-self: flex-end;
-}
-.tf-post-desc {
-    a {
-        color: $color-white;
-        &:hover {
-            color: $color-light-bg;
+
+        @media #{$max767} {
+            width: 100%;
+            margin: unset;
+            margin-bottom: 10px;
         }
     }
-    p {
-        color: $color-white;
+    .tf-post-content {
+        flex-grow: 1;
+        align-self: flex-end;
     }
-}
-@media screen and (max-width: 767px) {
-    .tf-more-info {
-        width: 100%;
-    }
-    .tf_destination-wrap {
-        padding: 10px !important;
-        border-bottom: 1px solid $color-gray;
-        width: 100%;
-        .tf_input-inner {
-            padding: 0 10px;
+    .tf-post-desc {
+        a {
+            color: $color-white;
+            &:hover {
+                color: $color-light-bg;
+            }
+        }
+        p {
+            color: $color-white;
         }
     }
-    .tf_submit-wrap {
-        width: 100%;
-    }
+}
+
+@media #{$max767} {
     select[name="tf-booking-form-tab-select"] {
         width: 100%;
         background: transparent;
@@ -1184,24 +1140,5 @@ div.tf-aq-inner {
         padding: 10px !important;
         border: 1px solid $color-text;
         border-radius: 4px;
-    }
-    .post-section-one {
-        flex-direction: column;
-        .tf-single-item {
-            width: 100%;
-            margin: unset;
-            margin-bottom: 10px;
-        }
-    }
-    .tf-single-item {
-        width: 100%;
-        margin: unset;
-        margin-bottom: 10px;
-    }
-    .tf-hotel-grid {
-        .tf-slider-item {
-            width: 100%;
-            float: left;
-        }
     }
 }

@@ -1217,19 +1217,44 @@ h3.section-heading {
 
 .tf_destination-wrap {
   border-right: 1px solid #f0f2f4;
+  border-left: 0;
   display: table-cell;
   vertical-align: middle;
+  min-width: 150px;
+  width: 25%;
 }
 
 @media only screen and (max-width: 767.98px) {
   .tf_destination-wrap {
     width: 100%;
     display: block;
+    padding: 10px !important;
+    border-bottom: 1px solid #808080;
   }
 }
 
 .tf_destination-wrap .tf_input-inner {
   padding: 0 15px;
+}
+
+@media only screen and (max-width: 767.98px) {
+  .tf_destination-wrap .tf_input-inner {
+    padding: 0 10px;
+  }
+}
+
+.tf_destination-wrap .ui-menu-item:before {
+  content: "\f3c5";
+  font-weight: 900;
+  font-family: "Font Awesome 5 Free";
+  float: left;
+  font-size: 15px;
+  line-height: 25px;
+  margin-right: 5px;
+}
+
+#tf_car_booking .tf_destination-wrap {
+  width: auto;
 }
 
 .tf_selectdate-wrap {
@@ -1253,6 +1278,8 @@ h3.section-heading {
   }
   .tf_selectdate-wrap.tf_more_info_selections {
     padding: 20px !important;
+    position: relative;
+    cursor: pointer;
   }
 }
 
@@ -2543,26 +2570,6 @@ button.tf-tablinks:focus {
   margin: 0;
 }
 
-.tf_destination-wrap {
-  border-left: 0;
-  min-width: 150px;
-  width: 25%;
-}
-
-.tf_destination-wrap .ui-menu-item:before {
-  content: "\f3c5";
-  font-weight: 900;
-  font-family: "Font Awesome 5 Free";
-  float: left;
-  font-size: 15px;
-  line-height: 25px;
-  margin-right: 5px;
-}
-
-#tf_car_booking .tf_destination-wrap {
-  width: auto;
-}
-
 div#tf-locationautocomplete-list div:before {
   content: "\f3c5";
   font-weight: 900;
@@ -2619,11 +2626,6 @@ div#tf-destinationautocomplete-list div:before {
   margin-top: 5px;
 }
 
-.tf_more_info_selections {
-  position: relative;
-  cursor: pointer;
-}
-
 .tf-more-info {
   position: absolute;
   width: 620px;
@@ -2639,6 +2641,16 @@ div#tf-destinationautocomplete-list div:before {
   z-index: 999;
 }
 
+.tf-more-info.show {
+  display: block;
+}
+
+@media only screen and (max-width: 767.98px) {
+  .tf-more-info {
+    width: 100%;
+  }
+}
+
 .tf-more-info .form-group.form-check {
   width: 33%;
   float: left;
@@ -2650,10 +2662,6 @@ div#tf-destinationautocomplete-list div:before {
   font-weight: 600;
   display: block;
   margin-bottom: 10px;
-}
-
-.tf-more-info.show {
-  display: block;
 }
 
 .tf-filter-price-range .al-range-slider__track {
@@ -3347,7 +3355,7 @@ div#tf-destinationautocomplete-list div:before {
   overflow: auto scroll;
 }
 
-.tf-aq-overlay {
+#tf-ask-question .tf-aq-overlay {
   position: fixed;
   left: 0;
   right: 0;
@@ -3359,7 +3367,7 @@ div#tf-destinationautocomplete-list div:before {
   opacity: 0.5;
 }
 
-.tf-aq-outer {
+#tf-ask-question .tf-aq-outer {
   position: absolute;
   left: 0;
   right: 0;
@@ -3374,12 +3382,12 @@ div#tf-destinationautocomplete-list div:before {
 }
 
 @media only screen and (max-width: 640px) {
-  .tf-aq-outer {
+  #tf-ask-question .tf-aq-outer {
     width: 90%;
   }
 }
 
-span.close-aq {
+#tf-ask-question span.close-aq {
   position: absolute;
   right: 16px;
   top: 16px;
@@ -3389,11 +3397,11 @@ span.close-aq {
   z-index: 9999;
 }
 
-span.close-aq:hover {
+#tf-ask-question span.close-aq:hover {
   scale: 1.2;
 }
 
-div.tf-aq-inner {
+#tf-ask-question div.tf-aq-inner {
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -3403,7 +3411,7 @@ div.tf-aq-inner {
   align-self: center;
 }
 
-div.tf-aq-inner .tf-ask-question-head-content {
+#tf-ask-question div.tf-aq-inner .tf-ask-question-head-content {
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -3415,7 +3423,7 @@ div.tf-aq-inner .tf-ask-question-head-content {
   margin-bottom: 24px;
 }
 
-div.tf-aq-inner .tf-ask-question-head-content h3 {
+#tf-ask-question div.tf-aq-inner .tf-ask-question-head-content h3 {
   text-align: center;
   font-family: Inter;
   font-size: 24px;
@@ -3425,7 +3433,7 @@ div.tf-aq-inner .tf-ask-question-head-content h3 {
   line-height: 120%;
 }
 
-div.tf-aq-inner form {
+#tf-ask-question div.tf-aq-inner form {
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -3435,7 +3443,7 @@ div.tf-aq-inner form {
   gap: 24px;
 }
 
-div.tf-aq-inner form .tf-ask-question-submit {
+#tf-ask-question div.tf-aq-inner form .tf-ask-question-submit {
   padding: 12px 32px;
   border-radius: 4px;
   background: #0E3DD8;
@@ -3447,11 +3455,11 @@ div.tf-aq-inner form .tf-ask-question-submit {
   line-height: 150%;
 }
 
-div.tf-aq-inner form .tf-ask-question-submit:hover {
+#tf-ask-question div.tf-aq-inner form .tf-ask-question-submit:hover {
   background: #003C7A;
 }
 
-.tf-aq-field {
+#tf-ask-question .tf-aq-field {
   position: relative;
   margin: 0;
   overflow: hidden;
@@ -3463,13 +3471,13 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   flex-direction: column;
 }
 
-.tf-aq-field label {
+#tf-ask-question .tf-aq-field label {
   font-size: 13px;
   font-weight: 400;
   margin-bottom: 8px;
 }
 
-.tf-aq-field input, .tf-aq-field textarea {
+#tf-ask-question .tf-aq-field input, #tf-ask-question .tf-aq-field textarea {
   border: 1px solid #808080 !important;
   border-radius: 4px;
   padding: 12px 16px !important;
@@ -3480,16 +3488,16 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   transition: all 0.3s ease-in-out;
 }
 
-.tf-aq-field input:focus, .tf-aq-field textarea:focus {
+#tf-ask-question .tf-aq-field input:focus, #tf-ask-question .tf-aq-field textarea:focus {
   outline: none;
   border-color: #0E3DD8;
 }
 
-.tf-aq-field textarea {
+#tf-ask-question .tf-aq-field textarea {
   height: 120px;
 }
 
-.tf-aq-field input::placeholder, .tf-aq-field textarea::placeholder {
+#tf-ask-question .tf-aq-field input::placeholder, #tf-ask-question .tf-aq-field textarea::placeholder {
   font-family: Inter;
   font-size: 15px;
   font-style: normal;
@@ -3501,7 +3509,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   display: none;
 }
 
-@media screen and (max-width: 767px) {
+@media only screen and (max-width: 830px) {
   .tf-booking-form-tab-mobile {
     display: block;
   }
@@ -3515,6 +3523,10 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 @media only screen and (max-width: 767.98px) {
   .tf-hotel-grid {
     grid-template-columns: 1fr 1fr;
+  }
+  .tf-hotel-grid .tf-slider-item {
+    width: 100%;
+    float: left;
   }
 }
 
@@ -3531,6 +3543,12 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
+}
+
+@media only screen and (max-width: 767.98px) {
+  .post-section-one {
+    flex-direction: column;
+  }
 }
 
 .post-section-one .tf-single-item {
@@ -3564,69 +3582,32 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   border-radius: 5px;
 }
 
-.tf-single-item {
-  width: 48%;
-  float: left;
-  margin: 11px;
-  padding: 15px;
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  border-radius: 5px;
-  height: 400px;
-  object-fit: cover;
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  position: relative;
-  z-index: 0;
+@media only screen and (max-width: 767.98px) {
+  .post-section-one .tf-single-item {
+    width: 100%;
+    margin: unset;
+    margin-bottom: 10px;
+  }
 }
 
-.tf-single-item:before {
-  position: absolute;
-  content: "";
-  height: 100%;
-  width: 100%;
-  left: 0;
-  top: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: -1;
-  border-radius: 5px;
-}
-
-.tf-post-content {
+.post-section-one .tf-post-content {
   flex-grow: 1;
   align-self: flex-end;
 }
 
-.tf-post-desc a {
+.post-section-one .tf-post-desc a {
   color: #ffffff;
 }
 
-.tf-post-desc a:hover {
+.post-section-one .tf-post-desc a:hover {
   color: #faeedc;
 }
 
-.tf-post-desc p {
+.post-section-one .tf-post-desc p {
   color: #ffffff;
 }
 
-@media screen and (max-width: 767px) {
-  .tf-more-info {
-    width: 100%;
-  }
-  .tf_destination-wrap {
-    padding: 10px !important;
-    border-bottom: 1px solid #808080;
-    width: 100%;
-  }
-  .tf_destination-wrap .tf_input-inner {
-    padding: 0 10px;
-  }
-  .tf_submit-wrap {
-    width: 100%;
-  }
+@media only screen and (max-width: 767.98px) {
   select[name="tf-booking-form-tab-select"] {
     width: 100%;
     background: transparent;
@@ -3634,23 +3615,6 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
     padding: 10px !important;
     border: 1px solid #686E7A;
     border-radius: 4px;
-  }
-  .post-section-one {
-    flex-direction: column;
-  }
-  .post-section-one .tf-single-item {
-    width: 100%;
-    margin: unset;
-    margin-bottom: 10px;
-  }
-  .tf-single-item {
-    width: 100%;
-    margin: unset;
-    margin-bottom: 10px;
-  }
-  .tf-hotel-grid .tf-slider-item {
-    width: 100%;
-    float: left;
   }
 }
 

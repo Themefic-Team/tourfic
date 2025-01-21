@@ -331,16 +331,40 @@ h3.section-heading {
 }
 .tf_destination-wrap {
     border-right: 1px solid $color-border;
+    border-left: 0;
     display: table-cell;
     vertical-align: middle;
+    min-width: 150px;
+    width: 25%;
 
     @media #{$max767}{
         width: 100%;
         display: block;
+        padding: 10px !important;
+        border-bottom: 1px solid $color-gray;
     }
 
     .tf_input-inner {
         padding: 0 15px;
+        @media #{$max767}{
+            padding: 0 10px;
+        }
+    }
+    .ui-menu-item {
+        &:before {
+            content: "\f3c5";
+            font-weight: 900;
+            font-family: "Font Awesome 5 Free";
+            float: left;
+            font-size: 15px;
+            line-height: 25px;
+            margin-right: 5px;
+        }
+    }
+}
+#tf_car_booking{
+    .tf_destination-wrap {
+        width: auto;
     }
 }
 .tf_selectdate-wrap {
@@ -362,6 +386,8 @@ h3.section-heading {
 
         &.tf_more_info_selections {
             padding: 20px !important;
+            position: relative;
+            cursor: pointer;
         }
     }
 
