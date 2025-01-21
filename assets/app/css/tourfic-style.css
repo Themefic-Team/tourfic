@@ -1,3 +1,6 @@
+/*!****************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[3]!./sass-modify/app/css/free/tourfic.scss ***!
+  \****************************************************************************************************************************************************************************************/
 @charset "UTF-8";
 /* 
 Container
@@ -10,6 +13,12 @@ Container
 
 .tf-container-fluid {
   max-width: 100%;
+}
+
+@media only screen and (max-width: 767.98px) {
+  .tf-container {
+    width: 100%;
+  }
 }
 
 /*
@@ -351,18 +360,37 @@ Ajax Loader
   visibility: visible;
   opacity: 1;
   transition: opacity .2s ease, visibility .2s ease;
-  -webkit-animation: wd-rotate 450ms infinite linear;
-  animation: wd-rotate 450ms infinite linear;
+  -webkit-animation: tf-rotate 450ms infinite linear;
+  animation: tf-rotate 450ms infinite linear;
 }
 
-@-webkit-keyframes wd-rotate {
+#tour_room_details_loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.8);
+  display: none;
+  z-index: 99999999;
+}
+
+#tour_room_details_loader #tour-room-details-loader-img {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@-webkit-keyframes tf-rotate {
   100% {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
   }
 }
 
-@keyframes wd-rotate {
+@keyframes tf-rotate {
   100% {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
@@ -988,12 +1016,12 @@ h3.section-heading {
   display: block;
 }
 
-.slick-initialized .slick-slide {
+.slick-slider.slick-initialized .slick-slide {
   display: block;
 }
 
 @media only screen and (max-width: 767.98px) {
-  .slick-initialized .slick-slide {
+  .slick-slider.slick-initialized .slick-slide {
     margin: 0px !important;
   }
 }
@@ -1541,6 +1569,12 @@ h3.section-heading {
   margin: 25px 0 0 0;
 }
 
+@media only screen and (max-width: 1000px) {
+  .tf-review-form-container form.tf-review-form {
+    gap: 20px;
+  }
+}
+
 #tf-rating .logged-in-as {
   text-align: center;
   margin-bottom: 25px;
@@ -1753,39 +1787,11 @@ h3.section-heading {
   text-align: center;
   font-size: 16px;
   font-style: italic;
-  font-weight: normal;
   background: #ffffff;
   border-radius: 4px;
   padding: 10px 10px;
   color: #686E7A;
   margin: 30px 0 10px 0;
-}
-
-.tf-faq-sec-title {
-  margin-bottom: 60px;
-  text-align: center;
-}
-
-@media only screen and (max-width: 767px) {
-  .tf-faq-sec-title {
-    margin-bottom: 20px;
-  }
-}
-
-.tf-faq-sec-title p {
-  max-width: 480px;
-  margin: auto;
-}
-
-.tf-faq-content-wrapper {
-  display: flex;
-  gap: 35px;
-}
-
-@media only screen and (max-width: 980px) {
-  .tf-faq-content-wrapper {
-    display: grid;
-  }
 }
 
 .tf-ask-question {
@@ -1804,6 +1810,10 @@ h3.section-heading {
 }
 
 .tf-ask-question .default-enquiry-title-section {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
   justify-content: center;
   align-items: baseline;
@@ -1820,59 +1830,6 @@ h3.section-heading {
   padding-right: 10px;
   font-size: 22px;
   color: #0E3DD8;
-}
-
-.tf-faq-items-wrapper {
-  flex: 5;
-}
-
-#tf-faq-item {
-  border-bottom: 1px solid #f0f2f4;
-  margin-bottom: 10px;
-  padding-bottom: 10px;
-}
-
-#tf-faq-item .tf-faq-title {
-  cursor: pointer;
-  transition: 0.2s ease;
-  display: flex;
-  align-items: center;
-}
-
-#tf-faq-item .tf-faq-title h4 {
-  font-size: 18px !important;
-}
-
-#tf-faq-item .tf-faq-title.active {
-  margin-bottom: 15px;
-}
-
-#tf-faq-item .arrow {
-  transition: 0.25s ease;
-  transform: rotate(-90deg);
-  font-size: 20px;
-  color: #0E3DD8;
-}
-
-#tf-faq-item .arrow-animate {
-  transform: rotate(0deg);
-}
-
-#tf-faq-item .tf-faq-desc {
-  background-color: #ffffff;
-  display: none;
-  padding: 20px;
-  color: #686E7A;
-  margin-top: -2px;
-  z-index: 999;
-  position: relative;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-}
-
-.tf-faq-title h4 {
-  width: 100%;
-  color: #060D1C;
 }
 
 .tf-slider-item {
@@ -1908,7 +1865,7 @@ h3.section-heading {
   }
 }
 
-.tf-slider-content {
+.tf-slider-item .tf-slider-content {
   background: rgba(0, 0, 0, 0.45);
   border: 1px solid rgba(255, 255, 255, 0.16);
   -webkit-backdrop-filter: blur(3px);
@@ -1919,24 +1876,24 @@ h3.section-heading {
   color: #ffffff;
 }
 
-.tf-slider-desc h3 {
+.tf-slider-item .tf-slider-desc h3 {
   font-size: 20px;
   color: #ffffff;
 }
 
 @media only screen and (max-width: 980px) {
-  .tf-slider-desc h3 {
+  .tf-slider-item .tf-slider-desc h3 {
     font-size: 18px;
   }
 }
 
 @media only screen and (max-width: 480px) {
-  .tf-slider-desc h3 {
+  .tf-slider-item .tf-slider-desc h3 {
     font-size: 16px;
   }
 }
 
-.tf-slider-desc h3 span {
+.tf-slider-item .tf-slider-desc h3 span {
   font-size: 15px;
   line-height: 26px;
   margin-top: 5px;
@@ -1944,12 +1901,12 @@ h3.section-heading {
   font-weight: 400;
 }
 
-.tf-slider-desc a {
+.tf-slider-item .tf-slider-desc a {
   color: #ffffff;
   text-decoration: none;
 }
 
-.tf-slider-desc a:hover {
+.tf-slider-item .tf-slider-desc a:hover {
   color: #003C7A;
 }
 
@@ -1993,7 +1950,7 @@ h3.section-heading {
   padding: 10px 10px;
 }
 
-.checkmark {
+.tf-checkmark {
   position: absolute;
   top: 2px;
   left: 0px;
@@ -2004,7 +1961,7 @@ h3.section-heading {
   border: 1px solid #f0f2f4;
 }
 
-.filter-item label {
+.tf-filter-item label {
   position: relative;
   cursor: pointer;
   width: 100%;
@@ -2013,7 +1970,11 @@ h3.section-heading {
   line-height: 1.3;
 }
 
-li.filter-item {
+li.tf-filter-item {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -2023,6 +1984,10 @@ li.filter-item {
 }
 
 .tf-widget-title {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
   align-items: center;
   padding: 10px 16px;
@@ -2169,114 +2134,16 @@ li.filter-item {
   display: none;
 }
 
-@media only screen and (max-width: 1025px) {
-  .flatpickr-calendar {
-    font-size: 14px;
-  }
-}
-
 #commentform label {
   position: static !important;
   display: inline-block !important;
-}
-
-/*
-Ajax Loader Booking Availability
-*/
-.tf-btn-booking-loading {
-  padding-right: 40px;
-  position: relative;
-}
-
-.tf-btn-booking-loading:before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  right: 10px;
-  margin-top: -7px;
-  display: inline-block;
-  width: 12px;
-  height: 12px;
-  border: 2px solid #ffffff;
-  border-left-color: transparent;
-  border-radius: 50%;
-  vertical-align: middle;
-  visibility: visible;
-  opacity: 1;
-  transition: opacity 0.2s ease, visibility 0.2s ease;
-  -webkit-animation: tf-wd-rotate 450ms infinite linear;
-  animation: tf-wd-rotate 450ms infinite linear;
-}
-
-@-webkit-keyframes tf-wd-rotate {
-  100% {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes tf-wd-rotate {
-  100% {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
 }
 
 .woocommerce-product-gallery .ct-image-container {
   width: 100% !important;
 }
 
-@media only screen and (max-width: 1000px) {
-  form.tf-review-form {
-    gap: 20px;
-  }
-}
-
-@media (max-width: 991px) {
-  .archive_ajax_result .single-tour-wrap {
-    width: 100% !important;
-    flex: none;
-    margin-bottom: 20px;
-  }
-  .archive_ajax_result .tourfic-single-left {
-    width: 100%;
-    margin-bottom: 16px;
-  }
-  .archive_ajax_result .single-tour-inner {
-    margin: 0;
-    height: 100%;
-    padding: 20px;
-  }
-  .archive_ajax_result .tourfic-single-right {
-    padding: 0;
-    width: 100%;
-    height: 100%;
-  }
-  .archive_ajax_result .roomrow_flex {
-    padding: 0;
-    flex-wrap: wrap;
-  }
-  .archive_ajax_result .roomName_flex {
-    width: 100%;
-    max-width: 100%;
-  }
-  .archive_ajax_result .roomPrice.roomPrice_flex.sr_discount {
-    text-align: left;
-    margin: 10px 0;
-  }
-  .archive_ajax_result .availability-btn-area .tf_btn {
-    width: 100%;
-    margin-top: 15px;
-  }
-  .tf_search_result .tf-action-top {
-    display: none;
-  }
-}
-
 @media screen and (max-width: 767px) {
-  .tf-container {
-    width: 100%;
-  }
   #check-in-out-date {
     width: 220px !important;
   }
@@ -3776,6 +3643,12 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   border-top: 1px solid #f0f2f4;
 }
 
+@media (max-width: 991px) {
+  .search-result-inner .tf-search-left .tf-action-top {
+    display: none;
+  }
+}
+
 .search-result-inner .tf-search-left .tf-action-top .tf-result-counter-info {
   display: flex;
 }
@@ -4068,6 +3941,44 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   transition: all 0.3s ease-out;
 }
 
+@media only screen and (max-width: 991.98px) {
+  .search-result-inner .tf-search-left .archive_ajax_result .single-tour-wrap {
+    width: 100% !important;
+    flex: none;
+    margin-bottom: 20px;
+  }
+  .search-result-inner .tf-search-left .archive_ajax_result .tourfic-single-left {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+  .search-result-inner .tf-search-left .archive_ajax_result .single-tour-inner {
+    margin: 0;
+    height: 100%;
+    padding: 20px;
+  }
+  .search-result-inner .tf-search-left .archive_ajax_result .tourfic-single-right {
+    padding: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .search-result-inner .tf-search-left .archive_ajax_result .roomrow_flex {
+    padding: 0;
+    flex-wrap: wrap;
+  }
+  .search-result-inner .tf-search-left .archive_ajax_result .roomName_flex {
+    width: 100%;
+    max-width: 100%;
+  }
+  .search-result-inner .tf-search-left .archive_ajax_result .roomPrice.roomPrice_flex.sr_discount {
+    text-align: left;
+    margin: 10px 0;
+  }
+  .search-result-inner .tf-search-left .archive_ajax_result .availability-btn-area .tf_btn {
+    width: 100%;
+    margin-top: 15px;
+  }
+}
+
 @media only screen and (min-width: 635px) and (max-width: 659px) {
   .search-result-inner .tf-search-left .archive_ajax_result {
     display: grid;
@@ -4264,33 +4175,33 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   padding: 0;
 }
 
-.tf_widget ul li.filter-item {
+.tf_widget ul li.tf-filter-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 6px 10px;
   border-radius: 4px;
   margin: 5px;
-  /* Style the checkmark/indicator */
+  /* Style the tf-checkmark/indicator */
 }
 
 @media only screen and (max-width: 659px) {
-  .tf_widget ul li.filter-item {
+  .tf_widget ul li.tf-filter-item {
     display: inline-block;
     padding-right: 25px;
     margin-top: 5px;
   }
 }
 
-.tf_widget ul li.filter-item.active {
+.tf_widget ul li.tf-filter-item.active {
   background-color: #faeedc;
 }
 
-.tf_widget ul li.filter-item.hidden {
+.tf_widget ul li.tf-filter-item.hidden {
   display: none;
 }
 
-.tf_widget ul li.filter-item label {
+.tf_widget ul li.tf-filter-item label {
   position: relative;
   cursor: pointer;
   width: 100%;
@@ -4299,11 +4210,11 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   font-weight: 400 !important;
 }
 
-.tf_widget ul li.filter-item label input {
+.tf_widget ul li.tf-filter-item label input {
   display: none;
 }
 
-.tf_widget ul li.filter-item .checkmark {
+.tf_widget ul li.tf-filter-item .tf-checkmark {
   position: absolute;
   top: 0px;
   left: 0px;
@@ -4314,29 +4225,29 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   border: 1px solid #f0f2f4;
 }
 
-.tf_widget ul li.filter-item input[type=checkbox] {
+.tf_widget ul li.tf-filter-item input[type=checkbox] {
   display: none !important;
 }
 
-.tf_widget ul li.filter-item label:hover input ~ .checkmark {
+.tf_widget ul li.tf-filter-item label:hover input ~ .tf-checkmark {
   background-color: #808080;
 }
 
-.tf_widget ul li.filter-item label input:checked ~ .checkmark {
+.tf_widget ul li.tf-filter-item label input:checked ~ .tf-checkmark {
   background-color: #0E3DD8;
 }
 
-.tf_widget ul li.filter-item .checkmark:after {
+.tf_widget ul li.tf-filter-item .tf-checkmark:after {
   content: "";
   position: absolute;
   display: none;
 }
 
-.tf_widget ul li.filter-item label input:checked ~ .checkmark:after {
+.tf_widget ul li.tf-filter-item label input:checked ~ .tf-checkmark:after {
   display: block;
 }
 
-.tf_widget ul li.filter-item label .checkmark:after {
+.tf_widget ul li.tf-filter-item label .tf-checkmark:after {
   left: 6px;
   top: 3px;
   width: 6px;
@@ -4375,7 +4286,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   list-style: none;
   flex-wrap: wrap;
   margin-bottom: 16px;
-  /* Style the checkmark/indicator */
+  /* Style the tf-checkmark/indicator */
 }
 
 .tf-room-filter .tf-room-checkbox label {
@@ -4387,7 +4298,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   font-weight: 400 !important;
 }
 
-.tf-room-filter .tf-room-checkbox .checkmark {
+.tf-room-filter .tf-room-checkbox .tf-checkmark {
   position: absolute;
   top: 0px;
   left: 0px;
@@ -4402,25 +4313,25 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   display: none !important;
 }
 
-.tf-room-filter .tf-room-checkbox label:hover input ~ .checkmark {
+.tf-room-filter .tf-room-checkbox label:hover input ~ .tf-checkmark {
   background-color: #808080;
 }
 
-.tf-room-filter .tf-room-checkbox label input:checked ~ .checkmark {
+.tf-room-filter .tf-room-checkbox label input:checked ~ .tf-checkmark {
   background-color: #0E3DD8;
 }
 
-.tf-room-filter .tf-room-checkbox .checkmark:after {
+.tf-room-filter .tf-room-checkbox .tf-checkmark:after {
   content: "";
   position: absolute;
   display: none;
 }
 
-.tf-room-filter .tf-room-checkbox label input:checked ~ .checkmark:after {
+.tf-room-filter .tf-room-checkbox label input:checked ~ .tf-checkmark:after {
   display: block;
 }
 
-.tf-room-filter .tf-room-checkbox label .checkmark:after {
+.tf-room-filter .tf-room-checkbox label .tf-checkmark:after {
   left: 6px;
   top: 3px;
   width: 6px;
@@ -5383,16 +5294,16 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 /* map widget */
-.tf-map-preview {
+.tf-map-widget-wrap .tf-map-preview {
   position: relative;
 }
 
-.tf-map-preview img {
+.tf-map-widget-wrap .tf-map-preview img {
   width: 100%;
   border-radius: 8px;
 }
 
-.tf-map-preview .tf-map-preview-content {
+.tf-map-widget-wrap .tf-map-preview .tf-map-preview-content {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -5414,7 +5325,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   gap: 20px;
 }
 
-.tf-map-popup-wrap {
+.tf-map-widget-wrap .tf-map-popup-wrap {
   display: none;
 }
 
@@ -6033,7 +5944,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   width: 120px;
 }
 
-.fancybox-container .tf-archive-filter label input:checked ~ .checkmark {
+.fancybox-container .tf-archive-filter label input:checked ~ .tf-checkmark {
   background-color: #0E3DD8 !important;
   border-color: #0E3DD8 !important;
 }
@@ -6242,7 +6153,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   display: none;
 }
 
-.fancybox-container .tf-archive-filter #tf_map_popup_sidebar .widget .tf-filter ul li label .checkmark {
+.fancybox-container .tf-archive-filter #tf_map_popup_sidebar .widget .tf-filter ul li label .tf-checkmark {
   position: absolute;
   top: 50%;
   left: 0px;
@@ -6254,7 +6165,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   border: 1px solid #0E3DD8;
 }
 
-.fancybox-container .tf-archive-filter #tf_map_popup_sidebar .widget .tf-filter ul li label .checkmark:after {
+.fancybox-container .tf-archive-filter #tf_map_popup_sidebar .widget .tf-filter ul li label .tf-checkmark:after {
   left: 4.5px;
   top: 1.5px;
   width: 5px;
@@ -6819,16 +6730,52 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   }
 }
 
-.tf_template_3_global_layouts .fancybox-container #tf_posts_navigation_bar,
-.tf_template_3_global_layouts .fancybox-container .tf_posts_ajax_navigation,
-.tf_template_3_global_layouts .fancybox-container .tf_posts_page_navigation {
+.tf-single-template__one .fancybox-container #tf_posts_navigation_bar,
+.tf-single-template__one .fancybox-container .tf_posts_ajax_navigation,
+.tf-single-template__one .fancybox-container .tf_posts_page_navigation, .tf-single-template__two .fancybox-container #tf_posts_navigation_bar,
+.tf-single-template__two .fancybox-container .tf_posts_ajax_navigation,
+.tf-single-template__two .fancybox-container .tf_posts_page_navigation, .tf-single-template__three .fancybox-container #tf_posts_navigation_bar,
+.tf-single-template__three .fancybox-container .tf_posts_ajax_navigation,
+.tf-single-template__three .fancybox-container .tf_posts_page_navigation, .tf-single-template__four .fancybox-container #tf_posts_navigation_bar,
+.tf-single-template__four .fancybox-container .tf_posts_ajax_navigation,
+.tf-single-template__four .fancybox-container .tf_posts_page_navigation,
+.tf-archive-template__one .fancybox-container #tf_posts_navigation_bar,
+.tf-archive-template__one .fancybox-container .tf_posts_ajax_navigation,
+.tf-archive-template__one .fancybox-container .tf_posts_page_navigation,
+.tf-archive-template__two .fancybox-container #tf_posts_navigation_bar,
+.tf-archive-template__two .fancybox-container .tf_posts_ajax_navigation,
+.tf-archive-template__two .fancybox-container .tf_posts_page_navigation,
+.tf-archive-template__three .fancybox-container #tf_posts_navigation_bar,
+.tf-archive-template__three .fancybox-container .tf_posts_ajax_navigation,
+.tf-archive-template__three .fancybox-container .tf_posts_page_navigation,
+.tf-archive-template__four .fancybox-container #tf_posts_navigation_bar,
+.tf-archive-template__four .fancybox-container .tf_posts_ajax_navigation,
+.tf-archive-template__four .fancybox-container .tf_posts_page_navigation {
   display: inline-flex;
   margin-top: 30px;
 }
 
-.tf_template_3_global_layouts .fancybox-container #tf_posts_navigation_bar .page-numbers,
-.tf_template_3_global_layouts .fancybox-container .tf_posts_ajax_navigation .page-numbers,
-.tf_template_3_global_layouts .fancybox-container .tf_posts_page_navigation .page-numbers {
+.tf-single-template__one .fancybox-container #tf_posts_navigation_bar .page-numbers,
+.tf-single-template__one .fancybox-container .tf_posts_ajax_navigation .page-numbers,
+.tf-single-template__one .fancybox-container .tf_posts_page_navigation .page-numbers, .tf-single-template__two .fancybox-container #tf_posts_navigation_bar .page-numbers,
+.tf-single-template__two .fancybox-container .tf_posts_ajax_navigation .page-numbers,
+.tf-single-template__two .fancybox-container .tf_posts_page_navigation .page-numbers, .tf-single-template__three .fancybox-container #tf_posts_navigation_bar .page-numbers,
+.tf-single-template__three .fancybox-container .tf_posts_ajax_navigation .page-numbers,
+.tf-single-template__three .fancybox-container .tf_posts_page_navigation .page-numbers, .tf-single-template__four .fancybox-container #tf_posts_navigation_bar .page-numbers,
+.tf-single-template__four .fancybox-container .tf_posts_ajax_navigation .page-numbers,
+.tf-single-template__four .fancybox-container .tf_posts_page_navigation .page-numbers,
+.tf-archive-template__one .fancybox-container #tf_posts_navigation_bar .page-numbers,
+.tf-archive-template__one .fancybox-container .tf_posts_ajax_navigation .page-numbers,
+.tf-archive-template__one .fancybox-container .tf_posts_page_navigation .page-numbers,
+.tf-archive-template__two .fancybox-container #tf_posts_navigation_bar .page-numbers,
+.tf-archive-template__two .fancybox-container .tf_posts_ajax_navigation .page-numbers,
+.tf-archive-template__two .fancybox-container .tf_posts_page_navigation .page-numbers,
+.tf-archive-template__three .fancybox-container #tf_posts_navigation_bar .page-numbers,
+.tf-archive-template__three .fancybox-container .tf_posts_ajax_navigation .page-numbers,
+.tf-archive-template__three .fancybox-container .tf_posts_page_navigation .page-numbers,
+.tf-archive-template__four .fancybox-container #tf_posts_navigation_bar .page-numbers,
+.tf-archive-template__four .fancybox-container .tf_posts_ajax_navigation .page-numbers,
+.tf-archive-template__four .fancybox-container .tf_posts_page_navigation .page-numbers {
   border: 0.5px solid #808080;
   background: #ffffff;
   height: 40px;
@@ -6844,15 +6791,41 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   align-items: center;
 }
 
-.tf_template_3_global_layouts .fancybox-container #tf_posts_navigation_bar .page-numbers.current,
-.tf_template_3_global_layouts .fancybox-container .tf_posts_ajax_navigation .page-numbers.current,
-.tf_template_3_global_layouts .fancybox-container .tf_posts_page_navigation .page-numbers.current {
+.tf-single-template__one .fancybox-container #tf_posts_navigation_bar .page-numbers.current,
+.tf-single-template__one .fancybox-container .tf_posts_ajax_navigation .page-numbers.current,
+.tf-single-template__one .fancybox-container .tf_posts_page_navigation .page-numbers.current, .tf-single-template__two .fancybox-container #tf_posts_navigation_bar .page-numbers.current,
+.tf-single-template__two .fancybox-container .tf_posts_ajax_navigation .page-numbers.current,
+.tf-single-template__two .fancybox-container .tf_posts_page_navigation .page-numbers.current, .tf-single-template__three .fancybox-container #tf_posts_navigation_bar .page-numbers.current,
+.tf-single-template__three .fancybox-container .tf_posts_ajax_navigation .page-numbers.current,
+.tf-single-template__three .fancybox-container .tf_posts_page_navigation .page-numbers.current, .tf-single-template__four .fancybox-container #tf_posts_navigation_bar .page-numbers.current,
+.tf-single-template__four .fancybox-container .tf_posts_ajax_navigation .page-numbers.current,
+.tf-single-template__four .fancybox-container .tf_posts_page_navigation .page-numbers.current,
+.tf-archive-template__one .fancybox-container #tf_posts_navigation_bar .page-numbers.current,
+.tf-archive-template__one .fancybox-container .tf_posts_ajax_navigation .page-numbers.current,
+.tf-archive-template__one .fancybox-container .tf_posts_page_navigation .page-numbers.current,
+.tf-archive-template__two .fancybox-container #tf_posts_navigation_bar .page-numbers.current,
+.tf-archive-template__two .fancybox-container .tf_posts_ajax_navigation .page-numbers.current,
+.tf-archive-template__two .fancybox-container .tf_posts_page_navigation .page-numbers.current,
+.tf-archive-template__three .fancybox-container #tf_posts_navigation_bar .page-numbers.current,
+.tf-archive-template__three .fancybox-container .tf_posts_ajax_navigation .page-numbers.current,
+.tf-archive-template__three .fancybox-container .tf_posts_page_navigation .page-numbers.current,
+.tf-archive-template__four .fancybox-container #tf_posts_navigation_bar .page-numbers.current,
+.tf-archive-template__four .fancybox-container .tf_posts_ajax_navigation .page-numbers.current,
+.tf-archive-template__four .fancybox-container .tf_posts_page_navigation .page-numbers.current {
   background: #faeedc;
   color: #686E7A;
 }
 
-.admin-bar .fancybox-container .tf-archive-details .tf-details-left,
+.admin-bar .fancybox-container .tf-archive-details .tf-details-left {
+  height: calc(100vh - 32px);
+}
+
 .admin-bar .fancybox-container .tf-archive-details .tf-details-right .tf-hotel-archive-map-wrap {
+  height: calc(100vh - 32px);
+}
+
+.admin-bar .fancybox-container .tf-archive-filter .tf-archive-filter-sidebar {
+  top: 32px;
   height: calc(100vh - 32px);
 }
 
@@ -6861,11 +6834,6 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 }
 
 .admin-bar .tf-archive-details-fancy .fancybox-slide {
-  top: 32px;
-  height: calc(100vh - 32px);
-}
-
-.admin-bar .fancybox-container .tf-archive-filter .tf-archive-filter-sidebar {
   top: 32px;
   height: calc(100vh - 32px);
 }
@@ -6944,6 +6912,124 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
 .single-tf_tours .tf-single-template__one .tf-suggestion-wrapper,
 .single-tf_apartment .tf-single-template__one .tf-suggestion-wrapper {
   background-color: #FCF4E8;
+}
+
+.single-tf_hotel .tf-single-template__one .tf-faq-sec-title,
+.single-tf_tours .tf-single-template__one .tf-faq-sec-title,
+.single-tf_apartment .tf-single-template__one .tf-faq-sec-title {
+  margin-bottom: 60px;
+  text-align: center;
+}
+
+@media only screen and (max-width: 767px) {
+  .single-tf_hotel .tf-single-template__one .tf-faq-sec-title,
+  .single-tf_tours .tf-single-template__one .tf-faq-sec-title,
+  .single-tf_apartment .tf-single-template__one .tf-faq-sec-title {
+    margin-bottom: 20px;
+  }
+}
+
+.single-tf_hotel .tf-single-template__one .tf-faq-sec-title p,
+.single-tf_tours .tf-single-template__one .tf-faq-sec-title p,
+.single-tf_apartment .tf-single-template__one .tf-faq-sec-title p {
+  max-width: 480px;
+  margin: auto;
+}
+
+.single-tf_hotel .tf-single-template__one .tf-faq-content-wrapper,
+.single-tf_tours .tf-single-template__one .tf-faq-content-wrapper,
+.single-tf_apartment .tf-single-template__one .tf-faq-content-wrapper {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  gap: 35px;
+}
+
+@media only screen and (max-width: 980px) {
+  .single-tf_hotel .tf-single-template__one .tf-faq-content-wrapper,
+  .single-tf_tours .tf-single-template__one .tf-faq-content-wrapper,
+  .single-tf_apartment .tf-single-template__one .tf-faq-content-wrapper {
+    display: grid;
+  }
+}
+
+.single-tf_hotel .tf-single-template__one .tf-faq-items-wrapper,
+.single-tf_tours .tf-single-template__one .tf-faq-items-wrapper,
+.single-tf_apartment .tf-single-template__one .tf-faq-items-wrapper {
+  flex: 5;
+}
+
+.single-tf_hotel .tf-single-template__one #tf-faq-item,
+.single-tf_tours .tf-single-template__one #tf-faq-item,
+.single-tf_apartment .tf-single-template__one #tf-faq-item {
+  border-bottom: 1px solid #f0f2f4;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
+
+.single-tf_hotel .tf-single-template__one #tf-faq-item .tf-faq-title,
+.single-tf_tours .tf-single-template__one #tf-faq-item .tf-faq-title,
+.single-tf_apartment .tf-single-template__one #tf-faq-item .tf-faq-title {
+  cursor: pointer;
+  transition: 0.2s ease;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.single-tf_hotel .tf-single-template__one #tf-faq-item .tf-faq-title h4,
+.single-tf_tours .tf-single-template__one #tf-faq-item .tf-faq-title h4,
+.single-tf_apartment .tf-single-template__one #tf-faq-item .tf-faq-title h4 {
+  font-size: 18px !important;
+}
+
+.single-tf_hotel .tf-single-template__one #tf-faq-item .tf-faq-title.active,
+.single-tf_tours .tf-single-template__one #tf-faq-item .tf-faq-title.active,
+.single-tf_apartment .tf-single-template__one #tf-faq-item .tf-faq-title.active {
+  margin-bottom: 15px;
+}
+
+.single-tf_hotel .tf-single-template__one #tf-faq-item .arrow,
+.single-tf_tours .tf-single-template__one #tf-faq-item .arrow,
+.single-tf_apartment .tf-single-template__one #tf-faq-item .arrow {
+  transition: 0.25s ease;
+  transform: rotate(-90deg);
+  font-size: 20px;
+  color: #0E3DD8;
+}
+
+.single-tf_hotel .tf-single-template__one #tf-faq-item .arrow-animate,
+.single-tf_tours .tf-single-template__one #tf-faq-item .arrow-animate,
+.single-tf_apartment .tf-single-template__one #tf-faq-item .arrow-animate {
+  transform: rotate(0deg);
+}
+
+.single-tf_hotel .tf-single-template__one #tf-faq-item .tf-faq-desc,
+.single-tf_tours .tf-single-template__one #tf-faq-item .tf-faq-desc,
+.single-tf_apartment .tf-single-template__one #tf-faq-item .tf-faq-desc {
+  background-color: #ffffff;
+  display: none;
+  padding: 20px;
+  color: #686E7A;
+  margin-top: -2px;
+  z-index: 999;
+  position: relative;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.single-tf_hotel .tf-single-template__one .tf-faq-title h4,
+.single-tf_tours .tf-single-template__one .tf-faq-title h4,
+.single-tf_apartment .tf-single-template__one .tf-faq-title h4 {
+  width: 100%;
+  color: #060D1C;
 }
 
 .single-tf_carrental .tf-single-template__one .tf-single-car-details-warper {
@@ -7593,27 +7679,27 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   width: 0;
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label input:checked ~ .checkmark:after,
-.tax-carrental_location .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label input:checked ~ .checkmark:after,
-.tax-carrental_brand .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label input:checked ~ .checkmark:after,
-.page-template-tf-search .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label input:checked ~ .checkmark:after,
-.single-tf_carrental .tf-single-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label input:checked ~ .checkmark:after {
+.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label input:checked ~ .tf-checkmark:after,
+.tax-carrental_location .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label input:checked ~ .tf-checkmark:after,
+.tax-carrental_brand .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label input:checked ~ .tf-checkmark:after,
+.page-template-tf-search .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label input:checked ~ .tf-checkmark:after,
+.single-tf_carrental .tf-single-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label input:checked ~ .tf-checkmark:after {
   display: block;
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label input:checked ~ .checkmark,
-.tax-carrental_location .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label input:checked ~ .checkmark,
-.tax-carrental_brand .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label input:checked ~ .checkmark,
-.page-template-tf-search .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label input:checked ~ .checkmark,
-.single-tf_carrental .tf-single-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label input:checked ~ .checkmark {
+.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label input:checked ~ .tf-checkmark,
+.tax-carrental_location .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label input:checked ~ .tf-checkmark,
+.tax-carrental_brand .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label input:checked ~ .tf-checkmark,
+.page-template-tf-search .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label input:checked ~ .tf-checkmark,
+.single-tf_carrental .tf-single-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label input:checked ~ .tf-checkmark {
   background-color: #faeedc;
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label .checkmark,
-.tax-carrental_location .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label .checkmark,
-.tax-carrental_brand .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label .checkmark,
-.page-template-tf-search .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label .checkmark,
-.single-tf_carrental .tf-single-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label .checkmark {
+.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label .tf-checkmark,
+.tax-carrental_location .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label .tf-checkmark,
+.tax-carrental_brand .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label .tf-checkmark,
+.page-template-tf-search .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label .tf-checkmark,
+.single-tf_carrental .tf-single-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label .tf-checkmark {
   position: absolute;
   height: 15px;
   width: 15px;
@@ -7623,11 +7709,11 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   border-radius: 5px;
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label .checkmark::after,
-.tax-carrental_location .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label .checkmark::after,
-.tax-carrental_brand .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label .checkmark::after,
-.page-template-tf-search .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label .checkmark::after,
-.single-tf_carrental .tf-single-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label .checkmark::after {
+.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label .tf-checkmark::after,
+.tax-carrental_location .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label .tf-checkmark::after,
+.tax-carrental_brand .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label .tf-checkmark::after,
+.page-template-tf-search .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label .tf-checkmark::after,
+.single-tf_carrental .tf-single-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label .tf-checkmark::after {
   content: "";
   position: absolute;
   display: none;
@@ -8212,15 +8298,15 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   width: 0;
 }
 
-.tf-archive-search-box-wrapper .tf-driver-location-box .tf-driver-location ul li label input:checked ~ .checkmark:after {
+.tf-archive-search-box-wrapper .tf-driver-location-box .tf-driver-location ul li label input:checked ~ .tf-checkmark:after {
   display: block;
 }
 
-.tf-archive-search-box-wrapper .tf-driver-location-box .tf-driver-location ul li label input:checked ~ .checkmark {
+.tf-archive-search-box-wrapper .tf-driver-location-box .tf-driver-location ul li label input:checked ~ .tf-checkmark {
   background-color: #F8FAFC;
 }
 
-.tf-archive-search-box-wrapper .tf-driver-location-box .tf-driver-location ul li label .checkmark {
+.tf-archive-search-box-wrapper .tf-driver-location-box .tf-driver-location ul li label .tf-checkmark {
   position: absolute;
   top: 2px;
   left: 0;
@@ -8231,7 +8317,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   border-radius: 5px;
 }
 
-.tf-archive-search-box-wrapper .tf-driver-location-box .tf-driver-location ul li label .checkmark::after {
+.tf-archive-search-box-wrapper .tf-driver-location-box .tf-driver-location ul li label .tf-checkmark::after {
   content: "";
   position: absolute;
   display: none;
@@ -9167,7 +9253,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   width: 120px;
 }
 
-.tf-archive-template__two label input:checked ~ .checkmark {
+.tf-archive-template__two label input:checked ~ .tf-checkmark {
   background-color: #0E3DD8 !important;
 }
 
@@ -9346,7 +9432,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   display: none;
 }
 
-.tf-archive-template__two .tf-archive-right #tf__booking_sidebar .widget .tf-filter ul li label .checkmark {
+.tf-archive-template__two .tf-archive-right #tf__booking_sidebar .widget .tf-filter ul li label .tf-checkmark {
   position: absolute;
   top: 0px;
   left: 0px;
@@ -10323,9 +10409,9 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   margin-left: 0px;
 }
 
-.tf-single-template__three .tf-available-rooms-wrapper .tf-room-filter ul li label .checkmark,
-.tf-archive-template__three .tf-available-rooms-wrapper .tf-room-filter ul li label .checkmark,
-.page-template-tf-search__three .tf-available-rooms-wrapper .tf-room-filter ul li label .checkmark {
+.tf-single-template__three .tf-available-rooms-wrapper .tf-room-filter ul li label .tf-checkmark,
+.tf-archive-template__three .tf-available-rooms-wrapper .tf-room-filter ul li label .tf-checkmark,
+.page-template-tf-search__three .tf-available-rooms-wrapper .tf-room-filter ul li label .tf-checkmark {
   border-radius: 4px;
   border: 1px solid #0E3DD8;
   background: #faeedc;
@@ -10333,23 +10419,23 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   width: 16px;
 }
 
-.tf-single-template__three .tf-available-rooms-wrapper .tf-room-filter ul li label .checkmark:hover,
-.tf-archive-template__three .tf-available-rooms-wrapper .tf-room-filter ul li label .checkmark:hover,
-.page-template-tf-search__three .tf-available-rooms-wrapper .tf-room-filter ul li label .checkmark:hover {
+.tf-single-template__three .tf-available-rooms-wrapper .tf-room-filter ul li label .tf-checkmark:hover,
+.tf-archive-template__three .tf-available-rooms-wrapper .tf-room-filter ul li label .tf-checkmark:hover,
+.page-template-tf-search__three .tf-available-rooms-wrapper .tf-room-filter ul li label .tf-checkmark:hover {
   border-color: #003C7A;
 }
 
-.tf-single-template__three .tf-available-rooms-wrapper .tf-room-filter ul li label .checkmark::after,
-.tf-archive-template__three .tf-available-rooms-wrapper .tf-room-filter ul li label .checkmark::after,
-.page-template-tf-search__three .tf-available-rooms-wrapper .tf-room-filter ul li label .checkmark::after {
+.tf-single-template__three .tf-available-rooms-wrapper .tf-room-filter ul li label .tf-checkmark::after,
+.tf-archive-template__three .tf-available-rooms-wrapper .tf-room-filter ul li label .tf-checkmark::after,
+.page-template-tf-search__three .tf-available-rooms-wrapper .tf-room-filter ul li label .tf-checkmark::after {
   top: 1px;
   left: 4px;
   border-color: #0E3DD8;
 }
 
-.tf-single-template__three .tf-available-rooms-wrapper .tf-room-filter ul li label input:checked ~ .checkmark,
-.tf-archive-template__three .tf-available-rooms-wrapper .tf-room-filter ul li label input:checked ~ .checkmark,
-.page-template-tf-search__three .tf-available-rooms-wrapper .tf-room-filter ul li label input:checked ~ .checkmark {
+.tf-single-template__three .tf-available-rooms-wrapper .tf-room-filter ul li label input:checked ~ .tf-checkmark,
+.tf-archive-template__three .tf-available-rooms-wrapper .tf-room-filter ul li label input:checked ~ .tf-checkmark,
+.page-template-tf-search__three .tf-available-rooms-wrapper .tf-room-filter ul li label input:checked ~ .tf-checkmark {
   background-color: transparent !important;
   border-color: #0E3DD8;
 }
@@ -11342,9 +11428,9 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   line-height: 16px;
 }
 
-.tf-single-template__three .tf-details-right .tf_widget .tf-filter ul li label .checkmark,
-.tf-archive-template__three .tf-details-right .tf_widget .tf-filter ul li label .checkmark,
-.page-template-tf-search__three .tf-details-right .tf_widget .tf-filter ul li label .checkmark {
+.tf-single-template__three .tf-details-right .tf_widget .tf-filter ul li label .tf-checkmark,
+.tf-archive-template__three .tf-details-right .tf_widget .tf-filter ul li label .tf-checkmark,
+.page-template-tf-search__three .tf-details-right .tf_widget .tf-filter ul li label .tf-checkmark {
   border-radius: 4px;
   border: 1px solid #0E3DD8;
   background: #FDF9F3;
@@ -11352,15 +11438,15 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   width: 16px;
 }
 
-.tf-single-template__three .tf-details-right .tf_widget .tf-filter ul li label .checkmark:hover,
-.tf-archive-template__three .tf-details-right .tf_widget .tf-filter ul li label .checkmark:hover,
-.page-template-tf-search__three .tf-details-right .tf_widget .tf-filter ul li label .checkmark:hover {
+.tf-single-template__three .tf-details-right .tf_widget .tf-filter ul li label .tf-checkmark:hover,
+.tf-archive-template__three .tf-details-right .tf_widget .tf-filter ul li label .tf-checkmark:hover,
+.page-template-tf-search__three .tf-details-right .tf_widget .tf-filter ul li label .tf-checkmark:hover {
   border-color: #003C7A;
 }
 
-.tf-single-template__three .tf-details-right .tf_widget .tf-filter ul li label .checkmark::after,
-.tf-archive-template__three .tf-details-right .tf_widget .tf-filter ul li label .checkmark::after,
-.page-template-tf-search__three .tf-details-right .tf_widget .tf-filter ul li label .checkmark::after {
+.tf-single-template__three .tf-details-right .tf_widget .tf-filter ul li label .tf-checkmark::after,
+.tf-archive-template__three .tf-details-right .tf_widget .tf-filter ul li label .tf-checkmark::after,
+.page-template-tf-search__three .tf-details-right .tf_widget .tf-filter ul li label .tf-checkmark::after {
   top: 1px;
   left: 4px;
   border-color: #0E3DD8;
@@ -11368,9 +11454,9 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   height: 9px;
 }
 
-.tf-single-template__three .tf-details-right .tf_widget .tf-filter ul li label input:checked ~ .checkmark,
-.tf-archive-template__three .tf-details-right .tf_widget .tf-filter ul li label input:checked ~ .checkmark,
-.page-template-tf-search__three .tf-details-right .tf_widget .tf-filter ul li label input:checked ~ .checkmark {
+.tf-single-template__three .tf-details-right .tf_widget .tf-filter ul li label input:checked ~ .tf-checkmark,
+.tf-archive-template__three .tf-details-right .tf_widget .tf-filter ul li label input:checked ~ .tf-checkmark,
+.page-template-tf-search__three .tf-details-right .tf_widget .tf-filter ul li label input:checked ~ .tf-checkmark {
   background-color: transparent !important;
   border-color: #0E3DD8;
 }
@@ -16404,7 +16490,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   width: 120px;
 }
 
-.tf-archive-template__four .tf-archive-filter label input:checked ~ .checkmark {
+.tf-archive-template__four .tf-archive-filter label input:checked ~ .tf-checkmark {
   background-color: #0E3DD8 !important;
   border-color: #0E3DD8 !important;
 }
@@ -16612,7 +16698,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   display: none;
 }
 
-.tf-archive-template__four .tf-archive-filter #tf__booking_sidebar .widget .tf-filter ul li label .checkmark {
+.tf-archive-template__four .tf-archive-filter #tf__booking_sidebar .widget .tf-filter ul li label .tf-checkmark {
   position: absolute;
   top: 50%;
   left: 0px;
@@ -16624,7 +16710,7 @@ div.tf-aq-inner form .tf-ask-question-submit:hover {
   border: 1px solid #0E3DD8;
 }
 
-.tf-archive-template__four .tf-archive-filter #tf__booking_sidebar .widget .tf-filter ul li label .checkmark:after {
+.tf-archive-template__four .tf-archive-filter #tf__booking_sidebar .widget .tf-filter ul li label .tf-checkmark:after {
   left: 4.5px;
   top: 1.5px;
   width: 5px;

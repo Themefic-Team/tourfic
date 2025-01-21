@@ -103,13 +103,13 @@
                                             height: 0;
                                             width: 0;
                                         }
-                                        input:checked ~ .checkmark:after {
+                                        input:checked ~ .tf-checkmark:after {
                                             display: block;
                                         }
-                                        input:checked ~ .checkmark{
+                                        input:checked ~ .tf-checkmark{
                                             background-color: transparent;
                                         }
-                                        .checkmark {
+                                        .tf-checkmark {
                                             position: absolute;
                                             top: 0;
                                             left: 0;

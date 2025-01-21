@@ -435,14 +435,14 @@ class Car_Rental
                             <li>
                                 <label><?php esc_html_e("Return in the same location", "tourfic"); ?>
                                     <input type="checkbox" name="same_location">
-                                    <span class="checkmark"></span>
+                                    <span class="tf-checkmark"></span>
                                 </label>
                             </li>
                             <li>
                                 <label><?php esc_html_e("Age of driver ", "tourfic"); ?>
                                     <?php echo esc_attr($car_driver_min_age); ?>-<?php echo esc_attr($car_driver_max_age); ?>?
                                     <input type="checkbox" name="driver_age">
-                                    <span class="checkmark"></span>
+                                    <span class="tf-checkmark"></span>
                                 </label>
                             </li>
                         </ul>
@@ -689,14 +689,14 @@ class Car_Rental
                         <li>
                             <label><?php esc_html_e("Return in the same location", "tourfic"); ?>
                                 <input type="checkbox" name="same_location">
-                                <span class="checkmark"></span>
+                                <span class="tf-checkmark"></span>
                             </label>
                         </li>
                         <li>
                             <label><?php esc_html_e("Age of driver ", "tourfic"); ?>
                                 <?php echo esc_attr($car_driver_min_age); ?>-<?php echo esc_attr($car_driver_max_age); ?>?
                                 <input type="checkbox" name="driver_age">
-                                <span class="checkmark"></span>
+                                <span class="tf-checkmark"></span>
                             </label>
                         </li>
                     </ul>

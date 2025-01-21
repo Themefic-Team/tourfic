@@ -781,7 +781,7 @@
                 }
             }
         }
-        label input:checked ~ .checkmark{
+        label input:checked ~ .tf-checkmark{
             background-color: $color-primary !important;
         }
         .tf-archive-right{
@@ -937,7 +937,7 @@
                                     input{
                                         display: none;
                                     }
-                                    .checkmark{
+                                    .tf-checkmark{
                                         position: absolute;
                                         top: 0px;
                                         left: 0px;

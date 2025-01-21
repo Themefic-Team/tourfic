@@ -26,6 +26,9 @@
             margin-bottom: 15px;
             border-bottom: 1px solid $color-border;
             border-top: 1px solid $color-border;
+            @media (max-width: 991px) {
+                display: none;
+            }
             .tf-result-counter-info{
                 display: flex;
                 .tf-counter-title{
@@ -278,6 +281,45 @@
             }
         }
         .archive_ajax_result {
+            @media #{$max991} {
+                .single-tour-wrap {
+                    width: 100% !important;
+                    flex: none;
+                    margin-bottom: 20px;
+                }
+                .tourfic-single-left {
+                    width: 100%;
+                    margin-bottom: 16px;
+                }
+                .single-tour-inner {
+                    margin: 0;
+                    height: 100%;
+                    padding: 20px;
+                }
+                .tourfic-single-right {
+                    padding: 0;
+                    width: 100%;
+                    height: 100%;
+                }
+                .roomrow_flex {
+                    padding: 0;
+                    flex-wrap: wrap;
+                }
+                .roomName_flex {
+                    width: 100%;
+                    max-width: 100%;
+                }
+                .roomPrice.roomPrice_flex.sr_discount {
+                    text-align: left;
+                    margin: 10px 0;
+                }
+                .availability-btn-area {
+                    .tf_btn {
+                        width: 100%;
+                        margin-top: 15px;
+                    }
+                } 
+            }
             @media only screen and (min-width: 635px) and (max-width: 659px) {
                 display: grid;
                 grid-template-columns: 49% 49%;
@@ -445,7 +487,7 @@
     ul{
         margin: 0;
         padding: 0;
-        li.filter-item {
+        li.tf-filter-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -474,7 +516,7 @@
                     display: none;
                 }
             }
-            .checkmark {
+            .tf-checkmark {
                 position: absolute;
                 top: 0px;
                 left: 0px;
@@ -489,26 +531,26 @@
                 display: none !important;
             }
     
-            label:hover input~.checkmark {
+            label:hover input~.tf-checkmark {
                 background-color: $color-gray;
             }
     
-            label input:checked~.checkmark {
+            label input:checked~.tf-checkmark {
                 background-color: $color-primary;
             }
     
-            .checkmark:after {
+            .tf-checkmark:after {
                 content: "";
                 position: absolute;
                 display: none;
             }
     
-            label input:checked~.checkmark:after {
+            label input:checked~.tf-checkmark:after {
                 display: block;
             }
     
-            /* Style the checkmark/indicator */
-            label .checkmark:after {
+            /* Style the tf-checkmark/indicator */
+            label .tf-checkmark:after {
                 left: 6px;
                 top: 3px;
                 width: 6px;
@@ -556,7 +598,7 @@
             padding-left: 25px;
             font-weight: 400 !important;
         }
-        .checkmark {
+        .tf-checkmark {
             position: absolute;
             top: 0px;
             left: 0px;
@@ -571,26 +613,26 @@
             display: none !important;
         }
 
-        label:hover input~.checkmark {
+        label:hover input~.tf-checkmark {
             background-color: $color-gray;
         }
 
-        label input:checked~.checkmark {
+        label input:checked~.tf-checkmark {
             background-color: $color-primary;
         }
 
-        .checkmark:after {
+        .tf-checkmark:after {
             content: "";
             position: absolute;
             display: none;
         }
 
-        label input:checked~.checkmark:after {
+        label input:checked~.tf-checkmark:after {
             display: block;
         }
 
-        /* Style the checkmark/indicator */
-        label .checkmark:after {
+        /* Style the tf-checkmark/indicator */
+        label .tf-checkmark:after {
             left: 6px;
             top: 3px;
             width: 6px;

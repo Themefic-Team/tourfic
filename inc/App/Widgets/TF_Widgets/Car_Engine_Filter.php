@@ -68,7 +68,7 @@ class Car_Engine_Filter extends \WP_Widget {
                 $default_count = $term->count;
                 $count = $show_count ? '<span>(' . $default_count . ')</span>' : '';
 
-                echo wp_kses("<li class='filter-item'><label><input type='checkbox' name='car_engine_year[]' value='{$id}'/> {$name}</label> {$count}</li>", Helper::tf_custom_wp_kses_allow_tags());
+                echo wp_kses("<li class='tf-filter-item'><label><input type='checkbox' name='car_engine_year[]' value='{$id}'/> {$name}</label> {$count}</li>", Helper::tf_custom_wp_kses_allow_tags());
             }
             echo "</ul></div>";
 

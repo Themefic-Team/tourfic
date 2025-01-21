@@ -2241,14 +2241,14 @@ class Helper {
 							<li>
 								<label><?php esc_html_e("Return in the same location", "tourfic"); ?>
 									<input type="checkbox" name="same_location" <?php echo !empty($_GET['same_location']) && 'on'==$_GET['same_location'] ? esc_attr('checked') : ''; ?>>
-									<span class="checkmark"></span>
+									<span class="tf-checkmark"></span>
 								</label>
 							</li>
 							<li>
 								<label><?php esc_html_e("Age of driver ", "tourfic"); ?>
                                 <?php echo esc_attr($car_driver_min_age); ?>-<?php echo esc_attr($car_driver_max_age); ?>?
 									<input type="checkbox" name="driver_age" <?php echo !empty($_GET['driver_age']) && 'on'==$_GET['driver_age'] ? esc_attr('checked') : ''; ?>>
-									<span class="checkmark"></span>
+									<span class="tf-checkmark"></span>
 								</label>
 							</li>
 						</ul>

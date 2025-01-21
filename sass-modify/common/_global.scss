@@ -9,6 +9,10 @@ Container
     &-fluid{
         max-width: 100%;
     }
+
+    @media #{$max767} {
+        width: 100%;
+    }
 }
 
 /*
@@ -312,19 +316,36 @@ Ajax Loader
         visibility: visible;
         opacity: 1;
         transition: opacity .2s ease, visibility .2s ease;
-        -webkit-animation: wd-rotate 450ms infinite linear;
-        animation: wd-rotate 450ms infinite linear;
+        -webkit-animation: tf-rotate 450ms infinite linear;
+        animation: tf-rotate 450ms infinite linear;
     }
 }
-
-@-webkit-keyframes wd-rotate {
+// Room Loader
+#tour_room_details_loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, .8);
+    display: none;
+    z-index: 99999999;
+    #tour-room-details-loader-img {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+@-webkit-keyframes tf-rotate {
     100% {
         -webkit-transform: rotate(360deg);
         transform: rotate(360deg);
     }
 }
 
-@keyframes wd-rotate {
+@keyframes tf-rotate {
     100% {
         -webkit-transform: rotate(360deg);
         transform: rotate(360deg);

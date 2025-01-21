@@ -48,6 +48,71 @@
             .tf-suggestion-wrapper{
                 background-color: $color-yellow-thin;
             }
+
+            .tf-faq-sec-title {
+                margin-bottom: 60px;
+                text-align: center;
+                @media only screen and (max-width: 767px) {
+                    margin-bottom: 20px;
+                }
+                p {
+                    max-width: 480px;
+                    margin: auto;
+                }
+            }
+            .tf-faq-content-wrapper {
+                @include flexbox();
+                gap: 35px;
+                @media only screen and (max-width: 980px) {
+                    display: grid;
+                }
+            }
+            .tf-faq-items-wrapper {
+                flex: 5;
+            }
+            #tf-faq-item {
+                border-bottom: 1px solid $color-border;
+                margin-bottom: 10px;
+                padding-bottom: 10px;
+                .tf-faq-title {
+                    cursor: pointer;
+                    transition: 0.2s ease;
+                    @include flexbox();
+                    @include align-items(center);
+                    h4{
+                        font-size: 18px !important;
+                    }
+                }
+                .tf-faq-title.active {
+                    margin-bottom: 15px;
+                }
+                .arrow {
+                    transition: 0.25s ease;
+                    transform: rotate(-90deg);
+                    font-size: 20px;
+                    color: $color-primary;
+                }
+                .arrow-animate {
+                    transform: rotate(0deg);
+                }
+                .tf-faq-desc {
+                    background-color: $color-white;
+                    display: none;
+                    padding: 20px;
+                    color: $color-text;
+                    margin-top: -2px;
+                    z-index: 999;
+                    position: relative;
+                    border-bottom-left-radius: 5px;
+                    border-bottom-right-radius: 5px;
+                }
+            }
+            .tf-faq-title {
+                h4 {
+                    width: 100%;
+                    color: $color-heading;
+                }
+            }
         }
     }
 }
@@ -405,13 +470,13 @@
                                                     height: 0;
                                                     width: 0;
                                                 }
-                                                input:checked ~ .checkmark:after {
+                                                input:checked ~ .tf-checkmark:after {
                                                     display: block;
                                                 }
-                                                input:checked ~ .checkmark{
+                                                input:checked ~ .tf-checkmark{
                                                     background-color: $color-light-bg;
                                                 }
-                                                .checkmark {
+                                                .tf-checkmark {
                                                     position: absolute;
                                                     height: 15px;
                                                     width: 15px;
@@ -842,13 +907,13 @@
                             height: 0;
                             width: 0;
                         }
-                        input:checked ~ .checkmark:after {
+                        input:checked ~ .tf-checkmark:after {
                             display: block;
                         }
-                        input:checked ~ .checkmark{
+                        input:checked ~ .tf-checkmark{
                             background-color: #F8FAFC;
                         }
-                        .checkmark {
+                        .tf-checkmark {
                             position: absolute;
                             top: 2px;
                             left: 0;
