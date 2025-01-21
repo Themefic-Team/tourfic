@@ -17,12 +17,12 @@ h3.section-heading {
         font-size: 35px;
         margin-top: 0;
         margin-bottom: 6px;
-        @media only screen and (max-width: 767px){
+        @media #{$max767}{
             font-size: 28px;
         }
     }
     &.tf-tour-title {
-        @media only screen and (max-width: 650px) {
+        @media #{$max640}{
             text-align: center;
         }
     }
@@ -30,7 +30,7 @@ h3.section-heading {
     .tf-title-wrap {
         display: flex;
         justify-content: space-between;
-        @media only screen and (max-width: 650px) {
+        @media #{$max640}{
             display: block;
         }
     
@@ -50,7 +50,7 @@ h3.section-heading {
             display: flex;
             align-items: center;
             column-gap: 5px;
-            @media only screen and (max-width: 600px) {
+            @media #{$max640}{
                 margin-top: 15px;
                 justify-content: end;
             }
@@ -78,7 +78,7 @@ h3.section-heading {
     border-radius: 4px;
     position: relative;
 
-    @media only screen and (max-width: 600px) {
+    @media #{$max640}{
         font-size: 14px;
         padding: 6px;
     }
@@ -92,7 +92,7 @@ h3.section-heading {
         font-weight: 700;
         font-size: 18px;
 
-        @media only screen and (max-width: 600px) {
+        @media #{$max640}{
             font-size: 14px;
         }
     }
@@ -194,26 +194,6 @@ h3.section-heading {
                 border: 0;
                 outline: 0;
             }
-        }
-    }
-}
-.tf_booking-widget {
-    background: $color-light-bg;
-    background: linear-gradient(to bottom, $color-light-bg 0, $color-light-bg 100%);
-    border-color: $color-light-bg;
-    padding: 20px;
-    border-radius: 4px;
-    font-size: 14px;
-    @media only screen and (max-width: 830px) {
-        margin-bottom: 0;
-    }
-    #check-in-out-date {
-        min-width: 150px;
-    }
-    .tf_form-row {
-        .tf_btn {
-            padding: 15px 20px;
-            width: 100%;
         }
     }
 }
@@ -354,7 +334,7 @@ h3.section-heading {
     display: table-cell;
     vertical-align: middle;
 
-    @media screen and (max-width: 767px) {
+    @media #{$max767}{
         width: 100%;
         display: block;
     }
@@ -374,7 +354,7 @@ h3.section-heading {
     -ms-user-select: none;
     user-select: none;
 
-    @media screen and (max-width: 767px) {
+    @media #{$max767}{
         width: 100%;
         display: block;
         padding: 10px 20px !important;
@@ -403,7 +383,7 @@ h3.section-heading {
     -ms-user-select: none;
     user-select: none;
 
-    @media screen and (max-width: 767px) {
+    @media #{$max767}{
         width: 100%;
         display: block;
         padding: 20px !important;
@@ -447,13 +427,24 @@ h3.section-heading {
     }
 }
 .tf_submit-wrap {
-    border-right: 1px solid $color-border;
+    border-right: 0;
+    border-radius: 0 8px 8px 0;
+    background: $color-primary;
+    width: 15%;
     display: table-cell;
     vertical-align: middle;
 
-    @media screen and (max-width: 767px) {
+    @media #{$max767} {
         width: 100%;
         display: block;
+        border-radius: 0 0 8px 8px;
+    }
+
+    button {
+        width: 100%;
+        height: 100%;
+        border-radius: 8px !important;
+        padding: 20px 20px;
     }
 }
 
@@ -462,13 +453,13 @@ h3.section-heading {
     padding: 0 !important;
     margin: 0 !important;
     background: $color-white !important;
-    @media only screen and (max-width: 1000px) {
+    @media #{$max1024}{
         min-width: 500px;
     }
     @media only screen and (min-width: 1000px) {
         min-width: 800px;
     }
-    @media screen and (max-width: 767px) {
+    @media #{$max767}{
         min-width: auto;
     }
     .logged-in-as {
@@ -481,7 +472,7 @@ h3.section-heading {
         row-gap: 15px;
         margin: 0 0 80px 0;
 
-        @media screen and (max-width: 767px) {
+        @media #{$max767}{
             grid-template-columns: 100%;
         }
         .tf-form-single-rating {
@@ -637,7 +628,7 @@ h3.section-heading {
         margin: 25px 0 0 0;
     }
     form.tf-review-form {
-        @media only screen and (max-width: 1000px) {
+        @media #{$max1024}{
             gap: 20px;
         }
     }
@@ -702,7 +693,7 @@ h3.section-heading {
         @media (min-width: 768px) and (max-width: 991px) {
             grid-template-columns: auto;
         }
-        @media only screen and (max-width: 600px) {
+        @media #{$max640}{
             grid-template-columns: auto;
         }
         .tf-single {
@@ -763,7 +754,7 @@ h3.section-heading {
     @media (min-width: 768px) and (max-width: 991px) {
         grid-template-columns: auto;
     }
-    @media only screen and (max-width: 600px) {
+    @media #{$max640}{
         grid-template-columns: auto;
     }
 
@@ -844,7 +835,7 @@ h3.section-heading {
     border-radius: 4px;
     flex: 2;
     text-align: center;
-    @media only screen and (max-width: 767px) {
+    @media #{$max767}{
         max-width: 450px;
         margin: auto;
     }
@@ -886,7 +877,7 @@ h3.section-heading {
         padding: 15px;
         margin: 0 7px 15px !important;
     }
-    @media only screen and (max-width: 767px) {
+    @media #{$max767}{
         border: 7px solid $color-white;
         height: 250px !important;
         padding: 15px;
@@ -908,10 +899,10 @@ h3.section-heading {
         h3 {
             font-size: 20px;
             color: $color-white;
-            @media only screen and (max-width: 980px) {
+            @media #{$max991}{
                 font-size: 18px;
             }
-            @media only screen and (max-width: 480px) {
+            @media #{$max480}{
                 font-size: 16px;
             }
             span {
@@ -936,7 +927,25 @@ h3.section-heading {
     .remove-wishlist {
         cursor: pointer;
     }
+
+    a {
+        text-decoration: none !important;
+    }
+
+    i {
+        padding-left: 10px;
+        color: $color-primary;
+    }
+
+    td {
+        @include flexbox();
+        align-items: center;
+        align-content: center;
+        justify-content: space-between;
+        padding: 15px;
+    }
 }
+
 .tf-wishlist-button {
     font-size: 24px;
     cursor: pointer;
@@ -1132,7 +1141,7 @@ li.tf-filter-item {
     width: 100% !important;
 }
 
-@media screen and (max-width: 767px) {
+@media #{$max767}{
     #check-in-out-date {
         width: 220px !important;
     }

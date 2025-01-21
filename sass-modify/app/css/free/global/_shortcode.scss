@@ -1,13 +1,16 @@
 .tf-booking-form-tab{
+    @media #{$max767}{
+        display: none;
+    }
     .tf_btn.active{
         background-color: $color-primary;
         border-color: $color-primary;
         color: $color-white;
     }
     &.design-3{
-        display: flex;
+        @include flexbox();
         gap: 8px;
-        justify-content: center;
+        @include justify-content(center);
         @media #{$max767}{
             display: none;
         }
@@ -42,6 +45,10 @@
         top: 100%;
         left: 0;
         right: 0;
+
+        @media #{$max767} {
+            top: 70px !important;
+        }
         div {
             padding: 10px;
             cursor: pointer;
@@ -90,6 +97,19 @@
         left: 0;
         right: 0;
         #ui-id-1 {
+            left: 0 !important;
+            width: 100% !important;
+            right: 0 !important;
+            margin: 0 !important;
+            list-style: none;
+            top: 100% !important;
+            max-height: 225px;
+            z-index: 99999;
+            overflow-y: scroll;
+            padding-left: 0px !important;
+            @media #{$max767} {
+                top: -255px !important;
+            }
             li {
                 padding: 10px;
                 cursor: pointer;
@@ -104,6 +124,19 @@
             }
         }
         #ui-id-2 {
+            left: 0 !important;
+            width: 100% !important;
+            right: 0 !important;
+            margin: 0 !important;
+            list-style: none;
+            top: 100% !important;
+            max-height: 225px;
+            z-index: 99999;
+            overflow-y: scroll;
+            padding-left: 0px !important;
+            @media #{$max767} {
+                top: -255px !important;
+            }
             li {
                 padding: 10px;
                 cursor: pointer;
@@ -117,33 +150,25 @@
                 }
             }
         }
-        ul#ui-id-1 {
-            left: 0 !important;
-            width: 100% !important;
-            right: 0 !important;
-            margin: 0 !important;
-            list-style: none;
-            top: 100% !important;
-            max-height: 225px;
-            z-index: 99999;
-            overflow-y: scroll;
-            padding-left: 0px !important;
-        }
-        ul#ui-id-2 {
-            left: 0 !important;
-            width: 100% !important;
-            right: 0 !important;
-            margin: 0 !important;
-            list-style: none;
-            top: 100% !important;
-            max-height: 225px;
-            z-index: 99999;
-            overflow-y: scroll;
-            padding-left: 0px !important;
-        }
     }
 }
 .tf_booking-widget {
+    background: $color-light-bg;
+    background: linear-gradient(to bottom, $color-light-bg 0, $color-light-bg 100%);
+    border-color: $color-light-bg;
+    padding: 20px;
+    border-radius: 4px;
+    font-size: 14px;
+
+    @media only screen and (max-width: 830px) {
+        margin-bottom: 0;
+    }
+
+    #check-in-out-date {
+        font-size: 13px;
+        min-width: 150px;
+    }
+
     .tf_form-row {
         .tf_btn {
             padding: 15px 20px;
@@ -152,134 +177,133 @@
             border-color: $color-primary;
         }
     }
-    #check-in-out-date {
-        font-size: 13px;
-        min-width: 150px;
+
+    &.default-form {
+        padding: 0;
+        background: none !important;
+        border: none;
+        .tf_form-inner {
+            padding: 0;
+            display: flex !important;
+            align-items: center;
+        }
+        .tf-label {
+            display: none;
+        }
     }
 }
-.tf_submit-wrap {
-    border-right: 0;
-    border-radius: 0 8px 8px 0;
-    background: $color-primary;
-    width: 15%;
 
-    @media #{$max767} {
-        border-radius: 0 0 8px 8px;
-    }
-
-    button {
-        width: 100%;
-        height: 100%;
-        border-radius: 8px !important;
-        padding: 20px 20px;
-    }
-}
 .tf-tabcontent {
     display: none;
     border-top: none;
-}
-button.tf-tablinks.active {
-    background: $color-primary;
-    color: $color-white ;
-    outline: none;
+
+    .tf-children-age-fields {
+        @include flexbox();
+        flex-wrap: wrap;
+    }
+    .tf-children-age {
+        flex-grow: 1;
+        width: 44%;
+        margin: 5px;
+        select {
+            width: 100%;
+            background-position-y: center;
+        }
+    }
 }
 button.tf-tablinks {
+    &.active {
+        background: $color-primary;
+        color: $color-white ;
+        outline: none;
+    }
     &:focus {
         outline: none;
     }
 }
-.tf_booking-widget.default-form {
-    padding: 0;
-    background: none !important;
-    border: none;
-    .tf_form-inner {
-        padding: 0;
-        display: flex !important;
-        align-items: center;
-    }
-    .tf-label {
-        display: none;
-    }
-}
-.tf-widget-slider.recent-hotel-slider {
+
+#tf_recomended_section_wrapper {
     overflow: hidden;
-    width: 100%;
-}
-.tf-children-age-fields {
-    display: flex;
-    flex-wrap: wrap;
-}
-.tf-children-age {
-    flex-grow: 1;
-    width: 44%;
-    margin: 5px;
-    select {
-        width: 100%;
-        background-position-y: center;
-    }
-}
-.single_recomended_content {
-    height: 270px;
-    position: relative;
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-}
-.single_recomended_item {
-    box-sizing: border-box;
-    margin-bottom: 15px;
-    float: left;
-    width: 33%;
-    &:hover {
-        box-shadow: 0 0 1px $color-primary;
-        .recomended_place_info_header {
-            background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(0, 27, 65, 0.85)), color-stop(100%, rgba(0, 27, 65, 0)));
-            background: linear-gradient(to bottom, rgba(0, 27, 65, 0.85) 0, rgba(0, 27, 65, 0) 100%);
-            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#00224F", endColorstr="$color-heading01e47", GradientType=0);
-        }
-    }
-}
-.recomended_inner {
-    .single_recomended_item {
-        width: 32.33%;
-        float: left;
-        margin-right: 1%;
-        &:nth-child(3) {
-            margin-right: 0;
-        }
-    }
-}
-#recomended_section_wrapper {
-    overflow: hidden;
+
     a {
         text-decoration: none;
         display: block;
     }
-}
-.recomended_place_info_header {
-    h3 {
-        margin: 0px;
-        padding: 0px;
-        color: $color-white;
-        font-weight: bold;
-        text-decoration: none;
+    .recomended_inner {
+        @media #{$max767} {
+            margin-left: -15px;
+            margin-right: -15px;
+            clear: both;
+        }
     }
-    p {
-        margin: 0px;
-        padding: 0px;
-        color: $color-white;
-        text-decoration: none;
+    .single_recomended_item {
+        box-sizing: border-box;
+        float: left;
+        width: 32.33%;
+        margin-right: 1%;
+        &:nth-child(3) {
+            margin-right: 0;
+        }
+        &:hover {
+            box-shadow: 0 0 1px $color-primary;
+            
+            .recomended_place_info_header {
+                background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(0, 27, 65, 0.85)), color-stop(100%, rgba(0, 27, 65, 0)));
+                background: linear-gradient(to bottom, rgba(0, 27, 65, 0.85) 0, rgba(0, 27, 65, 0) 100%);
+                filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#00224F", endColorstr="$color-heading01e47", GradientType=0);
+            }
+        }
+
+        @media #{$max767} {
+            width: 49% !important;
+            float: left;
+            margin-right: 0;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+        @media #{$max480} {
+            width: 100% !important;
+            float: none;
+            margin-right: 0;
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        .single_recomended_content {
+            height: 270px;
+            position: relative;
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+
+            .recomended_place_info_header {
+                text-align: center;
+                padding: 10px 18px;
+                background: rgba(0, 0, 0, 0.65);
+                display: inline-block;
+                border-radius: 4px;
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                margin: 10px;
+                h3 {
+                    margin: 0px;
+                    padding: 0px;
+                    color: $color-white;
+                    font-weight: bold;
+                    text-decoration: none;
+                }
+                p {
+                    margin: 0px;
+                    padding: 0px;
+                    color: $color-white;
+                    text-decoration: none;
+                }
+            }
+        }
     }
-    text-align: center;
-    padding: 10px 18px;
-    background: rgba(0, 0, 0, 0.65);
-    display: inline-block;
-    border-radius: 4px;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    margin: 10px;
 }
+
 .tf_homepage-booking {
     display: table;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
@@ -354,62 +378,33 @@ div#tf-destinationautocomplete-list {
     }
 }
 .tf-widget-slider {
+    &.recent-hotel-slider {
+        overflow: hidden;
+        width: 100%;
+    }
+    &.recent-hotel-slider, 
+    &.recent-apartment-slider,
+    &.recent-tour-slider {
+        a {
+            text-decoration: none !important;
+        }
+        h3 {
+            margin-bottom: 0 !important;
+        }
+        p {
+            margin-top: 7px;
+            margin-bottom: 0 !important;
+        }
+        .tf-slider-rating-star {
+            margin-top: 7px;
+            margin-bottom: 0 !important;
+            i {
+                color: $color-primary;
+            }
+        }
+    }
     .tf-heading {
         margin: 0 0 30px 0;
-    }
-}
-.recent-tour-slider {
-    a {
-        text-decoration: none !important;
-    }
-    h3 {
-        margin-bottom: 0 !important;
-    }
-    p {
-        margin-top: 7px;
-        margin-bottom: 0 !important;
-    }
-    .tf-slider-rating-star {
-        margin-top: 7px;
-        margin-bottom: 0 !important;
-        i {
-            color: $color-primary;
-        }
-    }
-}
-.recent-hotel-slider, .recent-apartment-slider {
-    a {
-        text-decoration: none !important;
-    }
-    h3 {
-        margin-bottom: 0 !important;
-    }
-    p {
-        margin-top: 7px;
-        margin-bottom: 0 !important;
-    }
-    .tf-slider-rating-star {
-        margin-top: 7px;
-        margin-bottom: 0 !important;
-        i {
-            color: $color-primary;
-        }
-    }
-}
-.tf-wishlists {
-    a {
-        text-decoration: none !important;
-    }
-    i {
-        padding-left: 10px;
-        color: $color-primary;
-    }
-    td {
-        display: flex;
-        align-items: center;
-        align-content: center;
-        justify-content: space-between;
-        padding: 15px;
     }
 }
 .tf-recent-room-price {
@@ -506,7 +501,7 @@ div#tf-destinationautocomplete-list {
         border-radius: 0px;
         .tf_submit-wrap {
             background-color: $color-primary !important;
-            .btn-styled{
+            .tf_btn{
                 background-color: $color-primary !important;
                 border: 0px solid !important;
             }
@@ -519,7 +514,7 @@ div#tf-destinationautocomplete-list {
         margin: 24px 0 16px;
         .tf_hotel_searching{
             .tf_form_innerbody{
-                display: flex;
+                @include flexbox();
                 justify-content: space-between;
                 @media #{$max830}{
                     display: flow-root;
@@ -578,7 +573,7 @@ div#tf-destinationautocomplete-list {
                 }
                 .tf_form_fields{
                     padding: 24px 40px;
-                    display: flex;
+                    @include flexbox();
                     width: calc(100% - 222px);
                     @media #{$max1366}{
                         padding: 24px 24px;
@@ -618,7 +613,7 @@ div#tf-destinationautocomplete-list {
                         .tf_label_location{
                             .tf_form_inners{
                                 border: .5px solid $color-border;
-                                display: flex;
+                                @include flexbox();
                                 align-items: center;
                                 padding: 8px 0px 8px 12px;
                                 svg{
@@ -678,7 +673,7 @@ div#tf-destinationautocomplete-list {
                         .tf_form_inners{
                             .tf_checkin_dates,
                             .tf_checkout_dates{
-                                display: flex;
+                                @include flexbox();
                                 span.date{
                                     font-size: 24px;
                                     font-style: normal;
@@ -737,10 +732,10 @@ div#tf-destinationautocomplete-list {
                             .tf_form_inners{
                                 display: inline-block;
                                 .tf_guest_calculation{
-                                    display: flex;
+                                    @include flexbox();
                                     gap: 8px;
                                     .tf_guest_number{
-                                        display: flex;
+                                        @include flexbox();
                                         align-items: center;
                                         span.guest,
                                         span.room{
@@ -817,7 +812,7 @@ div#tf-destinationautocomplete-list {
                 .tf_availability_checker_box{
                     width: 222px;
                     background-color: $color-primary;
-                    display: flex;
+                    @include flexbox();
                     
                     @media #{$max1366}{
                         width: 150px;
@@ -892,7 +887,7 @@ div#tf-destinationautocomplete-list {
                             border-right: 0px solid;
                         }
                         .tf_form_inners{
-                            display: flex;
+                            @include flexbox();
                             gap: 16px;
                             justify-content: space-between;
                             input{
@@ -906,17 +901,17 @@ div#tf-destinationautocomplete-list {
                                 .tf-select-date{
                                     align-items: center;
                                     cursor: pointer;
-                                    display: flex;
+                                    @include flexbox();
                                 }
                                 span.date{
                                     margin-right: 8px;
                                 }
                                 span.month{
-                                    display: flex;
+                                    @include flexbox();
                                     align-items: center;
                                     gap: 8px;
                                     .tf_check_arrow{
-                                        display: flex;
+                                        @include flexbox();
                                     }
                                 }
                             }
@@ -994,12 +989,12 @@ span.close-aq:hover {
 }
 
 div.tf-aq-inner {
-    display: flex;
+    @include flexbox();
     flex-direction: column;
     align-self: center;
 
     .tf-ask-question-head-content {
-        display: flex;
+        @include flexbox();
         flex-direction: column;
         align-items: center;
         gap: 16px;
@@ -1017,7 +1012,7 @@ div.tf-aq-inner {
     }
 
     form {
-        display: flex;
+        @include flexbox();
         flex-direction: column;
         gap: 24px;
 
@@ -1043,7 +1038,7 @@ div.tf-aq-inner {
     position: relative;
     margin: 0;
     overflow: hidden;
-    display: flex;
+    @include flexbox();
     flex-direction: column;
 
     label {
@@ -1086,6 +1081,9 @@ div.tf-aq-inner {
 }
 .tf-booking-form-tab-mobile {
     display: none;
+    @media screen and (max-width: 767px) {
+        display: block;
+    }
 }
 .tf-hotel-grid {
     display: grid;
@@ -1100,13 +1098,13 @@ div.tf-aq-inner {
 
 .post-section-one {
     overflow: hidden;
-    display: flex;
+    @include flexbox();
     .tf-single-item {
         width: 32%;
         float: left;
         margin: 10px;
         padding: 15px;
-        display: flex;
+        @include flexbox();
         border-radius: 5px;
         height: 400px;
         object-fit: cover;
@@ -1132,7 +1130,7 @@ div.tf-aq-inner {
     float: left;
     margin: 11px;
     padding: 15px;
-    display: flex;
+    @include flexbox();
     border-radius: 5px;
     height: 400px;
     object-fit: cover;
@@ -1168,19 +1166,6 @@ div.tf-aq-inner {
     }
 }
 @media screen and (max-width: 767px) {
-    .tf_form-inner {
-        .autocomplete-items {
-            top: 70px !important;
-        }
-        .tf-hotel-results {
-            #ui-id-1 {
-                top: -255px !important;
-            }
-            #ui-id-2 {
-                top: -255px !important;
-            }
-        }
-    }
     .tf-more-info {
         width: 100%;
     }
@@ -1194,24 +1179,6 @@ div.tf-aq-inner {
     }
     .tf_submit-wrap {
         width: 100%;
-    }
-    .recomended_inner {
-        margin-left: -15px;
-        margin-right: -15px;
-        clear: both;
-        .single_recomended_item {
-            width: 49% !important;
-            float: left;
-            margin-right: 0;
-            padding-left: 15px;
-            padding-right: 15px;
-        }
-    }
-    .tf-booking-form-tab {
-        display: none;
-    }
-    .tf-booking-form-tab-mobile {
-        display: block;
     }
     select[name="tf-booking-form-tab-select"] {
         width: 100%;
@@ -1238,17 +1205,6 @@ div.tf-aq-inner {
         .tf-slider-item {
             width: 100%;
             float: left;
-        }
-    }
-}
-@media screen and (max-width: 450px) {
-    .recomended_inner {
-        .single_recomended_item {
-            width: 100% !important;
-            float: none;
-            margin-right: 0;
-            padding-left: 0;
-            padding-right: 0;
         }
     }
 }
