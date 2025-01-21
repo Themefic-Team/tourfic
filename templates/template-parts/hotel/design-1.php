@@ -436,12 +436,12 @@ $price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings'
                         </div>
 					<?php } ?>
 					<?php if ( ( $tf_booking_type == 2 && $tf_hide_booking_form !== '1' && $tf_ext_booking_type == 1 ) || $tf_booking_type == 1 ||  $tf_booking_type == 3 ) : ?>
-                        <div class="hero-booking">
+                        <div class="tf-hero-booking">
 							<?php Hotel::tf_hotel_sidebar_booking_form(); ?>
                         </div>
 					<?php endif; ?>
                     <?php if( $tf_booking_type == 2 && $tf_ext_booking_type == 2 && !empty( $tf_ext_booking_code )) : ?>
-                        <div id="tf-external-booking-embaded-form" class="hero-booking">
+                        <div id="tf-external-booking-embaded-form" class="tf-hero-booking">
                             <?php echo wp_kses( $tf_ext_booking_code, Helper::tf_custom_wp_kses_allow_tags() ) ?>
                         </div>
                     <?php endif; ?>

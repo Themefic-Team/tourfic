@@ -67,7 +67,11 @@
   }
 }
 
-.single-tf_hotel .tf-single-template__one .hero-section-wrap .hero-right .hero-booking .widget {
+.single-tf_hotel .tf-single-template__one .hero-section-wrap .hero-right .tf-hero-booking .tf_booking-widget {
+  color: #ffffff;
+}
+
+.single-tf_hotel .tf-single-template__one .hero-section-wrap .hero-right .tf-hero-booking .widget {
   margin-bottom: 0;
 }
 

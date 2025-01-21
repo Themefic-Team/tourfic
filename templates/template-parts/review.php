@@ -337,7 +337,7 @@ if ( ( get_post_type( $post_id ) == 'tf_tours' && $tf_tour_selected_template == 
 						if ( in_array( 'li', $tf_ratings_for ) && ! TF_Review::tf_user_has_comments() ) {
 							?>
                             <div class="tf-btn">
-                                <button class="<?php echo esc_attr( $btn_class ); ?>" data-fancybox data-src="#tourfic-rating">
+                                <button class="<?php echo esc_attr( $btn_class ); ?>" data-fancybox data-src="#tf-rating">
                                     <i class="fas fa-plus"></i> <?php esc_html_e( 'Add Review', 'tourfic' ); ?>
                                 </button>
                             </div>
@@ -347,7 +347,7 @@ if ( ( get_post_type( $post_id ) == 'tf_tours' && $tf_tour_selected_template == 
 						if ( in_array( 'lo', $tf_ratings_for ) ) {
 							?>
                             <div class="tf-btn">
-                                <button class="<?php echo esc_attr( $btn_class ); ?>" data-fancybox data-src="#tourfic-rating">
+                                <button class="<?php echo esc_attr( $btn_class ); ?>" data-fancybox data-src="#tf-rating">
                                     <i class="fas fa-plus"></i> <?php esc_html_e( 'Add Review', 'tourfic' ) ?>
                                 </button>
                             </div>
@@ -448,7 +448,7 @@ if ( ( get_post_type( $post_id ) == 'tf_tours' && $tf_tour_selected_template == 
 				if ( is_array( $tf_ratings_for ) && in_array( 'li', $tf_ratings_for ) && ! TF_Review::tf_user_has_comments() ) {
 					?>
                     <div class="tf-btn">
-                        <button class="<?php echo esc_attr( $btn_class ); ?>" data-fancybox data-src="#tourfic-rating">
+                        <button class="<?php echo esc_attr( $btn_class ); ?>" data-fancybox data-src="#tf-rating">
                             <i class="fas fa-plus"></i> <?php esc_html_e( 'Add Review', 'tourfic' ); ?>
                         </button>
                     </div>
@@ -461,7 +461,7 @@ if ( ( get_post_type( $post_id ) == 'tf_tours' && $tf_tour_selected_template == 
 				if ( is_array( $tf_ratings_for ) && in_array( 'lo', $tf_ratings_for ) ) {
 					?>
                     <div class="tf-btn">
-                        <button class="<?php echo esc_attr( $btn_class ); ?>" data-fancybox data-src="#tourfic-rating">
+                        <button class="<?php echo esc_attr( $btn_class ); ?>" data-fancybox data-src="#tf-rating">
                             <i class="fas fa-plus"></i> <?php esc_html_e( 'Add Review', 'tourfic' ) ?>
                         </button>
                     </div>
@@ -476,7 +476,7 @@ if ( ( get_post_type( $post_id ) == 'tf_tours' && $tf_tour_selected_template == 
 		?>
     </div>
 
-    <div style="display: none;" id="tourfic-rating">
+    <div style="display: none;" id="tf-rating">
         <div id="tfreview-error-response"></div>
 		<?php TF_Review::tf_review_form(); ?>
     </div>

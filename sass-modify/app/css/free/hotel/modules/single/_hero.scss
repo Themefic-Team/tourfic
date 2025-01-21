@@ -39,7 +39,10 @@
                         max-width: 316px;
                         margin: auto;
                     }
-                    .hero-booking{
+                    .tf-hero-booking{
+                        .tf_booking-widget {
+                            color: $color-white;
+                        }
                         .widget {
                             margin-bottom: 0;
                         }
