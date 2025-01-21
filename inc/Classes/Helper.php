@@ -957,7 +957,7 @@ class Helper {
                             // flatpickr locale first day of Week
 							<?php self::tf_flatpickr_locale( "root" ); ?>
 
-                            $(".tf-template-3 .tf-booking-date-wrap").on("click", function () {
+                            $(".tf-archive-template__three .tf-booking-date-wrap").on("click", function () {
                                 $("#check-in-out-date").trigger("click");
                             });
                             $("#check-in-out-date").flatpickr({
@@ -995,13 +995,13 @@ class Helper {
                                     ];
                                     if (selectedDates[0]) {
                                         const startDate = selectedDates[0];
-                                        $(".tf-template-3 .tf-booking-form-checkin .tf-tour-start-date span.tf-booking-date").html(startDate.getDate());
-                                        $(".tf-template-3 .tf-booking-form-checkin .tf-tour-start-date span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
+                                        $(".tf-archive-template__three .tf-booking-form-checkin .tf-tour-start-date span.tf-booking-date").html(startDate.getDate());
+                                        $(".tf-archive-template__three .tf-booking-form-checkin .tf-tour-start-date span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
                                     }
                                     if (selectedDates[1]) {
                                         const endDate = selectedDates[1];
-                                        $(".tf-template-3 .tf-booking-form-checkin .tf-tour-end-date span.tf-booking-date").html(endDate.getDate());
-                                        $(".tf-template-3 .tf-booking-form-checkin .tf-tour-end-date span.tf-booking-month span").html(monthNames[endDate.getMonth()]);
+                                        $(".tf-archive-template__three .tf-booking-form-checkin .tf-tour-end-date span.tf-booking-date").html(endDate.getDate());
+                                        $(".tf-archive-template__three .tf-booking-form-checkin .tf-tour-end-date span.tf-booking-month span").html(monthNames[endDate.getMonth()]);
                                     }
                                 }
                             }
@@ -1033,7 +1033,7 @@ class Helper {
                             // flatpickr locale
 							<?php self::tf_flatpickr_locale( "root" ); ?>
 
-                            $(".tf-template-3 .tf-booking-date-wrap").on("click", function () {
+                            $(".tf-archive-template__three .tf-booking-date-wrap").on("click", function () {
                                 $("#check-in-out-date").trigger("click");
                             });
                             $("#check-in-out-date").flatpickr({
@@ -1069,13 +1069,13 @@ class Helper {
                                     ];
                                     if (selectedDates[0]) {
                                         const startDate = selectedDates[0];
-                                        $(".tf-template-3 .tf-booking-form-checkin span.tf-booking-date").html(startDate.getDate());
-                                        $(".tf-template-3 .tf-booking-form-checkin span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
+                                        $(".tf-archive-template__three .tf-booking-form-checkin span.tf-booking-date").html(startDate.getDate());
+                                        $(".tf-archive-template__three .tf-booking-form-checkin span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
                                     }
                                     if (selectedDates[1]) {
                                         const endDate = selectedDates[1];
-                                        $(".tf-template-3 .tf-booking-form-checkout span.tf-booking-date").html(endDate.getDate());
-                                        $(".tf-template-3 .tf-booking-form-checkout span.tf-booking-month span").html(monthNames[endDate.getMonth()]);
+                                        $(".tf-archive-template__three .tf-booking-form-checkout span.tf-booking-date").html(endDate.getDate());
+                                        $(".tf-archive-template__three .tf-booking-form-checkout span.tf-booking-month span").html(monthNames[endDate.getMonth()]);
                                     }
                                 }
                             }
@@ -1316,7 +1316,7 @@ class Helper {
                             // flatpickr locale first day of Week
 							<?php self::tf_flatpickr_locale( "root" ); ?>
 
-                            $(".tf-hotel-template-4 #tf-check-out").on('click', function () {
+                            $(".tf-archive-template__four #tf-check-out").on('click', function () {
                                 $(".tf-search-input.form-control").click();
                             });
 
@@ -1352,12 +1352,12 @@ class Helper {
                                 if (selectedDates.length === 2) {
                                     if (selectedDates[0]) {
                                         let checkInDate = instance.formatDate(selectedDates[0], format);
-                                        $(".tf-hotel-template-4 #tf-check-in").val(checkInDate);
+                                        $(".tf-archive-template__four #tf-check-in").val(checkInDate);
                                     }
 
                                     if (selectedDates[1]) {
                                         let checkOutDate = instance.formatDate(selectedDates[1], format);
-                                        $(".tf-hotel-template-4 #tf-check-out").val(checkOutDate);
+                                        $(".tf-archive-template__four #tf-check-out").val(checkOutDate);
                                     }
                                 }
                             }
@@ -1975,7 +1975,7 @@ class Helper {
                             // flatpickr locale first day of Week
 							<?php self::tf_flatpickr_locale( "root" ); ?>
 
-                            $(".tf-template-3 .tf-booking-date-wrap").on("click", function () {
+                            $(".tf-archive-template__three .tf-booking-date-wrap").on("click", function () {
 
                                 $("#check-in-out-date").trigger("click");
                             });
@@ -2014,13 +2014,13 @@ class Helper {
                                     ];
                                     if (selectedDates[0]) {
                                         const startDate = selectedDates[0];
-                                        $(".tf-template-3 .tf-booking-form-checkin .tf-tour-start-date span.tf-booking-date").html(startDate.getDate());
-                                        $(".tf-template-3 .tf-booking-form-checkin .tf-tour-start-date span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
+                                        $(".tf-archive-template__three .tf-booking-form-checkin .tf-tour-start-date span.tf-booking-date").html(startDate.getDate());
+                                        $(".tf-archive-template__three .tf-booking-form-checkin .tf-tour-start-date span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
                                     }
                                     if (selectedDates[1]) {
                                         const endDate = selectedDates[1];
-                                        $(".tf-template-3 .tf-booking-form-checkin .tf-tour-end-date span.tf-booking-date").html(endDate.getDate());
-                                        $(".tf-template-3 .tf-booking-form-checkin .tf-tour-end-date span.tf-booking-month span").html(monthNames[endDate.getMonth()]);
+                                        $(".tf-archive-template__three .tf-booking-form-checkin .tf-tour-end-date span.tf-booking-date").html(endDate.getDate());
+                                        $(".tf-archive-template__three .tf-booking-form-checkin .tf-tour-end-date span.tf-booking-month span").html(monthNames[endDate.getMonth()]);
                                     }
                                 }
                             }
@@ -2050,7 +2050,7 @@ class Helper {
                             // flatpickr locale first day of Week
 							<?php self::tf_flatpickr_locale( "root" ); ?>
 
-                            $(".tf-template-3 .tf-booking-date-wrap").on("click", function () {
+                            $(".tf-archive-template__three .tf-booking-date-wrap").on("click", function () {
 
                                 $("#check-in-out-date").trigger("click");
                             });
@@ -2089,13 +2089,13 @@ class Helper {
                                     ];
                                     if (selectedDates[0]) {
                                         const startDate = selectedDates[0];
-                                        $(".tf-template-3 .tf-booking-form-checkin span.tf-booking-date").html(startDate.getDate());
-                                        $(".tf-template-3 .tf-booking-form-checkin span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
+                                        $(".tf-archive-template__three .tf-booking-form-checkin span.tf-booking-date").html(startDate.getDate());
+                                        $(".tf-archive-template__three .tf-booking-form-checkin span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
                                     }
                                     if (selectedDates[1]) {
                                         const endDate = selectedDates[1];
-                                        $(".tf-template-3 .tf-booking-form-checkout span.tf-booking-date").html(endDate.getDate());
-                                        $(".tf-template-3 .tf-booking-form-checkout span.tf-booking-month span").html(monthNames[endDate.getMonth()]);
+                                        $(".tf-archive-template__three .tf-booking-form-checkout span.tf-booking-date").html(endDate.getDate());
+                                        $(".tf-archive-template__three .tf-booking-form-checkout span.tf-booking-month span").html(monthNames[endDate.getMonth()]);
                                     }
                                 }
                             }
@@ -2584,7 +2584,7 @@ class Helper {
                             // flatpickr locale first day of Week
                             <?php self::tf_flatpickr_locale( "root" ); ?>
 
-                            $(".tf-hotel-template-4 #tf-check-out").on('click', function () {
+                            $(".tf-archive-template__four #tf-check-out").on('click', function () {
                                 $(".tf-search-input.form-control").click();
                             });
 
@@ -2619,12 +2619,12 @@ class Helper {
                                 if (selectedDates.length === 2) {
                                     if (selectedDates[0]) {
                                         let checkInDate = instance.formatDate(selectedDates[0], format);
-                                        $(".tf-hotel-template-4 #tf-check-in").val(checkInDate);
+                                        $(".tf-archive-template__four #tf-check-in").val(checkInDate);
                                     }
 
                                     if (selectedDates[1]) {
                                         let checkOutDate = instance.formatDate(selectedDates[1], format);
-                                        $(".tf-hotel-template-4 #tf-check-out").val(checkOutDate);
+                                        $(".tf-archive-template__four #tf-check-out").val(checkOutDate);
                                     }
                                 }
                             }

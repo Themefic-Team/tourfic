@@ -7323,27 +7323,27 @@ div#tf-destinationautocomplete-list div:before {
   margin-bottom: 0px;
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-car-section .tf-archive-car-details-warper,
-.tax-carrental_location .tf-archive-template__one .tf-archive-car-section .tf-archive-car-details-warper,
-.tax-carrental_brand .tf-archive-template__one .tf-archive-car-section .tf-archive-car-details-warper,
-.page-template-tf-search .tf-archive-template__one .tf-archive-car-section .tf-archive-car-details-warper {
+.post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-car-details-warper,
+.tax-carrental_location .tf-archive-template__one .tf-archive-car-details-warper,
+.tax-carrental_brand .tf-archive-template__one .tf-archive-car-details-warper,
+.page-template-tf-search .tf-archive-template__one .tf-archive-car-details-warper {
   padding: 0px 0px 56px 0px;
 }
 
 @media only screen and (max-width: 1024px) {
-  .post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-car-section .tf-archive-car-details-warper,
-  .tax-carrental_location .tf-archive-template__one .tf-archive-car-section .tf-archive-car-details-warper,
-  .tax-carrental_brand .tf-archive-template__one .tf-archive-car-section .tf-archive-car-details-warper,
-  .page-template-tf-search .tf-archive-template__one .tf-archive-car-section .tf-archive-car-details-warper {
+  .post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-car-details-warper,
+  .tax-carrental_location .tf-archive-template__one .tf-archive-car-details-warper,
+  .tax-carrental_brand .tf-archive-template__one .tf-archive-car-details-warper,
+  .page-template-tf-search .tf-archive-template__one .tf-archive-car-details-warper {
     padding-left: 15px;
     padding-right: 15px;
   }
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box,
-.tax-carrental_location .tf-archive-template__one .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box,
-.tax-carrental_brand .tf-archive-template__one .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box,
-.page-template-tf-search .tf-archive-template__one .tf-archive-car-section .tf-archive-car-details-warper .tf-archive-search-box {
+.post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-car-details-warper .tf-archive-search-box,
+.tax-carrental_location .tf-archive-template__one .tf-archive-car-details-warper .tf-archive-search-box,
+.tax-carrental_brand .tf-archive-template__one .tf-archive-car-details-warper .tf-archive-search-box,
+.page-template-tf-search .tf-archive-template__one .tf-archive-car-details-warper .tf-archive-search-box {
   border-radius: 24px;
   background: #F1F3F4;
   padding: 8px;
