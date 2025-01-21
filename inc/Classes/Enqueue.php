@@ -238,7 +238,7 @@ class Enqueue {
 		/**
 		 * Cars Min and Max Price
 		 */
-		$tf_car_min_max_price = get_cars_min_max_price();
+		$tf_car_min_max_price = !empty( get_option( 'tf_transport_min_max_price' ) ) ? get_option( 'tf_transport_min_max_price' ) : array('min' => 0, 'max' => 1);
 
 		/**
 		 * Tour booking form

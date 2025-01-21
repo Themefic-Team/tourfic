@@ -58,14 +58,15 @@ class Migrator {
 
 	function tf_min_max_price_migrate() {
 
-		if( empty( get_option( 'tf_min_max_price_migrate' ) ) ) {
+		if( ! empty( get_option( 'tf_min_max_price_migrate' ) ) ) {
 			
 			$current_hotel_min_max_price = !empty( get_option( 'tf_hotel_min_max_price' ) ) ? get_option( 'tf_hotel_min_max_price' ) : array();
 			$current_tour_min_max_price = !empty( get_option( 'tf_tours_min_max_price' ) ) ? get_option( 'tf_tours_min_max_price' ) : array();
 			$current_apt_min_max_price = !empty( get_option( 'tf_apt_min_max_price' ) ) ? get_option( 'tf_apt_min_max_price' ) : array();
+			$current_transport_min_max_price = !empty( get_option( 'tf_transport_min_max_price' ) ) ? get_option( 'tf_transport_min_max_price' ) : array();
 
 
-			if( empty( $current_min_max_price ) ) {
+			if( empty( $current_hotel_min_max_price ) ) {
 				$hotel_min_max_price 	 = HotelPricing::get_min_max_price_from_all_hotel();
 				// $transport_min_max_price = HotelPricing::get_min_max_price_from_all_hotel();
 
@@ -82,7 +83,18 @@ class Migrator {
 				update_option( 'tf_apt_min_max_price', $apartment_min_max_price );
 			}
 
-			update_option( 'tf_min_max_price_migrate', 1 );
+			if( empty( $current_transport_min_max_price ) ) {
+				$transport_min_max_price = !empty( get_cars_min_max_price() ) ? get_cars_min_max_price() : array();
+				update_option( 'tf_transport_min_max_price', $transport_min_max_price );
+			}
+
+			update_option( 'tf_min_max_price_migrate', 2 );
+
+			// echo "<pre>";
+			// print_r(AptPricing::get_min_max_price_from_all_apartment());
+			// echo "</pre>";
+			// die(); // added by - Sunvi
+
 		}
 	}
 
