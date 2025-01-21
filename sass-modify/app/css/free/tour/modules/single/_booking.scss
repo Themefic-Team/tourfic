@@ -106,8 +106,8 @@
                 &.tf-tours-fixed{
                     width: 100%;
                     z-index: 9999;
-                    background-color: $color-secondary;
-                    border-top: 4px solid $color-primary;
+                    background-color: rgba($color-secondary, 0.9);
+                    border-top: 4px solid $color-danger;
                     padding: 8px 0;
                     position: fixed;
                     bottom: 0;
