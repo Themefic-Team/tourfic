@@ -1680,7 +1680,7 @@ class Helper {
                     <div class="tf-field-group tf-mt-8">
                         <i class="fa-solid fa-calendar-days"></i>
                         <input type="text" class="tf-field time" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
-                               placeholder="<?php esc_html_e( 'Select Date', 'tourfic' ); ?>" required value="" style="width: 100% !important">
+                               placeholder="<?php esc_html_e( 'Select Date', 'tourfic' ); ?>" required value="">
                     </div>
                     <div class="tf_booking-dates">
                         <div class="tf_label-row"></div>

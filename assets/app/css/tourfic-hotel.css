@@ -1467,27 +1467,27 @@
 
 .post-type-archive-tf_hotel .tf-archive-template__one .flatpickr-calendar,
 .page-template-tf-search .tf-archive-template__one .flatpickr-calendar {
-  left: 495px !important;
+  left: 495px;
 }
 
 @media only screen and (max-width: 1280px) {
   .post-type-archive-tf_hotel .tf-archive-template__one .flatpickr-calendar,
   .page-template-tf-search .tf-archive-template__one .flatpickr-calendar {
-    left: 285px !important;
+    left: 285px;
   }
 }
 
 @media only screen and (max-width: 1024px) {
   .post-type-archive-tf_hotel .tf-archive-template__one .flatpickr-calendar,
   .page-template-tf-search .tf-archive-template__one .flatpickr-calendar {
-    left: 170px !important;
+    left: 170px;
   }
 }
 
 @media only screen and (max-width: 660px) {
   .post-type-archive-tf_hotel .tf-archive-template__one .flatpickr-calendar,
   .page-template-tf-search .tf-archive-template__one .flatpickr-calendar {
-    left: 30px !important;
+    left: 30px;
   }
 }
 

@@ -1362,7 +1362,7 @@ class Enqueue {
 		// Template 1 Global CSS
 		if ( ! empty( $tf_template1_global_reg ) ) {
 			$output .= '
-			.tf-template-global .tf-bttn-normal.bttn-primary,
+			.tf-template-global .tf_btn,
 			.tf-template-global .tf-archive-head .active,
 			.tf-template-global .tf-item-featured .tf-features-box .tf-featur,
 			.tf-template-global .tf-itinerary-wrapper .tf-single-itinerary-item.active .accordion-checke::after,

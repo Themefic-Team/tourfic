@@ -3,15 +3,15 @@
     .tf-archive-template{
         &__one{
             .flatpickr-calendar {
-                left: 495px !important;
+                left: 495px;
                 @media only screen and (max-width: 1280px) {
-                    left: 285px !important;
+                    left: 285px;
                 }
                 @media #{$max1024}{
-                    left: 170px !important;
+                    left: 170px;
                 }
                 @media only screen and (max-width: 660px) {
-                    left: 30px !important;
+                    left: 30px;
                 }
             }
         }
