@@ -3157,7 +3157,7 @@ div#tf-destinationautocomplete-list div:before {
   }
 }
 
-.post-section-one {
+.tf-recent-blog-wrapper .post-section-one {
   overflow: hidden;
   display: -webkit-box;
   display: -moz-box;
@@ -3166,11 +3166,11 @@ div#tf-destinationautocomplete-list div:before {
   display: flex;
 }
 @media only screen and (max-width: 767.98px) {
-  .post-section-one {
+  .tf-recent-blog-wrapper .post-section-one {
     flex-direction: column;
   }
 }
-.post-section-one .tf-single-item {
+.tf-recent-blog-wrapper .post-section-one .tf-single-item {
   width: 32%;
   float: left;
   margin: 10px;
@@ -3188,7 +3188,7 @@ div#tf-destinationautocomplete-list div:before {
   position: relative;
   z-index: 0;
 }
-.post-section-one .tf-single-item:before {
+.tf-recent-blog-wrapper .post-section-one .tf-single-item:before {
   position: absolute;
   content: "";
   height: 100%;
@@ -3200,23 +3200,59 @@ div#tf-destinationautocomplete-list div:before {
   border-radius: 5px;
 }
 @media only screen and (max-width: 767.98px) {
-  .post-section-one .tf-single-item {
+  .tf-recent-blog-wrapper .post-section-one .tf-single-item {
     width: 100%;
     margin: unset;
     margin-bottom: 10px;
   }
 }
-.post-section-one .tf-post-content {
+.tf-recent-blog-wrapper .tf-single-item {
+  width: 48%;
+  float: left;
+  margin: 11px;
+  padding: 15px;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  border-radius: 5px;
+  height: 400px;
+  object-fit: cover;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  position: relative;
+  z-index: 0;
+}
+.tf-recent-blog-wrapper .tf-single-item:before {
+  position: absolute;
+  content: "";
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: -1;
+  border-radius: 5px;
+}
+@media only screen and (max-width: 767.98px) {
+  .tf-recent-blog-wrapper .tf-single-item {
+    width: 100%;
+    margin: unset;
+    margin-bottom: 10px;
+  }
+}
+.tf-recent-blog-wrapper .tf-single-item .tf-post-content {
   flex-grow: 1;
   align-self: flex-end;
 }
-.post-section-one .tf-post-desc a {
+.tf-recent-blog-wrapper .tf-single-item .tf-post-desc a {
   color: #ffffff;
 }
-.post-section-one .tf-post-desc a:hover {
+.tf-recent-blog-wrapper .tf-single-item .tf-post-desc a:hover {
   color: #faeedc;
 }
-.post-section-one .tf-post-desc p {
+.tf-recent-blog-wrapper .tf-single-item .tf-post-desc p {
   color: #ffffff;
 }
 
