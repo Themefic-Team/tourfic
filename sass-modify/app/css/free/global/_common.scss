@@ -1237,6 +1237,25 @@ Ajax Loader Booking Availability
     width: 100% !important;
 }
 
+// Room Loader
+#tour_room_details_loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, .8);
+    display: none;
+    z-index: 99999999;
+    #tour-room-details-loader-img {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
 
 @media only screen and (max-width: 1000px) {
     form.tf-review-form {
