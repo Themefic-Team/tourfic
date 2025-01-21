@@ -1,4 +1,4 @@
-<div class="tf-hotel-template-4 tf-archive-template__four <?php echo !empty($_GET['type']) && $_GET['type'] == "tf_tours" ? 'tf-tour-template-4' : '' ?> <?php echo !empty($_GET['type']) && $_GET['type'] == "tf_apartment" ? 'tf-apartment-template-4' : '' ?>">
+<div class="tf-archive-template__four">
     <?php
 
     use \Tourfic\Classes\Helper;
