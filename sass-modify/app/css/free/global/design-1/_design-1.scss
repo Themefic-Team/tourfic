@@ -259,6 +259,43 @@
     }
 }
 
+.single-tf_apartment{
+    .tf-single-template{
+        &__one{
+            .section-heading {
+                font-weight: 600 !important;
+                font-size: 24px !important;
+                line-height: 32px !important;
+                margin: 0 0 16px 0;
+                color: $color-heading;
+            }
+            .tf-apartment-content-wrapper {
+                @include flexbox();
+                @include flex-wrap(wrap);
+                gap: 24px;
+    
+                @media #{$max991} {
+                    flex-direction: column-reverse;
+                }
+                .tf-apartment-left {
+                    width: calc(66.66% - 32px);
+            
+                    @media #{$max991} {
+                        width: 100%;
+                    }
+                }
+                .tf-apartment-right {
+                    width: 33.33%;
+            
+                    @media #{$max991} {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+}
+
 .post-type-archive-tf_carrental,
 .tax-carrental_location,
 .tax-carrental_brand,

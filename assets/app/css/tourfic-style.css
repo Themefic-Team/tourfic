@@ -6399,6 +6399,46 @@ div#tf-destinationautocomplete-list div:before {
   margin-bottom: 0px;
 }
 
+.single-tf_apartment .tf-single-template__one .section-heading {
+  font-weight: 600 !important;
+  font-size: 24px !important;
+  line-height: 32px !important;
+  margin: 0 0 16px 0;
+  color: #060D1C;
+}
+.single-tf_apartment .tf-single-template__one .tf-apartment-content-wrapper {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+@media only screen and (max-width: 991.98px) {
+  .single-tf_apartment .tf-single-template__one .tf-apartment-content-wrapper {
+    flex-direction: column-reverse;
+  }
+}
+.single-tf_apartment .tf-single-template__one .tf-apartment-content-wrapper .tf-apartment-left {
+  width: calc(66.66% - 32px);
+}
+@media only screen and (max-width: 991.98px) {
+  .single-tf_apartment .tf-single-template__one .tf-apartment-content-wrapper .tf-apartment-left {
+    width: 100%;
+  }
+}
+.single-tf_apartment .tf-single-template__one .tf-apartment-content-wrapper .tf-apartment-right {
+  width: 33.33%;
+}
+@media only screen and (max-width: 991.98px) {
+  .single-tf_apartment .tf-single-template__one .tf-apartment-content-wrapper .tf-apartment-right {
+    width: 100%;
+  }
+}
+
 .post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-car-details-warper,
 .tax-carrental_location .tf-archive-template__one .tf-archive-car-details-warper,
 .tax-carrental_brand .tf-archive-template__one .tf-archive-car-details-warper,
