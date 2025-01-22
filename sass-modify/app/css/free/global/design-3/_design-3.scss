@@ -1034,42 +1034,42 @@
                 .al-range-slider__track {
                     background: $color-gray-light;
                     height: 10px;
-                    box-shadow: none !important;
+                    box-shadow: none;
                     margin: 0px 0px 10px 0px;
                 }
                 .al-range-slider_dark {
-                    padding: 0px !important;
+                    padding: 0px;
                     .al-range-slider__bar {
-                        background: $color-gray !important;
-                        box-shadow: none !important;
+                        background: $color-gray;
+                        box-shadow: none;
                     }
                 }
                 .al-range-slider__knob {
-                    background: $color-light-bg !important;
+                    background: $color-light-bg;
                     height: 24px;
                     width: 24px;
-                    box-shadow: none !important;
-                    border: 3px solid $color-gray !important;
+                    box-shadow: none;
+                    border: 3px solid $color-gray;
                     &:first-child {
                         span {
-                            left: 10px !important;
+                            left: 10px;
                         }
                     }
                 }
                 .al-range-slider__tooltip {
-                    background: transparent !important;
+                    background: transparent;
                     box-shadow: none;
                     padding: 3px 10px;
-                    margin-bottom: 0px !important;
+                    margin-bottom: 0px;
                     bottom: -40px;
-                    color: $color-text !important;
-                    font-size: 16px !important;
+                    color: $color-text;
+                    font-size: 16px;
                     font-style: normal;
                     font-weight: 400;
                     line-height: 130%;
                 }
                 .al-range-slider__input.js-al-range-slider__input {
-                    display: none !important;
+                    display: none;
                 }
             }
             .tf_widget.widget_tf_price_filters{
@@ -1774,7 +1774,6 @@
                 }
             }
             .tf-slider-item{
-                // height: auto;
                 box-shadow: none;
                 border: 0px solid;
                 background-color: transparent;
