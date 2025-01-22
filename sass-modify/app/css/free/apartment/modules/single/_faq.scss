@@ -33,7 +33,7 @@
             
                 #tf-faq-item {
                     border-radius: 8px;
-                    border-bottom: none !important;
+                    border-bottom: none;
                     padding: 8px 0;
                     margin-bottom: 0;
             
@@ -43,12 +43,12 @@
                         gap: 8px;
             
                         h4 {
-                            font-size: 16px !important;
+                            font-size: 16px;
                             color: $color-heading;
                             font-weight: 500;
                             line-height: 1.5;
                             letter-spacing: 0.5px;
-                            margin: 0 !important;
+                            margin: 0;
             
                             &:hover {
                                 color: $color-primary;
