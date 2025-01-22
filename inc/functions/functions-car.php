@@ -85,7 +85,7 @@ foreach($extra_qty as $key => $singleqty){
 				?>
 				<h4><?php echo !empty($single_extra_info['title']) ? esc_html($single_extra_info['title']) : ''; ?></h4>
 				<div class="qty-price tf-flex tf-flex-space-bttn">
-					<div class="line-sum tf-flex">
+					<div class="line-sum tf-flex tf-flex-align-center">
 						<i class="ri-close-line"></i> 
 						<span class="qty"><?php echo $singleqty; ?></span> 
 						<span class="price"><?php echo !empty($single_extra_info['price']) ? wc_price( ($single_extra_info['price'] * $calday) * $singleqty) : ''; ?></span>

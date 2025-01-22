@@ -9,7 +9,7 @@
                 }
                 h3{
                     color: $color-heading;
-                    font-size: 21px !important;
+                    font-size: 21px;
                     font-weight: 400;
                     margin-bottom: 16px;
                     margin-top: 0px;
@@ -27,23 +27,23 @@
                 }
                 .tf-review-form-container{
                     min-width: auto;
-                    background:  transparent !important;
+                    background:  transparent;
                     .tf-visitor-info{
-                        margin: 20px 0px !important;
+                        margin: 20px 0px;
                     }
                     .tf-rating-wrapper{
                         margin-bottom: 20px;
                     }
                     .tf-review-submit{
                         input[type="submit"]{
-                            padding: 16px 32px !important;
-                            border-radius: 8px !important;
-                            background: $color-primary !important;
-                            color: $color-white !important;
-                            font-size: 16px !important;
+                            padding: 16px 32px;
+                            border-radius: 8px;
+                            background: $color-primary;
+                            color: $color-white;
+                            font-size: 16px;
                             font-weight: 700;
                             cursor: pointer;
-                            border: 0px solid !important;
+                            border: 0px solid;
                         }
                     }
                 }
@@ -111,7 +111,7 @@
                         p{
                             margin: 0;
                             color: $color-text;
-                            font-size: 12px !important;
+                            font-size: 12px;
                             font-weight: 400;
                             text-transform: capitalize;
                             &.feature-rating{
@@ -149,11 +149,11 @@
                             .tf-reviews-meta{
                                 color: $color-text;
                                 font-size: 16px;
-                                font-weight: 700 !important;
+                                font-weight: 700;
                                 span{
                                     color:$color-text;
                                     font-size: 16px;
-                                    font-weight: 400 !important;
+                                    font-weight: 400;
                                 }
                             }
                             p{
