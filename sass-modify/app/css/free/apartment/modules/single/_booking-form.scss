@@ -55,7 +55,7 @@
                         @include align-items(center);
             
                         i {
-                            color: $color-primary;
+                            color: $color-warning;
                             font-size: 16px;
                             margin-top: -3px;
                         }
@@ -198,11 +198,8 @@
                     }
                 }
             
-                .tf-btn {
+                .tf_btn {
                     height: auto;
-                }
-            
-                .btn-styled {
                     border-radius: 8px;
                     background: $color-primary;
                     padding: 12px 24px;
@@ -212,7 +209,7 @@
                     line-height: 24px;
                     letter-spacing: 0.5px;
                 }
-            
+
                 .tf-apartment-price-list {
                     margin: 15px 0 0;
                     padding: 0;
@@ -258,9 +255,7 @@
                         span{
                             color: $color-primary;
                             font-size: 32px;
-                            font-style: normal;
                             font-weight: 700;
-                            line-height: 120%; /* 38.4px */
                             @media #{$max767}{
                                 font-size: 20px;
                             }
@@ -332,9 +327,7 @@
                                 h3.tf-person-info-title{
                                     color: $color-text;
                                     font-size: 32px;
-                                    font-style: normal;
                                     font-weight: 700;
-                                    line-height: 120%;
                                     margin: 0px;
                                     @media #{$max767}{
                                         font-size: 20px;
