@@ -14,8 +14,8 @@
 
         #tf-required {
             text-align: center;
-            width: 100% !important;
-            color: $color-danger !important;
+            width: 100%;
+            color: $color-danger;
             display: block;
         }
         @media #{$tfmax767}{
@@ -111,7 +111,7 @@
                 }
                 .tf-details-left{
                     @media #{$max991}{
-                        width: 100% !important;
+                        width: 100%;
                     }
                 }
                 .tf-available-room{
@@ -120,29 +120,29 @@
                     }
                     .tf-available-room-gallery{
                         @media only screen and (max-width: 767.98px) {
-                            height: 120px !important;
-                            max-width: none !important;
+                            height: 120px;
+                            max-width: none;
                         }
                         .tf-room-gallery:nth-child(n+2){
                             @media only screen and (max-width: 767.98px) {
-                                width: 48px !important;
-                                height: 28px !important;
+                                width: 48px;
+                                height: 28px;
                             }
                             svg{
                                 @media only screen and (max-width: 767.98px) {
-                                    width: 10px !important;
+                                    width: 10px;
                                 }
                             }
                         }
                     }
                     .tf-available-room-content{
                         @media only screen and (max-width: 767.98px) {
-                            width: auto !important;
+                            width: auto;
                             display: flow-root;
                         }
                         .tf-available-room-content-left{
                             @media only screen and (max-width: 767.98px) {
-                                width: 100% !important;
+                                width: 100%;
                             }
                             .tf-card-heading-info{
                                 @media only screen and (max-width: 767.98px) {
@@ -189,13 +189,13 @@
                             }
                             ul{
                                 @media only screen and (max-width: 767.98px) {
-                                    margin-bottom: 24px !important;
+                                    margin-bottom: 24px;
                                 }
                             }
                         }
                         .tf-available-room-content-right{
                             @media only screen and (max-width: 767.98px) {
-                                width: 100% !important;
+                                width: 100%;
                                 display: flow-root;
                             }
                             .tf-card-pricing-heading{
@@ -205,7 +205,7 @@
                             }
                             a{
                                 @media only screen and (max-width: 767.98px) {
-                                    width: 100% !important;
+                                    width: 100%;
                                 }
                             }
                         }
@@ -244,7 +244,7 @@
                     padding: 24px;
                     padding-right: 0;
                     @media #{$max1024}{
-                        width: calc(100% - 150px) !important;
+                        width: calc(100% - 150px);
                     }
                     &>div {
                         width: 32%;
@@ -326,7 +326,7 @@
                 .tf_label-row{
                     span#tf-required{
                         font-size: 12px;
-                        color: $color-danger !important;
+                        color: $color-danger;
                     }
                 }
                 .tf-booking-guest-and-room-wrap {
@@ -345,7 +345,7 @@
                 .tf-booking-form-submit {
                     width: 22%;
                     @media #{$max1024}{
-                        width: 150px !important;
+                        width: 150px;
                     }
                     button {
                         height: 100%;
@@ -360,9 +360,10 @@
             padding: 32px;
             margin-bottom: 32px;
             .tf-room-filter{
-                display: none !important;
+                display: none;
+                margin-bottom: 16px;
                 h4{
-                    font-weight: 600 !important;
+                    font-weight: 600;
                 }
                 ul{
                     margin: 0;
@@ -379,7 +380,7 @@
                         line-height: 130%;
                         color: $color-text;
                         @media #{$max1024}{
-                            font-size: 12px !important;
+                            font-size: 12px;
                         }
                         label{
                             padding-left: 25px;
@@ -409,7 +410,7 @@
                 }
             }
             .tf-room-filter.tf-filter-show{
-                display: block !important;
+                display: block;
             }
             .tf-available-rooms {
                 display: flex;
@@ -495,17 +496,17 @@
                     }
         
                     .tf-room-info-list{
-                        margin-bottom: 24px !important;
+                        margin-bottom: 24px ;
                     }
                     .tf-option-list{
-                        margin-bottom: 24px !important;
-                        display: flex !important;
+                        margin-bottom: 24px ;
+                        display: flex ;
                         flex-direction: column;
                         gap: 12px 5px;
                     }
         
                     .tf-available-room-content {
-                        width: 100% !important;
+                        width: 100% ;
                         padding-bottom: 0;
         
                         &:last-child .tf-room-options-content-inner{
@@ -543,7 +544,7 @@
                             margin-bottom: 20px;
                         }
                         h2{
-                            font-weight: 700 !important;
+                            font-weight: 700;
                             margin-bottom: 24px;
                         }
                         ul {
@@ -553,7 +554,7 @@
                             grid-template-columns: 1fr 1fr;
                             gap: 12px 5px;
                             @media #{$max767}{
-                                gap: 8px 5px !important;
+                                gap: 8px 5px;
                             }
                             &:last-child {
                                 margin-bottom: 0;
@@ -564,7 +565,7 @@
                                     font-size: 16px;
                                 }
                                 @media #{$max767}{
-                                    font-size: 14px !important;
+                                    font-size: 14px;
                                 }
                                 i {
                                     margin-right: 8px;
@@ -582,8 +583,8 @@
                         }
                         span.tf-others-benefits-title {
                             color: $color-heading;
-                            font-size: 16px !important;
-                            font-weight: 600 !important;
+                            font-size: 16px;
+                            font-weight: 600;
                             margin-bottom: 16px;
                             margin-top: auto;
                             display: block;
@@ -598,7 +599,7 @@
                         flex-direction: column;
                         align-items: flex-end;
                         @media #{$max1024}{
-                            width: 153px !important;
+                            width: 153px;
                         }
                         .tf-cancellation-refundable-text {
                             display: flex;
@@ -645,7 +646,7 @@
                                 line-height: 31.20px;
                                 text-align: right;
                                 .amount{
-                                    font-weight: 400 !important;
+                                    font-weight: 400;
                                 }
                                 .discount-price{
                                     color: $color-gray;
@@ -653,7 +654,7 @@
                                     display: inline-flex;
                                     gap: 2px;
                                     .amount{
-                                        font-weight: normal !important;
+                                        font-weight: normal;
                                     }
                                 }
                                 .sale-price{
@@ -707,7 +708,7 @@
                         }
                     }
                     .roomselectissue{
-                        text-align: right !important;
+                        text-align: right;
                     }
                     a.tf_btn {
                         margin-top: auto;
@@ -725,8 +726,8 @@
                     display: flow-root;
                 }
                 .tf-available-room-gallery{
-                    min-width: auto !important;
-                    max-width: none !important;
+                    min-width: auto;
+                    max-width: none;
                     display: grid;
                     grid-template-columns: 2fr 1fr;
                     .tf-room-image{
@@ -748,7 +749,7 @@
                         gap: 10px;
                         .tf-room-gallery{
                             height: 66px;
-                            width: 100% !important;
+                            width: 100%;
                             img{
                                 height: 66px;
                                 width: 100%;
@@ -761,14 +762,14 @@
                     grid-template-columns: 1fr;
                 }
                 .tf-available-room-content{
-                    width: auto !important;
+                    width: auto;
                     display: flow-root;
                     padding: 16px;
                     @media only screen and (max-width: 767.98px) {
                         padding: 16px;
                     }
                     .tf-available-room-content-left{
-                        width: 100% !important;
+                        width: 100%;
                         .room-heading-price{
                             display: flex;
                             justify-content: space-between;
@@ -776,7 +777,7 @@
                             margin-bottom: 16px;
                             h2{
                                 margin: 0;
-                                font-size: 20px !important;
+                                font-size: 20px;
                             }
                             .tf-available-room-price{
                                 display: flex;
@@ -812,7 +813,7 @@
                         }
                     }
                     .tf-available-room-content-right{
-                        width: 100% !important;
+                        width: 100%;
                         align-items: start;
                         a.availability{
                             width: 100%;
@@ -873,17 +874,17 @@
             }
             &>span{
                 color: $color-text;
-                font-size: 24px !important;
-                font-weight: 400 !important;
-                line-height: 130% !important;
+                font-size: 24px;
+                font-weight: 400;
+                line-height: 130%;
                 margin: 0px;
                 @media #{$max1024}{
-                    font-size: 14px !important;
+                    font-size: 14px;
                 }
             }
             > h2{
                 @media only screen and (max-width: 1280px) {
-                    font-size: 16px !important;
+                    font-size: 16px;
                 }
             }
             .tf-archive-filter-showing{
@@ -909,12 +910,12 @@
                 width: 320px;
             }
             @media #{$max1366}{
-                width: 283px !important;
-                padding: 32px !important;
+                width: 283px;
+                padding: 32px;
             }
             @media #{$max1024}{
-                width: 222px !important;
-                padding: 16px !important;
+                width: 222px;
+                padding: 16px;
             }
         
             &.tf-archive-right{
@@ -925,7 +926,7 @@
                 @media #{$max991}{
                     display: none;
                     position: absolute;
-                    width: 100% !important;
+                    width: 100%;
                     z-index: 99;
                     top: 200px;
                 }
@@ -949,13 +950,13 @@
                     border-radius: 8px 8px 0px 0px;
                     pointer-events: none;
                     span{
-                        margin-bottom: 10px !important;
-                        font-size: 16px !important;
-                        font-weight: 600 !important;
-                        line-height: 1.5 !important;
-                        color: $color-text !important;
+                        margin-bottom: 10px;
+                        font-size: 16px;
+                        font-weight: 600;
+                        line-height: 1.5;
+                        color: $color-text;
                         @media #{$max1024}{
-                            font-size: 12px !important;
+                            font-size: 12px;
                         }
                     }
                     i{
@@ -975,7 +976,7 @@
                             color: $color-text;
                             background: transparent;
                             @media #{$max1024}{
-                                font-size: 12px !important;
+                                font-size: 12px;
                             }
                             label{
                                 padding-left: 30px;
@@ -1019,7 +1020,7 @@
                             display: none;
                         }
                         @media #{$max1024}{
-                            font-size: 12px !important;
+                            font-size: 12px;
                         }
                     }
                 }
@@ -1208,8 +1209,8 @@
                     h4{
                         color: $color-heading;
                         text-align: center;
-                        font-size: 32px !important;
-                        font-weight: 700 !important;
+                        font-size: 32px;
+                        font-weight: 700;
                         margin-bottom: 32px;
                     }
                 }
@@ -1243,19 +1244,19 @@
                 }
         
                 button{
-                    background: $color-primary !important;
-                    border-color: $color-primary !important;
-                    border-radius: 0px !important;
-                    padding: 12px 32px !important;
-                    color: $color-white !important;
-                    font-size: 16px !important;
+                    background: $color-primary;
+                    border-color: $color-primary;
+                    border-radius: 0px;
+                    padding: 12px 32px;
+                    color: $color-white;
+                    font-size: 16px;
                     font-weight: 700;
                     transition: .3s all ease;
                     &::after{
-                        position: static !important;
+                        position: static;
                     }
                     &:hover{
-                        background: $color-secondary !important;
+                        background: $color-secondary;
                     }
                 }
             }
@@ -1278,20 +1279,20 @@
                             width: calc(100% - 246px);
                         }
                         @media only screen and (max-width: 767.98px) {
-                            width: 100% !important;
+                            width: 100%;
                         }
                     }
                     .tf-details-right{
                         @media only screen and (max-width: 1366px) {
-                            width: 391px !important;
-                            padding: 0px !important;
+                            width: 391px;
+                            padding: 0px;
                         }
                         @media only screen and (max-width: 1024px) {
-                            width: 222px !important;
-                            padding: 0px !important;
+                            width: 222px;
+                            padding: 0px;
                         }
                         @media only screen and (max-width: 767.98px) {
-                            width: 100% !important;
+                            width: 100%;
                         }
                         .tf-location.tf-single-widgets{
                             @media only screen and (max-width: 767.98px) {
@@ -1341,7 +1342,7 @@
                             }
                             h2{
                                 @media only screen and (max-width: 1280px) {
-                                    font-size: 24px !important;
+                                    font-size: 24px;
                                 }
                             }
                             ul{
@@ -1422,23 +1423,23 @@
                     }
                     .tf-booking-form-guest-and-room{
                         @media only screen and (max-width: 1366px) {
-                            padding-left: 48px !important;
+                            padding-left: 48px;
                         }
                         @media only screen and (max-width: 1280px) {
-                            padding-left: 32px !important;
+                            padding-left: 32px;
                         }
                         @media only screen and (max-width: 1024px) {
-                            padding-left: 20px !important;
+                            padding-left: 20px;
                         }
                     }
                     .tf-booking-form-fields{
                         @media only screen and (max-width: 992px) {
-                            width: 100% !important;
+                            width: 100%;
                         }
                     }
                     .tf-booking-form-submit{
                         @media only screen and (max-width: 992px) {
-                            width: 100% !important;
+                            width: 100%;
                         }
                     }
                 }
@@ -1494,23 +1495,23 @@
                             width: calc(100% - 284px);
                         }
                         @media only screen and (max-width: 767.98px) {
-                            width: 100% !important;
+                            width: 100%;
                         }
                     }
                     .tf-details-right{
                         @media only screen and (max-width: 1366px) {
-                            width: 391px !important;
-                            padding: 0px !important;
+                            width: 391px;
+                            padding: 0px;
                         }
                         @media only screen and (max-width: 1024px) {
-                            width: 345px !important;
-                            padding: 0px !important;
+                            width: 345px;
+                            padding: 0px;
                         }
                         @media only screen and (max-width: 992px) {
-                            width: 260px !important;
+                            width: 260px;
                         }
                         @media only screen and (max-width: 767.98px) {
-                            width: 100% !important;
+                            width: 100%;
                         }
                     }
                 }
@@ -1529,17 +1530,17 @@
                 .tf_tours_booking > .tf-tours-booking-btn .tf-btn,
                 .tf-bottom-booking-bar{
                     @media only screen and (max-width: 767.98px) {
-                        display: none !important;
+                        display: none;
                     }
                     .tf-bottom-booking-field{
                         @media only screen and (max-width: 767.98px) {
-                            width: auto !important;
+                            width: auto;
                         }
                     }
                 }
                 .tf-bottom-booking-bar.tf-mobile-booking-form{
                     @media only screen and (max-width: 767.98px) {
-                        display: block !important;
+                        display: block;
                     }
                 }
             }
@@ -1554,7 +1555,7 @@
             }
             #tf-tour-reviews{
                 @media only screen and (max-width: 767.98px) {
-                    padding-bottom: 32px !important;
+                    padding-bottom: 32px;
                     padding-top: 16px;
                 }
             }
@@ -1590,8 +1591,8 @@
                     }
                     .tf-details-right{
                         @media only screen and (max-width: 1024px) {
-                            width: 240px !important;
-                            padding: 0px !important;
+                            width: 240px;
+                            padding: 0px;
                         }
                     }
                 }
@@ -1606,13 +1607,13 @@
         .tf-questions-wrapper {
             h2{
                 color: $color-heading;
-                font-size: 32px !important;
-                font-style: normal !important;
-                font-weight: 700 !important;
+                font-size: 32px;
+                font-style: normal;
+                font-weight: 700;
                 line-height: 120%; /* 38.4px */
                 margin-bottom: 24px;
                 @media #{$max1024}{
-                    font-size: 24px !important;
+                    font-size: 24px;
                 }
             }
             .tf-questions {
@@ -1646,17 +1647,17 @@
                             flex-direction: column;
                             cursor: text;
                             i {
-                                top: 16px !important;
-                                right: 16px !important;
+                                top: 16px;
+                                right: 16px;
                                 transform: rotate(180deg);
                             }
                         }
                         .tf-faq-head{
                             span {
                                 color: $color-text;
-                                font-size: 16px !important;
-                                font-weight: 600 !important;
-                                line-height: 20.80px !important;
+                                font-size: 16px;
+                                font-weight: 600;
+                                line-height: 20.80px;
                                 margin-bottom: 8px;
                                 display: flex;
                                 justify-content: space-between;
@@ -1667,12 +1668,12 @@
                         .tf-question-desc {
                             display: none;
                             @media #{$max767}{
-                                font-size: 14px !important;
+                                font-size: 14px;
                             }
                         }
                     }
                     .tf-question:last-child {
-                        margin-bottom: 0px !important;
+                        margin-bottom: 0px;
                     }
                 }
             }
@@ -1683,13 +1684,13 @@
             margin: 0;
             h2{
                 color: $color-heading;
-                font-size: 32px !important;
-                font-style: normal !important;
-                font-weight: 700 !important;
+                font-size: 32px;
+                font-style: normal;
+                font-weight: 700;
                 line-height: 120%; /* 38.4px */
                 margin-bottom: 24px;
                 @media #{$max1024}{
-                    font-size: 24px !important;
+                    font-size: 24px;
                 }
             }
             .tf-policies {
@@ -1699,7 +1700,7 @@
                 p{
                     color: $color-text;
                     @media #{$max767}{
-                        font-size: 14px !important;
+                        font-size: 14px;
                     }
                 }
                 .tf-policy-item {
@@ -1719,7 +1720,7 @@
             }
         }
         .tf-single-pb-56 {
-            padding-bottom: 56px !important;
+            padding-bottom: 56px;
             @media #{$max767}{
                 padding-bottom: 32px;
             }
@@ -1741,28 +1742,28 @@
             }
             h2{
                 color: $color-heading;
-                font-size: 32px !important;
-                font-weight: 700 !important;
+                font-size: 32px;
+                font-weight: 700;
                 margin-bottom: 24px;
                 @media #{$max1024}{
-                    font-size: 24px !important;
+                    font-size: 24px;
                     margin-bottom: 24px;
                 }
             }
             .slick-track{
                 display: flex;
                 .slick-slide{
-                    height: inherit !important;
-                    margin: 0 !important;
+                    height: inherit;
+                    margin: 0;
                 }
             }
             .tf-slider-item{
-                // height: auto !important;
+                // height: auto;
                 box-shadow: none;
                 border: 0px solid;
                 background-color: transparent;
                 padding: 0px 12px;
-                margin-bottom: 0px !important;
+                margin-bottom: 0px;
                 @media #{$max1024}{
                     padding: 0px 4px;
                 }
@@ -1770,10 +1771,10 @@
                     padding: 0px 12px;
                 }
                 @media only screen and (min-width: 768px) and (max-width: 970px) {
-                    height: auto !important;
-                    padding: auto !important;
-                    margin: auto !important;
-                    border: 0px solid !important;
+                    height: auto;
+                    padding: auto;
+                    margin: auto;
+                    border: 0px solid;
                 }
                 .tf-post-single-box{
                     width: 100%;
@@ -1814,7 +1815,7 @@
                             border-color: $color-secondary;
                         }
                         @media #{$max1024}{
-                            font-size: 12px !important;
+                            font-size: 12px;
                         }
                     }
                     .tf-meta-location{
@@ -1839,7 +1840,7 @@
                                 font-weight: 700;
                                 line-height: 120%;
                                 @media #{$max1024}{
-                                    font-size: 20px !important;
+                                    font-size: 20px;
                                 }
                                 @media only screen and (max-width: 767.98px) {
                                     font-size: 20px;
@@ -1861,12 +1862,12 @@
                                 font-weight: 400;
                                 line-height: 130%;
                                 @media #{$max1024}{
-                                    font-size: 20px !important;
+                                    font-size: 20px;
                                 }
                             }
                             span.pricing_calc_type{
                                 color: $color-text;
-                                font-size: 16px !important;
+                                font-size: 16px;
                                 font-style: normal;
                                 font-weight: 400;
                                 line-height: 130%;
@@ -1913,14 +1914,14 @@
             }
             h3{
                 color: $color-heading;
-                font-size: 32px !important;
-                font-style: normal !important;
-                font-weight: 700 !important;
+                font-size: 32px;
+                font-style: normal;
+                font-weight: 700;
                 line-height: 120%;
                 margin: 0;
                 text-align: center;
                 @media #{$max1024}{
-                    font-size: 20px !important;
+                    font-size: 20px;
                 }
             }
             p{
@@ -1932,7 +1933,7 @@
                 line-height: 130%;
                 margin: 0;
                 @media #{$max767}{
-                    font-size: 14px !important;
+                    font-size: 14px;
                 }
             }
         }
@@ -1965,13 +1966,13 @@
             .tf-review-data-average {
                 span.avg-review{
                     margin-bottom: 0px;
-                    font-size: 40px !important;
-                    font-weight: 400 !important;
-                    line-height: 52px !important;
+                    font-size: 40px;
+                    font-weight: 400;
+                    line-height: 52px;
                     word-wrap: break-word;
                     color: $color-text;
                     @media #{$max1024}{
-                        font-size: 24px !important;
+                        font-size: 24px;
                     }
                     span {
                         color: $color-text;
@@ -1983,7 +1984,7 @@
                 font-size: 20px;
                 line-height: 26px;
                 p{
-                    font-size: 20px !important;
+                    font-size: 20px;
                     span {
                         color: $color-text;
                         font-size: 16px;
@@ -2046,29 +2047,29 @@
             }
             h3 {
                 color: $color-heading;
-                font-size: 20px !important;
+                font-size: 20px;
                 font-weight: 700;
                 line-height: 24px;
             }
             .tf-review-form-container{
                 width: 100%;
-                min-width: auto !important;
-                background: transparent !important;
+                min-width: auto;
+                background: transparent;
                 form{
                     .tf-rating-wrapper{
-                        grid-template-columns: 1fr !important;
-                        margin-bottom: 16px !important;
+                        grid-template-columns: 1fr;
+                        margin-bottom: 16px;
                         .tf-form-single-rating{
                             display: flex;
                             label{
-                                font-size: 14px !important;
+                                font-size: 14px;
                                 font-weight: 600;
                                 line-height: 18.2px;
                                 display: block;
                                 margin-right: 4px;
                             }
                             .ratings-container{
-                                width: auto !important;
+                                width: auto;
                                 text-align: left;
                             }
                             span.error{
@@ -2078,7 +2079,7 @@
                         }
                     }
                     .tf-review-submit{
-                        margin-top: 16px !important;
+                        margin-top: 16px;
 
                         .tf_btn{
                             width: 100%;
@@ -2095,7 +2096,7 @@
                         border-radius: 0px;
                     }
                     textarea{
-                        width: 100% !important;
+                        width: 100%;
                     }
                 }
             }
@@ -2133,8 +2134,8 @@
                         max-height: 275px;
                     }
                     @media #{$max767}{
-                        min-height: 210px !important;
-                        max-height: 210px !important;
+                        min-height: 210px;
+                        max-height: 210px;
                     }
                     .tf-wish-and-share {
                         display: flex;
@@ -2255,10 +2256,10 @@
                                 color: $color-white;
                                 margin-bottom: 16px;
                                 @media #{$max1024}{
-                                    font-size: 32px !important;
+                                    font-size: 32px;
                                 }
                                 @media #{$max767}{
-                                    font-size: 20px !important;
+                                    font-size: 20px;
                                     margin-bottom: 8px;
                                 }
                                 @media #{$max480}{
@@ -2277,11 +2278,11 @@
                                 gap: 8px;
                                 width: 80%;
                                 @media #{$max1024}{
-                                    font-size: 16px !important;
+                                    font-size: 16px;
                                     width: auto;
                                 }
                                 @media #{$max767}{
-                                    font-size: 14px !important;
+                                    font-size: 14px;
                                     line-height: 130%; /* 18.2px */
                                 }
                                 a {
@@ -2291,10 +2292,10 @@
                                     font-weight: 400;
                                     line-height: 31.20px;
                                     @media #{$max1024}{
-                                        font-size: 16px !important;
+                                        font-size: 16px;
                                     }
                                     @media #{$max767}{
-                                        font-size: 14px !important;
+                                        font-size: 14px;
                                         line-height: 130%; /* 18.2px */
                                     }
                                 }
@@ -2325,8 +2326,8 @@
                                     height: 40px;
                                 }
                                 @media #{$max767}{
-                                    width: 52px !important;
-                                    height: 32px !important;
+                                    width: 52px;
+                                    height: 32px;
                                 }
                             }
                             a {
@@ -2339,13 +2340,13 @@
 
                                 svg {
                                     @media #{$max1024}{
-                                        width: 16px !important;
+                                        width: 16px;
                                     }
                                     @media only screen and (max-width: 992px) {
                                         width: 16px;
                                     }
                                     @media #{$max767}{
-                                        width: 12px !important;
+                                        width: 12px;
                                     }
                                 }
                             }
@@ -2362,14 +2363,14 @@
             }
             h2{
                 color: $color-heading;
-                font-size: 32px !important;
-                font-style: normal !important;
-                font-weight: 700 !important;
+                font-size: 32px;
+                font-style: normal;
+                font-weight: 700;
                 line-height: 120%; /* 38.4px */
-                margin-bottom: 24px !important;
+                margin-bottom: 24px;
                 @media #{$max1024}{
-                    font-size: 24px !important;
-                    margin-bottom: 16px !important;
+                    font-size: 24px;
+                    margin-bottom: 16px;
                 }
             }
             .tf-facilities {
@@ -2409,25 +2410,25 @@
         }
 
         .tf-reviews-wrapper {
-            padding-bottom: 55px !important;
+            padding-bottom: 55px;
             .tf-section-title{
                 color: $color-heading;
-                font-size: 32px !important;
-                font-style: normal !important;
-                font-weight: 700 !important;
+                font-size: 32px;
+                font-style: normal;
+                font-weight: 700;
                 line-height: 120%; /* 38.4px */
                 margin-bottom: 8px;
                 @media #{$max1024}{
-                    font-size: 24px !important;
+                    font-size: 24px;
                 }
             }
             .tf-reviews-slider {
 
                 .tf-reviews-item {
                     background: $color-yellow-light;
-                    margin-right: 35px !important;
+                    margin-right: 35px;
                     padding: 24px;
-                    display: flex !important;
+                    display: flex;
                     flex-direction: row;
                     gap: 8px;
                     min-height: 212px;
@@ -2468,7 +2469,7 @@
 
                         p {
                             @media #{$max767}{
-                                font-size: 14px !important;
+                                font-size: 14px;
                             }
                         }
                     }
@@ -2524,7 +2525,7 @@
                         display: flex;
                     }
                     span{
-                        width: 100% !important;
+                        width: 100%;
                         display: block;
                         &:last-child{
                             text-align: right;
@@ -2541,9 +2542,9 @@
 
         .tf-single-widgets h2 {
             margin-bottom: 0px;
-            font-weight: 700 !important;
+            font-weight: 700;
             @media #{$max1024}{
-                font-size: 20px !important;
+                font-size: 20px;
             }
         }
 
@@ -2578,8 +2579,8 @@
             .tf-popup-inner {
                 width: 1500px;
                 @media #{$max767}{
-                    width: 90% !important;
-                    max-width: none !important;
+                    width: 90%;
+                    max-width: none;
                 }
                 .tf-popup-body {
                     width: 100%;
@@ -2614,8 +2615,8 @@
                     }
                     .tf-popup-right span {
                         color: $color-text;
-                        font-size: 16px !important;
-                        font-weight: 600 !important;
+                        font-size: 16px;
+                        font-weight: 600;
                         line-height: 20.80px;
                         word-wrap: break-word;
                         margin-bottom: 0px;
@@ -2666,10 +2667,10 @@
                 max-width: 150px;
                 margin-right: 40px;
                 justify-content: flex-start;
-                padding: 16px !important;
+                padding: 16px;
                 width: inherit;
-                max-width: unset !important;
-                margin: 0 !important;
+                max-width: unset;
+                margin: 0;
 
                 input {
                     padding: 9px;
@@ -2694,18 +2695,18 @@
             }
 
             .acr-select input[type=tel] {
-                width: 34px !important;
+                width: 34px;
                 height: 48px;
-                border: 1px solid !important;
+                border: 1px solid;
                 font-size: 16px;
                 font-style: normal;
                 font-weight: 600;
-                color: $color-text !important;
+                color: $color-text;
                 text-align: center;
-                padding-left: 0px !important;
-                padding-right: 0px !important;
+                padding-left: 0px;
+                padding-right: 0px;
                 border-radius: 20px;
-                background: $color-light-bg !important;
+                background: $color-light-bg;
             }
 
             form {
@@ -2718,8 +2719,8 @@
             }
 
             h2 {
-                padding: 0 !important;
-                margin: 0 !important;
+                padding: 0;
+                margin: 0;
             }
 
             .tf_acrselection-wrap {
@@ -2783,21 +2784,21 @@
             .tf-form-title{
                 h3.tf-person-info-title{
                     color: $color-text;
-                    font-size: 32px !important;
-                    font-style: normal !important;
-                    font-weight: 700 !important;
-                    line-height: 120% !important;
+                    font-size: 32px;
+                    font-style: normal;
+                    font-weight: 700;
+                    line-height: 120%;
                     margin: 0;
                     @media #{$max1024}{
-                        font-size: 24px !important;
+                        font-size: 24px;
                     }
                 }
             }
             .tf-field-group {
-                margin: 0px !important;
+                margin: 0px;
                 .tf-field{
-                    background-color: transparent !important;
-                    padding: 12px 0px !important;
+                    background-color: transparent;
+                    padding: 12px 0px;
                     align-items: center;
                     justify-content: space-between;
                     .acr-label{
@@ -2807,11 +2808,11 @@
                     }
                     .acr-select{
                         input{
-                            padding-left: 0px !important;
-                            padding-right: 0px !important;
-                            -webkit-appearance: none !important;
-                            -moz-appearance: none !important;
-                            appearance: none !important;
+                            padding-left: 0px;
+                            padding-right: 0px;
+                            -webkit-appearance: none;
+                            -moz-appearance: none;
+                            appearance: none;
                         }
                     }
                 }
@@ -2821,29 +2822,29 @@
                     margin-top: -3px;
                 }
                 .tf-field{
-                    padding: 15px 40px !important;
-                    width: 100% !important;
-                    background-color: $form-input-bg!important;
-                    border-radius: 0px !important;
-                    color: $color-text !important;
+                    padding: 15px 40px;
+                    width: 100%;
+                    background-color: $form-input-bg;
+                    border-radius: 0px;
+                    color: $color-text;
                     &::placeholder{
-                        color: $color-text !important;
+                        color: $color-text;
                     }
                 }
             }
             .tf-field-calander.check-in-time-div .tf-field{
-                padding: 18.7px 40px !important;
+                padding: 18.7px 40px;
             }
             .tf-tours-booking-btn.tf-booking-bttns{
                 a{
-                    border: 1px solid $color-primary !important;
-                    background: $color-primary !important;
-                    padding: 12px 32px !important;
+                    border: 1px solid $color-primary;
+                    background: $color-primary;
+                    padding: 12px 32px;
                     justify-content: center;
                     transition: .3s all ease;
                     border-radius: 0px;
                     &:hover{
-                        background-color: $color-secondary !important;
+                        background-color: $color-secondary;
                     }
                 }
             }
@@ -2909,10 +2910,10 @@
                             background-color: $color-primary;
                         }
                         a.tf-back-control{
-                            background-color: transparent !important;
+                            background-color: transparent;
                             color: $color-primary;
-                            padding: 0px !important;
-                            border: 0px solid !important;
+                            padding: 0px;
+                            border: 0px solid;
                         }
                     }
                 }
@@ -2924,7 +2925,7 @@
                                 input[type="textarea"],
                                 input[type="date"],
                                 select{
-                                    background: $color-light-bg !important;
+                                    background: $color-light-bg;
                                 }
                             }
                         }
@@ -2934,10 +2935,10 @@
         }
 
         .tf-single-tour-extra .tf_quantity-acrselection .quanity-acr-fields {
-            background-color: $color-light-bg !important;
-            padding: 15px 40px !important;
-            margin-bottom: 10px !important;
-            margin-left: 23px !important;
+            background-color: $color-light-bg;
+            padding: 15px 40px;
+            margin-bottom: 10px;
+            margin-left: 23px;
         }
 
         .tf-content-wrapper {
@@ -2969,7 +2970,7 @@
                                     display: inline-block;
                                     border-color: transparent;
                                     @media #{$max1024}{
-                                        font-size: 12px !important;
+                                        font-size: 12px;
                                     }
                                     &.tf-hashlink {
                                         border-color: $color-primary;
@@ -3023,10 +3024,10 @@
                         .tf-overview-popular-facilities {
                             span.tf-popular-facilities-title {
                                 color: $color-text;
-                                font-size: 16px !important;
+                                font-size: 16px;
                                 display: block;
-                                font-weight: 600 !important;
-                                line-height: 20.8px !important;
+                                font-weight: 600;
+                                line-height: 20.8px;
                                 margin-bottom: 16px;
                             }
                             &>ul {
@@ -3041,7 +3042,7 @@
                                     width: 25%;
                                     display: flex;
                                     @media #{$max767}{
-                                        width: 50% !important;
+                                        width: 50%;
                                     }
                                     @media only screen and (max-width: 1280px) {
                                         width: 33%;
@@ -3077,7 +3078,7 @@
                                 gap: 16px;
                                 background: $color-yellow-thin;
                                 @media #{$max1024}{
-                                    padding: 16px !important;
+                                    padding: 16px;
                                     gap: 8px;
                                 }
                                 i {
@@ -3087,9 +3088,9 @@
                                 .tf-feature-block-details {
                                     h5 {
                                         color: $color-heading;
-                                        font-size: 20px !important;
-                                        font-style: normal !important;
-                                        font-weight: 700 !important;
+                                        font-size: 20px;
+                                        font-style: normal;
+                                        font-weight: 700;
                                         line-height: 1.3;
                                     }
                                     p{
@@ -3106,7 +3107,7 @@
                                 display: flex;
                                 .slick-slide{
                                     height: inherit;
-                                    margin: 0px 5px !important;
+                                    margin: 0px 5px;
                                 }
                             }
                             .tf-feature-block {
@@ -3115,7 +3116,7 @@
                                 gap: 16px;
                                 background: $color-yellow-thin;
                                 @media #{$max1024}{
-                                    padding: 16px !important;
+                                    padding: 16px;
                                     gap: 8px;
                                 }
                                 i {
@@ -3125,9 +3126,9 @@
                                 .tf-feature-block-details {
                                     h5 {
                                         color: $color-heading;
-                                        font-size: 20px !important;
-                                        font-style: normal !important;
-                                        font-weight: 700 !important;
+                                        font-size: 20px;
+                                        font-style: normal;
+                                        font-weight: 700;
                                         line-height: 1.3;
                                     }
                                     p{
@@ -3181,10 +3182,10 @@
                                     padding-right: 16px;
                                 }
                                 h2{
-                                    font-weight: 700 !important;
+                                    font-weight: 700;
                                     margin-bottom: 24px;
                                     @media #{$max1024}{
-                                        font-size: 24px !important;
+                                        font-size: 24px;
                                     }
                                 }
                                 p{
@@ -3260,9 +3261,9 @@
                         h1{
                             color: $color-white;
                             margin: 0px;
-                            font-size: 40px !important;
+                            font-size: 40px;
                             @media #{$max767}{
-                                font-size: 20px !important;
+                                font-size: 20px;
                             }
                         }
                     }
@@ -3276,7 +3277,7 @@
                         p{
                             color: $color-white;
                             margin: 0px;
-                            font-size: 24px !important;
+                            font-size: 24px;
                             line-height: 1.3;
                         }
                     }
@@ -3292,44 +3293,44 @@
             }
             .tf_archive_search_result{
                 @media only screen and (max-width: 660px) {
-                    display: flow-root !important;
+                    display: flow-root;
                     padding: 0px 16px 8px 16px;
                 }
                 .tf-booking-form-submit{
                     @media only screen and (max-width: 660px) {
-                        width: 100% !important;
+                        width: 100%;
                     }
                 }
             }
             .tf-booking-form {
                 .tf-booking-form-fields {
                     @media only screen and (max-width: 660px) {
-                        width: 100% !important;
-                        display: flow-root !important;
+                        width: 100%;
+                        display: flow-root;
                         padding: 8px 0;
                     }
                     .tf-booking-form-location {
                         display: flex;
-                        align-items: flex-start !important;
+                        align-items: flex-start;
                         padding-right: 40px;
                         padding-left: 16px;
                         @media only screen and (min-width: 1025px) and (max-width: 1165px) {
-                            padding-right: 10px !important;
-                            width: 25% !important;
+                            padding-right: 10px;
+                            width: 25%;
                         }
                         @media #{$max1200}{
-                            padding-right: 28px !important;
-                            padding-left: 4px !important;
+                            padding-right: 28px;
+                            padding-left: 4px;
                         }
                         @media #{$max1024}{
-                            padding-right: 15px !important;
-                            padding-left: 0px !important;
+                            padding-right: 15px;
+                            padding-left: 0px;
                         }
                         @media only screen and (max-width: 660px) {
-                            width: 100% !important;
-                            padding: 0px !important;
-                            border-right: 0px solid !important;
-                            margin-bottom: 12px !important;
+                            width: 100%;
+                            padding: 0px;
+                            border-right: 0px solid;
+                            margin-bottom: 12px;
                         }
                         .tf-booking-location-wrap {
                             display: flex;
@@ -3347,9 +3348,9 @@
                                 background: transparent;
                                 box-shadow: none;
                                 font-size: 12px;
-                                color: $color-text !important;
+                                color: $color-text;
                                 &::placeholder{
-                                    color: $color-text !important;
+                                    color: $color-text;
                                 }
                             }
 
@@ -3369,7 +3370,7 @@
                                 scrollbar-color: $color-light-bg $color-white;
                                 padding: 8px;
                                 @media only screen and (max-width: 660px) {
-                                    width: 100% !important;
+                                    width: 100%;
                                 }
                                 &::-webkit-scrollbar{
                                     width: 5px;
@@ -3404,13 +3405,13 @@
                     }
                     .tf-booking-form-checkin{
                         @media only screen and (min-width: 1025px) and (max-width: 1165px) {
-                            padding-left: 10px !important;
-                            padding-right: 10px !important;
+                            padding-left: 10px;
+                            padding-right: 10px;
                             max-width: none;
                             width: 20%;
                         }
                         @media only screen and (max-width: 660px) {
-                            width: 31% !important;
+                            width: 31%;
                             float: left;
                             padding: 0px;
                             max-width: none;
@@ -3428,16 +3429,16 @@
                     }
                     .tf-booking-form-checkout{
                         @media only screen and (min-width: 1025px) and (max-width: 1165px) {
-                            padding-left: 10px !important;
-                            padding-right: 10px !important;
+                            padding-left: 10px;
+                            padding-right: 10px;
                             max-width: none;
                             width: 20%;
                         }
                         @media only screen and (max-width: 660px) {
-                            width: 31% !important;
+                            width: 31%;
                             float: left;
                             padding: 0px;
-                            padding-left: 20px !important;
+                            padding-left: 20px;
                             max-width: none;
                         }
                         .tf-booking-date{
@@ -3453,29 +3454,29 @@
                     }
 
                     .tf-booking-form-guest-and-room {
-                        padding-left: 40px !important;
+                        padding-left: 40px;
                         padding-right: 40px;
                         min-width: 200px;
                         @media only screen and (min-width: 1025px) and (max-width: 1165px) {
-                            padding-left: 10px !important;
-                            padding-right: 10px !important;
-                            width: 35% !important;
+                            padding-left: 10px;
+                            padding-right: 10px;
+                            width: 35%;
                             min-width: auto;
                         }
                         @media #{$max1200}{
-                            padding-right: 28px !important;
-                            padding-left: 28px !important;
+                            padding-right: 28px;
+                            padding-left: 28px;
                         }
                         @media #{$max1024}{
-                            padding-right: 15px !important;
-                            padding-left: 15px !important;
+                            padding-right: 15px;
+                            padding-left: 15px;
                             min-width: 160px;
                         }
                         @media only screen and (max-width: 660px) {
-                            width: 31% !important;
+                            width: 31%;
                             float: left;
-                            padding-left: 20px !important;
-                            padding-right: 0px !important;
+                            padding-left: 20px;
+                            padding-right: 0px;
                             min-width: auto;
                         }
                         .tf-booking-date{
@@ -3518,13 +3519,13 @@
                     &.tf-tour-archive-block{
                         .tf-booking-form-checkin{
                             max-width: none;
-                            width: 37% !important;
+                            width: 37%;
                             @media only screen and (min-width: 1025px) and (max-width: 1165px) {
-                                padding-left: 10px !important;
-                                padding-right: 10px !important;
+                                padding-left: 10px;
+                                padding-right: 10px;
                             }
                             @media only screen and (max-width: 660px) {
-                                width: 50% !important;
+                                width: 50%;
                                 float: left;
                                 padding: 0px;
                             }
@@ -3561,8 +3562,8 @@
                         }
                         .tf-booking-form-checkout{
                             @media only screen and (min-width: 1025px) and (max-width: 1165px) {
-                                padding-left: 10px !important;
-                                padding-right: 10px !important;
+                                padding-left: 10px;
+                                padding-right: 10px;
                             }
                             .tf-booking-date{
                                 @media only screen and (min-width: 1025px) and (max-width: 1165px) {
@@ -3577,16 +3578,16 @@
                         }
                         .tf-booking-form-guest-and-room{
                             @media only screen and (min-width: 1025px) and (max-width: 1165px) {
-                                padding-left: 10px !important;
-                                padding-right: 10px !important;
-                                width: 20% !important;
+                                padding-left: 10px;
+                                padding-right: 10px;
+                                width: 20%;
                                 min-width: auto;
                             }
                             @media only screen and (max-width: 660px) {
-                                width: 50% !important;
+                                width: 50%;
                                 float: left;
-                                padding-left: 20px !important;
-                                padding-right: 0px !important;
+                                padding-left: 20px;
+                                padding-right: 0px;
                             }
                             .tf-booking-date{
                                 @media only screen and (min-width: 1025px) and (max-width: 1165px) {
@@ -3602,7 +3603,7 @@
                         }
                         .tf-booking-form-location{
                             @media only screen and (min-width: 1025px) and (max-width: 1165px) {
-                                padding-right: 10px !important;
+                                padding-right: 10px;
                             }
                         }
                     }
@@ -3621,7 +3622,7 @@
                 visibility: visible;
                 opacity: 1;
                 top: 116%;
-                display: block !important;
+                display: block;
             }
             .acr-label{
                 color: $color-text;
@@ -3633,18 +3634,18 @@
                 text-align: right;
                 width: 96px;
                 input[type=tel]{
-                    width: 34px !important;
+                    width: 34px;
                     height: 48px;
-                    border: 1px solid !important;
+                    border: 1px solid;
                     font-size: 16px;
                     font-style: normal;
                     font-weight: 600;
-                    color: $color-text !important;
+                    color: $color-text;
                     text-align: center;
-                    padding-left: 0px !important;
-                    padding-right: 0px !important;
+                    padding-left: 0px;
+                    padding-right: 0px;
                     border-radius: 20px;
-                    background: $color-light-bg !important;
+                    background: $color-light-bg;
                 }
                 .acr-dec,
                 .acr-inc{
@@ -3727,8 +3728,8 @@
                                 position: absolute;
                                 height: 70px ;
                                 width: 70px;
-                                left: unset !important;
-                                top: unset !important;
+                                left: unset;
+                                top: unset;
                                 bottom: 16px;
                                 right: 16px;
                                 img {
@@ -3794,7 +3795,7 @@
                             width: calc(100% - 222px);
                         }
                         @media #{$max1024}{
-                            padding: 24px 16px !important;
+                            padding: 24px 16px;
                         }
                         .tf-available-room-content-left {
                             display: flex;
@@ -3811,11 +3812,11 @@
                             ul{
                                 margin-top: auto;
                                 @media #{$max1024}{
-                                    font-size: 14px !important;
+                                    font-size: 14px;
                                 }
                                 li{
                                     @media #{$max1024}{
-                                        font-size: 14px !important;
+                                        font-size: 14px;
                                     }
                                 }
                             }
@@ -3828,7 +3829,7 @@
                                 .tf-section-title {
                                     margin: 0 0 10px 0;
                                     @media #{$max1200}{
-                                        font-size: 24px !important;
+                                        font-size: 24px;
                                     }
                                 }
                                 .tf-title-location {
@@ -3920,11 +3921,11 @@
                 display: flex;
                 justify-content: space-between;
                 .tf-section-title {
-                    margin: 0 !important;
+                    margin: 0;
                     padding: 0;
-                    font-weight: 700 !important;
+                    font-weight: 700;
                     @media #{$max1024}{
-                        font-size: 20px !important;
+                        font-size: 20px;
                     }
                 }
                 button {
@@ -3938,7 +3939,7 @@
                     font-weight: 700;
                     transition: .3s all ease;
                     @media #{$max1024}{
-                        font-size: 12px !important;
+                        font-size: 12px;
                     }
                     &:hover{
                         color: $color-primary;
