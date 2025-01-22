@@ -308,7 +308,7 @@
                 .tf-review-data-average p {
                     background: $color-light-bg;
                     text-align: center;
-                    font-size: 30px !important;
+                    font-size: 30px;
                     color: $color-primary;
                     font-weight: 500;
                     @include bd-radius(5px);;
@@ -445,6 +445,10 @@
                     }
                     .tf-review-message{
                         margin-top: 10px;
+
+                        p{
+                            margin-bottom: 0;
+                        }
                     }
                     .tf-review-ratings{
                         display: flex;

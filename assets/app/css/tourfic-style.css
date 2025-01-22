@@ -8829,7 +8829,7 @@ div#tf-destinationautocomplete-list div:before {
 .tf-single-template__two .tf-review-wrapper .tf-review-data .tf-review-data-average p {
   background: #faeedc;
   text-align: center;
-  font-size: 30px !important;
+  font-size: 30px;
   color: #0E3DD8;
   font-weight: 500;
   -webkit-border-radius: 5px;
@@ -8996,6 +8996,10 @@ div#tf-destinationautocomplete-list div:before {
 
 .tf-single-template__two .tf-review-wrapper .tf-review-reply .tf-review-details .tf-review-message {
   margin-top: 10px;
+}
+
+.tf-single-template__two .tf-review-wrapper .tf-review-reply .tf-review-details .tf-review-message p {
+  margin-bottom: 0;
 }
 
 .tf-single-template__two .tf-review-wrapper .tf-review-reply .tf-review-details .tf-review-ratings {

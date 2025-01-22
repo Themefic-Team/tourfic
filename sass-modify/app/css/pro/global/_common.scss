@@ -217,12 +217,12 @@
     }
     .slick-prev {
         &:before {
-            color: $color-heading !important;
+            color: $color-heading;
         }
     }
     .slick-next {
         &:before {
-            color: $color-heading !important;
+            color: $color-heading;
         }
     }
 }
@@ -357,95 +357,6 @@
         height: 100vh;
     }
 }
-/*.tf-modal-btn {
-    cursor: pointer;
-}
-.tf-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 999999;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    outline: 0;
-    visibility: hidden;
-    opacity: 0;
-    transform: scale(0.7);
-    -webkit-transition: all 0.4s ease-in-out;
-    -moz-transition: all 0.4s ease-in-out;
-    -o-transition: all 0.4s ease-in-out;
-    transition: all 0.4s ease-in-out;
-    .tf-modal-dialog {
-        display: -webkit-box;
-        display: -moz-box;
-        display: -ms-flexbox;
-        display: -webkit-flex;
-        display: flex;
-        -webkit-align-items: center;
-        -ms-flex-align: center;
-        align-items: center;
-        min-height: calc(100% - 4rem);
-        max-width: 100%;
-        margin: 2rem auto;
-        position: relative;
-        pointer-events: none;
-    }
-    .tf-modal-content {
-        position: relative;
-        display: -webkit-box;
-        display: -moz-box;
-        display: -ms-flexbox;
-        display: -webkit-flex;
-        display: flex;
-        -webkit-flex-direction: column;
-        -ms-flex-direction: column;
-        flex-direction: column;
-        width: 80%;
-        pointer-events: auto;
-        background-color: $color-white;
-        outline: 0;
-        margin: 0 auto;
-        border-radius: 10px;
-        padding: 30px;
-    }
-    .tf-modal-close {
-        color: #003162;
-        cursor: pointer;
-        font-size: 22px;
-        position: absolute;
-        top: 0;
-        right: 10px;
-        &:hover {
-            -webkit-transform: rotate(180deg);
-            -ms-transform: rotate(180deg);
-            -o-transform: rotate(180deg);
-            transform: rotate(180deg);
-        }
-    }
-}
-.tf-modal.tf-modal-show {
-    opacity: 1;
-    visibility: visible;
-    transform: scale(1);
-}
-.tf-modal-open {
-    overflow: hidden;
-    .tf-modal {
-        overflow-x: hidden;
-        overflow-y: auto;
-    }
-    &:after {
-        content: "";
-        position: fixed;
-        height: 100%;
-        width: 100%;
-        top: 0;
-        left: 0;
-        z-index: 999;
-        background: rgba(0, 0, 0, 0.4);
-    }
-}*/
 .tf-styled-checkbox {
     position: relative;
     display: flex;
@@ -835,7 +746,7 @@
         max-width: 550px;
     }
     .tf-hotel-details-qc-gallelry {
-        width: 99% !important;
+        width: 99%;
         max-width: 550px;
     }
     .tf-details-qc-slider-single {

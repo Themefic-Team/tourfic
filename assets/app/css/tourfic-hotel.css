@@ -1216,9 +1216,9 @@
 .single-tf_hotel .tf-single-template__two .tf-review-wrapper .tf-review-data.tf-box .tf-review-data-average p {
   background: #faeedc;
   text-align: center;
-  font-size: 30px !important;
+  font-size: 30px;
   color: #0E3DD8;
-  font-weight: 600 !important;
+  font-weight: 600;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
@@ -1227,6 +1227,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 0;
 }
 
 .single-tf_hotel .tf-single-template__two .tf-review-wrapper .tf-review-data.tf-box .tf-review-data-label p {
@@ -1295,6 +1296,10 @@
   .single-tf_hotel .tf-single-template__two .tf-review-wrapper .tf-review-data.tf-box .tf-review-data-features .tf-progress-item {
     width: 42%;
   }
+}
+
+.single-tf_hotel .tf-single-template__two .tf-review-wrapper .tf-review-data.tf-box .tf-review-data-features .tf-progress-item .tf-review-feature-label p {
+  margin-bottom: 0;
 }
 
 @media only screen and (min-width: 951px) {
@@ -1402,6 +1407,16 @@
   padding: 0px;
 }
 
+.fancybox-slide #tour_room_details_qv.tf-hotel-design-1-popup .tf-hotel-details-qc-gallelry {
+  width: 545px;
+}
+
+@media only screen and (max-width: 991.98px) {
+  .fancybox-slide #tour_room_details_qv.tf-hotel-design-1-popup .tf-hotel-details-qc-gallelry {
+    width: 100%;
+  }
+}
+
 .fancybox-slide #tour_room_details_qv.tf-hotel-design-1-popup .tf-details-qc-slider .tf-details-qcs img {
   width: 100%;
 }
@@ -1432,13 +1447,14 @@
   overflow-y: auto;
 }
 
-@media only screen and (max-width: 767.98px) {
+@media only screen and (max-width: 991.98px) {
   .fancybox-slide #tour_room_details_qv.tf-hotel-design-1-popup .tf-hotel-details-info {
     padding-right: 10px;
     padding-left: 10px;
     margin: 0;
     overflow: auto;
     max-height: none;
+    width: 100%;
   }
 }
 
@@ -1452,12 +1468,12 @@
   border-radius: 5px;
   padding: 5px 10px 5px 0px;
   margin: 4px 5px 4px 0px;
-  color: #686E7A !important;
+  color: #686E7A;
   font-size: 16px;
 }
 
 .fancybox-slide #tour_room_details_qv.tf-hotel-design-1-popup .tf-hotel-details-info .tf-template-1.tf-room-adv-info ul li i {
-  color: #686E7A !important;
+  color: #686E7A;
 }
 
 .fancybox-slide #tour_room_details_qv.tf-hotel-design-1-popup .tf-hotel-details-info .tf-template-1.tf-room-adv-info p {

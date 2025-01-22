@@ -4191,7 +4191,7 @@ class Hotel {
 						$tf_room_gallery = ! empty( $room['gallery'] ) ? $room['gallery'] : '';
 						$child_age_limit = ! empty( $room['children_age_limit'] ) ? $room['children_age_limit'] : "";
 						?>
-                        <div class="tf-hotel-details-qc-gallelry" style="width: 545px;">
+                        <div class="tf-hotel-details-qc-gallelry">
 							<?php
 							if ( $tf_room_gallery ) {
 								$tf_room_gallery_ids = explode( ',', $tf_room_gallery );
