@@ -2,16 +2,17 @@
     .tf-single-template{
         &__two{
             #tf-single-hotel-avail{
-                margin: 0px !important;
+                margin: 0px;
                 .tf_booking-dates{
+                    .tf-field,
                     #check-in-out-date{
-                        background-color: $color-light-bg !important;
-                        padding-top: 3px !important;
-                        padding-bottom: 3px !important;
+                        background-color: $form-input-bg;
+                        padding-top: 3px;
+                        padding-bottom: 3px;
                     }
                     #tf-required {
                         text-align: center;
-                        margin-top: 10px !important;
+                        margin-top: 10px;
                         display: block;
                         b{
                             font-family: inherit;
@@ -32,18 +33,18 @@
         }
         &__three{
             .flatpickr-calendar {
-                left: 320px !important;
+                left: 320px;
                 @media only screen and (max-width: 1920px) {
-                    left: 240px !important;
+                    left: 240px;
                 }
                 @media only screen and (max-width: 1280px) {
-                    left: 100px !important;
+                    left: 100px;
                 }
                 @media only screen and (max-width: 1024px) {
-                    left: 80px !important;
+                    left: 80px;
                 } 
                 @media only screen and (max-width: 660px) {
-                    left: 20px !important;
+                    left: 20px;
                 }
             }
         }

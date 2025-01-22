@@ -39,17 +39,17 @@ a{
         color: $color-text;
     }
     .tf-field {
-        border: none !important;
-        padding: 15px 40px !important;
-        width: 100% !important;
-        background-color: $form-input-bg !important;
-        border-radius: 5px !important;
-        font-size: 14px !important;
-        margin: 0px !important;
-        color: $color-text !important;
+        border: none;
+        padding: 15px 40px;
+        width: 100%;
+        background-color: $form-input-bg;
+        border-radius: 5px;
+        font-size: 14px;
+        margin: 0px;
+        color: $color-text;
         font-family: inherit;
         background-image: none;
-        -moz-appearance: auto !important;
+        -moz-appearance: auto;
         height: auto;
 
         &:focus{
