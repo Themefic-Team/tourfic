@@ -826,18 +826,18 @@
 }
 .single-tf_carrental .tf-single-template__one .tf-date-select-box .tf-date-single-select .tf-select-date .info-select h5 {
   color: #060D1C;
-  font-size: 12px !important;
-  font-weight: 400 !important;
+  font-size: 12px;
+  font-weight: 400;
   margin-top: 0px;
   margin-bottom: 8px;
 }
 .single-tf_carrental .tf-single-template__one .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input {
   min-width: auto;
-  width: 100% !important;
+  width: 100%;
   color: #686E7A;
   font-size: 16px;
   font-weight: 400;
-  border: 0px solid !important;
+  border: 0px solid;
   padding: 0;
 }
 .single-tf_carrental .tf-single-template__one .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input:focus {
@@ -847,16 +847,6 @@
 .single-tf_carrental .tf-single-template__one .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input::placeholder {
   color: #686E7A;
   opacity: 1;
-}
-.single-tf_carrental .tf-single-template__one .tf-date-select-box .tf-date-single-select .tf-select-date .info-select select {
-  min-width: auto;
-  width: 100% !important;
-  color: #686E7A;
-  font-size: 16px;
-  font-weight: 400;
-  border: 0px solid !important;
-  background-color: transparent;
-  padding: 0;
 }
 .single-tf_carrental .tf-single-template__one .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .autocomplete-items {
   position: absolute;
@@ -1086,11 +1076,11 @@
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-price-header h2 del {
   color: #686E7A;
   text-decoration-line: strikethrough;
-  font-weight: 400 !important;
+  font-weight: 400;
 }
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-price-header h2 small.pricing-type {
   color: #686E7A;
-  font-size: 16px !important;
+  font-size: 16px;
   font-weight: 400;
   text-transform: capitalize;
 }
@@ -1108,8 +1098,8 @@
 }
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-extra-added-info .tf-extra-added-box h3 {
   color: #060D1C;
-  font-size: 21px !important;
-  font-weight: 400 !important;
+  font-size: 21px;
+  font-weight: 400;
   margin: 0;
 }
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-extra-added-info .tf-extra-added-box .tf-single-added-extra {
@@ -1120,8 +1110,8 @@
 }
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-extra-added-info .tf-extra-added-box .tf-single-added-extra h4 {
   color: #060D1C;
-  font-size: 16px !important;
-  font-weight: 400 !important;
+  font-size: 16px;
+  font-weight: 400;
   margin: 0;
   width: calc(100% - 148px);
 }
@@ -1149,13 +1139,13 @@
 }
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-add-extra-section h3 {
   color: #060D1C;
-  font-size: 21px !important;
-  font-weight: 400 !important;
+  font-size: 21px;
+  font-weight: 400;
   margin-bottom: 16px;
   margin-top: 0px;
 }
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-add-extra-section .tf-car-extra-infos .tf-car-single-extra {
-  padding: 12px 16px 16px 16px;
+  padding: 12px 16px 16px 0px;
   border-radius: 8px;
   background: #F1F3F4;
 }
@@ -1164,8 +1154,8 @@
 }
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-add-extra-section .tf-car-extra-infos .tf-car-single-extra .tf-extra-title h4 {
   color: #060D1C;
-  font-size: 16px !important;
-  font-weight: 400 !important;
+  font-size: 16px;
+  font-weight: 400;
   margin-bottom: 8px;
 }
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-add-extra-section .tf-car-extra-infos .tf-car-single-extra .tf-extra-title h4 .tf-info-tooltip {
@@ -1210,8 +1200,8 @@
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-add-extra-section .tf-car-extra-infos .tf-car-single-extra .tf-extra-title h4 .tf-info-tooltip .tf-info-tooltip-content p {
   color: #ffffff;
   text-align: center;
-  font-size: 13px !important;
-  font-weight: 600 !important;
+  font-size: 13px;
+  font-weight: 600;
   margin: 0;
 }
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-add-extra-section .tf-car-extra-infos .tf-car-single-extra .tf-extra-title .acr-select {
@@ -1236,24 +1226,29 @@
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-add-extra-section .tf-car-extra-infos .tf-car-single-extra .tf-extra-title .acr-select input {
   color: #686E7A;
   font-size: 16px;
-  width: 18px !important;
+  width: 18px;
   cursor: not-allowed;
   background: transparent;
   border: 0px solid;
   padding: 0;
+  text-align: center;
+}
+.single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-add-extra-section .tf-car-extra-infos .tf-car-single-extra .tf-extra-title .acr-select input:focus {
+  box-shadow: none;
+  outline: none;
 }
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-add-extra-section .tf-car-extra-infos .tf-car-single-extra .tf-extra-price {
   text-align: right;
 }
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-add-extra-section .tf-car-extra-infos .tf-car-single-extra .tf-extra-price h4 {
   color: #060D1C;
-  font-size: 21px !important;
-  font-weight: 400 !important;
+  font-size: 21px;
+  font-weight: 400;
   margin-bottom: 8px;
 }
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-add-extra-section .tf-car-extra-infos .tf-car-single-extra .tf-extra-price h4 small {
   display: block;
-  font-size: 16px !important;
+  font-size: 16px;
   color: #686E7A;
 }
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-add-extra-section .tf-car-extra-infos .tf-extra-apply-btn {
@@ -1281,14 +1276,14 @@
 }
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-driver-details .tf-driver-details-header h3 {
   color: #27333F;
-  font-size: 21px !important;
-  font-weight: 400 !important;
+  font-size: 21px;
+  font-weight: 400;
   margin: 0;
 }
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-driver-details .tf-driver-details-header span {
   color: #0E3DD8;
-  font-size: 16px !important;
-  font-weight: 400 !important;
+  font-size: 16px;
+  font-weight: 400;
 }
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-driver-details .tf-driver-details-header span i {
   color: #0E3DD8;
@@ -1304,14 +1299,14 @@
 }
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-driver-details .tf-driver-photo .tf-driver-info h4 {
   color: #060D1C;
-  font-size: 16px !important;
-  font-weight: 700 !important;
+  font-size: 16px;
+  font-weight: 700;
   margin: 0;
 }
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-driver-details .tf-driver-photo .tf-driver-info p {
   color: #686E7A;
-  font-size: 16px !important;
-  font-weight: 400 !important;
+  font-size: 16px;
+  font-weight: 400;
   margin: 0;
 }
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-driver-details .tf-driver-photo .tf-driver-info .tf-driver-contact-info {
@@ -1370,8 +1365,8 @@
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-driver-details .tf-driver-photo .tf-driver-info .tf-driver-contact-info ul li a .tf-tooltip-info p {
   color: #ffffff;
   text-align: center;
-  font-size: 12px !important;
-  font-weight: 400 !important;
+  font-size: 12px;
+  font-weight: 400;
 }
 
 .post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-car-banner,
