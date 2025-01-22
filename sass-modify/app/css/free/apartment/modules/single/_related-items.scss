@@ -3,7 +3,7 @@
         &__one{
             .tf-related-apartment {
                 .slick-track {
-                    margin: 0 !important;
+                    margin: 0;
                 }
             
                 .slick-arrow {
@@ -56,7 +56,7 @@
                 }
             
                 .tf-apartment-item {
-                    margin: 0 8px !important;
+                    margin: 0 8px;
             
                     .tf-apartment-item-thumb {
                         overflow: hidden;
@@ -83,13 +83,13 @@
                         }
             
                         h3 {
-                            font-size: 18px !important;
+                            font-size: 18px;
                             color: $color-heading;
                             margin: 0;
                         }
             
                         span {
-                            font-size: 14px !important;
+                            font-size: 14px;
                             color: $color-gray;
                             margin: 0;
                         }
