@@ -71,16 +71,17 @@
 }
 
 .single-tf_hotel .tf-single-template__two #tf-single-hotel-avail {
-  margin: 0px !important;
+  margin: 0px;
 }
+.single-tf_hotel .tf-single-template__two #tf-single-hotel-avail .tf_booking-dates .tf-field,
 .single-tf_hotel .tf-single-template__two #tf-single-hotel-avail .tf_booking-dates #check-in-out-date {
-  background-color: #faeedc !important;
-  padding-top: 3px !important;
-  padding-bottom: 3px !important;
+  background-color: #F3F7FA;
+  padding-top: 3px;
+  padding-bottom: 3px;
 }
 .single-tf_hotel .tf-single-template__two #tf-single-hotel-avail .tf_booking-dates #tf-required {
   text-align: center;
-  margin-top: 10px !important;
+  margin-top: 10px;
   display: block;
 }
 .single-tf_hotel .tf-single-template__two #tf-single-hotel-avail .tf_booking-dates #tf-required b {
@@ -97,26 +98,26 @@
   background-color: #faeedc;
 }
 .single-tf_hotel .tf-single-template__three .flatpickr-calendar {
-  left: 320px !important;
+  left: 320px;
 }
 @media only screen and (max-width: 1920px) {
   .single-tf_hotel .tf-single-template__three .flatpickr-calendar {
-    left: 240px !important;
+    left: 240px;
   }
 }
 @media only screen and (max-width: 1280px) {
   .single-tf_hotel .tf-single-template__three .flatpickr-calendar {
-    left: 100px !important;
+    left: 100px;
   }
 }
 @media only screen and (max-width: 1024px) {
   .single-tf_hotel .tf-single-template__three .flatpickr-calendar {
-    left: 80px !important;
+    left: 80px;
   }
 }
 @media only screen and (max-width: 660px) {
   .single-tf_hotel .tf-single-template__three .flatpickr-calendar {
-    left: 20px !important;
+    left: 20px;
   }
 }
 
@@ -254,10 +255,10 @@
   position: relative;
 }
 .single-tf_hotel .tf-single-template__one .single-slider-wrapper .slick-slide-item img {
-  width: 100% !important;
+  width: 100%;
 }
 .single-tf_hotel .tf-single-template__one .single-slider-wrapper a.slick-slide-item-link {
-  width: 100% !important;
+  width: 100%;
 }
 .single-tf_hotel .tf-single-template__one .single-slider-wrapper .swiper-button-prev,
 .single-tf_hotel .tf-single-template__one .single-slider-wrapper .swiper-button-next {
@@ -279,7 +280,7 @@
 }
 .single-tf_hotel .tf-single-template__one .single-slider-wrapper .swiper-button-prev {
   left: 20px;
-  background-image: none !important;
+  background-image: none;
 }
 .single-tf_hotel .tf-single-template__one .single-slider-wrapper .swiper-button-next {
   right: 20px;
@@ -662,7 +663,7 @@
 .single-tf_hotel .tf-single-template__one .nearby-container h3 {
   margin: 0;
   text-transform: capitalize;
-  font-size: 22px !important;
+  font-size: 22px;
 }
 .single-tf_hotel .tf-single-template__one .nearby-container ul {
   padding-left: 5px;
@@ -1147,7 +1148,7 @@
   }
 }
 .single-tf_hotel .tf-single-template__two .tf-hotel-location-map .tf-hotel-location-preview iframe {
-  height: 260px !important;
+  height: 260px;
 }
 .single-tf_hotel .tf-single-template__two .tf-hotel-location-map .tf-hotel-location-preview a.map-pre {
   position: absolute;
@@ -1172,42 +1173,47 @@
   font-size: 20px;
 }
 
-.tf-hotel-design-1-popup {
-  padding: 0px !important;
+.fancybox-slide #tour_room_details_qv.tf-hotel-design-1-popup {
+  padding: 0px;
 }
-.tf-hotel-design-1-popup .tf-details-qc-slider .tf-details-qcs img {
+.fancybox-slide #tour_room_details_qv.tf-hotel-design-1-popup .tf-details-qc-slider .tf-details-qcs img {
   width: 100%;
 }
-.tf-hotel-design-1-popup .tf-details-qc-slider-nav {
+.fancybox-slide #tour_room_details_qv.tf-hotel-design-1-popup .tf-details-qc-slider-nav {
   margin-top: 0px;
 }
-.tf-hotel-design-1-popup .tf-details-qc-slider-nav .tf-details-qcs.is-active img {
+.fancybox-slide #tour_room_details_qv.tf-hotel-design-1-popup .tf-details-qc-slider-nav .tf-details-qcs.is-active img {
   border: 5px solid #0E3DD8;
 }
-.tf-hotel-design-1-popup .tf-details-qc-slider-nav .tf-details-qcs img {
+.fancybox-slide #tour_room_details_qv.tf-hotel-design-1-popup .tf-details-qc-slider-nav .tf-details-qcs img {
   min-height: 50px;
   max-height: 50px;
 }
-.tf-hotel-design-1-popup .fancybox-button.fancybox-close-small {
+.fancybox-slide #tour_room_details_qv.tf-hotel-design-1-popup .fancybox-button.fancybox-close-small {
   right: 20px;
 }
-.tf-hotel-design-1-popup .tf-hotel-details-info {
+.fancybox-slide #tour_room_details_qv.tf-hotel-design-1-popup .tf-hotel-details-info {
   padding-right: 25px;
+  width: 440px;
+  padding-left: 35px;
+  max-height: 470px;
+  padding-top: 25px;
+  overflow-y: auto;
 }
 @media only screen and (max-width: 767.98px) {
-  .tf-hotel-design-1-popup .tf-hotel-details-info {
+  .fancybox-slide #tour_room_details_qv.tf-hotel-design-1-popup .tf-hotel-details-info {
     padding-right: 10px;
-    padding-left: 10px !important;
-    margin: 0 !important;
-    overflow: auto !important;
-    max-height: none !important;
+    padding-left: 10px;
+    margin: 0;
+    overflow: auto;
+    max-height: none;
   }
 }
-.tf-hotel-design-1-popup .tf-hotel-details-info .tf-template-1.tf-room-adv-info ul {
+.fancybox-slide #tour_room_details_qv.tf-hotel-design-1-popup .tf-hotel-details-info .tf-template-1.tf-room-adv-info ul {
   margin: 0;
   padding: 0;
 }
-.tf-hotel-design-1-popup .tf-hotel-details-info .tf-template-1.tf-room-adv-info ul li {
+.fancybox-slide #tour_room_details_qv.tf-hotel-design-1-popup .tf-hotel-details-info .tf-template-1.tf-room-adv-info ul li {
   display: inline-block;
   border-radius: 5px;
   padding: 5px 10px 5px 0px;
@@ -1215,14 +1221,14 @@
   color: #686E7A !important;
   font-size: 16px;
 }
-.tf-hotel-design-1-popup .tf-hotel-details-info .tf-template-1.tf-room-adv-info ul li i {
+.fancybox-slide #tour_room_details_qv.tf-hotel-design-1-popup .tf-hotel-details-info .tf-template-1.tf-room-adv-info ul li i {
   color: #686E7A !important;
 }
-.tf-hotel-design-1-popup .tf-hotel-details-info .tf-template-1.tf-room-adv-info p {
+.fancybox-slide #tour_room_details_qv.tf-hotel-design-1-popup .tf-hotel-details-info .tf-template-1.tf-room-adv-info p {
   margin: 10px 0px;
   color: #686E7A;
 }
-.tf-hotel-design-1-popup .tf-hotel-details-info .tf-template-1.tf-room-adv-info h4 {
+.fancybox-slide #tour_room_details_qv.tf-hotel-design-1-popup .tf-hotel-details-info .tf-template-1.tf-room-adv-info h4 {
   font-size: 20px;
   margin: 15px 0px 10px 0px;
   color: #060D1C;

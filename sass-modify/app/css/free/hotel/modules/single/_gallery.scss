@@ -5,11 +5,11 @@
                 position: relative;
                 .slick-slide-item{
                     img{
-                        width: 100% !important;
+                        width: 100%;
                     }
                 }
                 a.slick-slide-item-link {
-                    width: 100% !important;
+                    width: 100%;
                 }
                 .swiper-button-prev,
                 .swiper-button-next {
@@ -30,7 +30,7 @@
                 }
                 .swiper-button-prev {
                     left: 20px;
-                    background-image: none !important;
+                    background-image: none;
                 }
                 .swiper-button-next {
                     right: 20px;
