@@ -197,7 +197,7 @@
                     margin-top: 16px;
                     display: none;
                     @media #{$max767}{
-                        display: none !important;
+                        display: none;
                     }
                     .tf-cancellation-timeline{
                         margin-top: 12px;

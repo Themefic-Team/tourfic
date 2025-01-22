@@ -83,14 +83,14 @@
 }
 @media only screen and (max-width: 640px) {
   .single-tf_carrental .tf-single-template__one .tf-car-hero-gallery .tf-featured-car .tf-wish-and-share .tf-off-canvas-share-box .share-car-content {
-    left: auto !important;
+    left: auto;
     right: 0px;
   }
 }
 @media only screen and (max-width: 480px) {
   .single-tf_carrental .tf-single-template__one .tf-car-hero-gallery .tf-featured-car .tf-wish-and-share .tf-off-canvas-share-box .share-car-content {
-    left: 0 !important;
-    right: auto !important;
+    left: 0;
+    right: auto;
   }
 }
 .single-tf_carrental .tf-single-template__one .tf-car-hero-gallery .tf-featured-car .tf-wish-and-share .tf-off-canvas-share-box .share-car-content .tf-dropdown-share-content {
@@ -109,7 +109,7 @@
   right: 0;
 }
 .single-tf_carrental .tf-single-template__one .tf-car-hero-gallery .tf-featured-car .tf-wish-and-share .tf-off-canvas-share-box .share-car-content .tf-dropdown-share-content h4 {
-  font-size: 14px !important;
+  font-size: 14px;
   color: #0E3DD8;
   font-weight: 600;
   margin-bottom: 10px;
@@ -133,11 +133,11 @@
   font-size: 22px;
 }
 .single-tf_carrental .tf-single-template__one .tf-car-hero-gallery .tf-featured-car .tf-wish-and-share .tf-off-canvas-share-box .share-car-content .tf-dropdown-share-content ul li a:hover {
-  background: transparent !important;
+  background: transparent;
 }
 .single-tf_carrental .tf-single-template__one .tf-car-hero-gallery .tf-featured-car .tf-wish-and-share .tf-off-canvas-share-box .share-car-content .tf-dropdown-share-content ul li button {
-  padding: 10px 8px !important;
-  background-color: transparent !important;
+  padding: 10px 8px;
+  background-color: transparent;
   border: 0px solid;
   font-size: 22px !important;
   cursor: pointer;
@@ -156,7 +156,7 @@
 }
 @media only screen and (max-width: 640px) {
   .single-tf_carrental .tf-single-template__one .tf-car-hero-gallery .tf-featured-car .tf-wish-and-share .tf-off-canvas-share-box .share-car-content .tf-dropdown-share-content ul li input {
-    display: contents !important;
+    display: contents;
   }
 }
 .single-tf_carrental .tf-single-template__one .tf-car-hero-gallery .tf-gallery {
@@ -625,7 +625,7 @@
 }
 .single-tf_carrental .tf-single-template__one .tf-review-section h3 {
   color: #060D1C;
-  font-size: 21px !important;
+  font-size: 21px;
   font-weight: 400;
   margin-bottom: 16px;
   margin-top: 0px;
@@ -641,23 +641,23 @@
 }
 .single-tf_carrental .tf-single-template__one .tf-review-section .tf-review-form-container {
   min-width: auto;
-  background: transparent !important;
+  background: transparent;
 }
 .single-tf_carrental .tf-single-template__one .tf-review-section .tf-review-form-container .tf-visitor-info {
-  margin: 20px 0px !important;
+  margin: 20px 0px;
 }
 .single-tf_carrental .tf-single-template__one .tf-review-section .tf-review-form-container .tf-rating-wrapper {
   margin-bottom: 20px;
 }
 .single-tf_carrental .tf-single-template__one .tf-review-section .tf-review-form-container .tf-review-submit input[type=submit] {
-  padding: 16px 32px !important;
-  border-radius: 8px !important;
-  background: #0E3DD8 !important;
-  color: #ffffff !important;
-  font-size: 16px !important;
+  padding: 16px 32px;
+  border-radius: 8px;
+  background: #0E3DD8;
+  color: #ffffff;
+  font-size: 16px;
   font-weight: 700;
   cursor: pointer;
-  border: 0px solid !important;
+  border: 0px solid;
 }
 .single-tf_carrental .tf-single-template__one .tf-review-section .tf-review-data {
   margin-bottom: 32px;
@@ -715,7 +715,7 @@
 .single-tf_carrental .tf-single-template__one .tf-review-section .tf-review-data-features .tf-review-feature-label p {
   margin: 0;
   color: #686E7A;
-  font-size: 12px !important;
+  font-size: 12px;
   font-weight: 400;
   text-transform: capitalize;
 }
@@ -752,12 +752,12 @@
 .single-tf_carrental .tf-single-template__one .tf-review-section .tf-clients-reviews .tf-reviews-item .tf-reviews-text .tf-reviews-meta {
   color: #686E7A;
   font-size: 16px;
-  font-weight: 700 !important;
+  font-weight: 700;
 }
 .single-tf_carrental .tf-single-template__one .tf-review-section .tf-clients-reviews .tf-reviews-item .tf-reviews-text .tf-reviews-meta span {
   color: #686E7A;
   font-size: 16px;
-  font-weight: 400 !important;
+  font-weight: 400;
 }
 .single-tf_carrental .tf-single-template__one .tf-review-section .tf-clients-reviews .tf-reviews-item .tf-reviews-text p {
   color: #686E7A;
@@ -965,7 +965,7 @@
 }
 @media only screen and (max-width: 767.98px) {
   .single-tf_carrental .tf-single-template__one .tf-date-select-box .tf-cancellation-box {
-    display: none !important;
+    display: none;
   }
 }
 .single-tf_carrental .tf-single-template__one .tf-date-select-box .tf-cancellation-box .tf-cancellation-timeline {
