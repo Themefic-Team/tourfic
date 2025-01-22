@@ -261,9 +261,11 @@ use \Tourfic\Classes\Apartment\Apartment;
                                             </a>
                                         </div>
                                         <div class="tf-apartment-room-item-content">
+                                            <?php if(!empty($room['title'])){ ?>
                                             <a href="#" class="tf-apt-room-qv" data-id="<?php echo esc_attr( $key ); ?>" data-post-id="<?php echo esc_attr( $post_id ); ?>">
                                                 <h3><?php echo esc_html( $room['title'] ) ?></h3>
                                             </a>
+                                            <?php } ?>
                                             <p class="tf-apartment-room-item-price">
 												<?php echo ! empty( $room['price'] ) ? '<span>' . esc_html( $room['price'] ) . '</span>' : ''; ?>
 												<?php echo ! empty( $room['price_label'] ) ? '<span>' . esc_html( $room['price_label'] ) . '</span>' : ''; ?>
@@ -313,7 +315,9 @@ use \Tourfic\Classes\Apartment\Apartment;
 											?>
                                             <div class="tf-apt-amenity">
 												<?php echo ! empty( $feature_meta['apartment-feature-icon'] ) || !empty($feature_meta['apartment-feature-icon-custom']) ? "<div class='tf-apt-amenity-icon'>" . wp_kses_post( $feature_icon ) . "</div>" : ""; ?>
+                                                <?php if(!empty($feature->name)){ ?>
                                                 <span><?php echo esc_html( $feature->name ); ?></span>
+                                                <?php } ?>
                                             </div>
 										<?php endforeach; ?>
 									<?php endif; ?>
