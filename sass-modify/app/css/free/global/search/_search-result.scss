@@ -16,7 +16,7 @@
     .tf-search-left {
         padding-right: 15px;
         @media only screen and (max-width: 659px) {
-            padding: 0 !important;
+            padding: 0;
         }
         .tf-action-top {
             display: flex;
@@ -108,7 +108,7 @@
                         justify-content: space-evenly;
                         width: 100%;
                         font-size: 12px;
-                        margin-top: 5px !important;
+                        margin-top: 5px;
                 
                         .default-single-tag {
                             padding: 6px 12px;
@@ -204,7 +204,7 @@
                                 margin-bottom: 4px;
                                 .tourfic_hotel-title {
                                     display: inline-block;
-                                    margin: 0 !important;
+                                    margin: 0;
                                     padding-right: 2px;
                                     &:hover {
                                         color: $color-secondary;
@@ -283,7 +283,7 @@
         .archive_ajax_result {
             @media #{$max991} {
                 .single-tour-wrap {
-                    width: 100% !important;
+                    width: 100%;
                     flex: none;
                     margin-bottom: 20px;
                 }
@@ -399,7 +399,7 @@
     .tf-search-right {
         padding-left: 15px;
         @media only screen and (max-width: 659px) {
-            padding: 0 !important;
+            padding: 0;
             grid-row: 1;
         }
     }
@@ -410,7 +410,7 @@
     background: $color-white;
     border-radius: 10px;
     margin-bottom: 20px;
-    padding: 0px !important;
+    padding: 0px;
     .tf-hotel-result-price-range,
     .tf-tour-result-price-range,
     .tf-apartment-result-price-range{
@@ -425,39 +425,39 @@
     .al-range-slider__track {
         background: $color-gray-light;
         height: 10px;
-        box-shadow: none !important;
+        box-shadow: none;
         margin: 30px 0px 10px 0px;
     }
     .al-range-slider_dark {
-        padding: 0px !important;
+        padding: 0px;
         .al-range-slider__bar {
-            background: $color-primary !important;
-            box-shadow: none !important;
+            background: $color-primary;
+            box-shadow: none;
         }
     }
     .al-range-slider__knob {
-        background: $color-primary !important;
+        background: $color-primary;
         height: 15px;
         width: 15px;
-        box-shadow: none !important;
-        border: 3px solid $color-primary !important;
+        box-shadow: none;
+        border: 3px solid $color-primary;
         &:first-child {
             span {
-                left: 10px !important;
+                left: 10px;
             }
         }
     }
     .al-range-slider__tooltip {
-        background: $color-primary !important;
+        background: $color-primary;
         border-radius: 5px;
         box-shadow: none;
         padding: 3px 10px;
-        color: $color-white !important;
-        font-size: 13px !important;
-        margin-bottom: 0px !important;
+        color: $color-white;
+        font-size: 13px;
+        margin-bottom: 0px;
     }
     .al-range-slider__input.js-al-range-slider__input {
-        display: none !important;
+        display: none;
     }
     .tf-widget-title {
         display: flex;
@@ -511,7 +511,7 @@
                 width: 100%;
                 display: inline-block;
                 padding-left: 25px;
-                font-weight: 400 !important;
+                font-weight: 400;
                 input{
                     display: none;
                 }
@@ -528,7 +528,7 @@
             }
     
             input[type=checkbox] {
-                display: none !important;
+                display: none;
             }
     
             label:hover input~.tf-checkmark {
@@ -596,7 +596,7 @@
             width: 100%;
             display: inline-block;
             padding-left: 25px;
-            font-weight: 400 !important;
+            font-weight: 400;
         }
         .tf-checkmark {
             position: absolute;
@@ -610,7 +610,7 @@
         }
 
         input[type=checkbox] {
-            display: none !important;
+            display: none;
         }
 
         label:hover input~.tf-checkmark {
