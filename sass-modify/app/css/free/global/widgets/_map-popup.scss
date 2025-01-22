@@ -135,7 +135,7 @@
             .tf-map-item {
 
                 &:focus-visible{
-                    outline: none !important;
+                    outline: none;
                 }
 
                 .tf-map-item-thumb {
@@ -144,8 +144,8 @@
                     position: relative;
 
                     a{
-                        outline: none !important;
-                        box-shadow: none !important;
+                        outline: none;
+                        box-shadow: none;
                     }
 
                     img {
@@ -153,8 +153,8 @@
                         width: 100%;
                         object-fit: cover;
                         border-radius: 4px;
-                        outline: none !important;
-                        box-shadow: none !important;
+                        outline: none;
+                        box-shadow: none;
                     }
 
                     .tf-map-item-discount {
@@ -181,7 +181,7 @@
                         font-size: 16px;
                         font-weight: 500;
                         line-height: 20px;
-                        margin: 0 !important;
+                        margin: 0;
                         text-transform: capitalize;
 
                         a {
@@ -275,7 +275,7 @@
             margin-bottom: 16px;
 
             .tf-total-results {
-                margin: 0 !important;
+                margin: 0;
                 font-size: 16px;
                 font-weight: 500;
 
@@ -334,7 +334,7 @@
             overflow-y: auto;
 
             .single-tour-inner{
-                margin: 0 !important;
+                margin: 0;
             }
 
             @media #{$max1440} {
@@ -583,7 +583,7 @@
                 cursor: pointer;
 
                 @media #{$max1024}{
-                    font-size: 12px !important;
+                    font-size: 12px;
                 }
             }
         }
@@ -673,7 +673,7 @@
                 background: inherit;
                 border-radius: 0;
                 margin-bottom: 32px;
-                padding: 0px !important;
+                padding: 0px;
 
                 .tf-widget-title {
                     background-color: inherit;
@@ -746,14 +746,14 @@
                         }
 
                         li.active {
-                            background: transparent !important;
+                            background: transparent;
                         }
                     }
 
                     a.see-more,
                     a.see-less{
                         text-align: left;
-                        color: $color-primary !important;
+                        color: $color-primary;
                         text-transform: capitalize;
                         font-weight: 400;
                         text-decoration: none;
@@ -831,11 +831,11 @@
                 padding: 8px;
 
                 .tf-title-meta p{
-                    margin: 0 !important;
+                    margin: 0;
                 }
                 .tf-title h2{
-                    margin: 0 !important;
-                    font-size: 16px !important;
+                    margin: 0;
+                    font-size: 16px;
                 }
                 .tf-details,
                 .tf-archive-features,
@@ -921,17 +921,17 @@
             }
 
             .tf-room-info-list{
-                margin-bottom: 24px !important;
+                margin-bottom: 24px;
             }
             .tf-option-list{
-                margin-bottom: 24px !important;
-                display: flex !important;
+                margin-bottom: 24px;
+                display: flex;
                 flex-direction: column;
                 gap: 12px 5px;
             }
 
             .tf-available-room-content {
-                width: 100% !important;
+                width: 100%;
                 padding-bottom: 0;
 
                 &:last-child .tf-room-options-content-inner{
@@ -959,9 +959,9 @@
                     margin-bottom: 16px;
                 }
                 h2{
-                    font-weight: 700 !important;
+                    font-weight: 700;
                     margin-bottom: 8px;
-                    font-size: 14px !important;
+                    font-size: 14px;
                 }
                 .tf-title-location {
                     display: inline-flex;
@@ -1007,7 +1007,7 @@
                         line-height: 31.20px;
                         text-align: right;
                         .amount{
-                            font-weight: 400 !important;
+                            font-weight: 400;
                         }
                         .discount-price{
                             color: $color-text;
@@ -1018,7 +1018,7 @@
                             display: inline-flex;
                             gap: 2px;
                             .amount{
-                                font-weight: normal !important;
+                                font-weight: normal;
                             }
                         }
                         .sale-price{
@@ -1046,7 +1046,7 @@
                 }
             }
             .roomselectissue{
-                text-align: right !important;
+                text-align: right;
             }
             button,
             a.tf_air_service,
@@ -1084,8 +1084,8 @@
             display: flow-root;
         }
         .tf-available-room-gallery{
-            min-width: auto !important;
-            max-width: none !important;
+            min-width: auto;
+            max-width: none;
             display: grid;
             grid-template-columns: 2fr 1fr;
             .tf-room-image{
@@ -1102,7 +1102,7 @@
                 gap: 10px;
                 .tf-room-gallery{
                     height: 66px;
-                    width: 100% !important;
+                    width: 100%;
                     img{
                         height: 66px;
                         width: 100%;
@@ -1115,11 +1115,11 @@
             grid-template-columns: 1fr;
         }
         .tf-available-room-content{
-            width: auto !important;
+            width: auto;
             display: flow-root;
             padding: 16px;
             .tf-available-room-content-left{
-                width: 100% !important;
+                width: 100%;
                 .room-heading-price{
                     display: flex;
                     justify-content: space-between;
@@ -1127,7 +1127,7 @@
                     margin-bottom: 16px;
                     h2{
                         margin: 0;
-                        font-size: 20px !important;
+                        font-size: 20px;
                     }
                     .tf-available-room-price{
                         display: flex;
@@ -1163,7 +1163,7 @@
                 }
             }
             .tf-available-room-content-right{
-                width: 100% !important;
+                width: 100%;
                 align-items: start;
 
                 a.availability{
@@ -1222,7 +1222,7 @@
                         padding: 12px 32px;
                     }
                     @media #{$max1200}{
-                        font-size: 12px !important;
+                        font-size: 12px;
                     }
                 }
             }
