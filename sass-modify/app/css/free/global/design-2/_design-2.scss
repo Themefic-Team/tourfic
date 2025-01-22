@@ -139,6 +139,16 @@
                 color: $color-primary;
             }
         }
+        //share
+        .tf-share {
+            .share-tour-content {
+                input#share_link_input {
+                    opacity: 0; 
+                    width: 0;
+                    margin: 0px;
+                }
+            }
+        }
         // Gallery
         .tf-hero-gallery{
             width: 100%;
