@@ -43,21 +43,21 @@
                                 position: relative;
                                 h5{
                                     color: $color-heading;
-                                    font-size: 12px !important;
-                                    font-weight: 400 !important;
+                                    font-size: 12px;
+                                    font-weight: 400;
                                     margin-bottom: 8px;
                                     margin-top: 0px;
                                 }
                                 input{
                                     min-width: auto;
-                                    width: 100% !important;
+                                    width: 100%;
                                     color: $color-text;
                                     font-size: 16px;
                                     font-weight: 400;
-                                    border: 0px solid !important;
+                                    border: 0px solid;
                                     padding-left: 0px;
                                     box-shadow: none;
-                                    background: transparent !important;
+                                    background: transparent;
                                     &:focus{
                                         outline: none;
                                         box-shadow: none;
@@ -65,15 +65,6 @@
                                     &::placeholder{
                                         color: $color-text;
                                     }
-                                }
-                                select{
-                                    min-width: auto;
-                                    width: 100% !important;
-                                    color: $color-text;
-                                    font-size: 16px;
-                                    font-weight: 400;
-                                    border: 0px solid !important;
-                                    background-color: transparent;
                                 }
                                 .autocomplete-items{
                                     position: absolute;
@@ -118,27 +109,6 @@
                                         }
                                         &:hover{
                                             background-color: $color-light-bg;
-                                        }
-                                    }
-                                }
-                                .tf_selectperson-wrap{
-                                    padding: 3px 0px !important;
-                                    border: 0px solid;
-                                    input{
-                                        width: 50px !important;
-                                        padding: 0 !important;
-                                        text-align: center;
-                                    }
-                                    .tf_input-inner > div{
-                                        color: $color-text;
-                                        font-size: 16px;
-                                        font-weight: 400;
-                                    }
-                                    .tf_acrselection-wrap{
-                                        left: 0;
-                                        .acr-dec,
-                                        .acr-inc{
-                                            padding: 0;
                                         }
                                     }
                                 }

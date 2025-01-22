@@ -80,7 +80,7 @@
                     @include flexbox();
                     @include align-items(center);
                     h4{
-                        font-size: 18px !important;
+                        font-size: 18px;
                     }
                 }
                 .tf-faq-title.active {
@@ -144,7 +144,7 @@
                     }
                     h3{
                         color: $color-heading;
-                        font-size: 21px !important;
+                        font-size: 21px;
                         font-weight: 400;
                         margin-bottom: 16px;
                         margin-top: 0px;
@@ -152,8 +152,8 @@
                     .tf-car-title{
                         h1{
                             color: $color-heading;
-                            font-size: 28px !important;
-                            font-weight: 600 !important;
+                            font-size: 28px;
+                            font-weight: 600;
                             margin-bottom: 10px;
                         }
                         .breadcrumb{
@@ -211,8 +211,8 @@
                         flex-wrap: nowrap;
                         h3{
                             color: $color-heading;
-                            font-size: 21px !important;
-                            font-weight: 700 !important;
+                            font-size: 21px;
+                            font-weight: 700;
                             margin: 0;
                             text-align: left;
                         }
@@ -263,9 +263,9 @@
     .tf-single-template{
         &__one{
             .section-heading {
-                font-weight: 600 !important;
-                font-size: 24px !important;
-                line-height: 32px !important;
+                font-weight: 600;
+                font-size: 24px;
+                line-height: 32px;
                 margin: 0 0 16px 0;
                 color: $color-heading;
             }
@@ -350,8 +350,8 @@
                     margin-bottom: 24px;
                     h3{
                         color: $color-heading;
-                        font-size: 21px !important;
-                        font-weight: 700 !important;
+                        font-size: 21px;
+                        font-weight: 700;
                         margin: 0;
                     }
                     .tf-close-popup{
@@ -384,13 +384,13 @@
                             margin: 0;
                             padding: 0;
                             li{
-                                color: $color-text !important;
-                                font-size: 16px !important;
-                                font-weight: 400 !important;
+                                color: $color-text;
+                                font-size: 16px;
+                                font-weight: 400;
                                 padding: 0 8px 8px 8px;
                                 display: inline-block;
                                 cursor: pointer;
-                                width: auto !important;
+                                width: auto;
                                 &.active{
                                     color: $color-primary;
                                     border-bottom: 2px solid $color-primary;
@@ -578,8 +578,8 @@
                                                 p{
                                                     color: $color-white;
                                                     text-align: center;
-                                                    font-size: 13px !important;
-                                                    font-weight: 600 !important;
+                                                    font-size: 13px;
+                                                    font-weight: 600;
                                                 }
                                             }
                                         }
@@ -611,7 +611,7 @@
                                 }
                                 label{
                                     color: $color-text;
-                                    font-size: 12px !important;
+                                    font-size: 12px;
                                     font-weight: 700;
                                     margin-bottom: 8px;
                                 }
@@ -666,7 +666,7 @@
                                 cursor: pointer;
                                 transition: .3s all ease;
                                 &:hover{
-                                    background: $color-secondary !important;
+                                    background: $color-secondary;
                                 }
                             }
                         }
@@ -686,11 +686,11 @@
                             cursor: pointer;
                         }
                         button.with-charge{
-                            background-color: $color-primary !important;
-                            color: $color-white !important;
+                            background-color: $color-primary;
+                            color: $color-white;
                             transition: .3s all ease;
                             &:hover{
-                                background: $color-secondary !important;
+                                background: $color-secondary;
                             }
                         }
                     }
@@ -769,20 +769,20 @@
                     position: relative;
                     h5{
                         color: $color-heading;
-                        font-size: 12px !important;
-                        font-weight: 400 !important;
+                        font-size: 12px;
+                        font-weight: 400;
                         margin-bottom: 8px;
                         margin-top: 0px;
                     }
                     input{
                         min-width: auto;
-                        width: 100% !important;
+                        width: 100%;
                         color: $color-text;
                         font-size: 16px;
-                        border: 0px solid !important;
+                        border: 0px solid;
                         padding-left: 0px;
                         box-shadow: none;
-                        background: transparent !important;
+                        background: transparent;
                         &:focus{
                             outline: none;
                             box-shadow: none;
@@ -793,10 +793,10 @@
                     }
                     select{
                         min-width: auto;
-                        width: 100% !important;
+                        width: 100%;
                         color: $color-text;
                         font-size: 16px;
-                        border: 0px solid !important;
+                        border: 0px solid;
                         background-color: transparent;
                     }
                     .autocomplete-items{
@@ -846,11 +846,11 @@
                         }
                     }
                     .tf_selectperson-wrap{
-                        padding: 3px 0px !important;
+                        padding: 3px 0px;
                         border: 0px solid;
                         input{
-                            width: 50px !important;
-                            padding: 0 !important;
+                            width: 50px;
+                            padding: 0;
                             text-align: center;
                         }
                         .tf_input-inner > div{

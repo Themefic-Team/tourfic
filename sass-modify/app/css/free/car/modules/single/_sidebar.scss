@@ -19,11 +19,11 @@
                         del{
                             color: $color-text;
                             text-decoration-line: strikethrough;
-                            font-weight: 400 !important;
+                            font-weight: 400;
                         }
                         small.pricing-type{
                             color: $color-text;
-                            font-size: 16px !important;
+                            font-size: 16px;
                             font-weight: 400;
                             text-transform: capitalize;
                         }
@@ -43,8 +43,8 @@
                     .tf-extra-added-box{
                         h3{
                             color: $color-heading;
-                            font-size: 21px !important;
-                            font-weight: 400 !important;
+                            font-size: 21px;
+                            font-weight: 400;
                             margin: 0;
                         }
                         .tf-single-added-extra{
@@ -54,8 +54,8 @@
                             gap: 8px;
                             h4{
                                 color: $color-heading;
-                                font-size: 16px !important;
-                                font-weight: 400 !important;
+                                font-size: 16px;
+                                font-weight: 400;
                                 margin: 0;
                                 width: calc(100% - 148px);
                             }
@@ -85,22 +85,22 @@
                     margin-bottom: 32px;
                     h3{
                         color: $color-heading;
-                        font-size: 21px !important;
-                        font-weight: 400 !important;
+                        font-size: 21px;
+                        font-weight: 400;
                         margin-bottom: 16px;
                         margin-top: 0px;
                     }
                     .tf-car-extra-infos{
                         .tf-car-single-extra{
-                            padding: 12px 16px 16px 16px;
+                            padding: 12px 16px 16px 0px;
                             border-radius: 8px;
                             background: $color-gray-light;
                             .tf-extra-title{
                                 width: calc(100% - 95px);
                                 h4{
                                     color: $color-heading;
-                                    font-size: 16px !important;
-                                    font-weight: 400 !important;
+                                    font-size: 16px;
+                                    font-weight: 400;
                                     margin-bottom: 8px;
                                     .tf-info-tooltip{
                                         position: relative;
@@ -144,8 +144,8 @@
                                             p{
                                                 color: $color-white;
                                                 text-align: center;
-                                                font-size: 13px !important;
-                                                font-weight: 600 !important;
+                                                font-size: 13px;
+                                                font-weight: 600;
                                                 margin: 0;
                                             }
                                         }
@@ -172,11 +172,16 @@
                                     input{
                                         color: $color-text;
                                         font-size: 16px;
-                                        width: 18px !important;
+                                        width: 18px;
                                         cursor: not-allowed;
                                         background: transparent;
                                         border: 0px solid;
                                         padding: 0;
+                                        text-align: center;
+                                        &:focus{
+                                            box-shadow: none;
+                                            outline: none;
+                                        }
                                     }
                                 }
                             }
@@ -184,12 +189,12 @@
                                 text-align: right;
                                 h4{
                                     color: $color-heading;
-                                    font-size: 21px !important;
-                                    font-weight: 400 !important;
+                                    font-size: 21px;
+                                    font-weight: 400;
                                     margin-bottom: 8px;
                                     small{
                                         display: block;
-                                        font-size: 16px !important;
+                                        font-size: 16px;
                                         color: $color-text;
                                     }
                                 }
@@ -223,14 +228,14 @@
                     .tf-driver-details-header{
                         h3{
                             color: #27333F;
-                            font-size: 21px !important;
-                            font-weight: 400 !important;
+                            font-size: 21px;
+                            font-weight: 400;
                             margin: 0;
                         }
                         span{
                             color: $color-primary;
-                            font-size: 16px !important;
-                            font-weight: 400 !important;
+                            font-size: 16px;
+                            font-weight: 400;
                             i{
                                 color: $color-primary;
                             }
@@ -247,14 +252,14 @@
                             width: calc(100% - 72px);
                             h4{
                                 color: $color-heading;
-                                font-size: 16px !important;
-                                font-weight: 700 !important;
+                                font-size: 16px;
+                                font-weight: 700;
                                 margin: 0;
                             }
                             p{
                                 color: $color-text;
-                                font-size: 16px !important;
-                                font-weight: 400 !important;
+                                font-size: 16px;
+                                font-weight: 400;
                                 margin: 0;
                             }
                             
@@ -313,8 +318,8 @@
                                                 p{
                                                     color: $color-white;
                                                     text-align: center;
-                                                    font-size: 12px !important;
-                                                    font-weight: 400 !important;
+                                                    font-size: 12px;
+                                                    font-weight: 400;
                                                 }
                                                 
                                             }

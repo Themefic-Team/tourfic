@@ -15,12 +15,12 @@
                 &.tf-car-lists-widgets{
                     width: 100%;
                     .tf-single-car-view{
-                        width: calc(33% - 18px) !important;
+                        width: calc(33% - 18px);
                         @media #{$max1199}{
-                            width: calc(50% - 16px) !important;
+                            width: calc(50% - 16px);
                         }
                         @media #{$max767}{
-                            width: 100% !important;
+                            width: 100%;
                         }
                     }
                 }
@@ -109,8 +109,8 @@
                                 text-decoration: none;
                                 h3{
                                     color: $color-heading;
-                                    font-size: 21px !important;
-                                    font-weight: 700 !important;
+                                    font-size: 21px;
+                                    font-weight: 700;
                                     margin-top: 0px;
                                 }
                             }
@@ -149,12 +149,12 @@
                                 .tf-price-info{
                                     h3{
                                         color: $color-heading;
-                                        font-size: 28px !important;
-                                        font-weight: 600 !important;
+                                        font-size: 28px;
+                                        font-weight: 600;
                                         margin: 0;
                                         small{
                                             color: $color-text;
-                                            font-size: 16px !important;
+                                            font-size: 16px;
                                             font-weight: 400;
                                             text-transform: capitalize;
                                         }
@@ -187,7 +187,7 @@
                     }
                     &.list-view{
                         .tf-single-car-view{
-                            width: 100% !important;
+                            width: 100%;
                             display: flex;
                             @media #{$max885}{
                                 display: flow-root;

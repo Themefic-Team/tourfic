@@ -96,15 +96,15 @@
 
 @media only screen and (max-width: 640px) {
   .single-tf_carrental .tf-single-template__one .tf-car-hero-gallery .tf-featured-car .tf-wish-and-share .tf-off-canvas-share-box .share-car-content {
-    left: auto !important;
+    left: auto;
     right: 0px;
   }
 }
 
 @media only screen and (max-width: 480px) {
   .single-tf_carrental .tf-single-template__one .tf-car-hero-gallery .tf-featured-car .tf-wish-and-share .tf-off-canvas-share-box .share-car-content {
-    left: 0 !important;
-    right: auto !important;
+    left: 0;
+    right: auto;
   }
 }
 
@@ -125,7 +125,7 @@
 }
 
 .single-tf_carrental .tf-single-template__one .tf-car-hero-gallery .tf-featured-car .tf-wish-and-share .tf-off-canvas-share-box .share-car-content .tf-dropdown-share-content h4 {
-  font-size: 14px !important;
+  font-size: 14px;
   color: #0E3DD8;
   font-weight: 600;
   margin-bottom: 10px;
@@ -154,12 +154,12 @@
 }
 
 .single-tf_carrental .tf-single-template__one .tf-car-hero-gallery .tf-featured-car .tf-wish-and-share .tf-off-canvas-share-box .share-car-content .tf-dropdown-share-content ul li a:hover {
-  background: transparent !important;
+  background: transparent;
 }
 
 .single-tf_carrental .tf-single-template__one .tf-car-hero-gallery .tf-featured-car .tf-wish-and-share .tf-off-canvas-share-box .share-car-content .tf-dropdown-share-content ul li button {
-  padding: 10px 8px !important;
-  background-color: transparent !important;
+  padding: 10px 8px;
+  background-color: transparent;
   border: 0px solid;
   font-size: 22px !important;
   cursor: pointer;
@@ -182,7 +182,7 @@
 
 @media only screen and (max-width: 640px) {
   .single-tf_carrental .tf-single-template__one .tf-car-hero-gallery .tf-featured-car .tf-wish-and-share .tf-off-canvas-share-box .share-car-content .tf-dropdown-share-content ul li input {
-    display: contents !important;
+    display: contents;
   }
 }
 
@@ -726,7 +726,7 @@
 
 .single-tf_carrental .tf-single-template__one .tf-review-section h3 {
   color: #060D1C;
-  font-size: 21px !important;
+  font-size: 21px;
   font-weight: 400;
   margin-bottom: 16px;
   margin-top: 0px;
@@ -746,11 +746,11 @@
 
 .single-tf_carrental .tf-single-template__one .tf-review-section .tf-review-form-container {
   min-width: auto;
-  background: transparent !important;
+  background: transparent;
 }
 
 .single-tf_carrental .tf-single-template__one .tf-review-section .tf-review-form-container .tf-visitor-info {
-  margin: 20px 0px !important;
+  margin: 20px 0px;
 }
 
 .single-tf_carrental .tf-single-template__one .tf-review-section .tf-review-form-container .tf-rating-wrapper {
@@ -758,14 +758,14 @@
 }
 
 .single-tf_carrental .tf-single-template__one .tf-review-section .tf-review-form-container .tf-review-submit input[type="submit"] {
-  padding: 16px 32px !important;
-  border-radius: 8px !important;
-  background: #0E3DD8 !important;
-  color: #ffffff !important;
-  font-size: 16px !important;
+  padding: 16px 32px;
+  border-radius: 8px;
+  background: #0E3DD8;
+  color: #ffffff;
+  font-size: 16px;
   font-weight: 700;
   cursor: pointer;
-  border: 0px solid !important;
+  border: 0px solid;
 }
 
 .single-tf_carrental .tf-single-template__one .tf-review-section .tf-review-data {
@@ -835,7 +835,7 @@
 .single-tf_carrental .tf-single-template__one .tf-review-section .tf-review-data-features .tf-review-feature-label p {
   margin: 0;
   color: #686E7A;
-  font-size: 12px !important;
+  font-size: 12px;
   font-weight: 400;
   text-transform: capitalize;
 }
@@ -881,13 +881,13 @@
 .single-tf_carrental .tf-single-template__one .tf-review-section .tf-clients-reviews .tf-reviews-item .tf-reviews-text .tf-reviews-meta {
   color: #686E7A;
   font-size: 16px;
-  font-weight: 700 !important;
+  font-weight: 700;
 }
 
 .single-tf_carrental .tf-single-template__one .tf-review-section .tf-clients-reviews .tf-reviews-item .tf-reviews-text .tf-reviews-meta span {
   color: #686E7A;
   font-size: 16px;
-  font-weight: 400 !important;
+  font-weight: 400;
 }
 
 .single-tf_carrental .tf-single-template__one .tf-review-section .tf-clients-reviews .tf-reviews-item .tf-reviews-text p {
@@ -968,19 +968,19 @@
 
 .single-tf_carrental .tf-single-template__one .tf-date-select-box .tf-date-single-select .tf-select-date .info-select h5 {
   color: #060D1C;
-  font-size: 12px !important;
-  font-weight: 400 !important;
+  font-size: 12px;
+  font-weight: 400;
   margin-top: 0px;
   margin-bottom: 8px;
 }
 
 .single-tf_carrental .tf-single-template__one .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input {
   min-width: auto;
-  width: 100% !important;
+  width: 100%;
   color: #686E7A;
   font-size: 16px;
   font-weight: 400;
-  border: 0px solid !important;
+  border: 0px solid;
   padding: 0;
 }
 
@@ -992,17 +992,6 @@
 .single-tf_carrental .tf-single-template__one .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input::placeholder {
   color: #686E7A;
   opacity: 1;
-}
-
-.single-tf_carrental .tf-single-template__one .tf-date-select-box .tf-date-single-select .tf-select-date .info-select select {
-  min-width: auto;
-  width: 100% !important;
-  color: #686E7A;
-  font-size: 16px;
-  font-weight: 400;
-  border: 0px solid !important;
-  background-color: transparent;
-  padding: 0;
 }
 
 .single-tf_carrental .tf-single-template__one .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .autocomplete-items {
@@ -1130,7 +1119,7 @@
 
 @media only screen and (max-width: 767.98px) {
   .single-tf_carrental .tf-single-template__one .tf-date-select-box .tf-cancellation-box {
-    display: none !important;
+    display: none;
   }
 }
 
@@ -1270,12 +1259,12 @@
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-price-header h2 del {
   color: #686E7A;
   text-decoration-line: strikethrough;
-  font-weight: 400 !important;
+  font-weight: 400;
 }
 
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-price-header h2 small.pricing-type {
   color: #686E7A;
-  font-size: 16px !important;
+  font-size: 16px;
   font-weight: 400;
   text-transform: capitalize;
 }
@@ -1296,8 +1285,8 @@
 
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-extra-added-info .tf-extra-added-box h3 {
   color: #060D1C;
-  font-size: 21px !important;
-  font-weight: 400 !important;
+  font-size: 21px;
+  font-weight: 400;
   margin: 0;
 }
 
@@ -1310,8 +1299,8 @@
 
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-extra-added-info .tf-extra-added-box .tf-single-added-extra h4 {
   color: #060D1C;
-  font-size: 16px !important;
-  font-weight: 400 !important;
+  font-size: 16px;
+  font-weight: 400;
   margin: 0;
   width: calc(100% - 148px);
 }
@@ -1345,14 +1334,14 @@
 
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-add-extra-section h3 {
   color: #060D1C;
-  font-size: 21px !important;
-  font-weight: 400 !important;
+  font-size: 21px;
+  font-weight: 400;
   margin-bottom: 16px;
   margin-top: 0px;
 }
 
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-add-extra-section .tf-car-extra-infos .tf-car-single-extra {
-  padding: 12px 16px 16px 16px;
+  padding: 12px 16px 16px 0px;
   border-radius: 8px;
   background: #F1F3F4;
 }
@@ -1363,8 +1352,8 @@
 
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-add-extra-section .tf-car-extra-infos .tf-car-single-extra .tf-extra-title h4 {
   color: #060D1C;
-  font-size: 16px !important;
-  font-weight: 400 !important;
+  font-size: 16px;
+  font-weight: 400;
   margin-bottom: 8px;
 }
 
@@ -1415,8 +1404,8 @@
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-add-extra-section .tf-car-extra-infos .tf-car-single-extra .tf-extra-title h4 .tf-info-tooltip .tf-info-tooltip-content p {
   color: #ffffff;
   text-align: center;
-  font-size: 13px !important;
-  font-weight: 600 !important;
+  font-size: 13px;
+  font-weight: 600;
   margin: 0;
 }
 
@@ -1444,11 +1433,17 @@
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-add-extra-section .tf-car-extra-infos .tf-car-single-extra .tf-extra-title .acr-select input {
   color: #686E7A;
   font-size: 16px;
-  width: 18px !important;
+  width: 18px;
   cursor: not-allowed;
   background: transparent;
   border: 0px solid;
   padding: 0;
+  text-align: center;
+}
+
+.single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-add-extra-section .tf-car-extra-infos .tf-car-single-extra .tf-extra-title .acr-select input:focus {
+  box-shadow: none;
+  outline: none;
 }
 
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-add-extra-section .tf-car-extra-infos .tf-car-single-extra .tf-extra-price {
@@ -1457,14 +1452,14 @@
 
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-add-extra-section .tf-car-extra-infos .tf-car-single-extra .tf-extra-price h4 {
   color: #060D1C;
-  font-size: 21px !important;
-  font-weight: 400 !important;
+  font-size: 21px;
+  font-weight: 400;
   margin-bottom: 8px;
 }
 
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-add-extra-section .tf-car-extra-infos .tf-car-single-extra .tf-extra-price h4 small {
   display: block;
-  font-size: 16px !important;
+  font-size: 16px;
   color: #686E7A;
 }
 
@@ -1497,15 +1492,15 @@
 
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-driver-details .tf-driver-details-header h3 {
   color: #27333F;
-  font-size: 21px !important;
-  font-weight: 400 !important;
+  font-size: 21px;
+  font-weight: 400;
   margin: 0;
 }
 
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-driver-details .tf-driver-details-header span {
   color: #0E3DD8;
-  font-size: 16px !important;
-  font-weight: 400 !important;
+  font-size: 16px;
+  font-weight: 400;
 }
 
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-driver-details .tf-driver-details-header span i {
@@ -1525,15 +1520,15 @@
 
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-driver-details .tf-driver-photo .tf-driver-info h4 {
   color: #060D1C;
-  font-size: 16px !important;
-  font-weight: 700 !important;
+  font-size: 16px;
+  font-weight: 700;
   margin: 0;
 }
 
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-driver-details .tf-driver-photo .tf-driver-info p {
   color: #686E7A;
-  font-size: 16px !important;
-  font-weight: 400 !important;
+  font-size: 16px;
+  font-weight: 400;
   margin: 0;
 }
 
@@ -1600,8 +1595,8 @@
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-driver-details .tf-driver-photo .tf-driver-info .tf-driver-contact-info ul li a .tf-tooltip-info p {
   color: #ffffff;
   text-align: center;
-  font-size: 12px !important;
-  font-weight: 400 !important;
+  font-size: 12px;
+  font-weight: 400;
 }
 
 .post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-car-banner,
@@ -1722,8 +1717,8 @@
 .tax-carrental_brand .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select h5,
 .page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select h5 {
   color: #060D1C;
-  font-size: 12px !important;
-  font-weight: 400 !important;
+  font-size: 12px;
+  font-weight: 400;
   margin-bottom: 8px;
   margin-top: 0px;
 }
@@ -1733,14 +1728,14 @@
 .tax-carrental_brand .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input,
 .page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input {
   min-width: auto;
-  width: 100% !important;
+  width: 100%;
   color: #686E7A;
   font-size: 16px;
   font-weight: 400;
-  border: 0px solid !important;
+  border: 0px solid;
   padding-left: 0px;
   box-shadow: none;
-  background: transparent !important;
+  background: transparent;
 }
 
 .post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input:focus,
@@ -1756,19 +1751,6 @@
 .tax-carrental_brand .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input::placeholder,
 .page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input::placeholder {
   color: #686E7A;
-}
-
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select select,
-.tax-carrental_location .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select select,
-.tax-carrental_brand .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select select,
-.page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select select {
-  min-width: auto;
-  width: 100% !important;
-  color: #686E7A;
-  font-size: 16px;
-  font-weight: 400;
-  border: 0px solid !important;
-  background-color: transparent;
 }
 
 .post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .autocomplete-items,
@@ -1841,50 +1823,6 @@
 .tax-carrental_brand .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .autocomplete-items > div:hover,
 .page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .autocomplete-items > div:hover {
   background-color: #faeedc;
-}
-
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap,
-.tax-carrental_location .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap,
-.tax-carrental_brand .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap,
-.page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap {
-  padding: 3px 0px !important;
-  border: 0px solid;
-}
-
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap input,
-.tax-carrental_location .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap input,
-.tax-carrental_brand .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap input,
-.page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap input {
-  width: 50px !important;
-  padding: 0 !important;
-  text-align: center;
-}
-
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap .tf_input-inner > div,
-.tax-carrental_location .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap .tf_input-inner > div,
-.tax-carrental_brand .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap .tf_input-inner > div,
-.page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap .tf_input-inner > div {
-  color: #686E7A;
-  font-size: 16px;
-  font-weight: 400;
-}
-
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap .tf_acrselection-wrap,
-.tax-carrental_location .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap .tf_acrselection-wrap,
-.tax-carrental_brand .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap .tf_acrselection-wrap,
-.page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap .tf_acrselection-wrap {
-  left: 0;
-}
-
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap .tf_acrselection-wrap .acr-dec,
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap .tf_acrselection-wrap .acr-inc,
-.tax-carrental_location .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap .tf_acrselection-wrap .acr-dec,
-.tax-carrental_location .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap .tf_acrselection-wrap .acr-inc,
-.tax-carrental_brand .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap .tf_acrselection-wrap .acr-dec,
-.tax-carrental_brand .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap .tf_acrselection-wrap .acr-inc,
-.page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap .tf_acrselection-wrap .acr-dec,
-.page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap .tf_acrselection-wrap .acr-inc {
-  padding: 0;
 }
 
 .post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select.tf-pick-drop-location.active .tf-select-date,
@@ -2183,7 +2121,7 @@
 .tax-carrental_location .tf-archive-template__one .tf-car-archive-result.tf-car-lists-widgets .tf-single-car-view,
 .tax-carrental_brand .tf-archive-template__one .tf-car-archive-result.tf-car-lists-widgets .tf-single-car-view,
 .page-template-tf-search .tf-archive-template__one .tf-car-archive-result.tf-car-lists-widgets .tf-single-car-view {
-  width: calc(33% - 18px) !important;
+  width: calc(33% - 18px);
 }
 
 @media only screen and (max-width: 1199.98px) {
@@ -2191,7 +2129,7 @@
   .tax-carrental_location .tf-archive-template__one .tf-car-archive-result.tf-car-lists-widgets .tf-single-car-view,
   .tax-carrental_brand .tf-archive-template__one .tf-car-archive-result.tf-car-lists-widgets .tf-single-car-view,
   .page-template-tf-search .tf-archive-template__one .tf-car-archive-result.tf-car-lists-widgets .tf-single-car-view {
-    width: calc(50% - 16px) !important;
+    width: calc(50% - 16px);
   }
 }
 
@@ -2200,7 +2138,7 @@
   .tax-carrental_location .tf-archive-template__one .tf-car-archive-result.tf-car-lists-widgets .tf-single-car-view,
   .tax-carrental_brand .tf-archive-template__one .tf-car-archive-result.tf-car-lists-widgets .tf-single-car-view,
   .page-template-tf-search .tf-archive-template__one .tf-car-archive-result.tf-car-lists-widgets .tf-single-car-view {
-    width: 100% !important;
+    width: 100%;
   }
 }
 
@@ -2364,8 +2302,8 @@
 .tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details a h3,
 .page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details a h3 {
   color: #060D1C;
-  font-size: 21px !important;
-  font-weight: 700 !important;
+  font-size: 21px;
+  font-weight: 700;
   margin-top: 0px;
 }
 
@@ -2433,8 +2371,8 @@
 .tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn .tf-price-info h3,
 .page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn .tf-price-info h3 {
   color: #060D1C;
-  font-size: 28px !important;
-  font-weight: 600 !important;
+  font-size: 28px;
+  font-weight: 600;
   margin: 0;
 }
 
@@ -2443,7 +2381,7 @@
 .tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn .tf-price-info h3 small,
 .page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn .tf-price-info h3 small {
   color: #686E7A;
-  font-size: 16px !important;
+  font-size: 16px;
   font-weight: 400;
   text-transform: capitalize;
 }
@@ -2492,7 +2430,7 @@
 .tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view,
 .tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view,
 .page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view {
-  width: 100% !important;
+  width: 100%;
   display: flex;
 }
 
@@ -2732,8 +2670,8 @@
 .tax-carrental_brand .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf-sidebar-header h4,
 .page-template-tf-search .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf-sidebar-header h4 {
   color: #060D1C;
-  font-size: 16px !important;
-  font-weight: 400 !important;
+  font-size: 16px;
+  font-weight: 400;
   margin: 0;
 }
 
@@ -2742,7 +2680,7 @@
 .tax-carrental_brand .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf-sidebar-header button,
 .page-template-tf-search .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf-sidebar-header button {
   color: #686E7A;
-  font-size: 16px !important;
+  font-size: 16px;
   font-weight: 400;
   background-color: transparent;
   padding: 0px;
@@ -2785,9 +2723,9 @@
 .tax-carrental_brand .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-widget-title span,
 .page-template-tf-search .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-widget-title span {
   color: #686E7A;
-  font-size: 16px !important;
-  font-style: normal !important;
-  font-weight: 400 !important;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
   margin-bottom: 16px;
   cursor: auto;
 }
