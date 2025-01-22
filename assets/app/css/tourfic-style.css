@@ -834,11 +834,11 @@ a {
 }
 
 .tf-d-n {
-  display: none !important;
+  display: none;
 }
 
 .tf-d-g {
-  display: grid !important;
+  display: grid;
 }
 
 .section-heading {

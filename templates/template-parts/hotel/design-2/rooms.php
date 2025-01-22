@@ -183,7 +183,7 @@ if ( $rooms ) :
 									if ( $tour_room_details_gall ) {
 										?>
                                         <a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo ! empty( $room['unique_id'] ) ? esc_attr( $room['unique_id'] . $room_id ) : '' ?>"
-                                           data-hotel="<?php echo esc_attr( $post_id ); ?>" style="text-decoration: underline;">
+                                           data-hotel="<?php echo esc_attr( $post_id ); ?>">
 											<?php esc_html_e( "Room Photos & Details", "tourfic" ); ?>
                                         </a>
 

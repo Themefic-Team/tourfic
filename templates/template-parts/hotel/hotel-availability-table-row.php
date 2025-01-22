@@ -41,8 +41,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 						if ( $tour_room_details_gall ) {
 							?>
                             <a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo ! empty( $room['unique_id'] ) ? esc_attr( $room['unique_id'] . $room_id ) : '' ?>"
-                               data-hotel="<?php echo esc_attr( $hotel_id ); ?>"
-                               style="text-decoration: underline;">
+                               data-hotel="<?php echo esc_attr( $hotel_id ); ?>">
                                 <img src="<?php echo esc_url( $room_preview_img ); ?>" alt="<?php esc_html_e( "Room Image", "tourfic" ); ?>">
                             </a>
 						<?php } else { ?>
@@ -58,8 +57,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 								?>
                                 <h3>
                                     <a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo ! empty( $room['unique_id'] ) ? esc_attr( $room['unique_id'] . $room_id ) : '' ?>"
-                                       data-hotel="<?php echo esc_attr( $hotel_id ); ?>"
-                                       style="text-decoration: none;"><?php echo esc_html( get_the_title( $room_id ) ); ?></a>
+                                       data-hotel="<?php echo esc_attr( $hotel_id ); ?>"><?php echo esc_html( get_the_title( $room_id ) ); ?></a>
                                 </h3>
 								<?php
 							} else { ?>
@@ -116,8 +114,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 					if ( $tour_room_details_gall ) {
 						?>
                         <a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo ! empty( $room['unique_id'] ) ? esc_attr( $room['unique_id'] . $room_id ) : '' ?>"
-                           data-hotel="<?php echo esc_attr( $hotel_id ); ?>"
-                           style="text-decoration: underline;">
+                           data-hotel="<?php echo esc_attr( $hotel_id ); ?>">
 							<?php esc_html_e( "Room Photos & Details", "tourfic" ); ?>
                         </a>
                         <div id="tour_room_details_qv" class=" <?php echo $tf_hotel_selected_template_check == "design-1" ? "tf-hotel-design-1-popup" : ""; ?>">
@@ -1894,7 +1891,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 					if ( $tour_room_details_gall ) {
 						?>
                         <h3><a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo ! empty( $room['unique_id'] ) ? esc_attr( $room['unique_id'] . $room_id ) : '' ?>"
-                               data-hotel="<?php echo esc_attr( $hotel_id ); ?>" style="text-decoration: underline;">
+                               data-hotel="<?php echo esc_attr( $hotel_id ); ?>">
 								<?php echo esc_html( get_the_title( $room_id ) ); ?>
                             </a></h3>
 
