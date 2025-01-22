@@ -1009,8 +1009,8 @@ h3.section-heading {
 }
 
 .slick-slider .slick-slide {
-  margin-left: 5px !important;
-  margin-right: 5px !important;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 .slick-slider .slick-slide img {
@@ -1560,11 +1560,11 @@ h3.section-heading {
   display: grid;
   grid-template-columns: calc(50% - 20px) calc(50% - 20px);
   column-gap: 40px;
-  margin: 40px 0 0 0;
+  margin: 16px 0 0 0;
 }
 
 .tf-review-form-container .tf-visitor-info input {
-  background: #faeedc;
+  background: #F1F3F4;
   border: 1px solid #f0f2f4;
   box-sizing: border-box;
   border-radius: 4px;
@@ -9073,7 +9073,7 @@ div#tf-destinationautocomplete-list div:before {
   padding: 15px 20px;
   border: 1px solid #f0f2f4;
   width: 100%;
-  background-color: #faeedc;
+  background-color: #F1F3F4;
   border-radius: 5px;
   font-size: 14px;
   color: #686E7A;
@@ -12903,7 +12903,7 @@ div#tf-destinationautocomplete-list div:before {
 }
 
 .tf-single-template__three .tf-review-form-wrapper .tf-review-form-container form .tf-rating-wrapper .tf-form-single-rating {
-  display: flow-root;
+  display: flex;
 }
 
 .tf-single-template__three .tf-review-form-wrapper .tf-review-form-container form .tf-rating-wrapper .tf-form-single-rating label {

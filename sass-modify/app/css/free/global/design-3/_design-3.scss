@@ -2059,7 +2059,7 @@
                         grid-template-columns: 1fr !important;
                         margin-bottom: 16px !important;
                         .tf-form-single-rating{
-                            display: flow-root;
+                            display: flex;
                             label{
                                 font-size: 14px !important;
                                 font-weight: 600;

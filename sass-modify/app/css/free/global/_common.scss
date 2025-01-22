@@ -145,8 +145,8 @@ h3.section-heading {
     }
 
     .slick-slide {
-        margin-left: 5px !important;
-        margin-right: 5px !important;
+        margin-left: 5px;
+        margin-right: 5px;
         
         img {
             display: block;
@@ -633,9 +633,9 @@ h3.section-heading {
         display: grid;
         grid-template-columns: calc(50% - 20px) calc(50% - 20px);
         column-gap: 40px;
-        margin: 40px 0 0 0;
+        margin: 16px 0 0 0;
         input {
-            background: $color-light-bg;
+            background: $color-gray-light;
             border: 1px solid $color-border;
             box-sizing: border-box;
             border-radius: 4px;
