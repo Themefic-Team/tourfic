@@ -20,17 +20,3 @@
 @import './modules/archive/_search-form';
 @import './modules/archive/_listing';
 // Archive Module Load End
-
-
-.tf_template_3_global_layouts{
-    .site-primary-header-wrap,
-    .header-container.container,
-    #footer .footer-bottom,
-    .page-top,
-    #masthead.site-header .col-full,
-    .storefront-breadcrumb,
-    #colophon.site-footer .site-info{
-        padding-left: 32px !important;
-        padding-right: 32px !important;
-    }
-}

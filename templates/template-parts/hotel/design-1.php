@@ -562,7 +562,7 @@ $price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings'
 													if ( $tour_room_details_gall ){
 														?>
                                                         <h3><a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo ! empty( $room['unique_id'] ) ? esc_attr( $room['unique_id'] . $_room->ID ) : '' ?>"
-                                                               data-hotel="<?php echo esc_attr( $post_id ); ?>" style="text-decoration: underline;">
+                                                               data-hotel="<?php echo esc_attr( $post_id ); ?>">
 																<?php echo esc_html( get_the_title($_room->ID) ); ?>
                                                             </a></h3>
 

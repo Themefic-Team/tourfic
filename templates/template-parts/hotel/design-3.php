@@ -68,7 +68,7 @@ use \Tourfic\App\TF_Review;
                             <i class="ri-links-line"></i>
                                 <span class="tf-button-text share-center-copied-message"><?php esc_html_e( 'Link Copied!', 'tourfic' ); ?></span>
                             </a>
-                            <input type="text" id="share_link_input" class="share-center-url share-center-url-input" value="<?php echo esc_attr( $share_link ); ?>" readonly style="opacity: 0; width: 0px !important;margin: 0px">
+                            <input type="text" id="share_link_input" class="share-center-url share-center-url-input" value="<?php echo esc_attr( $share_link ); ?>" readonly>
                         </li>
                     </ul>
                     <a href="#dropdown-share-center" class="tf-share-toggle tf-icon tf-social-box"

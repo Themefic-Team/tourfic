@@ -41,15 +41,16 @@
                     .tf-review-data-average p {
                         background: $color-light-bg;
                         text-align: center;
-                        font-size: 30px !important;
+                        font-size: 30px;
                         color: $color-primary;
-                        font-weight: 600 !important;
+                        font-weight: 600;
                         @include bd-radius(5px);;
                         width: 100%;
                         height: 75px;
                         display: flex;
                         align-items: center;
                         justify-content: center;
+                        margin-bottom: 0;
                     }
                     .tf-review-data-label{
                         p{
@@ -102,6 +103,11 @@
                                 width: 42%;
                             }
                             
+                            .tf-review-feature-label{
+                                p{
+                                    margin-bottom: 0;
+                                }
+                            }
                         }
                         
                     }

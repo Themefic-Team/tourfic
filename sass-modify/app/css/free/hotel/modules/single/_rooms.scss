@@ -69,7 +69,7 @@
                         h3,a{
                             font-size: 20px;
                             line-height: 1.5;
-                            text-decoration: underline !important;
+                            text-decoration: underline;
                         }
                         .room-features {
                             margin-top: 15px;
@@ -213,12 +213,12 @@
         &__two{
             .tf-rooms-sections{
                 .tf-rooms{
-                    @media #{$tfmax767}{
+                    @media #{$max767}{
                         overflow-x: scroll;
                         width: auto;
                     }
                     .hotel-room-wrap {
-                        overflow-x: unset !important;
+                        overflow-x: unset;
                     }
                     .tf-availability-table{
                         background-color: $color-white;
@@ -227,7 +227,7 @@
                         margin-bottom: 0px;
                         border-collapse: collapse;
                         width: 100%;
-                        border-left: none !important;
+                        border-left: none;
                         &>thead{
                             background-color: $color-primary;
                             tr{
@@ -255,8 +255,8 @@
                                         margin-right: 20px;
                                         border-radius: 4px;
                                         position: relative;
-                                        @media #{$tfmax767}{
-                                            width: 100% !important;
+                                        @media #{$max767}{
+                                            width: 100%;
                                             margin-bottom: 10px;
                                         }
                                         img{
@@ -277,11 +277,11 @@
                                         
                                     }
                                     .tf-features-infos{
-                                        @media #{$tfmax991}{
-                                            width: 60% !important;
+                                        @media #{$max991}{
+                                            width: 60%;
                                         }
-                                        @media #{$tfmax767}{
-                                            width: 100% !important;
+                                        @media #{$max767}{
+                                            width: 100%;
                                         }
                                         .tf-room-type{
                                             h3{
@@ -323,13 +323,13 @@
                                     padding-top: 30px;
                                     padding-bottom: 30px;
                                     border-left: 0px;
-                                    @media #{$tfmax767}{
+                                    @media #{$max767}{
                                         width: auto;
                                     }
                                 }
                                 td.pax{
                                     .tf-tooltip{
-                                        @media #{$tfmax767}{
+                                        @media #{$max767}{
                                             width: 100px
                                         }
                                         .room-detail-icon {

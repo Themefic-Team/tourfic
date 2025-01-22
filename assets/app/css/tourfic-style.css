@@ -7892,6 +7892,9 @@ div#tf-destinationautocomplete-list div:before {
 .tf-single-template__two .tf-review-wrapper .tf-review-reply .tf-review-details .tf-review-message {
   margin-top: 10px;
 }
+.tf-single-template__two .tf-review-wrapper .tf-review-reply .tf-review-details .tf-review-message p {
+  margin-bottom: 0;
+}
 .tf-single-template__two .tf-review-wrapper .tf-review-reply .tf-review-details .tf-review-ratings {
   display: flex;
 }
