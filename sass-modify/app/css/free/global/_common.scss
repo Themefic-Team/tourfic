@@ -888,26 +888,26 @@ h3.section-heading {
     border: 12px solid $color-white;
     box-shadow: 0px 2px 4px rgba(90, 91, 106, 0.08);
     border-radius: 4px;
-    height: 450px !important;
+    height: 450px;
     padding: 20px;
-    display: flex !important;
+    display: flex;
     align-items: flex-end;
-    margin: 0 15px 15px !important;
+    margin: 0 15px 15px;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
-    margin-left: 0 !important;
+    margin-left: 0;
     @media only screen and (min-width: 768px) and (max-width: 970px) {
         border: 7px solid $color-white;
-        height: 300px !important;
+        height: 300px;
         padding: 15px;
-        margin: 0 7px 15px !important;
+        margin: 0 7px 15px;
     }
     @media #{$max767}{
         border: 7px solid $color-white;
-        height: 250px !important;
+        height: 250px;
         padding: 15px;
-        margin: 0 7px 15px !important;
+        margin: 0 7px 15px;
     }
 
     .tf-slider-content {
@@ -1116,40 +1116,40 @@ li.tf-filter-item {
     .al-range-slider__track {
         background: $color-gray-light;
         height: 10px;
-        box-shadow: none !important;
+        box-shadow: none;
         margin: 30px 0px 10px 0px;
         .al-range-slider__grid{
-            pointer-events: inherit !important;
+            pointer-events: inherit;
         }
     }
     .al-range-slider_dark {
-        padding: 0px !important;
+        padding: 0px;
         .al-range-slider__bar {
-            background: $color-primary !important;
-            box-shadow: none !important;
-            pointer-events: none !important;
+            background: $color-primary;
+            box-shadow: none;
+            pointer-events: none;
         }
     }
     .al-range-slider__knob {
-        background: $color-primary !important;
+        background: $color-primary;
         height: 15px;
         width: 15px;
-        box-shadow: none !important;
-        border: 3px solid $color-primary !important;
+        box-shadow: none;
+        border: 3px solid $color-primary;
         &:first-child {
             span {
-                left: 10px !important;
+                left: 10px;
             }
         }
     }
     .al-range-slider__tooltip {
-        background: $color-primary !important;
+        background: $color-primary;
         border-radius: 5px;
         box-shadow: none;
         padding: 3px 10px;
-        color: $color-white !important;
-        font-size: 13px !important;
-        margin-bottom: 0px !important;
+        color: $color-white;
+        font-size: 13px;
+        margin-bottom: 0px;
     }
     .al-range-slider__input.js-al-range-slider__input {
         display: none;
@@ -1158,13 +1158,13 @@ li.tf-filter-item {
 
 // UNFOLD Theme Compatibily
 #commentform label{
-    position: static !important;
-    display: inline-block !important;
+    position: static;
+    display: inline-block;
 }
 
 // Blocksy Theme Single Product image
 .woocommerce-product-gallery .ct-image-container {
-    width: 100% !important;
+    width: 100%;
 }
 
 @media #{$max767}{

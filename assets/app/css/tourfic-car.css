@@ -2869,16 +2869,16 @@
 .tax-carrental_location .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .al-range-slider__tooltip,
 .tax-carrental_brand .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .al-range-slider__tooltip,
 .page-template-tf-search .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .al-range-slider__tooltip {
-  bottom: -30px !important;
-  background: transparent !important;
-  color: #686E7A !important;
+  bottom: -30px;
+  background: transparent;
+  color: #686E7A;
 }
 
 .post-type-archive-tf_carrental .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .al-range-slider_dark .al-range-slider__bar,
 .tax-carrental_location .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .al-range-slider_dark .al-range-slider__bar,
 .tax-carrental_brand .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .al-range-slider_dark .al-range-slider__bar,
 .page-template-tf-search .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .al-range-slider_dark .al-range-slider__bar {
-  background-color: #0E3DD8 !important;
+  background-color: #0E3DD8;
 }
 
 .post-type-archive-tf_carrental .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .al-range-slider__knob,
@@ -2886,8 +2886,8 @@
 .tax-carrental_brand .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .al-range-slider__knob,
 .page-template-tf-search .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .al-range-slider__knob {
   border-radius: 12px;
-  border: 1.5px solid #f0f2f4 !important;
-  background: #ffffff !important;
+  border: 1.5px solid #f0f2f4;
+  background: #ffffff;
   width: 24px;
   height: 24px;
 }
