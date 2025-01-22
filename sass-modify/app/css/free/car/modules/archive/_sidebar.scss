@@ -152,17 +152,17 @@
                             margin: 0 0 28px 0;
                         }
                         .al-range-slider__tooltip{
-                            bottom: -30px !important;
-                            background: transparent !important;
-                            color: $color-text !important;
+                            bottom: -30px;
+                            background: transparent;
+                            color: $color-text;
                         }
                         .al-range-slider_dark .al-range-slider__bar{
-                            background-color: $color-primary !important;
+                            background-color: $color-primary;
                         }
                         .al-range-slider__knob{
                             border-radius: 12px;
-                            border: 1.5px solid $color-border !important;
-                            background: $color-white !important;
+                            border: 1.5px solid $color-border;
+                            background: $color-white;
                             width: 24px;
                             height: 24px;
                         }

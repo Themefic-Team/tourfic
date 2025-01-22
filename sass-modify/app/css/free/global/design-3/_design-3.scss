@@ -1034,42 +1034,42 @@
                 .al-range-slider__track {
                     background: $color-gray-light;
                     height: 10px;
-                    box-shadow: none !important;
+                    box-shadow: none;
                     margin: 0px 0px 10px 0px;
                 }
                 .al-range-slider_dark {
-                    padding: 0px !important;
+                    padding: 0px;
                     .al-range-slider__bar {
-                        background: $color-gray !important;
-                        box-shadow: none !important;
+                        background: $color-gray;
+                        box-shadow: none;
                     }
                 }
                 .al-range-slider__knob {
-                    background: $color-light-bg !important;
+                    background: $color-light-bg;
                     height: 24px;
                     width: 24px;
-                    box-shadow: none !important;
-                    border: 3px solid $color-gray !important;
+                    box-shadow: none;
+                    border: 3px solid $color-gray;
                     &:first-child {
                         span {
-                            left: 10px !important;
+                            left: 10px;
                         }
                     }
                 }
                 .al-range-slider__tooltip {
-                    background: transparent !important;
+                    background: transparent;
                     box-shadow: none;
                     padding: 3px 10px;
-                    margin-bottom: 0px !important;
+                    margin-bottom: 0px;
                     bottom: -40px;
-                    color: $color-text !important;
-                    font-size: 16px !important;
+                    color: $color-text;
+                    font-size: 16px;
                     font-style: normal;
                     font-weight: 400;
                     line-height: 130%;
                 }
                 .al-range-slider__input.js-al-range-slider__input {
-                    display: none !important;
+                    display: none;
                 }
             }
             .tf_widget.widget_tf_price_filters{
@@ -1584,15 +1584,31 @@
         &__three{
             .tf-content-wrapper{
                 .tf-details{
+                    @media only screen and (max-width: 767.98px) {
+                        display: flow-root;
+                    }
                     .tf-details-left{
                         @media only screen and (max-width: 1024px) {
                             width: calc(100% - 264px);
                         }
+                        @media only screen and (max-width: 992px) {
+                            width: calc(100% - 284px);
+                        }
+                        @media only screen and (max-width: 767.98px) {
+                            width: 100%;
+                        }
                     }
                     .tf-details-right{
+                        @media only screen and (max-width: 1366px) {
+                            width: 391px;
+                            padding: 0px;
+                        }
                         @media only screen and (max-width: 1024px) {
                             width: 240px;
                             padding: 0px;
+                        }
+                        @media only screen and (max-width: 767.98px) {
+                            width: 100%;
                         }
                     }
                 }
@@ -1758,7 +1774,6 @@
                 }
             }
             .tf-slider-item{
-                // height: auto;
                 box-shadow: none;
                 border: 0px solid;
                 background-color: transparent;
@@ -1985,6 +2000,7 @@
                 line-height: 26px;
                 p{
                     font-size: 20px;
+                    margin: 0;
                     span {
                         color: $color-text;
                         font-size: 16px;
@@ -2005,6 +2021,9 @@
                 display: flex;
                 justify-content: space-between;
                 padding-bottom: 4px;
+                p{
+                    margin: 0;
+                }
             }
 
             .tf-progress-bar {
@@ -3098,6 +3117,7 @@
                                         font-size: 16px;
                                         font-style: normal;
                                         font-weight: 400;
+                                        margin: 0;
                                     }
                                 }
                             }
@@ -3190,6 +3210,7 @@
                                 }
                                 p{
                                     color: $color-text;
+                                    margin: 0;
                                 }
                                 ul {
                                     margin: 0px 0px 0px 13px;;
