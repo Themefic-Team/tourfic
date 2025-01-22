@@ -157,21 +157,21 @@
   background: transparent;
 }
 
-.single-tf_carrental .tf-single-template__one .tf-car-hero-gallery .tf-featured-car .tf-wish-and-share .tf-off-canvas-share-box .share-car-content .tf-dropdown-share-content ul li button {
+.single-tf_carrental .tf-single-template__one .tf-car-hero-gallery .tf-featured-car .tf-wish-and-share .tf-off-canvas-share-box .share-car-content .tf-dropdown-share-content ul li .tf_btn {
   padding: 10px 8px;
   background-color: transparent;
   border: 0px solid;
-  font-size: 22px !important;
+  font-size: 22px;
   cursor: pointer;
   color: #0E3DD8;
   box-shadow: none;
 }
 
-.single-tf_carrental .tf-single-template__one .tf-car-hero-gallery .tf-featured-car .tf-wish-and-share .tf-off-canvas-share-box .share-car-content .tf-dropdown-share-content ul li button span {
+.single-tf_carrental .tf-single-template__one .tf-car-hero-gallery .tf-featured-car .tf-wish-and-share .tf-off-canvas-share-box .share-car-content .tf-dropdown-share-content ul li .tf_btn span {
   color: #0E3DD8;
 }
 
-.single-tf_carrental .tf-single-template__one .tf-car-hero-gallery .tf-featured-car .tf-wish-and-share .tf-off-canvas-share-box .share-car-content .tf-dropdown-share-content ul li button .share-center-copied-message {
+.single-tf_carrental .tf-single-template__one .tf-car-hero-gallery .tf-featured-car .tf-wish-and-share .tf-off-canvas-share-box .share-car-content .tf-dropdown-share-content ul li .tf_btn .share-center-copied-message {
   display: none;
 }
 
