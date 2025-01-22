@@ -1475,8 +1475,8 @@
 .tax-carrental_brand .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select h5,
 .page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select h5 {
   color: #060D1C;
-  font-size: 12px !important;
-  font-weight: 400 !important;
+  font-size: 12px;
+  font-weight: 400;
   margin-bottom: 8px;
   margin-top: 0px;
 }
@@ -1485,14 +1485,14 @@
 .tax-carrental_brand .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input,
 .page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input {
   min-width: auto;
-  width: 100% !important;
+  width: 100%;
   color: #686E7A;
   font-size: 16px;
   font-weight: 400;
-  border: 0px solid !important;
+  border: 0px solid;
   padding-left: 0px;
   box-shadow: none;
-  background: transparent !important;
+  background: transparent;
 }
 .post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input:focus,
 .tax-carrental_location .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input:focus,
@@ -1506,18 +1506,6 @@
 .tax-carrental_brand .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input::placeholder,
 .page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input::placeholder {
   color: #686E7A;
-}
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select select,
-.tax-carrental_location .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select select,
-.tax-carrental_brand .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select select,
-.page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select select {
-  min-width: auto;
-  width: 100% !important;
-  color: #686E7A;
-  font-size: 16px;
-  font-weight: 400;
-  border: 0px solid !important;
-  background-color: transparent;
 }
 .post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .autocomplete-items,
 .tax-carrental_location .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .autocomplete-items,
@@ -1583,45 +1571,6 @@
 .tax-carrental_brand .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .autocomplete-items > div:hover,
 .page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .autocomplete-items > div:hover {
   background-color: #faeedc;
-}
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap,
-.tax-carrental_location .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap,
-.tax-carrental_brand .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap,
-.page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap {
-  padding: 3px 0px !important;
-  border: 0px solid;
-}
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap input,
-.tax-carrental_location .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap input,
-.tax-carrental_brand .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap input,
-.page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap input {
-  width: 50px !important;
-  padding: 0 !important;
-  text-align: center;
-}
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap .tf_input-inner > div,
-.tax-carrental_location .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap .tf_input-inner > div,
-.tax-carrental_brand .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap .tf_input-inner > div,
-.page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap .tf_input-inner > div {
-  color: #686E7A;
-  font-size: 16px;
-  font-weight: 400;
-}
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap .tf_acrselection-wrap,
-.tax-carrental_location .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap .tf_acrselection-wrap,
-.tax-carrental_brand .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap .tf_acrselection-wrap,
-.page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap .tf_acrselection-wrap {
-  left: 0;
-}
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap .tf_acrselection-wrap .acr-dec,
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap .tf_acrselection-wrap .acr-inc,
-.tax-carrental_location .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap .tf_acrselection-wrap .acr-dec,
-.tax-carrental_location .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap .tf_acrselection-wrap .acr-inc,
-.tax-carrental_brand .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap .tf_acrselection-wrap .acr-dec,
-.tax-carrental_brand .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap .tf_acrselection-wrap .acr-inc,
-.page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap .tf_acrselection-wrap .acr-dec,
-.page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .tf_selectperson-wrap .tf_acrselection-wrap .acr-inc {
-  padding: 0;
 }
 .post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select.tf-pick-drop-location.active .tf-select-date,
 .tax-carrental_location .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select.tf-pick-drop-location.active .tf-select-date,
@@ -1889,14 +1838,14 @@
 .tax-carrental_location .tf-archive-template__one .tf-car-archive-result.tf-car-lists-widgets .tf-single-car-view,
 .tax-carrental_brand .tf-archive-template__one .tf-car-archive-result.tf-car-lists-widgets .tf-single-car-view,
 .page-template-tf-search .tf-archive-template__one .tf-car-archive-result.tf-car-lists-widgets .tf-single-car-view {
-  width: calc(33% - 18px) !important;
+  width: calc(33% - 18px);
 }
 @media only screen and (max-width: 1199.98px) {
   .post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result.tf-car-lists-widgets .tf-single-car-view,
   .tax-carrental_location .tf-archive-template__one .tf-car-archive-result.tf-car-lists-widgets .tf-single-car-view,
   .tax-carrental_brand .tf-archive-template__one .tf-car-archive-result.tf-car-lists-widgets .tf-single-car-view,
   .page-template-tf-search .tf-archive-template__one .tf-car-archive-result.tf-car-lists-widgets .tf-single-car-view {
-    width: calc(50% - 16px) !important;
+    width: calc(50% - 16px);
   }
 }
 @media only screen and (max-width: 767.98px) {
@@ -1904,7 +1853,7 @@
   .tax-carrental_location .tf-archive-template__one .tf-car-archive-result.tf-car-lists-widgets .tf-single-car-view,
   .tax-carrental_brand .tf-archive-template__one .tf-car-archive-result.tf-car-lists-widgets .tf-single-car-view,
   .page-template-tf-search .tf-archive-template__one .tf-car-archive-result.tf-car-lists-widgets .tf-single-car-view {
-    width: 100% !important;
+    width: 100%;
   }
 }
 .post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-heading,
@@ -2050,8 +1999,8 @@
 .tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details a h3,
 .page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details a h3 {
   color: #060D1C;
-  font-size: 21px !important;
-  font-weight: 700 !important;
+  font-size: 21px;
+  font-weight: 700;
   margin-top: 0px;
 }
 .post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul,
@@ -2112,8 +2061,8 @@
 .tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn .tf-price-info h3,
 .page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn .tf-price-info h3 {
   color: #060D1C;
-  font-size: 28px !important;
-  font-weight: 600 !important;
+  font-size: 28px;
+  font-weight: 600;
   margin: 0;
 }
 .post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn .tf-price-info h3 small,
@@ -2121,7 +2070,7 @@
 .tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn .tf-price-info h3 small,
 .page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn .tf-price-info h3 small {
   color: #686E7A;
-  font-size: 16px !important;
+  font-size: 16px;
   font-weight: 400;
   text-transform: capitalize;
 }
@@ -2166,7 +2115,7 @@
 .tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view,
 .tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view,
 .page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view {
-  width: 100% !important;
+  width: 100%;
   display: flex;
 }
 @media only screen and (max-width: 885px) {
@@ -2378,8 +2327,8 @@
 .tax-carrental_brand .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf-sidebar-header h4,
 .page-template-tf-search .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf-sidebar-header h4 {
   color: #060D1C;
-  font-size: 16px !important;
-  font-weight: 400 !important;
+  font-size: 16px;
+  font-weight: 400;
   margin: 0;
 }
 .post-type-archive-tf_carrental .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf-sidebar-header button,
@@ -2387,7 +2336,7 @@
 .tax-carrental_brand .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf-sidebar-header button,
 .page-template-tf-search .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf-sidebar-header button {
   color: #686E7A;
-  font-size: 16px !important;
+  font-size: 16px;
   font-weight: 400;
   background-color: transparent;
   padding: 0px;
@@ -2426,9 +2375,9 @@
 .tax-carrental_brand .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-widget-title span,
 .page-template-tf-search .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-widget-title span {
   color: #686E7A;
-  font-size: 16px !important;
-  font-style: normal !important;
-  font-weight: 400 !important;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
   margin-bottom: 16px;
   cursor: auto;
 }
