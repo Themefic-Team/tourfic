@@ -114,7 +114,7 @@
             
                     @media #{$max767} {
                         border-bottom: none;
-                        padding: 0 !important;
+                        padding: 0;
                     }
             
                     .tf_input-inner{
@@ -182,7 +182,7 @@
                 transform-origin: bottom;
                 transform: rotateX(90deg);
                 transition: all 0.3s ease-in-out;
-                width: 100% !important;
+                width: 100%;
                 background: $color-light-bg;
                 box-shadow: none;
                 @media #{$max1199} {
@@ -225,7 +225,7 @@
             
                     @media #{$max767} {
                         border-bottom: none;
-                        padding: 0 !important;
+                        padding: 0;
                     }
             
                     .tf_input-inner{
@@ -277,7 +277,7 @@
                     }
                     &.tf-booking-bttns{
                         a{
-                            padding: 16px 32px !important;
+                            padding: 16px 32px;
                         }
                     }
                 }
@@ -307,7 +307,7 @@
                             gap: 6px;
                             cursor: pointer;
                             background: transparent;
-                            padding: 0px !important;
+                            padding: 0px;
                             justify-content: start;
                         }
                         .tf-booking-date {
@@ -345,7 +345,7 @@
                             line-height: 20.8px;
                             margin-bottom: 0px;
                             border-right: 1px solid $color-border;
-                            border-radius: 0px !important;
+                            border-radius: 0px;
                             background-image: none;
                             text-align: center;
                             @media #{$max640}{
@@ -403,7 +403,7 @@
                             width: 100%;
                             display: none;
                             .acr-select input[type="number"]{
-                                padding-left: 0px !important;
+                                padding-left: 0px;
                             }
                         }
                         .tf_acrselection-wrap.tf-show{
@@ -413,7 +413,7 @@
                             visibility: visible;
                             opacity: 1;
                             top: 100%;
-                            display: block !important;
+                            display: block;
                             margin-top: 0px;
                             bottom: 162%;
                             top: auto;
@@ -434,9 +434,9 @@
                 padding: 24px;
             
                 .tf-tour-external-booking-button {
-                    border: 1px solid $color-primary !important;
-                    background: $color-primary !important;
-                    padding: 12px 32px !important;
+                    border: 1px solid $color-primary;
+                    background: $color-primary;
+                    padding: 12px 32px;
                     justify-content: center;
                     transition: .3s all ease;
                     border-radius: 0px;

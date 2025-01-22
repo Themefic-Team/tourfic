@@ -18,7 +18,7 @@
                 @media only screen and (max-width: 767px) {
                     max-width: 450px;
                 }
-                .btn-styled {
+                .tf_btn {
                     border-radius: 2px;
                     width: 160px;
                     font-weight: bold;
@@ -38,7 +38,7 @@
                     display: flex;
                     align-items: center;
                     gap: 15px;
-                    margin: 0 !important;
+                    margin: 0;
                     @media only screen and (max-width: 1200px) {
                         flex-wrap: wrap;
                     }
@@ -51,7 +51,7 @@
                         display: flex;
                         justify-content: center;
                         width: 95%;
-                        padding: 10px !important;
+                        padding: 10px;
                     }
                 }
                 .tf_form-row {
@@ -115,16 +115,16 @@
                     right: 0;
                     .tf_acrselection-wrap {
                         position: absolute;
-                        top: unset !important;
+                        top: unset;
                         left: 0;
                         right: auto;
-                        bottom: 100% !important;
+                        bottom: 100%;
                     }
                     .tf_tours_booking {
                         width: 100%;
                         max-width: 1200px;
                         margin: auto;
-                        margin: 0 auto !important;
+                        margin: 0 auto;
                     }
 
                     .tf_selectperson-wrap {

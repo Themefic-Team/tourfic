@@ -101,7 +101,7 @@
                         &:first-child{
                             border-radius: 8px 0px 0px 8px;
                             @media #{$max767}{
-                                border-radius: 16px !important;
+                                border-radius: 16px;
                                 border: 1px solid $color-primary;
                                 background-color: transparent;
                                 color: $color-primary;
@@ -114,7 +114,7 @@
                         color: $color-white;
                         padding-right: 50px;
                         @media #{$max767}{
-                            padding-right: 8px !important;
+                            padding-right: 8px;
                             border: 1px solid $color-primary;
                             background-color: transparent;
                             color: $color-primary;
@@ -122,7 +122,7 @@
                         &:first-child{
                             border-radius: 8px 0px 0px 8px;
                             @media #{$max767}{
-                                border-radius: 16px !important;
+                                border-radius: 16px;
                             }
                         }
                         &::before{
@@ -146,7 +146,7 @@
                                 position: static;
                             }
                             @media #{$max767}{
-                                border-radius: 16px !important;
+                                border-radius: 16px;
                                 border: 1px solid $color-primary;
                                 background-color: transparent;
                                 color: $color-primary;
@@ -187,10 +187,10 @@
                 p{
                     color: $color-text;
                     font-family: inherit;
-                    font-size: 16px !important;
-                    font-style: normal !important;
-                    font-weight: 400 !important;
-                    line-height: 24px !important;
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 24px;
                     margin-top: 0px;
                     margin-bottom: 24px;
                 }
@@ -269,28 +269,28 @@
                                 h5{
                                     color: $color-heading;
                                     font-family: inherit;
-                                    font-size: 16px !important;
+                                    font-size: 16px;
                                     font-style: normal;
-                                    font-weight: 500 !important;
-                                    line-height: 20px !important;
+                                    font-weight: 500;
+                                    line-height: 20px;
                                     margin: 0;
                                     span{
-                                        font-weight: 700 !important;
+                                        font-weight: 700;
                                     }
                                 }
                                 p{
                                     color:  $color-text;                                
                                     font-family: inherit;
-                                    font-size: 16px !important;
-                                    font-style: normal !important;
-                                    font-weight: 400 !important;
-                                    line-height: 20px !important;
-                                    margin: 0 !important;
+                                    font-size: 16px;
+                                    font-style: normal;
+                                    font-weight: 400;
+                                    line-height: 20px;
+                                    margin: 0;
                                 }
                             }
                         }
                         .quantity-active {
-                            display: block !important;
+                            display: block;
                         }
                         .tf_quantity-acrselection {
                             width: 70%;
@@ -306,7 +306,7 @@
                             .quanity-acr-fields {
                                 display: flex;
                                 align-items: center;
-                                padding: 15px !important;
+                                padding: 15px;
                             }
 
                             .quanity-acr-select {
@@ -332,16 +332,16 @@
                             }
 
                             input[type=number] {
-                                width: 25% !important;
-                                padding: 0px !important;
-                                margin: 0px !important;
-                                border: 0px !important;
+                                width: 25%;
+                                padding: 0px;
+                                margin: 0px;
+                                border: 0px;
                                 box-shadow: none;
-                                background: rgba(0,0,0,0) !important;
+                                background: rgba(0,0,0,0);
                                 text-align: center;
                                 font-size: 16px;
                                 font-weight: 600;
-                                color: $color-text !important;
+                                color: $color-text;
                             }
 
                             input::-webkit-outer-spin-button,
@@ -356,10 +356,10 @@
                         h4{
                             color: $color-heading;
                             font-family: inherit;
-                            font-size: 16px !important;
-                            font-style: normal !important;
-                            font-weight: 500 !important;
-                            line-height: 20px !important;
+                            font-size: 16px;
+                            font-style: normal;
+                            font-weight: 500;
+                            line-height: 20px;
                         }
                         .traveller-info{
                             display: grid;
@@ -423,19 +423,19 @@
                     h5{
                         color: $color-heading;
                         font-family: inherit;
-                        font-size: 16px !important;
-                        font-style: normal !important;
-                        font-weight: 500 !important;
-                        line-height: 20px !important; 
+                        font-size: 16px;
+                        font-style: normal;
+                        font-weight: 500;
+                        line-height: 20px; 
                         margin-bottom: 16px;
                     }
                     h4{
                         color: $color-heading;
                         font-family: inherit;
-                        font-size: 20px !important;
-                        font-style: normal !important;
-                        font-weight: 500 !important;
-                        line-height: 30px !important;
+                        font-size: 20px;
+                        font-style: normal;
+                        font-weight: 500;
+                        line-height: 30px;
                         letter-spacing: -0.4px;
                         margin-bottom: 15px;
                     }
@@ -459,10 +459,10 @@
                     h6{
                         color: $color-heading;
                         font-family: inherit;
-                        font-size: 16px !important;
-                        font-style: normal !important;
-                        font-weight: 400 !important;
-                        line-height: 20px !important;
+                        font-size: 16px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 20px;
                         margin-bottom: 16px;
                     }
                     table{
@@ -530,10 +530,10 @@
                     display: inline-block;
                     color: $color-heading;
                     font-family: inherit;
-                    font-size: 16px !important;
-                    font-style: normal !important;
-                    font-weight: 500 !important;
-                    line-height: 24px !important;
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: 24px;
                 }
                 .tooltip-box {
                     top: 11px;
@@ -544,8 +544,8 @@
                         text-align: center;
                         position: relative;
                         i{
-                            padding: 0px !important;
-                            font-weight: 400 !important;
+                            padding: 0px;
+                            font-weight: 400;
                         }
                         .tf-tooltip {
                             padding: 10px 10px;

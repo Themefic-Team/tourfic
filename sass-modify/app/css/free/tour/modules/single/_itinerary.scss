@@ -113,11 +113,11 @@
                             margin-bottom: 20px;
                             .ininerary-gallery-single {
                                 &.slick-slide.slick-active {
-                                    height: 130px !important;
+                                    height: 130px;
                                 }
                                 >a {
                                     img {
-                                        height: 130px !important;
+                                        height: 130px;
                                     }
                                 }
                             }
@@ -327,7 +327,7 @@
                     justify-content: center;
                     text-decoration: none;
                     @media #{$max1024}{
-                        font-size: 12px !important;
+                        font-size: 12px;
                     }
                 }
                 .tf-itinerary-wrapper{
@@ -361,13 +361,13 @@
                     }
                     .tf-itinerary-title span.tf-head-title {
                         color: $color-text;
-                        font-size: 20px !important;
-                        font-weight: 400 !important;
-                        line-height: 26px !important;
+                        font-size: 20px;
+                        font-weight: 400;
+                        line-height: 26px;
                         word-wrap: break-word;
                         margin: 0px;
                         @media #{$max1024}{
-                            font-size: 16px !important;
+                            font-size: 16px;
                         }
                         @media #{$max767}{
                             display: flex;
@@ -401,7 +401,7 @@
                             width: calc(100% - 204px);
                         }
                         @media #{$max767}{
-                            width: 100% !important;
+                            width: 100%;
                         }
                         .tf-itinerary-more-offer{
                             margin-top: 16px;
@@ -449,12 +449,12 @@
             
                 .section-title h2 {
                     color: $color-heading;
-                    font-size: 32px !important;
-                    font-style: normal !important;
-                    font-weight: 700 !important;
+                    font-size: 32px;
+                    font-style: normal;
+                    font-weight: 700;
                     margin: 0;
                     @media #{$max1024}{
-                        font-size: 24px !important;
+                        font-size: 24px;
                     }
                 }
             
@@ -475,7 +475,7 @@
                         width: 179px;
                     }
                     @media #{$max767}{
-                        width: 100% !important;
+                        width: 100%;
                     }
                     .ininerary-other-gallery{
                         display: grid;
@@ -496,18 +496,18 @@
                             width: 100%;
                             height: 100%;
                             justify-content: center;
-                            background-size: cover !important;
-                            background-position: center !important;
+                            background-size: cover;
+                            background-position: center;
                         }
                     }
                 }
             
                 .tf-single-itinerary.active .tf-itinerary-content {
-                    display: flex !important;
+                    display: flex;
                 }
             
                 .tf-single-itinerary.active {
-                    padding-bottom: 32px !important;
+                    padding-bottom: 32px;
                 }
             
                 .tf-itinerary-map iframe {
@@ -529,7 +529,7 @@
             
                 #tour-location {
                     @media #{$tfmax767}{
-                        height: 220px !important;
+                        height: 220px;
                     }
                 }
             }
