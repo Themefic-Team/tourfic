@@ -5907,18 +5907,12 @@ div#tf-destinationautocomplete-list div:before {
   -ms-flex-direction: column;
   flex-direction: column;
   gap: 24px;
-  max-height: 728px;
+  max-height: calc(100vh - 96px);
   overflow-y: auto;
 }
 
 .fancybox-container .tf-archive-details .tf-archive-hotels .single-tour-inner {
   margin: 0;
-}
-
-@media only screen and (max-width: 1440px) {
-  .fancybox-container .tf-archive-details .tf-archive-hotels {
-    max-height: calc(100vh - 96px);
-  }
 }
 
 @media only screen and (max-width: 1024px) {
@@ -6113,27 +6107,6 @@ div#tf-destinationautocomplete-list div:before {
   font-size: 16px;
   font-weight: 500;
   color: #060D1C;
-}
-
-.fancybox-container .tf-archive-details .tf-archive-hotel .tf-archive-hotel-content .tf-archive-hotel-content-right .view-hotel {
-  color: #0E3DD8;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 20px;
-  text-decoration: none;
-  border-radius: 4px;
-  background-color: #faeedc;
-  padding: 8px 24px;
-  text-align: center;
-  -webkit-transition: all 0.25s ease-in-out;
-  -moz-transition: all 0.25s ease-in-out;
-  -o-transition: all 0.25s ease-in-out;
-  transition: all 0.25s ease-in-out;
-}
-
-.fancybox-container .tf-archive-details .tf-archive-hotel .tf-archive-hotel-content .tf-archive-hotel-content-right .view-hotel:hover {
-  background-color: #0E3DD8;
-  color: #ffffff;
 }
 
 .fancybox-container .tf-archive-details #tf_ajax_searchresult_loader {
@@ -6605,7 +6578,7 @@ div#tf-destinationautocomplete-list div:before {
   padding-bottom: 24px;
 }
 
-@media only screen and (max-width: 991.98px) {
+@media only screen and (max-width: 1024px) {
   .fancybox-container .tf-available-room .tf-available-room-contents .tf-room-options-content-inner {
     display: block;
   }
@@ -6757,7 +6730,7 @@ div#tf-destinationautocomplete-list div:before {
   margin-top: auto;
 }
 
-@media only screen and (max-width: 991.98px) {
+@media only screen and (max-width: 1024px) {
   .fancybox-container .tf-available-room.tf-desktop-room {
     display: none;
   }
@@ -6767,7 +6740,7 @@ div#tf-destinationautocomplete-list div:before {
   display: none;
 }
 
-@media only screen and (max-width: 991.98px) {
+@media only screen and (max-width: 1024px) {
   .fancybox-container .tf-available-room.tf-tabs-room {
     display: flow-root;
   }
@@ -6915,36 +6888,6 @@ div#tf-destinationautocomplete-list div:before {
 
 .fancybox-container .tf-available-room.tf-tabs-room .tf-available-room-content .tf-available-room-content-right button {
   padding: 12px 20px;
-}
-
-.fancybox-container .tf-available-room.tf-tabs-room .tf-available-room-content .tf-available-room-content-right a.view-hotel {
-  color: #ffffff;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 24px;
-  background: #0E3DD8;
-  padding: 12px 32px;
-  text-decoration: none;
-  display: inline-block;
-  text-align: center;
-  transition: .3s all ease;
-  margin-top: auto;
-}
-
-.fancybox-container .tf-available-room.tf-tabs-room .tf-available-room-content .tf-available-room-content-right a.view-hotel:hover {
-  background-color: #003C7A;
-}
-
-@media only screen and (max-width: 1366px) {
-  .fancybox-container .tf-available-room.tf-tabs-room .tf-available-room-content .tf-available-room-content-right a.view-hotel {
-    padding: 12px 32px;
-  }
-}
-
-@media only screen and (max-width: 1200px) {
-  .fancybox-container .tf-available-room.tf-tabs-room .tf-available-room-content .tf-available-room-content-right a.view-hotel {
-    font-size: 12px;
-  }
 }
 
 .tf-single-template__one .fancybox-container #tf_posts_navigation_bar,
@@ -16712,27 +16655,6 @@ div#tf-destinationautocomplete-list div:before {
   font-size: 16px;
   font-weight: 500;
   color: #060D1C;
-}
-
-.tf-archive-template__four .tf-archive-details .tf-archive-hotel .tf-archive-hotel-content .tf-archive-hotel-content-right .view-hotel {
-  color: #0E3DD8;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 20px;
-  text-decoration: none;
-  border-radius: 4px;
-  background-color: #faeedc;
-  padding: 8px 24px;
-  text-align: center;
-  -webkit-transition: all 0.25s ease-in-out;
-  -moz-transition: all 0.25s ease-in-out;
-  -o-transition: all 0.25s ease-in-out;
-  transition: all 0.25s ease-in-out;
-}
-
-.tf-archive-template__four .tf-archive-details .tf-archive-hotel .tf-archive-hotel-content .tf-archive-hotel-content-right .view-hotel:hover {
-  background-color: #0E3DD8;
-  color: #ffffff;
 }
 
 .tf-archive-template__four .tf-archive-details .tf-archive-hotels.tf-layout-grid {
