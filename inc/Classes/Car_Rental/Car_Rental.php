@@ -33,12 +33,11 @@ class Car_Rental
 
 		$existing_min_max_price = !empty( get_option('tf_transport_min_max_price') ) ? get_option('tf_transport_min_max_price') : array('min' => 0, 'max' => 1);
 
-		$min_max_price = get_cars_min_max_price();
-
-		// TODO: Need to check the minimum price, and if the minimum price changed then the option sould be updated
+		$min_max_price = get_cars_min_max_price($post_id);
         
-		if( !empty($min_max_price['min']) && ($min_max_price['min'] < $existing_min_max_price["min"] || $existing_min_max_price["min"] < $min_max_price['min'] ) && $min_max_price['min'] < $min_max_price['max'] ) {
-			$updated_min_max_price["min"] = $min_max_price['min'];
+        
+		if( !empty($min_max_price['min']) && $min_max_price['min'] < $existing_min_max_price["min"] && $min_max_price['min'] < $min_max_price['max'] ) {
+			$updated_min_max_price["min"] = $min_max_price["min"] === 1 ? $min_max_price['max'] : $min_max_price['min'];
 		} else {
 			$updated_min_max_price["min"] = $existing_min_max_price["min"];
 		}
