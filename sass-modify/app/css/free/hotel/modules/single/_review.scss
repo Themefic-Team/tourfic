@@ -17,11 +17,11 @@
                         background-color: $color-white;
                         box-shadow: 0px 13px 30px 0px rgba(224,232,238,0.32);
                         padding: 30px;
-                        @media #{$tfmax991}{
+                        @media #{$max1024}{
                             flex-basis: 28%;
                             margin-right: 28px;
                         }
-                        @media #{$tfmax767}{
+                        @media #{$max768}{
                             flex-basis: 100%;
                             margin-right: 0px;
                             margin-bottom: 20px;
@@ -70,17 +70,17 @@
                         box-shadow: 0px 13px 30px 0px rgba(224,232,238,0.32);
                         padding: 30px;
         
-                        @media #{$tfmax767}{
+                        @media #{$max768}{
                             flex-basis: 100%;
                         }
                         
                         .tf-percent-progress{
                             column-gap: 70px;
                             flex-wrap: wrap;
-                            @media #{$tfmax991}{
+                            @media #{$max1024}{
                                 column-gap: 24px;
                             }
-                            @media #{$tfmax767}{
+                            @media #{$max768}{
                                 column-gap: 16px;
                             }
                         }
@@ -93,13 +93,13 @@
                         .tf-progress-item {
                             width: 42%;
                             margin-bottom: 16px;
-                            @media #{$tfmax767}{
+                            @media #{$max768}{
                                 width: 40%;
                             }
-                            @media #{$tfmax360}{
+                            @media #{$max320}{
                                 width: 100%;
                             }
-                            @media #{$tfmax991}{
+                            @media #{$max1024}{
                                 width: 42%;
                             }
                             

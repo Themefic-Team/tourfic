@@ -54,10 +54,10 @@
                                 margin-right: 8px;
                             }
                     }
-                    @media #{$tfmax767}{
+                    @media #{$max768}{
                         grid-template-columns: 100%;
                     }
-                    @media #{$tfmax991}{
+                    @media #{$max1024}{
                         grid-template-columns: repeat(3, 33%);
                     }
                 }

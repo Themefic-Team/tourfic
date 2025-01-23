@@ -2,30 +2,25 @@
     .tf-single-template{
         &__one{
             .popupmap-for-mobile {
-                @media only screen and (min-width: 951px) {
-                    display: none;
-                }
-                @media only screen and (max-width: 950px) {
+                display: none;
+                @media #{$max1024}{
+                    display: block;
                     margin-top: 15px;
                 }
             }
             .map-for-mobile {
-                @media only screen and (min-width: 831px) {
-                    display: none;
-                }
-                @media only screen and (max-width: 830px) {
+                display: none;
+                @media #{$max1024}{
+                    display: block;
                     margin-top: 15px;
                 }
             }
             .show-on-map {
                 margin-bottom: 20px;
-                @media only screen and (max-width: 830px) {
-                    display: none;
-                }
                 iframe {
                     height: 130px;
                 }
-                .btn-styled {
+                .tf_btn {
                     background: linear-gradient(to bottom, $color-primary 0, $color-secondary 100%);
                     border: none;
                     text-transform: uppercase;
@@ -37,6 +32,13 @@
                 i {
                     padding-right: 8px;
                     font-size: 15px;
+                }
+            }
+            .hero-right{
+                .show-on-map{
+                    @media #{$max1024}{
+                        display: none;
+                    }
                 }
             }
         }
@@ -52,7 +54,7 @@
                     position: relative;
                     margin-bottom: 0px;
                     border: 1px solid $color-border;
-                    @media #{$tfmax767}{
+                    @media #{$max768}{
                         margin-bottom: 30px;
                     }
                     iframe{
