@@ -10,7 +10,7 @@ Container
         max-width: 100%;
     }
 
-    @media #{$max767} {
+    @media #{$max768} {
         width: 100%;
     }
 }
@@ -213,10 +213,6 @@ Modal
         max-width: 100%;
         position: relative;
         pointer-events: none;
-
-        @media #{$min576} {
-            min-height: calc(100% - 40px);
-        }
     }
 
     .tf-modal-content {

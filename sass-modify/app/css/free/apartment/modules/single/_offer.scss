@@ -9,6 +9,9 @@
                     border: 1px solid $color-border;
                     background: $color-gray-info;
                     padding: 24px 40px;
+                    @media #{$max575}{
+                        padding: 16px;
+                    }
                 }
 
                 .tf-apartment-amenities {
@@ -22,13 +25,18 @@
                         gap: 16px;
                         margin-bottom: 5px;
                         color: $color-text;
-
+                        @media #{$max575}{
+                            gap: 8px;
+                        }
                         .tf-apt-amenity-icon {
                             @include flexbox();
                             @include align-items(center);
                             @include flex(0 0 24px);
                             height: 24px;
+                            @media #{$max575}{
+                                @include flex(initial);
 
+                            }
                             i {
                                 font-size: 24px;
                                 color: $color-text;
@@ -54,7 +62,7 @@
         }
         &__three{
             .tf-place-offer-section{
-                @media #{$max767}{
+                @media #{$max768}{
                     padding-left: 16px;
                     padding-right: 16px;
                 }
@@ -63,7 +71,7 @@
                     font-size: 32px;
                     font-weight: 700;
                     margin-bottom: 24px;
-                    @media #{$max767}{
+                    @media #{$max768}{
                         font-size: 24px;
                     }
                 }
@@ -71,7 +79,7 @@
                     display: grid;
                     gap: 8px 16px;
                     grid-template-columns: 1fr 1fr 1fr 1fr;
-                    @media #{$max767}{
+                    @media #{$max768}{
                         grid-template-columns: 1fr 1fr;
                     }
                     .tf-apt-amenity{

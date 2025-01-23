@@ -20,6 +20,9 @@
                         @media #{$max768} {
                             gap: 16px;
                         }
+                        @media #{$max320} {
+                           flex-direction: column;
+                        }
 
                         img {
                             object-fit: cover;
@@ -46,7 +49,7 @@
                                 @media #{$max768} {
                                     height: 350px;
                                 }
-                                @media #{$max480} {
+                                @media #{$max575} {
                                     height: 300px;
                                 }
                             }
@@ -72,7 +75,7 @@
                                 @media #{$max768} {
                                     height: 167px;
                                 }
-                                @media #{$max480} {
+                                @media #{$max575} {
                                     height: 142px;
                                 }
                             }

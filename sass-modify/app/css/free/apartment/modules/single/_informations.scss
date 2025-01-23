@@ -59,7 +59,7 @@
                     min-height: 72px;
                     box-sizing: border-box;
 
-                    @media #{$max480} {
+                    @media #{$max575} {
                         @include flex(0 0 100%);
                     }
 
