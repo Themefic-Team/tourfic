@@ -178,9 +178,7 @@
                                     input:checked ~ .tf-checkmark:after {
                                         display: block;
                                     }
-                                    input:checked ~ .tf-checkmark{
-                                        background-color: $color-light-bg;
-                                    }
+                                    
                                     .tf-checkmark {
                                         position: absolute;
                                         top: 2px;

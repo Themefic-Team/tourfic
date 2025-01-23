@@ -52,7 +52,7 @@
             .tf-faq-sec-title {
                 margin-bottom: 60px;
                 text-align: center;
-                @media only screen and (max-width: 767px) {
+                @media #{$max768} {
                     margin-bottom: 20px;
                 }
                 p {
@@ -63,7 +63,7 @@
             .tf-faq-content-wrapper {
                 @include flexbox();
                 gap: 35px;
-                @media only screen and (max-width: 980px) {
+                @media #{$max1024} {
                     display: grid;
                 }
             }
@@ -225,7 +225,6 @@
                         font-weight: 400;
                         max-height: 260px;
                         overflow: auto;
-
                         scrollbar-width: thin;
                         scrollbar-color: $color-gray $color-white;
 
@@ -270,20 +269,20 @@
                 @include flex-wrap(wrap);
                 gap: 24px;
     
-                @media #{$max991} {
+                @media #{$max1024} {
                     flex-direction: column-reverse;
                 }
                 .tf-apartment-left {
                     width: calc(66.66% - 32px);
             
-                    @media #{$max991} {
+                    @media #{$max1024} {
                         width: 100%;
                     }
                 }
                 .tf-apartment-right {
                     width: 33.33%;
             
-                    @media #{$max991} {
+                    @media #{$max1024} {
                         width: 100%;
                     }
                 }
@@ -397,17 +396,13 @@
         
                     .tf-protection-content{
                         max-height: 360px;
-                        @media #{$max1024}{
-                            max-height: 260px;
-                        }
-                        @media #{$max991}{
-                            flex-direction: inherit;
-                        }
                         overflow: auto;
                         padding-right: 8px;
                         scrollbar-width: thin;
                         scrollbar-color: $color-gray $color-white;
-        
+                        @media #{$max1024}{
+                            max-height: 260px;
+                        }
                         /* Chrome, Edge, and Safari */
                         *::-webkit-scrollbar {
                             width: 5px;
@@ -431,7 +426,7 @@
                             border-radius: 16px;
                             border: 1px solid $color-border;
                             padding: 24px;
-                            @media #{$max991}{
+                            @media #{$max1024}{
                                 width: 100%;
                             }
                             @media #{$max768}{
@@ -737,7 +732,7 @@
     .tf-date-select-box{
         padding: 8px;
         flex-wrap: nowrap;
-        @media #{$max767}{
+        @media #{$max768}{
             flex-wrap: wrap;
         }
         .tf-date-single-select{
@@ -745,7 +740,7 @@
             background: $color-white;
             padding: 16px;
             width: 33.33%;
-            @media #{$max767}{
+            @media #{$max768}{
                 width: 100%;
             }
             .tf-select-date{
@@ -890,12 +885,12 @@
     }
     .tf-driver-location-box{
         padding: 8px;
-        @media #{$max767}{
+        @media #{$max768}{
             display: flow-root;
         }
         .tf-driver-location{
             padding-left: 16px;
-            @media #{$max767}{
+            @media #{$max768}{
                 padding-left: 0px;
             }
             ul{
@@ -964,7 +959,7 @@
             }
         }
         .tf-submit-button{
-            @media #{$max767}{
+            @media #{$max768}{
                 margin-top: 16px;
             }
             button{
