@@ -2309,6 +2309,13 @@ li.tf-filter-item {
   display: flex;
   align-items: center;
 }
+.tf_booking-widget.default-form .tf_form-inner input {
+  border: 0px solid;
+}
+.tf_booking-widget.default-form .tf_form-inner input:focus {
+  box-shadow: none;
+  outline: none;
+}
 .tf_booking-widget.default-form .tf-label {
   display: none;
 }

@@ -186,6 +186,13 @@
             padding: 0;
             display: flex;
             align-items: center;
+            input{
+                border: 0px solid;
+                &:focus{
+                    box-shadow: none;
+                    outline: none;
+                }
+            }
         }
         .tf-label {
             display: none;
