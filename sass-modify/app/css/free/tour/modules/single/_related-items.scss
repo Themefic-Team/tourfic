@@ -43,10 +43,10 @@
                     justify-content: space-between;
                     font-size: 18px;
                     margin-top: 30px;
-                    @media only screen and (max-width: 980px) {
+                    @media #{$max1024}{
                         font-size: 14px;
                     }
-                    @media only screen and (max-width: 480px) {
+                    @media #{$max575}{
                         font-size: 12px;
                     }
                 }
@@ -58,13 +58,13 @@
                 border-top: 1px solid $color-border;
         
                 .tf-upcomming-tours-list-outter{
-                    @media #{$tfmax991}{
+                    @media #{$max1024}{
                         .tf-post-box-lists{
                             flex-basis: calc(100%/2 - 12px);
                         }
                     }
                 }
-                @media #{$tfmax991}{
+                @media #{$max1024}{
                     padding-top: 60px;
                 }
                 .tf-image-data {

@@ -9,7 +9,7 @@
                 }
                 #tf-accordion-wrapper {
                     margin-bottom: 30px;
-                    @media only screen and (max-width: 480px) {
+                    @media #{$max575}{
                         margin-bottom: 15px;
                     }
                     .tf-accordion-head {
@@ -32,13 +32,13 @@
                             justify-content: center;
                             box-shadow: 0px 2px 4px rgba(90, 91, 106, 0.08);
                             padding: 10px;
-                            @media only screen and (max-width: 767px) {
+                            @media #{$max768}{
                                 height: 60px;
                             }
                             span {
                                 font-size: 18px;
                                 color: $color-white;
-                                @media only screen and (max-width: 767px) {
+                                @media #{$max768}{
                                     font-size: 15px;
                                     text-align: center;
                                 }
@@ -53,7 +53,7 @@
                             &:hover {
                                 color: $color-primary;
                             }
-                            @media only screen and (max-width: 767px) {
+                            @media #{$max768}{
                                 font-size: 15px;
                                 padding-left: 20px;
                             }
@@ -88,7 +88,7 @@
                             padding-top: 20px;
                             gap: 20px;
                             flex-direction: row;
-                            @media only screen and (max-width: 767px) {
+                            @media #{$max768}{
                                 display: grid;
                             }
                             .tf-ititnerary-img {
@@ -96,7 +96,7 @@
                                 img {
                                     width: 100%;
                                     object-fit: cover;
-                                    @media only screen and (max-width: 767px) {
+                                    @media #{$max768}{
                                         max-width: 100%;
                                     }
                                 }
@@ -132,7 +132,7 @@
                     background: $color-white;
                     @include bd-radius(5px);;
                     box-shadow: 0px 0px 24px 5px $color-box-shadow;
-                    @media #{$tfmax767}{
+                    @media #{$max768}{
                         padding: 40px 24px;
                     }
                 }
@@ -146,18 +146,18 @@
                             cursor: pointer;
                         }
                     }
-                    @media #{$tfmax767}{
+                    @media #{$max768}{
                         padding-left: 30px;
                     }
         
                     .tf-itinerary-content-box{
                     display: none;
-                        @media #{$tfmax767}{
+                        @media #{$max768}{
                             margin-left: -30px;
                         }
                         .tf-itinerary-content-img{
                             flex-basis: 20%;
-                            @media #{$tfmax767}{
+                            @media #{$max768}{
                                 flex-basis: 100%;
                             }
                             img{
@@ -169,7 +169,7 @@
                                 margin-bottom: 5px;
                             }
                             flex-basis: 80%;
-                            @media #{$tfmax767}{
+                            @media #{$max768}{
                                 flex-basis: 100%;
                             }
                         }
@@ -216,7 +216,7 @@
                                     width: 100%;
                                     z-index: 1;
                                     background: $color-heading;
-                                    @media #{$tfmax767}{
+                                    @media #{$max768}{
                                         text-align: center;
                                     }
                                 }
@@ -297,7 +297,7 @@
                 display: flex;
                 flex-direction: column;
                 gap: 16px;
-                @media #{$max767}{
+                @media #{$max768}{
                     padding-left: 16px;
                     padding-right: 16px;
                 }
@@ -369,7 +369,7 @@
                         @media #{$max1024}{
                             font-size: 16px;
                         }
-                        @media #{$max767}{
+                        @media #{$max768}{
                             display: flex;
                             align-items: center;
                         }
@@ -385,7 +385,7 @@
                     .tf-itinerary-content {
                         display: flex;
                         gap: 32px;
-                        @media #{$max767}{
+                        @media #{$max768}{
                             flex-wrap: wrap;
                         }
                     }
@@ -394,13 +394,10 @@
                         display: flex;
                         flex-direction: column;
                         width: calc(100% - 320px);
-                        @media #{$max1366}{
-                            width: calc(100% - 292px);
-                        }
                         @media #{$max1024}{
                             width: calc(100% - 204px);
                         }
-                        @media #{$max767}{
+                        @media #{$max768}{
                             width: 100%;
                         }
                         .tf-itinerary-more-offer{
@@ -467,14 +464,10 @@
                         height: 100%;
                         object-fit: cover;
                     }
-                    
-                    @media #{$max1366}{
-                        width: 252px;
-                    }
-                    @media #{$max1366}{
+                    @media #{$max1024}{
                         width: 179px;
                     }
-                    @media #{$max767}{
+                    @media #{$max768}{
                         width: 100%;
                     }
                     .ininerary-other-gallery{
@@ -522,13 +515,13 @@
                 margin-top: 32px;
                 margin-bottom: 48px;
             
-                @media #{$tfmax767}{
+                @media #{$max768}{
                     margin-top: 12px;
                     margin-bottom: 20px;
                 }
             
                 #tour-location {
-                    @media #{$tfmax767}{
+                    @media #{$max768}{
                         height: 220px;
                     }
                 }

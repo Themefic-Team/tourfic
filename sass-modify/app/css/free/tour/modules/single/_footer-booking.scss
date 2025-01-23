@@ -17,14 +17,14 @@
                 transform: rotateX(90deg);
                 transition: all 0.3s ease-in-out;
             
-                @media #{$max1199} {
+                @media #{$max1024} {
                     @include flex-wrap();
                     padding: 16px;
                     gap: 8px;
                     width:calc(100% - 32px);
                 }
             
-                @media #{$max767} {
+                @media #{$max768}{
                     transform: rotateX(0);
                     z-index: 9999;
                     width: 100%;
@@ -51,13 +51,13 @@
                     @include flexbox();
                     gap: 24px;
             
-                    @media #{$max1199} {
+                    @media #{$max1024} {
                         width: 100%;
                         gap: 16px;
                         @include justify-content(center);
                     }
             
-                    @media #{$max767} {
+                    @media #{$max768}{
                         @include flex-wrap();
                         display: none;
                     }
@@ -67,7 +67,7 @@
                     @include flexbox();
                     gap: 8px;
             
-                    @media #{$max767} {
+                    @media #{$max768}{
                         width: 100%;
                     }
             
@@ -81,7 +81,7 @@
                         font-size: 16px;
                         flex: 1;
             
-                        @media #{$max767} {
+                        @media #{$max768}{
                             flex-grow: 1;
                         }
                     }
@@ -100,7 +100,7 @@
                     text-align: center;
                     color: $color-white;
             
-                    @media #{$max767} {
+                    @media #{$max768}{
                         height: 44px;
                         width: 44px;
                         line-height: 44px;
@@ -112,7 +112,7 @@
                     border-right: none;
                     padding: 0;
             
-                    @media #{$max767} {
+                    @media #{$max768}{
                         border-bottom: none;
                         padding: 0;
                     }
@@ -123,7 +123,7 @@
                         padding: 0 16px;
                         background-color: $color-white;
             
-                        @media #{$max767} {
+                        @media #{$max768}{
                             flex-grow: 1;
                             width: 100%;
                         }
@@ -140,29 +140,27 @@
             
                 .tf-booking-mobile-btn{
                     display: none;
-            
-                    @media #{$max767} {
+                    @media #{$max768}{
                         display: block;
                     }
                 }
             
-                @media #{$max767} {
-                    .tf-booking-popup-btn{
+               
+                .tf-booking-popup-btn{
+                    @media #{$max768}{
                         display: none;
-                    }
-                    .tf-tours-booking-btn{
-                        width: 100%;
                     }
                 }
                 
                 .tf-tours-booking-btn {
-                    @media only screen and (min-width: 768px) and (max-width: 970px) {
-                        width: 98%;
-                        margin: auto;
+                    @media #{$max1024}{
+                        width: 100%;
+                        display: flex;
+                        justify-content: center;
                     }
-                    @media only screen and (max-width: 767px) {
-                        width: 98%;
-                        margin: auto;
+                    @media #{$max768}{
+                        width: 100%;
+                        display: block;
                     }
             
                 }
@@ -185,14 +183,14 @@
                 width: 100%;
                 background: $color-light-bg;
                 box-shadow: none;
-                @media #{$max1199} {
+                @media #{$max1024} {
                     @include flex-wrap();
                     padding: 16px;
                     gap: 8px;
                     width:calc(100% - 32px);
                 }
             
-                @media #{$max767} {
+                @media #{$max768} {
                     transform: rotateX(0);
                     z-index: 9999;
                     width: 100%;
@@ -223,7 +221,7 @@
                     border-right: none;
                     padding: 0;
             
-                    @media #{$max767} {
+                    @media #{$max768} {
                         border-bottom: none;
                         padding: 0;
                     }
@@ -234,7 +232,7 @@
                         padding: 0 16px;
                         background-color: $color-white;
             
-                        @media #{$max767} {
+                        @media #{$max768} {
                             flex-grow: 1;
                             width: 100%;
                         }
@@ -251,29 +249,26 @@
             
                 .tf-booking-mobile-btn{
                     display: none;
-            
-                    @media #{$max767} {
+                    @media #{$max768} {
                         display: block;
                     }
                 }
-            
-                @media #{$max767} {
-                    .tf-booking-popup-btn{
+                
+                .tf-booking-popup-btn{
+                    @media #{$max768} {
                         display: none;
-                    }
-                    .tf-tours-booking-btn{
-                        width: 100%;
                     }
                 }
                 
                 .tf-tours-booking-btn {
-                    @media only screen and (min-width: 768px) and (max-width: 970px) {
-                        width: 98%;
-                        margin: auto;
+                    @media #{$max1024} {
+                        width: 100%;
+                        display: flex;
+                        justify-content: center;
                     }
-                    @media only screen and (max-width: 767px) {
-                        width: 98%;
-                        margin: auto;
+                    @media #{$max768} {
+                        width: 100%;
+                        display: block;
                     }
                     &.tf-booking-bttns{
                         a{
@@ -284,7 +279,7 @@
 
                 .tf-booking-form-fields{
                     display: flex;
-                    @media #{$max640}{
+                    @media #{$max768}{
                         justify-content: center;
                     }
                     .tf-booking-form-checkinout{
@@ -293,7 +288,7 @@
                         position: relative;
                         padding: 0px 38px;
                         display: flex;
-                        @media #{$max640}{
+                        @media #{$max768}{
                             padding: 0px 10px;
                         }
                         span.tf-booking-form-title {
@@ -348,7 +343,7 @@
                             border-radius: 0px;
                             background-image: none;
                             text-align: center;
-                            @media #{$max640}{
+                            @media #{$max768}{
                                 padding: 0px 10px;
                             }
                         }
@@ -356,7 +351,7 @@
                     .tf-booking-form-guest-and-room{
                         position: relative;
                         padding: 0px 38px;
-                        @media #{$max640}{
+                        @media #{$max768}{
                             padding: 0px 10px;
                         }
                         .tf-booking-form-title{
@@ -417,10 +412,10 @@
                             margin-top: 0px;
                             bottom: 162%;
                             top: auto;
-                            @media #{$max1199}{
+                            @media #{$max1024}{
                                 bottom: 131%;
                             }
-                            @media #{$max640}{
+                            @media #{$max768}{
                                 left: auto;
                                 right: 0;
                             }

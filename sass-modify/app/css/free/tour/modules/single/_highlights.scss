@@ -6,7 +6,7 @@
                     display: flex;
                     gap: 30px;
                     align-items: center;
-                    @media only screen and (max-width: 767px) {
+                    @media #{$max768}{
                         display: grid;
                     }
                     .tf-highlight-text {
