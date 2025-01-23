@@ -8,7 +8,7 @@
                 padding-bottom: 0;
                 margin-bottom: 80px;
 
-                @media #{$max767} {
+                @media #{$max1024} {
                     max-width: 100%;
                     padding: 0;
                 }
@@ -26,6 +26,7 @@
                     @include flexbox();
                     @include align-items(center);
                     gap: 16px;
+                    flex: 1;
 
                     .tf-apartment-question-icon {
                         @include flexbox();
@@ -68,15 +69,12 @@
 
                     @media #{$max575} {
                         @include flex-direction(column);
+                        @include align-items(flex-start);
                     }
                 }
 
                 .tf-btn {
                     width: auto;
-
-                    @media #{$max575} {
-                        width: 100%;
-                    }
                 }
             }
             .host-details {

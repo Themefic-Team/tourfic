@@ -4,18 +4,15 @@
 .search-result-inner {
     display: grid;
     grid-template-columns: 75% 25%;
-    @media only screen and (min-width: 768px) and (max-width: 991px) {
-        grid-template-columns: 65% 35%;
+    @media #{$max1024} {
+        grid-template-columns: 67% 33%;
     }
-    @media only screen and (min-width: 660px) and (max-width: 767px) {
-        grid-template-columns: 60% 40%;
-    }
-    @media only screen and (max-width: 659px) {
+    @media #{$max768} {
         grid-template-columns: 100%;
     }
     .tf-search-left {
         padding-right: 15px;
-        @media only screen and (max-width: 659px) {
+        @media #{$max768} {
             padding: 0;
         }
         .tf-action-top {
@@ -26,7 +23,7 @@
             margin-bottom: 15px;
             border-bottom: 1px solid $color-border;
             border-top: 1px solid $color-border;
-            @media (max-width: 991px) {
+            @media #{$max1024} {
                 display: none;
             }
             .tf-result-counter-info{
@@ -35,7 +32,7 @@
                     margin-right: 5px;
                 }
             }
-            @media(max-width: 544px) {
+            @media #{$max575} {
                 flex-direction: column;
                 .tf-result-counter-info{
                     margin-top: 10px;
@@ -65,7 +62,7 @@
             }
         }
         .single-tour-wrap{
-            @media only screen and (min-width: 635px) and (max-width: 659px) {
+            @media #{$max768} {
                 margin-bottom: 0px;
             }
             .single-tour-inner {
@@ -127,7 +124,7 @@
                     flex-basis: 200px;
                     padding: 0 0 0 16px;
                     .tf-archive-rating-wrapper {
-                        @media only screen and (min-width: 635px) and (max-width: 659px) {
+                        @media #{$max768} {
                             margin-top: 20px;
                         }
                         .tf-archive-rating {
@@ -145,7 +142,7 @@
                             font-size: 14px;
                             color: $color-white;
                             font-weight: bold;
-                            @media only screen and (min-width: 635px) and (max-width: 659px) {
+                            @media #{$max768} {
                                 float: none;
                             }
                         }
@@ -155,7 +152,7 @@
                             text-transform: capitalize;
                             font-size: 14px;
                             text-align: right;
-                            @media only screen and (min-width: 635px) and (max-width: 659px) {
+                            @media #{$max768} {
                                 text-align: left;
                             }
                         }
@@ -194,7 +191,7 @@
                         font-size: 12px;
                         line-height: 18px;
                         font-weight: 400;
-                        @media only screen and (min-width: 635px) and (max-width: 659px) {
+                        @media #{$max768} {
                             display: block;
                         }
                         .tf_item_main_block {
@@ -281,7 +278,7 @@
             }
         }
         .archive_ajax_result {
-            @media #{$max991} {
+            @media #{$max1024} {
                 .single-tour-wrap {
                     width: 100%;
                     flex: none;
@@ -320,10 +317,14 @@
                     }
                 } 
             }
-            @media only screen and (min-width: 635px) and (max-width: 659px) {
+            @media #{$max768} {
                 display: grid;
                 grid-template-columns: 49% 49%;
                 gap: 2%;
+            }
+            @media #{$max575} {
+                grid-template-columns: 100%;
+                gap: 0;
             }
             &.loading {
                 opacity: 0.3;
@@ -398,9 +399,11 @@
     }
     .tf-search-right {
         padding-left: 15px;
-        @media only screen and (max-width: 659px) {
+
+        @media #{$max768} {
             padding: 0;
             grid-row: 1;
+            margin-bottom: 24px;
         }
     }
 }
@@ -494,7 +497,7 @@
             padding: 6px 10px;
             border-radius: 4px;
             margin: 5px;
-            @media only screen and (max-width: 659px) {
+            @media #{$max768} {
                 display: inline-block;
                 padding-right: 25px;
                 margin-top: 5px;

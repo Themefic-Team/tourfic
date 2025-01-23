@@ -286,14 +286,10 @@
 
             .tf-details-left {
                 width: 787px;
+                height: 100vh;
                 padding: 24px 16px 24px 32px;
                 gap: 24px;
                 position: relative;
-
-                @media #{$max1440} {
-                    width: 50%;
-                    height: 100vh;
-                }
 
                 @media #{$max1024} {
                     width: 100%;
@@ -308,10 +304,6 @@
                 width: calc(100% - 787px);
                 overflow: hidden;
 
-                @media #{$max1440} {
-                    width: 50%;
-                }
-
                 @media #{$max1024} {
                     display: none;
                     position: fixed;
@@ -322,12 +314,8 @@
                 }
 
                 .tf-hotel-archive-map-wrap {
-                    height: 885px;
+                    height: 100vh;
                     width: 100%;
-
-                    @media #{$max1440} {
-                        height: 100vh;
-                    }
                 }
 
                 #tf-hotel-archive-map {
@@ -587,12 +575,8 @@
                 @include flexbox();
                 @include flex-direction(column);
                 gap: 24px;
-                max-height: 728px;
+                max-height: calc(100vh - 96px);
                 overflow-y: auto;
-
-                @media #{$max1440} {
-                    max-height: calc(100vh - 96px);
-                }
 
                 @media #{$max1024} {
                     max-height: inherit;
@@ -1132,7 +1116,7 @@
             display: block;
             width: 100%;
 
-            @media #{$max767}{
+            @media #{$max768}{
                 margin-bottom: 30px;
             }
 

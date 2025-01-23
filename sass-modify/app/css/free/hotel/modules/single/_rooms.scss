@@ -33,7 +33,7 @@
                 .hotel-room-wrap {
                     width: 100%;
                     overflow-x: auto;
-                    @media only screen and (max-width: 767px) {
+                    @media #{$max768} {
                         width: auto;
                         overflow-x: auto;
                     }
@@ -63,7 +63,7 @@
                     }
                     td.description {
                         padding: 25px;
-                        @media only screen and (max-width: 767px) {
+                        @media #{$max768} {
                             min-width: 300px;
                         }
                         h3,a{
@@ -213,7 +213,7 @@
         &__two{
             .tf-rooms-sections{
                 .tf-rooms{
-                    @media #{$max767}{
+                    @media #{$max768}{
                         overflow-x: scroll;
                         width: auto;
                     }
@@ -255,7 +255,7 @@
                                         margin-right: 20px;
                                         border-radius: 4px;
                                         position: relative;
-                                        @media #{$max767}{
+                                        @media #{$max768}{
                                             width: 100%;
                                             margin-bottom: 10px;
                                         }
@@ -277,10 +277,10 @@
                                         
                                     }
                                     .tf-features-infos{
-                                        @media #{$max991}{
+                                        @media #{$max1024}{
                                             width: 60%;
                                         }
-                                        @media #{$max767}{
+                                        @media #{$max768}{
                                             width: 100%;
                                         }
                                         .tf-room-type{
@@ -323,13 +323,13 @@
                                     padding-top: 30px;
                                     padding-bottom: 30px;
                                     border-left: 0px;
-                                    @media #{$max767}{
+                                    @media #{$max768}{
                                         width: auto;
                                     }
                                 }
                                 td.pax{
                                     .tf-tooltip{
-                                        @media #{$max767}{
+                                        @media #{$max768}{
                                             width: 100px
                                         }
                                         .room-detail-icon {

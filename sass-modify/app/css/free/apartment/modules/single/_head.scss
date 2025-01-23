@@ -7,8 +7,11 @@
                 .tf-title-wrap {
                     @include align-items(flex-end);
 
-                    @media #{$max767} {
+                    @media #{$max768} {
                         @include flex-direction(column);
+                    }
+                    @media #{$max575} {
+                        @include align-items(flex-start);
                     }
                 }
 
@@ -16,9 +19,15 @@
                     @include flexbox();
                     @include align-items(center);
                     gap: 32px;
-
+                    @media #{$max575} {
+                        flex-direction: column;
+                        gap: 16px;
+                        @include align-items(Start);
+                    }
                     a {
                         text-decoration: none;
+                        display: block;
+                        width: max-content;
                     }
 
                     .tf-single-rating {
@@ -49,10 +58,14 @@
                     @include justify-content(flex-end);
                     gap: 24px;
 
-                    @media #{$max767} {
+                    @media #{$max768} {
                         @include flex(0 0 100%);
-                        @include justify-content(flex-start);
                         margin-top: 24px;
+                    }
+
+                    @media #{$max575} {
+                        @include justify-content(flex-start);
+                        margin-top: 16px;
                     }
 
                     a {
@@ -95,7 +108,10 @@
                             z-index: 99999;
                             left: auto;
                             right: 0;
-
+                            @media #{$max575} {
+                                left: 0;
+                                right: inherit;
+                            }
                             .tf-dropdown-content {
                                 margin: 0;
                                 background: $color-white;
@@ -104,7 +120,9 @@
                                 min-width: 200px;
                                 z-index: 100;
                                 box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.12), 0 2px 3px -1px rgba(0, 0, 0, 0.2);
-
+                                @media #{$max768} {
+                                    min-width: auto;
+                                }
                                 li {
                                     display: inline-block;
 
@@ -148,16 +166,24 @@
                                 align-items: center;
                                 font-weight: 400;
                                 font-size: 14px;
-
+                                @media #{$max575} {
+                                    padding-bottom: 0;
+                                }
                                 &:hover {
                                     background-color: $color-light-bg;
                                 }
                             }
 
                             .share-center-copy-form {
-                                display: flex;
-                                align-items: center;
+                                @include flexbox();
+                                @include align-items(flex-center);
                                 padding: 12px 16px;
+                                @media #{$max575} {
+                                    flex-direction: column;
+                                    gap: 6px;
+                                    padding-top: 10px;
+                                    @include align-items(flex-start);
+                                }
                             }
 
                             .share-center-copy-label {
@@ -181,6 +207,9 @@
                                 background-color: $color-white;
                                 padding: 3px;
                                 border: 2px solid $color-gray;
+                                @media #{$max575} {
+                                    margin: 0;
+                                }
                             }
                         }
 
@@ -211,7 +240,9 @@
                     font-weight: 400;
                     line-height: 24px;
                     letter-spacing: 0.2px;
-
+                    @media #{$max1024} {
+                        flex: 1;
+                    }
                     .more-apartment {
                         color: $color-gray-light;
                         font-weight: 600;
