@@ -78,7 +78,7 @@
                                 &.show{
                                     display: block;
                                 }
-                                @media #{$max640}{
+                                @media #{$max768}{
                                     left: auto;
                                     right: 0px;
                                 }
@@ -142,7 +142,7 @@
                                             }
                                             
                                             input{
-                                                @media #{$max640}{
+                                                @media #{$max768}{
                                                     display: contents;
                                                 }
                                                 padding: 0;
@@ -161,10 +161,7 @@
                         width: calc(25% - 12px);
                         display: none;
                         height: 122px;
-                        @media #{$tfmax991}{
-                            height: 90px;
-                        }
-                        @media #{$max575}{
+                        @media #{$max1024}{
                             height: 90px;
                         }
                         @media #{$max480}{
@@ -195,7 +192,7 @@
                                 width: 100%;
                                 z-index: 1;
                                 background: $color-heading;
-                                @media #{$tfmax767}{
+                                @media #{$max768}{
                                     text-align: center;
                                 }
                             }

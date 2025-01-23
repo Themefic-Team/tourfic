@@ -22,13 +22,13 @@
                         i{
                             font-size: 20px;
                         }
-                        @media #{$tfmax991}{
+                        @media #{$max1024}{
                             width: calc(33% - 8px);
                         }
-                        @media #{$max767}{
+                        @media #{$max768}{
                             width: calc(33% - 4px);
                         }
-                        @media #{$max575}{
+                        @media #{$max480}{
                             width: calc(50% - 8px);
                         }
                         &:hover{
@@ -52,7 +52,7 @@
                             margin-left: -130px;
                             transition: .3s all ease;
                             text-align: center;
-                            @media #{$max767}{
+                            @media #{$max768}{
                                 width: 100%;
                                 margin-left: -50%;
                             }

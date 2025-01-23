@@ -6369,13 +6369,7 @@ div#tf-destinationautocomplete-list div:before {
   display: flex;
   gap: 32px;
 }
-@media only screen and (max-width: 1199.98px) {
-  .single-tf_carrental .tf-single-template__one .tf-single-car-details-warper {
-    padding-left: 15px;
-    padding-right: 15px;
-  }
-}
-@media only screen and (max-width: 767.98px) {
+@media only screen and (max-width: 768px) {
   .single-tf_carrental .tf-single-template__one .tf-single-car-details-warper {
     flex-wrap: wrap;
   }
@@ -6386,12 +6380,12 @@ div#tf-destinationautocomplete-list div:before {
   gap: 32px;
   flex-wrap: wrap;
 }
-@media only screen and (min-width: 767.99px) and (max-width: 991px) {
+@media only screen and (max-width: 1024px) {
   .single-tf_carrental .tf-single-template__one .tf-single-car-details-warper .tf-car-details-column {
-    width: calc(100% - 360px);
+    width: calc(100% - 402px);
   }
 }
-@media only screen and (max-width: 767.98px) {
+@media only screen and (max-width: 768px) {
   .single-tf_carrental .tf-single-template__one .tf-single-car-details-warper .tf-car-details-column {
     width: 100%;
   }
@@ -6454,7 +6448,7 @@ div#tf-destinationautocomplete-list div:before {
   padding: 16px 24px;
   width: 850px;
 }
-@media only screen and (max-width: 640px) {
+@media only screen and (max-width: 768px) {
   .single-tf_carrental .tf-single-template__one .tf-car-instraction-popup .tf-instraction-popup-warp,
   .single-tf_carrental .tf-single-template__one .tf-car-instraction-popup .tf-cancellation-popup-warp,
   .single-tf_carrental .tf-single-template__one .tf-car-cancellation-popup .tf-instraction-popup-warp,
@@ -6663,7 +6657,7 @@ div#tf-destinationautocomplete-list div:before {
   padding: 16px 24px;
   width: 850px;
 }
-@media only screen and (max-width: 767.98px) {
+@media only screen and (max-width: 768px) {
   .post-type-archive-tf_carrental .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp,
   .tax-carrental_location .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp,
   .tax-carrental_brand .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp,
@@ -6847,7 +6841,7 @@ div#tf-destinationautocomplete-list div:before {
     width: 100%;
   }
 }
-@media only screen and (max-width: 767.98px) {
+@media only screen and (max-width: 768px) {
   .post-type-archive-tf_carrental .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured,
   .tax-carrental_location .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured,
   .tax-carrental_brand .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured,
@@ -6876,7 +6870,7 @@ div#tf-destinationautocomplete-list div:before {
   font-weight: 400;
   padding: 0 0 16px 0px;
 }
-@media only screen and (max-width: 767.98px) {
+@media only screen and (max-width: 768px) {
   .post-type-archive-tf_carrental .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr td,
   .tax-carrental_location .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr td,
   .tax-carrental_brand .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr td,
@@ -6893,7 +6887,7 @@ div#tf-destinationautocomplete-list div:before {
 .single-tf_carrental .tf-single-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr td span {
   font-weight: 600;
 }
-@media only screen and (max-width: 767.98px) {
+@media only screen and (max-width: 768px) {
   .post-type-archive-tf_carrental .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr td:nth-child(2),
   .tax-carrental_location .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr td:nth-child(2),
   .tax-carrental_brand .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr td:nth-child(2),
@@ -6913,7 +6907,7 @@ div#tf-destinationautocomplete-list div:before {
   font-weight: 700;
   padding: 0 0 16px 0px;
 }
-@media only screen and (max-width: 767.98px) {
+@media only screen and (max-width: 768px) {
   .post-type-archive-tf_carrental .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th,
   .tax-carrental_location .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th,
   .tax-carrental_brand .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th,
@@ -6929,7 +6923,7 @@ div#tf-destinationautocomplete-list div:before {
 .single-tf_carrental .tf-single-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-flex.tf-flex-align-center {
   flex-wrap: nowrap;
 }
-@media only screen and (max-width: 767.98px) {
+@media only screen and (max-width: 768px) {
   .post-type-archive-tf_carrental .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-flex.tf-flex-align-center,
   .tax-carrental_location .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-flex.tf-flex-align-center,
   .tax-carrental_brand .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-flex.tf-flex-align-center,
@@ -6953,7 +6947,7 @@ div#tf-destinationautocomplete-list div:before {
 .single-tf_carrental .tf-single-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select {
   height: 15px;
 }
-@media only screen and (max-width: 767.98px) {
+@media only screen and (max-width: 768px) {
   .post-type-archive-tf_carrental .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select,
   .tax-carrental_location .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select,
   .tax-carrental_brand .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select,
@@ -7137,7 +7131,7 @@ div#tf-destinationautocomplete-list div:before {
 .single-tf_carrental .tf-single-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-form-fields .tf-form-fields .tf-single-field {
   width: calc(33% - 24px);
 }
-@media only screen and (max-width: 767.98px) {
+@media only screen and (max-width: 768px) {
   .post-type-archive-tf_carrental .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-form-fields .tf-form-fields .tf-single-field,
   .tax-carrental_location .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-form-fields .tf-form-fields .tf-single-field,
   .tax-carrental_brand .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-booking-form-fields .tf-form-fields .tf-single-field,
