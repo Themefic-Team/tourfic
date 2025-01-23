@@ -256,12 +256,12 @@
                             color: $color-primary;
                             font-size: 32px;
                             font-weight: 700;
-                            @media #{$max767}{
+                            @media #{$max768}{
                                 font-size: 20px;
                             }
                             bdi{
                                 font-size: 32px;
-                                @media #{$max767}{
+                                @media #{$max768}{
                                     font-size: 20px;
                                 }
                             }
@@ -329,7 +329,7 @@
                                     font-size: 32px;
                                     font-weight: 700;
                                     margin: 0px;
-                                    @media #{$max767}{
+                                    @media #{$max768}{
                                         font-size: 20px;
                                     }
                                 }

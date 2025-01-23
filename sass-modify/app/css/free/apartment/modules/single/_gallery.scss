@@ -14,9 +14,10 @@
 
                     .tf-apt-hero-gallery {
                         @include flexbox();
+                        flex-wrap: wrap;
                         gap: 24px;
 
-                        @media #{$max575} {
+                        @media #{$max768} {
                             gap: 16px;
                         }
 
@@ -32,16 +33,20 @@
 
                             &.has-right {
                                 @include flex(0 0 calc(70% - 12px));
-
-                                @media #{$max991} {
+                                @media #{$max1024} {
                                     @include flex(0 0 calc(50% - 12px));
+                                }
+                                @media #{$max768} {
+                                    @include flex(0 0 calc(50% - 4px));
                                 }
                             }
 
                             .hero-first-image {
                                 height: 424px;
-
-                                @media #{$max575} {
+                                @media #{$max768} {
+                                    height: 350px;
+                                }
+                                @media #{$max480} {
                                     height: 300px;
                                 }
                             }
@@ -53,19 +58,21 @@
                             @include flex-direction(column);
                             gap: 24px;
 
-                            @media #{$max991} {
+                            @media #{$max1024} {
                                 @include flex(0 0 calc(50% - 12px));
                             }
 
-                            @media #{$max575} {
+                            @media #{$max768} {
                                 gap: 16px;
                             }
 
                             .hero-second-image,
                             .hero-third-image {
                                 height: 200px;
-
-                                @media #{$max575} {
+                                @media #{$max768} {
+                                    height: 167px;
+                                }
+                                @media #{$max480} {
                                     height: 142px;
                                 }
                             }
