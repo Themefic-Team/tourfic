@@ -8656,6 +8656,9 @@ div#tf-destinationautocomplete-list div:before {
   color: #060D1C;
   text-decoration: none;
 }
+.tf-archive-template__two .tf-search-results-list .tf-item-card .tf-item-details .tf-reviews i {
+  color: #ffc107;
+}
 .tf-archive-template__two .tf-search-results-list .tf-item-card .tf-item-details .tf-archive-features ul {
   margin: 0;
   padding: 0;
