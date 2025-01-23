@@ -137,11 +137,6 @@ Custom Modal
   position: relative;
   pointer-events: none;
 }
-@media only screen and (min-width: 576px) {
-  .tf-modal .tf-modal-dialog {
-    min-height: calc(100% - 40px);
-  }
-}
 .tf-modal .tf-modal-content {
   position: relative;
   display: -webkit-box;
@@ -239,7 +234,7 @@ body.tf-modal-open:after {
   background: rgba(0, 0, 0, 0.4);
 }
 
-@media only screen and (max-width: 991.98px) {
+@media only screen and (max-width: 1024px) {
   #poststuff h2 {
     justify-content: initial;
   }
@@ -250,7 +245,7 @@ body.tf-modal-open:after {
   font-size: 20px;
   display: none;
 }
-@media only screen and (max-width: 991.98px) {
+@media only screen and (max-width: 1024px) {
   #poststuff h2 a {
     display: inline-block;
     margin-right: 15px;
@@ -735,7 +730,7 @@ body.tourfic-settings_page_tf-setup-wizard {
   -ms-flex-align: center;
   align-items: center;
 }
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 575.98px) {
   .tf-setup-header {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
@@ -877,7 +872,7 @@ Welcome Step
   -webkit-justify-content: center;
   justify-content: center;
 }
-@media only screen and (max-width: 767.98px) {
+@media only screen and (max-width: 768px) {
   .tf-setup-content-layout .tf-setup-welcome-footer.tf-setup-finish-footer {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
@@ -1151,7 +1146,7 @@ Steps
   cursor: pointer;
   border-radius: 6px;
 }
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 575.98px) {
   .tf-setup-step-container .tf-select-service label {
     padding: 5px;
   }
@@ -1183,7 +1178,7 @@ Steps
   font-family: "dashicons";
   font-size: 20px;
 }
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 575.98px) {
   .tf-setup-step-container .tf-select-service label:before {
     width: 20px;
     height: 20px;
@@ -1567,7 +1562,7 @@ Steps
   border-radius: 5px;
 }
 
-@media only screen and (max-width: 991.98px) {
+@media only screen and (max-width: 1024px) {
   #tf_tours_opt .tf-admin-meta-box {
     position: relative;
     min-height: 660px;
@@ -1584,7 +1579,7 @@ Steps
   z-index: 10;
   position: relative;
 }
-@media only screen and (max-width: 991.98px) {
+@media only screen and (max-width: 1024px) {
   .tf-admin-meta-box {
     position: relative;
     min-height: 500px;
@@ -1615,7 +1610,7 @@ Steps
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
-@media only screen and (max-width: 991.98px) {
+@media only screen and (max-width: 1024px) {
   .tf-admin-meta-box .tf-admin-tab {
     display: none;
   }
@@ -1671,7 +1666,7 @@ Steps
   color: #ffffff;
   position: relative;
 }
-@media only screen and (max-width: 991.98px) {
+@media only screen and (max-width: 1024px) {
   .tf-admin-meta-box .tf-admin-tab a.tf-tablinks.active {
     position: static;
   }
@@ -1693,7 +1688,7 @@ Steps
   top: 50%;
   margin-top: -5px;
 }
-@media only screen and (max-width: 991.98px) {
+@media only screen and (max-width: 1024px) {
   .tf-admin-meta-box .tf-admin-tab a.tf-tablinks.active::after {
     position: static;
     display: none;
@@ -1746,7 +1741,7 @@ Steps
   -ms-flex: 0 0 calc(100% - 280px);
   flex: 0 0 calc(100% - 280px);
 }
-@media only screen and (max-width: 991.98px) {
+@media only screen and (max-width: 1024px) {
   .tf-admin-meta-box .tf-tab-wrapper {
     flex: 0 0 calc(100% - 0px);
   }
@@ -1805,7 +1800,7 @@ Steps
   background-color: #ffffff;
   padding: 12px 0;
 }
-@media only screen and (max-width: 991.98px) {
+@media only screen and (max-width: 1024px) {
   .tf-option .tf-tab-wrapper {
     flex: 0 0 calc(100% - 0px);
   }
@@ -1901,12 +1896,12 @@ Steps
   justify-content: space-between;
   background-image: radial-gradient(at center center, #004A9E 0%, #001C39 75%);
 }
-@media only screen and (max-width: 991.98px) {
+@media only screen and (max-width: 1024px) {
   .tf-setting-dashboard .tf-setting-banner {
     display: flow-root;
   }
 }
-@media only screen and (max-width: 767.98px) {
+@media only screen and (max-width: 768px) {
   .tf-setting-dashboard .tf-setting-banner {
     padding: 30px 40px;
   }
@@ -1914,7 +1909,7 @@ Steps
 .tf-setting-dashboard .tf-setting-banner .tf-setting-banner-content {
   width: 50%;
 }
-@media only screen and (max-width: 991.98px) {
+@media only screen and (max-width: 1024px) {
   .tf-setting-dashboard .tf-setting-banner .tf-setting-banner-content {
     width: 100%;
   }
@@ -1942,7 +1937,7 @@ Steps
 .tf-setting-dashboard .tf-setting-banner .tf-setting-banner-image {
   width: 30%;
 }
-@media only screen and (max-width: 991.98px) {
+@media only screen and (max-width: 1024px) {
   .tf-setting-dashboard .tf-setting-banner .tf-setting-banner-image {
     width: 100%;
   }
@@ -1991,7 +1986,7 @@ Steps
     float: left;
   }
 }
-@media only screen and (max-width: 767.98px) {
+@media only screen and (max-width: 768px) {
   .tf-setting-dashboard .tf-setting-performace-section .tf-performance-grid .tf-single-performance-grid {
     width: 94%;
     margin: 15px 0px;
@@ -2185,7 +2180,7 @@ Steps
     float: left;
   }
 }
-@media only screen and (max-width: 767.98px) {
+@media only screen and (max-width: 768px) {
   .tf-settings-help-center .tf-support-document .tf-single-support {
     width: 100%;
     margin: 15px 0%;
@@ -2243,7 +2238,7 @@ Steps
   display: grid;
   gap: 20px;
 }
-@media only screen and (max-width: 767.98px) {
+@media only screen and (max-width: 768px) {
   .tf-settings-help-center .tf-settings-faq .tf-accordion-wrapper {
     display: block;
   }
@@ -2252,7 +2247,7 @@ Steps
   border: 1px solid #E4E6EB;
   border-radius: 8px;
 }
-@media only screen and (max-width: 767.98px) {
+@media only screen and (max-width: 768px) {
   .tf-settings-help-center .tf-settings-faq .tf-accordion-wrapper .tf-single-faq {
     margin: 15px 0px;
   }
@@ -2504,7 +2499,7 @@ Steps
   z-index: 10;
   position: relative;
 }
-@media only screen and (max-width: 991.98px) {
+@media only screen and (max-width: 1024px) {
   .tf-setting-wrapper .tf-option-form .tf-option {
     position: relative;
     min-height: 500px;
@@ -2534,7 +2529,7 @@ Steps
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
-@media only screen and (max-width: 991.98px) {
+@media only screen and (max-width: 1024px) {
   .tf-setting-wrapper .tf-option-form .tf-option .tf-admin-tab {
     display: none;
   }
@@ -2592,7 +2587,7 @@ Steps
   overflow: hidden;
   border-radius: 0px 5px 0px 0px;
 }
-@media only screen and (max-width: 991.98px) {
+@media only screen and (max-width: 1024px) {
   .tf-setting-wrapper .tf-option-form .tf-option .tf-admin-tab a.tf-tablinks.active {
     position: static;
   }
@@ -2621,7 +2616,7 @@ Steps
   margin: auto;
   border-radius: 25px;
 }
-@media only screen and (max-width: 991.98px) {
+@media only screen and (max-width: 1024px) {
   .tf-setting-wrapper .tf-option-form .tf-option .tf-admin-tab a.tf-tablinks.active::after {
     position: static;
     display: none;
@@ -2661,7 +2656,7 @@ Steps
   flex: 0 0 calc(100% - 280px);
   padding-top: 0px;
 }
-@media only screen and (max-width: 991.98px) {
+@media only screen and (max-width: 1024px) {
   .tf-setting-wrapper .tf-option-form .tf-option .tf-tab-wrapper {
     flex: 0 0 calc(100% - 0px);
   }
@@ -2671,7 +2666,7 @@ Steps
   padding-bottom: 15px;
   display: none;
 }
-@media only screen and (max-width: 991.98px) {
+@media only screen and (max-width: 1024px) {
   .tf-setting-wrapper .tf-option-form .tf-option .tf-tab-wrapper .tf-mobile-setting {
     display: block;
   }
@@ -2989,7 +2984,7 @@ Steps
 .tf-field {
   padding: 12px 0;
 }
-@media only screen and (max-width: 991.98px) {
+@media only screen and (max-width: 1024px) {
   .tf-field {
     width: 100% !important;
   }
@@ -4122,7 +4117,7 @@ Steps
   border-radius: 8px;
   padding: 20px 30px 13px 30px;
 }
-@media only screen and (max-width: 767.98px) {
+@media only screen and (max-width: 768px) {
   .tf-field-color .tf-fieldset ul.tf-inline li {
     display: flow-root;
   }
@@ -4134,7 +4129,7 @@ Steps
   width: 45%;
   margin-top: 5px;
 }
-@media only screen and (max-width: 767.98px) {
+@media only screen and (max-width: 768px) {
   .tf-field-color .tf-fieldset ul.tf-inline li > label {
     margin-top: 0px;
     margin-bottom: 10px;
@@ -4145,7 +4140,7 @@ Steps
   display: block;
   text-align: right;
 }
-@media only screen and (max-width: 767.98px) {
+@media only screen and (max-width: 768px) {
   .tf-field-color .tf-fieldset ul.tf-inline li .wp-picker-container {
     text-align: left;
     display: block;
@@ -4635,7 +4630,7 @@ a.tf-import-btn, a.tf-export-btn {
   justify-content: space-between;
   align-items: center;
 }
-@media only screen and (max-width: 767.98px) {
+@media only screen and (max-width: 768px) {
   .tf_booking_details_wrap .tf_booking_wrap_header {
     display: flow-root;
   }
@@ -5157,13 +5152,13 @@ a.tf-import-btn, a.tf-export-btn {
 .tf_booking_details_wrap .tf-calendar-booking-header-filter .tf-bulk-action-form {
   display: inline-flex;
 }
-@media only screen and (max-width: 991.98px) {
+@media only screen and (max-width: 1024px) {
   .tf_booking_details_wrap .tf-booking-header-filter .tf-bulk-action-form,
   .tf_booking_details_wrap .tf-calendar-booking-header-filter .tf-bulk-action-form {
     display: flex;
   }
 }
-@media only screen and (max-width: 991.98px) {
+@media only screen and (max-width: 1024px) {
   .tf_booking_details_wrap .tf-booking-header-filter .tf-bulk-action-form .tf-filter-options,
   .tf_booking_details_wrap .tf-calendar-booking-header-filter .tf-bulk-action-form .tf-filter-options {
     margin-top: 0px !important;
@@ -5173,7 +5168,7 @@ a.tf-import-btn, a.tf-export-btn {
 .tf_booking_details_wrap .tf-calendar-booking-header-filter .tf-left-search-filter {
   display: flex;
 }
-@media only screen and (max-width: 991.98px) {
+@media only screen and (max-width: 1024px) {
   .tf_booking_details_wrap .tf-booking-header-filter .tf-left-search-filter,
   .tf_booking_details_wrap .tf-calendar-booking-header-filter .tf-left-search-filter {
     display: flow-root;
@@ -5183,7 +5178,7 @@ a.tf-import-btn, a.tf-export-btn {
 .tf_booking_details_wrap .tf-calendar-booking-header-filter .tf-left-search-filter .tf-filter-options {
   margin-right: 16px;
 }
-@media only screen and (max-width: 991.98px) {
+@media only screen and (max-width: 1024px) {
   .tf_booking_details_wrap .tf-booking-header-filter .tf-left-search-filter .tf-filter-options,
   .tf_booking_details_wrap .tf-calendar-booking-header-filter .tf-left-search-filter .tf-filter-options {
     margin: 15px 0 0 0;
@@ -5198,7 +5193,7 @@ a.tf-import-btn, a.tf-export-btn {
   box-shadow: 0px 8px 20px 0px rgba(29, 35, 39, 0.06);
   min-width: 160px !important;
 }
-@media only screen and (max-width: 991.98px) {
+@media only screen and (max-width: 1024px) {
   .tf_booking_details_wrap .tf-booking-header-filter .tf-left-search-filter .tf-filter-options span.select2,
   .tf_booking_details_wrap .tf-calendar-booking-header-filter .tf-left-search-filter .tf-filter-options span.select2 {
     min-width: auto !important;
@@ -5252,7 +5247,7 @@ a.tf-import-btn, a.tf-export-btn {
   height: 48px;
   transition: 0.3s all ease;
 }
-@media only screen and (max-width: 991.98px) {
+@media only screen and (max-width: 1024px) {
   .tf_booking_details_wrap .tf-booking-header-filter .tf-left-search-filter .tf-order-status-filter-btn,
   .tf_booking_details_wrap .tf-calendar-booking-header-filter .tf-left-search-filter .tf-order-status-filter-btn {
     margin: 0px;
@@ -5316,7 +5311,7 @@ a.tf-import-btn, a.tf-export-btn {
     margin-top: 16px;
   }
 }
-@media only screen and (max-width: 991.98px) {
+@media only screen and (max-width: 1024px) {
   .tf_booking_details_wrap .tf-booking-header-filter .tf-right-search-filter, .tf_booking_details_wrap .tf-booking-header-filter .tf-enquiry-right-search-filter,
   .tf_booking_details_wrap .tf-calendar-booking-header-filter .tf-right-search-filter,
   .tf_booking_details_wrap .tf-calendar-booking-header-filter .tf-enquiry-right-search-filter {
@@ -5650,7 +5645,7 @@ a.tf-import-btn, a.tf-export-btn {
 .tf-booking-details-preview .tf-details-preview-header .tf-booking-id-author ul li:first-child {
   padding-left: 0px;
 }
-@media only screen and (max-width: 767.98px) {
+@media only screen and (max-width: 768px) {
   .tf-booking-details-preview .tf-details-preview-header .tf-booking-id-author ul li {
     padding: 0px 5px;
   }
@@ -5672,7 +5667,7 @@ a.tf-import-btn, a.tf-export-btn {
   align-self: stretch;
   gap: 24px;
 }
-@media only screen and (max-width: 767.98px) {
+@media only screen and (max-width: 768px) {
   .tf-booking-details-preview .tf-booking-details-preview-box {
     display: flow-root;
   }
@@ -5680,7 +5675,7 @@ a.tf-import-btn, a.tf-export-btn {
 .tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-details {
   width: calc(100% - 260px);
 }
-@media only screen and (max-width: 767.98px) {
+@media only screen and (max-width: 768px) {
   .tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-details {
     width: auto;
   }
@@ -5834,7 +5829,7 @@ a.tf-import-btn, a.tf-export-btn {
   background: #ffffff;
   margin-top: 24px;
 }
-@media only screen and (max-width: 767.98px) {
+@media only screen and (max-width: 768px) {
   .tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-actions {
     width: auto;
   }
@@ -6247,7 +6242,7 @@ a.tf-import-btn, a.tf-export-btn {
   justify-content: space-between;
   align-items: center;
 }
-@media only screen and (max-width: 767.98px) {
+@media only screen and (max-width: 768px) {
   .tf_enquiry_details_wrap_header {
     display: flow-root;
   }
@@ -6814,7 +6809,7 @@ hr.enqury-single-title-line {
   height: 200px !important;
 }
 
-@media only screen and (max-width: 991.98px) {
+@media only screen and (max-width: 1024px) {
   .tf-enquiry-details-wrap .tf-booking-header-filter .tf-bulk-action-form {
     width: 100%;
     gap: 12px;

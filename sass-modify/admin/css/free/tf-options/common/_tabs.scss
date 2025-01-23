@@ -1,5 +1,5 @@
 #tf_tours_opt .tf-admin-meta-box {
-  @media #{$max991}{
+  @media #{$max1024}{
     position: relative;
     min-height: 660px;
   }
@@ -10,7 +10,7 @@
   z-index: 10;
   position: relative;
 
-  @media #{$max991}{
+  @media #{$max1024}{
     position: relative;
     min-height: 500px;
   }
@@ -35,7 +35,7 @@
     background-color: $slate0;
     min-width: 280px;
     @include transition(all, 0.3s, ease);
-    @media #{$max991}{
+    @media #{$max1024}{
       display: none;
     }
 
@@ -76,7 +76,7 @@
         color: $color-white;
         position: relative;
 
-        @media #{$max991}{
+        @media #{$max1024}{
           position: static;
         }
 
@@ -94,7 +94,7 @@
           right: -5px;
           top: 50%;
           margin-top: -5px;
-          @media #{$max991}{
+          @media #{$max1024}{
             position: static;
             display: none;
           }
@@ -152,7 +152,7 @@
 
   .tf-tab-wrapper {
     @include flex(0 0 calc(100% - 280px));
-    @media #{$max991}{
+    @media #{$max1024}{
       flex: 0 0 calc(100% - 0px);
     }
 
@@ -206,7 +206,7 @@
     @include flex(0 0 calc(100% - 281px));
     background-color: $color-white;
     padding: 12px 0;
-    @media #{$max991}{
+    @media #{$max1024}{
       flex: 0 0 calc(100% - 0px);
     }
   }

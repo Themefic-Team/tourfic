@@ -2708,7 +2708,7 @@ function updateMaxWidth(inputField) {
     
     // Adjust max width based on window width
     let newMaxWidth;
-    if (windowWidth < 992) {
+    if (windowWidth < 1025) {
         newMaxWidth = 100 + (Math.max(characterCount - 1, 0) * 20); // Mobile: 100px + 20px per character
     } else {
         newMaxWidth = 132 + (Math.max(characterCount - 1, 0) * 40); // Desktop: 132px + 40px per character

@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    @media #{$max767}{
+    @media #{$max768}{
         display: flow-root;
     }
     h1{
@@ -642,7 +642,7 @@ hr.enqury-single-title-line {
     height: 200px !important;
 }
 
-@media #{$max991}{
+@media #{$max1024}{
     .tf-enquiry-details-wrap .tf-booking-header-filter .tf-bulk-action-form {
         width: 100%;
         gap: 12px;

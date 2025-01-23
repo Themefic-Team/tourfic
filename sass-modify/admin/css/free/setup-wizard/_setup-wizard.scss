@@ -130,7 +130,7 @@ body.tourfic-settings_page_tf-setup-wizard {
     @include justify-content(space-between);
     @include align-items(center);
 
-    @media #{$max480} {
+    @media #{$max575} {
         @include flex-direction(column);
         gap: 15px;
     }
@@ -264,7 +264,7 @@ Welcome Step
             @include flex-direction(row);
             @include justify-content(center);
 
-            @media #{$max767} {
+            @media #{$max768} {
                 @include flex-direction(column);
                 gap: 10px;
             }
@@ -539,7 +539,7 @@ Steps
             cursor: pointer;
             border-radius: 6px;
 
-            @media #{$max480} {
+            @media #{$max575} {
                 padding: 5px;
             }
 
@@ -573,7 +573,7 @@ Steps
             font-family: 'dashicons';
             font-size: 20px;
 
-            @media #{$max480} {
+            @media #{$max575} {
                 width: 20px;
                 height: 20px;
                 top: -3px;

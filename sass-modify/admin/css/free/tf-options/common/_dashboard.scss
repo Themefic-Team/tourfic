@@ -102,16 +102,16 @@
         align-items: center;
         justify-content: space-between;
         background-image: radial-gradient(at center center, #004A9E 0%, #001C39 75%);
-        @media #{$max991}{
+        @media #{$max1024}{
             display: flow-root;
         }
-        @media #{$max767}{
+        @media #{$max768}{
             padding: 30px 40px;
         }
 
         .tf-setting-banner-content {
             width: 50%;
-            @media #{$max991}{
+            @media #{$max1024}{
                 width: 100%;
             }
 
@@ -139,7 +139,7 @@
 
         .tf-setting-banner-image {
             width: 30%;
-            @media #{$max991}{
+            @media #{$max1024}{
                 width: 100%;
             }
 
@@ -184,7 +184,7 @@
                     margin: 15px 1%;
                     float: left;
                 }
-                @media #{$max767}{
+                @media #{$max768}{
                     width: 94%;
                     margin: 15px 0px;
                 }
@@ -374,7 +374,7 @@
                 margin: 15px 1%;
                 float: left;
             }
-            @media #{$max767}{
+            @media #{$max768}{
                 width: 100%;
                 margin: 15px 0%;
                 float: left;
@@ -438,14 +438,14 @@
             grid-template-columns: repeat(2, 1fr);
             display: grid;
             gap: 20px;
-            @media #{$max767}{
+            @media #{$max768}{
                 display: block;
             }
 
             .tf-single-faq {
                 border: 1px solid #E4E6EB;
                 border-radius: 8px;
-                @media #{$max767}{
+                @media #{$max768}{
                     margin: 15px 0px;
                 }
 
@@ -731,7 +731,7 @@
             z-index: 10;
             position: relative;
 
-            @media #{$max991}{
+            @media #{$max1024}{
                 position: relative;
                 min-height: 500px;
             }
@@ -755,7 +755,7 @@
             .tf-admin-tab {
                 min-width: 280px;
                 @include transition(all, 0.3s, ease);
-                @media #{$max991}{
+                @media #{$max1024}{
                     display: none;
                 }
 
@@ -797,7 +797,7 @@
                         position: relative;
                         overflow: hidden;
                         border-radius: 0px 5px 0px 0px;
-                        @media #{$max991}{
+                        @media #{$max1024}{
                             position: static;
                         }
 
@@ -826,7 +826,7 @@
                             height: 28px;
                             margin: auto;
                             border-radius: 25px;
-                            @media #{$max991}{
+                            @media #{$max1024}{
                                 position: static;
                                 display: none;
                             }
@@ -870,7 +870,7 @@
             .tf-tab-wrapper {
                 @include flex(0 0 calc(100% - 280px));
                 padding-top: 0px;
-                @media #{$max991}{
+                @media #{$max1024}{
                     flex: 0 0 calc(100% - 0px);
                 }
 
@@ -878,7 +878,7 @@
                     text-align: right;
                     padding-bottom: 15px;
                     display: none;
-                    @media #{$max991}{
+                    @media #{$max1024}{
                         display: block;
                     }
 
