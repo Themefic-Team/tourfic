@@ -9,13 +9,11 @@
                 box-shadow: 0px 5px 10px rgba(0, 44, 102, 0.2);
                 width: 80%;
                 font-size: 16px;
-                @media only screen and (max-width: 1200px) {
+                @media #{$max1024}{
                     width: 95%;
-                }
-                @media only screen and (max-width: 1025px) {
                     font-size: 14px;
                 }
-                @media only screen and (max-width: 767px) {
+                @media #{$max768}{
                     max-width: 450px;
                 }
                 .tf_btn {
@@ -23,12 +21,8 @@
                     width: 160px;
                     font-weight: bold;
                     text-transform: uppercase;
-                    @media only screen and (max-width: 767px) {
-                        width: 98%;
-                        margin: auto;
-                    }
-                    @media only screen and (min-width: 768px) and (max-width: 970px) {
-                        width: 98%;
+                    @media #{$max1024}{
+                        width: 100%;
                         margin: auto;
                     }
                 }
@@ -39,7 +33,7 @@
                     align-items: center;
                     gap: 15px;
                     margin: 0;
-                    @media only screen and (max-width: 1200px) {
+                    @media #{$max1024}{
                         flex-wrap: wrap;
                     }
                 }
@@ -47,7 +41,10 @@
                     color:$color-text;
                     font-weight: 500;
                     border: none;
-                    @media only screen and (max-width: 767px) {
+                    .tf_person-icon{
+                        margin-right: 12px;
+                    }
+                    @media #{$max768}{
                         display: flex;
                         justify-content: center;
                         width: 95%;
@@ -67,13 +64,12 @@
                 .tf_form-inner {
                     input[type="text"] {
                         background: transparent;
-                        border: 1px solid $color-gray;
                         padding: 5px 15px;
                         border-radius: 2px;
-                        @media only screen and (max-width: 1025px) {
+                        @media #{$max1024}{
                             font-size: 14px;
                         }
-                        @media only screen and (max-width: 767px) {
+                        @media #{$max768}{
                             max-width: 100%;
                         }
                     }
@@ -82,10 +78,10 @@
                         border: 1px solid $color-gray;
                         padding: 5px 15px;
                         border-radius: 2px;
-                        @media only screen and (max-width: 1025px) {
+                        @media #{$max1024}{
                             font-size: 14px;
                         }
-                        @media only screen and (max-width: 767px) {
+                        @media #{$max768}{
                             max-width: 100%;
                         }
                         &:focus {
@@ -156,7 +152,7 @@
                         width: 180px;
                     }
                     
-                    @media only screen and (max-width: 767px) {
+                    @media #{$max768}{
                         max-width: 100%;
                     }
                 }

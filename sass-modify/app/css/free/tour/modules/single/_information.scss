@@ -6,7 +6,7 @@
                     display: flex;
                     text-align: center;
                     gap: 35px;
-                    @media only screen and (max-width: 767px) {
+                    @media #{$max768}{
                         display: grid;
                         gap: 2%;
                         grid-template-columns: 48% 48%;
@@ -20,13 +20,13 @@
                         border: 1px solid $color-white;
                         padding: 50px 20px;
                         min-height: 100px;
-                        @media only screen and (max-width: 1025px) {
+                        @media #{$max1024}{
                             width: 300px;
                         }
-                        @media only screen and (max-width: 767px) {
+                        @media #{$max768}{
                             width: auto;
                         }
-                        @media only screen and (max-width: 480px) {
+                        @media #{$max575}{
                             padding: 30px 20px;
                         }
                         .repeat-design-default {
@@ -83,26 +83,17 @@
                     display: flex;
                     flex-wrap: nowrap;
                 
-                    @media #{$tfmax991}{
+                    @media #{$max1024}{
                         flex-wrap: wrap;
                     }
-                    @media #{$tfmax360}{
-                        flex-wrap: wrap;
-                    }
-                    @media #{$tfmax767}{
-                        flex-wrap: wrap;
-                    }
+                    
                     .tf-feature-block {
                         width: 100%;
                         flex-basis: auto;
-                
-                        @media #{$tfmax991}{
+                        @media #{$max1024}{
                             flex-basis: calc(50% - 16px);
                         }
-                        @media #{$tfmax767}{
-                            flex-basis: calc(50% - 16px);
-                        }
-                        @media #{$tfmax360}{
+                        @media #{$max575}{
                             flex-basis: calc(100% - 16px);
                         }
                     }
@@ -114,7 +105,7 @@
                     padding: 20px;
                     width: 100%;
                     align-items: baseline;
-                    @media #{$tfmax991}{
+                    @media #{$max1024}{
                         padding: 24px;
                     }
                     i{

@@ -4,7 +4,7 @@
         .tf-hotel-details-qc-gallelry{
             width: 545px;
 
-            @media #{$max991} {
+            @media #{$max1024} {
                 width: 100%;
             }
         }
@@ -36,7 +36,7 @@
             padding-top: 25px; 
             overflow-y: auto;
 
-            @media #{$max991}{
+            @media #{$max1024}{
                 padding-right: 10px;
                 padding-left: 10px;
                 margin: 0;

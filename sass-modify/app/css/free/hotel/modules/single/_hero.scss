@@ -7,12 +7,12 @@
                 @media #{$max1024} {
                     grid-template-columns: 67% 33%;
                 }
-                @media #{$max768} {
+                @media #{$max575} {
                     grid-template-columns: 100%;
                 }
                 .hero-left {
                     padding-right: 15px;
-                    @media #{$max768} {
+                    @media #{$max575} {
                         padding-right: 0;
                     }
                     .tf-top-review {
@@ -25,7 +25,7 @@
                 }
                 .hero-right {
                     padding-left: 15px;
-                    @media #{$max768}{
+                    @media #{$max575}{
                         padding-left: 0;
                         max-width: 316px;
                         margin: auto;
