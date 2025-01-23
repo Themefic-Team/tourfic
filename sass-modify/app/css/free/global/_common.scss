@@ -17,12 +17,12 @@ h3.section-heading {
         font-size: 35px;
         margin-top: 0;
         margin-bottom: 6px;
-        @media #{$max767}{
+        @media #{$max768}{
             font-size: 28px;
         }
     }
     &.tf-tour-title {
-        @media #{$max640}{
+        @media #{$max768}{
             text-align: center;
         }
     }
@@ -30,7 +30,7 @@ h3.section-heading {
     .tf-title-wrap {
         display: flex;
         justify-content: space-between;
-        @media #{$max640}{
+        @media #{$max768}{
             display: block;
         }
     
@@ -50,7 +50,7 @@ h3.section-heading {
             display: flex;
             align-items: center;
             column-gap: 5px;
-            @media #{$max640}{
+            @media #{$max768}{
                 margin-top: 15px;
                 justify-content: end;
             }
@@ -78,7 +78,7 @@ h3.section-heading {
     border-radius: 4px;
     position: relative;
 
-    @media #{$max640}{
+    @media #{$max768}{
         font-size: 14px;
         padding: 6px;
     }
@@ -92,7 +92,7 @@ h3.section-heading {
         font-weight: 700;
         font-size: 18px;
 
-        @media #{$max640}{
+        @media #{$max768}{
             font-size: 14px;
         }
     }
@@ -156,7 +156,7 @@ h3.section-heading {
     &.slick-initialized {
         .slick-slide {
             display: block;
-            @media #{$tfmax767}{
+            @media #{$max768}{
                 margin: 0px !important;
             }
         }
@@ -336,7 +336,7 @@ h3.section-heading {
     min-width: 150px;
     width: 25%;
 
-    @media #{$max767}{
+    @media #{$max768}{
         width: 100%;
         display: block;
         padding: 10px;
@@ -345,7 +345,7 @@ h3.section-heading {
 
     .tf_input-inner {
         padding: 0 15px;
-        @media #{$max767}{
+        @media #{$max768}{
             padding: 0 10px;
         }
     }
@@ -377,7 +377,7 @@ h3.section-heading {
     -ms-user-select: none;
     user-select: none;
 
-    @media #{$max767}{
+    @media #{$max768}{
         width: 100%;
         display: block;
         padding: 10px 20px;
@@ -408,7 +408,7 @@ h3.section-heading {
     -ms-user-select: none;
     user-select: none;
 
-    @media #{$max767}{
+    @media #{$max768}{
         width: 100%;
         display: block;
         padding: 20px;
@@ -459,7 +459,7 @@ h3.section-heading {
     display: table-cell;
     vertical-align: middle;
 
-    @media #{$max767} {
+    @media #{$max768} {
         width: 100%;
         display: block;
         border-radius: 0 0 8px 8px;
@@ -474,17 +474,14 @@ h3.section-heading {
 }
 
 .tf-review-form-container {
-    min-width: 600px;
+    min-width: 800px;
     padding: 0;
     margin: 0;
     background: $color-white;
     @media #{$max1024}{
         min-width: 500px;
     }
-    @media only screen and (min-width: 1000px) {
-        min-width: 800px;
-    }
-    @media #{$max767}{
+    @media #{$max768}{
         min-width: auto;
     }
     .logged-in-as {
@@ -497,7 +494,7 @@ h3.section-heading {
         row-gap: 15px;
         margin: 0 0 80px 0;
 
-        @media #{$max767}{
+        @media #{$max768}{
             grid-template-columns: 100%;
         }
         .tf-form-single-rating {
@@ -718,7 +715,7 @@ h3.section-heading {
         @media (min-width: 768px) and (max-width: 991px) {
             grid-template-columns: auto;
         }
-        @media #{$max640}{
+        @media #{$max768}{
             grid-template-columns: auto;
         }
         .tf-single {
@@ -779,7 +776,7 @@ h3.section-heading {
     @media (min-width: 768px) and (max-width: 991px) {
         grid-template-columns: auto;
     }
-    @media #{$max640}{
+    @media #{$max768}{
         grid-template-columns: auto;
     }
 
@@ -860,7 +857,7 @@ h3.section-heading {
     border-radius: 4px;
     flex: 2;
     text-align: center;
-    @media #{$max767}{
+    @media #{$max768}{
         max-width: 450px;
         margin: auto;
     }
@@ -902,7 +899,7 @@ h3.section-heading {
         padding: 15px;
         margin: 0 7px 15px;
     }
-    @media #{$max767}{
+    @media #{$max768}{
         border: 7px solid $color-white;
         height: 250px;
         padding: 15px;
@@ -924,10 +921,10 @@ h3.section-heading {
         h3 {
             font-size: 20px;
             color: $color-white;
-            @media #{$max991}{
+            @media #{$max1024}{
                 font-size: 18px;
             }
-            @media #{$max480}{
+            @media #{$max575}{
                 font-size: 16px;
             }
             span {
@@ -1173,7 +1170,7 @@ li.tf-filter-item {
         z-index: 9999;
         left: auto;
         right: 0;
-        @media only screen and (max-width: 600px) {
+        @media #{$max575} {
             left: 50px;
         }
         .tf-dropdown-content {
@@ -1184,7 +1181,7 @@ li.tf-filter-item {
             min-width: 200px;
             z-index: 100;
             box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.12), 0 2px 3px -1px rgba(0, 0, 0, 0.2);
-            @media only screen and (max-width: 600px) {
+            @media #{$max575} {
                 min-width: 270px;
                 margin-left: -170px;
             }
@@ -1217,7 +1214,7 @@ li.tf-filter-item {
                         }
                     }
                 }
-                @media only screen and (max-width: 600px) {
+                @media #{$max575} {
                     display: block;
                 }
             }
@@ -1250,7 +1247,7 @@ li.tf-filter-item {
             display: flex;
             align-items: center;
             padding: 12px 16px;
-            @media only screen and (max-width: 600px) {
+            @media #{$max575} {
                 display: block;
             }
         }
@@ -1282,7 +1279,7 @@ li.tf-filter-item {
             padding: 0;
             border: 2px solid rgba(118, 118, 118, 0.3);
 
-            @media only screen and (max-width: 600px) {
+            @media #{$max575} {
                 width: 100%;
                 margin: 5px 0;
                 max-width: 100%;
@@ -1303,7 +1300,7 @@ li.tf-filter-item {
     width: 100%;
 }
 
-@media #{$max767}{
+@media #{$max768}{
     #check-in-out-date {
         width: 220px;
     }
