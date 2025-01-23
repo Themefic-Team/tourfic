@@ -222,7 +222,7 @@ use \Tourfic\Classes\Apartment\Apartment;
                                 <h2 class="section-heading"><?php echo esc_html( $meta['highlights_title'] ) ?></h2>
 							<?php endif; ?>
 
-                            <div class="tf-apt-highlights <?php echo count( Helper::tf_data_types( $meta['highlights'] ) ) > 3 ? 'tf-apt-highlights-slider' : ''; ?>">
+                            <div class="tf-apt-highlights <?php echo count( Helper::tf_data_types( $meta['highlights'] ) ) > 3 ? 'tf-apt-highlights-slider tf-slick-slider' : ''; ?>">
 								<?php
 								foreach ( Helper::tf_data_types( $meta['highlights'] ) as $highlight ) :
 									if ( empty( $highlight['title'] ) ) {
@@ -252,7 +252,7 @@ use \Tourfic\Classes\Apartment\Apartment;
 							<?php if ( ! empty( $meta['room_details_title'] ) ): ?>
                                 <h2 class="section-heading"><?php echo esc_html( $meta['room_details_title'] ) ?></h2>
 							<?php endif; ?>
-                            <div class="tf-apartment-default-design-room-slider">
+                            <div class="tf-apartment-default-design-room-slider tf-slick-slider">
 								<?php foreach ( Helper::tf_data_types( $meta['rooms'] ) as $key => $room ) : ?>
                                     <div class="tf-apartment-room-item">
                                         <div class="tf-apartment-room-item-thumb">
@@ -667,7 +667,7 @@ use \Tourfic\Classes\Apartment\Apartment;
         <div class="tf-related-apartment">
             <div class="tf-container">
                 <h2 class="section-heading"><?php echo ! empty( $meta['related_apartment_title'] ) ? esc_html( $meta['related_apartment_title'] ) : ''; ?></h2>
-                <div class="tf-related-apartment-slider">
+                <div class="tf-related-apartment-slider tf-slick-slider">
 					<?php while ( $related_apartment->have_posts() ) : $related_apartment->the_post();
 						if ( ! in_array( get_the_ID(), array( $post_id ) ) ):
 							?>

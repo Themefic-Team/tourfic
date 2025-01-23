@@ -7,7 +7,7 @@ if ( isset( $meta['highlights'] ) && ! empty( Helper::tf_data_types( $meta['high
 ?>
 <!--Information Section Start -->
 <div class="tf-overview-wrapper">
-    <div class="<?php echo $tf_highlights_count > 4 ? esc_attr('tf-features-block-slides') : esc_attr('tf-features-block-wrapper'); ?> tf-informations-secations">
+    <div class="<?php echo $tf_highlights_count > 4 ? esc_attr('tf-features-block-slides tf-slick-slider') : esc_attr('tf-features-block-wrapper'); ?> tf-informations-secations">
         
         <?php
         foreach ( Helper::tf_data_types( $meta['highlights'] ) as $highlight ) :
