@@ -665,7 +665,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                         <p><?php echo wp_kses_post(Helper::tfopt( 'rt-description')) ?></p>
                                     <?php } ?>
                                 </div>
-                                <div class="tf-slider-items-wrapper tf-upcomming-tours-list-outter tf-mt-40 tf-flex tf-flex-gap-24">
+                                <div class="tf-slider-items-wrapper tf-slick-slider tf-upcomming-tours-list-outter tf-mt-40 tf-flex tf-flex-gap-24">
                                     <?php
                                     while ( $tours->have_posts() ) {
                                         $tours->the_post();

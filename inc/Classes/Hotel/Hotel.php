@@ -4199,7 +4199,7 @@ class Hotel {
 
 							?>
 
-                            <div class="tf-details-qc-slider tf-details-qc-slider-single">
+                            <div class="tf-details-qc-slider tf-details-qc-slider-single tf-slick-slider">
 								<?php
 								if ( ! empty( $tf_room_gallery_ids ) ) {
 									foreach ( $tf_room_gallery_ids as $key => $gallery_item_id ) {
@@ -4213,7 +4213,7 @@ class Hotel {
 									<?php }
 								} ?>
                             </div>
-                            <div class="tf-details-qc-slider tf-details-qc-slider-nav">
+                            <div class="tf-details-qc-slider tf-details-qc-slider-nav tf-slick-slider">
 								<?php
 								if ( ! empty( $tf_room_gallery_ids ) ) {
 									foreach ( $tf_room_gallery_ids as $key => $gallery_item_id ) {
@@ -4569,7 +4569,7 @@ class Hotel {
                     <div class="tf-room-modal-inner">
                         <div class="tf-room-modal-gallery <?php echo empty( $tf_room_gallery ) ? esc_attr('tf-room-modal-no-gallery') : ''?>">
 		                    <?php if ( ! empty( $tf_room_gallery ) ): ?>
-                                <div class="tf-room-gallery-slider">
+                                <div class="tf-room-gallery-slider tf-slick-slider">
 				                    <?php
 				                    if ( ! empty( $tf_room_gallery_ids ) ) {
 					                    foreach ( $tf_room_gallery_ids as $gallery_item_id ) {
@@ -4578,7 +4578,7 @@ class Hotel {
 					                    }
 				                    } ?>
                                 </div>
-                                <div class="tf-room-gallery-slider-nav">
+                                <div class="tf-room-gallery-slider-nav tf-slick-slider">
 				                    <?php
 				                    if ( ! empty( $tf_room_gallery_ids ) ) {
 					                    foreach ( $tf_room_gallery_ids as $gallery_item_id ) {

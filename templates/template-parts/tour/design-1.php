@@ -700,7 +700,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                             <?php } ?>
                         </div>
 
-                        <div class="tf-slider-items-wrapper">
+                        <div class="tf-slider-items-wrapper tf-slick-slider">
                             <?php
                             while ( $tours->have_posts() ) {
                                 $tours->the_post();
