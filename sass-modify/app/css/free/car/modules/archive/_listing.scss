@@ -9,7 +9,7 @@
                 @media #{$max1024}{
                     width: calc(100% - 322px);
                 }
-                @media #{$max767}{
+                @media #{$max768}{
                     width: 100%;
                 }
                 &.tf-car-lists-widgets{
@@ -19,7 +19,7 @@
                         @media #{$max1199}{
                             width: calc(50% - 16px);
                         }
-                        @media #{$max767}{
+                        @media #{$max768}{
                             width: 100%;
                         }
                     }
@@ -45,7 +45,7 @@
                         border-radius: 16px;
                         background: rgb(248,250,252);
                         width: calc(50% - 16px);
-                        @media #{$max991}{
+                        @media #{$max1024}{
                             width: 100%;
                         }
                         .tf-car-image{
@@ -189,16 +189,13 @@
                         .tf-single-car-view{
                             width: 100%;
                             display: flex;
-                            @media #{$max885}{
+                            @media #{$max1024}{
                                 display: flow-root;
                             }
                             .tf-car-image{
                                 width: 280px;
                                 height: 200px;
                                 @media #{$max1024}{
-                                    width: 200px;
-                                }
-                                @media #{$max885}{
                                     width: 100%;
                                 }
                                 img{
@@ -226,16 +223,13 @@
                                 display: flex;
                                 padding: 24px;
                                 justify-content: space-between;
-                                @media #{$max885}{
+                                @media #{$max1024}{
                                     display: flow-root;
                                     width: 100%;
                                 }
                                 .tf-car-content{
                                     width: calc(100% - 196px);
                                     @media #{$max1024}{
-                                        width: calc(100% - 140px);
-                                    }
-                                    @media #{$max885}{
                                         width: 100%;
                                     }
                                     h3{
@@ -243,7 +237,7 @@
                                     }
                                     ul{
                                         margin: 0;
-                                        @media #{$max885}{
+                                        @media #{$max1024}{
                                             margin-bottom: 24px;
                                         }
                                         li{
@@ -253,7 +247,7 @@
                                 }
                                 .tf-booking-btn{
                                     flex-direction: column;
-                                    @media #{$max885}{
+                                    @media #{$max1024}{
                                         flex-direction: row;
                                     }
                                     button{

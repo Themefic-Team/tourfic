@@ -124,11 +124,7 @@
                 padding: 32px 0;
                 display: flex;
                 gap: 32px;
-                @media #{$max1199}{
-                    padding-left: 15px;
-                    padding-right: 15px;
-                }
-                @media #{$max767}{
+                @media #{$max768}{
                     flex-wrap: wrap;
                 }
                 .tf-car-details-column{
@@ -136,10 +132,10 @@
                     display: flex;
                     gap: 32px;
                     flex-wrap: wrap;
-                    @media #{$tfmax991}{
-                        width: calc(100% - 360px);
+                    @media #{$max1024}{
+                        width: calc(100% - 402px);
                     }
-                    @media #{$max767}{
+                    @media #{$max768}{
                         width: 100%;
                     }
                     h3{
@@ -202,7 +198,7 @@
                     background: $color-white;
                     padding: 16px 24px;
                     width: 850px;
-                    @media #{$max640}{
+                    @media #{$max768}{
                         width: 100%;
                     }
                     .tf-instraction-popup-header,
@@ -343,7 +339,7 @@
                 background: $color-white;
                 padding: 16px 24px;
                 width: 850px;
-                @media #{$max767}{
+                @media #{$max768}{
                     padding: 24px 15px;
                 }
                 .tf-booking-popup-header{
@@ -438,7 +434,7 @@
                             @media #{$max991}{
                                 width: 100%;
                             }
-                            @media #{$max767}{
+                            @media #{$max768}{
                                 padding: 20px 12px;
                             }
                             table{
@@ -452,7 +448,7 @@
                                         font-size: 16px;
                                         font-weight: 400;
                                         padding: 0 0 16px 0px;
-                                        @media #{$max767}{
+                                        @media #{$max768}{
                                             font-size: 12px;
                                             vertical-align: top;
                                         }
@@ -460,7 +456,7 @@
                                             font-weight: 600;
                                         }
                                         &:nth-child(2){
-                                            @media #{$max767}{
+                                            @media #{$max768}{
                                                 width: 90px;
                                             }
                                         }
@@ -471,12 +467,12 @@
                                         font-size: 16px;
                                         font-weight: 700;
                                         padding: 0 0 16px 0px;
-                                        @media #{$max767}{
+                                        @media #{$max768}{
                                             font-size: 14px;
                                         }
                                         .tf-flex.tf-flex-align-center{
                                             flex-wrap: nowrap;
-                                            @media #{$max767}{
+                                            @media #{$max768}{
                                                 align-items: flex-start;
                                             }
                                         }
@@ -486,7 +482,7 @@
                                         }
                                         .tf-protection-select{
                                             height: 15px;
-                                            @media #{$max767}{
+                                            @media #{$max768}{
                                                 margin-top: 6px;
                                             }
                                             label{
@@ -606,7 +602,7 @@
                             flex-wrap: wrap;
                             .tf-single-field{
                                 width: calc(33% - 24px);
-                                @media #{$max767}{
+                                @media #{$max768}{
                                     width: calc(50% - 24px);
                                 }
                                 label{
