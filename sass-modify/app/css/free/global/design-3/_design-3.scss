@@ -18,7 +18,7 @@
             color: $color-danger;
             display: block;
         }
-        @media #{$tfmax767}{
+        @media #{$max768}{
             padding-top: 0px;
         }
 
@@ -82,11 +82,7 @@
                     display: flex;
                     flex-direction: column;
                     gap: 32px;
-        
-                    @media #{$max1600}{
-                        width: calc(100% - 360px);
-                    }
-                    @media #{$max1366}{
+                    @media only screen and (max-width: 1366px) {
                         width: calc(100% - 323px);
                     }
                     @media #{$max1024}{
@@ -94,11 +90,11 @@
                         gap: 16px;
                     }
                     .tf-details-menu{
-                        @media only screen and (max-width: 767.98px) {
+                        @media #{$max768} {
                             padding: 16px;
                         }
                         ul{
-                            @media only screen and (max-width: 767.98px) {
+                            @media #{$max768} {
                                 gap: 16px;
                             }
                         }
@@ -106,69 +102,69 @@
                 }
             }
             .tf-archive-details{
-                @media only screen and (max-width: 992px) {
+                @media #{$max1024}{
                     position: relative;
                 }
                 .tf-details-left{
-                    @media #{$max991}{
+                    @media #{$max1024}{
                         width: 100%;
                     }
                 }
                 .tf-available-room{
-                    @media only screen and (max-width: 767.98px) {
+                    @media #{$max768} {
                         display: flow-root;
                     }
                     .tf-available-room-gallery{
-                        @media only screen and (max-width: 767.98px) {
+                        @media #{$max768} {
                             height: 120px;
                             max-width: none;
                         }
                         .tf-room-gallery:nth-child(n+2){
-                            @media only screen and (max-width: 767.98px) {
+                            @media #{$max768} {
                                 width: 48px;
                                 height: 28px;
                             }
                             svg{
-                                @media only screen and (max-width: 767.98px) {
+                                @media #{$max768} {
                                     width: 10px;
                                 }
                             }
                         }
                     }
                     .tf-available-room-content{
-                        @media only screen and (max-width: 767.98px) {
+                        @media #{$max768} {
                             width: auto;
                             display: flow-root;
                         }
                         .tf-available-room-content-left{
-                            @media only screen and (max-width: 767.98px) {
+                            @media #{$max768} {
                                 width: 100%;
                             }
                             .tf-card-heading-info{
-                                @media only screen and (max-width: 767.98px) {
+                                @media #{$max768} {
                                     display: flex;
                                     justify-content: space-between;
                                     margin-bottom: 24px;
                                 }
                                 .tf-section-title-and-location{
-                                    @media only screen and (max-width: 767.98px) {
+                                    @media #{$max768} {
                                         margin-bottom: 0px;
                                         width: calc(100% - 124px);
                                     }
                                     h2{
-                                        @media only screen and (max-width: 767.98px) {
+                                        @media #{$max768} {
                                             margin-bottom: 6px;
                                         }
                                     }
                                     .tf-title-location{
-                                        @media only screen and (max-width: 767.98px) {
+                                        @media #{$max768} {
                                             margin: 0px;
                                         }
                                     }
                                 }
                                 .tf-mobile.tf-pricing-info{
                                     display: none;
-                                    @media only screen and (max-width: 767.98px) {
+                                    @media #{$max768} {
                                         display: flex;
                                         width: 120px;
                                         flex-direction: column;
@@ -176,8 +172,8 @@
                                     }
                                     .tf-price-from{
                                         .amount{
-                                            @media only screen and (max-width: 767.98px) {
-                                                color: #595349;
+                                            @media #{$max768} {
+                                                color: $color-text;
                                                 font-size: 20px;
                                                 font-style: normal;
                                                 font-weight: 400;
@@ -188,23 +184,23 @@
                                 }
                             }
                             ul{
-                                @media only screen and (max-width: 767.98px) {
+                                @media #{$max768} {
                                     margin-bottom: 24px;
                                 }
                             }
                         }
                         .tf-available-room-content-right{
-                            @media only screen and (max-width: 767.98px) {
+                            @media #{$max768} {
                                 width: 100%;
                                 display: flow-root;
                             }
                             .tf-card-pricing-heading{
-                                @media only screen and (max-width: 767.98px) {
+                                @media #{$max768} {
                                     display: none;
                                 }
                             }
                             a{
-                                @media only screen and (max-width: 767.98px) {
+                                @media #{$max768} {
                                     width: 100%;
                                 }
                             }
@@ -226,13 +222,13 @@
             margin-left: 16px;
             margin-right: 16px;
             display: none;
-            @media #{$max767}{
+            @media #{$max768}{
                 display: block;
             }
         }
         .tf-booking-form-wrapper {
             background: $color-light-bg;
-            @media #{$max767}{
+            @media #{$max768}{
                 display: none;
             }
             .tf-booking-form {
@@ -553,7 +549,7 @@
                             display: grid;
                             grid-template-columns: 1fr 1fr;
                             gap: 12px 5px;
-                            @media #{$max767}{
+                            @media #{$max768}{
                                 gap: 8px 5px;
                             }
                             &:last-child {
@@ -564,7 +560,7 @@
                                 @media #{$max1024}{
                                     font-size: 16px;
                                 }
-                                @media #{$max767}{
+                                @media #{$max768}{
                                     font-size: 14px;
                                 }
                                 i {
@@ -765,7 +761,7 @@
                     width: auto;
                     display: flow-root;
                     padding: 16px;
-                    @media only screen and (max-width: 767.98px) {
+                    @media #{$max768} {
                         padding: 16px;
                     }
                     .tf-available-room-content-left{
@@ -930,7 +926,7 @@
                     z-index: 99;
                     top: 200px;
                 }
-                @media #{$max767}{
+                @media #{$max768}{
                     top: 100px;
                 }
             }
@@ -1121,7 +1117,7 @@
                     gap: 10px;
                     scrollbar-width: thin;
                     scrollbar-color: $color-gray $color-light-bg;
-                    @media #{$max767}{
+                    @media #{$max768}{
                         grid-template-columns: 1fr 1fr;
                         max-height: 320px;
                     }
@@ -1319,14 +1315,14 @@
                     @media only screen and (max-width: 1280px) {
                         gap: 24px;
                     }
-                    @media only screen and (max-width: 767.98px) {
+                    @media #{$max768} {
                         display: flow-root;
                     }
                     .tf-details-left{
                         @media only screen and (max-width: 1024px) {
                             width: calc(100% - 246px);
                         }
-                        @media only screen and (max-width: 767.98px) {
+                        @media #{$max768} {
                             width: 100%;
                         }
                     }
@@ -1339,11 +1335,11 @@
                             width: 222px;
                             padding: 0px;
                         }
-                        @media only screen and (max-width: 767.98px) {
+                        @media #{$max768} {
                             width: 100%;
                         }
                         .tf-location.tf-single-widgets{
-                            @media only screen and (max-width: 767.98px) {
+                            @media #{$max768} {
                                 padding-left: 16px;
                                 padding-right: 16px;
                             }
@@ -1428,7 +1424,7 @@
                 }
             }
             .tf-booking-form-wrapper{
-                @media only screen and (max-width: 767.98px) {
+                @media #{$max768} {
                     margin-left: 16px;
                     margin-right: 16px;
                 }
@@ -1437,12 +1433,12 @@
                         display: flow-root;
                     }
                     span.tf-booking-form-title{
-                        @media only screen and (max-width: 767.98px) {
+                        @media #{$max768} {
                             font-size: 12px;
                         }
                     }
                     .tf-booking-date{
-                        @media only screen and (max-width: 767.98px) {
+                        @media #{$max768} {
                             font-size: 16px;
                         }
                     }
@@ -1499,19 +1495,19 @@
                 }
             }
             #tf-hotel-facilities{
-                @media only screen and (max-width: 767.98px) {
+                @media #{$max768} {
                     padding-left: 16px;
                     padding-right: 16px;
                 }
             }
             .tf-popup-left,
             .tf-popup-right{
-                @media only screen and (max-width: 767.98px) {
+                @media #{$max768} {
                     width: 100%;
                 }
             }
             .tf-popup-body {
-                @media only screen and (max-width: 767.98px) {
+                @media #{$max768} {
                     max-height: 320px;
                 }
             }
@@ -1532,7 +1528,7 @@
             margin-bottom: 0;
             .tf-content-wrapper{
                 .tf-details{
-                    @media only screen and (max-width: 767.98px) {
+                    @media #{$max768} {
                         display: flow-root;
                     }
                     .tf-details-left{
@@ -1542,7 +1538,7 @@
                         @media only screen and (max-width: 992px) {
                             width: calc(100% - 284px);
                         }
-                        @media only screen and (max-width: 767.98px) {
+                        @media #{$max768} {
                             width: 100%;
                         }
                     }
@@ -1558,14 +1554,14 @@
                         @media only screen and (max-width: 992px) {
                             width: 260px;
                         }
-                        @media only screen and (max-width: 767.98px) {
+                        @media #{$max768} {
                             width: 100%;
                         }
                     }
                 }
             }
             .tf-search-date-wrapper.tf-single-widgets{
-                @media only screen and (max-width: 767.98px) {
+                @media #{$max768} {
                     background-color: transparent;
                     gap: 0px;
                     padding: 0px;
@@ -1577,17 +1573,17 @@
                 .tf-tour-booking-box,
                 .tf_tours_booking > .tf-tours-booking-btn .tf-btn,
                 .tf-bottom-booking-bar{
-                    @media only screen and (max-width: 767.98px) {
+                    @media #{$max768} {
                         display: none;
                     }
                     .tf-bottom-booking-field{
-                        @media only screen and (max-width: 767.98px) {
+                        @media #{$max768} {
                             width: auto;
                         }
                     }
                 }
                 .tf-bottom-booking-bar.tf-mobile-booking-form{
-                    @media only screen and (max-width: 767.98px) {
+                    @media #{$max768} {
                         display: block;
                     }
                 }
@@ -1596,25 +1592,25 @@
             #tf-tour-faq,
             #tf-tour-reviews,
             #tf-tour-policies{
-                @media only screen and (max-width: 767.98px) {
+                @media #{$max768} {
                     padding-left: 16px;
                     padding-right: 16px;
                 }
             }
             #tf-tour-reviews{
-                @media only screen and (max-width: 767.98px) {
+                @media #{$max768} {
                     padding-bottom: 32px;
                     padding-top: 16px;
                 }
             }
             #tf-tour-policies{
-                @media only screen and (max-width: 767.98px) {
+                @media #{$max768} {
                     padding-top: 16px;
                     padding-bottom: 16px;
                 }
             }
             .tf-send-inquiry{
-                @media only screen and (max-width: 767.98px) {
+                @media #{$max768} {
                     margin-bottom: 32px;
                     margin-right: 16px;
                     margin-left: 16px;
@@ -1632,7 +1628,7 @@
         &__three{
             .tf-content-wrapper{
                 .tf-details{
-                    @media only screen and (max-width: 767.98px) {
+                    @media #{$max768} {
                         display: flow-root;
                     }
                     .tf-details-left{
@@ -1642,7 +1638,7 @@
                         @media only screen and (max-width: 992px) {
                             width: calc(100% - 284px);
                         }
-                        @media only screen and (max-width: 767.98px) {
+                        @media #{$max768} {
                             width: 100%;
                         }
                     }
@@ -1655,7 +1651,7 @@
                             width: 240px;
                             padding: 0px;
                         }
-                        @media only screen and (max-width: 767.98px) {
+                        @media #{$max768} {
                             width: 100%;
                         }
                     }
@@ -1684,7 +1680,7 @@
                 display: grid;
                 gap: 40px;
                 grid-template-columns: 1fr 1fr;
-                @media #{$max767}{
+                @media #{$max768}{
                     grid-template-columns: 1fr;
                     gap: 0px;
                 }
@@ -1731,7 +1727,7 @@
                         }
                         .tf-question-desc {
                             display: none;
-                            @media #{$max767}{
+                            @media #{$max768}{
                                 font-size: 14px;
                             }
                         }
@@ -1763,7 +1759,7 @@
                 gap: 16px;
                 p{
                     color: $color-text;
-                    @media #{$max767}{
+                    @media #{$max768}{
                         font-size: 14px;
                     }
                 }
@@ -1785,7 +1781,7 @@
         }
         .tf-single-pb-56 {
             padding-bottom: 56px;
-            @media #{$max767}{
+            @media #{$max768}{
                 padding-bottom: 32px;
             }
         }
@@ -1794,14 +1790,14 @@
             background-color: $color-yellow-thin;
             padding: 120px 0px;
 
-            @media #{$max767}{
+            @media #{$max768}{
                 padding: 32px;
 
             }
-            @media #{$max480}{
+            @media #{$max575}{
                 padding: 16px;
             }
-            @media only screen and (max-width: 767.98px) {
+            @media #{$max768} {
                 padding: 16px;
             }
             h2{
@@ -1830,7 +1826,7 @@
                 @media #{$max1024}{
                     padding: 0px 4px;
                 }
-                @media #{$max767}{
+                @media #{$max768}{
                     padding: 0px 12px;
                 }
                 @media only screen and (min-width: 768px) and (max-width: 970px) {
@@ -1905,7 +1901,7 @@
                                 @media #{$max1024}{
                                     font-size: 20px;
                                 }
-                                @media only screen and (max-width: 767.98px) {
+                                @media #{$max768} {
                                     font-size: 20px;
                                 }
                                 &:hover{
@@ -1969,7 +1965,7 @@
             @media #{$max1024}{
                 padding: 16px;
             }
-            @media #{$max767}{
+            @media #{$max768}{
                 gap: 16px;
             }
             i{
@@ -1995,7 +1991,7 @@
                 font-weight: 400;
                 line-height: 130%;
                 margin: 0;
-                @media #{$max767}{
+                @media #{$max768}{
                     font-size: 14px;
                 }
             }
@@ -2175,7 +2171,7 @@
             background-position: center;
             background-repeat: no-repeat;
             margin-bottom: 56px;
-            @media #{$max767}{
+            @media #{$max768}{
                 margin-bottom: 16px;
             }
             .tf-container {
@@ -2200,7 +2196,7 @@
                         min-height: 275px;
                         max-height: 275px;
                     }
-                    @media #{$max767}{
+                    @media #{$max768}{
                         min-height: 210px;
                         max-height: 210px;
                     }
@@ -2214,11 +2210,11 @@
                         @media #{$max1024}{
                             margin-top: 90px;
                         }
-                        @media #{$max767}{
+                        @media #{$max768}{
                             margin-top: 64px;
                             padding-right: 16px;
                         }
-                        @media #{$max480}{
+                        @media #{$max575}{
                             margin-top: 16px;
                             padding-right: 16px;
                         }
@@ -2313,7 +2309,7 @@
                             align-items: center;
                             padding: 0px 0 32px 0;
                         }
-                        @media #{$max767}{
+                        @media #{$max768}{
                             padding: 0px 16px 16px 16px;
                         }
                         .tf-head-title {
@@ -2325,11 +2321,11 @@
                                 @media #{$max1024}{
                                     font-size: 32px;
                                 }
-                                @media #{$max767}{
+                                @media #{$max768}{
                                     font-size: 20px;
                                     margin-bottom: 8px;
                                 }
-                                @media #{$max480}{
+                                @media #{$max575}{
                                     display: -webkit-box;
                                     overflow: hidden;
                                     -webkit-line-clamp: 2;
@@ -2348,7 +2344,7 @@
                                     font-size: 16px;
                                     width: auto;
                                 }
-                                @media #{$max767}{
+                                @media #{$max768}{
                                     font-size: 14px;
                                     line-height: 130%; /* 18.2px */
                                 }
@@ -2361,7 +2357,7 @@
                                     @media #{$max1024}{
                                         font-size: 16px;
                                     }
-                                    @media #{$max767}{
+                                    @media #{$max768}{
                                         font-size: 14px;
                                         line-height: 130%; /* 18.2px */
                                     }
@@ -2392,7 +2388,7 @@
                                     width: 104px;
                                     height: 40px;
                                 }
-                                @media #{$max767}{
+                                @media #{$max768}{
                                     width: 52px;
                                     height: 32px;
                                 }
@@ -2412,7 +2408,7 @@
                                     @media only screen and (max-width: 992px) {
                                         width: 16px;
                                     }
-                                    @media #{$max767}{
+                                    @media #{$max768}{
                                         width: 12px;
                                     }
                                 }
@@ -2424,7 +2420,7 @@
         }
 
         .tf-facilities-wrapper {
-            @media #{$max767}{
+            @media #{$max768}{
                 padding-left: 16px;
                 padding-right: 16px;
             }
@@ -2499,7 +2495,7 @@
                     flex-direction: row;
                     gap: 8px;
                     min-height: 212px;
-                    @media #{$max767}{
+                    @media #{$max768}{
                         min-height: auto;
                     }
                     .tf-reviews-avater {
@@ -2535,7 +2531,7 @@
                         }
 
                         p {
-                            @media #{$max767}{
+                            @media #{$max768}{
                                 font-size: 14px;
                             }
                         }
@@ -2543,7 +2539,7 @@
                 }
                 .slick-list {
                     padding: 32px 0;
-                    @media #{$max767}{
+                    @media #{$max768}{
                         padding-top: 16px;
                         padding-bottom: 16px;
                     }
@@ -2569,7 +2565,7 @@
         }
 
         .tf-whats-around {
-            @media #{$max767}{
+            @media #{$max768}{
                 margin-left: 16px;
                 margin-right: 16px;
             }
@@ -2579,7 +2575,7 @@
                 display: flex;
                 flex-direction: column;
                 gap: 16px;
-                @media #{$max767}{
+                @media #{$max768}{
                     gap: 8px;
                 }
                 li {
@@ -2588,7 +2584,7 @@
                     @media #{$max1024}{
                         display: flow-root;
                     }
-                    @media #{$max767}{
+                    @media #{$max768}{
                         display: flex;
                     }
                     span{
@@ -2645,7 +2641,7 @@
         .tf-popup-wrapper.tf-room-popup{
             .tf-popup-inner {
                 width: 1500px;
-                @media #{$max767}{
+                @media #{$max768}{
                     width: 90%;
                     max-width: none;
                 }
@@ -2662,7 +2658,7 @@
                     @media #{$max1024}{
                         grid-template-columns: 2fr 1fr;
                     }
-                    @media #{$max767}{
+                    @media #{$max768}{
                         max-height: 430px;
                     }
                     scrollbar {
@@ -2706,7 +2702,7 @@
                         width: calc(50% - 8px);
                         display: flex;
                         gap: 8px;
-                        @media #{$max767}{
+                        @media #{$max768}{
                             width: calc(100% - 8px);
                         }
                     }
@@ -3060,7 +3056,7 @@
                                 font-style: normal;
                                 font-weight: 400;
                                 line-height: 130%; /* 20.8px */
-                                @media #{$max767}{
+                                @media #{$max768}{
                                     font-size: 14px;
                                 }
                             }
@@ -3072,7 +3068,7 @@
                                 font-weight: 400;
                                 line-height: 130%;
                                 cursor: pointer;
-                                @media #{$max767}{
+                                @media #{$max768}{
                                     font-size: 14px;
                                 }
                             }
@@ -3083,7 +3079,7 @@
                                 font-style: normal;
                                 font-weight: 400;
                                 line-height: 130%; /* 20.8px */
-                                @media #{$max767}{
+                                @media #{$max768}{
                                     font-size: 14px;
                                 }
                             }
@@ -3108,7 +3104,7 @@
                                 li {
                                     width: 25%;
                                     display: flex;
-                                    @media #{$max767}{
+                                    @media #{$max768}{
                                         width: 50%;
                                     }
                                     @media only screen and (max-width: 1280px) {
@@ -3136,7 +3132,7 @@
                             @media #{$max991}{
                                 grid-template-columns: 1fr 1fr;
                             }
-                            @media #{$max480}{
+                            @media #{$max575}{
                                 grid-template-columns: 100%;
                             }
                             .tf-feature-block {
@@ -3295,7 +3291,7 @@
             background-position: center;
             background-repeat: no-repeat;
             margin-bottom: 56px;
-            @media #{$max767}{
+            @media #{$max768}{
                 margin-bottom: 16px;
             }
             .tf-hero-content {
@@ -3323,7 +3319,7 @@
                             display: flow-root;
                             padding: 0px 0 30px 0;
                         }
-                        @media #{$max767}{
+                        @media #{$max768}{
                             align-items: center;
                             padding: 0px 16px 16px 16px;
                         }
@@ -3331,7 +3327,7 @@
                             color: $color-white;
                             margin: 0px;
                             font-size: 40px;
-                            @media #{$max767}{
+                            @media #{$max768}{
                                 font-size: 20px;
                             }
                         }
@@ -3355,7 +3351,7 @@
         }
         .tf-archive-search-form {
             width: 100%;
-            @media #{$max767}{
+            @media #{$max768}{
                 margin-left: 16px;
                 margin-right: 16px;
                 width: auto;
@@ -3685,7 +3681,7 @@
         .tf-available-archive-hetels-wrapper {
             background: $color-light-bg;
             margin-bottom: 56px;
-            @media #{$max767}{
+            @media #{$max768}{
                 padding: 16px;
             }
             .tf-archive-available-rooms-head {
@@ -3842,7 +3838,7 @@
                                 }
                             }
                             ul.features{
-                                @media #{$max767}{
+                                @media #{$max768}{
                                     display: none;
                                 }
                             }

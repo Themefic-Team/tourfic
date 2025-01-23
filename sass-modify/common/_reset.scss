@@ -113,18 +113,13 @@ a{
     @media #{$max1024}{
         padding: $tf-space-24;
     }
-    @media #{$max768}{
-        padding: $tf-space-24;
-    }
+
    
 }
 
 .tf-flex{
     display: flex;
-    @media #{max1024}{
-        flex-wrap: wrap;
-    }
-    @media #{$max768}{
+    @media #{$max1024}{
         flex-wrap: wrap;
     }
   

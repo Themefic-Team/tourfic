@@ -1908,13 +1908,6 @@
   display: block;
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-search-box .tf-driver-location-box .tf-driver-location ul li label input:checked ~ .tf-checkmark,
-.tax-carrental_location .tf-archive-template__one .tf-archive-search-box .tf-driver-location-box .tf-driver-location ul li label input:checked ~ .tf-checkmark,
-.tax-carrental_brand .tf-archive-template__one .tf-archive-search-box .tf-driver-location-box .tf-driver-location ul li label input:checked ~ .tf-checkmark,
-.page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-driver-location-box .tf-driver-location ul li label input:checked ~ .tf-checkmark {
-  background-color: #faeedc;
-}
-
 .post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-search-box .tf-driver-location-box .tf-driver-location ul li label .tf-checkmark,
 .tax-carrental_location .tf-archive-template__one .tf-archive-search-box .tf-driver-location-box .tf-driver-location ul li label .tf-checkmark,
 .tax-carrental_brand .tf-archive-template__one .tf-archive-search-box .tf-driver-location-box .tf-driver-location ul li label .tf-checkmark,
