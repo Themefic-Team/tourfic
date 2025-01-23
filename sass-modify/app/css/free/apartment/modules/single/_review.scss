@@ -26,7 +26,7 @@
                     row-gap: 16px;
                     grid-template-columns: calc(50% - 100px) calc(50% - 100px);
             
-                    @media #{$max767} {
+                    @media #{$max768} {
                         grid-template-columns: 1fr;
                     }
             
@@ -75,13 +75,13 @@
             .show-all-review-wrap {
                 padding: 8px 24px;
                 border-radius: 4px;
-                background: $color-light-bg;
+                background: $color-primary;
                 border: 1px solid $color-primary;
                 width: 200px;
                 margin: auto;
             
                 .tf-apaartment-show-all {
-                    color: $color-primary;
+                    color: $color-white;
                     text-align: center;
                     font-size: 14px;
                     font-style: normal;

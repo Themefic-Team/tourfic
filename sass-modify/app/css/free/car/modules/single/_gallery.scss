@@ -11,7 +11,7 @@
                         height: 338px;
                         width: 100%;
                         object-fit: cover;
-                        @media #{$max480}{
+                        @media #{$max575}{
                             height: 240px;
                         }
                     }
@@ -78,11 +78,11 @@
                                 &.show{
                                     display: block;
                                 }
-                                @media #{$max640}{
+                                @media #{$max768}{
                                     left: auto;
                                     right: 0px;
                                 }
-                                @media #{$max480}{
+                                @media #{$max575}{
                                     left: 0;
                                     right: auto;
                                 }
@@ -142,7 +142,7 @@
                                             }
                                             
                                             input{
-                                                @media #{$max640}{
+                                                @media #{$max768}{
                                                     display: contents;
                                                 }
                                                 padding: 0;
@@ -161,13 +161,10 @@
                         width: calc(25% - 12px);
                         display: none;
                         height: 122px;
-                        @media #{$tfmax991}{
+                        @media #{$max1024}{
                             height: 90px;
                         }
                         @media #{$max575}{
-                            height: 90px;
-                        }
-                        @media #{$max480}{
                             height: 60px;
                         }
 
@@ -195,7 +192,7 @@
                                 width: 100%;
                                 z-index: 1;
                                 background: $color-heading;
-                                @media #{$tfmax767}{
+                                @media #{$max768}{
                                     text-align: center;
                                 }
                             }

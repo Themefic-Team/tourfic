@@ -8,11 +8,19 @@
   align-items: flex-end;
 }
 
-@media only screen and (max-width: 767.98px) {
+@media only screen and (max-width: 768px) {
   .single-tf_apartment .tf-single-template__one .tf-apartment-title .tf-title-wrap {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
+  }
+}
+
+@media only screen and (max-width: 575.98px) {
+  .single-tf_apartment .tf-single-template__one .tf-apartment-title .tf-title-wrap {
+    -webkit-align-items: flex-start;
+    -ms-flex-align: flex-start;
+    align-items: flex-start;
   }
 }
 
@@ -28,8 +36,20 @@
   gap: 32px;
 }
 
+@media only screen and (max-width: 575.98px) {
+  .single-tf_apartment .tf-single-template__one .tf-apartment-title .tf-title-left-bottom {
+    flex-direction: column;
+    gap: 16px;
+    -webkit-align-items: Start;
+    -ms-flex-align: Start;
+    align-items: Start;
+  }
+}
+
 .single-tf_apartment .tf-single-template__one .tf-apartment-title .tf-title-left-bottom a {
   text-decoration: none;
+  display: block;
+  width: max-content;
 }
 
 .single-tf_apartment .tf-single-template__one .tf-apartment-title .tf-title-left-bottom .tf-single-rating {
@@ -69,14 +89,20 @@
   gap: 24px;
 }
 
-@media only screen and (max-width: 767.98px) {
+@media only screen and (max-width: 768px) {
   .single-tf_apartment .tf-single-template__one .tf-apartment-title .tf-title-right {
     -webkit-flex: 0 0 100%;
     -ms-flex: 0 0 100%;
     flex: 0 0 100%;
+    margin-top: 24px;
+  }
+}
+
+@media only screen and (max-width: 575.98px) {
+  .single-tf_apartment .tf-single-template__one .tf-apartment-title .tf-title-right {
     -webkit-justify-content: flex-start;
     justify-content: flex-start;
-    margin-top: 24px;
+    margin-top: 16px;
   }
 }
 
@@ -123,6 +149,13 @@
   right: 0;
 }
 
+@media only screen and (max-width: 575.98px) {
+  .single-tf_apartment .tf-single-template__one .tf-apartment-title .tf-title-right .tf-share .share-tour-content {
+    left: 0;
+    right: inherit;
+  }
+}
+
 .single-tf_apartment .tf-single-template__one .tf-apartment-title .tf-title-right .tf-share .share-tour-content .tf-dropdown-content {
   margin: 0;
   background: #ffffff;
@@ -131,6 +164,12 @@
   min-width: 200px;
   z-index: 100;
   box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.12), 0 2px 3px -1px rgba(0, 0, 0, 0.2);
+}
+
+@media only screen and (max-width: 768px) {
+  .single-tf_apartment .tf-single-template__one .tf-apartment-title .tf-title-right .tf-share .share-tour-content .tf-dropdown-content {
+    min-width: auto;
+  }
 }
 
 .single-tf_apartment .tf-single-template__one .tf-apartment-title .tf-title-right .tf-share .share-tour-content .tf-dropdown-content li {
@@ -177,14 +216,37 @@
   font-size: 14px;
 }
 
+@media only screen and (max-width: 575.98px) {
+  .single-tf_apartment .tf-single-template__one .tf-apartment-title .tf-title-right .tf-share .share-tour-content .tf-dropdown-item {
+    padding-bottom: 0;
+  }
+}
+
 .single-tf_apartment .tf-single-template__one .tf-apartment-title .tf-title-right .tf-share .share-tour-content .tf-dropdown-item:hover {
   background-color: #faeedc;
 }
 
 .single-tf_apartment .tf-single-template__one .tf-apartment-title .tf-title-right .tf-share .share-tour-content .share-center-copy-form {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
-  align-items: center;
+  -webkit-align-items: flex-center;
+  -ms-flex-align: flex-center;
+  align-items: flex-center;
   padding: 12px 16px;
+}
+
+@media only screen and (max-width: 575.98px) {
+  .single-tf_apartment .tf-single-template__one .tf-apartment-title .tf-title-right .tf-share .share-tour-content .share-center-copy-form {
+    flex-direction: column;
+    gap: 6px;
+    padding-top: 10px;
+    -webkit-align-items: flex-start;
+    -ms-flex-align: flex-start;
+    align-items: flex-start;
+  }
 }
 
 .single-tf_apartment .tf-single-template__one .tf-apartment-title .tf-title-right .tf-share .share-tour-content .share-center-copy-label {
@@ -210,6 +272,12 @@
   border: 2px solid #808080;
 }
 
+@media only screen and (max-width: 575.98px) {
+  .single-tf_apartment .tf-single-template__one .tf-apartment-title .tf-title-right .tf-share .share-tour-content input#share_link_input {
+    margin: 0;
+  }
+}
+
 .single-tf_apartment .tf-single-template__one .tf-apartment-title .tf-title-right .tf-share .share-center-copy-cta.copied .share-center-copied-message {
   display: inline-block;
   font-weight: bold;
@@ -233,6 +301,12 @@
   font-weight: 400;
   line-height: 24px;
   letter-spacing: 0.2px;
+}
+
+@media only screen and (max-width: 1024px) {
+  .single-tf_apartment .tf-single-template__one .tf-apartment-title .tf-map-link {
+    flex: 1;
+  }
 }
 
 .single-tf_apartment .tf-single-template__one .tf-apartment-title .tf-map-link .more-apartment {
@@ -277,12 +351,19 @@
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
+  flex-wrap: wrap;
   gap: 24px;
 }
 
-@media only screen and (max-width: 575.98px) {
+@media only screen and (max-width: 768px) {
   .single-tf_apartment .tf-single-template__one .tf-apt-hero-section .tf-apt-hero-wrapper .tf-apt-hero-gallery {
     gap: 16px;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .single-tf_apartment .tf-single-template__one .tf-apt-hero-section .tf-apt-hero-wrapper .tf-apt-hero-gallery {
+    flex-direction: column;
   }
 }
 
@@ -305,7 +386,7 @@
   flex: 0 0 calc(70% - 12px);
 }
 
-@media only screen and (max-width: 991.98px) {
+@media only screen and (max-width: 1024px) {
   .single-tf_apartment .tf-single-template__one .tf-apt-hero-section .tf-apt-hero-wrapper .tf-apt-hero-gallery .tf-apt-hero-left.has-right {
     -webkit-flex: 0 0 calc(50% - 12px);
     -ms-flex: 0 0 calc(50% - 12px);
@@ -313,8 +394,22 @@
   }
 }
 
+@media only screen and (max-width: 768px) {
+  .single-tf_apartment .tf-single-template__one .tf-apt-hero-section .tf-apt-hero-wrapper .tf-apt-hero-gallery .tf-apt-hero-left.has-right {
+    -webkit-flex: 0 0 calc(50% - 4px);
+    -ms-flex: 0 0 calc(50% - 4px);
+    flex: 0 0 calc(50% - 4px);
+  }
+}
+
 .single-tf_apartment .tf-single-template__one .tf-apt-hero-section .tf-apt-hero-wrapper .tf-apt-hero-gallery .tf-apt-hero-left .hero-first-image {
   height: 424px;
+}
+
+@media only screen and (max-width: 768px) {
+  .single-tf_apartment .tf-single-template__one .tf-apt-hero-section .tf-apt-hero-wrapper .tf-apt-hero-gallery .tf-apt-hero-left .hero-first-image {
+    height: 350px;
+  }
 }
 
 @media only screen and (max-width: 575.98px) {
@@ -338,7 +433,7 @@
   gap: 24px;
 }
 
-@media only screen and (max-width: 991.98px) {
+@media only screen and (max-width: 1024px) {
   .single-tf_apartment .tf-single-template__one .tf-apt-hero-section .tf-apt-hero-wrapper .tf-apt-hero-gallery .tf-apt-hero-right {
     -webkit-flex: 0 0 calc(50% - 12px);
     -ms-flex: 0 0 calc(50% - 12px);
@@ -346,7 +441,7 @@
   }
 }
 
-@media only screen and (max-width: 575.98px) {
+@media only screen and (max-width: 768px) {
   .single-tf_apartment .tf-single-template__one .tf-apt-hero-section .tf-apt-hero-wrapper .tf-apt-hero-gallery .tf-apt-hero-right {
     gap: 16px;
   }
@@ -355,6 +450,13 @@
 .single-tf_apartment .tf-single-template__one .tf-apt-hero-section .tf-apt-hero-wrapper .tf-apt-hero-gallery .tf-apt-hero-right .hero-second-image,
 .single-tf_apartment .tf-single-template__one .tf-apt-hero-section .tf-apt-hero-wrapper .tf-apt-hero-gallery .tf-apt-hero-right .hero-third-image {
   height: 200px;
+}
+
+@media only screen and (max-width: 768px) {
+  .single-tf_apartment .tf-single-template__one .tf-apt-hero-section .tf-apt-hero-wrapper .tf-apt-hero-gallery .tf-apt-hero-right .hero-second-image,
+  .single-tf_apartment .tf-single-template__one .tf-apt-hero-section .tf-apt-hero-wrapper .tf-apt-hero-gallery .tf-apt-hero-right .hero-third-image {
+    height: 167px;
+  }
 }
 
 @media only screen and (max-width: 575.98px) {
@@ -504,11 +606,11 @@
 .single-tf_apartment .tf-single-template__one .tf-apt-highlights .tf-apt-highlight .tf-apt-highlight-icon i {
   font-size: 24px;
   line-height: 1;
-  color: #F1F3F4;
+  color: #060D1C;
 }
 
 .single-tf_apartment .tf-single-template__one .tf-apt-highlights .tf-apt-highlight h4 {
-  color: #F1F3F4;
+  color: #060D1C;
   margin: 0;
   font-size: 20px;
   font-weight: 500;
@@ -823,7 +925,7 @@
   box-sizing: border-box;
 }
 
-@media only screen and (max-width: 767.98px) {
+@media only screen and (max-width: 768px) {
   .single-tf_apartment .tf-single-template__one .tf-house-rules .tf-house-rules-wrapper .tf-not-included-house-rules,
   .single-tf_apartment .tf-single-template__one .tf-house-rules .tf-house-rules-wrapper .tf-included-house-rules {
     -webkit-flex: 0 0 100%;
@@ -913,7 +1015,7 @@
   background: #dc3545;
 }
 
-@media only screen and (max-width: 767.98px) {
+@media only screen and (max-width: 768px) {
   .single-tf_apartment .tf-single-template__three .tf-aprtment-rules-section {
     padding-left: 16px;
     padding-right: 16px;
@@ -927,7 +1029,7 @@
   margin-bottom: 24px;
 }
 
-@media only screen and (max-width: 767.98px) {
+@media only screen and (max-width: 768px) {
   .single-tf_apartment .tf-single-template__three .tf-aprtment-rules-section h2 {
     font-size: 24px;
   }
@@ -938,7 +1040,7 @@
   gap: 26px;
 }
 
-@media only screen and (max-width: 767.98px) {
+@media only screen and (max-width: 768px) {
   .single-tf_apartment .tf-single-template__three .tf-aprtment-rules-section .aprtment-inc-exc {
     flex-wrap: wrap;
   }
@@ -948,7 +1050,7 @@
   width: 50%;
 }
 
-@media only screen and (max-width: 767.98px) {
+@media only screen and (max-width: 768px) {
   .single-tf_apartment .tf-single-template__three .tf-aprtment-rules-section .aprtment-inc-exc .aprtment-single-rules {
     width: 100%;
   }
@@ -1001,6 +1103,12 @@
   padding: 24px 40px;
 }
 
+@media only screen and (max-width: 575.98px) {
+  .single-tf_apartment .tf-single-template__one .tf-apartment-amenities-section .tf-apartment-amenities-inner {
+    padding: 16px;
+  }
+}
+
 .single-tf_apartment .tf-single-template__one .tf-apartment-amenities-section .tf-apartment-amenities {
   display: -webkit-box;
   display: -moz-box;
@@ -1027,6 +1135,12 @@
   color: #686E7A;
 }
 
+@media only screen and (max-width: 575.98px) {
+  .single-tf_apartment .tf-single-template__one .tf-apartment-amenities-section .tf-apartment-amenities .tf-apt-amenity {
+    gap: 8px;
+  }
+}
+
 .single-tf_apartment .tf-single-template__one .tf-apartment-amenities-section .tf-apartment-amenities .tf-apt-amenity .tf-apt-amenity-icon {
   display: -webkit-box;
   display: -moz-box;
@@ -1040,6 +1154,14 @@
   -ms-flex: 0 0 24px;
   flex: 0 0 24px;
   height: 24px;
+}
+
+@media only screen and (max-width: 575.98px) {
+  .single-tf_apartment .tf-single-template__one .tf-apartment-amenities-section .tf-apartment-amenities .tf-apt-amenity .tf-apt-amenity-icon {
+    -webkit-flex: initial;
+    -ms-flex: initial;
+    flex: initial;
+  }
 }
 
 .single-tf_apartment .tf-single-template__one .tf-apartment-amenities-section .tf-apartment-amenities .tf-apt-amenity .tf-apt-amenity-icon i {
@@ -1066,7 +1188,7 @@
   text-decoration: none;
 }
 
-@media only screen and (max-width: 767.98px) {
+@media only screen and (max-width: 768px) {
   .single-tf_apartment .tf-single-template__three .tf-place-offer-section {
     padding-left: 16px;
     padding-right: 16px;
@@ -1080,7 +1202,7 @@
   margin-bottom: 24px;
 }
 
-@media only screen and (max-width: 767.98px) {
+@media only screen and (max-width: 768px) {
   .single-tf_apartment .tf-single-template__three .tf-place-offer-section h2 {
     font-size: 24px;
   }
@@ -1092,7 +1214,7 @@
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
-@media only screen and (max-width: 767.98px) {
+@media only screen and (max-width: 768px) {
   .single-tf_apartment .tf-single-template__three .tf-place-offer-section .place-offer-items {
     grid-template-columns: 1fr 1fr;
   }
@@ -1159,7 +1281,7 @@
   flex: 0 0 calc(50% - 12px);
 }
 
-@media only screen and (max-width: 767.98px) {
+@media only screen and (max-width: 768px) {
   .single-tf_apartment .tf-single-template__one #apartment-map .tf-map-content-wrapper .tf-apartment-map {
     -webkit-flex: 0 0 100%;
     -ms-flex: 0 0 100%;
@@ -1179,7 +1301,7 @@
   border-radius: 8px;
 }
 
-@media only screen and (max-width: 767.98px) {
+@media only screen and (max-width: 768px) {
   .single-tf_apartment .tf-single-template__one #apartment-map .tf-map-content-wrapper .tf-apartment-map #apartment-location {
     height: 250px;
   }
@@ -1189,9 +1311,9 @@
   border-radius: 8px;
 }
 
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 575.98px) {
   .single-tf_apartment .tf-single-template__one #apartment-map .tf-map-content-wrapper .tf-apartment-map iframe {
-    height: 320px;
+    height: 300px;
   }
 }
 
@@ -1202,7 +1324,7 @@
   padding-left: 40px;
 }
 
-@media only screen and (max-width: 767.98px) {
+@media only screen and (max-width: 768px) {
   .single-tf_apartment .tf-single-template__one #apartment-map .tf-map-content-wrapper .about-location {
     -webkit-flex: 0 0 100%;
     -ms-flex: 0 0 100%;
@@ -1455,7 +1577,7 @@
   grid-template-columns: calc(50% - 100px) calc(50% - 100px);
 }
 
-@media only screen and (max-width: 767.98px) {
+@media only screen and (max-width: 768px) {
   .single-tf_apartment .tf-single-template__one .tf-apartment-review .tf-review-progress-bar {
     grid-template-columns: 1fr;
   }
@@ -1501,14 +1623,14 @@
 .single-tf_apartment .tf-single-template__one .show-all-review-wrap {
   padding: 8px 24px;
   border-radius: 4px;
-  background: #faeedc;
+  background: #0E3DD8;
   border: 1px solid #0E3DD8;
   width: 200px;
   margin: auto;
 }
 
 .single-tf_apartment .tf-single-template__one .show-all-review-wrap .tf-apaartment-show-all {
-  color: #0E3DD8;
+  color: #ffffff;
   text-align: center;
   font-size: 14px;
   font-style: normal;
@@ -1613,6 +1735,12 @@
   border-radius: 8px;
   padding: 32px;
   margin-bottom: 40px;
+}
+
+@media only screen and (max-width: 320px) {
+  .single-tf_apartment .tf-single-template__one #tf-apartment-booking {
+    padding: 16px;
+  }
 }
 
 .single-tf_apartment .tf-single-template__one #tf-apartment-booking h5 {
@@ -1892,7 +2020,7 @@
   font-weight: 700;
 }
 
-@media only screen and (max-width: 767.98px) {
+@media only screen and (max-width: 768px) {
   .single-tf_apartment .tf-single-template__three #tf-apartment-booking .tf-apartment-form-header h3 span {
     font-size: 20px;
   }
@@ -1902,7 +2030,7 @@
   font-size: 32px;
 }
 
-@media only screen and (max-width: 767.98px) {
+@media only screen and (max-width: 768px) {
   .single-tf_apartment .tf-single-template__three #tf-apartment-booking .tf-apartment-form-header h3 span bdi {
     font-size: 20px;
   }
@@ -1982,7 +2110,7 @@
   margin: 0px;
 }
 
-@media only screen and (max-width: 767.98px) {
+@media only screen and (max-width: 768px) {
   .single-tf_apartment .tf-single-template__three #tf-apartment-booking .tf-apartment-form-fields .tf-apartment-guest-row .tf_selectperson-wrap .tf-form-title h3.tf-person-info-title {
     font-size: 20px;
   }
@@ -2013,7 +2141,7 @@
   margin-bottom: 80px;
 }
 
-@media only screen and (max-width: 767.98px) {
+@media only screen and (max-width: 1024px) {
   .single-tf_apartment .tf-single-template__one .apartment-question {
     max-width: 100%;
     padding: 0;
@@ -2038,6 +2166,7 @@
   -ms-flex-align: center;
   align-items: center;
   gap: 16px;
+  flex: 1;
 }
 
 .single-tf_apartment .tf-single-template__one .apartment-question .tf-question-left .tf-apartment-question-icon {
@@ -2097,17 +2226,14 @@
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
+    -webkit-align-items: flex-start;
+    -ms-flex-align: flex-start;
+    align-items: flex-start;
   }
 }
 
 .single-tf_apartment .tf-single-template__one .apartment-question .tf-btn {
   width: auto;
-}
-
-@media only screen and (max-width: 575.98px) {
-  .single-tf_apartment .tf-single-template__one .apartment-question .tf-btn {
-    width: 100%;
-  }
 }
 
 .single-tf_apartment .tf-single-template__one .host-details {
@@ -2282,7 +2408,7 @@
   border: 1px solid #f0f2f4;
 }
 
-@media only screen and (max-width: 767.98px) {
+@media only screen and (max-width: 768px) {
   .single-tf_apartment .tf-single-template__one .apartment-toc .tf-toc-wrap {
     padding: 20px;
   }

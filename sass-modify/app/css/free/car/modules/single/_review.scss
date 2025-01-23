@@ -3,10 +3,6 @@
         &__one{
             .tf-review-section{
                 margin-bottom: 32px;
-                @media #{$max1199}{
-                    padding-left: 15px;
-                    padding-right: 15px;
-                }
                 h3{
                     color: $color-heading;
                     font-size: 21px;
@@ -84,7 +80,7 @@
                     
                     .tf-progress-item {
                         width: calc(50% - 16px);
-                        @media #{$tfmax767}{
+                        @media #{$max768}{
                             width: 100%;
                         }
                         

@@ -6,7 +6,7 @@
                 background: $color-gray-info;
                 padding: 8px 8px 16px 8px;
                 margin-bottom: 32px;
-                @media #{$max767}{
+                @media #{$max768}{
                     position: fixed;
                     left: 0;
                     bottom: 72px;
@@ -17,7 +17,7 @@
                 }
                 &.tf-box-loading{
                     position: relative;
-                    @media #{$max767}{
+                    @media #{$max768}{
                         position: fixed;
                     }
                     &::before{
@@ -168,7 +168,7 @@
                     }
                 }
                 .tf-instraction-btn{
-                    @media #{$max767}{
+                    @media #{$max768}{
                         display: none;
                     }
                     text-align: center;
@@ -186,7 +186,7 @@
                     padding: 16px;
                     margin-top: 16px;
                     display: none;
-                    @media #{$max767}{
+                    @media #{$max768}{
                         display: none;
                     }
                     .tf-cancellation-timeline{
@@ -260,7 +260,7 @@
                 display: none;
                 background: $color-light-bg;
                 padding: 8px;
-                @media #{$max767}{
+                @media #{$max768}{
                     display: block;
                     position: fixed;
                     left: 0;

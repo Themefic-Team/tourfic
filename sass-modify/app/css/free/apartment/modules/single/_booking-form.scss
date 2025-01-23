@@ -7,6 +7,9 @@
                 border-radius: 8px;
                 padding: 32px;
                 margin-bottom: 40px;
+                @media #{$max320}{
+                    padding: 16px;
+                }
             
                 h5 {
                     color: $color-heading;
@@ -256,12 +259,12 @@
                             color: $color-primary;
                             font-size: 32px;
                             font-weight: 700;
-                            @media #{$max767}{
+                            @media #{$max768}{
                                 font-size: 20px;
                             }
                             bdi{
                                 font-size: 32px;
-                                @media #{$max767}{
+                                @media #{$max768}{
                                     font-size: 20px;
                                 }
                             }
@@ -329,7 +332,7 @@
                                     font-size: 32px;
                                     font-weight: 700;
                                     margin: 0px;
-                                    @media #{$max767}{
+                                    @media #{$max768}{
                                         font-size: 20px;
                                     }
                                 }

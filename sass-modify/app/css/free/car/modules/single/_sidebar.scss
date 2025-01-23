@@ -3,10 +3,10 @@
         &__one{
             .tf-car-booking-form{
                 width: 440px;
-                @media #{$tfmax991}{
-                    width: 400px;
+                @media #{$max1024}{
+                    width: 370px;
                 }
-                @media #{$max767}{
+                @media #{$max768}{
                     width: 100%;
                 }
                 .tf-price-header{

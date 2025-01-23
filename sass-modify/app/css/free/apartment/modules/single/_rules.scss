@@ -21,7 +21,7 @@
                         margin: 0;
                         box-sizing: border-box;
             
-                        @media #{$max767} {
+                        @media #{$max768} {
                             @include flex(0 0 100%);
                         }
             
@@ -108,7 +108,7 @@
         }
         &__three{
             .tf-aprtment-rules-section{
-                @media #{$max767}{
+                @media #{$max768}{
                     padding-left: 16px;
                     padding-right: 16px;
                 }
@@ -117,19 +117,19 @@
                     font-size: 32px;
                     font-weight: 700;
                     margin-bottom: 24px;
-                    @media #{$max767}{
+                    @media #{$max768}{
                         font-size: 24px;
                     }
                 }
                 .aprtment-inc-exc{
                     display: flex;
                     gap: 26px;
-                    @media #{$max767}{
+                    @media #{$max768}{
                         flex-wrap: wrap;
                     }
                     .aprtment-single-rules{
                         width: 50%;
-                        @media #{$max767}{
+                        @media #{$max768}{
                             width: 100%;
                         }
                         ul{

@@ -11,17 +11,14 @@
                 width: 100%;
                 z-index: 9999;
                 display: none;
-                @media #{$max991}{
-                    padding-left: 16px;
-                    padding-right: 16px;
-                }
                 .tf-top-booking-bar{
-                    @media #{$max991}{
+                    @media #{$max1024}{
                         gap: 16px;
+                        flex-wrap: wrap;
                     }
                 }
                 .tf-top-bar-booking{
-                    @media #{$max991}{
+                    @media #{$max1024}{
                         justify-content: space-between;
                         width: 100%;
                     }
@@ -57,7 +54,7 @@
                 }
                 .tf-details-menu{
                     width: 668px;
-                    @media #{$max991}{
+                    @media #{$max1024}{
                         width: 100%;
                     }
                 }
@@ -65,9 +62,6 @@
 
             .tf-details-menu{
                 position: relative;
-                @media #{$max640}{
-                    width: 100%;
-                }
                 &::before{
                     background: linear-gradient(90deg, rgba(217, 217, 217, 0.00) 0%, $color-gray-light 100%);
                     position: absolute;

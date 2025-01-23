@@ -15,7 +15,7 @@
                     padding: 8px;
                     flex-wrap: nowrap;
                     margin-bottom: 0px;
-                    @media #{$max767}{
+                    @media #{$max768}{
                         flex-wrap: wrap;
                     }
                     .tf-date-single-select{
@@ -23,7 +23,7 @@
                         background: $color-white;
                         padding: 16px;
                         width: 33.33%;
-                        @media #{$max767}{
+                        @media #{$max768}{
                             width: 100%;
                         }
                         .tf-select-date{
@@ -138,12 +138,12 @@
                 }
                 .tf-driver-location-box{
                     padding: 8px;
-                    @media #{$max767}{
+                    @media #{$max768}{
                         display: flow-root;
                     }
                     .tf-driver-location{
                         padding-left: 16px;
-                        @media #{$max767}{
+                        @media #{$max768}{
                             padding-left: 0px;
                         }
                         ul{
@@ -213,7 +213,7 @@
                         }
                     }
                     .tf-submit-button{
-                        @media #{$max767}{
+                        @media #{$max768}{
                             margin-top: 16px;
                         }
                         button{
