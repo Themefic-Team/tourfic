@@ -19,7 +19,7 @@
                         border: 1px solid $color-blue-light;
                         box-shadow: -1px 1px 6px -1px #0000002e;
                         margin-top:10px;
-                        @media only screen and (max-width: 767px) {
+                        @media #{$max768} {
                             margin-bottom: 10px;
                         }
                         i {

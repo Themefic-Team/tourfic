@@ -1,35 +1,20 @@
+/*!********************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[3]!./sass-modify/app/css/free/hotel/hotel.scss ***!
+  \********************************************************************************************************************************************************************************************/
 .single-tf_hotel .tf-single-template__one .hero-section-wrap {
   display: grid;
   grid-template-columns: 75% 25%;
 }
 
-@media only screen and (max-width: 767px) {
-  .single-tf_hotel .tf-single-template__one .hero-section-wrap {
-    grid-template-columns: 60% 40%;
-  }
-}
-
-@media only screen and (max-width: 600px) {
-  .single-tf_hotel .tf-single-template__one .hero-section-wrap {
-    grid-template-columns: 100%;
-  }
-}
-
-@media only screen and (min-width: 821px) and (max-width: 991px) {
-  .single-tf_hotel .tf-single-template__one .hero-section-wrap {
-    grid-template-columns: 72% 28%;
-  }
-}
-
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-  .single-tf_hotel .tf-single-template__one .hero-section-wrap {
-    grid-template-columns: 72% 28%;
-  }
-}
-
-@media only screen and (min-width: 768px) and (max-width: 820px) {
+@media only screen and (max-width: 1024px) {
   .single-tf_hotel .tf-single-template__one .hero-section-wrap {
     grid-template-columns: 67% 33%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .single-tf_hotel .tf-single-template__one .hero-section-wrap {
+    grid-template-columns: 100%;
   }
 }
 
@@ -37,7 +22,7 @@
   padding-right: 15px;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 768px) {
   .single-tf_hotel .tf-single-template__one .hero-section-wrap .hero-left {
     padding-right: 0;
   }
@@ -56,7 +41,7 @@
   padding-left: 15px;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 768px) {
   .single-tf_hotel .tf-single-template__one .hero-section-wrap .hero-right {
     padding-left: 0;
     max-width: 316px;
@@ -79,7 +64,7 @@
   text-decoration: underline;
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 768px) {
   .single-tf_hotel .tf-single-template__two .tf-single-head .more-hotel.tf-d-ib {
     display: inline;
   }
@@ -116,34 +101,6 @@
   margin-bottom: 25px;
   box-shadow: 0px 13px 30px 0px rgba(224, 232, 238, 0.32);
   background-color: #faeedc;
-}
-
-.single-tf_hotel .tf-single-template__three .flatpickr-calendar {
-  left: 320px;
-}
-
-@media only screen and (max-width: 1920px) {
-  .single-tf_hotel .tf-single-template__three .flatpickr-calendar {
-    left: 240px;
-  }
-}
-
-@media only screen and (max-width: 1280px) {
-  .single-tf_hotel .tf-single-template__three .flatpickr-calendar {
-    left: 100px;
-  }
-}
-
-@media only screen and (max-width: 1024px) {
-  .single-tf_hotel .tf-single-template__three .flatpickr-calendar {
-    left: 80px;
-  }
-}
-
-@media only screen and (max-width: 660px) {
-  .single-tf_hotel .tf-single-template__three .flatpickr-calendar {
-    left: 20px;
-  }
 }
 
 .single-tf_hotel .tf-single-template__one .single-slider-wrapper {
@@ -726,7 +683,7 @@
   margin-top: 10px;
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 768px) {
   .single-tf_hotel .tf-single-template__one .tf_features .tf-feature-list .single-feature-box {
     margin-bottom: 10px;
   }
@@ -835,7 +792,7 @@
   padding: 0px;
 }
 
-@media only screen and (max-width: 767.98px) {
+@media only screen and (max-width: 768px) {
   .single-tf_hotel .tf-single-template__one .tf-hotel-facilities-section .tf-hotel-facilities-container .tf-hotel-facilities-content-area .hotel-facility-item ul {
     flex-direction: column;
   }
@@ -856,7 +813,7 @@
   margin-right: 8px;
 }
 
-@media only screen and (max-width: 767.98px) {
+@media only screen and (max-width: 768px) {
   .single-tf_hotel .tf-single-template__one .tf-hotel-facilities-section .tf-hotel-facilities-container .tf-hotel-facilities-content-area .hotel-facility-item ul li span {
     min-width: 16px;
   }
@@ -921,7 +878,7 @@
   padding: 0px;
 }
 
-@media only screen and (max-width: 767.98px) {
+@media only screen and (max-width: 768px) {
   .single-tf_hotel .tf-single-template__two .tf-hotel-facilities-section .tf-hotel-facilities-container .tf-hotel-facilities-content-area .hotel-facility-item ul {
     flex-direction: column;
   }
@@ -942,7 +899,7 @@
   margin-right: 8px;
 }
 
-@media only screen and (max-width: 767.98px) {
+@media only screen and (max-width: 768px) {
   .single-tf_hotel .tf-single-template__two .tf-hotel-facilities-section .tf-hotel-facilities-container .tf-hotel-facilities-content-area .hotel-facility-item ul li span {
     min-width: 16px;
   }
@@ -958,7 +915,7 @@
   padding-right: 30px;
 }
 
-@media only screen and (max-width: 767.98px) {
+@media only screen and (max-width: 768px) {
   .single-tf_hotel .tf-single-template__two .tf-hotel-faqs-section .tf-hotel-enquiry {
     flex-basis: 100%;
     padding-right: 0px;
@@ -979,7 +936,7 @@
   flex-basis: 68%;
 }
 
-@media only screen and (max-width: 767.98px) {
+@media only screen and (max-width: 768px) {
   .single-tf_hotel .tf-single-template__two .tf-hotel-faqs-section .tf-hotel-faqs {
     flex-basis: 100%;
     margin-top: 30px;
@@ -1332,32 +1289,6 @@
   font-size: 20px;
   margin: 15px 0px 10px 0px;
   color: #060D1C;
-}
-
-.post-type-archive-tf_hotel .tf-archive-template__one .flatpickr-calendar,
-.page-template-tf-search .tf-archive-template__one .flatpickr-calendar {
-  left: 495px;
-}
-
-@media only screen and (max-width: 1280px) {
-  .post-type-archive-tf_hotel .tf-archive-template__one .flatpickr-calendar,
-  .page-template-tf-search .tf-archive-template__one .flatpickr-calendar {
-    left: 285px;
-  }
-}
-
-@media only screen and (max-width: 1024px) {
-  .post-type-archive-tf_hotel .tf-archive-template__one .flatpickr-calendar,
-  .page-template-tf-search .tf-archive-template__one .flatpickr-calendar {
-    left: 170px;
-  }
-}
-
-@media only screen and (max-width: 660px) {
-  .post-type-archive-tf_hotel .tf-archive-template__one .flatpickr-calendar,
-  .page-template-tf-search .tf-archive-template__one .flatpickr-calendar {
-    left: 30px;
-  }
 }
 
 .post-type-archive-tf_tours .tf-archive-template__one .single-tour-wrap.tf-featured .single-tour-inner,
