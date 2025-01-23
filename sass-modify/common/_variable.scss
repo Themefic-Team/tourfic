@@ -36,7 +36,6 @@ $max1366: "only screen and (max-width: 1366px)";
 $max1320: "only screen and (max-width: 1320px)";
 $max1200: "only screen and (max-width: 1200px)";
 $max1199: "only screen and (max-width: 1199.98px)";
-$max1024: "only screen and (max-width: 1024px)";
 $max991: "only screen and (max-width: 991.98px)";
 $max885: "only screen and (max-width: 885px)";
 $max830: "only screen and (max-width: 830px)";
@@ -44,10 +43,19 @@ $max767: "only screen and (max-width: 767.98px)";
 $max640: "only screen and (max-width: 640px)";
 $max575: "only screen and (max-width: 575.98px)";
 $max530: "only screen and (max-width: 530px)";
-$max480: "only screen and (max-width: 480px)";
 $max400: "only screen and (max-width: 400px)";
 $max375: "only screen and (max-width: 375px)";
 $max360: "only screen and (max-width: 360px)";
+
+
+// Media Queries
+$max1024: "only screen and (max-width: 1024px)";
+$max768: "only screen and (max-width: 768px)";
+$max480: "only screen and (max-width: 480px)";
+$max320: "only screen and (max-width: 320px)";
+
+
+
 
 
 // Template Responsive
