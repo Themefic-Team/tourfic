@@ -14,7 +14,7 @@ class Car_Rental
     public function __construct()
     {
         add_action('wp_after_insert_post', array($this, 'tf_car_assign_inline_taxonomies'), 100, 3);
-        add_action("save_post_tf_carrental", array($this, 'tf_carrental_save_post'), 99, 2);
+        // add_action("save_post_tf_carrental", array($this, 'tf_carrental_save_post'), 99, 2);
 
         // Car CPT
         Car_Rental_CPT::instance();

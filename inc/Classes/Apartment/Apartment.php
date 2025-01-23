@@ -31,7 +31,7 @@ class Apartment {
 		add_action( 'wp_ajax_tf_apartments_search', array( $this, 'tf_apartments_search_ajax_callback' ) );
 		add_action( 'wp_ajax_nopriv_tf_apartments_search', array( $this, 'tf_apartments_search_ajax_callback' ) );
 
-		add_action("save_post_tf_apartment", array($this, 'tf_apartment_save_post'), 99, 2);
+		// add_action("save_post_tf_apartment", array($this, 'tf_apartment_save_post'), 99, 2);
 
 		// apartmet CPT
 		Apartment_CPT::instance();

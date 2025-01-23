@@ -75,6 +75,9 @@ class Helper {
 
         add_filter('upload_mimes', array($this, 'tf_upload_mimes_support'));
         add_filter( 'wp_check_filetype_and_ext', array($this, 'tf_filetype_and_ext_check_support'), 10, 5 );
+
+        add_action( 'wp_ajax_tf_get_min_max_price', array( $this, 'tf_get_min_max_price_callback' ) );
+		add_action( 'wp_ajax_nopriv_tf_get_min_max_price', array( $this, 'tf_get_min_max_price_callback' ) );
 	}
 
 	static function tfopt( $option = '', $default = null ) {

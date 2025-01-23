@@ -40,7 +40,7 @@ class Hotel {
 		add_action( 'wp_after_insert_post', array( $this, 'tf_hotel_rooms_assign' ), 100, 3 );
 		add_action( 'wp_after_insert_post', array( $this, 'tf_room_assign_to_hotel' ), 100, 3 );
 
-		add_action("save_post_tf_hotel", array($this, 'tf_hotel_save_post'), 99, 2);
+		// add_action("save_post_tf_hotel", array($this, 'tf_hotel_save_post'), 99, 2);
 
 	}
 
