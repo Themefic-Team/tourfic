@@ -470,7 +470,7 @@ if ( $disable_related_sec !== '1' ) {
                     <div class="section-title">
                         <h2 class="tf-title"><?php echo ! empty( $meta['related_apartment_title'] ) ? esc_html( $meta['related_apartment_title'] ) : ''; ?></h2>
                     </div>
-                    <div class="tf-design-3-slider-items-wrapper tf-upcomming-tours-list-outter tf-flex tf-flex-gap-24">
+                    <div class="tf-design-3-slider-items-wrapper tf-slick-slider tf-upcomming-tours-list-outter tf-flex tf-flex-gap-24">
                         <?php
                         while ( $related_apartment->have_posts() ) {
                             $related_apartment->the_post();

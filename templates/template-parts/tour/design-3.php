@@ -487,7 +487,7 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
                             <div class="section-title">
                                 <h2 class="tf-title"><?php echo ! empty( Helper::tfopt( 'rt-title' ) ) ? esc_html( Helper::tfopt( 'rt-title' ), "tourfic" ) : esc_html_e( "You may also like", "tourfic" ); ?></h2>
                             </div>
-                            <div class="tf-design-3-slider-items-wrapper tf-upcomming-tours-list-outter tf-flex tf-flex-gap-24">
+                            <div class="tf-design-3-slider-items-wrapper tf-slick-slider tf-upcomming-tours-list-outter tf-flex tf-flex-gap-24">
 								<?php
 								while ( $tours->have_posts() ) {
 									$tours->the_post();

@@ -57,7 +57,7 @@ class Recent_Tour extends \Tourfic\Core\Shortcodes {
 				</div>
 
 
-				<div class="tf-slider-items-wrapper">
+				<div class="tf-slider-items-wrapper tf-slick-slider">
 					<?php while ( $tour_loop->have_posts() ) {
 						$tour_loop->the_post();
 						$post_id          = get_the_ID();

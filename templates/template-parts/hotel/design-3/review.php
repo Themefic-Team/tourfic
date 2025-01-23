@@ -5,7 +5,7 @@ if ( $comments && $disable_review_sec != 1 ) { ?>
 <div class="tf-reviews-wrapper tf-section" id="tf-hotel-reviews">         
     <h2 class="tf-section-title"><?php echo !empty( $meta['review-section-title'] ) ? esc_html($meta['review-section-title']) : ''; ?></h2>
     <p><?php esc_html_e("Total", "tourfic"); ?> <?php TF_REVIEW::tf_based_on_text( count( $comments ) ); ?></p>
-    <div class="tf-reviews-slider">
+    <div class="tf-reviews-slider tf-slick-slider">
         <?php
         foreach ( $comments as $comment ) {
         // Get rating details

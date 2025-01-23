@@ -11,7 +11,7 @@
                         height: 338px;
                         width: 100%;
                         object-fit: cover;
-                        @media #{$max480}{
+                        @media #{$max575}{
                             height: 240px;
                         }
                     }
@@ -82,7 +82,7 @@
                                     left: auto;
                                     right: 0px;
                                 }
-                                @media #{$max480}{
+                                @media #{$max575}{
                                     left: 0;
                                     right: auto;
                                 }
@@ -164,7 +164,7 @@
                         @media #{$max1024}{
                             height: 90px;
                         }
-                        @media #{$max480}{
+                        @media #{$max575}{
                             height: 60px;
                         }
 

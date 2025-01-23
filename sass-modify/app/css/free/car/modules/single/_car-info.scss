@@ -28,7 +28,7 @@
                         @media #{$max768}{
                             width: calc(33% - 4px);
                         }
-                        @media #{$max480}{
+                        @media #{$max575}{
                             width: calc(50% - 8px);
                         }
                         &:hover{

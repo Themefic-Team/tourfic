@@ -51,7 +51,7 @@ class Hotels extends \Tourfic\Core\Shortcodes {
 		ob_start();
 
 		if ( $style == 'slider' ) {
-			$slider_activate = 'tf-slider-activated';
+			$slider_activate = 'tf-slider-activated tf-slick-slider';
 		} else {
 			$slider_activate = 'tf-hotel-grid';
 		}
