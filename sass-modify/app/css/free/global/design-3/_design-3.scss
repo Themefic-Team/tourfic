@@ -3305,6 +3305,14 @@
                 flex-direction: column;
                 justify-content: space-between;
                 gap: 30px;
+                @media #{$max1024}{
+                    min-height: 320px;
+                    max-height: 320px;
+                }
+                @media #{$max768}{
+                    min-height: 260px;
+                    max-height: 260px;
+                }
                 &.tf-archive-hero-content {
                     display: flex;
                     justify-content: flex-end;
@@ -3356,19 +3364,19 @@
                 width: auto;
             }
             .tf_archive_search_result{
-                @media only screen and (max-width: 660px) {
+                @media #{$max768} {
                     display: flow-root;
                     padding: 0px 16px 8px 16px;
                 }
                 .tf-booking-form-submit{
-                    @media only screen and (max-width: 660px) {
+                    @media #{$max768} {
                         width: 100%;
                     }
                 }
             }
             .tf-booking-form {
                 .tf-booking-form-fields {
-                    @media only screen and (max-width: 660px) {
+                    @media #{$max768} {
                         width: 100%;
                         display: flow-root;
                         padding: 8px 0;
@@ -3390,7 +3398,7 @@
                             padding-right: 15px;
                             padding-left: 0px;
                         }
-                        @media only screen and (max-width: 660px) {
+                        @media #{$max768} {
                             width: 100%;
                             padding: 0px;
                             border-right: 0px solid;
@@ -3433,7 +3441,7 @@
                                 scrollbar-width: thin;
                                 scrollbar-color: $color-light-bg $color-white;
                                 padding: 8px;
-                                @media only screen and (max-width: 660px) {
+                                @media #{$max768} {
                                     width: 100%;
                                 }
                                 &::-webkit-scrollbar{
@@ -3474,7 +3482,7 @@
                             max-width: none;
                             width: 20%;
                         }
-                        @media only screen and (max-width: 660px) {
+                        @media #{$max768} {
                             width: 31%;
                             float: left;
                             padding: 0px;
@@ -3498,11 +3506,17 @@
                             max-width: none;
                             width: 20%;
                         }
-                        @media only screen and (max-width: 660px) {
+                        @media #{$max768} {
                             width: 31%;
                             float: left;
                             padding: 0px;
                             padding-left: 20px;
+                            max-width: none;
+                        }
+                        @media #{$max575} {
+                            width: 31%;
+                            float: left;
+                            padding: 0px;
                             max-width: none;
                         }
                         .tf-booking-date{
@@ -3533,13 +3547,13 @@
                         }
                         @media #{$max1024}{
                             padding-right: 15px;
-                            padding-left: 15px;
+                            padding-left: 15px !important;
                             min-width: 160px;
                         }
-                        @media only screen and (max-width: 660px) {
+                        @media #{$max768} {
                             width: 31%;
                             float: left;
-                            padding-left: 20px;
+                            padding-left: 0px !important;
                             padding-right: 0px;
                             min-width: auto;
                         }
@@ -3588,7 +3602,7 @@
                                 padding-left: 10px;
                                 padding-right: 10px;
                             }
-                            @media only screen and (max-width: 660px) {
+                            @media #{$max768} {
                                 width: 50%;
                                 float: left;
                                 padding: 0px;
@@ -3647,7 +3661,7 @@
                                 width: 20%;
                                 min-width: auto;
                             }
-                            @media only screen and (max-width: 660px) {
+                            @media #{$max768} {
                                 width: 50%;
                                 float: left;
                                 padding-left: 20px;
