@@ -619,9 +619,12 @@
                         form.find('input').closest('.tf-reg-field').find('small.text-danger').remove();
                         form.find('textarea').closest('.tf-reg-field').find('small.text-danger').remove();
                     }
-                    if (obj.redirect_url) {
-                        window.location.href = obj.redirect_url;
-                    }
+                    setTimeout(function() { 
+                        if (obj.redirect_url) {
+                            window.location.href = obj.redirect_url;
+                        }
+                    }, 2000);
+                    
                     btn.removeClass('tf-btn-loading');
                 },
             });
@@ -709,15 +712,18 @@
                             'Success!',
                             obj.message,
                             'success'
-                        )
+                        ).then((result) => {
+                            if (result.isConfirmed || result.isDismissed) {
+                                if (obj.redirect_url) {
+                                    window.location.href = obj.redirect_url;
+                                }
+                            }
+                        });
                         form[0].reset();
                         form.find('input').removeClass('error-input');
                         form.find('textarea').removeClass('error-input');
                         form.find('input').closest('.tf-reg-field').find('small.text-danger').remove();
                         form.find('textarea').closest('.tf-reg-field').find('small.text-danger').remove();
-                    }
-                    if (obj.redirect_url) {
-                        //window.location.href = obj.redirect_url;
                     }
                     btn.removeClass('tf-btn-loading');
                 },
