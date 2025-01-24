@@ -5257,12 +5257,15 @@ a.tf-import-btn, a.tf-export-btn {
 .tf-colors-radio-group li .tf-colors-checkbox .tf-color-footer .tf-color-checkmark::after {
   position: absolute;
   content: "";
-  top: 1px;
+  top: 0;
   left: 4px;
+  border: solid #fff;
   border-color: #fff;
+  border-width: 0 3px 3px 0;
   width: 6px;
   height: 9px;
   z-index: 99;
+  transform: rotate(45deg);
 }
 
 .tf-colors-radio-group li .tf-colors-checkbox input:checked ~ .tf-color-checkmark {
