@@ -1255,6 +1255,9 @@
                                     @media #{$max1024}{
                                         font-size: 16px;
                                     }
+                                    @media #{$max768}{
+                                        font-size: 14px;
+                                    }
                                 }
                             }
                             .tf-card-heading-info{
@@ -1401,6 +1404,9 @@
                             a{
                                 width: 100%;
                                 margin-top: 32px;
+                                @media #{$max768}{
+                                    font-size: 12px;
+                                }
                             }
                             .tf-available-room-select{
                                 margin-top: 32px;

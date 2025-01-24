@@ -20,7 +20,13 @@
                 object-position: bottom;
             }
         }
-
+        .tf-image-checkbox span.tf-template-title{
+            display: block;
+            text-align: center;
+            margin-top: 5px;
+            font-weight: 500;
+            cursor: pointer;
+        }
         .tf-image-checkbox > input {
             display: none
         }

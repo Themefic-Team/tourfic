@@ -25,6 +25,9 @@ if ( ! class_exists( 'TF_imageselect' ) ) {
 								<?php echo '<input type="radio" id="' . esc_attr( $this->field_name() ) . '[' . esc_attr( $key ) . ']" name="' . esc_attr( $this->field_name() ) . '" data-depend-id="' . esc_attr( $this->field['id'] ) . '' . esc_attr( $this->parent_field ) . '" value="' . esc_attr( $key ) . '" ' . esc_attr( $checked ) . ' ' . esc_attr($disable_checked). ' '. wp_kses_post( $this->field_attributes() ) . '/>'; ?>
 							<?php endif; ?>
                             <img src="<?php echo esc_url( $value['url'] ); ?>" alt="<?php echo esc_attr( $value['title'] ); ?>">
+							<?php if(!empty($value['title'])){ ?>
+							<span class="tf-template-title"><?php echo esc_html($value['title']); ?></span>
+							<?php } ?>
                         </label>
                     </li>
 
