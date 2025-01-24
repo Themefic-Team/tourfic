@@ -1159,7 +1159,7 @@ class Enqueue {
 	public function tf_global_custom_css() {
 		$output = '
 			:root {
-				--tf-primary: red;
+				--tf-primary: #0E3DD8;
 				--tf-secondary: #003C7A;
 				--tf-text: #686E7A;
 				--tf-heading: #060D1C;
