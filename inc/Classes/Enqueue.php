@@ -24,6 +24,7 @@ class Enqueue {
 
 		add_action( 'admin_enqueue_scripts', array( $this, 'tf_options_admin_enqueue_scripts' ), 9 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'tf_options_wp_enqueue_scripts' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'tf_global_custom_css' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'tf_required_taxonomies' ) );
 	}
 
@@ -1151,6 +1152,30 @@ class Enqueue {
 		wp_enqueue_style( 'tf-remixicon', '//cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css', array(), TF_VERSION );
 	}
 
+	/**
+	 * Enqueue Global CSS
+	 * @author Mofazzal
+	*/
+	public function tf_global_custom_css() {
+		$output = '
+			:root {
+				--tf-primary: red;
+				--tf-secondary: #003C7A;
+				--tf-text: #686E7A;
+				--tf-heading: #060D1C;
+				--tf-light-bg: #FAEEDC;
+				--tf-yellow-thin: #FCF4E8;
+				--tf-border: #F5E9E0;
+				--tf-form-input-bg: #F3F7FA;
+				--tf-box-shadow: rgba(224, 232, 238, 0.32);
+			}
+		';
+
+		if (wp_style_is('tf-app-style', 'enqueued')) {
+			wp_add_inline_style('tf-app-style', apply_filters('tf-global-css', $output));
+		}
+	}
+
 	function tf_required_taxonomies( $hook ) {
 		if ( ! in_array( $hook, array( 'post.php', 'post-new.php' ) ) ) {
 			return;
@@ -1263,5 +1288,7 @@ class Enqueue {
 		) );
 
 	}
+
+
 
 }

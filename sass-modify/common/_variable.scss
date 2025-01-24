@@ -1,15 +1,19 @@
 //colors
-$color-primary: #0E3DD8;
+$color-primary: var(--tf-primary);
+$color-secondary: var(--tf-secondary);
+$color-text: var(--tf-text);
+$color-heading: var(--tf-heading);
+$color-border: var(--tf-border);
+$color-light-bg: var(--tf-light-bg);
+$color-yellow-thin: var(--tf-yellow-thin);
+$color-box-shadow: var(--tf-box-shadow);
+$form-input-bg: var(--tf-form-input-bg);
+
 $color-primary-light: #2051f5;
-$color-secondary: #003C7A;
-$color-text: #686E7A;
-$color-heading: #060D1C;
 $color-gray: #808080;
 $color-gray-light: #F1F3F4;
 $color-gray-info: #F5FAFF;
-$color-border: #f0f2f4;
 $color-white: #ffffff;
-$color-light-bg: #faeedc;
 $color-danger: #ff6055;
 $color-danger-light: #fddcda;
 $color-warning: #ffbf00;
@@ -20,9 +24,7 @@ $color-info: #069697;
 $color-info-light: #f0fafa;
 $color-blue-light: #E6F2FE;
 $color-yellow-light: #FDF9F3;
-$color-yellow-thin: #FCF4E8;
-$color-box-shadow: #e0e8ee;
-$form-input-bg: #F3F7FA;
+
 $btn-secondary-bg: #E3E7F2;
 $btn-secondary-text: #060D1C;
 
