@@ -48,8 +48,9 @@ class Car_Seat_Range_Filter extends \WP_Widget {
                 <div class="tf-car-result-seat-range"></div>
             <?php 
         }else{
-            extract( $args );
+            
             if( !empty($_GET['type']) && $_GET['type']=="tf_carrental" && !empty($_GET['from']) && !empty($_GET['to'] ) ){
+                extract( $args );
             ?>
                 <div class="tf-widget-title">
                     <span><?php esc_html_e("By Seat","tourfic"); ?></span>
