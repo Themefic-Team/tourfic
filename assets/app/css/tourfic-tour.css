@@ -2079,6 +2079,11 @@
   margin-bottom: 5px;
 }
 
+.single-tf_tours .tf-single-template__two .tf-itinerary-wrapper .tf-single-itinerary-item .tf-itinerary-content-box .tf-itinerary-content-details p:empty {
+  display: none;
+  margin: 0;
+}
+
 @media only screen and (max-width: 768px) {
   .single-tf_tours .tf-single-template__two .tf-itinerary-wrapper .tf-single-itinerary-item .tf-itinerary-content-box .tf-itinerary-content-details {
     flex-basis: 100%;
@@ -2798,6 +2803,10 @@
   font-size: 30px;
 }
 
+.single-tf_tours .tf-single-template__two .tf-trip-description p {
+  margin-bottom: 0;
+}
+
 .single-tf_tours .tf-single-template__two .tf-bottom-booking-bar {
   position: fixed;
   width: calc(100% - 64px);
@@ -2996,6 +3005,10 @@
   }
 }
 
+.single-tf_tours .tf-single-template__two .tf-bottom-booking-bar .tf-tours-booking-btn {
+  align-self: stretch;
+}
+
 @media only screen and (max-width: 1024px) {
   .single-tf_tours .tf-single-template__two .tf-bottom-booking-bar .tf-tours-booking-btn {
     width: 100%;
@@ -3009,6 +3022,15 @@
     width: 100%;
     display: block;
   }
+}
+
+.single-tf_tours .tf-single-template__two .tf-bottom-booking-bar .tf-tours-booking-btn .tf-btn-wrap {
+  height: 100%;
+}
+
+.single-tf_tours .tf-single-template__two .tf-bottom-booking-bar .tf-tours-booking-btn .tf-btn-wrap .tf_btn {
+  height: 100%;
+  align-items: center;
 }
 
 .single-tf_tours .tf-single-template__three .tf-bottom-booking-bar {
@@ -3361,6 +3383,10 @@
   font-weight: 700;
   font-size: 30px;
   margin-bottom: 5px;
+}
+
+.single-tf_tours .tf-single-template__three .tf-tour-contact-informations .tf-contact-details-items .tf-list {
+  margin: 0;
 }
 
 .single-tf_tours .tf-single-template__three .tf-tour-contact-informations .tf-contact-details-items .tf-list li {

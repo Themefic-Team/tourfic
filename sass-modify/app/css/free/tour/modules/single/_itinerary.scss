@@ -172,6 +172,10 @@
                         .tf-itinerary-content-details{
                             p {
                                 margin-bottom: 5px;
+                                &:empty{
+                                    display: none;
+                                    margin: 0;
+                                }
                             }
                             flex-basis: 80%;
                             @media #{$max768}{
