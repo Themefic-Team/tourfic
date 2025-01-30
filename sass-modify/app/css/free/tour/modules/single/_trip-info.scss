@@ -82,7 +82,6 @@
                     list-style: none;
                 }
                 li {
-                    font-family: inherit;
                     color: $color-text;
                     margin-top: $tf-space-8;
                     align-items: center;
@@ -143,6 +142,9 @@
             .tf-trip-description{
                 h2 {
                     font-size: 30px;
+                }
+                p{
+                    margin-bottom: 0;
                 }
             }
         }

@@ -53,7 +53,6 @@
                         color: $color-text;
                         margin: 0;
                         font-size: 14px;
-                        font-style: normal;
                         font-weight: 400;
                         line-height: 24px;
                         letter-spacing: 0.2px;
@@ -157,7 +156,6 @@
             
                     h5 {
                         font-size: 18px;
-                        font-style: normal;
                         font-weight: 500;
                         line-height: 1.33;
                         letter-spacing: 0.5px;
@@ -196,25 +194,6 @@
                             &:last-child {
                                 margin-bottom: 0px;
                             }
-                        }
-                    }
-            
-                    .tf-apartment-contact-button {
-                        padding: 11px 24px;
-                        border-radius: 4px;
-                        background-color: $color-white;
-                        color: $color-primary;
-                        border: 1px solid $color-primary;
-                        text-decoration: none;
-                        text-align: center;
-                        transition: all 0.3s ease-in-out;
-                        i {
-                            padding-right: 8px;
-                        }
-            
-                        &:hover {
-                            background-color: $color-primary;
-                            color: $color-white;
                         }
                     }
                 }

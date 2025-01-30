@@ -1158,29 +1158,6 @@
             });
         });
 
-        /**
-         * Ask question
-         */
-        $(document).on('click', '#tf-ask-question-trigger', function (e) {
-            e.preventDefault();
-            $('#tf-ask-question').fadeIn().find('.response').html("");
-            if (!$('#tf-ask-question').is(":hidden")) {
-                $('body').css({"overflow": "hidden", "padding-right": "17px"})
-            }
-        });
-
-        // Close Ask question
-        $(document).on('click', 'span.close-aq', function () {
-            $('#tf-ask-question').fadeOut();
-            $('body').removeAttr("style")
-        });
-
-        // Close Ask question when Clicking the outside
-        $(document).on("click", ".tf-aq-overlay", function () {
-            $('#tf-ask-question').fadeOut();
-            $('body').removeAttr("style")
-        })
-
         // Ajax Ask question submit
         $(document).on('submit', 'form#ask-question', function (e) {
             e.preventDefault();

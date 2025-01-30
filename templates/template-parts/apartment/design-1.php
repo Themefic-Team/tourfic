@@ -425,7 +425,7 @@ use \Tourfic\Classes\Apartment\Apartment;
 								}
 								?>
                             </ul>
-                            <a href="" id="tf-ask-question-trigger" class="tf-apartment-contact-button tf_btn tf_btn_full"><i class="fas fa-phone"></i><?php esc_html_e( 'Contact Host', 'tourfic' ) ?></a>
+                            <a href="#" data-target="#tf-ask-modal" class="tf-modal-btn tf_btn tf_btn_white tf_btn_full"><i class="fas fa-phone"></i><?php esc_html_e( 'Contact Host', 'tourfic' ) ?></a>
                         </div>
                     </div>
                 </div>
@@ -618,8 +618,8 @@ use \Tourfic\Classes\Apartment\Apartment;
                         </div>
                     </div>
 					<?php if ( ! empty( $enquiry_section_button ) ) {?>
-                        <div class="tf-btn">
-                            <a href="#" id="tf-ask-question-trigger" class="tf_btn tf_btn_large">
+                        <div class="tf-btn-wrap">
+                            <a href="#" data-target="#tf-ask-modal" class="tf-modal-btn tf_btn tf_btn_large">
                                 <span><?php echo wp_kses_post( $enquiry_section_button ) ?></span>
                             </a>
                         </div>

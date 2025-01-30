@@ -475,7 +475,6 @@
                         .tf-form-single-rating{
                             display: initial;
                             > label{
-                                font-family: inherit;
                                 font-size: 16px;
                                 font-weight: 400;
                                 line-height: 1.6;
@@ -504,7 +503,6 @@
                             border-radius: 5px;
                             font-size: 14px;
                             color: $color-text;
-                            font-family: inherit;
                             &::placeholder{
                                 color: $color-heading;
                             }
@@ -521,7 +519,6 @@
                                 border-radius: 5px;
                                 font-size: 14px;
                                 color: $color-text;
-                                font-family: inherit;
                                 &::placeholder{
                                     color: $color-heading;
                                 }
@@ -722,7 +719,6 @@
                         appearance: none;
                         padding: 14px 36px 14px 14px;
                         background-position: calc(100% - 12px) 50%;
-                        font-family: inherit;
                         font-size: inherit;
                         font-weight: inherit;
                         color: inherit;
@@ -925,7 +921,6 @@
                         height: auto;
                         pointer-events: none;
                         h4{
-                            font-family: inherit;
                             font-size: 20px;
                             font-weight: 500;
                         }

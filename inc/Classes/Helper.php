@@ -15,6 +15,7 @@ class Helper {
 	public function __construct() {
 		add_filter( 'body_class', array( $this, 'tf_templates_body_class' ) );
 		add_action( 'admin_footer', array( $this, 'tf_admin_footer' ) );
+		add_action( 'wp_footer', array($this, 'tf_ask_question_modal') );
 
 		add_filter( 'rest_prepare_taxonomy', array( $this, 'tf_remove_metabox_gutenburg' ), 10, 3 );
 		add_filter( 'rest_user_query', array( $this, 'tf_gutenberg_author_dropdown_roles' ), 10, 2 );
