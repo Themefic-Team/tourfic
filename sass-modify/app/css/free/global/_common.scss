@@ -276,7 +276,6 @@ h3.section-heading {
         text-align: left;
         padding: 7px 15px;
         cursor: pointer;
-        font-family: inherit;
         text-decoration: none;
         box-sizing: border-box;
         vertical-align: middle;
@@ -309,7 +308,6 @@ h3.section-heading {
         text-align: left;
         padding: 7px 15px;
         cursor: pointer;
-        font-family: inherit;
         text-decoration: none;
         box-sizing: border-box;
         vertical-align: middle;
@@ -505,7 +503,6 @@ h3.section-heading {
             column-gap: 20px;
             label {
                 color: $color-text;
-                font-style: normal;
                 font-weight: 500;
                 font-size: 16px;
                 line-height: 1;
@@ -692,7 +689,6 @@ h3.section-heading {
             }
             span {
                 color: $color-text;
-                font-style: normal;
                 font-weight: 400;
                 font-size: 16px;
                 line-height: 24px;
@@ -725,7 +721,6 @@ h3.section-heading {
             .tf-text {
                 text-align: left;
                 color: $color-text;
-                font-style: normal;
                 font-weight: 400;
                 font-size: 14px;
                 line-height: 1;
@@ -748,7 +743,6 @@ h3.section-heading {
             }
             .tf-p-b-rating {
                 text-align: right;
-                font-style: normal;
                 font-weight: 500;
                 font-size: 14px;
                 line-height: 1;
@@ -800,7 +794,6 @@ h3.section-heading {
     }
     .tf-review-details {
         .tf-name {
-            font-style: normal;
             font-weight: 500;
             font-size: 18px;
             line-height: 1;
@@ -809,7 +802,6 @@ h3.section-heading {
             text-transform: capitalize;
         }
         .tf-date {
-            font-style: normal;
             font-weight: 400;
             font-size: 12px;
             line-height: 1;
@@ -831,7 +823,6 @@ h3.section-heading {
             }
         }
         .tf-description {
-            font-style: normal;
             font-weight: 400;
             font-size: 14px;
             line-height: 22px;
@@ -1082,9 +1073,8 @@ li.tf-filter-item {
                 padding: 8px 30px;
                 border: 0px solid;
                 font-size: 16px;
-                font-style: normal;
                 font-weight: 500;
-                line-height: 150%;
+                line-height: 1.5;
                 cursor: pointer;
                 color: $color-white;
                 transition: .3s all ease;
@@ -1106,7 +1096,6 @@ li.tf-filter-item {
 .tf-box-wrapper {
     h4{
         margin-bottom: 20px;
-        font-family: "rubik", sans-serif;
         font-size: 16px;
     }
     .al-range-slider__track {

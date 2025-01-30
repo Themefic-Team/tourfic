@@ -406,9 +406,7 @@
 .tf-withoutpayment-booking .tf-confirm-popup h2,
 .tf-withoutpayment-booking-confirm .tf-confirm-popup h2 {
   color: var(--tf-heading);
-  font-family: inherit;
   font-size: 48px;
-  font-style: normal;
   font-weight: 600;
   line-height: 30px;
   letter-spacing: -0.96px;
@@ -609,9 +607,7 @@
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content p,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content p {
   color: var(--tf-text);
-  font-family: inherit;
   font-size: 16px;
-  font-style: normal;
   font-weight: 400;
   line-height: 24px;
   margin-top: 0px;
@@ -732,9 +728,7 @@
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-extra .tf-single-tour-extra label .tf-extra-content h5,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-traveller .tf-single-tour-extra label .tf-extra-content h5 {
   color: var(--tf-heading);
-  font-family: inherit;
   font-size: 16px;
-  font-style: normal;
   font-weight: 500;
   line-height: 20px;
   margin: 0;
@@ -750,9 +744,7 @@
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-extra .tf-single-tour-extra label .tf-extra-content p,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-traveller .tf-single-tour-extra label .tf-extra-content p {
   color: var(--tf-text);
-  font-family: inherit;
   font-size: 16px;
-  font-style: normal;
   font-weight: 400;
   line-height: 20px;
   margin: 0;
@@ -853,9 +845,7 @@
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-extra .tf-single-tour-traveller h4,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-traveller .tf-single-tour-traveller h4 {
   color: var(--tf-heading);
-  font-family: inherit;
   font-size: 16px;
-  font-style: normal;
   font-weight: 500;
   line-height: 20px;
 }
@@ -886,7 +876,6 @@
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-extra .tf-single-tour-traveller .traveller-info .traveller-single-info label,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-traveller .tf-single-tour-traveller .traveller-info .traveller-single-info label {
   color: var(--tf-text);
-  font-family: inherit;
   font-size: 14px;
   font-weight: 500;
 }
@@ -969,9 +958,7 @@
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-summery .tf-booking-fixed-summery h5,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-summery .tf-booking-fixed-summery h5 {
   color: var(--tf-heading);
-  font-family: inherit;
   font-size: 16px;
-  font-style: normal;
   font-weight: 500;
   line-height: 20px;
   margin-bottom: 16px;
@@ -979,9 +966,7 @@
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-summery .tf-booking-fixed-summery h4,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-summery .tf-booking-fixed-summery h4 {
   color: var(--tf-heading);
-  font-family: inherit;
   font-size: 20px;
-  font-style: normal;
   font-weight: 500;
   line-height: 30px;
   letter-spacing: -0.4px;
@@ -1013,9 +998,7 @@
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-summery .tf-booking-traveller-info h6,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-summery .tf-booking-traveller-info h6 {
   color: var(--tf-heading);
-  font-family: inherit;
   font-size: 16px;
-  font-style: normal;
   font-weight: 400;
   line-height: 20px;
   margin-bottom: 16px;
@@ -1027,7 +1010,6 @@
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-summery .tf-booking-traveller-info table thead tr th,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-summery .tf-booking-traveller-info table thead tr th {
   color: var(--tf-text);
-  font-family: inherit;
   font-size: 14px;
   font-weight: 600;
   line-height: 28px;
@@ -1037,7 +1019,6 @@
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-summery .tf-booking-traveller-info table tbody tr td,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-summery .tf-booking-traveller-info table tbody tr td {
   color: var(--tf-text);
-  font-family: inherit;
   font-size: 14px;
   font-weight: 400;
   line-height: 26px;
@@ -1047,7 +1028,6 @@
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-summery .tf-booking-traveller-info table tfoot tr th,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-summery .tf-booking-traveller-info table tfoot tr th {
   color: var(--tf-text);
-  font-family: inherit;
   font-size: 16px;
   font-weight: 700;
   padding-top: 15px;
@@ -1080,9 +1060,7 @@
   margin: 0;
   display: inline-block;
   color: var(--tf-heading);
-  font-family: inherit;
   font-size: 16px;
-  font-style: normal;
   font-weight: 500;
   line-height: 24px;
 }
@@ -1216,7 +1194,6 @@
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-pagination .tf-control-pagination a.tf-back-control,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-pagination .tf-control-pagination a.tf-back-control {
   color: var(--tf-primary);
-  font-family: inherit;
   font-size: 14px;
   font-weight: 700;
   line-height: 20px;
@@ -1306,7 +1283,6 @@
   padding-top: 30px;
   padding-left: 82px;
   line-height: 1.33;
-  font-family: inherit;
   font-weight: 600;
   align-items: baseline;
 }
@@ -1380,21 +1356,17 @@
 .single-tf_tours .tf-single-template__one .gm-style-iw .gm-style-iw-d .itinerary-map-popup .itinerary-map-popup-content .itinerary-map-popup-time-wrap .itinerary-map-popup-time {
   color: var(--tf-text);
   font-size: 12px;
-  font-style: normal;
   font-weight: 700;
-  line-height: normal;
 }
 .single-tf_tours .tf-single-template__one .gm-style-iw .gm-style-iw-d .itinerary-map-popup .itinerary-map-popup-content .itinerary-map-popup-time-wrap .itinerary-map-popup-title {
   color: var(--tf-heading);
   font-size: 12px;
-  font-style: normal;
   font-weight: 400;
   line-height: 18px;
 }
 .single-tf_tours .tf-single-template__one .gm-style-iw .gm-style-iw-d .itinerary-map-popup .itinerary-map-popup-content .itinerary-map-popup-desc {
   color: var(--tf-text);
   font-size: 12px;
-  font-style: normal;
   font-weight: 400;
   line-height: 1.5;
   margin-bottom: 4px;
@@ -1583,7 +1555,6 @@
 .single-tf_tours .tf-single-template__three .tf-include-exclude-wrapper h2 {
   color: var(--tf-heading);
   font-size: 32px;
-  font-style: normal;
   font-weight: 700;
   margin-bottom: 24px;
 }
@@ -2089,7 +2060,6 @@
 .single-tf_tours .tf-single-template__three .tf-itinerary-wrapper .section-title h2 {
   color: var(--tf-heading);
   font-size: 32px;
-  font-style: normal;
   font-weight: 700;
   margin: 0;
 }
@@ -2365,7 +2335,6 @@
   list-style: none;
 }
 .single-tf_tours .tf-single-template__two .tf-trip-info li {
-  font-family: inherit;
   color: var(--tf-text);
   margin-top: 8px;
   align-items: center;

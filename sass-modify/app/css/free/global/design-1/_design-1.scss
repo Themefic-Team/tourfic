@@ -221,7 +221,6 @@
                         text-align: left;
                         color: $color-text;
                         font-size: 16px;
-                        font-style: normal;
                         font-weight: 400;
                         max-height: 260px;
                         overflow: auto;
@@ -847,9 +846,8 @@
                         .tf_input-inner > div{
                             color: #27333f;
                             font-size: 16px;
-                            font-style: normal;
                             font-weight: 400;
-                            line-height: 150%;
+                            line-height: 1.5;
                         }
                         .tf_acrselection-wrap{
                             left: 0;
@@ -968,9 +966,8 @@
                 padding: 16px 50px;
                 color: $color-white;
                 font-size: 16px;
-                font-style: normal;
                 font-weight: 700;
-                line-height: 150%; /* 24px */
+                line-height: 24px;
                 border: 0px solid;
                 cursor: pointer;
                 transition: .3s all ease;

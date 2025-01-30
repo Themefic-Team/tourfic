@@ -34,7 +34,6 @@
 .single-tf_carrental .tf-single-template__one .tf-car-hero-gallery .tf-featured-car .tf-featured-reviews a span {
   color: var(--tf-text);
   font-size: 16px;
-  font-style: normal;
   font-weight: 400;
 }
 .single-tf_carrental .tf-single-template__one .tf-car-hero-gallery .tf-featured-car .tf-featured-reviews a span i {
@@ -2327,7 +2326,6 @@
 .page-template-tf-search .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-widget-title span {
   color: var(--tf-text);
   font-size: 16px;
-  font-style: normal;
   font-weight: 400;
   margin-bottom: 16px;
   cursor: auto;

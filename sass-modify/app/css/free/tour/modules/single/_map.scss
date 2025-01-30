@@ -19,7 +19,6 @@
                     padding-top: 30px;
                     padding-left: 82px;
                     line-height: 1.33;
-                    font-family: inherit;
                     font-weight: 600;
                     align-items: baseline;
                     
@@ -101,15 +100,12 @@
                                 .itinerary-map-popup-time {
                                     color: $color-text;
                                     font-size: 12px;
-                                    font-style: normal;
                                     font-weight: 700;
-                                    line-height: normal;
                                 }
 
                                 .itinerary-map-popup-title {
                                     color: $color-heading;
                                     font-size: 12px;
-                                    font-style: normal;
                                     font-weight: 400;
                                     line-height: 18px;
                                 }
@@ -118,7 +114,6 @@
                             .itinerary-map-popup-desc {
                                 color: $color-text;
                                 font-size: 12px;
-                                font-style: normal;
                                 font-weight: 400;
                                 line-height: 1.5;
                                 margin-bottom: 4px;

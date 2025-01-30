@@ -30,7 +30,7 @@
                 }
                 if( !empty( $tf_enquiry_section_button )) {
                     ?>
-                    <div class="tf-btn"><a href="#" id="tf-ask-question-trigger" class="tf_btn tf_btn_full"><span><?php echo esc_html($tf_enquiry_section_button); ?></span></a></div>
+                    <div class="tf-btn-wrap"><a href="#" data-target="#tf-ask-modal" class="tf-modal-btn tf_btn tf_btn_full"><span><?php echo esc_html($tf_enquiry_section_button); ?></span></a></div>
                     <?php
                 }
                 ?>

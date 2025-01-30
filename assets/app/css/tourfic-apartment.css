@@ -1157,7 +1157,6 @@
   color: #808080;
   font-size: 16px;
   margin: 0 0 30px 0;
-  font-style: normal;
   font-weight: 400;
   line-height: 24px;
   letter-spacing: 0.2px;
@@ -1295,9 +1294,9 @@
   padding-bottom: 0;
 }
 
-.single-tf_apartment #tf-ask-question input[type=text],
-.single-tf_apartment #tf-ask-question input[type=email],
-.single-tf_apartment #tf-ask-question textarea {
+.single-tf_apartment #tf-ask-modal input[type=text],
+.single-tf_apartment #tf-ask-modal input[type=email],
+.single-tf_apartment #tf-ask-modal textarea {
   border: 1px solid #808080;
   border-radius: 4px;
   padding: 12px 16px;
@@ -1307,13 +1306,13 @@
   font-weight: 400;
   transition: all 0.3s ease-in-out;
 }
-.single-tf_apartment #tf-ask-question input[type=text]:focus,
-.single-tf_apartment #tf-ask-question input[type=email]:focus,
-.single-tf_apartment #tf-ask-question textarea:focus {
+.single-tf_apartment #tf-ask-modal input[type=text]:focus,
+.single-tf_apartment #tf-ask-modal input[type=email]:focus,
+.single-tf_apartment #tf-ask-modal textarea:focus {
   outline: none;
   border-color: var(--tf-primary);
 }
-.single-tf_apartment #tf-ask-question textarea {
+.single-tf_apartment #tf-ask-modal textarea {
   height: 120px;
 }
 
@@ -1402,7 +1401,6 @@
   color: #ffffff;
   text-align: center;
   font-size: 14px;
-  font-style: normal;
   font-weight: 500;
   line-height: 1.7;
   letter-spacing: 0.5px;
@@ -1886,7 +1884,6 @@
   color: var(--tf-text);
   margin: 0;
   font-size: 14px;
-  font-style: normal;
   font-weight: 400;
   line-height: 24px;
   letter-spacing: 0.2px;
@@ -2007,7 +2004,6 @@
 }
 .single-tf_apartment .tf-single-template__one .host-details .host-bottom h5 {
   font-size: 18px;
-  font-style: normal;
   font-weight: 500;
   line-height: 1.33;
   letter-spacing: 0.5px;
@@ -2042,23 +2038,6 @@
 }
 .single-tf_apartment .tf-single-template__one .host-details .host-bottom ul li:last-child {
   margin-bottom: 0px;
-}
-.single-tf_apartment .tf-single-template__one .host-details .host-bottom .tf-apartment-contact-button {
-  padding: 11px 24px;
-  border-radius: 4px;
-  background-color: #ffffff;
-  color: var(--tf-primary);
-  border: 1px solid var(--tf-primary);
-  text-decoration: none;
-  text-align: center;
-  transition: all 0.3s ease-in-out;
-}
-.single-tf_apartment .tf-single-template__one .host-details .host-bottom .tf-apartment-contact-button i {
-  padding-right: 8px;
-}
-.single-tf_apartment .tf-single-template__one .host-details .host-bottom .tf-apartment-contact-button:hover {
-  background-color: var(--tf-primary);
-  color: #ffffff;
 }
 
 .single-tf_apartment .tf-single-template__one .apartment-toc {
