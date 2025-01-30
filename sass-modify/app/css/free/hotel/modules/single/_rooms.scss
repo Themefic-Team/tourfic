@@ -326,6 +326,12 @@
                                     @media #{$max768}{
                                         width: auto;
                                     }
+                                    .bed-facilities{
+                                        margin: 8px 0;
+                                        p{
+                                            margin-bottom: 0;
+                                        }
+                                    }
                                 }
                                 td.pax{
                                     .tf-tooltip{

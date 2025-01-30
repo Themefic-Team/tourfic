@@ -7,6 +7,9 @@
         }
         .tf-template-section:last-child{
             margin-bottom: 0px;
+            p{
+                margin-bottom: 0;
+            }
         }
         .tf-section-title{
             margin-bottom: 15px;
@@ -688,6 +691,11 @@
                         position: static;
                     }
                 }
+            }
+        }
+        .tf-hotel-descriptions{
+            p{
+                margin-bottom: 0;
             }
         }
     }

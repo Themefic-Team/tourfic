@@ -2318,6 +2318,7 @@
                             h1{
                                 color: $color-white;
                                 margin-bottom: 16px;
+                                line-height: initial;
                                 @media #{$max1024}{
                                     font-size: 32px;
                                 }
