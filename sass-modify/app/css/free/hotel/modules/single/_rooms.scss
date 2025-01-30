@@ -239,7 +239,6 @@
                                     padding: 13px 30px;
                                     font-size: 16px;
                                     font-weight: 500;
-                                    font-family: inherit;
                                     border: 1px solid $color-border;
                                 }
                             }
@@ -325,6 +324,12 @@
                                     border-left: 0px;
                                     @media #{$max768}{
                                         width: auto;
+                                    }
+                                    .bed-facilities{
+                                        margin: 8px 0;
+                                        p{
+                                            margin-bottom: 0;
+                                        }
                                     }
                                 }
                                 td.pax{

@@ -171,7 +171,7 @@
                 display: block;
                 transition: .3s all ease;    
                 font-weight: 400;
-                line-height: 175%; /* 28px */
+                line-height: 28px;
                 letter-spacing: 0.15px;
                 border-radius: 4px;
 
@@ -216,7 +216,7 @@
                 color: $color-heading;
                 font-size: 16px;
                 font-weight: 400;
-                line-height: 175%;
+                line-height: 1.75;
                 letter-spacing: 0.15px;
             }
 
@@ -229,7 +229,6 @@
                     width: 34px;
                     height: 48px;
                     font-size: 16px;
-                    font-style: normal;
                     font-weight: 600;
                     color: $color-heading;
                     text-align: center;
@@ -1037,7 +1036,7 @@
                                     color: $color-text;
                                     font-size: 14px;
                                     font-weight: 500;
-                                    line-height: 150%;
+                                    line-height: 1.5;
                                     letter-spacing: 0.15px;
 
                                     .tf-checkmark {

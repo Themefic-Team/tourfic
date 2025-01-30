@@ -17,7 +17,7 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 ?>
 <div class="tf-single-template__two">
     <div class="tf-tour-single">
-        <div class="tf-template-container">
+        <div class="tf-container">
             <div class="tf-container-inner">
                 <!-- Single Hotel Heading Section start -->
                 <div class="tf-section tf-single-head">

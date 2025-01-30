@@ -80,6 +80,7 @@
                         min-width: 220px;
                         font-size: 16px;
                         flex: 1;
+                        height: 56px;
             
                         @media #{$max768}{
                             flex-grow: 1;

@@ -5200,7 +5200,7 @@ a.tf-import-btn, a.tf-export-btn {
 .tf-colors-radio-group li {
   display: inline-block;
   border-radius: 5px;
-  width: calc(25% - 16px);
+  width: calc(20% - 16px);
 }
 
 .tf-colors-radio-group li .tf-colors-checkbox {

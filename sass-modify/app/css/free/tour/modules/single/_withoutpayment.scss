@@ -32,9 +32,7 @@
         }
         h2{
             color: $color-heading;
-            font-family: inherit;
             font-size: 48px;
-            font-style: normal;
             font-weight: 600;
             line-height: 30px;
             letter-spacing: -0.96px;
@@ -186,9 +184,7 @@
                 }
                 p{
                     color: $color-text;
-                    font-family: inherit;
                     font-size: 16px;
-                    font-style: normal;
                     font-weight: 400;
                     line-height: 24px;
                     margin-top: 0px;
@@ -268,9 +264,7 @@
                                 padding-left: 5px;
                                 h5{
                                     color: $color-heading;
-                                    font-family: inherit;
                                     font-size: 16px;
-                                    font-style: normal;
                                     font-weight: 500;
                                     line-height: 20px;
                                     margin: 0;
@@ -280,9 +274,7 @@
                                 }
                                 p{
                                     color:  $color-text;                                
-                                    font-family: inherit;
                                     font-size: 16px;
-                                    font-style: normal;
                                     font-weight: 400;
                                     line-height: 20px;
                                     margin: 0;
@@ -355,9 +347,7 @@
                         padding-bottom: 16px;
                         h4{
                             color: $color-heading;
-                            font-family: inherit;
                             font-size: 16px;
-                            font-style: normal;
                             font-weight: 500;
                             line-height: 20px;
                         }
@@ -372,7 +362,6 @@
                                 width: 100%;
                                 label{
                                     color: $color-text;
-                                    font-family: inherit;
                                     font-size: 14px;
                                     font-weight: 500;
                                 }
@@ -422,18 +411,14 @@
                 .tf-booking-fixed-summery{
                     h5{
                         color: $color-heading;
-                        font-family: inherit;
                         font-size: 16px;
-                        font-style: normal;
                         font-weight: 500;
                         line-height: 20px; 
                         margin-bottom: 16px;
                     }
                     h4{
                         color: $color-heading;
-                        font-family: inherit;
                         font-size: 20px;
-                        font-style: normal;
                         font-weight: 500;
                         line-height: 30px;
                         letter-spacing: -0.4px;
@@ -458,9 +443,7 @@
                     }
                     h6{
                         color: $color-heading;
-                        font-family: inherit;
                         font-size: 16px;
-                        font-style: normal;
                         font-weight: 400;
                         line-height: 20px;
                         margin-bottom: 16px;
@@ -471,7 +454,6 @@
                             tr{
                                 th{
                                     color: $color-text;
-                                    font-family: inherit;
                                     font-size: 14px;
                                     font-weight: 600;
                                     line-height: 28px;
@@ -484,7 +466,6 @@
                             tr{
                                 td{
                                     color: $color-text;
-                                    font-family: inherit;
                                     font-size: 14px;
                                     font-weight: 400;
                                     line-height: 26px;
@@ -497,7 +478,6 @@
                             tr{
                                 th{
                                     color: $color-text;
-                                    font-family: inherit;
                                     font-size: 16px;
                                     font-weight: 700;
                                     padding-top: 15px;
@@ -529,9 +509,7 @@
                     margin: 0;
                     display: inline-block;
                     color: $color-heading;
-                    font-family: inherit;
                     font-size: 16px;
-                    font-style: normal;
                     font-weight: 500;
                     line-height: 24px;
                 }
@@ -650,7 +628,6 @@
                 }
                 a.tf-back-control{
                     color: $color-primary;
-                    font-family: inherit;
                     font-size: 14px;
                     font-weight: 700;
                     line-height: 20px;
