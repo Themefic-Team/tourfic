@@ -1164,8 +1164,8 @@ class Enqueue {
 			$tf_design_secondary = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d1-secondary' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d1-secondary' ) )['gcolor'] : '#0054A8';
 			$tf_design_text = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d1-text' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d1-text' ) )['gcolor'] : '#000';
 			$tf_design_heading = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d1-heading' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d1-heading' ) )['gcolor'] : '#000';
-			$tf_design_light_bg = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d1-light-bg' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d1-light-bg' ) )['gcolor'] : '#FA5535';
-			$tf_design_highlights_bg = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d1-highlights-bg' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d1-highlights-bg' ) )['gcolor'] : '#FCF4E8';
+			$tf_design_light_bg = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d1-light-bg' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d1-light-bg' ) )['gcolor'] : '#F5E9E0';
+			$tf_design_highlights_bg = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d1-highlights-bg' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d1-highlights-bg' ) )['gcolor'] : '#FEF9F6';
 			$tf_design_form_input_bg = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d1-form-input-bg' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d1-form-input-bg' ) )['gcolor'] : '#fff';
 			$tf_design_box_shadow = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d1-box-shadow' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d1-box-shadow' ) )['gcolor'] : '#e0e8ee52';
 			$tf_design_border_color = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d1-border-color' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d1-border-color' ) )['gcolor'] : '#ddd';
@@ -1175,7 +1175,7 @@ class Enqueue {
 			$tf_design_text = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d2-text' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d2-text' ) )['gcolor'] : '#686E7A';
 			$tf_design_heading = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d2-heading' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d2-heading' ) )['gcolor'] : '#060D1C';
 			$tf_design_light_bg = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d2-light-bg' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d2-light-bg' ) )['gcolor'] : '#fff';
-			$tf_design_highlights_bg = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d2-highlights-bg' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d2-highlights-bg' ) )['gcolor'] : '#FCF4E8';
+			$tf_design_highlights_bg = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d2-highlights-bg' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d2-highlights-bg' ) )['gcolor'] : '#FEF9F6';
 			$tf_design_form_input_bg = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d2-form-input-bg' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d2-form-input-bg' ) )['gcolor'] : '#F3F7FA';
 			$tf_design_box_shadow = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d2-box-shadow' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d2-box-shadow' ) )['gcolor'] : '#e0e8ee52';
 			$tf_design_border_color = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d2-border-color' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d2-border-color' ) )['gcolor'] : '#ddd';
@@ -1185,7 +1185,7 @@ class Enqueue {
 			$tf_design_text = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d3-text' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d3-text' ) )['gcolor'] : '#99948D';
 			$tf_design_heading = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d3-heading' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d3-heading' ) )['gcolor'] : '#595349';
 			$tf_design_light_bg = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d3-light-bg' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d3-light-bg' ) )['gcolor'] : '#FAEEDC';
-			$tf_design_highlights_bg = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d3-highlights-bg' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d3-highlights-bg' ) )['gcolor'] : '#FCF4E8';
+			$tf_design_highlights_bg = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d3-highlights-bg' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d3-highlights-bg' ) )['gcolor'] : '#FEF9F6';
 			$tf_design_form_input_bg = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d3-form-input-bg' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d3-form-input-bg' ) )['gcolor'] : '#F3F7FA';
 			$tf_design_box_shadow = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d3-box-shadow' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d3-box-shadow' ) )['gcolor'] : '#e0e8ee52';
 			$tf_design_border_color = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d3-border-color' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d3-border-color' ) )['gcolor'] : '#ddd';
@@ -1195,7 +1195,7 @@ class Enqueue {
 			$tf_design_text = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d4-text' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d4-text' ) )['gcolor'] : '#6E655E';
 			$tf_design_heading = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d4-heading' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d4-heading' ) )['gcolor'] : '#1A0B00';
 			$tf_design_light_bg = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d4-light-bg' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d4-light-bg' ) )['gcolor'] : '#F5E9E0';
-			$tf_design_highlights_bg = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d4-highlights-bg' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d4-highlights-bg' ) )['gcolor'] : '#FCF4E8';
+			$tf_design_highlights_bg = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d4-highlights-bg' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d4-highlights-bg' ) )['gcolor'] : '#FEF9F6';
 			$tf_design_form_input_bg = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d4-form-input-bg' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d4-form-input-bg' ) )['gcolor'] : '#F3F7FA';
 			$tf_design_box_shadow = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d4-box-shadow' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d4-box-shadow' ) )['gcolor'] : '#e0e8ee52';
 			$tf_design_border_color = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d4-border-color' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d4-border-color' ) )['gcolor'] : '#ddd';

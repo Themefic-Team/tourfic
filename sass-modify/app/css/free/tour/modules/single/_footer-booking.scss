@@ -154,6 +154,7 @@
                 }
                 
                 .tf-tours-booking-btn {
+                    align-self: stretch;
                     @media #{$max1024}{
                         width: 100%;
                         display: flex;
@@ -162,6 +163,13 @@
                     @media #{$max768}{
                         width: 100%;
                         display: block;
+                    }
+                    .tf-btn-wrap{
+                        height: 100%;
+                        .tf_btn{
+                            height: 100%;
+                            align-items: center;
+                        }
                     }
             
                 }
