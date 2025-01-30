@@ -130,8 +130,6 @@ class Base {
 		\Tourfic\App\Shortcodes\Recent_Cars::instance();
 		\Tourfic\App\Shortcodes\Carrental_Locations::instance();
 		\Tourfic\App\Shortcodes\Carrental_Brand::instance();
-
-		\Tourfic\App\Shortcodes\Component::instance();
 	}
 }
 

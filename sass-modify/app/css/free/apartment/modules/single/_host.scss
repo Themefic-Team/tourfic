@@ -198,25 +198,6 @@
                             }
                         }
                     }
-            
-                    .tf-apartment-contact-button {
-                        padding: 11px 24px;
-                        border-radius: 4px;
-                        background-color: $color-white;
-                        color: $color-primary;
-                        border: 1px solid $color-primary;
-                        text-decoration: none;
-                        text-align: center;
-                        transition: all 0.3s ease-in-out;
-                        i {
-                            padding-right: 8px;
-                        }
-            
-                        &:hover {
-                            background-color: $color-primary;
-                            color: $color-white;
-                        }
-                    }
                 }
             }
         }

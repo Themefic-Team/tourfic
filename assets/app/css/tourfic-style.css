@@ -199,15 +199,6 @@ Button Flip
 }
 
 /*
-Button Group
-*/
-/* .tf_btn_group {
-    @include flexbox();
-    @include align-items(flex-start);
-    @include flex-wrap();
-    gap: 8px;
-} */
-/*
 Modal
 */
 .tf-modal {
@@ -3463,75 +3454,7 @@ div#tf-destinationautocomplete-list div:before {
   z-index: 999;
 }
 
-#tf-ask-question {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 9999;
-  background: transparent;
-  margin: auto;
-  overflow: auto scroll;
-}
-
-#tf-ask-question .tf-aq-overlay {
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  height: 100%;
-  width: 100%;
-  background: var(--tf-heading);
-  opacity: 0.5;
-}
-
-#tf-ask-question .tf-aq-outer {
-  position: absolute;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
-  top: 20%;
-  width: 100%;
-  max-width: 428px;
-  background: #ffffff;
-  padding: 48px 40px 32px 40px;
-  border-radius: 16px;
-  transform: translate(0, 0);
-}
-
-@media only screen and (max-width: 768px) {
-  #tf-ask-question .tf-aq-outer {
-    width: 90%;
-  }
-}
-
-#tf-ask-question span.close-aq {
-  position: absolute;
-  right: 16px;
-  top: 16px;
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-  z-index: 9999;
-}
-
-#tf-ask-question span.close-aq:hover {
-  scale: 1.2;
-}
-
-#tf-ask-question div.tf-aq-inner {
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  flex-direction: column;
-  align-self: center;
-}
-
-#tf-ask-question div.tf-aq-inner .tf-ask-question-head-content {
+#tf-ask-modal .tf-ask-question-head-content {
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -3543,7 +3466,7 @@ div#tf-destinationautocomplete-list div:before {
   margin-bottom: 24px;
 }
 
-#tf-ask-question div.tf-aq-inner .tf-ask-question-head-content h3 {
+#tf-ask-modal .tf-ask-question-head-content h3 {
   text-align: center;
   font-size: 24px;
   font-style: normal;
@@ -3552,7 +3475,7 @@ div#tf-destinationautocomplete-list div:before {
   line-height: 120%;
 }
 
-#tf-ask-question div.tf-aq-inner form {
+#tf-ask-modal form {
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -3562,7 +3485,7 @@ div#tf-destinationautocomplete-list div:before {
   gap: 24px;
 }
 
-#tf-ask-question div.tf-aq-inner form .tf-ask-question-submit {
+#tf-ask-modal form .tf-ask-question-submit {
   padding: 12px 32px;
   border-radius: 4px;
   background: var(--tf-primary);
@@ -3574,11 +3497,11 @@ div#tf-destinationautocomplete-list div:before {
   line-height: 150%;
 }
 
-#tf-ask-question div.tf-aq-inner form .tf-ask-question-submit:hover {
+#tf-ask-modal form .tf-ask-question-submit:hover {
   background: var(--tf-secondary);
 }
 
-#tf-ask-question .tf-aq-field {
+#tf-ask-modal .tf-aq-field {
   position: relative;
   margin: 0;
   overflow: hidden;
@@ -3590,13 +3513,13 @@ div#tf-destinationautocomplete-list div:before {
   flex-direction: column;
 }
 
-#tf-ask-question .tf-aq-field label {
+#tf-ask-modal .tf-aq-field label {
   font-size: 13px;
   font-weight: 400;
   margin-bottom: 8px;
 }
 
-#tf-ask-question .tf-aq-field input, #tf-ask-question .tf-aq-field textarea {
+#tf-ask-modal .tf-aq-field input, #tf-ask-modal .tf-aq-field textarea {
   border: 1px solid #808080;
   border-radius: 4px;
   padding: 12px 16px;
@@ -3607,16 +3530,16 @@ div#tf-destinationautocomplete-list div:before {
   transition: all 0.3s ease-in-out;
 }
 
-#tf-ask-question .tf-aq-field input:focus, #tf-ask-question .tf-aq-field textarea:focus {
+#tf-ask-modal .tf-aq-field input:focus, #tf-ask-modal .tf-aq-field textarea:focus {
   outline: none;
   border-color: var(--tf-primary);
 }
 
-#tf-ask-question .tf-aq-field textarea {
+#tf-ask-modal .tf-aq-field textarea {
   height: 120px;
 }
 
-#tf-ask-question .tf-aq-field input::placeholder, #tf-ask-question .tf-aq-field textarea::placeholder {
+#tf-ask-modal .tf-aq-field input::placeholder, #tf-ask-modal .tf-aq-field textarea::placeholder {
   font-family: Inter;
   font-size: 15px;
   font-style: normal;
@@ -11690,16 +11613,16 @@ div#tf-destinationautocomplete-list div:before {
   padding-right: 83px;
 }
 
-.single-tf_apartment .tf-single-template__three #tf-ask-question .tf-aq-outer,
-.single-tf_hotel .tf-single-template__three #tf-ask-question .tf-aq-outer,
-.single-tf_tours .tf-single-template__three #tf-ask-question .tf-aq-outer {
+.single-tf_apartment .tf-single-template__three #tf-ask-modal .tf-aq-outer,
+.single-tf_hotel .tf-single-template__three #tf-ask-modal .tf-aq-outer,
+.single-tf_tours .tf-single-template__three #tf-ask-modal .tf-aq-outer {
   background: var(--tf-light-bg);
   border-radius: 0px;
 }
 
-.single-tf_apartment .tf-single-template__three #tf-ask-question .tf-aq-outer h4,
-.single-tf_hotel .tf-single-template__three #tf-ask-question .tf-aq-outer h4,
-.single-tf_tours .tf-single-template__three #tf-ask-question .tf-aq-outer h4 {
+.single-tf_apartment .tf-single-template__three #tf-ask-modal .tf-aq-outer h4,
+.single-tf_hotel .tf-single-template__three #tf-ask-modal .tf-aq-outer h4,
+.single-tf_tours .tf-single-template__three #tf-ask-modal .tf-aq-outer h4 {
   color: var(--tf-heading);
   text-align: center;
   font-size: 32px;
@@ -11707,9 +11630,9 @@ div#tf-destinationautocomplete-list div:before {
   margin-bottom: 32px;
 }
 
-.single-tf_apartment .tf-single-template__three #tf-ask-question .tf-aq-field input,
-.single-tf_hotel .tf-single-template__three #tf-ask-question .tf-aq-field input,
-.single-tf_tours .tf-single-template__three #tf-ask-question .tf-aq-field input {
+.single-tf_apartment .tf-single-template__three #tf-ask-modal .tf-aq-field input,
+.single-tf_hotel .tf-single-template__three #tf-ask-modal .tf-aq-field input,
+.single-tf_tours .tf-single-template__three #tf-ask-modal .tf-aq-field input {
   border: 1px solid var(--tf-border);
   box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
   color: var(--tf-text);
@@ -11720,15 +11643,15 @@ div#tf-destinationautocomplete-list div:before {
   border-radius: 0px;
 }
 
-.single-tf_apartment .tf-single-template__three #tf-ask-question .tf-aq-field input::placeholder,
-.single-tf_hotel .tf-single-template__three #tf-ask-question .tf-aq-field input::placeholder,
-.single-tf_tours .tf-single-template__three #tf-ask-question .tf-aq-field input::placeholder {
+.single-tf_apartment .tf-single-template__three #tf-ask-modal .tf-aq-field input::placeholder,
+.single-tf_hotel .tf-single-template__three #tf-ask-modal .tf-aq-field input::placeholder,
+.single-tf_tours .tf-single-template__three #tf-ask-modal .tf-aq-field input::placeholder {
   color: var(--tf-text);
 }
 
-.single-tf_apartment .tf-single-template__three #tf-ask-question .tf-aq-field textarea,
-.single-tf_hotel .tf-single-template__three #tf-ask-question .tf-aq-field textarea,
-.single-tf_tours .tf-single-template__three #tf-ask-question .tf-aq-field textarea {
+.single-tf_apartment .tf-single-template__three #tf-ask-modal .tf-aq-field textarea,
+.single-tf_hotel .tf-single-template__three #tf-ask-modal .tf-aq-field textarea,
+.single-tf_tours .tf-single-template__three #tf-ask-modal .tf-aq-field textarea {
   border: 1px solid var(--tf-border);
   box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
   background-color: var(--tf-light-bg);
@@ -11739,15 +11662,15 @@ div#tf-destinationautocomplete-list div:before {
   border-radius: 0px;
 }
 
-.single-tf_apartment .tf-single-template__three #tf-ask-question .tf-aq-field textarea::placeholder,
-.single-tf_hotel .tf-single-template__three #tf-ask-question .tf-aq-field textarea::placeholder,
-.single-tf_tours .tf-single-template__three #tf-ask-question .tf-aq-field textarea::placeholder {
+.single-tf_apartment .tf-single-template__three #tf-ask-modal .tf-aq-field textarea::placeholder,
+.single-tf_hotel .tf-single-template__three #tf-ask-modal .tf-aq-field textarea::placeholder,
+.single-tf_tours .tf-single-template__three #tf-ask-modal .tf-aq-field textarea::placeholder {
   color: var(--tf-text);
 }
 
-.single-tf_apartment .tf-single-template__three #tf-ask-question button,
-.single-tf_hotel .tf-single-template__three #tf-ask-question button,
-.single-tf_tours .tf-single-template__three #tf-ask-question button {
+.single-tf_apartment .tf-single-template__three #tf-ask-modal button,
+.single-tf_hotel .tf-single-template__three #tf-ask-modal button,
+.single-tf_tours .tf-single-template__three #tf-ask-modal button {
   background: var(--tf-primary);
   border-color: var(--tf-primary);
   border-radius: 0px;
@@ -11758,15 +11681,15 @@ div#tf-destinationautocomplete-list div:before {
   transition: .3s all ease;
 }
 
-.single-tf_apartment .tf-single-template__three #tf-ask-question button::after,
-.single-tf_hotel .tf-single-template__three #tf-ask-question button::after,
-.single-tf_tours .tf-single-template__three #tf-ask-question button::after {
+.single-tf_apartment .tf-single-template__three #tf-ask-modal button::after,
+.single-tf_hotel .tf-single-template__three #tf-ask-modal button::after,
+.single-tf_tours .tf-single-template__three #tf-ask-modal button::after {
   position: static;
 }
 
-.single-tf_apartment .tf-single-template__three #tf-ask-question button:hover,
-.single-tf_hotel .tf-single-template__three #tf-ask-question button:hover,
-.single-tf_tours .tf-single-template__three #tf-ask-question button:hover {
+.single-tf_apartment .tf-single-template__three #tf-ask-modal button:hover,
+.single-tf_hotel .tf-single-template__three #tf-ask-modal button:hover,
+.single-tf_tours .tf-single-template__three #tf-ask-modal button:hover {
   background: var(--tf-secondary);
 }
 
