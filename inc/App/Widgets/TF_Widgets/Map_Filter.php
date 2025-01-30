@@ -131,10 +131,18 @@ class Map_Filter extends \WP_Widget {
             return;
         }
 
-        $design_1_items_wrap_class = '';
+        $items_wrap_class = $section_wrap_class = '';
+        if ( ($post_type == 'tf_hotel' && Hotel::template( 'archive' ) == 'default') || 
+        ($post_type == 'tf_tours' && Tour::template( 'archive' ) == 'default') || 
+        ($post_type == 'tf_apartment' && Apartment::template( 'archive' ) == 'default')){
+            $section_wrap_class = 'tf-archive-template__one';
+        }elseif ( ($post_type == 'tf_hotel' && Hotel::template( 'archive' ) == 'design-1') || 
+        ($post_type == 'tf_tours' && Tour::template( 'archive' ) == 'design-1')){
+            $section_wrap_class = 'tf-archive-template__two';
+        }
         if ( ($post_type == 'tf_hotel' && Hotel::template( 'archive' ) == 'design-1') ||
             ($post_type == 'tf_tours' && Tour::template( 'archive' ) == 'design-1')){
-            $design_1_items_wrap_class = 'tf-search-results-list';
+            $items_wrap_class = 'tf-search-results-list';
         }
 
         if($post_type == "tf_hotel") {
@@ -175,7 +183,7 @@ class Map_Filter extends \WP_Widget {
                     if ( ($post_type == 'tf_hotel' && Hotel::template( 'archive' ) !== 'design-3') ||
                         ($post_type == 'tf_tours' && Tour::template( 'archive' ) !== 'design-3') ||
                         ($post_type == 'tf_apartment' && Apartment::template( 'archive' ) !== 'design-2') ) : ?>
-                        <div class="tf-archive-details-wrap tf-map-popup-wrap">
+                        <div class="tf-archive-details-wrap tf-map-popup-wrap <?php echo esc_attr($section_wrap_class); ?>">
                             <div class="tf-archive-details ">
                                 <div class="tf-details-left">
                                     <!-- Loader Image -->
@@ -217,7 +225,7 @@ class Map_Filter extends \WP_Widget {
                                         </div>
 
                                         <!--Available rooms start -->
-                                        <div class="tf-archive-hotels archive_ajax_result tf-layout-list <?php echo esc_attr($design_1_items_wrap_class) ?>">
+                                        <div class="tf-archive-hotels archive_ajax_result tf-layout-list <?php echo esc_attr($items_wrap_class) ?>">
 
                                             <?php
                                             $count = 0;
