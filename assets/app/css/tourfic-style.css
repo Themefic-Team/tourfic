@@ -8852,7 +8852,7 @@ div#tf-destinationautocomplete-list div:before {
 }
 
 .tf-single-template__two .tf-review-wrapper .tf-review-data .tf-review-data-average p {
-  background: var(--tf-light-bg);
+  background: #F1F3F4;
   text-align: center;
   font-size: 30px;
   color: var(--tf-primary);
