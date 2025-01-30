@@ -2532,6 +2532,7 @@
                         }
 
                         p {
+                            margin: 0;
                             @media #{$max768}{
                                 font-size: 14px;
                             }
