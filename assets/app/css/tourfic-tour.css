@@ -2531,6 +2531,7 @@
   min-width: 220px;
   font-size: 16px;
   flex: 1;
+  height: 56px;
 }
 @media only screen and (max-width: 768px) {
   .single-tf_tours .tf-single-template__two .tf-bottom-booking-bar .tf-bottom-booking-field input.tf-field, .single-tf_tours .tf-single-template__two .tf-bottom-booking-bar .tf-bottom-booking-field select.tf-field {
@@ -2967,6 +2968,7 @@ div#tf-contact-info {
 }
 .single-tf_tours .tf-single-template__two .tf-tour-details-right .tf-form-title p {
   color: var(--tf-text);
+  margin-bottom: 0;
 }
 .single-tf_tours .tf-single-template__two .tf-tour-details-right .tf-form-title.tf-tour-extra p {
   cursor: pointer;
