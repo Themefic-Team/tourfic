@@ -1758,6 +1758,7 @@
                 gap: 16px;
                 p{
                     color: $color-text;
+                    margin: 0;
                     @media #{$max768}{
                         font-size: 14px;
                     }
@@ -3200,6 +3201,7 @@
                                         font-style: normal;
                                         font-weight: 400;
                                         line-height: 130%; /* 20.8px */
+                                        margin: 0;
                                         span.show_sub_title{
                                             color: $color-text;
                                             font-size: 16px;
