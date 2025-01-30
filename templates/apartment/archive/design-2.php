@@ -142,11 +142,13 @@
                                             $min_sale_price = !empty($min_price_arr['min_sale_price']) ? $min_price_arr['min_sale_price'] : 0;
                                             $min_regular_price = !empty($min_price_arr['min_regular_price']) ? $min_price_arr['min_regular_price'] : 0;
 
-                                            if ($min_regular_price != 0) {
-                                                $price_html = wc_format_sale_price($min_regular_price, $min_sale_price);
-                                            } else {
-                                                $price_html = wp_kses_post(wc_price($min_sale_price)) . " ";
-                                            }
+                                            // if ($min_sale_price != 0) {
+                                            //     $price_html = wc_format_sale_price($min_regular_price, $min_sale_price);
+                                            // } else {
+                                            //     $price_html = wp_kses_post(wc_price($min_regular_price)) . " ";
+                                            // }
+
+                                            $price_html = Pricing::instance(get_the_ID())->get_min_price_html();
 
                                             if (!empty($map)) {
                                                 $lat = $map['latitude'];
@@ -216,10 +218,10 @@
                                             $min_sale_price = !empty($min_price_arr['min_sale_price']) ? $min_price_arr['min_sale_price'] : 0;
                                             $min_regular_price = !empty($min_price_arr['min_regular_price']) ? $min_price_arr['min_regular_price'] : 0;
 
-                                            if ($min_regular_price != 0) {
+                                            if ($min_sale_price != 0) {
                                                 $price_html = wc_format_sale_price($min_regular_price, $min_sale_price);
                                             } else {
-                                                $price_html = wp_kses_post(wc_price($min_sale_price)) . " ";
+                                                $price_html = wp_kses_post(wc_price($min_regular_price)) . " ";
                                             }
 
                                             if (!empty($map)) {

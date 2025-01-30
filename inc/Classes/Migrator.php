@@ -832,7 +832,7 @@ class Migrator {
 				if ( is_a( $itemmeta, 'WC_Order_Refund' ) ) {
 					$itemmeta = wc_get_order( $itemmeta->get_parent_id() );
 				}
-				$tf_ordering_date = $itemmeta->get_date_created();
+				$tf_ordering_date = !empty( $itemmeta) ? $itemmeta->get_date_created() : '';
 
 				//Order Data Insert
 				$billinginfo = [

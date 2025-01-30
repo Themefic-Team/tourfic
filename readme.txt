@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, room-booking, car-rental
 Requires at least: 5.4
 Tested up to: 6.7
-Stable tag: 2.15.13
+Stable tag: 2.15.14
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -355,6 +355,12 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 22. Map Template(Pro)
 
 == Changelog ==
+
+= 2.15.14 – January 30, 2025 =
+
+- Fixed: Apartment archive pricing issue.
+- Fixed: Car rental seat range widget issue.
+- Fixed: Compatibility issue with WooCommerce refunds.
 
 = 2.15.13 – January 24, 2025 =
 
