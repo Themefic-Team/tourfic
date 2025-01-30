@@ -2032,7 +2032,7 @@ Steps
 .tf-setting-dashboard .tf-setting-top-bar .version span {
   font-size: 11px;
   line-height: 11px;
-  color: #060D1C;
+  color: var(--tf-heading);
   font-weight: 700;
   border: 1px solid #003c79;
   border-radius: 4px;
@@ -2083,7 +2083,7 @@ Steps
 .tf-setting-dashboard .tf-setting-top-bar .other-document .dropdown .list-item a {
   font-size: 15px;
   font-weight: 500;
-  color: #060D1C;
+  color: var(--tf-heading);
   display: flex;
   align-items: center;
   transition: all 0.2s ease;
@@ -2180,7 +2180,7 @@ Steps
   font-size: 26px;
   font-weight: 600;
   line-height: 36px;
-  color: #060D1C;
+  color: var(--tf-heading);
   margin: 0 0 10px;
 }
 
@@ -2271,7 +2271,7 @@ Steps
   margin: 0;
   font-size: 30px;
   font-weight: 700;
-  color: #060D1C;
+  color: var(--tf-heading);
   line-height: 0.8;
 }
 
@@ -2390,7 +2390,7 @@ Steps
 }
 
 .tf-settings-help-center .tf-help-center-banner .tf-help-center-content h2 {
-  color: #060D1C;
+  color: var(--tf-heading);
   font-size: 34px;
   margin: 0;
 }
@@ -2468,7 +2468,7 @@ Steps
 .tf-settings-help-center .tf-support-document .tf-single-support a h3 {
   font-size: 20px;
   margin: 0;
-  color: #060D1C;
+  color: var(--tf-heading);
   display: block;
   line-height: 24px;
 }
@@ -2505,7 +2505,7 @@ Steps
   font-size: 24px;
   font-weight: 600;
   line-height: 28px;
-  color: #060D1C;
+  color: var(--tf-heading);
 }
 
 .tf-settings-help-center .tf-settings-faq .tf-accordion-wrapper {
@@ -2547,7 +2547,7 @@ Steps
 .tf-settings-help-center .tf-settings-faq .tf-accordion-wrapper .tf-single-faq .tf-faq-title i {
   font-size: 18px;
   margin-right: 10px;
-  color: #060D1C;
+  color: var(--tf-heading);
 }
 
 .tf-settings-help-center .tf-settings-faq .tf-accordion-wrapper .tf-single-faq .tf-faq-title h4 {
@@ -2624,7 +2624,7 @@ Steps
 .tf-setting-license .tf-setting-license-tabs ul li.active span {
   display: inline-block;
   padding: 14px 22px;
-  color: #060D1C;
+  color: var(--tf-heading);
   font-size: 18px;
   text-decoration: none;
 }
@@ -2752,7 +2752,7 @@ Steps
   border-radius: 4px;
   margin: 0;
   text-decoration: none;
-  color: #060D1C;
+  color: var(--tf-heading);
 }
 
 .tf-setting-wrapper .tourfic-settings-header .settings-header-left .tf-setting-search .tf-search-results ul a:focus {
@@ -2868,7 +2868,7 @@ Steps
   -ms-flex-align: center;
   align-items: center;
   text-decoration: none;
-  color: #060D1C;
+  color: var(--tf-heading);
   padding: 18px 30px;
   font-size: 16px;
   text-align: left;
@@ -3015,7 +3015,7 @@ Steps
 }
 
 .tf-setting-wrapper .tf-option-form .tf-option .tf-tab-wrapper .tf-mobile-setting a i {
-  color: #060D1C;
+  color: var(--tf-heading);
   font-size: 22px;
 }
 
@@ -3383,7 +3383,7 @@ Steps
   margin-bottom: 3px;
   font-weight: 600;
   font-size: 16px;
-  color: #060D1C;
+  color: var(--tf-heading);
   display: flex !important;
   align-items: center;
   line-height: 20px;
@@ -3457,7 +3457,7 @@ Steps
 .tf-field-ical_export input:focus,
 .tf-field-text input:focus, .tf-field-password input:focus {
   background: #ffffff;
-  box-shadow: 0 0 0 2px #0E3DD8;
+  box-shadow: 0 0 0 2px var(--tf-primary);
   border-radius: 4px;
 }
 
@@ -3527,7 +3527,7 @@ Steps
 
 .tf-field-textarea textarea:focus {
   background: #ffffff;
-  box-shadow: 0 0 0 2px #0E3DD8;
+  box-shadow: 0 0 0 2px var(--tf-primary);
   border-radius: 4px;
 }
 
@@ -3782,7 +3782,7 @@ Steps
   content: "";
   height: 14px;
   width: 14px;
-  background-color: #0E3DD8;
+  background-color: var(--tf-primary);
   border-radius: 100%;
   position: absolute;
   top: 4px;
@@ -3807,7 +3807,7 @@ Steps
 }
 
 .tf-field-radio .tf-fieldset input[type=radio]:checked + label:before {
-  border-color: #0E3DD8;
+  border-color: var(--tf-primary);
 }
 
 .tf-field-checkbox .tf-fieldset ul li {
@@ -4076,13 +4076,13 @@ Steps
   align-items: center;
   -webkit-justify-content: center;
   justify-content: center;
-  background-color: #0E3DD8;
+  background-color: var(--tf-primary);
   color: #ffffff;
   border-radius: 4px;
 }
 
 .tf-field-heading .tf-field-heading-inner .tf-field-heading-content {
-  color: #060D1C;
+  color: var(--tf-heading);
   font-size: 14px;
   font-weight: 600;
 }
@@ -4175,7 +4175,7 @@ Steps
 }
 
 .tf-pro-notice .tf-field-notice-inner .tf-field-notice-content {
-  color: #060D1C;
+  color: var(--tf-heading);
   font-size: 14px;
   line-height: 1.6;
   align-self: center;
@@ -4307,7 +4307,7 @@ Steps
 
 .tf-field-date input:focus {
   background: #ffffff;
-  box-shadow: 0 0 0 2px #0E3DD8;
+  box-shadow: 0 0 0 2px var(--tf-primary);
   border-radius: 4px;
 }
 
@@ -4364,7 +4364,7 @@ Steps
 
 .tf-field-time input:focus {
   background: #ffffff;
-  box-shadow: 0 0 0 2px #0E3DD8;
+  box-shadow: 0 0 0 2px var(--tf-primary);
   border-radius: 4px;
 }
 
@@ -4441,7 +4441,7 @@ Steps
 .tf-repeater .tf-repeater-header .tf-repeater-icon-move:hover {
   background-color: #c4daff;
   transition: 0.4s;
-  color: #0E3DD8;
+  color: var(--tf-primary);
 }
 
 .tf-repeater .tf-repeater-header .tf-repeater-icon-clone {
@@ -4451,7 +4451,7 @@ Steps
 .tf-repeater .tf-repeater-header .tf-repeater-icon-clone:hover {
   background-color: #c4daff;
   transition: 0.4s;
-  color: #0E3DD8;
+  color: var(--tf-primary);
 }
 
 .tf-repeater .tf-repeater-header .tf-repeater-icon-delete {
@@ -4666,7 +4666,7 @@ Steps
 .tf-field-color .tf-fieldset ul.tf-inline li > label {
   font-weight: 600;
   font-size: 16px;
-  color: #060D1C;
+  color: var(--tf-heading);
   width: 45%;
   margin-top: 5px;
 }
@@ -4760,7 +4760,7 @@ Steps
 
 #tf-icon-modal .tf-modal-content .tf-icon-search input.tf-icon-search-input:focus {
   background: #ffffff;
-  box-shadow: 0 0 0 2px #0E3DD8;
+  box-shadow: 0 0 0 2px var(--tf-primary);
   border-radius: 4px;
 }
 
@@ -4823,7 +4823,7 @@ Steps
 }
 
 #tf-icon-modal .tf-modal-content .tf-icon-wrapper ul.tf-icon-tab-list li.active {
-  background: #0E3DD8;
+  background: var(--tf-primary);
   color: #ffffff;
 }
 
@@ -4911,8 +4911,8 @@ Steps
 }
 
 #tf-icon-modal .tf-modal-content .tf-icon-wrapper .tf-icon-tab-content .tf-icon-tab-pane ul.tf-icon-list li.active .tf-icon-inner span.check-icon {
-  border-color: #0E3DD8;
-  background-color: #0E3DD8;
+  border-color: var(--tf-primary);
+  background-color: var(--tf-primary);
   opacity: 1;
 }
 
@@ -4935,7 +4935,7 @@ Steps
 }
 
 #tf-icon-modal .tf-modal-content .tf-icon-wrapper .tf-icon-tab-content .tf-icon-tab-pane ul.tf-icon-list::-webkit-scrollbar-thumb:hover {
-  background: #0E3DD8;
+  background: var(--tf-primary);
 }
 
 #tf-icon-modal .tf-modal-content .tf-modal-footer {
@@ -4964,7 +4964,7 @@ Steps
 
 .tf-field-number input:focus {
   background: #ffffff;
-  box-shadow: 0 0 0 2px #0E3DD8;
+  box-shadow: 0 0 0 2px var(--tf-primary);
   border-radius: 4px;
 }
 
@@ -5027,6 +5027,14 @@ a.tf-import-btn, a.tf-export-btn {
 
 .tf-image-radio-group li .tf-image-checkbox img:hover {
   object-position: bottom;
+}
+
+.tf-image-radio-group li .tf-image-checkbox span.tf-template-title {
+  display: block;
+  text-align: center;
+  margin-top: 5px;
+  font-weight: 500;
+  cursor: pointer;
 }
 
 .tf-image-radio-group li .tf-image-checkbox > input {
@@ -5138,7 +5146,7 @@ a.tf-import-btn, a.tf-export-btn {
   display: inline-block;
   width: 18px;
   height: 18px;
-  border: 2px solid #060D1C;
+  border: 2px solid var(--tf-heading);
   border-left-color: transparent;
   border-radius: 50%;
   vertical-align: middle;
@@ -5180,6 +5188,93 @@ a.tf-import-btn, a.tf-export-btn {
   font-weight: 600;
   font-size: 16px;
   line-height: 24px;
+}
+
+.tf-colors-radio-group {
+  display: flex;
+  align-items: initial;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.tf-colors-radio-group li {
+  display: inline-block;
+  border-radius: 5px;
+  width: calc(25% - 16px);
+}
+
+.tf-colors-radio-group li .tf-colors-checkbox {
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  display: block;
+  cursor: pointer;
+}
+
+.tf-colors-radio-group li .tf-colors-checkbox .tf-colors-box {
+  height: 35px;
+  display: flex;
+}
+
+.tf-colors-radio-group li .tf-colors-checkbox .tf-colors-box span {
+  min-width: 25%;
+}
+
+.tf-colors-radio-group li .tf-colors-checkbox .tf-colors-box span:first-child {
+  border-radius: 6px 0 0 0;
+}
+
+.tf-colors-radio-group li .tf-colors-checkbox .tf-colors-box span:last-child {
+  border-radius: 0 6px 0 0;
+}
+
+.tf-colors-radio-group li .tf-colors-checkbox .tf-color-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 10px;
+}
+
+.tf-colors-radio-group li .tf-colors-checkbox .tf-color-footer span.tf-template-title {
+  text-align: center;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.tf-colors-radio-group li .tf-colors-checkbox .tf-color-footer input {
+  display: none;
+}
+
+.tf-colors-radio-group li .tf-colors-checkbox .tf-color-footer .tf-color-checkmark {
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  background: #fff;
+  height: 16px;
+  width: 16px;
+  position: relative;
+  z-index: 0;
+}
+
+.tf-colors-radio-group li .tf-colors-checkbox .tf-color-footer .tf-color-checkmark::after {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 4px;
+  border: solid #fff;
+  border-color: #fff;
+  border-width: 0 3px 3px 0;
+  width: 6px;
+  height: 9px;
+  z-index: 99;
+  transform: rotate(45deg);
+}
+
+.tf-colors-radio-group li .tf-colors-checkbox input:checked ~ .tf-color-checkmark {
+  background-color: #3E64DE;
+  border-color: #3E64DE;
+}
+
+.tf-colors-radio-group li .tf-colors-checkbox input:checked ~ .tf-color-checkmark::after {
+  display: block;
 }
 
 .tf-backend-tour-booking h1,
