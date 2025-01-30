@@ -31,7 +31,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
 ?>
 <div class="tf-single-template__two">
     <div class="tf-tour-single">
-        <div class="tf-template-container">
+        <div class="tf-container">
             <div class="tf-container-inner">
                 <!-- Single Tour Heading Section start -->
                 <div class="tf-section tf-single-head">
@@ -656,7 +656,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
 				?>
                     <!-- Tourfic upcomming tours tours -->
                     <div class="upcomming-tours">
-                        <div class="tf-template-container">
+                        <div class="tf-container">
                             <div class="tf-container-inner">
                                 <div class="section-title">
                                     <h2 class="tf-title"><?php echo ! empty( Helper::tfopt( 'rt-title' ) ) ? esc_html( Helper::tfopt( 'rt-title' )) : ''; ?></h2>
