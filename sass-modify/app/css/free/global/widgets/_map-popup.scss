@@ -335,6 +335,10 @@
 
             .single-tour-inner{
                 margin: 0;
+
+                .tf-reviews{
+                    display: none;
+                }
             }
 
             @media #{$max1024} {
@@ -358,7 +362,7 @@
 
         .tf-archive-hotel {
             border-radius: 4px;
-            background-color: $color-heading;
+            background-color: $color-light-bg;
             @include flexbox();
             @include transition();
 
@@ -777,16 +781,22 @@
         }
 
         .tf-featured-badge span {
-            right: -2px;
-            top: 26px;
-            width: 225px;
-            padding: 6px 0;
-            font: 600 12px / 1 'Lato', sans-serif;
-            font-size: 12px;
+            
         }
         .roomName_flex{
             display: none;
         }
+    }
+    .tf-archive-template__one .single-tour-wrap.tf-featured .single-tour-inner .tf-featured-badge span{
+        right: -2px;
+        top: 26px;
+        width: 225px;
+        padding: 6px 0;
+        font: 600 12px / 1 'Lato', sans-serif;
+        font-size: 12px;
+    }
+    .single-tour-wrap .single-tour-inner .tourfic-single-right .sr_rooms_table_block .room_details .featuredRooms .roomrow_flex .roomPrice.roomPrice_flex.sr_discount{
+        max-width: 100%;
     }
 
     /* Template - Design 1 */

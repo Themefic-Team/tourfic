@@ -3856,259 +3856,6 @@ div#tf-destinationautocomplete-list div:before {
   background-color: #F1F3F4;
 }
 
-.search-result-inner .tf-search-left .single-tour-wrap {
-  transition: all 0.3s ease-out;
-}
-
-@media only screen and (max-width: 768px) {
-  .search-result-inner .tf-search-left .single-tour-wrap {
-    margin-bottom: 0px;
-  }
-}
-
-.search-result-inner .tf-search-left .single-tour-wrap .single-tour-inner {
-  overflow: hidden;
-  width: 100%;
-  min-height: 149px;
-  padding: 20px;
-  margin: 16px 0;
-  border: 1px solid var(--tf-border);
-  border-radius: 4px;
-  box-sizing: border-box;
-  cursor: default;
-  clear: both;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  position: relative;
-}
-
-.search-result-inner .tf-search-left .single-tour-wrap .single-tour-inner .tourfic-single-left {
-  order: 1;
-  flex-grow: 0;
-  flex-shrink: 0;
-  flex-basis: main-size;
-  width: 210px;
-  min-height: 210px;
-  position: relative;
-}
-
-.search-result-inner .tf-search-left .single-tour-wrap .single-tour-inner .tourfic-single-left img {
-  height: 100%;
-  width: 100%;
-  -o-object-fit: cover;
-  object-fit: cover;
-  border-radius: 4px;
-}
-
-.search-result-inner .tf-search-left .single-tour-wrap .single-tour-inner .tourfic-single-left .default-tags-container {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  justify-content: space-evenly;
-  width: 100%;
-  font-size: 12px;
-  margin-top: 5px;
-}
-
-.search-result-inner .tf-search-left .single-tour-wrap .single-tour-inner .tourfic-single-left .default-tags-container .default-single-tag {
-  padding: 6px 12px;
-  display: block;
-  border-radius: 50px;
-  margin: 5px 4px;
-  font-weight: 500;
-  line-height: 1;
-  text-transform: capitalize;
-}
-
-.search-result-inner .tf-search-left .single-tour-wrap .single-tour-inner .tourfic-single-right {
-  order: 2;
-  flex-grow: 1;
-  flex-basis: 200px;
-  padding: 0 0 0 16px;
-}
-
-@media only screen and (max-width: 768px) {
-  .search-result-inner .tf-search-left .single-tour-wrap .single-tour-inner .tourfic-single-right .tf-archive-rating-wrapper {
-    margin-top: 20px;
-  }
-}
-
-.search-result-inner .tf-search-left .single-tour-wrap .single-tour-inner .tourfic-single-right .tf-archive-rating-wrapper .tf-archive-rating {
-  width: 40px;
-  height: 40px;
-  line-height: 1;
-  background: var(--tf-primary);
-  border-radius: 4px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  float: right;
-  margin-bottom: 3px;
-  font-size: 14px;
-  color: #ffffff;
-  font-weight: bold;
-}
-
-@media only screen and (max-width: 768px) {
-  .search-result-inner .tf-search-left .single-tour-wrap .single-tour-inner .tourfic-single-right .tf-archive-rating-wrapper .tf-archive-rating {
-    float: none;
-  }
-}
-
-.search-result-inner .tf-search-left .single-tour-wrap .single-tour-inner .tourfic-single-right .tf-archive-rating-wrapper h6 {
-  color: var(--tf-heading);
-  font-weight: 400;
-  text-transform: capitalize;
-  font-size: 14px;
-  text-align: right;
-}
-
-@media only screen and (max-width: 768px) {
-  .search-result-inner .tf-search-left .single-tour-wrap .single-tour-inner .tourfic-single-right .tf-archive-rating-wrapper h6 {
-    text-align: left;
-  }
-}
-
-.search-result-inner .tf-search-left .single-tour-wrap .single-tour-inner .tourfic-single-right .tf-tour-desc {
-  line-height: 1.8;
-  margin: 5px 0 10px;
-  font-size: 14px;
-  opacity: 0.85;
-  border-top: 1px solid gray;
-  padding-top: 8px;
-}
-
-.search-result-inner .tf-search-left .single-tour-wrap .single-tour-inner .tourfic-single-right .availability-btn-area.tour-search {
-  font-size: 14px;
-  line-height: 1;
-  text-align: right;
-}
-
-.search-result-inner .tf-search-left .single-tour-wrap .single-tour-inner .tourfic-single-right .tf-room-price {
-  margin-top: 10px;
-}
-
-.search-result-inner .tf-search-left .single-tour-wrap .single-tour-inner .tourfic-single-right .tf-room-price .amount {
-  font-weight: bold;
-  margin-left: 5px;
-}
-
-.search-result-inner .tf-search-left .single-tour-wrap .single-tour-inner .tourfic-single-right .tf-tour-price .amount {
-  font-weight: bold;
-  margin-left: 5px;
-}
-
-.search-result-inner .tf-search-left .single-tour-wrap .single-tour-inner .tourfic-single-right .tf_property_block_main_row {
-  min-height: 50px;
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: space-between;
-  font-size: 12px;
-  line-height: 18px;
-  font-weight: 400;
-}
-
-@media only screen and (max-width: 768px) {
-  .search-result-inner .tf-search-left .single-tour-wrap .single-tour-inner .tourfic-single-right .tf_property_block_main_row {
-    display: block;
-  }
-}
-
-.search-result-inner .tf-search-left .single-tour-wrap .single-tour-inner .tourfic-single-right .tf_property_block_main_row .tf_item_main_block {
-  order: 2;
-  flex-grow: 1;
-}
-
-.search-result-inner .tf-search-left .single-tour-wrap .single-tour-inner .tourfic-single-right .tf_property_block_main_row .tf_item_main_block .tf-hotel__title-wrap {
-  margin-bottom: 4px;
-}
-
-.search-result-inner .tf-search-left .single-tour-wrap .single-tour-inner .tourfic-single-right .tf_property_block_main_row .tf_item_main_block .tf-hotel__title-wrap .tourfic_hotel-title {
-  display: inline-block;
-  margin: 0;
-  padding-right: 2px;
-}
-
-.search-result-inner .tf-search-left .single-tour-wrap .single-tour-inner .tourfic-single-right .tf_property_block_main_row .tf_item_main_block .tf-hotel__title-wrap .tourfic_hotel-title:hover {
-  color: var(--tf-secondary);
-}
-
-.search-result-inner .tf-search-left .single-tour-wrap .single-tour-inner .tourfic-single-right .sr_rooms_table_block {
-  margin-top: 8px;
-}
-
-.search-result-inner .tf-search-left .single-tour-wrap .single-tour-inner .tourfic-single-right .sr_rooms_table_block .room_details {
-  border-top: 1px solid #808080;
-  padding-top: 8px;
-}
-
-.search-result-inner .tf-search-left .single-tour-wrap .single-tour-inner .tourfic-single-right .sr_rooms_table_block .room_details .featuredRooms {
-  margin: 0;
-  clear: both;
-  width: 100%;
-  line-height: 1;
-}
-
-.search-result-inner .tf-search-left .single-tour-wrap .single-tour-inner .tourfic-single-right .sr_rooms_table_block .room_details .featuredRooms .tf-archive-shortdesc {
-  line-height: 1.8;
-  margin: 5px 0 10px;
-  font-size: 14px;
-  opacity: 0.85;
-}
-
-.search-result-inner .tf-search-left .single-tour-wrap .single-tour-inner .tourfic-single-right .sr_rooms_table_block .room_details .featuredRooms .roomrow_flex {
-  display: flex;
-  justify-content: space-between;
-  align-items: end;
-  font-size: 14px;
-  align-items: center;
-}
-
-.search-result-inner .tf-search-left .single-tour-wrap .single-tour-inner .tourfic-single-right .sr_rooms_table_block .room_details .featuredRooms .roomrow_flex .roomName_flex {
-  flex-grow: 1;
-  width: auto;
-  max-width: 50%;
-}
-
-.search-result-inner .tf-search-left .single-tour-wrap .single-tour-inner .tourfic-single-right .sr_rooms_table_block .room_details .featuredRooms .roomrow_flex .roomName_flex .tf-archive-desc {
-  margin: 0;
-  padding: 0;
-}
-
-.search-result-inner .tf-search-left .single-tour-wrap .single-tour-inner .tourfic-single-right .sr_rooms_table_block .room_details .featuredRooms .roomrow_flex .roomName_flex .tf-archive-desc li {
-  display: inline-block;
-  margin-right: 7px;
-}
-
-.search-result-inner .tf-search-left .single-tour-wrap .single-tour-inner .tourfic-single-right .sr_rooms_table_block .room_details .featuredRooms .roomrow_flex .roomName_flex .tf-archive-desc i {
-  color: #198754;
-  font-size: 15px;
-  margin-bottom: 10px;
-}
-
-.search-result-inner .tf-search-left .single-tour-wrap .single-tour-inner .tourfic-single-right .sr_rooms_table_block .room_details .featuredRooms .roomrow_flex .roomPrice.roomPrice_flex.sr_discount {
-  text-align: right;
-  max-width: 50%;
-}
-
-.search-result-inner .tf-search-left .single-tour-wrap.tf-featured .single-tour-inner {
-  background: #F1F3F4;
-  border-color: var(--tf-border);
-  box-shadow: 0px 2px 4px rgba(179, 180, 202, 0.48);
-}
-
-.search-result-inner .tf-search-left .single-tour-wrap:first-child .single-tour-inner {
-  margin-top: 0;
-}
-
-.search-result-inner .tf-search-left .single-tour-wrap * {
-  transition: all 0.3s ease-out;
-}
-
 @media only screen and (max-width: 1024px) {
   .search-result-inner .tf-search-left .archive_ajax_result .single-tour-wrap {
     width: 100%;
@@ -4253,6 +4000,259 @@ div#tf-destinationautocomplete-list div:before {
     grid-row: 1;
     margin-bottom: 24px;
   }
+}
+
+.single-tour-wrap {
+  transition: all 0.3s ease-out;
+}
+
+.single-tour-wrap * {
+  transition: all 0.3s ease-out;
+}
+
+@media only screen and (max-width: 768px) {
+  .single-tour-wrap {
+    margin-bottom: 0px;
+  }
+}
+
+.single-tour-wrap .single-tour-inner {
+  overflow: hidden;
+  width: 100%;
+  min-height: 149px;
+  padding: 20px;
+  margin: 16px 0;
+  border: 1px solid var(--tf-border);
+  border-radius: 4px;
+  box-sizing: border-box;
+  cursor: default;
+  clear: both;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  position: relative;
+}
+
+.single-tour-wrap .single-tour-inner .tourfic-single-left {
+  order: 1;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: main-size;
+  width: 210px;
+  min-height: 210px;
+  position: relative;
+}
+
+.single-tour-wrap .single-tour-inner .tourfic-single-left img {
+  height: 100%;
+  width: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.single-tour-wrap .single-tour-inner .tourfic-single-left .default-tags-container {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-evenly;
+  width: 100%;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.single-tour-wrap .single-tour-inner .tourfic-single-left .default-tags-container .default-single-tag {
+  padding: 6px 12px;
+  display: block;
+  border-radius: 50px;
+  margin: 5px 4px;
+  font-weight: 500;
+  line-height: 1;
+  text-transform: capitalize;
+}
+
+.single-tour-wrap .single-tour-inner .tourfic-single-right {
+  order: 2;
+  flex-grow: 1;
+  flex-basis: 200px;
+  padding: 0 0 0 16px;
+}
+
+@media only screen and (max-width: 768px) {
+  .single-tour-wrap .single-tour-inner .tourfic-single-right .tf-archive-rating-wrapper {
+    margin-top: 20px;
+  }
+}
+
+.single-tour-wrap .single-tour-inner .tourfic-single-right .tf-archive-rating-wrapper .tf-archive-rating {
+  width: 40px;
+  height: 40px;
+  line-height: 1;
+  background: var(--tf-primary);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  float: right;
+  margin-bottom: 3px;
+  font-size: 14px;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+@media only screen and (max-width: 768px) {
+  .single-tour-wrap .single-tour-inner .tourfic-single-right .tf-archive-rating-wrapper .tf-archive-rating {
+    float: none;
+  }
+}
+
+.single-tour-wrap .single-tour-inner .tourfic-single-right .tf-archive-rating-wrapper h6 {
+  color: var(--tf-heading);
+  font-weight: 400;
+  text-transform: capitalize;
+  font-size: 14px;
+  text-align: right;
+}
+
+@media only screen and (max-width: 768px) {
+  .single-tour-wrap .single-tour-inner .tourfic-single-right .tf-archive-rating-wrapper h6 {
+    text-align: left;
+  }
+}
+
+.single-tour-wrap .single-tour-inner .tourfic-single-right .tf-tour-desc {
+  line-height: 1.8;
+  margin: 5px 0 10px;
+  font-size: 14px;
+  opacity: 0.85;
+  border-top: 1px solid gray;
+  padding-top: 8px;
+}
+
+.single-tour-wrap .single-tour-inner .tourfic-single-right .availability-btn-area.tour-search {
+  font-size: 14px;
+  line-height: 1;
+  text-align: right;
+}
+
+.single-tour-wrap .single-tour-inner .tourfic-single-right .tf-room-price {
+  margin-top: 10px;
+}
+
+.single-tour-wrap .single-tour-inner .tourfic-single-right .tf-room-price .amount {
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+.single-tour-wrap .single-tour-inner .tourfic-single-right .tf-tour-price .amount {
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+.single-tour-wrap .single-tour-inner .tourfic-single-right .tf_property_block_main_row {
+  min-height: 50px;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 400;
+}
+
+@media only screen and (max-width: 768px) {
+  .single-tour-wrap .single-tour-inner .tourfic-single-right .tf_property_block_main_row {
+    display: block;
+  }
+}
+
+.single-tour-wrap .single-tour-inner .tourfic-single-right .tf_property_block_main_row .tf_item_main_block {
+  order: 2;
+  flex-grow: 1;
+}
+
+.single-tour-wrap .single-tour-inner .tourfic-single-right .tf_property_block_main_row .tf_item_main_block .tf-hotel__title-wrap {
+  margin-bottom: 4px;
+}
+
+.single-tour-wrap .single-tour-inner .tourfic-single-right .tf_property_block_main_row .tf_item_main_block .tf-hotel__title-wrap .tourfic_hotel-title {
+  display: inline-block;
+  margin: 0;
+  padding-right: 2px;
+}
+
+.single-tour-wrap .single-tour-inner .tourfic-single-right .tf_property_block_main_row .tf_item_main_block .tf-hotel__title-wrap .tourfic_hotel-title:hover {
+  color: var(--tf-secondary);
+}
+
+.single-tour-wrap .single-tour-inner .tourfic-single-right .sr_rooms_table_block {
+  margin-top: 8px;
+}
+
+.single-tour-wrap .single-tour-inner .tourfic-single-right .sr_rooms_table_block .room_details {
+  border-top: 1px solid #808080;
+  padding-top: 8px;
+}
+
+.single-tour-wrap .single-tour-inner .tourfic-single-right .sr_rooms_table_block .room_details .featuredRooms {
+  margin: 0;
+  clear: both;
+  width: 100%;
+  line-height: 1;
+}
+
+.single-tour-wrap .single-tour-inner .tourfic-single-right .sr_rooms_table_block .room_details .featuredRooms .tf-archive-shortdesc {
+  line-height: 1.8;
+  margin: 5px 0 10px;
+  font-size: 14px;
+  opacity: 0.85;
+}
+
+.single-tour-wrap .single-tour-inner .tourfic-single-right .sr_rooms_table_block .room_details .featuredRooms .roomrow_flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  font-size: 14px;
+  align-items: center;
+}
+
+.single-tour-wrap .single-tour-inner .tourfic-single-right .sr_rooms_table_block .room_details .featuredRooms .roomrow_flex .roomName_flex {
+  flex-grow: 1;
+  width: auto;
+  max-width: 50%;
+}
+
+.single-tour-wrap .single-tour-inner .tourfic-single-right .sr_rooms_table_block .room_details .featuredRooms .roomrow_flex .roomName_flex .tf-archive-desc {
+  margin: 0;
+  padding: 0;
+}
+
+.single-tour-wrap .single-tour-inner .tourfic-single-right .sr_rooms_table_block .room_details .featuredRooms .roomrow_flex .roomName_flex .tf-archive-desc li {
+  display: inline-block;
+  margin-right: 7px;
+}
+
+.single-tour-wrap .single-tour-inner .tourfic-single-right .sr_rooms_table_block .room_details .featuredRooms .roomrow_flex .roomName_flex .tf-archive-desc i {
+  color: #198754;
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+.single-tour-wrap .single-tour-inner .tourfic-single-right .sr_rooms_table_block .room_details .featuredRooms .roomrow_flex .roomPrice.roomPrice_flex.sr_discount {
+  text-align: right;
+  max-width: 50%;
+}
+
+.single-tour-wrap.tf-featured .single-tour-inner {
+  background: #F1F3F4;
+  border-color: var(--tf-border);
+  box-shadow: 0px 2px 4px rgba(179, 180, 202, 0.48);
+}
+
+.single-tour-wrap:first-child .single-tour-inner {
+  margin-top: 0;
 }
 
 .tf_widget {
@@ -5850,6 +5850,10 @@ div#tf-destinationautocomplete-list div:before {
   margin: 0;
 }
 
+.fancybox-container .tf-archive-details .tf-archive-hotels .single-tour-inner .tf-reviews {
+  display: none;
+}
+
 @media only screen and (max-width: 1024px) {
   .fancybox-container .tf-archive-details .tf-archive-hotels {
     max-height: inherit;
@@ -5872,7 +5876,7 @@ div#tf-destinationautocomplete-list div:before {
 
 .fancybox-container .tf-archive-details .tf-archive-hotel {
   border-radius: 4px;
-  background-color: var(--tf-heading);
+  background-color: var(--tf-light-bg);
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -6356,7 +6360,11 @@ div#tf-destinationautocomplete-list div:before {
   margin-top: 0;
 }
 
-.fancybox-container .single-tour-wrap .tf-featured-badge span {
+.fancybox-container .single-tour-wrap .roomName_flex {
+  display: none;
+}
+
+.fancybox-container .tf-archive-template__one .single-tour-wrap.tf-featured .single-tour-inner .tf-featured-badge span {
   right: -2px;
   top: 26px;
   width: 225px;
@@ -6365,8 +6373,8 @@ div#tf-destinationautocomplete-list div:before {
   font-size: 12px;
 }
 
-.fancybox-container .single-tour-wrap .roomName_flex {
-  display: none;
+.fancybox-container .single-tour-wrap .single-tour-inner .tourfic-single-right .sr_rooms_table_block .room_details .featuredRooms .roomrow_flex .roomPrice.roomPrice_flex.sr_discount {
+  max-width: 100%;
 }
 
 .fancybox-container .tf-search-results-list .tf-item-card .tf-item-featured {

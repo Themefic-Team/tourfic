@@ -61,222 +61,7 @@
                 }
             }
         }
-        .single-tour-wrap{
-            @media #{$max768} {
-                margin-bottom: 0px;
-            }
-            .single-tour-inner {
-                overflow: hidden;
-                width: 100%;
-                min-height: 149px;
-                padding: 20px;
-                margin: 16px 0;
-                border: 1px solid $color-border;
-                border-radius: 4px;
-                box-sizing: border-box;
-                cursor: default;
-                clear: both;
-                display: flex;
-                flex-direction: row;
-                flex-wrap: wrap;
-                justify-content: space-between;
-                position: relative;
-                .tourfic-single-left {
-                    order: 1;
-                    flex-grow: 0;
-                    flex-shrink: 0;
-                    flex-basis: main-size;
-                    width: 210px;
-                    min-height: 210px;
-                    position: relative;
-                
-                    img {
-                        height: 100%;
-                        width: 100%;
-                        -o-object-fit: cover;
-                        object-fit: cover;
-                        border-radius: 4px;
-                    }
-                    .default-tags-container {
-                        position: absolute;
-                        display: flex;
-                        flex-direction: column;
-                        align-items: flex-end;
-                        justify-content: space-evenly;
-                        width: 100%;
-                        font-size: 12px;
-                        margin-top: 5px;
-                
-                        .default-single-tag {
-                            padding: 6px 12px;
-                            display: block;
-                            border-radius: 50px;
-                            margin: 5px 4px;
-                            font-weight: 500;
-                            line-height: 1;
-                            text-transform: capitalize;
-                        }
-                    }
-                }
-                .tourfic-single-right {
-                    order: 2;
-                    flex-grow: 1;
-                    flex-basis: 200px;
-                    padding: 0 0 0 16px;
-                    .tf-archive-rating-wrapper {
-                        @media #{$max768} {
-                            margin-top: 20px;
-                        }
-                        .tf-archive-rating {
-                            width: 40px;
-                            height: 40px;
-                            line-height: 1;
-                            background: $color-primary;
-                            border-radius: 4px;
-                            display: flex;
-                            flex-direction: row;
-                            justify-content: center;
-                            align-items: center;
-                            float: right;
-                            margin-bottom: 3px;
-                            font-size: 14px;
-                            color: $color-white;
-                            font-weight: bold;
-                            @media #{$max768} {
-                                float: none;
-                            }
-                        }
-                        h6 {
-                            color: $color-heading;
-                            font-weight: 400;
-                            text-transform: capitalize;
-                            font-size: 14px;
-                            text-align: right;
-                            @media #{$max768} {
-                                text-align: left;
-                            }
-                        }
-                    }
-                    .tf-tour-desc {
-                        line-height: 1.8;
-                        margin: 5px 0 10px;
-                        font-size: 14px;
-                        opacity: 0.85;
-                        border-top: 1px solid gray;
-                        padding-top: 8px;
-                    }
-                    .availability-btn-area.tour-search {
-                        font-size: 14px;
-                        line-height: 1;
-                        text-align: right;
-                    }
-                    .tf-room-price {
-                        margin-top: 10px;
-                        .amount {
-                            font-weight: bold;
-                            margin-left: 5px;
-                        }
-                    }
-                    .tf-tour-price {
-                        .amount {
-                            font-weight: bold;
-                            margin-left: 5px;
-                        }
-                    }
-                    .tf_property_block_main_row {
-                        min-height: 50px;
-                        display: flex;
-                        flex-direction: row-reverse;
-                        justify-content: space-between;
-                        font-size: 12px;
-                        line-height: 18px;
-                        font-weight: 400;
-                        @media #{$max768} {
-                            display: block;
-                        }
-                        .tf_item_main_block {
-                            order: 2;
-                            flex-grow: 1;
-                            .tf-hotel__title-wrap {
-                                margin-bottom: 4px;
-                                .tourfic_hotel-title {
-                                    display: inline-block;
-                                    margin: 0;
-                                    padding-right: 2px;
-                                    &:hover {
-                                        color: $color-secondary;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    .sr_rooms_table_block {
-                        margin-top: 8px;
-                        .room_details {
-                            border-top: 1px solid $color-gray;
-                            padding-top: 8px;
-                            .featuredRooms {
-                                margin: 0;
-                                clear: both;
-                                width: 100%;
-                                line-height: 1;
-                                .tf-archive-shortdesc {
-                                    line-height: 1.8;
-                                    margin: 5px 0 10px;
-                                    font-size: 14px;
-                                    opacity: 0.85;
-                                }
-                                .roomrow_flex {
-                                    display: flex;
-                                    justify-content: space-between;
-                                    align-items: end;
-                                    font-size: 14px;
-                                    align-items: center;
-                                    .roomName_flex {
-                                        flex-grow: 1;
-                                        width: auto;
-                                        max-width: 50%;
-                                        .tf-archive-desc {
-                                            li {
-                                                display: inline-block;
-                                                margin-right: 7px;
-                                            }
-                                            margin: 0;
-                                            padding: 0;
-                                            i {
-                                                color: $color-success;
-                                                font-size: 15px;
-                                                margin-bottom: 10px;
-                                            }
-                                        }
-                                    }
-                                    .roomPrice.roomPrice_flex.sr_discount {
-                                        text-align: right;
-                                        max-width: 50%;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            &.tf-featured{
-                .single-tour-inner {
-                    background: $color-gray-light;
-                    border-color: $color-border;
-                    box-shadow: 0px 2px 4px rgba(179, 180, 202, 0.48);
-                }
-            }
-            &:first-child {
-                .single-tour-inner {
-                    margin-top: 0;
-                }
-            }
-            transition: all 0.3s ease-out;
-            * {
-                transition: all 0.3s ease-out;
-            }
-        }
+        
         .archive_ajax_result {
             @media #{$max1024} {
                 .single-tour-wrap {
@@ -407,7 +192,222 @@
         }
     }
 }
-
+.single-tour-wrap{
+    transition: all 0.3s ease-out;
+    * {
+        transition: all 0.3s ease-out;
+    }
+    @media #{$max768} {
+        margin-bottom: 0px;
+    }
+    .single-tour-inner {
+        overflow: hidden;
+        width: 100%;
+        min-height: 149px;
+        padding: 20px;
+        margin: 16px 0;
+        border: 1px solid $color-border;
+        border-radius: 4px;
+        box-sizing: border-box;
+        cursor: default;
+        clear: both;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        position: relative;
+        .tourfic-single-left {
+            order: 1;
+            flex-grow: 0;
+            flex-shrink: 0;
+            flex-basis: main-size;
+            width: 210px;
+            min-height: 210px;
+            position: relative;
+        
+            img {
+                height: 100%;
+                width: 100%;
+                -o-object-fit: cover;
+                object-fit: cover;
+                border-radius: 4px;
+            }
+            .default-tags-container {
+                position: absolute;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                justify-content: space-evenly;
+                width: 100%;
+                font-size: 12px;
+                margin-top: 5px;
+        
+                .default-single-tag {
+                    padding: 6px 12px;
+                    display: block;
+                    border-radius: 50px;
+                    margin: 5px 4px;
+                    font-weight: 500;
+                    line-height: 1;
+                    text-transform: capitalize;
+                }
+            }
+        }
+        .tourfic-single-right {
+            order: 2;
+            flex-grow: 1;
+            flex-basis: 200px;
+            padding: 0 0 0 16px;
+            .tf-archive-rating-wrapper {
+                @media #{$max768} {
+                    margin-top: 20px;
+                }
+                .tf-archive-rating {
+                    width: 40px;
+                    height: 40px;
+                    line-height: 1;
+                    background: $color-primary;
+                    border-radius: 4px;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;
+                    float: right;
+                    margin-bottom: 3px;
+                    font-size: 14px;
+                    color: $color-white;
+                    font-weight: bold;
+                    @media #{$max768} {
+                        float: none;
+                    }
+                }
+                h6 {
+                    color: $color-heading;
+                    font-weight: 400;
+                    text-transform: capitalize;
+                    font-size: 14px;
+                    text-align: right;
+                    @media #{$max768} {
+                        text-align: left;
+                    }
+                }
+            }
+            .tf-tour-desc {
+                line-height: 1.8;
+                margin: 5px 0 10px;
+                font-size: 14px;
+                opacity: 0.85;
+                border-top: 1px solid gray;
+                padding-top: 8px;
+            }
+            .availability-btn-area.tour-search {
+                font-size: 14px;
+                line-height: 1;
+                text-align: right;
+            }
+            .tf-room-price {
+                margin-top: 10px;
+                .amount {
+                    font-weight: bold;
+                    margin-left: 5px;
+                }
+            }
+            .tf-tour-price {
+                .amount {
+                    font-weight: bold;
+                    margin-left: 5px;
+                }
+            }
+            .tf_property_block_main_row {
+                min-height: 50px;
+                display: flex;
+                flex-direction: row-reverse;
+                justify-content: space-between;
+                font-size: 12px;
+                line-height: 18px;
+                font-weight: 400;
+                @media #{$max768} {
+                    display: block;
+                }
+                .tf_item_main_block {
+                    order: 2;
+                    flex-grow: 1;
+                    .tf-hotel__title-wrap {
+                        margin-bottom: 4px;
+                        .tourfic_hotel-title {
+                            display: inline-block;
+                            margin: 0;
+                            padding-right: 2px;
+                            &:hover {
+                                color: $color-secondary;
+                            }
+                        }
+                    }
+                }
+            }
+            .sr_rooms_table_block {
+                margin-top: 8px;
+                .room_details {
+                    border-top: 1px solid $color-gray;
+                    padding-top: 8px;
+                    .featuredRooms {
+                        margin: 0;
+                        clear: both;
+                        width: 100%;
+                        line-height: 1;
+                        .tf-archive-shortdesc {
+                            line-height: 1.8;
+                            margin: 5px 0 10px;
+                            font-size: 14px;
+                            opacity: 0.85;
+                        }
+                        .roomrow_flex {
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: end;
+                            font-size: 14px;
+                            align-items: center;
+                            .roomName_flex {
+                                flex-grow: 1;
+                                width: auto;
+                                max-width: 50%;
+                                .tf-archive-desc {
+                                    li {
+                                        display: inline-block;
+                                        margin-right: 7px;
+                                    }
+                                    margin: 0;
+                                    padding: 0;
+                                    i {
+                                        color: $color-success;
+                                        font-size: 15px;
+                                        margin-bottom: 10px;
+                                    }
+                                }
+                            }
+                            .roomPrice.roomPrice_flex.sr_discount {
+                                text-align: right;
+                                max-width: 50%;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &.tf-featured{
+        .single-tour-inner {
+            background: $color-gray-light;
+            border-color: $color-border;
+            box-shadow: 0px 2px 4px rgba(179, 180, 202, 0.48);
+        }
+    }
+    &:first-child {
+        .single-tour-inner {
+            margin-top: 0;
+        }
+    }
+}
 .tf_widget {
     border: 1px solid $color-border;
     background: $color-white;
