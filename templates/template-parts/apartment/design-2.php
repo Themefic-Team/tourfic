@@ -325,7 +325,7 @@ use \Tourfic\Classes\Apartment\Pricing as Apt_Pricing;
                 ) );
                 ?>
                 <?php if( empty($tf_comment_counts) && $tf_comment_counts == 0 ) : ?>
-                    <button class="tf-review-open button">
+                    <button class="tf_btn tf_btn_full tf_btn_sharp tf_btn_large tf-review-open">
                         <?php esc_html_e("Leave your review", "tourfic"); ?>
                     </button>
                 <?php endif; ?>

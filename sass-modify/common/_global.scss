@@ -203,6 +203,7 @@ Modal
         max-width: 100%;
         position: relative;
         pointer-events: none;
+        margin: 40px 0;
     }
 
     .tf-modal-content {
@@ -212,7 +213,7 @@ Modal
         width: 100%;
         max-width: 1080px;
         pointer-events: auto;
-        background-color: $color-light-bg;
+        background-color: $color-white;
         outline: 0;
         margin: 0 auto;
         border-radius: 10px;
@@ -448,20 +449,6 @@ Tooltip
         .tf-top {
             visibility: visible;
             opacity: 1;
-        }
-    }
-}
-
-
-/* 
-reviews
-*/
-.reviews{
-    .tf-review-container{
-        .tf-btn{
-            .tf_btn{
-                width: 100%;
-            }
         }
     }
 }

@@ -652,7 +652,10 @@ h3.section-heading {
         }
     }
 }
-#tf-rating {
+#tf-rating-modal {
+    .tf-modal-content{
+        padding: 40px;
+    }
     .logged-in-as {
         text-align: center;
         margin-bottom: 25px;

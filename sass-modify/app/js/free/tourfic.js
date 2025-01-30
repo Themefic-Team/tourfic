@@ -2205,7 +2205,7 @@
             $(".tf-single-template__three .tf-booking-form-guest-and-room .tf_acrselection-wrap, .tf-archive-template__three .tf-booking-form-guest-and-room .tf_acrselection-wrap").addClass("tf-show");
         });
 
-        $(".tf-single-template__three .tf-review-open.button").on("click", function () {
+        $(".tf-single-template__three .tf-review-open").on("click", function () {
             $(".tf-single-template__three .tf-sitebar-widgets .tf-review-form-wrapper").toggleClass("tf-review-show");
         });
 

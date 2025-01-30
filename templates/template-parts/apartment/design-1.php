@@ -336,7 +336,7 @@ use \Tourfic\Classes\Apartment\Apartment;
                                     <!-- Modal -->
                                     <div class="tf-modal" id="tf-amenities-modal">
                                         <div class="tf-modal-dialog">
-                                            <div class="container tf-modal-content">
+                                            <div class="tf-modal-content">
                                                 <div class="tf-modal-header">
                                                     <a data-dismiss="modal" class="tf-modal-close">&#10005;</a>
                                                 </div>

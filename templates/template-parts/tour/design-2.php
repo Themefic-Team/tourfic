@@ -455,7 +455,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                         <!-- Responsive booking Modal -->
                         <div class="tf-modal" id="tf-tour-booking-modal">
                             <div class="tf-modal-dialog">
-                                <div class="container tf-modal-content">
+                                <div class="tf-modal-content">
                                     <div class="tf-modal-header">
                                         <a data-dismiss="modal" class="tf-modal-close">&#10005;</a>
                                     </div>

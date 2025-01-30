@@ -241,6 +241,7 @@ Modal
   max-width: 100%;
   position: relative;
   pointer-events: none;
+  margin: 40px 0;
 }
 
 .tf-modal .tf-modal-content {
@@ -256,7 +257,7 @@ Modal
   width: 100%;
   max-width: 1080px;
   pointer-events: auto;
-  background-color: var(--tf-light-bg);
+  background-color: #ffffff;
   outline: 0;
   margin: 0 auto;
   border-radius: 10px;
@@ -498,13 +499,6 @@ Tooltip
 .tf-tooltip:hover .tf-top {
   visibility: visible;
   opacity: 1;
-}
-
-/* 
-reviews
-*/
-.reviews .tf-review-container .tf-btn .tf_btn {
-  width: 100%;
 }
 
 body {
@@ -1552,7 +1546,11 @@ h3.section-heading {
   }
 }
 
-#tf-rating .logged-in-as {
+#tf-rating-modal .tf-modal-content {
+  padding: 40px;
+}
+
+#tf-rating-modal .logged-in-as {
   text-align: center;
   margin-bottom: 25px;
 }
@@ -12696,7 +12694,6 @@ div#tf-destinationautocomplete-list div:before {
   }
 }
 
-.tf-single-template__three button.tf-review-open.button,
 .tf-single-template__three .tf-reting-field button {
   color: var(--tf-text);
   font-size: 16px;
@@ -12710,7 +12707,6 @@ div#tf-destinationautocomplete-list div:before {
 }
 
 @media only screen and (max-width: 1024px) {
-  .tf-single-template__three button.tf-review-open.button,
   .tf-single-template__three .tf-reting-field button {
     font-size: 12px;
   }
