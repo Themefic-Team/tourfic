@@ -1426,11 +1426,13 @@ trait Action_Helper {
 								$min_sale_price = !empty($min_price_arr['min_sale_price']) ? $min_price_arr['min_sale_price'] : 0;
 								$min_regular_price = !empty($min_price_arr['min_regular_price']) ? $min_price_arr['min_regular_price'] : 0;
 
-								if ( $min_regular_price != 0 ) {
-									$price_html = wc_format_sale_price( $min_regular_price, $min_sale_price );
-								} else {
-									$price_html = wp_kses_post( wc_price( $min_sale_price ) ) . " ";
-								}
+								// if ( $min_regular_price != 0 ) {
+								// 	$price_html = wc_format_sale_price( $min_regular_price, $min_sale_price );
+								// } else {
+								// 	$price_html = wp_kses_post( wc_price( $min_sale_price ) ) . " ";
+								// }
+
+								$price_html = wp_kses_post(Apt_Pricing::instance(get_the_ID())->get_min_price_html());
 
 								if ( ! empty( $map ) ) {
 									$lat = $map['latitude'];
@@ -1725,11 +1727,7 @@ trait Action_Helper {
 								$min_sale_price = !empty($min_price_arr['min_sale_price']) ? $min_price_arr['min_sale_price'] : 0;
 								$min_regular_price = !empty($min_price_arr['min_regular_price']) ? $min_price_arr['min_regular_price'] : 0;
 
-								if ( $min_regular_price != 0 ) {
-									$price_html = wc_format_sale_price( $min_regular_price, $min_sale_price );
-								} else {
-									$price_html = wp_kses_post( wc_price( $min_sale_price ) ) . " ";
-								}
+								$price_html = wp_kses_post(Apt_Pricing::instance(get_the_ID())->get_min_price_html());
 
 								if ( ! empty( $map ) ) {
 									$lat = $map['latitude'];
@@ -1881,11 +1879,6 @@ trait Action_Helper {
 		die();
 	}
 
-	/**
-	 * TODO: Tour Template 1, 2, 3 and Search Result Check
-	 * TODO: Hotel Template 1, 2, 3 and Search Result Check
-	 * TODO: Hotel Sorting Without Date
-	 */
 	private function tf_get_sorting_data($ordering_type, $results, $post_type) {
         global $wpdb;
         $sort_results = [];
