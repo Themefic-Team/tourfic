@@ -152,7 +152,7 @@
             cursor: pointer;
             &::before {
               font-size: 14px;
-              line-height: 26px;
+              line-height: 1.85;
               margin-right: 8px;
             }
             &:hover {
@@ -208,7 +208,7 @@
         color: $color-white;
         font-size: 18px;
         font-weight: 700;
-        line-height: 26px;
+        line-height: 1.44;
         margin-left: 0;
         margin-top: 45px;
         @media #{$max768} {
@@ -340,7 +340,7 @@
       color: $color-white;
       position: relative;
       cursor: pointer;
-      line-height: 22px;
+      line-height: 1.375;
       @media #{$max320} {
         align-items: self-start;
       }
@@ -360,7 +360,7 @@
         appearance: none;
         font-size: 60px;
         font-weight: 500;
-        line-height: 70.2px;
+        line-height: 1.17;
         border: 0;
         background: transparent;
         color: $color-white;
@@ -373,7 +373,7 @@
         }
         @media only screen and (max-width: 1366px) {
           font-size: 50px;
-          line-height: 60.2px;
+          line-height: 1.20;
         }
         @media #{$max1024} {
           font-size: 35px;
@@ -503,7 +503,7 @@
           margin-left: 10px;
           span {
             font-size: 15px;
-            line-height: 20px;
+            line-height: 1.33;
           }
         }
       }
@@ -551,7 +551,7 @@
     &__label {
       font-size: 20px;
       font-weight: 400;
-      line-height: 22.98px;
+      line-height: 1.149;
       color: rgba(255, 255, 255, 0.55);
       margin-bottom: 28px;
       display: block;
@@ -606,7 +606,7 @@
       transition: all 0.3s ease;
       font-size: 16px;
       font-weight: 500;
-      line-height: 18.38px;
+      line-height: 1.14;
       @media #{$max768} {
         min-height: 45px;
         font-size: 15px;

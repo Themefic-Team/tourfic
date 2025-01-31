@@ -230,7 +230,7 @@
                     color: $color-heading;
                     font-weight: 500;
                     font-size: 36px;
-                    line-height: 40px;
+                    line-height: 1.2;
                     margin-bottom: 8px;
                 }
 
@@ -238,7 +238,7 @@
                     color: $color-text;
                     font-size: 16px;
                     font-weight: 400;
-                    line-height: 24px;
+                    line-height: 1.5;
                     letter-spacing: 0.2px;
                     @media #{$max1024} {
                         flex: 1;

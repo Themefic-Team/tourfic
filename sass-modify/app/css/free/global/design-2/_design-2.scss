@@ -558,13 +558,14 @@
                 background-color: $color-blue-light;
                 border-radius: 50%;
                 color: $color-primary;
+                margin: auto;
                 margin-bottom: 25px;
                 font-size: 30px;
                 height: 80px;
                 width: 80px;
-                text-align: center;
-                line-height: 80px;
-                display: inline-block;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
             p{
                 margin-top: 5px;

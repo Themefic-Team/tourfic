@@ -187,7 +187,7 @@
 
 .single-tf_hotel .tf-single-template__one .tf-room-section ul.tf-room-checkbox label {
   margin-left: 5px;
-  line-height: 19px;
+  line-height: 1.18;
 }
 
 .single-tf_hotel .tf-single-template__one .tf-room-section .hotel-room-wrap {
@@ -506,7 +506,7 @@
   border-radius: 5px;
   padding: 10px;
   margin: 5px 10px 5px 0px;
-  line-height: 1rem;
+  line-height: 1.33;
   font-size: 12px;
 }
 
@@ -1195,7 +1195,7 @@
   height: 80px;
   width: 80px;
   text-align: center;
-  line-height: 80px;
+  line-height: 4;
   color: #ffffff;
   background-color: var(--tf-primary);
   border-radius: 50%;

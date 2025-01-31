@@ -324,7 +324,7 @@
                 flex-direction: row-reverse;
                 justify-content: space-between;
                 font-size: 12px;
-                line-height: 18px;
+                line-height: 1.5;
                 font-weight: 400;
                 @media #{$max768} {
                     display: block;
@@ -473,7 +473,7 @@
         justify-content: space-between;
         span {
             font-size: 16px;
-            line-height: 24px;
+            line-height: 1.5;
             cursor: pointer;
             width: 100%;
         }

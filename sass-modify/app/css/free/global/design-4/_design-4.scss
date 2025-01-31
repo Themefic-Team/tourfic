@@ -71,7 +71,7 @@
                 .tf-search-field-label {
                     color: $color-heading;
                     font-size: 16px;
-                    line-height: 12px;
+                    line-height: 0.75;
                     cursor: pointer;
                 }
 
@@ -171,7 +171,7 @@
                 display: block;
                 transition: .3s all ease;    
                 font-weight: 400;
-                line-height: 28px;
+                line-height: 1.75;
                 letter-spacing: 0.15px;
                 border-radius: 4px;
 
@@ -378,7 +378,7 @@
                             color: $color-heading;
                             font-size: 12px;
                             font-weight: 700;
-                            line-height: 14px;
+                            line-height: 1.17;
                             padding: 8px 16px;
                             border-radius: 32px;
                             background-color: $color-white;
@@ -394,7 +394,7 @@
                         h4 {
                             font-size: 16px;
                             font-weight: 500;
-                            line-height: 20px;
+                            line-height: 1.25;
                             margin: 0;
                             text-transform: capitalize;
 
@@ -430,7 +430,7 @@
                             }
 
                             .tf-avarage-review {
-                                line-height: 20px;
+                                line-height: 1.25;
                                 color: $color-heading;
                                 font-weight: 400;
 
@@ -450,7 +450,7 @@
                         color: $color-text;
                         padding: 8px 12px;
                         font-size: 14px;
-                        line-height: 14px;
+                        line-height: 1;
                         font-weight: 700;
                         @include transition();
                         box-shadow: 0px 4px 30px 0px rgba(255, 237, 225, 0.40);
@@ -515,7 +515,7 @@
                     li.tf-archive-view-item {
                         width: 32px;
                         height: 32px;
-                        line-height: 36px;
+                        line-height: 2.25;
                         border-radius: 8px;
                         background-color: $color-white;
                         text-align: center;
@@ -542,7 +542,7 @@
                         font-size: 14px;
                         font-weight: 500;
                         height: 32px;
-                        line-height: 32px;
+                        line-height: 2.28;
                         border-radius: 4px;
                         background-color: $color-white;
                         text-align: center;
@@ -631,7 +631,7 @@
                         color: $color-white;
                         font-size: 12px;
                         font-weight: 700;
-                        line-height: 14px;
+                        line-height: 1.2;
                         padding: 8px 16px;
                         border-radius: 32px;
                         background-color: $color-primary;
@@ -664,7 +664,7 @@
                             gap: 8px;
                             color: $color-text;
                             font-size: 16px;
-                            line-height: 20px;
+                            line-height: 1.25;
                             
                             @media #{$max575} {
                                 font-size: 12px;
@@ -674,7 +674,7 @@
                         .tf-section-title {
                             font-size: 16px;
                             font-weight: 500;
-                            line-height: 20px;
+                            line-height: 1.25;
                             margin-bottom: 0;
                             text-transform: capitalize;
 
@@ -709,14 +709,14 @@
 
                             li {
                                 color: $color-text;
-                                line-height: 20px;
+                                line-height: 1.25;
                                 @include flexbox();
                                 @include align-items(center);
                                 gap: 8px;
 
                                 @media #{$max575} {
                                     font-size: 12px;
-                                    line-height: 14px;
+                                    line-height: 1.16;
                                 }
                             }
                         }
@@ -742,7 +742,7 @@
                             }
 
                             .tf-avarage-review {
-                                line-height: 20px;
+                                line-height: 1.25;
                                 color: $color-text;
 
                                 .tf-no-review-count{
@@ -887,7 +887,7 @@
                     font-size: 16px;
                     font-weight: 500;
                     color: $color-heading;
-                    line-height: 24px;
+                    line-height: 1.5;
                 }
 
                 button {
@@ -897,7 +897,7 @@
                     color: $color-primary;
                     font-size: 16px;
                     font-weight: 700;
-                    line-height: 28px;
+                    line-height: 1.75;
                     background-color: transparent;
                     letter-spacing: 0.15px;
                     cursor: pointer;
@@ -1004,7 +1004,7 @@
                         color: $color-heading;
                         font-size: 16px;
                         font-weight: 500;
-                        line-height: 24px;
+                        line-height: 1.5;
                         letter-spacing: 0.15px;
                         margin-bottom: 16px;
 
@@ -1111,7 +1111,7 @@
                     text-decoration: none;
                     padding: 12px 12px;
                     min-width: 40px;
-                    line-height: 16px;
+                    line-height: 1.14;
                     border-radius: 5px;
                     text-align: center;
                     background: transparent;
@@ -1133,7 +1133,7 @@
                 text-decoration: none;
                 padding: 12px 12px;
                 min-width: 40px;
-                line-height: 16px;
+                line-height: 1.14;
                 border-radius: 5px;
                 text-align: center;
                 background: transparent;
