@@ -4355,7 +4355,7 @@ div#tf-destinationautocomplete-list div:before {
   gap: 10px 30px;
   list-style: none;
   flex-wrap: wrap;
-  margin-bottom: 16px;
+  margin: 0 0 16px 0;
   /* Style the tf-checkmark/indicator */
 }
 
@@ -9021,6 +9021,7 @@ div#tf-destinationautocomplete-list div:before {
   width: 80px;
   text-align: center;
   line-height: 80px;
+  display: inline-block;
 }
 
 .tf-single-template__two .tf-ask-enquiry p {
