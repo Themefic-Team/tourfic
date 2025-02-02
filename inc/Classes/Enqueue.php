@@ -1210,6 +1210,7 @@ class Enqueue {
 			$tf_design_box_shadow = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-custom-box-shadow' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-custom-box-shadow' ) )['gcolor'] : '';
 			$tf_design_border_color = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-custom-border-color' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-custom-border-color' ) )['gcolor'] : '';
 		}
+		$base_font_size = apply_filters('tf_base_font_size', '14px');
 		$output = "
 			:root {
 				--tf-primary: {$tf_design_primary};
@@ -1221,6 +1222,7 @@ class Enqueue {
 				--tf-border: {$tf_design_border_color};
 				--tf-form-input-bg: {$tf_design_form_input_bg};
 				--tf-box-shadow: {$tf_design_box_shadow};
+				--tf-base-font-size: " . esc_html($base_font_size) . ";
 			}
 		";
 

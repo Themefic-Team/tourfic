@@ -25,7 +25,7 @@
                     border-radius: 4px;
                     width: auto;
                     i{
-                        font-size: 28px;
+                        font-size: calc(var(--tf-base-font-size) + 14px);
                     }
                 }
                 .swiper-button-prev {

@@ -43,7 +43,7 @@
                         gap: 8px;
             
                         h4 {
-                            font-size: 16px;
+                            font-size: calc(var(--tf-base-font-size) + 2px);
                             color: $color-heading;
                             font-weight: 500;
                             line-height: 1.5;
@@ -125,7 +125,7 @@
             padding: 12px 16px;
             background-color: $color-white;
             color: $color-gray-light;
-            font-size: 16px;
+            font-size: calc(var(--tf-base-font-size) + 2px);
             font-weight: 400;
             transition: all 0.3s ease-in-out;
 

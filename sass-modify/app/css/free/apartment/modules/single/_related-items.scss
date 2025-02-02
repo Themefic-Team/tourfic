@@ -83,13 +83,13 @@
                         }
             
                         h3 {
-                            font-size: 18px;
+                            font-size: calc(var(--tf-base-font-size) + 4px);
                             color: $color-heading;
                             margin: 0;
                         }
             
                         span {
-                            font-size: 14px;
+                            font-size: var(--tf-base-font-size);
                             color: $color-gray;
                             margin: 0;
                         }

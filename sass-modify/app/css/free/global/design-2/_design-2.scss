@@ -60,7 +60,7 @@
                 }
                 .tf-share{
                     a{
-                        font-size: 16px;
+                        font-size: calc(var(--tf-base-font-size) + 2px);
                         text-decoration: none;
                     }
                 }
@@ -81,7 +81,7 @@
                         text-align: center;
                         box-shadow: 0px 13px 30px 0px $color-box-shadow;
                         h4{
-                            font-size: 14px;
+                            font-size: var(--tf-base-font-size);
                             color: $color-primary;
                             font-weight: 600;
                             margin-bottom: 10px;
@@ -97,7 +97,7 @@
                                     display: inline-block;
                                     padding: 10px 9px;
                                     i{
-                                        font-size: 22px;
+                                        font-size: calc(var(--tf-base-font-size) + 8px);
                                     }
                                     &:hover{
                                         background: transparent;
@@ -107,7 +107,7 @@
                                     padding: 10px 8px;
                                     background-color: transparent;
                                     border: 0px solid;
-                                    font-size: 22px !important;
+                                    font-size: calc(var(--tf-base-font-size) + 8px);
                                     cursor: pointer;
                                     span{
                                         color: $color-primary;
@@ -128,7 +128,7 @@
             }
             h1{
                 color: $color-heading;
-                font-size: 38px;
+                font-size: calc(var(--tf-base-font-size) + 24px);
                 margin-bottom: 6px;
             }
             i{
@@ -214,7 +214,7 @@
                     .tf-single-rating{
                         background-color: $color-primary;
                         padding: 9px 8px;
-                        font-size: 16px;
+                        font-size: calc(var(--tf-base-font-size) + 2px);
                         text-decoration: none;
                         span{
                             font-weight: 600;
@@ -268,10 +268,10 @@
                         width: 100%;
                         z-index: 1;
                         background: $color-heading;
-                        font-size: var(--tf-base-font-size + 2px);
+                        font-size: calc(var(--tf-base-font-size) + 2px);
                         @media #{$max768}{
                             text-align: center;
-                            font-size: var(--tf-base-font-size - 4px);
+                            font-size: calc(var(--tf-base-font-size) - 2px);
                         }
                     }
                 }
@@ -318,7 +318,7 @@
                 .tf-review-data-average p {
                     background: $color-gray-light;
                     text-align: center;
-                    font-size: 30px;
+                    font-size: calc(var(--tf-base-font-size) + 16px);
                     color: $color-primary;
                     font-weight: 500;
                     @include bd-radius(5px);;
@@ -337,7 +337,7 @@
                 }
                 .tf-review-all-info {
                     li {
-                        font-size: 14px;
+                        font-size: var(--tf-base-font-size);
                         color: $color-primary;
                     }
                 }
@@ -411,7 +411,7 @@
                             color: $color-primary;
                         }
                         h3{
-                            font-size: 20px;
+                            font-size: calc(var(--tf-base-font-size) + 6px);
                         }
                     }
                     .tf-review-date{
@@ -443,7 +443,7 @@
 
                     .tf-review-author-name{
                         h3{
-                            font-size: 1.17rem;
+                            font-size: calc(var(--tf-base-font-size) + 5px);
                         }
                     }
                     .tf-review-message{
@@ -475,7 +475,7 @@
                         .tf-form-single-rating{
                             display: initial;
                             > label{
-                                font-size: 16px;
+                                font-size: calc(var(--tf-base-font-size) + 2px);
                                 font-weight: 400;
                                 line-height: 1.6;
                                 color: $color-text;
@@ -487,7 +487,7 @@
                                 label{
                                     &:before{
                                     color: $color-warning;
-                                    font-size: 15px;
+                                    font-size: calc(var(--tf-base-font-size) + 1px);
                                     }
                                 }
                             }
@@ -501,7 +501,7 @@
                             width: 100%;
                             background-color: $color-gray-light;
                             border-radius: 5px;
-                            font-size: 14px;
+                            font-size: var(--tf-base-font-size);
                             color: $color-text;
                             &::placeholder{
                                 color: $color-heading;
@@ -517,7 +517,7 @@
                                 width: 100%;
                                 background-color: $color-gray-light;
                                 border-radius: 5px;
-                                font-size: 14px;
+                                font-size: var(--tf-base-font-size);
                                 color: $color-text;
                                 &::placeholder{
                                     color: $color-heading;
@@ -560,7 +560,7 @@
                 color: $color-primary;
                 margin: auto;
                 margin-bottom: 25px;
-                font-size: 30px;
+                font-size: calc(var(--tf-base-font-size) + 16px);
                 height: 80px;
                 width: 80px;
                 display: flex;
@@ -586,18 +586,18 @@
                 .active{
                     .tf-faq-single-inner{
                         background: $color-white;
-                        @include bd-radius(5px);;
+                        @include bd-radius(5px);
                         margin: 0px 0px 30px 0px;
                         box-shadow: 0px 0px 24px 5px $color-box-shadow;
                         .tf-faq-collaps{
                             .faq-icon{
-                            i.fa-plus{
-                                display: none;
-                            }
-                            i.fa-minus{
-                                color: $color-primary;
-                                display: block;
-                            }
+                                i.fa-plus{
+                                    display: none;
+                                }
+                                i.fa-minus{
+                                    color: $color-primary;
+                                    display: block;
+                                }
                             }
                         }
                     }
@@ -861,7 +861,7 @@
                     padding-bottom: 20px;
                 }
                 h4{
-                    font-size: 20px;
+                    font-size: calc(var(--tf-base-font-size) + 6px);
                     font-weight: 500;
                 }
                 .al-range-slider__track {
@@ -895,7 +895,7 @@
                     box-shadow: none;
                     padding: 3px 10px;
                     color: $color-white;
-                    font-size: 13px;
+                    font-size: calc(var(--tf-base-font-size) - 1px);
                     margin-bottom: 0px;
                 }
                 .al-range-slider__input.js-al-range-slider__input {
@@ -923,7 +923,7 @@
                         height: auto;
                         pointer-events: none;
                         h4{
-                            font-size: 20px;
+                            font-size: calc(var(--tf-base-font-size) + 6px);
                             font-weight: 500;
                         }
                         i{
@@ -944,7 +944,7 @@
                                     display: inline-block;
                                     padding-left: 32px;
                                     line-height: 1.3;
-                                    font-size: 16px;
+                                    font-size: calc(var(--tf-base-font-size) + 2px);
                                     font-weight: 400;
                                     input{
                                         display: none;
@@ -1087,7 +1087,7 @@
                             background: $color-white;
                             padding: 6px 12px;
                             border-radius: 50px;
-                            font-size: 12px;
+                            font-size: calc(var(--tf-base-font-size) - 2px);
                             color: $color-heading;
                             line-height: 1;
                             margin-right: 10px;
@@ -1096,7 +1096,7 @@
                             background: $color-primary;
                             padding: 6px 12px;
                             border-radius: 50px;
-                            font-size: 12px;
+                            font-size: calc(var(--tf-base-font-size) - 2px);
                             color: $color-white;
                             line-height: 1;
                             margin-right: 5px;
@@ -1117,7 +1117,7 @@
                         .tf-multiple-tag-item {
                             padding: 6px 12px;
                             border-radius: 50px;
-                            font-size: 12px;
+                            font-size: calc(var(--tf-base-font-size) - 2px);
                             line-height: 1;
                             margin-top: 5px;
                         }
@@ -1138,7 +1138,7 @@
                         color: $color-primary;
                     }
                     p{
-                        font-size: 12px;
+                        font-size: calc(var(--tf-base-font-size) - 2px);
                         margin-bottom: 0;
                     }
                     .tf-title-meta{
@@ -1146,7 +1146,7 @@
                     }
                     .tf-title {
                         h2 {
-                        font-size: 22px;
+                        font-size: calc(var(--tf-base-font-size) + 8px);
                         line-height: 1.3;
                         a{
                             color: $color-heading;
@@ -1169,7 +1169,7 @@
                                 padding: 6px 10px;
                                 border-radius: 5px;
                                 margin: 10px 10px 0px 0px;
-                                font-size: 12px;
+                                font-size: calc(var(--tf-base-font-size) - 2px);
                                 i{
                                     margin-right: 5px;
                                     color: $color-text;
@@ -1193,13 +1193,13 @@
                     .tf-post-footer {
                         .tf-pricing {
                             del{
-                                font-size: 16px;
+                                font-size: calc(var(--tf-base-font-size) + 2px);
                                 span {
-                                    font-size: 16px;
+                                    font-size: calc(var(--tf-base-font-size) + 2px);
                                 }
                             }
                             span {
-                                font-size: 20px;
+                                font-size: calc(var(--tf-base-font-size) + 6px);
                                 color: $color-primary;
                             }
                         }
@@ -1209,7 +1209,7 @@
                         gap: 8px;
                         align-items: center;
                         .tf-avarage-review{
-                            font-size: 12px;
+                            font-size: calc(var(--tf-base-font-size) - 2px);
                             line-height: 1rem;
                         }
                     }
@@ -1231,7 +1231,7 @@
                     margin-top: 40px;
                     width: 100%;
                     .page-numbers {
-                        font-size: 14px;
+                        font-size: var(--tf-base-font-size);
                         color: $color-primary;
                         text-decoration: none;
                         padding: 12px 18px;
@@ -1251,7 +1251,7 @@
                 margin-top: 40px;
                 width: 100%;
                 .page-numbers {
-                    font-size: 14px;
+                    font-size: var(--tf-base-font-size);
                     color: $color-primary;
                     text-decoration: none;
                     padding: 12px 18px;
@@ -1269,4 +1269,3 @@
         }
     }
 }
-// Archive Global End

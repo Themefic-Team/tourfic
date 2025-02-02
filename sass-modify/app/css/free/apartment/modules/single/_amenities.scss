@@ -15,7 +15,7 @@
                     }
 
                     h3 {
-                        font-size: 20px;
+                        font-size: calc(var(--tf-base-font-size) + 6px);
                         color: $color-heading;
                         margin-bottom: 16px;
                     }

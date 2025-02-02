@@ -46,11 +46,11 @@
                     .tf-review-details {
             
                         .tf-rating-stars {
-                            font-size: 14px;
+                            font-size: var(--tf-base-font-size);
                         }
             
                         .tf-apartment-show-more {
-                            font-size: 14px;
+                            font-size: var(--tf-base-font-size);
                             font-weight: 500;
                             line-height: 1.7;
                             letter-spacing: 0.5px;
@@ -67,7 +67,7 @@
                     p {
                         margin: 0 0 8px 0;
                         color: $color-text;
-                        font-size: 14px;
+                        font-size: var(--tf-base-font-size);
                     }
                 }
             }
@@ -82,7 +82,7 @@
                 .tf-apaartment-show-all {
                     color: $color-white;
                     text-align: center;
-                    font-size: 14px;
+                    font-size: var(--tf-base-font-size);
                     font-weight: 500;
                     line-height: 1.7;
                     letter-spacing: 0.5px;

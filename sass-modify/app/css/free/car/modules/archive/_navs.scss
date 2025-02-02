@@ -36,7 +36,7 @@
                     gap: 2px;
                     span{
                         color: $color-text;
-                        font-size: 16px;
+                        font-size: calc(var(--tf-base-font-size) + 2px);
                         font-weight: 400;
                     }
                 }

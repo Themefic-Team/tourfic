@@ -13,7 +13,7 @@
                         border-radius: 4px;
                         transform: matrix(1, 0, 0, -1, 0, 0);
                         color: $color-primary;
-                        font-size: 20px;
+                        font-size: calc(var(--tf-base-font-size) + 6px);
                         transition: 0.3s;
                         &:hover {
                             background: $color-primary;
@@ -41,13 +41,13 @@
                     }
                     display: flex;
                     justify-content: space-between;
-                    font-size: 18px;
+                    font-size: calc(var(--tf-base-font-size) + 4px);
                     margin-top: 30px;
                     @media #{$max1024}{
-                        font-size: 14px;
+                        font-size: var(--tf-base-font-size);
                     }
                     @media #{$max575}{
-                        font-size: 12px;
+                        font-size: calc(var(--tf-base-font-size) - 2px);
                     }
                 }
             }
@@ -88,10 +88,10 @@
                     bottom: 0px;
                     background: $color-white;
                     padding: 15px 22px;
-                    font-size: 12px;
+                    font-size: calc(var(--tf-base-font-size) - 2px);
                     span {
                         color: $color-primary;
-                        font-size: 20px;
+                        font-size: calc(var(--tf-base-font-size) + 6px);
                         font-weight: 500;
         
                     }
@@ -99,7 +99,7 @@
                 .tf-meta-title {
                     margin-top: $tf-space-8;
                     h2 {
-                        font-size: 22px;
+                        font-size: calc(var(--tf-base-font-size) + 8px);
                         line-height: 1.4;
                         a{
                             text-decoration: none;
