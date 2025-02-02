@@ -41,7 +41,7 @@
                     .tf-review-data-average p {
                         background: $color-gray-light;
                         text-align: center;
-                        font-size: 30px;
+                        font-size: calc(var(--tf-base-font-size) + 16px);
                         color: $color-primary;
                         font-weight: 600;
                         @include bd-radius(5px);;
@@ -59,7 +59,7 @@
                     }
                     .tf-review-all-info {
                         li {
-                            font-size: 14px;
+                            font-size: var(--tf-base-font-size);
                             color: $color-primary;
                         }
                     }

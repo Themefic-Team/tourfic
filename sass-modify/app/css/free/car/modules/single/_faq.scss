@@ -24,7 +24,7 @@
                         cursor: pointer;
                         span{
                             color: $color-text;
-                            font-size: 16px;
+                            font-size: calc(var(--tf-base-font-size) + 2px);
                             font-weight: 400;
                             gap: 8px;
                             flex-wrap: nowrap;
@@ -35,7 +35,7 @@
                     }
                     .tf-question-desc{
                         color: $color-text;
-                        font-size: 15px;
+                        font-size: calc(var(--tf-base-font-size) + 1px);
                         padding: 8px 16px;
                         display: none;
                     }

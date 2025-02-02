@@ -23,17 +23,17 @@
                             text-decoration: none;
                             border-radius: 8px;
                             color: $color-text;
-                            font-size: 16px;
+                            font-size: calc(var(--tf-base-font-size) + 2px);
                             font-weight: 400;
                             background: rgba(255,255,255,0.24);
                             backdrop-filter: blur(32px);
                             span{
                                 color: $color-text;
-                                font-size: 16px;
+                                font-size: calc(var(--tf-base-font-size) + 2px);
                                 font-weight: 400;
                                 i{
                                     color: $color-warning;
-                                    font-size: 18px;
+                                    font-size: calc(var(--tf-base-font-size) + 4px);
                                 }
                             }
                         }
@@ -61,7 +61,7 @@
                             justify-content: center;
                             color: $color-secondary;
                             cursor: pointer;
-                            font-size: 24px;
+                            font-size: calc(var(--tf-base-font-size) + 10px);
                             text-decoration: none;
                         }
                         
@@ -100,7 +100,7 @@
                                     left: auto;
                                     right: 0;
                                     h4{
-                                        font-size: 14px;
+                                        font-size: var(--tf-base-font-size);
                                         color: $color-primary;
                                         font-weight: 600;
                                         margin-bottom: 10px;
@@ -117,7 +117,7 @@
                                                 padding: 10px 9px;
                                                 margin: 0;
                                                 i{
-                                                    font-size: 22px;
+                                                    font-size: calc(var(--tf-base-font-size) + 8px);
                                                 }
                                                 color: $color-primary;
                                                 &:hover{
@@ -128,7 +128,7 @@
                                                 padding: 10px 8px;
                                                 background-color: transparent;
                                                 border: 0px solid;
-                                                font-size: 22px;
+                                                font-size: calc(var(--tf-base-font-size) + 8px);
                                                 cursor: pointer;
                                                 color: $color-primary;
                                                 box-shadow: none;

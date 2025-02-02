@@ -48,7 +48,7 @@
                 a {
                     display: inline-flex;
                     margin-left: 10px;
-                    font-size: 20px;
+                    font-size: calc(var(--tf-base-font-size) + 6px);
                     text-decoration: none;
                 }
             
@@ -239,7 +239,7 @@
                 align-items: flex-end;
                 justify-content: space-evenly;
                 width: 100%;
-                font-size: 12px;
+                font-size: calc(var(--tf-base-font-size) - 2px);
                 margin-top: 5px;
         
                 .default-single-tag {
@@ -274,7 +274,7 @@
                     align-items: center;
                     float: right;
                     margin-bottom: 3px;
-                    font-size: 14px;
+                    font-size: var(--tf-base-font-size);
                     color: $color-white;
                     font-weight: bold;
                     @media #{$max768} {
@@ -285,7 +285,7 @@
                     color: $color-heading;
                     font-weight: 400;
                     text-transform: capitalize;
-                    font-size: 14px;
+                    font-size: var(--tf-base-font-size);
                     text-align: right;
                     @media #{$max768} {
                         text-align: left;
@@ -295,13 +295,13 @@
             .tf-tour-desc {
                 line-height: 1.8;
                 margin: 5px 0 10px;
-                font-size: 14px;
+                font-size: var(--tf-base-font-size);
                 opacity: 0.85;
                 border-top: 1px solid gray;
                 padding-top: 8px;
             }
             .availability-btn-area.tour-search {
-                font-size: 14px;
+                font-size: var(--tf-base-font-size);
                 line-height: 1;
                 text-align: right;
             }
@@ -323,7 +323,7 @@
                 display: flex;
                 flex-direction: row-reverse;
                 justify-content: space-between;
-                font-size: 12px;
+                font-size: calc(var(--tf-base-font-size) - 2px);
                 line-height: 1.5;
                 font-weight: 400;
                 @media #{$max768} {
@@ -358,14 +358,14 @@
                         .tf-archive-shortdesc {
                             line-height: 1.8;
                             margin: 5px 0 10px;
-                            font-size: 14px;
+                            font-size: var(--tf-base-font-size);
                             opacity: 0.85;
                         }
                         .roomrow_flex {
                             display: flex;
                             justify-content: space-between;
                             align-items: end;
-                            font-size: 14px;
+                            font-size: var(--tf-base-font-size);
                             align-items: center;
                             .roomName_flex {
                                 flex-grow: 1;
@@ -380,7 +380,7 @@
                                     padding: 0;
                                     i {
                                         color: $color-success;
-                                        font-size: 15px;
+                                        font-size: calc(var(--tf-base-font-size) + 1px);
                                         margin-bottom: 10px;
                                     }
                                 }
@@ -422,7 +422,7 @@
         padding-right: 20px;
     }
     h4{
-        font-size: 20px;
+        font-size: calc(var(--tf-base-font-size) + 6px);
         font-weight: 500;
     }
     .al-range-slider__track {
@@ -456,7 +456,7 @@
         box-shadow: none;
         padding: 3px 10px;
         color: $color-white;
-        font-size: 13px;
+        font-size: calc(var(--tf-base-font-size) - 1px);
         margin-bottom: 0px;
     }
     .al-range-slider__input.js-al-range-slider__input {
@@ -472,7 +472,7 @@
         border-radius: 8px 8px 0px 0px;
         justify-content: space-between;
         span {
-            font-size: 16px;
+            font-size: calc(var(--tf-base-font-size) + 2px);
             line-height: 1.5;
             cursor: pointer;
             width: 100%;

@@ -20,7 +20,7 @@
                         text-transform: capitalize;
                         margin: 5px 16px 10px 0px;
                         box-shadow: 0px 0px 24px 5px $color-box-shadow;
-                        font-size: 15px;
+                        font-size: calc(var(--tf-base-font-size) + 1px);
                         font-weight: 300;
                         
                         .tf-tour-features-icon {

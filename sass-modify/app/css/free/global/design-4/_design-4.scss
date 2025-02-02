@@ -70,7 +70,7 @@
 
                 .tf-search-field-label {
                     color: $color-heading;
-                    font-size: 16px;
+                    font-size: calc(var(--tf-base-font-size) + 2px);
                     line-height: 0.75;
                     cursor: pointer;
                 }
@@ -81,13 +81,13 @@
                     border: none;
                     width: 90px;
                     color: $color-text;
-                    font-size: 12px;
+                    font-size: calc(var(--tf-base-font-size) - 2px);
                     height: 14px;
                     outline: none;
                 }
 
                 .tf-archive-guest-info {
-                    font-size: 12px;
+                    font-size: calc(var(--tf-base-font-size) - 2px);
                 }
             }
 
@@ -214,7 +214,7 @@
 
             .acr-label {
                 color: $color-heading;
-                font-size: 16px;
+                font-size: calc(var(--tf-base-font-size) + 2px);
                 font-weight: 400;
                 line-height: 1.75;
                 letter-spacing: 0.15px;
@@ -228,7 +228,7 @@
                 input[type=tel] {
                     width: 34px;
                     height: 48px;
-                    font-size: 16px;
+                    font-size: calc(var(--tf-base-font-size) + 2px);
                     font-weight: 600;
                     color: $color-heading;
                     text-align: center;
@@ -243,7 +243,7 @@
                 .acr-inc {
                     background: transparent;
                     border: none;
-                    font-size: 31px;
+                    font-size: calc(var(--tf-base-font-size) + 17px);
                     font-weight: 400;
                     color: $color-secondary;
                     padding: 0;
@@ -376,7 +376,7 @@
                             top: 16px;
                             left: 16px;
                             color: $color-heading;
-                            font-size: 12px;
+                            font-size: calc(var(--tf-base-font-size) - 2px);
                             font-weight: 700;
                             line-height: 1.17;
                             padding: 8px 16px;
@@ -392,7 +392,7 @@
                         gap: 16px;
 
                         h4 {
-                            font-size: 16px;
+                            font-size: calc(var(--tf-base-font-size) + 2px);
                             font-weight: 500;
                             line-height: 1.25;
                             margin: 0;
@@ -412,11 +412,11 @@
                             @include flexbox();
                             @include align-items(flex-end);
                             gap: 2px;
-                            font-size: 14px;
+                            font-size: var(--tf-base-font-size);
                             color: $color-text;
 
                             .woocommerce-Price-amount {
-                                font-size: 16px;
+                                font-size: calc(var(--tf-base-font-size) + 2px);
                                 font-weight: 500;
                                 color: $color-heading;
                             }
@@ -449,7 +449,7 @@
                         text-align: center;
                         color: $color-text;
                         padding: 8px 12px;
-                        font-size: 14px;
+                        font-size: var(--tf-base-font-size);
                         line-height: 1;
                         font-weight: 700;
                         @include transition();
@@ -499,7 +499,7 @@
 
                 .tf-total-results {
                     margin: 0;
-                    font-size: 16px;
+                    font-size: calc(var(--tf-base-font-size) + 2px);
                     font-weight: 500;
 
                     @media #{$max1024} {
@@ -539,7 +539,7 @@
                     li.tf-archive-filter-btn {
                         padding: 0 16px;
                         color: $color-text;
-                        font-size: 14px;
+                        font-size: var(--tf-base-font-size);
                         font-weight: 500;
                         height: 32px;
                         line-height: 2.28;
@@ -629,7 +629,7 @@
                         top: 16px;
                         left: 16px;
                         color: $color-white;
-                        font-size: 12px;
+                        font-size: calc(var(--tf-base-font-size) - 2px);
                         font-weight: 700;
                         line-height: 1.2;
                         padding: 8px 16px;
@@ -663,16 +663,16 @@
                             @include flexbox();
                             gap: 8px;
                             color: $color-text;
-                            font-size: 16px;
+                            font-size: calc(var(--tf-base-font-size) + 2px);
                             line-height: 1.25;
                             
                             @media #{$max575} {
-                                font-size: 12px;
+                                font-size: calc(var(--tf-base-font-size) - 2px);
                             }
                         }
 
                         .tf-section-title {
-                            font-size: 16px;
+                            font-size: calc(var(--tf-base-font-size) + 2px);
                             font-weight: 500;
                             line-height: 1.25;
                             margin-bottom: 0;
@@ -688,14 +688,14 @@
                             }
                             
                             .tf-edit-link{
-                                font-size: 14px;
+                                font-size: var(--tf-base-font-size);
                                 color: $color-primary;
                                 text-decoration: underline;
                                 margin-left: 6px;
                             }
 
                             @media #{$max575} {
-                                font-size: 14px;
+                                font-size: var(--tf-base-font-size);
                             }
                         }
 
@@ -715,7 +715,7 @@
                                 gap: 8px;
 
                                 @media #{$max575} {
-                                    font-size: 12px;
+                                    font-size: calc(var(--tf-base-font-size) - 2px);
                                     line-height: 1.16;
                                 }
                             }
@@ -728,7 +728,7 @@
 
                             @media #{$max575} {
                                 margin-top: 0;
-                                font-size: 14px;
+                                font-size: var(--tf-base-font-size);
                             }
 
                             .tf-review-items {
@@ -769,7 +769,7 @@
                             @include justify-content(flex-end);
                             @include align-items(flex-end);
                             gap: 2px;
-                            font-size: 14px;
+                            font-size: var(--tf-base-font-size);
                             color: $color-text;
 
                             @media #{$max575} {
@@ -777,7 +777,7 @@
                             }
 
                             .woocommerce-Price-amount {
-                                font-size: 16px;
+                                font-size: calc(var(--tf-base-font-size) + 2px);
                                 font-weight: 500;
                                 color: $color-heading;
                             }
@@ -884,7 +884,7 @@
                 .tf-section-title {
                     margin: 0;
                     padding: 0;
-                    font-size: 16px;
+                    font-size: calc(var(--tf-base-font-size) + 2px);
                     font-weight: 500;
                     color: $color-heading;
                     line-height: 1.5;
@@ -895,7 +895,7 @@
                     padding: 0;
                     border: none;
                     color: $color-primary;
-                    font-size: 16px;
+                    font-size: calc(var(--tf-base-font-size) + 2px);
                     font-weight: 700;
                     line-height: 1.75;
                     background-color: transparent;
@@ -903,7 +903,7 @@
                     cursor: pointer;
 
                     @media #{$max1024}{
-                        font-size: 12px;
+                        font-size: calc(var(--tf-base-font-size) - 2px);
                     }
                 }
             }
@@ -916,7 +916,7 @@
                 }
 
                 h4 {
-                    font-size: 20px;
+                    font-size: calc(var(--tf-base-font-size) + 6px);
                     font-weight: 500;
                 }
 
@@ -956,7 +956,7 @@
                     box-shadow: none;
                     padding: 3px 10px;
                     color: $color-white;
-                    font-size: 13px;
+                    font-size: calc(var(--tf-base-font-size) - 1px);
                     margin-bottom: 0px;
                 }
 
@@ -1002,7 +1002,7 @@
                         height: auto;
                         pointer-events: none;
                         color: $color-heading;
-                        font-size: 16px;
+                        font-size: calc(var(--tf-base-font-size) + 2px);
                         font-weight: 500;
                         line-height: 1.5;
                         letter-spacing: 0.15px;
@@ -1034,7 +1034,7 @@
                                     display: inline-block;
                                     padding-left: 24px;
                                     color: $color-text;
-                                    font-size: 14px;
+                                    font-size: var(--tf-base-font-size);
                                     font-weight: 500;
                                     line-height: 1.5;
                                     letter-spacing: 0.15px;
@@ -1106,7 +1106,7 @@
                 width: 100%;
 
                 .page-numbers {
-                    font-size: 14px;
+                    font-size: var(--tf-base-font-size);
                     color: $color-text;
                     text-decoration: none;
                     padding: 12px 12px;
@@ -1128,7 +1128,7 @@
             width: 100%;
 
             .page-numbers {
-                font-size: 14px;
+                font-size: var(--tf-base-font-size);
                 color: $color-text;
                 text-decoration: none;
                 padding: 12px 12px;

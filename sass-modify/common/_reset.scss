@@ -9,9 +9,6 @@ h1,h2,h3,h4,h5,h6{
 a{
     color: $color-primary;
 }
-:root {
-    --tf-base-font-size: 14px;
-}
 
 .tf-list {
     list-style: none;
@@ -44,7 +41,7 @@ a{
         width: 100%;
         background-color: $form-input-bg;
         border-radius: 5px;
-        font-size: 14px;
+        font-size: var(--tf-base-font-size);
         margin: 0px;
         color: $color-text;
         background-image: none;
@@ -57,7 +54,7 @@ a{
         }
     }
     input::placeholder {
-        font-size: 14px;
+        font-size: var(--tf-base-font-size);
         color: $color-text;
     }
 }
