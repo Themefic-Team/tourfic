@@ -2892,4 +2892,49 @@ var frame, gframe;
 
     });
 
+
+    //Color Palatte Change
+    jQuery(document).ready(function ($) {
+
+        const inputSelector = 'input[name="tf_settings[tf-d1][primary]"]';
+        const $colorField = $(inputSelector);
+        const $radioCustom = $('#tf_settings\\[color-palette-template\\]\\[custom\\]');
+        const $customColorField = $('input[name="tf_settings[tf-custom][primary]"]');
+        
+        if ($colorField.length) {
+            const originalValue = $colorField.val();
+            $colorField.wpColorPicker({
+                change: function (event, ui) {
+                    let selectedValue = $('input[name="tf_settings\\[color-palette-template\\]"]:checked').val();
+                    if('design-1'==selectedValue){
+                        const secondary = $('input[name="tf_settings[tf-d1][secondary]"]').val();
+                        const text = $('input[name="tf_settings[tf-d1][text]"]').val();
+                        const heading = $('input[name="tf_settings[tf-d1][heading]"]').val();
+                        const light_bg = $('input[name="tf_settings[tf-d1][light-bg]"]').val();
+                        const highlights_bg = $('input[name="tf_settings[tf-d1][highlights-bg]"]').val();
+                        const form_input_bg = $('input[name="tf_settings[tf-d1][form-input-bg]"]').val();
+                        const box_shadow = $('input[name="tf_settings[tf-d1][box-shadow]"]').val();
+                        const border_color = $('input[name="tf_settings[tf-d1][border-color]"]').val();
+                        $('input[name="tf_settings[tf-custom][secondary]"]').val(secondary).trigger('change');
+                        $('input[name="tf_settings[tf-custom][text]"]').val(text).trigger('change');
+                        $('input[name="tf_settings[tf-custom][heading]"]').val(heading).trigger('change');
+                        $('input[name="tf_settings[tf-custom][light-bg]"]').val(light_bg).trigger('change');
+                        $('input[name="tf_settings[tf-custom][highlights-bg]"]').val(highlights_bg).trigger('change');
+                        $('input[name="tf_settings[tf-custom][form-input-bg]"]').val(form_input_bg).trigger('change');
+                        $('input[name="tf_settings[tf-custom][box-shadow]"]').val(box_shadow).trigger('change');
+                        $('input[name="tf_settings[tf-custom][border-color]"]').val(border_color).trigger('change');
+                    }
+                    const newValue = ui.color.toString(); 
+                    if (newValue !== originalValue) {
+                        $radioCustom.prop("checked", true);
+                        $customColorField.val(newValue).trigger('change');
+                        $colorField.wpColorPicker('color', originalValue);
+                    }
+                }
+            });
+        }
+
+    });
+    
+    
 })(jQuery);
