@@ -175,8 +175,8 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
 							<?php
 							if ( ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour-layout'] ) ) {
 								foreach ( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour-layout'] as $section ) {
-									if ( ! empty( $section['tour-section-status'] ) && $section['tour-section-status'] == "1" && ! empty( $section['tour-section-slug'] ) ) {
-										include TF_TEMPLATE_PART_PATH . 'tour/design-2/' . $section['tour-section-slug'] . '.php';
+									if ( ! empty( $section['status'] ) && $section['status'] == "1" && ! empty( $section['slug'] ) ) {
+										include TF_TEMPLATE_PART_PATH . 'tour/design-2/' . $section['slug'] . '.php';
 									}
 								}
 							} else {

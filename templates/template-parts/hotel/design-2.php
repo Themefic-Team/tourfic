@@ -321,8 +321,8 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
                 <?php 
                 if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout']) ){
                     foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout'] as $section){
-                        if( !empty($section['hotel-section-status']) && $section['hotel-section-status']=="1" && !empty($section['hotel-section-slug']) ){
-                            include TF_TEMPLATE_PART_PATH . 'hotel/design-2/'.$section['hotel-section-slug'].'.php';
+                        if( !empty($section['status']) && $section['status']=="1" && !empty($section['slug']) ){
+                            include TF_TEMPLATE_PART_PATH . 'hotel/design-2/'.$section['slug'].'.php';
                         }
                     }
                 }else{

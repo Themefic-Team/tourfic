@@ -68,62 +68,71 @@ class Migrator {
 			//Hotel
 			if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout']) ){
 				foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout'] as $key => $section){
-					$single_hotel_layout[$key]['status'] = !empty($section['hotel-section-status']) ? $section['hotel-section-status'] : '0';
+					$single_hotel_layout[$key]['label'] = !empty($section['hotel-section']) ? $section['hotel-section'] : '';
 					$single_hotel_layout[$key]['slug'] = !empty($section['hotel-section-slug']) ? $section['hotel-section-slug'] : '';
+					$single_hotel_layout[$key]['status'] = !empty($section['hotel-section-status']) ? $section['hotel-section-status'] : '0';
 				}
 			}
 			if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout-part-1']) ){
 				foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout-part-1'] as $key => $section){
-					$single_hotel_layout1[$key]['status'] = !empty($section['hotel-section-status']) ? $section['hotel-section-status'] : '0';
+					$single_hotel_layout1[$key]['label'] = !empty($section['hotel-section']) ? $section['hotel-section'] : '';
 					$single_hotel_layout1[$key]['slug'] = !empty($section['hotel-section-slug']) ? $section['hotel-section-slug'] : '';
+					$single_hotel_layout1[$key]['status'] = !empty($section['hotel-section-status']) ? $section['hotel-section-status'] : '0';
 				}
 			}
 			if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout-part-2']) ){
 				foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout-part-2'] as $key => $section){
-					$single_hotel_layout2[$key]['status'] = !empty($section['hotel-section-status']) ? $section['hotel-section-status'] : '0';
+					$single_hotel_layout2[$key]['label'] = !empty($section['hotel-section']) ? $section['hotel-section'] : '';
 					$single_hotel_layout2[$key]['slug'] = !empty($section['hotel-section-slug']) ? $section['hotel-section-slug'] : '';
+					$single_hotel_layout2[$key]['status'] = !empty($section['hotel-section-status']) ? $section['hotel-section-status'] : '0';
 				}
 			}
 
 			//Tour
 			if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-tour-layout']) ){
 				foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-tour-layout'] as $key => $section){
-					$single_tour_layout[$key]['status'] = !empty($section['tour-section-status']) ? $section['tour-section-status'] : '0';
+					$single_tour_layout[$key]['label'] = !empty($section['tour-section']) ? $section['tour-section'] : '';
 					$single_tour_layout[$key]['slug'] = !empty($section['tour-section-slug']) ? $section['tour-section-slug'] : '';
+					$single_tour_layout[$key]['status'] = !empty($section['tour-section-status']) ? $section['tour-section-status'] : '0';
 				}
 			}
 			if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-tour-layout-part-1']) ){
 				foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-tour-layout-part-1'] as $key => $section){
-					$single_tour_layout1[$key]['status'] = !empty($section['tour-section-status']) ? $section['tour-section-status'] : '0';
+					$single_tour_layout1[$key]['label'] = !empty($section['tour-section']) ? $section['tour-section'] : '';
 					$single_tour_layout1[$key]['slug'] = !empty($section['tour-section-slug']) ? $section['tour-section-slug'] : '';
+					$single_tour_layout1[$key]['status'] = !empty($section['tour-section-status']) ? $section['tour-section-status'] : '0';
 				}
 			}
 			if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-tour-layout-part-2']) ){
 				foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-tour-layout-part-2'] as $key => $section){
-					$single_tour_layout2[$key]['status'] = !empty($section['tour-section-status']) ? $section['tour-section-status'] : '0';
+					$single_tour_layout2[$key]['label'] = !empty($section['tour-section']) ? $section['tour-section'] : '';
 					$single_tour_layout2[$key]['slug'] = !empty($section['tour-section-slug']) ? $section['tour-section-slug'] : '';
+					$single_tour_layout2[$key]['status'] = !empty($section['tour-section-status']) ? $section['tour-section-status'] : '0';
 				}
 			}
 
 			//Apartment
 			if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-aprtment-layout-part-1']) ){
 				foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-aprtment-layout-part-1'] as $key => $section){
-					$single_apartment_layout1[$key]['status'] = !empty($section['aprtment-section-status']) ? $section['aprtment-section-status'] : '0';
+					$single_apartment_layout1[$key]['label'] = !empty($section['aprtment-section']) ? $section['aprtment-section'] : '';
 					$single_apartment_layout1[$key]['slug'] = !empty($section['aprtment-section-slug']) ? $section['aprtment-section-slug'] : '';
+					$single_apartment_layout1[$key]['status'] = !empty($section['aprtment-section-status']) ? $section['aprtment-section-status'] : '0';
 				}
 			}
 			if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-aprtment-layout-part-2']) ){
 				foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-aprtment-layout-part-2'] as $key => $section){
-					$single_apartment_layout2[$key]['status'] = !empty($section['aprtment-section-status']) ? $section['aprtment-section-status'] : '0';
+					$single_apartment_layout2[$key]['label'] = !empty($section['aprtment-section']) ? $section['aprtment-section'] : '';
 					$single_apartment_layout2[$key]['slug'] = !empty($section['aprtment-section-slug']) ? $section['aprtment-section-slug'] : '';
+					$single_apartment_layout2[$key]['status'] = !empty($section['aprtment-section-status']) ? $section['aprtment-section-status'] : '0';
 				}
 			}
 
 			//Car
 			if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-car-layout']) ){
 				foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-car-layout'] as $key => $section){
-					$single_car_layout[$key]['status'] = !empty($section['car-section-status']) ? $section['car-section-status'] : '0';
+					$single_car_layout[$key]['label'] = !empty($section['car-section']) ? $section['car-section'] : '';
 					$single_car_layout[$key]['slug'] = !empty($section['car-section-slug']) ? $section['car-section-slug'] : '';
+					$single_car_layout[$key]['status'] = !empty($section['car-section-status']) ? $section['car-section-status'] : '0';
 				}
 			}
 

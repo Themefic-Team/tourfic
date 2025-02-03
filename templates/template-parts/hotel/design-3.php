@@ -182,8 +182,8 @@ use \Tourfic\App\TF_Review;
             <?php 
             if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout-part-1']) ){
                 foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout-part-1'] as $section){
-                    if( !empty($section['hotel-section-status']) && $section['hotel-section-status']=="1" && !empty($section['hotel-section-slug']) ){
-                        include TF_TEMPLATE_PART_PATH . 'hotel/design-3/'.$section['hotel-section-slug'].'.php';
+                    if( !empty($section['status']) && $section['status']=="1" && !empty($section['slug']) ){
+                        include TF_TEMPLATE_PART_PATH . 'hotel/design-3/'.$section['slug'].'.php';
                     }
                 }
             }else{
@@ -404,8 +404,8 @@ use \Tourfic\App\TF_Review;
     <?php 
     if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout-part-2']) ){
         foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout-part-2'] as $section){
-            if( !empty($section['hotel-section-status']) && $section['hotel-section-status']=="1" && !empty($section['hotel-section-slug']) ){
-                include TF_TEMPLATE_PART_PATH . 'hotel/design-3/'.$section['hotel-section-slug'].'.php';
+            if( !empty($section['status']) && $section['status']=="1" && !empty($section['slug']) ){
+                include TF_TEMPLATE_PART_PATH . 'hotel/design-3/'.$section['slug'].'.php';
             }
         }
     }else{
