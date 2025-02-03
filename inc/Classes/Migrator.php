@@ -11,6 +11,7 @@ class Migrator {
 
 	public function __construct() {
 		add_action( 'init', array( $this, 'tf_permalink_settings_migration' ) );
+		add_action( 'init', array( $this, 'tf_template_migrate_data' ) );
 		add_action( 'init', array( $this, 'tf_template_3_migrate_data' ) );
 		add_action( 'init', array( $this, 'tf_migrate_option_data' ) );
 		add_action( 'init', array( $this, 'tf_migrate_data' ) );
@@ -48,6 +49,42 @@ class Migrator {
 			wp_cache_flush();
 			flush_rewrite_rules( true );
 			update_option( 'tf_permalink_settings_migration', 1 );
+
+		}
+	}
+
+	/**
+	 * Template data migrate repeater to switch-group
+	 *
+	 * run once
+	 */
+	function tf_template_migrate_data() {
+		if ( empty( get_option( 'tf_template_migrate_data' ) ) || ( ! empty( get_option( 'tf_template_migrate_data' ) ) && get_option( 'tf_template_migrate_data' ) < 1 ) ) {
+			$settings = ! empty( get_option( 'tf_settings' ) ) ? get_option( 'tf_settings' ) : array();
+			$single_hotel_layout = $single_hotel_layout1 = $single_hotel_layout2 = [];
+			if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout']) ){
+				foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout'] as $key => $section){
+					$single_hotel_layout[$key]['status'] = !empty($section['hotel-section-status']) ? $section['hotel-section-status'] : 0;
+				}
+			}
+			if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout-part-1']) ){
+				foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout-part-1'] as $key => $section){
+					$single_hotel_layout1[$key]['status'] = !empty($section['hotel-section-status']) ? $section['hotel-section-status'] : 0;
+				}
+			}
+			if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout-part-2']) ){
+				foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout-part-2'] as $key => $section){
+					$single_hotel_layout2[$key]['status'] = !empty($section['hotel-section-status']) ? $section['hotel-section-status'] : 0;
+				}
+			}
+			$settings['tf-template']['single-hotel-layout'] = $single_hotel_layout;
+			$settings['tf-template']['single-hotel-layout-part-1'] = $single_hotel_layout1;
+			$settings['tf-template']['single-hotel-layout-part-2'] = $single_hotel_layout2;
+
+			update_option( 'tf_settings', $settings );
+			wp_cache_flush();
+			flush_rewrite_rules( true );
+			update_option( 'tf_template_migrate_data', 1 );
 
 		}
 	}
