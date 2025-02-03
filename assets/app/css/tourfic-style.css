@@ -5,7 +5,7 @@ Container
 .tf-container {
   margin: 0 auto;
   padding: 0 15px;
-  max-width: 1200px;
+  max-width: var(--tf-container-width);
 }
 
 .tf-container-fluid {

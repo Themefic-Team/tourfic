@@ -157,7 +157,6 @@ class Migrator {
 			wp_cache_flush();
 			flush_rewrite_rules( true );
 			update_option( 'tf_template_migrate_data', 1 );
-
 		}
 	}
 
