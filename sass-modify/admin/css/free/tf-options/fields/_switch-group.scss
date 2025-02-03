@@ -5,6 +5,34 @@
     grid-template-columns: 1fr 1fr 1fr;
     gap: 12px;
 
+    &.tf-switch-column-4{
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+
+      @media #{$max1024} {
+        grid-template-columns: 1fr 1fr;
+      }
+      @media #{$max768} {
+        grid-template-columns: 1fr;
+      }
+    }
+    &.tf-switch-column-2{
+      grid-template-columns: 1fr 1fr;
+
+      @media #{$max768} {
+        grid-template-columns: 1fr;
+      }
+    }
+    &.tf-switch-column-1{
+      grid-template-columns: 1fr;
+    }
+
+    @media #{$max1024} {
+      grid-template-columns: 1fr 1fr;
+    }
+    @media #{$max768} {
+      grid-template-columns: 1fr;
+    }
+
     .tf-switch-column{
       padding: 8px 16px;
       border: 1px solid $slate20;

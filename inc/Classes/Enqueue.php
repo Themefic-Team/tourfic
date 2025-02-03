@@ -1159,6 +1159,8 @@ class Enqueue {
 	public function tf_global_custom_css() {
 
 		$color_palette_template = ! empty( Helper::tfopt( 'color-palette-template' ) ) ? Helper::tfopt( 'color-palette-template' ) : 'design-2';
+		$tf_container = ! empty( Helper::tfopt( 'tf-container' ) ) ? Helper::tfopt( 'tf-container' ) : 'boxed';
+		$tf_container_width = ! empty( Helper::tfopt( 'tf-container-width' ) ) ? Helper::tfopt( 'tf-container-width' ) . 'px' : '1200px';
 
 		$design_default = [
 			'design-1' => [
@@ -1228,6 +1230,10 @@ class Enqueue {
 			}
 		}
 
+		//container
+		if($tf_container == 'full-width'){
+			$tf_container_width = '100%';
+		}
 		
 		$base_font_size = apply_filters('tf_base_font_size', '16px');
 		$output = "
@@ -1241,7 +1247,8 @@ class Enqueue {
 				--tf-border: {$tf_design_border_color};
 				--tf-form-input-bg: {$tf_design_form_input_bg};
 				--tf-box-shadow: {$tf_design_box_shadow};
-				--tf-base-font-size: " . esc_html($base_font_size) . ";
+				--tf-base-font-size: " . esc_attr($base_font_size) . ";
+				--tf-container-width: " . esc_attr($tf_container_width) . ";
 			}
 		";
 

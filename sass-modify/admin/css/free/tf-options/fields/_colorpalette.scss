@@ -6,8 +6,22 @@
     li {
         display: inline-block;
         border-radius: 5px;
-        width: calc(20% - 16px);
-
+        width: calc(20% - 13px);
+        @media only  screen and (max-width: 1366px){
+            width: calc(33.33% - 12px);
+        }
+        @media #{$max1024}{
+            width: calc(25% - 12px);
+        }
+        @media #{$max768}{
+            width: calc(33.33% - 11px);
+        }
+        @media #{$max575}{
+            width: calc(50% - 8px);
+        }
+        @media #{$max320}{
+            width: 100%;
+        }
         .tf-colors-checkbox{
             border-radius: 6px;
             border: 1px solid #ddd;

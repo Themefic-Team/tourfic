@@ -1863,9 +1863,9 @@
                         transition: .3s all ease;
                         margin-top: auto;
                         &:hover{
-                            background-color: $color-secondary;
+                            background-color: $color-primary;
                             color: $color-white;
-                            border-color: $color-secondary;
+                            border-color: $color-primary;
                         }
                         @media #{$max1024}{
                             font-size: 0.75rem;
