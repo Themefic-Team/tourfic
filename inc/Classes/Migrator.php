@@ -62,24 +62,87 @@ class Migrator {
 		if ( empty( get_option( 'tf_template_migrate_data' ) ) || ( ! empty( get_option( 'tf_template_migrate_data' ) ) && get_option( 'tf_template_migrate_data' ) < 1 ) ) {
 			$settings = ! empty( get_option( 'tf_settings' ) ) ? get_option( 'tf_settings' ) : array();
 			$single_hotel_layout = $single_hotel_layout1 = $single_hotel_layout2 = [];
+			$single_tour_layout = $single_tour_layout1 = $single_tour_layout2 = [];
+			$single_apartment_layout1 = $single_apartment_layout2 = [];
+			$single_car_layout = [];
+			//Hotel
 			if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout']) ){
 				foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout'] as $key => $section){
-					$single_hotel_layout[$key]['status'] = !empty($section['hotel-section-status']) ? $section['hotel-section-status'] : 0;
+					$single_hotel_layout[$key]['status'] = !empty($section['hotel-section-status']) ? $section['hotel-section-status'] : '0';
+					$single_hotel_layout[$key]['slug'] = !empty($section['hotel-section-slug']) ? $section['hotel-section-slug'] : '';
 				}
 			}
 			if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout-part-1']) ){
 				foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout-part-1'] as $key => $section){
-					$single_hotel_layout1[$key]['status'] = !empty($section['hotel-section-status']) ? $section['hotel-section-status'] : 0;
+					$single_hotel_layout1[$key]['status'] = !empty($section['hotel-section-status']) ? $section['hotel-section-status'] : '0';
+					$single_hotel_layout1[$key]['slug'] = !empty($section['hotel-section-slug']) ? $section['hotel-section-slug'] : '';
 				}
 			}
 			if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout-part-2']) ){
 				foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout-part-2'] as $key => $section){
-					$single_hotel_layout2[$key]['status'] = !empty($section['hotel-section-status']) ? $section['hotel-section-status'] : 0;
+					$single_hotel_layout2[$key]['status'] = !empty($section['hotel-section-status']) ? $section['hotel-section-status'] : '0';
+					$single_hotel_layout2[$key]['slug'] = !empty($section['hotel-section-slug']) ? $section['hotel-section-slug'] : '';
 				}
 			}
+
+			//Tour
+			if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-tour-layout']) ){
+				foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-tour-layout'] as $key => $section){
+					$single_tour_layout[$key]['status'] = !empty($section['tour-section-status']) ? $section['tour-section-status'] : '0';
+					$single_tour_layout[$key]['slug'] = !empty($section['tour-section-slug']) ? $section['tour-section-slug'] : '';
+				}
+			}
+			if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-tour-layout-part-1']) ){
+				foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-tour-layout-part-1'] as $key => $section){
+					$single_tour_layout1[$key]['status'] = !empty($section['tour-section-status']) ? $section['tour-section-status'] : '0';
+					$single_tour_layout1[$key]['slug'] = !empty($section['tour-section-slug']) ? $section['tour-section-slug'] : '';
+				}
+			}
+			if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-tour-layout-part-2']) ){
+				foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-tour-layout-part-2'] as $key => $section){
+					$single_tour_layout2[$key]['status'] = !empty($section['tour-section-status']) ? $section['tour-section-status'] : '0';
+					$single_tour_layout2[$key]['slug'] = !empty($section['tour-section-slug']) ? $section['tour-section-slug'] : '';
+				}
+			}
+
+			//Apartment
+			if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-aprtment-layout-part-1']) ){
+				foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-aprtment-layout-part-1'] as $key => $section){
+					$single_apartment_layout1[$key]['status'] = !empty($section['aprtment-section-status']) ? $section['aprtment-section-status'] : '0';
+					$single_apartment_layout1[$key]['slug'] = !empty($section['aprtment-section-slug']) ? $section['aprtment-section-slug'] : '';
+				}
+			}
+			if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-aprtment-layout-part-2']) ){
+				foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-aprtment-layout-part-2'] as $key => $section){
+					$single_apartment_layout2[$key]['status'] = !empty($section['aprtment-section-status']) ? $section['aprtment-section-status'] : '0';
+					$single_apartment_layout2[$key]['slug'] = !empty($section['aprtment-section-slug']) ? $section['aprtment-section-slug'] : '';
+				}
+			}
+
+			//Car
+			if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-car-layout']) ){
+				foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-car-layout'] as $key => $section){
+					$single_car_layout[$key]['status'] = !empty($section['car-section-status']) ? $section['car-section-status'] : '0';
+					$single_car_layout[$key]['slug'] = !empty($section['car-section-slug']) ? $section['car-section-slug'] : '';
+				}
+			}
+
+			//Hotel
 			$settings['tf-template']['single-hotel-layout'] = $single_hotel_layout;
 			$settings['tf-template']['single-hotel-layout-part-1'] = $single_hotel_layout1;
 			$settings['tf-template']['single-hotel-layout-part-2'] = $single_hotel_layout2;
+			
+			//Tour
+			$settings['tf-template']['single-tour-layout'] = $single_tour_layout;
+			$settings['tf-template']['single-tour-layout-part-1'] = $single_tour_layout1;
+			$settings['tf-template']['single-tour-layout-part-2'] = $single_tour_layout2;
+
+			//Apartment
+			$settings['tf-template']['single-aprtment-layout-part-1'] = $single_apartment_layout1;
+			$settings['tf-template']['single-aprtment-layout-part-2'] = $single_apartment_layout2;
+			
+			//Car
+			$settings['tf-template']['single-car-layout'] = $single_car_layout;
 
 			update_option( 'tf_settings', $settings );
 			wp_cache_flush();
