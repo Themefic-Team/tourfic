@@ -15,7 +15,7 @@ Button
   font-weight: 500;
   text-decoration: none;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 1rem;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
@@ -24,7 +24,7 @@ Button
 
 .tf-admin-btn i {
   margin-right: 8px;
-  font-size: 18px;
+  font-size: 1.125rem;
 }
 
 .tf-admin-btn:hover {
@@ -92,13 +92,13 @@ Button
   font-weight: 500;
   text-decoration: underline;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 1rem;
   color: #003c79;
 }
 
 .tf-link-btn i {
   margin-right: 8px;
-  font-size: 18px;
+  font-size: 1.125rem;
 }
 
 /*
@@ -258,7 +258,7 @@ body.tf-modal-open:after {
 
 #poststuff h2 a {
   color: #222;
-  font-size: 20px;
+  font-size: 1.25rem;
   display: none;
 }
 
@@ -303,7 +303,7 @@ Fontawesome
 
 .tf-booking-status-swt .tf-booking-status span {
   font-weight: 700;
-  font-size: 15px;
+  font-size: 0.938rem;
 }
 
 .tf-booking-status-swt .tf-booking-status .switch {
@@ -390,7 +390,7 @@ Fontawesome
 
 .tf-small-btn {
   margin-left: 10px;
-  font-size: 12px;
+  font-size: 0.75rem;
   padding: 7px 15px;
 }
 
@@ -444,7 +444,7 @@ Fontawesome
   border-radius: 3px;
   text-align: center;
   margin: 5px 0 0 0;
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 600;
   line-height: 13px;
   background: #006600;
@@ -458,7 +458,7 @@ Fontawesome
   border-radius: 3px;
   text-align: center;
   margin: 5px 0 0 0;
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 600;
   line-height: 13px;
   background: #b30000;
@@ -493,7 +493,7 @@ button.tf-order-remove {
   line-height: 1;
   padding: 10px 15px;
   margin: 0;
-  font-size: 14px;
+  font-size: 0.875rem;
   cursor: pointer;
   transition: 0.3s;
   text-decoration: none;
@@ -652,7 +652,7 @@ body.tourfic-settings_page_tf-setup-wizard {
   padding: 12px 32px;
   color: #ffffff;
   font-family: Inter;
-  font-size: 15px;
+  font-size: 0.938rem;
   font-style: normal;
   font-weight: 600;
   line-height: 24px;
@@ -696,7 +696,7 @@ body.tourfic-settings_page_tf-setup-wizard {
   padding: 12px 32px;
   color: #003C79;
   font-family: Inter;
-  font-size: 15px;
+  font-size: 0.938rem;
   font-style: normal;
   font-weight: 600;
   line-height: 24px;
@@ -799,7 +799,7 @@ body.tourfic-settings_page_tf-setup-wizard {
 .tf-setup-header .tf-setup-header-right span {
   color: #566676;
   font-family: Inter;
-  font-size: 15px;
+  font-size: 0.938rem;
   font-style: normal;
   font-weight: 400;
   line-height: 24px;
@@ -809,7 +809,7 @@ body.tourfic-settings_page_tf-setup-wizard {
 .tf-setup-header .tf-setup-header-right span a {
   color: #003C79;
   font-family: Inter;
-  font-size: 15px;
+  font-size: 0.938rem;
   font-style: normal;
   font-weight: 400;
   line-height: 24px;
@@ -855,7 +855,7 @@ Welcome Step
 .tf-setup-content-layout .tf-back-btn span {
   color: #003C79;
   font-family: Inter;
-  font-size: 15px;
+  font-size: 0.938rem;
   font-style: normal;
   font-weight: 600;
   line-height: 24px;
@@ -905,7 +905,7 @@ Welcome Step
   color: #566676;
   text-align: center;
   font-family: Inter;
-  font-size: 15px;
+  font-size: 0.938rem;
   font-style: normal;
   font-weight: 400;
   line-height: 24px;
@@ -1075,7 +1075,7 @@ Steps
   border: 0;
   border-radius: 0;
   display: inline-block;
-  font-size: 12px;
+  font-size: 0.75rem;
   text-align: center;
   border-color: #1890ff;
   display: block;
@@ -1107,7 +1107,7 @@ Steps
 .tf-setup-step-container .tf-back-btn span {
   color: #003C79;
   font-family: Inter;
-  font-size: 15px;
+  font-size: 0.938rem;
   font-style: normal;
   font-weight: 600;
   line-height: 24px;
@@ -1195,7 +1195,7 @@ Steps
   text-align: left;
   color: #27333F;
   font-family: Inter;
-  font-size: 15px;
+  font-size: 0.938rem;
   font-style: normal;
   font-weight: 400;
   line-height: 24px;
@@ -1205,7 +1205,7 @@ Steps
 .tf-setup-step-container .tf-select-title {
   color: #27333f;
   font-family: Inter;
-  font-size: 16px;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 600;
   line-height: 120%;
@@ -1215,7 +1215,7 @@ Steps
 .tf-setup-step-container .tf-setup-step-desc {
   color: #566676;
   font-family: Inter;
-  font-size: 15px;
+  font-size: 0.938rem;
   font-style: normal;
   font-weight: 400;
   line-height: 24px;
@@ -1262,7 +1262,7 @@ Steps
 .tf-setup-step-container .tf-select-service label span {
   color: #566676;
   font-family: Inter;
-  font-size: 15px;
+  font-size: 0.938rem;
   font-style: normal;
   font-weight: 400;
   line-height: 24px;
@@ -1285,7 +1285,7 @@ Steps
   transition-duration: 0.4s;
   transform: scale(0);
   font-family: 'dashicons';
-  font-size: 20px;
+  font-size: 1.25rem;
 }
 
 @media only screen and (max-width: 575.98px) {
@@ -1294,7 +1294,7 @@ Steps
     height: 20px;
     top: -3px;
     left: -3px;
-    font-size: 18px;
+    font-size: 1.125rem;
     line-height: 20px;
   }
 }
@@ -1412,7 +1412,7 @@ Steps
   padding: 8px 12px;
   color: #566676;
   font-family: Inter;
-  font-size: 15px;
+  font-size: 0.938rem;
   font-style: normal;
   font-weight: 400;
   line-height: 24px;
@@ -1499,7 +1499,7 @@ Steps
 }
 
 .tf-setup-step-container .setup-form-group .tf-setup-form-item-inline .tf-setup-form-item-label label {
-  font-size: 15px;
+  font-size: 0.938rem;
 }
 
 .tf-setup-step-container .setup-form-group .tf-setup-form-item-inline .tf-setup-form-item-input {
@@ -1526,7 +1526,7 @@ Steps
 .tf-setup-step-container .setup-form-group .tf-field-imageselect label {
   color: #27333F;
   font-family: Inter;
-  font-size: 15px;
+  font-size: 0.938rem;
   font-style: normal;
   font-weight: 400;
   line-height: 24px;
@@ -1808,7 +1808,7 @@ Steps
   color: #363e4a;
   padding: 12px 16px;
   text-align: left;
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 24px;
   cursor: pointer;
   -webkit-transition: all 0.3s ease;
@@ -1974,7 +1974,7 @@ Steps
 
 .tf-option-wrapper .tf-option-footer span {
   display: block;
-  font-size: 16px;
+  font-size: 1rem;
   color: #8997a9;
   font-weight: 600;
   margin-top: 5px;
@@ -2081,7 +2081,7 @@ Steps
 }
 
 .tf-setting-dashboard .tf-setting-top-bar .other-document .dropdown .list-item a {
-  font-size: 15px;
+  font-size: 0.938rem;
   font-weight: 500;
   color: var(--tf-heading);
   display: flex;
@@ -2255,7 +2255,7 @@ Steps
 }
 
 .tf-setting-dashboard .tf-setting-performace-section .tf-performance-grid .tf-single-performance-grid .tf-single-performance-content p {
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 600;
   color: #222;
   margin: 0 0 10px;
@@ -2263,7 +2263,7 @@ Steps
 
 @media only screen and (max-width: 1650px) {
   .tf-setting-dashboard .tf-setting-performace-section .tf-performance-grid .tf-single-performance-grid .tf-single-performance-content p {
-    font-size: 14px;
+    font-size: 0.875rem;
   }
 }
 
@@ -2277,7 +2277,7 @@ Steps
 
 @media only screen and (max-width: 1650px) {
   .tf-setting-dashboard .tf-setting-performace-section .tf-performance-grid .tf-single-performance-grid .tf-single-performance-content h3 {
-    font-size: 24px;
+    font-size: 1.5rem;
   }
 }
 
@@ -2466,7 +2466,7 @@ Steps
 }
 
 .tf-settings-help-center .tf-support-document .tf-single-support a h3 {
-  font-size: 20px;
+  font-size: 1.25rem;
   margin: 0;
   color: var(--tf-heading);
   display: block;
@@ -2480,7 +2480,7 @@ Steps
   border: 2px solid #003c79;
   border-radius: 6px;
   padding: 9px 16px;
-  font-size: 15px;
+  font-size: 0.938rem;
   font-weight: 600;
   color: #003c79;
   margin-top: 20px;
@@ -2502,7 +2502,7 @@ Steps
 
 .tf-settings-help-center .tf-settings-faq h2 {
   margin: 0 0 30px;
-  font-size: 24px;
+  font-size: 1.5rem;
   font-weight: 600;
   line-height: 28px;
   color: var(--tf-heading);
@@ -2545,14 +2545,14 @@ Steps
 }
 
 .tf-settings-help-center .tf-settings-faq .tf-accordion-wrapper .tf-single-faq .tf-faq-title i {
-  font-size: 18px;
+  font-size: 1.125rem;
   margin-right: 10px;
   color: var(--tf-heading);
 }
 
 .tf-settings-help-center .tf-settings-faq .tf-accordion-wrapper .tf-single-faq .tf-faq-title h4 {
   margin: 0;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: 600;
   color: #1d2327;
   line-height: 24px;
@@ -2560,7 +2560,7 @@ Steps
 
 @media only screen and (max-width: 480px) {
   .tf-settings-help-center .tf-settings-faq .tf-accordion-wrapper .tf-single-faq .tf-faq-title h4 {
-    font-size: 17px;
+    font-size: 1.063rem;
   }
 }
 
@@ -2625,7 +2625,7 @@ Steps
   display: inline-block;
   padding: 14px 22px;
   color: var(--tf-heading);
-  font-size: 18px;
+  font-size: 1.125rem;
   text-decoration: none;
 }
 
@@ -2672,7 +2672,7 @@ Steps
 }
 
 .tf-setting-wrapper .tourfic-settings-header .settings-header-left .tf-setting-title {
-  font-size: 18px;
+  font-size: 1.125rem;
   margin: 0;
 }
 
@@ -2703,7 +2703,7 @@ Steps
   position: relative;
   background-color: transparent;
   height: 42px;
-  font-size: 16px;
+  font-size: 1rem;
   z-index: 999;
 }
 
@@ -2732,7 +2732,7 @@ Steps
 
 .tf-setting-wrapper .tourfic-settings-header .settings-header-left .tf-setting-search .tf-search-results .tf-search-not-found {
   text-align: center;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 500;
 }
 
@@ -2770,12 +2770,12 @@ Steps
 
 .tf-setting-wrapper .tourfic-settings-header .settings-header-left .tf-setting-search .tf-search-results ul a p {
   margin: 0;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 600;
 }
 
 .tf-setting-wrapper .tourfic-settings-header .settings-header-left .tf-setting-search .tf-search-results ul a span {
-  font-size: 12px;
+  font-size: 0.75rem;
   color: #777;
 }
 
@@ -2870,7 +2870,7 @@ Steps
   text-decoration: none;
   color: var(--tf-heading);
   padding: 18px 30px;
-  font-size: 16px;
+  font-size: 1rem;
   text-align: left;
   line-height: 24px;
   cursor: pointer;
@@ -2928,7 +2928,7 @@ Steps
 .tf-setting-wrapper .tf-option-form .tf-option .tf-admin-tab a.tf-tablinks.active::before {
   position: absolute;
   content: "\f105";
-  font-size: 14px;
+  font-size: 0.875rem;
   color: #003c79;
   font-family: "FontAwesome" !important;
   right: 10px;
@@ -3048,7 +3048,7 @@ Steps
 }
 
 .tf-setting-wrapper .tf-option-form .tf-option .tf-tab-wrapper .tf-tab-content > .tf-field p.description {
-  font-size: 14px;
+  font-size: 0.875rem;
   margin-top: 10px;
 }
 
@@ -3099,7 +3099,7 @@ Steps
 }
 
 .tf-shortcode-generator-section .tf-shortcode-generators .tf-shortcode-generator-label .tf-labels label {
-  font-size: 14px;
+  font-size: 0.875rem;
   line-height: 22px;
   font-weight: 600;
   color: #0d165e;
@@ -3248,7 +3248,7 @@ Steps
 
 .tf-shortcode-generator-section .tf-shortcode-generators .tf-sg-form-wrapper .tf-shortcode-generator-form .select2-search__field {
   margin: 10px;
-  font-size: 14px;
+  font-size: 0.875rem;
 }
 
 .tf-shortcode-generator-section .tf-shortcode-generators .tf-sg-form-wrapper .tf-shortcode-generator-form .tf-setting-field {
@@ -3258,7 +3258,7 @@ Steps
   padding: 10px 25px;
   border-radius: 5px;
   border: 1px solid #ccc;
-  font-size: 14px;
+  font-size: 0.875rem;
   line-height: 16px;
   appearance: none;
 }
@@ -3278,7 +3278,7 @@ Steps
   background: red;
   color: #ffffff;
   text-align: center;
-  font-size: 20px;
+  font-size: 1.25rem;
   border-radius: 50%;
   cursor: pointer;
 }
@@ -3382,7 +3382,7 @@ Steps
   font-style: normal;
   margin-bottom: 3px;
   font-weight: 600;
-  font-size: 16px;
+  font-size: 1rem;
   color: var(--tf-heading);
   display: flex !important;
   align-items: center;
@@ -3412,7 +3412,7 @@ Steps
 
 .tf-field .tf-fieldset {
   font-style: normal;
-  font-size: 14px;
+  font-size: 0.875rem;
   margin-top: 15px;
 }
 
@@ -3423,7 +3423,7 @@ Steps
 
 .tf-field .tf-field-sub-title {
   color: #87888B;
-  font-size: 14px;
+  font-size: 0.875rem;
   margin-bottom: 0px;
   display: block;
 }
@@ -3450,7 +3450,7 @@ Steps
   border-radius: 4px;
   height: 48px;
   color: #363e4a;
-  font-size: 14px;
+  font-size: 0.875rem;
 }
 
 .tf-field-ical input:focus,
@@ -3521,7 +3521,7 @@ Steps
   background-color: #f5f8ff;
   border-radius: 4px;
   color: #363e4a;
-  font-size: 14px;
+  font-size: 0.875rem;
   width: 100%;
 }
 
@@ -3540,7 +3540,7 @@ Steps
   border-radius: 4px;
   height: 48px;
   color: #363e4a;
-  font-size: 14px;
+  font-size: 0.875rem;
   line-height: 22px;
 }
 
@@ -3560,7 +3560,7 @@ Steps
   border-radius: 4px;
   min-height: 48px;
   color: #363e4a;
-  font-size: 14px;
+  font-size: 0.875rem;
 }
 
 .tf-field-select2 .select2-container .select2-selection .select2-selection__choice {
@@ -3581,7 +3581,7 @@ Steps
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   color: #363e4a;
-  font-size: 16px;
+  font-size: 1rem;
   padding: 0;
   position: absolute;
   left: auto;
@@ -3672,7 +3672,7 @@ Steps
 }
 
 .tf-field-select2 .tf-popup-box .tf-add-category-box .tf-add-category-box-header h3 {
-  font-size: 14px;
+  font-size: 0.875rem;
   line-height: 1em;
   margin: 0;
   padding: 0;
@@ -3745,7 +3745,7 @@ Steps
 
 .tf-field-radio .tf-fieldset input[type=radio] + label {
   color: #607085;
-  font-size: 16px;
+  font-size: 1rem;
   position: relative;
   padding-left: 30px;
   -webkit-transition: all 0.3s ease;
@@ -3825,7 +3825,7 @@ Steps
 
 .tf-field-checkbox .tf-fieldset input[type=checkbox] + label {
   color: #607085;
-  font-size: 16px;
+  font-size: 1rem;
   position: relative;
   padding-left: 30px;
   -webkit-transition: all 0.3s ease;
@@ -3952,7 +3952,7 @@ Steps
   border-radius: 4px;
   height: 48px;
   color: #363e4a;
-  font-size: 14px;
+  font-size: 0.875rem;
   white-space: nowrap;
   overflow: hidden;
 }
@@ -3982,7 +3982,7 @@ Steps
   border-radius: 4px;
   height: 48px;
   color: #363e4a;
-  font-size: 14px;
+  font-size: 0.875rem;
   background: #ffffff;
   border: 1px solid #c4cbd4;
   white-space: nowrap;
@@ -4065,7 +4065,7 @@ Steps
   margin-right: 10px;
   width: 28px;
   height: 28px;
-  font-size: 16px;
+  font-size: 1rem;
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -4083,7 +4083,7 @@ Steps
 
 .tf-field-heading .tf-field-heading-inner .tf-field-heading-content {
   color: var(--tf-heading);
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 600;
 }
 
@@ -4111,7 +4111,7 @@ Steps
 
 .tf-field-notice-inner .tf-field-notice-icon {
   margin-right: 10px;
-  font-size: 20px;
+  font-size: 1.25rem;
   color: #069697;
 }
 
@@ -4124,7 +4124,7 @@ Steps
   margin: 0;
   font-weight: 500;
   color: #363e4a;
-  font-size: 16px;
+  font-size: 1rem;
 }
 
 .tf-field-notice-inner .tf-field-notice-content.has-content h6 {
@@ -4159,7 +4159,7 @@ Steps
 }
 
 .tour-option-itinerary-notice .tf-field-notice-content {
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 1.5;
 }
 
@@ -4169,14 +4169,14 @@ Steps
 }
 
 .tf-pro-notice .tf-field-notice-inner .tf-field-notice-icon {
-  font-size: 24px;
+  font-size: 1.5rem;
   color: #295BFF;
   margin-right: 8px;
 }
 
 .tf-pro-notice .tf-field-notice-inner .tf-field-notice-content {
   color: var(--tf-heading);
-  font-size: 14px;
+  font-size: 0.875rem;
   line-height: 1.6;
   align-self: center;
   font-weight: 400;
@@ -4242,7 +4242,7 @@ Steps
   transform: translateY(-50%);
   top: 50%;
   left: 12px;
-  font-size: 12px;
+  font-size: 0.75rem;
   opacity: 0;
   -webkit-transition: all 0.4s ease-in-out;
   -moz-transition: all 0.4s ease-in-out;
@@ -4301,7 +4301,7 @@ Steps
   border-radius: 4px;
   height: 48px;
   color: #363e4a;
-  font-size: 14px;
+  font-size: 0.875rem;
   border: 1px solid #c4cbd4;
 }
 
@@ -4343,7 +4343,7 @@ Steps
   right: 8px;
   transform: translateY(-50%);
   color: #a6b1bf;
-  font-size: 16px;
+  font-size: 1rem;
 }
 
 .tf-field-time .tf-fieldset {
@@ -4358,7 +4358,7 @@ Steps
   border-radius: 4px;
   height: 48px;
   color: #363e4a;
-  font-size: 14px;
+  font-size: 0.875rem;
   border: 1px solid #c4cbd4;
 }
 
@@ -4400,7 +4400,7 @@ Steps
   right: 8px;
   transform: translateY(-50%);
   color: #a6b1bf;
-  font-size: 16px;
+  font-size: 1rem;
 }
 
 .tf-repeater {
@@ -4428,7 +4428,7 @@ Steps
   text-align: center;
   display: inline-block;
   border-radius: 4px;
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 24px;
   height: 24px;
   width: 24px;
@@ -4470,7 +4470,7 @@ Steps
   margin-right: 120px;
   font-style: normal;
   font-weight: 600;
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 24px;
 }
 
@@ -4507,7 +4507,7 @@ Steps
   line-height: 24px;
   background-color: #003c79;
   border-radius: 4px;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 600;
   color: #ffffff;
   letter-spacing: 0.5px;
@@ -4537,7 +4537,7 @@ Steps
   padding: 8px 24px;
   font-style: normal;
   font-weight: 600;
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 24px;
   color: #607085;
   cursor: pointer;
@@ -4597,7 +4597,7 @@ Steps
   border-radius: 4px;
   height: 48px;
   color: #363e4a;
-  font-size: 14px;
+  font-size: 0.875rem;
 }
 
 .tf-field-map .tf--map-osm-wrap {
@@ -4624,7 +4624,7 @@ Steps
   display: block;
   margin-bottom: 5px;
   font-weight: 500;
-  font-size: 14px;
+  font-size: 0.875rem;
   color: #607085;
   margin-top: 15px;
 }
@@ -4637,7 +4637,7 @@ Steps
   border-radius: 4px;
   height: 48px;
   color: #363e4a;
-  font-size: 14px;
+  font-size: 0.875rem;
 }
 
 .tf-field-color > label {
@@ -4665,7 +4665,7 @@ Steps
 
 .tf-field-color .tf-fieldset ul.tf-inline li > label {
   font-weight: 600;
-  font-size: 16px;
+  font-size: 1rem;
   color: var(--tf-heading);
   width: 45%;
   margin-top: 5px;
@@ -4728,7 +4728,7 @@ Steps
   box-shadow: 0px 8px 16px rgba(90, 91, 106, 0.08);
   border-radius: 8px;
   color: #dc3545;
-  font-size: 14px;
+  font-size: 0.875rem;
   text-align: center;
   line-height: 20px;
   cursor: pointer;
@@ -4755,7 +4755,7 @@ Steps
   border-radius: 4px;
   height: 48px;
   color: #363e4a;
-  font-size: 14px;
+  font-size: 0.875rem;
 }
 
 #tf-icon-modal .tf-modal-content .tf-icon-search input.tf-icon-search-input:focus {
@@ -4810,7 +4810,7 @@ Steps
 #tf-icon-modal .tf-modal-content .tf-icon-wrapper ul.tf-icon-tab-list li {
   margin-bottom: 8px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 0.875rem;
   color: #363e4a;
   font-weight: 500;
   text-transform: capitalize;
@@ -4850,7 +4850,7 @@ Steps
 
 #tf-icon-modal .tf-modal-content .tf-icon-wrapper .tf-icon-tab-content .tf-icon-tab-pane ul.tf-icon-list li {
   background: #ffffff;
-  font-size: 24px;
+  font-size: 1.5rem;
   border-radius: 4px;
   cursor: pointer;
   position: relative;
@@ -4884,7 +4884,7 @@ Steps
   height: 16px;
   width: 16px;
   line-height: 16px;
-  font-size: 12px;
+  font-size: 0.75rem;
   text-align: center;
   border: 1px solid #8997a9;
   border-radius: 100%;
@@ -4959,7 +4959,7 @@ Steps
   border-radius: 4px;
   height: 48px;
   color: #363e4a;
-  font-size: 14px;
+  font-size: 0.875rem;
 }
 
 .tf-field-number input:focus {
@@ -5062,7 +5062,7 @@ a.tf-import-btn, a.tf-export-btn {
   background-color: #295BFF;
   padding: 3px 10px;
   color: #ffffff;
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 600;
   line-height: 13px;
   border-radius: 3px;
@@ -5083,12 +5083,12 @@ a.tf-import-btn, a.tf-export-btn {
 .tf-apt-cal-wrap .fc-direction-rtl .fc-daygrid-event.fc-event-start,
 .tf-room-cal-wrap .fc-direction-ltr .fc-daygrid-event.fc-event-end,
 .tf-room-cal-wrap .fc-direction-rtl .fc-daygrid-event.fc-event-start {
-  font-size: 10px;
+  font-size: 0.625rem;
 }
 
 .tf-apt-cal-wrap .fc .fc-bg-event .fc-event-title,
 .tf-room-cal-wrap .fc .fc-bg-event .fc-event-title {
-  font-size: 10px;
+  font-size: 0.625rem;
 }
 
 .tf-apt-cal-wrap .fc .fc-daygrid-event,
@@ -5180,13 +5180,13 @@ a.tf-import-btn, a.tf-export-btn {
   border-radius: 5px;
   align-items: center;
   justify-content: space-between;
-  font-size: 16px;
+  font-size: 1rem;
   margin-bottom: 16px;
 }
 
 .tf-hotel-room .tf-single-room .tf-room-title {
   font-weight: 600;
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 24px;
 }
 
@@ -5398,7 +5398,7 @@ a.tf-import-btn, a.tf-export-btn {
 
 .tf-backend-tour-booking h1,
 .tf-backend-hotel-booking h1 {
-  font-size: 24px;
+  font-size: 1.5rem;
   line-height: 28px;
   margin: 0 0 20px 0;
   padding: 0;
@@ -5464,7 +5464,7 @@ a.tf-import-btn, a.tf-export-btn {
 .tf_booking_details_wrap .tf_booking_wrap_header h1 {
   color: #1D2327;
   font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-  font-size: 32px;
+  font-size: 2rem;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
@@ -5504,7 +5504,7 @@ a.tf-import-btn, a.tf-export-btn {
 }
 
 .tf_booking_details_wrap .tf_booking_wrap_header .tf_header_wrap_button .tf_booking_views_button ul li i {
-  font-size: 15px;
+  font-size: 0.938rem;
 }
 
 .tf_booking_details_wrap .tf_booking_wrap_header .tf_header_wrap_button .tf_booking_views_button ul li.active {
@@ -5521,7 +5521,7 @@ a.tf-import-btn, a.tf-export-btn {
   margin: 0 !important;
   color: #003C79;
   font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-  font-size: 16px;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 600;
   line-height: 24px;
@@ -5543,7 +5543,7 @@ a.tf-import-btn, a.tf-export-btn {
   margin: 0;
   box-shadow: 0px 8px 20px 0px rgba(29, 35, 39, 0.06);
   font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-  font-size: 16px;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 600;
   line-height: 24px;
@@ -5590,7 +5590,7 @@ a.tf-import-btn, a.tf-export-btn {
 
 .tf_booking_details_wrap .tf-booking-calendar-popup-box .tf-calendar-popup-box .tf-popup-header h3 {
   color: #151615;
-  font-size: 17px;
+  font-size: 1.063rem;
   font-style: normal;
   font-weight: 600;
   line-height: 150%;
@@ -5620,7 +5620,7 @@ a.tf-import-btn, a.tf-export-btn {
 
 .tf_booking_details_wrap .tf-booking-calendar-popup-box .tf-calendar-popup-box .tf-popup-content .tf-content-single-box h4 {
   color: #141915;
-  font-size: 15px;
+  font-size: 0.938rem;
   font-style: normal;
   font-weight: 600;
   line-height: 24px;
@@ -5640,7 +5640,7 @@ a.tf-import-btn, a.tf-export-btn {
 
 .tf_booking_details_wrap .tf-booking-calendar-popup-box .tf-calendar-popup-box .tf-popup-content .tf-content-single-box .tf-content-box .tf-single-content h5 {
   margin: 0 0 5px 0;
-  font-size: 14px;
+  font-size: 0.875rem;
   text-transform: capitalize;
 }
 
@@ -5700,7 +5700,7 @@ a.tf-import-btn, a.tf-export-btn {
   color: #003c79;
   border-color: #003c79;
   border-radius: 8px;
-  font-size: 20px;
+  font-size: 1.25rem;
   transition: .3s all ease;
 }
 
@@ -5736,7 +5736,7 @@ a.tf-import-btn, a.tf-export-btn {
 .tf_booking_details_wrap #tf-booking-calendar .fc-header-toolbar .fc-toolbar-chunk:nth-child(3) .fc-button-group button {
   background: #ffffff;
   color: #131c25;
-  font-size: 15px;
+  font-size: 0.938rem;
   font-style: normal;
   font-weight: 400;
   line-height: 24px;
@@ -5789,7 +5789,7 @@ a.tf-import-btn, a.tf-export-btn {
 
 .tf_booking_details_wrap #tf-booking-calendar table .fc-scrollgrid-section-header th .fc-col-header tr th a {
   color: #131c25;
-  font-size: 15px;
+  font-size: 0.938rem;
   font-style: normal;
   font-weight: 400;
   line-height: 24px;
@@ -5809,7 +5809,7 @@ a.tf-import-btn, a.tf-export-btn {
 
 .tf_booking_details_wrap #tf-booking-calendar table .fc-scrollgrid-section-body table tr td .fc-daygrid-day-top a {
   color: #211319;
-  font-size: 15px;
+  font-size: 0.938rem;
   font-style: normal;
   font-weight: 600;
   line-height: 24px;
@@ -6157,7 +6157,7 @@ a.tf-import-btn, a.tf-export-btn {
   background: transparent;
   color: #1d2327;
   font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-  font-size: 16px;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 600;
   line-height: 24px;
@@ -6181,7 +6181,7 @@ a.tf-import-btn, a.tf-export-btn {
   box-shadow: 0px 8px 20px 0px rgba(29, 35, 39, 0.06);
   color: #003C79;
   font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-  font-size: 16px;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 600;
   line-height: 24px;
@@ -6209,7 +6209,7 @@ a.tf-import-btn, a.tf-export-btn {
   text-decoration: none;
   color: #1D2327;
   font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-  font-size: 16px;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 600;
   line-height: 20px;
@@ -6234,7 +6234,7 @@ a.tf-import-btn, a.tf-export-btn {
 
 .tf_booking_details_wrap .tf-booking-header-filter .tf-left-search-filter .tf-enquiry-reset-button-text,
 .tf_booking_details_wrap .tf-calendar-booking-header-filter .tf-left-search-filter .tf-enquiry-reset-button-text {
-  font-size: 16px;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 600;
   line-height: 1.25;
@@ -6278,7 +6278,7 @@ a.tf-import-btn, a.tf-export-btn {
   border: 0px solid;
   color: #87888B;
   font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-  font-size: 16px;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 400;
   line-height: 24px;
@@ -6340,7 +6340,7 @@ a.tf-import-btn, a.tf-export-btn {
 .tf_booking_details_wrap .tf-order-table-responsive .wp-list-table thead tr th, .tf_booking_details_wrap .tf-order-table-responsive .wp-list-table thead tr td {
   color: #87888B;
   font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-  font-size: 16px;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 600;
   line-height: 18px;
@@ -6385,7 +6385,7 @@ a.tf-import-btn, a.tf-export-btn {
   padding: 16px 24px;
   color: #1D2327;
   font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-  font-size: 16px;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 600;
   line-height: 18px;
@@ -6402,7 +6402,7 @@ a.tf-import-btn, a.tf-export-btn {
 .tf_booking_details_wrap .tf-order-table-responsive .wp-list-table tbody tr th span, .tf_booking_details_wrap .tf-order-table-responsive .wp-list-table tbody tr td span {
   color: #87888B;
   font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-  font-size: 16px;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 400;
   line-height: 18px;
@@ -6445,7 +6445,7 @@ a.tf-import-btn, a.tf-export-btn {
   color: #027A48;
   text-align: center;
   font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-  font-size: 12px;
+  font-size: 0.75rem;
   font-style: normal;
   font-weight: 600;
   line-height: 18px;
@@ -6494,7 +6494,7 @@ a.tf-import-btn, a.tf-export-btn {
   padding: 10px;
   color: #1D2327;
   font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-style: normal;
   font-weight: 600;
   line-height: 20px;
@@ -6563,7 +6563,7 @@ a.tf-import-btn, a.tf-export-btn {
   display: block;
   color: #1D2327;
   font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-  font-size: 16px;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 600;
   line-height: 24px;
@@ -6604,7 +6604,7 @@ a.tf-import-btn, a.tf-export-btn {
 .tf-booking-details-preview .tf-details-preview-header .tf-back a {
   color: #003C79;
   font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-  font-size: 16px;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 600;
   line-height: 24px;
@@ -6625,7 +6625,7 @@ a.tf-import-btn, a.tf-export-btn {
 .tf-booking-details-preview .tf-details-preview-header .tf-title h2 {
   color: #1D2327;
   font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-  font-size: 32px;
+  font-size: 2rem;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
@@ -6640,7 +6640,7 @@ a.tf-import-btn, a.tf-export-btn {
   display: inline-block;
   color: #1D2327;
   font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-  font-size: 16px;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 400;
   line-height: 18px;
@@ -6704,7 +6704,7 @@ a.tf-import-btn, a.tf-export-btn {
 .tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-details .details-box h4 {
   color: #003C79;
   font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-  font-size: 16px;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 600;
   line-height: 24px;
@@ -6739,7 +6739,7 @@ a.tf-import-btn, a.tf-export-btn {
 .tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-details .details-box .tf-grid-box h3 {
   color: #87888B;
   font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-  font-size: 16px;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 600;
   line-height: 24px;
@@ -6762,7 +6762,7 @@ a.tf-import-btn, a.tf-export-btn {
   padding: 8px;
   color: #1D2327;
   font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-style: normal;
   font-weight: 400;
   line-height: 18px;
@@ -6773,7 +6773,7 @@ a.tf-import-btn, a.tf-export-btn {
   padding: 8px 8px 8px 0px;
   color: #1D2327;
   font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-style: normal;
   font-weight: 600;
   line-height: 18px;
@@ -6826,7 +6826,7 @@ a.tf-import-btn, a.tf-export-btn {
   border: 1px solid #F0F0F1;
   color: #F0F0F1;
   font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-  font-size: 16px;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 600;
   line-height: 24px;
@@ -6883,7 +6883,7 @@ a.tf-import-btn, a.tf-export-btn {
 .tf-booking-details-preview .tf-booking-details-preview-box .tf-booking-actions .tf-filter-selection h3 {
   color: #1D2327;
   font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-  font-size: 16px;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 600;
   line-height: 24px;
@@ -6899,7 +6899,7 @@ a.tf-import-btn, a.tf-export-btn {
   background: #003C79;
   color: #F0F0F1;
   font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-  font-size: 16px;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 600;
   line-height: 24px;
@@ -6933,7 +6933,7 @@ a.tf-import-btn, a.tf-export-btn {
   background: #ffffff;
   cursor: pointer;
   font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-  font-size: 16px;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 600;
   line-height: 24px;
@@ -6972,7 +6972,7 @@ a.tf-import-btn, a.tf-export-btn {
   text-decoration: none;
   color: #003C79;
   font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-  font-size: 16px;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 600;
   line-height: 24px;
@@ -7022,7 +7022,7 @@ a.tf-import-btn, a.tf-export-btn {
 .visitor-details-edit-form .visitor-details-edit-popup .tf-visitor-details-edit-header h2 {
   color: #003C79;
   font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-  font-size: 16px;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 600;
   line-height: 24px;
@@ -7093,7 +7093,7 @@ a.tf-import-btn, a.tf-export-btn {
 .visitor-details-edit-form .visitor-details-edit-popup .visitor-details-popup .tf-single-tour-traveller .traveller-info .traveller-single-info label {
   color: #A4A4A4;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-style: normal;
   font-weight: 500;
   line-height: 20px;
@@ -7134,7 +7134,7 @@ a.tf-import-btn, a.tf-export-btn {
   padding: 10px 0px;
   color: #FCFDFF;
   font-family: inherit;
-  font-size: 16px;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 500;
   line-height: 20px;
@@ -7176,7 +7176,7 @@ a.tf-import-btn, a.tf-export-btn {
 .tf-voucher-quick-view-box .voucher-quick-view .tf-voucher-details-preview-header h2 {
   color: #003C79;
   font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-  font-size: 16px;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 600;
   line-height: 24px;
@@ -7216,7 +7216,7 @@ a.tf-import-btn, a.tf-export-btn {
 
 .tf-visitor-vouchers .tf-voucher-header .title h1 {
   color: #002043;
-  font-size: 24px;
+  font-size: 1.5rem;
   font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
   line-height: 32px;
   font-weight: 700;
@@ -7225,7 +7225,7 @@ a.tf-import-btn, a.tf-export-btn {
 
 .tf-visitor-vouchers .tf-voucher-header .title span {
   color: #828C99;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
   line-height: 32px;
   font-weight: 700;
@@ -7249,7 +7249,7 @@ a.tf-import-btn, a.tf-export-btn {
 .tf-visitor-vouchers .tf-voucher-qr-code .time-info h5 {
   margin: 0;
   color: #828C99;
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 28px;
   font-weight: 400;
   font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
@@ -7273,7 +7273,7 @@ a.tf-import-btn, a.tf-export-btn {
 
 .tf-visitor-vouchers .tf-voucher-billing-info .tf-billing-details h5 {
   color: #828C99;
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 28px;
   font-weight: 400;
   font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
@@ -7282,7 +7282,7 @@ a.tf-import-btn, a.tf-export-btn {
 
 .tf-visitor-vouchers .tf-voucher-billing-info .tf-cta-info h4 {
   color: #828C99;
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 28px;
   font-weight: 700;
   font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
@@ -7291,7 +7291,7 @@ a.tf-import-btn, a.tf-export-btn {
 
 .tf-visitor-vouchers .tf-voucher-billing-info .tf-cta-info h5 {
   color: #828C99;
-  font-size: 14px;
+  font-size: 0.875rem;
   line-height: 28px;
   font-weight: 400;
   margin: 0;
@@ -7348,7 +7348,7 @@ a.tf-import-btn, a.tf-export-btn {
 .tf_enquiry_details_wrap_header h1 {
   color: #1D2327;
   font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-  font-size: 32px;
+  font-size: 2rem;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
@@ -7388,7 +7388,7 @@ a.tf-import-btn, a.tf-export-btn {
 }
 
 .tf_enquiry_details_wrap_header .tf_header_wrap_button .tf_booking_views_button ul li i {
-  font-size: 15px;
+  font-size: 0.938rem;
 }
 
 .tf_enquiry_details_wrap_header .tf_header_wrap_button .tf_booking_views_button ul li.active {
@@ -7405,7 +7405,7 @@ a.tf-import-btn, a.tf-export-btn {
   margin: 0 !important;
   color: #003C79;
   font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-  font-size: 16px;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 600;
   line-height: 24px;
@@ -7427,7 +7427,7 @@ a.tf-import-btn, a.tf-export-btn {
   margin: 0;
   box-shadow: 0px 8px 20px 0px rgba(29, 35, 39, 0.06);
   font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-  font-size: 16px;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 600;
   line-height: 24px;
@@ -7526,7 +7526,7 @@ a.tf-import-btn, a.tf-export-btn {
 .tf-enquiry-table tbody .tf-enquiry-single-row .time-n-date .email-time-date .email-date {
   color: #1D2327;
   font-family: inherit;
-  font-size: 16px;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 600;
   line-height: 1.12;
@@ -7535,7 +7535,7 @@ a.tf-import-btn, a.tf-export-btn {
 .tf-enquiry-table tbody .tf-enquiry-single-row .time-n-date .email-time-date .email-time {
   color: #666D74;
   font-family: inherit;
-  font-size: 16px;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 400;
   line-height: 1.12;
@@ -7584,7 +7584,7 @@ a.tf-import-btn, a.tf-export-btn {
 
 .tf-enquiry-single-header-details h1 {
   font-family: inherit;
-  font-size: 24px;
+  font-size: 1.5rem;
   font-style: normal;
   font-weight: 600;
   line-height: 1.33;
@@ -7606,7 +7606,7 @@ hr.enqury-single-title-line {
   padding: 8px 20px 8px 16px;
   background-color: #ffffff;
   max-width: 60px;
-  font-size: 15px;
+  font-size: 0.938rem;
   color: #2C273F;
   font-family: Inter;
   font-style: normal;
@@ -7665,7 +7665,7 @@ hr.enqury-single-title-line {
 
 .tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-enquiry-details h2 {
   font-family: inherit;
-  font-size: 17px;
+  font-size: 1.063rem;
   font-style: normal;
   font-weight: 600;
   line-height: 150%;
@@ -7704,7 +7704,7 @@ hr.enqury-single-title-line {
 
 .tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-details-name .tf-single-enquiry-details-value, .tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-details-email .tf-single-enquiry-details-value, .tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-details-message .tf-single-enquiry-details-value {
   font-family: inherit;
-  font-size: 15px;
+  font-size: 0.938rem;
   font-style: normal;
   font-weight: 400;
   line-height: 1.6;
@@ -7713,7 +7713,7 @@ hr.enqury-single-title-line {
 .tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-details-name .tf-single-enquiry-details-value i, .tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-details-email .tf-single-enquiry-details-value i, .tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-details-message .tf-single-enquiry-details-value i {
   margin-left: 16px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 1rem;
 }
 
 .tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-reply-another-mail-button {
@@ -7723,7 +7723,7 @@ hr.enqury-single-title-line {
   border-radius: 8px;
   align-self: self-end;
   color: #ffffff;
-  font-size: 15px;
+  font-size: 0.938rem;
   cursor: pointer;
 }
 
@@ -7742,7 +7742,7 @@ hr.enqury-single-title-line {
 }
 
 .tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-enquiry-details .tf-single-enquiry-details-content .tf-single-enquiry-reply-another-mail-button i {
-  font-size: 16px;
+  font-size: 1rem;
 }
 
 .tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-single-enquiry-reply-mail-button {
@@ -7752,7 +7752,7 @@ hr.enqury-single-title-line {
   border-radius: 8px;
   align-self: self-end;
   color: #ffffff;
-  font-size: 15px;
+  font-size: 0.938rem;
   cursor: pointer;
 }
 
@@ -7771,13 +7771,13 @@ hr.enqury-single-title-line {
 }
 
 .tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-single-enquiry-reply-mail-button i {
-  font-size: 16px;
+  font-size: 1rem;
 }
 
 .tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-single-enquiry-reply-wrapper .tf-enquiry-details-single-heading .tf-single-enquiry-reply-mail {
   color: #2C273F;
   font-family: inherit;
-  font-size: 17px;
+  font-size: 1.063rem;
   font-style: normal;
   font-weight: 400;
   line-height: 150%;
@@ -7799,7 +7799,7 @@ hr.enqury-single-title-line {
 
 .tf-enquiry-single-details-wrapper .tf-single-enquiry-left .tf-single-enquiry-reply-wrapper .tf-single-enquiry-accordion .tf-single-enquiry-accordion-item .tf-single-enquiry-accordion-head .tf-single-enquiry-accordion-head-left {
   font-family: inherit;
-  font-size: 15px;
+  font-size: 0.938rem;
   font-style: normal;
   font-weight: 600;
   line-height: 1.6;
@@ -7837,7 +7837,7 @@ hr.enqury-single-title-line {
   margin-top: 16px;
   color: #5D5676;
   font-family: inherit;
-  font-size: 15px;
+  font-size: 0.938rem;
   font-style: normal;
   font-weight: 400;
   line-height: 1.6;
@@ -7866,7 +7866,7 @@ hr.enqury-single-title-line {
 .tf-enquiry-single-details-wrapper .tf-single-enquiry-left #tf-single-enquiry-reply-form textarea::placeholder {
   color: #77708F;
   font-family: inherit;
-  font-size: 15px;
+  font-size: 0.938rem;
   font-style: normal;
   font-weight: 400;
   line-height: 1.6;
@@ -7879,7 +7879,7 @@ hr.enqury-single-title-line {
   border-color: #003c79;
   color: #ffffff;
   font-family: inherit;
-  font-size: 15px;
+  font-size: 0.938rem;
   font-style: normal;
   font-weight: 600;
   line-height: 1.6;
@@ -7919,7 +7919,7 @@ hr.enqury-single-title-line {
 
 .tf-enquiry-single-details-wrapper .tf-single-enquiry-right .tf-enquiry-single-log-details .tf-singe-enquiry-log-details-heading h2 {
   font-family: inherit;
-  font-size: 17px;
+  font-size: 1.063rem;
   font-style: normal;
   font-weight: 600;
   line-height: 150%;
@@ -7955,7 +7955,7 @@ hr.enqury-single-title-line {
   align-items: center;
   color: var(--UI-800, #2C273F);
   font-family: inherit;
-  font-size: 15px;
+  font-size: 0.938rem;
   font-style: normal;
   font-weight: 400;
   line-height: 1.6;
@@ -7964,7 +7964,7 @@ hr.enqury-single-title-line {
 .tf-enquiry-single-details-wrapper .tf-single-enquiry-right .tf-enquiry-single-log-details .tf-single-enquiry-log-details-content .tf-single-enquiry-log-details-single i {
   margin-left: 8px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 1rem;
 }
 
 .tf-enquiry-details-wrap .tf-booking-header-filter .tf-right-search-filter, .tf-enquiry-details-wrap .tf-booking-header-filter .tf-enquiry-right-search-filter {

@@ -54,7 +54,7 @@
                         padding: 5px 10px 5px 0px;
                         margin: 4px 5px 4px 0px;
                         color: $color-text;
-                        font-size: calc(var(--tf-base-font-size) + 2px);
+                        font-size: 1rem;
                         i{
                             color: $color-text;
                         }
@@ -65,7 +65,7 @@
                     color: $color-text;
                 }
                 h4{
-                    font-size: calc(var(--tf-base-font-size) + 6px);
+                    font-size: 1.25rem;
                     margin: 15px 0px 10px 0px;
                     color: $color-heading;
                 }

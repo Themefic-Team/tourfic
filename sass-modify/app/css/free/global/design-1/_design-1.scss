@@ -9,7 +9,7 @@
                     padding-left: 8px;
                     text-transform: capitalize;
                     letter-spacing: 0.5px;
-                    font-size: calc(var(--tf-base-font-size) - 1px);
+                    font-size: 0.813rem;
                 }
                 i {
                     color: $color-success;
@@ -80,7 +80,7 @@
                     @include flexbox();
                     @include align-items(center);
                     h4{
-                        font-size: calc(var(--tf-base-font-size) + 4px);
+                        font-size: 1.125rem;
                     }
                 }
                 .tf-faq-title.active {
@@ -89,7 +89,7 @@
                 .arrow {
                     transition: 0.25s ease;
                     transform: rotate(-90deg);
-                    font-size: calc(var(--tf-base-font-size) + 6px);
+                    font-size: 1.25rem;
                     color: $color-primary;
                 }
                 .arrow-animate {
@@ -140,7 +140,7 @@
                     }
                     h3{
                         color: $color-heading;
-                        font-size: calc(var(--tf-base-font-size) + 7px);
+                        font-size: 1.313rem;
                         font-weight: 400;
                         margin-bottom: 16px;
                         margin-top: 0px;
@@ -148,7 +148,7 @@
                     .tf-car-title{
                         h1{
                             color: $color-heading;
-                            font-size: calc(var(--tf-base-font-size) + 14px);
+                            font-size: 1.75rem;
                             font-weight: 600;
                             margin-bottom: 10px;
                         }
@@ -158,13 +158,13 @@
                                 padding: 0;
                                 li{
                                     color: $color-text;
-                                    font-size: calc(var(--tf-base-font-size) + 2px);
+                                    font-size: 1rem;
                                     font-weight: 400;
                                     display: inline-block;
                                     a{
                                         text-decoration: none;
                                         color: $color-text;
-                                        font-size: calc(var(--tf-base-font-size) + 2px);
+                                        font-size: 1rem;
                                         font-weight: 400;
                                     }
                                 }
@@ -207,7 +207,7 @@
                         flex-wrap: nowrap;
                         h3{
                             color: $color-heading;
-                            font-size: calc(var(--tf-base-font-size) + 7px);
+                            font-size: 1.313rem;
                             font-weight: 700;
                             margin: 0;
                             text-align: left;
@@ -220,7 +220,7 @@
                     .tf-cancellation-content-wraper{
                         text-align: left;
                         color: $color-text;
-                        font-size: calc(var(--tf-base-font-size) + 2px);
+                        font-size: 1rem;
                         font-weight: 400;
                         max-height: 260px;
                         overflow: auto;
@@ -241,7 +241,7 @@
                         }
                         p{
                             color: $color-text;
-                            font-size: calc(var(--tf-base-font-size) + 2px);
+                            font-size: 1rem;
                         }
                         table{
                             margin-bottom: 0px;
@@ -258,7 +258,7 @@
         &__one{
             .section-heading {
                 font-weight: 600;
-                font-size: calc(var(--tf-base-font-size) + 10px);
+                font-size: 1.5rem;
                 line-height: 1.33;
                 margin: 0 0 16px 0;
                 color: $color-heading;
@@ -344,7 +344,7 @@
                     margin-bottom: 24px;
                     h3{
                         color: $color-heading;
-                        font-size: calc(var(--tf-base-font-size) + 7px);
+                        font-size: 1.313rem;
                         font-weight: 700;
                         margin: 0;
                     }
@@ -362,7 +362,7 @@
                         margin-bottom: 24px;
                         span{
                             color: $color-danger;
-                            font-size: calc(var(--tf-base-font-size) + 2px);
+                            font-size: 1rem;
                             font-weight: 400;
                             i{
                                 color: $color-danger;
@@ -379,7 +379,7 @@
                             padding: 0;
                             li{
                                 color: $color-text;
-                                font-size: calc(var(--tf-base-font-size) + 2px);
+                                font-size: 1rem;
                                 font-weight: 400;
                                 padding: 0 8px 8px 8px;
                                 display: inline-block;
@@ -416,7 +416,7 @@
                         }
                         p{
                             color: $color-text;
-                            font-size: calc(var(--tf-base-font-size) + 2px);
+                            font-size: 1rem;
                             font-weight: 400;
                             margin: 0;
                         }
@@ -439,11 +439,11 @@
                                     td{
                                         border: 0px solid;
                                         color: $color-text;
-                                        font-size: calc(var(--tf-base-font-size) + 2px);
+                                        font-size: 1rem;
                                         font-weight: 400;
                                         padding: 0 0 16px 0px;
                                         @media #{$max768}{
-                                            font-size: calc(var(--tf-base-font-size) - 2px);
+                                            font-size: 0.75rem;
                                             vertical-align: top;
                                         }
                                         span{
@@ -458,11 +458,11 @@
                                     th{
                                         color: $color-text;
                                         border: 0px solid;
-                                        font-size: calc(var(--tf-base-font-size) + 2px);
+                                        font-size: 1rem;
                                         font-weight: 700;
                                         padding: 0 0 16px 0px;
                                         @media #{$max768}{
-                                            font-size: var(--tf-base-font-size);
+                                            font-size: 0.875rem;
                                         }
                                         .tf-flex.tf-flex-align-center{
                                             flex-wrap: nowrap;
@@ -481,7 +481,7 @@
                                             }
                                             label{
                                                 color: $color-text;
-                                                font-size: calc(var(--tf-base-font-size) + 2px);
+                                                font-size: 1rem;
                                                 font-weight: 400;
                                                 position: relative;
                                                 margin-bottom: 0px;
@@ -568,7 +568,7 @@
                                                 p{
                                                     color: $color-white;
                                                     text-align: center;
-                                                    font-size: calc(var(--tf-base-font-size) - 1px);
+                                                    font-size: 0.813rem;
                                                     font-weight: 600;
                                                 }
                                             }
@@ -601,7 +601,7 @@
                                 }
                                 label{
                                     color: $color-text;
-                                    font-size: calc(var(--tf-base-font-size) - 2px);
+                                    font-size: 0.75rem;
                                     font-weight: 700;
                                     margin-bottom: 8px;
                                 }
@@ -612,7 +612,7 @@
                                     padding: 8px 16px;
                                     height: 40px;
                                     color: $color-text;
-                                    font-size: calc(var(--tf-base-font-size) + 2px);
+                                    font-size: 1rem;
                                     font-weight: 400;
                                     width: 100%;
                                 }
@@ -622,7 +622,7 @@
                                     padding: 0px 16px;
                                     height: 40px;
                                     color: $color-text;
-                                    font-size: calc(var(--tf-base-font-size) + 2px);
+                                    font-size: 1rem;
                                     font-weight: 400;
                                     width: 100%;
                                     text-transform: uppercase;
@@ -633,7 +633,7 @@
                                     padding: 0px 16px;
                                     height: 40px;
                                     color: $color-text;
-                                    font-size: calc(var(--tf-base-font-size) + 2px);
+                                    font-size: 1rem;
                                     font-weight: 400;
                                     width: 100%;
                                 }
@@ -651,7 +651,7 @@
                                 color: $color-white;
                                 padding: 16px 32px;
                                 border: 0px solid;
-                                font-size: calc(var(--tf-base-font-size) + 2px);
+                                font-size: 1rem;
                                 font-weight: 700;
                                 cursor: pointer;
                                 transition: .3s all ease;
@@ -671,7 +671,7 @@
                             padding: 16px 32px;
                             border: 0px solid;
                             color: $color-text;
-                            font-size: calc(var(--tf-base-font-size) + 2px);
+                            font-size: 1rem;
                             font-weight: 700;
                             cursor: pointer;
                         }
@@ -759,7 +759,7 @@
                     position: relative;
                     h5{
                         color: $color-heading;
-                        font-size: calc(var(--tf-base-font-size) - 2px);
+                        font-size: 0.75rem;
                         font-weight: 400;
                         margin-bottom: 8px;
                         margin-top: 0px;
@@ -768,7 +768,7 @@
                         min-width: auto;
                         width: 100%;
                         color: $color-text;
-                        font-size: calc(var(--tf-base-font-size) + 2px);
+                        font-size: 1rem;
                         border: 0px solid;
                         padding-left: 0px;
                         box-shadow: none;
@@ -785,7 +785,7 @@
                         min-width: auto;
                         width: 100%;
                         color: $color-text;
-                        font-size: calc(var(--tf-base-font-size) + 2px);
+                        font-size: 1rem;
                         border: 0px solid;
                         background-color: transparent;
                     }
@@ -824,7 +824,7 @@
                             background: $color-white;
                             text-transform: capitalize;
                             color: $color-text;
-                            font-size: calc(var(--tf-base-font-size) + 2px);
+                            font-size: 1rem;
                             margin-bottom: 2px;
                             transition: .3s all ease;
                             &:last-child{
@@ -844,8 +844,8 @@
                             text-align: center;
                         }
                         .tf_input-inner > div{
-                            color: #27333f;
-                            font-size: calc(var(--tf-base-font-size) + 2px);
+                            color: $color-text;
+                            font-size: 1rem;
                             font-weight: 400;
                             line-height: 1.5;
                         }
@@ -901,7 +901,7 @@
                 li{
                     label{
                         color: $color-text;
-                        font-size: calc(var(--tf-base-font-size) + 2px);
+                        font-size: 1rem;
                         display: block;
                         position: relative;
                         padding-left: 35px;
@@ -965,7 +965,7 @@
                 background: $color-primary;
                 padding: 16px 50px;
                 color: $color-white;
-                font-size: calc(var(--tf-base-font-size) + 2px);
+                font-size: 1rem;
                 font-weight: 700;
                 line-height: 1.5;
                 border: 0px solid;

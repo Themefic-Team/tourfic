@@ -43,7 +43,7 @@
                                 position: relative;
                                 h5{
                                     color: $color-heading;
-                                    font-size: calc(var(--tf-base-font-size) - 2px);
+                                    font-size: 0.75rem;
                                     font-weight: 400;
                                     margin-bottom: 8px;
                                     margin-top: 0px;
@@ -52,7 +52,7 @@
                                     min-width: auto;
                                     width: 100%;
                                     color: $color-text;
-                                    font-size: calc(var(--tf-base-font-size) + 2px);
+                                    font-size: 1rem;
                                     font-weight: 400;
                                     border: 0px solid;
                                     padding-left: 0px;
@@ -101,7 +101,7 @@
                                         background: $color-white;
                                         text-transform: capitalize;
                                         color: $color-text;
-                                        font-size: calc(var(--tf-base-font-size) + 2px);
+                                        font-size: 1rem;
                                         margin-bottom: 2px;
                                         transition: .3s all ease;
                                         &:last-child{
@@ -156,7 +156,7 @@
                             li{
                                 label{
                                     color: $color-text;
-                                    font-size: calc(var(--tf-base-font-size) + 2px);
+                                    font-size: 1rem;
                                     font-weight: 400;
                                     display: block;
                                     position: relative;
@@ -219,7 +219,7 @@
                             background: $color-primary;
                             padding: 16px 50px;
                             color: $color-white;
-                            font-size: calc(var(--tf-base-font-size) + 2px);
+                            font-size: 1rem;
                             font-weight: 700;
                             border: 0px solid;
                             cursor: pointer;

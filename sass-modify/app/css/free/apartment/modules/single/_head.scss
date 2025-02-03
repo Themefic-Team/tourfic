@@ -34,18 +34,18 @@
                         color: $color-text;
                         background-color: transparent;
                         padding: 0;
-                        font-size: calc(var(--tf-base-font-size) - 2px);
+                        font-size: 0.75rem;
                         @include flexbox();
                         @include align-items(center);
 
                         i {
                             color: $color-primary;
-                            font-size: 16px;
+                            font-size: 1rem;
                             margin-top: -3px;
                         }
 
                         span {
-                            font-size: var(--tf-base-font-size);
+                            font-size: 0.875rem;
                             font-weight: 500;
                             color: $color-gray;
                             margin: 0 4px;
@@ -73,7 +73,7 @@
                     }
 
                     .tf-wishlist-button {
-                        font-size: var(--tf-base-font-size);
+                        font-size: 0.875rem;
                         cursor: pointer;
                         line-height: 1;
                         color: $color-gray;
@@ -82,7 +82,7 @@
                         gap: 8px;
 
                         i {
-                            font-size: calc(var(--tf-base-font-size) + 10px);
+                            font-size: 1.5rem;
                         }
                     }
 
@@ -91,7 +91,7 @@
 
                         a {
                             line-height: 1;
-                            font-size: var(--tf-base-font-size);
+                            font-size: 0.875rem;
                             display: flex;
                             align-items: center;
                             outline: none;
@@ -128,7 +128,7 @@
 
                                     a i {
                                         color: #1D75E3;
-                                        font-size: 17px;
+                                        font-size: 1.063rem;
                                     }
 
                                     &:nth-child(2) a i {
@@ -165,7 +165,7 @@
                                 display: flex;
                                 align-items: center;
                                 font-weight: 400;
-                                font-size: var(--tf-base-font-size);
+                                font-size: 0.875rem;
                                 @media #{$max575} {
                                     padding-bottom: 0;
                                 }
@@ -196,7 +196,7 @@
 
                             #share_link_button {
                                 white-space: nowrap;
-                                font-size: calc(var(--tf-base-font-size) - 1px);
+                                font-size: 0.813rem;
                                 padding: 5px 12px;
                             }
 
@@ -229,14 +229,14 @@
                 h1 {
                     color: $color-heading;
                     font-weight: 500;
-                    font-size: calc(var(--tf-base-font-size) + 22px);
+                    font-size: 2.25rem;
                     line-height: 1.2;
                     margin-bottom: 8px;
                 }
 
                 .tf-map-link {
                     color: $color-text;
-                    font-size: calc(var(--tf-base-font-size) + 2px);
+                    font-size: 1rem;
                     font-weight: 400;
                     line-height: 1.5;
                     letter-spacing: 0.2px;
@@ -249,7 +249,7 @@
                     }
                     p {
                         margin-bottom: 0;
-                        font-size: calc(var(--tf-base-font-size) + 2px);
+                        font-size: 1rem;
                     }
                 }
 

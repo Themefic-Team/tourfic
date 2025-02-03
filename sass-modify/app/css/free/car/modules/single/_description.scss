@@ -4,11 +4,11 @@
             .tf-short-description,
             .tf-full-description{
                 color: $color-text;
-                font-size: calc(var(--tf-base-font-size) + 2px);
+                font-size: 1rem;
                 font-weight: 400;
                 p{
                     color: $color-text;
-                    font-size: calc(var(--tf-base-font-size) + 2px);
+                    font-size: 1rem;
                     font-weight: 400;
                     margin: 0;
                     

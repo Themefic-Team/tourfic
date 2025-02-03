@@ -74,7 +74,7 @@
                         @include flex(0 0 25px);
 
                         i {
-                            font-size: calc(var(--tf-base-font-size) + 10px);
+                            font-size: 1.5rem;
                             line-height: 1;
                             color: $color-heading;
                         }
@@ -83,13 +83,13 @@
                     h4 {
                         color: $color-heading;
                         margin: 0;
-                        font-size: calc(var(--tf-base-font-size) + 6px);
+                        font-size: 1.25rem;
                         font-weight: 500;
                     }
 
                     p {
                         color: $color-text;
-                        font-size: var(--tf-base-font-size);
+                        font-size: 0.875rem;
                         line-height: 1.5;
                         font-weight: 400;
                         margin: 0;

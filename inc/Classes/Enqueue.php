@@ -1174,7 +1174,7 @@ class Enqueue {
 			$tf_design_secondary = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d2-secondary' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d2-secondary' ) )['gcolor'] : '#003C7A';
 			$tf_design_text = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d2-text' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d2-text' ) )['gcolor'] : '#686E7A';
 			$tf_design_heading = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d2-heading' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d2-heading' ) )['gcolor'] : '#060D1C';
-			$tf_design_light_bg = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d2-light-bg' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d2-light-bg' ) )['gcolor'] : '#fff';
+			$tf_design_light_bg = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d2-light-bg' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d2-light-bg' ) )['gcolor'] : '#faeedc';
 			$tf_design_highlights_bg = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d2-highlights-bg' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d2-highlights-bg' ) )['gcolor'] : '#FCF4E8';
 			$tf_design_form_input_bg = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d2-form-input-bg' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d2-form-input-bg' ) )['gcolor'] : '#F3F7FA';
 			$tf_design_box_shadow = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d2-box-shadow' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d2-box-shadow' ) )['gcolor'] : '#e0e8ee52';
@@ -1210,7 +1210,7 @@ class Enqueue {
 			$tf_design_box_shadow = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-custom-box-shadow' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-custom-box-shadow' ) )['gcolor'] : '';
 			$tf_design_border_color = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-custom-border-color' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-custom-border-color' ) )['gcolor'] : '';
 		}
-		$base_font_size = apply_filters('tf_base_font_size', '14px');
+		$base_font_size = apply_filters('tf_base_font_size', '16px');
 		$output = "
 			:root {
 				--tf-primary: {$tf_design_primary};

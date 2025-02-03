@@ -8,7 +8,7 @@
         width: 100%;
         background: $color-yellow-light;
         color: $color-gray;
-        font-size: calc(var(--tf-base-font-size) + 2px);
+        font-size: 1rem;
         font-weight: 400;
         line-height: 1.25;
 
@@ -171,7 +171,7 @@
                                         .amount{
                                             @media #{$max768} {
                                                 color: $color-text;
-                                                font-size: calc(var(--tf-base-font-size) + 6px);
+                                                font-size: 1.25rem;
                                                 font-weight: 400;
                                                 line-height: 1.3;
                                             }
@@ -210,7 +210,7 @@
             padding: 8px 32px;
             color: $color-white;
             text-align: center;
-            font-size: calc(var(--tf-base-font-size) - 2px);
+            font-size: 0.75rem;
             font-weight: 600;
             line-height: 1.5;
             cursor: pointer;
@@ -279,34 +279,34 @@
                 }
                 .tf-booking-date {
                     color: $color-text;
-                    font-size: calc(var(--tf-base-font-size) + 10px);
+                    font-size: 1.5rem;
                     font-weight: 400;
                     line-height: 1.33;
                     text-align: right;
                     margin-right: 5px;
                     @media #{$max1024}{
-                        font-size: calc(var(--tf-base-font-size) + 6px);
+                        font-size: 1.25rem;
                     }
                 }
                 span.tf-booking-form-title {
-                    font-size: calc(var(--tf-base-font-size) + 2px);
+                    font-size: 1rem;
                     font-weight: 600;
                     line-height: 1.25;
                     margin-bottom: 8px;
                     color: $color-text;
                     @media #{$max1024}{
-                        font-size: 14px;
+                        font-size: 0.875rem;
                     }
                 }
                 span.tf-booking-month {
                     color: $color-text;
-                    font-size: calc(var(--tf-base-font-size) + 2px);
+                    font-size: 1rem;
                     display: flex;
                     flex-direction: column;
                     align-items: center;
                     text-transform: capitalize;
                     @media #{$max1024}{
-                        font-size: var(--tf-base-font-size);
+                        font-size: 0.875rem;
                     }
                 }
                 .tf-booking-date-wrap {
@@ -316,7 +316,7 @@
                 }
                 .tf_label-row{
                     span#tf-required{
-                        font-size: calc(var(--tf-base-font-size) - 2px);
+                        font-size: 0.75rem;
                         color: $color-danger;
                     }
                 }
@@ -365,12 +365,12 @@
                     li{
                         margin: 0px;
                         padding-left: 0px;
-                        font-size: calc(var(--tf-base-font-size) + 2px);
+                        font-size: 1rem;
                         font-weight: 400;
                         line-height: 1.3;
                         color: $color-text;
                         @media #{$max1024}{
-                            font-size: calc(var(--tf-base-font-size) - 2px);
+                            font-size: 0.75rem;
                         }
                         label{
                             padding-left: 25px;
@@ -552,17 +552,17 @@
                             li {
                                 display: flex;
                                 @media #{$max1024}{
-                                    font-size: calc(var(--tf-base-font-size) + 2px);
+                                    font-size: 1rem;
                                 }
                                 @media #{$max768}{
-                                    font-size: var(--tf-base-font-size);
+                                    font-size: 0.875rem;
                                 }
                                 i {
                                     margin-right: 8px;
-                                    font-size: calc(var(--tf-base-font-size) + 6px);
+                                    font-size: 1.25rem;
                                     width: 20px;
                                     @media #{$max1024}{
-                                        font-size: var(--tf-base-font-size);
+                                        font-size: 0.875rem;
                                     }
                                 }
                                 a {
@@ -573,7 +573,7 @@
                         }
                         span.tf-others-benefits-title {
                             color: $color-heading;
-                            font-size: calc(var(--tf-base-font-size) + 2px);
+                            font-size: 1rem;
                             font-weight: 600;
                             margin-bottom: 16px;
                             margin-top: auto;
@@ -606,7 +606,7 @@
                                 }
                             }
                             i {
-                                font-size: calc(var(--tf-base-font-size) - 4px);
+                                font-size: 0.625rem;
                                 border: 1px solid;
                                 height: 14px;
                                 width: 14px;
@@ -640,7 +640,7 @@
                                 }
                                 .discount-price{
                                     color: $color-gray;
-                                    font-size: calc(var(--tf-base-font-size) + 2px);
+                                    font-size: 1rem;
                                     display: inline-flex;
                                     gap: 2px;
                                     .amount{
@@ -648,19 +648,19 @@
                                     }
                                 }
                                 .sale-price{
-                                    font-size: calc(var(--tf-base-font-size) + 10px);
+                                    font-size: 1.5rem;
                                     display: inline-flex;
                                     align-items: center;
                                     gap: 2px;
                                     .booking-type{
-                                        font-size: calc(var(--tf-base-font-size) + 2px);
+                                        font-size: 1rem;
                                     }
                                 }
                             }
                         }
                         .tf-available-room-select {
                             color: $color-text;
-                            font-size: calc(var(--tf-base-font-size) + 2px);
+                            font-size: 1rem;
                             display: flex;
                             width: fit-content;
                             margin-bottom: 26px;
@@ -682,7 +682,7 @@
                         }
                     }
                     .tf-available-room-purchase-summery {
-                        font-size: calc(var(--tf-base-font-size) - 2px);
+                        font-size: 0.75rem;
                         display: flex;
                         .price-per-night{
                             margin-left: 5px;
@@ -691,7 +691,7 @@
                     .tf-deposit-content{
                         text-align: right;
                         label{
-                            font-size: calc(var(--tf-base-font-size) - 2px);
+                            font-size: 0.75rem;
                         }
                         input[type=checkbox]{
                             background: $color-primary;
@@ -710,7 +710,7 @@
             .tf-available-room-off {
                 padding: 4px 12px;
                 background: $color-success;
-                font-size: calc(var(--tf-base-font-size) - 2px);
+                font-size: 0.75rem;
                 font-weight: 500;
                 color: $color-white;
                 margin-bottom: 8px;
@@ -734,17 +734,17 @@
             }
             &>span{
                 color: $color-text;
-                font-size: calc(var(--tf-base-font-size) + 10px);
+                font-size: 1.5rem;
                 font-weight: 400;
                 line-height: 1.3;
                 margin: 0px;
                 @media #{$max1024}{
-                    font-size: var(--tf-base-font-size);
+                    font-size: 0.875rem;
                 }
             }
             > h2{
                 @media only screen and (max-width: 1280px) {
-                    font-size: calc(var(--tf-base-font-size) + 2px);
+                    font-size: 1rem;
                 }
             }
             .tf-archive-filter-showing{
@@ -759,7 +759,7 @@
                 padding: 0px;
                 cursor: pointer;
                 i{
-                    font-size: calc(var(--tf-base-font-size) + 10px);
+                    font-size: 1.5rem;
                     color: $color-text;
                 }
             }
@@ -811,12 +811,12 @@
                     pointer-events: none;
                     span{
                         margin-bottom: 10px;
-                        font-size: calc(var(--tf-base-font-size) + 2px);
+                        font-size: 1rem;
                         font-weight: 600;
                         line-height: 1.5;
                         color: $color-text;
                         @media #{$max1024}{
-                            font-size: calc(var(--tf-base-font-size) - 2px);
+                            font-size: 0.75rem;
                         }
                     }
                     i{
@@ -829,13 +829,13 @@
                         li{
                             margin: 0px;
                             padding-left: 0px;
-                            font-size: calc(var(--tf-base-font-size) + 2px);
+                            font-size: 1rem;
                             font-weight: 400;
                             line-height: 1.3;
                             color: $color-text;
                             background: transparent;
                             @media #{$max1024}{
-                                font-size: calc(var(--tf-base-font-size) - 2px);
+                                font-size: 0.75rem;
                             }
                             label{
                                 padding-left: 30px;
@@ -870,7 +870,7 @@
                         text-decoration: none;
                         text-transform: capitalize;
                         color: $color-primary;
-                        font-size: calc(var(--tf-base-font-size) + 2px);
+                        font-size: 1rem;
                         font-weight: 400;
                         line-height: 1.3;
                         margin-top: 6px;
@@ -878,7 +878,7 @@
                             display: none;
                         }
                         @media #{$max1024}{
-                            font-size: calc(var(--tf-base-font-size) - 2px);
+                            font-size: 0.75rem;
                         }
                     }
                 }
@@ -921,7 +921,7 @@
                     margin-bottom: 0px;
                     bottom: -40px;
                     color: $color-text;
-                    font-size: calc(var(--tf-base-font-size) + 2px);
+                    font-size: 1rem;
                     font-weight: 400;
                     line-height: 1.3;
                 }
@@ -1032,7 +1032,7 @@
                 }
                 .tf-popup-close i {
                     color: $color-text;
-                    font-size: calc(var(--tf-base-font-size) + 4px);
+                    font-size: 1.125rem;
                 }
             }
         }
@@ -1052,7 +1052,7 @@
             }
             .acr-label{
                 color: $color-text;
-                font-size: calc(var(--tf-base-font-size) + 2px);
+                font-size: 1rem;
                 font-weight: 600;
                 line-height: 1.3;
             }
@@ -1063,7 +1063,7 @@
                     width: 34px;
                     height: 48px;
                     border: 1px solid;
-                    font-size: calc(var(--tf-base-font-size) + 2px);
+                    font-size: 1rem;
                     font-weight: 600;
                     color: $color-text;
                     text-align: center;
@@ -1076,7 +1076,7 @@
                 .acr-inc{
                     background: transparent;
                     border: none;
-                    font-size: calc(var(--tf-base-font-size) + 17px);
+                    font-size: 1.938rem;
                     font-weight: 400;
                     color: $color-text;
                     padding: 0px;
@@ -1113,7 +1113,7 @@
                     h4{
                         color: $color-heading;
                         text-align: center;
-                        font-size: calc(var(--tf-base-font-size) + 18px);
+                        font-size: 2rem;
                         font-weight: 700;
                         margin-bottom: 32px;
                     }
@@ -1124,7 +1124,7 @@
                         box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
                         color: $color-text;
                         background-color: $color-light-bg;
-                        font-size: calc(var(--tf-base-font-size) + 2px);
+                        font-size: 1rem;
                         height: 45px;
                         padding: 12px 14px;;
                         border-radius: 0px;
@@ -1137,7 +1137,7 @@
                         box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
                         background-color: $color-light-bg;
                         color: $color-text;
-                        font-size: calc(var(--tf-base-font-size) + 2px);
+                        font-size: 1rem;
                         font-weight: 400;
                         padding: 12px 14px;
                         border-radius: 0px;
@@ -1153,7 +1153,7 @@
                     border-radius: 0px;
                     padding: 12px 32px;
                     color: $color-white;
-                    font-size: calc(var(--tf-base-font-size) + 2px);
+                    font-size: 1rem;
                     font-weight: 700;
                     transition: .3s all ease;
                     &::after{
@@ -1239,19 +1239,19 @@
                             }
                             h2{
                                 @media only screen and (max-width: 1280px) {
-                                    font-size: calc(var(--tf-base-font-size) + 10px);
+                                    font-size: 1.5rem;
                                 }
                             }
                             ul{
                                 li{
                                     @media only screen and (max-width: 1280px) {
-                                        font-size: var(--tf-base-font-size);
+                                        font-size: 0.875rem;
                                     }
                                     @media #{$max1024}{
-                                        font-size: calc(var(--tf-base-font-size) + 2px);
+                                        font-size: 1rem;
                                     }
                                     @media #{$max768}{
-                                        font-size: var(--tf-base-font-size);
+                                        font-size: 0.875rem;
                                     }
                                 }
                             }
@@ -1340,7 +1340,7 @@
                                 margin-bottom: 16px;
                                 h2{
                                     margin: 0;
-                                    font-size: calc(var(--tf-base-font-size) + 6px);
+                                    font-size: 1.25rem;
                                 }
                                 .tf-available-room-price{
                                     display: flex;
@@ -1352,7 +1352,7 @@
                                         line-height: 1.7;
                                         .discount-price {
                                             color: $color-gray;
-                                            font-size: calc(var(--tf-base-font-size) + 2px);
+                                            font-size: 1rem;
                                             font-weight: 400;
                                             line-height: 1.3;
                                             display: flex;
@@ -1363,13 +1363,13 @@
                                             }
                                         }
                                         .sale-price {
-                                            font-size: calc(var(--tf-base-font-size) + 10px);
+                                            font-size: 1.5rem;
                                             display: flex;
                                             align-items: center;
                                             gap: 2px;
                                             justify-content: end;
                                             .booking-type {
-                                                font-size: calc(var(--tf-base-font-size) + 2px);
+                                                font-size: 1rem;
                                             }
                                         }
                                     }
@@ -1382,7 +1382,7 @@
                             a.availability{
                                 width: 100%;
                                 margin-top: 32px;
-                                font-size: calc(var(--tf-base-font-size) - 2px);
+                                font-size: 0.75rem;
                                 @media only screen and (max-width: 1280px) {
                                     min-width: 128px;
                                 }
@@ -1390,7 +1390,7 @@
                             a.tf_air_service,
                             button{
                                 width: 100%;
-                                font-size: calc(var(--tf-base-font-size) - 2px);
+                                font-size: 0.75rem;
                             }
                             a.tf_air_service{
                                 @media only screen and (max-width: 1280px) {
@@ -1401,7 +1401,7 @@
                                 width: 100%;
                                 margin-top: 32px;
                                 @media #{$max768}{
-                                    font-size: calc(var(--tf-base-font-size) - 2px);
+                                    font-size: 0.75rem;
                                 }
                             }
                             .tf-available-room-select{
@@ -1429,12 +1429,12 @@
                     }
                     span.tf-booking-form-title{
                         @media #{$max768} {
-                            font-size: calc(var(--tf-base-font-size) - 2px);
+                            font-size: 0.75rem;
                         }
                     }
                     .tf-booking-date{
                         @media #{$max768} {
-                            font-size: calc(var(--tf-base-font-size) + 2px);
+                            font-size: 1rem;
                         }
                     }
                     .tf-booking-form-checkin,
@@ -1662,12 +1662,12 @@
         .tf-questions-wrapper {
             h2{
                 color: $color-heading;
-                font-size: calc(var(--tf-base-font-size) + 18px);
+                font-size: 2rem;
                 font-weight: 700;
                 line-height: 1.2;
                 margin-bottom: 24px;
                 @media #{$max1024}{
-                    font-size: calc(var(--tf-base-font-size) + 10px);
+                    font-size: 1.5rem;
                 }
             }
             .tf-questions {
@@ -1709,7 +1709,7 @@
                         .tf-faq-head{
                             span {
                                 color: $color-text;
-                                font-size: calc(var(--tf-base-font-size) + 2px);
+                                font-size: 1rem;
                                 font-weight: 600;
                                 line-height: 1.3;
                                 margin-bottom: 8px;
@@ -1722,7 +1722,7 @@
                         .tf-question-desc {
                             display: none;
                             @media #{$max768}{
-                                font-size: var(--tf-base-font-size);
+                                font-size: 0.875rem;
                             }
                         }
                     }
@@ -1738,12 +1738,12 @@
             margin: 0;
             h2{
                 color: $color-heading;
-                font-size: calc(var(--tf-base-font-size) + 18px);
+                font-size: 2rem;
                 font-weight: 700;
                 line-height: 1.2;
                 margin-bottom: 24px;
                 @media #{$max1024}{
-                    font-size: calc(var(--tf-base-font-size) + 10px);
+                    font-size: 1.5rem;
                 }
             }
             .tf-policies {
@@ -1754,7 +1754,7 @@
                     color: $color-text;
                     margin: 0;
                     @media #{$max768}{
-                        font-size: var(--tf-base-font-size);
+                        font-size: 0.875rem;
                     }
                 }
                 .tf-policy-item {
@@ -1796,11 +1796,11 @@
             }
             h2{
                 color: $color-heading;
-                font-size: calc(var(--tf-base-font-size) + 18px);
+                font-size: 2rem;
                 font-weight: 700;
                 margin-bottom: 24px;
                 @media #{$max1024}{
-                    font-size: calc(var(--tf-base-font-size) + 10px);
+                    font-size: 1.5rem;
                     margin-bottom: 24px;
                 }
             }
@@ -1856,7 +1856,7 @@
                         padding: 8px 16px;
                         border: 0.5px solid $color-primary;
                         color: $color-primary;
-                        font-size: calc(var(--tf-base-font-size) + 2px);
+                        font-size: 1rem;
                         font-weight: 700;
                         text-decoration: none;
                         text-align: center;
@@ -1868,12 +1868,12 @@
                             border-color: $color-secondary;
                         }
                         @media #{$max1024}{
-                            font-size: calc(var(--tf-base-font-size) - 2px);
+                            font-size: 0.75rem;
                         }
                     }
                     .tf-meta-location{
                         color: $color-text;
-                        font-size: calc(var(--tf-base-font-size) + 2px);
+                        font-size: 1rem;
                         font-weight: 400;
                         line-height: 1.3;
                         margin: 0px 0px 24px 0px;
@@ -1887,7 +1887,7 @@
                             a{
                                 text-decoration: none;
                                 color: inherit;
-                                font-size: calc(var(--tf-base-font-size) + 6px);
+                                font-size: 1.25rem;
                                 font-weight: 700;
                                 line-height: 1.2;
                                 &:hover{
@@ -1902,16 +1902,16 @@
                             }
                             span{
                                 color: $color-text;
-                                font-size: calc(var(--tf-base-font-size) + 10px);
+                                font-size: 1.5rem;
                                 font-weight: 400;
                                 line-height: 1.3;
                                 @media #{$max1024}{
-                                    font-size: calc(var(--tf-base-font-size) + 6px);
+                                    font-size: 1.25rem;
                                 }
                             }
                             span.pricing_calc_type{
                                 color: $color-text;
-                                font-size: calc(var(--tf-base-font-size) + 2px);
+                                font-size: 1rem;
                                 font-weight: 400;
                                 line-height: 1.3;
                             }
@@ -1953,28 +1953,28 @@
                 gap: 16px;
             }
             i{
-                font-size: calc(var(--tf-base-font-size) + 50px);
+                font-size: 4rem;
             }
             h3{
                 color: $color-heading;
-                font-size: calc(var(--tf-base-font-size) + 18px);
+                font-size: 2rem;
                 font-weight: 700;
                 line-height: 1.2;
                 margin: 0;
                 text-align: center;
                 @media #{$max1024}{
-                    font-size: calc(var(--tf-base-font-size) + 6px);
+                    font-size: 1.25rem;
                 }
             }
             p{
                 color: $color-text;
                 text-align: center;
-                font-size: calc(var(--tf-base-font-size) + 2px);
+                font-size: 1rem;
                 font-weight: 400;
                 line-height: 1.3;
                 margin: 0;
                 @media #{$max768}{
-                    font-size: var(--tf-base-font-size);
+                    font-size: 0.875rem;
                 }
             }
         }
@@ -1990,7 +1990,7 @@
         }
         .tf-reting-field button {
             color: $color-text;
-            font-size: calc(var(--tf-base-font-size) + 2px);
+            font-size: 1rem;
             font-weight: 700;
             line-height: 1.5;
             background: $color-light-bg;
@@ -1999,20 +1999,20 @@
             padding: 12px 0;
             border-radius: 0px;
             @media #{$max1024}{
-                font-size: calc(var(--tf-base-font-size) - 2px);
+                font-size: 0.75rem;
             }
         }
         .tf-review-data-inner{
             .tf-review-data-average {
                 span.avg-review{
                     margin-bottom: 0px;
-                    font-size: calc(var(--tf-base-font-size) + 26px);
+                    font-size: 2.5rem;
                     font-weight: 400;
                     line-height: 1.3;
                     word-wrap: break-word;
                     color: $color-text;
                     @media #{$max1024}{
-                        font-size: calc(var(--tf-base-font-size) + 10px);
+                        font-size: 1.5rem;
                     }
                     span {
                         color: $color-text;
@@ -2021,14 +2021,14 @@
             }
             .tf-review-all-info {
                 color: $color-text;
-                font-size: calc(var(--tf-base-font-size) + 6px);
+                font-size: 1.25rem;
                 line-height: 1.3;
                 p{
-                    font-size: calc(var(--tf-base-font-size) + 6px);
+                    font-size: 1.25rem;
                     margin: 0;
                     span {
                         color: $color-text;
-                        font-size: calc(var(--tf-base-font-size) + 2px);
+                        font-size: 1rem;
                         line-height: 1.3;
                         display: block;
                         margin-top: 6px;
@@ -2091,7 +2091,7 @@
             }
             h3 {
                 color: $color-heading;
-                font-size: calc(var(--tf-base-font-size) + 6px);
+                font-size: 1.25rem;
                 font-weight: 700;
                 line-height: 1.2;
             }
@@ -2106,7 +2106,7 @@
                         .tf-form-single-rating{
                             display: flex;
                             label{
-                                font-size: var(--tf-base-font-size);
+                                font-size: 0.875rem;
                                 font-weight: 600;
                                 line-height: 1.3;
                                 display: block;
@@ -2129,14 +2129,14 @@
                             width: 100%;
                             border-radius: 0;
                             padding: 16px 32px;
-                            font-size: calc(var(--tf-base-font-size) + 2px);
+                            font-size: 1rem;
                         }
                     }
                     input[type="text"],textarea{
                         border: 1px solid $color-border;
                         padding: 8px;
                         color: $color-text;
-                        font-size: calc(var(--tf-base-font-size) + 2px);
+                        font-size: 1rem;
                         border-radius: 0px;
                     }
                     textarea{
@@ -2217,7 +2217,7 @@
                             justify-content: center;
                             color: $color-white;
                             cursor: pointer;
-                            font-size: calc(var(--tf-base-font-size) + 2px);
+                            font-size: 1rem;
                             text-decoration: none;
                         }
                         a.tf-share-toggle.actives,
@@ -2240,7 +2240,7 @@
                                         margin-right: 16px;
                                         text-decoration: none;
                                         i{
-                                            font-size: calc(var(--tf-base-font-size) + 2px);
+                                            font-size: 1rem;
                                             color: $color-white;
                                         }
                                     }
@@ -2258,7 +2258,7 @@
                                         gap: 5px;
                                         span{
                                             display: none;
-                                            font-size: calc(var(--tf-base-font-size) - 1px);
+                                            font-size: 0.813rem;
                                             color: $color-white;
                                         }
                                     }
@@ -2301,10 +2301,10 @@
                                 margin-bottom: 16px;
                                 line-height: initial;
                                 @media #{$max1024}{
-                                    font-size: calc(var(--tf-base-font-size) + 18px);
+                                    font-size: 2rem;
                                 }
                                 @media #{$max768}{
-                                    font-size: calc(var(--tf-base-font-size) + 6px);
+                                    font-size: 1.25rem;
                                     margin-bottom: 8px;
                                 }
                                 @media #{$max575}{
@@ -2315,7 +2315,7 @@
                                 }
                             }
                             .tf-title-meta {
-                                font-size: calc(var(--tf-base-font-size) + 10px);
+                                font-size: 1.5rem;
                                 font-weight: 400;
                                 line-height: 1.3;
                                 color: $color-white;
@@ -2323,24 +2323,24 @@
                                 gap: 8px;
                                 width: 80%;
                                 @media #{$max1024}{
-                                    font-size: calc(var(--tf-base-font-size) + 2px);
+                                    font-size: 1rem;
                                     width: auto;
                                 }
                                 @media #{$max768}{
-                                    font-size: var(--tf-base-font-size);
+                                    font-size: 0.875rem;
                                     line-height: 1.3;
                                 }
                                 a {
                                     color: $color-white;
                                     text-decoration: none;
-                                    font-size: calc(var(--tf-base-font-size) + 10px);
+                                    font-size: 1.5rem;
                                     font-weight: 400;
                                     line-height: 1.3;
                                     @media #{$max1024}{
-                                        font-size: calc(var(--tf-base-font-size) + 2px);
+                                        font-size: 1rem;
                                     }
                                     @media #{$max768}{
-                                        font-size: var(--tf-base-font-size);
+                                        font-size: 0.875rem;
                                         line-height: 1.3;
                                     }
                                 }
@@ -2408,12 +2408,12 @@
             }
             h2{
                 color: $color-heading;
-                font-size: calc(var(--tf-base-font-size) + 18px);
+                font-size: 2rem;
                 font-weight: 700;
                 line-height: 1.2;
                 margin-bottom: 24px;
                 @media #{$max1024}{
-                    font-size: calc(var(--tf-base-font-size) + 10px);
+                    font-size: 1.5rem;
                     margin-bottom: 16px;
                 }
             }
@@ -2436,7 +2436,7 @@
                         display: block;
                         i {
                             margin-right: 8px;
-                            font-size: calc(var(--tf-base-font-size) + 6px);
+                            font-size: 1.25rem;
                             width: 20px;
                         }
                     }
@@ -2457,12 +2457,12 @@
             padding-bottom: 55px;
             .tf-section-title{
                 color: $color-heading;
-                font-size: calc(var(--tf-base-font-size) + 18px);
+                font-size: 2rem;
                 font-weight: 700;
                 line-height: 1.2;
                 margin-bottom: 8px;
                 @media #{$max1024}{
-                    font-size: calc(var(--tf-base-font-size) + 10px);
+                    font-size: 1.5rem;
                 }
             }
             .tf-reviews-slider {
@@ -2493,7 +2493,7 @@
 
                         .tf-review-rating {
                             color: $color-text;
-                            font-size: calc(var(--tf-base-font-size) + 2px);
+                            font-size: 1rem;
                             font-weight: 600;
                             line-height: 1.3;
                             word-wrap: break-word;
@@ -2513,7 +2513,7 @@
                         p {
                             margin: 0;
                             @media #{$max768}{
-                                font-size: var(--tf-base-font-size);
+                                font-size: 0.875rem;
                             }
                         }
                     }
@@ -2530,7 +2530,7 @@
                     bottom: -30px;
                     border: none;
                     background: transparent;
-                    font-size: calc(var(--tf-base-font-size) + 16px);
+                    font-size: 1.875rem;
                     color: $color-primary;
                     padding: 0px;
                     cursor: pointer;
@@ -2578,7 +2578,7 @@
                     i {
                         margin-right: 8px;
                         width: 20px;
-                        font-size: calc(var(--tf-base-font-size) + 6px);
+                        font-size: 1.25rem;
                     }
                 }
             }
@@ -2588,7 +2588,7 @@
             margin-bottom: 0px;
             font-weight: 700;
             @media #{$max1024}{
-                font-size: calc(var(--tf-base-font-size) + 6px);
+                font-size: 1.25rem;
             }
         }
 
@@ -2659,7 +2659,7 @@
                     }
                     .tf-popup-right span {
                         color: $color-text;
-                        font-size: calc(var(--tf-base-font-size) + 2px);
+                        font-size: 1rem;
                         font-weight: 600;
                         line-height: 1.3;
                         word-wrap: break-word;
@@ -2689,7 +2689,7 @@
                     }
                     .tf-popup-right a {
                         color: $color-primary;
-                        font-size: calc(var(--tf-base-font-size) + 2px);
+                        font-size: 1rem;
                         font-weight: 600;
                         line-height: 1.3;
                         text-decoration: none;
@@ -2732,7 +2732,7 @@
             .acr-inc {
                 background: transparent;
                 border: none;
-                font-size: calc(var(--tf-base-font-size) + 17px);
+                font-size: 1.938rem;
                 font-weight: 400;
                 color: $color-text;
                 padding: 0px;
@@ -2742,7 +2742,7 @@
                 width: 34px;
                 height: 48px;
                 border: 1px solid;
-                font-size: calc(var(--tf-base-font-size) + 2px);
+                font-size: 1rem;
                 font-weight: 600;
                 color: $color-text;
                 text-align: center;
@@ -2778,22 +2778,22 @@
 
             .acr-label {
                 color: $color-text;
-                font-size: calc(var(--tf-base-font-size) + 2px);
+                font-size: 1rem;
                 font-weight: 600;
                 line-height: 1.4;
                 @media #{$max1024}{
-                    font-size: var(--tf-base-font-size);
+                    font-size: 0.875rem;
                 }
                 div{
                     margin-left: 5px;
                     span{
                         display: inline-block;
                         color: $color-text;
-                        font-size: calc(var(--tf-base-font-size) + 2px);
+                        font-size: 1rem;
                         font-weight: 600;
                         line-height: 1.4;
                         @media #{$max1024}{
-                            font-size: var(--tf-base-font-size);
+                            font-size: 0.875rem;
                         }
                     }
                 }
@@ -2807,14 +2807,14 @@
 
             .acr-label span {
                 color: $color-text;
-                font-size: calc(var(--tf-base-font-size) - 2px);
+                font-size: 0.75rem;
                 font-weight: 500;
                 display: block;
             }
 
             span.tf-search-date-info {
                 color: $color-text;
-                font-size: calc(var(--tf-base-font-size) + 18px);
+                font-size: 2rem;
                 font-weight: 700;
                 line-height: 1;
             }
@@ -2824,12 +2824,12 @@
             .tf-form-title{
                 h3.tf-person-info-title{
                     color: $color-text;
-                    font-size: calc(var(--tf-base-font-size) + 18px);
+                    font-size: 2rem;
                     font-weight: 700;
                     line-height: 1.2;
                     margin: 0;
                     @media #{$max1024}{
-                        font-size: calc(var(--tf-base-font-size) + 10px);
+                        font-size: 1.5rem;
                     }
                 }
             }
@@ -2910,7 +2910,7 @@
             }
             span{
                 color: $color-white;
-                font-size: calc(var(--tf-base-font-size) + 2px);
+                font-size: 1rem;
                 font-weight: 700;
                 line-height: 1.5;
             }
@@ -2999,7 +2999,7 @@
                             li {
                                 a {
                                     text-decoration: none;
-                                    font-size: calc(var(--tf-base-font-size) + 2px);
+                                    font-size: 1rem;
                                     font-weight: 600;
                                     line-height: 1.3;
                                     color: $color-text;
@@ -3008,7 +3008,7 @@
                                     display: inline-block;
                                     border-color: transparent;
                                     @media #{$max1024}{
-                                        font-size: calc(var(--tf-base-font-size) - 2px);
+                                        font-size: 0.75rem;
                                     }
                                     &.tf-hashlink {
                                         border-color: $color-primary;
@@ -3027,39 +3027,39 @@
                             }
                             .tf-short-description{
                                 color: $color-text;
-                                font-size: calc(var(--tf-base-font-size) + 2px);
+                                font-size: 1rem;
                                 font-weight: 400;
                                 line-height: 1.3;
                                 @media #{$max768}{
-                                    font-size: var(--tf-base-font-size);
+                                    font-size: 0.875rem;
                                 }
                             }
                             span.tf-see-description,
                             span.tf-see-less-description{
                                 color: $color-primary;
-                                font-size: calc(var(--tf-base-font-size) + 2px);
+                                font-size: 1rem;
                                 font-weight: 400;
                                 line-height: 1.3;
                                 cursor: pointer;
                                 @media #{$max768}{
-                                    font-size: var(--tf-base-font-size);
+                                    font-size: 0.875rem;
                                 }
                             }
                             .tf-full-description{
                                 display: none;
                                 color: $color-text;
-                                font-size: calc(var(--tf-base-font-size) + 2px);
+                                font-size: 1rem;
                                 font-weight: 400;
                                 line-height: 1.3;
                                 @media #{$max768}{
-                                    font-size: var(--tf-base-font-size);
+                                    font-size: 0.875rem;
                                 }
                             }
                         }
                         .tf-overview-popular-facilities {
                             span.tf-popular-facilities-title {
                                 color: $color-text;
-                                font-size: calc(var(--tf-base-font-size) + 2px);
+                                font-size: 1rem;
                                 display: block;
                                 font-weight: 600;
                                 line-height: 1.3;
@@ -3084,7 +3084,7 @@
                                     }
                                     i{
                                         margin-right: 8px;
-                                        font-size: calc(var(--tf-base-font-size) + 6px);
+                                        font-size: 1.25rem;
                                     }
                                 }
                             }
@@ -3117,19 +3117,19 @@
                                     gap: 8px;
                                 }
                                 i {
-                                    font-size: calc(var(--tf-base-font-size) + 10px);
+                                    font-size: 1.5rem;
                                     color: $color-primary;
                                 }
                                 .tf-feature-block-details {
                                     h5 {
                                         color: $color-heading;
-                                        font-size: calc(var(--tf-base-font-size) + 6px);
+                                        font-size: 1.25rem;
                                         font-weight: 700;
                                         line-height: 1.3;
                                     }
                                     p{
                                         color: $color-text;
-                                        font-size: calc(var(--tf-base-font-size) + 2px);
+                                        font-size: 1rem;
                                         font-weight: 400;
                                         margin: 0;
                                     }
@@ -3154,25 +3154,25 @@
                                     gap: 8px;
                                 }
                                 i {
-                                    font-size: calc(var(--tf-base-font-size) + 10px);
+                                    font-size: 1.5rem;
                                     color: $color-primary;
                                 }
                                 .tf-feature-block-details {
                                     h5 {
                                         color: $color-heading;
-                                        font-size: calc(var(--tf-base-font-size) + 10px);
+                                        font-size: 1.5rem;
                                         font-weight: 700;
                                         line-height: 1.3;
                                     }
                                     p{
                                         color: $color-text;
-                                        font-size: calc(var(--tf-base-font-size) + 2px);
+                                        font-size: 1rem;
                                         font-weight: 400;
                                         line-height: 1.3;
                                         margin: 0;
                                         span.show_sub_title{
                                             color: $color-text;
-                                            font-size: calc(var(--tf-base-font-size) + 2px);
+                                            font-size: 1rem;
                                             font-weight: 400;
                                             line-height: 1.3;
                                             cursor: pointer;
@@ -3217,7 +3217,7 @@
                                     font-weight: 700;
                                     margin-bottom: 24px;
                                     @media #{$max1024}{
-                                        font-size: calc(var(--tf-base-font-size) + 10px);
+                                        font-size: 1.5rem;
                                     }
                                 }
                                 p{
@@ -3302,14 +3302,14 @@
                         h1{
                             color: $color-white;
                             margin: 0px;
-                            font-size: calc(var(--tf-base-font-size) + 26px);
+                            font-size: 2.5rem;
                             @media #{$max768}{
-                                font-size: calc(var(--tf-base-font-size) + 6px);
+                                font-size: 1.25rem;
                             }
                         }
                     }
                     .tf-title-meta {
-                        font-size: calc(var(--tf-base-font-size) + 10px);
+                        font-size: 1.5rem;
                         line-height: 1.3;
                         padding-top: 8px;
                         @media #{$max1024}{
@@ -3318,7 +3318,7 @@
                         p{
                             color: $color-white;
                             margin: 0px;
-                            font-size: calc(var(--tf-base-font-size) + 10px);
+                            font-size: 1.5rem;
                             line-height: 1.3;
                         }
                     }
@@ -3388,7 +3388,7 @@
                                 width: 100%;
                                 background: transparent;
                                 box-shadow: none;
-                                font-size: calc(var(--tf-base-font-size) - 2px);
+                                font-size: 0.75rem;
                                 color: $color-text;
                                 &::placeholder{
                                     color: $color-text;
@@ -3459,7 +3459,7 @@
                         }
                         .tf-booking-date{
                             @media only screen and (min-width: 1025px) and (max-width: 1165px) {
-                                font-size: calc(var(--tf-base-font-size) + 6px);
+                                font-size: 1.25rem;
                             }
                         }
                         .tf-duration span{
@@ -3490,7 +3490,7 @@
                         }
                         .tf-booking-date{
                             @media only screen and (min-width: 1025px) and (max-width: 1165px) {
-                                font-size: calc(var(--tf-base-font-size) + 6px);
+                                font-size: 1.25rem;
                             }
                         }
                         .tf-duration span{
@@ -3528,7 +3528,7 @@
                         }
                         .tf-booking-date{
                             @media only screen and (min-width: 1025px) and (max-width: 1165px) {
-                                font-size: calc(var(--tf-base-font-size) + 6px);
+                                font-size: 1.25rem;
                             }
                         }
                         .tf-booking-form-guest-and-room-inner {
@@ -3543,7 +3543,7 @@
                                 align-items: center;
                                 gap: 5px;
                                 span{
-                                    font-size: calc(var(--tf-base-font-size) + 10px);
+                                    font-size: 1.5rem;
                                     margin-bottom: -3px;
                                     color: $color-text;
                                     display: -webkit-box;
@@ -3554,7 +3554,7 @@
                                     align-items: center;
                                     gap: 5px;
                                     @media #{$max1024}{
-                                        font-size: calc(var(--tf-base-font-size) + 6px);
+                                        font-size: 1.25rem;
                                     }
                                 }
                             }
@@ -3578,7 +3578,7 @@
                             }
                             .tf-booking-date{
                                 @media only screen and (min-width: 1025px) and (max-width: 1165px) {
-                                    font-size: calc(var(--tf-base-font-size) + 6px);
+                                    font-size: 1.25rem;
                                 }
                             }
                             .tf-duration span{
@@ -3591,7 +3591,7 @@
                                 align-items: center;
                                 .tf-duration{
                                     span{
-                                        font-size: calc(var(--tf-base-font-size) + 10px);
+                                        font-size: 1.5rem;
                                         margin: 0px 15px;
                                         color: $color-text;
                                         @media #{$max1024}{
@@ -3614,7 +3614,7 @@
                             }
                             .tf-booking-date{
                                 @media only screen and (min-width: 1025px) and (max-width: 1165px) {
-                                    font-size: calc(var(--tf-base-font-size) + 6px);
+                                    font-size: 1.25rem;
                                 }
                             }
                             .tf-duration span{
@@ -3638,7 +3638,7 @@
                             }
                             .tf-booking-date{
                                 @media only screen and (min-width: 1025px) and (max-width: 1165px) {
-                                    font-size: calc(var(--tf-base-font-size) + 6px);
+                                    font-size: 1.25rem;
                                 }
                             }
                             span.tf-booking-month{
@@ -3683,7 +3683,7 @@
                     background-position: calc(100% - 12px) 50%;
                     border: none;
                     border-radius: 0px;
-                    font-size: calc(var(--tf-base-font-size) + 2px);
+                    font-size: 1rem;
                     background-size: 16px;
                     appearance: none;
 
@@ -3692,7 +3692,7 @@
                     }
 
                     @media #{$max1024}{
-                        font-size: var(--tf-base-font-size);
+                        font-size: 0.875rem;
                         padding: 10px 36px 10px 10px;
                         background-size: 14px;
                     }
@@ -3764,7 +3764,7 @@
                             gap: 8px;
                             &>span {
                                 color: $color-white;
-                                font-size: calc(var(--tf-base-font-size) - 2px);
+                                font-size: 0.75rem;
                                 font-weight: 500;
                                 padding: 8px;
                                 min-width: 84px;
@@ -3787,7 +3787,7 @@
                             top: 16px;
                             background: rgba(253, 249, 243, 0.80);
                             padding: 5px 4px 0 8px;
-                            font-size: calc(var(--tf-base-font-size) + 2px);
+                            font-size: 1rem;
                             color: $color-text;
                             i {
                                 color: $color-primary;
@@ -3820,11 +3820,11 @@
                             ul{
                                 margin-top: auto;
                                 @media #{$max1024}{
-                                    font-size: var(--tf-base-font-size);
+                                    font-size: 0.875rem;
                                 }
                                 li{
                                     @media #{$max1024}{
-                                        font-size: var(--tf-base-font-size);
+                                        font-size: 0.875rem;
                                     }
                                 }
                             }
@@ -3837,7 +3837,7 @@
                                 .tf-section-title {
                                     margin: 0 0 10px 0;
                                     @media only screen and (max-width: 1200px){
-                                        font-size: calc(var(--tf-base-font-size) + 10px);
+                                        font-size: 1.5rem;
                                     }
                                 }
                                 .tf-title-location {
@@ -3845,13 +3845,13 @@
                                     margin-top: 6px;
                                     @media #{$max1024}{
                                         margin-bottom: 36px;
-                                        font-size: var(--tf-base-font-size);
+                                        font-size: 0.875rem;
                                     }
                                     i{
                                         margin-right: 8px;
-                                        font-size: calc(var(--tf-base-font-size) + 6px);
+                                        font-size: 1.25rem;
                                         @media #{$max1024}{
-                                            font-size: var(--tf-base-font-size);
+                                            font-size: 0.875rem;
                                         }
                                     }
                                 }
@@ -3869,7 +3869,7 @@
                                 .tf-price-from{
                                     .amount{
                                         color: $color-text;
-                                        font-size: calc(var(--tf-base-font-size) + 10px);
+                                        font-size: 1.5rem;
                                         font-weight: 600;
                                         line-height: 1.3;
                                     }
@@ -3899,7 +3899,7 @@
                         background: $color-light-bg;
                         height: 40px;
                         color: $color-gray;
-                        font-size: calc(var(--tf-base-font-size) + 2px);
+                        font-size: 1rem;
                         font-weight: 400;
                         line-height: 1.3;
                         letter-spacing: 0.16px;
@@ -3931,7 +3931,7 @@
                     padding: 0;
                     font-weight: 700;
                     @media #{$max1024}{
-                        font-size: calc(var(--tf-base-font-size) + 6px);
+                        font-size: 1.25rem;
                     }
                 }
                 button {
@@ -3941,11 +3941,11 @@
                     border: none;
                     background: unset;
                     color: $color-text;
-                    font-size: calc(var(--tf-base-font-size) + 2px);
+                    font-size: 1rem;
                     font-weight: 700;
                     transition: .3s all ease;
                     @media #{$max1024}{
-                        font-size: calc(var(--tf-base-font-size) - 2px);
+                        font-size: 0.75rem;
                     }
                     &:hover{
                         color: $color-primary;
@@ -3958,7 +3958,7 @@
             .tf-filter-list-item {
                 h4 {
                     margin-bottom: 12px;
-                    font-size: calc(var(--tf-base-font-size) + 2px);
+                    font-size: 1rem;
                     font-weight: 600;
                     line-height: 1.5;
                     color: $color-heading;
@@ -4010,7 +4010,7 @@
                         border-radius: none;
                         bottom: -150%;
                         box-shadow: none;
-                        font-size: calc(var(--tf-base-font-size) + 2px);
+                        font-size: 1rem;
                         padding: 0;
                         color: $color-text;
                     }

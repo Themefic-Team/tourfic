@@ -5,7 +5,7 @@
                 padding-bottom: 32px;
                 h3{
                     color: $color-heading;
-                    font-size: calc(var(--tf-base-font-size) + 7px);
+                    font-size: 1.313rem;
                     font-weight: 400;
                     margin-bottom: 16px;
                 }
@@ -17,7 +17,7 @@
                     tr{
                         th{
                             color: $color-text;
-                            font-size: calc(var(--tf-base-font-size) + 2px);
+                            font-size: 1rem;
                             font-weight: 400;
                             border-right: 1px solid $color-border;
                             border-bottom: 1px solid $color-border;
@@ -32,7 +32,7 @@
                         }
                         td{
                             color: $color-text;
-                            font-size: calc(var(--tf-base-font-size) + 2px);
+                            font-size: 1rem;
                             font-weight: 400;
                             border-right: 1px solid $color-border;
                             border-bottom: 1px solid $color-border;

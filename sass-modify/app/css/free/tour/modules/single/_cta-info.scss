@@ -10,7 +10,7 @@
                 .tf-contact-details-title {
                     h3 {
                         font-weight: 700;
-                        font-size: calc(var(--tf-base-font-size) + 16px);
+                        font-size: 1.875rem;
                         margin-bottom: 5px;
                     }
                 }
@@ -27,7 +27,7 @@
                             color: $color-text;
                         }
                         i {
-                            font-size: calc(var(--tf-base-font-size) + 6px);
+                            font-size: 1.25rem;
                             color: $color-primary;
                         }
                     }
