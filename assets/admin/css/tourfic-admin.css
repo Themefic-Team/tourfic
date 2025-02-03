@@ -5200,7 +5200,37 @@ a.tf-import-btn, a.tf-export-btn {
 .tf-colors-radio-group li {
   display: inline-block;
   border-radius: 5px;
-  width: calc(20% - 16px);
+  width: calc(20% - 13px);
+}
+
+@media only screen and (max-width: 1366px) {
+  .tf-colors-radio-group li {
+    width: calc(33.33% - 12px);
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .tf-colors-radio-group li {
+    width: calc(25% - 12px);
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .tf-colors-radio-group li {
+    width: calc(33.33% - 11px);
+  }
+}
+
+@media only screen and (max-width: 575.98px) {
+  .tf-colors-radio-group li {
+    width: calc(50% - 8px);
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .tf-colors-radio-group li {
+    width: 100%;
+  }
 }
 
 .tf-colors-radio-group li .tf-colors-checkbox {
