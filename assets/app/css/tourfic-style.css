@@ -4993,7 +4993,7 @@ div#tf-destinationautocomplete-list div:before {
 }
 
 .tf-booking-forms-wrapper .tf-search__form__field__incdec span.form--span svg:hover {
-  fill: #2051f5;
+  fill: var(--tf-secondary);
 }
 
 @media only screen and (max-width: 1024px) {
@@ -5007,6 +5007,11 @@ div#tf-destinationautocomplete-list div:before {
   .tf-booking-forms-wrapper .tf-search__form__field__incdec span.form--span svg {
     width: 25px;
   }
+}
+
+.tf-booking-forms-wrapper .tf-search__form__field__incdec span.form--span svg rect {
+  stroke: var(--tf-primary);
+  filter: brightness(0.8);
 }
 
 .tf-booking-forms-wrapper .tf-search__form__field__icon {
@@ -5046,6 +5051,11 @@ div#tf-destinationautocomplete-list div:before {
   .tf-booking-forms-wrapper .tf-search__form__field__icon svg {
     margin-top: 4px;
   }
+}
+
+.tf-booking-forms-wrapper .tf-search__form__field__icon svg path {
+  fill: var(--tf-primary);
+  filter: brightness(0.9);
 }
 
 .tf-booking-forms-wrapper .tf-search__form__field .icon--location {
@@ -5172,7 +5182,8 @@ div#tf-destinationautocomplete-list div:before {
   -moz-appearance: none;
   appearance: none;
   width: 100%;
-  background: #2051f5;
+  background: var(--tf-primary);
+  filter: brightness(1.2);
   color: #ffffff;
   border: 0;
   font-size: 1rem;
@@ -5193,8 +5204,9 @@ div#tf-destinationautocomplete-list div:before {
 }
 
 .tf-booking-forms-wrapper .tf-search__form__submit {
-  background: var(--tf-secondary);
-  border-color: var(--tf-secondary);
+  background: var(--tf-primary);
+  border-color: var(--tf-primary);
+  filter: brightness(1.2);
   color: #ffffff;
   border-radius: 5px;
   gap: 15px;
@@ -5220,13 +5232,13 @@ div#tf-destinationautocomplete-list div:before {
 }
 
 .tf-booking-forms-wrapper .tf-search__form__submit:hover {
-  background: var(--tf-light-bg);
-  border-color: var(--tf-light-bg);
-  color: var(--tf-heading);
+  background: var(--tf-secondary);
+  border-color: var(--tf-secondary);
+  color: #ffffff;
 }
 
 .tf-booking-forms-wrapper .tf-search__form__submit:hover path {
-  fill: var(--tf-heading);
+  fill: #ffffff;
 }
 
 .tf-booking-forms-wrapper .tf-search__form .tf-driver-location {

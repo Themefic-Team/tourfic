@@ -436,7 +436,7 @@
             }
             svg {
               &:hover {
-                fill: $color-primary-light;
+                fill: $color-secondary;
               }
               @media #{$max1024} {
                 width: 28px;
@@ -444,6 +444,10 @@
               }
               @media #{$max768} {
                 width: 25px;
+              }
+              rect{
+                stroke: $color-primary;
+                filter: brightness(0.8);
               }
             }
           }
@@ -473,6 +477,10 @@
           }
           @media #{$max320} {
             margin-top: 4px;
+          }
+          path{
+            fill: $color-primary;
+            filter: brightness(0.9);
           }
         }
       }
@@ -574,7 +582,8 @@
       -moz-appearance: none;
       appearance: none;
       width: 100%;
-      background: $color-primary-light;
+      background: $color-primary;
+      filter: brightness(1.2);
       color: $color-white;
       border: 0;
       font-size: 1rem;
@@ -591,8 +600,9 @@
     }
 
     &__submit {
-      background: $color-secondary;
-      border-color: $color-secondary;
+      background: $color-primary;
+      border-color: $color-primary;
+      filter: brightness(1.2);
       color: $color-white;
       border-radius: 5px;
       gap: 15px;
@@ -613,11 +623,11 @@
         min-width: 160px;
       }
       &:hover {
-        background: $color-light-bg;
-        border-color: $color-light-bg;
-        color: $color-heading;
+        background: $color-secondary;
+        border-color: $color-secondary;
+        color: $color-white;
         path{
-          fill: $color-heading;
+          fill: $color-white;
         }
       }
     }
