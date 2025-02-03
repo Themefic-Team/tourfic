@@ -5,7 +5,7 @@
                 margin-bottom: 32px;
                 h3{
                     color: $color-heading;
-                    font-size: 21px;
+                    font-size: calc(var(--tf-base-font-size) + 7px);
                     font-weight: 400;
                     margin-bottom: 16px;
                     margin-top: 0px;
@@ -36,7 +36,7 @@
                             border-radius: 8px;
                             background: $color-primary;
                             color: $color-white;
-                            font-size: 16px;
+                            font-size: calc(var(--tf-base-font-size) + 2px);
                             font-weight: 700;
                             cursor: pointer;
                             border: 0px solid;
@@ -48,17 +48,17 @@
                     .tf-review-data-average{
                         .avg-review{
                             color: $color-text;
-                            font-size: 38px;
+                            font-size: calc(var(--tf-base-font-size) + 24px);
                             font-weight: 700;
                             i{
-                                font-size: 20px; 
+                                font-size: calc(var(--tf-base-font-size) + 6px); 
                                 color: $color-primary;
                             }
                         }
                         .tf-review-all-info{
                             p{
                                 color: $color-text;
-                                font-size: 16px;
+                                font-size: calc(var(--tf-base-font-size) + 2px);
                                 font-weight: 400;
                                 margin: 0;
                             }
@@ -107,7 +107,7 @@
                         p{
                             margin: 0;
                             color: $color-text;
-                            font-size: 12px;
+                            font-size: calc(var(--tf-base-font-size) - 2px);
                             font-weight: 400;
                             text-transform: capitalize;
                             &.feature-rating{
@@ -144,17 +144,17 @@
                             }
                             .tf-reviews-meta{
                                 color: $color-text;
-                                font-size: 16px;
+                                font-size: calc(var(--tf-base-font-size) + 2px);
                                 font-weight: 700;
                                 span{
                                     color:$color-text;
-                                    font-size: 16px;
+                                    font-size: calc(var(--tf-base-font-size) + 2px);
                                     font-weight: 400;
                                 }
                             }
                             p{
                                 color: $color-text;
-                                font-size: 16px;
+                                font-size: calc(var(--tf-base-font-size) + 2px);
                                 font-weight: 400;
                                 margin: 15px 0 0 0;
                             }

@@ -23,7 +23,7 @@
                     .tf-hero-bottom-area {
                         text-align: right;
                         color: $color-white;
-                        font-size: 14px;
+                        font-size: var(--tf-base-font-size);
                         margin-top: 20px;
                         .tf-hero-btm-icon {
                             display: inline-block;
@@ -31,7 +31,7 @@
                                 background: rgba(26, 43, 72, .6);
                                 border-radius: 50%;
                                 color: $color-white;
-                                font-size: 18px;
+                                font-size: calc(var(--tf-base-font-size) + 4px);
                                 height: 40px;
                                 width: 40px;
                                 text-align: center;

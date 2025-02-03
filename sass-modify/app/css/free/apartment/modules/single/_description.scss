@@ -6,7 +6,7 @@
                 p {
                     margin: 0;
                     color: $color-text;
-                    font-size: 14px;
+                    font-size: var(--tf-base-font-size);
                     font-weight: 400;
                     letter-spacing: 0.2px;
                 }

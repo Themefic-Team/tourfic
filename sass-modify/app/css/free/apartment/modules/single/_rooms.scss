@@ -121,7 +121,7 @@
 
                         h3 {
                             font-weight: 400;
-                            font-size: 18px;
+                            font-size: calc(var(--tf-base-font-size) + 4px);
                             line-height: 1.5;
                             letter-spacing: 0.2px;
                             color: $color-heading;
@@ -130,7 +130,7 @@
                         
                         p {
                             font-weight: 400;
-                            font-size: 14px;
+                            font-size: var(--tf-base-font-size);
                             line-height: 1.4;
                             letter-spacing: 0.2px;
                             color: $color-gray;
@@ -155,7 +155,7 @@
                     padding: 24px 24px 28px 24px;
                     h4{
                         color: $color-heading;
-                        font-size: 20px;
+                        font-size: calc(var(--tf-base-font-size) + 6px);
                         font-weight: 700;
                         margin: 0 0 16px 0;
                     }
@@ -182,14 +182,14 @@
                                 text-decoration: none;
                                 span{
                                     color: $color-text;
-                                    font-size: 16px;
+                                    font-size: calc(var(--tf-base-font-size) + 2px);
                                     font-weight: 600;
                                 }
                             }
                             p{
                                 margin: 8px 0 0 0;
                                 color: $color-text;
-                                font-size: 16px;
+                                font-size: calc(var(--tf-base-font-size) + 2px);
                                 font-weight: 400;
                             }
                         }

@@ -32,14 +32,14 @@
                             h6 {
                                 margin: 0 0 5px 0;
                                 font-weight: 500;
-                                font-size: 18px;
+                                font-size: calc(var(--tf-base-font-size) + 4px);
                                 line-height: 1.33;
                                 color: $color-primary;
                             }
             
                             span {
                                 color: $color-text;
-                                font-size: 16px;
+                                font-size: calc(var(--tf-base-font-size) + 2px);
                                 font-weight: 400;
                                 line-height: 1.4;
                             }
@@ -50,7 +50,7 @@
                                 position: absolute;
                                 top: 0;
                                 left: -29px;
-                                font-size: 20px;
+                                font-size: calc(var(--tf-base-font-size) + 6px);
                                 line-height: 1;
                                 color: $color-primary;
                             }
@@ -114,11 +114,11 @@
                 }
                 h2{
                     color: $color-heading;
-                    font-size: 32px;
+                    font-size: calc(var(--tf-base-font-size) + 18px);
                     font-weight: 700;
                     margin-bottom: 24px;
                     @media #{$max768}{
-                        font-size: 24px;
+                        font-size: calc(var(--tf-base-font-size) + 10px);
                     }
                 }
                 .aprtment-inc-exc{
@@ -148,14 +148,14 @@
                                 .rules-content{
                                     span{
                                         color: $color-gray;
-                                        font-size: 16px;
+                                        font-size: calc(var(--tf-base-font-size) + 2px);
                                         font-weight: 600;
                                         margin: 0 0 8px 0px;
                                         display: block;
                                     }
                                     p{
                                         color: $color-text;
-                                        font-size: 16px;
+                                        font-size: calc(var(--tf-base-font-size) + 2px);
                                         margin: 0;
                                     }
                                 }

@@ -2892,4 +2892,146 @@ var frame, gframe;
 
     });
 
+
+    //Color Palatte Change
+    // jQuery(document).ready(function ($) {
+
+    //     const inputSelector = 'input[name="tf_settings[tf-d1][primary]"]';
+    //     const $colorField = $(inputSelector);
+    //     const $radioCustom = $('#tf_settings\\[color-palette-template\\]\\[custom\\]');
+    //     const $customColorField = $('input[name="tf_settings[tf-custom][primary]"]');
+        
+    //     if ($colorField.length) {
+    //         const originalValue = $colorField.val();
+    //         $colorField.wpColorPicker({
+    //             change: function (event, ui) {
+    //                 let selectedValue = $('input[name="tf_settings\\[color-palette-template\\]"]:checked').val();
+    //                 if('design-1'==selectedValue){
+    //                     const secondary = $('input[name="tf_settings[tf-d1][secondary]"]').val();
+    //                     const text = $('input[name="tf_settings[tf-d1][text]"]').val();
+    //                     const heading = $('input[name="tf_settings[tf-d1][heading]"]').val();
+    //                     const light_bg = $('input[name="tf_settings[tf-d1][light-bg]"]').val();
+    //                     const highlights_bg = $('input[name="tf_settings[tf-d1][highlights-bg]"]').val();
+    //                     const form_input_bg = $('input[name="tf_settings[tf-d1][form-input-bg]"]').val();
+    //                     const box_shadow = $('input[name="tf_settings[tf-d1][box-shadow]"]').val();
+    //                     const border_color = $('input[name="tf_settings[tf-d1][border-color]"]').val();
+    //                     $('input[name="tf_settings[tf-custom][secondary]"]').val(secondary).trigger('change');
+    //                     $('input[name="tf_settings[tf-custom][text]"]').val(text).trigger('change');
+    //                     $('input[name="tf_settings[tf-custom][heading]"]').val(heading).trigger('change');
+    //                     $('input[name="tf_settings[tf-custom][light-bg]"]').val(light_bg).trigger('change');
+    //                     $('input[name="tf_settings[tf-custom][highlights-bg]"]').val(highlights_bg).trigger('change');
+    //                     $('input[name="tf_settings[tf-custom][form-input-bg]"]').val(form_input_bg).trigger('change');
+    //                     $('input[name="tf_settings[tf-custom][box-shadow]"]').val(box_shadow).trigger('change');
+    //                     $('input[name="tf_settings[tf-custom][border-color]"]').val(border_color).trigger('change');
+    //                 }
+    //                 const newValue = ui.color.toString(); 
+    //                 if (newValue !== originalValue) {
+    //                     $radioCustom.prop("checked", true);
+    //                     $customColorField.val(newValue).trigger('change');
+    //                     $colorField.wpColorPicker('color', originalValue);
+    //                 }
+    //             }
+    //         });
+    //     }
+
+    // });
+    
+    jQuery(document).ready(function ($) {
+        // Function to get the selected color palette template (e.g., design-1, design-2)
+        function getSelectedDesign() {
+            return $('input[name="tf_settings\\[color-palette-template\\]"]:checked').val();
+        }
+    
+        // Function to update custom colors dynamically
+        function updateCustomColors(selectedDesign) {
+            if (!selectedDesign) return;
+    
+            // Mapping available designs to their respective IDs
+            const colorPalettes = {
+                'design-1': 'tf-d1',
+                'design-2': 'tf-d2',
+                'design-3': 'tf-d3',
+                'design-4': 'tf-d4'
+            };
+    
+            const selectedPalette = colorPalettes[selectedDesign];
+            if (!selectedPalette) return;
+    
+            // Copy all color values from the selected palette to `tf-custom`
+            $('input[name^="tf_settings[' + selectedPalette + ']"]').each(function () {
+                let fieldNameMatch = $(this).attr('name').match(/\[(.*?)\]$/);
+                if (!fieldNameMatch) return;
+    
+                let fieldName = fieldNameMatch[1]; // Extracts 'primary', 'secondary', etc.
+                let fieldValue = $(this).val();
+                let $customField = $('input[name="tf_settings[tf-custom][' + fieldName + ']"]');
+    
+                if ($customField.length) {
+                    $customField.val(fieldValue).trigger('change');
+                }
+            });
+        }
+    
+        // Initialize color pickers dynamically for all `tf-dX` color fields
+        $('input[name^="tf_settings[tf-d"]').each(function () {
+            const $colorField = $(this);
+            const originalValue = $colorField.val();
+    
+            $colorField.wpColorPicker({
+                change: function (event, ui) {
+                    let selectedDesign = getSelectedDesign();
+                    updateCustomColors(selectedDesign);
+    
+                    const newValue = ui.color.toString();
+                    
+                    if (newValue !== originalValue) {
+                        $('#tf_settings\\[color-palette-template\\]\\[custom\\]').prop("checked", true);
+    
+                        let nameAttr = $colorField.attr('name');
+                        let match = nameAttr.match(/\[tf-(d\d+)]\[(.*?)\]/);
+                        if (!match) return;
+
+                        let design = match[1];
+                        let fieldName = match[2];
+                        let $customColorField = $('input[name="tf_settings[tf-custom][' + fieldName + ']"]');
+                        
+                        if ($customColorField.length) {
+                            // Get the values dynamically
+                            let secondary = $(`input[name="tf_settings[tf-${design}][secondary]"]`).val();
+                            let text = $(`input[name="tf_settings[tf-${design}][text]"]`).val();
+                            let heading = $(`input[name="tf_settings[tf-${design}][heading]"]`).val();
+                            let light_bg = $(`input[name="tf_settings[tf-${design}][light-bg]"]`).val();
+                            let highlights_bg = $(`input[name="tf_settings[tf-${design}][highlights-bg]"]`).val();
+                            let form_input_bg = $(`input[name="tf_settings[tf-${design}][form-input-bg]"]`).val();
+                            let box_shadow = $(`input[name="tf_settings[tf-${design}][box-shadow]"]`).val();
+                            let border_color = $(`input[name="tf_settings[tf-${design}][border-color]"]`).val();
+
+                            // Assign values to tf-custom dynamically
+                            $(`input[name="tf_settings[tf-custom][secondary]"]`).val(secondary).trigger('change');
+                            $(`input[name="tf_settings[tf-custom][text]"]`).val(text).trigger('change');
+                            $(`input[name="tf_settings[tf-custom][heading]"]`).val(heading).trigger('change');
+                            $(`input[name="tf_settings[tf-custom][light-bg]"]`).val(light_bg).trigger('change');
+                            $(`input[name="tf_settings[tf-custom][highlights-bg]"]`).val(highlights_bg).trigger('change');
+                            $(`input[name="tf_settings[tf-custom][form-input-bg]"]`).val(form_input_bg).trigger('change');
+                            $(`input[name="tf_settings[tf-custom][box-shadow]"]`).val(box_shadow).trigger('change');
+                            $(`input[name="tf_settings[tf-custom][border-color]"]`).val(border_color).trigger('change');
+                            $customColorField.val(newValue).trigger('change');
+                            $colorField.wpColorPicker('color', originalValue);
+                        }
+                        
+                    }
+                }
+            });
+        });
+    
+        // Trigger updates when a design is selected
+        $('input[name="tf_settings\\[color-palette-template\\]"]').on('change', function () {
+            updateCustomColors(getSelectedDesign());
+        });
+    
+        // Initialize the colors when the page loads based on the selected design
+        updateCustomColors(getSelectedDesign());
+    });
+    
+    
 })(jQuery);

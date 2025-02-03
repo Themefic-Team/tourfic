@@ -1,10 +1,10 @@
 .section-heading {
-    font-size: 28px;
+    font-size: calc(var(--tf-base-font-size) + 14px);
     margin-bottom: 15px;
     font-weight: 600;
 }
 h3.section-heading {
-    font-size: 24px;
+    font-size: calc(var(--tf-base-font-size) + 14px);
 }
 
 .fancybox-navigation .fancybox-button--arrow_left > div,
@@ -14,11 +14,11 @@ h3.section-heading {
 
 .tf-title-area {
     h1 {
-        font-size: 35px;
+        font-size: calc(var(--tf-base-font-size) + 21px);
         margin-top: 0;
         margin-bottom: 6px;
         @media #{$max768}{
-            font-size: 28px;
+            font-size: calc(var(--tf-base-font-size) + 14px);
         }
     }
     &.tf-tour-title {
@@ -39,7 +39,7 @@ h3.section-heading {
                 background: $color-primary;
                 color: $color-white;
                 padding: 0 10px;
-                font-size: 13px;
+                font-size: calc(var(--tf-base-font-size) - 1px);
                 border-radius: 25px;
                 margin-bottom: 5px;
                 display: inline-block;
@@ -55,7 +55,7 @@ h3.section-heading {
                 justify-content: end;
             }
             .tf-wishlist-button {
-                font-size: 24px;
+                font-size: calc(var(--tf-base-font-size) + 10px);
                 cursor: pointer;
                 margin: 0 5px 0 0;
                 line-height: 1;
@@ -66,7 +66,7 @@ h3.section-heading {
 
 .tf-single-rating {
     line-height: 1;
-    font-size: 16px;
+    font-size: calc(var(--tf-base-font-size) + 2px);
     cursor: pointer;
     z-index: 999;
     display: inline-block;
@@ -79,21 +79,21 @@ h3.section-heading {
     position: relative;
 
     @media #{$max768}{
-        font-size: 14px;
+        font-size: var(--tf-base-font-size);
         padding: 6px;
     }
 
     i {
-        font-size: 14px;
+        font-size: var(--tf-base-font-size);
         color: $color-primary;
     }
     span {
         margin: 0 3px 0 5px;
         font-weight: 700;
-        font-size: 18px;
+        font-size: calc(var(--tf-base-font-size) + 4px);
 
         @media #{$max768}{
-            font-size: 14px;
+            font-size: var(--tf-base-font-size);
         }
     }
 }
@@ -208,7 +208,7 @@ h3.section-heading {
         justify-items: center;
         i {
             color: $color-text;
-            font-size: 16px;
+            font-size: calc(var(--tf-base-font-size) + 2px);
         }
     }
     #check-in-out-date {
@@ -282,7 +282,7 @@ h3.section-heading {
         position: relative;
         min-height: 36px;
         min-width: 36px;
-        font-size: 14px;
+        font-size: var(--tf-base-font-size);
         font-weight: 500;
         line-height: 1.5;
         &:hover {
@@ -314,7 +314,7 @@ h3.section-heading {
         position: relative;
         min-height: 36px;
         min-width: 36px;
-        font-size: 14px;
+        font-size: var(--tf-base-font-size);
         font-weight: 500;
         line-height: 1.5;
         &:hover {
@@ -353,7 +353,7 @@ h3.section-heading {
             font-weight: 900;
             font-family: "Font Awesome 5 Free";
             float: left;
-            font-size: 15px;
+            font-size: calc(var(--tf-base-font-size) + 1px);
             line-height: 1.66;
             margin-right: 5px;
         }
@@ -504,7 +504,7 @@ h3.section-heading {
             label {
                 color: $color-text;
                 font-weight: 500;
-                font-size: 16px;
+                font-size: calc(var(--tf-base-font-size) + 2px);
                 line-height: 1;
                 text-transform: capitalize;
             }
@@ -551,7 +551,7 @@ h3.section-heading {
                 display: inline-block;
                 content: "\f005";
                 color: $color-warning;
-                font-size: 18px;
+                font-size: calc(var(--tf-base-font-size) + 4px);
             }
             &:hover~label {
                 &:before {
@@ -687,13 +687,13 @@ h3.section-heading {
                 padding: 16px;
                 color: $color-white;
                 font-weight: 600;
-                font-size: 24px;
+                font-size: calc(var(--tf-base-font-size) + 10px);
                 line-height: 1.333;
             }
             span {
                 color: $color-text;
                 font-weight: 400;
-                font-size: 16px;
+                font-size: calc(var(--tf-base-font-size) + 2px);
                 line-height: 1.5;
                 margin: 0px 16px;
             }
@@ -725,7 +725,7 @@ h3.section-heading {
                 text-align: left;
                 color: $color-text;
                 font-weight: 400;
-                font-size: 14px;
+                font-size: var(--tf-base-font-size);
                 line-height: 1;
                 text-transform: capitalize;
             }
@@ -744,10 +744,10 @@ h3.section-heading {
                     transition: width 1s ease-in-out;
                 }
             }
-            .tf-p-b-rating {
+            .tf-p-b-rating { 
                 text-align: right;
                 font-weight: 500;
-                font-size: 14px;
+                font-size: var(--tf-base-font-size);
                 line-height: 1;
                 color: $color-text;
             }
@@ -798,7 +798,7 @@ h3.section-heading {
     .tf-review-details {
         .tf-name {
             font-weight: 500;
-            font-size: 18px;
+            font-size: calc(var(--tf-base-font-size) + 4px);
             line-height: 1;
             color: $color-heading;
             margin: 0 0 8px 0;
@@ -806,7 +806,7 @@ h3.section-heading {
         }
         .tf-date {
             font-weight: 400;
-            font-size: 12px;
+            font-size: calc(var(--tf-base-font-size) - 2px);
             line-height: 1;
             color: $color-text;
             letter-spacing: 0.2px;
@@ -821,13 +821,13 @@ h3.section-heading {
             line-height: 1;
             i {
                 color: $color-primary;
-                font-size: 10px;
+                font-size: calc(var(--tf-base-font-size) - 4px);
                 height: 14px;
             }
         }
         .tf-description {
             font-weight: 400;
-            font-size: 14px;
+            font-size: var(--tf-base-font-size);
             line-height: 1.5;
             color: $color-text;
             margin: 8px 0 0 0;
@@ -836,7 +836,7 @@ h3.section-heading {
 }
 .tf-review-pending {
     text-align: center;
-    font-size: 16px;
+    font-size: calc(var(--tf-base-font-size) + 2px);
     font-style: italic;
     background: $color-white;
     border-radius: 4px;
@@ -861,14 +861,14 @@ h3.section-heading {
         align-items: baseline;
 
         h3 {
-            font-size: 22px;
+            font-size: calc(var(--tf-base-font-size) + 8px);
             color: $color-heading;
             margin-bottom: 10px;
         }
         i {
             font-weight: 900;
             padding-right: 10px;
-            font-size: 22px;
+            font-size: calc(var(--tf-base-font-size) + 8px);
             color: $color-primary;
         }
     }
@@ -913,16 +913,16 @@ h3.section-heading {
 
     .tf-slider-desc {
         h3 {
-            font-size: 20px;
+            font-size: calc(var(--tf-base-font-size) + 6px);
             color: $color-white;
             @media #{$max1024}{
-                font-size: 18px;
+                font-size: calc(var(--tf-base-font-size) + 4px);
             }
             @media #{$max575}{
-                font-size: 16px;
+                font-size: calc(var(--tf-base-font-size) + 2px);
             }
             span {
-                font-size: 15px;
+                font-size: calc(var(--tf-base-font-size) + 1px);
                 line-height: 1.7;
                 margin-top: 5px;
                 display: block;
@@ -963,7 +963,7 @@ h3.section-heading {
 }
 
 .tf-wishlist-button {
-    font-size: 24px;
+    font-size: calc(var(--tf-base-font-size) + 10px);
     cursor: pointer;
     margin: 0 5px 0 0;
     line-height: 1;
@@ -975,13 +975,13 @@ h3.section-heading {
 }
 .single-tour-wish-bt {
     color: $color-text;
-    font-size: 24px;
+    font-size: calc(var(--tf-base-font-size) + 10px);
     cursor: pointer;
     i {
         background: rgba(26, 43, 72, .6);
         border-radius: 50%;
         color: $color-white;
-        font-size: 18px;
+        font-size: calc(var(--tf-base-font-size) + 4px);
         padding: 10px 9px 7px 10px;
         transition: 0.3s;
     }
@@ -1054,16 +1054,16 @@ li.tf-filter-item {
         border-radius: 8px;
         text-align: center;
         i{
-            font-size: 32px;
+            font-size: calc(var(--tf-base-font-size) + 18px);
         }
         h3{
             margin: 10px 0;
             color: $color-heading;
-            font-size: 20px;
+            font-size: calc(var(--tf-base-font-size) + 6px);
         }
         p{
             color: $color-text;
-            font-size: 16px;
+            font-size: calc(var(--tf-base-font-size) + 2px);
             margin: 0 0 20px 0;
         }
         .tf-refund-confirmation-button{
@@ -1075,7 +1075,7 @@ li.tf-filter-item {
                 background: $color-primary;
                 padding: 8px 30px;
                 border: 0px solid;
-                font-size: 16px;
+                font-size: calc(var(--tf-base-font-size) + 2px);
                 font-weight: 500;
                 line-height: 1.5;
                 cursor: pointer;
@@ -1099,7 +1099,7 @@ li.tf-filter-item {
 .tf-box-wrapper {
     h4{
         margin-bottom: 20px;
-        font-size: 16px;
+        font-size: calc(var(--tf-base-font-size) + 2px);
     }
     .al-range-slider__track {
         background: $color-gray-light;
@@ -1136,7 +1136,7 @@ li.tf-filter-item {
         box-shadow: none;
         padding: 3px 10px;
         color: $color-white;
-        font-size: 13px;
+        font-size: calc(var(--tf-base-font-size) - 1px);
         margin-bottom: 0px;
     }
     .al-range-slider__input.js-al-range-slider__input {
@@ -1148,7 +1148,7 @@ li.tf-filter-item {
     position: relative;
     a {
         line-height: 1;
-        font-size: 22px;
+        font-size: calc(var(--tf-base-font-size) + 8px);
         display: block;
         margin: 0 10px 0 0;
         outline: none;
@@ -1182,7 +1182,7 @@ li.tf-filter-item {
                 a{
                     i{
                         color: #1D75E3;
-                        font-size: 17px;
+                        font-size: calc(var(--tf-base-font-size) + 3px);
                     }
                 }
                 &:nth-child(2){
@@ -1230,7 +1230,7 @@ li.tf-filter-item {
             display: flex;
             align-items: center;
             font-weight: 400;
-            font-size: 14px;
+            font-size: var(--tf-base-font-size);
             &:hover {
                 background-color: #f5f5f5;
             }
@@ -1260,7 +1260,7 @@ li.tf-filter-item {
         }
         #share_link_button {
             white-space: nowrap;
-            font-size: 13px;
+            font-size: calc(var(--tf-base-font-size) - 1px);
             padding: 5px 12px;
         }
         input#share_link_input {

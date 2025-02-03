@@ -224,7 +224,7 @@ Modal
     .tf-modal-close {
         color: $color-primary;
         cursor: pointer;
-        font-size: 22px;
+        font-size: calc(var(--tf-base-font-size) + 8px);
         position: absolute;
         top: 12px;
         right: 16px;
@@ -351,7 +351,7 @@ Notice
 
     .tf-notice-icon {
         margin-right: 10px;
-        font-size: 20px;
+        font-size: calc(var(--tf-base-font-size) + 6px);
         color: $color-info;
     }
 
@@ -362,7 +362,7 @@ Notice
             margin: 0;
             font-weight: 500;
             color: $color-heading;
-            font-size: 16px;
+            font-size: calc(var(--tf-base-font-size) + 2px);
         }
 
         &.has-content {
@@ -412,7 +412,7 @@ Tooltip
         color: $color-white;
         background-color: $color-text;
         font-weight: normal;
-        font-size: 12px;
+        font-size: calc(var(--tf-base-font-size) - 2px);
         border-radius: 4px;
         position: absolute;
         z-index: 99999999;

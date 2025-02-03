@@ -46,7 +46,7 @@
                         text-shadow: 0 1px 1px rgba(0,0,0,.2);
                         text-transform: uppercase;
                         text-align: center;
-                        font-size: 1rem;
+                        font-size: calc(var(--tf-base-font-size) + 2px);
                         z-index: 9;
                         right: -12px;
                         top: 33px;

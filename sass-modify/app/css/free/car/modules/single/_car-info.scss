@@ -12,7 +12,7 @@
                     gap: 16px 8px;
                     li{
                         color: $color-text;
-                        font-size: 16px;
+                        font-size: calc(var(--tf-base-font-size) + 2px);
                         font-weight: 400;
                         width: calc(25% - 8px);
                         border-radius: 8px;
@@ -20,7 +20,7 @@
                         padding: 8px;
                         position: relative;
                         i{
-                            font-size: 20px;
+                            font-size: calc(var(--tf-base-font-size) + 6px);
                         }
                         @media #{$max1024}{
                             width: calc(33% - 8px);
@@ -71,7 +71,7 @@
                             }
                             span{
                                 color: $color-text;
-                                font-size: .875rem;
+                                font-size: var(--tf-base-font-size);
                                 line-height: 1.3;
                             }
                         }

@@ -34,7 +34,7 @@
                         color: $color-text;
                         background-color: transparent;
                         padding: 0;
-                        font-size: 12px;
+                        font-size: calc(var(--tf-base-font-size) - 2px);
                         @include flexbox();
                         @include align-items(center);
 
@@ -45,7 +45,7 @@
                         }
 
                         span {
-                            font-size: 14px;
+                            font-size: var(--tf-base-font-size);
                             font-weight: 500;
                             color: $color-gray;
                             margin: 0 4px;
@@ -73,7 +73,7 @@
                     }
 
                     .tf-wishlist-button {
-                        font-size: 14px;
+                        font-size: var(--tf-base-font-size);
                         cursor: pointer;
                         line-height: 1;
                         color: $color-gray;
@@ -82,7 +82,7 @@
                         gap: 8px;
 
                         i {
-                            font-size: 24px;
+                            font-size: calc(var(--tf-base-font-size) + 10px);
                         }
                     }
 
@@ -91,7 +91,7 @@
 
                         a {
                             line-height: 1;
-                            font-size: 14px;
+                            font-size: var(--tf-base-font-size);
                             display: flex;
                             align-items: center;
                             outline: none;
@@ -165,7 +165,7 @@
                                 display: flex;
                                 align-items: center;
                                 font-weight: 400;
-                                font-size: 14px;
+                                font-size: var(--tf-base-font-size);
                                 @media #{$max575} {
                                     padding-bottom: 0;
                                 }
@@ -196,7 +196,7 @@
 
                             #share_link_button {
                                 white-space: nowrap;
-                                font-size: 13px;
+                                font-size: calc(var(--tf-base-font-size) - 1px);
                                 padding: 5px 12px;
                             }
 
@@ -229,14 +229,14 @@
                 h1 {
                     color: $color-heading;
                     font-weight: 500;
-                    font-size: 36px;
+                    font-size: calc(var(--tf-base-font-size) + 22px);
                     line-height: 1.2;
                     margin-bottom: 8px;
                 }
 
                 .tf-map-link {
                     color: $color-text;
-                    font-size: 16px;
+                    font-size: calc(var(--tf-base-font-size) + 2px);
                     font-weight: 400;
                     line-height: 1.5;
                     letter-spacing: 0.2px;
@@ -249,7 +249,7 @@
                     }
                     p {
                         margin-bottom: 0;
-                        font-size: 16px;
+                        font-size: calc(var(--tf-base-font-size) + 2px);
                     }
                 }
 
