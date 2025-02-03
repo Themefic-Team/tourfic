@@ -22,6 +22,7 @@ class Migrator {
 		add_action( 'init', array( $this, 'tf_rooms_data_add_in_hotel' ) );
 //		add_action( 'admin_init', array( $this, 'tf_search_keys_migrate' ) );
 		add_action( 'admin_init', array( $this, 'tf_migrate_tf_enquiry_data' ) );
+		add_action( 'admin_init', array( $this, 'tf_migrate_color_palatte_data' ) );
 	}
 
 	function tf_permalink_settings_migration() {
@@ -588,6 +589,41 @@ class Migrator {
 			update_option( 'tf_template_1_car_migrate_data', 1 );
 		}
 
+	}
+
+	/**
+	 * Color Migrate
+	 *
+	 * run once
+	 */
+	function tf_migrate_color_palatte_data(){
+		$options = ! empty( get_option( 'tf_settings' ) ) ? get_option( 'tf_settings' ) : array();
+		$options["color-palette-template"] = 'custom';
+
+		$prev_primary = unserialize($options['tourfic-design1-global-color']);
+		$prev_body_text = unserialize($options['tourfic-design1-p-global-color']);
+		$prev_template3 = unserialize($options['tourfic-template3-bg']);
+		
+		$tf_custom_palatte = unserialize($options["tf-custom"]);
+		$current_template = $options['tf-template']['single-hotel'];
+		if("design-2"==$current_template){
+
+			$tf_custom_palatte['primary'] = !empty($prev_primary['gcolor']) ? $prev_primary['gcolor'] : '#0E3DD8';
+			$tf_custom_palatte['text'] = !empty($prev_body_text['pgcolor']) ? $prev_body_text['pgcolor'] : '#686E7A';
+			$options["tf-custom"] = $tf_custom_palatte;
+
+		}elseif("design-3"==$current_template){
+
+			$tf_custom_palatte['primary'] = !empty($prev_primary['gcolor']) ? $prev_primary['gcolor'] : '#B58E53';
+			$tf_custom_palatte['text'] = !empty($prev_body_text['pgcolor']) ? $prev_body_text['pgcolor'] : '#B58E53';
+			$tf_custom_palatte['highlights-bg'] = !empty($prev_template3['template3-highlight']) ? $prev_template3['template3-highlight'] : '#FCF4E8';
+
+			$options["tf-custom"] = $tf_custom_palatte;
+		}
+
+		// var_dump($tf_custom_palatte);
+		// echo "<pre>";
+		// var_dump($options); exit();
 	}
 
 	/**
