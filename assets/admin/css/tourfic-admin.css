@@ -5313,6 +5313,48 @@ a.tf-import-btn, a.tf-export-btn {
   gap: 12px;
 }
 
+.tf-field-switch_group .tf-switch-group-wrap.tf-switch-column-4 {
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+@media only screen and (max-width: 1024px) {
+  .tf-field-switch_group .tf-switch-group-wrap.tf-switch-column-4 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .tf-field-switch_group .tf-switch-group-wrap.tf-switch-column-4 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tf-field-switch_group .tf-switch-group-wrap.tf-switch-column-2 {
+  grid-template-columns: 1fr 1fr;
+}
+
+@media only screen and (max-width: 768px) {
+  .tf-field-switch_group .tf-switch-group-wrap.tf-switch-column-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tf-field-switch_group .tf-switch-group-wrap.tf-switch-column-1 {
+  grid-template-columns: 1fr;
+}
+
+@media only screen and (max-width: 1024px) {
+  .tf-field-switch_group .tf-switch-group-wrap {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .tf-field-switch_group .tf-switch-group-wrap {
+    grid-template-columns: 1fr;
+  }
+}
+
 .tf-field-switch_group .tf-switch-group-wrap .tf-switch-column {
   padding: 8px 16px;
   border: 1px solid #c4cbd4;
