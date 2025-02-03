@@ -1,3 +1,7 @@
+.tf-archive-template__one .tf_item_main_block h3 {
+  font-size: 1.5rem;
+}
+
 .single-tf_apartment .tf-single-template__one .tf-apartment-title {
   padding-bottom: 40px;
 }
@@ -1933,7 +1937,6 @@
   padding: 0;
   border: none;
   width: 100%;
-  color: #F1F3F4;
 }
 
 .single-tf_apartment .tf-single-template__one #tf-apartment-booking .tf-apartment-form-fields .tf-apartment-guest-row .tf_selectperson-wrap .tf_acrselection-wrap {

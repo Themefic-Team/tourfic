@@ -1,6 +1,8 @@
 @import '../../../../common/variable';
 @import '../../../../common/mixin';
 
+@import './modules/archive/_listing';
+
 // Single Apartment Modules Start
 @import './modules/single/_head';
 @import './modules/single/_description';

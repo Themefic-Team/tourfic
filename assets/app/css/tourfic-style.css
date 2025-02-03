@@ -12522,9 +12522,9 @@ div#tf-destinationautocomplete-list div:before {
 }
 
 .tf-single-template__three .tf-related-items-section .tf-slider-item .tf-meta-info a.see-details:hover {
-  background-color: var(--tf-secondary);
+  background-color: var(--tf-primary);
   color: #ffffff;
-  border-color: var(--tf-secondary);
+  border-color: var(--tf-primary);
 }
 
 @media only screen and (max-width: 1024px) {
