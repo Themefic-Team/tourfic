@@ -379,7 +379,7 @@ class Car_Rental
                                 </div>
                                 <div class="info-select">
                                     <h5><?php esc_html_e("Time", "tourfic"); ?></h5>
-                                    <input type="text" placeholder="Pick Up Time" name="pickup-time" class="tf_pickup_time" />
+                                    <input type="text" placeholder="<?php esc_html_e("Pick Up Time", "tourfic"); ?>" name="pickup-time" class="tf_pickup_time" />
                                 </div>
                             </div>
                         </div>
@@ -395,7 +395,7 @@ class Car_Rental
                                 </div>
                                 <div class="info-select">
                                     <h5><?php esc_html_e("Drop-off date", "tourfic"); ?></h5>
-                                    <input type="text" placeholder="Drop Off Date" name="dropoff-date" class="tf_dropoff_date" />
+                                    <input type="text" placeholder="<?php esc_html_e("Drop Off Date", "tourfic"); ?>" name="dropoff-date" class="tf_dropoff_date" />
                                 </div>
                             </div>
                         </div>
@@ -466,6 +466,7 @@ class Car_Rental
                             enableTime: false,
                             dateFormat: "Y/m/d",
                             minDate: "today",
+                            disableMobile: true,
 
                             // flatpickr locale
                             <?php Helper::tf_flatpickr_locale(); ?>
@@ -485,6 +486,7 @@ class Car_Rental
                             enableTime: false,
                             dateFormat: "Y/m/d",
                             minDate: "today",
+                            disableMobile: true,
 
                             // flatpickr locale
                             <?php Helper::tf_flatpickr_locale(); ?>
@@ -502,6 +504,7 @@ class Car_Rental
                             enableTime: true,
                             noCalendar: true,
                             dateFormat: "H:i",
+                            disableMobile: true,
 
                             // flatpickr locale
                             <?php Helper::tf_flatpickr_locale(); ?>
@@ -520,6 +523,8 @@ class Car_Rental
                             enableTime: true,
                             noCalendar: true,
                             dateFormat: "H:i",
+                            disableMobile: true,
+
                             // flatpickr locale
                             <?php Helper::tf_flatpickr_locale(); ?>
 
@@ -616,7 +621,7 @@ class Car_Rental
                                             </svg>
                                         </div>
                                     </h5>
-                                    <input type="text" placeholder="Pick Up Time" name="pickup-time" class="tf_pickup_time_field tf-check-inout-hidden" />
+                                    <input type="text" placeholder="<?php esc_html_e("Pick Up Time", "tourfic"); ?>" name="pickup-time" class="tf_pickup_time_field tf-check-inout-hidden" />
                                 </div>
                             </div>
                         </div>
