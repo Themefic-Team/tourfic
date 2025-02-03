@@ -5297,11 +5297,17 @@ a.tf-import-btn, a.tf-export-btn {
   -webkit-justify-content: space-between;
   justify-content: space-between;
   border-radius: 4px;
+  background-color: #fff;
+  cursor: move;
 }
 
 .tf-field-switch_group .tf-switch-group-wrap .tf-switch-column .tf-switch-group-label {
   margin-right: 4px;
   cursor: pointer;
+}
+
+.tf-field-switch_group .tf-switch-group-wrap .tf-switch-drag-highlight {
+  background-color: #e1e5ea;
 }
 
 .tf-field-switch_group .tf-switch-label {

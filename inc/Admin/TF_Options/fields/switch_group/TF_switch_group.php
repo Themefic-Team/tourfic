@@ -2,8 +2,6 @@
 	die;
 } // Cannot access directly.
 
-use Tourfic\Classes\Helper;
-
 /**
  *
  * Field: switch_group
@@ -32,27 +30,28 @@ if ( ! class_exists( 'TF_Switch_Group' ) ) {
 				$class_attribute_value = $matches[1];
 				$class                 = $class . ' ' . $class_attribute_value;
 			}
-            $label = ( ! empty( $this->field['label'] ) ) ? $this->field['label'] : '';
             $column = ( ! empty( $this->field['column'] ) ) ? $this->field['column'] : 3;
 			$value  = ( ! empty( $this->value ) && ! is_array( $this->value ) ) ? unserialize( $this->value ) : $this->value;
 			?>
 			<div class="tf-switch-group-wrap tf-switch-group-wrap-<?php echo esc_attr($this->field['id']);?> tf-switch-column-<?php echo esc_attr($column); ?>">
 				<?php 
-				if ( ! empty( $this->field['options'] ) && is_array($this->field['options']) ):
-					foreach ( $this->field['options'] as $key => $option ) :
-						$_value = ! empty( $value[ $key ] ) ? $value[ $key ] : '';
-						$status_value = isset($_value['status']) ? esc_attr($_value['status']) : 0;
-						// Helper::tf_var_dump($option);
-						// Helper::tf_var_dump($_value);
+				if ( ! empty( $value ) && is_array($value) ):
+					foreach ( $value as $key => $single_value ) :
+						$status_value = isset($single_value['status']) ? esc_attr($single_value['status']) : 0;
 						?>
-						<div class="tf-switch-column">
-							<label class="tf-switch-gr-label" for="<?php echo esc_attr( $this->field_name() ) . '[' . esc_attr($key) . '][status]'; ?>">
-								<?php echo esc_html($option['label']) ?>
+						<div class="tf-switch-column ui-state-default">
+							<label class="tf-switch-group-label" for="<?php echo esc_attr( $this->field_name() ) . '[' . esc_attr($key) . '][status]'; ?>">
+								<?php echo esc_html($single_value['label']) ?>
 							</label>
 							<input 
 								type="hidden"
+								name="<?php echo esc_attr( $this->field_name() ) . '[' . esc_attr($key) . '][label]'; ?>" 
+								value="<?php echo esc_attr($single_value['label']); ?>"
+							/>
+							<input 
+								type="hidden"
 								name="<?php echo esc_attr( $this->field_name() ) . '[' . esc_attr($key) . '][slug]'; ?>" 
-								value="<?php echo esc_attr($option['slug']); ?>"
+								value="<?php echo esc_attr($single_value['slug']); ?>"
 							/>
 							<label for="<?php echo esc_attr( $this->field_name() ) . '[' . esc_attr($key) . '][status]'; ?>" class="tf-switch-label" <?php echo wp_kses_post( $width ); ?>>
 								<input
@@ -76,7 +75,6 @@ if ( ! class_exists( 'TF_Switch_Group' ) ) {
 				?>
 			</div>
 			<?php
-
 		}
 		public function sanitize() {
 			return $this->value;

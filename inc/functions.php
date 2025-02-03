@@ -833,3 +833,17 @@ if(!function_exists('tf_average_rating_change_on_base')){
         return $rating;
     }
 }
+
+// Admin Color Palette
+
+if(!function_exists('tf_custom_color_palette_values')){
+	function tf_custom_color_palette_values(){
+		$tf_design_custom = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-custom' ) ) ) ? Helper::tf_data_types( Helper::tfopt( 'tf-custom' ) ) : '';
+		return $values = [
+			!empty($tf_design_custom['primary']) ? $tf_design_custom['primary'] : '#ddd',
+			!empty($tf_design_custom['secondary']) ? $tf_design_custom['secondary'] : '#ccc',
+			!empty($tf_design_custom['text']) ? $tf_design_custom['text'] : '#ddd',
+			!empty($tf_design_custom['heading']) ? $tf_design_custom['heading'] : '#ccc'
+		];
+	}
+}
