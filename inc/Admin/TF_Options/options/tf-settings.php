@@ -956,7 +956,42 @@ TF_Settings::option( 'tf_settings', array(
 							),
 						),
 					),
-				)
+				),
+				array(
+					'id'       => 'container_heading',
+					'type'     => 'heading',
+					'label'    => esc_html__( 'Container Settings', 'tourfic' ),
+					'subtitle' => esc_html__( 'Select your preferred container layout', 'tourfic' ),
+				),
+				array(
+					'id'       => 'tf-container',
+					'type'     => 'imageselect',
+					'label'    => esc_html__( 'Select Container Layout', 'tourfic' ),
+					'img-width'=> '120',
+					'img-height'=> '120',
+					'options'  => array(
+						'boxed' => array(
+							'title' => esc_html__('Boxed', 'tourfic'),
+							'url'   => TF_ASSETS_ADMIN_URL . "images/boxed.png",
+						),
+						'full-width' => array(
+							'title'	=> esc_html__('Full width', 'tourfic'),
+							'url' 	=> TF_ASSETS_ADMIN_URL."images/full-width.png",
+						),
+					),
+					'default'  => 'boxed',
+				),
+				array(
+					'id'       => 'tf-container-width',
+					'type'     => 'number',
+					'label'    => esc_html__( 'Container Width (px)', 'tourfic' ),
+					'default'  => '1200',
+					'dependency'  => array( 'tf-container', '==', 'boxed' ),
+					'attributes' => array(
+						'min' => '768',
+						'max' => '1920'
+					),
+				),
 			),
 		),
 
