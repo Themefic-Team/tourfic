@@ -38,7 +38,7 @@
 
                             }
                             i {
-                                font-size: calc(var(--tf-base-font-size) + 10px);
+                                font-size: 1.5rem;
                                 color: $color-text;
                             }
                         }
@@ -51,7 +51,7 @@
                         @include align-items(center);
                         @include justify-content(flex-end);
                         gap: 4px;
-                        font-size: var(--tf-base-font-size);
+                        font-size: 0.875rem;
                         font-weight: 500;
                         color: $color-heading;
                         cursor: pointer;
@@ -68,11 +68,11 @@
                 }
                 h2{
                     color: $color-heading;
-                    font-size: calc(var(--tf-base-font-size) + 18px);
+                    font-size: 2rem;
                     font-weight: 700;
                     margin-bottom: 24px;
                     @media #{$max768}{
-                        font-size: calc(var(--tf-base-font-size) + 10px);
+                        font-size: 1.5rem;
                     }
                 }
                 .place-offer-items{
@@ -95,7 +95,7 @@
                         }
                         span{
                             color: $color-text;
-                            font-size: var(--tf-base-font-size);
+                            font-size: 0.875rem;
                             font-weight: 400;
                             line-height: 0.928;
                         }

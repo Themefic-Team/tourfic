@@ -8,7 +8,7 @@
     h1{
         color: #1D2327;
         font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-        font-size: 32px;
+        font-size: 2rem;
         font-style: normal;
         font-weight: 700;
         line-height: normal;
@@ -40,7 +40,7 @@
                     justify-content: center;
                     cursor: pointer;
                     i{
-                        font-size: 15px;
+                        font-size: 0.938rem;
                     }
                     &.active{
                         color: #f0f0f1;
@@ -58,7 +58,7 @@
             margin: 0 !important;
             color: #003C79;
             font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-            font-size: 16px;
+            font-size: 1rem;
             font-style: normal;
             font-weight: 600;
             line-height: 24px; /* 150% */
@@ -77,7 +77,7 @@
             margin: 0;
             box-shadow: 0px 8px 20px 0px rgba(29, 35, 39, 0.06);
             font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-            font-size: 16px;
+            font-size: 1rem;
             font-style: normal;
             font-weight: 600;
             line-height: 24px; /* 150% */
@@ -172,7 +172,7 @@
                 .email-date {
                     color: #1D2327;
                     font-family: inherit;
-                    font-size: 16px;
+                    font-size: 1rem;
                     font-style: normal;
                     font-weight: 600;
                     line-height: 1.12;
@@ -181,7 +181,7 @@
                 .email-time {
                     color: #666D74;
                     font-family: inherit;
-                    font-size: 16px;
+                    font-size: 1rem;
                     font-style: normal;
                     font-weight: 400;
                     line-height: 1.12;
@@ -231,7 +231,7 @@
 
     h1 {
         font-family: inherit;
-        font-size: 24px;
+        font-size: 1.5rem;
         font-style: normal;
         font-weight: 600;
         line-height: 1.33;
@@ -253,7 +253,7 @@ hr.enqury-single-title-line {
         padding: 8px 20px 8px 16px;
         background-color: $color-white;
         max-width: 60px;
-        font-size: 15px;
+        font-size: 0.938rem;
         color: #2C273F;
         font-family: Inter;
         font-style: normal;
@@ -309,7 +309,7 @@ hr.enqury-single-title-line {
     
             h2 {
                 font-family: inherit;
-                font-size: 17px;
+                font-size: 1.063rem;
                 font-style: normal;
                 font-weight: 600;
                 line-height: 150%;
@@ -346,7 +346,7 @@ hr.enqury-single-title-line {
     
                     .tf-single-enquiry-details-value {
                         font-family: inherit;
-                        font-size: 15px;
+                        font-size: 0.938rem;
                         font-style: normal;
                         font-weight: 400;
                         line-height: 1.6;
@@ -354,7 +354,7 @@ hr.enqury-single-title-line {
                         i {
                             margin-left: 16px;
                             cursor: pointer;
-                            font-size: 16px;
+                            font-size: 1rem;
                         }
                     }
                 }
@@ -366,7 +366,7 @@ hr.enqury-single-title-line {
                     border-radius: 8px;
                     align-self: self-end;
                     color: $color-white;
-                    font-size: 15px;
+                    font-size: 0.938rem;
                     cursor: pointer;
         
                     &:hover {
@@ -384,7 +384,7 @@ hr.enqury-single-title-line {
                     }
         
                     i {
-                        font-size: 16px;
+                        font-size: 1rem;
                     }
                 }
             }
@@ -397,7 +397,7 @@ hr.enqury-single-title-line {
             border-radius: 8px;
             align-self: self-end;
             color: $color-white;
-            font-size: 15px;
+            font-size: 0.938rem;
             cursor: pointer;
 
             &:hover {
@@ -415,7 +415,7 @@ hr.enqury-single-title-line {
             }
 
             i {
-                font-size: 16px;
+                font-size: 1rem;
             }
 
         }
@@ -425,7 +425,7 @@ hr.enqury-single-title-line {
                 .tf-single-enquiry-reply-mail {
                     color: #2C273F;
                     font-family: inherit;
-                    font-size: 17px;
+                    font-size: 1.063rem;
                     font-style: normal;
                     font-weight: 400;
                     line-height: 150%;
@@ -447,7 +447,7 @@ hr.enqury-single-title-line {
 
                         .tf-single-enquiry-accordion-head-left {
                             font-family: inherit;
-                            font-size: 15px;
+                            font-size: 0.938rem;
                             font-style: normal;
                             font-weight: 600;
                             line-height: 1.6;
@@ -483,7 +483,7 @@ hr.enqury-single-title-line {
                         margin-top: 16px;
                         color: #5D5676;
                         font-family: inherit;
-                        font-size: 15px;
+                        font-size: 0.938rem;
                         font-style: normal;
                         font-weight: 400;
                         line-height: 1.6;
@@ -515,7 +515,7 @@ hr.enqury-single-title-line {
                 &::placeholder {
                     color: #77708F;
                     font-family: inherit;
-                    font-size: 15px;
+                    font-size: 0.938rem;
                     font-style: normal;
                     font-weight: 400;
                     line-height: 1.6;
@@ -529,7 +529,7 @@ hr.enqury-single-title-line {
                 border-color: #003c79;
                 color: $color-white;
                 font-family: inherit;
-                font-size: 15px;
+                font-size: 0.938rem;
                 font-style: normal;
                 font-weight: 600;
                 line-height: 1.6;
@@ -567,7 +567,7 @@ hr.enqury-single-title-line {
 
                 h2 {
                     font-family: inherit;
-                    font-size: 17px;
+                    font-size: 1.063rem;
                     font-style: normal;
                     font-weight: 600;
                     line-height: 150%;
@@ -602,7 +602,7 @@ hr.enqury-single-title-line {
                     align-items: center;
                     color: var(--UI-800, #2C273F);
                     font-family: inherit;
-                    font-size: 15px;
+                    font-size: 0.938rem;
                     font-style: normal;
                     font-weight: 400;
                     line-height: 1.6;
@@ -610,7 +610,7 @@ hr.enqury-single-title-line {
                     i {
                         margin-left: 8px;
                         cursor: pointer;
-                        font-size: 16px;
+                        font-size: 1rem;
                     }
                 }
 

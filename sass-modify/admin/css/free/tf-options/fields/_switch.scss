@@ -41,7 +41,7 @@
         @include translateY(-50%);
         top: 50%;
         left: 12px;
-        font-size: 12px;
+        font-size: 0.75rem;
         opacity: 0;
         @include transition(all, 0.4s);
       }

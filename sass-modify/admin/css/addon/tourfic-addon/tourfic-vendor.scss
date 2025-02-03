@@ -36,7 +36,7 @@ Cover pic
         background-color: $color-white;
         height: 32px;
         width: 32px;
-        font-size: 16px;
+        font-size: 1rem;
         border-radius: 100%;
         @include flex-center();
         font-weight: 500;
@@ -72,7 +72,7 @@ Cover pic
             background-color: $color-white;
             height: 32px;
             width: 32px;
-            font-size: 16px;
+            font-size: 1rem;
             border-radius: 100%;
             @include flex-center();
             font-weight: 500;
@@ -106,7 +106,7 @@ Cover pic
     .tf-grid-view {
         .tf-save-user {
             padding: 8px 15px;
-            font-size: 16px;
+            font-size: 1rem;
             font-weight: 600;
             letter-spacing: 0.5px;
             margin-top: 10px;
@@ -150,13 +150,13 @@ Cover pic
     .tf-vendor-reg-response {
         .tf_errors {
             color: red;
-            font-size: 16px;
+            font-size: 1rem;
             line-height: 24px;
         }
 
         .tf_success {
             color: green;
-            font-size: 16px;
+            font-size: 1rem;
             line-height: 24px;
             font-weight: 600;
         }
@@ -315,7 +315,7 @@ Cover pic
 
 .tf-tooltip-overview {
     display: flex;
-    font-size: 14px;
+    font-size: 0.875rem;
 }
 
 .tooltip-title-box {
@@ -365,7 +365,7 @@ Cover pic
 }
 
 .tf-vendor-single-report p {
-    font-size: 14px;
+    font-size: 0.875rem;
     margin: 0px;
 }
 
@@ -436,7 +436,7 @@ Cover pic
 .tf-setting-dashboard .tf-vendor-list-data .tablenav #tf_vendor_bulk {
     border: 1px solid #ededed;
     color: #666;
-    font-size: 14px;
+    font-size: 0.875rem;
     height: 38px;
 }
 
@@ -473,7 +473,7 @@ Cover pic
             tr {
                 th {
                     color: $color-heading;
-                    font-size: 14px;
+                    font-size: 0.875rem;
                     font-weight: 600;
                     padding: 20px 10px;
                     font-family: 'arial';
@@ -483,7 +483,7 @@ Cover pic
 
                 td {
                     color: $color-heading;
-                    font-size: 14px;
+                    font-size: 0.875rem;
                     font-weight: 600;
                     padding: 20px 10px;
                     font-family: 'arial';
@@ -500,7 +500,7 @@ Cover pic
             tr {
                 th {
                     color: $color-heading;
-                    font-size: 14px;
+                    font-size: 0.875rem;
                     font-weight: 600;
                     padding: 20px 10px;
                     font-family: 'arial';
@@ -510,7 +510,7 @@ Cover pic
 
                 td {
                     color: $color-heading;
-                    font-size: 14px;
+                    font-size: 0.875rem;
                     font-weight: 600;
                     padding: 20px 10px;
                     font-family: 'arial';
@@ -524,13 +524,13 @@ Cover pic
             tr {
                 td {
                     border-bottom: 1px solid #eaeaea;
-                    font-size: 14px;
+                    font-size: 0.875rem;
                     padding: 24px 10px;
                 }
 
                 th {
                     border-bottom: 1px solid #eaeaea;
-                    font-size: 14px;
+                    font-size: 0.875rem;
                     padding: 28px 5px !important;
                 }
             }
@@ -582,7 +582,7 @@ a.tf-payout-times {
     background: red;
     color: $color-white;
     text-align: center;
-    font-size: 14px;
+    font-size: 0.875rem;
     border-radius: 50%;
     cursor: pointer;
     text-decoration: none;
@@ -592,7 +592,7 @@ a.tf-payout-times {
 .tf-payout-update-button {
     cursor: pointer;
     padding: 10px 20px !important;
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: 600;
     letter-spacing: 0.5px;
 }

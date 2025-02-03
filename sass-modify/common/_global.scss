@@ -23,7 +23,7 @@ input[type="submit"].tf_btn,
     color: $color-white;
     background-color: $color-primary;
     border-color: $color-primary;
-    font-size: var(--tf-base-font-size);
+    font-size: 0.875rem;
     line-height: 1.2;
     padding: 12px 24px;
     text-decoration: none;
@@ -108,7 +108,7 @@ input[type="submit"].tf_btn,
     }
     &_large{
         padding: 16px 32px;
-        font-size: calc(var(--tf-base-font-size) + 2px);
+        font-size: 1rem;
     }
   
 
@@ -224,7 +224,7 @@ Modal
     .tf-modal-close {
         color: $color-primary;
         cursor: pointer;
-        font-size: calc(var(--tf-base-font-size) + 8px);
+        font-size: 1.375rem;
         position: absolute;
         top: 12px;
         right: 16px;
@@ -351,7 +351,7 @@ Notice
 
     .tf-notice-icon {
         margin-right: 10px;
-        font-size: calc(var(--tf-base-font-size) + 6px);
+        font-size: 1.25rem;
         color: $color-info;
     }
 
@@ -362,7 +362,7 @@ Notice
             margin: 0;
             font-weight: 500;
             color: $color-heading;
-            font-size: calc(var(--tf-base-font-size) + 2px);
+            font-size: 1rem;
         }
 
         &.has-content {
@@ -412,7 +412,7 @@ Tooltip
         color: $color-white;
         background-color: $color-text;
         font-weight: normal;
-        font-size: calc(var(--tf-base-font-size) - 2px);
+        font-size: 0.75rem;
         border-radius: 4px;
         position: absolute;
         z-index: 99999999;

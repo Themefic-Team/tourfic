@@ -13,7 +13,7 @@
                     margin-bottom: 38px;
                     h2{
                         color: $color-heading;
-                        font-size: calc(var(--tf-base-font-size) + 14px);
+                        font-size: 1.75rem;
                         font-weight: 600;
                         margin-bottom: 8px;
                         del{
@@ -23,14 +23,14 @@
                         }
                         small.pricing-type{
                             color: $color-text;
-                            font-size: calc(var(--tf-base-font-size) + 2px);
+                            font-size: 1rem;
                             font-weight: 400;
                             text-transform: capitalize;
                         }
                     }
                     p{
                         color: $color-text;
-                        font-size: calc(var(--tf-base-font-size) + 2px);
+                        font-size: 1rem;
                         margin: 0;
                     }
                 }
@@ -43,7 +43,7 @@
                     .tf-extra-added-box{
                         h3{
                             color: $color-heading;
-                            font-size: calc(var(--tf-base-font-size) + 7px);
+                            font-size: 1.313rem;
                             font-weight: 400;
                             margin: 0;
                         }
@@ -54,14 +54,14 @@
                             gap: 8px;
                             h4{
                                 color: $color-heading;
-                                font-size: calc(var(--tf-base-font-size) + 2px);
+                                font-size: 1rem;
                                 font-weight: 400;
                                 margin: 0;
                                 width: calc(100% - 148px);
                             }
                             .qty-price{
                                 color: $color-heading;
-                                font-size: calc(var(--tf-base-font-size) + 2px);
+                                font-size: 1rem;
                                 font-weight: 400;
                                 width: 140px;
                                 span.price{
@@ -69,7 +69,7 @@
                                 }
                                 i{
                                     color: $color-text;
-                                    font-size: calc(var(--tf-base-font-size) + 6px);
+                                    font-size: 1.25rem;
                                 }
                                 span.delete{
                                     cursor: pointer;
@@ -85,7 +85,7 @@
                     margin-bottom: 32px;
                     h3{
                         color: $color-heading;
-                        font-size: calc(var(--tf-base-font-size) + 7px);
+                        font-size: 1.313rem;
                         font-weight: 400;
                         margin-bottom: 16px;
                         margin-top: 0px;
@@ -99,7 +99,7 @@
                                 width: calc(100% - 95px);
                                 h4{
                                     color: $color-heading;
-                                    font-size: calc(var(--tf-base-font-size) + 2px);
+                                    font-size: 1rem;
                                     font-weight: 400;
                                     margin-bottom: 8px;
                                     .tf-info-tooltip{
@@ -144,7 +144,7 @@
                                             p{
                                                 color: $color-white;
                                                 text-align: center;
-                                                font-size: calc(var(--tf-base-font-size) - 1px);
+                                                font-size: 0.813rem;
                                                 font-weight: 600;
                                                 margin: 0;
                                             }
@@ -171,7 +171,7 @@
                                     }
                                     input{
                                         color: $color-text;
-                                        font-size: calc(var(--tf-base-font-size) + 2px);
+                                        font-size: 1rem;
                                         width: 18px;
                                         cursor: not-allowed;
                                         background: transparent;
@@ -189,12 +189,12 @@
                                 text-align: right;
                                 h4{
                                     color: $color-heading;
-                                    font-size: calc(var(--tf-base-font-size) + 7px);
+                                    font-size: 1.313rem;
                                     font-weight: 400;
                                     margin-bottom: 8px;
                                     small{
                                         display: block;
-                                        font-size: calc(var(--tf-base-font-size) + 2px);
+                                        font-size: 1rem;
                                         color: $color-text;
                                     }
                                 }
@@ -208,7 +208,7 @@
                                 border-radius: 8px;
                                 background: $color-gray-light;
                                 color:$color-primary;
-                                font-size: calc(var(--tf-base-font-size) + 2px);
+                                font-size: 1rem;
                                 font-weight: 700;
                                 cursor: pointer;
                                 border: 1px solid $color-primary;
@@ -227,14 +227,14 @@
                     padding: 24px;
                     .tf-driver-details-header{
                         h3{
-                            color: #27333F;
-                            font-size: calc(var(--tf-base-font-size) + 7px);
+                            color: $color-heading;
+                            font-size: 1.313rem;
                             font-weight: 400;
                             margin: 0;
                         }
                         span{
                             color: $color-primary;
-                            font-size: calc(var(--tf-base-font-size) + 2px);
+                            font-size: 1rem;
                             font-weight: 400;
                             i{
                                 color: $color-primary;
@@ -252,13 +252,13 @@
                             width: calc(100% - 72px);
                             h4{
                                 color: $color-heading;
-                                font-size: calc(var(--tf-base-font-size) + 2px);
+                                font-size: 1rem;
                                 font-weight: 700;
                                 margin: 0;
                             }
                             p{
                                 color: $color-text;
-                                font-size: calc(var(--tf-base-font-size) + 2px);
+                                font-size: 1rem;
                                 font-weight: 400;
                                 margin: 0;
                             }
@@ -276,10 +276,10 @@
                                             position: relative;
                                             text-decoration: none;
                                             i{
-                                                font-size: calc(var(--tf-base-font-size) + 6px);
+                                                font-size: 1.25rem;
                                             }
                                             color: $color-text;
-                                            font-size: calc(var(--tf-base-font-size) + 2px);
+                                            font-size: 1rem;
                                             font-weight: 400;
                                             display: inline-block;
                                             &:hover{
@@ -318,7 +318,7 @@
                                                 p{
                                                     color: $color-white;
                                                     text-align: center;
-                                                    font-size: calc(var(--tf-base-font-size) - 2px);
+                                                    font-size: 0.75rem;
                                                     font-weight: 400;
                                                 }
                                                 

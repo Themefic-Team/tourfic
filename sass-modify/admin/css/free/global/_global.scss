@@ -12,12 +12,12 @@ Button
   font-weight: 500;
   text-decoration: none;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 1rem;
   @include transition(all, 0.3s);
 
   i {
     margin-right: 8px;
-    font-size: 18px;
+    font-size: 1.125rem;
   }
 
   &:hover {
@@ -83,12 +83,12 @@ Button
   font-weight: 500;
   text-decoration: underline;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 1rem;
   color: #003c79;
 
   i {
     margin-right: 8px;
-    font-size: 18px;
+    font-size: 1.125rem;
   }
 }
 
@@ -223,7 +223,7 @@ body.tf-modal-open {
 }
 #poststuff h2 a{
   color: #222;
-  font-size: 20px;
+  font-size: 1.25rem;
   display: none;
   @media #{$max1024}{
     display: inline-block;
@@ -264,7 +264,7 @@ Fontawesome
     align-items: center;
     span{
       font-weight: 700;
-      font-size: 15px;
+      font-size: 0.938rem;
     }
     .switch {
         margin-left: 15px;
@@ -344,6 +344,6 @@ Fontawesome
 }
 .tf-small-btn {
   margin-left:10px;
-  font-size: 12px;
+  font-size: 0.75rem;
   padding: 7px 15px;
 } 

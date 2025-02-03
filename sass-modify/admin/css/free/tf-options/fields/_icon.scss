@@ -32,7 +32,7 @@
       box-shadow: 0px 8px 16px rgba(90, 91, 106, 0.08);
       border-radius: 8px;
       color: $color-error;
-      font-size: 14px;
+      font-size: 0.875rem;
       text-align: center;
       line-height: 20px;
       cursor: pointer;
@@ -63,7 +63,7 @@
         border-radius: 4px;
         height: 48px;
         color: $slate80;
-        font-size: 14px;
+        font-size: 0.875rem;
 
         &:focus {
           background: $color-white;
@@ -111,7 +111,7 @@
         li {
           margin-bottom: 8px;
           cursor: pointer;
-          font-size: 14px;
+          font-size: 0.875rem;
           color: $slate80;
           font-weight: 500;
           text-transform: capitalize;
@@ -149,7 +149,7 @@
 
             li {
               background: $color-white;
-              font-size: 24px;
+              font-size: 1.5rem;
               border-radius: 4px;
               cursor: pointer;
               position: relative;
@@ -174,7 +174,7 @@
                   height: 16px;
                   width: 16px;
                   line-height: 16px;
-                  font-size: 12px;
+                  font-size: 0.75rem;
                   text-align: center;
                   border: 1px solid $slate40;
                   border-radius: 100%;

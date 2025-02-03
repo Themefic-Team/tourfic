@@ -33,7 +33,7 @@
                 
                         h3 {
                             font-weight: 600;
-                            font-size: calc(var(--tf-base-font-size) + 6px);
+                            font-size: 1.25rem;
                             line-height: 1.33;
                             color: $color-heading;
                             margin-bottom: 24px;
@@ -65,7 +65,7 @@
                 
                         .surroundings_sec_title {
                             font-weight: 600;
-                            font-size: calc(var(--tf-base-font-size) + 10px);
+                            font-size: 1.5rem;
                             line-height: 1.33;
                             color: $color-heading;
                             margin: 0 0 8px 0;
@@ -73,7 +73,7 @@
                 
                         .surroundings_subtitle {
                             color: $color-gray;
-                            font-size: calc(var(--tf-base-font-size) + 2px);
+                            font-size: 1rem;
                             margin: 0 0 30px 0;
                             font-weight: 400;
                             line-height: 1.5;
@@ -87,7 +87,7 @@
                         .tf-apartment-surronding-criteria-label {
                             @include flexbox();
                             @include align-items(center);
-                            font-size: calc(var(--tf-base-font-size) + 4px);
+                            font-size: 1.125rem;
                             font-weight: 500;
                             color: $color-heading;
                 
@@ -109,7 +109,7 @@
                                 @include align-items(center);
                                 @include justify-content(space-between);
                                 color: $color-text;
-                                font-size: var(--tf-base-font-size);
+                                font-size: 0.875rem;
                                 font-weight: 400;
                                 line-height: 1.5;
                                 letter-spacing: 0.2px;

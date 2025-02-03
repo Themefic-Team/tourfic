@@ -12,7 +12,7 @@
     border-radius: 4px;
     height: 48px;
     color: $slate80;
-    font-size: 14px;
+    font-size: 0.875rem;
     border: 1px solid #c4cbd4;
 
     &:focus {
@@ -54,6 +54,6 @@
     right: 8px;
     transform: translateY(-50%);
     color: $slate30;
-    font-size: 16px;
+    font-size: 1rem;
   }
 }

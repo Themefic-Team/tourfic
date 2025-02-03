@@ -196,7 +196,7 @@ table.tf-table-form {
 
 p.submit {
   float: right;
-  font-size: 16px;
+  font-size: 1rem;
 }
 .tf-column-mapping-form {
   padding: 20px;
@@ -243,7 +243,7 @@ table.tf-importer-mapping-table tr:nth-child(even) {
     height: 150px;
   }
   p{
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: bold;
   }
 }
@@ -255,10 +255,10 @@ table.tf-importer-mapping-table tr:nth-child(even) {
     padding: 30px;
 
     h2 {
-      font-size: 32px;
+      font-size: 2rem;
     }
     p {
-      font-size: 16px;      
+      font-size: 1rem;      
     }
   }
 }
