@@ -187,7 +187,7 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'         => 'single-hotel-layout',
 									'type'       => 'switch_group',
-									'column'  	 => 3,
+									'column'  	 => 4,
 									'label'      => esc_html__( 'Single Hotel Template Sections', 'tourfic' ),
 									'subtitle'   => esc_html__( 'You can change the order of sections by dragging and dropping them.', 'tourfic' ),
 									'dependency' => array( 'single-hotel', '==', 'design-1' ),
@@ -239,7 +239,7 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'         => 'single-hotel-layout-part-1',
 									'type'       => 'switch_group',
-									'column'  	 => 3,
+									'column'  	 => 4,
 									'label'      => esc_html__( 'Single Hotel Template Sections Part 1', 'tourfic' ),
 									'subtitle'   => esc_html__( 'You can able to change section positions by Drag & Drop.', 'tourfic' ),
 									'dependency' => array( 'single-hotel', '==', 'design-2' ),
@@ -264,7 +264,7 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'         => 'single-hotel-layout-part-2',
 									'type'       => 'switch_group',
-									'column'  	 => 3,
+									'column'  	 => 4,
 									'label'      => esc_html__( 'Single Hotel Template Sections Part 2', 'tourfic' ),
 									'subtitle'   => esc_html__( 'You can able to change section positions by Drag & Drop.', 'tourfic' ),
 									'dependency' => array( 'single-hotel', '==', 'design-2' ),
@@ -418,7 +418,7 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'         => 'single-tour-layout',
 									'type'       => 'switch_group',
-									'column'  	 => 3,
+									'column'  	 => 4,
 									'label'      => esc_html__( 'Single Tour Template Sections', 'tourfic' ),
 									'subtitle'   => esc_html__( 'You can change the order of sections by dragging and dropping them.', 'tourfic' ),
 									'dependency' => array( 'single-tour', '==', 'design-1' ),
@@ -490,7 +490,7 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'         => 'single-tour-layout-part-1',
 									'type'       => 'switch_group',
-									'column'  	 => 3,
+									'column'  	 => 4,
 									'label'      => esc_html__( 'Single Tour Template Sections Part 1', 'tourfic' ),
 									'subtitle'   => esc_html__( 'You can able to change section positions by Drag & Drop.', 'tourfic' ),
 									'dependency' => array( 'single-tour', '==', 'design-2' ),
@@ -525,7 +525,7 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'         => 'single-tour-layout-part-2',
 									'type'       => 'switch_group',
-									'column'  	 => 3,
+									'column'  	 => 4,
 									'label'      => esc_html__( 'Single Tour Template Sections Part 2', 'tourfic' ),
 									'subtitle'   => esc_html__( 'You can able to change section positions by Drag & Drop.', 'tourfic' ),
 									'dependency' => array( 'single-tour', '==', 'design-2' ),
@@ -670,7 +670,7 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'         => 'single-aprtment-layout-part-1',
 									'type'       => 'switch_group',
-									'column'  	 => 3,
+									'column'  	 => 4,
 									'label'      => esc_html__( 'Single Apartment Template Sections Part 1', 'tourfic' ),
 									'subtitle'   => esc_html__( 'You can able to change section positions by Drag & Drop.', 'tourfic' ),
 									'dependency' => array( 'single-apartment', '==', 'design-1' ),
@@ -710,7 +710,7 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'         => 'single-aprtment-layout-part-2',
 									'type'       => 'switch_group',
-									'column'  	 => 3,
+									'column'  	 => 4,
 									'label'      => esc_html__( 'Single Apartment Template Sections Part 2', 'tourfic' ),
 									'subtitle'   => esc_html__( 'You can able to change section positions by Drag & Drop.', 'tourfic' ),
 									'dependency' => array( 'single-apartment', '==', 'design-1' ),
@@ -846,7 +846,7 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'         => 'single-car-layout',
 									'type'       => 'switch_group',
-									'column'  	 => 3,
+									'column'  	 => 4,
 									'label'      => __( 'Single Car Template Sections', 'tourfic' ),
 									'subtitle'   => __( 'You can able to change section positions by Drag & Drop.', 'tourfic' ),
 									'dependency' => array( 'single-car', '==', 'design-1' ),
@@ -989,7 +989,8 @@ TF_Settings::option( 'tf_settings', array(
 					'dependency'  => array( 'tf-container', '==', 'boxed' ),
 					'attributes' => array(
 						'min' => '768',
-						'max' => '1920'
+						'max' => '1920',
+						'step'=> '10'
 					),
 				),
 			),
