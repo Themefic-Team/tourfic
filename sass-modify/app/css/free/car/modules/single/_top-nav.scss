@@ -28,7 +28,7 @@
                     .tf-price-header{
                         h2{
                             color: $color-primary;
-                            font-size: calc(var(--tf-base-font-size) + 7px);
+                            font-size: 1.313rem;
                             font-weight: 700;
                             margin: 0;
                         }
@@ -42,7 +42,7 @@
                         border-radius: 8px;
                         background: $color-primary;
                         color: $color-white;
-                        font-size: calc(var(--tf-base-font-size) + 2px);
+                        font-size: 1rem;
                         font-weight: 700;
                         cursor: pointer;
                         border: 0px solid;
@@ -101,7 +101,7 @@
                         a{
                             text-decoration: none;
                             color: $color-text;
-                            font-size: calc(var(--tf-base-font-size) + 2px);
+                            font-size: 1rem;
                             font-weight: 400;
                             padding: 0 8px 8px 8px;
                             display: inline-block;

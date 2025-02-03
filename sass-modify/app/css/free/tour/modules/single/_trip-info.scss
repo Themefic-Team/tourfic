@@ -8,7 +8,7 @@
                 }
                 .tf-price {
                     font-weight: 400;
-                    font-size: calc(var(--tf-base-font-size) + 2px);
+                    font-size: 1rem;
                     line-height: 1;
                     color: $color-text;
                     display: flex;
@@ -18,7 +18,7 @@
                     justify-content: center;
                     span.sale-price {
                         font-weight: 600;
-                        font-size: calc(var(--tf-base-font-size) + 10px);
+                        font-size: 1.5rem;
                         line-height: 1;
                         color: $color-primary;
                         margin: 0 8px 0 0;
@@ -28,7 +28,7 @@
                     list-style: none;
                     display: flex;
                     line-height: 1;
-                    font-size: var(--tf-base-font-size);
+                    font-size: 0.875rem;
                     font-weight: 600;
                     color: $color-text;
                     flex-direction: row;
@@ -107,7 +107,7 @@
                         cursor: pointer;
                     }
                     p {
-                        font-size: calc(var(--tf-base-font-size) - 2px);
+                        font-size: 0.75rem;
                         color: $color-heading;
                         margin: 0;
                     }
@@ -127,11 +127,11 @@
                     }
                     .tf-price-amount {
                         color: $color-heading;
-                        font-size: calc(var(--tf-base-font-size) + 12px);
+                        font-size: 1.625rem;
                         margin: 4px 0px;
                         
                         @media #{$max768}{
-                            font-size: calc(var(--tf-base-font-size) + 8px);
+                            font-size: 1.375rem;
                         }
                     }
                 }
@@ -141,7 +141,7 @@
             }
             .tf-trip-description{
                 h2 {
-                    font-size: calc(var(--tf-base-font-size) + 16px);
+                    font-size: 1.875rem;
                 }
                 p{
                     margin-bottom: 0;

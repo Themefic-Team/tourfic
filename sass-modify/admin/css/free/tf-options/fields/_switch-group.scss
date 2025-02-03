@@ -1,24 +1,31 @@
 .tf-field-switch_group {
 
-    .tf-switch-group-wrap{
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: 12px;
+  .tf-switch-group-wrap{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
 
-        .tf-switch-column{
-            padding: 8px 16px;
-            border: 1px solid $slate20;
-            @include flexbox();
-            @include align-items(center);
-            @include justify-content(space-between);
-            border-radius: 4px;
+    .tf-switch-column{
+      padding: 8px 16px;
+      border: 1px solid $slate20;
+      @include flexbox();
+      @include align-items(center);
+      @include justify-content(space-between);
+      border-radius: 4px;
+      background-color: #fff;
+      cursor: move;
 
-            .tf-switch-group-label{
-                margin-right: 4px;
-                cursor: pointer;
-            }
-        }
+      .tf-switch-group-label{
+        margin-right: 4px;
+        cursor: pointer;
+      }
     }
+
+    .tf-switch-drag-highlight{
+      background-color: $slate10;
+    }
+
+  }
 
   .tf-switch-label {
     position: relative;

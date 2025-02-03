@@ -68,7 +68,7 @@
 
                 .list-item {
                     a {
-                        font-size: 15px;
+                        font-size: 0.938rem;
                         font-weight: 500;
                         color: $color-heading;
                         display: flex;
@@ -212,13 +212,13 @@
                     }
 
                     p {
-                        font-size: 16px;
+                        font-size: 1rem;
                         font-weight: 600;
                         color: #222;
                         margin: 0 0 10px;
 
                         @media #{$max1650}{
-                            font-size: 14px;
+                            font-size: 0.875rem;
                         }
                     }
 
@@ -230,7 +230,7 @@
                         line-height: 0.8;
 
                         @media #{$max1650}{
-                            font-size: 24px;
+                            font-size: 1.5rem;
                         }
                     }
                 }
@@ -390,7 +390,7 @@
                 }
 
                 h3 {
-                    font-size: 20px;
+                    font-size: 1.25rem;
                     margin: 0;
                     color: $color-heading;
                     display: block;
@@ -404,7 +404,7 @@
                     border: 2px solid #003c79;
                     border-radius: 6px;
                     padding: 9px 16px;
-                    font-size: 15px;
+                    font-size: 0.938rem;
                     font-weight: 600;
                     color: #003c79;
                     margin-top: 20px;
@@ -428,7 +428,7 @@
 
         h2 {
             margin: 0 0 30px;
-            font-size: 24px;
+            font-size: 1.5rem;
             font-weight: 600;
             line-height: 28px;
             color: $color-heading;
@@ -459,19 +459,19 @@
                     }
 
                     i {
-                        font-size: 18px;
+                        font-size: 1.125rem;
                         margin-right: 10px;
                         color: $color-heading;
                     }
 
                     h4 {
                         margin: 0;
-                        font-size: 20px;
+                        font-size: 1.25rem;
                         font-weight: 600;
                         color: #1d2327;
                         line-height: 24px;
                         @media #{$max480}{
-                            font-size: 17px;
+                            font-size: 1.063rem;
                         }
                     }
                 }
@@ -541,7 +541,7 @@
                     display: inline-block;
                     padding: 14px 22px;
                     color: $color-heading;
-                    font-size: 18px;
+                    font-size: 1.125rem;
                     text-decoration: none;
 
                     i {
@@ -589,7 +589,7 @@
             gap: 16px;
 
             .tf-setting-title {
-                font-size: 18px;
+                font-size: 1.125rem;
                 margin: 0;
             }
 
@@ -619,7 +619,7 @@
                     position: relative;
                     background-color: transparent;
                     height: 42px;
-                    font-size: 16px;
+                    font-size: 1rem;
                     z-index: 999;
 
                     &:focus {
@@ -647,7 +647,7 @@
 
                     .tf-search-not-found {
                         text-align: center;
-                        font-size: 14px;
+                        font-size: 0.875rem;
                         font-weight: 500;
                     }
 
@@ -683,12 +683,12 @@
 
                             p {
                                 margin: 0;
-                                font-size: 14px;
+                                font-size: 0.875rem;
                                 font-weight: 600;
                             }
 
                             span {
-                                font-size: 12px;
+                                font-size: 0.75rem;
                                 color: #777;
                             }
 
@@ -766,7 +766,7 @@
                     text-decoration: none;
                     color: $color-heading;
                     padding: 18px 30px;
-                    font-size: 16px;
+                    font-size: 1rem;
                     text-align: left;
                     line-height: 24px;
                     cursor: pointer;
@@ -808,7 +808,7 @@
                         &::before {
                             position: absolute;
                             content: "\f105";
-                            font-size: 14px;
+                            font-size: 0.875rem;
                             color: #003c79;
                             font-family: "FontAwesome" !important;
                             right: 10px;
@@ -910,7 +910,7 @@
                         padding: 20px 30px;
 
                         p.description {
-                            font-size: 14px;
+                            font-size: 0.875rem;
                             margin-top: 10px;
                         }
                     }
@@ -962,7 +962,7 @@
 
             .tf-labels {
                 label {
-                    font-size: 14px;
+                    font-size: 0.875rem;
                     line-height: 22px;
                     font-weight: 600;
                     color: #0d165e;
@@ -1097,7 +1097,7 @@
                 .select2-search__field {
                     // padding-top: 5px;
                     margin: 10px;
-                    font-size: 14px;
+                    font-size: 0.875rem;
                 }
 
                 .tf-setting-field {
@@ -1107,7 +1107,7 @@
                     padding: 10px 25px;
                     border-radius: 5px;
                     border: 1px solid #ccc;
-                    font-size: 14px;
+                    font-size: 0.875rem;
                     line-height: 16px;
                     appearance: none;
 
@@ -1127,7 +1127,7 @@
                     background: red;
                     color: $color-white;
                     text-align: center;
-                    font-size: 20px;
+                    font-size: 1.25rem;
                     border-radius: 50%;
                     cursor: pointer;
                 }

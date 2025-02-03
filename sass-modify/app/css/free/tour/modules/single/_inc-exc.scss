@@ -126,11 +126,11 @@
                 }
                 h2{
                     color: $color-heading;
-                    font-size: calc(var(--tf-base-font-size) + 18px);
+                    font-size: 2rem;
                     font-weight: 700;
                     margin-bottom: 24px;
                     @media #{$max1024}{
-                        font-size: calc(var(--tf-base-font-size) + 10px);
+                        font-size: 1.5rem;
                     }
                 }
                 .tf-include-exclude-innter {

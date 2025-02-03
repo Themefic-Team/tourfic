@@ -191,7 +191,7 @@ TF_Settings::option( 'tf_settings', array(
 									'label'      => esc_html__( 'Single Hotel Template Sections', 'tourfic' ),
 									'subtitle'   => esc_html__( 'You can change the order of sections by dragging and dropping them.', 'tourfic' ),
 									'dependency' => array( 'single-hotel', '==', 'design-1' ),
-									'options'    => array(
+									'default'    => array(
 										array(
 											'label'  => esc_html__( 'Description', 'tourfic' ),
 											'slug'   => 'description',
@@ -228,36 +228,6 @@ TF_Settings::option( 'tf_settings', array(
 											'status' => 1,
 										),
 									),
-									'default'    => array(
-										array(
-											'slug'   => 'description',
-											'status' => 1,
-										),
-										array(
-											'slug'   => 'features',
-											'status' => 1,
-										),
-										array(
-											'slug'   => 'rooms',
-											'status' => 1,
-										),
-										array(
-											'slug'   => 'facilities',
-											'status' => 1,
-										),
-										array(
-											'slug'   => 'faq',
-											'status' => 1,
-										),
-										array(
-											'slug'   => 'review',
-											'status' => 1,
-										),
-										array(
-											'slug'   => 'trams-condition',
-											'status' => 1,
-										),
-									)
 								),
 								//design 2
 								array(
@@ -273,7 +243,7 @@ TF_Settings::option( 'tf_settings', array(
 									'label'      => esc_html__( 'Single Hotel Template Sections Part 1', 'tourfic' ),
 									'subtitle'   => esc_html__( 'You can able to change section positions by Drag & Drop.', 'tourfic' ),
 									'dependency' => array( 'single-hotel', '==', 'design-2' ),
-									'options'    => array(
+									'default'    => array(
 										array(
 											'label'  => esc_html__( 'Description', 'tourfic' ),
 											'slug'   => 'description',
@@ -290,20 +260,6 @@ TF_Settings::option( 'tf_settings', array(
 											'status' => 1,
 										)
 									),
-									'default'    => array(
-										array(
-											'slug'   => 'description',
-											'status' => 1,
-										),
-										array(
-											'slug'   => 'features',
-											'status' => 1,
-										),
-										array(
-											'slug'   => 'rooms',
-											'status' => 1,
-										)
-									)
 								),
 								array(
 									'id'         => 'single-hotel-layout-part-2',
@@ -312,7 +268,7 @@ TF_Settings::option( 'tf_settings', array(
 									'label'      => esc_html__( 'Single Hotel Template Sections Part 2', 'tourfic' ),
 									'subtitle'   => esc_html__( 'You can able to change section positions by Drag & Drop.', 'tourfic' ),
 									'dependency' => array( 'single-hotel', '==', 'design-2' ),
-									'options'    => array(
+									'default'    => array(
 										array(
 											'label'  => esc_html__( 'Facilities', 'tourfic' ),
 											'slug'   => 'facilities',
@@ -330,24 +286,6 @@ TF_Settings::option( 'tf_settings', array(
 										),
 										array(
 											'label'  => esc_html__( 'Terms & Conditions', 'tourfic' ),
-											'slug'   => 'trams-condition',
-											'status' => 1,
-										),
-									),
-									'default'    => array(
-										array(
-											'slug'   => 'facilities',
-											'status' => 1,
-										),
-										array(
-											'slug'   => 'review',
-											'status' => 1,
-										),
-										array(
-											'slug'   => 'faq',
-											'status' => 1,
-										),
-										array(
 											'slug'   => 'trams-condition',
 											'status' => 1,
 										),
@@ -484,7 +422,7 @@ TF_Settings::option( 'tf_settings', array(
 									'label'      => esc_html__( 'Single Tour Template Sections', 'tourfic' ),
 									'subtitle'   => esc_html__( 'You can change the order of sections by dragging and dropping them.', 'tourfic' ),
 									'dependency' => array( 'single-tour', '==', 'design-1' ),
-									'options'    => array(
+									'default'    => array(
 										array(
 											'label'  => esc_html__( 'Gallery', 'tourfic' ),
 											'slug'   => 'gallery',
@@ -541,52 +479,6 @@ TF_Settings::option( 'tf_settings', array(
 											'status' => 1,
 										),
 									),
-									'default'    => array(
-										array(
-											'slug'   => 'gallery',
-											'status' => 1,
-										),
-										array(
-											'slug'   => 'price',
-											'status' => 1,
-										),
-										array(
-											'slug'   => 'description',
-											'status' => 1,
-										),
-										array(
-											'slug'   => 'information',
-											'status' => 1,
-										),
-										array(
-											'slug'   => 'highlights',
-											'status' => 1,
-										),
-										array(
-											'slug'   => 'include-exclude',
-											'status' => 1,
-										),
-										array(
-											'slug'   => 'itinerary',
-											'status' => 1,
-										),
-										array(
-											'slug'   => 'map',
-											'status' => 1,
-										),
-										array(
-											'slug'   => 'faq',
-											'status' => 1,
-										),
-										array(
-											'slug'   => 'trams-condition',
-											'status' => 1,
-										),
-										array(
-											'slug'   => 'review',
-											'status' => 1,
-										),
-									),
 								),
                                 //design 2
 								array(
@@ -602,7 +494,7 @@ TF_Settings::option( 'tf_settings', array(
 									'label'      => esc_html__( 'Single Tour Template Sections Part 1', 'tourfic' ),
 									'subtitle'   => esc_html__( 'You can able to change section positions by Drag & Drop.', 'tourfic' ),
 									'dependency' => array( 'single-tour', '==', 'design-2' ),
-									'options'    => array(
+									'default'    => array(
 										array(
 											'label'  => esc_html__( 'Description', 'tourfic' ),
 											'slug'   => 'description',
@@ -629,28 +521,6 @@ TF_Settings::option( 'tf_settings', array(
 											'status' => 1,
 										)
 									),
-									'default'    => array(
-										array(
-											'slug'   => 'description',
-											'status' => 1,
-										),
-										array(
-											'slug'   => 'information',
-											'status' => 1,
-										),
-										array(
-											'slug'   => 'highlights',
-											'status' => 1,
-										),
-										array(
-											'slug'   => 'include-exclude',
-											'status' => 1,
-										),
-										array(
-											'slug'   => 'itinerary',
-											'status' => 1,
-										)
-									),
 								),
 								array(
 									'id'         => 'single-tour-layout-part-2',
@@ -659,7 +529,7 @@ TF_Settings::option( 'tf_settings', array(
 									'label'      => esc_html__( 'Single Tour Template Sections Part 2', 'tourfic' ),
 									'subtitle'   => esc_html__( 'You can able to change section positions by Drag & Drop.', 'tourfic' ),
 									'dependency' => array( 'single-tour', '==', 'design-2' ),
-									'options'    => array(
+									'default'    => array(
 										array(
 											'label'  => esc_html__( 'FAQ', 'tourfic' ),
 											'slug'   => 'faq',
@@ -672,20 +542,6 @@ TF_Settings::option( 'tf_settings', array(
 										),
 										array(
 											'label'  => esc_html__( 'Terms & Conditions', 'tourfic' ),
-											'slug'   => 'trams-condition',
-											'status' => 1,
-										),
-									),
-									'default'    => array(
-										array(
-											'slug'   => 'faq',
-											'status' => 1,
-										),
-										array(
-											'slug'   => 'review',
-											'status' => 1,
-										),
-										array(
 											'slug'   => 'trams-condition',
 											'status' => 1,
 										),
@@ -818,7 +674,7 @@ TF_Settings::option( 'tf_settings', array(
 									'label'      => esc_html__( 'Single Apartment Template Sections Part 1', 'tourfic' ),
 									'subtitle'   => esc_html__( 'You can able to change section positions by Drag & Drop.', 'tourfic' ),
 									'dependency' => array( 'single-apartment', '==', 'design-1' ),
-									'options'    => array(
+									'default'    => array(
 										array(
 											'label'  => esc_html__( 'Description', 'tourfic' ),
 											'slug'   => 'description',
@@ -850,32 +706,6 @@ TF_Settings::option( 'tf_settings', array(
 											'status' => 1,
 										)
 									),
-									'default'    => array(
-										array(
-											'slug'   => 'description',
-											'status' => 1,
-										),
-										array(
-											'slug'   => 'features',
-											'status' => 1,
-										),
-										array(
-											'slug'   => 'rooms',
-											'status' => 1,
-										),
-										array(
-											'slug'   => 'offer',
-											'status' => 1,
-										),
-										array(
-											'slug'   => 'rules',
-											'status' => 1,
-										),
-										array(
-											'slug'   => 'facilities',
-											'status' => 1,
-										)
-									),
 								),
 								array(
 									'id'         => 'single-aprtment-layout-part-2',
@@ -884,7 +714,7 @@ TF_Settings::option( 'tf_settings', array(
 									'label'      => esc_html__( 'Single Apartment Template Sections Part 2', 'tourfic' ),
 									'subtitle'   => esc_html__( 'You can able to change section positions by Drag & Drop.', 'tourfic' ),
 									'dependency' => array( 'single-apartment', '==', 'design-1' ),
-									'options'    => array(
+									'default'    => array(
 										array(
 											'label'  => esc_html__( 'Review', 'tourfic' ),
 											'slug'   => 'review',
@@ -897,20 +727,6 @@ TF_Settings::option( 'tf_settings', array(
 										),
 										array(
 											'label'  => esc_html__( 'Terms & Conditions', 'tourfic' ),
-											'slug'   => 'trams-condition',
-											'status' => 1,
-										),
-									),
-									'default'    => array(
-										array(
-											'slug'   => 'review',
-											'status' => 1,
-										),
-										array(
-											'slug'   => 'faq',
-											'status' => 1,
-										),
-										array(
 											'slug'   => 'trams-condition',
 											'status' => 1,
 										),
@@ -1034,7 +850,7 @@ TF_Settings::option( 'tf_settings', array(
 									'label'      => __( 'Single Car Template Sections', 'tourfic' ),
 									'subtitle'   => __( 'You can able to change section positions by Drag & Drop.', 'tourfic' ),
 									'dependency' => array( 'single-car', '==', 'design-1' ),
-									'options'    => array(
+									'default'    => array(
 										array(
 											'label'  => __( 'Description', 'tourfic' ),
 											'slug'   => 'description',
@@ -1062,32 +878,6 @@ TF_Settings::option( 'tf_settings', array(
 										),
 										array(
 											'label'  => __( 'FAQs', 'tourfic' ),
-											'slug'   => 'faq',
-											'status' => 1,
-										)
-									),
-									'default'    => array(
-										array(
-											'slug'   => 'description',
-											'status' => 1,
-										),
-										array(
-											'slug'   => 'car-info',
-											'status' => 1,
-										),
-										array(
-											'slug'   => 'benefits',
-											'status' => 1,
-										),
-										array(
-											'slug'   => 'inc-exc',
-											'status' => 1,
-										),
-										array(
-											'slug'   => 'location',
-											'status' => 1,
-										),
-										array(
 											'slug'   => 'faq',
 											'status' => 1,
 										)

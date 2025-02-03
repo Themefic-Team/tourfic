@@ -1771,6 +1771,10 @@
             }
         });
 
+        // switch-group Drag and  show
+        $(".tf-switch-group-wrap").sortable({
+            placeholder: "tf-switch-drag-highlight"
+        });
 
         // TAB jquery
         $(document).on('click', '.tf-tab-item', function () {

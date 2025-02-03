@@ -32,7 +32,7 @@
         }
         h2{
             color: $color-heading;
-            font-size: calc(var(--tf-base-font-size) + 34px);
+            font-size: 3rem;
             font-weight: 600;
             line-height: 0.625;
             letter-spacing: -0.96px;
@@ -89,7 +89,7 @@
                             padding: 8px;
                             border-radius: 16px;
                             border: 1px solid $color-gray;
-                            font-size: calc(var(--tf-base-font-size) - 1px);
+                            font-size: 0.813rem;
                             margin: 5px 0px;
                         }
                     }
@@ -184,7 +184,7 @@
                 }
                 p{
                     color: $color-text;
-                    font-size: calc(var(--tf-base-font-size) + 2px);
+                    font-size: 1rem;
                     font-weight: 400;
                     line-height: 1.25;
                     margin-top: 0px;
@@ -264,7 +264,7 @@
                                 padding-left: 5px;
                                 h5{
                                     color: $color-heading;
-                                    font-size: calc(var(--tf-base-font-size) + 2px);
+                                    font-size: 1rem;
                                     font-weight: 500;
                                     line-height: 1.25;
                                     margin: 0;
@@ -274,7 +274,7 @@
                                 }
                                 p{
                                     color:  $color-text;                                
-                                    font-size: calc(var(--tf-base-font-size) + 2px);
+                                    font-size: 1rem;
                                     font-weight: 400;
                                     line-height: 1.25;
                                     margin: 0;
@@ -331,7 +331,7 @@
                                 box-shadow: none;
                                 background: rgba(0,0,0,0);
                                 text-align: center;
-                                font-size: calc(var(--tf-base-font-size) + 2px);
+                                font-size: 1rem;
                                 font-weight: 600;
                                 color: $color-text;
                             }
@@ -347,7 +347,7 @@
                         padding-bottom: 16px;
                         h4{
                             color: $color-heading;
-                            font-size: calc(var(--tf-base-font-size) + 2px);
+                            font-size: 1rem;
                             font-weight: 500;
                             line-height: 1.25;
                         }
@@ -362,7 +362,7 @@
                                 width: 100%;
                                 label{
                                     color: $color-text;
-                                    font-size: var(--tf-base-font-size);
+                                    font-size: 0.875rem;
                                     font-weight: 500;
                                 }
                                 input[type="text"],
@@ -378,7 +378,7 @@
                                 }
                                 input[type="date"]{
                                     text-transform: uppercase;
-                                    font-size: calc(var(--tf-base-font-size) - 1px);
+                                    font-size: 0.813rem;
                                 }
                                 input[type="checkbox"],
                                 input[type="radio"]{
@@ -386,7 +386,7 @@
                                 }
                                 .error-text.error-visible {
                                     color: $color-danger;
-                                    font-size: calc(var(--tf-base-font-size) - 1px);
+                                    font-size: 0.813rem;
                                 }
                             }
                         }
@@ -411,14 +411,14 @@
                 .tf-booking-fixed-summery{
                     h5{
                         color: $color-heading;
-                        font-size: calc(var(--tf-base-font-size) + 2px);
+                        font-size: 1rem;
                         font-weight: 500;
                         line-height: 1.25; 
                         margin-bottom: 16px;
                     }
                     h4{
                         color: $color-heading;
-                        font-size: calc(var(--tf-base-font-size) + 6px);
+                        font-size: 1.25rem;
                         font-weight: 500;
                         line-height: 1.5;
                         letter-spacing: -0.4px;
@@ -443,7 +443,7 @@
                     }
                     h6{
                         color: $color-heading;
-                        font-size: calc(var(--tf-base-font-size) + 2px);
+                        font-size: 1rem;
                         font-weight: 400;
                         line-height: 1.25;
                         margin-bottom: 16px;
@@ -454,7 +454,7 @@
                             tr{
                                 th{
                                     color: $color-text;
-                                    font-size: var(--tf-base-font-size);
+                                    font-size: 0.875rem;
                                     font-weight: 600;
                                     line-height: 2;
                                     border: 0px solid;
@@ -466,7 +466,7 @@
                             tr{
                                 td{
                                     color: $color-text;
-                                    font-size: var(--tf-base-font-size);
+                                    font-size: 0.875rem;
                                     font-weight: 400;
                                     line-height: 1.85;
                                     border: 0px solid;
@@ -478,7 +478,7 @@
                             tr{
                                 th{
                                     color: $color-text;
-                                    font-size: calc(var(--tf-base-font-size) + 2px);
+                                    font-size: 1rem;
                                     font-weight: 700;
                                     padding-top: 15px;
                                     margin-top: 15px;
@@ -498,7 +498,7 @@
             .tf-tax-notice{
                 padding-bottom: 16px;
                 span{
-                    font-size: calc(var(--tf-base-font-size) + 2px);
+                    font-size: 1rem;
                 }
             }
             .tf-diposit-switcher{
@@ -509,7 +509,7 @@
                     margin: 0;
                     display: inline-block;
                     color: $color-heading;
-                    font-size: calc(var(--tf-base-font-size) + 2px);
+                    font-size: 1rem;
                     font-weight: 500;
                     line-height: 1.5;
                 }
@@ -530,7 +530,7 @@
                             color: $color-white;
                             background-color: $color-gray;
                             font-weight: normal;
-                            font-size: calc(var(--tf-base-font-size) - 1px);
+                            font-size: 0.813rem;
                             border-radius: 4px;
                             position: absolute;
                             z-index: 99999999;
@@ -628,7 +628,7 @@
                 }
                 a.tf-back-control{
                     color: $color-primary;
-                    font-size: var(--tf-base-font-size);
+                    font-size: 0.875rem;
                     font-weight: 700;
                     line-height: 1.4;
                     margin-right: 24px;
