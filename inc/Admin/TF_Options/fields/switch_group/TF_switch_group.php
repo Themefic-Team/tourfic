@@ -18,102 +18,63 @@ if ( ! class_exists( 'TF_Switch_Group' ) ) {
 			parent::__construct( $field, $value, $settings_id, $parent_field);
 		}
 		public function render() {
-			$max_index = 0;
-            $label = ( ! empty( $this->field['label'] ) ) ? $this->field['label'] : '';
-            $field_title = ( ! empty( $this->field['field_title'] ) ) ? $this->field['field_title'] : $label;
+			$args = wp_parse_args( $this->field, array(
+				'label_on'  => esc_html__( 'On', 'tourfic' ),
+				'label_off' => esc_html__( 'Off', 'tourfic' ),
+			) );
 
-			if ( ! empty( $this->value ) ){
-				
-				if(!is_array($this->value)){
-					$tf_rep_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
-						return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
-					}, $this->value );
+			$on    = ( ! empty( $args['label_on'] ) ) ? $args['label_on'] : esc_html__( 'On', 'tourfic' );
+			$off   = ( ! empty( $args['label_off'] ) ) ? $args['label_off'] : esc_html__( 'Off', 'tourfic' );
+			$width = ( ! empty( $this->field['width'] ) ) ? ' style="width: ' . esc_attr( $this->field['width'] ) . 'px;"' : '';
 
-					$data = unserialize( $tf_rep_value );
-				}else{
-					$data = $this->value;
-				}
-				
-				$max_index = ! empty($data) && is_array($data) ? max(array_keys($data)) : 0;
+			$class = 'tf-switch';
+			if ( preg_match( '/class="([^"]*)"/', wp_kses_post($this->field_attributes()), $matches ) ) {
+				$class_attribute_value = $matches[1];
+				$class                 = $class . ' ' . $class_attribute_value;
 			}
+            $label = ( ! empty( $this->field['label'] ) ) ? $this->field['label'] : '';
+            $column = ( ! empty( $this->field['column'] ) ) ? $this->field['column'] : 3;
+			$value  = ( ! empty( $this->value ) && ! is_array( $this->value ) ) ? unserialize( $this->value ) : $this->value;
 			?>
-            <div id="tf-repeater-1" class="tf-repeater <?php echo esc_attr($this->field['id']);?>" data-max-index="<?php echo esc_attr($max_index); ?>">
-                <div class="tf-repeater-wrap tf-repeater-wrap-<?php echo esc_attr($this->field['id']);?>">
-					<?php if ( ! empty( $this->value ) ):
-						$num = 0;
-					 	if(is_array($data)):
-							
-							foreach ( $data as $key => $value ) :
-								if( "cont_custom_date" == $this->field['id'] ){
-									$value[$field_title] = esc_html__('Custom Dates', 'tourfic');
-								}
-							?>
-                            <div class="tf-single-repeater tf-single-repeater-<?php echo esc_attr($this->field['id']);?>">
-							<input type="hidden" name="tf_parent_field" value="<?php echo esc_attr($this->parent_field); ?>">
-							<input type="hidden" name="tf_repeater_count" value="<?php echo esc_attr($key); ?>">
-							<input type="hidden" name="tf_current_field" value="<?php echo esc_attr($this->field['id']);?>">
-								<div class="tf-repeater-header">
-									<span class="tf-repeater-icon tf-repeater-icon-collapse">
-										<i class="fa-solid fa-angle-down"></i>
-									</span>
-									<span class="tf-repeater-title"><?php echo !empty($value[$field_title]) && is_string($value[$field_title]) ? esc_html($value[$field_title]) : esc_html($label) ?>  </span>
-									<div class="tf-repeater-icon-absulate">
-										<span class="tf-repeater-icon tf-repeater-icon-move">
-											<i class="fa-solid fa-up-down-left-right"></i>
-										</span>
-										<?php
-										if(empty($this->field['drag_only']) || !$this->field['drag_only']){
-										?>
-										<span class="tf-repeater-icon tf-repeater-icon-clone" data-repeater-max = "<?php if(isset($this->field['max'])){ echo esc_attr($this->field['max']); }  ?>">
-											<i class="fa-solid fa-copy"></i> 
-										</span>
-										<span class="tf-repeater-icon tf-repeater-icon-delete">
-											<i class="fa-solid fa-trash"></i>
-										</span>
-										<?php } ?>
-									</div>
-								</div>
-                                <div class="tf-repeater-content-wrap hide" style="display: none">
-									<?php
-									foreach ( $this->field['fields'] as $re_field ) :
-
-										if($re_field['type'] == 'editor'){
-											$re_field['wp_editor'] = 'wp_editor';
-										}
-										if($re_field['type'] == 'select2'){
-											$re_field['select2'] = 'select2';
-										}
-
-										if(!empty($this->parent_field)){
-											$parent_field = $this->parent_field.'[' . $this->field['id'] . '][' . $key . ']';
-										}else{
-											$parent_field = '[' . $this->field['id'] . '][' . $key . ']';
-										}
-
-										$id = ( ! empty( $this->settings_id ) ) ? $this->settings_id . '[' . $this->field['id'] . '][00]' . '[' . $re_field['id'] . ']' : $this->field['id'] . '[00]' . '[' . $re_field['id'] . ']';
-										if ( isset( $tf_meta_box_value[ $id ] ) ) {
-											$value = isset( $tf_meta_box_value[ $id ] ) ? $tf_meta_box_value[ $id ] : '';
-										} else {
-											$value = ( isset( $re_field['id'] ) && isset( $data[ $key ][ $re_field['id'] ] ) ) ? $data[ $key ][ $re_field['id'] ] : '';
-										}
-
-										if(isset($re_field['validate']) && $re_field['validate'] == 'no_space_no_special'){
-											//remove special characters, replace space with underscore and convert to lowercase
-											$value = sanitize_title(str_replace(' ', '_', strtolower($value)));
-										}
-
-										$value = ($re_field['type'] == 'text' || $re_field['type'] == 'textarea') ? stripslashes($value) : $value;
-
-										$tf_option = new \Tourfic\Admin\TF_Options\TF_Options();
-										$tf_option->field( $re_field, $value, $this->settings_id, $parent_field);
-									endforeach;
-									$num ++;
-									?>
-                                </div>
-                            </div>
-						<?php endforeach; endif; endif; ?>
-                </div>
-            </div>
+			<div class="tf-switch-group-wrap tf-switch-group-wrap-<?php echo esc_attr($this->field['id']);?> tf-switch-column-<?php echo esc_attr($column); ?>">
+				<?php 
+				if ( ! empty( $this->field['options'] ) && is_array($this->field['options']) ):
+					foreach ( $this->field['options'] as $key => $option ) :
+						$_value = ! empty( $value[ $key ] ) ? $value[ $key ] : '';
+						$status_value = isset($_value['status']) ? esc_attr($_value['status']) : 0;
+						// Helper::tf_var_dump($option);
+						// Helper::tf_var_dump($_value);
+						?>
+						<div class="tf-switch-column">
+							<label class="tf-switch-gr-label" for="<?php echo esc_attr( $this->field_name() ) . '[' . esc_attr($key) . '][status]'; ?>">
+								<?php echo esc_html($option['label']) ?>
+							</label>
+							<input 
+								type="hidden"
+								name="<?php echo esc_attr( $this->field_name() ) . '[' . esc_attr($key) . '][slug]'; ?>" 
+								value="<?php echo esc_attr($option['slug']); ?>"
+							/>
+							<label for="<?php echo esc_attr( $this->field_name() ) . '[' . esc_attr($key) . '][status]'; ?>" class="tf-switch-label" <?php echo wp_kses_post( $width ); ?>>
+								<input
+									type="checkbox" 
+									id="<?php echo esc_attr( $this->field_name() ) . '[' . esc_attr($key) . '][status]'; ?>" 
+									name="<?php echo esc_attr( $this->field_name() ) . '[' . esc_attr($key) . '][status]'; ?>" 
+									value="<?php echo esc_attr($status_value); ?>" 
+									class="<?php echo esc_attr($class) ?>"
+									<?php checked( $status_value, 1 ); ?>
+									<?php echo wp_kses_post($this->field_attributes()) ?>
+								/>
+								<span class="tf-switch-slider">
+									<span class="tf-switch-on"><?php echo esc_html( $on ); ?></span>
+									<span class="tf-switch-off"><?php echo esc_html( $off ); ?></span>
+								</span>
+							</label>
+						</div>
+						<?php 
+					endforeach; 
+				endif;
+				?>
+			</div>
 			<?php
 
 		}
