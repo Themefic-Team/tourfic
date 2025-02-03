@@ -1159,57 +1159,76 @@ class Enqueue {
 	public function tf_global_custom_css() {
 
 		$color_palette_template = ! empty( Helper::tfopt( 'color-palette-template' ) ) ? Helper::tfopt( 'color-palette-template' ) : 'design-2';
-		if('design-1'==$color_palette_template){
-			$tf_design_primary = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d1-primary' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d1-primary' ) )['gcolor'] : '#003162';
-			$tf_design_secondary = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d1-secondary' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d1-secondary' ) )['gcolor'] : '#0054A8';
-			$tf_design_text = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d1-text' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d1-text' ) )['gcolor'] : '#000';
-			$tf_design_heading = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d1-heading' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d1-heading' ) )['gcolor'] : '#000';
-			$tf_design_light_bg = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d1-light-bg' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d1-light-bg' ) )['gcolor'] : '#faeedc';
-			$tf_design_highlights_bg = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d1-highlights-bg' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d1-highlights-bg' ) )['gcolor'] : '#FCF4E8';
-			$tf_design_form_input_bg = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d1-form-input-bg' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d1-form-input-bg' ) )['gcolor'] : '#fff';
-			$tf_design_box_shadow = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d1-box-shadow' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d1-box-shadow' ) )['gcolor'] : '#e0e8ee52';
-			$tf_design_border_color = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d1-border-color' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d1-border-color' ) )['gcolor'] : '#ddd';
-		}elseif('design-2'==$color_palette_template){
-			$tf_design_primary = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d2-primary' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d2-primary' ) )['gcolor'] : '#0E3DD8';
-			$tf_design_secondary = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d2-secondary' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d2-secondary' ) )['gcolor'] : '#003C7A';
-			$tf_design_text = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d2-text' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d2-text' ) )['gcolor'] : '#686E7A';
-			$tf_design_heading = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d2-heading' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d2-heading' ) )['gcolor'] : '#060D1C';
-			$tf_design_light_bg = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d2-light-bg' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d2-light-bg' ) )['gcolor'] : '#faeedc';
-			$tf_design_highlights_bg = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d2-highlights-bg' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d2-highlights-bg' ) )['gcolor'] : '#FCF4E8';
-			$tf_design_form_input_bg = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d2-form-input-bg' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d2-form-input-bg' ) )['gcolor'] : '#F3F7FA';
-			$tf_design_box_shadow = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d2-box-shadow' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d2-box-shadow' ) )['gcolor'] : '#e0e8ee52';
-			$tf_design_border_color = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d2-border-color' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d2-border-color' ) )['gcolor'] : '#ddd';
-		}elseif('design-3'==$color_palette_template){
-			$tf_design_primary = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d3-primary' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d3-primary' ) )['gcolor'] : '#B58E53';
-			$tf_design_secondary = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d3-secondary' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d3-secondary' ) )['gcolor'] : '#917242';
-			$tf_design_text = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d3-text' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d3-text' ) )['gcolor'] : '#99948D';
-			$tf_design_heading = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d3-heading' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d3-heading' ) )['gcolor'] : '#595349';
-			$tf_design_light_bg = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d3-light-bg' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d3-light-bg' ) )['gcolor'] : '#faeedc';
-			$tf_design_highlights_bg = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d3-highlights-bg' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d3-highlights-bg' ) )['gcolor'] : '#FCF4E8';
-			$tf_design_form_input_bg = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d3-form-input-bg' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d3-form-input-bg' ) )['gcolor'] : '#F3F7FA';
-			$tf_design_box_shadow = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d3-box-shadow' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d3-box-shadow' ) )['gcolor'] : '#e0e8ee52';
-			$tf_design_border_color = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d3-border-color' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d3-border-color' ) )['gcolor'] : '#ddd';
-		}elseif('design-4'==$color_palette_template){
-			$tf_design_primary = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d4-primary' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d4-primary' ) )['gcolor'] : '#FF6B00';
-			$tf_design_secondary = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d4-secondary' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d4-secondary' ) )['gcolor'] : '#C15100';
-			$tf_design_text = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d4-text' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d4-text' ) )['gcolor'] : '#6E655E';
-			$tf_design_heading = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d4-heading' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d4-heading' ) )['gcolor'] : '#1A0B00';
-			$tf_design_light_bg = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d4-light-bg' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d4-light-bg' ) )['gcolor'] : '#F5E9E0';
-			$tf_design_highlights_bg = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d4-highlights-bg' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d4-highlights-bg' ) )['gcolor'] : '#FCF4E8';
-			$tf_design_form_input_bg = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d4-form-input-bg' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d4-form-input-bg' ) )['gcolor'] : '#F3F7FA';
-			$tf_design_box_shadow = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d4-box-shadow' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d4-box-shadow' ) )['gcolor'] : '#e0e8ee52';
-			$tf_design_border_color = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-d4-border-color' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-d4-border-color' ) )['gcolor'] : '#ddd';
-		}elseif('custom'==$color_palette_template){
-			$tf_design_primary = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-custom-primary' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-custom-primary' ) )['gcolor'] : '';
-			$tf_design_secondary = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-custom-secondary' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-custom-secondary' ) )['gcolor'] : '';
-			$tf_design_text = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-custom-text' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-custom-text' ) )['gcolor'] : '';
-			$tf_design_heading = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-custom-heading' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-custom-heading' ) )['gcolor'] : '';
-			$tf_design_light_bg = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-custom-light-bg' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-custom-light-bg' ) )['gcolor'] : '';
-			$tf_design_highlights_bg = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-custom-highlights-bg' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-custom-highlights-bg' ) )['gcolor'] : '';
-			$tf_design_form_input_bg = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-custom-form-input-bg' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-custom-form-input-bg' ) )['gcolor'] : '';
-			$tf_design_box_shadow = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-custom-box-shadow' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-custom-box-shadow' ) )['gcolor'] : '';
-			$tf_design_border_color = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-custom-border-color' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-custom-border-color' ) )['gcolor'] : '';
+
+		$design_default = [
+			'design-1' => [
+				'default' => [
+					'primary'    => '#003162',
+					'secondary'  => '#0054A8',
+					'text'       => '#000',
+					'heading'    => '#000',
+				]
+			],
+			'design-2' => [
+				'default' => [
+					'primary'    => '#0E3DD8',
+					'secondary'  => '#003C7A',
+					'text'       => '#686E7A',
+					'heading'    => '#060D1C',
+				]
+			],
+			'design-3' => [
+				'default' => [
+					'primary'    => '#B58E53',
+					'secondary'  => '#917242',
+					'text'       => '#99948D',
+					'heading'    => '#595349',
+				]
+			],
+			'design-4' => [
+				'default' => [
+					'primary'    => '#FF6B00',
+					'secondary'  => '#C15100',
+					'text'       => '#6E655E',
+					'heading'    => '#1A0B00',
+				]
+			],
+			'custom' => []
+		];
+
+		foreach ( $design_default as $key => $value ) {
+			if('custom' !== $key && $color_palette_template === $key){
+				
+				$tf_key_split = explode('-', $key);
+				$tf_id = end($tf_key_split);
+				$tf_design_data = ! empty( Helper::tf_data_types( Helper::tfopt( "tf-d{$tf_id}" ) ) ) ? Helper::tf_data_types( Helper::tfopt( "tf-d{$tf_id}" ) ) : [];
+
+				$tf_design_primary = ! empty( $tf_design_data['primary'] ) ? $tf_design_data['primary'] : $value['default']['primary'];
+				$tf_design_secondary = ! empty( $tf_design_data['secondary'] ) ? $tf_design_data['secondary'] : $value['default']['secondary'];
+				$tf_design_text = ! empty( $tf_design_data['text'] ) ? $tf_design_data['text'] : $value['default']['text'];
+				$tf_design_heading = ! empty( $tf_design_data['heading'] ) ? $tf_design_data['heading'] : $value['default']['heading'];
+				$tf_design_light_bg = ! empty( $tf_design_data['light-bg'] ) ? $tf_design_data['light-bg'] : '#faeedc';
+				$tf_design_highlights_bg = ! empty( $tf_design_data['highlights-bg'] ) ? $tf_design_data['highlights-bg'] : '#FCF4E8';
+				$tf_design_form_input_bg = ! empty( $tf_design_data['form-input-bg'] ) ? $tf_design_data['form-input-bg'] : '#F3F7FA';
+				$tf_design_box_shadow = ! empty( $tf_design_data['box-shadow'] ) ? $tf_design_data['box-shadow'] : '#e0e8ee52';
+				$tf_design_border_color = ! empty( $tf_design_data['border-color'] ) ? $tf_design_data['border-color'] : '#ddd';
+				
+			}else if('custom' === $key && $color_palette_template === $key){
+				$tf_design_data = ! empty( Helper::tf_data_types( Helper::tfopt( "tf-{$key}" ) )) ? Helper::tf_data_types( Helper::tfopt( "tf-{$key}" ) ): [];
+				
+				$tf_design_primary = ! empty( $tf_design_data['primary'] ) ? $tf_design_data['primary'] : '';
+				$tf_design_secondary = ! empty( $tf_design_data['secondary'] ) ? $tf_design_data['secondary'] : '';
+				$tf_design_text = ! empty( $tf_design_data['text'] ) ? $tf_design_data['text'] : '';
+				$tf_design_heading = ! empty( $tf_design_data['heading'] ) ? $tf_design_data['heading'] : '';
+				$tf_design_light_bg = ! empty( $tf_design_data['light-bg'] ) ? $tf_design_data['light-bg'] : '';
+				$tf_design_highlights_bg = ! empty( $tf_design_data['highlights-bg'] ) ? $tf_design_data['highlights-bg'] : '';
+				$tf_design_form_input_bg = ! empty( $tf_design_data['form-input-bg'] ) ? $tf_design_data['form-input-bg'] : '';
+				$tf_design_box_shadow = ! empty( $tf_design_data['box-shadow'] ) ? $tf_design_data['box-shadow'] : '';
+				$tf_design_border_color = ! empty( $tf_design_data['border-color'] ) ? $tf_design_data['border-color'] : '';
+			}
 		}
+
+		
 		$base_font_size = apply_filters('tf_base_font_size', '16px');
 		$output = "
 			:root {
