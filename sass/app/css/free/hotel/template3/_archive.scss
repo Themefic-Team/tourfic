@@ -845,6 +845,10 @@ $t4-main-color: #060D1C;
                             @include justify-content(flex-start);
                         }
 
+                        del {
+                            font-size: 16px;
+                        }
+
                         .woocommerce-Price-amount {
                             font-size: 16px;
                             font-weight: 500;
