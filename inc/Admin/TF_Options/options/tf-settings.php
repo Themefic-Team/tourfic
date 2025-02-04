@@ -1015,23 +1015,14 @@ TF_Settings::option( 'tf_settings', array(
 						'design-1' => array(
 							'title' => 'Palette 1',
 							'colors' => [
-								'#003162',
-								'#0054A8',
-								'#000',
-								'#faeedc'
-							]
-						),
-						'design-2' => array(
-							'title' => 'Palette 2',
-							'colors' => [
 								'#0E3DD8',
 								'#003C7A',
 								'#686E7A',
 								'#060D1C'
 							]
 						),
-						'design-3' => array(
-							'title' => 'Palette 3',
+						'design-2' => array(
+							'title' => 'Palette 2',
 							'colors' => [
 								'#B58E53',
 								'#917242',
@@ -1039,8 +1030,8 @@ TF_Settings::option( 'tf_settings', array(
 								'#595349'
 							]
 						),
-						'design-4' => array(
-							'title' => 'Palette 4',
+						'design-3' => array(
+							'title' => 'Palette 3',
 							'colors' => [
 								'#FF6B00',
 								'#C15100',
@@ -1048,675 +1039,167 @@ TF_Settings::option( 'tf_settings', array(
 								'#1A0B00'
 							]
 						),
+						'design-4' => array(
+							'title' => 'Palette 4',
+							'colors' => [
+								'#003162',
+								'#0054A8',
+								'#000',
+								'#faeedc'
+							]
+						),
 						'custom' => array(
 							'title' => 'Custom Palette',
-							'colors' => [
-								'#ddd',
-								'#ccc',
-								'#ddd',
-								'#ccc'
-							]
+							'colors' => function_exists('tf_custom_color_palette_values') ? tf_custom_color_palette_values() : '',
 						)
 					),
-					'default'  => 'design-2',
+					'default'  => 'design-1',
 				),
 				// Design 1 Fields
 				array(
-					'id'       => 'tf-d1-primary',
+					'id'       => 'tf-d1',
 					'type'     => 'color',
 					'multiple' => true,
 					'inline'   => true,
 					'default'  => array(
-						'gcolor' => '#003162'
+						'primary' => '#0E3DD8',
+						'secondary' => '#003C7A',
+						'text' => '#686E7A',
+						'heading' => '#060D1C',
+						'light-bg' => '#faeedc',
+						'highlights-bg' => '#FCF4E8',
+						'form-input-bg' => '#F3F7FA',
+						'box-shadow' => '#e0e8ee52',
+						'border-color' => '#ddd',
 					),
 					'colors'   => array(
-						'gcolor' => esc_html__( 'Primary Color', 'tourfic' ),
+						'primary' => esc_html__( 'Primary Color', 'tourfic' ),
+						'secondary' => esc_html__( 'Secondary Color', 'tourfic' ),
+						'text' => esc_html__( 'Text Color', 'tourfic' ),
+						'heading' => esc_html__( 'Heading Color', 'tourfic' ),
+						'light-bg' => esc_html__( 'Light Background', 'tourfic' ),
+						'highlights-bg' => esc_html__( 'Highlights Background', 'tourfic' ),
+						'form-input-bg' => esc_html__( 'Form Input Background', 'tourfic' ),
+						'box-shadow' => esc_html__( 'Box Shadow', 'tourfic' ),
+						'border-color' => esc_html__( 'Box Shadow', 'tourfic' ),
 					),
 					'dependency'   => array(
 						array( 'color-palette-template', '==', 'design-1' ),
 					),
 				),
 				array(
-					'id'       => 'tf-d1-secondary',
+					'id'       => 'tf-d2',
 					'type'     => 'color',
 					'multiple' => true,
 					'inline'   => true,
 					'default'  => array(
-						'gcolor' => '#0054A8'
+						'primary' => '#B58E53',
+						'secondary' => '#917242',
+						'text' => '#99948D',
+						'heading' => '#595349',
+						'light-bg' => '#faeedc',
+						'highlights-bg' => '#FCF4E8',
+						'form-input-bg' => '#F3F7FA',
+						'box-shadow' => '#e0e8ee52',
+						'border-color' => '#ddd',
 					),
 					'colors'   => array(
-						'gcolor' => esc_html__( 'Secondary Color', 'tourfic' ),
-					),
-					'dependency'   => array(
-						array( 'color-palette-template', '==', 'design-1' ),
-					),
-				),
-				array(
-					'id'       => 'tf-d1-text',
-					'type'     => 'color',
-					'multiple' => true,
-					'inline'   => true,
-					'default'  => array(
-						'gcolor' => '#000'
-					),
-					'colors'   => array(
-						'gcolor' => esc_html__( 'Text Color', 'tourfic' ),
-					),
-					'dependency'   => array(
-						array( 'color-palette-template', '==', 'design-1' ),
-					),
-				),
-				array(
-					'id'       => 'tf-d1-heading',
-					'type'     => 'color',
-					'multiple' => true,
-					'inline'   => true,
-					'default'  => array(
-						'gcolor' => '#000'
-					),
-					'colors'   => array(
-						'gcolor' => esc_html__( 'Heading Color', 'tourfic' ),
-					),
-					'dependency'   => array(
-						array( 'color-palette-template', '==', 'design-1' ),
-					),
-				),
-				array(
-					'id'       => 'tf-d1-light-bg',
-					'type'     => 'color',
-					'multiple' => true,
-					'inline'   => true,
-					'default'  => array(
-						'gcolor' => '#faeedc'
-					),
-					'colors'   => array(
-						'gcolor' => esc_html__( 'Light Background', 'tourfic' ),
-					),
-					'dependency'   => array(
-						array( 'color-palette-template', '==', 'design-1' ),
-					),
-				),
-				array(
-					'id'       => 'tf-d1-highlights-bg',
-					'type'     => 'color',
-					'multiple' => true,
-					'inline'   => true,
-					'default'  => array(
-						'gcolor' => '#FCF4E8'
-					),
-					'colors'   => array(
-						'gcolor' => esc_html__( 'Highlights Background', 'tourfic' ),
-					),
-					'dependency'   => array(
-						array( 'color-palette-template', '==', 'design-1' ),
-					),
-				),
-				array(
-					'id'       => 'tf-d1-form-input-bg',
-					'type'     => 'color',
-					'multiple' => true,
-					'inline'   => true,
-					'default'  => array(
-						'gcolor' => '#F3F7FA'
-					),
-					'colors'   => array(
-						'gcolor' => esc_html__( 'Form Input Background', 'tourfic' ),
-					),
-					'dependency'   => array(
-						array( 'color-palette-template', '==', 'design-1' ),
-					),
-				),
-				array(
-					'id'       => 'tf-d1-box-shadow',
-					'type'     => 'color',
-					'multiple' => true,
-					'inline'   => true,
-					'default'  => array(
-						'gcolor' => '#e0e8ee52'
-					),
-					'colors'   => array(
-						'gcolor' => esc_html__( 'Box Shadow', 'tourfic' ),
-					),
-					'dependency'   => array(
-						array( 'color-palette-template', '==', 'design-1' ),
-					),
-				),
-				array(
-					'id'       => 'tf-d1-border-color',
-					'type'     => 'color',
-					'multiple' => true,
-					'inline'   => true,
-					'default'  => array(
-						'gcolor' => '#ddd'
-					),
-					'colors'   => array(
-						'gcolor' => esc_html__( 'Border Color', 'tourfic' ),
-					),
-					'dependency'   => array(
-						array( 'color-palette-template', '==', 'design-1' ),
-					),
-				),
-
-				// Design 2 Fields
-				array(
-					'id'       => 'tf-d2-primary',
-					'type'     => 'color',
-					'multiple' => true,
-					'inline'   => true,
-					'default'  => array(
-						'gcolor' => '#0E3DD8'
-					),
-					'colors'   => array(
-						'gcolor' => esc_html__( 'Primary Color', 'tourfic' ),
+						'primary' => esc_html__( 'Primary Color', 'tourfic' ),
+						'secondary' => esc_html__( 'Secondary Color', 'tourfic' ),
+						'text' => esc_html__( 'Text Color', 'tourfic' ),
+						'heading' => esc_html__( 'Heading Color', 'tourfic' ),
+						'light-bg' => esc_html__( 'Light Background', 'tourfic' ),
+						'highlights-bg' => esc_html__( 'Highlights Background', 'tourfic' ),
+						'form-input-bg' => esc_html__( 'Form Input Background', 'tourfic' ),
+						'box-shadow' => esc_html__( 'Box Shadow', 'tourfic' ),
+						'border-color' => esc_html__( 'Box Shadow', 'tourfic' ),
 					),
 					'dependency'   => array(
 						array( 'color-palette-template', '==', 'design-2' ),
 					),
 				),
 				array(
-					'id'       => 'tf-d2-secondary',
+					'id'       => 'tf-d3',
 					'type'     => 'color',
 					'multiple' => true,
 					'inline'   => true,
 					'default'  => array(
-						'gcolor' => '#003C7A'
+						'primary' => '#FF6B00',
+						'secondary' => '#C15100',
+						'text' => '#6E655E',
+						'heading' => '#1A0B00',
+						'light-bg' => '#faeedc',
+						'highlights-bg' => '#FCF4E8',
+						'form-input-bg' => '#F3F7FA',
+						'box-shadow' => '#e0e8ee52',
+						'border-color' => '#ddd',
 					),
 					'colors'   => array(
-						'gcolor' => esc_html__( 'Secondary Color', 'tourfic' ),
-					),
-					'dependency'   => array(
-						array( 'color-palette-template', '==', 'design-2' ),
-					),
-				),
-				array(
-					'id'       => 'tf-d2-text',
-					'type'     => 'color',
-					'multiple' => true,
-					'inline'   => true,
-					'default'  => array(
-						'gcolor' => '#686E7A'
-					),
-					'colors'   => array(
-						'gcolor' => esc_html__( 'Text Color', 'tourfic' ),
-					),
-					'dependency'   => array(
-						array( 'color-palette-template', '==', 'design-2' ),
-					),
-				),
-				array(
-					'id'       => 'tf-d2-heading',
-					'type'     => 'color',
-					'multiple' => true,
-					'inline'   => true,
-					'default'  => array(
-						'gcolor' => '#060D1C'
-					),
-					'colors'   => array(
-						'gcolor' => esc_html__( 'Heading Color', 'tourfic' ),
-					),
-					'dependency'   => array(
-						array( 'color-palette-template', '==', 'design-2' ),
-					),
-				),
-				array(
-					'id'       => 'tf-d2-light-bg',
-					'type'     => 'color',
-					'multiple' => true,
-					'inline'   => true,
-					'default'  => array(
-						'gcolor' => '#fff'
-					),
-					'colors'   => array(
-						'gcolor' => esc_html__( 'Light Background', 'tourfic' ),
-					),
-					'dependency'   => array(
-						array( 'color-palette-template', '==', 'design-2' ),
-					),
-				),
-				array(
-					'id'       => 'tf-d2-highlights-bg',
-					'type'     => 'color',
-					'multiple' => true,
-					'inline'   => true,
-					'default'  => array(
-						'gcolor' => '#FCF4E8'
-					),
-					'colors'   => array(
-						'gcolor' => esc_html__( 'Highlights Background', 'tourfic' ),
-					),
-					'dependency'   => array(
-						array( 'color-palette-template', '==', 'design-2' ),
-					),
-				),
-				array(
-					'id'       => 'tf-d2-form-input-bg',
-					'type'     => 'color',
-					'multiple' => true,
-					'inline'   => true,
-					'default'  => array(
-						'gcolor' => '#F3F7FA'
-					),
-					'colors'   => array(
-						'gcolor' => esc_html__( 'Form Input Background', 'tourfic' ),
-					),
-					'dependency'   => array(
-						array( 'color-palette-template', '==', 'design-2' ),
-					),
-				),
-				array(
-					'id'       => 'tf-d2-box-shadow',
-					'type'     => 'color',
-					'multiple' => true,
-					'inline'   => true,
-					'default'  => array(
-						'gcolor' => '#e0e8ee52'
-					),
-					'colors'   => array(
-						'gcolor' => esc_html__( 'Box Shadow', 'tourfic' ),
-					),
-					'dependency'   => array(
-						array( 'color-palette-template', '==', 'design-2' ),
-					),
-				),
-				array(
-					'id'       => 'tf-d2-border-color',
-					'type'     => 'color',
-					'multiple' => true,
-					'inline'   => true,
-					'default'  => array(
-						'gcolor' => '#ddd'
-					),
-					'colors'   => array(
-						'gcolor' => esc_html__( 'Border Color', 'tourfic' ),
-					),
-					'dependency'   => array(
-						array( 'color-palette-template', '==', 'design-2' ),
-					),
-				),
-
-				// Design 3 Fields
-				array(
-					'id'       => 'tf-d3-primary',
-					'type'     => 'color',
-					'multiple' => true,
-					'inline'   => true,
-					'default'  => array(
-						'gcolor' => '#B58E53'
-					),
-					'colors'   => array(
-						'gcolor' => esc_html__( 'Primary Color', 'tourfic' ),
+						'primary' => esc_html__( 'Primary Color', 'tourfic' ),
+						'secondary' => esc_html__( 'Secondary Color', 'tourfic' ),
+						'text' => esc_html__( 'Text Color', 'tourfic' ),
+						'heading' => esc_html__( 'Heading Color', 'tourfic' ),
+						'light-bg' => esc_html__( 'Light Background', 'tourfic' ),
+						'highlights-bg' => esc_html__( 'Highlights Background', 'tourfic' ),
+						'form-input-bg' => esc_html__( 'Form Input Background', 'tourfic' ),
+						'box-shadow' => esc_html__( 'Box Shadow', 'tourfic' ),
+						'border-color' => esc_html__( 'Box Shadow', 'tourfic' ),
 					),
 					'dependency'   => array(
 						array( 'color-palette-template', '==', 'design-3' ),
 					),
 				),
 				array(
-					'id'       => 'tf-d3-secondary',
+					'id'       => 'tf-d4',
 					'type'     => 'color',
 					'multiple' => true,
 					'inline'   => true,
 					'default'  => array(
-						'gcolor' => '#917242'
+						'primary' => '#003162',
+						'secondary' => '#0054A8',
+						'text' => '#000',
+						'heading' => '#000',
+						'light-bg' => '#faeedc',
+						'highlights-bg' => '#FCF4E8',
+						'form-input-bg' => '#F3F7FA',
+						'box-shadow' => '#e0e8ee52',
+						'border-color' => '#ddd',
 					),
 					'colors'   => array(
-						'gcolor' => esc_html__( 'Secondary Color', 'tourfic' ),
-					),
-					'dependency'   => array(
-						array( 'color-palette-template', '==', 'design-3' ),
-					),
-				),
-				array(
-					'id'       => 'tf-d3-text',
-					'type'     => 'color',
-					'multiple' => true,
-					'inline'   => true,
-					'default'  => array(
-						'gcolor' => '#99948D'
-					),
-					'colors'   => array(
-						'gcolor' => esc_html__( 'Text Color', 'tourfic' ),
-					),
-					'dependency'   => array(
-						array( 'color-palette-template', '==', 'design-3' ),
-					),
-				),
-				array(
-					'id'       => 'tf-d3-heading',
-					'type'     => 'color',
-					'multiple' => true,
-					'inline'   => true,
-					'default'  => array(
-						'gcolor' => '#595349'
-					),
-					'colors'   => array(
-						'gcolor' => esc_html__( 'Heading Color', 'tourfic' ),
-					),
-					'dependency'   => array(
-						array( 'color-palette-template', '==', 'design-3' ),
-					),
-				),
-				array(
-					'id'       => 'tf-d3-light-bg',
-					'type'     => 'color',
-					'multiple' => true,
-					'inline'   => true,
-					'default'  => array(
-						'gcolor' => '#faeedc'
-					),
-					'colors'   => array(
-						'gcolor' => esc_html__( 'Light Background', 'tourfic' ),
-					),
-					'dependency'   => array(
-						array( 'color-palette-template', '==', 'design-3' ),
-					),
-				),
-				array(
-					'id'       => 'tf-d3-highlights-bg',
-					'type'     => 'color',
-					'multiple' => true,
-					'inline'   => true,
-					'default'  => array(
-						'gcolor' => '#FCF4E8'
-					),
-					'colors'   => array(
-						'gcolor' => esc_html__( 'Highlights Background', 'tourfic' ),
-					),
-					'dependency'   => array(
-						array( 'color-palette-template', '==', 'design-3' ),
-					),
-				),
-				array(
-					'id'       => 'tf-d3-form-input-bg',
-					'type'     => 'color',
-					'multiple' => true,
-					'inline'   => true,
-					'default'  => array(
-						'gcolor' => '#F3F7FA'
-					),
-					'colors'   => array(
-						'gcolor' => esc_html__( 'Form Input Background', 'tourfic' ),
-					),
-					'dependency'   => array(
-						array( 'color-palette-template', '==', 'design-3' ),
-					),
-				),
-				array(
-					'id'       => 'tf-d3-box-shadow',
-					'type'     => 'color',
-					'multiple' => true,
-					'inline'   => true,
-					'default'  => array(
-						'gcolor' => '#e0e8ee52'
-					),
-					'colors'   => array(
-						'gcolor' => esc_html__( 'Box Shadow', 'tourfic' ),
-					),
-					'dependency'   => array(
-						array( 'color-palette-template', '==', 'design-3' ),
-					),
-				),
-				array(
-					'id'       => 'tf-d3-border-color',
-					'type'     => 'color',
-					'multiple' => true,
-					'inline'   => true,
-					'default'  => array(
-						'gcolor' => '#ddd'
-					),
-					'colors'   => array(
-						'gcolor' => esc_html__( 'Border Color', 'tourfic' ),
-					),
-					'dependency'   => array(
-						array( 'color-palette-template', '==', 'design-3' ),
-					),
-				),
-
-				// Design 4 Fields
-				array(
-					'id'       => 'tf-d4-primary',
-					'type'     => 'color',
-					'multiple' => true,
-					'inline'   => true,
-					'default'  => array(
-						'gcolor' => '#FF6B00'
-					),
-					'colors'   => array(
-						'gcolor' => esc_html__( 'Primary Color', 'tourfic' ),
+						'primary' => esc_html__( 'Primary Color', 'tourfic' ),
+						'secondary' => esc_html__( 'Secondary Color', 'tourfic' ),
+						'text' => esc_html__( 'Text Color', 'tourfic' ),
+						'heading' => esc_html__( 'Heading Color', 'tourfic' ),
+						'light-bg' => esc_html__( 'Light Background', 'tourfic' ),
+						'highlights-bg' => esc_html__( 'Highlights Background', 'tourfic' ),
+						'form-input-bg' => esc_html__( 'Form Input Background', 'tourfic' ),
+						'box-shadow' => esc_html__( 'Box Shadow', 'tourfic' ),
+						'border-color' => esc_html__( 'Box Shadow', 'tourfic' ),
 					),
 					'dependency'   => array(
 						array( 'color-palette-template', '==', 'design-4' ),
 					),
 				),
 				array(
-					'id'       => 'tf-d4-secondary',
-					'type'     => 'color',
-					'multiple' => true,
-					'inline'   => true,
-					'default'  => array(
-						'gcolor' => '#C15100'
-					),
-					'colors'   => array(
-						'gcolor' => esc_html__( 'Secondary Color', 'tourfic' ),
-					),
-					'dependency'   => array(
-						array( 'color-palette-template', '==', 'design-4' ),
-					),
-				),
-				array(
-					'id'       => 'tf-d4-text',
-					'type'     => 'color',
-					'multiple' => true,
-					'inline'   => true,
-					'default'  => array(
-						'gcolor' => '#6E655E'
-					),
-					'colors'   => array(
-						'gcolor' => esc_html__( 'Text Color', 'tourfic' ),
-					),
-					'dependency'   => array(
-						array( 'color-palette-template', '==', 'design-4' ),
-					),
-				),
-				array(
-					'id'       => 'tf-d4-heading',
-					'type'     => 'color',
-					'multiple' => true,
-					'inline'   => true,
-					'default'  => array(
-						'gcolor' => '#1A0B00'
-					),
-					'colors'   => array(
-						'gcolor' => esc_html__( 'Heading Color', 'tourfic' ),
-					),
-					'dependency'   => array(
-						array( 'color-palette-template', '==', 'design-4' ),
-					),
-				),
-				array(
-					'id'       => 'tf-d4-light-bg',
-					'type'     => 'color',
-					'multiple' => true,
-					'inline'   => true,
-					'default'  => array(
-						'gcolor' => '#faeedc'
-					),
-					'colors'   => array(
-						'gcolor' => esc_html__( 'Light Background', 'tourfic' ),
-					),
-					'dependency'   => array(
-						array( 'color-palette-template', '==', 'design-4' ),
-					),
-				),
-				array(
-					'id'       => 'tf-d4-highlights-bg',
-					'type'     => 'color',
-					'multiple' => true,
-					'inline'   => true,
-					'default'  => array(
-						'gcolor' => '#FCF4E8'
-					),
-					'colors'   => array(
-						'gcolor' => esc_html__( 'Highlights Background', 'tourfic' ),
-					),
-					'dependency'   => array(
-						array( 'color-palette-template', '==', 'design-4' ),
-					),
-				),
-				array(
-					'id'       => 'tf-d4-form-input-bg',
-					'type'     => 'color',
-					'multiple' => true,
-					'inline'   => true,
-					'default'  => array(
-						'gcolor' => '#F3F7FA'
-					),
-					'colors'   => array(
-						'gcolor' => esc_html__( 'Form Input Background', 'tourfic' ),
-					),
-					'dependency'   => array(
-						array( 'color-palette-template', '==', 'design-4' ),
-					),
-				),
-				array(
-					'id'       => 'tf-d4-box-shadow',
-					'type'     => 'color',
-					'multiple' => true,
-					'inline'   => true,
-					'default'  => array(
-						'gcolor' => '#e0e8ee52'
-					),
-					'colors'   => array(
-						'gcolor' => esc_html__( 'Box Shadow', 'tourfic' ),
-					),
-					'dependency'   => array(
-						array( 'color-palette-template', '==', 'design-4' ),
-					),
-				),
-				array(
-					'id'       => 'tf-d4-border-color',
-					'type'     => 'color',
-					'multiple' => true,
-					'inline'   => true,
-					'default'  => array(
-						'gcolor' => '#ddd'
-					),
-					'colors'   => array(
-						'gcolor' => esc_html__( 'Border Color', 'tourfic' ),
-					),
-					'dependency'   => array(
-						array( 'color-palette-template', '==', 'design-4' ),
-					),
-				),
-
-				// Custom Fields
-				array(
-					'id'       => 'tf-custom-primary',
+					'id'       => 'tf-custom',
 					'type'     => 'color',
 					'multiple' => true,
 					'inline'   => true,
 					'colors'   => array(
-						'gcolor' => esc_html__( 'Primary Color', 'tourfic' ),
+						'primary' => esc_html__( 'Primary Color', 'tourfic' ),
+						'secondary' => esc_html__( 'Secondary Color', 'tourfic' ),
+						'text' => esc_html__( 'Text Color', 'tourfic' ),
+						'heading' => esc_html__( 'Heading Color', 'tourfic' ),
+						'light-bg' => esc_html__( 'Light Background', 'tourfic' ),
+						'highlights-bg' => esc_html__( 'Highlights Background', 'tourfic' ),
+						'form-input-bg' => esc_html__( 'Form Input Background', 'tourfic' ),
+						'box-shadow' => esc_html__( 'Box Shadow', 'tourfic' ),
+						'border-color' => esc_html__( 'Box Shadow', 'tourfic' ),
 					),
 					'dependency'   => array(
 						array( 'color-palette-template', '==', 'custom' ),
 					),
-				),
-				array(
-					'id'       => 'tf-custom-secondary',
-					'type'     => 'color',
-					'multiple' => true,
-					'inline'   => true,
-					'colors'   => array(
-						'gcolor' => esc_html__( 'Secondary Color', 'tourfic' ),
-					),
-					'dependency'   => array(
-						array( 'color-palette-template', '==', 'custom' ),
-					),
-				),
-				array(
-					'id'       => 'tf-custom-text',
-					'type'     => 'color',
-					'multiple' => true,
-					'inline'   => true,
-					'colors'   => array(
-						'gcolor' => esc_html__( 'Text Color', 'tourfic' ),
-					),
-					'dependency'   => array(
-						array( 'color-palette-template', '==', 'custom' ),
-					),
-				),
-				array(
-					'id'       => 'tf-custom-heading',
-					'type'     => 'color',
-					'multiple' => true,
-					'inline'   => true,
-					'colors'   => array(
-						'gcolor' => esc_html__( 'Heading Color', 'tourfic' ),
-					),
-					'dependency'   => array(
-						array( 'color-palette-template', '==', 'custom' ),
-					),
-				),
-				array(
-					'id'       => 'tf-custom-light-bg',
-					'type'     => 'color',
-					'multiple' => true,
-					'inline'   => true,
-					'colors'   => array(
-						'gcolor' => esc_html__( 'Light Background', 'tourfic' ),
-					),
-					'dependency'   => array(
-						array( 'color-palette-template', '==', 'custom' ),
-					),
-				),
-				array(
-					'id'       => 'tf-custom-highlights-bg',
-					'type'     => 'color',
-					'multiple' => true,
-					'inline'   => true,
-					'colors'   => array(
-						'gcolor' => esc_html__( 'Highlights Background', 'tourfic' ),
-					),
-					'dependency'   => array(
-						array( 'color-palette-template', '==', 'custom' ),
-					),
-				),
-				array(
-					'id'       => 'tf-custom-form-input-bg',
-					'type'     => 'color',
-					'multiple' => true,
-					'inline'   => true,
-					'colors'   => array(
-						'gcolor' => esc_html__( 'Form Input Background', 'tourfic' ),
-					),
-					'dependency'   => array(
-						array( 'color-palette-template', '==', 'custom' ),
-					),
-				),
-				array(
-					'id'       => 'tf-custom-box-shadow',
-					'type'     => 'color',
-					'multiple' => true,
-					'inline'   => true,
-					'colors'   => array(
-						'gcolor' => esc_html__( 'Box Shadow', 'tourfic' ),
-					),
-					'dependency'   => array(
-						array( 'color-palette-template', '==', 'custom' ),
-					),
-				),
-				array(
-					'id'       => 'tf-custom-border-color',
-					'type'     => 'color',
-					'multiple' => true,
-					'inline'   => true,
-					'colors'   => array(
-						'gcolor' => esc_html__( 'Border Color', 'tourfic' ),
-					),
-					'dependency'   => array(
-						array( 'color-palette-template', '==', 'custom' ),
-					),
-				),
+				)
 			)
 		),
 
