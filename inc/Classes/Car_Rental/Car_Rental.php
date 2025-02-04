@@ -14,48 +14,10 @@ class Car_Rental
     public function __construct()
     {
         add_action('wp_after_insert_post', array($this, 'tf_car_assign_inline_taxonomies'), 100, 3);
-        // add_action("save_post_tf_carrental", array($this, 'tf_carrental_save_post'), 99, 2);
 
         // Car CPT
         Car_Rental_CPT::instance();
     }
-
-    function tf_carrental_save_post($post_id, $post) {
-        if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
-            return;
-        }
-
-		if( $post->post_type != 'tf_carrental' ) {
-			return;
-		}
-
-		$updated_min_max_price = array();
-
-		$existing_min_max_price = !empty( get_option('tf_transport_min_max_price') ) ? get_option('tf_transport_min_max_price') : array('min' => 0, 'max' => 1);
-
-		$min_max_price = get_cars_min_max_price($post_id);
-        
-        
-		if( !empty($min_max_price['min']) && $min_max_price['min'] < $existing_min_max_price["min"] && $min_max_price['min'] < $min_max_price['max'] ) {
-			$updated_min_max_price["min"] = $min_max_price["min"] === 1 ? $min_max_price['max'] : $min_max_price['min'];
-		} else {
-			$updated_min_max_price["min"] = $existing_min_max_price["min"];
-		}
-		// max price change
-		if( !empty($min_max_price['max']) && $min_max_price['max'] > $existing_min_max_price["max"]) {
-			$updated_min_max_price["max"] = $min_max_price['max'];
-		} else {
-			$updated_min_max_price["max"] = $existing_min_max_price["max"];
-		}
-
-        // Min Max Seat Update
-        $updated_min_max_price["min_seat"] = !empty($min_max_price['min_seat']) ? $min_max_price['min_seat'] : 0;
-        $updated_min_max_price["max_seat"] = !empty($min_max_price['max_seat']) ? $min_max_price['max_seat'] : 1;
-
-		update_option('tf_transport_min_max_price', $updated_min_max_price);
-
-    }
-
 
     function tf_car_assign_inline_taxonomies($post_id, $post, $old_status)
     {

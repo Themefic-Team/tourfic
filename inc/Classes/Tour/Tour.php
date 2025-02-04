@@ -38,40 +38,8 @@ class Tour {
 		add_action( 'wp_after_insert_post', array( $this, 'tf_tour_type_assign_taxonomies'), 100, 3 );
 		add_action( 'wp_ajax_nopriv_tf_tour_booking_popup', array( $this, 'tf_tour_booking_popup_callback' ) );
 		add_action( 'wp_ajax_tf_tour_booking_popup', array( $this, 'tf_tour_booking_popup_callback' ) );
-		// add_action("save_post_tf_tours", array($this, 'tf_tours_save_post'), 99, 2);
+
 	}
-
-	function tf_tours_save_post($post_id, $post) {
-        if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
-            return;
-        }
-
-		if( $post->post_type != 'tf_tours' ) {
-			return;
-		}
-
-		$updated_min_max_price = array();
-
-		$existing_min_max_price = !empty( get_option('tf_tours_min_max_price') ) ? get_option('tf_tours_min_max_price') : array('min' => 0, 'max' => 1);
-
-		$min_max_price = Pricing::instance($post_id)->get_min_price();
-
-		// min price change
-		if( !empty($min_max_price["min_regular_price"]) && $min_max_price["min_regular_price"] < $existing_min_max_price["min"] && $min_max_price["min_regular_price"] < $min_max_price["max_regular_price"]) {
-			$updated_min_max_price["min"] = $min_max_price["min_regular_price"];
-		} else {
-			$updated_min_max_price["min"] = $existing_min_max_price["min"];
-		}
-		// max price change
-		if( !empty($min_max_price["max_regular_price"]) && $min_max_price["max_regular_price"] > $existing_min_max_price["max"]) {
-			$updated_min_max_price["max"] = $min_max_price["max_regular_price"];
-		} else {
-			$updated_min_max_price["max"] = $existing_min_max_price["max"];
-		}
-
-		update_option('tf_tours_min_max_price', $updated_min_max_price);
-
-    }
 
 	/**
 	 * Tour Search form

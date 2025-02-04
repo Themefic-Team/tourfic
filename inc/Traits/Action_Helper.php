@@ -2432,6 +2432,13 @@ trait Action_Helper {
 
 
 	function tf_get_min_max_price_callback() {
+
+		// Check nonce security
+		if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_nonce'] ) ), 'tf_ajax_nonce' ) ) {
+			wp_send_json_error();
+			return;
+		}
+
 		$post_type = !empty( $_POST['post_type']) ? sanitize_text_field( $_POST['post_type'] ) : '';
 		$response = array();
 
