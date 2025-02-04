@@ -11,7 +11,6 @@ class Migrator {
 
 	public function __construct() {
 		add_action( 'init', array( $this, 'tf_permalink_settings_migration' ) );
-		add_action( 'init', array( $this, 'tf_template_migrate_data' ) );
 		add_action( 'init', array( $this, 'tf_template_3_migrate_data' ) );
 		add_action( 'init', array( $this, 'tf_migrate_option_data' ) );
 		add_action( 'init', array( $this, 'tf_migrate_data' ) );
@@ -20,9 +19,10 @@ class Migrator {
 		}
 		add_action( 'admin_init', array( $this, 'tf_hotel_room_migrate' ) );
 		add_action( 'init', array( $this, 'tf_rooms_data_add_in_hotel' ) );
-//		add_action( 'admin_init', array( $this, 'tf_search_keys_migrate' ) );
+		//		add_action( 'admin_init', array( $this, 'tf_search_keys_migrate' ) );
 		add_action( 'admin_init', array( $this, 'tf_migrate_tf_enquiry_data' ) );
-		// add_action( 'admin_init', array( $this, 'tf_migrate_color_palatte_data' ) );
+		add_action( 'admin_init', array( $this, 'tf_template_migrate_data' ) );
+		add_action( 'admin_init', array( $this, 'tf_migrate_color_palatte_data' ) );
 	}
 
 	function tf_permalink_settings_migration() {
@@ -596,33 +596,67 @@ class Migrator {
 	 * run once
 	 */
 	function tf_migrate_color_palatte_data(){
-		$options = ! empty( get_option( 'tf_settings' ) ) ? get_option( 'tf_settings' ) : array();
-		$options["color-palette-template"] = 'custom';
+		if ( empty( get_option( 'tf_color_data_migrate' ) ) || ( ! empty( get_option( 'tf_color_data_migrate' ) ) && get_option( 'tf_color_data_migrate' ) < 1 ) ) {
+			$options = ! empty( get_option( 'tf_settings' ) ) ? get_option( 'tf_settings' ) : array();
+			$options["color-palette-template"] = 'custom';
 
-		$prev_primary = unserialize($options['tourfic-design1-global-color']);
-		$prev_body_text = unserialize($options['tourfic-design1-p-global-color']);
-		$prev_template3 = unserialize($options['tourfic-template3-bg']);
-		
-		$tf_custom_palatte = unserialize($options["tf-custom"]);
-		$current_template = $options['tf-template']['single-hotel'];
-		if("design-2"==$current_template){
+			$prev_primary = !empty($options['tourfic-design1-global-color']) ? unserialize($options['tourfic-design1-global-color']) : '';
+			$prev_body_text = !empty($options['tourfic-design1-p-global-color']) ? unserialize($options['tourfic-design1-p-global-color']) : '';
+			$prev_template3 = !empty($options['tourfic-template3-bg']) ? unserialize($options['tourfic-template3-bg']) : '';
+			if(!empty($options["tf-custom"])){
+				$tf_custom_palatte = is_string($options["tf-custom"]) ? unserialize($options["tf-custom"]) : $options["tf-custom"];
+			} else {
+				$tf_custom_palatte = [];
+			}
 
-			$tf_custom_palatte['primary'] = !empty($prev_primary['gcolor']) ? $prev_primary['gcolor'] : '#0E3DD8';
-			$tf_custom_palatte['text'] = !empty($prev_body_text['pgcolor']) ? $prev_body_text['pgcolor'] : '#686E7A';
-			$options["tf-custom"] = $tf_custom_palatte;
+			if(!empty($options['tf-template'])){
+				$current_template = $options['tf-template']['single-hotel'];
+				if("design-1"==$current_template){
 
-		}elseif("design-3"==$current_template){
+					$tf_custom_palatte['primary'] = !empty($prev_primary['gcolor']) ? $prev_primary['gcolor'] : '#0E3DD8';
+					$tf_custom_palatte['text'] = !empty($prev_body_text['pgcolor']) ? $prev_body_text['pgcolor'] : '#686E7A';
+					$tf_custom_palatte['secondary'] = '#003C7A';
+					$tf_custom_palatte['heading'] = '#060D1C';
+					$tf_custom_palatte['light-bg'] = '#faeedc';
+					$tf_custom_palatte['highlights-bg'] = '#FCF4E8';
+					$tf_custom_palatte['form-input-bg'] = '#F3F7FA';
+					$tf_custom_palatte['box-shadow'] = '#e0e8ee52';
+					$tf_custom_palatte['border-color'] = '#ddd';
+					$options["tf-custom"] = $tf_custom_palatte;
 
-			$tf_custom_palatte['primary'] = !empty($prev_primary['gcolor']) ? $prev_primary['gcolor'] : '#B58E53';
-			$tf_custom_palatte['text'] = !empty($prev_body_text['pgcolor']) ? $prev_body_text['pgcolor'] : '#B58E53';
-			$tf_custom_palatte['highlights-bg'] = !empty($prev_template3['template3-highlight']) ? $prev_template3['template3-highlight'] : '#FCF4E8';
+				}elseif("design-2"==$current_template){
 
-			$options["tf-custom"] = $tf_custom_palatte;
+					$tf_custom_palatte['primary'] = !empty($prev_primary['gcolor']) ? $prev_primary['gcolor'] : '#B58E53';
+					$tf_custom_palatte['text'] = !empty($prev_body_text['pgcolor']) ? $prev_body_text['pgcolor'] : '#99948D';
+					$tf_custom_palatte['highlights-bg'] = !empty($prev_template3['template3-highlight']) ? $prev_template3['template3-highlight'] : '#FCF4E8';
+					$tf_custom_palatte['secondary'] = '#917242';
+					$tf_custom_palatte['heading'] = '#595349';
+					$tf_custom_palatte['light-bg'] = '#faeedc';
+					$tf_custom_palatte['form-input-bg'] = '#F3F7FA';
+					$tf_custom_palatte['box-shadow'] = '#e0e8ee52';
+					$tf_custom_palatte['border-color'] = '#ddd';
+					$options["tf-custom"] = $tf_custom_palatte;
+				
+				}elseif("default"==$current_template){
+
+					$tf_custom_palatte['primary'] = !empty($prev_primary['gcolor']) ? $prev_primary['gcolor'] : '#003162';
+					$tf_custom_palatte['text'] = !empty($prev_body_text['pgcolor']) ? $prev_body_text['pgcolor'] : '#000';
+					$tf_custom_palatte['secondary'] = '#0054A8';
+					$tf_custom_palatte['heading'] = '#000';
+					$tf_custom_palatte['light-bg'] = '#faeedc';
+					$tf_custom_palatte['highlights-bg'] = '#FCF4E8';
+					$tf_custom_palatte['form-input-bg'] = '#F3F7FA';
+					$tf_custom_palatte['box-shadow'] = '#e0e8ee52';
+					$tf_custom_palatte['border-color'] = '#ddd';
+					$options["tf-custom"] = $tf_custom_palatte;
+				}
+
+				update_option( 'tf_settings', $options );
+				wp_cache_flush();
+				flush_rewrite_rules( true );
+				update_option( 'tf_color_data_migrate', 1 );
+			}
 		}
-
-		// var_dump($tf_custom_palatte);
-		// echo "<pre>";
-		// var_dump($options); exit();
 	}
 
 	/**
