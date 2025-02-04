@@ -17,7 +17,7 @@ if ( ! class_exists( 'TF_imageselect' ) ) {
 				$multiple = isset( $this->field['multiple'] ) ? $this->field['multiple'] : false;
 				$img_width = ( isset( $this->field['img-width'] ) && $this->field['img-width'] ) ? $this->field['img-width']. 'px' : '240px';
 				$img_height = ( isset( $this->field['img-height'] ) && $this->field['img-height'] ) ? $this->field['img-height']. 'px' : '180px';
-				Helper::tf_var_dump($this->value);
+				
 				echo '<ul class="tf-image-radio-group">';
 				foreach ( $this->field['options'] as $key => $value ) {
 					if($multiple){
@@ -55,6 +55,12 @@ if ( ! class_exists( 'TF_imageselect' ) ) {
 				}
 				echo '</ul>';
 			}
+		}
+
+		public function sanitize() {
+			$value = ( is_array( $this->value ) ) ? array_map( 'sanitize_text_field', $this->value ) : sanitize_text_field( $this->value );
+
+			return $value;
 		}
 	}
 }
