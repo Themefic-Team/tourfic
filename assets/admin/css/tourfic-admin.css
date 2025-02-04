@@ -5017,6 +5017,45 @@ a.tf-import-btn, a.tf-export-btn {
   border-radius: 5px;
 }
 
+.tf-image-radio-group li .tf-image-checkbox {
+  display: inline-block;
+  position: relative;
+}
+
+.tf-image-radio-group li .tf-image-checkbox .tf-circle-check {
+  position: absolute;
+  font-family: 'remixicon';
+  height: 24px;
+  width: 24px;
+  right: -8px;
+  top: -8px;
+  border-radius: 50%;
+  background-color: #21A159;
+  -webkit-transition: all 0.25s ease-in-out;
+  -moz-transition: all 0.25s ease-in-out;
+  -o-transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.tf-image-radio-group li .tf-image-checkbox .tf-circle-check::before {
+  content: "\eb7b";
+  color: #fff;
+  font-size: 18px;
+  line-height: 1;
+}
+
 .tf-image-radio-group li .tf-image-checkbox img {
   width: 240px;
   object-fit: cover;
@@ -5043,12 +5082,17 @@ a.tf-import-btn, a.tf-export-btn {
 
 .tf-image-radio-group li .tf-image-checkbox > img {
   cursor: pointer;
-  border: 3px solid transparent !important;
+  border: 2px solid transparent;
+  border-radius: 5px;
 }
 
 .tf-image-radio-group li .tf-image-checkbox > input:checked + img {
-  border-color: #607085 !important;
-  border-radius: 5px;
+  border-color: #21A159;
+}
+
+.tf-image-radio-group li .tf-image-checkbox > input:checked + img + .tf-circle-check {
+  opacity: 1;
+  visibility: visible;
 }
 
 .tf-image-radio-group li.tf-pro-item {

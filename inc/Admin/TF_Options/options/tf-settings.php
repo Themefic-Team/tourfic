@@ -74,14 +74,29 @@ TF_Settings::option( 'tf_settings', array(
 				),
 				array(
 					'id'       => 'disable-services',
-					'type'     => 'checkbox',
-					'label'    => __( 'Disable Post Types', 'tourfic' ),
-					'subtitle' => __( 'Tick the checkbox to disable the Post Type you don\'t need.', 'tourfic' ),
+					'type'     => 'imageselect',
+					'label'    => esc_html__( 'Disable Post Types', 'tourfic' ),
+					'subtitle' => esc_html__( 'Tick the image to disable the Post Type you don\'t need.', 'tourfic' ),
+					'multiple' => true,
+					'img-width'=> '150',
+					'img-height'=> '150',
 					'options'  => array(
-						'hotel'     => __( 'Hotel', 'tourfic' ),
-						'tour'      => __( 'Tour', 'tourfic' ),
-						'apartment' => __( 'Apartment', 'tourfic' ),
-						'carrentals' => __( 'Car', 'tourfic' ),
+						'hotel' => array(
+							'title' => 'Hotel',
+							'url'   => TF_ASSETS_ADMIN_URL . "images/hotel.png",
+						),
+						'tour' 		=> array(
+							'title'	=> 'Tour',
+							'url' 	=> TF_ASSETS_ADMIN_URL."images/tour.png",
+						),
+						'apartment'  => array(
+							'title' => 'Apartment',
+							'url'   => TF_ASSETS_ADMIN_URL . "images/apartment.png",
+						),
+						'carrentals'  => array(
+							'title' => 'Car',
+							'url'   => TF_ASSETS_ADMIN_URL . "images/carrentals.png",
+						),
 					),
 				),
 				array(
