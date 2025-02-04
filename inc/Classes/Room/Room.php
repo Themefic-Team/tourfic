@@ -15,21 +15,32 @@ class Room {
 		add_action( 'wp_ajax_tf_remove_room_order_ids', array( $this, 'tf_remove_room_order_ids' ) );
 	}
 
-	// static function get_hotel_rooms( $hotel_id ) {
+	static function get_hotel_rooms( $hotel_id ) {
 
-	// 	$hotel_meta = get_post_meta( $hotel_id, 'tf_hotels_opt', true );
+		$args = array(
+			'post_type'      => 'tf_room',
+			'posts_per_page' => - 1,
+		);
 
-	// 	$rooms = ! empty( $hotel_meta['tf_rooms'] ) ? $hotel_meta['tf_rooms'] : array();
-	// 	asort($rooms);
+		$rooms = new \WP_Query( $args );
 
-	// 	$hotel_rooms = array();
-	// 	foreach ( $rooms as $room ) {
-	// 		$hotel_rooms[] = get_post( $room );
-	// 	}
+		$hotel_rooms = array();
 
-	// 	return $hotel_rooms;
+		while( $rooms->have_posts() ) {
+			
+			$rooms->the_post();
 
-	// }
+			$room_meta = get_post_meta( get_the_ID(), 'tf_room_opt', true );
+			if ( ! empty( $room_meta['tf_hotel'] ) && $room_meta['tf_hotel'] == $hotel_id ) {
+				$hotel_rooms[] = get_post( get_the_ID() );
+			}
+
+		}
+
+		wp_reset_postdata();
+
+		return $hotel_rooms;
+	}
 
 
 
