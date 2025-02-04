@@ -2851,7 +2851,6 @@ var frame, gframe;
     * Author @Jahid
     * Color Palatte Change
     */
-
     jQuery(document).ready(function ($) {
 
         function getSelectedDesign() {
@@ -2885,17 +2884,6 @@ var frame, gframe;
 
         const tf_colorData = {
             'd1': {
-                'primary' : '#003162',
-                'secondary' : '#0054A8',
-                'text' : '#000',
-                'heading' : '#000',
-                'light-bg' : '#faeedc',
-                'highlights-bg' : '#FCF4E8',
-                'form-input-bg' : '#F3F7FA',
-                'box-shadow' : '#e0e8ee52',
-                'border-color' : '#ddd',
-            },
-            'd2': {
                 'primary' : '#0E3DD8',
                 'secondary' : '#003C7A',
                 'text' : '#686E7A',
@@ -2906,7 +2894,7 @@ var frame, gframe;
                 'box-shadow' : '#e0e8ee52',
                 'border-color' : '#ddd',
             },
-            'd3': {
+            'd2': {
                 'primary' : '#B58E53',
                 'secondary' : '#917242',
                 'text' : '#99948D',
@@ -2917,7 +2905,7 @@ var frame, gframe;
                 'box-shadow' : '#e0e8ee52',
                 'border-color' : '#ddd',
             },
-            'd4': {
+            'd3': {
                 'primary' : '#FF6B00',
                 'secondary' : '#C15100',
                 'text' : '#6E655E',
@@ -2927,7 +2915,18 @@ var frame, gframe;
                 'form-input-bg' : '#F3F7FA',
                 'box-shadow' : '#e0e8ee52',
                 'border-color' : '#ddd',
-            }
+            },
+            'd4': {
+                'primary' : '#003162',
+                'secondary' : '#0054A8',
+                'text' : '#000',
+                'heading' : '#000',
+                'light-bg' : '#faeedc',
+                'highlights-bg' : '#FCF4E8',
+                'form-input-bg' : '#F3F7FA',
+                'box-shadow' : '#e0e8ee52',
+                'border-color' : '#ddd',
+            },
         };
 
         // Initialize wpColorPicker for all relevant inputs

@@ -1158,20 +1158,12 @@ class Enqueue {
 	*/
 	public function tf_global_custom_css() {
 
-		$color_palette_template = ! empty( Helper::tfopt( 'color-palette-template' ) ) ? Helper::tfopt( 'color-palette-template' ) : 'design-2';
+		$color_palette_template = ! empty( Helper::tfopt( 'color-palette-template' ) ) ? Helper::tfopt( 'color-palette-template' ) : 'design-1';
 		$tf_container = ! empty( Helper::tfopt( 'tf-container' ) ) ? Helper::tfopt( 'tf-container' ) : 'boxed';
 		$tf_container_width = ! empty( Helper::tfopt( 'tf-container-width' ) ) ? Helper::tfopt( 'tf-container-width' ) . 'px' : '1200px';
 
 		$design_default = [
 			'design-1' => [
-				'default' => [
-					'primary'    => '#003162',
-					'secondary'  => '#0054A8',
-					'text'       => '#000',
-					'heading'    => '#000',
-				]
-			],
-			'design-2' => [
 				'default' => [
 					'primary'    => '#0E3DD8',
 					'secondary'  => '#003C7A',
@@ -1179,7 +1171,7 @@ class Enqueue {
 					'heading'    => '#060D1C',
 				]
 			],
-			'design-3' => [
+			'design-2' => [
 				'default' => [
 					'primary'    => '#B58E53',
 					'secondary'  => '#917242',
@@ -1187,12 +1179,20 @@ class Enqueue {
 					'heading'    => '#595349',
 				]
 			],
-			'design-4' => [
+			'design-3' => [
 				'default' => [
 					'primary'    => '#FF6B00',
 					'secondary'  => '#C15100',
 					'text'       => '#6E655E',
 					'heading'    => '#1A0B00',
+				]
+			],
+			'design-4' => [
+				'default' => [
+					'primary'    => '#003162',
+					'secondary'  => '#0054A8',
+					'text'       => '#000',
+					'heading'    => '#000',
 				]
 			],
 			'custom' => []

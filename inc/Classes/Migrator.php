@@ -22,7 +22,7 @@ class Migrator {
 		add_action( 'init', array( $this, 'tf_rooms_data_add_in_hotel' ) );
 //		add_action( 'admin_init', array( $this, 'tf_search_keys_migrate' ) );
 		add_action( 'admin_init', array( $this, 'tf_migrate_tf_enquiry_data' ) );
-		add_action( 'admin_init', array( $this, 'tf_migrate_color_palatte_data' ) );
+		// add_action( 'admin_init', array( $this, 'tf_migrate_color_palatte_data' ) );
 	}
 
 	function tf_permalink_settings_migration() {
