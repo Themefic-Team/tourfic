@@ -78,8 +78,8 @@ TF_Settings::option( 'tf_settings', array(
 					'label'    => esc_html__( 'Disable Post Types', 'tourfic' ),
 					'subtitle' => esc_html__( 'Tick the image to disable the Post Type you don\'t need.', 'tourfic' ),
 					'multiple' => true,
-					'img-width'=> '150',
-					'img-height'=> '150',
+					'img-width'=> '100',
+					'img-height'=> '100',
 					'options'  => array(
 						'hotel' => array(
 							'title' => 'Hotel',
