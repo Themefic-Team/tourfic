@@ -143,7 +143,7 @@ TF_Settings::option( 'tf_settings', array(
 		),
 
 		// Template Settings
-		'tf-template-settings'                  => array(
+		'tf-template-settings' => array(
 			'title'  => esc_html__( 'Template', 'tourfic' ),
 			'icon'   => 'fa-solid fa-newspaper',
 			'fields' => array(
@@ -174,20 +174,18 @@ TF_Settings::option( 'tf_settings', array(
 									'type'     => 'imageselect',
 									'label'    => esc_html__( 'Select Single Hotel Template', 'tourfic' ),
 									'subtitle'   => esc_html__( 'You have the option to override this from the settings specific to each individual hotel page.', 'tourfic' ),
-									'multiple' => true,
-									'inline'   => true,
 									'options'  => array(
 										'design-1' => array(
-											'title' => 'Design 1',
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/design1-hotel.jpg",
+											'title' => esc_html__('Design 1', 'tourfic'),
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-design-1.png",
 										),
-										'design-2' 				=> array(
-											'title'			=> 'Design 2',
-											'url' 			=> TF_ASSETS_ADMIN_URL."images/template/design2-hotel.jpg",
+										'design-2' 	=> array(
+											'title'	=> esc_html__('Design 2', 'tourfic'),
+											'url' 	=> TF_ASSETS_ADMIN_URL."images/template/preview-single-design-2.png",
 										),
 										'default'  => array(
-											'title' => 'Default',
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/default-hotel.jpg",
+											'title' => esc_html__('Default', 'tourfic'),
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-default.png",
 										),
 									),
 									'default'  => 'design-1',
@@ -316,24 +314,23 @@ TF_Settings::option( 'tf_settings', array(
 									'id'       => 'hotel-archive',
 									'type'     => 'imageselect',
 									'label'    => esc_html__( 'Select Archive & Search Result Template', 'tourfic' ),
-									'multiple' => true,
-									'inline'   => true,
 									'options'  => array(
 										'design-1' => array(
-											'title' => 'Design 1',
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/hotel-archive-design1.jpg",
+											'title' => esc_html__('Design 1', 'tourfic'),
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-design-1.png",
 										),
 										'design-2' => array(
-											'title' => 'Design 2',
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/hotel-archive-design2.jpg",
+											'title' => esc_html__('Design 2', 'tourfic'),
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-design-2.png",
 										),
 										'design-3' => array(
-											'title' => 'Design 3',
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/hotel-archive-design3.jpg",
+											'title' => esc_html__('Design 3', 'tourfic'),
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-design-3.png",
+											'is_pro'=> true,
 										),
 										'default'  => array(
-											'title' => 'Default',
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/hotel-archive-default.jpg",
+											'title' => esc_html__('Default', 'tourfic'),
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-default.png",
 										),
 									),
 									'default'  => 'design-1',
@@ -405,20 +402,18 @@ TF_Settings::option( 'tf_settings', array(
 									'type'     => 'imageselect',
 									'label'    => esc_html__( 'Select Single Tour Template', 'tourfic' ),
 									'subtitle'   => esc_html__( 'You have the option to override this from the settings specific to each individual tour page.', 'tourfic' ),
-									'multiple' => true,
-									'inline'   => true,
 									'options'  => array(
 										'design-1' => array(
-											'title' => 'Design 1',
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/design1-tour.jpg",
+											'title' => esc_html__('Design 1', 'tourfic'),
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-design-1.png",
 										),
 										'design-2' => array(
-											'title' => 'Design 2',
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/design2-tour.jpg",
+											'title' => esc_html__('Design 2', 'tourfic'),
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-design-2.png",
 										),
 										'default'  => array(
-											'title' => 'Default',
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/default-tour.jpg",
+											'title' => esc_html__('Default', 'tourfic'),
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-default.png",
 										),
 									),
 									'default'  => 'design-1',
@@ -572,24 +567,23 @@ TF_Settings::option( 'tf_settings', array(
 									'id'       => 'tour-archive',
 									'type'     => 'imageselect',
 									'label'    => esc_html__( 'Select Archive & Search Result Template', 'tourfic' ),
-									'multiple' => true,
-									'inline'   => true,
 									'options'  => array(
 										'design-1' => array(
-											'title' => 'Design 1',
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/tour-archive-design-1.jpg",
+											'title' => esc_html__('Design 1', 'tourfic'),
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-design-1.png",
 										),
 										'design-2' => array(
-											'title' => 'Design 2',
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/tour-archive-design-2.jpg",
+											'title' => esc_html__('Design 2', 'tourfic'),
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-design-2.png",
 										),
 										'design-3' => array(
-											'title' => 'Design 3',
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/hotel-archive-design3.jpg",
+											'title' => esc_html__('Design 3', 'tourfic'),
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-design-3.png",
+											'is_pro'=> true,
 										),
 										'default'  => array(
-											'title' => 'Default',
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/tour-archive-default.jpg",
+											'title' => esc_html__('Default', 'tourfic'),
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-default.png",
 										),
 									),
 									'default'  => 'design-1',
@@ -662,19 +656,17 @@ TF_Settings::option( 'tf_settings', array(
 									'type'     => 'imageselect',
 									'label'    => esc_html__( 'Select Single Apartment Template', 'tourfic' ),
 									'subtitle'   => esc_html__( 'You have the option to override this from the settings specific to each individual apartment page.', 'tourfic' ),
-									'multiple' => true,
-									'inline'   => true,
 									'options'  => array(
 										'default'  => array(
-											'title' => 'Default',
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/default-apartment.jpg",
+											'title' => esc_html__('Default', 'tourfic'),
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-apt-default.png",
 										),
 										'design-1' => array(
-											'title' => 'Design 1',
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/design1-apartment.jpg",
+											'title' => esc_html__('Design 1', 'tourfic'),
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-apt-design-1.png",
 										),
 									),
-									'default'  => 'default',
+									'default'  => 'design-1',
 								),
 								array(
 									'id'      => 'apartment_single_design_1_fonts_notice',
@@ -757,20 +749,19 @@ TF_Settings::option( 'tf_settings', array(
 									'id'       => 'apartment-archive',
 									'type'     => 'imageselect',
 									'label'    => esc_html__( 'Select Archive & Search Result Template', 'tourfic' ),
-									'multiple' => true,
-									'inline'   => true,
 									'options'  => array(
 										'default'  => array(
-											'title' => 'Default',
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/apartment-archive-default.jpg",
+											'title' => esc_html__('Default', 'tourfic'),
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-default.png",
 										),
 										'design-1' => array(
-											'title' => 'Design 1',
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/tour-archive-design-2.jpg",
+											'title' => esc_html__('Design 1', 'tourfic'),
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-design-2.png",
 										),
 										'design-2' => array(
-											'title' => 'Design 2',
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/hotel-archive-design3.jpg",
+											'title' => esc_html__('Design 2', 'tourfic'),
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-design-3.png",
+											'is_pro'=> true,
 										),
 									),
 									'default'  => 'default',
@@ -837,16 +828,14 @@ TF_Settings::option( 'tf_settings', array(
 									'type'     => 'imageselect',
 									'label'    => __( 'Select Single Car Template', 'tourfic' ),
 									'subtitle'   => __( 'You have the option to override this from the settings specific to each individual apartment page.', 'tourfic' ),
-									'multiple' => true,
-									'inline'   => true,
 									'options'  => array(
 										'design-1' => array(
-											'title' => 'Design 1',
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/design-1-car.jpg",
+											'title' => esc_html__('Design 1', 'tourfic'),
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-car-design-1.png",
 										),
 										'design-2' => array(
-											'title' => 'Design 2',
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/more-template.jpg",
+											'title' => esc_html__('Design 2', 'tourfic'),
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-coming-soon.png",
 											'disabled' => true
 										),
 									),
@@ -909,16 +898,14 @@ TF_Settings::option( 'tf_settings', array(
 									'id'       => 'car-archive',
 									'type'     => 'imageselect',
 									'label'    => __( 'Select Archive & Search Result Template', 'tourfic' ),
-									'multiple' => true,
-									'inline'   => true,
 									'options'  => array(
 										'design-1' => array(
-											'title' => 'Design 1',
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/car-archive-design-1.jpg",
+											'title' => esc_html__('Design 1', 'tourfic'),
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-car-design-1.png",
 										),
 										'design-2' => array(
-											'title' => 'Design 2',
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/more-template.jpg",
+											'title' => esc_html__('Design 2', 'tourfic'),
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-coming-soon.png",
 											'disabled' => true
 										),
 									),

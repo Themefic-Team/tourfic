@@ -18,8 +18,8 @@
                 font-family: 'remixicon';
                 height: 24px;
                 width: 24px;
-                right: -8px;
-                top: -8px;
+                right: -10px;
+                top: -10px;
                 border-radius: 50%;
                 background-color: #21A159;
                 @include transition();
@@ -36,10 +36,10 @@
             }
 
             img {
-                width: 240px;
+                width: 170px;
                 object-fit: cover;
                 object-position: top;
-                height: 180px;
+                height: 190px;
                 transition: object-position 2s ease-in-out, border-color 0.3s ease-in-out;
     
                 &:hover {
@@ -59,11 +59,11 @@
             }
             &> img {
                 cursor: pointer;
-                border: 2px solid transparent;
+                border: 1px solid #EDF0F2;
                 border-radius: 5px;
             }
             &> input:checked + img {
-                border-color: #21A159;
+                box-shadow: 0 0 0 2px #21A159;
             }
             &> input:checked + img + .tf-circle-check {
                 opacity: 1;

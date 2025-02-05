@@ -15,8 +15,8 @@ if ( ! class_exists( 'TF_imageselect' ) ) {
 		public function render() {
 			if ( isset( $this->field['options'] ) ) {
 				$multiple = isset( $this->field['multiple'] ) ? $this->field['multiple'] : false;
-				$img_width = ( isset( $this->field['img-width'] ) && $this->field['img-width'] ) ? $this->field['img-width']. 'px' : '240px';
-				$img_height = ( isset( $this->field['img-height'] ) && $this->field['img-height'] ) ? $this->field['img-height']. 'px' : '180px';
+				$img_width = ( isset( $this->field['img-width'] ) && $this->field['img-width'] ) ? $this->field['img-width']. 'px' : '170px';
+				$img_height = ( isset( $this->field['img-height'] ) && $this->field['img-height'] ) ? $this->field['img-height']. 'px' : '190px';
 				
 				echo '<ul class="tf-image-radio-group">';
 				foreach ( $this->field['options'] as $key => $value ) {
