@@ -422,12 +422,16 @@ function tf_car_availability_response($car_meta, array &$not_found, $pickup='', 
  * @include
  */
 if ( ! function_exists( 'get_cars_min_max_price' ) ) {
-	function get_cars_min_max_price(){
+	function get_cars_min_max_price( $post_id = ''){
 		$tf_car_min_max = array(
 			'posts_per_page' => - 1,
 			'post_type'      => 'tf_carrental',
 			'post_status'    => 'publish'
 		);
+
+		if( !empty($post_id) && is_numeric($post_id) ){
+			$tf_car_min_max['p'] = $post_id;
+		}
 
 		$tf_car_min_max_query = new \WP_Query( $tf_car_min_max );
 		$tf_car_min_maxprices = array();

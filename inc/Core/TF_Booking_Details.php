@@ -86,7 +86,7 @@ abstract Class TF_Booking_Details {
 						$paged = 1;
 					}
 
-					$no_of_booking_per_page = 10;
+					$no_of_booking_per_page = 15;
 					$offset                 = ( $paged - 1 ) * $no_of_booking_per_page;
 
 					$tf_booking_details_select = array(
@@ -181,7 +181,8 @@ abstract Class TF_Booking_Details {
                  * Booking Data showing new template
                  * @since 2.9.26
                  */
-                $this->tf_booking_details_list( $booking_type, $tf_order_details_result );
+
+                $this->tf_booking_details_list( $booking_type, $tf_order_details_result, $total_pages );
                 ?>
             </div>
 
@@ -192,7 +193,14 @@ abstract Class TF_Booking_Details {
 
     }
 
-    function tf_booking_details_list( $booking_type, $tf_order_details_result ) {
+    function tf_booking_details_list( $booking_type, $tf_order_details_result, $total_pages ) {
+
+        if ( isset( $_GET['paged'] ) ) {
+            $paged = $_GET['paged'];
+        } else {
+            $paged = 1;
+        }
+
 		?>
         <div class="tf-booking-calendar-popup-box">
             <div class="tf-calendar-popup-box">
@@ -480,41 +488,43 @@ abstract Class TF_Booking_Details {
 				} ?>
                 </tbody>
                 <tfoot>
-                <tr>
-                    <th colspan="8">
-                        <ul class="tf-booking-details-pagination">
-							<?php if ( ! empty( $paged ) && $paged >= 2 ) { ?>
-                                <li><a href="<?php echo esc_url($this->tf_booking_details_pagination( $paged - 1 )); ?>">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                            <path d="M15.8333 10.0001H4.16663M4.16663 10.0001L9.99996 15.8334M4.16663 10.0001L9.99996 4.16675" stroke="#1D2327" stroke-width="1.67" stroke-linecap="round"
-                                                  stroke-linejoin="round"/>
-                                        </svg><?php esc_html_e( "Previous", "tourfic" ); ?></a></li>
-							<?php }
-							if ( ! empty( $total_pages ) && $total_pages > 1 ) {
-								for ( $i = 1; $i <= $total_pages; $i ++ ) {
-									if ( $i == $paged ) {
-										?>
-                                        <li class="active">
-                                            <a href="<?php echo esc_url($this->tf_booking_details_pagination( $i )); ?>"><?php echo esc_html($i); ?></a>
-                                        </li>
-									<?php } else { ?>
-                                        <li>
-                                            <a href="<?php echo esc_url($this->tf_booking_details_pagination( $i )); ?>"><?php echo esc_html($i); ?></a>
-                                        </li>
-									<?php }
-								}
-							}
-							if ( ! empty( $total_pages ) && ! empty( $paged ) && $paged < $total_pages ) {
-								?>
-                                <li><a href="<?php echo esc_url($this->tf_booking_details_pagination( $paged + 1 )); ?>"><?php esc_html_e( "Next", "tourfic" ); ?>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                            <path d="M4.16669 10.0001H15.8334M15.8334 10.0001L10 4.16675M15.8334 10.0001L10 15.8334" stroke="#1D2327" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </svg>
-                                    </a></li>
-							<?php } ?>
-                        </ul>
-                    </th>
-                </tr>
+                    <tr>
+                        <th colspan="8">
+                            <ul class="tf-booking-details-pagination">
+                                <?php if( function_exists( 'is_tf_pro' ) && is_tf_pro() ): ?>
+                                    <?php if ( ! empty( $paged ) && $paged >= 2 ) { ?>
+                                        <li><a href="<?php echo esc_url($this->tf_booking_details_pagination( $paged - 1 )); ?>">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                    <path d="M15.8333 10.0001H4.16663M4.16663 10.0001L9.99996 15.8334M4.16663 10.0001L9.99996 4.16675" stroke="#1D2327" stroke-width="1.67" stroke-linecap="round"
+                                                        stroke-linejoin="round"/>
+                                                </svg><?php esc_html_e( "Previous", "tourfic" ); ?></a></li>
+                                    <?php }
+                                    if ( ! empty( $total_pages ) && $total_pages > 1 ) {
+                                        for ( $i = 1; $i <= $total_pages; $i ++ ) {
+                                            if ( $i == $paged ) {
+                                                ?>
+                                                <li class="active">
+                                                    <a href="<?php echo esc_url($this->tf_booking_details_pagination( $i )); ?>"><?php echo esc_html($i); ?></a>
+                                                </li>
+                                            <?php } else { ?>
+                                                <li>
+                                                    <a href="<?php echo esc_url($this->tf_booking_details_pagination( $i )); ?>"><?php echo esc_html($i); ?></a>
+                                                </li>
+                                            <?php }
+                                        }
+                                    }
+                                    if ( ! empty( $total_pages ) && ! empty( $paged ) && $paged < $total_pages ) {
+                                        ?>
+                                        <li><a href="<?php echo esc_url($this->tf_booking_details_pagination( $paged + 1 )); ?>"><?php esc_html_e( "Next", "tourfic" ); ?>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                    <path d="M4.16669 10.0001H15.8334M15.8334 10.0001L10 4.16675M15.8334 10.0001L10 15.8334" stroke="#1D2327" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
+                                                </svg>
+                                            </a></li>
+                                    <?php } ?>
+                                <?php endif; ?>
+                            </ul>
+                        </th>
+                    </tr>
                 </tfoot>
             </table>
         </div>

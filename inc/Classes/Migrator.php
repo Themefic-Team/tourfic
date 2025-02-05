@@ -5,6 +5,9 @@ defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\Classes\Helper;
 use \Tourfic\Classes\Room\Room;
+use \Tourfic\Classes\Hotel\Pricing as HotelPricing;
+use \Tourfic\Classes\Tour\Pricing as TourPricing;
+use \Tourfic\Classes\Apartment\Pricing as AptPricing;
 
 class Migrator {
 	use \Tourfic\Traits\Singleton;
@@ -14,6 +17,7 @@ class Migrator {
 		add_action( 'init', array( $this, 'tf_template_3_migrate_data' ) );
 		add_action( 'init', array( $this, 'tf_migrate_option_data' ) );
 		add_action( 'init', array( $this, 'tf_migrate_data' ) );
+		add_action( 'init', array( $this, 'tf_min_max_price_migrate' ) );
 		if ( Helper::tf_is_woo_active() ) {
 			add_action( 'admin_init', array( $this, 'tf_admin_order_data_migration' ) );
 		}
@@ -48,6 +52,48 @@ class Migrator {
 			wp_cache_flush();
 			flush_rewrite_rules( true );
 			update_option( 'tf_permalink_settings_migration', 1 );
+
+		}
+	}
+
+	function tf_min_max_price_migrate() {
+
+		if( ! empty( get_option( 'tf_min_max_price_migrate' ) ) ) {
+			
+			$current_hotel_min_max_price = !empty( get_option( 'tf_hotel_min_max_price' ) ) ? get_option( 'tf_hotel_min_max_price' ) : array();
+			$current_tour_min_max_price = !empty( get_option( 'tf_tours_min_max_price' ) ) ? get_option( 'tf_tours_min_max_price' ) : array();
+			$current_apt_min_max_price = !empty( get_option( 'tf_apt_min_max_price' ) ) ? get_option( 'tf_apt_min_max_price' ) : array();
+			$current_transport_min_max_price = !empty( get_option( 'tf_transport_min_max_price' ) ) ? get_option( 'tf_transport_min_max_price' ) : array();
+
+
+			if( empty( $current_hotel_min_max_price ) ) {
+				$hotel_min_max_price 	 = HotelPricing::get_min_max_price_from_all_hotel();
+				// $transport_min_max_price = HotelPricing::get_min_max_price_from_all_hotel();
+
+				update_option( 'tf_hotel_min_max_price', $hotel_min_max_price );
+			}
+
+			if( empty( $current_tour_min_max_price )) {
+				$tour_min_max_price = TourPricing::get_min_max_price_from_all_tour();
+				update_option( 'tf_tours_min_max_price', $tour_min_max_price );
+			}
+
+			if( empty( $current_apt_min_max_price ) ) {
+				$apartment_min_max_price = AptPricing::get_min_max_price_from_all_apartment();
+				update_option( 'tf_apt_min_max_price', $apartment_min_max_price );
+			}
+
+			if( empty( $current_transport_min_max_price ) ) {
+				$transport_min_max_price = !empty( get_cars_min_max_price() ) ? get_cars_min_max_price() : array();
+				update_option( 'tf_transport_min_max_price', $transport_min_max_price );
+			}
+
+			update_option( 'tf_min_max_price_migrate', 2 );
+
+			// echo "<pre>";
+			// print_r(AptPricing::get_min_max_price_from_all_apartment());
+			// echo "</pre>";
+			// die(); // added by - Sunvi
 
 		}
 	}

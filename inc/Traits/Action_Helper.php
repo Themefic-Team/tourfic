@@ -2427,4 +2427,29 @@ trait Action_Helper {
 			return $robots;
 		}
 	}
+
+
+	function tf_get_min_max_price_callback() {
+
+		// Check nonce security
+		if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_nonce'] ) ), 'tf_ajax_nonce' ) ) {
+			wp_send_json_error();
+			return;
+		}
+
+		$post_type = !empty( $_POST['post_type']) ? sanitize_text_field( $_POST['post_type'] ) : '';
+		$response = array();
+
+		if( $post_type == 'tf_hotel' ) {
+			$response[$post_type] = Hotel_Pricing::get_min_max_price_from_all_hotel();
+		} else if( $post_type == 'tf_tours' ) {
+			$response[$post_type] = Tour_Pricing::get_min_max_price_from_all_tour();
+		} else if( $post_type == 'tf_apartment' ) {
+			$response[$post_type] = Apt_Pricing::get_min_max_price_from_all_apartment();
+		} else if( $post_type == 'tf_carrental' ) {
+			$response[$post_type] = get_cars_min_max_price();
+		}
+
+		wp_send_json_success( $response );
+	}
 }
