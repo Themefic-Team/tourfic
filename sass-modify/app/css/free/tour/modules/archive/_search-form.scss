@@ -1,0 +1,13 @@
+.post-type-archive-tf_tours{
+    .tf-archive-template{
+        &__four{
+            .tf-search-fields .tf-search-field .tf-search-input {
+                width: 120px;
+            }
+            .tf-search-fields .tf-search-field-checkinout .tf-search-field .tf-search-input {
+                width: 180px;
+                cursor: pointer;
+            }
+        }
+    }
+}

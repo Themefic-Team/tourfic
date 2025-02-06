@@ -226,7 +226,7 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 
 		if ( ( $post_type == "tf_tours" && $tf_tour_arc_selected_template == "design-1" ) || ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template == "design-1" ) ) {
 			?>
-			<div class="tf-column tf-page-content tf-archive-left tf-result-previews">
+			<div class="tf-page-content tf-archive-left tf-result-previews">
 				<!-- Search Head Section -->
 				<div class="tf-archive-head tf-flex tf-flex-align-center tf-flex-space-bttn">
 					<div class="tf-search-result tf-flex">
@@ -1211,13 +1211,11 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 									$min_sale_price = !empty($min_price_arr['min_sale_price']) ? $min_price_arr['min_sale_price'] : 0;
 									$min_regular_price = !empty($min_price_arr['min_regular_price']) ? $min_price_arr['min_regular_price'] : 0;
 
-									// if ( $min_regular_price != 0 ) {
-									// 	$price_html = wc_format_sale_price( $min_regular_price, $min_sale_price );
-									// } else {
-									// 	$price_html = wp_kses_post( wc_price( $min_sale_price ) ) . " ";
-									// }
-
-									$price_html = apartmentPricing::instance(get_the_ID())->get_min_price_html();
+									if ( $min_regular_price != 0 ) {
+										$price_html = wc_format_sale_price( $min_regular_price, $min_sale_price );
+									} else {
+										$price_html = wp_kses_post( wc_price( $min_sale_price ) ) . " ";
+									}
 
 									if ( ! empty( $map ) ) {
 										$lat = $map['latitude'];
@@ -1465,13 +1463,11 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 									$min_sale_price = !empty($min_price_arr['min_sale_price']) ? $min_price_arr['min_sale_price'] : 0;
 									$min_regular_price = !empty($min_price_arr['min_regular_price']) ? $min_price_arr['min_regular_price'] : 0;
 
-									// if ( $min_regular_price != 0 ) {
-									// 	$price_html = wc_format_sale_price( $min_regular_price, $min_sale_price );
-									// } else {
-									// 	$price_html = wp_kses_post( wc_price( $min_sale_price ) ) . " ";
-									// }
-
-									$price_html = apartmentPricing::instance(get_the_ID())->get_min_price_html();
+									if ( $min_regular_price != 0 ) {
+										$price_html = wc_format_sale_price( $min_regular_price, $min_sale_price );
+									} else {
+										$price_html = wp_kses_post( wc_price( $min_sale_price ) ) . " ";
+									}
 
 									if ( ! empty( $map ) ) {
 										$lat = $map['latitude'];

@@ -1,0 +1,60 @@
+.single-tf_hotel{
+    .tf-single-template{
+        &__one{
+            .hero-section-wrap {
+                display: grid;
+                grid-template-columns: 75% 25%;
+                @media #{$max1024} {
+                    grid-template-columns: 67% 33%;
+                }
+                @media #{$max575} {
+                    grid-template-columns: 100%;
+                }
+                .hero-left {
+                    padding-right: 15px;
+                    @media #{$max575} {
+                        padding-right: 0;
+                    }
+                    .tf-top-review {
+                        position: absolute;
+                        margin: 20px;
+                    }
+                    .desc-wrap{
+                        margin-top: 16px;
+                    }
+                }
+                .hero-right {
+                    padding-left: 15px;
+                    @media #{$max575}{
+                        padding-left: 0;
+                        max-width: 316px;
+                        margin: auto;
+                    }
+                    .tf-hero-booking{
+                        .tf_booking-widget {
+                            color: $color-white;
+                        }
+                        .widget {
+                            margin-bottom: 0;
+                        }
+                    }
+                }
+            }
+        }
+        &__two{
+            .tf-single-head{
+                .more-hotel{
+                    color: $color-primary;
+                    font-size: 1rem;
+                    font-weight: 500;
+                    text-decoration: underline;
+                    &.tf-d-ib{
+                        @media #{$max768}{
+                            display: inline;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

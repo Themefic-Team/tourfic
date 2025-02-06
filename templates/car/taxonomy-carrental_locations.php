@@ -29,14 +29,14 @@ $tf_car_arc_banner = ! empty( $tf_car_location_meta['image'] ) ? $tf_car_locatio
 $tf_defult_views = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['car_archive_view'] ) ? Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['car_archive_view'] : 'grid';
 
 ?>
-<div class="tf-archive-car-section">
+<div class="tf-archive-template__one">
     <div class="tf-archive-car-banner" style="<?php echo !empty($tf_car_arc_banner) ? 'background-image: url('.esc_url($tf_car_arc_banner).')' : ''; ?>">
         <div class="tf-banner-content tf-flex tf-flex-align-center tf-flex-justify-center tf-flex-direction-column">
             <h1><?php echo esc_html($taxonomy_name); ?></h1>
         </div>
     </div>
 
-    <div class="tf-car-template-container">
+    <div class="tf-container">
         <div class="tf-container-inner">
             <div class="tf-archive-car-details-warper">
 

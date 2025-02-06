@@ -1,0 +1,123 @@
+.single-tf_hotel{
+    .tf-single-template{
+        &__two{
+            .tf-review-wrapper{
+                .tf-review-data.tf-box {
+                    background: transparent;
+                    border-radius: 0px;
+                    flex-basis: 20%;
+                    box-shadow: none;
+                    padding: 0px;
+                    .tf-review-data-inner{
+                        gap: 0px;
+                    }
+                    .tf-review-data{
+                        flex-basis: 30%;
+                        margin-right: 30px;
+                        background-color: $color-white;
+                        box-shadow: 0px 13px 30px 0px rgba(224,232,238,0.32);
+                        padding: 30px;
+                        @media #{$max1024}{
+                            flex-basis: 28%;
+                            margin-right: 28px;
+                        }
+                        @media #{$max768}{
+                            flex-basis: 100%;
+                            margin-right: 0px;
+                            margin-bottom: 20px;
+                        }
+                    }
+                    .tf-list{
+                        margin-top: 0px;
+                        text-align: center;
+                        width: 100%;
+                        li{
+                            display: block;
+                        }
+                    }
+                    p,li{
+                        text-transform: capitalize;
+                    }
+                    .tf-review-data-average p {
+                        background: $color-gray-light;
+                        text-align: center;
+                        font-size: 1.875rem;
+                        color: $color-primary;
+                        font-weight: 600;
+                        @include bd-radius(5px);;
+                        width: 100%;
+                        height: 75px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        margin-bottom: 0;
+                    }
+                    .tf-review-data-label{
+                        p{
+                            color: $color-heading;
+                        }
+                    }
+                    .tf-review-all-info {
+                        li {
+                            font-size: 0.875rem;
+                            color: $color-primary;
+                        }
+                    }
+            
+                    .tf-review-data-features {
+                        flex-basis: 68%;
+                        background-color: $color-white;
+                        box-shadow: 0px 13px 30px 0px rgba(224,232,238,0.32);
+                        padding: 30px;
+        
+                        @media #{$max768}{
+                            flex-basis: 100%;
+                        }
+                        
+                        .tf-percent-progress{
+                            column-gap: 70px;
+                            flex-wrap: wrap;
+                            @media #{$max1024}{
+                                column-gap: 24px;
+                            }
+                            @media #{$max768}{
+                                column-gap: 16px;
+                            }
+                        }
+                        .tf-progress-bar {
+                            height: 7px;
+                            background: $color-light-bg;
+                            border-radius: 7px;
+                        }
+                        
+                        .tf-progress-item {
+                            width: 42%;
+                            margin-bottom: 16px;
+                            &:nth-child(5),
+                            &:last-child{
+                                margin-bottom: 0;
+                            }
+                            @media #{$max768}{
+                                width: 40%;
+                            }
+                            @media #{$max320}{
+                                width: 100%;
+                            }
+                            @media #{$max1024}{
+                                width: 42%;
+                            }
+                            
+                            .tf-review-feature-label{
+                                p{
+                                    margin-bottom: 0;
+                                }
+                            }
+                          
+                        }
+                        
+                    }
+                }
+            }
+        }
+    }
+}

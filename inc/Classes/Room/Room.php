@@ -16,7 +16,6 @@ class Room {
 	}
 
 	static function get_hotel_rooms( $hotel_id ) {
-
 		$args = array(
 			'post_type'      => 'tf_room',
 			'posts_per_page' => - 1,

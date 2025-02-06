@@ -54,6 +54,8 @@ class Search_Form extends \Tourfic\Core\Shortcodes
 
 		$tf_tabs_class = (count($type) > 1 || $type[0] == 'all') ? ' tf-multiple-tabs' : '';
 
+		$tf_btn_rounded = ('4' === $design) ? ' tf_btn_rounded' : '';
+
 		ob_start();
 ?>
 
@@ -85,19 +87,19 @@ class Search_Form extends \Tourfic\Core\Shortcodes
 							<?php do_action('tf_before_booking_form_tab', $type); ?>
 
 							<?php if (! in_array('hotel', $disable_services) && Helper::tf_is_search_form_tab_type('hotel', $type) && ! Helper::tf_is_search_form_single_tab($type)) : ?>
-								<button class="tf-tablinks btn-styled active" data-form-id="tf-hotel-booking-form"><?php esc_html_e(apply_filters("tf_hotel_search_form_tab_button_text", $hotel_tab_title), 'tourfic'); ?></button>
+								<button class="tf-tablinks tf_btn tf_btn_small tf_btn_secondary <?php echo esc_attr($tf_btn_rounded);?> active" data-form-id="tf-hotel-booking-form"><?php esc_html_e(apply_filters("tf_hotel_search_form_tab_button_text", $hotel_tab_title), 'tourfic'); ?></button>
 							<?php endif; ?>
 
 							<?php if (! in_array('tour', $disable_services) && Helper::tf_is_search_form_tab_type('tour', $type) && ! Helper::tf_is_search_form_single_tab($type)) : ?>
-								<button class="tf-tablinks btn-styled" data-form-id="tf-tour-booking-form"><?php esc_html_e(apply_filters("tf_tour_search_form_tab_button_text", $tour_tab_title), 'tourfic'); ?></button>
+								<button class="tf-tablinks tf_btn tf_btn_small tf_btn_secondary <?php echo esc_attr($tf_btn_rounded);?>" data-form-id="tf-tour-booking-form"><?php esc_html_e(apply_filters("tf_tour_search_form_tab_button_text", $tour_tab_title), 'tourfic'); ?></button>
 							<?php endif ?>
 
 							<?php if (! in_array('apartment', $disable_services) && Helper::tf_is_search_form_tab_type('apartment', $type) && ! Helper::tf_is_search_form_single_tab($type)) : ?>
-								<button class="tf-tablinks btn-styled" data-form-id="tf-apartment-booking-form"><?php esc_html_e(apply_filters("tf_apartment_search_form_tab_button_text", $apartment_tab_title), 'tourfic'); ?></button>
+								<button class="tf-tablinks tf_btn tf_btn_small tf_btn_secondary <?php echo esc_attr($tf_btn_rounded);?>" data-form-id="tf-apartment-booking-form"><?php esc_html_e(apply_filters("tf_apartment_search_form_tab_button_text", $apartment_tab_title), 'tourfic'); ?></button>
 							<?php endif ?>
 
 							<?php if (! in_array('carrentals', $disable_services) && Helper::tf_is_search_form_tab_type('carrentals', $type) && ! Helper::tf_is_search_form_single_tab($type)) : ?>
-								<button class="tf-tablinks btn-styled" data-form-id="tf-car-booking-form"><?php esc_html_e(apply_filters("tf_car_search_form_tab_button_text", $car_tab_title), 'tourfic'); ?></button>
+								<button class="tf-tablinks tf_btn tf_btn_small tf_btn_secondary <?php echo esc_attr($tf_btn_rounded);?>" data-form-id="tf-car-booking-form"><?php esc_html_e(apply_filters("tf_car_search_form_tab_button_text", $car_tab_title), 'tourfic'); ?></button>
 							<?php endif ?>
 
 							<?php do_action('tf_after_booking_form_tab', $type) ?>

@@ -12,9 +12,9 @@ $tf_dropoff_time = !empty($_GET['dropoff_time']) ? $_GET['dropoff_time'] : '';
 $total_prices = Pricing::set_total_price($meta, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time); 
 $tf_cars_slug = get_option('car_slug');
 ?>
-<div class="tf-single-car-section">
+<div class="tf-single-template__one">
     <div class="tf-single-booking-bar">
-        <div class="tf-car-template-container">
+        <div class="tf-container">
             <div class="tf-top-booking-bar tf-flex tf-flex-space-bttn tf-flex-align-center">
                 <div class="tf-details-menu">
                     <ul>
@@ -87,7 +87,7 @@ $tf_cars_slug = get_option('car_slug');
         </div>
     </div>
     
-    <div class="tf-car-template-container">
+    <div class="tf-container">
         <div class="tf-container-inner">
             <div class="tf-single-car-details-warper">
                 <div class="tf-car-details-column">
@@ -189,7 +189,7 @@ $tf_cars_slug = get_option('car_slug');
                                             <li>
                                                 <div title="<?php esc_attr_e( 'Share this link', 'tourfic' ); ?>"
                                                     aria-controls="share_link_button">
-                                                    <button id="share_link_button" class="tf_button share-center-copy-cta" tabindex="0"
+                                                    <button id="share_link_button" class="tf_btn tf_btn_small share-center-copy-cta" tabindex="0"
                                                             role="button">
                                                         <i class="fa fa-link" aria-hidden="true"></i>
                                                         
@@ -284,8 +284,8 @@ $tf_cars_slug = get_option('car_slug');
                         <?php
                         if ( ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-car-layout'] ) ) {
                             foreach ( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-car-layout'] as $section ) {
-                                if ( ! empty( $section['car-section-status'] ) && $section['car-section-status'] == "1" && ! empty( $section['car-section-slug'] ) ) {
-                                    include TF_TEMPLATE_PART_PATH . 'car/design-1/' . $section['car-section-slug'] . '.php';
+                                if ( ! empty( $section['status'] ) && $section['status'] == "1" && ! empty( $section['slug'] ) ) {
+                                    include TF_TEMPLATE_PART_PATH . 'car/design-1/' . $section['slug'] . '.php';
                                 }
                             }
                         } else {

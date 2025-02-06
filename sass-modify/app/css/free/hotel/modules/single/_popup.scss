@@ -1,0 +1,75 @@
+.fancybox-slide {
+    #tour_room_details_qv.tf-hotel-design-1-popup{
+        padding: 0px;
+        .tf-hotel-details-qc-gallelry{
+            width: 545px;
+
+            @media #{$max1024} {
+                width: 100%;
+            }
+        }
+        .tf-details-qc-slider{
+            .tf-details-qcs{
+                img{
+                    width: 100%;
+                }
+            }
+        }
+        .tf-details-qc-slider-nav {
+            margin-top: 0px;
+            .tf-details-qcs.is-active img {
+                border: 5px solid $color-primary;
+            }
+            .tf-details-qcs img {
+                min-height: 50px;
+                max-height: 50px;
+            }
+        }
+        .fancybox-button.fancybox-close-small{
+            right: 20px;
+        }
+        .tf-hotel-details-info{
+            padding-right: 25px;
+            width:440px; 
+            padding-left: 35px;
+            max-height: 470px;
+            padding-top: 25px; 
+            overflow-y: auto;
+
+            @media #{$max1024}{
+                padding-right: 10px;
+                padding-left: 10px;
+                margin: 0;
+                overflow: auto;
+                max-height: none;
+                width: 100%;
+            }
+            .tf-template-1.tf-room-adv-info{
+                ul{
+                    margin: 0;
+                    padding: 0;
+                    li{
+                        display: inline-block;
+                        border-radius: 5px;
+                        padding: 5px 10px 5px 0px;
+                        margin: 4px 5px 4px 0px;
+                        color: $color-text;
+                        font-size: 1rem;
+                        i{
+                            color: $color-text;
+                        }
+                    }
+                }
+                p{
+                    margin: 10px 0px;
+                    color: $color-text;
+                }
+                h4{
+                    font-size: 1.25rem;
+                    margin: 15px 0px 10px 0px;
+                    color: $color-heading;
+                }
+            }
+        }
+    }
+}

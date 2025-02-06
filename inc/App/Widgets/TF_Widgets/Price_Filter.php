@@ -5,7 +5,6 @@ namespace Tourfic\App\Widgets\TF_Widgets;
 // Exit if accessed directly.
 defined('ABSPATH') || exit;
 
-use \Tourfic\Classes\Hotel\Pricing as HotelPricing;
 
 /**
  * Hotel & Tour Price Filter
@@ -48,7 +47,7 @@ class Price_Filter extends \WP_Widget {
                 <div class="tf-widget-title">
                     <span><?php esc_html_e("Hotel Price Range","tourfic"); ?> (<?php echo wp_kses_post(get_woocommerce_currency_symbol()); ?>)</span>
                 </div>
-                <div class="tf-hotel-result-price-range" ></div>
+                <div class="tf-hotel-result-price-range"></div>
             <?php
             } 
             if( is_post_type_archive('tf_tours') ){

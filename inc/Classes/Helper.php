@@ -15,6 +15,7 @@ class Helper {
 	public function __construct() {
 		add_filter( 'body_class', array( $this, 'tf_templates_body_class' ) );
 		add_action( 'admin_footer', array( $this, 'tf_admin_footer' ) );
+		add_action( 'wp_footer', array($this, 'tf_ask_question_modal') );
 
 		add_filter( 'rest_prepare_taxonomy', array( $this, 'tf_remove_metabox_gutenburg' ), 10, 3 );
 		add_filter( 'rest_user_query', array( $this, 'tf_gutenberg_author_dropdown_roles' ), 10, 2 );
@@ -603,7 +604,7 @@ class Helper {
 
                         <input type="hidden" name="place" id="tf-place" value="<?php echo esc_attr( $place_value ) ?? ''; ?> "/>
                     </div>
-                    <div class="tf-field-group tf-mt-8 tf_acrselection">
+                    <div class="tf-field-group tf-mt-16 tf_acrselection">
                         <div class="tf-field tf-flex">
                             <div class="acr-label tf-flex">
                                 <i class="fa-regular fa-user"></i>
@@ -658,12 +659,12 @@ class Helper {
                                placeholder="<?php esc_html_e( 'Select Date', 'tourfic' ); ?>" required value="<?php echo esc_attr( $date ) ?>">
                     </div>
 
-                    <div class="tf-booking-bttns tf-mt-30">
+                    <div class="tf-booking-bttns tf-mt-24">
 						<?php
 						$ptype = esc_attr( $_GET['type'] ) ?? get_post_type();
 						?>
                         <input type="hidden" name="type" value="<?php echo esc_attr( $ptype ); ?>" class="tf-post-type"/>
-                        <button class="tf-btn-normal btn-primary tf-submit"
+                        <button class="tf_btn tf_btn_full tf-submit"
                                 type="submit"><?php esc_html_e( 'Check Availability', 'tourfic' ); ?></button>
                     </div>
                 </form>
@@ -951,7 +952,7 @@ class Helper {
 				$ptype = esc_attr( $_GET['type'] ) ?? get_post_type();
 				?>
                 <input type="hidden" name="type" value="<?php echo esc_attr( $ptype ); ?>" class="tf-post-type"/>
-                <button class="tf-btn-normal btn-primary tf-submit"><?php esc_html_e( 'Check Availability', 'tourfic' ); ?></button>
+                <button class="tf_btn tf_btn_large tf_btn_sharp tf-submit"><?php esc_html_e( 'Check Availability', 'tourfic' ); ?></button>
             </div>
 			<?php if ( $post_type == 'tf_tours' ) { ?>
                 <script>
@@ -960,7 +961,7 @@ class Helper {
                             // flatpickr locale first day of Week
 							<?php self::tf_flatpickr_locale( "root" ); ?>
 
-                            $(".tf-template-3 .tf-booking-date-wrap").on("click", function () {
+                            $(".tf-archive-template__three .tf-booking-date-wrap").on("click", function () {
                                 $("#check-in-out-date").trigger("click");
                             });
                             $("#check-in-out-date").flatpickr({
@@ -998,13 +999,13 @@ class Helper {
                                     ];
                                     if (selectedDates[0]) {
                                         const startDate = selectedDates[0];
-                                        $(".tf-template-3 .tf-booking-form-checkin .tf-tour-start-date span.tf-booking-date").html(startDate.getDate());
-                                        $(".tf-template-3 .tf-booking-form-checkin .tf-tour-start-date span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
+                                        $(".tf-archive-template__three .tf-booking-form-checkin .tf-tour-start-date span.tf-booking-date").html(startDate.getDate());
+                                        $(".tf-archive-template__three .tf-booking-form-checkin .tf-tour-start-date span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
                                     }
                                     if (selectedDates[1]) {
                                         const endDate = selectedDates[1];
-                                        $(".tf-template-3 .tf-booking-form-checkin .tf-tour-end-date span.tf-booking-date").html(endDate.getDate());
-                                        $(".tf-template-3 .tf-booking-form-checkin .tf-tour-end-date span.tf-booking-month span").html(monthNames[endDate.getMonth()]);
+                                        $(".tf-archive-template__three .tf-booking-form-checkin .tf-tour-end-date span.tf-booking-date").html(endDate.getDate());
+                                        $(".tf-archive-template__three .tf-booking-form-checkin .tf-tour-end-date span.tf-booking-month span").html(monthNames[endDate.getMonth()]);
                                     }
                                 }
                             }
@@ -1036,7 +1037,7 @@ class Helper {
                             // flatpickr locale
 							<?php self::tf_flatpickr_locale( "root" ); ?>
 
-                            $(".tf-template-3 .tf-booking-date-wrap").on("click", function () {
+                            $(".tf-archive-template__three .tf-booking-date-wrap").on("click", function () {
                                 $("#check-in-out-date").trigger("click");
                             });
                             $("#check-in-out-date").flatpickr({
@@ -1072,13 +1073,13 @@ class Helper {
                                     ];
                                     if (selectedDates[0]) {
                                         const startDate = selectedDates[0];
-                                        $(".tf-template-3 .tf-booking-form-checkin span.tf-booking-date").html(startDate.getDate());
-                                        $(".tf-template-3 .tf-booking-form-checkin span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
+                                        $(".tf-archive-template__three .tf-booking-form-checkin span.tf-booking-date").html(startDate.getDate());
+                                        $(".tf-archive-template__three .tf-booking-form-checkin span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
                                     }
                                     if (selectedDates[1]) {
                                         const endDate = selectedDates[1];
-                                        $(".tf-template-3 .tf-booking-form-checkout span.tf-booking-date").html(endDate.getDate());
-                                        $(".tf-template-3 .tf-booking-form-checkout span.tf-booking-month span").html(monthNames[endDate.getMonth()]);
+                                        $(".tf-archive-template__three .tf-booking-form-checkout span.tf-booking-date").html(endDate.getDate());
+                                        $(".tf-archive-template__three .tf-booking-form-checkout span.tf-booking-month span").html(monthNames[endDate.getMonth()]);
                                     }
                                 }
                             }
@@ -1105,7 +1106,7 @@ class Helper {
                             </defs>
                         </svg>
                     </div>
-                    <label for="<?php echo esc_attr( $place_input_id ) ?? ''; ?>" class="tf-search-field-content">
+                    <label for="tf-search-location" class="tf-search-field-content">
                         <span class="tf-search-field-label"><?php echo $post_type == 'tf_hotel' || $post_type == 'tf_apartment' ? esc_html__( 'Location', 'tourfic' ) : esc_html__( 'Destination', 'tourfic' ); ?></span>
 
                         <input type="text" id="<?php echo esc_attr( $place_input_id ) ?? ''; ?>" <?php echo $hotel_location_field_required == 1 ? 'required=""' : '' ?> class="tf-search-input" placeholder="<?php echo $post_type == 'tf_hotel' || $post_type == 'tf_apartment' ? esc_html__( 'Enter Location', 'tourfic' ) : esc_html__( 'Where are you going?', 'tourfic' ); ?>" value="<?php echo ! empty( $place_title ) ? esc_attr( $place_title ) : ''; ?>">
@@ -1155,10 +1156,10 @@ class Helper {
                                           fill="#6E655E"/>
                                 </svg>
                             </div>
-                            <label class="tf-search-field-content" for="check-in-out-date">
+                            <div class="tf-search-field-content">
                                 <span class="tf-search-field-label"><?php esc_html_e( "Select Date", "tourfic" ); ?></span>
                                 <input type="text" class="tf-search-input" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . esc_attr($check_in_out) . '"' : '' ?>>
-                            </label>
+                            </div>
                         </div>
                     </div>
 				<?php } ?>
@@ -1309,7 +1310,7 @@ class Helper {
             <div class="tf-booking-form-submit">
 	            <?php $ptype = esc_attr( $_GET['type'] ) ?? get_post_type(); ?>
                 <input type="hidden" name="type" value="<?php echo esc_attr($ptype); ?>" class="tf-post-type"/>
-                <button class="tf-btn-normal btn-primary tf-submit"><?php esc_html_e( 'Search Now', 'tourfic' ); ?></button>
+                <button class="tf_btn tf_btn_full tf-submit"><?php esc_html_e( 'Search Now', 'tourfic' ); ?></button>
             </div>
 
 			<?php if ( $post_type == 'tf_hotel' || $post_type == 'tf_tours' || $post_type == 'tf_apartment' ) : ?>
@@ -1319,7 +1320,7 @@ class Helper {
                             // flatpickr locale first day of Week
 							<?php self::tf_flatpickr_locale( "root" ); ?>
 
-                            $(".tf-hotel-template-4 #tf-check-out").on('click', function () {
+                            $(".tf-archive-template__four #tf-check-out").on('click', function () {
                                 $(".tf-search-input.form-control").click();
                             });
 
@@ -1355,12 +1356,12 @@ class Helper {
                                 if (selectedDates.length === 2) {
                                     if (selectedDates[0]) {
                                         let checkInDate = instance.formatDate(selectedDates[0], format);
-                                        $(".tf-hotel-template-4 #tf-check-in").val(checkInDate);
+                                        $(".tf-archive-template__four #tf-check-in").val(checkInDate);
                                     }
 
                                     if (selectedDates[1]) {
                                         let checkOutDate = instance.formatDate(selectedDates[1], format);
-                                        $(".tf-hotel-template-4 #tf-check-out").val(checkOutDate);
+                                        $(".tf-archive-template__four #tf-check-out").val(checkOutDate);
                                     }
                                 }
                             }
@@ -1511,7 +1512,7 @@ class Helper {
 					$ptype = esc_attr( $_GET['type'] ) ?? get_post_type();
 					?>
                     <input type="hidden" name="type" value="<?php echo esc_attr( $ptype ); ?>" class="tf-post-type"/>
-                    <button class="tf_button tf-submit btn-styled"
+                    <button class="tf_btn tf_btn_full tf-submit"
                             type="submit"><?php esc_html_e( 'Check Availability', 'tourfic' ); ?></button>
                 </div>
 
@@ -1632,7 +1633,7 @@ class Helper {
                         <input type="hidden" id="tf-place" name="place" value="<?php echo ! empty( $taxonomy_slug ) ? esc_attr( $taxonomy_slug ) : ''; ?>"/>
 
                     </div>
-                    <div class="tf-field-group tf-mt-8 tf_acrselection">
+                    <div class="tf-field-group tf-mt-16 tf_acrselection">
                         <div class="tf-field tf-flex">
                             <div class="acr-label tf-flex">
                                 <i class="fa-regular fa-user"></i>
@@ -1683,14 +1684,14 @@ class Helper {
                     <div class="tf-field-group tf-mt-8">
                         <i class="fa-solid fa-calendar-days"></i>
                         <input type="text" class="tf-field time" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
-                               placeholder="<?php esc_html_e( 'Select Date', 'tourfic' ); ?>" required value="" style="width: 100% !important">
+                               placeholder="<?php esc_html_e( 'Select Date', 'tourfic' ); ?>" required value="">
                     </div>
                     <div class="tf_booking-dates">
                         <div class="tf_label-row"></div>
                     </div>
-                    <div class="tf-booking-bttns tf-mt-30">
+                    <div class="tf-booking-bttns tf-mt-24">
                         <input type="hidden" name="type" value="<?php echo esc_attr( $post_type ); ?>" class="tf-post-type"/>
-                        <button class="tf-btn-normal btn-primary tf-submit"><?php esc_html_e( 'Check Availability', 'tourfic' ); ?></button>
+                        <button class="tf_btn tf_btn_full tf-submit"><?php esc_html_e( 'Check Availability', 'tourfic' ); ?></button>
                     </div>
                 </form>
             </div>
@@ -1968,7 +1969,7 @@ class Helper {
             </div>
             <div class="tf-booking-form-submit">
                 <input type="hidden" name="type" value="<?php echo esc_attr( $post_type ); ?>" class="tf-post-type"/>
-                <button class="tf-btn-normal btn-primary tf-submit"><?php echo esc_html__( 'Check Availability', 'tourfic' ); ?></button>
+                <button class="tf_btn tf_btn_large tf_btn_sharp tf-submit"><?php echo esc_html__( 'Check Availability', 'tourfic' ); ?></button>
             </div>
 
 			<?php if ( $post_type == 'tf_tours' ) { ?>
@@ -1978,7 +1979,7 @@ class Helper {
                             // flatpickr locale first day of Week
 							<?php self::tf_flatpickr_locale( "root" ); ?>
 
-                            $(".tf-template-3 .tf-booking-date-wrap").on("click", function () {
+                            $(".tf-archive-template__three .tf-booking-date-wrap").on("click", function () {
 
                                 $("#check-in-out-date").trigger("click");
                             });
@@ -2017,13 +2018,13 @@ class Helper {
                                     ];
                                     if (selectedDates[0]) {
                                         const startDate = selectedDates[0];
-                                        $(".tf-template-3 .tf-booking-form-checkin .tf-tour-start-date span.tf-booking-date").html(startDate.getDate());
-                                        $(".tf-template-3 .tf-booking-form-checkin .tf-tour-start-date span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
+                                        $(".tf-archive-template__three .tf-booking-form-checkin .tf-tour-start-date span.tf-booking-date").html(startDate.getDate());
+                                        $(".tf-archive-template__three .tf-booking-form-checkin .tf-tour-start-date span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
                                     }
                                     if (selectedDates[1]) {
                                         const endDate = selectedDates[1];
-                                        $(".tf-template-3 .tf-booking-form-checkin .tf-tour-end-date span.tf-booking-date").html(endDate.getDate());
-                                        $(".tf-template-3 .tf-booking-form-checkin .tf-tour-end-date span.tf-booking-month span").html(monthNames[endDate.getMonth()]);
+                                        $(".tf-archive-template__three .tf-booking-form-checkin .tf-tour-end-date span.tf-booking-date").html(endDate.getDate());
+                                        $(".tf-archive-template__three .tf-booking-form-checkin .tf-tour-end-date span.tf-booking-month span").html(monthNames[endDate.getMonth()]);
                                     }
                                 }
                             }
@@ -2053,7 +2054,7 @@ class Helper {
                             // flatpickr locale first day of Week
 							<?php self::tf_flatpickr_locale( "root" ); ?>
 
-                            $(".tf-template-3 .tf-booking-date-wrap").on("click", function () {
+                            $(".tf-archive-template__three .tf-booking-date-wrap").on("click", function () {
 
                                 $("#check-in-out-date").trigger("click");
                             });
@@ -2092,13 +2093,13 @@ class Helper {
                                     ];
                                     if (selectedDates[0]) {
                                         const startDate = selectedDates[0];
-                                        $(".tf-template-3 .tf-booking-form-checkin span.tf-booking-date").html(startDate.getDate());
-                                        $(".tf-template-3 .tf-booking-form-checkin span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
+                                        $(".tf-archive-template__three .tf-booking-form-checkin span.tf-booking-date").html(startDate.getDate());
+                                        $(".tf-archive-template__three .tf-booking-form-checkin span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
                                     }
                                     if (selectedDates[1]) {
                                         const endDate = selectedDates[1];
-                                        $(".tf-template-3 .tf-booking-form-checkout span.tf-booking-date").html(endDate.getDate());
-                                        $(".tf-template-3 .tf-booking-form-checkout span.tf-booking-month span").html(monthNames[endDate.getMonth()]);
+                                        $(".tf-archive-template__three .tf-booking-form-checkout span.tf-booking-date").html(endDate.getDate());
+                                        $(".tf-archive-template__three .tf-booking-form-checkout span.tf-booking-month span").html(monthNames[endDate.getMonth()]);
                                     }
                                 }
                             }
@@ -2244,14 +2245,14 @@ class Helper {
 							<li>
 								<label><?php esc_html_e("Return in the same location", "tourfic"); ?>
 									<input type="checkbox" name="same_location" <?php echo !empty($_GET['same_location']) && 'on'==$_GET['same_location'] ? esc_attr('checked') : ''; ?>>
-									<span class="checkmark"></span>
+									<span class="tf-checkmark"></span>
 								</label>
 							</li>
 							<li>
 								<label><?php esc_html_e("Age of driver ", "tourfic"); ?>
                                 <?php echo esc_attr($car_driver_min_age); ?>-<?php echo esc_attr($car_driver_max_age); ?>?
 									<input type="checkbox" name="driver_age" <?php echo !empty($_GET['driver_age']) && 'on'==$_GET['driver_age'] ? esc_attr('checked') : ''; ?>>
-									<span class="checkmark"></span>
+									<span class="tf-checkmark"></span>
 								</label>
 							</li>
 						</ul>
@@ -2374,7 +2375,7 @@ class Helper {
                             </defs>
                         </svg>
                     </div>
-                    <label for="<?php echo esc_attr($place); ?>" class="tf-search-field-content">
+                    <label for="tf-location" class="tf-search-field-content">
                         <span class="tf-search-field-label"><?php echo $post_type == 'tf_hotel' || $post_type == 'tf_apartment' ? esc_html__( 'Location', 'tourfic' ) : esc_html__( 'Destination', 'tourfic' ); ?></span>
 
                         <input type="text" required="" id="<?php echo esc_attr($place); ?>" class="tf-search-input" placeholder="<?php echo $post_type == 'tf_hotel' || $post_type == 'tf_apartment' ? esc_html__( 'Enter Location', 'tourfic' ) : esc_html__( 'Where are you going?', 'tourfic' ); ?>" value="<?php echo ! empty( $taxonomy_name ) ? esc_attr($taxonomy_name) : ''; ?>">
@@ -2424,10 +2425,10 @@ class Helper {
                                           fill="#6E655E"/>
                                 </svg>
                             </div>
-                            <label class="tf-search-field-content" for="check-in-out-date">
+                            <div class="tf-search-field-content">
                                 <span class="tf-search-field-label"><?php esc_html_e( "Select Date", "tourfic" ); ?></span>
                                 <input type="text" class="tf-search-input" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;" placeholder="<?php esc_attr_e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . esc_attr($check_in_out) . '"' : '' ?>>
-                            </label>
+                            </div>
                         </div>
                     </div>
 				<?php } ?>
@@ -2577,7 +2578,7 @@ class Helper {
             </div>
             <div class="tf-booking-form-submit">
                 <input type="hidden" name="type" value="<?php echo esc_attr($post_type); ?>" class="tf-post-type"/>
-                <button class="tf-btn-normal btn-primary tf-submit"><?php esc_html_e( 'Search Now', 'tourfic' ); ?></button>
+                <button class="tf_btn tf-submit"><?php esc_html_e( 'Search Now', 'tourfic' ); ?></button>
             </div>
 
             <?php if ( $post_type == 'tf_hotel' || $post_type == 'tf_tours' || $post_type == 'tf_apartment' ) : ?>
@@ -2587,7 +2588,7 @@ class Helper {
                             // flatpickr locale first day of Week
                             <?php self::tf_flatpickr_locale( "root" ); ?>
 
-                            $(".tf-hotel-template-4 #tf-check-out").on('click', function () {
+                            $(".tf-archive-template__four #tf-check-out").on('click', function () {
                                 $(".tf-search-input.form-control").click();
                             });
 
@@ -2622,12 +2623,12 @@ class Helper {
                                 if (selectedDates.length === 2) {
                                     if (selectedDates[0]) {
                                         let checkInDate = instance.formatDate(selectedDates[0], format);
-                                        $(".tf-hotel-template-4 #tf-check-in").val(checkInDate);
+                                        $(".tf-archive-template__four #tf-check-in").val(checkInDate);
                                     }
 
                                     if (selectedDates[1]) {
                                         let checkOutDate = instance.formatDate(selectedDates[1], format);
-                                        $(".tf-hotel-template-4 #tf-check-out").val(checkOutDate);
+                                        $(".tf-archive-template__four #tf-check-out").val(checkOutDate);
                                     }
                                 }
                             }
@@ -2747,7 +2748,7 @@ class Helper {
 
                 <div class="tf_form-row">
                     <input type="hidden" name="type" value="<?php echo esc_attr( $post_type ); ?>" class="tf-post-type"/>
-                    <button class="tf_button tf-submit btn-styled"
+                    <button class="tf_btn tf_btn_full tf-submit"
                             type="submit"><?php esc_html_e( 'Check Availability', 'tourfic' ); ?></button>
                 </div>
 
@@ -3052,5 +3053,19 @@ class Helper {
 		echo '<pre>';
 		var_dump( $var );
 		echo '</pre>';
+	}
+
+    /*
+     * Post edit link
+     * @author Foysal
+     */
+	static function edit_link( $post_id ) {
+		if ( current_user_can( 'administrator' ) && current_user_can( 'manage_options' ) ) {
+			$edit_link = get_edit_post_link( $post_id );
+
+			if ( $edit_link ) {
+				return '<a href="' . esc_url( $edit_link ) . '" target="_blank" class="tf-edit-link">' . esc_html__( 'Edit', 'tourfic' ) . '</a>';
+			}
+		}
 	}
 }

@@ -39,7 +39,6 @@ class Hotel {
 		//add_filter( 'comment_form_fields', array($this, 'tf_move_comment_field') );
 		add_action( 'wp_after_insert_post', array( $this, 'tf_hotel_rooms_assign' ), 100, 3 );
 		add_action( 'wp_after_insert_post', array( $this, 'tf_room_assign_to_hotel' ), 100, 3 );
-
 	}
 
 	/**
@@ -1866,7 +1865,6 @@ class Hotel {
             </script>
 		<?php }elseif( !empty($design) && 3==$design ){ ?>
 			<form class="tf-archive-search-box-wrapper <?php echo esc_attr( $classes ); ?>" id="tf_hotel_aval_check" method="get" autocomplete="off" action="<?php echo esc_url( Helper::tf_booking_search_action() ); ?>">
-
 				<div class="tf-date-selection-form">
 				<div class="tf-date-select-box tf-flex tf-flex-gap-8">
 					<div class="tf-date-single-select tf-flex tf-flex-gap-8 tf-flex-space-bttn tf-pick-drop-location full-width">
@@ -2210,7 +2208,7 @@ class Hotel {
                         <!-- Submit Button -->
                         <input type="hidden" name="type" value="tf_hotel" class="tf-post-type" />
                         <button type="submit" class="tf-search__form__submit mh-btn">
-                            <?php esc_html_e(apply_filters("tf_hotel_search_form_submit_button_text", 'Search Now'), 'tourfic'); ?>
+                            <?php esc_html_e(apply_filters("tf_hotel_search_form_submit_button_text", 'Search'), 'tourfic'); ?>
                             <svg class="tf-search__form__submit__icon" width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M15.75 14.7188L11.5625 10.5312C12.4688 9.4375 12.9688 8.03125 12.9688 6.5C12.9688 2.9375 10.0312 0 6.46875 0C2.875 0 0 2.9375 0 6.5C0 10.0938 2.90625 13 6.46875 13C7.96875 13 9.375 12.5 10.5 11.5938L14.6875 15.7812C14.8438 15.9375 15.0312 16 15.25 16C15.4375 16 15.625 15.9375 15.75 15.7812C16.0625 15.5 16.0625 15.0312 15.75 14.7188ZM1.5 6.5C1.5 3.75 3.71875 1.5 6.5 1.5C9.25 1.5 11.5 3.75 11.5 6.5C11.5 9.28125 9.25 11.5 6.5 11.5C3.71875 11.5 1.5 9.28125 1.5 6.5Z" fill="white" />
                             </svg>
@@ -2467,7 +2465,7 @@ class Hotel {
 						if ( $author ) { ?>
                             <input type="hidden" name="tf-author" value="<?php echo esc_attr( $author ); ?>" class="tf-post-type"/>
 						<?php } ?>
-                        <button class="tf_button tf-submit btn-styled" type="submit"><?php echo esc_html(apply_filters("tf_hotel_search_form_submit_button_text", esc_html__('Search', 'tourfic' ))); ?></button>
+                        <button class="tf_btn tf-submit" type="submit"><?php echo esc_html(apply_filters("tf_hotel_search_form_submit_button_text", esc_html__('Search', 'tourfic' ))); ?></button>
                     </div>
 
                 </div>
@@ -2675,8 +2673,7 @@ class Hotel {
                             <div class="tf_form-inner tf-field-group">
                                 <i class="far fa-calendar-alt"></i>
                                 <input type="text" name="check-in-out-date" id="check-in-out-date" class="tf-field" onkeypress="return false;"
-                                       placeholder="<?php esc_html_e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . esc_attr( $check_in_out ) . '"' : '' ?> required
-                                       style="width: 100% !important;">
+                                       placeholder="<?php esc_html_e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . esc_attr( $check_in_out ) . '"' : '' ?> required >
                             </div>
                         </label>
                     </div>
@@ -2690,8 +2687,8 @@ class Hotel {
                     <input type="hidden" name="post_id" value="<?php echo esc_attr( get_the_ID() ); ?>"/>
                     <input type="hidden" name="children_ages" value="<?php echo esc_attr( $children_ages ); ?>"/>
 
-                    <div class="tf-btn">
-                        <button class="tf-btn-normal btn-primary tf-submit"
+                    <div class="tf-btn-wrap">
+                        <button class="tf_btn tf_btn_full tf-submit"
                                 type="submit"><?php echo esc_html( $tf_hotel_book_avaibality_button_text ); ?></button>
                     </div>
 
@@ -2821,7 +2818,7 @@ class Hotel {
                     <input type="hidden" name="type" value="<?php echo esc_html( $ptype ); ?>" class="tf-post-type"/>
                     <input type="hidden" name="post_id" value="<?php echo esc_html( get_the_ID() ); ?>"/>
                     <input type="hidden" name="children_ages" value="<?php echo esc_html( $children_ages ); ?>"/>
-                    <button type="submit" class="btn-primary tf-submit"><?php echo esc_html( $tf_hotel_book_avaibality_button_text ); ?></button>
+                    <button type="submit" class="tf_btn tf_btn_large tf_btn_sharp tf-submit"><?php echo esc_html( $tf_hotel_book_avaibality_button_text ); ?></button>
                 </div>
             </form>
 
@@ -2850,7 +2847,7 @@ class Hotel {
                         // flatpickr locale first day of Week
 						<?php Helper::tf_flatpickr_locale( "root" ); ?>
 
-                        $(".tf-template-3 .tf-booking-date-wrap").on("click", function () {
+                        $(".tf-single-template__three .tf-booking-date-wrap").on("click", function () {
                             $(".tf-check-in-out-date").trigger("click");
                         });
                         $(".tf-check-in-out-date").flatpickr({
@@ -2885,13 +2882,13 @@ class Hotel {
                                 ];
                                 if (selectedDates[0]) {
                                     const startDate = selectedDates[0];
-                                    $(".tf-template-3 .tf-booking-form-checkin span.tf-booking-date").html(startDate.getDate());
-                                    $(".tf-template-3 .tf-booking-form-checkin span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
+                                    $(".tf-single-template__three .tf-booking-form-checkin span.tf-booking-date").html(startDate.getDate());
+                                    $(".tf-single-template__three .tf-booking-form-checkin span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
                                 }
                                 if (selectedDates[1]) {
                                     const endDate = selectedDates[1];
-                                    $(".tf-template-3 .tf-booking-form-checkout span.tf-booking-date").html(endDate.getDate());
-                                    $(".tf-template-3 .tf-booking-form-checkout span.tf-booking-month span").html(monthNames[endDate.getMonth()]);
+                                    $(".tf-single-template__three .tf-booking-form-checkout span.tf-booking-date").html(endDate.getDate());
+                                    $(".tf-single-template__three .tf-booking-form-checkout span.tf-booking-month span").html(monthNames[endDate.getMonth()]);
                                 }
                             }
                         }
@@ -2911,8 +2908,7 @@ class Hotel {
                                 <path d="M3.0625 0.75C3.28125 0.75 3.5 0.96875 3.5 1.1875V2.5H8.75V1.1875C8.75 0.96875 8.94141 0.75 9.1875 0.75C9.40625 0.75 9.625 0.96875 9.625 1.1875V2.5H10.5C11.457 2.5 12.25 3.29297 12.25 4.25V13C12.25 13.9844 11.457 14.75 10.5 14.75H1.75C0.765625 14.75 0 13.9844 0 13V4.25C0 3.29297 0.765625 2.5 1.75 2.5H2.625V1.1875C2.625 0.96875 2.81641 0.75 3.0625 0.75ZM11.375 6H8.53125V7.96875H11.375V6ZM11.375 8.84375H8.53125V11.0312H11.375V8.84375ZM11.375 11.9062H8.53125V13.875H10.5C10.9648 13.875 11.375 13.4922 11.375 13V11.9062ZM7.65625 11.0312V8.84375H4.59375V11.0312H7.65625ZM4.59375 13.875H7.65625V11.9062H4.59375V13.875ZM3.71875 11.0312V8.84375H0.875V11.0312H3.71875ZM0.875 11.9062V13C0.875 13.4922 1.25781 13.875 1.75 13.875H3.71875V11.9062H0.875ZM0.875 7.96875H3.71875V6H0.875V7.96875ZM4.59375 7.96875H7.65625V6H4.59375V7.96875ZM10.5 3.375H1.75C1.25781 3.375 0.875 3.78516 0.875 4.25V5.125H11.375V4.25C11.375 3.78516 10.9648 3.375 10.5 3.375Z" fill="#6E655E"/>
                             </svg>
                             <input type="text" name="check-in-out-date" id="check-in-out-date" class="tf-field tf-check-in-out-date" onkeypress="return false;"
-                                   placeholder="<?php esc_html_e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . esc_attr( $check_in_out ) . '"' : '' ?> required
-                                   style="width: 100% !important;">
+                                   placeholder="<?php esc_html_e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . esc_attr( $check_in_out ) . '"' : '' ?> required>
                         </div>
                     </label>
                 </div>
@@ -2971,8 +2967,8 @@ class Hotel {
                     <input type="hidden" name="type" value="<?php echo esc_attr( $ptype ); ?>" class="tf-post-type"/>
                     <input type="hidden" name="post_id" value="<?php echo esc_attr( get_the_ID() ); ?>"/>
                     <input type="hidden" name="children_ages" value="<?php echo esc_attr( $children_ages ); ?>"/>
-                    <div class="tf-btn">
-                        <button class="tf-btn-normal btn-primary tf-submit" type="submit"><?php echo esc_html( $tf_hotel_book_avaibality_button_text ); ?></button>
+                    <div class="tf-btn-wrap">
+                        <button class="tf_btn tf_btn_full tf-submit" type="submit"><?php echo esc_html( $tf_hotel_book_avaibality_button_text ); ?></button>
                         <span class="tf-hotel-error-msg"><?php echo esc_html__('Please select check in and check out date', 'tourfic') ?></span>
                     </div>
                 </div>
@@ -3043,8 +3039,8 @@ class Hotel {
                     <input type="hidden" name="post_id" value="<?php echo esc_attr( get_the_ID() ); ?>"/>
                     <input type="hidden" name="children_ages" value="<?php echo esc_attr( $children_ages ); ?>"/>
 
-                    <div class="tf-btn">
-                        <button class="tf_button tf-submit btn-styled"
+                    <div class="tf-btn-wrap">
+                        <button class="tf_btn tf_btn_full tf-submit"
                                 type="submit"><?php echo esc_html( $tf_hotel_book_avaibality_button_text ); ?></button>
                     </div>
 
@@ -3388,7 +3384,7 @@ class Hotel {
                 <div class="tf-booking-pagination tf-hotel-booking-pagination">
 					<?php if ( empty( $airport_service_type ) && 3 != $room_book_by && empty( $enable_guest_info ) ) { ?>
                         <div class="tf-control-pagination show">
-                            <button class="hotel-room-book" type="submit"><?php echo __( "Continue", "tourfic" ); ?></button>
+                            <button class="hotel-room-book tf_btn" type="submit"><?php echo __( "Continue", "tourfic" ); ?></button>
                         </div>
 						<?php
 					}
@@ -3396,9 +3392,9 @@ class Hotel {
                         <div class="tf-control-pagination show tf-pagination-content-1">
 							<?php
 							if ( 3 != $room_book_by && empty( $enable_guest_info ) ) { ?>
-                                <button type="submit" class="hotel-room-book"><?php echo !empty( tfopt( 'hotel_service_popup_action' ) ) ? tfopt( 'hotel_service_popup_action' ) : __( "Continue", "tourfic" ); ?></button>
+                                <button type="submit" class="hotel-room-book tf_btn"><?php echo !empty( tfopt( 'hotel_service_popup_action' ) ) ? tfopt( 'hotel_service_popup_action' ) : __( "Continue", "tourfic" ); ?></button>
 							<?php } else { ?>
-                                <a href="#" class="tf-next-control tf-tabs-control"
+                                <a href="#" class="tf-next-control tf-tabs-control tf_btn"
                                    data-step="<?php echo 3 == $room_book_by && empty( $enable_guest_info ) ? esc_attr( "3" ) : esc_attr( "2" ); ?>"><?php echo !empty( tfopt( 'hotel_service_popup_action' ) ) ? tfopt( 'hotel_service_popup_action' ) : __( "Continue", "tourfic" ); ?></a>
 							<?php } ?>
                         </div>
@@ -3413,9 +3409,9 @@ class Hotel {
 							<?php }
 							if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && 3 == $room_book_by ) {
 								?>
-                                <a href="#" class="tf-next-control tf-tabs-control tf-traveller-error" data-step="3"><?php echo __( "Continue", "tourfic" ); ?></a>
+                                <a href="#" class="tf-next-control tf-tabs-control tf_btn tf-traveller-error" data-step="3"><?php echo __( "Continue", "tourfic" ); ?></a>
 							<?php } else { ?>
-                                <button type="submit" class="tf-traveller-error <?php echo !empty( $room_book_by ) && 3 != $room_book_by ? 'hotel-room-book' : '';  ?>"><?php echo __( "Continue", "tourfic" ); ?></button>
+                                <button type="submit" class="tf-traveller-error tf_btn <?php echo !empty( $room_book_by ) && 3 != $room_book_by ? 'hotel-room-book' : '';  ?>"><?php echo __( "Continue", "tourfic" ); ?></button>
 							<?php } ?>
                         </div>
 					<?php }
@@ -3428,7 +3424,7 @@ class Hotel {
 							if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ( $airport_service_type || $enable_guest_info ) ) { ?>
                                 <a href="#" class="tf-back-control tf-step-back" data-step="2"><i class="fa fa-angle-left"></i><?php echo __( "Back", "tourfic" ); ?></a>
 							<?php } ?>
-                            <button type="submit" class="tf-hotel-book-confirm-error"><?php echo __( "Continue", "tourfic" ); ?></button>
+                            <button type="submit" class="tf-hotel-book-confirm-error tf_btn"><?php echo __( "Continue", "tourfic" ); ?></button>
                         </div>
 					<?php } ?>
                 </div>
@@ -3816,7 +3812,7 @@ class Hotel {
 							<?php echo wp_kses_post(Pricing::instance( $post_id )->get_min_price_html($period)); ?>
                         </div>
                         <div class="tf-booking-bttns">
-                            <a class="tf-btn-normal btn-secondary" href="<?php echo esc_url( $url ); ?>"><?php esc_html_e( "View Details", "tourfic" ); ?></a>
+                            <a class="tf_btn tf_btn_gray" href="<?php echo esc_url( $url ); ?>"><?php esc_html_e( "View Details", "tourfic" ); ?></a>
                         </div>
                     </div>
                 </div>
@@ -3960,7 +3956,7 @@ class Hotel {
                             </span>
                             </div>
                         </div>
-                        <a href="<?php echo esc_url( $url ); ?>" class="view-hotel"><?php esc_html_e( "See details", "tourfic" ); ?></a>
+                        <a href="<?php echo esc_url( $url ); ?>" class="tf_btn tf_btn_large tf_btn_sharp"><?php esc_html_e( "See details", "tourfic" ); ?></a>
                     </div>
                 </div>
             </div>
@@ -3977,20 +3973,13 @@ class Hotel {
 						?>
                     </a>
 
-					<div class="tf-tag-items">
-						<?php
-						if ( ! empty( $min_discount_amount ) ) : ?>
-							<div class="tf-tag-item">
-								<?php echo $min_discount_type == "percent" ? wp_kses_post($min_discount_amount . '%') : wp_kses_post(wc_price( $min_discount_amount )) ?>
-								<?php esc_html_e( " Off", "tourfic" ); ?>
-							</div>
-						<?php endif; ?>
-						<?php if ( $featured ): ?>
-							<div class="tf-tag-item">
-								<?php echo ! empty( $meta['featured_text'] ) ? esc_html( $meta['featured_text'] ) : esc_html( "HOT DEAL" ); ?>
-							</div>
-						<?php endif; ?>
-					</div>
+					<?php
+					if ( ! empty( $min_discount_amount ) ) : ?>
+                        <div class="tf-archive-hotel-discount">
+							<?php echo $min_discount_type == "percent" ? wp_kses_post($min_discount_amount . '%') : wp_kses_post(wc_price( $min_discount_amount )) ?>
+							<?php esc_html_e( " Off", "tourfic" ); ?>
+                        </div>
+					<?php endif; ?>
                 </div>
                 <div class="tf-archive-hotel-content">
                     <div class="tf-archive-hotel-content-left">
@@ -4004,8 +3993,9 @@ class Hotel {
 						<?php endif; ?>
                         <h4 class="tf-section-title">
                             <a href="<?php echo esc_url( $url ); ?>">
-                                <?php echo wp_kses_post(Helper::tourfic_character_limit_callback( get_the_title(), 45 )); ?>
+                                <?php echo wp_kses_post(Helper::tourfic_character_limit_callback( get_the_title(), 55 )); ?>
                             </a>
+                            <?php echo wp_kses_post(Helper::edit_link(get_the_ID())) ?>
                         </h4>
 						<?php if ( $features ) { ?>
                             <ul class="features">
@@ -4041,7 +4031,7 @@ class Hotel {
                         <div class="tf-archive-hotel-price">
 							<?php echo wp_kses_post(Pricing::instance( $post_id )->get_min_price_html()); ?>
                         </div>
-                        <a href="<?php echo esc_url( $url ); ?>" class="view-hotel"><?php esc_html_e( "View Details", "tourfic" ); ?></a>
+                        <a href="<?php echo esc_url( $url ); ?>" class="tf_btn tf_btn_gray tf_btn_small"><?php esc_html_e( "View Details", "tourfic" ); ?></a>
                     </div>
                 </div>
             </div>
@@ -4110,7 +4100,7 @@ class Hotel {
                                             <p><?php echo esc_html( substr( wp_strip_all_tags( get_the_content() ), 0, 160 ) ) . '...'; ?></p>
                                         </div>
                                     </div>
-                                    <div class="roomNameInner">
+                                    <div class="tf_room_name_inner">
                                         <div class="room_link">
                                             <div class="roomrow_flex">
 
@@ -4149,7 +4139,7 @@ class Hotel {
 
                                                 <div class="roomPrice roomPrice_flex sr_discount" style="<?php echo empty( $features ) ? 'text-align:left' : ''; ?>">
                                                     <div class="availability-btn-area">
-                                                        <a href="<?php echo esc_url( $url ); ?>" class="tf_button btn-styled"><?php esc_html_e( 'View Details', 'tourfic' ); ?></a>
+                                                        <a href="<?php echo esc_url( $url ); ?>" class="tf_btn"><?php esc_html_e( 'View Details', 'tourfic' ); ?></a>
                                                     </div>
                                                     <!-- Show minimum price @author - Hena -->
                                                     <div class="tf-room-price-area">
@@ -4201,7 +4191,7 @@ class Hotel {
 						$tf_room_gallery = ! empty( $room['gallery'] ) ? $room['gallery'] : '';
 						$child_age_limit = ! empty( $room['children_age_limit'] ) ? $room['children_age_limit'] : "";
 						?>
-                        <div class="tf-hotel-details-qc-gallelry" style="width: 545px;">
+                        <div class="tf-hotel-details-qc-gallelry">
 							<?php
 							if ( $tf_room_gallery ) {
 								$tf_room_gallery_ids = explode( ',', $tf_room_gallery );
@@ -4209,7 +4199,7 @@ class Hotel {
 
 							?>
 
-                            <div class="tf-details-qc-slider tf-details-qc-slider-single">
+                            <div class="tf-details-qc-slider tf-details-qc-slider-single tf-slick-slider">
 								<?php
 								if ( ! empty( $tf_room_gallery_ids ) ) {
 									foreach ( $tf_room_gallery_ids as $key => $gallery_item_id ) {
@@ -4223,7 +4213,7 @@ class Hotel {
 									<?php }
 								} ?>
                             </div>
-                            <div class="tf-details-qc-slider tf-details-qc-slider-nav">
+                            <div class="tf-details-qc-slider tf-details-qc-slider-nav tf-slick-slider">
 								<?php
 								if ( ! empty( $tf_room_gallery_ids ) ) {
 									foreach ( $tf_room_gallery_ids as $key => $gallery_item_id ) {
@@ -4298,7 +4288,7 @@ class Hotel {
                             </script>
 
                         </div>
-                        <div class="tf-hotel-details-info" style="width:440px; padding-left: 35px;max-height: 470px;padding-top: 25px; overflow-y: scroll;">
+                        <div class="tf-hotel-details-info">
 							<?php
 							$footage      = ! empty( $room['footage'] ) ? $room['footage'] : '';
 							$bed          = ! empty( $room['bed'] ) ? $room['bed'] : '';
@@ -4579,7 +4569,7 @@ class Hotel {
                     <div class="tf-room-modal-inner">
                         <div class="tf-room-modal-gallery <?php echo empty( $tf_room_gallery ) ? esc_attr('tf-room-modal-no-gallery') : ''?>">
 		                    <?php if ( ! empty( $tf_room_gallery ) ): ?>
-                                <div class="tf-room-gallery-slider">
+                                <div class="tf-room-gallery-slider tf-slick-slider">
 				                    <?php
 				                    if ( ! empty( $tf_room_gallery_ids ) ) {
 					                    foreach ( $tf_room_gallery_ids as $gallery_item_id ) {
@@ -4588,7 +4578,7 @@ class Hotel {
 					                    }
 				                    } ?>
                                 </div>
-                                <div class="tf-room-gallery-slider-nav">
+                                <div class="tf-room-gallery-slider-nav tf-slick-slider">
 				                    <?php
 				                    if ( ! empty( $tf_room_gallery_ids ) ) {
 					                    foreach ( $tf_room_gallery_ids as $gallery_item_id ) {
@@ -4880,7 +4870,7 @@ class Hotel {
 						if ( $term ) {
 							echo '<li><label for="' . esc_attr( $term->slug ) . '">';
 							echo '<input type="checkbox" name="features" class="" value="' . esc_attr( $feature ) . '" id="' . esc_attr( $term->slug ) . '">';
-							echo "<span class='checkmark'></span>";
+							echo "<span class='tf-checkmark'></span>";
 							echo esc_html( $term->name ) . '</label>';
 							echo "</li>";
 						}

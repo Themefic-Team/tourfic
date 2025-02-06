@@ -23,8 +23,10 @@ class Migrator {
 		}
 		add_action( 'admin_init', array( $this, 'tf_hotel_room_migrate' ) );
 		add_action( 'init', array( $this, 'tf_rooms_data_add_in_hotel' ) );
-//		add_action( 'admin_init', array( $this, 'tf_search_keys_migrate' ) );
+		//		add_action( 'admin_init', array( $this, 'tf_search_keys_migrate' ) );
 		add_action( 'admin_init', array( $this, 'tf_migrate_tf_enquiry_data' ) );
+		add_action( 'admin_init', array( $this, 'tf_template_migrate_data' ) );
+		add_action( 'admin_init', array( $this, 'tf_migrate_color_palatte_data' ) );
 	}
 
 	function tf_permalink_settings_migration() {
@@ -89,12 +91,113 @@ class Migrator {
 			}
 
 			update_option( 'tf_min_max_price_migrate', 2 );
+		}
+	}
 
-			// echo "<pre>";
-			// print_r(AptPricing::get_min_max_price_from_all_apartment());
-			// echo "</pre>";
-			// die(); // added by - Sunvi
+	/**
+	 * Template data migrate repeater to switch-group
+	 *
+	 * run once
+	 */
+	function tf_template_migrate_data() {
+		if ( empty( get_option( 'tf_template_migrate_data' ) ) || ( ! empty( get_option( 'tf_template_migrate_data' ) ) && get_option( 'tf_template_migrate_data' ) < 1 ) ) {
+			$settings = ! empty( get_option( 'tf_settings' ) ) ? get_option( 'tf_settings' ) : array();
+			$single_hotel_layout = $single_hotel_layout1 = $single_hotel_layout2 = [];
+			$single_tour_layout = $single_tour_layout1 = $single_tour_layout2 = [];
+			$single_apartment_layout1 = $single_apartment_layout2 = [];
+			$single_car_layout = [];
+			//Hotel
+			if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout']) ){
+				foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout'] as $key => $section){
+					$single_hotel_layout[$key]['label'] = !empty($section['hotel-section']) ? $section['hotel-section'] : '';
+					$single_hotel_layout[$key]['slug'] = !empty($section['hotel-section-slug']) ? $section['hotel-section-slug'] : '';
+					$single_hotel_layout[$key]['status'] = !empty($section['hotel-section-status']) ? $section['hotel-section-status'] : '0';
+				}
+			}
+			if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout-part-1']) ){
+				foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout-part-1'] as $key => $section){
+					$single_hotel_layout1[$key]['label'] = !empty($section['hotel-section']) ? $section['hotel-section'] : '';
+					$single_hotel_layout1[$key]['slug'] = !empty($section['hotel-section-slug']) ? $section['hotel-section-slug'] : '';
+					$single_hotel_layout1[$key]['status'] = !empty($section['hotel-section-status']) ? $section['hotel-section-status'] : '0';
+				}
+			}
+			if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout-part-2']) ){
+				foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout-part-2'] as $key => $section){
+					$single_hotel_layout2[$key]['label'] = !empty($section['hotel-section']) ? $section['hotel-section'] : '';
+					$single_hotel_layout2[$key]['slug'] = !empty($section['hotel-section-slug']) ? $section['hotel-section-slug'] : '';
+					$single_hotel_layout2[$key]['status'] = !empty($section['hotel-section-status']) ? $section['hotel-section-status'] : '0';
+				}
+			}
 
+			//Tour
+			if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-tour-layout']) ){
+				foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-tour-layout'] as $key => $section){
+					$single_tour_layout[$key]['label'] = !empty($section['tour-section']) ? $section['tour-section'] : '';
+					$single_tour_layout[$key]['slug'] = !empty($section['tour-section-slug']) ? $section['tour-section-slug'] : '';
+					$single_tour_layout[$key]['status'] = !empty($section['tour-section-status']) ? $section['tour-section-status'] : '0';
+				}
+			}
+			if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-tour-layout-part-1']) ){
+				foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-tour-layout-part-1'] as $key => $section){
+					$single_tour_layout1[$key]['label'] = !empty($section['tour-section']) ? $section['tour-section'] : '';
+					$single_tour_layout1[$key]['slug'] = !empty($section['tour-section-slug']) ? $section['tour-section-slug'] : '';
+					$single_tour_layout1[$key]['status'] = !empty($section['tour-section-status']) ? $section['tour-section-status'] : '0';
+				}
+			}
+			if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-tour-layout-part-2']) ){
+				foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-tour-layout-part-2'] as $key => $section){
+					$single_tour_layout2[$key]['label'] = !empty($section['tour-section']) ? $section['tour-section'] : '';
+					$single_tour_layout2[$key]['slug'] = !empty($section['tour-section-slug']) ? $section['tour-section-slug'] : '';
+					$single_tour_layout2[$key]['status'] = !empty($section['tour-section-status']) ? $section['tour-section-status'] : '0';
+				}
+			}
+
+			//Apartment
+			if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-aprtment-layout-part-1']) ){
+				foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-aprtment-layout-part-1'] as $key => $section){
+					$single_apartment_layout1[$key]['label'] = !empty($section['aprtment-section']) ? $section['aprtment-section'] : '';
+					$single_apartment_layout1[$key]['slug'] = !empty($section['aprtment-section-slug']) ? $section['aprtment-section-slug'] : '';
+					$single_apartment_layout1[$key]['status'] = !empty($section['aprtment-section-status']) ? $section['aprtment-section-status'] : '0';
+				}
+			}
+			if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-aprtment-layout-part-2']) ){
+				foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-aprtment-layout-part-2'] as $key => $section){
+					$single_apartment_layout2[$key]['label'] = !empty($section['aprtment-section']) ? $section['aprtment-section'] : '';
+					$single_apartment_layout2[$key]['slug'] = !empty($section['aprtment-section-slug']) ? $section['aprtment-section-slug'] : '';
+					$single_apartment_layout2[$key]['status'] = !empty($section['aprtment-section-status']) ? $section['aprtment-section-status'] : '0';
+				}
+			}
+
+			//Car
+			if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-car-layout']) ){
+				foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-car-layout'] as $key => $section){
+					$single_car_layout[$key]['label'] = !empty($section['car-section']) ? $section['car-section'] : '';
+					$single_car_layout[$key]['slug'] = !empty($section['car-section-slug']) ? $section['car-section-slug'] : '';
+					$single_car_layout[$key]['status'] = !empty($section['car-section-status']) ? $section['car-section-status'] : '0';
+				}
+			}
+
+			//Hotel
+			$settings['tf-template']['single-hotel-layout'] = $single_hotel_layout;
+			$settings['tf-template']['single-hotel-layout-part-1'] = $single_hotel_layout1;
+			$settings['tf-template']['single-hotel-layout-part-2'] = $single_hotel_layout2;
+			
+			//Tour
+			$settings['tf-template']['single-tour-layout'] = $single_tour_layout;
+			$settings['tf-template']['single-tour-layout-part-1'] = $single_tour_layout1;
+			$settings['tf-template']['single-tour-layout-part-2'] = $single_tour_layout2;
+
+			//Apartment
+			$settings['tf-template']['single-aprtment-layout-part-1'] = $single_apartment_layout1;
+			$settings['tf-template']['single-aprtment-layout-part-2'] = $single_apartment_layout2;
+			
+			//Car
+			$settings['tf-template']['single-car-layout'] = $single_car_layout;
+
+			update_option( 'tf_settings', $settings );
+			wp_cache_flush();
+			flush_rewrite_rules( true );
+			update_option( 'tf_template_migrate_data', 1 );
 		}
 	}
 
@@ -525,6 +628,75 @@ class Migrator {
 			update_option( 'tf_template_1_car_migrate_data', 1 );
 		}
 
+	}
+
+	/**
+	 * Color Migrate
+	 *
+	 * run once
+	 */
+	function tf_migrate_color_palatte_data(){
+		if ( empty( get_option( 'tf_color_data_migrate' ) ) || ( ! empty( get_option( 'tf_color_data_migrate' ) ) && get_option( 'tf_color_data_migrate' ) < 1 ) ) {
+			$options = ! empty( get_option( 'tf_settings' ) ) ? get_option( 'tf_settings' ) : array();
+			$options["color-palette-template"] = 'custom';
+
+			$prev_primary = !empty($options['tourfic-design1-global-color']) ? unserialize($options['tourfic-design1-global-color']) : '';
+			$prev_body_text = !empty($options['tourfic-design1-p-global-color']) ? unserialize($options['tourfic-design1-p-global-color']) : '';
+			$prev_template3 = !empty($options['tourfic-template3-bg']) ? unserialize($options['tourfic-template3-bg']) : '';
+			if(!empty($options["tf-custom"])){
+				$tf_custom_palatte = is_string($options["tf-custom"]) ? unserialize($options["tf-custom"]) : $options["tf-custom"];
+			} else {
+				$tf_custom_palatte = [];
+			}
+
+			if(!empty($options['tf-template'])){
+				$current_template = $options['tf-template']['single-hotel'];
+				if("design-1"==$current_template){
+
+					$tf_custom_palatte['primary'] = !empty($prev_primary['gcolor']) ? $prev_primary['gcolor'] : '#0E3DD8';
+					$tf_custom_palatte['text'] = !empty($prev_body_text['pgcolor']) ? $prev_body_text['pgcolor'] : '#686E7A';
+					$tf_custom_palatte['secondary'] = '#003C7A';
+					$tf_custom_palatte['heading'] = '#060D1C';
+					$tf_custom_palatte['light-bg'] = '#faeedc';
+					$tf_custom_palatte['highlights-bg'] = '#FCF4E8';
+					$tf_custom_palatte['form-input-bg'] = '#F3F7FA';
+					$tf_custom_palatte['box-shadow'] = '#e0e8ee52';
+					$tf_custom_palatte['border-color'] = '#ddd';
+					$options["tf-custom"] = $tf_custom_palatte;
+
+				}elseif("design-2"==$current_template){
+
+					$tf_custom_palatte['primary'] = !empty($prev_primary['gcolor']) ? $prev_primary['gcolor'] : '#B58E53';
+					$tf_custom_palatte['text'] = !empty($prev_body_text['pgcolor']) ? $prev_body_text['pgcolor'] : '#99948D';
+					$tf_custom_palatte['highlights-bg'] = !empty($prev_template3['template3-highlight']) ? $prev_template3['template3-highlight'] : '#FCF4E8';
+					$tf_custom_palatte['secondary'] = '#917242';
+					$tf_custom_palatte['heading'] = '#595349';
+					$tf_custom_palatte['light-bg'] = '#faeedc';
+					$tf_custom_palatte['form-input-bg'] = '#F3F7FA';
+					$tf_custom_palatte['box-shadow'] = '#e0e8ee52';
+					$tf_custom_palatte['border-color'] = '#ddd';
+					$options["tf-custom"] = $tf_custom_palatte;
+				
+				}elseif("default"==$current_template){
+
+					$tf_custom_palatte['primary'] = !empty($prev_primary['gcolor']) ? $prev_primary['gcolor'] : '#003162';
+					$tf_custom_palatte['text'] = !empty($prev_body_text['pgcolor']) ? $prev_body_text['pgcolor'] : '#000';
+					$tf_custom_palatte['secondary'] = '#0054A8';
+					$tf_custom_palatte['heading'] = '#000';
+					$tf_custom_palatte['light-bg'] = '#faeedc';
+					$tf_custom_palatte['highlights-bg'] = '#FCF4E8';
+					$tf_custom_palatte['form-input-bg'] = '#F3F7FA';
+					$tf_custom_palatte['box-shadow'] = '#e0e8ee52';
+					$tf_custom_palatte['border-color'] = '#ddd';
+					$options["tf-custom"] = $tf_custom_palatte;
+				}
+
+				update_option( 'tf_settings', $options );
+				wp_cache_flush();
+				flush_rewrite_rules( true );
+				update_option( 'tf_color_data_migrate', 1 );
+			}
+		}
 	}
 
 	/**

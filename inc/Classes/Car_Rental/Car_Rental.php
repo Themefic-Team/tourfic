@@ -19,6 +19,7 @@ class Car_Rental
         Car_Rental_CPT::instance();
     }
 
+
     function tf_car_assign_inline_taxonomies($post_id, $post, $old_status)
     {
         if ('tf_carrental' !== $post->post_type) {
@@ -62,7 +63,7 @@ class Car_Rental
         $disable_apartment_infant_search  = ! empty(Helper::tfopt('disable_apartment_infant_search')) ? Helper::tfopt('disable_apartment_infant_search') : '';
 
         if (!empty($design) && 2 == $design) {
-        ?>
+?>
             <form class="tf_booking-widget-design-2 tf_hotel-shortcode-design-2" id="tf_car_booking" method="get" autocomplete="off" action="<?php echo esc_url(Helper::tf_booking_search_action()); ?>">
                 <div class="tf_hotel_searching">
                     <div class="tf_form_innerbody">
@@ -378,7 +379,7 @@ class Car_Rental
                                 </div>
                                 <div class="info-select">
                                     <h5><?php esc_html_e("Time", "tourfic"); ?></h5>
-                                    <input type="text" placeholder="<?php esc_html_e("Pick Up Time", "tourfic"); ?>" name="pickup-time" class="tf_pickup_time" />
+                                    <input type="text" placeholder="Pick Up Time" name="pickup-time" class="tf_pickup_time" />
                                 </div>
                             </div>
                         </div>
@@ -394,7 +395,7 @@ class Car_Rental
                                 </div>
                                 <div class="info-select">
                                     <h5><?php esc_html_e("Drop-off date", "tourfic"); ?></h5>
-                                    <input type="text" placeholder="<?php esc_html_e("Drop Off Date", "tourfic"); ?>" name="dropoff-date" class="tf_dropoff_date" />
+                                    <input type="text" placeholder="Drop Off Date" name="dropoff-date" class="tf_dropoff_date" />
                                 </div>
                             </div>
                         </div>
@@ -434,14 +435,14 @@ class Car_Rental
                             <li>
                                 <label><?php esc_html_e("Return in the same location", "tourfic"); ?>
                                     <input type="checkbox" name="same_location">
-                                    <span class="checkmark"></span>
+                                    <span class="tf-checkmark"></span>
                                 </label>
                             </li>
                             <li>
                                 <label><?php esc_html_e("Age of driver ", "tourfic"); ?>
                                     <?php echo esc_attr($car_driver_min_age); ?>-<?php echo esc_attr($car_driver_max_age); ?>?
                                     <input type="checkbox" name="driver_age">
-                                    <span class="checkmark"></span>
+                                    <span class="tf-checkmark"></span>
                                 </label>
                             </li>
                         </ul>
@@ -465,7 +466,6 @@ class Car_Rental
                             enableTime: false,
                             dateFormat: "Y/m/d",
                             minDate: "today",
-                            disableMobile: true,
 
                             // flatpickr locale
                             <?php Helper::tf_flatpickr_locale(); ?>
@@ -485,7 +485,6 @@ class Car_Rental
                             enableTime: false,
                             dateFormat: "Y/m/d",
                             minDate: "today",
-                            disableMobile: true,
 
                             // flatpickr locale
                             <?php Helper::tf_flatpickr_locale(); ?>
@@ -503,7 +502,6 @@ class Car_Rental
                             enableTime: true,
                             noCalendar: true,
                             dateFormat: "H:i",
-                            disableMobile: true,
 
                             // flatpickr locale
                             <?php Helper::tf_flatpickr_locale(); ?>
@@ -522,8 +520,6 @@ class Car_Rental
                             enableTime: true,
                             noCalendar: true,
                             dateFormat: "H:i",
-                            disableMobile: true,
-
                             // flatpickr locale
                             <?php Helper::tf_flatpickr_locale(); ?>
 
@@ -620,7 +616,7 @@ class Car_Rental
                                             </svg>
                                         </div>
                                     </h5>
-                                    <input type="text" placeholder="<?php esc_html_e("Pick Up Time", "tourfic"); ?>" name="pickup-time" class="tf_pickup_time_field tf-check-inout-hidden" />
+                                    <input type="text" placeholder="Pick Up Time" name="pickup-time" class="tf_pickup_time_field tf-check-inout-hidden" />
                                 </div>
                             </div>
                         </div>
@@ -693,14 +689,14 @@ class Car_Rental
                         <li>
                             <label><?php esc_html_e("Return in the same location", "tourfic"); ?>
                                 <input type="checkbox" name="same_location">
-                                <span class="checkmark"></span>
+                                <span class="tf-checkmark"></span>
                             </label>
                         </li>
                         <li>
                             <label><?php esc_html_e("Age of driver ", "tourfic"); ?>
                                 <?php echo esc_attr($car_driver_min_age); ?>-<?php echo esc_attr($car_driver_max_age); ?>?
                                 <input type="checkbox" name="driver_age">
-                                <span class="checkmark"></span>
+                                <span class="tf-checkmark"></span>
                             </label>
                         </li>
                     </ul>
@@ -931,7 +927,7 @@ class Car_Rental
 
                     <div class="tf_submit-wrap">
                         <input type="hidden" name="type" value="tf_carrental" class="tf-post-type" />
-                        <button class="tf_button tf-submit btn-styled" type="submit"><?php esc_html_e(apply_filters("tf_car_search_form_submit_button_text", 'Search'), 'tourfic'); ?></button>
+                        <button class="tf_btn tf-submit" type="submit"><?php esc_html_e(apply_filters("tf_car_search_form_submit_button_text", 'Search'), 'tourfic'); ?></button>
                     </div>
 
                 </div>
@@ -1020,7 +1016,7 @@ class Car_Rental
                     });
                 })(jQuery);
             </script>
-        <?php
+<?php
         }
     }
 }

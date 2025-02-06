@@ -294,27 +294,6 @@ class Pricing {
 
 		$min_max_price = array_filter($min_max_price);
 
-		if ( ! empty( $min_max_price ) && count( $min_max_price ) > 1 ) {
-			$max_price = max( $min_max_price );
-			$min_price = min( $min_max_price );
-			if ( $max_price == $min_price ) {
-				$min_price = 1;
-			}
-		}
-		if ( ! empty( $min_max_price ) && count( $min_max_price ) == 1 ) {
-			$max_price = max( $min_max_price );
-			$min_price = 1;
-		}
-		if ( empty( $min_max_price ) ) {
-			$max_price = 0;
-			$min_price = 0;
-		}
-
-		return array(
-			'max' => $max_price,
-			'min' => $min_price,
-		);
-
 		return array(
 			'min' => ! empty( $min_max_price ) ? min( $min_max_price ) : 0,
 			'max' => ! empty( $min_max_price ) ? max( $min_max_price ) : 0,
@@ -349,10 +328,10 @@ class Pricing {
 		$price_html = '';
 		if ( ! empty( $min_max_price ) ) {
 			$price_html .= esc_html__( "From ", "tourfic" );
-			if ( $sale_price != 0 && $sale_price != $regular_price ) {
+			if ( $regular_price != 0 ) {
 				$price_html .= wc_format_sale_price( $regular_price, $sale_price );
 			} else {
-				$price_html .= wp_kses_post( wc_price( $regular_price ) ) . " ";
+				$price_html .= wp_kses_post( wc_price( $sale_price ) ) . " ";
 			}
 		}
 
