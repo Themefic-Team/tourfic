@@ -722,7 +722,7 @@
   height: 230px;
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: #808080 var(--tf-light-bg);
+  scrollbar-color: #aaa #eee;
   margin-bottom: 20px;
   padding-right: 10px;
 }
@@ -748,7 +748,7 @@
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-traveller scrollbar-thumb,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-extra scrollbar-thumb,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-traveller scrollbar-thumb {
-  background-color: #808080;
+  background-color: #aaa;
   border-radius: 4px;
 }
 
@@ -1120,7 +1120,7 @@
   max-height: 230px;
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: #808080 var(--tf-light-bg);
+  scrollbar-color: #aaa #eee;
 }
 
 @media only screen and (max-width: 768px) {
@@ -1138,7 +1138,7 @@
 
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-summery .tf-booking-traveller-info scrollbar-thumb,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-summery .tf-booking-traveller-info scrollbar-thumb {
-  background-color: #808080;
+  background-color: #aaa;
   border-radius: 4px;
 }
 
@@ -3442,6 +3442,12 @@ div#tf-contact-info {
 .single-tf_tours .tf-single-template__two .tf-tour-details-right .tf-booking-price p {
   color: var(--tf-text);
   margin-bottom: 0;
+  font-size: 1.875rem;
+}
+
+.single-tf_tours .tf-single-template__two .tf-tour-details-right .tf-booking-price p span {
+  font-size: 0.875rem;
+  font-weight: 400;
 }
 
 .single-tf_tours .tf-single-template__two .tf-tour-details-right .tf-form-title p {

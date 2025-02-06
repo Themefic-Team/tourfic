@@ -28,6 +28,10 @@ $color-yellow-light: #FDF9F3;
 $btn-secondary-bg: #E3E7F2;
 $btn-secondary-text: #060D1C;
 
+$scrollbar-color: #aaa #eee;
+$scrollbar-thumb-color: #aaa;
+
+
 // Media Queries
 $min576: "only screen and (min-width: 576px)";
 $max1650: "only screen and (max-width: 1650px)";
@@ -77,6 +81,8 @@ $box-shadow-primary: 0px 13px 30px 0px $color-box-shadow;
 
 
 // admin colors
+$admin-color-primary: #2979ff;
+$admin-color-heading: #000;
 $neutral70: #404040;
 $color-error: #dc3545;
 $color-success: #198754;

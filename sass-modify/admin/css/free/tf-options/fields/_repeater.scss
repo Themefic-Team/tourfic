@@ -34,7 +34,7 @@
       &:hover {
         background-color: $blue20;
         transition: 0.4s;
-        color: $color-primary;
+        color: $admin-color-primary;
       }
     }
 
@@ -44,7 +44,7 @@
       &:hover {
         background-color: $blue20;
         transition: 0.4s;
-        color: $color-primary;
+        color: $admin-color-primary;
       }
     }
 
@@ -79,7 +79,7 @@
 
   .tf-repeater-content-wrap {
     border: 1px solid #F0F2F4;
-    background-color: $color-white;
+    background-color: #ffffff;
     padding: 10px 24px;
     box-shadow: 0px 5px 10px 1px #f5f5f5;
     overflow: hidden;
@@ -105,7 +105,7 @@
       border-radius: 4px;
       font-size: 1rem;
       font-weight: 600;
-      color: $color-white;
+      color: #ffffff;
       letter-spacing: 0.5px;
     }
   }

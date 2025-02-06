@@ -56,7 +56,7 @@
             }
             /* Handle */
             &::-webkit-scrollbar-thumb {
-                background: $color-gray;
+                background: $scrollbar-thumb-color;
                 border-radius: 50px;
                 overflow: hidden;
             }
@@ -78,7 +78,7 @@
                     gap: 24px;
                 }
                 .tf-details-left {
-                    width: calc(100% - 520px);
+                    width: calc(100% - 30%);
                     display: flex;
                     flex-direction: column;
                     gap: 32px;
@@ -245,7 +245,7 @@
                         position: relative;
                         &.tf-booking-form-guest-and-room {
                             width: 36%;
-                            padding-left: 70px;
+                            padding-left: 25px;
                             align-items: start;
                             border-right: none;
                             cursor: pointer;
@@ -254,8 +254,8 @@
                 }
                 .tf-booking-form-checkout,
                 .tf-booking-form-checkin {
-                    padding-left: 40px;
-                    padding-right: 40px;
+                    padding-left: 25px;
+                    padding-right: 25px;
                     @media only screen and (max-width: 1200px){
                         padding-right: 28px;
                         padding-left: 28px;
@@ -302,7 +302,7 @@
                     color: $color-text;
                     font-size: 1rem;
                     display: flex;
-                    flex-direction: column;
+                    flex-direction: row;
                     align-items: center;
                     text-transform: capitalize;
                     @media #{$max1024}{
@@ -781,7 +781,7 @@
             &.tf-archive-right{
                 background-color: $color-yellow-thin;
                 padding: 32px;
-                width: 480px;
+                width: 30%;
                 margin-bottom: 56px;
                 @media #{$max1024}{
                     display: none;
@@ -977,7 +977,7 @@
                     grid-template-columns: 1fr 1fr 1fr;
                     gap: 10px;
                     scrollbar-width: thin;
-                    scrollbar-color: $color-gray $color-light-bg;
+                    scrollbar-color: $scrollbar-color;
                     @media #{$max768}{
                         grid-template-columns: 1fr 1fr;
                         max-height: 320px;
@@ -986,7 +986,7 @@
                         width: 5px;
                     }
                     scrollbar-thumb {
-                        background-color: $color-gray;
+                        background-color: $scrollbar-thumb-color;
                         border-radius: 4px;
                     }
                     img.tf-popup-image {
@@ -1094,8 +1094,8 @@
             .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-checkin,
             .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-checkout{
                 max-width: none;
-                padding-left: 83px;
-                padding-right: 83px;
+                padding-left: 45px;
+                padding-right: 45px;
             } 
         }
     }
@@ -2635,7 +2635,7 @@
                     grid-template-columns: 3fr 1fr;
                     gap: 10px;
                     scrollbar-width: thin;
-                    scrollbar-color: $color-gray $color-light-bg;
+                    scrollbar-color: $scrollbar-color;
                     @media #{$max1024}{
                         grid-template-columns: 2fr 1fr;
                     }
@@ -2646,7 +2646,7 @@
                         width: 5px;
                     }
                     scrollbar-thumb {
-                        background-color: $color-gray;
+                        background-color: $scrollbar-thumb-color;
                         border-radius: 4px;
                     }
                     .tf-popup-left {
@@ -3353,8 +3353,8 @@
                     .tf-booking-form-location {
                         display: flex;
                         align-items: flex-start;
-                        padding-right: 40px;
-                        padding-left: 16px;
+                        padding-right: 25px;
+                        padding-left: 0;
                         @media only screen and (min-width: 1025px) and (max-width: 1165px) {
                             padding-right: 10px;
                             width: 25%;
@@ -3408,7 +3408,7 @@
                                 max-height: 200px;
                                 overflow: auto;
                                 scrollbar-width: thin;
-                                scrollbar-color: $color-light-bg $color-white;
+                                scrollbar-color: $scrollbar-color;
                                 padding: 8px;
                                 @media #{$max768} {
                                     width: 100%;
@@ -3417,7 +3417,7 @@
                                     width: 5px;
                                 }
                                 &::-webkit-scrollbar-thumb {
-                                    background-color: $color-gray;
+                                    background-color: $scrollbar-thumb-color;
                                     border-radius: 4px;
                                 }
                                 &::-webkit-scrollbar-track {

@@ -4,7 +4,7 @@
   padding: 1px 8px;
   border-radius: 10px;
   background: #333;
-  color: $color-white;
+  color: #ffffff;
 }
 .tf-depend-hidden.tf-depend-on {
   display: none;
@@ -41,7 +41,7 @@
 .tf-csf-badge {
   .tf-upcoming {
     display: inline-block;
-    color: $color-white;
+    color: #ffffff;
     padding: 3px 10px 3px 10px;
     border-radius: 3px;
     text-align: center;
@@ -54,7 +54,7 @@
   }
   .tf-pro {
     display: inline-block;
-    color: $color-white;
+    color: #ffffff;
     padding: 3px 10px 3px 10px;
     border-radius: 3px;
     text-align: center;
@@ -80,7 +80,7 @@
 button.tf-order-remove {
   background: #f44336 !important;
   border: 1px solid #f44336 !important;
-  color: $color-white !important;
+  color: #ffffff !important;
   padding: 2px 18px !important;
   font-family: 'lato';
   margin-top: 6px !important;
@@ -99,7 +99,7 @@ button.tf-order-remove {
   text-decoration: none;
   &:hover {
     background: #135e96;
-    color: $color-white;
+    color: #ffffff;
   }
 }
 .tf-major-update-warning {
@@ -189,7 +189,7 @@ button.tf-order-remove {
     input {
       background-color: #003C79 !important;
       border-color: #003C79 !important;
-      color: $color-white;
+      color: #ffffff;
       padding: 4px 25px;
       font-size: 1rem;
     }
@@ -202,7 +202,7 @@ button.tf-order-remove {
     input {
       background-color: #003C79 !important;
       border-color: #003C79 !important;
-      color: $color-white;
+      color: #ffffff;
       padding: 4px 25px;
       font-size: 1rem;
     }

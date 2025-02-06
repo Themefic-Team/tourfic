@@ -79,7 +79,7 @@
                     width: 100%;
                     display: block ruby;
                     scrollbar-width: thin;
-                    scrollbar-color: $color-gray $color-light-bg;
+                    scrollbar-color: $scrollbar-color;
                     &::-webkit-scrollbar {
                         width: 4px;
                     }
@@ -88,7 +88,7 @@
                         background: $color-light-bg;
                     }
                     &::-webkit-scrollbar-thumb {
-                        background-color: $color-gray;
+                        background-color: $scrollbar-thumb-color;
                         border-radius: 4px;
 
                         &:hover {

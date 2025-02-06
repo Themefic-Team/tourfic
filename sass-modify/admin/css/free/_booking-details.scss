@@ -22,7 +22,7 @@
             .tf_booking_views_button{
                 border-radius: 8px;
                 border: 1px solid #EEF6F0;
-                background: $color-white;
+                background: #ffffff;
                 padding: 4px 8px;
                 float: left;
                 height: 46px;
@@ -55,7 +55,7 @@
                 padding: 10px 32px;
                 border-radius: 8px;
                 border: 1px solid #003C79;
-                background: $color-white;
+                background: #ffffff;
                 margin: 0 !important;
                 color: #003C79;
                 font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
@@ -108,7 +108,7 @@
         display: none;
         .tf-calendar-popup-box{
             border-radius: 8px;
-            background: $color-white;
+            background: #ffffff;
             box-shadow: 0px 8px 30px 0px rgba(16, 40, 20, 0.10);
             padding: 16px 24px;
             width: 750px;
@@ -174,7 +174,7 @@
     // Booking Calendar
     #tf-booking-calendar{
         border-radius: 16px;
-        background: $color-white;
+        background: #ffffff;
         padding: 24px;
         padding-top: 30px;
         position: relative;
@@ -192,7 +192,7 @@
                             width: 40px;
                             border-radius: 8px;
                             border: 0.2px solid #003c7929;
-                            background: $color-white;
+                            background: #ffffff;
                             padding: 0;
                             transition: .3s all ease;
                             &:focus{
@@ -204,7 +204,7 @@
                                 border-color: #003c79;
                                 span{
                                     &::before{
-                                        color: $color-white;
+                                        color: #ffffff;
                                     }
                                 }
                             }
@@ -247,12 +247,12 @@
                     .fc-button-group{
                         border-radius: 24px;
                         border: 1px solid #003c7929;
-                        background: $color-white;
+                        background: #ffffff;
                         padding: 4px;
                         display: flex;
                         gap: 8px;
                         button{
-                            background: $color-white;
+                            background: #ffffff;
                             color: #131c25;
                             font-size: 0.938rem;
                             font-style: normal;
@@ -644,7 +644,7 @@
                 span.select2{
                     height: 48px;
                     border-radius: 6px;
-                    background: $color-white;
+                    background: #ffffff;
                     box-shadow: 0px 8px 20px 0px rgba(29, 35, 39, 0.06);
                     min-width: 160px !important;
                     @media #{$max1024}{
@@ -685,7 +685,7 @@
                 padding: 10px 32px;
                 border-radius: 8px;
                 border: 1px solid #003C79;
-                background: $color-white;
+                background: #ffffff;
                 box-shadow: 0px 8px 20px 0px rgba(29, 35, 39, 0.06);
                 color: #003C79;
                 font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
@@ -742,7 +742,7 @@
         .tf-right-search-filter, .tf-enquiry-right-search-filter{
             border-radius: 8px;
             border: 1px solid #87888B;
-            background: $color-white;
+            background: #ffffff;
             box-shadow: 0px 8px 20px 0px rgba(29, 35, 39, 0.06);
             padding: 8px 16px;
             display: flex;
@@ -825,7 +825,7 @@
                             &:hover{
                                 background-color: #F0F2F4;
                                 input{
-                                    background-color: $color-white;
+                                    background-color: #ffffff;
                                 }
                             }
                             input{
@@ -853,7 +853,7 @@
                         font-style: normal;
                         font-weight: 600;
                         line-height: 18px;
-                        background-color: $color-white;
+                        background-color: #ffffff;
                         border-bottom: 1px solid #F0F0F1;
                         text-align: left;
                         a{
@@ -871,7 +871,7 @@
                         .tf-checkbox-listing{
                             height: 28px;
                             width: 28px;
-                            background-color: $color-white;
+                            background-color: #ffffff;
                             border-radius: 8px;
                             display: flex;
                             align-items: center;
@@ -880,7 +880,7 @@
                             &:hover{
                                 background-color: #F0F2F4;
                                 input{
-                                    background-color: $color-white;
+                                    background-color: #ffffff;
                                     box-shadow: none;
                                 }
                             }
@@ -907,12 +907,12 @@
                             line-height: 18px;
                         }
                         .checkinout.checkout{
-                            background: $color-white;
+                            background: #ffffff;
                             color: #B54708;
                         }
                         a.tf_booking_details_view{
                             border-radius: 8px;
-                            background-color: $color-white;
+                            background-color: #ffffff;
                             display: inline-flex;
                             padding: 10px;
                             transition: .3s all ease;
@@ -954,7 +954,7 @@
                                     justify-content: center;
                                 }
                                 border-right: 1px solid #F0F0F1;
-                                background: $color-white;
+                                background: #ffffff;
                                 &:last-child{
                                     border-right: 0px solid;
                                     border-radius: 0px 8px 8px 0px;
@@ -972,7 +972,7 @@
                             li.active{
                                 background-color: #003C79;
                                 a{
-                                    color: $color-white;
+                                    color: #ffffff;
                                 }
                             }
                         }
@@ -994,14 +994,14 @@
             padding-left: 4px;
             padding-right: 4px;
             scrollbar-width: thin;
-            scrollbar-color: #aaa #eee;
+            scrollbar-color: $scrollbar-color;
             max-height: 218px;
             scrollbar {
                 width: 5px;
                 border-radius: 10px !important;
             }
             scrollbar-thumb {
-                background-color: #aaa;
+                background-color: $scrollbar-thumb-color;
                 border-radius: 10px !important;
             }
             li{
@@ -1014,8 +1014,8 @@
                 line-height: 24px;
                 margin-bottom: 4px;
                 padding: 8px 16px;
-                background-color: $color-white;
-                background: $color-white;
+                background-color: #ffffff;
+                background: #ffffff;
                 cursor: pointer;
                 border-radius: 6px;
                 transition: .3s all ease;
@@ -1038,7 +1038,7 @@
                     color: #027A48; 
                 }
                 &:last-child{
-                    background: $color-white;
+                    background: #ffffff;
                     color: #B54708;; 
                 }
             }
@@ -1131,7 +1131,7 @@
             width: calc(100% - 260px);
             .details-box{
                 border-radius: 8px;
-                background: $color-white;
+                background: #ffffff;
                 box-shadow: 0px 8px 20px 0px rgba(29, 35, 39, 0.10);
                 padding: 24px;
                 margin-top: 24px;
@@ -1280,7 +1280,7 @@
             width: 268px;
             padding: 24px;
             border-radius: 8px;
-            background: $color-white;
+            background: #ffffff;
             margin-top: 24px;
             @media #{$max768}{
                 width: auto;
@@ -1329,8 +1329,8 @@
                             color: #1D2327;
                             margin: 0px 8px 4px 8px;
                             padding: 8px 16px;
-                            background-color: $color-white;
-                            background: $color-white;
+                            background-color: #ffffff;
+                            background: #ffffff;
                             cursor: pointer;
                             font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
                             font-size: 1rem;
@@ -1351,7 +1351,7 @@
                             color: #027A48;
                         }
                         li.checkout{
-                            background: $color-white;
+                            background: #ffffff;
                             color: #B54708;
                         }
                     }
@@ -1363,7 +1363,7 @@
                     a{
                         border-radius: 8px;
                         border: 1px solid #003C79;
-                        background: $color-white;
+                        background: #ffffff;
                         box-shadow: 0px 8px 20px 0px rgba(29, 35, 39, 0.06);
                         text-decoration: none;
                         color: #003C79;
@@ -1405,7 +1405,7 @@
     .visitor-details-edit-popup{
         border-radius: 24px;
         border: 1px solid #f0f0f1;
-        background: $color-white;
+        background: #ffffff;
         position: fixed;
         left: 50%;
         top: 25%;
@@ -1430,7 +1430,7 @@
                 span{
                     height: 24px;
                     width: 24px;
-                    background: $color-white;
+                    background: #ffffff;
                     display: flex;
                     align-items: center;
                     justify-content: center;
@@ -1445,13 +1445,13 @@
             overflow-x: hidden;
             overflow-y: auto;
             scrollbar-width: thin;
-            scrollbar-color: #aaa #eee;
+            scrollbar-color: $scrollbar-color;
             padding: 16px;
             scrollbar {
                 width: 5px; 
             }
             scrollbar-thumb {
-                background-color: #aaa;
+                background-color: $scrollbar-thumb-color;
                 border-radius: 4px;
             }
             .tf-single-tour-traveller{
@@ -1541,7 +1541,7 @@
     .voucher-quick-view{
         border-radius: 24px;
         border: 1px solid #f0f0f1;
-        background: $color-white;
+        background: #ffffff;
         position: fixed;
         left: 50%;
         top: 25%;
@@ -1566,7 +1566,7 @@
                 span{
                     height: 24px;
                     width: 24px;
-                    background: $color-white;
+                    background: #ffffff;
                     display: flex;
                     align-items: center;
                     justify-content: center;
