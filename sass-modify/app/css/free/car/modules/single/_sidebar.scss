@@ -278,7 +278,7 @@
                                             i{
                                                 font-size: 1.25rem;
                                             }
-                                            color: $color-text;
+                                            color: $color-primary;
                                             font-size: 1rem;
                                             font-weight: 400;
                                             display: inline-block;
@@ -287,6 +287,9 @@
                                                     visibility: visible;
                                                     opacity: 1;
                                                 }
+                                            }
+                                            path{
+                                                stroke: $color-primary;
                                             }
                                             .tf-tooltip-info{
                                                 visibility: hidden;
