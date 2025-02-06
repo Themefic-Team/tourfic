@@ -2135,7 +2135,7 @@
   right: 0;
   width: 100%;
   z-index: 1;
-  background: var(--tf-heading);
+  background: #0000009c;
 }
 
 @media only screen and (max-width: 768px) {

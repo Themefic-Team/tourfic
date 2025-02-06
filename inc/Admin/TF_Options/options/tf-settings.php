@@ -990,7 +990,7 @@ TF_Settings::option( 'tf_settings', array(
 					'default'  => '1200',
 					'dependency'  => array( 'tf-container', '==', 'boxed' ),
 					'attributes' => array(
-						'min' => '768',
+						'min' => '770',
 						'max' => '1920',
 						'step'=> '10'
 					),
