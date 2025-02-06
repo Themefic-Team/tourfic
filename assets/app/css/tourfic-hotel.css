@@ -1141,10 +1141,6 @@
   font-weight: bold;
 }
 
-.single-tf_hotel .tf-single-template__one .show-on-map .tf_btn:hover {
-  background: linear-gradient(to bottom, var(--tf-primary) var(--tf-secondary) 100%);
-}
-
 .single-tf_hotel .tf-single-template__one .show-on-map i {
   padding-right: 8px;
   font-size: 0.938rem;

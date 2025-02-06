@@ -9,7 +9,7 @@ body.tourfic-settings_page_tf-setup-wizard {
     cursor: pointer;
     border: 0px solid;
     padding: 12px 32px;
-    color: $color-white;
+    color: #ffffff;
     font-family: Inter;
     font-size: 0.938rem;
     font-style: normal;
@@ -38,7 +38,7 @@ body.tourfic-settings_page_tf-setup-wizard {
     }
 
     &:hover {
-        color: $color-white;
+        color: #ffffff;
         box-shadow: 0px 24px 20px 0px rgba(8, 20, 33, 0.08), 0px 8px 16px 0px rgba(8, 20, 33, 0.08), 0px 16px 8px 0px rgba(8, 20, 33, 0.04);
 
         &::after {
@@ -81,7 +81,7 @@ body.tourfic-settings_page_tf-setup-wizard {
 
     &:hover {
         box-shadow: 0px 24px 20px 0px rgba(8, 20, 33, 0.08), 0px 8px 16px 0px rgba(8, 20, 33, 0.08), 0px 16px 8px 0px rgba(8, 20, 33, 0.04);
-        color: $color-white;
+        color: #ffffff;
 
         &::after {
             opacity: 1;
@@ -207,7 +207,7 @@ Welcome Step
 
     .setup-content-warper {
         border-radius: 16px;
-        background: $color-white;
+        background: #ffffff;
         text-align: center;
         padding: 104px 112px;
         @media #{$max885} {
@@ -278,7 +278,7 @@ Welcome Step
 
     .tf-setup-finish-content {
         border-radius: 16px;
-        background: $color-white;
+        background: #ffffff;
         padding: 56px 32px 96px 32px;
         text-align: center;
 
@@ -469,7 +469,7 @@ Steps
     .tf-setup-step-layout {
         padding: 56px 96px;
         border-radius: 16px;
-        background: var(--UI-0, $color-white);
+        background: var(--UI-0, #ffffff);
         text-align: center;
         @include flexbox();
         @include flex-direction(column);
@@ -533,7 +533,7 @@ Steps
         }
 
         label {
-            //border: 2px solid $color-white;
+            //border: 2px solid #ffffff;
             display: block;
             position: relative;
             cursor: pointer;
@@ -556,8 +556,8 @@ Steps
         }
 
         label:before {
-            background: $color-white
-            $color-white;
+            background: #ffffff
+            #ffffff;
             content: "";
             display: block;
             border-radius: 50%;
@@ -594,7 +594,7 @@ Steps
 
                     &:hover {
                         border-radius: 12px;
-                        background: $color-white;
+                        background: #ffffff;
                         box-shadow: 0px 10px 16px 0px rgba(0, 36, 72, 0.04), 0px 10px 20px 0px rgba(0, 36, 72, 0.04);
                     }
                 }
@@ -642,7 +642,7 @@ Steps
     .setup-form-group {
         border-radius: 12px;
         border: 1px solid #EEF2F6;
-        background: $color-white;
+        background: #ffffff;
         padding: 16px 24px 24px 24px;
         display: flex;
         flex-direction: column;
@@ -787,7 +787,7 @@ Steps
                 input[type="text"] {
                     height: 32px;
                     margin: 0;
-                    background: $color-white;
+                    background: #ffffff;
                 }
             }
         }
@@ -861,7 +861,7 @@ Steps
 
         .tf-archive-imageselect-box {
             .tf-image-checkbox .select-image-box {
-                background-color: $color-white !important
+                background-color: #ffffff !important
             }
         }
 
@@ -979,7 +979,7 @@ Steps
         display: inline-block;
         width: 12px;
         height: 12px;
-        border: 2px solid $color-white;
+        border: 2px solid #ffffff;
         border-left-color: transparent;
         border-radius: 50%;
         vertical-align: middle;

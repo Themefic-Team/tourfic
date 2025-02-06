@@ -22,7 +22,16 @@ a{
         }
     }
 }
-
+.archive,
+.single{
+    .site-content{
+        .ast-container {
+            max-width: 100%;
+            padding: 0;
+            display: block;
+        }
+    }
+}
 //Tourfic forms
 .tf-field-group.tf_form-inner,
 .tf-field-group {

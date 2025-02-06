@@ -10,8 +10,8 @@
     font-size: 0.875rem;
     width: 100%;
     &:focus {
-      background: $color-white;
-      box-shadow: 0 0 0 2px $color-primary;
+      background: #ffffff;
+      box-shadow: 0 0 0 2px $admin-color-primary;
       border-radius: 4px;
     }
   }

@@ -515,7 +515,7 @@ div#tf-destinationautocomplete-list {
                     box-shadow: 0px 20px 40px 0px rgba(0,0,0,.1);
                     overflow: auto;
                     scrollbar-width: thin;
-                    scrollbar-color: $color-gray $color-light-bg;
+                    scrollbar-color: $scrollbar-color;
                     padding: 8px;
                     z-index: 99;
                     top: 100%;
@@ -534,7 +534,7 @@ div#tf-destinationautocomplete-list {
                         width: 5px;
                     }
                     &::-webkit-scrollbar-thumb {
-                        background-color: $color-gray;
+                        background-color: $scrollbar-thumb-color;
                         border-radius: 4px;
                     }
                     &::-webkit-scrollbar-track {

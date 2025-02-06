@@ -62,7 +62,7 @@
       }
 
       &:hover {
-        background-color: $color-white;
+        background-color: #ffffff;
         outline: none;
       }
 
@@ -73,7 +73,7 @@
 
       &.active {
         background-color: #003c79;
-        color: $color-white;
+        color: #ffffff;
         position: relative;
 
         @media #{$max1024}{
@@ -81,7 +81,7 @@
         }
 
         .tf-sec-icon {
-          color: $color-white;
+          color: #ffffff;
         }
 
         &::after {
@@ -89,7 +89,7 @@
           content: "";
           height: 10px;
           width: 10px;
-          background: $color-white;
+          background: #ffffff;
           @include rotate(45);
           right: -5px;
           top: 50%;
@@ -204,7 +204,7 @@
 
   .tf-tab-wrapper {
     @include flex(0 0 calc(100% - 281px));
-    background-color: $color-white;
+    background-color: #ffffff;
     padding: 12px 0;
     @media #{$max1024}{
       flex: 0 0 calc(100% - 0px);

@@ -145,7 +145,6 @@
                 filter_xhr.abort();
             }
 
-
             //var pagination_url = '/?place=' + dest + '&adults=' + adults + '&children=' + children + '&type=' + posttype;
             //formData.append('pagination_url', pagination_url);
             filter_xhr = $.ajax({
@@ -489,10 +488,11 @@
 
         // Copy button
         $('button#share_link_button').on("click", function () {
-
             $(this).addClass('copied');
+            $(this).children('span').css('display', 'block');
             setTimeout(function () {
                 $('button#share_link_button').removeClass('copied');
+                $('button#share_link_button').children('span').css('display', 'none');
             }, 3000);
             $(this).parent().find("#share_link_input").select();
             document.execCommand("copy");
@@ -2065,8 +2065,10 @@
 
         // Copy button
         $('a#share_link_button').on("click", function (e) {
+    
             e.preventDefault();
             $(this).addClass('copied');
+           
             setTimeout(function () {
                 $('a#share_link_button').removeClass('copied');
             }, 3000);

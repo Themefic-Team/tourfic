@@ -155,7 +155,7 @@
             }
 
             &::-webkit-scrollbar-thumb {
-                background-color: $color-text;
+                background-color: $scrollbar-thumb-color;
                 border-radius: 32px;
             }
 
@@ -586,7 +586,7 @@
                 }
 
                 &::-webkit-scrollbar-thumb {
-                    background-color: $color-text;
+                    background-color: $scrollbar-thumb-color;
                     border-radius: 32px;
                 }
 
@@ -978,7 +978,7 @@
                 }
 
                 &::-webkit-scrollbar-thumb {
-                    background-color: $color-text;
+                    background-color: $scrollbar-thumb-color;
                     border-radius: 32px;
                 }
 

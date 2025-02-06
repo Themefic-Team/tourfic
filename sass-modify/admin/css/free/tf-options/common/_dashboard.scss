@@ -1,6 +1,6 @@
 .tf-setting-dashboard {
     .tf-setting-top-bar {
-        background-color: $color-white;
+        background-color: #ffffff;
         padding: 15px 40px;
         margin-left: -20px;
         margin-bottom: 30px;
@@ -19,7 +19,7 @@
             span {
                 font-size: 11px;
                 line-height: 11px;
-                color: $color-heading;
+                color: $admin-color-heading;
                 font-weight: 700;
                 border: 1px solid #003c79;
                 border-radius: 4px;
@@ -43,7 +43,7 @@
                 top: 60px;
                 right: -10px;
                 z-index: 1;
-                background-color: $color-white;
+                background-color: #ffffff;
                 padding: 30px;
                 border-radius: 8px;
                 box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -70,7 +70,7 @@
                     a {
                         font-size: 0.938rem;
                         font-weight: 500;
-                        color: $color-heading;
+                        color: $admin-color-heading;
                         display: flex;
                         align-items: center;
                         transition: all 0.2s ease;
@@ -122,7 +122,7 @@
             }
 
             span {
-                color: $color-white;
+                color: #ffffff;
                 font-size: 38px;
                 line-height: 1.2;
                 font-weight: 200;
@@ -157,7 +157,7 @@
             font-size: 26px;
             font-weight: 600;
             line-height: 36px;
-            color: $color-heading;
+            color: $admin-color-heading;
             margin: 0 0 10px;
         }
 
@@ -171,7 +171,7 @@
             .tf-single-performance-grid {
                 padding: 20px;
                 border-radius: 8px;
-                background-color: $color-white;
+                background-color: #ffffff;
                 display: flex;
                 flex-wrap: wrap;
                 margin-bottom: 15px;
@@ -226,7 +226,7 @@
                         margin: 0;
                         font-size: 30px;
                         font-weight: 700;
-                        color: $color-heading;
+                        color: $admin-color-heading;
                         line-height: 0.8;
 
                         @media #{$max1650}{
@@ -261,7 +261,7 @@
         }
 
         .tf-order-report {
-            background: $color-white;
+            background: #ffffff;
             padding: 20px;
             border-radius: 10px;
             @media #{$max640}{
@@ -301,7 +301,7 @@
 // get Help page
 .tf-settings-help-center {
     .tf-help-center-banner {
-        background-color: $color-white;
+        background-color: #ffffff;
         border-radius: 10px;
         margin: 40px 20px 40px 0;
         display: flex;
@@ -330,7 +330,7 @@
             }
 
             h2 {
-                color: $color-heading;
+                color: $admin-color-heading;
                 font-size: 34px;
                 margin: 0;
             }
@@ -365,7 +365,7 @@
         }
 
         .tf-single-support {
-            background-color: $color-white;
+            background-color: #ffffff;
             border-radius: 10px;
             width: 24%;
             min-height: 270px;
@@ -392,7 +392,7 @@
                 h3 {
                     font-size: 1.25rem;
                     margin: 0;
-                    color: $color-heading;
+                    color: $admin-color-heading;
                     display: block;
                     line-height: 24px;
                 }
@@ -413,7 +413,7 @@
 
                     &:hover {
                         background-color: #003c79;
-                        color: $color-white;
+                        color: #ffffff;
                     }
                 }
             }
@@ -422,7 +422,7 @@
 
     .tf-settings-faq {
         margin: 40px 40px 40px 20px;
-        background-color: $color-white;
+        background-color: #ffffff;
         border-radius: 10px;
         padding: 40px;
 
@@ -431,7 +431,7 @@
             font-size: 1.5rem;
             font-weight: 600;
             line-height: 28px;
-            color: $color-heading;
+            color: $admin-color-heading;
         }
 
         .tf-accordion-wrapper {
@@ -461,7 +461,7 @@
                     i {
                         font-size: 1.125rem;
                         margin-right: 10px;
-                        color: $color-heading;
+                        color: $admin-color-heading;
                     }
 
                     h4 {
@@ -512,7 +512,7 @@
                 text-decoration: none;
                 font-weight: 600;
                 position: relative;
-                background-color: $color-white;
+                background-color: #ffffff;
                 border-radius: 5px 5px 0px 0px;
 
                 &:before {
@@ -520,7 +520,7 @@
                     content: "";
                     width: 16px;
                     height: 16px;
-                    background-color: $color-white;
+                    background-color: #ffffff;
                     bottom: -8px;
                     left: -5px;
                     transform: rotate(45deg);
@@ -531,7 +531,7 @@
                     content: "";
                     width: 16px;
                     height: 16px;
-                    background-color: $color-white;
+                    background-color: #ffffff;
                     bottom: -8px;
                     right: -5px;
                     transform: rotate(45deg);
@@ -540,7 +540,7 @@
                 span {
                     display: inline-block;
                     padding: 14px 22px;
-                    color: $color-heading;
+                    color: $admin-color-heading;
                     font-size: 1.125rem;
                     text-decoration: none;
 
@@ -553,7 +553,7 @@
     }
 
     .tf-setting-license-field {
-        background-color: $color-white;
+        background-color: #ffffff;
         border-radius: 8px;
         padding: 0px 20px;
     }
@@ -566,7 +566,7 @@
 .tf-setting-wrapper {
     max-width: 100%;
     margin: 30px 20px 30px 0px;
-    background-color: $color-white;
+    background-color: #ffffff;
     border-radius: 10px;
     scroll-margin-top: 100px;
 
@@ -576,7 +576,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background-color: $color-white;
+        background-color: #ffffff;
         border-radius: 10px 10px 0px 0px;
         position: sticky;
         top: 32px;
@@ -634,7 +634,7 @@
                     left: 164px;
                     right: 0;
                     width: 379px;
-                    background-color: $color-white;
+                    background-color: #ffffff;
                     box-sizing: border-box;
                     border-radius: 4px;
                     min-height: 60px;
@@ -666,7 +666,7 @@
                             border-radius: 4px;
                             margin: 0;
                             text-decoration: none;
-                            color: $color-heading;
+                            color: $admin-color-heading;
 
                             &:focus {
                                 box-shadow: none;
@@ -748,7 +748,7 @@
                 z-index: 99999;
                 top: 0;
                 bottom: 0;
-                background-color: $color-white;
+                background-color: #ffffff;
                 @include transition(all, 0.3s, ease);
             }
 
@@ -764,7 +764,7 @@
                     @include flexbox();
                     @include align-items(center);
                     text-decoration: none;
-                    color: $color-heading;
+                    color: $admin-color-heading;
                     padding: 18px 30px;
                     font-size: 1rem;
                     text-align: left;
@@ -782,7 +782,7 @@
                     }
 
                     &:hover {
-                        background-color: $color-white;
+                        background-color: #ffffff;
                         outline: none;
                     }
 
@@ -884,7 +884,7 @@
 
                     a {
                         i {
-                            color: $color-heading;
+                            color: $admin-color-heading;
                             font-size: 22px;
                         }
                     }
@@ -904,7 +904,7 @@
                     }
 
                     > .tf-field {
-                        background-color: $color-white;
+                        background-color: #ffffff;
                         margin: 5px 0px;
                         border-radius: 8px;
                         padding: 20px 30px;
@@ -930,7 +930,7 @@
 }
 
 .tf-shortcode-generator-section {
-    background-color: $color-white;
+    background-color: #ffffff;
     padding: 30px;
     border-radius: 8px;
     margin-right: 20px;
@@ -951,7 +951,7 @@
             padding: 20px 30px;
             flex-wrap: wrap;
             flex-direction: row;
-            background-color: $color-white;
+            background-color: #ffffff;
             padding: 20px 30px;
             align-items: center;
             border-radius: 5px;
@@ -994,7 +994,7 @@
                 margin-left: 15px;
                 height: 45px;
                 background-color: #003c79;
-                color: $color-white;
+                color: #ffffff;
                 border: none;
                 box-shadow: none !important;
                 outline: none;
@@ -1029,7 +1029,7 @@
                 width: 600px;
                 margin: 30px auto;
                 padding: 30px;
-                background-color: $color-white;
+                background-color: #ffffff;
                 box-shadow: 0 10px 30px rgba(0, 0, 0, .18);
                 border-radius: 10px;
                 @media #{$max640}{
@@ -1125,7 +1125,7 @@
                     height: 36px;
                     line-height: 36px;
                     background: red;
-                    color: $color-white;
+                    color: #ffffff;
                     text-align: center;
                     font-size: 1.25rem;
                     border-radius: 50%;
@@ -1145,7 +1145,7 @@
                 input.tf-shortcode-value {
                     width: 100%;
                     height: 45px;
-                    background: $color-white;
+                    background: #ffffff;
                     padding: 10px 15px;
                     border: 1px solid #ccc;
                 }

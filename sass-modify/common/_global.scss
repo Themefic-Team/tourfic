@@ -236,6 +236,17 @@ Modal
             width: 50%;
         }
     }
+    &-extra-small{
+        .tf-modal-content {
+            width: 30%;
+            @media only screen and (max-width: 1366px) {
+                width: 40%;
+            }
+            @media #{$max1024}{
+                width: 50%;
+            }
+        }
+    }
     &-large{
         .tf-modal-content {
             width: 80%;

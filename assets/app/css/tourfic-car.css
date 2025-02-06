@@ -337,7 +337,7 @@
   width: 100%;
   display: block ruby;
   scrollbar-width: thin;
-  scrollbar-color: #808080 var(--tf-light-bg);
+  scrollbar-color: #aaa #eee;
 }
 
 .single-tf_carrental .tf-single-template__one .tf-details-menu ul::-webkit-scrollbar {
@@ -349,7 +349,7 @@
 }
 
 .single-tf_carrental .tf-single-template__one .tf-details-menu ul::-webkit-scrollbar-thumb {
-  background-color: #808080;
+  background-color: #aaa;
   border-radius: 4px;
 }
 
@@ -975,7 +975,7 @@
   box-shadow: 0px 4px 16px 0px rgba(2, 28, 53, 0.2);
   padding: 2px;
   scrollbar-width: thin;
-  scrollbar-color: #808080 #ffffff;
+  scrollbar-color: #aaa #eee;
   /* Chrome, Edge, and Safari */
 }
 
@@ -988,7 +988,7 @@
 }
 
 .single-tf_carrental .tf-single-template__one .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .autocomplete-items::-webkit-scrollbar-thumb {
-  background-color: #808080;
+  background-color: #aaa;
   border-radius: 5px;
   border: 3px solid #ffffff;
 }
@@ -1046,6 +1046,10 @@
   background: transparent;
   color: var(--tf-primary);
   transition: .3s all ease;
+}
+
+.single-tf_carrental .tf-single-template__one .tf-date-select-box .tf-form-submit-btn button.tf-partial-button svg path {
+  stroke: var(--tf-primary);
 }
 
 .single-tf_carrental .tf-single-template__one .tf-date-select-box .tf-form-submit-btn button.tf-partial-button:hover {
@@ -1736,7 +1740,7 @@
   padding: 2px;
   box-shadow: 0px 4px 16px 0px rgba(2, 28, 53, 0.2);
   scrollbar-width: thin;
-  scrollbar-color: #808080 #ffffff;
+  scrollbar-color: #aaa #eee;
   /* Chrome, Edge, and Safari */
 }
 
@@ -1758,7 +1762,7 @@
 .tax-carrental_location .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .autocomplete-items::-webkit-scrollbar-thumb,
 .tax-carrental_brand .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .autocomplete-items::-webkit-scrollbar-thumb,
 .page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .autocomplete-items::-webkit-scrollbar-thumb {
-  background-color: #808080;
+  background-color: #aaa;
   border-radius: 5px;
   border: 3px solid #ffffff;
 }

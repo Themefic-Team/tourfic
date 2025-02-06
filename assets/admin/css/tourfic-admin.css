@@ -1271,7 +1271,7 @@ Steps
 }
 
 .tf-setup-step-container .tf-select-service label:before {
-  background: #ffffff #ffffff;
+  background: #ffffff #ffffff;
   content: "";
   display: block;
   border-radius: 50%;
@@ -2032,7 +2032,7 @@ Steps
 .tf-setting-dashboard .tf-setting-top-bar .version span {
   font-size: 11px;
   line-height: 11px;
-  color: var(--tf-heading);
+  color: #000;
   font-weight: 700;
   border: 1px solid #003c79;
   border-radius: 4px;
@@ -2083,7 +2083,7 @@ Steps
 .tf-setting-dashboard .tf-setting-top-bar .other-document .dropdown .list-item a {
   font-size: 0.938rem;
   font-weight: 500;
-  color: var(--tf-heading);
+  color: #000;
   display: flex;
   align-items: center;
   transition: all 0.2s ease;
@@ -2180,7 +2180,7 @@ Steps
   font-size: 26px;
   font-weight: 600;
   line-height: 36px;
-  color: var(--tf-heading);
+  color: #000;
   margin: 0 0 10px;
 }
 
@@ -2271,7 +2271,7 @@ Steps
   margin: 0;
   font-size: 30px;
   font-weight: 700;
-  color: var(--tf-heading);
+  color: #000;
   line-height: 0.8;
 }
 
@@ -2390,7 +2390,7 @@ Steps
 }
 
 .tf-settings-help-center .tf-help-center-banner .tf-help-center-content h2 {
-  color: var(--tf-heading);
+  color: #000;
   font-size: 34px;
   margin: 0;
 }
@@ -2468,7 +2468,7 @@ Steps
 .tf-settings-help-center .tf-support-document .tf-single-support a h3 {
   font-size: 1.25rem;
   margin: 0;
-  color: var(--tf-heading);
+  color: #000;
   display: block;
   line-height: 24px;
 }
@@ -2505,7 +2505,7 @@ Steps
   font-size: 1.5rem;
   font-weight: 600;
   line-height: 28px;
-  color: var(--tf-heading);
+  color: #000;
 }
 
 .tf-settings-help-center .tf-settings-faq .tf-accordion-wrapper {
@@ -2547,7 +2547,7 @@ Steps
 .tf-settings-help-center .tf-settings-faq .tf-accordion-wrapper .tf-single-faq .tf-faq-title i {
   font-size: 1.125rem;
   margin-right: 10px;
-  color: var(--tf-heading);
+  color: #000;
 }
 
 .tf-settings-help-center .tf-settings-faq .tf-accordion-wrapper .tf-single-faq .tf-faq-title h4 {
@@ -2624,7 +2624,7 @@ Steps
 .tf-setting-license .tf-setting-license-tabs ul li.active span {
   display: inline-block;
   padding: 14px 22px;
-  color: var(--tf-heading);
+  color: #000;
   font-size: 1.125rem;
   text-decoration: none;
 }
@@ -2752,7 +2752,7 @@ Steps
   border-radius: 4px;
   margin: 0;
   text-decoration: none;
-  color: var(--tf-heading);
+  color: #000;
 }
 
 .tf-setting-wrapper .tourfic-settings-header .settings-header-left .tf-setting-search .tf-search-results ul a:focus {
@@ -2868,7 +2868,7 @@ Steps
   -ms-flex-align: center;
   align-items: center;
   text-decoration: none;
-  color: var(--tf-heading);
+  color: #000;
   padding: 18px 30px;
   font-size: 1rem;
   text-align: left;
@@ -3015,7 +3015,7 @@ Steps
 }
 
 .tf-setting-wrapper .tf-option-form .tf-option .tf-tab-wrapper .tf-mobile-setting a i {
-  color: var(--tf-heading);
+  color: #000;
   font-size: 22px;
 }
 
@@ -3383,7 +3383,7 @@ Steps
   margin-bottom: 3px;
   font-weight: 600;
   font-size: 1rem;
-  color: var(--tf-heading);
+  color: #000;
   display: flex !important;
   align-items: center;
   line-height: 20px;
@@ -3457,7 +3457,7 @@ Steps
 .tf-field-ical_export input:focus,
 .tf-field-text input:focus, .tf-field-password input:focus {
   background: #ffffff;
-  box-shadow: 0 0 0 2px var(--tf-primary);
+  box-shadow: 0 0 0 2px #2979ff;
   border-radius: 4px;
 }
 
@@ -3527,7 +3527,7 @@ Steps
 
 .tf-field-textarea textarea:focus {
   background: #ffffff;
-  box-shadow: 0 0 0 2px var(--tf-primary);
+  box-shadow: 0 0 0 2px #2979ff;
   border-radius: 4px;
 }
 
@@ -3782,7 +3782,7 @@ Steps
   content: "";
   height: 14px;
   width: 14px;
-  background-color: var(--tf-primary);
+  background-color: #2979ff;
   border-radius: 100%;
   position: absolute;
   top: 4px;
@@ -3807,7 +3807,7 @@ Steps
 }
 
 .tf-field-radio .tf-fieldset input[type=radio]:checked + label:before {
-  border-color: var(--tf-primary);
+  border-color: #2979ff;
 }
 
 .tf-field-checkbox .tf-fieldset ul li {
@@ -4076,13 +4076,13 @@ Steps
   align-items: center;
   -webkit-justify-content: center;
   justify-content: center;
-  background-color: var(--tf-primary);
+  background-color: #2979ff;
   color: #ffffff;
   border-radius: 4px;
 }
 
 .tf-field-heading .tf-field-heading-inner .tf-field-heading-content {
-  color: var(--tf-heading);
+  color: #000;
   font-size: 0.875rem;
   font-weight: 600;
 }
@@ -4175,7 +4175,7 @@ Steps
 }
 
 .tf-pro-notice .tf-field-notice-inner .tf-field-notice-content {
-  color: var(--tf-heading);
+  color: #000;
   font-size: 0.875rem;
   line-height: 1.6;
   align-self: center;
@@ -4307,7 +4307,7 @@ Steps
 
 .tf-field-date input:focus {
   background: #ffffff;
-  box-shadow: 0 0 0 2px var(--tf-primary);
+  box-shadow: 0 0 0 2px #2979ff;
   border-radius: 4px;
 }
 
@@ -4364,7 +4364,7 @@ Steps
 
 .tf-field-time input:focus {
   background: #ffffff;
-  box-shadow: 0 0 0 2px var(--tf-primary);
+  box-shadow: 0 0 0 2px #2979ff;
   border-radius: 4px;
 }
 
@@ -4441,7 +4441,7 @@ Steps
 .tf-repeater .tf-repeater-header .tf-repeater-icon-move:hover {
   background-color: #c4daff;
   transition: 0.4s;
-  color: var(--tf-primary);
+  color: #2979ff;
 }
 
 .tf-repeater .tf-repeater-header .tf-repeater-icon-clone {
@@ -4451,7 +4451,7 @@ Steps
 .tf-repeater .tf-repeater-header .tf-repeater-icon-clone:hover {
   background-color: #c4daff;
   transition: 0.4s;
-  color: var(--tf-primary);
+  color: #2979ff;
 }
 
 .tf-repeater .tf-repeater-header .tf-repeater-icon-delete {
@@ -4666,7 +4666,7 @@ Steps
 .tf-field-color .tf-fieldset ul.tf-inline li > label {
   font-weight: 600;
   font-size: 1rem;
-  color: var(--tf-heading);
+  color: #000;
   width: 45%;
   margin-top: 5px;
 }
@@ -4760,7 +4760,7 @@ Steps
 
 #tf-icon-modal .tf-modal-content .tf-icon-search input.tf-icon-search-input:focus {
   background: #ffffff;
-  box-shadow: 0 0 0 2px var(--tf-primary);
+  box-shadow: 0 0 0 2px #2979ff;
   border-radius: 4px;
 }
 
@@ -4823,7 +4823,7 @@ Steps
 }
 
 #tf-icon-modal .tf-modal-content .tf-icon-wrapper ul.tf-icon-tab-list li.active {
-  background: var(--tf-primary);
+  background: #2979ff;
   color: #ffffff;
 }
 
@@ -4911,8 +4911,8 @@ Steps
 }
 
 #tf-icon-modal .tf-modal-content .tf-icon-wrapper .tf-icon-tab-content .tf-icon-tab-pane ul.tf-icon-list li.active .tf-icon-inner span.check-icon {
-  border-color: var(--tf-primary);
-  background-color: var(--tf-primary);
+  border-color: #2979ff;
+  background-color: #2979ff;
   opacity: 1;
 }
 
@@ -4935,7 +4935,7 @@ Steps
 }
 
 #tf-icon-modal .tf-modal-content .tf-icon-wrapper .tf-icon-tab-content .tf-icon-tab-pane ul.tf-icon-list::-webkit-scrollbar-thumb:hover {
-  background: var(--tf-primary);
+  background: #2979ff;
 }
 
 #tf-icon-modal .tf-modal-content .tf-modal-footer {
@@ -4964,7 +4964,7 @@ Steps
 
 .tf-field-number input:focus {
   background: #ffffff;
-  box-shadow: 0 0 0 2px var(--tf-primary);
+  box-shadow: 0 0 0 2px #2979ff;
   border-radius: 4px;
 }
 
@@ -5190,7 +5190,7 @@ a.tf-import-btn, a.tf-export-btn {
   display: inline-block;
   width: 18px;
   height: 18px;
-  border: 2px solid var(--tf-heading);
+  border: 2px solid #000;
   border-left-color: transparent;
   border-radius: 50%;
   vertical-align: middle;

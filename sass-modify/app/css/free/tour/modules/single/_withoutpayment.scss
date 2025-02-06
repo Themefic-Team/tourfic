@@ -195,7 +195,7 @@
                     height: 230px;
                     overflow-y: auto;
                     scrollbar-width: thin;
-                    scrollbar-color: $color-gray $color-light-bg;
+                    scrollbar-color: $scrollbar-color;
                     margin-bottom: 20px;
                     padding-right: 10px;
                     @media #{$max768}{
@@ -206,7 +206,7 @@
                         width: 5px; 
                     }
                     scrollbar-thumb {
-                        background-color: $color-gray;
+                        background-color: $scrollbar-thumb-color;
                         border-radius: 4px;
                     }
                     .tf-single-tour-extra{
@@ -429,7 +429,7 @@
                     max-height: 230px;
                     overflow-y: auto;
                     scrollbar-width: thin;
-                    scrollbar-color: $color-gray $color-light-bg;
+                    scrollbar-color: $scrollbar-color;
                     @media #{$max768}{
                         padding-right: 0px;
                         height: auto;
@@ -438,7 +438,7 @@
                         width: 5px; 
                     }
                     scrollbar-thumb {
-                        background-color: $color-gray;
+                        background-color: $scrollbar-thumb-color;
                         border-radius: 4px;
                     }
                     h6{

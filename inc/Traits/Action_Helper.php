@@ -71,7 +71,7 @@ trait Action_Helper {
 	 */
 	function tf_ask_question_modal() {
 		?>
-		<div class="tf-modal tf-modal-small" id="tf-ask-modal">
+		<div class="tf-modal tf-modal-extra-small" id="tf-ask-modal">
 			<div class="tf-modal-dialog">
 				<div class="tf-modal-content">
 					<div class="tf-modal-header">
@@ -733,6 +733,8 @@ trait Action_Helper {
 		if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_nonce'] ) ), 'tf_ajax_nonce' ) ) {
 			return;
 		}
+
+	
 		/**
 		 * Get form data
 		 */
