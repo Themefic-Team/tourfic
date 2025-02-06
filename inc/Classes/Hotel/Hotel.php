@@ -2706,29 +2706,28 @@ class Hotel {
                         <div class="tf-booking-date-wrap">
                             <span class="tf-booking-date"><?php esc_html_e( "00", "tourfic" ); ?></span>
                             <span class="tf-booking-month">
-						<span>
-							<?php echo esc_html( gmdate( 'M' ) ); ?>
-						</span>
-						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
-						<path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
-						</svg>
-					</span>
+								<span>
+									<?php echo esc_html( gmdate( 'M' ) ); ?>
+								</span>
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+								<path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
+								</svg>
+							</span>
                         </div>
+						<input type="text" name="check-in-out-date" class="tf-check-in-out-date" onkeypress="return false;"
+                               placeholder="<?php esc_html_e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . esc_attr( $check_in_out ) . '"' : '' ?> required>
                     </div>
                     <div class="tf-booking-form-checkout">
                         <span class="tf-booking-form-title"><?php esc_html_e( "Check out", "tourfic" ); ?></span>
                         <div class="tf-booking-date-wrap">
                             <span class="tf-booking-date"><?php esc_html_e( "00", "tourfic" ); ?></span>
                             <span class="tf-booking-month">
-						<span><?php echo esc_html( gmdate( 'M' ) ); ?></span>
-						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
-						<path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
-						</svg>
-					</span>
+								<span><?php echo esc_html( gmdate( 'M' ) ); ?></span>
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+								<path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
+								</svg>
+							</span>
                         </div>
-                        <input type="text" name="check-in-out-date" class="tf-check-in-out-date" onkeypress="return false;"
-                               placeholder="<?php esc_html_e( 'Select Date', 'tourfic' ); ?>" <?php echo ! empty( $check_in_out ) ? 'value="' . esc_attr( $check_in_out ) . '"' : '' ?> required>
-
                     </div>
                     <div class="tf-booking-form-guest-and-room">
                         <div class="tf-booking-form-guest-and-room-inner">
