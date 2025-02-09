@@ -70,6 +70,23 @@
                 visibility: visible;
             }
         }
+        .tf-image-checkbox-footer{
+            @include flexbox();
+            @include align-items(center);
+            @include justify-content(space-between);
+
+            a{
+                height: 24px;
+                width: 24px;
+                line-height: 24px;
+                text-align: center;
+                border-radius: 50%;
+                background-color: $admin-color-primary;
+                color: #fff;
+                text-decoration: none;
+                outline: none;
+            }
+        }
 
         &.tf-pro-item{
             position: relative;

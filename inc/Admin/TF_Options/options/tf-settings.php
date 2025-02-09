@@ -178,14 +178,17 @@ TF_Settings::option( 'tf_settings', array(
 										'design-1' => array(
 											'title' => esc_html__('Design 1', 'tourfic'),
 											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-design-1.png",
+											'preview_link' => esc_url('https://tourfic.com/preview/hotels/tuvo-suites-hotel/'),
 										),
 										'design-2' 	=> array(
 											'title'	=> esc_html__('Design 2', 'tourfic'),
 											'url' 	=> TF_ASSETS_ADMIN_URL."images/template/preview-single-design-2.png",
+											'preview_link' => esc_url('https://tourfic.com/preview/hotels/tuvo-suites-hotel/'),
 										),
 										'default'  => array(
 											'title' => esc_html__('Default', 'tourfic'),
 											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-default.png",
+											'preview_link' => esc_url('https://tourfic.com/preview/hotels/tuvo-suites-hotel/'),
 										),
 									),
 									'default'  => 'design-1',

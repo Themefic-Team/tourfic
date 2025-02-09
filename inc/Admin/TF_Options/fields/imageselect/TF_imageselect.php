@@ -46,9 +46,15 @@ if ( ! class_exists( 'TF_imageselect' ) ) {
 								style="width: <?php echo esc_attr($img_width); ?>; height: <?php echo esc_attr($img_height); ?>"
 							/>
 							<span class="tf-circle-check"></span>
-							<?php if(!empty($value['title'])){ ?>
-								<span class="tf-template-title"><?php echo esc_html($value['title']); ?></span>
-							<?php } ?>
+							<span class="tf-image-checkbox-footer">
+								<?php if(!empty($value['title'])): ?>
+									<span class="tf-template-title"><?php echo esc_html($value['title']); ?></span>
+								<?php endif; ?>
+
+								<?php if(!empty($value['preview_link'])): ?>
+									<a href="<?php echo esc_url($value['preview_link']) ?>" target="_blank"><i class="ri-eye-line"></i></a>
+								<?php endif; ?>
+							</span>
                         </label>
                     </li>
 					<?php
