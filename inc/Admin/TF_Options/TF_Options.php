@@ -536,6 +536,9 @@ class TF_Options {
         if($pricing_by == '3'){
             foreach ( $option_arr as $key => $item ) {
                 ob_start();
+				if(empty($item)){
+					continue;
+				}
                 ?>
                 <div class="tf-single-option">
                     <div class="tf-field-switch">
