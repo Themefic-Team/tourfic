@@ -6,7 +6,6 @@
     li {
         display: inline-block;
         margin-right: 20px;
-        cursor: n-resize;
         border-radius: 5px;
 
         .tf-image-checkbox{
@@ -46,13 +45,6 @@
                     object-position: bottom;
                 }
             }
-            span.tf-template-title{
-                display: block;
-                text-align: center;
-                margin-top: 5px;
-                font-weight: 500;
-                cursor: pointer;
-            }
 
             &> input {
                 display: none
@@ -70,21 +62,30 @@
                 visibility: visible;
             }
         }
+        span.tf-template-title{
+            display: block;
+            text-align: center;
+            font-weight: 500;
+        }
         .tf-image-checkbox-footer{
             @include flexbox();
             @include align-items(center);
-            @include justify-content(space-between);
+            @include justify-content(center);
+            margin-top: 8px;
+            gap: 8px;
+            color: $neutral70;
+            text-decoration: none;
+            outline: none;
 
-            a{
-                height: 24px;
-                width: 24px;
-                line-height: 24px;
-                text-align: center;
-                border-radius: 50%;
-                background-color: $admin-color-primary;
-                color: #fff;
-                text-decoration: none;
-                outline: none;
+            &:focus{
+                box-shadow: none;
+            }
+        }
+
+        a.tf-image-checkbox-footer{
+            &:hover{
+                text-decoration: underline;
+                color: $admin-color-primary;
             }
         }
 

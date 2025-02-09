@@ -5013,7 +5013,6 @@ a.tf-import-btn, a.tf-export-btn {
 .tf-image-radio-group li {
   display: inline-block;
   margin-right: 20px;
-  cursor: n-resize;
   border-radius: 5px;
 }
 
@@ -5068,14 +5067,6 @@ a.tf-import-btn, a.tf-export-btn {
   object-position: bottom;
 }
 
-.tf-image-radio-group li .tf-image-checkbox span.tf-template-title {
-  display: block;
-  text-align: center;
-  margin-top: 5px;
-  font-weight: 500;
-  cursor: pointer;
-}
-
 .tf-image-radio-group li .tf-image-checkbox > input {
   display: none;
 }
@@ -5095,6 +5086,12 @@ a.tf-import-btn, a.tf-export-btn {
   visibility: visible;
 }
 
+.tf-image-radio-group li span.tf-template-title {
+  display: block;
+  text-align: center;
+  font-weight: 500;
+}
+
 .tf-image-radio-group li .tf-image-checkbox-footer {
   display: -webkit-box;
   display: -moz-box;
@@ -5104,20 +5101,22 @@ a.tf-import-btn, a.tf-export-btn {
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
-  -webkit-justify-content: space-between;
-  justify-content: space-between;
-}
-
-.tf-image-radio-group li .tf-image-checkbox-footer a {
-  height: 24px;
-  width: 24px;
-  line-height: 24px;
-  text-align: center;
-  border-radius: 50%;
-  background-color: #2979ff;
-  color: #fff;
+  -webkit-justify-content: center;
+  justify-content: center;
+  margin-top: 8px;
+  gap: 8px;
+  color: #404040;
   text-decoration: none;
   outline: none;
+}
+
+.tf-image-radio-group li .tf-image-checkbox-footer:focus {
+  box-shadow: none;
+}
+
+.tf-image-radio-group li a.tf-image-checkbox-footer:hover {
+  text-decoration: underline;
+  color: #2979ff;
 }
 
 .tf-image-radio-group li.tf-pro-item {
