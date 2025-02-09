@@ -1518,7 +1518,7 @@
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-driver-details .tf-driver-photo .tf-driver-info .tf-driver-contact-info ul li a {
   position: relative;
   text-decoration: none;
-  color: var(--tf-text);
+  color: var(--tf-primary);
   font-size: 1rem;
   font-weight: 400;
   display: inline-block;
@@ -1531,6 +1531,10 @@
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-driver-details .tf-driver-photo .tf-driver-info .tf-driver-contact-info ul li a:hover .tf-tooltip-info {
   visibility: visible;
   opacity: 1;
+}
+
+.single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-driver-details .tf-driver-photo .tf-driver-info .tf-driver-contact-info ul li a path {
+  stroke: var(--tf-primary);
 }
 
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-driver-details .tf-driver-photo .tf-driver-info .tf-driver-contact-info ul li a .tf-tooltip-info {

@@ -734,6 +734,9 @@ trait Action_Helper {
 			return;
 		}
 
+		echo  '<pre>';
+			print_r( $_POST );
+		echo '</pre>';
 	
 		/**
 		 * Get form data

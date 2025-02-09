@@ -3689,7 +3689,7 @@ div#tf-destinationautocomplete-list div:before {
 
 .search-result-inner {
   display: grid;
-  grid-template-columns: 75% 25%;
+  grid-template-columns: 73% 27%;
 }
 
 @media only screen and (max-width: 1024px) {

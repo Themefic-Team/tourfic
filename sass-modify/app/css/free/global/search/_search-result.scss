@@ -3,7 +3,7 @@
 }
 .search-result-inner {
     display: grid;
-    grid-template-columns: 75% 25%;
+    grid-template-columns: 73% 27%;
     @media #{$max1024} {
         grid-template-columns: 67% 33%;
     }
