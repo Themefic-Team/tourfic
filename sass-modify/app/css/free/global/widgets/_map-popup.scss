@@ -212,7 +212,7 @@
                         margin-top: 0;
 
                         .tf-review-items {
-                            display: none;
+                            color: #FFC700;
                         }
 
                         .tf-avarage-review {
@@ -436,13 +436,6 @@
                             &:hover {
                                 color: $color-primary;
                             }
-                        }
-
-                        .tf-edit-link{
-                            font-size: 0.875rem;
-                            color: $color-primary;
-                            text-decoration: underline;
-                            margin-left: 6px;
                         }
                     }
 

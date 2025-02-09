@@ -3994,7 +3994,6 @@ class Hotel {
                             <a href="<?php echo esc_url( $url ); ?>">
                                 <?php echo wp_kses_post(Helper::tourfic_character_limit_callback( get_the_title(), 55 )); ?>
                             </a>
-                            <?php echo wp_kses_post(Helper::edit_link(get_the_ID())) ?>
                         </h4>
 						<?php if ( $features ) { ?>
                             <ul class="features">

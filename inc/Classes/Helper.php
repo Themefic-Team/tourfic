@@ -3054,18 +3054,4 @@ class Helper {
 		var_dump( $var );
 		echo '</pre>';
 	}
-
-    /*
-     * Post edit link
-     * @author Foysal
-     */
-	static function edit_link( $post_id ) {
-		if ( current_user_can( 'administrator' ) && current_user_can( 'manage_options' ) ) {
-			$edit_link = get_edit_post_link( $post_id );
-
-			if ( $edit_link ) {
-				return '<a href="' . esc_url( $edit_link ) . '" target="_blank" class="tf-edit-link">' . esc_html__( 'Edit', 'tourfic' ) . '</a>';
-			}
-		}
-	}
 }
