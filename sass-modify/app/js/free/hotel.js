@@ -352,7 +352,7 @@
 
             // Executes when some one click in the search form location
             inp.addEventListener("focus", function () {
-                if (this.value == '' || !this.value) {
+                // if (this.value == '' || !this.value) {
                     // alert("Working....")
                     let a = document.createElement("DIV");
                     a.setAttribute("id", this.id + "autocomplete-list");
@@ -369,7 +369,7 @@
                         });
                         a.appendChild(b);
                     }
-                }
+                // }
             })
 
             var currentFocus;
@@ -501,11 +501,7 @@
 
         $('#tf-destination-adv').on("click", function (e) {
             var location = $(this).val();
-            if (location) {
-                $(".tf-hotel-locations").removeClass('tf-locations-show');
-            } else {
-                $(".tf-hotel-locations").addClass('tf-locations-show');
-            }
+            $(".tf-hotel-locations").addClass('tf-locations-show');
         });
         $('#tf-destination-adv').on("keyup", function (e) {
             var location = $(this).val();
