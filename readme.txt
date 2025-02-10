@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, car-rental, multivendor-marketplace
 Requires at least: 5.4
 Tested up to: 6.7
-Stable tag: 2.15.15
+Stable tag: 2.15.16
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -372,6 +372,10 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
+= 2.15.16 – February 10, 2025 =
+
+- Improved: Hotel search and filter functionality for a better user experience.
+
 = 2.15.15 – February 05, 2025 =
 
 - Updated: readme.txt file for better clarity.
@@ -455,16 +459,6 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 - Added: Booking calendar integration for vendors (Pro).
 - Fixed: The issue with backend tour bookings has been resolved.
 - Fixed: The security patch has been resolved.
-
-= 2.15.3 - 05 December 2024 =
-
-- Added: Integration of Tourfic with Google Calendar(Pro).
-- Added: Hotel booking details now sync with Google Calendar.
-- Added: Apartment booking details now sync with Google Calendar.
-- Added: Tour booking details now sync with Google Calendar.
-- Added: Car booking details now sync with Google Calendar.
-- Improvement: Backend calendar view for booking details.
-- Improvement: System stability is further optimized.
 
 **Old Changelog can be found [here](https://themefic.com/tourfic/changelog/)**.
 
