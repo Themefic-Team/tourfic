@@ -15,31 +15,24 @@ class Room {
 		add_action( 'wp_ajax_tf_remove_room_order_ids', array( $this, 'tf_remove_room_order_ids' ) );
 	}
 
-	static function get_hotel_rooms( $hotel_id ) {
-
+		static function get_hotel_rooms( $hotel_id ) {
 		$args = array(
 			'post_type'      => 'tf_room',
 			'posts_per_page' => - 1,
 		);
 
-		$rooms = new \WP_Query( $args );
+		$rooms = get_posts( $args );
 
 		$hotel_rooms = array();
-
-		while( $rooms->have_posts() ) {
-			
-			$rooms->the_post();
-
-			$room_meta = get_post_meta( get_the_ID(), 'tf_room_opt', true );
+		foreach ( $rooms as $room ) {
+			$room_meta = get_post_meta( $room->ID, 'tf_room_opt', true );
 			if ( ! empty( $room_meta['tf_hotel'] ) && $room_meta['tf_hotel'] == $hotel_id ) {
-				$hotel_rooms[] = get_post( get_the_ID() );
+				$hotel_rooms[] = $room;
 			}
-
 		}
 
-		wp_reset_postdata();
-
 		return $hotel_rooms;
+
 	}
 
 
