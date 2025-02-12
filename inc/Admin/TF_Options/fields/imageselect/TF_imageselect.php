@@ -30,7 +30,7 @@ if ( ! class_exists( 'TF_imageselect' ) ) {
                     <li class="<?php echo isset( $value['is_pro'] ) && $value['is_pro'] ? 'tf-pro-item' : '' ?>">
                         <label class="tf-image-checkbox">
 							<?php if ( isset( $value['is_pro'] ) && $value['is_pro'] ): ?>
-                                <span><?php echo esc_html__('Pro', 'tourfic') ?></span>
+                                <span class="tf-image-checkbox-pro-badge"><?php echo esc_html__('Pro', 'tourfic') ?></span>
                             <?php else : 
 								if($multiple){
 									echo '<input type="checkbox" id="' . esc_attr( $this->field_name() ) . '[' . esc_attr( $key ) . ']" name="' . esc_attr( $this->field_name() ) . '[]" data-depend-id="' . esc_attr( $this->field['id'] ) . '' . esc_attr( $this->parent_field ) . '" value="' . esc_attr( $key ) . '" ' . esc_attr( $checked ) . ' ' . esc_attr($disable_checked). ' '. wp_kses_post( $this->field_attributes() ) . '/>';

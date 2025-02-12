@@ -5124,7 +5124,7 @@ a.tf-import-btn, a.tf-export-btn {
   position: relative;
 }
 
-.tf-image-radio-group li.tf-pro-item span {
+.tf-image-radio-group li.tf-pro-item .tf-image-checkbox-pro-badge {
   position: absolute;
   top: -1px;
   right: -2px;
