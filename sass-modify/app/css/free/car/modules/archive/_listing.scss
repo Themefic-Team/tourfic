@@ -261,13 +261,13 @@
                     .tf_posts_navigation{
                         width: 100%;
                         .page-numbers{
-                            background: $color-primary;
-                            color: $color-white;
-                            border-radius: 8px;
-                        }
-                        .page-numbers.current{
                             background: $color-light-bg;
                             color: $color-text;
+                            border-radius: 8px;
+                            &.current{
+                                background: $color-primary;
+                                color: $color-text;
+                            }
                         }
                     }
                 }

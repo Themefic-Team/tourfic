@@ -3738,6 +3738,7 @@
                                 top: unset;
                                 bottom: 16px;
                                 right: 16px;
+                                cursor: pointer;
                                 img {
                                     height: 20px;
                                     width: 20px;
@@ -3910,10 +3911,12 @@
                         text-decoration: none;
                         display: flex;
                         align-items: center;
-                    }
-                    .page-numbers.current{
-                        background: $color-light-bg;
-                        color: $color-text;
+                        &.current,
+                        &:hover{
+                            background: $color-primary;
+                            color: $color-white;
+                            border-color: $color-primary;
+                        }
                     }
                 }
             }

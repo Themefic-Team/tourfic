@@ -687,8 +687,19 @@
                 $('button#share_link_button').removeClass('copied');
                 $('button#share_link_button').children('span').css('display', 'none');
             }, 3000);
-            $(this).parent().find("#share_link_input").select();
-            document.execCommand("copy");
+            const inputElement = $(this).parent().find("#share_link_input");
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(inputElement.val()).then(() => {
+                    console.log("Copied to clipboard!");
+                });
+            } else {
+                const tempInput = document.createElement("textarea");
+                tempInput.value = inputElement.val();
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                document.execCommand("copy");
+                document.body.removeChild(tempInput);
+            }
         });
 
 
@@ -891,9 +902,9 @@
         /* fill icon class */
         const wishIconFill = targetNode => {
             targetNode.addClass('remove-wishlist');
-            targetNode.addClass('fa-heart');
+            targetNode.addClass('fas fa-heart');
             targetNode.addClass('tf-text-red');
-            targetNode.removeClass('fa-heart-o');
+            targetNode.removeClass('far fa-heart-o');
             targetNode.removeClass('add-wishlist');
 
 
@@ -901,8 +912,8 @@
         /* blank icon */
         const wishIcon = targetNode => {
             targetNode.addClass('add-wishlist');
-            targetNode.addClass('fa-heart-o');
-            targetNode.removeClass('fa-heart');
+            targetNode.addClass('far fa-heart-o');
+            targetNode.removeClass('fas fa-heart');
             targetNode.removeClass('tf-text-red');
             targetNode.removeClass('remove-wishlist');
         }
@@ -2102,8 +2113,23 @@
             setTimeout(function () {
                 $('a#share_link_button').removeClass('copied');
             }, 3000);
-            $(this).parent().find("#share_link_input").select();
-            document.execCommand("copy");
+           // Get the input element
+            const inputElement = $(this).parent().find("#share_link_input");
+
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(inputElement.val()).then(() => {
+                    console.log("Copied to clipboard!");
+                });
+            } else {
+                const tempInput = document.createElement("textarea");
+                tempInput.value = inputElement.val();
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                document.execCommand("copy");
+                document.body.removeChild(tempInput);
+            }
+       
         });
 
         /*
