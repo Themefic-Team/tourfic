@@ -733,10 +733,6 @@ trait Action_Helper {
 		if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_nonce'] ) ), 'tf_ajax_nonce' ) ) {
 			return;
 		}
-
-		echo  '<pre>';
-			print_r( $_POST );
-		echo '</pre>';
 	
 		/**
 		 * Get form data

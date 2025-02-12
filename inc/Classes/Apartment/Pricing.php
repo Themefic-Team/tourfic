@@ -328,10 +328,10 @@ class Pricing {
 		$price_html = '';
 		if ( ! empty( $min_max_price ) ) {
 			$price_html .= esc_html__( "From ", "tourfic" );
-			if ( $regular_price != 0 ) {
+			if ( $sale_price != 0 && $sale_price != $regular_price ) {
 				$price_html .= wc_format_sale_price( $regular_price, $sale_price );
 			} else {
-				$price_html .= wp_kses_post( wc_price( $sale_price ) ) . " ";
+				$price_html .= wp_kses_post( wc_price( $regular_price ) ) . " ";
 			}
 		}
 

@@ -3867,6 +3867,9 @@
                                 margin-bottom: 12px;
                                 text-align: right;
                                 .tf-price-from{
+                                    del {
+                                        font-size: 1.5rem;
+                                    }
                                     .amount{
                                         color: $color-text;
                                         font-size: 1.5rem;
