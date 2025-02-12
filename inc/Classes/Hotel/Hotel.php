@@ -4926,7 +4926,7 @@ class Hotel {
 		$rooms    	= ! empty( $hotel_meta['tf_rooms'] ) ? $hotel_meta['tf_rooms'] : [];
 		$assigned_rooms = Room::get_hotel_rooms( $post_id );
 		$assigned_room_ids = array_column($assigned_rooms, 'ID');
-		$removed_rooms = array_diff($assigned_room_ids, $rooms);
+		$removed_rooms = (!empty($rooms) && !empty($assigned_room_ids)) ? array_diff($assigned_room_ids, $rooms) : '';
 		
 		if(!empty($rooms)){
 			foreach($rooms as $room_id){
