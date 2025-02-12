@@ -49,7 +49,7 @@ if ( ! class_exists( 'TF_text' ) ) {
 
 												$value = ($field['type'] == 'text' || $field['type'] == 'textarea') ? stripslashes($value) : $value;
 											} else {
-												$value = '';
+												$value = $default;
 											}
 										}
 									}
