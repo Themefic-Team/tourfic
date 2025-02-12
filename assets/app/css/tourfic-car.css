@@ -2567,8 +2567,8 @@
 .tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf_posts_navigation .page-numbers,
 .tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf_posts_navigation .page-numbers,
 .page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf_posts_navigation .page-numbers {
-  background: var(--tf-primary);
-  color: #ffffff;
+  background: var(--tf-light-bg);
+  color: var(--tf-text);
   border-radius: 8px;
 }
 
@@ -2576,7 +2576,7 @@
 .tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf_posts_navigation .page-numbers.current,
 .tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf_posts_navigation .page-numbers.current,
 .page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf_posts_navigation .page-numbers.current {
-  background: var(--tf-light-bg);
+  background: var(--tf-primary);
   color: var(--tf-text);
 }
 

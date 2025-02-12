@@ -119,9 +119,15 @@
                 justify-content: end;
             }
             .tf_posts_navigation {
-                .page-numbers.current {
-                    background: $color-light-bg;
-                    padding: 5px 15px;
+                .page-numbers{
+                    background-color: $color-gray-light;
+                    color: $color-text;
+                    &.current,
+                    &:hover {
+                        background: $color-primary;
+                        color: $color-white;
+                        padding: 5px 15px;
+                    }
                 }
             }
             &.tours-grid{

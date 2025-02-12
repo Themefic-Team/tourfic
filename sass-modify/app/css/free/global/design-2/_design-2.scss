@@ -715,20 +715,24 @@
             }
             .tf-search-layout {
                 .tf-sorting-selection-warper {
-                    select {
+                    height: 50px;
+                    form{
                         height: 100%;
-                        border-radius: 5px;
-                        -moz-appearance: none;
-                        -webkit-appearance: none;
-                        appearance: none;
-                        padding: 14px 36px 14px 14px;
-                        background-position: calc(100% - 12px) 50%;
-                        font-size: inherit;
-                        font-weight: inherit;
-                        color: inherit;
-                        box-sizing: border-box;
-                        border: 1px solid $color-border;
-                        background-color: $color-white;
+                        select {
+                            height: 100%;
+                            border-radius: 5px;
+                            -moz-appearance: none;
+                            -webkit-appearance: none;
+                            appearance: none;
+                            padding: 14px 36px 14px 14px;
+                            background-position: calc(100% - 12px) 50%;
+                            font-size: inherit;
+                            font-weight: inherit;
+                            color: inherit;
+                            box-sizing: border-box;
+                            border: 1px solid $color-border;
+                            background-color: $color-white;
+                        }
                     }
                 }
             }
@@ -1093,6 +1097,7 @@
                             color: $color-heading;
                             line-height: 1;
                             margin-right: 10px;
+                            font-weight: 600;
                         }
                         .tf-feature{
                             background: $color-primary;
@@ -1102,6 +1107,7 @@
                             color: $color-white;
                             line-height: 1;
                             margin-right: 5px;
+                            font-weight: 600;
                         }
                     }
                     .tf-tag-items {

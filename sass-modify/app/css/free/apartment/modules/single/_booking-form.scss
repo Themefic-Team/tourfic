@@ -221,10 +221,10 @@
                         @include flexbox();
                         @include justify-content(space-between);
                         margin-bottom: 8px;
-                        color: $color-gray-light;
+                        color: $color-text;
             
                         .tf-price-list-label {
-                            color: $color-gray-light;
+                            color: $color-text;
                         }
             
                         .tf-price-list-price {
@@ -234,7 +234,7 @@
                         &.total-price-wrap {
                             padding-top: 10px;
                             margin-top: 16px;
-                            border-top: 1px solid $color-white;
+                            border-top: 1px solid $color-blue-light;
                             font-weight: 500;
                             color: $color-text;
                         }
@@ -294,7 +294,7 @@
                         .tf-aprtment-check-in-out-date{
                             height: 53px;
                             padding: 15px 32px 16px 16px;
-                            background: $color-white;
+                            background: $form-input-bg;
                             width: 100%;
                             box-sizing: border-box;
             
@@ -346,6 +346,37 @@
                                     margin-bottom: 0px;
                                 }
                             }
+                        }
+                    }
+                }
+                .tf-apartment-price-list {
+                    margin: 15px 0 0;
+                    padding: 0;
+            
+                    li {
+                        @include flexbox();
+                        @include justify-content(space-between);
+                        margin-bottom: 8px;
+                        color: $color-text;
+            
+                        .tf-price-list-label {
+                            color: $color-text;
+                        }
+            
+                        .tf-price-list-price {
+                            font-weight: 500;
+                        }
+            
+                        &.total-price-wrap {
+                            padding-top: 10px;
+                            margin-top: 16px;
+                            border-top: 1px solid $color-info-light;
+                            font-weight: 500;
+                            color: $color-text;
+                        }
+            
+                        &:last-child {
+                            margin-bottom: 0px;
                         }
                     }
                 }
