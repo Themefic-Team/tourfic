@@ -59,7 +59,7 @@ class Plugin_Page_Notice extends \Tourfic\Core\TF_Notice {
     }
 
 	function tf_in_plugin_update_message( $data, $response ){
-        if ( isset( $data['update'] ) && $data['update'] ) { ?>
+        if ( isset( $data['update'] ) && $data['update'] && isset( $data['upgrade_notice'] )) { ?>
             <p><?php echo wp_kses_post( __('We’re excited to announce that our <b>revamped design panel</b> is finally here! In the upcoming update, we’re bringing a <b>new and improved design panel</b> that enhances usability, organization, and customization options for a smoother experience. ', "tourfic")); ?></p>
             <p><?php echo wp_kses_post( __('Want to know what’s new in this update? Read <a href="https://themefic.com/tourfic-v2-16-0-optimized-design-coming-soon/" target="_blank"><b>this blog</b></a> to explore all the exciting changes.', "tourfic")); ?></p>
         <?php
