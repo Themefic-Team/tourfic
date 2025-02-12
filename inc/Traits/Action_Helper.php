@@ -134,7 +134,7 @@ trait Action_Helper {
 							<div class="tf-aq-field">
 								<button type="reset" class="screen-reader-text"><?php esc_html_e( 'Reset', 'tourfic' ); ?></button>
 								<button type="submit" form="ask-question" class="tf_btn tf-ask-question-submit"><?php esc_html_e( 'Submit', 'tourfic' ); ?></button>
-								<input type="hidden" name="post_id" value="<?php echo esc_attr( get_the_ID() ); ?>">
+								<input type="hidden" name="post_id" value="<?php echo esc_attr( get_the_ID() ); ?>" data-post-type="<?php echo esc_attr( get_post_type() ); ?>">
 								<?php wp_nonce_field( 'ask_question_nonce' ); ?>
 								<div class="response"></div>
 							</div>
@@ -2531,5 +2531,6 @@ trait Action_Helper {
 		}
 
 		wp_send_json_success( $response );
+		wp_die();
 	}
 }
