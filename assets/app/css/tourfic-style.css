@@ -16210,6 +16210,26 @@ div#tf-destinationautocomplete-list div:before {
   stroke: var(--tf-primary);
 }
 
+.tf-archive-template__four .tf-archive-details .tf-archive-top .tf-archive-view li.tf-sorting-selection-wrapper .tf-orderby {
+  padding: 4px 16px;
+  color: var(--tf-text);
+  font-size: 0.875rem;
+  font-weight: 500;
+  height: 32px;
+  line-height: 2.28;
+  border-radius: 4px;
+  border: none;
+  background-color: #ffffff;
+  -webkit-transition: all 0.25s ease-in-out;
+  -moz-transition: all 0.25s ease-in-out;
+  -o-transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
+}
+
+.tf-archive-template__four .tf-archive-details .tf-archive-top .tf-archive-view li.tf-sorting-selection-wrapper .tf-orderby:focus {
+  outline: none;
+}
+
 .tf-archive-template__four .tf-archive-details .tf-archive-hotels {
   display: -webkit-box;
   display: -moz-box;

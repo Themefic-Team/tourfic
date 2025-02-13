@@ -567,6 +567,24 @@
                             }
                         }
                     }
+                    li.tf-sorting-selection-wrapper{
+                        .tf-orderby{
+                            padding: 4px 16px;
+                            color: $color-text;
+                            font-size: 0.875rem;
+                            font-weight: 500;
+                            height: 32px;
+                            line-height: 2.28;
+                            border-radius: 4px;
+                            border: none;
+                            background-color: $color-white;
+                            @include transition();
+
+                            &:focus{
+                                outline: none;
+                            }
+                        }
+                    }
                 }
             }
 

@@ -85,7 +85,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 						'design-1' => array(
 							'title' => esc_html__('Design 1', 'tourfic'),
 							'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-apt-design-1.png",
-							'preview_link' => esc_url('https://tourfic.com/preview/apartments/apartamento-en-ronda/'),
+							'preview_link' => esc_url('https://tourfic.com/preview/apartments/2-bedroom-apartment-in-gamle-oslo/'),
 						),
 						'default'  => array(
 							'title' => esc_html__('Default', 'tourfic'),

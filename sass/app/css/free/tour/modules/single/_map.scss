@@ -11,43 +11,46 @@
                 }
             }
             .itn-gm-m {
-                background-color: $color-primary;
+                background-color: #002C66 !important;
             }
+            
             .gm-style {
                 .marker-label {
                     display: block;
                     padding-top: 30px;
                     padding-left: 82px;
                     line-height: 1.33;
-                    font-weight: 600;
+                    font-family: inherit !important;
+                    font-weight: 600 !important;
                     align-items: baseline;
                     
                     &:before {
                         content: "\eb21";
-                        font-size: 1rem;
+                        font-size: 16px;
                         padding-right: 4px;
                         margin-top: 4px;
-                        font-weight: 300;
-                        font-family: 'remixicon';
+                        font-weight: 300 !important;
+                        font-family: 'remixicon' !important;
                     }
                 }
             }
+            
             .gm-style-iw {
-
-                padding: 0px;
+            
+                padding: 0px !important;
                 width: 296px;
-                border-radius: 12px;
-
+                border-radius: 12px !important;
+            
                 .gm-style-iw-d {
-                    overflow: hidden;
-
+                    overflow: hidden !important;
+            
                     .itinerary-map-popup {
                         .itinerary-map-popup-img-wrap {
                             width: 296px;
                             height: 140px;
                             overflow: hidden;
                             margin: 0px;
-
+            
                             img {
                                 width: 100%;
                                 height: 140px;
@@ -56,13 +59,13 @@
                             }
                         }
                         .popup-arrow-active {
-                            display: none;
+                            display: none !important;
                         }
-
+            
                         .itinerary-map-popup-img-icons {
                             display: block;
                             z-index: 99;
-
+            
                             .itinerary-map-popup-img-icon-right {
                                 cursor: pointer;
                                 user-select: none;
@@ -77,43 +80,47 @@
                                 top: 51px;
                                 left: 0;
                             }
-
+            
                         }
                         .itinerary-map-popup-content {
                             padding: 12px;
                             display: flex;
                             flex-direction: column;
                             gap: 8px;
-                            font-size: 0.875rem;
+                            font-size: 14px;
                             font-weight: 500;
-                            color: $color-text;
-
+                            color: black;
+            
                             .itinerary-map-popup-time-wrap {
                                 padding: 8px 16px;
-                                background: $color-white;
+                                background: #F3F4F6;
                                 width: 70px;
                                 height: auto;
                                 border-radius: 32px;
                                 text-align: center;
                                 margin-bottom: 4px;
-
+            
                                 .itinerary-map-popup-time {
-                                    color: $color-text;
-                                    font-size: 0.75rem;
+                                    color: #454954;
+                                    font-size: 12px;
+                                    font-style: normal;
                                     font-weight: 700;
+                                    line-height: normal;
                                 }
-
+            
                                 .itinerary-map-popup-title {
-                                    color: $color-heading;
-                                    font-size: 0.75rem;
+                                    color: #818797;
+                                    font-size: 12px;
+                                    font-style: normal;
                                     font-weight: 400;
-                                    line-height: 1.5;
+                                    line-height: 18px;
                                 }
                             }
-
+            
                             .itinerary-map-popup-desc {
-                                color: $color-text;
-                                font-size: 0.75rem;
+                                color: #818797;
+                                font-size: 12px;
+                                font-style: normal;
                                 font-weight: 400;
                                 line-height: 1.5;
                                 margin-bottom: 4px;
@@ -123,22 +130,22 @@
                                 align-items: center;
                                 gap: 8px;
                                 flex-wrap: wrap;
-
+            
                                 .itinerary-map-popup-option {
                                     padding: 4px 8px;
-                                    border: 1px solid $color-border;
+                                    border: 1px solid #F3F4F6;
                                     border-radius: 32px;
                                     font-weight: 400;
-                                    color: $color-text;
-
+                                    color: #818797;
+            
                                     .map-popup-option-icon {
                                         margin-right: 4px;
                                     }
-
+            
                                     .map-popup-option-mode {
-                                        font-size: 0.75rem;
+                                        font-size: 12px;
                                     }
-
+            
                                 }
                             }
                         }
@@ -146,30 +153,31 @@
                 }
                 
                 button[title~=Close] {
-                    top: 8px;
-                    right: 8px;
-                    background-color: $color-white;
-                    opacity: 1;
-                    border-radius: 6px;
-                    height: 24px;
-                    width: 24px;
-                
-                    span {
-                        margin: auto;
+                   top: 8px !important;
+                   right: 8px !important;
+                   background-color: #F3F4F6 !important;
+                   opacity: 1 !important;
+                   border-radius: 6px;
+                   height: 24px !important;
+                   width: 24px !important;
+                   
+                   span {
+                       margin: auto !important;
+                       
                     }
                 }
                 
                 button:hover {
                     border-radius: 24px;
-                    border: 1px solid $color-gray;
-                
+                    border: 1px solid #8F94A3 !important;
+                   
                 }
-
+            
                 
-                @media #{$max575}{
+                @media only screen and (max-width: 480px) {
                 
                     .gm-style-iw {
-                        width: 148px;
+                        width: 148px !important;
                         .gm-style-iw-d {
                             .itinerary-map-popup {
                 
@@ -180,10 +188,10 @@
                         }
                     }
                 }
-                @media #{$max575}{
+                @media only screen and (max-width: 480px) {
                 
                     .gm-style-iw {
-                        width: 148px;
+                        width: 148px !important;
                         .gm-style-iw-d {
                             .itinerary-map-popup {
                 
@@ -195,6 +203,7 @@
                     }
                 }
             }
+            
         }
         &__two{
             #tf-tour-map{
