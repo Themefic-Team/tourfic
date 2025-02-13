@@ -10604,6 +10604,7 @@ div#tf-destinationautocomplete-list div:before {
   justify-content: center;
   position: relative;
   z-index: 1;
+  cursor: pointer;
 }
 
 .tf-single-template__three .tf-available-rooms-wrapper .tf-available-room .tf-available-room-gallery .tf-room-gallery.tf-popup-buttons img,
