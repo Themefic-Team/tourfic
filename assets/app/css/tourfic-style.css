@@ -581,7 +581,9 @@ a {
   color: var(--tf-text);
 }
 
+.tf-field-group.tf_form-inner input[type="text"].tf-field,
 .tf-field-group.tf_form-inner .tf-field,
+.tf-field-group input[type="text"].tf-field,
 .tf-field-group .tf-field {
   border: none;
   padding: 15px 40px;
@@ -596,7 +598,9 @@ a {
   height: auto;
 }
 
+.tf-field-group.tf_form-inner input[type="text"].tf-field:focus,
 .tf-field-group.tf_form-inner .tf-field:focus,
+.tf-field-group input[type="text"].tf-field:focus,
 .tf-field-group .tf-field:focus {
   outline: none;
   border: none;
@@ -13897,7 +13901,7 @@ div#tf-destinationautocomplete-list div:before {
 
 .tf-single-template__three .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.active::before,
 .tf-single-template__three .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.active::before {
-  background-color: var(--tf-primary);
+  background-color: transparent;
 }
 
 .tf-single-template__three .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.done,

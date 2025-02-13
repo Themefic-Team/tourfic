@@ -2933,7 +2933,7 @@
                                 &.active{
                                     background-color: $color-primary;
                                     &::before{
-                                        background-color: $color-primary;
+                                        background-color: transparent;
                                     }
                                 }
                                 &.done{
