@@ -133,9 +133,9 @@
                             border-radius: 0px 10px 0px 0px;
                             width: 0;
                             height: 0;
-                            border-top: 26px solid transparent;
+                            border-top: 28px solid transparent;
                             border-left: 25px solid $color-primary;
-                            border-bottom: 26px solid transparent;
+                            border-bottom: 28px solid transparent;
                             @media #{$max768}{
                                 position: static;
                             }
