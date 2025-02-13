@@ -581,7 +581,9 @@ a {
   color: var(--tf-text);
 }
 
+.tf-field-group.tf_form-inner input[type="text"].tf-field,
 .tf-field-group.tf_form-inner .tf-field,
+.tf-field-group input[type="text"].tf-field,
 .tf-field-group .tf-field {
   border: none;
   padding: 15px 40px;
@@ -596,7 +598,9 @@ a {
   height: auto;
 }
 
+.tf-field-group.tf_form-inner input[type="text"].tf-field:focus,
 .tf-field-group.tf_form-inner .tf-field:focus,
+.tf-field-group input[type="text"].tf-field:focus,
 .tf-field-group .tf-field:focus {
   outline: none;
   border: none;
@@ -7396,7 +7400,7 @@ div#tf-destinationautocomplete-list div:before {
   z-index: 9999;
   background-color: rgba(0, 0, 0, 0.2);
   display: flex;
-  align-items: center;
+  align-items: end;
   justify-content: center;
   display: none;
 }
@@ -7407,6 +7411,8 @@ div#tf-destinationautocomplete-list div:before {
 .page-template-tf-search .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp,
 .single-tf_carrental .tf-single-template__one .tf-car-booking-popup .tf-booking-popup-warp {
   border-radius: 16px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
   background: #ffffff;
   padding: 16px 24px;
   width: 850px;
@@ -10604,6 +10610,7 @@ div#tf-destinationautocomplete-list div:before {
   justify-content: center;
   position: relative;
   z-index: 1;
+  cursor: pointer;
 }
 
 .tf-single-template__three .tf-available-rooms-wrapper .tf-available-room .tf-available-room-gallery .tf-room-gallery.tf-popup-buttons img,
@@ -13896,7 +13903,7 @@ div#tf-destinationautocomplete-list div:before {
 
 .tf-single-template__three .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.active::before,
 .tf-single-template__three .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.active::before {
-  background-color: var(--tf-primary);
+  background-color: transparent;
 }
 
 .tf-single-template__three .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.done,

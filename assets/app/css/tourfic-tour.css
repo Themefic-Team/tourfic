@@ -534,7 +534,7 @@
   margin: 0;
   padding: 0;
   list-style: none;
-  border-radius: 8px;
+  border-radius: 10px;
   background: #F5FAFF;
   display: flex;
 }
@@ -621,14 +621,15 @@
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.active::before {
   content: "";
   position: absolute;
-  height: 40px;
-  width: 40px;
-  background: var(--tf-primary);
-  top: 50%;
-  right: -20px;
-  transform: rotate(45deg);
-  margin-top: -20px;
+  background: transparent;
+  top: 0;
+  right: -25px;
   border-radius: 0px 10px 0px 0px;
+  width: 0;
+  height: 0;
+  border-top: 26px solid transparent;
+  border-left: 25px solid var(--tf-primary);
+  border-bottom: 26px solid transparent;
 }
 
 @media only screen and (max-width: 768px) {
@@ -646,6 +647,7 @@
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.active:last-child::before,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.active:last-child::before {
   position: static;
+  border: 0;
 }
 
 @media only screen and (max-width: 768px) {
@@ -1153,6 +1155,11 @@
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-summery .tf-booking-traveller-info table,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-summery .tf-booking-traveller-info table {
   border: 0px solid;
+}
+
+.tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-summery .tf-booking-traveller-info table thead,
+.tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-summery .tf-booking-traveller-info table thead {
+  background-color: transparent;
 }
 
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-summery .tf-booking-traveller-info table thead tr th,

@@ -73,7 +73,7 @@
                     margin: 0;
                     padding: 0;
                     list-style: none;
-                    border-radius: 8px;
+                    border-radius: 10px;
                     background: $color-gray-info;
                     display: flex;
                     @media #{$max768}{
@@ -126,14 +126,16 @@
                         &::before{
                             content: "";
                             position: absolute;
-                            height: 40px;
-                            width: 40px;
-                            background: $color-primary;
-                            top: 50%;
-                            right: -20px;
-                            transform: rotate(45deg);
-                            margin-top: -20px;
+                            background: transparent;
+                            top: 0;
+                            right: -25px;
+                            // transform: rotate(45deg);
                             border-radius: 0px 10px 0px 0px;
+                            width: 0;
+                            height: 0;
+                            border-top: 26px solid transparent;
+                            border-left: 25px solid $color-primary;
+                            border-bottom: 26px solid transparent;
                             @media #{$max768}{
                                 position: static;
                             }
@@ -142,6 +144,7 @@
                             border-radius: 0px 8px 8px 0px;
                             &::before{
                                 position: static;
+                                border: 0;
                             }
                             @media #{$max768}{
                                 border-radius: 16px;
@@ -451,6 +454,7 @@
                     table{
                         border: 0px solid;
                         thead{
+                            background-color: transparent;
                             tr{
                                 th{
                                     color: $color-text;
