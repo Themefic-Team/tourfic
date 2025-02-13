@@ -625,7 +625,7 @@
 @media (min-width: 576px) {
     .tf-modal {
         .tf-modal-dialog {
-            min-height: calc(100% - 4rem);
+            min-height: 100%;
         }
     }
 }

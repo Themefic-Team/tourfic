@@ -46,6 +46,13 @@ input[type="submit"].tf_btn,
   gap: 4px;
 }
 
+input[type="submit"].tf_btn:focus,
+.tf_btn:focus {
+  color: #ffffff;
+  background-color: var(--tf-secondary);
+  border-color: var(--tf-secondary);
+}
+
 input[type="submit"].tf_btn:hover,
 .tf_btn:hover {
   color: #ffffff;
@@ -237,11 +244,11 @@ Modal
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
-  min-height: calc(100% - 40px);
+  min-height: 100%;
   max-width: 100%;
   position: relative;
   pointer-events: none;
-  margin: 40px 0;
+  margin: 0;
 }
 
 .tf-modal .tf-modal-content {
@@ -284,6 +291,7 @@ Modal
 
 .tf-modal-extra-small .tf-modal-content {
   width: 30%;
+  max-width: 480px;
 }
 
 @media only screen and (max-width: 1366px) {

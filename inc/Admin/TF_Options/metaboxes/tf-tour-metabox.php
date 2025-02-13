@@ -881,7 +881,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 		// Tour Enquiry
 		't_enquiry'  => array(
 			'title'  => __( 'Tour Enquiry', 'tourfic' ),
-			'icon'   => 'fa fa-question-circle-o',
+			'icon'   => 'fa-solid fa-question-circle',
 			'fields' => array(
 				array(
 					'id'      => 'enquiry-section',

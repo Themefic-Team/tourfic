@@ -188,7 +188,6 @@
   width: 100%;
   z-index: 9999;
   background-color: var(--tf-secondary);
-  opacity: 0.9;
   border-top: 4px solid #ff6055;
   padding: 8px 0;
   position: fixed;
@@ -1268,7 +1267,8 @@
 
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-pagination .tf-diposit-switcher .tooltip-box .tf-info-btn .tooltip-title-box,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-pagination .tf-diposit-switcher .tooltip-box .tf-info-btn .tooltip-title-box {
-  margin-top: 3px;
+  margin-top: 0;
+  font-weight: 900;
 }
 
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-pagination .tf-diposit-switcher .tooltip-box .tooltip-title-box:hover + .tf-tooltip,

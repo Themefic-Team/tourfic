@@ -60,7 +60,7 @@ class Ask_Question extends \WP_Widget {
         ?>
 			</div>
 			<div class="ni-buttons">
-				<a href="#" data-target="#tf-ask-modal" class="tf-modal-btn tf_btn tf_btn_outline"><?php echo esc_html( $btn_label ); ?></a>
+				<a href="javaScript:void(0);" data-target="#tf-ask-modal" class="tf-modal-btn tf_btn tf_btn_outline"><?php echo esc_html( $btn_label ); ?></a>
 			</div>
 		</div>
 		<!-- End ask ques tour widget -->

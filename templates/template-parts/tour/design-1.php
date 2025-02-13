@@ -582,7 +582,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                         <?php 
                         if(!empty($enquery_button_text)) {
                             ?>
-                            <div class="tf-btn-wrap"><a href="#" data-target="#tf-ask-modal" class="tf-modal-btn tf_btn">
+                            <div class="tf-btn-wrap"><a href="javaScript:void(0);" data-target="#tf-ask-modal" class="tf-modal-btn tf_btn">
                                 <span><?php echo esc_html($enquery_button_text); ?>
                             </span></a></div>
                             <?php

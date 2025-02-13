@@ -385,7 +385,7 @@ use \Tourfic\App\TF_Review;
                     }
                     if( !empty( $tf_enquiry_section_button )) {
                         ?>
-                        <div class="tf-btn-wrap"><a href="#" data-target="#tf-ask-modal" class="tf-modal-btn tf_btn tf_btn_full tf_btn_large tf_btn_sharp"><span><?php echo esc_html($tf_enquiry_section_button); ?></span></a></div>
+                        <div class="tf-btn-wrap"><a href="javaScript:void(0);" data-target="#tf-ask-modal" class="tf-modal-btn tf_btn tf_btn_full tf_btn_large tf_btn_sharp"><span><?php echo esc_html($tf_enquiry_section_button); ?></span></a></div>
                         <?php
                     }
                     ?>

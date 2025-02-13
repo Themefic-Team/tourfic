@@ -36,6 +36,11 @@ input[type="submit"].tf_btn,
     cursor: pointer;
     gap: 4px;
 
+    &:focus{
+        color: $color-white;
+        background-color: $color-secondary;
+        border-color: $color-secondary;
+    }
     &:hover{
         color: $color-white;
         background-color: $color-secondary;
@@ -199,11 +204,11 @@ Modal
     .tf-modal-dialog {
         @include flexbox();
         @include align-items(center);
-        min-height: calc(100% - 40px);
+        min-height: 100%;
         max-width: 100%;
         position: relative;
         pointer-events: none;
-        margin: 40px 0;
+        margin: 0;
     }
 
     .tf-modal-content {
@@ -239,6 +244,7 @@ Modal
     &-extra-small{
         .tf-modal-content {
             width: 30%;
+            max-width: 480px;
             @media only screen and (max-width: 1366px) {
                 width: 40%;
             }
