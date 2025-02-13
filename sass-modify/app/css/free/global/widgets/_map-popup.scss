@@ -388,17 +388,23 @@
                     border-radius: 4px;
                 }
 
-                .tf-archive-hotel-discount {
+                .tf-tag-items{
                     position: absolute;
                     top: 16px;
                     left: 16px;
-                    color: $color-white;
-                    font-size: 0.75rem;
-                    font-weight: 700;
-                    line-height: 1.16;
-                    padding: 8px 16px;
-                    border-radius: 32px;
-                    background-color: $color-primary;
+                    @include flexbox();
+                    @include flex-direction(column);
+                    gap: 8px;
+
+                    .tf-tag-item {    
+                        color: $color-white;
+                        font-size: 12px;
+                        font-weight: 700;
+                        line-height: 14px;
+                        padding: 8px 16px;
+                        border-radius: 32px;
+                        background-color: $color-primary;
+                    }
                 }
             }
 
