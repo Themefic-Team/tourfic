@@ -1,5 +1,8 @@
 <?php
 // don't load directly
+
+use Tourfic\Classes\Helper;
+
 defined( 'ABSPATH' ) || exit;
 
 if ( ! class_exists( 'TF_text' ) ) {
@@ -38,6 +41,7 @@ if ( ! class_exists( 'TF_text' ) ) {
 									$parent  = '[' . $this->field['id'] . ']';
 									$default = isset( $field['default'] ) ? $field['default'] : '';
 									$value   = isset( $tf_meta_box_value[ $field['id'] ] ) ? $tf_meta_box_value[ $field['id'] ] : $default;
+									$layout_ids = array('single-hotel-layout', 'single-hotel-layout-part-1', 'single-hotel-layout-part-2', 'single-tour-layout', 'single-tour-layout-part-1', 'single-tour-layout-part-2', 'single-aprtment-layout-part-1', 'single-aprtment-layout-part-2', 'single-car-layout');
 
 									if ( ! empty( $this->value ) ) {
 										
@@ -45,8 +49,12 @@ if ( ! class_exists( 'TF_text' ) ) {
 										if ( is_array( $data ) ) {
 											if ( isset( $data[ $field['id'] ] ) ) {
 
-												$value = ( isset( $field['id'] ) ) ? $data[ $field['id'] ] : '';
-
+												if(!empty($field['id']) && in_array($field['id'], $layout_ids)){
+													$value = !empty( $data[ $field['id'] ] ) ? $data[ $field['id'] ] : $default;
+												} else {
+													$value = ( isset( $field['id'] ) ) ? $data[ $field['id'] ] : '';
+												}
+												
 												$value = ($field['type'] == 'text' || $field['type'] == 'textarea') ? stripslashes($value) : $value;
 											} else {
 												$value = $default;

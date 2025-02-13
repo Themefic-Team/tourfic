@@ -3972,13 +3972,18 @@ class Hotel {
 						?>
                     </a>
 
-					<?php
-					if ( ! empty( $min_discount_amount ) ) : ?>
-                        <div class="tf-archive-hotel-discount">
-							<?php echo $min_discount_type == "percent" ? wp_kses_post($min_discount_amount . '%') : wp_kses_post(wc_price( $min_discount_amount )) ?>
-							<?php esc_html_e( " Off", "tourfic" ); ?>
-                        </div>
-					<?php endif; ?>
+					<div class="tf-tag-items">
+						<?php if ( ! empty( $tf_discount_type ) && $tf_discount_type != "none" && ! empty( $tf_discount_amount ) ) {?>
+							<div class="tf-tag-item">
+								<?php echo $tf_discount_type == "percent" ? esc_attr( $tf_discount_amount ) . "%" : wp_kses_post( wc_price( $tf_discount_amount ) ); ?><?php esc_html_e( " Off", "tourfic" ); ?>
+							</div>
+						<?php } ?>
+						<?php if ( $featured ): ?>
+							<div class="tf-tag-item">
+								<?php echo ! empty( $meta['featured_text'] ) ? esc_html( $meta['featured_text'] ) : esc_html( "HOT DEAL" ); ?>
+							</div>
+						<?php endif; ?>
+					</div>
                 </div>
                 <div class="tf-archive-hotel-content">
                     <div class="tf-archive-hotel-content-left">

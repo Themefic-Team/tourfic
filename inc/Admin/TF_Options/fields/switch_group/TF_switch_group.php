@@ -40,19 +40,23 @@ if ( ! class_exists( 'TF_Switch_Group' ) ) {
 						$status_value = isset($single_value['status']) ? esc_attr($single_value['status']) : 0;
 						?>
 						<div class="tf-switch-column ui-state-default">
-							<label class="tf-switch-group-label" for="<?php echo esc_attr( $this->field_name() ) . '[' . esc_attr($key) . '][status]'; ?>">
-								<?php echo esc_html($single_value['label']) ?>
-							</label>
-							<input 
-								type="hidden"
-								name="<?php echo esc_attr( $this->field_name() ) . '[' . esc_attr($key) . '][label]'; ?>" 
-								value="<?php echo esc_attr($single_value['label']); ?>"
-							/>
+							<?php if(!empty($single_value['label'])) : ?> 
+								<label class="tf-switch-group-label" for="<?php echo esc_attr( $this->field_name() ) . '[' . esc_attr($key) . '][status]'; ?>">
+									<?php echo esc_html($single_value['label']) ?>
+								</label>
+								<input 
+									type="hidden"
+									name="<?php echo esc_attr( $this->field_name() ) . '[' . esc_attr($key) . '][label]'; ?>" 
+									value="<?php echo esc_attr($single_value['label']); ?>"
+								/>
+							<?php endif ?>
+							<?php if(!empty($single_value['slug'])): ?>
 							<input 
 								type="hidden"
 								name="<?php echo esc_attr( $this->field_name() ) . '[' . esc_attr($key) . '][slug]'; ?>" 
 								value="<?php echo esc_attr($single_value['slug']); ?>"
 							/>
+							<?php endif ?>
 							<label for="<?php echo esc_attr( $this->field_name() ) . '[' . esc_attr($key) . '][status]'; ?>" class="tf-switch-label" <?php echo wp_kses_post( $width ); ?>>
 								<input
 									type="checkbox" 

@@ -60,6 +60,13 @@ input[type="submit"].tf_btn:hover,
   border-color: var(--tf-secondary);
 }
 
+input[type="submit"].tf_btn:focus,
+.tf_btn:focus {
+  color: #ffffff;
+  background-color: var(--tf-secondary);
+  border-color: var(--tf-secondary);
+}
+
 input[type="submit"].tf_btn_secondary,
 .tf_btn_secondary {
   color: #060D1C;
@@ -1379,7 +1386,7 @@ h3.section-heading {
 .tf_submit-wrap button {
   width: 100%;
   height: 100%;
-  border-radius: 8px;
+  border-radius: 0 8px 8px 0;
   padding: 20px 20px;
 }
 
@@ -5857,14 +5864,26 @@ div#tf-destinationautocomplete-list div:before {
   border-radius: 4px;
 }
 
-.fancybox-container .tf-archive-details .tf-archive-hotel .tf-archive-hotel-thumb .tf-archive-hotel-discount {
+.fancybox-container .tf-archive-details .tf-archive-hotel .tf-archive-hotel-thumb .tf-tag-items {
   position: absolute;
   top: 16px;
   left: 16px;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.fancybox-container .tf-archive-details .tf-archive-hotel .tf-archive-hotel-thumb .tf-tag-items .tf-tag-item {
   color: #ffffff;
-  font-size: 0.75rem;
+  font-size: 12px;
   font-weight: 700;
-  line-height: 1.16;
+  line-height: 14px;
   padding: 8px 16px;
   border-radius: 32px;
   background-color: var(--tf-primary);
@@ -15833,7 +15852,7 @@ div#tf-destinationautocomplete-list div:before {
   visibility: visible;
   opacity: 1;
   top: 116%;
-  display: block;
+  display: block !important;
 }
 
 .tf-archive-template__four .tf-booking-form-submit {
@@ -16262,14 +16281,26 @@ div#tf-destinationautocomplete-list div:before {
   border-radius: 4px;
 }
 
-.tf-archive-template__four .tf-archive-details .tf-archive-hotel .tf-archive-hotel-thumb .tf-archive-hotel-discount {
+.tf-archive-template__four .tf-archive-details .tf-archive-hotel .tf-archive-hotel-thumb .tf-tag-items {
   position: absolute;
   top: 16px;
   left: 16px;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tf-archive-template__four .tf-archive-details .tf-archive-hotel .tf-archive-hotel-thumb .tf-tag-items .tf-tag-item {
   color: #ffffff;
-  font-size: 0.75rem;
+  font-size: 12px;
   font-weight: 700;
-  line-height: 1.2;
+  line-height: 14px;
   padding: 8px 16px;
   border-radius: 32px;
   background-color: var(--tf-primary);
@@ -16507,6 +16538,15 @@ div#tf-destinationautocomplete-list div:before {
   min-width: 100%;
   max-width: 100%;
   height: 165px;
+}
+
+.tf-archive-template__four .tf-archive-details .tf-archive-hotels.tf-layout-grid .tf-archive-hotel .tf-archive-hotel-thumb .tf-tag-items {
+  width: calc(100% - 32px);
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
 }
 
 .tf-archive-template__four .tf-archive-details .tf-archive-hotels.tf-layout-grid .tf-archive-hotel .tf-archive-hotel-content {

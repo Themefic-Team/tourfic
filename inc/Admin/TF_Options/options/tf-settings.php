@@ -183,12 +183,12 @@ TF_Settings::option( 'tf_settings', array(
 										'design-2' 	=> array(
 											'title'	=> esc_html__('Design 2', 'tourfic'),
 											'url' 	=> TF_ASSETS_ADMIN_URL."images/template/preview-single-design-2.png",
-											'preview_link' => esc_url('https://tourfic.com/preview/hotels/tuvo-suites-hotel/'),
+											'preview_link' => esc_url('https://tourfic.com/preview/hotels/melbourne-mastlereagh/'),
 										),
 										'default'  => array(
 											'title' => esc_html__('Default', 'tourfic'),
 											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-default.png",
-											'preview_link' => esc_url('https://tourfic.com/preview/hotels/tuvo-suites-hotel/'),
+											'preview_link' => esc_url('https://tourfic.com/preview/hotels/rio-ontho-palace/'),
 										),
 									),
 									'default'  => 'design-1',
@@ -409,14 +409,17 @@ TF_Settings::option( 'tf_settings', array(
 										'design-1' => array(
 											'title' => esc_html__('Design 1', 'tourfic'),
 											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-design-1.png",
+											'preview_link' => esc_url('https://tourfic.com/preview/tours/amplified-nz-tour/'),
 										),
 										'design-2' => array(
 											'title' => esc_html__('Design 2', 'tourfic'),
 											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-design-2.png",
+											'preview_link' => esc_url('https://tourfic.com/preview/tours/ancient-trails-of-japan/'),
 										),
 										'default'  => array(
 											'title' => esc_html__('Default', 'tourfic'),
 											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-default.png",
+											'preview_link' => esc_url('https://tourfic.com/preview/tours/magical-russia/'),
 										),
 									),
 									'default'  => 'design-1',
@@ -660,13 +663,15 @@ TF_Settings::option( 'tf_settings', array(
 									'label'    => esc_html__( 'Select Single Apartment Template', 'tourfic' ),
 									'subtitle'   => esc_html__( 'You have the option to override this from the settings specific to each individual apartment page.', 'tourfic' ),
 									'options'  => array(
-										'default'  => array(
-											'title' => esc_html__('Default', 'tourfic'),
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-apt-default.png",
-										),
 										'design-1' => array(
 											'title' => esc_html__('Design 1', 'tourfic'),
 											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-apt-design-1.png",
+											'preview_link' => esc_url('https://tourfic.com/preview/apartments/apartamento-en-ronda/'),
+										),
+										'default'  => array(
+											'title' => esc_html__('Default', 'tourfic'),
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-apt-default.png",
+											'preview_link' => esc_url('https://tourfic.com/preview/apartments/barcelo-residences-dubai-marina/'),
 										),
 									),
 									'default'  => 'design-1',
@@ -835,6 +840,7 @@ TF_Settings::option( 'tf_settings', array(
 										'design-1' => array(
 											'title' => esc_html__('Design 1', 'tourfic'),
 											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-car-design-1.png",
+											'preview_link' => esc_url('https://tourfic.com/preview/cars/honda-city/'),
 										),
 										'design-2' => array(
 											'title' => esc_html__('Design 2', 'tourfic'),

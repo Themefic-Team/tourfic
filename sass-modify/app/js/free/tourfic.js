@@ -2006,7 +2006,8 @@
         * Custom modal
         * @author: Foysal
         */
-        $(document).on('click', '.tf-modal-btn', function () {
+        $(document).on('click', '.tf-modal-btn', function (e) {
+            e.preventDefault();
             var dataTarget = $(this).attr('data-target');
             $(dataTarget).addClass('tf-modal-show');
             $('body').addClass('tf-modal-open');

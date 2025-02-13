@@ -46,6 +46,11 @@ input[type="submit"].tf_btn,
         background-color: $color-secondary;
         border-color: $color-secondary;
     }
+    &:focus{
+        color: $color-white;
+        background-color: $color-secondary;
+        border-color: $color-secondary;
+    }
 
     &_secondary{
         color: $btn-secondary-text;
