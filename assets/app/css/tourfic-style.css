@@ -7400,7 +7400,7 @@ div#tf-destinationautocomplete-list div:before {
   z-index: 9999;
   background-color: rgba(0, 0, 0, 0.2);
   display: flex;
-  align-items: center;
+  align-items: end;
   justify-content: center;
   display: none;
 }
@@ -7411,6 +7411,8 @@ div#tf-destinationautocomplete-list div:before {
 .page-template-tf-search .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp,
 .single-tf_carrental .tf-single-template__one .tf-car-booking-popup .tf-booking-popup-warp {
   border-radius: 16px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
   background: #ffffff;
   padding: 16px 24px;
   width: 850px;
