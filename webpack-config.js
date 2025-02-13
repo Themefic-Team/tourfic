@@ -6,15 +6,15 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const entryPoints = {};
 const StyleEntryPoints = {};
 
-const freeAppJs = glob.sync('./sass-modify/app/js/free/*.js');
-const freeAdminJs = glob.sync('./sass-modify/admin/js/free/*.js');
-const vendorAdminJs = glob.sync('./sass-modify/admin/js/addon/vendor/*.js');
-const vendorAppJs = glob.sync('./sass-modify/app/js/addon/vendor/*.js');
-const tfepAdminJs = glob.sync('./sass-modify/admin/js/addon/tfepiping/*.js');
-const tfepAppJs = glob.sync('./sass-modify/app/js/addon/tfepiping/*.js');
-const iCalAdminJs = glob.sync('./sass-modify/admin/js/addon/ical/*.js');
-const proAppJs = glob.sync('./sass-modify/app/js/pro/*.js');
-const proAdminJs = ['./sass-modify/admin/js/pro/locationpicker.jquery.js','./sass-modify/admin/js/pro/locationpicker-custom.js','./sass-modify/admin/js/pro/admin.js'];
+const freeAppJs = glob.sync('./sass/app/js/free/*.js');
+const freeAdminJs = glob.sync('./sass/admin/js/free/*.js');
+const vendorAdminJs = glob.sync('./sass/admin/js/addon/vendor/*.js');
+const vendorAppJs = glob.sync('./sass/app/js/addon/vendor/*.js');
+const tfepAdminJs = glob.sync('./sass/admin/js/addon/tfepiping/*.js');
+const tfepAppJs = glob.sync('./sass/app/js/addon/tfepiping/*.js');
+const iCalAdminJs = glob.sync('./sass/admin/js/addon/ical/*.js');
+const proAppJs = glob.sync('./sass/app/js/pro/*.js');
+const proAdminJs = ['./sass/admin/js/pro/locationpicker.jquery.js','./sass/admin/js/pro/locationpicker-custom.js','./sass/admin/js/pro/admin.js'];
 
 //tourfic free
 entryPoints['tourfic/assets/app/js/tourfic-scripts'] = freeAppJs;
@@ -36,18 +36,18 @@ entryPoints['tourfic-email-piping/assets/app/js/tourfic-email-piping-scripts.min
 entryPoints['tourfic-ical/assets/admin/js/tourfic-ical.min'] = iCalAdminJs;
 
 // SASS entry points
-const appScss = glob.sync('./sass-modify/app/css/free/tourfic.scss');
-const proAppScss = glob.sync('./sass-modify/app/css/pro/tourfic-pro.scss');
-const adminScss = glob.sync('./sass-modify/admin/css/free/tourfic-admin.scss');
-const proAdminScss = glob.sync('./sass-modify/admin/css/pro/tourfic-pro-admin.scss');
-const addonAdminScss = glob.sync('./sass-modify/admin/css/addon/tourfic-addon/tourfic-vendor.scss'); 
-const addonAppScss = glob.sync('./sass-modify/app/css/addon/tourfic-vendor.scss'); 
-const tfepAdminScss = glob.sync('./sass-modify/admin/css/addon/tourfic-addon/tourfic-email-piping.scss'); 
-const tfepAppScss = glob.sync('./sass-modify/app/css/addon/tourfic-email-piping.scss'); 
-const CarAppScss = glob.sync('./sass-modify/app/css/free/car/car.scss');
-const ApartmentAppScss = glob.sync('./sass-modify/app/css/free/apartment/apartment.scss');
-const TourAppScss = glob.sync('./sass-modify/app/css/free/tour/tour.scss');
-const HotelAppScss = glob.sync('./sass-modify/app/css/free/hotel/hotel.scss');
+const appScss = glob.sync('./sass/app/css/free/tourfic.scss');
+const proAppScss = glob.sync('./sass/app/css/pro/tourfic-pro.scss');
+const adminScss = glob.sync('./sass/admin/css/free/tourfic-admin.scss');
+const proAdminScss = glob.sync('./sass/admin/css/pro/tourfic-pro-admin.scss');
+const addonAdminScss = glob.sync('./sass/admin/css/addon/tourfic-addon/tourfic-vendor.scss'); 
+const addonAppScss = glob.sync('./sass/app/css/addon/tourfic-vendor.scss'); 
+const tfepAdminScss = glob.sync('./sass/admin/css/addon/tourfic-addon/tourfic-email-piping.scss'); 
+const tfepAppScss = glob.sync('./sass/app/css/addon/tourfic-email-piping.scss'); 
+const CarAppScss = glob.sync('./sass/app/css/free/car/car.scss');
+const ApartmentAppScss = glob.sync('./sass/app/css/free/apartment/apartment.scss');
+const TourAppScss = glob.sync('./sass/app/css/free/tour/tour.scss');
+const HotelAppScss = glob.sync('./sass/app/css/free/hotel/hotel.scss');
 
 StyleEntryPoints['tourfic/assets/app/css/tourfic-style'] = appScss;
 StyleEntryPoints['tourfic-pro/assets/app/css/tourfic-pro'] = proAppScss;

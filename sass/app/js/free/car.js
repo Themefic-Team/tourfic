@@ -358,10 +358,8 @@
         }
 
         const protectionValidation = (protections) => {
-
             var attrCount = 0;
             var response = [];
-
             $(protections).each(function() {
                 attrCount += Array.from(this.attributes).filter( function(a) {
                     return a.nodeName.startsWith('data-required');
@@ -369,7 +367,6 @@
             })
             
             protections.each(function (i, protection) {
-
                 if ( $(protection).data("required") ) {
                     
                     if (! $(protection).is(':checked')) {
@@ -379,7 +376,6 @@
                     }
                 }
             });
-
             if( response.includes(true) ){
                 if( attrCount > 1 ){
                     notyf.error('( * ) fields are required');
@@ -460,7 +456,6 @@
             }).get();
 
             let protections = $('input[name="protections[]"]');
-
             
             let validationProtections = protectionValidation(protections);
 
@@ -723,10 +718,9 @@
             }).get();
 
             let protections = $('input[name="protections[]"]');
-
             
             let validationProtections = protectionValidation(protections);
-
+            
             if( validationProtections ){
                 return;
             }
@@ -911,7 +905,7 @@
         });        
 
         // Social Share
-        $('.tf-single-car-section .tf-share-toggle').on("click", function (e) {
+        $('.single-tf_carrental .tf-single-template__one .tf-share-toggle').on("click", function (e) {
             e.preventDefault();
             $('.tf-share-toggle').toggleClass('actives');
             $('.share-car-content').toggleClass('show');

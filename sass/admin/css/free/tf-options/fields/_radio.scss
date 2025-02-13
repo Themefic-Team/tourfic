@@ -20,7 +20,7 @@
 
       & + label {
         color: $slate60;
-        font-size: 16px;
+        font-size: 1rem;
         position: relative;
         padding-left: 30px;
         @include transition(all, .3s, ease);
@@ -51,7 +51,7 @@
         content: "";
         height: 14px;
         width: 14px;
-        background-color: $blue60;
+        background-color: $admin-color-primary;
         border-radius: 100%;
         position: absolute;
         top: 4px;
@@ -68,7 +68,7 @@
         }
 
         & + label:before {
-          border-color: $blue60;
+          border-color: $admin-color-primary;
         }
       }
     }

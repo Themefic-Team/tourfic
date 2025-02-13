@@ -11,20 +11,20 @@
       li {
         display: flex;
         justify-content: space-between;
-        background-color: #fff;
+        background-color: #ffffff;
         margin: 10px 0px;
         border-radius: 8px;
         padding: 20px 30px 13px 30px;
-        @media #{$max767}{
+        @media #{$max768}{
           display: flow-root;
         }
         > label{
           font-weight: 600;
-          font-size: 16px;
-          color: #000;
+          font-size: 1rem;
+          color: $admin-color-heading;
           width: 45%;
           margin-top: 5px;
-          @media #{$max767}{
+          @media #{$max768}{
             margin-top: 0px;
             margin-bottom: 10px;
             display: block;
@@ -33,7 +33,7 @@
         .wp-picker-container{
           display: block;
           text-align: right;
-          @media #{$max767}{
+          @media #{$max768}{
             text-align: left;
             display: block;
           }

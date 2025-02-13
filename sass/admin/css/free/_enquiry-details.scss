@@ -2,13 +2,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    @media #{$max767}{
+    @media #{$max768}{
         display: flow-root;
     }
     h1{
         color: #1D2327;
         font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-        font-size: 32px;
+        font-size: 2rem;
         font-style: normal;
         font-weight: 700;
         line-height: normal;
@@ -21,7 +21,7 @@
         .tf_booking_views_button{
             border-radius: 8px;
             border: 1px solid #EEF6F0;
-            background: #FFF;
+            background: #ffffff;
             padding: 4px 8px;
             float: left;
             height: 46px;
@@ -40,7 +40,7 @@
                     justify-content: center;
                     cursor: pointer;
                     i{
-                        font-size: 15px;
+                        font-size: 0.938rem;
                     }
                     &.active{
                         color: #f0f0f1;
@@ -54,11 +54,11 @@
             padding: 10px 32px;
             border-radius: 8px;
             border: 1px solid #003C79;
-            background: #FFF;
+            background: #ffffff;
             margin: 0 !important;
             color: #003C79;
             font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-            font-size: 16px;
+            font-size: 1rem;
             font-style: normal;
             font-weight: 600;
             line-height: 24px; /* 150% */
@@ -77,7 +77,7 @@
             margin: 0;
             box-shadow: 0px 8px 20px 0px rgba(29, 35, 39, 0.06);
             font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-            font-size: 16px;
+            font-size: 1rem;
             font-style: normal;
             font-weight: 600;
             line-height: 24px; /* 150% */
@@ -172,7 +172,7 @@
                 .email-date {
                     color: #1D2327;
                     font-family: inherit;
-                    font-size: 16px;
+                    font-size: 1rem;
                     font-style: normal;
                     font-weight: 600;
                     line-height: 1.12;
@@ -181,7 +181,7 @@
                 .email-time {
                     color: #666D74;
                     font-family: inherit;
-                    font-size: 16px;
+                    font-size: 1rem;
                     font-style: normal;
                     font-weight: 400;
                     line-height: 1.12;
@@ -216,7 +216,7 @@
 
 .tf-enquiry-single-header-details {
     padding: 16px 24px;
-    background-color: #fff;
+    background-color: #ffffff;
     width: 100%;
     display: flex;
     gap: 16px;
@@ -231,7 +231,7 @@
 
     h1 {
         font-family: inherit;
-        font-size: 24px;
+        font-size: 1.5rem;
         font-style: normal;
         font-weight: 600;
         line-height: 1.33;
@@ -251,9 +251,9 @@ hr.enqury-single-title-line {
 
     .tf-enquiry-single-back-button{
         padding: 8px 20px 8px 16px;
-        background-color: #fff;
+        background-color: #ffffff;
         max-width: 60px;
-        font-size: 15px;
+        font-size: 0.938rem;
         color: #2C273F;
         font-family: Inter;
         font-style: normal;
@@ -281,14 +281,14 @@ hr.enqury-single-title-line {
         cursor: pointer;
         background-color: #003c79;
         border-color: #003c79;
-        color: #fff;
+        color: #ffffff;
         transition: all .3s ease-in-out;
         user-select: none;
 
         &:hover {
             background-color: #001f3e;
             border-color: #001f3e;
-            color: #fff;
+            color: #ffffff;
         }
     }
 }
@@ -302,14 +302,14 @@ hr.enqury-single-title-line {
         gap: 16px;
         width: 60%;
         .tf-enquiry-details {
-            background-color: #fff;
+            background-color: #ffffff;
             padding: 16px 0px 24px 0px;
             border-radius: 8px;
             min-height: 286px;
     
             h2 {
                 font-family: inherit;
-                font-size: 17px;
+                font-size: 1.063rem;
                 font-style: normal;
                 font-weight: 600;
                 line-height: 150%;
@@ -346,7 +346,7 @@ hr.enqury-single-title-line {
     
                     .tf-single-enquiry-details-value {
                         font-family: inherit;
-                        font-size: 15px;
+                        font-size: 0.938rem;
                         font-style: normal;
                         font-weight: 400;
                         line-height: 1.6;
@@ -354,7 +354,7 @@ hr.enqury-single-title-line {
                         i {
                             margin-left: 16px;
                             cursor: pointer;
-                            font-size: 16px;
+                            font-size: 1rem;
                         }
                     }
                 }
@@ -365,14 +365,14 @@ hr.enqury-single-title-line {
                     border-color: #003c79;
                     border-radius: 8px;
                     align-self: self-end;
-                    color: #fff;
-                    font-size: 15px;
+                    color: #ffffff;
+                    font-size: 0.938rem;
                     cursor: pointer;
         
                     &:hover {
                         background-color: #001f3e;
                         border-color: #001f3e;
-                        color: #fff;
+                        color: #ffffff;
                     }
         
                     span {
@@ -384,7 +384,7 @@ hr.enqury-single-title-line {
                     }
         
                     i {
-                        font-size: 16px;
+                        font-size: 1rem;
                     }
                 }
             }
@@ -396,14 +396,14 @@ hr.enqury-single-title-line {
             border-color: #003c79;
             border-radius: 8px;
             align-self: self-end;
-            color: #fff;
-            font-size: 15px;
+            color: #ffffff;
+            font-size: 0.938rem;
             cursor: pointer;
 
             &:hover {
                 background-color: #001f3e;
                 border-color: #001f3e;
-                color: #fff;
+                color: #ffffff;
             }
 
             span {
@@ -415,7 +415,7 @@ hr.enqury-single-title-line {
             }
 
             i {
-                font-size: 16px;
+                font-size: 1rem;
             }
 
         }
@@ -425,7 +425,7 @@ hr.enqury-single-title-line {
                 .tf-single-enquiry-reply-mail {
                     color: #2C273F;
                     font-family: inherit;
-                    font-size: 17px;
+                    font-size: 1.063rem;
                     font-style: normal;
                     font-weight: 400;
                     line-height: 150%;
@@ -447,7 +447,7 @@ hr.enqury-single-title-line {
 
                         .tf-single-enquiry-accordion-head-left {
                             font-family: inherit;
-                            font-size: 15px;
+                            font-size: 0.938rem;
                             font-style: normal;
                             font-weight: 600;
                             line-height: 1.6;
@@ -483,7 +483,7 @@ hr.enqury-single-title-line {
                         margin-top: 16px;
                         color: #5D5676;
                         font-family: inherit;
-                        font-size: 15px;
+                        font-size: 0.938rem;
                         font-style: normal;
                         font-weight: 400;
                         line-height: 1.6;
@@ -515,7 +515,7 @@ hr.enqury-single-title-line {
                 &::placeholder {
                     color: #77708F;
                     font-family: inherit;
-                    font-size: 15px;
+                    font-size: 0.938rem;
                     font-style: normal;
                     font-weight: 400;
                     line-height: 1.6;
@@ -527,9 +527,9 @@ hr.enqury-single-title-line {
                 padding: 8px 20px;
                 background-color: #003c79;
                 border-color: #003c79;
-                color: #fff;
+                color: #ffffff;
                 font-family: inherit;
-                font-size: 15px;
+                font-size: 0.938rem;
                 font-style: normal;
                 font-weight: 600;
                 line-height: 1.6;
@@ -544,7 +544,7 @@ hr.enqury-single-title-line {
                 &:hover {
                     background-color: #001f3e;
                     border-color: #001f3e;
-                    color: #fff;
+                    color: #ffffff;
                 }
             }
         }
@@ -553,7 +553,7 @@ hr.enqury-single-title-line {
     .tf-single-enquiry-right {
         width: 40%;
         .tf-enquiry-single-log-details {
-            background-color: #fff;
+            background-color: #ffffff;
             padding: 16px 0px 24px 0px;
             border-radius: 8px;
 
@@ -567,7 +567,7 @@ hr.enqury-single-title-line {
 
                 h2 {
                     font-family: inherit;
-                    font-size: 17px;
+                    font-size: 1.063rem;
                     font-style: normal;
                     font-weight: 600;
                     line-height: 150%;
@@ -602,7 +602,7 @@ hr.enqury-single-title-line {
                     align-items: center;
                     color: var(--UI-800, #2C273F);
                     font-family: inherit;
-                    font-size: 15px;
+                    font-size: 0.938rem;
                     font-style: normal;
                     font-weight: 400;
                     line-height: 1.6;
@@ -610,7 +610,7 @@ hr.enqury-single-title-line {
                     i {
                         margin-left: 8px;
                         cursor: pointer;
-                        font-size: 16px;
+                        font-size: 1rem;
                     }
                 }
 
@@ -642,7 +642,7 @@ hr.enqury-single-title-line {
     height: 200px !important;
 }
 
-@media #{$max991}{
+@media #{$max1024}{
     .tf-enquiry-details-wrap .tf-booking-header-filter .tf-bulk-action-form {
         width: 100%;
         gap: 12px;

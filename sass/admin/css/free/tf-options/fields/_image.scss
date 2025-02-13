@@ -14,7 +14,7 @@
         position: absolute;
         top: -10px;
         right: -10px;
-        background: #fff;
+        background: #ffffff;
         padding: 2px;
         cursor: pointer;
         border-radius: 50%;
@@ -26,7 +26,7 @@
         @include align-items(center);
 
         img {
-          background: #fff;
+          background: #ffffff;
           width: 11px !important;
         }
       }
@@ -48,7 +48,7 @@
         border-radius: 4px;
         height: 48px;
         color: #363e4a;
-        font-size: 14px;
+        font-size: 0.875rem;
         white-space: nowrap;
         overflow: hidden;
       }
@@ -82,8 +82,8 @@
           border-radius: 4px;
           height: 48px;
           color: #363e4a;
-          font-size: 14px;
-          background: #fff;
+          font-size: 0.875rem;
+          background: #ffffff;
           border: 1px solid $slate20;
           white-space: nowrap;
           overflow: hidden;

@@ -1,5 +1,5 @@
 #tf_tours_opt .tf-admin-meta-box {
-  @media #{$max991}{
+  @media #{$max1024}{
     position: relative;
     min-height: 660px;
   }
@@ -10,7 +10,7 @@
   z-index: 10;
   position: relative;
 
-  @media #{$max991}{
+  @media #{$max1024}{
     position: relative;
     min-height: 500px;
   }
@@ -35,7 +35,7 @@
     background-color: $slate0;
     min-width: 280px;
     @include transition(all, 0.3s, ease);
-    @media #{$max991}{
+    @media #{$max1024}{
       display: none;
     }
 
@@ -47,7 +47,7 @@
       color: $slate80;
       padding: 12px 16px;
       text-align: left;
-      font-size: 16px;
+      font-size: 1rem;
       line-height: 24px;
       cursor: pointer;
       @include transition(all, 0.3s, ease);
@@ -62,7 +62,7 @@
       }
 
       &:hover {
-        background-color: #fff;
+        background-color: #ffffff;
         outline: none;
       }
 
@@ -73,15 +73,15 @@
 
       &.active {
         background-color: #003c79;
-        color: #fff;
+        color: #ffffff;
         position: relative;
 
-        @media #{$max991}{
+        @media #{$max1024}{
           position: static;
         }
 
         .tf-sec-icon {
-          color: #fff;
+          color: #ffffff;
         }
 
         &::after {
@@ -89,12 +89,12 @@
           content: "";
           height: 10px;
           width: 10px;
-          background: #fff;
+          background: #ffffff;
           @include rotate(45);
           right: -5px;
           top: 50%;
           margin-top: -5px;
-          @media #{$max991}{
+          @media #{$max1024}{
             position: static;
             display: none;
           }
@@ -152,7 +152,7 @@
 
   .tf-tab-wrapper {
     @include flex(0 0 calc(100% - 280px));
-    @media #{$max991}{
+    @media #{$max1024}{
       flex: 0 0 calc(100% - 0px);
     }
 
@@ -181,7 +181,7 @@
     }
     span{
       display: block;
-      font-size: 16px;
+      font-size: 1rem;
       color: $slate40;
       font-weight: 600;
       margin-top: 5px;
@@ -204,9 +204,9 @@
 
   .tf-tab-wrapper {
     @include flex(0 0 calc(100% - 281px));
-    background-color: #fff;
+    background-color: #ffffff;
     padding: 12px 0;
-    @media #{$max991}{
+    @media #{$max1024}{
       flex: 0 0 calc(100% - 0px);
     }
   }

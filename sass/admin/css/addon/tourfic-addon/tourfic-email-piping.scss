@@ -1,6 +1,6 @@
 //global css
-@import '../../../../common/css/variable';
-@import '../../../../common/css/mixin';
+@import '../../../../common/variable';
+@import '../../../../common/mixin';
 
 
 
@@ -16,7 +16,7 @@
             background-color: #003c79;
             border-color: #003c79;
             border: 1px solid #003c79;
-            color: #fff;
+            color: #ffffff;
             font-weight: 600;
             font-family: inherit;
             padding: 5px 12px;
@@ -28,12 +28,12 @@
             &:hover {
                 background-color: #001f3e;
                 border-color: #001f3e;
-                color: #fff;
+                color: #ffffff;
             }
         }
     
         .tfep-connection-result {
-            font-size: 14px;
+            font-size: 0.875rem;
             font-weight: 500;
         }
     
@@ -47,7 +47,7 @@
     }
 
     .tfep-notice-for-test-connection {
-        font-size: 14px;
+        font-size: 0.875rem;
         font-weight: 400;
         margin-top: 14px;
         line-height: 1.5;

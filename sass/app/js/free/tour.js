@@ -580,9 +580,9 @@
         });
 
         //Template 3 Mobile Booking Btn
-        $('.tf-template-3 .tf-mobile-booking-btn').on('click', function () {
+        $('.tf-single-template__three .tf-mobile-booking-btn').on('click', function () {
             $('.tf-bottom-booking-bar').addClass('tf-mobile-booking-form');
-            $('.tf-template-3 .tf-mobile-booking-btn').slideUp(300);
+            $('.tf-single-template__three .tf-mobile-booking-btn').slideUp(300);
         });
 
         /**
@@ -743,8 +743,8 @@
                     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
                 ];
                 const startDate = new Date(tour_date_options.defaultDate);
-                $(".tf-template-3 .tf-bottom-booking-bar .tf-booking-form-checkinout span.tf-booking-date").html(startDate.getDate());
-                $(".tf-template-3 .tf-bottom-booking-bar .tf-booking-form-checkinout span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
+                $(".tf-single-template__three .tf-bottom-booking-bar .tf-booking-form-checkinout span.tf-booking-date").html(startDate.getDate());
+                $(".tf-single-template__three .tf-bottom-booking-bar .tf-booking-form-checkinout span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
             }
             function dateSetToFields(selectedDates, instance) {
                 if (selectedDates.length === 1) {
@@ -754,8 +754,8 @@
                     ];
                     if(selectedDates[0]){
                         const startDate = selectedDates[0];
-                        $(".tf-template-3 .tf-bottom-booking-bar .tf-booking-form-checkinout span.tf-booking-date").html(startDate.getDate());
-                        $(".tf-template-3 .tf-bottom-booking-bar .tf-booking-form-checkinout span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
+                        $(".tf-single-template__three .tf-bottom-booking-bar .tf-booking-form-checkinout span.tf-booking-date").html(startDate.getDate());
+                        $(".tf-single-template__three .tf-bottom-booking-bar .tf-booking-form-checkinout span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
                     }
                 }
                 if (selectedDates.length === 2) {
@@ -765,13 +765,13 @@
                     ];
                     if(selectedDates[0]){
                         const startDate = selectedDates[0];
-                        $(".tf-template-3 .tf-bottom-booking-bar .tf-booking-form-checkinout  span.tf-booking-date").html(startDate.getDate());
-                        $(".tf-template-3 .tf-bottom-booking-bar .tf-booking-form-checkinout span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
+                        $(".tf-single-template__three .tf-bottom-booking-bar .tf-booking-form-checkinout  span.tf-booking-date").html(startDate.getDate());
+                        $(".tf-single-template__three .tf-bottom-booking-bar .tf-booking-form-checkinout span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
                     }
                     if(selectedDates[1]){
                         const endDate = selectedDates[1];
-                        $(".tf-template-3 .tf-bottom-booking-bar .tf-booking-form-checkinout  span.tf-booking-date").html(endDate.getDate());
-                        $(".tf-template-3 .tf-bottom-booking-bar .tf-booking-form-checkinout span.tf-booking-month span").html(monthNames[endDate.getMonth()]);
+                        $(".tf-single-template__three .tf-bottom-booking-bar .tf-booking-form-checkinout  span.tf-booking-date").html(endDate.getDate());
+                        $(".tf-single-template__three .tf-bottom-booking-bar .tf-booking-form-checkinout span.tf-booking-month span").html(monthNames[endDate.getMonth()]);
                     }
                 }
             }

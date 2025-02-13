@@ -10,11 +10,11 @@
         border-radius: 4px;
         height: 48px;
         color: $slate80;
-        font-size: 14px;
+        font-size: 0.875rem;
 
         &:focus {
-            background: #FFFFFF;
-            box-shadow: 0 0 0 2px $blue60;
+            background: #ffffff;
+            box-shadow: 0 0 0 2px $admin-color-primary;
             border-radius: 4px;
         }
 
