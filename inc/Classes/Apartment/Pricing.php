@@ -297,13 +297,14 @@ class Pricing {
 		if ( ! empty( $min_max_price ) && count( $min_max_price ) > 1 ) {
 			$max_price = max( $min_max_price );
 			$min_price = min( $min_max_price );
+
 			if ( $max_price == $min_price ) {
-				$min_price = 1;
+				$min_price = $max_price;
 			}
 		}
 		if ( ! empty( $min_max_price ) && count( $min_max_price ) == 1 ) {
 			$max_price = max( $min_max_price );
-			$min_price = 1;
+			$min_price = $max_price;
 		}
 		if ( empty( $min_max_price ) ) {
 			$max_price = 0;
@@ -313,11 +314,6 @@ class Pricing {
 		return array(
 			'max' => $max_price,
 			'min' => $min_price,
-		);
-
-		return array(
-			'min' => ! empty( $min_max_price ) ? min( $min_max_price ) : 0,
-			'max' => ! empty( $min_max_price ) ? max( $min_max_price ) : 0,
 		);
 	}
 
