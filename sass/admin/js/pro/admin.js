@@ -341,7 +341,14 @@
                 $('.tf-importing-progressbar-container').show();
             },
             success: function(response){
-                
+                /* let data = JSON.parse(response);
+                if (data.status === 'progress') {
+                    // Update the progress bar or progress text
+                    $('.tf-importing-progressbar p').text('Importing... ' + data.progress);
+                } else if (data.status === 'success') {
+                    // Final success message
+                    $('.tf-importing-progressbar p').text('Import complete: ' + data.progress);
+                } */
             },
             complete: function(){
                 $('.tf_import_apartments_btn').html('Import');

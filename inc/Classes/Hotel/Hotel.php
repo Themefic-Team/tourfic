@@ -4977,15 +4977,19 @@ class Hotel {
 		//remove from tf_rooms fields if exists
 		if(empty($hotel_id)){
 			$assign_hotel_id = Room::get_hotel_id_for_assigned_room($post_id);
-			$hotel_meta = get_post_meta( $assign_hotel_id, 'tf_hotels_opt', true );
+			if(!empty($assign_hotel_id)){
+				$hotel_meta = get_post_meta( $assign_hotel_id, 'tf_hotels_opt', true );
 
-			if(! empty( $hotel_meta['tf_rooms'] ) && is_array($hotel_meta['tf_rooms'])){
-				$hotel_meta['tf_rooms'] = array_diff($hotel_meta['tf_rooms'], [$post_id]);
-			} else {
-				$hotel_meta['tf_rooms'] = '';
+				if(!empty($hotel_meta)){
+					if(! empty( $hotel_meta['tf_rooms'] ) && is_array($hotel_meta['tf_rooms'])){
+						$hotel_meta['tf_rooms'] = array_diff($hotel_meta['tf_rooms'], [$post_id]);
+					} else {
+						$hotel_meta['tf_rooms'] = '';
+					}
+				}
+				
+				update_post_meta($assign_hotel_id, 'tf_hotels_opt', $hotel_meta);
 			}
-			
-			update_post_meta($assign_hotel_id, 'tf_hotels_opt', $hotel_meta);
 		}
 	}
 
