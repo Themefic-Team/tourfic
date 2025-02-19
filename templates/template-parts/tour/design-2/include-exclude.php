@@ -4,7 +4,7 @@
     <div class="tf-inex-inner tf-flex tf-flex-gap-24">
         <?php if ( $inc ) { ?>
         <div class="tf-inex tf-tour-include tf-box">
-            <h3 class="tf-section-title"><?php esc_html_e( 'Included', 'tourfic' ); ?></h3>
+            <h2 class="tf-section-title"><?php esc_html_e( 'Included', 'tourfic' ); ?></h2>
             <ul class="tf-list">
                 <?php
                 foreach ( $inc as $key => $val ) {
@@ -19,7 +19,7 @@
         <?php } ?>
         <?php if ( $exc ) { ?>
         <div class="tf-inex tf-tour-exclude tf-box">
-            <h3 class="tf-section-title"><?php esc_html_e( 'Excluded', 'tourfic' ); ?></h3>
+            <h2 class="tf-section-title"><?php esc_html_e( 'Excluded', 'tourfic' ); ?></h2>
             <ul class="tf-list">
                 <?php
                 foreach ( $exc as $key => $val ) {
