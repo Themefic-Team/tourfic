@@ -186,7 +186,7 @@ TF_Settings::option( 'tf_settings', array(
 											'preview_link' => esc_url('https://tourfic.com/preview/hotels/melbourne-mastlereagh/'),
 										),
 										'default'  => array(
-											'title' => esc_html__('Default', 'tourfic'),
+											'title' => esc_html__('Legacy', 'tourfic'),
 											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-default.png",
 											'preview_link' => esc_url('https://tourfic.com/preview/hotels/rio-ontho-palace/'),
 										),
@@ -320,7 +320,7 @@ TF_Settings::option( 'tf_settings', array(
 											'is_pro'=> true,
 										),
 										'default'  => array(
-											'title' => esc_html__('Default', 'tourfic'),
+											'title' => esc_html__('Legacy', 'tourfic'),
 											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-default.png",
 										),
 									),
@@ -388,7 +388,7 @@ TF_Settings::option( 'tf_settings', array(
 											'preview_link' => esc_url('https://tourfic.com/preview/tours/ancient-trails-of-japan/'),
 										),
 										'default'  => array(
-											'title' => esc_html__('Default', 'tourfic'),
+											'title' => esc_html__('Legacy', 'tourfic'),
 											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-default.png",
 											'preview_link' => esc_url('https://tourfic.com/preview/tours/magical-russia/'),
 										),
@@ -549,7 +549,7 @@ TF_Settings::option( 'tf_settings', array(
 											'is_pro'=> true,
 										),
 										'default'  => array(
-											'title' => esc_html__('Default', 'tourfic'),
+											'title' => esc_html__('Legacy', 'tourfic'),
 											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-default.png",
 										),
 									),
@@ -613,7 +613,7 @@ TF_Settings::option( 'tf_settings', array(
 											'preview_link' => esc_url('https://tourfic.com/preview/apartments/2-bedroom-apartment-in-gamle-oslo/'),
 										),
 										'default'  => array(
-											'title' => esc_html__('Default', 'tourfic'),
+											'title' => esc_html__('Legacy', 'tourfic'),
 											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-apt-default.png",
 											'preview_link' => esc_url('https://tourfic.com/preview/apartments/barcelo-residences-dubai-marina/'),
 										),
@@ -698,7 +698,7 @@ TF_Settings::option( 'tf_settings', array(
 									'label'    => esc_html__( 'Select Archive & Search Result Template', 'tourfic' ),
 									'options'  => array(
 										'default'  => array(
-											'title' => esc_html__('Default', 'tourfic'),
+											'title' => esc_html__('Legacy', 'tourfic'),
 											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-default.png",
 										),
 										'design-1' => array(

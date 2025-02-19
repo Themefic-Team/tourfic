@@ -37,7 +37,7 @@ class Car_Seat_Range_Filter extends \WP_Widget {
 
         //check if is Car
         $posttype = isset( $_GET['type'] ) ? $_GET['type'] : get_post_type();
-
+       
         if ( $posttype == 'tf_carrental' ) {
             extract( $args );
             echo wp_kses_post($before_widget);
@@ -47,6 +47,7 @@ class Car_Seat_Range_Filter extends \WP_Widget {
                 </div>
                 <div class="tf-car-result-seat-range"></div>
             <?php 
+            echo wp_kses_post($after_widget);
         }else{
             if( !empty($_GET['type']) && $_GET['type']=="tf_carrental" && !empty($_GET['from']) && !empty($_GET['to'] ) ){
             extract( $args );
@@ -59,7 +60,7 @@ class Car_Seat_Range_Filter extends \WP_Widget {
 		<!-- End Price Range widget -->
         <?php
 
-        echo wp_kses_post($after_widget);
+        
     }
 
     /**

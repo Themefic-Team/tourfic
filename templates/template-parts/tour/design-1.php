@@ -169,7 +169,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                     <h1><?php the_title(); ?></h1>
                     <!-- Start map link -->
                     <div class="tf-map-link" id="tf-map-location" data-location="<?php echo esc_attr( $location ) ?>">
-                        <?php if ( $location ) {
+                        <?php if ( !empty($location) ) {
                             echo '<a href="#tour-map"><span class="tf-d-ib"><i class="fas fa-map-marker-alt"></i> ' . wp_kses_post($location) . '.</span></a>';
                         } ?>
                     </div>
@@ -506,7 +506,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
     <!-- Travel Itinerary section End -->
 
     <!-- Map Section Start -->
-    <?php if ( $location && $itinerary_map != 1 && ! $itineraries ): ?>
+    <?php if ( !empty($location) && $itinerary_map != 1 && ! $itineraries ): ?>
         <div class="tf-map-wrapper">
             <div class="tf-container">
                 <div class="tf-row">

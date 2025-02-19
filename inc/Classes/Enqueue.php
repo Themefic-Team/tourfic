@@ -64,6 +64,12 @@ class Enqueue {
 		$min_css          = ! empty( Helper::tfopt( 'css_min' ) ) ? '.min' : '';
 		$min_js           = ! empty( Helper::tfopt( 'js_min' ) ) ? '.min' : '';		
 		$tf_disable_services = ! empty( Helper::tfopt( 'disable-services' ) ) ? Helper::tfopt( 'disable-services' ) : [];
+		$tf_services = [
+			'apartment' => 'tf_apartment',
+			'carrentals' => 'tf_carrental',
+			'tour' => 'tf_tours',
+			'hotel' => 'tf_hotel',
+		];
 
 		/*
 		 * Ubuntu font load for hotel, tour, apartment template 3
@@ -92,21 +98,11 @@ class Enqueue {
 
 		//Updated CSS
 		wp_enqueue_style( 'tf-app-style', TF_ASSETS_URL . 'app/css/tourfic-style' . $min_css . '.css', null, TF_VERSION );
-
-		if ( !in_array('apartment', $tf_disable_services) ){
-			wp_enqueue_style( 'tf-app-apartment', TF_ASSETS_URL . 'app/css/tourfic-apartment' . $min_css . '.css', null, TF_VERSION );
-		}
-
-		if ( !in_array('carrentals', $tf_disable_services) ){
-			wp_enqueue_style( 'tf-app-car', TF_ASSETS_URL . 'app/css/tourfic-car' . $min_css . '.css', null, TF_VERSION );
-		}
-
-		if ( !in_array('tour', $tf_disable_services) ){
-			wp_enqueue_style( 'tf-app-tour', TF_ASSETS_URL . 'app/css/tourfic-tour' . $min_css . '.css', null, TF_VERSION );
-		}
-
-		if ( !in_array('hotel', $tf_disable_services) ){
-			wp_enqueue_style( 'tf-app-hotel', TF_ASSETS_URL . 'app/css/tourfic-hotel' . $min_css . '.css', null, TF_VERSION );
+	
+		foreach ($tf_services as $key => $post_type) {
+			if (!in_array($key, $tf_disable_services) && (is_singular($post_type) || is_post_type_archive($post_type))) {
+				wp_enqueue_style("tf-app-{$key}", TF_ASSETS_URL . "app/css/tourfic-{$key}" . $min_css . ".css", null, TF_VERSION);
+			}
 		}
 
 		if ( get_post_type() == 'tf_tours' ) {
