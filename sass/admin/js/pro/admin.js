@@ -101,37 +101,47 @@
         });
 
         //export tours ajax
-        $(document).on('click', '.tf-export-tours-btn', function(e){
+        $(document).on('submit', '.tf-tours-export-form', function(e){
             e.preventDefault();
+
+            let form = $(this);
+            let btn = form.find('.tf-admin-btn');
+            let formData = new FormData(form[0]);
+                formData.append('action', 'tf_export_tours');
+
             $.ajax({
                 type: "post",
                 url: tf_pro_params.ajax_url,
-                data: {
-                    action: "tf_export_tours",
-                    nonce: tf_pro_params.nonce,
-                },
+                data: formData,
+                contentType: false,
+                processData: false,
                 beforeSend: function(){
-                $('.tf-export-tours-btn').html('Exporting...');
+                    btn.addClass('tf-btn-loading');
                 },
                 success: function(response){
-                    var date = new Date();
-                    var generated_date = date.getMonth() + '-' + date.getDate() + '-' + date.getFullYear();
+                    if(response.success == false){
+                        notyf.error(response.data)
+                    } else {
+                        var date = new Date();
+                        var generated_date = date.getMonth() + '-' + date.getDate() + '-' + date.getFullYear();
 
-                    var link               = document.createElement('a');
-                        link.href          = 'data:text/csv;charset=utf-8,' + encodeURI(response);
-                        link.download      = 'Tours_' + generated_date + '.csv';
-                        link.style.display = 'none';
-                    document.body.appendChild(link);
-                    link.click();
-                    //clean up
-                    document.body.removeChild(link);
-                    $('.tf-export-tours-btn').html('Export');
+                        var link               = document.createElement('a');
+                            link.href          = 'data:text/csv;charset=utf-8,' + encodeURI(response);
+                            link.download      = 'Tours_' + generated_date + '.csv';
+                            link.style.display = 'none';
+                        document.body.appendChild(link);
+                        link.click();
+                        //clean up
+                        document.body.removeChild(link);
+                    }
+                    btn.removeClass('tf-btn-loading');
                 },
                 complete: function(){
-                    $('.tf-export-tours-btn').html('Export');
+                    btn.removeClass('tf-btn-loading');
                 }
             });
         });
+
         //export hotels ajax
         $(document).on('submit', '.tf-hotels-export-form', function(e){
             e.preventDefault();
@@ -154,7 +164,6 @@
                     if(response.success == false){
                         notyf.error(response.data)
                     } else {
-                        console.log('hillo');
                         var date           = new Date();
                         var generated_date = date.getMonth() + '-' + date.getDate() + '-' + date.getFullYear();
 
@@ -177,67 +186,85 @@
         });
 
         //export apartments ajax
-        $(document).on('click', '.tf-export-apartments-btn', function(e){
+        $(document).on('submit', '.tf-apartments-export-form', function(e){
             e.preventDefault();
+            
+            let form = $(this);
+            let btn = form.find('.tf-admin-btn');
+            let formData = new FormData(form[0]);
+                formData.append('action', 'tf_export_apartments');
+
             $.ajax({
                 type: "post",
                 url: tf_pro_params.ajax_url,
-                data: {
-                    action: "tf_export_apartments",
-                    nonce: tf_pro_params.nonce,
-                },
+                data: formData,
+                contentType: false,
+                processData: false,
                 beforeSend: function(){
-                    $('.tf-export-apartments-btn').html('Exporting...');
+                    btn.addClass('tf-btn-loading');
                 },
                 success: function(response){
-                    var date           = new Date();
-                    var generated_date = date.getMonth() + '-' + date.getDate() + '-' + date.getFullYear();
+                    if(response.success == false){
+                        notyf.error(response.data)
+                    } else {
+                        var date           = new Date();
+                        var generated_date = date.getMonth() + '-' + date.getDate() + '-' + date.getFullYear();
 
-                    var link               = document.createElement('a');
-                        link.href          = 'data:text/csv;charset=utf-8,' + encodeURI(response);
-                        link.download      = 'Apartments_' + generated_date + '.csv';
-                        link.style.display = 'none';
-                    document.body.appendChild(link);
-                    link.click();
-                    //clean up
-                    document.body.removeChild(link);
-                    $('.tf-export-apartments-btn').html('Export');
+                        var link               = document.createElement('a');
+                            link.href          = 'data:text/csv;charset=utf-8,' + encodeURI(response);
+                            link.download      = 'Apartments_' + generated_date + '.csv';
+                            link.style.display = 'none';
+                        document.body.appendChild(link);
+                        link.click();
+                        //clean up
+                        document.body.removeChild(link);
+                    }
+                    btn.removeClass('tf-btn-loading');
                 },
                 complete: function(){
-                    $('.tf-export-apartments-btn').html('Export');
+                    btn.removeClass('tf-btn-loading');
                 }
             });
         });
 
         //export cars ajax
-        $(document).on('click', '.tf-export-cars-btn', function(e){
+        $(document).on('submit', '.tf-cars-export-form', function(e){
             e.preventDefault();
+            
+            let form = $(this);
+            let btn = form.find('.tf-admin-btn');
+            let formData = new FormData(form[0]);
+                formData.append('action', 'tf_export_cars');
+
             $.ajax({
                 type: "post",
                 url: tf_pro_params.ajax_url,
-                data: {
-                    action: "tf_export_cars",
-                    nonce: tf_pro_params.nonce,
-                },
+                data: formData,
+                contentType: false,
+                processData: false,
                 beforeSend: function(){
-                    $('.tf-export-cars-btn').html('Exporting...');
+                    btn.addClass('tf-btn-loading');
                 },
                 success: function(response){
-                    var date           = new Date();
-                    var generated_date = date.getMonth() + '-' + date.getDate() + '-' + date.getFullYear();
+                    if(response.success == false){
+                        notyf.error(response.data)
+                    } else {
+                        var date           = new Date();
+                        var generated_date = date.getMonth() + '-' + date.getDate() + '-' + date.getFullYear();
 
-                    var link               = document.createElement('a');
-                        link.href          = 'data:text/csv;charset=utf-8,' + encodeURI(response);
-                        link.download      = 'cars_' + generated_date + '.csv';
-                        link.style.display = 'none';
-                    document.body.appendChild(link);
-                    link.click();
-                    //clean up
-                    document.body.removeChild(link);
-                    $('.tf-export-cars-btn').html('Export');
+                        var link               = document.createElement('a');
+                            link.href          = 'data:text/csv;charset=utf-8,' + encodeURI(response);
+                            link.download      = 'Cars_' + generated_date + '.csv';
+                            link.style.display = 'none';
+                        document.body.appendChild(link);
+                        link.click();
+                        //clean up
+                        document.body.removeChild(link);
+                    }
+                    btn.removeClass('tf-btn-loading');
                 },
                 complete: function(){
-                    $('.tf-export-cars-btn').html('Export');
+                    btn.removeClass('tf-btn-loading');
                 }
             });
         });
