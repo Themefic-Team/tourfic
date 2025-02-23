@@ -281,34 +281,63 @@
             let import_csv_nonce                = $('#tf-import-tours').find('input[name="import_csv_nonce"]').val();
             let tf_import_tours_update_existing = $('#tf-import-tours').find('input[name="tf_import_tours_update_existing"]').val();
             $('.tf-column-mapping-form').hide();
+            $('.tf-import-progress-bar-wrap').addClass('tf-progress-loader').show();
             
-            $.ajax({
-                type: 'post',
-                url: ajaxurl,
-                data:{
-                    action: 'tf_import_tours',
-                    form_data: formData,
-                    tour_csv_file_url: tour_csv_file_url,
-                    import_csv_nonce: import_csv_nonce,
-                    tf_import_tours_update_existing: tf_import_tours_update_existing,
-                },
-                beforeSend: function(){
-                    $('.tf-step-1').addClass('active');
-                    $('.tf-step-2').addClass('done');
-                    $('.tf-step-3').addClass('done');
-                    $('.tf-importing-progressbar-container').show();
-                },
-                success: function(response){
-                
-                },
-                complete: function(){
-                    $('.tf_import_tours_btn').html('Import');
-                    $('.tf-step-4').addClass('done');
-                    $('.tf-importing-progressbar-container').hide();
-                    $('.tf-import-complete-wrap').show();
-                },
-            });
+            function importNextRow(currentRow = 1) {
+                $.ajax({
+                    type: 'post',
+                    url: ajaxurl,
+                    data:{
+                        action: 'tf_import_tours',
+                        form_data: formData,
+                        current_row: currentRow,
+                        tour_csv_file_url: tour_csv_file_url,
+                        import_csv_nonce: import_csv_nonce,
+                        tf_import_tours_update_existing: tf_import_tours_update_existing,
+                    },
+                    beforeSend: function(){
+                        $('.tf-step-1').addClass('active');
+                        $('.tf-step-2').addClass('done');
+                        $('.tf-step-3').addClass('done');
+                        $('.tf-importing-progressbar-container').show();
+                        $('.tf-import-log-content').append('<li class="tf-importing-msg">Importing...</li>');
+                    },
+                    success: function(response){
+                        if (response.success) {
+                            var currentRow = response.data.current_row;
+                            var totalPosts = response.data.total_posts;
+                            var log = response.data.log;
+    
+                            $('.tf-import-progress-bar').text(currentRow + '/' + totalPosts);
+    
+                            // Calculate progress percentage for the width
+                            var progress = (currentRow / totalPosts) * 100;
+                            $('.tf-import-progress-bar').css('width', progress + '%');
+                            $('.tf-importing-msg').remove();
+                            $('.tf-import-log-content').append('<li>' + log + '</li>');
+                            $('.tf-import-log-box').scrollTop($('.tf-import-log-box')[0].scrollHeight);
 
+                            if (currentRow < totalPosts) {
+                                importNextRow(currentRow + 1);
+                            } else if (currentRow === totalPosts) {
+                                $('.tf-import-progress-bar-wrap').removeClass('tf-progress-loader');
+                                $('.tf-importing-msg').remove();
+                                $('.tf-import-log-content').append('<li>Import completed!</li>');
+                                $('.tf-step-4').addClass('done');
+                            }
+                        } else {
+                            $('.tf-import-log-content').append('<li>Error: ' + response.data + '</li>');
+                        }
+                    },
+                    error: function(response) {
+                        $('.tf-importing-msg').remove();
+                        $('.tf-import-log-content').append('<li>Error: ' + response.statusText + '</li>');
+                    }
+                });
+            }
+
+            // Start the import process
+            importNextRow(1);
         });
 
         /**
@@ -321,10 +350,9 @@
             let import_csv_nonce                 = $('#tf-import-hotels').find('input[name="import_csv_nonce"]').val();
             let tf_import_hotels_update_existing = $('#tf-import-hotels').find('input[name="tf_import_hotels_update_existing"]').val();
             $('.tf-column-mapping-form').hide();
-            $('.tf-import-progress-bar-wrap').show();
+            $('.tf-import-progress-bar-wrap').addClass('tf-progress-loader').show();
 
             function importNextRow(currentRow = 1) {
-                // formData.push({name: 'current_row', value: currentRow});
                 $.ajax({
                     type: 'post',
                     url: ajaxurl,
@@ -337,10 +365,11 @@
                         tf_import_hotels_update_existing: tf_import_hotels_update_existing,
                     },
                     beforeSend: function(){
-                        $('.tf-step-1').addClass('done');
+                        $('.tf-step-1').addClass('active');
                         $('.tf-step-2').addClass('done');
                         $('.tf-step-3').addClass('done');
                         $('.tf-importing-progressbar-container').show();
+                        $('.tf-import-log-content').append('<li class="tf-importing-msg">Importing...</li>');
                     },
                     success: function(response){
                         if (response.success) {
@@ -348,24 +377,20 @@
                             var totalPosts = response.data.total_posts;
                             var log = response.data.log;
     
-                            // Update progress bar label
                             $('.tf-import-progress-bar').text(currentRow + '/' + totalPosts);
     
                             // Calculate progress percentage for the width
                             var progress = (currentRow / totalPosts) * 100;
                             $('.tf-import-progress-bar').css('width', progress + '%');
-    
-                            // Update log box
+                            $('.tf-importing-msg').remove();
                             $('.tf-import-log-content').append('<li>' + log + '</li>');
-    
-                            // Scroll log box to the bottom
                             $('.tf-import-log-box').scrollTop($('.tf-import-log-box')[0].scrollHeight);
-    
-                            // Import next row if not completed
+
                             if (currentRow < totalPosts) {
                                 importNextRow(currentRow + 1);
                             } else if (currentRow === totalPosts) {
-                                // Display "Import completed!" only once
+                                $('.tf-import-progress-bar-wrap').removeClass('tf-progress-loader');
+                                $('.tf-importing-msg').remove();
                                 $('.tf-import-log-content').append('<li>Import completed!</li>');
                                 $('.tf-step-4').addClass('done');
                             }
@@ -374,6 +399,7 @@
                         }
                     },
                     error: function(response) {
+                        $('.tf-importing-msg').remove();
                         $('.tf-import-log-content').append('<li>Error: ' + response.statusText + '</li>');
                     }
                 });
@@ -394,41 +420,63 @@
             let import_csv_nonce                 = $('#tf-import-apartments').find('input[name="import_csv_nonce"]').val();
             let tf_import_apartments_update_existing = $('#tf-import-apartments').find('input[name="tf_import_apartments_update_existing"]').val();
             $('.tf-column-mapping-form').hide();
+            $('.tf-import-progress-bar-wrap').addClass('tf-progress-loader').show();
             
-            $.ajax({
-                type: 'post',
-                url: ajaxurl,
-                data:{
-                    action: 'tf_import_apartments',
-                    form_data: formData,
-                    apartment_csv_file_url: apartment_csv_file_url,
-                    import_csv_nonce: import_csv_nonce,
-                    tf_import_apartments_update_existing: tf_import_apartments_update_existing,
-                },
-                beforeSend: function(){
-                    $('.tf-step-1').addClass('done');
-                    $('.tf-step-2').addClass('done');
-                    $('.tf-step-3').addClass('done');
-                    $('.tf-importing-progressbar-container').show();
-                },
-                success: function(response){
-                    /* let data = JSON.parse(response);
-                    if (data.status === 'progress') {
-                        // Update the progress bar or progress text
-                        $('.tf-importing-progressbar p').text('Importing... ' + data.progress);
-                    } else if (data.status === 'success') {
-                        // Final success message
-                        $('.tf-importing-progressbar p').text('Import complete: ' + data.progress);
-                    } */
-                },
-                complete: function(){
-                    $('.tf_import_apartments_btn').html('Import');
-                    $('.tf-step-4').addClass('done');
-                    $('.tf-importing-progressbar-container').hide();
-                    $('.tf-import-complete-wrap').show();
-                },
-            });
+            function importNextRow(currentRow = 1) {
+                $.ajax({
+                    type: 'post',
+                    url: ajaxurl,
+                    data:{
+                        action: 'tf_import_apartments',
+                        form_data: formData,
+                        current_row: currentRow,
+                        apartment_csv_file_url: apartment_csv_file_url,
+                        import_csv_nonce: import_csv_nonce,
+                        tf_import_apartments_update_existing: tf_import_apartments_update_existing,
+                    },
+                    beforeSend: function(){
+                        $('.tf-step-1').addClass('active');
+                        $('.tf-step-2').addClass('done');
+                        $('.tf-step-3').addClass('done');
+                        $('.tf-importing-progressbar-container').show();
+                        $('.tf-import-log-content').append('<li class="tf-importing-msg">Importing...</li>');
+                    },
+                    success: function(response){
+                        if (response.success) {
+                            var currentRow = response.data.current_row;
+                            var totalPosts = response.data.total_posts;
+                            var log = response.data.log;
+    
+                            $('.tf-import-progress-bar').text(currentRow + '/' + totalPosts);
+    
+                            // Calculate progress percentage for the width
+                            var progress = (currentRow / totalPosts) * 100;
+                            $('.tf-import-progress-bar').css('width', progress + '%');
+                            $('.tf-importing-msg').remove();
+                            $('.tf-import-log-content').append('<li>' + log + '</li>');
+                            $('.tf-import-log-box').scrollTop($('.tf-import-log-box')[0].scrollHeight);
 
+                            if (currentRow < totalPosts) {
+                                importNextRow(currentRow + 1);
+                            } else if (currentRow === totalPosts) {
+                                $('.tf-import-progress-bar-wrap').removeClass('tf-progress-loader');
+                                $('.tf-importing-msg').remove();
+                                $('.tf-import-log-content').append('<li>Import completed!</li>');
+                                $('.tf-step-4').addClass('done');
+                            }
+                        } else {
+                            $('.tf-import-log-content').append('<li>Error: ' + response.data + '</li>');
+                        }
+                    },
+                    error: function(response) {
+                        $('.tf-importing-msg').remove();
+                        $('.tf-import-log-content').append('<li>Error: ' + response.statusText + '</li>');
+                    }
+                });
+            }
+
+            // Start the import process
+            importNextRow(1);
         });
 
         /**
@@ -442,34 +490,63 @@
             let import_csv_nonce                 = $('#tf-import-cars').find('input[name="import_csv_nonce"]').val();
             let tf_import_cars_update_existing = $('#tf-import-cars').find('input[name="tf_import_cars_update_existing"]').val();
             $('.tf-column-mapping-form').hide();
+            $('.tf-import-progress-bar-wrap').addClass('tf-progress-loader').show();
             
-            $.ajax({
-                type: 'post',
-                url: ajaxurl,
-                data:{
-                    action: 'tf_import_cars',
-                    form_data: formData,
-                    car_csv_file_url: car_csv_file_url,
-                    import_csv_nonce: import_csv_nonce,
-                    tf_import_cars_update_existing: tf_import_cars_update_existing,
-                },
-                beforeSend: function(){
-                    $('.tf-step-1').addClass('done');
-                    $('.tf-step-2').addClass('done');
-                    $('.tf-step-3').addClass('done');
-                    $('.tf-importing-progressbar-container').show();
-                },
-                success: function(response){
-                    
-                },
-                complete: function(){
-                    $('.tf_import_apartments_btn').html('Import');
-                    $('.tf-step-4').addClass('done');
-                    $('.tf-importing-progressbar-container').hide();
-                    $('.tf-import-complete-wrap').show();
-                },
-            });
+            function importNextRow(currentRow = 1) {
+                $.ajax({
+                    type: 'post',
+                    url: ajaxurl,
+                    data:{
+                        action: 'tf_import_cars',
+                        form_data: formData,
+                        current_row: currentRow,
+                        car_csv_file_url: car_csv_file_url,
+                        import_csv_nonce: import_csv_nonce,
+                        tf_import_cars_update_existing: tf_import_cars_update_existing,
+                    },
+                    beforeSend: function(){
+                        $('.tf-step-1').addClass('active');
+                        $('.tf-step-2').addClass('done');
+                        $('.tf-step-3').addClass('done');
+                        $('.tf-importing-progressbar-container').show();
+                        $('.tf-import-log-content').append('<li class="tf-importing-msg">Importing...</li>');
+                    },
+                    success: function(response){
+                        if (response.success) {
+                            var currentRow = response.data.current_row;
+                            var totalPosts = response.data.total_posts;
+                            var log = response.data.log;
+    
+                            $('.tf-import-progress-bar').text(currentRow + '/' + totalPosts);
+    
+                            // Calculate progress percentage for the width
+                            var progress = (currentRow / totalPosts) * 100;
+                            $('.tf-import-progress-bar').css('width', progress + '%');
+                            $('.tf-importing-msg').remove();
+                            $('.tf-import-log-content').append('<li>' + log + '</li>');
+                            $('.tf-import-log-box').scrollTop($('.tf-import-log-box')[0].scrollHeight);
 
+                            if (currentRow < totalPosts) {
+                                importNextRow(currentRow + 1);
+                            } else if (currentRow === totalPosts) {
+                                $('.tf-import-progress-bar-wrap').removeClass('tf-progress-loader');
+                                $('.tf-importing-msg').remove();
+                                $('.tf-import-log-content').append('<li>Import completed!</li>');
+                                $('.tf-step-4').addClass('done');
+                            }
+                        } else {
+                            $('.tf-import-log-content').append('<li>Error: ' + response.data + '</li>');
+                        }
+                    },
+                    error: function(response) {
+                        $('.tf-importing-msg').remove();
+                        $('.tf-import-log-content').append('<li>Error: ' + response.statusText + '</li>');
+                    }
+                });
+            }
+
+            // Start the import process
+            importNextRow(1);
         });
 
         /**
