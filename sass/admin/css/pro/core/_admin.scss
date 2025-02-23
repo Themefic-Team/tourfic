@@ -417,7 +417,7 @@ table.tf-importer-mapping-table tr:nth-child(even) {
     }
   }
 
-  .tf-select2{
+  .tf-export-select2{
       width: 100%;
   }
   .tf_export_range{
@@ -438,6 +438,60 @@ table.tf-importer-mapping-table tr:nth-child(even) {
     font-style: italic;
     font-weight: 400;
     display: block;
+  }
+}
+
+/* Progress bar */
+.tf-import-progress-bar-wrap {
+  margin-top: 20px;
+  display: none;
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  border-radius: 5px; 
+  overflow: hidden; 
+
+  .tf-import-progress-bar {
+    width: 0%;
+    height: 30px;
+    background-color: #4CAF50; 
+    text-align: center;
+    line-height: 30px;
+    color: white;
+    transition: width 0.3s ease; 
+  }
+}
+
+/* Log box styling */
+.tf-import-log-box {
+  margin-top: 20px;
+  height: 200px;
+  overflow-y: scroll;
+  border: 1px solid #ccc;
+  padding: 10px;
+  background-color: #f9f9f9;
+  font-family: monospace;
+  font-size: 12px;
+  text-align: left;
+
+  .tf-import-log-content {
+    margin: 0;
+    padding: 0;
+    @include flexbox();
+    @include flex-direction(column);
+    @include justify-content(flex-start);
+
+    li {
+      margin: 0;
+      padding: 3px 5px;
+
+      &:nth-child(odd) {
+        background-color: #f1f1f1;
+      }
+
+      &:nth-child(even) {
+        background-color: #e1e1e1;
+      }
+    }
   }
 }
 

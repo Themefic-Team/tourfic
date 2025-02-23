@@ -557,7 +557,7 @@ class Enqueue {
 	 * Enqueue Admin scripts
 	 * @since 1.0
 	 */
-	function tf_enqueue_admin_scripts( $hook ) {
+	function tf_enqueue_admin_scripts( $screen ) {
 
 		/**
 		 * Notyf
@@ -566,7 +566,11 @@ class Enqueue {
 		wp_enqueue_style( 'notyf', TF_ASSETS_URL . 'app/libs/notyf/notyf.min.css', '', TF_VERSION );
 		wp_enqueue_script( 'notyf', TF_ASSETS_URL . 'app/libs/notyf/notyf.min.js', array( 'jquery' ), TF_VERSION, true );
 
-		if ( $hook == "widgets.php" && function_exists( 'is_woocommerce' ) ) {
+		if ( ($screen == "widgets.php" && function_exists( 'is_woocommerce' )) || 
+			$screen == 'tf_hotel_page_tf_export_hotels' ||
+			$screen == 'tf_tours_page_tf_export_tours' ||
+			$screen == 'tf_apartment_page_tf_export_apartments' ||
+			$screen == 'tf_carrental_page_tf_export_cars') {
 
 			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ?: '.min';
 
