@@ -306,6 +306,7 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
                             <!-- Hotel Single Widget Hook are - start -->
                             <div class="tf-hotel-single-custom-widget-wrap">
                                 <?php do_action( "tf_hotel_single_widgets" ); ?>
+                                <?php do_action( "tf_single_hotel_sidebar_area_with_args", $post_id ); ?>
                             </div>
                             <!-- Hotel Single Widget Hook are - end -->
                         </div>
