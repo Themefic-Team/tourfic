@@ -5,6 +5,7 @@ $badge_up     = '<div class="tf-csf-badge"><span class="tf-upcoming">' . __( "Up
 $badge_pro    = '<div class="tf-csf-badge"><span class="tf-pro">' . __( "Pro Feature", "tourfic" ) . '</span></div>';
 $badge_up_pro = '<div class="tf-csf-badge"><span class="tf-upcoming">' . __( "Upcoming", "tourfic" ) . '</span><span class="tf-pro">' . __( "Pro Feature", "tourfic" ) . '</span></div>';
 
+$adults_name = apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) );
 
 TF_Metabox::metabox( 'tf_room_opt', array(
 	'title'     => 'Room Settings',
@@ -102,8 +103,8 @@ TF_Metabox::metabox( 'tf_room_opt', array(
                 array(
                     'id'          => 'adult',
                     'type'        => 'number',
-                    'label'       => __( 'Number of Adults', 'tourfic' ),
-                    'subtitle'    => __( 'Max number of adults allowed in the room.', 'tourfic' ),
+                    'label'       => __( 'Number of ' . $adults_name .'s', 'tourfic' ),
+                    'subtitle'    => __( 'Max number of ' . $adults_name . 's allowed in the room.', 'tourfic' ),
                     'attributes'  => array(
                         'min' => '0',
                     ),
@@ -239,7 +240,7 @@ TF_Metabox::metabox( 'tf_room_opt', array(
                 array(
                     'id'          => '',
                     'type'        => 'text',
-                    'label'       => __( 'Price per Adult', 'tourfic' ),
+                    'label'       => __( 'Price per ' . $adults_name, 'tourfic' ),
                     'is_pro'      => true,
                     'dependency'  => array( 'pricing-by', '==', '2' ),
                     'field_width' => 50,

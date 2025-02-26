@@ -846,7 +846,7 @@ class Helper {
                     <div class="tf_acrselection-wrap">
                         <div class="tf_acrselection-inner">
                             <div class="tf_acrselection">
-                                <div class="acr-label"><?php esc_html_e( "Adults", "tourfic" ); ?></div>
+                                <div class="acr-label"><?php esc_html_e( $adults_name . "s", "tourfic" ); ?></div>
                                 <div class="acr-select">
                                     <div class="acr-dec">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">

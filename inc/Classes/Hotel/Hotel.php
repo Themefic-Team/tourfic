@@ -1597,6 +1597,8 @@ class Hotel {
 		$hotel_date_format_for_users   = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 		$hotel_location_field_required = ! empty( Helper::tfopt( "required_location_hotel_search" ) ) ? Helper::tfopt( "required_location_hotel_search" ) : 0;
 
+		$adults_name = apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) );
+
 		$disable_hotel_child_search = ! empty( Helper::tfopt( 'disable_hotel_child_search' ) ) ? Helper::tfopt( 'disable_hotel_child_search' ) : '';
 		if ( ! empty( $design ) && 2 == $design ) {
 			?>
@@ -1687,7 +1689,7 @@ class Hotel {
                                 <div class="tf_acrselection-wrap">
                                     <div class="tf_acrselection-inner">
                                         <div class="tf_acrselection">
-                                            <div class="acr-label"><?php esc_html_e( 'Adults', 'tourfic' ); ?></div>
+                                            <div class="acr-label"><?php esc_html_e( $adults_name . 's', 'tourfic' ); ?></div>
                                             <div class="acr-select">
                                                 <div class="acr-dec">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -1921,7 +1923,7 @@ class Hotel {
 									<h5><?php esc_html_e("Guests & Rooms", "tourfic"); ?></h5>
 									<div class="tf_selectperson-wrap">
 										<div class="tf_input-inner">
-											<div class="adults-text"><?php echo esc_html__( '1 Adults', 'tourfic' ); ?></div>
+											<div class="adults-text"><?php echo esc_html__( '1 ' . $adults_name . 's', 'tourfic' ); ?></div>
 											<?php if ( empty( $disable_hotel_child_search ) ) : ?>
 												<div class="person-sep"></div>
 												<div class="child-text"><?php echo esc_html__( '0 Children', 'tourfic' ); ?></div>
@@ -1933,7 +1935,7 @@ class Hotel {
 										<div class="tf_acrselection-wrap">
 											<div class="tf_acrselection-inner">
 												<div class="tf_acrselection">
-													<div class="acr-label"><?php esc_html_e( 'Adults', 'tourfic' ); ?></div>
+													<div class="acr-label"><?php esc_html_e( $adults_name . 's', 'tourfic' ); ?></div>
 													<div class="acr-select">
 														<div class="acr-dec">-</div>
 														<input type="number" name="adults" id="adults" min="1" value="1" readonly>
@@ -2325,7 +2327,7 @@ class Hotel {
                         <span class="tf_person-icon tf-search-form-field-icon">
                             <i class="fas fa-user"></i>
                         </span>
-                            <div class="adults-text"><?php echo esc_html__( '1 Adults', 'tourfic' ); ?></div>
+                            <div class="adults-text"><?php echo esc_html__( '1 ' . $adults_name . 's', 'tourfic' ); ?></div>
 							<?php if ( empty( $disable_hotel_child_search ) ) : ?>
                                 <div class="person-sep"></div>
                                 <div class="child-text"><?php echo esc_html__( '0 Children', 'tourfic' ); ?></div>
@@ -2337,7 +2339,7 @@ class Hotel {
                         <div class="tf_acrselection-wrap">
                             <div class="tf_acrselection-inner">
                                 <div class="tf_acrselection">
-                                    <div class="acr-label"><?php esc_html_e( 'Adults', 'tourfic' ); ?></div>
+                                    <div class="acr-label"><?php esc_html_e( $adults_name . 's', 'tourfic' ); ?></div>
                                     <div class="acr-select">
                                         <div class="acr-dec">-</div>
                                         <input type="number" name="adults" id="adults" min="1" value="1" readonly>
@@ -2548,6 +2550,8 @@ class Hotel {
 		// date format for users output
 		$hotel_date_format_for_users = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 
+		$adults_name = apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) );
+
 
 		/**
 		 * Get each hotel room's disabled date from the available dates
@@ -2747,7 +2751,7 @@ class Hotel {
                         <div class="tf_acrselection-wrap">
                             <div class="tf_acrselection-inner">
                                 <div class="tf_acrselection">
-                                    <div class="acr-label"><?php esc_html_e( "Adults", "tourfic" ); ?></div>
+                                    <div class="acr-label"><?php esc_html_e( $adults_name . 's', "tourfic" ); ?></div> <!-- Here -->
                                     <div class="acr-select">
                                         <div class="acr-dec">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -2985,11 +2989,11 @@ class Hotel {
                             <i class="fas fa-user-friends"></i>
                             <select name="adults" id="adults" class="">
 								<?php
-								echo '<option value="1">1 ' . esc_html__( "Adult", "tourfic" ) . '</option>';
+								echo '<option value="1">1 ' . esc_html__( $adults_name, "tourfic" ) . '</option>';
 								if ( $max_adults_numbers > 1 ) {
 									foreach ( range( 2, $max_adults_numbers ) as $value ) {
 										$selected = $value == $adults ? 'selected' : null;
-										echo '<option ' . esc_attr( $selected ) . ' value="' . esc_attr( $value ) . '">' . esc_html( $value ) . ' ' . esc_html__( "Adults", "tourfic" ) . '</option>';
+										echo '<option ' . esc_attr( $selected ) . ' value="' . esc_attr( $value ) . '">' . esc_html( $value ) . ' ' . esc_html__( $adults_name . "s", "tourfic" ) . '</option>';
 									}
 								}
 								?>
