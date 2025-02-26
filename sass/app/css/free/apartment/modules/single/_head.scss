@@ -75,7 +75,6 @@
                     .tf-wishlist-button {
                         font-size: 0.875rem;
                         cursor: pointer;
-                        line-height: 1;
                         color: $color-gray;
                         display: flex;
                         align-items: center;
@@ -90,7 +89,6 @@
                         position: relative;
 
                         a {
-                            line-height: 1;
                             font-size: 0.875rem;
                             display: flex;
                             align-items: center;
@@ -238,7 +236,6 @@
                     color: $color-text;
                     font-size: 1rem;
                     font-weight: 400;
-                    line-height: 1.5;
                     letter-spacing: 0.2px;
                     @media #{$max1024} {
                         flex: 1;

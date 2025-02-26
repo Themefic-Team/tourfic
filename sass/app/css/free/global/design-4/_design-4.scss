@@ -171,7 +171,7 @@
                 display: block;
                 transition: .3s all ease;    
                 font-weight: 400;
-                line-height: 1.75;
+                line-height: 1.5;
                 letter-spacing: 0.15px;
                 border-radius: 4px;
 
@@ -213,10 +213,6 @@
             }
 
             .acr-label {
-                color: $color-heading;
-                font-size: 1rem;
-                font-weight: 400;
-                line-height: 1.75;
                 letter-spacing: 0.15px;
             }
 
@@ -378,7 +374,7 @@
                             color: $color-heading;
                             font-size: 0.75rem;
                             font-weight: 700;
-                            line-height: 1.17;
+                            line-height: 1.2;
                             padding: 8px 16px;
                             border-radius: 32px;
                             background-color: $color-white;
@@ -394,7 +390,7 @@
                         h4 {
                             font-size: 1rem;
                             font-weight: 500;
-                            line-height: 1.25;
+                            line-height: 1.2;
                             margin: 0;
                             text-transform: capitalize;
 
@@ -430,7 +426,6 @@
                             }
 
                             .tf-avarage-review {
-                                line-height: 1.25;
                                 color: $color-heading;
                                 font-weight: 400;
 
@@ -515,7 +510,9 @@
                     li.tf-archive-view-item {
                         width: 32px;
                         height: 32px;
-                        line-height: 2.25;
+                        @include flexbox();
+                        align-items: center;
+                        justify-content: center;
                         border-radius: 8px;
                         background-color: $color-white;
                         text-align: center;
@@ -542,7 +539,9 @@
                         font-size: 0.875rem;
                         font-weight: 500;
                         height: 32px;
-                        line-height: 2.28;
+                        @include flexbox();
+                        align-items: center;
+                        justify-content: center;
                         border-radius: 4px;
                         background-color: $color-white;
                         text-align: center;
@@ -574,7 +573,9 @@
                             font-size: 0.875rem;
                             font-weight: 500;
                             height: 32px;
-                            line-height: 2.28;
+                            @include flexbox();
+                            align-items: center;
+                            justify-content: center;
                             border-radius: 4px;
                             border: none;
                             background-color: $color-white;
@@ -654,8 +655,7 @@
                             color: $color-white;
                             font-size: 12px;
                             font-weight: 700;
-                            line-height: 14px;
-                            padding: 8px 16px;
+                            padding: 6px 16px;
                             border-radius: 32px;
                             background-color: $color-primary;
                         }
@@ -688,8 +688,6 @@
                             gap: 8px;
                             color: $color-text;
                             font-size: 1rem;
-                            line-height: 1.25;
-                            
                             @media #{$max575} {
                                 font-size: 0.75rem;
                             }
@@ -759,9 +757,6 @@
                             }
 
                             .tf-avarage-review {
-                                line-height: 1.25;
-                                color: $color-text;
-
                                 .tf-no-review-count{
                                     color: $color-heading;
                                 }
@@ -920,7 +915,7 @@
                     color: $color-primary;
                     font-size: 1rem;
                     font-weight: 700;
-                    line-height: 1.75;
+                    line-height: 1.5;
                     background-color: transparent;
                     letter-spacing: 0.15px;
                     cursor: pointer;
@@ -1134,7 +1129,7 @@
                     text-decoration: none;
                     padding: 12px 12px;
                     min-width: 40px;
-                    line-height: 1.14;
+                    line-height: 1.2;
                     border-radius: 5px;
                     text-align: center;
                     background: transparent;
@@ -1156,7 +1151,7 @@
                 text-decoration: none;
                 padding: 12px 12px;
                 min-width: 40px;
-                line-height: 1.14;
+                line-height: 1.2;
                 border-radius: 5px;
                 text-align: center;
                 background: transparent;

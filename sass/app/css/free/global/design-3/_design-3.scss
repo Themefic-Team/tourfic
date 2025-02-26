@@ -10,7 +10,6 @@
         color: $color-gray;
         font-size: 1rem;
         font-weight: 400;
-        line-height: 1.25;
 
         #tf-required {
             text-align: center;
@@ -173,7 +172,6 @@
                                                 color: $color-text;
                                                 font-size: 1.25rem;
                                                 font-weight: 400;
-                                                line-height: 1.3;
                                             }
                                         }
                                     }
@@ -212,7 +210,6 @@
             text-align: center;
             font-size: 0.75rem;
             font-weight: 600;
-            line-height: 1.5;
             cursor: pointer;
             margin-left: 16px;
             margin-right: 16px;
@@ -280,8 +277,6 @@
                 .tf-booking-date {
                     color: $color-text;
                     font-size: 1.5rem;
-                    font-weight: 400;
-                    line-height: 1.33;
                     text-align: right;
                     margin-right: 5px;
                     @media #{$max1024}{
@@ -291,7 +286,6 @@
                 span.tf-booking-form-title {
                     font-size: 1rem;
                     font-weight: 600;
-                    line-height: 1.25;
                     margin-bottom: 8px;
                     color: $color-text;
                     @media #{$max1024}{
@@ -367,14 +361,12 @@
                         padding-left: 0px;
                         font-size: 1rem;
                         font-weight: 400;
-                        line-height: 1.3;
                         color: $color-text;
                         @media #{$max1024}{
                             font-size: 0.75rem;
                         }
                         label{
                             padding-left: 25px;
-                            line-height: 1;
                             margin-left: 0px;
                             .tf-checkmark{
                                 border-radius: 4px;
@@ -634,7 +626,6 @@
                             .tf-price {
                                 color: $color-heading;
                                 font-weight: 400;
-                                line-height: 1.7;
                                 text-align: right;
                                 .amount{
                                     font-weight: 400;
@@ -736,9 +727,6 @@
             &>span{
                 color: $color-text;
                 font-size: 1.5rem;
-                font-weight: 400;
-                line-height: 1.3;
-                margin: 0px;
                 @media #{$max1024}{
                     font-size: 0.875rem;
                 }
@@ -814,7 +802,6 @@
                         margin-bottom: 10px;
                         font-size: 1rem;
                         font-weight: 600;
-                        line-height: 1.5;
                         color: $color-text;
                         @media #{$max1024}{
                             font-size: 0.75rem;
@@ -832,7 +819,6 @@
                             padding-left: 0px;
                             font-size: 1rem;
                             font-weight: 400;
-                            line-height: 1.3;
                             color: $color-text;
                             background: transparent;
                             @media #{$max1024}{
@@ -840,7 +826,6 @@
                             }
                             label{
                                 padding-left: 30px;
-                                line-height: 1;
                                 .tf-checkmark{
                                     border-radius: 4px;
                                     border: 1px solid $color-primary;
@@ -873,7 +858,6 @@
                         color: $color-primary;
                         font-size: 1rem;
                         font-weight: 400;
-                        line-height: 1.3;
                         margin-top: 6px;
                         span{
                             display: none;
@@ -924,7 +908,6 @@
                     color: $color-text;
                     font-size: 1rem;
                     font-weight: 400;
-                    line-height: 1.3;
                 }
                 .al-range-slider__input.js-al-range-slider__input {
                     display: none;
@@ -1055,7 +1038,6 @@
                 color: $color-text;
                 font-size: 1rem;
                 font-weight: 600;
-                line-height: 1.3;
             }
             .acr-select{
                 text-align: right;
@@ -1350,7 +1332,6 @@
                                     .tf-price{
                                         color: $color-text;
                                         font-weight: 400;
-                                        line-height: 1.7;
                                         .discount-price {
                                             color: $color-gray;
                                             font-size: 1rem;
@@ -1665,7 +1646,6 @@
                 color: $color-heading;
                 font-size: 2rem;
                 font-weight: 700;
-                line-height: 1.2;
                 margin-bottom: 24px;
                 @media #{$max1024}{
                     font-size: 1.5rem;
@@ -1712,11 +1692,9 @@
                                 color: $color-text;
                                 font-size: 1rem;
                                 font-weight: 600;
-                                line-height: 1.3;
                                 margin-bottom: 8px;
                                 display: flex;
                                 justify-content: space-between;
-                                cursor: pointer;
                                 align-items: center;
                             }
                         }
@@ -1741,7 +1719,6 @@
                 color: $color-heading;
                 font-size: 2rem;
                 font-weight: 700;
-                line-height: 1.2;
                 margin-bottom: 24px;
                 @media #{$max1024}{
                     font-size: 1.5rem;
@@ -1876,7 +1853,6 @@
                         color: $color-text;
                         font-size: 1rem;
                         font-weight: 400;
-                        line-height: 1.3;
                         margin: 0px 0px 24px 0px;
                     }
                     .tf-meta-title{
@@ -1885,12 +1861,13 @@
                         justify-content: space-between;
                         h2{
                             margin-bottom: 16px;
+                            line-height: 1;
                             a{
                                 text-decoration: none;
                                 color: inherit;
                                 font-size: 1.25rem;
                                 font-weight: 700;
-                                line-height: 1.2;
+                                line-height: inherit;
                                 &:hover{
                                     color: $color-primary;
                                 }
@@ -1905,7 +1882,6 @@
                                 color: $color-text;
                                 font-size: 1.5rem;
                                 font-weight: 400;
-                                line-height: 1.3;
                                 @media #{$max1024}{
                                     font-size: 1.25rem;
                                 }
@@ -1914,7 +1890,6 @@
                                 color: $color-text;
                                 font-size: 1rem;
                                 font-weight: 400;
-                                line-height: 1.3;
                             }
                         }
                     }
@@ -1940,12 +1915,12 @@
         .tf-send-inquiry{
             background: $color-yellow-thin;
             display: flex;
-            padding: 56px 80px;
+            padding: 30px;
             flex-direction: column;
             align-items: center;
             gap: 24px;
             @media #{$max1600}{
-                padding: 56px 16px;
+                padding:30px 16px;
             }
             @media #{$max1024}{
                 padding: 16px;
@@ -1968,11 +1943,8 @@
                 }
             }
             p{
-                color: $color-text;
                 text-align: center;
                 font-size: 1rem;
-                font-weight: 400;
-                line-height: 1.3;
                 margin: 0;
                 @media #{$max768}{
                     font-size: 0.875rem;
@@ -2094,7 +2066,7 @@
                 color: $color-heading;
                 font-size: 1.25rem;
                 font-weight: 700;
-                line-height: 1.2;
+                margin-bottom: 0;
             }
             .tf-review-form-container{
                 width: 100%;
@@ -2109,7 +2081,7 @@
                             label{
                                 font-size: 0.875rem;
                                 font-weight: 600;
-                                line-height: 1.3;
+                                line-height: 1.5;
                                 display: block;
                                 margin-right: 4px;
                             }
@@ -2212,7 +2184,6 @@
                             opacity: .5;
                             box-shadow: 0px 14px 30px 0px rgba(0, 23, 100, 0.07);
                             text-align: center;
-                            line-height: 2;
                             display: flex;
                             align-items: center;
                             justify-content: center;
@@ -2317,8 +2288,6 @@
                             }
                             .tf-title-meta {
                                 font-size: 1.5rem;
-                                font-weight: 400;
-                                line-height: 1.3;
                                 color: $color-white;
                                 display: flex;
                                 gap: 8px;
@@ -2334,9 +2303,8 @@
                                 a {
                                     color: $color-white;
                                     text-decoration: none;
-                                    font-size: 1.5rem;
+                                    font-size: 1.3rem;
                                     font-weight: 400;
-                                    line-height: 1.3;
                                     @media #{$max1024}{
                                         font-size: 1rem;
                                     }
@@ -2411,8 +2379,7 @@
                 color: $color-heading;
                 font-size: 2rem;
                 font-weight: 700;
-                line-height: 1.2;
-                margin-bottom: 24px;
+                margin-bottom: 20px;
                 @media #{$max1024}{
                     font-size: 1.5rem;
                     margin-bottom: 16px;
@@ -2432,7 +2399,6 @@
                     span.single-facilities-title {
                         color: $color-text;
                         font-weight: 600;
-                        line-height: 1.3;
                         margin-bottom: 16px;
                         display: block;
                         i {
@@ -2460,8 +2426,7 @@
                 color: $color-heading;
                 font-size: 2rem;
                 font-weight: 700;
-                line-height: 1.2;
-                margin-bottom: 8px;
+                margin-bottom: 6px;
                 @media #{$max1024}{
                     font-size: 1.5rem;
                 }
@@ -2496,9 +2461,8 @@
                             color: $color-text;
                             font-size: 1rem;
                             font-weight: 600;
-                            line-height: 1.3;
                             word-wrap: break-word;
-                            margin: 0px 0px 8px 0px;
+                            margin: 0px 0px 4px 0px;
                             display: block;
                             >div{
                                 display: none;
@@ -2662,7 +2626,6 @@
                         color: $color-text;
                         font-size: 1rem;
                         font-weight: 600;
-                        line-height: 1.3;
                         word-wrap: break-word;
                         margin-bottom: 0px;
                     }
@@ -2692,7 +2655,6 @@
                         color: $color-primary;
                         font-size: 1rem;
                         font-weight: 600;
-                        line-height: 1.3;
                         text-decoration: none;
                     }
                 }
@@ -2792,7 +2754,6 @@
                         color: $color-text;
                         font-size: 1rem;
                         font-weight: 600;
-                        line-height: 1.4;
                         @media #{$max1024}{
                             font-size: 0.875rem;
                         }
@@ -2827,7 +2788,6 @@
                     color: $color-text;
                     font-size: 2rem;
                     font-weight: 700;
-                    line-height: 1.2;
                     margin: 0;
                     @media #{$max1024}{
                         font-size: 1.5rem;
@@ -2913,7 +2873,6 @@
                 color: $color-white;
                 font-size: 1rem;
                 font-weight: 700;
-                line-height: 1.5;
             }
         }
 
@@ -3002,7 +2961,6 @@
                                     text-decoration: none;
                                     font-size: 1rem;
                                     font-weight: 600;
-                                    line-height: 1.3;
                                     color: $color-text;
                                     border-bottom: 2px solid;
                                     padding-bottom: 5px;
@@ -3027,20 +2985,14 @@
                                 padding: 0;
                             }
                             .tf-short-description{
-                                color: $color-text;
                                 font-size: 1rem;
-                                font-weight: 400;
-                                line-height: 1.3;
                                 @media #{$max768}{
                                     font-size: 0.875rem;
                                 }
                             }
                             span.tf-see-description,
                             span.tf-see-less-description{
-                                color: $color-primary;
                                 font-size: 1rem;
-                                font-weight: 400;
-                                line-height: 1.3;
                                 cursor: pointer;
                                 @media #{$max768}{
                                     font-size: 0.875rem;
@@ -3048,10 +3000,8 @@
                             }
                             .tf-full-description{
                                 display: none;
-                                color: $color-text;
                                 font-size: 1rem;
-                                font-weight: 400;
-                                line-height: 1.3;
+              
                                 @media #{$max768}{
                                     font-size: 0.875rem;
                                 }
@@ -3063,7 +3013,6 @@
                                 font-size: 1rem;
                                 display: block;
                                 font-weight: 600;
-                                line-height: 1.3;
                                 margin-bottom: 16px;
                             }
                             &>ul {
@@ -3120,13 +3069,15 @@
                                 i {
                                     font-size: 1.5rem;
                                     color: $color-primary;
+                                    line-height: 1.5;
                                 }
                                 .tf-feature-block-details {
                                     h5 {
                                         color: $color-heading;
                                         font-size: 1.25rem;
                                         font-weight: 700;
-                                        line-height: 1.3;
+                                        line-height: 1.5;
+                                        margin-bottom: 5px;
                                     }
                                     p{
                                         color: $color-text;
@@ -3157,25 +3108,20 @@
                                 i {
                                     font-size: 1.5rem;
                                     color: $color-primary;
+                                    line-height: 1.5;
                                 }
                                 .tf-feature-block-details {
                                     h5 {
                                         color: $color-heading;
                                         font-size: 1.5rem;
                                         font-weight: 700;
-                                        line-height: 1.3;
+                                        line-height: 1.5;
+                                        margin-bottom: 5px;
                                     }
                                     p{
-                                        color: $color-text;
-                                        font-size: 1rem;
-                                        font-weight: 400;
-                                        line-height: 1.3;
                                         margin: 0;
                                         span.show_sub_title{
-                                            color: $color-text;
                                             font-size: 1rem;
-                                            font-weight: 400;
-                                            line-height: 1.3;
                                             cursor: pointer;
                                         }
                                     }
@@ -3311,7 +3257,7 @@
                     }
                     .tf-title-meta {
                         font-size: 1.5rem;
-                        line-height: 1.3;
+                        line-height: 1.5;
                         padding-top: 8px;
                         @media #{$max1024}{
                             margin-top: 6px;
@@ -3320,7 +3266,7 @@
                             color: $color-white;
                             margin: 0px;
                             font-size: 1.5rem;
-                            line-height: 1.3;
+                            line-height: 1.5;
                         }
                     }
                 }
@@ -3768,10 +3714,9 @@
                                 color: $color-white;
                                 font-size: 0.75rem;
                                 font-weight: 500;
-                                padding: 8px;
+                                padding: 6px;
                                 min-width: 84px;
                                 text-align: center;
-                                line-height: 1;
                             }
                             span.tf-available-labels-populer {
                                 background: $color-primary;
@@ -3788,7 +3733,7 @@
                             right: 16px;
                             top: 16px;
                             background: rgba(253, 249, 243, 0.80);
-                            padding: 5px 4px 0 8px;
+                            padding: 4px 4px 4px 8px;
                             font-size: 1rem;
                             color: $color-text;
                             i {
@@ -3876,7 +3821,6 @@
                                         color: $color-text;
                                         font-size: 1.5rem;
                                         font-weight: 600;
-                                        line-height: 1.3;
                                     }
                                 }
                             }
@@ -3906,7 +3850,6 @@
                         color: $color-gray;
                         font-size: 1rem;
                         font-weight: 400;
-                        line-height: 1.3;
                         letter-spacing: 0.16px;
                         padding: 0px 20px;
                         text-decoration: none;
@@ -3944,7 +3887,6 @@
                 button {
                     margin: 0;
                     padding: 0;
-                    line-height: 1;
                     border: none;
                     background: unset;
                     color: $color-text;
