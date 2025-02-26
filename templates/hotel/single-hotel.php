@@ -28,6 +28,11 @@ if ( !Helper::tf_is_woo_active() ) {
 /**
  * Query start
  */
+
+
+$hotel_name = apply_filters( 'tf_hotel_post_type_name_change_singular', esc_html__( 'Hotel', 'tourfic' ) );
+$hotels_name = apply_filters( 'tf_hotel_post_type_name_change_plural', esc_html__( 'Hotels', 'tourfic' ) );
+
 while ( have_posts() ) : the_post();
 
 	// get post id

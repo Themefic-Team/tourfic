@@ -60,6 +60,7 @@ class Map_Filter extends \WP_Widget {
         }
 
         $tf_query_taxonomy = !empty(get_taxonomy(get_queried_object())) ? get_taxonomy(get_queried_object()->taxonomy)->object_type : '';
+        $hotels_name = apply_filters( 'tf_hotel_post_type_name_change_plural', esc_html__( 'Hotels', 'tourfic' ) );
         if (is_post_type_archive('tf_tours') ||
             is_post_type_archive('tf_hotel') ||
             is_post_type_archive('tf_apartment') ||
@@ -117,6 +118,7 @@ class Map_Filter extends \WP_Widget {
         $tf_map_settings = !empty(Helper::tfopt('google-page-option')) ? Helper::tfopt('google-page-option') : "default";
         $tf_map_api = !empty(Helper::tfopt('tf-googlemapapi')) ? Helper::tfopt('tf-googlemapapi') : '';
         $post_per_page = get_option( 'posts_per_page' );
+        $hotels_name = apply_filters( 'tf_hotel_post_type_name_change_plural', esc_html__( 'Hotels', 'tourfic' ) );
         $paged          = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
 
         $args = array(
@@ -146,7 +148,7 @@ class Map_Filter extends \WP_Widget {
         }
 
         if($post_type == "tf_hotel") {
-            $found_post_label = esc_html__( "Hotels", "tourfic" );
+            $found_post_label = esc_html__( $hotels_name, "tourfic" );
         }elseif($post_type == "tf_tours"){
             $found_post_label = esc_html__( "Tours", "tourfic" );
         }elseif($post_type == "tf_apartment"){

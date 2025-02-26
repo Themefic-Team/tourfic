@@ -33,7 +33,7 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
                                     <a href="<?php echo esc_url($first_location_url); ?>" class="more-hotel tf-d-ib">
                                         <?php
                                         /* translators: %s location name */
-                                        printf( esc_html__( 'Show more hotels in %s', 'tourfic' ), esc_html($first_location_name) );
+                                        printf( esc_html__( 'Show more %s in %s', 'tourfic' ), strtolower($hotels_name), esc_html($first_location_name) );
                                         ?>
                                     </a>
                             <?php } ?>

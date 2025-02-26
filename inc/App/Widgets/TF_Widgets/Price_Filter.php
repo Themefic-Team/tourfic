@@ -38,6 +38,8 @@ class Price_Filter extends \WP_Widget {
 		<!-- Start Price Range widget -->
 		<?php 
         $tf_query_taxonomy = !empty( get_taxonomy(get_queried_object()) ) ? get_taxonomy(get_queried_object()->taxonomy)->object_type : '' ;
+        $hotel_name = apply_filters( 'tf_hotel_post_type_name_change_singular', esc_html__( 'Hotel', 'tourfic' ) );
+
         if( is_post_type_archive('tf_tours') || is_post_type_archive('tf_hotel') || is_post_type_archive('tf_apartment') || is_post_type_archive('tf_carrental') || ( !empty( $tf_query_taxonomy ) ) ){
             extract( $args );
             $title = apply_filters( 'widget_title', $instance['title'] );
@@ -45,7 +47,7 @@ class Price_Filter extends \WP_Widget {
             if( is_post_type_archive('tf_hotel') ){
             ?>
                 <div class="tf-widget-title">
-                    <span><?php esc_html_e("Hotel Price Range","tourfic"); ?> (<?php echo wp_kses_post(get_woocommerce_currency_symbol()); ?>)</span>
+                    <span><?php esc_html_e( $hotel_name . " Price Range","tourfic"); ?> (<?php echo wp_kses_post(get_woocommerce_currency_symbol()); ?>)</span>
                 </div>
                 <div class="tf-hotel-result-price-range"></div>
             <?php
@@ -76,7 +78,7 @@ class Price_Filter extends \WP_Widget {
             if( !is_post_type_archive('tf_hotel') && !is_post_type_archive('tf_tours') && !is_post_type_archive('tf_apartment') && !is_post_type_archive('tf_carrental') && ( !empty(get_taxonomy(get_queried_object()->taxonomy)->object_type) && get_taxonomy(get_queried_object()->taxonomy)->object_type[0]=="tf_hotel" ) ){
                 ?>
                     <div class="tf-widget-title">
-                        <span><?php esc_html_e("Hotel Price Range","tourfic"); ?></span> (<?php echo wp_kses_post(get_woocommerce_currency_symbol()); ?>)
+                        <span><?php esc_html_e( $hotel_name . " Price Range","tourfic"); ?></span> (<?php echo wp_kses_post(get_woocommerce_currency_symbol()); ?>)
                     </div>
                     <div class="tf-hotel-result-price-range"></div>
                 <?php
@@ -119,7 +121,7 @@ class Price_Filter extends \WP_Widget {
             if( !empty($_GET['type']) && $_GET['type']=="tf_hotel" && !empty($_GET['from']) && !empty($_GET['to'] ) ){
             ?>
                 <div class="tf-widget-title">
-                    <span><?php esc_html_e("Hotel Price Range","tourfic"); ?> (<?php echo wp_kses_post(get_woocommerce_currency_symbol()); ?>)</span>
+                    <span><?php esc_html_e( $hotel_name . " Price Range","tourfic"); ?> (<?php echo wp_kses_post(get_woocommerce_currency_symbol()); ?>)</span>
                 </div>
                 <div class="tf-hotel-result-price-range"></div>
             <?php }

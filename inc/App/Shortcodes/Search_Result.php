@@ -224,6 +224,8 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 		$tf_apartment_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] : 'default';
 		$tf_car_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['car-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['car-archive'] : 'design-1';
 
+		$hotels_name = apply_filters( 'tf_hotel_post_type_name_change_plural', esc_html__( 'Hotels', 'tourfic' ) );
+
 		if ( ( $post_type == "tf_tours" && $tf_tour_arc_selected_template == "design-1" ) || ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template == "design-1" ) ) {
 			?>
 			<div class="tf-page-content tf-archive-left tf-result-previews">
@@ -511,7 +513,7 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 					<span class="tf-total-results">
 							<?php esc_html_e("Total", "tourfic"); ?> <span><?php echo esc_html( $total_posts ); ?></span>
 						<?php if($post_type == "tf_hotel"){
-							esc_html_e("hotels available", "tourfic");
+							esc_html_e( strtolower($hotels_name) . " available", "tourfic");
 						}elseif($post_type == "tf_apartment"){
 							esc_html_e("apartments available", "tourfic");
 						}else{
@@ -884,7 +886,7 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 		           ( $post_type == "tf_apartment" && $tf_apartment_arc_selected_template == "design-2" && function_exists( 'is_tf_pro' ) && is_tf_pro()) ) {
 
 			if($post_type == "tf_hotel") {
-				$found_post_label = esc_html__( "Hotels", "tourfic" );
+				$found_post_label = esc_html_e( $hotels_name, "tourfic" );
 				$tf_defult_views = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['hotel_archive_view'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['hotel_archive_view'] : 'list';
 			}elseif($post_type == "tf_tours"){
 				$found_post_label = esc_html__( "Tours", "tourfic" );

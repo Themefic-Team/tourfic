@@ -56,7 +56,7 @@ $price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings'
                             <a href="<?php echo esc_url( $first_location_url ); ?>" class="more-hotel tf-d-ib">
 								<?php
 								/* translators: %s location name */
-								printf( esc_html__( 'Show more hotels in %s', 'tourfic' ), esc_html( $first_location_name ) );
+								printf( esc_html__( 'Show more %s in %s', 'tourfic' ), strtolower($hotels_name), esc_html( $first_location_name ) );
 								?>
                             </a>
                         </div>
