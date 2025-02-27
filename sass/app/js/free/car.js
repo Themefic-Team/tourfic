@@ -200,7 +200,7 @@
             tourfic_car_autocomplete(car_dropoff_input, car_locations);
         }
 
-        $(document).on('click', '.tf-booking-popup-header .tf-close-popup', function (e) {
+        $('.tf-booking-popup-header .tf-close-popup').on("click", function (e) {
             e.preventDefault();
             $('.tf-car-booking-popup').hide();
             if($(window).width() < 768){
@@ -933,7 +933,7 @@
         });   
 
         // Instructions Popup Close
-        $(document).on('click', '.tf-instraction-popup-header .tf-close-popup', function (e) {
+        $(".tf-instraction-popup-header .tf-close-popup").on("click", function (e) {
             e.preventDefault();
             $('.tf-car-instraction-popup').hide();
         });
