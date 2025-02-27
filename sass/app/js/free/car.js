@@ -200,7 +200,8 @@
             tourfic_car_autocomplete(car_dropoff_input, car_locations);
         }
 
-        $('.tf-booking-popup-header .tf-close-popup').on("click", function (e) {
+        $(".tf-booking-popup-header .tf-close-popup").on("click", function (e) {
+            console.log('close the popup');
             e.preventDefault();
             $('.tf-car-booking-popup').hide();
             if($(window).width() < 768){
@@ -399,8 +400,9 @@
                 return true;
             }
         };
-
-        $(document).on('click', '.tf-car-booking-form .booking-process', function (e) {
+        $(document).on('click', '.booking-process', function (e) {
+       
+            console.log('booking process');
             let $this = $(this);
             
             let extra_ids = $("input[name='selected_extra[]']").map(function() {
@@ -628,7 +630,7 @@
         * @author Jahid
         */
 
-        $(document).on('click', '.quick-booking', function (e) {
+        $(".quick-booking").on('click', function (e) {
             let $this = $(this);
 
             var pickup = $('#tf_pickup_location').val();
@@ -687,7 +689,8 @@
 
         });
 
-        $(document).on('click', '.tf-booking-btn .booking-process', function (e) {
+        $(".tf-booking-btn .booking-process").on("click", function (e) {
+            console.log('booking process');
             let $this = $(this);
 
             var travellerData = {};
@@ -959,7 +962,8 @@
         * Mobile Booking button
         * @author Jahid
         */
-        $(document).on('click', '.tf-mobile-booking-btn button', function (e) {
+        $(".tf-mobile-booking-btn button").on("click", function (e) {
+            console.log('show the popup');
             e.preventDefault();
             var $button = $(this);
 
