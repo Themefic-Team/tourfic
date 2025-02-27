@@ -213,7 +213,7 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
                 <div class="tf-details-right tf-sitebar-widgets">
 					<?php if ( ( $tf_booking_type == 2 && $tf_hide_booking_form !== '1' ) || $tf_booking_type == 1 || $tf_booking_type == 3 ) : ?>
                         <div class="tf-search-date-wrapper tf-single-widgets">
-                            <h2 class="tf-section-title"><?php echo ! empty( $meta["booking-section-title"] ) ? esc_html( $meta["booking-section-title"] ) : ''; ?></h2>
+                            <h3 class="tf-section-title"><?php echo ! empty( $meta["booking-section-title"] ) ? esc_html( $meta["booking-section-title"] ) : ''; ?></h3>
 							<?php echo wp_kses( Tour::tf_single_tour_booking_form( $post->ID ), Helper::tf_custom_wp_kses_allow_tags() ); ?>
                         </div>
 					<?php endif; ?>
@@ -234,7 +234,7 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
                         <div class="tf-tour-contact-informations tf-single-widgets">
 							<?php if ( ! empty( $meta['contact-info-section-title'] ) ) : ?>
                                 <div class="tf-contact-details-title">
-                                    <h2 class="tf-section-title"><?php echo esc_html( $meta['contact-info-section-title'] ) ?></h2>
+                                    <h3 class="tf-section-title"><?php echo esc_html( $meta['contact-info-section-title'] ) ?></h3>
                                 </div>
 							<?php endif; ?>
 
@@ -275,7 +275,7 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
 								TF_Review::tf_calculate_comments_rating( $comments, $tf_overall_rate, $total_rating );
 								TF_Review::tf_get_review_fields( $fields );
 								?>
-                                <h2 class="tf-section-title"><?php esc_html_e( "Overall reviews", "tourfic" ); ?></h2>
+                                <h3 class="tf-section-title"><?php esc_html_e( "Overall reviews", "tourfic" ); ?></h3>
                                 <div class="tf-review-data-inner">
                                     <div class="tf-review-data">
                                         <div class="tf-review-data-average">

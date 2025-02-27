@@ -370,7 +370,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
         <div class="tf_features sp-50">
             <div class="tf-container">
                 <?php if (!empty($meta["tour-features-section-title"])) : ?>
-                    <h3 class="tf-title tf-section-title"><?php echo esc_html( $meta["tour-features-section-title"], 'tourfic' ); ?></h3>
+                    <h2 class="tf-title tf-section-title"><?php echo esc_html( $meta["tour-features-section-title"], 'tourfic' ); ?></h2>
                 <?php endif; ?>
                 <div class="tf-feature-list">
                     <?php foreach ( $features as $feature ) {
@@ -403,7 +403,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                 <div class="tf-inc-exc-content">
                     <?php if ( $inc ) { ?>
                         <div class="tf-include-section <?php echo esc_attr( $custom_inc_icon ); ?>">
-                            <h4><?php esc_html_e( 'Included', 'tourfic' ); ?></h4>
+                            <h2><?php esc_html_e( 'Included', 'tourfic' ); ?></h2>
                             <ul>
                                 <?php
                                 foreach ( $inc as $key => $val ) {
@@ -415,7 +415,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                     <?php } ?>
                     <?php if ( $exc ) { ?>
                         <div class="tf-exclude-section <?php echo esc_attr( $custom_exc_icon ); ?>">
-                            <h4><?php esc_html_e( 'Excluded', 'tourfic' ); ?></h4>
+                            <h2><?php esc_html_e( 'Excluded', 'tourfic' ); ?></h2>
                             <ul>
                                 <?php
                                 foreach ( $exc as $key => $val ) {

@@ -38,6 +38,11 @@
                 td {
                     white-space: break-spaces;
                 }
+                .tf-toc-inner{
+                    p{
+                        margin-bottom: 0;
+                    }
+                }
             }
             .tf-highlight-wrapper{
                 background-color: $color-yellow-thin;
@@ -162,10 +167,7 @@
                                     font-weight: 400;
                                     display: inline-block;
                                     a{
-                                        text-decoration: none;
                                         color: $color-text;
-                                        font-size: 1rem;
-                                        font-weight: 400;
                                     }
                                 }
                             }
@@ -249,6 +251,9 @@
                     }
                 }
             }
+
+      
+
         }
     }
 }

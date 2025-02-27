@@ -341,7 +341,7 @@ $price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings'
 					<?php if ( $features && count( $features ) > 0 ) { ?>
                         <div class="tf_features">
                             <?php if( !empty( $meta['popular-section-title'] ) ): ?>
-                                <h3 class="section-heading"><?php echo esc_html($meta['popular-section-title']); ?></h3>
+                                <h2 class="section-heading"><?php echo esc_html($meta['popular-section-title']); ?></h2>
                             <?php endif; ?>
 
                             <div class="tf-feature-list">
