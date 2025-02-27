@@ -214,9 +214,10 @@
         * Car Booking Popup
         * @author Jahid
         */
-        $(document).on('click', '.tf-car-booking', function (e) {
+        $(".tf-car-booking").on('click', function (e) {
             e.preventDefault();
             $this = $(this);
+
             $('.tf-booking-content-wraper').html("");
             var pickup = $('#tf_pickup_location').val();
             let dropoff = $('#tf_dropoff_location').val();
@@ -258,10 +259,10 @@
                     $('.error-notice').hide();
                     $('.tf-car-booking-popup').css('display', 'flex');
                     $this.removeClass('tf-btn-loading');
-                    if($(window).width() < 768){
-                        $(".tf-date-select-box").hide();
-                        $(".tf-mobile-booking-btn").hide();
-                    }
+  
+                    $(".tf-date-select-box").hide();
+                    $(".tf-mobile-booking-btn").hide();
+                    
                 }
             });
 
