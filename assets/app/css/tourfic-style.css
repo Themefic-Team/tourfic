@@ -26630,9 +26630,15 @@ html {
   z-index: 9999;
   background-color: rgba(0, 0, 0, 0.2);
   display: flex;
-  align-items: end;
+  align-items: center;
   justify-content: center;
   display: none;
+}
+
+@media only screen and (max-width: 767.98px) {
+  .tf-car-template-container .tf-car-booking-popup {
+    align-items: end;
+  }
 }
 
 .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp {
