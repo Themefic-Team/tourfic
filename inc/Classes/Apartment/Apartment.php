@@ -1328,7 +1328,7 @@ class Apartment {
 
 			<?php if ( ( $tf_booking_type == 2 && $tf_hide_booking_form == '1' || ( $tf_ext_booking_type == 2 && empty( $tf_booking_code ) ) ) || $tf_booking_type == 1 ): ?>
 				
-				<h2 class="tf-section-title"><?php esc_html_e("Available Date", "tourfic"); ?></h2>
+				<h3 class="tf-section-title"><?php esc_html_e("Available Date", "tourfic"); ?></h3>
 				<div class="tf-apartment-form-fields">
 					<div class="tf_booking-dates tf-check-in-out-date">
 						<div class="tf-aprtment-check-in-out-date">

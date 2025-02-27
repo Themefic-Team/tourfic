@@ -298,9 +298,6 @@
 }
 
 .single-tf_apartment .tf-single-template__one .tf-apartment-title .tf-map-link {
-  color: var(--tf-text);
-  font-size: 1rem;
-  font-weight: 400;
   letter-spacing: 0.2px;
 }
 
@@ -317,7 +314,6 @@
 
 .single-tf_apartment .tf-single-template__one .tf-apartment-title .tf-map-link p {
   margin-bottom: 0;
-  font-size: 1rem;
 }
 
 .single-tf_apartment .tf-single-template__one .apt-description {
@@ -946,14 +942,7 @@
   margin: 0 0 5px 0;
   font-weight: 500;
   font-size: 1.125rem;
-  line-height: 1.5;
   color: var(--tf-primary);
-}
-
-.single-tf_apartment .tf-single-template__one .tf-house-rules .tf-house-rules-wrapper .tf-not-included-house-rules li span,
-.single-tf_apartment .tf-single-template__one .tf-house-rules .tf-house-rules-wrapper .tf-included-house-rules li span {
-  color: var(--tf-text);
-  font-size: 1rem;
 }
 
 .single-tf_apartment .tf-single-template__one .tf-house-rules .tf-house-rules-wrapper .tf-not-included-house-rules li::before,
@@ -964,7 +953,6 @@
   top: 0;
   left: -29px;
   font-size: 1.25rem;
-  line-height: 1.5;
   color: var(--tf-primary);
 }
 
@@ -1099,7 +1087,7 @@
   border-radius: 8px;
   border: 1px solid var(--tf-border);
   background: #F5FAFF;
-  padding: 24px 40px;
+  padding: 24px;
 }
 
 @media only screen and (max-width: 575.98px) {
@@ -1130,8 +1118,6 @@
   display: -webkit-flex;
   display: flex;
   gap: 16px;
-  margin-bottom: 5px;
-  color: var(--tf-text);
 }
 
 @media only screen and (max-width: 575.98px) {
@@ -2218,6 +2204,10 @@
 
 .single-tf_apartment .tf-single-template__one .apartment-question .tf-question-left .default-enquiry-title-section {
   justify-content: flex-start;
+}
+
+.single-tf_apartment .tf-single-template__one .apartment-question .tf-question-left .default-enquiry-title-section h2 {
+  margin-bottom: 0;
 }
 
 .single-tf_apartment .tf-single-template__one .apartment-question .tf-question-left h4 {

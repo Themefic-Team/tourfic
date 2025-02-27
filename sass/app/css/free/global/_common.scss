@@ -399,7 +399,6 @@ h3.section-heading {
     border-right: 1px solid $color-border;
     display: table-cell;
     vertical-align: middle;
-    padding: 0 15px;
     width: auto;
     position: relative;
     -webkit-user-select: none;
@@ -410,7 +409,7 @@ h3.section-heading {
     @media #{$max768}{
         width: 100%;
         display: block;
-        padding: 20px;
+        padding: 20px 0;
         border-bottom: 1px solid $color-gray;
     }
 

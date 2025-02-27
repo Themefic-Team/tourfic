@@ -522,5 +522,7 @@ Without Payment Popup
             letter-spacing: -0.96px;
         }
     }
-    
+    &.show{
+        display: block;
+    }
 }

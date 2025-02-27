@@ -203,8 +203,10 @@
         $(document).on('click', '.tf-booking-popup-header .tf-close-popup', function (e) {
             e.preventDefault();
             $('.tf-car-booking-popup').hide();
-            $('.tf-mobile-booking-btn').show();
-            $('.tf-mobile-booking-btn button').text('Book Now');
+            if($(window).width() < 768){
+                $('.tf-mobile-booking-btn').show();
+                $('.tf-mobile-booking-btn button').text('Book Now');
+            }
         });
 
         /*
@@ -255,8 +257,10 @@
                     $('.error-notice').hide();
                     $('.tf-car-booking-popup').css('display', 'flex');
                     $this.removeClass('tf-btn-loading');
-                    $(".tf-date-select-box").hide();
-                    $(".tf-mobile-booking-btn").hide();
+                    if($(window).width() < 768){
+                        $(".tf-date-select-box").hide();
+                        $(".tf-mobile-booking-btn").hide();
+                    }
                 }
             });
 

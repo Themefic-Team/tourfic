@@ -233,9 +233,6 @@
                 }
 
                 .tf-map-link {
-                    color: $color-text;
-                    font-size: 1rem;
-                    font-weight: 400;
                     letter-spacing: 0.2px;
                     @media #{$max1024} {
                         flex: 1;
@@ -246,7 +243,6 @@
                     }
                     p {
                         margin-bottom: 0;
-                        font-size: 1rem;
                     }
                 }
 

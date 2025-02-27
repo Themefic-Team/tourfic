@@ -11,7 +11,7 @@ if ( ! empty( $total_facilities_cat ) && ! empty( $meta['amenities'] ) ) {
         <div class="tf-facilities">
 			<?php
 			$facilites_list = [];
-			if ( ! empty( $meta['amenities'] ) ) {
+			if ( ! empty( $meta['amenities'] ) && is_array( $meta['amenities'] ) ) {
 				foreach ( $meta['amenities'] as $facility ) {
 					$facilites_list [ $facility['cat'] ] = $facility['cat'];
 				}

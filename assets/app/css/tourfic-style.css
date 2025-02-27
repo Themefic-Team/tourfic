@@ -586,6 +586,10 @@ Without Payment Popup
   letter-spacing: -0.96px;
 }
 
+.tf-withoutpayment-booking-confirm.show {
+  display: block;
+}
+
 body {
   color: var(--tf-text);
   font-size: 1rem;
@@ -1365,7 +1369,6 @@ h3.section-heading {
   border-right: 1px solid var(--tf-border);
   display: table-cell;
   vertical-align: middle;
-  padding: 0 15px;
   width: auto;
   position: relative;
   -webkit-user-select: none;
@@ -1378,7 +1381,7 @@ h3.section-heading {
   .tf_selectperson-wrap {
     width: 100%;
     display: block;
-    padding: 20px;
+    padding: 20px 0;
     border-bottom: 1px solid #808080;
   }
 }
@@ -7509,9 +7512,19 @@ div#tf-destinationautocomplete-list div:before {
   z-index: 9999;
   background-color: rgba(0, 0, 0, 0.2);
   display: flex;
-  align-items: end;
+  align-items: center;
   justify-content: center;
   display: none;
+}
+
+@media only screen and (max-width: 768px) {
+  .post-type-archive-tf_carrental .tf-archive-template__one .tf-car-booking-popup,
+  .tax-carrental_location .tf-archive-template__one .tf-car-booking-popup,
+  .tax-carrental_brand .tf-archive-template__one .tf-car-booking-popup,
+  .page-template-tf-search .tf-archive-template__one .tf-car-booking-popup,
+  .single-tf_carrental .tf-single-template__one .tf-car-booking-popup {
+    align-items: end;
+  }
 }
 
 .post-type-archive-tf_carrental .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp,
@@ -12573,7 +12586,7 @@ div#tf-destinationautocomplete-list div:before {
 
 .tf-single-template__three .tf-related-items-section {
   background-color: var(--tf-yellow-thin);
-  padding: 120px 0px;
+  padding: 80px 0px;
 }
 
 @media only screen and (max-width: 768px) {
@@ -12610,6 +12623,7 @@ div#tf-destinationautocomplete-list div:before {
 
 .tf-single-template__three .tf-related-items-section .slick-track {
   display: flex;
+  margin-left: 0;
 }
 
 .tf-single-template__three .tf-related-items-section .slick-track .slick-slide {
@@ -12726,7 +12740,7 @@ div#tf-destinationautocomplete-list div:before {
 }
 
 .tf-single-template__three .tf-related-items-section .tf-slider-item .tf-meta-info .tf-meta-title .tf-meta-data-price {
-  margin-left: 37px;
+  margin-left: 24px;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -13788,10 +13802,7 @@ div#tf-destinationautocomplete-list div:before {
 }
 
 .tf-single-template__three .tf-search-date-wrapper .acr-label {
-  color: var(--tf-text);
-  font-size: 1rem;
   font-weight: 600;
-  line-height: 1.4;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -13806,8 +13817,6 @@ div#tf-destinationautocomplete-list div:before {
 
 .tf-single-template__three .tf-search-date-wrapper .acr-label div span {
   display: inline-block;
-  color: var(--tf-text);
-  font-size: 1rem;
   font-weight: 600;
 }
 

@@ -1758,7 +1758,7 @@
         // Related Section
         .tf-related-items-section{
             background-color: $color-yellow-thin;
-            padding: 120px 0px;
+            padding: 80px 0px;
 
             @media #{$max768}{
                 padding: 32px;
@@ -1782,6 +1782,7 @@
             }
             .slick-track{
                 display: flex;
+                margin-left: 0;
                 .slick-slide{
                     height: inherit;
                     margin: 0;
@@ -1872,7 +1873,7 @@
                             }
                         }
                         .tf-meta-data-price{
-                            margin-left: 37px;
+                            margin-left: 24px;
                             @media #{$max1024}{
                                 margin-left: 23px;
                             }
@@ -2741,10 +2742,7 @@
             }
 
             .acr-label {
-                color: $color-text;
-                font-size: 1rem;
                 font-weight: 600;
-                line-height: 1.4;
                 @media #{$max1024}{
                     font-size: 0.875rem;
                 }
@@ -2752,8 +2750,6 @@
                     margin-left: 5px;
                     span{
                         display: inline-block;
-                        color: $color-text;
-                        font-size: 1rem;
                         font-weight: 600;
                         @media #{$max1024}{
                             font-size: 0.875rem;

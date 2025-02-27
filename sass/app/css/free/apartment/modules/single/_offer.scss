@@ -8,7 +8,7 @@
                     border-radius: 8px;
                     border: 1px solid $color-border;
                     background: $color-gray-info;
-                    padding: 24px 40px;
+                    padding: 24px;
                     @media #{$max575}{
                         padding: 16px;
                     }
@@ -23,8 +23,6 @@
                         @include flex(0 0 calc(100% / 2 - 11px));
                         @include flexbox();
                         gap: 16px;
-                        margin-bottom: 5px;
-                        color: $color-text;
                         @media #{$max575}{
                             gap: 8px;
                         }
