@@ -201,7 +201,7 @@ use \Tourfic\Classes\Apartment\Apartment;
 					if ( has_post_thumbnail() ) {
 						the_post_thumbnail( 'tf_apartment_single_thumb' );
 					} else {
-						echo '<img src="' . esc_url( TF_ASSETS_APP_URL . '/images/feature-default.jpg' ) . '" alt="feature-default">';
+						echo '<img src="' . esc_url( TF_ASSETS_APP_URL . 'images/feature-default.jpg' ) . '" alt="feature-default">';
 					}
 					?>
 				<?php endif; ?>

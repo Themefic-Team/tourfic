@@ -1359,7 +1359,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 					<?php if ( ! empty( $room_preview_img ) ) : ?>
                         <img src="<?php echo esc_url( $room_preview_img ); ?>" alt="<?php esc_html_e( "Room Image", "tourfic" ); ?>">
 					<?php else: ?>
-                        <img src="<?php echo esc_url( TF_ASSETS_APP_URL . '/images/feature-default.jpg' ) ?>" alt="room-thumb"/>
+                        <img src="<?php echo esc_url( TF_ASSETS_APP_URL . 'images/feature-default.jpg' ) ?>" alt="room-thumb"/>
 					<?php endif; ?>
                 </div>
 

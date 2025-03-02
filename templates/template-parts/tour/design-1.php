@@ -35,7 +35,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
     <!-- Hero section Start -->
     <div class="tf-hero-wrapper">
         <div class="tf-container">
-            <div class="tf-hero-content" style="background-image: url(<?php echo !empty(wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' )) ? esc_url( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) : esc_url(TF_ASSETS_APP_URL.'/images/feature-default.jpg'); ?>);">
+            <div class="tf-hero-content" style="background-image: url(<?php echo !empty(wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' )) ? esc_url( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) : esc_url(TF_ASSETS_APP_URL.'images/feature-default.jpg'); ?>);">
                 <div class="tf-hero-top">
                     <div class="tf-top-review">
                         <?php if ( $comments && ! $disable_review_sec == '1' ) { ?>
