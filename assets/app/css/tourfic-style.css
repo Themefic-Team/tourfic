@@ -26627,12 +26627,18 @@ html {
   top: 0;
   right: 0;
   bottom: 0;
-  z-index: 9999;
+  z-index: 99999;
   background-color: rgba(0, 0, 0, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
   display: none;
+}
+
+@media only screen and (max-width: 767.98px) {
+  .tf-car-template-container .tf-car-booking-popup {
+    align-items: end;
+  }
 }
 
 .tf-car-template-container .tf-car-booking-popup .tf-booking-popup-warp {
@@ -28044,6 +28050,10 @@ html {
 
 .tf-archive-search-box-wrapper .tf-driver-location-box .tf-submit-button button i {
   margin-left: 8px;
+}
+
+.notyf {
+  z-index: 99999 !important;
 }
 
 .tf-single-car-section {

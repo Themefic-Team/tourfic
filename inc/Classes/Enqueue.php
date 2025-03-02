@@ -983,8 +983,8 @@ class Enqueue {
 			wp_enqueue_style( 'tf-admin', TF_ASSETS_ADMIN_URL . 'css/tourfic-admin.min.css', '', TF_VERSION );
 
 			if( $swal_cdn ) {
-				wp_enqueue_style( 'tf-admin-sweet-alert', '//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css', '', TF_VERSION );
-				wp_enqueue_script( 'tf-admin-sweet-alert', '//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js', array( 'jquery' ), TF_VERSION, true );
+				wp_enqueue_style( 'tf-admin-sweet-alert', '//cdn.jsdelivr.net/npm/sweetalert2@11.6.13/dist/sweetalert2.min.css', '', TF_VERSION );
+				wp_enqueue_script( 'tf-admin-sweet-alert', '//cdn.jsdelivr.net/npm/sweetalert2@11.6.13/dist/sweetalert2.min.js', array( 'jquery' ), TF_VERSION, true );
 			} else {
 				wp_enqueue_style( 'tf-admin-sweet-alert', TF_ASSETS_APP_URL . 'libs/swal/sweetalert2.min.css', '', TF_VERSION );
 				wp_enqueue_script( 'tf-admin-sweet-alert', TF_ASSETS_APP_URL . 'libs/swal/sweetalert2.min.js', array( 'jquery' ), TF_VERSION, true );
