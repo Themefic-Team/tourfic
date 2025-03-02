@@ -201,13 +201,8 @@
         }
 
         $(".tf-booking-popup-header .tf-close-popup").on("click", function (e) {
-            console.log('close the popup');
             e.preventDefault();
             $('.tf-car-booking-popup').hide();
-            if($(window).width() < 768){
-                $('.tf-mobile-booking-btn').show();
-                $('.tf-mobile-booking-btn button').text('Book Now');
-            }
         });
  
 
@@ -260,10 +255,6 @@
                     $('.error-notice').hide();
                     $('.tf-car-booking-popup').css('display', 'flex');
                     $this.removeClass('tf-btn-loading');
-  
-                    $(".tf-date-select-box").hide();
-                    $(".tf-mobile-booking-btn").hide();
-                    
                 }
             });
 
@@ -309,16 +300,26 @@
 
         });
 
-        $(document).on('click', '.booking-next', function (e) {
+        $(document).on('click touchstart', '.tf-booking-content-wraper .booking-next', function (e) {
+            e.preventDefault();
             let $this = $(this);
-            $('.tf-booking-tabs ul li').removeClass('active');
-            $('.tf-booking-tabs ul li.booking').addClass('active');
 
-            $('.tf-protection-content').hide();
-            $('.tf-booking-bar').hide();
+            let protections = $('input[name="protections[]"]');
 
-            $('.tf-booking-form-fields').show();
+            
+            let validationProtections = protectionValidation(protections);
 
+            if( validationProtections ){
+                return;
+            }else{
+                $('.tf-booking-tabs ul li').removeClass('active');
+                $('.tf-booking-tabs ul li.booking').addClass('active');
+    
+                $('.tf-protection-content').hide();
+                $('.tf-booking-bar').hide();
+    
+                $('.tf-booking-form-fields').show();
+            }
         });
 
         /*
@@ -400,9 +401,11 @@
                 return true;
             }
         };
-        $(document).on('click', '.booking-process', function (e) {
-       
-            console.log('booking process');
+        $(document).on('click touchstart', '.booking-process', function (e) {
+
+            if (e.type === 'touchstart') {
+                $(this).off('click'); 
+            }
             let $this = $(this);
             
             let extra_ids = $("input[name='selected_extra[]']").map(function() {
@@ -689,8 +692,10 @@
 
         });
 
-        $(".tf-booking-btn .booking-process").on("click", function (e) {
-            console.log('booking process');
+        $(".tf-booking-btn .booking-process").on("click touchstart", function (e) {
+            if(e.type === 'touchstart'){
+                $(this).off('click'); 
+            }
             let $this = $(this);
 
             var travellerData = {};
@@ -883,9 +888,7 @@
             let $this = $(this);
             $this.addClass('active');
             let view = $this.attr('data-view');
-   
             if(view=='grid'){
-                console.log(view);
                 $('.tf-car-details-column .tf-car-archive-result .tf-car-result').removeClass('list-view');
                 $('.tf-car-details-column .tf-car-archive-result .tf-car-result').addClass('grid-view');
             }else{
@@ -936,10 +939,15 @@
         });   
 
         // Instructions Popup Close
-        $(".tf-instraction-popup-header .tf-close-popup").on("click", function (e) {
+        $(".tf-instraction-popup-header .tf-close-popup").on("click touchstart", function (e) {
             e.preventDefault();
             $('.tf-car-instraction-popup').hide();
         });
+
+        $(".tf-confirm-popup .tf-booking-times").on("click touchstart", function (e) {
+            e.preventDefault();
+            $('.tf-withoutpayment-booking-confirm').removeClass('show');
+        })
 
         // Showing Total into a protections
         $(document).on('change', '.protection-checkbox', function (e) {
@@ -963,7 +971,6 @@
         * @author Jahid
         */
         $(".tf-mobile-booking-btn button").on("click", function (e) {
-            console.log('show the popup');
             e.preventDefault();
             var $button = $(this);
 
