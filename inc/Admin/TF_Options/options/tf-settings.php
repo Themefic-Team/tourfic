@@ -4097,7 +4097,7 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'        => 'chart_cdn',
 					'type'      => 'switch',
-					'label'     => __( 'Chart Js CDN', 'tourfic' ),
+					'label'     => __( 'Chart JS CDN', 'tourfic' ),
 					'subtitle'  => __( 'Enable/disable Cloudflare CDN for Chart Js', 'tourfic' ),
 					'label_on'  => __( 'Enabled', 'tourfic' ),
 					'label_off' => __( 'Disabled', 'tourfic' ),
