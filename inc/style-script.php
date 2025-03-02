@@ -10,12 +10,12 @@ if ( !function_exists('tourfic_enqueue_scripts') ) {
 		global $detect, $dedicated_mobile;
 
         $tf_min_css = !empty(tfopt( 'css_min' )) ? '.min' : '';
-		wp_enqueue_style( 'tf-common-style', TF_ASSETS_URL . 'css/common.css', null, '' );
+		wp_enqueue_style( 'tf-common-style', TF_ASSETS_URL . 'css/common.css', null, TOURFIC );
 		if ( get_post_type() == 'tf_hotel' ){
-			wp_enqueue_style( 'tf-hotel-style', TF_ASSETS_URL . 'css/hotel' . $tf_min_css . '.css', null, '' );
+			wp_enqueue_style( 'tf-hotel-style', TF_ASSETS_URL . 'css/hotel' . $tf_min_css . '.css', null, TOURFIC );
 		}
 		if ( get_post_type() == 'tf_tours' ){
-			wp_enqueue_style( 'tf-tour-style', TF_ASSETS_URL . 'css/tour' . $tf_min_css . '.css', null, '' );
+			wp_enqueue_style( 'tf-tour-style', TF_ASSETS_URL . 'css/tour' . $tf_min_css . '.css', null, TOURFIC );
 		}
 
 		// Inline script parent

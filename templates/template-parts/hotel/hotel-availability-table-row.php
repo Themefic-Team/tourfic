@@ -1,6 +1,7 @@
 <?php 
 $custom_adult_number     = !empty( $room['adult'] ) ? $room['adult'] : 0;
-if($form_adult <= $custom_adult_number ){
+
+if($form_adult == $custom_adult_number ){
 ?>
 <tr>
     <td class="description">
@@ -13,7 +14,7 @@ if($form_adult <= $custom_adult_number ){
             }
             if (defined( 'TF_PRO' ) && $tour_room_details_gall){ 
             ?>	
-            <h3><a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo !empty($room['unique_id']) ? $room['unique_id'] : '' ?>" data-hotel="<?php echo $form_post_id; ?>" style="text-decoration: underline;">
+            <h3><a href="#" class="tf-room-detail-qv" data-roomid="<?php echo esc_attr($room_id); ?>" data-uniqid="<?php echo !empty($room['unique_id']) ? $room['unique_id'] : '' ?>" data-hotel="<?php echo $form_post_id; ?>" style="text-decoration: underline;">
                 <?php echo esc_html( $room['title'] ); ?>
             </a></h3>
 
@@ -117,10 +118,10 @@ if($form_adult <= $custom_adult_number ){
                 if(!defined( 'TF_PRO' )){ echo wc_price( $price ); } ?></span>
             
                 <div class="price-per-night">
-                <b style="font-size: 14px; text-transform: uppercase;">
+                <b style="font-size: 17px; text-transform: uppercase;">
                 <?php
                 if(defined( 'TF_PRO' )){ ?>
-                    <?php $days > 0 ? esc_html_e( 'Per person and night', 'tourfic' ) :  esc_html_e( 'Per person and night', 'tourfic' );?>
+                    <?php $days > 0 ? esc_html_e( 'FULL STAY PER PERSON', 'tourfic' ) :  esc_html_e( 'FULL STAY PER PERSON', 'tourfic' );?>
                 <?php } ?>
                 </b>
                 </div>
@@ -134,20 +135,26 @@ if($form_adult <= $custom_adult_number ){
                     if(!empty($tf8days['tf-room']) || !empty($tf8days['tf-breakfast']) || !empty($tf8days['tf-half-b']) || !empty($tf8days['tf-full-b']) || !empty($tf8days['tf-inclusive']) || !empty($tf8days['tf-inclusive-gold'])){
                     ?>
                     <div class="tf-single-prices">
-                        <span><input type="radio" id="tf-hotel-duration" value="8" checked> <?php esc_html_e( '8 DAYS', 'tourfic' ); ?>  <?php echo $tf8days['tf-room'] ? wc_price($tf8days['tf-room']*$form_adult) : '';  ?></span>
+                        <span><input type="radio" id="tf-hotel-duration" value="8" checked> <?php esc_html_e( '8 DAYS', 'tourfic' ); ?>  <?php echo $tf8days['tf-room'] ? wc_price($tf8days['tf-room']) : '';  ?></span>
                         
                         <div class="tf-single-prices-item">
-                            <span><?php esc_html_e( 'Breakfast', 'tourfic' ); ?> <br><?php echo $tf8days['tf-breakfast'] ? wc_price($tf8days['tf-breakfast']*$form_adult) : '';  ?> <br> <input type="radio" name="tf-meals-info" id="tf-meals-info" value="tf-breakfast" ></span>
-                            
-                            <span><?php esc_html_e( 'Half B.', 'tourfic' ); ?> <br><?php echo $tf8days['tf-half-b'] ? wc_price($tf8days['tf-half-b']*$form_adult) : '';  ?> <br> <input type="radio" name="tf-meals-info" id="tf-meals-info" value="tf-half-b" ></span>
-
-                            <span><?php esc_html_e( 'Full B.', 'tourfic' ); ?> <br><?php echo $tf8days['tf-full-b'] ? wc_price($tf8days['tf-full-b']*$form_adult) : '';  ?> <br> <input type="radio" name="tf-meals-info" id="tf-meals-info" value="tf-full-b" ></span>
+                            <?php if(!empty($tf8days['tf-breakfast'])){ ?>
+                            <span><?php esc_html_e( 'Con Desayuno', 'tourfic' ); ?> <br><?php echo $tf8days['tf-breakfast'] ? wc_price($tf8days['tf-breakfast']) : '';  ?> <br> <input type="radio" name="tf-meals-info" id="tf-meals-info" value="tf-breakfast" ></span>
+                            <?php } ?>
+                            <?php if(!empty($tf8days['tf-half-b'])){ ?>
+                            <span><?php esc_html_e( 'Con Media Pensión', 'tourfic' ); ?> <br><?php echo $tf8days['tf-half-b'] ? wc_price($tf8days['tf-half-b']) : '';  ?> <br> <input type="radio" name="tf-meals-info" id="tf-meals-info" value="tf-half-b" ></span>
+                            <?php } ?>
+                            <?php if(!empty($tf8days['tf-full-b'])){ ?>
+                            <span><?php esc_html_e( 'Pensión Completa', 'tourfic' ); ?> <br><?php echo $tf8days['tf-full-b'] ? wc_price($tf8days['tf-full-b']) : '';  ?> <br> <input type="radio" name="tf-meals-info" id="tf-meals-info" value="tf-full-b" ></span>
+                            <?php } ?>
                         </div>
                         <div class="tf-single-prices-item">
-                            <span class="inclusive"><?php esc_html_e( 'All Inclusive', 'tourfic' ); ?> <br><?php echo $tf8days['tf-inclusive'] ? wc_price($tf8days['tf-inclusive']*$form_adult) : '';  ?> <br> <input type="radio" name="tf-meals-info" id="tf-meals-info" value="tf-inclusive" ></span>
-                            
-                            <span class="inclusive"><?php esc_html_e( 'All Inclusive Gold', 'tourfic' ); ?> <br><?php echo $tf8days['tf-inclusive-gold'] ? wc_price($tf8days['tf-inclusive-gold']*$form_adult) : '';  ?> <br> <input type="radio" name="tf-meals-info" id="tf-meals-info" value="tf-inclusive-gold" ></span>
-
+                            <?php if(!empty($tf8days['tf-inclusive'])){ ?>
+                            <span class="inclusive"><?php esc_html_e( 'Todo Incluido', 'tourfic' ); ?> <br><?php echo $tf8days['tf-inclusive'] ? wc_price($tf8days['tf-inclusive']) : '';  ?> <br> <input type="radio" name="tf-meals-info" id="tf-meals-info" value="tf-inclusive" ></span>
+                            <?php } ?>
+                            <?php if(!empty($tf8days['tf-inclusive-gold'])){ ?>
+                            <span class="inclusive"><?php esc_html_e( 'Todo Incluído Plus, Lavandería incluída', 'tourfic' ); ?> <br><?php echo $tf8days['tf-inclusive-gold'] ? wc_price($tf8days['tf-inclusive-gold']) : '';  ?> <br> <input type="radio" name="tf-meals-info" id="tf-meals-info" value="tf-inclusive-gold" ></span>
+                            <?php } ?>
                         </div>
                     </div>
                     <?php } } ?>
@@ -158,20 +165,28 @@ if($form_adult <= $custom_adult_number ){
                     if(!empty($tf16days['tf-room']) || !empty($tf16days['tf-breakfast']) || !empty($tf16days['tf-half-b']) || !empty($tf16days['tf-full-b']) || !empty($tf16days['tf-inclusive']) || !empty($tf16days['tf-inclusive-gold'])){
                     ?>
                     <div class="tf-single-prices">
-                        <span><input type="radio" id="tf-hotel-duration" value="16" checked> <?php esc_html_e( '16 DAYS', 'tourfic' ); ?>  <?php echo $tf16days['tf-room'] ? wc_price($tf16days['tf-room']*$form_adult) : '';  ?></span>
+                        <span><input type="radio" id="tf-hotel-duration" value="16" checked> <?php esc_html_e( '16 DAYS', 'tourfic' ); ?>  <?php echo $tf16days['tf-room'] ? wc_price($tf16days['tf-room']) : '';  ?></span>
                         
                         <div class="tf-single-prices-item">
-                            <span><?php esc_html_e( 'Breakfast', 'tourfic' ); ?> <br><?php echo $tf16days['tf-breakfast'] ? wc_price($tf16days['tf-breakfast']*$form_adult) : '';  ?> <br> <input type="radio" name="tf-meals-info" id="tf-meals-info" value="tf-breakfast" ></span>
+                            <?php if(!empty($tf16days['tf-breakfast'])){ ?>
+                            <span><?php esc_html_e( 'Con Desayuno', 'tourfic' ); ?> <br><?php echo $tf16days['tf-breakfast'] ? wc_price($tf16days['tf-breakfast']) : '';  ?> <br> <input type="radio" name="tf-meals-info" id="tf-meals-info" value="tf-breakfast" ></span>
+                            <?php } ?>
+                            <?php if(!empty($tf16days['tf-half-b'])){ ?>
                             
-                            <span><?php esc_html_e( 'Half B.', 'tourfic' ); ?> <br><?php echo $tf16days['tf-half-b'] ? wc_price($tf16days['tf-half-b']*$form_adult) : '';  ?> <br> <input type="radio" name="tf-meals-info" id="tf-meals-info" value="tf-half-b" ></span>
+                            <span><?php esc_html_e( 'Con Media Pensión', 'tourfic' ); ?> <br><?php echo $tf16days['tf-half-b'] ? wc_price($tf16days['tf-half-b']) : '';  ?> <br> <input type="radio" name="tf-meals-info" id="tf-meals-info" value="tf-half-b" ></span>
+                            <?php } ?>
 
-                            <span><?php esc_html_e( 'Full B.', 'tourfic' ); ?> <br><?php echo $tf16days['tf-full-b'] ? wc_price($tf16days['tf-full-b']*$form_adult) : '';  ?> <br> <input type="radio" name="tf-meals-info" id="tf-meals-info" value="tf-full-b" ></span>
+                            <?php if(!empty($tf16days['tf-full-b'])){ ?>
+                            <span><?php esc_html_e( 'Pensión Completa', 'tourfic' ); ?> <br><?php echo $tf16days['tf-full-b'] ? wc_price($tf16days['tf-full-b']) : '';  ?> <br> <input type="radio" name="tf-meals-info" id="tf-meals-info" value="tf-full-b" ></span>
+                            <?php } ?>
                         </div>
                         <div class="tf-single-prices-item">
-                            <span class="inclusive"><?php esc_html_e( 'All Inclusive', 'tourfic' ); ?> <br><?php echo $tf16days['tf-inclusive'] ? wc_price($tf16days['tf-inclusive']*$form_adult) : '';  ?> <br> <input type="radio" name="tf-meals-info" id="tf-meals-info" value="tf-inclusive" ></span>
-                            
-                            <span class="inclusive"><?php esc_html_e( 'All Inclusive Gold', 'tourfic' ); ?> <br><?php echo $tf16days['tf-inclusive-gold'] ? wc_price($tf16days['tf-inclusive-gold']*$form_adult) : '';  ?> <br> <input type="radio" name="tf-meals-info" id="tf-meals-info" value="tf-inclusive-gold" ></span>
-
+                            <?php if(!empty($tf16days['tf-inclusive'])){ ?>
+                            <span class="inclusive"><?php esc_html_e( 'Todo Incluido', 'tourfic' ); ?> <br><?php echo $tf16days['tf-inclusive'] ? wc_price($tf16days['tf-inclusive']) : '';  ?> <br> <input type="radio" name="tf-meals-info" id="tf-meals-info" value="tf-inclusive" ></span>
+                            <?php } ?>
+                            <?php if(!empty($tf16days['tf-inclusive-gold'])){ ?>
+                            <span class="inclusive"><?php esc_html_e( 'Todo Incluído Plus, Lavandería incluída', 'tourfic' ); ?> <br><?php echo $tf16days['tf-inclusive-gold'] ? wc_price($tf16days['tf-inclusive-gold']) : '';  ?> <br> <input type="radio" name="tf-meals-info" id="tf-meals-info" value="tf-inclusive-gold" ></span>
+                            <?php } ?>
                         </div>
                     </div>
                     <?php } } ?>
@@ -182,21 +197,27 @@ if($form_adult <= $custom_adult_number ){
                     if(!empty($tf24days['tf-room']) || !empty($tf24days['tf-breakfast']) || !empty($tf24days['tf-half-b']) || !empty($tf24days['tf-full-b']) || !empty($tf24days['tf-inclusive']) || !empty($tf24days['tf-inclusive-gold'])){
                     ?>
                     <div class="tf-single-prices">
-                        <span><input type="radio" id="tf-hotel-duration" value="24" checked> <?php esc_html_e( '24 DAYS', 'tourfic' ); ?>  <?php echo $tf24days['tf-room'] ? wc_price($tf24days['tf-room']*$form_adult) : '';  ?></span>
+                        <span><input type="radio" id="tf-hotel-duration" value="24" checked> <?php esc_html_e( '24 DAYS', 'tourfic' ); ?>  <?php echo $tf24days['tf-room'] ? wc_price($tf24days['tf-room']) : '';  ?></span>
                         
 
                         <div class="tf-single-prices-item">
-                            <span><?php esc_html_e( 'Breakfast', 'tourfic' ); ?> <br><?php echo $tf24days['tf-breakfast'] ? wc_price($tf24days['tf-breakfast']*$form_adult) : '';  ?> <br> <input type="radio" name="tf-meals-info" id="tf-meals-info" value="tf-breakfast" ></span>
-                            
-                            <span><?php esc_html_e( 'Half B.', 'tourfic' ); ?> <br><?php echo $tf24days['tf-half-b'] ? wc_price($tf24days['tf-half-b']*$form_adult) : '';  ?> <br> <input type="radio" name="tf-meals-info" id="tf-meals-info" value="tf-half-b" ></span>
-
-                            <span><?php esc_html_e( 'Full B.', 'tourfic' ); ?> <br><?php echo $tf24days['tf-full-b'] ? wc_price($tf24days['tf-full-b']*$form_adult) : '';  ?> <br> <input type="radio" name="tf-meals-info" id="tf-meals-info" value="tf-full-b" ></span>
+                            <?php if(!empty($tf24days['tf-breakfast'])){ ?>
+                            <span><?php esc_html_e( 'Con Desayuno', 'tourfic' ); ?> <br><?php echo $tf24days['tf-breakfast'] ? wc_price($tf24days['tf-breakfast']) : '';  ?> <br> <input type="radio" name="tf-meals-info" id="tf-meals-info" value="tf-breakfast" ></span>
+                            <?php } ?>
+                            <?php if(!empty($tf24days['tf-half-b'])){ ?>
+                            <span><?php esc_html_e( 'Con Media Pensión', 'tourfic' ); ?> <br><?php echo $tf24days['tf-half-b'] ? wc_price($tf24days['tf-half-b']) : '';  ?> <br> <input type="radio" name="tf-meals-info" id="tf-meals-info" value="tf-half-b" ></span>
+                            <?php } ?>
+                            <?php if(!empty($tf24days['tf-full-b'])){ ?>
+                            <span><?php esc_html_e( 'Pensión Completa', 'tourfic' ); ?> <br><?php echo $tf24days['tf-full-b'] ? wc_price($tf24days['tf-full-b']) : '';  ?> <br> <input type="radio" name="tf-meals-info" id="tf-meals-info" value="tf-full-b" ></span>
+                            <?php } ?>
                         </div>
                         <div class="tf-single-prices-item">
-                            <span class="inclusive"><?php esc_html_e( 'All Inclusive', 'tourfic' ); ?> <br><?php echo $tf24days['tf-inclusive'] ? wc_price($tf24days['tf-inclusive']*$form_adult) : '';  ?> <br> <input type="radio" name="tf-meals-info" id="tf-meals-info" value="tf-inclusive" ></span>
-                            
-                            <span class="inclusive"><?php esc_html_e( 'All Inclusive Gold', 'tourfic' ); ?> <br><?php echo $tf24days['tf-inclusive-gold'] ? wc_price($tf24days['tf-inclusive-gold']*$form_adult) : '';  ?> <br> <input type="radio" name="tf-meals-info" id="tf-meals-info" value="tf-inclusive-gold" ></span>
-
+                            <?php if(!empty($tf24days['tf-inclusive'])){ ?>
+                            <span class="inclusive"><?php esc_html_e( 'Todo Incluido', 'tourfic' ); ?> <br><?php echo $tf24days['tf-inclusive'] ? wc_price($tf24days['tf-inclusive']) : '';  ?> <br> <input type="radio" name="tf-meals-info" id="tf-meals-info" value="tf-inclusive" ></span>
+                            <?php } ?>
+                            <?php if(!empty($tf24days['tf-inclusive-gold'])){ ?>
+                            <span class="inclusive"><?php esc_html_e( 'Todo Incluído Plus, Lavandería incluída', 'tourfic' ); ?> <br><?php echo $tf24days['tf-inclusive-gold'] ? wc_price($tf24days['tf-inclusive-gold']) : '';  ?> <br> <input type="radio" name="tf-meals-info" id="tf-meals-info" value="tf-inclusive-gold" ></span>
+                            <?php } ?>
                         </div>
                     </div>
                     <?php } } ?>
@@ -207,21 +228,27 @@ if($form_adult <= $custom_adult_number ){
                     if(!empty($tf32days['tf-room']) || !empty($tf32days['tf-breakfast']) || !empty($tf32days['tf-half-b']) || !empty($tf32days['tf-full-b']) || !empty($tf32days['tf-inclusive']) || !empty($tf32days['tf-inclusive-gold'])){
                     ?>
                     <div class="tf-single-prices">
-                        <span><input type="radio" id="tf-hotel-duration" value="32" checked> <?php esc_html_e( '32 DAYS', 'tourfic' ); ?>  <?php echo $tf32days['tf-room'] ? wc_price($tf32days['tf-room']*$form_adult) : '';  ?></span>
+                        <span><input type="radio" id="tf-hotel-duration" value="32" checked> <?php esc_html_e( '32 DAYS', 'tourfic' ); ?>  <?php echo $tf32days['tf-room'] ? wc_price($tf32days['tf-room']) : '';  ?></span>
                         
 
                         <div class="tf-single-prices-item">
-                            <span><?php esc_html_e( 'Breakfast', 'tourfic' ); ?> <br><?php echo $tf32days['tf-breakfast'] ? wc_price($tf32days['tf-breakfast']*$form_adult) : '';  ?> <br> <input type="radio" name="tf-meals-info" id="tf-meals-info" value="tf-breakfast" ></span>
-                            
-                            <span><?php esc_html_e( 'Half B.', 'tourfic' ); ?> <br><?php echo $tf32days['tf-half-b'] ? wc_price($tf32days['tf-half-b']*$form_adult) : '';  ?> <br> <input type="radio" name="tf-meals-info" id="tf-meals-info" value="tf-half-b" ></span>
-
-                            <span><?php esc_html_e( 'Full B.', 'tourfic' ); ?> <br><?php echo $tf32days['tf-full-b'] ? wc_price($tf32days['tf-full-b']*$form_adult) : '';  ?> <br> <input type="radio" name="tf-meals-info" id="tf-meals-info" value="tf-full-b" ></span>
+                            <?php if(!empty($tf32days['tf-breakfast'])){ ?>
+                            <span><?php esc_html_e( 'Con Desayuno', 'tourfic' ); ?> <br><?php echo $tf32days['tf-breakfast'] ? wc_price($tf32days['tf-breakfast']) : '';  ?> <br> <input type="radio" name="tf-meals-info" id="tf-meals-info" value="tf-breakfast" ></span>
+                            <?php } ?>
+                            <?php if(!empty($tf32days['tf-half-b'])){ ?>
+                            <span><?php esc_html_e( 'Con Media Pensión', 'tourfic' ); ?> <br><?php echo $tf32days['tf-half-b'] ? wc_price($tf32days['tf-half-b']) : '';  ?> <br> <input type="radio" name="tf-meals-info" id="tf-meals-info" value="tf-half-b" ></span>
+                            <?php } ?>
+                            <?php if(!empty($tf32days['tf-full-b'])){ ?>
+                            <span><?php esc_html_e( 'Pensión Completa', 'tourfic' ); ?> <br><?php echo $tf32days['tf-full-b'] ? wc_price($tf32days['tf-full-b']) : '';  ?> <br> <input type="radio" name="tf-meals-info" id="tf-meals-info" value="tf-full-b" ></span>
+                            <?php } ?>
                         </div>
                         <div class="tf-single-prices-item">
-                            <span class="inclusive"><?php esc_html_e( 'All Inclusive', 'tourfic' ); ?> <br><?php echo $tf32days['tf-inclusive'] ? wc_price($tf32days['tf-inclusive']*$form_adult) : '';  ?> <br> <input type="radio" name="tf-meals-info" id="tf-meals-info" value="tf-inclusive" ></span>
-                            
-                            <span class="inclusive"><?php esc_html_e( 'All Inclusive Gold', 'tourfic' ); ?> <br><?php echo $tf32days['tf-inclusive-gold'] ? wc_price($tf32days['tf-inclusive-gold']*$form_adult) : '';  ?> <br> <input type="radio" name="tf-meals-info" id="tf-meals-info" value="tf-inclusive-gold" ></span>
-
+                            <?php if(!empty($tf32days['tf-inclusive'])){ ?>
+                            <span class="inclusive"><?php esc_html_e( 'Todo Incluido', 'tourfic' ); ?> <br><?php echo $tf32days['tf-inclusive'] ? wc_price($tf32days['tf-inclusive']) : '';  ?> <br> <input type="radio" name="tf-meals-info" id="tf-meals-info" value="tf-inclusive" ></span>
+                            <?php } ?>
+                            <?php if(!empty($tf32days['tf-inclusive-gold'])){ ?>
+                            <span class="inclusive"><?php esc_html_e( 'Todo Incluído Plus, Lavandería incluída', 'tourfic' ); ?> <br><?php echo $tf32days['tf-inclusive-gold'] ? wc_price($tf32days['tf-inclusive-gold']) : '';  ?> <br> <input type="radio" name="tf-meals-info" id="tf-meals-info" value="tf-inclusive-gold" ></span>
+                            <?php } ?>
                         </div>
                     </div>
                     <?php } ?>
@@ -234,6 +261,8 @@ if($form_adult <= $custom_adult_number ){
         </div>
     </td>
     <td class="reserve">
+		
+						
         <form class="tf-room">
             <?php wp_nonce_field( 'check_room_booking_nonce', 'tf_room_booking_nonce' );?>
             <?php 
@@ -474,8 +503,41 @@ if($form_adult <= $custom_adult_number ){
                 if(!empty($order_ids)){
                 if(!empty($custom_num_room_available)){ ?>
                     <?php if($days<=29){ ?>
-                        <a class="tf_air_service tf-sml-btn btn-styled" href="javascript:;" data-room="<?php echo $room_id; ?>"><?php _e( 'Add to Cart', 'tourfic' );?></a>
+				
+						<?php if($days==8){
+							 if(!empty($tf8days['tf-room']) || !empty($tf8days['tf-breakfast']) || !empty($tf8days['tf-half-b']) || !empty($tf8days['tf-full-b']) || !empty($tf8days['tf-inclusive']) || !empty($tf8days['tf-inclusive-gold'])){ ?>
+						 <button class="hotel-room-book btn-styled tf-sml-btn" type="submit"><?php _e( 'Add to Cart', 'tourfic' );?></button>
                         <a href="<?php echo wc_get_checkout_url(); ?>" class="hotel-room-complete"><?php _e( 'Complete your order', 'tourfic' );?></a>
+					<?php }else{ ?>
+					<button class="btn-styled tf-sml-btn tf-sml-btn-no-pack" disabled><?php _e( 'No Package Available', 'tourfic' );?></button>
+					<?php } } ?>
+				
+				<?php if($days==15){
+                    $tf16days  = !empty($room['tf-16-days']) ? $room['tf-16-days'] : ''; 
+                    if(!empty($tf16days['tf-room']) || !empty($tf16days['tf-breakfast']) || !empty($tf16days['tf-half-b']) || !empty($tf16days['tf-full-b']) || !empty($tf16days['tf-inclusive']) || !empty($tf16days['tf-inclusive-gold'])){ ?>
+				<button class="hotel-room-book btn-styled tf-sml-btn" type="submit"><?php _e( 'Add to Cart', 'tourfic' );?></button>
+                        <a href="<?php echo wc_get_checkout_url(); ?>" class="hotel-room-complete"><?php _e( 'Complete your order', 'tourfic' );?></a>
+					<?php }else{ ?>
+					<button class="btn-styled tf-sml-btn tf-sml-btn-no-pack" disabled><?php _e( 'No Package Available', 'tourfic' );?></button>
+					<?php } } ?>
+				<?php if($days==22){
+                    $tf24days  = !empty($room['tf-24-days']) ? $room['tf-24-days'] : ''; 
+                    if(!empty($tf24days['tf-room']) || !empty($tf24days['tf-breakfast']) || !empty($tf24days['tf-half-b']) || !empty($tf24days['tf-full-b']) || !empty($tf24days['tf-inclusive']) || !empty($tf24days['tf-inclusive-gold'])){ ?>
+                        <button class="hotel-room-book btn-styled tf-sml-btn" type="submit"><?php _e( 'Add to Cart', 'tourfic' );?></button>
+                        <a href="<?php echo wc_get_checkout_url(); ?>" class="hotel-room-complete"><?php _e( 'Complete your order', 'tourfic' );?></a>
+					<?php }else{ ?>
+					<button class="btn-styled tf-sml-btn tf-sml-btn-no-pack" disabled><?php _e( 'No Package Available', 'tourfic' );?></button>
+					<?php } } ?>
+				
+				<?php if($days==29){
+                    $tf32days  = !empty($room['tf-32-days']) ? $room['tf-32-days'] : ''; 
+                    if(!empty($tf32days['tf-room']) || !empty($tf32days['tf-breakfast']) || !empty($tf32days['tf-half-b']) || !empty($tf32days['tf-full-b']) || !empty($tf32days['tf-inclusive']) || !empty($tf32days['tf-inclusive-gold'])){ ?>
+                        <button class="hotel-room-book btn-styled tf-sml-btn" type="submit"><?php _e( 'Add to Cart', 'tourfic' );?></button>
+                        <a href="<?php echo wc_get_checkout_url(); ?>" class="hotel-room-complete"><?php _e( 'Complete your order', 'tourfic' );?></a>
+					<?php }else{ ?>
+					<button class="btn-styled tf-sml-btn tf-sml-btn-no-pack" disabled><?php _e( 'No Package Available', 'tourfic' );?></button>
+					<?php } } ?>
+				
                     <?php }else{ ?>
                         <div class="price-per-night"><?php _e( 'Please Select Date within 29 days', 'tourfic' );?></div>
                     <?php } ?>
@@ -484,8 +546,41 @@ if($form_adult <= $custom_adult_number ){
                 <?php } ?>
                 <?php }else{ ?>
                     <?php if($days<=29){ ?>
-                        <a class="tf_air_service tf-sml-btn btn-styled" href="javascript:;" data-room="<?php echo $room_id; ?>"><?php _e( 'Add to Cart', 'tourfic' );?></a>
+				
+                        <?php if($days==8){
+							 if(!empty($tf8days['tf-room']) || !empty($tf8days['tf-breakfast']) || !empty($tf8days['tf-half-b']) || !empty($tf8days['tf-full-b']) || !empty($tf8days['tf-inclusive']) || !empty($tf8days['tf-inclusive-gold'])){ ?>
+                        <button class="hotel-room-book btn-styled tf-sml-btn" type="submit"><?php _e( 'Add to Cart', 'tourfic' );?></button>
                         <a href="<?php echo wc_get_checkout_url(); ?>" class="hotel-room-complete"><?php _e( 'Complete your order', 'tourfic' );?></a>
+					<?php }else{ ?>
+					<button class="btn-styled tf-sml-btn tf-sml-btn-no-pack" disabled><?php _e( 'No Package Available', 'tourfic' );?></button>
+					<?php } } ?>
+				
+				<?php if($days==15){
+                    $tf16days  = !empty($room['tf-16-days']) ? $room['tf-16-days'] : ''; 
+                    if(!empty($tf16days['tf-room']) || !empty($tf16days['tf-breakfast']) || !empty($tf16days['tf-half-b']) || !empty($tf16days['tf-full-b']) || !empty($tf16days['tf-inclusive']) || !empty($tf16days['tf-inclusive-gold'])){ ?>
+                        <button class="hotel-room-book btn-styled tf-sml-btn" type="submit"><?php _e( 'Add to Cart', 'tourfic' );?></button>
+                        <a href="<?php echo wc_get_checkout_url(); ?>" class="hotel-room-complete"><?php _e( 'Complete your order', 'tourfic' );?></a>
+					<?php }else{ ?>
+					<button class="btn-styled tf-sml-btn tf-sml-btn-no-pack" disabled><?php _e( 'No Package Available', 'tourfic' );?></button>
+					<?php } } ?>
+				<?php if($days==22){
+                    $tf24days  = !empty($room['tf-24-days']) ? $room['tf-24-days'] : ''; 
+                    if(!empty($tf24days['tf-room']) || !empty($tf24days['tf-breakfast']) || !empty($tf24days['tf-half-b']) || !empty($tf24days['tf-full-b']) || !empty($tf24days['tf-inclusive']) || !empty($tf24days['tf-inclusive-gold'])){ ?>
+                        <button class="hotel-room-book btn-styled tf-sml-btn" type="submit"><?php _e( 'Add to Cart', 'tourfic' );?></button>
+                        <a href="<?php echo wc_get_checkout_url(); ?>" class="hotel-room-complete"><?php _e( 'Complete your order', 'tourfic' );?></a>
+					<?php }else{ ?>
+					<button class="btn-styled tf-sml-btn tf-sml-btn-no-pack" disabled><?php _e( 'No Package Available', 'tourfic' );?></button>
+					<?php } } ?>
+				
+				<?php if($days==29){
+                    $tf32days  = !empty($room['tf-32-days']) ? $room['tf-32-days'] : ''; 
+                    if(!empty($tf32days['tf-room']) || !empty($tf32days['tf-breakfast']) || !empty($tf32days['tf-half-b']) || !empty($tf32days['tf-full-b']) || !empty($tf32days['tf-inclusive']) || !empty($tf32days['tf-inclusive-gold'])){ ?>
+                        <button class="hotel-room-book btn-styled tf-sml-btn" type="submit"><?php _e( 'Add to Cart', 'tourfic' );?></button>
+                        <a href="<?php echo wc_get_checkout_url(); ?>" class="hotel-room-complete"><?php _e( 'Complete your order', 'tourfic' );?></a>
+					<?php }else{ ?>
+					<button class="btn-styled tf-sml-btn tf-sml-btn-no-pack" disabled><?php _e( 'No Package Available', 'tourfic' );?></button>
+					<?php } } ?>
+				
                     <?php }else{ ?>
                         <div class="price-per-night"><?php _e( 'Please Select Date within 29 days', 'tourfic' );?></div>
                     <?php } ?>
@@ -533,20 +628,85 @@ if($form_adult <= $custom_adult_number ){
                 if(!empty($order_ids)){
                 if(!empty($custom_num_room_available)){ ?>
                     <?php if($days<=29){ ?>
-                    <button class="hotel-room-book btn-styled tf-sml-btn" type="submit"><?php _e( 'Add to Cart', 'tourfic' );?></button>
-                    <a href="<?php echo wc_get_checkout_url(); ?>" class="hotel-room-complete"><?php _e( 'Complete your order', 'tourfic' );?></a>
+                    
+				<?php if($days==8){
+							 if(!empty($tf8days['tf-room']) || !empty($tf8days['tf-breakfast']) || !empty($tf8days['tf-half-b']) || !empty($tf8days['tf-full-b']) || !empty($tf8days['tf-inclusive']) || !empty($tf8days['tf-inclusive-gold'])){ ?>
+                        <button class="hotel-room-book btn-styled tf-sml-btn" type="submit"><?php _e( 'Add to Cart', 'tourfic' );?></button>
+                        <a href="<?php echo wc_get_checkout_url(); ?>" class="hotel-room-complete"><?php _e( 'Complete your order', 'tourfic' );?></a>
+					<?php }else{ ?>
+					<button class="btn-styled tf-sml-btn tf-sml-btn-no-pack" disabled><?php _e( 'No Package Available', 'tourfic' );?></button>
+					<?php } } ?>
+				
+				<?php if($days==15){
+                    $tf16days  = !empty($room['tf-16-days']) ? $room['tf-16-days'] : ''; 
+                    if(!empty($tf16days['tf-room']) || !empty($tf16days['tf-breakfast']) || !empty($tf16days['tf-half-b']) || !empty($tf16days['tf-full-b']) || !empty($tf16days['tf-inclusive']) || !empty($tf16days['tf-inclusive-gold'])){ ?>
+                        <button class="hotel-room-book btn-styled tf-sml-btn" type="submit"><?php _e( 'Add to Cart', 'tourfic' );?></button>
+                        <a href="<?php echo wc_get_checkout_url(); ?>" class="hotel-room-complete"><?php _e( 'Complete your order', 'tourfic' );?></a>
+					<?php }else{ ?>
+					<button class="btn-styled tf-sml-btn tf-sml-btn-no-pack" disabled><?php _e( 'No Package Available', 'tourfic' );?></button>
+					<?php } } ?>
+				<?php if($days==22){
+                    $tf24days  = !empty($room['tf-24-days']) ? $room['tf-24-days'] : ''; 
+                    if(!empty($tf24days['tf-room']) || !empty($tf24days['tf-breakfast']) || !empty($tf24days['tf-half-b']) || !empty($tf24days['tf-full-b']) || !empty($tf24days['tf-inclusive']) || !empty($tf24days['tf-inclusive-gold'])){ ?>
+                        <button class="hotel-room-book btn-styled tf-sml-btn" type="submit"><?php _e( 'Add to Cart', 'tourfic' );?></button>
+                        <a href="<?php echo wc_get_checkout_url(); ?>" class="hotel-room-complete"><?php _e( 'Complete your order', 'tourfic' );?></a>
+					<?php }else{ ?>
+					<button class="btn-styled tf-sml-btn tf-sml-btn-no-pack" disabled><?php _e( 'No Package Available', 'tourfic' );?></button>
+					<?php } } ?>
+				
+				<?php if($days==29){
+                    $tf32days  = !empty($room['tf-32-days']) ? $room['tf-32-days'] : ''; 
+                    if(!empty($tf32days['tf-room']) || !empty($tf32days['tf-breakfast']) || !empty($tf32days['tf-half-b']) || !empty($tf32days['tf-full-b']) || !empty($tf32days['tf-inclusive']) || !empty($tf32days['tf-inclusive-gold'])){ ?>
+                        <button class="hotel-room-book btn-styled tf-sml-btn" type="submit"><?php _e( 'Add to Cart', 'tourfic' );?></button>
+                        <a href="<?php echo wc_get_checkout_url(); ?>" class="hotel-room-complete"><?php _e( 'Complete your order', 'tourfic' );?></a>
+					<?php }else{ ?>
+					<button class="btn-styled tf-sml-btn tf-sml-btn-no-pack" disabled><?php _e( 'No Package Available', 'tourfic' );?></button>
+					<?php } } ?>
+				
                     <?php }else{ ?>
                         <div class="price-per-night"><?php _e( 'Please Select Date within 29 days', 'tourfic' );?></div>
                     <?php } ?>
                 <?php }else{ ?>
-                    <button class="btn-styled tf-sml-btn" disabled><?php _e( 'Room Not Available', 'tourfic' );?></button>
+                    <button class="btn-styled tf-sml-btn " disabled><?php _e( 'Room Not Available', 'tourfic' );?></button>
                 <?php } ?>
                 <?php }else{ ?>
                     <?php if($days<=29){ 
                     if(!empty($custom_num_room_available)){    
                     ?>
-                    <button class="hotel-room-book btn-styled tf-sml-btn" type="submit"><?php _e( 'Add to Cart', 'tourfic' );?></button>
-                    <a href="<?php echo wc_get_checkout_url(); ?>" class="hotel-room-complete"><?php _e( 'Complete your order', 'tourfic' );?></a>
+                    <?php if($days==8){
+							 if(!empty($tf8days['tf-room']) || !empty($tf8days['tf-breakfast']) || !empty($tf8days['tf-half-b']) || !empty($tf8days['tf-full-b']) || !empty($tf8days['tf-inclusive']) || !empty($tf8days['tf-inclusive-gold'])){ ?>
+                        <button class="hotel-room-book btn-styled tf-sml-btn" type="submit"><?php _e( 'Add to Cart', 'tourfic' );?></button>
+                        <a href="<?php echo wc_get_checkout_url(); ?>" class="hotel-room-complete"><?php _e( 'Complete your order', 'tourfic' );?></a>
+					<?php }else{ ?>
+					<button class="btn-styled tf-sml-btn tf-sml-btn-no-pack" disabled><?php _e( 'No Package Available', 'tourfic' );?></button>
+					<?php } } ?>
+				
+				<?php if($days==15){
+                    $tf16days  = !empty($room['tf-16-days']) ? $room['tf-16-days'] : ''; 
+                    if(!empty($tf16days['tf-room']) || !empty($tf16days['tf-breakfast']) || !empty($tf16days['tf-half-b']) || !empty($tf16days['tf-full-b']) || !empty($tf16days['tf-inclusive']) || !empty($tf16days['tf-inclusive-gold'])){ ?>
+                        <button class="hotel-room-book btn-styled tf-sml-btn" type="submit"><?php _e( 'Add to Cart', 'tourfic' );?></button>
+                        <a href="<?php echo wc_get_checkout_url(); ?>" class="hotel-room-complete"><?php _e( 'Complete your order', 'tourfic' );?></a>
+					<?php }else{ ?>
+					<button class="btn-styled tf-sml-btn tf-sml-btn-no-pack" disabled><?php _e( 'No Package Available', 'tourfic' );?></button>
+					<?php } } ?>
+				<?php if($days==22){
+                    $tf24days  = !empty($room['tf-24-days']) ? $room['tf-24-days'] : ''; 
+                    if(!empty($tf24days['tf-room']) || !empty($tf24days['tf-breakfast']) || !empty($tf24days['tf-half-b']) || !empty($tf24days['tf-full-b']) || !empty($tf24days['tf-inclusive']) || !empty($tf24days['tf-inclusive-gold'])){ ?>
+                        <button class="hotel-room-book btn-styled tf-sml-btn" type="submit"><?php _e( 'Add to Cart', 'tourfic' );?></button>
+                        <a href="<?php echo wc_get_checkout_url(); ?>" class="hotel-room-complete"><?php _e( 'Complete your order', 'tourfic' );?></a>
+					<?php }else{ ?>
+					<button class="btn-styled tf-sml-btn tf-sml-btn-no-pack" disabled><?php _e( 'No Package Available', 'tourfic' );?></button>
+					<?php } } ?>
+				
+				<?php if($days==29){
+                    $tf32days  = !empty($room['tf-32-days']) ? $room['tf-32-days'] : ''; 
+                    if(!empty($tf32days['tf-room']) || !empty($tf32days['tf-breakfast']) || !empty($tf32days['tf-half-b']) || !empty($tf32days['tf-full-b']) || !empty($tf32days['tf-inclusive']) || !empty($tf32days['tf-inclusive-gold'])){ ?>
+                        <button class="hotel-room-book btn-styled tf-sml-btn" type="submit"><?php _e( 'Add to Cart', 'tourfic' );?></button>
+                        <a href="<?php echo wc_get_checkout_url(); ?>" class="hotel-room-complete"><?php _e( 'Complete your order', 'tourfic' );?></a>
+					<?php }else{ ?>
+					<button class="btn-styled tf-sml-btn tf-sml-btn-no-pack" disabled><?php _e( 'No Package Available', 'tourfic' );?></button>
+					<?php } } ?>
+				
                     <?php }else{ ?>
                     <button class="btn-styled tf-sml-btn" disabled><?php _e( 'Room Not Available', 'tourfic' );?></button>
                     <?php } ?>

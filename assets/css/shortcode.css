@@ -27,13 +27,14 @@
 }
 
 .tf_booking-widget .tf_form-row .tf_button {
-    padding: 15px 20px;
+    padding: 10px 20px;
     width: 100%;
+	font-size: 18px;
 }
 
 /* Horizontal Search Form */
 .tf_booking-widget #check-in-out-date {
-    font-size: 13px;
+    font-size: 17px;
     min-width: 150px;
 }
 
@@ -149,7 +150,7 @@ button.tf-tablinks:focus {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     border-radius: 4px;
     position: relative;
-    border: 1px solid #cccccc;
+    border: 1px solid #CEF6FE;
     justify-content: space-between;
     align-items: center;
     width: 100%;
@@ -157,9 +158,11 @@ button.tf-tablinks:focus {
     font-size: 14px;
     height: 55px;
     margin: 24px 0 16px;
-    background: #fff;
+    background: #CEF6FE;
 }
-
+.tf-seach-box-bar{
+    margin-top: -60px;
+}
 .tf_destination-wrap {
     border-left: 0;
     min-width: 150px;
@@ -258,7 +261,7 @@ button.tf-tablinks:focus {
 .tf_form-inner .tf-hotel-results #ui-id-2 li {
     padding: 10px;
     cursor: pointer;
-    background-color: #fff;
+    background-color: #CEF6FE;
     border-bottom: 1px solid #d4d4d4;
     color: #444;
 }
@@ -342,9 +345,9 @@ button.tf-tablinks:focus {
     margin: 0 !important;
     list-style: none;
     top: 100% !important;
-    height: 225px;
+    max-height: 225px;
     z-index: 99999;
-    overflow-y: scroll;
+    overflow-y: auto;
     padding-left: 0px !important;
 }
 
@@ -408,8 +411,9 @@ span.close-aq {
     background: #e00d0d;
     color: #fff;
     line-height: 25px;
-    font-size: 20px;
+    font-size: 13px;
     cursor: pointer;
+    border-radius: 50%;
 }
 
 .tf-aq-field {

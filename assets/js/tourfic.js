@@ -21,7 +21,16 @@
          * 
          * Ajax
          */
-         $(document).on('click', '#tf-single-hotel-avail .tf-submit', function(e) {
+        $(document).on('keydown', '#tf-single-hotel-avail input', function(e) {
+            if (e.key === 'Enter' || e.keyCode === 13) {
+                e.preventDefault(); // Prevent default form submission
+                $(".flatpickr-calendar").removeClass('open');
+                
+                $('#tf-single-hotel-avail').submit(); // Trigger the submit event
+            }
+        });
+
+         $(document).on('submit', '#tf-single-hotel-avail', function(e) {
             e.preventDefault();
 
             if($.trim($('input[name=check-in-out-date]').val()) == ''){
@@ -432,7 +441,17 @@
             });
             var tf_property_month = tf_property_month.join();
 
+            //Monthwise Pricing
+            var tf_month_pricing = [];
 
+            $('[name*=tf_month_pricing]').each(function () {
+                if ($(this).is(':checked')) {
+                    tf_month_pricing.push($(this).val());
+                }
+            });
+            var tf_month_pricing = tf_month_pricing.join();
+
+            
             var filters = [];
 
             $('[name*=tf_filters]').each(function () {
@@ -526,6 +545,7 @@
             formData.append('room', room);
             formData.append('children', children);
             formData.append('filters', filters);
+            formData.append('tf_month_pricing', tf_month_pricing);
             formData.append('tf_property_type', tf_property_type);
             formData.append('tf_property_month', tf_property_month);
             formData.append('tf_location', tf_location);
@@ -582,7 +602,7 @@
             e.preventDefault();
             makeFilter()
         });
-        $(document).on('change', '[name*=tf_property_month],[name*=tf_property_type],[name*=tf_location],[name*=tf_property_style],[name*=tf_days],[name*=tf_meals],[name*=tf_theme],[name*=tf_activities],[name*=tf_stars],[name*=tf_filters]', function () {
+        $(document).on('change', '[name*=tf_property_month],[name*=tf_property_type],[name*=tf_location],[name*=tf_property_style],[name*=tf_days],[name*=tf_meals],[name*=tf_theme],[name*=tf_activities],[name*=tf_stars],[name*=tf_filters], [name*=tf_month_pricing]', function () {
             makeFilter();
         })
 
@@ -1425,10 +1445,7 @@
             }
         });
         $("#tf-country-name").on('focus', function() {
-            if ($("#tf-country-name").val() == '') {
-            console.log('is empty, force search with blank terms...')
             $("#tf-country-name").autocomplete("search", "");
-            }
         });
 
           // Hotel Month
@@ -1443,10 +1460,7 @@
               }
           });
           $("#tf-month-name").on('focus', function() {
-              if ($("#tf-month-name").val() == '') {
-              console.log('is empty, force search with blank terms...')
-              $("#tf-month-name").autocomplete("search", "");
-              }
+            $("#tf-month-name").autocomplete("search", "");
           });
 
 
@@ -1460,12 +1474,18 @@
           
 
          // FAQ Accordion
-         $('.tf-faq-title').click(function(){
-            $(this).toggleClass('active');
-            $(this).parent().find('.arrow').toggleClass('arrow-animate');
-            $(this).parent().find('.tf-faq-desc').slideToggle();
-            $(this).parents('#tf-faq-item').siblings().find('.tf-faq-desc').slideUp();
-          });
+        $('.tf-faq-title').on("click", function (e) {
+            e.preventDefault();
+            var $this = $(this);
+            if (!$this.hasClass("active")) {
+                $(".tf-faq-desc").slideUp(400);
+                $(".tf-faq-title").removeClass("active");
+                $('.arrow').removeClass('arrow-animate');
+            }
+            $this.toggleClass("active");
+            $this.next().slideToggle();
+            $('.arrow', this).toggleClass('arrow-animate');
+        });
 
 		// adv_features show & hide
          $('.tf-feature-all-show span.tf-show-all-feature').click(function(){

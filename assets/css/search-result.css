@@ -1,6 +1,10 @@
+.tf-main-wrapper{
+  background-color: #C1FCFF;
+}
 .search-result-inner {
   display: grid;
   grid-template-columns: 75% 25%;
+  padding: 60px 0;
 }
 .tf-custom-search-results{
   display: grid;
@@ -14,7 +18,83 @@
 .tf-search-right {
   padding-left: 15px;
 }
-
+.tf-custom-search-results .tf-search-right{
+  padding-left: 0px;
+  margin-right: 15px;
+}
+.tf-custom-search-results .tf-search-right .tf_booking-widget{
+  background: #9B008A;
+  border-color: #9B008A;
+  border-radius: 16px;
+  margin-bottom: 24px;
+}
+.tf-custom-search-results .tf-search-right .tf_booking-widget .tf_form-row .tf_label-row h4{
+  margin: 0 0 5px 0;
+  color: #fff;
+  font-size: 16px;
+}
+.tf-custom-search-results .tf-search-right .tf_booking-widget .tf_form-row .tf_form-inner{
+  display: inherit;
+}
+.tf-custom-search-results .tf-search-right .tf_booking-widget .tf_form-row .tf_calendar_select{
+  display: flex;
+  gap: 8px;
+  padding: 0px 1rem;
+  color: #333;
+}
+.tf-custom-search-results .tf-search-right .tf_booking-widget .tf_form-row .tf_calendar_select i,
+.tf-custom-search-results .tf-search-right .tf_booking-widget .tf_form-row .tf_calendar_select input::placeholder{
+  color: #333;
+}
+.tf-custom-search-results .tf-search-right .tf-archive-filter-box{
+  background: #110375;
+  border-radius: 24px;
+  padding: 24px;
+}
+.tf-custom-search-results .tf-search-right h2{
+  color: #fff;
+  text-align: center;
+  margin: 0 0 15px 0;
+  font-size: 18px;
+}
+.tf-custom-search-results .tf-search-right #tf_hotel_filter-3{
+  margin-bottom: 15px;
+}
+.tf-custom-search-results .tf-search-right #tf_hotel_filter-3:last-child{
+  margin-bottom: 0px;
+}
+.tf-custom-search-results .tf-search-right #tf_hotel_filter-3 h4{
+  color: #fff;
+  text-align: center;
+  margin: 0 0 5px 0;
+  text-transform: uppercase;
+  font-size: 15px;
+}
+.tf-custom-search-results .tf-search-right #tf_hotel_filter-3 ul{
+  margin: 0;
+  padding: 0;
+}
+.tf-custom-search-results .tf-search-right #tf_hotel_filter-3 ul ul{
+  margin-left: 20px;
+}
+.tf-custom-search-results .tf-search-right #tf_hotel_filter-3 ul li{
+  list-style: none;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 2px 0;
+}
+.tf-custom-search-results .tf-search-right #tf_hotel_filter-3 ul li label{
+  display: flex;
+  gap: 5px;
+  text-transform: capitalize;
+}
+.tf-custom-search-results .tf-search-right #tf_hotel_filter-3 .tf-activities-all-show,
+.tf-custom-search-results .tf-search-right #tf_hotel_filter-3 .tf-theme-all-show,
+.tf-custom-search-results .tf-search-right #tf_hotel_filter-3 .tf-feature-all-show{
+  color: #fff;
+  font-weight: 600;
+}
 .page-template-tf_search-result .tf_form-row .tf_button {
   padding: 15px 20px;
   width: 100%;
@@ -28,7 +108,7 @@
   display: block;
   width: 100%;
   min-height: 149px;
-  padding: 20px;
+  /* padding: 20px; */
   margin: 16px 0;
   border: 1px solid #c6c6c6;
   border-radius: 4px;
@@ -40,6 +120,7 @@
   flex-wrap: wrap;
   justify-content: space-between;
   position: relative;
+  background: #FEFFF4;
 }
 .single-tour-wrap.tf-featured .single-tour-inner {
   background: #F5F9FF;
@@ -59,14 +140,14 @@
   order: 2;
   flex-grow: 1;
   flex-basis: 200px;
-  padding: 0 0 0 16px;
+  padding: 0;
 }
 
 .tourfic_hotel-title {
   display: inline-block;
   margin: 0 !important;
   padding-right: 2px;
-color: rgb(121,121,121);
+  color: #080994;
 }
 
 .single-tour-wrap:first-child .single-tour-inner {
@@ -81,6 +162,8 @@ color: rgb(121,121,121);
   font-size: 17px;
   line-height: 22px;
   font-weight: 400;
+  background-color: #FFFFCF;
+  padding: 5px 10px 10px 20px;
 }
 
 .tf_item_main_block {
@@ -98,6 +181,7 @@ color: rgb(121,121,121);
 
 .sr_rooms_table_block, .tf_search_result .tf-tour-desc {
   margin-top: 8px;
+  padding: 0 20px 20px 20px;
 }
 
 .room_details, .tf_search_result .tf-tour-desc {
@@ -339,7 +423,10 @@ grid-template-columns: 100% 0%;
   text-align: left;
   margin: 10px 0;
 }
-
+.tf-line-box p{
+  display: flex;
+  gap: 5px;
+}
 @media only screen and (max-width: 991px) {
   .widget_tf_hotel_filter {
       margin-top: 20px;

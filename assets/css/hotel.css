@@ -2,7 +2,6 @@
 .tf-map-link a.more-hotel {
     font-weight: bold;
 }
-
 .tf-wishlist-button {
     font-size: 24px;
     cursor: pointer;
@@ -170,20 +169,23 @@ a.slick-slide-item-link {
     position: relative;
 }
 
-.swiper-button-prev,
-.swiper-button-next {
-    position: absolute;
-    z-index: 9;
-    top: 50%;
+.tf-gallery-wrap .swiper-button-prev,
+.tf-gallery-wrap .swiper-button-next {
+    position: absolute !important;
+    z-index: 9 !important;
+    top: 50% !important;
     transform: translateY(-50%);
-    color: #fff;
+    color: #fff !important;
     background-color: #000;
     text-align: center;
-    cursor: pointer;
+    cursor: pointer !important;
     padding: 3px 10px 0;
     border-radius: 4px;
 }
-
+.tf-gallery-wrap .swiper-button-prev::after,
+.tf-gallery-wrap .swiper-button-next::after{
+    display: none;
+}
 .swiper-button-prev i,
 .swiper-button-next i {
     font-size: 28px;
@@ -199,7 +201,7 @@ a.slick-slide-item-link {
 
 .tf-gallery-wrap .slick-slide img {
     width: 100%;
-    height: 100%;
+    height: 385px;
     -o-object-fit: cover;
     object-fit: cover;
     cursor: zoom-in;
@@ -331,25 +333,33 @@ a.slick-slide-item-link {
 }
 
 .availability-table thead {
-    background: #003162;
-    color: #fff;
+    background: #FFFFCF;
+    color: #080994;
+    text-transform: uppercase;
+    font-size: 18px;
+}
+.availability-table thead tr th{
+    border: 1px solid #080994;
+    border-block-start: 1px solid #080994 !important;
 }
 
 .availability-table td {
-    border-left: 1px solid #c8e2fc;
-    border-bottom: 1px solid #c8e2fc;
+    border-left: 1px solid #080994;
+    border-bottom: 1px solid #080994;
     border-top: none;
     border-right: none;
 }
 
 .availability-table td.reserve {
-    border-right: 1px solid #c8e2fc;
+    border-right: 1px solid #080994;
 }
 
-.tf-room-table .availability-table tbody tr:nth-child(odd) td {
-    background: #fff;
+.tf-room-table .availability-table tbody tr td {
+    background: #FEFFF4;
 }
-
+.tf-room-table .availability-table tbody tr td .tf-price-column{
+    color: #080994;
+}
 .hotel-room-wrap {
     width: 100%;
     overflow-x: auto;
@@ -361,6 +371,7 @@ a.slick-slide-item-link {
     padding: 10px;
     width: 100%;
     text-align: center;
+    background-color: #fff;
 }
 
 .availability-table td.description {
@@ -379,7 +390,8 @@ a.slick-slide-item-link {
 
 .room-features h4,
 .pax h4 {
-    font-size: 16px;
+    font-size: 18px;
+    color: #080994;
 }
 
 .room-features {
@@ -431,6 +443,11 @@ a.slick-slide-item-link {
 
 .hotel-room-book {
     margin-top: 15px;
+    background-color: #FFFFCF;
+    color: #080994;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 700;
 }
 
 #tour_room_details_loader {
@@ -482,12 +499,15 @@ span.tf-price .amount {
 }
 .tf-single-pricebox{
     width: 48%;
-    border: 1px solid #023169;
+    border: 1px solid #080994;
     margin-right: 1%;
     float: left;
 }
+.availability-table thead .pricing {
+    width: 290px;
+}
 .tf-person-title{
-    color: #023169;
+    color: #080994;
     text-transform: uppercase;
     font-size: 20px;
     font-weight: 700;
@@ -495,10 +515,11 @@ span.tf-price .amount {
     display: block;
 }
 .tf-single-pricebox tr td{
-    color: #023169;
+    color: #080994;
     font-weight: 600;
-    border-right: 1px solid #023169;
+    border-right: 1px solid #080994;
 	padding: 10px;
+    border: 1px solid #080994;
 }
 .tf-single-pricebox tr td:last-child{
     border-right: 0px solid;
@@ -525,7 +546,7 @@ span.tf-price .amount {
   }
 .tf-single-prices-item {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     margin-top: 10px;
 }
 .tf-single-prices-item span {

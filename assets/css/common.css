@@ -21,6 +21,7 @@
 .section-heading {
     font-size: 28px;
     margin-bottom: 15px;
+    color: #080994 !important;
 }
 
 h3.section-heading {
@@ -204,7 +205,7 @@ h3.section-heading {
 }
 
 .btn-styled {
-    border: 1px solid #003162;
+    border: 1px solid #110375;
     border-radius: 4px;
     overflow: hidden;
     position: relative;
@@ -212,12 +213,18 @@ h3.section-heading {
     cursor: pointer;
     position: relative;
     text-decoration: none;
-    background: #003162;
+    background: #110375;
     width: 100%;
     padding: 10px 20px;
 
 }
-
+.tf-inline-btn.tf-btn{
+    width: auto;
+    display: inline-flex;
+}
+.tf-inline-btn.tf-btn a{
+    text-decoration: none;
+}
 .btn-styled span {
     z-index: 20;
 }
@@ -282,20 +289,22 @@ h3.section-heading {
     font-size: 35px;
     margin-top: 0;
     margin-bottom: 6px;
-	color: rgb(121,121,121);
+	color: #080994;
 }
 .reserve.tf-t-c button.tf-sml-btn {
-  font-size: 18px;
+  font-size: 16px;
 }
 .tf-title-right {
     display: flex;
     align-items: center;
     column-gap: 5px;
 }
-
+.tf-map-link .tf-d-ib{
+    color: #080994;
+}
 .tf-map-link a {
     font-size: 17px;
-    color: #393939;
+    color: #080994;
 }
 
 .tf-single-rating {
@@ -407,6 +416,10 @@ h3.section-heading {
     display: block;
     font-size: inherit;
 }
+.tf_form-row .tf_label-row span.tf-label{
+    margin-bottom: 5px;
+    display: block;
+}
 
 .tf_form-inner input[type=text],
 .tf_form-inner select {
@@ -414,8 +427,8 @@ h3.section-heading {
     background: transparent;
     border: 0;
     box-shadow: none;
-    height: 45px;
-    font-size: inherit;
+    height: 35px;
+    font-size: 18px;
 }
 
 .tf_form-inner input[type=text]:focus,

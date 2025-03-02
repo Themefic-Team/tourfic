@@ -393,37 +393,37 @@ function display_cart_item_custom_meta_data( $item_data, $cart_item ) {
 
     if ( isset( $cart_item['tf_hotel_data']['tf-room'] ) && $cart_item['tf_hotel_data']['tf-room'] > 0 ) {
         $item_data[] = array(
-            'key'       => __('Room', 'tourfic'),
+            'key'       => __('Alojamiento', 'tourfic'),
             'value'     => wc_price( $cart_item['tf_hotel_data']['tf-room'] ),
         );
     }
     if ( isset( $cart_item['tf_hotel_data']['tf-breakfast'] ) && $cart_item['tf_hotel_data']['tf-breakfast'] > 0 ) {
         $item_data[] = array(
-            'key'       => __('Breakfast', 'tourfic'),
+            'key'       => __('Con Desayuno', 'tourfic'),
             'value'     => wc_price( $cart_item['tf_hotel_data']['tf-breakfast'] ),
         );
     }
     if ( isset( $cart_item['tf_hotel_data']['tf-half-b'] ) && $cart_item['tf_hotel_data']['tf-half-b'] > 0 ) {
         $item_data[] = array(
-            'key'       => __('Half B.', 'tourfic'),
+            'key'       => __('Con Media Pensión', 'tourfic'),
             'value'     => wc_price( $cart_item['tf_hotel_data']['tf-half-b'] ),
         );
     }
     if ( isset( $cart_item['tf_hotel_data']['tf-full-b'] ) && $cart_item['tf_hotel_data']['tf-full-b'] > 0 ) {
         $item_data[] = array(
-            'key'       => __('Full B.', 'tourfic'),
+            'key'       => __('Pensión Completa', 'tourfic'),
             'value'     => wc_price( $cart_item['tf_hotel_data']['tf-full-b'] ),
         );
     }
     if ( isset( $cart_item['tf_hotel_data']['tf-inclusive'] ) && $cart_item['tf_hotel_data']['tf-inclusive'] > 0 ) {
         $item_data[] = array(
-            'key'       => __('All Inclusive', 'tourfic'),
+            'key'       => __('Todo Incluido', 'tourfic'),
             'value'     => wc_price( $cart_item['tf_hotel_data']['tf-inclusive'] ),
         );
     }
     if ( isset( $cart_item['tf_hotel_data']['tf-inclusive-gold'] ) && $cart_item['tf_hotel_data']['tf-inclusive-gold'] > 0 ) {
         $item_data[] = array(
-            'key'       => __('All Inclusive Gold', 'tourfic'),
+            'key'       => __('Todo Incluído Plus, Lavandería incluída', 'tourfic'),
             'value'     => wc_price( $cart_item['tf_hotel_data']['tf-inclusive-gold'] ),
         );
     }
@@ -581,28 +581,28 @@ function tf_hotel_custom_order_data( $item, $cart_item_key, $values, $order ) {
     }
     if ( $tf_room ) {
 
-        $item->update_meta_data( 'Room', wc_price ( $tf_room ) );
+        $item->update_meta_data( 'Alojamiento', wc_price ( $tf_room ) );
     }
     if ( $tf_breakfast ) {
 
-        $item->update_meta_data( 'Breakfast', wc_price ( $tf_breakfast ) );
+        $item->update_meta_data( 'Con Desayuno', wc_price ( $tf_breakfast ) );
     }
     if ( $tf_half_b ) {
 
-        $item->update_meta_data( 'Half B.', wc_price ( $tf_half_b ) );
+        $item->update_meta_data( 'Con Media Pensión', wc_price ( $tf_half_b ) );
     }
     if ( $tf_full_b ) {
 
-        $item->update_meta_data( 'Full B', wc_price ( $tf_full_b ) );
+        $item->update_meta_data( 'Pensión Completa', wc_price ( $tf_full_b ) );
     }
     
     if ( $tf_inclusive ) {
 
-        $item->update_meta_data( 'All Inclusive', wc_price ( $tf_inclusive ) );
+        $item->update_meta_data( 'Todo Incluido', wc_price ( $tf_inclusive ) );
     }
     if ( $tf_inclusive_gold ) {
 
-        $item->update_meta_data( 'All Inclusive Gold', wc_price ( $tf_inclusive_gold ) );
+        $item->update_meta_data( 'Todo Incluído Plus, Lavandería incluída', wc_price ( $tf_inclusive_gold ) );
     }
 
     if ( $check_in ) {

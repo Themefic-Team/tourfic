@@ -158,10 +158,10 @@ function tf_hotel_taxonomies_register() {
             'edit_terms' => 'edit_tf_hotel',
          ),
     );
+
     if ( is_plugin_active('tourfic-pro/tourfic-pro.php') && defined( 'TF_PRO' )) {
         register_taxonomy( 'hotel_country', 'tf_hotel', apply_filters( 'hotel_country_args', $hotel_country_args ) );
     }
-
 
     /**
      * Taxonomy: hotel_month
@@ -169,7 +169,7 @@ function tf_hotel_taxonomies_register() {
     $hotel_month_slug = apply_filters( 'hotel_month_slug', 'hotel-month-type' );
 
     $hotel_month_labels = array(
-        'name'                       => __( 'Month', 'tourfic' ),
+        'name'                       => __( 'Available Months', 'tourfic' ),
         'singular_name'              => __( 'Month', 'tourfic' ),
         'menu_name'                  => __( 'Month', 'tourfic' ),
         'all_items'                  => __( 'All Month', 'tourfic' ),
@@ -1036,8 +1036,8 @@ function tf_room_availability_callback() {
         <table class="availability-table">
             <thead>
                 <tr>
-                    <th class="description"><?php _e( 'Room Details', 'tourfic' ); ?></th>
-                    <th class="pax"><?php _e( 'Pax', 'tourfic' ); ?></th>
+                    <th class="description"><?php _e( 'ROOM DETAILS', 'tourfic' ); ?></th>
+                    <th class="pax"><?php _e( 'PERSONS', 'tourfic' ); ?></th>
                     <th class="pricing"><?php _e( 'Price', 'tourfic' ); ?></th>
                     <th class="reserve"><?php _e( 'Select Rooms', 'tourfic' ); ?></th>
                 </tr>
@@ -1260,6 +1260,7 @@ function tf_room_availability_callback() {
                                 // Check if date is provided and within date range
                                 if ( !in_array( 0, $has_room )  ) {
 	                                tf_get_deposit_amount($room, $price, $deposit_amount, $has_deposit);
+
                                     if ( $form_total_person <= $total_person ) {
 
                                         include TF_TEMPLATE_PART_PATH . 'hotel/hotel-availability-table-row.php';
@@ -1293,7 +1294,7 @@ function tf_room_availability_callback() {
                                 }
 
                                 tf_get_deposit_amount($room, $price, $deposit_amount, $has_deposit);
-
+                                
                                 if ( $form_total_person <= $total_person ) {
 
                                     include TF_TEMPLATE_PART_PATH . 'hotel/hotel-availability-table-row.php';
@@ -1641,7 +1642,6 @@ if ( !function_exists('tf_hotel_advanced_search_form_horizontal') ) {
             <div class="tf_input-inner">
                 <div class="tf_form-row">
                     <label class="tf_label-row">
-                        <span class="tf-label"><?php _e('Country', 'tourfic'); ?>:</span>
                         <div class="tf_form-inner tf-d-g">
                             <i class="fas fa-search"></i>
                             <input type="text" name="country" required id="tf-country-name" class="tf-advance-destination" placeholder="<?php _e('Enter Country', 'tourfic'); ?>" value="">               
@@ -1657,7 +1657,6 @@ if ( !function_exists('tf_hotel_advanced_search_form_horizontal') ) {
             <div class="tf_input-inner">
                 <div class="tf_form-row">
                     <label class="tf_label-row">
-                        <span class="tf-label"><?php _e('Month', 'tourfic'); ?>:</span>
                         <div class="tf_form-inner tf-d-g">
                             <i class="fas fa-search"></i>
                             <input type="text" name="month" required id="tf-month-name" class="tf-advance-destination" placeholder="<?php _e('Enter Month', 'tourfic'); ?>" value="">               
@@ -1724,7 +1723,7 @@ function tf_hotel_sidebar_booking_form($b_check_in='',$b_check_out='') {
     $child = !empty($_GET['children']) ? sanitize_text_field($_GET['children']) : '';
     // Check-in & out date
     $check_in_out = !empty($_GET['check-in-out-date']) ? sanitize_text_field($_GET['check-in-out-date']) : '';
-    $eheckinout_date = !empty($meta['tf-ct-checkinout']) ? $meta['tf-ct-checkinout'] : '';
+    $eheckinout_date = isset($meta['tf-ct-checkinout']) ? $meta['tf-ct-checkinout'] : '';
 
     $maxadults = [];
     $hotels_rooms = !empty($meta['room']) ? $meta['room'] : '';
@@ -1737,8 +1736,7 @@ function tf_hotel_sidebar_booking_form($b_check_in='',$b_check_out='') {
     }else{
         $max_adults_numbers = 1;
     }
-
-    
+	
     $hotel_month  = !empty(get_the_terms( $post_id, 'hotel_month' )) ? get_the_terms( $post_id, 'hotel_month' ) : '';
 
     ?>
@@ -1793,45 +1791,68 @@ function tf_hotel_sidebar_booking_form($b_check_in='',$b_check_out='') {
     </form>
     
     <script>
-    (function($) {
-        $(document).ready(function() {
-    
-            const checkinoutdateange = flatpickr(".tf-hotel-side-booking #check-in-out-date",{
-                enableTime: false,
-                mode: "range",
-                dateFormat: "Y/m/d",
-                minDate: "today",
-                onReady: function(selectedDates, dateStr, instance) {
-                    instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-                },
-                onChange: function(selectedDates, dateStr, instance) {
-                    instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-                },
-                enable: [
-                    function (date) {
-                        //only monday in december
-                        <?php 
-                        if(!empty($hotel_month)){
-                        foreach($hotel_month as $month) {
-                            $selectedmonths = date( "m", strtotime( $month->name ) );
-                         ?>
-                        return (date.getDay() === <?php echo $eheckinout_date;  ?> && date.getMonth() === <?php echo intval($selectedmonths-1); ?>);
-                        <?php }} ?>
-                    }
-                ],
+        (function($) {
+            $(document).ready(function() {
 
-                defaultDate: <?php echo json_encode(explode('-', $check_in_out)) ?>,
-                
-                
-                <?php
-                // Flatpickt locale for translation
-                tf_flatpickr_locale();
-                ?>
+                const checkinoutdateange = flatpickr(".tf-hotel-side-booking #check-in-out-date", {
+                    enableTime: false,
+                    mode: "range",
+                    dateFormat: "Y/m/d",
+                    minDate: "today",
+                    onReady: function(selectedDates, dateStr, instance) {
+                        instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                    },
+                    onChange: function(selectedDates, dateStr, instance) {
+                        instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                    },
+                    enable: [
+                        function(date) {
+                            <?php 
+                            if (!empty($hotel_month)) {
+                                $all_months = [
+                                    'Enero', 
+                                    'Febrero', 
+                                    'March', 
+                                    'Abril', 
+                                    'Mayo', 
+                                    'Junio', 
+                                    'Julio', 
+                                    'Agosto', 
+                                    'Septiembre', 
+                                    'Octubre', 
+                                    'Noviembre', 
+                                    'Diciembre'
+                                ];
+                                // Generate an array of allowed months
+                                $allowed_months = [];
+                                foreach ($hotel_month as $month) {
+                                    $month_name = $month->name;
+                                    $index = array_search($month_name, $all_months); // Find the index in $all_months
+                                    if ($index !== false) { // Check if the month is found
+                                        $allowed_months[] = $index; // Use the index (zero-based)
+                                    }
+                                }
+                                // Get the allowed day of the week (0-6, Sunday-Saturday)
+                                $allowed_day = isset($eheckinout_date) ? intval($eheckinout_date) : null;
+                            ?>
+                            const allowedMonths = <?php echo json_encode($allowed_months); ?>;
+                            const allowedDay = <?php echo json_encode($allowed_day); ?>;
+                            // Check if the month and day match the allowed criteria
+                            return allowedMonths.includes(date.getMonth()) && date.getDay() === allowedDay;
+                            <?php } else { ?>
+                            return false; // No dates allowed if $hotel_month is empty
+                            <?php } ?>
+                        }
+                    ],
+                    defaultDate: <?php echo json_encode(explode('-', $check_in_out)); ?>,
+                    <?php tf_flatpickr_locale(); // Flatpickr locale for translation ?>
+                });
+
             });
-    
-        });
-    })(jQuery);
+        })(jQuery);
     </script>
+
+
     
     <?php if ( is_active_sidebar( 'tf_single_booking_sidebar' ) ) { ?>
         <div id="tf__booking_sidebar">
@@ -1889,80 +1910,6 @@ function tf_hotel_archive_single_item($tf_stars='') {
     // Single link
     $url = get_the_permalink() . '?adults=' . ($adults ?? '') . '&children=' . ($child ?? '') . '&room=' . ($room ?? '') . '&check-in-out-date=' . ($check_in_out ?? '');
 
-    // Check room check in/out time
-    // $room_date_matched = array();
-    // if(!empty($check_in_out)) {
-    //     if(!empty($b_rooms)) {
-    //         $b_room_id = -1;
-    //         foreach ($b_rooms as $b_room) {
-                
-    //             $b_room_id++;
-
-    //             $enable = !empty($b_room['enable']) ? $b_room['enable'] : '';
-
-    //             // Check if room is enabled
-    //             if ($enable == '1') {
-
-    //                 $b_check_in = !empty($b_room['availability']['from']) ? $b_room['availability']['from'] : '';
-    //                 if($b_check_in) {
-    //                     $b_check_in_stt = strtotime($b_check_in);
-    //                 }
-    //                 $b_check_out = !empty($b_room['availability']['to']) ? $b_room['availability']['to'] : '';
-    //                 if($b_check_out) {
-    //                     $b_check_out_stt = strtotime($b_check_out);
-    //                 }
-
-    //                 if(empty($b_check_in) || empty($b_check_out) || ($form_check_in_stt >= $b_check_in_stt && $form_check_out_stt <= $b_check_out_stt)) {
-    //                     if(!empty($startprice) && !empty($endprice)){
-    //                         if(!empty($b_room['price'])){
-    //                             if($startprice<=$b_room['price'] && $b_room['price']<=$endprice){
-    //                                 array_push($room_date_matched, 'yes');  
-    //                             }
-    //                         }
-    //                         if(!empty($b_room['adult_price'])){
-    //                             if($startprice<=$b_room['adult_price'] && $b_room['adult_price']<=$endprice){
-    //                                 array_push($room_date_matched, 'yes');  
-    //                             }
-    //                         }
-    //                         if(!empty($b_room['child_price'])){
-    //                             if($startprice<=$b_room['child_price'] && $b_room['child_price']<=$endprice){
-    //                                 array_push($room_date_matched, 'yes');  
-    //                             }
-    //                         }
-    //                         if(!empty($b_room['repeat_by_date'])){
-    //                             foreach($b_room['repeat_by_date'] as $singleavailroom){
-    //                                 if(!empty($singleavailroom['price'])){
-    //                                     if($startprice<=$singleavailroom['price'] && $singleavailroom['price']<=$endprice){
-    //                                         array_push($room_date_matched, 'yes');  
-    //                                     }
-    //                                 }
-    //                                 if(!empty($singleavailroom['adult_price'])){
-    //                                     if($startprice<=$singleavailroom['adult_price'] && $singleavailroom['adult_price']<=$endprice){
-    //                                         array_push($room_date_matched, 'yes');  
-    //                                     }
-    //                                 }
-    //                                 if(!empty($singleavailroom['child_price'])){
-    //                                     if($startprice<=$singleavailroom['child_price'] && $singleavailroom['child_price']<=$endprice){
-    //                                         array_push($room_date_matched, 'yes');  
-    //                                     }
-    //                                 }
-    //                             }
-    //                         }
-    //                     }else{
-    //                         array_push($room_date_matched, 'yes'); 
-    //                     }
-                                       
-    //                 }
-
-    //             }
-    //         }
-    //     } else {
-    //         array_push($room_date_matched, 'yes'); 
-    //     }
-    // } else {
-    //     array_push($room_date_matched, 'yes'); 
-    // }
-    // if(!empty($room_date_matched)) {
     ?>
 
 
@@ -2008,11 +1955,13 @@ function tf_hotel_archive_single_item($tf_stars='') {
                                                     <?php foreach($features as $feature) {
                                                     $feature_meta = get_term_meta( $feature->term_id, 'hotel_feature', true );
                                                     $f_icon_type = !empty($feature_meta['icon-type']) ? $feature_meta['icon-type'] : '';
-                                                    if ($f_icon_type == 'fa') {
+                                                    if ($f_icon_type == 'fa' && !empty($feature_meta['icon-fa'])) {
                                                         $feature_icon = '<i class="' .$feature_meta['icon-fa']. '"></i>';
-                                                    } elseif ($f_icon_type == 'c') {
+                                                    } elseif ($f_icon_type == 'c' && !empty($feature_meta['icon-c'])) {
                                                         $feature_icon = '<img src="' .$feature_meta['icon-c']["url"]. '" style="width: ' .$feature_meta['dimention']["width"]. 'px; height: ' .$feature_meta['dimention']["width"]. 'px;" />';
-                                                    } ?>
+                                                    } 
+                                                    if(!empty($feature_icon)){
+                                                    ?>
                                                     <li class="tf-tooltip">
                                                         <?php echo $feature_icon; ?>
                                                         <div class="tf-top">
@@ -2020,7 +1969,7 @@ function tf_hotel_archive_single_item($tf_stars='') {
                                                             <i class="tool-i"></i>
                                                         </div>
                                                     </li>
-                                                    <?php } ?>
+                                                    <?php }} ?>
                                                 </ul>
                                             </div>
                                             <?php } ?>
@@ -2038,18 +1987,86 @@ function tf_hotel_archive_single_item($tf_stars='') {
                                                 $tf24days  = !empty($sroom['tf-24-days']) ? $sroom['tf-24-days'] : ''; 
                                                 $tf32days  = !empty($sroom['tf-32-days']) ? $sroom['tf-32-days'] : ''; 
                                                 
+                                                // 8 Days
                                                 if(!empty($tf8days['tf-room'])){
                                                     $tf_8_min_price[]=$tf8days['tf-room'];
                                                 }
+                                                if(!empty($tf8days['tf-breakfast'])){
+                                                    $tf_8_min_price[]=$tf8days['tf-breakfast'];
+                                                }
+                                                if(!empty($tf8days['tf-half-b'])){
+                                                    $tf_8_min_price[]=$tf8days['tf-half-b'];
+                                                }
+                                                if(!empty($tf8days['tf-full-b'])){
+                                                    $tf_8_min_price[]=$tf8days['tf-full-b'];
+                                                }
+                                                if(!empty($tf8days['tf-inclusive'])){
+                                                    $tf_8_min_price[]=$tf8days['tf-inclusive'];
+                                                }
+                                                if(!empty($tf8days['tf-inclusive-gold'])){
+                                                    $tf_8_min_price[]=$tf8days['tf-inclusive-gold'];
+                                                }
+
+                                                // 16 Days
                                                 if(!empty($tf16days['tf-room'])){
                                                     $tf_16_min_price[]=$tf16days['tf-room'];
                                                 }
+                                                if(!empty($tf16days['tf-breakfast'])){
+                                                    $tf_16_min_price[]=$tf16days['tf-breakfast'];
+                                                }
+                                                if(!empty($tf16days['tf-half-b'])){
+                                                    $tf_16_min_price[]=$tf16days['tf-half-b'];
+                                                }
+                                                if(!empty($tf16days['tf-full-b'])){
+                                                    $tf_16_min_price[]=$tf16days['tf-full-b'];
+                                                }
+                                                if(!empty($tf16days['tf-inclusive'])){
+                                                    $tf_16_min_price[]=$tf16days['tf-inclusive'];
+                                                }
+                                                if(!empty($tf16days['tf-inclusive-gold'])){
+                                                    $tf_16_min_price[]=$tf16days['tf-inclusive-gold'];
+                                                }
+
+                                                // 24 Days
                                                 if(!empty($tf24days['tf-room'])){
                                                     $tf_24_min_price[]=$tf24days['tf-room'];
                                                 }
+                                                if(!empty($tf24days['tf-breakfast'])){
+                                                    $tf_24_min_price[]=$tf24days['tf-breakfast'];
+                                                }
+                                                if(!empty($tf24days['tf-half-b'])){
+                                                    $tf_24_min_price[]=$tf24days['tf-half-b'];
+                                                }
+                                                if(!empty($tf24days['tf-full-b'])){
+                                                    $tf_24_min_price[]=$tf24days['tf-full-b'];
+                                                }
+                                                if(!empty($tf24days['tf-inclusive'])){
+                                                    $tf_24_min_price[]=$tf24days['tf-inclusive'];
+                                                }
+                                                if(!empty($tf24days['tf-inclusive-gold'])){
+                                                    $tf_24_min_price[]=$tf24days['tf-inclusive-gold'];
+                                                }
+
+                                                // 32 Days
                                                 if(!empty($tf32days['tf-room'])){
                                                     $tf_32_min_price[]=$tf32days['tf-room'];
                                                 }
+                                                if(!empty($tf32days['tf-breakfast'])){
+                                                    $tf_32_min_price[]=$tf32days['tf-breakfast'];
+                                                }
+                                                if(!empty($tf32days['tf-half-b'])){
+                                                    $tf_32_min_price[]=$tf32days['tf-half-b'];
+                                                }
+                                                if(!empty($tf32days['tf-full-b'])){
+                                                    $tf_32_min_price[]=$tf32days['tf-full-b'];
+                                                }
+                                                if(!empty($tf32days['tf-inclusive'])){
+                                                    $tf_32_min_price[]=$tf32days['tf-inclusive'];
+                                                }
+                                                if(!empty($tf32days['tf-inclusive-gold'])){
+                                                    $tf_32_min_price[]=$tf32days['tf-inclusive-gold'];
+                                                }
+
                                             }
                                             if( !empty($tf_8_min_price) ){
                                                 $hotel_8_min_price = min($tf_8_min_price);
@@ -2067,22 +2084,22 @@ function tf_hotel_archive_single_item($tf_stars='') {
                                             <ul>
                                                 <?php 
                                                 if( !empty($hotel_8_min_price) ){ ?>
-                                                <li><?php _e("8 Nights stay: Starting on ","tourfic"); ?> <?php echo wc_price($hotel_8_min_price); ?> </li>
+                                                <li><?php _e("8 DAYS stay: Starting on ","tourfic"); ?> <?php echo wc_price($hotel_8_min_price); ?> </li>
                                                 <?php } ?>
 
                                                 <?php 
                                                 if( !empty($hotel_16_min_price) ){ ?>
-                                                <li><?php _e("16 Nights stay: Starting on ","tourfic"); ?> <?php echo wc_price($hotel_16_min_price); ?> </li>
+                                                <li><?php _e("16 DAYS stay: Starting on ","tourfic"); ?> <?php echo wc_price($hotel_16_min_price); ?> </li>
                                                 <?php } ?>
 
                                                 <?php 
                                                 if( !empty($hotel_24_min_price) ){ ?>
-                                                <li><?php _e("24 Nights stay: Starting on ","tourfic"); ?> <?php echo wc_price($hotel_24_min_price); ?> </li>
+                                                <li><?php _e("24 DAYS stay: Starting on ","tourfic"); ?> <?php echo wc_price($hotel_24_min_price); ?> </li>
                                                 <?php } ?>
 
                                                 <?php 
                                                 if( !empty($hotel_32_min_price) ){ ?>
-                                                <li><?php _e("32 Nights stay: Starting on ","tourfic"); ?> <?php echo wc_price($hotel_32_min_price); ?> </li>
+                                                <li><?php _e("32 DAYS stay: Starting on ","tourfic"); ?> <?php echo wc_price($hotel_32_min_price); ?> </li>
                                                 <?php } ?>
                                             </ul>
 
@@ -2118,120 +2135,87 @@ function tf_hotel_archive_single_item($tf_stars='') {
 function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] ): void {
 
     // Form Data
-    if(isset($data[4]) && isset($data[5])){
-    [$adults, $child, $room, $check_in_out, $startprice, $endprice] = $data;
-    }else{
-        [$adults, $child, $room, $check_in_out] = $data;
-    }
-
+    [$adults, $child, $room, $check_in_out, $tf_month_pricing] = $data;
     // Get hotel meta options
     $meta = get_post_meta(get_the_ID(), 'tf_hotel', true);
-    // Remove disabled rooms
-    $meta = array_filter($meta['room'], function ($value) {
-        return !empty($value) && $value['enable'] != '0';
-    });
 
-    // If no room return
-    if (empty($meta)) {
-        return;
-    }
+    $selected_months = get_the_terms( get_the_ID(), 'hotel_month' );
 
-    // Set initial room availability status
+    $months_in_spanish = [
+        "January" => "Enero",
+        "February" => "Febrero",
+        "March" => "March",
+        "April" => "Abril",
+        "May" => "Mayo",
+        "June" => "Junio",
+        "July" => "Julio",
+        "August" => "Agosto",
+        "September" => "Septiembre",
+        "October" => "Octubre",
+        "November" => "Noviembre",
+        "December" => "Diciembre"
+    ];
+
+    // Extract months from $check_in_out
+    preg_match_all('/\d{4}\/(\d{2})\/\d{2}/', $check_in_out, $matches);
+    $check_in_out_months = array_unique(array_map(function($month) use ($months_in_spanish) {
+        $lmonth = date('F', mktime(0, 0, 0, intval($month), 10)); // Get full month name
+        return $months_in_spanish[$lmonth] ?? $lmonth; // Translate to Spanish or return original
+    }, $matches[1]));
+
     $has_hotel = false;
 
-    /**
-     * Adult Number Validation
-     */
-    $back_adults = array_column($meta, 'adult');
-    $adult_counter = 0;
-    foreach($back_adults as $back_adult) {
-        if($back_adult >= $adults) {
-            $adult_counter++;
-        }
-    }
+    if (!empty($selected_months)) {
+        $selected_month_names = array_map(function($term) {
+            return $term->name; // Extract term names
+        }, $selected_months);
 
-    /**
-     * Child Number Validation
-     */
-    $back_childs = array_column($meta, 'adult');
-    $child_counter = 0;
-    foreach($back_childs as $back_child) {
-        if($back_child >= $child) {
-            $child_counter++;
-        }
-    }
-
-    // If adult and child number validation is true proceed
-    if($adult_counter > 0 && $child_counter > 0) {
-
-        // Check custom date range status of room
-        $avil_by_date = array_column($meta, 'avil_by_date');
-
-        // Check if any room available without custom date range
-        if ( in_array( 0, $avil_by_date ) || empty( $avil_by_date ) ) {
-
-            $has_hotel = true; // Show that hotel
-
-        } else {
-            // If all the room has custom date range then filter the rooms by date
-            
-            // Get custom date range repeater
-            $dates = array_column($meta, 'repeat_by_date');
-
-            // If no date range return
-            if (empty($dates)) {
-                return;
-            }
-
-            // Initial available dates array
-            $availability_dates = [];
-
-            // Run loop through custom date range repeater and filter out only the dates
-            foreach ($dates as $date) {
-                $availability_dates[] = array_column($date, 'availability');
-            }    
-
-            // Run loop through custom dates & set custom dates on a single array
-            foreach (tf_array_flatten($availability_dates, 1) as $dates) {
-
-                //Initial matching date array
-                $show_hotel = [];
-
-                // Check if any date range match with search form date range and set them on array
-                if(!empty($period)) {
-                    foreach ( $period as $date ) {
-
-                        $show_hotel[] = intval( strtotime( $date->format( 'Y-m-d' ) ) >= strtotime( $dates['from'] ) && strtotime( $date->format( 'Y-m-d' ) ) <= strtotime( $dates['to'] ) );
+        $exists = !array_diff($check_in_out_months, $selected_month_names); // Check if all months exist
     
+        if ($exists) {
+            if(empty($tf_month_pricing)){
+                $has_hotel = true;
+            }else{
+                if(!empty($meta['room'])){
+                    foreach($meta['room'] as $room){
+                        $tf_full_month_price = $room["tf-32-days"];
+
+                        $tf_room = $room["tf-32-days"]["tf-room"];
+                        $tf_breakfast = $room["tf-32-days"]["tf-breakfast"];
+                        $tf_half_b = $room["tf-32-days"]["tf-half-b"];
+                        $tf_full_b = $room["tf-32-days"]["tf-full-b"];
+                        $tf_inclusive = $room["tf-32-days"]["tf-inclusive"];
+                        $tf_inclusive_gold = $room["tf-32-days"]["tf-inclusive-gold"];
+
+                        if (filter_pricing($tf_month_pricing, $tf_room)) {
+                            $has_hotel = true;
+                        }elseif (filter_pricing($tf_month_pricing, $tf_breakfast)) {
+                            $has_hotel = true;
+                        }elseif (filter_pricing($tf_month_pricing, $tf_half_b)) {
+                            $has_hotel = true;
+                        }elseif (filter_pricing($tf_month_pricing, $tf_full_b)) {
+                            $has_hotel = true;
+                        }elseif (filter_pricing($tf_month_pricing, $tf_inclusive)) {
+                            $has_hotel = true;
+                        }elseif (filter_pricing($tf_month_pricing, $tf_inclusive_gold)) {
+                            $has_hotel = true;
+                        } else {
+                            $has_hotel = false;
+                        }
                     }
-                }              
-
-                // If any date range matches show hotel
-                if ( !in_array( 0, $show_hotel ) ) {
-                    $has_hotel = true;
-                    break;
                 }
-
             }
-
+        } else {
+            $has_hotel = false;
         }
-
+    } else {
+        $has_hotel = false;
     }
 
     // Conditional hotel showing
     if ( $has_hotel ) {
-
-        if ( !empty( $data ) ) {
-            if(isset($data[4]) && isset($data[5])){
-            [$adults, $child, $room, $check_in_out, $startprice, $endprice] = $data;
-            tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out, $startprice, $endprice );
-            }else{
-                [$adults, $child, $room, $check_in_out] = $data;
-                tf_hotel_archive_single_item( $adults, $child, $room, $check_in_out);
-            }
-        } else {
-            tf_hotel_archive_single_item($tf_stars);
-        }
+       
+        tf_hotel_archive_single_item($tf_stars);
 
         $not_found[] = 0;
 
@@ -2241,6 +2225,33 @@ function tf_filter_hotel_by_date( $period, array &$not_found, array $data = [] )
         
     }
 
+}
+
+// Function to check if a value matches the pricing filters
+function filter_pricing($pricing, $full_month_value) {
+    foreach ($pricing as $range) {
+        if (strpos($range, '-') !== false) {
+            // Handle range (e.g., "1000-1500")
+            [$min, $max] = explode('-', $range);
+            if ($full_month_value >= $min && $full_month_value <= $max) {
+                return true;
+            }
+        } else {
+            
+            if($range==1000){
+                if ($full_month_value <= $range) {
+                    return true;
+                }
+            }
+            if($range==2000){
+                if ($full_month_value >= $range) {
+                    return true;
+                }
+            }
+            
+        }
+    }
+    return false;
 }
 
 /**
@@ -2296,11 +2307,11 @@ function tf_hotel_quickview_callback(){
         <?php 
             $meta = get_post_meta( $_POST['post_id'], 'tf_hotel', true );
             $rooms = !empty($meta['room']) ? $meta['room'] : '';
-            foreach ($rooms as $room) {
+            foreach ($rooms as $room_id => $room) {
             $enable = !empty($room['enable']) ? $room['enable'] : '';
             if ($enable == '1') {
             $tf_room_gallery = !empty($room['gallery']) ? $room['gallery'] : '';
-            if($room['unique_id']==$_POST['uniqid_id']){
+            if($room['unique_id']==$_POST['uniqid_id'] && $room_id==$_POST['roomid_id']){
         ?>
         <div class="tf-hotel-details-qc-gallelry" style="width: 545px;">
             <?php

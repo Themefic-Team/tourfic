@@ -405,6 +405,10 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
     $date = $_GET['check-in-out-date'] ?? '';
     $startprice = $_GET['from'] ?? '';
     $endprice = $_GET['to'] ?? '';
+
+    $pcountry = !empty($_GET['country']) ? $_GET['country'] : '';
+    $pmonth = !empty($_GET['month']) ? $_GET['month'] : '';
+
     if ( !defined( 'TF_PRO' ) ){
     ?>
     <!-- Start Booking widget -->
@@ -518,20 +522,227 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
     })(jQuery);
     </script>
     <?php }else{ ?>
+        <form class="tf_booking-widget widget tf-hotel-side-booking" method="get" autocomplete="off"
+        action="<?php echo tf_booking_search_action(); ?>" id="tf-widget-booking-search">
+            <h2><?php _e("Search", "tourfic" ); ?></h2>
+            <div class="tf_form-row">
+                <label class="tf_label-row">
+                    <h4><?php _e("Country", "tourfic" ); ?></h4>
+                    <div class="tf_form-inner">
+                        <input type="text" name="country" required id="tf-country-name" class="tf-advance-destination tf-post-country" value="<?php echo $pcountry; ?>">               
+                        <div class="ui-widget ui-widget-content results tf-hotel-results tf-hotel-adv-results">
+                        </div>
+                    </div>
+                </label>
+            </div>
 
+            <div class="tf_booking-dates">
+                <div class="tf_form-row">
+                    <label class="tf_label-row">
+                        <div class="tf_form-inner tf_calendar_select">
+                            <i class="far fa-calendar-alt"></i>
+                            <input type="text" name="check-in-out-date" id="check-in-out-date" onkeypress="return false;"
+                                placeholder="<?php _e('Select Date', 'tourfic'); ?>" required value="<?php echo $date ?>">
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- <div class="tf_form-row">
+                <label class="tf_label-row">
+                    <h4><?php _e("Month", "tourfic" ); ?></h4>
+                    <div class="tf_form-inner">
+                        <input type="text" name="month" required id="tf-month-name" class="tf-advance-destination tf-post-month" value="<?php echo $pmonth; ?>">               
+                        <div class="ui-widget ui-widget-content results tf-hotel-results tf-hotel-month-results">
+                        </div>
+                    </div>
+                </label>
+            </div> -->
         
+            <div class="tf_form-row">
+                <?php
+                    $ptype = $_GET['type'] ?? get_post_type();
+                ?>
+                <input type="hidden" name="type" value="<?php echo $ptype; ?>" class="tf-post-type" />
+                <button class="tf_button tf-submit btn-styled"
+                    type="submit"><?php esc_html_e( 'Search', 'tourfic' );?></button>
+            </div>
+        
+        </form>
+        <script>
+        (function($) {
+            $(document).ready(function() {
+        
+                $(".tf-hotel-side-booking #check-in-out-date").flatpickr({
+                    enableTime: false,
+                    mode: "range",
+                    dateFormat: "Y/m/d",
+                    onReady: function(selectedDates, dateStr, instance) {
+                        instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                    },
+                    onChange: function(selectedDates, dateStr, instance) {
+                        instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                    },
+                    defaultDate: <?php echo json_encode(explode('-', $date)) ?>,
+                });
+        
+            });
+        })(jQuery);
+        </script>
+        
+        <div class="tf-archive-filter-box">
+        <h2><?php _e("Filter By", "tourfic" ); ?></h2>
 
         <div id="tf_hotel_filter-3" class="tf_widget widget widget_tf_hotel_filter">
-        <?php
-            $ptype = $_GET['type'] ?? get_post_type();
-            $pcountry = $_GET['country'];
-            $pmonth = $_GET['month'];
-        ?>   
-        <input type="hidden" name="type" value="<?php echo $ptype; ?>" class="tf-post-type" />
-        <input type="hidden" name="country" value="<?php echo $pcountry; ?>" class="tf-post-country" />
-        <input type="hidden" name="month" value="<?php echo $pmonth; ?>" class="tf-post-month" />
-            <h4 class="tf_widgettitle"><?php _e("Type of Property", "tourfic" ); ?></h4>
+            <h4 class="tf_widgettitle"><?php _e("Price Per Month", "tourfic" ); ?></h4>
             <div class="tf-filter">
+                <ul>
+                    <li>
+                        <label>
+                            <input type="checkbox" name="tf_month_pricing[]" value="1000" /> 
+                            Hasta 1.000 <?php echo get_woocommerce_currency_symbol(); ?>
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="checkbox" name="tf_month_pricing[]" value="1000-1500" /> 
+                            1.000 <?php echo get_woocommerce_currency_symbol(); ?> - 1.500 <?php echo get_woocommerce_currency_symbol(); ?>
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="checkbox" name="tf_month_pricing[]" value="1500-2000" /> 
+                            1.500 <?php echo get_woocommerce_currency_symbol(); ?> - 2.000 <?php echo get_woocommerce_currency_symbol(); ?>
+                        </label>
+                    </li>
+                    <li>
+                        <label style="text-transform: none;">
+                            <input type="checkbox" name="tf_month_pricing[]" value="2000" /> 
+                            Más de 2.000 <?php echo get_woocommerce_currency_symbol(); ?>
+                        </label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="tf_hotel_filter-3" class="tf_widget widget widget_tf_hotel_filter">
+            <h4 class="tf_widgettitle"><?php _e("Month", "tourfic" ); ?></h4>
+            <div class="tf-filter">
+                <ul>
+                <?php 
+                $all_months = [
+                    'Enero', 
+                    'Febrero', 
+                    'March', 
+                    'Abril', 
+                    'Mayo', 
+                    'Junio', 
+                    'Julio', 
+                    'Agosto', 
+                    'Septiembre', 
+                    'Octubre', 
+                    'Noviembre', 
+                    'Diciembre'
+                ];
+
+                // Fetch terms
+                $tf_property_month = get_terms(array(
+                    'taxonomy' => 'hotel_month',
+                    'orderby' => 'title', // Original order
+                    'order' => 'ASC',
+                    'hide_empty' => false,
+                    'hierarchical' => 0,
+                ));
+
+                if ($tf_property_month) {
+                    // Reorder terms based on $all_months
+                    usort($tf_property_month, function($a, $b) use ($all_months) {
+                        $pos_a = array_search($a->name, $all_months);
+                        $pos_b = array_search($b->name, $all_months);
+                        return $pos_a - $pos_b; // Sort by position in $all_months
+                    });
+
+                    // Display terms
+                    foreach ($tf_property_month as $term) {
+                        ?>
+                        <li>
+                            <label>
+                                <input type="checkbox" name="tf_property_month[]" value="<?php echo $term->term_id; ?>" <?php echo $pmonth==$term->name ? 'checked' : ''; ?> > 
+                                <?php echo ucfirst(strtolower($term->name)); ?>
+                            </label>
+                        </li>
+                        <?php 
+                    }
+                }
+                ?>
+                </ul>
+            </div>
+        </div>
+
+        <div id="tf_hotel_filter-3" class="tf_widget widget widget_tf_hotel_filter">
+            <h4 class="tf_widgettitle tf_widge_location_title"><?php _e("Location", "tourfic" ); ?></h4>
+            <div class="tf-filter tf_widge_location_content">
+                <?php 
+                    $tf_hotel_location = get_terms(array(
+                        'taxonomy' => 'hotel_location',
+                        'orderby' => 'name',
+                        'order' => 'ASC',
+                        'hide_empty' => false,
+                    ));
+                    $total_hotel_locations = count($tf_hotel_location);
+                    
+                    // Build a hierarchical structure
+                    function build_location_hierarchy($terms, $parent = 0) {
+                        $hierarchy = [];
+                        foreach ($terms as $term) {
+                            if ($term->parent == $parent) {
+                                $term->children = build_location_hierarchy($terms, $term->term_id);
+                                $hierarchy[] = $term;
+                            }
+                        }
+                        return $hierarchy;
+                    }
+
+                    // Generate hierarchical terms
+                    $hierarchical_terms = build_location_hierarchy($tf_hotel_location);
+
+                    // Recursive function to render the terms with a visible count limit
+                    function render_location_terms($terms, &$visible_location_count, $limit = 200) {
+                        foreach ($terms as $term) {
+                            $is_hidden = $visible_location_count >= $limit; // Hide items beyond the limit
+                            ?>
+                            <li <?php echo $is_hidden ? 'class="tf-hide-theme"' : ''; ?>>
+                                <label>
+                                    <input type="checkbox" name="tf_location[]" value="<?php echo $term->term_id; ?>"> 
+                                    <?php echo ucfirst(strtolower($term->name)); ?>
+                                </label>
+                            </li>
+                            <?php
+                            $visible_location_count++;
+                            if (!empty($term->children)) {
+                                echo '<ul>';
+                                render_location_terms($term->children, $visible_location_count, $limit);
+                                echo '</ul>';
+                            }
+                        }
+                    }
+                ?>
+
+                <ul>
+                    <?php 
+                    $visible_location_count = 0; // Initialize visible count
+                    if (!empty($hierarchical_terms)) {
+                        render_location_terms($hierarchical_terms, $visible_location_count);
+                    }
+                    ?>
+                </ul>
+
+            </div>
+        </div>
+
+        <div id="tf_hotel_filter-3" class="tf_widget widget widget_tf_hotel_filter">
+            <h4 class="tf_widgettitle tf_widge_prop_title"><?php _e("Property Type", "tourfic" ); ?></h4>
+            <div class="tf-filter tf_widge_prop_content">
                 <ul>
                     <?php 
                     $tf_property_type= get_terms( array(
@@ -544,87 +755,15 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
                     if ( $tf_property_type ) { 
                     foreach( $tf_property_type as $term ) {
                     ?>
-                    <li><label><input type="checkbox" name="tf_property_type[]" value="<?php echo $term->term_id; ?>"> <?php echo $term->name; ?></label></li>
+                    <li><label><input type="checkbox" name="tf_property_type[]" value="<?php echo $term->term_id; ?>"> <?php echo ucfirst(strtolower($term->name)); ?></label></li>
                     <?php } } ?>
                 </ul>
-            </div>
-        </div>
-        
-        
-        <div id="tf_hotel_filter-3" class="tf_widget widget widget_tf_hotel_filter">
-            <h4 class="tf_widgettitle"><?php _e("Style of Property", "tourfic" ); ?></h4>
-            <div class="tf-filter">
-                <ul>
-                    <?php 
-                    $tf_hotel_property_style= get_terms( array(
-                        'taxonomy' => 'hotel_style_property',
-                        'orderby' => 'title',
-                        'order' => 'ASC',
-                        'hide_empty' => false,
-                        'hierarchical' => 0,
-                    ) );
-                    if ( $tf_hotel_property_style ) { 
-                    foreach( $tf_hotel_property_style as $term ) {
-                    ?>
-                    <li><label><input type="checkbox" name="tf_property_style[]" value="<?php echo $term->term_id; ?>"> <?php echo $term->name; ?></label></li>
-                    <?php } } ?>
-                </ul>
-            </div>
-        </div>
-		
-		<div id="tf_hotel_filter-3" class="tf_widget widget widget_tf_hotel_filter">
-            <h4 class="tf_widgettitle"><?php _e("Theme", "tourfic" ); ?></h4>
-            <div class="tf-filter">
-                <ul>
-                    <?php 
-                    $tf_hotel_theme= get_terms( array(
-                        'taxonomy' => 'hotel_theme',
-                        'orderby' => 'title',
-                        'order' => 'ASC',
-                        'hide_empty' => false,
-                        'hierarchical' => 0,
-                    ) );
-                    if ( $tf_hotel_theme ) { 
-                    $total_hotel_themes = count($tf_hotel_theme);
-                    $tf_themes_count=1;
-                    foreach( $tf_hotel_theme as $term ) {
-                    ?>
-                    <li <?php echo $tf_themes_count>5 ? 'class="tf-hide-theme"' : ''; ?>><label><input type="checkbox" name="tf_theme[]" value="<?php echo $term->term_id; ?>"> <?php echo $term->name; ?></label></li>
-                    <?php $tf_themes_count++; } } ?>
-                </ul>
-                <?php 
-                if(!empty($tf_hotel_theme) && $total_hotel_themes>5){ ?>
-                <div class="tf-theme-all-show">
-                    <span class="tf-show-all-theme"><?php _e("Show All", "tourfic" ); ?> <i class="fas fa-angle-down"></i></span>
-                    <span class="tf-hide-all-theme"><?php _e("Hide All", "tourfic" ); ?> <i class="fas fa-angle-up"></i></span>
-                </div>
-                <?php } ?>
             </div>
         </div>
 
-		<div id="tf_hotel_filter-3" class="tf_widget widget widget_tf_hotel_filter">
-            <h4 class="tf_widgettitle"><?php _e("Length of Stay", "tourfic" ); ?></h4>
-            <div class="tf-filter">
-                <ul>
-                    <?php 
-                    $tf_hotel_days= get_terms( array(
-                        'taxonomy' => 'hotel_day',
-                        'orderby' => 'title',
-                        'order' => 'DESC',
-                        'hide_empty' => false,
-                        'hierarchical' => 0,
-                    ) );
-                    if ( $tf_hotel_days ) { 
-                    foreach( $tf_hotel_days as $term ) {
-                    ?>
-                    <li><label><input type="checkbox" name="tf_days[]" value="<?php echo $term->term_id; ?>"> <?php echo $term->name; ?></label></li>
-                    <?php } } ?>
-                </ul>
-            </div>
-        </div>
         <div id="tf_hotel_filter-3" class="tf_widget widget widget_tf_hotel_filter">
-            <h4 class="tf_widgettitle"><?php _e("Stars", "tourfic" ); ?></h4>
-            <div class="tf-filter">
+            <h4 class="tf_widgettitle tf_widge_stars_title"><?php _e("Stars", "tourfic" ); ?></h4>
+            <div class="tf-filter tf_widge_stars_content">
                
                 <ul>
                     <?php 
@@ -638,40 +777,106 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
                     if ( $hotel_rating ) { 
                     foreach( $hotel_rating as $term ) {
                     ?>
-                    <li><label><input type="checkbox" name="tf_stars[]" value="<?php echo $term->term_id; ?>"> <?php echo $term->name; ?></label></li>
+                    <li><label><input type="checkbox" name="tf_stars[]" value="<?php echo $term->term_id; ?>"> <?php echo ucfirst(strtolower($term->name)); ?></label></li>
                     <?php } } ?>
                 </ul>
             </div>
         </div>
         
         
-
         <div id="tf_hotel_filter-3" class="tf_widget widget widget_tf_hotel_filter">
-            <h4 class="tf_widgettitle"><?php _e("Meals", "tourfic" ); ?></h4>
-            <div class="tf-filter">
+            <h4 class="tf_widgettitle tf_widge_prop_style_title"><?php _e("Style of Property", "tourfic" ); ?></h4>
+            <div class="tf-filter tf_widge_prop_style_content">
                 <ul>
                     <?php 
-                    $tf_hotel_meals= get_terms( array(
-                        'taxonomy' => 'hotel_meals',
+                    $tf_hotel_property_style= get_terms( array(
+                        'taxonomy' => 'hotel_style_property',
                         'orderby' => 'title',
                         'order' => 'ASC',
                         'hide_empty' => false,
                         'hierarchical' => 0,
                     ) );
-                    if ( $tf_hotel_meals ) { 
-                    foreach( $tf_hotel_meals as $term ) {
+                    if ( $tf_hotel_property_style ) { 
+                    foreach( $tf_hotel_property_style as $term ) {
                     ?>
-                    <li><label><input type="checkbox" name="tf_meals[]" value="<?php echo $term->term_id; ?>"> <?php echo $term->name; ?></label></li>
+                    <li><label><input type="checkbox" name="tf_property_style[]" value="<?php echo $term->term_id; ?>"> <?php echo ucfirst(strtolower($term->name)); ?></label></li>
                     <?php } } ?>
                 </ul>
             </div>
         </div>
+		
+		<div id="tf_hotel_filter-3" class="tf_widget widget widget_tf_hotel_filter">
+            <h4 class="tf_widgettitle tf_widge_theme_title"><?php _e("Theme", "tourfic" ); ?></h4>
+            <div class="tf-filter tf_widge_theme_content">
+                    <?php 
+                    // Fetch all terms for the 'hotel_theme' taxonomy
+                    $tf_hotel_theme = get_terms(array(
+                        'taxonomy' => 'hotel_theme',
+                        'orderby' => 'name',
+                        'order' => 'ASC',
+                        'hide_empty' => false,
+                    ));
+                    $total_hotel_themes = count($tf_hotel_theme);
+                    
+                    // Build a hierarchical structure
+                    function build_hierarchy($terms, $parent = 0) {
+                        $hierarchy = [];
+                        foreach ($terms as $term) {
+                            if ($term->parent == $parent) {
+                                $term->children = build_hierarchy($terms, $term->term_id);
+                                $hierarchy[] = $term;
+                            }
+                        }
+                        return $hierarchy;
+                    }
 
-        
+                    // Generate hierarchical terms
+                    $hierarchical_terms = build_hierarchy($tf_hotel_theme);
+
+                    // Recursive function to render the terms with a visible count limit
+                    function render_terms($terms, &$visible_count, $limit = 5) {
+                        foreach ($terms as $term) {
+                            $is_hidden = $visible_count >= $limit; // Hide items beyond the limit
+                            ?>
+                            <li <?php echo $is_hidden ? 'class="tf-hide-theme"' : ''; ?>>
+                                <label>
+                                    <input type="checkbox" name="tf_theme[]" value="<?php echo $term->term_id; ?>"> 
+                                    <?php echo ucfirst(strtolower($term->name)); ?>
+                                </label>
+                            </li>
+                            <?php
+                            $visible_count++;
+                            if (!empty($term->children)) {
+                                echo '<ul>';
+                                render_terms($term->children, $visible_count, $limit);
+                                echo '</ul>';
+                            }
+                        }
+                    }
+                ?>
+
+                <ul>
+                    <?php 
+                    $visible_count = 0; // Initialize visible count
+                    if (!empty($hierarchical_terms)) {
+                        render_terms($hierarchical_terms, $visible_count);
+                    }
+                    ?>
+                </ul>
+
+                <?php 
+                if(!empty($tf_hotel_theme) && $total_hotel_themes>5){ ?>
+                <div class="tf-theme-all-show">
+                    <span class="tf-show-all-theme"><?php _e("Show All", "tourfic" ); ?> <i class="fas fa-angle-down"></i></span>
+                    <span class="tf-hide-all-theme"><?php _e("Hide All", "tourfic" ); ?> <i class="fas fa-angle-up"></i></span>
+                </div>
+                <?php } ?>
+            </div>
+        </div>
 
         <div id="tf_hotel_filter-3" class="tf_widget widget widget_tf_hotel_filter">
-            <h4 class="tf_widgettitle"><?php _e("Activities", "tourfic" ); ?></h4>
-            <div class="tf-filter">
+            <h4 class="tf_widgettitle tf_widge_activities_title"><?php _e("Activities", "tourfic" ); ?></h4>
+            <div class="tf-filter tf_widge_activities_content">
                 <ul>
                     <?php 
                     $tf_hotel_activities= get_terms( array(
@@ -687,7 +892,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
                     $tf_activities_count=1;
                     foreach( $tf_hotel_activities as $term ) {
                     ?>
-                    <li <?php echo $tf_activities_count>5 ? 'class="tf-hide-activities"' : ''; ?>><label><input type="checkbox" name="tf_activities[]" value="<?php echo $term->term_id; ?>"> <?php echo $term->name; ?></label></li>
+                    <li <?php echo $tf_activities_count>5 ? 'class="tf-hide-activities"' : ''; ?>><label><input type="checkbox" name="tf_activities[]" value="<?php echo $term->term_id; ?>"> <?php echo ucfirst(strtolower($term->name)); ?></label></li>
                     <?php $tf_activities_count++; } } ?>
                 </ul>
                 <?php 
@@ -699,10 +904,70 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
                 <?php } ?>
             </div>
         </div>
+
+        <div id="tf_hotel_filter-3" class="tf_widget widget widget_tf_hotel_filter">
+            <h4 class="tf_widgettitle tf_widge_meals_title"><?php _e("Meals", "tourfic" ); ?></h4>
+            <div class="tf-filter tf_widge_meals_content">
+                <ul>
+                    <?php 
+                    $tf_hotel_meals= get_terms( array(
+                        'taxonomy' => 'hotel_meals',
+                        'orderby' => 'title',
+                        'order' => 'ASC',
+                        'hide_empty' => false,
+                        'hierarchical' => 0,
+                    ) );
+                    if ( $tf_hotel_meals ) { 
+                    foreach( $tf_hotel_meals as $term ) {
+                    ?>
+                    <li><label><input type="checkbox" name="tf_meals[]" value="<?php echo $term->term_id; ?>"> <?php echo ucfirst(strtolower($term->name)); ?></label></li>
+                    <?php } } ?>
+                </ul>
+            </div>
+        </div>
+
+		<div id="tf_hotel_filter-3" class="tf_widget widget widget_tf_hotel_filter">
+            <h4 class="tf_widgettitle tf_widge_stay_title"><?php _e("Duration of Stay", "tourfic" ); ?></h4>
+            <div class="tf-filter tf_widge_stay_content">
+                <ul>
+                <?php 
+                $tf_hotel_days = get_terms(array(
+                    'taxonomy' => 'hotel_day',
+                    'orderby' => 'title', // Default ordering; we'll sort numerically later
+                    'order' => 'ASC',
+                    'hide_empty' => false,
+                    'hierarchical' => false,
+                ));
+
+                // Sort terms numerically based on the numeric part of their names
+                if (!is_wp_error($tf_hotel_days) && !empty($tf_hotel_days)) {
+                    usort($tf_hotel_days, function ($a, $b) {
+                        $numA = (int) filter_var($a->name, FILTER_SANITIZE_NUMBER_INT);
+                        $numB = (int) filter_var($b->name, FILTER_SANITIZE_NUMBER_INT);
+                        return $numA <=> $numB;
+                    });
+
+                    // Render the sorted terms
+                    foreach ($tf_hotel_days as $term) {
+                        ?>
+                        <li>
+                            <label>
+                                <input type="checkbox" name="tf_days[]" value="<?php echo esc_attr($term->term_id); ?>"> 
+                                <?php echo ucfirst(strtolower($term->name)); ?>
+                            </label>
+                        </li>
+                        <?php
+                    }
+                }
+                ?>
+
+                </ul>
+            </div>
+        </div>
         
         <div id="tf_hotel_filter-3" class="tf_widget widget widget_tf_hotel_filter">
-            <h4 class="tf_widgettitle"><?php _e("Features", "tourfic" ); ?></h4>
-            <div class="tf-filter">
+            <h4 class="tf_widgettitle tf_widge_features_title"><?php _e("Features", "tourfic" ); ?></h4>
+            <div class="tf-filter tf_widge_features_content">
                 <ul>
                     <?php 
                     $tf_hotel_feature= get_terms( array(
@@ -717,7 +982,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
                     $tf_feature_count=1;
                     foreach( $tf_hotel_feature as $term ) {
                     ?>
-                    <li <?php echo $tf_feature_count>5 ? 'class="tf-hide-feature"' : ''; ?>><label><input type="checkbox" name="tf_filters[]" value="<?php echo $term->term_id; ?>"> <?php echo $term->name; ?></label></li>
+                    <li <?php echo $tf_feature_count>5 ? 'class="tf-hide-feature"' : ''; ?>><label><input type="checkbox" name="tf_filters[]" value="<?php echo $term->term_id; ?>"> <?php echo ucfirst(strtolower($term->name)); ?></label></li>
                     <?php $tf_feature_count++; } } ?>
                 </ul>
                 <?php 
@@ -729,45 +994,7 @@ function tf_search_result_sidebar_form( $placement = 'single' ) {
                 <?php } ?>
             </div>
         </div>
-        <div id="tf_hotel_filter-3" class="tf_widget widget widget_tf_hotel_filter">
-            <h4 class="tf_widgettitle"><?php _e("Location", "tourfic" ); ?></h4>
-            <div class="tf-filter">
-                <ul>
-                    <?php 
-                    $tf_hotel_location= get_terms( array(
-                        'taxonomy' => 'hotel_location',
-                        'orderby' => 'title',
-                        'order' => 'ASC',
-                        'hide_empty' => false,
-                        'hierarchical' => 0,
-                    ) );
-                    if ( $tf_hotel_location ) { 
-                    foreach( $tf_hotel_location as $term ) {
-                    ?>
-                    <li><label><input type="checkbox" name="tf_location[]" value="<?php echo $term->term_id; ?>"> <?php echo $term->name; ?></label></li>
-                    <?php } } ?>
-                </ul>
-            </div>
-        </div>
-		<div id="tf_hotel_filter-3" class="tf_widget widget widget_tf_hotel_filter">
-            <h4 class="tf_widgettitle"><?php _e("Month", "tourfic" ); ?></h4>
-            <div class="tf-filter">
-                <ul>
-                    <?php 
-                    $tf_property_month= get_terms( array(
-                        'taxonomy' => 'hotel_month',
-                        'orderby' => 'title',
-                        'order' => 'DESC',
-                        'hide_empty' => false,
-                        'hierarchical' => 0,
-                    ) );
-                    if ( $tf_property_month ) { 
-                    foreach( $tf_property_month as $term ) {
-                    ?>
-                    <li><label><input type="checkbox" name="tf_property_month[]" value="<?php echo $term->term_id; ?>"> <?php echo $term->name; ?></label></li>
-                    <?php } } ?>
-                </ul>
-            </div>
+        
         </div>
 
     <?php } ?>
@@ -922,6 +1149,7 @@ function tf_search_result_ajax_sidebar(){
     $filters = ( $_POST['filters'] ) ? explode(',', sanitize_text_field( $_POST['filters'] )) : null;
     $tf_property_month = ( $_POST['tf_property_month'] ) ? explode(',', sanitize_text_field( $_POST['tf_property_month'] )) : null;
     $tf_property_type = ( $_POST['tf_property_type'] ) ? explode(',', sanitize_text_field( $_POST['tf_property_type'] )) : null;
+    $tf_month_pricing = ( $_POST['tf_month_pricing'] ) ? explode(',', sanitize_text_field( $_POST['tf_month_pricing'] )) : null;
     $tf_location = ( $_POST['tf_location'] ) ? explode(',', sanitize_text_field( $_POST['tf_location'] )) : null;
     $tf_property_style = ( $_POST['tf_property_style'] ) ? explode(',', sanitize_text_field( $_POST['tf_property_style'] )) : null;
     $tf_days = ( $_POST['tf_days'] ) ? explode(',', sanitize_text_field( $_POST['tf_days'] )) : null;
@@ -969,18 +1197,17 @@ function tf_search_result_ajax_sidebar(){
         );
     }
     // hotel month
-    if ( $tf_property_month!=null ) {
+    // if ( $post_month!=null ) {
 
-        $args['tax_query']['relation'] = $relation;
-        $args['tax_query'][] = array(
-            'taxonomy' => 'hotel_month',
-            'field' => 'slug',
-            'terms'    => $post_month,
-        );
-    }
+    //     $args['tax_query']['relation'] = $relation;
+    //     $args['tax_query'][] = array(
+    //         'taxonomy' => 'hotel_month',
+    //         'field' => 'slug',
+    //         'terms'    => $post_month,
+    //     );
+    // }
 
     // hotel Month
-
     if ( $tf_property_month ) {
         $args['tax_query']['relation'] = $relation;
 
@@ -1215,8 +1442,20 @@ function tf_search_result_ajax_sidebar(){
 
             if( $posttype == 'tf_hotel' ){
 
-                $not_found[] = 0;
-                tf_hotel_archive_single_item($tf_stars);
+                // $not_found[] = 0;
+                // tf_hotel_archive_single_item($tf_stars);
+
+                if( empty( $check_in_out ) && empty( $tf_month_pricing ) ) {
+
+                    $not_found[] = 0;
+                    tf_hotel_archive_single_item();
+
+                } else {
+
+                    $data = [$adults, $child, $room, $check_in_out, $tf_month_pricing];
+	                tf_filter_hotel_by_date( $period,$not_found, $data);
+
+                }
             } 
         } 
 

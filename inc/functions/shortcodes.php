@@ -455,6 +455,22 @@ add_shortcode('tf_search_form', 'tf_search_form_shortcode');
 // Old shortcode
 add_shortcode('tf_search', 'tf_search_form_shortcode');
 
+function tf_hotel_register_panel_callback( ){
+    ob_start(); 
+    if (is_user_logged_in()) {
+        $current_user = wp_get_current_user();
+        if (in_array('customer', $current_user->roles)) {
+            $login_url = site_url('/my-account/');
+        }else{
+            $login_url = admin_url();
+        }
+    ?>
+    <div class="tf-inline-btn tf-btn">
+        <a href="<?php echo esc_url($login_url); ?>" class="btn-styled">Registre su hotel</a>
+    </div>
+    <?php } return ob_get_clean();
+}
+add_shortcode('tf_hotel_register_panel', 'tf_hotel_register_panel_callback');
 /**
  * Search Result Shortcode Function
  */
@@ -539,7 +555,7 @@ function tf_search_result_shortcode( $atts, $content = null ){
         $args['tax_query']['relation'] = "AND";
         $args['tax_query'][] = array(
             'taxonomy' => 'hotel_month',
-            'field' => 'slug',
+            'field' => 'name',
             'terms'    => $_GET['month'],
         );
     }

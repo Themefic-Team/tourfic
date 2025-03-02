@@ -49,15 +49,15 @@ if ( !function_exists('tf_enqueue_scripts') ) {
         //wp_enqueue_style( 'tf-style', TF_ASSETS_URL . 'css/old/style.css', null, '' );
 
         //Updated CSS
-        wp_enqueue_style( 'tf-common-style', TF_ASSETS_URL . 'css/common.css', null, '' );
+        wp_enqueue_style( 'tf-common-style', TF_ASSETS_URL . 'css/common.css', null, TOURFIC );
         if ( get_post_type() == 'tf_hotel' ){
-            wp_enqueue_style( 'tf-hotel-style', TF_ASSETS_URL . 'css/hotel' . $min_css . '.css', null, '' );
+            wp_enqueue_style( 'tf-hotel-style', TF_ASSETS_URL . 'css/hotel' . $min_css . '.css', null, TOURFIC );
         }
         if ( get_post_type() == 'tf_tours' ){
-            wp_enqueue_style( 'tf-tour-style', TF_ASSETS_URL . 'css/tour' . $min_css . '.css', null, '' );
+            wp_enqueue_style( 'tf-tour-style', TF_ASSETS_URL . 'css/tour' . $min_css . '.css', null, TOURFIC );
         }
-        wp_enqueue_style( 'tf-search-style', TF_ASSETS_URL . 'css/search-result.css', null, '' );
-        wp_enqueue_style( 'tf-shortcode-style', TF_ASSETS_URL . 'css/shortcode.css', null, '' );
+        wp_enqueue_style( 'tf-search-style', TF_ASSETS_URL . 'css/search-result.css', null, TOURFIC );
+        wp_enqueue_style( 'tf-shortcode-style', TF_ASSETS_URL . 'css/shortcode.css', null, TOURFIC );
 
         /**
          * Flatpickr
@@ -273,14 +273,27 @@ if ( !function_exists('tf_enqueue_scripts') ) {
         $tf_hotel_month=array();
         $tf_monthlist = get_terms( array(
             'taxonomy' => 'hotel_month',
-            'order' => 'DESC',
+            'order' => 'ASC',
             'hide_empty' => false,
             'hierarchical' => 0,
         ) );
-        if ( $tf_monthlist ) { 
-        foreach( $tf_monthlist as $term ) {
-             $tf_hotel_month[] = $term->slug;
-        } }
+        // Predefined order of months
+        $month_order = array(
+            'Enero', 'Febrero', 'March', 'Abril', 'Mayo', 
+            'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 
+            'Noviembre', 'Diciembre'
+        );
+        // Reorder terms based on the predefined month order
+        if ( ! is_wp_error( $tf_monthlist ) ) {
+            foreach ( $month_order as $month_name ) {
+                foreach ( $tf_monthlist as $term ) {
+                    if ( $term->name === $month_name ) {
+                        $tf_hotel_month[] = $term->name;
+                        break;
+                    }
+                }
+            }
+        }
 
 
         /**
