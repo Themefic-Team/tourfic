@@ -13,6 +13,7 @@ if ( ! class_exists( 'TF_text' ) ) {
 		}
 
 		public function render() {
+			$tf_disable_services = ! empty( Helper::tfopt( 'disable-services' ) ) ? Helper::tfopt( 'disable-services' ) : [];
 			?>
             <div id="<?php echo isset( $this->field['id'] ) ? esc_attr( $this->field['id'] ) : '' ?>" class="tf-tablist">
 
@@ -20,6 +21,13 @@ if ( ! class_exists( 'TF_text' ) ) {
                     <ul class="tf-nav-tabs">
 						<?php if ( isset( $this->field['tabs'] ) && is_array( $this->field['tabs'] ) ): ?>
 							<?php foreach ( $this->field['tabs'] as $key => $value ): ?>
+								<?php 
+								if(isset( $value['post_dependency'] ) && !empty( $value['post_dependency'] )){
+									if(!empty( $tf_disable_services ) && in_array( $value['post_dependency'], $tf_disable_services )){
+										continue;
+									}
+								}
+								?>
                                 <li class="tf-tab-item <?php if ( $key == 0 ) {
 									echo "show";
 								} ?>" data-tab-id="<?php if ( isset( $value['id'] ) ) {
@@ -32,6 +40,13 @@ if ( ! class_exists( 'TF_text' ) ) {
                 <div class="tf-tab-field-content">
 					<?php if ( isset( $this->field['tabs'] ) && is_array( $this->field['tabs'] ) ): ?>
 						<?php foreach ( $this->field['tabs'] as $key => $value ): ?>
+							<?php 
+							if(isset( $value['post_dependency'] ) && !empty( $value['post_dependency'] )){
+								if(!empty( $tf_disable_services ) && in_array( $value['post_dependency'], $tf_disable_services )){
+									continue;
+								}
+							}
+							?>
                             <div class="tf-tab-item-content <?php echo $key == 0 ? "show" : '' ?>" data-tab-id="<?php echo isset( $value['id'] ) ? esc_attr( $value['id'] ) : '' ?>">
 								<?php
 								$parent_id = !empty( $value['id'] ) ? $value['id'] : '';

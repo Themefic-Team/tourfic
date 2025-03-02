@@ -1271,8 +1271,7 @@ Steps
 }
 
 .tf-setup-step-container .tf-select-service label:before {
-  background: #ffffff
- #ffffff;
+  background: #ffffff #ffffff;
   content: "";
   display: block;
   border-radius: 50%;
@@ -1546,17 +1545,16 @@ Steps
 .tf-setup-step-container .setup-form-group .tf-field-imageselect .tf-fieldset .tf-image-radio-group li {
   margin: 0;
   width: 200px;
-  height: 180px;
   border-radius: 8px;
-  background-color: #ebf5ff;
   box-sizing: border-box;
 }
 
 .tf-setup-step-container .setup-form-group .tf-field-imageselect .tf-fieldset .tf-image-radio-group li .tf-image-checkbox .select-image-box {
   width: 200px;
   height: 180px;
-  padding: 16px 16px 2px 16px;
+  padding: 8px 24px 2px 24px;
   box-sizing: border-box;
+  cursor: pointer;
 }
 
 .tf-setup-step-container .setup-form-group .tf-field-imageselect .tf-fieldset .tf-image-radio-group li .tf-image-checkbox .select-image-box img {
@@ -1564,12 +1562,6 @@ Steps
   height: 100%;
   border: 2px solid rgba(0, 0, 0, 0) !important;
   object-fit: cover;
-  object-position: top;
-  transition: object-position 2s ease-in-out, border-color 0.3s ease-in-out;
-}
-
-.tf-setup-step-container .setup-form-group .tf-field-imageselect .tf-fieldset .tf-image-radio-group li .tf-image-checkbox .select-image-box img:hover {
-  object-position: bottom;
 }
 
 .tf-setup-step-container .setup-form-group .tf-field-imageselect .tf-fieldset .tf-image-radio-group li .tf-image-checkbox .select-image-box {
@@ -1584,7 +1576,7 @@ Steps
 }
 
 .tf-setup-step-container .setup-form-group .tf-archive-imageselect-box .tf-image-checkbox .select-image-box {
-  background-color: #ffffff !important;
+  background-color: #fafafa !important;
 }
 
 .tf-setup-step-container .setup-form-group .tf-setup-permalink {
@@ -2795,8 +2787,8 @@ Steps
 }
 
 .tf-setting-wrapper .tourfic-settings-header .tf-setting-save-btn .tf-reset-btn {
-  background-color: gray;
-  border-color: gray;
+  background-color: #b3241a;
+  border-color: #b3241a;
 }
 
 .tf-setting-wrapper .tourfic-settings-header .tf-setting-save-btn .tf-reset-btn:hover {

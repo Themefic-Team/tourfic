@@ -610,7 +610,7 @@ class Migrator {
 			}
 
 			if(!empty($options['tf-template'])){
-				$current_template = $options['tf-template']['single-hotel'];
+				$current_template = !empty($options['tf-template']['single-hotel']) ? $options['tf-template']['single-hotel'] : '';
 				if("design-1"==$current_template){
 
 					$tf_custom_palatte['primary'] = !empty($prev_primary['gcolor']) ? $prev_primary['gcolor'] : '#0E3DD8';

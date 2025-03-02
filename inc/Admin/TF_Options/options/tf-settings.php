@@ -156,12 +156,13 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'    => 'tf-template',
 					'type'  => 'tab',
-					'label' => 'Hotel, Tour, Apartment & Car Template',
+					'label' => esc_html__('Hotel, Tour, Apartment & Car Template', 'tourfic'),
 					'tabs'  => array(
 						array(
 							'id'     => 'hotel_template',
 							'title'  => esc_html__( 'Hotel', 'tourfic' ),
 							'icon'   => 'fa fa-gear',
+							'post_dependency' => 'hotel',
 							'fields' => array(
 								array(
 									'id'      => 'hotel-title',
@@ -364,6 +365,7 @@ TF_Settings::option( 'tf_settings', array(
 						array(
 							'id'     => 'tour_template',
 							'title'  => esc_html__( 'Tour', 'tourfic' ),
+							'post_dependency' => 'tour',
 							'fields' => array(
 								array(
 									'id'      => 'tour-title',
@@ -594,6 +596,7 @@ TF_Settings::option( 'tf_settings', array(
 							'id'     => 'apartment_template',
 							'title'  => esc_html__( 'Apartment', 'tourfic' ),
 							'icon'   => 'fa fa-gear',
+							'post_dependency' => 'apartment',
 							'fields' => array(
 								array(
 									'id'      => 'apartment-title',
@@ -697,10 +700,6 @@ TF_Settings::option( 'tf_settings', array(
 									'type'     => 'imageselect',
 									'label'    => esc_html__( 'Select Archive & Search Result Template', 'tourfic' ),
 									'options'  => array(
-										'default'  => array(
-											'title' => esc_html__('Legacy', 'tourfic'),
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-default.png",
-										),
 										'design-1' => array(
 											'title' => esc_html__('Design 1', 'tourfic'),
 											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-design-2.png",
@@ -709,6 +708,10 @@ TF_Settings::option( 'tf_settings', array(
 											'title' => esc_html__('Design 2', 'tourfic'),
 											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-design-3.png",
 											'is_pro'=> true,
+										),
+										'default'  => array(
+											'title' => esc_html__('Legacy', 'tourfic'),
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-default.png",
 										),
 									),
 									'default'  => 'default',
@@ -752,6 +755,7 @@ TF_Settings::option( 'tf_settings', array(
 							'id'     => 'car_template',
 							'title'  => __( 'Car', 'tourfic' ),
 							'icon'   => 'fa fa-gear',
+							'post_dependency' => 'carrentals',
 							'fields' => array(
 								array(
 									'id'      => 'car-title',
@@ -1136,6 +1140,7 @@ TF_Settings::option( 'tf_settings', array(
 		'tour'                  => array(
 			'title'  => __( 'Tour Options', 'tourfic' ),
 			'icon'   => 'fas fa-umbrella-beach',
+			'post_dependency' => 'tour',
 			'fields' => array(),
 		),
 		'single_tour'           => array(
@@ -1330,6 +1335,7 @@ TF_Settings::option( 'tf_settings', array(
 		'hotel_option'          => array(
 			'title'  => __( 'Hotel Options', 'tourfic' ),
 			'icon'   => 'fas fa-hotel',
+			'post_dependency' => 'hotel',
 			'fields' => array(),
 		),
 		'single_page'           => array(
@@ -1466,6 +1472,7 @@ TF_Settings::option( 'tf_settings', array(
 		'apartment_option'      => array(
 			'title'  => __( 'Apartment Options', 'tourfic' ),
 			'icon'   => 'fa-solid fa-house-chimney',
+			'post_dependency' => 'apartment',
 			'fields' => array(),
 		),
 		'apartment_single_page' => array(
@@ -1545,6 +1552,7 @@ TF_Settings::option( 'tf_settings', array(
 		'car_option'      => array(
 			'title'  => __( 'Car Options', 'tourfic' ),
 			'icon'   => 'fa-solid fa-car',
+			'post_dependency' => 'carrentals',
 			'fields' => array(),
 		),
 		'car_single_page' => array(

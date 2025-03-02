@@ -1979,4 +1979,604 @@ class TF_Demo_Importer {
 			}
 		}
 	}
+
+	public function tf_dummy_cars_import() {
+		$tours_post = array(
+			'post_type' => 'tf_carrental',
+			'posts_per_page' => -1,
+		);
+		
+		$tours_query = new \WP_Query($tours_post);
+		if(!empty($tours_query)){
+			$tours_count = $tours_query->post_count;
+			if($tours_count>=3){
+				return;
+			}
+		}
+		
+		$dummy_cars_files = TF_ASSETS_PATH . 'demo/car-data.csv';
+		$dummy_cars_fields = array(
+			'id',
+			'post_title',
+			'post_slug',
+			'post_content',
+			'thumbnail',
+			'car_gallery',
+			'tf_single_car_layout_opt',
+			'tf_single_car_template',
+			'location_title',
+			'[map][address]',
+			'[map][latitude]',
+			'[map][longitude]',
+			'[map][zoom]',
+			'car_info_sec_title',
+			'car_as_featured',
+			'passengers',
+			'baggage',
+			'auto_transmission',
+			'pay_pickup',
+			'shuttle_car',
+			'shuttle_car_fee_type',
+			'shuttle_car_fee',
+			'fuel_included',
+			'unlimited_mileage',
+			'mileage_type',
+			'mileage',
+			'car_custom_info',
+			'driver_included',
+			'car_driverinfo_section',
+			'driver_sec_title',
+			'driver_name',
+			'driver_email',
+			'driver_phone',
+			'driver_age',
+			'driver_address',
+			'driver_image',
+			'benefits_section',
+			'benefits_sec_title',
+			'benefits',
+			'inc_exc_section',
+			'inc_sec_title',
+			'inc',
+			'inc_icon',
+			'exc_sec_title',
+			'exc',
+			'exc_icon',
+			'badge',
+			'information_section',
+			'owner_sec_title',
+			'owner_name',
+			'email',
+			'phone',
+			'website',
+			'fax',
+			'owner_image',
+			'price_by',
+			'car_rent',
+			'custom_availability',
+			'pricing_type',
+			'day_prices',
+			'date_prices',
+			'discount_type',
+			'discount_price',
+			'car_numbers',
+			'allow_deposit',
+			'deposit_type',
+			'deposit_amount',
+			'car_extra_sec_title',
+			'extras',
+			'protection_section',
+			'protection_tab_title',
+			'protections',
+			'instructions_section',
+			'instructions_content',
+			'cancellation_section',
+			'calcellation_policy',
+			'booking-by',
+			'booking-url',
+			'booking-attribute',
+			'booking-query',
+			'is_taxable',
+			'taxable_class',
+			'faq_sec_title',
+			'faq',
+			'car-tc-section-title',
+			'terms_conditions',
+			'review_sec_title',
+			'c-share',
+			'c-wishlist',
+			'locations',
+			'categories',
+			'brands',
+			'fuel_types',
+			'engine_years',
+			'post_date',
+		);
+		
+		if ( isset( $dummy_cars_files ) ) {
+			$column_mapping_data = $dummy_cars_fields;
+			$csv_data            = array_map( 'str_getcsv', file( $dummy_cars_files ) );
+			
+			//skip the first row
+			array_shift( $csv_data );
+			$post_meta     = array();
+	
+			foreach ( $csv_data as $row_index => $row ) {
+				$post_id      = '';
+				$post_title   = '';
+				$post_default_slug   = '';
+				$post_slug   = '';
+				$post_content = '';
+				$post_date    = '';
+				$taxonomies   = array();
+				$tax_icons    = array();
+	
+				foreach ( $column_mapping_data as $column_index => $field ) {
+					if( ( $field == 'locations' || $field == 'categories' || $field == 'brands' || $field == 'fuel_types' || $field == 'engine_years' ) && ! empty( $row[$column_index] ) ){
+						if($field == 'locations'){
+							$taxonomies['carrental_location'] = $row[$column_index];
+						}elseif($field == 'categories'){
+							$taxonomies['carrental_category'] = $row[$column_index];
+						}elseif($field == 'brands'){
+							$taxonomies['carrental_brand'] = $row[$column_index];
+						}elseif($field == 'fuel_types'){
+							$taxonomies['carrental_fuel_type'] = $row[$column_index];
+						}elseif($field == 'engine_years'){
+							$taxonomies['carrental_engine_year'] = $row[$column_index];
+						}else{
+							$taxonomies[$field] = $row[$column_index];
+						}
+					}
+				}
+	
+				if (!empty($taxonomies)) {
+					foreach ($taxonomies as $taxonomy => $values) {
+						// Extract the taxonomy terms from the CSV row
+						$taxonomy_terms = explode(',', $values);
+	
+						foreach ($taxonomy_terms as $taxonomy_term) {
+							// Get the taxonomy name based on the column name
+							$taxonomy_name = $taxonomy; // Assuming the column names match the taxonomy names
+	
+							// Check if ">" string is present in the text
+							if (strpos($taxonomy_term, '>') !== false) {
+								$taxonomy_parts = explode('>', $taxonomy_term);
+								$parent_name    = trim($taxonomy_parts[0]);
+								if(  strpos( $taxonomy_parts[1], '+' ) !== false ){
+									$child_terms = explode('+', $taxonomy_parts[1]);
+								}else{
+									$child_terms = array( $taxonomy_parts[1] );
+								}
+	
+								// Get or create the parent term
+								$parent_term = get_term_by('name', $parent_name, $taxonomy_name);
+								if (!$parent_term) {
+									$parent_result = wp_insert_term($parent_name, $taxonomy_name);
+									if (!is_wp_error($parent_result)) {
+										$parent_term_id = $parent_result['term_id'];
+									} else {
+										// Handle error if necessary
+										echo 'Error creating parent term: ' . esc_html($parent_result->get_error_message());
+										continue;
+									}
+								} else {
+									$parent_term_id = $parent_term->term_id;
+									//check if parrent term is already assigned to the post
+									$assigned_terms = wp_get_post_terms( $post_id, $taxonomy_name, array( 'fields' => 'ids' ) );
+									if( ! in_array( $parent_term_id, $assigned_terms ) ){
+										wp_set_post_terms( $post_id, $parent_term_id, $taxonomy_name, true );
+									}
+								}
+	
+								// Get or create the child terms under the parent term
+								$child_term_ids = array();
+								foreach ($child_terms as $child_name) {
+									$child_name = trim($child_name);
+	
+									$child_term = get_term_by('name', $child_name, $taxonomy_name);
+									if (!$child_term) {
+										$child_result = wp_insert_term($child_name, $taxonomy_name, array('parent' => $parent_term_id));
+										if (!is_wp_error($child_result)) {
+											$child_term_ids[] = $child_result['term_id'];
+										} else {
+											// Handle error if necessary
+											echo 'Error creating child term: ' . esc_html($child_result->get_error_message());
+											continue;
+										}
+									} else {
+										$child_term_ids[] = $child_term->term_id;
+									}
+								}
+	
+								// Assign the parent and child terms to the post
+								wp_set_post_terms($post_id, array_merge(array($parent_term_id), $child_term_ids), $taxonomy_name, true);
+							} else {
+								// No hierarchy, it's a standalone term
+								$term_name = trim($taxonomy_term);
+	
+								// Get or create the term by name and taxonomy
+								$term = get_term_by('name', $term_name, $taxonomy_name);
+	
+								if (!$term) {
+									// Term does not exist, create a new one
+									$term_result = wp_insert_term($term_name, $taxonomy_name);
+	
+									if (!is_wp_error($term_result)) {
+										// Term already exists, assign it to the post
+										$term_id = $term_result['term_id'];
+										wp_set_post_terms($post_id, $term_id, $taxonomy_name, true);
+									} else {
+										// Handle error if necessary
+										echo 'Error creating term: ' . esc_html($term_result->get_error_message());
+									}
+								} else {
+									wp_set_post_terms($post_id, $term->term_id, $taxonomy_name, true);
+								}
+							}
+						}
+					}
+				}     
+
+				foreach ( $column_mapping_data as $column_index => $field ) {
+					if( $field == 'id' ){
+						$post_id = $row[$column_index];
+					}
+					if ( $field == 'post_title' ) {
+						$post_default_slug = $row[$column_index];
+						$post_title = ucwords(str_replace('-', ' ', $row[$column_index]));
+						if( empty( $post_title ) ){
+							$post_title = 'No Title';
+						}
+					} else if ( $field == 'post_content' ) {
+						$post_content = $row[$column_index];
+						if( empty( $post_content ) ){
+							$post_content = 'No Content';
+						}
+					}
+					if ( $field == 'slug' ) {
+						$post_slug = $row[$column_index];
+					}
+					if( $field == 'thumbnail' ){
+						$thumbnail = $row[$column_index];
+						//set as the post thumbnail.
+						if (!empty( $thumbnail )) {
+							// Get the file name from the URL.
+							$filename = basename($thumbnail);
+	
+							// Download the image to the server.
+							$upload_dir = wp_upload_dir();
+							$image_path = $upload_dir['path'] . '/' . $filename;
+	
+							$image_data = file_get_contents($thumbnail);
+							file_put_contents($image_path, $image_data);
+	
+							// Check if the image was downloaded successfully.
+							if (file_exists($image_path)) {
+								// Create the attachment in the media library.
+								$attachment = array(
+									'guid'           => $upload_dir['url'] . '/' . $filename,
+									'post_mime_type' => 'image/jpeg', // Replace with the appropriate mime type if needed.
+									'post_title'     => sanitize_file_name($filename),
+									'post_content'   => '',
+									'post_status'    => 'inherit',
+								);
+	
+								$attach_id = wp_insert_attachment($attachment, $image_path, $post_id);
+	
+								// Include the necessary file 
+								require_once(ABSPATH . 'wp-admin/includes/image.php');
+	
+								// Set the image as the post thumbnail.
+								$attach_data = wp_generate_attachment_metadata($attach_id, $image_path);
+								wp_update_attachment_metadata($attach_id, $attach_data);
+	
+								$post_meta['_thumbnail_id'] = $attach_id;
+							}
+						}
+	
+					}
+					if( $field == 'post_date' ){
+						$post_date = $row[$column_index];
+					}
+	
+					if( $field == 'longitude' ){
+						$post_meta['tf_carrental_opt']['map'][$field] = $row[$column_index];
+					}else if( $field == 'latitude' ){
+						$post_meta['tf_carrental_opt']['map'][$field] = $row[$column_index];
+					}else if( $field == 'zoom' ){
+						$post_meta['tf_carrental_opt']['map'][$field] = $row[$column_index];
+					} else if ( strpos( $field, '[' ) !== false && strpos( $field, ']' ) !== false ) {
+						//exclude title, post content, features from adding into the array
+						// Field is a multidimensional array key, e.g., [location][latitude]
+						$nested_keys = explode( '][', trim($field, '[]' ) );
+						$meta_value = &$post_meta['tf_carrental_opt'];
+					
+						// Iterate through nested keys except the last one
+						for ( $i = 0; $i < count( $nested_keys ) - 1; $i++ ) {
+							$nested_key = $nested_keys[$i];
+					
+							// Create the nested array if it doesn't exist
+							if ( !isset( $meta_value[$nested_key] ) ) {
+								$meta_value[$nested_key] = array();
+							}
+					
+							$meta_value = &$meta_value[$nested_key];
+						}
+						// Assign the value to the last nested key
+						$last_nested_key = end( $nested_keys );
+						$meta_value[$last_nested_key] = $row[$column_index];
+	
+					} else if( $field == 'brands' ){
+						$features = explode( ',', $row[$column_index] );
+						$tf_carrental_brand = array();
+						foreach( $features as $feature ){
+							$term = get_term_by( 'name', $feature, 'carrental_brand' );
+							$term_id = $term ? $term->term_id : '';
+							$tf_carrental_brand[] = !empty($term_id) ? $term_id : '';
+						}
+						$post_meta['tf_carrental_opt']['brands'] = $tf_carrental_brand;
+	
+					} else if( $field == 'fuel_types' ){
+						$carrental_fuel_type = explode( ',', $row[$column_index] );
+						$tf_carrental_fuel_type = array();
+						foreach( $carrental_fuel_type as $feature ){
+							$term = get_term_by( 'name', $feature, 'carrental_fuel_type' );
+							$term_id = $term ? $term->term_id : '';
+							$tf_carrental_fuel_type[] = !empty($term_id) ? $term_id : '';
+						}
+						$post_meta['tf_carrental_opt']['fuel_types'] = $tf_carrental_fuel_type;
+	
+					}else if( $field == 'engine_years' ){
+						$carrental_engine_year = explode( ',', $row[$column_index] );
+						$tf_carrental_engine_year = array();
+						foreach( $carrental_engine_year as $feature ){
+							$term = get_term_by( 'name', $feature, 'carrental_engine_year' );
+							$term_id = $term ? $term->term_id : '';
+							$tf_carrental_engine_year[] = !empty($term_id) ? $term_id : '';
+						}
+						$post_meta['tf_carrental_opt']['engine_year'] = $tf_carrental_engine_year;
+	
+					}else {
+						// Create an array to store post meta for the current row
+						$post_meta['tf_carrental_opt'][$field] = !empty($row[$column_index]) ? $row[$column_index] : '';
+					}    
+	
+					if( $field == 'car_custom_info' && ! empty( $row[$column_index] ) ){
+						$car_custom_info = json_decode( $row[$column_index], true );
+						$post_meta['tf_carrental_opt'][$field] = $car_custom_info;
+					}
+	
+					if ( $field === 'car_gallery' && ! empty( $row[ $column_index ] ) ) {
+						// Extract the image URLs from the CSV row
+						$image_urls = explode( ',', $row[ $column_index] );
+						$gallery_images = array();
+						
+						//include image.php for wp_generate_attachment_metadata() function
+						if( ! function_exists( 'wp_crop_image' ) ){
+							require_once ABSPATH . 'wp-admin/includes/image.php';
+						}
+	
+						foreach ( $image_urls as $image_url ) {
+							if(!empty($image_url)){
+								// Download the image file
+								$image_data = file_get_contents( $image_url );
+								
+								//if not found image
+								if( $image_data === false ){
+									continue;
+								}
+								// Create a unique filename for the image
+								$filename = basename( $image_url );
+								$upload_dir = wp_upload_dir();
+								$image_path = $upload_dir['path'] . '/' . $filename;
+			
+								// Save the image file to the uploads directory
+								$result = file_put_contents( $image_path, $image_data );
+								
+								//failed to save image
+								if( $result === false ){
+									continue;
+								}
+			
+								// Create the attachment for the uploaded image
+								$attachment = array(
+									'guid'           => $upload_dir['url'] . '/' . $filename,
+									'post_mime_type' => 'image/jpeg',
+									'post_title'     => preg_replace( '/\.[^.]+$/', '', $filename ),
+									'post_content'   => '',
+									'post_status'    => 'inherit'
+								);
+			
+								// Insert the attachment
+								$attachment_id = wp_insert_attachment( $attachment, $image_path );                       
+								
+								// Generate the attachment metadata
+								$attachment_data = wp_generate_attachment_metadata( $attachment_id, $image_path );
+								wp_update_attachment_metadata( $attachment_id, $attachment_data );
+			
+								// Add the attachment ID to the gallery images array
+								$gallery_images[] = $attachment_id;
+							}
+						}
+	
+						// Combine the attachment IDs into a comma-separated string
+						$gallery_ids_string = implode( ',', $gallery_images );
+		
+						// Assign the gallery IDs string to the tour_gallery meta field
+						$post_meta['tf_carrental_opt']['car_gallery'] = $gallery_ids_string;
+					}
+	
+					if( $field == 'inc' && ! empty( $row[$column_index] ) ){
+						$inc = json_decode( $row[$column_index], true );
+						$post_meta['tf_carrental_opt'][$field] = $inc;
+					}
+	
+					if( $field == 'day_prices' && ! empty( $row[$column_index] ) ){
+						$day_prices = json_decode( $row[$column_index], true );
+						$post_meta['tf_carrental_opt'][$field] = $day_prices;
+					}
+	
+					if( $field == 'date_prices' && ! empty( $row[$column_index] ) ){
+						$date_prices = json_decode( $row[$column_index], true );
+						$post_meta['tf_carrental_opt'][$field] = $date_prices;
+					}
+	
+					if( $field == 'exc' && ! empty( $row[$column_index] ) ){
+						$exc = json_decode( $row[$column_index], true );
+						$post_meta['tf_carrental_opt'][$field] = $exc;
+					}
+	
+					if( $field == 'benefits' && ! empty( $row[$column_index] ) ){
+						$benefits = json_decode( $row[$column_index], true );
+						$post_meta['tf_carrental_opt'][$field] = $benefits;
+					}
+	
+					if( $field == 'badge' && ! empty( $row[$column_index] ) ){
+						$badge = json_decode( $row[$column_index], true );
+						$post_meta['tf_carrental_opt'][$field] = $badge;
+					}
+	
+					if( $field == 'extras' && ! empty( $row[$column_index] ) ){
+						$extras = json_decode( $row[$column_index], true );
+						$post_meta['tf_carrental_opt'][$field] = $extras;
+					}
+	
+					if( $field == 'protections' && ! empty( $row[$column_index] ) ){
+						$protections = json_decode( $row[$column_index], true );
+						$post_meta['tf_carrental_opt'][$field] = $protections;
+					}
+	
+					if( $field == 'cancellation_type' && ! empty( $row[$column_index] ) ){
+						$cancellation_types = json_decode( $row[$column_index], true );
+						$post_meta['tf_carrental_opt'][$field] = $cancellation_types;
+					}
+	
+					if( $field == 'faq' && ! empty( $row[$column_index] ) ){
+						$faqs = json_decode( $row[$column_index], true );
+						$post_meta['tf_carrental_opt'][$field] = $faqs;
+					}
+	
+					if( $field == 'terms_conditions' && ! empty( $row[$column_index] ) ){
+						$terms_conditions = json_decode( $row[$column_index], true );
+						$post_meta['tf_carrental_opt'][$field] = $terms_conditions;
+					}
+					
+				}
+	
+				if ( ! function_exists( 'post_exists' ) ) {
+					require_once ABSPATH . 'wp-includes/post.php';
+				}
+				
+				// Create an array to store the post data for the current row
+				$post_data = array(
+					'post_type'    => 'tf_carrental',
+					'post_title'   => $post_title,
+					'post_content' => $post_content,
+					'post_status'  => 'publish',
+					'post_author'  => 1,
+					'post_date'    => $post_date,
+					'meta_input'   => $post_meta,
+					'post_name'    => !empty($post_slug) ? $post_slug : $post_default_slug,
+				);
+
+				$post_id = wp_insert_post( $post_data );
+				if(!empty($post_id)){
+					update_post_meta($post_id, 'tf_search_car_rent', 120);
+					update_post_meta($post_id, 'tf_search_driver_age', 24);
+				}
+	
+				//assign or create taxonomies to the imported cars
+				if (!empty($taxonomies)) {
+					foreach ($taxonomies as $taxonomy => $values) {
+						// Extract the taxonomy terms from the CSV row
+						$taxonomy_terms = explode(',', $values);
+
+						foreach ($taxonomy_terms as $taxonomy_term) {
+							// Get the taxonomy name based on the column name
+							$taxonomy_name = $taxonomy; // Assuming the column names match the taxonomy names
+
+							// Check if ">" string is present in the text
+							if (strpos($taxonomy_term, '>') !== false) {
+								$taxonomy_parts = explode('>', $taxonomy_term);
+								$parent_name    = trim($taxonomy_parts[0]);
+								if(  strpos( $taxonomy_parts[1], '+' ) !== false ){
+									$child_terms = explode('+', $taxonomy_parts[1]);
+								}else{
+									$child_terms = array( $taxonomy_parts[1] );
+								}
+
+								// Get or create the parent term
+								$parent_term = get_term_by('name', $parent_name, $taxonomy_name);
+								if (!$parent_term) {
+									$parent_result = wp_insert_term($parent_name, $taxonomy_name);
+									if (!is_wp_error($parent_result)) {
+										$parent_term_id = $parent_result['term_id'];
+									} else {
+										// Handle error if necessary
+										echo 'Error creating parent term: ' . esc_html($parent_result->get_error_message());
+										continue;
+									}
+								} else {
+									$parent_term_id = $parent_term->term_id;
+									//check if parrent term is already assigned to the post
+									$assigned_terms = wp_get_post_terms( $post_id, $taxonomy_name, array( 'fields' => 'ids' ) );
+									if( ! in_array( $parent_term_id, $assigned_terms ) ){
+										wp_set_post_terms( $post_id, $parent_term_id, $taxonomy_name, true );
+									}
+								}
+
+								// Get or create the child terms under the parent term
+								$child_term_ids = array();
+								foreach ($child_terms as $child_name) {
+									$child_name = trim($child_name);
+
+									$child_term = get_term_by('name', $child_name, $taxonomy_name);
+									if (!$child_term) {
+										$child_result = wp_insert_term($child_name, $taxonomy_name, array('parent' => $parent_term_id));
+										if (!is_wp_error($child_result)) {
+											$child_term_ids[] = $child_result['term_id'];
+										} else {
+											// Handle error if necessary
+											echo 'Error creating child term: ' . esc_html($child_result->get_error_message());
+											continue;
+										}
+									} else {
+										$child_term_ids[] = $child_term->term_id;
+									}
+								}
+
+								// Assign the parent and child terms to the post
+								wp_set_post_terms($post_id, array_merge(array($parent_term_id), $child_term_ids), $taxonomy_name, true);
+							} else {
+								// No hierarchy, it's a standalone term
+								$term_name = trim($taxonomy_term);
+
+								// Get or create the term by name and taxonomy
+								$term = get_term_by('name', $term_name, $taxonomy_name);
+
+								if (!$term) {
+									// Term does not exist, create a new one
+									$term_result = wp_insert_term($term_name, $taxonomy_name);
+
+									if (!is_wp_error($term_result)) {
+										// Term already exists, assign it to the post
+										$term_id = $term_result['term_id'];
+										wp_set_post_terms($post_id, $term_id, $taxonomy_name, true);
+									} else {
+										// Handle error if necessary
+										echo 'Error creating term: ' . esc_html($term_result->get_error_message());
+									}
+								} else {
+									wp_set_post_terms($post_id, $term->term_id, $taxonomy_name, true);
+								}
+							}
+						}
+					}
+				}
+				//reset the post meta array
+				$post_meta = array();           
+			}
+
+		}
+	}
 }
