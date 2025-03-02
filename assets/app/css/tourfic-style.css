@@ -590,6 +590,10 @@ Without Payment Popup
   display: block;
 }
 
+.notyf {
+  z-index: 99999 !important;
+}
+
 body {
   color: var(--tf-text);
   font-size: 1rem;
@@ -7509,7 +7513,7 @@ div#tf-destinationautocomplete-list div:before {
   top: 0;
   right: 0;
   bottom: 0;
-  z-index: 9999;
+  z-index: 99999;
   background-color: rgba(0, 0, 0, 0.2);
   display: flex;
   align-items: center;

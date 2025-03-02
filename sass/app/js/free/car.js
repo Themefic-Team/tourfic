@@ -200,20 +200,16 @@
             tourfic_car_autocomplete(car_dropoff_input, car_locations);
         }
 
-        $(document).on('click', '.tf-booking-popup-header .tf-close-popup', function (e) {
+        $(".tf-booking-popup-header .tf-close-popup").on("click", function (e) {
             e.preventDefault();
             $('.tf-car-booking-popup').hide();
-            if($(window).width() < 768){
-                $('.tf-mobile-booking-btn').show();
-                $('.tf-mobile-booking-btn button').text('Book Now');
-            }
         });
 
         /*
         * Car Booking Popup
         * @author Jahid
         */
-        $(document).on('click', '.tf-car-booking', function (e) {
+        $(".tf-car-booking").on('click', function (e) {
             e.preventDefault();
             $this = $(this);
             $('.tf-booking-content-wraper').html("");
@@ -306,16 +302,21 @@
 
         });
 
-        $(document).on('click', '.booking-next', function (e) {
+        $(document).on('click touchstart', '.tf-booking-content-wraper .booking-next', function (e) {
+            e.preventDefault();
             let $this = $(this);
-            $('.tf-booking-tabs ul li').removeClass('active');
-            $('.tf-booking-tabs ul li.booking').addClass('active');
 
-            $('.tf-protection-content').hide();
-            $('.tf-booking-bar').hide();
-
-            $('.tf-booking-form-fields').show();
-
+            let protections = $('input[name="protections[]"]');
+            let validationProtections = protectionValidation(protections);
+            if( validationProtections ){
+                return;
+            }else{
+                $('.tf-booking-tabs ul li').removeClass('active');
+                $('.tf-booking-tabs ul li.booking').addClass('active');
+                $('.tf-protection-content').hide();
+                $('.tf-booking-bar').hide();
+                $('.tf-booking-form-fields').show();
+            }
         });
 
         /*
@@ -394,7 +395,7 @@
             }
         };
 
-        $(document).on('click', '.tf-car-booking-form .booking-process', function (e) {
+        $(".tf-booking-btn .booking-process").on("click touchstart", function (e) {
             let $this = $(this);
             
             let extra_ids = $("input[name='selected_extra[]']").map(function() {
@@ -621,7 +622,7 @@
         * @author Jahid
         */
 
-        $(document).on('click', '.quick-booking', function (e) {
+        $(".quick-booking").on('click', function (e) {
             let $this = $(this);
 
             var pickup = $('#tf_pickup_location').val();
@@ -925,10 +926,15 @@
         });   
 
         // Instructions Popup Close
-        $(document).on('click', '.tf-instraction-popup-header .tf-close-popup', function (e) {
+        $(".tf-instraction-popup-header .tf-close-popup").on("click touchstart", function (e) {
             e.preventDefault();
             $('.tf-car-instraction-popup').hide();
         });
+
+        $(".tf-confirm-popup .tf-booking-times").on("click touchstart", function (e) {
+            e.preventDefault();
+            $('.tf-withoutpayment-booking-confirm').removeClass('show');
+        })
 
         // Showing Total into a protections
         $(document).on('change', '.protection-checkbox', function (e) {
