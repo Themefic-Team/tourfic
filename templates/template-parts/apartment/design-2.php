@@ -195,7 +195,7 @@ use \Tourfic\Classes\Apartment\Pricing as Apt_Pricing;
             <?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && isset( $meta['surroundings_places'] ) && ! empty( Helper::tf_data_types( $meta['surroundings_places'] ) ) ): ?>
             <div class="tf-whats-around tf-single-widgets">
                 <?php if ( ! empty( $meta['surroundings_sec_title'] ) ): ?>
-                    <h2 class="tf-section-title"><?php echo esc_html( $meta['surroundings_sec_title'] ); ?></h2>
+                    <h3 class="tf-section-title"><?php echo esc_html( $meta['surroundings_sec_title'] ); ?></h3>
                 <?php endif; ?>
                 <ul>
                     <?php foreach ( Helper::tf_data_types( $meta['surroundings_places'] ) as $surroundings_place ) : ?>
@@ -218,7 +218,7 @@ use \Tourfic\Classes\Apartment\Pricing as Apt_Pricing;
             <?php endif; ?>
 
             <div id="hotel-map-location" class="tf-location tf-single-widgets">
-                <h2 class="tf-section-title"><?php echo ! empty( $meta['location_title'] ) ? esc_html( $meta['location_title'] ) : ''; ?></h2>
+                <h3 class="tf-section-title"><?php echo ! empty( $meta['location_title'] ) ? esc_html( $meta['location_title'] ) : ''; ?></h3>
                 <?php if ( !defined( 'TF_PRO' ) ) { ?>
                     <?php
                     if( $address && $tf_openstreet_map!="default" && ( empty($address_latitude) || empty($address_longitude) ) ){ ?>

@@ -7,9 +7,7 @@
     &__three{
         width: 100%;
         background: $color-yellow-light;
-        color: $color-gray;
-        font-size: 1rem;
-        font-weight: 400;
+
 
         #tf-required {
             text-align: center;
@@ -1719,7 +1717,7 @@
                 color: $color-heading;
                 font-size: 2rem;
                 font-weight: 700;
-                margin-bottom: 24px;
+                margin-bottom: 20px;
                 @media #{$max1024}{
                     font-size: 1.5rem;
                 }
@@ -1760,7 +1758,7 @@
         // Related Section
         .tf-related-items-section{
             background-color: $color-yellow-thin;
-            padding: 120px 0px;
+            padding: 80px 0px;
 
             @media #{$max768}{
                 padding: 32px;
@@ -1784,6 +1782,7 @@
             }
             .slick-track{
                 display: flex;
+                margin-left: 0;
                 .slick-slide{
                     height: inherit;
                     margin: 0;
@@ -1874,7 +1873,7 @@
                             }
                         }
                         .tf-meta-data-price{
-                            margin-left: 37px;
+                            margin-left: 24px;
                             @media #{$max1024}{
                                 margin-left: 23px;
                             }
@@ -2302,9 +2301,7 @@
                                 }
                                 a {
                                     color: $color-white;
-                                    text-decoration: none;
                                     font-size: 1.3rem;
-                                    font-weight: 400;
                                     @media #{$max1024}{
                                         font-size: 1rem;
                                     }
@@ -2397,9 +2394,8 @@
                         width: 50%;
                     }
                     span.single-facilities-title {
-                        color: $color-text;
                         font-weight: 600;
-                        margin-bottom: 16px;
+                        margin-bottom: 10px;
                         display: block;
                         i {
                             margin-right: 8px;
@@ -2431,6 +2427,9 @@
                     font-size: 1.5rem;
                 }
             }
+            p{
+                margin-bottom: 0;
+            }
             .tf-reviews-slider {
 
                 .tf-reviews-item {
@@ -2439,8 +2438,8 @@
                     padding: 24px;
                     display: flex;
                     flex-direction: row;
-                    gap: 8px;
-                    min-height: 212px;
+                    gap: 15px;
+                    min-height: 150px;
                     @media #{$max768}{
                         min-height: auto;
                     }
@@ -2470,8 +2469,7 @@
                         }
 
                         .tf-reviews-meta {
-                            color: $color-text;
-                            margin-bottom: 16px;
+                            margin-bottom: 10px;
                             display: inline-block;
                         }
 
@@ -2548,7 +2546,13 @@
                 }
             }
         }
-
+        .tf-single-widgets h3{
+            font-size: 1.5em;
+            margin-bottom: 0;
+            @media #{$max1024}{
+                font-size: 1.25rem;
+            }
+        }
         .tf-single-widgets h2 {
             margin-bottom: 0px;
             font-weight: 700;
@@ -2662,10 +2666,8 @@
         }
 
         .tf-search-date-wrapper {
-
             background: $color-light-bg;
             padding: 24px;
-
             .tf-booking-date-wrap {
                 display: flex;
                 flex-direction: row;
@@ -2740,10 +2742,7 @@
             }
 
             .acr-label {
-                color: $color-text;
-                font-size: 1rem;
                 font-weight: 600;
-                line-height: 1.4;
                 @media #{$max1024}{
                     font-size: 0.875rem;
                 }
@@ -2751,8 +2750,6 @@
                     margin-left: 5px;
                     span{
                         display: inline-block;
-                        color: $color-text;
-                        font-size: 1rem;
                         font-weight: 600;
                         @media #{$max1024}{
                             font-size: 0.875rem;
@@ -2985,14 +2982,12 @@
                                 padding: 0;
                             }
                             .tf-short-description{
-                                font-size: 1rem;
                                 @media #{$max768}{
                                     font-size: 0.875rem;
                                 }
                             }
                             span.tf-see-description,
                             span.tf-see-less-description{
-                                font-size: 1rem;
                                 cursor: pointer;
                                 @media #{$max768}{
                                     font-size: 0.875rem;
@@ -3000,8 +2995,6 @@
                             }
                             .tf-full-description{
                                 display: none;
-                                font-size: 1rem;
-              
                                 @media #{$max768}{
                                     font-size: 0.875rem;
                                 }
@@ -3162,13 +3155,12 @@
                                 }
                                 h2{
                                     font-weight: 700;
-                                    margin-bottom: 24px;
+                                    margin-bottom: 20px;
                                     @media #{$max1024}{
                                         font-size: 1.5rem;
                                     }
                                 }
                                 p{
-                                    color: $color-text;
                                     margin: 0;
                                 }
                                 ul {

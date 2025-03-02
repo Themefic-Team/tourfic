@@ -844,21 +844,10 @@
 }
 
 .single-tf_carrental .tf-single-template__one .tf-review-section .tf-clients-reviews .tf-reviews-item .tf-reviews-text .tf-reviews-meta {
-  color: var(--tf-text);
-  font-size: 1rem;
   font-weight: 700;
 }
 
-.single-tf_carrental .tf-single-template__one .tf-review-section .tf-clients-reviews .tf-reviews-item .tf-reviews-text .tf-reviews-meta span {
-  color: var(--tf-text);
-  font-size: 1rem;
-  font-weight: 400;
-}
-
 .single-tf_carrental .tf-single-template__one .tf-review-section .tf-clients-reviews .tf-reviews-item .tf-reviews-text p {
-  color: var(--tf-text);
-  font-size: 1rem;
-  font-weight: 400;
   margin: 15px 0 0 0;
 }
 

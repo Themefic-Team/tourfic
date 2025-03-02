@@ -386,6 +386,7 @@
   -moz-border-radius: 5px;
   border-radius: 5px;
   padding: 20px;
+  padding-top: 17px;
   width: 100%;
   align-items: baseline;
 }
@@ -393,10 +394,16 @@
 @media only screen and (max-width: 1024px) {
   .single-tf_tours .tf-single-template__two .tf-trip-feature-blocks .tf-feature-block {
     padding: 24px;
+    padding-top: 21px;
   }
 }
 
-.single-tf_tours .tf-single-template__two .tf-trip-feature-blocks .tf-feature-block i {
+.single-tf_tours .tf-single-template__two .tf-trip-feature-blocks .tf-feature-block .tf-feature-block-icon {
+  position: relative;
+  top: 3px;
+}
+
+.single-tf_tours .tf-single-template__two .tf-trip-feature-blocks .tf-feature-block .tf-feature-block-icon i {
   color: var(--tf-primary);
   font-size: 1.25rem;
 }
@@ -405,10 +412,16 @@
   color: var(--tf-heading);
 }
 
+.single-tf_tours .tf-single-template__two .tf-trip-feature-blocks .tf-feature-block h5 {
+  color: var(--tf-heading);
+  margin-bottom: 5px;
+}
+
 .single-tf_tours .tf-single-template__two .tf-trip-feature-blocks .tf-feature-block p {
   color: var(--tf-text);
   margin-top: 8px;
   margin-bottom: 0;
+  margin-top: 0;
 }
 
 .single-tf_tours .tf-single-template__two .tf-trip-feature-blocks .tf-feature-block .repeat-dates {
@@ -1412,6 +1425,10 @@
   list-style-position: inside;
 }
 
+.single-tf_tours .tf-single-template__one .tf-highlight-wrapper .tf-highlight-item .tf-highlight-text p {
+  margin-bottom: 0;
+}
+
 .single-tf_tours .tf-single-template__one .tf-highlight-wrapper .tf-highlight-item .tf-highlight-image {
   flex: 0 0 49%;
 }
@@ -1760,8 +1777,16 @@
   display: none;
 }
 
+.single-tf_tours .tf-single-template__one .tf-inc-exc-wrapper .tf-include-section.custom-inc-icon h2 {
+  color: #ffffff;
+}
+
 .single-tf_tours .tf-single-template__one .tf-inc-exc-wrapper .tf-exclude-section.custom-exc-icon ul li:before {
   display: none;
+}
+
+.single-tf_tours .tf-single-template__one .tf-inc-exc-wrapper .tf-exclude-section.custom-exc-icon h2 {
+  color: #ffffff;
 }
 
 .single-tf_tours .tf-single-template__two .tf-inex-wrapper .tf-inex {
@@ -1797,7 +1822,7 @@
   color: var(--tf-heading);
   font-size: 2rem;
   font-weight: 700;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -1857,10 +1882,12 @@
 
 .single-tf_tours .tf-single-template__three .tf-include-exclude-wrapper .tf-include-exclude-innter .tf-include ul li i {
   color: #198754;
+  line-height: 1.6;
 }
 
 .single-tf_tours .tf-single-template__three .tf-include-exclude-wrapper .tf-include-exclude-innter .tf-exclude ul li i {
   color: #ff6055;
+  line-height: 1.6;
 }
 
 .single-tf_tours .tf-single-template__one .tf-travel-itinerary-wrapper .tf-travel-itinerary-content h2 {
@@ -3383,8 +3410,8 @@
 
 .single-tf_tours .tf-single-template__three .tf-tour-contact-informations .tf-contact-details-title h3 {
   font-weight: 700;
-  font-size: 1.875rem;
-  margin-bottom: 5px;
+  font-size: 1.5rem;
+  margin-bottom: 0;
 }
 
 .single-tf_tours .tf-single-template__three .tf-tour-contact-informations .tf-contact-details-items .tf-list {
@@ -3442,7 +3469,6 @@ div#tf-contact-info {
 }
 
 .single-tf_tours .tf-single-template__two .tf-tour-details-right .tf-booking-price p {
-  color: var(--tf-text);
   margin-bottom: 0;
   font-size: 1.875rem;
 }
@@ -3453,7 +3479,6 @@ div#tf-contact-info {
 }
 
 .single-tf_tours .tf-single-template__two .tf-tour-details-right .tf-form-title p {
-  color: var(--tf-text);
   margin-bottom: 0;
 }
 

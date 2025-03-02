@@ -20,6 +20,7 @@ if ( ! class_exists( 'TF_text' ) ) {
 				<?php if ( count( $this->field['tabs'] ) > 1 ): ?>
                     <ul class="tf-nav-tabs">
 						<?php if ( isset( $this->field['tabs'] ) && is_array( $this->field['tabs'] ) ): ?>
+							<?php $active_tab = false; // Flag to track if an active tab has been set ?>
 							<?php foreach ( $this->field['tabs'] as $key => $value ): ?>
 								<?php 
 								if(isset( $value['post_dependency'] ) && !empty( $value['post_dependency'] )){
@@ -27,18 +28,25 @@ if ( ! class_exists( 'TF_text' ) ) {
 										continue;
 									}
 								}
+
+								// Set the first visible tab as active
+								$active_class = '';
+								if (!$active_tab) {
+									$active_class = 'show';
+									$active_tab = true; // Mark that an active tab has been set
+								}
 								?>
-                                <li class="tf-tab-item <?php if ( $key == 0 ) {
-									echo "show";
-								} ?>" data-tab-id="<?php if ( isset( $value['id'] ) ) {
-									echo esc_attr( $value['id'] );
-								} ?>"><?php echo esc_html($value['title']) ?></li>
+                                <li class="tf-tab-item <?php echo esc_attr($active_class) ?>" 
+								data-tab-id="<?php echo  isset( $value['id'] ) ? esc_attr( $value['id'] ) : ''?>">
+									<?php echo esc_html($value['title']) ?>
+								</li>
 							<?php endforeach; ?>
 						<?php endif; ?>
                     </ul>
 				<?php endif; ?>
                 <div class="tf-tab-field-content">
 					<?php if ( isset( $this->field['tabs'] ) && is_array( $this->field['tabs'] ) ): ?>
+						<?php $active_tab_content = false; // Flag to track if an active tab has been set ?>
 						<?php foreach ( $this->field['tabs'] as $key => $value ): ?>
 							<?php 
 							if(isset( $value['post_dependency'] ) && !empty( $value['post_dependency'] )){
@@ -46,8 +54,15 @@ if ( ! class_exists( 'TF_text' ) ) {
 									continue;
 								}
 							}
+
+							// Set the first visible tab as active
+							$active_class = '';
+							if (!$active_tab_content) {
+								$active_class = 'show';
+								$active_tab_content = true; // Mark that an active tab has been set
+							}
 							?>
-                            <div class="tf-tab-item-content <?php echo $key == 0 ? "show" : '' ?>" data-tab-id="<?php echo isset( $value['id'] ) ? esc_attr( $value['id'] ) : '' ?>">
+                            <div class="tf-tab-item-content <?php echo esc_attr($active_class) ?>" data-tab-id="<?php echo isset( $value['id'] ) ? esc_attr( $value['id'] ) : '' ?>">
 								<?php
 								$parent_id = !empty( $value['id'] ) ? $value['id'] : '';
 								
