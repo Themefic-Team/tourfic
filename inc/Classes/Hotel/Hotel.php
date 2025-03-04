@@ -2632,6 +2632,7 @@ class Hotel {
 		$tf_hotel_global_template = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-hotel'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-hotel'] : 'design-1';
 
 		$tf_hotel_selected_check = ! empty( $tf_hotel_single_template ) ? $tf_hotel_single_template : $tf_hotel_global_template;
+		$adults_name = apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) );
 
 		$tf_hotel_selected_template = $tf_hotel_selected_check;
 
@@ -2647,7 +2648,7 @@ class Hotel {
                         <div class="tf-field tf-flex">
                             <div class="acr-label tf-flex">
                                 <i class="fa-regular fa-user"></i>
-								<?php esc_html_e( 'Adults', 'tourfic' ); ?>
+								<?php esc_html_e( $adults_name . 's', 'tourfic' ); ?>
                             </div>
                             <div class="acr-select">
                                 <div class="acr-dec">-</div>
@@ -2700,7 +2701,11 @@ class Hotel {
                 </div>
 
             </form>
-		<?php } elseif ( $tf_hotel_selected_template == "design-2" ) { ?>
+		<?php } elseif ( $tf_hotel_selected_template == "design-2" ) { 
+			
+			$adults_name = apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Guest', 'tourfic' ) );
+
+			?>
 
             <form id="tf-single-hotel-avail" class="tf-booking-form" method="get" autocomplete="off">
 				<?php wp_nonce_field( 'check_room_avail_nonce', 'tf_room_avail_nonce' ); ?>
@@ -2735,11 +2740,11 @@ class Hotel {
                     </div>
                     <div class="tf-booking-form-guest-and-room">
                         <div class="tf-booking-form-guest-and-room-inner">
-                            <span class="tf-booking-form-title"><?php esc_html_e( "Guests", "tourfic" ); ?></span>
+                            <span class="tf-booking-form-title"><?php esc_html_e( $adults_name . "s", "tourfic" ); ?></span>
                             <div class="tf-booking-guest-and-room-wrap">
                                 <span class="tf-guest tf-booking-date"><?php esc_html_e( "01", "tourfic" ); ?></span>
                                 <span class="tf-booking-month">
-							<span><?php esc_html_e( "Guest", "tourfic" ); ?></span>
+							<span><?php esc_html_e( $adults_name, "tourfic" ); ?></span>
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
 							<path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
 							</svg>
@@ -2922,7 +2927,7 @@ class Hotel {
                                 <svg class="tf-hotel-booking-form-icon" width="13" height="15" viewBox="0 0 13 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M6.125 7.75C8.03906 7.75 9.625 6.19141 9.625 4.25C9.625 2.33594 8.03906 0.75 6.125 0.75C4.18359 0.75 2.625 2.33594 2.625 4.25C2.625 6.19141 4.18359 7.75 6.125 7.75ZM6.125 1.625C7.54688 1.625 8.75 2.82812 8.75 4.25C8.75 5.69922 7.54688 6.875 6.125 6.875C4.67578 6.875 3.5 5.69922 3.5 4.25C3.5 2.82812 4.67578 1.625 6.125 1.625ZM7.49219 9.0625H4.73047C2.10547 9.0625 0 11.1953 0 13.8203C0 14.3398 0.410156 14.75 0.929688 14.75H11.293C11.8125 14.75 12.25 14.3398 12.25 13.8203C12.25 11.1953 10.1172 9.0625 7.49219 9.0625ZM11.293 13.875H0.929688C0.902344 13.875 0.875 13.8477 0.875 13.8203C0.875 11.6875 2.59766 9.9375 4.73047 9.9375H7.49219C9.625 9.9375 11.375 11.6875 11.375 13.8203C11.375 13.8477 11.3203 13.875 11.293 13.875Z" fill="#6E655E"/>
                                 </svg>
-                                <?php esc_html_e( 'Adults', 'tourfic' ); ?>
+                                <?php esc_html_e( $adults_name . 's', 'tourfic' ); ?>
                             </div>
                             <div class="acr-select">
                                 <div class="acr-dec">
