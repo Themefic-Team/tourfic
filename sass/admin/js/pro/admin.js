@@ -324,6 +324,7 @@
                                 $('.tf-importing-msg').remove();
                                 $('.tf-import-log-content').append('<li>Import completed!</li>');
                                 $('.tf-step-4').addClass('done');
+                                $('.tf-importing-progressbar-container').find('.tf-admin-btn').show();
                             }
                         } else {
                             $('.tf-import-log-content').append('<li>Error: ' + response.data + '</li>');
@@ -393,6 +394,7 @@
                                 $('.tf-importing-msg').remove();
                                 $('.tf-import-log-content').append('<li>Import completed!</li>');
                                 $('.tf-step-4').addClass('done');
+                                $('.tf-importing-progressbar-container').find('.tf-admin-btn').show();
                             }
                         } else {
                             $('.tf-import-log-content').append('<li>Error: ' + response.data + '</li>');
@@ -463,6 +465,7 @@
                                 $('.tf-importing-msg').remove();
                                 $('.tf-import-log-content').append('<li>Import completed!</li>');
                                 $('.tf-step-4').addClass('done');
+                                $('.tf-importing-progressbar-container').find('.tf-admin-btn').show();
                             }
                         } else {
                             $('.tf-import-log-content').append('<li>Error: ' + response.data + '</li>');
@@ -533,6 +536,7 @@
                                 $('.tf-importing-msg').remove();
                                 $('.tf-import-log-content').append('<li>Import completed!</li>');
                                 $('.tf-step-4').addClass('done');
+                                $('.tf-importing-progressbar-container').find('.tf-admin-btn').show();
                             }
                         } else {
                             $('.tf-import-log-content').append('<li>Error: ' + response.data + '</li>');

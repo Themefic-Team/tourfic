@@ -303,18 +303,20 @@ use \Tourfic\Classes\Apartment\Apartment;
 									<?php if ( ! empty( $all_amenities ) ):
 										foreach ( array_slice( $all_amenities, 0, 10 ) as $amenity ) :
 											$feature = get_term_by( 'id', $amenity['feature'], 'apartment_feature' );
-											$feature_meta = get_term_meta( $amenity['feature'], 'tf_apartment_feature', true );
-											$f_icon_type = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
-											if ( $f_icon_type == 'icon' ) {
-												$feature_icon = '<i class="' . $feature_meta['apartment-feature-icon'] . '"></i>';
-											} elseif ( $f_icon_type == 'custom' ) {
-												$feature_icon = '<img src="' . esc_url( $feature_meta['apartment-feature-icon-custom'] ) . '" style="width: ' . $feature_meta['apartment-feature-icon-dimension'] . 'px; height: ' . $feature_meta['apartment-feature-icon-dimension'] . 'px;" />';
-											}
-											?>
-                                            <div class="tf-apt-amenity">
-												<?php echo ! empty( $feature_meta['apartment-feature-icon'] ) || !empty($feature_meta['apartment-feature-icon-custom']) ? "<div class='tf-apt-amenity-icon'>" . wp_kses_post( $feature_icon ) . "</div>" : ""; ?>
-                                                <span><?php echo esc_html( $feature->name ); ?></span>
-                                            </div>
+                                            if($feature):
+                                                $feature_meta = get_term_meta( $amenity['feature'], 'tf_apartment_feature', true );
+                                                $f_icon_type = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
+                                                if ( $f_icon_type == 'icon' ) {
+                                                    $feature_icon = '<i class="' . $feature_meta['apartment-feature-icon'] . '"></i>';
+                                                } elseif ( $f_icon_type == 'custom' ) {
+                                                    $feature_icon = '<img src="' . esc_url( $feature_meta['apartment-feature-icon-custom'] ) . '" style="width: ' . $feature_meta['apartment-feature-icon-dimension'] . 'px; height: ' . $feature_meta['apartment-feature-icon-dimension'] . 'px;" />';
+                                                }
+                                                ?>
+                                                <div class="tf-apt-amenity">
+                                                    <?php echo ! empty( $feature_meta['apartment-feature-icon'] ) || !empty($feature_meta['apartment-feature-icon-custom']) ? "<div class='tf-apt-amenity-icon'>" . wp_kses_post( $feature_icon ) . "</div>" : ""; ?>
+                                                    <span><?php echo esc_html( $feature->name ); ?></span>
+                                                </div>
+										    <?php endif; ?>
 										<?php endforeach; ?>
 									<?php endif; ?>
                                 </div>
