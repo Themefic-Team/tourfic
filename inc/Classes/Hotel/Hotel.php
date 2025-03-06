@@ -1598,6 +1598,7 @@ class Hotel {
 		$hotel_location_field_required = ! empty( Helper::tfopt( "required_location_hotel_search" ) ) ? Helper::tfopt( "required_location_hotel_search" ) : 0;
 
 		$adults_name = apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) );
+		$child_field_hidden = apply_filters( 'tf_hotel_child_field_hidden', 1 );
 
 		$disable_hotel_child_search = ! empty( Helper::tfopt( 'disable_hotel_child_search' ) ) ? Helper::tfopt( 'disable_hotel_child_search' ) : '';
 		if ( ! empty( $design ) && 2 == $design ) {
@@ -2551,7 +2552,7 @@ class Hotel {
 		$hotel_date_format_for_users = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 
 		$adults_name = apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) );
-
+		$child_field_hidden = apply_filters( 'tf_hotel_child_field_hidden', 1 );
 
 		/**
 		 * Get each hotel room's disabled date from the available dates
@@ -2657,19 +2658,21 @@ class Hotel {
                             </div>
                         </div>
                     </div>
-                    <div class="tf-field-group tf_acrselection">
-                        <div class="tf-field tf-flex">
-                            <div class="acr-label tf-flex">
-                                <i class="fa-solid fa-child"></i>
-								<?php esc_html_e( 'Children', 'tourfic' ); ?>
-                            </div>
-                            <div class="acr-select">
-                                <div class="acr-dec">-</div>
-                                <input type="number" name="children" id="children" min="0" value="<?php echo ! empty( $child ) ? esc_attr( $child ) : '0'; ?>">
-                                <div class="acr-inc">+</div>
-                            </div>
-                        </div>
-                    </div>
+                    <?php if( !empty( $child_field_hidden ) ): ?>
+						<div class="tf-field-group tf_acrselection">
+							<div class="tf-field tf-flex">
+								<div class="acr-label tf-flex">
+									<i class="fa-solid fa-child"></i>
+									<?php esc_html_e( 'Children', 'tourfic' ); ?>
+								</div>
+								<div class="acr-select">
+									<div class="acr-dec">-</div>
+									<input type="number" name="children" id="children" min="0" value="<?php echo ! empty( $child ) ? esc_attr( $child ) : '0'; ?>">
+									<div class="acr-inc">+</div>
+								</div>
+							</div>
+						</div>
+					<?php endif; ?>
                 </div>
 
                 <div class="tf_booking-dates">
@@ -2785,36 +2788,38 @@ class Hotel {
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tf_acrselection">
-                                    <div class="acr-label"><?php esc_html_e( "Children", "tourfic" ); ?></div>
-                                    <div class="acr-select">
-                                        <div class="acr-dec">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                                <g clip-path="url(#clip0_3229_13094)">
-                                                    <rect x="4.16602" y="9.16675" width="11.6667" height="1.66667" fill="#595349"/>
-                                                </g>
-                                                <defs>
-                                                    <clipPath id="clip0_3229_13094">
-                                                        <rect width="20" height="20" fill="white"/>
-                                                    </clipPath>
-                                                </defs>
-                                            </svg>
-                                        </div>
-                                        <input type="tel" name="children" id="children" min="0" value="<?php echo ! empty( $child ) ? esc_attr( $child ) : '0'; ?>" readonly>
-                                        <div class="acr-inc">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                                <g clip-path="url(#clip0_3229_13100)">
-                                                    <path d="M9.16602 9.16675V4.16675H10.8327V9.16675H15.8327V10.8334H10.8327V15.8334H9.16602V10.8334H4.16602V9.16675H9.16602Z" fill="#595349"/>
-                                                </g>
-                                                <defs>
-                                                    <clipPath id="clip0_3229_13100">
-                                                        <rect width="20" height="20" fill="white"/>
-                                                    </clipPath>
-                                                </defs>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </div>
+								<?php if( !empty( $child_field_hidden )) : ?>
+									<div class="tf_acrselection">
+										<div class="acr-label"><?php esc_html_e( "Children", "tourfic" ); ?></div>
+										<div class="acr-select">
+											<div class="acr-dec">
+												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+													<g clip-path="url(#clip0_3229_13094)">
+														<rect x="4.16602" y="9.16675" width="11.6667" height="1.66667" fill="#595349"/>
+													</g>
+													<defs>
+														<clipPath id="clip0_3229_13094">
+															<rect width="20" height="20" fill="white"/>
+														</clipPath>
+													</defs>
+												</svg>
+											</div>
+											<input type="tel" name="children" id="children" min="0" value="<?php echo ! empty( $child ) ? esc_attr( $child ) : '0'; ?>" readonly>
+											<div class="acr-inc">
+												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+													<g clip-path="url(#clip0_3229_13100)">
+														<path d="M9.16602 9.16675V4.16675H10.8327V9.16675H15.8327V10.8334H10.8327V15.8334H9.16602V10.8334H4.16602V9.16675H9.16602Z" fill="#595349"/>
+													</g>
+													<defs>
+														<clipPath id="clip0_3229_13100">
+															<rect width="20" height="20" fill="white"/>
+														</clipPath>
+													</defs>
+												</svg>
+											</div>
+										</div>
+									</div>
+								<?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -3009,22 +3014,24 @@ class Hotel {
                 </div>
 
                 <div class="tf_form-row">
-                    <label class="tf_label-row">
-                        <div class="tf_form-inner">
-                            <i class="fas fa-child"></i>
-                            <select name="children" id="children" class="">
-								<?php
-								echo '<option value="0">0 ' . esc_html__( "Children", "tourfic" ) . '</option>';
-								if ( $max_childs_numbers > 0 ) {
-									foreach ( range( 1, $max_childs_numbers ) as $value ) {
-										$selected = $value == $child ? 'selected' : null;
-										echo '<option ' . esc_attr( $selected ) . ' value="' . esc_attr( $value ) . '">' . esc_html( $value ) . ' ' . esc_html__( "Children", "tourfic" ) . '</option>';
+                    <?php if(!empty($child_field_hidden)): ?>
+						<label class="tf_label-row">
+							<div class="tf_form-inner">
+								<i class="fas fa-child"></i>
+								<select name="children" id="children" class="">
+									<?php
+									echo '<option value="0">0 ' . esc_html__( "Children", "tourfic" ) . '</option>';
+									if ( $max_childs_numbers > 0 ) {
+										foreach ( range( 1, $max_childs_numbers ) as $value ) {
+											$selected = $value == $child ? 'selected' : null;
+											echo '<option ' . esc_attr( $selected ) . ' value="' . esc_attr( $value ) . '">' . esc_html( $value ) . ' ' . esc_html__( "Children", "tourfic" ) . '</option>';
+										}
 									}
-								}
-								?>
-                            </select>
-                        </div>
-                    </label>
+									?>
+								</select>
+							</div>
+						</label>
+                    <?php endif; ?>
                 </div>
 
                 <div class="tf_booking-dates">
