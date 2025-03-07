@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, car-rental, multivendor-marketplace
 Requires at least: 5.4
 Tested up to: 6.7
-Stable tag: 2.15.15
+Stable tag: 2.15.18
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -372,6 +372,22 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
+= 2.15.18 – March 02, 2025 =
+
+- Fixed: Car booking responsiveness issue successfully resolved.
+- Fixed: Code enhancements applied to SweetAlert2 script.
+
+= 2.15.17 – February 16, 2025 =
+
+- Fixed: The apartment pricing issue has been resolved.
+- Fixed: Post types tab switch issue corrected.
+- Fixed: Hotel backend booking issue for vendors resolved.
+- Fixed: Only vendor posts are now displayed in the backend booking.
+
+= 2.15.16 – February 10, 2025 =
+
+- Improved: Hotel search and filter functionality for a better user experience.
+
 = 2.15.15 – February 05, 2025 =
 
 - Updated: readme.txt file for better clarity.
@@ -440,31 +456,6 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 - Fixed: Fixed FAQ display issue for hotels.
 - Fixed: Room availability issue resolved.
 - Compatibility: WPML compatibility added for setting fields.
-
-= 2.15.5 - 17 December 2024 =
-
-- Compatibility: Now fully compatible with Elementor 3.26.0.
-
-= 2.15.4 - 13 December 2024 =
-
-- Added: Option to edit rooms directly from the hotel edit page.
-- Added: Duplicator feature for car rentals and rooms.
-- Added: Offline booking email template settings (Pro).
-- Added: Export and import options for car rentals (Pro).
-- Added: Option for hotel bookings without payment (Pro).
-- Added: Booking calendar integration for vendors (Pro).
-- Fixed: The issue with backend tour bookings has been resolved.
-- Fixed: The security patch has been resolved.
-
-= 2.15.3 - 05 December 2024 =
-
-- Added: Integration of Tourfic with Google Calendar(Pro).
-- Added: Hotel booking details now sync with Google Calendar.
-- Added: Apartment booking details now sync with Google Calendar.
-- Added: Tour booking details now sync with Google Calendar.
-- Added: Car booking details now sync with Google Calendar.
-- Improvement: Backend calendar view for booking details.
-- Improvement: System stability is further optimized.
 
 **Old Changelog can be found [here](https://themefic.com/tourfic/changelog/)**.
 

@@ -200,18 +200,20 @@
             tourfic_car_autocomplete(car_dropoff_input, car_locations);
         }
 
-        $(document).on('click', '.tf-booking-popup-header .tf-close-popup', function (e) {
+        $(".tf-booking-popup-header .tf-close-popup").on("click", function (e) {
             e.preventDefault();
             $('.tf-car-booking-popup').hide();
         });
+ 
 
         /*
         * Car Booking Popup
         * @author Jahid
         */
-        $(document).on('click', '.tf-car-booking', function (e) {
+        $(".tf-car-booking").on('click', function (e) {
             e.preventDefault();
             $this = $(this);
+
             $('.tf-booking-content-wraper').html("");
             var pickup = $('#tf_pickup_location').val();
             let dropoff = $('#tf_dropoff_location').val();
@@ -298,16 +300,26 @@
 
         });
 
-        $(document).on('click', '.booking-next', function (e) {
+        $(document).on('click touchstart', '.tf-booking-content-wraper .booking-next', function (e) {
+            e.preventDefault();
             let $this = $(this);
-            $('.tf-booking-tabs ul li').removeClass('active');
-            $('.tf-booking-tabs ul li.booking').addClass('active');
 
-            $('.tf-protection-content').hide();
-            $('.tf-booking-bar').hide();
+            let protections = $('input[name="protections[]"]');
 
-            $('.tf-booking-form-fields').show();
+            
+            let validationProtections = protectionValidation(protections);
 
+            if( validationProtections ){
+                return;
+            }else{
+                $('.tf-booking-tabs ul li').removeClass('active');
+                $('.tf-booking-tabs ul li.booking').addClass('active');
+    
+                $('.tf-protection-content').hide();
+                $('.tf-booking-bar').hide();
+    
+                $('.tf-booking-form-fields').show();
+            }
         });
 
         /*
@@ -389,8 +401,11 @@
                 return true;
             }
         };
+        $(document).on('click touchstart', '.booking-process', function (e) {
 
-        $(document).on('click', '.tf-car-booking-form .booking-process', function (e) {
+            if (e.type === 'touchstart') {
+                $(this).off('click'); 
+            }
             let $this = $(this);
             
             let extra_ids = $("input[name='selected_extra[]']").map(function() {
@@ -618,7 +633,7 @@
         * @author Jahid
         */
 
-        $(document).on('click', '.quick-booking', function (e) {
+        $(".quick-booking").on('click', function (e) {
             let $this = $(this);
 
             var pickup = $('#tf_pickup_location').val();
@@ -677,7 +692,10 @@
 
         });
 
-        $(document).on('click', '.tf-booking-btn .booking-process', function (e) {
+        $(".tf-booking-btn .booking-process").on("click touchstart", function (e) {
+            if(e.type === 'touchstart'){
+                $(this).off('click'); 
+            }
             let $this = $(this);
 
             var travellerData = {};
@@ -870,9 +888,7 @@
             let $this = $(this);
             $this.addClass('active');
             let view = $this.attr('data-view');
-   
             if(view=='grid'){
-                console.log(view);
                 $('.tf-car-details-column .tf-car-archive-result .tf-car-result').removeClass('list-view');
                 $('.tf-car-details-column .tf-car-archive-result .tf-car-result').addClass('grid-view');
             }else{
@@ -923,10 +939,15 @@
         });   
 
         // Instructions Popup Close
-        $(document).on('click', '.tf-instraction-popup-header .tf-close-popup', function (e) {
+        $(".tf-instraction-popup-header .tf-close-popup").on("click touchstart", function (e) {
             e.preventDefault();
             $('.tf-car-instraction-popup').hide();
         });
+
+        $(".tf-confirm-popup .tf-booking-times").on("click touchstart", function (e) {
+            e.preventDefault();
+            $('.tf-withoutpayment-booking-confirm').removeClass('show');
+        })
 
         // Showing Total into a protections
         $(document).on('change', '.protection-checkbox', function (e) {
@@ -949,7 +970,7 @@
         * Mobile Booking button
         * @author Jahid
         */
-        $(document).on('click', '.tf-mobile-booking-btn button', function (e) {
+        $(".tf-mobile-booking-btn button").on("click", function (e) {
             e.preventDefault();
             var $button = $(this);
 
