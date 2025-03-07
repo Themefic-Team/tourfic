@@ -94,7 +94,7 @@
 .single-tf_hotel .tf-single-template__two .tf-tour-booking-box {
   margin-bottom: 25px;
   box-shadow: 0px 13px 30px 0px rgba(224, 232, 238, 0.32);
-  background-color: var(--tf-brand-lite);
+  background-color: var(--tf-filling-foreground);
 }
 
 .single-tf_hotel .tf-single-template__one .single-slider-wrapper {

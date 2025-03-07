@@ -589,10 +589,9 @@
                 }
                 .active{
                     .tf-faq-single-inner{
-                        background: $color-white;
+                        background: $color-filling-fg;
                         @include bd-radius(5px);
                         margin: 0px 0px 30px 0px;
-                        box-shadow: 0px 0px 24px 5px $color-box-shadow;
                         .tf-faq-collaps{
                             .faq-icon{
                                 i.fa-plus{

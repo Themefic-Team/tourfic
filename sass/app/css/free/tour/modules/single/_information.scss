@@ -13,8 +13,7 @@
                     }
                     .tf-single-square-block {
                         width: 100%;
-                        background: $color-white;
-                        box-shadow: 0px 8px 16px rgba(90, 91, 106, 0.08);
+                        background: $color-filling-fg;
                         border-radius: 4px;
                         color: $color-text;
                         border: 1px solid $color-white;
@@ -99,8 +98,7 @@
                     }
                 }
                 .tf-feature-block {
-                    background: $color-white;
-                    box-shadow: 0px 0px 24px 5px $color-box-shadow;
+                    background: $color-filling-fg;
                     @include bd-radius(5px);;
                     padding: 20px;
                     padding-top: 17px;
@@ -141,13 +139,12 @@
             
                         .repeat-date-list {
                             list-style: none;
-                            background-color: $color-white;
+                            background-color: $color-filling-fg;
                             padding: 0px 8px;
                             margin: 10px 5px;
                             text-align: center;
                             @include bd-radius(5px);;
                             font-size: 0.938rem;
-                            box-shadow: 0px 0px 8px 2px $color-box-shadow;
                         }
                     }
                 }

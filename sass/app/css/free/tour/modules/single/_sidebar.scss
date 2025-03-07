@@ -3,9 +3,8 @@
         &__two{
             .tf-tour-details-right {
                 .tf-tour-booking-box  {
-                    background: $color-brand-lite;
+                    background: $color-filling-fg;
                     @include bd-radius(5px);;
-                    box-shadow: 0px 0px 24px 5px $color-box-shadow;
                 }
                 .tf-booking-price{
                     border-bottom: 1px solid $form-input-bg;
@@ -85,9 +84,8 @@
                     }
                 }
                 .tf-tour-booking-advantages{
-                    background-color: $color-white;
+                    background-color: $color-filling-fg;
                     @include bd-radius(5px);;
-                    box-shadow: 0px 0px 24px 5px $color-box-shadow;
                     ul{
                         margin: 0px;
                     }

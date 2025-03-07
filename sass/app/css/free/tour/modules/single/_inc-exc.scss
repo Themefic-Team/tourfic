@@ -111,9 +111,8 @@
             .tf-inex-wrapper {
                 .tf-inex {
                     width: 100%;
-                    background: $color-white;
+                    background: $color-filling-fg;
                     @include bd-radius(5px);;
-                    box-shadow: 0px 0px 24px 5px $color-box-shadow;
                     ul{
                         li{
                             margin-top: 0px;
