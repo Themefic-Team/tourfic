@@ -657,7 +657,7 @@ a {
   border: none;
   padding: 15px 40px;
   width: 100%;
-  background-color: var(--tf-form-input-bg);
+  background-color: var(--tf-filling-background);
   border-radius: 5px;
   font-size: 0.875rem;
   margin: 0px;
@@ -1146,7 +1146,7 @@ h3.section-heading {
   position: relative;
   display: grid;
   padding: 0;
-  background: var(--tf-form-input-bg);
+  background: var(--tf-filling-background);
   grid-template-columns: 38px auto;
   -webkit-align-items: center;
   -ms-flex-align: center;
@@ -14009,7 +14009,7 @@ div#tf-destinationautocomplete-list div:before {
 .tf-single-template__three .tf_tours_booking .tf-field-calander .tf-field {
   padding: 15px 40px;
   width: 100%;
-  background-color: var(--tf-form-input-bg);
+  background-color: var(--tf-filling-background);
   border-radius: 0px;
   color: var(--tf-text-paragraph);
 }

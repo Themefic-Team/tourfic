@@ -2045,7 +2045,7 @@
 .single-tf_apartment .tf-single-template__three #tf-apartment-booking .tf-apartment-form-fields .tf_booking-dates .tf-aprtment-check-in-out-date {
   height: 53px;
   padding: 15px 32px 16px 16px;
-  background: var(--tf-form-input-bg);
+  background: var(--tf-filling-background);
   width: 100%;
   box-sizing: border-box;
 }

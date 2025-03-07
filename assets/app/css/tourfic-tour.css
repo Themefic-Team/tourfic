@@ -3456,7 +3456,7 @@ div#tf-contact-info {
 }
 
 .single-tf_tours .tf-single-template__two .tf-tour-details-right .tf-booking-price {
-  border-bottom: 1px solid var(--tf-form-input-bg);
+  border-bottom: 1px solid var(--tf-filling-background);
   padding-bottom: 12px;
 }
 

@@ -73,7 +73,7 @@
 
 .single-tf_hotel .tf-single-template__two #tf-single-hotel-avail .tf_booking-dates .tf-field,
 .single-tf_hotel .tf-single-template__two #tf-single-hotel-avail .tf_booking-dates #check-in-out-date {
-  background-color: var(--tf-form-input-bg);
+  background-color: var(--tf-filling-background);
 }
 
 .single-tf_hotel .tf-single-template__two #tf-single-hotel-avail .tf_booking-dates #tf-required {
