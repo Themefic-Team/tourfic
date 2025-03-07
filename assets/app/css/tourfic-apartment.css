@@ -1,3 +1,6 @@
+/*!*********************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[3]!./sass/app/css/free/apartment/apartment.scss ***!
+  \*********************************************************************************************************************************************************************************************/
 .tf-archive-template__one .tf_item_main_block h3 {
   font-size: 1.5rem;
 }
@@ -2045,7 +2048,7 @@
 .single-tf_apartment .tf-single-template__three #tf-apartment-booking .tf-apartment-form-fields .tf_booking-dates .tf-aprtment-check-in-out-date {
   height: 53px;
   padding: 15px 32px 16px 16px;
-  background: var(--tf-form-input-bg);
+  background: var(--tf-filling-background);
   width: 100%;
   box-sizing: border-box;
 }

@@ -203,7 +203,7 @@ h3.section-heading {
         position: relative;
         display: grid;
         padding: 0;
-        background: $form-input-bg;
+        background: $color-filling-bg;
         grid-template-columns: 38px auto;
         @include align-items(center);
         justify-items: center;

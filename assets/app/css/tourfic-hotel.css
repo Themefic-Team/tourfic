@@ -1,3 +1,6 @@
+/*!*************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[3]!./sass/app/css/free/hotel/hotel.scss ***!
+  \*************************************************************************************************************************************************************************************/
 .single-tf_hotel .tf-single-template__one .hero-section-wrap {
   display: grid;
   grid-template-columns: 75% 25%;
@@ -73,7 +76,7 @@
 
 .single-tf_hotel .tf-single-template__two #tf-single-hotel-avail .tf_booking-dates .tf-field,
 .single-tf_hotel .tf-single-template__two #tf-single-hotel-avail .tf_booking-dates #check-in-out-date {
-  background-color: var(--tf-form-input-bg);
+  background-color: var(--tf-filling-background);
 }
 
 .single-tf_hotel .tf-single-template__two #tf-single-hotel-avail .tf_booking-dates #tf-required {
