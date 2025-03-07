@@ -915,8 +915,7 @@
 }
 
 .single-tf_hotel .tf-single-template__two .tf-hotel-faqs-section .tf-hotel-enquiry .tf-ask-enquiry {
-  background-color: #ffffff;
-  box-shadow: 0px 13px 30px 0px rgba(224, 232, 238, 0.32);
+  background-color: var(--tf-filling-foreground);
   padding: 30px;
 }
 
@@ -941,14 +940,12 @@
 
 .single-tf_hotel .tf-single-template__two .tf-hotel-faqs-section .tf-hotel-faqs .tf-faq-wrapper .tf-faq-single .tf-faq-single-inner {
   margin: 0px 0px 30px 0px;
-  background: #ffffff;
-  box-shadow: 0px 13px 30px 0px rgba(224, 232, 238, 0.32);
+  background: var(--tf-filling-foreground);
   transition: .3s all ease;
 }
 
 .single-tf_hotel .tf-single-template__two .tf-hotel-faqs-section .tf-hotel-faqs .tf-faq-wrapper .tf-faq-single .tf-faq-single-inner:hover {
-  background: #F1F3F4;
-  box-shadow: 0px 13px 30px 0px #F1F3F4;
+  background: var(--tf-brand-lite);
 }
 
 .single-tf_hotel .tf-single-template__two .tf-hotel-faqs-section .tf-hotel-faqs .tf-faq-wrapper .tf-faq-single .tf-faq-single-inner h3 {
@@ -956,8 +953,7 @@
 }
 
 .single-tf_hotel .tf-single-template__two .tf-hotel-faqs-section .tf-hotel-faqs .tf-faq-wrapper .tf-faq-single.active .tf-faq-single-inner {
-  background: #F1F3F4;
-  box-shadow: 0px 13px 30px 0px #F1F3F4;
+  background: var(--tf-brand-lite);
 }
 
 .single-tf_hotel .tf-single-template__two .tf-review-wrapper .tf-review-data.tf-box {

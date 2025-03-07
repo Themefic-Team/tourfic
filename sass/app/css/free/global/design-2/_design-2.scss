@@ -178,12 +178,14 @@
                     border-radius: 5px;
                     a {
                         display: flex;
+                        align-items: center;
                         gap: 8px;
                         text-decoration: none;
                         color: $color-heading;
                         padding: 5px 12px;
                         border-radius: 5px;
                         transition: all .6s ease;
+                        min-height: 35px;
                         &:hover{
                             background-color: $color-primary;
                             color: $color-white;

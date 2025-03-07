@@ -21,11 +21,11 @@
                     width: 40px;
 
                     svg {
-                        padding: 8px;
+                        padding: 4px;
                         border-radius: 50%;
                         border: 1px solid $color-border;
-                        background: rgba(255, 255, 255, 0.70);
-                        box-shadow: 0px 5px 10px 0px rgba(0, 44, 102, 0.20);
+                        background: $color-filling-fg;
+
                     }
                 }
 

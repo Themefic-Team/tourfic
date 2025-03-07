@@ -2,8 +2,7 @@
     .tf-single-template{
         &__one{
             #tf-apartment-booking {
-                border: 1px solid $color-border;
-                box-shadow: 0px 2px 10px rgba(26, 156, 255, .2);
+                background-color: $color-filling-fg;
                 border-radius: 8px;
                 padding: 32px;
                 margin-bottom: 40px;
@@ -206,7 +205,6 @@
                     border-radius: 8px;
                     background: $color-primary;
                     padding: 12px 24px;
-                    box-shadow: 0px 1px 1px 0px rgba(0, 60, 121, 0.16);
                     font-size: 1rem;
                     font-weight: 500;
                     line-height: 1.5;

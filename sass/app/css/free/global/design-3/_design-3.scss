@@ -217,7 +217,7 @@
             }
         }
         .tf-booking-form-wrapper {
-            background: $color-brand-lite;
+            background: $color-filling-fg;
             @media #{$max768}{
                 display: none;
             }
@@ -339,7 +339,7 @@
             }
         }
         .tf-available-rooms-wrapper {
-            background: $color-filling-fg;
+            background: $color-filling-bg;
             padding: 32px;
             margin-bottom: 32px;
             .tf-room-filter{
@@ -407,7 +407,7 @@
                 }
             }
             .tf-available-room {
-                background: $color-yellow-light;
+                background: $color-filling-bg;
                 display: flex;
                 .tf-available-room-gallery {
                     min-width: 230px;
@@ -1823,7 +1823,7 @@
                 }
                 .tf-meta-info{
                     padding: 16px 24px 24px 24px;
-                    background-color: $color-yellow-light;
+                    background-color: $color-filling-bg;
                     display: flex;
                     flex-direction: column;
                     justify-content: space-between;
@@ -2666,7 +2666,7 @@
         }
 
         .tf-search-date-wrapper {
-            background: $color-brand-lite;
+            background: $color-filling-fg;
             padding: 24px;
             .tf-booking-date-wrap {
                 display: flex;
@@ -3313,7 +3313,7 @@
                         .tf-booking-location-wrap {
                             display: flex;
                             flex-direction: row;
-                            background: $color-yellow-light;
+                            background: $color-filling-bg;
                             padding: 0 12px;
                             width: 100%;
                             align-items: center;
@@ -3598,7 +3598,7 @@
             display: block;
         }
         .tf-available-archive-hetels-wrapper {
-            background: $color-brand-lite;
+            background: $color-filling-fg;
             margin-bottom: 56px;
             @media #{$max768}{
                 padding: 16px;
@@ -3613,7 +3613,7 @@
                     padding: 12px 16px;
                 }
                .tf-archive-ordering #tf-orderby {
-                    background-color: $color-yellow-light;
+                    background-color: $color-filling-bg;
                     color: $color-text;
                     padding: 15px 36px 15px 15px;
                     height: 100%;

@@ -8878,12 +8878,14 @@ div#tf-destinationautocomplete-list div:before {
 
 .tf-single-template__two .tf-hero-gallery .tf-gallery-featured .featured-column a {
   display: flex;
+  align-items: center;
   gap: 8px;
   text-decoration: none;
   color: var(--tf-text-heading);
   padding: 5px 12px;
   border-radius: 5px;
   transition: all .6s ease;
+  min-height: 35px;
 }
 
 .tf-single-template__two .tf-hero-gallery .tf-gallery-featured .featured-column a:hover {
@@ -10432,7 +10434,7 @@ div#tf-destinationautocomplete-list div:before {
 .tf-single-template__three .tf-booking-form-wrapper,
 .tf-archive-template__three .tf-booking-form-wrapper,
 .page-template-tf-search__three .tf-booking-form-wrapper {
-  background: var(--tf-brand-lite);
+  background: var(--tf-filling-foreground);
 }
 
 @media only screen and (max-width: 768px) {
@@ -10662,7 +10664,7 @@ div#tf-destinationautocomplete-list div:before {
 .tf-single-template__three .tf-available-rooms-wrapper,
 .tf-archive-template__three .tf-available-rooms-wrapper,
 .page-template-tf-search__three .tf-available-rooms-wrapper {
-  background: var(--tf-filling-foreground);
+  background: var(--tf-filling-background);
   padding: 32px;
   margin-bottom: 32px;
 }
@@ -10781,7 +10783,7 @@ div#tf-destinationautocomplete-list div:before {
 .tf-single-template__three .tf-available-rooms-wrapper .tf-available-room,
 .tf-archive-template__three .tf-available-rooms-wrapper .tf-available-room,
 .page-template-tf-search__three .tf-available-rooms-wrapper .tf-available-room {
-  background: #FDF9F3;
+  background: var(--tf-filling-background);
   display: flex;
 }
 
@@ -12793,7 +12795,7 @@ div#tf-destinationautocomplete-list div:before {
 
 .tf-single-template__three .tf-related-items-section .tf-slider-item .tf-meta-info {
   padding: 16px 24px 24px 24px;
-  background-color: #FDF9F3;
+  background-color: var(--tf-filling-background);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -13839,7 +13841,7 @@ div#tf-destinationautocomplete-list div:before {
 }
 
 .tf-single-template__three .tf-search-date-wrapper {
-  background: var(--tf-brand-lite);
+  background: var(--tf-filling-foreground);
   padding: 24px;
 }
 
@@ -14641,7 +14643,7 @@ div#tf-destinationautocomplete-list div:before {
 .page-template-tf-search__three .tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap {
   display: flex;
   flex-direction: row;
-  background: #FDF9F3;
+  background: var(--tf-filling-background);
   padding: 0 12px;
   width: 100%;
   align-items: center;
@@ -15076,7 +15078,7 @@ div#tf-destinationautocomplete-list div:before {
 
 .tf-archive-template__three .tf-available-archive-hetels-wrapper,
 .page-template-tf-search__three .tf-available-archive-hetels-wrapper {
-  background: var(--tf-brand-lite);
+  background: var(--tf-filling-foreground);
   margin-bottom: 56px;
 }
 
@@ -15099,7 +15101,7 @@ div#tf-destinationautocomplete-list div:before {
 
 .tf-archive-template__three .tf-available-archive-hetels-wrapper .tf-archive-available-rooms-head .tf-archive-ordering #tf-orderby,
 .page-template-tf-search__three .tf-available-archive-hetels-wrapper .tf-archive-available-rooms-head .tf-archive-ordering #tf-orderby {
-  background-color: #FDF9F3;
+  background-color: var(--tf-filling-background);
   color: var(--tf-text-paragraph);
   padding: 15px 36px 15px 15px;
   height: 100%;
