@@ -8655,9 +8655,21 @@ div#tf-destinationautocomplete-list div:before {
   margin-left: 8px;
 }
 
+.tf-archive-template__one .tf-search-right #tf__booking_sidebar .widget .tf-filter a.see-more {
+  margin-bottom: 0;
+}
+
 .tf-archive-template__one .tf-search-right #tf__booking_sidebar .widget .tf-filter a.see-less {
   display: none;
   text-decoration: none;
+}
+
+.tf-archive-template__one .tf-search-right #tf__booking_sidebar .widget .tf-map-preview {
+  line-height: 0;
+}
+
+.tf-archive-template__one .tf-search-right #tf__booking_sidebar .widget .tf-map-preview .tf-map-preview-content {
+  width: 100%;
 }
 
 .tf-single-template__two,

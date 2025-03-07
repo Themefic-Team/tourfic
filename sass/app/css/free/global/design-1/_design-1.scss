@@ -1069,11 +1069,22 @@
                             span{
                                 margin-left: 8px;
                             }
+                            &.see-more{
+                                margin-bottom: 0;
+                            }
+                            &.see-less{
+                                display: none;
+                                text-decoration: none;
+                            }
                         }
-                        a.see-less{
-                            display: none;
-                            text-decoration: none;
-                        }
+                        
+                    }
+
+                    .tf-map-preview{
+                        line-height: 0;
+                        .tf-map-preview-content{
+                            width: 100%;
+                        } 
                     }
                 }
             }
