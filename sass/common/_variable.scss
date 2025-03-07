@@ -1,11 +1,15 @@
 //colors
 $color-primary: var(--tf-primary);
-$color-secondary: var(--tf-secondary);
-$color-text: var(--tf-text);
-$color-heading: var(--tf-heading);
-$color-border: var(--tf-border);
-$color-light-bg: var(--tf-light-bg);
-$color-yellow-thin: var(--tf-yellow-thin);
+$color-brand-dark: var(--tf-brand-dark);
+$color-brand-lite: var(--tf-brand-lite);
+$color-heading: var(--tf-text-heading);
+$color-text: var(--tf-text-paragraph);
+$color-text-lite: var(--tf-text-lite);
+$color-border: var(--tf-border-default);
+$color-border-lite: var(--tf-border-lite);
+$color-filling-bg: var(--tf-filling-background);
+$color-filling-fg: var(--tf-filling-foreground);
+
 $color-box-shadow: var(--tf-box-shadow);
 $form-input-bg: var(--tf-form-input-bg);
 

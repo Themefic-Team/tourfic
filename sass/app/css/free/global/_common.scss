@@ -267,9 +267,9 @@ h3.section-heading {
         -ms-user-select: none;
         user-select: none;
         background-color: $color-white;
-        color: $color-secondary;
-        border-color: $color-secondary;
-        border: 1px solid $color-secondary;
+        color: $color-brand-dark;
+        border-color: $color-brand-dark;
+        border: 1px solid $color-brand-dark;
         border-radius: 50%;
         display: inline-flex;
         align-items: center;
@@ -299,9 +299,9 @@ h3.section-heading {
         -ms-user-select: none;
         user-select: none;
         background-color: $color-white;
-        color: $color-secondary;
-        border-color: $color-secondary;
-        border: 1px solid $color-secondary;
+        color: $color-brand-dark;
+        border-color: $color-brand-dark;
+        border: 1px solid $color-brand-dark;
         border-radius: 50%;
         display: inline-flex;
         align-items: center;
@@ -426,7 +426,7 @@ h3.section-heading {
             content: "";
             position: absolute;
             height: 2px;
-            background: $color-light-bg;
+            background: $color-brand-lite;
             width: 2px;
             left: 0;
             top: 0px;
@@ -700,7 +700,7 @@ h3.section-heading {
         }
     }
     .tf-review-progress-bar {
-        background: $color-light-bg;
+        background: $color-brand-lite;
         display: grid;
         grid-template-columns: calc(50% - 20px) calc(50% - 20px);
         column-gap: 40px;
@@ -732,7 +732,7 @@ h3.section-heading {
             .tf-p-bar {
                 width: 100%;
                 height: 7px;
-                background: $color-light-bg;
+                background: $color-brand-lite;
                 border-radius: 4px;
                 position: relative;
                 overflow: hidden;
@@ -785,7 +785,7 @@ h3.section-heading {
         display: grid;
         grid-template-columns: 56px calc(100% - 72px);
         column-gap: 16px;
-        background: $color-light-bg;
+        background: $color-brand-lite;
         padding: 25px 25px 35px;
         border-radius: 4px;
     }
@@ -933,7 +933,7 @@ h3.section-heading {
             color: $color-white;
             text-decoration: none;
             &:hover {
-                color: $color-secondary;
+                color: $color-brand-dark;
             }
         }
     }
@@ -1028,7 +1028,7 @@ li.tf-filter-item {
     align-items: center;
     padding: 10px 16px;
     height: 48px;
-    background: $color-light-bg;
+    background: $color-brand-lite;
     border: 1px solid $color-border;
     border-radius: 8px 8px 0px 0px;
     justify-content: space-between;
@@ -1085,10 +1085,10 @@ li.tf-filter-item {
                 color: $color-white;
                 transition: .3s all ease;
                 &:hover{
-                    background: $color-secondary;
+                    background: $color-brand-dark;
                 }
                 &.tf-refund-cancel{
-                    background: $color-light-bg;
+                    background: $color-brand-lite;
                     color: $color-text;
                     &:hover{
                         background: $color-primary;
@@ -1270,7 +1270,7 @@ li.tf-filter-item {
             width: auto;
             flex-grow: 1;
             margin: 0 8px;
-            background-color: $color-light-bg;
+            background-color: $color-brand-lite;
             padding: 0;
             border: 2px solid rgba(118, 118, 118, 0.3);
 

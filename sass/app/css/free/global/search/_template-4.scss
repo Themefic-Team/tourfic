@@ -47,7 +47,7 @@
           font-size: 0.875rem;
         }
         &:hover {
-          background-color: $color-secondary;
+          background-color: $color-brand-dark;
           box-shadow: 0px 3px 0px 0px $color-primary;
         }
         &::after {
@@ -156,7 +156,7 @@
               margin-right: 8px;
             }
             &:hover {
-              background: $color-light-bg;
+              background: $color-brand-lite;
               color: $color-heading;
               text-overflow: ellipsis;
               overflow: hidden;
@@ -434,7 +434,7 @@
             }
             svg {
               &:hover {
-                fill: $color-secondary;
+                fill: $color-brand-dark;
               }
               @media #{$max1024} {
                 width: 28px;
@@ -620,8 +620,8 @@
         min-width: 160px;
       }
       &:hover {
-        background: $color-secondary;
-        border-color: $color-secondary;
+        background: $color-brand-dark;
+        border-color: $color-brand-dark;
         color: $color-white;
         path{
           fill: $color-white;
