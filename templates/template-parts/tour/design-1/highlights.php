@@ -1,7 +1,7 @@
 <?php 
 if($highlights){ ?>
 <!-- Tour Highlights  -->
-<div class="tf-highlights-wrapper tf-mb-50 tf-box tf-template-section">
+<div class="tf-highlights-wrapper tf-mb-56 tf-box tf-template-section">
     <div class="tf-highlights-inner tf-flex">
         <div class="tf-highlights-icon">
             <img src="<?php echo esc_url(TF_ASSETS_APP_URL).'images/tour-highlights.png' ?>" alt="<?php esc_html_e( 'Highlights Icon', 'tourfic' ); ?>" />

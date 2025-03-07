@@ -1807,10 +1807,6 @@
   margin-bottom: 0px;
 }
 
-.single-tf_tours .tf-single-template__three .tf-include-exclude-wrapper {
-  margin-bottom: 16px;
-}
-
 @media only screen and (max-width: 768px) {
   .single-tf_tours .tf-single-template__three .tf-include-exclude-wrapper {
     padding-left: 16px;
@@ -2352,7 +2348,6 @@
 
 .single-tf_tours .tf-single-template__three .tf-itinerary-wrapper .tf-itinerary-wrapper .tf-itinerary-title span.tf-head-title span.tf-itinerary-time {
   padding: 8px 16px;
-  background: var(--tf-light-bg);
   margin-right: 16px;
 }
 
@@ -2507,8 +2502,8 @@
 }
 
 .single-tf_tours .tf-single-template__three .tf-itinerary-map {
-  margin-top: 32px;
-  margin-bottom: 48px;
+  margin-top: 16px;
+  margin-bottom: 32px;
 }
 
 @media only screen and (max-width: 768px) {
@@ -2522,6 +2517,10 @@
   .single-tf_tours .tf-single-template__three .tf-itinerary-map #tour-location {
     height: 220px;
   }
+}
+
+.single-tf_tours .tf-single-template__three .tf-itinerary-map#tf-map {
+  height: auto;
 }
 
 .single-tf_tours .tf-single-template__one .tf-suggestion-wrapper .owl-nav button {

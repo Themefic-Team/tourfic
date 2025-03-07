@@ -858,6 +858,10 @@ a {
   margin-bottom: 50px;
 }
 
+.tf-mb-56 {
+  margin-bottom: 56px;
+}
+
 .sp-20 {
   padding: 20px 0;
 }
@@ -8851,7 +8855,8 @@ div#tf-destinationautocomplete-list div:before {
 
 .tf-single-template__two .tf-hero-gallery .tf-gallery-featured {
   position: relative;
-  margin-bottom: 10px;
+  line-height: 0;
+  margin-bottom: 18px;
 }
 
 .tf-single-template__two .tf-hero-gallery .tf-gallery-featured > img {
@@ -8951,6 +8956,7 @@ div#tf-destinationautocomplete-list div:before {
 .tf-single-template__two .tf-hero-gallery .tf-gallery {
   display: flex;
   gap: 10px;
+  line-height: 0;
 }
 
 .tf-single-template__two .tf-hero-gallery .tf-gallery a {
@@ -12698,7 +12704,7 @@ div#tf-destinationautocomplete-list div:before {
 
 .tf-single-template__three .tf-related-items-section {
   background-color: var(--tf-yellow-thin);
-  padding: 80px 0px;
+  padding: 56px 0px;
 }
 
 @media only screen and (max-width: 768px) {
@@ -13963,9 +13969,9 @@ div#tf-destinationautocomplete-list div:before {
 }
 
 .tf-single-template__three .tf_tours_booking .tf-form-title h3.tf-person-info-title {
-  color: var(--tf-text);
+  color: var(--tf-heading);
   font-size: 2rem;
-  font-weight: 700;
+  font-weight: 400;
   margin: 0;
 }
 
@@ -14171,17 +14177,14 @@ div#tf-destinationautocomplete-list div:before {
   color: var(--tf-primary);
 }
 
-.tf-single-template__three .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper {
-  padding: 0 32px;
-}
-
 .tf-single-template__three .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-overview-description p {
   margin: 0;
   padding: 0;
 }
 
 @media only screen and (max-width: 768px) {
-  .tf-single-template__three .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-overview-description .tf-short-description {
+  .tf-single-template__three .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-overview-description s
+.tf-short-description {
     font-size: 0.875rem;
   }
 }
@@ -14369,7 +14372,6 @@ div#tf-destinationautocomplete-list div:before {
   gap: 24px;
   padding: 32px 0;
   background: var(--tf-yellow-thin);
-  margin-bottom: 16px;
   border-radius: 0px;
   box-shadow: none;
 }

@@ -128,7 +128,6 @@
         }
         &__three{
             .tf-include-exclude-wrapper {
-                margin-bottom: 16px;
                 @media #{$max768}{
                     padding-left: 16px;
                     padding-right: 16px;

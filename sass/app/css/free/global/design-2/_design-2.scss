@@ -161,7 +161,8 @@
             }
             .tf-gallery-featured {
                 position: relative;
-                margin-bottom: 10px;
+                line-height: 0;
+                margin-bottom: 18px;
                 >img{
                     min-height: 474px;
                     max-height: 474px;
@@ -240,6 +241,7 @@
             .tf-gallery{
                 display: flex;
                 gap: 10px;
+                line-height: 0;
                 a {
                     width: 20%;
                     float: left;

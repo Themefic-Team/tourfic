@@ -383,7 +383,6 @@
                         }
                         span.tf-itinerary-time {
                             padding: 8px 16px;
-                            background: $color-light-bg;
                             margin-right: 16px;
                         }
                     }
@@ -519,8 +518,8 @@
             }
             
             .tf-itinerary-map{
-                margin-top: 32px;
-                margin-bottom: 48px;
+                margin-top: 16px;
+                margin-bottom: 32px;
                 
                 @media #{$max768}{
                     margin-top: 12px;
@@ -531,6 +530,9 @@
                     @media #{$max768}{
                         height: 220px;
                     }
+                }
+                &#tf-map{
+                    height: auto;
                 }
             }
         }

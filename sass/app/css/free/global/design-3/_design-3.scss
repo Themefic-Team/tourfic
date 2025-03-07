@@ -1758,7 +1758,7 @@
         // Related Section
         .tf-related-items-section{
             background-color: $color-yellow-thin;
-            padding: 80px 0px;
+            padding: 56px 0px;
 
             @media #{$max768}{
                 padding: 32px;
@@ -2782,9 +2782,9 @@
         .tf_tours_booking{
             .tf-form-title{
                 h3.tf-person-info-title{
-                    color: $color-text;
+                    color: $color-heading;
                     font-size: 2rem;
-                    font-weight: 700;
+                    font-weight: 400;
                     margin: 0;
                     @media #{$max1024}{
                         font-size: 1.5rem;
@@ -2975,12 +2975,11 @@
                         }
                     }
                     .tf-overview-wrapper {
-                        padding: 0 32px;
                         .tf-overview-description {
                             p {
                                 margin: 0;
                                 padding: 0;
-                            }
+                            }s
                             .tf-short-description{
                                 @media #{$max768}{
                                     font-size: 0.875rem;
@@ -3129,7 +3128,6 @@
                             gap: 24px;
                             padding: 32px 0;
                             background: $color-yellow-thin;
-                            margin-bottom: 16px;
                             border-radius: 0px;
                             box-shadow: none;
                             @media #{$max1024}{
