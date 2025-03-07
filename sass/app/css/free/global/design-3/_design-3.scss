@@ -31,7 +31,7 @@
             outline: none;
         }
         .tf-section {
-            background: $color-yellow-thin;
+            background: $color-filling-fg;
             padding: 32px;
             margin-bottom: 32px;
         }
@@ -49,7 +49,7 @@
             }
             /* Track */
             &::-webkit-scrollbar-track {
-                background: $color-light-bg;
+                background: $color-brand-lite;
             }
             /* Handle */
             &::-webkit-scrollbar-thumb {
@@ -217,7 +217,7 @@
             }
         }
         .tf-booking-form-wrapper {
-            background: $color-light-bg;
+            background: $color-brand-lite;
             @media #{$max768}{
                 display: none;
             }
@@ -339,7 +339,7 @@
             }
         }
         .tf-available-rooms-wrapper {
-            background: $color-yellow-thin;
+            background: $color-filling-fg;
             padding: 32px;
             margin-bottom: 32px;
             .tf-room-filter{
@@ -369,11 +369,11 @@
                             .tf-checkmark{
                                 border-radius: 4px;
                                 border: 1px solid $color-primary;
-                                background: $color-light-bg;
+                                background: $color-brand-lite;
                                 height: 16px;
                                 width: 16px;
                                 &:hover{
-                                    border-color: $color-secondary;
+                                    border-color: $color-brand-dark;
                                 }
                                 &::after{
                                     top: 1px;
@@ -664,7 +664,7 @@
                                 background-size: 10px;
                                 background-position: 80% 49%;
                                 text-align: center;
-                                background-color: $color-light-bg;
+                                background-color: $color-brand-lite;
                                 border: none;
                                 cursor: pointer;
                                 font-weight: 700;
@@ -766,7 +766,7 @@
             }
         
             &.tf-archive-right{
-                background-color: $color-yellow-thin;
+                background-color: $color-filling-fg;
                 padding: 32px;
                 width: 30%;
                 margin-bottom: 56px;
@@ -831,7 +831,7 @@
                                     height: 16px;
                                     width: 16px;
                                     &:hover{
-                                        border-color: $color-secondary;
+                                        border-color: $color-brand-dark;
                                     }
                                     &::after{
                                         top: 1px;
@@ -886,7 +886,7 @@
                     }
                 }
                 .al-range-slider__knob {
-                    background: $color-light-bg;
+                    background: $color-brand-lite;
                     height: 24px;
                     width: 24px;
                     box-shadow: none;
@@ -942,7 +942,7 @@
             }
             .tf-popup-inner {
                 width: 1130px;
-                background: $color-light-bg;
+                background: $color-brand-lite;
                 padding: 24px;
                 max-height: 695px;
                 max-width: 80vw;
@@ -988,7 +988,7 @@
                 }
 
                 .tf-popup-body::-webkit-scrollbar-track {
-                    background-color: $color-light-bg;
+                    background-color: $color-brand-lite;
                 }
 
                 .tf-popup-close {
@@ -999,7 +999,7 @@
                     height: 30px;
                     width: 30px;
                     border-radius: 50%;
-                    background: $color-light-bg;
+                    background: $color-brand-lite;
                     display: flex;
                     align-items: center;
                     justify-content: center;
@@ -1051,7 +1051,7 @@
                     padding-left: 0px;
                     padding-right: 0px;
                     border-radius: 20px;
-                    background: $color-light-bg;
+                    background: $color-brand-lite;
                 }
                 .acr-dec,
                 .acr-inc{
@@ -1089,7 +1089,7 @@
         &__three{
             #tf-ask-modal{
                 .tf-aq-outer{
-                    background: $color-light-bg;
+                    background: $color-brand-lite;
                     border-radius: 0px;
                     h4{
                         color: $color-heading;
@@ -1104,7 +1104,7 @@
                         border: 1px solid $color-border;
                         box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
                         color: $color-text;
-                        background-color: $color-light-bg;
+                        background-color: $color-brand-lite;
                         font-size: 1rem;
                         height: 45px;
                         padding: 12px 14px;;
@@ -1116,7 +1116,7 @@
                     textarea{
                         border: 1px solid $color-border;
                         box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
-                        background-color: $color-light-bg;
+                        background-color: $color-brand-lite;
                         color: $color-text;
                         font-size: 1rem;
                         font-weight: 400;
@@ -1141,7 +1141,7 @@
                         position: static;
                     }
                     &:hover{
-                        background: $color-secondary;
+                        background: $color-brand-dark;
                     }
                 }
             }
@@ -1592,7 +1592,7 @@
                 }
             }
             .tf-travel-itinerary-wrapper{
-                background-color: $color-light-bg;
+                background-color: $color-brand-lite;
             }
         }
     }
@@ -1738,7 +1738,7 @@
                     gap: 16px;
                     &>div {
                         padding: 24px;
-                        background-color: $color-light-bg;
+                        background-color: $color-brand-lite;
                     }
                     .tf-policy-title {
                         min-width: 316px;
@@ -1757,8 +1757,8 @@
         }
         // Related Section
         .tf-related-items-section{
-            background-color: $color-yellow-thin;
             padding: 56px 0px;
+            background-color: $color-filling-fg;
 
             @media #{$max768}{
                 padding: 32px;
@@ -1912,7 +1912,7 @@
 
         // Inquery Box
         .tf-send-inquiry{
-            background: $color-yellow-thin;
+            background: $color-filling-fg;
             display: flex;
             padding: 30px;
             flex-direction: column;
@@ -1965,7 +1965,7 @@
             font-size: 1rem;
             font-weight: 700;
             line-height: 1.5;
-            background: $color-light-bg;
+            background: $color-brand-lite;
             width: 100%;
             border: none;
             padding: 12px 0;
@@ -2026,7 +2026,7 @@
             .tf-progress-bar {
                 width: 100%;
                 height: 12px;
-                background: $color-light-bg;
+                background: $color-brand-lite;
                 border-radius: 50px;
                 display: flex;
             }
@@ -2052,7 +2052,7 @@
             }
         }
         .tf-review-form-wrapper{
-            background: $color-yellow-thin;
+            background: $color-filling-fg;
             padding: 24px;
             display: none;
             flex-direction: column;
@@ -2666,7 +2666,7 @@
         }
 
         .tf-search-date-wrapper {
-            background: $color-light-bg;
+            background: $color-brand-lite;
             padding: 24px;
             .tf-booking-date-wrap {
                 display: flex;
@@ -2714,7 +2714,7 @@
                 padding-left: 0px;
                 padding-right: 0px;
                 border-radius: 20px;
-                background: $color-light-bg;
+                background: $color-brand-lite;
             }
 
             form {
@@ -2841,7 +2841,7 @@
                     transition: .3s all ease;
                     border-radius: 0px;
                     &:hover{
-                        background-color: $color-secondary;
+                        background-color: $color-brand-dark;
                     }
                 }
             }
@@ -2860,8 +2860,8 @@
             display: none;
             transition: .3s all ease;
             &:hover{
-                background-color: $color-secondary;
-                border-color: $color-secondary;
+                background-color: $color-brand-dark;
+                border-color: $color-brand-dark;
             }
             @media #{$max1024}{
                 display: block;
@@ -2893,7 +2893,7 @@
                                     }
                                 }
                                 &.done{
-                                    background-color: $color-light-bg;
+                                    background-color: $color-brand-lite;
                                 }
                             }
                         }
@@ -2920,7 +2920,7 @@
                                 input[type="textarea"],
                                 input[type="date"],
                                 select{
-                                    background: $color-light-bg;
+                                    background: $color-brand-lite;
                                 }
                             }
                         }
@@ -2930,7 +2930,7 @@
         }
 
         .tf-single-tour-extra .tf_quantity-acrselection .quanity-acr-fields {
-            background-color: $color-light-bg;
+            background-color: $color-brand-lite;
             padding: 15px 40px;
             margin-bottom: 10px;
             margin-left: 23px;
@@ -2940,7 +2940,7 @@
             .tf-details {
                 .tf-details-left {
                     .tf-details-menu {
-                        background: $color-yellow-thin;
+                        background: $color-filling-fg;
                         padding: 16px 30px;
                         position: sticky;
                         left: 0;
@@ -3053,7 +3053,7 @@
                                 padding: 24px;
                                 display: flex;
                                 gap: 16px;
-                                background: $color-yellow-thin;
+                                background: $color-filling-fg;
                                 @media #{$max1024}{
                                     padding: 16px;
                                     gap: 8px;
@@ -3092,7 +3092,7 @@
                                 padding: 24px;
                                 display: flex;
                                 gap: 16px;
-                                background: $color-yellow-thin;
+                                background: $color-filling-fg;
                                 @media #{$max1024}{
                                     padding: 16px;
                                     gap: 8px;
@@ -3127,7 +3127,8 @@
                             display: flex;
                             gap: 24px;
                             padding: 32px 0;
-                            background: $color-yellow-thin;
+                            background: $color-filling-fg;
+                            margin-bottom: 16px;
                             border-radius: 0px;
                             box-shadow: none;
                             @media #{$max1024}{
@@ -3339,7 +3340,7 @@
                                 left: 0;
                                 top: 100%;
                                 width: 250px;
-                                background: $color-light-bg;
+                                background: $color-brand-lite;
                                 box-shadow: 0px 20px 40px 0px rgba(0, 0, 0, 0.10);
                                 z-index: 999;
                                 max-height: 200px;
@@ -3358,7 +3359,7 @@
                                     border-radius: 4px;
                                 }
                                 &::-webkit-scrollbar-track {
-                                    background-color: $color-light-bg;
+                                    background-color: $color-brand-lite;
                                 }
                                 div{
                                     padding: 10px;
@@ -3372,7 +3373,7 @@
                                         margin-bottom: 0px;
                                     }
                                     &:hover{
-                                        background: $color-light-bg;
+                                        background: $color-brand-lite;
                                     }
                                     &::before{
                                         display: none;
@@ -3598,7 +3599,7 @@
             display: block;
         }
         .tf-available-archive-hetels-wrapper {
-            background: $color-light-bg;
+            background: $color-brand-lite;
             margin-bottom: 56px;
             @media #{$max768}{
                 padding: 16px;
@@ -3835,7 +3836,7 @@
                     margin-top: 30px;
                     .page-numbers{
                         border: 0.5px solid $color-gray;
-                        background: $color-light-bg;
+                        background: $color-brand-lite;
                         height: 40px;
                         color: $color-gray;
                         font-size: 1rem;
@@ -3937,7 +3938,7 @@
                         height: 24px;
                         border-radius: 12px;
                         border: 1.5px solid $color-gray;
-                        background: $color-light-bg;
+                        background: $color-brand-lite;
                         box-shadow: none;
                         &:hover {
                             border-color: none;
@@ -3986,7 +3987,7 @@
                             display: inline-block;
                             border-radius: 2px;
                             border: 0.794px solid $color-primary;
-                            background: $color-light-bg;
+                            background: $color-brand-lite;
                             height: 12px;
                             width: 12px;
                             margin-right: 8px;

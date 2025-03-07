@@ -24,7 +24,7 @@
         @media #{$max768}{
             width: 100%;
         }
-        background-color: $color-light-bg;
+        background-color: $color-brand-lite;
         border-radius: 24px;
         position: relative;
         img{
@@ -230,7 +230,7 @@
                                     position: absolute;
                                     top: 0px;
                                     left: 0px;
-                                    background-color: $color-light-bg;
+                                    background-color: $color-brand-lite;
                                     border-radius: 5px;
                                     border: 1px solid $color-gray;
                                     cursor: pointer;

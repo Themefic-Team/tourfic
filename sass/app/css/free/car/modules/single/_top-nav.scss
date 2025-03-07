@@ -48,7 +48,7 @@
                         border: 0px solid;
                         transition: .3s all ease;
                         &:hover{
-                            background: $color-secondary;
+                            background: $color-brand-dark;
                         }
                     }
                 }
@@ -85,7 +85,7 @@
                     }
 
                     &::-webkit-scrollbar-track {
-                        background: $color-light-bg;
+                        background: $color-brand-lite;
                     }
                     &::-webkit-scrollbar-thumb {
                         background-color: $scrollbar-thumb-color;

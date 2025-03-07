@@ -86,7 +86,7 @@
                                 max-height: 200px;
                                 overflow: auto;
                                 border-radius: 4px;
-                                background: $color-light-bg;
+                                background: $color-brand-lite;
                                 box-shadow: 0px 4px 16px 0px rgba(2, 28, 53, 0.20);
                                 padding: 2px;
                                 scrollbar-width: thin;
@@ -119,7 +119,7 @@
                                         margin-bottom: 0px;
                                     }
                                     &:hover{
-                                        background-color: $color-light-bg;
+                                        background-color: $color-brand-lite;
                                     }
                                 }
                             }
@@ -147,7 +147,7 @@
                         border: 0px solid;
                         transition: .3s all ease;
                         &:hover{
-                            background: $color-secondary;
+                            background: $color-brand-dark;
                         }
                         &.tf-partial-button{
                             border: 1px solid $color-primary;
@@ -160,8 +160,8 @@
                                 }
                             }
                             &:hover{
-                                border: 1px solid $color-secondary;
-                                background: $color-secondary;
+                                border: 1px solid $color-brand-dark;
+                                background: $color-brand-dark;
                                 color: $color-white;
                                 svg{
                                     path{
@@ -219,7 +219,7 @@
                                     }
                                     span.paid{
                                         border-radius: 2px;
-                                        background: $color-secondary;
+                                        background: $color-brand-dark;
                                         color: $color-white;
                                         font-size: 0.75rem;
                                         font-weight: 400;
@@ -263,7 +263,7 @@
 
             .tf-mobile-booking-btn{
                 display: none;
-                background: $color-light-bg;
+                background: $color-brand-lite;
                 padding: 8px;
                 @media #{$max768}{
                     display: block;
@@ -285,7 +285,7 @@
                     border: 0px solid;
                     transition: .3s all ease;
                     &:hover{
-                        background: $color-secondary;
+                        background: $color-brand-dark;
                     }
                 }
             }

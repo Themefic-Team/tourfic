@@ -45,13 +45,13 @@
                 }
             }
             .tf-highlight-wrapper{
-                background-color: $color-yellow-thin;
+                background-color: $color-filling-fg;
             }
             .tf-travel-itinerary-wrapper{
-                background-color: $color-yellow-thin;
+                background-color: $color-filling-fg;
             }
             .tf-suggestion-wrapper{
-                background-color: $color-yellow-thin;
+                background-color: $color-filling-fg;
             }
 
             .tf-faq-sec-title {
@@ -666,7 +666,7 @@
                                 cursor: pointer;
                                 transition: .3s all ease;
                                 &:hover{
-                                    background: $color-secondary;
+                                    background: $color-brand-dark;
                                 }
                             }
                         }
@@ -677,7 +677,7 @@
                         justify-content: end;
                         button{
                             border-radius: 8px;
-                            background: $color-light-bg;
+                            background: $color-brand-lite;
                             padding: 16px 32px;
                             border: 0px solid;
                             color: $color-text;
@@ -690,7 +690,7 @@
                             color: $color-white;
                             transition: .3s all ease;
                             &:hover{
-                                background: $color-secondary;
+                                background: $color-brand-dark;
                             }
                         }
                     }
@@ -808,7 +808,7 @@
                         max-height: 200px;
                         overflow: auto;
                         border-radius: 4px;
-                        background: $color-light-bg;
+                        background: $color-brand-lite;
                         padding: 2px;
                         box-shadow: 0px 4px 16px 0px rgba(2, 28, 53, 0.20);
                         scrollbar-width: thin;
@@ -982,7 +982,7 @@
                 cursor: pointer;
                 transition: .3s all ease;
                 &:hover{
-                    background: $color-secondary;
+                    background: $color-brand-dark;
                 }
                 i{
                     margin-left: 8px;

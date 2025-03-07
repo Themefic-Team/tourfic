@@ -302,7 +302,7 @@
                     text-align: center;
                     cursor: pointer;
                     @include transition();
-                    border: 0.5px solid $color-light-bg;
+                    border: 0.5px solid $color-brand-lite;
                     box-shadow: 0px 4px 30px 0px rgba(255, 237, 225, 0.40);
 
                     i {
@@ -311,12 +311,12 @@
 
                     &:hover {
                         border-radius: 4px;
-                        background: $color-light-bg;
+                        background: $color-brand-lite;
                         box-shadow: 0px 4px 30px 0px rgba(255, 237, 225, 0.40);
                     }
 
                     &.active {
-                        background-color: $color-light-bg;
+                        background-color: $color-brand-lite;
 
                         svg path {
                             stroke: $color-primary;
@@ -362,7 +362,7 @@
 
         .tf-archive-hotel {
             border-radius: 4px;
-            background-color: $color-light-bg;
+            background-color: $color-brand-lite;
             @include flexbox();
             @include transition();
 
@@ -835,7 +835,7 @@
 
     /* Template - Design 2 */
     .tf-available-room {
-        background: $color-light-bg;
+        background: $color-brand-lite;
         display: flex;
         .tf-available-room-gallery {
             display: flex;
@@ -881,7 +881,7 @@
                     background: $color-primary;
                 }
                 span.tf-available-labels-featured {
-                    background: $color-secondary;
+                    background: $color-brand-dark;
                 }
                 span.tf-available-labels-visited {
                     background: $color-success;
@@ -1047,7 +1047,7 @@
                 transition: .3s all ease;
                 border-radius: 0px;
                 &:hover{
-                    background-color: $color-secondary;
+                    background-color: $color-brand-dark;
                 }
             }
             a.availability {
@@ -1215,7 +1215,7 @@
                     align-items: center;
                 }
                 .page-numbers.current{
-                    background: $color-light-bg;
+                    background: $color-brand-lite;
                     color: $color-text;
                 }
             }

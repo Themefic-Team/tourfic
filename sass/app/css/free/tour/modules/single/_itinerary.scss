@@ -327,7 +327,7 @@
                     line-height: 1.5;
                     word-wrap: break-word;
                     border: none;
-                    background: $color-light-bg;
+                    background: $color-brand-lite;
                     min-width: 211px;
                     height: fit-content;
                     padding: 12px;
@@ -342,7 +342,7 @@
                 .tf-itinerary-wrapper{
                     padding: 0px;
                     .tf-single-itinerary {
-                        background: $color-yellow-thin;
+                        background: $color-filling-fg;
                         padding: 16px 32px;
                         display: flex;
                         flex-direction: column;
@@ -383,6 +383,7 @@
                         }
                         span.tf-itinerary-time {
                             padding: 8px 16px;
+                            background: $color-brand-lite;
                             margin-right: 16px;
                         }
                     }

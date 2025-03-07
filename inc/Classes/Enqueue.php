@@ -1141,36 +1141,84 @@ class Enqueue {
 
 		$design_default = [
 			'design-1' => [
-				'default' => [
-					'primary'    => '#0E3DD8',
-					'secondary'  => '#003C7A',
-					'text'       => '#686E7A',
-					'heading'    => '#060D1C',
-				]
+				'brand' => array(
+					'default' => '#0E3DD8',
+					'dark' => '#0A2B99',
+					'lite' => '#C9D4F7',
+				),
+				'text'  => array(
+					'heading' => '#1C2130',
+					'paragraph' => '#494D59',
+					'lite' => '#F3F5FD',
+				),
+				'border'  => array(
+					'default' => '#16275F',
+					'lite' => '#D1D7EE',
+				),
+				'filling'  => array(
+					'background' => '#ffffff',
+					'foreground' => '#F5F7FF',
+				),
 			],
 			'design-2' => [
-				'default' => [
-					'primary'    => '#B58E53',
-					'secondary'  => '#917242',
-					'text'       => '#99948D',
-					'heading'    => '#595349',
-				]
+				'brand'  => array(
+					'default' => '#B58E53',
+					'dark' => '#917242',
+					'lite' => '#FAEEDC',
+				),
+				'text'  => array(
+					'heading' => '#30281C',
+					'paragraph' => '#595349',
+					'lite' => '#FDF9F3',
+				),
+				'border'  => array(
+					'default' => '#5F4216',
+					'lite' => '#EEE2D1',
+				),
+				'filling'  => array(
+					'background' => '#ffffff',
+					'foreground' => '#FDF9F3',
+				),
 			],
 			'design-3' => [
-				'default' => [
-					'primary'    => '#FF6B00',
-					'secondary'  => '#C15100',
-					'text'       => '#6E655E',
-					'heading'    => '#1A0B00',
-				]
+				'brand'  => array(
+					'default' => '#F97415',
+					'dark' => '#C75605',
+					'lite' => '#FDDCC3',
+				),
+				'text'  => array(
+					'heading' => '#30241C',
+					'paragraph' => '#595049',
+					'lite' => '#FDF7F3',
+				),
+				'border'  => array(
+					'default' => '#5F3416',
+					'lite' => '#EEDDD1',
+				),
+				'filling'  => array(
+					'background' => '#ffffff',
+					'foreground' => '#FFF9F5',
+				),
 			],
 			'design-4' => [
-				'default' => [
-					'primary'    => '#003162',
-					'secondary'  => '#0054A8',
-					'text'       => '#000',
-					'heading'    => '#000',
-				]
+				'brand'  => array(
+					'default' => '#003061',
+					'dark' => '#002952',
+					'lite' => '#C2E0FF',
+				),
+				'text'  => array(
+					'heading' => '#1C2630',
+					'paragraph' => '#495159',
+					'lite' => '#F3F8FD',
+				),
+				'border'  => array(
+					'default' => '#163A5F',
+					'lite' => '#D1DFEE',
+				),
+				'filling'  => array(
+					'background' => '#ffffff',
+					'foreground' => '#F5FAFF',
+				),
 			],
 			'custom' => []
 		];
@@ -1180,30 +1228,38 @@ class Enqueue {
 				
 				$tf_key_split = explode('-', $key);
 				$tf_id = end($tf_key_split);
-				$tf_design_data = ! empty( Helper::tf_data_types( Helper::tfopt( "tf-d{$tf_id}" ) ) ) ? Helper::tf_data_types( Helper::tfopt( "tf-d{$tf_id}" ) ) : [];
+				$tf_brand_data = ! empty( Helper::tf_data_types( Helper::tfopt( "tf-d{$tf_id}-brand" ) ) ) ? Helper::tf_data_types( Helper::tfopt( "tf-d{$tf_id}-brand" ) ) : [];
+				$tf_text_data = ! empty( Helper::tf_data_types( Helper::tfopt( "tf-d{$tf_id}-text" ) ) ) ? Helper::tf_data_types( Helper::tfopt( "tf-d{$tf_id}-text" ) ) : [];
+				$tf_border_data = ! empty( Helper::tf_data_types( Helper::tfopt( "tf-d{$tf_id}-border" ) ) ) ? Helper::tf_data_types( Helper::tfopt( "tf-d{$tf_id}-border" ) ) : [];
+				$tf_filling_data = ! empty( Helper::tf_data_types( Helper::tfopt( "tf-d{$tf_id}-filling" ) ) ) ? Helper::tf_data_types( Helper::tfopt( "tf-d{$tf_id}-filling" ) ) : [];
 
-				$tf_design_primary = ! empty( $tf_design_data['primary'] ) ? $tf_design_data['primary'] : $value['default']['primary'];
-				$tf_design_secondary = ! empty( $tf_design_data['secondary'] ) ? $tf_design_data['secondary'] : $value['default']['secondary'];
-				$tf_design_text = ! empty( $tf_design_data['text'] ) ? $tf_design_data['text'] : $value['default']['text'];
-				$tf_design_heading = ! empty( $tf_design_data['heading'] ) ? $tf_design_data['heading'] : $value['default']['heading'];
-				$tf_design_light_bg = ! empty( $tf_design_data['light-bg'] ) ? $tf_design_data['light-bg'] : '#faeedc';
-				$tf_design_highlights_bg = ! empty( $tf_design_data['highlights-bg'] ) ? $tf_design_data['highlights-bg'] : '#FCF4E8';
-				$tf_design_form_input_bg = ! empty( $tf_design_data['form-input-bg'] ) ? $tf_design_data['form-input-bg'] : '#F3F7FA';
-				$tf_design_box_shadow = ! empty( $tf_design_data['box-shadow'] ) ? $tf_design_data['box-shadow'] : '#e0e8ee52';
-				$tf_design_border_color = ! empty( $tf_design_data['border-color'] ) ? $tf_design_data['border-color'] : '#ddd';
+				$tf_brand_default = ! empty( $tf_brand_data['default'] ) ? $tf_brand_data['default'] : $value['brand']['default'];
+				$tf_brand_dark = ! empty( $tf_brand_data['dark'] ) ? $tf_brand_data['dark'] : $value['brand']['dark'];
+				$tf_brand_lite = ! empty( $tf_brand_data['lite'] ) ? $tf_brand_data['lite'] : $value['brand']['lite'];
+				$tf_text_heading = ! empty( $tf_text_data['heading'] ) ? $tf_text_data['heading'] : $value['text']['heading'];
+				$tf_text_paragraph = ! empty( $tf_text_data['paragraph'] ) ? $tf_text_data['paragraph'] : $value['text']['paragraph'];
+				$tf_text_lite = ! empty( $tf_text_data['lite'] ) ? $tf_text_data['lite'] : $value['text']['lite'];
+				$tf_border_default = ! empty( $tf_border_data['default'] ) ? $tf_border_data['default'] : $value['border']['default'];
+				$tf_border_lite = ! empty( $tf_border_data['lite'] ) ? $tf_border_data['lite'] : $value['border']['lite'];
+				$tf_filling_background = ! empty( $tf_filling_data['background'] ) ? $tf_filling_data['background'] : $value['filling']['background'];
+				$tf_filling_foreground = ! empty( $tf_filling_data['foreground'] ) ? $tf_filling_data['foreground'] : $value['filling']['foreground'];
 				
 			}else if('custom' === $key && $color_palette_template === $key){
-				$tf_design_data = ! empty( Helper::tf_data_types( Helper::tfopt( "tf-{$key}" ) )) ? Helper::tf_data_types( Helper::tfopt( "tf-{$key}" ) ): [];
-				
-				$tf_design_primary = ! empty( $tf_design_data['primary'] ) ? $tf_design_data['primary'] : '';
-				$tf_design_secondary = ! empty( $tf_design_data['secondary'] ) ? $tf_design_data['secondary'] : '';
-				$tf_design_text = ! empty( $tf_design_data['text'] ) ? $tf_design_data['text'] : '';
-				$tf_design_heading = ! empty( $tf_design_data['heading'] ) ? $tf_design_data['heading'] : '';
-				$tf_design_light_bg = ! empty( $tf_design_data['light-bg'] ) ? $tf_design_data['light-bg'] : '';
-				$tf_design_highlights_bg = ! empty( $tf_design_data['highlights-bg'] ) ? $tf_design_data['highlights-bg'] : '';
-				$tf_design_form_input_bg = ! empty( $tf_design_data['form-input-bg'] ) ? $tf_design_data['form-input-bg'] : '';
-				$tf_design_box_shadow = ! empty( $tf_design_data['box-shadow'] ) ? $tf_design_data['box-shadow'] : '';
-				$tf_design_border_color = ! empty( $tf_design_data['border-color'] ) ? $tf_design_data['border-color'] : '';
+				$tf_brand_data = ! empty( Helper::tf_data_types( Helper::tfopt( "tf-{$key}-brand" ) ) ) ? Helper::tf_data_types( Helper::tfopt( "tf-{$key}-brand" ) ) : [];
+				$tf_text_data = ! empty( Helper::tf_data_types( Helper::tfopt( "tf-{$key}-text" ) ) ) ? Helper::tf_data_types( Helper::tfopt( "tf-{$key}-text" ) ) : [];
+				$tf_border_data = ! empty( Helper::tf_data_types( Helper::tfopt( "tf-{$key}-border" ) ) ) ? Helper::tf_data_types( Helper::tfopt( "tf-{$key}-border" ) ) : [];
+				$tf_filling_data = ! empty( Helper::tf_data_types( Helper::tfopt( "tf-{$key}-filling" ) ) ) ? Helper::tf_data_types( Helper::tfopt( "tf-{$key}-filling" ) ) : [];
+
+				$tf_brand_default = ! empty( $tf_brand_data['default'] ) ? $tf_brand_data['default'] : '';
+				$tf_brand_dark = ! empty( $tf_brand_data['dark'] ) ? $tf_brand_data['dark'] : '';
+				$tf_brand_lite = ! empty( $tf_brand_data['lite'] ) ? $tf_brand_data['lite'] : '';
+				$tf_text_heading = ! empty( $tf_text_data['heading'] ) ? $tf_text_data['heading'] : '';
+				$tf_text_paragraph = ! empty( $tf_text_data['paragraph'] ) ? $tf_text_data['paragraph'] : '';
+				$tf_text_lite = ! empty( $tf_text_data['lite'] ) ? $tf_text_data['lite'] : '';
+				$tf_border_default = ! empty( $tf_border_data['default'] ) ? $tf_border_data['default'] : '';
+				$tf_border_lite = ! empty( $tf_border_data['lite'] ) ? $tf_border_data['lite'] : '';
+				$tf_filling_background = ! empty( $tf_filling_data['background'] ) ? $tf_filling_data['background'] : '';
+				$tf_filling_foreground = ! empty( $tf_filling_data['foreground'] ) ? $tf_filling_data['foreground'] : '';
 			}
 		}
 
@@ -1215,15 +1271,16 @@ class Enqueue {
 		$base_font_size = apply_filters('tf_base_font_size', '16px');
 		$output = "
 			:root {
-				--tf-primary: {$tf_design_primary};
-				--tf-secondary: {$tf_design_secondary};
-				--tf-text: {$tf_design_text};
-				--tf-heading: {$tf_design_heading};
-				--tf-light-bg: {$tf_design_light_bg};
-				--tf-yellow-thin: {$tf_design_highlights_bg};
-				--tf-border: {$tf_design_border_color};
-				--tf-form-input-bg: {$tf_design_form_input_bg};
-				--tf-box-shadow: {$tf_design_box_shadow};
+				--tf-primary: {$tf_brand_default};
+				--tf-brand-dark: {$tf_brand_dark};
+				--tf-brand-lite: {$tf_brand_lite};
+				--tf-text-heading: {$tf_text_heading};
+				--tf-text-paragraph: {$tf_text_paragraph};
+				--tf-text-lite: {$tf_text_lite};
+				--tf-border-default: {$tf_border_default};
+				--tf-border-lite: {$tf_border_lite};
+				--tf-filling-background: {$tf_filling_background};
+				--tf-filling-foreground: {$tf_filling_foreground};
 				--tf-base-font-size: " . esc_attr($base_font_size) . ";
 				--tf-container-width: " . esc_attr($tf_container_width) . ";
 			}

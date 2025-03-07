@@ -121,7 +121,7 @@
             
                     .tf_input-inner{
                         border-radius: 8px;
-                        border: 1px solid $color-secondary;
+                        border: 1px solid $color-brand-dark;
                         padding: 0 16px;
                         background-color: $color-white;
             
@@ -191,7 +191,7 @@
                 transform: rotateX(90deg);
                 transition: all 0.3s ease-in-out;
                 width: 100%;
-                background: $color-light-bg;
+                background: $color-brand-lite;
                 box-shadow: none;
                 @media #{$max1024} {
                     @include flex-wrap();
@@ -238,7 +238,7 @@
             
                     .tf_input-inner{
                         border-radius: 8px;
-                        border: 1px solid $color-secondary;
+                        border: 1px solid $color-brand-dark;
                         padding: 0 16px;
                         background-color: $color-white;
             
@@ -435,7 +435,7 @@
                 
             }
             .tour-external-booking-form {
-                background-color: $color-light-bg;
+                background-color: $color-brand-lite;
                 padding: 24px;
             
                 .tf-tour-external-booking-button {

@@ -38,24 +38,24 @@ input[type="submit"].tf_btn,
 
     &:focus{
         color: $color-white;
-        background-color: $color-secondary;
-        border-color: $color-secondary;
+        background-color: $color-brand-dark;
+        border-color: $color-brand-dark;
     }
     &:hover{
         color: $color-white;
-        background-color: $color-secondary;
-        border-color: $color-secondary;
+        background-color: $color-brand-dark;
+        border-color: $color-brand-dark;
     }
     &:focus{
         color: $color-white;
-        background-color: $color-secondary;
-        border-color: $color-secondary;
+        background-color: $color-brand-dark;
+        border-color: $color-brand-dark;
     }
 
     &_secondary{
         color: $btn-secondary-text;
-        background-color: $color-secondary;
-        border-color: $color-secondary;
+        background-color: $color-brand-dark;
+        border-color: $color-brand-dark;
 
         &:hover{
             color: $color-white;

@@ -3,7 +3,7 @@
         &__two{
             .tf-tour-details-right {
                 .tf-tour-booking-box  {
-                    background: $color-light-bg;
+                    background: $color-brand-lite;
                     @include bd-radius(5px);;
                     box-shadow: 0px 0px 24px 5px $color-box-shadow;
                 }
@@ -28,7 +28,7 @@
                 .tf-form-title.tf-tour-extra{
                     p{
                         cursor: pointer;
-                        background-color: $color-light-bg;
+                        background-color: $color-brand-lite;
                         padding: 10px;
                         border-radius: 5px;
                         display: flex;
