@@ -3443,13 +3443,7 @@ class Hotel {
 		$airport_service_total = 0;
 		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['airport_service'] ) && 1 == $meta['airport_service'] ) {
 			if ( "pickup" == $airport_service ) {
-				$airport_pickup_price = ! empty( $meta['airport_pickup_price'] ) ? $meta['airport_pickup_price'] : '';
-				if ( ! empty( $airport_pickup_price ) && gettype( $airport_pickup_price ) == "string" ) {
-					$tf_hotel_airport_pickup_price_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
-						return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
-					}, $airport_pickup_price );
-					$airport_pickup_price                = unserialize( $tf_hotel_airport_pickup_price_value );
-				}
+				$airport_pickup_price = ! empty( Helper::tf_data_types($meta['airport_pickup_price']) ) ? Helper::tf_data_types($meta['airport_pickup_price']) : '';
 				if ( "per_person" == $airport_pickup_price['airport_pickup_price_type'] ) {
 					$service_adult_fee           = ! empty( $airport_pickup_price['airport_service_fee_adult'] ) ? $airport_pickup_price['airport_service_fee_adult'] : 0;
 					$service_child_fee           = ! empty( $airport_pickup_price['airport_service_fee_children'] ) ? $airport_pickup_price['airport_service_fee_children'] : 0;
@@ -3495,13 +3489,7 @@ class Hotel {
 				$airport_service_arr['label'] = __( 'Pickup Service', 'tourfic' );
 			}
 			if ( "dropoff" == $airport_service ) {
-				$airport_pickup_price = ! empty( $meta['airport_dropoff_price'] ) ? $meta['airport_dropoff_price'] : '';
-				if ( ! empty( $airport_pickup_price ) && gettype( $airport_pickup_price ) == "string" ) {
-					$tf_hotel_airport_pickup_price_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
-						return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
-					}, $airport_pickup_price );
-					$airport_pickup_price                = unserialize( $tf_hotel_airport_pickup_price_value );
-				}
+				$airport_pickup_price = ! empty( Helper::tf_data_types($meta['airport_dropoff_price']) ) ? Helper::tf_data_types($meta['airport_dropoff_price']) : '';
 
 				if ( "per_person" == $airport_pickup_price['airport_pickup_price_type'] ) {
 					$service_adult_fee           = ! empty( $airport_pickup_price['airport_service_fee_adult'] ) ? $airport_pickup_price['airport_service_fee_adult'] : 0;
@@ -3548,13 +3536,7 @@ class Hotel {
 				$airport_service_arr['label'] = __( 'Drop-off Service', 'tourfic' );
 			}
 			if ( "both" == $airport_service ) {
-				$airport_pickup_price = ! empty( $meta['airport_pickup_dropoff_price'] ) ? $meta['airport_pickup_dropoff_price'] : '';
-				if ( ! empty( $airport_pickup_price ) && gettype( $airport_pickup_price ) == "string" ) {
-					$tf_hotel_airport_pickup_price_value = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
-						return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
-					}, $airport_pickup_price );
-					$airport_pickup_price                = unserialize( $tf_hotel_airport_pickup_price_value );
-				}
+				$airport_pickup_price = ! empty( Helper::tf_data_types($meta['airport_pickup_dropoff_price']) ) ? Helper::tf_data_types($meta['airport_pickup_dropoff_price']) : '';
 
 				if ( "per_person" == $airport_pickup_price['airport_pickup_price_type'] ) {
 					$service_adult_fee           = ! empty( $airport_pickup_price['airport_service_fee_adult'] ) ? $airport_pickup_price['airport_service_fee_adult'] : 0;
@@ -3633,7 +3615,7 @@ class Hotel {
 
 		// Featured
 		$featured            = ! empty( $meta['featured'] ) ? $meta['featured'] : '';
-		$hotel_multiple_tags = ! empty( $meta['tf-hotel-tags'] ) ? $meta['tf-hotel-tags'] : array();
+		$hotel_multiple_tags = ! empty( Helper::tf_data_types($meta['tf-hotel-tags']) ) ? Helper::tf_data_types($meta['tf-hotel-tags']) : array();
 		/**
 		 * All values from URL
 		 */
@@ -4926,7 +4908,7 @@ class Hotel {
 		$rooms    	= ! empty( $hotel_meta['tf_rooms'] ) ? $hotel_meta['tf_rooms'] : [];
 		$assigned_rooms = Room::get_hotel_rooms( $post_id );
 		$assigned_room_ids = array_column($assigned_rooms, 'ID');
-		$removed_rooms = array_diff($assigned_room_ids, $rooms);
+		$removed_rooms = (is_array($rooms) && is_array($assigned_room_ids)) ? array_diff($assigned_room_ids, $rooms) : [];
 		
 		if(!empty($rooms)){
 			foreach($rooms as $room_id){
@@ -4977,15 +4959,19 @@ class Hotel {
 		//remove from tf_rooms fields if exists
 		if(empty($hotel_id)){
 			$assign_hotel_id = Room::get_hotel_id_for_assigned_room($post_id);
-			$hotel_meta = get_post_meta( $assign_hotel_id, 'tf_hotels_opt', true );
+			if(!empty($assign_hotel_id)){
+				$hotel_meta = get_post_meta( $assign_hotel_id, 'tf_hotels_opt', true );
 
-			if(! empty( $hotel_meta['tf_rooms'] ) && is_array($hotel_meta['tf_rooms'])){
-				$hotel_meta['tf_rooms'] = array_diff($hotel_meta['tf_rooms'], [$post_id]);
-			} else {
-				$hotel_meta['tf_rooms'] = '';
+				if(!empty($hotel_meta)){
+					if(! empty( $hotel_meta['tf_rooms'] ) && is_array($hotel_meta['tf_rooms'])){
+						$hotel_meta['tf_rooms'] = array_diff($hotel_meta['tf_rooms'], [$post_id]);
+					} else {
+						$hotel_meta['tf_rooms'] = '';
+					}
+				}
+				
+				update_post_meta($assign_hotel_id, 'tf_hotels_opt', $hotel_meta);
 			}
-			
-			update_post_meta($assign_hotel_id, 'tf_hotels_opt', $hotel_meta);
 		}
 	}
 

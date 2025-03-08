@@ -197,11 +197,11 @@ use \Tourfic\App\TF_Review;
 
         </div>
         <div class="tf-details-right tf-sitebar-widgets">
-            <?php if( !empty($meta['nearby-places']) ){ ?>
+            <?php if( !empty(Helper::tf_data_types($meta['nearby-places'])) ){ ?>
             <div class="tf-whats-around tf-single-widgets">
                 <h2 class="tf-section-title"><?php echo !empty($meta['section-title']) ? esc_html($meta['section-title']) : esc_html__("What’s around?", 'tourfic'); ?></h2>
                 <ul>
-                    <?php foreach($meta['nearby-places'] as $place){ ?>
+                    <?php foreach(Helper::tf_data_types($meta['nearby-places']) as $place){ ?>
                     <li>
                         <span>
                         <?php if( !empty( $place['place-icon'] )){ ?>

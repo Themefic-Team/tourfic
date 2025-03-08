@@ -286,42 +286,17 @@ class Enqueue {
 			} elseif ( $tour_type == 'continuous' ) {
 
 				$disabled_day  = ! empty( $meta['disabled_day'] ) ? $meta['disabled_day'] : '';
-				$disable_range = ! empty( $meta['disable_range'] ) ? $meta['disable_range'] : '';
-				if ( ! empty( $disable_range ) && gettype( $disable_range ) == "string" ) {
-					$disable_range_unserial = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
-						return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
-					}, $disable_range );
-					$disable_range          = unserialize( $disable_range_unserial );
-
-				}
+				$disable_range = ! empty( Helper::tf_data_types($meta['disable_range']) ) ? Helper::tf_data_types($meta['disable_range']) : '';
 				$disable_specific = ! empty( $meta['disable_specific'] ) ? $meta['disable_specific'] : '';
 
 				if ( $custom_avail == true ) {
-
-					$cont_custom_date = ! empty( $meta['cont_custom_date'] ) ? $meta['cont_custom_date'] : '';
-
-					if ( ! empty( $cont_custom_date ) && gettype( $cont_custom_date ) == "string" ) {
-						$cont_custom_date_unserial = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
-							return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
-						}, $cont_custom_date );
-						$cont_custom_date          = unserialize( $cont_custom_date_unserial );
-
-					}
-
+					$cont_custom_date = ! empty( Helper::tf_data_types($meta['cont_custom_date']) ) ? Helper::tf_data_types($meta['cont_custom_date']) : '';
 				}
 
 			}
 
-			$tour_extras = isset( $meta['tour-extra'] ) ? $meta['tour-extra'] : null;
+			$tour_extras = isset( $meta['tour-extra'] ) ? Helper::tf_data_types($meta['tour-extra']) : null;
 
-			if ( ! empty( $tour_extras ) && gettype( $tour_extras ) == "string" ) {
-
-				$tour_extras_unserial = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
-					return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
-				}, $tour_extras );
-				$tour_extras          = unserialize( $tour_extras_unserial );
-
-			}
 			$times = [];
 			if ( ! empty( $meta['cont_custom_date'] ) && gettype( $meta['cont_custom_date'] ) == "string" ) {
 
@@ -367,7 +342,7 @@ class Enqueue {
 					return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
 				}, $meta['allowed_time'] );
 				$tf_tour_unserial_custom_time = unserialize( $tf_tour_unserial_custom_time );
-				if ( ! empty( $tf_tour_unserial_custom_time ) ) {
+				if ( ! empty( $tf_tour_unserial_custom_time ) && is_array($tf_tour_unserial_custom_time) ) {
 					if ( $custom_avail == false && ! empty( $meta['allowed_time'] ) ) {
 						$allowed_times = array_map( function ( $v ) {
 							return $v['time'];
@@ -437,7 +412,7 @@ class Enqueue {
 							}
 							$single_tour_form_data['disable'][] = ");";
 						}
-						if ( $disable_range ) {
+						if ( !empty($disable_range) && is_array($disable_range) ) {
 							foreach ( $disable_range as $d_item ) {
 								$single_tour_form_data['disable'][] = array(
 									'from' => esc_attr( $d_item["date"]["from"] ),
@@ -557,7 +532,7 @@ class Enqueue {
 	 * Enqueue Admin scripts
 	 * @since 1.0
 	 */
-	function tf_enqueue_admin_scripts( $hook ) {
+	function tf_enqueue_admin_scripts( $screen ) {
 
 		/**
 		 * Notyf
@@ -566,7 +541,11 @@ class Enqueue {
 		wp_enqueue_style( 'notyf', TF_ASSETS_URL . 'app/libs/notyf/notyf.min.css', '', TF_VERSION );
 		wp_enqueue_script( 'notyf', TF_ASSETS_URL . 'app/libs/notyf/notyf.min.js', array( 'jquery' ), TF_VERSION, true );
 
-		if ( $hook == "widgets.php" && function_exists( 'is_woocommerce' ) ) {
+		if ( ($screen == "widgets.php" && function_exists( 'is_woocommerce' )) || 
+			$screen == 'tf_hotel_page_tf_export_hotels' ||
+			$screen == 'tf_tours_page_tf_export_tours' ||
+			$screen == 'tf_apartment_page_tf_export_apartments' ||
+			$screen == 'tf_carrental_page_tf_export_cars') {
 
 			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ?: '.min';
 
