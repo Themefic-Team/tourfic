@@ -3,7 +3,7 @@
         /* Search form */
         .tf-archive-search-form {
             padding: 64px 0;
-            background-color: $color-filling-fg;
+            background-color: $color-filling-bg;
             background-image: url(../images/hotel-form-bg.png);
             background-repeat: no-repeat;
             background-position: center center;
@@ -23,8 +23,8 @@
                 display: inline-flex;
                 @include justify-content(center);
                 border-radius: 8px;
-                border: 0.5px solid $color-brand-lite;
-                background-color: $color-brand-lite;
+                border: 0.5px solid $color-filling-fg;
+                background-color: $color-filling-fg;
                 padding: 24px 48px;
                 max-width: 1050px;
                 margin: 0 auto;
@@ -276,7 +276,7 @@
         
         .tf-archive-details {
             @include flexbox();
-            background: $color-filling-fg;
+            background: $color-filling-bg;
             position: relative;
 
             .tf-details-left {
@@ -514,7 +514,7 @@
                         align-items: center;
                         justify-content: center;
                         border-radius: 8px;
-                        background-color: $color-white;
+                        background-color: $color-filling-fg;
                         text-align: center;
                         cursor: pointer;
                         @include transition();
@@ -543,7 +543,7 @@
                         align-items: center;
                         justify-content: center;
                         border-radius: 4px;
-                        background-color: $color-white;
+                        background-color: $color-filling-fg;
                         text-align: center;
                         cursor: pointer;
                         @include transition();
@@ -617,7 +617,7 @@
 
             .tf-archive-hotel {
                 border-radius: 4px;
-                background-color: $color-brand-lite;
+                background-color: $color-filling-fg;
                 @include flexbox();
                 @include transition();
 

@@ -209,7 +209,6 @@
   white-space: nowrap;
   text-decoration: none;
   color: var(--tf-text-heading);
-  background-color: #ffffff;
   fill: var(--tf-text-heading);
   display: flex;
   align-items: center;
@@ -792,14 +791,9 @@
   margin-top: 5px;
 }
 
-.single-tf_apartment .tf-single-template__three .tf-apartment-rooms-section {
-  margin-left: 32px;
-  margin-right: 32px;
-}
-
 .single-tf_apartment .tf-single-template__three .tf-apartment-rooms-section .tf-apartment-room-details {
   border-radius: 4px;
-  background: var(--tf-brand-lite);
+  background: var(--tf-filling-foreground);
   padding: 24px 24px 28px 24px;
 }
 

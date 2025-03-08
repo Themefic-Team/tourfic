@@ -51,12 +51,11 @@
                     transition: all .3s ease;
                     height: 50px;
                     width: 50px;
-                    background: $color-white;
+                    background: $color-filling-fg;
                     display: flex;
                     align-items: center;
                     justify-content: center;
                     border-radius: 50px;
-                    box-shadow: 0px 0px 24px 5px $color-box-shadow;
                 }
                 .tf-share{
                     a{
@@ -74,12 +73,11 @@
                         right: auto;
                     }
                     .tf-dropdown-share-content{
-                        background: $color-white;
+                        background: $color-filling-fg;
                         border-radius: 8px;
                         padding: 16px 10px;
                         width: 280px;
                         text-align: center;
-                        box-shadow: 0px 13px 30px 0px $color-box-shadow;
                         h4{
                             font-size: 0.875rem;
                             color: $color-primary;
@@ -107,10 +105,12 @@
                                     padding: 10px 8px;
                                     background-color: transparent;
                                     border: 0px solid;
-                                    font-size: 1.375rem;
                                     cursor: pointer;
                                     span{
                                         color: $color-primary;
+                                    }
+                                    i{
+                                        font-size: 1.375rem;
                                     }
                                 }
                                 input{
@@ -302,11 +302,7 @@
         }
         // Review Section
         .tf-review-wrapper{
-            .tf-review-data.tf-box{
-                box-shadow: 0px 0px 24px 5px $color-box-shadow;
-            }
             .tf-review-data {
-                background: $color-white;
                 @include bd-radius(5px);;
                 flex-basis: 20%;
 
@@ -322,19 +318,21 @@
                 p,li{
                     text-transform: capitalize;
                 }
-                .tf-review-data-average p {
-                    background: $color-gray-light;
-                    text-align: center;
-                    font-size: 1.875rem;
-                    color: $color-primary;
-                    font-weight: 500;
-                    @include bd-radius(5px);;
-                    width: 100px;
-                    height: 75px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    margin: 0;
+                .tf-review-data-average {
+                    background-color: $color-filling-fg;
+                    p {
+                        text-align: center;
+                        font-size: 1.875rem;
+                        color: $color-primary;
+                        font-weight: 500;
+                        @include bd-radius(5px);;
+                        width: 100px;
+                        height: 75px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        margin: 0;
+                    }
                 }
                 .tf-review-data-label{
                     p{
@@ -469,10 +467,16 @@
                 }
             }
             .tf-review-form{
-                padding-bottom: 30px;
+               padding-bottom: 30px;
                 .tf-review-form-container{
                     background: transparent;
                     min-width: auto;
+                    form{
+                        padding: 32px;
+                        padding-top: 12px;
+                        background: $color-filling-fg;
+                        border-radius: 8px;
+                    }
                     .tf-rating-wrapper{
                         column-gap: 40px;
                         flex-wrap: wrap;
@@ -502,10 +506,10 @@
                     .review-desc{
                         display: flex;
                         textarea{
+                            background: transparent;
                             padding: 15px 20px;
-                            border: 1px solid $color-border;
+                            border: 1px solid $color-border-lite;
                             width: 100%;
-                            background-color: $color-gray-light;
                             border-radius: 5px;
                             font-size: 0.875rem;
                             color: $color-text;
@@ -636,6 +640,7 @@
                 }
                 h4{
                     line-height: 1.5;
+                    margin-bottom: 0;
                 }
             }
         }
@@ -913,8 +918,7 @@
             }
             #tf__booking_sidebar{
                 padding: 30px;
-                box-shadow: 0px 13px 30px 0px $color-box-shadow;
-                background-color: $color-white;
+                background-color: $color-filling-fg;
                 border-radius: 5px;
                 margin: 30px 0;
                 .widget{
@@ -1077,9 +1081,8 @@
                 }
             }
             .tf-item-card {
-                background-color: $color-white;
+                background-color: $color-filling-fg;
                 border-radius: 5px;
-                box-shadow: $box-shadow-primary;
                 @media #{$max1024} {
                     flex-basis: 100%;
                 }

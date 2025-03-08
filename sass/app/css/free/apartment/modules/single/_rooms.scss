@@ -146,11 +146,9 @@
         }
         &__three{
             .tf-apartment-rooms-section{
-                margin-left: 32px;
-                margin-right: 32px;
                 .tf-apartment-room-details{
                     border-radius: 4px;
-                    background: $color-brand-lite;
+                    background: $color-filling-fg;
                     padding: 24px 24px 28px 24px;
                     h4{
                         color: $color-heading;

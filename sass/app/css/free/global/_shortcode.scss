@@ -153,9 +153,9 @@
     }
 }
 .tf_booking-widget {
-    background: $color-brand-lite;
-    background: linear-gradient(to bottom, $color-brand-lite 0, $color-brand-lite 100%);
-    border-color: $color-brand-lite;
+    background: $color-filling-fg;
+    background: linear-gradient(to bottom, $color-filling-fg 0, $color-filling-fg 100%);
+    border-color: $color-filling-fg;
     padding: 20px;
     border-radius: 4px;
     font-size: 0.875rem;
@@ -748,8 +748,7 @@ div#tf-destinationautocomplete-list {
                             }
                         }
                         .tf_acrselection-wrap {
-                            background: $color-yellow-light;
-                            box-shadow: 0px 8px 40px 0px rgba(0, 0, 0, 0.10);
+                            background: $color-filling-fg;
                             top: 111%;
                             border-radius: 0px;
                             .acr-label{

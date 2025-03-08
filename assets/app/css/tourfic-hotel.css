@@ -636,12 +636,11 @@
 .single-tf_hotel .tf-single-template__two .tf-hotel-single-places ul li {
   display: inline-flex;
   justify-content: space-between;
-  background-color: #ffffff;
+  background-color: var(--tf-filling-foreground);
   border-radius: 5px;
   padding: 10px;
   text-transform: capitalize;
   margin: 5px 5px 5px 0px;
-  box-shadow: 0px 13px 30px 0px rgba(224, 232, 238, 0.32);
   font-size: 0.938rem;
 }
 
@@ -681,7 +680,6 @@
   padding: 6px 10px;
   border-radius: 4px;
   border: 1px solid #E6F2FE;
-  box-shadow: -1px 1px 6px -1px #0000002e;
   margin-top: 10px;
 }
 
@@ -711,12 +709,11 @@
 .single-tf_hotel .tf-single-template__two .tf-hotel-single-features ul li {
   display: inline-flex;
   align-items: center;
-  background-color: #ffffff;
+  background-color: var(--tf-filling-foreground);
   border-radius: 5px;
   padding: 10px;
   text-transform: capitalize;
   margin: 5px 5px 5px 0px;
-  box-shadow: 0px 13px 30px 0px rgba(224, 232, 238, 0.32);
   font-size: 0.938rem;
 }
 
@@ -823,8 +820,7 @@
 .single-tf_hotel .tf-single-template__two .tf-hotel-facilities-section .tf-hotel-facilities-container {
   padding: 32px;
   border-radius: 6px;
-  background: #ffffff;
-  box-shadow: 0px 13px 30px 0px rgba(224, 232, 238, 0.32);
+  background: var(--tf-filling-foreground);
 }
 
 .single-tf_hotel .tf-single-template__two .tf-hotel-facilities-section .tf-hotel-facilities-container .tf-hotel-facilities-title-area {
@@ -971,8 +967,6 @@
 .single-tf_hotel .tf-single-template__two .tf-review-wrapper .tf-review-data.tf-box .tf-review-data {
   flex-basis: 30%;
   margin-right: 30px;
-  background-color: #ffffff;
-  box-shadow: 0px 13px 30px 0px rgba(224, 232, 238, 0.32);
   padding: 30px;
 }
 
@@ -1006,7 +1000,6 @@
 }
 
 .single-tf_hotel .tf-single-template__two .tf-review-wrapper .tf-review-data.tf-box .tf-review-data-average p {
-  background: #F1F3F4;
   text-align: center;
   font-size: 1.875rem;
   color: var(--tf-primary);
@@ -1033,8 +1026,6 @@
 
 .single-tf_hotel .tf-single-template__two .tf-review-wrapper .tf-review-data.tf-box .tf-review-data-features {
   flex-basis: 68%;
-  background-color: #ffffff;
-  box-shadow: 0px 13px 30px 0px rgba(224, 232, 238, 0.32);
   padding: 30px;
 }
 
@@ -1157,6 +1148,7 @@
   position: relative;
   margin-bottom: 0px;
   border: 1px solid var(--tf-border-default);
+  line-height: 0;
 }
 
 @media only screen and (max-width: 768px) {

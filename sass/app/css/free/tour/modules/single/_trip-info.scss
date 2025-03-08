@@ -70,8 +70,7 @@
         &__two{
             .tf-trip-info{
                 background-color: $color-filling-fg;
-                @include bd-radius(5px);;
-                box-shadow: 0px 0px 24px 5px $color-box-shadow;
+                @include bd-radius(5px);
             
                 // trip info -
                 .person-info.active {
@@ -94,7 +93,6 @@
                 .person-info {
                     border: 1px solid $color-border;
                     @include bd-radius(5px);;
-                    box-shadow: 0px 9px 12px 0px #0e132305;
                     display: flex;
                     align-items: center;
                     justify-content: center;

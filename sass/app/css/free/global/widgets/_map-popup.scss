@@ -526,8 +526,8 @@
             left: -320px;
             width: 300px;
             height: 100vh;
-            background-color: $color-white;
-            box-shadow: 0px 4px 40px 0px rgba(80, 33, 0, 0.10);
+            background-color: $color-filling-fg;
+
             padding: 16px;
             z-index: 9999;
             @include transition();

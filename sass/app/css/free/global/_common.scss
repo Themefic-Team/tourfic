@@ -222,11 +222,10 @@ h3.section-heading {
     top: 100%;
     right: 0;
     margin-top: 12px;
-    background: $color-white;
+    background: $color-filling-fg;
     padding: 24px 24px 8px;
     min-width: 250px;
     border-radius: 4px;
-    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.15);
     z-index: 9999;
     width: 100%;
     display: none;
@@ -1170,12 +1169,11 @@ li.tf-filter-item {
         }
         .tf-dropdown-content {
             margin: 0;
-            background: $color-white;
+            background: $color-filling-fg;
             border-radius: 4px;
             overflow: hidden;
             min-width: 200px;
             z-index: 100;
-            box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.12), 0 2px 3px -1px rgba(0, 0, 0, 0.2);
             @media #{$max575} {
                 min-width: 270px;
                 margin-left: -170px;
@@ -1228,7 +1226,6 @@ li.tf-filter-item {
             white-space: nowrap;
             text-decoration: none;
             color: $color-text;
-            background-color: $color-white;
             fill: $color-text;
             display: flex;
             align-items: center;

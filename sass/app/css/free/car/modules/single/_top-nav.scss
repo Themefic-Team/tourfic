@@ -2,8 +2,7 @@
     .tf-single-template{
         &__one{
             .tf-single-booking-bar{
-                background: $color-white;
-                box-shadow: 0px 48px 64px 0px rgba(2, 12, 21, 0.05);
+                background: $color-filling-fg;
                 padding: 16px 0px;
                 position: fixed;
                 left: 0;

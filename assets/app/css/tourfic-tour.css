@@ -2737,7 +2737,6 @@
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
-  box-shadow: 0px 0px 24px 5px var(--tf-box-shadow);
 }
 
 .single-tf_tours .tf-single-template__two .tf-trip-info .person-info.active {
@@ -2765,7 +2764,6 @@
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
-  box-shadow: 0px 9px 12px 0px #0e132305;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -3589,12 +3587,11 @@ div#tf-contact-info {
 .single-tf_tours .tf-single-template__two .tf-tour-features ul li {
   display: inline-flex;
   justify-content: flex-start;
-  background-color: #ffffff;
+  background-color: var(--tf-filling-foreground);
   border-radius: 5px;
   padding: 10px 15px;
   text-transform: capitalize;
   margin: 5px 16px 10px 0px;
-  box-shadow: 0px 0px 24px 5px var(--tf-box-shadow);
   font-size: 0.938rem;
   font-weight: 300;
 }
