@@ -2860,6 +2860,7 @@ var frame, gframe;
         function getSelectedDesign() {
             return $('input[name="tf_settings\\[color-palette-template\\]"]:checked').val();
         }
+        
     
         // Function to update custom colors based on the selected design
         function updateCustomColors(selectedDesign) {
@@ -2890,6 +2891,90 @@ var frame, gframe;
                 });
             });
         }
+
+        const designDefault = {
+            'd1': {
+                brand: {
+                    default: '#0E3DD8',
+                    dark: '#0A2B99',
+                    lite: '#C9D4F7',
+                },
+                text: {
+                    heading: '#1C2130',
+                    paragraph: '#494D59',
+                    lite: '#F3F5FD',
+                },
+                border: {
+                    default: '#16275F',
+                    lite: '#D1D7EE',
+                },
+                filling: {
+                    background: '#ffffff',
+                    foreground: '#F5F7FF',
+                },
+            },
+            'd2': {
+                brand: {
+                    default: '#B58E53',
+                    dark: '#917242',
+                    lite: '#FAEEDC',
+                },
+                text: {
+                    heading: '#30281C',
+                    paragraph: '#595349',
+                    lite: '#FDF9F3',
+                },
+                border: {
+                    default: '#5F4216',
+                    lite: '#EEE2D1',
+                },
+                filling: {
+                    background: '#ffffff',
+                    foreground: '#FDF9F3',
+                },
+            },
+            'd3': {
+                brand: {
+                    default: '#F97415',
+                    dark: '#C75605',
+                    lite: '#FDDCC3',
+                },
+                text: {
+                    heading: '#30241C',
+                    paragraph: '#595049',
+                    lite: '#FDF7F3',
+                },
+                border: {
+                    default: '#5F3416',
+                    lite: '#EEDDD1',
+                },
+                filling: {
+                    background: '#ffffff',
+                    foreground: '#FFF9F5',
+                },
+            },
+            'd4': {
+                brand: {
+                    default: '#003061',
+                    dark: '#002952',
+                    lite: '#C2E0FF',
+                },
+                text: {
+                    heading: '#1C2630',
+                    paragraph: '#495159',
+                    lite: '#F3F8FD',
+                },
+                border: {
+                    default: '#163A5F',
+                    lite: '#D1DFEE',
+                },
+                filling: {
+                    background: '#ffffff',
+                    foreground: '#F5FAFF',
+                },
+            },
+            custom: {},
+        };
     
         // Initialize wpColorPicker for all relevant inputs
         $('input[name^="tf_settings[tf-d"]').wpColorPicker({
@@ -2916,6 +3001,10 @@ var frame, gframe;
                     // Update the corresponding custom field
                     let $customColorField = $(`input[name="tf_settings[tf-custom-${fieldType}][${fieldName}]"]`);
                     if ($customColorField.length) {
+                        
+                        let value = $(`input[name="tf_settings[tf-${design}-${fieldType}][${fieldName}]"]`).val();
+                        $(`input[name="tf_settings[tf-custom${fieldType}][${fieldName}]"]`).val(value).trigger('change');
+                        $(`input[name="tf_settings[tf-${design}-${fieldType}][${fieldName}]"]`).val(designDefault[design][fieldType][fieldName]).trigger('change');
                         $customColorField.val(newValue).trigger('change');
                     }
                 }
@@ -2925,6 +3014,7 @@ var frame, gframe;
         // Trigger updates when a design is selected
         $('input[name="tf_settings\\[color-palette-template\\]"]').on('change', function () {
             updateCustomColors(getSelectedDesign());
+            console.log(getSelectedDesign());
         });
     
         // Initialize custom colors on page load
