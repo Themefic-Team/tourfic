@@ -445,6 +445,8 @@ class Enqueue {
 
 		}
 
+		// var_dump(Helper::tf_templates_body_class());
+		// die();
 
 		/**
 		 * Custom
@@ -455,6 +457,7 @@ class Enqueue {
 				'nonce'                  => wp_create_nonce( 'tf_ajax_nonce' ),
 				'ajax_url'               => admin_url( 'admin-ajax.php' ),
 				'single'                 => is_single(),
+				'body_classes'           => Helper::tf_templates_body_class(),
 				'locations'              => Helper::get_terms_dropdown('hotel_location'),
 				'apartment_locations'    => Helper::get_terms_dropdown('apartment_location'),
 				'tour_destinations'      => Helper::get_terms_dropdown('tour_destination'),
