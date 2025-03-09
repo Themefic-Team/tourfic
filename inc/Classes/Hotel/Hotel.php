@@ -4197,6 +4197,7 @@ class Hotel {
 		$tf_hotel_selected_check = ! empty( $tf_hotel_single_template ) ? $tf_hotel_single_template : $tf_hotel_global_template;
 
 		$tf_hotel_selected_template = $tf_hotel_selected_check;
+		$adults_name = apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) );
 
 		$rooms                       = Room::get_hotel_rooms( $_POST['post_id'] );
 		if ( $tf_hotel_selected_template == "design-1" || $tf_hotel_selected_template == "default" ) {
@@ -4529,7 +4530,7 @@ class Hotel {
                                         <li><i class="ri-hotel-bed-line"></i> <?php echo esc_html( $bed ); ?><?php esc_html_e( ' Beds', 'tourfic' ); ?></li>
 									<?php } ?>
 									<?php if ( $adult_number ) { ?>
-                                        <li><i class="ri-user-2-line"></i> <?php echo esc_html( $adult_number ); ?><?php esc_html_e( ' Adults', 'tourfic' ); ?></li>
+                                        <li><i class="ri-user-2-line"></i> <?php echo esc_html( $adult_number ); ?><?php esc_html_e( " " . $adults_name . 's', 'tourfic' ); ?></li>
 									<?php } ?>
 									<?php if ( $child_number ) { ?>
                                         <li><i class="ri-user-smile-line"></i><?php echo esc_html( $child_number ); ?><?php esc_html_e( ' Child', 'tourfic' ); ?></li>
