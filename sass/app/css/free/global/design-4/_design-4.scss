@@ -117,7 +117,7 @@
             }
 
             .tf-search-field-divider {
-                background-color: $color-white;
+                background-color: $color-border-lite;
                 width: 1px;
 
                 @media #{$max1024} {
@@ -231,7 +231,7 @@
                     padding-left: 0px;
                     padding-right: 0px;
                     border-radius: 4px;
-                    border: 0.2px solid $color-text;
+                    border: 0.2px solid $color-border-lite;
                     background: $color-filling-bg;
                 }
 
@@ -939,7 +939,7 @@
                 }
 
                 .al-range-slider__track {
-                    background: $color-gray-light;
+                    background: $color-brand-lite;
                     height: 10px;
                     box-shadow: none;
                     margin: 30px 0px 10px 0px;
@@ -949,17 +949,17 @@
                     padding: 0px;
 
                     .al-range-slider__bar {
-                        background: $color-primary;
+                        background: $color-text;
                         box-shadow: none;
                     }
                 }
 
                 .al-range-slider__knob {
-                    background: $color-primary;
-                    height: 15px;
-                    width: 15px;
+                    background: $color-filling-bg;
+                    height: 24px;
+                    width: 24px;
                     box-shadow: none;
-                    border: 3px solid $color-primary;
+                    border: 1.5px solid $color-border;
 
                     &:first-child {
                         span {

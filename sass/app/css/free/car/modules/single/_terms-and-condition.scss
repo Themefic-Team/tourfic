@@ -10,8 +10,8 @@
                     margin-bottom: 16px;
                 }
                 table{
-                    border-left: 1px solid $color-border;
-                    border-top: 1px solid $color-border;
+                    border-left: 1px solid $color-border-lite;
+                    border-top: 1px solid $color-border-lite;
                     margin: 0px;
                     border-radius: 16px;
                     tr{
@@ -19,8 +19,8 @@
                             color: $color-text;
                             font-size: 1rem;
                             font-weight: 400;
-                            border-right: 1px solid $color-border;
-                            border-bottom: 1px solid $color-border;
+                            border-right: 1px solid $color-border-lite;
+                            border-bottom: 1px solid $color-border-lite;
                             padding: 16px;
                             vertical-align: baseline;
                             text-align: left;
@@ -34,8 +34,8 @@
                             color: $color-text;
                             font-size: 1rem;
                             font-weight: 400;
-                            border-right: 1px solid $color-border;
-                            border-bottom: 1px solid $color-border;
+                            border-right: 1px solid $color-border-lite;
+                            border-bottom: 1px solid $color-border-lite;
                             padding: 16px 40px;
                             @media #{$max768}{
                                 padding: 8px; 

@@ -327,7 +327,7 @@ h3.section-heading {
     margin-right: 8px;
 }
 .tf_destination-wrap {
-    border-right: 1px solid $color-border;
+    border-right: 1px solid $color-border-lite;
     border-left: 0;
     display: table-cell;
     vertical-align: middle;
@@ -365,7 +365,7 @@ h3.section-heading {
     }
 }
 .tf_selectdate-wrap {
-    border-right: 1px solid $color-border;
+    border-right: 1px solid $color-border-lite;
     display: table-cell;
     vertical-align: middle;
     padding: 0 15px;
@@ -395,7 +395,7 @@ h3.section-heading {
     }
 }
 .tf_selectperson-wrap {
-    border-right: 1px solid $color-border;
+    border-right: 1px solid $color-border-lite;
     display: table-cell;
     vertical-align: middle;
     width: auto;
@@ -611,7 +611,7 @@ h3.section-heading {
     .review-desc {
         textarea {
             background: $color-gray-light;
-            border: 1px solid $color-border;
+            border: 1px solid $color-border-lite;
             border-radius: 4px;
             padding: 16px 8px 16px 16px;
             height: 160px;
@@ -628,7 +628,7 @@ h3.section-heading {
         margin: 16px 0 0 0;
         input {
             background: $color-gray-light;
-            border: 1px solid $color-border;
+            border: 1px solid $color-border-lite;
             box-sizing: border-box;
             border-radius: 4px;
             height: 56px;
@@ -705,7 +705,7 @@ h3.section-heading {
         column-gap: 40px;
         row-gap: 20px;
         padding: 24px;
-        border: 1px solid $color-border;
+        border: 1px solid $color-border-lite;
         box-sizing: border-box;
         border-radius: 4px;
         margin: 0 0 25px 0;
@@ -1002,7 +1002,7 @@ h3.section-heading {
     width: 15px;
     background-color: $color-white;
     border-radius: 2px;
-    border: 1px solid $color-border;
+    border: 1px solid $color-border-lite;
 }
 .tf-filter-item {
     label {
@@ -1028,7 +1028,7 @@ li.tf-filter-item {
     padding: 10px 16px;
     height: 48px;
     background: $color-brand-lite;
-    border: 1px solid $color-border;
+    border: 1px solid $color-border-lite;
     border-radius: 8px 8px 0px 0px;
     justify-content: space-between;
 }
@@ -1104,7 +1104,7 @@ li.tf-filter-item {
         font-size: 1rem;
     }
     .al-range-slider__track {
-        background: $color-gray-light;
+        background: $color-brand-lite;
         height: 10px;
         box-shadow: none;
         margin: 30px 0px 10px 0px;
@@ -1115,7 +1115,7 @@ li.tf-filter-item {
     .al-range-slider_dark {
         padding: 0px;
         .al-range-slider__bar {
-            background: $color-primary;
+            background: $color-text;
             box-shadow: none;
             pointer-events: none;
         }

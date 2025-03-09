@@ -46,7 +46,7 @@
                             flex-wrap: nowrap;
                         }
                         &:first-child{
-                            border-right: 1px solid $color-border;
+                            border-right: 1px solid $color-border-lite;
                         }
 
                         .info-select{
@@ -195,7 +195,7 @@
                     }
                     .tf-cancellation-timeline{
                         margin-top: 12px;
-                        border-bottom: 1px solid $color-border;
+                        border-bottom: 1px solid $color-border-lite;
                         .tf-timeline{
                             ul{
                                 display: flex;

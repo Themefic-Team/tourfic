@@ -147,7 +147,7 @@
                         }
                         .al-range-slider__track{
                             border-radius: 4px;
-                            background: $color-gray-light;
+                            background: $color-brand-lite;
                             margin: 0 0 28px 0;
                         }
                         .al-range-slider__tooltip{
@@ -156,12 +156,12 @@
                             color: $color-text;
                         }
                         .al-range-slider_dark .al-range-slider__bar{
-                            background-color: $color-primary;
+                            background-color: $color-text;
                         }
                         .al-range-slider__knob{
                             border-radius: 12px;
                             border: 1.5px solid $color-border;
-                            background: $color-white;
+                            background: $color-filling-bg;
                             width: 24px;
                             height: 24px;
                         }

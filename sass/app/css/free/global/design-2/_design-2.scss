@@ -407,7 +407,7 @@
 
             //Tourfic review reply
             .tf-review-reply{
-                border-bottom: 1px solid $color-border;
+                border-bottom: 1px solid $color-border-lite;
                 padding-bottom: 30px;
 
                 .tf-review-details{
@@ -526,7 +526,7 @@
                         div{
                             input{
                                 padding: 15px 20px;
-                                border: 1px solid $color-border;
+                                border: 1px solid $color-border-lite;
                                 width: 100%;
                                 background-color: $color-gray-light;
                                 border-radius: 5px;
@@ -594,7 +594,7 @@
         .tf-faq-wrapper {
             .tf-faq-inner{
                 .tf-faq-single{
-                    border-bottom: 1px solid $color-border;
+                    border-bottom: 1px solid $color-border-lite;
                 }
                 .active{
                     .tf-faq-single-inner{
@@ -741,7 +741,7 @@
                             font-weight: inherit;
                             color: inherit;
                             box-sizing: border-box;
-                            border: 1px solid $color-border;
+                            border: 1px solid $color-border-lite;
                             background-color: $color-white;
                         }
                     }
@@ -750,7 +750,7 @@
             .tf-icon {
                 background-color: $color-white;
                 border-radius: 5px;
-                border: 1px solid $color-border;
+                border: 1px solid $color-border-lite;
                 &:hover {
                 cursor: pointer;
                 }
@@ -821,7 +821,7 @@
                     overflow: scroll;
                     overflow-x: hidden;
                     position: absolute;
-                    border: 1px solid $color-border;
+                    border: 1px solid $color-border-lite;
                     border-bottom: none;
                     border-top: none;
                     z-index: 99;
@@ -832,7 +832,7 @@
                         padding: 10px;
                         cursor: pointer;
                         background-color: $color-white;
-                        border-bottom: 1px solid $color-border;
+                        border-bottom: 1px solid $color-border-lite;
                         color: $color-text;
                     }
                 }
@@ -857,7 +857,7 @@
                 }
             }
             .tf-related-single{
-                border-top: 1px solid $color-border;
+                border-top: 1px solid $color-border-lite;
                 margin-bottom: $tf-space-24;
                 padding-top: $tf-space-24;
                 .tf-related-item-featured {
@@ -874,15 +874,15 @@
             .tf_widget {
                 .tf-hotel-result-price-range,
                 .tf-tour-result-price-range{
-                    margin-top: 20px;
-                    padding-bottom: 20px;
+                    margin-top: 12px;
+                    padding-bottom: 12px;
                 }
                 h4{
                     font-size: 1.25rem;
                     font-weight: 500;
                 }
                 .al-range-slider__track {
-                    background: $color-gray-light;
+                    background: $color-brand-lite;
                     height: 10px;
                     box-shadow: none;
                     margin: 30px 0px 10px 0px;
@@ -890,16 +890,16 @@
                 .al-range-slider_dark {
                     padding: 0px;
                     .al-range-slider__bar {
-                        background: $color-primary;
+                        background: $color-text;
                         box-shadow: none;
                     }
                 }
                 .al-range-slider__knob {
-                    background: $color-primary;
-                    height: 15px;
-                    width: 15px;
+                    background: $color-filling-bg;
+                    height: 24px;
+                    width: 24px;
                     box-shadow: none;
-                    border: 3px solid $color-primary;
+                    border: 1.5px solid $color-border;
                     &:first-child {
                         span {
                             left: 10px;
@@ -1222,7 +1222,7 @@
                 }
 
                 .tf-post-footer {
-                    border-top: 1px solid $color-border;
+                    border-top: 1px solid $color-border-lite;
                     padding-top: 16px;
                 }
             }

@@ -665,7 +665,7 @@
 
 .single-tf_tours .gm-style-iw .gm-style-iw-d .itinerary-map-popup .itinerary-map-popup-content .itinerary-map-popup-options .itinerary-map-popup-option {
   padding: 4px 8px;
-  border: 1px solid var(--tf-border-default);
+  border: 1px solid var(--tf-border-lite);
   border-radius: 32px;
   font-weight: 400;
   color: var(--tf-text-paragraph);
@@ -944,7 +944,6 @@
   display: flex;
   align-items: center;
   background: #ffffff;
-  box-shadow: 0px 2px 4px rgba(90, 91, 106, 0.08);
   border-radius: 4px;
   z-index: 1;
   position: relative;
@@ -958,7 +957,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0px 2px 4px rgba(90, 91, 106, 0.08);
   padding: 10px;
 }
 
@@ -1090,7 +1088,7 @@
 
 .single-tf_tours .tf-single-template__two .tf-itinerary-wrapper .tf-single-itinerary-item {
   padding-left: 40px;
-  border-bottom: 1px solid var(--tf-border-default);
+  border-bottom: 1px solid var(--tf-border-lite);
   padding-bottom: 24px;
   padding-top: 24px;
 }
@@ -1623,7 +1621,7 @@
 
 .single-tf_tours .tf-single-template__two .upcomming-tours {
   padding-top: 120px;
-  border-top: 1px solid var(--tf-border-default);
+  border-top: 1px solid var(--tf-border-lite);
 }
 
 @media only screen and (max-width: 1024px) {
@@ -1739,7 +1737,7 @@
   flex-direction: row;
   justify-content: space-evenly;
   margin: 10px 0 0 0;
-  border: 1px solid var(--tf-border-default);
+  border: 1px solid var(--tf-border-lite);
   box-sizing: border-box;
   border-radius: 4px;
   cursor: pointer;
@@ -1804,7 +1802,7 @@
 }
 
 .single-tf_tours .tf-single-template__two .tf-trip-info .person-info {
-  border: 1px solid var(--tf-border-default);
+  border: 1px solid var(--tf-border-lite);
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
@@ -2246,7 +2244,7 @@
 }
 
 .single-tf_tours .tf-single-template__three .tf-bottom-booking-bar .tf-booking-form-fields .tf-booking-form-checkinout {
-  border-right: 1px solid var(--tf-border-default);
+  border-right: 1px solid var(--tf-border-lite);
   flex-direction: column;
   position: relative;
   padding: 0px 38px;
@@ -2311,7 +2309,7 @@
   font-weight: 600;
   line-height: 1.3;
   margin-bottom: 0px;
-  border-right: 1px solid var(--tf-border-default);
+  border-right: 1px solid var(--tf-border-lite);
   border-radius: 0px;
   background-image: none;
   text-align: center;
@@ -2498,7 +2496,7 @@ div#tf-contact-info {
 }
 
 .single-tf_tours .tf-single-template__two .tf-tour-details-right .tf-booking-price {
-  border-bottom: 1px solid var(--tf-filling-background);
+  border-bottom: 1px solid var(--tf-border-lite);
   padding-bottom: 12px;
 }
 
@@ -2548,7 +2546,7 @@ div#tf-contact-info {
 
 .single-tf_tours .tf-single-template__two .tf-tour-details-right .tf-tour-extra-box .tf-tour-extra {
   padding: 16px 24px;
-  border: 1px solid var(--tf-border-default);
+  border: 1px solid var(--tf-border-lite);
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
@@ -2603,7 +2601,7 @@ div#tf-contact-info {
   height: 38px;
   width: 38px;
   background: #ffffff;
-  border: 1px solid var(--tf-border-default);
+  border: 1px solid var(--tf-border-lite);
   box-shadow: 0px 9px 24px rgba(224, 235, 243, 0.75);
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;

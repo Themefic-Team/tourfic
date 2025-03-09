@@ -630,8 +630,8 @@
 }
 
 .single-tf_carrental .tf-single-template__one .tf-car-conditions-section table {
-  border-left: 1px solid var(--tf-border-default);
-  border-top: 1px solid var(--tf-border-default);
+  border-left: 1px solid var(--tf-border-lite);
+  border-top: 1px solid var(--tf-border-lite);
   margin: 0px;
   border-radius: 16px;
 }
@@ -640,8 +640,8 @@
   color: var(--tf-text-paragraph);
   font-size: 1rem;
   font-weight: 400;
-  border-right: 1px solid var(--tf-border-default);
-  border-bottom: 1px solid var(--tf-border-default);
+  border-right: 1px solid var(--tf-border-lite);
+  border-bottom: 1px solid var(--tf-border-lite);
   padding: 16px;
   vertical-align: baseline;
   text-align: left;
@@ -659,8 +659,8 @@
   color: var(--tf-text-paragraph);
   font-size: 1rem;
   font-weight: 400;
-  border-right: 1px solid var(--tf-border-default);
-  border-bottom: 1px solid var(--tf-border-default);
+  border-right: 1px solid var(--tf-border-lite);
+  border-bottom: 1px solid var(--tf-border-lite);
   padding: 16px 40px;
 }
 
@@ -920,7 +920,7 @@
 }
 
 .single-tf_carrental .tf-single-template__one .tf-date-select-box .tf-date-single-select .tf-select-date:first-child {
-  border-right: 1px solid var(--tf-border-default);
+  border-right: 1px solid var(--tf-border-lite);
 }
 
 .single-tf_carrental .tf-single-template__one .tf-date-select-box .tf-date-single-select .tf-select-date .info-select {
@@ -1090,7 +1090,7 @@
 
 .single-tf_carrental .tf-single-template__one .tf-date-select-box .tf-cancellation-box .tf-cancellation-timeline {
   margin-top: 12px;
-  border-bottom: 1px solid var(--tf-border-default);
+  border-bottom: 1px solid var(--tf-border-lite);
 }
 
 .single-tf_carrental .tf-single-template__one .tf-date-select-box .tf-cancellation-box .tf-cancellation-timeline .tf-timeline ul {
@@ -1387,7 +1387,7 @@
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-add-extra-section .tf-car-extra-infos .tf-car-single-extra .tf-extra-title .acr-select .acr-dec,
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-add-extra-section .tf-car-extra-infos .tf-car-single-extra .tf-extra-title .acr-select .acr-inc {
   color: var(--tf-brand-dark);
-  border: 0px solid;
+  border: 0px solid var(--tf-border-lite);
   background-color: transparent;
   width: auto;
   height: auto;
@@ -1497,7 +1497,7 @@
 }
 
 .single-tf_carrental .tf-single-template__one .tf-car-booking-form .tf-driver-details .tf-driver-photo .tf-driver-info .tf-driver-contact-info {
-  border-top: 1px solid var(--tf-border-default);
+  border-top: 1px solid var(--tf-border-lite);
   margin-top: 16px;
   padding-top: 16px;
 }
@@ -1654,7 +1654,7 @@
 .tax-carrental_location .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date:first-child,
 .tax-carrental_brand .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date:first-child,
 .page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date:first-child {
-  border-right: 1px solid var(--tf-border-default);
+  border-right: 1px solid var(--tf-border-lite);
 }
 
 .post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date i,
@@ -2801,7 +2801,7 @@
 .tax-carrental_brand .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .al-range-slider__track,
 .page-template-tf-search .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .al-range-slider__track {
   border-radius: 4px;
-  background: #F1F3F4;
+  background: var(--tf-brand-lite);
   margin: 0 0 28px 0;
 }
 
@@ -2818,7 +2818,7 @@
 .tax-carrental_location .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .al-range-slider_dark .al-range-slider__bar,
 .tax-carrental_brand .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .al-range-slider_dark .al-range-slider__bar,
 .page-template-tf-search .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .al-range-slider_dark .al-range-slider__bar {
-  background-color: var(--tf-primary);
+  background-color: var(--tf-text-paragraph);
 }
 
 .post-type-archive-tf_carrental .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .al-range-slider__knob,
@@ -2827,7 +2827,7 @@
 .page-template-tf-search .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .al-range-slider__knob {
   border-radius: 12px;
   border: 1.5px solid var(--tf-border-default);
-  background: #ffffff;
+  background: var(--tf-filling-background);
   width: 24px;
   height: 24px;
 }

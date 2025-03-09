@@ -684,7 +684,7 @@
 .single-tf_apartment .tf-single-template__one .tf-apartment-rooms .slick-arrow svg {
   padding: 4px;
   border-radius: 50%;
-  border: 1px solid var(--tf-border-default);
+  border: 1px solid var(--tf-border-lite);
   background: var(--tf-filling-foreground);
 }
 
@@ -899,7 +899,7 @@
   gap: 30px;
   padding: 24px;
   background-color: var(--tf-brand-lite);
-  border: 1px solid var(--tf-border-default);
+  border: 1px solid var(--tf-border-lite);
   border-radius: 8px;
 }
 
@@ -1357,7 +1357,7 @@
 
 .single-tf_apartment .tf-single-template__one #apartment-map .tf-map-content-wrapper .about-location .tf-apartment-surronding-places li {
   padding: 8px 0 8px 32px;
-  border-bottom: 1px solid var(--tf-border-default);
+  border-bottom: 1px solid var(--tf-border-lite);
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -1394,7 +1394,7 @@
 
 .single-tf_apartment .tf-single-template__one .tf-apartment-faq .tf-faq-content-wrapper {
   background: var(--tf-brand-lite);
-  border: 1px solid var(--tf-border-default);
+  border: 1px solid var(--tf-border-lite);
   border-radius: 8px;
   padding: 40px;
 }
@@ -1875,7 +1875,7 @@
 }
 
 .single-tf_apartment .tf-single-template__one #tf-apartment-booking .tf-apartment-form-fields .tf_booking-dates .tf-check-in-date {
-  border-right: 1px solid var(--tf-border-default);
+  border-right: 1px solid var(--tf-border-lite);
 }
 
 .single-tf_apartment .tf-single-template__one #tf-apartment-booking .tf-apartment-form-fields .tf_booking-dates #check-in-out-date {
@@ -1886,7 +1886,7 @@
 }
 
 .single-tf_apartment .tf-single-template__one #tf-apartment-booking .tf-apartment-form-fields .tf-apartment-guest-row {
-  border-top: 1px solid var(--tf-border-default);
+  border-top: 1px solid var(--tf-border-lite);
   padding: 8px 16px;
 }
 
@@ -2390,7 +2390,7 @@
 .single-tf_apartment .tf-single-template__one .apartment-toc .tf-toc-wrap {
   padding: 40px;
   border-radius: 4px;
-  border: 1px solid var(--tf-border-default);
+  border: 1px solid var(--tf-border-lite);
 }
 
 @media only screen and (max-width: 768px) {

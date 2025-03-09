@@ -21,8 +21,6 @@
             justify-content: space-between;
             padding: 10px 0;
             margin-bottom: 15px;
-            border-bottom: 1px solid $color-border;
-            border-top: 1px solid $color-border;
             @media #{$max1024} {
                 display: none;
             }
@@ -212,7 +210,8 @@
         min-height: 149px;
         padding: 20px;
         margin: 16px 0;
-        border: 1px solid $color-border;
+        border: 1px solid $color-border-lite;
+        background: $color-filling-fg;
         border-radius: 4px;
         box-sizing: border-box;
         cursor: default;
@@ -347,7 +346,7 @@
                 margin: 5px 0 10px;
                 font-size: 0.875rem;
                 opacity: 0.85;
-                border-top: 1px solid gray;
+                border-top: 1px solid $color-border-lite;
                 padding-top: 8px;
             }
             .availability-btn-area.tour-search {
@@ -398,7 +397,7 @@
             .sr_rooms_table_block {
                 margin-top: 8px;
                 .room_details {
-                    border-top: 1px solid $color-gray;
+                    border-top: 1px solid $color-border-lite;
                     padding-top: 8px;
                     .featuredRooms {
                         margin: 0;
@@ -458,7 +457,7 @@
     }
 }
 .tf_widget {
-    border: 1px solid $color-border;
+    border: 1px solid $color-border-lite;
     background: $color-white;
     border-radius: 10px;
     margin-bottom: 20px;
@@ -467,15 +466,15 @@
     .tf-tour-result-price-range,
     .tf-apartment-result-price-range{
         margin-top: 20px;
-        padding-left: 20px;
-        padding-right: 20px;
+        padding-left: 12px;
+        padding-right: 12px;
     }
     h4{
         font-size: 1.25rem;
         font-weight: 500;
     }
     .al-range-slider__track {
-        background: $color-gray-light;
+        background: $color-brand-lite;
         height: 10px;
         box-shadow: none;
         margin: 30px 0px 10px 0px;
@@ -483,16 +482,16 @@
     .al-range-slider_dark {
         padding: 0px;
         .al-range-slider__bar {
-            background: $color-primary;
+            background: $color-text;
             box-shadow: none;
         }
     }
     .al-range-slider__knob {
-        background: $color-primary;
-        height: 15px;
-        width: 15px;
+        background: $color-filling-bg;
+        height: 24px;
+        width: 24px;
         box-shadow: none;
-        border: 3px solid $color-primary;
+        border: 1.5px solid $color-border;
         &:first-child {
             span {
                 left: 10px;
@@ -517,7 +516,7 @@
         padding: 10px;
         height: 48px;
         background: $color-gray-light;
-        border: 1px solid $color-border;
+        border: 1px solid $color-border-lite;
         border-radius: 8px 8px 0px 0px;
         justify-content: space-between;
         span {
@@ -576,7 +575,7 @@
                 width: 20px;
                 background-color: $color-white;
                 border-radius: 5px;
-                border: 1px solid $color-border;
+                border: 1px solid $color-border-lite;
             }
     
             input[type=checkbox] {
@@ -658,7 +657,7 @@
             width: 20px;
             background-color: $color-white;
             border-radius: 5px;
-            border: 1px solid $color-border;
+            border: 1px solid $color-border-lite;
         }
 
         input[type=checkbox] {
