@@ -1219,6 +1219,7 @@
   position: relative;
   font-size: 1.125rem;
   line-height: 1.5;
+  margin-bottom: 0;
 }
 
 .single-tf_tours .tf-single-template__two .tf-itinerary-wrapper .tf-single-itinerary-item.active .accordion-checke::before {

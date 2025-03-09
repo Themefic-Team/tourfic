@@ -43,7 +43,7 @@
                     flex-wrap: wrap;
                     .tf-single-car-view{
                         border-radius: 16px;
-                        background: rgb(248,250,252);
+                        background: $color-filling-fg;
                         width: calc(50% - 16px);
                         @media #{$max1024}{
                             width: 100%;

@@ -8,7 +8,7 @@
                 .tf-car-archive-sidebar{
                     width: 358px;
                     border-radius: 16px;
-                    background: $color-gray-info;
+                    background: $color-filling-fg;
                     padding: 32px;
                     @media #{$max1024}{
                         width: 280px;
@@ -187,7 +187,7 @@
                                     li{
                                         width: calc(33% - 5px);
                                         label{
-                                            background: $color-white;
+                                            background: $color-filling-bg;
                                             border-radius: 8px;
                                             margin: 0;
                                             padding: 0;

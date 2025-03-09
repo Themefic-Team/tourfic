@@ -6,8 +6,7 @@
 
                 .tf-apartment-amenities-inner {
                     border-radius: 8px;
-                    border: 1px solid $color-border;
-                    background: $color-gray-info;
+                    background: $color-filling-fg;
                     padding: 24px;
                     @media #{$max575}{
                         padding: 16px;

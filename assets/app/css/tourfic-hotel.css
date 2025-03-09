@@ -592,7 +592,7 @@
 
 .single-tf_hotel .tf-single-template__one .nearby-container {
   display: block;
-  background-color: #ffffff;
+  background-color: var(--tf-filling-foreground);
   margin-top: 20px;
   margin-bottom: 20px;
   padding: 20px 20px 10px 20px;
@@ -679,7 +679,7 @@
   margin-right: 10px;
   padding: 6px 10px;
   border-radius: 4px;
-  border: 1px solid #E6F2FE;
+  border: 1px solid var(--tf-filling-foreground);
   margin-top: 10px;
 }
 

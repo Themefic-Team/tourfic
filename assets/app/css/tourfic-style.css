@@ -861,6 +861,12 @@ a {
   margin-bottom: 56px;
 }
 
+@media only screen and (max-width: 768px) {
+  .tf-mb-56 {
+    margin-bottom: 40px;
+  }
+}
+
 .sp-20 {
   padding: 20px 0;
 }
@@ -1876,7 +1882,7 @@ h3.section-heading {
 }
 
 .tf-ask-question {
-  background: #F5FAFF;
+  background: var(--tf-filling-foreground);
   padding: 30px;
   border-radius: 4px;
   flex: 2;
@@ -5264,9 +5270,8 @@ div#tf-destinationautocomplete-list div:before {
 }
 
 .single-tour-wrap.tf-featured .single-tour-inner {
-  background: #F1F3F4;
-  border-color: var(--tf-border-default);
-  box-shadow: 0px 2px 4px rgba(179, 180, 202, 0.48);
+  background: var(--tf-filling-foreground);
+  border-color: var(--tf-border-lite);
 }
 
 .single-tour-wrap:first-child .single-tour-inner {
@@ -7997,7 +8002,7 @@ div#tf-destinationautocomplete-list div:before {
   margin-right: 10px;
   padding: 6px 10px;
   border-radius: 4px;
-  border: 1px solid #E6F2FE;
+  border: 1px solid var(--tf-filling-foreground);
   background-color: var(--tf-filling-foreground);
   margin-top: 10px;
 }
@@ -9171,7 +9176,7 @@ div#tf-destinationautocomplete-list div:before {
 
 .tf-archive-search-box-wrapper {
   border-radius: 16px;
-  background: #E6F2FE;
+  background: var(--tf-filling-foreground);
   box-shadow: 0px 24px 60px 0px rgba(0, 15, 63, 0.16);
 }
 
@@ -10179,7 +10184,13 @@ div#tf-destinationautocomplete-list div:before {
 }
 
 .tf-single-template__two .tf-review-wrapper .tf-review-form {
-  padding-bottom: 30px;
+  padding-bottom: 56px;
+}
+
+@media only screen and (max-width: 768px) {
+  .tf-single-template__two .tf-review-wrapper .tf-review-form {
+    padding-bottom: 40px;
+  }
 }
 
 .tf-single-template__two .tf-review-wrapper .tf-review-form .tf-review-form-container {
@@ -11059,7 +11070,6 @@ div#tf-destinationautocomplete-list div:before {
 .tf-archive-template__three,
 .page-template-tf-search__three {
   width: 100%;
-  background: #FDF9F3;
 }
 
 .tf-single-template__three #tf-required,
@@ -13865,6 +13875,7 @@ div#tf-destinationautocomplete-list div:before {
   flex-direction: column;
   align-items: center;
   gap: 24px;
+  margin-top: 32px;
 }
 
 @media only screen and (max-width: 1600px) {
@@ -14676,14 +14687,7 @@ div#tf-destinationautocomplete-list div:before {
 
 .tf-single-template__three .tf-single-widgets {
   display: flex;
-  gap: 24px;
   flex-direction: column;
-}
-
-@media only screen and (max-width: 1024px) {
-  .tf-single-template__three .tf-single-widgets {
-    gap: 16px;
-  }
 }
 
 .tf-single-template__three .tf-popup-video-item {
