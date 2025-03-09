@@ -24,6 +24,11 @@
                 .tf-review-form-container{
                     min-width: auto;
                     background:  transparent;
+                    form{
+                        padding: 32px;
+                        background: var(--tf-filling-foreground);
+                        border-radius: 8px;
+                    }
                     .tf-visitor-info{
                         margin: 20px 0px;
                     }
@@ -42,11 +47,14 @@
                             border: 0px solid;
                         }
                     }
+                    textarea{
+                        background: transparent;
+                        border-color: $color-brand-lite;
+                    }
                 }
                 .tf-review-data{
                     margin-bottom: 32px;
                     .tf-review-data-average{
-                        background-color: $color-filling-fg;
                         .avg-review{
                             color: $color-text;
                             font-size: 2.375rem;
