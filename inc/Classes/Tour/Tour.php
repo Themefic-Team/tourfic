@@ -2396,7 +2396,7 @@ class Tour {
 		}
 		// Featured
 		$featured            = ! empty( $meta['tour_as_featured'] ) ? $meta['tour_as_featured'] : '';
-		$tours_multiple_tags = ! empty( Helper::tf_data_types($meta['tf-tour-tags']) ) ? Helper::tf_data_types($meta['tf-tour-tags']) : array();
+		$tours_multiple_tags = isset($meta['tf-tour-tags']) && is_array($meta['tf-tour-tags'])? Helper::tf_data_types($meta['tf-tour-tags']) : array();
 
 		// Gallery Image
 		$gallery = ! empty( $meta['tour_gallery'] ) ? $meta['tour_gallery'] : '';

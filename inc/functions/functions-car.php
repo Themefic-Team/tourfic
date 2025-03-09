@@ -45,7 +45,7 @@ $get_prices = Pricing::set_total_price($meta, $pickup_date, $dropoff_date, $pick
 $total_prices = $get_prices['sale_price'] ? $get_prices['sale_price'] : 0;
 
 if(!empty($car_extra_pass)){
-	$total_extra = Pricing::set_extra_price($meta, $car_extra_pass, $extra_qty, $pickup_date, $dropoff_date, $pickup_time, $dropoff_time);
+	$total_extra = Pricing::set_extra_price($meta, $pickup_date, $dropoff_date, $pickup_time, $dropoff_time, $car_extra_pass, $extra_qty);
 	$total_prices = $total_prices + $total_extra['price'];
 }
 
@@ -935,7 +935,7 @@ function tf_car_price_calculation_callback() {
 	$total_prices = $get_prices['sale_price'] ? $get_prices['sale_price'] : 0;
 
 	if(!empty($extra_ids)){
-		$total_extra = Pricing::set_extra_price($meta, $extra_ids, $extra_qty, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time);
+		$total_extra = Pricing::set_extra_price($meta, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time, $extra_ids, $extra_qty);
 		$total_prices = $total_prices + $total_extra['price'];
 	}
 	

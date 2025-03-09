@@ -17516,17 +17516,12 @@ html {
 @media only screen and (max-width: 767.98px) {
   .tf-template-3 .tf-modify-search-btn {
     display: block;
+    margin-bottom: -16px;
   }
 }
 
 .tf-template-3 .tf-booking-form-wrapper {
   background: #FAEEDC;
-}
-
-@media only screen and (max-width: 767.98px) {
-  .tf-template-3 .tf-booking-form-wrapper {
-    display: none;
-  }
 }
 
 .tf-template-3 .tf-booking-form-wrapper .tf-booking-form {
@@ -20640,6 +20635,9 @@ html {
     margin-top: 32px;
     margin-right: 16px;
     margin-left: 16px;
+  }
+  .tf-template-3.tf-hotel-single .tf-booking-form {
+    display: none;
   }
   .tf-template-3.tf-tour-single .tf-content-wrapper .tf-details {
     display: flow-root;

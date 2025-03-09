@@ -13,13 +13,12 @@
     display: none;
     @media #{$max767}{
         display: block;
+        margin-bottom: -16px;
     }
 }
 .tf-booking-form-wrapper {
     background: #FAEEDC;
-    @media #{$max767}{
-        display: none;
-    }
+   
     .tf-booking-form {
         display: flex;
         margin: 0;

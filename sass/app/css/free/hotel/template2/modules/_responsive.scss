@@ -388,6 +388,11 @@
             margin-right: 16px;
             margin-left: 16px;
         }
+        &.tf-hotel-single{
+            .tf-booking-form{
+                display: none;
+            }
+        }
     }
 
     .tf-template-3.tf-tour-single {

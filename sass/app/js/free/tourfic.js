@@ -2195,7 +2195,7 @@
 
         //Search Form Showing
         $('.tf-template-3 .tf-modify-search-btn').on('click', function () {
-            $('.tf-booking-form-wrapper').slideDown(300);
+            $('.tf-booking-form-wrapper .tf-booking-form').slideDown(300);
             $('.tf-template-3 .tf-modify-search-btn').slideUp(300);
         });
 
