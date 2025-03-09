@@ -218,12 +218,10 @@
         }
         .tf-booking-form-wrapper {
             background: $color-filling-fg;
-            @media #{$max768}{
-                display: none;
-            }
             .tf-booking-form {
                 display: flex;
                 margin: 0;
+                
                 .tf-booking-form-fields {
                     display: flex;
                     width: 78%;
@@ -1406,6 +1404,9 @@
                 .tf-booking-form{
                     @media #{$max1024}{
                         display: flow-root;
+                    }
+                    @media #{$max768}{
+                        display: none;
                     }
                     span.tf-booking-form-title{
                         @media #{$max768} {

@@ -10436,14 +10436,6 @@ div#tf-destinationautocomplete-list div:before {
   background: var(--tf-filling-foreground);
 }
 
-@media only screen and (max-width: 768px) {
-  .tf-single-template__three .tf-booking-form-wrapper,
-  .tf-archive-template__three .tf-booking-form-wrapper,
-  .page-template-tf-search__three .tf-booking-form-wrapper {
-    display: none;
-  }
-}
-
 .tf-single-template__three .tf-booking-form-wrapper .tf-booking-form,
 .tf-archive-template__three .tf-booking-form-wrapper .tf-booking-form,
 .page-template-tf-search__three .tf-booking-form-wrapper .tf-booking-form {
@@ -12272,6 +12264,12 @@ div#tf-destinationautocomplete-list div:before {
 @media only screen and (max-width: 1024px) {
   .single-tf_hotel .tf-single-template__three .tf-booking-form-wrapper .tf-booking-form {
     display: flow-root;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .single-tf_hotel .tf-single-template__three .tf-booking-form-wrapper .tf-booking-form {
+    display: none;
   }
 }
 
