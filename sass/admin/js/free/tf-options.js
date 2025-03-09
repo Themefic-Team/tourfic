@@ -2942,12 +2942,6 @@ var frame, gframe;
                     foreground: '#F5FAFF',
                 },
             },
-            custom: {
-                brand: {},
-                text: {},
-                border: {},
-                filling: {},
-            },
         };
     
         // Function to update custom colors based on the selected design
@@ -2972,30 +2966,13 @@ var frame, gframe;
                     let fieldName = $(this).attr('name').split('[')[2].replace(']', ''); // Extract the sub-field (e.g., 'default', 'dark', 'lite')
                     let fieldValue = $(this).val();
                     let $customField = $(`input[name="tf_settings[tf-custom-${field}][${fieldName}]"]`);
-    
+
                     if ($customField.length) {
                         $customField.val(fieldValue).trigger('change');
                     }
                 });
             });
-        }
-
-        // Function to populate custom fields with stored custom colors
-        function populateCustomFields() {
-            const fields = ['brand', 'text', 'border', 'filling'];
-console.log('customColors', designDefault['custom']);
-            fields.forEach(field => {
-                $(`input[name^="tf_settings[tf-custom-${field}]"]`).each(function () {
-                    let fieldName = $(this).attr('name').split('[')[2].replace(']', ''); // Extract the sub-field (e.g., 'default', 'dark', 'lite')
-                    let customValue = designDefault['custom'][`${field}`][`${fieldName}`];
-                    if (customValue) {
-                        $(this).val(customValue).trigger('change');
-                    }
-                });
-            });
-        }
-
-        
+        }     
     
         // Initialize wpColorPicker for all relevant inputs
         $('input[name^="tf_settings[tf-d"]').wpColorPicker({
@@ -3003,6 +2980,8 @@ console.log('customColors', designDefault['custom']);
                 let $colorField = $(event.target);
                 let originalValue = $colorField.val();
                 let newValue = ui.color.toString();
+
+                updateCustomColors(getSelectedDesign());
     
                 if (newValue !== originalValue) {
                     // Switch to custom palette
@@ -3018,9 +2997,6 @@ console.log('customColors', designDefault['custom']);
                     let design = match[1]; // e.g., 'd1', 'd2', etc.
                     let fieldType = match[2]; // e.g., 'brand', 'text', etc.
                     let fieldName = match[3]; // e.g., 'default', 'dark', 'lite', etc.
-
-                    // Store the custom color value
-                    designDefault['custom'][`${fieldType}`][`${fieldName}`] = newValue;
     
                     // Update the corresponding custom field
                     let $customColorField = $(`input[name="tf_settings[tf-custom-${fieldType}][${fieldName}]"]`);
@@ -3034,19 +3010,6 @@ console.log('customColors', designDefault['custom']);
                 }
             }
         });
-    
-        // Trigger updates when a design is selected
-        $('input[name="tf_settings\\[color-palette-template\\]"]').on('change', function () {
-            let selectedDesign = getSelectedDesign();
-            if (selectedDesign === 'custom') {
-                populateCustomFields(); // Populate custom fields with stored values
-            } else {
-                updateCustomColors(selectedDesign); // Update custom fields with design-specific values
-            }
-        });
-    
-        // Initialize custom colors on page load
-        updateCustomColors(getSelectedDesign());
     });
     
     

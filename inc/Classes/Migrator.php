@@ -603,52 +603,63 @@ class Migrator {
 			$prev_primary = !empty($options['tourfic-design1-global-color']) ? unserialize($options['tourfic-design1-global-color']) : '';
 			$prev_body_text = !empty($options['tourfic-design1-p-global-color']) ? unserialize($options['tourfic-design1-p-global-color']) : '';
 			$prev_template3 = !empty($options['tourfic-template3-bg']) ? unserialize($options['tourfic-template3-bg']) : '';
-			if(!empty($options["tf-custom"])){
-				$tf_custom_palatte = is_string($options["tf-custom"]) ? unserialize($options["tf-custom"]) : $options["tf-custom"];
-			} else {
-				$tf_custom_palatte = [];
-			}
+			$tf_brand_data = ! empty( Helper::tf_data_types( Helper::tfopt( "tf-custom-brand" ) ) ) ? Helper::tf_data_types( Helper::tfopt( "tf-custom-brand" ) ) : [];
+			$tf_text_data = ! empty( Helper::tf_data_types( Helper::tfopt( "tf-custom-text" ) ) ) ? Helper::tf_data_types( Helper::tfopt( "tf-custom-text" ) ) : [];
+			$tf_border_data = ! empty( Helper::tf_data_types( Helper::tfopt( "tf-custom-border" ) ) ) ? Helper::tf_data_types( Helper::tfopt( "tf-custom-border" ) ) : [];
+			$tf_filling_data = ! empty( Helper::tf_data_types( Helper::tfopt( "tf-custom-filling" ) ) ) ? Helper::tf_data_types( Helper::tfopt( "tf-custom-filling" ) ) : [];
 
 			if(!empty($options['tf-template'])){
 				$current_template = !empty($options['tf-template']['single-hotel']) ? $options['tf-template']['single-hotel'] : '';
 				if("design-1"==$current_template){
 
-					$tf_custom_palatte['primary'] = !empty($prev_primary['gcolor']) ? $prev_primary['gcolor'] : '#0E3DD8';
-					$tf_custom_palatte['text'] = !empty($prev_body_text['pgcolor']) ? $prev_body_text['pgcolor'] : '#686E7A';
-					$tf_custom_palatte['secondary'] = '#003C7A';
-					$tf_custom_palatte['heading'] = '#060D1C';
-					$tf_custom_palatte['light-bg'] = '#faeedc';
-					$tf_custom_palatte['highlights-bg'] = '#FCF4E8';
-					$tf_custom_palatte['form-input-bg'] = '#F3F7FA';
-					$tf_custom_palatte['box-shadow'] = '#e0e8ee52';
-					$tf_custom_palatte['border-color'] = '#ddd';
-					$options["tf-custom"] = $tf_custom_palatte;
+					$tf_brand_data['default'] = !empty($prev_primary['gcolor']) ? $prev_primary['gcolor'] : '#0E3DD8';
+					$tf_brand_data['dark'] = '#0A2B99';
+					$tf_brand_data['lite'] = '#C9D4F7';
+					$tf_text_data['heading'] = '#1C2130';
+					$tf_text_data['paragraph'] = !empty($prev_body_text['pgcolor']) ? $prev_body_text['pgcolor'] : '#494D59';
+					$tf_text_data['lite'] = '#F3F5FD';
+					$tf_border_data['default'] = '#16275F';
+					$tf_border_data['lite'] = '#D1D7EE';
+					$tf_filling_data['background'] = '#ffffff';
+					$tf_filling_data['foreground'] = '#F5F7FF';
+					$options["tf-custom-brand"] = $tf_brand_data;
+					$options["tf-custom-text"] = $tf_text_data;
+					$options["tf-custom-border"] = $tf_border_data;
+					$options["tf-custom-filling"] = $tf_filling_data;
 
 				}elseif("design-2"==$current_template){
 
-					$tf_custom_palatte['primary'] = !empty($prev_primary['gcolor']) ? $prev_primary['gcolor'] : '#B58E53';
-					$tf_custom_palatte['text'] = !empty($prev_body_text['pgcolor']) ? $prev_body_text['pgcolor'] : '#99948D';
-					$tf_custom_palatte['highlights-bg'] = !empty($prev_template3['template3-highlight']) ? $prev_template3['template3-highlight'] : '#FCF4E8';
-					$tf_custom_palatte['secondary'] = '#917242';
-					$tf_custom_palatte['heading'] = '#595349';
-					$tf_custom_palatte['light-bg'] = '#faeedc';
-					$tf_custom_palatte['form-input-bg'] = '#F3F7FA';
-					$tf_custom_palatte['box-shadow'] = '#e0e8ee52';
-					$tf_custom_palatte['border-color'] = '#ddd';
-					$options["tf-custom"] = $tf_custom_palatte;
+					$tf_brand_data['default'] = !empty($prev_primary['gcolor']) ? $prev_primary['gcolor'] : '#B58E53';
+					$tf_brand_data['dark'] = '#917242';
+					$tf_brand_data['lite'] = !empty($prev_template3['template3-highlight']) ? $prev_template3['template3-highlight'] : '#FAEEDC';;
+					$tf_text_data['heading'] = '#30281C';
+					$tf_text_data['paragraph'] = !empty($prev_body_text['pgcolor']) ? $prev_body_text['pgcolor'] : '#595349';
+					$tf_text_data['lite'] = '#FDF9F3';
+					$tf_border_data['default'] = '#5F4216';
+					$tf_border_data['lite'] = '#EEE2D1';
+					$tf_filling_data['background'] = '#ffffff';
+					$tf_filling_data['foreground'] = '#FDF9F3';
+					$options["tf-custom-brand"] = $tf_brand_data;
+					$options["tf-custom-text"] = $tf_text_data;
+					$options["tf-custom-border"] = $tf_border_data;
+					$options["tf-custom-filling"] = $tf_filling_data;
 				
 				}elseif("default"==$current_template){
 
-					$tf_custom_palatte['primary'] = !empty($prev_primary['gcolor']) ? $prev_primary['gcolor'] : '#003162';
-					$tf_custom_palatte['text'] = !empty($prev_body_text['pgcolor']) ? $prev_body_text['pgcolor'] : '#000';
-					$tf_custom_palatte['secondary'] = '#0054A8';
-					$tf_custom_palatte['heading'] = '#000';
-					$tf_custom_palatte['light-bg'] = '#faeedc';
-					$tf_custom_palatte['highlights-bg'] = '#FCF4E8';
-					$tf_custom_palatte['form-input-bg'] = '#F3F7FA';
-					$tf_custom_palatte['box-shadow'] = '#e0e8ee52';
-					$tf_custom_palatte['border-color'] = '#ddd';
-					$options["tf-custom"] = $tf_custom_palatte;
+					$tf_brand_data['default'] = !empty($prev_primary['gcolor']) ? $prev_primary['gcolor'] : '#003061';
+					$tf_brand_data['dark'] = '#002952';
+					$tf_brand_data['lite'] = '#C2E0FF';
+					$tf_text_data['heading'] = '#1C2630';
+					$tf_text_data['paragraph'] = !empty($prev_body_text['pgcolor']) ? $prev_body_text['pgcolor'] : '#495159';
+					$tf_text_data['lite'] = '#F3F8FD';
+					$tf_border_data['default'] = '#163A5F';
+					$tf_border_data['lite'] = '#D1DFEE';
+					$tf_filling_data['background'] = '#ffffff';
+					$tf_filling_data['foreground'] = '#F5FAFF';
+					$options["tf-custom-brand"] = $tf_brand_data;
+					$options["tf-custom-text"] = $tf_text_data;
+					$options["tf-custom-border"] = $tf_border_data;
+					$options["tf-custom-filling"] = $tf_filling_data;
 				}
 
 				update_option( 'tf_settings', $options );
