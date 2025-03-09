@@ -2552,6 +2552,9 @@
             @media #{$max1024}{
                 font-size: 1.25rem;
             }
+            &.tf-section-title{
+                margin-bottom: 20px;
+            }
         }
         .tf-single-widgets h2 {
             margin-bottom: 0px;

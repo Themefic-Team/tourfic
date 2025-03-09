@@ -14664,6 +14664,10 @@ div#tf-destinationautocomplete-list div:before {
   }
 }
 
+.tf-single-template__three .tf-single-widgets h3.tf-section-title {
+  margin-bottom: 20px;
+}
+
 .tf-single-template__three .tf-single-widgets h2 {
   margin-bottom: 0px;
   font-weight: 700;
