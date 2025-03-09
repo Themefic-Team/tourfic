@@ -2861,37 +2861,6 @@ var frame, gframe;
             return $('input[name="tf_settings\\[color-palette-template\\]"]:checked').val();
         }
         
-    
-        // Function to update custom colors based on the selected design
-        function updateCustomColors(selectedDesign) {
-            if (!selectedDesign) return;
-    
-            const colorPalettes = {
-                'design-1': 'tf-d1',
-                'design-2': 'tf-d2',
-                'design-3': 'tf-d3',
-                'design-4': 'tf-d4'
-            };
-    
-            const selectedPalette = colorPalettes[selectedDesign];
-            if (!selectedPalette) return;
-    
-            // Define the fields to be updated
-            const fields = ['brand', 'text', 'border', 'filling'];
-    
-            fields.forEach(field => {
-                $(`input[name^="tf_settings[${selectedPalette}-${field}]"]`).each(function () {
-                    let fieldName = $(this).attr('name').split('[')[2].replace(']', ''); // Extract the sub-field (e.g., 'default', 'dark', 'lite')
-                    let fieldValue = $(this).val();
-                    let $customField = $(`input[name="tf_settings[tf-custom-${field}][${fieldName}]"]`);
-    
-                    if ($customField.length) {
-                        $customField.val(fieldValue).trigger('change');
-                    }
-                });
-            });
-        }
-
         const designDefault = {
             'd1': {
                 brand: {
@@ -2973,8 +2942,37 @@ var frame, gframe;
                     foreground: '#F5FAFF',
                 },
             },
-            custom: {},
         };
+    
+        // Function to update custom colors based on the selected design
+        function updateCustomColors(selectedDesign) {
+            if (!selectedDesign) return;
+    
+            const colorPalettes = {
+                'design-1': 'tf-d1',
+                'design-2': 'tf-d2',
+                'design-3': 'tf-d3',
+                'design-4': 'tf-d4'
+            };
+    
+            const selectedPalette = colorPalettes[selectedDesign];
+            if (!selectedPalette) return;
+    
+            // Define the fields to be updated
+            const fields = ['brand', 'text', 'border', 'filling'];
+    
+            fields.forEach(field => {
+                $(`input[name^="tf_settings[${selectedPalette}-${field}]"]`).each(function () {
+                    let fieldName = $(this).attr('name').split('[')[2].replace(']', ''); // Extract the sub-field (e.g., 'default', 'dark', 'lite')
+                    let fieldValue = $(this).val();
+                    let $customField = $(`input[name="tf_settings[tf-custom-${field}][${fieldName}]"]`);
+
+                    if ($customField.length) {
+                        $customField.val(fieldValue).trigger('change');
+                    }
+                });
+            });
+        }     
     
         // Initialize wpColorPicker for all relevant inputs
         $('input[name^="tf_settings[tf-d"]').wpColorPicker({
@@ -2982,6 +2980,8 @@ var frame, gframe;
                 let $colorField = $(event.target);
                 let originalValue = $colorField.val();
                 let newValue = ui.color.toString();
+
+                updateCustomColors(getSelectedDesign());
     
                 if (newValue !== originalValue) {
                     // Switch to custom palette
@@ -3003,22 +3003,13 @@ var frame, gframe;
                     if ($customColorField.length) {
                         
                         let value = $(`input[name="tf_settings[tf-${design}-${fieldType}][${fieldName}]"]`).val();
-                        $(`input[name="tf_settings[tf-custom${fieldType}][${fieldName}]"]`).val(value).trigger('change');
+                        $(`input[name="tf_settings[tf-custom-${fieldType}][${fieldName}]"]`).val(value).trigger('change');
                         $(`input[name="tf_settings[tf-${design}-${fieldType}][${fieldName}]"]`).val(designDefault[design][fieldType][fieldName]).trigger('change');
                         $customColorField.val(newValue).trigger('change');
                     }
                 }
             }
         });
-    
-        // Trigger updates when a design is selected
-        $('input[name="tf_settings\\[color-palette-template\\]"]').on('change', function () {
-            updateCustomColors(getSelectedDesign());
-            console.log(getSelectedDesign());
-        });
-    
-        // Initialize custom colors on page load
-        updateCustomColors(getSelectedDesign());
     });
     
     
