@@ -447,9 +447,8 @@
     }
     &.tf-featured{
         .single-tour-inner {
-            background: $color-gray-light;
-            border-color: $color-border;
-            box-shadow: 0px 2px 4px rgba(179, 180, 202, 0.48);
+            background: $color-filling-fg;
+            border-color: $color-border-lite;
         }
     }
     &:first-child {

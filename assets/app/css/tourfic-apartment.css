@@ -1077,8 +1077,7 @@
 
 .single-tf_apartment .tf-single-template__one .tf-apartment-amenities-section .tf-apartment-amenities-inner {
   border-radius: 8px;
-  border: 1px solid var(--tf-border-default);
-  background: #F5FAFF;
+  background: var(--tf-filling-foreground);
   padding: 24px;
 }
 
@@ -1547,9 +1546,9 @@
 .single-tf_apartment .tf-single-template__one .tf-apartment-review .tf-review-progress-bar {
   background: var(--tf-brand-lite);
   border-radius: 8px;
-  border: 1px solid var(--tf-border-default);
   column-gap: 200px;
   row-gap: 16px;
+  border: 0;
   grid-template-columns: calc(50% - 100px) calc(50% - 100px);
 }
 
@@ -1792,8 +1791,8 @@
 }
 
 .single-tf_apartment .tf-single-template__one #tf-apartment-booking .tf-apartment-form-fields {
-  background: #F5FAFF;
-  border: 1px solid var(--tf-border-default);
+  background: var(--tf-filling-background);
+  border: 1px solid var(--tf-border-lite);
   border-radius: 8px;
   margin-bottom: 16px;
 }
@@ -2251,7 +2250,6 @@
   background: var(--tf-brand-dark);
   border-radius: 8px;
   padding: 24px;
-  border: 1px solid var(--tf-border-default);
   margin-bottom: 25px;
 }
 
@@ -2291,7 +2289,6 @@
   height: 80px;
   object-fit: cover;
   border-radius: 40px;
-  border: 1px solid var(--tf-border-default);
 }
 
 .single-tf_apartment .tf-single-template__one .host-details .host-meta {

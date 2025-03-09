@@ -206,6 +206,9 @@ a{
 }
 .tf-mb-56{
     margin-bottom: 56px;
+    @media #{$max768}{
+        margin-bottom: 40px;
+    }
 }
 
 .sp-20 {

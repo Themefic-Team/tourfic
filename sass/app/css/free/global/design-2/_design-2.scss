@@ -467,7 +467,10 @@
                 }
             }
             .tf-review-form{
-               padding-bottom: 30px;
+               padding-bottom: 56px;
+               @media #{$max768}{
+                padding-bottom: 40px;
+               }
                 .tf-review-form-container{
                     background: transparent;
                     min-width: auto;
