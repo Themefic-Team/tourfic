@@ -395,9 +395,10 @@
             }
         };
 
-        $(".tf-booking-btn .booking-process").on("click touchstart", function (e) {
+        $(document).on('click touchstart', '.booking-process', function (e) {
+
             let $this = $(this);
-            
+
             let extra_ids = $("input[name='selected_extra[]']").map(function() {
                 return $(this).val();
             }).get();
