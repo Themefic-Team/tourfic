@@ -12,8 +12,6 @@
             },
         });
         
-        console.log(tf_params.body_classes)
-    
         // Add the classes to the body element
         if (tf_params.body_classes && tf_params.body_classes.length > 0) {
             $.each(tf_params.body_classes, function(index, className) {

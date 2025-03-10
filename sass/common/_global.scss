@@ -64,6 +64,18 @@ input[type="submit"].tf_btn,
         }
     }
 
+    &_lite{
+        color: $color-primary;
+        background-color: $color-brand-lite;
+        border-color: $color-brand-lite;
+
+        &:hover{
+            color: $color-white;
+            background-color: $color-primary;
+            border-color: $color-primary;
+        }
+    }
+
     &_gray{
         color: $color-primary;
         background-color: $color-brand-lite;

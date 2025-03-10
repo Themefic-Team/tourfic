@@ -322,7 +322,7 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
 							) );
 							?>
 							<?php if ( empty( $tf_comment_counts ) && $tf_comment_counts == 0 ): ?>
-                                <button class="tf_btn tf_btn_full tf_btn_sharp tf_btn_large tf-review-open">
+                                <button class="tf_btn tf_btn_lite tf_btn_full tf_btn_sharp tf_btn_large tf-review-open">
 									<?php esc_html_e( "Leave your review", "tourfic" ); ?>
                                 </button>
 							<?php endif; ?>

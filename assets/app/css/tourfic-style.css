@@ -81,6 +81,20 @@ input[type="submit"].tf_btn_secondary:hover,
   border-color: var(--tf-primary);
 }
 
+input[type="submit"].tf_btn_lite,
+.tf_btn_lite {
+  color: var(--tf-primary);
+  background-color: var(--tf-brand-lite);
+  border-color: var(--tf-brand-lite);
+}
+
+input[type="submit"].tf_btn_lite:hover,
+.tf_btn_lite:hover {
+  color: #ffffff;
+  background-color: var(--tf-primary);
+  border-color: var(--tf-primary);
+}
+
 input[type="submit"].tf_btn_gray,
 .tf_btn_gray {
   color: var(--tf-primary);
@@ -11016,6 +11030,10 @@ div#tf-destinationautocomplete-list div:before {
   color: var(--tf-primary);
 }
 
+.tf-archive-template__two .tf-search-results-list .tf-item-card .tf-item-details .tf-post-footer .tf-booking-bttns .tf_btn {
+  font-weight: 500;
+}
+
 .tf-archive-template__two .tf-search-results-list .tf-item-card .tf-item-details .tf-reviews {
   gap: 8px;
   align-items: center;
@@ -11028,6 +11046,10 @@ div#tf-destinationautocomplete-list div:before {
 .tf-archive-template__two .tf-search-results-list .tf-item-card .tf-post-footer {
   border-top: 1px solid var(--tf-border-lite);
   padding-top: 16px;
+}
+
+.tf-archive-template__two .tf-search-results-list .tf-item-card .tf-post-footer .tf-booking-bttns .tf_btn {
+  font-weight: 500;
 }
 
 .tf-archive-template__two .tf-search-results-list .tf-pagination-bar {
@@ -12672,7 +12694,7 @@ div#tf-destinationautocomplete-list div:before {
 .tf-archive-template__three .tf-popup-wrapper .tf-popup-inner,
 .page-template-tf-search__three .tf-popup-wrapper .tf-popup-inner {
   width: 1130px;
-  background: var(--tf-brand-lite);
+  background: var(--tf-filling-foreground);
   padding: 24px;
   max-height: 695px;
   max-width: 80vw;
@@ -12935,6 +12957,12 @@ div#tf-destinationautocomplete-list div:before {
 .single-tf_hotel .tf-single-template__three #tf-ask-modal button:hover,
 .single-tf_tours .tf-single-template__three #tf-ask-modal button:hover {
   background: var(--tf-brand-dark);
+}
+
+.single-tf_apartment.tf_template_3_global_layouts,
+.single-tf_hotel.tf_template_3_global_layouts,
+.single-tf_tours.tf_template_3_global_layouts {
+  background-color: #ffffff;
 }
 
 @media only screen and (max-width: 1280px) {
@@ -13598,7 +13626,7 @@ div#tf-destinationautocomplete-list div:before {
 }
 
 .tf-single-template__three .tf-questions-wrapper .tf-questions .tf-questions-col .tf-question.tf-active {
-  background: #FDF9F3;
+  background: var(--tf-brand-lite);
   padding: 24px;
   display: flex;
   flex-direction: column;
@@ -14229,7 +14257,6 @@ div#tf-destinationautocomplete-list div:before {
   width: 32px;
   border-radius: 100px;
   background: var(--tf-primary);
-  opacity: .5;
   box-shadow: 0px 14px 30px 0px rgba(0, 23, 100, 0.07);
   text-align: center;
   display: flex;
@@ -14408,7 +14435,7 @@ div#tf-destinationautocomplete-list div:before {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(48, 40, 28, 0.8);
+  background: var(--tf-text-heading);
   color: #ffffff;
   background-size: cover;
   background-position: center;
@@ -15367,6 +15394,9 @@ div#tf-destinationautocomplete-list div:before {
   background: var(--tf-filling-foreground);
   border-radius: 0px;
   box-shadow: none;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -15385,10 +15415,15 @@ div#tf-destinationautocomplete-list div:before {
   }
 }
 
+.tf-single-template__three .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-highlights-wrapper .tf-highlights-icon svg,
 .tf-single-template__three .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-highlights-wrapper .tf-highlights-icon img {
   width: 230px;
   height: 230px;
   object-fit: contain;
+}
+
+.tf-single-template__three .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-highlights-wrapper .tf-highlights-icon svg path {
+  fill: var(--tf-primary);
 }
 
 .tf-single-template__three .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-highlights-wrapper .ft-highlights-details {

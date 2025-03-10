@@ -1213,7 +1213,11 @@
                                 color: $color-primary;
                             }
                         }
-
+                        .tf-booking-bttns{
+                            .tf_btn{
+                                font-weight: 500;
+                            }
+                        }
                     }
                     .tf-reviews{
                         gap: 8px;
@@ -1227,6 +1231,12 @@
                 .tf-post-footer {
                     border-top: 1px solid $color-border-lite;
                     padding-top: 16px;
+
+                    .tf-booking-bttns{
+                        .tf_btn{
+                            font-weight: 500;
+                        }
+                    }
                 }
             }
 
