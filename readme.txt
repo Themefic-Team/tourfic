@@ -374,7 +374,7 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 = 2.15.20 – March 10, 2025 =
 
-- Fixed: Mobile scrolling for hotel availability on mobile.
+- Fixed: Scrolling for the hotel availability issue has been resolved.
 - Improved: System stability for better performance.
 
 = 2.15.19 – March 08, 2025 =
