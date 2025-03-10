@@ -936,6 +936,20 @@ a {
   display: grid !important;
 }
 
+/* Body bg */
+.post-type-archive-tf_tours,
+.post-type-archive-tf_hotel,
+.post-type-archive-tf_apartment,
+.tax-hotel_location,
+.tax-tour_destination,
+.tax-apartment_location,
+.page-template-tf-search,
+.single-tf_apartment,
+.single-tf_hotel,
+.single-tf_tours {
+  background-color: #ffffff;
+}
+
 .section-heading {
   font-size: 1.75rem;
   margin-bottom: 15px;
@@ -12957,12 +12971,6 @@ div#tf-destinationautocomplete-list div:before {
 .single-tf_hotel .tf-single-template__three #tf-ask-modal button:hover,
 .single-tf_tours .tf-single-template__three #tf-ask-modal button:hover {
   background: var(--tf-brand-dark);
-}
-
-.single-tf_apartment.tf_template_3_global_layouts,
-.single-tf_hotel.tf_template_3_global_layouts,
-.single-tf_tours.tf_template_3_global_layouts {
-  background-color: #ffffff;
 }
 
 @media only screen and (max-width: 1280px) {

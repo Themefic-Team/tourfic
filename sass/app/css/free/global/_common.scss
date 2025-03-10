@@ -1,3 +1,17 @@
+/* Body bg */
+.post-type-archive-tf_tours,
+.post-type-archive-tf_hotel,
+.post-type-archive-tf_apartment,
+.tax-hotel_location,
+.tax-tour_destination,
+.tax-apartment_location,
+.page-template-tf-search,
+.single-tf_apartment,
+.single-tf_hotel,
+.single-tf_tours{
+    background-color: $color-white;
+}
+
 .section-heading {
     font-size: 1.75rem;
     margin-bottom: 15px;
