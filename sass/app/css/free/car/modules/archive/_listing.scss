@@ -136,6 +136,9 @@
                                     svg{
                                         height: 20px;
                                         width: 20px;
+                                        path{
+                                            stroke: $color-text;
+                                        }
                                     }
                                     p{
                                         width: 100%;
@@ -264,6 +267,7 @@
                             background: $color-brand-lite;
                             color: $color-text;
                             border-radius: 8px;
+                            border: 1px solid $color-border-lite;
                             &.current{
                                 background: $color-primary;
                                 color: $color-text;

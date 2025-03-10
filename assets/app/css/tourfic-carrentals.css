@@ -861,7 +861,7 @@
 
 .single-tf_carrental .tf-single-template__one .tf-date-select-box {
   border-radius: 16px;
-  background: #F5FAFF;
+  background: var(--tf-filling-foreground);
   padding: 8px 8px 16px 8px;
   margin-bottom: 32px;
 }
@@ -902,7 +902,7 @@
 
 .single-tf_carrental .tf-single-template__one .tf-date-select-box .tf-date-single-select {
   border-radius: 8px;
-  background: #ffffff;
+  background: var(--tf-filling-background);
   padding: 16px;
   margin-bottom: 8px;
 }
@@ -1629,7 +1629,7 @@
 .tax-carrental_brand .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select,
 .page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select {
   border-radius: 8px;
-  background: #ffffff;
+  background: var(--tf-filling-background);
   padding: 16px;
   width: 33.33%;
 }
@@ -2309,6 +2309,13 @@
   width: 20px;
 }
 
+.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li svg path,
+.tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li svg path,
+.tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li svg path,
+.page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li svg path {
+  stroke: var(--tf-text-paragraph);
+}
+
 .post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li p,
 .tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li p,
 .tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li p,
@@ -2561,6 +2568,7 @@
   background: var(--tf-brand-lite);
   color: var(--tf-text-paragraph);
   border-radius: 8px;
+  border: 1px solid var(--tf-border-lite);
 }
 
 .post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf_posts_navigation .page-numbers.current,

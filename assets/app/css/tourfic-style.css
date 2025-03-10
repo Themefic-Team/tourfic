@@ -83,16 +83,15 @@ input[type="submit"].tf_btn_secondary:hover,
 
 input[type="submit"].tf_btn_gray,
 .tf_btn_gray {
-  color: #060D1C;
-  background-color: #E3E7F2;
-  border-color: #E3E7F2;
+  color: var(--tf-primary);
+  background-color: var(--tf-brand-lite);
+  border: 0;
 }
 
 input[type="submit"].tf_btn_gray:hover,
 .tf_btn_gray:hover {
   color: #ffffff;
   background-color: var(--tf-primary);
-  border-color: var(--tf-primary);
 }
 
 input[type="submit"].tf_btn_primary,
@@ -1139,7 +1138,14 @@ h3.section-heading {
   border: 0;
   box-shadow: none;
   height: 45px;
-  margin: 0px;
+  -webkit-appearance: none;
+  appearance: none;
+  -moz-appearance: none;
+  background-image: url("https://www.svgrepo.com/show/80156/down-arrow.svg");
+  background-repeat: no-repeat;
+  background-size: 12px 12px;
+  cursor: pointer;
+  background-position: 95% 50%;
 }
 
 .tf_form-row .tf_form-inner select:focus {
@@ -1158,6 +1164,7 @@ h3.section-heading {
   -ms-flex-align: center;
   align-items: center;
   justify-items: center;
+  padding-left: 5px;
 }
 
 .tf-hotel-side-booking .tf_form-inner i {
@@ -2238,6 +2245,7 @@ li.tf-filter-item {
   color: #ffffff;
   font-size: 0.813rem;
   margin-bottom: 0px;
+  bottom: 30px;
 }
 
 .tf-box-wrapper .al-range-slider__input.js-al-range-slider__input {
@@ -3429,7 +3437,7 @@ li.tf-filter-item {
   overflow: auto;
   overflow-x: hidden;
   position: absolute;
-  border: 1px solid #808080;
+  border: 1px solid var(--tf-border-lite);
   border-bottom: none;
   border-top: none;
   z-index: 99;
@@ -3448,7 +3456,7 @@ li.tf-filter-item {
   padding: 10px;
   cursor: pointer;
   background-color: #ffffff;
-  border-bottom: 1px solid #808080;
+  border-bottom: 1px solid var(--tf-border-lite);
   color: var(--tf-text-paragraph);
 }
 
@@ -4821,7 +4829,15 @@ div#tf-destinationautocomplete-list div:before {
   padding: 8px 30px 8px 8px;
   background-position: calc(100% - 8px) 54%;
   border-radius: 4px;
-  background-color: #F1F3F4;
+  background-color: var(--tf-filling-background);
+  border-color: var(--tf-border-lite);
+  -webkit-appearance: none;
+  appearance: none;
+  -moz-appearance: none;
+  background-image: url("https://www.svgrepo.com/show/80156/down-arrow.svg");
+  background-repeat: no-repeat;
+  background-size: 12px 12px;
+  cursor: pointer;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -4889,12 +4905,14 @@ div#tf-destinationautocomplete-list div:before {
 .search-result-inner .tf-search-left .archive_ajax_result .tf_posts_navigation .page-numbers {
   background-color: #F1F3F4;
   color: var(--tf-text-paragraph);
+  border: 1px solid var(--tf-border-lite);
 }
 
 .search-result-inner .tf-search-left .archive_ajax_result .tf_posts_navigation .page-numbers.current, .search-result-inner .tf-search-left .archive_ajax_result .tf_posts_navigation .page-numbers:hover {
   background: var(--tf-primary);
   color: #ffffff;
   padding: 5px 15px;
+  border-color: var(--tf-primary);
 }
 
 .search-result-inner .tf-search-left .archive_ajax_result.tours-grid {
@@ -5334,6 +5352,7 @@ div#tf-destinationautocomplete-list div:before {
   color: #ffffff;
   font-size: 0.813rem;
   margin-bottom: 0px;
+  bottom: 30px;
 }
 
 .tf_widget .al-range-slider__input.js-al-range-slider__input {
@@ -9238,7 +9257,7 @@ div#tf-destinationautocomplete-list div:before {
 
 .tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select {
   border-radius: 8px;
-  background: #ffffff;
+  background: var(--tf-filling-background);
   padding: 16px;
   width: 33.33%;
 }
@@ -9632,7 +9651,7 @@ div#tf-destinationautocomplete-list div:before {
 
 .tf-single-template__two,
 .tf-archive-template__two {
-  padding: 60px 0px;
+  padding: 56px 0px;
 }
 
 .tf-single-template__two .tf-btn,
@@ -9653,10 +9672,6 @@ div#tf-destinationautocomplete-list div:before {
 .tf-single-template__two .tf-section-title,
 .tf-archive-template__two .tf-section-title {
   margin-bottom: 15px;
-}
-
-.single-tf_tours .tf-single-template__two {
-  margin-bottom: 50px;
 }
 
 .tf-single-template__two .tf-single-head .tf-head-info {
@@ -10202,6 +10217,7 @@ div#tf-destinationautocomplete-list div:before {
   padding-top: 12px;
   background: var(--tf-filling-foreground);
   border-radius: 8px;
+  margin-top: 16px;
 }
 
 .tf-single-template__two .tf-review-wrapper .tf-review-form .tf-review-form-container .tf-rating-wrapper {
@@ -10294,7 +10310,7 @@ div#tf-destinationautocomplete-list div:before {
 
 .tf-single-template__two .tf-ask-enquiry i {
   text-align: center;
-  background-color: #E6F2FE;
+  background-color: var(--tf-brand-lite);
   border-radius: 50%;
   color: var(--tf-primary);
   margin: auto;
@@ -10465,21 +10481,26 @@ div#tf-destinationautocomplete-list div:before {
 .tf-archive-template__two .tf-archive-head .tf-search-layout .tf-sorting-selection-warper form select {
   height: 100%;
   border-radius: 5px;
-  -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
-  padding: 14px 36px 14px 14px;
+  -moz-appearance: none;
+  background-image: url("https://www.svgrepo.com/show/80156/down-arrow.svg");
+  background-repeat: no-repeat;
+  background-size: 12px 12px;
+  background-position: calc(100% - 16px);
+  padding: 14px;
   background-position: calc(100% - 12px) 50%;
   font-size: inherit;
   font-weight: inherit;
   color: inherit;
   box-sizing: border-box;
   border: 1px solid var(--tf-border-lite);
-  background-color: #ffffff;
+  background-color: var(--tf-filling-background);
+  cursor: pointer;
 }
 
 .tf-archive-template__two .tf-archive-head .tf-icon {
-  background-color: #ffffff;
+  background-color: var(--tf-filling-foreground);
   border-radius: 5px;
   border: 1px solid var(--tf-border-lite);
 }
@@ -10934,6 +10955,12 @@ div#tf-destinationautocomplete-list div:before {
   align-items: baseline;
 }
 
+.tf-archive-template__two .tf-search-results-list .tf-item-card .tf-item-details .tf-title-meta i {
+  line-height: 1.5;
+  position: relative;
+  top: 1px;
+}
+
 .tf-archive-template__two .tf-search-results-list .tf-item-card .tf-item-details .tf-title h2 {
   font-size: 1.375rem;
   line-height: 1.5;
@@ -11017,22 +11044,26 @@ div#tf-destinationautocomplete-list div:before {
 .tf-archive-template__two .tf-search-results-list .tf-pagination-bar .tf_posts_navigation, .tf-archive-template__two .tf-search-results-list .tf-pagination-bar #tf_posts_navigation_bar {
   margin-top: 40px;
   width: 100%;
+  display: flex;
+  gap: 10px;
 }
 
 .tf-archive-template__two .tf-search-results-list .tf-pagination-bar .tf_posts_navigation .page-numbers, .tf-archive-template__two .tf-search-results-list .tf-pagination-bar #tf_posts_navigation_bar .page-numbers {
   font-size: 0.875rem;
   color: var(--tf-primary);
   text-decoration: none;
-  padding: 12px 18px;
+  padding: 8px 16px;
   background: #ffffff;
   box-shadow: 0px 10px 18px rgba(88, 128, 160, 0.05);
   border-radius: 5px;
   display: inline-block;
+  border: 1px solid var(--tf-border-lite);
 }
 
 .tf-archive-template__two .tf-search-results-list .tf-pagination-bar .tf_posts_navigation .page-numbers.current, .tf-archive-template__two .tf-search-results-list .tf-pagination-bar #tf_posts_navigation_bar .page-numbers.current {
   background: var(--tf-primary);
   color: #ffffff;
+  border-color: #ffffff;
 }
 
 .tf-archive-template__two .tf-search-results-list .tf_posts_navigation.tf_posts_ajax_navigation,
@@ -16072,7 +16103,13 @@ div#tf-destinationautocomplete-list div:before {
   border-radius: 0px;
   font-size: 1rem;
   background-size: 16px;
+  -webkit-appearance: none;
   appearance: none;
+  -moz-appearance: none;
+  background-image: url("https://www.svgrepo.com/show/80156/down-arrow.svg");
+  background-repeat: no-repeat;
+  background-size: 12px 12px;
+  cursor: pointer;
 }
 
 .tf-archive-template__three .tf-available-archive-hetels-wrapper .tf-archive-available-rooms-head .tf-archive-ordering #tf-orderby:focus-visible,
@@ -16392,8 +16429,8 @@ div#tf-destinationautocomplete-list div:before {
 .page-template-tf-search__three .tf-available-archive-hetels-wrapper .tf-archive-available-rooms #tf_posts_navigation_bar .page-numbers,
 .page-template-tf-search__three .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf_posts_ajax_navigation .page-numbers,
 .page-template-tf-search__three .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf_posts_page_navigation .page-numbers {
-  border: 0.5px solid #808080;
-  background: var(--tf-brand-lite);
+  border: 0.5px solid var(--tf-border-lite);
+  background: var(--tf-filling-background);
   height: 40px;
   color: #808080;
   font-size: 1rem;
@@ -16403,6 +16440,16 @@ div#tf-destinationautocomplete-list div:before {
   text-decoration: none;
   display: flex;
   align-items: center;
+  border-right: 0;
+}
+
+.tf-archive-template__three .tf-available-archive-hetels-wrapper .tf-archive-available-rooms #tf_posts_navigation_bar .page-numbers:last-child,
+.tf-archive-template__three .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf_posts_ajax_navigation .page-numbers:last-child,
+.tf-archive-template__three .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf_posts_page_navigation .page-numbers:last-child,
+.page-template-tf-search__three .tf-available-archive-hetels-wrapper .tf-archive-available-rooms #tf_posts_navigation_bar .page-numbers:last-child,
+.page-template-tf-search__three .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf_posts_ajax_navigation .page-numbers:last-child,
+.page-template-tf-search__three .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf_posts_page_navigation .page-numbers:last-child {
+  border-right: 0.5px solid var(--tf-border-lite);
 }
 
 .tf-archive-template__three .tf-available-archive-hetels-wrapper .tf-archive-available-rooms #tf_posts_navigation_bar .page-numbers.current, .tf-archive-template__three .tf-available-archive-hetels-wrapper .tf-archive-available-rooms #tf_posts_navigation_bar .page-numbers:hover,
@@ -16687,7 +16734,7 @@ div#tf-destinationautocomplete-list div:before {
   -webkit-justify-content: center;
   justify-content: center;
   border-radius: 8px;
-  border: 0.5px solid var(--tf-filling-foreground);
+  border: 0.5px solid var(--tf-border-lite);
   background-color: var(--tf-filling-foreground);
   padding: 24px 48px;
   max-width: 1050px;
@@ -17296,6 +17343,7 @@ div#tf-destinationautocomplete-list div:before {
   -moz-transition: all 0.25s ease-in-out;
   -o-transition: all 0.25s ease-in-out;
   transition: all 0.25s ease-in-out;
+  border: 0.5px solid var(--tf-border-lite);
 }
 
 .tf-archive-template__four .tf-archive-details .tf-archive-top .tf-archive-view li.tf-archive-view-item:hover {
@@ -17326,6 +17374,7 @@ div#tf-destinationautocomplete-list div:before {
   justify-content: center;
   border-radius: 4px;
   background-color: var(--tf-filling-foreground);
+  border: 0.5px solid var(--tf-border-lite);
   text-align: center;
   cursor: pointer;
   -webkit-transition: all 0.25s ease-in-out;
@@ -18053,8 +18102,8 @@ div#tf-destinationautocomplete-list div:before {
 
 .tf-archive-template__four .tf-pagination-bar .tf_posts_navigation .page-numbers.current,
 .tf-archive-template__four .tf-pagination-bar #tf_posts_navigation_bar .page-numbers.current {
-  background: var(--tf-primary);
-  color: #ffffff;
+  background: var(--tf-brand-lite);
+  color: var(--tf-text-paragraph);
 }
 
 .tf-archive-template__four .tf_posts_navigation.tf_posts_ajax_navigation,
@@ -18078,8 +18127,8 @@ div#tf-destinationautocomplete-list div:before {
 
 .tf-archive-template__four .tf_posts_navigation.tf_posts_ajax_navigation .page-numbers.current,
 .tf-archive-template__four .tf_posts_navigation.tf_posts_page_navigation .page-numbers.current {
-  background: var(--tf-primary);
-  color: #ffffff;
+  background: var(--tf-brand-lite);
+  color: var(--tf-text-paragraph);
 }
 
 .tf-archive-template__four .tf-archive-hotels-wrapper,

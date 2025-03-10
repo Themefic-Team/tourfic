@@ -3,7 +3,7 @@
         &__one{
             .tf-date-select-box{
                 border-radius: 16px;
-                background: $color-gray-info;
+                background: $color-filling-fg;
                 padding: 8px 8px 16px 8px;
                 margin-bottom: 32px;
                 @media #{$max768}{
@@ -34,7 +34,7 @@
                 }
                 .tf-date-single-select{
                     border-radius: 8px;
-                    background: $color-white;
+                    background: $color-filling-bg;
                     padding: 16px;
                     margin-bottom: 8px;
                     &:last-child{

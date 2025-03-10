@@ -55,7 +55,15 @@
                     padding: 8px 30px 8px 8px;
                     background-position: calc(100% - 8px) 54%;
                     border-radius: 4px;
-                    background-color: $color-gray-light;
+                    background-color: $color-filling-bg;
+                    border-color: $color-border-lite;
+                    -webkit-appearance: none;
+                    appearance: none;
+                    -moz-appearance: none;
+                    background-image: url('https://www.svgrepo.com/show/80156/down-arrow.svg');
+                    background-repeat: no-repeat;
+                    background-size: 12px 12px;
+                    cursor: pointer;
                 }
             }
         }
@@ -120,11 +128,13 @@
                 .page-numbers{
                     background-color: $color-gray-light;
                     color: $color-text;
+                    border: 1px solid $color-border-lite;
                     &.current,
                     &:hover {
                         background: $color-primary;
                         color: $color-white;
                         padding: 5px 15px;
+                        border-color: $color-primary;
                     }
                 }
             }
@@ -506,6 +516,7 @@
         color: $color-white;
         font-size: 0.813rem;
         margin-bottom: 0px;
+        bottom: 30px;
     }
     .al-range-slider__input.js-al-range-slider__input {
         display: none;

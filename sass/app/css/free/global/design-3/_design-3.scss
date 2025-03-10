@@ -3621,7 +3621,13 @@
                     border-radius: 0px;
                     font-size: 1rem;
                     background-size: 16px;
+                    -webkit-appearance: none;
                     appearance: none;
+                    -moz-appearance: none;
+                    background-image: url('https://www.svgrepo.com/show/80156/down-arrow.svg');
+                    background-repeat: no-repeat;
+                    background-size: 12px 12px;
+                    cursor: pointer;
 
                     &:focus-visible {
                         outline: none;
@@ -3833,8 +3839,8 @@
                     display: inline-flex;
                     margin-top: 30px;
                     .page-numbers{
-                        border: 0.5px solid $color-gray;
-                        background: $color-brand-lite;
+                        border: 0.5px solid $color-border-lite;
+                        background: $color-filling-bg;
                         height: 40px;
                         color: $color-gray;
                         font-size: 1rem;
@@ -3844,6 +3850,10 @@
                         text-decoration: none;
                         display: flex;
                         align-items: center;
+                        border-right: 0;
+                        &:last-child{
+                            border-right: 0.5px solid $color-border-lite;
+                        }
                         &.current,
                         &:hover{
                             background: $color-primary;

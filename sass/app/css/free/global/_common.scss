@@ -189,7 +189,15 @@ h3.section-heading {
             border: 0;
             box-shadow: none;
             height: 45px;
-            margin: 0px;
+            -webkit-appearance: none;
+            appearance: none;
+            -moz-appearance: none;
+            background-image: url("https://www.svgrepo.com/show/80156/down-arrow.svg");
+            background-repeat: no-repeat;
+            background-size: 12px 12px;
+            cursor: pointer;
+            background-position: 95% 50%;
+            
             &:focus {
                 background: transparent;
                 border: 0;
@@ -207,6 +215,7 @@ h3.section-heading {
         grid-template-columns: 38px auto;
         @include align-items(center);
         justify-items: center;
+        padding-left: 5px;
         i {
             color: $color-text;
             font-size: 1rem;
@@ -1140,6 +1149,7 @@ li.tf-filter-item {
         color: $color-white;
         font-size: 0.813rem;
         margin-bottom: 0px;
+        bottom: 30px;
     }
     .al-range-slider__input.js-al-range-slider__input {
         display: none;

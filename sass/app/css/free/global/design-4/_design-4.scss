@@ -23,7 +23,7 @@
                 display: inline-flex;
                 @include justify-content(center);
                 border-radius: 8px;
-                border: 0.5px solid $color-filling-fg;
+                border: 0.5px solid $color-border-lite;
                 background-color: $color-filling-fg;
                 padding: 24px 48px;
                 max-width: 1050px;
@@ -518,7 +518,7 @@
                         text-align: center;
                         cursor: pointer;
                         @include transition();
-
+                        border: 0.5px solid $color-border-lite;
                         &:hover {
                             background: $color-brand-lite;
                             box-shadow: 0px 4px 40px 0px rgba(80, 33, 0, 0.10);
@@ -544,6 +544,7 @@
                         justify-content: center;
                         border-radius: 4px;
                         background-color: $color-filling-fg;
+                        border: 0.5px solid $color-border-lite;
                         text-align: center;
                         cursor: pointer;
                         @include transition();
@@ -1136,8 +1137,8 @@
                     display: inline-block;
                 }
                 .page-numbers.current{
-                    background: $color-primary;
-                    color: $color-white;
+                    background: $color-brand-lite;
+                    color: $color-text;
                 }
             }
         }
@@ -1158,8 +1159,8 @@
                 display: inline-block;
             }
             .page-numbers.current{
-                background: $color-primary;
-                color: $color-white;
+                background: $color-brand-lite;
+                color: $color-text;
             }
         }
 

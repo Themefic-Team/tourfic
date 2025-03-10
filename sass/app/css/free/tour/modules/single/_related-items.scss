@@ -54,7 +54,7 @@
         }
         &__two{
             .upcomming-tours{
-                padding-top: 120px;
+                padding-top: 56px;
                 border-top: 1px solid $color-border-lite;
         
                 .tf-upcomming-tours-list-outter{
@@ -86,7 +86,7 @@
                 .tf-meta-data-price {
                     position: absolute;
                     bottom: 0px;
-                    background: $color-white;
+                    background: $color-filling-fg;
                     padding: 15px 22px;
                     font-size: 0.75rem;
                     span {
