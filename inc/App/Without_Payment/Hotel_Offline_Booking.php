@@ -205,7 +205,6 @@ class Hotel_Offline_Booking extends Without_Payment_Booking{
 						$adult_price = floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $adult_price - ( ( (int) $adult_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) );
 						$child_price = floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $child_price - ( ( (int) $child_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) );
 					}
-					
 					$adult_price = (int) $adult_price * (int) $adult;
 					$child_price = (int) $child_price * (int) $child;
 					$total_price = (int) $adult_price + (int) $child_price;

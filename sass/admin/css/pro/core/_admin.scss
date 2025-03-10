@@ -113,6 +113,17 @@ button.tf-import-btn {
     form {
       overflow: hidden;
     }
+    #tf-import-hotels,
+    #tf-import-apartments {
+      .tf-header{
+        h4{
+          margin: 0;
+        }
+        p{
+          margin-top: 0;
+        }
+      }
+    }
     .tf-admin-btn{
       background-color: #003c79;
       border-color: #003c79;
@@ -263,9 +274,294 @@ table.tf-importer-mapping-table tr:nth-child(even) {
   }
 }
 
+/* Export form */
+.tf-export-section-wrapper{
+  h1{
+    margin: 0;
+  }
+
+  table.tf-table-form{
+    th {
+      width: 50%;
+      padding-right: 24px;
+      padding: 15px 24px 15px 0;
+    }
+    td{
+      input[type="number"] {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid $slate20;
+        background-color: $blue0;
+        border-radius: 4px;
+        height: 40px;
+        color: $slate80;
+        font-size: 14px;
+
+        &:focus {
+            background: #FFFFFF;
+            box-shadow: 0 0 0 2px $blue60;
+            border-radius: 4px;
+        }
+
+        &::-webkit-input-placeholder {
+            color: $slate30;
+        }
+
+        &::-ms-input-placeholder {
+            color: $slate30;
+        }
+
+        input:-ms-input-placeholder {
+            color: $slate30;
+        }
+
+        &::-moz-placeholder {
+            opacity: 1;
+            color: $slate30;
+        }
+
+        &:-moz-placeholder {
+            opacity: 1;
+            color: $slate30;
+        }
+
+        &::placeholder {
+            color: $slate30;
+        }
+
+        &:read-only {
+            box-shadow: inset 0 1px 2px rgba(0,0,0,.04);
+            background-color: $blue5;
+
+            &:focus {
+                box-shadow: none;
+                border: 1px solid $slate20;
+            }
+        }
+      }
+      select{
+        width: 100%;
+        max-width: 100%;
+        padding: 8px;
+        border: 1px solid $slate20;
+        background-color: $blue0;
+        border-radius: 4px;
+        height: 40px;
+        color: $slate80;
+        font-size: 14px;
+        line-height: 22px;
+        &:focus{
+          outline: none;
+        }
+      }
+
+      .select2-container{
+        width: 100% !important;
+    
+        .select2-selection{
+          width: 100%;
+          padding: 10px 8px 0 12px;
+          border: 1px solid $slate20;
+          background-color: $blue0;
+          border-radius: 4px;
+          min-height: 48px;
+          color: $slate80;
+          font-size: 14px;
+    
+          .select2-selection__choice {
+            background-color: $slate10;
+            border: none;
+            margin-left: 4px;
+            margin-top: 0;
+            padding: 4px 20px 4px 4px !important;
+            color: $slate80;
+            position: relative;
+    
+            &:first-child{
+              margin-left: 0;
+            }
+          }
+          .select2-selection__choice__remove {
+            border-right: none;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            color: $slate80;
+            font-size: 16px;
+            padding: 0;
+            position: absolute;
+            left: auto;
+            top: 2px;
+            right: 4px;
+          }
+    
+          .select2-selection__clear {
+            margin-top: 0;
+          }
+        }
+        .select2-search--inline .select2-search__field {
+          margin-top: 0;
+          margin-left: 5px;
+          padding: 4px 0 0 0;
+          max-width: 100%;
+          resize: none;
+          height: 30px;
+          vertical-align: middle;
+          font-family: sans-serif;
+          overflow: hidden;
+          word-break: keep-all;
+        }
+      }
+      .select2-container--default .select2-selection--single .select2-selection__arrow {
+        height: 48px;
+      }
+    }
+  }
+
+  .tf-export-select2{
+      width: 100%;
+  }
+  .tf_export_range{
+      display: flex;
+      align-items: center;
+      gap: 10px;
+  }
+  .tf_export_range input[type="number"] {
+      width: 100px;
+  }
+  .tf-range-separator {
+      font-weight: bold;
+  }
+  .tf-subtitle {
+    font-size: 12px;
+    color: #777;
+    margin: 2px 0 0;
+    font-style: italic;
+    font-weight: 400;
+    display: block;
+  }
+}
+
+/* Progress bar */
+.tf-import-progress-bar-wrap {
+  display: none;
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  border-radius: 5px; 
+  overflow: hidden; 
+  position: relative;
+
+  .tf-import-progress-bar {
+    width: 0%;
+    height: 30px;
+    background-color: #4CAF50; 
+    text-align: center;
+    line-height: 30px;
+    color: white;
+    transition: width 0.3s ease; 
+
+    
+  }
+
+  &.tf-progress-loader{
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      margin-top: -7px;
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border: 2px solid #4CAF50;
+      border-left-color: transparent;
+      border-radius: 50%;
+      vertical-align: middle;
+      visibility: visible;
+      opacity: 1;
+      transition: opacity 1s ease, visibility 1s ease;
+      -webkit-animation: wd-rotate 1s infinite linear;
+      animation: wd-rotate 1s infinite linear;
+    }
+  }
+}
+
+/* Log box styling */
+.tf-import-log-box {
+  margin-top: 20px;
+  height: 200px;
+  overflow-y: scroll;
+  border: 1px solid #ccc;
+  padding: 10px;
+  background-color: #f9f9f9;
+  font-family: monospace;
+  font-size: 12px;
+  text-align: left;
+
+  .tf-import-log-content {
+    margin: 0;
+    padding: 0;
+    @include flexbox();
+    @include flex-direction(column);
+    @include justify-content(flex-start);
+
+    li {
+      margin: 0;
+      padding: 3px 5px;
+
+      &:nth-child(odd) {
+        background-color: #f1f1f1;
+      }
+
+      &:nth-child(even) {
+        background-color: #e1e1e1;
+      }
+    }
+  }
+}
+
+.tf-btn-loading {
+  padding-right: 40px !important;
+  position: relative;
+}
+
+.tf-btn-loading:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  margin-top: -7px;
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border: 2px solid #fff;
+  border-left-color: transparent;
+  border-radius: 50%;
+  vertical-align: middle;
+  visibility: visible;
+  opacity: 1;
+  transition: opacity .2s ease, visibility .2s ease;
+  -webkit-animation: wd-rotate 450ms infinite linear;
+  animation: wd-rotate 450ms infinite linear;
+}
+
+@-webkit-keyframes wd-rotate {
+  100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+  }
+}
+
+@keyframes wd-rotate {
+  100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+  }
+}
+
 @media only screen and ( max-width: 767px ) {
   ol.tf-progress-steps li:before {
     bottom: 31%;
-}
-  
+  } 
 }
