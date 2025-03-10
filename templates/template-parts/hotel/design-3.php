@@ -295,7 +295,7 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 
 							<?php endif; ?>
 
-							<?php if ( ! empty( $meta['nearby-places'] ) ) { ?>
+							<?php if (isset($meta['nearby-places']) && ! empty( $meta['nearby-places'] ) ) { ?>
                                 <div class="tf-whats-around">
                                     <span class="tf-whats-around-title"><?php echo ! empty( $meta['section-title'] ) ? esc_html( $meta['section-title'] ) : esc_html( "What’s around?" ); ?></span>
                                     <ul>

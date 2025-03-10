@@ -3615,7 +3615,7 @@ class Hotel {
 
 		// Featured
 		$featured            = ! empty( $meta['featured'] ) ? $meta['featured'] : '';
-		$hotel_multiple_tags = ! empty( Helper::tf_data_types($meta['tf-hotel-tags']) ) ? Helper::tf_data_types($meta['tf-hotel-tags']) : array();
+		$hotel_multiple_tags = isset($meta['tf-hotel-tags']) && is_array($meta['tf-hotel-tags']) ? Helper::tf_data_types($meta['tf-hotel-tags']) : array();
 		/**
 		 * All values from URL
 		 */

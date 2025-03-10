@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, car-rental, multivendor-marketplace
 Requires at least: 5.4
 Tested up to: 6.7
-Stable tag: 2.15.19
+Stable tag: 2.15.20
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -371,6 +371,11 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 22. Map Template(Pro)
 
 == Changelog ==
+
+= 2.15.20 – March 10, 2025 =
+
+- Fixed: Mobile scrolling for hotel availability on mobile.
+- Improved: System stability for better performance.
 
 = 2.15.19 – March 08, 2025 =
 

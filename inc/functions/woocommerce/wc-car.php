@@ -75,7 +75,7 @@ function tf_car_booking_callback() {
 	}
 
 	if(!empty($extra_ids)){
-		$total_extra = Pricing::set_extra_price($meta, $extra_ids, $extra_qty, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time);
+		$total_extra = Pricing::set_extra_price($meta, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time, $extra_ids, $extra_qty);
 		$total_prices = $total_prices + $total_extra['price'];
 		$tf_cars_data['tf_car_data']['extras'] = $total_extra['title'];
 	}
