@@ -2177,20 +2177,6 @@ TF_Settings::option( 'tf_settings', array(
 									'subtitle' => __( 'ON: Display visual graphs to follow your earnings through each time', 'tourfic' ),
 									'is_pro'   => true,
 								),
-								array(
-									'id'       => 'vendor-booking-history',
-									'type'     => 'switch',
-									'label'    => __( 'Show Booking history', 'tourfic' ),
-									'subtitle' => __( 'ON: Show booking history of partner', 'tourfic' ),
-									'is_pro'   => true,
-								),
-								array(
-									'id'       => 'vendor-enquiry-history',
-									'type'     => 'switch',
-									'label'    => __( 'Show Enquiry history', 'tourfic' ),
-									'subtitle' => __( 'ON: Show Enquiry history of partner', 'tourfic' ),
-									'is_pro'   => true,
-								),
 							),
 						),
 						array(

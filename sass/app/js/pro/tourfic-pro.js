@@ -697,6 +697,17 @@
 
         });
 
+        if($('[name=tf_role]').length > 0) {
+            $(document).on('change', '[name=tf_role]', function () {
+                let role = $(this).val();
+                if (role == 'tf_vendor') {
+                    $('.tf-reg-extra-fields').show();
+                } else {
+                    $('.tf-reg-extra-fields').hide();
+                }
+            });
+        }
+
         /* get wishlist from localstorage  */
         const wishKey = 'wishlist_item';
         const getWish = () => {
