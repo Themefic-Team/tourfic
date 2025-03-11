@@ -39,7 +39,7 @@
 
         .tf-search-fields {
             @include flexbox();
-            gap: 48px;
+            gap: 16px;
 
             @media #{$max1024} {
                 @include flex-direction(column);
@@ -69,9 +69,9 @@
                 }
 
                 .tf-search-field-label {
-                    color: $color-heading;
-                    font-size: 1rem;
-                    line-height: 0.75;
+                    color: $color-text;
+                    font-size: 0.875rem;
+                    line-height: 1;
                     cursor: pointer;
                 }
 
@@ -79,15 +79,18 @@
                     background: transparent;
                     padding: 0;
                     border: none;
-                    width: 90px;
-                    color: $color-text;
-                    font-size: 0.75rem;
-                    height: 14px;
+                    width: 110px;
+                    color: $color-heading;
+                    font-size: 1rem;
+                    height: 20px;
                     outline: none;
+                    font-weight: 600;
                 }
 
                 .tf-archive-guest-info {
-                    font-size: 0.75rem;
+                    font-size: 1rem;
+                    font-weight: 600;
+                    line-height: 1.25;
                 }
             }
 

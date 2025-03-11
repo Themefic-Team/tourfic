@@ -2647,11 +2647,11 @@ div#tf-contact-info {
 }
 
 .post-type-archive-tf_tours .tf-archive-template__four .tf-search-fields .tf-search-field .tf-search-input {
-  width: 120px;
+  width: 160px;
 }
 
 .post-type-archive-tf_tours .tf-archive-template__four .tf-search-fields .tf-search-field-checkinout .tf-search-field .tf-search-input {
-  width: 180px;
+  width: 190px;
   cursor: pointer;
 }
 
