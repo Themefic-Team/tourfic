@@ -314,6 +314,7 @@
 
 .single-tf_carrental .tf-single-template__one .tf-details-menu {
   position: relative;
+  overflow: hidden;
 }
 
 .single-tf_carrental .tf-single-template__one .tf-details-menu::before {
@@ -330,11 +331,13 @@
 .single-tf_carrental .tf-single-template__one .tf-details-menu ul {
   margin: 0;
   padding: 0;
-  overflow-y: auto;
+  overflow-x: auto;
   width: 100%;
   display: block ruby;
   scrollbar-width: thin;
   scrollbar-color: #aaa #eee;
+  display: flex;
+  white-space: nowrap;
 }
 
 .single-tf_carrental .tf-single-template__one .tf-details-menu ul::-webkit-scrollbar {

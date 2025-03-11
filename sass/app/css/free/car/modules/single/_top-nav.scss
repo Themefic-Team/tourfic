@@ -61,6 +61,7 @@
 
             .tf-details-menu{
                 position: relative;
+                overflow: hidden;
                 &::before{
                     background: linear-gradient(90deg, rgba(217, 217, 217, 0.00) 0%, $color-gray-light 100%);
                     position: absolute;
@@ -74,11 +75,13 @@
                 ul{
                     margin: 0;
                     padding: 0;
-                    overflow-y: auto;
+                    overflow-x: auto;
                     width: 100%;
                     display: block ruby;
                     scrollbar-width: thin;
                     scrollbar-color: $scrollbar-color;
+                    display: flex;
+                    white-space: nowrap;
                     &::-webkit-scrollbar {
                         width: 4px;
                     }

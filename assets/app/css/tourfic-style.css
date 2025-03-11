@@ -8278,10 +8278,6 @@ div#tf-destinationautocomplete-list div:before {
   color: var(--tf-text-paragraph);
 }
 
-.single-tf_carrental .tf-single-template__one .tf-single-car-details-warper .tf-car-details-column .tf-details-menu {
-  width: 100%;
-}
-
 .single-tf_carrental .tf-single-template__one .tf-single-car-details-warper .tf-car-details-column .tf-template-part {
   width: 100%;
 }
@@ -10863,12 +10859,19 @@ div#tf-destinationautocomplete-list div:before {
   flex-basis: 100%;
 }
 
-.tf-archive-template__two .tf-search-results-list .tf-layout-list .tf-item-card .tf-item-featured img {
+.tf-archive-template__two .tf-search-results-list .tf-layout-list .tf-item-card .tf-item-featured a {
+  line-height: 0;
+  display: block;
+  height: 100%;
+}
+
+.tf-archive-template__two .tf-search-results-list .tf-layout-list .tf-item-card .tf-item-featured a img {
   width: 100%;
   object-fit: cover;
   height: 100%;
   min-height: 250px;
   border-radius: 5px 0px 0px 5px;
+  max-height: 322px;
 }
 
 .tf-archive-template__two .tf-search-results-list .tf-layout-list .tf-item-card.tf-item-hotel .tf-item-featured img {
@@ -10876,6 +10879,7 @@ div#tf-destinationautocomplete-list div:before {
   object-fit: cover;
   height: 100%;
   min-height: 250px;
+  max-height: initial;
   border-radius: 5px 0px 0px 5px;
 }
 
@@ -10889,6 +10893,7 @@ div#tf-destinationautocomplete-list div:before {
   height: 100%;
   border-radius: 5px 5px 0px 0px;
   min-height: 280px;
+  max-height: 280px;
 }
 
 .tf-archive-template__two .tf-search-results-list .tf-item-card {
@@ -10977,6 +10982,11 @@ div#tf-destinationautocomplete-list div:before {
 .tf-archive-template__two .tf-search-results-list .tf-item-card .tf-item-details p {
   font-size: 0.75rem;
   margin-bottom: 0;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  flex: 1;
 }
 
 .tf-archive-template__two .tf-search-results-list .tf-item-card .tf-item-details .tf-title-meta {
@@ -10986,12 +10996,16 @@ div#tf-destinationautocomplete-list div:before {
 .tf-archive-template__two .tf-search-results-list .tf-item-card .tf-item-details .tf-title-meta i {
   line-height: 1.5;
   position: relative;
-  top: 1px;
+  top: 2px;
 }
 
 .tf-archive-template__two .tf-search-results-list .tf-item-card .tf-item-details .tf-title h2 {
   font-size: 1.375rem;
   line-height: 1.5;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .tf-archive-template__two .tf-search-results-list .tf-item-card .tf-item-details .tf-title h2 a {

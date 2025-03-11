@@ -1,5 +1,10 @@
 (function ($, win) {
+    
+
     $(document).ready(function () {
+       
+
+        
 
         // Create an instance of Notyf
         const notyf = new Notyf({
@@ -35,6 +40,10 @@
             $('.tf-details-menu ul li[data-menu="' + $currentmenu + '"]').addClass('active');
         });
 
+       
+        
+        
+        
         // Car Location Autocomplete
 
         function tourfic_car_autocomplete(inp, arr) {
@@ -988,8 +997,14 @@
             });
         });
 
-                
-
+    
     });
 
+    
+     
+     
+   
+
 })(jQuery, window);
+
+
