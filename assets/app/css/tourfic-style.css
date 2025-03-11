@@ -5335,8 +5335,8 @@ div#tf-destinationautocomplete-list div:before {
 .tf_widget .tf-tour-result-price-range,
 .tf_widget .tf-apartment-result-price-range {
   margin-top: 20px;
-  padding-left: 12px;
-  padding-right: 12px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .tf_widget h4 {
@@ -7222,6 +7222,8 @@ div#tf-destinationautocomplete-list div:before {
 .fancybox-container .tf-archive-filter .tf_widget .tf-tour-result-price-range {
   margin-top: 20px;
   padding-bottom: 0px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .fancybox-container .tf-archive-filter .tf_widget h4 {
@@ -16814,7 +16816,7 @@ div#tf-destinationautocomplete-list div:before {
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
-  gap: 48px;
+  gap: 16px;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -16868,9 +16870,9 @@ div#tf-destinationautocomplete-list div:before {
 }
 
 .tf-archive-template__four .tf-search-fields .tf-search-field .tf-search-field-label {
-  color: var(--tf-text-heading);
-  font-size: 1rem;
-  line-height: 0.75;
+  color: var(--tf-text-paragraph);
+  font-size: 0.875rem;
+  line-height: 1;
   cursor: pointer;
 }
 
@@ -16878,15 +16880,18 @@ div#tf-destinationautocomplete-list div:before {
   background: transparent;
   padding: 0;
   border: none;
-  width: 90px;
-  color: var(--tf-text-paragraph);
-  font-size: 0.75rem;
-  height: 14px;
+  width: 110px;
+  color: var(--tf-text-heading);
+  font-size: 1rem;
+  height: 20px;
   outline: none;
+  font-weight: 600;
 }
 
 .tf-archive-template__four .tf-search-fields .tf-search-field .tf-archive-guest-info {
-  font-size: 0.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.25;
 }
 
 .tf-archive-template__four .tf-search-fields .tf-search-field-checkinout {
