@@ -2788,8 +2788,8 @@ Steps
 }
 
 .tf-setting-wrapper .tourfic-settings-header .tf-setting-save-btn .tf-reset-btn {
-  background-color: gray;
-  border-color: gray;
+  background-color: #dc3545;
+  border-color: #dc3545;
 }
 
 .tf-setting-wrapper .tourfic-settings-header .tf-setting-save-btn .tf-reset-btn:hover {
