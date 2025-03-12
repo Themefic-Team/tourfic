@@ -3143,6 +3143,7 @@
                             }
                             .tf-highlights-icon {
                                 width: 230px;
+                                padding-left: 15px;
                                 @media #{$max1024}{
                                     display: none;
                                 }
@@ -3150,7 +3151,7 @@
                                 img {
                                     width: 230px;
                                     height: 230px;
-                                    object-fit: contain;
+                                    object-fit: cover;
                                 }
                                 svg path{
                                     fill: $color-primary;
