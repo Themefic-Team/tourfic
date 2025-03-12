@@ -1639,6 +1639,8 @@
     &__three{
         //  FAQ Section
         .tf-questions-wrapper {
+            background-color: transparent;
+            padding: 0;
             h2{
                 color: $color-heading;
                 font-size: 2rem;
@@ -1673,7 +1675,7 @@
                             transition: 0.3s;
                         }
                         &.tf-active {
-                            background: $color-brand-lite;
+                            background: $color-filling-fg;
                             padding: 24px;
                             display: flex;
                             flex-direction: column;
@@ -2575,6 +2577,13 @@
         .tf-single-widgets {
             display: flex;
             flex-direction: column;
+            .tf_btn_lite{
+                color: $color-heading;
+                font-weight: 500;
+                &:hover{
+                    color: $color-white;
+                }
+            }
         }
 
         .tf-popup-video-item {
