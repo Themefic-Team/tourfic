@@ -15431,6 +15431,7 @@ div#tf-destinationautocomplete-list div:before {
 
 .tf-single-template__three .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-highlights-wrapper .tf-highlights-icon {
   width: 230px;
+  padding-left: 15px;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -15443,7 +15444,7 @@ div#tf-destinationautocomplete-list div:before {
 .tf-single-template__three .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-highlights-wrapper .tf-highlights-icon img {
   width: 230px;
   height: 230px;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .tf-single-template__three .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-highlights-wrapper .tf-highlights-icon svg path {

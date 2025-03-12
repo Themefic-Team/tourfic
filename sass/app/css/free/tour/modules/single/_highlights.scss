@@ -43,8 +43,9 @@
                     align-items: flex-start;
                     .tf-highlights-icon{
                         img{
-                            height: 100%;
-                            max-width: none;
+                            object-fit: cover;
+                            height: 100%;    
+                            max-width: 300px;
                         }
                         
                     }

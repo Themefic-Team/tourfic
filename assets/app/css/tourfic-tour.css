@@ -494,8 +494,9 @@
 }
 
 .single-tf_tours .tf-single-template__two .tf-highlights-wrapper .tf-highlights-inner .tf-highlights-icon img {
+  object-fit: cover;
   height: 100%;
-  max-width: none;
+  max-width: 300px;
 }
 
 .single-tf_tours .tf-single-template__two .tf-highlights-wrapper .highlights-list p {
