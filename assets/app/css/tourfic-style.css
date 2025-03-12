@@ -5545,8 +5545,8 @@ div#tf-destinationautocomplete-list div:before {
 
 .tf-room-filter .tf-room-checkbox .tf-checkmark {
   position: absolute;
-  top: 0px;
-  left: 0px;
+  top: 4px;
+  left: 1px;
   height: 20px;
   width: 20px;
   background-color: #ffffff;
@@ -13605,6 +13605,11 @@ div#tf-destinationautocomplete-list div:before {
   }
 }
 
+.tf-single-template__three .tf-questions-wrapper {
+  background-color: transparent;
+  padding: 0;
+}
+
 .tf-single-template__three .tf-questions-wrapper h2 {
   color: var(--tf-text-heading);
   font-size: 2rem;
@@ -13650,7 +13655,7 @@ div#tf-destinationautocomplete-list div:before {
 }
 
 .tf-single-template__three .tf-questions-wrapper .tf-questions .tf-questions-col .tf-question.tf-active {
-  background: var(--tf-brand-lite);
+  background: var(--tf-filling-foreground);
   padding: 24px;
   display: flex;
   flex-direction: column;
@@ -14773,6 +14778,15 @@ div#tf-destinationautocomplete-list div:before {
 .tf-single-template__three .tf-single-widgets {
   display: flex;
   flex-direction: column;
+}
+
+.tf-single-template__three .tf-single-widgets .tf_btn_lite {
+  color: var(--tf-text-heading);
+  font-weight: 500;
+}
+
+.tf-single-template__three .tf-single-widgets .tf_btn_lite:hover {
+  color: #ffffff;
 }
 
 .tf-single-template__three .tf-popup-video-item {
