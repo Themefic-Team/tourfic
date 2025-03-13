@@ -57,8 +57,7 @@
         position: relative;
         width: 640px;
         height: 324px;
-        background: $color-white;
-        box-shadow: 0px 8px 16px rgba(90, 91, 106, 0.2);
+        background: $color-filling-fg;
         border-radius: 4px;
         cursor: auto;
     }
@@ -127,8 +126,7 @@
         position: relative;
         width: 640px;
         height: 324px;
-        background: $color-white;
-        box-shadow: 0px 8px 16px rgba(90, 91, 106, 0.2);
+        background: $color-filling-fg;
         border-radius: 4px;
         cursor: auto;
         height: auto !important;
@@ -320,8 +318,7 @@
     isolation: isolate;
     position: relative;
     width: 100%;
-    background: $color-white;
-    box-shadow: 0px 8px 16px rgba(90, 91, 106, 0.2);
+    background: $color-filling-fg;
     border-radius: 5px;
 }
 .fancybox-stage {
@@ -462,11 +459,10 @@
     border: 1px solid #ccc;
     border-top: none;
     border-radius: 0 0 5px 5px;
-    background-color: $color-white;
+    background-color: $color-filling-fg;
     min-width: 320px;
     max-height: 300px;
     overflow-y: auto;
-    box-shadow: 1px 1px 3px #ccc;
     ul {
         list-style: none;
         padding: 0;

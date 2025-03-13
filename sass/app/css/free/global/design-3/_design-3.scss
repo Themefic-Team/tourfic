@@ -1021,7 +1021,6 @@
             visibility: hidden;
             transition: 0.3s;
             background: $color-filling-bg;
-            box-shadow: 0px 8px 40px 0px rgba(0, 0, 0, 0.10);
             &.tf-show {
                 visibility: visible;
                 opacity: 1;
@@ -1098,7 +1097,7 @@
                 .tf-aq-field{
                     input{
                         border: 1px solid $color-border-lite;
-                        box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+
                         color: $color-text;
                         background-color: $color-brand-lite;
                         font-size: 1rem;
@@ -1111,7 +1110,6 @@
                     }
                     textarea{
                         border: 1px solid $color-border-lite;
-                        box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
                         background-color: $color-brand-lite;
                         color: $color-text;
                         font-size: 1rem;
@@ -2182,7 +2180,6 @@
                             width: 32px;
                             border-radius: 100px;
                             background: $color-primary;
-                            box-shadow: 0px 14px 30px 0px rgba(0, 23, 100, 0.07);
                             text-align: center;
                             display: flex;
                             align-items: center;
@@ -2195,7 +2192,6 @@
                         a.tf-share-toggle.actives,
                         a.tf-wishlist.actives {
                             background: $color-primary;
-                            box-shadow: 0px 14px 30px 0px rgba(0, 23, 100, 0.07);
                         }
 
                         .tf-off-canvas-share-box{
@@ -3353,7 +3349,6 @@
                                 top: 100%;
                                 width: 250px;
                                 background: $color-brand-lite;
-                                box-shadow: 0px 20px 40px 0px rgba(0, 0, 0, 0.10);
                                 z-index: 999;
                                 max-height: 200px;
                                 overflow: auto;
