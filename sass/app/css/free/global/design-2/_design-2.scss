@@ -1,7 +1,7 @@
 .tf-single-template,
 .tf-archive-template {
     &__two{
-        padding: 60px 0px;
+        padding: 56px 0px;
         .tf-btn{
             height: auto;
         }
@@ -17,14 +17,6 @@
     }
 }
 
-// Single Global Start
-.single-tf_tours{
-    .tf-single-template{
-        &__two{
-            margin-bottom: 50px;
-        }
-    }
-}
 .tf-single-template{
     &__two{
         // Header
@@ -51,12 +43,11 @@
                     transition: all .3s ease;
                     height: 50px;
                     width: 50px;
-                    background: $color-white;
+                    background: $color-filling-fg;
                     display: flex;
                     align-items: center;
                     justify-content: center;
                     border-radius: 50px;
-                    box-shadow: 0px 0px 24px 5px $color-box-shadow;
                 }
                 .tf-share{
                     a{
@@ -74,12 +65,11 @@
                         right: auto;
                     }
                     .tf-dropdown-share-content{
-                        background: $color-white;
+                        background: $color-filling-fg;
                         border-radius: 8px;
                         padding: 16px 10px;
                         width: 280px;
                         text-align: center;
-                        box-shadow: 0px 13px 30px 0px $color-box-shadow;
                         h4{
                             font-size: 0.875rem;
                             color: $color-primary;
@@ -107,10 +97,12 @@
                                     padding: 10px 8px;
                                     background-color: transparent;
                                     border: 0px solid;
-                                    font-size: 1.375rem;
                                     cursor: pointer;
                                     span{
                                         color: $color-primary;
+                                    }
+                                    i{
+                                        font-size: 1.375rem;
                                     }
                                 }
                                 input{
@@ -161,7 +153,8 @@
             }
             .tf-gallery-featured {
                 position: relative;
-                margin-bottom: 10px;
+                line-height: 0;
+                margin-bottom: 18px;
                 >img{
                     min-height: 474px;
                     max-height: 474px;
@@ -177,17 +170,21 @@
                     border-radius: 5px;
                     a {
                         display: flex;
+                        align-items: center;
                         gap: 8px;
                         text-decoration: none;
                         color: $color-heading;
-                        line-height: 1em;
-                        padding: 10px 12px;
+                        padding: 5px 12px;
                         border-radius: 5px;
                         transition: all .6s ease;
+                        min-height: 35px;
                         &:hover{
                             background-color: $color-primary;
                             color: $color-white;
                             transition: all .6s ease;
+                        }
+                        i{
+                            line-height: inherit;
                         }
                     }
                 }
@@ -238,12 +235,12 @@
             .tf-gallery{
                 display: flex;
                 gap: 10px;
+                line-height: 0;
                 a {
                     width: 20%;
                     float: left;
                     display: none;
                     position: relative;
-                    line-height: 0;
 
                     img{
                         height: 100%;
@@ -297,11 +294,7 @@
         }
         // Review Section
         .tf-review-wrapper{
-            .tf-review-data.tf-box{
-                box-shadow: 0px 0px 24px 5px $color-box-shadow;
-            }
             .tf-review-data {
-                background: $color-white;
                 @include bd-radius(5px);;
                 flex-basis: 20%;
 
@@ -317,19 +310,21 @@
                 p,li{
                     text-transform: capitalize;
                 }
-                .tf-review-data-average p {
-                    background: $color-gray-light;
-                    text-align: center;
-                    font-size: 1.875rem;
-                    color: $color-primary;
-                    font-weight: 500;
-                    @include bd-radius(5px);;
-                    width: 100px;
-                    height: 75px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    margin: 0;
+                .tf-review-data-average {
+                    background-color: $color-filling-fg;
+                    p {
+                        text-align: center;
+                        font-size: 1.875rem;
+                        color: $color-primary;
+                        font-weight: 500;
+                        @include bd-radius(5px);;
+                        width: 100px;
+                        height: 75px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        margin: 0;
+                    }
                 }
                 .tf-review-data-label{
                     p{
@@ -368,7 +363,7 @@
                     }
                     .tf-progress-bar {
                         height: 7px;
-                        background: $color-light-bg;
+                        background: $color-brand-lite;
                         border-radius: 7px;
                     }
 
@@ -404,7 +399,7 @@
 
             //Tourfic review reply
             .tf-review-reply{
-                border-bottom: 1px solid $color-border;
+                border-bottom: 1px solid $color-border-lite;
                 padding-bottom: 30px;
 
                 .tf-review-details{
@@ -464,10 +459,20 @@
                 }
             }
             .tf-review-form{
-                padding-bottom: 30px;
+               padding-bottom: 56px;
+               @media #{$max768}{
+                padding-bottom: 40px;
+               }
                 .tf-review-form-container{
                     background: transparent;
                     min-width: auto;
+                    form{
+                        padding: 32px;
+                        padding-top: 12px;
+                        background: $color-filling-fg;
+                        border-radius: 8px;
+                        margin-top: 16px;
+                    }
                     .tf-rating-wrapper{
                         column-gap: 40px;
                         flex-wrap: wrap;
@@ -479,7 +484,6 @@
                             > label{
                                 font-size: 1rem;
                                 font-weight: 400;
-                                line-height: 1.6;
                                 color: $color-text;
                                 margin: 0px;
                                 text-transform: capitalize;
@@ -498,10 +502,10 @@
                     .review-desc{
                         display: flex;
                         textarea{
+                            background: transparent;
                             padding: 15px 20px;
-                            border: 1px solid $color-border;
+                            border: 1px solid $color-border-lite;
                             width: 100%;
-                            background-color: $color-gray-light;
                             border-radius: 5px;
                             font-size: 0.875rem;
                             color: $color-text;
@@ -515,7 +519,7 @@
                         div{
                             input{
                                 padding: 15px 20px;
-                                border: 1px solid $color-border;
+                                border: 1px solid $color-border-lite;
                                 width: 100%;
                                 background-color: $color-gray-light;
                                 border-radius: 5px;
@@ -557,7 +561,7 @@
             text-align: center;
             i{
                 text-align: center;
-                background-color: $color-blue-light;
+                background-color: $color-brand-lite;
                 border-radius: 50%;
                 color: $color-primary;
                 margin: auto;
@@ -575,7 +579,7 @@
             }
             .tf-btn{
                 a:hover{
-                    background-color: $color-secondary;
+                    background-color: $color-brand-dark;
                 }
             }
         }
@@ -583,14 +587,13 @@
         .tf-faq-wrapper {
             .tf-faq-inner{
                 .tf-faq-single{
-                    border-bottom: 1px solid $color-border;
+                    border-bottom: 1px solid $color-border-lite;
                 }
                 .active{
                     .tf-faq-single-inner{
-                        background: $color-white;
+                        background: $color-filling-fg;
                         @include bd-radius(5px);
                         margin: 0px 0px 30px 0px;
-                        box-shadow: 0px 0px 24px 5px $color-box-shadow;
                         .tf-faq-collaps{
                             .faq-icon{
                                 i.fa-plus{
@@ -632,7 +635,8 @@
                     }
                 }
                 h4{
-                    line-height: 1.4;
+                    line-height: 1.5;
+                    margin-bottom: 0;
                 }
             }
         }
@@ -721,25 +725,30 @@
                         select {
                             height: 100%;
                             border-radius: 5px;
-                            -moz-appearance: none;
                             -webkit-appearance: none;
                             appearance: none;
-                            padding: 14px 36px 14px 14px;
+                            -moz-appearance: none;
+                            background-image: url('https://www.svgrepo.com/show/80156/down-arrow.svg');
+                            background-repeat: no-repeat;
+                            background-size: 12px 12px;
+                            background-position: calc(100% - 16px);
+                            padding: 14px;
                             background-position: calc(100% - 12px) 50%;
                             font-size: inherit;
                             font-weight: inherit;
                             color: inherit;
                             box-sizing: border-box;
-                            border: 1px solid $color-border;
-                            background-color: $color-white;
+                            border: 1px solid $color-border-lite;
+                            background-color: $color-filling-bg;
+                            cursor: pointer;
                         }
                     }
                 }
             }
             .tf-icon {
-                background-color: $color-white;
+                background-color: $color-filling-fg;
                 border-radius: 5px;
-                border: 1px solid $color-border;
+                border: 1px solid $color-border-lite;
                 &:hover {
                 cursor: pointer;
                 }
@@ -810,7 +819,7 @@
                     overflow: scroll;
                     overflow-x: hidden;
                     position: absolute;
-                    border: 1px solid $color-border;
+                    border: 1px solid $color-border-lite;
                     border-bottom: none;
                     border-top: none;
                     z-index: 99;
@@ -821,7 +830,7 @@
                         padding: 10px;
                         cursor: pointer;
                         background-color: $color-white;
-                        border-bottom: 1px solid $color-border;
+                        border-bottom: 1px solid $color-border-lite;
                         color: $color-text;
                     }
                 }
@@ -846,7 +855,7 @@
                 }
             }
             .tf-related-single{
-                border-top: 1px solid $color-border;
+                border-top: 1px solid $color-border-lite;
                 margin-bottom: $tf-space-24;
                 padding-top: $tf-space-24;
                 .tf-related-item-featured {
@@ -863,15 +872,15 @@
             .tf_widget {
                 .tf-hotel-result-price-range,
                 .tf-tour-result-price-range{
-                    margin-top: 20px;
-                    padding-bottom: 20px;
+                    margin-top: 12px;
+                    padding-bottom: 12px;
                 }
                 h4{
                     font-size: 1.25rem;
                     font-weight: 500;
                 }
                 .al-range-slider__track {
-                    background: $color-gray-light;
+                    background: $color-brand-lite;
                     height: 10px;
                     box-shadow: none;
                     margin: 30px 0px 10px 0px;
@@ -879,16 +888,16 @@
                 .al-range-slider_dark {
                     padding: 0px;
                     .al-range-slider__bar {
-                        background: $color-primary;
+                        background: $color-text;
                         box-shadow: none;
                     }
                 }
                 .al-range-slider__knob {
-                    background: $color-primary;
-                    height: 15px;
-                    width: 15px;
+                    background: $color-filling-bg;
+                    height: 24px;
+                    width: 24px;
                     box-shadow: none;
-                    border: 3px solid $color-primary;
+                    border: 1.5px solid $color-border;
                     &:first-child {
                         span {
                             left: 10px;
@@ -910,8 +919,7 @@
             }
             #tf__booking_sidebar{
                 padding: 30px;
-                box-shadow: 0px 13px 30px 0px $color-box-shadow;
-                background-color: $color-white;
+                background-color: $color-filling-fg;
                 border-radius: 5px;
                 margin: 30px 0;
                 .widget{
@@ -919,7 +927,6 @@
                     background: inherit;
                     border-radius: 0px;
                     margin-bottom: 26px;
-                    border-bottom: 1px solid $color-border;
                     padding: 0px;
                     .tf-widget-title{
                         background-color: inherit;
@@ -949,7 +956,6 @@
                                     width: 100%;
                                     display: inline-block;
                                     padding-left: 32px;
-                                    line-height: 1.3;
                                     font-size: 1rem;
                                     font-weight: 400;
                                     input{
@@ -1040,12 +1046,18 @@
             .tf-layout-list{
                 .tf-item-card {
                     .tf-item-featured {
-                        img {
-                            width: 100%;
-                            object-fit: cover;
+                        a{
+                            line-height: 0;
+                            display: block;
                             height: 100%;
-                            min-height: 250px;
-                            border-radius: 5px 0px 0px 5px;
+                            img {
+                                width: 100%;
+                                object-fit: cover;
+                                height: 100%;
+                                min-height: 250px;
+                                border-radius: 5px 0px 0px 5px;
+                                max-height: 322px;
+                            }
                         }
                     }
                 }
@@ -1056,6 +1068,7 @@
                             object-fit: cover;
                             height: 100%;
                             min-height: 250px;
+                            max-height: initial;
                             border-radius: 5px 0px 0px 5px;
                         }
                     }
@@ -1071,14 +1084,14 @@
                             height: 100%;
                             border-radius: 5px 5px 0px 0px;
                             min-height: 280px;
+                            max-height: 280px;
                         }
                     }
                 }
             }
             .tf-item-card {
-                background-color: $color-white;
+                background-color: $color-filling-fg;
                 border-radius: 5px;
-                box-shadow: $box-shadow-primary;
                 @media #{$max1024} {
                     flex-basis: 100%;
                 }
@@ -1091,21 +1104,19 @@
                     .tf-features-box{
                         .tf-discount {
                             background: $color-white;
-                            padding: 6px 12px;
+                            padding: 4px 12px;
                             border-radius: 50px;
                             font-size: 0.75rem;
                             color: $color-heading;
-                            line-height: 1;
                             margin-right: 10px;
                             font-weight: 600;
                         }
                         .tf-feature{
                             background: $color-primary;
-                            padding: 6px 12px;
+                            padding: 4px 12px;
                             border-radius: 50px;
                             font-size: 0.75rem;
                             color: $color-white;
-                            line-height: 1;
                             margin-right: 5px;
                             font-weight: 600;
                         }
@@ -1123,10 +1134,9 @@
                         text-transform: capitalize;
 
                         .tf-multiple-tag-item {
-                            padding: 6px 12px;
+                            padding: 4px 12px;
                             border-radius: 50px;
                             font-size: 0.75rem;
-                            line-height: 1;
                             margin-top: 5px;
                         }
                     }
@@ -1135,6 +1145,7 @@
                 .tf-item-details {
                     flex-basis: 59%;
                     padding: 20px $tf-space-30;
+                   
                     @media #{$max768} {
                         padding: $tf-space-24 $tf-space-24;
                     }
@@ -1148,18 +1159,33 @@
                     p{
                         font-size: 0.75rem;
                         margin-bottom: 0;
+                        overflow: hidden;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 2;
+                        -webkit-box-orient: vertical;
+                        flex: 1;
                     }
                     .tf-title-meta{
                         align-items: baseline;
+                        i{
+                            line-height: 1.5;
+                            position: relative;
+                            top: 2px;
+                        }
                     }
                     .tf-title {
                         h2 {
-                        font-size: 1.375rem;
-                        line-height: 1.3;
-                        a{
-                            color: $color-heading;
-                            text-decoration: none;
-                        }
+                            font-size: 1.375rem;
+                            line-height: 1.5;
+                            overflow: hidden;
+                            display: -webkit-box;
+                            -webkit-line-clamp: 2;
+                            -webkit-box-orient: vertical;
+
+                            a{
+                                color: $color-heading;
+                                text-decoration: none;
+                            }
                         }
                     }
                     .tf-reviews{
@@ -1192,12 +1218,7 @@
                             }
                         }
                     }
-                    .tf-details {
-                        p {
-                            line-height: 1.5;
-                        }
-                    }
-
+            
                     .tf-post-footer {
                         .tf-pricing {
                             del{
@@ -1211,21 +1232,30 @@
                                 color: $color-primary;
                             }
                         }
-
+                        .tf-booking-bttns{
+                            .tf_btn{
+                                font-weight: 500;
+                            }
+                        }
                     }
                     .tf-reviews{
                         gap: 8px;
                         align-items: center;
                         .tf-avarage-review{
                             font-size: 0.75rem;
-                            line-height: 1rem;
                         }
                     }
                 }
 
                 .tf-post-footer {
-                    border-top: 1px solid $color-border;
+                    border-top: 1px solid $color-border-lite;
                     padding-top: 16px;
+
+                    .tf-booking-bttns{
+                        .tf_btn{
+                            font-weight: 500;
+                        }
+                    }
                 }
             }
 
@@ -1238,19 +1268,23 @@
                 .tf_posts_navigation,#tf_posts_navigation_bar{
                     margin-top: 40px;
                     width: 100%;
+                    display: flex;
+                    gap: 10px;
                     .page-numbers {
                         font-size: 0.875rem;
                         color: $color-primary;
                         text-decoration: none;
-                        padding: 12px 18px;
+                        padding: 8px 16px;
                         background: $color-white;
                         box-shadow: 0px 10px 18px rgba(88, 128, 160, 0.05);
                         border-radius: 5px;
                         display: inline-block;
+                        border: 1px solid $color-border-lite;
                     }
                     .page-numbers.current{
                         background: $color-primary;
                         color: $color-white;
+                        border-color: $color-white;
                     }
                 }
             }

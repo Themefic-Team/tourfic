@@ -302,7 +302,7 @@
                     text-align: center;
                     cursor: pointer;
                     @include transition();
-                    border: 0.5px solid $color-light-bg;
+                    border: 0.5px solid $color-brand-lite;
                     box-shadow: 0px 4px 30px 0px rgba(255, 237, 225, 0.40);
 
                     i {
@@ -311,12 +311,12 @@
 
                     &:hover {
                         border-radius: 4px;
-                        background: $color-light-bg;
+                        background: $color-brand-lite;
                         box-shadow: 0px 4px 30px 0px rgba(255, 237, 225, 0.40);
                     }
 
                     &.active {
-                        background-color: $color-light-bg;
+                        background-color: $color-brand-lite;
 
                         svg path {
                             stroke: $color-primary;
@@ -362,7 +362,7 @@
 
         .tf-archive-hotel {
             border-radius: 4px;
-            background-color: $color-light-bg;
+            background-color: $color-brand-lite;
             @include flexbox();
             @include transition();
 
@@ -526,8 +526,8 @@
             left: -320px;
             width: 300px;
             height: 100vh;
-            background-color: $color-white;
-            box-shadow: 0px 4px 40px 0px rgba(80, 33, 0, 0.10);
+            background-color: $color-filling-fg;
+
             padding: 16px;
             z-index: 9999;
             @include transition();
@@ -574,6 +574,8 @@
             .tf-tour-result-price-range {
                 margin-top: 20px;
                 padding-bottom: 0px;
+                padding-left: 20px;
+                padding-right: 20px;
             }
 
             h4 {
@@ -582,7 +584,7 @@
             }
 
             .al-range-slider__track {
-                background: $color-gray-light;
+                background: $color-brand-lite;
                 height: 10px;
                 box-shadow: none;
                 margin: 30px 0px 10px 0px;
@@ -592,17 +594,17 @@
                 padding: 0px;
 
                 .al-range-slider__bar {
-                    background: $color-primary;
+                    background: $color-text;
                     box-shadow: none;
                 }
             }
 
             .al-range-slider__knob {
-                background: $color-primary;
-                height: 15px;
-                width: 15px;
+                background: $color-filling-bg;
+                height: 24px;
+                width: 24px;
                 box-shadow: none;
-                border: 3px solid $color-primary;
+                border: 1.5px solid $color-border;
 
                 &:first-child {
                     span {
@@ -835,7 +837,7 @@
 
     /* Template - Design 2 */
     .tf-available-room {
-        background: $color-light-bg;
+        background: $color-brand-lite;
         display: flex;
         .tf-available-room-gallery {
             display: flex;
@@ -881,7 +883,7 @@
                     background: $color-primary;
                 }
                 span.tf-available-labels-featured {
-                    background: $color-secondary;
+                    background: $color-brand-dark;
                 }
                 span.tf-available-labels-visited {
                     background: $color-success;
@@ -987,7 +989,7 @@
                     .tf-price {
                         color: $color-heading;
                         font-weight: 400;
-                        line-height: 1.95;
+                        line-height: 2;
                         text-align: right;
                         .amount{
                             font-weight: 400;
@@ -1047,7 +1049,7 @@
                 transition: .3s all ease;
                 border-radius: 0px;
                 &:hover{
-                    background-color: $color-secondary;
+                    background-color: $color-brand-dark;
                 }
             }
             a.availability {
@@ -1118,7 +1120,7 @@
                         .tf-price{
                             color: $color-heading;
                             font-weight: 400;
-                            line-height: 1.95;
+                            line-height: 2;
                             .discount-price {
                                 color: $color-text;
                                 font-size: 1rem;
@@ -1215,7 +1217,7 @@
                     align-items: center;
                 }
                 .page-numbers.current{
-                    background: $color-light-bg;
+                    background: $color-brand-lite;
                     color: $color-text;
                 }
             }

@@ -34,7 +34,6 @@
                     flex-direction: row;
                     justify-content: space-evenly;
                     margin: 10px 0 0 0;
-                    border: 1px solid $color-border;
                     box-sizing: border-box;
                     border-radius: 4px;
                     cursor: pointer;
@@ -49,33 +48,38 @@
                         display: flex;
                         align-items: center;
                         transition: 0.3s;
+                        border: 1px solid $color-border-lite;
                         &:hover {
                             color: $color-primary;
-                            background-color: $color-gray-light;
+                            background-color: $color-border-lite;
+                        }
+                        &:nth-child(1) {
+                            border-top-left-radius: 4px;
+                            border-bottom-left-radius: 4px;
                         }
                         &:nth-child(2) {
-                            border-left: 1px solid $color-gray-light;
+                            border-right: 0;
+                            border-left:0;
                         }
                         &:nth-child(3) {
-                            border-left: 1px solid $color-gray-light;
+                            border-top-right-radius: 4px;
+                            border-bottom-right-radius: 4px;
                         }
                     }
                     li.active {
-                        color: $color-primary;
-                        background: $color-gray-light;
+                        background: $color-brand-lite;
                     }
                 }
             }
         }
         &__two{
             .tf-trip-info{
-                background-color: $color-white;
-                @include bd-radius(5px);;
-                box-shadow: 0px 0px 24px 5px $color-box-shadow;
+                background-color: $color-filling-fg;
+                @include bd-radius(5px);
             
                 // trip info -
                 .person-info.active {
-                    background: $color-blue-light;
+                    background: $color-brand-lite;
                 }
                 ul {
                     padding: 0;
@@ -86,15 +90,13 @@
                     margin-top: $tf-space-8;
                     align-items: center;
                     i{
-                        margin-right: 10px;
-                        width: 10px;
+                        margin-right: 0;
                     }
                 } 
                 // trip person info
                 .person-info {
-                    border: 1px solid $color-border;
+                    border: 1px solid $color-border-lite;
                     @include bd-radius(5px);;
-                    box-shadow: 0px 9px 12px 0px #0e132305;
                     display: flex;
                     align-items: center;
                     justify-content: center;

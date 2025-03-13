@@ -3,7 +3,7 @@
         &__one{
             .tf-date-select-box{
                 border-radius: 16px;
-                background: $color-gray-info;
+                background: $color-filling-fg;
                 padding: 8px 8px 16px 8px;
                 margin-bottom: 32px;
                 @media #{$max768}{
@@ -34,7 +34,7 @@
                 }
                 .tf-date-single-select{
                     border-radius: 8px;
-                    background: $color-white;
+                    background: $color-filling-bg;
                     padding: 16px;
                     margin-bottom: 8px;
                     &:last-child{
@@ -46,7 +46,7 @@
                             flex-wrap: nowrap;
                         }
                         &:first-child{
-                            border-right: 1px solid $color-border;
+                            border-right: 1px solid $color-border-lite;
                         }
 
                         .info-select{
@@ -86,8 +86,7 @@
                                 max-height: 200px;
                                 overflow: auto;
                                 border-radius: 4px;
-                                background: $color-light-bg;
-                                box-shadow: 0px 4px 16px 0px rgba(2, 28, 53, 0.20);
+                                background: $color-filling-fg;
                                 padding: 2px;
                                 scrollbar-width: thin;
                                 scrollbar-color: $scrollbar-color;
@@ -119,7 +118,7 @@
                                         margin-bottom: 0px;
                                     }
                                     &:hover{
-                                        background-color: $color-light-bg;
+                                        background-color: $color-brand-lite;
                                     }
                                 }
                             }
@@ -147,7 +146,7 @@
                         border: 0px solid;
                         transition: .3s all ease;
                         &:hover{
-                            background: $color-secondary;
+                            background: $color-brand-dark;
                         }
                         &.tf-partial-button{
                             border: 1px solid $color-primary;
@@ -160,8 +159,8 @@
                                 }
                             }
                             &:hover{
-                                border: 1px solid $color-secondary;
-                                background: $color-secondary;
+                                border: 1px solid $color-brand-dark;
+                                background: $color-brand-dark;
                                 color: $color-white;
                                 svg{
                                     path{
@@ -196,7 +195,7 @@
                     }
                     .tf-cancellation-timeline{
                         margin-top: 12px;
-                        border-bottom: 1px solid $color-border;
+                        border-bottom: 1px solid $color-border-lite;
                         .tf-timeline{
                             ul{
                                 display: flex;
@@ -219,7 +218,7 @@
                                     }
                                     span.paid{
                                         border-radius: 2px;
-                                        background: $color-secondary;
+                                        background: $color-brand-dark;
                                         color: $color-white;
                                         font-size: 0.75rem;
                                         font-weight: 400;
@@ -263,7 +262,7 @@
 
             .tf-mobile-booking-btn{
                 display: none;
-                background: $color-light-bg;
+                background: $color-brand-lite;
                 padding: 8px;
                 @media #{$max768}{
                     display: block;
@@ -285,7 +284,7 @@
                     border: 0px solid;
                     transition: .3s all ease;
                     &:hover{
-                        background: $color-secondary;
+                        background: $color-brand-dark;
                     }
                 }
             }

@@ -65,6 +65,9 @@
                     @media #{$max575}{
                         margin-bottom: 15px;
                     }
+                    h2{
+
+                    }
                 }
                 .tf-exclude-section {
                     background: $color-heading;
@@ -86,6 +89,9 @@
                             }
                         }
                     }
+                    h2{
+                        color: $color-white;
+                    }
                 }
                 .tf-exclude-section.custom-exc-icon {
                     ul {
@@ -95,6 +101,9 @@
                             }
                         }
                     }
+                    h2{
+                        color: $color-white;
+                    }
                 }
             }
         }
@@ -102,9 +111,8 @@
             .tf-inex-wrapper {
                 .tf-inex {
                     width: 100%;
-                    background: $color-white;
+                    background: $color-filling-fg;
                     @include bd-radius(5px);;
-                    box-shadow: 0px 0px 24px 5px $color-box-shadow;
                     ul{
                         li{
                             margin-top: 0px;
@@ -119,7 +127,6 @@
         }
         &__three{
             .tf-include-exclude-wrapper {
-                margin-bottom: 16px;
                 @media #{$max768}{
                     padding-left: 16px;
                     padding-right: 16px;
@@ -128,7 +135,7 @@
                     color: $color-heading;
                     font-size: 2rem;
                     font-weight: 700;
-                    margin-bottom: 24px;
+                    margin-bottom: 20px;
                     @media #{$max1024}{
                         font-size: 1.5rem;
                     }
@@ -172,6 +179,7 @@
                             li{
                                 i{
                                     color: $color-success;
+                                    line-height: 1.6;
                                 }
                             }
                         }
@@ -180,7 +188,8 @@
                         ul{
                             li{
                                 i{
-                                    color: $color-danger
+                                    color: $color-danger;
+                                    line-height: 1.6;
                                 }
                             }
                         }

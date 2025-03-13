@@ -13,6 +13,7 @@ use Tourfic\Admin\Booking_Details\Car_Booking_Details;
 use Tourfic\Admin\TF_Promo_Notice;
 use Tourfic\App\Widgets\TF_Widget_Base;
 use Tourfic\Admin\Notice\Room_Notice;
+use Tourfic\Admin\Notice\Plugin_Page_Notice;
 
 class Base {
 	use \Tourfic\Traits\Singleton;
@@ -70,6 +71,7 @@ class Base {
 			// Admin Notices
 			\Tourfic\Admin\Notice_Update::instance();
 			Room_Notice::instance();
+			// Plugin_Page_Notice::instance();
 		}
 		// Promo Notice
 		TF_Promo_Notice::instance();

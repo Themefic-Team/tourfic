@@ -54,8 +54,8 @@
         }
         &__two{
             .upcomming-tours{
-                padding-top: 120px;
-                border-top: 1px solid $color-border;
+                padding-top: 56px;
+                border-top: 1px solid $color-border-lite;
         
                 .tf-upcomming-tours-list-outter{
                     @media #{$max1024}{
@@ -86,7 +86,7 @@
                 .tf-meta-data-price {
                     position: absolute;
                     bottom: 0px;
-                    background: $color-white;
+                    background: $color-filling-fg;
                     padding: 15px 22px;
                     font-size: 0.75rem;
                     span {
@@ -100,7 +100,7 @@
                     margin-top: $tf-space-8;
                     h2 {
                         font-size: 1.375rem;
-                        line-height: 1.4;
+                        line-height: 1.5;
                         a{
                             text-decoration: none;
                             color: inherit;

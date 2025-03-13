@@ -3,12 +3,12 @@
         /* Search form */
         .tf-archive-search-form {
             padding: 64px 0;
-            background-color: $color-yellow-thin;
+            background-color: $color-filling-bg;
             background-image: url(../images/hotel-form-bg.png);
             background-repeat: no-repeat;
             background-position: center center;
             background-size: cover;
-            border-bottom: 0.5px solid $color-light-bg;
+            border-bottom: 0.5px solid $color-brand-lite;
 
             @media #{$max1024} {
                 padding: 16px 0;
@@ -23,8 +23,8 @@
                 display: inline-flex;
                 @include justify-content(center);
                 border-radius: 8px;
-                border: 0.5px solid $color-light-bg;
-                background-color: $color-light-bg;
+                border: 0.5px solid $color-border-lite;
+                background-color: $color-filling-fg;
                 padding: 24px 48px;
                 max-width: 1050px;
                 margin: 0 auto;
@@ -39,7 +39,7 @@
 
         .tf-search-fields {
             @include flexbox();
-            gap: 48px;
+            gap: 16px;
 
             @media #{$max1024} {
                 @include flex-direction(column);
@@ -54,7 +54,7 @@
                 @media #{$max1024} {
                     padding: 16px;
                     border-radius: 4px;
-                    background: $color-light-bg;
+                    background: $color-brand-lite;
                 }
 
                 .tf-search-field-icon {
@@ -69,9 +69,9 @@
                 }
 
                 .tf-search-field-label {
-                    color: $color-heading;
-                    font-size: 1rem;
-                    line-height: 0.75;
+                    color: $color-text;
+                    font-size: 0.875rem;
+                    line-height: 1;
                     cursor: pointer;
                 }
 
@@ -79,15 +79,18 @@
                     background: transparent;
                     padding: 0;
                     border: none;
-                    width: 90px;
-                    color: $color-text;
-                    font-size: 0.75rem;
-                    height: 14px;
+                    width: 110px;
+                    color: $color-heading;
+                    font-size: 1rem;
+                    height: 20px;
                     outline: none;
+                    font-weight: 600;
                 }
 
                 .tf-archive-guest-info {
-                    font-size: 0.75rem;
+                    font-size: 1rem;
+                    font-weight: 600;
+                    line-height: 1.25;
                 }
             }
 
@@ -98,7 +101,7 @@
 
                 @media #{$max1024} {
                     border-radius: 4px;
-                    background: $color-light-bg;
+                    background: $color-brand-lite;
                 }
                 @media #{$max575} {
                     gap: 8px;
@@ -117,7 +120,7 @@
             }
 
             .tf-search-field-divider {
-                background-color: $color-white;
+                background-color: $color-border-lite;
                 width: 1px;
 
                 @media #{$max1024} {
@@ -147,8 +150,7 @@
             overflow: auto;
             padding: 4px;
             border-radius: 4px;
-            background: $color-yellow-thin;
-            box-shadow: 0px 4px 40px 0px rgba(80, 33, 0, 0.10);
+            background: $color-filling-fg;
 
             &::-webkit-scrollbar {
                 width: 4px;
@@ -171,12 +173,12 @@
                 display: block;
                 transition: .3s all ease;    
                 font-weight: 400;
-                line-height: 1.75;
+                line-height: 1.5;
                 letter-spacing: 0.15px;
                 border-radius: 4px;
 
                 &:hover {
-                    background: $color-light-bg;
+                    background: $color-brand-lite;
                 }
 
                 &::before {
@@ -199,8 +201,7 @@
             transition: 0.3s;
             border-radius: 8px;
             padding: 16px;
-            background: $color-yellow-thin;
-            box-shadow: 0px 8px 40px 0px rgba(0, 0, 0, 0.10);
+            background: $color-filling-fg;
 
             .tf_acrselection-inner{
                 @include flexbox();
@@ -213,10 +214,6 @@
             }
 
             .acr-label {
-                color: $color-heading;
-                font-size: 1rem;
-                font-weight: 400;
-                line-height: 1.75;
                 letter-spacing: 0.15px;
             }
 
@@ -235,8 +232,8 @@
                     padding-left: 0px;
                     padding-right: 0px;
                     border-radius: 4px;
-                    border: 0.2px solid $color-text;
-                    background: $color-light-bg;
+                    border: 0.2px solid $color-border-lite;
+                    background: $color-filling-bg;
                 }
 
                 .acr-dec,
@@ -245,14 +242,14 @@
                     border: none;
                     font-size: 1.938rem;
                     font-weight: 400;
-                    color: $color-secondary;
+                    color: $color-brand-dark;
                     padding: 0;
                     min-width: auto;
                     width: auto;
 
                     svg rect,
                     svg path{
-                        fill: $color-secondary;
+                        fill: $color-brand-dark;
                     }
                 }
             }
@@ -280,7 +277,7 @@
         
         .tf-archive-details {
             @include flexbox();
-            background: $color-yellow-thin;
+            background: $color-filling-bg;
             position: relative;
 
             .tf-details-left {
@@ -331,8 +328,6 @@
                     .gm-style-iw-c {
                         border-radius: 4px;
                         padding: 0;
-                        -webkit-box-shadow: 0px 4px 40px 0px rgba(80, 33, 0, 0.10);
-                        box-shadow: 0px 4px 40px 0px rgba(80, 33, 0, 0.10);
                         overflow: visible;
                     }
 
@@ -378,7 +373,7 @@
                             color: $color-heading;
                             font-size: 0.75rem;
                             font-weight: 700;
-                            line-height: 1.17;
+                            line-height: 1.2;
                             padding: 8px 16px;
                             border-radius: 32px;
                             background-color: $color-white;
@@ -394,7 +389,7 @@
                         h4 {
                             font-size: 1rem;
                             font-weight: 500;
-                            line-height: 1.25;
+                            line-height: 1.2;
                             margin: 0;
                             text-transform: capitalize;
 
@@ -430,7 +425,6 @@
                             }
 
                             .tf-avarage-review {
-                                line-height: 1.25;
                                 color: $color-heading;
                                 font-weight: 400;
 
@@ -444,7 +438,7 @@
 
                 .tf_map_price {
                     .tf_price_inner {
-                        background: $color-white;
+                        background: $color-filling-fg;
                         border-radius: 30px;
                         text-align: center;
                         color: $color-text;
@@ -453,7 +447,6 @@
                         line-height: 1;
                         font-weight: 700;
                         @include transition();
-                        box-shadow: 0px 4px 30px 0px rgba(255, 237, 225, 0.40);
                         cursor: pointer;
 
                         &:hover,
@@ -515,20 +508,21 @@
                     li.tf-archive-view-item {
                         width: 32px;
                         height: 32px;
-                        line-height: 2.25;
+                        @include flexbox();
+                        align-items: center;
+                        justify-content: center;
                         border-radius: 8px;
-                        background-color: $color-white;
+                        background-color: $color-filling-fg;
                         text-align: center;
                         cursor: pointer;
                         @include transition();
-
+                        border: 0.5px solid $color-border-lite;
                         &:hover {
-                            background: $color-light-bg;
-                            box-shadow: 0px 4px 40px 0px rgba(80, 33, 0, 0.10);
+                            background: $color-brand-lite;
                         }
 
                         &.active {
-                            background-color: $color-light-bg;
+                            background-color: $color-brand-lite;
 
                             svg path {
                                 stroke: $color-primary;
@@ -542,9 +536,12 @@
                         font-size: 0.875rem;
                         font-weight: 500;
                         height: 32px;
-                        line-height: 2.28;
+                        @include flexbox();
+                        align-items: center;
+                        justify-content: center;
                         border-radius: 4px;
-                        background-color: $color-white;
+                        background-color: $color-filling-fg;
+                        border: 0.5px solid $color-border-lite;
                         text-align: center;
                         cursor: pointer;
                         @include transition();
@@ -555,12 +552,11 @@
 
                         &:hover {
                             border-radius: 4px;
-                            background: $color-light-bg;
-                            box-shadow: 0px 4px 30px 0px rgba(255, 237, 225, 0.40);
+                            background: $color-brand-lite;
                         }
 
                         &.active {
-                            background-color: $color-light-bg;
+                            background-color: $color-brand-lite;
 
                             svg path {
                                 stroke: $color-primary;
@@ -574,7 +570,9 @@
                             font-size: 0.875rem;
                             font-weight: 500;
                             height: 32px;
-                            line-height: 2.28;
+                            @include flexbox();
+                            align-items: center;
+                            justify-content: center;
                             border-radius: 4px;
                             border: none;
                             background-color: $color-white;
@@ -616,13 +614,12 @@
 
             .tf-archive-hotel {
                 border-radius: 4px;
-                background-color: $color-light-bg;
+                background-color: $color-filling-fg;
                 @include flexbox();
                 @include transition();
 
                 &:hover{
                     background: $color-white;
-                    box-shadow: 0px 4px 30px 0px rgba(255, 237, 225, 0.40);
 
                     .tf-archive-hotel-content .tf-archive-hotel-content-left .tf-section-title a{
                         color: $color-primary;
@@ -654,8 +651,7 @@
                             color: $color-white;
                             font-size: 12px;
                             font-weight: 700;
-                            line-height: 14px;
-                            padding: 8px 16px;
+                            padding: 6px 16px;
                             border-radius: 32px;
                             background-color: $color-primary;
                         }
@@ -688,8 +684,6 @@
                             gap: 8px;
                             color: $color-text;
                             font-size: 1rem;
-                            line-height: 1.25;
-                            
                             @media #{$max575} {
                                 font-size: 0.75rem;
                             }
@@ -759,9 +753,6 @@
                             }
 
                             .tf-avarage-review {
-                                line-height: 1.25;
-                                color: $color-text;
-
                                 .tf-no-review-count{
                                     color: $color-heading;
                                 }
@@ -920,7 +911,7 @@
                     color: $color-primary;
                     font-size: 1rem;
                     font-weight: 700;
-                    line-height: 1.75;
+                    line-height: 1.5;
                     background-color: transparent;
                     letter-spacing: 0.15px;
                     cursor: pointer;
@@ -944,7 +935,7 @@
                 }
 
                 .al-range-slider__track {
-                    background: $color-gray-light;
+                    background: $color-brand-lite;
                     height: 10px;
                     box-shadow: none;
                     margin: 30px 0px 10px 0px;
@@ -954,17 +945,17 @@
                     padding: 0px;
 
                     .al-range-slider__bar {
-                        background: $color-primary;
+                        background: $color-text;
                         box-shadow: none;
                     }
                 }
 
                 .al-range-slider__knob {
-                    background: $color-primary;
-                    height: 15px;
-                    width: 15px;
+                    background: $color-filling-bg;
+                    height: 24px;
+                    width: 24px;
                     box-shadow: none;
-                    border: 3px solid $color-primary;
+                    border: 1.5px solid $color-border;
 
                     &:first-child {
                         span {
@@ -1134,15 +1125,15 @@
                     text-decoration: none;
                     padding: 12px 12px;
                     min-width: 40px;
-                    line-height: 1.14;
+                    line-height: 1.2;
                     border-radius: 5px;
                     text-align: center;
                     background: transparent;
                     display: inline-block;
                 }
                 .page-numbers.current{
-                    background: $color-primary;
-                    color: $color-white;
+                    background: $color-brand-lite;
+                    color: $color-text;
                 }
             }
         }
@@ -1156,15 +1147,15 @@
                 text-decoration: none;
                 padding: 12px 12px;
                 min-width: 40px;
-                line-height: 1.14;
+                line-height: 1.2;
                 border-radius: 5px;
                 text-align: center;
                 background: transparent;
                 display: inline-block;
             }
             .page-numbers.current{
-                background: $color-primary;
-                color: $color-white;
+                background: $color-brand-lite;
+                color: $color-text;
             }
         }
 

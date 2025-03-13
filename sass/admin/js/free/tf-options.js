@@ -2856,122 +2856,160 @@ var frame, gframe;
     */
     jQuery(document).ready(function ($) {
 
+        // Function to get the selected design
         function getSelectedDesign() {
             return $('input[name="tf_settings\\[color-palette-template\\]"]:checked').val();
         }
-
+        
+        const designDefault = {
+            'd1': {
+                brand: {
+                    default: '#0E3DD8',
+                    dark: '#0A2B99',
+                    lite: '#C9D4F7',
+                },
+                text: {
+                    heading: '#1C2130',
+                    paragraph: '#494D59',
+                    lite: '#F3F5FD',
+                },
+                border: {
+                    default: '#16275F',
+                    lite: '#D1D7EE',
+                },
+                filling: {
+                    background: '#ffffff',
+                    foreground: '#F5F7FF',
+                },
+            },
+            'd2': {
+                brand: {
+                    default: '#B58E53',
+                    dark: '#917242',
+                    lite: '#FAEEDC',
+                },
+                text: {
+                    heading: '#30281C',
+                    paragraph: '#595349',
+                    lite: '#FDF9F3',
+                },
+                border: {
+                    default: '#5F4216',
+                    lite: '#EEE2D1',
+                },
+                filling: {
+                    background: '#ffffff',
+                    foreground: '#FDF9F3',
+                },
+            },
+            'd3': {
+                brand: {
+                    default: '#F97415',
+                    dark: '#C75605',
+                    lite: '#FDDCC3',
+                },
+                text: {
+                    heading: '#30241C',
+                    paragraph: '#595049',
+                    lite: '#FDF7F3',
+                },
+                border: {
+                    default: '#5F3416',
+                    lite: '#EEDDD1',
+                },
+                filling: {
+                    background: '#ffffff',
+                    foreground: '#FFF9F5',
+                },
+            },
+            'd4': {
+                brand: {
+                    default: '#003061',
+                    dark: '#002952',
+                    lite: '#C2E0FF',
+                },
+                text: {
+                    heading: '#1C2630',
+                    paragraph: '#495159',
+                    lite: '#F3F8FD',
+                },
+                border: {
+                    default: '#163A5F',
+                    lite: '#D1DFEE',
+                },
+                filling: {
+                    background: '#ffffff',
+                    foreground: '#F5FAFF',
+                },
+            },
+        };
+    
+        // Function to update custom colors based on the selected design
         function updateCustomColors(selectedDesign) {
             if (!selectedDesign) return;
+    
             const colorPalettes = {
                 'design-1': 'tf-d1',
                 'design-2': 'tf-d2',
                 'design-3': 'tf-d3',
                 'design-4': 'tf-d4'
             };
+    
             const selectedPalette = colorPalettes[selectedDesign];
             if (!selectedPalette) return;
     
-            $('input[name^="tf_settings[' + selectedPalette + ']"]').each(function () {
-                let fieldNameMatch = $(this).attr('name').match(/\[(.*?)\]$/);
-                if (!fieldNameMatch) return;
+            // Define the fields to be updated
+            const fields = ['brand', 'text', 'border', 'filling'];
     
-                let fieldName = fieldNameMatch[1];
-                let fieldValue = $(this).val();
-                let $customField = $('input[name="tf_settings[tf-custom][' + fieldName + ']"]');
-    
-                if ($customField.length) {
-                    $customField.val(fieldValue).trigger('change');
-                }
+            fields.forEach(field => {
+                $(`input[name^="tf_settings[${selectedPalette}-${field}]"]`).each(function () {
+                    let fieldName = $(this).attr('name').split('[')[2].replace(']', ''); // Extract the sub-field (e.g., 'default', 'dark', 'lite')
+                    let fieldValue = $(this).val();
+                    let $customField = $(`input[name="tf_settings[tf-custom-${field}][${fieldName}]"]`);
+
+                    if ($customField.length) {
+                        $customField.val(fieldValue).trigger('change');
+                    }
+                });
             });
-        }
-
-        const tf_colorData = {
-            'd1': {
-                'primary' : '#0E3DD8',
-                'secondary' : '#003C7A',
-                'text' : '#686E7A',
-                'heading' : '#060D1C',
-                'light-bg' : '#faeedc',
-                'highlights-bg' : '#FCF4E8',
-                'form-input-bg' : '#F3F7FA',
-                'box-shadow' : '#e0e8ee52',
-                'border-color' : '#ddd',
-            },
-            'd2': {
-                'primary' : '#B58E53',
-                'secondary' : '#917242',
-                'text' : '#99948D',
-                'heading' : '#595349',
-                'light-bg' : '#faeedc',
-                'highlights-bg' : '#FCF4E8',
-                'form-input-bg' : '#F3F7FA',
-                'box-shadow' : '#e0e8ee52',
-                'border-color' : '#ddd',
-            },
-            'd3': {
-                'primary' : '#FF6B00',
-                'secondary' : '#C15100',
-                'text' : '#6E655E',
-                'heading' : '#1A0B00',
-                'light-bg' : '#faeedc',
-                'highlights-bg' : '#FCF4E8',
-                'form-input-bg' : '#F3F7FA',
-                'box-shadow' : '#e0e8ee52',
-                'border-color' : '#ddd',
-            },
-            'd4': {
-                'primary' : '#003162',
-                'secondary' : '#0054A8',
-                'text' : '#000',
-                'heading' : '#000',
-                'light-bg' : '#faeedc',
-                'highlights-bg' : '#FCF4E8',
-                'form-input-bg' : '#F3F7FA',
-                'box-shadow' : '#e0e8ee52',
-                'border-color' : '#ddd',
-            },
-        };
-
+        }     
+    
         // Initialize wpColorPicker for all relevant inputs
         $('input[name^="tf_settings[tf-d"]').wpColorPicker({
             change: function (event, ui) {
                 let $colorField = $(event.target);
                 let originalValue = $colorField.val();
                 let newValue = ui.color.toString();
-                
+
+                updateCustomColors(getSelectedDesign());
+    
                 if (newValue !== originalValue) {
+                    // Switch to custom palette
                     $('#tf_settings\\[color-palette-template\\]\\[custom\\]').prop("checked", true);
                     $('.tf-field.tf-field-color.tf-depend-hidden').addClass('tf-depend-on');
                     $('.tf-field.tf-field-color.tf-depend-hidden[data-value="custom"]').removeClass('tf-depend-on');
+    
+                    // Extract the field type and sub-field name
                     let nameAttr = $colorField.attr('name');
-                    let match = nameAttr.match(/\[tf-(d\d+)]\[(.*?)\]/);
+                    let match = nameAttr.match(/\[tf-(d\d+)-(brand|text|border|filling)]\[(.*?)\]/);
                     if (!match) return;
-
-                    let design = match[1];
-                    let fieldName = match[2];
-                    let $customColorField = $(`input[name="tf_settings[tf-custom][${fieldName}]"]`);
-                    
+    
+                    let design = match[1]; // e.g., 'd1', 'd2', etc.
+                    let fieldType = match[2]; // e.g., 'brand', 'text', etc.
+                    let fieldName = match[3]; // e.g., 'default', 'dark', 'lite', etc.
+    
+                    // Update the corresponding custom field
+                    let $customColorField = $(`input[name="tf_settings[tf-custom-${fieldType}][${fieldName}]"]`);
                     if ($customColorField.length) {
-                        let fields = ["primary", "secondary", "text", "heading", "light-bg", "highlights-bg", "form-input-bg", "box-shadow", "border-color"];
                         
-                        fields.forEach(field => {
-                            let value = $(`input[name="tf_settings[tf-${design}][${field}]"]`).val();
-                            $(`input[name="tf_settings[tf-custom][${field}]"]`).val(value).trigger('change');
-                            $(`input[name="tf_settings[tf-${design}][${fieldName}]"]`).val(tf_colorData[design][fieldName]).trigger('change');
-                        });
-
+                        let value = $(`input[name="tf_settings[tf-${design}-${fieldType}][${fieldName}]"]`).val();
+                        $(`input[name="tf_settings[tf-custom-${fieldType}][${fieldName}]"]`).val(value).trigger('change');
+                        $(`input[name="tf_settings[tf-${design}-${fieldType}][${fieldName}]"]`).val(designDefault[design][fieldType][fieldName]).trigger('change');
                         $customColorField.val(newValue).trigger('change');
                     }
                 }
             }
         });
-
-    
-        // Trigger updates when a design is selected
-        $('input[name="tf_settings\\[color-palette-template\\]"]').on('change', function () {
-            updateCustomColors(getSelectedDesign());
-        });
-        updateCustomColors(getSelectedDesign());
     });
     
     

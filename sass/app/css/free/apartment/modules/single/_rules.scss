@@ -9,8 +9,8 @@
                     @include flex-wrap(wrap);
                     gap: 30px;
                     padding: 24px;
-                    background-color: $color-light-bg;
-                    border: 1px solid $color-border;
+                    background-color: $color-brand-lite;
+                    border: 1px solid $color-border-lite;
                     border-radius: 8px;
             
                     .tf-not-included-house-rules,
@@ -33,15 +33,7 @@
                                 margin: 0 0 5px 0;
                                 font-weight: 500;
                                 font-size: 1.125rem;
-                                line-height: 1.33;
                                 color: $color-primary;
-                            }
-            
-                            span {
-                                color: $color-text;
-                                font-size: 1rem;
-                                font-weight: 400;
-                                line-height: 1.4;
                             }
             
                             &::before {
@@ -51,7 +43,6 @@
                                 top: 0;
                                 left: -29px;
                                 font-size: 1.25rem;
-                                line-height: 1;
                                 color: $color-primary;
                             }
             

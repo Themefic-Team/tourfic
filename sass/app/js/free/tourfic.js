@@ -11,7 +11,14 @@
                 y: 'bottom',
             },
         });
-
+        
+        // Add the classes to the body element
+        if (tf_params.body_classes && tf_params.body_classes.length > 0) {
+            $.each(tf_params.body_classes, function(index, className) {
+                $('body').addClass(className);
+            });
+        }
+        
 
         /*
          * AJAX load for range filter to prevent performance issue.
@@ -2202,7 +2209,7 @@
 
         //Search Form Showing
         $('.tf-single-template__three .tf-modify-search-btn, .tf-archive-template__three .tf-modify-search-btn').on('click', function () {
-            $('.tf-booking-form-wrapper').slideDown(300);
+            $('.tf-booking-form-wrapper .tf-booking-form').slideDown(300);
             $('.tf-single-template__three .tf-modify-search-btn, .tf-archive-template__three .tf-modify-search-btn').slideUp(300);
         });
 

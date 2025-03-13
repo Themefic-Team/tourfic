@@ -237,9 +237,9 @@ $price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings'
                                 <div class="single-slider-wrapper fl-wrap">
                                     <div class="tf_slider-for fl-wrap tf-slick-slider">
 
-                                        <a href="<?php echo ! empty( get_the_post_thumbnail_url( $post_id, 'tf_gallery_thumb' ) ) ? esc_url( get_the_post_thumbnail_url( $post_id, 'tf_gallery_thumb' ) ) : esc_url( TF_ASSETS_APP_URL . '/images/feature-default.jpg' ); ?>"
+                                        <a href="<?php echo ! empty( get_the_post_thumbnail_url( $post_id, 'tf_gallery_thumb' ) ) ? esc_url( get_the_post_thumbnail_url( $post_id, 'tf_gallery_thumb' ) ) : esc_url( TF_ASSETS_APP_URL . 'images/feature-default.jpg' ); ?>"
                                            class="slick-slide-item-link" data-fancybox="hotel-gallery">
-                                            <img src="<?php echo ! empty( get_the_post_thumbnail_url( $post_id, 'tf_gallery_thumb' ) ) ? esc_url( get_the_post_thumbnail_url( $post_id, 'tf_gallery_thumb' ) ) : esc_url( TF_ASSETS_APP_URL . '/images/feature-default.jpg' ); ?>"
+                                            <img src="<?php echo ! empty( get_the_post_thumbnail_url( $post_id, 'tf_gallery_thumb' ) ) ? esc_url( get_the_post_thumbnail_url( $post_id, 'tf_gallery_thumb' ) ) : esc_url( TF_ASSETS_APP_URL . 'images/feature-default.jpg' ); ?>"
                                                  alt="">
                                         </a>
 
@@ -341,7 +341,7 @@ $price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings'
 					<?php if ( $features && count( $features ) > 0 ) { ?>
                         <div class="tf_features">
                             <?php if( !empty( $meta['popular-section-title'] ) ): ?>
-                                <h3 class="section-heading"><?php echo esc_html($meta['popular-section-title']); ?></h3>
+                                <h2 class="section-heading"><?php echo esc_html($meta['popular-section-title']); ?></h2>
                             <?php endif; ?>
 
                             <div class="tf-feature-list">
@@ -447,7 +447,7 @@ $price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings'
                     <?php endif; ?>
 					<?php
 					$places_section_title = ! empty( $meta["section-title"] ) ? $meta["section-title"] : "What's around?";
-					$places_meta          = ! empty( $meta["nearby-places"] ) ? $meta["nearby-places"] : array();
+					$places_meta          = ! empty( $meta["nearby-places"] ) ? Helper::tf_data_types($meta["nearby-places"]) : array();
 					?>
 					<?php if ( count( $places_meta ) > 0 ) : ?> <!-- nearby places - start -->
                         <div class="nearby-container">

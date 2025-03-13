@@ -87,7 +87,7 @@ class Hotel_External_Listings extends \Tourfic\Core\Shortcodes {
 
 						if($tf_booking_type == 2 && !empty($tf_booking_url)):
 							?>
-                            <div class="tf-slider-item" style="background-image: url(<?php echo ! empty( get_the_post_thumbnail_url( $post_id, 'full' ) ) ? esc_url( get_the_post_thumbnail_url( $post_id, 'full' ) ) : esc_url(TF_ASSETS_APP_URL . '/images/feature-default.jpg'); ?>);">
+                            <div class="tf-slider-item" style="background-image: url(<?php echo ! empty( get_the_post_thumbnail_url( $post_id, 'full' ) ) ? esc_url( get_the_post_thumbnail_url( $post_id, 'full' ) ) : esc_url(TF_ASSETS_APP_URL . 'images/feature-default.jpg'); ?>);">
                                 <div class="tf-slider-content">
                                     <div class="tf-slider-desc">
                                         <h3><a href="<?php echo esc_url(get_the_permalink($post_id)) ?>" target="_blank"><?php the_title() ?></a></h3>

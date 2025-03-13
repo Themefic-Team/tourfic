@@ -6,12 +6,6 @@
     }
     &__three{
         width: 100%;
-        background: $color-yellow-light;
-        color: $color-gray;
-        font-size: 1rem;
-        font-weight: 400;
-        line-height: 1.25;
-
         #tf-required {
             text-align: center;
             width: 100%;
@@ -34,7 +28,7 @@
             outline: none;
         }
         .tf-section {
-            background: $color-yellow-thin;
+            background: $color-filling-fg;
             padding: 32px;
             margin-bottom: 32px;
         }
@@ -52,7 +46,7 @@
             }
             /* Track */
             &::-webkit-scrollbar-track {
-                background: $color-light-bg;
+                background: $color-brand-lite;
             }
             /* Handle */
             &::-webkit-scrollbar-thumb {
@@ -173,7 +167,6 @@
                                                 color: $color-text;
                                                 font-size: 1.25rem;
                                                 font-weight: 400;
-                                                line-height: 1.3;
                                             }
                                         }
                                     }
@@ -212,23 +205,21 @@
             text-align: center;
             font-size: 0.75rem;
             font-weight: 600;
-            line-height: 1.5;
             cursor: pointer;
             margin-left: 16px;
             margin-right: 16px;
             display: none;
             @media #{$max768}{
                 display: block;
+                margin-bottom: -16px;
             }
         }
         .tf-booking-form-wrapper {
-            background: $color-light-bg;
-            @media #{$max768}{
-                display: none;
-            }
+            background: $color-filling-fg;
             .tf-booking-form {
                 display: flex;
                 margin: 0;
+                
                 .tf-booking-form-fields {
                     display: flex;
                     width: 78%;
@@ -239,7 +230,7 @@
                     }
                     &>div {
                         width: 32%;
-                        border-right: 1px solid $color-border;
+                        border-right: 1px solid $color-border-lite;
                         display: flex;
                         flex-direction: column;
                         position: relative;
@@ -280,8 +271,6 @@
                 .tf-booking-date {
                     color: $color-text;
                     font-size: 1.5rem;
-                    font-weight: 400;
-                    line-height: 1.33;
                     text-align: right;
                     margin-right: 5px;
                     @media #{$max1024}{
@@ -291,7 +280,6 @@
                 span.tf-booking-form-title {
                     font-size: 1rem;
                     font-weight: 600;
-                    line-height: 1.25;
                     margin-bottom: 8px;
                     color: $color-text;
                     @media #{$max1024}{
@@ -347,7 +335,7 @@
             }
         }
         .tf-available-rooms-wrapper {
-            background: $color-yellow-thin;
+            background: $color-filling-fg;
             padding: 32px;
             margin-bottom: 32px;
             .tf-room-filter{
@@ -367,23 +355,21 @@
                         padding-left: 0px;
                         font-size: 1rem;
                         font-weight: 400;
-                        line-height: 1.3;
                         color: $color-text;
                         @media #{$max1024}{
                             font-size: 0.75rem;
                         }
                         label{
                             padding-left: 25px;
-                            line-height: 1;
                             margin-left: 0px;
                             .tf-checkmark{
                                 border-radius: 4px;
                                 border: 1px solid $color-primary;
-                                background: $color-light-bg;
+                                background: $color-brand-lite;
                                 height: 16px;
                                 width: 16px;
                                 &:hover{
-                                    border-color: $color-secondary;
+                                    border-color: $color-brand-dark;
                                 }
                                 &::after{
                                     top: 1px;
@@ -417,7 +403,7 @@
                 }
             }
             .tf-available-room {
-                background: $color-yellow-light;
+                background: $color-filling-bg;
                 display: flex;
                 .tf-available-room-gallery {
                     min-width: 230px;
@@ -634,7 +620,6 @@
                             .tf-price {
                                 color: $color-heading;
                                 font-weight: 400;
-                                line-height: 1.7;
                                 text-align: right;
                                 .amount{
                                     font-weight: 400;
@@ -675,7 +660,7 @@
                                 background-size: 10px;
                                 background-position: 80% 49%;
                                 text-align: center;
-                                background-color: $color-light-bg;
+                                background-color: $color-brand-lite;
                                 border: none;
                                 cursor: pointer;
                                 font-weight: 700;
@@ -736,9 +721,6 @@
             &>span{
                 color: $color-text;
                 font-size: 1.5rem;
-                font-weight: 400;
-                line-height: 1.3;
-                margin: 0px;
                 @media #{$max1024}{
                     font-size: 0.875rem;
                 }
@@ -780,7 +762,7 @@
             }
         
             &.tf-archive-right{
-                background-color: $color-yellow-thin;
+                background-color: $color-filling-fg;
                 padding: 32px;
                 width: 30%;
                 margin-bottom: 56px;
@@ -814,7 +796,6 @@
                         margin-bottom: 10px;
                         font-size: 1rem;
                         font-weight: 600;
-                        line-height: 1.5;
                         color: $color-text;
                         @media #{$max1024}{
                             font-size: 0.75rem;
@@ -832,7 +813,6 @@
                             padding-left: 0px;
                             font-size: 1rem;
                             font-weight: 400;
-                            line-height: 1.3;
                             color: $color-text;
                             background: transparent;
                             @media #{$max1024}{
@@ -840,7 +820,6 @@
                             }
                             label{
                                 padding-left: 30px;
-                                line-height: 1;
                                 .tf-checkmark{
                                     border-radius: 4px;
                                     border: 1px solid $color-primary;
@@ -848,7 +827,7 @@
                                     height: 16px;
                                     width: 16px;
                                     &:hover{
-                                        border-color: $color-secondary;
+                                        border-color: $color-brand-dark;
                                     }
                                     &::after{
                                         top: 1px;
@@ -873,7 +852,6 @@
                         color: $color-primary;
                         font-size: 1rem;
                         font-weight: 400;
-                        line-height: 1.3;
                         margin-top: 6px;
                         span{
                             display: none;
@@ -891,7 +869,7 @@
                     margin-top: 10px;
                 }
                 .al-range-slider__track {
-                    background: $color-gray-light;
+                    background: $color-brand-lite;
                     height: 10px;
                     box-shadow: none;
                     margin: 0px 0px 10px 0px;
@@ -904,11 +882,11 @@
                     }
                 }
                 .al-range-slider__knob {
-                    background: $color-light-bg;
+                    background: $color-filling-bg;
                     height: 24px;
                     width: 24px;
                     box-shadow: none;
-                    border: 3px solid $color-gray;
+                    border: 1.5px solid $color-border;
                     &:first-child {
                         span {
                             left: 10px;
@@ -924,7 +902,6 @@
                     color: $color-text;
                     font-size: 1rem;
                     font-weight: 400;
-                    line-height: 1.3;
                 }
                 .al-range-slider__input.js-al-range-slider__input {
                     display: none;
@@ -961,7 +938,7 @@
             }
             .tf-popup-inner {
                 width: 1130px;
-                background: $color-light-bg;
+                background: $color-filling-fg;
                 padding: 24px;
                 max-height: 695px;
                 max-width: 80vw;
@@ -1007,7 +984,7 @@
                 }
 
                 .tf-popup-body::-webkit-scrollbar-track {
-                    background-color: $color-light-bg;
+                    background-color: $color-brand-lite;
                 }
 
                 .tf-popup-close {
@@ -1018,7 +995,7 @@
                     height: 30px;
                     width: 30px;
                     border-radius: 50%;
-                    background: $color-light-bg;
+                    background: $color-brand-lite;
                     display: flex;
                     align-items: center;
                     justify-content: center;
@@ -1043,8 +1020,7 @@
             opacity: 0;
             visibility: hidden;
             transition: 0.3s;
-            background: $color-yellow-light;
-            box-shadow: 0px 8px 40px 0px rgba(0, 0, 0, 0.10);
+            background: $color-filling-bg;
             &.tf-show {
                 visibility: visible;
                 opacity: 1;
@@ -1055,7 +1031,6 @@
                 color: $color-text;
                 font-size: 1rem;
                 font-weight: 600;
-                line-height: 1.3;
             }
             .acr-select{
                 text-align: right;
@@ -1063,7 +1038,7 @@
                 input[type=tel]{
                     width: 34px;
                     height: 48px;
-                    border: 1px solid;
+                    border: 1px solid $color-border-lite;
                     font-size: 1rem;
                     font-weight: 600;
                     color: $color-text;
@@ -1071,7 +1046,7 @@
                     padding-left: 0px;
                     padding-right: 0px;
                     border-radius: 20px;
-                    background: $color-light-bg;
+                    background: $color-filling-fg;
                 }
                 .acr-dec,
                 .acr-inc{
@@ -1109,7 +1084,7 @@
         &__three{
             #tf-ask-modal{
                 .tf-aq-outer{
-                    background: $color-light-bg;
+                    background: $color-brand-lite;
                     border-radius: 0px;
                     h4{
                         color: $color-heading;
@@ -1121,10 +1096,10 @@
                 }
                 .tf-aq-field{
                     input{
-                        border: 1px solid $color-border;
-                        box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+                        border: 1px solid $color-border-lite;
+
                         color: $color-text;
-                        background-color: $color-light-bg;
+                        background-color: $color-brand-lite;
                         font-size: 1rem;
                         height: 45px;
                         padding: 12px 14px;;
@@ -1134,9 +1109,8 @@
                         }
                     }
                     textarea{
-                        border: 1px solid $color-border;
-                        box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
-                        background-color: $color-light-bg;
+                        border: 1px solid $color-border-lite;
+                        background-color: $color-brand-lite;
                         color: $color-text;
                         font-size: 1rem;
                         font-weight: 400;
@@ -1161,7 +1135,7 @@
                         position: static;
                     }
                     &:hover{
-                        background: $color-secondary;
+                        background: $color-brand-dark;
                     }
                 }
             }
@@ -1350,7 +1324,6 @@
                                     .tf-price{
                                         color: $color-text;
                                         font-weight: 400;
-                                        line-height: 1.7;
                                         .discount-price {
                                             color: $color-gray;
                                             font-size: 1rem;
@@ -1427,6 +1400,9 @@
                 .tf-booking-form{
                     @media #{$max1024}{
                         display: flow-root;
+                    }
+                    @media #{$max768}{
+                        display: none;
                     }
                     span.tf-booking-form-title{
                         @media #{$max768} {
@@ -1613,7 +1589,7 @@
                 }
             }
             .tf-travel-itinerary-wrapper{
-                background-color: $color-light-bg;
+                background-color: $color-brand-lite;
             }
         }
     }
@@ -1661,11 +1637,12 @@
     &__three{
         //  FAQ Section
         .tf-questions-wrapper {
+            background-color: transparent;
+            padding: 0;
             h2{
                 color: $color-heading;
                 font-size: 2rem;
                 font-weight: 700;
-                line-height: 1.2;
                 margin-bottom: 24px;
                 @media #{$max1024}{
                     font-size: 1.5rem;
@@ -1696,7 +1673,7 @@
                             transition: 0.3s;
                         }
                         &.tf-active {
-                            background: $color-yellow-light;
+                            background: $color-filling-fg;
                             padding: 24px;
                             display: flex;
                             flex-direction: column;
@@ -1712,11 +1689,9 @@
                                 color: $color-text;
                                 font-size: 1rem;
                                 font-weight: 600;
-                                line-height: 1.3;
                                 margin-bottom: 8px;
                                 display: flex;
                                 justify-content: space-between;
-                                cursor: pointer;
                                 align-items: center;
                             }
                         }
@@ -1741,8 +1716,7 @@
                 color: $color-heading;
                 font-size: 2rem;
                 font-weight: 700;
-                line-height: 1.2;
-                margin-bottom: 24px;
+                margin-bottom: 20px;
                 @media #{$max1024}{
                     font-size: 1.5rem;
                 }
@@ -1763,7 +1737,7 @@
                     gap: 16px;
                     &>div {
                         padding: 24px;
-                        background-color: $color-light-bg;
+                        background-color: $color-brand-lite;
                     }
                     .tf-policy-title {
                         min-width: 316px;
@@ -1782,8 +1756,8 @@
         }
         // Related Section
         .tf-related-items-section{
-            background-color: $color-yellow-thin;
-            padding: 120px 0px;
+            padding: 56px 0px;
+            background-color: $color-filling-fg;
 
             @media #{$max768}{
                 padding: 32px;
@@ -1807,6 +1781,7 @@
             }
             .slick-track{
                 display: flex;
+                margin-left: 0;
                 .slick-slide{
                     height: inherit;
                     margin: 0;
@@ -1847,7 +1822,7 @@
                 }
                 .tf-meta-info{
                     padding: 16px 24px 24px 24px;
-                    background-color: $color-yellow-light;
+                    background-color: $color-filling-bg;
                     display: flex;
                     flex-direction: column;
                     justify-content: space-between;
@@ -1876,7 +1851,6 @@
                         color: $color-text;
                         font-size: 1rem;
                         font-weight: 400;
-                        line-height: 1.3;
                         margin: 0px 0px 24px 0px;
                     }
                     .tf-meta-title{
@@ -1885,19 +1859,20 @@
                         justify-content: space-between;
                         h2{
                             margin-bottom: 16px;
+                            line-height: 1;
                             a{
                                 text-decoration: none;
                                 color: inherit;
                                 font-size: 1.25rem;
                                 font-weight: 700;
-                                line-height: 1.2;
+                                line-height: inherit;
                                 &:hover{
                                     color: $color-primary;
                                 }
                             }
                         }
                         .tf-meta-data-price{
-                            margin-left: 37px;
+                            margin-left: 24px;
                             @media #{$max1024}{
                                 margin-left: 23px;
                             }
@@ -1905,7 +1880,6 @@
                                 color: $color-text;
                                 font-size: 1.5rem;
                                 font-weight: 400;
-                                line-height: 1.3;
                                 @media #{$max1024}{
                                     font-size: 1.25rem;
                                 }
@@ -1914,7 +1888,6 @@
                                 color: $color-text;
                                 font-size: 1rem;
                                 font-weight: 400;
-                                line-height: 1.3;
                             }
                         }
                     }
@@ -1938,14 +1911,15 @@
 
         // Inquery Box
         .tf-send-inquiry{
-            background: $color-yellow-thin;
+            background: $color-filling-fg;
             display: flex;
-            padding: 56px 80px;
+            padding: 30px;
             flex-direction: column;
             align-items: center;
             gap: 24px;
+            margin-top: 32px;
             @media #{$max1600}{
-                padding: 56px 16px;
+                padding:30px 16px;
             }
             @media #{$max1024}{
                 padding: 16px;
@@ -1968,11 +1942,8 @@
                 }
             }
             p{
-                color: $color-text;
                 text-align: center;
                 font-size: 1rem;
-                font-weight: 400;
-                line-height: 1.3;
                 margin: 0;
                 @media #{$max768}{
                     font-size: 0.875rem;
@@ -1994,7 +1965,7 @@
             font-size: 1rem;
             font-weight: 700;
             line-height: 1.5;
-            background: $color-light-bg;
+            background: $color-brand-lite;
             width: 100%;
             border: none;
             padding: 12px 0;
@@ -2055,7 +2026,7 @@
             .tf-progress-bar {
                 width: 100%;
                 height: 12px;
-                background: $color-light-bg;
+                background: $color-brand-lite;
                 border-radius: 50px;
                 display: flex;
             }
@@ -2081,7 +2052,7 @@
             }
         }
         .tf-review-form-wrapper{
-            background: $color-yellow-thin;
+            background: $color-filling-fg;
             padding: 24px;
             display: none;
             flex-direction: column;
@@ -2094,7 +2065,7 @@
                 color: $color-heading;
                 font-size: 1.25rem;
                 font-weight: 700;
-                line-height: 1.2;
+                margin-bottom: 0;
             }
             .tf-review-form-container{
                 width: 100%;
@@ -2109,7 +2080,7 @@
                             label{
                                 font-size: 0.875rem;
                                 font-weight: 600;
-                                line-height: 1.3;
+                                line-height: 1.5;
                                 display: block;
                                 margin-right: 4px;
                             }
@@ -2134,7 +2105,7 @@
                         }
                     }
                     input[type="text"],textarea{
-                        border: 1px solid $color-border;
+                        border: 1px solid $color-border-lite;
                         padding: 8px;
                         color: $color-text;
                         font-size: 1rem;
@@ -2209,10 +2180,7 @@
                             width: 32px;
                             border-radius: 100px;
                             background: $color-primary;
-                            opacity: .5;
-                            box-shadow: 0px 14px 30px 0px rgba(0, 23, 100, 0.07);
                             text-align: center;
-                            line-height: 2;
                             display: flex;
                             align-items: center;
                             justify-content: center;
@@ -2224,7 +2192,6 @@
                         a.tf-share-toggle.actives,
                         a.tf-wishlist.actives {
                             background: $color-primary;
-                            box-shadow: 0px 14px 30px 0px rgba(0, 23, 100, 0.07);
                         }
 
                         .tf-off-canvas-share-box{
@@ -2317,8 +2284,6 @@
                             }
                             .tf-title-meta {
                                 font-size: 1.5rem;
-                                font-weight: 400;
-                                line-height: 1.3;
                                 color: $color-white;
                                 display: flex;
                                 gap: 8px;
@@ -2333,10 +2298,7 @@
                                 }
                                 a {
                                     color: $color-white;
-                                    text-decoration: none;
-                                    font-size: 1.5rem;
-                                    font-weight: 400;
-                                    line-height: 1.3;
+                                    font-size: 1.3rem;
                                     @media #{$max1024}{
                                         font-size: 1rem;
                                     }
@@ -2358,7 +2320,7 @@
                                 display: flex;
                                 align-items: center;
                                 justify-content: center;
-                                background: rgba(48, 40, 28, 0.8);
+                                background: $color-heading;
                                 color: $color-white;
                                 background-size: cover;
                                 background-position: center;
@@ -2411,8 +2373,7 @@
                 color: $color-heading;
                 font-size: 2rem;
                 font-weight: 700;
-                line-height: 1.2;
-                margin-bottom: 24px;
+                margin-bottom: 20px;
                 @media #{$max1024}{
                     font-size: 1.5rem;
                     margin-bottom: 16px;
@@ -2430,10 +2391,8 @@
                         width: 50%;
                     }
                     span.single-facilities-title {
-                        color: $color-text;
                         font-weight: 600;
-                        line-height: 1.3;
-                        margin-bottom: 16px;
+                        margin-bottom: 10px;
                         display: block;
                         i {
                             margin-right: 8px;
@@ -2460,11 +2419,13 @@
                 color: $color-heading;
                 font-size: 2rem;
                 font-weight: 700;
-                line-height: 1.2;
-                margin-bottom: 8px;
+                margin-bottom: 6px;
                 @media #{$max1024}{
                     font-size: 1.5rem;
                 }
+            }
+            p{
+                margin-bottom: 0;
             }
             .tf-reviews-slider {
 
@@ -2474,8 +2435,8 @@
                     padding: 24px;
                     display: flex;
                     flex-direction: row;
-                    gap: 8px;
-                    min-height: 212px;
+                    gap: 15px;
+                    min-height: 150px;
                     @media #{$max768}{
                         min-height: auto;
                     }
@@ -2496,9 +2457,8 @@
                             color: $color-text;
                             font-size: 1rem;
                             font-weight: 600;
-                            line-height: 1.3;
                             word-wrap: break-word;
-                            margin: 0px 0px 8px 0px;
+                            margin: 0px 0px 4px 0px;
                             display: block;
                             >div{
                                 display: none;
@@ -2506,8 +2466,7 @@
                         }
 
                         .tf-reviews-meta {
-                            color: $color-text;
-                            margin-bottom: 16px;
+                            margin-bottom: 10px;
                             display: inline-block;
                         }
 
@@ -2584,7 +2543,16 @@
                 }
             }
         }
-
+        .tf-single-widgets h3{
+            font-size: 1.5em;
+            margin-bottom: 0;
+            @media #{$max1024}{
+                font-size: 1.25rem;
+            }
+            &.tf-section-title{
+                margin-bottom: 20px;
+            }
+        }
         .tf-single-widgets h2 {
             margin-bottom: 0px;
             font-weight: 700;
@@ -2604,10 +2572,13 @@
 
         .tf-single-widgets {
             display: flex;
-            gap: 24px;
             flex-direction: column;
-            @media #{$max1024}{
-                gap: 16px;
+            .tf_btn_lite{
+                color: $color-heading;
+                font-weight: 500;
+                &:hover{
+                    color: $color-white;
+                }
             }
         }
 
@@ -2662,7 +2633,6 @@
                         color: $color-text;
                         font-size: 1rem;
                         font-weight: 600;
-                        line-height: 1.3;
                         word-wrap: break-word;
                         margin-bottom: 0px;
                     }
@@ -2692,7 +2662,6 @@
                         color: $color-primary;
                         font-size: 1rem;
                         font-weight: 600;
-                        line-height: 1.3;
                         text-decoration: none;
                     }
                 }
@@ -2700,10 +2669,8 @@
         }
 
         .tf-search-date-wrapper {
-
-            background: $color-light-bg;
+            background: $color-filling-fg;
             padding: 24px;
-
             .tf-booking-date-wrap {
                 display: flex;
                 flex-direction: row;
@@ -2742,7 +2709,7 @@
             .acr-select input[type=tel] {
                 width: 34px;
                 height: 48px;
-                border: 1px solid;
+                border: 1px solid $color-border-lite;
                 font-size: 1rem;
                 font-weight: 600;
                 color: $color-text;
@@ -2750,7 +2717,7 @@
                 padding-left: 0px;
                 padding-right: 0px;
                 border-radius: 20px;
-                background: $color-light-bg;
+                background: $color-filling-bg;
             }
 
             form {
@@ -2778,10 +2745,7 @@
             }
 
             .acr-label {
-                color: $color-text;
-                font-size: 1rem;
                 font-weight: 600;
-                line-height: 1.4;
                 @media #{$max1024}{
                     font-size: 0.875rem;
                 }
@@ -2789,10 +2753,7 @@
                     margin-left: 5px;
                     span{
                         display: inline-block;
-                        color: $color-text;
-                        font-size: 1rem;
                         font-weight: 600;
-                        line-height: 1.4;
                         @media #{$max1024}{
                             font-size: 0.875rem;
                         }
@@ -2824,10 +2785,9 @@
         .tf_tours_booking{
             .tf-form-title{
                 h3.tf-person-info-title{
-                    color: $color-text;
+                    color: $color-heading;
                     font-size: 2rem;
-                    font-weight: 700;
-                    line-height: 1.2;
+                    font-weight: 400;
                     margin: 0;
                     @media #{$max1024}{
                         font-size: 1.5rem;
@@ -2864,7 +2824,7 @@
                 .tf-field{
                     padding: 15px 40px;
                     width: 100%;
-                    background-color: $form-input-bg;
+                    background-color: $color-filling-bg;
                     border-radius: 0px;
                     color: $color-text;
                     &::placeholder{
@@ -2884,7 +2844,7 @@
                     transition: .3s all ease;
                     border-radius: 0px;
                     &:hover{
-                        background-color: $color-secondary;
+                        background-color: $color-brand-dark;
                     }
                 }
             }
@@ -2903,8 +2863,8 @@
             display: none;
             transition: .3s all ease;
             &:hover{
-                background-color: $color-secondary;
-                border-color: $color-secondary;
+                background-color: $color-brand-dark;
+                border-color: $color-brand-dark;
             }
             @media #{$max1024}{
                 display: block;
@@ -2913,7 +2873,6 @@
                 color: $color-white;
                 font-size: 1rem;
                 font-weight: 700;
-                line-height: 1.5;
             }
         }
 
@@ -2937,7 +2896,7 @@
                                     }
                                 }
                                 &.done{
-                                    background-color: $color-light-bg;
+                                    background-color: $color-brand-lite;
                                 }
                             }
                         }
@@ -2964,7 +2923,7 @@
                                 input[type="textarea"],
                                 input[type="date"],
                                 select{
-                                    background: $color-light-bg;
+                                    background: $color-brand-lite;
                                 }
                             }
                         }
@@ -2974,7 +2933,7 @@
         }
 
         .tf-single-tour-extra .tf_quantity-acrselection .quanity-acr-fields {
-            background-color: $color-light-bg;
+            background-color: $color-brand-lite;
             padding: 15px 40px;
             margin-bottom: 10px;
             margin-left: 23px;
@@ -2984,7 +2943,7 @@
             .tf-details {
                 .tf-details-left {
                     .tf-details-menu {
-                        background: $color-yellow-thin;
+                        background: $color-filling-fg;
                         padding: 16px 30px;
                         position: sticky;
                         left: 0;
@@ -3002,7 +2961,6 @@
                                     text-decoration: none;
                                     font-size: 1rem;
                                     font-weight: 600;
-                                    line-height: 1.3;
                                     color: $color-text;
                                     border-bottom: 2px solid;
                                     padding-bottom: 5px;
@@ -3020,27 +2978,18 @@
                         }
                     }
                     .tf-overview-wrapper {
-                        padding: 0 32px;
                         .tf-overview-description {
                             p {
                                 margin: 0;
                                 padding: 0;
-                            }
+                            }s
                             .tf-short-description{
-                                color: $color-text;
-                                font-size: 1rem;
-                                font-weight: 400;
-                                line-height: 1.3;
                                 @media #{$max768}{
                                     font-size: 0.875rem;
                                 }
                             }
                             span.tf-see-description,
                             span.tf-see-less-description{
-                                color: $color-primary;
-                                font-size: 1rem;
-                                font-weight: 400;
-                                line-height: 1.3;
                                 cursor: pointer;
                                 @media #{$max768}{
                                     font-size: 0.875rem;
@@ -3048,10 +2997,6 @@
                             }
                             .tf-full-description{
                                 display: none;
-                                color: $color-text;
-                                font-size: 1rem;
-                                font-weight: 400;
-                                line-height: 1.3;
                                 @media #{$max768}{
                                     font-size: 0.875rem;
                                 }
@@ -3063,7 +3008,6 @@
                                 font-size: 1rem;
                                 display: block;
                                 font-weight: 600;
-                                line-height: 1.3;
                                 margin-bottom: 16px;
                             }
                             &>ul {
@@ -3112,7 +3056,7 @@
                                 padding: 24px;
                                 display: flex;
                                 gap: 16px;
-                                background: $color-yellow-thin;
+                                background: $color-filling-fg;
                                 @media #{$max1024}{
                                     padding: 16px;
                                     gap: 8px;
@@ -3120,13 +3064,15 @@
                                 i {
                                     font-size: 1.5rem;
                                     color: $color-primary;
+                                    line-height: 1.5;
                                 }
                                 .tf-feature-block-details {
                                     h5 {
                                         color: $color-heading;
                                         font-size: 1.25rem;
                                         font-weight: 700;
-                                        line-height: 1.3;
+                                        line-height: 1.5;
+                                        margin-bottom: 5px;
                                     }
                                     p{
                                         color: $color-text;
@@ -3149,7 +3095,7 @@
                                 padding: 24px;
                                 display: flex;
                                 gap: 16px;
-                                background: $color-yellow-thin;
+                                background: $color-filling-fg;
                                 @media #{$max1024}{
                                     padding: 16px;
                                     gap: 8px;
@@ -3157,25 +3103,20 @@
                                 i {
                                     font-size: 1.5rem;
                                     color: $color-primary;
+                                    line-height: 1.5;
                                 }
                                 .tf-feature-block-details {
                                     h5 {
                                         color: $color-heading;
                                         font-size: 1.5rem;
                                         font-weight: 700;
-                                        line-height: 1.3;
+                                        line-height: 1.5;
+                                        margin-bottom: 5px;
                                     }
                                     p{
-                                        color: $color-text;
-                                        font-size: 1rem;
-                                        font-weight: 400;
-                                        line-height: 1.3;
                                         margin: 0;
                                         span.show_sub_title{
-                                            color: $color-text;
                                             font-size: 1rem;
-                                            font-weight: 400;
-                                            line-height: 1.3;
                                             cursor: pointer;
                                         }
                                     }
@@ -3189,22 +3130,27 @@
                             display: flex;
                             gap: 24px;
                             padding: 32px 0;
-                            background: $color-yellow-thin;
-                            margin-bottom: 16px;
+                            background: $color-filling-fg;
                             border-radius: 0px;
                             box-shadow: none;
+                            @include align-items(center);
                             @media #{$max1024}{
                                 padding: 16px 0px 16px 16px;
                             }
                             .tf-highlights-icon {
                                 width: 230px;
+                                padding-left: 15px;
                                 @media #{$max1024}{
                                     display: none;
                                 }
+                                svg,
                                 img {
                                     width: 230px;
                                     height: 230px;
-                                    object-fit: contain;
+                                    object-fit: cover;
+                                }
+                                svg path{
+                                    fill: $color-primary;
                                 }
                             }
                             .ft-highlights-details {
@@ -3216,13 +3162,12 @@
                                 }
                                 h2{
                                     font-weight: 700;
-                                    margin-bottom: 24px;
+                                    margin-bottom: 20px;
                                     @media #{$max1024}{
                                         font-size: 1.5rem;
                                     }
                                 }
                                 p{
-                                    color: $color-text;
                                     margin: 0;
                                 }
                                 ul {
@@ -3311,7 +3256,7 @@
                     }
                     .tf-title-meta {
                         font-size: 1.5rem;
-                        line-height: 1.3;
+                        line-height: 1.5;
                         padding-top: 8px;
                         @media #{$max1024}{
                             margin-top: 6px;
@@ -3320,7 +3265,7 @@
                             color: $color-white;
                             margin: 0px;
                             font-size: 1.5rem;
-                            line-height: 1.3;
+                            line-height: 1.5;
                         }
                     }
                 }
@@ -3377,7 +3322,7 @@
                         .tf-booking-location-wrap {
                             display: flex;
                             flex-direction: row;
-                            background: $color-yellow-light;
+                            background: $color-filling-bg;
                             padding: 0 12px;
                             width: 100%;
                             align-items: center;
@@ -3403,8 +3348,7 @@
                                 left: 0;
                                 top: 100%;
                                 width: 250px;
-                                background: $color-light-bg;
-                                box-shadow: 0px 20px 40px 0px rgba(0, 0, 0, 0.10);
+                                background: $color-brand-lite;
                                 z-index: 999;
                                 max-height: 200px;
                                 overflow: auto;
@@ -3422,7 +3366,7 @@
                                     border-radius: 4px;
                                 }
                                 &::-webkit-scrollbar-track {
-                                    background-color: $color-light-bg;
+                                    background-color: $color-brand-lite;
                                 }
                                 div{
                                     padding: 10px;
@@ -3436,7 +3380,7 @@
                                         margin-bottom: 0px;
                                     }
                                     &:hover{
-                                        background: $color-light-bg;
+                                        background: $color-brand-lite;
                                     }
                                     &::before{
                                         display: none;
@@ -3662,7 +3606,7 @@
             display: block;
         }
         .tf-available-archive-hetels-wrapper {
-            background: $color-light-bg;
+            background: $color-filling-fg;
             margin-bottom: 56px;
             @media #{$max768}{
                 padding: 16px;
@@ -3677,7 +3621,7 @@
                     padding: 12px 16px;
                 }
                .tf-archive-ordering #tf-orderby {
-                    background-color: $color-yellow-light;
+                    background-color: $color-filling-bg;
                     color: $color-text;
                     padding: 15px 36px 15px 15px;
                     height: 100%;
@@ -3686,7 +3630,13 @@
                     border-radius: 0px;
                     font-size: 1rem;
                     background-size: 16px;
+                    -webkit-appearance: none;
                     appearance: none;
+                    -moz-appearance: none;
+                    background-image: url('https://www.svgrepo.com/show/80156/down-arrow.svg');
+                    background-repeat: no-repeat;
+                    background-size: 12px 12px;
+                    cursor: pointer;
 
                     &:focus-visible {
                         outline: none;
@@ -3768,10 +3718,9 @@
                                 color: $color-white;
                                 font-size: 0.75rem;
                                 font-weight: 500;
-                                padding: 8px;
+                                padding: 6px;
                                 min-width: 84px;
                                 text-align: center;
-                                line-height: 1;
                             }
                             span.tf-available-labels-populer {
                                 background: $color-primary;
@@ -3788,7 +3737,7 @@
                             right: 16px;
                             top: 16px;
                             background: rgba(253, 249, 243, 0.80);
-                            padding: 5px 4px 0 8px;
+                            padding: 4px 4px 4px 8px;
                             font-size: 1rem;
                             color: $color-text;
                             i {
@@ -3876,7 +3825,6 @@
                                         color: $color-text;
                                         font-size: 1.5rem;
                                         font-weight: 600;
-                                        line-height: 1.3;
                                     }
                                 }
                             }
@@ -3900,18 +3848,21 @@
                     display: inline-flex;
                     margin-top: 30px;
                     .page-numbers{
-                        border: 0.5px solid $color-gray;
-                        background: $color-light-bg;
+                        border: 0.5px solid $color-border-lite;
+                        background: $color-filling-bg;
                         height: 40px;
                         color: $color-gray;
                         font-size: 1rem;
                         font-weight: 400;
-                        line-height: 1.3;
                         letter-spacing: 0.16px;
                         padding: 0px 20px;
                         text-decoration: none;
                         display: flex;
                         align-items: center;
+                        border-right: 0;
+                        &:last-child{
+                            border-right: 0.5px solid $color-border-lite;
+                        }
                         &.current,
                         &:hover{
                             background: $color-primary;
@@ -3944,7 +3895,6 @@
                 button {
                     margin: 0;
                     padding: 0;
-                    line-height: 1;
                     border: none;
                     background: unset;
                     color: $color-text;
@@ -3990,7 +3940,7 @@
                     }
                     .al-range-slider__track {
                         box-shadow: none;
-                        background: $color-gray-light;
+                        background: $color-brand-lite;
                         height: 8px;
                         margin: 10px 0 40px 0;
                     }
@@ -4004,8 +3954,8 @@
                         width: 24px;
                         height: 24px;
                         border-radius: 12px;
-                        border: 1.5px solid $color-gray;
-                        background: $color-light-bg;
+                        border: 1.5px solid $color-border;
+                        background: $color-filling-bg;
                         box-shadow: none;
                         &:hover {
                             border-color: none;
@@ -4054,7 +4004,7 @@
                             display: inline-block;
                             border-radius: 2px;
                             border: 0.794px solid $color-primary;
-                            background: $color-light-bg;
+                            background: $color-brand-lite;
                             height: 12px;
                             width: 12px;
                             margin-right: 8px;

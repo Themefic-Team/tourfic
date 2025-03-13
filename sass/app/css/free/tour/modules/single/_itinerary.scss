@@ -18,7 +18,6 @@
                         display: flex;
                         align-items: center;
                         background: $color-white;
-                        box-shadow: 0px 2px 4px rgba(90, 91, 106, 0.08);
                         border-radius: 4px;
                         z-index: 1;
                         position: relative;
@@ -30,7 +29,6 @@
                             display: flex;
                             align-items: center;
                             justify-content: center;
-                            box-shadow: 0px 2px 4px rgba(90, 91, 106, 0.08);
                             padding: 10px;
                             @media #{$max768}{
                                 height: 60px;
@@ -129,16 +127,15 @@
         &__two{
             .tf-itinerary-wrapper{
                 .tf-itinerary-box {
-                    background: $color-white;
+                    background: $color-filling-fg;
                     @include bd-radius(5px);;
-                    box-shadow: 0px 0px 24px 5px $color-box-shadow;
                     @media #{$max768}{
                         padding: 40px 24px;
                     }
                 }
                 .tf-single-itinerary-item{
                     padding-left: 40px;
-                    border-bottom: 1px solid $color-border;
+                    border-bottom: 1px solid $color-border-lite;
                     padding-bottom: 24px;
                     padding-top: 24px;
                     .tf-itinerary-title{
@@ -242,7 +239,8 @@
                     h4 {
                         position: relative;
                         font-size: 1.125rem;
-                        line-height: 1.4;
+                        line-height: 1.5;
+                        margin-bottom: 0;
                     }
                     
                     &.active{
@@ -327,7 +325,7 @@
                     line-height: 1.5;
                     word-wrap: break-word;
                     border: none;
-                    background: $color-light-bg;
+                    background: $color-brand-lite;
                     min-width: 211px;
                     height: fit-content;
                     padding: 12px;
@@ -342,7 +340,7 @@
                 .tf-itinerary-wrapper{
                     padding: 0px;
                     .tf-single-itinerary {
-                        background: $color-yellow-thin;
+                        background: $color-filling-fg;
                         padding: 16px 32px;
                         display: flex;
                         flex-direction: column;
@@ -372,7 +370,6 @@
                         color: $color-text;
                         font-size: 1.25rem;
                         font-weight: 400;
-                        line-height: 1.3;
                         word-wrap: break-word;
                         margin: 0px;
                         @media #{$max1024}{
@@ -384,7 +381,6 @@
                         }
                         span.tf-itinerary-time {
                             padding: 8px 16px;
-                            background: $color-light-bg;
                             margin-right: 16px;
                         }
                     }
@@ -520,8 +516,8 @@
             }
             
             .tf-itinerary-map{
-                margin-top: 32px;
-                margin-bottom: 48px;
+                margin-top: 16px;
+                margin-bottom: 32px;
                 
                 @media #{$max768}{
                     margin-top: 12px;
@@ -532,6 +528,9 @@
                     @media #{$max768}{
                         height: 220px;
                     }
+                }
+                &#tf-map{
+                    height: auto;
                 }
             }
         }

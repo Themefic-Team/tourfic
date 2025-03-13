@@ -1328,7 +1328,7 @@ class Apartment {
 
 			<?php if ( ( $tf_booking_type == 2 && $tf_hide_booking_form == '1' || ( $tf_ext_booking_type == 2 && empty( $tf_booking_code ) ) ) || $tf_booking_type == 1 ): ?>
 				
-				<h2 class="tf-section-title"><?php esc_html_e("Available Date", "tourfic"); ?></h2>
+				<h3 class="tf-section-title"><?php esc_html_e("Available Date", "tourfic"); ?></h3>
 				<div class="tf-apartment-form-fields">
 					<div class="tf_booking-dates tf-check-in-out-date">
 						<div class="tf-aprtment-check-in-out-date">
@@ -1997,7 +1997,7 @@ class Apartment {
 		}
 		$featured        = ! empty( $meta['apartment_as_featured'] ) ? $meta['apartment_as_featured'] : '';
 		$pricing_type    = ! empty( $meta['pricing_type'] ) ? $meta['pricing_type'] : 'per_night';
-		$apartment_multiple_tags = !empty($meta['tf-apartment-tags']) ? Helper::tf_data_types($meta['tf-apartment-tags']) : [];
+		$apartment_multiple_tags = !empty(Helper::tf_data_types($meta['tf-apartment-tags'])) ? Helper::tf_data_types($meta['tf-apartment-tags']) : [];
 		//Discout Info
 		$apartment_discount_type = !empty($meta["discount_type"]) ? $meta["discount_type"] : "none";
 		$apartment_discount_amount = !empty($meta["discount"]) ? $meta["discount"] : 0;

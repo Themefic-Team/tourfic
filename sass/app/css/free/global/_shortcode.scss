@@ -38,7 +38,7 @@
         overflow: auto;
         overflow-x: hidden;
         position: absolute;
-        border: 1px solid $color-gray;
+        border: 1px solid $color-border-lite;
         border-bottom: none;
         border-top: none;
         z-index: 99;
@@ -53,10 +53,10 @@
             padding: 10px;
             cursor: pointer;
             background-color: $color-white;
-            border-bottom: 1px solid $color-gray;
+            border-bottom: 1px solid $color-border-lite;
             color: $color-text;
             &:hover {
-                background-color: $color-light-bg;
+                background-color: $color-brand-lite;
             }
         }
     }
@@ -115,11 +115,11 @@
                 cursor: pointer;
                 background-color: $color-white;
                 color: $color-text;
-                border: 1px solid $color-border;
+                border: 1px solid $color-border-lite;
                 border-top: 0;
                 text-transform: capitalize;
                 &:hover {
-                    background-color: $color-light-bg;
+                    background-color: $color-brand-lite;
                 }
             }
         }
@@ -142,20 +142,20 @@
                 cursor: pointer;
                 background-color: $color-white;
                 color: $color-text;
-                border: 1px solid $color-border;
+                border: 1px solid $color-border-lite;
                 border-top: 0;
                 text-transform: capitalize;
                 &:hover {
-                    background-color: $color-light-bg;
+                    background-color: $color-brand-lite;
                 }
             }
         }
     }
 }
 .tf_booking-widget {
-    background: $color-light-bg;
-    background: linear-gradient(to bottom, $color-light-bg 0, $color-light-bg 100%);
-    border-color: $color-light-bg;
+    background: $color-filling-fg;
+    background: linear-gradient(to bottom, $color-filling-fg 0, $color-filling-fg 100%);
+    border-color: $color-filling-fg;
     padding: 20px;
     border-radius: 4px;
     font-size: 0.875rem;
@@ -347,7 +347,7 @@ div#tf-locationautocomplete-list {
             float: left;
             font-size: 0.813rem;
             margin-right: 5px;
-            line-height: 1.6;
+            line-height: 1.5;
         }
     }
 }
@@ -360,7 +360,7 @@ div#tf-destinationautocomplete-list {
             float: left;
             font-size: 0.938rem;
             margin-right: 5px;
-            line-height: 1.6;
+            line-height: 1.5;
         }
     }
 }
@@ -436,7 +436,7 @@ div#tf-destinationautocomplete-list {
 }
 .tf-filter-price-range {
     .al-range-slider__track {
-        background: $color-gray-light;
+        background: $color-brand-lite;
         height: 10px;
         box-shadow: none;
         margin: 30px 0px 10px 0px;
@@ -444,16 +444,16 @@ div#tf-destinationautocomplete-list {
     .al-range-slider_dark {
         padding: 0px;
         .al-range-slider__bar {
-            background: $color-primary;
+            background: $color-text;
             box-shadow: none;
         }
     }
     .al-range-slider__knob {
-        background: $color-primary;
-        height: 15px;
-        width: 15px;
+        background: $color-filling-bg;
+        height: 24px;
+        width: 24px;
         box-shadow: none;
-        border: 3px solid $color-primary;
+        border: 3px solid $color-border;
         &:first-child {
             span {
                 left: 10px;
@@ -511,7 +511,7 @@ div#tf-destinationautocomplete-list {
                 .autocomplete-items {
                     max-height: 240px;
                     position: absolute;
-                    background: $color-light-bg;
+                    background: $color-brand-lite;
                     box-shadow: 0px 20px 40px 0px rgba(0,0,0,.1);
                     overflow: auto;
                     scrollbar-width: thin;
@@ -538,7 +538,7 @@ div#tf-destinationautocomplete-list {
                         border-radius: 4px;
                     }
                     &::-webkit-scrollbar-track {
-                        background-color: $color-light-bg;
+                        background-color: $color-brand-lite;
                     }
                     div{
                         padding: 10px;
@@ -553,7 +553,7 @@ div#tf-destinationautocomplete-list {
                             margin-bottom: 0px;
                         }
                         &:hover{
-                            background: $color-light-bg;
+                            background: $color-brand-lite;
                         }
                         &::before{
                             display: none;
@@ -748,8 +748,7 @@ div#tf-destinationautocomplete-list {
                             }
                         }
                         .tf_acrselection-wrap {
-                            background: $color-yellow-light;
-                            box-shadow: 0px 8px 40px 0px rgba(0, 0, 0, 0.10);
+                            background: $color-filling-fg;
                             top: 111%;
                             border-radius: 0px;
                             .acr-label{
@@ -764,7 +763,7 @@ div#tf-destinationautocomplete-list {
                                 input[type=tel]{
                                     width: 34px;
                                     height: 48px;
-                                    border: 0.2px solid;
+                                    border: 0.2px solid $color-border-lite;
                                     font-size: 1rem;
                                     font-weight: 600;
                                     color: $color-text;
@@ -772,7 +771,7 @@ div#tf-destinationautocomplete-list {
                                     padding-left: 0px;
                                     padding-right: 0px;
                                     border-radius: 20px;
-                                    background: $color-light-bg;
+                                    background: $color-filling-bg;
                                 }
                                 .acr-dec,
                                 .acr-inc{
@@ -806,7 +805,7 @@ div#tf-destinationautocomplete-list {
                         cursor: pointer;
                         transition: .3s all ease;
                         &:hover{
-                            background-color: $color-secondary;
+                            background-color: $color-brand-dark;
                         }
                         @media #{$max1024}{
                             font-size: 0.75rem;
@@ -941,7 +940,7 @@ div#tf-destinationautocomplete-list {
         }
 
         .tf-ask-question-submit:hover {
-            background: $color-secondary;
+            background: $color-brand-dark;
         }
     }
     .tf-aq-field {
@@ -1080,7 +1079,7 @@ div#tf-destinationautocomplete-list {
             a {
                 color: $color-white;
                 &:hover {
-                    color: $color-light-bg;
+                    color: $color-brand-lite;
                 }
             }
             p {

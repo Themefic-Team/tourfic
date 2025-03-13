@@ -55,11 +55,10 @@
                             width: 32px;
                             border-radius: 100px;
                             text-align: center;
-                            line-height: 1.33;
                             display: flex;
                             align-items: center;
                             justify-content: center;
-                            color: $color-secondary;
+                            color: $color-brand-dark;
                             cursor: pointer;
                             font-size: 1.5rem;
                             text-decoration: none;
@@ -86,12 +85,11 @@
                                     right: auto;
                                 }
                                 .tf-dropdown-share-content{
-                                    background: $color-white;
+                                    background: $color-filling-fg;
                                     border-radius: 8px;
                                     padding: 16px 10px;
                                     width: 280px;
                                     text-align: center;
-                                    box-shadow: 0px 13px 30px 0px $color-box-shadow;
                                     position: absolute;
                                     min-width: 100%;
                                     top: 100%;

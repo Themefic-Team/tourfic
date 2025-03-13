@@ -14,8 +14,6 @@
                     .tf-review-data{
                         flex-basis: 30%;
                         margin-right: 30px;
-                        background-color: $color-white;
-                        box-shadow: 0px 13px 30px 0px rgba(224,232,238,0.32);
                         padding: 30px;
                         @media #{$max1024}{
                             flex-basis: 28%;
@@ -39,7 +37,6 @@
                         text-transform: capitalize;
                     }
                     .tf-review-data-average p {
-                        background: $color-gray-light;
                         text-align: center;
                         font-size: 1.875rem;
                         color: $color-primary;
@@ -66,8 +63,6 @@
             
                     .tf-review-data-features {
                         flex-basis: 68%;
-                        background-color: $color-white;
-                        box-shadow: 0px 13px 30px 0px rgba(224,232,238,0.32);
                         padding: 30px;
         
                         @media #{$max768}{
@@ -86,7 +81,7 @@
                         }
                         .tf-progress-bar {
                             height: 7px;
-                            background: $color-light-bg;
+                            background: $color-brand-lite;
                             border-radius: 7px;
                         }
                         

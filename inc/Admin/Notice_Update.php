@@ -90,7 +90,7 @@ class Notice_Update extends \Tourfic\Core\TF_Notice {
 
     // For single site of multisite
     function tf_ms_plugin_update_message( $file, $plugin ) {
-        if( is_multisite() && version_compare( $plugin['Version'], $plugin['new_version'], '<') ) {
+        if( is_multisite() && isset($plugin['new_version']) && version_compare( $plugin['Version'], $plugin['new_version'], '<') ) {
             if( isset( $data['upgrade_notice'] ) ) {
                 $wp_list_table = _get_list_table( 'WP_Plugins_List_Table' );
                     echo '<tr class="plugin-update-tr"><td colspan="' .esc_attr( $wp_list_table->get_column_count() ). '" class="plugin-update update-message notice inline notice-warning notice-alt"><div class="update-message"><span style="background: #D64D21;color: #fff;padding: 10px 10px 12px 10px;margin: 20px 0 15px 2px;display: block;border-radius: 2px;line-height: 18px;"><b>'. esc_html__('IMPORTANT UPGRADE NOTICE:', 'tourfic') .' </b>' . wp_kses_post( str_replace(['<p>', '</p>'], '', wpautop( $plugin['upgrade_notice'] )) ). '</span></div></td></tr>';

@@ -15,9 +15,11 @@ if ( isset( $meta['rooms'] ) && ! empty( Helper::tf_data_types( $meta['rooms'] )
                 </a>
             </div>
             <div class="tf-apartment-room-item-content">
-                <a href="#" class="tf-apt-room-qv-desgin-1" data-id="<?php echo esc_attr( $key ); ?>" data-post-id="<?php echo esc_attr( $post_id ); ?>">
-                    <span><?php echo esc_html( $room['title'] ) ?></span>
-                </a>
+                <?php if(!empty($room['title'])): ?>
+                    <a href="#" class="tf-apt-room-qv-desgin-1" data-id="<?php echo esc_attr( $key ); ?>" data-post-id="<?php echo esc_attr( $post_id ); ?>">
+                        <span><?php echo esc_html( $room['title'] ) ?></span>
+                    </a>
+                <?php endif; ?>
                 <?php echo ! empty( $room['subtitle'] ) ? '<p>' . esc_html( $room['subtitle'] ) . '</p>' : ''; ?>
             </div>
         </div>

@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-class Room_Notice extends \Tourfic\Core\TF_Notice {
+class Plugin_Page_Notice extends \Tourfic\Core\TF_Notice {
 
     function __construct() {
         $this->set_notice_id();
@@ -18,7 +18,7 @@ class Room_Notice extends \Tourfic\Core\TF_Notice {
     use \Tourfic\Traits\Singleton;
 
     function set_notice_type() {
-        $this->type = 'admin_notice';
+        $this->type = 'update_notice';
     }
 
     function set_notice_id() {
@@ -33,8 +33,8 @@ class Room_Notice extends \Tourfic\Core\TF_Notice {
             ?>
                 <div class="tf-critical-update-notice notice notice-info is-dismissible">
                     <h2><?php echo esc_html__("The Wait is Over! Our Revamped Design Panel will be Introducing Soon!", 'tourfic') ?></h2>
-                    <p><?php echo wp_kses_post( __('We are pleased to introduce the beta version of our <b>revamped design panel</b>, offering an enhanced and more intuitive customization experience. You can now explore the improved interface, test the latest features, and provide valuable feedback before the official release.', "tourfic")); ?></p>
-		    <p><?php echo wp_kses_post( __('Discover the latest enhancements in our revamped design panel! Test the beta version today and experience the improved customization firsthand. Read <a href="https://themefic.com/tourfic-v2-16-0-revamped-design-panel-launching-soon/" target="_blank"><b>this blog</b></a> for a detailed overview and access to the beta version download link.', "tourfic")); ?></p>
+                    <p><?php echo wp_kses_post( __('We’re excited to announce that our <b>revamped design panel</b> is finally here! In the upcoming update, we’re bringing a <b>new and improved design panel</b> that enhances usability, organization, and customization options for a smoother experience. ', "tourfic")); ?></p>
+                    <p><?php echo wp_kses_post( __('Want to know what’s new in this update? Read <a href="https://themefic.com/tourfic-v2-16-0-optimized-design-coming-soon/" target="_blank"><b>this blog</b></a> to explore all the exciting changes.', "tourfic")); ?></p>
                 </div>
 
                 <script>
@@ -55,12 +55,14 @@ class Room_Notice extends \Tourfic\Core\TF_Notice {
 
 	function tf_disable_critical_update_admin_notice() {
         update_option( $this->notice_id, 1 );
-        echo "<pre>";
-        print_r($this->notice_id);
-        echo "</pre>";
-        die(); // added by - Sunvi
         wp_die();
     }
 
-	function tf_in_plugin_update_message( $data, $response ){}
+	function tf_in_plugin_update_message( $data, $response ){
+        if ( isset( $data['update'] ) && $data['update'] && isset( $data['upgrade_notice'] )) { ?>
+            <p><?php echo wp_kses_post( __('We’re excited to announce that our <b>revamped design panel</b> is finally here! In the upcoming update, we’re bringing a <b>new and improved design panel</b> that enhances usability, organization, and customization options for a smoother experience. ', "tourfic")); ?></p>
+            <p><?php echo wp_kses_post( __('Want to know what’s new in this update? Read <a href="https://themefic.com/tourfic-v2-16-0-optimized-design-coming-soon/" target="_blank"><b>this blog</b></a> to explore all the exciting changes.', "tourfic")); ?></p>
+        <?php
+        }
+    }
 }

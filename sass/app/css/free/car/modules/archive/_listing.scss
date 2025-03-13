@@ -43,7 +43,7 @@
                     flex-wrap: wrap;
                     .tf-single-car-view{
                         border-radius: 16px;
-                        background: rgb(248,250,252);
+                        background: $color-filling-fg;
                         width: calc(50% - 16px);
                         @media #{$max1024}{
                             width: 100%;
@@ -136,6 +136,9 @@
                                     svg{
                                         height: 20px;
                                         width: 20px;
+                                        path{
+                                            stroke: $color-text;
+                                        }
                                     }
                                     p{
                                         width: 100%;
@@ -261,9 +264,10 @@
                     .tf_posts_navigation{
                         width: 100%;
                         .page-numbers{
-                            background: $color-light-bg;
+                            background: $color-brand-lite;
                             color: $color-text;
                             border-radius: 8px;
+                            border: 1px solid $color-border-lite;
                             &.current{
                                 background: $color-primary;
                                 color: $color-text;

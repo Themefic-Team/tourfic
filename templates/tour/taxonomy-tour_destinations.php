@@ -120,11 +120,7 @@ if( $post_type == "tf_tours" && $tf_tour_arc_selected_template=="design-1" ){
 </div>
 
 <?php } elseif( $post_type == "tf_tours" && $tf_tour_arc_selected_template=="design-3" ){ ?>
-<<<<<<< HEAD
-    <div class="tf-hotel-template-4">
-=======
     <div class="tf-archive-template__four">
->>>>>>> 7c52948afa1c34a29f5b69316a9abab55ef057ac
 
         <div class="tf-content-wrapper">
             <?php

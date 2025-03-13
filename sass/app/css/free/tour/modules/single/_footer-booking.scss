@@ -94,7 +94,9 @@
                 .tf-bottom-booking-field-icon{
                     height: 56px;
                     width: 56px;
-                    line-height: 2.33;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
                     font-size: 1.5rem;
                     border-radius: 8px;
                     background-color: $color-primary;
@@ -104,7 +106,6 @@
                     @media #{$max768}{
                         height: 44px;
                         width: 44px;
-                        line-height: 2.44;
                         font-size: 1.125rem;
                     }
                 }
@@ -120,7 +121,7 @@
             
                     .tf_input-inner{
                         border-radius: 8px;
-                        border: 1px solid $color-secondary;
+                        border: 1px solid $color-brand-dark;
                         padding: 0 16px;
                         background-color: $color-white;
             
@@ -190,7 +191,7 @@
                 transform: rotateX(90deg);
                 transition: all 0.3s ease-in-out;
                 width: 100%;
-                background: $color-light-bg;
+                background: $color-brand-lite;
                 box-shadow: none;
                 @media #{$max1024} {
                     @include flex-wrap();
@@ -237,7 +238,7 @@
             
                     .tf_input-inner{
                         border-radius: 8px;
-                        border: 1px solid $color-secondary;
+                        border: 1px solid $color-brand-dark;
                         padding: 0 16px;
                         background-color: $color-white;
             
@@ -292,7 +293,7 @@
                         justify-content: center;
                     }
                     .tf-booking-form-checkinout{
-                        border-right: 1px solid $color-border;
+                        border-right: 1px solid $color-border-lite;
                         flex-direction: column;
                         position: relative;
                         padding: 0px 38px;
@@ -348,7 +349,7 @@
                             font-weight: 600;
                             line-height: 1.3;
                             margin-bottom: 0px;
-                            border-right: 1px solid $color-border;
+                            border-right: 1px solid $color-border-lite;
                             border-radius: 0px;
                             background-image: none;
                             text-align: center;
@@ -434,7 +435,7 @@
                 
             }
             .tour-external-booking-form {
-                background-color: $color-light-bg;
+                background-color: $color-brand-lite;
                 padding: 24px;
             
                 .tf-tour-external-booking-button {

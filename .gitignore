@@ -4,11 +4,7 @@ tourfic
 *.zip
 /tourfic
 .idea
-<<<<<<< HEAD
-.gitignore
-=======
 # .gitignore
->>>>>>> 7c52948afa1c34a29f5b69316a9abab55ef057ac
 README.md
 *.LICENSE.txt
 .DS_Store

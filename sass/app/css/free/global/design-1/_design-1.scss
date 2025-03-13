@@ -22,8 +22,8 @@
                     margin-right: 10px;
                     padding: 6px 10px;
                     border-radius: 4px;
-                    border: 1px solid $color-blue-light;
-                    box-shadow: -1px 1px 6px -1px $color-heading;
+                    border: 1px solid $color-filling-fg;
+                    background-color: $color-filling-fg;
                     margin-top: 10px;
                 }
                 .tf-feature-list {
@@ -38,15 +38,20 @@
                 td {
                     white-space: break-spaces;
                 }
+                .tf-toc-inner{
+                    p{
+                        margin-bottom: 0;
+                    }
+                }
             }
             .tf-highlight-wrapper{
-                background-color: $color-yellow-thin;
+                background-color: $color-filling-fg;
             }
             .tf-travel-itinerary-wrapper{
-                background-color: $color-yellow-thin;
+                background-color: $color-filling-fg;
             }
             .tf-suggestion-wrapper{
-                background-color: $color-yellow-thin;
+                background-color: $color-filling-fg;
             }
 
             .tf-faq-sec-title {
@@ -71,7 +76,7 @@
                 flex: 5;
             }
             #tf-faq-item {
-                border-bottom: 1px solid $color-border;
+                border-bottom: 1px solid $color-border-lite;
                 margin-bottom: 10px;
                 padding-bottom: 10px;
                 .tf-faq-title {
@@ -162,18 +167,13 @@
                                     font-weight: 400;
                                     display: inline-block;
                                     a{
-                                        text-decoration: none;
                                         color: $color-text;
-                                        font-size: 1rem;
-                                        font-weight: 400;
                                     }
                                 }
                             }
                         }
                     }
-                    .tf-details-menu{
-                        width: 100%;
-                    }
+                    
                     .tf-template-part{
                         width: 100%;
                     }
@@ -249,6 +249,9 @@
                     }
                 }
             }
+
+      
+
         }
     }
 }
@@ -259,7 +262,7 @@
             .section-heading {
                 font-weight: 600;
                 font-size: 1.5rem;
-                line-height: 1.33;
+                line-height: 1.5;
                 margin: 0 0 16px 0;
                 color: $color-heading;
             }
@@ -326,12 +329,15 @@
             top: 0;
             right: 0;
             bottom: 0;
-            z-index: 9999;
+            z-index: 99999;
             background-color: rgba(0,0,0,.2);
             display: flex;
-            align-items: end;
+            align-items: center;
             justify-content: center;
             display: none;
+            @media #{$max768}{
+                align-items: end;
+            }
             .tf-booking-popup-warp{
                 border-radius: 16px;
                 border-bottom-left-radius: 0;
@@ -425,7 +431,7 @@
         
                         .tf-protection-featured{
                             border-radius: 16px;
-                            border: 1px solid $color-border;
+                            border: 1px solid $color-border-lite;
                             padding: 24px;
                             @media #{$max1024}{
                                 width: 100%;
@@ -582,7 +588,7 @@
                                     margin-top: 16px;
                                     tr{
                                         th{
-                                            border-top: 1px solid $color-border;
+                                            border-top: 1px solid $color-border-lite;
                                             padding: 16px 0 0 0;
                                         }
                                     }
@@ -610,7 +616,7 @@
                                 input[type="text"],
                                 input[type="email"]{
                                     border-radius: 8px;
-                                    border: 1px solid $color-border;
+                                    border: 1px solid $color-border-lite;
                                     padding: 8px 16px;
                                     height: 40px;
                                     color: $color-text;
@@ -620,7 +626,7 @@
                                 }
                                 input[type="date"]{
                                     border-radius: 8px;
-                                    border: 1px solid $color-border;
+                                    border: 1px solid $color-border-lite;
                                     padding: 0px 16px;
                                     height: 40px;
                                     color: $color-text;
@@ -631,7 +637,7 @@
                                 }
                                 select{
                                     border-radius: 8px;
-                                    border: 1px solid $color-border;
+                                    border: 1px solid $color-border-lite;
                                     padding: 0px 16px;
                                     height: 40px;
                                     color: $color-text;
@@ -658,7 +664,7 @@
                                 cursor: pointer;
                                 transition: .3s all ease;
                                 &:hover{
-                                    background: $color-secondary;
+                                    background: $color-brand-dark;
                                 }
                             }
                         }
@@ -669,7 +675,7 @@
                         justify-content: end;
                         button{
                             border-radius: 8px;
-                            background: $color-light-bg;
+                            background: $color-brand-lite;
                             padding: 16px 32px;
                             border: 0px solid;
                             color: $color-text;
@@ -682,7 +688,7 @@
                             color: $color-white;
                             transition: .3s all ease;
                             &:hover{
-                                background: $color-secondary;
+                                background: $color-brand-dark;
                             }
                         }
                     }
@@ -694,7 +700,7 @@
 
 .tf-archive-search-box-wrapper{
     border-radius: 16px;
-    background: $color-blue-light;
+    background: $color-filling-fg;
     box-shadow: 0px 24px 60px 0px rgba(0, 15, 63, 0.16);
 
     .tf-date-selection-form{
@@ -738,7 +744,7 @@
         }
         .tf-date-single-select{
             border-radius: 8px;
-            background: $color-white;
+            background: $color-filling-bg;
             padding: 16px;
             width: 33.33%;
             @media #{$max768}{
@@ -747,7 +753,7 @@
             .tf-select-date{
                 width: calc(50% - 8px);
                 &:first-child{
-                    border-right: 1px solid $color-border;
+                    border-right: 1px solid $color-border-lite;
                 }
                 
                 i{
@@ -800,7 +806,7 @@
                         max-height: 200px;
                         overflow: auto;
                         border-radius: 4px;
-                        background: $color-light-bg;
+                        background: $color-brand-lite;
                         padding: 2px;
                         box-shadow: 0px 4px 16px 0px rgba(2, 28, 53, 0.20);
                         scrollbar-width: thin;
@@ -974,11 +980,109 @@
                 cursor: pointer;
                 transition: .3s all ease;
                 &:hover{
-                    background: $color-secondary;
+                    background: $color-brand-dark;
                 }
                 i{
                     margin-left: 8px;
                     color: $color-white
+                }
+            }
+        }
+    }
+}
+
+.tf-archive-template{
+    &__one{
+        .tf-search-right{
+            #tf__booking_sidebar{
+                padding: 30px;
+                background-color: $color-filling-fg;
+                border-radius: 5px;
+                margin: 30px 0;
+                .widget{
+                    border: 0px solid;
+                    background: inherit;
+                    border-radius: 0px;
+                    padding: 0px;
+                    &:last-child{
+                        margin-bottom: 0px;
+                    }
+                    .tf-widget-title{
+                        background-color: inherit;
+                        border: 0px solid;
+                        padding: 0px;
+                        border-radius: 0px;
+                        height: auto;
+                        pointer-events: none;
+                        h4{
+                            font-size: 1.25rem;
+                            font-weight: 500;
+                        }
+                        i{
+                            display: none;
+                        }
+                    }
+                    .tf-filter{
+                        padding: 0;
+                        ul{
+                            padding: 0;
+                            li{
+                                padding: 6px 0px;
+                                margin: 5px 0px;
+                                label{
+                                    position: relative;
+                                    cursor: pointer;
+                                    width: 100%;
+                                    display: inline-block;
+                                    padding-left: 32px;
+                                    font-size: 1rem;
+                                    font-weight: 400;
+                                    input{
+                                        display: none;
+                                    }
+                                    .tf-checkmark{
+                                        position: absolute;
+                                        top: 0px;
+                                        left: 0px;
+                                        height: 20px;
+                                        width: 20px;
+                                        background-color: $color-white;
+                                        border-radius: 5px;
+                                        border: 1px solid $color-gray;
+                                    }
+                                }
+                            }
+                            li.active{
+                                background: transparent;
+                            }
+                        }
+                        a{
+                            text-align: left;
+                            color: $color-primary;
+                            text-transform: capitalize;
+                            margin-bottom: 26px;
+                            font-weight: 400;
+                            text-decoration: none;
+                            span{
+                                margin-left: 8px;
+                            }
+                            &.see-more{
+                                margin-bottom: 0;
+                            }
+                            &.see-less{
+                                display: none;
+                                text-decoration: none;
+                            }
+                        }
+                        
+                    }
+
+                    .tf-map-preview{
+                        line-height: 0;
+                        .tf-map-preview-content{
+                            width: 100%;
+                        } 
+                    }
                 }
             }
         }

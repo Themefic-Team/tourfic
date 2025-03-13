@@ -20,7 +20,7 @@
                     }
                     .tf-date-single-select{
                         border-radius: 8px;
-                        background: $color-white;
+                        background: $color-filling-bg;
                         padding: 16px;
                         width: 33.33%;
                         @media #{$max768}{
@@ -29,7 +29,7 @@
                         .tf-select-date{
                             width: calc(50% - 8px);
                             &:first-child{
-                                border-right: 1px solid $color-border;
+                                border-right: 1px solid $color-border-lite;
                             }
                             
                             i{
@@ -75,9 +75,8 @@
                                     max-height: 200px;
                                     overflow: auto;
                                     border-radius: 4px;
-                                    background: $color-light-bg;
+                                    background: $color-filling-fg;
                                     padding: 2px;
-                                    box-shadow: 0px 4px 16px 0px rgba(2, 28, 53, 0.20);
                                     scrollbar-width: thin;
                                     scrollbar-color: $scrollbar-color;
                 
@@ -108,7 +107,7 @@
                                             margin-bottom: 0px;
                                         }
                                         &:hover{
-                                            background-color: $color-light-bg;
+                                            background-color: $color-brand-lite;
                                         }
                                     }
                                 }
@@ -225,7 +224,7 @@
                             cursor: pointer;
                             transition: .3s all ease;
                             &:hover{
-                                background: $color-secondary;
+                                background: $color-brand-dark;
                             }
                             i{
                                 margin-left: 8px;

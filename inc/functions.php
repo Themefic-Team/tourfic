@@ -838,12 +838,19 @@ if(!function_exists('tf_average_rating_change_on_base')){
 
 if(!function_exists('tf_custom_color_palette_values')){
 	function tf_custom_color_palette_values(){
-		$tf_design_custom = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-custom' ) ) ) ? Helper::tf_data_types( Helper::tfopt( 'tf-custom' ) ) : '';
-		return $values = [
-			!empty($tf_design_custom['primary']) ? $tf_design_custom['primary'] : '#ddd',
-			!empty($tf_design_custom['secondary']) ? $tf_design_custom['secondary'] : '#ccc',
-			!empty($tf_design_custom['text']) ? $tf_design_custom['text'] : '#ddd',
-			!empty($tf_design_custom['heading']) ? $tf_design_custom['heading'] : '#ccc'
+		$tf_brand_data = ! empty( Helper::tf_data_types( Helper::tfopt( "tf-custom-brand" ) ) ) ? Helper::tf_data_types( Helper::tfopt( "tf-custom-brand" ) ) : [];
+		$tf_text_data = ! empty( Helper::tf_data_types( Helper::tfopt( "tf-custom-text" ) ) ) ? Helper::tf_data_types( Helper::tfopt( "tf-custom-text" ) ) : [];
+		
+		$tf_brand_default = ! empty( $tf_brand_data['default'] ) ? $tf_brand_data['default'] : '#ddd';
+		$tf_brand_dark = ! empty( $tf_brand_data['dark'] ) ? $tf_brand_data['dark'] : '#ccc';
+		$tf_text_heading = ! empty( $tf_text_data['heading'] ) ? $tf_text_data['heading'] : '#ddd';
+		$tf_text_paragraph = ! empty( $tf_text_data['paragraph'] ) ? $tf_text_data['paragraph'] : '#ccc';
+
+		return [
+			$tf_brand_default,
+			$tf_brand_dark,
+			$tf_text_heading,
+			$tf_text_paragraph
 		];
 	}
 }

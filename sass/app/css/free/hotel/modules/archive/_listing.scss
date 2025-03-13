@@ -22,7 +22,7 @@
                         z-index: -1;
                         content: '';
                         display: block;
-                        border: 5px solid $color-secondary;    
+                        border: 5px solid $color-brand-dark;    
                         border-top-color: transparent;
                         border-left-color: transparent;
                     }
@@ -39,7 +39,7 @@
                         display: block;
                         width: 225px;
                         padding: 10px 0;
-                        background-color: $color-secondary;
+                        background-color: $color-brand-dark;
                         box-shadow: 0 5px 10px rgba(0,0,0,.1);
                         color: $color-white;
                         font: 700 18px/1 'Lato', sans-serif;

@@ -32,6 +32,7 @@ class Room {
 		}
 
 		return $hotel_rooms;
+
 	}
 
 	static function get_hotel_id_for_assigned_room( $room_id ) {

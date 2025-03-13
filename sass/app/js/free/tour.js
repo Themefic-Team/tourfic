@@ -548,10 +548,20 @@
          */
         $(window).on("scroll", function () {
             var sticky = $('.tf-tour-booking-wrap'),
-                scroll = $(window).scrollTop();
+                scroll = $(window).scrollTop(),
+                footer = $('footer'),
+                footerOffset = footer.offset().top,
+                windowHeight = $(window).height();
 
-            if (scroll >= 800) sticky.addClass('tf-tours-fixed');
-            else sticky.removeClass('tf-tours-fixed');
+            if (scroll >= 800) {
+                if (scroll + windowHeight >= footerOffset) {
+                    sticky.removeClass('tf-tours-fixed'); 
+                } else {
+                    sticky.addClass('tf-tours-fixed');
+                }
+            } else {
+                sticky.removeClass('tf-tours-fixed');
+            }
         });
 
         /**
@@ -562,14 +572,17 @@
             $(window).on("scroll", function () {
                 let bookingBox = $('.tf-tour-booking-box');
                 let bottomBar = $('.tf-bottom-booking-bar');
+                let footer = $('.footer');
+                
                 let boxOffset = bookingBox.offset().top + bookingBox.outerHeight();
-
+                let footerOffset = footer.offset().top;
                 var scrollTop = $(window).scrollTop();
+                let windowHeight = $(window).height();
 
-                if (scrollTop > boxOffset) {
-                    bottomBar.addClass('active'); // Add your class name here
+                if (scrollTop > boxOffset && scrollTop + windowHeight < footerOffset) {
+                    bottomBar.addClass('active');
                 } else {
-                    bottomBar.removeClass('active'); // Remove the class if scrolling back up
+                    bottomBar.removeClass('active');
                 }
             });
         }

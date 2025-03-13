@@ -156,12 +156,13 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'    => 'tf-template',
 					'type'  => 'tab',
-					'label' => 'Hotel, Tour, Apartment & Car Template',
+					'label' => esc_html__('Hotel, Tour, Apartment & Car Template', 'tourfic'),
 					'tabs'  => array(
 						array(
 							'id'     => 'hotel_template',
 							'title'  => esc_html__( 'Hotel', 'tourfic' ),
 							'icon'   => 'fa fa-gear',
+							'post_dependency' => 'hotel',
 							'fields' => array(
 								array(
 									'id'      => 'hotel-title',
@@ -364,6 +365,7 @@ TF_Settings::option( 'tf_settings', array(
 						array(
 							'id'     => 'tour_template',
 							'title'  => esc_html__( 'Tour', 'tourfic' ),
+							'post_dependency' => 'tour',
 							'fields' => array(
 								array(
 									'id'      => 'tour-title',
@@ -594,6 +596,7 @@ TF_Settings::option( 'tf_settings', array(
 							'id'     => 'apartment_template',
 							'title'  => esc_html__( 'Apartment', 'tourfic' ),
 							'icon'   => 'fa fa-gear',
+							'post_dependency' => 'apartment',
 							'fields' => array(
 								array(
 									'id'      => 'apartment-title',
@@ -697,10 +700,6 @@ TF_Settings::option( 'tf_settings', array(
 									'type'     => 'imageselect',
 									'label'    => esc_html__( 'Select Archive & Search Result Template', 'tourfic' ),
 									'options'  => array(
-										'default'  => array(
-											'title' => esc_html__('Legacy', 'tourfic'),
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-default.png",
-										),
 										'design-1' => array(
 											'title' => esc_html__('Design 1', 'tourfic'),
 											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-design-2.png",
@@ -709,6 +708,10 @@ TF_Settings::option( 'tf_settings', array(
 											'title' => esc_html__('Design 2', 'tourfic'),
 											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-design-3.png",
 											'is_pro'=> true,
+										),
+										'default'  => array(
+											'title' => esc_html__('Legacy', 'tourfic'),
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-default.png",
 										),
 									),
 									'default'  => 'default',
@@ -752,6 +755,7 @@ TF_Settings::option( 'tf_settings', array(
 							'id'     => 'car_template',
 							'title'  => __( 'Car', 'tourfic' ),
 							'icon'   => 'fa fa-gear',
+							'post_dependency' => 'carrentals',
 							'fields' => array(
 								array(
 									'id'      => 'car-title',
@@ -945,9 +949,9 @@ TF_Settings::option( 'tf_settings', array(
 							'title' => 'Palette 1',
 							'colors' => [
 								'#0E3DD8',
-								'#003C7A',
-								'#686E7A',
-								'#060D1C'
+								'#0A2B99',
+								'#1C2130',
+								'#494D59'
 							]
 						),
 						'design-2' => array(
@@ -955,26 +959,26 @@ TF_Settings::option( 'tf_settings', array(
 							'colors' => [
 								'#B58E53',
 								'#917242',
-								'#99948D',
+								'#30281C',
 								'#595349'
 							]
 						),
 						'design-3' => array(
 							'title' => 'Palette 3',
 							'colors' => [
-								'#FF6B00',
-								'#C15100',
-								'#6E655E',
-								'#1A0B00'
+								'#F97415',
+								'#C75605',
+								'#30241C',
+								'#595049'
 							]
 						),
 						'design-4' => array(
 							'title' => 'Palette 4',
 							'colors' => [
-								'#003162',
-								'#0054A8',
-								'#000',
-								'#faeedc'
+								'#003061',
+								'#002952',
+								'#1C2630',
+								'#495159'
 							]
 						),
 						'custom' => array(
@@ -986,149 +990,371 @@ TF_Settings::option( 'tf_settings', array(
 				),
 				// Design 1 Fields
 				array(
-					'id'       => 'tf-d1',
+					'id'       => 'tf-d1-brand',
+					'label'   => esc_html__( 'Brand Color', 'tourfic' ),
 					'type'     => 'color',
 					'multiple' => true,
 					'inline'   => true,
 					'default'  => array(
-						'primary' => '#0E3DD8',
-						'secondary' => '#003C7A',
-						'text' => '#686E7A',
-						'heading' => '#060D1C',
-						'light-bg' => '#faeedc',
-						'highlights-bg' => '#FCF4E8',
-						'form-input-bg' => '#F3F7FA',
-						'box-shadow' => '#e0e8ee52',
-						'border-color' => '#ddd',
+						'default' => '#0E3DD8',
+						'dark' => '#0A2B99',
+						'lite' => '#C9D4F7',
 					),
 					'colors'   => array(
-						'primary' => esc_html__( 'Primary Color', 'tourfic' ),
-						'secondary' => esc_html__( 'Secondary Color', 'tourfic' ),
-						'text' => esc_html__( 'Text Color', 'tourfic' ),
-						'heading' => esc_html__( 'Heading Color', 'tourfic' ),
-						'light-bg' => esc_html__( 'Light Background', 'tourfic' ),
-						'highlights-bg' => esc_html__( 'Highlights Background', 'tourfic' ),
-						'form-input-bg' => esc_html__( 'Form Input Background', 'tourfic' ),
-						'box-shadow' => esc_html__( 'Box Shadow', 'tourfic' ),
-						'border-color' => esc_html__( 'Border Color', 'tourfic' ),
+						'default' => esc_html__( 'Default', 'tourfic' ),
+						'dark' => esc_html__( 'Dark', 'tourfic' ),
+						'lite' => esc_html__( 'Lite', 'tourfic' ),
 					),
 					'dependency'   => array(
 						array( 'color-palette-template', '==', 'design-1' ),
 					),
 				),
 				array(
-					'id'       => 'tf-d2',
+					'id'       => 'tf-d1-text',
+					'label'   => esc_html__( 'Text Color', 'tourfic' ),
 					'type'     => 'color',
 					'multiple' => true,
 					'inline'   => true,
 					'default'  => array(
-						'primary' => '#B58E53',
-						'secondary' => '#917242',
-						'text' => '#99948D',
-						'heading' => '#595349',
-						'light-bg' => '#faeedc',
-						'highlights-bg' => '#FCF4E8',
-						'form-input-bg' => '#F3F7FA',
-						'box-shadow' => '#e0e8ee52',
-						'border-color' => '#ddd',
+						'heading' => '#1C2130',
+						'paragraph' => '#494D59',
+						'lite' => '#F3F5FD',
 					),
 					'colors'   => array(
-						'primary' => esc_html__( 'Primary Color', 'tourfic' ),
-						'secondary' => esc_html__( 'Secondary Color', 'tourfic' ),
-						'text' => esc_html__( 'Text Color', 'tourfic' ),
-						'heading' => esc_html__( 'Heading Color', 'tourfic' ),
-						'light-bg' => esc_html__( 'Light Background', 'tourfic' ),
-						'highlights-bg' => esc_html__( 'Highlights Background', 'tourfic' ),
-						'form-input-bg' => esc_html__( 'Form Input Background', 'tourfic' ),
-						'box-shadow' => esc_html__( 'Box Shadow', 'tourfic' ),
-						'border-color' => esc_html__( 'Border Color', 'tourfic' ),
+						'heading' => esc_html__( 'Heading', 'tourfic' ),
+						'paragraph' => esc_html__( 'Paragraph', 'tourfic' ),
+						'lite' => esc_html__( 'Lite', 'tourfic' ),
+					),
+					'dependency'   => array(
+						array( 'color-palette-template', '==', 'design-1' ),
+					),
+				),
+				array(
+					'id'       => 'tf-d1-border',
+					'label'   => esc_html__( 'Border Color', 'tourfic' ),
+					'type'     => 'color',
+					'multiple' => true,
+					'inline'   => true,
+					'default'  => array(
+						'default' => '#16275F',
+						'lite' => '#D1D7EE',
+					),
+					'colors'   => array(
+						'default' => esc_html__( 'Default', 'tourfic' ),
+						'lite' => esc_html__( 'Lite', 'tourfic' ),
+					),
+					'dependency'   => array(
+						array( 'color-palette-template', '==', 'design-1' ),
+					),
+				),
+				array(
+					'id'       => 'tf-d1-filling',
+					'label'   => esc_html__( 'Filling Color', 'tourfic' ),
+					'type'     => 'color',
+					'multiple' => true,
+					'inline'   => true,
+					'default'  => array(
+						'background' => '#ffffff',
+						'foreground' => '#F5F7FF',
+					),
+					'colors'   => array(
+						'background' => esc_html__( 'Background', 'tourfic' ),
+						'foreground' => esc_html__( 'Foreground', 'tourfic' ),
+					),
+					'dependency'   => array(
+						array( 'color-palette-template', '==', 'design-1' ),
+					),
+				),
+				// Design 2 Fields
+				array(
+					'id'       => 'tf-d2-brand',
+					'label'   => esc_html__( 'Brand Color', 'tourfic' ),
+					'type'     => 'color',
+					'multiple' => true,
+					'inline'   => true,
+					'default'  => array(
+						'default' => '#B58E53',
+						'dark' => '#917242',
+						'lite' => '#FAEEDC',
+					),
+					'colors'   => array(
+						'default' => esc_html__( 'Default', 'tourfic' ),
+						'dark' => esc_html__( 'Dark', 'tourfic' ),
+						'lite' => esc_html__( 'Lite', 'tourfic' ),
 					),
 					'dependency'   => array(
 						array( 'color-palette-template', '==', 'design-2' ),
 					),
 				),
 				array(
-					'id'       => 'tf-d3',
+					'id'       => 'tf-d2-text',
+					'label'   => esc_html__( 'Text Color', 'tourfic' ),
 					'type'     => 'color',
 					'multiple' => true,
 					'inline'   => true,
 					'default'  => array(
-						'primary' => '#FF6B00',
-						'secondary' => '#C15100',
-						'text' => '#6E655E',
-						'heading' => '#1A0B00',
-						'light-bg' => '#faeedc',
-						'highlights-bg' => '#FCF4E8',
-						'form-input-bg' => '#F3F7FA',
-						'box-shadow' => '#e0e8ee52',
-						'border-color' => '#ddd',
+						'heading' => '#30281C',
+						'paragraph' => '#595349',
+						'lite' => '#FDF9F3',
 					),
 					'colors'   => array(
-						'primary' => esc_html__( 'Primary Color', 'tourfic' ),
-						'secondary' => esc_html__( 'Secondary Color', 'tourfic' ),
-						'text' => esc_html__( 'Text Color', 'tourfic' ),
-						'heading' => esc_html__( 'Heading Color', 'tourfic' ),
-						'light-bg' => esc_html__( 'Light Background', 'tourfic' ),
-						'highlights-bg' => esc_html__( 'Highlights Background', 'tourfic' ),
-						'form-input-bg' => esc_html__( 'Form Input Background', 'tourfic' ),
-						'box-shadow' => esc_html__( 'Box Shadow', 'tourfic' ),
-						'border-color' => esc_html__( 'Border Color', 'tourfic' ),
+						'heading' => esc_html__( 'Heading', 'tourfic' ),
+						'paragraph' => esc_html__( 'Paragraph', 'tourfic' ),
+						'lite' => esc_html__( 'Lite', 'tourfic' ),
+					),
+					'dependency'   => array(
+						array( 'color-palette-template', '==', 'design-2' ),
+					),
+				),
+				array(
+					'id'       => 'tf-d2-border',
+					'label'   => esc_html__( 'Border Color', 'tourfic' ),
+					'type'     => 'color',
+					'multiple' => true,
+					'inline'   => true,
+					'default'  => array(
+						'default' => '#5F4216',
+						'lite' => '#EEE2D1',
+					),
+					'colors'   => array(
+						'default' => esc_html__( 'Default', 'tourfic' ),
+						'lite' => esc_html__( 'Lite', 'tourfic' ),
+					),
+					'dependency'   => array(
+						array( 'color-palette-template', '==', 'design-2' ),
+					),
+				),
+				array(
+					'id'       => 'tf-d2-filling',
+					'label'   => esc_html__( 'Filling Color', 'tourfic' ),
+					'type'     => 'color',
+					'multiple' => true,
+					'inline'   => true,
+					'default'  => array(
+						'background' => '#ffffff',
+						'foreground' => '#FDF9F3',
+					),
+					'colors'   => array(
+						'background' => esc_html__( 'Background', 'tourfic' ),
+						'foreground' => esc_html__( 'Foreground', 'tourfic' ),
+					),
+					'dependency'   => array(
+						array( 'color-palette-template', '==', 'design-2' ),
+					),
+				),
+				// Design 3 Fields
+				array(
+					'id'       => 'tf-d3-brand',
+					'label'   => esc_html__( 'Brand Color', 'tourfic' ),
+					'type'     => 'color',
+					'multiple' => true,
+					'inline'   => true,
+					'default'  => array(
+						'default' => '#F97415',
+						'dark' => '#C75605',
+						'lite' => '#FDDCC3',
+					),
+					'colors'   => array(
+						'default' => esc_html__( 'Default', 'tourfic' ),
+						'dark' => esc_html__( 'Dark', 'tourfic' ),
+						'lite' => esc_html__( 'Lite', 'tourfic' ),
 					),
 					'dependency'   => array(
 						array( 'color-palette-template', '==', 'design-3' ),
 					),
 				),
 				array(
-					'id'       => 'tf-d4',
+					'id'       => 'tf-d3-text',
+					'label'   => esc_html__( 'Text Color', 'tourfic' ),
 					'type'     => 'color',
 					'multiple' => true,
 					'inline'   => true,
 					'default'  => array(
-						'primary' => '#003162',
-						'secondary' => '#0054A8',
-						'text' => '#000',
-						'heading' => '#000',
-						'light-bg' => '#faeedc',
-						'highlights-bg' => '#FCF4E8',
-						'form-input-bg' => '#F3F7FA',
-						'box-shadow' => '#e0e8ee52',
-						'border-color' => '#ddd',
+						'heading' => '#30241C',
+						'paragraph' => '#595049',
+						'lite' => '#FDF7F3',
 					),
 					'colors'   => array(
-						'primary' => esc_html__( 'Primary Color', 'tourfic' ),
-						'secondary' => esc_html__( 'Secondary Color', 'tourfic' ),
-						'text' => esc_html__( 'Text Color', 'tourfic' ),
-						'heading' => esc_html__( 'Heading Color', 'tourfic' ),
-						'light-bg' => esc_html__( 'Light Background', 'tourfic' ),
-						'highlights-bg' => esc_html__( 'Highlights Background', 'tourfic' ),
-						'form-input-bg' => esc_html__( 'Form Input Background', 'tourfic' ),
-						'box-shadow' => esc_html__( 'Box Shadow', 'tourfic' ),
-						'border-color' => esc_html__( 'Border Color', 'tourfic' ),
+						'heading' => esc_html__( 'Heading', 'tourfic' ),
+						'paragraph' => esc_html__( 'Paragraph', 'tourfic' ),
+						'lite' => esc_html__( 'Lite', 'tourfic' ),
+					),
+					'dependency'   => array(
+						array( 'color-palette-template', '==', 'design-3' ),
+					),
+				),
+				array(
+					'id'       => 'tf-d3-border',
+					'label'   => esc_html__( 'Border Color', 'tourfic' ),
+					'type'     => 'color',
+					'multiple' => true,
+					'inline'   => true,
+					'default'  => array(
+						'default' => '#5F3416',
+						'lite' => '#EEDDD1',
+					),
+					'colors'   => array(
+						'default' => esc_html__( 'Default', 'tourfic' ),
+						'lite' => esc_html__( 'Lite', 'tourfic' ),
+					),
+					'dependency'   => array(
+						array( 'color-palette-template', '==', 'design-3' ),
+					),
+				),
+				array(
+					'id'       => 'tf-d3-filling',
+					'label'   => esc_html__( 'Filling Color', 'tourfic' ),
+					'type'     => 'color',
+					'multiple' => true,
+					'inline'   => true,
+					'default'  => array(
+						'background' => '#ffffff',
+						'foreground' => '#FFF9F5',
+					),
+					'colors'   => array(
+						'background' => esc_html__( 'Background', 'tourfic' ),
+						'foreground' => esc_html__( 'Foreground', 'tourfic' ),
+					),
+					'dependency'   => array(
+						array( 'color-palette-template', '==', 'design-3' ),
+					),
+				),
+				// Design 4 Fields
+				array(
+					'id'       => 'tf-d4-brand',
+					'label'   => esc_html__( 'Brand Color', 'tourfic' ),
+					'type'     => 'color',
+					'multiple' => true,
+					'inline'   => true,
+					'default'  => array(
+						'default' => '#003061',
+						'dark' => '#002952',
+						'lite' => '#C2E0FF',
+					),
+					'colors'   => array(
+						'default' => esc_html__( 'Default', 'tourfic' ),
+						'dark' => esc_html__( 'Dark', 'tourfic' ),
+						'lite' => esc_html__( 'Lite', 'tourfic' ),
 					),
 					'dependency'   => array(
 						array( 'color-palette-template', '==', 'design-4' ),
 					),
 				),
 				array(
-					'id'       => 'tf-custom',
+					'id'       => 'tf-d4-text',
+					'label'   => esc_html__( 'Text Color', 'tourfic' ),
+					'type'     => 'color',
+					'multiple' => true,
+					'inline'   => true,
+					'default'  => array(
+						'heading' => '#1C2630',
+						'paragraph' => '#495159',
+						'lite' => '#F3F8FD',
+					),
+					'colors'   => array(
+						'heading' => esc_html__( 'Heading', 'tourfic' ),
+						'paragraph' => esc_html__( 'Paragraph', 'tourfic' ),
+						'lite' => esc_html__( 'Lite', 'tourfic' ),
+					),
+					'dependency'   => array(
+						array( 'color-palette-template', '==', 'design-4' ),
+					),
+				),
+				array(
+					'id'       => 'tf-d4-border',
+					'label'   => esc_html__( 'Border Color', 'tourfic' ),
+					'type'     => 'color',
+					'multiple' => true,
+					'inline'   => true,
+					'default'  => array(
+						'default' => '#163A5F',
+						'lite' => '#D1DFEE',
+					),
+					'colors'   => array(
+						'default' => esc_html__( 'Default', 'tourfic' ),
+						'lite' => esc_html__( 'Lite', 'tourfic' ),
+					),
+					'dependency'   => array(
+						array( 'color-palette-template', '==', 'design-4' ),
+					),
+				),
+				array(
+					'id'       => 'tf-d4-filling',
+					'label'   => esc_html__( 'Filling Color', 'tourfic' ),
+					'type'     => 'color',
+					'multiple' => true,
+					'inline'   => true,
+					'default'  => array(
+						'background' => '#ffffff',
+						'foreground' => '#F5FAFF',
+					),
+					'colors'   => array(
+						'background' => esc_html__( 'Background', 'tourfic' ),
+						'foreground' => esc_html__( 'Foreground', 'tourfic' ),
+					),
+					'dependency'   => array(
+						array( 'color-palette-template', '==', 'design-4' ),
+					),
+				),
+				// Custom Palette
+				array(
+					'id'       => 'tf-custom-brand',
+					'label'   => esc_html__( 'Brand Color', 'tourfic' ),
 					'type'     => 'color',
 					'multiple' => true,
 					'inline'   => true,
 					'colors'   => array(
-						'primary' => esc_html__( 'Primary Color', 'tourfic' ),
-						'secondary' => esc_html__( 'Secondary Color', 'tourfic' ),
-						'text' => esc_html__( 'Text Color', 'tourfic' ),
-						'heading' => esc_html__( 'Heading Color', 'tourfic' ),
-						'light-bg' => esc_html__( 'Light Background', 'tourfic' ),
-						'highlights-bg' => esc_html__( 'Highlights Background', 'tourfic' ),
-						'form-input-bg' => esc_html__( 'Form Input Background', 'tourfic' ),
-						'box-shadow' => esc_html__( 'Box Shadow', 'tourfic' ),
-						'border-color' => esc_html__( 'Box Shadow', 'tourfic' ),
+						'default' => esc_html__( 'Default', 'tourfic' ),
+						'dark' => esc_html__( 'Dark', 'tourfic' ),
+						'lite' => esc_html__( 'Lite', 'tourfic' ),
 					),
 					'dependency'   => array(
 						array( 'color-palette-template', '==', 'custom' ),
 					),
-				)
+				),
+				array(
+					'id'       => 'tf-custom-text',
+					'label'   => esc_html__( 'Text Color', 'tourfic' ),
+					'type'     => 'color',
+					'multiple' => true,
+					'inline'   => true,
+					'colors'   => array(
+						'heading' => esc_html__( 'Heading', 'tourfic' ),
+						'paragraph' => esc_html__( 'Paragraph', 'tourfic' ),
+						'lite' => esc_html__( 'Lite', 'tourfic' ),
+					),
+					'dependency'   => array(
+						array( 'color-palette-template', '==', 'custom' ),
+					),
+				),
+				array(
+					'id'       => 'tf-custom-border',
+					'label'   => esc_html__( 'Border Color', 'tourfic' ),
+					'type'     => 'color',
+					'multiple' => true,
+					'inline'   => true,
+					'colors'   => array(
+						'default' => esc_html__( 'Default', 'tourfic' ),
+						'lite' => esc_html__( 'Lite', 'tourfic' ),
+					),
+					'dependency'   => array(
+						array( 'color-palette-template', '==', 'custom' ),
+					),
+				),
+				array(
+					'id'       => 'tf-custom-filling',
+					'label'   => esc_html__( 'Filling Color', 'tourfic' ),
+					'type'     => 'color',
+					'multiple' => true,
+					'inline'   => true,
+					'colors'   => array(
+						'background' => esc_html__( 'Background', 'tourfic' ),
+						'foreground' => esc_html__( 'Foreground', 'tourfic' ),
+					),
+					'dependency'   => array(
+						array( 'color-palette-template', '==', 'custom' ),
+					),
+				),
 			)
 		),
 
@@ -1136,6 +1362,7 @@ TF_Settings::option( 'tf_settings', array(
 		'tour'                  => array(
 			'title'  => __( 'Tour Options', 'tourfic' ),
 			'icon'   => 'fas fa-umbrella-beach',
+			'post_dependency' => 'tour',
 			'fields' => array(),
 		),
 		'single_tour'           => array(
@@ -1330,6 +1557,7 @@ TF_Settings::option( 'tf_settings', array(
 		'hotel_option'          => array(
 			'title'  => __( 'Hotel Options', 'tourfic' ),
 			'icon'   => 'fas fa-hotel',
+			'post_dependency' => 'hotel',
 			'fields' => array(),
 		),
 		'single_page'           => array(
@@ -1466,6 +1694,7 @@ TF_Settings::option( 'tf_settings', array(
 		'apartment_option'      => array(
 			'title'  => __( 'Apartment Options', 'tourfic' ),
 			'icon'   => 'fa-solid fa-house-chimney',
+			'post_dependency' => 'apartment',
 			'fields' => array(),
 		),
 		'apartment_single_page' => array(
@@ -1545,6 +1774,7 @@ TF_Settings::option( 'tf_settings', array(
 		'car_option'      => array(
 			'title'  => __( 'Car Options', 'tourfic' ),
 			'icon'   => 'fa-solid fa-car',
+			'post_dependency' => 'carrentals',
 			'fields' => array(),
 		),
 		'car_single_page' => array(
@@ -1945,20 +2175,6 @@ TF_Settings::option( 'tf_settings', array(
 									'type'     => 'switch',
 									'label'    => __( 'Show Chart info', 'tourfic' ),
 									'subtitle' => __( 'ON: Display visual graphs to follow your earnings through each time', 'tourfic' ),
-									'is_pro'   => true,
-								),
-								array(
-									'id'       => 'vendor-booking-history',
-									'type'     => 'switch',
-									'label'    => __( 'Show Booking history', 'tourfic' ),
-									'subtitle' => __( 'ON: Show booking history of partner', 'tourfic' ),
-									'is_pro'   => true,
-								),
-								array(
-									'id'       => 'vendor-enquiry-history',
-									'type'     => 'switch',
-									'label'    => __( 'Show Enquiry history', 'tourfic' ),
-									'subtitle' => __( 'ON: Show Enquiry history of partner', 'tourfic' ),
 									'is_pro'   => true,
 								),
 							),
@@ -3025,7 +3241,7 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'        => 'chart_cdn',
 					'type'      => 'switch',
-					'label'     => __( 'Chart Js CDN', 'tourfic' ),
+					'label'     => __( 'Chart JS CDN', 'tourfic' ),
 					'subtitle'  => __( 'Enable/disable Cloudflare CDN for Chart Js', 'tourfic' ),
 					'label_on'  => __( 'Enabled', 'tourfic' ),
 					'label_off' => __( 'Disabled', 'tourfic' ),

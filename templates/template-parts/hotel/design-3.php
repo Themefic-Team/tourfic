@@ -197,11 +197,13 @@ use \Tourfic\App\TF_Review;
 
         </div>
         <div class="tf-details-right tf-sitebar-widgets">
-            <?php if( !empty($meta['nearby-places']) ){ ?>
+            <?php 
+            $places_meta = ! empty( $meta["nearby-places"] ) ? Helper::tf_data_types($meta["nearby-places"]) : array();
+            if($places_meta){ ?>
             <div class="tf-whats-around tf-single-widgets">
-                <h2 class="tf-section-title"><?php echo !empty($meta['section-title']) ? esc_html($meta['section-title']) : esc_html__("What’s around?", 'tourfic'); ?></h2>
+                <h3 class="tf-section-title"><?php echo !empty($meta['section-title']) ? esc_html($meta['section-title']) : esc_html__("What’s around?", 'tourfic'); ?></h3>
                 <ul>
-                    <?php foreach($meta['nearby-places'] as $place){ ?>
+                    <?php foreach(Helper::tf_data_types($meta['nearby-places']) as $place){ ?>
                     <li>
                         <span>
                         <?php if( !empty( $place['place-icon'] )){ ?>
@@ -217,7 +219,7 @@ use \Tourfic\App\TF_Review;
             <?php } ?>
             
             <div id="hotel-map-location" class="tf-location tf-single-widgets">
-                <h2 class="tf-section-title"><?php esc_html_e("Location", "tourfic"); ?></h2>
+                <h3 class="tf-section-title"><?php esc_html_e("Location", "tourfic"); ?></h3>
                 <?php if ( !defined( 'TF_PRO' ) ) { ?>
                     <?php 
                     if( $address && $tf_openstreet_map!="default" && ( empty($address_latitude) || empty($address_longitude) ) ){ ?>

@@ -201,7 +201,7 @@ use \Tourfic\Classes\Apartment\Apartment;
 					if ( has_post_thumbnail() ) {
 						the_post_thumbnail( 'tf_apartment_single_thumb' );
 					} else {
-						echo '<img src="' . esc_url( TF_ASSETS_APP_URL . '/images/feature-default.jpg' ) . '" alt="feature-default">';
+						echo '<img src="' . esc_url( TF_ASSETS_APP_URL . 'images/feature-default.jpg' ) . '" alt="feature-default">';
 					}
 					?>
 				<?php endif; ?>
@@ -241,7 +241,7 @@ use \Tourfic\Classes\Apartment\Apartment;
                         </div>
 					<?php endif; ?>
 
-                    <h3 class="section-heading"><?php echo ! empty( $meta['description_title'] ) ? esc_html( $meta['description_title'] ) : ''; ?></h3>
+                    <h2 class="section-heading"><?php echo ! empty( $meta['description_title'] ) ? esc_html( $meta['description_title'] ) : ''; ?></h2>
                     <div class="apt-description">
 						<?php the_content(); ?>
                     </div>
@@ -527,7 +527,7 @@ use \Tourfic\Classes\Apartment\Apartment;
 		?>
         <div class="tf-house-rules">
             <div class="tf-container">
-                <h3 class="section-heading"><?php echo ! empty( $meta['house_rules_title'] ) ? esc_html( $meta['house_rules_title'] ) : ''; ?></h3>
+                <h2 class="section-heading"><?php echo ! empty( $meta['house_rules_title'] ) ? esc_html( $meta['house_rules_title'] ) : ''; ?></h2>
                 <div class="tf-house-rules-wrapper <?php echo empty( $included_house_rules ) || empty( $not_included_house_rules ) ? 'tf-house-rules-full' : ''; ?>">
 					<?php if ( ! empty( $included_house_rules ) ): ?>
                         <ul class="tf-included-house-rules">
@@ -609,7 +609,7 @@ use \Tourfic\Classes\Apartment\Apartment;
                         <div class="tf-question-left-inner">
                             <div class="default-enquiry-title-section">
                                 <?php if ( ! empty( $enquiry_section_title ) ) {?>
-                                    <h4><?php echo esc_html( $enquiry_section_title ) ?></h4>
+                                    <h2><?php echo esc_html( $enquiry_section_title ) ?></h2>
                                 <?php } ?>
                             </div>
                             <?php if ( ! empty( $enquiry_section_des ) ) {?>

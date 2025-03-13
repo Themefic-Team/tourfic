@@ -47,7 +47,7 @@
           font-size: 0.875rem;
         }
         &:hover {
-          background-color: $color-secondary;
+          background-color: $color-brand-dark;
           box-shadow: 0px 3px 0px 0px $color-primary;
         }
         &::after {
@@ -156,7 +156,7 @@
               margin-right: 8px;
             }
             &:hover {
-              background: $color-light-bg;
+              background: $color-brand-lite;
               color: $color-heading;
               text-overflow: ellipsis;
               overflow: hidden;
@@ -208,7 +208,6 @@
         color: $color-white;
         font-size: 1.125rem;
         font-weight: 700;
-        line-height: 1.44;
         margin-left: 0;
         margin-top: 45px;
         @media #{$max768} {
@@ -340,7 +339,6 @@
       color: $color-white;
       position: relative;
       cursor: pointer;
-      line-height: 1.375;
       @media #{$max320} {
         align-items: self-start;
       }
@@ -373,7 +371,7 @@
         }
         @media only screen and (max-width: 1366px) {
           font-size: 3.125rem;
-          line-height: 1.20;
+          line-height: 1.2;
         }
         @media #{$max1024} {
           font-size: 2.188rem;
@@ -436,7 +434,7 @@
             }
             svg {
               &:hover {
-                fill: $color-secondary;
+                fill: $color-brand-dark;
               }
               @media #{$max1024} {
                 width: 28px;
@@ -511,7 +509,7 @@
           margin-left: 10px;
           span {
             font-size: 0.938rem;
-            line-height: 1.33;
+            line-height: 1.3;
           }
         }
       }
@@ -559,7 +557,7 @@
     &__label {
       font-size: 1.25rem;
       font-weight: 400;
-      line-height: 1.149;
+      line-height: 1;
       color: rgba(255, 255, 255, 0.55);
       margin-bottom: 28px;
       display: block;
@@ -616,15 +614,14 @@
       transition: all 0.3s ease;
       font-size: 1rem;
       font-weight: 500;
-      line-height: 1.14;
       @media #{$max768} {
         min-height: 45px;
         font-size: 0.938rem;
         min-width: 160px;
       }
       &:hover {
-        background: $color-secondary;
-        border-color: $color-secondary;
+        background: $color-brand-dark;
+        border-color: $color-brand-dark;
         color: $color-white;
         path{
           fill: $color-white;

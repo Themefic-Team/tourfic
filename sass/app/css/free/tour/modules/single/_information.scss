@@ -13,8 +13,7 @@
                     }
                     .tf-single-square-block {
                         width: 100%;
-                        background: $color-white;
-                        box-shadow: 0px 8px 16px rgba(90, 91, 106, 0.08);
+                        background: $color-filling-fg;
                         border-radius: 4px;
                         color: $color-text;
                         border: 1px solid $color-white;
@@ -99,26 +98,37 @@
                     }
                 }
                 .tf-feature-block {
-                    background: $color-white;
-                    box-shadow: 0px 0px 24px 5px $color-box-shadow;
+                    background: $color-filling-fg;
                     @include bd-radius(5px);;
                     padding: 20px;
+                    padding-top: 17px;
                     width: 100%;
                     align-items: baseline;
                     @media #{$max1024}{
                         padding: 24px;
+                        padding-top: 21px;
                     }
-                    i{
-                        color: $color-primary;
-                        font-size: 1.25rem;
+                    .tf-feature-block-icon{
+                        position: relative;
+                        top: 3px;
+                        i{
+                            color: $color-primary;
+                            font-size: 1.25rem;
+                        }
                     }
+                  
                     h3{
                         color: $color-heading;
+                    }
+                    h5{
+                        color: $color-heading;
+                        margin-bottom: 5px;
                     }
                     p{
                         color: $color-text;
                         margin-top: $tf-space-8;
                         margin-bottom: 0;
+                        margin-top: 0;
                     }
                     .repeat-dates {
                         display: block;
@@ -129,13 +139,12 @@
             
                         .repeat-date-list {
                             list-style: none;
-                            background-color: $color-white;
+                            background-color: $color-filling-fg;
                             padding: 0px 8px;
                             margin: 10px 5px;
                             text-align: center;
                             @include bd-radius(5px);;
                             font-size: 0.938rem;
-                            box-shadow: 0px 0px 8px 2px $color-box-shadow;
                         }
                     }
                 }

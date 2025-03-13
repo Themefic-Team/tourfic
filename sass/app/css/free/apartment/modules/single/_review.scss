@@ -19,11 +19,11 @@
                     }
                 }
                 .tf-review-progress-bar {
-                    background: $color-light-bg;
+                    background: $color-brand-lite;
                     border-radius: 8px;
-                    border: 1px solid $color-border;
                     column-gap: 200px;
                     row-gap: 16px;
+                    border: 0;
                     grid-template-columns: calc(50% - 100px) calc(50% - 100px);
             
                     @media #{$max768} {
@@ -52,7 +52,7 @@
                         .tf-apartment-show-more {
                             font-size: 0.875rem;
                             font-weight: 500;
-                            line-height: 1.7;
+                            line-height: 1.5;
                             letter-spacing: 0.5px;
                             color: $color-heading;
                             cursor: pointer;
@@ -84,7 +84,7 @@
                     text-align: center;
                     font-size: 0.875rem;
                     font-weight: 500;
-                    line-height: 1.7;
+                    line-height: 1.5;
                     letter-spacing: 0.5px;
                     user-select: none;
                     cursor: pointer;

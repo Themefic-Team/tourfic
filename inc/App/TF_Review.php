@@ -640,7 +640,7 @@ class TF_Review {
             ( "tf_hotel"==$tf_current_post && $tf_hotel_arc_selected_template=="design-1" || $tf_hotel_arc_selected_template=="design-3" ) ||
             ( "tf_apartment"==$tf_current_post && $tf_apartment_arc_selected_template=="design-2" )){
             ?>
-            <div class="tf-reviews tf-flex tf-mt-16 tf-flex-gap-12">
+            <div class="tf-reviews tf-flex tf-flex-gap-12">
                 <div class="tf-review-items">
                     <i class="fa-regular fa-star"></i>
                     <i class="fa-regular fa-star"></i>
