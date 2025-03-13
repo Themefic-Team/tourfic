@@ -613,7 +613,7 @@ class Migrator {
 			$tf_filling_data = ! empty( Helper::tf_data_types( Helper::tfopt( "tf-custom-filling" ) ) ) ? Helper::tf_data_types( Helper::tfopt( "tf-custom-filling" ) ) : [];
 
 			if(!empty($options['tf-template'])){
-				$current_template = !empty($options['tf-template']['single-hotel']) ? $options['tf-template']['single-hotel'] : '';
+				$current_template = !empty($options['tf-template']['single-hotel']) ? $options['tf-template']['single-hotel'] : 'design-1';
 		
 				if("design-1"==$current_template){
 
