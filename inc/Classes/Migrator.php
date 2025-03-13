@@ -596,9 +596,13 @@ class Migrator {
 	 * run once
 	 */
 	function tf_migrate_color_palatte_data(){
-		if ( empty( get_option( 'tf_color_data_migrate' ) ) || ( ! empty( get_option( 'tf_color_data_migrate' ) ) && get_option( 'tf_color_data_migrate' ) < 1 ) ) {
+		$migrate_option = get_option('tf_color_data_migrate');
+		if ( empty( $migrate_option) || ( ! empty( $migrate_option) && $migrate_option< 1 ) ) {
 			$options = ! empty( get_option( 'tf_settings' ) ) ? get_option( 'tf_settings' ) : array();
-			$options["color-palette-template"] = 'custom';
+			
+			if (!empty($options['tf-template']['single-hotel'])) {
+    			$options["color-palette-template"] = 'custom'; 
+			}
 
 			$prev_primary = !empty($options['tourfic-design1-global-color']) ? unserialize($options['tourfic-design1-global-color']) : '';
 			$prev_body_text = !empty($options['tourfic-design1-p-global-color']) ? unserialize($options['tourfic-design1-p-global-color']) : '';
@@ -610,6 +614,7 @@ class Migrator {
 
 			if(!empty($options['tf-template'])){
 				$current_template = !empty($options['tf-template']['single-hotel']) ? $options['tf-template']['single-hotel'] : '';
+		
 				if("design-1"==$current_template){
 
 					$tf_brand_data['default'] = !empty($prev_primary['gcolor']) ? $prev_primary['gcolor'] : '#0E3DD8';
