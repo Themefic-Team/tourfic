@@ -4021,38 +4021,123 @@
 }
 // Archive Global End
 
-/* .tf_template_3_single_hotel .flatpickr-calendar {
-    left: 320px !important;
-  
-    @media only screen and (max-width: 1920px) {
-      left: 240px !important;
-    }
-    
-    @media only screen and (max-width: 1280px) {
-      left: 100px !important;
-    }
-  
-    @media only screen and (max-width: 1024px) {
-      left: 80px !important;
-    } 
-  
-    @media only screen and (max-width: 660px) {
-      left: 20px !important;
+.tf-archive-booking-form__style-2{
+    background: $color-filling-fg;
+    .tf-booking-form {
+        display: flex;
+        margin: 0;
+        
+        .tf-booking-form-fields {
+            display: flex;
+            width: 78%;
+            padding: 24px;
+            padding-right: 0;
+            @media #{$max1024}{
+                width: calc(100% - 150px);
+            }
+            &>div {
+                width: 32%;
+                border-right: 1px solid $color-border-lite;
+                display: flex;
+                flex-direction: column;
+                position: relative;
+                &.tf-booking-form-guest-and-room {
+                    width: 36%;
+                    padding-left: 25px;
+                    align-items: start;
+                    border-right: none;
+                    cursor: pointer;
+                }
+            }
+        }
+        .tf-booking-form-checkout,
+        .tf-booking-form-checkin {
+            padding-left: 25px;
+            padding-right: 25px;
+            @media only screen and (max-width: 1200px){
+                padding-right: 28px;
+                padding-left: 28px;
+            }
+            @media #{$max1024}{
+                padding-right: 15px;
+                padding-left: 15px;
+            }
+            input {
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                opacity: 0;
+            }
+        }
+        .tf-booking-form-checkin{
+            max-width: 146px;
+        }
+        .tf-booking-form-checkout{
+            max-width: 155px;
+        }
+        .tf-booking-date {
+            color: $color-text;
+            font-size: 1.5rem;
+            text-align: right;
+            margin-right: 5px;
+            @media #{$max1024}{
+                font-size: 1.25rem;
+            }
+        }
+        span.tf-booking-form-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: $color-text;
+            @media #{$max1024}{
+                font-size: 0.875rem;
+            }
+        }
+        span.tf-booking-month {
+            color: $color-text;
+            font-size: 1rem;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            text-transform: capitalize;
+            @media #{$max1024}{
+                font-size: 0.875rem;
+            }
+        }
+        .tf-booking-date-wrap {
+            display: flex;
+            gap: 6px;
+            cursor: pointer;
+        }
+        .tf_label-row{
+            span#tf-required{
+                font-size: 0.75rem;
+                color: $color-danger;
+            }
+        }
+        .tf-booking-guest-and-room-wrap {
+            display: flex;
+            gap: 6px;
+            margin-top: 4px;
+            text-transform: capitalize;
+        }
+        .tf-booking-person-count span {
+            margin-right: 12px;
+        }
+        .tf-cancellation-refundable-text {
+            display: flex;
+            flex-direction: column;
+        }
+        .tf-booking-form-submit {
+            width: 22%;
+            @media #{$max1024}{
+                width: 150px;
+            }
+            button {
+                height: 100%;
+                width: 100%;
+                @include align-items(center);
+            }
+        }
     }
 }
-  
-.tf_template_3_hotel_archive .flatpickr-calendar {
-    left: 495px !important;
-  
-    @media only screen and (max-width: 1280px) {
-      left: 285px !important;
-    }
-    
-    @media #{$max1024}{
-      left: 170px !important;
-    }
-  
-    @media only screen and (max-width: 660px) {
-      left: 30px !important;
-    }
-} */

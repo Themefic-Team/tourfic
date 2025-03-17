@@ -43,6 +43,9 @@ class Register {
         $widgets_manager->register( \Tourfic\App\Widgets\Elementor\Widgets\TF_Apartment_Locations::instance() );
         $widgets_manager->register( \Tourfic\App\Widgets\Elementor\Widgets\TF_Recent_Apartments_slider::instance() );
         $widgets_manager->register( \Tourfic\App\Widgets\Elementor\Widgets\TF_Apartment_Grid_Slider::instance() );
+        
+        //Archive
+        $widgets_manager->register( \Tourfic\App\Widgets\Elementor\Widgets\Search_Form::instance() );
     
     }
 
