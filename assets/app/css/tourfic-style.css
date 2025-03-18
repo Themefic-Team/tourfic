@@ -1547,7 +1547,7 @@ h3.section-heading {
   grid-template-columns: auto auto;
   justify-content: space-between;
   align-items: center;
-  column-gap: 20px;
+  column-gap: 15px;
 }
 
 .tf-review-form-container .tf-rating-wrapper .tf-form-single-rating label {
@@ -1604,16 +1604,11 @@ h3.section-heading {
   display: inline-block;
   content: "\f005";
   color: #ffc107;
-  font-size: 1.125rem;
+  font-size: 1rem;
+  font-weight: 400;
 }
 
 .tf-review-form-container .ratings-container > input + label:hover ~ label:before {
-  content: "\f005";
-  color: #ffc107;
-  font-weight: 900;
-}
-
-.tf-review-form-container .ratings-container > input + label:hover:before {
   content: "\f005";
   color: #ffc107;
   font-weight: 900;
@@ -1634,11 +1629,6 @@ h3.section-heading {
   content: "\f005";
   color: #ffc107;
   font-weight: 900;
-}
-
-.tf-review-form-container .ratings-container:hover > input + label:before {
-  content: "\f005";
-  color: #ffc107;
 }
 
 .tf-review-form-container .ratings-container:hover > input + label:hover ~ label:before {
@@ -14779,7 +14769,8 @@ div#tf-destinationautocomplete-list div:before {
   font-weight: 500;
 }
 
-.tf-single-template__three .tf-single-widgets .tf_btn_lite:hover {
+.tf-single-template__three .tf-single-widgets .tf_btn_lite:hover, .tf-single-template__three .tf-single-widgets .tf_btn_lite:focus {
+  background-color: var(--tf-brand-dark);
   color: #ffffff;
 }
 

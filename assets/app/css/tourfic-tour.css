@@ -1262,7 +1262,7 @@
 }
 
 .single-tf_tours .tf-single-template__two .tf-itinerary-wrapper.tf-mb-50 .tf-itinerary-downloader-option {
-  background-color: var(--tf-primary);
+  background-color: var(--tf-filling-foreground);
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
@@ -1272,12 +1272,12 @@
   overflow: hidden;
 }
 
-.single-tf_tours .tf-single-template__two .tf-itinerary-wrapper.tf-mb-50 .tf-itinerary-downloader-option h3, .single-tf_tours .tf-single-template__two .tf-itinerary-wrapper.tf-mb-50 .tf-itinerary-downloader-option p {
-  color: #ffffff;
+.single-tf_tours .tf-single-template__two .tf-itinerary-wrapper.tf-mb-50 .tf-itinerary-downloader-option h3 {
+  color: var(--tf-text-heading);
 }
 
-.single-tf_tours .tf-single-template__two .tf-itinerary-wrapper.tf-mb-50 .tf-itinerary-downloader-option a {
-  color: var(--tf-primary);
+.single-tf_tours .tf-single-template__two .tf-itinerary-wrapper.tf-mb-50 .tf-itinerary-downloader-option p {
+  color: var(--tf-text-paragraph);
 }
 
 .single-tf_tours .tf-single-template__three .tf-itinerary-wrapper {
@@ -1308,13 +1308,13 @@
 .single-tf_tours .tf-single-template__three .tf-itinerary-wrapper .section-title a {
   display: flex;
   flex-direction: row;
-  color: var(--tf-text-heading);
+  color: #ffffff;
   font-size: 1rem;
   font-weight: 700;
   line-height: 1.5;
   word-wrap: break-word;
   border: none;
-  background: var(--tf-brand-lite);
+  background: var(--tf-primary);
   min-width: 211px;
   height: fit-content;
   padding: 12px;
@@ -1322,12 +1322,22 @@
   align-items: center;
   justify-content: center;
   text-decoration: none;
+  -webkit-transition: all 0.25s ease-in-out;
+  -moz-transition: all 0.25s ease-in-out;
+  -o-transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
 }
 
 @media only screen and (max-width: 1024px) {
   .single-tf_tours .tf-single-template__three .tf-itinerary-wrapper .section-title a {
     font-size: 0.75rem;
   }
+}
+
+.single-tf_tours .tf-single-template__three .tf-itinerary-wrapper .section-title a:hover {
+  color: #ffffff;
+  background-color: var(--tf-brand-dark);
+  border-color: var(--tf-brand-dark);
 }
 
 .single-tf_tours .tf-single-template__three .tf-itinerary-wrapper .tf-itinerary-wrapper {
@@ -2582,7 +2592,8 @@ div#tf-contact-info {
 
 .single-tf_tours .tf-single-template__two .tf-tour-details-right .tf-booking-bttns button {
   margin-top: 8px;
-  padding: 16px 24px;
+  padding: 12px 20px;
+  width: 260px;
 }
 
 .single-tf_tours .tf-single-template__two .tf-tour-details-right .tf-tour-booking-advantages {

@@ -58,7 +58,14 @@
 
   }
 
-  .tour-option-itinerary-notice {
+  .tour-option-itinerary-notice{
+    .tf-field-notice-content {
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+  }
+
+  .tour-option-itinerary-notice{
     .tf-field-notice-content {
       font-size: 1rem;
       line-height: 1.5;

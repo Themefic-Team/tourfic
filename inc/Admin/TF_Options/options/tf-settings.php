@@ -1655,7 +1655,7 @@ TF_Settings::option( 'tf_settings', array(
 				),
 			),
 		),
-		'room_config'           => array(
+		'room_config'=> array(
 			'title'  => __( 'Room Config', 'tourfic' ),
 			'parent' => 'hotel_option',
 			'icon'   => 'fa fa-cog',
@@ -1670,7 +1670,6 @@ TF_Settings::option( 'tf_settings', array(
 					'type'    => 'notice',
 					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-hotel-options/#room" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
 				),
-
 				array(
 					'id'       => 'enable_child_age_limit',
 					'type'     => 'switch',

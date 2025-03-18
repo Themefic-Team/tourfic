@@ -284,16 +284,17 @@
             }
             .tf-itinerary-wrapper.tf-mb-50{
                 .tf-itinerary-downloader-option{
-                    background-color: $color-primary;
+                    background-color: $color-filling-fg;
                     @include bd-radius(5px);;
                     .itinerary-downloader-left {
                         overflow: hidden;
                     }
-                    h3,p{
-                        color: $color-white;
+                    h3{
+                        color: $color-heading;
                     }
-                    a{
-                        color: $color-primary;
+                    
+                    p{
+                        color: $color-text;
                     }
                     
                 }
@@ -319,13 +320,13 @@
                 .section-title a {
                     display: flex;
                     flex-direction: row;
-                    color: $color-heading;
+                    color: $color-white;
                     font-size: 1rem;
                     font-weight: 700;
                     line-height: 1.5;
                     word-wrap: break-word;
                     border: none;
-                    background: $color-brand-lite;
+                    background: $color-primary;
                     min-width: 211px;
                     height: fit-content;
                     padding: 12px;
@@ -333,8 +334,14 @@
                     align-items: center;
                     justify-content: center;
                     text-decoration: none;
+                    @include transition();
                     @media #{$max1024}{
                         font-size: 0.75rem;
+                    }
+                    &:hover{
+                        color: $color-white;
+                        background-color: $color-brand-dark;
+                        border-color: $color-brand-dark;
                     }
                 }
                 .tf-itinerary-wrapper{

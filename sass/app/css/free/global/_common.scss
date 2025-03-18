@@ -522,7 +522,7 @@ h3.section-heading {
             grid-template-columns: auto auto;
             justify-content: space-between;
             align-items: center;
-            column-gap: 20px;
+            column-gap: 15px;
             label {
                 color: $color-text;
                 font-weight: 500;
@@ -573,7 +573,8 @@ h3.section-heading {
                 display: inline-block;
                 content: "\f005";
                 color: $color-warning;
-                font-size: 1.125rem;
+                font-size: 1rem;
+                font-weight: 400;   
             }
             &:hover~label {
                 &:before {
@@ -582,13 +583,7 @@ h3.section-heading {
                     font-weight: 900;
                 }
             }
-            &:hover {
-                &:before {
-                    content: "\f005";
-                    color: $color-warning;
-                    font-weight: 900;
-                }
-            }
+           
         }
         >.star-cb-clear+label {
             text-indent: 9999px;
@@ -610,10 +605,7 @@ h3.section-heading {
         }
         &:hover {
             >input+label {
-                &:before {
-                    content: "\f005";
-                    color: $color-warning;
-                }
+               
                 &:hover~label {
                     &:before {
                         content: "\f005";
