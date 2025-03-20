@@ -14193,7 +14193,8 @@ div#tf-destinationautocomplete-list div:before {
 
 .tf-single-template__three .tf-questions-wrapper {
   background-color: transparent;
-  padding: 0;
+  padding: 32px;
+  background-color: var(--tf-filling-foreground);
 }
 
 .tf-single-template__three .tf-questions-wrapper h2 {
@@ -14241,7 +14242,7 @@ div#tf-destinationautocomplete-list div:before {
 }
 
 .tf-single-template__three .tf-questions-wrapper .tf-questions .tf-questions-col .tf-question.tf-active {
-  background: var(--tf-filling-foreground);
+  background: var(--tf-filling-background);
   padding: 24px;
   display: flex;
   flex-direction: column;
@@ -15186,7 +15187,7 @@ div#tf-destinationautocomplete-list div:before {
 }
 
 .tf-single-template__three .tf-reviews-wrapper .tf-reviews-slider .tf-reviews-item {
-  background: #FDF9F3;
+  background: var(--tf-filling-background);
   margin-right: 35px;
   padding: 24px;
   display: flex;

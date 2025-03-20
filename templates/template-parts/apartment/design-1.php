@@ -304,8 +304,8 @@ use \Tourfic\Classes\Apartment\Apartment;
                                 <div class="tf-apartment-amenities">
 									<?php if ( ! empty( $all_amenities ) ):
 										foreach ( array_slice( $all_amenities, 0, 10 ) as $amenity ) :
-											$feature = get_term_by( 'id', $amenity['feature'], 'apartment_feature' );
-											$feature_meta = get_term_meta( $amenity['feature'], 'tf_apartment_feature', true );
+											$feature =  isset( $amenity['feature'] ) ? get_term_by( 'id', $amenity['feature'], 'apartment_feature' ) : '';
+											$feature_meta = isset( $amenity['feature'] ) ? get_term_meta( $amenity['feature'], 'tf_apartment_feature', true ) : '';
 											$f_icon_type = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
 											if ( $f_icon_type == 'icon' ) {
 												$feature_icon = '<i class="' . $feature_meta['apartment-feature-icon'] . '"></i>';

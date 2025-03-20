@@ -19,12 +19,12 @@
         <?php if(!empty($faqfirstArray)){ ?>
         <div class="tf-questions-col">
             <?php foreach ($faqfirstArray as $key => $faq) { ?>
-            <div class="tf-question">
+            <div class="tf-question <?php echo $key == 0 ? 'tf-active' : ''; ?>">
                 <div class="tf-faq-head">
                     <span><?php echo esc_html( $faq['title'] ); ?>
                     <i class="fa-solid fa-chevron-down"></i></span>
                 </div>
-                <div class="tf-question-desc">
+                <div class="tf-question-desc" style="<?php echo $key == 0 ? 'display: block;' : ''; ?>">
                 <?php echo wp_kses_post( $faq['description'] ); ?>
                 </div>
             </div>
@@ -33,12 +33,12 @@
         <?php } if(!empty($faqsecondArray)){ ?>
         <div class="tf-questions-col">
             <?php foreach ($faqsecondArray as $key => $faq) { ?>
-            <div class="tf-question">
+            <div class="tf-question <?php echo $key == 0 ? 'tf-active' : ''; ?>">
                 <div class="tf-faq-head">
                     <span><?php echo esc_html( $faq['title'] ); ?>
                     <i class="fa-solid fa-chevron-down"></i></span>
                 </div>
-                <div class="tf-question-desc">
+                <div class="tf-question-desc" style="<?php echo $key == 0 ? 'display: block;' : ''; ?>">
                 <?php echo wp_kses_post( $faq['description'] ); ?>
                 </div>
             </div>

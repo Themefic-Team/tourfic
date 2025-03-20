@@ -1638,7 +1638,8 @@
         //  FAQ Section
         .tf-questions-wrapper {
             background-color: transparent;
-            padding: 0;
+            padding: 32px;
+            background-color: $color-filling-fg;
             h2{
                 color: $color-heading;
                 font-size: 2rem;
@@ -1673,7 +1674,7 @@
                             transition: 0.3s;
                         }
                         &.tf-active {
-                            background: $color-filling-fg;
+                            background: $color-filling-bg;
                             padding: 24px;
                             display: flex;
                             flex-direction: column;
@@ -2430,7 +2431,7 @@
             .tf-reviews-slider {
 
                 .tf-reviews-item {
-                    background: $color-yellow-light;
+                    background: $color-filling-bg;
                     margin-right: 35px;
                     padding: 24px;
                     display: flex;
