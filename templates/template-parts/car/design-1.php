@@ -487,29 +487,31 @@ $tf_cars_slug = get_option('car_slug');
                                 <?php } ?>
                             <?php } ?>
                         </div>
-                        <?php if(!empty($car_instructions_content)){ ?>
-                        <div class="tf-instraction-btn tf-mt-16">
-                            <span class="tf-instraction-showing"><?php esc_html_e("Pick-up and Drop-off instructions", "tourfic"); ?></span>
-                            
-                            <div class="tf-car-instraction-popup">
-                                <div class="tf-instraction-popup-warp">
+                        <?php if($car_instructions_section_status){ ?>
+                            <div class="tf-instraction-btn tf-mt-16">
+                                <span class="tf-instraction-showing"><?php esc_html_e("Pick-up and Drop-off instructions", "tourfic"); ?></span>
+                                
+                                <div class="tf-car-instraction-popup">
+                                    <div class="tf-instraction-popup-warp">
 
-                                    <div class="tf-instraction-popup-header tf-flex tf-flex-align-center tf-flex-space-bttn">
-                                        <h3><?php esc_html_e("Pick-up and Drop-off instructions", "tourfic"); ?></h3>
-                                        <div class="tf-close-popup">
-                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M15 5L5 15M5 5L15 15" stroke="#566676" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
-                                            </svg>
+                                        <div class="tf-instraction-popup-header tf-flex tf-flex-align-center tf-flex-space-bttn">
+                                            <h3><?php esc_html_e("Pick-up and Drop-off instructions", "tourfic"); ?></h3>
+                                            <div class="tf-close-popup">
+                                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M15 5L5 15M5 5L15 15" stroke="#566676" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                                                </svg>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="tf-instraction-content-wraper">
-                                        <?php echo $car_instructions_content; ?>
-                                    </div>
+                                        <?php if(!empty($car_instructions_content)): ?>
+                                            <div class="tf-instraction-content-wraper">
+                                                <?php echo $car_instructions_content; ?>
+                                            </div>    
+                                        <?php endif; ?>
 
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         <?php } ?>
 
                         <?php do_action( 'tf_car_cancellation', $post_id ); ?>

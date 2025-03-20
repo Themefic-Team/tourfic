@@ -124,7 +124,6 @@ TF_Metabox::metabox( 'tf_room_opt', array(
                 array(
                     'id'          => 'children_age_limit',
                     'type'        => 'number',
-                    'is_pro'      => true,
                     'label'       => __( 'Child age limit', 'tourfic' ),
                     'subtitle'    => __( 'Maximum age of a children.', 'tourfic' ),
                     'description' => __( 'keep blank if don\'t want to add', 'tourfic' ),
@@ -294,39 +293,13 @@ TF_Metabox::metabox( 'tf_room_opt', array(
                     'class'   => 'tf-field-class',
                 ),
                 array(
-                    'id'      => '',
-                    'type'    => 'switch',
-                    'label'   => __( 'Enable Deposit', 'tourfic' ),
-                    'is_pro'  => true,
-                    'default' => false,
-                ),
-                array(
-                    'id'         => 'deposit_type',
-                    'type'       => 'select',
-                    'label'      => __( 'Deposit Type', 'tourfic' ),
-                    'subtitle'   => __( 'Select Deposit Type: Percentage or Fixed', 'tourfic' ),
-                    'options'    => array(
-                        'none'    => __( 'None', 'tourfic' ),
-                        'percent' => __( 'Percent', 'tourfic' ),
-                        'fixed'   => __( 'Fixed', 'tourfic' ),
-                    ),
-                    'default'    => 'none',
-                    'dependency' => array( 'allow_deposit', '!=', 'false' ),
-                ),
-
-                array(
-                    'id'         => 'deposit_amount',
-                    'type'       => 'number',
-                    'label'      => __( 'Deposit Amount', 'tourfic' ),
-                    'subtitle'   => __( 'Insert your deposit amount', 'tourfic' ),
-                    'attributes' => array(
-                        'min' => '0',
-                    ),
-                    'dependency' => array(
-                        array( 'deposit_type', '!=', 'none' ),
-                        // array( 'allow_deposit', '!=', 'false' ),
-                    ),
-                ),
+					'id'    => 'tf-pro-notice',
+					'type'  => 'notice',
+					'class' => 'tf-pro-notice',
+					'notice' => 'info',
+					'icon' => 'ri-information-fill',
+					'content' => wp_kses_post(__( 'We\'re offering some extra features like <b>deposit</b> in our pro plan. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of these fantastic options!</a>', 'tourfic' )),
+				),
 			),
 		),
 
@@ -361,16 +334,7 @@ TF_Metabox::metabox( 'tf_room_opt', array(
                     'default'   => false,
                     'is_search_able' => true
                 ),
-                array(
-                    'id'      => '',
-                    'type'    => 'switch',
-                    'label'   => __( 'Enable Availability by Date', 'tourfic' ),
-                    'is_pro'  => true,
-                    'default' => true,
-                    'attributes'  => array(
-                        'class' => 'tf_room_single_availability_by_date',
-                    ),
-                ),
+               
                 array(
                     'id'        => '',
                     'type'      => 'room_availability',
@@ -391,6 +355,15 @@ TF_Metabox::metabox( 'tf_room_opt', array(
                     'dependency' => array( 'reduce_num_room', '==', '1' ),
                     'function'   => 'tf_remove_order_ids_from_room',
                 ),
+
+                array(
+					'id'    => 'tf-pro-notice',
+					'type'  => 'notice',
+					'class' => 'tf-pro-notice',
+					'notice' => 'info',
+					'icon' => 'ri-information-fill',
+					'content' => wp_kses_post(__( 'We\'re offering some extra features like <b>Availability Calendar</b> in our pro plan. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of these fantastic options!</a>', 'tourfic' )),
+				),
 			),
 		),
 
@@ -404,17 +377,13 @@ TF_Metabox::metabox( 'tf_room_opt', array(
                     'content' => __( 'iCal Sync', 'tourfic' ),
                 ),
                 array(
-                    'id'          => '',
-                    'type'        => 'ical',
-                    'label'       => __( 'iCal URL', 'tourfic' ),
-                    'placeholder' => __( 'https://website.com', 'tourfic' ),
-                    'button_text' => __( 'Import', 'tourfic' ),
-                    'button_class'   => 'room-ical-import',
-                    'attributes'  => array(
-                        'class' => 'ical_url_input',
-                    ),
-                    'is_pro'      => true
-                )
+					'id'    => 'tf-pro-notice',
+					'type'  => 'notice',
+					'class' => 'tf-pro-notice',
+					'notice' => 'info',
+					'icon' => 'ri-information-fill',
+					'content' => wp_kses_post(__( 'We\'re offering some extra features like <b>iCal synchronization</b> in our pro plan. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of these fantastic options!</a>', 'tourfic' )),
+				),
 			),
 		),
 

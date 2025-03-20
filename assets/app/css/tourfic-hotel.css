@@ -577,6 +577,7 @@
 
 .single-tf_hotel .tf-single-template__two .tf-rooms-sections .tf-rooms .tf-availability-table > tbody tr td .hotel-room-book {
   width: 100%;
+  margin-top: 10px;
 }
 
 .single-tf_hotel .tf-single-template__two .tf-rooms-sections .tf-rooms .tf-availability-table > tbody tr td.description {
