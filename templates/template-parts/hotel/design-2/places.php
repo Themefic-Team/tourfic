@@ -15,8 +15,8 @@ $places_meta = !empty($meta["nearby-places"]) ? Helper::tf_data_types($meta["nea
             $place_icon = '<i class="' . $place['place-icon'] . '"></i>';
             ?>
             <li>
-                <span> <?php echo wp_kses_post($place_icon); ?> <?php echo esc_html($place["place-title"]) ?></span>
-                <span> <?php echo esc_html($place["place-dist"]) ?></span>
+                <span> <?php echo wp_kses_post($place_icon); ?> <?php echo esc_html($place["place-title"]) ?></span> 
+                <span> <?php echo wp_kses_post($place["place-dist"]) ?></span>
             </li>
             <?php } ;?>
         </ul>

@@ -1,9 +1,8 @@
-<?php
+<?php 
 
 use Tourfic\Classes\Helper;
-
 $places_section_title = !empty($meta["section-title"]) ? $meta["section-title"] : "";
-$places_meta = isset($meta["nearby-places"]) ? Helper::tf_data_types($meta["nearby-places"]) : array();
+$places_meta = !empty($meta["nearby-places"]) ? Helper::tf_data_types($meta["nearby-places"]) : array();
 ?>
 
 <?php if( count($places_meta) > 0 ) : ?>

@@ -1,9 +1,12 @@
 <?php if ( $tc ) { ?>
-<!-- Tourfic Hotel Terms and conditions -->
-<div class="tf-toc-wrapper tf-mb-50 tf-template-section">
-    <div class="tf-section-head">
-        <h2 class="tf-title tf-section-title"><?php echo !empty($meta['tc-section-title']) ? esc_html($meta['tc-section-title']) : ''; ?></h2>
+<!-- Hotel Policies Starts -->        
+<div class="tf-policies-wrapper tf-section" id="tf-hotel-policies">            
+    <h2 class="tf-section-title">
+        <?php echo !empty($meta['tc-section-title']) ? esc_html($meta['tc-section-title']) : esc_html__("Hotel Terms & Conditions","tourfic"); ?>
+    </h2>  
+    <div class="tf-policies">
         <?php echo wp_kses_post(wpautop( $tc )); ?>
     </div>
 </div>
+<!-- Hotel Policies end -->
 <?php } ?>

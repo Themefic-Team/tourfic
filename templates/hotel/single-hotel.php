@@ -149,11 +149,11 @@ while ( have_posts() ) : the_post();
 	$tf_hotel_selected_template = $tf_hotel_selected_check;
 
     if( $tf_hotel_selected_template == "design-1" ){
-		include TF_TEMPLATE_PART_PATH . 'hotel/design-2.php';
-	}elseif( $tf_hotel_selected_template == "design-2" ){
-		include TF_TEMPLATE_PART_PATH . 'hotel/design-3.php';
-	}else{
 		include TF_TEMPLATE_PART_PATH . 'hotel/design-1.php';
+	}elseif( $tf_hotel_selected_template == "design-2" ){
+		include TF_TEMPLATE_PART_PATH . 'hotel/design-2.php';
+	}else{
+		include TF_TEMPLATE_PART_PATH . 'hotel/design-legacy.php';
 	}
 endwhile;
 

@@ -20,16 +20,16 @@ if ( !isset( $_GET['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field(wp_unsl
 
 if ( Helper::tf_is_woo_active() ) {
 	if ( ( ! empty( $_GET['type'] ) && $_GET['type'] == "tf_tours" && $tf_tour_arc_selected_template == "design-1" ) || ( ! empty( $_GET['type'] ) && $_GET['type'] == "tf_hotel" && $tf_hotel_arc_selected_template == "design-1" ) ) {
-		include TF_TEMPLATE_PART_PATH . 'search/design-2.php';
+		include TF_TEMPLATE_PART_PATH . 'search/design-1.php';
 	} elseif ( ( ! empty( $_GET['type'] ) && $_GET['type'] == "tf_tours" && $tf_tour_arc_selected_template == "design-2" ) || ( ! empty( $_GET['type'] ) && $_GET['type'] == "tf_hotel" && $tf_hotel_arc_selected_template == "design-2" ) || ( ! empty( $_GET['type'] ) && $_GET['type'] == "tf_apartment" && $tf_apartment_arc_selected_template == "design-1" ) ) {
-		include TF_TEMPLATE_PART_PATH . 'search/design-3.php';
+		include TF_TEMPLATE_PART_PATH . 'search/design-2.php';
 	}  elseif ( ( ! empty( $_GET['type'] ) && $_GET['type'] == "tf_tours" && $tf_tour_arc_selected_template == "design-3" ) ||
                 ( ! empty( $_GET['type'] ) && $_GET['type'] == "tf_hotel" && $tf_hotel_arc_selected_template == "design-3" ) ||
 	            ( ! empty( $_GET['type'] ) && $_GET['type'] == "tf_apartment" && $tf_apartment_arc_selected_template == "design-2" )
     ) {
-		include TF_TEMPLATE_PART_PATH . 'search/design-4.php';
+		include TF_TEMPLATE_PART_PATH . 'search/design-3.php';
 	} else {
-		include TF_TEMPLATE_PART_PATH . 'search/design-1.php';
+		include TF_TEMPLATE_PART_PATH . 'search/design-legacy.php';
 	}
 } else {
 	?>

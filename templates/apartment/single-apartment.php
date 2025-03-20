@@ -122,9 +122,9 @@ while ( have_posts() ) : the_post();
 	$tf_apartment_selected_template = $tf_apartment_selected_check;
     
     if( $tf_apartment_selected_template == "design-1" ){
-		include TF_TEMPLATE_PART_PATH . 'apartment/design-2.php';
-	}else{
 		include TF_TEMPLATE_PART_PATH . 'apartment/design-1.php';
+	}else{
+		include TF_TEMPLATE_PART_PATH . 'apartment/design-legacy.php';
 	}
 
 endwhile;
