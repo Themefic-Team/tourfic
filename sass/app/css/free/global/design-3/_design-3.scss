@@ -1726,6 +1726,7 @@
                 display: flex;
                 flex-direction: column;
                 gap: 16px;
+                overflow-x: hidden;
                 p{
                     color: $color-text;
                     margin: 0;
@@ -2582,6 +2583,10 @@
                     background-color: $color-brand-dark;
                     color: $color-white;
                 }
+            }
+            .tf-all-reviews{
+                margin: 20px 0;
+                color: $color-primary;
             }
         }
 

@@ -1330,10 +1330,10 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 							?>
                                 <input type="hidden" id="hotel_room_depo" value="false">
                                 <div class="roomselectissue"></div>
-                                <a class="tf_air_service tf-hotel-booking-popup-btn" href="javascript:;" data-room="<?php echo esc_attr( $room_id ); ?>"><?php esc_html_e( 'Continue', 'tourfic' ); ?></a>
+                                <a class="tf_air_service tf-hotel-booking-popup-btn tf_btn" href="javascript:;" data-room="<?php echo esc_attr( $room_id ); ?>"><?php esc_html_e( 'Continue', 'tourfic' ); ?></a>
 
                             <?php } else { ?>
-                                <button class="tf-hotel-booking-popup-btn tf-reserve-button" type="submit"><?php echo esc_html( $tf_hotel_reserve_button_text ); ?></button>
+                                <button class="tf-hotel-booking-popup-btn tf-reserve-button tf_btn" type="submit"><?php echo esc_html( $tf_hotel_reserve_button_text ); ?></button>
                             <?php } ?>
 						<?php } else { ?>
                             <button class="hotel-room-book tf_btn tf_btn_large tf_btn_sharp" type="submit"><?php echo esc_html( $tf_hotel_reserve_button_text ); ?></button>

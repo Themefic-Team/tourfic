@@ -50,7 +50,7 @@ abstract Class TF_Booking_Details {
 
 		} else {
 			$current_user = wp_get_current_user();
-
+            $total_pages = '';
 			// get user role
 			$current_user_role = $current_user->roles[0];
 

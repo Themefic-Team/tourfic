@@ -2263,6 +2263,7 @@
   -ms-flex-align: center;
   align-items: center;
   gap: 4px;
+  color: #ffffff;
 }
 
 .single-tf_apartment .tf-single-template__one .host-details .tf-host-rating-wrapper .tf-host-rating {
@@ -2271,6 +2272,7 @@
 
 .single-tf_apartment .tf-single-template__one .host-details .tf-host-rating-wrapper h6 {
   margin-bottom: 0;
+  color: #ffffff;
 }
 
 .single-tf_apartment .tf-single-template__one .host-details .host-top {

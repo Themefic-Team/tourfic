@@ -87,6 +87,7 @@
                     @include flexbox();
                     @include align-items(center);
                     gap: 4px;
+                    color: $color-white;
                 
                     .tf-host-rating {
                         font-weight: 600;
@@ -94,6 +95,7 @@
                 
                     h6 {
                         margin-bottom: 0;
+                        color: $color-white;
                     }
                 }
                 

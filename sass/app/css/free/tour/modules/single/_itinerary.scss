@@ -320,13 +320,13 @@
                 .section-title a {
                     display: flex;
                     flex-direction: row;
-                    color: $color-white;
+                    color: $color-text;
                     font-size: 1rem;
                     font-weight: 700;
                     line-height: 1.5;
                     word-wrap: break-word;
                     border: none;
-                    background: $color-primary;
+                    background: $color-filling-fg;
                     min-width: 211px;
                     height: fit-content;
                     padding: 12px;
@@ -340,8 +340,8 @@
                     }
                     &:hover{
                         color: $color-white;
-                        background-color: $color-brand-dark;
-                        border-color: $color-brand-dark;
+                        background-color: $color-primary;
+                        border-color: $color-primary;
                     }
                 }
                 .tf-itinerary-wrapper{

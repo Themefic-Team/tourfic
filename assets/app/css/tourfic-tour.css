@@ -1308,13 +1308,13 @@
 .single-tf_tours .tf-single-template__three .tf-itinerary-wrapper .section-title a {
   display: flex;
   flex-direction: row;
-  color: #ffffff;
+  color: var(--tf-text-paragraph);
   font-size: 1rem;
   font-weight: 700;
   line-height: 1.5;
   word-wrap: break-word;
   border: none;
-  background: var(--tf-primary);
+  background: var(--tf-filling-foreground);
   min-width: 211px;
   height: fit-content;
   padding: 12px;
@@ -1336,8 +1336,8 @@
 
 .single-tf_tours .tf-single-template__three .tf-itinerary-wrapper .section-title a:hover {
   color: #ffffff;
-  background-color: var(--tf-brand-dark);
-  border-color: var(--tf-brand-dark);
+  background-color: var(--tf-primary);
+  border-color: var(--tf-primary);
 }
 
 .single-tf_tours .tf-single-template__three .tf-itinerary-wrapper .tf-itinerary-wrapper {

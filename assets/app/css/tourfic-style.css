@@ -69,7 +69,7 @@ input[type="submit"].tf_btn:focus,
 
 input[type="submit"].tf_btn_secondary,
 .tf_btn_secondary {
-  color: #060D1C;
+  color: #ffffff;
   background-color: var(--tf-brand-dark);
   border-color: var(--tf-brand-dark);
 }
@@ -8740,8 +8740,8 @@ div#tf-destinationautocomplete-list div:before {
 .single-tf_tours .tf-single-template__one #tf-faq-item,
 .single-tf_apartment .tf-single-template__one #tf-faq-item {
   border-bottom: 1px solid var(--tf-border-lite);
-  margin-bottom: 10px;
-  padding-bottom: 10px;
+  margin: 0;
+  padding: 0;
 }
 
 .single-tf_hotel .tf-single-template__one #tf-faq-item .tf-faq-title,
@@ -8757,18 +8757,21 @@ div#tf-destinationautocomplete-list div:before {
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
+  padding: 20px 0;
 }
 
 .single-tf_hotel .tf-single-template__one #tf-faq-item .tf-faq-title h4,
 .single-tf_tours .tf-single-template__one #tf-faq-item .tf-faq-title h4,
 .single-tf_apartment .tf-single-template__one #tf-faq-item .tf-faq-title h4 {
   font-size: 1.125rem;
+  margin-bottom: 0;
 }
 
 .single-tf_hotel .tf-single-template__one #tf-faq-item .tf-faq-title.active,
 .single-tf_tours .tf-single-template__one #tf-faq-item .tf-faq-title.active,
 .single-tf_apartment .tf-single-template__one #tf-faq-item .tf-faq-title.active {
-  margin-bottom: 15px;
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 .single-tf_hotel .tf-single-template__one #tf-faq-item .arrow,
@@ -14300,6 +14303,7 @@ div#tf-destinationautocomplete-list div:before {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  overflow-x: hidden;
 }
 
 .tf-single-template__three .tf-policies-wrapper .tf-policies p {
@@ -15373,6 +15377,11 @@ div#tf-destinationautocomplete-list div:before {
 .tf-single-template__three .tf-single-widgets .tf_btn_lite:hover, .tf-single-template__three .tf-single-widgets .tf_btn_lite:focus {
   background-color: var(--tf-brand-dark);
   color: #ffffff;
+}
+
+.tf-single-template__three .tf-single-widgets .tf-all-reviews {
+  margin: 20px 0;
+  color: var(--tf-primary);
 }
 
 .tf-single-template__three .tf-popup-video-item {
