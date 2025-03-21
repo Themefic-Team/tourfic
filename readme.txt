@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, car-rental, multivendor-marketplace
 Requires at least: 5.4
 Tested up to: 6.7
-Stable tag: 2.15.20
+Stable tag: 2.15.21
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -372,6 +372,12 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
+= 2.15.21 – March 21, 2025 =
+
+- Added: iCal export option for apartments.
+- Fixed: Hotel room iCal import issue.
+- Fixed: Apartment availability calendar date selection issue.
+
 = 2.15.20 – March 10, 2025 =
 
 - Fixed: Scrolling for the hotel availability issue has been resolved.
@@ -438,34 +444,6 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 - Fixed: Issue with the Frontend Dashboard Metabox repeater (Pro).
 - Improved: Archive Map Template design (Pro).
 - Improved: Overall system stability.
-
-= 2.15.9 – 02 January 2025 =
-
-- Fixed: Minor bugs and issues resolved.
-- Fixed: Frontend dashboard calendar issue addressed.
-- Compatibility: Now compatible with Elementor 3.26.3.
-
-= 2.15.8 – 31 December 2024 =
-
-- Fixed: Resolved the hotel availability issue.
-- Updated: Updated the readme.txt file and plugin information.
-
-= 2.15.7 – 28 December 2024 =
-
-- Updated readme.txt
-
-= 2.15.6 – 28 December 2024 =
-
-- Introduced: New archive and Search templates with map view for Hotel, Tour, and Apartment.
-- Introduced: Map view widget added for all templates.
-- Improved: New design (design-4) introduced for the search form shortcode.
-- Improved: Added card preloader in the Frontend Dashboard (Pro).
-- Improved: Updated license information label.
-- Fixed: Location selection issue resolved in the Frontend Dashboard (Pro).
-- Fixed: Room block issue resolved.
-- Fixed: Fixed FAQ display issue for hotels.
-- Fixed: Room availability issue resolved.
-- Compatibility: WPML compatibility added for setting fields.
 
 **Old Changelog can be found [here](https://themefic.com/tourfic/changelog/)**.
 
