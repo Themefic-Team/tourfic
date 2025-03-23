@@ -1,5 +1,5 @@
 
-<div class="tf-main-wrapper tf-archive-template__one" data-fullwidth="true">
+<div class="tf-main-wrapper tf-archive-template__legacy" data-fullwidth="true">
 	<?php
 
 	use \Tourfic\Classes\Helper;

@@ -1,1003 +1,921 @@
-.single-tf_hotel,
-.single-tf_tours,
-.single-tf_apartment{
-    .tf-single-template{
-        &__one{
-            .tf_features {
-                .feature-list-title {
-                    margin: 0;
-                    padding-left: 8px;
-                    text-transform: capitalize;
-                    letter-spacing: 0.5px;
-                    font-size: 0.813rem;
-                }
-                i {
-                    color: $color-success;
-                }
-                .single-feature-box {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    align-content: center;
-                    margin-right: 10px;
-                    padding: 6px 10px;
-                    border-radius: 4px;
-                    border: 1px solid $color-filling-fg;
-                    background-color: $color-filling-fg;
-                    margin-top: 10px;
-                }
-                .tf-feature-list {
-                    display: flex;
-                    align-items: center;
-                    justify-content: flex-start;
-                    flex-wrap: wrap;
-                }
+.tf-single-template,
+.tf-archive-template {
+    &__two{
+        padding: 56px 0px;
+        .tf-btn{
+            height: auto;
+        }
+        .tf-template-section:last-child{
+            margin-bottom: 0px;
+            p{
+                margin-bottom: 0;
             }
-            .tf-toc-wrap{
-                background-color: transparent;
-                td {
-                    white-space: break-spaces;
-                }
-                .tf-toc-inner{
-                    p{
-                        margin-bottom: 0;
-                    }
-                }
-            }
-            .tf-highlight-wrapper{
-                background-color: $color-filling-fg;
-            }
-            .tf-travel-itinerary-wrapper{
-                background-color: $color-filling-fg;
-            }
-            .tf-suggestion-wrapper{
-                background-color: $color-filling-fg;
-            }
+        }
+        .tf-section-title{
+            margin-bottom: 15px;
+        }
+    }
+}
 
-            .tf-faq-sec-title {
-                margin-bottom: 60px;
-                text-align: center;
-                @media #{$max768} {
-                    margin-bottom: 20px;
+.tf-single-template{
+    &__two{
+        // Header
+        .tf-single-head{
+            .tf-head-info{
+                align-items: baseline;
+                .tf-icon {
+                    height: 50px;
+                    width: 50px;
+                    background: $color-white;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border-radius: 50px;
                 }
-                p {
-                    max-width: 480px;
-                    margin: auto;
-                }
-            }
-            .tf-faq-content-wrapper {
-                @include flexbox();
-                gap: 35px;
-                @media #{$max1024} {
-                    display: grid;
-                }
-            }
-            .tf-faq-items-wrapper {
-                flex: 5;
-            }
-            #tf-faq-item {
-                border-bottom: 1px solid $color-border-lite;
-                margin: 0;
-                padding: 0;
-                .tf-faq-title {
+                .tf-icon:hover {
                     cursor: pointer;
-                    transition: 0.2s ease;
-                    @include flexbox();
-                    @include align-items(center);
-                    padding: 20px 0;
-                    h4{
-                        font-size: 1.125rem;
-                        margin-bottom: 0;
-                    }
-                    &.active {
-                        margin-bottom: 0;
-                        padding-bottom: 0;
-                    }
                 }
-        
-                .arrow {
-                    transition: 0.25s ease;
-                    transform: rotate(-90deg);
-                    font-size: 1.25rem;
+                .tf-icon:hover i {
+                    transform: scale(1.2);
                     color: $color-primary;
                 }
-                .arrow-animate {
-                    transform: rotate(0deg);
-                }
-                .tf-faq-desc {
-                    background-color: $color-white;
-                    display: none;
-                    padding: 20px;
-                    color: $color-text;
-                    margin-top: -2px;
-                    z-index: 999;
-                    position: relative;
-                    border-bottom-left-radius: 5px;
-                    border-bottom-right-radius: 5px;
-                }
-            }
-            .tf-faq-title {
-                h4 {
-                    width: 100%;
-                    color: $color-heading;
-                }
-            }
-        }
-    }
-}
-
-.single-tf_carrental{
-    .tf-single-template{
-        &__one{
-            .tf-single-car-details-warper{
-                padding: 32px 0;
-                display: flex;
-                gap: 32px;
-                @media #{$max768}{
-                    flex-wrap: wrap;
-                }
-                .tf-car-details-column{
-                    width: calc(100% - 472px);
+                .tf-icon i {
+                    transition: all .3s ease;
+                    height: 50px;
+                    width: 50px;
+                    background: $color-filling-fg;
                     display: flex;
-                    gap: 32px;
-                    flex-wrap: wrap;
-                    @media #{$max1024}{
-                        width: calc(100% - 402px);
+                    align-items: center;
+                    justify-content: center;
+                    border-radius: 50px;
+                }
+                .tf-share{
+                    a{
+                        font-size: 1rem;
+                        text-decoration: none;
                     }
+                }
+                .share-tour-content{
                     @media #{$max768}{
-                        width: 100%;
+                        left: auto;
+                        right: 0px;
                     }
-                    h3{
-                        color: $color-heading;
-                        font-size: 1.313rem;
-                        font-weight: 400;
-                        margin-bottom: 16px;
-                        margin-top: 0px;
+                    @media #{$max575}{
+                        left: 0;
+                        right: auto;
                     }
-                    .tf-car-title{
-                        h1{
-                            color: $color-heading;
-                            font-size: 1.75rem;
+                    .tf-dropdown-share-content{
+                        background: $color-filling-fg;
+                        border-radius: 8px;
+                        padding: 16px 10px;
+                        width: 280px;
+                        text-align: center;
+                        h4{
+                            font-size: 0.875rem;
+                            color: $color-primary;
                             font-weight: 600;
                             margin-bottom: 10px;
+                            display: block;
                         }
-                        .breadcrumb{
-                            ul{
-                                margin: 0;
-                                padding: 0;
-                                li{
-                                    color: $color-text;
-                                    font-size: 1rem;
-                                    font-weight: 400;
-                                    display: inline-block;
-                                    a{
-                                        color: $color-text;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    
-                    .tf-template-part{
-                        width: 100%;
-                    }
-                }
-            }
-            .tf-car-instraction-popup,
-            .tf-car-cancellation-popup{
-                position: fixed;
-                left: 0;
-                top: 0;
-                right: 0;
-                bottom: 0;
-                z-index: 9999;
-                background-color: rgba(0,0,0,.2);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                display: none;
-                .tf-instraction-popup-warp,
-                .tf-cancellation-popup-warp{
-                    border-radius: 16px;
-                    background: $color-white;
-                    padding: 16px 24px;
-                    width: 850px;
-                    @media #{$max768}{
-                        width: 100%;
-                    }
-                    .tf-instraction-popup-header,
-                    .tf-cancellation-popup-header{
-                        margin-bottom: 24px;
-                        flex-wrap: nowrap;
-                        h3{
-                            color: $color-heading;
-                            font-size: 1.313rem;
-                            font-weight: 700;
-                            margin: 0;
-                            text-align: left;
-                        }
-                        .tf-close-popup{
-                            cursor: pointer;
-                        }
-                    }
-                    .tf-instraction-content-wraper,
-                    .tf-cancellation-content-wraper{
-                        text-align: left;
-                        color: $color-text;
-                        font-size: 1rem;
-                        font-weight: 400;
-                        max-height: 260px;
-                        overflow: auto;
-                        scrollbar-width: thin;
-                        scrollbar-color: $scrollbar-color;
-
-                        /* Chrome, Edge, and Safari */
-                        *::-webkit-scrollbar {
-                            width: 5px;
-                        }
-                        *::-webkit-scrollbar-track {
-                            background: $color-white;
-                        }
-                        &::-webkit-scrollbar-thumb {
-                            background-color: $scrollbar-thumb-color;
-                            border-radius: 5px;
-                            border: 3px solid $color-white;
-                        }
-                        p{
-                            color: $color-text;
-                            font-size: 1rem;
-                        }
-                        table{
-                            margin-bottom: 0px;
-                        }
-                    }
-                }
-            }
-
-      
-
-        }
-    }
-}
-
-.single-tf_apartment{
-    .tf-single-template{
-        &__one{
-            .section-heading {
-                font-weight: 600;
-                font-size: 1.5rem;
-                line-height: 1.5;
-                margin: 0 0 16px 0;
-                color: $color-heading;
-            }
-            .tf-apartment-content-wrapper {
-                @include flexbox();
-                @include flex-wrap(wrap);
-                gap: 24px;
-    
-                @media #{$max1024} {
-                    flex-direction: column-reverse;
-                }
-                .tf-apartment-left {
-                    width: calc(66.66% - 32px);
-            
-                    @media #{$max1024} {
-                        width: 100%;
-                    }
-                }
-                .tf-apartment-right {
-                    width: 33.33%;
-            
-                    @media #{$max1024} {
-                        width: 100%;
-                    }
-                }
-            }
-        }
-    }
-}
-
-.post-type-archive-tf_carrental,
-.tax-carrental_location,
-.tax-carrental_brand,
-.page-template-tf-search{
-    .tf-archive-template{
-        &__one{
-            .tf-archive-car-details-warper{
-                padding: 0px 0px 56px 0px;
-                @media #{$max1024}{
-                    padding-left: 15px;
-                    padding-right: 15px;
-                }
-                .tf-archive-search-box{
-                    border-radius: 24px;
-                    background: $color-gray-light;
-                    padding: 8px;
-                    position: relative;
-                    top: -60px;
-                }
-            }
-        }
-    }
-}
-
-.post-type-archive-tf_carrental .tf-archive-template,
-.tax-carrental_location .tf-archive-template,
-.tax-carrental_brand .tf-archive-template,
-.page-template-tf-search .tf-archive-template,
-.single-tf_carrental .tf-single-template{
-    &__one{
-        .tf-car-booking-popup{
-            position: fixed;
-            left: 0;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            z-index: 99999;
-            background-color: rgba(0,0,0,.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            display: none;
-            @media #{$max768}{
-                align-items: end;
-            }
-            .tf-booking-popup-warp{
-                border-radius: 16px;
-                border-bottom-left-radius: 0;
-                border-bottom-right-radius: 0;
-                background: $color-white;
-                padding: 16px 24px;
-                width: 850px;
-                @media #{$max768}{
-                    padding: 24px 15px;
-                }
-                .tf-booking-popup-header{
-                    margin-bottom: 24px;
-                    h3{
-                        color: $color-heading;
-                        font-size: 1.313rem;
-                        font-weight: 700;
-                        margin: 0;
-                    }
-                    .tf-close-popup{
-                        cursor: pointer;
-                        display: flex;
-                    }
-                }
-        
-                .tf-booking-content-wraper{
-                    .tf-cancellation-notice{
-                        border-radius: 8px;
-                        background: $color-white;
-                        padding: 16px;
-                        margin-bottom: 24px;
-                        span{
-                            color: $color-danger;
-                            font-size: 1rem;
-                            font-weight: 400;
-                            i{
-                                color: $color-danger;
-                            }
-                            b{
-                                font-weight: 700;
-                            }
-                        }
-                    }
-                    .tf-booking-tabs{
-                        margin-bottom: 24px;
                         ul{
                             margin: 0;
                             padding: 0;
+                            list-style: none;
                             li{
-                                color: $color-text;
-                                font-size: 1rem;
-                                font-weight: 400;
-                                padding: 0 8px 8px 8px;
                                 display: inline-block;
-                                cursor: pointer;
-                                width: auto;
-                                &.active{
-                                    color: $color-primary;
-                                    border-bottom: 2px solid $color-primary;
+                                a{
+                                    display: inline-block;
+                                    padding: 10px 9px;
+                                    i{
+                                        font-size: 1.375rem;
+                                    }
+                                    &:hover{
+                                        background: transparent;
+                                    }
+                                }
+                                button{
+                                    padding: 10px 8px;
+                                    background-color: transparent;
+                                    border: 0px solid;
+                                    cursor: pointer;
+                                    span{
+                                        color: $color-primary;
+                                    }
+                                    i{
+                                        font-size: 1.375rem;
+                                    }
+                                }
+                                input{
+                                    @media #{$max768}{
+                                        display: contents;
+                                    }
                                 }
                             }
                         }
                     }
-        
-                    .tf-protection-content{
-                        max-height: 360px;
-                        overflow: auto;
-                        padding-right: 8px;
-                        scrollbar-width: thin;
-                        scrollbar-color: $scrollbar-color;
-                        @media #{$max1024}{
-                            max-height: 260px;
-                        }
-                        /* Chrome, Edge, and Safari */
-                        *::-webkit-scrollbar {
-                            width: 5px;
-                        }
-                        *::-webkit-scrollbar-track {
-                            background: $color-white;
-                        }
-                        &::-webkit-scrollbar-thumb {
-                            background-color: $color-gray;
-                            border-radius: 5px;
-                            border: 3px solid $color-white;
-                        }
-                        p{
-                            color: $color-text;
-                            font-size: 1rem;
-                            font-weight: 400;
-                            margin: 0;
-                        }
-        
-                        .tf-protection-featured{
-                            border-radius: 16px;
-                            border: 1px solid $color-border-lite;
-                            padding: 24px;
-                            @media #{$max1024}{
-                                width: 100%;
-                            }
-                            @media #{$max768}{
-                                padding: 20px 12px;
-                            }
-                            table{
-                                border: 0px solid;
-                                margin: 0;
-                                width: 100%;
-                                tr{
-                                    td{
-                                        border: 0px solid;
-                                        color: $color-text;
-                                        font-size: 1rem;
-                                        font-weight: 400;
-                                        padding: 0 0 16px 0px;
-                                        @media #{$max768}{
-                                            font-size: 0.75rem;
-                                            vertical-align: top;
-                                        }
-                                        span{
-                                            font-weight: 600;
-                                        }
-                                        &:nth-child(2){
-                                            @media #{$max768}{
-                                                width: 90px;
-                                            }
-                                        }
-                                    }
-                                    th{
-                                        color: $color-text;
-                                        border: 0px solid;
-                                        font-size: 1rem;
-                                        font-weight: 700;
-                                        padding: 0 0 16px 0px;
-                                        @media #{$max768}{
-                                            font-size: 0.875rem;
-                                        }
-                                        .tf-flex.tf-flex-align-center{
-                                            flex-wrap: nowrap;
-                                            @media #{$max768}{
-                                                align-items: flex-start;
-                                            }
-                                        }
-                                        .tf-single-protection-title{
-                                            text-align: left;
-                                            flex-wrap: nowrap;
-                                        }
-                                        .tf-protection-select{
-                                            height: 15px;
-                                            @media #{$max768}{
-                                                margin-top: 6px;
-                                            }
-                                            label{
-                                                color: $color-text;
-                                                font-size: 1rem;
-                                                font-weight: 400;
-                                                position: relative;
-                                                margin-bottom: 0px;
-                                                margin-right: 23px;
-                                                cursor: pointer;
-                                                display: block;
-                                                input{
-                                                    position: absolute;
-                                                    opacity: 0;
-                                                    cursor: pointer;
-                                                    height: 0;
-                                                    width: 0;
-                                                }
-                                                input:checked ~ .tf-checkmark:after {
-                                                    display: block;
-                                                }
-                                                input:checked ~ .tf-checkmark{
-                                                    background-color: transparent;
-                                                }
-                                                .tf-checkmark {
-                                                    position: absolute;
-                                                    height: 15px;
-                                                    width: 15px;
-                                                    top: 0;
-                                                    border: 2px solid $color-gray;
-                                                    background-color: transparent;
-                                                    border-radius: 5px;
-                                                    &::after{
-                                                        content: "";
-                                                        position: absolute;
-                                                        display: none;
-                                                        left: 3px;
-                                                        top: 1px;
-                                                        width: 5px;
-                                                        height: 8px;
-                                                        border: solid $color-gray;
-                                                        border-width: 0 3px 3px 0;
-                                                        -webkit-transform: rotate(45deg);
-                                                        -ms-transform: rotate(45deg);
-                                                        transform: rotate(45deg);
-                                                    }
-                                                }
-                                            }
-                                        }
-                                        .tf-info-tooltip{
-                                            position: relative;
-                                            margin-left: 5px;
-                                            i{
-                                                font-weight: 400;
-                                            }
-                                            &:hover{
-                                                .tf-info-tooltip-content{
-                                                    visibility: visible;
-                                                    opacity: 1;
-                                                }
-                                            }
-                                            .tf-info-tooltip-content{
-                                                visibility: hidden;
-                                                opacity: 0;
-                                                position: absolute;
-                                                box-shadow: 0px 15px 30px 0px rgba(40, 16, 26, 0.10);
-                                                border-radius: 8px;
-                                                background: var(--UI-800, linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), #27333F);
-                                                padding: 8px 12px;
-                                                width: 218px;
-                                                z-index: 0;
-                                                bottom: 30px;
-                                                left: 50%;
-                                                margin-left: -109px;
-                                                transition: .3s all ease;
-                                                &::after{
-                                                    position: absolute;
-                                                    content: "";
-                                                    height: 16px;
-                                                    width: 16px;
-                                                    background: var(--UI-800, linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), #27333F);
-                                                    border-radius: 5px;
-                                                    transform: rotate(45deg);
-                                                    left: 50%;
-                                                    margin-left: -8px;
-                                                    bottom: -6px;
-                                                    z-index: -1;
-                                                }
-                                                p{
-                                                    color: $color-white;
-                                                    text-align: center;
-                                                    font-size: 0.813rem;
-                                                    font-weight: 600;
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-        
-                                tfoot{
-                                    margin-top: 16px;
-                                    tr{
-                                        th{
-                                            border-top: 1px solid $color-border-lite;
-                                            padding: 16px 0 0 0;
-                                        }
-                                    }
-                                }
-        
-                            }
-                        }
+                }
+                .tf-title-meta{
+                    align-items: baseline;
+                }
+            }
+            h1{
+                color: $color-heading;
+                font-size: 2.375rem;
+                margin-bottom: 6px;
+            }
+            i{
+                color: $color-primary;
+            }
+            a{
+                text-decoration: none;
+                color: $color-primary;
+            }
+        }
+        //share
+        .tf-share {
+            .share-tour-content {
+                input#share_link_input {
+                    opacity: 0; 
+                    width: 0;
+                    margin: 0px;
+                }
+            }
+        }
+        // Gallery
+        .tf-hero-gallery{
+            width: 100%;
+            display: inline-block;
+
+            img{
+                width: 100%;
+                border-radius: 5px;
+                height: auto;
+            }
+            .tf-gallery-featured {
+                position: relative;
+                line-height: 0;
+                margin-bottom: 18px;
+                >img{
+                    min-height: 474px;
+                    max-height: 474px;
+                    object-fit: cover;
+
+                    @media #{$max1024}{
+                        min-height: auto;
+                        max-height: initial;
                     }
-        
-                    .tf-booking-form-fields{
-                        display: none;
-                        .tf-form-fields{
-                            flex-wrap: wrap;
-                            .tf-single-field{
-                                width: calc(33% - 24px);
-                                @media #{$max768}{
-                                    width: calc(50% - 24px);
-                                }
-                                label{
-                                    color: $color-text;
-                                    font-size: 0.75rem;
-                                    font-weight: 700;
-                                    margin-bottom: 8px;
-                                }
-                                input[type="text"],
-                                input[type="email"]{
-                                    border-radius: 8px;
-                                    border: 1px solid $color-border-lite;
-                                    padding: 8px 16px;
-                                    height: 40px;
-                                    color: $color-text;
-                                    font-size: 1rem;
-                                    font-weight: 400;
-                                    width: 100%;
-                                }
-                                input[type="date"]{
-                                    border-radius: 8px;
-                                    border: 1px solid $color-border-lite;
-                                    padding: 0px 16px;
-                                    height: 40px;
-                                    color: $color-text;
-                                    font-size: 1rem;
-                                    font-weight: 400;
-                                    width: 100%;
-                                    text-transform: uppercase;
-                                }
-                                select{
-                                    border-radius: 8px;
-                                    border: 1px solid $color-border-lite;
-                                    padding: 0px 16px;
-                                    height: 40px;
-                                    color: $color-text;
-                                    font-size: 1rem;
-                                    font-weight: 400;
-                                    width: 100%;
-                                }
-                                .error-text.error-visible{
-                                    color: $color-danger;
-                                }
-                            }
-                        }
-                        .tf-booking-submission{
-                            margin-top: 24px;
-                            text-align: right;
-                            button{
-                                border-radius: 8px;
-                                background-color: $color-primary;
-                                color: $color-white;
-                                padding: 16px 32px;
-                                border: 0px solid;
-                                font-size: 1rem;
-                                font-weight: 700;
-                                cursor: pointer;
-                                transition: .3s all ease;
-                                &:hover{
-                                    background: $color-brand-dark;
-                                }
-                            }
-                        }
-                    }
-        
-                    .tf-booking-bar{
-                        margin-top: 24px;
-                        justify-content: end;
-                        button{
-                            border-radius: 8px;
-                            background: $color-brand-lite;
-                            padding: 16px 32px;
-                            border: 0px solid;
-                            color: $color-text;
-                            font-size: 1rem;
-                            font-weight: 700;
-                            cursor: pointer;
-                        }
-                        button.with-charge{
+                }
+                .featured-column {
+                    background: $color-white;
+                    border-radius: 5px;
+                    a {
+                        display: flex;
+                        align-items: center;
+                        gap: 8px;
+                        text-decoration: none;
+                        color: $color-heading;
+                        padding: 5px 12px;
+                        border-radius: 5px;
+                        transition: all .6s ease;
+                        min-height: 35px;
+                        &:hover{
                             background-color: $color-primary;
                             color: $color-white;
-                            transition: .3s all ease;
-                            &:hover{
-                                background: $color-brand-dark;
-                            }
+                            transition: all .6s ease;
+                        }
+                        i{
+                            line-height: inherit;
+                        }
+                    }
+                }
+                .featured-meta-gallery-videos{
+                    display: flex;
+                    position: absolute;
+                    top: calc(0px - -25px);
+                    right: calc(0px - -25px);
+                    gap: 24px;
+                    @media #{$max768}{
+                        gap: 5px;
+                        right: calc(0px - -15px);
+                    }
+                }
+                .tf-single-review-box{
+                    position: absolute;
+                    top: calc(0px - -25px);
+                    left: calc(0px - -25px);
+                    gap: 24px;
+                    @media #{$max768}{
+                        gap: 5px;
+                        left: calc(0px - -15px);
+                    }
+                    .tf-single-rating{
+                        background-color: $color-primary;
+                        padding: 9px 8px;
+                        font-size: 1rem;
+                        text-decoration: none;
+                        span{
+                            font-weight: 600;
+                        }
+                        &:hover{
+                            color: $color-white;
                         }
                     }
                 }
             }
-        }
-    }
-}
-
-.tf-archive-search-box-wrapper{
-    border-radius: 16px;
-    background: $color-filling-fg;
-    box-shadow: 0px 24px 60px 0px rgba(0, 15, 63, 0.16);
-
-    .tf-date-selection-form{
-        display: flex;
-        margin-top: 8px;
-        @media #{$max1024}{
-            flex-wrap: wrap;
-            justify-content: end;
-        }
-        .tf-date-select-box{
-            width: calc(100% - 155px);
-            @media #{$max1024}{
-                width: 100%;
-            }
-        }
-        .tf-driver-location-box{
-            padding-left: 0;
-            padding-right: 0;
-            width: 147px;
-            @media #{$max1024}{
-                margin-right: 8px;
-            }
-            .tf-submit-button{
-                height: 100%;
-                width: 100%;
-                button{
-                    width: 100%;
-                    height: 100%;
-                    padding-left: 10px;
-                    padding-right: 10px;
+            .tf-without-gallery-featured{
+                >img{
+                    min-height: 596px;
+                    max-height: 596px;
+                    @media #{$max1024}{
+                        min-height: auto;
+                        max-height: auto;
+                    }
                 }
             }
-        }
-    }
-
-    .tf-date-select-box{
-        padding: 8px;
-        flex-wrap: nowrap;
-        @media #{$max768}{
-            flex-wrap: wrap;
-        }
-        .tf-date-single-select{
-            border-radius: 8px;
-            background: $color-filling-bg;
-            padding: 16px;
-            width: 33.33%;
-            @media #{$max768}{
-                width: 100%;
-            }
-            .tf-select-date{
-                width: calc(50% - 8px);
-                &:first-child{
-                    border-right: 1px solid $color-border-lite;
-                }
-                
-                i{
-                    color: $color-text
-                }
-                .tf-flex{
-                    flex-wrap: nowrap;
-                }
-                .info-select{
-                    width: 100%;
+            .tf-gallery{
+                display: flex;
+                gap: 10px;
+                line-height: 0;
+                a {
+                    width: 20%;
+                    float: left;
+                    display: none;
                     position: relative;
-                    h5{
-                        color: $color-heading;
-                        font-size: 0.75rem;
-                        font-weight: 400;
-                        margin-bottom: 8px;
-                        margin-top: 0px;
+
+                    img{
+                        height: 100%;
+                        min-height: 112px;
+                        max-height: 112px;
+                        object-fit: cover;
                     }
-                    input{
-                        min-width: auto;
-                        width: 100%;
-                        color: $color-text;
-                        font-size: 1rem;
-                        border: 0px solid;
-                        padding-left: 0px;
-                        box-shadow: none;
-                        background: transparent;
-                        &:focus{
-                            outline: none;
-                            box-shadow: none;
-                        }
-                        &::placeholder{
-                            color: $color-text;
-                        }
-                    }
-                    select{
-                        min-width: auto;
-                        width: 100%;
-                        color: $color-text;
-                        font-size: 1rem;
-                        border: 0px solid;
-                        background-color: transparent;
-                    }
-                    .autocomplete-items{
+                }
+                a.tf-gallery-more {
+                    position: relative;
+
+                    &::before{
+                        content: "View More → ";
                         position: absolute;
-                        z-index: 99;
-                        top: 100%;
+                        color: $color-white;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        top: 0;
+                        bottom: 0;
                         left: 0;
-                        width: 190px;
-                        max-height: 200px;
-                        overflow: auto;
-                        border-radius: 4px;
+                        right: 0;
+                        width: 100%;
+                        z-index: 1;
+                        background: #0000009c;
+                        font-size: 1rem;
+                        border-radius: 5px;
+                        @media #{$max768}{
+                            text-align: center;
+                            font-size: 0.75rem;
+                        }
+                    }
+                }
+            }
+
+            .tf-gallery a:nth-child(1) {
+                display: block;
+            }
+            .tf-gallery a:nth-child(2) {
+                display: block;
+            }
+            .tf-gallery a:nth-child(3) {
+                display: block;
+            }
+            .tf-gallery a:nth-child(4) {
+                display: block;
+            }
+            .tf-gallery a:nth-child(5) {
+                display: block;
+            }
+        }
+        // Review Section
+        .tf-review-wrapper{
+            .tf-review-data {
+                @include bd-radius(5px);;
+                flex-basis: 20%;
+
+                @media #{$max1024}{
+                    flex-basis: 100%;
+                }
+                @media #{$max768}{
+                    flex-basis: 100%;
+                }
+                .tf-list{
+                    margin-top: -8px;
+                }
+                p,li{
+                    text-transform: capitalize;
+                }
+                .tf-review-data-average {
+                    background-color: $color-filling-fg;
+                    p {
+                        text-align: center;
+                        font-size: 1.875rem;
+                        color: $color-primary;
+                        font-weight: 500;
+                        @include bd-radius(5px);;
+                        width: 100px;
+                        height: 75px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        margin: 0;
+                    }
+                }
+                .tf-review-data-label{
+                    p{
+                        color: $color-heading;
+                        font-weight: 500;
+                    }
+                }
+                .tf-review-all-info {
+                    li {
+                        font-size: 0.875rem;
+                        color: $color-primary;
+                    }
+                }
+
+                .tf-review-data-features {
+                    flex-basis: 80%;
+
+                    @media #{$max1024}{
+                        flex-basis: 100%;
+                        padding-left: 0px;
+                    }
+                    @media #{$max768}{
+                        flex-basis: 100%;
+                        padding-left: 0px;
+                    }
+
+                    .tf-percent-progress{
+                        column-gap: 70px;
+                        flex-wrap: wrap;
+                        @media #{$max1024}{
+                            column-gap: 24px;
+                        }
+                        @media #{$max768}{
+                            column-gap: 16px;
+                        }
+                    }
+                    .tf-progress-bar {
+                        height: 7px;
                         background: $color-brand-lite;
-                        padding: 2px;
-                        box-shadow: 0px 4px 16px 0px rgba(2, 28, 53, 0.20);
-                        scrollbar-width: thin;
-                        scrollbar-color: $scrollbar-color;
-    
-                        /* Chrome, Edge, and Safari */
-                        *::-webkit-scrollbar {
-                            width: 5px;
+                        border-radius: 7px;
+                    }
+
+                    .tf-progress-item {
+                        width: 240px;
+                        margin-bottom: 16px;
+                        @media #{$max1024}{
+                            width: 178px;
                         }
-                        *::-webkit-scrollbar-track {
-                            background: $color-white;
+                        @media #{$max768}{
+                            width: 128px;
                         }
-                        &::-webkit-scrollbar-thumb {
-                            background-color: $scrollbar-thumb-color;
-                            border-radius: 5px;
-                            border: 3px solid $color-white;
+                        @media #{$max575}{
+                            width: 110px;
                         }
-                        
-                        >div{
-                            padding: 8px;
-                            cursor: pointer;
-                            border-radius: 4px;
-                            background: $color-white;
-                            text-transform: capitalize;
-                            color: $color-text;
-                            font-size: 1rem;
-                            margin-bottom: 2px;
-                            transition: .3s all ease;
-                            &:last-child{
-                                margin-bottom: 0px;
-                            }
-                            &:hover{
-                                background-color: $color-white;
+                    }
+
+                    .tf-progress-bar {
+                        position: relative;
+                        margin-bottom: 4px;
+                    }
+
+                    .percent-progress {
+                        position: absolute;
+                        background: $color-primary;
+                        top: 0;
+                        left: 0;
+                        bottom: 0;
+                        border-radius: 7px;
+                    }
+                }
+            }
+
+            //Tourfic review reply
+            .tf-review-reply{
+                border-bottom: 1px solid $color-border-lite;
+                padding-bottom: 30px;
+                .tf-review-details{
+                    .tf-review-ratings {
+                        i {
+                            color: $color-primary;
+                        }
+                        h3{
+                            font-size: 1.25rem;
+                        }
+                    }
+                    .tf-review-date{
+                        li{
+                            color: $color-heading;
+                            i{
+                                color: $color-heading;
                             }
                         }
                     }
-                    .tf_selectperson-wrap{
-                        padding: 3px 0px;
-                        border: 0px solid;
-                        input{
-                            width: 50px;
-                            padding: 0;
-                            text-align: center;
+                }
+                .tf-review-author {
+                    max-width: 15%;
+                    @media #{$max1024}{
+                        max-width: 20%;
+                    }
+                    img {
+                        object-fit: cover;
+                        width: 70px;
+                        height: 70px;
+                        border-radius: 50%;
+                    }
+                }
+                .tf-review-details{
+                    max-width: 85%;
+                    @media #{$max1024}{
+                        max-width: 80%;
+                    }
+
+                    .tf-review-author-name{
+                        h3{
+                            font-size: 1.188rem;
                         }
-                        .tf_input-inner > div{
+                    }
+                    .tf-review-message{
+                        margin-top: 10px;
+
+                        p{
+                            margin-bottom: 0;
+                        }
+                    }
+                    .tf-review-ratings{
+                        display: flex;
+                        div{
+                            margin-right: 5px;
+                        }
+                    }
+                }
+            }
+            .tf-review-form{
+               padding-bottom: 56px;
+               @media #{$max768}{
+                padding-bottom: 40px;
+               }
+                .tf-review-form-container{
+                    background: transparent;
+                    min-width: auto;
+                    form{
+                        padding: 32px;
+                        padding-top: 12px;
+                        background: $color-filling-fg;
+                        border-radius: 8px;
+                        margin-top: 16px;
+                    }
+                    .tf-rating-wrapper{
+                        column-gap: 40px;
+                        flex-wrap: wrap;
+                        row-gap: 24px;
+                        margin: 20px 0 24px 0;
+                        display: flex;
+                        .tf-form-single-rating{
+                            display: initial;
+                            > label{
+                                font-size: 1rem;
+                                font-weight: 400;
+                                color: $color-text;
+                                margin: 0px;
+                                text-transform: capitalize;
+                            }
+                            .ratings-container{
+                                margin-top: 8px;
+                                label{
+                                    &:before{
+                                    color: $color-warning;
+                                    font-size: 0.938rem;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .review-desc{
+                        display: flex;
+                        textarea{
+                            background: transparent;
+                            padding: 15px 20px;
+                            border: 1px solid $color-border-lite;
+                            width: 100%;
+                            border-radius: 5px;
+                            font-size: 0.875rem;
                             color: $color-text;
-                            font-size: 1rem;
-                            font-weight: 400;
-                            line-height: 1.5;
+                            &::placeholder{
+                                color: $color-heading;
+                            }
                         }
-                        .tf_acrselection-wrap{
-                            left: 0;
-                            .acr-dec,
-                            .acr-inc{
-                                padding: 0;
+                    }
+                    .tf-visitor-info{
+                        margin-top: 24px;
+                        div{
+                            input{
+                                padding: 15px 20px;
+                                border: 1px solid $color-border-lite;
+                                width: 100%;
+                                background-color: $color-gray-light;
+                                border-radius: 5px;
+                                font-size: 0.875rem;
+                                color: $color-text;
+                                &::placeholder{
+                                    color: $color-heading;
+                                }
                             }
                         }
                     }
                 }
             }
-            &.tf-pick-drop-location.active{
-                .tf-select-date{
+        }
+        // Booking Form
+        .tf-booking-form{
+            .tf-field-group{
+                #check-in-out-date {
                     width: 100%;
-                    &:first-child{
-                        border-right: 0px solid $color-border;
+                }
+            }
+            .tf-booking-person{
+                .tf-field{
+                    align-items: center;
+                    justify-content: space-between;
+                    padding: 10px 20px;
+                    .acr-label{
+                        align-items: center;
+                        i{
+                            position: static;
+                            margin-right: 5px;
+                        }
                     }
-                    &:last-child{
+                }
+            }
+        }
+        // Enquiry Box
+        .tf-ask-enquiry{
+            text-align: center;
+            i{
+                text-align: center;
+                background-color: $color-brand-lite;
+                border-radius: 50%;
+                color: $color-primary;
+                margin: auto;
+                margin-bottom: 25px;
+                font-size: 1.875rem;
+                height: 80px;
+                width: 80px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            p{
+                margin-top: 5px;
+                margin-bottom: 25px;
+            }
+            .tf-btn{
+                a:hover{
+                    background-color: $color-brand-dark;
+                }
+            }
+        }
+        // FAQ
+        .tf-faq-wrapper {
+            .tf-faq-inner{
+                .tf-faq-single{
+                    border-bottom: 1px solid $color-border-lite;
+                }
+                .active{
+                    .tf-faq-single-inner{
+                        background: $color-filling-fg;
+                        @include bd-radius(5px);
+                        margin: 0px 0px 30px 0px;
+                        .tf-faq-collaps{
+                            .faq-icon{
+                                i.fa-plus{
+                                    display: none;
+                                }
+                                i.fa-minus{
+                                    color: $color-primary;
+                                    display: block;
+                                }
+                            }
+                        }
+                    }
+                }
+                .tf-faq-single-inner{
+                    .tf-faq-content{
                         display: none;
                     }
                 }
             }
-            &.tf-date-single-select.full-width{
-                .tf-select-date{
-                    width: 100%;
-                    &:first-child{
-                        border-right: 0px solid $color-border;
+            .tf-faq-single-inner{
+                .tf-faq-content{
+                    padding: 0px 24px 24px 24px;
+                    p{
+                        margin: 0;
                     }
                 }
+                .tf-faq-collaps{
+                    padding: 24px;
+                    &:hover{
+                        cursor: pointer;
+                    }
+                    .faq-icon{
+                        i.fa-plus{
+                        display: block;
+                        }
+                        i.fa-minus{
+                        display: none;
+                        }
+                    }
+                }
+                h4{
+                    line-height: 1.5;
+                    margin-bottom: 0;
+                }
             }
-            
         }
-    }
-    .tf-driver-location-box{
-        padding: 8px;
-        @media #{$max768}{
-            display: flow-root;
-        }
-        .tf-driver-location{
-            padding-left: 16px;
-            @media #{$max768}{
-                padding-left: 0px;
-            }
-            ul{
-                margin: 0;
-                padding: 0;
+        .tf-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            li {
+                margin-top: 12px;
                 list-style: none;
                 display: flex;
-                flex-wrap: wrap;
-                gap: 0px 32px;
-                li{
-                    label{
-                        color: $color-text;
-                        font-size: 1rem;
-                        display: block;
-                        position: relative;
-                        padding-left: 35px;
-                        margin-bottom: 0px;
-                        cursor: pointer;
-                        -webkit-user-select: none;
-                        -moz-user-select: none;
-                        -ms-user-select: none;
-                        user-select: none;
-                        
-                        input{
-                            position: absolute;
-                            opacity: 0;
-                            cursor: pointer;
-                            height: 0;
-                            width: 0;
-                        }
-                        input:checked ~ .tf-checkmark:after {
-                            display: block;
-                        }
-                        input:checked ~ .tf-checkmark{
-                            background-color: $color-white;
-                        }
-                        .tf-checkmark {
-                            position: absolute;
-                            top: 2px;
-                            left: 0;
-                            height: 20px;
-                            width: 20px;
-                            border: 2px solid $color-gray-info;
-                            background-color: transparent;
-                            border-radius: 5px;
-                            &::after{
-                                content: "";
-                                position: absolute;
-                                display: none;
-                                left: 5px;
-                                top: 2px;
-                                width: 7px;
-                                height: 10px;
-                                border: solid $color-gray-info;
-                                border-width: 0 3px 3px 0;
-                                -webkit-transform: rotate(45deg);
-                                -ms-transform: rotate(45deg);
-                                transform: rotate(45deg);
-                            }
-                        }
+                align-items: baseline;
+                i{
+                    color: $color-primary;
+                    width: 24px;
+                    margin-right: 5px;
+                }
+            }
+        }
+        .tf-single-details-wrapper{
+            .tf-single-details-inner{
+                @media #{$max1024}{
+                    justify-content: space-between;
+                }
+                .tf-tour-details-left {
+                    flex-basis: 68%;
+                    width: 68%;
+
+                    @media #{$max1024}{
+                        flex-basis: 58%;
+                        width: 58%;
+                    }
+
+                    @media #{$max768}{
+                        flex-basis: 100%;
+                        width: 58%;
+                    }
+                }
+
+                .tf-tour-details-right {
+                    flex-basis: 32%;
+                    width: 32%;
+                    padding-left: 30px;
+                    top: 0;
+                    align-self: flex-start;
+
+                    @media #{$max1024}{
+                        flex-basis: 40%;
+                        padding-left: $tf-space-12;
+                        width: 40%;
+                    }
+                    @media #{$max768}{
+                        flex-basis: 100%;
+                        width: 58%;
+                        margin-top: 30px;
+                        padding-left: 0px;
+                        position: static;
                     }
                 }
             }
-            span#tf-required{
-                color: $color-danger;
-            }
         }
-        .tf-submit-button{
-            @media #{$max768}{
-                margin-top: 16px;
-            }
-            button{
-                border-radius: 8px;
-                background: $color-primary;
-                padding: 16px 50px;
-                color: $color-white;
-                font-size: 1rem;
-                font-weight: 700;
-                line-height: 1.5;
-                border: 0px solid;
-                cursor: pointer;
-                transition: .3s all ease;
-                &:hover{
-                    background: $color-brand-dark;
-                }
-                i{
-                    margin-left: 8px;
-                    color: $color-white
-                }
+        .tf-hotel-descriptions{
+            p{
+                margin-bottom: 0;
             }
         }
     }
 }
+// Single Global End
 
+// Archive Global Start
 .tf-archive-template{
-    &__one{
-        .tf-search-right{
+    &__two{
+        .tf-archive-head {
+            @media #{$max575}{
+                gap: 12px;
+            }
+            .tf-search-result {
+                color: $color-heading;
+            }
+            .tf-search-layout {
+                .tf-sorting-selection-warper {
+                    height: 50px;
+                    form{
+                        height: 100%;
+                        select {
+                            height: 100%;
+                            border-radius: 5px;
+                            -webkit-appearance: none;
+                            appearance: none;
+                            -moz-appearance: none;
+                            background-image: url('https://www.svgrepo.com/show/80156/down-arrow.svg');
+                            background-repeat: no-repeat;
+                            background-size: 12px 12px;
+                            background-position: calc(100% - 16px);
+                            padding: 14px;
+                            background-position: calc(100% - 12px) 50%;
+                            font-size: inherit;
+                            font-weight: inherit;
+                            color: inherit;
+                            box-sizing: border-box;
+                            border: 1px solid $color-border-lite;
+                            background-color: $color-filling-bg;
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+            .tf-icon {
+                background-color: $color-filling-fg;
+                border-radius: 5px;
+                border: 1px solid $color-border-lite;
+                &:hover {
+                cursor: pointer;
+                }
+                .active-view{
+                    display: none;
+                }
+            }
+            i {
+                color: $color-primary;
+            }
+            .active {
+                background-color: $color-primary;
+                i {
+                color: $color-white;
+                }
+                .active-view{
+                    display: block;
+                }
+                .defult-view{
+                    display: none;
+                }
+            }
+            .tf-list-active{
+                .active-view{
+                    display: block;
+                }
+                .defult-view{
+                    display: none;
+                }
+                &.active{
+                    .active-view{
+                        display: none;
+                    }
+                    .defult-view{
+                        display: block;
+                    }
+                }
+            }
+        }
+        .tf-result-previews{
+            position: relative;
+            #tf_ajax_searchresult_loader {
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 100%;
+                z-index: 99999;
+                display: none;
+                #tf-searchresult-loader-img {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 100%;
+                    img {
+                        width: 120px;
+                    }
+                }
+            }
+        }
+        label input:checked ~ .tf-checkmark{
+            background-color: $color-primary !important;
+        }
+        .tf-archive-right{
+            .tf-destination-box{
+                .autocomplete-items {
+                    max-height: 120px;
+                    overflow: scroll;
+                    overflow-x: hidden;
+                    position: absolute;
+                    border: 1px solid $color-border-lite;
+                    border-bottom: none;
+                    border-top: none;
+                    z-index: 99;
+                    top: 100%;
+                    left: 0;
+                    right: 0;
+                    div{
+                        padding: 10px;
+                        cursor: pointer;
+                        background-color: $color-white;
+                        border-bottom: 1px solid $color-border-lite;
+                        color: $color-text;
+                    }
+                }
+            }
+            .tf_acrselection{
+                .tf-field{
+                    align-items: center;
+                    justify-content: space-between;
+                    padding: 10px 20px;
+                    .acr-label{
+                        align-items: center;
+                        i{
+                            position: static;
+                            margin-right: 5px;
+                        }
+                    }
+                }
+            }
+            .tf-booking-bttns{
+                button{
+                    width: 100%;
+                }
+            }
+            .tf-related-single{
+                border-top: 1px solid $color-border-lite;
+                margin-bottom: $tf-space-24;
+                padding-top: $tf-space-24;
+                .tf-related-item-featured {
+                    min-width: 100px;
+                    height: 85px;
+                    img{
+                        height: 100%;
+                        object-fit: cover;
+                        @include bd-radius(5px);;
+                    }
+                }
+
+            }
+            .tf_widget {
+                .tf-hotel-result-price-range,
+                .tf-tour-result-price-range{
+                    margin-top: 12px;
+                    padding-bottom: 12px;
+                }
+                h4{
+                    font-size: 1.25rem;
+                    font-weight: 500;
+                }
+                .al-range-slider__track {
+                    background: $color-brand-lite;
+                    height: 10px;
+                    box-shadow: none;
+                    margin: 30px 0px 10px 0px;
+                }
+                .al-range-slider_dark {
+                    padding: 0px;
+                    .al-range-slider__bar {
+                        background: $color-text;
+                        box-shadow: none;
+                    }
+                }
+                .al-range-slider__knob {
+                    background: $color-filling-bg;
+                    height: 24px;
+                    width: 24px;
+                    box-shadow: none;
+                    border: 1.5px solid $color-border;
+                    &:first-child {
+                        span {
+                            left: 10px;
+                        }
+                    }
+                }
+                .al-range-slider__tooltip {
+                    background: $color-primary;
+                    border-radius: 5px;
+                    box-shadow: none;
+                    padding: 3px 10px;
+                    color: $color-white;
+                    font-size: 0.813rem;
+                    margin-bottom: 0px;
+                }
+                .al-range-slider__input.js-al-range-slider__input {
+                    display: none;
+                }
+            }
             #tf__booking_sidebar{
                 padding: 30px;
                 background-color: $color-filling-fg;
@@ -1007,10 +925,8 @@
                     border: 0px solid;
                     background: inherit;
                     border-radius: 0px;
+                    margin-bottom: 26px;
                     padding: 0px;
-                    &:last-child{
-                        margin-bottom: 0px;
-                    }
                     .tf-widget-title{
                         background-color: inherit;
                         border: 0px solid;
@@ -1070,25 +986,327 @@
                             span{
                                 margin-left: 8px;
                             }
-                            &.see-more{
-                                margin-bottom: 0;
-                            }
-                            &.see-less{
-                                display: none;
-                                text-decoration: none;
-                            }
                         }
-                        
-                    }
-
-                    .tf-map-preview{
-                        line-height: 0;
-                        .tf-map-preview-content{
-                            width: 100%;
-                        } 
+                        a.see-less{
+                            display: none;
+                            text-decoration: none;
+                        }
                     }
                 }
             }
+        }
+        @media #{$max768} {
+            .tf-archive-inner{
+                gap: 40px;
+            }
+            .tf-sidebar {
+                order: 1;
+                margin-top: 0px;
+            }
+            .tf-page-content {
+                order: 2;
+            }
+        }
+        .tf-search-results-list {
+            .tf-item-cards {
+                flex-direction: column;
+                gap: $tf-space-24;
+            }
+
+            .tf-layout-list {
+                .tf-item-card {
+                    flex-basis: 100%;
+
+                }
+            }
+
+            .tf-layout-grid {
+                flex-direction: row;
+                flex-wrap: wrap;
+
+                .tf-item-card {
+                    flex-basis: calc(100% / 2 - 12px);
+                    @media #{$max1024}{
+                        flex-basis: calc(100% - 0px);
+                    }
+                    @media #{$max575}{
+                        flex-basis: calc(100% - 0px);
+                    }
+                    .tf-item-featured {
+                        flex-basis: 100%;
+                    }
+
+                    .tf-item-details {
+                        flex-basis: 100%;
+                    }
+                }
+            }
+            
+            .tf-layout-list{
+                .tf-item-card {
+                    .tf-item-featured {
+                        a{
+                            line-height: 0;
+                            display: block;
+                            height: 100%;
+                            img {
+                                width: 100%;
+                                object-fit: cover;
+                                height: 100%;
+                                min-height: 250px;
+                                border-radius: 5px 0px 0px 5px;
+                                max-height: 322px;
+                            }
+                        }
+                    }
+                }
+                .tf-item-card.tf-item-hotel{
+                    .tf-item-featured {
+                        img {
+                            width: 100%;
+                            object-fit: cover;
+                            height: 100%;
+                            min-height: 250px;
+                            max-height: initial;
+                            border-radius: 5px 0px 0px 5px;
+                        }
+                    }
+                }
+            }
+            .tf-layout-grid{
+                .tf-item-card {
+                    display: block;
+                    .tf-item-featured {
+                        img {
+                            width: 100%;
+                            object-fit: cover;
+                            height: 100%;
+                            border-radius: 5px 5px 0px 0px;
+                            min-height: 280px;
+                            max-height: 280px;
+                        }
+                    }
+                }
+            }
+            .tf-item-card {
+                background-color: $color-filling-fg;
+                border-radius: 5px;
+                @media #{$max1024} {
+                    flex-basis: 100%;
+                }
+                .tf-item-featured {
+                    flex-basis: 41%;
+                    position: relative;
+                    @media #{$max575}{
+                        flex-basis: 100%;
+                    }
+                    .tf-features-box{
+                        .tf-discount {
+                            background: $color-white;
+                            padding: 4px 12px;
+                            border-radius: 50px;
+                            font-size: 0.75rem;
+                            color: $color-heading;
+                            margin-right: 10px;
+                            font-weight: 600;
+                        }
+                        .tf-feature{
+                            background: $color-primary;
+                            padding: 4px 12px;
+                            border-radius: 50px;
+                            font-size: 0.75rem;
+                            color: $color-white;
+                            margin-right: 5px;
+                            font-weight: 600;
+                        }
+                    }
+                    .tf-tag-items {
+                        width: 90%;
+                        display: flex;
+                        flex-direction: column;
+                        max-height: 90%;
+                        overflow: hidden;
+                        position: absolute;
+                        top: 20px;
+                        left: 20px;
+                        align-items: baseline;
+                        text-transform: capitalize;
+
+                        .tf-multiple-tag-item {
+                            padding: 4px 12px;
+                            border-radius: 50px;
+                            font-size: 0.75rem;
+                            margin-top: 5px;
+                        }
+                    }
+                }
+
+                .tf-item-details {
+                    flex-basis: 59%;
+                    padding: 20px $tf-space-30;
+                   
+                    @media #{$max768} {
+                        padding: $tf-space-24 $tf-space-24;
+                    }
+                    @media #{$max575} {
+                        flex-basis: 100%;
+                    }
+                 
+                    i {
+                        color: $color-primary;
+                    }
+                    p{
+                        font-size: 0.75rem;
+                        margin-bottom: 0;
+                        overflow: hidden;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 2;
+                        -webkit-box-orient: vertical;
+                        flex: 1;
+                    }
+                    .tf-title-meta{
+                        align-items: baseline;
+                        i{
+                            line-height: 1.5;
+                            position: relative;
+                            top: 2px;
+                        }
+                    }
+                    .tf-title {
+                        h2 {
+                            font-size: 1.375rem;
+                            line-height: 1.5;
+                            overflow: hidden;
+                            display: -webkit-box;
+                            -webkit-line-clamp: 2;
+                            -webkit-box-orient: vertical;
+
+                            a{
+                                color: $color-heading;
+                                text-decoration: none;
+                            }
+                        }
+                    }
+                    .tf-reviews{
+                        i{
+                            color: $color-warning;
+                        }
+                    }
+                    .tf-archive-features{
+                        ul{
+                            margin: 0;
+                            padding: 0;
+                            li{
+                                display: inline-block;
+                                background-color: $color-gray-light;
+                                padding: 6px 10px;
+                                border-radius: 5px;
+                                margin: 10px 10px 0px 0px;
+                                font-size: 0.75rem;
+                                i{
+                                    margin-right: 5px;
+                                    color: $color-text;
+                                }
+                                img{
+                                    margin-right: 5px;
+                                }
+                            }
+                            span{
+                                margin-top: 10px;
+                                display: inline-block;
+                            }
+                        }
+                    }
+            
+                    .tf-post-footer {
+                        .tf-pricing {
+                            del{
+                                font-size: 1rem;
+                                span {
+                                    font-size: 1rem;
+                                }
+                            }
+                            span {
+                                font-size: 1.25rem;
+                                color: $color-primary;
+                            }
+                        }
+                        .tf-booking-bttns{
+                            .tf_btn{
+                                font-weight: 500;
+                            }
+                        }
+                    }
+                    .tf-reviews{
+                        gap: 8px;
+                        align-items: center;
+                        .tf-avarage-review{
+                            font-size: 0.75rem;
+                        }
+                    }
+                }
+
+                .tf-post-footer {
+                    border-top: 1px solid $color-border-lite;
+                    padding-top: 16px;
+
+                    .tf-booking-bttns{
+                        .tf_btn{
+                            font-weight: 500;
+                        }
+                    }
+                }
+            }
+
+            .tf-pagination-bar{
+                display: block;
+                width: 100%;
+                @media #{$max768}{
+                    margin-bottom: 30px;
+                }
+                .tf_posts_navigation,#tf_posts_navigation_bar{
+                    margin-top: 40px;
+                    width: 100%;
+                    display: flex;
+                    gap: 10px;
+                    .page-numbers {
+                        font-size: 0.875rem;
+                        color: $color-primary;
+                        text-decoration: none;
+                        padding: 8px 16px;
+                        background: $color-white;
+                        box-shadow: 0px 10px 18px rgba(88, 128, 160, 0.05);
+                        border-radius: 5px;
+                        display: inline-block;
+                        border: 1px solid $color-border-lite;
+                    }
+                    .page-numbers.current{
+                        background: $color-primary;
+                        color: $color-white;
+                        border-color: $color-white;
+                    }
+                }
+            }
+            .tf_posts_navigation.tf_posts_ajax_navigation,
+            .tf_posts_navigation.tf_posts_page_navigation{
+                margin-top: 40px;
+                width: 100%;
+                .page-numbers {
+                    font-size: 0.875rem;
+                    color: $color-primary;
+                    text-decoration: none;
+                    padding: 12px 18px;
+                    background: $color-white;
+                    box-shadow: 0px 10px 18px rgba(88, 128, 160, 0.05);
+                    border-radius: 5px;
+                    display: inline-block;
+                }
+                .page-numbers.current{
+                    background: $color-primary;
+                    color: $color-white;
+                }
+            }
+
         }
     }
 }

@@ -11,7 +11,7 @@ $tf_map_api = !empty(Helper::tfopt('tf-googlemapapi')) ? Helper::tfopt('tf-googl
 
 ?>
 
-<div class="tf-archive-template__four">
+<div class="tf-archive-template__three">
     <div class="tf-content-wrapper">
         <?php do_action('tf_before_container'); ?>
 

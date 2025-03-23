@@ -2198,7 +2198,7 @@
         });
 
         //Room Filter Showing
-        $('.tf-single-template__three .tf-available-rooms-head .tf-filter, .tf-archive-template__three .tf-available-rooms-head .tf-filter, .tf-archive-template__four .tf-available-rooms-head .tf-filter').on('click', function () {
+        $('.tf-single-template__three .tf-available-rooms-head .tf-filter, .tf-archive-template__three .tf-available-rooms-head .tf-filter, .tf-archive-template__three .tf-available-rooms-head .tf-filter').on('click', function () {
             $('.tf-room-filter').toggleClass('tf-filter-show');
         });
 
@@ -2214,7 +2214,7 @@
         });
 
         // Full Description Showing
-        $('.tf-single-template__three span.tf-see-description, .tf-archive-template__four span.tf-see-description, .single-tf_carrental .tf-single-template__one span.tf-see-description').on('click', function () {
+        $('.tf-single-template__three span.tf-see-description, .tf-archive-template__three span.tf-see-description, .single-tf_carrental .tf-single-template__one span.tf-see-description').on('click', function () {
             $('.tf-short-description').slideUp();
             $('.tf-full-description').slideDown();
         });
@@ -2313,7 +2313,7 @@
         * Template 4 Script Start
         * @author: Foysal
         */
-        $('.tf-archive-template__four .acr-inc , .tf-archive-template__four .acr-dec').on('click', function () {
+        $('.tf-archive-template__three .acr-inc , .tf-archive-template__three .acr-dec').on('click', function () {
 
             if ($('input#infant').length) {
                 var guest = Number($('input#adults').val()) + Number($('input#children').val()) + Number($('input#infant').val());
@@ -2336,13 +2336,13 @@
         })
 
         $(document).mouseup(function (e) {
-            var container = $(".tf-archive-template__four .tf_acrselection-wrap");
+            var container = $(".tf-archive-template__three .tf_acrselection-wrap");
             if (!container.is(e.target) && container.has(e.target).length === 0) {
-                $(".tf-archive-template__four .tf-search-guest-and-room .tf_acrselection-wrap").removeClass("tf-show");
+                $(".tf-archive-template__three .tf-search-guest-and-room .tf_acrselection-wrap").removeClass("tf-show");
             }
         });
-        $(".tf-archive-template__four .tf-search-guest-and-room").click(function () {
-            $(".tf-archive-template__four .tf-search-guest-and-room .tf_acrselection-wrap").addClass("tf-show");
+        $(".tf-archive-template__three .tf-search-guest-and-room").click(function () {
+            $(".tf-archive-template__three .tf-search-guest-and-room .tf_acrselection-wrap").addClass("tf-show");
         });
 
         /*
@@ -2370,7 +2370,7 @@
         * Template 4 hotel, tour, apartment archive scrollbar
         */
         function adjustPadding() {
-            var hotelsContainer = $('.tf-archive-template__four .tf-archive-hotels, .tf-archive-details-wrap .tf-archive-hotels');
+            var hotelsContainer = $('.tf-archive-template__three .tf-archive-hotels, .tf-archive-details-wrap .tf-archive-hotels');
 
             if (hotelsContainer[0].scrollHeight > hotelsContainer.height()) {
                 hotelsContainer.css('padding-right', '16px');
@@ -2379,13 +2379,13 @@
             }
         }
 
-        if($('.tf-archive-template__four .tf-archive-hotels').length) {
+        if($('.tf-archive-template__three .tf-archive-hotels').length) {
             adjustPadding();
             $(window).on('resize', adjustPadding);
         }
 
         function adjustSidebarPadding() {
-            var sidebar = $('.tf-archive-template__four #tf__booking_sidebar, #tf_map_popup_sidebar');
+            var sidebar = $('.tf-archive-template__three #tf__booking_sidebar, #tf_map_popup_sidebar');
 
             if (sidebar[0].scrollHeight > sidebar.height()) {
                 sidebar.css('padding-right', '16px');
@@ -2394,7 +2394,7 @@
             }
         }
 
-        if($('.tf-archive-template__four #tf__booking_sidebar').length) {
+        if($('.tf-archive-template__three #tf__booking_sidebar').length) {
             adjustSidebarPadding();
             $(window).on('resize', adjustSidebarPadding);
         }
@@ -2649,7 +2649,7 @@
         /*
         * Hotel hover effect on map marker
         * */
-        $(document).on('mouseover', '.tf-archive-template__four .tf-archive-hotel', function () {
+        $(document).on('mouseover', '.tf-archive-template__three .tf-archive-hotel', function () {
             let id = $(this).data('id');
             $('.tf_map_price .tf_price_inner[data-post-id="' + id + '"]').addClass('active');
 
@@ -2657,7 +2657,7 @@
                 markersById[id].setAnimation(google.maps.Animation.BOUNCE);
             }
         });
-        $(document).on('mouseleave', '.tf-archive-template__four .tf-archive-hotel', function () {
+        $(document).on('mouseleave', '.tf-archive-template__three .tf-archive-hotel', function () {
             let id = $(this).data('id');
             $('.tf_map_price .tf_price_inner[data-post-id="' + id + '"]').removeClass('active');
 
@@ -2669,13 +2669,13 @@
         /*
         * Map toggle btn for mobile
         */
-        $(document).on('click', '.tf-archive-template__four .tf-mobile-map-btn', function (e) {
+        $(document).on('click', '.tf-archive-template__three .tf-mobile-map-btn', function (e) {
             e.preventDefault();
-            $('.tf-archive-template__four .tf-details-right').css('display', 'block');
+            $('.tf-archive-template__three .tf-details-right').css('display', 'block');
         });
-        $(document).on('click', '.tf-archive-template__four .tf-mobile-list-btn', function (e) {
+        $(document).on('click', '.tf-archive-template__three .tf-mobile-list-btn', function (e) {
             e.preventDefault();
-            $('.tf-archive-template__four .tf-details-right').css('display', 'none');
+            $('.tf-archive-template__three .tf-details-right').css('display', 'none');
         });
 
         /*

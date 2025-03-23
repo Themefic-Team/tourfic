@@ -4,7 +4,7 @@ use \Tourfic\Classes\Hotel\Hotel;
 ?>
 
 
-<div class="tf-main-wrapper tf-archive-template__one" data-fullwidth="true">
+<div class="tf-main-wrapper tf-archive-template__legacy" data-fullwidth="true">
 	<?php
 		do_action( 'tf_before_container' );
 		$post_count = $GLOBALS['wp_query']->post_count;

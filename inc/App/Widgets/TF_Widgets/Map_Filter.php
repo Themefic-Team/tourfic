@@ -135,10 +135,10 @@ class Map_Filter extends \WP_Widget {
         if ( ($post_type == 'tf_hotel' && Hotel::template( 'archive' ) == 'default') || 
         ($post_type == 'tf_tours' && Tour::template( 'archive' ) == 'default') || 
         ($post_type == 'tf_apartment' && Apartment::template( 'archive' ) == 'default')){
-            $section_wrap_class = 'tf-archive-template__one';
+            $section_wrap_class = 'tf-archive-template__legacy';
         }elseif ( ($post_type == 'tf_hotel' && Hotel::template( 'archive' ) == 'design-1') || 
         ($post_type == 'tf_tours' && Tour::template( 'archive' ) == 'design-1')){
-            $section_wrap_class = 'tf-archive-template__two';
+            $section_wrap_class = 'tf-archive-template__one';
         }
         if ( ($post_type == 'tf_hotel' && Hotel::template( 'archive' ) == 'design-1') ||
             ($post_type == 'tf_tours' && Tour::template( 'archive' ) == 'design-1')){

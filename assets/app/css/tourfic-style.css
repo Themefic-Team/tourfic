@@ -8036,7 +8036,7 @@ div#tf-destinationautocomplete-list div:before {
   display: none;
 }
 
-.fancybox-container .tf-archive-template__one .single-tour-wrap.tf-featured .single-tour-inner .tf-featured-badge span {
+.fancybox-container .tf-archive-template__legacy .single-tour-wrap.tf-featured .single-tour-inner .tf-featured-badge span {
   right: -2px;
   top: 26px;
   width: 225px;
@@ -18800,7 +18800,7 @@ div#tf-destinationautocomplete-list div:before {
   position: relative;
 }
 
-.admin-bar .tf-archive-template__four .tf-archive-filter .tf-archive-filter-sidebar {
+.admin-bar .tf-archive-template__three .tf-archive-filter .tf-archive-filter-sidebar {
   top: 32px;
 }
 

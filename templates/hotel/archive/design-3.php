@@ -1,4 +1,4 @@
-<div class="tf-archive-template__four">
+<div class="tf-archive-template__three">
 
     <div class="tf-content-wrapper">
         <?php
