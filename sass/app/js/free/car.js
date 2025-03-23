@@ -52,11 +52,10 @@
 
             // Executes when some one click in the search form location
             inp.addEventListener("focus", function () {
-                // if (this.value == '' || !this.value) {
-                    // alert("Working....")
+                    closeAllLists();
                     let a = document.createElement("DIV");
-                    a.setAttribute("id", this.id + "autocomplete-list");
-                    a.classList.add("autocomplete-items")
+                    a.setAttribute("id", this.id + "-autocomplete-list");
+                    a.setAttribute("class", "autocomplete-items");
                     this.parentNode.appendChild(a);
                     for (const [key, value] of Object.entries(arr)) {
                         let b = document.createElement("DIV");
@@ -65,7 +64,10 @@
                         b.addEventListener("click", function (e) {
                             let source = this.getElementsByTagName("input")[0];
                             inp.value = source.value;
-                            inp.closest('input').nextElementSibling.value = source.dataset.slug
+                            inp.closest('input').nextElementSibling.value = source.dataset.slug;
+                            setTimeout(() => {
+                                closeAllLists();
+                            },100);
                         });
                         a.appendChild(b);
                     }
@@ -189,10 +191,9 @@
             }
 
             /*execute a function when someone clicks in the document:*/
-            document.addEventListener("click", function (e) {
-                // closeAllLists(e.target);
-                if (e.target.id == "content" || e.target.id == "") {
-                    closeAllLists(e.target);
+            $(document).on('click', function (event) {
+                if (!$(event.target).closest("#tf_dropoff_location, #tf_pickup_location").length) {
+                    $("#tf_pickup_location-autocomplete-list,#tf_dropoff_location-autocomplete-list").hide();
                 }
             });
         }

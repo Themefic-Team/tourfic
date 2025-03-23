@@ -29,10 +29,13 @@
                     b.innerHTML = value;
                     b.innerHTML += `<input type='hidden' value="${value}" data-slug='${key}'>`;
                     b.addEventListener("click", function () {
+                        console.log('clickeed');
                         let source = this.getElementsByTagName("input")[0];
                         inp.value = source.value;
                         inp.closest('input').nextElementSibling.value = source.dataset.slug;
-                        closeAllLists();
+                        setTimeout(() => {
+                            closeAllLists();
+                        },100);
                     });
                     a.appendChild(b);
                 }
@@ -129,9 +132,9 @@
             }
         
             // Close when clicking outside
-            document.addEventListener("click", function (e) {
-                if (!inp.contains(e.target)) {
-                    closeAllLists(e.target);
+            $(document).on('click', function (event) {
+                if (!$(event.target).closest("#tf-apartment-location").length) {
+                    $("#tf-apartment-location-autocomplete-list").hide();
                 }
             });
         }
