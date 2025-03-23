@@ -533,7 +533,9 @@
             var dest_slug = $(this).attr("data-slug");
             $(".tf-tour-preview-place").val(dest_name);
             $("#tf-tour-place").val(dest_slug);
-            $(".tf-tour-results").removeClass('tf-destination-show');
+            setTimeout(function () {
+                $(".tf-tour-results").removeClass('tf-destination-show');
+            }, 100);
         });
 
         // Tour destination autocomplete
