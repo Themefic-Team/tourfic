@@ -40,7 +40,7 @@ $tf_hotel_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 
 
 if( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-1" ){
 ?>
-<div class="tf-archive-page tf-archive-design-1 tf-archive-template__two">
+<div class="tf-archive-page tf-archive-design-1 tf-archive-template__one">
     <div class="tf-container">
 		<h3><?php echo esc_html( $taxonomy_name ); ?></h3>
         <div class="tf-row tf-archive-inner tf-flex">
@@ -54,7 +54,7 @@ if( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-1" ){
 </div>
 <?php } elseif( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-2" ){ ?>
 
-<div class="tf-archive-template__three">
+<div class="tf-archive-template__two">
     <!--Hero section start -->
     <div class="tf-hero-section-wrap" style="<?php echo !empty($tf_location_image) ? 'background: linear-gradient(0deg, rgba(48, 40, 28, 0.40) 0%, rgba(48, 40, 28, 0.40) 100%), url('.esc_url($tf_location_image).'), lightgray 0px -268.76px / 100% 249.543% no-repeat;background-size: cover; background-position: center;' : 'background: rgba(48, 40, 28, 0.30);'; ?>">
         <div class="tf-container">
@@ -121,7 +121,7 @@ if( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-1" ){
     <!-- Hotel PopUp end -->  
 </div>
 <?php } elseif( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-3" ){ ?>
-    <div class="tf-archive-template__four">
+    <div class="tf-archive-template__three">
 
         <div class="tf-content-wrapper">
             <?php

@@ -3,7 +3,7 @@ use \Tourfic\Classes\Helper;
 use \Tourfic\Classes\Hotel\Hotel;
 ?>
 
-<div class="tf-archive-page tf-archive-design-1 tf-archive-template__two">
+<div class="tf-archive-page tf-archive-design-1 tf-archive-template__one">
     <div class="tf-container">
         <div class="tf-row tf-archive-inner tf-flex">
             <div class="tf-page-content tf-archive-left tf-result-previews">

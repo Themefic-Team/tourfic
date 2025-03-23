@@ -138,7 +138,7 @@ class Map_Filter extends \WP_Widget {
             $section_wrap_class = 'tf-archive-template__legacy';
         }elseif ( ($post_type == 'tf_hotel' && Hotel::template( 'archive' ) == 'design-1') || 
         ($post_type == 'tf_tours' && Tour::template( 'archive' ) == 'design-1')){
-            $section_wrap_class = 'tf-archive-template__two';
+            $section_wrap_class = 'tf-archive-template__one';
         }
         if ( ($post_type == 'tf_hotel' && Hotel::template( 'archive' ) == 'design-1') ||
             ($post_type == 'tf_tours' && Tour::template( 'archive' ) == 'design-1')){
