@@ -146,7 +146,7 @@ if( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-1" ){
     </div>
 
 <?php } else{ ?>
-<div class="tf-main-wrapper tf-archive-template__one" data-fullwidth="true">
+<div class="tf-main-wrapper tf-archive-template__legacy" data-fullwidth="true">
 	<?php do_action( 'tf_before_container' ); ?>
 	<div class="tf-container">
 		<h3><?php echo esc_html( $taxonomy_name ); ?></h3>

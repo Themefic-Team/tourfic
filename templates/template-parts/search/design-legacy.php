@@ -24,7 +24,7 @@ if ( ( ! empty( $_GET['type'] ) && $_GET['type'] == "tf_carrental" && $tf_car_ar
     </div>
 </div>
 <?php else: ?>
-<div class="tf-main-wrapper search-result-wrapper tf-archive-template__one" data-fullwidth="true">
+<div class="tf-main-wrapper search-result-wrapper tf-archive-template__legacy" data-fullwidth="true">
     <?php do_action( 'tf_before_container' ); ?>
 	<div class="tf-container">
         <div class="search-result-inner">
