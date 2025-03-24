@@ -522,7 +522,6 @@
                 $(".tf-preview-destination").val(dest_name);
                 $("#tf-place-destination").val(dest_slug);
         
-         
                 setTimeout(function () {
                     $(".tf-hotel-locations").removeClass('tf-locations-show');
                 }, 100); 

@@ -65,8 +65,7 @@
                             let source = this.getElementsByTagName("input")[0];
                             inp.value = source.value;
                             inp.closest('input').nextElementSibling.value = source.dataset.slug;
-        
-                            // Close the list after selecting a value
+                
                             closeAllLists();
                         });
                         a.appendChild(b);
