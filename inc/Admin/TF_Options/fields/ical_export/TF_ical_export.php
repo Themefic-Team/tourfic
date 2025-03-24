@@ -12,20 +12,25 @@ if ( ! class_exists( 'TF_ical_export' ) ) {
 		public function render() {
 			global $post;
 			$post_type  = get_post_type( $post->ID );
-			$room_index = $room_id = '';
+			$room_id = '';
 			if ( $post_type === 'tf_room' ) {
-
 				$room = get_post_meta($post->ID, 'tf_room_opt', true);
 				$room_id    = ! empty( $room['unique_id'] ) ? $room['unique_id'] : '';
-			} elseif ( $post_type === 'tf_apartment' ) {
-				$meta = get_post_meta( $post->ID, 'tf_apartment_opt', true );
 			}
 
-			$query_args = array(
-				'feed'    => 'tf-ical',
-				'post_id' => $post->ID,
-				'room_id' => $room_id,
-			);
+			
+			if ( $post_type === 'tf_room' ) {
+				$query_args = array(
+					'feed'    => 'tf-ical',
+					'post_id' => $post->ID,
+					'room_id' => $room_id,
+				);
+			} else if($post_type === 'tf_apartment'){
+				$query_args = array(
+					'feed'    => 'tf-apartment-ical',
+					'post_id' => $post->ID,
+				);
+			}
 
 			$export_url = add_query_arg( $query_args, site_url( '/' ) );
 

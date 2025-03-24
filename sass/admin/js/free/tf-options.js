@@ -1247,7 +1247,7 @@
                 apt.init();
 
                 let checkIn = $(el).find('[name="tf_apt_check_in"]').flatpickr({
-                    dateFormat: 'Y-m-d',
+                    dateFormat: tf_options.tf_admin_date_format || 'MM/DD/YYYY',
                     minDate: 'today',
                     altInput: true,
                     altFormat: tf_options.tf_admin_date_format,
@@ -1257,7 +1257,7 @@
                 });
 
                 let checkOut = $(el).find('[name="tf_apt_check_out"]').flatpickr({
-                    dateFormat: 'Y-m-d',
+                    dateFormat: tf_options.tf_admin_date_format || 'MM/DD/YYYY',
                     minDate: 'today',
                     altInput: true,
                     altFormat: tf_options.tf_admin_date_format,
