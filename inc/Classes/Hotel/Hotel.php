@@ -2846,7 +2846,7 @@ class Hotel {
                         // flatpickr locale first day of Week
 						<?php Helper::tf_flatpickr_locale( "root" ); ?>
 
-                        $(".tf-single-template__three .tf-booking-date-wrap").on("click", function () {
+                        $(".tf-single-template__two .tf-booking-date-wrap").on("click", function () {
                             $(".tf-check-in-out-date").trigger("click");
                         });
                         $(".tf-check-in-out-date").flatpickr({
@@ -2881,13 +2881,13 @@ class Hotel {
                                 ];
                                 if (selectedDates[0]) {
                                     const startDate = selectedDates[0];
-                                    $(".tf-single-template__three .tf-booking-form-checkin span.tf-booking-date").html(startDate.getDate());
-                                    $(".tf-single-template__three .tf-booking-form-checkin span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
+                                    $(".tf-single-template__two .tf-booking-form-checkin span.tf-booking-date").html(startDate.getDate());
+                                    $(".tf-single-template__two .tf-booking-form-checkin span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
                                 }
                                 if (selectedDates[1]) {
                                     const endDate = selectedDates[1];
-                                    $(".tf-single-template__three .tf-booking-form-checkout span.tf-booking-date").html(endDate.getDate());
-                                    $(".tf-single-template__three .tf-booking-form-checkout span.tf-booking-month span").html(monthNames[endDate.getMonth()]);
+                                    $(".tf-single-template__two .tf-booking-form-checkout span.tf-booking-date").html(endDate.getDate());
+                                    $(".tf-single-template__two .tf-booking-form-checkout span.tf-booking-month span").html(monthNames[endDate.getMonth()]);
                                 }
                             }
                         }

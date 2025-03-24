@@ -1,6 +1,6 @@
 .single-tf_apartment{
     .tf-single-template{
-        &__one{
+        &__legacy{
             .tf-apartment-amenities-section {
                 margin-bottom: 80px;
 
@@ -57,7 +57,7 @@
                 }
             }
         }
-        &__three{
+        &__two{
             .tf-place-offer-section{
                 @media #{$max768}{
                     padding-left: 16px;

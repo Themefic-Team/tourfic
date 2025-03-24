@@ -1,6 +1,6 @@
 .single-tf_apartment{
     .tf-single-template{
-        &__one{
+        &__legacy{
             #tf-apartment-booking {
                 background-color: $color-filling-fg;
                 border-radius: 8px;
@@ -244,7 +244,7 @@
                 }
             }
         }
-        &__three{
+        &__two{
             #tf-apartment-booking{
                 box-shadow: none;
                 padding: 0px;

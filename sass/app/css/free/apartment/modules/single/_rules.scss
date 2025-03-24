@@ -1,6 +1,6 @@
 .single-tf_apartment{
     .tf-single-template{
-        &__one{
+        &__legacy{
             .tf-house-rules {
                 margin-bottom: 80px;
             
@@ -97,7 +97,7 @@
                 }
             }
         }
-        &__three{
+        &__two{
             .tf-aprtment-rules-section{
                 @media #{$max768}{
                     padding-left: 16px;

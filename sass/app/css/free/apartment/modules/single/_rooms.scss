@@ -1,6 +1,6 @@
 .single-tf_apartment{
     .tf-single-template{
-        &__one{
+        &__legacy{
             .tf-apartment-rooms {
                 margin-bottom: 80px;
 
@@ -144,7 +144,7 @@
                 }
             }
         }
-        &__three{
+        &__two{
             .tf-apartment-rooms-section{
                 .tf-apartment-room-details{
                     border-radius: 4px;

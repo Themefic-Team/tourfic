@@ -31,7 +31,7 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
 }
 ?>
 
-<div class="tf-single-template__three">
+<div class="tf-single-template__two">
 
     <!--Hero section start -->
     <div class="tf-hero-section-wrap"

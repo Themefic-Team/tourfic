@@ -1,6 +1,6 @@
 .single-tf_hotel{
     .tf-single-template{
-        &__one{
+        &__legacy{
             .popupmap-for-mobile {
                 display: none;
                 @media #{$max1024}{
@@ -39,7 +39,7 @@
                 }
             }
         }
-        &__two{
+        &__one{
             .tf-hotel-location-map{
                 #hotel-location{
                     height: 258px;

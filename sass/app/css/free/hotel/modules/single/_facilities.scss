@@ -1,6 +1,6 @@
 .single-tf_hotel{
     .tf-single-template{
-        &__one{
+        &__legacy{
             .tf-container h2 {
                 margin-top: 0px;
             }
@@ -83,7 +83,7 @@
                 }
             }
         }
-        &__two{
+        &__one{
             .tf-hotel-facilities-section {
                 .active {
                     display: none;

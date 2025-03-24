@@ -1,6 +1,6 @@
 .single-tf_apartment{
     .tf-single-template{
-        &__one{
+        &__legacy{
             .tf-apt-highlights {
                 @include flexbox();
                 @include flex-wrap(wrap);
@@ -98,7 +98,7 @@
                 }
             }
         }
-        &__three{
+        &__two{
             .tf-informations-secations{
                 .slick-dots {
                     bottom: -32px;

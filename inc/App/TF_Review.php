@@ -636,8 +636,8 @@ class TF_Review {
             $tf_apartment_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] : 'default';
             $tf_car_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['car-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['car-archive'] : 'design-1';
             
-            if( ( "tf_tours"==$tf_current_post && $tf_tour_arc_selected_template=="design-1" || $tf_tour_arc_selected_template=="design-3") || 
-            ( "tf_hotel"==$tf_current_post && $tf_hotel_arc_selected_template=="design-1" || $tf_hotel_arc_selected_template=="design-3" ) ||
+            if( ( "tf_tours"==$tf_current_post && ($tf_tour_arc_selected_template=="design-1" || $tf_tour_arc_selected_template=="design-3")) || 
+            ( "tf_hotel"==$tf_current_post && ($tf_hotel_arc_selected_template=="design-1" || $tf_hotel_arc_selected_template=="design-3") ) ||
             ( "tf_apartment"==$tf_current_post && $tf_apartment_arc_selected_template=="design-2" )){
             ?>
             <div class="tf-reviews tf-flex tf-flex-gap-12">
@@ -659,7 +659,9 @@ class TF_Review {
                 </div>
             </div>
             <?php
-            } elseif( ( "tf_tours"==$tf_current_post && $tf_tour_arc_selected_template=="design-2" ) || ( "tf_hotel"==$tf_current_post && $tf_hotel_arc_selected_template=="design-2" ) || ( "tf_apartment"==$tf_current_post && $tf_apartment_arc_selected_template=="design-1" ) ){ ?>
+            } elseif( ( "tf_tours"==$tf_current_post && $tf_tour_arc_selected_template=="design-2" ) || 
+            ( "tf_hotel"==$tf_current_post && $tf_hotel_arc_selected_template=="design-2" ) || 
+            ( "tf_apartment"==$tf_current_post && $tf_apartment_arc_selected_template=="design-1" ) ){ ?>
                 <span class="tf-available-rating-number">
                     <?php esc_html_e('0.0','tourfic'); ?>
                 </span>

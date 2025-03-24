@@ -1,10 +1,10 @@
 .tf-single-template,
 .tf-archive-template,
 .page-template-tf-search{
-    &__one{
+    &__legacy{
         padding: 40px 0px;
     }
-    &__three{
+    &__two{
         width: 100%;
         #tf-required {
             text-align: center;
@@ -1066,7 +1066,7 @@
 .single-tf_apartment,
 .single-tf_hotel{
     .tf-single-template{
-        &__three{
+        &__two{
             .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-checkin,
             .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-checkout{
                 max-width: none;
@@ -1081,7 +1081,7 @@
 .single-tf_hotel,
 .single-tf_tours{
     .tf-single-template{
-        &__three{
+        &__two{
             #tf-ask-modal{
                 .tf-aq-outer{
                     background: $color-brand-lite;
@@ -1144,7 +1144,7 @@
 }
 .single-tf_hotel{
     .tf-single-template{
-        &__three{
+        &__two{
             .tf-content-wrapper{
                 .tf-details{
                     @media only screen and (max-width: 1280px) {
@@ -1496,7 +1496,7 @@
 
 .single-tf_tours{
     .tf-single-template{
-        &__three{
+        &__two{
             margin-bottom: 0;
             .tf-content-wrapper{
                 .tf-details{
@@ -1597,7 +1597,7 @@
 
 .single-tf_apartment{
     .tf-single-template{
-        &__three{
+        &__two{
             .tf-content-wrapper{
                 .tf-details{
                     @media #{$max768} {
@@ -1634,7 +1634,7 @@
 }
 
 .tf-single-template{
-    &__three{
+    &__two{
         //  FAQ Section
         .tf-questions-wrapper {
             background-color: transparent;
@@ -3207,7 +3207,7 @@
 // Archive Global Start
 .tf-archive-template,
 .page-template-tf-search{
-    &__three{
+    &__two{
         .tf-hero-section-wrap {
             background-size: cover;
             background-position: center;

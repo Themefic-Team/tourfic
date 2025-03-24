@@ -36,7 +36,7 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
 $total_room_option_count = Tourfic\Classes\Room\Room::get_room_options_count($rooms);
 $price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings' ) ) ? Helper::tfopt( 'hotel_archive_price_minimum_settings' ) : 'all';
 ?>
-<div class="tf-single-template__one">
+<div class="tf-single-template__legacy">
 	<?php do_action( 'tf_before_container' ); ?>
 
     <!-- Start title area -->

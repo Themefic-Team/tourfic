@@ -1,6 +1,6 @@
 .single-tf_tours{
     .tf-single-template{
-        &__one{
+        &__legacy{
             .tf-inc-exc-wrapper {
                 background-position: center center;
                 background-size: cover;
@@ -107,7 +107,7 @@
                 }
             }
         }
-        &__two{
+        &__one{
             .tf-inex-wrapper {
                 .tf-inex {
                     width: 100%;
@@ -125,7 +125,7 @@
                 }
             }
         }
-        &__three{
+        &__two{
             .tf-include-exclude-wrapper {
                 @media #{$max768}{
                     padding-left: 16px;

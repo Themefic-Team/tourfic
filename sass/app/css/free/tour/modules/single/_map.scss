@@ -1,6 +1,6 @@
 .single-tf_tours{
     .tf-single-template{
-        &__one{
+        &__legacy{
             #tour-map{
                 margin-top: 0px;
             }
@@ -11,7 +11,7 @@
                 }
             }
         }
-        &__two{
+        &__one{
             #tf-tour-map{
                 .tf-map-area{
                     #tour-location{

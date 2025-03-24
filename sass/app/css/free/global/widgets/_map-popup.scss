@@ -1192,10 +1192,10 @@
 
 .tf-single-template,
 .tf-archive-template{
+    &__legacy,
     &__one,
     &__two,
-    &__three,
-    &__four{
+    &__three{
         .fancybox-container{
             #tf_posts_navigation_bar,
             .tf_posts_ajax_navigation,

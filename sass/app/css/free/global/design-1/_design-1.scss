@@ -1,6 +1,6 @@
 .tf-single-template,
 .tf-archive-template {
-    &__two{
+    &__one{
         padding: 56px 0px;
         .tf-btn{
             height: auto;
@@ -18,7 +18,7 @@
 }
 
 .tf-single-template{
-    &__two{
+    &__one{
         // Header
         .tf-single-head{
             .tf-head-info{
@@ -708,7 +708,7 @@
 
 // Archive Global Start
 .tf-archive-template{
-    &__two{
+    &__one{
         .tf-archive-head {
             @media #{$max575}{
                 gap: 12px;

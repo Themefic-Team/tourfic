@@ -1,6 +1,6 @@
 .single-tf_hotel{
     .tf-single-template{
-        &__one{
+        &__legacy{
             .hero-section-wrap {
                 display: grid;
                 grid-template-columns: 75% 25%;
@@ -41,7 +41,7 @@
                 }
             }
         }
-        &__two{
+        &__one{
             .tf-single-head{
                 .more-hotel{
                     color: $color-primary;
