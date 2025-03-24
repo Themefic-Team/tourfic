@@ -523,17 +523,21 @@
             var tf_location = $(this).val();
             $("#tf-search-tour").val(tf_location);
         });
-        $(document).on('click', function (event) {
-            if (!$(event.target).closest("#tf-tour-location-adv").length) {
-                $(".tf-tour-results").removeClass('tf-destination-show');
-            }
-        });
+    
         $('#ui-id-2 li').on("click", function (e) {
             var dest_name = $(this).attr("data-name");
             var dest_slug = $(this).attr("data-slug");
             $(".tf-tour-preview-place").val(dest_name);
             $("#tf-tour-place").val(dest_slug);
-            $(".tf-tour-results").removeClass('tf-destination-show');
+            setTimeout(function () {
+                $(".tf-tour-results").removeClass('tf-destination-show');
+            }, 100);
+        });
+
+        $(document).on('click', function (event) {
+            if (!$(event.target).closest("#tf-tour-location-adv").length) {
+                $(".tf-tour-results").removeClass('tf-destination-show');
+            }
         });
 
         // Tour destination autocomplete
@@ -549,10 +553,15 @@
         $(window).on("scroll", function () {
             var sticky = $('.tf-tour-booking-wrap'),
                 scroll = $(window).scrollTop(),
-                footer = $('footer'),
-                footerOffset = footer.offset().top,
+                footer = $('footer');
+        
+            if (footer.length === 0) {
+                return; 
+            }
+        
+            var footerOffset = footer.offset().top,
                 windowHeight = $(window).height();
-
+        
             if (scroll >= 800) {
                 if (scroll + windowHeight >= footerOffset) {
                     sticky.removeClass('tf-tours-fixed'); 
@@ -573,7 +582,9 @@
                 let bookingBox = $('.tf-tour-booking-box');
                 let bottomBar = $('.tf-bottom-booking-bar');
                 let footer = $('.footer');
-                
+                if (footer.length === 0) {
+                    return; 
+                }
                 let boxOffset = bookingBox.offset().top + bookingBox.outerHeight();
                 let footerOffset = footer.offset().top;
                 var scrollTop = $(window).scrollTop();
@@ -587,8 +598,9 @@
             });
         }
 
-        $(document).on('click', '.tf-booking-mobile-btn', function (e) {
+        $('.tf-booking-mobile-btn').on('click', function (e) {
             e.preventDefault();
+            e.stopPropagation();
             $(this).closest('.tf-bottom-booking-bar').toggleClass('mobile-active');
         });
 
