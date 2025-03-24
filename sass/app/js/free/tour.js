@@ -550,13 +550,54 @@
         /**
          * Single tour sticky booking bar position fixed
          */
-       
+        $(window).on("scroll", function () {
+            var sticky = $('.tf-tour-booking-wrap'),
+                scroll = $(window).scrollTop(),
+                footer = $('footer');
+        
+            if (footer.length === 0) {
+                return; 
+            }
+        
+            var footerOffset = footer.offset().top,
+                windowHeight = $(window).height();
+        
+            if (scroll >= 800) {
+                if (scroll + windowHeight >= footerOffset) {
+                    sticky.removeClass('tf-tours-fixed'); 
+                } else {
+                    sticky.addClass('tf-tours-fixed');
+                }
+            } else {
+                sticky.removeClass('tf-tours-fixed');
+            }
+        });
 
         /**
          * Single tour sticky booking bar - template 1
          * @author Foysal
          */
-     
+        if ($('.tf-tour-booking-box').length > 0) {
+            $(window).on("scroll", function () {
+                let bookingBox = $('.tf-tour-booking-box');
+                let bottomBar = $('.tf-bottom-booking-bar');
+                let footer = $('.footer');
+                if (footer.length === 0) {
+                    return; 
+                }
+                let boxOffset = bookingBox.offset().top + bookingBox.outerHeight();
+                let footerOffset = footer.offset().top;
+                var scrollTop = $(window).scrollTop();
+                let windowHeight = $(window).height();
+
+                if (scrollTop > boxOffset && scrollTop + windowHeight < footerOffset) {
+                    bottomBar.addClass('active');
+                } else {
+                    bottomBar.removeClass('active');
+                }
+            });
+        }
+
         $('.tf-booking-mobile-btn').on('click', function (e) {
             e.preventDefault();
             e.stopPropagation();
