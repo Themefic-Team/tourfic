@@ -2097,18 +2097,18 @@
         });
 
         // Design 3 Toggle share buttons
-        $('.tf-single-template__three .tf-share-toggle, .tf-single-template__four .tf-share-toggle').on("click", function (e) {
+        $('.tf-single-template__two .tf-share-toggle, .tf-single-template__three .tf-share-toggle').on("click", function (e) {
             e.preventDefault();
             $('.tf-share-toggle').toggleClass('actives');
             $('.tf-off-canvas-share').toggleClass('show');
         });
 
         // Design 3 Wishlist buttons
-        $('.tf-single-template__three .add-wishlist, .tf-single-template__four .add-wishlist').on("click", function (e) {
+        $('.tf-single-template__two .add-wishlist, .tf-single-template__three .add-wishlist').on("click", function (e) {
             e.preventDefault();
             $(this).parents().find('.tf-wishlist-box').addClass('actives');
         });
-        $('.tf-single-template__three .remove-wishlist, .tf-single-template__four .remove-wishlist').on("click", function (e) {
+        $('.tf-single-template__two .remove-wishlist, .tf-single-template__three .remove-wishlist').on("click", function (e) {
             e.preventDefault();
             $(this).parents().find('.tf-wishlist-box').removeClass('actives');
         });
@@ -2145,7 +2145,7 @@
         * Template 3 Script Start
         * @author: Jahid
         */
-        $('.tf-single-template__three .tf-reviews-slider').slick({
+        $('.tf-single-template__two .tf-reviews-slider').slick({
             infinite: true,
             slidesToShow: 3,
             slidesToScroll: 3,
@@ -2162,7 +2162,7 @@
             ]
         });
 
-        $(".tf-single-template__three .tf-question").on("click", function () {
+        $(".tf-single-template__two .tf-question").on("click", function () {
             var $this = $(this);
             if (!$this.hasClass("tf-active")) {
                 $(this).siblings().removeClass("tf-active");
@@ -2174,7 +2174,7 @@
             $(this).find('.tf-question-desc').slideToggle();
         });
 
-        $(".tf-single-template__three .tf-hero-hotel.tf-popup-buttons").on("click", function (e) {
+        $(".tf-single-template__two .tf-hero-hotel.tf-popup-buttons").on("click", function (e) {
             e.preventDefault();
             $("#tour_room_details_loader").show();
             setTimeout(function () {
@@ -2183,7 +2183,7 @@
             }, 1000);
         });
 
-        $(document).on('click', '.tf-single-template__three .tf-popup-close, .tf-archive-template__three .tf-popup-close', function () {
+        $(document).on('click', '.tf-single-template__two .tf-popup-close, .tf-archive-template__two .tf-popup-close', function () {
             $(".tf-popup-wrapper").removeClass("tf-show")
         });
 
@@ -2193,40 +2193,40 @@
             }
         });
 
-        $('.tf-single-template__three .tf-details-menu a').on('click', function () {
+        $('.tf-single-template__two .tf-details-menu a').on('click', function () {
             $(this).addClass('tf-hashlink');
             $(this).closest('li').siblings().find('a').removeClass('tf-hashlink');
         });
 
         //Room Filter Showing
-        $('.tf-single-template__three .tf-available-rooms-head .tf-filter, .tf-archive-template__three .tf-available-rooms-head .tf-filter, .tf-archive-template__three .tf-available-rooms-head .tf-filter').on('click', function () {
+        $('.tf-single-template__two .tf-available-rooms-head .tf-filter, .tf-archive-template__two .tf-available-rooms-head .tf-filter, .tf-archive-template__three .tf-available-rooms-head .tf-filter').on('click', function () {
             $('.tf-room-filter').toggleClass('tf-filter-show');
         });
 
         //Archive Filter Showing
-        $('.tf-archive-template__three .tf-archive-filter-showing').on('click', function () {
+        $('.tf-archive-template__two .tf-archive-filter-showing').on('click', function () {
             $('.tf-archive-right').toggleClass('tf-filter-show');
         });
 
         //Search Form Showing
-        $('.tf-single-template__three .tf-modify-search-btn, .tf-archive-template__three .tf-modify-search-btn').on('click', function () {
+        $('.tf-single-template__two .tf-modify-search-btn, .tf-archive-template__two .tf-modify-search-btn').on('click', function () {
             $('.tf-booking-form-wrapper .tf-booking-form').slideDown(300);
-            $('.tf-single-template__three .tf-modify-search-btn, .tf-archive-template__three .tf-modify-search-btn').slideUp(300);
+            $('.tf-single-template__two .tf-modify-search-btn, .tf-archive-template__two .tf-modify-search-btn').slideUp(300);
         });
 
         // Full Description Showing
-        $('.tf-single-template__three span.tf-see-description, .tf-archive-template__three span.tf-see-description, .single-tf_carrental .tf-single-template__one span.tf-see-description').on('click', function () {
+        $('.tf-single-template__two span.tf-see-description, .tf-archive-template__three span.tf-see-description, .single-tf_carrental .tf-single-template__one span.tf-see-description').on('click', function () {
             $('.tf-short-description').slideUp();
             $('.tf-full-description').slideDown();
         });
 
         // See Less Description Showing
-        $('.tf-single-template__three span.tf-see-less-description, .tf-single-template__four span.tf-see-less-description, .single-tf_carrental .tf-single-template__one span.tf-see-less-description').on('click', function () {
+        $('.tf-single-template__two span.tf-see-less-description, .tf-single-template__three span.tf-see-less-description, .single-tf_carrental .tf-single-template__one span.tf-see-less-description').on('click', function () {
             $('.tf-full-description').slideUp();
             $('.tf-short-description').slideDown();
         });
 
-        $('.tf-single-template__three .acr-inc, .tf-archive-template__three .acr-inc, .tf-single-template__three .acr-dec, .tf-archive-template__three .acr-dec').on('click', function () {
+        $('.tf-single-template__two .acr-inc, .tf-archive-template__two .acr-inc, .tf-single-template__two .acr-dec, .tf-archive-template__two .acr-dec').on('click', function () {
 
             if ($('input#infant').length) {
                 var guest = Number($('input#adults').val() ? $('input#adults').val() : 0) + Number($('input#children').val() ? $('input#children').val() : 0) + Number($('input#infant').val() ? $('input#infant').val() : 0);
@@ -2263,17 +2263,17 @@
         })
 
         $(document).on("mouseup", function (e) {
-            var container = $(".tf-single-template__three .tf_acrselection-wrap, .tf-archive-template__three .tf_acrselection-wrap");
+            var container = $(".tf-single-template__two .tf_acrselection-wrap, .tf-archive-template__two .tf_acrselection-wrap");
             if (!container.is(e.target) && container.has(e.target).length === 0) {
-                $(".tf-single-template__three .tf-booking-form-guest-and-room .tf_acrselection-wrap, .tf-archive-template__three .tf-booking-form-guest-and-room .tf_acrselection-wrap").removeClass("tf-show");
+                $(".tf-single-template__two .tf-booking-form-guest-and-room .tf_acrselection-wrap, .tf-archive-template__two .tf-booking-form-guest-and-room .tf_acrselection-wrap").removeClass("tf-show");
             }
         });
-        $(".tf-single-template__three .tf-booking-form-guest-and-room, .tf-archive-template__three .tf-booking-form-guest-and-room").on("click", function () {
-            $(".tf-single-template__three .tf-booking-form-guest-and-room .tf_acrselection-wrap, .tf-archive-template__three .tf-booking-form-guest-and-room .tf_acrselection-wrap").addClass("tf-show");
+        $(".tf-single-template__two .tf-booking-form-guest-and-room, .tf-archive-template__two .tf-booking-form-guest-and-room").on("click", function () {
+            $(".tf-single-template__two .tf-booking-form-guest-and-room .tf_acrselection-wrap, .tf-archive-template__two .tf-booking-form-guest-and-room .tf_acrselection-wrap").addClass("tf-show");
         });
 
-        $(".tf-single-template__three .tf-review-open").on("click", function () {
-            $(".tf-single-template__three .tf-sitebar-widgets .tf-review-form-wrapper").toggleClass("tf-review-show");
+        $(".tf-single-template__two .tf-review-open").on("click", function () {
+            $(".tf-single-template__two .tf-sitebar-widgets .tf-review-form-wrapper").toggleClass("tf-review-show");
         });
 
         /**

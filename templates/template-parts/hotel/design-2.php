@@ -3,7 +3,7 @@ use \Tourfic\Classes\Helper;
 use \Tourfic\App\TF_Review;
 ?>
 
-<div class="tf-single-template__three">
+<div class="tf-single-template__two">
 <!--Hero section start -->
 <div class="tf-hero-section-wrap" style="<?php echo !empty(get_the_post_thumbnail_url()) ? 'background: linear-gradient(0deg, rgba(48, 40, 28, 0.40) 0%, rgba(48, 40, 28, 0.40) 100%), url('.esc_url(get_the_post_thumbnail_url()).'), lightgray 0px -268.76px / 100% 249.543% no-repeat;background-size: cover; background-position: center;' : 'background: rgba(48, 40, 28, 0.30);'; ?>">
     <div class="tf-container">

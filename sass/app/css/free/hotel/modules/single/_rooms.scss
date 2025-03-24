@@ -1,6 +1,6 @@
 .single-tf_hotel{
     .tf-single-template{
-        &__one{
+        &__legacy{
             .tf-room-section{
                 margin-top: -20px;
                 .tf-room-filter .tf-room-checkbox, .tf-room-filter h3 {
@@ -260,7 +260,7 @@
                 
             }
         }
-        &__two{
+        &__one{
             .tf-rooms-sections{
                 .tf-rooms{
                     @media #{$max768}{

@@ -1,6 +1,6 @@
 .single-tf_tours{
     .tf-single-template{
-        &__one{
+        &__legacy{
             .tf-single-tour-pricing {
                 width: 200px;
                 @media #{$max768}{
@@ -72,7 +72,7 @@
                 }
             }
         }
-        &__two{
+        &__one{
             .tf-trip-info{
                 background-color: $color-filling-fg;
                 @include bd-radius(5px);

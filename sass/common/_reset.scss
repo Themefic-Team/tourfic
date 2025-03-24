@@ -128,11 +128,10 @@ a{
 }
 
 .tf-flex{
-    display: flex;
+    display: flex !important;
     @media #{$max1024}{
         flex-wrap: wrap;
     }
-  
 }
 .tf-flex-space-bttn{
     justify-content: space-between;

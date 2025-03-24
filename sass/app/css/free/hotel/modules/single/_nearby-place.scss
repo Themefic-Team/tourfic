@@ -1,6 +1,6 @@
 .single-tf_hotel{
     .tf-single-template{
-        &__one{
+        &__legacy{
             .nearby-container {
                 display: block;
                 background-color: $color-filling-fg;
@@ -31,7 +31,7 @@
                 }
             }
         }
-        &__two{
+        &__one{
             .tf-hotel-single-places{
                 ul{
                     margin: 0;

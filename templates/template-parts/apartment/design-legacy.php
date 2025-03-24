@@ -4,7 +4,7 @@ use \Tourfic\App\TF_Review;
 use \Tourfic\Classes\Apartment\Apartment;
 ?>
 
-<div class="tf-single-template__one">
+<div class="tf-single-template__legacy">
 	<?php do_action( 'tf_before_container' ); ?>
 
     <div class="tf-title-area tf-apartment-title">

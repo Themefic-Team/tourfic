@@ -1,6 +1,6 @@
 .single-tf_tours{
     .tf-single-template{
-        &__one{
+        &__legacy{
             .tf-travel-itinerary-wrapper{
                 .tf-travel-itinerary-content {
                     h2 {
@@ -124,7 +124,7 @@
                 }
             }
         }
-        &__two{
+        &__one{
             .tf-itinerary-wrapper{
                 .tf-itinerary-box {
                     background: $color-filling-fg;
@@ -300,7 +300,7 @@
                 }
             }
         }
-        &__three{
+        &__two{
             .tf-itinerary-wrapper {
                 display: flex;
                 flex-direction: column;

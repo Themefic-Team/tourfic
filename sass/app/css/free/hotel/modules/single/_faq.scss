@@ -1,12 +1,12 @@
 .single-tf_hotel{
     .tf-single-template{
-        &__one{
+        &__legacy{
             .hotel-faq .tf-faq-sec-title {
                 text-align: left;
                 margin-bottom: 20px;
             }
         }
-        &__two{
+        &__one{
             .tf-hotel-faqs-section{
                 .tf-hotel-enquiry{
                     flex-basis: 32%;

@@ -1,6 +1,6 @@
 .single-tf_tours{
     .tf-single-template{
-        &__two{
+        &__one{
             .tf-bottom-booking-bar {
                 position: fixed;
                 width: calc(100% - 64px);
@@ -176,7 +176,7 @@
                 }
             }
         }
-        &__three{
+        &__two{
             .tf-bottom-booking-bar {
                 position: fixed;
                 bottom: 0;

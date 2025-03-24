@@ -598,7 +598,7 @@
             }
     
             label input:checked~.tf-checkmark {
-                background-color: $color-primary;
+                background-color: $color-primary !important;
             }
     
             .tf-checkmark:after {

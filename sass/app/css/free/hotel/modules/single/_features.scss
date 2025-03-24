@@ -1,6 +1,6 @@
 .single-tf_hotel{
     .tf-single-template{
-        &__one{
+        &__legacy{
             .tf_features {
                 padding: 5px 0 30px 0;
                 .tf-feature-list {
@@ -35,7 +35,7 @@
                 }
             }
         }
-        &__two{
+        &__one{
             .tf-hotel-single-features{
                 ul{
                     margin: 0;

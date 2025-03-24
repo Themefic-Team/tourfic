@@ -15,7 +15,7 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
     $tf_ext_booking_code = !empty( $meta['booking-code'] ) ? $meta['booking-code'] : '';
 }
 ?>
-<div class="tf-single-template__two">
+<div class="tf-single-template__one">
     <div class="tf-tour-single">
         <div class="tf-container">
             <div class="tf-container-inner">

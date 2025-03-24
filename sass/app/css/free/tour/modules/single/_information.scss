@@ -1,6 +1,6 @@
 .single-tf_tours{
     .tf-single-template{
-        &__one{
+        &__legacy{
             .description-section{
                 .tf-square-block-content {
                     display: flex;
@@ -76,7 +76,7 @@
                 }
             }
         }
-        &__two{
+        &__one{
             .tf-trip-feature-blocks{
                 .tf-features-block-inner {
                     display: flex;

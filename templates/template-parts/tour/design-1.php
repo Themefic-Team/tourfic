@@ -29,7 +29,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
 	}
 }
 ?>
-<div class="tf-single-template__two">
+<div class="tf-single-template__one">
     <div class="tf-tour-single">
         <div class="tf-container">
             <div class="tf-container-inner">

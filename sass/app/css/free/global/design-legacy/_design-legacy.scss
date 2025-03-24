@@ -2,7 +2,7 @@
 .single-tf_tours,
 .single-tf_apartment{
     .tf-single-template{
-        &__one{
+        &__legacy{
             .tf_features {
                 .feature-list-title {
                     margin: 0;
@@ -262,7 +262,7 @@
 
 .single-tf_apartment{
     .tf-single-template{
-        &__one{
+        &__legacy{
             .section-heading {
                 font-weight: 600;
                 font-size: 1.5rem;
@@ -996,7 +996,7 @@
 }
 
 .tf-archive-template{
-    &__one{
+    &__legacy{
         .tf-search-right{
             #tf__booking_sidebar{
                 padding: 30px;

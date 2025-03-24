@@ -1,6 +1,6 @@
 .single-tf_tours{
     .tf-single-template{
-        &__one{
+        &__legacy{
             .tf-highlight-wrapper{
                 .tf-highlight-item {
                     display: flex;
@@ -34,7 +34,7 @@
                 }
             }
         }
-        &__two{
+        &__one{
             .tf-highlights-wrapper {
                 background: $color-filling-fg;
                 @include bd-radius(5px);;

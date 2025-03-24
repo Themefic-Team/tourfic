@@ -1,6 +1,6 @@
 .single-tf_tours{
     .tf-single-template{
-        &__one{
+        &__legacy{
             .tf-suggestion-wrapper {
                 .owl-nav {
                     button {
@@ -52,7 +52,7 @@
                 }
             }
         }
-        &__two{
+        &__one{
             .upcomming-tours{
                 padding-top: 56px;
                 border-top: 1px solid $color-border-lite;
