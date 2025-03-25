@@ -116,6 +116,7 @@ TF_Metabox::metabox( 'tf_room_opt', array(
                     'type'        => 'number',
                     'label'       => __( 'Number of Child', 'tourfic' ),
                     'subtitle'    => __( 'Max number of children allowed in the room.', 'tourfic' ),
+                    'class'       => 'tf_room_clild_fild',
                     'attributes'  => array(
                         'min' => '0',
                     ),
