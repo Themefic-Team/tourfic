@@ -1838,6 +1838,7 @@
   flex: 0 0 100%;
   text-align: center;
   font-size: 0.875rem;
+  color: #ff6055;
 }
 
 .single-tf_apartment .tf-single-template__legacy #tf-apartment-booking .tf-apartment-form-fields .tf_booking-dates .form-control,
@@ -1924,7 +1925,7 @@
 }
 
 .single-tf_apartment .tf-single-template__legacy #tf-apartment-booking .tf-apartment-form-fields .tf-err-msg {
-  color: #dc3545;
+  color: #ff6055;
   font-weight: 500;
 }
 
@@ -2139,6 +2140,10 @@
 
 .single-tf_apartment .tf-single-template__two #tf-apartment-booking .tf-apartment-form-fields .tf_booking-dates .tf_label-row {
   margin-top: 8px;
+}
+
+.single-tf_apartment .tf-single-template__two #tf-apartment-booking .tf-apartment-form-fields .tf_booking-dates .tf_label-row .tf-err-msg {
+  color: #ff6055;
 }
 
 .single-tf_apartment .tf-single-template__legacy .apartment-question {

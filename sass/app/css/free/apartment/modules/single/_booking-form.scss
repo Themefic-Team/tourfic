@@ -107,6 +107,7 @@
                             @include flex(0 0 100%);
                             text-align: center;
                             font-size: 0.875rem;
+                            color: $color-danger;
                         }
             
                         .form-control,
@@ -195,7 +196,7 @@
                     }
             
                     .tf-err-msg {
-                        color: $color-error;
+                        color: $color-danger;
                         font-weight: 500;
                     }
                 }
@@ -385,6 +386,9 @@
         
                 .tf_label-row {
                     margin-top: 8px;
+                    .tf-err-msg{
+                        color: $color-danger;
+                    }
                 }
             }
         }
