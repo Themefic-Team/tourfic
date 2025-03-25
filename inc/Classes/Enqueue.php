@@ -71,6 +71,23 @@ class Enqueue {
 			'hotel' => 'tf_hotel',
 		];
 
+		$tax_post_type = '';
+        if (is_tax()) {
+            $taxonomy = get_queried_object();
+
+            if ($taxonomy && !is_wp_error($taxonomy)) {
+                $taxonomy_name = $taxonomy->taxonomy;
+
+                // Retrieve the taxonomy object
+                $taxonomy_obj = get_taxonomy($taxonomy_name);
+
+                // Get the post types associated with the taxonomy
+                if (!empty($taxonomy_obj->object_type)) {
+                    $tax_post_type = $taxonomy_obj->object_type[0];
+                }
+            }
+        }
+
 		/*
 		 * Ubuntu font load for hotel, tour, apartment template 3
 		 */
@@ -100,7 +117,7 @@ class Enqueue {
 		wp_enqueue_style( 'tf-app-style', TF_ASSETS_URL . 'app/css/tourfic-style' . $min_css . '.css', null, TF_VERSION );
 	
 		foreach ($tf_services as $key => $post_type) {
-			if (!in_array($key, $tf_disable_services) && (is_singular($post_type) || is_post_type_archive($post_type))) {
+			if (!in_array($key, $tf_disable_services) && (is_singular($post_type) || is_post_type_archive($post_type) || $post_type == $tax_post_type)) {
 				wp_enqueue_style("tf-app-{$key}", TF_ASSETS_URL . "app/css/tourfic-{$key}" . $min_css . ".css", null, TF_VERSION);
 			}
 		}

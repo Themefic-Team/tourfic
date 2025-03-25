@@ -1782,6 +1782,10 @@ h3.section-heading {
   outline: 0;
 }
 
+.tf-hotel-deposit-hide {
+  display: none;
+}
+
 .tf-hotel-side-booking .tf_form-inner {
   position: relative;
   display: grid;
@@ -17557,7 +17561,7 @@ div#tf-destinationautocomplete-list div:before {
   bottom: 0;
 }
 
-.tf-archive-template__three #tf-apartment-locationautocomplete-list,
+.tf-archive-template__three #tf-apartment-location-autocomplete-list,
 .tf-archive-template__three #tf-locationautocomplete-list,
 .tf-archive-template__three #tf-destinationautocomplete-list {
   position: absolute;
@@ -17573,27 +17577,27 @@ div#tf-destinationautocomplete-list div:before {
   background: var(--tf-filling-foreground);
 }
 
-.tf-archive-template__three #tf-apartment-locationautocomplete-list::-webkit-scrollbar,
+.tf-archive-template__three #tf-apartment-location-autocomplete-list::-webkit-scrollbar,
 .tf-archive-template__three #tf-locationautocomplete-list::-webkit-scrollbar,
 .tf-archive-template__three #tf-destinationautocomplete-list::-webkit-scrollbar {
   width: 4px;
 }
 
-.tf-archive-template__three #tf-apartment-locationautocomplete-list::-webkit-scrollbar-thumb,
+.tf-archive-template__three #tf-apartment-location-autocomplete-list::-webkit-scrollbar-thumb,
 .tf-archive-template__three #tf-locationautocomplete-list::-webkit-scrollbar-thumb,
 .tf-archive-template__three #tf-destinationautocomplete-list::-webkit-scrollbar-thumb {
   background-color: #aaa;
   border-radius: 32px;
 }
 
-.tf-archive-template__three #tf-apartment-locationautocomplete-list::-webkit-scrollbar-track,
+.tf-archive-template__three #tf-apartment-location-autocomplete-list::-webkit-scrollbar-track,
 .tf-archive-template__three #tf-locationautocomplete-list::-webkit-scrollbar-track,
 .tf-archive-template__three #tf-destinationautocomplete-list::-webkit-scrollbar-track {
   border-radius: 32px;
   background: rgba(6, 13, 28, 0.2);
 }
 
-.tf-archive-template__three #tf-apartment-locationautocomplete-list div,
+.tf-archive-template__three #tf-apartment-location-autocomplete-list div,
 .tf-archive-template__three #tf-locationautocomplete-list div,
 .tf-archive-template__three #tf-destinationautocomplete-list div {
   padding: 4px 16px;
@@ -17607,13 +17611,13 @@ div#tf-destinationautocomplete-list div:before {
   border-radius: 4px;
 }
 
-.tf-archive-template__three #tf-apartment-locationautocomplete-list div:hover,
+.tf-archive-template__three #tf-apartment-location-autocomplete-list div:hover,
 .tf-archive-template__three #tf-locationautocomplete-list div:hover,
 .tf-archive-template__three #tf-destinationautocomplete-list div:hover {
   background: var(--tf-brand-lite);
 }
 
-.tf-archive-template__three #tf-apartment-locationautocomplete-list div::before,
+.tf-archive-template__three #tf-apartment-location-autocomplete-list div::before,
 .tf-archive-template__three #tf-locationautocomplete-list div::before,
 .tf-archive-template__three #tf-destinationautocomplete-list div::before {
   display: none;
