@@ -570,6 +570,8 @@
             $('.tf-single-review.tf_apartment .tf-single-details').each(function (index, val) {
                 $(val).show();
             });
+
+            $('.show-all-review-wrap').hide();
         });
 
     });

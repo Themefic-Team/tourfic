@@ -422,7 +422,7 @@ if ( ( get_post_type( $post_id ) == 'tf_tours' && $tf_tour_selected_template == 
 				}
 				?>
             </div>
-			<?php if ( $post_type == "apartment" && $tf_apartment_selected_template == 'default' ): ?>
+			<?php if ( $post_type == "apartment" && $tf_apartment_selected_template == 'default' && count( $comments ) > 2 ): ?>
                 <div class="show-all-review-wrap">
                     <div>
                         <div class="tf-apaartment-show-all">

@@ -1930,9 +1930,9 @@ trait Action_Helper {
 			}
 		} else {
 			if ( function_exists( 'is_tf_pro' ) && is_tf_pro() &&
-				(Hotel::template( 'archive' ) == 'design-3' ||
-				Tour::template( 'archive' ) == 'design-3' ||
-				Apartment::template( 'archive' ) == 'design-2' ) ) {
+				( ($posttype == 'tf_hotel' && Hotel::template( 'archive' ) == 'design-3') ||
+				($posttype == 'tf_tours' && Tour::template( 'archive' ) == 'design-3') ||
+				($posttype == 'tf_apartment' && Apartment::template( 'archive' ) == 'design-2') ) ) {
 				?>
 				<div id="map-datas" style="display: none"><?php echo wp_json_encode([]); ?></div>
 				<div class="tf-nothing-found tf-template-4-nothing-found" data-post-count="0">
