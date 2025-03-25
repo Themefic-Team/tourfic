@@ -211,11 +211,13 @@
                     const obj = JSON.parse(response);
                     if (!obj.success) {
                         if (obj.message) {
-                            Swal.fire(
-                                'Error!',
-                                obj.message,
-                                'error'
-                            )
+                            $.confirm({
+                                theme: 'modern',
+                                title: 'Error!',
+                                content: obj.message,
+                                type: 'red',
+                                typeAnimated: true,
+                            })
                             form.find('input').removeClass('error-input');
                             form.find('select').removeClass('error-input');
                             form.find('textarea').removeClass('error-input');
@@ -248,11 +250,13 @@
                             }
                         }
                     } else {
-                        Swal.fire(
-                            'Success!',
-                            obj.message,
-                            'success'
-                        )
+                        $.confirm({
+                            theme: 'modern',
+                            title: 'Success!',
+                            content: obj.message,
+                            type: 'green',
+                            typeAnimated: true,
+                        })
                         form[0].reset();
                         form.find('input').removeClass('error-input');
                         form.find('select').removeClass('error-input');
