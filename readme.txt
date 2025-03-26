@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, car-rental, multivendor-marketplace
 Requires at least: 5.4
 Tested up to: 6.7
-Stable tag: 2.15.20
+Stable tag: 2.15.23
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -372,6 +372,20 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
+= 2.15.23 – March 26, 2025 =
+
+- Fixed: Registration issue on mobile has been resolved.
+
+= 2.15.22 – March 24, 2025 =
+
+- Fixed: Scrolling button hash (#) issue on mobile devices.
+
+= 2.15.21 – March 21, 2025 =
+
+- Added: iCal export option for apartments.
+- Fixed: Hotel room iCal import issue.
+- Fixed: Apartment availability calendar date selection issue.
+
 = 2.15.20 – March 10, 2025 =
 
 - Fixed: Scrolling for the hotel availability issue has been resolved.
@@ -393,79 +407,6 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 - Fixed: Post types tab switch issue corrected.
 - Fixed: Hotel backend booking issue for vendors resolved.
 - Fixed: Only vendor posts are now displayed in the backend booking.
-
-= 2.15.16 – February 10, 2025 =
-
-- Improved: Hotel search and filter functionality for a better user experience.
-
-= 2.15.15 – February 05, 2025 =
-
-- Updated: readme.txt file for better clarity.
-- Fixed: The pagination issue has been resolved.
-- Fixed: Car rental search issue on iPhone.
-- Improved: Performance improved for service list and search.
-
-= 2.15.14 – January 30, 2025 =
-
-- Fixed: Apartment archive pricing issue.
-- Fixed: Car rental seat range widget issue.
-- Fixed: Compatibility issue with WooCommerce refunds.
-
-= 2.15.13 – January 24, 2025 =
-
-- Fixed: The register URL redirection issue.
-- Fixed: The hotel search functionality issue.
-
-= 2.15.12 – January 19, 2025 =
-
-- Notice: Tourfic Design Panel Revamp notice added
-- Compatibility: Now compatible with Elementor 3.26.5.
-
-= 2.15.11 – January 16, 2025 =
-
-- Fixed: Room availability date picker issue has been resolved.
-- Fixed: Incorrect room option pricing in the availability calendar.
-- Fixed: The Due price issue has been resolved.
-- Fixed: Database notices after demo import.
-- Improved: Compatibility with theme builders.
-- Improved: Tour and apartment design for a refined look.
-- Improved: Search Form Design 4 layout and functionality.
-
-= 2.15.10 – 09 January 2025 =
-
-- Added: Protection Required option for car rentals
-- Added: Option to customize the map marker on the Map Template (Pro).
-- Fixed: Issue with the Frontend Dashboard Metabox repeater (Pro).
-- Improved: Archive Map Template design (Pro).
-- Improved: Overall system stability.
-
-= 2.15.9 – 02 January 2025 =
-
-- Fixed: Minor bugs and issues resolved.
-- Fixed: Frontend dashboard calendar issue addressed.
-- Compatibility: Now compatible with Elementor 3.26.3.
-
-= 2.15.8 – 31 December 2024 =
-
-- Fixed: Resolved the hotel availability issue.
-- Updated: Updated the readme.txt file and plugin information.
-
-= 2.15.7 – 28 December 2024 =
-
-- Updated readme.txt
-
-= 2.15.6 – 28 December 2024 =
-
-- Introduced: New archive and Search templates with map view for Hotel, Tour, and Apartment.
-- Introduced: Map view widget added for all templates.
-- Improved: New design (design-4) introduced for the search form shortcode.
-- Improved: Added card preloader in the Frontend Dashboard (Pro).
-- Improved: Updated license information label.
-- Fixed: Location selection issue resolved in the Frontend Dashboard (Pro).
-- Fixed: Room block issue resolved.
-- Fixed: Fixed FAQ display issue for hotels.
-- Fixed: Room availability issue resolved.
-- Compatibility: WPML compatibility added for setting fields.
 
 **Old Changelog can be found [here](https://themefic.com/tourfic/changelog/)**.
 
