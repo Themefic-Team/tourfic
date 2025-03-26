@@ -3077,7 +3077,6 @@ li.tf-filter-item {
   width: 776px;
   background-color: var(--tf-brand-lite);
   border-radius: 24px;
-  position: relative;
 }
 
 @media only screen and (max-width: 768px) {
@@ -3094,10 +3093,11 @@ li.tf-filter-item {
 
 .tf-withoutpayment-booking .tf-confirm-popup h2,
 .tf-withoutpayment-booking-confirm .tf-confirm-popup h2 {
+  text-align: center;
   color: var(--tf-text-heading);
   font-size: 3rem;
   font-weight: 600;
-  line-height: 0.625;
+  line-height: normal;
   letter-spacing: -0.96px;
 }
 
@@ -3199,9 +3199,6 @@ li.tf-filter-item {
   .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.done:first-child,
   .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.done:first-child {
     border-radius: 16px;
-    border: 1px solid var(--tf-primary);
-    background-color: transparent;
-    color: var(--tf-primary);
   }
 }
 
@@ -3254,6 +3251,7 @@ li.tf-filter-item {
   .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.active::before,
   .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.active::before {
     position: static;
+    display: none;
   }
 }
 
@@ -3648,6 +3646,7 @@ li.tf-filter-item {
   box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
   height: 32px;
   width: 100%;
+  padding: 0 8px;
 }
 
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-extra .tf-single-tour-traveller .traveller-info .traveller-single-info input[type="date"],
@@ -5521,6 +5520,7 @@ div#tf-destinationautocomplete-list div:before {
 .search-result-inner .tf-search-left .archive_ajax_result .tf-tour-price {
   display: flex;
   justify-content: end;
+  margin-top: 10px;
 }
 
 .search-result-inner .tf-search-left .archive_ajax_result .tf_posts_navigation .page-numbers {
@@ -12848,8 +12848,7 @@ div#tf-destinationautocomplete-list div:before {
   background-size: 10px;
   background-position: 80% 49%;
   text-align: center;
-  background-color: var(--tf-brand-lite);
-  border: none;
+  border: 1px solid var(--tf-border-lite);
   cursor: pointer;
   font-weight: 700;
 }

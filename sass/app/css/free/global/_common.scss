@@ -1350,20 +1350,20 @@ li.tf-filter-item {
         justify-content: center;
         flex-direction: column;
         width: 776px;
+        background-color: $color-brand-lite;
+        border-radius: 24px;
         @media #{$max768}{
             width: 100%;
         }
-        background-color: $color-brand-lite;
-        border-radius: 24px;
-        position: relative;
         img{
             width: 320px;
         }
         h2{
+            text-align: center;
             color: $color-heading;
             font-size: 3rem;
             font-weight: 600;
-            line-height: 0.625;
+            line-height: normal;
             letter-spacing: -0.96px;
         }
         .tf-booking-times {
@@ -1429,9 +1429,6 @@ li.tf-filter-item {
                             border-radius: 8px 0px 0px 8px;
                             @media #{$max768}{
                                 border-radius: 16px;
-                                border: 1px solid $color-primary;
-                                background-color: transparent;
-                                color: $color-primary;
                             }
                         }
                     }
@@ -1467,6 +1464,7 @@ li.tf-filter-item {
                             border-bottom: 28px solid transparent;
                             @media #{$max768}{
                                 position: static;
+                                display: none;
                             }
                         }
                         &:last-child{
@@ -1703,6 +1701,7 @@ li.tf-filter-item {
                                     box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
                                     height: 32px;
                                     width: 100%;
+                                    padding: 0 8px;
                                 }
                                 input[type="date"]{
                                     text-transform: uppercase;

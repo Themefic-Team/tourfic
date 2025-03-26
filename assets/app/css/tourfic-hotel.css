@@ -408,6 +408,10 @@
   -moz-appearance: auto;
 }
 
+.single-tf_hotel .tf-single-template__legacy .tf-room-section .availability-table td.reserve .room-submit-wrap {
+  margin-top: 15px;
+}
+
 .single-tf_hotel .tf-single-template__legacy .tf-room-section .availability-table td.reserve #tour_room_details_loader {
   position: fixed;
   top: 0;

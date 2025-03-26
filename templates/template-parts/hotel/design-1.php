@@ -251,7 +251,7 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
                                         <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $address_latitude ); ?>,<?php echo esc_attr( $address_longitude ); ?>&output=embed" width="100%" height="290"
                                                 style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 
-                                        <a data-fancybox class="map-pre" data-src="#tf-hotel-google-maps" href="javascript:;">
+                                        <a data-fancybox class="map-pre" data-src="#tf-hotel-google-maps" href="https://www.google.com/maps/search/<?php echo wp_kses_post($address); ?>">
                                             <i class="fa-solid fa-location-dot"></i>
                                         </a>
 
@@ -260,7 +260,7 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
                                     <?php if (  $tf_openstreet_map=="default" && !empty($address_latitude) && !empty($address_longitude) ) {  ?>
                                         <div class="tf-hotel-location-preview show-on-map">
                                             <div id="hotel-location"></div>
-                                            <a data-fancybox class="map-pre" data-src="#tf-hotel-google-maps" href="javascript:;">
+                                            <a data-fancybox class="map-pre" data-src="#tf-hotel-google-maps" href="https://www.google.com/maps/search/<?php echo wp_kses_post($address); ?>">
                                             <i class="fa-solid fa-location-dot"></i>
                                         </a>
                                         </div>
@@ -282,7 +282,7 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
                                             <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $address_latitude ); ?>,<?php echo esc_attr( $address_longitude ); ?>&output=embed" width="100%" height="290"
                                                     style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 
-                                            <a data-fancybox class="map-pre" data-src="#tf-hotel-google-maps" href="javascript:;">
+                                            <a data-fancybox class="map-pre" data-src="#tf-hotel-google-maps" href="https://www.google.com/maps/search/<?php echo wp_kses_post($address); ?>">
                                                 <i class="fa-solid fa-location-dot"></i>
                                             </a>
 
