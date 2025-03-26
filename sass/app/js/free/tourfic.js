@@ -1562,9 +1562,9 @@
         });
 
         // Form Tab click
-        $(document).on('click', '.tf-tablinks', function (e) {
+        $('.tf-tablinks').on('click', function (e) {
             let formId = $(this).data('form-id');
-            tfOpenForm(event, formId);
+            tfOpenForm(e, formId);
         });
 
         /*
@@ -1978,7 +1978,7 @@
 
             });
         }
-        $(document).on('click', '.tf-booking-popup-btn', function (e) {
+        $('.tf-booking-popup-btn').on('click', function(e){
             e.preventDefault();
             $(".tf-withoutpayment-booking input[type='text'], .tf-withoutpayment-booking input[type='email'], .tf-withoutpayment-booking input[type='date'], .tf-withoutpayment-booking select, .tf-withoutpayment-booking textarea").val("");
 
