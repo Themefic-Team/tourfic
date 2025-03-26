@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, car-rental, multivendor-marketplace
 Requires at least: 5.4
 Tested up to: 6.7
-Stable tag: 2.15.22
+Stable tag: 2.15.23
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -371,6 +371,20 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 22. Map Template(Pro)
 
 == Changelog ==
+
+= 2.15.23 – March 26, 2025 =
+
+- Fixed: Registration issue on mobile has been resolved.
+
+= 2.15.22 – March 24, 2025 =
+
+- Fixed: Scrolling button hash (#) issue on mobile devices.
+
+= 2.15.21 – March 21, 2025 =
+
+- Added: iCal export option for apartments.
+- Fixed: Hotel room iCal import issue.
+- Fixed: Apartment availability calendar date selection issue.
 
 = 2.15.22 – March 24, 2025 =
 
