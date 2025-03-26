@@ -374,17 +374,7 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 = 2.15.23 – March 26, 2025 =
 
-- Fixed: Registration issue on mobile has been resolved.
-
-= 2.15.22 – March 24, 2025 =
-
-- Fixed: Scrolling button hash (#) issue on mobile devices.
-
-= 2.15.21 – March 21, 2025 =
-
-- Added: iCal export option for apartments.
-- Fixed: Hotel room iCal import issue.
-- Fixed: Apartment availability calendar date selection issue.
+- Fixed: The Registration issue on mobile has been resolved.
 
 = 2.15.22 – March 24, 2025 =
 
