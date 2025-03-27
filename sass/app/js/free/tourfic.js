@@ -1999,7 +1999,7 @@
         });
 
         // Popup Close
-        $(document).on('click touchstart', '.tf-booking-times span', function (e) {
+        $('.tf-booking-times span').on('click touchstart', function (e) {
             $('.tf-withoutpayment-booking').removeClass('show');
             $('.tf-withoutpayment-booking-confirm').removeClass('show');
             // Reset Tabs
