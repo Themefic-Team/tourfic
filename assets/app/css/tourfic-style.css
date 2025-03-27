@@ -2345,13 +2345,13 @@ h3.section-heading {
 }
 
 .tf-review-container .tf-review-progress-bar {
-  background: var(--tf-brand-lite);
+  background: var(--tf-filling-foreground);
   display: grid;
   grid-template-columns: calc(50% - 20px) calc(50% - 20px);
   column-gap: 40px;
   row-gap: 20px;
   padding: 24px;
-  border: 1px solid var(--tf-border-lite);
+  border: 1px solid var(--tf-filling-foreground);
   box-sizing: border-box;
   border-radius: 4px;
   margin: 0 0 25px 0;
@@ -2387,7 +2387,7 @@ h3.section-heading {
 .tf-review-container .tf-review-progress-bar .tf-single .tf-p-bar {
   width: 100%;
   height: 7px;
-  background: var(--tf-brand-lite);
+  background: var(--tf-filling-foreground);
   border-radius: 4px;
   position: relative;
   overflow: hidden;
@@ -2446,7 +2446,7 @@ h3.section-heading {
   display: grid;
   grid-template-columns: 56px calc(100% - 72px);
   column-gap: 16px;
-  background: var(--tf-brand-lite);
+  background: var(--tf-filling-foreground);
   padding: 25px 25px 35px;
   border-radius: 4px;
 }
@@ -2497,6 +2497,10 @@ h3.section-heading {
   line-height: 1.5;
   color: var(--tf-text-paragraph);
   margin: 8px 0 0 0;
+}
+
+.tf-single-review .tf-review-details .tf-description p {
+  margin-bottom: 0;
 }
 
 .tf-review-pending {

@@ -1172,13 +1172,13 @@
          * Open/close horizontal search form persons panel
          */
         // Adult, Child, Room Selection toggle
-        $(document).on('click', '.tf_selectperson-wrap .tf_input-inner,.tf_person-selection-wrap .tf_person-selection-inner', function () {
+        $(".tf_selectperson-wrap .tf_input-inner,.tf_person-selection-wrap .tf_person-selection-inner").on("click", function () {
             $('.tf_acrselection-wrap').slideToggle('fast');
         });
         // Close
-        jQuery(document).on("click", function (event) {
-            if (!jQuery(event.target).closest(".tf_selectperson-wrap").length) {
-                jQuery(".tf_acrselection-wrap").slideUp("fast");
+        document.addEventListener("click", function (event) {
+            if (!$(event.target).closest(".tf_selectperson-wrap, .tf_acrselection-wrap").length) {
+                $(".tf_acrselection-wrap, .tf_person-selection-wrap").slideUp("fast");
             }
         });
 
@@ -1995,7 +1995,8 @@
         });
 
         // Popup Close
-        $(document).on('click', '.tf-booking-times span', function (e) {
+        $(".tf-booking-times span").on("click touchstart", function (e) {
+            e.preventDefault();
             $('.tf-withoutpayment-booking').removeClass('show');
             $('.tf-withoutpayment-booking-confirm').removeClass('show');
             // Reset Tabs

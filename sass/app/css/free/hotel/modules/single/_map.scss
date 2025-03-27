@@ -17,6 +17,9 @@
             }
             .show-on-map {
                 margin-bottom: 20px;
+                @include flexbox();
+                flex-direction: column;
+                gap: 10px;
                 iframe {
                     height: 130px;
                 }
