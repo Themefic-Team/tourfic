@@ -295,11 +295,13 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 
 							<?php endif; ?>
 
-							<?php if (isset($meta['nearby-places']) && ! empty( $meta['nearby-places'] ) ) { ?>
+                            <?php 
+                                $places_meta = ! empty( $meta["nearby-places"] ) ? Helper::tf_data_types($meta["nearby-places"]) : array();
+                                if($places_meta){ ?>
                                 <div class="tf-whats-around">
                                     <span class="tf-whats-around-title"><?php echo ! empty( $meta['section-title'] ) ? esc_html( $meta['section-title'] ) : esc_html( "What’s around?" ); ?></span>
                                     <ul>
-										<?php foreach ( $meta['nearby-places'] as $place ) { ?>
+										<?php foreach(Helper::tf_data_types($meta['nearby-places']) as $place) { ?>
                                             <li>
                                                 <span>
                                                     <?php if ( ! empty( $place['place-icon'] ) ) { ?>
