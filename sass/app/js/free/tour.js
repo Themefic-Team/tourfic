@@ -574,8 +574,9 @@
             });
         }
 
-        $(document).on('click', '.tf-booking-mobile-btn', function (e) {
+        $('.tf-booking-mobile-btn').on('click', function (e) {
             e.preventDefault();
+            e.stopPropagation();
             $(this).closest('.tf-bottom-booking-bar').toggleClass('mobile-active');
         });
 

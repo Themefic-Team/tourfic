@@ -564,11 +564,11 @@
         /**
          * Ajax login
          */
-        $(document).on('click', '#tf-login .tf-submit', function (e) {
+        $(document).on('submit', '#tf-login', function (e) {
             e.preventDefault();
 
-            let btn = $(this);
-            let form = $(this).closest('#tf-login');
+            let btn = $(this).find('.tf-submit');
+            let form = $(this);
             let formData = new FormData(form[0]);
             formData.append('action', 'tf_login');
             let requiredFields = ['tf_log_user', 'tf_log_pass'];
@@ -649,12 +649,12 @@
         /**
          * Ajax registration
          */
-        $(document).on('click', '#tf-register .tf-submit', function (e) {
+        $(document).on('submit', '#tf-register', function (e) {
             e.preventDefault();
 
-            let btn = $(this);
+            let btn = $(this).find('.tf-submit');
             let wishlistItems = getWish();
-            let form = $(this).closest('#tf-register');
+            let form = $(this);
             let formData = new FormData(form[0]);
             formData.append('action', 'tf_registration');
             formData.append('wishlist', JSON.stringify(wishlistItems));
