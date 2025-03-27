@@ -82,6 +82,9 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 							$tf_room_fec_key = 1;
 							foreach ( $room['features'] as $feature ) {
 								if ( $tf_room_fec_key < 5 ) {
+									if(empty($feature)){
+										continue;
+									}
 									$room_f_meta = get_term_meta( $feature, 'tf_hotel_feature', true );
 									if ( ! empty( $room_f_meta ) ) {
 										$room_icon_type = ! empty( $room_f_meta['icon-type'] ) ? $room_f_meta['icon-type'] : '';
