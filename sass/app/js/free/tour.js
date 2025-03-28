@@ -191,13 +191,10 @@
         $(".tf-itinerary-single-meta li .fa-info-circle, .ininerary-other-info li .fa-info-circle").on("click", function (e) {
             e.preventDefault();
             e.stopPropagation();
-        
             var id = $(this).parent().attr("id");
-            console.log(id);
             $(".tour-itinerary-sleep").each(function () {
                 var elementId = $(this).attr("id"); 
                 if (id === elementId) {
-                    console.log(elementId);
                     $(this).fadeIn();
                 } else {
                     $(this).fadeOut();
