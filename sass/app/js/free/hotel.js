@@ -244,7 +244,7 @@
          *
          * Fancybox
          */
-        $('[data-fancybox="hotel-gallery"]').fancybox({
+        Fancybox.bind('[data-fancybox="hotel-gallery"]', {
             loop: true,
             buttons: [
                 "zoom",
