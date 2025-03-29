@@ -176,6 +176,9 @@
 .tour-itinerary-sleep {
     background-color: unset;
     background: transparent !important;
+    position: absolute;
+    top: 30px;
+    z-index: 999;
     .tf-tours-booking-deposit {
         display: flex;
         flex-direction: column;
@@ -635,6 +638,7 @@
                 color: #222322;
                 font-size: 16px;
                 text-decoration: none;
+                align-items: center;
             }
             i {
                 margin-right: 5px;

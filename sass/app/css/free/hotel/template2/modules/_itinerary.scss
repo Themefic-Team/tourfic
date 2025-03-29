@@ -115,6 +115,7 @@
                 grid-template-columns: 1fr 1fr;
                 gap: 15px;
                 .tf-itinerary-single-meta{
+                    position: relative;
                     li{
                         color: #99948D;
                         font-size: 16px;
@@ -133,6 +134,7 @@
                             font-weight: 400;
                             line-height: 130%; /* 20.8px */
                             text-decoration: none;
+                            align-items: center;
                             i{
                                 margin-right: 8px;
                                 width: 22px;
