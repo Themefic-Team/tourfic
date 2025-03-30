@@ -372,7 +372,7 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
-= 2.15.24 – March 29, 2025 =
+= 2.15.24 – March 30, 2025 =
 
 - Fixed: Itinerary meta description pop-up issue.
 - Updated: Meta description pop-up design.
