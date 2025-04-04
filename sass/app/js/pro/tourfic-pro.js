@@ -23,7 +23,7 @@
             var hotelid = $("#hotel-post-id").val();
             var hoteladult = $("#adults").val();
             var hotelchildren = $("#children").val();
-            var deposit = $("#hotel_room_depo").val();
+            var deposit = $("input[name=hotel_room_depo]").val();
             var room = $("#hotel_room_number").val();
             var check_in_date = $("input[name=check_in_date]").val();
             var check_out_date = $("input[name=check_out_date]").val();
