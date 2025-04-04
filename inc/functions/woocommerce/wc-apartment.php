@@ -28,9 +28,9 @@ function tf_apartment_booking_callback() {
 	$product_id          = get_post_meta( $post_id, 'product_id', true );
 	$post_author         = get_post_field( 'post_author', $post_id );
 	$meta                = get_post_meta( $post_id, 'tf_apartment_opt', true );
-	$max_adults          = ! empty( $meta['max_adults'] ) ? $meta['max_adults'] : '';
-	$max_children        = ! empty( $meta['max_children'] ) ? $meta['max_children'] : '';
-	$max_infants         = ! empty( $meta['max_infants'] ) ? $meta['max_infants'] : '';
+	$max_adults          = (isset($meta['max_adults']) && ! empty( $meta['max_adults'] )) ? $meta['max_adults'] : '0';
+	$max_children        = (isset($meta['max_children']) && ! empty( $meta['max_children'] )) ? $meta['max_children'] : '0';
+	$max_infants         = (isset($meta['max_infants']) && ! empty( $meta['max_infants'] )) ? $meta['max_infants'] : '0';
 	$pricing_type        = ! empty( $meta['pricing_type'] ) ? $meta['pricing_type'] : 'per_night';
 	$price_per_night     = ! empty( $meta['price_per_night'] ) ? $meta['price_per_night'] : 0;
 	$adult_price         = ! empty( $meta['adult_price'] ) ? $meta['adult_price'] : 0;
@@ -83,15 +83,21 @@ function tf_apartment_booking_callback() {
 	if ( empty( $adults ) ) {
 		$response['errors'][] = esc_html__( 'Select Adult(s).', 'tourfic' );
 	}
-	if ( $max_adults && $adults > $max_adults ) {
+	if($max_adults == 0 && $adults > 0){
+		$response['errors'][] = esc_html__( 'Adult not allowed.', 'tourfic' );
+	} elseif ( $max_adults && $adults > $max_adults ) {
 		/* translators: %s Adult Count */
 		$response['errors'][] = sprintf( esc_html__( 'Maximum %s Adult(s) allowed.', 'tourfic' ), $max_adults );
 	}
-	if ( $max_children && $children > $max_children ) {
+	if($max_children == 0 && $children > 0){
+		$response['errors'][] = esc_html__( 'Children not allowed.', 'tourfic' );
+	} elseif ( $max_children && $children > $max_children ) {
 		/* translators: %s Children Count */
 		$response['errors'][] = sprintf( esc_html__( 'Maximum %s Children(s) allowed.', 'tourfic' ), $max_children );
 	}
-	if ( $max_infants && $infant > $max_infants ) {
+	if($max_infants == 0 && $infant > 0){
+		$response['errors'][] = esc_html__( 'Infant not allowed.', 'tourfic' );
+	} elseif ( $max_infants && $infant > $max_infants ) {
 		/* translators: %s Infant Count */
 		$response['errors'][] = sprintf( esc_html__( 'Maximum %s Infant(s) allowed.', 'tourfic' ), $max_infants );
 	}
