@@ -33,13 +33,7 @@
                     <span class="tf-modify-search-btn">
                         <?php esc_html_e("Modify search", "tourfic"); ?>
                     </span>
-                    <!-- Booking form Start -->
-                    <div class="tf-archive-search-form tf-booking-form-wrapper">
-                        <form action="<?php echo esc_url(Helper::tf_booking_search_action()); ?>" method="get" autocomplete="off" class="tf_archive_search_result tf-hotel-side-booking tf-booking-form">
-                            <?php Helper::tf_archive_sidebar_search_form('tf_tours'); ?>
-                        </form>
-                    </div>
-                    <!-- Booking form end -->
+                    <?php Helper::tf_archive_sidebar_search_form('tf_tours'); ?>
 
                     <!--Available rooms start -->
                     <div class="tf-available-archive-hetels-wrapper tf-available-rooms-wrapper" id="tf-hotel-rooms">

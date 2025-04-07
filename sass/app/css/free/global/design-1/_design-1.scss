@@ -811,48 +811,7 @@
         label input:checked ~ .tf-checkmark{
             background-color: $color-primary !important;
         }
-        .tf-archive-right{
-            .tf-destination-box{
-                .autocomplete-items {
-                    max-height: 120px;
-                    overflow: scroll;
-                    overflow-x: hidden;
-                    position: absolute;
-                    border: 1px solid $color-border-lite;
-                    border-bottom: none;
-                    border-top: none;
-                    z-index: 99;
-                    top: 100%;
-                    left: 0;
-                    right: 0;
-                    div{
-                        padding: 10px;
-                        cursor: pointer;
-                        background-color: $color-white;
-                        border-bottom: 1px solid $color-border-lite;
-                        color: $color-text;
-                    }
-                }
-            }
-            .tf_acrselection{
-                .tf-field{
-                    align-items: center;
-                    justify-content: space-between;
-                    padding: 10px 20px;
-                    .acr-label{
-                        align-items: center;
-                        i{
-                            position: static;
-                            margin-right: 5px;
-                        }
-                    }
-                }
-            }
-            .tf-booking-bttns{
-                button{
-                    width: 100%;
-                }
-            }
+        .tf-archive-right{  
             .tf-related-single{
                 border-top: 1px solid $color-border-lite;
                 margin-bottom: $tf-space-24;
@@ -1307,6 +1266,50 @@
                 }
             }
 
+        }
+    }
+}
+
+.tf-archive-booking-form__style-1{
+    .tf-destination-box{
+        .autocomplete-items {
+            max-height: 120px;
+            overflow: scroll;
+            overflow-x: hidden;
+            position: absolute;
+            border: 1px solid $color-border-lite;
+            border-bottom: none;
+            border-top: none;
+            z-index: 99;
+            top: 100%;
+            left: 0;
+            right: 0;
+            div{
+                padding: 10px;
+                cursor: pointer;
+                background-color: $color-white;
+                border-bottom: 1px solid $color-border-lite;
+                color: $color-text;
+            }
+        }
+    }
+    .tf_acrselection{
+        .tf-field{
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            .acr-label{
+                align-items: center;
+                i{
+                    position: static;
+                    margin-right: 5px;
+                }
+            }
+        }
+    }
+    .tf-booking-bttns{
+        button{
+            width: 100%;
         }
     }
 }
