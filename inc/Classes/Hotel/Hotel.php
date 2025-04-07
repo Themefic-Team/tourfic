@@ -1582,6 +1582,7 @@ class Hotel {
 		if ( isset( $_GET ) ) {
 			$_GET = array_map( 'stripslashes_deep', $_GET );
 		}
+
 		// location
 		$location = ! empty( $_GET['place'] ) ? esc_html( $_GET['place'] ) : '';
 		// Adults
@@ -2405,21 +2406,22 @@ class Hotel {
                         </div>
                     </div>
 
-					<?php if ( ! empty( $advanced ) && "enabled" == $advanced ) { ?>
+					<?php if ( ! empty( $advanced ) && "enabled" == $advanced ) { 
+						?>
                         <div class="tf_selectdate-wrap tf_more_info_selections">
                             <div class="tf_input-inner">
                                 <label class="tf_label-row" style="width: 100%;">
                                     <span class="tf-label"><?php esc_html_e( 'More', 'tourfic' ); ?></span>
-                                    <span style="text-decoration: none; display: block; cursor: pointer;"><?php esc_html_e( 'Filter', 'tourfic' ); ?>  <i class="fas fa-angle-down"></i></span>
+                                    <span style="text-decoration: none; display: block; cursor: pointer;"><?php esc_html_e( apply_filters("tf_search_form_advance_filter_label", 'Filter'), 'tourfic' ); ?>  <i class="fas fa-angle-down"></i></span>
                                 </label>
                             </div>
                             <div class="tf-more-info">
-                                <h3><?php esc_html_e( 'Filter Price', 'tourfic' ); ?></h3>
+                                <h3 class="tf_advance_search_form_price_filter_label"><?php esc_html_e( 'Filter Price', 'tourfic' ); ?></h3>
                                 <div class="tf-filter-price-range">
                                     <div class="tf-hotel-filter-range"></div>
                                 </div>
 
-                                <h3 style="margin-top: 20px"><?php esc_html_e( 'Hotel Features', 'tourfic' ); ?></h3>
+                                <h3 style="margin-top: 20px" class="tf_advance_search_form_feature_filter_label"><?php esc_html_e( 'Hotel Features', 'tourfic' ); ?></h3>
 								<?php
 								$tf_hotelfeature = get_terms( array(
 									'taxonomy'     => 'hotel_feature',
@@ -2439,15 +2441,16 @@ class Hotel {
                                     </div>
 								<?php endif; ?>
 
-                                <h3 style="margin-top: 20px"><?php esc_html_e( 'Hotel Types', 'tourfic' ); ?></h3>
+                                <h3 style="margin-top: 20px" class="tf_advance_search_form_type_filter_label"><?php esc_html_e( 'Hotel Types', 'tourfic' ); ?></h3>
 								<?php
-								$tf_hoteltype = get_terms( array(
+								$hoteltype_args = array(
 									'taxonomy'     => 'hotel_type',
 									'orderby'      => 'title',
 									'order'        => 'ASC',
 									'hide_empty'   => true,
 									'hierarchical' => 0,
-								) );
+								);
+								$tf_hoteltype = get_terms( apply_filters("tf_hotel_search_form_advance_type_args", $hoteltype_args) );
 								if ( $tf_hoteltype ) : ?>
                                     <div class="tf-hotel-types" style="overflow: hidden">
 										<?php foreach ( $tf_hoteltype as $term ) : ?>
