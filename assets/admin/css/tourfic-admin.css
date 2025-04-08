@@ -1271,8 +1271,7 @@ Steps
 }
 
 .tf-setup-step-container .tf-select-service label:before {
-  background: #ffffff
- #ffffff;
+  background: #ffffff #ffffff;
   content: "";
   display: block;
   border-radius: 50%;
