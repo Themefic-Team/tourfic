@@ -1369,7 +1369,7 @@ a {
 }
 
 .tf-flex {
-  display: flex !important;
+  display: flex;
 }
 
 @media only screen and (max-width: 1024px) {

@@ -128,7 +128,7 @@ a{
 }
 
 .tf-flex{
-    display: flex !important;
+    display: flex;
     @media #{$max1024}{
         flex-wrap: wrap;
     }
