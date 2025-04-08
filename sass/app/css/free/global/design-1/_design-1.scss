@@ -707,8 +707,11 @@
 // Single Global End
 
 // Archive Global Start
+.tf-archive-listing,
 .tf-archive-template{
     &__one{
+        position: relative;
+        
         .tf-archive-head {
             @media #{$max575}{
                 gap: 12px;
@@ -789,22 +792,22 @@
         }
         .tf-result-previews{
             position: relative;
-            #tf_ajax_searchresult_loader {
-                position: absolute;
-                top: 0;
-                left: 0;
+        }
+        #tf_ajax_searchresult_loader {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            z-index: 99999;
+            display: none;
+            #tf-searchresult-loader-img {
+                display: flex;
+                align-items: center;
+                justify-content: center;
                 height: 100%;
-                width: 100%;
-                z-index: 99999;
-                display: none;
-                #tf-searchresult-loader-img {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    height: 100%;
-                    img {
-                        width: 120px;
-                    }
+                img {
+                    width: 120px;
                 }
             }
         }

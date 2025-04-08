@@ -46,6 +46,7 @@ class Register {
     
         //Archive
         $widgets_manager->register( \Tourfic\App\Widgets\Elementor\Widgets\Search_Form::instance() );
+        $widgets_manager->register( \Tourfic\App\Widgets\Elementor\Widgets\Listings::instance() );
     }
 
 }

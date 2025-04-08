@@ -92,24 +92,6 @@ class Search_Form extends \Elementor\Widget_Base {
 		);
 
 		$this->add_control(
-			'tf_search_title',
-			[
-				'label' => esc_html__( 'Title', 'tourfic' ),
-				'type'  => \Elementor\Controls_Manager::TEXTAREA,
-				'rows'  => 1,
-			]
-		);
-
-		$this->add_control(
-			'tf_search_subtitle',
-			[
-				'label' => esc_html__( 'Subtitle', 'tourfic' ),
-				'type'  => \Elementor\Controls_Manager::TEXTAREA,
-				'rows'  => 2,
-			]
-		);
-
-		$this->add_control(
 			'service',
 			[
 				'type'     => \Elementor\Controls_Manager::SELECT,
@@ -268,8 +250,6 @@ class Search_Form extends \Elementor\Widget_Base {
 	 */
 	protected function render() {
 		$settings           = $this->get_settings_for_display();
-		$tf_search_title    = $settings['tf_search_title'];
-		$tf_search_subtitle = $settings['tf_search_subtitle'];
 		$service            = !empty( $settings['service'] ) ? $settings['service'] : 'tf_hotel';
 		$design_hotel       = !empty( $settings['design_hotel'] ) ? $settings['design_hotel'] : 'design-1';
 		$design_tour        = !empty( $settings['design_tour'] ) ? $settings['design_tour'] : 'design-1';
