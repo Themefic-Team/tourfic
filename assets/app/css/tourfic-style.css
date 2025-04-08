@@ -365,6 +365,22 @@ Notice
   color: #fff;
 }
 
+.jconfirm .jconfirm-box.jconfirm-type-orange {
+  border: 1px solid #f1c40f;
+}
+
+.jconfirm.jconfirm-modern .jconfirm-box div.jconfirm-content {
+  min-height: 24px;
+}
+
+.jconfirm.jconfirm-modern.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+  margin-bottom: 25px;
+}
+
+.jconfirm .jconfirm-box div.jconfirm-content-pane.no-scroll {
+  margin: 0;
+}
+
 .fancybox__container {
   z-index: 99999 !important;
 }

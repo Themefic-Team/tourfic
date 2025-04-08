@@ -962,11 +962,11 @@ class Enqueue {
 			wp_enqueue_style( 'tf-admin', TF_ASSETS_ADMIN_URL . 'css/tourfic-admin.min.css', '', TF_VERSION );
 
 			if( $swal_cdn ) {
-				wp_enqueue_style( 'tf-admin-sweet-alert', '//cdn.jsdelivr.net/npm/sweetalert2@11.6.13/dist/sweetalert2.min.css', '', TF_VERSION );
-				wp_enqueue_script( 'tf-admin-sweet-alert', '//cdn.jsdelivr.net/npm/sweetalert2@11.6.13/dist/sweetalert2.min.js', array( 'jquery' ), TF_VERSION, true );
+				wp_enqueue_style( 'tf-admin-jquery-confirm', '//cdn.jsdelivr.net/npm/jquery-confirm@3.3.4/dist/jquery-confirm.min.css', '', TF_VERSION );
+				wp_enqueue_script( 'tf-admin-jquery-confirm', '//cdn.jsdelivr.net/npm/jquery-confirm@3.3.4/dist/jquery-confirm.min.js', array( 'jquery' ), TF_VERSION, true );
 			} else {
-				wp_enqueue_style( 'tf-admin-sweet-alert', TF_ASSETS_APP_URL . 'libs/swal/sweetalert2.min.css', '', TF_VERSION );
-				wp_enqueue_script( 'tf-admin-sweet-alert', TF_ASSETS_APP_URL . 'libs/swal/sweetalert2.min.js', array( 'jquery' ), TF_VERSION, true );
+				wp_enqueue_style( 'tf-admin-jquery-confirm', TF_ASSETS_APP_URL . 'libs/jq-confirm/jquery-confirm.min.css', '', TF_VERSION );
+				wp_enqueue_script( 'tf-admin-jquery-confirm', TF_ASSETS_APP_URL . 'libs/jq-confirm/jquery-confirm.min.js', array( 'jquery' ), TF_VERSION, true );
 			}
 
 			if( $fa_cdn ) {
