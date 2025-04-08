@@ -421,7 +421,7 @@ class Tour {
 				<div class="tf-driver-location-box">
 					<div class="tf-submit-button">
 						<input type="hidden" name="type" value="tf_tours" class="tf-post-type"/>
-						<button type="submit"><?php echo esc_html__( apply_filters("tf_tour_search_form_submit_button_text", 'Search' ), 'tourfic' ); ?>  <i class="ri-search-line"></i></button>
+						<button type="submit" class="tf_btn tf-flex-align-center"><?php echo esc_html__( apply_filters("tf_tour_search_form_submit_button_text", 'Search' ), 'tourfic' ); ?>  <i class="ri-search-line"></i></button>
 					</div>
 				</div>
 				</div>

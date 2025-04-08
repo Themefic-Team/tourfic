@@ -1990,7 +1990,7 @@ class Hotel {
 				<div class="tf-driver-location-box">
 					<div class="tf-submit-button">
 						<input type="hidden" name="type" value="tf_hotel" class="tf-post-type"/>
-                        <button type="submit"><?php esc_html_e( apply_filters("tf_hotel_search_form_submit_button_text", 'Search' ), 'tourfic' ); ?> <i class="ri-search-line"></i></button>
+                        <button type="submit" class="tf_btn tf-flex-align-center"><?php esc_html_e( apply_filters("tf_hotel_search_form_submit_button_text", 'Search' ), 'tourfic' ); ?> <i class="ri-search-line"></i></button>
 					</div>
 				</div>
 				</div>
