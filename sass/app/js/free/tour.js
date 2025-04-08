@@ -188,12 +188,35 @@
             }
         })
 
+        $(".tf-itinerary-single-meta li .fa-info-circle, .ininerary-other-info li .fa-info-circle").on("click", function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            var id = $(this).parent().attr("id");
+            $(".tour-itinerary-sleep").each(function () {
+                var elementId = $(this).attr("id"); 
+                if (id === elementId) {
+                    $(this).fadeIn();
+                } else {
+                    $(this).fadeOut();
+                }
+            });
+        });
+        
+    
+        // Hide when clicking outside
+        $(document).on("click", function (e) {
+            if (!$(e.target).closest(".tour-itinerary-sleep, .ininerary-other-info li .fa-info-circle, .tf-itinerary-single-meta li .fa-info-circle").length) {
+                $(".tour-itinerary-sleep").fadeOut();
+            }
+        });
+
+
         /**
          * Single Tour Gallery
          *
          * Fancybox
          */
-        $('[data-fancybox="tour-gallery"]').fancybox({
+        Fancybox.bind('[data-fancybox="tour-gallery"]', {
             loop: true,
             buttons: [
                 "zoom",
@@ -207,7 +230,7 @@
         /**
          * Itinerary gallery init
          */
-        $('.tf-itinerary-gallery').fancybox({
+        Fancybox.bind('[data-fancybox="tf-itinerary-gallery"]', {
             buttons: [
                 "zoom",
                 "slideShow",

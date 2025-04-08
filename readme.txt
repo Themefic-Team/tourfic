@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, car-rental, multivendor-marketplace
 Requires at least: 5.4
 Tested up to: 6.7
-Stable tag: 2.15.23
+Stable tag: 2.15.24
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -372,6 +372,12 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
+= 2.15.24 – March 30, 2025 =
+
+- Fixed: Itinerary meta description pop-up issue.
+- Updated: Meta description pop-up design.
+- Updated: Fancybox pop-up for better user experience.
+
 = 2.15.23 – March 26, 2025 =
 
 - Fixed: The Registration issue on mobile has been resolved.
@@ -407,23 +413,6 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 - Fixed: Post types tab switch issue corrected.
 - Fixed: Hotel backend booking issue for vendors resolved.
 - Fixed: Only vendor posts are now displayed in the backend booking.
-
-= 2.15.16 – February 10, 2025 =
-
-- Improved: Hotel search and filter functionality for a better user experience.
-
-= 2.15.15 – February 05, 2025 =
-
-- Updated: readme.txt file for better clarity.
-- Fixed: The pagination issue has been resolved.
-- Fixed: Car rental search issue on iPhone.
-- Improved: Performance improved for service list and search.
-
-= 2.15.14 – January 30, 2025 =
-
-- Fixed: Apartment archive pricing issue.
-- Fixed: Car rental seat range widget issue.
-- Fixed: Compatibility issue with WooCommerce refunds.
 
 **Old Changelog can be found [here](https://themefic.com/tourfic/changelog/)**.
 
