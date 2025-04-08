@@ -4087,8 +4087,8 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'        => 'swal_cdn',
 					'type'      => 'switch',
-					'label'     => __( 'Sweet Alart CDN', 'tourfic' ),
-					'subtitle'  => __( 'Enable/disable Cloudflare CDN for Sweet Alart', 'tourfic' ),
+					'label'     => __( 'jQuey Confirm CDN', 'tourfic' ),
+					'subtitle'  => __( 'Enable/disable Cloudflare CDN for jQuey Confirm', 'tourfic' ),
 					'label_on'  => __( 'Enabled', 'tourfic' ),
 					'label_off' => __( 'Disabled', 'tourfic' ),
 					'width'     => 100,

@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, car-rental, multivendor-marketplace
 Requires at least: 5.4
 Tested up to: 6.7
-Stable tag: 2.15.24
+Stable tag: 2.15.25
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -372,6 +372,15 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
+= 2.15.25 – April 08, 2025 =
+
+- Fixed: Hotel deposit issue fix on checkout page
+- Fixed: Apartment max person option issue fix when its 0
+- Fixed: Hotel room old price showing issue fix
+- Fixed: Backend booking room availability issue on frontend dashboard
+- Added: Hotel guest details added in frontend dashboard booking details
+- Improved: Replaced the Sweet alert with jQuery Confirm library.
+
 = 2.15.24 – March 30, 2025 =
 
 - Fixed: Itinerary meta description pop-up issue.
@@ -401,18 +410,6 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 - Fixed: The import/export issue has been resolved.
 - Improved: System stability for better performance.
-
-= 2.15.18 – March 02, 2025 =
-
-- Fixed: Car booking responsiveness issue successfully resolved.
-- Fixed: Code enhancements applied to SweetAlert2 script.
-
-= 2.15.17 – February 16, 2025 =
-
-- Fixed: The apartment pricing issue has been resolved.
-- Fixed: Post types tab switch issue corrected.
-- Fixed: Hotel backend booking issue for vendors resolved.
-- Fixed: Only vendor posts are now displayed in the backend booking.
 
 **Old Changelog can be found [here](https://themefic.com/tourfic/changelog/)**.
 
