@@ -1,5 +1,6 @@
 .tf-single-template,
 .tf-archive-template,
+.tf-archive-listing,
 .page-template-tf-search{
     &__legacy{
         padding: 40px 0px;
@@ -104,95 +105,96 @@
                         width: 100%;
                     }
                 }
-                .tf-available-room{
-                    .tf-available-room-gallery{
+                
+            }
+        }
+        .tf-available-room{
+            .tf-available-room-gallery{
+                @media #{$max768} {
+                    height: 120px;
+                    max-width: none;
+                }
+                .tf-room-gallery:nth-child(n+2){
+                    @media #{$max768} {
+                        width: 48px;
+                        height: 28px;
+                    }
+                    svg{
                         @media #{$max768} {
-                            height: 120px;
-                            max-width: none;
+                            width: 10px;
                         }
-                        .tf-room-gallery:nth-child(n+2){
+                    }
+                }
+            }
+            .tf-available-room-content{
+                @media #{$max768} {
+                    width: auto;
+                    display: flow-root;
+                }
+                .tf-available-room-content-left{
+                    @media #{$max768} {
+                        width: 100%;
+                    }
+                    .tf-card-heading-info{
+                        @media #{$max768} {
+                            display: flex;
+                            justify-content: space-between;
+                            margin-bottom: 24px;
+                        }
+                        .tf-section-title-and-location{
                             @media #{$max768} {
-                                width: 48px;
-                                height: 28px;
+                                margin-bottom: 0px;
+                                width: calc(100% - 124px);
                             }
-                            svg{
+                            h2{
                                 @media #{$max768} {
-                                    width: 10px;
+                                    margin-bottom: 6px;
+                                }
+                            }
+                            .tf-title-location{
+                                @media #{$max768} {
+                                    margin: 0px;
+                                }
+                            }
+                        }
+                        .tf-mobile.tf-pricing-info{
+                            display: none;
+                            @media #{$max768} {
+                                display: flex;
+                                width: 120px;
+                                flex-direction: column;
+                                align-items: end;
+                            }
+                            .tf-price-from{
+                                .amount{
+                                    @media #{$max768} {
+                                        color: $color-text;
+                                        font-size: 1.25rem;
+                                        font-weight: 400;
+                                    }
                                 }
                             }
                         }
                     }
-                    .tf-available-room-content{
+                    ul{
                         @media #{$max768} {
-                            width: auto;
-                            display: flow-root;
+                            margin-bottom: 24px;
                         }
-                        .tf-available-room-content-left{
-                            @media #{$max768} {
-                                width: 100%;
-                            }
-                            .tf-card-heading-info{
-                                @media #{$max768} {
-                                    display: flex;
-                                    justify-content: space-between;
-                                    margin-bottom: 24px;
-                                }
-                                .tf-section-title-and-location{
-                                    @media #{$max768} {
-                                        margin-bottom: 0px;
-                                        width: calc(100% - 124px);
-                                    }
-                                    h2{
-                                        @media #{$max768} {
-                                            margin-bottom: 6px;
-                                        }
-                                    }
-                                    .tf-title-location{
-                                        @media #{$max768} {
-                                            margin: 0px;
-                                        }
-                                    }
-                                }
-                                .tf-mobile.tf-pricing-info{
-                                    display: none;
-                                    @media #{$max768} {
-                                        display: flex;
-                                        width: 120px;
-                                        flex-direction: column;
-                                        align-items: end;
-                                    }
-                                    .tf-price-from{
-                                        .amount{
-                                            @media #{$max768} {
-                                                color: $color-text;
-                                                font-size: 1.25rem;
-                                                font-weight: 400;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                            ul{
-                                @media #{$max768} {
-                                    margin-bottom: 24px;
-                                }
-                            }
+                    }
+                }
+                .tf-available-room-content-right{
+                    @media #{$max768} {
+                        width: 100%;
+                        display: flow-root;
+                    }
+                    .tf-card-pricing-heading{
+                        @media #{$max768} {
+                            display: none;
                         }
-                        .tf-available-room-content-right{
-                            @media #{$max768} {
-                                width: 100%;
-                                display: flow-root;
-                            }
-                            .tf-card-pricing-heading{
-                                @media #{$max768} {
-                                    display: none;
-                                }
-                            }
-                            a{
-                                @media #{$max768} {
-                                    width: 100%;
-                                }
-                            }
+                    }
+                    a{
+                        @media #{$max768} {
+                            width: 100%;
                         }
                     }
                 }
@@ -3039,6 +3041,7 @@
 // Single Global End
 
 // Archive Global Start
+.tf-archive-listing,
 .tf-archive-template,
 .page-template-tf-search{
     &__two{

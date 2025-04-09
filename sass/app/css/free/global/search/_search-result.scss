@@ -1,7 +1,7 @@
 .search-result-wrapper {
     padding: 30px 0;
 }
-.search-result-inner {
+.search-result-inner{
     display: grid;
     grid-template-columns: 73% 27%;
     @media #{$max1024} {
@@ -10,6 +10,9 @@
     @media #{$max768} {
         grid-template-columns: 100%;
     }
+}
+.tf-archive-listing__legacy,
+.search-result-inner {
     .tf-search-left {
         padding-right: 15px;
         @media #{$max768} {

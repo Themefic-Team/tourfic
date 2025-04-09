@@ -3585,7 +3585,7 @@ class Hotel {
 	/**
 	 * Hotel Archive Single Item Layout
 	 */
-	static function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $check_in_out = '', $startprice = '', $endprice = '' ) {
+	static function tf_hotel_archive_single_item( $adults = '', $child = '', $room = '', $check_in_out = '', $startprice = '', $endprice = '', $design = '' ) {
 
 		// get post id
 		$post_id = get_the_ID();
@@ -3672,7 +3672,7 @@ class Hotel {
 			'check-in-out-date' => $check_in_out
 		), $url );
 
-		$tf_hotel_arc_selected_template = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['hotel-archive'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['hotel-archive'] : 'design-1';
+		$tf_hotel_arc_selected_template = !empty($design) ? $design : (! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['hotel-archive'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['hotel-archive'] : 'design-1');
 
         $min_price_arr = Pricing::instance($post_id)->get_min_price($period);
 		$min_discount_type = !empty($min_price_arr['min_discount_type']) ? $min_price_arr['min_discount_type'] : 'none';
@@ -3747,7 +3747,7 @@ class Hotel {
                         <h2><a href="<?php echo esc_url( $url ); ?>"><?php the_title(); ?></a></h2>
                     </div>
 					<?php if( $disable_review != true ): ?>
-						<?php TF_Review::tf_archive_single_rating(); ?>
+						<?php TF_Review::tf_archive_single_rating('', $design); ?>
 					<?php endif; ?>
 					<?php if ( $features ) { ?>
                         <div class="tf-archive-features tf-mt-16">
@@ -3855,7 +3855,7 @@ class Hotel {
                     </div>
                     <?php if( $disable_review != true ): ?>
 						<div class="tf-available-ratings">
-							<?php TF_Review::tf_archive_single_rating(); ?>
+							<?php TF_Review::tf_archive_single_rating('', $design); ?>
 							<i class="fa-solid fa-star"></i>
 						</div>
 					<?php endif; ?>
@@ -4010,7 +4010,7 @@ class Hotel {
 								?>
                             </ul>
 						<?php } ?>
-						<?php TF_Review::tf_archive_single_rating(); ?>
+						<?php TF_Review::tf_archive_single_rating('', $design); ?>
                     </div>
                     <div class="tf-archive-hotel-content-right">
                         <div class="tf-archive-hotel-price">
@@ -4073,7 +4073,7 @@ class Hotel {
 								?>
                             </div>
 							<?php if( $disable_review != true ): ?>
-								<?php TF_Review::tf_archive_single_rating(); ?>
+								<?php TF_Review::tf_archive_single_rating('', $design); ?>
 							<?php endif; ?>
                         </div>
 
