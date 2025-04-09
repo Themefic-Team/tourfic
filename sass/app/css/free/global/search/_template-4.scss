@@ -78,7 +78,7 @@
 .tf-booking-forms-wrapper{
   .tf-search__form {
     padding: 72px 15px;
-    background: $color-primary;
+    background: $color-brand-dark;
     border-radius: 0;
     box-shadow: none;
     @media #{$max1024} {
@@ -157,7 +157,7 @@
             }
             &:hover {
               background: $color-brand-lite;
-              color: $color-heading;
+              color: $color-text;
               text-overflow: ellipsis;
               overflow: hidden;
               white-space: nowrap;
@@ -444,7 +444,7 @@
                 width: 25px;
               }
               rect{
-                stroke: $color-primary;
+                stroke: $color-brand-dark;
                 filter: brightness(0.8);
               }
             }
@@ -477,7 +477,7 @@
             margin-top: 4px;
           }
           path{
-            fill: $color-primary;
+            fill: $color-brand-dark;
             filter: brightness(0.9);
           }
         }
@@ -580,7 +580,7 @@
       -moz-appearance: none;
       appearance: none;
       width: 100%;
-      background: $color-primary;
+      background: $color-brand-dark;
       filter: brightness(1.2);
       color: $color-white;
       border: 0;
