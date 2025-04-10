@@ -2382,7 +2382,7 @@ class Tour {
 	/**
 	 * Tours Archive
 	 */
-	static function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out = '', $startprice = '', $endprice = '' ) {
+	static function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out = '', $startprice = '', $endprice = '', $design = '' ) {
 
 		// get post id
 		$post_id = get_the_ID();
@@ -2632,7 +2632,7 @@ class Tour {
 			}
 		}
 
-		$tf_tour_arc_selected_template = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['tour-archive'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['tour-archive'] : 'design-1';
+		$tf_tour_arc_selected_template = !empty($design) ? $design : (! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['tour-archive'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['tour-archive'] : 'design-1');
 		$tf_discount_type   = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : '';
 		$tf_discount_amount = ! empty( $meta['discount_price'] ) ? $meta['discount_price'] : '';
 
@@ -2706,7 +2706,7 @@ class Tour {
                     </div>
 
 					<?php if( $disable_review != true ): ?>
-						<?php TF_Review::tf_archive_single_rating(); ?>
+						<?php TF_Review::tf_archive_single_rating('', $design); ?>
 					<?php endif; ?>
 
                     <div class="tf-details tf-mt-16">
@@ -2801,7 +2801,7 @@ class Tour {
                     </div>
                     <?php if( $disable_review != true ): ?>
 						<div class="tf-available-ratings">
-							<?php TF_Review::tf_archive_single_rating(); ?>
+							<?php TF_Review::tf_archive_single_rating('', $design); ?>
 							<i class="fa-solid fa-star"></i>
 						</div>
                     <?php endif; ?>
@@ -3032,7 +3032,7 @@ class Tour {
                                 }
                             } ?>
                         </ul>
-						<?php TF_Review::tf_archive_single_rating(); ?>
+						<?php TF_Review::tf_archive_single_rating('', $design); ?>
                     </div>
                     <div class="tf-archive-hotel-content-right">
                         <div class="tf-archive-hotel-price">
@@ -3093,7 +3093,7 @@ class Tour {
 								?>
                             </div>
 							<?php if( $disable_review != true ): ?>
-									<?php TF_Review::tf_archive_single_rating(); ?>
+									<?php TF_Review::tf_archive_single_rating('', $design); ?>
 								<?php endif; ?>
                         </div>
                         <div class="tf-tour-desc">

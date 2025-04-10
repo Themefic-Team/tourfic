@@ -1477,18 +1477,18 @@ trait Action_Helper {
 								if ( isset( $data[3] ) && isset( $data[4] ) ) {
 									[ $adults, $child, $check_in_out, $startprice, $endprice ] = $data;
 									if ( $tour_meta["tour_as_featured"] ) {
-										Tour::tf_tour_archive_single_item( $adults, $child, $check_in_out, $startprice, $endprice );
+										Tour::tf_tour_archive_single_item( $adults, $child, $check_in_out, $startprice, $endprice, $design );
 									}
 								} else {
 									[ $adults, $child, $check_in_out ] = $data;
 
 									if ( $tour_meta["tour_as_featured"] ) {
-										Tour::tf_tour_archive_single_item( $adults, $child, $check_in_out );
+										Tour::tf_tour_archive_single_item( $adults, $child, $check_in_out, '', '', $design );
 									}
 								}
 							} else {
 								if ( $tour_meta["tour_as_featured"] ) {
-									Tour::tf_tour_archive_single_item();
+									Tour::tf_tour_archive_single_item('', '', '', '', '', $design );
 								}
 							}
 						} elseif ( $posttype == 'tf_apartment' ) {
@@ -1779,17 +1779,17 @@ trait Action_Helper {
 								if ( isset( $data[3] ) && isset( $data[4] ) ) {
 									[ $adults, $child, $check_in_out, $startprice, $endprice ] = $data;
 									if ( ! $tour_meta["tour_as_featured"] ) {
-										Tour::tf_tour_archive_single_item( $adults, $child, $check_in_out, $startprice, $endprice );
+										Tour::tf_tour_archive_single_item( $adults, $child, $check_in_out, $startprice, $endprice, $design );
 									}
 								} else {
 									[ $adults, $child, $check_in_out ] = $data;
 									if ( ! $tour_meta["tour_as_featured"] ) {
-										Tour::tf_tour_archive_single_item( $adults, $child, $check_in_out );
+										Tour::tf_tour_archive_single_item( $adults, $child, $check_in_out, '', '', $design );
 									}
 								}
 							} else {
 								if ( ! $tour_meta["tour_as_featured"] ) {
-									Tour::tf_tour_archive_single_item();
+									Tour::tf_tour_archive_single_item('', '', '', '', '', $design );
 								}
 							}
 						} elseif ( $posttype == 'tf_apartment' ) {
