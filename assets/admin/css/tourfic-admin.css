@@ -394,6 +394,10 @@ Fontawesome
   padding: 7px 15px;
 }
 
+.jconfirm .jconfirm-box div.jconfirm-content-pane .jconfirm-content {
+  overflow: hidden !important;
+}
+
 .tf-post-states {
   display: inline-block;
   font-size: 11px;

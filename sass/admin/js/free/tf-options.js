@@ -473,48 +473,61 @@
 
         $(document).on('click', '.tf-setting-save-btn .tf-reset-btn', function (e) {
 
-            Swal.fire({
+            $.confirm({
+                icon: 'fa fa-warning',
                 title: tf_options.swal_reset_title_text,
-                text: tf_options.swal_reset_other_text,
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: tf_options.swal_reset_btn_text,
-                customClass: "tf-swal-settings-reset-alert",
-              }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        url: tf_options.ajax_url,
-                        type: 'POST',
-                        data: {
-                            action: 'tf_options_reset',
-                            tf_option_nonce: tf_admin_params.tf_nonce,
-                        },
-                        beforeSend: function () {
-                            $('.tf-setting-save-btn .tf-reset-btn').addClass('tf-btn-loading');
-                        },
-                        success: function (response) {
+                content: tf_options.swal_reset_other_text,
+                type: 'red',
+                typeAnimated: false,
+                boxWidth: '500px',
+                animationSpeed: 500,
+                animation: 'scale',
+                closeAnimation: 'scale',
+                animateFromElement: false,
+                useBootstrap: false,
+                theme: 'modern',
+                buttons: {
+                    confirm: {
+                        text: tf_options.swal_reset_btn_text,
+                        btnClass: 'btn-blue',
+                        action: function () {
+                            $.ajax({
+                                url: tf_options.ajax_url,
+                                type: 'POST',
+                                data: {
+                                    action: 'tf_options_reset',
+                                    tf_option_nonce: tf_admin_params.tf_nonce,
+                                },
+                                beforeSend: function () {
+                                    $('.tf-setting-save-btn .tf-reset-btn').addClass('tf-btn-loading');
+                                },
+                                success: function (response) {
 
-                            let data = JSON.parse(response)
-                            
-                            if (data.status === 'success') {
-                                notyf.success(data.message);
-                                window.location.reload();
-                            } else {
-                                notyf.error(data.message);
-                            }
-                            
-                            $('.tf-setting-save-btn .tf-reset-btn').removeClass('tf-btn-loading');
-                        },
-                        error: function (xhr, status, error) {
-                            console.log(error);
+                                    let data = JSON.parse(response)
+                                    
+                                    if (data.status === 'success') {
+                                        notyf.success(data.message);
+                                        window.location.reload();
+                                    } else {
+                                        notyf.error(data.message);
+                                    }
+                                    
+                                    $('.tf-setting-save-btn .tf-reset-btn').removeClass('tf-btn-loading');
+                                },
+                                error: function (xhr, status, error) {
+                                    console.log(error);
+                                }
+                            }).done(function () {
+                                // window.location.reload();
+                            });
                         }
-                    }).done(function () {
-                        // window.location.reload();
-                    });
+                    },
+                    cancel: {
+                        text: tf_options.swal_reset_cancel_btn_text,
+                        btnClass: 'btn-red',
+                    }
                 }
-              });
+            })
 
         });
 
