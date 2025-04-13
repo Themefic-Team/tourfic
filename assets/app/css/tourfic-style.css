@@ -14883,7 +14883,7 @@ div#tf-destinationautocomplete-list div:before {
   height: 32px;
   width: 32px;
   border-radius: 100px;
-  background: var(--tf-primary);
+  background: var(--tf-brand-dark);
   text-align: center;
   display: flex;
   align-items: center;
@@ -15060,7 +15060,7 @@ div#tf-destinationautocomplete-list div:before {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--tf-text-heading);
+  background: var(--tf-brand-dark);
   color: #ffffff;
   background-size: cover;
   background-position: center;
