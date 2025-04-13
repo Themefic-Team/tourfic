@@ -1966,7 +1966,7 @@ class Apartment {
 		<?php
 	}
 
-	public static function tf_apartment_archive_single_item( array $data = [ 1, 0, 0, '' ] ): void {
+	public static function tf_apartment_archive_single_item( array $data = [ 1, 0, 0, '' ], $design = '' ): void {
 
 		$post_id  = get_the_ID();
 		$features = ! empty( get_the_terms( $post_id, 'apartment_feature' ) ) ? get_the_terms( $post_id, 'apartment_feature' ) : '';
@@ -2021,7 +2021,7 @@ class Apartment {
 			'check-in-out-date' => $check_in_out,
 		), $url );
 
-		$tf_apartment_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] : 'default';
+		$tf_apartment_arc_selected_template = !empty($design) ? $design : (! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] : 'default');
 		if ( $tf_apartment_arc_selected_template == "design-1" ) {
 		$first_gallery_image = explode(',', $gallery);
 		?>
@@ -2069,7 +2069,7 @@ class Apartment {
 				</div>  
 				<?php if( $disable_review != true ): ?>
 					<div class="tf-available-ratings">
-						<?php TF_Review::tf_archive_single_rating($post_id); ?>
+						<?php TF_Review::tf_archive_single_rating($post_id, $design); ?>
 						<i class="fa-solid fa-star"></i>
 					</div>
 				<?php endif; ?>
@@ -2228,7 +2228,7 @@ class Apartment {
 								<?php } ?>
                             </ul>
 						<?php } ?>
-						<?php TF_Review::tf_archive_single_rating(); ?>
+						<?php TF_Review::tf_archive_single_rating('', $design); ?>
                     </div>
                     <div class="tf-archive-hotel-content-right">
                         <div class="tf-archive-hotel-price">
@@ -2288,7 +2288,7 @@ class Apartment {
 							?>
                         </div>
 						<?php if( $disable_review != true ): ?>
-							<?php TF_Review::tf_archive_single_rating($post_id); ?>
+							<?php TF_Review::tf_archive_single_rating($post_id, $design); ?>
 						<?php endif; ?>
                     </div>
 
