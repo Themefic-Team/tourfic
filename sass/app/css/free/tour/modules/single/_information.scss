@@ -123,6 +123,10 @@
                     h5{
                         color: $color-heading;
                         margin-bottom: 5px;
+                        font-size: 1.25rem;
+                        @media #{$max768}{
+                            font-size: 1rem;
+                        }
                     }
                     p{
                         color: $color-text;

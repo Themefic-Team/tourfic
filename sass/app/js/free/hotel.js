@@ -240,6 +240,22 @@
         });
 
         /**
+         * Single Hotel Video
+         *
+         * Fancybox
+         */
+        $('[data-fancybox="hotel-video"]').fancybox({
+            loop: true,
+            buttons: [
+                "zoom",
+                "slideShow",
+                "fullScreen",
+                "close"
+            ],
+            hash: false,
+        });
+
+        /**
          * Single hotel Gallery
          *
          * Fancybox
@@ -253,6 +269,16 @@
                 "close"
             ],
             hash: false,
+        });
+
+        /**
+         * Single Map
+         *
+         * Fancybox
+         */
+        $('.map-pre').fancybox({
+            loop: true,
+            touch: false
         });
 
         /**

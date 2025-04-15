@@ -189,6 +189,21 @@
         })
 
         /**
+         * Single Tour Video
+         *
+         * Fancybox
+         */
+        $('[data-fancybox="tour-video"]').fancybox({
+            loop: true,
+            buttons: [
+                "zoom",
+                "slideShow",
+                "fullScreen",
+                "close"
+            ],
+        });
+
+        /**
          * Single Tour Gallery
          *
          * Fancybox
@@ -214,6 +229,11 @@
                 "fullScreen",
                 "close"
             ]
+        });
+
+        $('.tf-hero-btm-icon.tf-tour-info').fancybox({
+            loop: true,
+            touch: false 
         });
 
         /**

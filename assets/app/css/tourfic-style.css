@@ -15970,6 +15970,12 @@ div#tf-destinationautocomplete-list div:before {
   margin-bottom: 5px;
 }
 
+@media only screen and (max-width: 768px) {
+  .tf-single-template__two .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-features-block-wrapper .tf-feature-block .tf-feature-block-details h5 {
+    font-size: 1rem;
+  }
+}
+
 .tf-single-template__two .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-features-block-wrapper .tf-feature-block .tf-feature-block-details p {
   color: var(--tf-text-paragraph);
   font-size: 1rem;

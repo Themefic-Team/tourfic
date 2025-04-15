@@ -751,8 +751,9 @@
             ]
         });
 
-        // Design 3 related tour
-        $('.tf-design-3-slider-items-wrapper').slick({
+
+        // Design 2 related tour
+        $('.tf-design-2-slider-items-wrapper, .tf-design-3-slider-items-wrapper').slick({
             dots: false,
             arrows: true,
             infinite: true,
@@ -1995,7 +1996,7 @@
         });
 
         // Popup Close
-        $(".tf-booking-times span").on("click touchstart", function (e) {
+        $('body').on('click touchstart', '.tf-booking-times span', function (e) {
             e.preventDefault();
             $('.tf-withoutpayment-booking').removeClass('show');
             $('.tf-withoutpayment-booking-confirm').removeClass('show');
