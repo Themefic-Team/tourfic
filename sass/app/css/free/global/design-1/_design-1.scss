@@ -1827,9 +1827,14 @@
             padding: 10px 20px;
             .acr-label{
                 align-items: center;
-                i{
+                i,
+                svg{
                     position: static;
                     margin-right: 5px;
+                }
+                svg{
+                    width: 16px;
+                    height: 16px;
                 }
             }
         }

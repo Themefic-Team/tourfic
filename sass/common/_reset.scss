@@ -44,10 +44,15 @@ a{
     display: flex;
     align-items: center;
     width: 100%;
+    svg,
     i{
         position: absolute;
         left: 18px;
         color: $color-text;
+    }
+    svg{
+        width: 16px;
+        height: 16px;
     }
     input[type="text"].tf-field,
     .tf-field {

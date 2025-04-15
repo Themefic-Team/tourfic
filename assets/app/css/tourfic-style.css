@@ -1256,11 +1256,19 @@ a {
   width: 100%;
 }
 
+.tf-field-group.tf_form-inner svg,
 .tf-field-group.tf_form-inner i,
+.tf-field-group svg,
 .tf-field-group i {
   position: absolute;
   left: 18px;
   color: var(--tf-text-paragraph);
+}
+
+.tf-field-group.tf_form-inner svg,
+.tf-field-group svg {
+  width: 16px;
+  height: 16px;
 }
 
 .tf-field-group.tf_form-inner input[type="text"].tf-field,
@@ -1871,7 +1879,6 @@ h3.section-heading {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  background-color: #ffffff;
   color: var(--tf-brand-dark);
   border-color: var(--tf-brand-dark);
   border: 1px solid var(--tf-brand-dark);
@@ -1905,7 +1912,6 @@ h3.section-heading {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  background-color: #ffffff;
   color: var(--tf-brand-dark);
   border-color: var(--tf-brand-dark);
   border: 1px solid var(--tf-brand-dark);
@@ -12566,9 +12572,15 @@ div#tf-destinationautocomplete-list div:before {
   align-items: center;
 }
 
-.tf-archive-booking-form__style-1 .tf_acrselection .tf-field .acr-label i {
+.tf-archive-booking-form__style-1 .tf_acrselection .tf-field .acr-label i,
+.tf-archive-booking-form__style-1 .tf_acrselection .tf-field .acr-label svg {
   position: static;
   margin-right: 5px;
+}
+
+.tf-archive-booking-form__style-1 .tf_acrselection .tf-field .acr-label svg {
+  width: 16px;
+  height: 16px;
 }
 
 .tf-archive-booking-form__style-1 .tf-booking-bttns button {

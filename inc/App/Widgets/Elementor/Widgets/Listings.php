@@ -55,17 +55,6 @@ class Listings extends Widget_Base {
         ];
     }
 
-	public function tf_service_types() {
-		$types = array(
-			'hotel'     => esc_html__( 'Hotel', 'tourfic' ),
-			'tour'      => esc_html__( 'Tour', 'tourfic' ),
-			'apartment' => esc_html__( 'Apartment', 'tourfic' ),
-			'carrentals' => esc_html__( 'Car', 'tourfic' ),
-		);
-
-		return $types;
-	}
-
 	protected function register_controls() {
 
         $this->tf_content_layout_controls();

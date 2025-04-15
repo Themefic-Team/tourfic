@@ -1700,7 +1700,7 @@ class Helper {
 	/**
 	 * Archive Sidebar Search Form
 	 */
-	static function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_name = '', $taxonomy_slug = '', $design = '' ) {
+	static function tf_archive_sidebar_search_form( $post_type, $taxonomy = '', $taxonomy_name = '', $taxonomy_slug = '' ) {
 		$place = $post_type == 'tf_hotel' ? 'tf-location' : 'tf-destination';
 		if ( $post_type == 'tf_apartment' ) {
 			$place = 'tf-apartment-location';
@@ -1708,10 +1708,10 @@ class Helper {
 		$place_text            = $post_type == 'tf_hotel' ? esc_html__( 'Enter Location', 'tourfic' ) : esc_html__( 'Enter Destination', 'tourfic' );
 		$date_format_for_users = ! empty( self::tfopt( "tf-date-format-for-users" ) ) ? self::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 
-		$tf_tour_arc_selected_template      = !empty($design) ? $design : (! empty( self::tf_data_types( self::tfopt( 'tf-template' ) )['tour-archive'] ) ? self::tf_data_types( self::tfopt( 'tf-template' ) )['tour-archive'] : 'design-1');
- 		$tf_hotel_arc_selected_template     = !empty($design) ? $design : (! empty( self::tf_data_types( self::tfopt( 'tf-template' ) )['hotel-archive'] ) ? self::tf_data_types( self::tfopt( 'tf-template' ) )['hotel-archive'] : 'design-1');
- 		$tf_apartment_arc_selected_template = !empty($design) ? $design : (! empty( self::tf_data_types( self::tfopt( 'tf-template' ) )['apartment-archive'] ) ? self::tf_data_types( self::tfopt( 'tf-template' ) )['apartment-archive'] : 'default');
- 		$tf_car_arc_selected_template       = !empty($design) ? $design : (! empty( self::tf_data_types( self::tfopt( 'tf-template' ) )['car-archive'] ) ? self::tf_data_types( self::tfopt( 'tf-template' ) )['car-archive'] : 'design-1');
+		$tf_tour_arc_selected_template      = ! empty( self::tf_data_types( self::tfopt( 'tf-template' ) )['tour-archive'] ) ? self::tf_data_types( self::tfopt( 'tf-template' ) )['tour-archive'] : 'design-1';
+ 		$tf_hotel_arc_selected_template     = ! empty( self::tf_data_types( self::tfopt( 'tf-template' ) )['hotel-archive'] ) ? self::tf_data_types( self::tfopt( 'tf-template' ) )['hotel-archive'] : 'design-1';
+ 		$tf_apartment_arc_selected_template = ! empty( self::tf_data_types( self::tfopt( 'tf-template' ) )['apartment-archive'] ) ? self::tf_data_types( self::tfopt( 'tf-template' ) )['apartment-archive'] : 'default';
+ 		$tf_car_arc_selected_template       = ! empty( self::tf_data_types( self::tfopt( 'tf-template' ) )['car-archive'] ) ? self::tf_data_types( self::tfopt( 'tf-template' ) )['car-archive'] : 'design-1';
 
 		$hotel_location_field_required      = ! empty( self::tfopt( "required_location_hotel_search" ) ) ? self::tfopt( "required_location_hotel_search" ) : 0;
 		$tour_location_field_required       = ! empty( self::tfopt( "required_location_tour_search" ) ) ? self::tfopt( "required_location_tour_search" ) : 0;
