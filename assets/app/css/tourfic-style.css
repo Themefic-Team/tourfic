@@ -17755,6 +17755,16 @@ div#tf-destinationautocomplete-list div:before {
   position: relative;
 }
 
+.tf-archive-booking-form__style-2 .tf-booking-form .tf-booking-form-location .tf-booking-location-wrap i,
+.tf-archive-booking-form__style-2 .tf-booking-form .tf-booking-form-location .tf-booking-location-wrap svg {
+  font-size: 16px;
+}
+
+.tf-archive-booking-form__style-2 .tf-booking-form .tf-booking-form-location .tf-booking-location-wrap svg {
+  width: 16px;
+  height: 16px;
+}
+
 .tf-archive-booking-form__style-2 .tf-booking-form .tf-booking-form-location .tf-booking-location-wrap input {
   padding: 9px;
   border: none;
@@ -19802,6 +19812,15 @@ div#tf-destinationautocomplete-list div:before {
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
+}
+
+.tf-archive-booking-form__style-3 .tf-search-fields .tf-search-field .tf-search-field-icon i {
+  font-size: 18px;
+}
+
+.tf-archive-booking-form__style-3 .tf-search-fields .tf-search-field .tf-search-field-icon svg {
+  width: 20px;
+  height: 20px;
 }
 
 .tf-archive-booking-form__style-3 .tf-search-fields .tf-search-field .tf-search-field-content {

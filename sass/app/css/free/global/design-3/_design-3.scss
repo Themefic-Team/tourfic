@@ -959,6 +959,14 @@
 
             .tf-search-field-icon {
                 @include flexbox();
+
+                i{
+                    font-size: 18px;
+                }
+                svg{
+                    width: 20px;
+                    height: 20px;
+                }
             }
 
             .tf-search-field-content {
