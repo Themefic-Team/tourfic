@@ -4,7 +4,8 @@
             .tf-tour-details-right {
                 .tf-tour-booking-box  {
                     background: $color-filling-fg;
-                    @include bd-radius(5px);;
+                    @include bd-radius(5px);
+                
                 }
                 .tf-booking-price{
                     border-bottom: 1px solid $color-border-lite;

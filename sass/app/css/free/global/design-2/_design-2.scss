@@ -31,6 +31,9 @@
             background: $color-filling-fg;
             padding: 32px;
             margin-bottom: 32px;
+            @media #{$max575}{
+                padding: 24px;
+            }
         }
         .tf-section-title {
             margin-bottom: 32px;
@@ -137,10 +140,18 @@
                                     justify-content: space-between;
                                     margin-bottom: 24px;
                                 }
+                                @media #{$max575} {
+                                    flex-direction: column;
+                                    margin-bottom: 12px;
+                                }
                                 .tf-section-title-and-location{
                                     @media #{$max768} {
                                         margin-bottom: 0px;
                                         width: calc(100% - 124px);
+                                    }
+                                    @media #{$max575} {
+                                        width: 100%;
+                                        margin-bottom: 12px;
                                     }
                                     h2{
                                         @media #{$max768} {
@@ -160,6 +171,9 @@
                                         width: 120px;
                                         flex-direction: column;
                                         align-items: end;
+                                    }
+                                    @media #{$max575} {
+                                        align-items: start;
                                     }
                                     .tf-price-from{
                                         .amount{
@@ -192,6 +206,9 @@
                                 @media #{$max768} {
                                     width: 100%;
                                 }
+                                @media #{$max575} {
+                                    width: auto;
+                                }
                             }
                         }
                     }
@@ -211,6 +228,7 @@
             display: none;
             @media #{$max768}{
                 display: block;
+                margin: 0;
                 margin-bottom: -16px;
             }
         }
@@ -240,6 +258,16 @@
                             align-items: start;
                             border-right: none;
                             cursor: pointer;
+                            @media #{$max768}{
+                                width: 38%;
+                            }
+                            @media #{$max575}{
+                                width: 100%;
+                                margin: 12px 0 8px;
+                            }
+                            .tf-booking-form-guest-and-room-inner{
+                                width: 100%;
+                            }
                         }
                     }
                 }
@@ -284,6 +312,9 @@
                     color: $color-text;
                     @media #{$max1024}{
                         font-size: 0.875rem;
+                    }
+                    @media #{$max575}{
+                        display: block;
                     }
                 }
                 span.tf-booking-month {
@@ -700,6 +731,11 @@
                 color: $color-white;
                 margin-bottom: 8px;
                 width: fit-content;
+                @media #{$max768}{
+                    position: absolute;
+                    top: 55px;
+                    right: 16px;
+                }
             }
         }
         .tf-available-rooms-head {
@@ -720,6 +756,7 @@
             &>span{
                 color: $color-text;
                 font-size: 1.5rem;
+                flex: 1;
                 @media #{$max1024}{
                     font-size: 0.875rem;
                 }
@@ -1392,8 +1429,8 @@
             }
             .tf-booking-form-wrapper{
                 @media #{$max768} {
-                    margin-left: 16px;
-                    margin-right: 16px;
+                    margin-left: 0;
+                    margin-right: 0;
                 }
                 .tf-booking-form{
                     @media #{$max1024}{
@@ -1445,16 +1482,23 @@
                         @media #{$max1024}{
                             padding-left: 20px;
                         }
+                        @media #{$max768}{
+                            margin: 0!important;
+                        }
                     }
                     .tf-booking-form-fields{
                         @media #{$max1024}{
                             width: 100%;
                         }
+                        @media #{$max768}{
+                            padding-left: 0;
+                         }
                     }
                     .tf-booking-form-submit{
                         @media #{$max1024}{
                             width: 100%;
                         }
+                      
                     }
                 }
             }
@@ -1541,7 +1585,7 @@
                 .tf_tours_booking > .tf-field-group,
                 .tf_tours_booking > .check-in-time-div,
                 .tf-tour-booking-box,
-                .tf_tours_booking > .tf-tours-booking-btn .tf-btn,
+                .tf_tours_booking > .tf-tours-booking-btn,
                 .tf-bottom-booking-bar{
                     @media #{$max768} {
                         display: none;
@@ -1558,15 +1602,7 @@
                     }
                 }
             }
-            .tf-reviews.tf-single-widgets,
-            #tf-tour-faq,
-            #tf-tour-reviews,
-            #tf-tour-policies{
-                @media #{$max768} {
-                    padding-left: 16px;
-                    padding-right: 16px;
-                }
-            }
+         
             #tf-tour-reviews{
                 @media #{$max768} {
                     padding-bottom: 32px;
@@ -1582,8 +1618,6 @@
             .tf-send-inquiry{
                 @media #{$max768} {
                     margin-bottom: 32px;
-                    margin-right: 16px;
-                    margin-left: 16px;
                 }
             }
             .tf-travel-itinerary-wrapper{
@@ -1638,6 +1672,9 @@
             background-color: transparent;
             padding: 32px;
             background-color: $color-filling-fg;
+            @media #{$max575}{
+                padding: 24px;
+            }
             h2{
                 color: $color-heading;
                 font-size: 2rem;
@@ -1919,13 +1956,13 @@
             gap: 24px;
             margin-top: 32px;
             @media #{$max1600}{
-                padding:30px 16px;
+                padding:30px 24px;
             }
             @media #{$max1024}{
-                padding: 16px;
+                padding: 24px;
             }
             @media #{$max768}{
-                gap: 16px;
+                gap: 24px;
             }
             i{
                 font-size: 4rem;
@@ -2261,9 +2298,15 @@
                         @media #{$max768}{
                             padding: 0px 16px 16px 16px;
                         }
+                        @media #{$max575}{
+                            padding-left: 0;
+                        }
                         .tf-head-title {
                             text-align: left;
                             width: 100%;
+                            @media #{$max575}{
+                                padding-right: 16px;
+                            }
                             h1{
                                 color: $color-white;
                                 margin-bottom: 16px;
@@ -2619,6 +2662,7 @@
                     }
                     @media #{$max768}{
                         max-height: 430px;
+                        grid-template-columns: 1fr;
                     }
                     scrollbar {
                         width: 5px;
@@ -2661,7 +2705,7 @@
                         display: flex;
                         gap: 8px;
                         @media #{$max768}{
-                            width: calc(100% - 8px);
+                            width: calc(50% - 8px);
                         }
                     }
                     .tf-popup-right a {
@@ -2955,6 +2999,9 @@
                         left: 0;
                         top: 0;
                         z-index: 99;
+                        @media #{$max768}{
+                            padding: 12px 16px;
+                        }
                         ul {
                             margin: 0;
                             padding: 0;
@@ -3283,14 +3330,12 @@
         .tf-archive-search-form {
             width: 100%;
             @media #{$max768}{
-                margin-left: 16px;
-                margin-right: 16px;
                 width: auto;
             }
             .tf_archive_search_result{
                 @media #{$max768} {
-                    display: flow-root;
-                    padding: 0px 16px 8px 16px;
+                    padding: 16px;
+                    display: none;
                 }
                 .tf-booking-form-submit{
                     @media #{$max768} {
@@ -3303,7 +3348,8 @@
                     @media #{$max768} {
                         width: 100%;
                         display: flow-root;
-                        padding: 8px 0;
+                        padding: 0;
+                        padding-bottom: 8px;
                     }
                     .tf-booking-form-location {
                         display: flex;
@@ -3411,6 +3457,9 @@
                             padding: 0px;
                             max-width: none;
                         }
+                        @media #{$max575} {
+                            width: 50%;
+                        }
                         .tf-booking-date{
                             @media only screen and (min-width: 1025px) and (max-width: 1165px) {
                                 font-size: 1.25rem;
@@ -3437,9 +3486,8 @@
                             max-width: none;
                         }
                         @media #{$max575} {
-                            width: 31%;
+                            width: 50%;
                             float: left;
-                            padding: 0px;
                             max-width: none;
                         }
                         .tf-booking-date{
@@ -3470,15 +3518,17 @@
                         }
                         @media #{$max1024}{
                             padding-right: 15px;
-                            padding-left: 15px !important;
+                            padding-left: 20px;
                             min-width: 160px;
                         }
                         @media #{$max768} {
                             width: 31%;
                             float: left;
-                            padding-left: 0px !important;
                             padding-right: 0px;
                             min-width: auto;
+                        }
+                        @media #{$max575} {
+                            padding-left: 0px;
                         }
                         .tf-booking-date{
                             @media only screen and (min-width: 1025px) and (max-width: 1165px) {
@@ -3496,6 +3546,12 @@
                                 -ms-flex-align: center;
                                 align-items: center;
                                 gap: 5px;
+                                @media #{$max768}{
+                                    gap: 8px;
+                                    float: left;
+                                    margin-top: 0;
+                                    line-height: normal;
+                                }
                                 span{
                                     font-size: 1.5rem;
                                     margin-bottom: -3px;
@@ -3510,10 +3566,16 @@
                                     @media #{$max1024}{
                                         font-size: 1.25rem;
                                     }
+                                    @media #{$max575}{
+                                        line-height: inherit;
+                                    }
                                 }
                             }
                             .tf-arrow-icons{
                                 text-align: right;
+                                @media #{$max768}{
+                                    float: left;
+                                }
                             }
                         }
                     }
@@ -3656,11 +3718,15 @@
                         padding: 10px 36px 10px 10px;
                         background-size: 14px;
                     }
+                    @media #{$max575}{
+                        max-width: 150px;
+                    }
                }
             }
             .tf-archive-available-rooms {
                 .tf-available-room {
                     overflow: hidden;
+                    position: relative;
                     @media #{$max768}{
                         display: flow-root;
                     }
@@ -3765,9 +3831,13 @@
                         @media #{$max768}{
                             width: 100%;
                         }
+                        @media #{$max575}{
+                            padding: 20px 16px;
+                        }
                         .tf-available-room-content-left {
                             display: flex;
                             flex-direction: column;
+                            
                             .tf-section-title-and-location {
                                 a {
                                     text-decoration: none;
@@ -3820,6 +3890,9 @@
                         }
                         .tf-available-room-content-right {
                             width: 196px;
+                            @media #{$max768}{
+                                margin-top: 15px;
+                            }
                             .tf-cancellation-refundable-text {
                                 margin-bottom: 48px;
                             }

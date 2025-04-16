@@ -1,8 +1,13 @@
 .single-tf_tours{
     .tf-single-template{
         &__legacy{
-            #tour-map{
+            #tf-tour-map{
                 margin-top: 0px;
+                .tf-map-area{
+                    #tour-location{
+                        height: 500px;
+                    }
+                }
             }
             .tf-map-wrapper {
                 .tf-container {

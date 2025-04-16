@@ -5,7 +5,7 @@
                 background-color: $color-filling-fg;
                 padding: 24px;
                 @media #{$max768}{
-                    margin: 32px 16px;
+                    margin: 32px 0;
                 }
                 .tf-contact-details-title {
                     h3 {

@@ -23,7 +23,6 @@ if ( $faqs ): ?>
         <?php if(!empty($faqfirstArray)){ ?>
         <div class="tf-questions-col">
             <?php foreach ($faqfirstArray as $key => $faq) {
-                error_log(print_r($key, true));
                 ?>
             <div class="tf-question <?php echo $key == 1 ? 'tf-active' : ''; ?>">
                 <div class="tf-faq-head">

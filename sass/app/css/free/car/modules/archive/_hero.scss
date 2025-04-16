@@ -11,6 +11,9 @@
                 border-radius: 16px;
                 background-size: cover;
                 background-position: center;
+                @media #{$max575}{
+                    margin: 0 16px;
+                }
                 .tf-banner-content{
                     height: 100%;
                     h1{

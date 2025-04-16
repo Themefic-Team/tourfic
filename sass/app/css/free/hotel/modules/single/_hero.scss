@@ -31,7 +31,6 @@
                         margin: auto;
                     }
                     .tf-hero-booking{
-                       
                         .widget {
                             margin-bottom: 0;
                         }
@@ -49,6 +48,9 @@
                     &.tf-d-ib{
                         @media #{$max768}{
                             display: inline;
+                        }
+                        @media #{$max575}{
+                            font-size: 0.95rem;
                         }
                     }
                 }

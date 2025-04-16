@@ -26,10 +26,18 @@
                         @media #{$max768}{
                             width: 100%;
                         }
+                        @media #{$max575}{
+                            padding: 10px;
+                        }
                         .tf-select-date{
                             width: calc(50% - 8px);
                             &:first-child{
                                 border-right: 1px solid $color-border-lite;
+                                .tf-flex{
+                                    @media #{$max575}{
+                                        padding-right: 15px;
+                                    }
+                                }
                             }
                             
                             i{
@@ -37,6 +45,7 @@
                             }
                             .tf-flex{
                                 flex-wrap: nowrap;
+                              
                             }
                             .info-select{
                                 width: 100%;
@@ -58,6 +67,9 @@
                                     padding-left: 0px;
                                     box-shadow: none;
                                     background: transparent;
+                                    @media #{$max575}{
+                                        font-size: 0.875rem;
+                                    }
                                     &:focus{
                                         outline: none;
                                         box-shadow: none;

@@ -21,9 +21,7 @@
             justify-content: space-between;
             padding: 10px 0;
             margin-bottom: 15px;
-            @media #{$max1024} {
-                display: none;
-            }
+          
             .tf-result-counter-info{
                 display: flex;
                 .tf-counter-title{
@@ -31,12 +29,8 @@
                 }
             }
             @media #{$max575} {
-                flex-direction: column;
-                .tf-result-counter-info{
-                    margin-top: 10px;
-                }
                 gap: 8px;
-                
+               
             }
             .tf-list-grid {
                 display: flex;
@@ -48,6 +42,9 @@
                     margin-left: 10px;
                     font-size: 1.25rem;
                     text-decoration: none;
+                    @media #{$max768}{
+                        display: none;
+                    }
                 }
             
                 .tf-archive-ordering #tf-orderby{
@@ -64,6 +61,10 @@
                     background-repeat: no-repeat;
                     background-size: 12px 12px;
                     cursor: pointer;
+           
+                    @media #{$max575}{
+                        max-width: 160px;
+                    }
                 }
             }
         }
@@ -73,20 +74,18 @@
                 .single-tour-wrap {
                     width: 100%;
                     flex: none;
-                    margin-bottom: 20px;
+                    margin-bottom: 0px;
                 }
                 .tourfic-single-left {
-                    width: 100%;
                     margin-bottom: 16px;
                 }
                 .single-tour-inner {
-                    margin: 0;
                     height: 100%;
                     padding: 20px;
+                    gap: 20px;
                 }
                 .tourfic-single-right {
                     padding: 0;
-                    width: 100%;
                     height: 100%;
                 }
                 .roomrow_flex {
@@ -110,12 +109,23 @@
             }
             @media #{$max768} {
                 display: grid;
-                grid-template-columns: 49% 49%;
-                gap: 2%;
+                grid-template-columns: 48% 49%;
+                gap: 20px;
             }
             @media #{$max575} {
                 grid-template-columns: 100%;
                 gap: 0;
+            }
+            .tourfic-single-left{
+                @media #{$max768} {
+                    width: 100%;
+                }
+            }
+            .single-tour-inner{
+                @media #{$max768} {
+                    margin-top: 0;
+                    gap: 0;
+                }
             }
             &.loading {
                 opacity: 0.3;
@@ -156,6 +166,9 @@
                 .tourfic-single-left {
                     width: 100%;
                     margin-bottom: 16px;
+                    @media #{$max1024}{
+                        margin-bottom: 0;
+                    }
                 }
                 .tourfic-single-right {
                     padding: 0;
@@ -420,6 +433,16 @@
                             margin: 5px 0 10px;
                             font-size: 0.875rem;
                             opacity: 0.85;
+                            p{
+                                @media #{$max768} {
+                                    margin-bottom: 0;
+                                }
+                            }
+                        }
+                        .tf_room_name_inner{
+                            @media #{$max768} {
+                                padding-top: 0;
+                            }
                         }
                         .roomrow_flex {
                             display: flex;
@@ -558,7 +581,6 @@
             border-radius: 4px;
             margin: 5px;
             @media #{$max768} {
-                display: inline-block;
                 padding-right: 25px;
                 margin-top: 5px;
             }

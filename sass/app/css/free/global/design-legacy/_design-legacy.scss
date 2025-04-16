@@ -309,6 +309,10 @@
                     padding-left: 15px;
                     padding-right: 15px;
                 }
+                @media #{$max575}{
+                    padding-left: 10px;
+                    padding-right: 10px;
+                }
                 .tf-archive-search-box{
                     border-radius: 24px;
                     background: $color-gray-light;
@@ -1003,6 +1007,9 @@
                 background-color: $color-filling-fg;
                 border-radius: 5px;
                 margin: 30px 0;
+                @media #{$max768}{
+                    margin-bottom: 0;
+                }
                 .widget{
                     border: 0px solid;
                     background: inherit;
@@ -1072,6 +1079,9 @@
                             }
                             &.see-more{
                                 margin-bottom: 0;
+                                @media #{$max768}{
+                                    margin-bottom: 20px;
+                                }
                             }
                             &.see-less{
                                 display: none;

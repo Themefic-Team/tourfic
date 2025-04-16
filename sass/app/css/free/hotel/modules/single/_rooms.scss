@@ -385,8 +385,10 @@
                                     padding: 30px;
                                     border-left: 0px;
                                     @media #{$max768}{
-                                        width: auto;
+                                        width: 250px;
                                         padding: 20px;
+                                        display: table-caption;
+                                        border-top: 0;
                                     }
                                     .tf-room-description-box{
                                         width: 100%;
@@ -454,6 +456,11 @@
                                         font-weight: 500;
                                         color: $color-heading;
                                         line-height: normal;
+                                        @media #{$max768}{
+                                            display: flex;
+                                            flex-direction: column;
+                                            gap: 5px;
+                                        }
                                         del{
                                             font-size: 1.2rem;
                                             font-weight: 400;

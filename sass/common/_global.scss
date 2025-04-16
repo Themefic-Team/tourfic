@@ -669,6 +669,7 @@ Without Payment Popup
                                 align-items: flex-start;
                                 flex-wrap: wrap;
                                 gap: 16px 8px;
+                                
                                 li{
                                     color: $color-text;
                                     font-size: 0.938rem;
@@ -720,6 +721,9 @@ Without Payment Popup
                                     cursor: pointer;
                                     text-decoration: none;
                                     transition: .3s all ease;
+                                    @media #{$max575}{
+                                        margin-top: 15px;
+                                    }
                                     
                                     &:hover{
                                         border: 1px solid $color-primary;

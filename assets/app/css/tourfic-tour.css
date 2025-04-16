@@ -525,8 +525,12 @@
   width: 24px;
 }
 
-.single-tf_tours .tf-single-template__legacy #tour-map {
+.single-tf_tours .tf-single-template__legacy #tf-tour-map {
   margin-top: 0px;
+}
+
+.single-tf_tours .tf-single-template__legacy #tf-tour-map .tf-map-area #tour-location {
+  height: 500px;
 }
 
 .single-tf_tours .tf-single-template__legacy .tf-map-wrapper .tf-container {
@@ -851,13 +855,6 @@
 
 .single-tf_tours .tf-single-template__one .tf-inex-wrapper .tf-inex ul li:last-child {
   margin-bottom: 0px;
-}
-
-@media only screen and (max-width: 768px) {
-  .single-tf_tours .tf-single-template__two .tf-include-exclude-wrapper {
-    padding-left: 16px;
-    padding-right: 16px;
-  }
 }
 
 .single-tf_tours .tf-single-template__two .tf-include-exclude-wrapper h2 {
@@ -1293,13 +1290,6 @@
   gap: 16px;
 }
 
-@media only screen and (max-width: 768px) {
-  .single-tf_tours .tf-single-template__two .tf-itinerary-wrapper {
-    padding-left: 16px;
-    padding-right: 16px;
-  }
-}
-
 .single-tf_tours .tf-single-template__two .tf-itinerary-wrapper .section-title {
   display: flex;
   justify-content: space-between;
@@ -1563,7 +1553,7 @@
 @media only screen and (max-width: 768px) {
   .single-tf_tours .tf-single-template__two .tf-itinerary-map {
     margin-top: 12px;
-    margin-bottom: 20px;
+    margin-bottom: 0;
   }
 }
 
@@ -2460,7 +2450,7 @@
 
 @media only screen and (max-width: 768px) {
   .single-tf_tours .tf-single-template__two .tf-tour-contact-informations {
-    margin: 32px 16px;
+    margin: 32px 0;
   }
 }
 

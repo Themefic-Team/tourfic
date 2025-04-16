@@ -2210,6 +2210,12 @@
             $('.tf-archive-right').toggleClass('tf-filter-show');
         });
 
+        $(document).on('click touchstart', function (event) {
+            if (!$(event.target).closest(".tf-archive-filter-showing, .tf-details-right").length) {
+                $(".tf-details-right").removeClass('tf-filter-show');
+            }
+        });
+
         //Search Form Showing
         $('.tf-single-template__two .tf-modify-search-btn, .tf-archive-template__two .tf-modify-search-btn').on('click', function () {
             $('.tf-booking-form-wrapper .tf-booking-form').slideDown(300);
@@ -2374,15 +2380,19 @@
         */
         function adjustPadding() {
             var hotelsContainer = $('.tf-archive-template__three .tf-archive-hotels, .tf-archive-details-wrap .tf-archive-hotels');
-
-            if (hotelsContainer[0].scrollHeight > hotelsContainer.height()) {
-                hotelsContainer.css('padding-right', '16px');
+        
+            if (window.innerWidth > 768) {
+                if (hotelsContainer[0].scrollHeight > hotelsContainer.height()) {
+                    hotelsContainer.css('padding-right', '16px');
+                } else {
+                    hotelsContainer.css('padding-right', '0px');
+                }
             } else {
                 hotelsContainer.css('padding-right', '0px');
             }
         }
-
-        if($('.tf-archive-template__three .tf-archive-hotels').length) {
+        
+        if ($('.tf-archive-template__three .tf-archive-hotels').length) {
             adjustPadding();
             $(window).on('resize', adjustPadding);
         }

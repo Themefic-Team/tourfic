@@ -127,10 +127,6 @@
         }
         &__two{
             .tf-include-exclude-wrapper {
-                @media #{$max768}{
-                    padding-left: 16px;
-                    padding-right: 16px;
-                }
                 h2{
                     color: $color-heading;
                     font-size: 2rem;
