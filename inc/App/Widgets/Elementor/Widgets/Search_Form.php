@@ -646,7 +646,12 @@ class Search_Form extends Widget_Base {
             'label'    => __( 'Label Typography', 'tourfic' ),
 			'name'     => "tf_label_typography",
 			'selector' => "{{WRAPPER}} .tf-field .acr-label, {{WRAPPER}} span.tf-booking-form-title, {{WRAPPER}} .tf-search-field-label",
-		] );
+            'conditions' => $this->tf_display_conditionally([
+                'tf_hotel' => ['design-1', 'design-2', 'design-3'],
+                'tf_tours' => ['design-1', 'design-2', 'design-3'],
+                'tf_apartment' => ['design-1', 'design-2'],
+            ]),
+		]);
 
 		$this->add_control( 'tf_input_field_color', [
 			'label'     => __( 'Text Color', 'tourfic' ),
@@ -658,6 +663,7 @@ class Search_Form extends Widget_Base {
 				"{{WRAPPER}} .tf_acrselection .acr-dec" => 'color: {{VALUE}}; border-color: {{VALUE}};',
 				"{{WRAPPER}} span.tf-booking-form-title" => 'color: {{VALUE}};', //design-2
 				"{{WRAPPER}} .tf-search-field-label" => 'color: {{VALUE}};', //design-3
+				"{{WRAPPER}} .tf_form-inner select" => 'color: {{VALUE}};', //default
 			],
 		] );
 
@@ -680,6 +686,7 @@ class Search_Form extends Widget_Base {
 				"{{WRAPPER}} .tf-booking-location-wrap input.tf-field::placeholder, {{WRAPPER}} .tf-booking-date-wrap span, {{WRAPPER}} .tf-booking-guest-and-room-wrap, {{WRAPPER}} .tf-booking-guest-and-room-wrap span" => 'color: {{VALUE}} !important;', //design-2
 				"{{WRAPPER}} .tf-booking-date-wrap svg path, {{WRAPPER}} .tf-booking-guest-and-room-wrap svg path" => 'fill: {{VALUE}} !important;', //design-2
 				"{{WRAPPER}} .tf-search-field .tf-search-input::placeholder, {{WRAPPER}} .tf-archive-guest-info" => 'color: {{VALUE}} !important;', //design-3
+				"{{WRAPPER}} .tf_form-inner input[type=text]::placeholder" => 'color: {{VALUE}} !important;', //legacy
 			],
 		] );
 
@@ -707,6 +714,8 @@ class Search_Form extends Widget_Base {
 				"{{WRAPPER}} .tf-booking-location-wrap svg" => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}', //design-2
 				"{{WRAPPER}} .tf-search-field-icon i" => 'font-size: {{SIZE}}{{UNIT}}', //design-3
 				"{{WRAPPER}} .tf-search-field-icon svg" => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}', //design-3
+				"{{WRAPPER}} .tf_form-inner i" => 'font-size: {{SIZE}}{{UNIT}}', //design-3
+				"{{WRAPPER}} .tf_form-inner svg" => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}', //design-3
 			],
 		] );
 
@@ -722,6 +731,8 @@ class Search_Form extends Widget_Base {
 				"{{WRAPPER}} .tf-booking-location-wrap svg path" => 'fill: {{VALUE}}', //design-2
 				"{{WRAPPER}} .tf-search-field-icon i" => 'color: {{VALUE}}', //design-3
 				"{{WRAPPER}} .tf-search-field-icon svg path" => 'fill: {{VALUE}}', //design-3
+				"{{WRAPPER}} .tf_form-inner i" => 'color: {{VALUE}}', //design-3
+				"{{WRAPPER}} .tf_form-inner svg path" => 'fill: {{VALUE}}', //design-3
 			],
 		] );
 
@@ -747,6 +758,7 @@ class Search_Form extends Widget_Base {
 				"{{WRAPPER}} .tf-booking-location-wrap i" => 'margin-right: {{SIZE}}px;',
 				"{{WRAPPER}} .tf-booking-location-wrap svg" => 'margin-right: {{SIZE}}px;',
 				"{{WRAPPER}} .tf-search-fields .tf-search-field" => 'gap: {{SIZE}}px;',
+				"{{WRAPPER}} .tf_form-inner" => 'gap: {{SIZE}}px;',
 			],
 		] );
 
@@ -772,11 +784,11 @@ class Search_Form extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .tf-field-group .tf-field" => $this->tf_apply_dim( 'margin' ),
+				"{{WRAPPER}} .tf-field-group .tf-field, {{WRAPPER}} .tf_form-row .tf_form-inner" => $this->tf_apply_dim( 'margin' ),
 			],
             'conditions' => $this->tf_display_conditionally([
                 'tf_hotel' => ['design-1', 'default'],
-                'tf_hotel' => ['design-1', 'default'],
+                'tf_tours' => ['design-1', 'default'],
                 'tf_apartment' => ['default']
             ]),
 		] );
@@ -785,8 +797,8 @@ class Search_Form extends Widget_Base {
 		$this->start_controls_tab( "tab_form_field_input_padding", [
 			'label' => __( 'Input', 'tourfic' ),
             'conditions' => $this->tf_display_conditionally([
-                'tf_hotel' => ['design-1', 'default'],
-                'tf_hotel' => ['design-1', 'default'],
+                'tf_hotel' => ['design-1'],
+                'tf_tours' => ['design-1'],
                 'tf_apartment' => ['default']
             ]),
 		] );
@@ -802,6 +814,7 @@ class Search_Form extends Widget_Base {
 				"{{WRAPPER}} .tf-field-group input.tf-field" => $this->tf_apply_dim( 'padding' ),
 				"{{WRAPPER}} .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap input" => $this->tf_apply_dim( 'padding' ), //design-2
 				"{{WRAPPER}} .tf-search-field .tf-search-input" => $this->tf_apply_dim( 'padding' ), //design-3
+				"{{WRAPPER}} .tf_form-row .tf_form-inner" => $this->tf_apply_dim( 'padding' ), //default
 			],
 		] );
         $this->end_controls_tab();
@@ -809,8 +822,8 @@ class Search_Form extends Widget_Base {
 		$this->start_controls_tab( "tab_form_field_selector_padding", [
 			'label' => __( 'Selector', 'tourfic' ),
             'conditions' => $this->tf_display_conditionally([
-                'tf_hotel' => ['design-1', 'default'],
-                'tf_hotel' => ['design-1', 'default'],
+                'tf_hotel' => ['design-1'],
+                'tf_tours' => ['design-1'],
                 'tf_apartment' => ['default']
             ]),
 		] );
@@ -826,8 +839,8 @@ class Search_Form extends Widget_Base {
 				"{{WRAPPER}} .tf-field-group.tf_acrselection .tf-field" => $this->tf_apply_dim( 'padding' ),
 			],
             'conditions' => $this->tf_display_conditionally([
-                'tf_hotel' => ['design-1', 'default'],
-                'tf_hotel' => ['design-1', 'default'],
+                'tf_hotel' => ['design-1'],
+                'tf_tours' => ['design-1'],
                 'tf_apartment' => ['default']
             ]),
 		] );
@@ -842,12 +855,14 @@ class Search_Form extends Widget_Base {
 				"{{WRAPPER}} .tf-field-group .tf-field" => 'background-color: {{VALUE}};',
 				"{{WRAPPER}} .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap" => 'background-color: {{VALUE}};', //design-2
 				"{{WRAPPER}} .tf-search-field .tf-search-input" => 'background-color: {{VALUE}};', //design-3
+				"{{WRAPPER}} .tf_form-row .tf_form-inner" => 'background-color: {{VALUE}};', //default
+				"{{WRAPPER}} .tf_form-row .tf_form-inner select option" => 'background-color: {{VALUE}};', //default
 			],
 		] );
 
 		$this->add_group_control( Group_Control_Border::get_type(), [
 			'name'     => "tf_field_border",
-			'selector' => "{{WRAPPER}} .tf-field-group .tf-field, {{WRAPPER}} .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap, {{WRAPPER}} .tf-search-field .tf-search-input",
+			'selector' => "{{WRAPPER}} .tf-field-group .tf-field, {{WRAPPER}} .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap, {{WRAPPER}} .tf-search-field .tf-search-input, {{WRAPPER}} .tf_form-row .tf_form-inner",
 		] );
 		$this->add_control( "tf_field_border_radius", [
 			'label'      => __( 'Border Radius', 'tourfic' ),
@@ -860,6 +875,7 @@ class Search_Form extends Widget_Base {
 				"{{WRAPPER}} .tf-field-group .tf-field" => $this->tf_apply_dim( 'border-radius' ),
 				"{{WRAPPER}} .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap" => $this->tf_apply_dim( 'border-radius' ), //design-2
 				"{{WRAPPER}} .tf-search-field .tf-search-input" => $this->tf_apply_dim( 'border-radius' ), //design-3
+				"{{WRAPPER}} .tf_form-row .tf_form-inner" => $this->tf_apply_dim( 'border-radius' ), //default
 			],
 		] );
 		$this->end_controls_section();
@@ -2205,7 +2221,7 @@ class Search_Form extends Widget_Base {
                             <?php
                             $adult_icon_migrated = isset($settings['__fa4_migrated']['adult_icon']);
                             $adult_icon_is_new = empty($settings['adult_icon_comp']);
-
+                            
                             if ( $adult_icon_is_new || $adult_icon_migrated ) {
                                 Icons_Manager::render_icon( $settings['adult_icon'], [ 'aria-hidden' => 'true' ] );
                             } else {
@@ -2214,12 +2230,10 @@ class Search_Form extends Widget_Base {
                                 <?php
                             }?>
                             <select name="adults" id="adults" class="">
-								<?php
-								echo '<option value="1">1 ' . !empty($settings['adult_label']) ? esc_html($settings['adult_label']) : esc_html__('Adult', 'tourfic'). '</option>';
-								foreach ( range( 2, 8 ) as $value ) {
-									echo '<option value="' . esc_attr( $value ) . '">' . esc_html( $value ) . ' ' . !empty($settings['adult_label']) ? esc_html($settings['adult_label']) : esc_html__('Adults', 'tourfic') . '</option>';
-								}
-								?>
+								<option value="1">1 <?php echo !empty($settings['adult_label']) ? esc_html($settings['adult_label']) : esc_html__('Adult', 'tourfic'); ?></option>
+								<?php foreach ( range( 2, 8 ) as $value ) { ?>
+									<option value="<?php echo esc_attr( $value ); ?>"><?php echo esc_html( $value ); ?> <?php echo !empty($settings['adult_label']) ? esc_html($settings['adult_label']) : esc_html__('Adults', 'tourfic'); ?></option>
+								<?php } ?>
                             </select>
                         </div>
                     </label>
@@ -2244,12 +2258,10 @@ class Search_Form extends Widget_Base {
                                 <?php
                             }?>
                             <select name="children" id="children" class="">
-								<?php
-								echo '<option value="0">0 ' . !empty($settings['children_label']) ? esc_html($settings['children_label']) : esc_html__('Children', 'tourfic') . '</option>';
-								foreach ( range( 1, 8 ) as $value ) {
-									echo '<option value="' . esc_attr( $value ) . '">' . esc_html( $value ) . ' ' . !empty($settings['children_label']) ? esc_html($settings['children_label']) : esc_html__('Children', 'tourfic') . '</option>';
-								}
-								?>
+								<option value="0">0 <?php echo !empty($settings['children_label']) ? esc_html($settings['children_label']) : esc_html__('Children', 'tourfic'); ?></option>
+								<?php foreach ( range( 1, 8 ) as $value ) { ?>
+									<option value="<?php echo esc_attr( $value ); ?>"><?php echo esc_html( $value ); ?> <?php echo !empty($settings['children_label']) ? esc_html($settings['children_label']) : esc_html__('Children', 'tourfic'); ?></option>
+								<?php } ?>
                             </select>
                         </div>
                     </label>
@@ -2273,10 +2285,9 @@ class Search_Form extends Widget_Base {
                                 }?>
                                 <select name="infant" id="infant" class="">
                                     <option value="0">0 <?php echo !empty($settings['infant_label']) ? esc_html($settings['infant_label']) : esc_html__('Infant', 'tourfic'); ?></option>
-									<?php foreach ( range( 1, 8 ) as $value ) {
-										echo '<option value="' . esc_attr( $value ) . '">' . esc_html( $value ) . ' ' . !empty($settings['infant_label']) ? esc_html($settings['infant_label']) : esc_html__('Infant', 'tourfic') . '</option>';
-									} ?>
-
+									<?php foreach ( range( 1, 8 ) as $value ) { ?>
+										<option value="<?php echo esc_attr( $value ); ?>"><?php echo esc_html( $value ); ?> <?php echo !empty($settings['infant_label']) ? esc_html($settings['infant_label']) : esc_html__('Infant', 'tourfic'); ?></option>
+									<?php } ?>
                                 </select>
                             </div>
                         </label>
@@ -2299,12 +2310,10 @@ class Search_Form extends Widget_Base {
                                     <?php
                                 }?>
                                 <select name="room" id="room" class="">
-									<?php
-									echo '<option value="1">1 ' . !empty($settings['room_label']) ? esc_html($settings['room_label']) : esc_html__('Room', 'tourfic') . '</option>';
-									foreach ( range( 2, 8 ) as $value ) {
-										echo '<option value="' . esc_attr( $value ) . '">' . esc_html( $value ) . ' ' . !empty($settings['room_label']) ? esc_html($settings['room_label']) : esc_html__('Rooms', 'tourfic') . '</option>';
-									}
-									?>
+									<option value="1">1 <?php echo !empty($settings['room_label']) ? esc_html($settings['room_label']) : esc_html__('Room', 'tourfic'); ?></option>
+									<?php foreach ( range( 2, 8 ) as $value ) { ?>
+										<option value="<?php echo esc_attr( $value ); ?>"><?php echo esc_html( $value ); ?> <?php echo !empty($settings['room_label']) ? esc_html($settings['room_label']) : esc_html__('Rooms', 'tourfic'); ?></option>
+									<?php } ?>
                                 </select>
                             </div>
                         </label>

@@ -184,6 +184,14 @@ h3.section-heading {
         display: block;
     }
     .tf_form-inner {
+        svg{
+            width: 20px;
+            height: 20px;
+        }
+        i{
+            font-size: 18px;
+        }
+
         input[type=text] {
             width: 100%;
             background: transparent;
