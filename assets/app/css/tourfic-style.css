@@ -10924,6 +10924,12 @@ div#tf-destinationautocomplete-list div:before {
   margin-top: 16px;
 }
 
+@media only screen and (max-width: 575.98px) {
+  .tf-single-template__one .tf-review-wrapper .tf-review-form .tf-review-form-container form {
+    padding: 24px;
+  }
+}
+
 .tf-single-template__one .tf-review-wrapper .tf-review-form .tf-review-form-container .tf-rating-wrapper {
   column-gap: 40px;
   flex-wrap: wrap;
@@ -11073,6 +11079,13 @@ div#tf-destinationautocomplete-list div:before {
   padding: 24px;
 }
 
+@media only screen and (max-width: 575.98px) {
+  .tf-single-template__one .tf-faq-wrapper .tf-faq-single-inner .tf-faq-collaps {
+    flex-wrap: nowrap;
+    gap: 5px;
+  }
+}
+
 .tf-single-template__one .tf-faq-wrapper .tf-faq-single-inner .tf-faq-collaps:hover {
   cursor: pointer;
 }
@@ -11157,6 +11170,12 @@ div#tf-destinationautocomplete-list div:before {
     margin-top: 30px;
     padding-left: 0px;
     position: static;
+  }
+}
+
+@media only screen and (max-width: 575.98px) {
+  .tf-single-template__one .tf-single-details-wrapper .tf-single-details-inner .tf-tour-details-right {
+    margin-top: 0;
   }
 }
 

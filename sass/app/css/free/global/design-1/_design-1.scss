@@ -480,6 +480,9 @@
                         background: $color-filling-fg;
                         border-radius: 8px;
                         margin-top: 16px;
+                        @media #{$max575}{
+                            padding: 24px;
+                        }
                     }
                     .tf-rating-wrapper{
                         column-gap: 40px;
@@ -630,6 +633,10 @@
                 }
                 .tf-faq-collaps{
                     padding: 24px;
+                    @media #{$max575}{
+                        flex-wrap: nowrap;
+                        gap: 5px;
+                    }
                     &:hover{
                         cursor: pointer;
                     }
@@ -702,6 +709,9 @@
                         margin-top: 30px;
                         padding-left: 0px;
                         position: static;
+                    }
+                    @media #{$max575}{
+                        margin-top: 0;
                     }
                 }
             }

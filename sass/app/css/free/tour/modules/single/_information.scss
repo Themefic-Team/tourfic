@@ -93,7 +93,7 @@
                             flex-basis: calc(50% - 16px);
                         }
                         @media #{$max575}{
-                            flex-basis: calc(100% - 16px);
+                            flex-basis: 100%;
                         }
                     }
                 }

@@ -374,7 +374,7 @@
 
 @media only screen and (max-width: 575.98px) {
   .single-tf_tours .tf-single-template__one .tf-trip-feature-blocks .tf-features-block-inner .tf-feature-block {
-    flex-basis: calc(100% - 16px);
+    flex-basis: 100%;
   }
 }
 
