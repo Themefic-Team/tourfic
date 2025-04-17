@@ -1587,9 +1587,9 @@
                 .tf-tour-booking-box,
                 .tf_tours_booking > .tf-tours-booking-btn,
                 .tf-bottom-booking-bar{
-                    @media #{$max768} {
-                        display: none;
-                    }
+                    // @media #{$max768} {
+                    //     display: none;
+                    // }
                     .tf-bottom-booking-field{
                         @media #{$max768} {
                             width: auto;
@@ -1894,6 +1894,10 @@
                         display: flex;
                         align-items: center;
                         justify-content: space-between;
+                        @media #{$max575}{
+                            flex-direction: column;
+                            align-items: flex-start;
+                        }
                         h2{
                             margin-bottom: 16px;
                             line-height: 1;
@@ -1912,6 +1916,10 @@
                             margin-left: 24px;
                             @media #{$max1024}{
                                 margin-left: 23px;
+                            }
+                            @media #{$max575}{
+                                margin-left: 0;
+                                margin-bottom: 15px;
                             }
                             span{
                                 color: $color-text;
@@ -2594,6 +2602,9 @@
             }
             &.tf-section-title{
                 margin-bottom: 20px;
+                @media #{$max575}{
+                    margin-bottom: 0px;
+                }
             }
         }
         .tf-single-widgets h2 {
@@ -2916,7 +2927,7 @@
                 background-color: $color-brand-dark;
                 border-color: $color-brand-dark;
             }
-            @media #{$max1024}{
+            @media #{$max768}{
                 display: block;
             }
             span{
@@ -2937,10 +2948,19 @@
                     .tf-booking-tab-menu{
                         ul{
                             background-color: $color-text;
+                            @media #{$max768}{
+                                background: transparent;
+                            }
                             li{
                                 color: $color-white;
+                                @media #{$max768}{
+                                    color: $color-text;
+                                }
                                 &.active{
                                     background-color: $color-primary;
+                                    @media #{$max768}{
+                                        color: $color-white;
+                                    }
                                     &::before{
                                         background-color: transparent;
                                     }

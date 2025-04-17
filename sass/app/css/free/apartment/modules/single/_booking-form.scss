@@ -325,6 +325,9 @@
                         .tf_selectperson-wrap{
                             display: block;
                             border-right: 0px solid;
+                            @media #{$max575}{
+                                padding-top: 0;
+                            }
                             .tf-form-title{
                                 margin-bottom: 24px;
                                 h3.tf-person-info-title{

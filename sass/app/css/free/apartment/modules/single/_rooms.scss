@@ -170,6 +170,9 @@
                                     height: 200px;
                                     border-radius: 4px;
                                     object-fit: cover;
+                                    @media #{$max575}{
+                                        width: 100%;
+                                    }
                                 }
                             }
                         }

@@ -40,7 +40,7 @@
                     background-color: transparent;
             
                     .tf-single-details {
-                        background-color: transparent;
+                        padding-bottom: 25px;
                     }
             
                     .tf-review-details {
@@ -68,6 +68,7 @@
                         margin: 0 0 8px 0;
                         color: $color-text;
                         font-size: 0.875rem;
+                        margin-bottom: 0;
                     }
                 }
             }

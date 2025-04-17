@@ -186,6 +186,7 @@
                                         height: 0;
                                         width: 0;
                                     }
+                                    
                                     input:checked ~ .tf-checkmark:after {
                                         display: block;
                                     }
@@ -207,12 +208,15 @@
                                             top: 2px;
                                             width: 7px;
                                             height: 10px;
-                                            border: solid $color-gray;
+                                            border: solid $color-white;
                                             border-width: 0 3px 3px 0;
                                             -webkit-transform: rotate(45deg);
                                             -ms-transform: rotate(45deg);
                                             transform: rotate(45deg);
                                         }
+                                    }
+                                    input:checked ~ .tf-checkmark{
+                                        border-color: $color-primary;
                                     }
                                 }
                             }

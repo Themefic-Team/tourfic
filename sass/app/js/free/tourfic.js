@@ -1844,7 +1844,7 @@
             if (step > 1) {
                 for (let i = 1; i <= step; i++) {
                     $('.tf-booking-step-' + i).removeClass("active");
-                    $('.tf-booking-step-' + i).addClass("done");
+                    $('.tf-booking-step-' + (i - 1)).addClass("done");
                 }
                 $('.tf-booking-step-' + step).addClass("active");
                 $('.tf-booking-content').hide();

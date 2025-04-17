@@ -1428,8 +1428,11 @@ li.tf-filter-item {
                         }
                     }
                     li.done{
-                        background-color: $color-primary; 
+                        background-color: $color-brand-lite; 
                         color: $color-white;
+                        @media #{$max768}{
+                            border-color: $color-border-lite;
+                        }
                         &:first-child{
                             border-radius: 8px 0px 0px 8px;
                             @media #{$max768}{
@@ -1445,8 +1448,6 @@ li.tf-filter-item {
                         @media #{$max768}{
                             padding-right: 8px;
                             border: 1px solid $color-primary;
-                            background-color: transparent;
-                            color: $color-primary;
                         }
                         &:first-child{
                             border-radius: 8px 0px 0px 8px;
@@ -1460,7 +1461,6 @@ li.tf-filter-item {
                             background: transparent;
                             top: 0;
                             right: -25px;
-                            // transform: rotate(45deg);
                             border-radius: 0px 10px 0px 0px;
                             width: 0;
                             height: 0;
@@ -1472,6 +1472,12 @@ li.tf-filter-item {
                                 display: none;
                             }
                         }
+                        &.done{
+                            &::before{
+                                border-left-color: $color-brand-lite;
+                            }
+                          
+                        }
                         &:last-child{
                             border-radius: 0px 8px 8px 0px;
                             &::before{
@@ -1481,8 +1487,6 @@ li.tf-filter-item {
                             @media #{$max768}{
                                 border-radius: 16px;
                                 border: 1px solid $color-primary;
-                                background-color: transparent;
-                                color: $color-primary;
                             }
                         }
                     }
@@ -1562,7 +1566,6 @@ li.tf-filter-item {
                                     position: absolute;
                                     top: 0px;
                                     left: 0px;
-                                    background-color: $color-brand-lite;
                                     border-radius: 5px;
                                     border: 1px solid $color-gray;
                                     cursor: pointer;
@@ -1702,7 +1705,7 @@ li.tf-filter-item {
                                 select{
                                     border-radius: 4px;
                                     border: 0.5px solid $color-gray;
-                                    background: $color-gray-info;
+                                    background: transparent;
                                     box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
                                     height: 32px;
                                     width: 100%;
