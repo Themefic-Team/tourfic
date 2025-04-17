@@ -631,11 +631,13 @@
         });
 
         $(document).on('click touchstart', function (e) {
-            if(!$(e.target).closest('.tf-bottom-booking-bar, .tf-mobile-booking-btn,.flatpickr-calendar').length) {
-                $('.tf-bottom-booking-bar').removeClass('tf-mobile-booking-form');
-                $('.tf-single-template__two .tf-mobile-booking-btn').slideDown(300);
+            if ($(window).width() <= 768) {
+                if (!$(e.target).closest('.tf-bottom-booking-bar, .tf-mobile-booking-btn, .flatpickr-calendar').length) {
+                    $('.tf-bottom-booking-bar').removeClass('tf-mobile-booking-form');
+                    $('.tf-single-template__two .tf-mobile-booking-btn').slideDown(300);
+                }
             }
-        })
+        });
 
         /**
          * Single tour booking form

@@ -7255,7 +7255,7 @@ a.tf-import-btn, a.tf-export-btn {
 .visitor-details-edit-form .visitor-details-edit-popup .visitor-details-popup .tf-single-tour-traveller .traveller-info .traveller-single-info select {
   border-radius: 4px;
   border: 0.5px solid #666D74;
-  background: #FCFDFF;
+  background: transparent;
   box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
   height: 32px;
   width: 100%;

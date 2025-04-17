@@ -189,8 +189,9 @@
                                 width: 100%;
                                 z-index: 1;
                                 background: $color-heading;
-                                @media #{$max768}{
-                                    text-align: center;
+                                text-align: center;
+                                @media #{$max1024}{
+                                    font-size: 0.875rem;
                                 }
                             }
                         }

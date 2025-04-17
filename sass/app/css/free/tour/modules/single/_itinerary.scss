@@ -222,7 +222,7 @@
                                     width: 100%;
                                     z-index: 1;
                                     background: #0000009c;
-                                    @media #{$max768}{
+                                    @media #{$max1024}{
                                         text-align: center;
                                     }
                                 }
@@ -525,7 +525,6 @@
                 
                 @media #{$max768}{
                     margin-top: 12px;
-                    margin-bottom: 0;
                 }
             
                 #tour-location {

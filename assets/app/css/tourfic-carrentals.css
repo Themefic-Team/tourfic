@@ -231,11 +231,12 @@
   width: 100%;
   z-index: 1;
   background: var(--tf-text-heading);
+  text-align: center;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1024px) {
   .single-tf_carrental .tf-single-template__one .tf-car-hero-gallery .tf-gallery a.tf-gallery-more::before {
-    text-align: center;
+    font-size: 0.875rem;
   }
 }
 
@@ -718,6 +719,12 @@
   padding: 32px;
   background: var(--tf-filling-foreground);
   border-radius: 8px;
+}
+
+@media only screen and (max-width: 575.98px) {
+  .single-tf_carrental .tf-single-template__one .tf-review-section .tf-review-form-container form {
+    padding: 24px;
+  }
 }
 
 .single-tf_carrental .tf-single-template__one .tf-review-section .tf-review-form-container .tf-visitor-info {
@@ -1970,11 +1977,18 @@
   top: 2px;
   width: 7px;
   height: 10px;
-  border: solid #808080;
+  border: solid #ffffff;
   border-width: 0 3px 3px 0;
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
+}
+
+.post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-search-box .tf-driver-location-box .tf-driver-location ul li label input:checked ~ .tf-checkmark,
+.tax-carrental_location .tf-archive-template__one .tf-archive-search-box .tf-driver-location-box .tf-driver-location ul li label input:checked ~ .tf-checkmark,
+.tax-carrental_brand .tf-archive-template__one .tf-archive-search-box .tf-driver-location-box .tf-driver-location ul li label input:checked ~ .tf-checkmark,
+.page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-driver-location-box .tf-driver-location ul li label input:checked ~ .tf-checkmark {
+  border-color: var(--tf-primary);
 }
 
 .post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-search-box .tf-driver-location-box .tf-driver-location span#tf-required,
@@ -2262,6 +2276,7 @@
 .tax-carrental_brand .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-category-lists ul li label input:checked ~ .tf-checkmark,
 .page-template-tf-search .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-category-lists ul li label input:checked ~ .tf-checkmark {
   background-color: transparent;
+  border-color: var(--tf-primary);
 }
 
 .post-type-archive-tf_carrental .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget .tf-category-lists ul li label .tf-checkmark,
@@ -2289,7 +2304,7 @@
   top: 2px;
   width: 7px;
   height: 10px;
-  border: solid #808080;
+  border: solid #ffffff;
   border-width: 0 3px 3px 0;
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);

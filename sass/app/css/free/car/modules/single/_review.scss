@@ -28,6 +28,9 @@
                         padding: 32px;
                         background: var(--tf-filling-foreground);
                         border-radius: 8px;
+                        @media #{$max575}{
+                            padding: 24px;
+                        }
                     }
                     .tf-visitor-info{
                         margin: 20px 0px;

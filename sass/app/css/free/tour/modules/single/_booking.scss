@@ -36,9 +36,12 @@
                     @media #{$max1024}{
                         flex-wrap: wrap;
                     }
+                    @media #{$max575}{
+                        flex-direction: column;;
+                    }
                 }
                 .tf_selectperson-wrap {
-                    color:$color-text;
+                    color: $color-text;
                     font-weight: 500;
                     border: none;
                     .tf_person-icon{
@@ -47,15 +50,25 @@
                     @media #{$max768}{
                         display: flex;
                         justify-content: center;
-                        width: 95%;
+                        flex: 1;
                         padding: 10px;
+                        height: 40px;
+                    }
+                    @media #{$max575}{
+                        width: 80%;
                     }
                 }
                 .tf_form-row {
+                    color: $color-text;
+                    @media #{$max768}{
+                       flex: 1;
+                    }
+                    @media #{$max575}{
+                        width: 80%;
+                    }
                     .tf_label-row {
                         margin-bottom: 0;
                     }
-                    color: $color-text;
                 }
                 .tours-check-in-out {
                     color: $color-text;
@@ -71,6 +84,10 @@
                         }
                         @media #{$max768}{
                             max-width: 100%;
+                            height: 40px;
+                        }
+                        @media #{$max575}{
+                            width: 100%;
                         }
                     }
                     select {
@@ -109,6 +126,10 @@
                     bottom: 0;
                     left: 0%;
                     right: 0;
+                    @media #{$max768}{
+                        padding: 8px 10px;
+                        border-radius: 0;
+                    }
                     .tf_acrselection-wrap {
                         position: absolute;
                         top: unset;
@@ -141,6 +162,12 @@
                     }
                     form.tf_tours_booking {
                         width: 55%;
+                        @media #{$max768}{
+                            width: 100%;
+                        }
+                        @media #{$max575}{
+                            flex-direction: column;
+                        }
                     }
                     .tf_form-inner {
                         background: $color-white;

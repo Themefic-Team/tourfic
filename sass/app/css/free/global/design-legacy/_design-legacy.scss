@@ -418,6 +418,10 @@
                         @media #{$max1024}{
                             max-height: 260px;
                         }
+                        @media #{$max575}{
+                            flex-wrap: nowrap;
+                            max-height: 300px;
+                        }
                         /* Chrome, Edge, and Safari */
                         *::-webkit-scrollbar {
                             width: 5px;
@@ -516,6 +520,7 @@
                                                 }
                                                 input:checked ~ .tf-checkmark{
                                                     background-color: transparent;
+                                                    border-color: $color-primary;
                                                 }
                                                 .tf-checkmark {
                                                     position: absolute;
@@ -533,7 +538,7 @@
                                                         top: 1px;
                                                         width: 5px;
                                                         height: 8px;
-                                                        border: solid $color-gray;
+                                                        border: solid $color-white;
                                                         border-width: 0 3px 3px 0;
                                                         -webkit-transform: rotate(45deg);
                                                         -ms-transform: rotate(45deg);

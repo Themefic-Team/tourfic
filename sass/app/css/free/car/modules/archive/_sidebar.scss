@@ -107,6 +107,7 @@
                                         }
                                         input:checked ~ .tf-checkmark{
                                             background-color: transparent;
+                                            border-color: $color-primary;
                                         }
                                         .tf-checkmark {
                                             position: absolute;
@@ -125,7 +126,7 @@
                                                 top: 2px;
                                                 width: 7px;
                                                 height: 10px;
-                                                border: solid $color-gray;
+                                                border: solid $color-white;
                                                 border-width: 0 3px 3px 0;
                                                 -webkit-transform: rotate(45deg);
                                                 -ms-transform: rotate(45deg);

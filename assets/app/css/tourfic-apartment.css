@@ -822,6 +822,12 @@
   object-fit: cover;
 }
 
+@media only screen and (max-width: 575.98px) {
+  .single-tf_apartment .tf-single-template__two .tf-apartment-rooms-section .tf-apartment-room-details .tf-apartment-room-item .tf-apartment-room-item-thumb a img {
+    width: 100%;
+  }
+}
+
 .single-tf_apartment .tf-single-template__two .tf-apartment-rooms-section .tf-apartment-room-details .tf-apartment-room-item .tf-apartment-room-item-content {
   margin-top: 16px;
 }
@@ -1567,7 +1573,7 @@
 }
 
 .single-tf_apartment .tf-single-template__legacy .tf-apartment-review .tf-single-review .tf-single-details {
-  background-color: transparent;
+  padding-bottom: 25px;
 }
 
 .single-tf_apartment .tf-single-template__legacy .tf-apartment-review .tf-single-review .tf-review-details .tf-rating-stars {
@@ -1592,6 +1598,7 @@
   margin: 0 0 8px 0;
   color: var(--tf-text-paragraph);
   font-size: 0.875rem;
+  margin-bottom: 0;
 }
 
 .single-tf_apartment .tf-single-template__legacy .show-all-review-wrap {
@@ -2069,6 +2076,12 @@
 .single-tf_apartment .tf-single-template__two #tf-apartment-booking .tf-apartment-form-fields .tf-apartment-guest-row .tf_selectperson-wrap {
   display: block;
   border-right: 0px solid;
+}
+
+@media only screen and (max-width: 575.98px) {
+  .single-tf_apartment .tf-single-template__two #tf-apartment-booking .tf-apartment-form-fields .tf-apartment-guest-row .tf_selectperson-wrap {
+    padding-top: 0;
+  }
 }
 
 .single-tf_apartment .tf-single-template__two #tf-apartment-booking .tf-apartment-form-fields .tf-apartment-guest-row .tf_selectperson-wrap .tf-form-title {
