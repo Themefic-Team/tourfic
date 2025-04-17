@@ -125,6 +125,11 @@
                 color: $color-heading;
                 font-size: 2.375rem;
                 margin-bottom: 6px;
+
+                @media #{$max768}{
+                    font-size: 1.875rem;
+                    line-height: 1.25;
+                }
             }
             i{
                 color: $color-primary;
@@ -142,6 +147,7 @@
                     opacity: 0; 
                     width: 0;
                     margin: 0px;
+                    display: none;
                 }
             }
         }

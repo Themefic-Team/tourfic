@@ -1366,6 +1366,10 @@ li.tf-filter-item {
             font-weight: 600;
             line-height: normal;
             letter-spacing: -0.96px;
+
+            @media #{$max768} {
+                font-size: 1.5rem;
+            }
         }
         .tf-booking-times {
             position: absolute;
