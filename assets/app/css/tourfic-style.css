@@ -1287,7 +1287,7 @@ a {
   width: 100%;
   background-color: var(--tf-filling-background);
   border-radius: 5px;
-  font-size: 0.875rem;
+  font-size: 1rem;
   margin: 0px;
   color: var(--tf-text-paragraph);
   background-image: none;
@@ -15850,6 +15850,7 @@ div#tf-destinationautocomplete-list div:before {
 }
 
 .tf-single-template__two .tf-search-date-wrapper .acr-label {
+  font-size: 1rem;
   font-weight: 600;
 }
 
@@ -15886,7 +15887,7 @@ div#tf-destinationautocomplete-list div:before {
 
 .tf-single-template__two .tf-search-date-wrapper .acr-label span {
   color: var(--tf-text-paragraph);
-  font-size: 0.75rem;
+  font-size: 1rem;
   font-weight: 500;
   display: block;
 }

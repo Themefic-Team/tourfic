@@ -2806,6 +2806,7 @@
             }
 
             .acr-label {
+                font-size: 1rem;
                 font-weight: 600;
                 @media #{$max1024}{
                     font-size: 0.875rem;
@@ -2830,7 +2831,7 @@
 
             .acr-label span {
                 color: $color-text;
-                font-size: 0.75rem;
+                font-size: 1rem;
                 font-weight: 500;
                 display: block;
             }
