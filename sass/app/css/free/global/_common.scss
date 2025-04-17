@@ -1424,7 +1424,7 @@ li.tf-filter-item {
                         }
                     }
                     li.done{
-                        background-color: $color-primary; 
+                        background-color: $color-brand-lite; 
                         color: $color-white;
                         @media #{$max768}{
                             border-color: $color-border-lite;
@@ -1444,8 +1444,6 @@ li.tf-filter-item {
                         @media #{$max768}{
                             padding-right: 8px;
                             border: 1px solid $color-primary;
-                            background-color: transparent;
-                            color: $color-primary;
                         }
                         &:first-child{
                             border-radius: 8px 0px 0px 8px;
@@ -1485,8 +1483,6 @@ li.tf-filter-item {
                             @media #{$max768}{
                                 border-radius: 16px;
                                 border: 1px solid $color-primary;
-                                background-color: transparent;
-                                color: $color-primary;
                             }
                         }
                     }

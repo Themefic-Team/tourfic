@@ -3202,7 +3202,7 @@ li.tf-filter-item {
 
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.done,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.done {
-  background-color: var(--tf-primary);
+  background-color: var(--tf-brand-lite);
   color: #ffffff;
 }
 
@@ -3238,8 +3238,6 @@ li.tf-filter-item {
   .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.active {
     padding-right: 8px;
     border: 1px solid var(--tf-primary);
-    background-color: transparent;
-    color: var(--tf-primary);
   }
 }
 
@@ -3299,8 +3297,6 @@ li.tf-filter-item {
   .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.active:last-child {
     border-radius: 16px;
     border: 1px solid var(--tf-primary);
-    background-color: transparent;
-    color: var(--tf-primary);
   }
 }
 
