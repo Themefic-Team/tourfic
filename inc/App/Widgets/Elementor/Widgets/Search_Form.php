@@ -83,7 +83,7 @@ class Search_Form extends Widget_Base {
 					'tf_hotel'     => esc_html__( 'Hotel', 'tourfic' ),
 					'tf_tours'     => esc_html__( 'Tour', 'tourfic' ),
 					'tf_apartment' => esc_html__( 'Apartment', 'tourfic' ),
-					'tf_carrental' => esc_html__( 'Car', 'tourfic' ),
+					// 'tf_carrental' => esc_html__( 'Car', 'tourfic' ),
 				],
 				'default'  => 'tf_hotel',
 			]
@@ -146,20 +146,20 @@ class Search_Form extends Widget_Base {
 		);
 		
 		// Design options for Car Rental
-		$this->add_control(
-			'design_carrental',
-			[
-				'type'     => Controls_Manager::SELECT,
-				'label'    => esc_html__( 'Design', 'tourfic' ),
-				'options'  => [
-					'design-1' => esc_html__( 'Design 1', 'tourfic' ),
-				],
-				'default'  => 'design-1',
-				'condition' => [
-					'service' => 'tf_carrental',
-				],
-			]
-		);
+		// $this->add_control(
+		// 	'design_carrental',
+		// 	[
+		// 		'type'     => Controls_Manager::SELECT,
+		// 		'label'    => esc_html__( 'Design', 'tourfic' ),
+		// 		'options'  => [
+		// 			'design-1' => esc_html__( 'Design 1', 'tourfic' ),
+		// 		],
+		// 		'default'  => 'design-1',
+		// 		'condition' => [
+		// 			'service' => 'tf_carrental',
+		// 		],
+		// 	]
+		// );
 
 	    do_action( 'tf/search/after-layout/controls', $this );
 
@@ -1061,9 +1061,10 @@ class Search_Form extends Widget_Base {
 			$design = $design_tour;
 		} elseif($service == 'tf_apartment'){
 			$design = $design_apartment;
-		} elseif($service == 'tf_carrental'){
-			$design = $design_car;
-		}
+		} 
+        // elseif($service == 'tf_carrental'){
+		// 	$design = $design_car;
+		// }
 
 		$place = ($service == 'tf_hotel') ? 'tf-location' : 'tf-destination';
 		if ( $service == 'tf_apartment' ) {

@@ -58,55 +58,7 @@ class Listings extends Widget_Base {
 	protected function register_controls() {
 
         $this->tf_content_layout_controls();
-
-		$this->start_controls_section(
-			'tf_search_style_section',
-			[
-				'label' => esc_html__( 'Style', 'tourfic' ),
-				'tab'   => Controls_Manager::TAB_STYLE,
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
-			[
-				'name'     => 'title_typography',
-				'label'    => esc_html__( 'Title Typography', 'tourfic' ),
-				'selector' => '{{WRAPPER}} .tf_widget-title h2',
-			]
-		);
-		$this->add_control(
-			'tf_search_title_color',
-			[
-				'label'     => esc_html__( 'Title Color', 'tourfic' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .tf-item-card' => 'background-color: {{VALUE}}',
-				],
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
-			[
-				'name'     => 'subtitle_typography',
-				'label'    => esc_html__( 'Subtitle Typography', 'tourfic' ),
-				'selector' => '{{WRAPPER}} .tf_widget-subtitle',
-			]
-		);
-
-		$this->add_control(
-			'tf_search_subtitle_color',
-			[
-				'label'     => esc_html__( 'Subtitle Color', 'tourfic' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .tf_widget-subtitle' => 'color: {{VALUE}}',
-				],
-			]
-		);
-
-		$this->end_controls_section();
+        $this->tf_content_listing_settings_controls();
 
 	}
 
@@ -118,6 +70,9 @@ class Listings extends Widget_Base {
             ]
         );
 
+        do_action( 'tf/listings/before-layout/controls', $this );
+
+		//service
 		$this->add_control(
 			'service',
 			[
@@ -127,7 +82,7 @@ class Listings extends Widget_Base {
 					'tf_hotel'     => esc_html__( 'Hotel', 'tourfic' ),
 					'tf_tours'     => esc_html__( 'Tour', 'tourfic' ),
 					'tf_apartment' => esc_html__( 'Apartment', 'tourfic' ),
-					'tf_carrental' => esc_html__( 'Car', 'tourfic' ),
+					// 'tf_carrental' => esc_html__( 'Car', 'tourfic' ),
 				],
 				'default'  => 'tf_hotel',
 			]
@@ -154,7 +109,7 @@ class Listings extends Widget_Base {
 		
 		// Design options for Tour
 		$this->add_control(
-			'design_tour',
+			'design_tours',
 			[
 				'type'     => Controls_Manager::SELECT,
 				'label'    => esc_html__( 'Design', 'tourfic' ),
@@ -191,7 +146,7 @@ class Listings extends Widget_Base {
 		
 		// Design options for Car Rental
 		$this->add_control(
-			'design_car',
+			'design_carrental',
 			[
 				'type'     => Controls_Manager::SELECT,
 				'label'    => esc_html__( 'Design', 'tourfic' ),
@@ -209,7 +164,7 @@ class Listings extends Widget_Base {
             'tf_listing_layout_toggle',
             [
                 'label' => esc_html__( 'Layout Toggle', 'tourfic' ),
-                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'type' => Controls_Manager::SWITCHER,
                 'label_on' => esc_html__( 'Show', 'tourfic' ),
                 'label_off' => esc_html__( 'Hide', 'tourfic' ),
                 'return_value' => 'yes',
@@ -263,36 +218,6 @@ class Listings extends Widget_Base {
 			]
 		);
 
-        /* $this->add_control(
-			'eael_product_grid_style_preset',
-			[
-				'label'       => esc_html__( 'Style Preset', 'tourfic' ),
-				'type'        => Controls_Manager::CHOOSE,
-				'options'     => [
-                    'tf_hotel_design_1' => [
-                        'title' => esc_html__('Design 1', 'tourfic'),
-                        'image' => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-design-1.png"
-                    ],
-                    'tf_hotel_design_2' => [
-                        'title' => esc_html__('Design 2', 'tourfic'),
-                        'image' => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-design-2.png"
-                    ],
-                    'tf_hotel_design_3' => [
-                        'title' => esc_html__('Design 3', 'tourfic'),
-                        'image' => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-design-3.png"
-                    ],
-                    'tf_hotel_design_legacy' => [
-                        'title' => esc_html__('Legacy', 'tourfic'),
-                        'image' => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-default.png"
-                    ],
-                ],
-				'default'     => 'tf_hotel_design_1',
-				'label_block' => true,
-                'toggle'      => false,
-                'image_choose'=> true,
-			]
-		); */
-
         $this->add_responsive_control(
             'tf_grid_column',
             [
@@ -312,7 +237,268 @@ class Listings extends Widget_Base {
             ]
         );
 
-	    do_action( 'tf/listings/layout/controls', $this );
+	    do_action( 'tf/listings/before-layout/controls', $this );
+
+        $this->end_controls_section();
+    }
+
+	protected function tf_content_listing_settings_controls(){
+        $this->start_controls_section('tf_section_listings_settings', [
+            'label' => esc_html__('Listing Settings', 'tourfic'),
+        ]);
+
+		$this->add_control('posts_per_page', [
+            'label' => __('Posts Per Page', 'tourfic'),
+            'type' => Controls_Manager::NUMBER,
+            'default' => 10,
+            'min' => 1,
+            'max' => 1000,
+            'step' => 1,
+        ]);
+
+        $this->add_control('orderby', [
+            'label' => __('Order By', 'tourfic'),
+            'type' => Controls_Manager::SELECT,
+            'options' => [
+				'ID'            => __( 'Post ID', 'tourfic' ),
+				'author'        => __( 'Post Author', 'tourfic' ),
+				'title'         => __( 'Title', 'tourfic' ),
+				'date'          => __( 'Date', 'tourfic' ),
+				'modified'      => __( 'Last Modified Date', 'tourfic' ),
+				'rand'          => __( 'Random', 'tourfic' ),
+				'comment_count' => __( 'Comment Count', 'tourfic' ),
+				'menu_order'    => __( 'Menu Order', 'tourfic' )
+			],
+            'default' => 'date',
+        ]);
+
+        $this->add_control('order', [
+			'label'   => __( 'Order', 'tourfic' ),
+			'type'    => Controls_Manager::CHOOSE,
+			'options' => [
+				'asc' => [
+					'title' => esc_html__( 'Ascending', 'tourfic' ),
+					'icon'  => 'fas fa-sort-amount-up-alt',
+				],
+				'desc' => [
+					'title' => esc_html__( 'Descending', 'tourfic' ),
+					'icon'  => 'fas fa-sort-amount-down',
+				],
+			],
+			'default' => 'desc',
+			'toggle'  => false,
+		]);
+		
+		$this->add_control('show_image',[
+			'label' => __('Show Image', 'tourfic'),
+			'type' => Controls_Manager::SWITCHER,
+			'label_on' => __('Show', 'tourfic'),
+			'label_off' => __('Hide', 'tourfic'),
+			'return_value' => 'yes',
+			'default' => 'yes',
+		]);
+
+		$this->add_group_control(Group_Control_Image_Size::get_type(), [
+			'name' => 'image',
+			'exclude' => ['custom'],
+			'default' => 'medium',
+			'condition' => [
+				'show_image' => 'yes',
+			],
+		]);
+		
+		$this->add_responsive_control('image_height',[
+			'label'      => __('Image Height', 'tourfic'),
+			'type'       => Controls_Manager::SLIDER,
+			'range'      => [
+				'px' => [
+					'min'  => 0,
+					'max'  => 600,
+					'step' => 1,
+				],
+				'em' => [
+					'min'  => 0,
+					'max'  => 50,
+					'step' => 1,
+				],
+				'%'  => [
+					'min'  => 0,
+					'max'  => 100,
+					'step' => 1,
+				],
+			],
+			'default'   => [
+				'unit' => '%',
+				'size' => 100,
+			],
+			'size_units' => ['px', 'em', '%'],
+			'selectors'  => [
+				'{{WRAPPER}} .tf-item-card.tf-item-hotel .tf-item-featured img' => 'height: {{SIZE}}{{UNIT}}; min-height: {{SIZE}}{{UNIT}};',
+			],
+			'condition' => [
+				'show_image' => 'yes',
+			],
+		]);
+
+        $this->add_control('show_fallback_img',[
+			'label' => __('Fallback Image', 'tourfic'),
+			'type' => Controls_Manager::SWITCHER,
+			'label_on' => __('Show', 'tourfic'),
+			'label_off' => __('Hide', 'tourfic'),
+			'return_value' => 'yes',
+			'default' => '',
+			'condition' => [
+				'show_image' => 'yes',
+			],
+		]);
+
+		$this->add_control('fallback_img',[
+			'label'             => __( 'Image', 'tourfic' ),
+			'type'              => Controls_Manager::MEDIA,
+			'condition'         => [
+				'show_fallback_img'    => 'yes',
+				'show_image' => 'yes',
+			],
+			'ai' => [
+				'active' => false,
+			],
+		]);
+
+		$this->add_control('show_title',[
+			'label' => __('Show Title', 'tourfic'),
+			'type' => Controls_Manager::SWITCHER,
+			'label_on' => __('Show', 'tourfic'),
+			'label_off' => __('Hide', 'tourfic'),
+			'return_value' => 'yes',
+			'default' => 'yes',
+		]);
+
+		$this->add_control('title_length',[
+			'label' => __('Title Length', 'tourfic'),
+			'type' => Controls_Manager::NUMBER,
+			'default' => 55,
+            'min' => 1,
+            'max' => 100,
+            'step' => 1,
+			'condition' => [
+				'show_title' => 'yes',
+			],
+		]);
+
+		$this->add_control('show_excerpt',[
+			'label' => __('Show Excerpt', 'tourfic'),
+			'type' => Controls_Manager::SWITCHER,
+			'label_on' => __('Show', 'tourfic'),
+			'label_off' => __('Hide', 'tourfic'),
+			'return_value' => 'yes',
+			'default' => 'yes',
+		]);
+
+		$this->add_control('excerpt_length',[
+			'label' => __('Excerpt Characters', 'tourfic'),
+			'type' => Controls_Manager::NUMBER,
+			'default' => 100,
+			'min' => 1,
+            'max' => 400,
+            'step' => 1,
+			'condition' => [
+				'show_excerpt' => 'yes',
+			],
+		]);
+
+	    $this->add_control('show_location',[
+			'label' => __('Show Location', 'tourfic'),
+			'type' => Controls_Manager::SWITCHER,
+			'label_on' => __('Show', 'tourfic'),
+			'label_off' => __('Hide', 'tourfic'),
+			'return_value' => 'yes',
+			'default' => 'yes',
+		]);
+
+		$this->add_control('location_icon',[
+			'label' => esc_html__('Location Icon', 'tourfic'),
+			'default' => [
+				'value' => 'fa-solid fa-location-dot',
+				'library' => 'fa-solid',
+			],
+			'label_block' => true,
+			'type' => Controls_Manager::ICONS,
+			'fa4compatibility' => 'location_icon_comp',
+			'condition' => [
+				'show_location' => 'yes',
+			],
+		]);
+
+		$this->add_control('location_length',[
+			'label' => __('Location Characters', 'tourfic'),
+			'type' => Controls_Manager::NUMBER,
+			'default' => 120,
+			'min' => 1,
+            'max' => 200,
+            'step' => 1,
+			'condition' => [
+				'show_location' => 'yes',
+			],
+		]);
+
+		$this->add_control('show_features',[
+			'label' => __('Show Features', 'tourfic'),
+			'type' => Controls_Manager::SWITCHER,
+			'label_on' => __('Show', 'tourfic'),
+			'label_off' => __('Hide', 'tourfic'),
+			'return_value' => 'yes',
+			'default' => 'yes',
+		]);
+
+		$this->add_control('features_count',[
+			'label' => __('Features count', 'tourfic'),
+			'type' => Controls_Manager::NUMBER,
+			'default' => 4,
+            'min' => 1,
+            'max' => 10,
+            'step' => 1,
+			'condition' => [
+				'show_features' => 'yes',
+			],
+		]);
+
+		$this->add_control('show_review',[
+			'label' => __('Show Review', 'tourfic'),
+			'type' => Controls_Manager::SWITCHER,
+			'label_on' => __('Show', 'tourfic'),
+			'label_off' => __('Hide', 'tourfic'),
+			'return_value' => 'yes',
+			'default' => 'yes',
+		]);
+
+		$this->add_control('show_price',[
+			'label' => __('Show Price', 'tourfic'),
+			'type' => Controls_Manager::SWITCHER,
+			'label_on' => __('Show', 'tourfic'),
+			'label_off' => __('Hide', 'tourfic'),
+			'return_value' => 'yes',
+			'default' => 'yes',
+		]);
+
+		$this->add_control('show_view_details', [
+			'label' => __('Show View Details', 'tourfic'),
+			'type' => Controls_Manager::SWITCHER,
+			'label_on' => __('Show', 'tourfic'),
+			'label_off' => __('Hide', 'tourfic'),
+			'return_value' => 'yes',
+			'default' => 'yes',
+		]);
+
+        $this->add_control('view_details_text',[
+			'label' => esc_html__('View Details Text', 'tourfic'),
+			'type' => Controls_Manager::TEXT,
+			'dynamic'     => [ 'active' => true ],
+			'label_block' => false,
+			'default' => esc_html__('View Details', 'tourfic'),
+			'condition' => [
+				'show_view_details' => 'yes',
+			],
+		]);
 
         $this->end_controls_section();
     }
@@ -337,8 +523,10 @@ class Listings extends Widget_Base {
 		$paged = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
         $query = new \WP_Query( array(
             'post_type' => $service,
-            'posts_per_page' => 1,
+            'posts_per_page' => !empty( $settings['posts_per_page'] ) ? absint($settings['posts_per_page']) : 10,
             'post_status' => 'publish',
+			'orderby' => !empty( $settings['orderby'] ) ? sanitize_text_field($settings['orderby']) : 'date',
+			'order' => !empty( $settings['order'] ) ? sanitize_text_field($settings['order']) : 'desc',
 			'paged' => $paged,
         ) );
 
@@ -469,18 +657,18 @@ class Listings extends Widget_Base {
                         $query->the_post();
                         $hotel_meta = get_post_meta( get_the_ID() , 'tf_hotels_opt', true );
                         if ( !empty( $hotel_meta[ "featured" ] ) && $hotel_meta[ "featured" ] == 1 ) {
-                            Hotel::tf_hotel_archive_single_item('', '', '', '', '', '', $settings['design_hotel']);
+                            Hotel::tf_hotel_archive_single_item('', '', '', '', '', '', $settings);
                         }
                     }
                     while ( $query->have_posts() ) {
                         $query->the_post();
                         $hotel_meta = get_post_meta( get_the_ID() , 'tf_hotels_opt', true );
                         if ( empty($hotel_meta[ "featured" ]) ) {
-                            Hotel::tf_hotel_archive_single_item('', '', '', '', '', '', $settings['design_hotel']);
+                            Hotel::tf_hotel_archive_single_item('', '', '', '', '', '', $settings);
                         }
                     }
                 } else {
-                    echo '<div class="tf-nothing-found" data-post-count="0" >' .esc_html__("No Tours Found!", "tourfic"). '</div>';
+                    echo '<div class="tf-nothing-found" data-post-count="0" >' .esc_html__("No Hotels Found!", "tourfic"). '</div>';
                 }
                 ?>
                     <div class="tf-pagination-bar">
@@ -534,18 +722,18 @@ class Listings extends Widget_Base {
 							$query->the_post();
 							$hotel_meta = get_post_meta( get_the_ID() , 'tf_hotels_opt', true );
 							if ( !empty( $hotel_meta[ "featured" ] ) && $hotel_meta[ "featured" ] == 1 ) {
-								Hotel::tf_hotel_archive_single_item('', '', '', '', '', '', $settings['design_hotel']);
+								Hotel::tf_hotel_archive_single_item('', '', '', '', '', '', $settings);
 							}
 						}
 						while ( $query->have_posts() ) {
 							$query->the_post();
 							$hotel_meta = get_post_meta( get_the_ID() , 'tf_hotels_opt', true );
 							if ( empty($hotel_meta[ "featured" ]) ) {
-								Hotel::tf_hotel_archive_single_item('', '', '', '', '', '', $settings['design_hotel']);
+								Hotel::tf_hotel_archive_single_item('', '', '', '', '', '', $settings);
 							}
 						}
 					} else {
-						echo '<div class="tf-nothing-found" data-post-count="0" >' .esc_html__("No Tours Found!", "tourfic"). '</div>';
+						echo '<div class="tf-nothing-found" data-post-count="0" >' .esc_html__("No Hotels Found!", "tourfic"). '</div>';
 					}
 					?>
 					<?php
@@ -749,7 +937,7 @@ class Listings extends Widget_Base {
 													'content' => base64_encode($infoWindowtext)
 												];
 											}
-											Hotel::tf_hotel_archive_single_item('', '', '', '', '', '', $settings['design_hotel']);
+											Hotel::tf_hotel_archive_single_item('', '', '', '', '', '', $settings);
 										}
 										while ($query->have_posts()) {
 											$query->the_post();
@@ -823,7 +1011,7 @@ class Listings extends Widget_Base {
 													'content' => base64_encode($infoWindowtext)
 												];
 											}
-											Hotel::tf_hotel_archive_single_item('', '', '', '', '', '', $settings['design_hotel']);
+											Hotel::tf_hotel_archive_single_item('', '', '', '', '', '', $settings);
 										}
 										wp_reset_query();
 										?>
@@ -922,14 +1110,14 @@ class Listings extends Widget_Base {
 							$query->the_post();
 							$hotel_meta = get_post_meta( get_the_ID() , 'tf_hotels_opt', true );
 							if ( !empty( $hotel_meta[ "featured" ] ) && $hotel_meta[ "featured" ] == 1 ) {
-								Hotel::tf_hotel_archive_single_item('', '', '', '', '', '', $settings['design_hotel']);
+								Hotel::tf_hotel_archive_single_item('', '', '', '', '', '', $settings);
 							}
 						}
 						while ( $query->have_posts() ) {
 							$query->the_post();
 							$hotel_meta = get_post_meta( get_the_ID() , 'tf_hotels_opt', true );
 							if ( empty($hotel_meta[ "featured" ]) ) {
-								Hotel::tf_hotel_archive_single_item('', '', '', '', '', '', $settings['design_hotel']);
+								Hotel::tf_hotel_archive_single_item('', '', '', '', '', '', $settings);
 							}
 						}
 					} else {
@@ -2061,4 +2249,43 @@ class Listings extends Widget_Base {
 		</div>
 		<?php
 	}
+
+	/**
+     * Generates conditional display rules for controls based on service and design
+     * 
+     * @param array $design Array of design conditions in format ['service' => 'design_value']
+     * @return array Condition array for Elementor controls
+     */
+    protected function tf_display_conditionally($design) {
+        $terms = [];
+        
+        foreach ($design as $service => $design_values) {
+            // Convert to array if it's not already
+            $design_values = (array) $design_values;
+            $design_control = 'design_' . str_replace('tf_', '', $service);
+
+            foreach ($design_values as $design_value) {
+                $terms[] = [
+                    'relation' => 'and',
+                    'terms' => [
+                        [
+                            'name' => 'service',
+                            'operator' => '==',
+                            'value' => $service,
+                        ],
+                        [
+                            'name' => $design_control,
+                            'operator' => '==',
+                            'value' => $design_value,
+                        ],
+                    ],
+                ];
+            }
+        }
+
+        return [
+            'relation' => 'or',
+            'terms' => $terms,
+        ];
+    }
 }
