@@ -375,6 +375,7 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 = 2.15.26 – April 20, 2025 =
 
 - Compatibility: Fully compatible with WordPress version 6.8.
+- Compatibility: Fully compatible with WooCommerce version 9.8.
 
 = 2.15.25 – April 08, 2025 =
 
