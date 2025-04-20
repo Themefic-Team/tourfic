@@ -1133,6 +1133,16 @@
                             position: relative;
                             top: 2px;
                         }
+                        svg{
+                            position: relative;
+                            top: 2px;
+                            width: 16px;
+                            height: 16px;
+
+                            path{
+                                fill: $color-primary;
+                            }
+                        }
                     }
                     .tf-title {
                         h2 {

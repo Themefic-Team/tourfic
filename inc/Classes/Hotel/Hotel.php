@@ -3694,7 +3694,7 @@ class Hotel {
 		$show_location = isset($settings['show_location']) ? $settings['show_location'] : 'yes';
 		$location_length = isset($settings['location_length']) ? $settings['location_length'] : 120;
 		$show_features = isset($settings['show_features']) ? $settings['show_features'] : 'yes';
-		$features_count = isset($settings['features_count']) ? $settings['features_count'] : '';
+		$features_count = isset($settings['features_count']) ? $settings['features_count'] : 4;
 		$show_review = isset($settings['show_review']) ? $settings['show_review'] : 'yes';
 		$show_price = isset($settings['show_price']) ? $settings['show_price'] : 'yes';
 		$show_view_details = isset($settings['show_view_details']) ? $settings['show_view_details'] : 'yes';
@@ -3728,12 +3728,15 @@ class Hotel {
 				ob_start();
 				Icons_Manager::render_icon( $settings['location_icon'], [ 'aria-hidden' => 'true' ] );
 				$location_icon_html = ob_get_clean();
+			} else{
+				$location_icon_html = '<i class="' . esc_attr( $settings['location_icon_comp'] ) . '"></i>';
 			}
 		}
 
 		if ( $tf_hotel_arc_selected_template == "design-1" ) {
 			?>
             <div class="tf-item-card tf-flex tf-item-hotel">
+				<!-- Thumbnail -->
 				<?php if($show_image == 'yes'): ?>
                 <div class="tf-item-featured">
                     <div class="tf-tag-items">
@@ -3780,20 +3783,27 @@ class Hotel {
                 </div>
 				<?php endif; ?>
                 <div class="tf-item-details" style="<?php echo $show_image != 'yes' ? 'flex-basis: 100%;' : ''; ?>">
+					<!-- Location -->
 					<?php if ( $show_location == 'yes' && ! empty( $address ) ) : ?>
                         <div class="tf-title-meta tf-flex tf-flex-align-center tf-flex-gap-8">
-							<?php echo wp_kses_post( $location_icon_html ); ?>
+							<?php echo wp_kses( $location_icon_html, Helper::tf_custom_wp_kses_allow_tags() ); ?>
                             <p><?php echo esc_html( Helper::tourfic_character_limit_callback( $address, $location_length ) ); ?></p>
                         </div>
 					<?php endif; ?>
+
+					<!-- Title -->
 					<?php if( $show_title == 'yes' ): ?>
 						<div class="tf-title tf-mt-16">
 							<h2><a href="<?php echo esc_url( $url ); ?>"><?php echo esc_html( Helper::tourfic_character_limit_callback( get_the_title(), $title_length ) ); ?></a></h2>
 						</div>
 					<?php endif; ?>
+
+					<!-- Review -->
 					<?php if( $show_review == 'yes' && $disable_review != true ): ?>
 						<?php TF_Review::tf_archive_single_rating('', $design); ?>
 					<?php endif; ?>
+
+					<!-- Features -->
 					<?php if ( $show_features == 'yes' && $features ) : ?>
                         <div class="tf-archive-features tf-mt-16">
                             <ul>
@@ -3807,7 +3817,7 @@ class Hotel {
 									} elseif ( ! empty( $f_icon_type ) && $f_icon_type == 'c' ) {
 										$feature_icon = ! empty( $feature_meta['icon-c'] ) ? '<img src="' . $feature_meta['icon-c'] . '" style="min-width: ' . $feature_meta['dimention'] . 'px; height: ' . $feature_meta['dimention'] . 'px;" />' : '';
 									}
-									if ( $tfkey < 4 ) {
+									if ( $tfkey < $features_count ) {
 										?>
                                         <li class="tf-feature-lists">
 											<?php
@@ -3828,17 +3838,24 @@ class Hotel {
                             </ul>
                         </div>
 					<?php endif; ?>
+
+					<!-- Excerpt -->
 					<?php if($show_excerpt == 'yes') : ?>
 						<div class="tf-details tf-mt-16">
 							<p><?php echo wp_kses_post( substr( wp_strip_all_tags( get_the_content() ), 0, $excerpt_length ) ) . '...'; ?></p>
 						</div>
 					<?php endif; ?>
+
+					<!-- Price & View Details -->
                     <div class="tf-post-footer tf-flex tf-flex-align-center tf-flex-space-bttn tf-mt-16">
+						<!-- Price -->
 						<?php if($show_price == 'yes') : ?>
 							<div class="tf-pricing">
 								<?php echo wp_kses_post(Pricing::instance( $post_id )->get_min_price_html($period)); ?>
 							</div>
 						<?php endif; ?>
+
+						<!-- View Details -->
 						<?php if($show_view_details == 'yes') : ?>
 							<div class="tf-booking-bttns">
 								<a class="tf_btn tf_btn_lite" href="<?php echo esc_url( $url ); ?>"><?php echo esc_html( $view_details_text ); ?></a>
@@ -3851,6 +3868,7 @@ class Hotel {
 			$first_gallery_image = explode( ',', $gallery );
 			?>
             <div class="tf-available-room">
+				<!-- Thumbnail -->
                 <div class="tf-available-room-gallery">
                     <div class="tf-room-gallery">
 						<?php
@@ -3912,20 +3930,22 @@ class Hotel {
                 <div class="tf-available-room-content">
                     <div class="tf-available-room-content-left">
                         <div class="tf-card-heading-info">
+							<!-- Title & Location -->
                             <div class="tf-section-title-and-location">
+								<!-- Title -->
                                 <a href="<?php echo esc_url( get_the_permalink() ); ?>">
 									<h2 class="tf-section-title"><?php echo esc_html( Helper::tourfic_character_limit_callback( get_the_title(), 55 ) ); ?></h2>
 								</a>
-								<?php
-								if ( ! empty( $address ) ) {
-									?>
+								
+								<!-- Location -->
+								<?php if ( ! empty( $address ) ) : ?>
                                     <div class="tf-title-location">
                                         <div class="location-icon">
-                                            <i class="ri-map-pin-line"></i>
+										<?php echo wp_kses( $location_icon_html, Helper::tf_custom_wp_kses_allow_tags() ); ?>
                                         </div>
                                         <span><?php echo esc_html( Helper::tourfic_character_limit_callback( esc_html( $address ), 65 ) ); ?></span>
                                     </div>
-								<?php } ?>
+								<?php endif; ?>
                             </div>
                             <div class="tf-mobile tf-pricing-info">
 								<?php if ( ! empty( $min_discount_amount ) ) { ?>
@@ -3942,8 +3962,9 @@ class Hotel {
                                 </div>
                             </div>
                         </div>
-                        <!-- Hotel Template 3 Archive Feature Start -->
-						<?php if ( $features ) { ?>
+
+                        <!-- Features -->
+						<?php if ( $features ) : ?>
                             <ul class="features">
 								<?php foreach ( $features as $tfkey => $feature ) {
 									$feature_meta = get_term_meta( $feature->term_taxonomy_id, 'tf_hotel_feature', true );
@@ -3955,7 +3976,7 @@ class Hotel {
 									} elseif ( ! empty( $f_icon_type ) && $f_icon_type == 'c' ) {
 										$feature_icon = ! empty( $feature_meta['icon-c'] ) ? '<img src="' . $feature_meta['icon-c'] . '" style="min-width: ' . $feature_meta['dimention'] . 'px; height: ' . $feature_meta['dimention'] . 'px;" />' : '';
 									}
-									if ( $tfkey < 5 ) { ?>
+									if ( $tfkey < $features_count ) { ?>
                                         <li>
 											<?php
 											if ( ! empty( $feature_icon ) ) {
@@ -3969,13 +3990,12 @@ class Hotel {
                                     <li><a href="<?php echo esc_url( $url ); ?>"><?php esc_html_e( "View More", "tourfic" ); ?></a></li>
 								<?php } ?>
                             </ul>
-						<?php } ?>
-                        <!-- Hotel Template 3 Archive Feature End -->
+						<?php endif; ?>
                     </div>
                     <div class="tf-available-room-content-right">
+						<!-- Price -->
                         <div class="tf-card-pricing-heading">
-							<?php
-							if ( ! empty( $min_discount_amount ) ) { ?>
+							<?php if ( ! empty( $min_discount_amount ) ) { ?>
                                 <div class="tf-available-room-off">
                                     <span>
                                         <?php echo $min_discount_type == "percent" ? esc_html( $min_discount_amount ) . '%' : wp_kses_post( wc_price( $min_discount_amount ) ) ?><?php esc_html_e( "Off ", "tourfic" ); ?>
@@ -3983,17 +4003,18 @@ class Hotel {
                                 </div>
 							<?php } ?>
                             <div class="tf-available-room-price">
-                            <span class="tf-price-from">
-                            <?php echo wp_kses_post(Pricing::instance( $post_id )->get_min_price_html($period)); ?>
-                            </span>
+								<span class="tf-price-from"><?php echo wp_kses_post(Pricing::instance( $post_id )->get_min_price_html($period)); ?></span>
                             </div>
                         </div>
+
+						<!-- View Details -->
                         <a href="<?php echo esc_url( $url ); ?>" class="tf_btn tf_btn_large tf_btn_sharp"><?php esc_html_e( "See details", "tourfic" ); ?></a>
                     </div>
                 </div>
             </div>
         <?php } elseif ( $tf_hotel_arc_selected_template == "design-3" && function_exists( 'is_tf_pro' ) && is_tf_pro()) { ?>
             <div class="tf-archive-hotel" data-id="<?php echo esc_attr(get_the_ID()); ?>">
+				<!-- Thumbnail -->
                 <div class="tf-archive-hotel-thumb">
                     <a href="<?php echo esc_url( $url ); ?>">
 						<?php
@@ -4020,22 +4041,27 @@ class Hotel {
                 </div>
                 <div class="tf-archive-hotel-content">
                     <div class="tf-archive-hotel-content-left">
+						<!-- Location -->
 						<?php if ( ! empty( $address ) ) : ?>
                             <div class="tf-title-location">
                                 <div class="location-icon">
-                                    <i class="ri-map-pin-fill"></i>
+									<?php echo wp_kses( $location_icon_html, Helper::tf_custom_wp_kses_allow_tags() ); ?>
                                 </div>
                                 <span><?php echo wp_kses_post(Helper::tourfic_character_limit_callback( esc_html( $address ), 20 )); ?></span>
                             </div>
 						<?php endif; ?>
+
+						<!-- Title -->
                         <h4 class="tf-section-title">
                             <a href="<?php echo esc_url( $url ); ?>">
                                 <?php echo wp_kses_post(Helper::tourfic_character_limit_callback( get_the_title(), 55 )); ?>
                             </a>
                         </h4>
+
+						<!-- Features -->
 						<?php if ( $features ) { ?>
                             <ul class="features">
-								<?php foreach ( array_slice( $features, 0, 3 ) as $tfkey => $feature ) :
+								<?php foreach ( array_slice( $features, 0, $features_count ) as $tfkey => $feature ) :
 									$feature_meta = get_term_meta( $feature->term_taxonomy_id, 'tf_hotel_feature', true );
 									if ( ! empty( $feature_meta ) ) {
 										$f_icon_type = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
@@ -4061,12 +4087,17 @@ class Hotel {
 								?>
                             </ul>
 						<?php } ?>
+
+						<!-- Review -->
 						<?php TF_Review::tf_archive_single_rating('', $design); ?>
                     </div>
                     <div class="tf-archive-hotel-content-right">
+						<!-- Price -->
                         <div class="tf-archive-hotel-price">
 							<?php echo wp_kses_post(Pricing::instance( $post_id )->get_min_price_html()); ?>
                         </div>
+
+						<!-- View Details -->
                         <a href="<?php echo esc_url( $url ); ?>" class="tf_btn tf_btn_gray tf_btn_small"><?php esc_html_e( "View Details", "tourfic" ); ?></a>
                     </div>
                 </div>
@@ -4079,6 +4110,7 @@ class Hotel {
                             <span><?php echo ! empty( $meta['featured_text'] ) ? esc_html( $meta['featured_text'] ) : esc_html( "HOT DEAL" ); ?></span>
                         </div>
 					<?php endif; ?>
+					<!-- Thumbnail -->
                     <div class="tourfic-single-left">
                         <div class="default-tags-container">
 							<?php
@@ -4112,17 +4144,22 @@ class Hotel {
                     <div class="tourfic-single-right">
                         <div class="tf_property_block_main_row">
                             <div class="tf_item_main_block">
+								<!-- Title -->
                                 <div class="tf-hotel__title-wrap">
-                                    <a href="<?php echo esc_url( $url ); ?>"><h3 class="tourfic_hotel-title"><?php the_title(); ?></h3></a>
+                                    <a href="<?php echo esc_url( $url ); ?>">
+										<h3 class="tourfic_hotel-title"><?php echo esc_html( Helper::tourfic_character_limit_callback( get_the_title(), $title_length ) ); ?></h3>
+									</a>
                                 </div>
-								<?php
-								if ( $address ) {
+
+								<!-- Location -->
+								<?php if ( $address ) {
 									echo '<div class="tf-map-link">';
-									echo '<span class="tf-d-ib"><i class="fas fa-map-marker-alt"></i> ' . strlen( $address ) > 75 ? esc_html( Helper::tourfic_character_limit_callback( $address, 76 ) ) : esc_html( $address ) . '</span>';
+									echo '<span class="tf-d-ib">' . wp_kses( $location_icon_html, Helper::tf_custom_wp_kses_allow_tags() ) . strlen( $address ) > 75 ? esc_html( Helper::tourfic_character_limit_callback( $address, 76 ) ) : esc_html( $address ) . '</span>';
 									echo '</div>';
-								}
-								?>
+								} ?>
                             </div>
+
+							<!-- Reivew -->
 							<?php if( $disable_review != true ): ?>
 								<?php TF_Review::tf_archive_single_rating('', $design); ?>
 							<?php endif; ?>
@@ -4131,6 +4168,8 @@ class Hotel {
                         <div class="sr_rooms_table_block">
                             <div class="room_details">
                                 <div class="featuredRooms">
+
+									<!-- Excerpt -->
                                     <div class="prco-ltr-right-align-helper">
                                         <div class="tf-archive-shortdesc">
                                             <p><?php echo esc_html( substr( wp_strip_all_tags( get_the_content() ), 0, $excerpt_length ) ) . '...'; ?></p>
@@ -4140,11 +4179,11 @@ class Hotel {
                                         <div class="room_link">
                                             <div class="roomrow_flex">
 
-                                                <!-- Hotel Template 1 Archive Feature Start -->
-												<?php if ( $features ) { ?>
+                                                <!-- Features -->
+												<?php if ( $features ) : ?>
                                                     <div class="roomName_flex">
                                                         <ul class="tf-archive-desc">
-															<?php foreach ( $features as $feature ) {
+															<?php foreach ( array_slice( $features, 0, $features_count ) as $feature ) {
 																$feature_meta = get_term_meta( $feature->term_taxonomy_id, 'tf_hotel_feature', true );
 																if ( ! empty( $feature_meta ) ) {
 																	$f_icon_type = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
@@ -4170,14 +4209,15 @@ class Hotel {
 															<?php } ?>
                                                         </ul>
                                                     </div>
-												<?php } ?>
-                                                <!-- Hotel Template 1 Archive Feature End -->
+												<?php endif; ?>
 
                                                 <div class="roomPrice roomPrice_flex sr_discount" style="<?php echo empty( $features ) ? 'text-align:left' : ''; ?>">
-                                                    <div class="availability-btn-area">
+                                                    <!-- View Details -->
+													<div class="availability-btn-area">
                                                         <a href="<?php echo esc_url( $url ); ?>" class="tf_btn"><?php esc_html_e( 'View Details', 'tourfic' ); ?></a>
                                                     </div>
-                                                    <!-- Show minimum price @author - Hena -->
+
+                                                    <!-- Price -->
                                                     <div class="tf-room-price-area">
                                                         <div class="tf-room-price">
 															<?php echo wp_kses_post(Pricing::instance( $post_id )->get_min_price_html($period)); ?>
