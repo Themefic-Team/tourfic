@@ -369,9 +369,10 @@ class Listings extends Widget_Base {
 			],
 			'size_units' => ['px', 'em', '%'],
 			'selectors'  => [
-				'{{WRAPPER}} .tf-item-card.tf-item-hotel .tf-item-featured img' => 'height: {{SIZE}}{{UNIT}}; min-height: {{SIZE}}{{UNIT}};', //design-1
-				'{{WRAPPER}} .tf-available-room-gallery .tf-room-gallery img' => 'height: {{SIZE}}{{UNIT}}; min-height: {{SIZE}}{{UNIT}};', //design-2
-				'{{WRAPPER}} .tf-archive-hotel .tf-archive-hotel-thumb img' => 'height: {{SIZE}}{{UNIT}}; min-height: {{SIZE}}{{UNIT}};', //design-3
+				'{{WRAPPER}} .tf-item-card .tf-item-featured img' => 'height: {{SIZE}}{{UNIT}} !important; min-height: {{SIZE}}{{UNIT}} !important;', //design-1
+				'{{WRAPPER}} .tf-available-room-gallery .tf-room-gallery img' => 'height: {{SIZE}}{{UNIT}} !important; min-height: {{SIZE}}{{UNIT}} !important;', //design-2
+				'{{WRAPPER}} .tf-archive-hotel .tf-archive-hotel-thumb img' => 'height: {{SIZE}}{{UNIT}} !important; min-height: {{SIZE}}{{UNIT}} !important;', //design-3
+				'{{WRAPPER}} .single-tour-inner .tourfic-single-left img' => 'height: {{SIZE}}{{UNIT}} !important; min-height: {{SIZE}}{{UNIT}} !important;', //default
 			],
 			'condition' => [
 				'show_image' => 'yes',
@@ -400,6 +401,34 @@ class Listings extends Widget_Base {
 			'ai' => [
 				'active' => false,
 			],
+		]);
+
+		$this->add_control('gallery', [
+			'label' => __('Gallery', 'tourfic'),
+			'type' => Controls_Manager::SWITCHER,
+			'label_on' => __('Show', 'tourfic'),
+			'label_off' => __('Hide', 'tourfic'),
+			'return_value' => 'yes',
+			'default' => 'yes',
+			'conditions' => $this->tf_display_conditionally([
+                'tf_hotel' => ['design-2'],
+                'tf_tours' => ['design-2'],
+                'tf_apartment' => ['design-1',],
+            ], [
+				'show_image' => 'yes',
+			]),
+		]);
+
+		$this->add_control('tour_infos', [
+			'label' => __('Tour Information', 'tourfic'),
+			'type' => Controls_Manager::SWITCHER,
+			'label_on' => __('Show', 'tourfic'),
+			'label_off' => __('Hide', 'tourfic'),
+			'return_value' => 'yes',
+			'default' => 'yes',
+			'conditions' => $this->tf_display_conditionally([
+                'tf_tours' => ['design-2', 'design-3'],
+            ]),
 		]);
 
 		$this->add_control('featured_badge', [
@@ -519,6 +548,11 @@ class Listings extends Widget_Base {
 			'label_off' => __('Hide', 'tourfic'),
 			'return_value' => 'yes',
 			'default' => 'yes',
+			'conditions' => $this->tf_display_conditionally([
+                'tf_hotel' => ['design-1', 'design-2', 'design-3', 'default'],
+                'tf_tours' => ['design-2', 'design-3', 'default'],
+                'tf_apartment' => ['design-1', 'design-2', 'default'],
+            ]),
 		]);
 
 		$this->add_control('features_count',[
@@ -528,9 +562,13 @@ class Listings extends Widget_Base {
             'min' => 1,
             'max' => 10,
             'step' => 1,
-			'condition' => [
+			'conditions' => $this->tf_display_conditionally([
+                'tf_hotel' => ['design-1', 'design-2', 'design-3', 'default'],
+                'tf_tours' => ['design-2', 'design-3', 'default'],
+                'tf_apartment' => ['design-1', 'design-2', 'default'],
+            ],[
 				'show_features' => 'yes',
-			],
+			]),
 		]);
 
 		$this->add_control('show_review',[
@@ -1255,10 +1293,20 @@ class Listings extends Widget_Base {
 
 	protected function tf_tour_design_1($settings, $query) {
 		$tf_total_results = 0;
+		$show_total_result = isset( $settings['show_total_result'] ) ? $settings['show_total_result'] : 'yes';
+		$show_sorting = isset( $settings['show_sorting'] ) ? $settings['show_sorting'] : 'yes';
+		$grid_column = isset( $settings['grid_column'] ) ? absint($settings['grid_column']) : 2;
+		$listing_layout_toggle = isset( $settings['listing_layout_toggle'] ) ? $settings['listing_layout_toggle'] : 'yes';
+		if($listing_layout_toggle == 'yes'){
+			$listing_layout = isset( $settings['listing_default_layout'] ) ? $settings['listing_default_layout'] : 'list';
+		} else {
+			$listing_layout = isset( $settings['listing_layout'] ) ? $settings['listing_layout'] : 'list';
+		}
 		?>
 		<div class="tf-archive-listing-wrap tf-archive-listing__one" data-design="design-1">
 			<!-- Search Head Section -->
 			<div class="tf-archive-head tf-flex tf-flex-align-center tf-flex-space-bttn">
+				<?php if($show_total_result == 'yes') : ?>
 				<div class="tf-search-result tf-flex">
 					<span class="tf-counter-title"><?php echo esc_html__( 'Total Results ', 'tourfic' ); ?> </span>
 					<span><?php echo ' ('; ?> </span>
@@ -1267,11 +1315,11 @@ class Listings extends Widget_Base {
 					</div>
 					<span><?php echo ')'; ?> </span>
 				</div>
-				<?php 
-				$tf_defult_views = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour_archive_view'] ) ? Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour_archive_view'] : 'list';
-				?>
+				<?php endif; ?>
+
 				<div class="tf-search-layout tf-flex tf-flex-gap-12">
-					<div class="tf-icon tf-serach-layout-list tf-list-active tf-grid-list-layout <?php echo $tf_defult_views=="list" ? esc_attr('active') : ''; ?>" data-id="list-view">
+					<?php if($listing_layout_toggle == 'yes') : ?>
+					<div class="tf-icon tf-serach-layout-list tf-list-active tf-grid-list-layout <?php echo $listing_layout=="list" ? esc_attr('active') : ''; ?>" data-id="list-view">
 						<div class="defult-view">
 							<svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<rect width="12" height="2" fill="white"/>
@@ -1293,7 +1341,7 @@ class Listings extends Widget_Base {
 							</svg>
 						</div>
 					</div>
-					<div class="tf-icon tf-serach-layout-grid tf-grid-list-layout <?php echo $tf_defult_views=="grid" ? esc_attr('active') : ''; ?>" data-id="grid-view">
+					<div class="tf-icon tf-serach-layout-grid tf-grid-list-layout <?php echo $listing_layout=="grid" ? esc_attr('active') : ''; ?>" data-id="grid-view">
 						<div class="defult-view">
 							<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<rect x="10" width="2" height="2" fill="#0E3DD8"/>
@@ -1321,7 +1369,9 @@ class Listings extends Widget_Base {
 							</svg>
 						</div>
 					</div>
+					<?php endif; ?>
 
+					<?php if($show_sorting == 'yes') : ?>
 					<div class="tf-sorting-selection-warper">
 						<form class="tf-archive-ordering" method="get">
 							<select class="tf-orderby" name="tf-orderby" id="tf-orderby">
@@ -1335,6 +1385,7 @@ class Listings extends Widget_Base {
 							</select>
 						</form>
 					</div>
+					<?php endif; ?>
 				</div>
 			</div>
 			<!-- Loader Image -->
@@ -1344,38 +1395,38 @@ class Listings extends Widget_Base {
 				</div>
 			</div>
 			<div class="tf-search-results-list tf-mt-30">
-				<div class="archive_ajax_result tf-item-cards tf-flex <?php echo $tf_defult_views=="list" ? esc_attr('tf-layout-list') : esc_attr('tf-layout-grid'); ?> ">
+				<div class="archive_ajax_result tf-item-cards tf-flex <?php echo $listing_layout=="list" ? esc_attr('tf-layout-list') : esc_attr('tf-layout-grid'); ?> tf-grid-<?php echo esc_attr($grid_column); ?>">
 
-				<?php
-				if ( $query->have_posts() ) {          
-					while ( $query->have_posts() ) {
-						$query->the_post();
-						$tour_meta = get_post_meta( get_the_ID() , 'tf_tours_opt', true );
-						
-						if(!empty($tour_meta["tour_as_featured"])) {
-							Tour::tf_tour_archive_single_item('', '', '', '', '', $settings);
-							$featured_post_id[] = get_the_ID(); 
-						}
+					<?php
+					if ( $query->have_posts() ) {          
+						while ( $query->have_posts() ) {
+							$query->the_post();
+							$tour_meta = get_post_meta( get_the_ID() , 'tf_tours_opt', true );
+							
+							if(!empty($tour_meta["tour_as_featured"])) {
+								Tour::tf_tour_archive_single_item('', '', '', '', '', $settings);
+								$featured_post_id[] = get_the_ID(); 
+							}
 
-						$tf_total_results+=1;
-					}
-					
-					while ( $query->have_posts() ) {
-						$query->the_post();
-						$tour_meta = get_post_meta( get_the_ID() , 'tf_tours_opt', true );
-						
-						if( empty($tour_meta["tour_as_featured"]) ) {
-							Tour::tf_tour_archive_single_item('', '', '', '', '', $settings);
+							$tf_total_results+=1;
 						}
+						
+						while ( $query->have_posts() ) {
+							$query->the_post();
+							$tour_meta = get_post_meta( get_the_ID() , 'tf_tours_opt', true );
+							
+							if( empty($tour_meta["tour_as_featured"]) ) {
+								Tour::tf_tour_archive_single_item('', '', '', '', '', $settings);
+							}
+						}
+						
+					} else {
+						echo '<div class="tf-nothing-found" data-post-count="0" >' .esc_html__("No Tours Found!", "tourfic"). '</div>';
 					}
-					
-				} else {
-					echo '<div class="tf-nothing-found" data-post-count="0" >' .esc_html__("No Tours Found!", "tourfic"). '</div>';
-				}
-				?>
-				<span class="tf-posts-count" hidden="hidden">
-					<?php echo esc_html($tf_total_results); ?>
-				</span>
+					?>
+					<span class="tf-posts-count" hidden="hidden">
+						<?php echo esc_html($tf_total_results); ?>
+					</span>
 					<div class="tf-pagination-bar">
 						<?php Helper::tourfic_posts_navigation($query); ?>
 					</div>
@@ -1386,16 +1437,22 @@ class Listings extends Widget_Base {
 	}
 
 	protected function tf_tour_design_2($settings, $query) {
-		$post_count = $query->post_count;
+		$show_total_result = isset( $settings['show_total_result'] ) ? $settings['show_total_result'] : 'yes';
+		$show_sorting = isset( $settings['show_sorting'] ) ? $settings['show_sorting'] : 'yes';
 		$tf_total_results = 0;
 		?>
         <div class="tf-archive-listing-wrap tf-archive-listing__two" data-design="design-2">
 			<div class="tf-available-archive-hetels-wrapper tf-available-rooms-wrapper" id="tf-hotel-rooms">
 				<div class="tf-archive-available-rooms-head tf-available-rooms-head">
+					<?php if($show_total_result == 'yes') : ?>
 					<span class="tf-total-results"><?php esc_html_e("Total", "tourfic"); ?> <span><?php echo esc_html($tf_total_results); ?></span> <?php esc_html_e("Tours available", "tourfic"); ?></span>
+					<?php endif; ?>
+
 					<div class="tf-archive-filter-showing">
 						<i class="ri-equalizer-line"></i>
 					</div>
+
+					<?php if($show_sorting == 'yes') : ?>
 					<div class="tf-sorting-selection-warper">
 						<form class="tf-archive-ordering" method="get">
 							<select class="tf-orderby" name="tf-orderby" id="tf-orderby">
@@ -1409,6 +1466,7 @@ class Listings extends Widget_Base {
 							</select>
 						</form>
 					</div>
+					<?php endif; ?>
 				</div>
 				
 				<!-- Loader Image -->
@@ -1479,6 +1537,14 @@ class Listings extends Widget_Base {
         $post_count = $query->post_count;
         $tf_map_settings = !empty(Helper::tfopt('google-page-option')) ? Helper::tfopt('google-page-option') : "default";
         $tf_map_api = !empty(Helper::tfopt('tf-googlemapapi')) ? Helper::tfopt('tf-googlemapapi') : '';
+		$show_total_result = isset( $settings['show_total_result'] ) ? $settings['show_total_result'] : 'yes';
+		$grid_column = isset( $settings['grid_column'] ) ? absint($settings['grid_column']) : 2;
+		$listing_layout_toggle = isset( $settings['listing_layout_toggle'] ) ? $settings['listing_layout_toggle'] : 'yes';
+		if($listing_layout_toggle == 'yes'){
+			$listing_layout = isset( $settings['listing_default_layout'] ) ? $settings['listing_default_layout'] : 'list';
+		} else {
+			$listing_layout = isset( $settings['listing_layout'] ) ? $settings['listing_layout'] : 'list';
+		}
 		?>
 		<div class="tf-archive-listing-wrap tf-archive-listing__three"  data-design="design-3">
 			<?php if ($query->have_posts()) : ?>
@@ -1531,8 +1597,11 @@ class Listings extends Widget_Base {
 											</div>
 										</div>
 										<div class="tf-archive-top">
+											<?php if($show_total_result == 'yes') : ?>
 											<h5 class="tf-total-results"><?php esc_html_e("Found", "tourfic"); ?>
-												<span class="tf-map-item-count"><?php echo esc_html($post_count); ?></span> <?php esc_html_e("of", "tourfic"); ?> <?php echo esc_html($GLOBALS['wp_query']->found_posts); ?> <?php esc_html_e("Tours", "tourfic"); ?></h5>
+												<span class="tf-map-item-count"><?php echo esc_html($post_count); ?></span> <?php esc_html_e("of", "tourfic"); ?> <?php echo esc_html($query->found_posts); ?> <?php esc_html_e("Tours", "tourfic"); ?></h5>
+											<?php endif; ?>
+
 											<a href="" class="tf-mobile-map-btn">
 												<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
 													<path d="M17.3327 7.33366V6.68156C17.3327 5.06522 17.3327 4.25705 16.8445 3.75491C16.3564 3.25278 15.5707 3.25278 13.9993 3.25278H12.2671C11.5027 3.25278 11.4964 3.25129 10.8089 2.90728L8.03258 1.51794C6.87338 0.93786 6.29378 0.647818 5.67633 0.667975C5.05888 0.688132 4.49833 1.01539 3.37722 1.66992L2.354 2.2673C1.5305 2.74807 1.11876 2.98846 0.892386 3.38836C0.666016 3.78827 0.666016 4.27527 0.666016 5.24927V12.0968C0.666016 13.3765 0.666016 14.0164 0.951234 14.3725C1.14102 14.6095 1.40698 14.7688 1.70102 14.8216C2.1429 14.901 2.68392 14.5851 3.76591 13.9534C4.50065 13.5245 5.20777 13.079 6.08674 13.1998C6.82326 13.301 7.50768 13.7657 8.16602 14.0952"
@@ -1546,13 +1615,13 @@ class Listings extends Widget_Base {
 												<span><?php echo esc_html__('Map', 'tourfic') ?></span>
 											</a>
 
-											<?php $tf_defult_views = !empty(Helper::tf_data_types(Helper::tfopt('tf-template'))['tour_archive_view']) ? Helper::tf_data_types(Helper::tfopt('tf-template'))['tour_archive_view'] : 'list'; ?>
 											<ul class="tf-archive-view">
 												<li class="tf-archive-filter-btn">
 													<i class="ri-equalizer-line"></i>
 													<span><?php esc_html_e("All Filter", "tourfic"); ?></span>
 												</li>
-												<li class="tf-archive-view-item tf-archive-list-view <?php echo $tf_defult_views == "list" ? esc_attr('active') : ''; ?>" data-id="list-view">
+												<?php if($listing_layout_toggle == 'yes') : ?>
+												<li class="tf-archive-view-item tf-archive-list-view <?php echo $listing_layout == "list" ? esc_attr('active') : ''; ?>" data-id="list-view">
 													<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
 														<path d="M1.33398 7.59996C1.33398 6.82778 1.49514 6.66663 2.26732 6.66663H13.734C14.5062 6.66663 14.6673 6.82778 14.6673 7.59996V8.39996C14.6673 9.17214 14.5062 9.33329 13.734 9.33329H2.26732C1.49514 9.33329 1.33398 9.17214 1.33398 8.39996V7.59996Z"
 															stroke="#6E655E" stroke-linecap="round"/>
@@ -1562,7 +1631,7 @@ class Listings extends Widget_Base {
 															stroke="#6E655E" stroke-linecap="round"/>
 													</svg>
 												</li>
-												<li class="tf-archive-view-item tf-archive-grid-view <?php echo $tf_defult_views == "grid" ? esc_attr('active') : ''; ?>" data-id="grid-view">
+												<li class="tf-archive-view-item tf-archive-grid-view <?php echo $listing_layout == "grid" ? esc_attr('active') : ''; ?>" data-id="grid-view">
 													<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
 														<path d="M1.33398 12C1.33398 10.973 1.33398 10.4595 1.56514 10.0823C1.69448 9.87127 1.87194 9.69381 2.08301 9.56447C2.46021 9.33331 2.97369 9.33331 4.00065 9.33331C5.02761 9.33331 5.54109 9.33331 5.9183 9.56447C6.12936 9.69381 6.30682 9.87127 6.43616 10.0823C6.66732 10.4595 6.66732 10.973 6.66732 12C6.66732 13.0269 6.66732 13.5404 6.43616 13.9176C6.30682 14.1287 6.12936 14.3062 5.9183 14.4355C5.54109 14.6666 5.02761 14.6666 4.00065 14.6666C2.97369 14.6666 2.46021 14.6666 2.08301 14.4355C1.87194 14.3062 1.69448 14.1287 1.56514 13.9176C1.33398 13.5404 1.33398 13.0269 1.33398 12Z"
 															stroke="#6E655E" stroke-width="1.2"/>
@@ -1574,11 +1643,12 @@ class Listings extends Widget_Base {
 															stroke="#6E655E" stroke-width="1.2"/>
 													</svg>
 												</li>
+												<?php endif; ?>
 											</ul>
 										</div>
 
 										<!--Available rooms start -->
-										<div class="tf-archive-hotels archive_ajax_result <?php echo $tf_defult_views == "list" ? esc_attr('tf-layout-list') : esc_attr('tf-layout-grid'); ?>">
+										<div class="tf-archive-hotels archive_ajax_result <?php echo $listing_layout == "list" ? esc_attr('tf-layout-list') : esc_attr('tf-layout-grid'); ?> tf-grid-<?php echo esc_attr($grid_column); ?>">
 
 											<?php
 											$count = 0;
@@ -1787,13 +1857,21 @@ class Listings extends Widget_Base {
 	}
 
 	protected function tf_tour_design_legacy($settings, $query) {
-		$post_count = $query->post_count;
 		$tf_total_results = 0;
-		$tf_defult_views="list";
+		$show_total_result = isset( $settings['show_total_result'] ) ? $settings['show_total_result'] : 'yes';
+		$show_sorting = isset( $settings['show_sorting'] ) ? $settings['show_sorting'] : 'yes';
+		$grid_column = isset( $settings['grid_column'] ) ? absint($settings['grid_column']) : 2;
+		$listing_layout_toggle = isset( $settings['listing_layout_toggle'] ) ? $settings['listing_layout_toggle'] : 'yes';
+		if($listing_layout_toggle == 'yes'){
+			$listing_layout = isset( $settings['listing_default_layout'] ) ? $settings['listing_default_layout'] : 'list';
+		} else {
+			$listing_layout = isset( $settings['listing_layout'] ) ? $settings['listing_layout'] : 'list';
+		}
 		?>
 		<div class="tf-archive-listing-wrap tf-archive-listing__legacy" data-design="default">
 			<div class="tf-search-left">				
 				<div class="tf-action-top">
+					<?php if($show_total_result == 'yes') : ?>
 					<div class="tf-result-counter-info">
 						<span class="tf-counter-title"><?php echo esc_html__( 'Total Results', 'tourfic' ); ?> </span>
 						<span><?php echo '('; ?> </span>
@@ -1802,9 +1880,15 @@ class Listings extends Widget_Base {
 						</div>
 						<span><?php echo ')'; ?> </span>
 					</div>
+					<?php endif; ?>
+
 		            <div class="tf-list-grid">
-		                <a href="#list-view" data-id="list-view" class="change-view <?php echo $tf_defult_views=="list" ? esc_attr('active') : ''; ?>" title="<?php esc_html_e('List View', 'tourfic'); ?>"><i class="fas fa-list"></i></a>
-		                <a href="#grid-view" data-id="grid-view" class="change-view <?php echo $tf_defult_views=="grid" ? esc_attr('active') : ''; ?>" title="<?php esc_html_e('Grid View', 'tourfic'); ?>"><i class="fas fa-border-all"></i></a>
+						<?php if($listing_layout_toggle == 'yes') : ?>
+		                <a href="#list-view" data-id="list-view" class="change-view <?php echo $listing_layout=="list" ? esc_attr('active') : ''; ?>" title="<?php esc_html_e('List View', 'tourfic'); ?>"><i class="fas fa-list"></i></a>
+		                <a href="#grid-view" data-id="grid-view" class="change-view <?php echo $listing_layout=="grid" ? esc_attr('active') : ''; ?>" title="<?php esc_html_e('Grid View', 'tourfic'); ?>"><i class="fas fa-border-all"></i></a>
+						<?php endif; ?>
+
+						<?php if($show_sorting == 'yes') : ?>
 						<div class="tf-sorting-selection-warper">
                             <form class="tf-archive-ordering" method="get">
                                 <select class="tf-orderby" name="tf-orderby" id="tf-orderby">
@@ -1818,9 +1902,10 @@ class Listings extends Widget_Base {
                                 </select>
                             </form>
                         </div>
+						<?php endif; ?>
 		            </div>
 		        </div>
-				<div class="archive_ajax_result <?php echo $tf_defult_views=="grid" ? esc_attr('tours-grid') : '' ?>">
+				<div class="archive_ajax_result <?php echo $listing_layout=="grid" ? esc_attr('tours-grid') : '' ?> tf-grid-<?php echo esc_attr($grid_column); ?>">
 					<?php
                     if ( $query->have_posts() ) {          
                         while ( $query->have_posts() ) {
@@ -1861,14 +1946,21 @@ class Listings extends Widget_Base {
 
 	protected function tf_apartment_design_1($settings, $query) {
 		$post_count = $query->post_count;
+		$show_total_result = isset( $settings['show_total_result'] ) ? $settings['show_total_result'] : 'yes';
+		$show_sorting = isset( $settings['show_sorting'] ) ? $settings['show_sorting'] : 'yes';
 		?>
         <div class="tf-archive-listing-wrap tf-archive-listing__two" data-design="design-1">
 			<div class="tf-available-archive-hetels-wrapper tf-available-rooms-wrapper" id="tf-hotel-rooms">
 				<div class="tf-archive-available-rooms-head tf-available-rooms-head">
+					<?php if($show_total_result == 'yes') : ?>
 					<span class="tf-total-results"><?php esc_html_e("Total", "tourfic"); ?> <span><?php echo esc_html( $post_count ); ?></span> <?php esc_html_e("apartments available", "tourfic"); ?></span>
+					<?php endif; ?>
+
 					<div class="tf-archive-filter-showing">
 						<i class="ri-equalizer-line"></i>
 					</div>
+					
+					<?php if($show_sorting == 'yes') : ?>
 					<div class="tf-sorting-selection-warper">
 						<form class="tf-archive-ordering" method="get">
 							<select class="tf-orderby" name="tf-orderby" id="tf-orderby">
@@ -1882,6 +1974,8 @@ class Listings extends Widget_Base {
 							</select>
 						</form>
 					</div>
+					<?php endif; ?>
+
 				</div>
 				
 				<!-- Loader Image -->
@@ -1902,14 +1996,14 @@ class Listings extends Widget_Base {
 							$query->the_post();
 							$apartment_meta = get_post_meta( get_the_ID() , 'tf_apartment_opt', true );
 							if ( !empty($apartment_meta[ "apartment_as_featured" ] )) {
-								echo apply_filters("tf_apartment_archive_single_featured_card_design_one", Apartment::tf_apartment_archive_single_item([ 1, 0, 0, '' ], $settings['design_apartment']));
+								echo apply_filters("tf_apartment_archive_single_featured_card_design_one", Apartment::tf_apartment_archive_single_item([ 1, 0, 0, '' ], $settings));
 							}
 						} 
 						while ( $query->have_posts() ) {
 							$query->the_post();
 							$apartment_meta = get_post_meta( get_the_ID() , 'tf_apartment_opt', true );
 							if ( empty($apartment_meta[ "apartment_as_featured" ] )) {
-								echo apply_filters("tf_apartment_archive_single_card_design_one", Apartment::tf_apartment_archive_single_item([ 1, 0, 0, '' ], $settings['design_apartment']));
+								echo apply_filters("tf_apartment_archive_single_card_design_one", Apartment::tf_apartment_archive_single_item([ 1, 0, 0, '' ], $settings));
 							}
 						}
 					} else {
@@ -1936,6 +2030,14 @@ class Listings extends Widget_Base {
         $post_count = $query->post_count;
         $tf_map_settings = !empty(Helper::tfopt('google-page-option')) ? Helper::tfopt('google-page-option') : "default";
         $tf_map_api = !empty(Helper::tfopt('tf-googlemapapi')) ? Helper::tfopt('tf-googlemapapi') : '';
+		$show_total_result = isset( $settings['show_total_result'] ) ? $settings['show_total_result'] : 'yes';
+		$grid_column = isset( $settings['grid_column'] ) ? absint($settings['grid_column']) : 2;
+		$listing_layout_toggle = isset( $settings['listing_layout_toggle'] ) ? $settings['listing_layout_toggle'] : 'yes';
+		if($listing_layout_toggle == 'yes'){
+			$listing_layout = isset( $settings['listing_default_layout'] ) ? $settings['listing_default_layout'] : 'list';
+		} else {
+			$listing_layout = isset( $settings['listing_layout'] ) ? $settings['listing_layout'] : 'list';
+		}
 		?>
 		<div class="tf-archive-listing-wrap tf-archive-listing__three"  data-design="design-3">
 		<?php if ($query->have_posts()) : ?>
@@ -1987,9 +2089,12 @@ class Listings extends Widget_Base {
                                         </div>
                                     </div>
                                     <div class="tf-archive-top">
+										<?php if($show_total_result == 'yes') : ?>
                                         <h5 class="tf-total-results"><?php esc_html_e("Found", "tourfic"); ?>
-                                            <span class="tf-map-item-count"><?php echo esc_html($post_count); ?></span> <?php esc_html_e("of", "tourfic"); ?> <?php echo esc_html($GLOBALS['wp_query']->found_posts); ?> <?php esc_html_e("Apartments", "tourfic"); ?></h5>
-                                        <a href="" class="tf-mobile-map-btn">
+                                            <span class="tf-map-item-count"><?php echo esc_html($post_count); ?></span> <?php esc_html_e("of", "tourfic"); ?> <?php echo esc_html($query->found_posts); ?> <?php esc_html_e("Apartments", "tourfic"); ?></h5>
+										<?php endif; ?>
+
+										<a href="" class="tf-mobile-map-btn">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
                                                 <path d="M17.3327 7.33366V6.68156C17.3327 5.06522 17.3327 4.25705 16.8445 3.75491C16.3564 3.25278 15.5707 3.25278 13.9993 3.25278H12.2671C11.5027 3.25278 11.4964 3.25129 10.8089 2.90728L8.03258 1.51794C6.87338 0.93786 6.29378 0.647818 5.67633 0.667975C5.05888 0.688132 4.49833 1.01539 3.37722 1.66992L2.354 2.2673C1.5305 2.74807 1.11876 2.98846 0.892386 3.38836C0.666016 3.78827 0.666016 4.27527 0.666016 5.24927V12.0968C0.666016 13.3765 0.666016 14.0164 0.951234 14.3725C1.14102 14.6095 1.40698 14.7688 1.70102 14.8216C2.1429 14.901 2.68392 14.5851 3.76591 13.9534C4.50065 13.5245 5.20777 13.079 6.08674 13.1998C6.82326 13.301 7.50768 13.7657 8.16602 14.0952"
                                                       stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
@@ -2002,13 +2107,13 @@ class Listings extends Widget_Base {
                                             <span><?php echo esc_html__('Map', 'tourfic') ?></span>
                                         </a>
 
-                                        <?php $tf_defult_views = !empty(Helper::tf_data_types(Helper::tfopt('tf-template'))['apartment_archive_view']) ? Helper::tf_data_types(Helper::tfopt('tf-template'))['apartment_archive_view'] : 'list'; ?>
                                         <ul class="tf-archive-view">
                                             <li class="tf-archive-filter-btn">
                                                 <i class="ri-equalizer-line"></i>
                                                 <span><?php esc_html_e("All Filter", "tourfic"); ?></span>
                                             </li>
-                                            <li class="tf-archive-view-item tf-archive-list-view <?php echo $tf_defult_views == "list" ? esc_attr('active') : ''; ?>" data-id="list-view">
+											<?php if($listing_layout_toggle == 'yes') : ?>
+                                            <li class="tf-archive-view-item tf-archive-list-view <?php echo $listing_layout == "list" ? esc_attr('active') : ''; ?>" data-id="list-view">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                                                     <path d="M1.33398 7.59996C1.33398 6.82778 1.49514 6.66663 2.26732 6.66663H13.734C14.5062 6.66663 14.6673 6.82778 14.6673 7.59996V8.39996C14.6673 9.17214 14.5062 9.33329 13.734 9.33329H2.26732C1.49514 9.33329 1.33398 9.17214 1.33398 8.39996V7.59996Z"
                                                           stroke="#6E655E" stroke-linecap="round"/>
@@ -2018,7 +2123,7 @@ class Listings extends Widget_Base {
                                                           stroke="#6E655E" stroke-linecap="round"/>
                                                 </svg>
                                             </li>
-                                            <li class="tf-archive-view-item tf-archive-grid-view <?php echo $tf_defult_views == "grid" ? esc_attr('active') : ''; ?>" data-id="grid-view">
+                                            <li class="tf-archive-view-item tf-archive-grid-view <?php echo $listing_layout == "grid" ? esc_attr('active') : ''; ?>" data-id="grid-view">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                                                     <path d="M1.33398 12C1.33398 10.973 1.33398 10.4595 1.56514 10.0823C1.69448 9.87127 1.87194 9.69381 2.08301 9.56447C2.46021 9.33331 2.97369 9.33331 4.00065 9.33331C5.02761 9.33331 5.54109 9.33331 5.9183 9.56447C6.12936 9.69381 6.30682 9.87127 6.43616 10.0823C6.66732 10.4595 6.66732 10.973 6.66732 12C6.66732 13.0269 6.66732 13.5404 6.43616 13.9176C6.30682 14.1287 6.12936 14.3062 5.9183 14.4355C5.54109 14.6666 5.02761 14.6666 4.00065 14.6666C2.97369 14.6666 2.46021 14.6666 2.08301 14.4355C1.87194 14.3062 1.69448 14.1287 1.56514 13.9176C1.33398 13.5404 1.33398 13.0269 1.33398 12Z"
                                                           stroke="#6E655E" stroke-width="1.2"/>
@@ -2030,11 +2135,12 @@ class Listings extends Widget_Base {
                                                           stroke="#6E655E" stroke-width="1.2"/>
                                                 </svg>
                                             </li>
+											<?php endif; ?>
                                         </ul>
                                     </div>
 
                                     <!--Available rooms start -->
-                                    <div class="tf-archive-hotels archive_ajax_result <?php echo $tf_defult_views == "list" ? esc_attr('tf-layout-list') : esc_attr('tf-layout-grid'); ?>">
+                                    <div class="tf-archive-hotels archive_ajax_result <?php echo $listing_layout == "list" ? esc_attr('tf-layout-list') : esc_attr('tf-layout-grid'); ?> tf-grid-<?php echo esc_attr($grid_column); ?>">
 
                                         <?php
                                         $count = 0;
@@ -2104,7 +2210,7 @@ class Listings extends Widget_Base {
                                                     'content' => base64_encode($infoWindowtext)
                                                 ];
                                             }
-                                            echo apply_filters("tf_apartment_archive_single_featured_card_design_one", Apartment::tf_apartment_archive_single_item([ 1, 0, 0, '' ], $settings['design_apartment']));
+                                            echo apply_filters("tf_apartment_archive_single_featured_card_design_one", Apartment::tf_apartment_archive_single_item([ 1, 0, 0, '' ], $settings));
                                         }
                                         while ($query->have_posts()) {
                                             $query->the_post();
@@ -2171,7 +2277,7 @@ class Listings extends Widget_Base {
                                                     'content' => base64_encode($infoWindowtext)
                                                 ];
                                             }
-                                            echo apply_filters("tf_apartment_archive_single_card_design_one", Apartment::tf_apartment_archive_single_item([ 1, 0, 0, '' ], $settings['design_apartment']));
+                                            echo apply_filters("tf_apartment_archive_single_card_design_one", Apartment::tf_apartment_archive_single_item([ 1, 0, 0, '' ], $settings));
                                         }
                                         wp_reset_query();
                                         ?>
@@ -2232,11 +2338,20 @@ class Listings extends Widget_Base {
 
 	protected function tf_apartment_design_legacy($settings, $query) {
 		$post_count = $query->post_count;
-		$tf_defult_views="list";
+		$show_total_result = isset( $settings['show_total_result'] ) ? $settings['show_total_result'] : 'yes';
+		$show_sorting = isset( $settings['show_sorting'] ) ? $settings['show_sorting'] : 'yes';
+		$grid_column = isset( $settings['grid_column'] ) ? absint($settings['grid_column']) : 2;
+		$listing_layout_toggle = isset( $settings['listing_layout_toggle'] ) ? $settings['listing_layout_toggle'] : 'yes';
+		if($listing_layout_toggle == 'yes'){
+			$listing_layout = isset( $settings['listing_default_layout'] ) ? $settings['listing_default_layout'] : 'list';
+		} else {
+			$listing_layout = isset( $settings['listing_layout'] ) ? $settings['listing_layout'] : 'list';
+		}
 		?>
 		<div class="tf-archive-listing-wrap tf-archive-listing__legacy" data-design="default">
 			<div class="tf-search-left">
 				<div class="tf-action-top">
+					<?php if($show_total_result == 'yes') : ?>
                     <div class="tf-result-counter-info">
                         <span class="tf-counter-title"><?php echo esc_html__( 'Total Results', 'tourfic' ); ?> </span>
                         <span><?php echo '('; ?> </span>
@@ -2245,9 +2360,15 @@ class Listings extends Widget_Base {
                         </div>
                         <span><?php echo ')'; ?> </span>
                     </div>
+					<?php endif; ?>
+					
 					<div class="tf-list-grid">
-		                <a href="#list-view" data-id="list-view" class="change-view <?php echo $tf_defult_views=="list" ? esc_attr('active') : ''; ?>" title="<?php esc_html_e('List View', 'tourfic'); ?>"><i class="fas fa-list"></i></a>
-		                <a href="#grid-view" data-id="grid-view" class="change-view <?php echo $tf_defult_views=="grid" ? esc_attr('active') : ''; ?>" title="<?php esc_html_e('Grid View', 'tourfic'); ?>"><i class="fas fa-border-all"></i></a>
+						<?php if($listing_layout_toggle == 'yes') : ?>
+		                <a href="#list-view" data-id="list-view" class="change-view <?php echo $listing_layout=="list" ? esc_attr('active') : ''; ?>" title="<?php esc_html_e('List View', 'tourfic'); ?>"><i class="fas fa-list"></i></a>
+		                <a href="#grid-view" data-id="grid-view" class="change-view <?php echo $listing_layout=="grid" ? esc_attr('active') : ''; ?>" title="<?php esc_html_e('Grid View', 'tourfic'); ?>"><i class="fas fa-border-all"></i></a>
+						<?php endif; ?>
+
+						<?php if($show_sorting == 'yes') : ?>
 						<div class="tf-sorting-selection-warper">
                             <form class="tf-archive-ordering" method="get">
                                 <select class="tf-orderby" name="tf-orderby" id="tf-orderby">
@@ -2261,24 +2382,25 @@ class Listings extends Widget_Base {
                                 </select>
                             </form>
                         </div>
+						<?php endif; ?>
 		            </div>
 		        </div>
 				<?php do_action("tf_apartment_archive_card_items_before"); ?>
-				<div class="archive_ajax_result <?php echo $tf_defult_views=="grid" ? esc_attr('tours-grid') : '' ?>">
+				<div class="archive_ajax_result <?php echo $listing_layout=="grid" ? esc_attr('tours-grid') : '' ?> tf-grid-<?php echo esc_attr($grid_column); ?>">
 					<?php
 					if ( $query->have_posts() ) {
 						while ( $query->have_posts() ) {
 							$query->the_post();
 							$apartment_meta = get_post_meta( get_the_ID() , 'tf_apartment_opt', true );
 							if (!empty($apartment_meta[ "apartment_as_featured" ])) {
-								Apartment::tf_apartment_archive_single_item([ 1, 0, 0, '' ], $settings['design_apartment']);
+								Apartment::tf_apartment_archive_single_item([ 1, 0, 0, '' ], $settings);
 							}
 						}
 						while ( $query->have_posts() ) {
 							$query->the_post();
 							$apartment_meta = get_post_meta( get_the_ID() , 'tf_apartment_opt', true );
 							if ( empty($apartment_meta[ "apartment_as_featured" ])) {
-								Apartment::tf_apartment_archive_single_item([ 1, 0, 0, '' ], $settings['design_apartment']);
+								Apartment::tf_apartment_archive_single_item([ 1, 0, 0, '' ], $settings);
 							}
 						}
 					} else {

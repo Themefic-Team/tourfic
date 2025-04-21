@@ -3688,6 +3688,7 @@ class Hotel {
 		//elementor settings
 		$show_image = isset($settings['show_image']) ? $settings['show_image'] : 'yes';
 		$featured_badge = isset($settings['featured_badge']) ? $settings['featured_badge'] : 'yes';
+		$gallery_switch = isset($settings['gallery']) ? $settings['gallery'] : 'yes';
 		$show_title = isset($settings['show_title']) ? $settings['show_title'] : 'yes';
 		$title_length = isset($settings['title_length']) ? absint($settings['title_length']) : 55;
 		$show_excerpt = isset($settings['show_excerpt']) ? $settings['show_excerpt'] : 'yes';
@@ -3889,7 +3890,7 @@ class Hotel {
 						}
 						?>
                     </div>
-					<?php if ( ! empty( $gallery_ids ) ) { ?>
+					<?php if ( $gallery_switch == 'yes' && ! empty( $gallery_ids ) ) { ?>
                         <div data-id="<?php echo esc_attr( get_the_ID() ); ?>" data-type="tf_hotel" class="tf-room-gallery tf-popup-buttons tf-hotel-room-popup"
                              style="<?php echo ! empty( $first_gallery_image[0] ) ? 'background: linear-gradient(0deg, rgba(48, 40, 28, 0.70) 0%, rgba(48, 40, 28, 0.70) 100%), url(' . esc_url( wp_get_attachment_image_url( $first_gallery_image[0] ) ) . '), lightgray 50% / cover no-repeat; background-size: cover; background-position: center;' : 'background: rgba(48, 40, 28, 0.30);'; ?>">
                             <svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -3959,6 +3960,9 @@ class Hotel {
                                     </div>
 								<?php endif; ?>
                             </div>
+
+							<!-- Mobile Price -->
+							<?php if($show_price == 'yes') : ?>
                             <div class="tf-mobile tf-pricing-info">
 								<?php if ( ! empty( $min_discount_amount ) ) { ?>
                                     <div class="tf-available-room-off">
@@ -3973,6 +3977,7 @@ class Hotel {
                                 </span>
                                 </div>
                             </div>
+							<?php endif; ?>
                         </div>
 
                         <!-- Features -->
@@ -4172,6 +4177,7 @@ class Hotel {
                         </a>
                     </div>
 					<?php endif; ?>
+
                     <div class="tourfic-single-right">
                         <div class="tf_property_block_main_row">
                             <div class="tf_item_main_block">

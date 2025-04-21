@@ -10,6 +10,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 use Tourfic\Classes\Helper;
 use Tourfic\Classes\Apartment\Pricing as Apt_Pricing;
 use Tourfic\App\TF_Review;
+use \Elementor\Group_Control_Image_Size;
+use \Elementor\Icons_Manager;
 
 class Apartment {
 
@@ -1966,7 +1968,7 @@ class Apartment {
 		<?php
 	}
 
-	public static function tf_apartment_archive_single_item( array $data = [ 1, 0, 0, '' ], $design = '' ): void {
+	public static function tf_apartment_archive_single_item( array $data = [ 1, 0, 0, '' ], $settings = [] ): void {
 
 		$post_id  = get_the_ID();
 		$features = ! empty( get_the_terms( $post_id, 'apartment_feature' ) ) ? get_the_terms( $post_id, 'apartment_feature' ) : '';
@@ -2021,20 +2023,82 @@ class Apartment {
 			'check-in-out-date' => $check_in_out,
 		), $url );
 
+		$design = !empty($settings['design_apartment']) ? $settings['design_apartment'] : '';
 		$tf_apartment_arc_selected_template = !empty($design) ? $design : (! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] : 'default');
+		
+		//elementor settings
+		$show_image = isset($settings['show_image']) ? $settings['show_image'] : 'yes';
+		$featured_badge = isset($settings['featured_badge']) ? $settings['featured_badge'] : 'yes';
+		$gallery_switch = isset($settings['gallery']) ? $settings['gallery'] : 'yes';
+		$show_title = isset($settings['show_title']) ? $settings['show_title'] : 'yes';
+		$title_length = isset($settings['title_length']) ? absint($settings['title_length']) : 55;
+		$show_excerpt = isset($settings['show_excerpt']) ? $settings['show_excerpt'] : 'yes';
+		$excerpt_length = isset($settings['excerpt_length']) ? absint($settings['excerpt_length']) : 100;
+		$show_location = isset($settings['show_location']) ? $settings['show_location'] : 'yes';
+		$location_length = isset($settings['location_length']) ? absint($settings['location_length']) : 120;
+		$show_features = isset($settings['show_features']) ? $settings['show_features'] : 'yes';
+		$features_count = isset($settings['features_count']) ? absint($settings['features_count']) : 4;
+		$show_review = isset($settings['show_review']) ? $settings['show_review'] : 'yes';
+		$show_price = isset($settings['show_price']) ? $settings['show_price'] : 'yes';
+		$tour_infos = isset($settings['tour_infos']) ? $settings['tour_infos'] : 'yes';
+		$show_view_details = isset($settings['show_view_details']) ? $settings['show_view_details'] : 'yes';
+		$view_details_text = isset($settings['view_details_text']) ? sanitize_text_field($settings['view_details_text']) : esc_html__('View Details', 'tourfic');
+		
+		// Thumbnail
+		$thumbnail_html = '';
+		if ( !empty($settings) && $show_image == 'yes' ) {
+			$settings[ 'image_size_customize' ] = [
+				'id' => get_post_thumbnail_id(),
+			];
+			$settings['image_size_customize_size'] = $settings['image_size'];
+			$thumbnail_html = Group_Control_Image_Size::get_attachment_image_html( $settings,'image_size_customize' );
+			
+			if ( "" === $thumbnail_html && 'yes' === $settings['show_fallback_img'] && !empty( $settings['fallback_img']['url'] ) ) {
+				$settings[ 'image_size_customize' ] = [
+					'id' => $settings['fallback_img']['id'],
+				];
+				$settings['image_size_customize_size'] = $settings['image_size'];
+				$thumbnail_html = Group_Control_Image_Size::get_attachment_image_html( $settings,'image_size_customize' );
+			} elseif("" === $thumbnail_html && 'yes' !== $settings['show_fallback_img']) {
+				$thumbnail_html = '<img src="' . esc_url( TF_ASSETS_APP_URL ) . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
+			}
+		}
+
+		//Location icon
+		$location_icon_html = '<i class="fa-solid fa-location-dot"></i>';
+		if(!empty($settings) && $show_location == 'yes'){
+			$location_icon_migrated = isset($settings['__fa4_migrated']['location_icon']);
+			$location_icon_is_new = empty($settings['location_icon_comp']);
+
+			if ( $location_icon_is_new || $location_icon_migrated ) {
+				ob_start();
+				Icons_Manager::render_icon( $settings['location_icon'], [ 'aria-hidden' => 'true' ] );
+				$location_icon_html = ob_get_clean();
+			} else{
+				$location_icon_html = '<i class="' . esc_attr( $settings['location_icon_comp'] ) . '"></i>';
+			}
+		}
+
+		//Featured badge
+		if(!empty($settings)){
+			$featured_badge_text = isset($settings['featured_badge_text']) ? sanitize_text_field($settings['featured_badge_text']) : esc_html( "HOT DEAL" );
+		} else {
+			$featured_badge_text = !empty( $meta['featured_text'] ) ? esc_html( $meta['featured_text'] ) : esc_html( "HOT DEAL" );
+		}
+
 		if ( $tf_apartment_arc_selected_template == "design-1" ) {
 		$first_gallery_image = explode(',', $gallery);
 		?>
 		<div class="tf-available-room">
 			<div class="tf-available-room-gallery">                       
 				<div class="tf-room-gallery">
-						<?php
-						if ( has_post_thumbnail($post_id) ) {
-							echo get_the_post_thumbnail($post_id, 'full' );
-						} else {
-							echo '<img src="' . esc_url(TF_ASSETS_APP_URL) . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
-						}
-						?>
+					<?php
+					if ( has_post_thumbnail($post_id) ) {
+						echo get_the_post_thumbnail($post_id, 'full' );
+					} else {
+						echo '<img src="' . esc_url(TF_ASSETS_APP_URL) . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
+					}
+					?>
 				</div>
 				<?php 
 				if( !empty($gallery_ids) ){ ?>                                                                     
