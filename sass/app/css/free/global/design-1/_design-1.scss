@@ -1002,6 +1002,36 @@
                         flex-basis: 100%;
                     }
                 }
+
+                &.tf-grid-1{
+                    .tf-item-card {
+                        flex-basis: 100%;
+                    }
+                }
+
+                &.tf-grid-3{
+                    .tf-item-card {
+                        flex-basis: calc(100% / 3 - 16px);
+                        @media #{$max1024}{
+                            flex-basis: calc(100% / 2 - 12px);
+                        }
+                        @media #{$max768}{
+                            flex-basis: calc(100% - 0px);
+                        }
+                    }
+                }
+
+                &.tf-grid-4{
+                    .tf-item-card {
+                        flex-basis: calc(100% / 4 - 18px);
+                        @media #{$max1024}{
+                            flex-basis: calc(100% / 2 - 12px);
+                        }
+                        @media #{$max768}{
+                            flex-basis: calc(100% - 0px);
+                        }
+                    }
+                }
             }
             
             .tf-layout-list{

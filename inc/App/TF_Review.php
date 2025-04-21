@@ -669,7 +669,15 @@ class TF_Review {
                 <div class="tf-reviews-box">
                     <span>0.0 <i class="fa-solid fa-star"></i> (<?php echo Pricing::get_total_trips(get_the_ID()); ?> <?php esc_html_e( "Trips", "tourfic" ) ?>)</span>
                 </div>
-            <?php }
+            <?php }else{ ?>
+                <div class="tf-archive-rating-wrapper">
+                    <div class="tf-archive-rating">
+                        <span><?php esc_html_e('0.0','tourfic'); ?></span>
+                    </div>
+                    
+                </div>
+            <?php
+            }
         }
     }
 

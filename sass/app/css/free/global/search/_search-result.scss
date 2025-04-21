@@ -146,6 +146,17 @@
                 display: grid;
                 grid-template-columns: 1fr 1fr;
                 gap: 10px;
+
+                &.tf-grid-1{
+                    grid-template-columns: 1fr;
+                    gap: 0;
+                }
+                &.tf-grid-3{
+                    grid-template-columns: 1fr 1fr 1fr;
+                }
+                &.tf-grid-4{
+                    grid-template-columns: 1fr 1fr 1fr 1fr;
+                }
                 .single-tour-wrap {
                     width: 100%;
                     padding: 0 5px;
@@ -217,6 +228,17 @@
     }
     @media #{$max768} {
         margin-bottom: 0px;
+    }
+
+    .tf-map-link{
+        i{
+            margin-right: 4px;
+        }
+        svg{
+            margin-right: 4px;
+            width: 16px;
+            height: 16px;
+        }
     }
     .single-tour-inner {
         overflow: hidden;

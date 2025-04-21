@@ -1,6 +1,3 @@
-/*!*********************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[3]!./sass/app/css/free/tourfic.scss ***!
-  \*********************************************************************************************************************************************************************************/
 @charset "UTF-8";
 /* 
 Container
@@ -5591,6 +5588,22 @@ div#tf-destinationautocomplete-list div:before {
   gap: 10px;
 }
 
+.tf-archive-listing__legacy .tf-search-left .archive_ajax_result.tours-grid.tf-grid-1,
+.search-result-inner .tf-search-left .archive_ajax_result.tours-grid.tf-grid-1 {
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+.tf-archive-listing__legacy .tf-search-left .archive_ajax_result.tours-grid.tf-grid-3,
+.search-result-inner .tf-search-left .archive_ajax_result.tours-grid.tf-grid-3 {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.tf-archive-listing__legacy .tf-search-left .archive_ajax_result.tours-grid.tf-grid-4,
+.search-result-inner .tf-search-left .archive_ajax_result.tours-grid.tf-grid-4 {
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
 .tf-archive-listing__legacy .tf-search-left .archive_ajax_result.tours-grid .single-tour-wrap,
 .search-result-inner .tf-search-left .archive_ajax_result.tours-grid .single-tour-wrap {
   width: 100%;
@@ -5690,6 +5703,16 @@ div#tf-destinationautocomplete-list div:before {
   .single-tour-wrap {
     margin-bottom: 0px;
   }
+}
+
+.single-tour-wrap .tf-map-link i {
+  margin-right: 4px;
+}
+
+.single-tour-wrap .tf-map-link svg {
+  margin-right: 4px;
+  width: 16px;
+  height: 16px;
 }
 
 .single-tour-wrap .single-tour-inner {
@@ -11546,6 +11569,49 @@ div#tf-destinationautocomplete-list div:before {
   flex-basis: 100%;
 }
 
+.tf-archive-listing__one .tf-search-results-list .tf-layout-grid.tf-grid-1 .tf-item-card,
+.tf-archive-template__one .tf-search-results-list .tf-layout-grid.tf-grid-1 .tf-item-card {
+  flex-basis: 100%;
+}
+
+.tf-archive-listing__one .tf-search-results-list .tf-layout-grid.tf-grid-3 .tf-item-card,
+.tf-archive-template__one .tf-search-results-list .tf-layout-grid.tf-grid-3 .tf-item-card {
+  flex-basis: calc(100% / 3 - 16px);
+}
+
+@media only screen and (max-width: 1024px) {
+  .tf-archive-listing__one .tf-search-results-list .tf-layout-grid.tf-grid-3 .tf-item-card,
+  .tf-archive-template__one .tf-search-results-list .tf-layout-grid.tf-grid-3 .tf-item-card {
+    flex-basis: calc(100% / 2 - 12px);
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .tf-archive-listing__one .tf-search-results-list .tf-layout-grid.tf-grid-3 .tf-item-card,
+  .tf-archive-template__one .tf-search-results-list .tf-layout-grid.tf-grid-3 .tf-item-card {
+    flex-basis: calc(100% - 0px);
+  }
+}
+
+.tf-archive-listing__one .tf-search-results-list .tf-layout-grid.tf-grid-4 .tf-item-card,
+.tf-archive-template__one .tf-search-results-list .tf-layout-grid.tf-grid-4 .tf-item-card {
+  flex-basis: calc(100% / 4 - 18px);
+}
+
+@media only screen and (max-width: 1024px) {
+  .tf-archive-listing__one .tf-search-results-list .tf-layout-grid.tf-grid-4 .tf-item-card,
+  .tf-archive-template__one .tf-search-results-list .tf-layout-grid.tf-grid-4 .tf-item-card {
+    flex-basis: calc(100% / 2 - 12px);
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .tf-archive-listing__one .tf-search-results-list .tf-layout-grid.tf-grid-4 .tf-item-card,
+  .tf-archive-template__one .tf-search-results-list .tf-layout-grid.tf-grid-4 .tf-item-card {
+    flex-basis: calc(100% - 0px);
+  }
+}
+
 .tf-archive-listing__one .tf-search-results-list .tf-layout-list .tf-item-card .tf-item-featured a,
 .tf-archive-template__one .tf-search-results-list .tf-layout-list .tf-item-card .tf-item-featured a {
   line-height: 0;
@@ -17351,6 +17417,14 @@ div#tf-destinationautocomplete-list div:before {
   }
 }
 
+.tf-archive-listing__two .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-left .tf-section-title-and-location .tf-title-location svg,
+.tf-archive-template__two .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-left .tf-section-title-and-location .tf-title-location svg,
+.page-template-tf-search__two .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-left .tf-section-title-and-location .tf-title-location svg {
+  margin-right: 8px;
+  height: 18px;
+  width: 18px;
+}
+
 .tf-archive-listing__two .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-right,
 .tf-archive-template__two .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-right,
 .page-template-tf-search__two .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-right {
@@ -19127,6 +19201,12 @@ div#tf-destinationautocomplete-list div:before {
   }
 }
 
+.tf-archive-listing__three .tf-archive-details .tf-archive-hotel .tf-archive-hotel-content .tf-archive-hotel-content-left .tf-title-location svg,
+.tf-archive-template__three .tf-archive-details .tf-archive-hotel .tf-archive-hotel-content .tf-archive-hotel-content-left .tf-title-location svg {
+  width: 16px;
+  height: 16px;
+}
+
 .tf-archive-listing__three .tf-archive-details .tf-archive-hotel .tf-archive-hotel-content .tf-archive-hotel-content-left .tf-section-title,
 .tf-archive-template__three .tf-archive-details .tf-archive-hotel .tf-archive-hotel-content .tf-archive-hotel-content-left .tf-section-title {
   font-size: 1.3rem;
@@ -19364,6 +19444,49 @@ div#tf-destinationautocomplete-list div:before {
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
+}
+
+.tf-archive-listing__three .tf-archive-details .tf-archive-hotels.tf-layout-grid.tf-grid-1 .tf-archive-hotel,
+.tf-archive-template__three .tf-archive-details .tf-archive-hotels.tf-layout-grid.tf-grid-1 .tf-archive-hotel {
+  flex-basis: 100%;
+}
+
+.tf-archive-listing__three .tf-archive-details .tf-archive-hotels.tf-layout-grid.tf-grid-3 .tf-archive-hotel,
+.tf-archive-template__three .tf-archive-details .tf-archive-hotels.tf-layout-grid.tf-grid-3 .tf-archive-hotel {
+  flex-basis: calc(100% / 3 - 16px);
+}
+
+@media only screen and (max-width: 1024px) {
+  .tf-archive-listing__three .tf-archive-details .tf-archive-hotels.tf-layout-grid.tf-grid-3 .tf-archive-hotel,
+  .tf-archive-template__three .tf-archive-details .tf-archive-hotels.tf-layout-grid.tf-grid-3 .tf-archive-hotel {
+    flex-basis: calc(100% / 2 - 12px);
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .tf-archive-listing__three .tf-archive-details .tf-archive-hotels.tf-layout-grid.tf-grid-3 .tf-archive-hotel,
+  .tf-archive-template__three .tf-archive-details .tf-archive-hotels.tf-layout-grid.tf-grid-3 .tf-archive-hotel {
+    flex-basis: calc(100% - 0px);
+  }
+}
+
+.tf-archive-listing__three .tf-archive-details .tf-archive-hotels.tf-layout-grid.tf-grid-4 .tf-archive-hotel,
+.tf-archive-template__three .tf-archive-details .tf-archive-hotels.tf-layout-grid.tf-grid-4 .tf-archive-hotel {
+  flex-basis: calc(100% / 4 - 18px);
+}
+
+@media only screen and (max-width: 1024px) {
+  .tf-archive-listing__three .tf-archive-details .tf-archive-hotels.tf-layout-grid.tf-grid-4 .tf-archive-hotel,
+  .tf-archive-template__three .tf-archive-details .tf-archive-hotels.tf-layout-grid.tf-grid-4 .tf-archive-hotel {
+    flex-basis: calc(100% / 2 - 12px);
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .tf-archive-listing__three .tf-archive-details .tf-archive-hotels.tf-layout-grid.tf-grid-4 .tf-archive-hotel,
+  .tf-archive-template__three .tf-archive-details .tf-archive-hotels.tf-layout-grid.tf-grid-4 .tf-archive-hotel {
+    flex-basis: calc(100% - 0px);
+  }
 }
 
 .tf-archive-listing__three .tf-archive-details #tf_ajax_searchresult_loader,

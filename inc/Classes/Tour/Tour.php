@@ -8,6 +8,8 @@ use Tourfic\Classes\Helper;
 use \Tourfic\App\TF_Review;
 use \Tourfic\Classes\Tour\Tour_Price;
 use \Tourfic\Classes\Tour\Pricing;
+use \Elementor\Group_Control_Image_Size;
+use \Elementor\Icons_Manager;
 
 class Tour {
 
@@ -2382,7 +2384,7 @@ class Tour {
 	/**
 	 * Tours Archive
 	 */
-	static function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out = '', $startprice = '', $endprice = '', $design = '' ) {
+	static function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out = '', $startprice = '', $endprice = '', $settings = [] ) {
 
 		// get post id
 		$post_id = get_the_ID();
@@ -2632,28 +2634,83 @@ class Tour {
 			}
 		}
 
+		$design = !empty($settings['design_tours']) ? $settings['design_tours'] : '';
 		$tf_tour_arc_selected_template = !empty($design) ? $design : (! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['tour-archive'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['tour-archive'] : 'design-1');
 		$tf_discount_type   = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : '';
 		$tf_discount_amount = ! empty( $meta['discount_price'] ) ? $meta['discount_price'] : '';
 
+		//elementor settings
+		$show_image = isset($settings['show_image']) ? $settings['show_image'] : 'yes';
+		$featured_badge = isset($settings['featured_badge']) ? $settings['featured_badge'] : 'yes';
+		$show_title = isset($settings['show_title']) ? $settings['show_title'] : 'yes';
+		$title_length = isset($settings['title_length']) ? absint($settings['title_length']) : 55;
+		$show_excerpt = isset($settings['show_excerpt']) ? $settings['show_excerpt'] : 'yes';
+		$excerpt_length = isset($settings['excerpt_length']) ? absint($settings['excerpt_length']) : 100;
+		$show_location = isset($settings['show_location']) ? $settings['show_location'] : 'yes';
+		$location_length = isset($settings['location_length']) ? absint($settings['location_length']) : 120;
+		$show_features = isset($settings['show_features']) ? $settings['show_features'] : 'yes';
+		$features_count = isset($settings['features_count']) ? absint($settings['features_count']) : 4;
+		$show_review = isset($settings['show_review']) ? $settings['show_review'] : 'yes';
+		$show_price = isset($settings['show_price']) ? $settings['show_price'] : 'yes';
+		$show_view_details = isset($settings['show_view_details']) ? $settings['show_view_details'] : 'yes';
+		$view_details_text = isset($settings['view_details_text']) ? sanitize_text_field($settings['view_details_text']) : esc_html__('View Details', 'tourfic');
+
+		// Thumbnail
+		$thumbnail_html = '';
+		if ( !empty($settings) && $show_image == 'yes' ) {
+			$settings[ 'image_size_customize' ] = [
+				'id' => get_post_thumbnail_id(),
+			];
+			$settings['image_size_customize_size'] = $settings['image_size'];
+			$thumbnail_html = Group_Control_Image_Size::get_attachment_image_html( $settings,'image_size_customize' );
+			
+			if ( "" === $thumbnail_html && 'yes' === $settings['show_fallback_img'] && !empty( $settings['fallback_img']['url'] ) ) {
+				$settings[ 'image_size_customize' ] = [
+					'id' => $settings['fallback_img']['id'],
+				];
+				$settings['image_size_customize_size'] = $settings['image_size'];
+				$thumbnail_html = Group_Control_Image_Size::get_attachment_image_html( $settings,'image_size_customize' );
+			} elseif("" === $thumbnail_html && 'yes' !== $settings['show_fallback_img']) {
+				$thumbnail_html = '<img src="' . esc_url( TF_ASSETS_APP_URL ) . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
+			}
+		}
+
+		//Location icon
+		$location_icon_html = '<i class="fa-solid fa-location-dot"></i>';
+		if(!empty($settings) && $show_location == 'yes'){
+			$location_icon_migrated = isset($settings['__fa4_migrated']['location_icon']);
+			$location_icon_is_new = empty($settings['location_icon_comp']);
+
+			if ( $location_icon_is_new || $location_icon_migrated ) {
+				ob_start();
+				Icons_Manager::render_icon( $settings['location_icon'], [ 'aria-hidden' => 'true' ] );
+				$location_icon_html = ob_get_clean();
+			} else{
+				$location_icon_html = '<i class="' . esc_attr( $settings['location_icon_comp'] ) . '"></i>';
+			}
+		}
+
+		//Featured badge
+		if(!empty($settings)){
+			$featured_badge_text = isset($settings['featured_badge_text']) ? sanitize_text_field($settings['featured_badge_text']) : esc_html( "HOT DEAL" );
+		} else {
+			$featured_badge_text = !empty( $meta['featured_text'] ) ? esc_html( $meta['featured_text'] ) : esc_html( "HOT DEAL" );
+		}
+
 		if ( $tf_tour_arc_selected_template == "design-1" ) {
 			?>
             <div class="tf-item-card tf-flex">
+				<!-- Thumbnail -->
+				<?php if($show_image == 'yes'): ?>
                 <div class="tf-item-featured">
                     <div class="tf-tag-items">
                         <div class="tf-features-box tf-flex">
-							<?php
-							if ( ! empty( $tf_discount_type ) && $tf_discount_type != "none" && ! empty( $tf_discount_amount ) ) {
-								?>
+							<?php if ( ! empty( $tf_discount_type ) && $tf_discount_type != "none" && ! empty( $tf_discount_amount ) ) { ?>
                                 <div class="tf-discount"><?php echo $tf_discount_type == "percent" ? esc_attr( $tf_discount_amount ) . "%" : wp_kses_post( wc_price( $tf_discount_amount ) ); ?><?php esc_html_e( "Off", "tourfic" ); ?></div>
 							<?php } ?>
 
-							<?php if ( $featured ): ?>
-                                <div class="tf-feature">
-									<?php
-									echo ! empty( $meta['featured_text'] ) ? esc_html( $meta['featured_text'] ) : esc_html( "HOT DEAL" );
-									?>
-                                </div>
+							<?php if (  $featured_badge == 'yes' && $featured ): ?>
+                                <div class="tf-feature"><?php echo esc_html( $featured_badge_text ); ?></div>
 							<?php endif; ?>
                         </div>
 						<?php
@@ -2676,7 +2733,9 @@ class Tour {
                     </div>
                     <a href="<?php echo esc_url( $url ); ?>">
 						<?php
-						if ( has_post_thumbnail() ) {
+						if ( ! empty( $thumbnail_html ) ) {
+							echo wp_kses_post( $thumbnail_html );
+						} elseif ( has_post_thumbnail() ) {
 							the_post_thumbnail( 'full' );
 						} else {
 							echo '<img src="' . esc_url( TF_ASSETS_APP_URL ) . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
@@ -2684,26 +2743,23 @@ class Tour {
 						?>
                     </a>
                 </div>
-                <div class="tf-item-details">
-					<?php
-					if ( ! empty( $location ) ) {
-						?>
+				<?php endif; ?>
+
+                <div class="tf-item-details" style="<?php echo $show_image != 'yes' ? 'flex-basis: 100%;' : ''; ?>">
+					<!-- Location -->
+					<?php if ( $show_location == 'yes' && ! empty( $location ) ) : ?>
                         <div class="tf-title-meta tf-flex tf-flex-align-center tf-flex-gap-8">
-                            <i class="fa-solid fa-location-dot"></i>
-                            <p>
-								<?php
-								if ( strlen( $location ) > 120 ) {
-									echo esc_html( Helper::tourfic_character_limit_callback( $location, 120 ) );
-								} else {
-									echo esc_html( $location );
-								}
-								?>
-                            </p>
+							<?php echo wp_kses( $location_icon_html, Helper::tf_custom_wp_kses_allow_tags() ); ?>
+                            <p><?php echo esc_html( Helper::tourfic_character_limit_callback( $location, $location_length ) ); ?></p>
                         </div>
-					<?php } ?>
+					<?php endif; ?>
+
+					<!-- Title -->
+					<?php if( $show_title == 'yes' ): ?>
                     <div class="tf-title tf-mt-16">
                         <h2><a href="<?php echo esc_url( $url ); ?>"><?php the_title(); ?></a></h2>
                     </div>
+					<?php endif; ?>
 
 					<?php if( $disable_review != true ): ?>
 						<?php TF_Review::tf_archive_single_rating('', $design); ?>
