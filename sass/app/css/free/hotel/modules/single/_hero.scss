@@ -7,7 +7,7 @@
                 @media #{$max1024} {
                     grid-template-columns: 67% 33%;
                 }
-                @media #{$max575} {
+                @media #{$max768} {
                     grid-template-columns: 100%;
                 }
                 .hero-left {
@@ -27,8 +27,8 @@
                     padding-left: 15px;
                     @media #{$max575}{
                         padding-left: 0;
-                        max-width: 316px;
                         margin: auto;
+                        width: 100%;
                     }
                     .tf-hero-booking{
                         .widget {

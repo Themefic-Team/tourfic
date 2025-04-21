@@ -1531,6 +1531,10 @@ a {
   padding-top: 70px;
 }
 
+.tf-pt-16 {
+  padding-top: 16px;
+}
+
 .tf-d-b {
   display: block;
 }
@@ -11178,6 +11182,7 @@ div#tf-destinationautocomplete-list div:before {
   .tf-single-template__one .tf-single-details-wrapper .tf-single-details-inner .tf-tour-details-left {
     flex-basis: 100%;
     width: 58%;
+    margin-bottom: 20px;
   }
 }
 
@@ -14339,15 +14344,6 @@ div#tf-destinationautocomplete-list div:before {
 }
 
 @media only screen and (max-width: 768px) {
-  .single-tf_tours .tf-single-template__two .tf-search-date-wrapper.tf-single-widgets {
-    background-color: transparent;
-    gap: 0px;
-    padding: 0px;
-    margin: 0px;
-  }
-}
-
-@media only screen and (max-width: 768px) {
   .single-tf_tours .tf-single-template__two .tf-search-date-wrapper.tf-single-widgets .tf-section-title .tf-bottom-booking-field,
   .single-tf_tours .tf-single-template__two .tf-search-date-wrapper.tf-single-widgets .tf_tours_booking > .tf-field-group .tf-bottom-booking-field,
   .single-tf_tours .tf-single-template__two .tf-search-date-wrapper.tf-single-widgets .tf_tours_booking > .check-in-time-div .tf-bottom-booking-field,
@@ -14547,7 +14543,7 @@ div#tf-destinationautocomplete-list div:before {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  overflow-x: hidden;
+  overflow-x: auto;
 }
 
 .tf-single-template__two .tf-policies-wrapper .tf-policies p {
@@ -15559,11 +15555,12 @@ div#tf-destinationautocomplete-list div:before {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  margin-top: 10px;
 }
 
 @media only screen and (max-width: 768px) {
   .tf-single-template__two .tf-whats-around ul {
-    gap: 8px;
+    gap: 16px;
   }
 }
 
@@ -15572,20 +15569,7 @@ div#tf-destinationautocomplete-list div:before {
   justify-content: space-between;
 }
 
-@media only screen and (max-width: 1024px) {
-  .tf-single-template__two .tf-whats-around ul li {
-    display: flow-root;
-  }
-}
-
-@media only screen and (max-width: 768px) {
-  .tf-single-template__two .tf-whats-around ul li {
-    display: flex;
-  }
-}
-
 .tf-single-template__two .tf-whats-around ul li span {
-  width: 100%;
   display: block;
 }
 
@@ -15593,7 +15577,18 @@ div#tf-destinationautocomplete-list div:before {
   text-align: right;
 }
 
-.tf-single-template__two .tf-whats-around ul li i {
+.tf-single-template__two .tf-whats-around ul li span.tf-place {
+  display: flex;
+  flex: 1;
+}
+
+.tf-single-template__two .tf-whats-around ul li span.tf-place .tf-icon {
+  width: auto;
+  height: auto;
+  line-height: auto;
+}
+
+.tf-single-template__two .tf-whats-around ul li span.tf-place .tf-icon i {
   margin-right: 8px;
   width: 20px;
   font-size: 1.25rem;
@@ -15616,7 +15611,7 @@ div#tf-destinationautocomplete-list div:before {
 
 @media only screen and (max-width: 575.98px) {
   .tf-single-template__two .tf-single-widgets h3.tf-section-title {
-    margin-bottom: 0px;
+    margin-bottom: 10px;
   }
 }
 
@@ -15828,6 +15823,12 @@ div#tf-destinationautocomplete-list div:before {
   display: flex;
   flex-direction: column;
   gap: 24px;
+}
+
+@media only screen and (max-width: 575.98px) {
+  .tf-single-template__two .tf-search-date-wrapper form {
+    gap: 16px;
+  }
 }
 
 .tf-single-template__two .tf-search-date-wrapper form .tf-booking-person.tf-tour-booking-box {

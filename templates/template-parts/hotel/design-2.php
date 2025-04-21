@@ -205,11 +205,15 @@ use \Tourfic\App\TF_Review;
                 <ul>
                     <?php foreach(Helper::tf_data_types($meta['nearby-places']) as $place){ ?>
                     <li>
-                        <span>
-                        <?php if( !empty( $place['place-icon'] )){ ?>
-                            <i class="<?php echo esc_attr($place['place-icon']); ?>"></i>
-                        <?php } ?> 
-                        <?php echo !empty( $place['place-title'] ) ? esc_html($place['place-title']) : ''; ?>
+                        <span class="tf-place">
+                            <span class="tf-icon">
+                                <?php if( !empty( $place['place-icon'] )){ ?>
+                                    <i class="<?php echo esc_attr($place['place-icon']); ?>"></i>
+                                <?php } ?> 
+                            </span>
+                            <span class="tf-place-title">
+                                <?php echo !empty( $place['place-title'] ) ? esc_html($place['place-title']) : ''; ?>
+                            </span>
                         </span>
                         <span><?php echo !empty( $place['place-dist'] ) ? esc_html($place['place-dist']) : ''; ?></span>
                     </li>

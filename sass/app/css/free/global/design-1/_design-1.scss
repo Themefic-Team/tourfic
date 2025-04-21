@@ -118,6 +118,7 @@
                     align-items: baseline;
                     @media #{$max575}{
                         font-size: 0.95rem;
+                  
                     }
                 }
             }
@@ -685,7 +686,6 @@
                 .tf-tour-details-left {
                     flex-basis: 68%;
                     width: 68%;
-
                     @media #{$max1024}{
                         flex-basis: 58%;
                         width: 58%;
@@ -694,6 +694,7 @@
                     @media #{$max768}{
                         flex-basis: 100%;
                         width: 58%;
+                        margin-bottom: 20px;
                     }
                 }
 

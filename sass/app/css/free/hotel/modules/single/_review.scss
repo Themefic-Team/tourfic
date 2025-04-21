@@ -114,5 +114,18 @@
                 }
             }
         }
+
+        &__legacy{
+            .review-section{
+                .reviews{
+                    .section-heading{
+                        text-align: center;
+                    }
+                    .no-review{
+                        text-align: center;
+                    }
+                }
+            }
+        }
     }
 }

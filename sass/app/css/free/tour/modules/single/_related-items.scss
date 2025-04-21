@@ -56,7 +56,9 @@
             .upcomming-tours{
                 padding-top: 56px;
                 border-top: 1px solid $color-border-lite;
-        
+                @media #{$max768}{
+                    margin-top: 30px;
+                }
                 .tf-upcomming-tours-list-outter{
                     @media #{$max1024}{
                         .tf-post-box-lists{

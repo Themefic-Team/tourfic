@@ -36,6 +36,9 @@
                                 margin: 0px 0px 30px 0px;
                                 background: $color-filling-fg;
                                 transition: .3s all ease;
+                                @media #{$max768}{
+                                    margin: 0px 0px 20px 0px;
+                                }
                                 &:hover{
                                     background: $color-brand-lite;
                                 }

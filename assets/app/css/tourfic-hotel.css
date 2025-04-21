@@ -9,7 +9,7 @@
   }
 }
 
-@media only screen and (max-width: 575.98px) {
+@media only screen and (max-width: 768px) {
   .single-tf_hotel .tf-single-template__legacy .hero-section-wrap {
     grid-template-columns: 100%;
   }
@@ -41,8 +41,8 @@
 @media only screen and (max-width: 575.98px) {
   .single-tf_hotel .tf-single-template__legacy .hero-section-wrap .hero-right {
     padding-left: 0;
-    max-width: 316px;
     margin: auto;
+    width: 100%;
   }
 }
 
@@ -506,7 +506,7 @@
   position: relative;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1024px) {
   .single-tf_hotel .tf-single-template__one .tf-rooms-sections .tf-rooms .tf-availability-table > tbody tr td .tf-room-preview-img {
     width: 100%;
     margin-bottom: 10px;
@@ -536,13 +536,7 @@
 
 @media only screen and (max-width: 1024px) {
   .single-tf_hotel .tf-single-template__one .tf-rooms-sections .tf-rooms .tf-availability-table > tbody tr td .tf-features-infos {
-    width: 60%;
-  }
-}
-
-@media only screen and (max-width: 768px) {
-  .single-tf_hotel .tf-single-template__one .tf-rooms-sections .tf-rooms .tf-availability-table > tbody tr td .tf-features-infos {
-    width: 100%;
+    width: 100% !important;
   }
 }
 
@@ -594,7 +588,7 @@
 
 @media only screen and (max-width: 768px) {
   .single-tf_hotel .tf-single-template__one .tf-rooms-sections .tf-rooms .tf-availability-table > tbody tr td.description {
-    width: 250px;
+    width: 300px;
     padding: 20px;
     display: table-caption;
     border-top: 0;
@@ -762,6 +756,24 @@
   grid-gap: 5px;
 }
 
+@media only screen and (max-width: 1024px) {
+  .single-tf_hotel .tf-single-template__one .tf-hotel-single-places ul {
+    grid-template-columns: repeat(3, 33%);
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .single-tf_hotel .tf-single-template__one .tf-hotel-single-places ul {
+    grid-template-columns: repeat(2, 50%);
+  }
+}
+
+@media only screen and (max-width: 575.98px) {
+  .single-tf_hotel .tf-single-template__one .tf-hotel-single-places ul {
+    grid-template-columns: 100%;
+  }
+}
+
 .single-tf_hotel .tf-single-template__one .tf-hotel-single-places ul li {
   display: inline-flex;
   justify-content: space-between;
@@ -773,20 +785,18 @@
   font-size: 0.938rem;
 }
 
-.single-tf_hotel .tf-single-template__one .tf-hotel-single-places ul li i {
+.single-tf_hotel .tf-single-template__one .tf-hotel-single-places ul li .tf-place {
+  display: flex;
+  flex: 1;
+}
+
+.single-tf_hotel .tf-single-template__one .tf-hotel-single-places ul li .tf-place .tf-icon {
+  width: auto;
+  height: auto;
+}
+
+.single-tf_hotel .tf-single-template__one .tf-hotel-single-places ul li .tf-place .tf-icon i {
   margin-right: 8px;
-}
-
-@media only screen and (max-width: 768px) {
-  .single-tf_hotel .tf-single-template__one .tf-hotel-single-places ul {
-    grid-template-columns: 100%;
-  }
-}
-
-@media only screen and (max-width: 1024px) {
-  .single-tf_hotel .tf-single-template__one .tf-hotel-single-places ul {
-    grid-template-columns: repeat(3, 33%);
-  }
 }
 
 .single-tf_hotel .tf-single-template__legacy .tf_features {
@@ -860,12 +870,6 @@
 
 .single-tf_hotel .tf-single-template__legacy .tf-hotel-facilities-section .active {
   display: none;
-}
-
-.single-tf_hotel .tf-single-template__legacy .tf-hotel-facilities-section .tf-hotel-facilities-container {
-  padding: 32px;
-  border-radius: 6px;
-  background: #ffffff;
 }
 
 .single-tf_hotel .tf-single-template__legacy .tf-hotel-facilities-section .tf-hotel-facilities-container .tf-hotel-facilities-title-area {
@@ -1069,6 +1073,12 @@
   transition: .3s all ease;
 }
 
+@media only screen and (max-width: 768px) {
+  .single-tf_hotel .tf-single-template__one .tf-hotel-faqs-section .tf-hotel-faqs .tf-faq-wrapper .tf-faq-single .tf-faq-single-inner {
+    margin: 0px 0px 20px 0px;
+  }
+}
+
 .single-tf_hotel .tf-single-template__one .tf-hotel-faqs-section .tf-hotel-faqs .tf-faq-wrapper .tf-faq-single .tf-faq-single-inner:hover {
   background: var(--tf-brand-lite);
 }
@@ -1216,6 +1226,14 @@
 
 .single-tf_hotel .tf-single-template__one .tf-review-wrapper .tf-review-data.tf-box .tf-review-data-features .tf-progress-item .tf-review-feature-label p {
   margin-bottom: 0;
+}
+
+.single-tf_hotel .tf-single-template__legacy .review-section .reviews .section-heading {
+  text-align: center;
+}
+
+.single-tf_hotel .tf-single-template__legacy .review-section .reviews .no-review {
+  text-align: center;
 }
 
 .single-tf_hotel .tf-single-template__legacy .popupmap-for-mobile {

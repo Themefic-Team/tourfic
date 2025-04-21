@@ -12,7 +12,7 @@ if( !empty($total_facilities_cat) && !empty($meta['hotel-facilities']) ){
     <div class="tf-facilities">
         <?php 
         $facilites_list = [];
-        if( !empty($meta['hotel-facilities']) ){
+        if( !empty($meta['hotel-facilities']) && is_array($meta['hotel-facilities']) ){
             foreach( $meta['hotel-facilities'] as $facility ){
                 $facilites_list [$facility['facilities-category']] = $facility['facilities-category'];
             }

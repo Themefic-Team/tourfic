@@ -1575,12 +1575,7 @@
                 }
             }
             .tf-search-date-wrapper.tf-single-widgets{
-                @media #{$max768} {
-                    background-color: transparent;
-                    gap: 0px;
-                    padding: 0px;
-                    margin: 0px;
-                }
+             
                 .tf-section-title,
                 .tf_tours_booking > .tf-field-group,
                 .tf_tours_booking > .check-in-time-div,
@@ -1761,7 +1756,7 @@
                 display: flex;
                 flex-direction: column;
                 gap: 16px;
-                overflow-x: hidden;
+                overflow-x: auto;
                 p{
                     color: $color-text;
                     margin: 0;
@@ -2567,29 +2562,33 @@
                 display: flex;
                 flex-direction: column;
                 gap: 16px;
+                margin-top: 10px;
                 @media #{$max768}{
-                    gap: 8px;
+                    gap: 16px;
                 }
                 li {
                     display: flex;
                     justify-content: space-between;
-                    @media #{$max1024}{
-                        display: flow-root;
-                    }
-                    @media #{$max768}{
-                        display: flex;
-                    }
                     span{
-                        width: 100%;
                         display: block;
                         &:last-child{
                             text-align: right;
                         }
-                    }
-                    i {
-                        margin-right: 8px;
-                        width: 20px;
-                        font-size: 1.25rem;
+
+                        &.tf-place{
+                            display: flex;
+                            flex: 1;
+                            .tf-icon{
+                                width: auto;
+                                height: auto;
+                                line-height: auto;
+                                i {
+                                    margin-right: 8px;
+                                    width: 20px;
+                                    font-size: 1.25rem;
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -2603,7 +2602,7 @@
             &.tf-section-title{
                 margin-bottom: 20px;
                 @media #{$max575}{
-                    margin-bottom: 0px;
+                    margin-bottom: 10px;
                 }
             }
         }
@@ -2785,6 +2784,9 @@
                 display: flex;
                 flex-direction: column;
                 gap: 24px;
+                @media #{$max575}{
+                    gap: 16px;
+                }
                 .tf-booking-person.tf-tour-booking-box{
                     margin-top: 8px;
                 }

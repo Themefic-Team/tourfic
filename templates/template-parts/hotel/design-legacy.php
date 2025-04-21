@@ -808,7 +808,7 @@ $price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings'
                 <div class="tf-hotel-facilities-content-area">
                     <?php
                         $facilities_list = [];
-                        if( !empty($meta['hotel-facilities']) ){
+                        if( !empty($meta['hotel-facilities']) && is_array($meta['hotel-facilities']) ){
                             foreach( $meta['hotel-facilities'] as $facility ){
                                 $facilities_list [$facility['facilities-category']] = $facility['facilities-category'];
                             }

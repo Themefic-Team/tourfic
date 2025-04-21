@@ -4,17 +4,18 @@
             .tf-apartment-review {
                 margin-bottom: 80px;
             
-                .tf-review-container .tf-total-review {
-                    margin: 0 0 24px 0;
-            
-                    .tf-total-average {
-                        div {
-                            border-radius: 8px;
-                            background-color: $color-primary;
-                        }
-            
-                        span {
-                            color: $color-gray;
+                .tf-review-container {
+                    .tf-total-review {
+                        margin: 0 0 24px 0;
+                        .tf-total-average {
+                            div {
+                                border-radius: 8px;
+                                background-color: $color-primary;
+                            }
+                
+                            span {
+                                color: $color-gray;
+                            }
                         }
                     }
                 }
