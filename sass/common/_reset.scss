@@ -109,6 +109,7 @@ a{
     height: 50px;
     width: 50px;
     @include flex-center();
+    @include transition();
 }
 
 .tf-divider {

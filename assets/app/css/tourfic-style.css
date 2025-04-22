@@ -1351,6 +1351,10 @@ a {
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
+  -webkit-transition: all 0.25s ease-in-out;
+  -moz-transition: all 0.25s ease-in-out;
+  -o-transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
 }
 
 .tf-divider {
@@ -11198,7 +11202,6 @@ div#tf-destinationautocomplete-list div:before {
 
 .tf-archive-listing__one .tf-archive-head .tf-search-layout .tf-sorting-selection-warper form select,
 .tf-archive-template__one .tf-archive-head .tf-search-layout .tf-sorting-selection-warper form select {
-  height: 100%;
   border-radius: 5px;
   -webkit-appearance: none;
   appearance: none;
@@ -11708,7 +11711,6 @@ div#tf-destinationautocomplete-list div:before {
   display: flex;
   flex-direction: column;
   max-height: 90%;
-  overflow: hidden;
   position: absolute;
   top: 20px;
   left: 20px;
