@@ -2955,6 +2955,8 @@ class Tour {
                                 </li>
 							<?php } ?>
 							<?php endif; ?>
+
+							<!-- Features -->
 							<?php
 							if ( $show_features == 'yes' && $features ) {
 								foreach ( $features as $tfkey => $feature ) {
@@ -3102,7 +3104,7 @@ class Tour {
                                 </li>
                             <?php } ?>
 							<?php endif; ?>
-							
+
                             <?php
                             if ( $show_features == 'yes' && $features ) {
                                 foreach ( $features as $tfkey => $feature ) {

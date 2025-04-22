@@ -2090,18 +2090,21 @@ class Apartment {
 		$first_gallery_image = explode(',', $gallery);
 		?>
 		<div class="tf-available-room">
+			<!-- Thumbnail -->
+			<?php if($show_image == 'yes'): ?>
 			<div class="tf-available-room-gallery">                       
 				<div class="tf-room-gallery">
 					<?php
-					if ( has_post_thumbnail($post_id) ) {
+					if ( ! empty( $thumbnail_html ) ) {
+						echo wp_kses_post( $thumbnail_html );
+					} elseif ( has_post_thumbnail($post_id) ) {
 						echo get_the_post_thumbnail($post_id, 'full' );
 					} else {
 						echo '<img src="' . esc_url(TF_ASSETS_APP_URL) . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
 					}
 					?>
 				</div>
-				<?php 
-				if( !empty($gallery_ids) ){ ?>                                                                     
+				<?php if( $gallery_switch == 'yes' && !empty($gallery_ids) ){ ?>                                                                     
 				<div data-id="<?php echo esc_attr( get_the_ID() ); ?>" data-type="tf_apartment" class="tf-room-gallery tf-popup-buttons tf-hotel-room-popup" style="<?php echo !empty($first_gallery_image[0]) ? 'background: linear-gradient(0deg, rgba(48, 40, 28, 0.70) 0%, rgba(48, 40, 28, 0.70) 100%), url('.esc_url(wp_get_attachment_image_url($first_gallery_image[0])).'), lightgray 50% / cover no-repeat; background-size: cover; background-position: center;' : 'background: rgba(48, 40, 28, 0.30);'; ?>">
 					<svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<g id="content">
@@ -2114,8 +2117,8 @@ class Apartment {
 				</div>
 				<?php } ?>
 				<div class="tf-available-labels">
-					<?php if ( $featured ): ?>
-					<span class="tf-available-labels-featured"><?php esc_html_e("Featured", "tourfic"); ?></span>
+					<?php if ( $featured_badge == 'yes' && $featured ): ?>
+					<span class="tf-available-labels-featured"><?php echo esc_html( $featured_badge_text ); ?></span>
 					<?php endif; ?>
 					<?php
 						if(sizeof($apartment_multiple_tags) > 0) {
@@ -2131,100 +2134,122 @@ class Apartment {
 						}
 					?>
 				</div>  
-				<?php if( $disable_review != true ): ?>
+				
+                <!-- Review -->
+				<?php if( $show_review == 'yes' && $disable_review != true ): ?>
 					<div class="tf-available-ratings">
 						<?php TF_Review::tf_archive_single_rating($post_id, $design); ?>
 						<i class="fa-solid fa-star"></i>
 					</div>
 				<?php endif; ?>
 			</div>
-			<div class="tf-available-room-content">
+			<?php endif; ?>
+
+			<div class="tf-available-room-content" style="<?php echo $show_image != 'yes' ? 'width: 100%;' : ''; ?>">
 				<div class="tf-available-room-content-left">
 					<div class="tf-card-heading-info">
-					<div class="tf-section-title-and-location">
-						<a href="<?php echo esc_url( get_the_permalink($post_id) ); ?>"><h2 class="tf-section-title"><?php echo esc_html( Helper::tourfic_character_limit_callback( get_the_title($post_id), 55 ) ); ?></h2></a>
-						<?php
-						if ( ! empty( $address ) ) {
-						?>
-						<div class="tf-title-location">
-							<div class="location-icon">
-								<i class="ri-map-pin-line"></i>
+						<!-- Title & Location -->
+						<div class="tf-section-title-and-location">
+							<!-- Title -->
+							<?php if( $show_title == 'yes' ): ?>
+							<a href="<?php echo esc_url( get_the_permalink($post_id) ); ?>"><h2 class="tf-section-title"><?php echo esc_html( Helper::tourfic_character_limit_callback( get_the_title($post_id), $title_length ) ); ?></h2></a>
+							<?php endif; ?>
+
+							<!-- Location -->
+							<?php if ( $show_location == 'yes' && ! empty( $address ) ) :?>
+							<div class="tf-title-location">
+								<div class="location-icon"><?php echo wp_kses( $location_icon_html, Helper::tf_custom_wp_kses_allow_tags() ); ?></div>
+								<span><?php echo esc_html( Helper::tourfic_character_limit_callback( esc_html( $address ), $location_length ) ); ?></span>
 							</div>
-							<span><?php echo esc_html( Helper::tourfic_character_limit_callback( esc_html( $address ), 65 ) ); ?></span>
+							<?php endif; ?>
 						</div>
-						<?php } ?>
+
+						<!-- Mobile Price -->
+						<?php if($show_price == 'yes') : ?>
+						<div class="tf-mobile tf-pricing-info">
+							<?php if ( ! empty( $apartment_discount_amount ) ){ ?>
+								<div class="tf-available-room-off">
+									<span>
+										<?php echo $apartment_discount_type == "percent" ? wp_kses_post($apartment_discount_amount . '%') : wp_kses_post(wc_price( $apartment_discount_amount )) ?>
+										<?php esc_html_e( " Off", "tourfic" ); ?>
+									</span>
+								</div>
+							<?php } ?>
+							<div class="tf-available-room-price">
+								<span class="tf-price-from">
+								<?php echo wp_kses_post(Pricing::instance(get_the_ID())->get_min_price_html()); ?>
+								</span>
+							</div>
+						</div>
+						<?php endif; ?>
 					</div>
-					<div class="tf-mobile tf-pricing-info">
-						<?php if ( ! empty( $apartment_discount_amount ) ){ ?>
+
+					<!-- Features -->
+					<?php if ( $show_features == 'yes' && $features ) : ?>
+						<ul class="features">
+							<?php foreach ( $features as $tfkey => $feature ) {
+							$feature_meta = get_term_meta( $feature->term_taxonomy_id, 'tf_apartment_feature', true );
+							if ( ! empty( $feature_meta ) ) {
+								$f_icon_type = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
+							}
+							if ( ! empty( $f_icon_type ) && $f_icon_type == 'icon' ) {
+								$feature_icon = ! empty( $feature_meta['apartment-feature-icon'] ) ? '<i class="' . esc_attr( $feature_meta['apartment-feature-icon'] ) . '"></i>' : '';
+							} elseif ( ! empty( $f_icon_type ) && $f_icon_type == 'custom' ) {
+								$feature_icon = ! empty( $feature_meta['apartment-feature-icon-custom'] ) ? '<img src="' . esc_url( $feature_meta['apartment-feature-icon-custom'] ) . '" style="min-width: ' . esc_attr( $feature_meta['apartment-feature-icon-dimension'] ) . 'px; height: ' . esc_attr( $feature_meta['apartment-feature-icon-dimension'] ) . 'px;" />' : '';
+							}
+							if ( $tfkey < $features_count ) {
+							?>
+								<li>
+								<?php
+								if ( ! empty( $feature_icon ) ) {
+									echo wp_kses_post( $feature_icon );
+								} ?>
+								<?php echo esc_html( $feature->name ); ?>
+								</li>
+							<?php } } ?>
+							<?php if(count($features) > $features_count){ ?>
+								<li><a href="<?php echo esc_url( $url ); ?>"><?php esc_html_e("View More", "tourfic"); ?></a></li>
+							<?php } ?>
+						</ul>
+					<?php endif; ?>
+				</div>
+				<div class="tf-available-room-content-right">
+					<!-- Price -->
+					<?php if($show_price == 'yes') : ?>
+					<div class="tf-card-pricing-heading">
+						<?php if ( ! empty( $apartment_discount_amount ) && $apartment_discount_type!="none" ){ ?>
 							<div class="tf-available-room-off">
 								<span>
-									<?php echo $apartment_discount_type == "percent" ? wp_kses_post($apartment_discount_amount . '%') : wp_kses_post(wc_price( $apartment_discount_amount )) ?>
-									<?php esc_html_e( " Off", "tourfic" ); ?>
+									<?php echo $apartment_discount_type=="percent" ? wp_kses_post( $apartment_discount_amount ).'%' : wp_kses_post(wc_price($apartment_discount_amount)); ?> 
+									<?php esc_html_e( "Off ", "tourfic" ); ?>
 								</span>
 							</div>
 						<?php } ?>
 						<div class="tf-available-room-price">
 							<span class="tf-price-from">
-							<?php echo wp_kses_post(Pricing::instance(get_the_ID())->get_min_price_html()); ?>
+								<?php echo wp_kses_post(Pricing::instance(get_the_ID())->get_min_price_html()); ?>
 							</span>
 						</div>
 					</div>
-					</div>
-					<?php if ( $features ) { ?>
-					<ul class="features">
-					<?php foreach ( $features as $tfkey => $feature ) {
-					$feature_meta = get_term_meta( $feature->term_taxonomy_id, 'tf_apartment_feature', true );
-					if ( ! empty( $feature_meta ) ) {
-						$f_icon_type = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
-					}
-					if ( ! empty( $f_icon_type ) && $f_icon_type == 'icon' ) {
-						$feature_icon = ! empty( $feature_meta['apartment-feature-icon'] ) ? '<i class="' . esc_attr( $feature_meta['apartment-feature-icon'] ) . '"></i>' : '';
-					} elseif ( ! empty( $f_icon_type ) && $f_icon_type == 'custom' ) {
-						$feature_icon = ! empty( $feature_meta['apartment-feature-icon-custom'] ) ? '<img src="' . esc_url( $feature_meta['apartment-feature-icon-custom'] ) . '" style="min-width: ' . esc_attr( $feature_meta['apartment-feature-icon-dimension'] ) . 'px; height: ' . esc_attr( $feature_meta['apartment-feature-icon-dimension'] ) . 'px;" />' : '';
-					}
-					if ( $tfkey < 5 ) {
-					?>
-						<li>
-						<?php
-						if ( ! empty( $feature_icon ) ) {
-							echo wp_kses_post( $feature_icon );
-						} ?>
-						<?php echo esc_html( $feature->name ); ?>
-						</li>
-					<?php } } ?>
-					<?php if(count($features)>5){ ?>
-						<li><a href="<?php echo esc_url( $url ); ?>"><?php esc_html_e("View More", "tourfic"); ?></a></li>
-					<?php } ?>
-					</ul>
-					<?php } ?>
-				</div>
-				<div class="tf-available-room-content-right">
-					<div class="tf-card-pricing-heading">
-					<?php
-					if ( ! empty( $apartment_discount_amount ) && $apartment_discount_type!="none" ){ ?>
-						<div class="tf-available-room-off">
-							<span>
-								<?php echo $apartment_discount_type=="percent" ? wp_kses_post( $apartment_discount_amount ).'%' : wp_kses_post(wc_price($apartment_discount_amount)); ?> 
-								<?php esc_html_e( "Off ", "tourfic" ); ?>
-							</span>
-						</div>
-					<?php } ?>
-					<div class="tf-available-room-price">
-						<span class="tf-price-from">
-						    <?php echo wp_kses_post(Pricing::instance(get_the_ID())->get_min_price_html()); ?>
-						</span>
-					</div>
-					</div>              
-					<a href="<?php echo esc_url( $url ); ?>" class="tf_btn tf_btn_large tf_btn_sharp"><?php esc_html_e("See details", "tourfic"); ?></a>
+					<?php endif; ?>
+
+					<!-- View Details -->
+					<?php if($show_view_details == 'yes') : ?>    
+					<a href="<?php echo esc_url( $url ); ?>" class="tf_btn tf_btn_large tf_btn_sharp"><?php echo esc_html( $view_details_text ); ?></a>
+					<?php endif; ?>
 				</div>
 			</div>
 		</div>
         <?php } elseif ( $tf_apartment_arc_selected_template == "design-2" ) { ?>
             <div class="tf-archive-hotel" data-id="<?php echo esc_attr(get_the_ID()); ?>">
-                <div class="tf-archive-hotel-thumb">
+            	<!-- Thumbnail -->
+				<?php if($show_image == 'yes'): ?>    
+				<div class="tf-archive-hotel-thumb">
                     <a href="<?php echo esc_url( $url ); ?>">
 						<?php
-						if ( ! empty( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) ) {
+						if ( ! empty( $thumbnail_html ) ) {
+							echo wp_kses_post( $thumbnail_html );
+						} elseif ( ! empty( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) ) {
 							the_post_thumbnail( 'full' );
 						} else {
 							echo '<img src="' . esc_url(TF_ASSETS_APP_URL . "images/feature-default.jpg") . '" class="attachment-full size-full wp-post-image">';
@@ -2239,31 +2264,38 @@ class Apartment {
 								<?php esc_html_e( " Off", "tourfic" ); ?>
 							</div>
 						<?php endif; ?>
-						<?php if ( $featured ): ?>
-							<div class="tf-tag-item">
-								<?php echo ! empty( $meta['featured_text'] ) ? esc_html( $meta['featured_text'] ) : esc_html( "HOT DEAL" ); ?>
-							</div>
+						<?php if ( $featured_badge == 'yes' && $featured ): ?>
+							<div class="tf-tag-item"><?php echo esc_html( $featured_badge_text ); ?></div>
 						<?php endif; ?>
 					</div>
                 </div>
-                <div class="tf-archive-hotel-content">
+				<?php endif; ?>
+
+                <div class="tf-archive-hotel-content" style="<?php echo $show_image != 'yes' ? 'width: 100%;' : ''; ?>">
                     <div class="tf-archive-hotel-content-left">
-						<?php if ( ! empty( $address ) ) : ?>
+						<!-- Location -->
+						<?php if ( $show_location == 'yes' && ! empty( $address ) ) : ?>
                             <div class="tf-title-location">
                                 <div class="location-icon">
-                                    <i class="ri-map-pin-fill"></i>
+									<?php echo wp_kses( $location_icon_html, Helper::tf_custom_wp_kses_allow_tags() ); ?>
                                 </div>
-                                <span><?php echo wp_kses_post(Helper::tourfic_character_limit_callback( esc_html( $address ), 20 )); ?></span>
+                                <span><?php echo wp_kses_post(Helper::tourfic_character_limit_callback( esc_html( $address ), $location_length )); ?></span>
                             </div>
 						<?php endif; ?>
+						
+						<!-- Title -->
+						<?php if( $show_title == 'yes' ): ?>
                         <h4 class="tf-section-title">
                             <a href="<?php echo esc_url( $url ); ?>">
-								<?php echo wp_kses_post(Helper::tourfic_character_limit_callback( get_the_title(), 55 )); ?>
+								<?php echo wp_kses_post(Helper::tourfic_character_limit_callback( get_the_title(), $title_length )); ?>
                             </a>
                         </h4>
-						<?php if ( $features ) { ?>
+						<?php endif; ?>
+
+						<!-- Features -->
+						<?php if ( $show_features == 'yes' && $features ) { ?>
                             <ul class="features">
-								<?php foreach ( array_slice( $features, 0, 3 ) as $tfkey => $feature ) :
+								<?php foreach ( array_slice( $features, 0, $features_count ) as $tfkey => $feature ) :
 									$feature_meta = get_term_meta( $feature->term_taxonomy_id, 'tf_apartment_feature', true );
 									if ( ! empty( $feature_meta ) ) {
 										$f_icon_type = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
@@ -2280,56 +2312,69 @@ class Apartment {
 									}
 									echo esc_html( $feature->name );
 									//add comma after each feature except last one, if only 1/2 exists then don't add comma to last one
-									if ( count( $features ) > 1 && $tfkey != count( $features ) - 1 ) {
+									if ( count( $features ) > 1 && $tfkey != count( array_slice( $features, 0, $features_count ) ) - 1  ) {
 										echo ',';
 									}
 									echo '</li>';
 
 								endforeach;
 								?>
-								<?php if ( count( $features ) > 3 ) { ?>
+								<?php if ( count( $features ) > $features_count ) { ?>
                                     <li><a href="<?php echo esc_url( $url ); ?>"><?php esc_html_e( "View More", "tourfic" ); ?></a></li>
 								<?php } ?>
                             </ul>
 						<?php } ?>
-						<?php TF_Review::tf_archive_single_rating('', $design); ?>
+
+						<!-- Review -->
+						<?php if( $show_review == 'yes' && $disable_review != true ): ?>
+							<?php TF_Review::tf_archive_single_rating('', $design); ?>
+						<?php endif; ?>
                     </div>
                     <div class="tf-archive-hotel-content-right">
+						<!-- Price -->
+						<?php if($show_price == 'yes') : ?>
                         <div class="tf-archive-hotel-price">
 							<?php echo wp_kses_post(Pricing::instance( $post_id )->get_min_price_html()); ?>
                         </div>
-                        <a href="<?php echo esc_url( $url ); ?>" class="tf_btn tf_btn_gray tf_btn_small"><?php esc_html_e( "View Details", "tourfic" ); ?></a>
-                    </div>
+						<?php endif; ?>
+
+						<!-- View Details -->
+						<?php if($show_view_details == 'yes') : ?>
+                        <a href="<?php echo esc_url( $url ); ?>" class="tf_btn tf_btn_gray tf_btn_small"><?php echo esc_html( $view_details_text ); ?></a>
+						<?php endif; ?>
+					</div>
                 </div>
             </div>
 		<?php }else{ ?>
         <div class="single-tour-wrap <?php echo $featured ? esc_attr( 'tf-featured' ) : '' ?>">
             <div class="single-tour-inner">
-				<?php if ( $featured ): ?>
-                    <div class="tf-featured-badge">
-                        <span><?php echo ! empty( $meta['featured_text'] ) ? esc_html( $meta['featured_text'] ) : esc_html( "HOT DEAL" ); ?></span>
-                    </div>
+				<?php if ( $show_image == 'yes' && $featured_badge == 'yes' && $featured ): ?>
+                    <div class="tf-featured-badge"><span><?php echo esc_html( $featured_badge_text ); ?></span></div>
 				<?php endif; ?>
+
+				<!-- Thumbnail -->
+				<?php if($show_image == 'yes'): ?>
                 <div class="tourfic-single-left">
                 	<div class="default-tags-container">
+						<?php
+						if(sizeof($apartment_multiple_tags) > 0) {
+							foreach($apartment_multiple_tags as $tag) {
+								$tag_title = !empty($tag["apartment-tag-title"]) ? esc_html( $tag["apartment-tag-title"], 'tourfic') : '';
+								$tag_background_color = !empty($tag["apartment-tag-color-settings"]["background"]) ? esc_attr( $tag["apartment-tag-color-settings"]["background"] ) : "#003162";
+								$tag_font_color = !empty($tag["apartment-tag-color-settings"]["font"]) ? esc_attr( $tag["apartment-tag-color-settings"]["font"] ) : "#fff";
 
-					<?php
-					if(sizeof($apartment_multiple_tags) > 0) {
-						foreach($apartment_multiple_tags as $tag) {
-							$tag_title = !empty($tag["apartment-tag-title"]) ? esc_html( $tag["apartment-tag-title"], 'tourfic') : '';
-							$tag_background_color = !empty($tag["apartment-tag-color-settings"]["background"]) ? esc_attr( $tag["apartment-tag-color-settings"]["background"] ) : "#003162";
-							$tag_font_color = !empty($tag["apartment-tag-color-settings"]["font"]) ? esc_attr( $tag["apartment-tag-color-settings"]["font"] ) : "#fff";
-
-							if (!empty($tag_title)) {
-									echo '<span class="default-single-tag" style="color: ' . esc_attr( $tag_font_color ) . '; background-color: ' . esc_attr( $tag_background_color ) . '">' . esc_html( $tag_title ) . '</span>';
+								if (!empty($tag_title)) {
+										echo '<span class="default-single-tag" style="color: ' . esc_attr( $tag_font_color ) . '; background-color: ' . esc_attr( $tag_background_color ) . '">' . esc_html( $tag_title ) . '</span>';
+								}
 							}
 						}
-					}
-					?>
+						?>
 					</div>
                     <a href="<?php echo esc_url( $url ); ?>">
 						<?php
-						if ( has_post_thumbnail($post_id) ) {
+						if ( ! empty( $thumbnail_html ) ) {
+							echo wp_kses_post( $thumbnail_html );
+						} elseif ( has_post_thumbnail($post_id) ) {
 							echo get_the_post_thumbnail($post_id, 'full' );
 						} else {
 							echo '<img width="100%" height="100%" src="' . esc_url(TF_ASSETS_APP_URL) . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
@@ -2337,21 +2382,32 @@ class Apartment {
 						?>
                     </a>
                 </div>
+				<?php endif; ?>
+
                 <div class="tourfic-single-right">
                     <div class="tf_property_block_main_row">
                         <div class="tf_item_main_block">
+							<!-- Title -->
+							<?php if( $show_title == 'yes' ): ?>
                             <div class="tf-hotel__title-wrap">
-                                <a href="<?php echo esc_url( $url ); ?>"><h3 class="tourfic_hotel-title"><?php echo esc_html( get_the_title($post_id) ); ?></h3></a>
+                                <a href="<?php echo esc_url( $url ); ?>">
+									<h3 class="tourfic_hotel-title"><?php echo esc_html( Helper::tourfic_character_limit_callback( get_the_title($post_id), $title_length ) ); ?></h3>
+								</a>
                             </div>
+							<?php endif; ?>
+
+							<!-- Location -->
 							<?php
-							if ( !empty($address) ) {
+							if ( $show_location == 'yes' && !empty($address) ) {
 								echo '<div class="tf-map-link">';
-								echo '<span class="tf-d-ib"><i class="fas fa-map-marker-alt"></i> ' . strlen($address) > 75 ? esc_html( Helper::tourfic_character_limit_callback($address, 76) ) : esc_html( $address ) . '</span>';
+								echo '<span class="tf-d-ib">' . wp_kses( $location_icon_html, Helper::tf_custom_wp_kses_allow_tags() ) . wp_kses_post(Helper::tourfic_character_limit_callback( esc_html( $address ), $location_length )) . '</span>';
 								echo '</div>';
 							}
 							?>
                         </div>
-						<?php if( $disable_review != true ): ?>
+
+						<!-- Reivew -->
+						<?php if( $show_review == 'yes' && $disable_review != true ): ?>
 							<?php TF_Review::tf_archive_single_rating($post_id, $design); ?>
 						<?php endif; ?>
                     </div>
@@ -2359,18 +2415,25 @@ class Apartment {
                     <div class="sr_rooms_table_block">
                         <div class="room_details">
                             <div class="featuredRooms">
+
+								<!-- Excerpt -->
+								<?php if ( $show_excerpt == 'yes' ) : ?>
                                 <div class="prco-ltr-right-align-helper">
                                     <div class="tf-archive-shortdesc">
-										<?php echo esc_html( substr( wp_strip_all_tags( get_post_field('post_content', $post_id) ), 0, 160 ) ) . '...'; ?>
+										<?php echo esc_html( substr( wp_strip_all_tags( get_post_field('post_content', $post_id) ), 0, $excerpt_length ) ) . '...'; ?>
                                     </div>
                                 </div>
+								<?php endif; ?>
+
                                 <div class="tf_room_name_inner">
                                     <div class="room_link">
                                         <div class="roomrow_flex">
-											<?php if ( $features ) { ?>
+
+											<!-- Features -->
+											<?php if ( $show_features == 'yes' && $features ) : ?>
                                                 <div class="roomName_flex">
                                                     <ul class="tf-archive-desc">
-														<?php foreach ( $features as $feature ) {
+														<?php foreach ( array_slice( $features, 0, $features_count ) as $feature ) {
 															$feature_meta = get_term_meta( $feature->term_taxonomy_id, 'tf_apartment_feature', true );
 															if ( ! empty( $feature_meta ) ) {
 																$f_icon_type = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
@@ -2396,17 +2459,24 @@ class Apartment {
 														<?php } ?>
                                                     </ul>
                                                 </div>
-											<?php } ?>
+											<?php endif; ?>
+
                                             <div class="roomPrice roomPrice_flex sr_discount" style="<?php echo empty( $features ) ? 'text-align:left' : ''; ?>">
-                                                <div class="availability-btn-area">
-                                                    <a href="<?php echo esc_url( $url ); ?>" class="tf_btn"><?php esc_html_e( 'View Details', 'tourfic' ); ?></a>
+                                                <!-- View Details -->
+												<?php if($show_view_details == 'yes') : ?>
+												<div class="availability-btn-area">
+                                                    <a href="<?php echo esc_url( $url ); ?>" class="tf_btn"><?php echo esc_html( $view_details_text ); ?></a>
                                                 </div>
-                                                <!-- Show minimum price @author - Hena -->
+												<?php endif; ?>
+												
+												<!-- Price -->
+												<?php if($show_price == 'yes') : ?>
                                                 <div class="tf-room-price-area">
                                                     <div class="tf-room-price">
                                                         <?php echo wp_kses_post(Pricing::instance( $post_id )->get_min_price_html()); ?>
                                                     </div>
                                                 </div>
+												<?php endif; ?>
                                             </div>
                                         </div>
                                     </div>

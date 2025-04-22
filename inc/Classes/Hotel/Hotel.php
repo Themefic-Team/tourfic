@@ -4103,7 +4103,7 @@ class Hotel {
 									}
 									echo esc_html( $feature->name );
 									//add comma after each feature except last one, if only 1/2 exists then don't add comma to last one
-									if ( count( $features ) > 1 && $tfkey != count( array_slice( $features, 0, 3 ) ) - 1 ) {
+									if ( count( $features ) > 1 && $tfkey != count( array_slice( $features, 0, $features_count ) ) - 1 ) {
 										echo ',';
 									}
 									echo '</li>';
@@ -4216,6 +4216,7 @@ class Hotel {
                                         </div>
                                     </div>
 									<?php endif; ?>
+									
                                     <div class="tf_room_name_inner">
                                         <div class="room_link">
                                             <div class="roomrow_flex">

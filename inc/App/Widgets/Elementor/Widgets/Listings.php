@@ -150,7 +150,7 @@ class Listings extends Widget_Base {
 			'conditions' => $this->tf_display_conditionally([
                 'tf_hotel' => ['design-1', 'design-3', 'default'],
                 'tf_tours' => ['design-1', 'design-3', 'default'],
-                'tf_apartment' => ['design-1', 'design-2'],
+                'tf_apartment' => ['design-2', 'default'],
             ]),
 		]);
 
@@ -172,7 +172,7 @@ class Listings extends Widget_Base {
 			'conditions' => $this->tf_display_conditionally([
                 'tf_hotel' => ['design-1', 'design-3', 'default'],
                 'tf_tours' => ['design-1', 'design-3', 'default'],
-                'tf_apartment' => ['design-1', 'design-2'],
+                'tf_apartment' => ['design-2', 'default'],
             ],[
 				'listing_layout_toggle' => 'yes',
 			]),
@@ -196,7 +196,7 @@ class Listings extends Widget_Base {
 			'conditions' => $this->tf_display_conditionally([
                 'tf_hotel' => ['design-1', 'design-3', 'default'],
                 'tf_tours' => ['design-1', 'design-3', 'default'],
-                'tf_apartment' => ['design-1', 'design-2'],
+                'tf_apartment' => ['design-2', 'default'],
             ],[
 				'listing_layout_toggle!' => 'yes',
 			]),
@@ -380,7 +380,8 @@ class Listings extends Widget_Base {
 		]);
 
         $this->add_control('show_fallback_img',[
-			'label' => __('Fallback Image', 'tourfic'),
+			'label' => __('Default Image', 'tourfic'),
+			'description' => __('Default image will be used if the post does not have a featured image.', 'tourfic'),
 			'type' => Controls_Manager::SWITCHER,
 			'label_on' => __('Show', 'tourfic'),
 			'label_off' => __('Hide', 'tourfic'),
@@ -486,7 +487,7 @@ class Listings extends Widget_Base {
 			'conditions' => $this->tf_display_conditionally([
                 'tf_hotel' => ['design-1', 'default'],
                 'tf_tours' => ['design-1', 'default'],
-                'tf_apartment' => ['design-1'],
+                'tf_apartment' => ['default'],
             ]),
 		]);
 
@@ -500,7 +501,7 @@ class Listings extends Widget_Base {
 			'conditions' => $this->tf_display_conditionally([
                 'tf_hotel' => ['design-1', 'default'],
                 'tf_tours' => ['design-1', 'default'],
-                'tf_apartment' => ['design-1'],
+                'tf_apartment' => ['default'],
             ],[
 				'show_excerpt' => 'yes',
 			]),
@@ -2361,7 +2362,7 @@ class Listings extends Widget_Base {
                         <span><?php echo ')'; ?> </span>
                     </div>
 					<?php endif; ?>
-					
+
 					<div class="tf-list-grid">
 						<?php if($listing_layout_toggle == 'yes') : ?>
 		                <a href="#list-view" data-id="list-view" class="change-view <?php echo $listing_layout=="list" ? esc_attr('active') : ''; ?>" title="<?php esc_html_e('List View', 'tourfic'); ?>"><i class="fas fa-list"></i></a>
