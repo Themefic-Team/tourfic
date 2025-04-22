@@ -2,8 +2,8 @@
 Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi, hasanet
 Tags: travel-booking, hotel-booking, tour-booking, car-rental, multivendor-marketplace
 Requires at least: 5.4
-Tested up to: 6.7
-Stable tag: 2.15.23
+Tested up to: 6.8
+Stable tag: 2.15.26
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -372,6 +372,36 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
+= 2.16.0 – April 23, 2025 =
+
+- Improved: Revamped assets for enhanced performance.
+- Introduced: New design settings panel for greater customization.
+- Improved: Updated template view aligned with the new design settings.
+- Improved: Added a new color palette to ensure design consistency.
+- Improved: General performance enhancements across the system.
+- Improved: Frontend design improvements for a better user experience.
+- Improved: Overall system stability.
+
+= 2.15.26 – April 20, 2025 =
+
+- Compatibility: Fully compatible with WordPress version 6.8.
+- Compatibility: Fully compatible with WooCommerce version 9.8.
+
+= 2.15.25 – April 08, 2025 =
+
+- Fixed: Hotel deposit issue fix on checkout page
+- Fixed: Apartment max person option issue fix when its 0
+- Fixed: Hotel room old price showing issue fix
+- Fixed: Backend booking room availability issue on frontend dashboard
+- Added: Hotel guest details added in frontend dashboard booking details
+- Improved: Replaced the Sweet alert with jQuery Confirm library.
+
+= 2.15.24 – March 30, 2025 =
+
+- Fixed: Itinerary meta description pop-up issue.
+- Updated: Meta description pop-up design.
+- Updated: Fancybox pop-up for better user experience.
+
 = 2.15.23 – March 26, 2025 =
 
 - Fixed: The Registration issue on mobile has been resolved.
@@ -395,35 +425,6 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 - Fixed: The import/export issue has been resolved.
 - Improved: System stability for better performance.
-
-= 2.15.18 – March 02, 2025 =
-
-- Fixed: Car booking responsiveness issue successfully resolved.
-- Fixed: Code enhancements applied to SweetAlert2 script.
-
-= 2.15.17 – February 16, 2025 =
-
-- Fixed: The apartment pricing issue has been resolved.
-- Fixed: Post types tab switch issue corrected.
-- Fixed: Hotel backend booking issue for vendors resolved.
-- Fixed: Only vendor posts are now displayed in the backend booking.
-
-= 2.15.16 – February 10, 2025 =
-
-- Improved: Hotel search and filter functionality for a better user experience.
-
-= 2.15.15 – February 05, 2025 =
-
-- Updated: readme.txt file for better clarity.
-- Fixed: The pagination issue has been resolved.
-- Fixed: Car rental search issue on iPhone.
-- Improved: Performance improved for service list and search.
-
-= 2.15.14 – January 30, 2025 =
-
-- Fixed: Apartment archive pricing issue.
-- Fixed: Car rental seat range widget issue.
-- Fixed: Compatibility issue with WooCommerce refunds.
 
 **Old Changelog can be found [here](https://themefic.com/tourfic/changelog/)**.
 
