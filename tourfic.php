@@ -7,9 +7,9 @@
  * Author URI:      https://themefic.com
  * Text Domain:     tourfic
  * Domain Path:     /lang/
- * Version:         2.15.23
- * Tested up to:    6.7
- * WC tested up to: 9.4
+ * Version:         2.16.0
+ * Tested up to:    6.8
+ * WC tested up to: 9.8
  * Requires PHP:    7.4
  * Elementor tested up to: 3.28
  */
@@ -25,7 +25,7 @@ final class Tourfic {
 	 * @var string
 	 */
 
-	const VERSION = '2.15.23';
+	const VERSION = '2.16.0';
 
 	/**
 	 * Minimum PHP version required.
