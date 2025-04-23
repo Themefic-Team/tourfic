@@ -96,10 +96,12 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 									}
 
 									$room_term = get_term( $feature ); ?>
-                                    <li>
-										<?php echo ! empty( $room_feature_icon ) ? wp_kses_post( $room_feature_icon ) : ''; ?>
-										<?php echo esc_html( $room_term->name ); ?>
-                                    </li>
+									<?php if(!empty($room_term->name)): ?>
+										<li>
+											<?php echo ! empty( $room_feature_icon ) ? wp_kses_post( $room_feature_icon ) : ''; ?>
+											<?php echo esc_html( $room_term->name ); ?>
+										</li>
+									<?php endif; ?>
 								<?php }
 								$tf_room_fec_key ++;
 							}

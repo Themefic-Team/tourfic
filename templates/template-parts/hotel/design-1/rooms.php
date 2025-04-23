@@ -150,6 +150,7 @@ if ( $rooms ) :
 										if ( ! empty( $room['features'] ) ) {
 											$tf_room_fec_key = 1;
 											foreach ( $room['features'] as $feature ) {
+												error_log(print_r($feature, true));
 												if ( $tf_room_fec_key < 5 ) {
 													$room_f_meta = get_term_meta( $feature, 'tf_hotel_feature', true );
 													if ( ! empty( $room_f_meta ) ) {
@@ -161,12 +162,14 @@ if ( $rooms ) :
 														$room_feature_icon = '<img src="' . $room_f_meta['icon-c'] . '" style="min-width: ' . $room_f_meta['dimention'] . 'px; height: ' . $room_f_meta['dimention'] . 'px;" />';
 													}
 
-													$room_term = get_term( $feature ); ?>
-                                                    <li>
-														<?php echo ! empty( $room_feature_icon ) ? wp_kses_post( $room_feature_icon ) : ''; ?>
-														<?php echo isset( $room_term->name ) && ! empty( $room_term->name ) ? esc_html( $room_term->name ) : ''; ?>
-                                                    </li>
-												<?php }
+													$room_term = get_term( $feature ); 
+													if ( ! is_wp_error($room_term) && ! empty( $room_term->name ) ) : ?>
+														<li>
+															<?php echo ! empty( $room_feature_icon ) ? wp_kses_post( $room_feature_icon ) : ''; ?>
+															<?php echo esc_html( $room_term->name ); ?>
+														</li>
+													<?php endif; 
+												}
 												$tf_room_fec_key ++;
 											}
 										} ?>

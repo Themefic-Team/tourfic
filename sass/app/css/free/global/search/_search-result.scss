@@ -11,7 +11,7 @@
         grid-template-columns: 100%;
     }
     .tf-search-left {
-        padding-right: 15px;
+        padding-right: 16px;
         @media #{$max768} {
             padding: 0;
         }
@@ -211,7 +211,7 @@
         }
     }
     .tf-search-right {
-        padding-left: 15px;
+        padding-left: 16px;
 
         @media #{$max768} {
             padding: 0;
@@ -407,12 +407,19 @@
                     flex-grow: 1;
                     .tf-hotel__title-wrap {
                         margin-bottom: 4px;
-                        .tourfic_hotel-title {
-                            display: inline-block;
-                            margin: 0;
-                            padding-right: 2px;
-                            &:hover {
-                                color: $color-brand-dark;
+                        a{
+                            display: block;
+                            .tourfic_hotel-title {
+                                display: inline-block;
+                                margin: 0;
+                                padding-right: 2px;
+                                font-size: 1.5rem;
+                                @media #{$max768} {
+                                    font-size: 1.25rem;
+                                }
+                                &:hover {
+                                    color: $color-brand-dark;
+                                }
                             }
                         }
                     }

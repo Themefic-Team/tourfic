@@ -1997,7 +1997,9 @@ class Apartment {
 		}
 		$featured        = ! empty( $meta['apartment_as_featured'] ) ? $meta['apartment_as_featured'] : '';
 		$pricing_type    = ! empty( $meta['pricing_type'] ) ? $meta['pricing_type'] : 'per_night';
-		$apartment_multiple_tags = !empty(Helper::tf_data_types($meta['tf-apartment-tags'])) ? Helper::tf_data_types($meta['tf-apartment-tags']) : [];
+		
+		$apartment_tags_raw = isset($meta['tf-apartment-tags']) ? $meta['tf-apartment-tags'] : null;
+		$apartment_multiple_tags = !empty($apartment_tags_raw) ? Helper::tf_data_types($apartment_tags_raw) : [];
 		//Discout Info
 		$apartment_discount_type = !empty($meta["discount_type"]) ? $meta["discount_type"] : "none";
 		$apartment_discount_amount = !empty($meta["discount"]) ? $meta["discount"] : 0;

@@ -918,7 +918,7 @@ TF_Settings::option( 'tf_settings', array(
 					'id'       => 'tf-container-width',
 					'type'     => 'number',
 					'label'    => esc_html__( 'Container Width (px)', 'tourfic' ),
-					'default'  => '1200',
+					'default'  => '1280',
 					'dependency'  => array( 'tf-container', '==', 'boxed' ),
 					'attributes' => array(
 						'min' => '770',

@@ -4,7 +4,7 @@ Container
 */
 .tf-container {
   margin: 0 auto;
-  padding: 0 15px;
+  padding: 0 16px;
   max-width: var(--tf-container-width);
 }
 
@@ -5424,7 +5424,7 @@ div#tf-destinationautocomplete-list div:before {
 }
 
 .search-result-inner .tf-search-left {
-  padding-right: 15px;
+  padding-right: 16px;
 }
 
 @media only screen and (max-width: 768px) {
@@ -5657,7 +5657,7 @@ div#tf-destinationautocomplete-list div:before {
 }
 
 .search-result-inner .tf-search-right {
-  padding-left: 15px;
+  padding-left: 16px;
 }
 
 @media only screen and (max-width: 768px) {
@@ -5892,13 +5892,24 @@ div#tf-destinationautocomplete-list div:before {
   margin-bottom: 4px;
 }
 
-.single-tour-wrap .single-tour-inner .tourfic-single-right .tf_property_block_main_row .tf_item_main_block .tf-hotel__title-wrap .tourfic_hotel-title {
+.single-tour-wrap .single-tour-inner .tourfic-single-right .tf_property_block_main_row .tf_item_main_block .tf-hotel__title-wrap a {
+  display: block;
+}
+
+.single-tour-wrap .single-tour-inner .tourfic-single-right .tf_property_block_main_row .tf_item_main_block .tf-hotel__title-wrap a .tourfic_hotel-title {
   display: inline-block;
   margin: 0;
   padding-right: 2px;
+  font-size: 1.5rem;
 }
 
-.single-tour-wrap .single-tour-inner .tourfic-single-right .tf_property_block_main_row .tf_item_main_block .tf-hotel__title-wrap .tourfic_hotel-title:hover {
+@media only screen and (max-width: 768px) {
+  .single-tour-wrap .single-tour-inner .tourfic-single-right .tf_property_block_main_row .tf_item_main_block .tf-hotel__title-wrap a .tourfic_hotel-title {
+    font-size: 1.25rem;
+  }
+}
+
+.single-tour-wrap .single-tour-inner .tourfic-single-right .tf_property_block_main_row .tf_item_main_block .tf-hotel__title-wrap a .tourfic_hotel-title:hover {
   color: var(--tf-brand-dark);
 }
 
@@ -11189,7 +11200,7 @@ div#tf-destinationautocomplete-list div:before {
 .tf-single-template__one .tf-single-details-wrapper .tf-single-details-inner .tf-tour-details-right {
   flex-basis: 32%;
   width: 32%;
-  padding-left: 30px;
+  padding-left: 32px;
   top: 0;
   align-self: flex-start;
 }
@@ -12018,7 +12029,7 @@ div#tf-destinationautocomplete-list div:before {
   display: flex;
   justify-content: space-between;
   flex-direction: row;
-  gap: 40px;
+  gap: 32px;
   align-items: start;
 }
 

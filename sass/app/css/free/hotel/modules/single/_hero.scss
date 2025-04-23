@@ -11,7 +11,7 @@
                     grid-template-columns: 100%;
                 }
                 .hero-left {
-                    padding-right: 15px;
+                    padding-right: 16px;
                     @media #{$max575} {
                         padding-right: 0;
                     }
@@ -24,7 +24,7 @@
                     }
                 }
                 .hero-right {
-                    padding-left: 15px;
+                    padding-left: 16px;
                     @media #{$max575}{
                         padding-left: 0;
                         margin: auto;
