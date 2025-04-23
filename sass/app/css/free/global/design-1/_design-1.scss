@@ -1250,6 +1250,10 @@
                     border-top: 1px solid $color-border-lite;
                     padding-top: 16px;
 
+                    ins{
+                        background-color: transparent;
+                    }
+
                     .tf-booking-bttns{
                         .tf_btn{
                             font-weight: 500;

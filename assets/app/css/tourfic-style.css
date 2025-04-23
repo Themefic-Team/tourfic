@@ -11879,6 +11879,11 @@ div#tf-destinationautocomplete-list div:before {
   padding-top: 16px;
 }
 
+.tf-archive-listing__one .tf-search-results-list .tf-item-card .tf-post-footer ins,
+.tf-archive-template__one .tf-search-results-list .tf-item-card .tf-post-footer ins {
+  background-color: transparent;
+}
+
 .tf-archive-listing__one .tf-search-results-list .tf-item-card .tf-post-footer .tf-booking-bttns .tf_btn,
 .tf-archive-template__one .tf-search-results-list .tf-item-card .tf-post-footer .tf-booking-bttns .tf_btn {
   font-weight: 500;
