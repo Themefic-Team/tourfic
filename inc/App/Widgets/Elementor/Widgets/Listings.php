@@ -67,8 +67,8 @@ class Listings extends Widget_Base {
 		$this->tf_featured_badge_style_controls();
 		$this->tf_title_style_controls();
 		$this->tf_location_style_controls();
-		// $this->tf_review_style_controls();
-		// $this->tf_features_style_controls();
+		$this->tf_review_style_controls();
+		$this->tf_features_style_controls();
 		// $this->tf_excerpt_style_controls();
 		// $this->tf_price_style_controls();
 		// $this->tf_button_style_controls();
@@ -1417,7 +1417,7 @@ class Listings extends Widget_Base {
 			],
 		] );
 
-		$this->add_control( "tf_icon_color", [
+		$this->add_control( "tf_location_icon_color", [
 			'label'     => __( 'Icon Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
@@ -1429,6 +1429,218 @@ class Listings extends Widget_Base {
 				"{{WRAPPER}} .tf_item_main_block .tf-map-link .tf-d-ib svg path" => 'fill: {{VALUE}}',
 			],
 		] );
+
+		$this->end_controls_section();
+	}
+
+	protected function tf_review_style_controls() {
+		$this->start_controls_section( 'review_style', [
+			'label' => __( 'Review Style', 'tourfic' ),
+			'tab'   => Controls_Manager::TAB_STYLE,
+		]);
+
+		$this->add_control( 'tf_review_color', [
+			'label'     => __( 'Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors'  => [
+				'{{WRAPPER}} .tf-avarage-review' => 'color: {{VALUE}};', //design-1, design-3
+				'{{WRAPPER}} .tf-available-rating-number' => 'color: {{VALUE}};', //design-2
+				'{{WRAPPER}} .tf-archive-rating-wrapper .tf-archive-rating' => 'color: {{VALUE}};', //default
+			],
+		]);
+
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+            'label'    => __( 'Typography', 'tourfic' ),
+			'name'     => "tf_review_typography",
+			'selector' => "{{WRAPPER}} .tf-item-details .tf-reviews .tf-avarage-review, {{WRAPPER}} .tf-available-rating-number, {{WRAPPER}} .tf-archive-rating-wrapper .tf-archive-rating",
+		]);
+
+		$this->add_responsive_control( "review_margin", [
+			'label'      => __( 'Margin', 'tourfic' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				'{{WRAPPER}} .tf-item-card .tf-item-details .tf-reviews' => $this->tf_apply_dim( 'margin' ), //design-1
+				'{{WRAPPER}} .tf-available-room-gallery .tf-available-ratings' => $this->tf_apply_dim( 'margin' ), //design-1
+				'{{WRAPPER}} .tf-archive-hotel-content-left .tf-reviews' => $this->tf_apply_dim( 'margin' ), //design-1
+				'{{WRAPPER}} .tf-archive-rating-wrapper .tf-archive-rating' => $this->tf_apply_dim( 'margin' ), //design-1
+			],
+		]);
+
+		$this->add_responsive_control( "tf_review_icon_size", [
+			'label'      => esc_html__( 'Icon Size', 'tourfic' ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [
+				'px',
+				'rem',
+				'%',
+			],
+			'range'      => [
+				'px' => [
+					'min'  => 0,
+					'max'  => 50,
+					'step' => 1,
+				],
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .tf-item-card .tf-item-details .tf-reviews i" => 'font-size: {{SIZE}}{{UNIT}}',
+				"{{WRAPPER}} .tf-archive-hotel-content-left .tf-reviews .tf-review-items i" => 'font-size: {{SIZE}}{{UNIT}}',
+				"{{WRAPPER}} .tf-available-room-gallery .tf-available-ratings i" => 'font-size: {{SIZE}}{{UNIT}}',
+			],
+			'conditions' => $this->tf_display_conditionally([
+                'tf_hotel' => ['design-1', 'design-2', 'design-3'],
+                'tf_tours' => ['design-1', 'design-2', 'design-3'],
+                'tf_apartment' => ['design-1', 'design-2'],
+            ]),
+		] );
+
+		$this->add_control( "tf_review_icon_color", [
+			'label'     => __( 'Icon Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .tf-item-card .tf-item-details .tf-reviews i" => 'color: {{VALUE}}',
+				"{{WRAPPER}} .tf-archive-hotel-content-left .tf-reviews .tf-review-items i" => 'color: {{VALUE}}',
+				"{{WRAPPER}} .tf-available-room-gallery .tf-available-ratings i" => 'color: {{VALUE}}',
+			],
+			'conditions' => $this->tf_display_conditionally([
+                'tf_hotel' => ['design-1', 'design-2', 'design-3'],
+                'tf_tours' => ['design-1', 'design-2', 'design-3'],
+                'tf_apartment' => ['design-1', 'design-2'],
+            ]),
+		] );
+
+		$this->end_controls_section();
+	}
+
+	protected function tf_features_style_controls() {
+		$this->start_controls_section( 'features_style', [
+			'label' => __( 'Features Style', 'tourfic' ),
+			'tab'   => Controls_Manager::TAB_STYLE,
+		] );
+
+		$this->add_control( 'tf_features_color', [
+			'label'     => __( 'Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors'  => [
+				'{{WRAPPER}} .tf-item-details .tf-archive-features ul li' => 'color: {{VALUE}};', //design-1
+				'{{WRAPPER}} .tf-available-room-content .tf-available-room-content-left ul li' => 'color: {{VALUE}};', //design-2
+				'{{WRAPPER}} .tf-archive-hotel-content .tf-archive-hotel-content-left ul li' => 'color: {{VALUE}};', //design-3
+			],
+		]);
+
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+            'label'    => __( 'Typography', 'tourfic' ),
+			'name'     => "tf_features_typography",
+			'selector' => "{{WRAPPER}} .tf-item-details .tf-archive-features ul li, {{WRAPPER}} .tf-available-room-content .tf-available-room-content-left ul li, {{WRAPPER}} .tf-archive-hotel-content .tf-archive-hotel-content-left ul li",
+		]);
+
+		$this->add_responsive_control( "features_padding", [
+			'label'      => __( 'Padding', 'tourfic' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				'{{WRAPPER}} .tf-item-details .tf-archive-features ul li' => $this->tf_apply_dim( 'padding' ), //design-1
+				'{{WRAPPER}} .tf-available-room-content .tf-available-room-content-left ul li' => $this->tf_apply_dim( 'padding' ), //design-2
+				'{{WRAPPER}} .tf-archive-hotel-content .tf-archive-hotel-content-left ul li' => $this->tf_apply_dim( 'padding' ), //design-3
+			],
+			'conditions' => $this->tf_display_conditionally([
+                'tf_hotel' => ['design-1'],
+                'tf_tours' => ['design-1'],
+            ]),
+		]);
+
+		$this->add_responsive_control( "features_margin", [
+			'label'      => __( 'Margin', 'tourfic' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				'{{WRAPPER}} .tf-item-details .tf-archive-features ul li' => $this->tf_apply_dim( 'margin' ), //design-1
+				'{{WRAPPER}} .tf-available-room-content .tf-available-room-content-left ul li' => $this->tf_apply_dim( 'margin' ), //design-2
+				'{{WRAPPER}} .tf-archive-hotel-content .tf-archive-hotel-content-left ul li' => $this->tf_apply_dim( 'margin' ), //design-3
+			],
+		]);
+
+		$this->add_group_control( Group_Control_Background::get_type(), [
+			'name'     => "features_bg_color",
+			'label'    => __( 'Background Color', 'tourfic' ),
+			'types'    => [
+				'classic',
+				'gradient',
+			],
+			'selector' => "{{WRAPPER}} .tf-item-details .tf-archive-features ul li, {{WRAPPER}} .tf-available-room-content .tf-available-room-content-left ul li, {{WRAPPER}} .tf-archive-hotel-content .tf-archive-hotel-content-left ul li",
+			'conditions' => $this->tf_display_conditionally([
+                'tf_hotel' => ['design-1'],
+                'tf_tours' => ['design-1'],
+            ]),
+		]);
+
+		$this->add_group_control( Group_Control_Border::get_type(), [
+			'name'     => "features_border",
+			'selector' => "{{WRAPPER}} .tf-item-details .tf-archive-features ul li, {{WRAPPER}} .tf-available-room-content .tf-available-room-content-left ul li, {{WRAPPER}} .tf-archive-hotel-content .tf-archive-hotel-content-left ul li",
+			'conditions' => $this->tf_display_conditionally([
+                'tf_hotel' => ['design-1'],
+                'tf_tours' => ['design-1'],
+            ]),
+		]);
+
+		$this->add_control( "features_border_radius", [
+			'label'      => __( 'Border Radius', 'tourfic' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'%',
+			],
+			'selectors'  => [
+				'{{WRAPPER}} .tf-item-details .tf-archive-features ul li' => $this->tf_apply_dim( 'border-radius' ), //design-1
+				'{{WRAPPER}} .tf-available-room-content .tf-available-room-content-left ul li' => $this->tf_apply_dim( 'border-radius' ), //design-2
+				'{{WRAPPER}} .tf-archive-hotel-content .tf-archive-hotel-content-left ul li' => $this->tf_apply_dim( 'border-radius' ), //design-3
+			],
+			'conditions' => $this->tf_display_conditionally([
+                'tf_hotel' => ['design-1'],
+                'tf_tours' => ['design-1'],
+            ]),
+		]);
+
+		$this->add_group_control(Group_Control_Box_Shadow::get_type(), [
+			'name' => 'features_shadow',
+			'selector' => "{{WRAPPER}} .tf-item-details .tf-archive-features ul li, {{WRAPPER}} .tf-available-room-content .tf-available-room-content-left ul li, {{WRAPPER}} .tf-archive-hotel-content .tf-archive-hotel-content-left ul li",
+			'conditions' => $this->tf_display_conditionally([
+                'tf_hotel' => ['design-1'],
+                'tf_tours' => ['design-1'],
+            ]),
+		]);
+
+		$this->add_control( 'tf_features_view_more_heading', [
+			'type'  => Controls_Manager::HEADING,
+			'label' => __( 'Features View More', 'tourfic' ),
+		] );
+		$this->add_control( 'tf_features_more_color', [
+			'label'     => __( 'Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors'  => [
+				'{{WRAPPER}} .tf-item-details .tf-archive-features ul span' => 'color: {{VALUE}};', //design-1
+				'{{WRAPPER}} .tf-available-room-content .tf-available-room-content-left ul li a' => 'color: {{VALUE}};', //design-2
+				'{{WRAPPER}} .tf-archive-hotel-content .tf-archive-hotel-content-left ul li a' => 'color: {{VALUE}};', //design-3
+			],
+		]);
+
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+            'label'    => __( 'Typography', 'tourfic' ),
+			'name'     => "tf_features_more_typography",
+			'selector' => "{{WRAPPER}} .tf-item-details .tf-archive-features ul span, {{WRAPPER}} .tf-available-room-content .tf-available-room-content-left ul li a, {{WRAPPER}} .tf-archive-hotel-content .tf-archive-hotel-content-left ul li a",
+		]);
 
 		$this->end_controls_section();
 	}
