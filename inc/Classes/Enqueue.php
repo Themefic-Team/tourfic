@@ -1136,7 +1136,7 @@ class Enqueue {
 
 		$color_palette_template = ! empty( Helper::tfopt( 'color-palette-template' ) ) ? Helper::tfopt( 'color-palette-template' ) : 'design-1';
 		$tf_container = ! empty( Helper::tfopt( 'tf-container' ) ) ? Helper::tfopt( 'tf-container' ) : 'boxed';
-		$tf_container_width = ! empty( Helper::tfopt( 'tf-container-width' ) ) ? Helper::tfopt( 'tf-container-width' ) . 'px' : '1200px';
+		$tf_container_width = ! empty( Helper::tfopt( 'tf-container-width' ) ) ? Helper::tfopt( 'tf-container-width' ) . 'px' : '1280px';
 
 		$design_default = [
 			'design-1' => [
