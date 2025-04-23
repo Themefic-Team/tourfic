@@ -25,11 +25,15 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 			if ( ! empty( $this->value ) ){
 				
 				if(!is_array($this->value)){
-					$tf_rep_value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
-						return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
-					}, $this->value );
+					$tf_rep_value = preg_replace_callback('!s:(\d+):"(.*?)";!', function ($match) {
+						return 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+					}, $this->value);
 
-					$data = unserialize( $tf_rep_value );
+					if (@unserialize($tf_rep_value) !== false || $tf_rep_value === 'b:0;') {
+						$data = @unserialize($tf_rep_value);
+					} else {
+						$data = [];
+					}
 				}else{
 					$data = $this->value;
 				}
