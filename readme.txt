@@ -372,7 +372,7 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
-= 2.16.0 – April 23, 2025 =
+= 2.16.0 – April 24, 2025 =
 
 - Improved: Revamped assets for enhanced performance.
 - Introduced: New design settings panel for greater customization.
