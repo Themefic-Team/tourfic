@@ -216,7 +216,8 @@
          *
          * Fancybox
          */
-        $('[data-fancybox="tour-video"]').fancybox({
+      
+        Fancybox.bind('[data-fancybox="tour-video"]', {
             loop: true,
             buttons: [
                 "zoom",
@@ -254,11 +255,10 @@
             ]
         });
 
-        $('.tf-hero-btm-icon.tf-tour-info').fancybox({
+        Fancybox.bind('.tf-hero-btm-icon.tf-tour-info', {
             loop: true,
-            touch: false 
+            touch: false
         });
-
         /**
          * Single Tour price change
          *

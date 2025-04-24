@@ -244,7 +244,8 @@
          *
          * Fancybox
          */
-        $('[data-fancybox="hotel-video"]').fancybox({
+
+        Fancybox.bind('[data-fancybox="hotel-video"]', {
             loop: true,
             buttons: [
                 "zoom",
@@ -276,7 +277,8 @@
          *
          * Fancybox
          */
-        $('.map-pre').fancybox({
+
+        Fancybox.bind('.map-pre', {
             loop: true,
             touch: false
         });
