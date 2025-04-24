@@ -72,11 +72,13 @@
                             font-size: 1.25rem;
                             line-height: 1.5;
                             text-decoration: underline;
+                            color: $color-heading;
                         }
                         .room-features {
                             margin-top: 15px;
                             h4 {
                                 font-size: 1rem;
+                                color: $color-heading;
                             }
                             .room-feature-list {
                                 list-style: none;
@@ -344,6 +346,7 @@
                                             h3{
                                                 font-size: 1.25rem;
                                                 line-height: normal;
+                                                color: $color-heading;
                                                 a{
                                                     color: $color-heading;
                                                     text-decoration: none;

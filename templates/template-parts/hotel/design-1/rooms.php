@@ -150,7 +150,6 @@ if ( $rooms ) :
 										if ( ! empty( $room['features'] ) ) {
 											$tf_room_fec_key = 1;
 											foreach ( $room['features'] as $feature ) {
-												error_log(print_r($feature, true));
 												if ( $tf_room_fec_key < 5 ) {
 													$room_f_meta = get_term_meta( $feature, 'tf_hotel_feature', true );
 													if ( ! empty( $room_f_meta ) ) {

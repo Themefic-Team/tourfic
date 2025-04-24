@@ -244,6 +244,7 @@
   font-size: 1.25rem;
   line-height: 1.5;
   text-decoration: underline;
+  color: var(--tf-text-heading);
 }
 
 .single-tf_hotel .tf-single-template__legacy .tf-room-section .availability-table td.description .room-features {
@@ -252,6 +253,7 @@
 
 .single-tf_hotel .tf-single-template__legacy .tf-room-section .availability-table td.description .room-features h4 {
   font-size: 1rem;
+  color: var(--tf-text-heading);
 }
 
 .single-tf_hotel .tf-single-template__legacy .tf-room-section .availability-table td.description .room-features .room-feature-list {
@@ -543,6 +545,7 @@
 .single-tf_hotel .tf-single-template__one .tf-rooms-sections .tf-rooms .tf-availability-table > tbody tr td .tf-features-infos .tf-room-type h3 {
   font-size: 1.25rem;
   line-height: normal;
+  color: var(--tf-text-heading);
 }
 
 .single-tf_hotel .tf-single-template__one .tf-rooms-sections .tf-rooms .tf-availability-table > tbody tr td .tf-features-infos .tf-room-type h3 a {
@@ -726,6 +729,7 @@
   margin: 0;
   text-transform: capitalize;
   font-size: 1.375rem;
+  color: var(--tf-text-heading);
 }
 
 .single-tf_hotel .tf-single-template__legacy .nearby-container ul {
@@ -866,6 +870,7 @@
 
 .single-tf_hotel .tf-single-template__legacy .tf-container h2 {
   margin-top: 0px;
+  color: var(--tf-text-heading);
 }
 
 .single-tf_hotel .tf-single-template__legacy .tf-hotel-facilities-section .active {
@@ -1093,6 +1098,7 @@
 
 .single-tf_hotel .tf-single-template__one .tf-review-wrapper .no-review h4 {
   font-size: 1.25rem;
+  color: var(--tf-text-heading);
 }
 
 .single-tf_hotel .tf-single-template__one .tf-review-wrapper .tf-review-data.tf-box {

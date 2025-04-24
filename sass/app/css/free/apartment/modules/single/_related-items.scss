@@ -78,15 +78,20 @@
                     }
             
                     .tf-related-apartment-content {
-                        a {
-                            text-decoration: none;
-                        }
-            
                         h3 {
                             font-size: 1.125rem;
                             color: $color-heading;
                             margin: 0;
                         }
+                        a {
+                            text-decoration: none;
+                            color: inherit;
+                            &:hover{
+                                color: $color-primary;
+                            }
+                        }
+            
+                       
             
                         span {
                             font-size: 0.875rem;

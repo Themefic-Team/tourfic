@@ -123,6 +123,10 @@
   gap: 8px;
 }
 
+.single-tf_apartment .tf-single-template__legacy .tf-apartment-title .tf-title-right .tf-wishlist-button:hover {
+  color: var(--tf-primary);
+}
+
 .single-tf_apartment .tf-single-template__legacy .tf-apartment-title .tf-title-right .tf-wishlist-button i {
   font-size: 1.5rem;
 }
@@ -1693,14 +1697,19 @@
   transform: scale(1.1);
 }
 
-.single-tf_apartment .tf-single-template__legacy .tf-related-apartment .tf-apartment-item .tf-related-apartment-content a {
-  text-decoration: none;
-}
-
 .single-tf_apartment .tf-single-template__legacy .tf-related-apartment .tf-apartment-item .tf-related-apartment-content h3 {
   font-size: 1.125rem;
   color: var(--tf-text-heading);
   margin: 0;
+}
+
+.single-tf_apartment .tf-single-template__legacy .tf-related-apartment .tf-apartment-item .tf-related-apartment-content a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.single-tf_apartment .tf-single-template__legacy .tf-related-apartment .tf-apartment-item .tf-related-apartment-content a:hover {
+  color: var(--tf-primary);
 }
 
 .single-tf_apartment .tf-single-template__legacy .tf-related-apartment .tf-apartment-item .tf-related-apartment-content span {
@@ -2215,6 +2224,7 @@
 .single-tf_apartment .tf-single-template__legacy .apartment-question .tf-question-left .default-enquiry-title-section h2 {
   margin-bottom: 0;
   font-size: 1.25rem;
+  color: var(--tf-text-heading);
 }
 
 .single-tf_apartment .tf-single-template__legacy .apartment-question .tf-question-left h4 {

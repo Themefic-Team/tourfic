@@ -2410,5 +2410,12 @@
   background: var(--tf-primary);
 }
 
+.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget a,
+.tax-carrental_location .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget a,
+.tax-carrental_brand .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget a,
+.page-template-tf-search .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf_widget a {
+  color: var(--tf-primary);
+}
+
 
 /*# sourceMappingURL=tourfic-carrentals.css.map*/

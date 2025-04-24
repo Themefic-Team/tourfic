@@ -5,6 +5,7 @@
                 .tf-travel-itinerary-content {
                     h2 {
                         margin-bottom: 30px;
+                        color: $color-heading;
                     }
                 }
                 #tf-accordion-wrapper {
@@ -241,6 +242,7 @@
                         font-size: 1.125rem;
                         line-height: 1.5;
                         margin-bottom: 0;
+                        color: $color-heading;
                     }
                     
                     &.active{

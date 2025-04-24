@@ -42,6 +42,7 @@
                     margin-left: 10px;
                     font-size: 1.25rem;
                     text-decoration: none;
+                    color: $color-primary;
                     @media #{$max768}{
                         display: none;
                     }
@@ -414,6 +415,7 @@
                                 margin: 0;
                                 padding-right: 2px;
                                 font-size: 1.5rem;
+                                color: $color-heading;
                                 @media #{$max768} {
                                     font-size: 1.25rem;
                                 }
@@ -510,9 +512,10 @@
         padding-left: 20px;
         padding-right: 20px;
     }
-    h4{
+    h4,h2{
         font-size: 1.25rem;
         font-weight: 500;
+        color: $color-heading;
     }
     .al-range-slider__track {
         background: $color-brand-lite;
@@ -672,6 +675,9 @@
     a.see-more span {
         margin-left: 3px;
         vertical-align: middle;
+    }
+    a{
+        color: $color-primary;
     }
 }
 

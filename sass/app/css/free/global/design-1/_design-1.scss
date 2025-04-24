@@ -15,6 +15,7 @@
             margin-bottom: 15px;
             font-size: 1.875rem;
             line-height: 1.5;
+            color: $color-heading;
         }
     }
 }
@@ -456,6 +457,7 @@
                     .tf-review-author-name{
                         h3{
                             font-size: 1.188rem;
+                            color: $color-heading;
                         }
                     }
                     .tf-review-message{
@@ -557,6 +559,7 @@
             .tf-booking-form-inner{
                 h3{
                     font-size: 1.5rem;
+                    color: $color-heading;
                 }
                 .tf-field-group{
                     #check-in-out-date {
@@ -599,6 +602,7 @@
             }
             h3{
                 font-size: 1.5rem;
+                color: $color-heading;
             }
             p{
                 margin-top: 5px;
@@ -669,6 +673,7 @@
                     line-height: 1.5;
                     margin-bottom: 0;
                     font-size: 1.25rem;
+                    color: $color-heading;
                 }
             }
         }
@@ -1235,10 +1240,13 @@
                             display: -webkit-box;
                             -webkit-line-clamp: 2;
                             -webkit-box-orient: vertical;
-
+                            color: $color-heading;
                             a{
-                                color: $color-heading;
+                                color: inherit;
                                 text-decoration: none;
+                                &:hover{
+                                    color: $color-primary;
+                                }
                             }
                         }
                     }

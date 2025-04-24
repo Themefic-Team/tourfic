@@ -2577,6 +2577,7 @@
                     justify-content: space-between;
                     span{
                         display: block;
+                        color: $color-text;
                         &:last-child{
                             text-align: right;
                         }
@@ -2615,6 +2616,7 @@
         .tf-single-widgets h2 {
             margin-bottom: 0px;
             font-weight: 700;
+            font-size: 1.875rem;
             @media #{$max1024}{
                 font-size: 1.25rem;
             }
