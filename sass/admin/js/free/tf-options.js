@@ -529,7 +529,7 @@
                 }
             })
 
-        });
+            });
 
         $(document).find("#tf-settings-header-search-filed").on("keyup", debounce(
             function () {

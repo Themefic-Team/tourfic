@@ -295,6 +295,8 @@
                     } else {
                         alert_popup.success(obj.message)
 
+                        alert_popup.success(obj.message)
+
                         form[0].reset();
                         form.find('input').removeClass('error-input');
                         form.find('select').removeClass('error-input');
@@ -549,6 +551,8 @@
                             }
                         }
                     } else {
+                        alert_popup.success(obj.message)
+
                         alert_popup.success(obj.message)
 
                         form[0].reset();
