@@ -396,6 +396,7 @@
                         left: 16px;
                         @include flexbox();
                         @include flex-direction(column);
+                        @include align-items(flex-start);
                         gap: 8px;
     
                         .tf-tag-item {    
@@ -405,6 +406,7 @@
                             padding: 6px 16px;
                             border-radius: 32px;
                             background-color: $color-primary;
+                            text-align: center;
                         }
                     }
                 }
@@ -544,6 +546,9 @@
                                 font-size: 1rem;
                                 font-weight: 500;
                                 color: $color-heading;
+                            }
+                            ins{
+                                background-color: transparent;
                             }
                         }
                     }

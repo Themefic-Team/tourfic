@@ -51,6 +51,8 @@
                     margin-left: 10px;
                     font-size: 1.25rem;
                     text-decoration: none;
+                    justify-content: center;
+                    align-items: center;
                 }
             
                 .tf-archive-ordering #tf-orderby{
@@ -222,6 +224,7 @@
     }
 }
 .single-tour-wrap{
+    margin: 16px 0;
     transition: all 0.3s ease-out;
     * {
         transition: all 0.3s ease-out;
@@ -230,6 +233,10 @@
         margin-bottom: 0px;
     }
 
+    &:first-child {
+        margin-top: 0;
+    }
+    
     .tf-map-link{
         i{
             margin-right: 4px;
@@ -245,7 +252,6 @@
         width: 100%;
         min-height: 149px;
         padding: 20px;
-        margin: 16px 0;
         border: 1px solid $color-border-lite;
         background: $color-filling-fg;
         border-radius: 4px;
@@ -396,11 +402,17 @@
                     font-weight: bold;
                     margin-left: 5px;
                 }
+                ins{
+                    background-color: transparent;
+                }
             }
             .tf-tour-price {
                 .amount {
                     font-weight: bold;
                     margin-left: 5px;
+                }
+                ins{
+                    background-color: transparent;
                 }
             }
             .tf_property_block_main_row {
@@ -419,7 +431,7 @@
                     flex-grow: 1;
                     .tf-hotel__title-wrap {
                         margin-bottom: 4px;
-                        .tourfic_hotel-title {
+                        .tourfic_hotel-title a{
                             display: inline-block;
                             margin: 0;
                             padding-right: 2px;
@@ -484,11 +496,6 @@
         .single-tour-inner {
             background: $color-filling-fg;
             border-color: $color-border-lite;
-        }
-    }
-    &:first-child {
-        .single-tour-inner {
-            margin-top: 0;
         }
     }
 }

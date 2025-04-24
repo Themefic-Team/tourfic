@@ -2642,6 +2642,8 @@ class Tour {
 		//elementor settings
 		$show_image = isset($settings['show_image']) ? $settings['show_image'] : 'yes';
 		$featured_badge = isset($settings['featured_badge']) ? $settings['featured_badge'] : 'yes';
+		$discount_tag = isset($settings['discount_tag']) ? $settings['discount_tag'] : 'yes';
+		$promotional_tags = isset($settings['promotional_tags']) ? $settings['promotional_tags'] : 'yes';
 		$gallery_switch = isset($settings['gallery']) ? $settings['gallery'] : 'yes';
 		$show_title = isset($settings['show_title']) ? $settings['show_title'] : 'yes';
 		$title_length = isset($settings['title_length']) ? absint($settings['title_length']) : 55;
@@ -2707,7 +2709,7 @@ class Tour {
                 <div class="tf-item-featured">
                     <div class="tf-tag-items">
                         <div class="tf-features-box tf-flex">
-							<?php if ( ! empty( $tf_discount_type ) && $tf_discount_type != "none" && ! empty( $tf_discount_amount ) ) { ?>
+							<?php if ( $discount_tag == 'yes' && ! empty( $tf_discount_type ) && $tf_discount_type != "none" && ! empty( $tf_discount_amount ) ) { ?>
                                 <div class="tf-discount"><?php echo $tf_discount_type == "percent" ? esc_attr( $tf_discount_amount ) . "%" : wp_kses_post( wc_price( $tf_discount_amount ) ); ?><?php esc_html_e( "Off", "tourfic" ); ?></div>
 							<?php } ?>
 
@@ -2716,7 +2718,7 @@ class Tour {
 							<?php endif; ?>
                         </div>
 						<?php
-						if ( sizeof( $tours_multiple_tags ) > 0 ) {
+						if ( $promotional_tags == 'yes' && sizeof( $tours_multiple_tags ) > 0 ) {
 							foreach ( $tours_multiple_tags as $tag ) {
 								$tour_tag_name        = ! empty( $tag['tour-tag-title'] ) ? esc_html( $tag['tour-tag-title'] ) : '';
 								$tag_background_color = ! empty( $tag["tour-tag-color-settings"]["background"] ) ? $tag["tour-tag-color-settings"]["background"] : "#003162";
@@ -2857,7 +2859,7 @@ class Tour {
                             <span class="tf-available-labels-featured"><?php echo esc_html( $featured_badge_text ); ?></span>
 						<?php endif; ?>
 						<?php
-						if ( sizeof( $tours_multiple_tags ) > 0 ) {
+						if ( $promotional_tags == 'yes' && sizeof( $tours_multiple_tags ) > 0 ) {
 							foreach ( $tours_multiple_tags as $tag ) {
 								$tour_tag_name        = ! empty( $tag['tour-tag-title'] ) ? esc_html( $tag['tour-tag-title'] ) : '';
 								$tag_background_color = ! empty( $tag["tour-tag-color-settings"]["background"] ) ? $tag["tour-tag-color-settings"]["background"] : "#003162";
@@ -2886,7 +2888,7 @@ class Tour {
 							<!-- Title & Location -->
                             <div class="tf-section-title-and-location">
 								<!-- Title -->
-								 <?php if( $show_title == 'yes' ): ?>
+								<?php if( $show_title == 'yes' ): ?>
                                 <h2 class="tf-section-title"><a href="<?php echo esc_url( get_the_permalink() ); ?>"><?php echo esc_html( Helper::tourfic_character_limit_callback( get_the_title(), $title_length ) ); ?></a></h2>
 								<?php endif; ?>
 
@@ -2900,15 +2902,16 @@ class Tour {
                             </div>
 
 							<!-- Mobile Price -->
-							<?php if($show_price == 'yes') : ?>
                             <div class="tf-mobile tf-pricing-info">
-								<?php if ( ! empty( $tf_discount_type ) && $tf_discount_type != "none" && ! empty( $tf_discount_amount ) ) { ?>
+								<?php if ( $discount_tag == 'yes' && ! empty( $tf_discount_type ) && $tf_discount_type != "none" && ! empty( $tf_discount_amount ) ) { ?>
                                     <div class="tf-available-room-off">
 										<span>
 											<?php echo $tf_discount_type == "percent" ? esc_html( $tf_discount_amount . "%" ) : wp_kses_post( wc_price( $tf_discount_amount ) ); ?><?php esc_html_e( "Off", "tourfic" ); ?>
 										</span>
                                     </div>
 								<?php } ?>
+
+								<?php if($show_price == 'yes') : ?>
                                 <div class="tf-available-room-price">
 									<span class="tf-price-from">
 									<?php
@@ -2936,8 +2939,8 @@ class Tour {
 									?>
 									</span>
                                 </div>
+								<?php endif; ?>
                             </div>
-							<?php endif; ?>
                         </div>
                         <ul>
 							<?php if($tour_infos == 'yes') : ?>
@@ -2987,16 +2990,17 @@ class Tour {
 
                     </div>
                     <div class="tf-available-room-content-right">
-						<!-- Price -->
-						<?php if($show_price == 'yes') : ?>
                         <div class="tf-card-pricing-heading">
-							<?php if ( ! empty( $tf_discount_type ) && $tf_discount_type != "none" && ! empty( $tf_discount_amount ) ) { ?>
+							<?php if ( $discount_tag == 'yes' && ! empty( $tf_discount_type ) && $tf_discount_type != "none" && ! empty( $tf_discount_amount ) ) { ?>
                                 <div class="tf-available-room-off">
 									<span>
 										<?php echo $tf_discount_type == "percent" ? esc_attr( $tf_discount_amount ) . "%" : wp_kses_post( wc_price( $tf_discount_amount ) ); ?><?php esc_html_e( "Off", "tourfic" ); ?>
 									</span>
                                 </div>
 							<?php } ?>
+
+							<!-- Price -->
+							<?php if($show_price == 'yes') : ?>
                             <div class="tf-available-room-price">
 								<span class="tf-price-from">
 								<?php
@@ -3026,8 +3030,8 @@ class Tour {
 								?>
 								</span>
                             </div>
+							<?php endif; ?>
                         </div>
-						<?php endif; ?>
 
 						<!-- View Details -->
 						<?php if($show_view_details == 'yes') : ?>
@@ -3057,14 +3061,28 @@ class Tour {
                     </a>
 
 					<div class="tf-tag-items">
-						<?php if ( ! empty( $tf_discount_type ) && $tf_discount_type != "none" && ! empty( $tf_discount_amount ) ) {?>
-							<div class="tf-tag-item">
+						<!-- Discount -->
+						<?php if ( $discount_tag == 'yes' && ! empty( $tf_discount_type ) && $tf_discount_type != "none" && ! empty( $tf_discount_amount ) ) {?>
+							<div class="tf-tag-item tf-tag-item-discount">
 								<?php echo $tf_discount_type == "percent" ? esc_attr( $tf_discount_amount ) . "%" : wp_kses_post( wc_price( $tf_discount_amount ) ); ?><?php esc_html_e( " Off", "tourfic" ); ?>
 							</div>
 						<?php } ?>
 						<?php if ( $featured_badge == 'yes' && $featured ): ?>
-							<div class="tf-tag-item"><?php echo esc_html( $featured_badge_text ); ?></div>
+							<div class="tf-tag-item tf-tag-item-featured"><?php echo esc_html( $featured_badge_text ); ?></div>
 						<?php endif; ?>
+						<?php
+						if ( $promotional_tags == 'yes' && sizeof( $tours_multiple_tags ) > 0 ) {
+							foreach ( $tours_multiple_tags as $tag ) {
+								$tour_tag_name        = ! empty( $tag['tour-tag-title'] ) ? esc_html( $tag['tour-tag-title'] ) : '';
+								$tag_background_color = ! empty( $tag["tour-tag-color-settings"]["background"] ) ? $tag["tour-tag-color-settings"]["background"] : "#003162";
+								$tag_font_color       = ! empty( $tag["tour-tag-color-settings"]["font"] ) ? $tag["tour-tag-color-settings"]["font"] : "#fff";
+
+								if ( ! empty( $tour_tag_name ) ) {
+									echo '<span class="tf-tag-item tf-multiple-tag" style="color: ' . esc_attr( $tag_font_color ) . '; background-color: ' . esc_attr( $tag_background_color ) . ' ">' . esc_html( $tour_tag_name ) . '</span>';
+								}
+							}
+						}
+						?>
 					</div>
                 </div>
 				<?php endif; ?>
@@ -3169,7 +3187,7 @@ class Tour {
                     <div class="tourfic-single-left">
                         <div class="default-tags-container">
 							<?php
-							if ( sizeof( $tours_multiple_tags ) > 0 ) {
+							if ( $promotional_tags == 'yes' && sizeof( $tours_multiple_tags ) > 0 ) {
 								foreach ( $tours_multiple_tags as $tag ) {
 									$hotel_tag_name       = ! empty( $tag['tour-tag-title'] ) ? esc_html( $tag['tour-tag-title'] ) : '';
 									$tag_background_color = ! empty( $tag["tour-tag-color-settings"]["background"] ) ? $tag["tour-tag-color-settings"]["background"] : "#003162";
@@ -3202,7 +3220,7 @@ class Tour {
 								<!-- Title -->
 								<?php if( $show_title == 'yes' ): ?>
                                 <div class="tf-hotel__title-wrap tf-tours-title-wrap">
-                                    <a href="<?php echo esc_url( $url ); ?>"><h3 class="tourfic_hotel-title"><?php echo esc_html( Helper::tourfic_character_limit_callback( get_the_title(), $title_length ) ); ?></h3></a>
+									<h3 class="tourfic_hotel-title"><a href="<?php echo esc_url( $url ); ?>"><?php echo esc_html( Helper::tourfic_character_limit_callback( get_the_title(), $title_length ) ); ?></a></h3>
                                 </div>
 								<?php endif; ?>
 
