@@ -13,6 +13,8 @@
         }
         .tf-section-title{
             margin-bottom: 15px;
+            font-size: 1.875rem;
+            line-height: 1.5;
         }
     }
 }
@@ -415,8 +417,6 @@
 
             //Tourfic review reply
             .tf-review-reply{
-                border-bottom: 1px solid $color-border-lite;
-                padding-bottom: 30px;
                 .tf-review-details{
                     .tf-review-ratings {
                         i {
@@ -554,11 +554,17 @@
         }
         // Booking Form
         .tf-booking-form{
-            .tf-field-group{
-                #check-in-out-date {
-                    width: 100%;
+            .tf-booking-form-inner{
+                h3{
+                    font-size: 1.5rem;
+                }
+                .tf-field-group{
+                    #check-in-out-date {
+                        width: 100%;
+                    }
                 }
             }
+           
             .tf-booking-person{
                 .tf-field{
                     align-items: center;
@@ -590,6 +596,9 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
+            }
+            h3{
+                font-size: 1.5rem;
             }
             p{
                 margin-top: 5px;
@@ -659,6 +668,7 @@
                 h4{
                     line-height: 1.5;
                     margin-bottom: 0;
+                    font-size: 1.25rem;
                 }
             }
         }

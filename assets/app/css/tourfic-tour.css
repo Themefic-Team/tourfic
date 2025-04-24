@@ -385,6 +385,7 @@
 
 .single-tf_tours .tf-single-template__legacy .description-section .tf-square-block-content .tf-single-square-block h4 {
   color: var(--tf-text-heading);
+  font-size: 1.25rem;
 }
 
 .single-tf_tours .tf-single-template__legacy .description-section .tf-square-block-content .tf-single-square-block img {
@@ -860,6 +861,11 @@
   }
 }
 
+.single-tf_tours .tf-single-template__legacy .tf-inc-exc-wrapper .tf-include-section h2 {
+  font-size: 1.25rem;
+  color: #ffffff;
+}
+
 .single-tf_tours .tf-single-template__legacy .tf-inc-exc-wrapper .tf-exclude-section {
   background: var(--tf-text-heading);
   background-image: linear-gradient(to right, rgba(253, 97, 67, 0), #003162);
@@ -874,6 +880,11 @@
   .single-tf_tours .tf-single-template__legacy .tf-inc-exc-wrapper .tf-exclude-section {
     padding: 15px 20px 20px;
   }
+}
+
+.single-tf_tours .tf-single-template__legacy .tf-inc-exc-wrapper .tf-exclude-section h2 {
+  font-size: 1.25rem;
+  color: #ffffff;
 }
 
 .single-tf_tours .tf-single-template__legacy .tf-inc-exc-wrapper .tf-include-section.custom-inc-icon ul li:before {
@@ -1699,6 +1710,16 @@
 @media only screen and (max-width: 768px) {
   .single-tf_tours .tf-single-template__one .upcomming-tours {
     margin-top: 30px;
+  }
+}
+
+.single-tf_tours .tf-single-template__one .upcomming-tours .section-title h2 {
+  font-size: 1.875rem;
+}
+
+@media only screen and (max-width: 1024px) {
+  .single-tf_tours .tf-single-template__one .upcomming-tours .section-title h2 {
+    font-size: 1.5rem;
   }
 }
 
@@ -2670,6 +2691,10 @@ div#tf-contact-info {
   border-radius: 5px;
 }
 
+.single-tf_tours .tf-single-template__one .tf-tour-details-right .tf-tour-booking-advantages .tf-head-title h3 {
+  font-size: 1.5rem;
+}
+
 .single-tf_tours .tf-single-template__one .tf-tour-details-right .tf-tour-booking-advantages ul {
   margin: 0px;
 }
@@ -2725,8 +2750,16 @@ div#tf-contact-info {
   margin-right: 8px;
 }
 
-.single-tf_tours .tf-single-template__legacy .review-section .reviews {
-  text-align: center;
+@media only screen and (max-width: 768px) {
+  .single-tf_tours .tf-single-template__legacy .review-section .reviews .section-heading {
+    text-align: center;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .single-tf_tours .tf-single-template__legacy .review-section .reviews .no-review {
+    text-align: center;
+  }
 }
 
 .post-type-archive-tf_tours .tf-archive-template__three .tf-search-fields .tf-search-field .tf-search-input {

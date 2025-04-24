@@ -554,6 +554,10 @@
                         h2{
                             font-weight: 700;
                             margin-bottom: 24px;
+                            font-size: 1.875rem;
+                            @media #{$max1024}{
+                                font-size: 1.5rem;
+                            }
                         }
                         ul {
                             margin: 0;
@@ -569,6 +573,7 @@
                             }
                             li {
                                 display: flex;
+                                align-items: center;
                                 @media #{$max1024}{
                                     font-size: 1rem;
                                 }
@@ -2314,6 +2319,7 @@
                                 color: $color-white;
                                 margin-bottom: 16px;
                                 line-height: initial;
+                                font-size: 2.375rem;
                                 @media #{$max1024}{
                                     font-size: 2rem;
                                 }
@@ -2594,7 +2600,7 @@
             }
         }
         .tf-single-widgets h3{
-            font-size: 1.5em;
+            font-size: 1.875rem;
             margin-bottom: 0;
             @media #{$max1024}{
                 font-size: 1.25rem;
@@ -3242,6 +3248,7 @@
                                 h2{
                                     font-weight: 700;
                                     margin-bottom: 20px;
+                                    font-size: 1.875rem;
                                     @media #{$max1024}{
                                         font-size: 1.5rem;
                                     }
@@ -3889,6 +3896,7 @@
                             .tf-section-title-and-location {
                                 .tf-section-title {
                                     margin: 0 0 10px 0;
+                                    font-size: 1.875rem;
                                     @media only screen and (max-width: 1200px){
                                         font-size: 1.5rem;
                                     }
@@ -3896,17 +3904,21 @@
                                 .tf-title-location {
                                     display: inline-flex;
                                     margin-top: 6px;
+                                    align-items: center;
                                     @media #{$max1024}{
                                         margin-bottom: 36px;
                                         font-size: 0.875rem;
                                     }
-                                    i{
-                                        margin-right: 8px;
-                                        font-size: 1.25rem;
-                                        @media #{$max1024}{
-                                            font-size: 0.875rem;
+                                    .location-icon{
+                                        i{
+                                            margin-right: 8px;
+                                            font-size: 1.25rem;
+                                            @media #{$max1024}{
+                                                font-size: 0.875rem;
+                                            }
                                         }
                                     }
+                                    
                                 }
                             }
 
@@ -3993,6 +4005,7 @@
                     margin: 0;
                     padding: 0;
                     font-weight: 700;
+                    font-size: 1.875rem;
                     @media #{$max1024}{
                         font-size: 1.25rem;
                     }

@@ -1091,8 +1091,11 @@
   background: var(--tf-brand-lite);
 }
 
+.single-tf_hotel .tf-single-template__one .tf-review-wrapper .no-review h4 {
+  font-size: 1.25rem;
+}
+
 .single-tf_hotel .tf-single-template__one .tf-review-wrapper .tf-review-data.tf-box {
-  background: transparent;
   border-radius: 0px;
   flex-basis: 20%;
   box-shadow: none;
@@ -1104,24 +1107,7 @@
 }
 
 .single-tf_hotel .tf-single-template__one .tf-review-wrapper .tf-review-data.tf-box .tf-review-data {
-  flex-basis: 30%;
-  margin-right: 30px;
   padding: 30px;
-}
-
-@media only screen and (max-width: 1024px) {
-  .single-tf_hotel .tf-single-template__one .tf-review-wrapper .tf-review-data.tf-box .tf-review-data {
-    flex-basis: 28%;
-    margin-right: 28px;
-  }
-}
-
-@media only screen and (max-width: 768px) {
-  .single-tf_hotel .tf-single-template__one .tf-review-wrapper .tf-review-data.tf-box .tf-review-data {
-    flex-basis: 100%;
-    margin-right: 0px;
-    margin-bottom: 20px;
-  }
 }
 
 .single-tf_hotel .tf-single-template__one .tf-review-wrapper .tf-review-data.tf-box .tf-list {
@@ -1164,14 +1150,7 @@
 }
 
 .single-tf_hotel .tf-single-template__one .tf-review-wrapper .tf-review-data.tf-box .tf-review-data-features {
-  flex-basis: 68%;
   padding: 30px;
-}
-
-@media only screen and (max-width: 768px) {
-  .single-tf_hotel .tf-single-template__one .tf-review-wrapper .tf-review-data.tf-box .tf-review-data-features {
-    flex-basis: 100%;
-  }
 }
 
 .single-tf_hotel .tf-single-template__one .tf-review-wrapper .tf-review-data.tf-box .tf-review-data-features .tf-percent-progress {
@@ -1228,12 +1207,21 @@
   margin-bottom: 0;
 }
 
-.single-tf_hotel .tf-single-template__legacy .review-section .reviews .section-heading {
-  text-align: center;
+.single-tf_hotel .tf-single-template__one .tf-review-wrapper .tf-review-reply {
+  border-bottom: 1px solid var(--tf-border-lite);
+  padding-bottom: 50px;
 }
 
-.single-tf_hotel .tf-single-template__legacy .review-section .reviews .no-review {
-  text-align: center;
+@media only screen and (max-width: 768px) {
+  .single-tf_hotel .tf-single-template__legacy .review-section .reviews .section-heading {
+    text-align: center;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .single-tf_hotel .tf-single-template__legacy .review-section .reviews .no-review {
+    text-align: center;
+  }
 }
 
 .single-tf_hotel .tf-single-template__legacy .popupmap-for-mobile {

@@ -3,7 +3,16 @@
         &__legacy{
             .review-section{
                 .reviews{
-                    text-align: center;
+                    .section-heading{
+                        @media #{$max768}{
+                            text-align: center;
+                        }
+                    }
+                    .no-review{
+                        @media #{$max768}{
+                            text-align: center;
+                        }
+                    }
                 }
             }
         }

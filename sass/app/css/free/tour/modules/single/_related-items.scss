@@ -59,6 +59,14 @@
                 @media #{$max768}{
                     margin-top: 30px;
                 }
+                .section-title{
+                    h2{
+                        font-size: 1.875rem;
+                        @media #{$max1024}{
+                            font-size: 1.5rem;
+                        }
+                    }
+                }
                 .tf-upcomming-tours-list-outter{
                     @media #{$max1024}{
                         .tf-post-box-lists{

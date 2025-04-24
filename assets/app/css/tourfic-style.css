@@ -606,152 +606,116 @@ Without Payment Popup
 /*
     Carrental archive listing
 */
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result,
-.tax-carrental_location .tf-archive-template__one .tf-car-archive-result,
-.tax-carrental_brand .tf-archive-template__one .tf-car-archive-result,
-.page-template-tf-search .tf-archive-template__one .tf-car-archive-result,
-#tft-site-main-body .tf-archive-template__one .tf-car-archive-result {
+.post-type-archive-tf_carrental .tf-car-archive-result,
+.tax-carrental_location .tf-car-archive-result,
+.tax-carrental_brand .tf-car-archive-result,
+.page-template-tf-search .tf-car-archive-result,
+body .tf-car-archive-result {
   width: calc(100% - 390px);
 }
 
 @media only screen and (max-width: 1024px) {
-  .post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result,
-  .tax-carrental_location .tf-archive-template__one .tf-car-archive-result,
-  .tax-carrental_brand .tf-archive-template__one .tf-car-archive-result,
-  .page-template-tf-search .tf-archive-template__one .tf-car-archive-result,
-  #tft-site-main-body .tf-archive-template__one .tf-car-archive-result {
+  .post-type-archive-tf_carrental .tf-car-archive-result,
+  .tax-carrental_location .tf-car-archive-result,
+  .tax-carrental_brand .tf-car-archive-result,
+  .page-template-tf-search .tf-car-archive-result,
+  body .tf-car-archive-result {
     width: calc(100% - 322px);
   }
 }
 
 @media only screen and (max-width: 768px) {
-  .post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result,
-  .tax-carrental_location .tf-archive-template__one .tf-car-archive-result,
-  .tax-carrental_brand .tf-archive-template__one .tf-car-archive-result,
-  .page-template-tf-search .tf-archive-template__one .tf-car-archive-result,
-  #tft-site-main-body .tf-archive-template__one .tf-car-archive-result {
+  .post-type-archive-tf_carrental .tf-car-archive-result,
+  .tax-carrental_location .tf-car-archive-result,
+  .tax-carrental_brand .tf-car-archive-result,
+  .page-template-tf-search .tf-car-archive-result,
+  body .tf-car-archive-result {
     width: 100%;
   }
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result.tf-car-lists-widgets,
-.tax-carrental_location .tf-archive-template__one .tf-car-archive-result.tf-car-lists-widgets,
-.tax-carrental_brand .tf-archive-template__one .tf-car-archive-result.tf-car-lists-widgets,
-.page-template-tf-search .tf-archive-template__one .tf-car-archive-result.tf-car-lists-widgets,
-#tft-site-main-body .tf-archive-template__one .tf-car-archive-result.tf-car-lists-widgets {
-  width: 100%;
-}
-
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result.tf-car-lists-widgets .tf-single-car-view,
-.tax-carrental_location .tf-archive-template__one .tf-car-archive-result.tf-car-lists-widgets .tf-single-car-view,
-.tax-carrental_brand .tf-archive-template__one .tf-car-archive-result.tf-car-lists-widgets .tf-single-car-view,
-.page-template-tf-search .tf-archive-template__one .tf-car-archive-result.tf-car-lists-widgets .tf-single-car-view,
-#tft-site-main-body .tf-archive-template__one .tf-car-archive-result.tf-car-lists-widgets .tf-single-car-view {
-  width: calc(33% - 18px);
-}
-
-@media only screen and (max-width: 1199.98px) {
-  .post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result.tf-car-lists-widgets .tf-single-car-view,
-  .tax-carrental_location .tf-archive-template__one .tf-car-archive-result.tf-car-lists-widgets .tf-single-car-view,
-  .tax-carrental_brand .tf-archive-template__one .tf-car-archive-result.tf-car-lists-widgets .tf-single-car-view,
-  .page-template-tf-search .tf-archive-template__one .tf-car-archive-result.tf-car-lists-widgets .tf-single-car-view,
-  #tft-site-main-body .tf-archive-template__one .tf-car-archive-result.tf-car-lists-widgets .tf-single-car-view {
-    width: calc(50% - 16px);
-  }
-}
-
-@media only screen and (max-width: 768px) {
-  .post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result.tf-car-lists-widgets .tf-single-car-view,
-  .tax-carrental_location .tf-archive-template__one .tf-car-archive-result.tf-car-lists-widgets .tf-single-car-view,
-  .tax-carrental_brand .tf-archive-template__one .tf-car-archive-result.tf-car-lists-widgets .tf-single-car-view,
-  .page-template-tf-search .tf-archive-template__one .tf-car-archive-result.tf-car-lists-widgets .tf-single-car-view,
-  #tft-site-main-body .tf-archive-template__one .tf-car-archive-result.tf-car-lists-widgets .tf-single-car-view {
-    width: 100%;
-  }
-}
-
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-heading,
-.tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-heading,
-.tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-heading,
-.page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-heading,
-#tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-heading {
+.post-type-archive-tf_carrental .tf-car-archive-result .tf-heading,
+.tax-carrental_location .tf-car-archive-result .tf-heading,
+.tax-carrental_brand .tf-car-archive-result .tf-heading,
+.page-template-tf-search .tf-car-archive-result .tf-heading,
+body .tf-car-archive-result .tf-heading {
   text-align: center;
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-heading h2,
-.tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-heading h2,
-.tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-heading h2,
-.page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-heading h2,
-#tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-heading h2 {
+.post-type-archive-tf_carrental .tf-car-archive-result .tf-heading h2,
+.tax-carrental_location .tf-car-archive-result .tf-heading h2,
+.tax-carrental_brand .tf-car-archive-result .tf-heading h2,
+.page-template-tf-search .tf-car-archive-result .tf-heading h2,
+body .tf-car-archive-result .tf-heading h2 {
   color: var(--tf-text-heading);
   font-size: 2.375rem;
   font-weight: 400;
   margin-bottom: 16px;
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-heading p,
-.tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-heading p,
-.tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-heading p,
-.page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-heading p,
-#tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-heading p {
+.post-type-archive-tf_carrental .tf-car-archive-result .tf-heading p,
+.tax-carrental_location .tf-car-archive-result .tf-heading p,
+.tax-carrental_brand .tf-car-archive-result .tf-heading p,
+.page-template-tf-search .tf-car-archive-result .tf-heading p,
+body .tf-car-archive-result .tf-heading p {
   color: var(--tf-text-paragraph);
   font-size: 1rem;
   font-weight: 400;
   margin-bottom: 56px;
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result,
-.tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result,
-.tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result,
-.page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result,
-#tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result {
+.post-type-archive-tf_carrental .tf-car-archive-result .tf-car-result,
+.tax-carrental_location .tf-car-archive-result .tf-car-result,
+.tax-carrental_brand .tf-car-archive-result .tf-car-result,
+.page-template-tf-search .tf-car-archive-result .tf-car-result,
+body .tf-car-archive-result .tf-car-result {
   flex-wrap: wrap;
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view,
-.tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view,
-.tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view,
-.page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view,
-#tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view {
+.post-type-archive-tf_carrental .tf-car-archive-result .tf-car-result .tf-single-car-view,
+.tax-carrental_location .tf-car-archive-result .tf-car-result .tf-single-car-view,
+.tax-carrental_brand .tf-car-archive-result .tf-car-result .tf-single-car-view,
+.page-template-tf-search .tf-car-archive-result .tf-car-result .tf-single-car-view,
+body .tf-car-archive-result .tf-car-result .tf-single-car-view {
   border-radius: 16px;
   background: var(--tf-filling-foreground);
   width: calc(50% - 16px);
 }
 
 @media only screen and (max-width: 1024px) {
-  .post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view,
-  .tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view,
-  .tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view,
-  .page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view,
-  #tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view {
+  .post-type-archive-tf_carrental .tf-car-archive-result .tf-car-result .tf-single-car-view,
+  .tax-carrental_location .tf-car-archive-result .tf-car-result .tf-single-car-view,
+  .tax-carrental_brand .tf-car-archive-result .tf-car-result .tf-single-car-view,
+  .page-template-tf-search .tf-car-archive-result .tf-car-result .tf-single-car-view,
+  body .tf-car-archive-result .tf-car-result .tf-single-car-view {
     width: 100%;
   }
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image,
-.tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image,
-.tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image,
-.page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image,
-#tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image {
+.post-type-archive-tf_carrental .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image,
+.tax-carrental_location .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image,
+.tax-carrental_brand .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image,
+.page-template-tf-search .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image,
+body .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image {
   position: relative;
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image img,
-.tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image img,
-.tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image img,
-.page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image img,
-#tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image img {
+.post-type-archive-tf_carrental .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image img,
+.tax-carrental_location .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image img,
+.tax-carrental_brand .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image img,
+.page-template-tf-search .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image img,
+body .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image img {
   border-radius: 16px;
   height: 200px;
   width: 100%;
   object-fit: cover;
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos,
-.tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos,
-.tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos,
-.page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos,
-#tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos {
+.post-type-archive-tf_carrental .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos,
+.tax-carrental_location .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos,
+.tax-carrental_brand .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos,
+.page-template-tf-search .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos,
+body .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos {
   position: absolute;
   left: 0;
   top: 0;
@@ -762,11 +726,11 @@ Without Payment Popup
   gap: 8px;
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-reviews-box span,
-.tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-reviews-box span,
-.tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-reviews-box span,
-.page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-reviews-box span,
-#tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-reviews-box span {
+.post-type-archive-tf_carrental .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-reviews-box span,
+.tax-carrental_location .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-reviews-box span,
+.tax-carrental_brand .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-reviews-box span,
+.page-template-tf-search .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-reviews-box span,
+body .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-reviews-box span {
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.24);
   backdrop-filter: blur(32px);
@@ -777,37 +741,37 @@ Without Payment Popup
   font-weight: 400;
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-reviews-box span i,
-.tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-reviews-box span i,
-.tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-reviews-box span i,
-.page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-reviews-box span i,
-#tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-reviews-box span i {
+.post-type-archive-tf_carrental .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-reviews-box span i,
+.tax-carrental_location .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-reviews-box span i,
+.tax-carrental_brand .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-reviews-box span i,
+.page-template-tf-search .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-reviews-box span i,
+body .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-reviews-box span i {
   color: var(--tf-primary);
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box,
-.tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box,
-.tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box,
-.page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box,
-#tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box {
+.post-type-archive-tf_carrental .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box,
+.tax-carrental_location .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box,
+.tax-carrental_brand .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box,
+.page-template-tf-search .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box,
+body .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box {
   max-width: 155px;
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box ul,
-.tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box ul,
-.tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box ul,
-.page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box ul,
-#tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box ul {
+.post-type-archive-tf_carrental .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box ul,
+.tax-carrental_location .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box ul,
+.tax-carrental_brand .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box ul,
+.page-template-tf-search .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box ul,
+body .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box ul {
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box ul li,
-.tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box ul li,
-.tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box ul li,
-.page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box ul li,
-#tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box ul li {
+.post-type-archive-tf_carrental .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box ul li,
+.tax-carrental_location .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box ul li,
+.tax-carrental_brand .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box ul li,
+.page-template-tf-search .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box ul li,
+body .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box ul li {
   border-radius: 8px;
   background: var(--tf-primary);
   backdrop-filter: blur(32px);
@@ -818,46 +782,46 @@ Without Payment Popup
   margin-bottom: 8px;
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box ul li:last-child,
-.tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box ul li:last-child,
-.tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box ul li:last-child,
-.page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box ul li:last-child,
-#tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box ul li:last-child {
+.post-type-archive-tf_carrental .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box ul li:last-child,
+.tax-carrental_location .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box ul li:last-child,
+.tax-carrental_brand .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box ul li:last-child,
+.page-template-tf-search .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box ul li:last-child,
+body .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box ul li:last-child {
   margin-bottom: 0px;
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details,
-.tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details,
-.tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details,
-.page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details,
-#tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details {
+.post-type-archive-tf_carrental .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details,
+.tax-carrental_location .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details,
+.tax-carrental_brand .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details,
+.page-template-tf-search .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details,
+body .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details {
   padding: 24px 16px 16px 16px;
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details a,
-.tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details a,
-.tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details a,
-.page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details a,
-#tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details a {
+.post-type-archive-tf_carrental .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details a,
+.tax-carrental_location .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details a,
+.tax-carrental_brand .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details a,
+.page-template-tf-search .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details a,
+body .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details a {
   text-decoration: none;
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details a h3,
-.tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details a h3,
-.tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details a h3,
-.page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details a h3,
-#tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details a h3 {
+.post-type-archive-tf_carrental .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details a h3,
+.tax-carrental_location .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details a h3,
+.tax-carrental_brand .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details a h3,
+.page-template-tf-search .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details a h3,
+body .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details a h3 {
   color: var(--tf-text-heading);
   font-size: 1.313rem;
   font-weight: 700;
   margin-top: 0px;
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul,
-.tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul,
-.tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul,
-.page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul,
-#tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul {
+.post-type-archive-tf_carrental .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul,
+.tax-carrental_location .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul,
+.tax-carrental_brand .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul,
+.page-template-tf-search .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul,
+body .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul {
   list-style: none;
   margin-top: 0;
   margin-left: 0;
@@ -869,11 +833,11 @@ Without Payment Popup
   gap: 16px 8px;
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li,
-.tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li,
-.tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li,
-.page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li,
-#tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li {
+.post-type-archive-tf_carrental .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li,
+.tax-carrental_location .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li,
+.tax-carrental_brand .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li,
+.page-template-tf-search .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li,
+body .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li {
   color: var(--tf-text-paragraph);
   font-size: 0.938rem;
   font-weight: 400;
@@ -882,82 +846,82 @@ Without Payment Popup
 }
 
 @media only screen and (max-width: 1024px) {
-  .post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li,
-  .tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li,
-  .tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li,
-  .page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li,
-  #tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li {
+  .post-type-archive-tf_carrental .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li,
+  .tax-carrental_location .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li,
+  .tax-carrental_brand .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li,
+  .page-template-tf-search .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li,
+  body .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li {
     width: calc(50% - 16px);
   }
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li svg,
-.tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li svg,
-.tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li svg,
-.page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li svg,
-#tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li svg {
+.post-type-archive-tf_carrental .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li svg,
+.tax-carrental_location .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li svg,
+.tax-carrental_brand .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li svg,
+.page-template-tf-search .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li svg,
+body .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li svg {
   height: 20px;
   width: 20px;
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li svg path,
-.tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li svg path,
-.tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li svg path,
-.page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li svg path,
-#tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li svg path {
+.post-type-archive-tf_carrental .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li svg path,
+.tax-carrental_location .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li svg path,
+.tax-carrental_brand .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li svg path,
+.page-template-tf-search .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li svg path,
+body .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li svg path {
   stroke: var(--tf-text-paragraph);
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li p,
-.tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li p,
-.tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li p,
-.page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li p,
-#tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li p {
+.post-type-archive-tf_carrental .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li p,
+.tax-carrental_location .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li p,
+.tax-carrental_brand .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li p,
+.page-template-tf-search .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li p,
+body .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul li p {
   width: 100%;
   margin: 0;
   padding-left: 4px;
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn,
-.tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn,
-.tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn,
-.page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn,
-#tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn {
+.post-type-archive-tf_carrental .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn,
+.tax-carrental_location .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn,
+.tax-carrental_brand .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn,
+.page-template-tf-search .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn,
+body .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn {
   align-items: center;
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn .tf-price-info h3,
-.tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn .tf-price-info h3,
-.tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn .tf-price-info h3,
-.page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn .tf-price-info h3,
-#tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn .tf-price-info h3 {
+.post-type-archive-tf_carrental .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn .tf-price-info h3,
+.tax-carrental_location .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn .tf-price-info h3,
+.tax-carrental_brand .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn .tf-price-info h3,
+.page-template-tf-search .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn .tf-price-info h3,
+body .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn .tf-price-info h3 {
   color: var(--tf-text-heading);
   font-size: 1.75rem;
   font-weight: 600;
   margin: 0;
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn .tf-price-info h3 small,
-.tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn .tf-price-info h3 small,
-.tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn .tf-price-info h3 small,
-.page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn .tf-price-info h3 small,
-#tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn .tf-price-info h3 small {
+.post-type-archive-tf_carrental .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn .tf-price-info h3 small,
+.tax-carrental_location .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn .tf-price-info h3 small,
+.tax-carrental_brand .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn .tf-price-info h3 small,
+.page-template-tf-search .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn .tf-price-info h3 small,
+body .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn .tf-price-info h3 small {
   color: var(--tf-text-paragraph);
   font-size: 1rem;
   font-weight: 400;
   text-transform: capitalize;
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn button,
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn a.view-more,
-.tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn button,
-.tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn a.view-more,
-.tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn button,
-.tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn a.view-more,
-.page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn button,
-.page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn a.view-more,
-#tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn button,
-#tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn a.view-more {
+.post-type-archive-tf_carrental .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn button,
+.post-type-archive-tf_carrental .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn a.view-more,
+.tax-carrental_location .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn button,
+.tax-carrental_location .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn a.view-more,
+.tax-carrental_brand .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn button,
+.tax-carrental_brand .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn a.view-more,
+.page-template-tf-search .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn button,
+.page-template-tf-search .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn a.view-more,
+body .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn button,
+body .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn a.view-more {
   border-radius: 8px;
   border: 1px solid var(--tf-primary);
   padding: 12px 32px;
@@ -971,120 +935,120 @@ Without Payment Popup
 }
 
 @media only screen and (max-width: 575.98px) {
-  .post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn button,
-  .post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn a.view-more,
-  .tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn button,
-  .tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn a.view-more,
-  .tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn button,
-  .tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn a.view-more,
-  .page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn button,
-  .page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn a.view-more,
-  #tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn button,
-  #tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn a.view-more {
+  .post-type-archive-tf_carrental .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn button,
+  .post-type-archive-tf_carrental .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn a.view-more,
+  .tax-carrental_location .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn button,
+  .tax-carrental_location .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn a.view-more,
+  .tax-carrental_brand .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn button,
+  .tax-carrental_brand .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn a.view-more,
+  .page-template-tf-search .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn button,
+  .page-template-tf-search .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn a.view-more,
+  body .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn button,
+  body .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn a.view-more {
     margin-top: 15px;
   }
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn button:hover,
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn a.view-more:hover,
-.tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn button:hover,
-.tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn a.view-more:hover,
-.tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn button:hover,
-.tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn a.view-more:hover,
-.page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn button:hover,
-.page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn a.view-more:hover,
-#tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn button:hover,
-#tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn a.view-more:hover {
+.post-type-archive-tf_carrental .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn button:hover,
+.post-type-archive-tf_carrental .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn a.view-more:hover,
+.tax-carrental_location .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn button:hover,
+.tax-carrental_location .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn a.view-more:hover,
+.tax-carrental_brand .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn button:hover,
+.tax-carrental_brand .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn a.view-more:hover,
+.page-template-tf-search .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn button:hover,
+.page-template-tf-search .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn a.view-more:hover,
+body .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn button:hover,
+body .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn a.view-more:hover {
   border: 1px solid var(--tf-primary);
   background: var(--tf-primary);
   color: #ffffff;
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn .tf-car-booking-popup,
-.tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn .tf-car-booking-popup,
-.tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn .tf-car-booking-popup,
-.page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn .tf-car-booking-popup,
-#tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn .tf-car-booking-popup {
+.post-type-archive-tf_carrental .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn .tf-car-booking-popup,
+.tax-carrental_location .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn .tf-car-booking-popup,
+.tax-carrental_brand .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn .tf-car-booking-popup,
+.page-template-tf-search .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn .tf-car-booking-popup,
+body .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn .tf-car-booking-popup {
   display: none;
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view,
-.tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view,
-.tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view,
-.page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view,
-#tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view {
+.post-type-archive-tf_carrental .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view,
+.tax-carrental_location .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view,
+.tax-carrental_brand .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view,
+.page-template-tf-search .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view,
+body .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view {
   width: 100%;
   display: flex;
 }
 
 @media only screen and (max-width: 1024px) {
-  .post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view,
-  .tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view,
-  .tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view,
-  .page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view,
-  #tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view {
+  .post-type-archive-tf_carrental .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view,
+  .tax-carrental_location .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view,
+  .tax-carrental_brand .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view,
+  .page-template-tf-search .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view,
+  body .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view {
     display: flow-root;
   }
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image,
-.tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image,
-.tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image,
-.page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image,
-#tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image {
+.post-type-archive-tf_carrental .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image,
+.tax-carrental_location .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image,
+.tax-carrental_brand .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image,
+.page-template-tf-search .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image,
+body .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image {
   width: 280px;
   height: 200px;
 }
 
 @media only screen and (max-width: 1024px) {
-  .post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image,
-  .tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image,
-  .tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image,
-  .page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image,
-  #tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image {
+  .post-type-archive-tf_carrental .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image,
+  .tax-carrental_location .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image,
+  .tax-carrental_brand .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image,
+  .page-template-tf-search .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image,
+  body .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image {
     width: 100%;
   }
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image img,
-.tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image img,
-.tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image img,
-.page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image img,
-#tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image img {
+.post-type-archive-tf_carrental .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image img,
+.tax-carrental_location .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image img,
+.tax-carrental_brand .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image img,
+.page-template-tf-search .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image img,
+body .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image img {
   width: 100%;
   height: 200px;
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image .tf-other-infos,
-.tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image .tf-other-infos,
-.tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image .tf-other-infos,
-.page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image .tf-other-infos,
-#tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image .tf-other-infos {
+.post-type-archive-tf_carrental .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image .tf-other-infos,
+.tax-carrental_location .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image .tf-other-infos,
+.tax-carrental_brand .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image .tf-other-infos,
+.page-template-tf-search .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image .tf-other-infos,
+body .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image .tf-other-infos {
   display: flow-root;
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box,
-.tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box,
-.tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box,
-.page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box,
-#tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box {
+.post-type-archive-tf_carrental .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box,
+.tax-carrental_location .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box,
+.tax-carrental_brand .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box,
+.page-template-tf-search .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box,
+body .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box {
   margin-top: 8px;
   max-width: none;
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box ul li,
-.tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box ul li,
-.tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box ul li,
-.page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box ul li,
-#tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box ul li {
+.post-type-archive-tf_carrental .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box ul li,
+.tax-carrental_location .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box ul li,
+.tax-carrental_brand .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box ul li,
+.page-template-tf-search .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box ul li,
+body .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box ul li {
   display: inline-block;
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details,
-.tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details,
-.tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details,
-.page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details,
-#tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details {
+.post-type-archive-tf_carrental .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details,
+.tax-carrental_location .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details,
+.tax-carrental_brand .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details,
+.page-template-tf-search .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details,
+body .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details {
   width: calc(100% - 280px);
   display: flex;
   padding: 24px;
@@ -1092,130 +1056,166 @@ Without Payment Popup
 }
 
 @media only screen and (max-width: 1024px) {
-  .post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details,
-  .tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details,
-  .tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details,
-  .page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details,
-  #tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details {
+  .post-type-archive-tf_carrental .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details,
+  .tax-carrental_location .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details,
+  .tax-carrental_brand .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details,
+  .page-template-tf-search .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details,
+  body .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details {
     width: calc(100% - 200px);
   }
 }
 
 @media only screen and (max-width: 1024px) {
-  .post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details,
-  .tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details,
-  .tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details,
-  .page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details,
-  #tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details {
+  .post-type-archive-tf_carrental .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details,
+  .tax-carrental_location .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details,
+  .tax-carrental_brand .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details,
+  .page-template-tf-search .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details,
+  body .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details {
     display: flow-root;
     width: 100%;
   }
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content,
-.tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content,
-.tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content,
-.page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content,
-#tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content {
+.post-type-archive-tf_carrental .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content,
+.tax-carrental_location .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content,
+.tax-carrental_brand .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content,
+.page-template-tf-search .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content,
+body .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content {
   width: calc(100% - 196px);
 }
 
 @media only screen and (max-width: 1024px) {
-  .post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content,
-  .tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content,
-  .tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content,
-  .page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content,
-  #tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content {
+  .post-type-archive-tf_carrental .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content,
+  .tax-carrental_location .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content,
+  .tax-carrental_brand .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content,
+  .page-template-tf-search .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content,
+  body .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content {
     width: 100%;
   }
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content h3,
-.tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content h3,
-.tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content h3,
-.page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content h3,
-#tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content h3 {
+.post-type-archive-tf_carrental .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content h3,
+.tax-carrental_location .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content h3,
+.tax-carrental_brand .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content h3,
+.page-template-tf-search .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content h3,
+body .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content h3 {
   margin-bottom: 16px;
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content ul,
-.tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content ul,
-.tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content ul,
-.page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content ul,
-#tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content ul {
+.post-type-archive-tf_carrental .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content ul,
+.tax-carrental_location .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content ul,
+.tax-carrental_brand .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content ul,
+.page-template-tf-search .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content ul,
+body .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content ul {
   margin: 0;
 }
 
 @media only screen and (max-width: 1024px) {
-  .post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content ul,
-  .tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content ul,
-  .tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content ul,
-  .page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content ul,
-  #tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content ul {
+  .post-type-archive-tf_carrental .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content ul,
+  .tax-carrental_location .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content ul,
+  .tax-carrental_brand .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content ul,
+  .page-template-tf-search .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content ul,
+  body .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content ul {
     margin-bottom: 24px;
   }
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content ul li,
-.tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content ul li,
-.tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content ul li,
-.page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content ul li,
-#tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content ul li {
+.post-type-archive-tf_carrental .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content ul li,
+.tax-carrental_location .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content ul li,
+.tax-carrental_brand .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content ul li,
+.page-template-tf-search .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content ul li,
+body .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-car-content ul li {
   width: calc(50% - 16px);
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-booking-btn,
-.tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-booking-btn,
-.tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-booking-btn,
-.page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-booking-btn,
-#tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-booking-btn {
+.post-type-archive-tf_carrental .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-booking-btn,
+.tax-carrental_location .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-booking-btn,
+.tax-carrental_brand .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-booking-btn,
+.page-template-tf-search .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-booking-btn,
+body .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-booking-btn {
   flex-direction: column;
 }
 
 @media only screen and (max-width: 1024px) {
-  .post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-booking-btn,
-  .tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-booking-btn,
-  .tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-booking-btn,
-  .page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-booking-btn,
-  #tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-booking-btn {
+  .post-type-archive-tf_carrental .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-booking-btn,
+  .tax-carrental_location .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-booking-btn,
+  .tax-carrental_brand .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-booking-btn,
+  .page-template-tf-search .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-booking-btn,
+  body .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-booking-btn {
     flex-direction: row;
   }
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-booking-btn button,
-.tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-booking-btn button,
-.tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-booking-btn button,
-.page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-booking-btn button,
-#tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-booking-btn button {
+.post-type-archive-tf_carrental .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-booking-btn button,
+.tax-carrental_location .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-booking-btn button,
+.tax-carrental_brand .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-booking-btn button,
+.page-template-tf-search .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-booking-btn button,
+body .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-booking-btn button {
   margin-top: auto;
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf_posts_navigation,
-.tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf_posts_navigation,
-.tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf_posts_navigation,
-.page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf_posts_navigation,
-#tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf_posts_navigation {
+.post-type-archive-tf_carrental .tf-car-archive-result .tf-car-result .tf_posts_navigation,
+.tax-carrental_location .tf-car-archive-result .tf-car-result .tf_posts_navigation,
+.tax-carrental_brand .tf-car-archive-result .tf-car-result .tf_posts_navigation,
+.page-template-tf-search .tf-car-archive-result .tf-car-result .tf_posts_navigation,
+body .tf-car-archive-result .tf-car-result .tf_posts_navigation {
   width: 100%;
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf_posts_navigation .page-numbers,
-.tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf_posts_navigation .page-numbers,
-.tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf_posts_navigation .page-numbers,
-.page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf_posts_navigation .page-numbers,
-#tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf_posts_navigation .page-numbers {
+.post-type-archive-tf_carrental .tf-car-archive-result .tf-car-result .tf_posts_navigation .page-numbers,
+.tax-carrental_location .tf-car-archive-result .tf-car-result .tf_posts_navigation .page-numbers,
+.tax-carrental_brand .tf-car-archive-result .tf-car-result .tf_posts_navigation .page-numbers,
+.page-template-tf-search .tf-car-archive-result .tf-car-result .tf_posts_navigation .page-numbers,
+body .tf-car-archive-result .tf-car-result .tf_posts_navigation .page-numbers {
   background: var(--tf-brand-lite);
   color: var(--tf-text-paragraph);
   border-radius: 8px;
   border: 1px solid var(--tf-border-lite);
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf_posts_navigation .page-numbers.current,
-.tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf_posts_navigation .page-numbers.current,
-.tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf_posts_navigation .page-numbers.current,
-.page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf_posts_navigation .page-numbers.current,
-#tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf_posts_navigation .page-numbers.current {
+.post-type-archive-tf_carrental .tf-car-archive-result .tf-car-result .tf_posts_navigation .page-numbers.current,
+.tax-carrental_location .tf-car-archive-result .tf-car-result .tf_posts_navigation .page-numbers.current,
+.tax-carrental_brand .tf-car-archive-result .tf-car-result .tf_posts_navigation .page-numbers.current,
+.page-template-tf-search .tf-car-archive-result .tf-car-result .tf_posts_navigation .page-numbers.current,
+body .tf-car-archive-result .tf-car-result .tf_posts_navigation .page-numbers.current {
   background: var(--tf-primary);
   color: var(--tf-text-paragraph);
+}
+
+.post-type-archive-tf_carrental .tf-car-archive-result.tf-car-lists-widgets,
+.tax-carrental_location .tf-car-archive-result.tf-car-lists-widgets,
+.tax-carrental_brand .tf-car-archive-result.tf-car-lists-widgets,
+.page-template-tf-search .tf-car-archive-result.tf-car-lists-widgets,
+body .tf-car-archive-result.tf-car-lists-widgets {
+  width: 100%;
+}
+
+.post-type-archive-tf_carrental .tf-car-archive-result.tf-car-lists-widgets .tf-single-car-view,
+.tax-carrental_location .tf-car-archive-result.tf-car-lists-widgets .tf-single-car-view,
+.tax-carrental_brand .tf-car-archive-result.tf-car-lists-widgets .tf-single-car-view,
+.page-template-tf-search .tf-car-archive-result.tf-car-lists-widgets .tf-single-car-view,
+body .tf-car-archive-result.tf-car-lists-widgets .tf-single-car-view {
+  width: calc(33% - 18px);
+}
+
+@media only screen and (max-width: 1199.98px) {
+  .post-type-archive-tf_carrental .tf-car-archive-result.tf-car-lists-widgets .tf-single-car-view,
+  .tax-carrental_location .tf-car-archive-result.tf-car-lists-widgets .tf-single-car-view,
+  .tax-carrental_brand .tf-car-archive-result.tf-car-lists-widgets .tf-single-car-view,
+  .page-template-tf-search .tf-car-archive-result.tf-car-lists-widgets .tf-single-car-view,
+  body .tf-car-archive-result.tf-car-lists-widgets .tf-single-car-view {
+    width: calc(50% - 16px);
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .post-type-archive-tf_carrental .tf-car-archive-result.tf-car-lists-widgets .tf-single-car-view,
+  .tax-carrental_location .tf-car-archive-result.tf-car-lists-widgets .tf-single-car-view,
+  .tax-carrental_brand .tf-car-archive-result.tf-car-lists-widgets .tf-single-car-view,
+  .page-template-tf-search .tf-car-archive-result.tf-car-lists-widgets .tf-single-car-view,
+  body .tf-car-archive-result.tf-car-lists-widgets .tf-single-car-view {
+    width: 100%;
+  }
 }
 
 .notyf {
@@ -2432,6 +2432,7 @@ h3.section-heading {
   text-align: center;
   color: var(--tf-text-heading);
   margin-bottom: 10px;
+  font-size: 1.25rem;
 }
 
 .tf-review-container .no-review .btn-styled {
@@ -4452,8 +4453,9 @@ div#tf-destinationautocomplete-list div:before {
   text-decoration: none;
 }
 
-.tf-widget-slider.recent-hotel-slider h3, .tf-widget-slider.recent-apartment-slider h3, .tf-widget-slider.recent-tour-slider h3 {
+.tf-widget-slider.recent-hotel-slider h2, .tf-widget-slider.recent-apartment-slider h2, .tf-widget-slider.recent-tour-slider h2 {
   margin-bottom: 0;
+  font-size: 1.5rem;
 }
 
 .tf-widget-slider.recent-hotel-slider p, .tf-widget-slider.recent-apartment-slider p, .tf-widget-slider.recent-tour-slider p {
@@ -10403,6 +10405,8 @@ div#tf-destinationautocomplete-list div:before {
 .tf-single-template__one .tf-section-title,
 .tf-archive-template__one .tf-section-title {
   margin-bottom: 15px;
+  font-size: 1.875rem;
+  line-height: 1.5;
 }
 
 .tf-single-template__one .tf-single-head .tf-head-info {
@@ -10882,11 +10886,6 @@ div#tf-destinationautocomplete-list div:before {
   border-radius: 7px;
 }
 
-.tf-single-template__one .tf-review-wrapper .tf-review-reply {
-  border-bottom: 1px solid var(--tf-border-lite);
-  padding-bottom: 30px;
-}
-
 .tf-single-template__one .tf-review-wrapper .tf-review-reply .tf-review-details .tf-review-ratings i {
   color: var(--tf-primary);
 }
@@ -11044,7 +11043,11 @@ div#tf-destinationautocomplete-list div:before {
   color: var(--tf-text-heading);
 }
 
-.tf-single-template__one .tf-booking-form .tf-field-group #check-in-out-date {
+.tf-single-template__one .tf-booking-form .tf-booking-form-inner h3 {
+  font-size: 1.5rem;
+}
+
+.tf-single-template__one .tf-booking-form .tf-booking-form-inner .tf-field-group #check-in-out-date {
   width: 100%;
 }
 
@@ -11080,6 +11083,10 @@ div#tf-destinationautocomplete-list div:before {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.tf-single-template__one .tf-ask-enquiry h3 {
+  font-size: 1.5rem;
 }
 
 .tf-single-template__one .tf-ask-enquiry p {
@@ -11150,6 +11157,7 @@ div#tf-destinationautocomplete-list div:before {
 .tf-single-template__one .tf-faq-wrapper .tf-faq-single-inner h4 {
   line-height: 1.5;
   margin-bottom: 0;
+  font-size: 1.25rem;
 }
 
 .tf-single-template__one .tf-list {
@@ -12868,6 +12876,15 @@ div#tf-destinationautocomplete-list div:before {
 .page-template-tf-search__two .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content .tf-available-room-content-left h2 {
   font-weight: 700;
   margin-bottom: 24px;
+  font-size: 1.875rem;
+}
+
+@media only screen and (max-width: 1024px) {
+  .tf-single-template__two .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content .tf-available-room-content-left h2,
+  .tf-archive-template__two .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content .tf-available-room-content-left h2,
+  .page-template-tf-search__two .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content .tf-available-room-content-left h2 {
+    font-size: 1.5rem;
+  }
 }
 
 .tf-single-template__two .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content .tf-available-room-content-left ul,
@@ -12898,6 +12915,7 @@ div#tf-destinationautocomplete-list div:before {
 .tf-archive-template__two .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content .tf-available-room-content-left ul li,
 .page-template-tf-search__two .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content .tf-available-room-content-left ul li {
   display: flex;
+  align-items: center;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -15255,6 +15273,7 @@ div#tf-destinationautocomplete-list div:before {
   color: #ffffff;
   margin-bottom: 16px;
   line-height: initial;
+  font-size: 2.375rem;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -15606,7 +15625,7 @@ div#tf-destinationautocomplete-list div:before {
 }
 
 .tf-single-template__two .tf-single-widgets h3 {
-  font-size: 1.5em;
+  font-size: 1.875rem;
   margin-bottom: 0;
 }
 
@@ -16398,6 +16417,7 @@ div#tf-destinationautocomplete-list div:before {
 .tf-single-template__two .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-highlights-wrapper .ft-highlights-details h2 {
   font-weight: 700;
   margin-bottom: 20px;
+  font-size: 1.875rem;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -17373,6 +17393,7 @@ div#tf-destinationautocomplete-list div:before {
 .tf-archive-template__two .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-left .tf-section-title-and-location .tf-section-title,
 .page-template-tf-search__two .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-left .tf-section-title-and-location .tf-section-title {
   margin: 0 0 10px 0;
+  font-size: 1.875rem;
 }
 
 @media only screen and (max-width: 1200px) {
@@ -17386,6 +17407,7 @@ div#tf-destinationautocomplete-list div:before {
 .page-template-tf-search__two .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-left .tf-section-title-and-location .tf-title-location {
   display: inline-flex;
   margin-top: 6px;
+  align-items: center;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -17396,15 +17418,15 @@ div#tf-destinationautocomplete-list div:before {
   }
 }
 
-.tf-archive-template__two .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-left .tf-section-title-and-location .tf-title-location i,
-.page-template-tf-search__two .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-left .tf-section-title-and-location .tf-title-location i {
+.tf-archive-template__two .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-left .tf-section-title-and-location .tf-title-location .location-icon i,
+.page-template-tf-search__two .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-left .tf-section-title-and-location .tf-title-location .location-icon i {
   margin-right: 8px;
   font-size: 1.25rem;
 }
 
 @media only screen and (max-width: 1024px) {
-  .tf-archive-template__two .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-left .tf-section-title-and-location .tf-title-location i,
-  .page-template-tf-search__two .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-left .tf-section-title-and-location .tf-title-location i {
+  .tf-archive-template__two .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-left .tf-section-title-and-location .tf-title-location .location-icon i,
+  .page-template-tf-search__two .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-left .tf-section-title-and-location .tf-title-location .location-icon i {
     font-size: 0.875rem;
   }
 }
@@ -17541,6 +17563,7 @@ div#tf-destinationautocomplete-list div:before {
   margin: 0;
   padding: 0;
   font-weight: 700;
+  font-size: 1.875rem;
 }
 
 @media only screen and (max-width: 1024px) {
