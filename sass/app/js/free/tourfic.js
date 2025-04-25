@@ -281,8 +281,8 @@
             let dropoff_time = $('.tf_dropoff_time').val();
             let pickup_slug = $('#tf_pickup_location_id').val();
             let dropoff_slug = $('#tf_dropoff_location_id').val();
-            let design = $('.tf-archive-listing-wrap').data('design');
-
+            let elSettings = $('#tf-elementor-settings').text();
+            
             var formData = new FormData();
             formData.append('action', 'tf_trigger_filter');
             formData.append('_nonce', tf_params.nonce);
@@ -318,7 +318,7 @@
             formData.append('driver_age', driver_age);
             formData.append('dropoff_time', dropoff_time);
             formData.append("tf_ordering", tf_ordering);
-            formData.append("design", design);
+            formData.append("elSettings", elSettings);
             formData.append('page', page);
 
             if (startprice) {

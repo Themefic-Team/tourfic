@@ -2987,10 +2987,12 @@ class Helper {
 
     }
 
-    static function tourfic_posts_navigation( $wp_query = '' ) {
+    static function tourfic_posts_navigation( $wp_query = '', $prev_text = '', $next_text = '' ) {
         if ( empty( $wp_query ) ) {
             global $wp_query;
         }
+        $prev_text = empty( $prev_text ) ? __( '&laquo; Previous' ) : $prev_text;
+		$next_text = empty( $next_text ) ?__( 'Next &raquo;' ) : $next_text;
         $max_num_pages = $wp_query->max_num_pages;
         $paged = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
         if ( $max_num_pages > 1 ) {
@@ -3001,6 +3003,8 @@ class Helper {
                     'total'     => $max_num_pages,
                     'mid_size'  => 2,
                     'prev_next' => true,
+                    'prev_text' => $prev_text,
+                    'next_text' => $next_text,
                 ) )
             );
             echo "</div>";
