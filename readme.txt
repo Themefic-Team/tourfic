@@ -372,15 +372,17 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
-= 2.16.0 – April 24, 2025 =
+= 2.16.0 – April 26, 2025 =
 
-- Improved: Revamped assets for enhanced performance.
-- Introduced: New design settings panel for greater customization.
-- Improved: Updated template view aligned with the new design settings.
-- Improved: Added a new color palette to ensure design consistency.
-- Improved: General performance enhancements across the system.
-- Improved: Frontend design improvements for a better user experience.
-- Improved: Overall system stability.
+- Added: Container width option has been added.
+- Added: Car rental demo data has been added to the quick setup wizard.
+- Improved: Assets revamped for better performance.
+- Introduced: New design settings panel for enhanced customization.
+- Improved: Template view updated according to the new design panel.
+- Improved: New color palette introduced for consistent design.
+- Improved: Frontend design improvements for better user experience.
+- Improved: Overall system stability has been improved.
+- Fixed: Minor issues and improved frontend dashboard settings.
 
 = 2.15.26 – April 20, 2025 =
 
