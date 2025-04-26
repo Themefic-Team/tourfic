@@ -1,6 +1,9 @@
 <?php
 
 namespace Tourfic\Classes\Apartment;
+
+use Tourfic\Classes\Helper;
+
 defined( 'ABSPATH' ) || exit;
 
 class Pricing {
@@ -132,7 +135,7 @@ class Pricing {
 		$meta = $this->meta;
 		$total_days = $this->days;
 		$total_person = !empty( $this->persons ) ? array_sum( $this->persons ) : 0;
-		$additional_fees = !empty( $meta["additional_fees"] ) ? $meta["additional_fees"] : array();
+		$additional_fees = !empty( Helper::tf_data_types($meta["additional_fees"]) ) ? Helper::tf_data_types($meta["additional_fees"]) : array();
 		
 		// if free version
 		$additional_fee = ! empty( $meta["additional_fee"] ) ? $meta["additional_fee"] : 0;

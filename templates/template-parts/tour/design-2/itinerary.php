@@ -28,7 +28,7 @@ if ( function_exists('is_tf_pro') && is_tf_pro() ) {
             <div class="tf-itinerary-content-wrap" style="display: none;">
                 <div class="tf-itinerary-content">
                     <div class="tf-itinerary-content-details">
-                    <?php echo wp_kses_post( $itinerary['desc'] ); ?>
+                        <?php echo wp_kses_post( $itinerary['desc'] ); ?>
                     </div>
                     <?php if ( $itinerary['image'] ) { ?>
                     <div class="tf-itinerary-content-images">

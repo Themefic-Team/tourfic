@@ -1,0 +1,125 @@
+.single-tf_apartment{
+    .tf-single-template{
+        &__legacy{
+            .tf-apt-hero-section {
+                margin-bottom: 40px;
+                .tf-apt-hero-wrapper {
+                    position: relative;
+
+                    &>img {
+                        width: 100%;
+                        border-radius: 8px;
+                        height: auto;
+                    }
+
+                    .tf-apt-hero-gallery {
+                        @include flexbox();
+                        flex-wrap: wrap;
+                        gap: 24px;
+
+                        @media #{$max768} {
+                            gap: 16px;
+                        }
+                        @media #{$max320} {
+                           flex-direction: column;
+                        }
+
+                        img {
+                            object-fit: cover;
+                            width: 100%;
+                            border-radius: 8px;
+                            height: auto;
+                        }
+
+                        .tf-apt-hero-left {
+                            @include flex(0 0 100%);
+
+                            &.has-right {
+                                @include flex(0 0 calc(70% - 12px));
+                                @media #{$max1024} {
+                                    @include flex(0 0 calc(50% - 12px));
+                                }
+                                @media #{$max768} {
+                                    @include flex(0 0 calc(50% - 4px));
+                                }
+                            }
+
+                            .hero-first-image {
+                                height: 424px;
+                                @media #{$max768} {
+                                    height: 350px;
+                                }
+                                @media #{$max575} {
+                                    height: 300px;
+                                }
+                            }
+                        }
+
+                        .tf-apt-hero-right {
+                            @include flex(0 0 calc(30% - 12px));
+                            @include flexbox();
+                            @include flex-direction(column);
+                            gap: 24px;
+
+                            @media #{$max1024} {
+                                @include flex(0 0 calc(50% - 12px));
+                            }
+
+                            @media #{$max768} {
+                                gap: 16px;
+                            }
+
+                            .hero-second-image,
+                            .hero-third-image {
+                                height: 200px;
+                                @media #{$max768} {
+                                    height: 167px;
+                                }
+                                @media #{$max575} {
+                                    height: 142px;
+                                }
+                            }
+
+                            .has-more {
+                                position: relative;
+
+                                &::after {
+                                    content: '';
+                                    position: absolute;
+                                    top: 0;
+                                    left: 0;
+                                    height: 100%;
+                                    width: 100%;
+                                    background: $color-heading;
+                                    opacity: .5;
+                                    border-radius: 8px;
+                                }
+                            }
+                        }
+
+                        .hero-first-image,
+                        .hero-second-image,
+                        .hero-third-image {
+                            @include flexbox();
+                        }
+                    }
+
+                    .gallery-all-photos {
+                        position: absolute;
+                        right: 15px;
+                        bottom: 15px;
+                        @include flexbox();
+                        z-index: 2;
+
+                        a.tf_btn {
+                            max-width: 130px;
+                            border: 1px solid rgba(255, 255, 255, 0.40);
+                            background: rgba(255, 255, 255, 0.60);
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+}

@@ -690,7 +690,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
             $ajax_save_class = 'tf-ajax-save';
 
-			
+			$tf_disable_services = ! empty( Helper::tfopt( 'disable-services' ) ) ? Helper::tfopt( 'disable-services' ) : [];
 
 			if ( ! empty( $this->option_sections ) ) :
 				?>
@@ -728,6 +728,12 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 								$section_count = 0;
 								foreach ( $this->pre_tabs as $key => $section ) :
 									$parent_tab_key = ! empty( $section['fields'] ) ? $key : array_key_first( $section['sub_section'] );
+									
+									if(isset( $section['post_dependency'] ) && !empty( $section['post_dependency'] )){
+										if(!empty( $tf_disable_services ) && in_array( $section['post_dependency'], $tf_disable_services )){
+											continue;
+										}
+									}
 									?>
                                     <div class="tf-admin-tab-item<?php echo ! empty( $section['sub_section'] ) ? ' tf-has-submenu' : '' ?>">
 

@@ -1,0 +1,192 @@
+.single-tf_tours{
+    .tf-single-template{
+        &__legacy{
+            .tf-tour-booking-wrap {
+                border-radius: 4px;
+                padding: 10px;
+                margin: 0 auto;
+                background: $color-white;
+                box-shadow: 0px 5px 10px rgba(0, 44, 102, 0.2);
+                width: 80%;
+                font-size: 1rem;
+                @media #{$max1024}{
+                    width: 95%;
+                    font-size: 0.875rem;
+                }
+                @media #{$max768}{
+                    max-width: 450px;
+                }
+                .tf_btn {
+                    border-radius: 2px;
+                    width: 160px;
+                    font-weight: bold;
+                    text-transform: uppercase;
+                    @media #{$max1024}{
+                        width: 100%;
+                        margin: auto;
+                    }
+                }
+                form.tf_tours_booking {
+                    justify-content: space-evenly;
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    gap: 15px;
+                    margin: 0;
+                    @media #{$max1024}{
+                        flex-wrap: wrap;
+                    }
+                    @media #{$max575}{
+                        flex-direction: column;;
+                    }
+                }
+                .tf_selectperson-wrap {
+                    color: $color-text;
+                    font-weight: 500;
+                    border: none;
+                    .tf_person-icon{
+                        margin-right: 12px;
+                    }
+                    @media #{$max768}{
+                        display: flex;
+                        justify-content: center;
+                        flex: 1;
+                        padding: 10px;
+                        height: 40px;
+                    }
+                    @media #{$max575}{
+                        width: 80%;
+                    }
+                }
+                .tf_form-row {
+                    color: $color-text;
+                    @media #{$max768}{
+                       flex: 1;
+                    }
+                    @media #{$max575}{
+                        width: 80%;
+                    }
+                    .tf_label-row {
+                        margin-bottom: 0;
+                    }
+                }
+                .tours-check-in-out {
+                    color: $color-text;
+                    padding: 0;
+                }
+                .tf_form-inner {
+                    input[type="text"] {
+                        background: transparent;
+                        padding: 5px 15px;
+                        border-radius: 2px;
+                        @media #{$max1024}{
+                            font-size: 0.875rem;
+                        }
+                        @media #{$max768}{
+                            max-width: 100%;
+                            height: 40px;
+                        }
+                        @media #{$max575}{
+                            width: 100%;
+                        }
+                    }
+                    select {
+                        background: transparent;
+                        border: 1px solid $color-gray;
+                        padding: 5px 15px;
+                        border-radius: 2px;
+                        @media #{$max1024}{
+                            font-size: 0.875rem;
+                        }
+                        @media #{$max768}{
+                            max-width: 100%;
+                        }
+                        &:focus {
+                            background: transparent;
+                            border: 0;
+                            outline: 0;
+                        }
+                    }
+                    input[type=text] {
+                        &:focus {
+                            background: transparent;
+                            border: 0;
+                            outline: 0;
+                        }
+                    }
+                }
+
+                &.tf-tours-fixed{
+                    width: 100%;
+                    z-index: 9999;
+                    background-color: $color-brand-dark;
+                    border-top: 4px solid $color-danger;
+                    padding: 8px 0;
+                    position: fixed;
+                    bottom: 0;
+                    left: 0%;
+                    right: 0;
+                    @media #{$max768}{
+                        padding: 8px 10px;
+                        border-radius: 0;
+                    }
+                    .tf_acrselection-wrap {
+                        position: absolute;
+                        top: unset;
+                        left: 0;
+                        right: auto;
+                        bottom: 100%;
+                    }
+                    .tf_tours_booking {
+                        width: 100%;
+                        max-width: 1200px;
+                        margin: auto;
+                        margin: 0 auto;
+                    }
+
+                    .tf_selectperson-wrap {
+                        background: $color-white;
+                        border-radius: 2px;
+                        padding: 9px 15px;
+                    }
+                    .tour-extra {
+                        i {
+                            color: $color-white;
+                        }
+                        a {
+                            color: $color-white;
+                        }
+                    }
+                    button[type="submit"] {
+                        padding: 16px;
+                    }
+                    form.tf_tours_booking {
+                        width: 55%;
+                        @media #{$max768}{
+                            width: 100%;
+                        }
+                        @media #{$max575}{
+                            flex-direction: column;
+                        }
+                    }
+                    .tf_form-inner {
+                        background: $color-white;
+                        border-radius: 2px;
+                    }
+                    .btn-styled {
+                        border: 1px solid $color-primary;
+                        background: $color-primary;
+                        width: 180px;
+                    }
+                    
+                    @media #{$max768}{
+                        max-width: 100%;
+                    }
+                }
+            }
+            .check-in-time-div{
+                display: none;
+            }
+        }
+    }
+}

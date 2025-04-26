@@ -15,7 +15,7 @@ class Room {
 		add_action( 'wp_ajax_tf_remove_room_order_ids', array( $this, 'tf_remove_room_order_ids' ) );
 	}
 
-		static function get_hotel_rooms( $hotel_id ) {
+	static function get_hotel_rooms( $hotel_id ) {
 		$args = array(
 			'post_type'      => 'tf_room',
 			'posts_per_page' => - 1,
@@ -34,8 +34,6 @@ class Room {
 		return $hotel_rooms;
 
 	}
-
-
 
 	static function get_hotel_id_for_assigned_room( $room_id ) {
 		$args = array(

@@ -74,14 +74,29 @@ TF_Settings::option( 'tf_settings', array(
 				),
 				array(
 					'id'       => 'disable-services',
-					'type'     => 'checkbox',
-					'label'    => __( 'Disable Post Types', 'tourfic' ),
-					'subtitle' => __( 'Tick the checkbox to disable the Post Type you don\'t need.', 'tourfic' ),
+					'type'     => 'imageselect',
+					'label'    => esc_html__( 'Disable Post Types', 'tourfic' ),
+					'subtitle' => esc_html__( 'Tick the image to disable the Post Type you don\'t need.', 'tourfic' ),
+					'multiple' => true,
+					'img-width'=> '100',
+					'img-height'=> '100',
 					'options'  => array(
-						'hotel'     => __( 'Hotel', 'tourfic' ),
-						'tour'      => __( 'Tour', 'tourfic' ),
-						'apartment' => __( 'Apartment', 'tourfic' ),
-						'carrentals' => __( 'Car', 'tourfic' ),
+						'hotel' => array(
+							'title' => 'Hotel',
+							'url'   => TF_ASSETS_ADMIN_URL . "images/hotel.png",
+						),
+						'tour' 		=> array(
+							'title'	=> 'Tour',
+							'url' 	=> TF_ASSETS_ADMIN_URL."images/tour.png",
+						),
+						'apartment'  => array(
+							'title' => 'Apartment',
+							'url'   => TF_ASSETS_ADMIN_URL . "images/apartment.png",
+						),
+						'carrentals'  => array(
+							'title' => 'Car',
+							'url'   => TF_ASSETS_ADMIN_URL . "images/carrentals.png",
+						),
 					),
 				),
 				array(
@@ -124,353 +139,190 @@ TF_Settings::option( 'tf_settings', array(
 					'label'    => __( 'Enable Quick Checkout', 'tourfic' ),
 					'subtitle' => __( 'This option allows you to complete the checkout process directly from the single service page, without navigating to the checkout page. Note: The Instantio plugin is required, and this option is only for woocommerce payment system.', 'tourfic' ),
 				),
+			),
+		),
+
+		// Template Settings
+		'tf-template-settings' => array(
+			'title'  => esc_html__( 'Template', 'tourfic' ),
+			'icon'   => 'fa-solid fa-newspaper',
+			'fields' => array(
 				array(
 					'id'       => 'template_heading',
 					'type'     => 'heading',
-					'label'    => __( 'Template Settings', 'tourfic' ),
-					'subtitle' => __( 'Select your preferred template from our current offering of two options, with more on the way!', 'tourfic' ),
+					'label'    => esc_html__( 'Template Settings', 'tourfic' ),
+					'subtitle' => esc_html__( 'Select your preferred template from our current offering of two options, with more on the way!', 'tourfic' ),
 				),
 				array(
 					'id'    => 'tf-template',
 					'type'  => 'tab',
-					'label' => 'Hotel, Tour, Apartment & Car Template',
+					'label' => esc_html__('Hotel, Tour, Apartment & Car Template', 'tourfic'),
 					'tabs'  => array(
 						array(
 							'id'     => 'hotel_template',
-							'title'  => __( 'Hotel', 'tourfic' ),
+							'title'  => esc_html__( 'Hotel', 'tourfic' ),
 							'icon'   => 'fa fa-gear',
+							'post_dependency' => 'hotel',
 							'fields' => array(
 								array(
 									'id'      => 'hotel-title',
 									'type'    => 'heading',
-									'content' => __( 'Hotel Single Page', 'tourfic' ),
+									'content' => esc_html__( 'Hotel Single Page', 'tourfic' ),
 									'class'   => 'tf-field-class',
 								),
 								array(
 									'id'       => 'single-hotel',
 									'type'     => 'imageselect',
-									'label'    => __( 'Select Single Hotel Template', 'tourfic' ),
-									'subtitle'   => __( 'You have the option to override this from the settings specific to each individual hotel page.', 'tourfic' ),
-									'multiple' => true,
-									'inline'   => true,
+									'label'    => esc_html__( 'Select Single Hotel Template', 'tourfic' ),
+									'subtitle'   => esc_html__( 'You have the option to override this from the settings specific to each individual hotel page.', 'tourfic' ),
 									'options'  => array(
 										'design-1' => array(
-											'title' => 'Design 1',
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/design1-hotel.jpg",
+											'title' => esc_html__('Design 1', 'tourfic'),
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-design-1.png",
+											'preview_link' => esc_url('https://tourfic.com/preview/hotels/tuvo-suites-hotel/'),
 										),
-										'design-2' 				=> array(
-											'title'			=> 'Design 2',
-											'url' 			=> TF_ASSETS_ADMIN_URL."images/template/design2-hotel.jpg",
+										'design-2' 	=> array(
+											'title'	=> esc_html__('Design 2', 'tourfic'),
+											'url' 	=> TF_ASSETS_ADMIN_URL."images/template/preview-single-design-2.png",
+											'preview_link' => esc_url('https://tourfic.com/preview/hotels/melbourne-mastlereagh/'),
 										),
 										'default'  => array(
-											'title' => 'Default',
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/default-hotel.jpg",
+											'title' => esc_html__('Legacy', 'tourfic'),
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-default.png",
+											'preview_link' => esc_url('https://tourfic.com/preview/hotels/rio-ontho-palace/'),
 										),
 									),
 									'default'  => 'design-1',
 								),
 								//design 1
 								array(
-									'id'      => 'hotel_design_1_fonts_notice',
-									'type'    => 'notice',
-									'content' => __( 'We will recommend you to add Body Fonts and Heading Fonts "Jost" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
-									'dependency' => array( 'single-hotel', '==', 'design-1' ),
-								),
-								array(
 									'id'         => 'single-hotel-layout',
-									'class'      => 'disable-sortable',
-									'type'       => 'repeater',
-									'drag_only'  => true,
-									'label'      => __( 'Single Hotel Template Sections', 'tourfic' ),
-									'subtitle'   => __( 'You can change the order of sections by dragging and dropping them.', 'tourfic' ),
+									'type'       => 'switch_group',
+									'column'  	 => 4,
+									'label'      => esc_html__( 'Single Hotel Template Sections', 'tourfic' ),
+									'subtitle'   => esc_html__( 'You can change the order of sections by dragging and dropping them.', 'tourfic' ),
 									'dependency' => array( 'single-hotel', '==', 'design-1' ),
-									'field_title'=> 'hotel-section',
-									'fields'     => array(
-										array(
-											'id'         => 'hotel-section',
-											'class'      => 'tf-section-name-hidden',
-											'type'       => 'text',
-											'label'      => __( 'Section Name', 'tourfic' ),
-											'attributes' => array(
-												'readonly' => 'readonly',
-											),
-										),
-										array(
-											'id'         => 'hotel-section-slug',
-											'class'      => 'tf-section-name-hidden',
-											'type'       => 'text',
-											'label'      => __( 'Section Slug', 'tourfic' ),
-											'attributes' => array(
-												'readonly' => 'readonly',
-											),
-										),
-										array(
-											'id'       => 'hotel-section-status',
-											'type'     => 'switch',
-											'label'    => __( 'Section Status', 'tourfic' ),
-											'subtitle' => __( 'Enable/disable this section.', 'tourfic' ),
-										),
-									),
 									'default'    => array(
 										array(
-											'hotel-section'        => __( 'Description', 'tourfic' ),
-											'hotel-section-slug'   => __( 'description', 'tourfic' ),
-											'hotel-section-status' => true,
+											'label'  => esc_html__( 'Description', 'tourfic' ),
+											'slug'   => 'description',
+											'status' => 1,
 										),
 										array(
-											'hotel-section'        => __( 'Features', 'tourfic' ),
-											'hotel-section-slug'   => __( 'features', 'tourfic' ),
-											'hotel-section-status' => true,
+											'label'  => esc_html__( 'Features', 'tourfic' ),
+											'slug'   => 'features',
+											'status' => 1,
 										),
 										array(
-											'hotel-section'        => __( 'Room', 'tourfic' ),
-											'hotel-section-slug'   => __( 'rooms', 'tourfic' ),
-											'hotel-section-status' => true,
+											'label'  => esc_html__( 'Room', 'tourfic' ),
+											'slug'   => 'rooms',
+											'status' => 1,
 										),
 										array(
-											"hotel-section"        => __( "Facilities", "tourfic" ),
-											"hotel-section-slug"   => __( "facilities", "tourfic" ),
-											"hotel-section-status" => "1"
+											'label'  => esc_html__( 'Facilities', 'tourfic' ),
+											'slug'   => 'facilities',
+											'status' => 1,
 										),
 										array(
-											'hotel-section'        => __( 'FAQ', 'tourfic' ),
-											'hotel-section-slug'   => __( 'faq', 'tourfic' ),
-											'hotel-section-status' => true,
+											'label'  => esc_html__( 'FAQ', 'tourfic' ),
+											'slug'   => 'faq',
+											'status' => 1,
 										),
 										array(
-											'hotel-section'        => __( 'Review', 'tourfic' ),
-											'hotel-section-slug'   => __( 'review', 'tourfic' ),
-											'hotel-section-status' => true,
+											'label'  => esc_html__( 'Review', 'tourfic' ),
+											'slug'   => 'review',
+											'status' => 1,
 										),
 										array(
-											'hotel-section'        => __( 'Terms & Conditions', 'tourfic' ),
-											'hotel-section-slug'   => __( 'trams-condition', 'tourfic' ),
-											'hotel-section-status' => true,
+											'label'  => esc_html__( 'Terms & Conditions', 'tourfic' ),
+											'slug'   => 'trams-condition',
+											'status' => 1,
 										),
-									)
+									),
 								),
 								//design 2
 								array(
-									'id'      => 'hotel_design_2_fonts_notice',
-									'type'    => 'notice',
-									'content' => __( 'We will recommend you to add Body Fonts "Josefin Sans" and Heading Fonts "Cormorant Garamond" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
-									'dependency' => array( 'single-hotel', '==', 'design-2' ),
-								),
-								array(
 									'id'         => 'single-hotel-layout-part-1',
-									'class'      => 'disable-sortable',
-									'type'       => 'repeater',
-									'drag_only'  => true,
-									'label'      => __( 'Single Hotel Template Sections Part 1', 'tourfic' ),
-									'subtitle'   => __( 'You can able to change section positions by Drag & Drop.', 'tourfic' ),
+									'type'       => 'switch_group',
+									'column'  	 => 4,
+									'label'      => esc_html__( 'Single Hotel Template Sections Part 1', 'tourfic' ),
+									'subtitle'   => esc_html__( 'You can able to change section positions by Drag & Drop.', 'tourfic' ),
 									'dependency' => array( 'single-hotel', '==', 'design-2' ),
-									'field_title'=> 'hotel-section',
-									'fields'     => array(
-										array(
-											'id'         => 'hotel-section',
-											'class'      => 'tf-section-name-hidden',
-											'type'       => 'text',
-											'label'      => __( 'Section Name', 'tourfic' ),
-											'attributes' => array(
-												'readonly' => 'readonly',
-											),
-										),
-										array(
-											'id'         => 'hotel-section-slug',
-											'class'      => 'tf-section-name-hidden',
-											'type'       => 'text',
-											'label'      => __( 'Section Slug', 'tourfic' ),
-											'attributes' => array(
-												'readonly' => 'readonly',
-											),
-										),
-										array(
-											'id'       => 'hotel-section-status',
-											'type'     => 'switch',
-											'label'    => __( 'Section Status', 'tourfic' ),
-											'subtitle' => __( 'You can able to enable/disable this section.', 'tourfic' ),
-										),
-									),
 									'default'    => array(
 										array(
-											'hotel-section'        => __( 'Description', 'tourfic' ),
-											'hotel-section-slug'   => __( 'description', 'tourfic' ),
-											'hotel-section-status' => true,
+											'label'  => esc_html__( 'Description', 'tourfic' ),
+											'slug'   => 'description',
+											'status' => 1,
 										),
 										array(
-											'hotel-section'        => __( 'Features', 'tourfic' ),
-											'hotel-section-slug'   => __( 'features', 'tourfic' ),
-											'hotel-section-status' => true,
+											'label'  => esc_html__( 'Features', 'tourfic' ),
+											'slug'   => 'features',
+											'status' => 1,
 										),
 										array(
-											'hotel-section'        => __( 'Room', 'tourfic' ),
-											'hotel-section-slug'   => __( 'rooms', 'tourfic' ),
-											'hotel-section-status' => true,
+											'label'  => esc_html__( 'Room', 'tourfic' ),
+											'slug'   => 'rooms',
+											'status' => 1,
 										)
-									)
+									),
 								),
 								array(
 									'id'         => 'single-hotel-layout-part-2',
-									'class'      => 'disable-sortable',
-									'type'       => 'repeater',
-									'drag_only'  => true,
-									'label'      => __( 'Single Hotel Template Sections Part 2', 'tourfic' ),
-									'subtitle'   => __( 'You can able to change section positions by Drag & Drop.', 'tourfic' ),
+									'type'       => 'switch_group',
+									'column'  	 => 4,
+									'label'      => esc_html__( 'Single Hotel Template Sections Part 2', 'tourfic' ),
+									'subtitle'   => esc_html__( 'You can able to change section positions by Drag & Drop.', 'tourfic' ),
 									'dependency' => array( 'single-hotel', '==', 'design-2' ),
-									'field_title'=> 'hotel-section',
-									'fields'     => array(
-										array(
-											'id'         => 'hotel-section',
-											'class'      => 'tf-section-name-hidden',
-											'type'       => 'text',
-											'label'      => __( 'Section Name', 'tourfic' ),
-											'attributes' => array(
-												'readonly' => 'readonly',
-											),
-										),
-										array(
-											'id'         => 'hotel-section-slug',
-											'class'      => 'tf-section-name-hidden',
-											'type'       => 'text',
-											'label'      => __( 'Section Slug', 'tourfic' ),
-											'attributes' => array(
-												'readonly' => 'readonly',
-											),
-										),
-										array(
-											'id'       => 'hotel-section-status',
-											'type'     => 'switch',
-											'label'    => __( 'Section Status', 'tourfic' ),
-											'subtitle' => __( 'You can able to enable/disable this section.', 'tourfic' ),
-										),
-									),
 									'default'    => array(
 										array(
-											'hotel-section'        => __( 'Facilities', 'tourfic' ),
-											'hotel-section-slug'   => __( 'facilities', 'tourfic' ),
-											'hotel-section-status' => true,
+											'label'  => esc_html__( 'Facilities', 'tourfic' ),
+											'slug'   => 'facilities',
+											'status' => 1,
 										),
 										array(
-											'hotel-section'        => __( 'Review', 'tourfic' ),
-											'hotel-section-slug'   => __( 'review', 'tourfic' ),
-											'hotel-section-status' => true,
+											'label'  => esc_html__( 'Review', 'tourfic' ),
+											'slug'   => 'review',
+											'status' => 1,
 										),
 										array(
-											'hotel-section'        => __( 'FAQ', 'tourfic' ),
-											'hotel-section-slug'   => __( 'faq', 'tourfic' ),
-											'hotel-section-status' => true,
+											'label'  => esc_html__( 'FAQ', 'tourfic' ),
+											'slug'   => 'faq',
+											'status' => 1,
 										),
 										array(
-											'hotel-section'        => __( 'Terms & Conditions', 'tourfic' ),
-											'hotel-section-slug'   => __( 'trams-condition', 'tourfic' ),
-											'hotel-section-status' => true,
-										),
-									)
-								),
-								//design 3
-								/*array(
-									'id'      => 'hotel_design_3_fonts_notice',
-									'type'    => 'notice',
-									'content' => __( 'We will recommend you to add Body Fonts and Heading Fonts "Ubuntu" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
-									'dependency' => array( 'single-hotel', '==', 'design-3' ),
-								),
-								array(
-									'id'         => 'single-hotel-layout-3',
-									'class'      => 'disable-sortable',
-									'type'       => 'repeater',
-									'drag_only'  => true,
-									'label'      => __( 'Single Hotel Template Sections', 'tourfic' ),
-									'subtitle'   => __( 'You can change the order of sections by dragging and dropping them.', 'tourfic' ),
-									'dependency' => array( 'single-hotel', '==', 'design-3' ),
-									'field_title'=> 'hotel-section',
-									'fields'     => array(
-										array(
-											'id'         => 'hotel-section',
-											'class'      => 'tf-section-name-hidden',
-											'type'       => 'text',
-											'label'      => __( 'Section Name', 'tourfic' ),
-											'attributes' => array(
-												'readonly' => 'readonly',
-											),
-										),
-										array(
-											'id'         => 'hotel-section-slug',
-											'class'      => 'tf-section-name-hidden',
-											'type'       => 'text',
-											'label'      => __( 'Section Slug', 'tourfic' ),
-											'attributes' => array(
-												'readonly' => 'readonly',
-											),
-										),
-										array(
-											'id'       => 'hotel-section-status',
-											'type'     => 'switch',
-											'label'    => __( 'Section Status', 'tourfic' ),
-											'subtitle' => __( 'Enable/disable this section.', 'tourfic' ),
+											'label'  => esc_html__( 'Terms & Conditions', 'tourfic' ),
+											'slug'   => 'trams-condition',
+											'status' => 1,
 										),
 									),
-									'default'    => array(
-										array(
-											'hotel-section'        => __( 'Description', 'tourfic' ),
-											'hotel-section-slug'   => __( 'description', 'tourfic' ),
-											'hotel-section-status' => true,
-										),
-										array(
-											'hotel-section'        => __( 'Room', 'tourfic' ),
-											'hotel-section-slug'   => __( 'rooms', 'tourfic' ),
-											'hotel-section-status' => true,
-										),
-										array(
-											"hotel-section"        => __( "Facilities", "tourfic" ),
-											"hotel-section-slug"   => __( "facilities", "tourfic" ),
-											"hotel-section-status" => true,
-										),
-										array(
-											'hotel-section'        => __( 'FAQ', 'tourfic' ),
-											'hotel-section-slug'   => __( 'faq', 'tourfic' ),
-											'hotel-section-status' => true,
-										),
-										array(
-											'hotel-section'        => __( 'Review', 'tourfic' ),
-											'hotel-section-slug'   => __( 'review', 'tourfic' ),
-											'hotel-section-status' => true,
-										),
-										array(
-											'hotel-section'        => __( 'Terms & Conditions', 'tourfic' ),
-											'hotel-section-slug'   => __( 'trams-condition', 'tourfic' ),
-											'hotel-section-status' => true,
-										),
-									)
-								),*/
+								),
 								array(
 									'id'      => 'hotel-title',
 									'type'    => 'heading',
-									'content' => __( 'Hotel Archive & Search Result Page', 'tourfic' ),
+									'content' => esc_html__( 'Hotel Archive & Search Result Page', 'tourfic' ),
 									'class'   => 'tf-field-class',
 								),
 								array(
 									'id'       => 'hotel-archive',
 									'type'     => 'imageselect',
-									'label'    => __( 'Select Archive & Search Result Template', 'tourfic' ),
-									'multiple' => true,
-									'inline'   => true,
+									'label'    => esc_html__( 'Select Archive & Search Result Template', 'tourfic' ),
 									'options'  => array(
 										'design-1' => array(
-											'title' => 'Design 1',
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/hotel-archive-design1.jpg",
+											'title' => esc_html__('Design 1', 'tourfic'),
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-design-1.png",
 										),
 										'design-2' => array(
-											'title' => 'Design 2',
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/hotel-archive-design2.jpg",
+											'title' => esc_html__('Design 2', 'tourfic'),
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-design-2.png",
 										),
 										'design-3' => array(
-											'title' => 'Design 3',
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/hotel-archive-design3.jpg",
+											'title' => esc_html__('Design 3', 'tourfic'),
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-design-3.png",
 											'is_pro'=> true,
 										),
 										'default'  => array(
-											'title' => 'Default',
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/hotel-archive-default.jpg",
+											'title' => esc_html__('Legacy', 'tourfic'),
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-default.png",
 										),
 									),
 									'default'  => 'design-1',
@@ -478,436 +330,229 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'      => 'hotel_archive_design_2_bannar',
 									'type'    => 'image',
-									'label'    => __( 'Archive & Search Result Banner Image', 'tourfic' ),
-									'subtitle' => __( 'Upload Banner Image for this hotel archive template.', 'tourfic' ),
+									'label'    => esc_html__( 'Archive & Search Result Banner Image', 'tourfic' ),
+									'subtitle' => esc_html__( 'Upload Banner Image for this hotel archive template.', 'tourfic' ),
 									'library' => 'image',
 									'dependency' => array( 'hotel-archive', '==', 'design-2' ),
 								),
 								array(
+									'id'      => 'hotel_archive_design_3_bannar',
+									'type'    => 'image',
+									'label'    => esc_html__( 'Archive & Search Result Banner Image', 'tourfic' ),
+									'subtitle' => esc_html__( 'Upload Banner Image for this hotel archive template.', 'tourfic' ),
+									'library' => 'image',
+									'dependency' => array( 'hotel-archive', '==', 'design-3' ),
+								),
+								array(
 									'id'         => 'hotel_archive_view',
 									'type'       => 'select',
-									'label'      => __( 'Archive Layout', 'tourfic' ),
+									'label'      => esc_html__( 'Archive Layout', 'tourfic' ),
 									'options'    => array(
-										'list' => __( 'List', 'tourfic' ),
-										'grid' => __( 'Grid', 'tourfic' ),
+										'list' => esc_html__( 'List', 'tourfic' ),
+										'grid' => esc_html__( 'Grid', 'tourfic' ),
 									),
 									'default'    => 'List',
 									'dependency' => array( 'hotel-archive', '!=', 'design-2' ),
 								),
-								array(
-									'id'      => 'hotel_design_1_fonts_notice',
-									'type'    => 'notice',
-									'content' => __( 'We will recommend you to add Body Fonts and Heading Fonts "Jost" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
-									'dependency' => array( 'hotel-archive', '==', 'design-1' ),
-								),
-								array(
-									'id'      => 'hotel_design_2_fonts_notice',
-									'type'    => 'notice',
-									'content' => __( 'We will recommend you to add Body Fonts "Josefin Sans" and Heading Fonts "Cormorant Garamond" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
-									'dependency' => array( 'hotel-archive', '==', 'design-2' ),
-								),
-								array(
-									'id'      => 'hotel_design_3_fonts_notice',
-									'type'    => 'notice',
-									'content' => __( 'We will recommend you to add Body Fonts and Heading Fonts "Ubuntu" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
-									'dependency' => array( 'hotel-archive', '==', 'design-3' ),
-								),
+							
 								array(
 									'id'      => 'hotel_archive_notice',
 									'type'    => 'notice',
-									'content' => __( 'Edit the sidebar filter from Appearance -> Widgets', 'tourfic' ),
+									'content' => esc_html__( 'Edit the sidebar filter from Appearance -> Widgets', 'tourfic' ),
 								),
 							),
 						),
 						array(
 							'id'     => 'tour_template',
-							'title'  => __( 'Tour', 'tourfic' ),
+							'title'  => esc_html__( 'Tour', 'tourfic' ),
+							'post_dependency' => 'tour',
 							'fields' => array(
 								array(
 									'id'      => 'tour-title',
 									'type'    => 'heading',
-									'content' => __( 'Tour Single Page', 'tourfic' ),
+									'content' => esc_html__( 'Tour Single Page', 'tourfic' ),
 									'class'   => 'tf-field-class',
 								),
 								array(
 									'id'       => 'single-tour',
 									'type'     => 'imageselect',
-									'label'    => __( 'Select Single Tour Template', 'tourfic' ),
-									'subtitle'   => __( 'You have the option to override this from the settings specific to each individual tour page.', 'tourfic' ),
-									'multiple' => true,
-									'inline'   => true,
+									'label'    => esc_html__( 'Select Single Tour Template', 'tourfic' ),
+									'subtitle'   => esc_html__( 'You have the option to override this from the settings specific to each individual tour page.', 'tourfic' ),
 									'options'  => array(
 										'design-1' => array(
-											'title' => 'Design 1',
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/design1-tour.jpg",
+											'title' => esc_html__('Design 1', 'tourfic'),
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-design-1.png",
+											'preview_link' => esc_url('https://tourfic.com/preview/tours/amplified-nz-tour/'),
 										),
 										'design-2' => array(
-											'title' => 'Design 2',
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/design2-tour.jpg",
+											'title' => esc_html__('Design 2', 'tourfic'),
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-design-2.png",
+											'preview_link' => esc_url('https://tourfic.com/preview/tours/ancient-trails-of-japan/'),
 										),
-//										'design-3' => array(
-//											'title' => 'Design 3',
-//											'url'   => TF_ASSETS_ADMIN_URL . "images/template/design3-tour.jpg",
-//										),
 										'default'  => array(
-											'title' => 'Default',
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/default-tour.jpg",
+											'title' => esc_html__('Legacy', 'tourfic'),
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-default.png",
+											'preview_link' => esc_url('https://tourfic.com/preview/tours/magical-russia/'),
 										),
 									),
 									'default'  => 'design-1',
 								),
-								//design 1
-								array(
-									'id'      => 'tour_design_1_fonts_notice',
-									'type'    => 'notice',
-									'content' => __( 'We will recommend you to add Body Fonts and Heading Fonts "Jost" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
-									'dependency' => array( 'single-tour', '==', 'design-1' ),
-								),
+                                //design 1
+							
 								array(
 									'id'         => 'single-tour-layout',
-									'class'      => 'disable-sortable',
-									'type'       => 'repeater',
-									'drag_only'  => true,
-									'label'      => __( 'Single Tour Template Sections', 'tourfic' ),
-									'subtitle'   => __( 'You can change the order of sections by dragging and dropping them.', 'tourfic' ),
+									'type'       => 'switch_group',
+									'column'  	 => 4,
+									'label'      => esc_html__( 'Single Tour Template Sections', 'tourfic' ),
+									'subtitle'   => esc_html__( 'You can change the order of sections by dragging and dropping them.', 'tourfic' ),
 									'dependency' => array( 'single-tour', '==', 'design-1' ),
-									'field_title'=> 'tour-section',
-									'fields'     => array(
-										array(
-											'id'         => 'tour-section',
-											'class'      => 'tf-section-name-hidden',
-											'type'       => 'text',
-											'label'      => __( 'Section Name', 'tourfic' ),
-											'attributes' => array(
-												'readonly' => 'readonly',
-											),
-										),
-										array(
-											'id'         => 'tour-section-slug',
-											'class'      => 'tf-section-name-hidden',
-											'type'       => 'text',
-											'label'      => __( 'Section Slug', 'tourfic' ),
-											'attributes' => array(
-												'readonly' => 'readonly',
-											),
-										),
-										array(
-											'id'       => 'tour-section-status',
-											'type'     => 'switch',
-											'label'    => __( 'Section Status', 'tourfic' ),
-											'subtitle' => __( 'You can enable/disable this section.', 'tourfic' ),
-										),
-									),
 									'default'    => array(
 										array(
-											'tour-section'        => __( 'Gallery', 'tourfic' ),
-											'tour-section-slug'   => __( 'gallery', 'tourfic' ),
-											'tour-section-status' => true,
+											'label'  => esc_html__( 'Gallery', 'tourfic' ),
+											'slug'   => 'gallery',
+											'status' => 1,
 										),
 										array(
-											'tour-section'        => __( 'Price', 'tourfic' ),
-											'tour-section-slug'   => __( 'price', 'tourfic' ),
-											'tour-section-status' => true,
+											'label'  => esc_html__( 'Price', 'tourfic' ),
+											'slug'   => 'price',
+											'status' => 1,
 										),
 										array(
-											'tour-section'        => __( 'Description', 'tourfic' ),
-											'tour-section-slug'   => __( 'description', 'tourfic' ),
-											'tour-section-status' => true,
+											'label'  => esc_html__( 'Description', 'tourfic' ),
+											'slug'   => 'description',
+											'status' => 1,
 										),
 										array(
-											'tour-section'        => __( 'Information', 'tourfic' ),
-											'tour-section-slug'   => __( 'information', 'tourfic' ),
-											'tour-section-status' => true,
+											'label'  => esc_html__( 'Information', 'tourfic' ),
+											'slug'   => 'information',
+											'status' => 1,
 										),
 										array(
-											'tour-section'        => __( 'Highlights', 'tourfic' ),
-											'tour-section-slug'   => __( 'highlights', 'tourfic' ),
-											'tour-section-status' => true,
+											'label'  => esc_html__( 'Highlights', 'tourfic' ),
+											'slug'   => 'highlights',
+											'status' => 1,
 										),
 										array(
-											'tour-section'        => __( 'Include Exclude', 'tourfic' ),
-											'tour-section-slug'   => __( 'include-exclude', 'tourfic' ),
-											'tour-section-status' => true,
+											'label'  => esc_html__( 'Include Exclude', 'tourfic' ),
+											'slug'   => 'include-exclude',
+											'status' => 1,
 										),
 										array(
-											'tour-section'        => __( 'Itinerary', 'tourfic' ),
-											'tour-section-slug'   => __( 'itinerary', 'tourfic' ),
-											'tour-section-status' => true,
+											'label'  => esc_html__( 'Itinerary', 'tourfic' ),
+											'slug'   => 'itinerary',
+											'status' => 1,
 										),
 										array(
-											'tour-section'        => __( 'Map', 'tourfic' ),
-											'tour-section-slug'   => __( 'map', 'tourfic' ),
-											'tour-section-status' => true,
+											'label'  => esc_html__( 'Map', 'tourfic' ),
+											'slug'   => 'map',
+											'status' => 1,
 										),
 										array(
-											'tour-section'        => __( 'FAQ', 'tourfic' ),
-											'tour-section-slug'   => __( 'faq', 'tourfic' ),
-											'tour-section-status' => true,
+											'label'  => esc_html__( 'FAQ', 'tourfic' ),
+											'slug'   => 'faq',
+											'status' => 1,
 										),
 										array(
-											'tour-section'        => __( 'Terms & Conditions', 'tourfic' ),
-											'tour-section-slug'   => __( 'trams-condition', 'tourfic' ),
-											'tour-section-status' => true,
+											'label'  => esc_html__( 'Terms & Conditions', 'tourfic' ),
+											'slug'   => 'trams-condition',
+											'status' => 1,
 										),
 										array(
-											'tour-section'        => __( 'Review', 'tourfic' ),
-											'tour-section-slug'   => __( 'review', 'tourfic' ),
-											'tour-section-status' => true,
+											'label'  => esc_html__( 'Review', 'tourfic' ),
+											'slug'   => 'review',
+											'status' => 1,
 										),
-									)
+									),
 								),
-								//design 2
-								array(
-									'id'      => 'tour_design_2_fonts_notice',
-									'type'    => 'notice',
-									'content' => __( 'We will recommend you to add Body Fonts "Josefin Sans" and Heading Fonts "Cormorant Garamond" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
-									'dependency' => array( 'single-tour', '==', 'design-2' ),
-								),
+                                //design 2
+								
 								array(
 									'id'         => 'single-tour-layout-part-1',
-									'class'      => 'disable-sortable',
-									'type'       => 'repeater',
-									'drag_only'  => true,
-									'label'      => __( 'Single Tour Template Sections Part 1', 'tourfic' ),
-									'subtitle'   => __( 'You can able to change section positions by Drag & Drop.', 'tourfic' ),
+									'type'       => 'switch_group',
+									'column'  	 => 4,
+									'label'      => esc_html__( 'Single Tour Template Sections Part 1', 'tourfic' ),
+									'subtitle'   => esc_html__( 'You can able to change section positions by Drag & Drop.', 'tourfic' ),
 									'dependency' => array( 'single-tour', '==', 'design-2' ),
-									'field_title'=> 'tour-section',
-									'fields'     => array(
-										array(
-											'id'         => 'tour-section',
-											'class'      => 'tf-section-name-hidden',
-											'type'       => 'text',
-											'label'      => __( 'Section Name', 'tourfic' ),
-											'attributes' => array(
-												'readonly' => 'readonly',
-											),
-										),
-										array(
-											'id'         => 'tour-section-slug',
-											'class'      => 'tf-section-name-hidden',
-											'type'       => 'text',
-											'label'      => __( 'Section Slug', 'tourfic' ),
-											'attributes' => array(
-												'readonly' => 'readonly',
-											),
-										),
-										array(
-											'id'       => 'tour-section-status',
-											'type'     => 'switch',
-											'label'    => __( 'Section Status', 'tourfic' ),
-											'subtitle' => __( 'You can able to enable/disable this section.', 'tourfic' ),
-										),
-									),
 									'default'    => array(
 										array(
-											'tour-section'        => __( 'Description', 'tourfic' ),
-											'tour-section-slug'   => __( 'description', 'tourfic' ),
-											'tour-section-status' => true,
+											'label'  => esc_html__( 'Description', 'tourfic' ),
+											'slug'   => 'description',
+											'status' => 1,
 										),
 										array(
-											'tour-section'        => __( 'Information', 'tourfic' ),
-											'tour-section-slug'   => __( 'information', 'tourfic' ),
-											'tour-section-status' => true,
+											'label'  => esc_html__( 'Information', 'tourfic' ),
+											'slug'   => 'information',
+											'status' => 1,
 										),
 										array(
-											'tour-section'        => __( 'Highlights', 'tourfic' ),
-											'tour-section-slug'   => __( 'highlights', 'tourfic' ),
-											'tour-section-status' => true,
+											'label'  => esc_html__( 'Highlights', 'tourfic' ),
+											'slug'   => 'highlights',
+											'status' => 1,
 										),
 										array(
-											'tour-section'        => __( 'Include & Exclude', 'tourfic' ),
-											'tour-section-slug'   => __( 'include-exclude', 'tourfic' ),
-											'tour-section-status' => true,
+											'label'  => esc_html__( 'Include & Exclude', 'tourfic' ),
+											'slug'   => 'include-exclude',
+											'status' => 1,
 										),
 										array(
-											'tour-section'        => __( 'Itinerary', 'tourfic' ),
-											'tour-section-slug'   => __( 'itinerary', 'tourfic' ),
-											'tour-section-status' => true,
+											'label'  => esc_html__( 'Itinerary', 'tourfic' ),
+											'slug'   => 'itinerary',
+											'status' => 1,
 										)
-									)
+									),
 								),
 								array(
 									'id'         => 'single-tour-layout-part-2',
-									'class'      => 'disable-sortable',
-									'type'       => 'repeater',
-									'drag_only'  => true,
-									'label'      => __( 'Single Tour Template Sections Part 2', 'tourfic' ),
-									'subtitle'   => __( 'You can able to change section positions by Drag & Drop.', 'tourfic' ),
+									'type'       => 'switch_group',
+									'column'  	 => 4,
+									'label'      => esc_html__( 'Single Tour Template Sections Part 2', 'tourfic' ),
+									'subtitle'   => esc_html__( 'You can able to change section positions by Drag & Drop.', 'tourfic' ),
 									'dependency' => array( 'single-tour', '==', 'design-2' ),
-									'field_title'=> 'tour-section',
-									'fields'     => array(
-										array(
-											'id'         => 'tour-section',
-											'class'      => 'tf-section-name-hidden',
-											'type'       => 'text',
-											'label'      => __( 'Section Name', 'tourfic' ),
-											'attributes' => array(
-												'readonly' => 'readonly',
-											),
-										),
-										array(
-											'id'         => 'tour-section-slug',
-											'class'      => 'tf-section-name-hidden',
-											'type'       => 'text',
-											'label'      => __( 'Section Slug', 'tourfic' ),
-											'attributes' => array(
-												'readonly' => 'readonly',
-											),
-										),
-										array(
-											'id'       => 'tour-section-status',
-											'type'     => 'switch',
-											'label'    => __( 'Section Status', 'tourfic' ),
-											'subtitle' => __( 'You can able to enable/disable this section.', 'tourfic' ),
-										),
-									),
 									'default'    => array(
 										array(
-											'tour-section'        => __( 'FAQ', 'tourfic' ),
-											'tour-section-slug'   => __( 'faq', 'tourfic' ),
-											'tour-section-status' => true,
+											'label'  => esc_html__( 'FAQ', 'tourfic' ),
+											'slug'   => 'faq',
+											'status' => 1,
 										),
 										array(
-											'tour-section'        => __( 'Review', 'tourfic' ),
-											'tour-section-slug'   => __( 'review', 'tourfic' ),
-											'tour-section-status' => true,
+											'label'  => esc_html__( 'Review', 'tourfic' ),
+											'slug'   => 'review',
+											'status' => 1,
 										),
 										array(
-											'tour-section'        => __( 'Terms & Conditions', 'tourfic' ),
-											'tour-section-slug'   => __( 'trams-condition', 'tourfic' ),
-											'tour-section-status' => true,
-										),
-									)
-								),
-								//design 3
-								/*array(
-									'id'      => 'tour_design_3_fonts_notice',
-									'type'    => 'notice',
-									'content' => __( 'We will recommend you to add Body Fonts and Heading Fonts "Ubuntu" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
-									'dependency' => array( 'single-tour', '==', 'design-3' ),
-								),
-								array(
-									'id'         => 'single-tour-layout-3',
-									'class'      => 'disable-sortable',
-									'type'       => 'repeater',
-									'drag_only'  => true,
-									'label'      => __( 'Single Tour Template Sections', 'tourfic' ),
-									'subtitle'   => __( 'You can change the order of sections by dragging and dropping them.', 'tourfic' ),
-									'dependency' => array( 'single-tour', '==', 'design-3' ),
-									'field_title'=> 'tour-section',
-									'fields'     => array(
-										array(
-											'id'         => 'tour-section',
-											'class'      => 'tf-section-name-hidden',
-											'type'       => 'text',
-											'label'      => __( 'Section Name', 'tourfic' ),
-											'attributes' => array(
-												'readonly' => 'readonly',
-											),
-										),
-										array(
-											'id'         => 'tour-section-slug',
-											'class'      => 'tf-section-name-hidden',
-											'type'       => 'text',
-											'label'      => __( 'Section Slug', 'tourfic' ),
-											'attributes' => array(
-												'readonly' => 'readonly',
-											),
-										),
-										array(
-											'id'       => 'tour-section-status',
-											'type'     => 'switch',
-											'label'    => __( 'Section Status', 'tourfic' ),
-											'subtitle' => __( 'You can enable/disable this section.', 'tourfic' ),
+											'label'  => esc_html__( 'Terms & Conditions', 'tourfic' ),
+											'slug'   => 'trams-condition',
+											'status' => 1,
 										),
 									),
-									'default'    => array(
-										array(
-											'tour-section'        => __( 'Gallery', 'tourfic' ),
-											'tour-section-slug'   => __( 'gallery', 'tourfic' ),
-											'tour-section-status' => true,
-										),
-										array(
-											'tour-section'        => __( 'Price', 'tourfic' ),
-											'tour-section-slug'   => __( 'price', 'tourfic' ),
-											'tour-section-status' => true,
-										),
-										array(
-											'tour-section'        => __( 'Description', 'tourfic' ),
-											'tour-section-slug'   => __( 'description', 'tourfic' ),
-											'tour-section-status' => true,
-										),
-										array(
-											'tour-section'        => __( 'Information', 'tourfic' ),
-											'tour-section-slug'   => __( 'information', 'tourfic' ),
-											'tour-section-status' => true,
-										),
-										array(
-											'tour-section'        => __( 'Highlights', 'tourfic' ),
-											'tour-section-slug'   => __( 'highlights', 'tourfic' ),
-											'tour-section-status' => true,
-										),
-										array(
-											'tour-section'        => __( 'Include Exclude', 'tourfic' ),
-											'tour-section-slug'   => __( 'include-exclude', 'tourfic' ),
-											'tour-section-status' => true,
-										),
-										array(
-											'tour-section'        => __( 'Itinerary', 'tourfic' ),
-											'tour-section-slug'   => __( 'itinerary', 'tourfic' ),
-											'tour-section-status' => true,
-										),
-										array(
-											'tour-section'        => __( 'Map', 'tourfic' ),
-											'tour-section-slug'   => __( 'map', 'tourfic' ),
-											'tour-section-status' => true,
-										),
-										array(
-											'tour-section'        => __( 'FAQ', 'tourfic' ),
-											'tour-section-slug'   => __( 'faq', 'tourfic' ),
-											'tour-section-status' => true,
-										),
-										array(
-											'tour-section'        => __( 'Terms & Conditions', 'tourfic' ),
-											'tour-section-slug'   => __( 'trams-condition', 'tourfic' ),
-											'tour-section-status' => true,
-										),
-										array(
-											'tour-section'        => __( 'Review', 'tourfic' ),
-											'tour-section-slug'   => __( 'review', 'tourfic' ),
-											'tour-section-status' => true,
-										),
-									)
-								),*/
+								),
 								array(
 									'id'      => 'tour-title',
 									'type'    => 'heading',
-									'content' => __( 'Tour Archive & Search Result Page', 'tourfic' ),
+									'content' => esc_html__( 'Tour Archive & Search Result Page', 'tourfic' ),
 									'class'   => 'tf-field-class',
 								),
 								array(
 									'id'       => 'tour-archive',
 									'type'     => 'imageselect',
-									'label'    => __( 'Select Archive & Search Result Template', 'tourfic' ),
-									'multiple' => true,
-									'inline'   => true,
+									'label'    => esc_html__( 'Select Archive & Search Result Template', 'tourfic' ),
 									'options'  => array(
 										'design-1' => array(
-											'title' => 'Design 1',
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/tour-archive-design-1.jpg",
+											'title' => esc_html__('Design 1', 'tourfic'),
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-design-1.png",
 										),
 										'design-2' => array(
-											'title' => 'Design 2',
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/tour-archive-design-2.jpg",
+											'title' => esc_html__('Design 2', 'tourfic'),
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-design-2.png",
 										),
 										'design-3' => array(
-											'title' => 'Design 3',
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/hotel-archive-design3.jpg",
+											'title' => esc_html__('Design 3', 'tourfic'),
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-design-3.png",
 											'is_pro'=> true,
 										),
 										'default'  => array(
-											'title' => 'Default',
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/tour-archive-default.jpg",
+											'title' => esc_html__('Legacy', 'tourfic'),
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-default.png",
 										),
 									),
 									'default'  => 'design-1',
@@ -915,229 +560,158 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'      => 'tour_archive_design_2_bannar',
 									'type'    => 'image',
-									'label'    => __( 'Archive & Search Result Banner Image', 'tourfic' ),
-									'subtitle' => __( 'Upload Banner Image for this tour archive template.', 'tourfic' ),
+									'label'    => esc_html__( 'Archive & Search Result Banner Image', 'tourfic' ),
+									'subtitle' => esc_html__( 'Upload Banner Image for this tour archive template.', 'tourfic' ),
 									'library' => 'image',
 									'dependency' => array( 'tour-archive', '==', 'design-2' ),
 								),
 								array(
+									'id'      => 'tour_archive_design_3_bannar',
+									'type'    => 'image',
+									'label'    => esc_html__( 'Archive & Search Result Banner Image', 'tourfic' ),
+									'subtitle' => esc_html__( 'Upload Banner Image for this tour archive template.', 'tourfic' ),
+									'library' => 'image',
+									'dependency' => array( 'tour-archive', '==', 'design-3' ),
+								),
+								array(
 									'id'         => 'tour_archive_view',
 									'type'       => 'select',
-									'label'      => __( 'Archive Layout', 'tourfic' ),
+									'label'      => esc_html__( 'Archive Layout', 'tourfic' ),
 									'options'    => array(
-										'list' => __( 'List', 'tourfic' ),
-										'grid' => __( 'Grid', 'tourfic' ),
+										'list' => esc_html__( 'List', 'tourfic' ),
+										'grid' => esc_html__( 'Grid', 'tourfic' ),
 									),
 									'default'    => 'List',
 									'dependency' => array( 'tour-archive', '!=', 'design-2' ),
 								),
-								array(
-									'id'      => 'tour_design_1_fonts_notice',
-									'type'    => 'notice',
-									'content' => __( 'We will recommend you to add Body Fonts and Heading Fonts "Jost" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
-									'dependency' => array( 'tour-archive', '==', 'design-1' ),
-								),
-								array(
-									'id'      => 'tour_design_2_fonts_notice',
-									'type'    => 'notice',
-									'content' => __( 'We will recommend you to add Body Fonts "Josefin Sans" and Heading Fonts "Cormorant Garamond" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
-									'dependency' => array( 'tour-archive', '==', 'design-2' ),
-								),
-								array(
-									'id'      => 'tour_design_3_fonts_notice',
-									'type'    => 'notice',
-									'content' => __( 'We will recommend you to add Body Fonts and Heading Fonts "Ubuntu" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
-									'dependency' => array( 'tour-archive', '==', 'design-3' ),
-								),
+								
 								array(
 									'id'      => 'tour_archive_notice',
 									'type'    => 'notice',
-									'content' => __( 'Edit the sidebar filter from Appearance -> Widgets', 'tourfic' ),
+									'content' => esc_html__( 'Edit the sidebar filter from Appearance -> Widgets', 'tourfic' ),
 								),
 							),
 						),
 						array(
 							'id'     => 'apartment_template',
-							'title'  => __( 'Apartment', 'tourfic' ),
+							'title'  => esc_html__( 'Apartment', 'tourfic' ),
 							'icon'   => 'fa fa-gear',
+							'post_dependency' => 'apartment',
 							'fields' => array(
 								array(
 									'id'      => 'apartment-title',
 									'type'    => 'heading',
-									'content' => __( 'Apartment Single Page', 'tourfic' ),
+									'content' => esc_html__( 'Apartment Single Page', 'tourfic' ),
 									'class'   => 'tf-field-class',
 								),
 								array(
 									'id'       => 'single-apartment',
 									'type'     => 'imageselect',
-									'label'    => __( 'Select Single Apartment Template', 'tourfic' ),
-									'subtitle'   => __( 'You have the option to override this from the settings specific to each individual apartment page.', 'tourfic' ),
-									'multiple' => true,
-									'inline'   => true,
+									'label'    => esc_html__( 'Select Single Apartment Template', 'tourfic' ),
+									'subtitle'   => esc_html__( 'You have the option to override this from the settings specific to each individual apartment page.', 'tourfic' ),
 									'options'  => array(
-										'default'  => array(
-											'title' => 'Default',
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/default-apartment.jpg",
-										),
 										'design-1' => array(
-											'title' => 'Design 1',
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/design1-apartment.jpg",
+											'title' => esc_html__('Design 1', 'tourfic'),
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-apt-design-1.png",
+											'preview_link' => esc_url('https://tourfic.com/preview/apartments/2-bedroom-apartment-in-gamle-oslo/'),
+										),
+										'default'  => array(
+											'title' => esc_html__('Legacy', 'tourfic'),
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-apt-default.png",
+											'preview_link' => esc_url('https://tourfic.com/preview/apartments/barcelo-residences-dubai-marina/'),
 										),
 									),
-									'default'  => 'default',
+									'default'  => 'design-1',
 								),
-								array(
-									'id'      => 'aprtment_single_design_1_fonts_notice',
-									'type'    => 'notice',
-									'content' => __( 'We will recommend you to add Body Fonts "Josefin Sans" and Heading Fonts "Cormorant Garamond" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
-									'dependency' => array( 'single-apartment', '==', 'design-1' ),
-								),
+							
 								array(
 									'id'         => 'single-aprtment-layout-part-1',
-									'class'      => 'disable-sortable',
-									'type'       => 'repeater',
-									'drag_only'  => true,
-									'label'      => __( 'Single Aprtment Template Sections Part 1', 'tourfic' ),
-									'subtitle'   => __( 'You can able to change section positions by Drag & Drop.', 'tourfic' ),
+									'type'       => 'switch_group',
+									'column'  	 => 4,
+									'label'      => esc_html__( 'Single Apartment Template Sections Part 1', 'tourfic' ),
+									'subtitle'   => esc_html__( 'You can able to change section positions by Drag & Drop.', 'tourfic' ),
 									'dependency' => array( 'single-apartment', '==', 'design-1' ),
-									'field_title'=> 'aprtment-section',
-									'fields'     => array(
-										array(
-											'id'         => 'aprtment-section',
-											'class'      => 'tf-section-name-hidden',
-											'type'       => 'text',
-											'label'      => __( 'Section Name', 'tourfic' ),
-											'attributes' => array(
-												'readonly' => 'readonly',
-											),
-										),
-										array(
-											'id'         => 'aprtment-section-slug',
-											'class'      => 'tf-section-name-hidden',
-											'type'       => 'text',
-											'label'      => __( 'Section Slug', 'tourfic' ),
-											'attributes' => array(
-												'readonly' => 'readonly',
-											),
-										),
-										array(
-											'id'       => 'aprtment-section-status',
-											'type'     => 'switch',
-											'label'    => __( 'Section Status', 'tourfic' ),
-											'subtitle' => __( 'You can able to enable/disable this section.', 'tourfic' ),
-										),
-									),
 									'default'    => array(
 										array(
-											'aprtment-section'        => __( 'Description', 'tourfic' ),
-											'aprtment-section-slug'   => __( 'description', 'tourfic' ),
-											'aprtment-section-status' => true,
+											'label'  => esc_html__( 'Description', 'tourfic' ),
+											'slug'   => 'description',
+											'status' => 1,
 										),
 										array(
-											'aprtment-section'        => __( 'Highlights ', 'tourfic' ),
-											'aprtment-section-slug'   => __( 'features', 'tourfic' ),
-											'aprtment-section-status' => true,
+											'label'  => esc_html__( 'Highlights ', 'tourfic' ),
+											'slug'   => 'features',
+											'status' => 1,
 										),
 										array(
-											'aprtment-section'        => __( 'Apartment Rooms', 'tourfic' ),
-											'aprtment-section-slug'   => __( 'rooms', 'tourfic' ),
-											'aprtment-section-status' => true,
+											'label'  => esc_html__( 'Apartment Rooms', 'tourfic' ),
+											'slug'   => 'rooms',
+											'status' => 1,
 										),
 										array(
-											'aprtment-section'        => __( 'Place offer', 'tourfic' ),
-											'aprtment-section-slug'   => __( 'offer', 'tourfic' ),
-											'aprtment-section-status' => true,
+											'label'  => esc_html__( 'Place offer', 'tourfic' ),
+											'slug'   => 'offer',
+											'status' => 1,
 										),
 										array(
-											'aprtment-section'        => __( 'House Rules', 'tourfic' ),
-											'aprtment-section-slug'   => __( 'rules', 'tourfic' ),
-											'aprtment-section-status' => true,
+											'label'  => esc_html__( 'House Rules', 'tourfic' ),
+											'slug'   => 'rules',
+											'status' => 1,
 										),
 										array(
-											'aprtment-section'        => __( 'Amenities', 'tourfic' ),
-											'aprtment-section-slug'   => __( 'facilities', 'tourfic' ),
-											'aprtment-section-status' => true,
+											'label'  => esc_html__( 'Amenities', 'tourfic' ),
+											'slug'   => 'facilities',
+											'status' => 1,
 										)
-									)
+									),
 								),
 								array(
 									'id'         => 'single-aprtment-layout-part-2',
-									'class'      => 'disable-sortable',
-									'type'       => 'repeater',
-									'drag_only'  => true,
-									'label'      => __( 'Single Aprtment Template Sections Part 2', 'tourfic' ),
-									'subtitle'   => __( 'You can able to change section positions by Drag & Drop.', 'tourfic' ),
+									'type'       => 'switch_group',
+									'column'  	 => 4,
+									'label'      => esc_html__( 'Single Apartment Template Sections Part 2', 'tourfic' ),
+									'subtitle'   => esc_html__( 'You can able to change section positions by Drag & Drop.', 'tourfic' ),
 									'dependency' => array( 'single-apartment', '==', 'design-1' ),
-									'field_title'=> 'aprtment-section',
-									'fields'     => array(
-										array(
-											'id'         => 'aprtment-section',
-											'class'      => 'tf-section-name-hidden',
-											'type'       => 'text',
-											'label'      => __( 'Section Name', 'tourfic' ),
-											'attributes' => array(
-												'readonly' => 'readonly',
-											),
-										),
-										array(
-											'id'         => 'aprtment-section-slug',
-											'class'      => 'tf-section-name-hidden',
-											'type'       => 'text',
-											'label'      => __( 'Section Slug', 'tourfic' ),
-											'attributes' => array(
-												'readonly' => 'readonly',
-											),
-										),
-										array(
-											'id'       => 'aprtment-section-status',
-											'type'     => 'switch',
-											'label'    => __( 'Section Status', 'tourfic' ),
-											'subtitle' => __( 'You can able to enable/disable this section.', 'tourfic' ),
-										),
-									),
 									'default'    => array(
 										array(
-											'aprtment-section'        => __( 'Review', 'tourfic' ),
-											'aprtment-section-slug'   => __( 'review', 'tourfic' ),
-											'aprtment-section-status' => true,
+											'label'  => esc_html__( 'Review', 'tourfic' ),
+											'slug'   => 'review',
+											'status' => 1,
 										),
 										array(
-											'aprtment-section'        => __( 'FAQ', 'tourfic' ),
-											'aprtment-section-slug'   => __( 'faq', 'tourfic' ),
-											'aprtment-section-status' => true,
+											'label'  => esc_html__( 'FAQ', 'tourfic' ),
+											'slug'   => 'faq',
+											'status' => 1,
 										),
 										array(
-											'aprtment-section'        => __( 'Terms & Conditions', 'tourfic' ),
-											'aprtment-section-slug'   => __( 'trams-condition', 'tourfic' ),
-											'aprtment-section-status' => true,
+											'label'  => esc_html__( 'Terms & Conditions', 'tourfic' ),
+											'slug'   => 'trams-condition',
+											'status' => 1,
 										),
-									)
+									),
 								),
 								array(
 									'id'      => 'apartment-title',
 									'type'    => 'heading',
-									'content' => __( 'Apartment Archive & Search Result Page', 'tourfic' ),
+									'content' => esc_html__( 'Apartment Archive & Search Result Page', 'tourfic' ),
 									'class'   => 'tf-field-class',
 								),
 								array(
 									'id'       => 'apartment-archive',
 									'type'     => 'imageselect',
-									'label'    => __( 'Select Archive & Search Result Template', 'tourfic' ),
-									'multiple' => true,
-									'inline'   => true,
+									'label'    => esc_html__( 'Select Archive & Search Result Template', 'tourfic' ),
 									'options'  => array(
-										'default'  => array(
-											'title' => 'Default',
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/apartment-archive-default.jpg",
-										),
 										'design-1' => array(
-											'title' => 'Design 1',
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/tour-archive-design-2.jpg",
+											'title' => esc_html__('Design 1', 'tourfic'),
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-design-2.png",
 										),
 										'design-2' => array(
-											'title' => 'Design 2',
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/hotel-archive-design3.jpg",
+											'title' => esc_html__('Design 2', 'tourfic'),
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-design-3.png",
 											'is_pro'=> true,
+										),
+										'default'  => array(
+											'title' => esc_html__('Legacy', 'tourfic'),
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-default.png",
 										),
 									),
 									'default'  => 'default',
@@ -1145,38 +719,35 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'      => 'apartment_archive_design_1_bannar',
 									'type'    => 'image',
-									'label'    => __( 'Archive & Search Result Banner Image', 'tourfic' ),
-									'subtitle' => __( 'Upload Banner Image for this tour archive template.', 'tourfic' ),
+									'label'    => esc_html__( 'Archive & Search Result Banner Image', 'tourfic' ),
+									'subtitle' => esc_html__( 'Upload Banner Image for this tour archive template.', 'tourfic' ),
 									'library' => 'image',
 									'dependency' => array( 'apartment-archive', '==', 'design-1' ),
 								),
 								array(
+									'id'      => 'apartment_archive_design_2_bannar',
+									'type'    => 'image',
+									'label'    => esc_html__( 'Archive & Search Result Banner Image', 'tourfic' ),
+									'subtitle' => esc_html__( 'Upload Banner Image for this tour archive template.', 'tourfic' ),
+									'library' => 'image',
+									'dependency' => array( 'apartment-archive', '==', 'design-2' ),
+								),
+								array(
 									'id'         => 'apartment_archive_view',
 									'type'       => 'select',
-									'label'      => __( 'Archive Layout', 'tourfic' ),
+									'label'      => esc_html__( 'Archive Layout', 'tourfic' ),
 									'options'    => array(
-										'list' => __( 'List', 'tourfic' ),
-										'grid' => __( 'Grid', 'tourfic' ),
+										'list' => esc_html__( 'List', 'tourfic' ),
+										'grid' => esc_html__( 'Grid', 'tourfic' ),
 									),
 									'default'    => 'List',
 									'dependency' => array( 'apartment-archive', '!=', 'design-1' ),
 								),
-								array(
-									'id'      => 'aprtment_design_1_fonts_notice',
-									'type'    => 'notice',
-									'content' => __( 'We will recommend you to add Body Fonts "Josefin Sans" and Heading Fonts "Cormorant Garamond" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
-									'dependency' => array( 'apartment-archive', '==', 'design-1' ),
-								),
-								array(
-									'id'      => 'apartment_design_2_fonts_notice',
-									'type'    => 'notice',
-									'content' => __( 'We will recommend you to add Body Fonts and Heading Fonts "Ubuntu" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
-									'dependency' => array( 'apartment-archive', '==', 'design-2' ),
-								),
+							
 								array(
 									'id'      => 'apartment_archive_notice',
 									'type'    => 'notice',
-									'content' => __( 'Edit the sidebar filter from Appearance -> Widgets', 'tourfic' ),
+									'content' => esc_html__( 'Edit the sidebar filter from Appearance -> Widgets', 'tourfic' ),
 								),
 							),
 						),
@@ -1184,6 +755,7 @@ TF_Settings::option( 'tf_settings', array(
 							'id'     => 'car_template',
 							'title'  => __( 'Car', 'tourfic' ),
 							'icon'   => 'fa fa-gear',
+							'post_dependency' => 'carrentals',
 							'fields' => array(
 								array(
 									'id'      => 'car-title',
@@ -1196,94 +768,60 @@ TF_Settings::option( 'tf_settings', array(
 									'type'     => 'imageselect',
 									'label'    => __( 'Select Single Car Template', 'tourfic' ),
 									'subtitle'   => __( 'You have the option to override this from the settings specific to each individual apartment page.', 'tourfic' ),
-									'multiple' => true,
-									'inline'   => true,
 									'options'  => array(
 										'design-1' => array(
-											'title' => 'Design 1',
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/design-1-car.jpg",
+											'title' => esc_html__('Design 1', 'tourfic'),
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-car-design-1.png",
+											'preview_link' => esc_url('https://tourfic.com/preview/cars/honda-city/'),
 										),
 										'design-2' => array(
-											'title' => 'Design 2',
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/more-template.jpg",
+											'title' => esc_html__('Design 2', 'tourfic'),
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-coming-soon.png",
 											'disabled' => true
 										),
 									),
 									'default'  => 'design-1',
 								),
-								array(
-									'id'      => 'car_single_design_1_fonts_notice',
-									'type'    => 'notice',
-									'content' => __( 'We will recommend you to add Body Fonts and Heading Fonts "Inter Sans" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
-									'dependency' => array( 'single-car', '==', 'design-1' ),
-								),
+							
 								array(
 									'id'         => 'single-car-layout',
-									'class'      => 'disable-sortable',
-									'type'       => 'repeater',
-									'drag_only'  => true,
+									'type'       => 'switch_group',
+									'column'  	 => 4,
 									'label'      => __( 'Single Car Template Sections', 'tourfic' ),
 									'subtitle'   => __( 'You can able to change section positions by Drag & Drop.', 'tourfic' ),
 									'dependency' => array( 'single-car', '==', 'design-1' ),
-									'field_title'=> 'car-section',
-									'fields'     => array(
-										array(
-											'id'         => 'car-section',
-											'class'      => 'tf-section-name-hidden',
-											'type'       => 'text',
-											'label'      => __( 'Section Name', 'tourfic' ),
-											'attributes' => array(
-												'readonly' => 'readonly',
-											),
-										),
-										array(
-											'id'         => 'car-section-slug',
-											'class'      => 'tf-section-name-hidden',
-											'type'       => 'text',
-											'label'      => __( 'Section Slug', 'tourfic' ),
-											'attributes' => array(
-												'readonly' => 'readonly',
-											),
-										),
-										array(
-											'id'       => 'car-section-status',
-											'type'     => 'switch',
-											'label'    => __( 'Section Status', 'tourfic' ),
-											'subtitle' => __( 'You can able to enable/disable this section.', 'tourfic' ),
-										),
-									),
 									'default'    => array(
 										array(
-											'car-section'        => __( 'Description', 'tourfic' ),
-											'car-section-slug'   => __( 'description', 'tourfic' ),
-											'car-section-status' => true,
+											'label'  => __( 'Description', 'tourfic' ),
+											'slug'   => 'description',
+											'status' => 1,
 										),
 										array(
-											'car-section'        => __( 'Car info', 'tourfic' ),
-											'car-section-slug'   => __( 'car-info', 'tourfic' ),
-											'car-section-status' => true,
+											'label'  => __( 'Car info', 'tourfic' ),
+											'slug'   => 'car-info',
+											'status' => 1,
 										),
 										array(
-											'car-section'        => __( 'Benefits', 'tourfic' ),
-											'car-section-slug'   => __( 'benefits', 'tourfic' ),
-											'car-section-status' => true,
+											'label'  => __( 'Benefits', 'tourfic' ),
+											'slug'   => 'benefits',
+											'status' => 1,
 										),
 										array(
-											'car-section'        => __( 'Include/Exclude', 'tourfic' ),
-											'car-section-slug'   => __( 'inc-exc', 'tourfic' ),
-											'car-section-status' => true,
+											'label'  => __( 'Include/Exclude', 'tourfic' ),
+											'slug'   => 'inc-exc',
+											'status' => 1,
 										),
 										array(
-											'car-section'        => __( 'Location', 'tourfic' ),
-											'car-section-slug'   => __( 'location', 'tourfic' ),
-											'car-section-status' => true,
+											'label'  => __( 'Location', 'tourfic' ),
+											'slug'   => 'location',
+											'status' => 1,
 										),
 										array(
-											'car-section'        => __( 'FAQs', 'tourfic' ),
-											'car-section-slug'   => __( 'faq', 'tourfic' ),
-											'car-section-status' => true,
+											'label'  => __( 'FAQs', 'tourfic' ),
+											'slug'   => 'faq',
+											'status' => 1,
 										)
-									)
+									),
 								),
 								
 								array(
@@ -1296,16 +834,14 @@ TF_Settings::option( 'tf_settings', array(
 									'id'       => 'car-archive',
 									'type'     => 'imageselect',
 									'label'    => __( 'Select Archive & Search Result Template', 'tourfic' ),
-									'multiple' => true,
-									'inline'   => true,
 									'options'  => array(
 										'design-1' => array(
-											'title' => 'Design 1',
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/car-archive-design-1.jpg",
+											'title' => esc_html__('Design 1', 'tourfic'),
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-car-design-1.png",
 										),
 										'design-2' => array(
-											'title' => 'Design 2',
-											'url'   => TF_ASSETS_ADMIN_URL . "images/template/more-template.jpg",
+											'title' => esc_html__('Design 2', 'tourfic'),
+											'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-coming-soon.png",
 											'disabled' => true
 										),
 									),
@@ -1344,12 +880,7 @@ TF_Settings::option( 'tf_settings', array(
 									'subtitle'      => __( "This setting allows you to display the driver's maximum age on the archive and search results pages.", 'tourfic' ),
 									'default'    => 40,
 								),
-								array(
-									'id'      => 'car_design_1_fonts_notice',
-									'type'    => 'notice',
-									'content' => __( 'We will recommend you to add Body Fonts and Heading Fonts "Inter Sans" for this template. Tourfic Settings->Settings->Design Panel->Global.', 'tourfic' ),
-									// 'dependency' => array( 'car-archive', '==', 'design-1' ),
-								),
+								
 								array(
 									'id'      => 'car_archive_notice',
 									'type'    => 'notice',
@@ -1358,14 +889,480 @@ TF_Settings::option( 'tf_settings', array(
 							),
 						),
 					),
-				)
+				),
+				array(
+					'id'       => 'container_heading',
+					'type'     => 'heading',
+					'label'    => esc_html__( 'Container Settings', 'tourfic' ),
+					'subtitle' => esc_html__( 'Select your preferred container layout', 'tourfic' ),
+				),
+				array(
+					'id'       => 'tf-container',
+					'type'     => 'imageselect',
+					'label'    => esc_html__( 'Select Container Layout', 'tourfic' ),
+					'img-width'=> '120',
+					'img-height'=> '120',
+					'options'  => array(
+						'boxed' => array(
+							'title' => esc_html__('Boxed', 'tourfic'),
+							'url'   => TF_ASSETS_ADMIN_URL . "images/boxed.png",
+						),
+						'full-width' => array(
+							'title'	=> esc_html__('Full width', 'tourfic'),
+							'url' 	=> TF_ASSETS_ADMIN_URL."images/full-width.png",
+						),
+					),
+					'default'  => 'boxed',
+				),
+				array(
+					'id'       => 'tf-container-width',
+					'type'     => 'number',
+					'label'    => esc_html__( 'Container Width (px)', 'tourfic' ),
+					'default'  => '1280',
+					'dependency'  => array( 'tf-container', '==', 'boxed' ),
+					'attributes' => array(
+						'min' => '770',
+						'max' => '1920',
+						'step'=> '10'
+					),
+				),
 			),
+		),
+
+		//Appearance
+		'appearance'               => array(
+			'title'  => esc_html__( 'Appearance', 'tourfic' ),
+			'icon'   => 'fas fa-palette',
+			'fields' => array(
+				array(
+					'id'       => 'appearance_heading',
+					'type'     => 'heading',
+					'label'    => esc_html__( 'Preset Colors', 'tourfic' ),
+					'subtitle' => esc_html__( 'These colors will be used throughout your website. Choose between these presets or create your own custom palette.', 'tourfic' ),
+				),
+				array(
+					'id'       => 'color-palette-template',
+					'type'     => 'colorpalette',
+					'inline'   => true,
+					'options'  => array(
+						'design-1' => array(
+							'title' => 'Palette 1',
+							'colors' => [
+								'#0E3DD8',
+								'#0A2B99',
+								'#1C2130',
+								'#494D59'
+							]
+						),
+						'design-2' => array(
+							'title' => 'Palette 2',
+							'colors' => [
+								'#B58E53',
+								'#917242',
+								'#30281C',
+								'#595349'
+							]
+						),
+						'design-3' => array(
+							'title' => 'Palette 3',
+							'colors' => [
+								'#F97415',
+								'#C75605',
+								'#30241C',
+								'#595049'
+							]
+						),
+						'design-4' => array(
+							'title' => 'Palette 4',
+							'colors' => [
+								'#003061',
+								'#002952',
+								'#1C2630',
+								'#495159'
+							]
+						),
+						'custom' => array(
+							'title' => 'Custom Palette',
+							'colors' => function_exists('tf_custom_color_palette_values') ? tf_custom_color_palette_values() : '',
+						)
+					),
+					'default'  => 'design-1',
+				),
+				// Design 1 Fields
+				array(
+					'id'       => 'tf-d1-brand',
+					'label'   => esc_html__( 'Brand Color', 'tourfic' ),
+					'type'     => 'color',
+					'multiple' => true,
+					'inline'   => true,
+					'default'  => array(
+						'default' => '#0E3DD8',
+						'dark' => '#0A2B99',
+						'lite' => '#C9D4F7',
+					),
+					'colors'   => array(
+						'default' => esc_html__( 'Default', 'tourfic' ),
+						'dark' => esc_html__( 'Dark', 'tourfic' ),
+						'lite' => esc_html__( 'Lite', 'tourfic' ),
+					),
+					'dependency'   => array(
+						array( 'color-palette-template', '==', 'design-1' ),
+					),
+				),
+				array(
+					'id'       => 'tf-d1-text',
+					'label'   => esc_html__( 'Text Color', 'tourfic' ),
+					'type'     => 'color',
+					'multiple' => true,
+					'inline'   => true,
+					'default'  => array(
+						'heading' => '#1C2130',
+						'paragraph' => '#494D59',
+						'lite' => '#F3F5FD',
+					),
+					'colors'   => array(
+						'heading' => esc_html__( 'Heading', 'tourfic' ),
+						'paragraph' => esc_html__( 'Paragraph', 'tourfic' ),
+						'lite' => esc_html__( 'Lite', 'tourfic' ),
+					),
+					'dependency'   => array(
+						array( 'color-palette-template', '==', 'design-1' ),
+					),
+				),
+				array(
+					'id'       => 'tf-d1-border',
+					'label'   => esc_html__( 'Border Color', 'tourfic' ),
+					'type'     => 'color',
+					'multiple' => true,
+					'inline'   => true,
+					'default'  => array(
+						'default' => '#16275F',
+						'lite' => '#D1D7EE',
+					),
+					'colors'   => array(
+						'default' => esc_html__( 'Default', 'tourfic' ),
+						'lite' => esc_html__( 'Lite', 'tourfic' ),
+					),
+					'dependency'   => array(
+						array( 'color-palette-template', '==', 'design-1' ),
+					),
+				),
+				array(
+					'id'       => 'tf-d1-filling',
+					'label'   => esc_html__( 'Filling Color', 'tourfic' ),
+					'type'     => 'color',
+					'multiple' => true,
+					'inline'   => true,
+					'default'  => array(
+						'background' => '#ffffff',
+						'foreground' => '#F5F7FF',
+					),
+					'colors'   => array(
+						'background' => esc_html__( 'Background', 'tourfic' ),
+						'foreground' => esc_html__( 'Foreground', 'tourfic' ),
+					),
+					'dependency'   => array(
+						array( 'color-palette-template', '==', 'design-1' ),
+					),
+				),
+				// Design 2 Fields
+				array(
+					'id'       => 'tf-d2-brand',
+					'label'   => esc_html__( 'Brand Color', 'tourfic' ),
+					'type'     => 'color',
+					'multiple' => true,
+					'inline'   => true,
+					'default'  => array(
+						'default' => '#B58E53',
+						'dark' => '#917242',
+						'lite' => '#FAEEDC',
+					),
+					'colors'   => array(
+						'default' => esc_html__( 'Default', 'tourfic' ),
+						'dark' => esc_html__( 'Dark', 'tourfic' ),
+						'lite' => esc_html__( 'Lite', 'tourfic' ),
+					),
+					'dependency'   => array(
+						array( 'color-palette-template', '==', 'design-2' ),
+					),
+				),
+				array(
+					'id'       => 'tf-d2-text',
+					'label'   => esc_html__( 'Text Color', 'tourfic' ),
+					'type'     => 'color',
+					'multiple' => true,
+					'inline'   => true,
+					'default'  => array(
+						'heading' => '#30281C',
+						'paragraph' => '#595349',
+						'lite' => '#FDF9F3',
+					),
+					'colors'   => array(
+						'heading' => esc_html__( 'Heading', 'tourfic' ),
+						'paragraph' => esc_html__( 'Paragraph', 'tourfic' ),
+						'lite' => esc_html__( 'Lite', 'tourfic' ),
+					),
+					'dependency'   => array(
+						array( 'color-palette-template', '==', 'design-2' ),
+					),
+				),
+				array(
+					'id'       => 'tf-d2-border',
+					'label'   => esc_html__( 'Border Color', 'tourfic' ),
+					'type'     => 'color',
+					'multiple' => true,
+					'inline'   => true,
+					'default'  => array(
+						'default' => '#5F4216',
+						'lite' => '#EEE2D1',
+					),
+					'colors'   => array(
+						'default' => esc_html__( 'Default', 'tourfic' ),
+						'lite' => esc_html__( 'Lite', 'tourfic' ),
+					),
+					'dependency'   => array(
+						array( 'color-palette-template', '==', 'design-2' ),
+					),
+				),
+				array(
+					'id'       => 'tf-d2-filling',
+					'label'   => esc_html__( 'Filling Color', 'tourfic' ),
+					'type'     => 'color',
+					'multiple' => true,
+					'inline'   => true,
+					'default'  => array(
+						'background' => '#ffffff',
+						'foreground' => '#FDF9F3',
+					),
+					'colors'   => array(
+						'background' => esc_html__( 'Background', 'tourfic' ),
+						'foreground' => esc_html__( 'Foreground', 'tourfic' ),
+					),
+					'dependency'   => array(
+						array( 'color-palette-template', '==', 'design-2' ),
+					),
+				),
+				// Design 3 Fields
+				array(
+					'id'       => 'tf-d3-brand',
+					'label'   => esc_html__( 'Brand Color', 'tourfic' ),
+					'type'     => 'color',
+					'multiple' => true,
+					'inline'   => true,
+					'default'  => array(
+						'default' => '#F97415',
+						'dark' => '#C75605',
+						'lite' => '#FDDCC3',
+					),
+					'colors'   => array(
+						'default' => esc_html__( 'Default', 'tourfic' ),
+						'dark' => esc_html__( 'Dark', 'tourfic' ),
+						'lite' => esc_html__( 'Lite', 'tourfic' ),
+					),
+					'dependency'   => array(
+						array( 'color-palette-template', '==', 'design-3' ),
+					),
+				),
+				array(
+					'id'       => 'tf-d3-text',
+					'label'   => esc_html__( 'Text Color', 'tourfic' ),
+					'type'     => 'color',
+					'multiple' => true,
+					'inline'   => true,
+					'default'  => array(
+						'heading' => '#30241C',
+						'paragraph' => '#595049',
+						'lite' => '#FDF7F3',
+					),
+					'colors'   => array(
+						'heading' => esc_html__( 'Heading', 'tourfic' ),
+						'paragraph' => esc_html__( 'Paragraph', 'tourfic' ),
+						'lite' => esc_html__( 'Lite', 'tourfic' ),
+					),
+					'dependency'   => array(
+						array( 'color-palette-template', '==', 'design-3' ),
+					),
+				),
+				array(
+					'id'       => 'tf-d3-border',
+					'label'   => esc_html__( 'Border Color', 'tourfic' ),
+					'type'     => 'color',
+					'multiple' => true,
+					'inline'   => true,
+					'default'  => array(
+						'default' => '#5F3416',
+						'lite' => '#EEDDD1',
+					),
+					'colors'   => array(
+						'default' => esc_html__( 'Default', 'tourfic' ),
+						'lite' => esc_html__( 'Lite', 'tourfic' ),
+					),
+					'dependency'   => array(
+						array( 'color-palette-template', '==', 'design-3' ),
+					),
+				),
+				array(
+					'id'       => 'tf-d3-filling',
+					'label'   => esc_html__( 'Filling Color', 'tourfic' ),
+					'type'     => 'color',
+					'multiple' => true,
+					'inline'   => true,
+					'default'  => array(
+						'background' => '#ffffff',
+						'foreground' => '#FFF9F5',
+					),
+					'colors'   => array(
+						'background' => esc_html__( 'Background', 'tourfic' ),
+						'foreground' => esc_html__( 'Foreground', 'tourfic' ),
+					),
+					'dependency'   => array(
+						array( 'color-palette-template', '==', 'design-3' ),
+					),
+				),
+				// Design 4 Fields
+				array(
+					'id'       => 'tf-d4-brand',
+					'label'   => esc_html__( 'Brand Color', 'tourfic' ),
+					'type'     => 'color',
+					'multiple' => true,
+					'inline'   => true,
+					'default'  => array(
+						'default' => '#003061',
+						'dark' => '#002952',
+						'lite' => '#C2E0FF',
+					),
+					'colors'   => array(
+						'default' => esc_html__( 'Default', 'tourfic' ),
+						'dark' => esc_html__( 'Dark', 'tourfic' ),
+						'lite' => esc_html__( 'Lite', 'tourfic' ),
+					),
+					'dependency'   => array(
+						array( 'color-palette-template', '==', 'design-4' ),
+					),
+				),
+				array(
+					'id'       => 'tf-d4-text',
+					'label'   => esc_html__( 'Text Color', 'tourfic' ),
+					'type'     => 'color',
+					'multiple' => true,
+					'inline'   => true,
+					'default'  => array(
+						'heading' => '#1C2630',
+						'paragraph' => '#495159',
+						'lite' => '#F3F8FD',
+					),
+					'colors'   => array(
+						'heading' => esc_html__( 'Heading', 'tourfic' ),
+						'paragraph' => esc_html__( 'Paragraph', 'tourfic' ),
+						'lite' => esc_html__( 'Lite', 'tourfic' ),
+					),
+					'dependency'   => array(
+						array( 'color-palette-template', '==', 'design-4' ),
+					),
+				),
+				array(
+					'id'       => 'tf-d4-border',
+					'label'   => esc_html__( 'Border Color', 'tourfic' ),
+					'type'     => 'color',
+					'multiple' => true,
+					'inline'   => true,
+					'default'  => array(
+						'default' => '#163A5F',
+						'lite' => '#D1DFEE',
+					),
+					'colors'   => array(
+						'default' => esc_html__( 'Default', 'tourfic' ),
+						'lite' => esc_html__( 'Lite', 'tourfic' ),
+					),
+					'dependency'   => array(
+						array( 'color-palette-template', '==', 'design-4' ),
+					),
+				),
+				array(
+					'id'       => 'tf-d4-filling',
+					'label'   => esc_html__( 'Filling Color', 'tourfic' ),
+					'type'     => 'color',
+					'multiple' => true,
+					'inline'   => true,
+					'default'  => array(
+						'background' => '#ffffff',
+						'foreground' => '#F5FAFF',
+					),
+					'colors'   => array(
+						'background' => esc_html__( 'Background', 'tourfic' ),
+						'foreground' => esc_html__( 'Foreground', 'tourfic' ),
+					),
+					'dependency'   => array(
+						array( 'color-palette-template', '==', 'design-4' ),
+					),
+				),
+				// Custom Palette
+				array(
+					'id'       => 'tf-custom-brand',
+					'label'   => esc_html__( 'Brand Color', 'tourfic' ),
+					'type'     => 'color',
+					'multiple' => true,
+					'inline'   => true,
+					'colors'   => array(
+						'default' => esc_html__( 'Default', 'tourfic' ),
+						'dark' => esc_html__( 'Dark', 'tourfic' ),
+						'lite' => esc_html__( 'Lite', 'tourfic' ),
+					),
+					'dependency'   => array(
+						array( 'color-palette-template', '==', 'custom' ),
+					),
+				),
+				array(
+					'id'       => 'tf-custom-text',
+					'label'   => esc_html__( 'Text Color', 'tourfic' ),
+					'type'     => 'color',
+					'multiple' => true,
+					'inline'   => true,
+					'colors'   => array(
+						'heading' => esc_html__( 'Heading', 'tourfic' ),
+						'paragraph' => esc_html__( 'Paragraph', 'tourfic' ),
+						'lite' => esc_html__( 'Lite', 'tourfic' ),
+					),
+					'dependency'   => array(
+						array( 'color-palette-template', '==', 'custom' ),
+					),
+				),
+				array(
+					'id'       => 'tf-custom-border',
+					'label'   => esc_html__( 'Border Color', 'tourfic' ),
+					'type'     => 'color',
+					'multiple' => true,
+					'inline'   => true,
+					'colors'   => array(
+						'default' => esc_html__( 'Default', 'tourfic' ),
+						'lite' => esc_html__( 'Lite', 'tourfic' ),
+					),
+					'dependency'   => array(
+						array( 'color-palette-template', '==', 'custom' ),
+					),
+				),
+				array(
+					'id'       => 'tf-custom-filling',
+					'label'   => esc_html__( 'Filling Color', 'tourfic' ),
+					'type'     => 'color',
+					'multiple' => true,
+					'inline'   => true,
+					'colors'   => array(
+						'background' => esc_html__( 'Background', 'tourfic' ),
+						'foreground' => esc_html__( 'Foreground', 'tourfic' ),
+					),
+					'dependency'   => array(
+						array( 'color-palette-template', '==', 'custom' ),
+					),
+				),
+			)
 		),
 
 		// Tour Options
 		'tour'                  => array(
 			'title'  => __( 'Tour Options', 'tourfic' ),
 			'icon'   => 'fas fa-umbrella-beach',
+			'post_dependency' => 'tour',
 			'fields' => array(),
 		),
 		'single_tour'           => array(
@@ -1560,6 +1557,7 @@ TF_Settings::option( 'tf_settings', array(
 		'hotel_option'          => array(
 			'title'  => __( 'Hotel Options', 'tourfic' ),
 			'icon'   => 'fas fa-hotel',
+			'post_dependency' => 'hotel',
 			'fields' => array(),
 		),
 		'single_page'           => array(
@@ -1657,7 +1655,7 @@ TF_Settings::option( 'tf_settings', array(
 				),
 			),
 		),
-		'room_config'           => array(
+		'room_config'=> array(
 			'title'  => __( 'Room Config', 'tourfic' ),
 			'parent' => 'hotel_option',
 			'icon'   => 'fa fa-cog',
@@ -1672,7 +1670,6 @@ TF_Settings::option( 'tf_settings', array(
 					'type'    => 'notice',
 					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-hotel-options/#room" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
 				),
-
 				array(
 					'id'       => 'enable_child_age_limit',
 					'type'     => 'switch',
@@ -1696,6 +1693,7 @@ TF_Settings::option( 'tf_settings', array(
 		'apartment_option'      => array(
 			'title'  => __( 'Apartment Options', 'tourfic' ),
 			'icon'   => 'fa-solid fa-house-chimney',
+			'post_dependency' => 'apartment',
 			'fields' => array(),
 		),
 		'apartment_single_page' => array(
@@ -1775,6 +1773,7 @@ TF_Settings::option( 'tf_settings', array(
 		'car_option'      => array(
 			'title'  => __( 'Car Options', 'tourfic' ),
 			'icon'   => 'fa-solid fa-car',
+			'post_dependency' => 'carrentals',
 			'fields' => array(),
 		),
 		'car_single_page' => array(
@@ -2177,20 +2176,6 @@ TF_Settings::option( 'tf_settings', array(
 									'subtitle' => __( 'ON: Display visual graphs to follow your earnings through each time', 'tourfic' ),
 									'is_pro'   => true,
 								),
-								array(
-									'id'       => 'vendor-booking-history',
-									'type'     => 'switch',
-									'label'    => __( 'Show Booking history', 'tourfic' ),
-									'subtitle' => __( 'ON: Show booking history of partner', 'tourfic' ),
-									'is_pro'   => true,
-								),
-								array(
-									'id'       => 'vendor-enquiry-history',
-									'type'     => 'switch',
-									'label'    => __( 'Show Enquiry history', 'tourfic' ),
-									'subtitle' => __( 'ON: Show Enquiry history of partner', 'tourfic' ),
-									'is_pro'   => true,
-								),
 							),
 						),
 						array(
@@ -2414,848 +2399,6 @@ TF_Settings::option( 'tf_settings', array(
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
 					'default'   => true
-				),
-			),
-		),
-		// Design Options
-		'design-panel'          => array(
-			'title'  => __( 'Design Panel', 'tourfic' ),
-			'icon'   => 'fas fa-palette',
-			'fields' => array(),
-		),
-		'global_design'         => array(
-			'title'  => __( 'Global', 'tourfic' ),
-			'parent' => 'design-panel',
-			'icon'   => 'fas fa-cogs',
-			'fields' => array(
-				array(
-					'id'      => 'colorGlobal',
-					'type'    => 'heading',
-					'label' => __( 'Global Options', 'tourfic' ),
-					'subtitle' => __( 'The options presented here are universal across all our post types, including Hotels, Tours, and Apartments. Any settings adjusted here will apply to all of these categories.', 'tourfic' ),
-					'class'   => 'tf-field-class',
-				),
-				array(
-					'id'      => 'design-settings-official-docs',
-					'type'    => 'notice',
-					'style'   => 'success',
-					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/design-panel/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
-				),
-				array(
-					'id'      => 'global_design_notice',
-					'type'    => 'notice',
-					'style'   => 'info',
-					'content' => __( "To ensure maximum compatibility with your theme, all Heading (h1-h6), Paragraph & Link's Color-Font Styles are not controlled by Tourfic. Those need to be edited using your Theme's option Panel.", "tourfic" ),
-				),
-				array(
-					'id'       => 'tourfic-design1-global-color',
-					'type'     => 'color',
-					'multiple' => true,
-					'inline'   => true,
-					'default'  => array(
-						'gcolor' => '#0e3dd8'
-					),
-					'colors'   => array(
-						'gcolor' => __( 'Primary Color', 'tourfic' ),
-					),
-				),
-				array(
-					'id'       => 'tourfic-design1-p-global-color',
-					'type'     => 'color',
-					'multiple' => true,
-					'inline'   => true,
-					'default'  => array(
-						'pgcolor' => '#36383C'
-					),
-					'colors'   => array(
-						'pgcolor' => __( 'Primary Color of all Paragraph / Text', 'tourfic' ),
-					),
-				),
-				array(
-					'id'      => 'typography',
-					'type'    => 'heading',
-					'content' => __( 'Typography', 'tourfic' ),
-					'class'   => 'tf-field-class',
-				),
-				array(
-					'id'          => 'global-body-fonts-family',
-					'type'        => 'select2',
-					'label'       => __( 'Global Body Fonts Family', 'tourfic' ),
-					'subtitle'    => __( 'Set the Body (Paragraph, Text, link etc) Font Family for Tourfic.', 'tourfic' ),
-					'options'     => Helper::tourfic_google_fonts_list(),
-					'default'     => 'Default',
-					'field_width' => 45,
-				),
-				array(
-					'id'          => 'global-heading-fonts-family',
-					'type'        => 'select2',
-					'label'       => __( 'Global Heading Fonts Family', 'tourfic' ),
-					'subtitle'    => __( 'Set the Heading (H1-H6) Font Family for Tourfic.', 'tourfic' ),
-					'options'     => Helper::tourfic_google_fonts_list(),
-					'default'     => 'Default',
-					'field_width' => 45,
-				),
-				array(
-					'id'      => 'h1-heading',
-					'type'    => 'heading',
-					'label' => __( 'H1 Font Settings', 'tourfic' ),
-					'class'   => 'tf-field-class',
-				),
-				array(
-					'id'          => 'global-h1',
-					'type'        => 'number',
-					'label'       => __( 'Font Size (PX)', 'tourfic' ),
-					'attributes'  => array(
-						'min' => '1',
-					),
-					'field_width' => 20,
-					'default'     => 38
-				),
-				array(
-					'id'          => 'global-h1-line-height',
-					'type'        => 'text',
-					'label'       => __( 'Line Height (REM)', 'tourfic' ),
-					'attributes'  => array(
-						'min' => '1',
-					),
-					'field_width' => 20,
-					'default'     => 1.2
-				),
-				array(
-					'id'          => 'global-h1-weight',
-					'type'        => 'select',
-					'label'       => __( 'Font Weight', 'tourfic' ),
-					'options'     => array(
-						'100' => __( '100(Thin)', 'tourfic' ),
-						'200' => __( '100(Extra Light)', 'tourfic' ),
-						'300' => __( '300(Light)', 'tourfic' ),
-						'400' => __( '400(Normal)', 'tourfic' ),
-						'500' => __( '500(Medium)', 'tourfic' ),
-						'600' => __( '600(Semi Bold)', 'tourfic' ),
-						'700' => __( '700(Bold)', 'tourfic' ),
-						'800' => __( '800(Extra Bold)', 'tourfic' ),
-						'900' => __( '900(Black)', 'tourfic' ),
-					),
-					'default'     => '500',
-					'field_width' => 20,
-				),
-				array(
-					'id'          => 'global-h1-style',
-					'type'        => 'select',
-					'label'       => __( 'Font Style', 'tourfic' ),
-					'options'     => array(
-						'normal' => __( 'Normal', 'tourfic' ),
-						'italic' => __( 'Italic', 'tourfic' ),
-					),
-					'default'     => 'normal',
-					'field_width' => 20,
-				),
-				array(
-					'id'      => 'h2-heading',
-					'type'    => 'heading',
-					'label' => __( 'H2 Font Settings', 'tourfic' ),
-					'class'   => 'tf-field-class',
-				),
-				array(
-					'id'          => 'global-h2',
-					'type'        => 'number',
-					'label'       => __( 'Font Size (PX)', 'tourfic' ),
-					'attributes'  => array(
-						'min' => '1',
-					),
-					'field_width' => 20,
-					'default'     => 30
-				),
-				array(
-					'id'          => 'global-h2-line-height',
-					'type'        => 'text',
-					'label'       => __( 'Line Height (REM)', 'tourfic' ),
-					'attributes'  => array(
-						'min' => '1',
-					),
-					'field_width' => 20,
-					'default'     => 1.2
-				),
-				array(
-					'id'          => 'global-h2-weight',
-					'type'        => 'select',
-					'label'       => __( 'Font Weight', 'tourfic' ),
-					'options'     => array(
-						'100' => __( '100(Thin)', 'tourfic' ),
-						'200' => __( '100(Extra Light)', 'tourfic' ),
-						'300' => __( '300(Light)', 'tourfic' ),
-						'400' => __( '400(Normal)', 'tourfic' ),
-						'500' => __( '500(Medium)', 'tourfic' ),
-						'600' => __( '600(Semi Bold)', 'tourfic' ),
-						'700' => __( '700(Bold)', 'tourfic' ),
-						'800' => __( '800(Extra Bold)', 'tourfic' ),
-						'900' => __( '900(Black)', 'tourfic' ),
-					),
-					'default'     => '500',
-					'field_width' => 20,
-				),
-				array(
-					'id'          => 'global-h2-style',
-					'type'        => 'select',
-					'label'       => __( 'Font Style', 'tourfic' ),
-					'options'     => array(
-						'normal' => __( 'Normal', 'tourfic' ),
-						'italic' => __( 'Italic', 'tourfic' ),
-					),
-					'default'     => 'normal',
-					'field_width' => 20,
-				),
-				array(
-					'id'      => 'h3-heading',
-					'type'    => 'heading',
-					'label' => __( 'H3 Font Settings', 'tourfic' ),
-					'class'   => 'tf-field-class',
-				),
-				array(
-					'id'          => 'global-h3',
-					'type'        => 'number',
-					'label'       => __( 'Font Size (PX)', 'tourfic' ),
-					'attributes'  => array(
-						'min' => '1',
-					),
-					'field_width' => 20,
-					'default'     => 24
-				),
-				array(
-					'id'          => 'global-h3-line-height',
-					'type'        => 'text',
-					'label'       => __( 'Line Height (REM)', 'tourfic' ),
-					'attributes'  => array(
-						'min' => '1',
-					),
-					'field_width' => 20,
-					'default'     => 1.2
-				),
-				array(
-					'id'          => 'global-h3-weight',
-					'type'        => 'select',
-					'label'       => __( 'Font Weight', 'tourfic' ),
-					'options'     => array(
-						'100' => __( '100(Thin)', 'tourfic' ),
-						'200' => __( '100(Extra Light)', 'tourfic' ),
-						'300' => __( '300(Light)', 'tourfic' ),
-						'400' => __( '400(Normal)', 'tourfic' ),
-						'500' => __( '500(Medium)', 'tourfic' ),
-						'600' => __( '600(Semi Bold)', 'tourfic' ),
-						'700' => __( '700(Bold)', 'tourfic' ),
-						'800' => __( '800(Extra Bold)', 'tourfic' ),
-						'900' => __( '900(Black)', 'tourfic' ),
-					),
-					'default'     => '500',
-					'field_width' => 20,
-				),
-				array(
-					'id'          => 'global-h3-style',
-					'type'        => 'select',
-					'label'       => __( 'Font Style', 'tourfic' ),
-					'options'     => array(
-						'normal' => __( 'Normal', 'tourfic' ),
-						'italic' => __( 'Italic', 'tourfic' ),
-					),
-					'default'     => 'normal',
-					'field_width' => 20,
-				),
-				array(
-					'id'      => 'h4-heading',
-					'type'    => 'heading',
-					'label' => __( 'H4 Font Settings', 'tourfic' ),
-					'class'   => 'tf-field-class',
-				),
-				array(
-					'id'          => 'global-h4',
-					'type'        => 'number',
-					'label'       => __( 'Font Size (PX)', 'tourfic' ),
-					'attributes'  => array(
-						'min' => '1',
-					),
-					'field_width' => 20,
-					'default'     => 20
-				),
-				array(
-					'id'          => 'global-h4-line-height',
-					'type'        => 'text',
-					'label'       => __( 'Line Height (REM)', 'tourfic' ),
-					'attributes'  => array(
-						'min' => '1',
-					),
-					'field_width' => 20,
-					'default'     => 1.2
-				),
-				array(
-					'id'          => 'global-h4-weight',
-					'type'        => 'select',
-					'label'       => __( 'Font Weight', 'tourfic' ),
-					'options'     => array(
-						'100' => __( '100(Thin)', 'tourfic' ),
-						'200' => __( '100(Extra Light)', 'tourfic' ),
-						'300' => __( '300(Light)', 'tourfic' ),
-						'400' => __( '400(Normal)', 'tourfic' ),
-						'500' => __( '500(Medium)', 'tourfic' ),
-						'600' => __( '600(Semi Bold)', 'tourfic' ),
-						'700' => __( '700(Bold)', 'tourfic' ),
-						'800' => __( '800(Extra Bold)', 'tourfic' ),
-						'900' => __( '900(Black)', 'tourfic' ),
-					),
-					'default'     => '500',
-					'field_width' => 20,
-				),
-				array(
-					'id'          => 'global-h4-style',
-					'type'        => 'select',
-					'label'       => __( 'Font Style', 'tourfic' ),
-					'options'     => array(
-						'normal' => __( 'Normal', 'tourfic' ),
-						'italic' => __( 'Italic', 'tourfic' ),
-					),
-					'default'     => 'normal',
-					'field_width' => 20,
-				),
-				array(
-					'id'      => 'h5-heading',
-					'type'    => 'heading',
-					'label' => __( 'H5 Font Settings', 'tourfic' ),
-					'class'   => 'tf-field-class',
-				),
-				array(
-					'id'          => 'global-h5',
-					'type'        => 'number',
-					'label'       => __( 'Font Size (PX)', 'tourfic' ),
-					'attributes'  => array(
-						'min' => '1',
-					),
-					'field_width' => 20,
-					'default'     => 18
-				),
-				array(
-					'id'          => 'global-h5-line-height',
-					'type'        => 'text',
-					'label'       => __( 'Line Height (REM)', 'tourfic' ),
-					'attributes'  => array(
-						'min' => '1',
-					),
-					'field_width' => 20,
-					'default'     => 1.2
-				),
-				array(
-					'id'          => 'global-h5-weight',
-					'type'        => 'select',
-					'label'       => __( 'Font Weight', 'tourfic' ),
-					'options'     => array(
-						'100' => __( '100(Thin)', 'tourfic' ),
-						'200' => __( '100(Extra Light)', 'tourfic' ),
-						'300' => __( '300(Light)', 'tourfic' ),
-						'400' => __( '400(Normal)', 'tourfic' ),
-						'500' => __( '500(Medium)', 'tourfic' ),
-						'600' => __( '600(Semi Bold)', 'tourfic' ),
-						'700' => __( '700(Bold)', 'tourfic' ),
-						'800' => __( '800(Extra Bold)', 'tourfic' ),
-						'900' => __( '900(Black)', 'tourfic' ),
-					),
-					'default'     => '500',
-					'field_width' => 20,
-				),
-				array(
-					'id'          => 'global-h5-style',
-					'type'        => 'select',
-					'label'       => __( 'Font Style', 'tourfic' ),
-					'options'     => array(
-						'normal' => __( 'Normal', 'tourfic' ),
-						'italic' => __( 'Italic', 'tourfic' ),
-					),
-					'default'     => 'normal',
-					'field_width' => 20,
-				),
-				array(
-					'id'      => 'h6-heading',
-					'type'    => 'heading',
-					'label' => __( 'H6 Font Settings', 'tourfic' ),
-					'class'   => 'tf-field-class',
-				),
-				array(
-					'id'          => 'global-h6',
-					'type'        => 'number',
-					'label'       => __( 'Font Size (PX)', 'tourfic' ),
-					'attributes'  => array(
-						'min' => '1',
-					),
-					'field_width' => 20,
-					'default'     => 14
-				),
-				array(
-					'id'          => 'global-h6-line-height',
-					'type'        => 'text',
-					'label'       => __( 'Line Height (REM)', 'tourfic' ),
-					'attributes'  => array(
-						'min' => '1',
-					),
-					'field_width' => 20,
-					'default'     => 1.2
-				),
-				array(
-					'id'          => 'global-h6-weight',
-					'type'        => 'select',
-					'label'       => __( 'Font Weight', 'tourfic' ),
-					'options'     => array(
-						'100' => __( '100(Thin)', 'tourfic' ),
-						'200' => __( '100(Extra Light)', 'tourfic' ),
-						'300' => __( '300(Light)', 'tourfic' ),
-						'400' => __( '400(Normal)', 'tourfic' ),
-						'500' => __( '500(Medium)', 'tourfic' ),
-						'600' => __( '600(Semi Bold)', 'tourfic' ),
-						'700' => __( '700(Bold)', 'tourfic' ),
-						'800' => __( '800(Extra Bold)', 'tourfic' ),
-						'900' => __( '900(Black)', 'tourfic' ),
-					),
-					'default'     => '500',
-					'field_width' => 20,
-				),
-				array(
-					'id'          => 'global-h6-style',
-					'type'        => 'select',
-					'label'       => __( 'Font Style', 'tourfic' ),
-					'options'     => array(
-						'normal' => __( 'Normal', 'tourfic' ),
-						'italic' => __( 'Italic', 'tourfic' ),
-					),
-					'default'     => 'normal',
-					'field_width' => 20,
-				),
-				array(
-					'id'      => 'p-heading',
-					'type'    => 'heading',
-					'label' => __( 'Paragraph Font Settings', 'tourfic' ),
-					'class'   => 'tf-field-class',
-				),
-				array(
-					'id'          => 'global-p',
-					'type'        => 'number',
-					'label'       => __( 'Font Size (PX)', 'tourfic' ),
-					'attributes'  => array(
-						'min' => '1',
-					),
-					'field_width' => 20,
-					'default'     => 16
-				),
-				array(
-					'id'          => 'global-p-line-height',
-					'type'        => 'text',
-					'label'       => __( 'Line Height (REM)', 'tourfic' ),
-					'attributes'  => array(
-						'min' => '1',
-					),
-					'field_width' => 20,
-					'default'     => 1.2
-				),
-				array(
-					'id'          => 'global-p-weight',
-					'type'        => 'select',
-					'label'       => __( 'Font Weight', 'tourfic' ),
-					'options'     => array(
-						'100' => __( '100(Thin)', 'tourfic' ),
-						'200' => __( '100(Extra Light)', 'tourfic' ),
-						'300' => __( '300(Light)', 'tourfic' ),
-						'400' => __( '400(Normal)', 'tourfic' ),
-						'500' => __( '500(Medium)', 'tourfic' ),
-						'600' => __( '600(Semi Bold)', 'tourfic' ),
-						'700' => __( '700(Bold)', 'tourfic' ),
-						'800' => __( '800(Extra Bold)', 'tourfic' ),
-						'900' => __( '900(Black)', 'tourfic' ),
-					),
-					'default'     => '400',
-					'field_width' => 20,
-				),
-				array(
-					'id'          => 'global-p-style',
-					'type'        => 'select',
-					'label'       => __( 'Font Style', 'tourfic' ),
-					'options'     => array(
-						'normal' => __( 'Normal', 'tourfic' ),
-						'italic' => __( 'Italic', 'tourfic' ),
-					),
-					'default'     => 'normal',
-					'field_width' => 20,
-				),
-				array(
-					'id'       => 'tourfic-button-color',
-					'type'     => 'color',
-					'label'    => __( 'Button Text Color', 'tourfic' ),
-					'subtitle' => __( 'Choose the Text Color for all buttons associated with Tourfic.', 'tourfic' ),
-					'multiple' => true,
-					'inline'   => true,
-					'colors'   => array(
-						'regular' => __( 'Normal', 'tourfic' ),
-						'hover'   => __( 'Hover', 'tourfic' ),
-					),
-				),
-				array(
-					'id'       => 'tourfic-button-bg-color',
-					'type'     => 'color',
-					'label'    => __( 'Button Background Color', 'tourfic' ),
-					'subtitle' => __( 'Choose the Background Color for all buttons associated with Tourfic.', 'tourfic' ),
-					'multiple' => true,
-					'inline'   => true,
-					'colors'   => array(
-						'regular' => __( 'Normal', 'tourfic' ),
-						'hover'   => __( 'Hover', 'tourfic' ),
-					),
-				),
-				array(
-					'id'          => 'button-font-size',
-					'type'        => 'number',
-					'label'       => __( 'Button Font Size (PX)', 'tourfic' ),
-					'subtitle'    => __( 'Button Font Size of Tourfic', 'tourfic' ),
-					'attributes'  => array(
-						'min' => '1',
-					),
-					'field_width' => 45,
-					'default'     => 14
-				),
-				array(
-					'id'          => 'button-line-height',
-					'type'        => 'text',
-					'label'       => __( 'Button Line Height (REM)', 'tourfic' ),
-					'subtitle'    => __( 'Button Line Height of Tourfic', 'tourfic' ),
-					'attributes'  => array(
-						'min' => '1',
-					),
-					'field_width' => 45,
-					'default'     => 1.2
-				),
-				array(
-					'id'       => 'tourfic-sidebar-booking',
-					'type'     => 'color',
-					'label'    => __( 'Sidebar Booking Form', 'tourfic' ),
-					'subtitle' => __( 'Set the gradient background color for the Sidebar Booking feature, available on the Search Results and Single pages.', 'tourfic' ),
-					'multiple' => true,
-					'inline'   => true,
-					'colors'   => array(
-						'gradient_one_reg' => __( 'Gradient One Color', 'tourfic' ),
-						'gradient_two_reg' => __( 'Gradient Two Color', 'tourfic' ),
-					)
-				),
-				array(
-					'id'       => 'tourfic-faq-style',
-					'type'     => 'color',
-					'label'    => __( 'FAQ Styles', 'tourfic' ),
-					'subtitle' => __( 'Configure the style of the FAQ Section for Hotels, Apartments, and Tours.', 'tourfic' ),
-					'multiple' => true,
-					'inline'   => true,
-					'colors'   => array(
-						'faq_color'        => __( 'Heading Color', 'tourfic' ),
-						'faq_icon_color'   => __( 'Icon Color', 'tourfic' ),
-						'faq_border_color' => __( 'Border Color', 'tourfic' ),
-					)
-				),
-				array(
-					'id'       => 'tourfic-review-style',
-					'type'     => 'color',
-					'label'    => __( 'Review Styles', 'tourfic' ),
-					'subtitle' => __( 'Configure the style of the Review Section for Hotels, Apartments, and Tours.', 'tourfic' ),
-					'multiple' => true,
-					'inline'   => true,
-					'colors'   => array(
-						'rating_color'          => __( 'Rating Color', 'tourfic' ),
-						'rating_bg_color'       => __( 'Rating Background', 'tourfic' ),
-						'param_bg_color'        => __( 'Parameter Background', 'tourfic' ),
-						'param_single_bg_color' => __( 'Single Parameter', 'tourfic' ),
-						'param_txt_color'       => __( 'Single Parameter Text', 'tourfic' ),
-						'review_color'          => __( 'Review Color', 'tourfic' ),
-						'review_bg_color'       => __( 'Review Background', 'tourfic' ),
-					)
-				),
-				array(
-					'id'       => 'tourfic-template3-bg',
-					'type'     => 'color',
-					'label'    => __( 'Colors Settings for Template 3', 'tourfic' ),
-					'subtitle' => __( 'Set the colors for the template 3.', 'tourfic' ),
-					'multiple' => true,
-					'inline'   => true,
-					'colors'   => array(
-						'template3-bg' => __( 'Template 3 Background Color', 'tourfic' ),
-						'template3-highlight' => __( 'Template 3 Highlight Color', 'tourfic' ),
-						'template3-icon-color' => __( 'Template 3 Icon Color', 'tourfic' ),
-					)
-				),
-				array(
-					'id'       => 'tourfic-template4-bg',
-					'type'     => 'color',
-					'label'    => __( 'Colors Settings for Template 4', 'tourfic' ),
-					'subtitle' => __( 'Set the colors for the template 4.', 'tourfic' ),
-					'multiple' => true,
-					'inline'   => true,
-					'colors'   => array(
-						'template4-bg' => __( 'Body Background Color', 'tourfic' ),
-						'template4-search-form-bg' => __( 'Search Form Background Color', 'tourfic' ),
-						'template4-card-bg' => __( 'Card Background Color', 'tourfic' ),
-						'template4-card-hover-bg-color' => __( 'Card Hover Background Color', 'tourfic' ),
-						'template4-btn-bg-color' => __( 'Button Background Color', 'tourfic' ),
-						'template4-btn-hover-bg-color' => __( 'Button Hover Background Color', 'tourfic' ),
-					)
-				),
-			),
-		),
-		'hotel_design'          => array(
-			'title'  => __( 'Hotel', 'tourfic' ),
-			'parent' => 'design-panel',
-			'icon'   => 'fas fa-hotel',
-			'fields' => array(
-				array(
-					'id'      => 'hotel_design_heading',
-					'type'    => 'heading',
-					'label' => __( 'Hotel Settings', 'tourfic' ),
-				),
-				array(
-					'id'      => 'design-settings-official-docs-two',
-					'type'    => 'notice',
-					'style'   => 'success',
-					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/design-panel/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
-				),
-				array(
-					'id'       => 'tourfic-hotel-type-bg-color',
-					'type'     => 'color',
-					'label'    => __( 'Hotel Type Color', 'tourfic' ),
-					'subtitle' => __( 'The "Hotel" text above main heading of single hotel (Applicable on Template Two only).', 'tourfic' ),
-					'multiple' => true,
-					'inline'   => true,
-					'colors'   => array(
-						'regular' => __( 'Color', 'tourfic' ),
-						'hover'   => __( 'Background Color', 'tourfic' ),
-					)
-				),
-				array(
-					'id'       => 'tourfic-hotel-share-icon',
-					'type'     => 'color',
-					'label'    => __( 'Share Icon Color', 'tourfic' ),
-					'subtitle' => __( 'Share color of the Share Icons', 'tourfic' ),
-					'multiple' => true,
-					'inline'   => true,
-					'colors'   => array(
-						'regular' => __( 'Normal', 'tourfic' ),
-						'hover'   => __( 'Hover', 'tourfic' ),
-					)
-				),
-				array(
-					'id'       => 'tourfic-hotel-map-button',
-					'type'     => 'color',
-					'label'    => __( 'Map Button Background', 'tourfic' ),
-					'subtitle' => __( 'Map Button Background Color (Applicable on Template Two only).', 'tourfic' ),
-					'multiple' => true,
-					'inline'   => true,
-					'colors'   => array(
-						'gradient_one_reg' => __( 'Gradient One Color', 'tourfic' ),
-						'gradient_two_reg' => __( 'Gradient Two Color', 'tourfic' ),
-						'gradient_one_hov' => __( 'Gradient One Hover', 'tourfic' ),
-						'gradient_two_hov' => __( 'Gradient Two Hover', 'tourfic' ),
-					)
-				),
-				array(
-					'id'       => 'tourfic-hotel-map-button-text',
-					'type'     => 'color',
-					'label'    => __( 'Map Button Text Color', 'tourfic' ),
-					'subtitle' => __( 'The text color of Map Button (Applicable on Template Two only).', 'tourfic' ),
-					'multiple' => true,
-					'inline'   => true,
-					'colors'   => array(
-						'regular' => __( 'Text Color', 'tourfic' ),
-					)
-				),
-				array(
-					'id'       => 'tourfic-hotel-features-color',
-					'type'     => 'color',
-					'label'    => __( 'Features Color', 'tourfic' ),
-					'subtitle' => __( 'Icon color on the Popular Features Section.', 'tourfic' ),
-					'multiple' => true,
-					'inline'   => true,
-					'colors'   => array(
-						'regular' => __( 'Color', 'tourfic' ),
-					)
-				),
-				array(
-					'id'       => 'tourfic-hotel-table-style',
-					'type'     => 'color',
-					'label'    => __( 'Room Table Styles', 'tourfic' ),
-					'subtitle' => __( 'Configure the style of the Table which showcases Hotel Rooms.', 'tourfic' ),
-					'multiple' => true,
-					'inline'   => true,
-					'colors'   => array(
-						'table_color'        => __( 'Heading Color', 'tourfic' ),
-						'table_bg_color'     => __( 'Heading Background Color', 'tourfic' ),
-						'table_border_color' => __( 'Border Color', 'tourfic' ),
-					)
-				),
-			),
-		),
-		'tour_design'           => array(
-			'title'  => __( 'Tour', 'tourfic' ),
-			'parent' => 'design-panel',
-			'icon'   => 'fas fa-umbrella-beach',
-			'fields' => array(
-				array(
-					'id'      => 'tour_design_heading',
-					'type'    => 'heading',
-					'label' => __( 'Tour Settings', 'tourfic' )
-				),
-				array(
-					'id'      => 'design-settings-official-docs-three',
-					'type'    => 'notice',
-					'style'   => 'success',
-					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/design-panel/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
-				),
-				array(
-					'id'       => 'tourfic-tour-pricing-color',
-					'type'     => 'color',
-					'label'    => __( 'Price Section', 'tourfic' ),
-					'subtitle' => __( 'Configure the style of the Pricing Section for Tours.', 'tourfic' ),
-					'multiple' => true,
-					'inline'   => true,
-					'colors'   => array(
-						'sale_price'      => __( 'Sale Price Color', 'tourfic' ),
-						'org_price'       => __( 'Original Price Color', 'tourfic' ),
-						'tab_text'        => __( 'Text Color of Pricing Tabs', 'tourfic' ),
-						'tab_bg'          => __( 'Background Color of Pricing Tabs', 'tourfic' ),
-						'active_tab_text' => __( 'Text Color of Active Tab', 'tourfic' ),
-						'active_tab_bg'   => __( 'Background Color of Active Tab', 'tourfic' ),
-						'tab_border'      => __( 'Tab Border Color', 'tourfic' ),
-					)
-				),
-				array(
-					'id'       => 'tourfic-tour-info-color',
-					'type'     => 'color',
-					'label'    => __( 'Information / Summary Section', 'tourfic' ),
-					'subtitle' => __( 'Configure the style of the Information/Summary Section for Tours.', 'tourfic' ),
-					'multiple' => true,
-					'inline'   => true,
-					'colors'   => array(
-						'icon_color'    => __( 'Icon Color', 'tourfic' ),
-						'heading_color' => __( 'Heading Color', 'tourfic' ),
-						'text_color'    => __( 'Text Color', 'tourfic' ),
-						'bg_one'        => __( 'Background One', 'tourfic' ),
-						'bg_two'        => __( 'Background Two', 'tourfic' ),
-						'bg_three'      => __( 'Background Three', 'tourfic' ),
-						'bg_four'       => __( 'Background Four', 'tourfic' ),
-					)
-				),
-				array(
-					'id'       => 'tourfic-tour-sticky-booking',
-					'type'     => 'color',
-					'label'    => __( 'Sticky Booking Form', 'tourfic' ),
-					'subtitle' => __( 'Customize the styling of the Sticky Booking Form that appears at the bottom of the window during scrolling.', 'tourfic' ),
-					'multiple' => true,
-					'inline'   => true,
-					'colors'   => array(
-						'btn_col'         => __( 'Button Color', 'tourfic' ),
-						'btn_bg'          => __( 'Button Background', 'tourfic' ),
-						'btn_hov_col'     => __( 'Button Hover Color', 'tourfic' ),
-						'btn_hov_bg'      => __( 'Button Hover Background', 'tourfic' ),
-						'form_background' => __( 'Form Background', 'tourfic' ),
-						'form_border'     => __( 'Form Border', 'tourfic' ),
-					)
-				),
-				array(
-					'id'       => 'tourfic-include-exclude',
-					'type'     => 'color',
-					'label'    => __( 'Include - Exclude Section', 'tourfic' ),
-					'subtitle' => __( 'Configure the style of the Include - Exclude Section for Tours.', 'tourfic' ),
-					'multiple' => true,
-					'inline'   => true,
-					'colors'   => array(
-						'gradient_one_reg' => __( 'Gradient One Color', 'tourfic' ),
-						'gradient_two_reg' => __( 'Gradient Two Color', 'tourfic' ),
-						'heading_color'    => __( 'Heading Color', 'tourfic' ),
-						'text_color'       => __( 'Text Color', 'tourfic' ),
-					)
-				),
-				array(
-					'id'       => 'tourfic-tour-itinerary',
-					'type'     => 'color',
-					'label'    => __( 'Travel Itinerary', 'tourfic' ),
-					'subtitle' => __( 'Configure the style of the Itinerary Section for Tours.', 'tourfic' ),
-					'multiple' => true,
-					'inline'   => true,
-					'colors'   => array(
-						'time_day_txt'  => __( 'Time or Day Text', 'tourfic' ),
-						'time_day_bg'   => __( 'Time or Day Background', 'tourfic' ),
-						'heading_color' => __( 'Heading Color', 'tourfic' ),
-						'text_color'    => __( 'Text Color', 'tourfic' ),
-						'bg_color'      => __( 'Background Color', 'tourfic' ),
-						'icon_color'    => __( 'Icon Color', 'tourfic' ),
-					)
-				),
-				array(
-					'id'       => 'tourfic-tour-itinerary-pdf',
-					'type'     => 'color',
-					'label'    => __( 'Travel Itinerary PDF', 'tourfic' ),
-					'subtitle' => __( 'Configure the style of the Itinerary Downloader PDF Section for Tours.', 'tourfic' ),
-					'multiple' => true,
-					'inline'   => true,
-					'colors'   => array(
-						'header_bg_color'         => __( 'Header Background Color', 'tourfic' ),
-						'header_color'            => __( 'Header Text Color', 'tourfic' ),
-						'footer_bg_color'         => __( 'Footer Background Color', 'tourfic' ),
-						'footer_color'            => __( 'Footer Text Color', 'tourfic' ),
-						'talk_to_expert_bg_color' => __( 'Talk to Expert Background Color', 'tourfic' ),
-						'talk_to_expert_color'    => __( 'Talk to Expert Text Color', 'tourfic' ),
-					)
-				),
-			),
-		),
-		'apartment_design'      => array(
-			'title'  => __( 'Apartment', 'tourfic' ),
-			'parent' => 'design-panel',
-			'icon'   => 'fa-solid fa-house-chimney',
-			'fields' => array(
-				array(
-					'id'      => 'apartment_form_heading',
-					'type'    => 'heading',
-					'label' => __( 'Apartment Settings', 'tourfic' ),
-					'subtitle'   => __( 'These settings are specific to the Single Apartment Page.', 'tourfic' ),
-				),
-				array(
-					'id'      => 'design-settings-official-docs-four',
-					'type'    => 'notice',
-					'style'   => 'success',
-					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/design-panel/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
-				),
-				array(
-					'id'       => 'booking-form-design',
-					'type'     => 'color',
-					'label'    => __( 'Booking Form', 'tourfic' ),
-					'subtitle' => __( 'Configure the style of the Booking Form for Apartments.', 'tourfic' ),
-					'multiple' => true,
-					'inline'   => true,
-					'colors'   => array(
-						'form_heading_color' => __( 'Heading Color', 'tourfic' ),
-						'form_bg'            => __( 'Background', 'tourfic' ),
-						'form_border_color'  => __( 'Border Color', 'tourfic' ),
-						'form_text'          => __( 'Text Color', 'tourfic' ),
-						'form_fields_bg'     => __( 'Fields Background', 'tourfic' ),
-						'form_fields_border' => __( 'Fields Border', 'tourfic' ),
-						'form_fields_text'   => __( 'Fields Text Color', 'tourfic' ),
-					)
-				),
-				array(
-					'id'      => 'apartment_host_heading',
-					'type'    => 'heading',
-					'content' => __( 'Apartment Host Settings', 'tourfic' )
-				),
-				array(
-					'id'       => 'host-card-design',
-					'type'     => 'color',
-					'label'    => __( 'Apartment Host', 'tourfic' ),
-					'subtitle' => __( 'Configure the style of the Apartment Host section for Apartments.', 'tourfic' ),
-					'multiple' => true,
-					'inline'   => true,
-					'colors'   => array(
-						'host_heading_color' => __( 'Heading Color', 'tourfic' ),
-						'host_bg'            => __( 'Background', 'tourfic' ),
-						'host_border_color'  => __( 'Border Color', 'tourfic' ),
-						'host_text'          => __( 'Text Color', 'tourfic' ),
-					)
 				),
 			),
 		),
@@ -4087,8 +3230,8 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'        => 'swal_cdn',
 					'type'      => 'switch',
-					'label'     => __( 'jQuey Confirm CDN', 'tourfic' ),
-					'subtitle'  => __( 'Enable/disable Cloudflare CDN for jQuey Confirm', 'tourfic' ),
+					'label'     => __( 'jQuery Confirm CDN', 'tourfic' ),
+					'subtitle'  => __( 'Enable/disable Cloudflare CDN for jQuery Confirm', 'tourfic' ),
 					'label_on'  => __( 'Enabled', 'tourfic' ),
 					'label_off' => __( 'Disabled', 'tourfic' ),
 					'width'     => 100,

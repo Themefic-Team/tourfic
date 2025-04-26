@@ -1,0 +1,20 @@
+.single-tf_tours{
+    .tf-single-template{
+        &__legacy{
+            .review-section{
+                .reviews{
+                    .section-heading{
+                        @media #{$max768}{
+                            text-align: center;
+                        }
+                    }
+                    .no-review{
+                        @media #{$max768}{
+                            text-align: center;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

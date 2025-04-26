@@ -81,16 +81,16 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'id'       => 'tf_single_apartment_template',
 					'type'     => 'imageselect',
 					'label'    => esc_html__( 'Single Apartment Page Layout', 'tourfic' ),
-					'multiple' 		=> true,
-					'inline'   		=> true,
-					'options'   	=> array(
-						'default' 			=> array(
-							'title'			=> 'Default',
-							'url' 			=> TF_ASSETS_ADMIN_URL."images/template/default-apartment.jpg",
-						),
+					'options'  => array(
 						'design-1' => array(
-							'title' => 'Design 1',
-							'url'   => TF_ASSETS_ADMIN_URL . "images/template/design1-apartment.jpg",
+							'title' => esc_html__('Design 1', 'tourfic'),
+							'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-apt-design-1.png",
+							'preview_link' => esc_url('https://tourfic.com/preview/apartments/2-bedroom-apartment-in-gamle-oslo/'),
+						),
+						'default'  => array(
+							'title' => esc_html__('Default', 'tourfic'),
+							'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-apt-default.png",
+							'preview_link' => esc_url('https://tourfic.com/preview/apartments/barcelo-residences-dubai-marina/'),
 						),
 					),
 					'default'   	=> 'default',

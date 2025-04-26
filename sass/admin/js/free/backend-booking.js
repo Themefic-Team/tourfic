@@ -20,8 +20,10 @@
                     title: 'Success!',
                     content: message,
                     type: 'green',
-                    animat6ionSpeed: 200,
-                    animation: 'zoom',
+                    animat6ionSpeed: 300,
+                    animation: 'scale',
+                    closeAnimation: 'scale',
+                    animateFromElement: false,
                     typeAnimated: true,
                     boxWidth: '500px',
                     useBootstrap: false,
@@ -42,8 +44,10 @@
                     content: message,
                     type: 'red',
                     typeAnimated: true,
-                    animationSpeed: 200,
-                    animation: 'zoom',
+                    animationSpeed: 300,
+                    animation: 'scale',
+                    closeAnimation: 'scale',
+                    animateFromElement: false,
                     boxWidth: '500px',
                     useBootstrap: false,
                     closeIcon: true,
@@ -255,7 +259,7 @@
                     const obj = JSON.parse(response);
                     if (!obj.success) {
                         if (obj.message) {
-                            alert_popup.error(obj.message)
+                            alert_popup.error(obj.message);
 
                             form.find('input').removeClass('error-input');
                             form.find('select').removeClass('error-input');
@@ -289,6 +293,8 @@
                             }
                         }
                     } else {
+                        alert_popup.success(obj.message)
+
                         alert_popup.success(obj.message)
 
                         form[0].reset();
@@ -518,6 +524,7 @@
                     const obj = JSON.parse(response);
                     if (!obj.success) {
                         alert_popup.error(obj.message)
+
                         if (obj.errors) {
                             obj.errors.forEach(function (text) {
                                 notyf.error(text);
@@ -544,6 +551,8 @@
                             }
                         }
                     } else {
+                        alert_popup.success(obj.message)
+
                         alert_popup.success(obj.message)
 
                         form[0].reset();
@@ -713,7 +722,7 @@
                     if (!obj.success) {
                         if (obj.message) {
                             alert_popup.error(obj.message)
-                            
+
                             form.find('input').removeClass('error-input');
                             form.find('select').removeClass('error-input');
                             form.find('textarea').removeClass('error-input');
@@ -746,7 +755,7 @@
                             }
                         }
                     } else {
-                        alert_popup.success(obj.nessage)
+                        alert_popup.success(obj.message)
 
                         form[0].reset();
                         form.find('input').removeClass('error-input');

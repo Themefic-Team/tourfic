@@ -1,7 +1,6 @@
-<?php
+<?php 
 
 use Tourfic\Classes\Helper;
-
 $places_section_title = !empty($meta["section-title"]) ? $meta["section-title"] : "";
 $places_meta = !empty($meta["nearby-places"]) ? Helper::tf_data_types($meta["nearby-places"]) : array();
 ?>
@@ -16,7 +15,14 @@ $places_meta = !empty($meta["nearby-places"]) ? Helper::tf_data_types($meta["nea
             $place_icon = '<i class="' . $place['place-icon'] . '"></i>';
             ?>
             <li>
-                <span> <?php echo wp_kses_post($place_icon); ?> <?php echo esc_html($place["place-title"]) ?></span>
+                <span class="tf-place"> 
+                    <div class="tf-icon">
+                        <?php echo wp_kses_post($place_icon); ?> 
+                    </div>
+                    <span class="tf-place-title">
+                        <?php echo esc_html($place["place-title"]) ?>
+                    </span>
+                </span>
                 <span> <?php echo esc_html($place["place-dist"]) ?></span>
             </li>
             <?php } ;?>

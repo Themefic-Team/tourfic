@@ -29,9 +29,9 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
 	}
 }
 ?>
-<div class="tf-single-page tf-template-global tf-tour-design-1">
+<div class="tf-single-template__one">
     <div class="tf-tour-single">
-        <div class="tf-template-container">
+        <div class="tf-container">
             <div class="tf-container-inner">
                 <!-- Single Tour Heading Section start -->
                 <div class="tf-section tf-single-head">
@@ -54,7 +54,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                 if ( is_user_logged_in() ) {
                                 if ( Helper::tfopt( 'wl-for' ) && in_array( 'li', Helper::tfopt( 'wl-for' ) ) ) { ?>
                                     <div class="tf-icon tf-wishlist-box">
-                                        <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>"
+                                        <i class="<?php echo $has_in_wishlist ? 'fas fa-heart tf-text-red remove-wishlist' : 'far fa-heart-o add-wishlist' ?>"
                                             data-nonce="<?php echo esc_attr(wp_create_nonce( "wishlist-nonce" )) ?>" data-id="<?php echo esc_attr($post_id) ?>" data-type="<?php echo esc_attr($post_type) ?>" <?php if ( Helper::tfopt( 'wl-page' ) ) {
                                             echo 'data-page-title="' . esc_attr(get_the_title( Helper::tfopt( 'wl-page' ) )) . '" data-page-url="' . esc_url(get_permalink( Helper::tfopt( 'wl-page' ) )) . '"';
                                         } ?>></i>
@@ -63,7 +63,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
 								} else {
 								if ( Helper::tfopt( 'wl-for' ) && in_array( 'lo', Helper::tfopt( 'wl-for' ) ) ) { ?>
                                     <div class="tf-icon tf-wishlist-box">
-                                        <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>"
+                                        <i class="<?php echo $has_in_wishlist ? 'fas fa-heart tf-text-red remove-wishlist' : 'far fa-heart-o add-wishlist' ?>"
                                             data-nonce="<?php echo esc_attr(wp_create_nonce( "wishlist-nonce" )) ?>" data-id="<?php echo esc_attr($post_id) ?>"
                                             data-type="<?php echo esc_attr($post_type) ?>" <?php if ( Helper::tfopt( 'wl-page' ) ) {
                                             echo 'data-page-title="' . esc_attr(get_the_title( Helper::tfopt( 'wl-page' ) )) . '" data-page-url="' . esc_url(get_permalink( Helper::tfopt( 'wl-page' ) )) . '"';
@@ -76,7 +76,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
 									if ( Helper::tfopt( 'wl-for' ) && in_array( 'li', Helper::tfopt( 'wl-for' ) ) ) {
 										?>
                                         <div class="tf-icon tf-wishlist-box">
-                                            <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>"
+                                            <i class="<?php echo $has_in_wishlist ? 'fas fa-heart tf-text-red remove-wishlist' : 'far fa-heart-o add-wishlist' ?>"
                                                data-nonce="<?php echo esc_attr(wp_create_nonce( "wishlist-nonce" )) ?>" data-id="<?php echo esc_attr($post_id) ?>" data-type="<?php echo esc_attr($post_type) ?>" <?php if ( Helper::tfopt( 'wl-page' ) ) {
 												echo 'data-page-title="' . esc_attr(get_the_title( Helper::tfopt( 'wl-page' ) )) . '" data-page-url="' . esc_url(get_permalink( Helper::tfopt( 'wl-page' ) )) . '"';
 											} ?>></i>
@@ -86,7 +86,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
 									if ( Helper::tfopt( 'wl-for' ) && in_array( 'lo', Helper::tfopt( 'wl-for' ) ) ) {
 										?>
                                         <div class="tf-icon tf-wishlist-box">
-                                            <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>"
+                                            <i class="<?php echo $has_in_wishlist ? 'fas fa-heart tf-text-red remove-wishlist' : 'far fa-heart-o add-wishlist' ?>"
                                                data-nonce="<?php echo esc_attr(wp_create_nonce( "wishlist-nonce" )) ?>" data-id="<?php echo esc_attr($post_id) ?>"
                                                data-type="<?php echo esc_attr($post_type) ?>" <?php if ( Helper::tfopt( 'wl-page' ) ) {
 												echo 'data-page-title="' . esc_attr(get_the_title( Helper::tfopt( 'wl-page' ) )) . '" data-page-url="' . esc_url(get_permalink( Helper::tfopt( 'wl-page' ) )) . '"';
@@ -143,7 +143,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                                 <li>
                                                     <div title="<?php esc_attr_e( 'Share this link', 'tourfic' ); ?>"
                                                          aria-controls="share_link_button">
-                                                        <button id="share_link_button" class="tf_button share-center-copy-cta" tabindex="0"
+                                                        <button id="share_link_button" class="tf_btn tf_btn_small share-center-copy-cta" tabindex="0"
                                                                 role="button">
                                                             <i class="fa fa-link" aria-hidden="true"></i>
 
@@ -151,7 +151,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                                         </button>
                                                         <input type="text" id="share_link_input"
                                                                class="share-center-url share-center-url-input"
-                                                               value="<?php echo esc_attr( $share_link ); ?>" readonly style="opacity: 0; width: 0px !important;margin: 0px">
+                                                               value="<?php echo esc_attr( $share_link ); ?>" readonly>
 
                                                     </div>
                                                 </li>
@@ -170,13 +170,13 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                 <!-- Single Tour Body details start -->
                 <div class="tf-single-details-wrapper tf-mt-30">
                     <div class="tf-single-details-inner tf-flex">
-                        <div class="tf-column tf-tour-details-left">
+                        <div class="tf-tour-details-left">
 
 							<?php
 							if ( ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour-layout'] ) ) {
 								foreach ( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour-layout'] as $section ) {
-									if ( ! empty( $section['tour-section-status'] ) && $section['tour-section-status'] == "1" && ! empty( $section['tour-section-slug'] ) ) {
-										include TF_TEMPLATE_PART_PATH . 'tour/design-1/' . $section['tour-section-slug'] . '.php';
+									if ( ! empty( $section['status'] ) && $section['status'] == "1" && ! empty( $section['slug'] ) ) {
+										include TF_TEMPLATE_PART_PATH . 'tour/design-1/' . $section['slug'] . '.php';
 									}
 								}
 							} else {
@@ -196,7 +196,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                         </div>
 
                         <!-- SIdebar Tour single -->
-                        <div class="tf-column tf-tour-details-right">
+                        <div class="tf-tour-details-right">
                             <div class="tf-tour-booking-box tf-box">
 								<?php
 								$hide_price = !empty( Helper::tfopt( 't-hide-start-price' ) ) ? Helper::tfopt( 't-hide-start-price' ) : '';
@@ -205,7 +205,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                         <!-- Tourfic Pricing Head -->
                                         <div class="tf-booking-form-data">
                                             <div class="tf-booking-block">
-                                                <div class="tf-booking-price tf-padbtm-12">
+                                                <div class="tf-booking-price">
                                                 <?php
                                                 $tour_price = [];
                                                 $tf_pricing_rule = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
@@ -378,7 +378,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                         }
                                         ?>
 	                                    <?php if ($tf_booking_type == 2 && $tf_hide_booking_form == 1):?>
-                                            <a href="<?php echo esc_url($tf_booking_url) ?>" target="_blank" class="tf-btn-normal btn-primary" style="margin-top: 10px;"><?php echo esc_html__($tf_tour_single_book_now_text, 'tourfic'); ?></a>
+                                            <a href="<?php echo esc_url($tf_booking_url) ?>" target="_blank" class="tf_btn tf_btn_large" style="margin-top: 10px;"><?php echo esc_html__($tf_tour_single_book_now_text, 'tourfic'); ?></a>
 	                                    <?php endif; ?>
                                     </div>
                                 </div>
@@ -442,9 +442,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                         }
                                         if(!empty($tf_enquiry_section_button)) {
                                             ?>
-                                            <div class="tf-btn"><a href="#" id="tf-ask-question-trigger" class="tf-btn-normal btn-primary"><span>
-                                        <?php echo esc_html($tf_enquiry_section_button); ?>
-                                        </span></a></div>
+                                            <div class="tf-btn-wrap"><a href="javaScript:void(0);" data-target="#tf-ask-modal" class="tf-modal-btn tf_btn tf_btn_full"><span><?php echo esc_html($tf_enquiry_section_button); ?></span></a></div>
                                         <?php 
                                         }
                                         ?>
@@ -457,7 +455,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                         <!-- Responsive booking Modal -->
                         <div class="tf-modal" id="tf-tour-booking-modal">
                             <div class="tf-modal-dialog">
-                                <div class="container tf-modal-content">
+                                <div class="tf-modal-content">
                                     <div class="tf-modal-header">
                                         <a data-dismiss="modal" class="tf-modal-close">&#10005;</a>
                                     </div>
@@ -466,7 +464,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                             <!-- Tourfic Pricing Head -->
                                             <div class="tf-booking-form-data">
                                                 <div class="tf-booking-block">
-                                                    <div class="tf-booking-price tf-padbtm-12">
+                                                    <div class="tf-booking-price">
 														<?php
 														$tour_price             = [];
 														$tf_pricing_rule        = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
@@ -656,7 +654,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
 				?>
                     <!-- Tourfic upcomming tours tours -->
                     <div class="upcomming-tours">
-                        <div class="tf-template-container">
+                        <div class="tf-container">
                             <div class="tf-container-inner">
                                 <div class="section-title">
                                     <h2 class="tf-title"><?php echo ! empty( Helper::tfopt( 'rt-title' ) ) ? esc_html( Helper::tfopt( 'rt-title' )) : ''; ?></h2>
@@ -665,7 +663,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                         <p><?php echo wp_kses_post(Helper::tfopt( 'rt-description')) ?></p>
                                     <?php } ?>
                                 </div>
-                                <div class="tf-slider-items-wrapper tf-upcomming-tours-list-outter tf-mt-40 tf-flex tf-flex-gap-24">
+                                <div class="tf-slider-items-wrapper tf-slick-slider tf-upcomming-tours-list-outter tf-mt-40 tf-flex tf-flex-gap-24">
                                     <?php
                                     while ( $tours->have_posts() ) {
                                         $tours->the_post();
@@ -684,7 +682,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                             <div class="tf-slider-item tf-post-box-lists">
                                                 <div class="tf-post-single-box">
                                                     <div class="tf-image-data">
-                                                        <img src="<?php echo ! empty( get_the_post_thumbnail_url( $selected_design_post_id, 'full' ) ) ? esc_url(get_the_post_thumbnail_url( $selected_design_post_id, 'full' )) : esc_url(TF_ASSETS_APP_URL . '/images/feature-default.jpg'); ?>"
+                                                        <img src="<?php echo ! empty( get_the_post_thumbnail_url( $selected_design_post_id, 'full' ) ) ? esc_url(get_the_post_thumbnail_url( $selected_design_post_id, 'full' )) : esc_url(TF_ASSETS_APP_URL . 'images/feature-default.jpg'); ?>"
                                                             alt="">
                                                         <div class="tf-meta-data-price">
                                                             <?php esc_html_e( "From", "tourfic" ); ?>

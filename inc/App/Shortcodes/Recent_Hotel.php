@@ -58,14 +58,14 @@ class Recent_Hotel extends \Tourfic\Core\Shortcodes {
 					?>
 				</div>
 
-				<div class="tf-slider-items-wrapper" data-slick='{"slidesToShow": <?php echo esc_attr( $slidestoshow ); ?>}'>
+				<div class="tf-slider-items-wrapper tf-slick-slider" data-slick='{"slidesToShow": <?php echo esc_attr( $slidestoshow ); ?>}'>
 					<?php while ( $hotel_loop->have_posts() ) {
 						$hotel_loop->the_post();
 						$post_id                = get_the_ID();
 						$related_comments_hotel = get_comments( array( 'post_id' => $post_id ) );
 						?>
 						<div class="tf-slider-item"
-						     style="background-image: url(<?php echo ! empty( get_the_post_thumbnail_url( $post_id, 'full' ) ) ? esc_url( get_the_post_thumbnail_url( $post_id, 'full' ) ) : esc_url(TF_ASSETS_APP_URL . '/images/feature-default.jpg'); ?>);">
+						     style="background-image: url(<?php echo ! empty( get_the_post_thumbnail_url( $post_id, 'full' ) ) ? esc_url( get_the_post_thumbnail_url( $post_id, 'full' ) ) : esc_url(TF_ASSETS_APP_URL . 'images/feature-default.jpg'); ?>);">
 							<div class="tf-slider-content">
 								<div class="tf-slider-desc">
 									<h3>

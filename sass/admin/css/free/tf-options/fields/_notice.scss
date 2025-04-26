@@ -9,7 +9,7 @@
 
     .tf-field-notice-icon {
       margin-right: 10px;
-      font-size: 20px;
+      font-size: 1.25rem;
       color: $teal60;
     }
 
@@ -21,7 +21,7 @@
         margin: 0;
         font-weight: 500;
         color: $slate80;
-        font-size: 16px;
+        font-size: 1rem;
       }
 
       &.has-content {
@@ -36,7 +36,7 @@
       background-color: $green0;
 
       .tf-field-notice-icon {
-        color: $green60;
+        color: $color-success;
       }
     }
     &.tf-notice-warning {
@@ -52,15 +52,22 @@
       background-color: $red0;
 
       .tf-field-notice-icon {
-        color: $red60;
+        color: $color-error;
       }
     }
 
   }
 
-  .tour-option-itinerary-notice {
+  .tour-option-itinerary-notice{
     .tf-field-notice-content {
-      font-size: 16px;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+  }
+
+  .tour-option-itinerary-notice{
+    .tf-field-notice-content {
+      font-size: 1rem;
       line-height: 1.5;
     }
   }
@@ -71,14 +78,14 @@
       border: 1.5px solid #295BFF;
 
       .tf-field-notice-icon {
-        font-size: 24px;
+        font-size: 1.5rem;
         color: #295BFF;
         margin-right: 8px;
       }
 
       .tf-field-notice-content {
-        color: #000E3D;
-        font-size: 14px;
+        color: $admin-color-heading;
+        font-size: 0.875rem;
         line-height: 1.6;
         align-self: center;
         font-weight: 400;

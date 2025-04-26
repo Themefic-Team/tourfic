@@ -75,24 +75,21 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'id'       => 'tf_single_tour_template',
 					'type'     => 'imageselect',
 					'label'    => esc_html__( 'Single Tour Page Layout', 'tourfic' ),
-					'multiple' 		=> true,
-					'inline'   		=> true,
-					'options'   	=> array( 
-						'design-1' 				=> array(
-							'title'			=> 'Design 1',
-							'url' 			=> TF_ASSETS_ADMIN_URL."images/template/design1-tour.jpg",
+					'options'  => array(
+						'design-1' => array(
+							'title' => esc_html__('Design 1', 'tourfic'),
+							'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-design-1.png",
+							'preview_link' => esc_url('https://tourfic.com/preview/tours/amplified-nz-tour/'),
 						),
-						'design-2' 				=> array(
-							'title'			=> 'Design 2',
-							'url' 			=> TF_ASSETS_ADMIN_URL."images/template/design2-tour.jpg",
+						'design-2' => array(
+							'title' => esc_html__('Design 2', 'tourfic'),
+							'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-design-2.png",
+							'preview_link' => esc_url('https://tourfic.com/preview/tours/ancient-trails-of-japan/'),
 						),
-//						'design-3' 				=> array(
-//							'title'			=> 'Design 3',
-//							'url' 			=> TF_ASSETS_ADMIN_URL."images/template/design3-tour.jpg",
-//						),
-						'default' 			=> array(
-							'title'			=> 'Defult',
-							'url' 			=> TF_ASSETS_ADMIN_URL."images/template/default-tour.jpg",
+						'default'  => array(
+							'title' => esc_html__('Default', 'tourfic'),
+							'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-default.png",
+							'preview_link' => esc_url('https://tourfic.com/preview/tours/magical-russia/'),
 						),
 					),
 					'default'   	=> 'design-1',
@@ -887,7 +884,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 		// Tour Enquiry
 		't_enquiry'  => array(
 			'title'  => __( 'Tour Enquiry', 'tourfic' ),
-			'icon'   => 'fa fa-question-circle-o',
+			'icon'   => 'fa-solid fa-question-circle',
 			'fields' => array(
 				array(
 					'id'      => 'enquiry-section',

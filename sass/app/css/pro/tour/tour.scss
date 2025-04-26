@@ -9,10 +9,10 @@
     width: 340px;
     text-align: center;
     margin: 0 auto;
-    a.tf_button{
+    a.tf_btn{
         padding: 10px 30px;
         width: 230px;
-        font-size: 16px;
+        font-size: 1rem;
         text-decoration: none;
     }
     .tf-qr-option{
@@ -20,7 +20,6 @@
     }
     .tf-qr-code-preview{
         position: relative;
-        box-shadow: 0px 13px 30px 0px #e0e8ee;
         padding: 10px;
         border: 1px solid #ececec;
         border-radius: 20px;
@@ -30,7 +29,7 @@
         }
         .tf-final-submission-form{
             position: absolute;
-            background-color: #fff;
+            background-color: $color-white;
             height: 100%;
             width: 100%;
             top: 0;
@@ -52,7 +51,7 @@
                         margin-bottom: 20px;
                         li{
                             display: block;
-                            font-size: 14px;
+                            font-size: 0.875rem;
                         }
                     }
                 }
@@ -60,37 +59,14 @@
                     display: flex;
                     justify-content: space-between;
                     width: 100%;
-                    a.tf_button{
-                        padding: 9px 16px;
-                        font-size: 12px;
-                        display: inline-block;
-                        border-radius: 5px;
-                        border: 1px solid #003C79;
-                        color: #003C79;
-                        font-weight: 500;
-                        background-color: #fff;
-                        width: 108px !important;
-                        text-decoration: none;
-                    }
-                    a.tf_secondary_btn{
-                        padding: 9px 16px;
-                        font-size: 12px;
-                        display: inline-block;
-                        border-radius: 5px;
-                        border: 1px solid #003C79;
-                        background-color: #003C79;
-                        font-weight: 500;
-                        color: #F2F4F5;
-                        text-decoration: none;
-                        width: 108px !important;
-                    }
+                    gap: 16px;
                 }
             }
         }
         .tf-final-submission-feedback,
         .tf-final-error-feedback{
             position: absolute;
-            background-color: #fff;
+            background-color: $color-white;
             height: 100%;
             width: 100%;
             top: 0;
@@ -106,14 +82,14 @@
                 flex-direction: column;
                 span{
                     color: #002043;
-                    font-size: 20px;
+                    font-size: 1.25rem;
                     font-weight: 700;
                     margin: 15px 0px 10px 0px;
                     line-height: 26px;
                 }
                 p{
                     margin-bottom: 15px;
-                    font-size: 15px;
+                    font-size: 0.938rem;
                     color: rgba(0, 0, 0, 0.9);
                     line-height: 20px;
                 }
@@ -121,30 +97,7 @@
                     display: flex;
                     justify-content: space-evenly;
                     width: 100%;
-                    a.tf_button{
-                        padding: 9px 16px;
-                        font-size: 12px;
-                        display: inline-block;
-                        border-radius: 5px;
-                        border: 1px solid #003C79;
-                        color: #003C79;
-                        font-weight: 500;
-                        background-color: #fff;
-                        width: 108px !important;
-                        text-decoration: none;
-                    }
-                    a.tf_secondary_btn{
-                        padding: 9px 16px;
-                        font-size: 12px;
-                        display: inline-block;
-                        border-radius: 5px;
-                        border: 1px solid #003C79;
-                        background-color: #003C79;
-                        font-weight: 500;
-                        color: #F2F4F5;
-                        text-decoration: none;
-                        width: 108px !important;
-                    }
+                    gap: 16px;
                 }
             }
         }
@@ -157,7 +110,7 @@
         }
         .tf-scanner-preloader{
             position: absolute;
-            background-color: #fff;
+            background-color: $color-white;
             height: 100%;
             width: 100%;
             top: 0;
@@ -183,8 +136,8 @@
         height: 220px;
     }
     .tf-scanner-section{
-        min-width: 100% !important;
-        width: 100% !important;
+        min-width: 100% ;
+        width: 100% ;
     }
 
     .tf-scanner-section .tf-qr-code-preview #tf-video-preview {

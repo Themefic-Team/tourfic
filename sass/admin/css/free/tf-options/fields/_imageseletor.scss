@@ -6,46 +6,100 @@
     li {
         display: inline-block;
         margin-right: 20px;
-        cursor: n-resize;
         border-radius: 5px;
 
-        .tf-image-checkbox img {
-            width: 240px;
-            object-fit: cover;
-            object-position: top;
-            height: 180px;
-            transition: object-position 2s ease-in-out, border-color 0.3s ease-in-out;
+        .tf-image-checkbox{
+            display: inline-block;
+            position: relative;
 
-            &:hover {
-                object-position: bottom;
+            .tf-circle-check{
+                position: absolute;
+                font-family: 'remixicon';
+                height: 24px;
+                width: 24px;
+                right: -10px;
+                top: -10px;
+                border-radius: 50%;
+                background-color: #21A159;
+                @include transition();
+                @include flex-center();
+                opacity: 0;
+                visibility: hidden;
+
+                &::before{
+                    content: "\eb7b";
+                    color: #fff;
+                    font-size: 18px;
+                    line-height: 1;
+                }
+            }
+
+            img {
+                width: 170px;
+                object-fit: cover;
+                object-position: top;
+                height: 190px;
+                transition: object-position 2s ease-in-out, border-color 0.3s ease-in-out;
+    
+                &:hover {
+                    object-position: bottom;
+                }
+            }
+
+            &> input {
+                display: none
+            }
+            &> img {
+                cursor: pointer;
+                border: 1px solid #EDF0F2;
+                border-radius: 5px;
+            }
+            &> input:checked + img {
+                box-shadow: 0 0 0 2px #21A159;
+            }
+            &> input:checked + img + .tf-circle-check {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+        span.tf-template-title{
+            display: block;
+            text-align: center;
+            font-weight: 500;
+        }
+        .tf-image-checkbox-footer{
+            @include flexbox();
+            @include align-items(center);
+            @include justify-content(center);
+            margin-top: 8px;
+            gap: 8px;
+            color: $neutral70;
+            text-decoration: none;
+            outline: none;
+
+            &:focus{
+                box-shadow: none;
             }
         }
 
-        .tf-image-checkbox > input {
-            display: none
-        }
-
-        .tf-image-checkbox > img {
-            cursor: pointer;
-            border: 3px solid transparent !important;
-        }
-
-        .tf-image-checkbox > input:checked + img {
-            border-color: #607085 !important;
-            border-radius: 5px;
+        a.tf-image-checkbox-footer{
+            &:hover{
+                text-decoration: underline;
+                color: $admin-color-primary;
+            }
         }
 
         &.tf-pro-item{
             position: relative;
 
-            span{
+            .tf-image-checkbox-pro-badge{
                 position: absolute;
                 top: -1px;
                 right: -2px;
                 background-color: #295BFF;
                 padding: 3px 10px;
-                color: #fff;
-                font-size: 12px;
+                color: #ffffff;
+                font-size: 0.75rem;
                 font-weight: 600;
                 line-height: 13px;
                 border-radius: 3px;

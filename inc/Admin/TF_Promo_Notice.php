@@ -184,10 +184,10 @@ class TF_Promo_Notice {
                     max-width: 825px;
                 } 
                 .tf_black_friday_20222_admin_notice button:before {
-                    color: #fff !important;
+                    color: #fff;
                 }
                 .tf_black_friday_20222_admin_notice button:hover::before {
-                    color: #d63638 !important;
+                    color: #d63638;
                 }
             </style>
             <div class="notice notice-success tf_black_friday_20222_admin_notice"> 

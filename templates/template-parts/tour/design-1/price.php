@@ -1,5 +1,5 @@
 <!-- Single Tour Trip informations -->
-<div class="tf-trip-info tf-box tf-mb-30 tf-template-section">
+<div class="tf-trip-info tf-box tf-mb-56 tf-template-section">
     <div class="tf-trip-info-inner tf-flex tf-flex-space-bttn tf-flex-align-center tf-flex-gap-8">
         <!-- Single Tour short details -->
         <div class="tf-short-info">

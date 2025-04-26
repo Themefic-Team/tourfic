@@ -1,0 +1,54 @@
+.single-tf_hotel{
+    .tf-single-template{
+        &__legacy{
+            .single-slider-wrapper {
+                position: relative;
+                .slick-slide-item{
+                    img{
+                        width: 100%;
+                    }
+                }
+                a.slick-slide-item-link {
+                    width: 100%;
+                }
+                .swiper-button-prev,
+                .swiper-button-next {
+                    position: absolute;
+                    z-index: 9;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    color: $color-white;
+                    background-color: $color-heading;
+                    text-align: center;
+                    cursor: pointer;
+                    padding: 6px 13px 0px 12px;
+                    border-radius: 4px;
+                    width: auto;
+                    i{
+                        font-size: 1.75rem;
+                    }
+                }
+                .swiper-button-prev {
+                    left: 20px;
+                    background-image: none;
+                }
+                .swiper-button-next {
+                    right: 20px;
+                    background-image: unset;
+                }
+                .slick-slide img {
+                    width: 100%;
+                    height: 100%;
+                    -o-object-fit: cover;
+                    object-fit: cover;
+                    cursor: zoom-in;
+                }
+                .tf-hotel-video {
+                    position: absolute;
+                    right: 10px;
+                    bottom: 10px;
+                }
+            }
+        }
+    }
+}

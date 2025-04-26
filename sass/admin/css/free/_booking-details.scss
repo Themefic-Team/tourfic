@@ -3,13 +3,13 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        @media #{$max767}{
+        @media #{$max768}{
             display: flow-root;
         }
         h1{
             color: #1D2327;
             font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-            font-size: 32px;
+            font-size: 2rem;
             font-style: normal;
             font-weight: 700;
             line-height: normal;
@@ -22,7 +22,7 @@
             .tf_booking_views_button{
                 border-radius: 8px;
                 border: 1px solid #EEF6F0;
-                background: #FFF;
+                background: #ffffff;
                 padding: 4px 8px;
                 float: left;
                 height: 46px;
@@ -41,7 +41,7 @@
                         justify-content: center;
                         cursor: pointer;
                         i{
-                            font-size: 15px;
+                            font-size: 0.938rem;
                         }
                         &.active{
                             color: #f0f0f1;
@@ -55,11 +55,11 @@
                 padding: 10px 32px;
                 border-radius: 8px;
                 border: 1px solid #003C79;
-                background: #FFF;
+                background: #ffffff;
                 margin: 0 !important;
                 color: #003C79;
                 font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-                font-size: 16px;
+                font-size: 1rem;
                 font-style: normal;
                 font-weight: 600;
                 line-height: 24px; /* 150% */
@@ -78,7 +78,7 @@
                 margin: 0;
                 box-shadow: 0px 8px 20px 0px rgba(29, 35, 39, 0.06);
                 font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-                font-size: 16px;
+                font-size: 1rem;
                 font-style: normal;
                 font-weight: 600;
                 line-height: 24px; /* 150% */
@@ -108,7 +108,7 @@
         display: none;
         .tf-calendar-popup-box{
             border-radius: 8px;
-            background: #FFF;
+            background: #ffffff;
             box-shadow: 0px 8px 30px 0px rgba(16, 40, 20, 0.10);
             padding: 16px 24px;
             width: 750px;
@@ -119,7 +119,7 @@
                 margin-bottom: 24px;
                 h3{
                     color: #151615;
-                    font-size: 17px;
+                    font-size: 1.063rem;
                     font-style: normal;
                     font-weight: 600;
                     line-height: 150%; /* 25.5px */
@@ -144,7 +144,7 @@
                     padding: 16px 24px 24px 24px;
                     h4{
                         color: #141915;
-                        font-size: 15px;
+                        font-size: 0.938rem;
                         font-style: normal;
                         font-weight: 600;
                         line-height: 24px; /* 160% */
@@ -158,7 +158,7 @@
                             width: calc(33% - 3px);
                             h5{
                                 margin: 0 0 5px 0;
-                                font-size: 14px;
+                                font-size: 0.875rem;
                                 text-transform: capitalize;
                             }
                             p{
@@ -174,7 +174,7 @@
     // Booking Calendar
     #tf-booking-calendar{
         border-radius: 16px;
-        background: #FFF;
+        background: #ffffff;
         padding: 24px;
         padding-top: 30px;
         position: relative;
@@ -192,7 +192,7 @@
                             width: 40px;
                             border-radius: 8px;
                             border: 0.2px solid #003c7929;
-                            background: #FFF;
+                            background: #ffffff;
                             padding: 0;
                             transition: .3s all ease;
                             &:focus{
@@ -204,7 +204,7 @@
                                 border-color: #003c79;
                                 span{
                                     &::before{
-                                        color: #fff;
+                                        color: #ffffff;
                                     }
                                 }
                             }
@@ -219,7 +219,7 @@
                                     color: #003c79;
                                     border-color: #003c79;
                                     border-radius: 8px;
-                                    font-size: 20px;
+                                    font-size: 1.25rem;
                                     transition: .3s all ease;
                                 }
                             }
@@ -247,14 +247,14 @@
                     .fc-button-group{
                         border-radius: 24px;
                         border: 1px solid #003c7929;
-                        background: #FFF;
+                        background: #ffffff;
                         padding: 4px;
                         display: flex;
                         gap: 8px;
                         button{
-                            background: #FFF;
+                            background: #ffffff;
                             color: #131c25;
-                            font-size: 15px;
+                            font-size: 0.938rem;
                             font-style: normal;
                             font-weight: 400;
                             line-height: 24px; /* 160% */
@@ -306,7 +306,7 @@
                                 border: 0px solid;
                                 a{
                                     color: #131c25;
-                                    font-size: 15px;
+                                    font-size: 0.938rem;
                                     font-style: normal;
                                     font-weight: 400;
                                     line-height: 24px; /* 160% */
@@ -331,7 +331,7 @@
                             .fc-daygrid-day-top{
                                 a{
                                     color: #211319;
-                                    font-size: 15px;
+                                    font-size: 0.938rem;
                                     font-style: normal;
                                     font-weight: 600;
                                     line-height: 24px; /* 160% */
@@ -621,33 +621,33 @@
         }
         .tf-bulk-action-form{
             display: inline-flex;
-            @media #{$max991}{
+            @media #{$max1024}{
                 display: flex;
             }
             .tf-filter-options{
-                @media #{$max991}{
+                @media #{$max1024}{
                     margin-top: 0px !important;
                 }
             }
         }
         .tf-left-search-filter{
             display: flex;
-            @media #{$max991}{
+            @media #{$max1024}{
                 display: flow-root;
             }
             .tf-filter-options{
                 margin-right: 16px;
-                @media #{$max991}{
+                @media #{$max1024}{
                     margin: 15px 0 0 0;
                     width: 100% !important;
                 }
                 span.select2{
                     height: 48px;
                     border-radius: 6px;
-                    background: #FFF;
+                    background: #ffffff;
                     box-shadow: 0px 8px 20px 0px rgba(29, 35, 39, 0.06);
                     min-width: 160px !important;
-                    @media #{$max991}{
+                    @media #{$max1024}{
                         min-width: auto !important;
                         width: 100% !important;
                     }
@@ -666,7 +666,7 @@
                         background: transparent;
                         color: #1d2327;
                         font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-                        font-size: 16px;
+                        font-size: 1rem;
                         font-style: normal;
                         font-weight: 600;
                         line-height: 24px;
@@ -685,11 +685,11 @@
                 padding: 10px 32px;
                 border-radius: 8px;
                 border: 1px solid #003C79;
-                background: #FFF;
+                background: #ffffff;
                 box-shadow: 0px 8px 20px 0px rgba(29, 35, 39, 0.06);
                 color: #003C79;
                 font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-                font-size: 16px;
+                font-size: 1rem;
                 font-style: normal;
                 font-weight: 600;
                 line-height: 24px;
@@ -697,7 +697,7 @@
                 margin-right: 16px;
                 height: 48px;
                 transition: .3s all ease;
-                @media #{$max991}{
+                @media #{$max1024}{
                     margin: 0px;
                 }
                 &:hover{
@@ -710,7 +710,7 @@
                     text-decoration: none;
                     color: #1D2327;
                     font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-                    font-size: 16px;
+                    font-size: 1rem;
                     font-style: normal;
                     font-weight: 600;
                     line-height: 20px;
@@ -731,7 +731,7 @@
                 }
             }
             .tf-enquiry-reset-button-text {
-                font-size: 16px;
+                font-size: 1rem;
                 font-style: normal;
                 font-weight: 600;
                 line-height: 1.25;
@@ -742,7 +742,7 @@
         .tf-right-search-filter, .tf-enquiry-right-search-filter{
             border-radius: 8px;
             border: 1px solid #87888B;
-            background: #FFF;
+            background: #ffffff;
             box-shadow: 0px 8px 20px 0px rgba(29, 35, 39, 0.06);
             padding: 8px 16px;
             display: flex;
@@ -751,7 +751,7 @@
                 display: inline-flex;
                 margin-top: 16px;
             }
-            @media #{$max991}{
+            @media #{$max1024}{
                 display: flex;
             }
             input{
@@ -759,7 +759,7 @@
                 border: 0px solid;
                 color: #87888B;
                 font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-                font-size: 16px;
+                font-size: 1rem;
                 font-style: normal;
                 font-weight: 400;
                 line-height: 24px; /* 150% */
@@ -806,7 +806,7 @@
                     th, td{
                         color: #87888B;
                         font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-                        font-size: 16px;
+                        font-size: 1rem;
                         font-style: normal;
                         font-weight: 600;
                         line-height: 18px;
@@ -825,7 +825,7 @@
                             &:hover{
                                 background-color: #F0F2F4;
                                 input{
-                                    background-color: #FFFFFF;
+                                    background-color: #ffffff;
                                 }
                             }
                             input{
@@ -849,11 +849,11 @@
                         padding: 16px 24px;
                         color: #1D2327;
                         font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-                        font-size: 16px;
+                        font-size: 1rem;
                         font-style: normal;
                         font-weight: 600;
                         line-height: 18px;
-                        background-color: #fff;
+                        background-color: #ffffff;
                         border-bottom: 1px solid #F0F0F1;
                         text-align: left;
                         a{
@@ -863,7 +863,7 @@
                         span{
                             color: #87888B;
                             font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-                            font-size: 16px;
+                            font-size: 1rem;
                             font-style: normal;
                             font-weight: 400;
                             line-height: 18px; /* 112.5% */
@@ -871,7 +871,7 @@
                         .tf-checkbox-listing{
                             height: 28px;
                             width: 28px;
-                            background-color: #FFFFFF;
+                            background-color: #ffffff;
                             border-radius: 8px;
                             display: flex;
                             align-items: center;
@@ -880,7 +880,7 @@
                             &:hover{
                                 background-color: #F0F2F4;
                                 input{
-                                    background-color: #FFFFFF;
+                                    background-color: #ffffff;
                                     box-shadow: none;
                                 }
                             }
@@ -901,18 +901,18 @@
                             color: #027A48;
                             text-align: center;
                             font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-                            font-size: 12px;
+                            font-size: 0.75rem;
                             font-style: normal;
                             font-weight: 600;
                             line-height: 18px;
                         }
                         .checkinout.checkout{
-                            background: #FFFAEB;
+                            background: #ffffff;
                             color: #B54708;
                         }
                         a.tf_booking_details_view{
                             border-radius: 8px;
-                            background-color: #FFFFFF;
+                            background-color: #ffffff;
                             display: inline-flex;
                             padding: 10px;
                             transition: .3s all ease;
@@ -944,7 +944,7 @@
                                     padding: 10px;
                                     color: #1D2327;
                                     font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-                                    font-size: 14px;
+                                    font-size: 0.875rem;
                                     font-style: normal;
                                     font-weight: 600;
                                     line-height: 20px;
@@ -954,7 +954,7 @@
                                     justify-content: center;
                                 }
                                 border-right: 1px solid #F0F0F1;
-                                background: #FFF;
+                                background: #ffffff;
                                 &:last-child{
                                     border-right: 0px solid;
                                     border-radius: 0px 8px 8px 0px;
@@ -972,7 +972,7 @@
                             li.active{
                                 background-color: #003C79;
                                 a{
-                                    color: #fff;
+                                    color: #ffffff;
                                 }
                             }
                         }
@@ -994,28 +994,28 @@
             padding-left: 4px;
             padding-right: 4px;
             scrollbar-width: thin;
-            scrollbar-color: #aaa #eee;
+            scrollbar-color: $scrollbar-color;
             max-height: 218px;
             scrollbar {
                 width: 5px;
                 border-radius: 10px !important;
             }
             scrollbar-thumb {
-                background-color: #aaa;
+                background-color: $scrollbar-thumb-color;
                 border-radius: 10px !important;
             }
             li{
                 display: block;
                 color: #1D2327;
                 font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-                font-size: 16px;
+                font-size: 1rem;
                 font-style: normal;
                 font-weight: 600;
                 line-height: 24px;
                 margin-bottom: 4px;
                 padding: 8px 16px;
-                background-color: #fff;
-                background: #FFF;
+                background-color: #ffffff;
+                background: #ffffff;
                 cursor: pointer;
                 border-radius: 6px;
                 transition: .3s all ease;
@@ -1038,7 +1038,7 @@
                     color: #027A48; 
                 }
                 &:last-child{
-                    background: #FFFAEB;
+                    background: #ffffff;
                     color: #B54708;; 
                 }
             }
@@ -1056,7 +1056,7 @@
             a{
                 color: #003C79;
                 font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-                font-size: 16px;
+                font-size: 1rem;
                 font-style: normal;
                 font-weight: 600;
                 line-height: 24px;
@@ -1076,7 +1076,7 @@
             h2{
                 color: #1D2327;
                 font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-                font-size: 32px;
+                font-size: 2rem;
                 font-style: normal;
                 font-weight: 700;
                 line-height: normal;
@@ -1090,7 +1090,7 @@
                     display: inline-block;
                     color: #1D2327;
                     font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-                    font-size: 16px;
+                    font-size: 1rem;
                     font-style: normal;
                     font-weight: 400;
                     line-height: 18px;
@@ -1098,7 +1098,7 @@
                     &:first-child{
                         padding-left: 0px;
                     }
-                    @media #{$max767}{
+                    @media #{$max768}{
                         padding: 0px 5px;
                     }
                     @media #{$max640}{
@@ -1121,24 +1121,24 @@
         align-items: flex-start;
         align-self: stretch;
         gap: 24px;
-        @media #{$max767}{
+        @media #{$max768}{
             display: flow-root;
         }
         .tf-booking-details{
-            @media #{$max767}{
+            @media #{$max768}{
                 width: auto;
             }
             width: calc(100% - 260px);
             .details-box{
                 border-radius: 8px;
-                background: #FFF;
+                background: #ffffff;
                 box-shadow: 0px 8px 20px 0px rgba(29, 35, 39, 0.10);
                 padding: 24px;
                 margin-top: 24px;
                 h4{
                     color: #003C79;
                     font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-                    font-size: 16px;
+                    font-size: 1rem;
                     font-style: normal;
                     font-weight: 600;
                     line-height: 24px; /* 150% */
@@ -1167,7 +1167,7 @@
                     h3{
                         color: #87888B;
                         font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-                        font-size: 16px;
+                        font-size: 1rem;
                         font-style: normal;
                         font-weight: 600;
                         line-height: 24px; /* 150% */ 
@@ -1185,7 +1185,7 @@
                                     padding: 8px;
                                     color: #1D2327;
                                     font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-                                    font-size: 14px;
+                                    font-size: 0.875rem;
                                     font-style: normal;
                                     font-weight: 400;
                                     line-height: 18px; /* 128.571% */
@@ -1194,7 +1194,7 @@
                                     padding: 8px 8px 8px 0px;
                                     color: #1D2327;
                                     font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-                                    font-size: 14px;
+                                    font-size: 0.875rem;
                                     font-style: normal;
                                     font-weight: 600;
                                     line-height: 18px; /* 128.571% */
@@ -1240,7 +1240,7 @@
                                 border: 1px solid #F0F0F1;
                                 color: #F0F0F1;
                                 font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-                                font-size: 16px;
+                                font-size: 1rem;
                                 font-style: normal;
                                 font-weight: 600;
                                 line-height: 24px;
@@ -1280,9 +1280,9 @@
             width: 268px;
             padding: 24px;
             border-radius: 8px;
-            background: #FFF;
+            background: #ffffff;
             margin-top: 24px;
-            @media #{$max767}{
+            @media #{$max768}{
                 width: auto;
             }
             .tf-filter-selection{
@@ -1290,7 +1290,7 @@
                 h3{
                     color: #1D2327;
                     font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-                    font-size: 16px;
+                    font-size: 1rem;
                     font-style: normal;
                     font-weight: 600;
                     line-height: 24px; /* 150% */
@@ -1302,7 +1302,7 @@
                         background: #003C79;
                         color: #F0F0F1;
                         font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-                        font-size: 16px;
+                        font-size: 1rem;
                         font-style: normal;
                         font-weight: 600;
                         line-height: 24px;
@@ -1329,11 +1329,11 @@
                             color: #1D2327;
                             margin: 0px 8px 4px 8px;
                             padding: 8px 16px;
-                            background-color: #fff;
-                            background: #FFF;
+                            background-color: #ffffff;
+                            background: #ffffff;
                             cursor: pointer;
                             font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-                            font-size: 16px;
+                            font-size: 1rem;
                             font-style: normal;
                             font-weight: 600;
                             line-height: 24px; /* 150% */
@@ -1351,7 +1351,7 @@
                             color: #027A48;
                         }
                         li.checkout{
-                            background: #FFFAEB;
+                            background: #ffffff;
                             color: #B54708;
                         }
                     }
@@ -1363,12 +1363,12 @@
                     a{
                         border-radius: 8px;
                         border: 1px solid #003C79;
-                        background: #FFF;
+                        background: #ffffff;
                         box-shadow: 0px 8px 20px 0px rgba(29, 35, 39, 0.06);
                         text-decoration: none;
                         color: #003C79;
                         font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-                        font-size: 16px;
+                        font-size: 1rem;
                         font-style: normal;
                         font-weight: 600;
                         line-height: 24px;
@@ -1405,7 +1405,7 @@
     .visitor-details-edit-popup{
         border-radius: 24px;
         border: 1px solid #f0f0f1;
-        background: #fff;
+        background: #ffffff;
         position: fixed;
         left: 50%;
         top: 25%;
@@ -1420,7 +1420,7 @@
             h2{
                 color: #003C79;
                 font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-                font-size: 16px;
+                font-size: 1rem;
                 font-style: normal;
                 font-weight: 600;
                 line-height: 24px;
@@ -1430,7 +1430,7 @@
                 span{
                     height: 24px;
                     width: 24px;
-                    background: #fff;
+                    background: #ffffff;
                     display: flex;
                     align-items: center;
                     justify-content: center;
@@ -1445,13 +1445,13 @@
             overflow-x: hidden;
             overflow-y: auto;
             scrollbar-width: thin;
-            scrollbar-color: #aaa #eee;
+            scrollbar-color: $scrollbar-color;
             padding: 16px;
             scrollbar {
                 width: 5px; 
             }
             scrollbar-thumb {
-                background-color: #aaa;
+                background-color: $scrollbar-thumb-color;
                 border-radius: 4px;
             }
             .tf-single-tour-traveller{
@@ -1478,7 +1478,7 @@
                         label{
                             color: #A4A4A4;
                             font-family: inherit;
-                            font-size: 14px;
+                            font-size: 0.875rem;
                             font-style: normal;
                             font-weight: 500;
                             line-height: 20px; /* 142.857% */
@@ -1489,7 +1489,7 @@
                         select{
                             border-radius: 4px;
                             border: 0.5px solid #666D74;
-                            background: #FCFDFF;
+                            background: transparent;
                             box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
                             height: 32px;
                             width: 100%;
@@ -1517,7 +1517,7 @@
             padding: 10px 0px;
             color: #FCFDFF;
             font-family: inherit;
-            font-size: 16px;
+            font-size: 1rem;
             font-style: normal;
             font-weight: 500;
             line-height: 20px;
@@ -1541,7 +1541,7 @@
     .voucher-quick-view{
         border-radius: 24px;
         border: 1px solid #f0f0f1;
-        background: #fff;
+        background: #ffffff;
         position: fixed;
         left: 50%;
         top: 25%;
@@ -1556,7 +1556,7 @@
             h2{
                 color: #003C79;
                 font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
-                font-size: 16px;
+                font-size: 1rem;
                 font-style: normal;
                 font-weight: 600;
                 line-height: 24px;
@@ -1566,7 +1566,7 @@
                 span{
                     height: 24px;
                     width: 24px;
-                    background: #fff;
+                    background: #ffffff;
                     display: flex;
                     align-items: center;
                     justify-content: center;
@@ -1595,7 +1595,7 @@
         .title{
             h1{
                 color:#002043;
-                font-size: 24px; 
+                font-size: 1.5rem; 
                 font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
                 line-height: 32px;
                 font-weight: 700;
@@ -1603,7 +1603,7 @@
             }
             span{
                 color:#828C99;
-                font-size: 20px; 
+                font-size: 1.25rem; 
                 font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
                 line-height: 32px;
                 font-weight: 700;
@@ -1624,7 +1624,7 @@
             h5{
                 margin: 0;
                 color: #828C99; 
-                font-size: 16px; 
+                font-size: 1rem; 
                 line-height: 28px; 
                 font-weight: 400; 
                 font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
@@ -1646,7 +1646,7 @@
         .tf-billing-details{
             h5{
                 color: #828C99; 
-                font-size: 16px; 
+                font-size: 1rem; 
                 line-height: 28px; 
                 font-weight: 400; 
                 font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
@@ -1656,7 +1656,7 @@
         .tf-cta-info{
             h4{
                 color: #828C99; 
-                font-size: 16px; 
+                font-size: 1rem; 
                 line-height: 28px; 
                 font-weight: 700; 
                 font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
@@ -1664,7 +1664,7 @@
             }
             h5{
                 color: #828C99; 
-                font-size: 14px; 
+                font-size: 0.875rem; 
                 line-height: 28px; 
                 font-weight: 400; 
                 margin: 0;

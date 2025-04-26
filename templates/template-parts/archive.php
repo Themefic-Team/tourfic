@@ -777,7 +777,7 @@ elseif( ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-2
                                 </svg>
                                 <span><?php echo esc_html__('List view', 'tourfic') ?></span>
                             </a>
-                            <div id="map-marker" data-marker="<?php echo !empty($tf_map_marker) ? esc_url($tf_map_marker) : esc_url(TF_ASSETS_URL . 'app/images/cluster-marker.png'); ?>"></div>
+                            <div id="map-marker" data-marker="<?php echo esc_url(TF_ASSETS_URL . 'app/images/cluster-marker.png'); ?>"></div>
                             <div class="tf-hotel-archive-map-wrap">
                                 <div id="tf-hotel-archive-map"></div>
                             </div>

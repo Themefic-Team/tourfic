@@ -226,7 +226,7 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 
 		if ( ( $post_type == "tf_tours" && $tf_tour_arc_selected_template == "design-1" ) || ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template == "design-1" ) ) {
 			?>
-			<div class="tf-column tf-page-content tf-archive-left tf-result-previews">
+			<div class="tf-page-content tf-archive-left tf-result-previews">
 				<!-- Search Head Section -->
 				<div class="tf-archive-head tf-flex tf-flex-align-center tf-flex-space-bttn">
 					<div class="tf-search-result tf-flex">

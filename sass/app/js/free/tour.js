@@ -212,6 +212,22 @@
 
 
         /**
+         * Single Tour Video
+         *
+         * Fancybox
+         */
+      
+        Fancybox.bind('[data-fancybox="tour-video"]', {
+            loop: true,
+            buttons: [
+                "zoom",
+                "slideShow",
+                "fullScreen",
+                "close"
+            ],
+        });
+
+        /**
          * Single Tour Gallery
          *
          * Fancybox
@@ -239,6 +255,10 @@
             ]
         });
 
+        Fancybox.bind('.tf-hero-btm-icon.tf-tour-info', {
+            loop: true,
+            touch: false
+        });
         /**
          * Single Tour price change
          *
@@ -546,17 +566,21 @@
             var tf_location = $(this).val();
             $("#tf-search-tour").val(tf_location);
         });
-        $(document).on('click', function (event) {
-            if (!$(event.target).closest("#tf-tour-location-adv").length) {
-                $(".tf-tour-results").removeClass('tf-destination-show');
-            }
-        });
+    
         $('#ui-id-2 li').on("click", function (e) {
             var dest_name = $(this).attr("data-name");
             var dest_slug = $(this).attr("data-slug");
             $(".tf-tour-preview-place").val(dest_name);
             $("#tf-tour-place").val(dest_slug);
-            $(".tf-tour-results").removeClass('tf-destination-show');
+            setTimeout(function () {
+                $(".tf-tour-results").removeClass('tf-destination-show');
+            }, 100);
+        });
+
+        $(document).on('click', function (event) {
+            if (!$(event.target).closest("#tf-tour-location-adv").length) {
+                $(".tf-tour-results").removeClass('tf-destination-show');
+            }
         });
 
         // Tour destination autocomplete
@@ -571,10 +595,25 @@
          */
         $(window).on("scroll", function () {
             var sticky = $('.tf-tour-booking-wrap'),
-                scroll = $(window).scrollTop();
-
-            if (scroll >= 800) sticky.addClass('tf-tours-fixed');
-            else sticky.removeClass('tf-tours-fixed');
+                scroll = $(window).scrollTop(),
+                footer = $('footer');
+        
+            if (footer.length === 0) {
+                return; 
+            }
+        
+            var footerOffset = footer.offset().top,
+                windowHeight = $(window).height();
+        
+            if (scroll >= 800) {
+                if (scroll + windowHeight >= footerOffset) {
+                    sticky.removeClass('tf-tours-fixed'); 
+                } else {
+                    sticky.addClass('tf-tours-fixed');
+                }
+            } else {
+                sticky.removeClass('tf-tours-fixed');
+            }
         });
 
         /**
@@ -585,14 +624,19 @@
             $(window).on("scroll", function () {
                 let bookingBox = $('.tf-tour-booking-box');
                 let bottomBar = $('.tf-bottom-booking-bar');
+                let footer = $('.footer');
+                if (footer.length === 0) {
+                    return; 
+                }
                 let boxOffset = bookingBox.offset().top + bookingBox.outerHeight();
-
+                let footerOffset = footer.offset().top;
                 var scrollTop = $(window).scrollTop();
+                let windowHeight = $(window).height();
 
-                if (scrollTop > boxOffset) {
-                    bottomBar.addClass('active'); // Add your class name here
+                if (scrollTop > boxOffset && scrollTop + windowHeight < footerOffset) {
+                    bottomBar.addClass('active');
                 } else {
-                    bottomBar.removeClass('active'); // Remove the class if scrolling back up
+                    bottomBar.removeClass('active');
                 }
             });
         }
@@ -604,9 +648,18 @@
         });
 
         //Template 3 Mobile Booking Btn
-        $('.tf-template-3 .tf-mobile-booking-btn').on('click', function () {
+        $('.tf-single-template__two .tf-mobile-booking-btn').on('click', function () {
             $('.tf-bottom-booking-bar').addClass('tf-mobile-booking-form');
-            $('.tf-template-3 .tf-mobile-booking-btn').slideUp(300);
+            $('.tf-single-template__two .tf-mobile-booking-btn').slideUp(300);
+        });
+
+        $(document).on('click touchstart', function (e) {
+            if ($(window).width() <= 768) {
+                if (!$(e.target).closest('.tf-bottom-booking-bar, .tf-mobile-booking-btn, .flatpickr-calendar').length) {
+                    $('.tf-bottom-booking-bar').removeClass('tf-mobile-booking-form');
+                    $('.tf-single-template__two .tf-mobile-booking-btn').slideDown(300);
+                }
+            }
         });
 
         /**
@@ -767,8 +820,8 @@
                     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
                 ];
                 const startDate = new Date(tour_date_options.defaultDate);
-                $(".tf-template-3 .tf-bottom-booking-bar .tf-booking-form-checkinout span.tf-booking-date").html(startDate.getDate());
-                $(".tf-template-3 .tf-bottom-booking-bar .tf-booking-form-checkinout span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
+                $(".tf-single-template__two .tf-bottom-booking-bar .tf-booking-form-checkinout span.tf-booking-date").html(startDate.getDate());
+                $(".tf-single-template__two .tf-bottom-booking-bar .tf-booking-form-checkinout span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
             }
             function dateSetToFields(selectedDates, instance) {
                 if (selectedDates.length === 1) {
@@ -778,8 +831,8 @@
                     ];
                     if(selectedDates[0]){
                         const startDate = selectedDates[0];
-                        $(".tf-template-3 .tf-bottom-booking-bar .tf-booking-form-checkinout span.tf-booking-date").html(startDate.getDate());
-                        $(".tf-template-3 .tf-bottom-booking-bar .tf-booking-form-checkinout span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
+                        $(".tf-single-template__two .tf-bottom-booking-bar .tf-booking-form-checkinout span.tf-booking-date").html(startDate.getDate());
+                        $(".tf-single-template__two .tf-bottom-booking-bar .tf-booking-form-checkinout span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
                     }
                 }
                 if (selectedDates.length === 2) {
@@ -789,13 +842,13 @@
                     ];
                     if(selectedDates[0]){
                         const startDate = selectedDates[0];
-                        $(".tf-template-3 .tf-bottom-booking-bar .tf-booking-form-checkinout  span.tf-booking-date").html(startDate.getDate());
-                        $(".tf-template-3 .tf-bottom-booking-bar .tf-booking-form-checkinout span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
+                        $(".tf-single-template__two .tf-bottom-booking-bar .tf-booking-form-checkinout  span.tf-booking-date").html(startDate.getDate());
+                        $(".tf-single-template__two .tf-bottom-booking-bar .tf-booking-form-checkinout span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
                     }
                     if(selectedDates[1]){
                         const endDate = selectedDates[1];
-                        $(".tf-template-3 .tf-bottom-booking-bar .tf-booking-form-checkinout  span.tf-booking-date").html(endDate.getDate());
-                        $(".tf-template-3 .tf-bottom-booking-bar .tf-booking-form-checkinout span.tf-booking-month span").html(monthNames[endDate.getMonth()]);
+                        $(".tf-single-template__two .tf-bottom-booking-bar .tf-booking-form-checkinout  span.tf-booking-date").html(endDate.getDate());
+                        $(".tf-single-template__two .tf-bottom-booking-bar .tf-booking-form-checkinout span.tf-booking-month span").html(monthNames[endDate.getMonth()]);
                     }
                 }
             }

@@ -1,0 +1,141 @@
+.single-tf_apartment{
+    .tf-single-template{
+        &__legacy{
+            .tf-apartment-faq {
+                margin-bottom: 24px;
+            
+                .tf-faq-sec-title {
+                    margin-bottom: 20px;
+                    text-align: left;
+            
+                    h4 {
+                        margin: 0;
+                    }
+            
+                    p {
+                        max-width: 100%;
+                    }
+                }
+            
+                .tf-faq-content-wrapper {
+                    background: $color-brand-lite;
+                    border: 1px solid $color-border-lite;
+                    border-radius: 8px;
+                    padding: 40px;
+                }
+            
+                .tf-faq-items-wrapper {
+                    display: flex;
+                    flex-direction: column;
+                    align-self: stretch;
+                    gap: 16px;
+                }
+            
+                #tf-faq-item {
+                    border-radius: 8px;
+                    border-bottom: none;
+                    padding: 8px 0;
+                    margin-bottom: 0;
+            
+                    .tf-faq-title {
+                        @include flexbox();
+                        @include align-items(center);
+                        gap: 8px;
+            
+                        h4 {
+                            font-size: 1rem;
+                            color: $color-heading;
+                            font-weight: 500;
+                            line-height: 1.5;
+                            letter-spacing: 0.5px;
+                            margin: 0;
+            
+                            &:hover {
+                                color: $color-primary;
+                            }
+                        }
+            
+                        .tf-faq-minus {
+                            display: none;
+                        }
+            
+                        svg rect {
+                            fill: $color-text;
+                        }
+            
+                        &.active {
+                            .tf-faq-plus {
+                                display: none;
+                            }
+            
+                            .tf-faq-minus {
+                                display: inline-block;
+                            }
+            
+                            h4 {
+                                color: $color-primary;
+                            }
+            
+                            svg rect {
+                                fill: $color-text;
+                            }
+                        }
+            
+                        &:hover {
+                            svg rect {
+                                fill: $color-primary;
+                            }
+                        }
+                    }
+            
+                    .tf-faq-desc {
+                        background-color: transparent;
+                        padding: 0;
+                        color: $color-text;
+                    }
+                }
+            
+                .tf-faq-desc {
+                    p {
+                        margin-bottom: 20px;
+                    }
+                }
+            
+                .tf-faq-items-wrapper {
+                    #tf-faq-item {
+                        &:last-child {
+                            border-bottom: 0;
+                            margin-bottom: 0;
+                            padding-bottom: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.single-tf_apartment {
+    #tf-ask-modal {
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            border: 1px solid $color-gray;
+            border-radius: 4px;
+            padding: 12px 16px;
+            background-color: $color-white;
+            font-size: 1rem;
+            font-weight: 400;
+            transition: all 0.3s ease-in-out;
+
+            &:focus {
+                outline: none;
+                border-color: $color-primary;
+            }
+        }
+
+        textarea {
+            height: 120px;
+        }
+    }
+}

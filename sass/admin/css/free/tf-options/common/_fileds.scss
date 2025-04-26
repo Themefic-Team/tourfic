@@ -1,7 +1,7 @@
 .tf-field {
   padding: 12px 0;
 
-  @media #{$max991} {
+  @media #{$max1024} {
     width: 100% !important;
   }
 
@@ -10,8 +10,8 @@
     font-style: normal;
     margin-bottom: 3px;
     font-weight: 600;
-    font-size: 16px;
-    color: #000;
+    font-size: 1rem;
+    color: $admin-color-heading;
     display: flex !important;
     align-items: center;
     line-height: 20px;
@@ -46,7 +46,7 @@
 
   .tf-fieldset {
     font-style: normal;
-    font-size: 14px;
+    font-size: 0.875rem;
     margin-top: 15px;
     a {
       font-style: normal;
@@ -56,7 +56,7 @@
 
   .tf-field-sub-title {
     color: #87888B;
-    font-size: 14px;
+    font-size: 0.875rem;
     margin-bottom: 0px;
     display: block;
   }

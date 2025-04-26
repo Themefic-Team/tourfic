@@ -1,0 +1,26 @@
+@import '../../../../common/variable';
+@import '../../../../common/mixin';
+
+//Single Modules Start
+@import 'modules/single/_hero';
+@import 'modules/single/_booking';
+@import 'modules/single/_information';
+@import 'modules/single/_highlights';
+@import 'modules/single/_map';
+@import 'modules/single/_inc-exc';
+@import 'modules/single/_itinerary';
+@import 'modules/single/_related-items';
+@import 'modules/single/_trip-info';
+@import 'modules/single/_footer-booking';
+@import 'modules/single/_terms-and-condition';
+@import 'modules/single/_cta-info';
+@import 'modules/single/_sidebar';
+@import 'modules/single/_feature';
+@import 'modules/single/_review';
+//Single Modules End
+
+//Archive Modules Start
+@import 'modules/archive/_search-form';
+@import 'modules/archive/_listing';
+@import 'modules/archive/_sidebar';
+//Archive Modules End

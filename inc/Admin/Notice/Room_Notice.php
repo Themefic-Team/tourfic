@@ -22,7 +22,7 @@ class Room_Notice extends \Tourfic\Core\TF_Notice {
     }
 
     function set_notice_id() {
-        $this->notice_id = 'tf_dismiss_221';
+        $this->notice_id = 'tf_dismiss_222';
     }
 
     // Red Color: style="color:#d63638;
@@ -32,9 +32,9 @@ class Room_Notice extends \Tourfic\Core\TF_Notice {
 		if ( get_option( $this->notice_id ) < 1 ) {
             ?>
                 <div class="tf-critical-update-notice notice notice-info is-dismissible">
-                    <h2><?php echo esc_html__("The Wait is Over! Our Revamped Design Panel will be Introducing Soon!", 'tourfic') ?></h2>
-                    <p><?php echo wp_kses_post( __('We are pleased to introduce the beta version of our <b>revamped design panel</b>, offering an enhanced and more intuitive customization experience. You can now explore the improved interface, test the latest features, and provide valuable feedback before the official release.', "tourfic")); ?></p>
-		    <p><?php echo wp_kses_post( __('Discover the latest enhancements in our revamped design panel! Test the beta version today and experience the improved customization firsthand. Read <a href="https://themefic.com/tourfic-v2-16-0-revamped-design-panel-launching-soon/" target="_blank"><b>this blog</b></a> for a detailed overview and access to the beta version download link.', "tourfic")); ?></p>
+                    <h2><?php echo esc_html__("After Update Support", 'tourfic') ?></h2>
+                    <p><?php echo wp_kses_post( __(' If you experience any inconvenience after updating to <b>Tourfic version 2.16.0</b>, please don\'t hesitate to reach out to our <a href="https://portal.themefic.com/support/" target="_blank"><b>Support Team</b></a>. We\'re  here to assist you with any inconvenience.', "tourfic")); ?></p>
+		    
                 </div>
 
                 <script>

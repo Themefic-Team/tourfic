@@ -265,16 +265,14 @@ while ( have_posts() ) : the_post();
 	}elseif( $tf_tour_selected_template == "design-2" ){
 		include TF_TEMPLATE_PART_PATH . 'tour/design-2.php';
 	}else{
-		include TF_TEMPLATE_PART_PATH . 'tour/design-default.php';
+		include TF_TEMPLATE_PART_PATH . 'tour/design-legacy.php';
 	}
 	?>
 <?php
 endwhile;
-?>
-<?php
 if(wp_is_block_theme()){
     wp_footer();
     block_footer_area();
  }else{
 	get_footer();
- }
+}

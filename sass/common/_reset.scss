@@ -1,0 +1,254 @@
+
+body{
+    color: $color-text;
+    font-size: 1rem;
+    line-height: 1.5;
+    font-weight: 400;
+}
+i{
+    line-height: 1.5;
+}
+
+
+.tf-list {
+    list-style: none;
+    padding: 0;
+    li {
+        margin-top: 12px;
+        list-style: none;
+        i{
+            color: $color-primary;
+            width: 24px;
+        }
+    }
+}
+.archive,
+.single{
+    .site-content{
+        .ast-container {
+            max-width: 100%;
+            padding: 0;
+            display: block;
+        }
+    }
+}
+//Tourfic forms
+.tf-field-group.tf_form-inner,
+.tf-field-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    i{
+        position: absolute;
+        left: 18px;
+        color: $color-text;
+    }
+    input[type="text"].tf-field,
+    .tf-field {
+        border: none;
+        padding: 15px 40px;
+        width: 100%;
+        background-color: $color-filling-bg;
+        border-radius: 5px;
+        font-size: 1rem;
+        margin: 0px;
+        color: $color-text;
+        background-image: none;
+        -moz-appearance: auto;
+        height: auto;
+
+        &:focus{
+            outline: none;
+            border: none;
+        }
+    }
+    input::placeholder {
+        font-size: 0.875rem;
+        color: $color-text;
+    }
+}
+
+.tf-page-content {
+    flex-basis: 68%;
+    @media #{$max1024}{
+        flex-basis: 58%;
+    }
+    @media #{$max768}{
+        flex-basis: 100%;
+    }
+   
+}
+.tf-sidebar {
+    flex-basis: 32%;
+    padding-left: 30px;
+    @media #{$max1024}{
+        flex-basis: 40%;
+        padding-left: $tf-space-12;
+    }
+    @media #{$max768}{
+        flex-basis: 100%;
+        margin-top: 0px;
+        padding-left: 0px;
+    }
+   
+}
+
+
+.tf-icon{
+    height: 50px;
+    width: 50px;
+    @include flex-center();
+}
+
+.tf-divider {
+    background: $color-blue-light;
+    height: 1px;
+}
+
+
+//Tourfic Base classes
+.tf-box-wrapper{
+    background-color: $color-white;
+    @include bd-radius(5px);
+}
+.tf-box{
+    padding: $tf-space-30;
+    background: $color-filling-fg;
+    @media #{$max1024}{
+        padding: $tf-space-24;
+    }
+
+   
+}
+
+.tf-flex{
+    display: flex;
+    @media #{$max1024}{
+        flex-wrap: wrap;
+    }
+}
+.tf-flex-space-bttn{
+    justify-content: space-between;
+}
+.tf-flex-justify-center{
+    justify-content: center;
+}
+.tf-flex-align-center{
+    align-items: center;
+}
+.tf-flex-align-baseline{
+    align-items: baseline;
+}
+.tf-flex-direction-column{
+    flex-direction: column;
+}
+.tf-flex-align-top{
+    align-items: flex-start;
+}
+.tf-flex-gap-4{
+    gap: 4px;
+}
+.tf-flex-gap-6{
+    gap: 6px;
+}
+.tf-flex-gap-8{
+    gap: 8px;
+}
+.tf-flex-gap-12{
+    gap: 12px;
+}
+.tf-flex-gap-16{
+    gap: 16px;
+}
+.tf-flex-gap-24{
+    gap: 24px;
+}
+.tf-flex-gap-32{
+    gap: 32px;
+}
+
+.tf-mt-8{
+    margin-top: 8px;
+}
+.tf-mt-16{
+    margin-top: 16px;
+}
+.tf-mt-24{
+    margin-top: 24px;
+}
+.tf-mb-24{
+    margin-bottom: 24px;
+}
+.tf-mt-30{
+    margin-top: 30px;
+}
+.tf-mb-30{
+    margin-bottom: 30px;
+}
+.tf-mt-40{
+    margin-top: 40px;
+}
+.tf-mb-40{
+    margin-bottom: 40px;
+}
+.tf-mt-50{
+    margin-top: 50px;
+}
+.tf-mb-50{
+    margin-bottom: 50px;
+}
+.tf-mb-56{
+    margin-bottom: 56px;
+    @media #{$max768}{
+        margin-bottom: 40px;
+    }
+}
+
+.sp-20 {
+    padding: 20px 0;
+}
+.sp-30 {
+    padding: 30px 0;
+}
+.sp-t-30 {
+    padding-top: 30px;
+}
+.sp-40 {
+    padding: 40px 0;
+}
+.sp-t-40 {
+    padding-top: 40px;
+}
+.sp-50 {
+    padding: 50px 0;
+}
+.sp-t-50 {
+    padding-top: 50px;
+}
+.sp-70 {
+    padding: 70px 0;
+}
+.sp-t-70 {
+    padding-top: 70px;
+}
+.tf-pt-16{
+    padding-top: 16px;
+}
+.tf-d-b {
+    display: block;
+}
+.tf-d-ib {
+    display: inline-block;
+}
+.tf-t-c {
+    text-align: center;
+}
+.tf-d-n {
+    display: none!important;
+}
+.tf-d-g {
+    display: grid!important;
+}
+
+

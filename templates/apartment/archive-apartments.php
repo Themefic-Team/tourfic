@@ -26,7 +26,7 @@ if ( Helper::tf_is_woo_active() ) {
 	} elseif( $tf_apartment_arc_selected_template == "design-2" && function_exists( 'is_tf_pro' ) && is_tf_pro()){
 		include TF_TEMPLATE_PATH . 'apartment/archive/design-2.php';
 	} else {
-		include TF_TEMPLATE_PATH . 'apartment/archive/design-default.php';
+		include TF_TEMPLATE_PATH . 'apartment/archive/design-legacy.php';
 	}
 } else {
 	?>

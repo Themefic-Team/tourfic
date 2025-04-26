@@ -35,7 +35,7 @@ class Reviews extends \Tourfic\Core\Shortcodes {
 		$type == "car" ? $type = "tf_carrental" : $type == '';
 		ob_start();
 		?>
-		<div class="tf-single-review tf-reviews-slider">
+		<div class="tf-single-review tf-slick-slider tf-reviews-slider">
 
 			<?php
 			$args     = array(

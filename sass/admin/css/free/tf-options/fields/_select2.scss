@@ -5,13 +5,13 @@
 
     .select2-selection{
       width: 100%;
-      padding: 10px 8px 0 12px;
+      padding: 2px 8px 0 12px;
       border: 1px solid $slate20;
       background-color: $blue0;
       border-radius: 4px;
       min-height: 48px;
       color: $slate80;
-      font-size: 14px;
+      font-size: 0.875rem;
 
       .select2-selection__choice {
         background-color: $slate10;
@@ -30,7 +30,7 @@
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
         color: $slate80;
-        font-size: 16px;
+        font-size: 1rem;
         padding: 0;
         position: absolute;
         left: auto;
@@ -116,7 +116,7 @@
         margin: 0;
         padding: 15px;
         h3{
-          font-size: 14px;
+          font-size: 0.875rem;
           line-height: 1em;
           margin: 0;
           padding: 0;
@@ -131,7 +131,7 @@
           justify-content: center;
           cursor: pointer;
           i{
-            color: #fff;
+            color: #ffffff;
           }
         }
       }

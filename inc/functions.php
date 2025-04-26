@@ -833,3 +833,24 @@ if(!function_exists('tf_average_rating_change_on_base')){
         return $rating;
     }
 }
+
+// Admin Color Palette
+
+if(!function_exists('tf_custom_color_palette_values')){
+	function tf_custom_color_palette_values(){
+		$tf_brand_data = ! empty( Helper::tf_data_types( Helper::tfopt( "tf-custom-brand" ) ) ) ? Helper::tf_data_types( Helper::tfopt( "tf-custom-brand" ) ) : [];
+		$tf_text_data = ! empty( Helper::tf_data_types( Helper::tfopt( "tf-custom-text" ) ) ) ? Helper::tf_data_types( Helper::tfopt( "tf-custom-text" ) ) : [];
+		
+		$tf_brand_default = ! empty( $tf_brand_data['default'] ) ? $tf_brand_data['default'] : '#ddd';
+		$tf_brand_dark = ! empty( $tf_brand_data['dark'] ) ? $tf_brand_data['dark'] : '#ccc';
+		$tf_text_heading = ! empty( $tf_text_data['heading'] ) ? $tf_text_data['heading'] : '#ddd';
+		$tf_text_paragraph = ! empty( $tf_text_data['paragraph'] ) ? $tf_text_data['paragraph'] : '#ccc';
+
+		return [
+			$tf_brand_default,
+			$tf_brand_dark,
+			$tf_text_heading,
+			$tf_text_paragraph
+		];
+	}
+}

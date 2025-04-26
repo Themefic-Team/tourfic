@@ -1,0 +1,124 @@
+.single-tf_tours{
+    .tf-single-template{
+        &__one{
+            .tf-tour-details-right {
+                .tf-tour-booking-box  {
+                    background: $color-filling-fg;
+                    @include bd-radius(5px);
+                
+                }
+                .tf-booking-price{
+                    border-bottom: 1px solid $color-border-lite;
+                    padding-bottom: 12px;
+                    
+                    p{
+                        margin-bottom: 0;
+                        font-size: 1.875rem;
+                        span{
+                            font-size: 0.875rem;
+                            font-weight: 400;
+                        }
+                    }
+                }
+                .tf-form-title{
+                    p{
+                        margin-bottom: 0;
+                    }
+                }
+                .tf-form-title.tf-tour-extra{
+                    p{
+                        cursor: pointer;
+                        background-color: $color-brand-lite;
+                        padding: 10px;
+                        border-radius: 5px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        i{
+                            float: right;
+                        }
+                        .fa-minus{
+                            display: none;
+                        }
+                    }
+                }
+                .tf-form-title.tf-tour-extra.active{
+                    i{
+                        display: none;
+                    }
+                    .fa-minus{
+                        display: block;
+                    }
+                }
+                .tf-tour-extra-box{
+                    display: none;
+                    .tf-tour-extra {
+                        padding: 16px 24px;
+                        border: 1px solid $color-border-lite;
+                        @include bd-radius(5px);;
+                        .tf-tour-extra-price{
+                            align-items: inherit;
+                            .tf-tour-extra-input{
+                                align-items: center;
+                            }
+                            .woocommerce-Price-amount.amount{
+                                font-weight: 600;
+                                margin-left: 10px;
+                                line-height: 1.2;
+                            }
+                            p{
+                                line-height: 1.3;
+                            }
+                            .tf-tour-extra-input{
+                                >p{
+                                    line-height: 1;
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                .tf-booking-bttns{
+                    button{
+                        margin-top: 8px;
+                        padding: 12px 20px;
+                        width: 260px;
+                    }
+                }
+                .tf-tour-booking-advantages{
+                    background-color: $color-filling-fg;
+                    @include bd-radius(5px);;
+                    .tf-head-title{
+                        h3{
+                            font-size: 1.5rem;
+                            color: $color-heading;
+                        }
+                    }
+                    ul{
+                        margin: 0px;
+                    }
+                    li {
+                        display: flex;
+                        align-items: center;
+                        gap: 8px;
+                        color: $color-heading;
+                        i {
+                            height: 38px;
+                            width: 38px;
+                            background: $color-white;
+                            border: 1px solid $color-border-lite;
+                            @include bd-radius(5px);;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                        }
+                        a{
+                            color: $color-heading;
+                            text-decoration: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -85,7 +85,7 @@ foreach($extra_qty as $key => $singleqty){
 				?>
 				<h4><?php echo !empty($single_extra_info['title']) ? esc_html($single_extra_info['title']) : ''; ?></h4>
 				<div class="qty-price tf-flex tf-flex-space-bttn">
-					<div class="line-sum tf-flex">
+					<div class="line-sum tf-flex tf-flex-align-center">
 						<i class="ri-close-line"></i> 
 						<span class="qty"><?php echo $singleqty; ?></span> 
 						<span class="price"><?php echo !empty($single_extra_info['price']) ? wc_price( ($single_extra_info['price'] * $calday) * $singleqty) : ''; ?></span>
@@ -701,7 +701,7 @@ function tf_car_booking_pupup_callback() {
 									<input id="tf_single_protection_price" type="hidden" value="<?php echo !empty($protection['price']) ? esc_attr($protection['price'] * $total_days) : 0; ?> ">
 									<label>
 										<input type="checkbox" class="protection-checkbox" name="protections[]" value="<?php echo esc_attr($pkey); ?>" <?php echo !empty($protection["protection_required"]) ? 'data-required=1' : '' ?>>
-										<span class="checkmark"></span>
+										<span class="tf-checkmark"></span>
 									</label>
 								</div>
 								<div class="tf-single-protection-title tf-flex">

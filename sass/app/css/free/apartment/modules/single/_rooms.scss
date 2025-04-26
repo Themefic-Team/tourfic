@@ -1,0 +1,240 @@
+.single-tf_apartment{
+    .tf-single-template{
+        &__legacy{
+            .tf-apartment-rooms {
+                margin-bottom: 80px;
+
+                .slick-list {
+                    margin: 0 -12px;
+                }
+
+                .slick-track {
+                    margin: 0;
+                }
+
+                .slick-arrow {
+                    display: inline-block;
+                    z-index: 999;
+                    right: 0;
+                    top: 80px;
+                    height: 40px;
+                    width: 40px;
+
+                    svg {
+                        padding: 4px;
+                        border-radius: 50%;
+                        border: 1px solid $color-border-lite;
+                        background: $color-filling-fg;
+
+                    }
+                }
+
+                .slick-prev {
+                    left: 0;
+                }
+
+                .slick-arrow::before {
+                    display: none;
+                }
+
+                .tf-apartment-default-design-room-slider {
+
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        right: -1px;
+                        width: 100%;
+                        height: 100%;
+                        background: linear-gradient(270deg, $color-white -0.06%, rgba(255, 255, 255, 0.00) 15.54%);
+                        border-radius: 8px;
+                    }
+                }
+
+                .slick-dots {
+                    bottom: 0;
+
+                    li {
+                        width: 16px;
+                        height: 16px;
+
+                        button {
+                            background: $color-gray;
+                            border-radius: 30px;
+                            border: 1px solid $color-gray;
+                            height: 16px;
+                            width: 16px;
+
+                            &:before {
+                                opacity: 0;
+                                font-size: 0;
+                                width: 6px;
+                                height: 6px;
+                                background: $color-primary;
+                                top: 50%;
+                                left: 50%;
+                                border-radius: 100%;
+                                transform: translate(-50%, -50%);
+                            }
+                        }
+
+                        &.slick-active {
+                            button {
+                                background: transparent;
+                                border: 1px solid $color-primary;
+
+                                &:before {
+                                    opacity: 1;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .tf-apartment-room-item {
+                    margin: 0 12px;
+
+                    .tf-apartment-room-item-thumb {
+                        overflow: hidden;
+                        border-radius: 8px;
+                        margin-bottom: 8px;
+
+                        img {
+                            height: 170px;
+                            object-fit: cover;
+                            width: 100%;
+                            transition: all 0.3s ease-in-out;
+                        }
+
+                        &:hover {
+                            img {
+                                transform: scale(1.1);
+                            }
+                        }
+                    }
+
+                    .tf-apartment-room-item-content {
+
+                        a {
+                            text-decoration: none;
+                        }
+
+                        h3 {
+                            font-weight: 400;
+                            font-size: 1.125rem;
+                            line-height: 1.5;
+                            letter-spacing: 0.2px;
+                            color: $color-heading;
+                            margin: 0;
+                        }
+                        
+                        p {
+                            font-weight: 400;
+                            font-size: 0.875rem;
+                            letter-spacing: 0.2px;
+                            color: $color-gray;
+                            margin: 0;
+                        }
+                    }
+                }
+            }
+            #tf_apt_room_details_qv {
+                .room-detail-icon .icon-text {
+                    margin-top: 5px;
+                }
+            }
+        }
+        &__two{
+            .tf-apartment-rooms-section{
+                .tf-apartment-room-details{
+                    border-radius: 4px;
+                    background: $color-filling-fg;
+                    padding: 24px 24px 28px 24px;
+                    h4{
+                        color: $color-heading;
+                        font-size: 1.25rem;
+                        font-weight: 700;
+                        margin: 0 0 16px 0;
+                    }
+                    .slick-track{
+                        margin: 0;
+                        .slick-slide{
+                            margin: 0px 5px;
+                        }
+                    }
+                    .tf-apartment-room-item{
+                        .tf-apartment-room-item-thumb{
+                            a{
+                                text-decoration: none;
+                                img{
+                                    height: 200px;
+                                    border-radius: 4px;
+                                    object-fit: cover;
+                                    @media #{$max575}{
+                                        width: 100%;
+                                    }
+                                }
+                            }
+                        }
+                        .tf-apartment-room-item-content{
+                            margin-top: 16px;
+                            a{
+                                text-decoration: none;
+                                span{
+                                    color: $color-text;
+                                    font-size: 1rem;
+                                    font-weight: 600;
+                                }
+                            }
+                            p{
+                                margin: 8px 0 0 0;
+                                color: $color-text;
+                                font-size: 1rem;
+                                font-weight: 400;
+                            }
+                        }
+                    }
+                    .slick-dots {
+                        bottom: -36px;
+                        li {
+                            width: 16px;
+                            height: 16px;
+        
+                            button {
+                                background: transparent;
+                                border-radius: 30px;
+                                border: 1px solid $color-gray;
+                                height: 12px;
+                                width: 12px;
+        
+                                &:before {
+                                    opacity: 0;
+                                    font-size: 0;
+                                    width: 6px;
+                                    height: 6px;
+                                    background: $color-primary;
+                                    top: 50%;
+                                    left: 50%;
+                                    border-radius: 100%;
+                                    transform: translate(-50%, -50%);
+                                }
+                            }
+        
+                            &.slick-active {
+                                button {
+                                    background: transparent;
+                                    border: 1px solid $color-primary;
+                                    height: 16px;
+                                    width: 16px;
+                                    &:before {
+                                        opacity: 1;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

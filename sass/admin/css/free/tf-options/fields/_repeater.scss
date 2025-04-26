@@ -21,7 +21,7 @@
       text-align: center;
       display: inline-block;
       border-radius: 4px;
-      font-size: 16px;
+      font-size: 1rem;
       line-height: 24px;
       height: 24px;
       width: 24px;
@@ -34,7 +34,7 @@
       &:hover {
         background-color: $blue20;
         transition: 0.4s;
-        color: $blue60;
+        color: $admin-color-primary;
       }
     }
 
@@ -44,7 +44,7 @@
       &:hover {
         background-color: $blue20;
         transition: 0.4s;
-        color: $blue60;
+        color: $admin-color-primary;
       }
     }
 
@@ -54,7 +54,7 @@
       &:hover {
         background-color: $red20;
         transition: 0.4s;
-        color: $red60;
+        color: $color-error;
       }
     }
 
@@ -64,7 +64,7 @@
       margin-right: 120px;
       font-style: normal;
       font-weight: 600;
-      font-size: 16px;
+      font-size: 1rem;
       line-height: 24px;
 
     }
@@ -79,7 +79,7 @@
 
   .tf-repeater-content-wrap {
     border: 1px solid #F0F2F4;
-    background-color: #fff;
+    background-color: #ffffff;
     padding: 10px 24px;
     box-shadow: 0px 5px 10px 1px #f5f5f5;
     overflow: hidden;
@@ -103,9 +103,9 @@
       line-height: 24px;
       background-color: #003c79;
       border-radius: 4px;
-      font-size: 16px;
+      font-size: 1rem;
       font-weight: 600;
-      color: #fff;
+      color: #ffffff;
       letter-spacing: 0.5px;
     }
   }

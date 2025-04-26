@@ -1,36 +1,21 @@
 //global css
-@import '../../../common/css/variable';
-@import '../../../common/css/mixin';
-@import 'global/global';
+@import '../../../common/variable';
+@import '../../../common/mixin';
+@import '../../../common/global';
+@import '../../../common/reset';
 @import 'global/common';
-@import 'global/search-result';
 @import 'global/shortcode';
-//Base for templates
-@import '../../../common/css/base';
-@import '../../../common/css/typography';
+@import 'global/search/search';
+@import 'global/widgets/widgets';
 
-@import 'hotel/hotel';
-@import 'tour/tour';
-@import "apartment/apartment";
+// Template 1 Global
+@import 'global/design-legacy/design-legacy';
 
-//Tour Templates
-@import 'tour/template1/tour-search';
-@import 'tour/template1/single';
-@import 'tour/template3/archive';
-@import 'tour/template3/single';
+// Template 2 Global
+@import 'global/design-1/design-1';
 
-//Hotel Templates
-@import 'hotel/template1/single';
-@import 'hotel/template2/single';
-@import 'hotel/template3/archive';
-@import 'hotel/template3/map-popup';
-@import 'hotel/template3/single';
+// Template 3 Global
+@import 'global/design-2/design-2';
 
-//Car Templates
-@import 'car/car';
-@import 'car/template1/single';
-@import 'car/template1/archive';
-
-
-// search form
-@import 'search-form/template-4';
+// Template 4 Global
+@import 'global/design-3/design-3';

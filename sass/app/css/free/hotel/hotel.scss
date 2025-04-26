@@ -1,0 +1,22 @@
+@import '../../../../common/variable';
+@import '../../../../common/mixin';
+
+// Single Module Load Start
+@import './modules/single/_hero';
+@import './modules/single/_booking';
+@import './modules/single/_social-share';
+@import './modules/single/_gallery';
+@import './modules/single/_rooms';
+@import './modules/single/_nearby-place';
+@import './modules/single/_features';
+@import './modules/single/_facilities';
+@import './modules/single/_faq';
+@import './modules/single/_review';
+@import './modules/single/_map';
+@import './modules/single/_popup';
+// Single Module Load End
+
+// Archive Module Load Start
+@import './modules/archive/_search-form';
+@import './modules/archive/_listing';
+// Archive Module Load End

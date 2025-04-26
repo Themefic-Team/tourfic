@@ -12,9 +12,9 @@ $tf_dropoff_time = !empty($_GET['dropoff_time']) ? $_GET['dropoff_time'] : '';
 $total_prices = Pricing::set_total_price($meta, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time); 
 $tf_cars_slug = get_option('car_slug');
 ?>
-<div class="tf-single-car-section">
+<div class="tf-single-template__one">
     <div class="tf-single-booking-bar">
-        <div class="tf-car-template-container">
+        <div class="tf-container">
             <div class="tf-top-booking-bar tf-flex tf-flex-space-bttn tf-flex-align-center">
                 <div class="tf-details-menu">
                     <ul>
@@ -87,7 +87,7 @@ $tf_cars_slug = get_option('car_slug');
         </div>
     </div>
     
-    <div class="tf-car-template-container">
+    <div class="tf-container">
         <div class="tf-container-inner">
             <div class="tf-single-car-details-warper">
                 <div class="tf-car-details-column">
@@ -105,7 +105,7 @@ $tf_cars_slug = get_option('car_slug');
                     </div>
                     <div class="tf-car-hero-gallery">
                         <div class="tf-featured-car">
-                            <img src="<?php echo !empty(wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' )) ? esc_url( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) : esc_url(TF_ASSETS_APP_URL.'/images/feature-default.jpg'); ?>" alt="<?php esc_html_e( 'Car Image', 'tourfic' ); ?>">
+                            <img src="<?php echo !empty(wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' )) ? esc_url( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) : esc_url(TF_ASSETS_APP_URL.'images/feature-default.jpg'); ?>" alt="<?php esc_html_e( 'Car Image', 'tourfic' ); ?>">
 
                             <div class="tf-featured-reviews">
                                 <a href="#tf-reviews" class="tf-single-rating">
@@ -130,13 +130,13 @@ $tf_cars_slug = get_option('car_slug');
                                 if ( Helper::tfopt( 'wl-for' ) && in_array( 'li', Helper::tfopt( 'wl-for' ) ) ) {
                             ?>
                             <a class="tf-icon tf-wishlist-box tf-wishlist <?php echo $has_in_wishlist ? esc_attr('actives') : '' ?>">
-                                <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo esc_attr(wp_create_nonce( "wishlist-nonce" )) ?>" data-id="<?php echo esc_attr($post_id) ?>" data-type="<?php echo esc_attr($post_type) ?>" <?php if ( Helper::tfopt( 'wl-page' ) ) { echo 'data-page-title="' . esc_html(get_the_title( Helper::tfopt( 'wl-page' ) )) . '" data-page-url="' . esc_url(get_permalink( Helper::tfopt( 'wl-page' ) )) . '"'; } ?>></i>
+                                <i class="<?php echo $has_in_wishlist ? 'fas fa-heart tf-text-red remove-wishlist' : 'far fa-heart-o add-wishlist' ?>" data-nonce="<?php echo esc_attr(wp_create_nonce( "wishlist-nonce" )) ?>" data-id="<?php echo esc_attr($post_id) ?>" data-type="<?php echo esc_attr($post_type) ?>" <?php if ( Helper::tfopt( 'wl-page' ) ) { echo 'data-page-title="' . esc_html(get_the_title( Helper::tfopt( 'wl-page' ) )) . '" data-page-url="' . esc_url(get_permalink( Helper::tfopt( 'wl-page' ) )) . '"'; } ?>></i>
                             </a>
                             <?php } } else{ 
                             if ( Helper::tfopt( 'wl-for' ) && in_array( 'lo', Helper::tfopt( 'wl-for' ) ) ) {    
                             ?>
                             <a class="tf-icon tf-wishlist-box tf-wishlist <?php echo $has_in_wishlist ? esc_attr('actives') : '' ?>">
-                                <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo esc_attr(wp_create_nonce( "wishlist-nonce" )) ?>" data-id="<?php echo esc_attr($post_id) ?>" data-type="<?php echo esc_attr($post_type) ?>" <?php if ( Helper::tfopt( 'wl-page' ) ) { echo 'data-page-title="' . esc_html(get_the_title( Helper::tfopt( 'wl-page' ) )) . '" data-page-url="' . esc_url(get_permalink( Helper::tfopt( 'wl-page' ) )) . '"'; } ?>></i>
+                                <i class="<?php echo $has_in_wishlist ? 'fas fa-heart tf-text-red remove-wishlist' : 'far fa-heart-o add-wishlist' ?>" data-nonce="<?php echo esc_attr(wp_create_nonce( "wishlist-nonce" )) ?>" data-id="<?php echo esc_attr($post_id) ?>" data-type="<?php echo esc_attr($post_type) ?>" <?php if ( Helper::tfopt( 'wl-page' ) ) { echo 'data-page-title="' . esc_html(get_the_title( Helper::tfopt( 'wl-page' ) )) . '" data-page-url="' . esc_url(get_permalink( Helper::tfopt( 'wl-page' ) )) . '"'; } ?>></i>
                             </a>
                             <?php } } } ?>
                             
@@ -189,7 +189,7 @@ $tf_cars_slug = get_option('car_slug');
                                             <li>
                                                 <div title="<?php esc_attr_e( 'Share this link', 'tourfic' ); ?>"
                                                     aria-controls="share_link_button">
-                                                    <button id="share_link_button" class="tf_button share-center-copy-cta" tabindex="0"
+                                                    <button id="share_link_button" class="tf_btn tf_btn_small share-center-copy-cta" tabindex="0"
                                                             role="button">
                                                         <i class="fa fa-link" aria-hidden="true"></i>
                                                         
@@ -284,8 +284,8 @@ $tf_cars_slug = get_option('car_slug');
                         <?php
                         if ( ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-car-layout'] ) ) {
                             foreach ( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-car-layout'] as $section ) {
-                                if ( ! empty( $section['car-section-status'] ) && $section['car-section-status'] == "1" && ! empty( $section['car-section-slug'] ) ) {
-                                    include TF_TEMPLATE_PART_PATH . 'car/design-1/' . $section['car-section-slug'] . '.php';
+                                if ( ! empty( $section['status'] ) && $section['status'] == "1" && ! empty( $section['slug'] ) ) {
+                                    include TF_TEMPLATE_PART_PATH . 'car/design-1/' . $section['slug'] . '.php';
                                 }
                             }
                         } else {
@@ -487,29 +487,31 @@ $tf_cars_slug = get_option('car_slug');
                                 <?php } ?>
                             <?php } ?>
                         </div>
-                        <?php if(!empty($car_instructions_content)){ ?>
-                        <div class="tf-instraction-btn tf-mt-16">
-                            <span class="tf-instraction-showing"><?php esc_html_e("Pick-up and Drop-off instructions", "tourfic"); ?></span>
-                            
-                            <div class="tf-car-instraction-popup">
-                                <div class="tf-instraction-popup-warp">
+                        <?php if($car_instructions_section_status){ ?>
+                            <div class="tf-instraction-btn tf-mt-16">
+                                <span class="tf-instraction-showing"><?php esc_html_e("Pick-up and Drop-off instructions", "tourfic"); ?></span>
+                                
+                                <div class="tf-car-instraction-popup">
+                                    <div class="tf-instraction-popup-warp">
 
-                                    <div class="tf-instraction-popup-header tf-flex tf-flex-align-center tf-flex-space-bttn">
-                                        <h3><?php esc_html_e("Pick-up and Drop-off instructions", "tourfic"); ?></h3>
-                                        <div class="tf-close-popup">
-                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M15 5L5 15M5 5L15 15" stroke="#566676" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
-                                            </svg>
+                                        <div class="tf-instraction-popup-header tf-flex tf-flex-align-center tf-flex-space-bttn">
+                                            <h3><?php esc_html_e("Pick-up and Drop-off instructions", "tourfic"); ?></h3>
+                                            <div class="tf-close-popup">
+                                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M15 5L5 15M5 5L15 15" stroke="#566676" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                                                </svg>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="tf-instraction-content-wraper">
-                                        <?php echo $car_instructions_content; ?>
-                                    </div>
+                                        <?php if(!empty($car_instructions_content)): ?>
+                                            <div class="tf-instraction-content-wraper">
+                                                <?php echo $car_instructions_content; ?>
+                                            </div>    
+                                        <?php endif; ?>
 
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         <?php } ?>
 
                         <?php do_action( 'tf_car_cancellation', $post_id ); ?>

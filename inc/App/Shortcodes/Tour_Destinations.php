@@ -50,7 +50,7 @@ class Tour_Destinations extends \Tourfic\Core\Shortcodes {
 		ob_start();
 
 		if ( $destinations ) { ?>
-			<section id="recomended_section_wrapper">
+			<section id="tf_recomended_section_wrapper">
 				<div class="recomended_inner">
 
 					<?php foreach ( $destinations as $term ) {

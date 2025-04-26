@@ -28,10 +28,8 @@ if ( Helper::tf_is_woo_active() ) {
 	            ( ! empty( $_GET['type'] ) && $_GET['type'] == "tf_apartment" && $tf_apartment_arc_selected_template == "design-2" )
     ) {
 		include TF_TEMPLATE_PART_PATH . 'search/design-3.php';
-	} elseif ( ( ! empty( $_GET['type'] ) && $_GET['type'] == "tf_carrental" && $tf_car_arc_selected_template == "design-1" ) ) {
-		include TF_TEMPLATE_PART_PATH . 'search/car-design-1.php';
 	} else {
-		include TF_TEMPLATE_PART_PATH . 'search/design-default.php';
+		include TF_TEMPLATE_PART_PATH . 'search/design-legacy.php';
 	}
 } else {
 	?>

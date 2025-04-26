@@ -1,0 +1,129 @@
+.single-tf_hotel{
+    .tf-single-template{
+        &__one{
+            .tf-review-wrapper{
+                .no-review{
+                    h4{
+                        font-size: 1.25rem;
+                        color: $color-heading;
+                    }
+                }
+                .tf-review-data.tf-box {
+                    border-radius: 0px;
+                    flex-basis: 20%;
+                    box-shadow: none;
+                    padding: 0px;
+                    .tf-review-data-inner{
+                        gap: 0px;
+                    }
+                    .tf-review-data{
+                        padding: 30px;
+                    }
+                    .tf-list{
+                        margin-top: 0px;
+                        text-align: center;
+                        width: 100%;
+                        li{
+                            display: block;
+                        }
+                    }
+                    p,li{
+                        text-transform: capitalize;
+                    }
+                    .tf-review-data-average p {
+                        text-align: center;
+                        font-size: 1.875rem;
+                        color: $color-primary;
+                        font-weight: 600;
+                        @include bd-radius(5px);;
+                        width: 100%;
+                        height: 75px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        margin-bottom: 0;
+                    }
+                    .tf-review-data-label{
+                        p{
+                            color: $color-heading;
+                        }
+                    }
+                    .tf-review-all-info {
+                        li {
+                            font-size: 0.875rem;
+                            color: $color-primary;
+                        }
+                    }
+            
+                    .tf-review-data-features {
+                        padding: 30px;
+                    
+                        .tf-percent-progress{
+                            column-gap: 70px;
+                            flex-wrap: wrap;
+                            @media #{$max1024}{
+                                column-gap: 24px;
+                            }
+                            @media #{$max768}{
+                                column-gap: 16px;
+                            }
+                        }
+                        .tf-progress-bar {
+                            height: 7px;
+                            background: $color-brand-lite;
+                            border-radius: 7px;
+                        }
+                        
+                        .tf-progress-item {
+                            width: 42%;
+                            margin-bottom: 16px;
+                            &:nth-child(5),
+                            &:last-child{
+                                margin-bottom: 0;
+                            }
+                            @media #{$max768}{
+                                width: 40%;
+                            }
+                            @media #{$max320}{
+                                width: 100%;
+                            }
+                            @media #{$max1024}{
+                                width: 42%;
+                            }
+                            
+                            .tf-review-feature-label{
+                                p{
+                                    margin-bottom: 0;
+                                }
+                            }
+                          
+                        }
+                        
+                    }
+                }
+
+                .tf-review-reply{
+                    border-bottom: 1px solid $color-border-lite;
+                    padding-bottom: 50px;
+                }
+            }
+        }
+
+        &__legacy{
+            .review-section{
+                .reviews{
+                    .section-heading{
+                        @media #{$max768}{
+                            text-align: center;
+                        }
+                    }
+                    .no-review{
+                        @media #{$max768}{
+                            text-align: center;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

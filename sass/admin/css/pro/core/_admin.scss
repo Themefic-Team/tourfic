@@ -42,13 +42,13 @@
   }
   .el-license-valid {
     padding: 0 5px 2px;
-    color: #fff;
+    color: #ffffff;
     background-color: #8fcc77;
     border-radius: 3px;
   }
   .el-license-invalid {
     padding: 0 5px 2px;
-    color: #fff;
+    color: #ffffff;
     background-color: #8fcc77;
     border-radius: 3px;
     background-color: #f44336;
@@ -59,7 +59,7 @@
   }
   .el-green-btn {
     padding: 0 5px 2px;
-    color: #fff;
+    color: #ffffff;
     background-color: #8fcc77;
     border-radius: 3px;
     text-decoration: none;
@@ -67,13 +67,13 @@
     -moz-box-shadow: 0 0 3px -1px rgba(0,0,0,0.38);
     box-shadow: 0 0 3px -1px rgba(0,0,0,0.38);
     &:hover {
-      color: #fff;
+      color: #ffffff;
       background-color: #84bc6c;
     }
   }
   .el-blue-btn {
     padding: 0 5px 2px;
-    color: #fff;
+    color: #ffffff;
     background-color: #20b1d2;
     border-radius: 3px;
     text-decoration: none;
@@ -81,7 +81,7 @@
     -moz-box-shadow: 0 0 3px -1px rgba(0,0,0,0.38);
     box-shadow: 0 0 3px -1px rgba(0,0,0,0.38);
     &:hover {
-      color: #fff;
+      color: #ffffff;
       background-color: #219dbf;
     }
   }
@@ -104,7 +104,7 @@ button.tf-import-btn {
 .tf-import-section-wrapper {
   max-width: 700px;
   margin: 50px auto;
-  background: #fff;
+  background: #ffffff;
   color: #828C99;
   overflow: hidden;
   padding: 25px;
@@ -127,7 +127,7 @@ button.tf-import-btn {
     .tf-admin-btn{
       background-color: #003c79;
       border-color: #003c79;
-      color: #fff;
+      color: #ffffff;
       font-weight: 600;
       border: 1px solid #003c79;
       padding: 10px 25px;
@@ -166,7 +166,7 @@ ol.tf-progress-steps {
       left: 50%;
       margin-left: -10px;
       margin-bottom: 22px;
-      background: #fff;
+      background: #ffffff;
     }
     li.tf-step.active:before {
       width: 20px;
@@ -207,7 +207,7 @@ table.tf-table-form {
 
 p.submit {
   float: right;
-  font-size: 16px;
+  font-size: 1rem;
 }
 .tf-column-mapping-form {
   padding: 20px;
@@ -254,7 +254,7 @@ table.tf-importer-mapping-table tr:nth-child(even) {
     height: 150px;
   }
   p{
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: bold;
   }
 }
@@ -266,10 +266,10 @@ table.tf-importer-mapping-table tr:nth-child(even) {
     padding: 30px;
 
     h2 {
-      font-size: 32px;
+      font-size: 2rem;
     }
     p {
-      font-size: 16px;      
+      font-size: 1rem;      
     }
   }
 }

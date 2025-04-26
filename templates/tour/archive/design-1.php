@@ -3,10 +3,10 @@ use \Tourfic\Classes\Helper;
 use Tourfic\Classes\Tour\Tour;
 ?>
 
-<div class="tf-archive-page tf-template-global tf-archive-design-1">
+<div class="tf-archive-page tf-archive-design-1 tf-archive-template__one">
     <div class="tf-container">
         <div class="tf-row tf-archive-inner tf-flex">
-            <div class="tf-column tf-page-content tf-archive-left tf-result-previews">
+            <div class="tf-page-content tf-archive-left tf-result-previews">
                 <?php
                     do_action( 'tf_before_container' );
                 ?>
@@ -140,7 +140,7 @@ use Tourfic\Classes\Tour\Tour;
             </div>
 
             <!-- SideBar-->
-            <div class="tf-column tf-sidebar tf-archive-right">
+            <div class="tf-sidebar tf-archive-right">
 
                 <?php Helper::tf_archive_sidebar_search_form('tf_tours'); ?>
 

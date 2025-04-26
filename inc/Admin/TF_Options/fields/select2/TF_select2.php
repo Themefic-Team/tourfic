@@ -88,7 +88,7 @@ if ( ! class_exists( 'TF_select2' ) ) {
 				echo '<div class="tf-popup-box">
 					<div class="tf-add-category-box">
 					<div class="tf-add-category-box-header">
-						<h3>'.$args['add_button_text'].'</h3>
+						<h3>'.(!empty($args['add_button_text']) ? esc_html($args['add_button_text']) : 'Add New').'</h3>
 						<span class="tf-add-category-box-close">
 							<i class="fa-solid fa-xmark"></i>
 						</span>
@@ -117,7 +117,7 @@ if ( ! class_exists( 'TF_select2' ) ) {
 						echo '</select>
 						</div>
 
-						<button class="tf-admin-btn tf-btn-secondary tf-category-button">'.$args['add_button_text'].'</button>
+						<button class="tf-admin-btn tf-btn-secondary tf-category-button">'.(!empty($args['add_button_text']) ? esc_html($args['add_button_text']) : 'Add New').'</button>
 					</div>
 				</div>
 				</div>';

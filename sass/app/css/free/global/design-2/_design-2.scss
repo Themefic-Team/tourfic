@@ -1,0 +1,4178 @@
+.tf-single-template,
+.tf-archive-template,
+.page-template-tf-search{
+    &__legacy{
+        padding: 40px 0px;
+    }
+    &__two{
+        width: 100%;
+        #tf-required {
+            text-align: center;
+            width: 100%;
+            color: $color-danger;
+            display: block;
+        }
+        @media #{$max768}{
+            padding-top: 0px;
+        }
+
+        select {
+            appearance: none;
+            background-position: center right;
+            padding-right: 22px;
+            padding-top: 4px;
+            background-repeat: no-repeat;
+            background-size: 20px;
+        }
+        select:focus {
+            outline: none;
+        }
+        .tf-section {
+            background: $color-filling-fg;
+            padding: 32px;
+            margin-bottom: 32px;
+            @media #{$max575}{
+                padding: 24px;
+            }
+        }
+        .tf-section-title {
+            margin-bottom: 32px;
+            color: $color-heading;
+        }
+
+        .tf-scroll-bar {
+            overflow: hidden;
+            overflow-y: scroll;
+            height: inherit;
+            &::-webkit-scrollbar {
+                width: 8px;
+            }
+            /* Track */
+            &::-webkit-scrollbar-track {
+                background: $color-brand-lite;
+            }
+            /* Handle */
+            &::-webkit-scrollbar-thumb {
+                background: $scrollbar-thumb-color;
+                border-radius: 50px;
+                overflow: hidden;
+            }
+            .tf-popup-image {
+                width: calc(33.33% - 7px);
+                height: fit-content;
+                aspect-ratio: 1/1;
+                object-fit: cover;
+            }
+        }
+        .tf-content-wrapper {
+            .tf-details {
+                display: flex;
+                justify-content: space-between;
+                flex-direction: row;
+                gap: 32px;
+                align-items: start;
+                @media #{$max1024}{
+                    gap: 24px;
+                }
+                .tf-details-left {
+                    width: calc(100% - 30%);
+                    display: flex;
+                    flex-direction: column;
+                    gap: 32px;
+                    @media only screen and (max-width: 1366px) {
+                        width: calc(100% - 323px);
+                    }
+                    @media #{$max1024}{
+                        width: calc(100% - 246px);
+                        gap: 16px;
+                    }
+                    .tf-details-menu{
+                        @media #{$max768} {
+                            padding: 16px;
+                        }
+                        ul{
+                            @media #{$max768} {
+                                gap: 16px;
+                            }
+                        }
+                    }
+                }
+            }
+            .tf-archive-details{
+                @media #{$max1024}{
+                    position: relative;
+                }
+                .tf-details-left{
+                    @media #{$max1024}{
+                        width: 100%;
+                    }
+                }
+                .tf-available-room{
+                    .tf-available-room-gallery{
+                        @media #{$max768} {
+                            height: 120px;
+                            max-width: none;
+                        }
+                        .tf-room-gallery:nth-child(n+2){
+                            @media #{$max768} {
+                                width: 48px;
+                                height: 28px;
+                            }
+                            svg{
+                                @media #{$max768} {
+                                    width: 10px;
+                                }
+                            }
+                        }
+                    }
+                    .tf-available-room-content{
+                        @media #{$max768} {
+                            width: auto;
+                            display: flow-root;
+                        }
+                        .tf-available-room-content-left{
+                            @media #{$max768} {
+                                width: 100%;
+                            }
+                            .tf-card-heading-info{
+                                @media #{$max768} {
+                                    display: flex;
+                                    justify-content: space-between;
+                                    margin-bottom: 24px;
+                                }
+                                @media #{$max575} {
+                                    flex-direction: column;
+                                    margin-bottom: 12px;
+                                }
+                                .tf-section-title-and-location{
+                                    @media #{$max768} {
+                                        margin-bottom: 0px;
+                                        width: calc(100% - 124px);
+                                    }
+                                    @media #{$max575} {
+                                        width: 100%;
+                                        margin-bottom: 12px;
+                                    }
+                                    h2{
+                                        @media #{$max768} {
+                                            margin-bottom: 6px;
+                                        }
+                                    }
+                                    .tf-title-location{
+                                        @media #{$max768} {
+                                            margin: 0px;
+                                        }
+                                    }
+                                }
+                                .tf-mobile.tf-pricing-info{
+                                    display: none;
+                                    @media #{$max768} {
+                                        display: flex;
+                                        width: 120px;
+                                        flex-direction: column;
+                                        align-items: end;
+                                    }
+                                    @media #{$max575} {
+                                        align-items: start;
+                                    }
+                                    .tf-price-from{
+                                        .amount{
+                                            @media #{$max768} {
+                                                color: $color-text;
+                                                font-size: 1.25rem;
+                                                font-weight: 400;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            ul{
+                                @media #{$max768} {
+                                    margin-bottom: 24px;
+                                }
+                            }
+                        }
+                        .tf-available-room-content-right{
+                            @media #{$max768} {
+                                width: 100%;
+                                display: flow-root;
+                            }
+                            .tf-card-pricing-heading{
+                                @media #{$max768} {
+                                    display: none;
+                                }
+                            }
+                            a{
+                                @media #{$max768} {
+                                    width: 100%;
+                                }
+                                @media #{$max575} {
+                                    width: auto;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .tf-modify-search-btn{
+            background: $color-primary;
+            padding: 8px 32px;
+            color: $color-white;
+            text-align: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-left: 16px;
+            margin-right: 16px;
+            display: none;
+            @media #{$max768}{
+                display: block;
+                margin: 0;
+                margin-bottom: -16px;
+            }
+        }
+        .tf-booking-form-wrapper {
+            background: $color-filling-fg;
+            .tf-booking-form {
+                display: flex;
+                margin: 0;
+                
+                .tf-booking-form-fields {
+                    display: flex;
+                    width: 78%;
+                    padding: 24px;
+                    padding-right: 0;
+                    @media #{$max1024}{
+                        width: calc(100% - 150px);
+                    }
+                    &>div {
+                        width: 32%;
+                        border-right: 1px solid $color-border-lite;
+                        display: flex;
+                        flex-direction: column;
+                        position: relative;
+                        &.tf-booking-form-guest-and-room {
+                            width: 36%;
+                            padding-left: 25px;
+                            align-items: start;
+                            border-right: none;
+                            cursor: pointer;
+                            @media #{$max768}{
+                                width: 38%;
+                            }
+                            @media #{$max575}{
+                                width: 100%;
+                                margin: 12px 0 8px;
+                            }
+                            .tf-booking-form-guest-and-room-inner{
+                                width: 100%;
+                            }
+                        }
+                    }
+                }
+                .tf-booking-form-checkout,
+                .tf-booking-form-checkin {
+                    padding-left: 25px;
+                    padding-right: 25px;
+                    @media only screen and (max-width: 1200px){
+                        padding-right: 28px;
+                        padding-left: 28px;
+                    }
+                    @media #{$max1024}{
+                        padding-right: 15px;
+                        padding-left: 15px;
+                    }
+                    input {
+                        position: absolute;
+                        height: 100%;
+                        width: 100%;
+                        opacity: 0;
+                    }
+                }
+                .tf-booking-form-checkin{
+                    max-width: 146px;
+                }
+                .tf-booking-form-checkout{
+                    max-width: 155px;
+                }
+                .tf-booking-date {
+                    color: $color-text;
+                    font-size: 1.5rem;
+                    text-align: right;
+                    margin-right: 5px;
+                    @media #{$max1024}{
+                        font-size: 1.25rem;
+                    }
+                }
+                span.tf-booking-form-title {
+                    font-size: 1rem;
+                    font-weight: 600;
+                    margin-bottom: 8px;
+                    color: $color-text;
+                    @media #{$max1024}{
+                        font-size: 0.875rem;
+                    }
+                    @media #{$max575}{
+                        display: block;
+                    }
+                }
+                span.tf-booking-month {
+                    color: $color-text;
+                    font-size: 1rem;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    text-transform: capitalize;
+                    @media #{$max1024}{
+                        font-size: 0.875rem;
+                    }
+                }
+                .tf-booking-date-wrap {
+                    display: flex;
+                    gap: 6px;
+                    cursor: pointer;
+                }
+                .tf_label-row{
+                    span#tf-required{
+                        font-size: 0.75rem;
+                        color: $color-danger;
+                    }
+                }
+                .tf-booking-guest-and-room-wrap {
+                    display: flex;
+                    gap: 6px;
+                    margin-top: 4px;
+                    text-transform: capitalize;
+                }
+                .tf-booking-person-count span {
+                    margin-right: 12px;
+                }
+                .tf-cancellation-refundable-text {
+                    display: flex;
+                    flex-direction: column;
+                }
+                .tf-booking-form-submit {
+                    width: 22%;
+                    @media #{$max1024}{
+                        width: 150px;
+                    }
+                    button {
+                        height: 100%;
+                        width: 100%;
+                        @include align-items(center);
+                    }
+                }
+            }
+        }
+        .tf-available-rooms-wrapper {
+            background: $color-filling-fg;
+            padding: 32px;
+            margin-bottom: 32px;
+            .tf-room-filter{
+                display: none;
+                margin-bottom: 16px;
+                h4{
+                    font-weight: 600;
+                }
+                ul{
+                    margin: 0;
+                    padding: 0;
+                    display: flex;
+                    gap: 10px;
+                    flex-wrap: wrap;
+                    li{
+                        margin: 0px;
+                        padding-left: 0px;
+                        font-size: 1rem;
+                        font-weight: 400;
+                        color: $color-text;
+                        @media #{$max1024}{
+                            font-size: 0.75rem;
+                        }
+                        label{
+                            padding-left: 25px;
+                            margin-left: 0px;
+                            .tf-checkmark{
+                                border-radius: 4px;
+                                border: 1px solid $color-primary;
+                                background: $color-brand-lite;
+                                height: 16px;
+                                width: 16px;
+                                &:hover{
+                                    border-color: $color-brand-dark;
+                                }
+                                &::after{
+                                    top: 1px;
+                                    left: 4px;
+                                    border-color: $color-primary;
+                                }
+                            }
+                        }
+                        label input:checked~.tf-checkmark {
+                            background-color: transparent !important;
+                            border-color: $color-primary;
+                        }
+                    }
+                }
+            }
+            .tf-room-filter.tf-filter-show{
+                display: block;
+            }
+            .tf-available-rooms {
+                display: flex;
+                flex-direction: column;
+                gap: 32px;
+                .tf-room-table.hotel-room-wrap{
+                    overflow: unset;
+                    .tf-available-room{
+                        margin-bottom: 32px;
+                        &:last-child{
+                            margin-bottom: 0px;
+                        }
+                    }
+                }
+            }
+            .tf-available-room {
+                background: $color-filling-bg;
+                display: flex;
+                .tf-available-room-gallery {
+                    min-width: 230px;
+                    max-width: 230px;
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    gap: 10px;
+                    height: fit-content;
+                    .tf-room-gallery {
+                        img {
+                            height: 100%;
+                            width: 100%;
+                            object-fit: cover;
+                        }
+                        &:nth-child(1) {
+                            width: 100%;
+                            height: 270px;
+                        }
+                        &:nth-child(n+2) {
+                            width: 110px;
+                            height: 110px;
+                        }
+                        &.tf-popup-buttons {
+                            background-size: cover;
+                            background-position: center;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            position: relative;
+                            z-index: 1;
+                            cursor: pointer;
+                            img {
+                                height: 30px;
+                                width: 30px;
+                            }
+                            &:after {
+                                position: absolute;
+                                content: "";
+                                height: 100%;
+                                width: 100%;
+                                background: $color-heading;
+                                opacity: .5;
+                                z-index: -1;
+                            }
+                        }
+                    }
+                    .tf-room-gallery.tf-no-room-gallery{
+                        height: 390px;
+                    }
+                }
+                .tf-available-room-contents{
+                    width: calc(100% - 230px);
+        
+                    @media #{$max1024}{
+                        width: 100%;
+                    }
+        
+                    .tf-section-title {
+                        margin-bottom: 0;
+                        color: $color-heading;
+                        padding: 24px 24px 0;
+                    }
+        
+                    h4{
+                        margin-bottom: 16px;
+                    }
+        
+                    .tf-room-info-list{
+                        margin-bottom: 24px ;
+                    }
+                    .tf-option-list{
+                        margin-bottom: 24px ;
+                        display: flex ;
+                        flex-direction: column;
+                        gap: 12px 5px;
+                    }
+        
+                    .tf-available-room-content {
+                        width: 100% ;
+                        padding-bottom: 0;
+        
+                        &:last-child .tf-room-options-content-inner{
+                            border-bottom: none;
+                        }
+                    }
+                    .tf-room-options-content-inner{
+                        border-bottom: 1px solid $color-gray;
+                        @include flexbox();
+                        justify-content: space-between;
+                        padding-bottom: 24px;
+        
+                        @media #{$max1024}{
+                            display: block;
+                        }
+                    }
+                }
+                .tf-available-room-content {
+                    width: calc(100% - 230px);
+                    display: flex;
+                    justify-content: space-between;
+                    padding: 24px;
+        
+                    .tf-available-room-content-left {
+                        width: 395px;
+                        display: flex;
+                        flex-direction: column;
+                        @media only screen and (max-width: 1366px) {
+                            width: calc(100% - 206px);
+                        }
+                        @media #{$max1024}{
+                            width: calc(100% - 177px);
+                        }
+                        h3 {
+                            margin-bottom: 20px;
+                        }
+                        h2{
+                            font-weight: 700;
+                            margin-bottom: 24px;
+                            font-size: 1.875rem;
+                            @media #{$max1024}{
+                                font-size: 1.5rem;
+                            }
+                        }
+                        ul {
+                            margin: 0;
+                            padding: 0;
+                            display: grid;
+                            grid-template-columns: 1fr 1fr;
+                            gap: 12px 5px;
+                            @media #{$max768}{
+                                gap: 8px 5px;
+                            }
+                            &:last-child {
+                                margin-bottom: 0;
+                            }
+                            li {
+                                display: flex;
+                                align-items: center;
+                                @media #{$max1024}{
+                                    font-size: 1rem;
+                                }
+                                @media #{$max768}{
+                                    font-size: 0.875rem;
+                                }
+                                i {
+                                    margin-right: 8px;
+                                    font-size: 1.25rem;
+                                    width: 20px;
+                                    @media #{$max1024}{
+                                        font-size: 0.875rem;
+                                    }
+                                }
+                                a {
+                                    color: $color-primary;
+                                    text-decoration: none;
+                                }
+                            }
+                        }
+                        span.tf-others-benefits-title {
+                            color: $color-heading;
+                            font-size: 1rem;
+                            font-weight: 600;
+                            margin-bottom: 16px;
+                            margin-top: auto;
+                            display: block;
+                            @media #{$max1024}{
+                                margin-top: 16px;
+                            }
+                        }
+                    }
+                    .tf-available-room-content-right {
+                        width: 230px;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: flex-end;
+                        @media #{$max1024}{
+                            width: 153px;
+                        }
+                        .tf-cancellation-refundable-text {
+                            display: flex;
+                            flex-direction: column;
+                            align-items: flex-end;
+                            gap: 8px;
+                            margin-bottom: 24px;
+                            span {
+                                display: flex;
+                                align-items: center;
+                                color: $color-text;
+                                svg{
+                                    margin-left: 8px;
+                                }
+                            }
+                            i {
+                                font-size: 0.625rem;
+                                border: 1px solid;
+                                height: 14px;
+                                width: 14px;
+                                border-radius: 50px;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                margin-left: 6px;
+                            }
+                        }
+                        .tf-card-pricing-heading{
+                            display: flex;
+                            flex-direction: column;
+                            align-items: end;
+                        }
+                        .tf-available-room-price {
+                            display: flex;
+                            align-items: center;
+                            flex-direction: row;
+                            flex-wrap: wrap;
+                            justify-content: end;
+                            gap: 4px;
+                            margin-bottom: 58px;
+                            .tf-price {
+                                color: $color-heading;
+                                font-weight: 400;
+                                text-align: right;
+                                .amount{
+                                    font-weight: 400;
+                                }
+                                .discount-price{
+                                    color: $color-gray;
+                                    font-size: 1rem;
+                                    display: inline-flex;
+                                    gap: 2px;
+                                    .amount{
+                                        font-weight: normal;
+                                    }
+                                }
+                                .sale-price{
+                                    font-size: 1.5rem;
+                                    display: inline-flex;
+                                    align-items: center;
+                                    gap: 2px;
+                                    .booking-type{
+                                        font-size: 1rem;
+                                    }
+                                }
+                            }
+                        }
+                        .tf-available-room-select {
+                            color: $color-text;
+                            font-size: 1rem;
+                            display: flex;
+                            width: fit-content;
+                            margin-bottom: 26px;
+                            gap: 8px;
+                            align-items: center;
+                            margin-top: auto;
+                            select {
+                                height: 37px;
+                                width: 70px;
+                                padding: 8px 20px 8px 13px;
+                                background-size: 10px;
+                                background-position: 80% 49%;
+                                text-align: center;
+                                border: 1px solid $color-border-lite;
+                                cursor: pointer;
+                                font-weight: 700;
+                            }
+                        }
+                    }
+                    .tf-available-room-purchase-summery {
+                        font-size: 0.75rem;
+                        display: flex;
+                        .price-per-night{
+                            margin-left: 5px;
+                        }
+                    }
+                    .tf-deposit-content{
+                        text-align: right;
+                        label{
+                            font-size: 0.75rem;
+                        }
+                        input[type=checkbox]{
+                            background: $color-primary;
+                            border-color: $color-primary;
+                            accent-color: $color-primary;
+                        }
+                    }
+                    .roomselectissue{
+                        text-align: right;
+                    }
+                    a.tf_btn {
+                        margin-top: auto;
+                    }
+                }
+            }
+            .tf-available-room-off {
+                padding: 4px 12px;
+                background: $color-success;
+                font-size: 0.75rem;
+                font-weight: 500;
+                color: $color-white;
+                margin-bottom: 8px;
+                width: fit-content;
+                @media #{$max768}{
+                    position: absolute;
+                    top: 55px;
+                    right: 16px;
+                }
+            }
+        }
+        .tf-available-rooms-head {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 32px;
+            align-items: center;
+            @media only screen and (max-width: 1280px) {
+                margin-bottom: 16px;
+            }
+            @media #{$max1024}{
+                margin-bottom: 24px;
+            }
+            @media #{$max1024}{
+                margin-bottom: 16px;
+                gap: 16px;
+            }
+            &>span{
+                color: $color-text;
+                font-size: 1.5rem;
+                flex: 1;
+                @media #{$max1024}{
+                    font-size: 0.875rem;
+                }
+            }
+            > h2{
+                @media only screen and (max-width: 1280px) {
+                    font-size: 1rem;
+                }
+            }
+            .tf-archive-filter-showing{
+                padding: 0px;
+                cursor: pointer;
+                display: none;
+                @media #{$max1024}{
+                    display: block;
+                }
+            }
+            .tf-filter{
+                padding: 0px;
+                cursor: pointer;
+                i{
+                    font-size: 1.5rem;
+                    color: $color-text;
+                }
+            }
+        }
+        .tf-details-right {
+            width: 480px;
+            @media #{$max1600}{
+                width: 320px;
+            }
+            @media only screen and (max-width: 1366px) {
+                width: 283px;
+                padding: 32px;
+            }
+            @media #{$max1024}{
+                width: 222px;
+                padding: 16px;
+            }
+        
+            &.tf-archive-right{
+                background-color: $color-filling-fg;
+                padding: 32px;
+                width: 30%;
+                margin-bottom: 56px;
+                @media #{$max1024}{
+                    display: none;
+                    position: absolute;
+                    width: 100%;
+                    z-index: 99;
+                    top: 200px;
+                }
+                @media #{$max768}{
+                    top: 100px;
+                }
+            }
+        
+            .tf_widget{
+                background-color: transparent;
+                border: 0px solid;
+                margin-bottom: 32px;
+                &:last-child{
+                    margin-bottom: 0px;
+                }
+                .tf-widget-title{
+                    padding: 0px;
+                    height: auto;
+                    background: transparent;
+                    border: 0px solid;
+                    border-radius: 8px 8px 0px 0px;
+                    pointer-events: none;
+                    span{
+                        margin-bottom: 10px;
+                        font-size: 1rem;
+                        font-weight: 600;
+                        color: $color-text;
+                        @media #{$max1024}{
+                            font-size: 0.75rem;
+                        }
+                    }
+                    i{
+                        display: none;
+                    }
+                }
+                .tf-filter{
+                    padding: 0;
+                    ul{
+                        li{
+                            margin: 0px;
+                            padding-left: 0px;
+                            font-size: 1rem;
+                            font-weight: 400;
+                            color: $color-text;
+                            background: transparent;
+                            @media #{$max1024}{
+                                font-size: 0.75rem;
+                            }
+                            label{
+                                padding-left: 30px;
+                                .tf-checkmark{
+                                    border-radius: 4px;
+                                    border: 1px solid $color-primary;
+                                    background: $color-yellow-light;
+                                    height: 16px;
+                                    width: 16px;
+                                    &:hover{
+                                        border-color: $color-brand-dark;
+                                    }
+                                    &::after{
+                                        top: 1px;
+                                        left: 4px;
+                                        border-color: $color-primary;
+                                        width: 6px;
+                                        height: 9px;
+                                    }
+                                }
+                            }
+                            label input:checked~.tf-checkmark {
+                                background-color: transparent !important;
+                                border-color: $color-primary;
+                            }
+                        }
+                    }
+                    a.see-more.btn-link,
+                    a.see-less.btn-link{
+                        text-align: left;
+                        text-decoration: none;
+                        text-transform: capitalize;
+                        color: $color-primary;
+                        font-size: 1rem;
+                        font-weight: 400;
+                        margin-top: 6px;
+                        span{
+                            display: none;
+                        }
+                        @media #{$max1024}{
+                            font-size: 0.75rem;
+                        }
+                    }
+                }
+                .tf-hotel-result-price-range,
+                .tf-tour-result-price-range,
+                .tf-apartment-result-price-range{
+                    padding-left: 14px;
+                    padding-right: 14px;
+                    margin-top: 10px;
+                }
+                .al-range-slider__track {
+                    background: $color-brand-lite;
+                    height: 10px;
+                    box-shadow: none;
+                    margin: 0px 0px 10px 0px;
+                }
+                .al-range-slider_dark {
+                    padding: 0px;
+                    .al-range-slider__bar {
+                        background: $color-gray;
+                        box-shadow: none;
+                    }
+                }
+                .al-range-slider__knob {
+                    background: $color-filling-bg;
+                    height: 24px;
+                    width: 24px;
+                    box-shadow: none;
+                    border: 1.5px solid $color-border;
+                    &:first-child {
+                        span {
+                            left: 10px;
+                        }
+                    }
+                }
+                .al-range-slider__tooltip {
+                    background: transparent;
+                    box-shadow: none;
+                    padding: 3px 10px;
+                    margin-bottom: 0px;
+                    bottom: -40px;
+                    color: $color-text;
+                    font-size: 1rem;
+                    font-weight: 400;
+                }
+                .al-range-slider__input.js-al-range-slider__input {
+                    display: none;
+                }
+            }
+            .tf_widget.widget_tf_price_filters{
+                margin-bottom: 54px;
+            }
+        }
+        .tf-popup-wrapper {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999999999;
+            background: rgba(48, 40, 28, 0.3019607843);
+            backdrop-filter: blur(15px);
+            visibility: hidden;
+            opacity: 0;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &.tf-show {
+                visibility: visible;
+                opacity: 1;
+                transform: scale(1);
+                .tf-popup-inner {
+                    transform: scale(1);
+
+                }
+            }
+            .tf-popup-inner {
+                width: 1130px;
+                background: $color-filling-fg;
+                padding: 24px;
+                max-height: 695px;
+                max-width: 80vw;
+                position: relative;
+                transform: scale(0.9);
+                transition: 0.3s;
+
+                .tf-popup-body {
+                    width: 100%;
+                    max-height: 624px;
+                    overflow: hidden;
+                    overflow-y: auto;
+                    display: grid;
+                    grid-template-columns: 1fr 1fr 1fr;
+                    gap: 10px;
+                    scrollbar-width: thin;
+                    scrollbar-color: $scrollbar-color;
+                    @media #{$max768}{
+                        grid-template-columns: 1fr 1fr;
+                        max-height: 320px;
+                    }
+                    scrollbar {
+                        width: 5px;
+                    }
+                    scrollbar-thumb {
+                        background-color: $scrollbar-thumb-color;
+                        border-radius: 4px;
+                    }
+                    img.tf-popup-image {
+                        width: 100%;
+                        height: fit-content;
+                        aspect-ratio: 1/1;
+                        object-fit: cover;
+                    }
+                }
+                .tf-popup-body::-webkit-scrollbar {
+                    width: 5px;
+                }
+
+                .tf-popup-body::-webkit-scrollbar-thumb {
+                    background-color: $color-gray;
+                    border-radius: 4px;
+                }
+
+                .tf-popup-body::-webkit-scrollbar-track {
+                    background-color: $color-brand-lite;
+                }
+
+                .tf-popup-close {
+                    position: absolute;
+                    right: -15px;
+                    top: -15px;
+                    padding: 6px;
+                    height: 30px;
+                    width: 30px;
+                    border-radius: 50%;
+                    background: $color-brand-lite;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    transition: .3s all ease;
+                    cursor: pointer;
+                    &:hover{
+                        background: $color-white;
+                    }
+                    &:focus{
+                        background: $color-white;
+                    }
+                }
+                .tf-popup-close i {
+                    color: $color-text;
+                    font-size: 1.125rem;
+                }
+            }
+        }
+        .tf_acrselection-wrap {
+            display: unset;
+            top: 80%;
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.3s;
+            background: $color-filling-bg;
+            &.tf-show {
+                visibility: visible;
+                opacity: 1;
+                top: 116%;
+                display: block !important;
+            }
+            .acr-label{
+                color: $color-text;
+                font-size: 1rem;
+                font-weight: 600;
+            }
+            .acr-select{
+                text-align: right;
+                width: 96px;
+                input[type=tel]{
+                    width: 34px;
+                    height: 48px;
+                    border: 1px solid $color-border-lite;
+                    font-size: 1rem;
+                    font-weight: 600;
+                    color: $color-text;
+                    text-align: center;
+                    padding-left: 0px;
+                    padding-right: 0px;
+                    border-radius: 20px;
+                    background: $color-filling-fg;
+                }
+                .acr-dec,
+                .acr-inc{
+                    background: transparent;
+                    border: none;
+                    font-size: 1.938rem;
+                    font-weight: 400;
+                    color: $color-text;
+                    padding: 0px;
+                }
+            }
+        }
+    }
+}
+
+// Single Global Start
+.single-tf_apartment,
+.single-tf_hotel{
+    .tf-single-template{
+        &__two{
+            .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-checkin,
+            .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-checkout{
+                max-width: none;
+                padding-left: 45px;
+                padding-right: 45px;
+            } 
+        }
+    }
+}
+
+.single-tf_apartment,
+.single-tf_hotel,
+.single-tf_tours{
+    .tf-single-template{
+        &__two{
+            #tf-ask-modal{
+                .tf-aq-outer{
+                    background: $color-brand-lite;
+                    border-radius: 0px;
+                    h4{
+                        color: $color-heading;
+                        text-align: center;
+                        font-size: 2rem;
+                        font-weight: 700;
+                        margin-bottom: 32px;
+                    }
+                }
+                .tf-aq-field{
+                    input{
+                        border: 1px solid $color-border-lite;
+                        color: $color-text;
+                        background-color: $color-brand-lite;
+                        font-size: 1rem;
+                        height: 45px;
+                        padding: 12px 14px;;
+                        border-radius: 0px;
+                        &::placeholder{
+                            color: $color-text;
+                        }
+                    }
+                    textarea{
+                        border: 1px solid $color-border-lite;
+                        background-color: $color-brand-lite;
+                        color: $color-text;
+                        font-size: 1rem;
+                        font-weight: 400;
+                        padding: 12px 14px;
+                        border-radius: 0px;
+                        &::placeholder{
+                            color: $color-text;
+                        }
+                    }
+                }
+        
+                button{
+                    background: $color-primary;
+                    border-color: $color-primary;
+                    border-radius: 0px;
+                    padding: 12px 32px;
+                    color: $color-white;
+                    font-size: 1rem;
+                    font-weight: 700;
+                    transition: .3s all ease;
+                    &::after{
+                        position: static;
+                    }
+                    &:hover{
+                        background: $color-brand-dark;
+                    }
+                }
+            }
+        }
+    }
+}
+.single-tf_hotel{
+    .tf-single-template{
+        &__two{
+            .tf-content-wrapper{
+                .tf-details{
+                    @media only screen and (max-width: 1280px) {
+                        gap: 24px;
+                    }
+                    @media #{$max1024} {
+                        display: flow-root;
+                    }
+                    .tf-details-left{
+                        @media #{$max1024}{
+                            width: 100%;
+                        }
+                    }
+                    .tf-details-right{
+                        @media only screen and (max-width: 1366px) {
+                            width: 391px;
+                            padding: 0px;
+                        }
+                        @media #{$max1024}{
+                            width: 100%;
+                        }
+                        .tf-location.tf-single-widgets{
+                            @media #{$max768} {
+                                padding-left: 16px;
+                                padding-right: 16px;
+                            }
+                        }
+                    }
+                }
+            }
+            .tf-available-rooms-wrapper{
+                @media only screen and (max-width: 1280px) {
+                    padding: 16px;
+                }
+                .tf-available-room{
+                    .tf-available-room-gallery{
+                        @media only screen and (max-width: 1280px) {
+                            min-width: 222px;
+                            max-width: 222px;
+                        }
+                        @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                            min-height: auto;
+                            max-height: none;
+                            height: auto;
+                        }
+                        .tf-room-gallery{
+                            &:nth-child(n+2){
+                                @media only screen and (max-width: 1280px) {
+                                    width: 105px;
+                                }
+                            }
+                        }
+                    }
+                    .tf-available-room-content{
+                        @media only screen and (max-width: 1600px) {
+                            width: calc(100% - 230px);
+                        }
+                        @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                            padding: 14px;
+                        }
+                        .tf-available-room-content-left{
+                            @media only screen and (max-width: 1280px) {
+                                width: calc(100% - 155px);
+                            }
+                            @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                                width: calc(100% - 154px);
+                            }
+                            h2{
+                                @media only screen and (max-width: 1280px) {
+                                    font-size: 1.5rem;
+                                }
+                            }
+                            ul{
+                                li{
+                                    @media only screen and (max-width: 1280px) {
+                                        font-size: 0.875rem;
+                                    }
+                                    @media #{$max1024}{
+                                        font-size: 1rem;
+                                    }
+                                    @media #{$max768}{
+                                        font-size: 0.875rem;
+                                    }
+                                }
+                            }
+                            .tf-card-heading-info{
+                                @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                                    margin-bottom: 32px;
+                                }
+                            }
+                        }
+                        .tf-available-room-content-right{
+                            @media only screen and (max-width: 1280px) {
+                                width: 133px;
+                            }
+                            @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                                width: 130px;
+                            }
+                            .tf-available-room-price{
+                                .tf-price{
+                                    @media only screen and (max-width: 1280px) {
+                                        text-align: right;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                .tf-available-room.tf-desktop-room{
+                    @media #{$max1024}{
+                        display: none;
+                    }
+                }
+                .tf-available-room.tf-tabs-room{
+                    display: none;
+                    @media #{$max1024}{
+                        display: flow-root;
+                    }
+                    .tf-available-room-gallery{
+                        min-width: auto;
+                        max-width: none;
+                        display: grid;
+                        grid-template-columns: 2fr 1fr;
+                        .tf-room-image{
+                            height: 140px;
+                            position: relative;
+                            img{
+                                height: 140px;
+                                width: 100%;
+                                object-fit: cover;
+                            }
+                            .tf-available-room-off{
+                                position: absolute;
+                                top: 12px;
+                                left: 12px;
+                            }
+                        }
+                        .tf-room-gallerys{
+                            display: grid;
+                            gap: 10px;
+                            .tf-room-gallery{
+                                height: 66px;
+                                width: 100%;
+                                img{
+                                    height: 66px;
+                                    width: 100%;
+                                    object-fit: cover;
+                                }
+                            }
+                        }
+                    }
+                    .tf-available-room-gallery.tf-no-room-gallery{
+                        grid-template-columns: 1fr;
+                    }
+                    .tf-available-room-content{
+                        width: auto;
+                        display: flow-root;
+                        padding: 16px;
+                        @media #{$max768} {
+                            padding: 16px;
+                        }
+                        .tf-available-room-content-left{
+                            width: 100%;
+                            .room-heading-price{
+                                display: flex;
+                                justify-content: space-between;
+                                gap: 30px;
+                                margin-bottom: 16px;
+                                h2{
+                                    margin: 0;
+                                    font-size: 1.25rem;
+                                }
+                                .tf-available-room-price{
+                                    display: flex;
+                                    flex-direction: column;
+                                    align-items: end;
+                                    .tf-price{
+                                        color: $color-text;
+                                        font-weight: 400;
+                                        .discount-price {
+                                            color: $color-gray;
+                                            font-size: 1rem;
+                                            font-weight: 400;
+                                            line-height: 1.3;
+                                            display: flex;
+                                            gap: 2px;
+                                            justify-content: end;
+                                            .amount{
+                                            font-weight: 400;
+                                            }
+                                        }
+                                        .sale-price {
+                                            font-size: 1.5rem;
+                                            display: flex;
+                                            align-items: center;
+                                            gap: 2px;
+                                            justify-content: end;
+                                            .booking-type {
+                                                font-size: 1rem;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        .tf-available-room-content-right{
+                            width: 100%;
+                            align-items: start;
+                            a.availability{
+                                width: 100%;
+                                margin-top: 32px;
+                                font-size: 0.75rem;
+                                @media only screen and (max-width: 1280px) {
+                                    min-width: 128px;
+                                }
+                            }
+                            a.tf_air_service,
+                            button{
+                                width: 100%;
+                                font-size: 0.75rem;
+                            }
+                            a.tf_air_service{
+                                @media only screen and (max-width: 1280px) {
+                                    min-width: 128px;
+                                }
+                            }
+                            a{
+                                width: 100%;
+                                margin-top: 32px;
+                                @media #{$max768}{
+                                    font-size: 0.75rem;
+                                }
+                            }
+                            .tf-available-room-select{
+                                margin-top: 32px;
+                                margin-bottom: 16px;
+                            }
+                            .room-submit-wrap{
+                                width: 100%;
+                                .tf-deposit-content{
+                                    text-align: left;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .tf-booking-form-wrapper{
+                @media #{$max768} {
+                    margin-left: 0;
+                    margin-right: 0;
+                }
+                .tf-booking-form{
+                    @media #{$max1024}{
+                        display: flow-root;
+                    }
+                    @media #{$max768}{
+                        display: none;
+                    }
+                    span.tf-booking-form-title{
+                        @media #{$max768} {
+                            font-size: 0.75rem;
+                        }
+                    }
+                    .tf-booking-date{
+                        @media #{$max768} {
+                            font-size: 1rem;
+                        }
+                    }
+                    .tf-booking-form-checkin,
+                    .tf-booking-form-checkout{
+                        @media only screen and (max-width: 1600px) {
+                            max-width: none;
+                            padding-left: 78px;
+                            padding-right: 78px;
+                        }
+                        @media only screen and (max-width: 1366px) {
+                            max-width: none;
+                            padding-left: 48px;
+                            padding-right: 48px;
+                        }
+                        @media only screen and (max-width: 1280px) {
+                            max-width: none;
+                            padding-left: 32px;
+                            padding-right: 32px;
+                        }
+                        @media #{$max1024}{
+                            max-width: none;
+                            padding-left: 20px;
+                            padding-right: 20px;
+                        }
+                    }
+                    .tf-booking-form-guest-and-room{
+                        @media only screen and (max-width: 1366px) {
+                            padding-left: 48px;
+                        }
+                        @media only screen and (max-width: 1280px) {
+                            padding-left: 32px;
+                        }
+                        @media #{$max1024}{
+                            padding-left: 20px;
+                        }
+                        @media #{$max768}{
+                            margin: 0!important;
+                        }
+                    }
+                    .tf-booking-form-fields{
+                        @media #{$max1024}{
+                            width: 100%;
+                        }
+                        @media #{$max768}{
+                            padding-left: 0;
+                         }
+                    }
+                    .tf-booking-form-submit{
+                        @media #{$max1024}{
+                            width: 100%;
+                        }
+                      
+                    }
+                }
+            }
+            .tf-review-data{
+                @media #{$max1024}{
+                    gap: 20px;
+                    justify-content: space-between;
+                }
+            }
+            #tf-hotel-facilities{
+                @media #{$max768} {
+                    padding-left: 16px;
+                    padding-right: 16px;
+                }
+            }
+            .tf-popup-left,
+            .tf-popup-right{
+                @media #{$max768} {
+                    width: 100%;
+                }
+            }
+            .tf-popup-body {
+                @media #{$max768} {
+                    max-height: 320px;
+                }
+            }
+            .tf-room-popup{
+                .tf-popup-inner{
+                    @media only screen and (max-width: 1600px) {
+                        width: 80%;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.single-tf_tours{
+    .tf-single-template{
+        &__two{
+            margin-bottom: 0;
+            .tf-content-wrapper{
+                .tf-details{
+                    @media #{$max768} {
+                        display: flow-root;
+                    }
+                    .tf-details-left{
+                        @media #{$max1024}{
+                            width: calc(100% - 369px);
+                        }
+                        @media #{$max1024}{
+                            width: calc(100% - 284px);
+                        }
+                        @media #{$max768} {
+                            width: 100%;
+                        }
+                    }
+                    .tf-details-right{
+                        @media only screen and (max-width: 1366px) {
+                            width: 391px;
+                            padding: 0px;
+                        }
+                        @media #{$max1024}{
+                            width: 345px;
+                            padding: 0px;
+                        }
+                        @media #{$max1024}{
+                            width: 260px;
+                        }
+                        @media #{$max768} {
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+            .tf-search-date-wrapper.tf-single-widgets{
+             
+                .tf-section-title,
+                .tf_tours_booking > .tf-field-group,
+                .tf_tours_booking > .check-in-time-div,
+                .tf-tour-booking-box,
+                .tf_tours_booking > .tf-tours-booking-btn,
+                .tf-bottom-booking-bar{
+                    // @media #{$max768} {
+                    //     display: none;
+                    // }
+                    .tf-bottom-booking-field{
+                        @media #{$max768} {
+                            width: auto;
+                        }
+                    }
+                }
+                .tf-bottom-booking-bar.tf-mobile-booking-form{
+                    @media #{$max768} {
+                        display: block;
+                    }
+                }
+            }
+         
+            #tf-tour-reviews{
+                @media #{$max768} {
+                    padding-bottom: 32px;
+                    padding-top: 16px;
+                }
+            }
+            #tf-tour-policies{
+                @media #{$max768} {
+                    padding-top: 16px;
+                    padding-bottom: 16px;
+                }
+            }
+            .tf-send-inquiry{
+                @media #{$max768} {
+                    margin-bottom: 32px;
+                }
+            }
+            .tf-travel-itinerary-wrapper{
+                background-color: $color-brand-lite;
+            }
+        }
+    }
+}
+
+.single-tf_apartment{
+    .tf-single-template{
+        &__two{
+            .tf-content-wrapper{
+                .tf-details{
+                    @media #{$max768} {
+                        display: flow-root;
+                    }
+                    .tf-details-left{
+                        @media #{$max1024}{
+                            width: calc(100% - 264px);
+                        }
+                        @media #{$max1024}{
+                            width: calc(100% - 284px);
+                        }
+                        @media #{$max768} {
+                            width: 100%;
+                        }
+                    }
+                    .tf-details-right{
+                        @media only screen and (max-width: 1366px) {
+                            width: 391px;
+                            padding: 0px;
+                        }
+                        @media #{$max1024}{
+                            width: 240px;
+                            padding: 0px;
+                        }
+                        @media #{$max768} {
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.tf-single-template{
+    &__two{
+        //  FAQ Section
+        .tf-questions-wrapper {
+            background-color: transparent;
+            padding: 32px;
+            background-color: $color-filling-fg;
+            @media #{$max575}{
+                padding: 24px;
+            }
+            h2{
+                color: $color-heading;
+                font-size: 2rem;
+                font-weight: 700;
+                margin-bottom: 24px;
+                @media #{$max1024}{
+                    font-size: 1.5rem;
+                }
+            }
+            .tf-questions {
+                display: grid;
+                gap: 40px;
+                grid-template-columns: 1fr 1fr;
+                @media #{$max768}{
+                    grid-template-columns: 1fr;
+                    gap: 0px;
+                }
+                .tf-questions-col {
+                    .tf-question {
+                        padding: 24px;
+                        background: transparent;
+                        padding: 0px 24px;
+                        transition: 0.3s;
+                        display: block;
+                        margin-bottom: 16px;
+                        position: relative;
+                        cursor: pointer;
+                        &>i {
+                            position: absolute;
+                            right: 16px;
+                            top: 8px;
+                            transition: 0.3s;
+                        }
+                        &.tf-active {
+                            background: $color-filling-bg;
+                            padding: 24px;
+                            display: flex;
+                            flex-direction: column;
+                            cursor: text;
+                            i {
+                                top: 16px;
+                                right: 16px;
+                                transform: rotate(180deg);
+                            }
+                        }
+                        .tf-faq-head{
+                            span {
+                                color: $color-text;
+                                font-size: 1rem;
+                                font-weight: 600;
+                                margin-bottom: 8px;
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+                            }
+                        }
+                        .tf-question-desc {
+                            display: none;
+                            @media #{$max768}{
+                                font-size: 0.875rem;
+                            }
+                        }
+                    }
+                    .tf-question:last-child {
+                        margin-bottom: 0px;
+                    }
+                }
+            }
+        }
+
+        //  Policies Section
+        .tf-policies-wrapper {
+            margin: 0;
+            h2{
+                color: $color-heading;
+                font-size: 2rem;
+                font-weight: 700;
+                margin-bottom: 20px;
+                @media #{$max1024}{
+                    font-size: 1.5rem;
+                }
+            }
+            .tf-policies {
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+                overflow-x: auto;
+                p{
+                    color: $color-text;
+                    margin: 0;
+                    @media #{$max768}{
+                        font-size: 0.875rem;
+                    }
+                }
+                .tf-policy-item {
+                    display: flex;
+                    gap: 16px;
+                    &>div {
+                        padding: 24px;
+                        background-color: $color-brand-lite;
+                    }
+                    .tf-policy-title {
+                        min-width: 316px;
+                    }
+                    .tf-policy-desc {
+                        width: -webkit-fill-available;
+                    }
+                }
+            }
+        }
+        .tf-single-pb-56 {
+            padding-bottom: 56px;
+            @media #{$max768}{
+                padding-bottom: 32px;
+            }
+        }
+        // Related Section
+        .tf-related-items-section{
+            padding: 56px 0px;
+            background-color: $color-filling-fg;
+
+            @media #{$max768}{
+                padding: 32px;
+
+            }
+            @media #{$max575}{
+                padding: 16px;
+            }
+            @media #{$max768} {
+                padding: 16px;
+            }
+            h2{
+                color: $color-heading;
+                font-size: 2rem;
+                font-weight: 700;
+                margin-bottom: 24px;
+                @media #{$max1024}{
+                    font-size: 1.5rem;
+                    margin-bottom: 24px;
+                }
+            }
+            .slick-track{
+                display: flex;
+                margin-left: 0;
+                .slick-slide{
+                    height: inherit;
+                    margin: 0;
+                }
+            }
+            .tf-slider-item{
+                box-shadow: none;
+                border: 0px solid;
+                background-color: transparent;
+                padding: 0px 12px;
+                margin-bottom: 0px;
+                @media #{$max1024}{
+                    padding: 0px 4px;
+                }
+                @media #{$max768}{
+                    padding: 0px 12px;
+                }
+                @media only screen and (min-width: 768px) and (max-width: 970px) {
+                    height: auto;
+                    padding: auto;
+                    margin: auto;
+                    border: 0px solid;
+                }
+                .tf-post-single-box{
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    background: $color-yellow-light;
+                    justify-content: flex-start;
+                }
+                .tf-image-data{
+                    img{
+                        height: 240px;
+                        object-fit: cover;
+                        width: 100%;
+                    }
+                }
+                .tf-meta-info{
+                    padding: 16px 24px 24px 24px;
+                    background-color: $color-filling-bg;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    height: 100%;
+                    a.see-details{
+                        display: block;
+                        padding: 8px 16px;
+                        border: 0.5px solid $color-primary;
+                        color: $color-primary;
+                        font-size: 1rem;
+                        font-weight: 700;
+                        text-decoration: none;
+                        text-align: center;
+                        transition: .3s all ease;
+                        margin-top: auto;
+                        &:hover{
+                            background-color: $color-primary;
+                            color: $color-white;
+                            border-color: $color-primary;
+                        }
+                        @media #{$max1024}{
+                            font-size: 0.75rem;
+                        }
+                    }
+                    .tf-meta-location{
+                        color: $color-text;
+                        font-size: 1rem;
+                        font-weight: 400;
+                        margin: 0px 0px 24px 0px;
+                    }
+                    .tf-meta-title{
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        @media #{$max575}{
+                            flex-direction: column;
+                            align-items: flex-start;
+                        }
+                        h2{
+                            margin-bottom: 16px;
+                            line-height: 1;
+                            a{
+                                text-decoration: none;
+                                color: inherit;
+                                font-size: 1.25rem;
+                                font-weight: 700;
+                                line-height: inherit;
+                                &:hover{
+                                    color: $color-primary;
+                                }
+                            }
+                        }
+                        .tf-meta-data-price{
+                            margin-left: 24px;
+                            @media #{$max1024}{
+                                margin-left: 23px;
+                            }
+                            @media #{$max575}{
+                                margin-left: 0;
+                                margin-bottom: 15px;
+                            }
+                            span{
+                                color: $color-text;
+                                font-size: 1.5rem;
+                                font-weight: 400;
+                                @media #{$max1024}{
+                                    font-size: 1.25rem;
+                                }
+                            }
+                            span.pricing_calc_type{
+                                color: $color-text;
+                                font-size: 1rem;
+                                font-weight: 400;
+                            }
+                        }
+                    }
+                }
+            }
+            .slick-prev.pull-left.slick-arrow,
+            .slick-next.pull-right.slick-arrow{
+                position: absolute;
+                right: 50px;
+                top: -37px;
+                left: auto;
+                &::before{
+                    font-family: "Font Awesome 6 Free";
+                    display: none;
+                }
+            }
+            .slick-prev.pull-left.slick-arrow{
+                right: 120px;
+            }
+        }
+
+        // Inquery Box
+        .tf-send-inquiry{
+            background: $color-filling-fg;
+            display: flex;
+            padding: 30px;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+            margin-top: 32px;
+            @media #{$max1600}{
+                padding:30px 24px;
+            }
+            @media #{$max1024}{
+                padding: 24px;
+            }
+            @media #{$max768}{
+                gap: 24px;
+            }
+            i{
+                font-size: 4rem;
+            }
+            h3{
+                color: $color-heading;
+                font-size: 2rem;
+                font-weight: 700;
+                line-height: 1.2;
+                margin: 0;
+                text-align: center;
+                @media #{$max1024}{
+                    font-size: 1.25rem;
+                }
+            }
+            p{
+                text-align: center;
+                font-size: 1rem;
+                margin: 0;
+                @media #{$max768}{
+                    font-size: 0.875rem;
+                }
+            }
+        }
+
+        // Review Section
+        .tf-review-data {
+            display: flex;
+            gap: 53px;
+            margin-bottom: 24px;
+            @media #{$max1024}{
+                margin-bottom: 16px;
+            }
+        }
+        .tf-reting-field button {
+            color: $color-text;
+            font-size: 1rem;
+            font-weight: 700;
+            line-height: 1.5;
+            background: $color-brand-lite;
+            width: 100%;
+            border: none;
+            padding: 12px 0;
+            border-radius: 0px;
+            @media #{$max1024}{
+                font-size: 0.75rem;
+            }
+        }
+        .tf-review-data-inner{
+            .tf-review-data-average {
+                span.avg-review{
+                    margin-bottom: 0px;
+                    font-size: 2.5rem;
+                    font-weight: 400;
+                    line-height: 1.3;
+                    word-wrap: break-word;
+                    color: $color-text;
+                    @media #{$max1024}{
+                        font-size: 1.5rem;
+                    }
+                    span {
+                        color: $color-text;
+                    }
+                }
+            }
+            .tf-review-all-info {
+                color: $color-text;
+                font-size: 1.25rem;
+                line-height: 1.3;
+                p{
+                    font-size: 1.25rem;
+                    margin: 0;
+                    span {
+                        color: $color-text;
+                        font-size: 1rem;
+                        line-height: 1.3;
+                        display: block;
+                        margin-top: 6px;
+                    }
+                }
+            }
+
+            .tf-progress-item {
+                display: flex;
+                flex-direction: column;
+                align-content: space-around;
+            }
+
+            .tf-review-feature-label {
+                display: flex;
+                justify-content: space-between;
+                padding-bottom: 4px;
+                p{
+                    margin: 0;
+                }
+            }
+
+            .tf-progress-bar {
+                width: 100%;
+                height: 12px;
+                background: $color-brand-lite;
+                border-radius: 50px;
+                display: flex;
+            }
+
+            .tf-percent-progress {
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            span.percent-progress {
+                height: 12px;
+                background: $color-gray;
+                border-radius: 50px;
+                display: inline-block;
+            }
+
+            a.tf-all-reviews {
+                color: $color-text;
+                font-weight: 500;
+                letter-spacing: 0.16px;
+                text-decoration: none;
+            }
+        }
+        .tf-review-form-wrapper{
+            background: $color-filling-fg;
+            padding: 24px;
+            display: none;
+            flex-direction: column;
+            gap: 16px;
+
+            &.tf-review-show{
+                display: flex;
+            }
+            h3 {
+                color: $color-heading;
+                font-size: 1.25rem;
+                font-weight: 700;
+                margin-bottom: 0;
+            }
+            .tf-review-form-container{
+                width: 100%;
+                min-width: auto;
+                background: transparent;
+                form{
+                    .tf-rating-wrapper{
+                        grid-template-columns: 1fr;
+                        margin-bottom: 16px;
+                        .tf-form-single-rating{
+                            display: flex;
+                            label{
+                                font-size: 0.875rem;
+                                font-weight: 600;
+                                line-height: 1.5;
+                                display: block;
+                                margin-right: 4px;
+                            }
+                            .ratings-container{
+                                width: auto;
+                                text-align: left;
+                            }
+                            span.error{
+                                position: relative;
+                                top: 4px;
+                            }
+                        }
+                    }
+                    .tf-review-submit{
+                        margin-top: 16px;
+
+                        .tf_btn{
+                            width: 100%;
+                            border-radius: 0;
+                            padding: 16px 32px;
+                            font-size: 1rem;
+                        }
+                    }
+                    input[type="text"],textarea{
+                        border: 1px solid $color-border-lite;
+                        padding: 8px;
+                        color: $color-text;
+                        font-size: 1rem;
+                        border-radius: 0px;
+                    }
+                    textarea{
+                        width: 100%;
+                    }
+                }
+            }
+        }
+
+        // Hero Section
+        .tf-hero-section-wrap {
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin-bottom: 56px;
+            @media #{$max768}{
+                margin-bottom: 16px;
+            }
+            .tf-container {
+                .tf-hero-content {
+                    min-height: 513px;
+                    max-height: 513px;
+                    margin: 0;
+                    padding: 0;
+                    background-position: center center;
+                    background-size: cover;
+                    border-radius: 0 0 4px 4px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    gap: 30px;
+
+                    @media #{$max1024}{
+                        min-height: 350px;
+                        max-height: 350px;
+                    }
+                    @media #{$max1024}{
+                        min-height: 275px;
+                        max-height: 275px;
+                    }
+                    @media #{$max768}{
+                        min-height: 210px;
+                        max-height: 210px;
+                    }
+                    .tf-wish-and-share {
+                        display: flex;
+                        justify-content: flex-end;
+                        align-items: center;
+                        margin-top: 32px;
+                        display: flex;
+                        gap: 16px;
+                        @media #{$max1024}{
+                            margin-top: 90px;
+                        }
+                        @media #{$max768}{
+                            margin-top: 64px;
+                            padding-right: 16px;
+                        }
+                        @media #{$max575}{
+                            margin-top: 16px;
+                            padding-right: 16px;
+                        }
+
+                        a.tf-share-toggle,
+                        a.tf-wishlist {
+                            margin: 0;
+                            padding: 0;
+                            height: 32px;
+                            width: 32px;
+                            border-radius: 100px;
+                            background: $color-brand-dark;
+                            text-align: center;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            color: $color-white;
+                            cursor: pointer;
+                            font-size: 1rem;
+                            text-decoration: none;
+                        }
+                        a.tf-share-toggle.actives,
+                        a.tf-wishlist.actives {
+                            background: $color-primary;
+                        }
+
+                        .tf-off-canvas-share-box{
+                            display: inline-flex;
+                            align-items: center;
+                            .tf-off-canvas-share{
+                                display: none;
+                                margin: 0;
+                                padding: 0;
+                                align-items: center;
+                                list-style: none;
+                                li{
+                                    a{
+                                        margin-right: 16px;
+                                        text-decoration: none;
+                                        i{
+                                            font-size: 1rem;
+                                            color: $color-white;
+                                        }
+                                    }
+                                    &:last-child{
+                                        a{
+                                            margin-right: 9px;
+                                        }
+                                    }
+                                    #share_link_button{
+                                        padding: 0px;
+                                        background-color: transparent;
+                                        border: 0px solid;
+                                        display: inline-flex;
+                                        align-items: center;
+                                        gap: 5px;
+                                        span{
+                                            display: none;
+                                            font-size: 0.813rem;
+                                            color: $color-white;
+                                        }
+                                    }
+                                    #share_link_button.copied{
+                                        span{
+                                            display: inline-block;
+                                        }
+                                    }
+                                    input{
+                                        padding: 0;
+                                        height: 0px;
+                                        width: 0px;
+                                    }
+                                }
+                            }
+                            .tf-off-canvas-share.show{
+                                display: inline-flex;
+                            }
+                        }
+                    }
+
+                    .tf-hero-bottom-area {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: flex-end;
+                        padding-bottom: 48px;
+                        margin-top: 0px;
+                        @media #{$max1024}{
+                            align-items: center;
+                            padding: 0px 0 32px 0;
+                        }
+                        @media #{$max768}{
+                            padding: 0px 16px 16px 16px;
+                        }
+                        @media #{$max575}{
+                            padding-left: 0;
+                        }
+                        .tf-head-title {
+                            text-align: left;
+                            width: 100%;
+                            @media #{$max575}{
+                                padding-right: 16px;
+                            }
+                            h1{
+                                color: $color-white;
+                                margin-bottom: 16px;
+                                line-height: initial;
+                                font-size: 2.375rem;
+                                @media #{$max1024}{
+                                    font-size: 2rem;
+                                }
+                                @media #{$max768}{
+                                    font-size: 1.25rem;
+                                    margin-bottom: 8px;
+                                }
+                                @media #{$max575}{
+                                    display: -webkit-box;
+                                    overflow: hidden;
+                                    -webkit-line-clamp: 2;
+                                    -webkit-box-orient: vertical;
+                                }
+                            }
+                            .tf-title-meta {
+                                font-size: 1.5rem;
+                                color: $color-white;
+                                display: flex;
+                                gap: 8px;
+                                width: 80%;
+                                @media #{$max1024}{
+                                    font-size: 1rem;
+                                    width: auto;
+                                }
+                                @media #{$max768}{
+                                    font-size: 0.875rem;
+                                    line-height: 1.3;
+                                }
+                                a {
+                                    color: $color-white;
+                                    font-size: 1.3rem;
+                                    @media #{$max1024}{
+                                        font-size: 1rem;
+                                    }
+                                    @media #{$max768}{
+                                        font-size: 0.875rem;
+                                        line-height: 1.3;
+                                    }
+                                }
+                            }
+                        }
+
+                        .tf-hero-gallery-videos {
+                            display: flex;
+                            gap: 16px;
+
+                            &>div {
+                                height: 80px;
+                                width: 200px;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                background: $color-brand-dark;
+                                color: $color-white;
+                                background-size: cover;
+                                background-position: center;
+                                cursor: pointer;
+                                @media #{$max1024}{
+                                    width: 103px;
+                                    height: 40px;
+                                }
+                                @media #{$max1024}{
+                                    width: 104px;
+                                    height: 40px;
+                                }
+                                @media #{$max768}{
+                                    width: 52px;
+                                    height: 32px;
+                                }
+                            }
+                            a {
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                height: 100%;
+                                width: 100%;
+                                color: $color-white;
+
+                                svg {
+                                    @media #{$max1024}{
+                                        width: 16px;
+                                    }
+                                    @media #{$max1024}{
+                                        width: 16px;
+                                    }
+                                    @media #{$max768}{
+                                        width: 12px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .tf-facilities-wrapper {
+            @media #{$max768}{
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+            h2{
+                color: $color-heading;
+                font-size: 2rem;
+                font-weight: 700;
+                margin-bottom: 20px;
+                @media #{$max1024}{
+                    font-size: 1.5rem;
+                    margin-bottom: 16px;
+                }
+            }
+            .tf-facilities {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 24px 0;
+                margin-bottom: 32px;
+                .tf-facility-item {
+                    width: 25%;
+                    @media #{$max1024}{
+                        width: 50%;
+                    }
+                    span.single-facilities-title {
+                        font-weight: 600;
+                        margin-bottom: 10px;
+                        display: block;
+                        i {
+                            margin-right: 8px;
+                            font-size: 1.25rem;
+                            width: 20px;
+                        }
+                    }
+                    ul {
+                        margin: 0;
+                        padding: 0;
+                        padding-left: 34px;
+                        display: flex;
+                        flex-direction: column;
+                        gap: 8px;
+                        list-style: none;
+                    }
+                }
+            }
+        }
+
+        .tf-reviews-wrapper {
+            padding-bottom: 55px;
+            .tf-section-title{
+                color: $color-heading;
+                font-size: 2rem;
+                font-weight: 700;
+                margin-bottom: 6px;
+                @media #{$max1024}{
+                    font-size: 1.5rem;
+                }
+            }
+            p{
+                margin-bottom: 0;
+            }
+            .tf-reviews-slider {
+
+                .tf-reviews-item {
+                    background: $color-filling-bg;
+                    margin-right: 35px;
+                    padding: 24px;
+                    display: flex;
+                    flex-direction: row;
+                    gap: 15px;
+                    min-height: 150px;
+                    @media #{$max768}{
+                        min-height: auto;
+                    }
+                    .tf-reviews-avater {
+                        width: 48px;
+                        img {
+                            width: 48px;
+                            height: 48px;
+                            object-fit: cover;
+                            border-radius: 50%;
+                            max-width: none;
+                        }
+                    }
+
+                    .tf-reviews-text {
+
+                        .tf-review-rating {
+                            color: $color-text;
+                            font-size: 1rem;
+                            font-weight: 600;
+                            word-wrap: break-word;
+                            margin: 0px 0px 4px 0px;
+                            display: block;
+                            >div{
+                                display: none;
+                            }
+                        }
+
+                        .tf-reviews-meta {
+                            margin-bottom: 10px;
+                            display: inline-block;
+                        }
+
+                        p {
+                            margin: 0;
+                            @media #{$max768}{
+                                font-size: 0.875rem;
+                            }
+                        }
+                    }
+                }
+                .slick-list {
+                    padding: 32px 0;
+                    @media #{$max768}{
+                        padding-top: 16px;
+                        padding-bottom: 16px;
+                    }
+                }
+                button.slide-arrow {
+                    position: absolute;
+                    bottom: -30px;
+                    border: none;
+                    background: transparent;
+                    font-size: 1.875rem;
+                    color: $color-primary;
+                    padding: 0px;
+                    cursor: pointer;
+                }
+                button.next-arrow {
+                    right: calc(50% - 70px);
+                }
+
+                button.prev-arrow {
+                    left: calc(50% - 70px);
+                }
+            }
+        }
+
+        .tf-whats-around {
+            @media #{$max768}{
+                margin-left: 16px;
+                margin-right: 16px;
+            }
+            ul {
+                margin: 0;
+                padding: 0;
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+                margin-top: 10px;
+                @media #{$max768}{
+                    gap: 16px;
+                }
+                li {
+                    display: flex;
+                    justify-content: space-between;
+                    span{
+                        display: block;
+                        color: $color-text;
+                        &:last-child{
+                            text-align: right;
+                        }
+
+                        &.tf-place{
+                            display: flex;
+                            flex: 1;
+                            .tf-icon{
+                                width: auto;
+                                height: auto;
+                                line-height: auto;
+                                i {
+                                    margin-right: 8px;
+                                    width: 20px;
+                                    font-size: 1.25rem;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .tf-single-widgets h3{
+            font-size: 1.875rem;
+            margin-bottom: 0;
+            @media #{$max1024}{
+                font-size: 1.25rem;
+            }
+            &.tf-section-title{
+                margin-bottom: 20px;
+                @media #{$max575}{
+                    margin-bottom: 10px;
+                }
+            }
+        }
+        .tf-single-widgets h2 {
+            margin-bottom: 0px;
+            font-weight: 700;
+            font-size: 1.875rem;
+            @media #{$max1024}{
+                font-size: 1.25rem;
+            }
+        }
+
+        .tf-location iframe {
+            width: 100%;
+            height: 250px;
+        }
+
+        .tf-single-widgets {
+            margin-bottom: 32px;
+        }
+
+        .tf-single-widgets {
+            display: flex;
+            flex-direction: column;
+            .tf_btn_lite{
+                color: $color-heading;
+                font-weight: 500;
+                &:hover,
+                &:focus{
+                    background-color: $color-brand-dark;
+                    color: $color-white;
+                }
+            }
+            .tf-all-reviews{
+                margin: 20px 0;
+                color: $color-primary;
+            }
+        }
+
+        .tf-popup-video-item {
+            width: 100%;
+            height: -webkit-fill-available;
+        }
+
+        .tf-popup-video-item iframe {
+            width: 100%;
+            height: 100%;
+        }
+        .tf-popup-wrapper.tf-room-popup{
+            .tf-popup-inner {
+                width: 1500px;
+                @media #{$max768}{
+                    width: 90%;
+                    max-width: none;
+                }
+                .tf-popup-body {
+                    width: 100%;
+                    max-height: 624px;
+                    overflow: hidden;
+                    overflow-y: auto;
+                    display: grid;
+                    grid-template-columns: 3fr 1fr;
+                    gap: 10px;
+                    scrollbar-width: thin;
+                    scrollbar-color: $scrollbar-color;
+                    @media #{$max1024}{
+                        grid-template-columns: 2fr 1fr;
+                    }
+                    @media #{$max768}{
+                        max-height: 430px;
+                        grid-template-columns: 1fr;
+                    }
+                    scrollbar {
+                        width: 5px;
+                    }
+                    scrollbar-thumb {
+                        background-color: $scrollbar-thumb-color;
+                        border-radius: 4px;
+                    }
+                    .tf-popup-left {
+                        display: grid;
+                        grid-template-columns: 1fr 1fr 1fr;
+                        gap: 12px;
+                        @media #{$max1024}{
+                            grid-template-columns: 1fr 1fr;
+                        }
+                    }
+                    .tf-popup-right span {
+                        color: $color-text;
+                        font-size: 1rem;
+                        font-weight: 600;
+                        word-wrap: break-word;
+                        margin-bottom: 0px;
+                    }
+                    .tf-popup-right {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 24px;
+                        padding-left: 10px;
+                    }
+                    .tf-popup-right ul {
+                        margin: 0;
+                        padding: 0;
+                        display: flex;
+                        flex-direction: row;
+                        flex-wrap: wrap;
+                        gap: 16px;
+                    }
+                    .tf-popup-right ul li {
+                        width: calc(50% - 8px);
+                        display: flex;
+                        gap: 8px;
+                        @media #{$max768}{
+                            width: calc(50% - 8px);
+                        }
+                    }
+                    .tf-popup-right a {
+                        color: $color-primary;
+                        font-size: 1rem;
+                        font-weight: 600;
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
+
+        .tf-search-date-wrapper {
+            background: $color-filling-fg;
+            padding: 24px;
+            .tf-booking-date-wrap {
+                display: flex;
+                flex-direction: row;
+                background: $color-white;
+                padding: 0 12px;
+                max-width: 150px;
+                margin-right: 40px;
+                justify-content: flex-start;
+                padding: 16px;
+                width: inherit;
+                max-width: unset;
+                margin: 0;
+
+                input {
+                    padding: 9px;
+                    border: none;
+                    outline: none;
+                    width: -webkit-fill-available;
+                }
+            }
+
+            .tf-booking-date-wrap input {
+                padding: 0 9px;
+            }
+
+            .acr-dec,
+            .acr-inc {
+                background: transparent;
+                border: none;
+                font-size: 1.938rem;
+                font-weight: 400;
+                color: $color-text;
+                padding: 0px;
+            }
+
+            .acr-select input[type=tel] {
+                width: 34px;
+                height: 48px;
+                border: 1px solid $color-border-lite;
+                font-size: 1rem;
+                font-weight: 600;
+                color: $color-text;
+                text-align: center;
+                padding-left: 0px;
+                padding-right: 0px;
+                border-radius: 20px;
+                background: $color-filling-bg;
+            }
+
+            form {
+                display: flex;
+                flex-direction: column;
+                gap: 24px;
+                @media #{$max575}{
+                    gap: 16px;
+                }
+                .tf-booking-person.tf-tour-booking-box{
+                    margin-top: 8px;
+                }
+            }
+
+            h2 {
+                padding: 0;
+                margin: 0;
+            }
+
+            .tf_acrselection-wrap {
+                position: unset;
+                visibility: unset;
+                opacity: unset;
+                margin: 0;
+                padding: 0;
+                background: transparent;
+                box-shadow: none;
+            }
+
+            .acr-label {
+                font-size: 1rem;
+                font-weight: 600;
+                @media #{$max1024}{
+                    font-size: 0.875rem;
+                }
+                div{
+                    margin-left: 5px;
+                    span{
+                        display: inline-block;
+                        font-weight: 600;
+                        @media #{$max1024}{
+                            font-size: 0.875rem;
+                        }
+                    }
+                }
+            }
+            .acr-select{
+                justify-content: end;
+                @media #{$max1024}{
+                    width: 100px;
+                }
+            }
+
+            .acr-label span {
+                color: $color-text;
+                font-size: 1rem;
+                font-weight: 500;
+                display: block;
+            }
+
+            span.tf-search-date-info {
+                color: $color-text;
+                font-size: 2rem;
+                font-weight: 700;
+                line-height: 1;
+            }
+        }
+
+        .tf_tours_booking{
+            .tf-form-title{
+                h3.tf-person-info-title{
+                    color: $color-heading;
+                    font-size: 2rem;
+                    font-weight: 400;
+                    margin: 0;
+                    @media #{$max1024}{
+                        font-size: 1.5rem;
+                    }
+                }
+            }
+            .tf-field-group {
+                margin: 0px;
+                .tf-field{
+                    background-color: transparent;
+                    padding: 12px 0px;
+                    align-items: center;
+                    justify-content: space-between;
+                    .acr-label{
+                        i{
+                            position: static;
+                        }
+                    }
+                    .acr-select{
+                        input{
+                            padding-left: 0px;
+                            padding-right: 0px;
+                            -webkit-appearance: none;
+                            -moz-appearance: none;
+                            appearance: none;
+                        }
+                    }
+                }
+            }
+            .tf-field-calander {
+                i{
+                    margin-top: -3px;
+                }
+                .tf-field{
+                    padding: 15px 40px;
+                    width: 100%;
+                    background-color: $color-filling-bg;
+                    border-radius: 0px;
+                    color: $color-text;
+                    &::placeholder{
+                        color: $color-text;
+                    }
+                }
+            }
+            .tf-field-calander.check-in-time-div .tf-field{
+                padding: 18.7px 40px;
+            }
+            .tf-tours-booking-btn.tf-booking-bttns{
+                a{
+                    border: 1px solid $color-primary;
+                    background: $color-primary;
+                    padding: 12px 32px;
+                    justify-content: center;
+                    transition: .3s all ease;
+                    border-radius: 0px;
+                    &:hover{
+                        background-color: $color-brand-dark;
+                    }
+                }
+            }
+        }
+        .tf-mobile-booking-btn{
+            border: 1px solid $color-primary;
+            background: $color-primary;
+            padding: 12px 32px;
+            text-align: center;
+            cursor: pointer;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            z-index: 9999;
+            display: none;
+            transition: .3s all ease;
+            &:hover{
+                background-color: $color-brand-dark;
+                border-color: $color-brand-dark;
+            }
+            @media #{$max768}{
+                display: block;
+            }
+            span{
+                color: $color-white;
+                font-size: 1rem;
+                font-weight: 700;
+            }
+        }
+
+        .tf-withoutpayment-booking,
+        .tf-withoutpayment-booking-confirm{
+            .tf-withoutpayment-popup{
+                background-color: $color-white;
+                box-shadow: 0px 3px 60px 0px rgba(0, 0, 0, 0.10);
+                .tf-booking-tabs{
+                    background-color: $color-white;
+                    border-bottom: 0.3px solid $color-border;
+                    .tf-booking-tab-menu{
+                        ul{
+                            background-color: $color-text;
+                            @media #{$max768}{
+                                background: transparent;
+                            }
+                            li{
+                                color: $color-white;
+                                @media #{$max768}{
+                                    color: $color-text;
+                                }
+                                &.active{
+                                    background-color: $color-primary;
+                                    @media #{$max768}{
+                                        color: $color-white;
+                                    }
+                                    &::before{
+                                        background-color: transparent;
+                                    }
+                                }
+                                &.done{
+                                    background-color: $color-brand-lite;
+                                }
+                            }
+                        }
+                    }
+                }
+                .tf-booking-pagination{
+                    .tf-control-pagination{
+                        button{
+                            background-color: $color-primary;
+                        }
+                        a.tf-back-control{
+                            background-color: transparent;
+                            color: $color-primary;
+                            padding: 0px;
+                            border: 0px solid;
+                        }
+                    }
+                }
+                .tf-booking-content-summery{
+                    .tf-booking-content{
+                        .traveller-info{
+                            .traveller-single-info{
+                                input[type="text"],
+                                input[type="textarea"],
+                                input[type="date"],
+                                select{
+                                    background: $color-brand-lite;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .tf-single-tour-extra .tf_quantity-acrselection .quanity-acr-fields {
+            background-color: $color-brand-lite;
+            padding: 15px 40px;
+            margin-bottom: 10px;
+            margin-left: 23px;
+        }
+
+        .tf-content-wrapper {
+            .tf-details {
+                .tf-details-left {
+                    .tf-details-menu {
+                        background: $color-filling-fg;
+                        padding: 16px 30px;
+                        position: sticky;
+                        left: 0;
+                        top: 0;
+                        z-index: 99;
+                        @media #{$max768}{
+                            padding: 12px 16px;
+                        }
+                        ul {
+                            margin: 0;
+                            padding: 0;
+                            list-style: none;
+                            display: flex;
+                            gap: 32px;
+                            flex-wrap: wrap;
+                            li {
+                                a {
+                                    text-decoration: none;
+                                    font-size: 1rem;
+                                    font-weight: 600;
+                                    color: $color-text;
+                                    border-bottom: 2px solid;
+                                    padding-bottom: 5px;
+                                    display: inline-block;
+                                    border-color: transparent;
+                                    @media #{$max1024}{
+                                        font-size: 0.75rem;
+                                    }
+                                    &.tf-hashlink {
+                                        border-color: $color-primary;
+                                        color: $color-primary;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .tf-overview-wrapper {
+                        .tf-overview-description {
+                            p {
+                                margin: 0;
+                                padding: 0;
+                            }s
+                            .tf-short-description{
+                                @media #{$max768}{
+                                    font-size: 0.875rem;
+                                }
+                            }
+                            span.tf-see-description,
+                            span.tf-see-less-description{
+                                cursor: pointer;
+                                @media #{$max768}{
+                                    font-size: 0.875rem;
+                                }
+                            }
+                            .tf-full-description{
+                                display: none;
+                                @media #{$max768}{
+                                    font-size: 0.875rem;
+                                }
+                            }
+                        }
+                        .tf-overview-popular-facilities {
+                            span.tf-popular-facilities-title {
+                                color: $color-text;
+                                font-size: 1rem;
+                                display: block;
+                                font-weight: 600;
+                                margin-bottom: 16px;
+                            }
+                            &>ul {
+                                margin: 0;
+                                padding: 0;
+                                list-style: none;
+                                display: flex;
+                                flex-direction: row;
+                                flex-wrap: wrap;
+                                gap: 12px 0;
+                                li {
+                                    width: 25%;
+                                    display: flex;
+                                    @media #{$max768}{
+                                        width: 50%;
+                                    }
+                                    @media only screen and (max-width: 1280px) {
+                                        width: 33%;
+                                    }
+                                    i{
+                                        margin-right: 8px;
+                                        font-size: 1.25rem;
+                                    }
+                                }
+                            }
+                        }
+                        .tf-features-block-wrapper {
+                            display: grid;
+                            gap: 24px;
+                            grid-template-columns: repeat(auto-fit, minmax(23%, 1fr));
+                            margin-bottom: 32px;
+
+                            @media #{$max1600}{
+                                grid-template-columns: repeat(auto-fit, minmax(23%, 1fr));
+                            }
+                            @media only screen and (max-width: 1200px){
+                                grid-template-columns: 1fr 1fr;
+                            }
+                            @media #{$max1024}{
+                                grid-template-columns: 1fr 1fr;
+                            }
+                            @media #{$max575}{
+                                grid-template-columns: 100%;
+                            }
+                            .tf-feature-block {
+                                padding: 24px;
+                                display: flex;
+                                gap: 16px;
+                                background: $color-filling-fg;
+                                @media #{$max1024}{
+                                    padding: 16px;
+                                    gap: 8px;
+                                }
+                                i {
+                                    font-size: 1.5rem;
+                                    color: $color-primary;
+                                    line-height: 1.5;
+                                }
+                                .tf-feature-block-details {
+                                    h5 {
+                                        color: $color-heading;
+                                        font-size: 1.25rem;
+                                        font-weight: 700;
+                                        line-height: 1.5;
+                                        margin-bottom: 5px;
+                                        @media #{$max768}{
+                                            font-size: 1rem;
+                                        }
+                                    }
+                                    p{
+                                        color: $color-text;
+                                        font-size: 1rem;
+                                        font-weight: 400;
+                                        margin: 0;
+                                    }
+                                }
+                            }
+                        }
+                        .tf-features-block-slides{
+                            .slick-track{
+                                display: flex;
+                                .slick-slide{
+                                    height: inherit;
+                                    margin: 0px 5px;
+                                }
+                            }
+                            .tf-feature-block {
+                                padding: 24px;
+                                display: flex;
+                                gap: 16px;
+                                background: $color-filling-fg;
+                                @media #{$max1024}{
+                                    padding: 16px;
+                                    gap: 8px;
+                                }
+                                i {
+                                    font-size: 1.5rem;
+                                    color: $color-primary;
+                                    line-height: 1.5;
+                                }
+                                .tf-feature-block-details {
+                                    h5 {
+                                        color: $color-heading;
+                                        font-size: 1.5rem;
+                                        font-weight: 700;
+                                        line-height: 1.5;
+                                        margin-bottom: 5px;
+                                    }
+                                    p{
+                                        margin: 0;
+                                        span.show_sub_title{
+                                            font-size: 1rem;
+                                            cursor: pointer;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        .tf-features-block-wrapper.tf-informations-secations{
+                        margin: 0px;
+                        }
+                        .tf-highlights-wrapper {
+                            display: flex;
+                            gap: 24px;
+                            padding: 32px 0;
+                            background: $color-filling-fg;
+                            border-radius: 0px;
+                            box-shadow: none;
+                            @include align-items(center);
+                            @media #{$max1024}{
+                                padding: 16px 0px 16px 16px;
+                            }
+                            .tf-highlights-icon {
+                                width: 230px;
+                                padding-left: 15px;
+                                @media #{$max1024}{
+                                    display: none;
+                                }
+                                svg,
+                                img {
+                                    width: 230px;
+                                    height: 230px;
+                                    object-fit: cover;
+                                }
+                                svg path{
+                                    fill: $color-primary;
+                                }
+                            }
+                            .ft-highlights-details {
+                                width: 80%;
+                                padding-right: 32px;
+                                @media #{$max1024}{
+                                    width: 100%;
+                                    padding-right: 16px;
+                                }
+                                h2{
+                                    font-weight: 700;
+                                    margin-bottom: 20px;
+                                    font-size: 1.875rem;
+                                    @media #{$max1024}{
+                                        font-size: 1.5rem;
+                                    }
+                                }
+                                p{
+                                    margin: 0;
+                                }
+                                ul {
+                                    margin: 0px 0px 0px 13px;;
+                                    padding: 0;
+                                    display: flex;
+                                    gap: 16px;
+                                    flex-direction: column;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .tf-details-menu.tf-sticky-menu {
+            position: fixed;
+            top: 175px;
+            box-shadow: 0 0 20px $color-border;
+            z-index: 9;
+            @media #{$max1024}{
+                top: 90px;
+            }
+        }
+    }
+}
+// Single Global End
+
+// Archive Global Start
+.tf-archive-template,
+.page-template-tf-search{
+    &__two{
+        .tf-hero-section-wrap {
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin-bottom: 56px;
+            @media #{$max768}{
+                margin-bottom: 16px;
+            }
+            .tf-hero-content {
+                min-height: 513px;
+                max-height: 513px;
+                margin: 0;
+                padding: 0;
+                background-position: center center;
+                background-size: cover;
+                border-radius: 0 0 4px 4px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                gap: 30px;
+                @media #{$max1024}{
+                    min-height: 320px;
+                    max-height: 320px;
+                }
+                @media #{$max768}{
+                    min-height: 260px;
+                    max-height: 260px;
+                }
+                &.tf-archive-hero-content {
+                    display: flex;
+                    justify-content: flex-end;
+                    .tf-head-title {
+                        padding: 0 0 48px 0;
+                        display: flex;
+                        align-items: center;
+                        gap: 32px;
+                        color: $color-white;
+                        @media #{$max1024}{
+                            display: flow-root;
+                            padding: 0px 0 30px 0;
+                        }
+                        @media #{$max768}{
+                            align-items: center;
+                            padding: 0px 16px 16px 16px;
+                        }
+                        h1{
+                            color: $color-white;
+                            margin: 0px;
+                            font-size: 2.5rem;
+                            @media #{$max768}{
+                                font-size: 1.25rem;
+                            }
+                        }
+                    }
+                    .tf-title-meta {
+                        font-size: 1.5rem;
+                        line-height: 1.5;
+                        padding-top: 8px;
+                        @media #{$max1024}{
+                            margin-top: 6px;
+                        }
+                        p{
+                            color: $color-white;
+                            margin: 0px;
+                            font-size: 1.5rem;
+                            line-height: 1.5;
+                        }
+                    }
+                }
+            }
+        }
+        .tf-archive-search-form {
+            width: 100%;
+            @media #{$max768}{
+                width: auto;
+            }
+            .tf_archive_search_result{
+                @media #{$max768} {
+                    padding: 16px;
+                    display: none;
+                }
+                .tf-booking-form-submit{
+                    @media #{$max768} {
+                        width: 100%;
+                    }
+                }
+            }
+            .tf-booking-form {
+                .tf-booking-form-fields {
+                    @media #{$max768} {
+                        width: 100%;
+                        display: flow-root;
+                        padding: 0;
+                        padding-bottom: 8px;
+                    }
+                    .tf-booking-form-location {
+                        display: flex;
+                        align-items: flex-start;
+                        padding-right: 25px;
+                        padding-left: 0;
+                        @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                            padding-right: 10px;
+                            width: 25%;
+                        }
+                        @media only screen and (max-width: 1200px){
+                            padding-right: 28px;
+                            padding-left: 4px;
+                        }
+                        @media #{$max1024}{
+                            padding-right: 15px;
+                            padding-left: 0px;
+                        }
+                        @media #{$max768} {
+                            width: 100%;
+                            padding: 0px;
+                            border-right: 0px solid;
+                            margin-bottom: 12px;
+                        }
+                        .tf-booking-location-wrap {
+                            display: flex;
+                            flex-direction: row;
+                            background: $color-filling-bg;
+                            padding: 0 12px;
+                            width: 100%;
+                            align-items: center;
+                            position: relative;
+                            input{
+                                padding: 9px;
+                                border: none;
+                                outline: none;
+                                width: 100%;
+                                background: transparent;
+                                box-shadow: none;
+                                font-size: 0.75rem;
+                                color: $color-text;
+                                &::placeholder{
+                                    color: $color-text;
+                                }
+                            }
+
+                            #tf-locationautocomplete-list,
+                            #tf-destinationautocomplete-list,
+                            #tf-apartment-locationautocomplete-list{
+                                position: absolute;
+                                left: 0;
+                                top: 100%;
+                                width: 250px;
+                                background: $color-brand-lite;
+                                z-index: 999;
+                                max-height: 200px;
+                                overflow: auto;
+                                scrollbar-width: thin;
+                                scrollbar-color: $scrollbar-color;
+                                padding: 8px;
+                                @media #{$max768} {
+                                    width: 100%;
+                                }
+                                &::-webkit-scrollbar{
+                                    width: 5px;
+                                }
+                                &::-webkit-scrollbar-thumb {
+                                    background-color: $scrollbar-thumb-color;
+                                    border-radius: 4px;
+                                }
+                                &::-webkit-scrollbar-track {
+                                    background-color: $color-brand-lite;
+                                }
+                                div{
+                                    padding: 10px;
+                                    cursor: pointer;
+                                    background-color: $color-white;
+                                    margin-bottom: 4px;
+                                    color: $color-text;
+                                    display: block;
+                                    transition: .3s all ease;
+                                    &:last-child{
+                                        margin-bottom: 0px;
+                                    }
+                                    &:hover{
+                                        background: $color-brand-lite;
+                                    }
+                                    &::before{
+                                        display: none;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .tf-booking-form-checkin{
+                        @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                            padding-left: 10px;
+                            padding-right: 10px;
+                            max-width: none;
+                            width: 20%;
+                        }
+                        @media #{$max768} {
+                            width: 31%;
+                            float: left;
+                            padding: 0px;
+                            max-width: none;
+                        }
+                        @media #{$max575} {
+                            width: 50%;
+                        }
+                        .tf-booking-date{
+                            @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                                font-size: 1.25rem;
+                            }
+                        }
+                        .tf-duration span{
+                            @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                                margin: 0px 5px;
+                            }
+                        }
+                    }
+                    .tf-booking-form-checkout{
+                        @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                            padding-left: 10px;
+                            padding-right: 10px;
+                            max-width: none;
+                            width: 20%;
+                        }
+                        @media #{$max768} {
+                            width: 31%;
+                            float: left;
+                            padding: 0px;
+                            padding-left: 20px;
+                            max-width: none;
+                        }
+                        @media #{$max575} {
+                            width: 50%;
+                            float: left;
+                            max-width: none;
+                        }
+                        .tf-booking-date{
+                            @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                                font-size: 1.25rem;
+                            }
+                        }
+                        .tf-duration span{
+                            @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                                margin: 0px 5px;
+                            }
+                        }
+                    }
+
+                    .tf-booking-form-guest-and-room {
+                        padding-left: 40px;
+                        padding-right: 40px;
+                        min-width: 200px;
+                        @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                            padding-left: 10px;
+                            padding-right: 10px;
+                            width: 35%;
+                            min-width: auto;
+                        }
+                        @media only screen and (max-width: 1200px){
+                            padding-right: 28px;
+                            padding-left: 28px;
+                        }
+                        @media #{$max1024}{
+                            padding-right: 15px;
+                            padding-left: 20px;
+                            min-width: 160px;
+                        }
+                        @media #{$max768} {
+                            width: 31%;
+                            float: left;
+                            padding-right: 0px;
+                            min-width: auto;
+                        }
+                        @media #{$max575} {
+                            padding-left: 0px;
+                        }
+                        .tf-booking-date{
+                            @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                                font-size: 1.25rem;
+                            }
+                        }
+                        .tf-booking-form-guest-and-room-inner {
+                            .tf-booking-guest-and-room-wrap.tf-archive-guest-info {
+                                margin-top: 8px;
+                                color: $color-text;
+                                display: -webkit-box;
+                                display: -ms-flexbox;
+                                display: flex;
+                                -webkit-box-align: center;
+                                -ms-flex-align: center;
+                                align-items: center;
+                                gap: 5px;
+                                @media #{$max768}{
+                                    gap: 8px;
+                                    float: left;
+                                    margin-top: 0;
+                                    line-height: normal;
+                                }
+                                span{
+                                    font-size: 1.5rem;
+                                    margin-bottom: -3px;
+                                    color: $color-text;
+                                    display: -webkit-box;
+                                    display: -ms-flexbox;
+                                    display: flex;
+                                    -webkit-box-align: center;
+                                    -ms-flex-align: center;
+                                    align-items: center;
+                                    gap: 5px;
+                                    @media #{$max1024}{
+                                        font-size: 1.25rem;
+                                    }
+                                    @media #{$max575}{
+                                        line-height: inherit;
+                                    }
+                                }
+                            }
+                            .tf-arrow-icons{
+                                text-align: right;
+                                @media #{$max768}{
+                                    float: left;
+                                }
+                            }
+                        }
+                    }
+                    &.tf-tour-archive-block{
+                        .tf-booking-form-checkin{
+                            max-width: none;
+                            width: 37%;
+                            @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                                padding-left: 10px;
+                                padding-right: 10px;
+                            }
+                            @media #{$max768} {
+                                width: 50%;
+                                float: left;
+                                padding: 0px;
+                            }
+                            .tf-booking-date{
+                                @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                                    font-size: 1.25rem;
+                                }
+                            }
+                            .tf-duration span{
+                                @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                                    margin: 0px 5px;
+                                }
+                            }
+                            .tf-tour-searching-date-block{
+                                display: flex;
+                                align-items: center;
+                                .tf-duration{
+                                    span{
+                                        font-size: 1.5rem;
+                                        margin: 0px 15px;
+                                        color: $color-text;
+                                        @media #{$max1024}{
+                                            margin: 0px 5px;
+                                        }
+                                    }
+                                }
+                                span.tf-booking-month{
+                                    flex-direction: row;
+                                    svg{
+                                        margin-left: 4px;
+                                    }
+                                }
+                            }
+                        }
+                        .tf-booking-form-checkout{
+                            @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                                padding-left: 10px;
+                                padding-right: 10px;
+                            }
+                            .tf-booking-date{
+                                @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                                    font-size: 1.25rem;
+                                }
+                            }
+                            .tf-duration span{
+                                @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                                    margin: 0px 5px;
+                                }
+                            }
+                        }
+                        .tf-booking-form-guest-and-room{
+                            @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                                padding-left: 10px;
+                                padding-right: 10px;
+                                width: 20%;
+                                min-width: auto;
+                            }
+                            @media #{$max768} {
+                                width: 50%;
+                                float: left;
+                                padding-left: 20px;
+                                padding-right: 0px;
+                            }
+                            .tf-booking-date{
+                                @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                                    font-size: 1.25rem;
+                                }
+                            }
+                            span.tf-booking-month{
+                                flex-direction: row;
+                                svg{
+                                    margin-left: 4px;
+                                }
+                            }
+                        }
+                        .tf-booking-form-location{
+                            @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                                padding-right: 10px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .tf-archive-right.tf-filter-show{
+            display: block;
+        }
+        .tf-available-archive-hetels-wrapper {
+            background: $color-filling-fg;
+            margin-bottom: 56px;
+            @media #{$max768}{
+                padding: 16px;
+            }
+            .tf-archive-available-rooms-head {
+                .tf-filter {
+                    background: $color-gray;
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    color: $color-white;
+                    padding: 12px 16px;
+                }
+               .tf-archive-ordering #tf-orderby {
+                    background-color: $color-filling-bg;
+                    color: $color-text;
+                    padding: 15px 36px 15px 15px;
+                    height: 100%;
+                    background-position: calc(100% - 12px) 50%;
+                    border: none;
+                    border-radius: 0px;
+                    font-size: 1rem;
+                    background-size: 16px;
+                    -webkit-appearance: none;
+                    appearance: none;
+                    -moz-appearance: none;
+                    background-image: url('https://www.svgrepo.com/show/80156/down-arrow.svg');
+                    background-repeat: no-repeat;
+                    background-size: 12px 12px;
+                    cursor: pointer;
+
+                    &:focus-visible {
+                        outline: none;
+                    }
+
+                    @media #{$max1024}{
+                        font-size: 0.875rem;
+                        padding: 10px 36px 10px 10px;
+                        background-size: 14px;
+                    }
+                    @media #{$max575}{
+                        max-width: 150px;
+                    }
+               }
+            }
+            .tf-archive-available-rooms {
+                .tf-available-room {
+                    overflow: hidden;
+                    position: relative;
+                    @media #{$max768}{
+                        display: flow-root;
+                    }
+                    .tf-available-room-gallery {
+                        min-width: 283px;
+                        max-width: 283px;
+                        position: relative;
+                        min-height: 328px;
+                        max-height: 328px;
+                        @media only screen and (max-width: 1200px){
+                            min-width: 222px;
+                            max-width: 222px;
+                        }
+                        @media #{$max1024}{
+                            min-height: 356px;
+                            max-height: 356px;
+                        }
+                        @media #{$max768}{
+                            width: 100%;
+                            max-width: 100%;
+                        }
+                        .tf-room-gallery {
+                            &:nth-child(n+1) {
+                                position: absolute;
+                                height: 100%;
+                                width: 100%;
+                                left: 0;
+                                top: 0;
+                            }
+                            &:nth-child(n+2) {
+                                position: absolute;
+                                height: 70px ;
+                                width: 70px;
+                                left: unset;
+                                top: unset;
+                                bottom: 16px;
+                                right: 16px;
+                                cursor: pointer;
+                                img {
+                                    height: 20px;
+                                    width: 20px;
+                                }
+                            }
+                        }
+                        .tf-room-gallery:first-child{
+                            &::before{
+                                position: absolute;
+                                content: "";
+                                left: 0;
+                                top: 0;
+                                height: 100%;
+                                width: 100%;
+                                background: rgba(238, 199, 140, 0.2);
+                            }
+                        }
+                        .tf-available-labels {
+                            position: absolute;
+                            display: flex;
+                            flex-direction: column;
+                            top: 16px;
+                            left: 16px;
+                            gap: 8px;
+                            &>span {
+                                color: $color-white;
+                                font-size: 0.75rem;
+                                font-weight: 500;
+                                padding: 6px;
+                                min-width: 84px;
+                                text-align: center;
+                            }
+                            span.tf-available-labels-populer {
+                                background: $color-primary;
+                            }
+                            span.tf-available-labels-featured {
+                                background: $color-danger;
+                            }
+                            span.tf-available-labels-visited {
+                                background: $color-success;
+                            }
+                        }
+                        .tf-available-ratings {
+                            position: absolute;
+                            right: 16px;
+                            top: 16px;
+                            background: rgba(253, 249, 243, 0.80);
+                            padding: 4px 4px 4px 8px;
+                            font-size: 1rem;
+                            color: $color-text;
+                            i {
+                                color: $color-primary;
+                            }
+                        }
+                    }
+                    .tf-available-room-content {
+                        width: calc(100% - 283px);
+                        @media only screen and (max-width: 1200px){
+                            width: calc(100% - 222px);
+                        }
+                        @media #{$max1024}{
+                            padding: 24px 16px;
+                        }
+                        @media #{$max768}{
+                            width: 100%;
+                        }
+                        @media #{$max575}{
+                            padding: 20px 16px;
+                        }
+                        .tf-available-room-content-left {
+                            display: flex;
+                            flex-direction: column;
+                            
+                            .tf-section-title-and-location {
+                                a {
+                                    text-decoration: none;
+                                    color: inherit;
+                                }
+                                a:hover {
+                                    color: inherit;
+                                }
+                            }
+                            ul{
+                                margin-top: auto;
+                                @media #{$max1024}{
+                                    font-size: 0.875rem;
+                                }
+                                li{
+                                    @media #{$max1024}{
+                                        font-size: 0.875rem;
+                                    }
+                                }
+                            }
+                            ul.features{
+                                @media #{$max768}{
+                                    display: none;
+                                }
+                            }
+                            .tf-section-title-and-location {
+                                .tf-section-title {
+                                    margin: 0 0 10px 0;
+                                    font-size: 1.875rem;
+                                    @media only screen and (max-width: 1200px){
+                                        font-size: 1.5rem;
+                                    }
+                                }
+                                .tf-title-location {
+                                    display: inline-flex;
+                                    margin-top: 6px;
+                                    align-items: center;
+                                    @media #{$max1024}{
+                                        margin-bottom: 36px;
+                                        font-size: 0.875rem;
+                                    }
+                                    .location-icon{
+                                        i{
+                                            margin-right: 8px;
+                                            font-size: 1.25rem;
+                                            @media #{$max1024}{
+                                                font-size: 0.875rem;
+                                            }
+                                        }
+                                    }
+                                    
+                                }
+                            }
+
+                        }
+                        .tf-available-room-content-right {
+                            width: 196px;
+                            @media #{$max768}{
+                                margin-top: 15px;
+                            }
+                            .tf-cancellation-refundable-text {
+                                margin-bottom: 48px;
+                            }
+                            .tf-available-room-price {
+                                margin-bottom: 12px;
+                                text-align: right;
+                                .tf-price-from{
+                                    del {
+                                        font-size: 1.5rem;
+                                    }
+                                    .amount{
+                                        color: $color-text;
+                                        font-size: 1.5rem;
+                                        font-weight: 600;
+                                    }
+                                }
+                            }
+                            button {
+                                padding: 12px 20px;
+                            }
+                            a.tf_btn{
+                                margin-top: auto;
+                            }
+                            a.view-hotel{
+                                @media #{$max1024}{
+                                    min-width: 95px;
+                                }
+                            }
+                        }
+                    }
+                }
+                #tf_posts_navigation_bar,
+                .tf_posts_ajax_navigation,
+                .tf_posts_page_navigation{
+                    display: inline-flex;
+                    margin-top: 30px;
+                    .page-numbers{
+                        border: 0.5px solid $color-border-lite;
+                        background: $color-filling-bg;
+                        height: 40px;
+                        color: $color-gray;
+                        font-size: 1rem;
+                        font-weight: 400;
+                        letter-spacing: 0.16px;
+                        padding: 0px 20px;
+                        text-decoration: none;
+                        display: flex;
+                        align-items: center;
+                        border-right: 0;
+                        &:last-child{
+                            border-right: 0.5px solid $color-border-lite;
+                        }
+                        &.current,
+                        &:hover{
+                            background: $color-primary;
+                            color: $color-white;
+                            border-color: $color-primary;
+                        }
+                    }
+                }
+            }
+        }
+
+        .tf-filter-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+            @media #{$max1024}{
+                gap: 16px;
+            }
+            .tf-filter-title {
+                display: flex;
+                justify-content: space-between;
+                .tf-section-title {
+                    margin: 0;
+                    padding: 0;
+                    font-weight: 700;
+                    font-size: 1.875rem;
+                    @media #{$max1024}{
+                        font-size: 1.25rem;
+                    }
+                }
+                button {
+                    margin: 0;
+                    padding: 0;
+                    border: none;
+                    background: unset;
+                    color: $color-text;
+                    font-size: 1rem;
+                    font-weight: 700;
+                    transition: .3s all ease;
+                    @media #{$max1024}{
+                        font-size: 0.75rem;
+                    }
+                    &:hover{
+                        color: $color-primary;
+                    }
+                }
+                button.filter-reset-btn{
+                    display: none;
+                }
+            }
+            .tf-filter-list-item {
+                h4 {
+                    margin-bottom: 12px;
+                    font-size: 1rem;
+                    font-weight: 600;
+                    line-height: 1.5;
+                    color: $color-heading;
+                }
+                label.tf-filter-location {
+                    display: flex;
+                    background: $color-white;
+                    padding: 12px;
+                    gap: 6px;
+                    input {
+                        width: -webkit-fill-available;
+                        border: none;
+                        outline: none;
+                    }
+                }
+                &.tf-filter-rating i {
+                    color: $color-primary;
+                }
+                .tf-filter-pricing-range {
+                    input.al-range-slider__input {
+                        display: none;
+                    }
+                    .al-range-slider__track {
+                        box-shadow: none;
+                        background: $color-brand-lite;
+                        height: 8px;
+                        margin: 10px 0 40px 0;
+                    }
+                    .al-range-slider__bar {
+                        border: none;
+                        box-shadow: none;
+                        background: $color-gray;
+                    }
+                    .al-range-slider__knob {
+                        display: flex;
+                        width: 24px;
+                        height: 24px;
+                        border-radius: 12px;
+                        border: 1.5px solid $color-border;
+                        background: $color-filling-bg;
+                        box-shadow: none;
+                        &:hover {
+                            border-color: none;
+                            box-shadow: none;
+                        }
+                    }
+                    .al-range-slider__tooltip {
+                        background: none;
+                        border-radius: none;
+                        bottom: -150%;
+                        box-shadow: none;
+                        font-size: 1rem;
+                        padding: 0;
+                        color: $color-text;
+                    }
+                    .al-range-slider {
+                        padding: 0;
+                    }
+                }
+                ul {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 8px;
+                    margin: 0;
+                    padding: 0;
+                    li {
+                        input {
+                            padding: 0;
+                            height: initial;
+                            width: initial;
+                            margin-bottom: 0;
+                            display: none;
+                            cursor: pointer;
+                        }
+                        input:checked+label:before {
+                            background: $color-primary
+                        }
+                        label {
+                            position: relative;
+                            cursor: pointer;
+                            color: $color-text;
+                        }
+                        label:before {
+                            content: '';
+                            background-color: transparent;
+                            display: inline-block;
+                            border-radius: 2px;
+                            border: 0.794px solid $color-primary;
+                            background: $color-brand-lite;
+                            height: 12px;
+                            width: 12px;
+                            margin-right: 8px;
+                        }
+                        a.tf-filter-list-see-less {
+                            color: $color-primary;
+                            text-decoration: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+// Archive Global End
+
+/* .tf_template_3_single_hotel .flatpickr-calendar {
+    left: 320px !important;
+  
+    @media only screen and (max-width: 1920px) {
+      left: 240px !important;
+    }
+    
+    @media only screen and (max-width: 1280px) {
+      left: 100px !important;
+    }
+  
+    @media only screen and (max-width: 1024px) {
+      left: 80px !important;
+    } 
+  
+    @media only screen and (max-width: 660px) {
+      left: 20px !important;
+    }
+}
+  
+.tf_template_3_hotel_archive .flatpickr-calendar {
+    left: 495px !important;
+  
+    @media only screen and (max-width: 1280px) {
+      left: 285px !important;
+    }
+    
+    @media #{$max1024}{
+      left: 170px !important;
+    }
+  
+    @media only screen and (max-width: 660px) {
+      left: 30px !important;
+    }
+} */

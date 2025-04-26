@@ -477,13 +477,13 @@
                 icon: 'fa fa-warning',
                 title: tf_options.swal_reset_title_text,
                 content: tf_options.swal_reset_other_text,
-                closeIcon: true,
                 type: 'red',
                 typeAnimated: false,
                 boxWidth: '500px',
                 animationSpeed: 500,
-                animation: 'zoom',
+                animation: 'scale',
                 closeAnimation: 'scale',
+                animateFromElement: false,
                 useBootstrap: false,
                 theme: 'modern',
                 buttons: {
@@ -838,11 +838,9 @@
             $('.tf-repeater-wrap-room-options .tf-single-repeater-room-options').each(function(i){
                 // Get the dynamic index from the tf_repeater_count field
                 let index = $(this).find('[name="tf_repeater_count"]').val();
-
                 // Extract the option title and type using the dynamic index
                 let optionType = $(this).find(`[name="tf_room_opt[room-options][${index}][option_pricing_type]"]`).val();
                 let optionTitle = $(this).find(`[name="tf_room_opt[room-options][${index}][option_title]"]`).val();
-
                 if (index !== undefined) {
                     optionsArr[index] = {
                         index: index,
@@ -1789,6 +1787,10 @@
             }
         });
 
+        // switch-group Drag and  show
+        $(".tf-switch-group-wrap").sortable({
+            placeholder: "tf-switch-drag-highlight"
+        });
 
         // TAB jquery
         $(document).on('click', '.tf-tab-item', function () {
@@ -2736,56 +2738,6 @@ var frame, gframe;
             });
         });
     });
-
-    // external listing dynamic location
-
-    /*$('[name="type-selector"]').on("change", function (e) {
-        const selectedValue = $(this).val();
-        let termName = "hotel_location";
-
-        if (selectedValue == "type=apartment") {
-            termName = "apartment_location";
-        } else if (selectedValue == "type=tours") {
-            termName = "tour_destination";
-        } else {
-            termName = "hotel_location"
-        }
-
-        $.ajax({
-            url: tf_options.ajax_url,
-            type: 'POST',
-            data: {
-                action: "tf_shortcode_type_to_location",
-                _nonce: tf_admin_params.tf_nonce,
-                typeValue: selectedValue,
-                termName: termName
-            },
-            success: function (res) {
-                var select2 = $('#tf_listing_location_shortcode');
-                select2.empty();
-                select2.append('<option value="">' + "Select Type First" + '</option>');
-                if (res.data.value.length > 0) {
-
-                    select2.append('<option value="all">All</option>');
-
-                    $.each(res.data.value, function (key, value) {
-                        if (value.term_id && value.name) {
-                            select2.append('<option value="' + value.term_id + '">' + value.name + '</option>');
-                        }
-                    })
-                }
-            },
-            error: function (response) {
-                console.log(response);
-            },
-        })
-    })
-    $("#tf_listing_location_shortcode").on("select2:select", function (e) {
-        var select_val = $(e.currentTarget).val();
-        if (select_val && select_val.includes("all")) {
-            $(this).val(["all"]).trigger('change.select2');
-        }
-    });*/
     
     $(document).ready(function () {
         // $('.tf-import-btn').on('click', function (event) {
@@ -2910,4 +2862,168 @@ var frame, gframe;
 
     });
 
+
+    /*
+    * Author @Jahid
+    * Color Palatte Change
+    */
+    jQuery(document).ready(function ($) {
+
+        // Function to get the selected design
+        function getSelectedDesign() {
+            return $('input[name="tf_settings\\[color-palette-template\\]"]:checked').val();
+        }
+        
+        const designDefault = {
+            'd1': {
+                brand: {
+                    default: '#0E3DD8',
+                    dark: '#0A2B99',
+                    lite: '#C9D4F7',
+                },
+                text: {
+                    heading: '#1C2130',
+                    paragraph: '#494D59',
+                    lite: '#F3F5FD',
+                },
+                border: {
+                    default: '#16275F',
+                    lite: '#D1D7EE',
+                },
+                filling: {
+                    background: '#ffffff',
+                    foreground: '#F5F7FF',
+                },
+            },
+            'd2': {
+                brand: {
+                    default: '#B58E53',
+                    dark: '#917242',
+                    lite: '#FAEEDC',
+                },
+                text: {
+                    heading: '#30281C',
+                    paragraph: '#595349',
+                    lite: '#FDF9F3',
+                },
+                border: {
+                    default: '#5F4216',
+                    lite: '#EEE2D1',
+                },
+                filling: {
+                    background: '#ffffff',
+                    foreground: '#FDF9F3',
+                },
+            },
+            'd3': {
+                brand: {
+                    default: '#F97415',
+                    dark: '#C75605',
+                    lite: '#FDDCC3',
+                },
+                text: {
+                    heading: '#30241C',
+                    paragraph: '#595049',
+                    lite: '#FDF7F3',
+                },
+                border: {
+                    default: '#5F3416',
+                    lite: '#EEDDD1',
+                },
+                filling: {
+                    background: '#ffffff',
+                    foreground: '#FFF9F5',
+                },
+            },
+            'd4': {
+                brand: {
+                    default: '#003061',
+                    dark: '#002952',
+                    lite: '#C2E0FF',
+                },
+                text: {
+                    heading: '#1C2630',
+                    paragraph: '#495159',
+                    lite: '#F3F8FD',
+                },
+                border: {
+                    default: '#163A5F',
+                    lite: '#D1DFEE',
+                },
+                filling: {
+                    background: '#ffffff',
+                    foreground: '#F5FAFF',
+                },
+            },
+        };
+    
+        // Function to update custom colors based on the selected design
+        function updateCustomColors(selectedDesign) {
+            if (!selectedDesign) return;
+    
+            const colorPalettes = {
+                'design-1': 'tf-d1',
+                'design-2': 'tf-d2',
+                'design-3': 'tf-d3',
+                'design-4': 'tf-d4'
+            };
+    
+            const selectedPalette = colorPalettes[selectedDesign];
+            if (!selectedPalette) return;
+    
+            // Define the fields to be updated
+            const fields = ['brand', 'text', 'border', 'filling'];
+    
+            fields.forEach(field => {
+                $(`input[name^="tf_settings[${selectedPalette}-${field}]"]`).each(function () {
+                    let fieldName = $(this).attr('name').split('[')[2].replace(']', ''); // Extract the sub-field (e.g., 'default', 'dark', 'lite')
+                    let fieldValue = $(this).val();
+                    let $customField = $(`input[name="tf_settings[tf-custom-${field}][${fieldName}]"]`);
+
+                    if ($customField.length) {
+                        $customField.val(fieldValue).trigger('change');
+                    }
+                });
+            });
+        }     
+    
+        // Initialize wpColorPicker for all relevant inputs
+        $('input[name^="tf_settings[tf-d"]').wpColorPicker({
+            change: function (event, ui) {
+                let $colorField = $(event.target);
+                let originalValue = $colorField.val();
+                let newValue = ui.color.toString();
+
+                updateCustomColors(getSelectedDesign());
+    
+                if (newValue !== originalValue) {
+                    // Switch to custom palette
+                    $('#tf_settings\\[color-palette-template\\]\\[custom\\]').prop("checked", true);
+                    $('.tf-field.tf-field-color.tf-depend-hidden').addClass('tf-depend-on');
+                    $('.tf-field.tf-field-color.tf-depend-hidden[data-value="custom"]').removeClass('tf-depend-on');
+    
+                    // Extract the field type and sub-field name
+                    let nameAttr = $colorField.attr('name');
+                    let match = nameAttr.match(/\[tf-(d\d+)-(brand|text|border|filling)]\[(.*?)\]/);
+                    if (!match) return;
+    
+                    let design = match[1]; // e.g., 'd1', 'd2', etc.
+                    let fieldType = match[2]; // e.g., 'brand', 'text', etc.
+                    let fieldName = match[3]; // e.g., 'default', 'dark', 'lite', etc.
+    
+                    // Update the corresponding custom field
+                    let $customColorField = $(`input[name="tf_settings[tf-custom-${fieldType}][${fieldName}]"]`);
+                    if ($customColorField.length) {
+                        
+                        let value = $(`input[name="tf_settings[tf-${design}-${fieldType}][${fieldName}]"]`).val();
+                        $(`input[name="tf_settings[tf-custom-${fieldType}][${fieldName}]"]`).val(value).trigger('change');
+                        $(`input[name="tf_settings[tf-${design}-${fieldType}][${fieldName}]"]`).val(designDefault[design][fieldType][fieldName]).trigger('change');
+                        $customColorField.val(newValue).trigger('change');
+                    }
+                }
+            }
+        });
+    });
+    
+    
 })(jQuery);

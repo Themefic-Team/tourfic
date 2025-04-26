@@ -51,7 +51,7 @@ class Recent_Apartment extends \Tourfic\Core\Shortcodes {
 					?>
 				</div>
 
-				<div class="tf-slider-items-wrapper">
+				<div class="tf-slider-items-wrapper tf-slick-slider">
 					<?php while ( $apartment_loop->have_posts() ) {
 						$apartment_loop->the_post();
 						$post_id                    = get_the_ID();

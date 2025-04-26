@@ -1,0 +1,59 @@
+.post-type-archive-tf_tours,
+.post-type-archive-tf_hotel,
+.post-type-archive-tf_apartment,
+.tax-hotel_location,
+.tax-tour_destination,
+.tax-apartment_location,
+.page-template-tf-search{
+    .tf-archive-template{
+        &__legacy{
+            .single-tour-wrap.tf-featured .single-tour-inner{
+                position: relative;
+                .tf-featured-badge {
+                    width: 150px;
+                    height: 150px;
+                    overflow: hidden;
+                    position: absolute;
+                    top: -10px;
+                    left: -10px;
+                    &::before,
+                    &::after{
+                        position: absolute;
+                        z-index: -1;
+                        content: '';
+                        display: block;
+                        border: 5px solid $color-brand-dark;    
+                        border-top-color: transparent;
+                        border-left-color: transparent;
+                    }
+                    &::before{
+                        top: 0;
+                        right: 0;
+                    }
+                    &::after{
+                        bottom: 0;
+                        left: 0;
+                    }
+                    span {
+                        position: absolute;
+                        display: block;
+                        width: 225px;
+                        padding: 10px 0;
+                        background-color: $color-brand-dark;
+                        box-shadow: 0 5px 10px rgba(0,0,0,.1);
+                        color: $color-white;
+                        font: 700 18px/1 'Lato', sans-serif;
+                        text-shadow: 0 1px 1px rgba(0,0,0,.2);
+                        text-transform: uppercase;
+                        text-align: center;
+                        font-size: 1rem;
+                        z-index: 9;
+                        right: -12px;
+                        top: 33px;
+                        transform: rotate(-45deg);
+                    }
+                }
+            }
+        }
+    }
+}

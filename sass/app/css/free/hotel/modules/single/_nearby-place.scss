@@ -1,0 +1,81 @@
+.single-tf_hotel{
+    .tf-single-template{
+        &__legacy{
+            .nearby-container {
+                display: block;
+                background-color: $color-filling-fg;
+                margin-top: 20px;
+                margin-bottom: 20px;
+                padding: 20px 20px 10px 20px;
+                border-radius: 8px;
+                h3{
+                    margin: 0;
+                    text-transform: capitalize;
+                    font-size: 1.375rem;
+                    color: $color-heading;
+                }
+                ul {
+                    padding-left: 5px;
+                    font-size: 0.938rem; 
+                    margin: 0;
+                    li {
+                        list-style-type: none;
+                        display: flex;
+                        justify-content: space-between;
+                        padding: 8px 0;
+                        text-transform: capitalize;
+                        i {
+                            padding-right: 5px;
+                            font-size: 0.875rem;
+                        }
+                    }
+                }
+            }
+        }
+        &__one{
+            .tf-hotel-single-places{
+                ul{
+                    margin: 0;
+                    padding: 0;
+                    display: grid;
+                    grid-template-columns: repeat(4, 25%);
+                    list-style-type: none;
+                    grid-gap: 5px;
+                    @media #{$max1024}{
+                        grid-template-columns: repeat(3, 33%);
+                    }
+                    @media #{$max768}{
+                        grid-template-columns: repeat(2, 50%);
+                    }
+                    @media #{$max575}{
+                        grid-template-columns: 100%;
+                    }
+
+                    li{
+                        display: inline-flex;
+                        justify-content: space-between;
+                        background-color: $color-filling-fg;
+                        border-radius: 5px;
+                        padding: 10px;
+                        text-transform: capitalize;
+                        margin: 5px 5px 5px 0px;
+                        font-size: 0.938rem;
+                        .tf-place{
+                            display: flex;
+                            flex: 1;
+                            .tf-icon{
+                                width: auto;
+                                height: auto;
+                                i{
+                                    margin-right: 8px;
+                                }
+                            }
+                        }
+
+                    }
+                   
+                }
+            }
+        }
+    }
+}

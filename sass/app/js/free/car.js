@@ -1,5 +1,10 @@
 (function ($, win) {
+    
+
     $(document).ready(function () {
+       
+
+        
 
         // Create an instance of Notyf
         const notyf = new Notyf({
@@ -35,6 +40,10 @@
             $('.tf-details-menu ul li[data-menu="' + $currentmenu + '"]').addClass('active');
         });
 
+       
+        
+        
+        
         // Car Location Autocomplete
 
         function tourfic_car_autocomplete(inp, arr) {
@@ -43,11 +52,10 @@
 
             // Executes when some one click in the search form location
             inp.addEventListener("focus", function () {
-                // if (this.value == '' || !this.value) {
-                    // alert("Working....")
+                    closeAllLists();
                     let a = document.createElement("DIV");
-                    a.setAttribute("id", this.id + "autocomplete-list");
-                    a.classList.add("autocomplete-items")
+                    a.setAttribute("id", this.id + "-autocomplete-list");
+                    a.setAttribute("class", "autocomplete-items");
                     this.parentNode.appendChild(a);
                     for (const [key, value] of Object.entries(arr)) {
                         let b = document.createElement("DIV");
@@ -56,7 +64,10 @@
                         b.addEventListener("click", function (e) {
                             let source = this.getElementsByTagName("input")[0];
                             inp.value = source.value;
-                            inp.closest('input').nextElementSibling.value = source.dataset.slug
+                            inp.closest('input').nextElementSibling.value = source.dataset.slug;
+                            setTimeout(() => {
+                                closeAllLists();
+                            },100);
                         });
                         a.appendChild(b);
                     }
@@ -180,10 +191,9 @@
             }
 
             /*execute a function when someone clicks in the document:*/
-            document.addEventListener("click", function (e) {
-                // closeAllLists(e.target);
-                if (e.target.id == "content" || e.target.id == "") {
-                    closeAllLists(e.target);
+            $(document).on('click', function (event) {
+                if (!$(event.target).closest("#tf_dropoff_location, #tf_pickup_location").length) {
+                    $("#tf_pickup_location-autocomplete-list,#tf_dropoff_location-autocomplete-list").hide();
                 }
             });
         }
@@ -204,7 +214,7 @@
             e.preventDefault();
             $('.tf-car-booking-popup').hide();
         });
- 
+
 
         /*
         * Car Booking Popup
@@ -255,6 +265,10 @@
                     $('.error-notice').hide();
                     $('.tf-car-booking-popup').css('display', 'flex');
                     $this.removeClass('tf-btn-loading');
+                    if($(window).width() < 768){
+                        $(".tf-date-select-box").hide();
+                        $(".tf-mobile-booking-btn").hide();
+                    }
                 }
             });
 
@@ -306,7 +320,7 @@
 
             let protections = $('input[name="protections[]"]');
 
-            
+
             let validationProtections = protectionValidation(protections);
 
             if( validationProtections ){
@@ -314,10 +328,10 @@
             }else{
                 $('.tf-booking-tabs ul li').removeClass('active');
                 $('.tf-booking-tabs ul li.booking').addClass('active');
-    
+
                 $('.tf-protection-content').hide();
                 $('.tf-booking-bar').hide();
-    
+
                 $('.tf-booking-form-fields').show();
             }
         });
@@ -401,10 +415,10 @@
                 return true;
             }
         };
-        $('.booking-process').on("click touchstart", function (e) {
-
+        $(document).on('click touchstart', '.booking-process', function (e) {
+            
             if (e.type === 'touchstart') {
-                $(this).off('click'); 
+                $(this).off('click');
             }
             let $this = $(this);
             
@@ -694,7 +708,7 @@
 
         $(".tf-booking-btn .booking-process").on("click touchstart", function (e) {
             if(e.type === 'touchstart'){
-                $(this).off('click'); 
+                $(this).off('click');
             }
             let $this = $(this);
 
@@ -741,7 +755,6 @@
             }).get();
 
             let protections = $('input[name="protections[]"]');
-
             
             let validationProtections = protectionValidation(protections);
 
@@ -927,7 +940,7 @@
         });        
 
         // Social Share
-        $('.tf-single-car-section .tf-share-toggle').on("click", function (e) {
+        $('.single-tf_carrental .tf-single-template__one .tf-share-toggle').on("click", function (e) {
             e.preventDefault();
             $('.tf-share-toggle').toggleClass('actives');
             $('.share-car-content').toggleClass('show');
@@ -985,8 +998,14 @@
             });
         });
 
-                
-
+    
     });
 
+    
+     
+     
+   
+
 })(jQuery, window);
+
+

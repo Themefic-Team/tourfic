@@ -65,7 +65,7 @@ class Apartment {
 							$tf_room_gallery_ids = explode( ',', $tf_room_gallery );
 							?>
 
-                            <div class="tf-details-qc-slider tf-details-qc-slider-single">
+                            <div class="tf-details-qc-slider tf-details-qc-slider-single tf-slick-slider">
 								<?php
 								if ( ! empty( $tf_room_gallery_ids ) ) {
 									foreach ( $tf_room_gallery_ids as $key => $gallery_item_id ) {
@@ -79,7 +79,7 @@ class Apartment {
 									<?php }
 								} ?>
                             </div>
-                            <div class="tf-details-qc-slider tf-details-qc-slider-nav">
+                            <div class="tf-details-qc-slider tf-details-qc-slider-nav tf-slick-slider">
 								<?php
 								if ( ! empty( $tf_room_gallery_ids ) ) {
 									foreach ( $tf_room_gallery_ids as $key => $gallery_item_id ) {
@@ -711,7 +711,7 @@ class Apartment {
 				<div class="tf-driver-location-box">
 					<div class="tf-submit-button">
 						<input type="hidden" name="type" value="tf_apartment" class="tf-post-type"/>
-						<button type="submit"><?php esc_html_e( apply_filters("tf_apartment_search_form_submit_button_text", 'Search' ), 'tourfic' ); ?> <i class="ri-search-line"></i></button>
+						<button type="submit" class="tf_btn tf-flex-align-center"><?php esc_html_e( apply_filters("tf_apartment_search_form_submit_button_text", 'Search' ), 'tourfic' ); ?> <i class="ri-search-line"></i></button>
 					</div>
 				</div>
 				</div>
@@ -929,7 +929,7 @@ class Apartment {
                     <div class="tf-search__form__fieldset__right">
                         <!-- Submit Button -->
                         <input type="hidden" name="type" value="tf_apartment" class="tf-post-type" />
-                        <button type="submit" class="tf-search__form__submit mh-btn">
+                        <button type="submit" class="tf-search__form__submit tf_btn">
                             <?php esc_html_e(apply_filters("tf_apartment_search_form_submit_button_text", 'Search'), 'tourfic'); ?>
                             <svg class="tf-search__form__submit__icon" width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M15.75 14.7188L11.5625 10.5312C12.4688 9.4375 12.9688 8.03125 12.9688 6.5C12.9688 2.9375 10.0312 0 6.46875 0C2.875 0 0 2.9375 0 6.5C0 10.0938 2.90625 13 6.46875 13C7.96875 13 9.375 12.5 10.5 11.5938L14.6875 15.7812C14.8438 15.9375 15.0312 16 15.25 16C15.4375 16 15.625 15.9375 15.75 15.7812C16.0625 15.5 16.0625 15.0312 15.75 14.7188ZM1.5 6.5C1.5 3.75 3.71875 1.5 6.5 1.5C9.25 1.5 11.5 3.75 11.5 6.5C11.5 9.28125 9.25 11.5 6.5 11.5C3.71875 11.5 1.5 9.28125 1.5 6.5Z" fill="white" />
@@ -1136,7 +1136,7 @@ class Apartment {
 
                 <div class="tf_submit-wrap">
                     <input type="hidden" name="type" value="tf_apartment" class="tf-post-type"/>
-                    <button class="tf_button tf-submit btn-styled" type="submit"><?php echo esc_html(apply_filters("tf_apartment_search_form_submit_button_text", esc_html__('Search', 'tourfic' ))); ?></button>
+                    <button class="tf_btn tf-submit" type="submit"><?php echo esc_html(apply_filters("tf_apartment_search_form_submit_button_text", esc_html__('Search', 'tourfic' ))); ?></button>
                 </div>
 
             </div>
@@ -1328,7 +1328,7 @@ class Apartment {
 
 			<?php if ( ( $tf_booking_type == 2 && $tf_hide_booking_form == '1' || ( $tf_ext_booking_type == 2 && empty( $tf_booking_code ) ) ) || $tf_booking_type == 1 ): ?>
 				
-				<h2 class="tf-section-title"><?php esc_html_e("Available Date", "tourfic"); ?></h2>
+				<h3 class="tf-section-title"><?php esc_html_e("Available Date", "tourfic"); ?></h3>
 				<div class="tf-apartment-form-fields">
 					<div class="tf_booking-dates tf-check-in-out-date">
 						<div class="tf-aprtment-check-in-out-date">
@@ -1452,12 +1452,12 @@ class Apartment {
                 <div class="tf-btn-booking">
 					<?php if ( ( $tf_booking_type == 2 && $tf_hide_booking_form !== '1' && $tf_ext_booking_type == 1 ) || $tf_booking_type == 1 ) : ?>
 							<?php if (!empty($apt_reserve_button_text)) : ?>
-								<button class="tf_button tf-submit" type="submit"><?php echo esc_html( $apt_reserve_button_text ); ?></button>
+								<button class="tf_btn tf_btn_full tf_btn_large tf-submit" type="submit"><?php echo esc_html( $apt_reserve_button_text ); ?></button>
 						<?php endif; ?>
 					<?php elseif( $tf_booking_type == 2 && $tf_hide_booking_form == 1 ): ?>
 						<?php if (!empty($apt_reserve_button_text)) : ?>
 							<a href="<?php echo esc_url( $tf_booking_url ); ?>"
-							class="tf_button tf-submit" <?php echo ! empty( $tf_booking_attribute ) ? esc_attr( $tf_booking_attribute ) : ''; ?> target="_blank"><?php echo esc_html($apt_reserve_button_text ); ?></a>
+							class="tf_btn tf_btn_full tf_btn_large tf-submit" <?php echo ! empty( $tf_booking_attribute ) ? esc_attr( $tf_booking_attribute ) : ''; ?> target="_blank"><?php echo esc_html($apt_reserve_button_text ); ?></a>
 						<?php endif; ?>
 					<?php endif; ?>
                 </div>
@@ -1624,15 +1624,15 @@ class Apartment {
                 <input type="hidden" name="type" value="<?php echo esc_attr( $ptype); ?>" class="tf-post-type"/>
                 <input type="hidden" name="post_id" value="<?php echo esc_attr( get_the_ID() ); ?>"/>
 
-                <div class="tf-btn">
+                <div class="tf-btn-wrap">
 					<?php if ( ( $tf_booking_type == 2 && $tf_hide_booking_form !== '1' && $tf_ext_booking_type == 1 ) || $tf_booking_type == 1 ) : ?>
                         <?php if (!empty($apt_reserve_button_text)) : ?>
-							<button class="tf-btn-normal btn-primary tf-submit" type="submit"><?php echo esc_html( $apt_reserve_button_text ); ?></button>
+							<button class="tf_btn tf_btn_full tf_btn_large tf-submit" type="submit"><?php echo esc_html( $apt_reserve_button_text ); ?></button>
 						<?php endif; ?>
 					<?php elseif( $tf_booking_type == 2 && $tf_hide_booking_form == 1 ): ?>
 						<?php if (!empty($apt_reserve_button_text)) : ?>
 							<a href="<?php echo esc_url( $tf_booking_url ); ?>"
-							class="tf-btn-normal btn-primary tf-submit" <?php echo ! empty( $tf_booking_attribute ) ? esc_attr( $tf_booking_attribute ) : ''; ?> target="_blank"><?php echo esc_html( $apt_reserve_button_text ); ?></a>
+							class="tf_btn tf_btn_full tf_btn_large tf-submit" <?php echo ! empty( $tf_booking_attribute ) ? esc_attr( $tf_booking_attribute ) : ''; ?> target="_blank"><?php echo esc_html( $apt_reserve_button_text ); ?></a>
 						<?php endif; ?>
 					<?php endif; ?>
                 </div>
@@ -1997,7 +1997,9 @@ class Apartment {
 		}
 		$featured        = ! empty( $meta['apartment_as_featured'] ) ? $meta['apartment_as_featured'] : '';
 		$pricing_type    = ! empty( $meta['pricing_type'] ) ? $meta['pricing_type'] : 'per_night';
-		$apartment_multiple_tags = !empty(Helper::tf_data_types($meta['tf-apartment-tags'])) ? Helper::tf_data_types($meta['tf-apartment-tags']) : [];
+		
+		$apartment_tags_raw = isset($meta['tf-apartment-tags']) ? $meta['tf-apartment-tags'] : null;
+		$apartment_multiple_tags = !empty($apartment_tags_raw) ? Helper::tf_data_types($apartment_tags_raw) : [];
 		//Discout Info
 		$apartment_discount_type = !empty($meta["discount_type"]) ? $meta["discount_type"] : "none";
 		$apartment_discount_amount = !empty($meta["discount"]) ? $meta["discount"] : 0;
@@ -2151,7 +2153,7 @@ class Apartment {
 						</span>
 					</div>
 					</div>              
-					<a href="<?php echo esc_url( $url ); ?>" class="view-hotel"><?php esc_html_e("See details", "tourfic"); ?></a>
+					<a href="<?php echo esc_url( $url ); ?>" class="tf_btn tf_btn_large tf_btn_sharp"><?php esc_html_e("See details", "tourfic"); ?></a>
 				</div>
 			</div>
 		</div>
@@ -2194,7 +2196,7 @@ class Apartment {
 						<?php endif; ?>
                         <h4 class="tf-section-title">
                             <a href="<?php echo esc_url( $url ); ?>">
-								<?php echo wp_kses_post(Helper::tourfic_character_limit_callback( get_the_title(), 45 )); ?>
+								<?php echo wp_kses_post(Helper::tourfic_character_limit_callback( get_the_title(), 55 )); ?>
                             </a>
                         </h4>
 						<?php if ( $features ) { ?>
@@ -2234,7 +2236,7 @@ class Apartment {
                         <div class="tf-archive-hotel-price">
 							<?php echo wp_kses_post(Pricing::instance( $post_id )->get_min_price_html()); ?>
                         </div>
-                        <a href="<?php echo esc_url( $url ); ?>" class="view-hotel"><?php esc_html_e( "View Details", "tourfic" ); ?></a>
+                        <a href="<?php echo esc_url( $url ); ?>" class="tf_btn tf_btn_gray tf_btn_small"><?php esc_html_e( "View Details", "tourfic" ); ?></a>
                     </div>
                 </div>
             </div>
@@ -2300,7 +2302,7 @@ class Apartment {
 										<?php echo esc_html( substr( wp_strip_all_tags( get_post_field('post_content', $post_id) ), 0, 160 ) ) . '...'; ?>
                                     </div>
                                 </div>
-                                <div class="roomNameInner">
+                                <div class="tf_room_name_inner">
                                     <div class="room_link">
                                         <div class="roomrow_flex">
 											<?php if ( $features ) { ?>
@@ -2335,7 +2337,7 @@ class Apartment {
 											<?php } ?>
                                             <div class="roomPrice roomPrice_flex sr_discount" style="<?php echo empty( $features ) ? 'text-align:left' : ''; ?>">
                                                 <div class="availability-btn-area">
-                                                    <a href="<?php echo esc_url( $url ); ?>" class="tf_button btn-styled"><?php esc_html_e( 'View Details', 'tourfic' ); ?></a>
+                                                    <a href="<?php echo esc_url( $url ); ?>" class="tf_btn"><?php esc_html_e( 'View Details', 'tourfic' ); ?></a>
                                                 </div>
                                                 <!-- Show minimum price @author - Hena -->
                                                 <div class="tf-room-price-area">

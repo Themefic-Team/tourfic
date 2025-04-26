@@ -36,12 +36,12 @@
       }
 
       .tf-switch-on, .tf-switch-off {
-        color: #fff;
+        color: #ffffff;
         position: absolute;
         @include translateY(-50%);
         top: 50%;
         left: 12px;
-        font-size: 12px;
+        font-size: 0.75rem;
         opacity: 0;
         @include transition(all, 0.4s);
       }
@@ -61,7 +61,7 @@
         &:before {
           left: 100%;
           margin-left: -24px;
-          background-color: #fff;
+          background-color: #ffffff;
           filter: drop-shadow(0px 2px 4px rgba(12, 31, 49, 0.12));
         }
 

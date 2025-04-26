@@ -13,18 +13,18 @@
 
     h3{
         font-weight: 600;
-        font-size: 32px;
+        font-size: 2rem;
         line-height: 38px;
         color: #002043;
     }
 
     .fancybox-close-small {
-        background: transparent !important;
-        color: #333 !important;
+        background: transparent;
+        color: #333;
     }
 
     .tf-reg-response {
-        font-size: 16px;
+        font-size: 1rem;
         font-weight: normal;
         line-height: 1;
 
@@ -33,7 +33,7 @@
             margin: 0 0 5px 0;
             padding: 7px 10px 7px 10px;
             border-radius: 2px;
-            color: #fff;
+            color: $color-white;
 
             &:last-child{
                 margin-bottom: 15px;
@@ -45,7 +45,7 @@
             margin: 0 0 5px 0;
             padding: 7px 10px 7px 10px;
             border-radius: 2px;
-            color: #fff;
+            color: $color-white;
             line-height: 22px;
 
 
@@ -56,7 +56,7 @@
     }
 
     .tf-login-response {
-        font-size: 16px;
+        font-size: 1rem;
         font-weight: normal;
         line-height: 1;
         margin: 0 0 20px 0;
@@ -66,7 +66,7 @@
             margin: 0 0 5px 0;
             padding: 7px 10px 7px 10px;
             border-radius: 2px;
-            color: #fff;
+            color: $color-white;
         }
 
         .tf_success {
@@ -74,7 +74,7 @@
             margin: 0 0 5px 0;
             padding: 7px 10px 7px 10px;
             border-radius: 2px;
-            color: #fff;
+            color: $color-white;
         }
     }
 
@@ -83,7 +83,7 @@
         padding: 0;
 
         label {
-            font-size: 16px;
+            font-size: 1rem;
             font-weight: 600;
             color: #828C99;
             display: block;
@@ -154,12 +154,16 @@
         }
     }
 
+    .tf-reg-extra-fields{
+        display: none;
+    }
+
     .tf-submit {
         border: 1px solid #003162;
         border-radius: 4px;
         overflow: hidden;
         position: relative;
-        color: #fff;
+        color: $color-white;
         cursor: pointer;
         text-decoration: none;
         background: #003162;
@@ -201,7 +205,7 @@
     border-radius: 3px;
     padding: 10px 0 10px 0;
     background: #f2f2f2;
-    font-size: 20px;
+    font-size: 1.25rem;
     color: #333;
     box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.45);
 }

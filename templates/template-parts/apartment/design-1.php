@@ -5,9 +5,9 @@ use \Tourfic\Classes\Apartment\Apartment;
 use \Tourfic\Classes\Apartment\Pricing as Apt_Pricing;
 ?>
 
-<div class="tf-template-3 tf-hotel-single tf-apartment-single">
+<div class="tf-single-template__two">
 <!--Hero section start -->
-<div class="tf-hero-section-wrap" style="<?php echo !empty(get_the_post_thumbnail_url()) ? 'background: linear-gradient(0deg, rgba(48, 40, 28, 0.40) 0%, rgba(48, 40, 28, 0.40) 100%), url('.esc_url(get_the_post_thumbnail_url()).'), lightgray 0px -268.76px / 100% 249.543% no-repeat;background-size: cover; background-position: center;' : 'background-color: rgba(48, 40, 28, 0.30); background-image: url('.esc_url(TF_ASSETS_APP_URL . '/images/feature-default.jpg').');' ?>">
+<div class="tf-hero-section-wrap" style="<?php echo !empty(get_the_post_thumbnail_url()) ? 'background: linear-gradient(0deg, rgba(48, 40, 28, 0.40) 0%, rgba(48, 40, 28, 0.40) 100%), url('.esc_url(get_the_post_thumbnail_url()).'), lightgray 0px -268.76px / 100% 249.543% no-repeat;background-size: cover; background-position: center;' : 'background-color: rgba(48, 40, 28, 0.30); background-image: url('.esc_url(TF_ASSETS_APP_URL . 'images/feature-default.jpg').');' ?>">
     <div class="tf-container">
         <div class="tf-hero-content">
             <div class="tf-wish-and-share">
@@ -18,13 +18,13 @@ use \Tourfic\Classes\Apartment\Pricing as Apt_Pricing;
                     if ( Helper::tfopt( 'wl-for' ) && in_array( 'li', Helper::tfopt( 'wl-for' ) ) ) {
                 ?>
                 <a class="tf-icon tf-wishlist-box tf-wishlist">
-                    <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo esc_attr( wp_create_nonce( "wishlist-nonce" ) ) ?>" data-id="<?php echo esc_attr( $post_id ) ?>" data-type="<?php echo esc_attr( $post_type ) ?>" <?php if ( Helper::tfopt( 'wl-page' ) ) { echo 'data-page-title="' . esc_attr( get_the_title( Helper::tfopt( 'wl-page' ) ) ) . '" data-page-url="' . esc_url( get_permalink( Helper::tfopt( 'wl-page' ) ) ) . '"'; } ?>></i>
+                    <i class="<?php echo $has_in_wishlist ? 'fas fa-heart tf-text-red remove-wishlist' : 'far fa-heart-o add-wishlist' ?>" data-nonce="<?php echo esc_attr( wp_create_nonce( "wishlist-nonce" ) ) ?>" data-id="<?php echo esc_attr( $post_id ) ?>" data-type="<?php echo esc_attr( $post_type ) ?>" <?php if ( Helper::tfopt( 'wl-page' ) ) { echo 'data-page-title="' . esc_attr( get_the_title( Helper::tfopt( 'wl-page' ) ) ) . '" data-page-url="' . esc_url( get_permalink( Helper::tfopt( 'wl-page' ) ) ) . '"'; } ?>></i>
                 </a>
                 <?php } } else{
                 if ( Helper::tfopt( 'wl-for' ) && in_array( 'lo', Helper::tfopt( 'wl-for' ) ) ) {
                 ?>
                 <a class="tf-icon tf-wishlist-box tf-wishlist">
-                    <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo esc_attr( wp_create_nonce( "wishlist-nonce" ) ) ?>" data-id="<?php echo esc_attr( $post_id ) ?>" data-type="<?php echo esc_attr( $post_type ) ?>" <?php if ( Helper::tfopt( 'wl-page' ) ) { echo 'data-page-title="' . esc_attr( get_the_title( Helper::tfopt( 'wl-page' ) ) ) . '" data-page-url="' . esc_url( get_permalink( Helper::tfopt( 'wl-page' ) ) ) . '"'; } ?>></i>
+                    <i class="<?php echo $has_in_wishlist ? 'fas fa-heart tf-text-red remove-wishlist' : 'far fa-heart-o add-wishlist' ?>" data-nonce="<?php echo esc_attr( wp_create_nonce( "wishlist-nonce" ) ) ?>" data-id="<?php echo esc_attr( $post_id ) ?>" data-type="<?php echo esc_attr( $post_type ) ?>" <?php if ( Helper::tfopt( 'wl-page' ) ) { echo 'data-page-title="' . esc_attr( get_the_title( Helper::tfopt( 'wl-page' ) ) ) . '" data-page-url="' . esc_url( get_permalink( Helper::tfopt( 'wl-page' ) ) ) . '"'; } ?>></i>
                 </a>
                 <?php } } } ?>
 
@@ -71,7 +71,7 @@ use \Tourfic\Classes\Apartment\Pricing as Apt_Pricing;
                             <i class="ri-links-line"></i>
                                 <span class="tf-button-text share-center-copied-message"><?php esc_html_e( 'Link Copied!', 'tourfic' ); ?></span>
                             </a>
-                            <input type="text" id="share_link_input" class="share-center-url share-center-url-input" value="<?php echo esc_attr( $share_link ); ?>" readonly style="opacity: 0; width: 0px !important;margin: 0px">
+                            <input type="text" id="share_link_input" class="share-center-url share-center-url-input" value="<?php echo esc_attr( $share_link ); ?>" readonly>
                         </li>
                     </ul>
                     <a href="#dropdown-share-center" class="tf-share-toggle tf-icon tf-social-box"
@@ -170,8 +170,8 @@ use \Tourfic\Classes\Apartment\Pricing as Apt_Pricing;
             <?php
             if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-aprtment-layout-part-1']) ){
                 foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-aprtment-layout-part-1'] as $section){
-                    if( !empty($section['aprtment-section-status']) && $section['aprtment-section-status']=="1" && !empty($section['aprtment-section-slug']) ){
-                        include TF_TEMPLATE_PART_PATH . 'apartment/design-1/'.$section['aprtment-section-slug'].'.php';
+                    if( !empty($section['status']) && $section['status']=="1" && !empty($section['slug']) ){
+                        include TF_TEMPLATE_PART_PATH . 'apartment/design-1/'.$section['slug'].'.php';
                     }
                 }
             }else{
@@ -195,7 +195,7 @@ use \Tourfic\Classes\Apartment\Pricing as Apt_Pricing;
             <?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && isset( $meta['surroundings_places'] ) && ! empty( Helper::tf_data_types( $meta['surroundings_places'] ) ) ): ?>
             <div class="tf-whats-around tf-single-widgets">
                 <?php if ( ! empty( $meta['surroundings_sec_title'] ) ): ?>
-                    <h2 class="tf-section-title"><?php echo esc_html( $meta['surroundings_sec_title'] ); ?></h2>
+                    <h3 class="tf-section-title"><?php echo esc_html( $meta['surroundings_sec_title'] ); ?></h3>
                 <?php endif; ?>
                 <ul>
                     <?php foreach ( Helper::tf_data_types( $meta['surroundings_places'] ) as $surroundings_place ) : ?>
@@ -218,7 +218,7 @@ use \Tourfic\Classes\Apartment\Pricing as Apt_Pricing;
             <?php endif; ?>
 
             <div id="hotel-map-location" class="tf-location tf-single-widgets">
-                <h2 class="tf-section-title"><?php echo ! empty( $meta['location_title'] ) ? esc_html( $meta['location_title'] ) : ''; ?></h2>
+                <h3 class="tf-section-title"><?php echo ! empty( $meta['location_title'] ) ? esc_html( $meta['location_title'] ) : ''; ?></h3>
                 <?php if ( !defined( 'TF_PRO' ) ) { ?>
                     <?php
                     if( $address && $tf_openstreet_map!="default" && ( empty($address_latitude) || empty($address_longitude) ) ){ ?>
@@ -325,7 +325,7 @@ use \Tourfic\Classes\Apartment\Pricing as Apt_Pricing;
                 ) );
                 ?>
                 <?php if( empty($tf_comment_counts) && $tf_comment_counts == 0 ) : ?>
-                    <button class="tf-review-open button">
+                    <button class="tf_btn tf_btn_full tf_btn_sharp tf_btn_large tf-review-open">
                         <?php esc_html_e("Leave your review", "tourfic"); ?>
                     </button>
                 <?php endif; ?>
@@ -384,7 +384,7 @@ use \Tourfic\Classes\Apartment\Pricing as Apt_Pricing;
                     }
                     if( !empty( $tf_enquiry_section_button )) {
                         ?>
-                        <div class="tf-btn"><a href="#" id="tf-ask-question-trigger" class="tf-send-inquiry-btn"><span><?php echo esc_html( $tf_enquiry_section_button ); ?></span></a></div>
+                        <div class="tf-btn-wrap"><a href="javaScript:void(0);" data-target="#tf-ask-modal" class="tf-modal-btn tf_btn"><span><?php echo esc_html( $tf_enquiry_section_button ); ?></span></a></div>
                         <?php
                     }
                     ?>
@@ -398,8 +398,8 @@ use \Tourfic\Classes\Apartment\Pricing as Apt_Pricing;
     <?php
     if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-aprtment-layout-part-2']) ){
         foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-aprtment-layout-part-2'] as $section){
-            if( !empty($section['aprtment-section-status']) && $section['aprtment-section-status']=="1" && !empty($section['aprtment-section-slug']) ){
-                include TF_TEMPLATE_PART_PATH . 'apartment/design-1/'.$section['aprtment-section-slug'].'.php';
+            if( !empty($section['status']) && $section['status']=="1" && !empty($section['slug']) ){
+                include TF_TEMPLATE_PART_PATH . 'apartment/design-1/'.$section['slug'].'.php';
             }
         }
     }else{
@@ -463,14 +463,14 @@ if ( $disable_related_sec !== '1' ) {
     );
     $related_apartment = new WP_Query( $args );
     if ( $related_apartment->have_posts() ) { ?>
-        <!-- Tourfic related tours tours -->
-        <div class="tf-related-tours">
+        <!-- Tourfic related -->
+        <div class="tf-related-items-section">
             <div class="tf-container">
                 <div class="tf-container-inner">
                     <div class="section-title">
                         <h2 class="tf-title"><?php echo ! empty( $meta['related_apartment_title'] ) ? esc_html( $meta['related_apartment_title'] ) : ''; ?></h2>
                     </div>
-                    <div class="tf-design-3-slider-items-wrapper tf-upcomming-tours-list-outter tf-flex tf-flex-gap-24">
+                    <div class="tf-design-3-slider-items-wrapper tf-slick-slider tf-upcomming-tours-list-outter tf-flex tf-flex-gap-24">
                         <?php
                         while ( $related_apartment->have_posts() ) {
                             $related_apartment->the_post();
@@ -487,7 +487,7 @@ if ( $disable_related_sec !== '1' ) {
                                 <div class="tf-slider-item tf-post-box-lists">
                                     <div class="tf-post-single-box">
                                         <div class="tf-image-data">
-                                            <img src="<?php echo ! empty( get_the_post_thumbnail_url( $selected_design_post_id, 'full' ) ) ? esc_url( get_the_post_thumbnail_url( $selected_design_post_id, 'full' )  ): esc_url(TF_ASSETS_APP_URL . '/images/feature-default.jpg'); ?>" alt="">
+                                            <img src="<?php echo ! empty( get_the_post_thumbnail_url( $selected_design_post_id, 'full' ) ) ? esc_url( get_the_post_thumbnail_url( $selected_design_post_id, 'full' )  ): esc_url(TF_ASSETS_APP_URL . 'images/feature-default.jpg'); ?>" alt="">
                                         </div>
                                         <div class="tf-meta-info">
                                             <div class="meta-content">

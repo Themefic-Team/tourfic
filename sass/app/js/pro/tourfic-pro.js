@@ -12,50 +12,6 @@
             }
         });
 
-        const alert_popup = {
-            success: function (title, message) {
-                $.confirm({
-                    icon: 'fa fa-check',
-                    theme: 'modern',
-                    title: title,
-                    content: message,
-                    type: 'green',
-                    typeAnimated: true,
-                    boxWidth: '500px',
-                    animationSpeed: 200,
-                    animation: 'zoom',
-                    useBootstrap: false,
-                    closeIcon: true,
-                    buttons: {
-                        OK: {
-                            btnClass: 'btn-blue',
-                            
-                        }
-                    }
-                })
-            },
-
-            error: function (title, message) {
-                $.confirm({
-                    icon: 'fa fa-times',
-                    theme: 'modern',
-                    title: title,
-                    content: message,
-                    type: 'red',
-                    typeAnimated: true,
-                    animationSpeed: 200,
-                    boxWidth: '500px',
-                    useBootstrap: false,
-                    closeIcon: true,
-                    buttons: {
-                        OK: {
-                            btnClass: 'btn-red',
-                        }
-                    }
-                })
-            }
-        }
-
         /**
          * Airport Service Price
          */
@@ -97,34 +53,6 @@
                 },
             });
         });
-
-        // $(document).on("click", ".tf_air_service", function (e) {
-        //     e.preventDefault();
-        //     var $this = $(this);
-        //     var roomnumber = $(this).closest('.reserve').find('select[name=hotel_room_selected] option').filter(':selected').val();
-        //     var room_id = $(this).closest('.room-submit-wrap').find('input[name=room_id]').val();
-        //     var unique_id = $(this).closest('.room-submit-wrap').find('input[name=unique_id]').val();
-        //     var hotel_deposit = $(this).closest('.room-submit-wrap').find('input[name=make_deposit]').is(':checked');
-
-        //     if (roomnumber == 0) {
-        //         $(this).closest('.room-submit-wrap').find('.roomselectissue').html('<span style="color:red">' + tf_pro_params.select_room + '</span>');
-        //     } else {
-        //         $(this).closest('.room-submit-wrap').find('.roomselectissue').html('');
-        //         $("#hotel_room_number").val(roomnumber);
-        //         $("#hotel_roomid").val(room_id);
-        //         $("#hotel_room_uniqueid").val(unique_id);
-        //         $("#hotel_room_depo").val(hotel_deposit);
-        //         $.fancybox.open({
-        //             src: $(this).closest('.tf-room').find('.tf-hotel-services-wrap'),
-        //             type: 'inline',
-        //             afterClose: function () {
-        //                 $('#airport-service option:first').prop('selected', true);
-        //                 $('.tf-airport-pickup-response').html('');
-        //             }
-        //         });
-        //     }
-        // });
-
 
         /*
         * Affiliate booking form ajax
@@ -205,8 +133,11 @@
                             window.open(obj.url, '_blank');
                         }
                     } else {
-
-                        alert_popup.error(obj.title, obj.message);
+                        Swal.fire(
+                            obj.title,
+                            obj.message,
+                            'error'
+                        )
                     }
                 },
                 error: function () {
@@ -252,8 +183,11 @@
                             window.open(obj.url, '_blank');
                         }
                     } else {
-
-                        alert_popup.error(obj.title, obj.message);
+                        Swal.fire(
+                            obj.title,
+                            obj.message,
+                            'error'
+                        )
                     }
                 },
                 error: function () {
@@ -620,9 +554,11 @@
                     const obj = JSON.parse(response);
                     if (!obj.success) {
                         if (obj.message) {
-
-                            alert_popup.error( "Error!" , obj.message);
-
+                            Swal.fire(
+                                'Error!',
+                                obj.message,
+                                'error'
+                            )
                             form.find('input').removeClass('error-input');
                             form.find('textarea').removeClass('error-input');
                             form.find('input').closest('.tf-reg-field').find('small.text-danger').remove();
@@ -640,19 +576,20 @@
                             }
                         }
                     } else {
-                        alert_popup.success("Success!", obj.message);
+                        Swal.fire(
+                            'Success!',
+                            obj.message,
+                            'success'
+                        )
                         form[0].reset();
                         form.find('input').removeClass('error-input');
                         form.find('textarea').removeClass('error-input');
                         form.find('input').closest('.tf-reg-field').find('small.text-danger').remove();
                         form.find('textarea').closest('.tf-reg-field').find('small.text-danger').remove();
                     }
-                    setTimeout(function() { 
-                        if (obj.redirect_url) {
-                            window.location.href = obj.redirect_url;
-                        }
-                    }, 2000);
-                    
+                    if (obj.redirect_url) {
+                        window.location.href = obj.redirect_url;
+                    }
                     btn.removeClass('tf-btn-loading');
                 },
             });
@@ -713,9 +650,11 @@
                     const obj = JSON.parse(response);
                     if (!obj.success) {
                         if (obj.message) {
-
-                            alert_popup.error("Error!", obj.message);
-
+                            Swal.fire(
+                                'Error!',
+                                obj.message,
+                                'error'
+                            )
                             form.find('input').removeClass('error-input');
                             form.find('textarea').removeClass('error-input');
                             form.find('input').closest('.tf-reg-field').find('small.text-danger').remove();
@@ -734,42 +673,42 @@
                             }
                         }
                     } else {
-    
-                        $.confirm({
-                            icon: 'fa fa-check',
-                            theme: 'modern',
-                            title: "Success!",
-                            content: obj.message,
-                            type: 'green',
-                            typeAnimated: true,
-                            boxWidth: '500px',
-                            useBootstrap: false,
-                            animation: 'zoom',
-                            closeIcon: true,
-                            animationSpeed: 200,
-                            buttons: {
-                                OK: {
-                                    btnClass: 'btn-blue',
-                                    action: function() {
-                                        if (obj.redirect_url) {
-                                            window.location.href = obj.redirect_url;
-                                        }
-                                    },
-
+                        Swal.fire(
+                            'Success!',
+                            obj.message,
+                            'success'
+                        ).then((result) => {
+                            if (result.isConfirmed || result.isDismissed) {
+                                if (obj.redirect_url) {
+                                    window.location.href = obj.redirect_url;
                                 }
                             }
-                        })
+                        });
                         form[0].reset();
                         form.find('input').removeClass('error-input');
                         form.find('textarea').removeClass('error-input');
                         form.find('input').closest('.tf-reg-field').find('small.text-danger').remove();
                         form.find('textarea').closest('.tf-reg-field').find('small.text-danger').remove();
                     }
+                    if (obj.redirect_url) {
+                        //window.location.href = obj.redirect_url;
+                    }
                     btn.removeClass('tf-btn-loading');
                 },
             });
 
         });
+
+        if($('[name=tf_role]').length > 0) {
+            $(document).on('change', '[name=tf_role]', function () {
+                let role = $(this).val();
+                if (role == 'tf_vendor') {
+                    $('.tf-reg-extra-fields').show();
+                } else {
+                    $('.tf-reg-extra-fields').hide();
+                }
+            });
+        }
 
         /* get wishlist from localstorage  */
         const wishKey = 'wishlist_item';

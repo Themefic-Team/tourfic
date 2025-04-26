@@ -4,7 +4,7 @@ Button
 .tf-admin-btn {
   display: inline-flex;
   @include align-items(center);
-  background-color: #fff;
+  background-color: #ffffff;
   color: #003c79;
   padding: 10px 25px;
   border: 1px solid #003c79;
@@ -12,29 +12,29 @@ Button
   font-weight: 500;
   text-decoration: none;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 1rem;
   @include transition(all, 0.3s);
 
   i {
     margin-right: 8px;
-    font-size: 18px;
+    font-size: 1.125rem;
   }
 
   &:hover {
     background-color: #003c79;
-    color: #fff;
+    color: #ffffff;
   }
 
   &.tf-btn-secondary {
     background-color: #003c79;
     border-color: #003c79;
-    color: #fff;
+    color: #ffffff;
     font-weight: 600;
 
     &:hover {
       background-color: #001f3e;
       border-color: #001f3e;
-      color: #fff;
+      color: #ffffff;
     }
   }
 
@@ -47,7 +47,7 @@ Button
 }
 .tf-btn{
   font-size: 1rem;
-  color: #fff;
+  color: #ffffff;
   background-color: #003c79;
   border-radius: 5px;
   -webkit-border-radius: 5px;
@@ -66,7 +66,7 @@ Button
   outline: none;
   &:hover{
     background-color: #002f5e;
-    color: #fff;
+    color: #ffffff;
     border: none;
     box-shadow: none !important;
     outline: none;
@@ -83,12 +83,12 @@ Button
   font-weight: 500;
   text-decoration: underline;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 1rem;
   color: #003c79;
 
   i {
     margin-right: 8px;
-    font-size: 18px;
+    font-size: 1.125rem;
   }
 }
 
@@ -123,10 +123,6 @@ Custom Modal
     margin: 20px auto;
     position: relative;
     pointer-events: none;
-
-    @media #{$min576} {
-      min-height: calc(100% - 40px);
-    }
   }
 
   .tf-modal-content {
@@ -176,25 +172,25 @@ Ajax Loader
   display: inline-block;
   width: 12px;
   height: 12px;
-  border: 2px solid #fff;
+  border: 2px solid #ffffff;
   border-left-color: transparent;
   border-radius: 50%;
   vertical-align: middle;
   visibility: visible;
   opacity: 1;
   transition: opacity .2s ease, visibility .2s ease;
-  -webkit-animation: wd-rotate 450ms infinite linear;
-  animation: wd-rotate 450ms infinite linear;
+  -webkit-animation: tf-rotate 450ms infinite linear;
+  animation: tf-rotate 450ms infinite linear;
 }
 
-@-webkit-keyframes wd-rotate {
+@-webkit-keyframes tf-rotate {
   100% {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
   }
 }
 
-@keyframes wd-rotate {
+@keyframes tf-rotate {
   100% {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
@@ -221,15 +217,15 @@ body.tf-modal-open {
   }
 }
 #poststuff h2{
-  @media #{$max991}{
+  @media #{$max1024}{
     justify-content: initial;
   }
 }
 #poststuff h2 a{
   color: #222;
-  font-size: 20px;
+  font-size: 1.25rem;
   display: none;
-  @media #{$max991}{
+  @media #{$max1024}{
     display: inline-block;
     margin-right: 15px;
   }
@@ -268,7 +264,7 @@ Fontawesome
     align-items: center;
     span{
       font-weight: 700;
-      font-size: 15px;
+      font-size: 0.938rem;
     }
     .switch {
         margin-left: 15px;
@@ -308,7 +304,7 @@ Fontawesome
   width: 18px;
   left: 2px;
   bottom: 1px;
-  background-color: white;
+  background: #ffffff;
   -webkit-transition: .4s;
   transition: .4s;
 }
@@ -348,25 +344,10 @@ Fontawesome
 }
 .tf-small-btn {
   margin-left:10px;
-  font-size: 12px;
+  font-size: 0.75rem;
   padding: 7px 15px;
 } 
 
-
-// Jquery Confirm CSS
-
-.jconfirm .jconfirm-box.jconfirm-type-orange {
-  border: 1px solid #f1c40f;
-}
-
-.jconfirm.jconfirm-modern .jconfirm-box div.jconfirm-content {
-  min-height: 24px;
-}
-
-.jconfirm.jconfirm-modern.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
-  margin-bottom: 25px;
-}
-
-.jconfirm .jconfirm-box div.jconfirm-content-pane.no-scroll {
-  margin: 0;
+.jconfirm .jconfirm-box div.jconfirm-content-pane .jconfirm-content {
+  overflow: hidden !important;
 }

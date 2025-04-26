@@ -133,7 +133,7 @@ class TF_Review {
     }
 
     function tf_comment_reply_link_filter( $content ) {
-        return '<div id="tourfic-rating" style="display: none">' . $content . '</div>';
+        return '<div id="tf-rating" style="display: none">' . $content . '</div>';
     }
 
     function tf_redirect_user_to_previous_url() {
@@ -272,10 +272,8 @@ class TF_Review {
 			'comment_notes_after'  => '',
 			//Submit Button ID
 			'id_submit'            => 'comment-submit',
-			// The comment submit element class attribute. Default 'submit'.
-			// 'class_submit' => 'tf_button',
 			//Submit Button html
-			'submit_button'        => '<input name="%1$s" type="submit" id="%2$s" class="tf_button btn-styled" value="%4$s" />',
+			'submit_button'        => '<input name="%1$s" type="submit" id="%2$s" class="tf_btn tf_btn_small" value="%4$s" />',
 			'submit_field'         => '<div class="tf-review-submit">%1$s %2$s</div>',
 		];
 		comment_form( $comments_args );
@@ -638,11 +636,11 @@ class TF_Review {
             $tf_apartment_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] : 'default';
             $tf_car_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['car-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['car-archive'] : 'design-1';
             
-            if( ( "tf_tours"==$tf_current_post && $tf_tour_arc_selected_template=="design-1" || $tf_tour_arc_selected_template=="design-3") || 
-            ( "tf_hotel"==$tf_current_post && $tf_hotel_arc_selected_template=="design-1" || $tf_hotel_arc_selected_template=="design-3" ) ||
+            if( ( "tf_tours"==$tf_current_post && ($tf_tour_arc_selected_template=="design-1" || $tf_tour_arc_selected_template=="design-3")) || 
+            ( "tf_hotel"==$tf_current_post && ($tf_hotel_arc_selected_template=="design-1" || $tf_hotel_arc_selected_template=="design-3") ) ||
             ( "tf_apartment"==$tf_current_post && $tf_apartment_arc_selected_template=="design-2" )){
             ?>
-            <div class="tf-reviews tf-flex tf-mt-16 tf-flex-gap-12">
+            <div class="tf-reviews tf-flex tf-flex-gap-12">
                 <div class="tf-review-items">
                     <i class="fa-regular fa-star"></i>
                     <i class="fa-regular fa-star"></i>
@@ -661,7 +659,9 @@ class TF_Review {
                 </div>
             </div>
             <?php
-            } elseif( ( "tf_tours"==$tf_current_post && $tf_tour_arc_selected_template=="design-2" ) || ( "tf_hotel"==$tf_current_post && $tf_hotel_arc_selected_template=="design-2" ) || ( "tf_apartment"==$tf_current_post && $tf_apartment_arc_selected_template=="design-1" ) ){ ?>
+            } elseif( ( "tf_tours"==$tf_current_post && $tf_tour_arc_selected_template=="design-2" ) || 
+            ( "tf_hotel"==$tf_current_post && $tf_hotel_arc_selected_template=="design-2" ) || 
+            ( "tf_apartment"==$tf_current_post && $tf_apartment_arc_selected_template=="design-1" ) ){ ?>
                 <span class="tf-available-rating-number">
                     <?php esc_html_e('0.0','tourfic'); ?>
                 </span>

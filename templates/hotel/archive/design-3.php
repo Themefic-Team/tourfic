@@ -1,4 +1,4 @@
-<div class="tf-hotel-template-4">
+<div class="tf-archive-template__three">
 
     <div class="tf-content-wrapper">
         <?php
@@ -12,7 +12,6 @@
         $tf_hotel_arc_banner = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel_archive_design_3_bannar'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel_archive_design_3_bannar'] : '';
         $tf_map_settings = !empty(Helper::tfopt('google-page-option')) ? Helper::tfopt('google-page-option') : "default";
         $tf_map_api = !empty(Helper::tfopt('tf-googlemapapi')) ? Helper::tfopt('tf-googlemapapi') : '';
-        $tf_map_marker = !empty(Helper::tfopt('map_template_marker')) ? Helper::tfopt('map_template_marker') : '';
         ?>
 
         <div class="tf-archive-search-form tf-booking-form-wrapper" style="<?php echo !empty($tf_hotel_arc_banner) ? 'background-image: url('.esc_url($tf_hotel_arc_banner).')' : ''; ?>">
@@ -34,7 +33,7 @@
                                 <div class="tf-notice tf-mt-24 tf-mb-30">
                                     <?php
                                     if (current_user_can('administrator')) {
-                                        echo '<p>' . esc_html__('Google Maps is selected but the API key is missing. Please configure the API key ', 'tourfic') . '<a href="' . esc_url(admin_url('admin.php?page=tf_settings#tab=map_settings')) . '" target="_blank">' . esc_html__('Map Settings', 'tourfic') . '</a></p>';
+                                        echo '<p>' . esc_html__('Google Maps is selected but the API key is missing. Please configure the API key', 'tourfic') . '<a href="' . esc_url(admin_url('admin.php?page=tf_settings#tab=map_settings')) . '" target="_blank">' . esc_html__('Map Settings', 'tourfic') . '</a></p>';
                                     } else {
                                         echo '<p>' . esc_html__('Access is restricted as Google Maps API key is not configured. Please contact the site administrator.', 'tourfic') . '</p>';
                                     }
@@ -296,7 +295,7 @@
                                     </svg>
                                     <span><?php echo esc_html__('List view', 'tourfic') ?></span>
                                 </a>
-                                <div id="map-marker" data-marker="<?php echo !empty($tf_map_marker) ? esc_url($tf_map_marker) : esc_url(TF_ASSETS_URL . 'app/images/cluster-marker.png'); ?>"></div>
+                                <div id="map-marker" data-marker="<?php echo esc_url(TF_ASSETS_URL . 'app/images/cluster-marker.png'); ?>"></div>
                                 <div class="tf-hotel-archive-map-wrap">
                                     <div id="tf-hotel-archive-map"></div>
                                 </div>

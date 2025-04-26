@@ -1,0 +1,33 @@
+.single-tf_tours{
+    .tf-single-template{
+        &__one{
+            .tf-tour-features {
+                ul {
+                    margin: 0;
+                    padding: 0;
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: flex-start;
+                    list-style-type: none;
+                    gap: 5px;
+
+                    li{
+                        display: inline-flex;
+                        justify-content: flex-start;
+                        background-color: $color-filling-fg;
+                        border-radius: 5px;
+                        padding: 10px 15px;
+                        text-transform: capitalize;
+                        margin: 5px 16px 10px 0px;
+                        font-size: 0.938rem;
+                        font-weight: 300;
+                        
+                        .tf-tour-features-icon {
+                            margin-right: 8px;
+                        } 
+                    }
+                }
+            }
+        }
+    }
+}

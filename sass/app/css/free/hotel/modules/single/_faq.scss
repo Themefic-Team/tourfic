@@ -1,0 +1,60 @@
+.single-tf_hotel{
+    .tf-single-template{
+        &__legacy{
+            .hotel-faq .tf-faq-sec-title {
+                text-align: left;
+                margin-bottom: 20px;
+            }
+        }
+        &__one{
+            .tf-hotel-faqs-section{
+                .tf-hotel-enquiry{
+                    flex-basis: 32%;
+                    padding-right: 30px;
+                    @media #{$max768}{
+                        flex-basis: 100%;
+                        padding-right: 0px;
+                    }
+                    .tf-ask-enquiry{
+                        background-color: $color-filling-fg;
+                        padding: 30px;
+                        h3{
+                            font-size: 1.563rem;
+                        }
+                    }
+                }
+                .tf-hotel-faqs{
+                    flex-basis: 68%;
+                    @media #{$max768}{
+                        flex-basis: 100%;
+                        margin-top: 30px;
+                    }
+                    .tf-faq-wrapper{
+                        .tf-faq-single {
+                            border-bottom: 0px solid;
+                            .tf-faq-single-inner{
+                                margin: 0px 0px 30px 0px;
+                                background: $color-filling-fg;
+                                transition: .3s all ease;
+                                @media #{$max768}{
+                                    margin: 0px 0px 20px 0px;
+                                }
+                                &:hover{
+                                    background: $color-brand-lite;
+                                }
+                                h3{
+                                    font-size: 1.25rem;
+                                }
+                            }
+                        }
+                        .tf-faq-single.active {
+                            .tf-faq-single-inner{
+                                background: $color-brand-lite;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

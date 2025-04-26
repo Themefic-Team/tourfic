@@ -40,13 +40,12 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					'id'       => 'tf_single_car_template',
 					'type'     => 'imageselect',
 					'label'    => esc_html__( 'Single Car Page Layout', 'tourfic' ),
-					'multiple' 		=> true,
-					'inline'   		=> true,
-					'options'   	=> array( 
-						'design-1' 				=> array(
-							'title'			=> 'Design 1',
-							'url' 			=> TF_ASSETS_ADMIN_URL."images/template/design-1-car.jpg",
-						)
+					'options'  => array(
+						'design-1' => array(
+							'title' => esc_html__('Design 1', 'tourfic'),
+							'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-car-design-1.png",
+							'preview_link' => esc_url('https://tourfic.com/preview/cars/honda-city/'),
+						),
 					),
 					'default'   	=> 'design-1',
 					'dependency'  => [

@@ -18,17 +18,13 @@ class Enqueue {
 	public function __construct() {
 		add_filter( 'wp_enqueue_scripts', array( $this, 'tf_dequeue_scripts' ), 9999 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'tf_enqueue_scripts' ) );
-		add_action( 'wp_enqueue_scripts', array( $this, 'tourfic_google_fonts_scriptss' ), 9999999 );
 		// add_action( 'elementor/editor/after_enqueue_scripts', array( $this, 'tf_enqueue_scripts' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'tf_enqueue_admin_scripts' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'tf_dequeue_theplus_script_on_settings_page' ), 9999 );
-		add_action( 'wp_enqueue_scripts', array( $this, 'tf_custom_css' ), 99999 );
-		add_action( 'wp_enqueue_scripts', array( $this, 'tf_hotel_css' ), 99999 );
-		add_action( 'wp_enqueue_scripts', array( $this, 'tf_tour_css' ), 99999 );
-		add_action( 'wp_enqueue_scripts', array( $this, 'tf_apartment_css' ), 99999 );
 
 		add_action( 'admin_enqueue_scripts', array( $this, 'tf_options_admin_enqueue_scripts' ), 9 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'tf_options_wp_enqueue_scripts' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'tf_global_custom_css' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'tf_required_taxonomies' ) );
 	}
 
@@ -66,7 +62,31 @@ class Enqueue {
 		$slick_cdn        = ! empty( Helper::tfopt( 'slick_cdn' ) ) ? Helper::tfopt( 'slick_cdn' ) : false;
 		$fa_cdn           = ! empty( Helper::tfopt( 'fa_cdn' ) ) ? Helper::tfopt( 'fa_cdn' ) : false;
 		$min_css          = ! empty( Helper::tfopt( 'css_min' ) ) ? '.min' : '';
-		$min_js           = ! empty( Helper::tfopt( 'js_min' ) ) ? '.min' : '';
+		$min_js           = ! empty( Helper::tfopt( 'js_min' ) ) ? '.min' : '';		
+		$tf_disable_services = ! empty( Helper::tfopt( 'disable-services' ) ) ? Helper::tfopt( 'disable-services' ) : [];
+		$tf_services = [
+			'apartment' => 'tf_apartment',
+			'carrentals' => 'tf_carrental',
+			'tour' => 'tf_tours',
+			'hotel' => 'tf_hotel',
+		];
+
+		$tax_post_type = '';
+        if (is_tax()) {
+            $taxonomy = get_queried_object();
+
+            if ($taxonomy && !is_wp_error($taxonomy)) {
+                $taxonomy_name = $taxonomy->taxonomy;
+
+                // Retrieve the taxonomy object
+                $taxonomy_obj = get_taxonomy($taxonomy_name);
+
+                // Get the post types associated with the taxonomy
+                if (!empty($taxonomy_obj->object_type)) {
+                    $tax_post_type = $taxonomy_obj->object_type[0];
+                }
+            }
+        }
 
 		/*
 		 * Ubuntu font load for hotel, tour, apartment template 3
@@ -95,6 +115,13 @@ class Enqueue {
 
 		//Updated CSS
 		wp_enqueue_style( 'tf-app-style', TF_ASSETS_URL . 'app/css/tourfic-style' . $min_css . '.css', null, TF_VERSION );
+	
+		foreach ($tf_services as $key => $post_type) {
+			if (!in_array($key, $tf_disable_services) && (is_singular($post_type) || is_post_type_archive($post_type) || $post_type == $tax_post_type)) {
+				wp_enqueue_style("tf-app-{$key}", TF_ASSETS_URL . "app/css/tourfic-{$key}" . $min_css . ".css", null, TF_VERSION);
+			}
+		}
+
 		if ( get_post_type() == 'tf_tours' ) {
 
 			if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
@@ -213,32 +240,6 @@ class Enqueue {
 		wp_enqueue_script( 'googleapis', 'https://maps.googleapis.com/maps/api/js?key=' . $tf_map_api_key . '&sensor=false&amp;libraries=places', array(), TOURFIC, true );
 		wp_enqueue_script( 'markerclusterer', TF_ASSETS_URL . 'app/libs/markerclusterer.min.js', array(), TOURFIC, true );
 		wp_enqueue_script('map-marker-label', TF_ASSETS_URL . 'app/libs/markerwithlabel.js', array(), TOURFIC, true);
-
-
-		/**
-		 * Hotel Min and Max Price
-		 */
-
-		// $hotel_min_max_price = !empty(get_option( 'tf_hotel_min_max_price' )) ? get_option( 'tf_hotel_min_max_price' ) : array('min' => 0, 'max' => 1);
-		// $hotel_min_max_price = HotelPricing::get_min_max_price_from_all_hotel();
-
-		/**
-		 * Tour Min and Max Price
-		 */
-		// $tour_min_max_price = TourPricing::get_min_max_price_from_all_tour();
-		// $tour_min_max_price = !empty( get_option( 'tf_tours_min_max_price' ) ) ? get_option( 'tf_tours_min_max_price' ) : array('min' => 0, 'max' => 1);
-
-
-		/*
-		 * Apartment Min and Max Price
-		 */
-		// $tf_apartment_min_max_price = ApartmentPricing::get_min_max_price_from_all_apartment();
-		// $tf_apartment_min_max_price = !empty( get_option( 'tf_apt_min_max_price' ) ) ? get_option( 'tf_apt_min_max_price' ) : array('min' => 0, 'max' => 1);
-		
-		/**
-		 * Cars Min and Max Price
-		 */
-		// $tf_car_min_max_price = !empty( get_option( 'tf_transport_min_max_price' ) ) ? get_option( 'tf_transport_min_max_price' ) : array('min' => 0, 'max' => 1);
 
 		/**
 		 * Tour booking form
@@ -436,6 +437,8 @@ class Enqueue {
 
 		}
 
+		// var_dump(Helper::tf_templates_body_class());
+		// die();
 
 		/**
 		 * Custom
@@ -446,6 +449,7 @@ class Enqueue {
 				'nonce'                  => wp_create_nonce( 'tf_ajax_nonce' ),
 				'ajax_url'               => admin_url( 'admin-ajax.php' ),
 				'single'                 => is_single(),
+				'body_classes'           => Helper::tf_templates_body_class(),
 				'locations'              => Helper::get_terms_dropdown('hotel_location'),
 				'apartment_locations'    => Helper::get_terms_dropdown('apartment_location'),
 				'tour_destinations'      => Helper::get_terms_dropdown('tour_destination'),
@@ -962,8 +966,8 @@ class Enqueue {
 			wp_enqueue_style( 'tf-admin', TF_ASSETS_ADMIN_URL . 'css/tourfic-admin.min.css', '', TF_VERSION );
 
 			if( $swal_cdn ) {
-				wp_enqueue_style( 'tf-admin-jquery-confirm', '//cdn.jsdelivr.net/npm/jquery-confirm@3.3.4/dist/jquery-confirm.min.css', '', TF_VERSION );
-				wp_enqueue_script( 'tf-admin-jquery-confirm', '//cdn.jsdelivr.net/npm/jquery-confirm@3.3.4/dist/jquery-confirm.min.js', array( 'jquery' ), TF_VERSION, true );
+				wp_enqueue_style( 'tf-admin-jquery-confirm', '//cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.css', '', TF_VERSION );
+				wp_enqueue_script( 'tf-admin-jquery-confirm', '///cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.js', array( 'jquery' ), TF_VERSION, true );
 			} else {
 				wp_enqueue_style( 'tf-admin-jquery-confirm', TF_ASSETS_APP_URL . 'libs/jq-confirm/jquery-confirm.min.css', '', TF_VERSION );
 				wp_enqueue_script( 'tf-admin-jquery-confirm', TF_ASSETS_APP_URL . 'libs/jq-confirm/jquery-confirm.min.js', array( 'jquery' ), TF_VERSION, true );
@@ -1124,6 +1128,168 @@ class Enqueue {
 		wp_enqueue_style( 'tf-remixicon', '//cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css', array(), TF_VERSION );
 	}
 
+	/**
+	 * Enqueue Global CSS
+	 * @author Mofazzal
+	*/
+	public function tf_global_custom_css() {
+
+		$color_palette_template = ! empty( Helper::tfopt( 'color-palette-template' ) ) ? Helper::tfopt( 'color-palette-template' ) : 'design-1';
+		$tf_container = ! empty( Helper::tfopt( 'tf-container' ) ) ? Helper::tfopt( 'tf-container' ) : 'boxed';
+		$tf_container_width = ! empty( Helper::tfopt( 'tf-container-width' ) ) ? Helper::tfopt( 'tf-container-width' ) . 'px' : '1280px';
+
+		$design_default = [
+			'design-1' => [
+				'brand' => array(
+					'default' => '#0E3DD8',
+					'dark' => '#0A2B99',
+					'lite' => '#C9D4F7',
+				),
+				'text'  => array(
+					'heading' => '#1C2130',
+					'paragraph' => '#494D59',
+					'lite' => '#F3F5FD',
+				),
+				'border'  => array(
+					'default' => '#16275F',
+					'lite' => '#D1D7EE',
+				),
+				'filling'  => array(
+					'background' => '#ffffff',
+					'foreground' => '#F5F7FF',
+				),
+			],
+			'design-2' => [
+				'brand'  => array(
+					'default' => '#B58E53',
+					'dark' => '#917242',
+					'lite' => '#FAEEDC',
+				),
+				'text'  => array(
+					'heading' => '#30281C',
+					'paragraph' => '#595349',
+					'lite' => '#FDF9F3',
+				),
+				'border'  => array(
+					'default' => '#5F4216',
+					'lite' => '#EEE2D1',
+				),
+				'filling'  => array(
+					'background' => '#ffffff',
+					'foreground' => '#FDF9F3',
+				),
+			],
+			'design-3' => [
+				'brand'  => array(
+					'default' => '#F97415',
+					'dark' => '#C75605',
+					'lite' => '#FDDCC3',
+				),
+				'text'  => array(
+					'heading' => '#30241C',
+					'paragraph' => '#595049',
+					'lite' => '#FDF7F3',
+				),
+				'border'  => array(
+					'default' => '#5F3416',
+					'lite' => '#EEDDD1',
+				),
+				'filling'  => array(
+					'background' => '#ffffff',
+					'foreground' => '#FFF9F5',
+				),
+			],
+			'design-4' => [
+				'brand'  => array(
+					'default' => '#003061',
+					'dark' => '#002952',
+					'lite' => '#C2E0FF',
+				),
+				'text'  => array(
+					'heading' => '#1C2630',
+					'paragraph' => '#495159',
+					'lite' => '#F3F8FD',
+				),
+				'border'  => array(
+					'default' => '#163A5F',
+					'lite' => '#D1DFEE',
+				),
+				'filling'  => array(
+					'background' => '#ffffff',
+					'foreground' => '#F5FAFF',
+				),
+			],
+			'custom' => []
+		];
+
+		foreach ( $design_default as $key => $value ) {
+			if('custom' !== $key && $color_palette_template === $key){
+				
+				$tf_key_split = explode('-', $key);
+				$tf_id = end($tf_key_split);
+				$tf_brand_data = ! empty( Helper::tf_data_types( Helper::tfopt( "tf-d{$tf_id}-brand" ) ) ) ? Helper::tf_data_types( Helper::tfopt( "tf-d{$tf_id}-brand" ) ) : [];
+				$tf_text_data = ! empty( Helper::tf_data_types( Helper::tfopt( "tf-d{$tf_id}-text" ) ) ) ? Helper::tf_data_types( Helper::tfopt( "tf-d{$tf_id}-text" ) ) : [];
+				$tf_border_data = ! empty( Helper::tf_data_types( Helper::tfopt( "tf-d{$tf_id}-border" ) ) ) ? Helper::tf_data_types( Helper::tfopt( "tf-d{$tf_id}-border" ) ) : [];
+				$tf_filling_data = ! empty( Helper::tf_data_types( Helper::tfopt( "tf-d{$tf_id}-filling" ) ) ) ? Helper::tf_data_types( Helper::tfopt( "tf-d{$tf_id}-filling" ) ) : [];
+
+				$tf_brand_default = ! empty( $tf_brand_data['default'] ) ? $tf_brand_data['default'] : $value['brand']['default'];
+				$tf_brand_dark = ! empty( $tf_brand_data['dark'] ) ? $tf_brand_data['dark'] : $value['brand']['dark'];
+				$tf_brand_lite = ! empty( $tf_brand_data['lite'] ) ? $tf_brand_data['lite'] : $value['brand']['lite'];
+				$tf_text_heading = ! empty( $tf_text_data['heading'] ) ? $tf_text_data['heading'] : $value['text']['heading'];
+				$tf_text_paragraph = ! empty( $tf_text_data['paragraph'] ) ? $tf_text_data['paragraph'] : $value['text']['paragraph'];
+				$tf_text_lite = ! empty( $tf_text_data['lite'] ) ? $tf_text_data['lite'] : $value['text']['lite'];
+				$tf_border_default = ! empty( $tf_border_data['default'] ) ? $tf_border_data['default'] : $value['border']['default'];
+				$tf_border_lite = ! empty( $tf_border_data['lite'] ) ? $tf_border_data['lite'] : $value['border']['lite'];
+				$tf_filling_background = ! empty( $tf_filling_data['background'] ) ? $tf_filling_data['background'] : $value['filling']['background'];
+				$tf_filling_foreground = ! empty( $tf_filling_data['foreground'] ) ? $tf_filling_data['foreground'] : $value['filling']['foreground'];
+				
+			}else if('custom' === $key && $color_palette_template === $key){
+				$tf_brand_data = ! empty( Helper::tf_data_types( Helper::tfopt( "tf-{$key}-brand" ) ) ) ? Helper::tf_data_types( Helper::tfopt( "tf-{$key}-brand" ) ) : [];
+				$tf_text_data = ! empty( Helper::tf_data_types( Helper::tfopt( "tf-{$key}-text" ) ) ) ? Helper::tf_data_types( Helper::tfopt( "tf-{$key}-text" ) ) : [];
+				$tf_border_data = ! empty( Helper::tf_data_types( Helper::tfopt( "tf-{$key}-border" ) ) ) ? Helper::tf_data_types( Helper::tfopt( "tf-{$key}-border" ) ) : [];
+				$tf_filling_data = ! empty( Helper::tf_data_types( Helper::tfopt( "tf-{$key}-filling" ) ) ) ? Helper::tf_data_types( Helper::tfopt( "tf-{$key}-filling" ) ) : [];
+
+				$tf_brand_default = ! empty( $tf_brand_data['default'] ) ? $tf_brand_data['default'] : '';
+				$tf_brand_dark = ! empty( $tf_brand_data['dark'] ) ? $tf_brand_data['dark'] : '';
+				$tf_brand_lite = ! empty( $tf_brand_data['lite'] ) ? $tf_brand_data['lite'] : '';
+				$tf_text_heading = ! empty( $tf_text_data['heading'] ) ? $tf_text_data['heading'] : '';
+				$tf_text_paragraph = ! empty( $tf_text_data['paragraph'] ) ? $tf_text_data['paragraph'] : '';
+				$tf_text_lite = ! empty( $tf_text_data['lite'] ) ? $tf_text_data['lite'] : '';
+				$tf_border_default = ! empty( $tf_border_data['default'] ) ? $tf_border_data['default'] : '';
+				$tf_border_lite = ! empty( $tf_border_data['lite'] ) ? $tf_border_data['lite'] : '';
+				$tf_filling_background = ! empty( $tf_filling_data['background'] ) ? $tf_filling_data['background'] : '';
+				$tf_filling_foreground = ! empty( $tf_filling_data['foreground'] ) ? $tf_filling_data['foreground'] : '';
+			}
+		}
+
+		//container
+		if($tf_container == 'full-width'){
+			$tf_container_width = '100%';
+		}
+		
+		$base_font_size = apply_filters('tf_base_font_size', '16px');
+		$output = "
+			:root {
+				--tf-primary: {$tf_brand_default};
+				--tf-brand-dark: {$tf_brand_dark};
+				--tf-brand-lite: {$tf_brand_lite};
+				--tf-text-heading: {$tf_text_heading};
+				--tf-text-paragraph: {$tf_text_paragraph};
+				--tf-text-lite: {$tf_text_lite};
+				--tf-border-default: {$tf_border_default};
+				--tf-border-lite: {$tf_border_lite};
+				--tf-filling-background: {$tf_filling_background};
+				--tf-filling-foreground: {$tf_filling_foreground};
+				--tf-base-font-size: " . esc_attr($base_font_size) . ";
+				--tf-container-width: " . esc_attr($tf_container_width) . ";
+			}
+		";
+
+		if (wp_style_is('tf-app-style', 'enqueued')) {
+			wp_add_inline_style('tf-app-style', apply_filters('tf-global-css', $output));
+		}
+	}
+
 	function tf_required_taxonomies( $hook ) {
 		if ( ! in_array( $hook, array( 'post.php', 'post-new.php' ) ) ) {
 			return;
@@ -1237,1140 +1403,6 @@ class Enqueue {
 
 	}
 
-	function tf_custom_css() {
-		// Store as PHP variables
-		// Template 1 Global CSS
-		$tf_template1_global_reg   = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-design1-global-color' ) )['gcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-design1-global-color' ) )['gcolor'] : '';
-		$tf_template1_p_global_reg = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-design1-p-global-color' ) )['pgcolor'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-design1-p-global-color' ) )['pgcolor'] : '';
 
-		// Common CSS
-		$tf_primary_color_reg        = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-button-color' ) )['regular'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-button-color' ) )['regular'] : '';
-		$tf_primary_color_hov        = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-button-color' ) )['hover'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-button-color' ) )['hover'] : '';
-		$tf_primary_bg_color_reg     = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-button-bg-color' ) )['regular'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-button-bg-color' ) )['regular'] : '';
-		$tf_primary_bg_color_hov     = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-button-bg-color' ) )['hover'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-button-bg-color' ) )['hover'] : '';
-		$tf_sidebar_gradient_one_reg = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-sidebar-booking' ) )['gradient_one_reg'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-sidebar-booking' ) )['gradient_one_reg'] : '';
-		$tf_sidebar_gradient_two_reg = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-sidebar-booking' ) )['gradient_two_reg'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-sidebar-booking' ) )['gradient_two_reg'] : '';
-		$tf_faq_color                = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-faq-style' ) )['faq_color'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-faq-style' ) )['faq_color'] : '';
-		$tf_faq_icon_color           = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-faq-style' ) )['faq_icon_color'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-faq-style' ) )['faq_icon_color'] : '';
-		$tf_faq_border_color         = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-faq-style' ) )['faq_border_color'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-faq-style' ) )['faq_border_color'] : '';
-		$tf_rating_color             = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-review-style' ) )['rating_color'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-review-style' ) )['rating_color'] : '';
-		$tf_rating_bg_color          = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-review-style' ) )['rating_bg_color'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-review-style' ) )['rating_bg_color'] : '';
-		$tf_param_bg_color           = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-review-style' ) )['param_bg_color'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-review-style' ) )['param_bg_color'] : '';
-		$tf_param_txt_color          = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-review-style' ) )['param_txt_color'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-review-style' ) )['param_txt_color'] : '';
-		$tf_param_single_bg_color    = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-review-style' ) )['param_single_bg_color'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-review-style' ) )['param_single_bg_color'] : '';
-		$tf_review_color             = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-review-style' ) )['review_color'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-review-style' ) )['review_color'] : '';
-		$tf_review_bg_color          = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-review-style' ) )['review_bg_color'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-review-style' ) )['review_bg_color'] : '';
 
-		// Global Font Family
-		$tf_global_font_family         = Helper::tfopt( 'global-body-fonts-family' ) ? str_replace( '_', ' ', Helper::tfopt( 'global-body-fonts-family' ) ) : 'Default';
-		$tf_global_heading_font_family = Helper::tfopt( 'global-heading-fonts-family' ) ? str_replace( '_', ' ', Helper::tfopt( 'global-heading-fonts-family' ) ) : 'Default';
-
-		// Global Typography P
-		$tf_global_font_p        = Helper::tfopt( 'global-p' ) ? Helper::tfopt( 'global-p' ) : 16;
-		$tf_global_font_weight_p = Helper::tfopt( 'global-p-weight' ) ? Helper::tfopt( 'global-p-weight' ) : 400;
-		$tf_global_font_style_p  = Helper::tfopt( 'global-p-style' ) ? Helper::tfopt( 'global-p-style' ) : 'normal';
-		$tf_global_line_height_p = Helper::tfopt( 'global-p-line-height' ) ? Helper::tfopt( 'global-p-line-height' ) : 1.5;
-
-		// Global Typography H1
-		$tf_global_font_h1        = Helper::tfopt( 'global-h1' ) ? Helper::tfopt( 'global-h1' ) : 38;
-		$tf_global_font_weight_h1 = Helper::tfopt( 'global-h1-weight' ) ? Helper::tfopt( 'global-h1-weight' ) : 500;
-		$tf_global_font_style_h1  = Helper::tfopt( 'global-h1-style' ) ? Helper::tfopt( 'global-h1-style' ) : 'normal';
-		$tf_global_line_height_h1 = Helper::tfopt( 'global-h1-line-height' ) ? Helper::tfopt( 'global-h1-line-height' ) : 1.2;
-
-		// Global Typography H2
-		$tf_global_font_h2        = Helper::tfopt( 'global-h2' ) ? Helper::tfopt( 'global-h2' ) : 30;
-		$tf_global_font_weight_h2 = Helper::tfopt( 'global-h2-weight' ) ? Helper::tfopt( 'global-h2-weight' ) : 500;
-		$tf_global_font_style_h2  = Helper::tfopt( 'global-h2-style' ) ? Helper::tfopt( 'global-h2-style' ) : 'normal';
-		$tf_global_line_height_h2 = Helper::tfopt( 'global-h2-line-height' ) ? Helper::tfopt( 'global-h2-line-height' ) : 1.2;
-
-		// Global Typography H3
-		$tf_global_font_h3        = Helper::tfopt( 'global-h3' ) ? Helper::tfopt( 'global-h3' ) : 24;
-		$tf_global_font_weight_h3 = Helper::tfopt( 'global-h3-weight' ) ? Helper::tfopt( 'global-h3-weight' ) : 500;
-		$tf_global_font_style_h3  = Helper::tfopt( 'global-h3-style' ) ? Helper::tfopt( 'global-h3-style' ) : 'normal';
-		$tf_global_line_height_h3 = Helper::tfopt( 'global-h3-line-height' ) ? Helper::tfopt( 'global-h3-line-height' ) : 1.2;
-
-		// Global Typography H4
-		$tf_global_font_h4        = Helper::tfopt( 'global-h4' ) ? Helper::tfopt( 'global-h4' ) : 20;
-		$tf_global_font_weight_h4 = Helper::tfopt( 'global-h4-weight' ) ? Helper::tfopt( 'global-h4-weight' ) : 500;
-		$tf_global_font_style_h4  = Helper::tfopt( 'global-h4-style' ) ? Helper::tfopt( 'global-h4-style' ) : 'normal';
-		$tf_global_line_height_h4 = Helper::tfopt( 'global-h4-line-height' ) ? Helper::tfopt( 'global-h4-line-height' ) : 1.2;
-
-		// Global Typography H5
-		$tf_global_font_h5        = Helper::tfopt( 'global-h5' ) ? Helper::tfopt( 'global-h5' ) : 18;
-		$tf_global_font_weight_h5 = Helper::tfopt( 'global-h5-weight' ) ? Helper::tfopt( 'global-h5-weight' ) : 500;
-		$tf_global_font_style_h5  = Helper::tfopt( 'global-h5-style' ) ? Helper::tfopt( 'global-h5-style' ) : 'normal';
-		$tf_global_line_height_h5 = Helper::tfopt( 'global-h5-line-height' ) ? Helper::tfopt( 'global-h5-line-height' ) : 1.2;
-
-		// Global Typography H6
-		$tf_global_font_h6        = Helper::tfopt( 'global-h6' ) ? Helper::tfopt( 'global-h6' ) : 14;
-		$tf_global_font_weight_h6 = Helper::tfopt( 'global-h6-weight' ) ? Helper::tfopt( 'global-h6-weight' ) : 500;
-		$tf_global_font_style_h6  = Helper::tfopt( 'global-h6-style' ) ? Helper::tfopt( 'global-h6-style' ) : 'normal';
-		$tf_global_line_height_h6 = Helper::tfopt( 'global-h6-line-height' ) ? Helper::tfopt( 'global-h6-line-height' ) : 1.2;
-
-		// Button
-		$tf_global_button_size        = Helper::tfopt( 'button-font-size' ) ? Helper::tfopt( 'button-font-size' ) : 14;
-		$tf_global_button_line_height = Helper::tfopt( 'button-line-height' ) ? Helper::tfopt( 'button-line-height' ) : 1.2;
-
-		// Template 3 Global Settings
-		$tf_global_bg_clr_t3        = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-template3-bg' ) )['template3-bg'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-template3-bg' ) )['template3-bg'] : '';
-		$tf_global_highlight_clr_t3 = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-template3-bg' ) )["template3-highlight"] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-template3-bg' ) )["template3-highlight"] : '';
-		$tf_global_icon_clr_t3      = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-template3-bg' ) )["template3-icon-color"] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-template3-bg' ) )["template3-icon-color"] : '';
-
-		// Template 4 Global Settings
-		$tf_t4_bg_color       = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-template4-bg' ) )['template4-bg'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-template4-bg' ) )['template4-bg'] : '';
-		$tf_t4_search_form_bg_color = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-template4-bg' ) )["template4-search-form-bg"] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-template4-bg' ) )["template4-search-form-bg"] : '';
-		$tf_t4_card_bg_color = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-template4-bg' ) )["template4-card-bg"] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-template4-bg' ) )["template4-card-bg"] : '';
-		$tf_t4_card_hover_bg_color      = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-template4-bg' ) )["template4-card-hover-bg-color"] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-template4-bg' ) )["template4-card-hover-bg-color"] : '';
-		$tf_t4_btn_bg_color      = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-template4-bg' ) )["template4-btn-bg-color"] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-template4-bg' ) )["template4-btn-bg-color"] : '';
-		$tf_t4_btn_hover_bg_color      = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-template4-bg' ) )["template4-btn-hover-bg-color"] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-template4-bg' ) )["template4-btn-hover-bg-color"] : '';
-
-		$output = '';
-
-		// Template 1 Global CSS
-		if ( ! empty( $tf_template1_global_reg ) ) {
-			$output .= '
-			.tf-template-global .tf-bttn-normal.bttn-primary,
-			.tf-template-global .tf-archive-head .active,
-			.tf-template-global .tf-item-featured .tf-features-box .tf-featur,
-			.tf-template-global .tf-itinerary-wrapper .tf-single-itinerary-item.active .accordion-checke::after,
-			.tf-template-global .tf-itinerary-wrapper.tf-mb-50 .tf-itinerary-downloader-option,
-			.tf-template-global .tf-rooms-sections .tf-rooms .tf-availability-table>thead,
-			.tf-template-global .tf-hotel-location-map .tf-hotel-location-preview a i,
-			.tf-template-global .tf-search-results-list .tf-item-card .tf-item-featured .tf-features-box .tf-feature,
-			.tf-template-global .tf-review-wrapper .tf-review-form .tf-review-form-container .tf-review-submit input[type="submit"],
-			.tf-template-global .tf-archive-right .tf_widget .al-range-slider__knob,
-			.tf-template-global .tf-search-results-list #tf_posts_navigation_bar .page-numbers.current,
-			.tf-template-global .tf-archive-right .tf_widget .al-range-slider__tooltip,
-			.tf-template-global .tf-archive-right .tf_widget .al-range-slider_dark .al-range-slider__bar,
-			.tf-template-global .tf-btn .btn-primary,
-			.tf-hotel-design-1 .tf-rooms-sections .tf-rooms .tf-availability-table>tbody tr td .hotel-room-book,
-			.tf-template-global .tf-archive-right .tf-booking-bttns button,
-			.tf-hotel-services-wrap.tf-hotel-service-design-1 .tf_button_group button,
-			.tf-tours-booking-deposit.tf-tours-booking-design-1 .tf_button_group button{
-				background: ' . $tf_template1_global_reg . ' !important;
-			}';
-		}
-		if ( ! empty( $tf_global_font_family ) && $tf_global_font_family != "Default" ) {
-			$output .= '
-			.tf-container-inner,
-			.tf-main-wrapper,
-			.tf-container,
-			#tour_room_details_qv,
-			#tf-hotel-services,
-			#tf-hotel-services span,
-			#tf-hotel-services select,
-			#tour-deposit,
-			#tour-deposit .tf_button_group button,
-			#tf-hotel-services .tf_button_group button,
-			#tf-ask-question button,
-			#tf-ask-question input,
-			#tf-ask-question textarea,
-			.tf-container button,
-			.tf-container input,
-			.tf-container textarea,
-			.gm-style .marker-label,
-			.tf-withoutpayment-booking{
-				font-family: "' . $tf_global_font_family . '", sans-serif !important;
-			}';
-		}
-		if ( ! empty( $tf_template1_p_global_reg ) ) {
-			$output .= '
-			.tf-container-inner p,
-			.tf-main-wrapper p,
-			.tf-container p,
-			.tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-overview-description .tf-full-description,
-			.tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-overview-description .tf-short-description,
-			.tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-highlights-wrapper .ft-highlights-details p,
-			.tf-template-3 .tf-bottom-booking-bar .tf-booking-form-fields .tf-booking-form-guest-and-room .tf-booking-form-title,
-			.tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-features-block-wrapper .tf-feature-block .tf-feature-block-details p,
-			.tf-template-3 .tf_tours_booking .tf-field-calander .tf-field,
-			.tf-template-3 .tf-questions-wrapper .tf-questions .tf-questions-col .tf-question .tf-question-desc,
-			.tf-template-3 .tf-policies-wrapper .tf-policies p,
-			.tf-template-3 .tf-tour-contact-informations .tf-contact-details-items .tf-list li a,
-			#tour_room_details_qv p{
-				color: ' . $tf_template1_p_global_reg . '
-			}';
-		}
-
-		if ( ! empty( $tf_global_heading_font_family ) && $tf_global_heading_font_family != "Default" ) {
-			$output .= '
-			.tf-container-inner h1,
-			.tf-main-wrapper h1,
-			.tf-container h1,
-			.tf-container-inner h2,
-			.tf-main-wrapper h2,
-			.tf-container h2,
-			.tf-container-inner h3,
-			.tf-main-wrapper h3,
-			.tf-container h3,
-			#tour_room_details_qv h3,
-			.tf-container-inner h4,
-			.tf-main-wrapper h4,
-			#tour_room_details_qv h4,
-			.tf-container h4,
-			#tf-ask-question h4,
-			.tf-container-inner h5,
-			.tf-main-wrapper h5,
-			.tf-container h5,
-			.tf-container-inner h6,
-			.tf-main-wrapper h6,
-			.tf-container h6{
-				font-family: "' . $tf_global_heading_font_family . '", sans-serif !important;
-			}';
-		}
-
-		// Global typo for P
-		if ( ! empty( $tf_global_font_p ) || ! empty( $tf_global_font_weight_p ) || ! empty( $tf_global_font_style_p ) || ! empty( $tf_global_line_height_p ) ) {
-			$output .= '
-			.tf-container-inner p,
-			.tf-main-wrapper p,
-			#tour_room_details_qv p,
-			.tf-container p,
-			.hero-booking .tf_booking-widget{
-				font-weight: ' . $tf_global_font_weight_p . ' !important;
-				font-size: ' . $tf_global_font_p . 'px !important;
-				font-style: ' . $tf_global_font_style_p . ' !important;
-				line-height: ' . $tf_global_line_height_p . ' !important;
-			}';
-		}
-
-		// Global typo for H1
-		if ( ! empty( $tf_global_font_h1 ) || ! empty( $tf_global_font_weight_h1 ) || ! empty( $tf_global_font_style_h1 ) || ! empty( $tf_global_line_height_h1 ) ) {
-			$output .= '
-			.tf-container-inner h1,
-			.tf-main-wrapper h1,
-			.tf-container h1{
-				font-weight: ' . $tf_global_font_weight_h1 . ' !important;
-				font-size: ' . $tf_global_font_h1 . 'px !important;
-				font-style: ' . $tf_global_font_style_h1 . ' !important;
-				line-height: ' . $tf_global_line_height_h1 . ' !important;
-			}';
-		}
-
-		// Global typo for H2
-		if ( ! empty( $tf_global_font_h2 ) || ! empty( $tf_global_font_weight_h2 ) || ! empty( $tf_global_font_style_h2 ) || ! empty( $tf_global_line_height_h2 ) ) {
-			$output .= '
-			.tf-container-inner h2,
-			.tf-main-wrapper h2,
-			.tf-container h2{
-				font-weight: ' . $tf_global_font_weight_h2 . ' !important;
-				font-size: ' . $tf_global_font_h2 . 'px !important;
-				font-style: ' . $tf_global_font_style_h2 . ' !important;
-				line-height: ' . $tf_global_line_height_h2 . ' !important;
-			}';
-		}
-
-		// Global typo for H3
-		if ( ! empty( $tf_global_font_h3 ) || ! empty( $tf_global_font_weight_h3 ) || ! empty( $tf_global_font_style_h3 ) || ! empty( $tf_global_line_height_h3 ) ) {
-			$output .= '
-			.tf-container-inner h3,
-			.tf-main-wrapper h3,
-			#tour_room_details_qv h3,
-			.tf-container h3{
-				font-weight: ' . $tf_global_font_weight_h3 . ' !important;
-				font-size: ' . $tf_global_font_h3 . 'px !important;
-				font-style: ' . $tf_global_font_style_h3 . ' !important;
-				line-height: ' . $tf_global_line_height_h3 . ' !important;
-			}';
-		}
-
-		// Global typo for H4
-		if ( ! empty( $tf_global_font_h4 ) || ! empty( $tf_global_font_weight_h4 ) || ! empty( $tf_global_font_style_h4 ) || ! empty( $tf_global_line_height_h4 ) ) {
-			$output .= '
-			.tf-container-inner h4,
-			.tf-main-wrapper h4,
-			#tf-ask-question h4,
-			#tour_room_details_qv h4,
-			.tf-container h4{
-				font-weight: ' . $tf_global_font_weight_h4 . ' !important;
-				font-size: ' . $tf_global_font_h4 . 'px !important;
-				font-style: ' . $tf_global_font_style_h4 . ' !important;
-				line-height: ' . $tf_global_line_height_h4 . ' !important;
-			}';
-		}
-
-		// Global typo for H5
-		if ( ! empty( $tf_global_font_h5 ) || ! empty( $tf_global_font_weight_h5 ) || ! empty( $tf_global_font_style_h5 ) || ! empty( $tf_global_line_height_h5 ) ) {
-			$output .= '
-			.tf-container-inner h5,
-			.tf-main-wrapper h5,
-			.tf-container h5{
-				font-weight: ' . $tf_global_font_weight_h5 . ' !important;
-				font-size: ' . $tf_global_font_h5 . 'px !important;
-				font-style: ' . $tf_global_font_style_h5 . ' !important;
-				line-height: ' . $tf_global_line_height_h5 . ' !important;
-			}';
-		}
-
-		// Global typo for H6
-		if ( ! empty( $tf_global_font_h6 ) || ! empty( $tf_global_font_weight_h6 ) || ! empty( $tf_global_font_style_h6 ) || ! empty( $tf_global_line_height_h6 ) ) {
-			$output .= '
-			.tf-container-inner h6,
-			.tf-main-wrapper h6,
-			.tf-container h6{
-				font-weight: ' . $tf_global_font_weight_h6 . ' !important;
-				font-size: ' . $tf_global_font_h6 . 'px !important;
-				font-style: ' . $tf_global_font_style_h6 . ' !important;
-				line-height: ' . $tf_global_line_height_h6 . ' !important;
-			}';
-		}
-
-		// Global Button
-		if ( ! empty( $tf_global_button_size ) || ! empty( $tf_global_button_line_height ) ) {
-			$output .= '
-			.tf-btn-normal,
-			.btn-styled{
-				font-size: ' . $tf_global_button_size . 'px !important;
-				line-height: ' . $tf_global_button_line_height . ' !important;
-			}';
-		}
-
-		if ( ! empty( $tf_template1_global_reg ) ) {
-			$output .= '
-			.tf-template-global .tf-archive-head i,
-			.tf-template-global .tf-search-results-list .tf-item-card .tf-item-details .tf-post-footer .tf-pricing span,
-			.tf-template-global .tf-single-head i,
-			.tf-template-global .tf-trip-info li i,
-			.tf-template-global .tf-trip-feature-blocks .tf-feature-block i,
-			.tf-template-global .tf-tour-details-right .tf-tour-booking-advantages li i,
-			.tf-template-global .tf-ask-enquiry i,
-			.tf-template-global .tf-list li i,
-			.tf-template-global .tf-itinerary-wrapper .tf-single-itinerary-item .itinerary-day,
-			.tf-template-global .tf-itinerary-wrapper.tf-mrbottom-70 .tf-itinerary-downloader-option a,
-			.tf-template-global .tf-review-wrapper .tf-review-data .tf-review-data-average p,
-			.tf-template-global .tf-review-wrapper .tf-review-data .tf-review-all-info li,
-			.tf-template-global .tf-single-head .more-hotel,
-			.tf-template-global .tf-head-info .tf-dropdown-share-content h4,
-			.tf-template-global .tf-head-info .tf-dropdown-share-content ul li button span,
-			.tf-template-global .itinerary-downloader-right a,
-			.tf-hotel-design-1 .tf-rooms-sections .tf-rooms .tf-availability-table>tbody tr td .tf-features-infos > a ,
-			.upcomming-tours .tf-meta-data-price span,
-			.upcomming-tours .tf-meta-location i,
-			.tf-template-global .tf-search-results-list .tf-item-card .tf-item-details i,
-			.tf-archive-design-1 .tf-archive-right #tf__booking_sidebar .widget .tf-filter a{
-				color: ' . $tf_template1_global_reg . ' !important;
-			}';
-		}
-
-		if ( ! empty( $tf_template1_global_reg ) ) {
-			$output .= '
-			.tf-template-global .tf-itinerary-wrapper .tf-single-itinerary-item.active .accordion-checke::before,
-			.tf-template-global .tf-archive-right .tf_widget .al-range-slider__knob,
-			.tf-tours-booking-deposit.tf-tours-booking-design-1 .tf_button_group button,
-			.tf-template-global .tf-review-wrapper .tf-review-form .tf-review-form-container .tf-review-submit input[type="submit"]{
-				border: 1px solid ' . $tf_template1_global_reg . ';
-				border-color: ' . $tf_template1_global_reg . ' !important;
-			}
-			.tf-aq-field .btn-styled {background: ' . $tf_template1_global_reg . ' !important;}';
-
-		}
-
-		// Common CSS
-		if ( $tf_primary_color_reg ) {
-			$output .= '
-			.tf_button, 
-			.tf-btn-flip:before, 
-			.tf-btn-flip, 
-			.btn-styled, 
-			.tf-review-form-container .tf-review-submit input[type="submit"], 
-			.tf-template-3 .tf-send-inquiry .tf-send-inquiry-btn,
-			.tf-bttn-normal.bttn-primary, 
-			.tf-bttn-normal.bttn-secondary, 
-			.tf-template-global .tf-archive-head .active, 
-			.tf-search-results-list .tf-item-card .tf-item-featured .tf-features-box .tf-feature,
-			.tf-template-3 .tf_tours_booking .tf-tours-booking-btn.tf-booking-bttns a,
-			.tf-template-3 .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-submit button,
-			.tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content a.availability,
-			.tf-template-3 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-right a.view-hotel,
-			.tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content button,
-			.tf-template-3 .tf-review-form-wrapper .tf-review-form-container form .tf-review-submit input#comment-submit,
-			.tf-template-3 .tf-mobile-booking-btn span,
-			.tf-template-3 .tf-modify-search-btn,
-			.tf_template_3_global_layouts #tf-ask-question button,
-			.tf_template_3_global_layouts #tf-ask-question .tf-aq-outer .close-aq,
-			.tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content a.tf_air_service,
-			.tf_template_3_global_layouts #tf-hotel-services .tf-hotel-services .tf_button_group button:hover{
-				color: ' . $tf_primary_color_reg . ' !important;
-			}
-			.tf-ask-question div i:before {
-				color: ' . $tf_primary_color_reg . ' !important;
-			}
-		';
-		}
-		if ( $tf_primary_color_hov ) {
-			$output .= '
-			.tf_button:hover, 
-			.btn-styled:hover, 
-			.tf-btn-flip:after, 
-			.tf-review-form-container .tf-review-submit input[type="submit"]:hover, 
-			.tf-bttn-normal.bttn-primary:hover, 
-			.tf-bttn-normal.bttn-secondary:hover,
-			.tf-template-3 .tf_tours_booking .tf-tours-booking-btn.tf-booking-bttns a:hover,
-			.tf-template-3 .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-submit button:hover,
-			.tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content a.availability:hover,
-			.tf-template-3 .tf-send-inquiry .tf-send-inquiry-btn:hover,
-			.tf-template-3 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-right a.view-hotel:hover,
-			.tf-template-3 .tf-review-form-wrapper .tf-review-form-container form .tf-review-submit input#comment-submit:hover,
-			.tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content button:hover,
-			.tf-template-3 .tf-mobile-booking-btn span:hover,
-			.tf-template-3 .tf-modify-search-btn:hover,
-			.tf_template_3_global_layouts #tf-ask-question button:hover,
-			.tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content a.tf_air_service:hover,
-			.tf_template_3_global_layouts #tf-hotel-services .tf-hotel-services .tf_button_group button:hover {
-				color: ' . $tf_primary_color_hov . ' !important;
-			}
-		';
-		}
-		if ( $tf_primary_bg_color_reg ) {
-			$output .= '
-			.tf_button, 
-			.tf-btn-flip:before, 
-			.tf-btn-flip:after, 
-			.btn-styled, 
-			.tf-review-form-container .tf-review-submit input[type="submit"], 
-			.tf-template-3 .tf-send-inquiry .tf-send-inquiry-btn,
-			.tf-bttn-normal.bttn-primary, 
-			.tf-bttn-normal.bttn-secondary, 
-			.tf-template-global .tf-archive-head .active, 
-			.tf-search-results-list .tf-item-card .tf-item-featured .tf-features-box .tf-feature,
-			.tf-template-3 .tf_tours_booking .tf-tours-booking-btn.tf-booking-bttns a,
-			.tf-template-3 .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-submit button,
-			.tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content a.availability,
-			.tf-template-3 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-right a.view-hotel,
-			.tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content button,
-			.tf-template-3 .tf-review-form-wrapper .tf-review-form-container form .tf-review-submit input#comment-submit,
-			.tf-template-3 .tf-mobile-booking-btn,
-			.tf-template-3 .tf-modify-search-btn,
-			.tf_template_3_global_layouts #tf-ask-question button,
-			.tf_template_3_global_layouts #tf-ask-question .tf-aq-outer .close-aq,
-			.tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content a.tf_air_service,
-			.tf_template_3_global_layouts #tf-hotel-services .tf-hotel-services .tf_button_group button {
-				background: ' . $tf_primary_bg_color_reg . ' !important;
-			}
-			.tf_button, 
-			.btn-styled, 
-			.tf-review-form-container .tf-review-submit input[type="submit"],
-			.tf-template-3 .tf_tours_booking .tf-tours-booking-btn.tf-booking-bttns a,
-			.tf_template_3_global_layouts #tf-ask-question button,
-			.tf_template_3_global_layouts #tf-hotel-services .tf-hotel-services .tf_button_group button {
-				border-color: ' . $tf_primary_bg_color_reg . ' !important;
-			}
-		';
-		}
-		if ( $tf_primary_bg_color_hov ) {
-			$output .= '
-			.tf_button:hover, 
-			.btn-styled:hover, 
-			.tf-review-form-container 
-			.tf-review-submit input[type="submit"]:hover, 
-			.tf-bttn-normal.bttn-primary:hover, 
-			.tf-bttn-normal.bttn-secondary:hover,
-			.tf-template-3 .tf_tours_booking .tf-tours-booking-btn.tf-booking-bttns a:hover,
-			.tf-template-3 .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-submit button:hover,
-			.tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content a.availability:hover,
-			.tf-template-3 .tf-send-inquiry .tf-send-inquiry-btn:hover,
-			.tf-template-3 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-right a.view-hotel:hover,
-			.tf-template-3 .tf-review-form-wrapper .tf-review-form-container form .tf-review-submit input#comment-submit:hover,
-			.tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content button:hover,
-			.tf-template-3 .tf-mobile-booking-btn:hover,
-			.tf-template-3 .tf-modify-search-btn:hover,
-			.tf_template_3_global_layouts #tf-ask-question button:hover,
-			.tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content a.tf_air_service:hover,
-			.tf_template_3_global_layouts #tf-hotel-services .tf-hotel-services .tf_button_group button:hover {
-				background: ' . $tf_primary_bg_color_hov . ' !important;
-			}
-			.tf_button:hover, 
-			.btn-styled:hover, .tf-review-form-container .tf-review-submit input[type="submit"]:hover,
-			.tf-template-3 .tf_tours_booking .tf-tours-booking-btn.tf-booking-bttns a:hover,
-			.tf_template_3_global_layouts #tf-ask-question button:hover,
-			.tf_template_3_global_layouts #tf-hotel-services .tf-hotel-services .tf_button_group button:hover{
-				border-color: ' . $tf_primary_bg_color_hov . ' !important ;
-			}
-		';
-		}
-		if ( $tf_sidebar_gradient_one_reg && $tf_sidebar_gradient_two_reg ) {
-			$output .= '
-			.tf_booking-widget, .tf-tour-details-right .tf-tour-booking-box, 
-			.tf-template-global .tf-box-wrapper.tf-box,
-			.tf-template-3 .tf-booking-form-wrapper,
-			.tf-template-3 .tf-search-date-wrapper.tf-single-widgets {background: linear-gradient(to bottom, ' . $tf_sidebar_gradient_one_reg . ' 0, ' . $tf_sidebar_gradient_two_reg . ' 100%);}
-		';
-		}
-		if ( $tf_faq_color or $tf_faq_icon_color or $tf_faq_border_color ) {
-			$output .= '
-			.tf-faq-title h4,
-			.tf-single-page .tf-faq-wrapper .tf-faq-single-inner h3,
-			.tf-template-global .tf-faq-wrapper .tf-faq-single-inner .tf-faq-collaps h4,
-			.tf-template-3 .tf-questions-wrapper .tf-questions .tf-questions-col .tf-question .tf-faq-head h3 {
-				color: ' . $tf_faq_color . ';
-			}
-			#tf-faq-item,
-			.tf-single-page .tf-faq-wrapper .tf-faq-inner .tf-faq-single {
-				border-color: ' . $tf_faq_border_color . ';
-			}
-			#tf-faq-item .arrow,
-			.tf-single-page .tf-faq-wrapper .tf-faq-single-inner .tf-faq-collaps .faq-icon i.fa-plus,
-			.tf-single-page .tf-faq-wrapper .tf-faq-inner .active .tf-faq-single-inner .tf-faq-collaps .faq-icon i.fa-minus,
-			.tf-template-3 .tf-questions-wrapper .tf-questions .tf-questions-col .tf-question i {
-				color: ' . $tf_faq_icon_color . ';
-			}
-		';
-		}
-
-		if ( $tf_faq_border_color ) {
-			$output .= '
-			.tf-hotel-design-1 .tf-hotel-faqs-section .tf-hotel-faqs .tf-faq-wrapper .tf-faq-single .tf-faq-single-inner{
-				border: 1px solid ' . $tf_faq_border_color . ';
-			}
-		';
-		}
-
-		if ( $tf_review_bg_color or $tf_review_color or $tf_param_single_bg_color or $tf_param_bg_color or $tf_rating_bg_color or $tf_rating_color ) {
-			$output .= '
-			.tf-single-review .tf-single-details,
-			.tf-template-3 .tf-reviews-wrapper .tf-reviews-slider .tf-reviews-item {
-				background: ' . $tf_review_bg_color . ';
-			}
-			.tf-single-review .tf-review-details .tf-name, 
-			.tf-single-review .tf-review-details .tf-date, 
-			.tf-single-review .tf-review-details .tf-rating-stars, 
-			.tf-single-review .tf-review-details .tf-rating-stars i, 
-			.tf-single-review .tf-review-details .tf-description p,
-			.tf-template-global .tf-review-wrapper .tf-review-reply .tf-review-details,
-			.tf-template-global .tf-review-wrapper .tf-review-reply .tf-review-details .tf-review-author-name h3,
-			.tf-template-global .tf-review-wrapper .tf-review-reply .tf-review-details .tf-review-message p,
-			.tf-template-global .tf-review-wrapper .tf-review-reply .tf-review-details .tf-review-date li,
-			.tf-template-global .tf-review-wrapper .tf-review-reply .tf-review-details .tf-review-ratings i,
-			.tf-template-global .tf-review-wrapper .tf-review-reply .tf-review-details .tf-review-date li i,
-			.tf-template-3 .tf-reviews-wrapper .tf-reviews-slider .tf-reviews-item .tf-reviews-text h3,
-			.tf-template-3 .tf-reviews-wrapper .tf-reviews-slider .tf-reviews-item .tf-reviews-text p,
-			.tf-template-3 .tf-reviews-wrapper .tf-reviews-slider .tf-reviews-item .tf-reviews-text span{
-				color: ' . $tf_review_color . ' !important;
-			}
-			.tf-review-container .tf-review-progress-bar .tf-single .tf-p-bar,
-			.tf-single-page .tf-review-wrapper .tf-review-data .tf-review-data-features .tf-progress-bar,
-			.tf-template-global .tf-review-wrapper .tf-review-data .tf-review-data-features .percent-progress,
-			.tf-template-3 .tf-single-widgets .tf-review-data-features span.percent-progress {
-				background: ' . $tf_param_single_bg_color . ';
-			}
-			.tf-review-container .tf-review-progress-bar,
-			.tf-single-page .tf-review-wrapper .tf-review-data,
-			.tf-template-global .tf-review-wrapper .tf-review-data.tf-box .tf-review-data-features{
-				background: ' . $tf_param_bg_color . ';
-				border-color: ' . $tf_param_bg_color . ';
-			}
-			.tf-review-container .tf-review-progress-bar .tf-single .tf-text, .tf-review-container .tf-review-progress-bar .tf-single .tf-p-b-rating,
-			.tf-single-page .tf-review-wrapper .tf-review-data p,
-			.tf-single-page .tf-review-wrapper .tf-review-data .tf-review-all-info li,
-			.tf-single-page .tf-review-wrapper .tf-review-data .tf-review-all-info li i {
-				color: ' . $tf_param_txt_color . ';
-			}
-			.tf-review-container .tf-total-review .tf-total-average div, .tf-archive-rating, .tf-single-page .tf-review-wrapper .tf-review-data .tf-review-data-average p,
-			.tf-template-3 .tf-review-data .tf-review-data-average {
-				background: ' . $tf_rating_bg_color . '!important;
-				color: ' . $tf_rating_color . '!important;
-			}
-		';
-		}
-		if ( $tf_param_bg_color ) {
-			$output .= '
-			.tf-template-3 .tf-single-widgets .tf-review-data-features{
-				background: ' . $tf_param_bg_color . ';
-				border-color: ' . $tf_param_bg_color . ';
-				padding: 32px;
-				border-radius: 5px;
-				margin-top: 10px;
-			}
-		';
-		}
-		if ( $tf_rating_bg_color || $tf_rating_color ) {
-			$output .= '
-			.tf-template-3 .tf-review-data .tf-review-data-average {
-				background: ' . $tf_rating_bg_color . '!important;
-				color: ' . $tf_rating_color . '!important;
-				border-radius: 5px;
-				padding: 10px;
-			}
-			.tf-template-3 .tf-review-data .tf-review-data-average span{
-				color: ' . $tf_rating_color . '!important;
-			}
-		';
-		}
-		if ( $tf_review_bg_color ) {
-			$output .= '
-			.tf-single-page .tf-review-reply .tf-review-reply-data {
-				background: ' . $tf_review_bg_color . ';
-				padding: 20px;
-				border-radius: 5px;
-				margin: 10px 0px;
-			}
-			.tf-single-page .tf-review-reply .tf-review-details h3,
-			.tf-single-page .tf-review-reply .tf-review-details p,
-			.tf-single-page .tf-review-wrapper .tf-review-reply .tf-review-details .tf-review-date li,
-			.tf-single-page .tf-review-wrapper .tf-review-reply .tf-review-details .tf-review-date li i,
-			.tf-single-page .tf-review-wrapper .tf-review-reply .tf-review-ratings,
-			.tf-single-page .tf-review-wrapper .tf-review-reply .tf-review-ratings i{
-				color: ' . $tf_review_color . ' !important;
-			}
-		';
-		}
-
-		// Template 3 Global Colors
-		if ( ! empty( $tf_global_bg_clr_t3 ) ) {
-			$output .= '
-			.tf-template-3 .tf-related-tours .tf-slider-item .tf-meta-info,
-			.tf-template-3 .tf-questions-wrapper .tf-questions .tf-questions-col .tf-question.tf-active,
-			.tf-template-3 .tf_tours_booking .tf-field-calander .tf-field,
-			.tf-template-3 .tf-search-date-wrapper .acr-select input[type=tel],
-			.tf-template-3 .tf-available-rooms-wrapper .tf-available-room,
-			.tf-template-3 .tf-itinerary-wrapper .tf-itinerary-wrapper span.tf-itinerary-time,
-			.tf-template-3 {
-				background: ' . $tf_global_bg_clr_t3 . ' !important;
-			}
-			';
-		}
-
-		if ( ! empty( $tf_global_highlight_clr_t3 ) ) {
-			$output .= '
-			.tf-template-3 .tf-booking-form-wrapper,
-			.tf-template-3 .tf-available-rooms-wrapper,
-			.tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-details-menu,
-			.tf-template-3 .tf-content-wrapper .tf-details .tf-details-right.tf-archive-right,
-			.tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-highlights-wrapper,
-			.tf-template-3 .tf-bottom-booking-bar,
-			.tf-template-3 .tf-related-tours,
-			.tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-features-block-wrapper .tf-feature-block,
-			.tf-template-3 .tf-search-date-wrapper,
-			.tf-template-3 button.tf-review-open.button, .tf-template-3 .tf-reting-field button,
-			.tf-template-3 .tf-review-form-wrapper,
-			.tf-template-3 .tf-tour-contact-informations,
-			.tf-template-3 .tf-itinerary-wrapper .tf-itinerary-wrapper .tf-single-itinerary,
-			.tf-template-3 .tf-itinerary-wrapper .section-title a,
-			.tf-template-3 .tf-send-inquiry,
-			.tf-template-3 .tf-tour-contact-informations,
-			.tf-template-3 .tf-popup-wrapper.tf-room-popup .tf-popup-inner,
-			.tf-template-3 .tf-popup-wrapper.tf-show .tf-popup-inner,
-			.tf-template-3 .tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-locationautocomplete-list,
-			.tf-template-3 .tf-section,
-			.tf-template-3.tf-apartment-single .tf-apartment-rooms-section .tf-apartment-room-details {
-				background: ' . $tf_global_highlight_clr_t3 . ' !important;
-			}
-			';
-		}
-		if ( ! empty( $tf_global_icon_clr_t3 ) ) {
-			$output .= '
-			.tf-template-3 .tf-tour-contact-informations .tf-contact-details-items .tf-list li i,
-			.tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-features-block-wrapper .tf-feature-block i,
-			.tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-overview-popular-facilities>ul li i,
-			.tf-template-3 .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content .tf-available-room-content-left ul li i,
-			.tf-template-3 .tf-facilities-wrapper .tf-facilities .tf-facility-item h4 i,
-			.tf-template-3 .tf-popup-wrapper.tf-room-popup .tf-popup-inner .tf-popup-body .tf-popup-right ul li i,
-			.tf-template-3 .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-left .tf-section-title-and-location .tf-title-location i,
-			.tf-template-3 .tf-section,
-			.tf-template-3 .tf-available-rooms-wrapper .tf-available-rooms-head .tf-filter i,
-			.tf-template-3 .tf-send-inquiry i {
-				color: ' . $tf_global_icon_clr_t3 . ' !important;
-			}
-			';
-		}
-
-		// Template 4 Global Colors
-		if ( ! empty( $tf_t4_bg_color ) ) {
-			$output .= '
-			.tf-hotel-template-4 .tf-archive-details, 
-			.tf_template_4_hotel_archive .tf-archive-details, 
-			.tf_template_4_tour_archive .tf-archive-details, 
-			.tf_template_4_apartment_archive .tf-archive-details{
-				background-color: ' . $tf_t4_bg_color . ' !important;
-			}
-			';
-		}
-		if ( ! empty( $tf_t4_search_form_bg_color ) ) {
-			$output .= '
-			.tf-hotel-template-4 .tf-archive-search-form .tf-booking-form, 
-			.tf_template_4_hotel_archive .tf-archive-search-form .tf-booking-form, 
-			.tf_template_4_tour_archive .tf-archive-search-form .tf-booking-form, 
-			.tf_template_4_apartment_archive .tf-archive-search-form .tf-booking-form{
-				background-color: ' . $tf_t4_search_form_bg_color . ' !important;
-				border-color: ' . $tf_t4_search_form_bg_color . ' !important;
-			}
-			';
-		}
-		if ( ! empty( $tf_t4_card_bg_color ) ) {
-			$output .= '
-			.tf-hotel-template-4 .tf-archive-details .tf-archive-hotel, 
-			.tf_template_4_hotel_archive .tf-archive-details .tf-archive-hotel, 
-			.tf_template_4_tour_archive .tf-archive-details .tf-archive-hotel, 
-			.tf_template_4_apartment_archive .tf-archive-details .tf-archive-hotel{
-				background-color: ' . $tf_t4_card_bg_color . ' !important;
-			}
-			';
-		}
-		if ( ! empty( $tf_t4_card_hover_bg_color ) ) {
-			$output .= '
-			.tf-hotel-template-4 .tf-archive-details .tf-archive-hotel:hover, 
-			.tf_template_4_hotel_archive .tf-archive-details .tf-archive-hotel:hover, 
-			.tf_template_4_tour_archive .tf-archive-details .tf-archive-hotel:hover, 
-			.tf_template_4_apartment_archive .tf-archive-details .tf-archive-hotel:hover{
-				background-color: ' . $tf_t4_card_hover_bg_color . ' !important;
-			}
-			';
-		}
-		if ( ! empty( $tf_t4_btn_bg_color ) ) {
-			$output .= '
-			.tf-hotel-template-4 .tf-archive-details .tf-archive-hotel .tf-archive-hotel-content .tf-archive-hotel-content-right .view-hotel, 
-			.tf_template_4_hotel_archive .tf-archive-details .tf-archive-hotel .tf-archive-hotel-content .tf-archive-hotel-content-right .view-hotel, 
-			.tf_template_4_tour_archive .tf-archive-details .tf-archive-hotel .tf-archive-hotel-content .tf-archive-hotel-content-right .view-hotel, 
-			.tf_template_4_apartment_archive .tf-archive-details .tf-archive-hotel .tf-archive-hotel-content .tf-archive-hotel-content-right .view-hotel{
-				background-color: ' . $tf_t4_btn_bg_color . ' !important;
-			}
-			';
-		}
-		if ( ! empty( $tf_t4_btn_hover_bg_color ) ) {
-			$output .= '
-			.tf-hotel-template-4 .tf-archive-details .tf-archive-hotel .tf-archive-hotel-content .tf-archive-hotel-content-right .view-hotel:hover, 
-			.tf_template_4_hotel_archive .tf-archive-details .tf-archive-hotel .tf-archive-hotel-content .tf-archive-hotel-content-right .view-hotel:hover, 
-			.tf_template_4_tour_archive .tf-archive-details .tf-archive-hotel .tf-archive-hotel-content .tf-archive-hotel-content-right .view-hotel:hover, 
-			.tf_template_4_apartment_archive .tf-archive-details .tf-archive-hotel .tf-archive-hotel-content .tf-archive-hotel-content-right .view-hotel:hover{
-				background-color: ' . $tf_t4_btn_hover_bg_color . ' !important;
-			}
-			';
-		}
-
-		wp_add_inline_style( 'tf-app-style', apply_filters( 'tf_global_css', $output ) );
-	}
-
-	function tf_hotel_css() {
-		// Store as PHP variables
-		// Hotel CSS
-		$tf_hotel_type_color         = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-hotel-type-bg-color' ) )['regular'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-hotel-type-bg-color' ) )['regular'] : '';
-		$tf_hotel_type_bg_color      = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-hotel-type-bg-color' ) )['hover'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-hotel-type-bg-color' ) )['hover'] : '';
-		$tf_share_color_reg          = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-hotel-share-icon' ) )['regular'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-hotel-share-icon' ) )['regular'] : '';
-		$tf_share_color_hov          = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-hotel-share-icon' ) )['hover'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-hotel-share-icon' ) )['hover'] : '';
-		$tf_gradient_one_reg         = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-hotel-map-button' ) )['gradient_one_reg'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-hotel-map-button' ) )['gradient_one_reg'] : '';
-		$tf_gradient_two_reg         = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-hotel-map-button' ) )['gradient_two_reg'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-hotel-map-button' ) )['gradient_two_reg'] : '';
-		$tf_gradient_one_hov         = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-hotel-map-button' ) )['gradient_one_hov'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-hotel-map-button' ) )['gradient_one_hov'] : '';
-		$tf_gradient_two_hov         = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-hotel-map-button' ) )['gradient_two_hov'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-hotel-map-button' ) )['gradient_two_hov'] : '';
-		$tf_map_text_color           = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-hotel-map-button-text' ) )['regular'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-hotel-map-button-text' ) )['regular'] : '';
-		$tf_hotel_features           = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-hotel-features-color' ) )['regular'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-hotel-features-color' ) )['regular'] : '';
-		$tf_hotel_table_color        = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-hotel-table-style' ) )['table_color'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-hotel-table-style' ) )['table_color'] : '';
-		$tf_hotel_table_bg_color     = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-hotel-table-style' ) )['table_bg_color'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-hotel-table-style' ) )['table_bg_color'] : '';
-		$tf_hotel_table_border_color = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-hotel-table-style' ) )['table_border_color'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-hotel-table-style' ) )['table_border_color'] : '';
-
-		$output = '';
-
-		// Hotel CSS
-		if ( $tf_hotel_type_color ) {
-			$output .= '
-			.tf-title-left span.post-type {color: ' . $tf_hotel_type_color . ';}
-		';
-		}
-		if ( $tf_hotel_type_bg_color ) {
-			$output .= '
-			.tf-title-left span.post-type {background: ' . $tf_hotel_type_bg_color . ';}
-		';
-		}
-		if ( $tf_share_color_reg ) {
-			$output .= '
-			.tf-share .share-toggle i, .tf-single-page .tf-section.tf-single-head .tf-share > a i,
-			.tf-wishlist-button i,
-			.tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content .tf-wish-and-share a.share-toggle i {color: ' . $tf_share_color_reg . ' !important;}
-		';
-		}
-		if ( $tf_share_color_hov ) {
-			$output .= '
-			.tf-share .share-toggle i:hover, .tf-single-page .tf-section.tf-single-head .tf-share > a i:hover,
-			.tf-wishlist-button i:hover,
-			.tf-template-3 .tf-hero-section-wrap .tf-container .tf-hero-content .tf-wish-and-share a.share-toggle:hover i {color: ' . $tf_share_color_hov . ' !important;}
-		';
-		}
-		if ( $tf_gradient_one_reg && $tf_gradient_two_reg ) {
-			$output .= '
-			.show-on-map .btn-styled, .tf-single-page .tf-hotel-location-map .tf-hotel-location-preview a i {background: linear-gradient(to bottom, ' . $tf_gradient_one_reg . ' 0, ' . $tf_gradient_two_reg . ' 100%) !important;}
-		';
-		}
-		if ( $tf_gradient_one_hov && $tf_gradient_two_hov ) {
-			$output .= '
-			.show-on-map .btn-styled:hover, .tf-single-page .tf-hotel-location-map .tf-hotel-location-preview a i:hover {background: linear-gradient(to bottom, ' . $tf_gradient_one_hov . ' 0, ' . $tf_gradient_two_hov . ' 100%) !important;}
-		';
-		}
-		if ( $tf_map_text_color ) {
-			$output .= '
-			.show-on-map .btn-styled, .tf-single-page .tf-hotel-location-map .tf-hotel-location-preview a i {color: ' . $tf_map_text_color . ';}
-		';
-		}
-		if ( $tf_hotel_features ) {
-			$output .= '
-			.tf_features i, 
-			.tf-archive-desc i, 
-			.tf-single-page .tf-hotel-single-features ul li i,
-			.tf-template-global .tf-search-results-list .tf-item-card .tf-item-details .tf-archive-features i,
-			.tf-hotel-design-1 .tf-rooms .tf-features-infos ul li,
-			.tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-overview-popular-facilities > ul li i {color: ' . $tf_hotel_features . '!important;}
-		';
-		}
-		if ( $tf_hotel_table_color or $tf_hotel_table_bg_color ) {
-			$output .= '
-			.availability-table thead{
-				color: ' . $tf_hotel_table_color . ';
-				background: ' . $tf_hotel_table_bg_color . ';
-			}
-			.tf-single-page .tf-rooms-sections .tf-rooms .tf-availability-table>thead tr th{
-				background: ' . $tf_hotel_table_bg_color . ';
-				color: ' . $tf_hotel_table_color . ';
-				border-radius: 0px;
-			}
-		';
-		}
-		if ( $tf_hotel_table_color ) {
-			$output .= '
-			.tf-single-page .tf-rooms-sections .tf-rooms .tf-availability-table>thead tr th{
-				color: ' . $tf_hotel_table_color . ';
-			}
-		';
-		}
-		if ( $tf_hotel_table_border_color ) {
-			$output .= '
-			.availability-table td, .availability-table th, .availability-table td.reserve, .tf-single-page .tf-rooms-sections .tf-rooms .tf-availability-table>tr>td {border-color: ' . $tf_hotel_table_border_color . ';}
-		';
-		}
-
-		if ( $tf_hotel_table_border_color ) {
-			$output .= '
-			.tf-single-page .tf-rooms-sections .tf-rooms .tf-availability-table {border: 1px solid ' . $tf_hotel_table_border_color . '; border-collapse: inherit;}
-			.tf-hotel-design-1 .tf-rooms-sections .tf-rooms .tf-availability-table thead tr th{
-				border-color: ' . $tf_hotel_table_border_color . ';
-			}
-			.tf-hotel-design-1 .tf-rooms-sections .tf-rooms .tf-availability-table tbody tr td{
-				border-color: ' . $tf_hotel_table_border_color . ';
-			}
-		';
-		}
-		if ( $tf_hotel_table_border_color ) {
-			$output .= '
-			
-			.tf-template-3 .tf-available-rooms-wrapper .tf-available-room{
-				border: 1px solid ' . $tf_hotel_table_border_color . ';
-			}
-		';
-		}
-
-		wp_add_inline_style( 'tf-app-style', apply_filters( 'tf_hotel_css', $output ) );
-	}
-
-	function tf_tour_css() {
-		// Store as PHP variables
-		// Tour CSS
-		$tf_tour_sale_price      = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-tour-pricing-color' ) )['sale_price'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-tour-pricing-color' ) )['sale_price'] : '';
-		$tf_tour_org_price       = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-tour-pricing-color' ) )['org_price'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-tour-pricing-color' ) )['org_price'] : '';
-		$tf_tour_tab_text        = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-tour-pricing-color' ) )['tab_text'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-tour-pricing-color' ) )['tab_text'] : '';
-		$tf_tour_tab_bg          = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-tour-pricing-color' ) )['tab_bg'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-tour-pricing-color' ) )['tab_bg'] : '';
-		$tf_tour_active_tab_text = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-tour-pricing-color' ) )['active_tab_text'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-tour-pricing-color' ) )['active_tab_text'] : '';
-		$tf_tour_active_tab_bg   = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-tour-pricing-color' ) )['active_tab_bg'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-tour-pricing-color' ) )['active_tab_bg'] : '';
-		$tf_tour_tab_border      = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-tour-pricing-color' ) )['tab_border'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-tour-pricing-color' ) )['tab_border'] : '';
-		$tf_tour_icon_color      = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-tour-info-color' ) )['icon_color'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-tour-info-color' ) )['icon_color'] : '';
-		$tf_tour_heading_color   = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-tour-info-color' ) )['heading_color'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-tour-info-color' ) )['heading_color'] : '';
-		$tf_tour_text_color      = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-tour-info-color' ) )['text_color'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-tour-info-color' ) )['text_color'] : '';
-		$tf_tour_bg_one          = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-tour-info-color' ) )['bg_one'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-tour-info-color' ) )['bg_one'] : '';
-		$tf_tour_bg_two          = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-tour-info-color' ) )['bg_two'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-tour-info-color' ) )['bg_two'] : '';
-		$tf_tour_bg_three        = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-tour-info-color' ) )['bg_three'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-tour-info-color' ) )['bg_three'] : '';
-		$tf_tour_bg_four         = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-tour-info-color' ) )['bg_four'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-tour-info-color' ) )['bg_four'] : '';
-		$tf_tour_btn_col         = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-tour-sticky-booking' ) )['btn_col'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-tour-sticky-booking' ) )['btn_col'] : '';
-		$tf_tour_btn_bg          = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-tour-sticky-booking' ) )['btn_bg'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-tour-sticky-booking' ) )['btn_bg'] : '';
-		$tf_tour_btn_hov_bg      = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-tour-sticky-booking' ) )['btn_hov_bg'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-tour-sticky-booking' ) )['btn_hov_bg'] : '';
-		$tf_tour_btn_hov_col     = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-tour-sticky-booking' ) )['btn_hov_col'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-tour-sticky-booking' ) )['btn_hov_col'] : '';
-		$tf_tour_form_background = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-tour-sticky-booking' ) )['form_background'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-tour-sticky-booking' ) )['form_background'] : '';
-		$tf_tour_form_border     = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-tour-sticky-booking' ) )['form_border'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-tour-sticky-booking' ) )['form_border'] : '';
-		$tf_inc_gradient_one_reg = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-include-exclude' ) )['gradient_one_reg'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-include-exclude' ) )['gradient_one_reg'] : '';
-		$tf_inc_gradient_two_reg = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-include-exclude' ) )['gradient_two_reg'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-include-exclude' ) )['gradient_two_reg'] : '';
-		$tf_inc_heading_color    = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-include-exclude' ) )['heading_color'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-include-exclude' ) )['heading_color'] : '';
-		$tf_inc_text_color       = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-include-exclude' ) )['text_color'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-include-exclude' ) )['text_color'] : '';
-		$tf_itin_time_day_txt    = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-tour-itinerary' ) )['time_day_txt'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-tour-itinerary' ) )['time_day_txt'] : '';
-		$tf_itin_time_day_bg     = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-tour-itinerary' ) )['time_day_bg'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-tour-itinerary' ) )['time_day_bg'] : '';
-		$tf_itin_heading_color   = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-tour-itinerary' ) )['heading_color'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-tour-itinerary' ) )['heading_color'] : '';
-		$tf_itin_text_color      = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-tour-itinerary' ) )['text_color'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-tour-itinerary' ) )['text_color'] : '';
-		$tf_itin_bg_color        = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-tour-itinerary' ) )['bg_color'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-tour-itinerary' ) )['bg_color'] : '';
-		$tf_itin_icon_color      = ! empty( Helper::tf_data_types( Helper::tfopt( 'tourfic-tour-itinerary' ) )['icon_color'] ) ? Helper::tf_data_types( Helper::tfopt( 'tourfic-tour-itinerary' ) )['icon_color'] : '';
-
-		$output = '';
-
-		// Tour CSS
-		if ( $tf_tour_sale_price or $tf_tour_org_price or $tf_tour_tab_text or $tf_tour_tab_bg or $tf_tour_tab_border ) {
-			$output .= '
-			.tf-single-tour-pricing .tf-price span.sale-price,
-			.tf-single-page .tf-trip-info .tf-trip-pricing .tf-price-amount {
-				color: ' . $tf_tour_sale_price . ';
-			}
-			.tf-single-tour-pricing .tf-price {
-				color: ' . $tf_tour_org_price . ';
-			}
-			.tf-single-tour-pricing .tf-price-tab li,
-			.tf-single-page .tf-trip-info .person-info,
-			.tf-single-page .tf-trip-info .person-info p {
-				color: ' . $tf_tour_tab_text . ';
-			}
-			.tf-single-tour-pricing .tf-price-tab li,
-			.tf-single-page .tf-trip-info .person-info {
-				background: ' . $tf_tour_tab_bg . ';
-			}
-			.tf-single-tour-pricing .tf-price-tab li.active,
-			.tf-single-page .tf-trip-info .person-info.active {
-				color: ' . $tf_tour_active_tab_text . ';
-			}
-			.tf-single-tour-pricing .tf-price-tab li.active,
-			.tf-single-page .tf-trip-info .person-info.active {
-				background: ' . $tf_tour_active_tab_bg . ';
-			}
-			.tf-single-tour-pricing .tf-price-tab, .tf-single-tour-pricing .tf-price-tab li:nth-child(2), .tf-single-tour-pricing .tf-price-tab li:nth-child(3) {
-				border-color: ' . $tf_tour_tab_border . ';
-			}
-		';
-		}
-
-		if ( $tf_tour_icon_color or $tf_tour_heading_color or $tf_tour_text_color or $tf_tour_bg_one or $tf_tour_bg_two or $tf_tour_bg_three or $tf_tour_bg_four ) {
-			$output .= '
-			.tf-single-square-block i,
-			.tf-single-page .tf-trip-feature-blocks .tf-feature-block i,
-			.tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-features-block-wrapper .tf-feature-block i {
-				color: ' . $tf_tour_icon_color . ';
-			}
-			.tf-single-square-block h4,
-			.tf-single-page .tf-trip-feature-blocks .tf-feature-block h3,
-			.tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-features-block-wrapper .tf-feature-block .tf-feature-block-details h5 {
-				color: ' . $tf_tour_heading_color . ';
-			}
-			.tf-single-square-block p,
-			.tf-single-page .tf-trip-feature-blocks .tf-feature-block p,
-			.tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-features-block-wrapper .tf-feature-block .tf-feature-block-details p {
-				color: ' . $tf_tour_text_color . ';
-			}
-			.tf-single-square-block.first,
-			.tf-single-page .tf-trip-feature-blocks .tf-feature-block.tf-first,
-			.tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-features-block-wrapper .tf-feature-block:nth-child(1) {
-				background: ' . $tf_tour_bg_one . ';
-			}
-			.tf-single-square-block.second,
-			.tf-single-page .tf-trip-feature-blocks .tf-feature-block.tf-second,
-			.tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-features-block-wrapper .tf-feature-block:nth-child(2) {
-				background: ' . $tf_tour_bg_two . ';
-			}
-			.tf-single-square-block.third,
-			.tf-single-page .tf-trip-feature-blocks .tf-feature-block.tf-third,
-			.tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-features-block-wrapper .tf-feature-block:nth-child(3) {
-				background: ' . $tf_tour_bg_three . ';
-			}
-			.tf-single-square-block.fourth,
-			.tf-single-page .tf-trip-feature-blocks .tf-feature-block.tf-tourth,
-			.tf-template-3 .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-features-block-wrapper .tf-feature-block:nth-child(4) {
-				background: ' . $tf_tour_bg_four . ';
-			}
-		';
-		}
-
-		if ( $tf_tour_btn_col or $tf_tour_btn_bg or $tf_tour_btn_hov_col or $tf_tour_btn_hov_bg or $tf_tour_form_background or $tf_tour_form_border ) {
-			$output .= '
-			.tf-tours-fixed .btn-styled {
-				color: ' . $tf_tour_btn_col . ';
-				border-color: ' . $tf_tour_btn_bg . ';
-				background: ' . $tf_tour_btn_bg . ';
-			}
-			.tf-tours-fixed .btn-styled:hover {
-				color: ' . $tf_tour_btn_hov_col . ';
-				border-color: ' . $tf_tour_btn_hov_bg . ';
-				background: ' . $tf_tour_btn_hov_bg . ';
-			}
-			.tf-tour-booking-wrap.tf-tours-fixed {
-				background: ' . $tf_tour_form_background . ';
-				border-color: ' . $tf_tour_form_border . ';
-			}
-		';
-		}
-
-		if ( $tf_inc_gradient_one_reg or $tf_inc_gradient_two_reg or $tf_inc_heading_color or $tf_inc_text_color ) {
-			$output .= '
-			.tf-include-section, 
-			.tf-exclude-section, 
-			.tf-single-page .tf-inex-wrapper .tf-inex,
-			.tf-template-3 .tf-include-exclude-wrapper .tf-include-exclude-innter > div{
-				background-image: linear-gradient(to right, ' . $tf_inc_gradient_one_reg . ', ' . $tf_inc_gradient_two_reg . ');
-				color: ' . $tf_inc_text_color . ';
-			}
-			.tf-inc-exc-content h4,
-			.tf-single-page .tf-inex-wrapper .tf-inex h3 {
-				color: ' . $tf_inc_heading_color . ';
-			}
-		';
-		}
-		if ( $tf_inc_gradient_one_reg or $tf_inc_gradient_two_reg ) {
-			$output .= '
-			.tf-template-3 .tf-include-exclude-wrapper .tf-include-exclude-innter > div{
-				padding: 15px;
-			}
-		';
-		}
-		if ( $tf_itin_time_day_txt or $tf_itin_time_day_bg or $tf_itin_heading_color or $tf_itin_text_color or $tf_itin_bg_color or $tf_itin_icon_color ) {
-			$output .= '
-			.tf-travel-time span,
-			.tf-single-page .tf-itinerary-wrapper .tf-single-itinerary-item .itinerary-day,
-			.tf-template-3 .tf-itinerary-wrapper span.tf-itinerary-time {
-				color: ' . $tf_itin_time_day_txt . ' !important;
-			}
-			.tf-travel-time,
-			.tf-template-3 .tf-itinerary-wrapper span.tf-itinerary-time {
-				background: ' . $tf_itin_time_day_bg . ';
-			}
-			.tf-accordion-head h4, 
-			.tf-accordion-head h4:hover,
-			.tf-single-page .tf-itinerary-wrapper .tf-single-itinerary-item h3,
-			.tf-tour-design-1 .tf-itinerary-wrapper .tf-itinerary-box .tf-single-itinerary-item h4,
-			.tf-template-3 .tf-itinerary-wrapper .tf-itinerary-title h4 {
-				color: ' . $tf_itin_heading_color . ';
-			}
-			.tf-travel-desc,
-			.tf-single-page .tf-itinerary-content-details p {
-				color: ' . $tf_itin_text_color . ';
-			}
-			#tf-accordion-wrapper .tf-accordion-content, 
-			#tf-accordion-wrapper .tf-accordion-head, 
-			.tf-tour-design-1 .tf-itinerary-wrapper .tf-itinerary-box,
-			.tf-template-3 .tf-itinerary-wrapper .tf-single-itinerary {
-				background: ' . $tf_itin_bg_color . ';
-			}
-			#tf-accordion-wrapper .arrow-animate, #tf-accordion-wrapper .arrow,
-			.tf-template-3 .tf-itinerary-wrapper .tf-itinerary-title i {
-				color: ' . $tf_itin_icon_color . ';
-			}
-			.tf-tour-design-1 .tf-itinerary-wrapper .tf-single-itinerary-item.active .accordion-checke::before,
-			.tf-tour-design-1 .tf-itinerary-wrapper .tf-single-itinerary-item .accordion-checke::before {
-				border: 1px solid ' . $tf_itin_icon_color . ' !important;
-			}
-			.tf-tour-design-1 .tf-itinerary-wrapper .tf-single-itinerary-item.active .accordion-checke::after {
-				background: ' . $tf_itin_icon_color . ' !important;
-			}
-		';
-		}
-
-		wp_add_inline_style( 'tf-app-style', apply_filters( 'tf_tour_css', $output ) );
-	}
-
-	function tf_apartment_css() {
-		//amenities
-		$amenities_bg           = ! empty( Helper::tf_data_types( Helper::tfopt( 'apartment-amenities' ) )['amenities_bg'] ) ? Helper::tf_data_types( Helper::tfopt( 'apartment-amenities' ) )['amenities_bg'] : '';
-		$amenities_border_color = ! empty( Helper::tf_data_types( Helper::tfopt( 'apartment-amenities' ) )['amenities_border_color'] ) ? Helper::tf_data_types( Helper::tfopt( 'apartment-amenities' ) )['amenities_border_color'] : '';
-		$amenities_text         = ! empty( Helper::tf_data_types( Helper::tfopt( 'apartment-amenities' ) )['amenities_text'] ) ? Helper::tf_data_types( Helper::tfopt( 'apartment-amenities' ) )['amenities_text'] : '';
-		$amenities_icon         = ! empty( Helper::tf_data_types( Helper::tfopt( 'apartment-amenities' ) )['amenities_icon'] ) ? Helper::tf_data_types( Helper::tfopt( 'apartment-amenities' ) )['amenities_icon'] : '';
-		//features
-		$features_bg           = ! empty( Helper::tf_data_types( Helper::tfopt( 'apartment-features' ) )['features_bg'] ) ? Helper::tf_data_types( Helper::tfopt( 'apartment-features' ) )['features_bg'] : '';
-		$features_border_color = ! empty( Helper::tf_data_types( Helper::tfopt( 'apartment-features' ) )['features_border_color'] ) ? Helper::tf_data_types( Helper::tfopt( 'apartment-features' ) )['features_border_color'] : '';
-		$features_text         = ! empty( Helper::tf_data_types( Helper::tfopt( 'apartment-features' ) )['features_text'] ) ? Helper::tf_data_types( Helper::tfopt( 'apartment-features' ) )['features_text'] : '';
-		$features_icon         = ! empty( Helper::tf_data_types( Helper::tfopt( 'apartment-features' ) )['features_icon'] ) ? Helper::tf_data_types( Helper::tfopt( 'apartment-features' ) )['features_icon'] : '';
-		//booking form
-		$form_heading_color = ! empty( Helper::tf_data_types( Helper::tfopt( 'booking-form-design' ) )['form_heading_color'] ) ? Helper::tf_data_types( Helper::tfopt( 'booking-form-design' ) )['form_heading_color'] : '';
-		$form_bg            = ! empty( Helper::tf_data_types( Helper::tfopt( 'booking-form-design' ) )['form_bg'] ) ? Helper::tf_data_types( Helper::tfopt( 'booking-form-design' ) )['form_bg'] : '';
-		$form_border_color  = ! empty( Helper::tf_data_types( Helper::tfopt( 'booking-form-design' ) )['form_border_color'] ) ? Helper::tf_data_types( Helper::tfopt( 'booking-form-design' ) )['form_border_color'] : '';
-		$form_text          = ! empty( Helper::tf_data_types( Helper::tfopt( 'booking-form-design' ) )['form_text'] ) ? Helper::tf_data_types( Helper::tfopt( 'booking-form-design' ) )['form_text'] : '';
-		$form_fields_bg     = ! empty( Helper::tf_data_types( Helper::tfopt( 'booking-form-design' ) )['form_fields_bg'] ) ? Helper::tf_data_types( Helper::tfopt( 'booking-form-design' ) )['form_fields_bg'] : '';
-		$form_fields_border = ! empty( Helper::tf_data_types( Helper::tfopt( 'booking-form-design' ) )['form_fields_border'] ) ? Helper::tf_data_types( Helper::tfopt( 'booking-form-design' ) )['form_fields_border'] : '';
-		$form_fields_text   = ! empty( Helper::tf_data_types( Helper::tfopt( 'booking-form-design' ) )['form_fields_text'] ) ? Helper::tf_data_types( Helper::tfopt( 'booking-form-design' ) )['form_fields_text'] : '';
-		//Host
-		$host_heading_color = ! empty( Helper::tf_data_types( Helper::tfopt( 'host-card-design' ) )['host_heading_color'] ) ? Helper::tf_data_types( Helper::tfopt( 'host-card-design' ) )['host_heading_color'] : '';
-		$host_bg            = ! empty( Helper::tf_data_types( Helper::tfopt( 'host-card-design' ) )['host_bg'] ) ? Helper::tf_data_types( Helper::tfopt( 'host-card-design' ) )['host_bg'] : '';
-		$host_border_color  = ! empty( Helper::tf_data_types( Helper::tfopt( 'host-card-design' ) )['host_border_color'] ) ? Helper::tf_data_types( Helper::tfopt( 'host-card-design' ) )['host_border_color'] : '';
-		$host_text          = ! empty( Helper::tf_data_types( Helper::tfopt( 'host-card-design' ) )['host_text'] ) ? Helper::tf_data_types( Helper::tfopt( 'host-card-design' ) )['host_text'] : '';
-
-		$output = '';
-		if ( $amenities_bg || $amenities_border_color || $amenities_text || $amenities_icon ) {
-			$output .= '
-			.tf-apartment .apartment-amenities ul {
-				background-color: ' . $amenities_bg . ';
-				border-color: ' . $amenities_border_color . ';
-			}
-			.tf-apartment .apartment-amenities ul li {
-				color: ' . $amenities_text . ';
-			}
-			.tf-apartment .apartment-amenities ul li i {
-				color: ' . $amenities_icon . ';
-			}
-		';
-		}
-		if ( $features_bg || $features_border_color || $features_text || $features_icon ) {
-			$output .= '
-			.tf-apartment .key-features ul {
-				background-color: ' . $features_bg . ';
-				border-color: ' . $features_border_color . ';
-			}
-			.tf-apartment .key-features ul li {
-				color: ' . $features_text . ';
-			}
-			.tf-apartment .key-features ul li i {
-				color: ' . $features_icon . ';
-			}
-		';
-		}
-		if ( $form_heading_color || $form_bg || $form_border_color || $form_text || $form_fields_bg || $form_fields_border || $form_fields_text ) {
-			$output .= '
-			#tf-apartment-booking h4 {
-				color: ' . $form_heading_color . ';
-			}
-			#tf-apartment-booking {
-				background-color: ' . $form_bg . ';
-				border-color: ' . $form_border_color . ';
-			}
-			#tf-apartment-booking .tf-apartment-form-header .tf-apartment-price-per-night span:not(.woocommerce-Price-amount,.woocommerce-Price-currencySymbol),
-			#tf-apartment-booking .tf-apartment-form-header .tf-apartment-price-per-night span,
-			#tf-apartment-booking .tf-apartment-form-header .tf-single-rating {
-				color: ' . $form_text . ';
-			}
-			#tf-apartment-booking .tf-apartment-form-fields{
-				background-color: ' . $form_fields_bg . ';
-				border-color: ' . $form_fields_border . ';
-			}
-			#tf-apartment-booking .tf-apartment-form-fields .tf-apartment-guest-row{
-				border-top-color: ' . $form_fields_border . ';
-			}
-			#tf-apartment-booking .tf-apartment-form-fields .tf_booking-dates .tf-check-in-out-date #check-in-out-date::-webkit-input-placeholder{
-				color: ' . $form_fields_text . ';
-			}
-			#tf-apartment-booking .tf-apartment-form-fields .tf-apartment-guest-row .tf-label,
-			.adults-text, .person-sep, .child-text, .room-text, .infant-text,
-			#tf-apartment-booking .tf-apartment-form-fields .tf_booking-dates .tf-check-in-out-date #check-in-out-date,
-			#tf-apartment-booking .tf-apartment-form-fields .tf_booking-dates .tf-check-in-out-date .tf-label{
-				color: ' . $form_fields_text . ';
-			}
-			';
-		}
-		if ( $host_heading_color || $host_bg || $host_border_color || $host_text ) {
-			$output .= '
-			.host-details {
-				background-color: ' . $host_bg . ';
-				border-color: ' . $host_border_color . ';
-			}
-			.host-details .host-meta h4 {
-				color: ' . $host_heading_color . ';
-			}
-			.host-details,
-			.host-details .host-bottom p,
-			.tf-host-rating-wrapper h6{
-				color: ' . $host_text . ';
-			}
-			';
-		}
-
-		wp_add_inline_style( 'tf-app-style', apply_filters( 'tf_apartment_css', $output ) );
-	}
-
-	function tourfic_google_fonts_scriptss() {
-		$tf_global_font = Helper::tfopt('global-body-fonts-family') ? Helper::tfopt('global-body-fonts-family') : 'Default';
-		$tf_global_heading_font_family = Helper::tfopt('global-heading-fonts-family') ? Helper::tfopt('global-heading-fonts-family') : 'Default';
-		
-		if($tf_global_heading_font_family!="Default"){
-			$heading_url = 'https://fonts.googleapis.com/css2?family='. str_replace("_","+",$tf_global_heading_font_family) .':wght@100;200;300;400;500;600;700;800;900&display=swap';
-			wp_enqueue_style( 'tourfic-google-'.$tf_global_heading_font_family, $heading_url, array(), TF_VERSION );
-		}
-		
-		if($tf_global_font!="Default"){
-			$body_url = 'https://fonts.googleapis.com/css2?family='. str_replace("_","+",$tf_global_font) .':wght@100;200;300;400;500;600;700;800;900&display=swap';
-			wp_enqueue_style( 'tourfic-google-'.$tf_global_font, $body_url, array(), TF_VERSION );
-		}
-	}
 }

@@ -1,0 +1,13 @@
+.single-tf_tours{
+    .tf-single-template{
+        &__one{
+            .tf-toc-wrapper{
+                .tf-section-head{
+                    p{
+                        margin-top: $tf-space-8;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -619,14 +619,17 @@ function initializeCalendar(eventsSource) {
     calendar.render();
 }
 
-// Initialize the calendar when the DOM is ready
 document.addEventListener('DOMContentLoaded', function() {
     var tfcalendarEl = document.getElementById('tf-booking-calendar');
-    var eventsSource;
-    if (tfcalendarEl.dataset.set) {
-        initializeCalendar(eventsSource);
-        tfcalendarEl.style.display = 'none';
-    }else{
-        initializeCalendar(eventsSource);
-    }
+
+    if (tfcalendarEl) {
+        var eventsSource;
+        
+        if (tfcalendarEl.dataset.set) {
+            initializeCalendar(eventsSource);
+            tfcalendarEl.style.display = 'none';
+        } else {
+            initializeCalendar(eventsSource);
+        }
+    } 
 });

@@ -10,18 +10,18 @@
       margin-right: 10px;
       width: 28px;
       height: 28px;
-      font-size: 16px;
+      font-size: 1rem;
       @include flexbox();
       @include align-items(center);
       @include justify-content(center);
-      background-color: $blue60;
-      color: #fff;
+      background-color: $admin-color-primary;
+      color: #ffffff;
       border-radius: 4px
     }
 
     .tf-field-heading-content {
-      color: #000;
-      font-size: 14px;
+      color: $admin-color-heading;
+      font-size: 0.875rem;
       font-weight: 600;
       h3 {
         margin: 0;

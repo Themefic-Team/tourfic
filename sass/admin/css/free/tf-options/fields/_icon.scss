@@ -28,11 +28,11 @@
       right: 0;
       width: 20px;
       height: 20px;
-      background: #FFFFFF;
+      background: #ffffff;
       box-shadow: 0px 8px 16px rgba(90, 91, 106, 0.08);
       border-radius: 8px;
-      color: $red60;
-      font-size: 14px;
+      color: $color-error;
+      font-size: 0.875rem;
       text-align: center;
       line-height: 20px;
       cursor: pointer;
@@ -59,15 +59,15 @@
         max-width: 720px;
         padding: 12px 8px 12px 12px;
         border: none;
-        background: #fff;
+        background: #ffffff;
         border-radius: 4px;
         height: 48px;
         color: $slate80;
-        font-size: 14px;
+        font-size: 0.875rem;
 
         &:focus {
-          background: #FFFFFF;
-          box-shadow: 0 0 0 2px $blue60;
+          background: #ffffff;
+          box-shadow: 0 0 0 2px $admin-color-primary;
           border-radius: 4px;
         }
 
@@ -111,7 +111,7 @@
         li {
           margin-bottom: 8px;
           cursor: pointer;
-          font-size: 14px;
+          font-size: 0.875rem;
           color: $slate80;
           font-weight: 500;
           text-transform: capitalize;
@@ -123,8 +123,8 @@
           }
 
           &.active {
-            background: $blue60;
-            color: #fff;
+            background: $admin-color-primary;
+            color: #ffffff;
           }
         }
       }
@@ -148,8 +148,8 @@
             overflow-y: auto;
 
             li {
-              background: #fff;
-              font-size: 24px;
+              background: #ffffff;
+              font-size: 1.5rem;
               border-radius: 4px;
               cursor: pointer;
               position: relative;
@@ -174,7 +174,7 @@
                   height: 16px;
                   width: 16px;
                   line-height: 16px;
-                  font-size: 12px;
+                  font-size: 0.75rem;
                   text-align: center;
                   border: 1px solid $slate40;
                   border-radius: 100%;
@@ -182,7 +182,7 @@
                   transition: all 0.3s ease;
 
                   i{
-                    color: #fff;
+                    color: #ffffff;
                     opacity: 0;
                     transition: all 0.3s ease;
                   }
@@ -201,8 +201,8 @@
                 box-shadow: -2px 2px 24px rgba(107, 125, 148, 0.2);
                 .tf-icon-inner {
                   span.check-icon {
-                    border-color: $blue60;
-                    background-color: $blue60;
+                    border-color: $admin-color-primary;
+                    background-color: $admin-color-primary;
                     opacity: 1;
                     i{
                       opacity: 1;
@@ -224,7 +224,7 @@
               border-radius:10px;
             }
             &::-webkit-scrollbar-thumb:hover {
-              background: $blue60;
+              background: $admin-color-primary;
             }
           }
         }
@@ -234,7 +234,7 @@
     .tf-modal-footer{
       padding: 24px;
       margin: 0 -30px -30px;
-      background: #FFFFFF;
+      background: #ffffff;
       border-top: 1px solid $slate10;
       box-shadow: 0px -4px 16px rgba(137, 151, 169, 0.2);
       text-align: right;

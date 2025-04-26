@@ -1,0 +1,505 @@
+.single-tf_hotel{
+    .tf-single-template{
+        &__legacy{
+            .tf-room-section{
+                margin-top: -20px;
+                .tf-room-filter .tf-room-checkbox, .tf-room-filter h3 {
+                    color: $color-heading;
+                    list-style: none;
+                }
+
+                h3.tf-room-feature-title {
+                    font-size: 1.125rem;
+                    font-weight: 600;
+                    margin-bottom: 0px;
+                }
+                ul.tf-room-checkbox {
+                    margin-left: 0px;
+                    li{
+                        float: left;
+                        margin: 10px;
+                        display: flex;
+                        align-items: center;
+                        &:first-child{
+                            margin-left: 0;
+                        }
+                    }
+                    label{
+                        margin-left: 5px;
+                        line-height: 1.2;
+                    }
+                }
+
+                .hotel-room-wrap {
+                    width: 100%;
+                    overflow-x: auto;
+                    @media #{$max768} {
+                        width: auto;
+                        overflow-x: auto;
+                    }
+                }
+
+                .tf-room-filter {
+                    padding: 0 0 15px 0;
+                    overflow: hidden;
+                }
+
+                .availability-table {
+                    border: none;
+                    margin-bottom: 0;
+                    thead {
+                        background: $color-primary;
+                        color: $color-white;
+                    }
+                    td,
+                    th {
+                        border-left: 1px solid $color-border-lite;
+                        border-bottom: 1px solid $color-border-lite;
+                        border-top: none;
+                        border-right: none;
+                        padding: 20px;
+                    }
+                    th{
+                        border-top: 1px solid $color-border-lite;
+                    }
+                    td.description {
+                        padding: 25px;
+                        @media #{$max768} {
+                            min-width: 300px;
+                            padding: 20px;
+                        }
+                        h3,a{
+                            font-size: 1.25rem;
+                            line-height: 1.5;
+                            text-decoration: underline;
+                            color: $color-heading;
+                        }
+                        .room-features {
+                            margin-top: 15px;
+                            h4 {
+                                font-size: 1rem;
+                                color: $color-heading;
+                            }
+                            .room-feature-list {
+                                list-style: none;
+                                padding: 0;
+                                margin: 5px 0 0;
+                                li {
+                                    display: inline-block;
+                                    margin-right: 8px;
+                                }
+                            }
+                            i{
+                                font-size: 1rem;
+                                color: $color-text;
+                            }
+                        }
+                        .tf-tooltip {
+                            margin-right: 15px;
+                            .room-detail-icon {
+                                margin: 0;
+                                display: flex;
+                                gap: 10px;
+                                align-items: center;
+                              
+                                .room-icon-wrap {
+                                    border: 1px solid $color-border-lite;
+                                    border-radius: 4px;
+                                    padding: 0;
+                                    margin-right: 0;
+                                    width: 40px;
+                                    height: 40px;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    i{
+                                        font-size: 1rem;
+                                        color: $color-text;
+                                    }
+                                }
+                                .icon-text {
+                                    font-size: 0.875rem;
+                                    color: $color-text;
+                                }
+                            }
+                            &:last-child{
+                                .room-detail-icon {
+                                    margin-right: 0;
+                                }
+                            }
+                        }
+                        
+                        .bed-facilities {
+                            margin: 8px 0;
+                            p{
+                                color: $color-text;
+                            }
+                        }
+                    }
+
+                    td.pax {
+                        min-width: 80px;
+                        h4 {
+                            font-size: 1rem;
+                        }
+                        .tf-tooltip{
+                            .room-detail-icon {
+                                text-align: center;
+                                margin: 15px 0 0 0;
+                                display: flex;
+                                gap: 10px;
+                                align-items: center;
+                                .room-icon-wrap {
+                                    border: 1px solid $color-border-lite;
+                                    border-radius: 4px;
+                                    padding: 0;
+                                    margin-right: 0;
+                                    width: 40px;
+                                    height: 40px;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    i{
+                                        font-size: 1rem;
+                                        color: $color-text;
+                                    }
+                                }
+                                .icon-text {
+                                    font-size: 0.875rem;
+                                    color: $color-text;
+                                }
+                            }
+                            &:last-child{
+                                .room-detail-icon {
+                                    margin-top: 10px;
+                                }
+                            }
+                        }
+                    }
+                    td.pricing{
+                        text-align: center;
+                    }
+                    td.reserve,
+                    td.pricing{
+                        .tf-price{
+                            font-size: 1.5rem;
+                            font-weight: 500;
+                            line-height: normal;
+                            del{
+                                font-size: 1.2rem;
+                                font-weight: 400;
+                            }
+                        }
+                    }
+                
+                    td.options{
+                        ul{
+                            list-style: none;
+                            margin-left: 0;
+                            margin-bottom: 0;
+                            li{
+                                margin-bottom: 4px;
+                                .room-extra-icon{
+                                    margin-right: 5px;
+                                }
+                            }
+                        }
+                    }
+                    td.price{
+                        .tf-hotel-deposit-hide {
+                            display: none;
+                        }
+                        span.tf-price .amount {
+                            font-weight: bold;
+                        }
+                        .price-per-night {
+                            font-size: 0.75rem;
+                            white-space: nowrap;
+                        }
+                    }
+                    td.reserve {
+                        border-right: 1px solid $color-border-lite;
+                        .room-selection-wrap{
+                            select,
+                            .select2-container .select2-selection--single{
+                                background-image: none;
+                                padding: 10px;
+                                width: 100%;
+                                text-align: center;
+                                -moz-appearance: auto;
+                             
+                            }
+                        }
+                        .room-submit-wrap{
+                            margin-top: 15px;
+                        }
+                        #tour_room_details_loader {
+                            position: fixed;
+                            top: 0;
+                            left: 0;
+                            right: 0;
+                            bottom: 0;
+                            background: rgba(255, 255, 255, .8);
+                            display: none;
+                            z-index: 999999;
+                            #tour-room-details-loader-img {
+                                height: 100%;
+                                width: 100%;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                            }
+                        }
+                        .tf-withoutpayment-booking{
+                            text-align: left;
+                        }
+                        .hotel-room-availability,
+                        .hotel-room-book {
+                            white-space: nowrap;
+                        }
+                        .hotel-room-book {
+                            margin-top: 15px;
+                        }
+                    }
+                }
+                
+            }
+        }
+        &__one{
+            .tf-rooms-sections{
+                .tf-rooms{
+                    @media #{$max768}{
+                        overflow-x: scroll;
+                        width: auto;
+                    }
+                    .hotel-room-wrap {
+                        overflow-x: unset;
+                    }
+                    .tf-availability-table{
+                        background-color: $color-white;
+                        box-shadow: 0px 13px 30px 0px rgba(224,232,238,0.32);
+                        border-radius: 5px;
+                        margin-bottom: 0px;
+                        border-collapse: collapse;
+                        width: 100%;
+                        border-left: none;
+                        &>thead{
+                            background-color: $color-primary;
+                            tr{
+                                th{
+                                    text-align: left;
+                                    color: $color-white;
+                                    border: 0px solid;
+                                    border-radius: 5px 5px 0px 0px;
+                                    padding: 13px 30px;
+                                    font-size: 1rem;
+                                    font-weight: 500;
+                                    border: 1px solid $color-border-lite;
+                                }
+                            }
+                        }
+                        &>tbody{
+                            tr{
+                                td{
+                                    border: 1px solid $color-border-lite;
+                                    padding: 30px;
+                                    border-right: none;
+                                    vertical-align: top;
+                                    text-align-last: left;
+                                    @media #{$max768}{
+                                        padding: 20px;
+                                    }
+                                    .tf-room-preview-img{
+                                        margin-right: 20px;
+                                        border-radius: 4px;
+                                        position: relative;
+                                        @media #{$max1024}{
+                                            width: 100%;
+                                            margin-bottom: 10px;
+                                            margin-right: 0;
+                                        }
+                                        img{
+                                            border-radius: 4px;
+                                            height: 100%;
+                                            max-width: 170px;
+                                            min-height: 155px;
+                                        }
+                                        span{
+                                            display: inline-block;
+                                            font-weight: 500;
+                                            background: $color-primary;
+                                            border-radius: 4px 0px 0px 0px;
+                                            padding: 3px 14px;
+                                            position: absolute;
+                                            left: 0;
+                                            top: 0;
+                                            color: $color-white;
+                                            font-size: 0.875rem;
+                                        }
+                                        
+                                    }
+                                    .tf-features-infos{
+                                        @media #{$max1024}{
+                                            width: 100%!important;
+                                        }
+                                        .tf-room-type{
+                                            h3{
+                                                font-size: 1.25rem;
+                                                line-height: normal;
+                                                color: $color-heading;
+                                                a{
+                                                    color: $color-heading;
+                                                    text-decoration: none;
+                                                }
+                                            }
+                                        }
+                                        ul{
+                                            margin: 0;
+                                            padding: 0;
+                                            margin-bottom: 15px;
+                                            li{
+                                                display: inline-block;
+                                                background: $color-gray-light;
+                                                border-radius: 5px;
+                                                padding: 10px;
+                                                margin: 5px 10px 5px 0px;
+                                                line-height: 1.3;
+                                                font-size: 0.75rem;
+                                                i,
+                                                img{
+                                                    margin-right: 5px;
+                                                }
+                                            }
+                                        }
+                                        > a{
+                                            color: $color-primary;
+                                        }
+                                    }
+                                    .hotel-room-book{
+                                        width: 100%;
+                                        margin-top: 10px;
+                                    }
+                                }
+                                td.description{
+                                    width: 65%;
+                                    padding: 30px;
+                                    border-left: 0px;
+                                    @media #{$max768}{
+                                        width: 300px;
+                                        padding: 20px;
+                                        display: table-caption;
+                                        border-top: 0;
+                                    }
+                                    .tf-room-description-box{
+                                        width: 100%;
+                                        .tf-room-detail-qv{
+                                            display: block;
+                                            &.tf-room-gallery-info{
+                                                text-decoration: underline;
+                                            }
+                                        }
+                                    }
+                                    .bed-facilities{
+                                        margin: 8px 0;
+                                        p{
+                                            margin-bottom: 0;
+                                        }
+                                    }
+                                }
+                                td.pax{
+                                    .tf-tooltip{
+                                        @media #{$max768}{
+                                            width: 100px
+                                        }
+                                        .room-detail-icon {
+                                            margin: 15px 0 0 0;
+                                            display: flex;
+                                            align-items: center;
+                                            gap: 10px;
+                                            .room-icon-wrap {
+                                                border: 1px solid $color-border-lite;
+                                                border-radius: 4px;
+                                                padding: 0;
+                                                margin-right: 0;
+                                                width: 40px;
+                                                height: 40px;
+                                                display: flex;
+                                                align-items: center;
+                                                justify-content: center;
+                                                i{
+                                                    font-size: 1rem;
+                                                    color: $color-text;
+                                                }
+                                            }
+                                            .icon-text {
+                                                font-size: 0.875rem;
+                                                color: $color-text;
+                                            }
+                                        }
+                                        &:last-child{
+                                            .room-detail-icon {
+                                                margin-top: 10px;
+                                            }
+                                        }
+                                    }
+                                }
+                                td.reserve{
+                                    .tf-room{
+                                        margin-top: 15px;
+                                        &>span{
+                                            display: block;
+                                            margin-bottom: 5px;
+                                        }
+                                    }
+                                    .tf-price{
+                                        font-size: 1.5rem;
+                                        font-weight: 500;
+                                        color: $color-heading;
+                                        line-height: normal;
+                                        @media #{$max768}{
+                                            display: flex;
+                                            flex-direction: column;
+                                            gap: 5px;
+                                        }
+                                        del{
+                                            font-size: 1.2rem;
+                                            font-weight: 400;
+                                        }
+                                    }
+                                    .price-per-night{
+                                        font-size: .875rem;
+                                        color: $color-text;
+                                    }
+                                    .hotel-room-availability{
+                                        margin-top: 25px;
+                                    }
+                                    .room-selection-wrap{
+                                        select{
+                                            border: 1px solid $color-border-lite;
+                                            text-align: center;
+                                            padding: 8px;
+                                            cursor: pointer;
+                                        }
+                                    }
+                                }
+                                td.options{
+                                    ul{
+                                        list-style: none;
+                                        margin-left: 0;
+                                        margin-bottom: 0;
+                                        li{
+                                            margin-bottom: 4px;
+                                            .room-extra-icon{
+                                                margin-right: 5px;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

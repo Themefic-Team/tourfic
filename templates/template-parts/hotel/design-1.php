@@ -15,9 +15,9 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
     $tf_ext_booking_code = !empty( $meta['booking-code'] ) ? $meta['booking-code'] : '';
 }
 ?>
-<div class="tf-single-page tf-template-global tf-hotel-design-1">
+<div class="tf-single-template__one">
     <div class="tf-tour-single">
-        <div class="tf-template-container">
+        <div class="tf-container">
             <div class="tf-container-inner">
                 <!-- Single Hotel Heading Section start -->
                 <div class="tf-section tf-single-head">
@@ -28,7 +28,7 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
                                 <div class="tf-title-meta tf-flex tf-flex-align-center tf-flex-gap-8">
                                 <?php if ( $locations ) { ?>
                                     <?php if ( !empty( $address ) ) {
-                                        echo '<i class="fa-solid fa-location-dot"></i> ' . wp_kses_post($address) . ' –';
+                                        echo '<div class="tf-address"><i class="fa-solid fa-location-dot"></i>' . wp_kses_post($address) . ' –</div>';
                                     } ?>
                                     <a href="<?php echo esc_url($first_location_url); ?>" class="more-hotel tf-d-ib">
                                         <?php
@@ -47,12 +47,12 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
                                 if ( is_user_logged_in() ) {
                                     if ( Helper::tfopt( 'wl-for' ) && in_array( 'li', Helper::tfopt( 'wl-for' ) ) ) { ?>
                                     <div class="tf-icon tf-wishlist-box">
-                                    <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo esc_attr(wp_create_nonce( "wishlist-nonce" )) ?>" data-id="<?php echo esc_attr($post_id) ?>" data-type="<?php echo esc_attr($post_type) ?>" <?php if ( Helper::tfopt( 'wl-page' ) ) { echo 'data-page-title="' . esc_html(get_the_title( Helper::tfopt( 'wl-page' ) )) . '" data-page-url="' . esc_url(get_permalink( Helper::tfopt( 'wl-page' ) )) . '"'; } ?>></i>
+                                    <i class="<?php echo $has_in_wishlist ? 'fas fa-heart tf-text-red remove-wishlist' : 'far fa-heart-o add-wishlist' ?>" data-nonce="<?php echo esc_attr(wp_create_nonce( "wishlist-nonce" )) ?>" data-id="<?php echo esc_attr($post_id) ?>" data-type="<?php echo esc_attr($post_type) ?>" <?php if ( Helper::tfopt( 'wl-page' ) ) { echo 'data-page-title="' . esc_html(get_the_title( Helper::tfopt( 'wl-page' ) )) . '" data-page-url="' . esc_url(get_permalink( Helper::tfopt( 'wl-page' ) )) . '"'; } ?>></i>
                                     </div>
                             <?php } }else{ 
                                 if ( Helper::tfopt( 'wl-for' ) && in_array( 'lo', Helper::tfopt( 'wl-for' ) ) ) {   ?>
                                     <div class="tf-icon tf-wishlist-box">
-                                    <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo esc_attr(wp_create_nonce( "wishlist-nonce" )) ?>" data-id="<?php echo esc_attr($post_id) ?>" data-type="<?php echo esc_attr($post_type) ?>" <?php if ( Helper::tfopt( 'wl-page' ) ) {
+                                    <i class="<?php echo $has_in_wishlist ? 'fas fa-heart tf-text-red remove-wishlist' : 'far fa-heart-o add-wishlist' ?>" data-nonce="<?php echo esc_attr(wp_create_nonce( "wishlist-nonce" )) ?>" data-id="<?php echo esc_attr($post_id) ?>" data-type="<?php echo esc_attr($post_type) ?>" <?php if ( Helper::tfopt( 'wl-page' ) ) {
                                         echo 'data-page-title="' . esc_html(get_the_title( Helper::tfopt( 'wl-page' ) )) . '" data-page-url="' . esc_url(get_permalink( Helper::tfopt( 'wl-page' ) )) . '"';
                                     } ?>></i>
                                     </div>
@@ -64,13 +64,13 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
                                 if ( Helper::tfopt( 'wl-for' ) && in_array( 'li', Helper::tfopt( 'wl-for' ) ) ) {
                             ?>
                             <div class="tf-icon tf-wishlist-box">
-                            <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo esc_attr(wp_create_nonce( "wishlist-nonce" )) ?>" data-id="<?php echo esc_attr($post_id) ?>" data-type="<?php echo esc_attr($post_type) ?>" <?php if ( Helper::tfopt( 'wl-page' ) ) { echo 'data-page-title="' . esc_html(get_the_title( Helper::tfopt( 'wl-page' ) )) . '" data-page-url="' . esc_url(get_permalink( Helper::tfopt( 'wl-page' ) )) . '"'; } ?>></i>
+                            <i class="<?php echo $has_in_wishlist ? 'fas fa-heart tf-text-red remove-wishlist' : 'far fa-heart-o add-wishlist' ?>" data-nonce="<?php echo esc_attr(wp_create_nonce( "wishlist-nonce" )) ?>" data-id="<?php echo esc_attr($post_id) ?>" data-type="<?php echo esc_attr($post_type) ?>" <?php if ( Helper::tfopt( 'wl-page' ) ) { echo 'data-page-title="' . esc_html(get_the_title( Helper::tfopt( 'wl-page' ) )) . '" data-page-url="' . esc_url(get_permalink( Helper::tfopt( 'wl-page' ) )) . '"'; } ?>></i>
                             </div>
                             <?php } } else{ 
                             if ( Helper::tfopt( 'wl-for' ) && in_array( 'lo', Helper::tfopt( 'wl-for' ) ) ) {    
                             ?>
                             <div class="tf-icon tf-wishlist-box">
-                            <i class="far <?php echo $has_in_wishlist ? 'fa-heart tf-text-red remove-wishlist' : 'fa-heart-o add-wishlist' ?>" data-nonce="<?php echo esc_attr(wp_create_nonce( "wishlist-nonce" )) ?>" data-id="<?php echo esc_attr($post_id) ?>" data-type="<?php echo esc_attr($post_type) ?>" <?php if ( Helper::tfopt( 'wl-page' ) ) {
+                            <i class="<?php echo $has_in_wishlist ? 'fas fa-heart tf-text-red remove-wishlist' : 'far fa-heart-o add-wishlist' ?>" data-nonce="<?php echo esc_attr(wp_create_nonce( "wishlist-nonce" )) ?>" data-id="<?php echo esc_attr($post_id) ?>" data-type="<?php echo esc_attr($post_type) ?>" <?php if ( Helper::tfopt( 'wl-page' ) ) {
                                 echo 'data-page-title="' . esc_html(get_the_title( Helper::tfopt( 'wl-page' ) )) . '" data-page-url="' . esc_url(get_permalink( Helper::tfopt( 'wl-page' ) )) . '"';
                             } ?>></i>
                             </div>
@@ -124,7 +124,7 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
                                             <li>
                                                 <div title="<?php esc_attr_e( 'Share this link', 'tourfic' ); ?>"
                                                     aria-controls="share_link_button">
-                                                    <button id="share_link_button" class="tf_button share-center-copy-cta" tabindex="0"
+                                                    <button id="share_link_button" class="tf_btn tf_btn_small share-center-copy-cta" tabindex="0"
                                                             role="button">
                                                         <i class="fa fa-link" aria-hidden="true"></i>
                                                         
@@ -132,7 +132,7 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
                                                     </button>
                                                     <input type="text" id="share_link_input"
                                                         class="share-center-url share-center-url-input"
-                                                        value="<?php echo esc_attr( $share_link ); ?>" readonly style="opacity: 0; width: 0px !important;margin: 0px">
+                                                        value="<?php echo esc_attr( $share_link ); ?>" readonly>
                                                     
                                                 </div>
                                             </li>
@@ -150,11 +150,11 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
                 <!-- Single Hotel Body details start -->
                 <div class="tf-single-details-wrapper tf-mt-30 tf-mb-40">
                     <div class="tf-single-details-inner tf-flex">
-                        <div class="tf-column tf-tour-details-left">
+                        <div class="tf-tour-details-left">
                             <!-- Hotel Gallery Section -->
                             <div class="tf-hero-gallery tf-mrbottom-30">
                             <div class="tf-gallery-featured <?php echo empty($gallery_ids) ? esc_attr('tf-without-gallery-featured') : ''; ?>">
-                                <img src="<?php echo !empty(wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' )) ? esc_url( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) : esc_url(TF_ASSETS_APP_URL.'/images/feature-default.jpg'); ?>" alt="<?php esc_html_e( 'Hotel Image', 'tourfic' ); ?>">
+                                <img src="<?php echo !empty(wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' )) ? esc_url( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) : esc_url(TF_ASSETS_APP_URL.'images/feature-default.jpg'); ?>" alt="<?php esc_html_e( 'Hotel Image', 'tourfic' ); ?>">
                                 <div class="featured-meta-gallery-videos">
                                     <div class="featured-column tf-gallery-box">
                                         <?php 
@@ -207,7 +207,7 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
                         </div>
 
                         <!-- SIdebar Tour single -->
-                        <div class="tf-column tf-tour-details-right">
+                        <div class="tf-tour-details-right">
 	                        <?php if(($tf_booking_type == 2 && $tf_hide_booking_form !== '1' && $tf_ext_booking_type == 1) || ($tf_booking_type == 1) || $tf_booking_type == 3) :?>
                                 <div class="tf-tour-booking-box tf-box">
                                     <?php Hotel::tf_hotel_sidebar_booking_form(); ?>
@@ -251,7 +251,7 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
                                         <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $address_latitude ); ?>,<?php echo esc_attr( $address_longitude ); ?>&output=embed" width="100%" height="290"
                                                 style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 
-                                        <a data-fancybox class="map-pre" data-src="#tf-hotel-google-maps" href="javascript:;">
+                                        <a data-fancybox class="map-pre" data-src="#tf-hotel-google-maps" href="https://www.google.com/maps/search/<?php echo wp_kses_post($address); ?>">
                                             <i class="fa-solid fa-location-dot"></i>
                                         </a>
 
@@ -260,7 +260,7 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
                                     <?php if (  $tf_openstreet_map=="default" && !empty($address_latitude) && !empty($address_longitude) ) {  ?>
                                         <div class="tf-hotel-location-preview show-on-map">
                                             <div id="hotel-location"></div>
-                                            <a data-fancybox class="map-pre" data-src="#tf-hotel-google-maps" href="javascript:;">
+                                            <a data-fancybox class="map-pre" data-src="#tf-hotel-google-maps" href="https://www.google.com/maps/search/<?php echo wp_kses_post($address); ?>">
                                             <i class="fa-solid fa-location-dot"></i>
                                         </a>
                                         </div>
@@ -282,7 +282,7 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
                                             <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $address_latitude ); ?>,<?php echo esc_attr( $address_longitude ); ?>&output=embed" width="100%" height="290"
                                                     style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 
-                                            <a data-fancybox class="map-pre" data-src="#tf-hotel-google-maps" href="javascript:;">
+                                            <a data-fancybox class="map-pre" data-src="#tf-hotel-google-maps" href="https://www.google.com/maps/search/<?php echo wp_kses_post($address); ?>">
                                                 <i class="fa-solid fa-location-dot"></i>
                                             </a>
 
@@ -321,8 +321,8 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
                 <?php 
                 if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout']) ){
                     foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout'] as $section){
-                        if( !empty($section['hotel-section-status']) && $section['hotel-section-status']=="1" && !empty($section['hotel-section-slug']) ){
-                            include TF_TEMPLATE_PART_PATH . 'hotel/design-1/'.$section['hotel-section-slug'].'.php';
+                        if( !empty($section['status']) && $section['status']=="1" && !empty($section['slug']) ){
+                            include TF_TEMPLATE_PART_PATH . 'hotel/design-1/'.$section['slug'].'.php';
                         }
                     }
                 }else{

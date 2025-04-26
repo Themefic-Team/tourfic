@@ -116,7 +116,6 @@ class Map_Filter extends \WP_Widget {
     function widget_html($button_title, $post_type = 'tf_hotel') {
         $tf_map_settings = !empty(Helper::tfopt('google-page-option')) ? Helper::tfopt('google-page-option') : "default";
         $tf_map_api = !empty(Helper::tfopt('tf-googlemapapi')) ? Helper::tfopt('tf-googlemapapi') : '';
-        $tf_map_marker = !empty(Helper::tfopt('map_template_marker')) ? Helper::tfopt('map_template_marker') : '';
         $post_per_page = get_option( 'posts_per_page' );
         $paged          = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
 
@@ -132,10 +131,18 @@ class Map_Filter extends \WP_Widget {
             return;
         }
 
-        $design_1_items_wrap_class = '';
+        $items_wrap_class = $section_wrap_class = '';
+        if ( ($post_type == 'tf_hotel' && Hotel::template( 'archive' ) == 'default') || 
+        ($post_type == 'tf_tours' && Tour::template( 'archive' ) == 'default') || 
+        ($post_type == 'tf_apartment' && Apartment::template( 'archive' ) == 'default')){
+            $section_wrap_class = 'tf-archive-template__legacy';
+        }elseif ( ($post_type == 'tf_hotel' && Hotel::template( 'archive' ) == 'design-1') || 
+        ($post_type == 'tf_tours' && Tour::template( 'archive' ) == 'design-1')){
+            $section_wrap_class = 'tf-archive-template__one';
+        }
         if ( ($post_type == 'tf_hotel' && Hotel::template( 'archive' ) == 'design-1') ||
             ($post_type == 'tf_tours' && Tour::template( 'archive' ) == 'design-1')){
-            $design_1_items_wrap_class = 'tf-search-results-list';
+            $items_wrap_class = 'tf-search-results-list';
         }
 
         if($post_type == "tf_hotel") {
@@ -168,7 +175,7 @@ class Map_Filter extends \WP_Widget {
                                 <ellipse cx="16" cy="42.5" rx="11" ry="2.5" fill="#141F43" fill-opacity="0.25"/>
                                 <path d="M14 41.0171C9.66667 35.6849 0 22.9696 0 15.7506C0 7.05494 7.08333 0 16 0C24.8333 0 32 7.05494 32 15.7506C32 22.9696 22.25 35.6849 17.9167 41.0171C16.9167 42.2476 15 42.2476 14 41.0171ZM16 21.0008C18.9167 21.0008 21.3333 18.7038 21.3333 15.7506C21.3333 12.8794 18.9167 10.5004 16 10.5004C13 10.5004 10.6667 12.8794 10.6667 15.7506C10.6667 18.7038 13 21.0008 16 21.0008Z" fill="#0E3DD8"/>
                             </svg>
-                            <span class="btn-styled tf-map-modal-btn"><?php echo esc_html($button_title); ?></span>
+                            <span class="tf_btn tf-map-modal-btn"><?php echo esc_html($button_title); ?></span>
                         </div>
                     </div>
 
@@ -176,7 +183,7 @@ class Map_Filter extends \WP_Widget {
                     if ( ($post_type == 'tf_hotel' && Hotel::template( 'archive' ) !== 'design-3') ||
                         ($post_type == 'tf_tours' && Tour::template( 'archive' ) !== 'design-3') ||
                         ($post_type == 'tf_apartment' && Apartment::template( 'archive' ) !== 'design-2') ) : ?>
-                        <div class="tf-archive-details-wrap tf-map-popup-wrap">
+                        <div class="tf-archive-details-wrap tf-map-popup-wrap <?php echo esc_attr($section_wrap_class); ?>">
                             <div class="tf-archive-details ">
                                 <div class="tf-details-left">
                                     <!-- Loader Image -->
@@ -218,7 +225,7 @@ class Map_Filter extends \WP_Widget {
                                         </div>
 
                                         <!--Available rooms start -->
-                                        <div class="tf-archive-hotels archive_ajax_result tf-layout-list <?php echo esc_attr($design_1_items_wrap_class) ?>">
+                                        <div class="tf-archive-hotels archive_ajax_result tf-layout-list <?php echo esc_attr($items_wrap_class) ?>">
 
                                             <?php
                                             $count = 0;
@@ -253,7 +260,7 @@ class Map_Filter extends \WP_Widget {
                                                         $lng = $map['longitude'];
                                                         ob_start();
                                                         ?>
-                                                        <div class="tf-map-item">
+                                                        <div class="tf-map-item" data-price="<?php //echo esc_attr( wc_price( $min_sale_price ) ); ?>">
                                                             <div class="tf-map-item-thumb">
                                                                 <a href="<?php echo esc_url( get_the_permalink() ); ?>">
                                                                     <?php
@@ -473,7 +480,7 @@ class Map_Filter extends \WP_Widget {
                                                         $lng = $map['longitude'];
                                                         ob_start();
                                                         ?>
-                                                        <div class="tf-map-item">
+                                                        <div class="tf-map-item" data-price="<?php //echo esc_attr( wc_price( $min_sale_price ) ); ?>">
                                                             <div class="tf-map-item-thumb">
                                                                 <a href="<?php echo esc_url( get_the_permalink() ); ?>">
                                                                     <?php
@@ -546,7 +553,7 @@ class Map_Filter extends \WP_Widget {
                                                         $lng = $map['longitude'];
                                                         ob_start();
                                                         ?>
-                                                        <div class="tf-map-item">
+                                                        <div class="tf-map-item" data-price="<?php //echo esc_attr( wc_price( $min_sale_price ) ); ?>">
                                                             <div class="tf-map-item-thumb">
                                                                 <a href="<?php echo esc_url( get_the_permalink() ); ?>">
                                                                     <?php
@@ -617,7 +624,7 @@ class Map_Filter extends \WP_Widget {
                                                         $lng = $map['longitude'];
                                                         ob_start();
                                                         ?>
-                                                        <div class="tf-map-item">
+                                                        <div class="tf-map-item" data-price="<?php //echo esc_attr( wc_price( $min_sale_price ) ); ?>">
                                                             <div class="tf-map-item-thumb">
                                                                 <a href="<?php echo esc_url( get_the_permalink() ); ?>">
                                                                     <?php
@@ -677,7 +684,7 @@ class Map_Filter extends \WP_Widget {
                                 </div>
 
                                 <div class="tf-details-right tf-archive-right">
-                                <div id="map-marker" data-marker="<?php echo !empty($tf_map_marker) ? esc_url($tf_map_marker) : esc_url(TF_ASSETS_URL . 'app/images/cluster-marker.png'); ?>"></div>
+                                    <div id="map-marker" data-marker="<?php echo esc_url(TF_ASSETS_URL . 'app/images/cluster-marker.png'); ?>"></div>
                                     <div class="tf-hotel-archive-map-wrap">
                                         <div id="tf-hotel-archive-map"></div>
                                     </div>

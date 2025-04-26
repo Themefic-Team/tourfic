@@ -1,6 +1,6 @@
 //global css
-@import '../../../../common/css/variable';
-@import '../../../../common/css/mixin';
+@import '../../../../common/variable';
+@import '../../../../common/mixin';
 
 /*
 Cover pic
@@ -8,7 +8,7 @@ Cover pic
 .tf-profile-cover-pic {
     position: relative;
 
-    @media #{$max991} {
+    @media #{$max1024} {
         margin-bottom: 20px;
     }
 
@@ -33,10 +33,10 @@ Cover pic
         top: 16px;
         right: 16px;
         color: #e24c4c;
-        background-color: #fff;
+        background-color: #ffffff;
         height: 32px;
         width: 32px;
-        font-size: 16px;
+        font-size: 1rem;
         border-radius: 100%;
         @include flex-center();
         font-weight: 500;
@@ -69,10 +69,10 @@ Cover pic
             top: 20px;
             right: -14px;
             color: #0a5ac2;
-            background-color: #fff;
+            background-color: #ffffff;
             height: 32px;
             width: 32px;
-            font-size: 16px;
+            font-size: 1rem;
             border-radius: 100%;
             @include flex-center();
             font-weight: 500;
@@ -95,7 +95,7 @@ Cover pic
 }
 
 .tf-vendor-setting {
-    background-color: #fff;
+    background-color: #ffffff;
     padding: 20px 25px;
     margin-top: 20px;
     border-radius: 5px;
@@ -106,7 +106,7 @@ Cover pic
     .tf-grid-view {
         .tf-save-user {
             padding: 8px 15px;
-            font-size: 16px;
+            font-size: 1rem;
             font-weight: 600;
             letter-spacing: 0.5px;
             margin-top: 10px;
@@ -150,13 +150,13 @@ Cover pic
     .tf-vendor-reg-response {
         .tf_errors {
             color: red;
-            font-size: 16px;
+            font-size: 1rem;
             line-height: 24px;
         }
 
         .tf_success {
             color: green;
-            font-size: 16px;
+            font-size: 1rem;
             line-height: 24px;
             font-weight: 600;
         }
@@ -226,7 +226,7 @@ Cover pic
 .tf-payout-edit,
 .tf-vendor-list-edit {
     display: inline-block;
-    background: #fff;
+    background: #ffffff;
     border-color: #c8d7e1;
     border-style: solid;
     border-width: 1px 1px 2px;
@@ -306,7 +306,7 @@ Cover pic
 }
 
 .tf-vendor-single-report {
-    background-color: #fff;
+    background-color: #ffffff;
     padding: 30px 25px;
     flex-basis: 100%;
     box-shadow: 0 0 0 1px rgba(200, 215, 225, 0.5), 0 1px 2px #e9eff3;
@@ -315,7 +315,7 @@ Cover pic
 
 .tf-tooltip-overview {
     display: flex;
-    font-size: 14px;
+    font-size: 0.875rem;
 }
 
 .tooltip-title-box {
@@ -327,7 +327,7 @@ Cover pic
 .tooltip-title-box .tf-tooltip {
     left: 50%;
     padding: 10px 10px;
-    color: #FFFFFF;
+    color: #ffffff;
     background-color: #333333;
     font-weight: normal;
     font-size: 13px;
@@ -365,14 +365,14 @@ Cover pic
 }
 
 .tf-vendor-single-report p {
-    font-size: 14px;
+    font-size: 0.875rem;
     margin: 0px;
 }
 
 .tf-vendor-single-report h3 {
     font-size: 28px;
     margin: 15px 0px;
-    color: #000;
+    color: $admin-color-heading;
 }
 
 .tf-vendor-single-report span {
@@ -391,7 +391,7 @@ Cover pic
 }
 
 .tf-vendor-order-cart {
-    background: #fff;
+    background: #ffffff;
     padding: 20px;
     border-radius: 10px;
 }
@@ -426,7 +426,7 @@ Cover pic
 /* vendor  Data Table */
 
 .tf-setting-dashboard .tf-vendor-list-data .tablenav.top {
-    background: #fff;
+    background: #ffffff;
     padding: 20px 15px;
     margin-bottom: 10px;
     border-radius: 6px;
@@ -436,13 +436,13 @@ Cover pic
 .tf-setting-dashboard .tf-vendor-list-data .tablenav #tf_vendor_bulk {
     border: 1px solid #ededed;
     color: #666;
-    font-size: 14px;
+    font-size: 0.875rem;
     height: 38px;
 }
 
 .tf-setting-dashboard .tf-vendor-list-data .tablenav input[type="submit"] {
     background-color: #003C79 !important;
-    color: #fff !important;
+    color: #ffffff !important;
     border: none !important;
     border-radius: 5px !important;
     outline: none;
@@ -453,7 +453,7 @@ Cover pic
 
 .tf-page-create-button {
     background-color: #003C79 !important;
-    color: #fff !important;
+    color: #ffffff !important;
     border: none !important;
     padding: 6px 8px !important;
     border-radius: 5px !important;
@@ -464,7 +464,7 @@ Cover pic
     table {
         border: 0px solid;
         box-shadow: 0 0 0 1px rgba(200, 215, 225, 0.5), 0 1px 2px #e9eff3;
-        background-color: #fff;
+        background-color: #ffffff;
 
         thead {
             box-shadow: 0px 4px 20px rgba(0, 0, 0, .06);
@@ -472,8 +472,8 @@ Cover pic
 
             tr {
                 th {
-                    color: #000;
-                    font-size: 14px;
+                    color: $admin-color-heading;
+                    font-size: 0.875rem;
                     font-weight: 600;
                     padding: 20px 10px;
                     font-family: 'arial';
@@ -482,8 +482,8 @@ Cover pic
                 }
 
                 td {
-                    color: #000;
-                    font-size: 14px;
+                    color: $admin-color-heading;
+                    font-size: 0.875rem;
                     font-weight: 600;
                     padding: 20px 10px;
                     font-family: 'arial';
@@ -499,8 +499,8 @@ Cover pic
 
             tr {
                 th {
-                    color: #000;
-                    font-size: 14px;
+                    color: $admin-color-heading;
+                    font-size: 0.875rem;
                     font-weight: 600;
                     padding: 20px 10px;
                     font-family: 'arial';
@@ -509,8 +509,8 @@ Cover pic
                 }
 
                 td {
-                    color: #000;
-                    font-size: 14px;
+                    color: $admin-color-heading;
+                    font-size: 0.875rem;
                     font-weight: 600;
                     padding: 20px 10px;
                     font-family: 'arial';
@@ -524,13 +524,13 @@ Cover pic
             tr {
                 td {
                     border-bottom: 1px solid #eaeaea;
-                    font-size: 14px;
+                    font-size: 0.875rem;
                     padding: 24px 10px;
                 }
 
                 th {
                     border-bottom: 1px solid #eaeaea;
-                    font-size: 14px;
+                    font-size: 0.875rem;
                     padding: 28px 5px !important;
                 }
             }
@@ -539,7 +539,7 @@ Cover pic
 }
 
 .tf-admin-data-table table tbody tr:nth-child(odd) {
-    background-color: #fff;
+    background-color: #ffffff;
 }
 
 .tf-admin-data-table table tbody tr:nth-child(even) {
@@ -567,7 +567,7 @@ Cover pic
     width: 600px;
     margin: 30px auto;
     padding: 30px;
-    background-color: #fff;
+    background-color: #ffffff;
     box-shadow: 0 10px 30px rgba(0, 0, 0, .18);
     border-radius: 10px;
 }
@@ -580,9 +580,9 @@ a.tf-payout-times {
     height: 36px;
     line-height: 36px;
     background: red;
-    color: #fff;
+    color: #ffffff;
     text-align: center;
-    font-size: 14px;
+    font-size: 0.875rem;
     border-radius: 50%;
     cursor: pointer;
     text-decoration: none;
@@ -592,7 +592,7 @@ a.tf-payout-times {
 .tf-payout-update-button {
     cursor: pointer;
     padding: 10px 20px !important;
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: 600;
     letter-spacing: 0.5px;
 }
@@ -670,7 +670,7 @@ a.tf-payout-times {
     width: 18px;
     left: 2px;
     bottom: 1px;
-    background-color: white;
+    background: #ffffff;
     -webkit-transition: .4s;
     transition: .4s;
 }

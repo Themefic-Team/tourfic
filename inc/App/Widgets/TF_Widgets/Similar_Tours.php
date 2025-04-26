@@ -55,7 +55,7 @@ class Similar_Tours extends \WP_Widget {
         }
         ?>
 			<div class="ni-buttons">
-				<a href="<?php echo esc_url( Helper::tf_booking_search_action()) . '?destination=' . esc_attr( $terms[0]->name ) . '&adults=' . esc_attr($_GET['adults']) . '&children=' . esc_attr($_GET['children']) . '&room=' . esc_attr($_GET['room']) . '&check-in-date=' . esc_attr($_GET['check-in-date']) . '&check-out-date=' . esc_attr($_GET['check-out-date']); ?>" class="button tf_button btn-outline"><?php echo esc_html( $btn_label );?></a>
+				<a href="<?php echo esc_url(Helper::tf_booking_search_action()) . '?destination=' . esc_attr( $terms[0]->name ) . '&adults=' . esc_attr($_GET['adults']) . '&children=' . esc_attr($_GET['children']) . '&room=' . esc_attr($_GET['room']) . '&check-in-date=' . esc_attr($_GET['check-in-date']) . '&check-out-date=' . esc_attr($_GET['check-out-date']); ?>" class="tf_btn tf_btn_outline"><?php echo esc_html( $btn_label );?></a>
 			</div>
 		</div>
 		<!-- End similar tour widget -->

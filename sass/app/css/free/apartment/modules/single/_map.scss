@@ -1,0 +1,123 @@
+.single-tf_apartment{
+    .tf-single-template{
+        &__legacy{
+            #apartment-map {
+                margin-bottom: 80px;
+                .show-on-map {
+                    .btn-styled {
+                        text-transform: uppercase;
+                        font-weight: bold;
+                    }
+                }
+                .tf-map-content-wrapper {
+                    @include flexbox();
+                    @include flex-wrap(wrap);
+                    gap: 24px;
+                
+                    &.tf-map-content-full {
+                        .tf-apartment-map {
+                            @include flex(0 0 100%);
+                        }
+                
+                        .about-location {
+                            @include flex(0 0 100%);
+                        }
+                    }
+                
+                    .tf-apartment-map {
+                        @include flex(0 0 calc(50% - 12px));
+                
+                        @media #{$max768} {
+                            @include flex(0 0 100%);
+                        }
+                
+                        h3 {
+                            font-weight: 600;
+                            font-size: 1.25rem;
+                            line-height: 1.5;
+                            color: $color-heading;
+                            margin-bottom: 24px;
+                        }
+                
+                        #apartment-location {
+                            border-radius: 8px;
+                            @media #{$max768} {
+                                height: 250px;
+                            }
+                        }
+                
+                        iframe {
+                            border-radius: 8px;
+                            @media #{$max575}{
+                                height: 300px;
+                            }
+                        }
+                    }
+                
+                    .about-location {
+                        @include flex(0 0 calc(50% - 52px));
+                        padding-left: 40px;
+                
+                        @media #{$max768} {
+                            @include flex(0 0 100%);
+                            padding-left: 0;
+                        }
+                
+                        .surroundings_sec_title {
+                            font-weight: 600;
+                            font-size: 1.5rem;
+                            line-height: 1.5;
+                            color: $color-heading;
+                            margin: 0 0 8px 0;
+                        }
+                
+                        .surroundings_subtitle {
+                            color: $color-gray;
+                            font-size: 1rem;
+                            margin: 0 0 30px 0;
+                            font-weight: 400;
+                            line-height: 1.5;
+                            letter-spacing: 0.2px;
+                        }
+                
+                        .tf-apartment-surronding-criteria {
+                            margin-bottom: 30px;
+                        }
+                
+                        .tf-apartment-surronding-criteria-label {
+                            @include flexbox();
+                            @include align-items(center);
+                            font-size: 1.125rem;
+                            font-weight: 500;
+                            color: $color-heading;
+                
+                            i {
+                                margin-right: 8px;
+                                color: $color-text;
+                            }
+                        }
+                
+                        .tf-apartment-surronding-places {
+                            margin: 0;
+                            padding: 0;
+                            list-style: none;
+                
+                            li {
+                                padding: 8px 0 8px 32px;
+                                border-bottom: 1px solid $color-border-lite;
+                                @include flexbox();
+                                @include align-items(center);
+                                @include justify-content(space-between);
+                                color: $color-text;
+                                font-size: 0.875rem;
+                                font-weight: 400;
+                                line-height: 1.5;
+                                letter-spacing: 0.2px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

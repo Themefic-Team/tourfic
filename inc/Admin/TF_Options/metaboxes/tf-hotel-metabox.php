@@ -79,20 +79,21 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'id'       => 'tf_single_hotel_template',
 					'type'     => 'imageselect',
 					'label'    => esc_html__( 'Single Hotel Page Layout', 'tourfic' ),
-					'multiple' 		=> true,
-					'inline'   		=> true,
 					'options'   	=> array(
-						'design-1' 				=> array(
-							'title'			=> 'Design 1',
-							'url' 			=> TF_ASSETS_ADMIN_URL."images/template/design1-hotel.jpg",
+						'design-1' => array(
+							'title' => esc_html__('Design 1', 'tourfic'),
+							'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-design-1.png",
+							'preview_link' => esc_url('https://tourfic.com/preview/hotels/tuvo-suites-hotel/'),
 						),
-						'design-2' 				=> array(
-							'title'			=> 'Design 2',
-							'url' 			=> TF_ASSETS_ADMIN_URL."images/template/design2-hotel.jpg",
+						'design-2' 	=> array(
+							'title'	=> esc_html__('Design 2', 'tourfic'),
+							'url' 	=> TF_ASSETS_ADMIN_URL."images/template/preview-single-design-2.png",
+							'preview_link' => esc_url('https://tourfic.com/preview/hotels/melbourne-mastlereagh/'),
 						),
-						'default' 			=> array(
-							'title'			=> 'Defult',
-							'url' 			=> TF_ASSETS_ADMIN_URL."images/template/default-hotel.jpg",
+						'default'  => array(
+							'title' => esc_html__('Default', 'tourfic'),
+							'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-default.png",
+							'preview_link' => esc_url('https://tourfic.com/preview/hotels/rio-ontho-palace/'),
 						),
 					),
 					'default'   	=> 'design-1',

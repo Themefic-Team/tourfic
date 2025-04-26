@@ -5,9 +5,6 @@ defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\Classes\Helper;
 use \Tourfic\Classes\Room\Room;
-use \Tourfic\Classes\Hotel\Pricing as HotelPricing;
-use \Tourfic\Classes\Tour\Pricing as TourPricing;
-use \Tourfic\Classes\Apartment\Pricing as AptPricing;
 
 class Migrator {
 	use \Tourfic\Traits\Singleton;
@@ -17,14 +14,15 @@ class Migrator {
 		add_action( 'init', array( $this, 'tf_template_3_migrate_data' ) );
 		add_action( 'init', array( $this, 'tf_migrate_option_data' ) );
 		add_action( 'init', array( $this, 'tf_migrate_data' ) );
-		add_action( 'init', array( $this, 'tf_min_max_price_migrate' ) );
 		if ( Helper::tf_is_woo_active() ) {
 			add_action( 'admin_init', array( $this, 'tf_admin_order_data_migration' ) );
 		}
 		add_action( 'admin_init', array( $this, 'tf_hotel_room_migrate' ) );
 		add_action( 'init', array( $this, 'tf_rooms_data_add_in_hotel' ) );
-//		add_action( 'admin_init', array( $this, 'tf_search_keys_migrate' ) );
+		//		add_action( 'admin_init', array( $this, 'tf_search_keys_migrate' ) );
 		add_action( 'admin_init', array( $this, 'tf_migrate_tf_enquiry_data' ) );
+		add_action( 'admin_init', array( $this, 'tf_template_migrate_data' ) );
+		add_action( 'admin_init', array( $this, 'tf_migrate_color_palatte_data' ) );
 	}
 
 	function tf_permalink_settings_migration() {
@@ -56,45 +54,110 @@ class Migrator {
 		}
 	}
 
-	function tf_min_max_price_migrate() {
+	/**
+	 * Template data migrate repeater to switch-group
+	 *
+	 * run once
+	 */
+	function tf_template_migrate_data() {
+		if ( empty( get_option( 'tf_template_migrate_data' ) ) || ( ! empty( get_option( 'tf_template_migrate_data' ) ) && get_option( 'tf_template_migrate_data' ) < 1 ) ) {
+			$settings = ! empty( get_option( 'tf_settings' ) ) ? get_option( 'tf_settings' ) : array();
+			$single_hotel_layout = $single_hotel_layout1 = $single_hotel_layout2 = [];
+			$single_tour_layout = $single_tour_layout1 = $single_tour_layout2 = [];
+			$single_apartment_layout1 = $single_apartment_layout2 = [];
+			$single_car_layout = [];
+			//Hotel
+			if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout']) ){
+				foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout'] as $key => $section){
+					$single_hotel_layout[$key]['label'] = !empty($section['hotel-section']) ? $section['hotel-section'] : '';
+					$single_hotel_layout[$key]['slug'] = !empty($section['hotel-section-slug']) ? $section['hotel-section-slug'] : '';
+					$single_hotel_layout[$key]['status'] = !empty($section['hotel-section-status']) ? $section['hotel-section-status'] : '0';
+				}
+			}
+			if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout-part-1']) ){
+				foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout-part-1'] as $key => $section){
+					$single_hotel_layout1[$key]['label'] = !empty($section['hotel-section']) ? $section['hotel-section'] : '';
+					$single_hotel_layout1[$key]['slug'] = !empty($section['hotel-section-slug']) ? $section['hotel-section-slug'] : '';
+					$single_hotel_layout1[$key]['status'] = !empty($section['hotel-section-status']) ? $section['hotel-section-status'] : '0';
+				}
+			}
+			if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout-part-2']) ){
+				foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-hotel-layout-part-2'] as $key => $section){
+					$single_hotel_layout2[$key]['label'] = !empty($section['hotel-section']) ? $section['hotel-section'] : '';
+					$single_hotel_layout2[$key]['slug'] = !empty($section['hotel-section-slug']) ? $section['hotel-section-slug'] : '';
+					$single_hotel_layout2[$key]['status'] = !empty($section['hotel-section-status']) ? $section['hotel-section-status'] : '0';
+				}
+			}
 
-		if( ! empty( get_option( 'tf_min_max_price_migrate' ) ) ) {
+			//Tour
+			if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-tour-layout']) ){
+				foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-tour-layout'] as $key => $section){
+					$single_tour_layout[$key]['label'] = !empty($section['tour-section']) ? $section['tour-section'] : '';
+					$single_tour_layout[$key]['slug'] = !empty($section['tour-section-slug']) ? $section['tour-section-slug'] : '';
+					$single_tour_layout[$key]['status'] = !empty($section['tour-section-status']) ? $section['tour-section-status'] : '0';
+				}
+			}
+			if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-tour-layout-part-1']) ){
+				foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-tour-layout-part-1'] as $key => $section){
+					$single_tour_layout1[$key]['label'] = !empty($section['tour-section']) ? $section['tour-section'] : '';
+					$single_tour_layout1[$key]['slug'] = !empty($section['tour-section-slug']) ? $section['tour-section-slug'] : '';
+					$single_tour_layout1[$key]['status'] = !empty($section['tour-section-status']) ? $section['tour-section-status'] : '0';
+				}
+			}
+			if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-tour-layout-part-2']) ){
+				foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-tour-layout-part-2'] as $key => $section){
+					$single_tour_layout2[$key]['label'] = !empty($section['tour-section']) ? $section['tour-section'] : '';
+					$single_tour_layout2[$key]['slug'] = !empty($section['tour-section-slug']) ? $section['tour-section-slug'] : '';
+					$single_tour_layout2[$key]['status'] = !empty($section['tour-section-status']) ? $section['tour-section-status'] : '0';
+				}
+			}
+
+			//Apartment
+			if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-aprtment-layout-part-1']) ){
+				foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-aprtment-layout-part-1'] as $key => $section){
+					$single_apartment_layout1[$key]['label'] = !empty($section['aprtment-section']) ? $section['aprtment-section'] : '';
+					$single_apartment_layout1[$key]['slug'] = !empty($section['aprtment-section-slug']) ? $section['aprtment-section-slug'] : '';
+					$single_apartment_layout1[$key]['status'] = !empty($section['aprtment-section-status']) ? $section['aprtment-section-status'] : '0';
+				}
+			}
+			if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-aprtment-layout-part-2']) ){
+				foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-aprtment-layout-part-2'] as $key => $section){
+					$single_apartment_layout2[$key]['label'] = !empty($section['aprtment-section']) ? $section['aprtment-section'] : '';
+					$single_apartment_layout2[$key]['slug'] = !empty($section['aprtment-section-slug']) ? $section['aprtment-section-slug'] : '';
+					$single_apartment_layout2[$key]['status'] = !empty($section['aprtment-section-status']) ? $section['aprtment-section-status'] : '0';
+				}
+			}
+
+			//Car
+			if( !empty(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-car-layout']) ){
+				foreach(Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['single-car-layout'] as $key => $section){
+					$single_car_layout[$key]['label'] = !empty($section['car-section']) ? $section['car-section'] : '';
+					$single_car_layout[$key]['slug'] = !empty($section['car-section-slug']) ? $section['car-section-slug'] : '';
+					$single_car_layout[$key]['status'] = !empty($section['car-section-status']) ? $section['car-section-status'] : '0';
+				}
+			}
+
+			//Hotel
+			$settings['tf-template']['single-hotel-layout'] = $single_hotel_layout;
+			$settings['tf-template']['single-hotel-layout-part-1'] = $single_hotel_layout1;
+			$settings['tf-template']['single-hotel-layout-part-2'] = $single_hotel_layout2;
 			
-			$current_hotel_min_max_price = !empty( get_option( 'tf_hotel_min_max_price' ) ) ? get_option( 'tf_hotel_min_max_price' ) : array();
-			$current_tour_min_max_price = !empty( get_option( 'tf_tours_min_max_price' ) ) ? get_option( 'tf_tours_min_max_price' ) : array();
-			$current_apt_min_max_price = !empty( get_option( 'tf_apt_min_max_price' ) ) ? get_option( 'tf_apt_min_max_price' ) : array();
-			$current_transport_min_max_price = !empty( get_option( 'tf_transport_min_max_price' ) ) ? get_option( 'tf_transport_min_max_price' ) : array();
+			//Tour
+			$settings['tf-template']['single-tour-layout'] = $single_tour_layout;
+			$settings['tf-template']['single-tour-layout-part-1'] = $single_tour_layout1;
+			$settings['tf-template']['single-tour-layout-part-2'] = $single_tour_layout2;
 
+			//Apartment
+			$settings['tf-template']['single-aprtment-layout-part-1'] = $single_apartment_layout1;
+			$settings['tf-template']['single-aprtment-layout-part-2'] = $single_apartment_layout2;
+			
+			//Car
+			$settings['tf-template']['single-car-layout'] = $single_car_layout;
 
-			if( empty( $current_hotel_min_max_price ) ) {
-				$hotel_min_max_price 	 = HotelPricing::get_min_max_price_from_all_hotel();
-				// $transport_min_max_price = HotelPricing::get_min_max_price_from_all_hotel();
-
-				update_option( 'tf_hotel_min_max_price', $hotel_min_max_price );
-			}
-
-			if( empty( $current_tour_min_max_price )) {
-				$tour_min_max_price = TourPricing::get_min_max_price_from_all_tour();
-				update_option( 'tf_tours_min_max_price', $tour_min_max_price );
-			}
-
-			if( empty( $current_apt_min_max_price ) ) {
-				$apartment_min_max_price = AptPricing::get_min_max_price_from_all_apartment();
-				update_option( 'tf_apt_min_max_price', $apartment_min_max_price );
-			}
-
-			if( empty( $current_transport_min_max_price ) ) {
-				$transport_min_max_price = !empty( get_cars_min_max_price() ) ? get_cars_min_max_price() : array();
-				update_option( 'tf_transport_min_max_price', $transport_min_max_price );
-			}
-
-			update_option( 'tf_min_max_price_migrate', 2 );
-
-			// echo "<pre>";
-			// print_r(AptPricing::get_min_max_price_from_all_apartment());
-			// echo "</pre>";
-			// die(); // added by - Sunvi
-
+			update_option( 'tf_settings', $settings );
+			wp_cache_flush();
+			flush_rewrite_rules( true );
+			update_option( 'tf_template_migrate_data', 1 );
 		}
 	}
 
@@ -525,6 +588,91 @@ class Migrator {
 			update_option( 'tf_template_1_car_migrate_data', 1 );
 		}
 
+	}
+
+	/**
+	 * Color Migrate
+	 *
+	 * run once
+	 */
+	function tf_migrate_color_palatte_data(){
+		$migrate_option = get_option('tf_color_data_migrate');
+		if ( empty( $migrate_option) || ( ! empty( $migrate_option) && $migrate_option< 1 ) ) {
+			$options = ! empty( get_option( 'tf_settings' ) ) ? get_option( 'tf_settings' ) : array();
+			
+			if (!empty($options['tf-template']['single-hotel'])) {
+    			$options["color-palette-template"] = 'custom'; 
+			}
+
+			$prev_primary = !empty($options['tourfic-design1-global-color']) ? unserialize($options['tourfic-design1-global-color']) : '';
+			$prev_body_text = !empty($options['tourfic-design1-p-global-color']) ? unserialize($options['tourfic-design1-p-global-color']) : '';
+			$prev_template3 = !empty($options['tourfic-template3-bg']) ? unserialize($options['tourfic-template3-bg']) : '';
+			$tf_brand_data = ! empty( Helper::tf_data_types( Helper::tfopt( "tf-custom-brand" ) ) ) ? Helper::tf_data_types( Helper::tfopt( "tf-custom-brand" ) ) : [];
+			$tf_text_data = ! empty( Helper::tf_data_types( Helper::tfopt( "tf-custom-text" ) ) ) ? Helper::tf_data_types( Helper::tfopt( "tf-custom-text" ) ) : [];
+			$tf_border_data = ! empty( Helper::tf_data_types( Helper::tfopt( "tf-custom-border" ) ) ) ? Helper::tf_data_types( Helper::tfopt( "tf-custom-border" ) ) : [];
+			$tf_filling_data = ! empty( Helper::tf_data_types( Helper::tfopt( "tf-custom-filling" ) ) ) ? Helper::tf_data_types( Helper::tfopt( "tf-custom-filling" ) ) : [];
+
+			if(!empty($options['tf-template'])){
+				$current_template = !empty($options['tf-template']['single-hotel']) ? $options['tf-template']['single-hotel'] : 'design-1';
+		
+				if("design-1"==$current_template){
+
+					$tf_brand_data['default'] = !empty($prev_primary['gcolor']) ? $prev_primary['gcolor'] : '#0E3DD8';
+					$tf_brand_data['dark'] = '#0A2B99';
+					$tf_brand_data['lite'] = '#C9D4F7';
+					$tf_text_data['heading'] = '#1C2130';
+					$tf_text_data['paragraph'] = !empty($prev_body_text['pgcolor']) ? $prev_body_text['pgcolor'] : '#494D59';
+					$tf_text_data['lite'] = '#F3F5FD';
+					$tf_border_data['default'] = '#16275F';
+					$tf_border_data['lite'] = '#D1D7EE';
+					$tf_filling_data['background'] = '#ffffff';
+					$tf_filling_data['foreground'] = '#F5F7FF';
+					$options["tf-custom-brand"] = $tf_brand_data;
+					$options["tf-custom-text"] = $tf_text_data;
+					$options["tf-custom-border"] = $tf_border_data;
+					$options["tf-custom-filling"] = $tf_filling_data;
+
+				}elseif("design-2"==$current_template){
+
+					$tf_brand_data['default'] = !empty($prev_primary['gcolor']) ? $prev_primary['gcolor'] : '#B58E53';
+					$tf_brand_data['dark'] = '#917242';
+					$tf_brand_data['lite'] = !empty($prev_template3['template3-highlight']) ? $prev_template3['template3-highlight'] : '#FAEEDC';;
+					$tf_text_data['heading'] = '#30281C';
+					$tf_text_data['paragraph'] = !empty($prev_body_text['pgcolor']) ? $prev_body_text['pgcolor'] : '#595349';
+					$tf_text_data['lite'] = '#FDF9F3';
+					$tf_border_data['default'] = '#5F4216';
+					$tf_border_data['lite'] = '#EEE2D1';
+					$tf_filling_data['background'] = '#ffffff';
+					$tf_filling_data['foreground'] = '#FDF9F3';
+					$options["tf-custom-brand"] = $tf_brand_data;
+					$options["tf-custom-text"] = $tf_text_data;
+					$options["tf-custom-border"] = $tf_border_data;
+					$options["tf-custom-filling"] = $tf_filling_data;
+				
+				}elseif("default"==$current_template){
+
+					$tf_brand_data['default'] = !empty($prev_primary['gcolor']) ? $prev_primary['gcolor'] : '#003061';
+					$tf_brand_data['dark'] = '#002952';
+					$tf_brand_data['lite'] = '#C2E0FF';
+					$tf_text_data['heading'] = '#1C2630';
+					$tf_text_data['paragraph'] = !empty($prev_body_text['pgcolor']) ? $prev_body_text['pgcolor'] : '#495159';
+					$tf_text_data['lite'] = '#F3F8FD';
+					$tf_border_data['default'] = '#163A5F';
+					$tf_border_data['lite'] = '#D1DFEE';
+					$tf_filling_data['background'] = '#ffffff';
+					$tf_filling_data['foreground'] = '#F5FAFF';
+					$options["tf-custom-brand"] = $tf_brand_data;
+					$options["tf-custom-text"] = $tf_text_data;
+					$options["tf-custom-border"] = $tf_border_data;
+					$options["tf-custom-filling"] = $tf_filling_data;
+				}
+
+				update_option( 'tf_settings', $options );
+				wp_cache_flush();
+				flush_rewrite_rules( true );
+				update_option( 'tf_color_data_migrate', 1 );
+			}
+		}
 	}
 
 	/**

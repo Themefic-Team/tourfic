@@ -82,7 +82,7 @@
                 type: 'post',
                 data: data,
                 beforeSend: function () {
-                    $("#tf-single-hotel-avail .btn-primary.tf-submit").addClass('tf-btn-booking-loading');
+                    $("#tf-single-hotel-avail .tf-submit").addClass('tf-btn-loading');
                 },
                 success: function (data) {
                     if( $("#rooms").length > 0){
@@ -91,10 +91,10 @@
                         }, 500);
                         $("#rooms").html(data);
                         $('.tf-room-filter').show();
-                        $("#tf-single-hotel-avail .btn-primary.tf-submit").removeClass('tf-btn-booking-loading');
+                        $("#tf-single-hotel-avail .tf-submit").removeClass('tf-btn-loading');
                      } else {
                          notyf.error(tf_params.no_room_found);
-                         $("#tf-single-hotel-avail .btn-primary.tf-submit").removeClass('tf-btn-booking-loading');
+                         $("#tf-single-hotel-avail .tf-submit").removeClass('tf-btn-loading');
                      }
                  },
                 error: function (data) {
@@ -240,6 +240,23 @@
         });
 
         /**
+         * Single Hotel Video
+         *
+         * Fancybox
+         */
+
+        Fancybox.bind('[data-fancybox="hotel-video"]', {
+            loop: true,
+            buttons: [
+                "zoom",
+                "slideShow",
+                "fullScreen",
+                "close"
+            ],
+            hash: false,
+        });
+
+        /**
          * Single hotel Gallery
          *
          * Fancybox
@@ -253,6 +270,17 @@
                 "close"
             ],
             hash: false,
+        });
+
+        /**
+         * Single Map
+         *
+         * Fancybox
+         */
+
+        Fancybox.bind('.map-pre', {
+            loop: true,
+            touch: false
         });
 
         /**
@@ -498,34 +526,40 @@
             });
         }
 
-        // Hotel Location
+            // Hotel Location
 
-        $('#tf-destination-adv').on("click", function (e) {
-            var location = $(this).val();
-            $(".tf-hotel-locations").addClass('tf-locations-show');
-        });
-        $('#tf-destination-adv').on("keyup", function (e) {
-            var location = $(this).val();
-            $("#tf-place-destination").val(location);
-        });
-        $('#tf-location').on("keyup", function (e) {
-            var tf_location = $(this).val();
-            $("#tf-search-hotel").val(tf_location);
-        });
-        $(document).on('click', function (event) {
-            if (!$(event.target).closest("#tf-destination-adv").length) {
-                $(".tf-hotel-locations").removeClass('tf-locations-show');
-            }
-        });
-        $('#ui-id-1 li').on("click", function (e) {
-            var dest_name = $(this).attr("data-name");
-            var dest_slug = $(this).attr("data-slug");
-            $(".tf-preview-destination").val(dest_name);
-            $("#tf-place-destination").val(dest_slug);
-            $(".tf-hotel-locations").removeClass('tf-locations-show');
-        });
-
+            $('#tf-destination-adv').on("click", function (e) {
+                $(".tf-hotel-locations").addClass('tf-locations-show');
+            });
         
+            $('#tf-destination-adv').on("keyup", function (e) {
+                var location = $(this).val();
+                $("#tf-place-destination").val(location);
+            });
+        
+            $('#tf-location').on("keyup", function (e) {
+                var tf_location = $(this).val();
+                $("#tf-search-hotel").val(tf_location);
+            });
+    
+        
+            $('#ui-id-1').on("click", "li", function (e) {
+        
+                var dest_name = $(this).attr("data-name");
+                var dest_slug = $(this).attr("data-slug");
+        
+                $(".tf-preview-destination").val(dest_name);
+                $("#tf-place-destination").val(dest_slug);
+        
+                setTimeout(function () {
+                    $(".tf-hotel-locations").removeClass('tf-locations-show');
+                }, 100); 
+            });
+            $(document).on('click', function (event) {
+                if (!$(event.target).closest("#tf-destination-adv, #ui-id-1").length) {
+                    $(".tf-hotel-locations").removeClass('tf-locations-show');
+                }
+            });
 
         // Hotel location autocomplete
         var hotel_location_input = document.getElementById("tf-location");

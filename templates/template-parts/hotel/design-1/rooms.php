@@ -161,12 +161,14 @@ if ( $rooms ) :
 														$room_feature_icon = '<img src="' . $room_f_meta['icon-c'] . '" style="min-width: ' . $room_f_meta['dimention'] . 'px; height: ' . $room_f_meta['dimention'] . 'px;" />';
 													}
 
-													$room_term = get_term( $feature ); ?>
-                                                    <li>
-														<?php echo ! empty( $room_feature_icon ) ? wp_kses_post( $room_feature_icon ) : ''; ?>
-														<?php echo isset( $room_term->name ) && ! empty( $room_term->name ) ? esc_html( $room_term->name ) : ''; ?>
-                                                    </li>
-												<?php }
+													$room_term = get_term( $feature ); 
+													if ( ! is_wp_error($room_term) && ! empty( $room_term->name ) ) : ?>
+														<li>
+															<?php echo ! empty( $room_feature_icon ) ? wp_kses_post( $room_feature_icon ) : ''; ?>
+															<?php echo esc_html( $room_term->name ); ?>
+														</li>
+													<?php endif; 
+												}
 												$tf_room_fec_key ++;
 											}
 										} ?>
@@ -182,8 +184,8 @@ if ( $rooms ) :
 									<?php
 									if ( $tour_room_details_gall ) {
 										?>
-                                        <a href="#" class="tf-room-detail-qv" data-uniqid="<?php echo ! empty( $room['unique_id'] ) ? esc_attr( $room['unique_id'] . $room_id ) : '' ?>"
-                                           data-hotel="<?php echo esc_attr( $post_id ); ?>" style="text-decoration: underline;">
+                                        <a href="#" class="tf-room-detail-qv tf-room-gallery-info" data-uniqid="<?php echo ! empty( $room['unique_id'] ) ? esc_attr( $room['unique_id'] . $room_id ) : '' ?>"
+                                           data-hotel="<?php echo esc_attr( $post_id ); ?>">
 											<?php esc_html_e( "Room Photos & Details", "tourfic" ); ?>
                                         </a>
 
@@ -213,7 +215,7 @@ if ( $rooms ) :
                                     </ul>
                                 </td>
                                 <td class="pax">
-                                    <div style="text-align:center; width: 100%;"><?php echo esc_html__( "Pax:", "tourfic" ); ?></div>
+                                    <div><?php echo esc_html__( "Pax:", "tourfic" ); ?></div>
 									<?php if ( $adult_number ) { ?>
                                         <div class="tf-tooltip tf-d-b">
                                             <div class="room-detail-icon">
@@ -254,11 +256,11 @@ if ( $rooms ) :
 										Pricing::instance( get_the_ID(), $_room->ID )->get_per_price_html( $room_option_key );
 									} ?>
 									<?php if ( $tf_booking_type == 2 && ! empty( $tf_booking_url ) ): ?>
-                                        <a href="<?php echo esc_url( $tf_booking_url ); ?>" class="tf-btn-normal btn-secondary" target="_blank">
+                                        <a href="<?php echo esc_url( $tf_booking_url ); ?>" class="tf_btn tf_btn_gray" target="_blank">
 											<?php esc_html_e( $tf_hotel_reserve_button_text, 'tourfic' ); ?>
                                         </a>
 									<?php else: ?>
-                                        <button class="hotel-room-availability tf-btn-normal btn-secondary" type="submit" style="margin: 0 auto;">
+                                        <button class="hotel-room-availability tf_btn tf_btn_gray" type="submit" style="margin: 0 auto;">
 											<?php esc_html_e( 'Check Availability', 'tourfic' ); ?>
                                         </button>
 									<?php endif; ?>
@@ -275,7 +277,7 @@ if ( $rooms ) :
                             <td class="options"></td>
 						<?php endif; ?>
                             <td class="pax">
-                                <div style="text-align:center; width: 100%;"><?php echo esc_html__( "Pax:", "tourfic" ); ?></div>
+                                <div><?php echo esc_html__( "Pax:", "tourfic" ); ?></div>
 								<?php if ( $adult_number ) { ?>
                                     <div class="tf-tooltip tf-d-b">
                                         <div class="room-detail-icon">
@@ -315,15 +317,15 @@ if ( $rooms ) :
 								}
 								?>
 								<?php if ( $tf_booking_type == 2 && ! empty( $tf_booking_url ) && $tf_ext_booking_type == 1 ): ?>
-                                    <a href="<?php echo esc_url( $tf_booking_url ); ?>" class="tf-btn-normal btn-secondary" target="_blank">
+                                    <a href="<?php echo esc_url( $tf_booking_url ); ?>" class="tf_btn tf_btn_gray" target="_blank">
 										<?php esc_html_e( $tf_hotel_reserve_button_text, 'tourfic' ); ?>
                                     </a>
 								<?php elseif ( $tf_booking_type == 2 && $tf_ext_booking_type == 2 && ! empty( $tf_ext_booking_code ) ): ?>
-                                    <a href="<?php echo esc_url( "#tf-external-booking-embaded-form" ); ?>" class="tf-btn-normal btn-secondary" target="_blank">
+                                    <a href="<?php echo esc_url( "#tf-external-booking-embaded-form" ); ?>" class="tf_btn tf_btn_gray" target="_blank">
 										<?php esc_html_e( $tf_hotel_reserve_button_text, 'tourfic' ); ?>
                                     </a>
 								<?php else: ?>
-                                    <button class="hotel-room-availability tf-btn-normal btn-secondary" type="submit" style="margin: 0 auto;">
+                                    <button class="hotel-room-availability tf_btn tf_btn_gray" type="submit">
 										<?php esc_html_e( 'Check Availability', 'tourfic' ); ?>
                                     </button>
 								<?php endif; ?>

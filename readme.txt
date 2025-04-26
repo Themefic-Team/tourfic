@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, car-rental, multivendor-marketplace
 Requires at least: 5.4
 Tested up to: 6.8
-Stable tag: 2.15.26
+Stable tag: 2.16.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -371,6 +371,18 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 22. Map Template(Pro)
 
 == Changelog ==
+
+= 2.16.0 – April 26, 2025 =
+
+- Added: Container width option has been added.
+- Added: Car rental demo data has been added to the quick setup wizard.
+- Improved: Assets revamped for better performance.
+- Introduced: New design settings panel for enhanced customization.
+- Improved: Template view updated according to the new design panel.
+- Improved: New color palette introduced for consistent design.
+- Improved: Frontend design improvements for better user experience.
+- Improved: Overall system stability has been improved.
+- Fixed: Minor issues and improved frontend dashboard settings.
 
 = 2.15.26 – April 20, 2025 =
 

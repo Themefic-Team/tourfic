@@ -48,7 +48,7 @@ class Tours extends \Tourfic\Core\Shortcodes {
 		ob_start();
 
 		if ( $style == 'slider' ) {
-			$slider_activate = 'tf-slider-activated';
+			$slider_activate = 'tf-slider-activated tf-slick-slider';
 		} else {
 			$slider_activate = 'tf-hotel-grid';
 		}
@@ -70,7 +70,7 @@ class Tours extends \Tourfic\Core\Shortcodes {
 						$post_id          = get_the_ID();
 						$related_comments = get_comments( array( 'post_id' => $post_id ) );
 						?>
-						<div class="tf-slider-item" style="background-image: url(<?php echo ! empty( get_the_post_thumbnail_url( $post_id, 'full' ) ) ? esc_url( get_the_post_thumbnail_url( $post_id, 'full' ) ) : esc_url(TF_ASSETS_APP_URL . '/images/feature-default.jpg'); ?>);">
+						<div class="tf-slider-item" style="background-image: url(<?php echo ! empty( get_the_post_thumbnail_url( $post_id, 'full' ) ) ? esc_url( get_the_post_thumbnail_url( $post_id, 'full' ) ) : esc_url(TF_ASSETS_APP_URL . 'images/feature-default.jpg'); ?>);">
 							<div class="tf-slider-content">
 								<div class="tf-slider-desc">
 									<h3>

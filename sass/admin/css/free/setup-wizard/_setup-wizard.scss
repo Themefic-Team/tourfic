@@ -9,9 +9,9 @@ body.tourfic-settings_page_tf-setup-wizard {
     cursor: pointer;
     border: 0px solid;
     padding: 12px 32px;
-    color: #FFF;
+    color: #ffffff;
     font-family: Inter;
-    font-size: 15px;
+    font-size: 0.938rem;
     font-style: normal;
     font-weight: 600;
     line-height: 24px;
@@ -38,7 +38,7 @@ body.tourfic-settings_page_tf-setup-wizard {
     }
 
     &:hover {
-        color: #FFF;
+        color: #ffffff;
         box-shadow: 0px 24px 20px 0px rgba(8, 20, 33, 0.08), 0px 8px 16px 0px rgba(8, 20, 33, 0.08), 0px 16px 8px 0px rgba(8, 20, 33, 0.04);
 
         &::after {
@@ -55,7 +55,7 @@ body.tourfic-settings_page_tf-setup-wizard {
     padding: 12px 32px;
     color: #003C79;
     font-family: Inter;
-    font-size: 15px;
+    font-size: 0.938rem;
     font-style: normal;
     font-weight: 600;
     line-height: 24px; /* 160% */
@@ -81,7 +81,7 @@ body.tourfic-settings_page_tf-setup-wizard {
 
     &:hover {
         box-shadow: 0px 24px 20px 0px rgba(8, 20, 33, 0.08), 0px 8px 16px 0px rgba(8, 20, 33, 0.08), 0px 16px 8px 0px rgba(8, 20, 33, 0.04);
-        color: #FFF;
+        color: #ffffff;
 
         &::after {
             opacity: 1;
@@ -130,7 +130,7 @@ body.tourfic-settings_page_tf-setup-wizard {
     @include justify-content(space-between);
     @include align-items(center);
 
-    @media #{$max480} {
+    @media #{$max575} {
         @include flex-direction(column);
         gap: 15px;
     }
@@ -148,14 +148,14 @@ body.tourfic-settings_page_tf-setup-wizard {
         span {
             color: #566676;
             font-family: Inter;
-            font-size: 15px;
+            font-size: 0.938rem;
             font-style: normal;
             font-weight: 400;
             line-height: 24px; /* 160% */
             a {
                 color: #003C79;
                 font-family: Inter;
-                font-size: 15px;
+                font-size: 0.938rem;
                 font-style: normal;
                 font-weight: 400;
                 line-height: 24px;
@@ -198,7 +198,7 @@ Welcome Step
         span {
             color: #003C79;
             font-family: Inter;
-            font-size: 15px;
+            font-size: 0.938rem;
             font-style: normal;
             font-weight: 600;
             line-height: 24px;
@@ -207,7 +207,7 @@ Welcome Step
 
     .setup-content-warper {
         border-radius: 16px;
-        background: #FFF;
+        background: #ffffff;
         text-align: center;
         padding: 104px 112px;
         @media #{$max885} {
@@ -241,7 +241,7 @@ Welcome Step
         color: #566676;
         text-align: center;
         font-family: Inter;
-        font-size: 15px;
+        font-size: 0.938rem;
         font-style: normal;
         font-weight: 400;
         line-height: 24px;
@@ -264,7 +264,7 @@ Welcome Step
             @include flex-direction(row);
             @include justify-content(center);
 
-            @media #{$max767} {
+            @media #{$max768} {
                 @include flex-direction(column);
                 gap: 10px;
             }
@@ -278,7 +278,7 @@ Welcome Step
 
     .tf-setup-finish-content {
         border-radius: 16px;
-        background: #FFF;
+        background: #ffffff;
         padding: 56px 32px 96px 32px;
         text-align: center;
 
@@ -389,7 +389,7 @@ Steps
             border: 0;
             border-radius: 0;
             display: inline-block;
-            font-size: 12px;
+            font-size: 0.75rem;
             text-align: center;
             border-color: #1890ff;
             display: block;
@@ -418,7 +418,7 @@ Steps
         span {
             color: #003C79;
             font-family: Inter;
-            font-size: 15px;
+            font-size: 0.938rem;
             font-style: normal;
             font-weight: 600;
             line-height: 24px;
@@ -469,7 +469,7 @@ Steps
     .tf-setup-step-layout {
         padding: 56px 96px;
         border-radius: 16px;
-        background: var(--UI-0, #FFF);
+        background: var(--UI-0, #ffffff);
         text-align: center;
         @include flexbox();
         @include flex-direction(column);
@@ -492,7 +492,7 @@ Steps
         text-align: left;
         color: #27333F;
         font-family: Inter;
-        font-size: 15px;
+        font-size: 0.938rem;
         font-style: normal;
         font-weight: 400;
         line-height: 24px;
@@ -502,7 +502,7 @@ Steps
     .tf-select-title{
         color: #27333f;
         font-family: Inter;
-        font-size: 16px;
+        font-size: 1rem;
         font-style: normal;
         font-weight: 600;
         line-height: 120%;
@@ -511,7 +511,7 @@ Steps
     .tf-setup-step-desc {
         color: #566676;
         font-family: Inter;
-        font-size: 15px;
+        font-size: 0.938rem;
         font-style: normal;
         font-weight: 400;
         line-height: 24px; /* 160% */
@@ -533,20 +533,20 @@ Steps
         }
 
         label {
-            //border: 2px solid #fff;
+            //border: 2px solid #ffffff;
             display: block;
             position: relative;
             cursor: pointer;
             border-radius: 6px;
 
-            @media #{$max480} {
+            @media #{$max575} {
                 padding: 5px;
             }
 
             span {
                 color: #566676;
                 font-family: Inter;
-                font-size: 15px;
+                font-size: 0.938rem;
                 font-style: normal;
                 font-weight: 400;
                 line-height: 24px;
@@ -556,8 +556,8 @@ Steps
         }
 
         label:before {
-            background-color: white;
-            color: white;
+            background: #ffffff
+            #ffffff;
             content: "";
             display: block;
             border-radius: 50%;
@@ -571,14 +571,14 @@ Steps
             transition-duration: 0.4s;
             transform: scale(0);
             font-family: 'dashicons';
-            font-size: 20px;
+            font-size: 1.25rem;
 
-            @media #{$max480} {
+            @media #{$max575} {
                 width: 20px;
                 height: 20px;
                 top: -3px;
                 left: -3px;
-                font-size: 18px;
+                font-size: 1.125rem;
                 line-height: 20px;
             }
         }
@@ -594,7 +594,7 @@ Steps
 
                     &:hover {
                         border-radius: 12px;
-                        background: #FFF;
+                        background: #ffffff;
                         box-shadow: 0px 10px 16px 0px rgba(0, 36, 72, 0.04), 0px 10px 20px 0px rgba(0, 36, 72, 0.04);
                     }
                 }
@@ -642,7 +642,7 @@ Steps
     .setup-form-group {
         border-radius: 12px;
         border: 1px solid #EEF2F6;
-        background: #FFF;
+        background: #ffffff;
         padding: 16px 24px 24px 24px;
         display: flex;
         flex-direction: column;
@@ -693,7 +693,7 @@ Steps
                     padding: 8px 12px;
                     color: #566676;
                     font-family: Inter;
-                    font-size: 15px;
+                    font-size: 0.938rem;
                     font-style: normal;
                     font-weight: 400;
                     line-height: 24px;
@@ -773,7 +773,7 @@ Steps
                 margin: 0;
 
                 label {
-                    font-size: 15px;
+                    font-size: 0.938rem;
                 }
             }
 
@@ -787,7 +787,7 @@ Steps
                 input[type="text"] {
                     height: 32px;
                     margin: 0;
-                    background: #FFF;
+                    background: #ffffff;
                 }
             }
         }
@@ -798,7 +798,7 @@ Steps
             label {
                 color: #27333F;
                 font-family: Inter;
-                font-size: 15px;
+                font-size: 0.938rem;
                 font-style: normal;
                 font-weight: 400;
                 line-height: 24px;
@@ -815,9 +815,8 @@ Steps
                     li {
                         margin: 0;
                         width: 200px;
-                        height: 180px;
+                        // height: 180px;
                         border-radius: 8px;
-                        background-color: hsla(210, 100%, 96%, 1);
                         box-sizing: border-box;
 
                         .tf-image-checkbox {
@@ -825,20 +824,15 @@ Steps
                             .select-image-box {
                                 width: 200px;
                                 height: 180px;
-                                padding: 16px 16px 2px 16px;
+                                padding: 8px 24px 2px 24px;
                                 box-sizing: border-box;
+                                cursor: pointer;
 
                                 img {
                                     width: 100%;
                                     height: 100%;
                                     border: 2px solid rgba(0, 0, 0, 0) !important;
                                     object-fit: cover;
-                                    object-position: top;
-                                    transition: object-position 2s ease-in-out, border-color 0.3s ease-in-out;
-
-                                    &:hover {
-                                        object-position: bottom;
-                                    }
                                 }
                             }
                         }
@@ -861,7 +855,7 @@ Steps
 
         .tf-archive-imageselect-box {
             .tf-image-checkbox .select-image-box {
-                background-color: #FFFAEB !important
+                background-color: #fafafa !important
             }
         }
 
@@ -979,25 +973,25 @@ Steps
         display: inline-block;
         width: 12px;
         height: 12px;
-        border: 2px solid #fff;
+        border: 2px solid #ffffff;
         border-left-color: transparent;
         border-radius: 50%;
         vertical-align: middle;
         visibility: visible;
         opacity: 1;
         transition: opacity .2s ease, visibility .2s ease;
-        -webkit-animation: wd-rotate 450ms infinite linear;
-        animation: wd-rotate 450ms infinite linear;
+        -webkit-animation: tf-rotate 450ms infinite linear;
+        animation: tf-rotate 450ms infinite linear;
     }
 
-    @-webkit-keyframes wd-rotate {
+    @-webkit-keyframes tf-rotate {
         100% {
             -webkit-transform: rotate(360deg);
             transform: rotate(360deg);
         }
     }
 
-    @keyframes wd-rotate {
+    @keyframes tf-rotate {
         100% {
             -webkit-transform: rotate(360deg);
             transform: rotate(360deg);

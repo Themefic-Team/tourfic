@@ -1,0 +1,16 @@
+.single-tf_apartment{
+    .tf-single-template{
+        &__legacy{
+            .apt-description {
+                margin-bottom: 48px;
+                p {
+                    margin: 0;
+                    color: $color-text;
+                    font-size: 0.875rem;
+                    font-weight: 400;
+                    letter-spacing: 0.2px;
+                }
+            }
+        }
+    }
+}

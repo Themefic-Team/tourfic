@@ -1,5 +1,8 @@
 <?php
 // don't load directly
+
+use Tourfic\Classes\Helper;
+
 defined( 'ABSPATH' ) || exit;
 
 if ( ! class_exists( 'TF_text' ) ) {
@@ -10,26 +13,56 @@ if ( ! class_exists( 'TF_text' ) ) {
 		}
 
 		public function render() {
+			$tf_disable_services = ! empty( Helper::tfopt( 'disable-services' ) ) ? Helper::tfopt( 'disable-services' ) : [];
 			?>
             <div id="<?php echo isset( $this->field['id'] ) ? esc_attr( $this->field['id'] ) : '' ?>" class="tf-tablist">
 
 				<?php if ( count( $this->field['tabs'] ) > 1 ): ?>
                     <ul class="tf-nav-tabs">
 						<?php if ( isset( $this->field['tabs'] ) && is_array( $this->field['tabs'] ) ): ?>
+							<?php $active_tab = false; // Flag to track if an active tab has been set ?>
 							<?php foreach ( $this->field['tabs'] as $key => $value ): ?>
-                                <li class="tf-tab-item <?php if ( $key == 0 ) {
-									echo "show";
-								} ?>" data-tab-id="<?php if ( isset( $value['id'] ) ) {
-									echo esc_attr( $value['id'] );
-								} ?>"><?php echo esc_html($value['title']) ?></li>
+								<?php 
+								if(isset( $value['post_dependency'] ) && !empty( $value['post_dependency'] )){
+									if(!empty( $tf_disable_services ) && in_array( $value['post_dependency'], $tf_disable_services )){
+										continue;
+									}
+								}
+
+								// Set the first visible tab as active
+								$active_class = '';
+								if (!$active_tab) {
+									$active_class = 'show';
+									$active_tab = true; // Mark that an active tab has been set
+								}
+								?>
+                                <li class="tf-tab-item <?php echo esc_attr($active_class) ?>" 
+								data-tab-id="<?php echo  isset( $value['id'] ) ? esc_attr( $value['id'] ) : ''?>">
+									<?php echo esc_html($value['title']) ?>
+								</li>
 							<?php endforeach; ?>
 						<?php endif; ?>
                     </ul>
 				<?php endif; ?>
                 <div class="tf-tab-field-content">
 					<?php if ( isset( $this->field['tabs'] ) && is_array( $this->field['tabs'] ) ): ?>
+						<?php $active_tab_content = false; // Flag to track if an active tab has been set ?>
 						<?php foreach ( $this->field['tabs'] as $key => $value ): ?>
-                            <div class="tf-tab-item-content <?php echo $key == 0 ? "show" : '' ?>" data-tab-id="<?php echo isset( $value['id'] ) ? esc_attr( $value['id'] ) : '' ?>">
+							<?php 
+							if(isset( $value['post_dependency'] ) && !empty( $value['post_dependency'] )){
+								if(!empty( $tf_disable_services ) && in_array( $value['post_dependency'], $tf_disable_services )){
+									continue;
+								}
+							}
+
+							// Set the first visible tab as active
+							$active_class = '';
+							if (!$active_tab_content) {
+								$active_class = 'show';
+								$active_tab_content = true; // Mark that an active tab has been set
+							}
+							?>
+                            <div class="tf-tab-item-content <?php echo esc_attr($active_class) ?>" data-tab-id="<?php echo isset( $value['id'] ) ? esc_attr( $value['id'] ) : '' ?>">
 								<?php
 								$parent_id = !empty( $value['id'] ) ? $value['id'] : '';
 								
@@ -38,6 +71,7 @@ if ( ! class_exists( 'TF_text' ) ) {
 									$parent  = '[' . $this->field['id'] . ']';
 									$default = isset( $field['default'] ) ? $field['default'] : '';
 									$value   = isset( $tf_meta_box_value[ $field['id'] ] ) ? $tf_meta_box_value[ $field['id'] ] : $default;
+									$layout_ids = array('single-hotel-layout', 'single-hotel-layout-part-1', 'single-hotel-layout-part-2', 'single-tour-layout', 'single-tour-layout-part-1', 'single-tour-layout-part-2', 'single-aprtment-layout-part-1', 'single-aprtment-layout-part-2', 'single-car-layout');
 
 									if ( ! empty( $this->value ) ) {
 										
@@ -45,11 +79,15 @@ if ( ! class_exists( 'TF_text' ) ) {
 										if ( is_array( $data ) ) {
 											if ( isset( $data[ $field['id'] ] ) ) {
 
-												$value = ( isset( $field['id'] ) ) ? $data[ $field['id'] ] : '';
-
+												if(!empty($field['id']) && in_array($field['id'], $layout_ids)){
+													$value = !empty( $data[ $field['id'] ] ) ? $data[ $field['id'] ] : $default;
+												} else {
+													$value = ( isset( $field['id'] ) ) ? $data[ $field['id'] ] : '';
+												}
+												
 												$value = ($field['type'] == 'text' || $field['type'] == 'textarea') ? stripslashes($value) : $value;
 											} else {
-												$value = '';
+												$value = $default;
 											}
 										}
 									}
