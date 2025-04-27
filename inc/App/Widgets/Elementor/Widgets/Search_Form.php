@@ -855,11 +855,12 @@ class Search_Form extends Widget_Base {
 		$this->add_group_control( Group_Control_Typography::get_type(), [
             'label'    => __( 'Label Typography', 'tourfic' ),
 			'name'     => "tf_label_typography",
-			'selector' => "{{WRAPPER}} .tf-field .acr-label, {{WRAPPER}} span.tf-booking-form-title, {{WRAPPER}} .tf-search-field-label, {{WRAPPER}} .tf-select-date .info-select h5",
+			'selector' => "{{WRAPPER}} .tf-field .acr-label, {{WRAPPER}} span.tf-booking-form-title, {{WRAPPER}} .tf-search-field-label, {{WRAPPER}} .tf-select-date .info-select label, {{WRAPPER}} .tf-driver-location ul li label",
             'conditions' => $this->tf_display_conditionally([
                 'tf_hotel' => ['design-1', 'design-2', 'design-3'],
                 'tf_tours' => ['design-1', 'design-2', 'design-3'],
                 'tf_apartment' => ['design-1', 'design-2'],
+                'tf_carrental' => ['design-1'],
             ]),
 		]);
 
@@ -874,7 +875,9 @@ class Search_Form extends Widget_Base {
 				"{{WRAPPER}} span.tf-booking-form-title" => 'color: {{VALUE}};', //design-2
 				"{{WRAPPER}} .tf-search-field-label" => 'color: {{VALUE}};', //design-3
 				"{{WRAPPER}} .tf_form-inner select" => 'color: {{VALUE}};', //default
-				"{{WRAPPER}} .tf-select-date .info-select h5" => 'color: {{VALUE}};', //car design-1
+				"{{WRAPPER}} .tf-select-date .info-select label" => 'color: {{VALUE}};', //car design-1
+				"{{WRAPPER}} .tf-driver-location ul li label" => 'color: {{VALUE}};', //car design-1
+				"{{WRAPPER}} .tf-driver-location ul li label .tf-checkmark" => 'border-color: {{VALUE}};', //car design-1
 			],
 		] );
 
@@ -992,6 +995,63 @@ class Search_Form extends Widget_Base {
 			'label' => __( 'Form Fields', 'tourfic' ),
 			'tab'   => Controls_Manager::TAB_STYLE,
 		] );
+		
+		$this->add_control( 'tf_input_wrapper_heading', [
+			'type'  => Controls_Manager::HEADING,
+			'label' => __( 'Input Wrapper', 'tourfic' ),
+            'condition' => [
+                'service' => 'tf_carrental',
+            ],
+		] );
+		$this->add_responsive_control( "tf_input_wrap_padding", [
+			'label'      => __( 'Padding', 'tourfic' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .tf-date-select-box .tf-date-single-select" => $this->tf_apply_dim( 'padding' ),
+			],
+            'condition' => [
+                'service' => 'tf_carrental',
+            ],
+		] );
+		$this->add_group_control( Group_Control_Border::get_type(), [
+			'name'      => "tf_input_wrapper_border",
+			'selector'  => "{{WRAPPER}} .tf-date-select-box .tf-date-single-select",
+            'condition' => [
+                'service' => 'tf_carrental',
+            ],
+		] );
+		$this->add_control( "tf_input_wrapper_border_radius", [
+			'label'      => __( 'Border Radius', 'tourfic' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .tf-date-select-box .tf-date-single-select" => $this->tf_apply_dim( 'border-radius' ),
+			],
+            'condition' => [
+                'service' => 'tf_carrental',
+            ],
+		] );
+		$this->add_group_control( Group_Control_Background::get_type(), [
+			'name'      => "tf_input_wrapper_bg_color",
+			'label'     => __( 'Background Color', 'tourfic' ),
+			'types'     => [
+				'classic',
+				'gradient',
+			],
+			'selector'  => "{{WRAPPER}} .tf-date-select-box .tf-date-single-select",
+            'condition' => [
+                'service' => 'tf_carrental',
+            ],
+		] );
+
 		
 		$this->add_control( 'tf_form_input_fields_heading', [
 			'type'  => Controls_Manager::HEADING,
@@ -1157,6 +1217,8 @@ class Search_Form extends Widget_Base {
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
 				"{{WRAPPER}} .tf_btn" => 'color: {{VALUE}};',
+				"{{WRAPPER}} .tf-submit-button button i" => 'color: {{VALUE}};',
+				"{{WRAPPER}} .tf-submit-button button svg path" => 'fill: {{VALUE}};',
 			],
 		] );
 		$this->add_group_control( Group_Control_Background::get_type(), [
@@ -1194,6 +1256,8 @@ class Search_Form extends Widget_Base {
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
 				"{{WRAPPER}} .tf_btn:hover" => 'color: {{VALUE}};',
+				"{{WRAPPER}} .tf-submit-button button:hover i" => 'color: {{VALUE}};',
+				"{{WRAPPER}} .tf-submit-button button:hover svg path" => 'fill: {{VALUE}};',
 			],
 		] );
 		$this->add_group_control( Group_Control_Background::get_type(), [
@@ -2000,7 +2064,7 @@ class Search_Form extends Widget_Base {
                                         <?php echo wp_kses( $pickup_location_icon_html, Helper::tf_custom_wp_kses_allow_tags() ); ?>
                                     </div>
                                     <div class="info-select">
-                                        <h5><?php echo !empty($settings['pickup_loc_label']) ? esc_attr($settings['pickup_loc_label']) : esc_html__( 'Pick-up', 'tourfic' ); ?></h5>
+                                        <label><?php echo !empty($settings['pickup_loc_label']) ? esc_attr($settings['pickup_loc_label']) : esc_html__( 'Pick-up', 'tourfic' ); ?></label>
                                         <input type="text" placeholder="<?php echo !empty($settings['pickup_loc_placeholder_text']) ? esc_attr($settings['pickup_loc_placeholder_text']) : esc_html__( 'Pick Up Location', 'tourfic' ); ?>" id="tf_pickup_location" value="<?php echo !empty($_GET['pickup-name']) ? esc_html($_GET['pickup-name']) : '' ?>" />
                                         <input type="hidden" id="tf_pickup_location_id" value="<?php echo !empty($_GET['pickup']) ? esc_html($_GET['pickup']) : '' ?>" />
                                     </div>
@@ -2013,7 +2077,7 @@ class Search_Form extends Widget_Base {
                                         <?php echo wp_kses( $dropoff_location_icon_html, Helper::tf_custom_wp_kses_allow_tags() ); ?>
                                     </div>
                                     <div class="info-select">
-                                        <h5><?php echo !empty($settings['dropoff_loc_label']) ? esc_attr($settings['dropoff_loc_label']) : esc_html__( 'Drop-off', 'tourfic' ); ?></h5>
+                                        <label><?php echo !empty($settings['dropoff_loc_label']) ? esc_attr($settings['dropoff_loc_label']) : esc_html__( 'Drop-off', 'tourfic' ); ?></label>
                                         <input type="text" placeholder="<?php echo !empty($settings['dropoff_loc_placeholder_text']) ? esc_attr($settings['dropoff_loc_placeholder_text']) : esc_html__( 'Drop Off Location', 'tourfic' ); ?>" id="tf_dropoff_location" value="<?php echo !empty($_GET['dropoff-name']) ? esc_html($_GET['dropoff-name']) : '' ?>" />
                                         <input type="hidden" id="tf_dropoff_location_id" value="<?php echo !empty($_GET['dropoff']) ? esc_html($_GET['dropoff']) : '' ?>" />
                                     </div>
@@ -2028,7 +2092,7 @@ class Search_Form extends Widget_Base {
                                         <?php echo wp_kses( $pickup_date_icon_html, Helper::tf_custom_wp_kses_allow_tags() ); ?>
                                     </div>
                                     <div class="info-select">
-                                        <h5><?php echo !empty($settings['pickup_date_label']) ? esc_attr($settings['pickup_date_label']) : esc_html__( 'Pick-up date', 'tourfic' ); ?></h5>
+                                        <label><?php echo !empty($settings['pickup_date_label']) ? esc_attr($settings['pickup_date_label']) : esc_html__( 'Pick-up date', 'tourfic' ); ?></label>
                                         <input type="text" placeholder="<?php echo !empty($settings['pickup_date_placeholder_text']) ? esc_attr($settings['pickup_date_placeholder_text']) : esc_html__( 'Pick Up Date', 'tourfic' ); ?>" class="tf_pickup_date" value="<?php echo !empty($_GET['pickup-date']) ? esc_html($_GET['pickup-date']) : '' ?>" />
                                     </div>
                                 </div>
@@ -2040,7 +2104,7 @@ class Search_Form extends Widget_Base {
                                         <?php echo wp_kses( $pickup_time_icon_html, Helper::tf_custom_wp_kses_allow_tags() ); ?>
                                     </div>
                                     <div class="info-select">
-                                        <h5><?php echo !empty($settings['pickup_time_label']) ? esc_attr($settings['pickup_time_label']) : esc_html__( 'Time', 'tourfic' ); ?></h5>
+                                        <label><?php echo !empty($settings['pickup_time_label']) ? esc_attr($settings['pickup_time_label']) : esc_html__( 'Time', 'tourfic' ); ?></label>
                                         <input type="text" placeholder="<?php echo !empty($settings['pickup_time_placeholder_text']) ? esc_attr($settings['pickup_time_placeholder_text']) : esc_html__( 'Pick Up Time', 'tourfic' ); ?>" class="tf_pickup_time" value="<?php echo !empty($_GET['pickup-time']) ? esc_html($_GET['pickup-time']) : '' ?>" />
                                     </div>
                                 </div>
@@ -2054,7 +2118,7 @@ class Search_Form extends Widget_Base {
                                         <?php echo wp_kses( $dropoff_date_icon_html, Helper::tf_custom_wp_kses_allow_tags() ); ?>
                                     </div>
                                     <div class="info-select">
-                                        <h5><?php echo !empty($settings['dropoff_date_label']) ? esc_attr($settings['dropoff_date_label']) : esc_html__( 'Drop-off date', 'tourfic' ); ?></h5>
+                                        <label><?php echo !empty($settings['dropoff_date_label']) ? esc_attr($settings['dropoff_date_label']) : esc_html__( 'Drop-off date', 'tourfic' ); ?></label>
                                         <input type="text" placeholder="<?php echo !empty($settings['dropoff_date_placeholder_text']) ? esc_attr($settings['dropoff_date_placeholder_text']) : esc_html__( 'Drop Off Date', 'tourfic' ); ?>" class="tf_dropoff_date" value="<?php echo !empty($_GET['dropoff-date']) ? esc_html($_GET['dropoff-date']) : '' ?>" />
                                     </div>
                                 </div>
@@ -2066,7 +2130,7 @@ class Search_Form extends Widget_Base {
                                         <?php echo wp_kses( $dropoff_time_icon_html, Helper::tf_custom_wp_kses_allow_tags() ); ?>
                                     </div>
                                     <div class="info-select">
-                                        <h5><?php echo !empty($settings['dropoff_time_label']) ? esc_attr($settings['dropoff_time_label']) : esc_html__( 'Time', 'tourfic' ); ?></h5>
+                                        <label><?php echo !empty($settings['dropoff_time_label']) ? esc_attr($settings['dropoff_time_label']) : esc_html__( 'Time', 'tourfic' ); ?></label>
                                         <input type="text" placeholder="<?php echo !empty($settings['dropoff_time_placeholder_text']) ? esc_attr($settings['dropoff_time_placeholder_text']) : esc_html__( 'Drop Off Time', 'tourfic' ); ?>" class="tf_dropoff_time" value="<?php echo !empty($_GET['dropoff-time']) ? esc_html($_GET['dropoff-time']) : '' ?>" />
                                     </div>
                                 </div>
