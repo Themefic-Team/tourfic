@@ -743,3 +743,260 @@
         }
     }
 }
+
+/* Car search */
+.page-template-tf-search{
+    .tf-archive-template{
+        &__one{
+            .tf-archive-car-details-warper{
+                .tf-archive-header{
+                    .tf-archive-view{
+                        ul{
+                            margin: 0px;
+                            padding: 0;
+                            li{
+                                height: 52px;
+                                width: 52px;
+                                display: flex;
+                                border-radius: 8px;
+                                background: $color-filling-fg;
+                                align-items: center;
+                                justify-content: center;
+                                cursor: pointer;
+                                i{
+                                    color: $color-text;
+                                }
+                                &.active{
+                                    background-color: $color-primary;
+                                    i{
+                                        color: $color-white;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .tf-total-result-bar{
+                        text-align: right;
+                        display: flex;
+                        gap: 2px;
+                        span{
+                            color: $color-text;
+                            font-size: 1rem;
+                            font-weight: 400;
+                        }
+                    }
+                }
+
+                .tf-car-details-column{
+                    .tf-car-archive-sidebar{
+                        width: 358px;
+                        border-radius: 16px;
+                        background: $color-filling-fg;
+                        padding: 32px;
+                        @media #{$max1024}{
+                            width: 280px;
+                        }
+                        @media #{$max768}{
+                            width: 100%;
+                        }
+                        
+                        .tf-sidebar-header{
+                            margin-bottom: 32px;
+                            h4{
+                                color: $color-heading;
+                                font-size: 1rem;
+                                font-weight: 400;
+                                margin: 0;
+                            }
+                            button{
+                                color: $color-text;
+                                font-size: 1rem;
+                                font-weight: 400;
+                                background-color: transparent;
+                                padding: 0px;
+                                border: 0px solid;
+                                cursor: pointer;
+                                display: none;
+                            }
+                        }
+                        .tf_widget{
+                            margin-bottom: 32px;
+                            background: transparent;
+                            border: 0;
+                            border-radius: 0;
+                            &:last-child{
+                                margin-bottom: 0px;
+                            }
+                            .tf-widget-title{
+                                background: transparent;
+                                padding: 0;
+                                height: auto;
+                                border: 0;
+                                box-shadow: none;
+                                border-radius: 0px;
+                                span{
+                                    color: $color-text;
+                                    font-size: 1rem;
+                                    font-weight: 400;
+                                    margin-bottom: 16px;
+                                    cursor: auto;
+                                }
+                                i{
+                                    display: none;
+                                }
+                            }
+                            .tf-category-lists{
+                                ul{
+                                    margin: 0;
+                                    padding: 0;
+                                    list-style: none;
+                                    display: flex;
+                                    flex-wrap: wrap;
+                                    gap: 8px;
+                                    li{
+                                        width: 100%;
+                                        background: transparent;
+                                        border-radius: 0;
+                                        margin: 0;
+                                        padding: 0;
+                                        display: flow-root;
+                                        &.hidden{
+                                            display: none;
+                                        }
+                                        label{
+                                            color: $color-gray-light;
+                                            color: $color-text;
+                                            font-size: 1rem;
+                                            font-weight: 400;
+                                            display: block;
+                                            position: relative;
+                                            padding-left: 35px;
+                                            margin-bottom: 0px;
+                                            cursor: pointer;
+                                            -webkit-user-select: none;
+                                            -moz-user-select: none;
+                                            -ms-user-select: none;
+                                            user-select: none;
+                                            
+                                            input{
+                                                position: absolute;
+                                                opacity: 0;
+                                                cursor: pointer;
+                                                height: 0;
+                                                width: 0;
+                                            }
+                                            input:checked ~ .tf-checkmark:after {
+                                                display: block;
+                                            }
+                                            input:checked ~ .tf-checkmark{
+                                                background-color: transparent;
+                                                border-color: $color-primary;
+                                            }
+                                            .tf-checkmark {
+                                                position: absolute;
+                                                top: 0;
+                                                left: 0;
+                                                height: 20px;
+                                                width: 20px;
+                                                border: 2px solid $color-gray;
+                                                background-color: transparent;
+                                                border-radius: 5px;
+                                                &::after{
+                                                    content: "";
+                                                    position: absolute;
+                                                    display: none;
+                                                    left: 5px;
+                                                    top: 2px;
+                                                    width: 7px;
+                                                    height: 10px;
+                                                    border: solid $color-white;
+                                                    border-width: 0 3px 3px 0;
+                                                    -webkit-transform: rotate(45deg);
+                                                    -ms-transform: rotate(45deg);
+                                                    transform: rotate(45deg);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                                a{
+                                    text-decoration: none;
+                                    color: $color-text;
+                                    font-size: 1rem;
+                                    font-weight: 400;
+                                    text-align: left;
+                                    margin-top: 8px;
+                                }
+                            }
+                            .al-range-slider__track{
+                                border-radius: 4px;
+                                background: $color-brand-lite;
+                                margin: 0 0 28px 0;
+                            }
+                            .al-range-slider__tooltip{
+                                bottom: -30px;
+                                background: transparent;
+                                color: $color-text;
+                            }
+                            .al-range-slider_dark .al-range-slider__bar{
+                                background-color: $color-text;
+                            }
+                            .al-range-slider__knob{
+                                border-radius: 12px;
+                                border: 1.5px solid $color-border;
+                                background: $color-filling-bg;
+                                width: 24px;
+                                height: 24px;
+                            }
+                            &.widget_tf_seat_filters{
+                                .al-range-slider__knob{
+                                    &::before{
+                                        content: "\f6c0";
+                                        position: absolute;
+                                        font-family: "FontAwesome";
+                                        color: $color-primary;
+                                        height: 100%;
+                                        width: 100%;
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                    }
+                                }
+                            }
+                            &.widget_tf_car_engine_filter{
+                                .tf-category-lists{
+                                    ul{
+                                        gap: 8px;
+                                        li{
+                                            width: calc(33% - 5px);
+                                            label{
+                                                background: $color-filling-bg;
+                                                border-radius: 8px;
+                                                margin: 0;
+                                                padding: 0;
+                                                font-size: 1rem;
+                                                font-weight: 400;
+                                                padding: 4px 8px;
+                                                text-align: center;
+                                                z-index: 0;
+                                            }
+                                            &.active{
+                                                label{
+                                                    background: $color-primary;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            a{
+                                color: $color-primary;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
