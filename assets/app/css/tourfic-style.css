@@ -6275,6 +6275,32 @@ div#tf-destinationautocomplete-list div:before {
 }
 
 /* Car search */
+.page-template-tf-search .tf-archive-template__one .tf-archive-car-banner {
+  background: #F1F3F4;
+  height: 350px;
+  margin: 24px 24px 0 24px;
+  border-radius: 16px;
+  background-size: cover;
+  background-position: center;
+}
+
+@media only screen and (max-width: 575.98px) {
+  .page-template-tf-search .tf-archive-template__one .tf-archive-car-banner {
+    margin: 0 16px;
+  }
+}
+
+.page-template-tf-search .tf-archive-template__one .tf-archive-car-banner .tf-banner-content {
+  height: 100%;
+}
+
+.page-template-tf-search .tf-archive-template__one .tf-archive-car-banner .tf-banner-content h1 {
+  color: #ffffff;
+  text-align: center;
+  font-size: 2.375rem;
+  font-weight: 700;
+}
+
 .page-template-tf-search .tf-archive-template__one .tf-archive-car-details-warper .tf-archive-header .tf-archive-view ul {
   margin: 0px;
   padding: 0;

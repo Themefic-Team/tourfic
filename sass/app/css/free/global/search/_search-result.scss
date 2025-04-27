@@ -748,6 +748,26 @@
 .page-template-tf-search{
     .tf-archive-template{
         &__one{
+            .tf-archive-car-banner{
+                background: $color-gray-light;
+                height: 350px;
+                margin: 24px 24px 0 24px;
+                border-radius: 16px;
+                background-size: cover;
+                background-position: center;
+                @media #{$max575}{
+                    margin: 0 16px;
+                }
+                .tf-banner-content{
+                    height: 100%;
+                    h1{
+                        color: $color-white;
+                        text-align: center;
+                        font-size: 2.375rem;
+                        font-weight: 700;
+                    }
+                }
+            }
             .tf-archive-car-details-warper{
                 .tf-archive-header{
                     .tf-archive-view{
