@@ -87,7 +87,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 							'preview_link' => esc_url('https://tourfic.com/preview/tours/ancient-trails-of-japan/'),
 						),
 						'default'  => array(
-							'title' => esc_html__('Default', 'tourfic'),
+							'title' => esc_html__('Legacy', 'tourfic'),
 							'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-default.png",
 							'preview_link' => esc_url('https://tourfic.com/preview/tours/magical-russia/'),
 						),

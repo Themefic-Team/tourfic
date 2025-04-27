@@ -216,8 +216,8 @@
          *
          * Fancybox
          */
-      
-        Fancybox.bind('[data-fancybox="tour-video"]', {
+
+        $('[data-fancybox="tour-video"]').fancybox({
             loop: true,
             buttons: [
                 "zoom",
@@ -225,6 +225,7 @@
                 "fullScreen",
                 "close"
             ],
+            hash: false,
         });
 
         /**
@@ -232,7 +233,7 @@
          *
          * Fancybox
          */
-        Fancybox.bind('[data-fancybox="tour-gallery"]', {
+        $('[data-fancybox="tour-gallery"]').fancybox({
             loop: true,
             buttons: [
                 "zoom",
@@ -246,7 +247,7 @@
         /**
          * Itinerary gallery init
          */
-        Fancybox.bind('[data-fancybox="tf-itinerary-gallery"]', {
+        $('.tf-itinerary-gallery').fancybox({
             buttons: [
                 "zoom",
                 "slideShow",
@@ -255,10 +256,6 @@
             ]
         });
 
-        Fancybox.bind('.tf-hero-btm-icon.tf-tour-info', {
-            loop: true,
-            touch: false
-        });
         /**
          * Single Tour price change
          *
