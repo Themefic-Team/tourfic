@@ -91,7 +91,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'preview_link' => esc_url('https://tourfic.com/preview/hotels/melbourne-mastlereagh/'),
 						),
 						'default'  => array(
-							'title' => esc_html__('Default', 'tourfic'),
+							'title' => esc_html__('Legacy', 'tourfic'),
 							'url'   => TF_ASSETS_ADMIN_URL . "images/template/preview-single-default.png",
 							'preview_link' => esc_url('https://tourfic.com/preview/hotels/rio-ontho-palace/'),
 						),

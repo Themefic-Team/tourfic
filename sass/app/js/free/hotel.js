@@ -245,7 +245,8 @@
          * Fancybox
          */
 
-        Fancybox.bind('[data-fancybox="hotel-video"]', {
+   
+        $('[data-fancybox="hotel-vide"]').fancybox({
             loop: true,
             buttons: [
                 "zoom",
@@ -261,7 +262,7 @@
          *
          * Fancybox
          */
-        Fancybox.bind('[data-fancybox="hotel-gallery"]', {
+        $('[data-fancybox="hotel-gallery"]').fancybox({
             loop: true,
             buttons: [
                 "zoom",
@@ -277,11 +278,11 @@
          *
          * Fancybox
          */
-
-        Fancybox.bind('.map-pre', {
+        $('[data-fancybox="hotel-gallery"]').fancybox({
             loop: true,
             touch: false
-        });
+        }); 
+  
 
         /**
          * Hotel slider
