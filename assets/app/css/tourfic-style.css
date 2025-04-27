@@ -37,6 +37,9 @@ input[type="submit"].tf_btn,
   display: inline-flex;
   -webkit-justify-content: center;
   justify-content: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-transition: all 0.25s ease-in-out;
   -moz-transition: all 0.25s ease-in-out;
   -o-transition: all 0.25s ease-in-out;
@@ -10002,6 +10005,11 @@ div#tf-destinationautocomplete-list div:before {
   color: var(--tf-text-paragraph);
 }
 
+.tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date svg {
+  height: 20px;
+  width: 20px;
+}
+
 .tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date .tf-flex {
   flex-wrap: nowrap;
 }
@@ -10261,6 +10269,14 @@ div#tf-destinationautocomplete-list div:before {
 .tf-archive-search-box-wrapper .tf-driver-location-box .tf-submit-button button i {
   margin-left: 8px;
   color: #ffffff;
+}
+
+.tf-car-archive-search-box label input:checked ~ .tf-checkmark {
+  background-color: var(--tf-primary) !important;
+}
+
+.tf-car-archive-search-box .tf-driver-location-box .tf-driver-location ul li label .tf-checkmark {
+  border: 2px solid #808080;
 }
 
 .tf-archive-template__legacy .tf-search-right #tf__booking_sidebar {

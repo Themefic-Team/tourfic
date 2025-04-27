@@ -33,11 +33,11 @@ class Listings extends Widget_Base {
 	}
 
 	public function get_title() {
-		return esc_html__( 'Tourfic Listings', 'tourfic' );
+		return esc_html__( 'Archive Listings', 'tourfic' );
 	}
 
 	public function get_icon() {
-		return 'eicon-post-list';
+		return 'tf eicon-post-list';
 	}
 
 	public function get_categories() {

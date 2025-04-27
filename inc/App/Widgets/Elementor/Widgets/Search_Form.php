@@ -7,9 +7,7 @@ use Elementor\Icons_Manager;
 use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
-use Elementor\Group_Control_Image_Size;
 use Elementor\Group_Control_Typography;
-use Elementor\Plugin;
 use Elementor\Widget_Base;
 use Tourfic\Classes\Helper;
 
@@ -28,11 +26,11 @@ class Search_Form extends Widget_Base {
 	}
 
 	public function get_title() {
-		return esc_html__( 'Tourfic Search Form', 'tourfic' );
+		return esc_html__( 'Archive Search Form', 'tourfic' );
 	}
 
 	public function get_icon() {
-		return 'eicon-site-search';
+		return 'tf eicon-site-search';
 	}
 
 	public function get_categories() {
@@ -64,102 +62,84 @@ class Search_Form extends Widget_Base {
 	}
 
 	protected function tf_content_layout_controls(){
-        $this->start_controls_section(
-            'tf_search_layouts',
-            [
-                'label' => esc_html__('Service & Layouts', 'tourfic'),
-            ]
-        );
+        $this->start_controls_section('tf_search_layouts',[
+            'label' => esc_html__('Service & Layouts', 'tourfic'),
+        ]);
 
         do_action( 'tf/search/before-layout/controls', $this );
 
         //service
-		$this->add_control(
-			'service',
-			[
-				'type'     => Controls_Manager::SELECT,
-				'label'    => esc_html__( 'Service', 'tourfic' ),
-				'options'  => [
-					'tf_hotel'     => esc_html__( 'Hotel', 'tourfic' ),
-					'tf_tours'     => esc_html__( 'Tour', 'tourfic' ),
-					'tf_apartment' => esc_html__( 'Apartment', 'tourfic' ),
-					// 'tf_carrental' => esc_html__( 'Car', 'tourfic' ),
-				],
-				'default'  => 'tf_hotel',
-			]
-		);
+		$this->add_control('service',[
+            'type'     => Controls_Manager::SELECT,
+            'label'    => esc_html__( 'Service', 'tourfic' ),
+            'options'  => [
+                'tf_hotel'     => esc_html__( 'Hotel', 'tourfic' ),
+                'tf_tours'     => esc_html__( 'Tour', 'tourfic' ),
+                'tf_apartment' => esc_html__( 'Apartment', 'tourfic' ),
+                'tf_carrental' => esc_html__( 'Car', 'tourfic' ),
+            ],
+            'default'  => 'tf_hotel',
+        ]);
 		
 		// Design options for Hotel
-		$this->add_control(
-			'design_hotel',
-			[
-				'type'     => Controls_Manager::SELECT,
-				'label'    => esc_html__( 'Design', 'tourfic' ),
-				'options'  => [
-					'design-1' => esc_html__( 'Design 1', 'tourfic' ),
-					'design-2' => esc_html__( 'Design 2', 'tourfic' ),
-					'design-3' => esc_html__( 'Design 3', 'tourfic' ),
-					'default'  => esc_html__( 'Legacy', 'tourfic' ),
-				],
-				'default'  => 'design-1',
-				'condition' => [
-					'service' => 'tf_hotel',
-				],
-			]
-		);
+		$this->add_control('design_hotel',[
+            'type'     => Controls_Manager::SELECT,
+            'label'    => esc_html__( 'Design', 'tourfic' ),
+            'options'  => [
+                'design-1' => esc_html__( 'Design 1', 'tourfic' ),
+                'design-2' => esc_html__( 'Design 2', 'tourfic' ),
+                'design-3' => esc_html__( 'Design 3', 'tourfic' ),
+                'default'  => esc_html__( 'Legacy', 'tourfic' ),
+            ],
+            'default'  => 'design-1',
+            'condition' => [
+                'service' => 'tf_hotel',
+            ],
+        ]);
 		
 		// Design options for Tour
-		$this->add_control(
-			'design_tours',
-			[
-				'type'     => Controls_Manager::SELECT,
-				'label'    => esc_html__( 'Design', 'tourfic' ),
-				'options'  => [
-					'design-1' => esc_html__( 'Design 1', 'tourfic' ),
-					'design-2' => esc_html__( 'Design 2', 'tourfic' ),
-					'design-3' => esc_html__( 'Design 3', 'tourfic' ),
-					'default'  => esc_html__( 'Legacy', 'tourfic' ),
-				],
-				'default'  => 'design-1',
-				'condition' => [
-					'service' => 'tf_tours',
-				],
-			]
-		);
+		$this->add_control('design_tours',[
+            'type'     => Controls_Manager::SELECT,
+            'label'    => esc_html__( 'Design', 'tourfic' ),
+            'options'  => [
+                'design-1' => esc_html__( 'Design 1', 'tourfic' ),
+                'design-2' => esc_html__( 'Design 2', 'tourfic' ),
+                'design-3' => esc_html__( 'Design 3', 'tourfic' ),
+                'default'  => esc_html__( 'Legacy', 'tourfic' ),
+            ],
+            'default'  => 'design-1',
+            'condition' => [
+                'service' => 'tf_tours',
+            ],
+        ]);
 		
 		// Design options for Apartment
-		$this->add_control(
-			'design_apartment',
-			[
-				'type'     => Controls_Manager::SELECT,
-				'label'    => esc_html__( 'Design', 'tourfic' ),
-				'options'  => [
-					'design-1' => esc_html__( 'Design 1', 'tourfic' ),
-					'design-2' => esc_html__( 'Design 2', 'tourfic' ),
-					'default'  => esc_html__( 'Legacy', 'tourfic' ),
-				],
-				'default'  => 'design-1',
-				'condition' => [
-					'service' => 'tf_apartment',
-				],
-			]
-		);
+		$this->add_control('design_apartment',[
+            'type'     => Controls_Manager::SELECT,
+            'label'    => esc_html__( 'Design', 'tourfic' ),
+            'options'  => [
+                'design-1' => esc_html__( 'Design 1', 'tourfic' ),
+                'design-2' => esc_html__( 'Design 2', 'tourfic' ),
+                'default'  => esc_html__( 'Legacy', 'tourfic' ),
+            ],
+            'default'  => 'design-1',
+            'condition' => [
+                'service' => 'tf_apartment',
+            ],
+        ]);
 		
 		// Design options for Car Rental
-		// $this->add_control(
-		// 	'design_carrental',
-		// 	[
-		// 		'type'     => Controls_Manager::SELECT,
-		// 		'label'    => esc_html__( 'Design', 'tourfic' ),
-		// 		'options'  => [
-		// 			'design-1' => esc_html__( 'Design 1', 'tourfic' ),
-		// 		],
-		// 		'default'  => 'design-1',
-		// 		'condition' => [
-		// 			'service' => 'tf_carrental',
-		// 		],
-		// 	]
-		// );
+		$this->add_control('design_carrental',[
+            'type'     => Controls_Manager::SELECT,
+            'label'    => esc_html__( 'Design', 'tourfic' ),
+            'options'  => [
+                'design-1' => esc_html__( 'Design 1', 'tourfic' ),
+            ],
+            'default'  => 'design-1',
+            'condition' => [
+                'service' => 'tf_carrental',
+            ],
+        ]);
 
 	    do_action( 'tf/search/after-layout/controls', $this );
 
@@ -167,369 +147,607 @@ class Search_Form extends Widget_Base {
     }
 
     protected function tf_search_field_controls(){
-        $this->start_controls_section(
-            'tf_search_fields',
-            [
-                'label' => esc_html__('Search Fields', 'tourfic'),
-            ]
-        );
+        $this->start_controls_section('tf_search_fields',[
+            'label' => esc_html__('Search Fields', 'tourfic'),
+        ]);
 
         //location//destination
-        $this->add_control(
-            'location_head',
-            [
-                'label' => __('Location', 'tourfic'),
-                'type' => Controls_Manager::HEADING,
-            ]
-        );
+        $this->add_control('location_head',[
+            'label' => __('Location', 'tourfic'),
+            'type' => Controls_Manager::HEADING,
+            'conditions' => $this->tf_display_conditionally([
+                'tf_carrental!' => ['design-1'],
+            ]),
+        ]);
 
-        $this->add_control(
-            'location_icon',
-            [
-                'label' => esc_html__('Location Icon', 'tourfic'),
-                'default' => [
-                    'value' => 'fa-solid fa-location-dot',
-                    'library' => 'fa-solid',
-                ],
-                'label_block' => true,
-                'type' => Controls_Manager::ICONS,
-                'fa4compatibility' => 'location_icon_comp',
-            ]
-        );
+        $this->add_control('location_icon',[
+            'label' => esc_html__('Location Icon', 'tourfic'),
+            'default' => [
+                'value' => 'fa-solid fa-location-dot',
+                'library' => 'fa-solid',
+            ],
+            'label_block' => true,
+            'type' => Controls_Manager::ICONS,
+            'fa4compatibility' => 'location_icon_comp',
+            'conditions' => $this->tf_display_conditionally([
+                'tf_carrental!' => ['design-1'],
+            ]),
+        ]);
 
-        $this->add_control(
-            'loc_label', [
-                'label' => esc_html__('Location Label', 'tourfic'),
-                'type' => Controls_Manager::TEXT,
-                'dynamic' => [
-                    'active' => true,
-                ],
-                'default' => 'Location',
-                'conditions' => $this->tf_display_conditionally([
-                    'tf_hotel' => ['design-2', 'design-3'],
-                    'tf_tours' => ['design-2', 'design-3'],
-                    'tf_apartment' => ['design-1', 'design-2'],
-                ]),
-            ]
-        );
+        $this->add_control('loc_label', [
+            'label' => esc_html__('Location Label', 'tourfic'),
+            'type' => Controls_Manager::TEXT,
+            'dynamic' => [
+                'active' => true,
+            ],
+            'default' => 'Location',
+            'conditions' => $this->tf_display_conditionally([
+                'tf_hotel' => ['design-2', 'design-3'],
+                'tf_tours' => ['design-2', 'design-3'],
+                'tf_apartment' => ['design-1', 'design-2'],
+            ]),
+        ]);
         
-        $this->add_control(
-            'loc_placeholder_text', [
-                'label' => esc_html__('Placeholder Text', 'tourfic'),
-                'type' => Controls_Manager::TEXT,
-				'dynamic' => [
-					'active' => true,
-				],
-                'default'   => 'Enter Location',
-            ]
-        );
+        $this->add_control('loc_placeholder_text', [
+            'label' => esc_html__('Placeholder Text', 'tourfic'),
+            'type' => Controls_Manager::TEXT,
+            'dynamic' => [
+                'active' => true,
+            ],
+            'default'   => 'Enter Location',
+            'conditions' => $this->tf_display_conditionally([
+                'tf_carrental!' => ['design-1'],
+            ]),
+        ]);
 
         //adult
-        $this->add_control(
-            'adult_head',
-            [
-                'label' => __('Adult', 'tourfic'),
-                'type' => Controls_Manager::HEADING,
-            ]
-        );
+        $this->add_control('adult_head',[
+            'label' => __('Adult', 'tourfic'),
+            'type' => Controls_Manager::HEADING,
+            'conditions' => $this->tf_display_conditionally([
+                'tf_carrental!' => ['design-1'],
+            ]),
+        ]);
 
-        $this->add_control(
-            'adult_icon',
-            [
-                'label' => esc_html__('Adult Icon', 'tourfic'),
-                'default' => [
-                    'value' => 'fa-regular fa-user',
-                    'library' => 'fa-regular',
-                ],
-                'label_block' => true,
-                'type' => Controls_Manager::ICONS,
-                'fa4compatibility' => 'adult_icon_comp',
-                'conditions' => $this->tf_display_conditionally([
-                    'tf_hotel' => ['design-1', 'default'],
-                    'tf_tours' => ['design-1', 'default'],
-                    'tf_apartment' => ['default'],
-                ]),
-            ]
-        );
+        $this->add_control('adult_icon',[
+            'label' => esc_html__('Adult Icon', 'tourfic'),
+            'default' => [
+                'value' => 'fa-regular fa-user',
+                'library' => 'fa',
+            ],
+            'label_block' => true,
+            'type' => Controls_Manager::ICONS,
+            'fa4compatibility' => 'adult_icon_comp',
+            'conditions' => $this->tf_display_conditionally([
+                'tf_hotel' => ['design-1', 'default'],
+                'tf_tours' => ['design-1', 'default'],
+                'tf_apartment' => ['default'],
+            ]),
+        ]);
         
-        $this->add_control(
-            'adult_label', [
-                'label' => esc_html__('Adult Label', 'tourfic'),
-                'type' => Controls_Manager::TEXT,
-				'dynamic' => [
-					'active' => true,
-				],
-                'default'   => 'Adult',
-            ]
-        );
+        $this->add_control('adult_label', [
+            'label' => esc_html__('Adult Label', 'tourfic'),
+            'type' => Controls_Manager::TEXT,
+            'dynamic' => [
+                'active' => true,
+            ],
+            'default'   => 'Adult',
+            'conditions' => $this->tf_display_conditionally([
+                'tf_carrental!' => ['design-1'],
+            ]),
+        ]);
 
         //children
-        $this->add_control(
-            'children_head',
-            [
-                'label' => __('Children', 'tourfic'),
-                'type' => Controls_Manager::HEADING,
-            ]
-        );
+        $this->add_control('children_head',[
+            'label' => __('Children', 'tourfic'),
+            'type' => Controls_Manager::HEADING,
+            'conditions' => $this->tf_display_conditionally([
+                'tf_carrental!' => ['design-1'],
+            ]),
+        ]);
 
-        $this->add_control(
-            'children_icon',
-            [
-                'label' => esc_html__('Children Icon', 'tourfic'),
-                'default' => [
-                    'value' => 'fa-solid fa-child',
-                    'library' => 'fa-solid',
-                ],
-                'label_block' => true,
-                'type' => Controls_Manager::ICONS,
-                'fa4compatibility' => 'children_icon_comp',
-                'conditions' => $this->tf_display_conditionally([
-                    'tf_hotel' => ['design-1', 'default'],
-                    'tf_tours' => ['design-1', 'default'],
-                    'tf_apartment' => ['default'],
-                ]),
-            ]
-        );
+        $this->add_control('children_icon',[
+            'label' => esc_html__('Children Icon', 'tourfic'),
+            'default' => [
+                'value' => 'fa-solid fa-child',
+                'library' => 'fa',
+            ],
+            'label_block' => true,
+            'type' => Controls_Manager::ICONS,
+            'fa4compatibility' => 'children_icon_comp',
+            'conditions' => $this->tf_display_conditionally([
+                'tf_hotel' => ['design-1', 'default'],
+                'tf_tours' => ['design-1', 'default'],
+                'tf_apartment' => ['default'],
+            ]),
+        ]);
         
-        $this->add_control(
-            'children_label', [
-                'label' => esc_html__('Children Label', 'tourfic'),
-                'type' => Controls_Manager::TEXT,
-				'dynamic' => [
-					'active' => true,
-				],
-                'default'   => 'Children',
-            ]
-        );
+        $this->add_control('children_label', [
+            'label' => esc_html__('Children Label', 'tourfic'),
+            'type' => Controls_Manager::TEXT,
+            'dynamic' => [
+                'active' => true,
+            ],
+            'default'   => 'Children',
+            'conditions' => $this->tf_display_conditionally([
+                'tf_carrental!' => ['design-1'],
+            ]),
+        ]);
 
         //infant
-        $this->add_control(
-            'infant_head',
-            [
-                'label' => __('Infant', 'tourfic'),
-                'type' => Controls_Manager::HEADING,
-                'conditions' => $this->tf_display_conditionally([
-                    'tf_apartment' => ['default'],
-                ]),
-            ]
-        );
+        $this->add_control('infant_head',[
+            'label' => __('Infant', 'tourfic'),
+            'type' => Controls_Manager::HEADING,
+            'conditions' => $this->tf_display_conditionally([
+                'tf_apartment' => ['default'],
+            ]),
+        ]);
 
-        $this->add_control(
-            'infant_icon',
-            [
-                'label' => esc_html__('Infant Icon', 'tourfic'),
-                'default' => [
-                    'value' => 'fa-regular fa-user',
-                    'library' => 'fa-regular',
-                ],
-                'label_block' => true,
-                'type' => Controls_Manager::ICONS,
-                'fa4compatibility' => 'infant_icon_comp',
-                'conditions' => $this->tf_display_conditionally([
-                    'tf_apartment' => ['default'],
-                ]),
-            ]
-        );
+        $this->add_control('infant_icon', [
+            'label' => esc_html__('Infant Icon', 'tourfic'),
+            'default' => [
+                'value' => 'fa-regular fa-user',
+                'library' => 'fa',
+            ],
+            'label_block' => true,
+            'type' => Controls_Manager::ICONS,
+            'fa4compatibility' => 'infant_icon_comp',
+            'conditions' => $this->tf_display_conditionally([
+                'tf_apartment' => ['default'],
+            ]),
+        ]);
         
-        $this->add_control(
-            'infant_label', [
-                'label' => esc_html__('Infant Label', 'tourfic'),
-                'type' => Controls_Manager::TEXT,
-				'dynamic' => [
-					'active' => true,
-				],
-                'default'   => 'Infant',
-                'conditions' => $this->tf_display_conditionally([
-                    'tf_apartment' => ['default'],
-                ]),
-            ]
-        );
+        $this->add_control('infant_label', [
+            'label' => esc_html__('Infant Label', 'tourfic'),
+            'type' => Controls_Manager::TEXT,
+            'dynamic' => [
+                'active' => true,
+            ],
+            'default'   => 'Infant',
+            'conditions' => $this->tf_display_conditionally([
+                'tf_apartment' => ['default'],
+            ]),
+        ]);
 
         //room
-        $this->add_control(
-            'room_head',
-            [
-                'label' => __('Room', 'tourfic'),
-                'type' => Controls_Manager::HEADING,
-                'condition' => [
-                    'service' => 'tf_hotel',
-                ],
-            ]
-        );
+        $this->add_control('room_head',[
+            'label' => __('Room', 'tourfic'),
+            'type' => Controls_Manager::HEADING,
+            'condition' => [
+                'service' => 'tf_hotel',
+            ],
+        ]);
 
-        $this->add_control(
-            'room_icon',
-            [
-                'label' => esc_html__('Room Icon', 'tourfic'),
-                'default' => [
-                    'value' => 'fa fa-building',
-                    'library' => 'fa',
-                ],
-                'label_block' => true,
-                'type' => Controls_Manager::ICONS,
-                'fa4compatibility' => 'room_icon_comp',
-                'conditions' => $this->tf_display_conditionally([
-                    'tf_hotel' => ['design-1', 'default'],
-                ]),
-            ]
-        );
+        $this->add_control('room_icon',[
+            'label' => esc_html__('Room Icon', 'tourfic'),
+            'default' => [
+                'value' => 'fa fa-building',
+                'library' => 'fa',
+            ],
+            'label_block' => true,
+            'type' => Controls_Manager::ICONS,
+            'fa4compatibility' => 'room_icon_comp',
+            'conditions' => $this->tf_display_conditionally([
+                'tf_hotel' => ['design-1', 'default'],
+            ]),
+        ]);
         
-        $this->add_control(
-            'room_label', [
-                'label' => esc_html__('Room Label', 'tourfic'),
-                'type' => Controls_Manager::TEXT,
-				'dynamic' => [
-					'active' => true,
-				],
-                'default'   => 'Room',
-                'condition' => [
-                    'service' => 'tf_hotel',
-                ],
-            ]
-        );
+        $this->add_control('room_label', [
+            'label' => esc_html__('Room Label', 'tourfic'),
+            'type' => Controls_Manager::TEXT,
+            'dynamic' => [
+                'active' => true,
+            ],
+            'default'   => 'Room',
+            'condition' => [
+                'service' => 'tf_hotel',
+            ],
+        ]);
 
         //Selector
-        $this->add_control(
-            'selector_head',
-            [
-                'label' => __('Selector', 'tourfic'),
-                'type' => Controls_Manager::HEADING,
-            ]
-        );
+        $this->add_control('selector_head',[
+            'label' => __('Selector', 'tourfic'),
+            'type' => Controls_Manager::HEADING,
+            'conditions' => $this->tf_display_conditionally([
+                'tf_carrental!' => ['design-1'],
+            ]),
+        ]);
 
-        $this->add_control(
-            'selector_icon',
-            [
-                'label' => esc_html__('Selector Icon', 'tourfic'),
-                'default' => [
-                    'value' => 'fa-solid fa-users',
-                    'library' => 'fa-solid',
-                ],
-                'label_block' => true,
-                'type' => Controls_Manager::ICONS,
-                'fa4compatibility' => 'selector_icon_comp',
-                'conditions' => $this->tf_display_conditionally([
-                    'tf_hotel' => ['design-3'],
-                    'tf_tours' => ['design-3'],
-                    'tf_apartment' => ['design-2'],
-                ]),
-            ]
-        );
+        $this->add_control('selector_icon',[
+            'label' => esc_html__('Selector Icon', 'tourfic'),
+            'default' => [
+                'value' => 'fa-solid fa-users',
+                'library' => 'fa-solid',
+            ],
+            'label_block' => true,
+            'type' => Controls_Manager::ICONS,
+            'fa4compatibility' => 'selector_icon_comp',
+            'conditions' => $this->tf_display_conditionally([
+                'tf_hotel' => ['design-3'],
+                'tf_tours' => ['design-3'],
+                'tf_apartment' => ['design-2'],
+            ]),
+        ]);
         
-        $this->add_control(
-            'selector_label', [
-                'label' => esc_html__('Selector Label', 'tourfic'),
-                'type' => Controls_Manager::TEXT,
-				'dynamic' => [
-					'active' => true,
-				],
-                'default'   => 'Guests & rooms',
-                'conditions' => $this->tf_display_conditionally([
-                    'tf_hotel' => ['design-2', 'design-3'],
-                    'tf_tours' => ['design-2', 'design-3'],
-                    'tf_apartment' => ['design-1', 'design-2']
-                ]),
-            ]
-        );
+        $this->add_control('selector_label', [
+            'label' => esc_html__('Selector Label', 'tourfic'),
+            'type' => Controls_Manager::TEXT,
+            'dynamic' => [
+                'active' => true,
+            ],
+            'default'   => 'Guests & rooms',
+            'conditions' => $this->tf_display_conditionally([
+                'tf_hotel' => ['design-2', 'design-3'],
+                'tf_tours' => ['design-2', 'design-3'],
+                'tf_apartment' => ['design-1', 'design-2']
+            ]),
+        ]);
 
         //date
-        $this->add_control(
-            'date_head',
-            [
-                'label' => __('Date', 'tourfic'),
-                'type' => Controls_Manager::HEADING,
-            ]
-        );
+        $this->add_control('date_head',[
+            'label' => __('Date', 'tourfic'),
+            'type' => Controls_Manager::HEADING,
+        ]);
 
-        $this->add_control(
-            'date_icon',
-            [
-                'label' => esc_html__('Date Icon', 'tourfic'),
-                'default' => [
-                    'value' => 'fa-solid fa-calendar-days',
-                    'library' => 'fa-regular',
-                ],
-                'label_block' => true,
-                'type' => Controls_Manager::ICONS,
-                'fa4compatibility' => 'date_icon_comp',
-                'conditions' => $this->tf_display_conditionally([
-                    'tf_hotel' => ['design-1', 'design-3', 'default'],
-                    'tf_tours' => ['design-1', 'design-3', 'default'],
-                    'tf_apartment' => ['design-2', 'default'],
-                ]),
-            ]
-        );
+        $this->add_control('date_icon',[
+            'label' => esc_html__('Date Icon', 'tourfic'),
+            'default' => [
+                'value' => 'fa-solid fa-calendar-days',
+                'library' => 'fa-regular',
+            ],
+            'label_block' => true,
+            'type' => Controls_Manager::ICONS,
+            'fa4compatibility' => 'date_icon_comp',
+            'conditions' => $this->tf_display_conditionally([
+                'tf_hotel' => ['design-1', 'design-3', 'default'],
+                'tf_tours' => ['design-1', 'design-3', 'default'],
+                'tf_apartment' => ['design-2', 'default'],
+            ]),
+        ]);
         
-        $this->add_control(
-            'date_label', [
-                'label' => esc_html__('Date Label', 'tourfic'),
-                'type' => Controls_Manager::TEXT,
-				'dynamic' => [
-					'active' => true,
-				],
-                'default'   => 'Date',
-                'conditions' => $this->tf_display_conditionally([
-                    'tf_tours' => ['design-2', 'design-3'],
-                ]),
-            ]
-        );
+        $this->add_control('date_label', [
+            'label' => esc_html__('Date Label', 'tourfic'),
+            'type' => Controls_Manager::TEXT,
+            'dynamic' => [
+                'active' => true,
+            ],
+            'default'   => 'Date',
+            'conditions' => $this->tf_display_conditionally([
+                'tf_tours' => ['design-2', 'design-3'],
+            ]),
+        ]);
         
-        $this->add_control(
-            'checkin_label', [
-                'label' => esc_html__('Checkin Label', 'tourfic'),
-                'type' => Controls_Manager::TEXT,
-				'dynamic' => [
-					'active' => true,
-				],
-                'default'   => 'Check in',
-                'conditions' => $this->tf_display_conditionally([
-                    'tf_hotel' => ['design-2', 'design-3'],
-                    'tf_apartment' => ['design-1', 'design-2']
-                ]),
-            ]
-        );
+        $this->add_control('checkin_label', [
+            'label' => esc_html__('Checkin Label', 'tourfic'),
+            'type' => Controls_Manager::TEXT,
+            'dynamic' => [
+                'active' => true,
+            ],
+            'default'   => 'Check in',
+            'conditions' => $this->tf_display_conditionally([
+                'tf_hotel' => ['design-2', 'design-3'],
+                'tf_apartment' => ['design-1', 'design-2']
+            ]),
+        ]);
         
-        $this->add_control(
-            'checkout_label', [
-                'label' => esc_html__('Checkout Label', 'tourfic'),
-                'type' => Controls_Manager::TEXT,
-				'dynamic' => [
-					'active' => true,
-				],
-                'default'   => 'Check out',
-                'conditions' => $this->tf_display_conditionally([
-                    'tf_hotel' => ['design-2', 'design-3'],
-                    'tf_apartment' => ['design-1', 'design-2']
-                ]),
-            ]
-        );
+        $this->add_control('checkout_label', [
+            'label' => esc_html__('Checkout Label', 'tourfic'),
+            'type' => Controls_Manager::TEXT,
+            'dynamic' => [
+                'active' => true,
+            ],
+            'default'   => 'Check out',
+            'conditions' => $this->tf_display_conditionally([
+                'tf_hotel' => ['design-2', 'design-3'],
+                'tf_apartment' => ['design-1', 'design-2']
+            ]),
+        ]);
 
-        $this->add_control(
-            'date_placeholder_text', [
-                'label' => esc_html__('Placeholder Text', 'tourfic'),
-                'type' => Controls_Manager::TEXT,
-				'dynamic' => [
-					'active' => true,
-				],
-                'default'   => 'Select Date',
-                'conditions' => $this->tf_display_conditionally([
-                    'tf_hotel' => ['design-1', 'design-3', 'default'],
-                    'tf_tours' => ['design-1', 'design-3', 'default'],
-                    'tf_apartment' => ['design-2', 'default']
-                ]),
-            ]
-        );
+        $this->add_control('date_placeholder_text', [
+            'label' => esc_html__('Placeholder Text', 'tourfic'),
+            'type' => Controls_Manager::TEXT,
+            'dynamic' => [
+                'active' => true,
+            ],
+            'default'   => 'Select Date',
+            'conditions' => $this->tf_display_conditionally([
+                'tf_hotel' => ['design-1', 'design-3', 'default'],
+                'tf_tours' => ['design-1', 'design-3', 'default'],
+                'tf_apartment' => ['design-2', 'default']
+            ]),
+        ]);
 
-        $this->add_control(
-            'btn_text', [
-                'label' => esc_html__('Button Text', 'tourfic'),
-                'type' => Controls_Manager::TEXT,
-				'dynamic' => [
-					'active' => true,
-				],
-                'default'   => 'Check Availability',
-            ]
-        );
+        /* Car Controls */
+        //Pick-up
+        $this->add_control('pickup_head',[
+            'label' => __('Pick-up Location', 'tourfic'),
+            'type' => Controls_Manager::HEADING,
+            'condition' => [
+                'service' => 'tf_carrental',
+            ],
+        ]);
+
+        $this->add_control('pickup_location_icon',[
+            'label' => esc_html__('Pick-up Location Icon', 'tourfic'),
+            'label_block' => true,
+            'type' => Controls_Manager::ICONS,
+            'fa4compatibility' => 'pickup_location_icon_comp',
+            'condition' => [
+                'service' => 'tf_carrental',
+            ],
+        ]);
+
+        $this->add_control('pickup_loc_label', [
+            'label' => esc_html__('Pick-up Location Label', 'tourfic'),
+            'type' => Controls_Manager::TEXT,
+            'dynamic' => [
+                'active' => true,
+            ],
+            'default' => 'Pick-up',
+            'condition' => [
+                'service' => 'tf_carrental',
+            ],
+        ]);
+        
+        $this->add_control('pickup_loc_placeholder_text', [
+            'label' => esc_html__('Pick-up Placeholder Text', 'tourfic'),
+            'type' => Controls_Manager::TEXT,
+            'dynamic' => [
+                'active' => true,
+            ],
+            'default'   => 'Pick Up Location',
+            'condition' => [
+                'service' => 'tf_carrental',
+            ],
+        ]);
+
+        //Drop-off
+        $this->add_control('dropoff_head',[
+            'label' => __('Drop-off Location', 'tourfic'),
+            'type' => Controls_Manager::HEADING,
+            'condition' => [
+                'service' => 'tf_carrental',
+            ],
+        ]);
+
+        $this->add_control('dropoff_location_icon',[
+            'label' => esc_html__('Drop-off Location Icon', 'tourfic'),
+            'label_block' => true,
+            'type' => Controls_Manager::ICONS,
+            'fa4compatibility' => 'dropoff_location_icon_comp',
+            'condition' => [
+                'service' => 'tf_carrental',
+            ],
+        ]);
+
+        $this->add_control('dropoff_loc_label', [
+            'label' => esc_html__('Drop-off Location Label', 'tourfic'),
+            'type' => Controls_Manager::TEXT,
+            'dynamic' => [
+                'active' => true,
+            ],
+            'default' => 'Drop-off',
+            'condition' => [
+                'service' => 'tf_carrental',
+            ],
+        ]);
+        
+        $this->add_control('dropoff_loc_placeholder_text', [
+            'label' => esc_html__('Drop-off Placeholder Text', 'tourfic'),
+            'type' => Controls_Manager::TEXT,
+            'dynamic' => [
+                'active' => true,
+            ],
+            'default'   => 'Drop Off Location',
+            'condition' => [
+                'service' => 'tf_carrental',
+            ],
+        ]);
+        
+        //Pick-up date & time
+        $this->add_control('pickup_date_head',[
+            'label' => __('Pick-up Date & Time', 'tourfic'),
+            'type' => Controls_Manager::HEADING,
+            'condition' => [
+                'service' => 'tf_carrental',
+            ],
+        ]);
+
+        $this->add_control('pickup_date_icon',[
+            'label' => esc_html__('Pick-up Date Icon', 'tourfic'),
+            'default' => [
+                'value' => 'fa-solid fa-calendar-days',
+                'library' => 'fa-regular',
+            ],
+            'label_block' => true,
+            'type' => Controls_Manager::ICONS,
+            'fa4compatibility' => 'pickup_date_icon_comp',
+            'condition' => [
+                'service' => 'tf_carrental',
+            ],
+        ]);
+        
+        $this->add_control('pickup_date_label', [
+            'label' => esc_html__('Pick-up Date Label', 'tourfic'),
+            'type' => Controls_Manager::TEXT,
+            'dynamic' => [
+                'active' => true,
+            ],
+            'default'   => 'Pick-up Date',
+            'condition' => [
+                'service' => 'tf_carrental',
+            ],
+        ]);
+
+        $this->add_control('pickup_date_placeholder_text', [
+            'label' => esc_html__('Pick-up Date Placeholder Text', 'tourfic'),
+            'type' => Controls_Manager::TEXT,
+            'dynamic' => [
+                'active' => true,
+            ],
+            'default'   => 'Pick Up Date',
+            'condition' => [
+                'service' => 'tf_carrental',
+            ],
+        ]);
+
+        $this->add_control('pickup_time_icon',[
+            'label' => esc_html__('Pick-up Time Icon', 'tourfic'),
+            'default' => [
+                'value' => 'fa-regular fa-clock',
+                'library' => 'fa-regular',
+            ],
+            'label_block' => true,
+            'type' => Controls_Manager::ICONS,
+            'fa4compatibility' => 'pickup_time_icon_comp',
+            'condition' => [
+                'service' => 'tf_carrental',
+            ],
+        ]);
+        
+        $this->add_control('pickup_time_label', [
+            'label' => esc_html__('Pick-up Time Label', 'tourfic'),
+            'type' => Controls_Manager::TEXT,
+            'dynamic' => [
+                'active' => true,
+            ],
+            'default'   => 'Time',
+            'condition' => [
+                'service' => 'tf_carrental',
+            ],
+        ]);
+
+        $this->add_control('pickup_time_placeholder_text', [
+            'label' => esc_html__('Pick-up Time Placeholder Text', 'tourfic'),
+            'type' => Controls_Manager::TEXT,
+            'dynamic' => [
+                'active' => true,
+            ],
+            'default'   => 'Pick Up Time',
+            'condition' => [
+                'service' => 'tf_carrental',
+            ],
+        ]);
+        
+        //Drop-off date & time
+        $this->add_control('dropoff_date_head',[
+            'label' => __('Drop-off Date & Time', 'tourfic'),
+            'type' => Controls_Manager::HEADING,
+            'condition' => [
+                'service' => 'tf_carrental',
+            ],
+        ]);
+
+        $this->add_control('dropoff_date_icon',[
+            'label' => esc_html__('Drop-off Date Icon', 'tourfic'),
+            'default' => [
+                'value' => 'fa-solid fa-calendar-days',
+                'library' => 'fa-regular',
+            ],
+            'label_block' => true,
+            'type' => Controls_Manager::ICONS,
+            'fa4compatibility' => 'dropoff_date_icon_comp',
+            'condition' => [
+                'service' => 'tf_carrental',
+            ],
+        ]);
+        
+        $this->add_control('dropoff_date_label', [
+            'label' => esc_html__('Drop-off Date Label', 'tourfic'),
+            'type' => Controls_Manager::TEXT,
+            'dynamic' => [
+                'active' => true,
+            ],
+            'default'   => 'Drop-off Date',
+            'condition' => [
+                'service' => 'tf_carrental',
+            ],
+        ]);
+
+        $this->add_control('dropoff_date_placeholder_text', [
+            'label' => esc_html__('Drop-off Date Placeholder Text', 'tourfic'),
+            'type' => Controls_Manager::TEXT,
+            'dynamic' => [
+                'active' => true,
+            ],
+            'default'   => 'Drop Off Date',
+            'condition' => [
+                'service' => 'tf_carrental',
+            ],
+        ]);
+
+        $this->add_control('dropoff_time_icon',[
+            'label' => esc_html__('Drop-off Time Icon', 'tourfic'),
+            'default' => [
+                'value' => 'fa-regular fa-clock',
+                'library' => 'fa-regular',
+            ],
+            'label_block' => true,
+            'type' => Controls_Manager::ICONS,
+            'fa4compatibility' => 'dropoff_time_icon_comp',
+            'condition' => [
+                'service' => 'tf_carrental',
+            ],
+        ]);
+        
+        $this->add_control('dropoff_time_label', [
+            'label' => esc_html__('Drop-off Time Label', 'tourfic'),
+            'type' => Controls_Manager::TEXT,
+            'dynamic' => [
+                'active' => true,
+            ],
+            'default'   => 'Time',
+            'condition' => [
+                'service' => 'tf_carrental',
+            ],
+        ]);
+
+        $this->add_control('dropoff_time_placeholder_text', [
+            'label' => esc_html__('Drop-off Time Placeholder Text', 'tourfic'),
+            'type' => Controls_Manager::TEXT,
+            'dynamic' => [
+                'active' => true,
+            ],
+            'default'   => 'Drop Off Time',
+            'condition' => [
+                'service' => 'tf_carrental',
+            ],
+        ]);
+
+        $this->add_control('return_same_location_text', [
+            'label' => esc_html__('Return in Same Location Text', 'tourfic'),
+            'type' => Controls_Manager::TEXT,
+            'dynamic' => [
+                'active' => true,
+            ],
+            'default'   => 'Return in the same location',
+            'condition' => [
+                'service' => 'tf_carrental',
+            ],
+        ]);
+
+        $this->add_control('search_icon',[
+            'label' => esc_html__('Search Icon', 'tourfic'),
+            'default' => [
+                'value' => 'fas fa-search',
+                'library' => 'fas',
+            ],
+            'label_block' => true,
+            'type' => Controls_Manager::ICONS,
+            'fa4compatibility' => 'search_icon_comp',
+            'condition' => [
+                'service' => 'tf_carrental',
+            ],
+        ]);
+
+        $this->add_control('btn_text', [
+            'label' => esc_html__('Button Text', 'tourfic'),
+            'type' => Controls_Manager::TEXT,
+            'dynamic' => [
+                'active' => true,
+            ],
+            'default'   => 'Check Availability',
+        ]);
 
 	    do_action( 'tf/search/fields/controls', $this );
 
@@ -560,14 +778,6 @@ class Search_Form extends Widget_Base {
 				],
 			],
 			'desktop_default' => [
-				'unit' => '%',
-				'size' => 65,
-			],
-			'tablet_default'  => [
-				'unit' => '%',
-				'size' => 75,
-			],
-			'mobile_default'  => [
 				'unit' => '%',
 				'size' => 100,
 			],
@@ -645,7 +855,7 @@ class Search_Form extends Widget_Base {
 		$this->add_group_control( Group_Control_Typography::get_type(), [
             'label'    => __( 'Label Typography', 'tourfic' ),
 			'name'     => "tf_label_typography",
-			'selector' => "{{WRAPPER}} .tf-field .acr-label, {{WRAPPER}} span.tf-booking-form-title, {{WRAPPER}} .tf-search-field-label",
+			'selector' => "{{WRAPPER}} .tf-field .acr-label, {{WRAPPER}} span.tf-booking-form-title, {{WRAPPER}} .tf-search-field-label, {{WRAPPER}} .tf-select-date .info-select h5",
             'conditions' => $this->tf_display_conditionally([
                 'tf_hotel' => ['design-1', 'design-2', 'design-3'],
                 'tf_tours' => ['design-1', 'design-2', 'design-3'],
@@ -664,13 +874,19 @@ class Search_Form extends Widget_Base {
 				"{{WRAPPER}} span.tf-booking-form-title" => 'color: {{VALUE}};', //design-2
 				"{{WRAPPER}} .tf-search-field-label" => 'color: {{VALUE}};', //design-3
 				"{{WRAPPER}} .tf_form-inner select" => 'color: {{VALUE}};', //default
+				"{{WRAPPER}} .tf-select-date .info-select h5" => 'color: {{VALUE}};', //car design-1
 			],
 		] );
 
         $this->add_group_control( Group_Control_Typography::get_type(), [
             'label'    => __( 'Placeholder Typography', 'tourfic' ),
 			'name'     => "tf_placeholder_typography",
-			'selector' => "{{WRAPPER}} .tf-booking-date-wrap span, {{WRAPPER}} span.tf-booking-date, {{WRAPPER}} .tf-booking-form .tf-booking-form-fields .tf-booking-form-guest-and-room .tf-booking-form-guest-and-room-inner .tf-booking-guest-and-room-wrap.tf-archive-guest-info span, {{WRAPPER}} .tf-booking-guest-and-room-wrap, {{WRAPPER}} .tf-search-input, {{WRAPPER}} .tf-archive-guest-info",
+			'selector' => "{{WRAPPER}} .tf-booking-date-wrap span, 
+                            {{WRAPPER}} span.tf-booking-date, 
+                            {{WRAPPER}} .tf-booking-form .tf-booking-form-fields .tf-booking-form-guest-and-room .tf-booking-form-guest-and-room-inner .tf-booking-guest-and-room-wrap.tf-archive-guest-info span, 
+                            {{WRAPPER}} .tf-booking-guest-and-room-wrap, 
+                            {{WRAPPER}} .tf-search-input, 
+                            {{WRAPPER}} .tf-archive-guest-info",
             'conditions' => $this->tf_display_conditionally([
                 'tf_hotel' => ['design-2', 'design-3'],
                 'tf_tours' => ['design-2', 'design-3'],
@@ -687,6 +903,7 @@ class Search_Form extends Widget_Base {
 				"{{WRAPPER}} .tf-booking-date-wrap svg path, {{WRAPPER}} .tf-booking-guest-and-room-wrap svg path" => 'fill: {{VALUE}} !important;', //design-2
 				"{{WRAPPER}} .tf-search-field .tf-search-input::placeholder, {{WRAPPER}} .tf-archive-guest-info" => 'color: {{VALUE}} !important;', //design-3
 				"{{WRAPPER}} .tf_form-inner input[type=text]::placeholder" => 'color: {{VALUE}} !important;', //legacy
+				"{{WRAPPER}} .tf-select-date .info-select input[type=text]::placeholder" => 'color: {{VALUE}} !important;', //legacy
 			],
 		] );
 
@@ -716,6 +933,8 @@ class Search_Form extends Widget_Base {
 				"{{WRAPPER}} .tf-search-field-icon svg" => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}', //design-3
 				"{{WRAPPER}} .tf_form-inner i" => 'font-size: {{SIZE}}{{UNIT}}', //design-3
 				"{{WRAPPER}} .tf_form-inner svg" => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}', //design-3
+				"{{WRAPPER}} .tf-date-single-select .tf-select-date i" => 'font-size: {{SIZE}}{{UNIT}}', //design-3
+				"{{WRAPPER}} .tf-date-single-select .tf-select-date svg" => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}', //design-3
 			],
 		] );
 
@@ -733,6 +952,8 @@ class Search_Form extends Widget_Base {
 				"{{WRAPPER}} .tf-search-field-icon svg path" => 'fill: {{VALUE}}', //design-3
 				"{{WRAPPER}} .tf_form-inner i" => 'color: {{VALUE}}', //design-3
 				"{{WRAPPER}} .tf_form-inner svg path" => 'fill: {{VALUE}}', //design-3
+				"{{WRAPPER}} .tf-date-single-select .tf-select-date i" => 'color: {{VALUE}}', //design-3
+				"{{WRAPPER}} .tf-date-single-select .tf-select-date svg path" => 'fill: {{VALUE}}', //design-3
 			],
 		] );
 
@@ -759,6 +980,7 @@ class Search_Form extends Widget_Base {
 				"{{WRAPPER}} .tf-booking-location-wrap svg" => 'margin-right: {{SIZE}}px;',
 				"{{WRAPPER}} .tf-search-fields .tf-search-field" => 'gap: {{SIZE}}px;',
 				"{{WRAPPER}} .tf_form-inner" => 'gap: {{SIZE}}px;',
+				"{{WRAPPER}} .tf-date-single-select .tf-select-date .tf-flex-gap-4" => 'gap: {{SIZE}}px;',
 			],
 		] );
 
@@ -789,7 +1011,7 @@ class Search_Form extends Widget_Base {
             'conditions' => $this->tf_display_conditionally([
                 'tf_hotel' => ['design-1', 'default'],
                 'tf_tours' => ['design-1', 'default'],
-                'tf_apartment' => ['default']
+                'tf_apartment' => ['default'],
             ]),
 		] );
 
@@ -815,6 +1037,7 @@ class Search_Form extends Widget_Base {
 				"{{WRAPPER}} .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap input" => $this->tf_apply_dim( 'padding' ), //design-2
 				"{{WRAPPER}} .tf-search-field .tf-search-input" => $this->tf_apply_dim( 'padding' ), //design-3
 				"{{WRAPPER}} .tf_form-row .tf_form-inner" => $this->tf_apply_dim( 'padding' ), //default
+				"{{WRAPPER}} .tf-select-date .info-select input" => $this->tf_apply_dim( 'padding' ), //car design-1
 			],
 		] );
         $this->end_controls_tab();
@@ -857,12 +1080,13 @@ class Search_Form extends Widget_Base {
 				"{{WRAPPER}} .tf-search-field .tf-search-input" => 'background-color: {{VALUE}};', //design-3
 				"{{WRAPPER}} .tf_form-row .tf_form-inner" => 'background-color: {{VALUE}};', //default
 				"{{WRAPPER}} .tf_form-row .tf_form-inner select option" => 'background-color: {{VALUE}};', //default
+				"{{WRAPPER}} .tf-select-date .info-select input" => 'background-color: {{VALUE}};', //car design-1
 			],
 		] );
 
 		$this->add_group_control( Group_Control_Border::get_type(), [
 			'name'     => "tf_field_border",
-			'selector' => "{{WRAPPER}} .tf-field-group .tf-field, {{WRAPPER}} .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap, {{WRAPPER}} .tf-search-field .tf-search-input, {{WRAPPER}} .tf_form-row .tf_form-inner",
+			'selector' => "{{WRAPPER}} .tf-field-group .tf-field, {{WRAPPER}} .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap, {{WRAPPER}} .tf-search-field .tf-search-input, {{WRAPPER}} .tf_form-row .tf_form-inner, {{WRAPPER}} .tf-select-date .info-select input",
 		] );
 		$this->add_control( "tf_field_border_radius", [
 			'label'      => __( 'Border Radius', 'tourfic' ),
@@ -876,6 +1100,7 @@ class Search_Form extends Widget_Base {
 				"{{WRAPPER}} .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap" => $this->tf_apply_dim( 'border-radius' ), //design-2
 				"{{WRAPPER}} .tf-search-field .tf-search-input" => $this->tf_apply_dim( 'border-radius' ), //design-3
 				"{{WRAPPER}} .tf_form-row .tf_form-inner" => $this->tf_apply_dim( 'border-radius' ), //default
+				"{{WRAPPER}} .tf-select-date .info-select input" => $this->tf_apply_dim( 'border-radius' ), //car design-1
 			],
 		] );
 		$this->end_controls_section();
@@ -1061,10 +1286,9 @@ class Search_Form extends Widget_Base {
 			$design = $design_tour;
 		} elseif($service == 'tf_apartment'){
 			$design = $design_apartment;
-		} 
-        // elseif($service == 'tf_carrental'){
-		// 	$design = $design_car;
-		// }
+		} elseif($service == 'tf_carrental'){
+			$design = $design_car;
+		}
 
 		$place = ($service == 'tf_hotel') ? 'tf-location' : 'tf-destination';
 		if ( $service == 'tf_apartment' ) {
@@ -1626,15 +1850,9 @@ class Search_Form extends Widget_Base {
                 </form>
             </div>
 		<?php 
-		} elseif ( $service == 'tf_carrental' && $design == "design-1" ) { ?>
-            <div class="tf-archive-search-box tf_archive_search_result">
-                <div class="tf-archive-search-box-wrapper">
-                    <div class="tf-date-select-box tf-flex tf-flex-gap-8">
-                        <div class="tf-date-single-select tf-flex tf-flex-gap-8 tf-flex-space-bttn tf-pick-drop-location <?php echo !empty($_GET['same_location']) && 'on'==$_GET['same_location'] ? esc_attr('active') : ''; ?>">
-                            <div class="tf-select-date">
-                                <div class="tf-flex tf-flex-gap-4">
-                                    <div class="icon">
-                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+		} elseif ( $service == 'tf_carrental' && $design == "design-1" ) { 
+            //Pickup Location icon
+            $pickup_location_icon_html = '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <g clip-path="url(#clip0_257_3711)">
                                             <path d="M7.36246 11.6666H4.16663C3.99707 11.6759 3.83438 11.7367 3.70034 11.8409C3.56631 11.9452 3.46732 12.0879 3.41663 12.25L1.74996 17.25C1.66663 17.3333 1.66663 17.4166 1.66663 17.5C1.66663 18 1.99996 18.3333 2.49996 18.3333H17.5C18 18.3333 18.3333 18 18.3333 17.5C18.3333 17.4166 18.3333 17.3333 18.25 17.25L16.5833 12.25C16.5326 12.0879 16.4336 11.9452 16.2996 11.8409C16.1655 11.7367 16.0028 11.6759 15.8333 11.6666H12.6375M15 6.66663C15 10.4166 9.99996 14.1666 9.99996 14.1666C9.99996 14.1666 4.99996 10.4166 4.99996 6.66663C4.99996 5.34054 5.52674 4.06877 6.46442 3.13109C7.40211 2.19341 8.67388 1.66663 9.99996 1.66663C11.326 1.66663 12.5978 2.19341 13.5355 3.13109C14.4732 4.06877 15 5.34054 15 6.66663ZM11.6666 6.66663C11.6666 7.5871 10.9204 8.33329 9.99996 8.33329C9.07948 8.33329 8.33329 7.5871 8.33329 6.66663C8.33329 5.74615 9.07948 4.99996 9.99996 4.99996C10.9204 4.99996 11.6666 5.74615 11.6666 6.66663Z" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                         </g>
@@ -1643,11 +1861,147 @@ class Search_Form extends Widget_Base {
                                             <rect width="20" height="20" fill="white"/>
                                             </clipPath>
                                         </defs>
-                                        </svg>
+                                        </svg>';
+            if(!empty($settings['pickup_location_icon']['value'])){
+                $pickup_location_icon_migrated = isset($settings['__fa4_migrated']['pickup_location_icon']);
+                $pickup_location_icon_is_new = empty($settings['pickup_location_icon_comp']);
+
+                if ( $pickup_location_icon_is_new || $pickup_location_icon_migrated ) {
+                    ob_start();
+                    Icons_Manager::render_icon( $settings['pickup_location_icon'], [ 'aria-hidden' => 'true' ] );
+                    $pickup_location_icon_html = ob_get_clean();
+                } else{
+                    $pickup_location_icon_html = '<i class="' . esc_attr( $settings['pickup_location_icon_comp'] ) . '"></i>';
+                }
+            }
+            //Dropoff Location icon
+            $dropoff_location_icon_html = '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0_257_3711)">
+                                            <path d="M7.36246 11.6666H4.16663C3.99707 11.6759 3.83438 11.7367 3.70034 11.8409C3.56631 11.9452 3.46732 12.0879 3.41663 12.25L1.74996 17.25C1.66663 17.3333 1.66663 17.4166 1.66663 17.5C1.66663 18 1.99996 18.3333 2.49996 18.3333H17.5C18 18.3333 18.3333 18 18.3333 17.5C18.3333 17.4166 18.3333 17.3333 18.25 17.25L16.5833 12.25C16.5326 12.0879 16.4336 11.9452 16.2996 11.8409C16.1655 11.7367 16.0028 11.6759 15.8333 11.6666H12.6375M15 6.66663C15 10.4166 9.99996 14.1666 9.99996 14.1666C9.99996 14.1666 4.99996 10.4166 4.99996 6.66663C4.99996 5.34054 5.52674 4.06877 6.46442 3.13109C7.40211 2.19341 8.67388 1.66663 9.99996 1.66663C11.326 1.66663 12.5978 2.19341 13.5355 3.13109C14.4732 4.06877 15 5.34054 15 6.66663ZM11.6666 6.66663C11.6666 7.5871 10.9204 8.33329 9.99996 8.33329C9.07948 8.33329 8.33329 7.5871 8.33329 6.66663C8.33329 5.74615 9.07948 4.99996 9.99996 4.99996C10.9204 4.99996 11.6666 5.74615 11.6666 6.66663Z" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip0_257_3711">
+                                            <rect width="20" height="20" fill="white"/>
+                                            </clipPath>
+                                        </defs>
+                                        </svg>';
+            if(!empty($settings['dropoff_location_icon']['value'])){
+                $dropoff_location_icon_migrated = isset($settings['__fa4_migrated']['dropoff_location_icon']);
+                $dropoff_location_icon_is_new = empty($settings['dropoff_location_icon_comp']);
+
+                if ( $dropoff_location_icon_is_new || $dropoff_location_icon_migrated ) {
+                    ob_start();
+                    Icons_Manager::render_icon( $settings['dropoff_location_icon'], [ 'aria-hidden' => 'true' ] );
+                    $dropoff_location_icon_html = ob_get_clean();
+                } else{
+                    $dropoff_location_icon_html = '<i class="' . esc_attr( $settings['dropoff_location_icon_comp'] ) . '"></i>';
+                }
+            }
+            //Pickup Date icon
+            $pickup_date_icon_html = '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M6.66667 1.66663V4.99996M13.3333 1.66663V4.99996M2.5 8.33329H17.5M6.66667 11.6666H6.675M10 11.6666H10.0083M13.3333 11.6666H13.3417M6.66667 15H6.675M10 15H10.0083M13.3333 15H13.3417M4.16667 3.33329H15.8333C16.7538 3.33329 17.5 4.07948 17.5 4.99996V16.6666C17.5 17.5871 16.7538 18.3333 15.8333 18.3333H4.16667C3.24619 18.3333 2.5 17.5871 2.5 16.6666V4.99996C2.5 4.07948 3.24619 3.33329 4.16667 3.33329Z" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>';
+            if(!empty($settings['pickup_date_icon']['value'])){
+                $pickup_date_icon_migrated = isset($settings['__fa4_migrated']['pickup_date_icon']);
+                $pickup_date_icon_is_new = empty($settings['pickup_date_icon_comp']);
+
+                if ( $pickup_date_icon_is_new || $pickup_date_icon_migrated ) {
+                    ob_start();
+                    Icons_Manager::render_icon( $settings['pickup_date_icon'], [ 'aria-hidden' => 'true' ] );
+                    $pickup_date_icon_html = ob_get_clean();
+                } else{
+                    $pickup_date_icon_html = '<i class="' . esc_attr( $settings['pickup_date_icon_comp'] ) . '"></i>';
+                }
+            }
+            //Pickup Time icon
+            $pickup_time_icon_html = '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <g clip-path="url(#clip0_257_3728)">
+                                                <path d="M9.99996 4.99996V9.99996L13.3333 11.6666M18.3333 9.99996C18.3333 14.6023 14.6023 18.3333 9.99996 18.3333C5.39759 18.3333 1.66663 14.6023 1.66663 9.99996C1.66663 5.39759 5.39759 1.66663 9.99996 1.66663C14.6023 1.66663 18.3333 5.39759 18.3333 9.99996Z" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </g>
+                                            <defs>
+                                                <clipPath id="clip0_257_3728">
+                                                <rect width="20" height="20" fill="white"/>
+                                                </clipPath>
+                                            </defs>
+                                            </svg>';
+            if(!empty($settings['pickup_time_icon']['value'])){
+                $pickup_time_icon_migrated = isset($settings['__fa4_migrated']['pickup_time_icon']);
+                $pickup_time_icon_is_new = empty($settings['pickup_time_icon_comp']);
+
+                if ( $pickup_time_icon_is_new || $pickup_time_icon_migrated ) {
+                    ob_start();
+                    Icons_Manager::render_icon( $settings['pickup_time_icon'], [ 'aria-hidden' => 'true' ] );
+                    $pickup_time_icon_html = ob_get_clean();
+                } else{
+                    $pickup_time_icon_html = '<i class="' . esc_attr( $settings['pickup_time_icon_comp'] ) . '"></i>';
+                }
+            }
+            //Drop-off Date icon
+            $dropoff_date_icon_html = '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M6.66667 1.66663V4.99996M13.3333 1.66663V4.99996M2.5 8.33329H17.5M6.66667 11.6666H6.675M10 11.6666H10.0083M13.3333 11.6666H13.3417M6.66667 15H6.675M10 15H10.0083M13.3333 15H13.3417M4.16667 3.33329H15.8333C16.7538 3.33329 17.5 4.07948 17.5 4.99996V16.6666C17.5 17.5871 16.7538 18.3333 15.8333 18.3333H4.16667C3.24619 18.3333 2.5 17.5871 2.5 16.6666V4.99996C2.5 4.07948 3.24619 3.33329 4.16667 3.33329Z" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>';
+            if(!empty($settings['dropoff_date_icon']['value'])){
+                $dropoff_date_icon_migrated = isset($settings['__fa4_migrated']['dropoff_date_icon']);
+                $dropoff_date_icon_is_new = empty($settings['dropoff_date_icon_comp']);
+
+                if ( $dropoff_date_icon_is_new || $dropoff_date_icon_migrated ) {
+                    ob_start();
+                    Icons_Manager::render_icon( $settings['dropoff_date_icon'], [ 'aria-hidden' => 'true' ] );
+                    $dropoff_date_icon_html = ob_get_clean();
+                } else{
+                    $dropoff_date_icon_html = '<i class="' . esc_attr( $settings['dropoff_date_icon_comp'] ) . '"></i>';
+                }
+            }
+            //Drop-off Time icon
+            $dropoff_time_icon_html = '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0_257_3728)">
+                                            <path d="M9.99996 4.99996V9.99996L13.3333 11.6666M18.3333 9.99996C18.3333 14.6023 14.6023 18.3333 9.99996 18.3333C5.39759 18.3333 1.66663 14.6023 1.66663 9.99996C1.66663 5.39759 5.39759 1.66663 9.99996 1.66663C14.6023 1.66663 18.3333 5.39759 18.3333 9.99996Z" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip0_257_3728">
+                                            <rect width="20" height="20" fill="white"/>
+                                            </clipPath>
+                                        </defs>
+                                        </svg>';
+            if(!empty($settings['dropoff_time_icon']['value'])){
+                $dropoff_time_icon_migrated = isset($settings['__fa4_migrated']['dropoff_time_icon']);
+                $dropoff_time_icon_is_new = empty($settings['dropoff_time_icon_comp']);
+
+                if ( $dropoff_time_icon_is_new || $dropoff_time_icon_migrated ) {
+                    ob_start();
+                    Icons_Manager::render_icon( $settings['dropoff_time_icon'], [ 'aria-hidden' => 'true' ] );
+                    $dropoff_time_icon_html = ob_get_clean();
+                } else{
+                    $dropoff_time_icon_html = '<i class="' . esc_attr( $settings['dropoff_time_icon_comp'] ) . '"></i>';
+                }
+            }
+            //Search icon
+            $search_icon_html = '<i class="ri-search-line"></i>';
+            if(!empty($settings['search_icon']['value'])){
+                $search_icon_migrated = isset($settings['__fa4_migrated']['search_icon']);
+                $search_icon_is_new = empty($settings['search_icon_comp']);
+
+                if ( $search_icon_is_new || $search_icon_migrated ) {
+                    ob_start();
+                    Icons_Manager::render_icon( $settings['search_icon'], [ 'aria-hidden' => 'true' ] );
+                    $search_icon_html = ob_get_clean();
+                } else{
+                    $search_icon_html = '<i class="' . esc_attr( $settings['search_icon_comp'] ) . '"></i>';
+                }
+            }
+            ?>
+            <div class="tf-archive-booking-form__style-1 tf-archive-search-box tf-car-archive-search-box ">
+                <div class="tf-archive-search-box-wrapper tf_archive_search_result">
+                    <div class="tf-date-select-box tf-flex tf-flex-gap-8">
+                        <div class="tf-date-single-select tf-flex tf-flex-gap-8 tf-flex-space-bttn tf-pick-drop-location <?php echo !empty($_GET['same_location']) && 'on'==$_GET['same_location'] ? esc_attr('active') : ''; ?>">
+                            <div class="tf-select-date">
+                                <div class="tf-flex tf-flex-gap-4">
+                                    <div class="icon">
+                                        <?php echo wp_kses( $pickup_location_icon_html, Helper::tf_custom_wp_kses_allow_tags() ); ?>
                                     </div>
                                     <div class="info-select">
-                                        <h5><?php esc_html_e("Pick-up", "tourfic"); ?></h5>
-                                        <input type="text" placeholder="Pick Up Location" id="tf_pickup_location" value="<?php echo !empty($_GET['pickup-name']) ? esc_html($_GET['pickup-name']) : '' ?>" />
+                                        <h5><?php echo !empty($settings['pickup_loc_label']) ? esc_attr($settings['pickup_loc_label']) : esc_html__( 'Pick-up', 'tourfic' ); ?></h5>
+                                        <input type="text" placeholder="<?php echo !empty($settings['pickup_loc_placeholder_text']) ? esc_attr($settings['pickup_loc_placeholder_text']) : esc_html__( 'Pick Up Location', 'tourfic' ); ?>" id="tf_pickup_location" value="<?php echo !empty($_GET['pickup-name']) ? esc_html($_GET['pickup-name']) : '' ?>" />
                                         <input type="hidden" id="tf_pickup_location_id" value="<?php echo !empty($_GET['pickup']) ? esc_html($_GET['pickup']) : '' ?>" />
                                     </div>
                                 </div>
@@ -1656,20 +2010,11 @@ class Search_Form extends Widget_Base {
                             <div class="tf-select-date">
                                 <div class="tf-flex tf-flex-gap-4">
                                     <div class="icon">
-                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <g clip-path="url(#clip0_257_3711)">
-                                            <path d="M7.36246 11.6666H4.16663C3.99707 11.6759 3.83438 11.7367 3.70034 11.8409C3.56631 11.9452 3.46732 12.0879 3.41663 12.25L1.74996 17.25C1.66663 17.3333 1.66663 17.4166 1.66663 17.5C1.66663 18 1.99996 18.3333 2.49996 18.3333H17.5C18 18.3333 18.3333 18 18.3333 17.5C18.3333 17.4166 18.3333 17.3333 18.25 17.25L16.5833 12.25C16.5326 12.0879 16.4336 11.9452 16.2996 11.8409C16.1655 11.7367 16.0028 11.6759 15.8333 11.6666H12.6375M15 6.66663C15 10.4166 9.99996 14.1666 9.99996 14.1666C9.99996 14.1666 4.99996 10.4166 4.99996 6.66663C4.99996 5.34054 5.52674 4.06877 6.46442 3.13109C7.40211 2.19341 8.67388 1.66663 9.99996 1.66663C11.326 1.66663 12.5978 2.19341 13.5355 3.13109C14.4732 4.06877 15 5.34054 15 6.66663ZM11.6666 6.66663C11.6666 7.5871 10.9204 8.33329 9.99996 8.33329C9.07948 8.33329 8.33329 7.5871 8.33329 6.66663C8.33329 5.74615 9.07948 4.99996 9.99996 4.99996C10.9204 4.99996 11.6666 5.74615 11.6666 6.66663Z" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </g>
-                                        <defs>
-                                            <clipPath id="clip0_257_3711">
-                                            <rect width="20" height="20" fill="white"/>
-                                            </clipPath>
-                                        </defs>
-                                        </svg>
+                                        <?php echo wp_kses( $dropoff_location_icon_html, Helper::tf_custom_wp_kses_allow_tags() ); ?>
                                     </div>
                                     <div class="info-select">
-                                        <h5><?php esc_html_e("Drop-off", "tourfic"); ?></h5>
-                                        <input type="text" placeholder="Drop Off Location" id="tf_dropoff_location" value="<?php echo !empty($_GET['dropoff-name']) ? esc_html($_GET['dropoff-name']) : '' ?>" />
+                                        <h5><?php echo !empty($settings['dropoff_loc_label']) ? esc_attr($settings['dropoff_loc_label']) : esc_html__( 'Drop-off', 'tourfic' ); ?></h5>
+                                        <input type="text" placeholder="<?php echo !empty($settings['dropoff_loc_placeholder_text']) ? esc_attr($settings['dropoff_loc_placeholder_text']) : esc_html__( 'Drop Off Location', 'tourfic' ); ?>" id="tf_dropoff_location" value="<?php echo !empty($_GET['dropoff-name']) ? esc_html($_GET['dropoff-name']) : '' ?>" />
                                         <input type="hidden" id="tf_dropoff_location_id" value="<?php echo !empty($_GET['dropoff']) ? esc_html($_GET['dropoff']) : '' ?>" />
                                     </div>
                                 </div>
@@ -1680,34 +2025,23 @@ class Search_Form extends Widget_Base {
                             <div class="tf-select-date">
                                 <div class="tf-flex tf-flex-gap-4">
                                     <div class="icon">
-                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M6.66667 1.66663V4.99996M13.3333 1.66663V4.99996M2.5 8.33329H17.5M6.66667 11.6666H6.675M10 11.6666H10.0083M13.3333 11.6666H13.3417M6.66667 15H6.675M10 15H10.0083M13.3333 15H13.3417M4.16667 3.33329H15.8333C16.7538 3.33329 17.5 4.07948 17.5 4.99996V16.6666C17.5 17.5871 16.7538 18.3333 15.8333 18.3333H4.16667C3.24619 18.3333 2.5 17.5871 2.5 16.6666V4.99996C2.5 4.07948 3.24619 3.33329 4.16667 3.33329Z" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </svg>
+                                        <?php echo wp_kses( $pickup_date_icon_html, Helper::tf_custom_wp_kses_allow_tags() ); ?>
                                     </div>
                                     <div class="info-select">
-                                        <h5><?php esc_html_e("Pick-up date", "tourfic"); ?></h5>
-                                        <input type="text" placeholder="Pick Up Date" class="tf_pickup_date" value="<?php echo !empty($_GET['pickup-date']) ? esc_html($_GET['pickup-date']) : '' ?>" />
+                                        <h5><?php echo !empty($settings['pickup_date_label']) ? esc_attr($settings['pickup_date_label']) : esc_html__( 'Pick-up date', 'tourfic' ); ?></h5>
+                                        <input type="text" placeholder="<?php echo !empty($settings['pickup_date_placeholder_text']) ? esc_attr($settings['pickup_date_placeholder_text']) : esc_html__( 'Pick Up Date', 'tourfic' ); ?>" class="tf_pickup_date" value="<?php echo !empty($_GET['pickup-date']) ? esc_html($_GET['pickup-date']) : '' ?>" />
                                     </div>
                                 </div>
                             </div>
 
                             <div class="tf-select-date">
-                                    <div class="tf-flex tf-flex-gap-4">
-                                        <div class="icon">
-                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <g clip-path="url(#clip0_257_3728)">
-                                                <path d="M9.99996 4.99996V9.99996L13.3333 11.6666M18.3333 9.99996C18.3333 14.6023 14.6023 18.3333 9.99996 18.3333C5.39759 18.3333 1.66663 14.6023 1.66663 9.99996C1.66663 5.39759 5.39759 1.66663 9.99996 1.66663C14.6023 1.66663 18.3333 5.39759 18.3333 9.99996Z" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                            </g>
-                                            <defs>
-                                                <clipPath id="clip0_257_3728">
-                                                <rect width="20" height="20" fill="white"/>
-                                                </clipPath>
-                                            </defs>
-                                            </svg>
-                                        </div>
+                                <div class="tf-flex tf-flex-gap-4">
+                                    <div class="icon">
+                                        <?php echo wp_kses( $pickup_time_icon_html, Helper::tf_custom_wp_kses_allow_tags() ); ?>
+                                    </div>
                                     <div class="info-select">
-                                        <h5><?php esc_html_e("Time", "tourfic"); ?></h5>
-                                        <input type="text" placeholder="Pick Up Time" class="tf_pickup_time" value="<?php echo !empty($_GET['pickup-time']) ? esc_html($_GET['pickup-time']) : '' ?>" />
+                                        <h5><?php echo !empty($settings['pickup_time_label']) ? esc_attr($settings['pickup_time_label']) : esc_html__( 'Time', 'tourfic' ); ?></h5>
+                                        <input type="text" placeholder="<?php echo !empty($settings['pickup_time_placeholder_text']) ? esc_attr($settings['pickup_time_placeholder_text']) : esc_html__( 'Pick Up Time', 'tourfic' ); ?>" class="tf_pickup_time" value="<?php echo !empty($_GET['pickup-time']) ? esc_html($_GET['pickup-time']) : '' ?>" />
                                     </div>
                                 </div>
                             </div>
@@ -1717,34 +2051,23 @@ class Search_Form extends Widget_Base {
                             <div class="tf-select-date">
                                 <div class="tf-flex tf-flex-gap-4">
                                     <div class="icon">
-                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M6.66667 1.66663V4.99996M13.3333 1.66663V4.99996M2.5 8.33329H17.5M6.66667 11.6666H6.675M10 11.6666H10.0083M13.3333 11.6666H13.3417M6.66667 15H6.675M10 15H10.0083M13.3333 15H13.3417M4.16667 3.33329H15.8333C16.7538 3.33329 17.5 4.07948 17.5 4.99996V16.6666C17.5 17.5871 16.7538 18.3333 15.8333 18.3333H4.16667C3.24619 18.3333 2.5 17.5871 2.5 16.6666V4.99996C2.5 4.07948 3.24619 3.33329 4.16667 3.33329Z" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </svg>
+                                        <?php echo wp_kses( $dropoff_date_icon_html, Helper::tf_custom_wp_kses_allow_tags() ); ?>
                                     </div>
                                     <div class="info-select">
-                                        <h5><?php esc_html_e("Drop-off date", "tourfic"); ?></h5>
-                                        <input type="text" placeholder="Drop Off Date" class="tf_dropoff_date" value="<?php echo !empty($_GET['dropoff-date']) ? esc_html($_GET['dropoff-date']) : '' ?>" />
+                                        <h5><?php echo !empty($settings['dropoff_date_label']) ? esc_attr($settings['dropoff_date_label']) : esc_html__( 'Drop-off date', 'tourfic' ); ?></h5>
+                                        <input type="text" placeholder="<?php echo !empty($settings['dropoff_date_placeholder_text']) ? esc_attr($settings['dropoff_date_placeholder_text']) : esc_html__( 'Drop Off Date', 'tourfic' ); ?>" class="tf_dropoff_date" value="<?php echo !empty($_GET['dropoff-date']) ? esc_html($_GET['dropoff-date']) : '' ?>" />
                                     </div>
                                 </div>
                             </div>
 
                             <div class="tf-select-date">
-                                    <div class="tf-flex tf-flex-gap-4">
-                                        <div class="icon">
-                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <g clip-path="url(#clip0_257_3728)">
-                                                <path d="M9.99996 4.99996V9.99996L13.3333 11.6666M18.3333 9.99996C18.3333 14.6023 14.6023 18.3333 9.99996 18.3333C5.39759 18.3333 1.66663 14.6023 1.66663 9.99996C1.66663 5.39759 5.39759 1.66663 9.99996 1.66663C14.6023 1.66663 18.3333 5.39759 18.3333 9.99996Z" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                            </g>
-                                            <defs>
-                                                <clipPath id="clip0_257_3728">
-                                                <rect width="20" height="20" fill="white"/>
-                                                </clipPath>
-                                            </defs>
-                                            </svg>
-                                        </div>
+                                <div class="tf-flex tf-flex-gap-4">
+                                    <div class="icon">
+                                        <?php echo wp_kses( $dropoff_time_icon_html, Helper::tf_custom_wp_kses_allow_tags() ); ?>
+                                    </div>
                                     <div class="info-select">
-                                        <h5><?php esc_html_e("Time", "tourfic"); ?></h5>
-                                        <input type="text" placeholder="Drop Off Time" class="tf_dropoff_time" value="<?php echo !empty($_GET['dropoff-time']) ? esc_html($_GET['dropoff-time']) : '' ?>" />
+                                        <h5><?php echo !empty($settings['dropoff_time_label']) ? esc_attr($settings['dropoff_time_label']) : esc_html__( 'Time', 'tourfic' ); ?></h5>
+                                        <input type="text" placeholder="<?php echo !empty($settings['dropoff_time_placeholder_text']) ? esc_attr($settings['dropoff_time_placeholder_text']) : esc_html__( 'Drop Off Time', 'tourfic' ); ?>" class="tf_dropoff_time" value="<?php echo !empty($_GET['dropoff-time']) ? esc_html($_GET['dropoff-time']) : '' ?>" />
                                     </div>
                                 </div>
                             </div>
@@ -1755,13 +2078,11 @@ class Search_Form extends Widget_Base {
                         <div class="tf-driver-location">
                             <?php
                             $car_driver_min_age      = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['car_archive_driver_min_age'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['car_archive_driver_min_age'] : 18;
-
                             $car_driver_max_age      = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['car_archive_driver_max_age'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['car_archive_driver_max_age'] : 40;
-
                             ?>
                             <ul>
                                 <li>
-                                    <label><?php esc_html_e("Return in the same location", "tourfic"); ?>
+                                    <label><?php echo !empty($settings['return_same_location_text']) ? esc_attr($settings['return_same_location_text']) : esc_html__( 'Return in the same location', 'tourfic' ); ?>
                                         <input type="checkbox" name="same_location" <?php echo !empty($_GET['same_location']) && 'on'==$_GET['same_location'] ? esc_attr('checked') : ''; ?>>
                                         <span class="tf-checkmark"></span>
                                     </label>
@@ -1777,7 +2098,7 @@ class Search_Form extends Widget_Base {
                         </div>
                         <div class="tf-submit-button">
                             <input type="hidden" class="tf-post-type" value="<?php echo esc_attr("tf_carrental"); ?>">
-                            <button class="tf-filter-cars"><?php esc_html_e("Search", "tourfic"); ?> <i class="ri-search-line"></i></button>
+                            <button class="tf_btn tf-filter-cars"><?php echo !empty($settings['btn_text']) ? esc_html($settings['btn_text']) : esc_html__( 'Search', 'tourfic' ); ?> <?php echo wp_kses( $search_icon_html, Helper::tf_custom_wp_kses_allow_tags() ); ?></button>
                         </div>
 
                         <script>
@@ -2411,7 +2732,16 @@ class Search_Form extends Widget_Base {
     protected function tf_display_conditionally($design) {
         $terms = [];
         
-        foreach ($design as $service => $design_values) {
+        foreach ($design as $service_key => $design_values) {
+            // Detect if this is a "NOT" condition
+            $is_not = false;
+            if ( substr( $service_key, -1 ) === '!' ) {
+                $is_not = true;
+                $service = rtrim( $service_key, '!' );
+            } else {
+                $service = $service_key;
+            }
+            
             // Convert to array if it's not already
             $design_values = (array) $design_values;
             $design_control = 'design_' . str_replace('tf_', '', $service);
@@ -2422,7 +2752,7 @@ class Search_Form extends Widget_Base {
                     'terms' => [
                         [
                             'name' => 'service',
-                            'operator' => '==',
+                            'operator' => $is_not ? '!=' : '==',
                             'value' => $service,
                         ],
                         [
