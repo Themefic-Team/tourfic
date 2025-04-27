@@ -177,7 +177,6 @@
                     var response = JSON.parse(data);
 
                     if (response.status === 'error') {
-                        $.fancybox.close();
                         if (response.errors) {
                             response.errors.forEach(function (text) {
                                 notyf.error(text);
