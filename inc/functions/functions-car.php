@@ -107,7 +107,7 @@ wp_send_json( $response );
 wp_die();
 }
 
-function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = '', $dropoff_date = '', $pickup_time = '', $dropoff_time = ''){
+function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = '', $dropoff_date = '', $pickup_time = '', $dropoff_time = '', $settings = []){
 	$post_id = get_the_ID();
 	$meta = get_post_meta( $post_id, 'tf_carrental_opt', true );
 	// Single link

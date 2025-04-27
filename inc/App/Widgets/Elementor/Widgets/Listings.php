@@ -152,7 +152,7 @@ class Listings extends Widget_Base {
 				'tf_hotel'     => esc_html__( 'Hotel', 'tourfic' ),
 				'tf_tours'     => esc_html__( 'Tour', 'tourfic' ),
 				'tf_apartment' => esc_html__( 'Apartment', 'tourfic' ),
-				// 'tf_carrental' => esc_html__( 'Car', 'tourfic' ),
+				'tf_carrental' => esc_html__( 'Car', 'tourfic' ),
 			],
 			'default'  => 'tf_hotel',
 		]);
@@ -4638,19 +4638,27 @@ class Listings extends Widget_Base {
 
 	protected function tf_car_design_1($settings, $query) {
 		$post_count = $query->post_count;
+		$show_total_result = isset( $settings['show_total_result'] ) ? $settings['show_total_result'] : 'yes';
+		$grid_column = isset( $settings['grid_column'] ) ? absint($settings['grid_column']) : 2;
+		$listing_layout_toggle = isset( $settings['listing_layout_toggle'] ) ? $settings['listing_layout_toggle'] : 'yes';
+		if($listing_layout_toggle == 'yes'){
+			$listing_layout = isset( $settings['listing_default_layout'] ) ? $settings['listing_default_layout'] : 'list';
+		} else {
+			$listing_layout = isset( $settings['listing_layout'] ) ? $settings['listing_layout'] : 'list';
+		}
 		$show_pagination = isset( $settings['show_pagination'] ) ? $settings['show_pagination'] : 'yes';
 		$pagination_prev_label = isset( $settings['pagination_prev_label'] ) ? $settings['pagination_prev_label'] : '';
 		$pagination_next_label = isset( $settings['pagination_next_label'] ) ? $settings['pagination_next_label'] : '';
-		$tf_defult_views="grid";
 		?>
 		<div class="tf-archive-listing-wrap tf-archive-listing__one tf-archive-car-listing__one" data-design="design-1">
 			<div class="tf-archive-header tf-flex tf-flex-space-bttn tf-flex-align-center tf-mb-30">
 				<div class="tf-archive-view">
 					<ul class="tf-flex tf-flex-gap-16">
-						<li class="<?php echo $tf_defult_views=="grid" ? esc_attr('active') : ''; ?>" data-view="grid"><i class="ri-layout-grid-line"></i></li>
-						<li class="<?php echo $tf_defult_views=="list" ? esc_attr('active') : ''; ?>" data-view="list"><i class="ri-list-check"></i></li>
+						<li class="<?php echo $listing_layout=="grid" ? esc_attr('active') : ''; ?>" data-view="grid"><i class="ri-layout-grid-line"></i></li>
+						<li class="<?php echo $listing_layout=="list" ? esc_attr('active') : ''; ?>" data-view="list"><i class="ri-list-check"></i></li>
 					</ul>
 				</div>
+				<?php if($show_total_result == 'yes') : ?>
 				<div class="tf-total-result-bar">
 					<span>
 						<?php echo esc_html__( 'Total Results ', 'tourfic' ); ?>
@@ -4661,6 +4669,7 @@ class Listings extends Widget_Base {
 					</div>
 					<span><?php echo ')'; ?> </span>
 				</div>
+				<?php endif; ?>
 			</div>
 			<div class="tf-car-details-column tf-flex tf-flex-gap-32">
 				
@@ -4678,34 +4687,31 @@ class Listings extends Widget_Base {
 
 				<div class="tf-car-archive-result">
 					<?php do_action("tf_car_archive_card_items_before"); ?>
-					<div class="tf-car-result archive_ajax_result tf-flex tf-flex-gap-32 <?php echo $tf_defult_views=="list" ? esc_attr('list-view') : esc_attr('grid-view'); ?>">
-						
+					<div class="tf-car-result archive_ajax_result tf-flex tf-flex-gap-32 <?php echo $listing_layout=="list" ? esc_attr('list-view') : esc_attr('grid-view'); ?> tf-grid-<?php echo esc_attr($grid_column); ?>">
 						<?php
 						if ( $query->have_posts() ) {
 							while ( $query->have_posts() ) {
 								$query->the_post();
 								$car_meta = get_post_meta( get_the_ID() , 'tf_carrental_opt', true );
 								if ( !empty( $car_meta[ "car_as_featured" ] ) && $car_meta[ "car_as_featured" ] == 1 ) {
-									tf_car_archive_single_item();
+									tf_car_archive_single_item('','','','','','', $settings);
 								}
 							}
 							while ( $query->have_posts() ) {
 								$query->the_post();
 								$car_meta = get_post_meta( get_the_ID() , 'tf_carrental_opt', true );
 								if ( empty($car_meta[ "car_as_featured" ]) ) {
-									tf_car_archive_single_item();
+									tf_car_archive_single_item('','','','','','', $settings);
 								}
 							}
 						} else {
-							echo '<div class="tf-nothing-found" data-post-count="0" >' .esc_html__("No Tours Found!", "tourfic"). '</div>';
+							echo '<div class="tf-nothing-found" data-post-count="0" >' .esc_html__("No Cars Found!", "tourfic"). '</div>';
 						}
 						?>
 
 					</div>
 					<?php do_action("tf_car_archive_card_items_after"); ?>
-
 				</div>
-
 			</div>
 			<?php $elementor_settings = $this->tf_search_elementor_settings($settings); ?>
 			<div id="tf-elementor-settings" style="display: none"><?php echo !empty($elementor_settings) ? wp_json_encode($elementor_settings, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP) : wp_json_encode([]); ?></div>
