@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, car-rental, multivendor-marketplace
 Requires at least: 5.4
 Tested up to: 6.8
-Stable tag: 2.16.0
+Stable tag: 2.16.1
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -371,6 +371,12 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 22. Map Template(Pro)
 
 == Changelog ==
+
+= 2.16.1 – April 27, 2025 =
+
+- Fixed: Car design issue on the search page has been resolved.
+- Fixed: JavaScript conflict issue has been resolved.
+- Fixed: Popup display issue has been resolved.
 
 = 2.16.0 – April 26, 2025 =
 
