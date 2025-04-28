@@ -1249,7 +1249,8 @@ i {
 }
 
 .archive .site-content .ast-container,
-.single .site-content .ast-container {
+.single .site-content .ast-container,
+.page-template-tf-search .site-content .ast-container {
   max-width: 100%;
   padding: 0;
   display: block;
