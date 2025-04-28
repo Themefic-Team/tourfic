@@ -709,6 +709,19 @@ Without Payment Popup
 .page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result,
 #tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result {
   flex-wrap: wrap;
+  /* .tf_posts_navigation{
+                        width: 100%;
+                        .page-numbers{
+                            background: $color-brand-lite;
+                            color: $color-text;
+                            border-radius: 8px;
+                            border: 1px solid $color-border-lite;
+                            &.current{
+                                background: $color-primary;
+                                color: $color-text;
+                            }
+                        }
+                    } */
 }
 
 .post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view,
@@ -1176,34 +1189,6 @@ Without Payment Popup
 .page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-booking-btn button,
 #tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view .tf-car-details .tf-booking-btn button {
   margin-top: auto;
-}
-
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf_posts_navigation,
-.tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf_posts_navigation,
-.tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf_posts_navigation,
-.page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf_posts_navigation,
-#tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf_posts_navigation {
-  width: 100%;
-}
-
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf_posts_navigation .page-numbers,
-.tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf_posts_navigation .page-numbers,
-.tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf_posts_navigation .page-numbers,
-.page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf_posts_navigation .page-numbers,
-#tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf_posts_navigation .page-numbers {
-  background: var(--tf-brand-lite);
-  color: var(--tf-text-paragraph);
-  border-radius: 8px;
-  border: 1px solid var(--tf-border-lite);
-}
-
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf_posts_navigation .page-numbers.current,
-.tax-carrental_location .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf_posts_navigation .page-numbers.current,
-.tax-carrental_brand .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf_posts_navigation .page-numbers.current,
-.page-template-tf-search .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf_posts_navigation .page-numbers.current,
-#tft-site-main-body .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf_posts_navigation .page-numbers.current {
-  background: var(--tf-primary);
-  color: var(--tf-text-paragraph);
 }
 
 .notyf {
@@ -10019,6 +10004,7 @@ div#tf-destinationautocomplete-list div:before {
   position: relative;
 }
 
+.tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date .info-select label,
 .tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date .info-select h5 {
   color: var(--tf-text-heading);
   font-size: 0.75rem;
@@ -12055,6 +12041,19 @@ div#tf-destinationautocomplete-list div:before {
 .tf-archive-listing__one .tf-car-archive-result .tf-car-result,
 .tf-archive-template__one .tf-car-archive-result .tf-car-result {
   flex-wrap: wrap;
+  /*  .tf_posts_navigation{
+                    width: 100%;
+                    .page-numbers{
+                        background: $color-brand-lite;
+                        color: $color-text;
+                        border-radius: 8px;
+                        border: 1px solid $color-border-lite;
+                        &.current{
+                            background: $color-primary;
+                            color: $color-text;
+                        }
+                    }
+                } */
 }
 
 .tf-archive-listing__one .tf-car-archive-result .tf-car-result .tf-single-car-view,
@@ -12147,17 +12146,17 @@ div#tf-destinationautocomplete-list div:before {
   padding: 24px 16px 16px 16px;
 }
 
-.tf-archive-listing__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details a,
-.tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details a {
-  text-decoration: none;
+.tf-archive-listing__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details h3,
+.tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details h3 {
+  margin-top: 0px;
 }
 
-.tf-archive-listing__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details a h3,
-.tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details a h3 {
-  color: var(--tf-text-heading);
+.tf-archive-listing__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details h3 a,
+.tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details h3 a {
   font-size: 1.313rem;
   font-weight: 700;
-  margin-top: 0px;
+  color: var(--tf-text-heading);
+  text-decoration: none;
 }
 
 .tf-archive-listing__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details ul,
@@ -12256,6 +12255,49 @@ div#tf-destinationautocomplete-list div:before {
 .tf-archive-listing__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn .tf-car-booking-popup,
 .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn .tf-car-booking-popup {
   display: none;
+}
+
+.tf-archive-listing__one .tf-car-archive-result .tf-car-result.tf-grid-1 .tf-single-car-view,
+.tf-archive-template__one .tf-car-archive-result .tf-car-result.tf-grid-1 .tf-single-car-view {
+  width: 100%;
+}
+
+.tf-archive-listing__one .tf-car-archive-result .tf-car-result.tf-grid-3 .tf-single-car-view,
+.tf-archive-template__one .tf-car-archive-result .tf-car-result.tf-grid-3 .tf-single-car-view {
+  width: calc(100% / 3 - 16px);
+}
+
+@media only screen and (max-width: 1024px) {
+  .tf-archive-listing__one .tf-car-archive-result .tf-car-result.tf-grid-3 .tf-single-car-view,
+  .tf-archive-template__one .tf-car-archive-result .tf-car-result.tf-grid-3 .tf-single-car-view {
+    width: calc(100% / 2 - 12px);
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .tf-archive-listing__one .tf-car-archive-result .tf-car-result.tf-grid-3 .tf-single-car-view,
+  .tf-archive-template__one .tf-car-archive-result .tf-car-result.tf-grid-3 .tf-single-car-view {
+    width: calc(100% - 0px);
+  }
+}
+
+.tf-archive-listing__one .tf-car-archive-result .tf-car-result.tf-grid-4 .tf-single-car-view,
+.tf-archive-template__one .tf-car-archive-result .tf-car-result.tf-grid-4 .tf-single-car-view {
+  width: calc(100% / 4 - 18px);
+}
+
+@media only screen and (max-width: 1024px) {
+  .tf-archive-listing__one .tf-car-archive-result .tf-car-result.tf-grid-4 .tf-single-car-view,
+  .tf-archive-template__one .tf-car-archive-result .tf-car-result.tf-grid-4 .tf-single-car-view {
+    width: calc(100% / 2 - 12px);
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .tf-archive-listing__one .tf-car-archive-result .tf-car-result.tf-grid-4 .tf-single-car-view,
+  .tf-archive-template__one .tf-car-archive-result .tf-car-result.tf-grid-4 .tf-single-car-view {
+    width: calc(100% - 0px);
+  }
 }
 
 .tf-archive-listing__one .tf-car-archive-result .tf-car-result.list-view .tf-single-car-view,
@@ -12380,23 +12422,78 @@ div#tf-destinationautocomplete-list div:before {
   margin-top: auto;
 }
 
-.tf-archive-listing__one .tf-car-archive-result .tf-car-result .tf_posts_navigation,
-.tf-archive-template__one .tf-car-archive-result .tf-car-result .tf_posts_navigation {
+.tf-archive-listing__one .tf-car-archive-result .tf-car-result .tf-pagination-bar,
+.tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-pagination-bar {
+  display: block;
   width: 100%;
 }
 
-.tf-archive-listing__one .tf-car-archive-result .tf-car-result .tf_posts_navigation .page-numbers,
-.tf-archive-template__one .tf-car-archive-result .tf-car-result .tf_posts_navigation .page-numbers {
-  background: var(--tf-brand-lite);
-  color: var(--tf-text-paragraph);
-  border-radius: 8px;
+@media only screen and (max-width: 768px) {
+  .tf-archive-listing__one .tf-car-archive-result .tf-car-result .tf-pagination-bar,
+  .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-pagination-bar {
+    margin-bottom: 30px;
+  }
+}
+
+.tf-archive-listing__one .tf-car-archive-result .tf-car-result .tf-pagination-bar .tf_posts_navigation, .tf-archive-listing__one .tf-car-archive-result .tf-car-result .tf-pagination-bar #tf_posts_navigation_bar,
+.tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-pagination-bar .tf_posts_navigation,
+.tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-pagination-bar #tf_posts_navigation_bar {
+  margin-top: 40px;
+  width: 100%;
+  display: flex;
+  gap: 10px;
+}
+
+.tf-archive-listing__one .tf-car-archive-result .tf-car-result .tf-pagination-bar .tf_posts_navigation .page-numbers, .tf-archive-listing__one .tf-car-archive-result .tf-car-result .tf-pagination-bar #tf_posts_navigation_bar .page-numbers,
+.tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-pagination-bar .tf_posts_navigation .page-numbers,
+.tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-pagination-bar #tf_posts_navigation_bar .page-numbers {
+  font-size: 0.875rem;
+  color: var(--tf-primary);
+  text-decoration: none;
+  padding: 8px 16px;
+  background: #ffffff;
+  box-shadow: 0px 10px 18px rgba(88, 128, 160, 0.05);
+  border-radius: 5px;
+  display: inline-block;
   border: 1px solid var(--tf-border-lite);
 }
 
-.tf-archive-listing__one .tf-car-archive-result .tf-car-result .tf_posts_navigation .page-numbers.current,
-.tf-archive-template__one .tf-car-archive-result .tf-car-result .tf_posts_navigation .page-numbers.current {
+.tf-archive-listing__one .tf-car-archive-result .tf-car-result .tf-pagination-bar .tf_posts_navigation .page-numbers.current, .tf-archive-listing__one .tf-car-archive-result .tf-car-result .tf-pagination-bar #tf_posts_navigation_bar .page-numbers.current,
+.tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-pagination-bar .tf_posts_navigation .page-numbers.current,
+.tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-pagination-bar #tf_posts_navigation_bar .page-numbers.current {
   background: var(--tf-primary);
-  color: var(--tf-text-paragraph);
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+.tf-archive-listing__one .tf-car-archive-result .tf-car-result .tf_posts_navigation.tf_posts_ajax_navigation,
+.tf-archive-listing__one .tf-car-archive-result .tf-car-result .tf_posts_navigation.tf_posts_page_navigation,
+.tf-archive-template__one .tf-car-archive-result .tf-car-result .tf_posts_navigation.tf_posts_ajax_navigation,
+.tf-archive-template__one .tf-car-archive-result .tf-car-result .tf_posts_navigation.tf_posts_page_navigation {
+  margin-top: 40px;
+  width: 100%;
+}
+
+.tf-archive-listing__one .tf-car-archive-result .tf-car-result .tf_posts_navigation.tf_posts_ajax_navigation .page-numbers,
+.tf-archive-listing__one .tf-car-archive-result .tf-car-result .tf_posts_navigation.tf_posts_page_navigation .page-numbers,
+.tf-archive-template__one .tf-car-archive-result .tf-car-result .tf_posts_navigation.tf_posts_ajax_navigation .page-numbers,
+.tf-archive-template__one .tf-car-archive-result .tf-car-result .tf_posts_navigation.tf_posts_page_navigation .page-numbers {
+  font-size: 0.875rem;
+  color: var(--tf-primary);
+  text-decoration: none;
+  padding: 12px 18px;
+  background: #ffffff;
+  box-shadow: 0px 10px 18px rgba(88, 128, 160, 0.05);
+  border-radius: 5px;
+  display: inline-block;
+}
+
+.tf-archive-listing__one .tf-car-archive-result .tf-car-result .tf_posts_navigation.tf_posts_ajax_navigation .page-numbers.current,
+.tf-archive-listing__one .tf-car-archive-result .tf-car-result .tf_posts_navigation.tf_posts_page_navigation .page-numbers.current,
+.tf-archive-template__one .tf-car-archive-result .tf-car-result .tf_posts_navigation.tf_posts_ajax_navigation .page-numbers.current,
+.tf-archive-template__one .tf-car-archive-result .tf-car-result .tf_posts_navigation.tf_posts_page_navigation .page-numbers.current {
+  background: var(--tf-primary);
+  color: #ffffff;
 }
 
 /* Nav */

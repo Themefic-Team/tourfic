@@ -1414,13 +1414,14 @@
                     }
                     .tf-car-details{
                         padding: 24px 16px 16px 16px;
-                        a{
-                            text-decoration: none;
-                            h3{
-                                color: $color-heading;
+                        h3{
+                            margin-top: 0px;
+                            
+                            a{
                                 font-size: 1.313rem;
                                 font-weight: 700;
-                                margin-top: 0px;
+                                color: $color-heading;
+                                text-decoration: none;
                             }
                         }
                         ul{
@@ -1497,6 +1498,37 @@
                         }
                     }
                 }
+
+                &.tf-grid-1{
+                    .tf-single-car-view {
+                        width: 100%;
+                    }
+                }
+
+                &.tf-grid-3{
+                    .tf-single-car-view {
+                        width: calc(100% / 3 - 16px);
+                        @media #{$max1024}{
+                            width: calc(100% / 2 - 12px);
+                        }
+                        @media #{$max768}{
+                            width: calc(100% - 0px);
+                        }
+                    }
+                }
+
+                &.tf-grid-4{
+                    .tf-single-car-view {
+                        width: calc(100% / 4 - 18px);
+                        @media #{$max1024}{
+                            width: calc(100% / 2 - 12px);
+                        }
+                        @media #{$max768}{
+                            width: calc(100% - 0px);
+                        }
+                    }
+                }
+
                 &.list-view{
                     .tf-single-car-view{
                         width: 100%;
@@ -1570,7 +1602,7 @@
                     }
                 }
 
-                .tf_posts_navigation{
+               /*  .tf_posts_navigation{
                     width: 100%;
                     .page-numbers{
                         background: $color-brand-lite;
@@ -1581,6 +1613,54 @@
                             background: $color-primary;
                             color: $color-text;
                         }
+                    }
+                } */
+                .tf-pagination-bar{
+                    display: block;
+                    width: 100%;
+                    @media #{$max768}{
+                        margin-bottom: 30px;
+                    }
+                    .tf_posts_navigation,#tf_posts_navigation_bar{
+                        margin-top: 40px;
+                        width: 100%;
+                        display: flex;
+                        gap: 10px;
+                        .page-numbers {
+                            font-size: 0.875rem;
+                            color: $color-primary;
+                            text-decoration: none;
+                            padding: 8px 16px;
+                            background: $color-white;
+                            box-shadow: 0px 10px 18px rgba(88, 128, 160, 0.05);
+                            border-radius: 5px;
+                            display: inline-block;
+                            border: 1px solid $color-border-lite;
+                        }
+                        .page-numbers.current{
+                            background: $color-primary;
+                            color: $color-white;
+                            border-color: $color-white;
+                        }
+                    }
+                }
+                .tf_posts_navigation.tf_posts_ajax_navigation,
+                .tf_posts_navigation.tf_posts_page_navigation{
+                    margin-top: 40px;
+                    width: 100%;
+                    .page-numbers {
+                        font-size: 0.875rem;
+                        color: $color-primary;
+                        text-decoration: none;
+                        padding: 12px 18px;
+                        background: $color-white;
+                        box-shadow: 0px 10px 18px rgba(88, 128, 160, 0.05);
+                        border-radius: 5px;
+                        display: inline-block;
+                    }
+                    .page-numbers.current{
+                        background: $color-primary;
+                        color: $color-white;
                     }
                 }
             }

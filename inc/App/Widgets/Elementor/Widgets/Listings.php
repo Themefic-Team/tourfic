@@ -74,6 +74,7 @@ class Listings extends Widget_Base {
 		$this->tf_gallery_style_controls();
 		$this->tf_features_style_controls();
 		$this->tf_excerpt_style_controls();
+		$this->tf_car_info_style_controls();
 		$this->tf_price_style_controls();
 		$this->tf_button_style_controls();
 		$this->tf_pagination_style_controls();
@@ -228,6 +229,7 @@ class Listings extends Widget_Base {
                 'tf_hotel' => ['design-1', 'design-3', 'default'],
                 'tf_tours' => ['design-1', 'design-3', 'default'],
                 'tf_apartment' => ['design-2', 'default'],
+                'tf_carrental' => ['design-1'],
             ]),
 		]);
 
@@ -250,6 +252,7 @@ class Listings extends Widget_Base {
                 'tf_hotel' => ['design-1', 'design-3', 'default'],
                 'tf_tours' => ['design-1', 'design-3', 'default'],
                 'tf_apartment' => ['design-2', 'default'],
+                'tf_carrental' => ['design-1'],
             ],[
 				'listing_layout_toggle' => 'yes',
 			]),
@@ -274,6 +277,7 @@ class Listings extends Widget_Base {
                 'tf_hotel' => ['design-1', 'design-3', 'default'],
                 'tf_tours' => ['design-1', 'design-3', 'default'],
                 'tf_apartment' => ['design-2', 'default'],
+                'tf_carrental' => ['design-1'],
             ],[
 				'listing_layout_toggle!' => 'yes',
 			]),
@@ -482,6 +486,7 @@ class Listings extends Widget_Base {
 			'default' => 'yes',
 			'condition'         => [
 				'show_image' => 'yes',
+				'service!' => 'tf_carrental',
 			],
 		]);
 
@@ -494,6 +499,7 @@ class Listings extends Widget_Base {
 			'condition' => [
 				'featured_badge' => 'yes',
 				'show_image' => 'yes',
+				'service!' => 'tf_carrental',
 			],
 		]);
 
@@ -583,6 +589,9 @@ class Listings extends Widget_Base {
 			'label_off' => __('Hide', 'tourfic'),
 			'return_value' => 'yes',
 			'default' => 'yes',
+			'condition' => [
+				'service!' => 'tf_carrental',
+			],
 		]);
 
 		$this->add_control('location_icon',[
@@ -596,6 +605,7 @@ class Listings extends Widget_Base {
 			'fa4compatibility' => 'location_icon_comp',
 			'condition' => [
 				'show_location' => 'yes',
+				'service!' => 'tf_carrental',
 			],
 		]);
 
@@ -608,6 +618,7 @@ class Listings extends Widget_Base {
             'step' => 1,
 			'condition' => [
 				'show_location' => 'yes',
+				'service!' => 'tf_carrental',
 			],
 		]);
 
@@ -652,6 +663,35 @@ class Listings extends Widget_Base {
 
 		$this->add_control('show_price',[
 			'label' => __('Show Price', 'tourfic'),
+			'type' => Controls_Manager::SWITCHER,
+			'label_on' => __('Show', 'tourfic'),
+			'label_off' => __('Hide', 'tourfic'),
+			'return_value' => 'yes',
+			'default' => 'yes',
+		]);
+
+		//car infos select2
+		$this->add_control('car_infos', [
+			'label' => __('Car Information', 'tourfic'),
+			'type' => Controls_Manager::SELECT2,
+			'label_block' => true,
+			'multiple' => true,
+			'options' => [
+				'mileage' => esc_html__('Mileage', 'tourfic'),
+				'fuel_type' => esc_html__('Fuel Type', 'tourfic'),
+				'engine_year' => esc_html__('Engine Year', 'tourfic'),
+				'transmission_type' => esc_html__('Transmission Type', 'tourfic'),
+				'passenger_capacity' => esc_html__('Passenger Capacity', 'tourfic'),
+				'luggage_capacity' => esc_html__('Luggage Capacity', 'tourfic'),
+			],
+			'default' => ['mileage', 'fuel_type', 'engine_year', 'transmission_type', 'luggage_capacity', 'passenger_capacity'],
+			'condition' => [
+				'service' => 'tf_carrental',
+			],
+		]);
+
+		$this->add_control('show_button',[
+			'label' => __('Show Button', 'tourfic'),
 			'type' => Controls_Manager::SWITCHER,
 			'label_on' => __('Show', 'tourfic'),
 			'label_off' => __('Hide', 'tourfic'),
@@ -743,6 +783,7 @@ class Listings extends Widget_Base {
 				"{{WRAPPER}} .tf-available-rooms-head>span.tf-total-results" => 'color: {{VALUE}};',
 				"{{WRAPPER}} .tf-archive-top .tf-total-results" => 'color: {{VALUE}};',
 				"{{WRAPPER}} .tf-action-top .tf-result-counter-info" => 'color: {{VALUE}};',
+				"{{WRAPPER}} .tf-archive-header .tf-total-result-bar" => 'color: {{VALUE}};',
 			],
 			'condition'  => [
 				'result_style_toggle' => 'yes',
@@ -762,6 +803,7 @@ class Listings extends Widget_Base {
 				"{{WRAPPER}} .tf-available-rooms-head>span.tf-total-results" => $this->tf_apply_dim( 'margin' ),
 				"{{WRAPPER}} .tf-archive-top .tf-total-results" => $this->tf_apply_dim( 'margin' ),
 				"{{WRAPPER}} .tf-action-top .tf-result-counter-info" => $this->tf_apply_dim( 'margin' ),
+				"{{WRAPPER}} .tf-archive-header .tf-total-result-bar" => $this->tf_apply_dim( 'margin' ),
 			],
 			'condition'  => [
 				'result_style_toggle' => 'yes',
@@ -781,6 +823,7 @@ class Listings extends Widget_Base {
 				"{{WRAPPER}} .tf-available-rooms-head>span.tf-total-results" => $this->tf_apply_dim( 'padding' ),
 				"{{WRAPPER}} .tf-archive-top .tf-total-results" => $this->tf_apply_dim( 'padding' ),
 				"{{WRAPPER}} .tf-action-top .tf-result-counter-info" => $this->tf_apply_dim( 'padding' ),
+				"{{WRAPPER}} .tf-archive-header .tf-total-result-bar" => $this->tf_apply_dim( 'padding' ),
 			],
 			'condition'  => [
 				'result_style_toggle' => 'yes',
@@ -792,7 +835,7 @@ class Listings extends Widget_Base {
 		$this->add_group_control( Group_Control_Typography::get_type(), [
             'label'    => __( 'Result Typography', 'tourfic' ),
 			'name'     => "tf_result_typography",
-			'selector' => "{{WRAPPER}} .tf-archive-head .tf-search-result, {{WRAPPER}} .tf-available-rooms-head>span.tf-total-results, {{WRAPPER}} .tf-archive-top .tf-total-results, {{WRAPPER}} .tf-action-top .tf-result-counter-info",
+			'selector' => "{{WRAPPER}} .tf-archive-head .tf-search-result, {{WRAPPER}} .tf-available-rooms-head>span.tf-total-results, {{WRAPPER}} .tf-archive-top .tf-total-results, {{WRAPPER}} .tf-action-top .tf-result-counter-info, {{WRAPPER}} .tf-archive-header .tf-total-result-bar",
 			'separator' => 'after',
 			'condition' => [
 				'show_total_result' => 'yes',
@@ -808,6 +851,7 @@ class Listings extends Widget_Base {
 			'return_value' => 'yes',
 			'condition' => [
 				'show_sorting' => 'yes',
+				'service!' => 'tf_carrental',
 			],
 		] );
 
@@ -893,6 +937,7 @@ class Listings extends Widget_Base {
 			'selector' => "{{WRAPPER}} .tf-sorting-selection-warper form select#tf-orderby",
 			'condition' => [
 				'show_sorting' => 'yes',
+				'service!' => 'tf_carrental',
 			],
 		]);
 
@@ -907,6 +952,7 @@ class Listings extends Widget_Base {
                 'tf_hotel' => ['design-1', 'design-3', 'default'],
                 'tf_tours' => ['design-1', 'design-3', 'default'],
                 'tf_apartment' => ['design-2', 'default'],
+                'tf_carrental' => ['design-1'],
             ],[
 				'listing_layout_toggle' => 'yes',
 			]),
@@ -934,6 +980,7 @@ class Listings extends Widget_Base {
 				"{{WRAPPER}} .tf-archive-head .tf-icon" => 'width: {{SIZE}}{{UNIT}};',
 				"{{WRAPPER}} .tf-archive-view li.tf-archive-view-item" => 'width: {{SIZE}}{{UNIT}};',
 				"{{WRAPPER}} .tf-action-top .tf-list-grid a.change-view" => 'width: {{SIZE}}{{UNIT}};',
+				"{{WRAPPER}} .tf-archive-header .tf-archive-view ul li" => 'width: {{SIZE}}{{UNIT}};',
 			],
 		] );
 
@@ -959,6 +1006,7 @@ class Listings extends Widget_Base {
 				"{{WRAPPER}} .tf-archive-head .tf-icon" => 'height: {{SIZE}}{{UNIT}};',
 				"{{WRAPPER}} .tf-archive-view li.tf-archive-view-item" => 'height: {{SIZE}}{{UNIT}};',
 				"{{WRAPPER}} .tf-action-top .tf-list-grid a.change-view" => 'height: {{SIZE}}{{UNIT}};',
+				"{{WRAPPER}} .tf-archive-header .tf-archive-view ul li" => 'height: {{SIZE}}{{UNIT}};',
 			],
 		] );
 
@@ -974,6 +1022,7 @@ class Listings extends Widget_Base {
 				"{{WRAPPER}} .tf-archive-head .tf-icon" => $this->tf_apply_dim( 'margin' ),
 				"{{WRAPPER}} .tf-archive-view li.tf-archive-view-item" => $this->tf_apply_dim( 'margin' ),
 				"{{WRAPPER}} .tf-action-top .tf-list-grid a.change-view" => $this->tf_apply_dim( 'margin' ),
+				"{{WRAPPER}} .tf-archive-header .tf-archive-view ul li" => $this->tf_apply_dim( 'margin' ),
 			],
 		] );
 
@@ -992,6 +1041,8 @@ class Listings extends Widget_Base {
 				"{{WRAPPER}} .tf-archive-view li.tf-archive-view-item svg path" => 'fill: {{VALUE}};',
 				"{{WRAPPER}} .tf-action-top .tf-list-grid a.change-view i" => 'color: {{VALUE}};',
 				"{{WRAPPER}} .tf-action-top .tf-list-grid a.change-view svg path" => 'fill: {{VALUE}};',
+				"{{WRAPPER}} .tf-archive-header .tf-archive-view ul li i" => 'color: {{VALUE}};',
+				"{{WRAPPER}} .tf-archive-header .tf-archive-view ul li svg path" => 'fill: {{VALUE}};',
 			],
 		] );
 		$this->add_group_control( Group_Control_Background::get_type(), [
@@ -1001,11 +1052,17 @@ class Listings extends Widget_Base {
 				'classic',
 				'gradient',
 			],
-			'selector' => "{{WRAPPER}} .tf-archive-head .tf-icon, {{WRAPPER}} .tf-archive-view li.tf-archive-view-item, {{WRAPPER}} .tf-action-top .tf-list-grid a.change-view",
+			'selector' => "{{WRAPPER}} .tf-archive-head .tf-icon, 
+							{{WRAPPER}} .tf-archive-view li.tf-archive-view-item, 
+							{{WRAPPER}} .tf-action-top .tf-list-grid a.change-view, 
+							{{WRAPPER}} .tf-archive-header .tf-archive-view ul li",
 		] );
 		$this->add_group_control( Group_Control_Border::get_type(), [
 			'name'     => "toggle_icon_border",
-			'selector' => "{{WRAPPER}} .tf-archive-head .tf-icon, {{WRAPPER}} .tf-archive-view li.tf-archive-view-item, {{WRAPPER}} .tf-action-top .tf-list-grid a.change-view",
+			'selector' => "{{WRAPPER}} .tf-archive-head .tf-icon, 
+							{{WRAPPER}} .tf-archive-view li.tf-archive-view-item, 
+							{{WRAPPER}} .tf-action-top .tf-list-grid a.change-view, 
+							{{WRAPPER}} .tf-archive-header .tf-archive-view ul li",
 		] );
 		$this->add_control( "toggle_icon_border_radius", [
 			'label'      => __( 'Border Radius', 'tourfic' ),
@@ -1018,6 +1075,7 @@ class Listings extends Widget_Base {
 				"{{WRAPPER}} .tf-archive-head .tf-icon" => $this->tf_apply_dim( 'border-radius' ),
 				"{{WRAPPER}} .tf-archive-view li.tf-archive-view-item" => $this->tf_apply_dim( 'border-radius' ),
 				"{{WRAPPER}} .tf-action-top .tf-list-grid a.change-view" => $this->tf_apply_dim( 'border-radius' ),
+				"{{WRAPPER}} .tf-archive-header .tf-archive-view ul li" => $this->tf_apply_dim( 'border-radius' ),
 			],
 		] );
 		$this->end_controls_tab();
@@ -1042,6 +1100,10 @@ class Listings extends Widget_Base {
 				"{{WRAPPER}} .tf-action-top .tf-list-grid a.change-view.active svg path" => 'fill: {{VALUE}};',
 				"{{WRAPPER}} .tf-action-top .tf-list-grid a.change-view:hover i" => 'color: {{VALUE}};',
 				"{{WRAPPER}} .tf-action-top .tf-list-grid a.change-view:hover svg path" => 'fill: {{VALUE}};',
+				"{{WRAPPER}} .tf-archive-header .tf-archive-view ul li.active i" => 'color: {{VALUE}};',
+				"{{WRAPPER}} .tf-archive-header .tf-archive-view ul li.active svg path" => 'fill: {{VALUE}};',
+				"{{WRAPPER}} .tf-archive-header .tf-archive-view ul li:hover i" => 'color: {{VALUE}};',
+				"{{WRAPPER}} .tf-archive-header .tf-archive-view ul li:hover svg path" => 'fill: {{VALUE}};',
 			],
 		] );
 		$this->add_group_control( Group_Control_Background::get_type(), [
@@ -1051,11 +1113,25 @@ class Listings extends Widget_Base {
 				'classic',
 				'gradient',
 			],
-			'selector' => "{{WRAPPER}} .tf-archive-head .tf-icon:hover, {{WRAPPER}} .tf-archive-head .tf-icon.active, {{WRAPPER}} .tf-archive-view li.tf-archive-view-item:hover, {{WRAPPER}} .tf-archive-view li.tf-archive-view-item.active, {{WRAPPER}} .tf-action-top .tf-list-grid a.change-view:hover, {{WRAPPER}} .tf-action-top .tf-list-grid a.change-view.active",
+			'selector' => "{{WRAPPER}} .tf-archive-head .tf-icon:hover, 
+							{{WRAPPER}} .tf-archive-head .tf-icon.active, 
+							{{WRAPPER}} .tf-archive-view li.tf-archive-view-item:hover, 
+							{{WRAPPER}} .tf-archive-view li.tf-archive-view-item.active, 
+							{{WRAPPER}} .tf-action-top .tf-list-grid a.change-view:hover, 
+							{{WRAPPER}} .tf-action-top .tf-list-grid a.change-view.active, 
+							{{WRAPPER}} .tf-archive-header .tf-archive-view ul li:hover, 
+							{{WRAPPER}} .tf-archive-header .tf-archive-view ul li.active",
 		] );
 		$this->add_group_control( Group_Control_Border::get_type(), [
 			'name'     => "toggle_icon_border_hover",
-			'selector' => "{{WRAPPER}} .tf-archive-head .tf-icon:hover, {{WRAPPER}} .tf-archive-head .tf-icon.active, {{WRAPPER}} .tf-archive-view li.tf-archive-view-item:hover, {{WRAPPER}} .tf-archive-view li.tf-archive-view-item.active, {{WRAPPER}} .tf-action-top .tf-list-grid a.change-view:hover, {{WRAPPER}} .tf-action-top .tf-list-grid a.change-view.active",
+			'selector' => "{{WRAPPER}} .tf-archive-head .tf-icon:hover, 
+							{{WRAPPER}} .tf-archive-head .tf-icon.active, 
+							{{WRAPPER}} .tf-archive-view li.tf-archive-view-item:hover, 
+							{{WRAPPER}} .tf-archive-view li.tf-archive-view-item.active, 
+							{{WRAPPER}} .tf-action-top .tf-list-grid a.change-view:hover, 
+							{{WRAPPER}} .tf-action-top .tf-list-grid a.change-view.active, 
+							{{WRAPPER}} .tf-archive-header .tf-archive-view ul li:hover, 
+							{{WRAPPER}} .tf-archive-header .tf-archive-view ul li.active",
 		] );
 		$this->add_control( "toggle_icon_border_radius_hover", [
 			'label'      => __( 'Border Radius', 'tourfic' ),
@@ -1071,8 +1147,10 @@ class Listings extends Widget_Base {
 				"{{WRAPPER}} .tf-archive-view li.tf-archive-view-item.active" => $this->tf_apply_dim( 'border-radius' ),
 				"{{WRAPPER}} .tf-action-top .tf-list-grid a.change-view:hover" => $this->tf_apply_dim( 'border-radius' ),
 				"{{WRAPPER}} .tf-action-top .tf-list-grid a.change-view.active" => $this->tf_apply_dim( 'border-radius' ),
+				"{{WRAPPER}} .tf-archive-header .tf-archive-view ul li:hover" => $this->tf_apply_dim( 'border-radius' ),
+				"{{WRAPPER}} .tf-archive-header .tf-archive-view ul li.active" => $this->tf_apply_dim( 'border-radius' ),
 			],
-		] );
+		]);
 		$this->end_controls_tab();
 		$this->end_controls_tabs();
 		/*-----ends Button tabs--------*/
@@ -1109,6 +1187,7 @@ class Listings extends Widget_Base {
 				"{{WRAPPER}} .tf-available-rooms-wrapper .tf-available-rooms" => 'gap: {{SIZE}}{{UNIT}};',
 				"{{WRAPPER}} .tf-archive-details .tf-archive-hotels" => 'gap: {{SIZE}}{{UNIT}};',
 				"{{WRAPPER}} .single-tour-wrap" => 'margin-bottom: {{SIZE}}{{UNIT}};',
+				"{{WRAPPER}} .tf-car-archive-result .tf-car-result" => 'gap: {{SIZE}}{{UNIT}};',
 			],
 		]);
 
@@ -1125,6 +1204,7 @@ class Listings extends Widget_Base {
 				"{{WRAPPER}} .tf-archive-available-rooms .tf-available-room" => $this->tf_apply_dim( 'padding' ),
 				"{{WRAPPER}} .tf-archive-details .tf-archive-hotel" => $this->tf_apply_dim( 'padding' ),
 				"{{WRAPPER}} .single-tour-wrap .single-tour-inner" => $this->tf_apply_dim( 'padding' ),
+				"{{WRAPPER}} .tf-car-result .tf-single-car-view" => $this->tf_apply_dim( 'padding' ),
 			],
 		] );
 
@@ -1141,6 +1221,7 @@ class Listings extends Widget_Base {
 				"{{WRAPPER}} .tf-archive-available-rooms .tf-available-room" => $this->tf_apply_dim( 'margin' ),
 				"{{WRAPPER}} .tf-archive-details .tf-archive-hotel" => $this->tf_apply_dim( 'margin' ),
 				"{{WRAPPER}} .single-tour-wrap .single-tour-inner" => $this->tf_apply_dim( 'margin' ),
+				"{{WRAPPER}} .tf-car-result .tf-single-car-view" => $this->tf_apply_dim( 'margin' ),
 			],
 		] );
 
@@ -1157,11 +1238,19 @@ class Listings extends Widget_Base {
 				'classic',
 				'gradient',
 			],
-			'selector' => "{{WRAPPER}} .tf-search-results-list .tf-item-card, {{WRAPPER}} .tf-archive-available-rooms .tf-available-room, {{WRAPPER}} .tf-archive-details .tf-archive-hotel, {{WRAPPER}} .single-tour-wrap .single-tour-inner",
+			'selector' => "{{WRAPPER}} .tf-search-results-list .tf-item-card, 
+							{{WRAPPER}} .tf-archive-available-rooms .tf-available-room, 
+							{{WRAPPER}} .tf-archive-details .tf-archive-hotel, 
+							{{WRAPPER}} .single-tour-wrap .single-tour-inner, 
+							{{WRAPPER}} .tf-car-result .tf-single-car-view",
 		] );
 		$this->add_group_control( Group_Control_Border::get_type(), [
 			'name'     => "card_border",
-			'selector' => "{{WRAPPER}} .tf-search-results-list .tf-item-card, {{WRAPPER}} .tf-archive-available-rooms .tf-available-room, {{WRAPPER}} .tf-archive-details .tf-archive-hotel, {{WRAPPER}} .single-tour-wrap .single-tour-inner",
+			'selector' => "{{WRAPPER}} .tf-search-results-list .tf-item-card, 
+							{{WRAPPER}} .tf-archive-available-rooms .tf-available-room, 
+							{{WRAPPER}} .tf-archive-details .tf-archive-hotel, 
+							{{WRAPPER}} .single-tour-wrap .single-tour-inner, 
+							{{WRAPPER}} .tf-car-result .tf-single-car-view",
 		] );
 		$this->add_control( "card_border_radius", [
 			'label'      => __( 'Border Radius', 'tourfic' ),
@@ -1175,11 +1264,16 @@ class Listings extends Widget_Base {
 				"{{WRAPPER}} .tf-archive-available-rooms .tf-available-room" => $this->tf_apply_dim( 'border-radius' ),
 				"{{WRAPPER}} .tf-archive-details .tf-archive-hotel" => $this->tf_apply_dim( 'border-radius' ),
 				"{{WRAPPER}} .single-tour-wrap .single-tour-inner" => $this->tf_apply_dim( 'border-radius' ),
+				"{{WRAPPER}} .tf-car-result .tf-single-car-view" => $this->tf_apply_dim( 'border-radius' ),
 			],
 		] );
 		$this->add_group_control(Group_Control_Box_Shadow::get_type(), [
 			'name' => 'card_shadow',
-			'selector' => '{{WRAPPER}} .tf-search-results-list .tf-item-card, {{WRAPPER}} .tf-archive-available-rooms .tf-available-room, {{WRAPPER}} .tf-archive-details .tf-archive-hotel, {{WRAPPER}} .single-tour-wrap .single-tour-inner',
+			'selector' => '{{WRAPPER}} .tf-search-results-list .tf-item-card, 
+							{{WRAPPER}} .tf-archive-available-rooms .tf-available-room, 
+							{{WRAPPER}} .tf-archive-details .tf-archive-hotel, 
+							{{WRAPPER}} .single-tour-wrap .single-tour-inner, 
+							{{WRAPPER}} .tf-car-result .tf-single-car-view',
 		]);
 		$this->end_controls_tab();
 
@@ -1194,11 +1288,19 @@ class Listings extends Widget_Base {
 				'classic',
 				'gradient',
 			],
-			'selector' => "{{WRAPPER}} .tf-search-results-list .tf-item-card:hover, {{WRAPPER}} .tf-archive-available-rooms .tf-available-room:hover, {{WRAPPER}} .tf-archive-details .tf-archive-hotel:hover, {{WRAPPER}} .single-tour-wrap .single-tour-inner:hover",
+			'selector' => "{{WRAPPER}} .tf-search-results-list .tf-item-card:hover, 
+							{{WRAPPER}} .tf-archive-available-rooms .tf-available-room:hover, 
+							{{WRAPPER}} .tf-archive-details .tf-archive-hotel:hover, 
+							{{WRAPPER}} .single-tour-wrap .single-tour-inner:hover, 
+							{{WRAPPER}} .tf-car-result .tf-single-car-view:hover",
 		] );
 		$this->add_group_control( Group_Control_Border::get_type(), [
 			'name'     => "card_border_hover",
-			'selector' => "{{WRAPPER}} .tf-search-results-list .tf-item-card:hover, {{WRAPPER}} .tf-archive-available-rooms .tf-available-room:hover, {{WRAPPER}} .tf-archive-details .tf-archive-hotel:hover, {{WRAPPER}} .single-tour-wrap .single-tour-inner:hover",
+			'selector' => "{{WRAPPER}} .tf-search-results-list .tf-item-card:hover, 
+							{{WRAPPER}} .tf-archive-available-rooms .tf-available-room:hover, 
+							{{WRAPPER}} .tf-archive-details .tf-archive-hotel:hover, 
+							{{WRAPPER}} .single-tour-wrap .single-tour-inner:hover, 
+							{{WRAPPER}} .tf-car-result .tf-single-car-view:hover",
 		] );
 		$this->add_control( "card_border_radius_hover", [
 			'label'      => __( 'Border Radius', 'tourfic' ),
@@ -1212,11 +1314,16 @@ class Listings extends Widget_Base {
 				"{{WRAPPER}} .tf-archive-available-rooms .tf-available-room:hover" => $this->tf_apply_dim( 'border-radius' ),
 				"{{WRAPPER}} .tf-archive-details .tf-archive-hotel:hover" => $this->tf_apply_dim( 'border-radius' ),
 				"{{WRAPPER}} .single-tour-wrap .single-tour-inner:hover" => $this->tf_apply_dim( 'border-radius' ),
+				"{{WRAPPER}} .tf-car-result .tf-single-car-view:hover" => $this->tf_apply_dim( 'border-radius' ),
 			],
 		] );
 		$this->add_group_control(Group_Control_Box_Shadow::get_type(), [
 			'name' => 'card_hover_shadow',
-			'selector' => '{{WRAPPER}} .tf-search-results-list .tf-item-card:hover, {{WRAPPER}} .tf-archive-available-rooms .tf-available-room:hover, {{WRAPPER}} .tf-archive-details .tf-archive-hotel:hover, {{WRAPPER}} .single-tour-wrap .single-tour-inner:hover',
+			'selector' => '{{WRAPPER}} .tf-search-results-list .tf-item-card:hover, 
+							{{WRAPPER}} .tf-archive-available-rooms .tf-available-room:hover, 
+							{{WRAPPER}} .tf-archive-details .tf-archive-hotel:hover, 
+							{{WRAPPER}} .single-tour-wrap .single-tour-inner:hover, 
+							{{WRAPPER}} .tf-car-result .tf-single-car-view:hover',
 		]);
 		$this->end_controls_tab();
 		$this->end_controls_tabs();
@@ -1240,6 +1347,7 @@ class Listings extends Widget_Base {
 				"{{WRAPPER}} .tf-archive-available-rooms .tf-available-room .tf-available-room-content" => $this->tf_apply_dim( 'padding' ),
 				"{{WRAPPER}} .tf-archive-hotel .tf-archive-hotel-content" => $this->tf_apply_dim( 'padding' ),
 				"{{WRAPPER}} .single-tour-wrap .single-tour-inner .tourfic-single-right" => $this->tf_apply_dim( 'padding' ),
+				"{{WRAPPER}} .tf-single-car-view .tf-car-details" => $this->tf_apply_dim( 'padding' ),
 			],
 		] );
 
@@ -1285,6 +1393,7 @@ class Listings extends Widget_Base {
 				'{{WRAPPER}} .tf-available-room-gallery .tf-room-gallery img' => 'height: {{SIZE}}{{UNIT}} !important; min-height: {{SIZE}}{{UNIT}} !important;', //design-2
 				'{{WRAPPER}} .tf-archive-hotel .tf-archive-hotel-thumb img' => 'height: {{SIZE}}{{UNIT}} !important; min-height: {{SIZE}}{{UNIT}} !important;', //design-3
 				'{{WRAPPER}} .single-tour-inner .tourfic-single-left img' => 'height: {{SIZE}}{{UNIT}} !important; min-height: {{SIZE}}{{UNIT}} !important;', //default
+				'{{WRAPPER}} .tf-single-car-view .tf-car-image img' => 'height: {{SIZE}}{{UNIT}} !important; min-height: {{SIZE}}{{UNIT}} !important;', //default
 			],
 		]);
 		
@@ -1318,6 +1427,7 @@ class Listings extends Widget_Base {
 				'{{WRAPPER}} .tf-available-room-gallery .tf-room-gallery img' => 'width: {{SIZE}}{{UNIT}} !important;', //design-2
 				'{{WRAPPER}} .tf-archive-hotel .tf-archive-hotel-thumb img' => 'width: {{SIZE}}{{UNIT}} !important;', //design-3
 				'{{WRAPPER}} .single-tour-inner .tourfic-single-left img' => 'width: {{SIZE}}{{UNIT}} !important;', //default
+				'{{WRAPPER}} .tf-single-car-view .tf-car-image img' => 'width: {{SIZE}}{{UNIT}} !important;', //default
 			],
 		]);
 
@@ -1334,6 +1444,7 @@ class Listings extends Widget_Base {
 				'{{WRAPPER}} .tf-available-room-gallery .tf-room-gallery img' => $this->tf_apply_dim( 'padding' ), //design-2
 				'{{WRAPPER}} .tf-archive-hotel .tf-archive-hotel-thumb img' => $this->tf_apply_dim( 'padding' ), //design-3
 				'{{WRAPPER}} .single-tour-inner .tourfic-single-left img' => $this->tf_apply_dim( 'padding' ), //default
+				'{{WRAPPER}} .tf-single-car-view .tf-car-image img' => $this->tf_apply_dim( 'padding' ), //default
 			],
 		] );
 
@@ -1350,6 +1461,7 @@ class Listings extends Widget_Base {
 				'{{WRAPPER}} .tf-available-room-gallery .tf-room-gallery img' => $this->tf_apply_dim( 'margin' ), //design-2
 				'{{WRAPPER}} .tf-archive-hotel .tf-archive-hotel-thumb img' => $this->tf_apply_dim( 'margin' ), //design-3
 				'{{WRAPPER}} .single-tour-inner .tourfic-single-left img' => $this->tf_apply_dim( 'margin' ), //default
+				'{{WRAPPER}} .tf-single-car-view .tf-car-image img' => $this->tf_apply_dim( 'margin' ), //default
 			],
 		]);
 
@@ -1360,11 +1472,19 @@ class Listings extends Widget_Base {
 				'classic',
 				'gradient',
 			],
-			'selector' => "{{WRAPPER}} .tf-item-card .tf-item-featured img, {{WRAPPER}} .tf-available-room-gallery .tf-room-gallery img, {{WRAPPER}} .tf-archive-hotel .tf-archive-hotel-thumb img, {{WRAPPER}} .single-tour-inner .tourfic-single-left img",
+			'selector' => "{{WRAPPER}} .tf-item-card .tf-item-featured img, 
+							{{WRAPPER}} .tf-available-room-gallery .tf-room-gallery img, 
+							{{WRAPPER}} .tf-archive-hotel .tf-archive-hotel-thumb img, 
+							{{WRAPPER}} .single-tour-inner .tourfic-single-left img, 
+							{{WRAPPER}} .tf-single-car-view .tf-car-image img",
 		] );
 		$this->add_group_control( Group_Control_Border::get_type(), [
 			'name'     => "thumbnail_border",
-			'selector' => "{{WRAPPER}} .tf-item-card .tf-item-featured img, {{WRAPPER}} .tf-available-room-gallery .tf-room-gallery img, {{WRAPPER}} .tf-archive-hotel .tf-archive-hotel-thumb img, {{WRAPPER}} .single-tour-inner .tourfic-single-left img",
+			'selector' => "{{WRAPPER}} .tf-item-card .tf-item-featured img, 
+							{{WRAPPER}} .tf-available-room-gallery .tf-room-gallery img, 
+							{{WRAPPER}} .tf-archive-hotel .tf-archive-hotel-thumb img, 
+							{{WRAPPER}} .single-tour-inner .tourfic-single-left img, 
+							{{WRAPPER}} .tf-single-car-view .tf-car-image img",
 		] );
 		$this->add_control( "thumbnail_border_radius", [
 			'label'      => __( 'Border Radius', 'tourfic' ),
@@ -1378,11 +1498,16 @@ class Listings extends Widget_Base {
 				'{{WRAPPER}} .tf-available-room-gallery .tf-room-gallery img' => $this->tf_apply_dim( 'border-radius', true ), //design-2
 				'{{WRAPPER}} .tf-archive-hotel .tf-archive-hotel-thumb img' => $this->tf_apply_dim( 'border-radius', true ), //design-3
 				'{{WRAPPER}} .single-tour-inner .tourfic-single-left img' => $this->tf_apply_dim( 'border-radius', true ), //default
+				'{{WRAPPER}} .tf-single-car-view .tf-car-image img' => $this->tf_apply_dim( 'border-radius', true ), //default
 			],
 		] );
 		$this->add_group_control(Group_Control_Box_Shadow::get_type(), [
 			'name' => 'thumbnail_shadow',
-			'selector' => "{{WRAPPER}} .tf-item-card .tf-item-featured img, {{WRAPPER}} .tf-available-room-gallery .tf-room-gallery img, {{WRAPPER}} .tf-archive-hotel .tf-archive-hotel-thumb img, {{WRAPPER}} .single-tour-inner .tourfic-single-left img",
+			'selector' => "{{WRAPPER}} .tf-item-card .tf-item-featured img, 
+							{{WRAPPER}} .tf-available-room-gallery .tf-room-gallery img, 
+							{{WRAPPER}} .tf-archive-hotel .tf-archive-hotel-thumb img, 
+							{{WRAPPER}} .single-tour-inner .tourfic-single-left img, 
+							{{WRAPPER}} .tf-single-car-view .tf-car-image img",
 		]);
 
 		$this->end_controls_section();
@@ -1395,6 +1520,7 @@ class Listings extends Widget_Base {
 			'condition' => [
 				'show_image' => 'yes',
 				'featured_badge' => 'yes',
+                'service!' => 'tf_carrental',
 			],
 		] );
 
@@ -1609,6 +1735,7 @@ class Listings extends Widget_Base {
 				'{{WRAPPER}} .tf-available-room-gallery .tf-available-labels>span.tf-multiple-tag' => 'color: {{VALUE}} !important;', //design-2
 				'{{WRAPPER}} .tf-archive-hotel-thumb .tf-tag-items .tf-tag-item.tf-multiple-tag' => 'color: {{VALUE}} !important;', //design-3
 				'{{WRAPPER}} .tourfic-single-left .default-tags-container .default-single-tag' => 'color: {{VALUE}} !important;', //default
+				'{{WRAPPER}} .tf-car-image .tf-other-infos .tf-tags-box ul li' => 'color: {{VALUE}} !important;', //car
 			],
 		]);
 
@@ -1620,13 +1747,18 @@ class Listings extends Widget_Base {
 				'{{WRAPPER}} .tf-available-room-gallery .tf-available-labels>span.tf-multiple-tag' => 'background-color: {{VALUE}} !important;', //design-2
 				'{{WRAPPER}} .tf-archive-hotel-thumb .tf-tag-items .tf-tag-item.tf-multiple-tag' => 'background-color: {{VALUE}} !important;', //design-3
 				'{{WRAPPER}} .tourfic-single-left .default-tags-container .default-single-tag' => 'background-color: {{VALUE}} !important;', //default
+				'{{WRAPPER}} .tf-car-image .tf-other-infos .tf-tags-box ul li' => 'background-color: {{VALUE}} !important;', //default
 			],
 		]);
 
 		$this->add_group_control( Group_Control_Typography::get_type(), [
             'label'    => __( 'Typography', 'tourfic' ),
 			'name'     => "tf_promotional_tag_typography",
-			'selector' => "{{WRAPPER}} .tf-item-featured .tf-tag-items .tf-multiple-tag-item, {{WRAPPER}} .tf-available-room-gallery .tf-available-labels>span.tf-multiple-tag, {{WRAPPER}} .tf-archive-hotel-thumb .tf-tag-items .tf-tag-item.tf-multiple-tag, {{WRAPPER}} .tourfic-single-left .default-tags-container .default-single-tag",
+			'selector' => "{{WRAPPER}} .tf-item-featured .tf-tag-items .tf-multiple-tag-item, 
+							{{WRAPPER}} .tf-available-room-gallery .tf-available-labels>span.tf-multiple-tag, 
+							{{WRAPPER}} .tf-archive-hotel-thumb .tf-tag-items .tf-tag-item.tf-multiple-tag, 
+							{{WRAPPER}} .tourfic-single-left .default-tags-container .default-single-tag, 
+							{{WRAPPER}} .tf-car-image .tf-other-infos .tf-tags-box ul li",
 		]);
 
 		$this->add_responsive_control( "promotional_tag_padding", [
@@ -1642,6 +1774,7 @@ class Listings extends Widget_Base {
 				'{{WRAPPER}} .tf-available-room-gallery .tf-available-labels>span.tf-multiple-tag' => $this->tf_apply_dim( 'padding', true ), //design-2
 				'{{WRAPPER}} .tf-archive-hotel-thumb .tf-tag-items .tf-tag-item.tf-multiple-tag' => $this->tf_apply_dim( 'padding', true ), //design-3
 				'{{WRAPPER}} .tourfic-single-left .default-tags-container .default-single-tag' => $this->tf_apply_dim( 'padding', true ), //default
+				'{{WRAPPER}} .tf-car-image .tf-other-infos .tf-tags-box ul li' => $this->tf_apply_dim( 'padding', true ), //default
 			],
 		]);
 
@@ -1658,12 +1791,17 @@ class Listings extends Widget_Base {
 				'{{WRAPPER}} .tf-available-room-gallery .tf-available-labels>span.tf-multiple-tag' => $this->tf_apply_dim( 'margin' ), //design-2
 				'{{WRAPPER}} .tf-archive-hotel-thumb .tf-tag-items .tf-tag-item.tf-multiple-tag' => $this->tf_apply_dim( 'margin' ), //design-3
 				'{{WRAPPER}} .tourfic-single-left .default-tags-container .default-single-tag' => $this->tf_apply_dim( 'margin' ), //default
+				'{{WRAPPER}} .tf-car-image .tf-other-infos .tf-tags-box ul li' => $this->tf_apply_dim( 'margin' ), //default
 			],
 		]);
 
 		$this->add_group_control( Group_Control_Border::get_type(), [
 			'name'     => "promotional_tag_border",
-			'selector' => "{{WRAPPER}} .tf-item-featured .tf-tag-items .tf-multiple-tag-item, {{WRAPPER}} .tf-available-room-gallery .tf-available-labels>span.tf-multiple-tag, {{WRAPPER}} .tf-archive-hotel-thumb .tf-tag-items .tf-tag-item.tf-multiple-tag, {{WRAPPER}} .tourfic-single-left .default-tags-container .default-single-tag",
+			'selector' => "{{WRAPPER}} .tf-item-featured .tf-tag-items .tf-multiple-tag-item, 
+							{{WRAPPER}} .tf-available-room-gallery .tf-available-labels>span.tf-multiple-tag, 
+							{{WRAPPER}} .tf-archive-hotel-thumb .tf-tag-items .tf-tag-item.tf-multiple-tag, 
+							{{WRAPPER}} .tourfic-single-left .default-tags-container .default-single-tag, 
+							{{WRAPPER}} .tf-car-image .tf-other-infos .tf-tags-box ul li",
 		]);
 
 		$this->add_control( "promotional_tag_border_radius", [
@@ -1678,12 +1816,17 @@ class Listings extends Widget_Base {
 				'{{WRAPPER}} .tf-available-room-gallery .tf-available-labels>span.tf-multiple-tag' => $this->tf_apply_dim( 'border-radius' ), //design-2
 				'{{WRAPPER}} .tf-archive-hotel-thumb .tf-tag-items .tf-tag-item.tf-multiple-tag' => $this->tf_apply_dim( 'border-radius' ), //design-3
 				'{{WRAPPER}} .tourfic-single-left .default-tags-container .default-single-tag' => $this->tf_apply_dim( 'border-radius' ), //default
+				'{{WRAPPER}} .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box ul li' => $this->tf_apply_dim( 'border-radius' ), //default
 			],
 		]);
 
 		$this->add_group_control(Group_Control_Box_Shadow::get_type(), [
 			'name' => 'promotional_tag_shadow',
-			'selector' => "{{WRAPPER}} .tf-item-featured .tf-tag-items .tf-multiple-tag-item, {{WRAPPER}} .tf-available-room-gallery .tf-available-labels>span.tf-multiple-tag, {{WRAPPER}} .tf-archive-hotel-thumb .tf-tag-items .tf-tag-item.tf-multiple-tag, {{WRAPPER}} .tourfic-single-left .default-tags-container .default-single-tag",
+			'selector' => "{{WRAPPER}} .tf-item-featured .tf-tag-items .tf-multiple-tag-item, 
+							{{WRAPPER}} .tf-available-room-gallery .tf-available-labels>span.tf-multiple-tag, 
+							{{WRAPPER}} .tf-archive-hotel-thumb .tf-tag-items .tf-tag-item.tf-multiple-tag, 
+							{{WRAPPER}} .tourfic-single-left .default-tags-container .default-single-tag, 
+							{{WRAPPER}} .tf-car-image .tf-other-infos .tf-tags-box ul li",
 		]);
 
 		$this->end_controls_section();
@@ -1706,6 +1849,7 @@ class Listings extends Widget_Base {
 				'{{WRAPPER}} .tf-available-room .tf-available-room-content .tf-available-room-content-left h2' => 'color: {{VALUE}};', //design-2
 				'{{WRAPPER}} .tf-archive-hotel-content .tf-archive-hotel-content-left .tf-section-title a' => 'color: {{VALUE}};', //design-3
 				'{{WRAPPER}} .tf_item_main_block .tf-hotel__title-wrap .tourfic_hotel-title a' => 'color: {{VALUE}};', //default
+				'{{WRAPPER}} .tf-car-result .tf-single-car-view .tf-car-details h3 a' => 'color: {{VALUE}};', //default
 			],
 		]);
 
@@ -1717,13 +1861,18 @@ class Listings extends Widget_Base {
 				'{{WRAPPER}} .tf-available-room .tf-available-room-content .tf-available-room-content-left h2:hover' => 'color: {{VALUE}};', //design-2
 				'{{WRAPPER}} .tf-archive-hotel-content .tf-archive-hotel-content-left .tf-section-title a:hover' => 'color: {{VALUE}};', //design-3
 				'{{WRAPPER}} .tf_item_main_block .tf-hotel__title-wrap .tourfic_hotel-title a:hover' => 'color: {{VALUE}};', //default
+				'{{WRAPPER}} .tf-car-result .tf-single-car-view .tf-car-details h3 a:hover' => 'color: {{VALUE}};', //default
 			],
 		]);
 
 		$this->add_group_control( Group_Control_Typography::get_type(), [
             'label'    => __( 'Typography', 'tourfic' ),
 			'name'     => "tf_title_typography",
-			'selector' => "{{WRAPPER}} .tf-item-card .tf-item-details .tf-title h2 a, {{WRAPPER}} .tf-available-room-content .tf-available-room-content-left .tf-section-title-and-location .tf-section-title a, {{WRAPPER}} .tf-archive-hotel-content .tf-archive-hotel-content-left .tf-section-title a, {{WRAPPER}} .tf_item_main_block .tf-hotel__title-wrap .tourfic_hotel-title a",
+			'selector' => "{{WRAPPER}} .tf-item-card .tf-item-details .tf-title h2 a, 
+							{{WRAPPER}} .tf-available-room-content .tf-available-room-content-left .tf-section-title-and-location .tf-section-title a, 
+							{{WRAPPER}} .tf-archive-hotel-content .tf-archive-hotel-content-left .tf-section-title a, 
+							{{WRAPPER}} .tf_item_main_block .tf-hotel__title-wrap .tourfic_hotel-title a, 
+							{{WRAPPER}} .tf-car-details h3 a",
 		]);
 
 		$this->add_responsive_control( "title_margin", [
@@ -1739,6 +1888,7 @@ class Listings extends Widget_Base {
 				'{{WRAPPER}} .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-left .tf-section-title-and-location .tf-section-title' => $this->tf_apply_dim( 'margin' ), //design-1
 				'{{WRAPPER}} .tf-archive-hotel .tf-archive-hotel-content .tf-archive-hotel-content-left .tf-section-title' => $this->tf_apply_dim( 'margin' ), //design-1
 				'{{WRAPPER}} .tf_item_main_block .tf-hotel__title-wrap .tourfic_hotel-title' => $this->tf_apply_dim( 'margin' ), //design-1
+				'{{WRAPPER}} .tf-car-details h3 a' => $this->tf_apply_dim( 'margin' ), //design-1
 			],
 		]);
 
@@ -1751,6 +1901,7 @@ class Listings extends Widget_Base {
 			'tab'   => Controls_Manager::TAB_STYLE,
 			'condition' => [
 				'show_location' => 'yes',
+                'service!' => 'tf_carrental',
 			],
 		]);
 
@@ -1849,13 +2000,19 @@ class Listings extends Widget_Base {
 				'{{WRAPPER}} .tf-available-rating-number' => 'color: {{VALUE}};', //design-2
 				'{{WRAPPER}} .tf-archive-rating-wrapper .tf-archive-rating' => 'color: {{VALUE}};', //default
 				'{{WRAPPER}} .tf-archive-hotel .tf-archive-hotel-content .tf-archive-hotel-content-left .tf-reviews .tf-avarage-review .tf-no-review-count' => 'color: {{VALUE}};', //design-3
+				'{{WRAPPER}} .tf-single-car-view .tf-car-image .tf-other-infos .tf-reviews-box span' => 'color: {{VALUE}};', //design-3
 			],
 		]);
 
 		$this->add_group_control( Group_Control_Typography::get_type(), [
             'label'    => __( 'Typography', 'tourfic' ),
 			'name'     => "tf_review_typography",
-			'selector' => "{{WRAPPER}} .tf-item-details .tf-reviews .tf-avarage-review, {{WRAPPER}} .tf-available-rating-number, {{WRAPPER}} .tf-archive-rating-wrapper .tf-archive-rating, {{WRAPPER}} .tf-reviews .tf-avarage-review .tf-no-review-count, {{WRAPPER}} .tf-archive-hotel-content-left .tf-reviews .tf-avarage-review",
+			'selector' => "{{WRAPPER}} .tf-item-details .tf-reviews .tf-avarage-review, 
+							{{WRAPPER}} .tf-available-rating-number, 
+							{{WRAPPER}} .tf-archive-rating-wrapper .tf-archive-rating, 
+							{{WRAPPER}} .tf-reviews .tf-avarage-review .tf-no-review-count, 
+							{{WRAPPER}} .tf-archive-hotel-content-left .tf-reviews .tf-avarage-review, 
+							{{WRAPPER}} .tf-single-car-view .tf-car-image .tf-other-infos .tf-reviews-box span",
 		]);
 
 		$this->add_responsive_control( "review_margin", [
@@ -1871,6 +2028,7 @@ class Listings extends Widget_Base {
 				'{{WRAPPER}} .tf-available-room-gallery .tf-available-ratings' => $this->tf_apply_dim( 'margin' ), //design-1
 				'{{WRAPPER}} .tf-archive-hotel-content-left .tf-reviews' => $this->tf_apply_dim( 'margin' ), //design-1
 				'{{WRAPPER}} .tf-archive-rating-wrapper .tf-archive-rating' => $this->tf_apply_dim( 'margin' ), //design-1
+				'{{WRAPPER}} .tf-single-car-view .tf-car-image .tf-other-infos .tf-reviews-box span' => $this->tf_apply_dim( 'margin' ), //design-1
 			],
 		]);
 
@@ -1880,7 +2038,6 @@ class Listings extends Widget_Base {
 			'size_units' => [
 				'px',
 				'rem',
-				'%',
 			],
 			'range'      => [
 				'px' => [
@@ -1893,11 +2050,13 @@ class Listings extends Widget_Base {
 				"{{WRAPPER}} .tf-item-card .tf-item-details .tf-reviews i" => 'font-size: {{SIZE}}{{UNIT}}',
 				"{{WRAPPER}} .tf-archive-hotel-content-left .tf-reviews .tf-review-items i" => 'font-size: {{SIZE}}{{UNIT}}',
 				"{{WRAPPER}} .tf-available-room-gallery .tf-available-ratings i" => 'font-size: {{SIZE}}{{UNIT}}',
+				"{{WRAPPER}} .tf-single-car-view .tf-car-image .tf-other-infos .tf-reviews-box span i" => 'font-size: {{SIZE}}{{UNIT}}',
 			],
 			'conditions' => $this->tf_display_conditionally([
                 'tf_hotel' => ['design-1', 'design-2', 'design-3'],
                 'tf_tours' => ['design-1', 'design-2', 'design-3'],
                 'tf_apartment' => ['design-1', 'design-2'],
+                'tf_carrental' => ['design-1'],
             ]),
 		] );
 
@@ -1908,11 +2067,13 @@ class Listings extends Widget_Base {
 				"{{WRAPPER}} .tf-item-card .tf-item-details .tf-reviews i" => 'color: {{VALUE}}',
 				"{{WRAPPER}} .tf-archive-hotel-content-left .tf-reviews .tf-review-items i" => 'color: {{VALUE}}',
 				"{{WRAPPER}} .tf-archive-available-rooms .tf-available-room .tf-available-room-gallery .tf-available-ratings i" => 'color: {{VALUE}}',
+				"{{WRAPPER}} .tf-single-car-view .tf-car-image .tf-other-infos .tf-reviews-box span i" => 'color: {{VALUE}}',
 			],
 			'conditions' => $this->tf_display_conditionally([
                 'tf_hotel' => ['design-1', 'design-2', 'design-3'],
                 'tf_tours' => ['design-1', 'design-2', 'design-3'],
                 'tf_apartment' => ['design-1', 'design-2'],
+                'tf_carrental' => ['design-1'],
             ]),
 		] );
 
@@ -1997,11 +2158,13 @@ class Listings extends Widget_Base {
 			'selectors'  => [
 				'{{WRAPPER}} .tf-available-room-gallery .tf-available-ratings' => $this->tf_apply_dim( 'padding', true ), //design-2
 				'{{WRAPPER}} .tf-archive-rating-wrapper .tf-archive-rating' => $this->tf_apply_dim( 'padding', true ), //default
+				'{{WRAPPER}} .tf-single-car-view .tf-car-image .tf-other-infos .tf-reviews-box span' => $this->tf_apply_dim( 'padding', true ), //default
 			],
 			'conditions' => $this->tf_display_conditionally([
                 'tf_hotel' => ['design-2'],
                 'tf_tours' => ['design-2'],
                 'tf_apartment' => ['design-1'],
+                'tf_carrental' => ['design-1'],
             ]),
 		]);
 
@@ -2012,21 +2175,27 @@ class Listings extends Widget_Base {
 				'classic',
 				'gradient',
 			],
-			'selector' => "{{WRAPPER}} .tf-archive-available-rooms .tf-available-room .tf-available-room-gallery .tf-available-ratings, {{WRAPPER}} .tf-archive-rating-wrapper .tf-archive-rating",
+			'selector' => "{{WRAPPER}} .tf-archive-available-rooms .tf-available-room .tf-available-room-gallery .tf-available-ratings, 
+							{{WRAPPER}} .tf-archive-rating-wrapper .tf-archive-rating, 
+							{{WRAPPER}} .tf-single-car-view .tf-car-image .tf-other-infos .tf-reviews-box span",
 			'conditions' => $this->tf_display_conditionally([
                 'tf_hotel' => ['design-2', 'default'],
                 'tf_tours' => ['design-2', 'default'],
                 'tf_apartment' => ['design-1', 'default'],
+                'tf_carrental' => ['design-1'],
             ]),
 		]);
 
 		$this->add_group_control( Group_Control_Border::get_type(), [
 			'name'     => "review_border",
-			'selector' => "{{WRAPPER}} .tf-available-room-gallery .tf-available-ratings, {{WRAPPER}} .tf-archive-rating-wrapper .tf-archive-rating",
+			'selector' => "{{WRAPPER}} .tf-available-room-gallery .tf-available-ratings, 
+							{{WRAPPER}} .tf-archive-rating-wrapper .tf-archive-rating, 
+							{{WRAPPER}} .tf-single-car-view .tf-car-image .tf-other-infos .tf-reviews-box span",
 			'conditions' => $this->tf_display_conditionally([
                 'tf_hotel' => ['design-2', 'default'],
                 'tf_tours' => ['design-2', 'default'],
                 'tf_apartment' => ['design-1', 'default'],
+                'tf_carrental' => ['design-1'],
             ]),
 		]);
 
@@ -2040,21 +2209,26 @@ class Listings extends Widget_Base {
 			'selectors'  => [
 				'{{WRAPPER}} .tf-available-room-gallery .tf-available-ratings' => $this->tf_apply_dim( 'border-radius' ), //design-2
 				'{{WRAPPER}} .tf-archive-rating-wrapper .tf-archive-rating' => $this->tf_apply_dim( 'border-radius' ), //design-3
+				'{{WRAPPER}} .tf-single-car-view .tf-car-image .tf-other-infos .tf-reviews-box span' => $this->tf_apply_dim( 'border-radius' ), //design-3
 			],
 			'conditions' => $this->tf_display_conditionally([
                 'tf_hotel' => ['design-2', 'default'],
                 'tf_tours' => ['design-2', 'default'],
                 'tf_apartment' => ['design-1', 'default'],
+                'tf_carrental' => ['design-1'],
             ]),
 		]);
 
 		$this->add_group_control(Group_Control_Box_Shadow::get_type(), [
 			'name' => 'review_shadow',
-			'selector' => "{{WRAPPER}} .tf-available-room-gallery .tf-available-ratings, {{WRAPPER}} .tf-archive-rating-wrapper .tf-archive-rating",
+			'selector' => "{{WRAPPER}} .tf-available-room-gallery .tf-available-ratings, 
+							{{WRAPPER}} .tf-archive-rating-wrapper .tf-archive-rating, 
+							{{WRAPPER}} .tf-single-car-view .tf-car-image .tf-other-infos .tf-reviews-box span",
 			'conditions' => $this->tf_display_conditionally([
                 'tf_hotel' => ['design-2', 'default'],
                 'tf_tours' => ['design-2', 'default'],
                 'tf_apartment' => ['design-1', 'default'],
+                'tf_carrental' => ['design-1'],
             ]),
 		]);
 
@@ -2341,6 +2515,118 @@ class Listings extends Widget_Base {
 		$this->end_controls_section();
 	}
 
+	protected function tf_car_info_style_controls() {
+		$this->start_controls_section( 'car_info_style', [
+			'label' => __( 'Car Info Style', 'tourfic' ),
+			'tab'   => Controls_Manager::TAB_STYLE,
+			'condition' => [
+				'service' => 'tf_carrental',
+			],
+		]);
+
+		$this->add_control( 'tf_car_info_color', [
+			'label'     => __( 'Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors'  => [
+				'{{WRAPPER}} .tf-car-result .tf-single-car-view .tf-car-details ul li' => 'color: {{VALUE}};',
+			],
+		]);
+
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+            'label'    => __( 'Typography', 'tourfic' ),
+			'name'     => "tf_car_info_typography",
+			'selector' => "{{WRAPPER}} .tf-car-result .tf-single-car-view .tf-car-details ul li",
+		]);
+
+		$this->add_responsive_control( "tf_car_info_icon_size", [
+			'label'      => esc_html__( 'Icon Size', 'tourfic' ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [
+				'px',
+				'rem',
+			],
+			'range'      => [
+				'px' => [
+					'min'  => 0,
+					'max'  => 50,
+					'step' => 1,
+				],
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .tf-car-result .tf-single-car-view .tf-car-details ul li svg" => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
+			],
+		] );
+
+		$this->add_control( "tf_car_info_icon_color", [
+			'label'     => __( 'Icon Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .tf-car-result .tf-single-car-view .tf-car-details ul li svg path" => 'stroke: {{VALUE}}',
+			],
+		] );
+
+		$this->add_responsive_control( "car_info_item_gap", [
+			'label'      => esc_html__( 'Item Gap', 'tourfic' ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [
+				'px',
+				'em',
+			],
+			'range'      => [
+				'px' => [
+					'min'  => 0,
+					'max'  => 100,
+					'step' => 1,
+				],
+				'em'  => [
+					'min' => 0,
+					'max' => 20,
+				],
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .tf-car-result .tf-single-car-view .tf-car-details ul" => 'gap: {{SIZE}}{{UNIT}};',
+			],
+		]);
+
+		$this->add_responsive_control( "car_info_icon_gap", [
+			'label'      => esc_html__( 'Icon Gap', 'tourfic' ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [
+				'px',
+				'em',
+			],
+			'range'      => [
+				'px' => [
+					'min'  => 0,
+					'max'  => 100,
+					'step' => 1,
+				],
+				'em'  => [
+					'min' => 0,
+					'max' => 20,
+				],
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .tf-car-result .tf-single-car-view .tf-car-details ul li p" => 'padding-left: {{SIZE}}{{UNIT}};',
+			],
+		]);
+
+		$this->add_responsive_control( "car_info_margin", [
+			'label'      => __( 'Margin', 'tourfic' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				'{{WRAPPER}} .tf-car-result .tf-single-car-view .tf-car-details ul' => $this->tf_apply_dim( 'margin' ),
+			],
+		]);
+
+		$this->end_controls_section();
+	}
+
 	protected function tf_price_style_controls() {
 		$this->start_controls_section( 'price_style', [
 			'label' => __( 'Price Style', 'tourfic' ),
@@ -2353,6 +2639,9 @@ class Listings extends Widget_Base {
 		$this->add_control( 'tf_price_from_heading', [
 			'type'  => Controls_Manager::HEADING,
 			'label' => __( 'From Text', 'tourfic' ),
+			'condition' => [
+                'service!' => 'tf_carrental',
+			],
 		] );
 		$this->add_control( 'tf_price_from_color', [
 			'label'     => __( 'Color', 'tourfic' ),
@@ -2364,12 +2653,22 @@ class Listings extends Widget_Base {
 				'{{WRAPPER}} .single-tour-wrap .single-tour-inner .tourfic-single-right .tf-room-price' => 'color: {{VALUE}};', //default
 				'{{WRAPPER}} .tourfic-single-right .tf-tour-price' => 'color: {{VALUE}};', //default
 			],
+			'condition' => [
+                'service!' => 'tf_carrental',
+			],
 		]);
 
 		$this->add_group_control( Group_Control_Typography::get_type(), [
             'label'    => __( 'Typography', 'tourfic' ),
 			'name'     => "tf_price_from_typography",
-			'selector' => "{{WRAPPER}} .tf-item-card .tf-post-footer .tf-pricing, {{WRAPPER}} .tf-available-room-price .tf-price-from, {{WRAPPER}} .tf-archive-hotel .tf-archive-hotel-content .tf-archive-hotel-content-right .tf-archive-hotel-price, {{WRAPPER}} .single-tour-wrap .single-tour-inner .tourfic-single-right .tf-room-price, {{WRAPPER}} .tourfic-single-right .tf-tour-price",
+			'selector' => "{{WRAPPER}} .tf-item-card .tf-post-footer .tf-pricing, 
+							{{WRAPPER}} .tf-available-room-price .tf-price-from, 
+							{{WRAPPER}} .tf-archive-hotel .tf-archive-hotel-content .tf-archive-hotel-content-right .tf-archive-hotel-price, 
+							{{WRAPPER}} .single-tour-wrap .single-tour-inner .tourfic-single-right .tf-room-price, 
+							{{WRAPPER}} .tourfic-single-right .tf-tour-price",
+			'condition' => [
+				'service!' => 'tf_carrental',
+			],
 		]);
 
 		$this->add_control( 'tf_price_heading', [
@@ -2385,13 +2684,47 @@ class Listings extends Widget_Base {
 				'{{WRAPPER}} .tf-archive-hotel .tf-archive-hotel-content .tf-archive-hotel-content-right .tf-archive-hotel-price .woocommerce-Price-amount' => 'color: {{VALUE}};', //design-3
 				'{{WRAPPER}} .single-tour-wrap .single-tour-inner .tourfic-single-right .tf-room-price .amount' => 'color: {{VALUE}};', //default
 				'{{WRAPPER}} .tourfic-single-right .tf-tour-price span' => 'color: {{VALUE}};', //default
+				'{{WRAPPER}} .tf-car-details .tf-booking-btn .tf-price-info h3 .amount' => 'color: {{VALUE}};', //default
 			],
 		]);
 
 		$this->add_group_control( Group_Control_Typography::get_type(), [
             'label'    => __( 'Typography', 'tourfic' ),
 			'name'     => "tf_price_typography",
-			'selector' => "{{WRAPPER}} .tf-item-card .tf-post-footer .tf-pricing span, {{WRAPPER}} .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-right .tf-available-room-price .tf-price-from .amount, {{WRAPPER}} .tf-archive-hotel .tf-archive-hotel-content .tf-archive-hotel-content-right .tf-archive-hotel-price .woocommerce-Price-amount, {{WRAPPER}} .single-tour-wrap .single-tour-inner .tourfic-single-right .tf-room-price .amount, {{WRAPPER}} .tourfic-single-right .tf-tour-price span",
+			'selector' => "{{WRAPPER}} .tf-item-card .tf-post-footer .tf-pricing span, 
+							{{WRAPPER}} .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-right .tf-available-room-price .tf-price-from .amount, 
+							{{WRAPPER}} .tf-archive-hotel .tf-archive-hotel-content .tf-archive-hotel-content-right .tf-archive-hotel-price .woocommerce-Price-amount, 
+							{{WRAPPER}} .single-tour-wrap .single-tour-inner .tourfic-single-right .tf-room-price .amount, 
+							{{WRAPPER}} .tourfic-single-right .tf-tour-price span, 
+							{{WRAPPER}} .tf-car-details .tf-booking-btn .tf-price-info h3 .amount",
+		]);
+
+		//price type
+		$this->add_control( 'tf_price_type_heading', [
+			'type'  => Controls_Manager::HEADING,
+			'label' => __( 'Price Type', 'tourfic' ),
+			'condition' => [
+				'service' => 'tf_carrental',
+			],
+		] );
+		$this->add_control( 'tf_price_type_color', [
+			'label'     => __( 'Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors'  => [
+				'{{WRAPPER}} .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn .tf-price-info h3 small' => 'color: {{VALUE}};', //default
+			],
+			'condition' => [
+				'service' => 'tf_carrental',
+			],
+		]);
+
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+            'label'    => __( 'Typography', 'tourfic' ),
+			'name'     => "tf_price_type_typography",
+			'selector' => "{{WRAPPER}} .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn .tf-price-info h3 small",
+			'condition' => [
+				'service' => 'tf_carrental',
+			],
 		]);
 
 		$this->add_responsive_control( "price_margin", [
@@ -2399,8 +2732,6 @@ class Listings extends Widget_Base {
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
 				'px',
-				'em',
-				'%',
 			],
 			'selectors'  => [
 				'{{WRAPPER}} .tf-item-card .tf-post-footer .tf-pricing' => $this->tf_apply_dim( 'margin' ), //design-1
@@ -2408,6 +2739,7 @@ class Listings extends Widget_Base {
 				'{{WRAPPER}} .tf-archive-hotel-content-right .tf-archive-hotel-price' => $this->tf_apply_dim( 'margin' ), //design-3
 				'{{WRAPPER}} .single-tour-wrap .single-tour-inner .tourfic-single-right .tf-room-price' => $this->tf_apply_dim( 'margin' ), //default
 				'{{WRAPPER}} .tourfic-single-right .tf-tour-price' => $this->tf_apply_dim( 'margin' ), //default
+				'{{WRAPPER}} .tf-car-details .tf-booking-btn .tf-price-info' => $this->tf_apply_dim( 'margin' ), //default
 			],
 		]);
 
@@ -2432,9 +2764,10 @@ class Listings extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .tf_btn" => $this->tf_apply_dim( 'margin' ),
+				"{{WRAPPER}} .tf_btn, {{WRAPPER}} .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn a.view-more" => $this->tf_apply_dim( 'margin' ),
 			],
 		] );
+
 		$this->add_responsive_control( "view_btn_padding", [
 			'label'      => __( 'Padding', 'tourfic' ),
 			'type'       => Controls_Manager::DIMENSIONS,
@@ -2444,12 +2777,13 @@ class Listings extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .tf_btn" => $this->tf_apply_dim( 'padding' ),
+				"{{WRAPPER}} .tf_btn, {{WRAPPER}} .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn a.view-more" => $this->tf_apply_dim( 'padding' ),
 			],
 		] );
+
 		$this->add_group_control( Group_Control_Typography::get_type(), [
 			'name'     => "view_btn_typography",
-			'selector' => "{{WRAPPER}} .tf_btn",
+			'selector' => "{{WRAPPER}} .tf_btn, {{WRAPPER}} .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn a.view-more",
 		] );
 		
 		$this->add_control( "tabs_view_btn_colors_heading", [
@@ -2467,7 +2801,7 @@ class Listings extends Widget_Base {
 			'label'     => __( 'Text Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
-				"{{WRAPPER}} .tf_btn" => 'color: {{VALUE}};',
+				"{{WRAPPER}} .tf_btn, {{WRAPPER}} .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn a.view-more" => 'color: {{VALUE}};',
 			],
 		] );
 		$this->add_group_control( Group_Control_Background::get_type(), [
@@ -2477,11 +2811,11 @@ class Listings extends Widget_Base {
 				'classic',
 				'gradient',
 			],
-			'selector' => "{{WRAPPER}} .tf_btn",
+			'selector' => "{{WRAPPER}} .tf_btn, {{WRAPPER}} .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn a.view-more",
 		] );
 		$this->add_group_control( Group_Control_Border::get_type(), [
 			'name'     => "btn_border",
-			'selector' => "{{WRAPPER}} .tf_btn",
+			'selector' => "{{WRAPPER}} .tf_btn, {{WRAPPER}} .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn a.view-more",
 		] );
 		$this->add_control( "btn_border_radius", [
 			'label'      => __( 'Border Radius', 'tourfic' ),
@@ -2491,7 +2825,7 @@ class Listings extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .tf_btn" => $this->tf_apply_dim( 'border-radius' ),
+				"{{WRAPPER}} .tf_btn, {{WRAPPER}} .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn a.view-more" => $this->tf_apply_dim( 'border-radius' ),
 			],
 		] );
 		$this->end_controls_tab();
@@ -2504,7 +2838,7 @@ class Listings extends Widget_Base {
 			'label'     => __( 'Text Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
-				"{{WRAPPER}} .tf_btn:hover" => 'color: {{VALUE}};',
+				"{{WRAPPER}} .tf_btn:hover, {{WRAPPER}} .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn a.view-more:hover" => 'color: {{VALUE}};',
 			],
 		] );
 		$this->add_group_control( Group_Control_Background::get_type(), [
@@ -2514,11 +2848,11 @@ class Listings extends Widget_Base {
 				'classic',
 				'gradient',
 			],
-			'selector' => "{{WRAPPER}} .tf_btn:hover",
+			'selector' => "{{WRAPPER}} .tf_btn:hover, {{WRAPPER}} .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn a.view-more:hover",
 		] );
 		$this->add_group_control( Group_Control_Border::get_type(), [
 			'name'     => "btn_border_hover",
-			'selector' => "{{WRAPPER}} .tf_btn:hover",
+			'selector' => "{{WRAPPER}} .tf_btn:hover, {{WRAPPER}} .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn a.view-more:hover",
 		] );
 		$this->add_control( "btn_border_radius_hover", [
 			'label'      => __( 'Border Radius', 'tourfic' ),
@@ -2528,7 +2862,7 @@ class Listings extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .tf_btn:hover" => $this->tf_apply_dim( 'border-radius' ),
+				"{{WRAPPER}} .tf_btn:hover, {{WRAPPER}} .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn a.view-more:hover" => $this->tf_apply_dim( 'border-radius' ),
 			],
 		] );
 		$this->end_controls_tab();
@@ -2554,7 +2888,7 @@ class Listings extends Widget_Base {
 				],
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .tf_btn" => 'width: {{SIZE}}{{UNIT}};',
+				"{{WRAPPER}} .tf_btn, {{WRAPPER}} .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn a.view-more" => 'width: {{SIZE}}{{UNIT}};',
 			],
 			'separator'  => 'before',
 		] );
@@ -2577,7 +2911,7 @@ class Listings extends Widget_Base {
 				],
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .tf_btn" => 'height: {{SIZE}}{{UNIT}};',
+				"{{WRAPPER}} .tf_btn, {{WRAPPER}} .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn a.view-more" => 'height: {{SIZE}}{{UNIT}};',
 			],
 		] );
 
@@ -4652,27 +4986,29 @@ class Listings extends Widget_Base {
 		?>
 		<div class="tf-archive-listing-wrap tf-archive-listing__one tf-archive-car-listing__one" data-design="design-1">
 			<div class="tf-archive-header tf-flex tf-flex-space-bttn tf-flex-align-center tf-mb-30">
-				<div class="tf-archive-view">
-					<ul class="tf-flex tf-flex-gap-16">
-						<li class="<?php echo $listing_layout=="grid" ? esc_attr('active') : ''; ?>" data-view="grid"><i class="ri-layout-grid-line"></i></li>
-						<li class="<?php echo $listing_layout=="list" ? esc_attr('active') : ''; ?>" data-view="list"><i class="ri-list-check"></i></li>
-					</ul>
-				</div>
-				<?php if($show_total_result == 'yes') : ?>
-				<div class="tf-total-result-bar">
-					<span>
-						<?php echo esc_html__( 'Total Results ', 'tourfic' ); ?>
-					</span>
-					<span><?php echo ' ('; ?> </span>
-					<div class="tf-total-results">
-						<span><?php echo esc_html( $post_count ); ?> </span>
+				<?php if($listing_layout_toggle == 'yes') : ?>
+					<div class="tf-archive-view">
+						<ul class="tf-flex tf-flex-gap-16">
+							<li class="<?php echo $listing_layout=="grid" ? esc_attr('active') : ''; ?>" data-view="grid"><i class="ri-layout-grid-line"></i></li>
+							<li class="<?php echo $listing_layout=="list" ? esc_attr('active') : ''; ?>" data-view="list"><i class="ri-list-check"></i></li>
+						</ul>
 					</div>
-					<span><?php echo ')'; ?> </span>
-				</div>
+				<?php endif; ?>
+
+				<?php if($show_total_result == 'yes') : ?>
+					<div class="tf-total-result-bar">
+						<span>
+							<?php echo esc_html__( 'Total Results ', 'tourfic' ); ?>
+						</span>
+						<span><?php echo ' ('; ?> </span>
+						<div class="tf-total-results">
+							<span><?php echo esc_html( $post_count ); ?> </span>
+						</div>
+						<span><?php echo ')'; ?> </span>
+					</div>
 				<?php endif; ?>
 			</div>
 			<div class="tf-car-details-column tf-flex tf-flex-gap-32">
-				
 				<div class="tf-car-archive-sidebar">
 					<div class="tf-sidebar-header tf-flex tf-flex-space-bttn tf-flex-align-center">
 						<h4><?php esc_html_e("Filter", "tourfic") ?></h4>
@@ -4708,7 +5044,13 @@ class Listings extends Widget_Base {
 							echo '<div class="tf-nothing-found" data-post-count="0" >' .esc_html__("No Cars Found!", "tourfic"). '</div>';
 						}
 						?>
-
+						
+						<?php if($show_pagination == 'yes') : ?>
+							<div class="tf-pagination-bar">
+								<?php Helper::tourfic_posts_navigation($query, $pagination_prev_label, $pagination_next_label); ?>
+							</div>
+						<?php endif; ?>
+                </div>
 					</div>
 					<?php do_action("tf_car_archive_card_items_after"); ?>
 				</div>
@@ -4728,7 +5070,16 @@ class Listings extends Widget_Base {
     protected function tf_display_conditionally($design, $extra_conditions = []) {
         $terms = [];
         
-        foreach ($design as $service => $design_values) {
+        foreach ($design as $service_key => $design_values) {
+			// Detect if this is a "NOT" condition
+            $is_not = false;
+            if ( substr( $service_key, -1 ) === '!' ) {
+                $is_not = true;
+                $service = rtrim( $service_key, '!' );
+            } else {
+                $service = $service_key;
+            }
+
             // Convert to array if it's not already
             $design_values = (array) $design_values;
             $design_control = 'design_' . str_replace('tf_', '', $service);
@@ -4737,7 +5088,7 @@ class Listings extends Widget_Base {
                 $service_terms = [
 					[
 						'name' => 'service',
-						'operator' => '==',
+						'operator' => $is_not ? '!=' : '==',
 						'value' => $service,
 					],
 					[
