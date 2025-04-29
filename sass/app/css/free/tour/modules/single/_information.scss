@@ -58,6 +58,7 @@
                         }
                         h4 {
                             color: $color-heading;
+                            font-size: 1.25rem;
                         }
                         img {
                             display: block;
@@ -93,7 +94,7 @@
                             flex-basis: calc(50% - 16px);
                         }
                         @media #{$max575}{
-                            flex-basis: calc(100% - 16px);
+                            flex-basis: 100%;
                         }
                     }
                 }
@@ -123,6 +124,10 @@
                     h5{
                         color: $color-heading;
                         margin-bottom: 5px;
+                        font-size: 1.25rem;
+                        @media #{$max768}{
+                            font-size: 1rem;
+                        }
                     }
                     p{
                         color: $color-text;

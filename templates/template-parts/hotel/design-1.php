@@ -28,7 +28,7 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
                                 <div class="tf-title-meta tf-flex tf-flex-align-center tf-flex-gap-8">
                                 <?php if ( $locations ) { ?>
                                     <?php if ( !empty( $address ) ) {
-                                        echo '<i class="fa-solid fa-location-dot"></i> ' . wp_kses_post($address) . ' –';
+                                        echo '<div class="tf-address"><i class="fa-solid fa-location-dot"></i>' . wp_kses_post($address) . ' –</div>';
                                     } ?>
                                     <a href="<?php echo esc_url($first_location_url); ?>" class="more-hotel tf-d-ib">
                                         <?php

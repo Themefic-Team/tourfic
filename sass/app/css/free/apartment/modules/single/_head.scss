@@ -79,7 +79,9 @@
                         display: flex;
                         align-items: center;
                         gap: 8px;
-
+                        &:hover {
+                            color: $color-primary;
+                        }
                         i {
                             font-size: 1.5rem;
                         }

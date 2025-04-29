@@ -44,7 +44,7 @@
             </div>
         </div>
         <?php } ?>
-        <?php if ( $info_tour_type ) {
+        <?php if ( is_array($info_tour_type) && array_filter($info_tour_type) ) {
         if ( gettype( $info_tour_type ) === 'string' ) {
             $info_tour_type = ucfirst( esc_html( $info_tour_type ) );
         } else if ( gettype( $info_tour_type ) === 'array' ) {

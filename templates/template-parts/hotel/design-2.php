@@ -198,18 +198,22 @@ use \Tourfic\App\TF_Review;
         </div>
         <div class="tf-details-right tf-sitebar-widgets">
             <?php 
-            $places_meta = ! empty( $meta["nearby-places"] ) ? Helper::tf_data_types($meta["nearby-places"]) : array();
-            if($places_meta){ ?>
+              $places_meta = ! empty( $meta["nearby-places"] ) ? Helper::tf_data_types($meta["nearby-places"]) : array();
+              if($places_meta){ ?>
             <div class="tf-whats-around tf-single-widgets">
                 <h3 class="tf-section-title"><?php echo !empty($meta['section-title']) ? esc_html($meta['section-title']) : esc_html__("What’s around?", 'tourfic'); ?></h3>
                 <ul>
                     <?php foreach(Helper::tf_data_types($meta['nearby-places']) as $place){ ?>
                     <li>
-                        <span>
-                        <?php if( !empty( $place['place-icon'] )){ ?>
-                            <i class="<?php echo esc_attr($place['place-icon']); ?>"></i>
-                        <?php } ?> 
-                        <?php echo !empty( $place['place-title'] ) ? esc_html($place['place-title']) : ''; ?>
+                        <span class="tf-place">
+                            <span class="tf-icon">
+                                <?php if( !empty( $place['place-icon'] )){ ?>
+                                    <i class="<?php echo esc_attr($place['place-icon']); ?>"></i>
+                                <?php } ?> 
+                            </span>
+                            <span class="tf-place-title">
+                                <?php echo !empty( $place['place-title'] ) ? esc_html($place['place-title']) : ''; ?>
+                            </span>
                         </span>
                         <span><?php echo !empty( $place['place-dist'] ) ? esc_html($place['place-dist']) : ''; ?></span>
                     </li>

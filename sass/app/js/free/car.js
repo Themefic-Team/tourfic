@@ -415,8 +415,8 @@
                 return true;
             }
         };
-        $('.booking-process').on("click touchstart", function (e) {
-
+        $(document).on('click touchstart', '.booking-process', function (e) {
+            
             if (e.type === 'touchstart') {
                 $(this).off('click');
             }

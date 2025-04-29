@@ -16,9 +16,11 @@
     font-size: 1.75rem;
     margin-bottom: 15px;
     font-weight: 600;
+    color: $color-heading;
 }
 h3.section-heading {
     font-size: 1.75rem;
+    color: $color-heading;
 }
 
 .fancybox-navigation .fancybox-button--arrow_left > div,
@@ -31,6 +33,7 @@ h3.section-heading {
         font-size: 2.188rem;
         margin-top: 0;
         margin-bottom: 6px;
+        color: $color-heading;
         @media #{$max768}{
             font-size: 1.75rem;
         }
@@ -58,6 +61,11 @@ h3.section-heading {
                 border-radius: 25px;
                 margin-bottom: 5px;
                 display: inline-block;
+            }
+            .tf-map-link{
+                a{
+                    color: $color-primary;
+                }
             }
         }
     
@@ -781,6 +789,7 @@ h3.section-heading {
             text-align: center;
             color: $color-heading;
             margin-bottom: 10px;
+            font-size: 1.25rem;
         }
         .btn-styled {
             padding: 18px 20px;
@@ -993,6 +1002,9 @@ h3.section-heading {
     margin: 0 5px 0 0;
     line-height: 1;
     color: $color-text;
+    &:hover {
+        color: $color-primary;
+    }
 }
 .tf-wishlist {
     text-align: right;
@@ -1181,6 +1193,10 @@ li.tf-filter-item {
         display: block;
         margin: 0 10px 0 0;
         outline: none;
+        color: $color-text;
+        &:hover {
+            color: $color-primary;
+        }
     }
     .share-tour-content {
         display: none;
@@ -1320,9 +1336,7 @@ li.tf-filter-item {
 }
 
 @media #{$max768}{
-    #check-in-out-date {
-        width: 220px;
-    }
+
     .tours-check-in-out.flatpickr-input.flatpickr-mobile {
         width: 200px;
         text-transform: uppercase;
@@ -1374,6 +1388,10 @@ li.tf-filter-item {
             font-weight: 600;
             line-height: normal;
             letter-spacing: -0.96px;
+
+            @media #{$max768} {
+                font-size: 1.5rem;
+            }
         }
         .tf-booking-times {
             position: absolute;
@@ -1432,8 +1450,11 @@ li.tf-filter-item {
                         }
                     }
                     li.done{
-                        background-color: $color-primary; 
+                        background-color: $color-brand-lite; 
                         color: $color-white;
+                        @media #{$max768}{
+                            border-color: $color-border-lite;
+                        }
                         &:first-child{
                             border-radius: 8px 0px 0px 8px;
                             @media #{$max768}{
@@ -1449,8 +1470,6 @@ li.tf-filter-item {
                         @media #{$max768}{
                             padding-right: 8px;
                             border: 1px solid $color-primary;
-                            background-color: transparent;
-                            color: $color-primary;
                         }
                         &:first-child{
                             border-radius: 8px 0px 0px 8px;
@@ -1464,7 +1483,6 @@ li.tf-filter-item {
                             background: transparent;
                             top: 0;
                             right: -25px;
-                            // transform: rotate(45deg);
                             border-radius: 0px 10px 0px 0px;
                             width: 0;
                             height: 0;
@@ -1476,6 +1494,12 @@ li.tf-filter-item {
                                 display: none;
                             }
                         }
+                        &.done{
+                            &::before{
+                                border-left-color: $color-brand-lite;
+                            }
+                          
+                        }
                         &:last-child{
                             border-radius: 0px 8px 8px 0px;
                             &::before{
@@ -1485,8 +1509,6 @@ li.tf-filter-item {
                             @media #{$max768}{
                                 border-radius: 16px;
                                 border: 1px solid $color-primary;
-                                background-color: transparent;
-                                color: $color-primary;
                             }
                         }
                     }
@@ -1566,7 +1588,6 @@ li.tf-filter-item {
                                     position: absolute;
                                     top: 0px;
                                     left: 0px;
-                                    background-color: $color-brand-lite;
                                     border-radius: 5px;
                                     border: 1px solid $color-gray;
                                     cursor: pointer;
@@ -1706,7 +1727,7 @@ li.tf-filter-item {
                                 select{
                                     border-radius: 4px;
                                     border: 0.5px solid $color-gray;
-                                    background: $color-gray-info;
+                                    background: transparent;
                                     box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
                                     height: 32px;
                                     width: 100%;

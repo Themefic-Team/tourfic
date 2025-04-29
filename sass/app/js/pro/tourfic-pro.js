@@ -23,7 +23,7 @@
             var hotelid = $("#hotel-post-id").val();
             var hoteladult = $("#adults").val();
             var hotelchildren = $("#children").val();
-            var deposit = $("#hotel_room_depo").val();
+            var deposit = $("input[name=hotel_room_depo]").val();
             var room = $("#hotel_room_number").val();
             var check_in_date = $("input[name=check_in_date]").val();
             var check_out_date = $("input[name=check_out_date]").val();
@@ -87,11 +87,7 @@
                         $('body').append(modal).addClass('tf-modal-open');
                         $('#tf-affiliate-booking-modal').addClass('tf-modal-show');
                     } else {
-                        Swal.fire(
-                            obj.title,
-                            obj.message,
-                            'error'
-                        )
+                        alert_popup.error(obj.title, obj.message);
                     }
                 },
                 error: function () {
@@ -681,7 +677,13 @@
                             'Success!',
                             obj.message,
                             'success'
-                        )
+                        ).then((result) => {
+                            if (result.isConfirmed || result.isDismissed) {
+                                if (obj.redirect_url) {
+                                    window.location.href = obj.redirect_url;
+                                }
+                            }
+                        });
                         form[0].reset();
                         form.find('input').removeClass('error-input');
                         form.find('textarea').removeClass('error-input');

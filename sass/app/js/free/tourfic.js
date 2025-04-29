@@ -753,8 +753,9 @@
             ]
         });
 
-        // Design 3 related tour
-        $('.tf-design-3-slider-items-wrapper').slick({
+
+        // Design 2 related tour
+        $('.tf-design-2-slider-items-wrapper, .tf-design-3-slider-items-wrapper').slick({
             dots: false,
             arrows: true,
             infinite: true,
@@ -1845,7 +1846,7 @@
             if (step > 1) {
                 for (let i = 1; i <= step; i++) {
                     $('.tf-booking-step-' + i).removeClass("active");
-                    $('.tf-booking-step-' + i).addClass("done");
+                    $('.tf-booking-step-' + (i - 1)).addClass("done");
                 }
                 $('.tf-booking-step-' + step).addClass("active");
                 $('.tf-booking-content').hide();
@@ -1997,7 +1998,7 @@
         });
 
         // Popup Close
-        $(".tf-booking-times span").on("click touchstart", function (e) {
+        $('body').on('click touchstart', '.tf-booking-times span', function (e) {
             e.preventDefault();
             $('.tf-withoutpayment-booking').removeClass('show');
             $('.tf-withoutpayment-booking-confirm').removeClass('show');
@@ -2211,6 +2212,12 @@
             $('.tf-archive-right').toggleClass('tf-filter-show');
         });
 
+        $(document).on('click touchstart', function (event) {
+            if (!$(event.target).closest(".tf-archive-filter-showing, .tf-details-right").length) {
+                $(".tf-details-right").removeClass('tf-filter-show');
+            }
+        });
+
         //Search Form Showing
         $('.tf-single-template__two .tf-modify-search-btn, .tf-archive-template__two .tf-modify-search-btn').on('click', function () {
             $('.tf-booking-form-wrapper .tf-booking-form').slideDown(300);
@@ -2375,15 +2382,19 @@
         */
         function adjustPadding() {
             var hotelsContainer = $('.tf-archive-template__three .tf-archive-hotels, .tf-archive-details-wrap .tf-archive-hotels');
-
-            if (hotelsContainer[0].scrollHeight > hotelsContainer.height()) {
-                hotelsContainer.css('padding-right', '16px');
+        
+            if (window.innerWidth > 768) {
+                if (hotelsContainer[0].scrollHeight > hotelsContainer.height()) {
+                    hotelsContainer.css('padding-right', '16px');
+                } else {
+                    hotelsContainer.css('padding-right', '0px');
+                }
             } else {
                 hotelsContainer.css('padding-right', '0px');
             }
         }
-
-        if($('.tf-archive-template__three .tf-archive-hotels').length) {
+        
+        if ($('.tf-archive-template__three .tf-archive-hotels').length) {
             adjustPadding();
             $(window).on('resize', adjustPadding);
         }

@@ -1,0 +1,365 @@
+/*
+Button
+*/
+.tf-admin-btn {
+    display: inline-flex;
+    @include align-items(center);
+    background-color: #fff;
+    padding: 7px 22px;
+    border: 1px solid #003c79;
+    border-radius: 4px;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+
+    i {
+        margin-right: 8px;
+        font-size: 18px;
+    }
+
+    &.tf-btn-secondary {
+        background-color: #003c79;
+        border-color: #003c79;
+        color: #fff;
+        font-weight: 600;
+    }
+
+    //disabled
+    &.disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+}
+
+/*
+Custom Modal
+*/
+.tf-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999999;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    outline: 0;
+    visibility: hidden;
+    opacity: 0;
+    @include scale(.7);
+    @include transition(all, 0.3s, ease-in-out);
+
+    &.tf-modal-show {
+        opacity: 1;
+        visibility: visible;
+        transform: scale(1);
+    }
+
+    .tf-modal-dialog {
+        @include flexbox();
+        @include align-items(center);
+        min-height: calc(100% - 40px);
+        max-width: 100%;
+        position: relative;
+        pointer-events: none;
+
+        @media #{$min576} {
+            min-height: calc(100% - 40px);
+        }
+    }
+
+    .tf-modal-content {
+        position: relative;
+        @include flexbox();
+        @include flex-direction(column);
+        width: 80%;
+        max-width: 1080px;
+        pointer-events: auto;
+        background-color: $blue0;
+        outline: 0;
+        margin: 0 auto;
+        border-radius: 10px;
+        padding: 30px;
+        overflow: hidden;
+    }
+
+    .tf-modal-close {
+        color: #003162;
+        cursor: pointer;
+        font-size: 22px;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        @include transition(all, 0.3s, ease-in-out);
+
+        &:hover {
+            @include rotate(180)
+        }
+    }
+
+    &.tf-modal-fullscreen {
+        .tf-modal-dialog {
+            min-height: 100%;
+        }
+
+        .tf-modal-content {
+            width: 100%;
+            max-width: 100%;
+            height: 100%;
+            border-radius: 0;
+            padding: 0;
+        }
+
+        .tf-modal-header {
+            min-height: 50px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+
+            .tf-modal-close {
+                right: 30px;
+                top: 20px;
+                height: 50px;
+                width: 50px;
+                margin-left: -25px;
+                line-height: 52px;
+                text-align: center;
+                background-color: rgba(0, 0, 0, 0.6);
+                border-radius: 50%;
+                color: #fff;
+            }
+
+            /*&:hover{
+                .tf-modal-close {
+                    top: 10px;
+                }
+            }*/
+        }
+    }
+}
+
+body.tf-modal-open {
+    overflow: hidden;
+
+    .tf-modal {
+        overflow-x: hidden;
+        overflow-y: auto;
+
+        &.tf-modal-fullscreen {
+            overflow: hidden;
+        }
+    }
+
+    &:after {
+        content: "";
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        z-index: 99999;
+        background: rgba(0, 0, 0, 0.4);
+    }
+}
+
+/*
+Ajax Loader
+*/
+.tf-btn-loading {
+    padding-right: 40px;
+    position: relative;
+}
+
+.tf-btn-loading:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    margin-top: -7px;
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border: 2px solid #fff;
+    border-left-color: transparent;
+    border-radius: 50%;
+    vertical-align: middle;
+    visibility: visible;
+    opacity: 1;
+    transition: opacity .2s ease, visibility .2s ease;
+    -webkit-animation: wd-rotate 450ms infinite linear;
+    animation: wd-rotate 450ms infinite linear;
+}
+
+@-webkit-keyframes wd-rotate {
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes wd-rotate {
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+/*
+Notice
+*/
+.tf-notice {
+    @include flexbox();
+    padding: 24px;
+    border: 1px solid $teal10;
+    border-radius: 8px;
+    background-color: $teal0;
+
+    .tf-notice-icon {
+        margin-right: 10px;
+        font-size: 20px;
+        color: $teal60;
+    }
+
+    .tf-notice-content {
+        color: $slate40;
+
+        h6 {
+            margin: 0;
+            font-weight: 500;
+            color: $slate80;
+            font-size: 16px;
+        }
+
+        &.has-content {
+            h6 {
+                margin-bottom: 5px;
+            }
+        }
+    }
+
+    &.tf-notice-success {
+        border-color: $green10;
+        background-color: $green0;
+
+        .tf-notice-icon {
+            color: $green60;
+        }
+    }
+
+    &.tf-notice-warning {
+        border-color: $yellow10;
+        background-color: $yellow0;
+
+        .tf-notice-icon {
+            color: $yellow60;
+        }
+    }
+
+    &.tf-notice-danger {
+        border-color: $red10;
+        background-color: $red0;
+
+        .tf-notice-icon {
+            color: $red60;
+        }
+    }
+
+}
+
+.tf-refund-confirmation-box {
+    background-color: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: none;
+
+    .tf-refund-box-content {
+        width: 450px;
+        background-color: #fff;
+        padding: 24px;
+        border-radius: 8px;
+        text-align: center;
+
+        i {
+            font-size: 32px;
+        }
+
+        h3 {
+            margin: 10px 0;
+            color: rgb(39, 51, 63);
+            font-size: 20px;
+        }
+
+        p {
+            color: rgb(86, 102, 118);
+            font-size: 16px;
+            margin: 0 0 20px 0;
+        }
+
+        .tf-refund-confirmation-button {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+
+            button {
+                border-radius: 8px;
+                background: #0274be;
+                padding: 8px 30px;
+                border: 0px solid;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 150%;
+                cursor: pointer;
+                color: #fff;
+                transition: .3s all ease;
+
+                &:hover {
+                    background: #094C90;
+                }
+
+                &.tf-refund-cancel {
+                    background: #E6F2FE;
+                    color: #566676;
+
+                    &:hover {
+                        background: #0274be;
+                        color: #fff;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Jquery Confirm CSS
+
+.jconfirm .jconfirm-box.jconfirm-type-orange {
+  border: 1px solid #f1c40f;
+}
+
+.jconfirm.jconfirm-modern .jconfirm-box div.jconfirm-content {
+  min-height: 24px;
+}
+
+.jconfirm.jconfirm-modern.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+  margin-bottom: 25px;
+}
+
+.jconfirm .jconfirm-box div.jconfirm-content-pane.no-scroll {
+  margin: 0;
+}
+
+// fancybox
+.fancybox {
+    &__container {
+        z-index: 99999!important;
+    }
+}

@@ -2,8 +2,13 @@
     .tf-single-template{
         &__one{
             .tf-review-wrapper{
+                .no-review{
+                    h4{
+                        font-size: 1.25rem;
+                        color: $color-heading;
+                    }
+                }
                 .tf-review-data.tf-box {
-                    background: transparent;
                     border-radius: 0px;
                     flex-basis: 20%;
                     box-shadow: none;
@@ -12,18 +17,7 @@
                         gap: 0px;
                     }
                     .tf-review-data{
-                        flex-basis: 30%;
-                        margin-right: 30px;
                         padding: 30px;
-                        @media #{$max1024}{
-                            flex-basis: 28%;
-                            margin-right: 28px;
-                        }
-                        @media #{$max768}{
-                            flex-basis: 100%;
-                            margin-right: 0px;
-                            margin-bottom: 20px;
-                        }
                     }
                     .tf-list{
                         margin-top: 0px;
@@ -62,13 +56,8 @@
                     }
             
                     .tf-review-data-features {
-                        flex-basis: 68%;
                         padding: 30px;
-        
-                        @media #{$max768}{
-                            flex-basis: 100%;
-                        }
-                        
+                    
                         .tf-percent-progress{
                             column-gap: 70px;
                             flex-wrap: wrap;
@@ -110,6 +99,28 @@
                           
                         }
                         
+                    }
+                }
+
+                .tf-review-reply{
+                    border-bottom: 1px solid $color-border-lite;
+                    padding-bottom: 50px;
+                }
+            }
+        }
+
+        &__legacy{
+            .review-section{
+                .reviews{
+                    .section-heading{
+                        @media #{$max768}{
+                            text-align: center;
+                        }
+                    }
+                    .no-review{
+                        @media #{$max768}{
+                            text-align: center;
+                        }
                     }
                 }
             }

@@ -8,12 +8,7 @@ body{
 i{
     line-height: 1.5;
 }
-h1,h2,h3,h4,h5,h6{
-    color: $color-heading;
-}
-a{
-    color: $color-primary;
-}
+
 
 .tf-list {
     list-style: none;
@@ -28,7 +23,8 @@ a{
     }
 }
 .archive,
-.single{
+.single,
+.page-template-tf-search{
     .site-content{
         .ast-container {
             max-width: 100%;
@@ -61,7 +57,7 @@ a{
         width: 100%;
         background-color: $color-filling-bg;
         border-radius: 5px;
-        font-size: 0.875rem;
+        font-size: 1rem;
         margin: 0px;
         color: $color-text;
         background-image: none;
@@ -242,6 +238,9 @@ a{
 }
 .sp-t-70 {
     padding-top: 70px;
+}
+.tf-pt-16{
+    padding-top: 16px;
 }
 .tf-d-b {
     display: block;

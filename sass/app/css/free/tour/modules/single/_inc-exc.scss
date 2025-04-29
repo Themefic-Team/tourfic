@@ -66,7 +66,8 @@
                         margin-bottom: 15px;
                     }
                     h2{
-
+                        font-size: 1.25rem;
+                        color: $color-white;
                     }
                 }
                 .tf-exclude-section {
@@ -79,6 +80,10 @@
                     backdrop-filter: blur(3px);
                     @media #{$max768}{
                         padding: 15px 20px 20px;
+                    }
+                    h2{
+                        font-size: 1.25rem;
+                        color: $color-white;
                     }
                 }
                 .tf-include-section.custom-inc-icon {
@@ -127,10 +132,6 @@
         }
         &__two{
             .tf-include-exclude-wrapper {
-                @media #{$max768}{
-                    padding-left: 16px;
-                    padding-right: 16px;
-                }
                 h2{
                     color: $color-heading;
                     font-size: 2rem;

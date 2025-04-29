@@ -47,21 +47,25 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
 }
 $price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings' ) ) ? Helper::tfopt( 'hotel_archive_price_minimum_settings' ) : 'all';
 ?>
-<span id="availability" class="tf-modify-search-btn">
-    <?php esc_html_e( "Modify search", "tourfic" ); ?>
-</span>
-<!--Booking form start -->
-<?php if( ($tf_booking_type == 2 && $tf_hide_booking_form !== '1' && $tf_ext_booking_type == 1 ) || $tf_booking_type == 1 || $tf_booking_type == 3) : ?>
-    <div id="room-availability" class="tf-booking-form-wrapper">
-        <?php Hotel::tf_hotel_sidebar_booking_form(); ?>
-    </div>
-<?php endif; ?>
-<?php if( $tf_booking_type == 2 && $tf_ext_booking_type == 2 && !empty($tf_ext_booking_code )): ?>
-    <div id="tf-external-booking-embaded-form" class="tf-booking-form-wrapper">
-        <?php echo wp_kses( $tf_ext_booking_code, Helper::tf_custom_wp_kses_allow_tags() ); ?>
-    </div>
-<?php endif; ?>
-<!-- Booking form end -->
+<div id="room-availability" class="tf-pt-16">
+	<span id="availability" class="tf-modify-search-btn">
+		<?php esc_html_e( "Modify search", "tourfic" ); ?>
+	</span>
+	<!--Booking form start -->
+	<?php if( ($tf_booking_type == 2 && $tf_hide_booking_form !== '1' && $tf_ext_booking_type == 1 ) || $tf_booking_type == 1 || $tf_booking_type == 3) : ?>
+		<div class="tf-booking-form-wrapper">
+			<?php Hotel::tf_hotel_sidebar_booking_form(); ?>
+		</div>
+	<?php endif; ?>
+	<?php if( $tf_booking_type == 2 && $tf_ext_booking_type == 2 && !empty($tf_ext_booking_code )): ?>
+		<div id="tf-external-booking-embaded-form" class="tf-booking-form-wrapper">
+			<?php echo wp_kses( $tf_ext_booking_code, Helper::tf_custom_wp_kses_allow_tags() ); ?>
+		</div>
+	<?php endif; ?>
+	<!-- Booking form end -->
+
+</div>
+
 
 <!--Available rooms start -->
 <div class="tf-available-rooms-wrapper" id="tf-hotel-rooms">

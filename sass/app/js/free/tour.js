@@ -188,6 +188,46 @@
             }
         })
 
+        $(".tf-itinerary-single-meta li .fa-info-circle, .ininerary-other-info li .fa-info-circle").on("click", function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            var id = $(this).parent().attr("id");
+            $(".tour-itinerary-sleep").each(function () {
+                var elementId = $(this).attr("id"); 
+                if (id === elementId) {
+                    $(this).fadeIn();
+                } else {
+                    $(this).fadeOut();
+                }
+            });
+        });
+        
+    
+        // Hide when clicking outside
+        $(document).on("click", function (e) {
+            if (!$(e.target).closest(".tour-itinerary-sleep, .ininerary-other-info li .fa-info-circle, .tf-itinerary-single-meta li .fa-info-circle").length) {
+                $(".tour-itinerary-sleep").fadeOut();
+            }
+        });
+
+
+        /**
+         * Single Tour Video
+         *
+         * Fancybox
+         */
+
+        $('[data-fancybox="tour-video"]').fancybox({
+            loop: true,
+            buttons: [
+                "zoom",
+                "slideShow",
+                "fullScreen",
+                "close"
+            ],
+            hash: false,
+        });
+
         /**
          * Single Tour Gallery
          *
@@ -608,6 +648,15 @@
         $('.tf-single-template__two .tf-mobile-booking-btn').on('click', function () {
             $('.tf-bottom-booking-bar').addClass('tf-mobile-booking-form');
             $('.tf-single-template__two .tf-mobile-booking-btn').slideUp(300);
+        });
+
+        $(document).on('click touchstart', function (e) {
+            if ($(window).width() <= 768) {
+                if (!$(e.target).closest('.tf-bottom-booking-bar, .tf-mobile-booking-btn, .flatpickr-calendar').length) {
+                    $('.tf-bottom-booking-bar').removeClass('tf-mobile-booking-form');
+                    $('.tf-single-template__two .tf-mobile-booking-btn').slideDown(300);
+                }
+            }
         });
 
         /**

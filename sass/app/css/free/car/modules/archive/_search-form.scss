@@ -26,10 +26,18 @@
                         @media #{$max768}{
                             width: 100%;
                         }
+                        @media #{$max575}{
+                            padding: 10px;
+                        }
                         .tf-select-date{
                             width: calc(50% - 8px);
                             &:first-child{
                                 border-right: 1px solid $color-border-lite;
+                                .tf-flex{
+                                    @media #{$max575}{
+                                        padding-right: 15px;
+                                    }
+                                }
                             }
                             
                             i{
@@ -37,6 +45,7 @@
                             }
                             .tf-flex{
                                 flex-wrap: nowrap;
+                              
                             }
                             .info-select{
                                 width: 100%;
@@ -58,6 +67,9 @@
                                     padding-left: 0px;
                                     box-shadow: none;
                                     background: transparent;
+                                    @media #{$max575}{
+                                        font-size: 0.875rem;
+                                    }
                                     &:focus{
                                         outline: none;
                                         box-shadow: none;
@@ -174,6 +186,7 @@
                                         height: 0;
                                         width: 0;
                                     }
+                                    
                                     input:checked ~ .tf-checkmark:after {
                                         display: block;
                                     }
@@ -195,12 +208,15 @@
                                             top: 2px;
                                             width: 7px;
                                             height: 10px;
-                                            border: solid $color-gray;
+                                            border: solid $color-white;
                                             border-width: 0 3px 3px 0;
                                             -webkit-transform: rotate(45deg);
                                             -ms-transform: rotate(45deg);
                                             transform: rotate(45deg);
                                         }
+                                    }
+                                    input:checked ~ .tf-checkmark{
+                                        border-color: $color-primary;
                                     }
                                 }
                             }

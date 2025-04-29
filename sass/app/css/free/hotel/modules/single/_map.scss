@@ -7,6 +7,7 @@
                     display: block;
                     margin-top: 15px;
                 }
+
             }
             .map-for-mobile {
                 display: none;
@@ -57,6 +58,9 @@
                     line-height: 0;
                     @media #{$max768}{
                         margin-bottom: 30px;
+                    }
+                    @media #{$max575}{
+                        margin-bottom: 0;
                     }
                     iframe{
                         height: 260px;

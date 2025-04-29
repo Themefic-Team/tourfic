@@ -918,7 +918,7 @@ TF_Settings::option( 'tf_settings', array(
 					'id'       => 'tf-container-width',
 					'type'     => 'number',
 					'label'    => esc_html__( 'Container Width (px)', 'tourfic' ),
-					'default'  => '1200',
+					'default'  => '1280',
 					'dependency'  => array( 'tf-container', '==', 'boxed' ),
 					'attributes' => array(
 						'min' => '770',
@@ -3230,8 +3230,8 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'        => 'swal_cdn',
 					'type'      => 'switch',
-					'label'     => __( 'Sweet Alart CDN', 'tourfic' ),
-					'subtitle'  => __( 'Enable/disable Cloudflare CDN for Sweet Alart', 'tourfic' ),
+					'label'     => __( 'jQuery Confirm CDN', 'tourfic' ),
+					'subtitle'  => __( 'Enable/disable Cloudflare CDN for jQuery Confirm', 'tourfic' ),
 					'label_on'  => __( 'Enabled', 'tourfic' ),
 					'label_off' => __( 'Disabled', 'tourfic' ),
 					'width'     => 100,

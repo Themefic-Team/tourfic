@@ -4,17 +4,27 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 function initMap() {
+    const mapDiv = document.getElementById("tf-map");
+
+    if (!mapDiv) {
+        return;
+    }
+
     const directionsService = new google.maps.DirectionsService();
     const directionsRenderer = new google.maps.DirectionsRenderer();
-    const map = new google.maps.Map(document.getElementById("tf-map"), {
+    const map = new google.maps.Map(mapDiv, {
         zoom: 6,
-        center: {lat: 41.85, lng: -87.65},
+        center: { lat: 41.85, lng: -87.65 },
     });
 
     directionsRenderer.setMap(map);
-    document.getElementById("submit").addEventListener("click", () => {
-        calculateAndDisplayRoute(directionsService, directionsRenderer);
-    });
+
+    const submitButton = document.getElementById("submit");
+    if (submitButton) {
+        submitButton.addEventListener("click", () => {
+            calculateAndDisplayRoute(directionsService, directionsRenderer);
+        });
+    }
 }
 
 function calculateAndDisplayRoute(directionsService, directionsRenderer) {

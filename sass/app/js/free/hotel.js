@@ -159,10 +159,10 @@
             var check_out_date = $('input[name=check_out_date]').val();
             if ($(this).closest('.reserve').find('select[name=hotel_room_selected] option').filter(':selected').val()) {
                 var room = $(this).closest('.reserve').find('select[name=hotel_room_selected] option').filter(':selected').val();
-                var deposit = $(this).closest('.room-submit-wrap').find('input[name=make_deposit]').is(':checked');
+                var deposit = $(this).closest('.tf-room').find('input[name=make_deposit]').is(':checked');
             } else {
                 var room = $("#hotel_room_number").val();
-                var deposit = $("#hotel_room_depo").val();
+                var deposit = $this.closest('.tf-room').find('input[name=make_deposit]').is(':checked');
             }
             var airport_service = $this.closest('.tf-withoutpayment-popup').find('[name="airport_service"]:checked').val();
 
@@ -240,6 +240,24 @@
         });
 
         /**
+         * Single Hotel Video
+         *
+         * Fancybox
+         */
+
+   
+        $('[data-fancybox="hotel-vide"]').fancybox({
+            loop: true,
+            buttons: [
+                "zoom",
+                "slideShow",
+                "fullScreen",
+                "close"
+            ],
+            hash: false,
+        });
+
+        /**
          * Single hotel Gallery
          *
          * Fancybox
@@ -254,6 +272,17 @@
             ],
             hash: false,
         });
+
+        /**
+         * Single Map
+         *
+         * Fancybox
+         */
+        $('[data-fancybox="hotel-gallery"]').fancybox({
+            loop: true,
+            touch: false
+        }); 
+  
 
         /**
          * Hotel slider
@@ -560,7 +589,7 @@
                 $("#hotel_room_number").val(roomnumber);
                 $("#hotel_roomid").val(room_id);
                 $("#hotel_room_uniqueid").val(unique_id);
-                $("#hotel_room_depo").val(hotel_deposit);
+                $this.closest('.tf-room').find("input[name=hotel_room_depo]").val(hotel_deposit);
             }
 
             /*if ($(this).closest('.room-submit-wrap').find('input[name=room_id]').val()) {
@@ -584,7 +613,7 @@
                 var deposit = $this.closest('.tf-room').find('input[name=make_deposit]').is(':checked');
             } else {
                 var room = $("#hotel_room_number").val();
-                var deposit = $("#hotel_room_depo").val();
+                var deposit = $this.closest('.tf-room').find("input[name=hotel_room_depo]").val();
             }
             var airport_service = $this.closest('[name="airport_service"]:checked').val();
 
@@ -674,8 +703,8 @@
             // } else {
             //     var room = $("#hotel_room_number").val();
             // }
-            var deposit = $("#hotel_room_depo").val();
-            var airport_service = $(this).find('[name="airport_service"]:checked').val();
+            var deposit = $this.find("input[name=hotel_room_depo]").val();
+            var airport_service = $this.find('[name="airport_service"]:checked').val();
 
             formData.append('action', 'tf_hotel_booking');
             formData.append('_ajax_nonce', tf_params.nonce);

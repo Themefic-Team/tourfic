@@ -12,6 +12,54 @@
             },
         });
 
+        const alert_popup = {
+            success: function (message) {
+                $.confirm({
+                    icon: 'fa fa-check',
+                    theme: 'modern',
+                    title: 'Success!',
+                    content: message,
+                    type: 'green',
+                    animat6ionSpeed: 300,
+                    animation: 'scale',
+                    closeAnimation: 'scale',
+                    animateFromElement: false,
+                    typeAnimated: true,
+                    boxWidth: '500px',
+                    useBootstrap: false,
+                    closeIcon: true,
+                    buttons: {
+                        OK: {
+                            btnClass: 'btn-blue',
+                        }
+                    }
+                })
+            },
+
+            error: function (message) { 
+                $.confirm({
+                    icon: 'fa fa-times',
+                    theme: 'modern',
+                    title: 'Error!',
+                    content: message,
+                    type: 'red',
+                    typeAnimated: true,
+                    animationSpeed: 300,
+                    animation: 'scale',
+                    closeAnimation: 'scale',
+                    animateFromElement: false,
+                    boxWidth: '500px',
+                    useBootstrap: false,
+                    closeIcon: true,
+                    buttons: {
+                        OK: {
+                            btnClass: 'btn-red',
+                        }
+                    }
+                })
+            }
+        }
+
         /*
         * Check available hotel room from date to date
         * Author @Foysal
@@ -211,11 +259,8 @@
                     const obj = JSON.parse(response);
                     if (!obj.success) {
                         if (obj.message) {
-                            Swal.fire(
-                                'Error!',
-                                obj.message,
-                                'error'
-                            )
+                            alert_popup.error(obj.message);
+
                             form.find('input').removeClass('error-input');
                             form.find('select').removeClass('error-input');
                             form.find('textarea').removeClass('error-input');
@@ -248,11 +293,10 @@
                             }
                         }
                     } else {
-                        Swal.fire(
-                            'Success!',
-                            obj.message,
-                            'success'
-                        )
+                        alert_popup.success(obj.message)
+
+                        alert_popup.success(obj.message)
+
                         form[0].reset();
                         form.find('input').removeClass('error-input');
                         form.find('select').removeClass('error-input');
@@ -479,6 +523,7 @@
                 success: function (response) {
                     const obj = JSON.parse(response);
                     if (!obj.success) {
+                        alert_popup.error(obj.message)
 
                         if (obj.errors) {
                             obj.errors.forEach(function (text) {
@@ -506,11 +551,10 @@
                             }
                         }
                     } else {
-                        Swal.fire(
-                            'Success!',
-                            obj.message,
-                            'success'
-                        )
+                        alert_popup.success(obj.message)
+
+                        alert_popup.success(obj.message)
+
                         form[0].reset();
                         form.find('input').removeClass('error-input');
                         form.find('select').removeClass('error-input');
@@ -677,11 +721,8 @@
                     const obj = JSON.parse(response);
                     if (!obj.success) {
                         if (obj.message) {
-                            Swal.fire(
-                                'Error!',
-                                obj.message,
-                                'error'
-                            )
+                            alert_popup.error(obj.message)
+
                             form.find('input').removeClass('error-input');
                             form.find('select').removeClass('error-input');
                             form.find('textarea').removeClass('error-input');
@@ -714,11 +755,8 @@
                             }
                         }
                     } else {
-                        Swal.fire(
-                            'Success!',
-                            obj.message,
-                            'success'
-                        )
+                        alert_popup.success(obj.message)
+
                         form[0].reset();
                         form.find('input').removeClass('error-input');
                         form.find('select').removeClass('error-input');

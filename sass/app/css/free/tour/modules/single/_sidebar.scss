@@ -4,7 +4,8 @@
             .tf-tour-details-right {
                 .tf-tour-booking-box  {
                     background: $color-filling-fg;
-                    @include bd-radius(5px);;
+                    @include bd-radius(5px);
+                
                 }
                 .tf-booking-price{
                     border-bottom: 1px solid $color-border-lite;
@@ -87,6 +88,12 @@
                 .tf-tour-booking-advantages{
                     background-color: $color-filling-fg;
                     @include bd-radius(5px);;
+                    .tf-head-title{
+                        h3{
+                            font-size: 1.5rem;
+                            color: $color-heading;
+                        }
+                    }
                     ul{
                         margin: 0px;
                     }

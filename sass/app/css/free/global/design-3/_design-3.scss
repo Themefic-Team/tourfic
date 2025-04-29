@@ -245,7 +245,7 @@
                     margin: 0;
                     font-size: 1rem;
                     font-weight: 500;
-
+                    color: $color-heading;
                     @media #{$max1024} {
                         display: none;
                     }
@@ -453,18 +453,13 @@
                             line-height: 1.3;
                             margin-bottom: 0;
                             text-transform: capitalize;
-
+                            color: $color-heading;
                             a {
-                                color: $color-heading;
                                 text-decoration: none;
-
+                                color: inherit;
                                 &:hover {
                                     color: $color-primary;
                                 }
-                            }
-
-                            @media #{$max575} {
-                                font-size: 0.875rem;
                             }
                         }
 
@@ -673,7 +668,7 @@
                 background-color: $color-white;
                 box-shadow: 0px 4px 40px 0px rgba(80, 33, 0, 0.10);
                 padding: 16px;
-                z-index: 9999;
+                z-index: 99999;
                 @include transition();
 
                 &.tf-show {
@@ -806,7 +801,7 @@
                         border-radius: 0px;
                         height: auto;
                         pointer-events: none;
-                        color: $color-heading;
+                        color: $color-text;
                         font-size: 1rem;
                         font-weight: 500;
                         line-height: 1.5;
@@ -901,11 +896,6 @@
         .tf-pagination-bar{
             display: block;
             width: 100%;
-
-            @media #{$max768}{
-                margin-bottom: 30px;
-            }
-
             .tf_posts_navigation,
             #tf_posts_navigation_bar{
                 width: 100%;
@@ -1119,7 +1109,7 @@
             cursor: pointer;
             color: $color-heading;
             display: block;
-            transition: .3s all ease;    
+            transition: .3s all ease;
             font-weight: 400;
             line-height: 1.5;
             letter-spacing: 0.15px;
@@ -1217,10 +1207,6 @@
             margin-left: 0;
         }
     }
-}
-
-.admin-bar .tf-archive-template__three .tf-archive-filter .tf-archive-filter-sidebar{
-    top: 32px;
 }
 
 .tf-nothing-found.tf-template-4-nothing-found {
