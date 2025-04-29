@@ -375,6 +375,8 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 = 2.16.2 – April 29, 2025 =
 
 - Fixed: Migration-related issue has been resolved.
+- Fixed: JavaScript issue with the map has been addressed.
+- Fixed: Tour pricing issue has been resolved.
 
 = 2.16.1 – April 27, 2025 =
 
