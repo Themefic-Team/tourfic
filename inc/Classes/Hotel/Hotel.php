@@ -3112,6 +3112,7 @@ class Hotel {
 		$room_meta                    = get_post_meta( $room_id, 'tf_room_opt', true );
 		$enable_airport_service   = ! empty( $meta['airport_service'] ) ? $meta['airport_service'] : '';
 		$airport_service_type     = ! empty( $meta['airport_service_type'] ) ? $meta['airport_service_type'] : '';
+		$hotel_extras     = ! empty( $meta['hotel-extra'] ) ? $meta['hotel-extra'] : '';
 		$room_book_by             = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
 		$room_book_url            = ! empty( $meta['booking-url'] ) ? $meta['booking-url'] : '';
 		$room_allow_deposit       = ! empty( $room_meta['allow_deposit'] ) ? $room_meta['allow_deposit'] : '';
@@ -3193,49 +3194,57 @@ class Hotel {
                             </div>
                             <div class="tf-booking-content-service">
 								<?php if ( ! empty( $airport_service_type ) ) { ?>
+									<select name="airport_service">
+										<option value=""><?php _e( '- Select Service -', 'tourfic' ) ?></option>
 									<?php foreach ( $airport_service_type as $key => $single_service_type ) {
 										$airport_service = self::tf_hotel_airport_service_title_price( $post_id, $adult, $child, $single_service_type );
 										?>
-                                        <div class="tf-single-hotel-service tour-extra-single">
-                                            <label for="service-<?php echo esc_attr( $key ) . '_' . $room_id; ?>">
-                                                <div class="tf-service-radio">
-                                                    <input type="radio" value="<?php echo esc_attr( $single_service_type ); ?>" id="service-<?php echo esc_attr( $key) . '_' . $room_id; ?>" name="airport_service">
-                                                </div>
-                                                <div class="tf-service-content">
-                                                    <h5>
-														<?php
-														if ( "pickup" == $single_service_type ) {
-															_e( 'Pickup Service', 'tourfic' );
-														}
-														if ( "dropoff" == $single_service_type ) {
-															_e( 'Drop-off Service', 'tourfic' );
-														}
-														if ( "both" == $single_service_type ) {
-															_e( 'Pickup & Drop-off Service', 'tourfic' );
-														}
-														?>
-                                                    </h5>
-													<p><?php echo $airport_service['title']; ?> = <?php echo wc_price( $airport_service['price'] ); ?></p>
-                                                </div>
-                                            </label>
-                                        </div>
+										<option value="<?php echo esc_attr( $single_service_type ); ?>">
+											<?php
+											if ( "pickup" == $single_service_type ) {
+												_e( 'Pickup Service', 'tourfic' );
+											}
+											if ( "dropoff" == $single_service_type ) {
+												_e( 'Drop-off Service', 'tourfic' );
+											}
+											if ( "both" == $single_service_type ) {
+												_e( 'Pickup & Drop-off Service', 'tourfic' );
+											}
+											?>
+
+											<?php echo $airport_service['title']; ?> = <?php echo wc_price( $airport_service['price'] ); ?>
+										</option>
 									<?php } ?>
+									</select>
+								<?php } ?>
+							</div>
+
+							<!-- Hotel Extra -->
+							<?php if ( ! empty( $hotel_extras ) ) { ?>
+							<div class="tf-hotel-services-text">
+                                <h3><?php echo !empty( tfopt( 'hotel_extra_popup_title' ) ) ? __( tfopt( 'hotel_extra_popup_title' ), 'tourfic' ) : '' ?></h3>
+                                <p><?php echo !empty( tfopt( 'hotel_extra_popup_subtile') ) ? __( tfopt( 'hotel_extra_popup_subtile'), 'tourfic' ) : '' ; ?></p>
+                            </div>
+							<div class="tf-booking-content-service">
+								<?php foreach ( $hotel_extras as $key => $extra ) {
+									$extra_service = self::tf_hotel_extras_title_price( $post_id, $adult, $child, $key );
+									?>
 									<div class="tf-single-hotel-service tour-extra-single">
-										<label for="service-no_<?php echo esc_attr($room_id); ?>">
+										<label for="service-<?php echo esc_attr( $key ) . '_' . $room_id; ?>">
 											<div class="tf-service-radio">
-												<input type="radio" value="" id="service-no_<?php echo esc_attr($room_id); ?>" name="airport_service">
+												<input type="checkbox" value="<?php echo esc_attr( $key ); ?>" id="service-<?php echo esc_attr( $key) . '_' . $room_id; ?>" name="extra_service">
 											</div>
 											<div class="tf-service-content">
 												<h5>
-													<?php echo esc_html__("No Service", 'tourfic'); ?>
+													<?php esc_html_e($extra['title']);?>
 												</h5>
+												<p><?php echo $extra_service['title']; ?> = <?php echo wc_price( $extra_service['price'] ); ?></p>
 											</div>
 										</label>
-										<p></p>
 									</div>
 								<?php } ?>
-
                             </div>
+							<?php } ?>
                         </div>
 					<?php }
 					if ( $enable_guest_info ) {
@@ -3576,6 +3585,34 @@ class Hotel {
 				}
 
 				$airport_service_arr['label'] = __( 'Pickup & Drop-off Service', 'tourfic' );
+			}
+		}
+
+		return !empty( $airport_service_arr ) ? $airport_service_arr : array( 'title' => '', 'price' => 0 );
+	}
+
+	static function tf_hotel_extras_title_price( $post_id, $adult, $child, $key ) {
+		$meta = get_post_meta( $post_id, 'tf_hotels_opt', true );
+		$hotel_extras     = ! empty( $meta['hotel-extra'] ) ? $meta['hotel-extra'] : '';
+
+		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $hotel_extras[$key] ) ) {
+			if ( !empty($hotel_extras[$key]['price']) ) {
+				
+				if ( "fixed" == $hotel_extras[$key]['price_type'] ) {
+					$airport_service_arr = array(
+						'title' => __( 'Fixed Price', 'tourfic' ),
+						'price' => $hotel_extras[$key]['price']
+					);
+				}
+				if ( "person" == $hotel_extras[$key]['price_type'] ) {
+					$airport_service_arr = array(
+						'title' => sprintf( __( 'Adult ( %1$s × %2$s )', 'tourfic' ),
+							$adult,
+							strip_tags( wc_price( $hotel_extras[$key]['price'] ) )
+						),
+						'price' => $hotel_extras[$key]['price'] * $adult
+					);
+				}
 			}
 		}
 

@@ -46,6 +46,7 @@ class Hotel_Offline_Booking extends Without_Payment_Booking{
 		$check_out       = isset( $_POST['check_out_date'] ) ? sanitize_text_field( $_POST['check_out_date'] ) : '';
 		$deposit         = isset( $_POST['deposit'] ) ? sanitize_text_field( $_POST['deposit'] ) : false;
 		$airport_service = isset( $_POST['airport_service'] ) ? sanitize_text_field( $_POST['airport_service'] ) : '';
+		$extras = isset( $_POST['extras'] ) ? sanitize_text_field( $_POST['extras'] ) : '';
 		$total_people    = $adult + $child;
 
 		# Calculate night number

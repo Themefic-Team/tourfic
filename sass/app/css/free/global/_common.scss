@@ -1545,6 +1545,17 @@ li.tf-filter-item {
                     margin-top: 0px;
                     margin-bottom: 24px;
                 }
+                .tf-booking-content-service{
+                    select[name="airport_service"]{
+                        width: 100%;
+                        height: 45px;
+                        border: 1px solid var(--tf-border-lite);
+                        background: transparent;
+                        padding: 8px;
+                        border-radius: 5px;
+                        margin-bottom: 24px;
+                    }
+                }
                 .tf-booking-content-extra,
                 .tf-booking-content-traveller{
                     height: 230px;

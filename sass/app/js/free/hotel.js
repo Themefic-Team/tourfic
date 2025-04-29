@@ -164,7 +164,7 @@
                 var room = $("#hotel_room_number").val();
                 var deposit = $this.closest('.tf-room').find('input[name=make_deposit]').is(':checked');
             }
-            var airport_service = $this.closest('.tf-withoutpayment-popup').find('[name="airport_service"]:checked').val();
+            var airport_service = $this.closest('.tf-withoutpayment-popup').find('[name="airport_service"]').val();
 
             var data = {
                 action: 'tf_hotel_booking',
@@ -615,8 +615,12 @@
                 var room = $("#hotel_room_number").val();
                 var deposit = $this.closest('.tf-room').find("input[name=hotel_room_depo]").val();
             }
-            var airport_service = $this.closest('[name="airport_service"]:checked').val();
+            var airport_service = $this.closest('[name="airport_service"]').val();
 
+            let selectedExtras = [];
+            $($this.closest('.tf-room').find('input[name="extra_service"]:checked')).each(function() {
+                selectedExtras.push($(this).val());
+            });
             var data = {
                 action: 'tf_hotel_booking_popup',
                 tf_room_booking_nonce: tf_room_booking_nonce,
@@ -631,7 +635,8 @@
                 check_out_date: check_out_date,
                 room: room,
                 deposit: deposit,
-                airport_service: airport_service
+                airport_service: airport_service,
+                extras: selectedExtras
             };
 
             $.ajax({
@@ -704,7 +709,7 @@
             //     var room = $("#hotel_room_number").val();
             // }
             var deposit = $this.find("input[name=hotel_room_depo]").val();
-            var airport_service = $this.find('[name="airport_service"]:checked').val();
+            var airport_service = $this.find('[name="airport_service"]').val();
 
             formData.append('action', 'tf_hotel_booking');
             formData.append('_ajax_nonce', tf_params.nonce);
@@ -742,7 +747,7 @@
         });
 
 
-        $(document).on("change", "[name='airport_service']", function (e) {
+        $(document).on("change", "[name='airport_service'], [name='extra_service']", function (e) {
             var $this = $(this);
 
             hotelPopupBooking($this);
