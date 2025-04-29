@@ -90,6 +90,9 @@ class Template_Builder {
 		];
 
 		register_post_type('tf_template_builder', $args);
+
+        // Add this to ensure Elementor support
+        add_post_type_support('tf_template_builder', 'elementor');
 	}
 
 	public function tf_template_post_row_actions($actions, $post) {
@@ -234,7 +237,7 @@ class Template_Builder {
                                         <ul class="tf-image-radio-group">
                                             <li class="">
                                                 <label class="tf-image-checkbox">
-                                                    <input type="radio" name="tf_template_hotel_archive" value="blank" checked>
+                                                    <input type="radio" name="tf_archive_template" value="blank" checked>
                                                     <div class="tf-template-blank"></div>
                                                     <span class="tf-circle-check"></span>
                                                 </label>
@@ -244,7 +247,7 @@ class Template_Builder {
                                             </li>
                                             <li class="">
                                                 <label class="tf-image-checkbox">
-                                                    <input type="radio" name="tf_template_hotel_archive" value="design-1">
+                                                    <input type="radio" name="tf_archive_template" value="design-1">
                                                     <img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL . "images/template/hotel-archive-design1.jpg"); ?>" alt="Design 1">
                                                     <span class="tf-circle-check"></span>
                                                 </label>
@@ -254,7 +257,7 @@ class Template_Builder {
                                             </li>
                                             <li class="">
                                                 <label class="tf-image-checkbox">
-                                                    <input type="radio" name="tf_template_hotel_archive" value="design-2">
+                                                    <input type="radio" name="tf_archive_template" value="design-2">
                                                     <img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL . "images/template/hotel-archive-design2.jpg"); ?>" alt="Design 2">
                                                     <span class="tf-circle-check"></span>
                                                 </label>
@@ -264,7 +267,7 @@ class Template_Builder {
                                             </li>
                                             <li class="">
                                                 <label class="tf-image-checkbox">
-                                                    <input type="radio" name="tf_template_hotel_archive" value="design-3">
+                                                    <input type="radio" name="tf_archive_template" value="design-3">
                                                     <img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL . "images/template/hotel-archive-design3.jpg"); ?>" alt="Design 3">
                                                     <span class="tf-circle-check"></span>
                                                 </label>
@@ -274,7 +277,7 @@ class Template_Builder {
                                             </li>
                                             <li class="">
                                                 <label class="tf-image-checkbox">
-                                                    <input type="radio" name="tf_template_hotel_archive" value="default">
+                                                    <input type="radio" name="tf_archive_template" value="default">
                                                     <img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL . "images/template/hotel-archive-default.jpg"); ?>" alt="Legacy">
                                                     <span class="tf-circle-check"></span>
                                                 </label>
@@ -299,6 +302,12 @@ class Template_Builder {
                     </div>
                 </div>
             </div>
+            <!-- Loader Image -->
+            <div class="tf-template-builder-loader">
+                <div class="tf-template-builder-loader-img">
+                    <img src="<?php echo esc_url(TF_ASSETS_APP_URL) ?>images/loader.gif" alt="">
+                </div>
+            </div>
             <?php
         }
     }
@@ -320,7 +329,7 @@ class Template_Builder {
             'tf_template_service' => get_post_meta($post->ID, 'tf_template_service', true),
             'tf_template_type' => get_post_meta($post->ID, 'tf_template_type', true),
             'tf_template_active' => get_post_meta($post->ID, 'tf_template_active', true),
-            'tf_template_hotel_archive' => get_post_meta($post->ID, 'tf_template_hotel_archive', true),
+            'tf_archive_template' => get_post_meta($post->ID, 'tf_archive_template', true),
         );
         
         wp_send_json_success($response);
@@ -330,11 +339,12 @@ class Template_Builder {
     function tf_save_template_builder_callback() {
         check_ajax_referer('updates', 'nonce');
         
+        $edit_with_elementor = isset($_POST['edit_with_elementor']) ? $_POST['edit_with_elementor'] : false;
         $post_id = intval($_POST['post_id']);
         $post_data = array(
             'post_title' => sanitize_text_field($_POST['template_name']),
             'post_type' => 'tf_template_builder',
-            'post_status' => 'publish'
+            'post_status' => 'publish',
         );
         
         if ($post_id > 0) {
@@ -345,15 +355,30 @@ class Template_Builder {
         }
         
         if (!is_wp_error($post_id)) {
+            $tf_template_type = !empty($_POST['tf_template_type']) ? sanitize_text_field($_POST['tf_template_type']) : '';
             update_post_meta($post_id, 'tf_template_service', sanitize_text_field($_POST['tf_template_service']));
             update_post_meta($post_id, 'tf_template_type', sanitize_text_field($_POST['tf_template_type']));
             update_post_meta($post_id, 'tf_template_active', isset($_POST['tf_template_active']) ? '1' : '0');
-            update_post_meta($post_id, 'tf_template_hotel_archive', sanitize_text_field($_POST['tf_template_hotel_archive']));
+            if($tf_template_type == 'archive'){
+                update_post_meta($post_id, 'tf_archive_template', sanitize_text_field($_POST['tf_archive_template']));
+            } else{
+                update_post_meta($post_id, 'tf_archive_template', '');
+            }
+
+            if($tf_template_type == 'single'){
+                update_post_meta($post_id, 'tf_single_template', sanitize_text_field($_POST['tf_single_template']));
+            } else{
+                update_post_meta($post_id, 'tf_single_template', '');
+            }
             
-            wp_send_json_success(array(
+            $response = array(
                 'post_id' => $post_id,
                 'message' => esc_html__('Template saved successfully.', 'tourfic'),
-            ));
+            );
+            if($edit_with_elementor){
+                $response['edit_url'] = add_query_arg(array('post' => $post_id, 'action' => 'elementor'), admin_url('post.php'));
+            }
+            wp_send_json_success($response);
         } else {
             wp_send_json_error();
         }

@@ -33,17 +33,15 @@
         });
         
         // Handle form submission
-        $('#tf-template-builder-form').on('submit', function(e) {
+        $(document).on('submit', '#tf-template-builder-form', function(e) {
             e.preventDefault();
             tf_save_template();
         });
         
         // Edit with Elementor button
-        $('#tf-edit-with-elementor').on('click', function() {
-            var post_id = $('#tf-post-id').val();
-            if (post_id > 0) {
-                window.location.href = ajaxurl + '?action=elementor&post=' + post_id;
-            }
+        $(document).on('click', '#tf-edit-with-elementor', function(e) {
+            e.preventDefault();
+            tf_save_template(true);
         });
 
         $(document).on("click", '.tf-modal-close', function () {
@@ -54,8 +52,16 @@
                 tf_close_template_popup();
             }
         });
+
+        // Template update based on service & type
+        // $(document).on('submit', function(e) {
+        //     e.preventDefault();
+        //     tf_save_template();
+        // });
         
         function tf_load_template_data(post_id) {
+            $(".tf-template-builder-loader").show();
+
             $.ajax({
                 url: tf_pro_params.ajax_url,
                 type: 'POST',
@@ -68,6 +74,7 @@
                     // Show loading indicator
                 },
                 success: function(response) {
+                    $(".tf-template-builder-loader").hide();
                     if (response.success) {
                         var data = response.data;
                         $('#tf-post-id').val(data.ID);
@@ -75,30 +82,47 @@
                         $('#tf-template-service').val(data.tf_template_service);
                         $('#tf-template-type').val(data.tf_template_type);
                         $('#tf-template-active').prop('checked', data.tf_template_active == '1');
-                        $('[name="tf_template_hotel_archive"]').prop('checked', data.tf_template_hotel_archive);
+                        $('input[name="tf_template_hotel_archive"][value="' + data.tf_template_hotel_archive + '"]').prop('checked', true);
                         
                         tf_open_template_popup();
                     }
+                },
+                error: function(xhr, status, error) {
+                    $(".tf-template-builder-loader").hide();
+                    // Handle error
+                    notyf.error('Error loading template data: ' + error);
                 }
             });
         }
         
-        function tf_save_template() {
+        function tf_save_template(editWithElementor = false) {
             var form_data = $('#tf-template-builder-form').serialize();
             
             $.ajax({
                 url: tf_pro_params.ajax_url,
                 type: 'POST',
-                data: form_data + '&nonce=' + tf_pro_params.tf_pro_nonce,
+                data: form_data + '&nonce=' + tf_pro_params.tf_pro_nonce + '&edit_with_elementor=' + editWithElementor,
                 beforeSend: function() {
-                    $('#tf-save-template').addClass('tf-btn-loading');
+                    if(editWithElementor) {
+                        $('#tf-edit-with-elementor').addClass('tf-btn-loading');
+                    } else {
+                        $('#tf-save-template').addClass('tf-btn-loading');
+                    }
                 },
                 success: function(response) {
                     tf_close_template_popup();
-                    $('#tf-save-template').addClass('tf-btn-loading');
-                    if (response.success) {
-                        notyf.success(response.data.message);
-                        window.location.reload();
+                    if(editWithElementor) {
+                        $('#tf-edit-with-elementor').removeClass('tf-btn-loading');
+                        if (response.success) {
+                            notyf.success(response.data.message);
+                            window.location.href = response.data.edit_url; // Redirect to Elementor editor
+                        }
+                    } else {
+                        $('#tf-save-template').removeClass('tf-btn-loading');
+                        if (response.success) {
+                            notyf.success(response.data.message);
+                            window.location.reload();
+                        }
                     }
                 },
                 error: function(xhr, status, error) {
@@ -125,7 +149,7 @@
             $('#tf-template-service').val($('#tf-template-service option:first').val());
             $('#tf-template-type').val($('#tf-template-type option:first').val());
             $('#tf-template-active').prop('checked', false);
-            $('[name="tf_template_hotel_archive"]').prop('checked', 'blank');
+            $('input[name="tf_template_hotel_archive"][value="blank"]').prop('checked', true);
         }
     });
 })(jQuery);
