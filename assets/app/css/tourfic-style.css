@@ -1249,7 +1249,8 @@ i {
 }
 
 .archive .site-content .ast-container,
-.single .site-content .ast-container {
+.single .site-content .ast-container,
+.page-template-tf-search .site-content .ast-container {
   max-width: 100%;
   padding: 0;
   display: block;
@@ -11470,6 +11471,7 @@ div#tf-destinationautocomplete-list div:before {
 
 .tf-single-template__one .tf-faq-wrapper .tf-faq-single-inner h4 {
   line-height: 1.5;
+  margin-top: 0;
   margin-bottom: 0;
   font-size: 1.25rem;
   color: var(--tf-text-heading);

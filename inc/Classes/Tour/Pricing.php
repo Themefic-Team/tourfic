@@ -272,8 +272,8 @@ class Pricing {
 		}
 
 		//get the lowest price from all available room price
-		$tf_tour_min_price      = min( $tour_price );
-		$tf_tour_full_price     = min( $tour_price );
+		$tf_tour_min_price      = !empty($tour_price) ? min( $tour_price ) : 0;
+		$tf_tour_full_price     = !empty($tour_price) ? min( $tour_price ) : 0;
 		$tf_tour_discount_type  = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : '';
 		$tf_tour_discount_price = ! empty( $meta['discount_price'] ) ? $meta['discount_price'] : '';
         $tf_tour_min_discount = 0;
@@ -292,7 +292,7 @@ class Pricing {
 			'min_regular_price' => $tf_tour_full_price,
 			'min_sale_price'    => $tf_tour_min_price,
 			'min_discount'      => $tf_tour_min_discount,
-			'max_regular_price' => max( $tour_price ),
+			'max_regular_price' => !empty($tour_price) ? max( $tour_price ) : 0,
 		);
 	}
 
