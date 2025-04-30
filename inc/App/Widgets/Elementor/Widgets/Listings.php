@@ -418,7 +418,7 @@ class Listings extends Widget_Base {
 		$this->add_group_control(Group_Control_Image_Size::get_type(), [
 			'name' => 'image',
 			'exclude' => ['custom'],
-			'default' => 'medium',
+			'default' => 'large',
 			'condition' => [
 				'show_image' => 'yes',
 			],

@@ -54,14 +54,15 @@
         });
 
         // Template update based on service & type
-        // $(document).on('submit', function(e) {
-        //     e.preventDefault();
-        //     tf_save_template();
-        // });
+        $(document).on('change', '#tf-template-service, #tf-template-type', function(e) {
+            e.preventDefault();
+            var service = $('#tf-template-service').val();
+            var type = $('#tf-template-type').val();
+
+            
+        });
         
         function tf_load_template_data(post_id) {
-            $(".tf-template-builder-loader").show();
-
             $.ajax({
                 url: tf_pro_params.ajax_url,
                 type: 'POST',
@@ -71,7 +72,7 @@
                     nonce: tf_pro_params.tf_pro_nonce
                 },
                 beforeSend: function() {
-                    // Show loading indicator
+                    $(".tf-template-builder-loader").show();
                 },
                 success: function(response) {
                     $(".tf-template-builder-loader").hide();
@@ -82,7 +83,7 @@
                         $('#tf-template-service').val(data.tf_template_service);
                         $('#tf-template-type').val(data.tf_template_type);
                         $('#tf-template-active').prop('checked', data.tf_template_active == '1');
-                        $('input[name="tf_template_hotel_archive"][value="' + data.tf_template_hotel_archive + '"]').prop('checked', true);
+                        $('input[name="tf_archive_template"][value="' + data.tf_archive_template + '"]').prop('checked', true);
                         
                         tf_open_template_popup();
                     }
@@ -132,7 +133,6 @@
                 }
             });
         }
-
         
         function tf_open_template_popup() {
             $('#tf-template-builder-popup').addClass('tf-modal-show');
@@ -149,7 +149,7 @@
             $('#tf-template-service').val($('#tf-template-service option:first').val());
             $('#tf-template-type').val($('#tf-template-type option:first').val());
             $('#tf-template-active').prop('checked', false);
-            $('input[name="tf_template_hotel_archive"][value="blank"]').prop('checked', true);
+            $('input[name="tf_archive_template"][value="blank"]').prop('checked', true);
         }
     });
 })(jQuery);

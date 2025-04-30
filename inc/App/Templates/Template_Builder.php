@@ -17,6 +17,7 @@ class Template_Builder {
         add_action('admin_footer', array($this, 'tf_template_builder_add_popup_html'), 9);
         add_action('wp_ajax_tf_get_template_data', array($this, 'tf_get_template_data_callback'));
         add_action('wp_ajax_tf_save_template_builder', array($this, 'tf_save_template_builder_callback'));
+        add_filter('template_include', array($this, 'tf_template_builder_custom_template'));
 	}
 
 	public function admin_menu() {
@@ -90,9 +91,6 @@ class Template_Builder {
 		];
 
 		register_post_type('tf_template_builder', $args);
-
-        // Add this to ensure Elementor support
-        add_post_type_support('tf_template_builder', 'elementor');
 	}
 
 	public function tf_template_post_row_actions($actions, $post) {
@@ -115,7 +113,6 @@ class Template_Builder {
 
 	public function tf_template_set_columns($columns) {
 		$date_column   = $columns['date'];
-		$author_column = $columns['author'];
 
 		unset($columns['date']);
 		unset($columns['author']);
@@ -355,10 +352,18 @@ class Template_Builder {
         }
         
         if (!is_wp_error($post_id)) {
+            $tf_template_service = !empty($_POST['tf_template_service']) ? sanitize_text_field($_POST['tf_template_service']) : '';
             $tf_template_type = !empty($_POST['tf_template_type']) ? sanitize_text_field($_POST['tf_template_type']) : '';
-            update_post_meta($post_id, 'tf_template_service', sanitize_text_field($_POST['tf_template_service']));
-            update_post_meta($post_id, 'tf_template_type', sanitize_text_field($_POST['tf_template_type']));
-            update_post_meta($post_id, 'tf_template_active', isset($_POST['tf_template_active']) ? '1' : '0');
+            $tf_template_active = isset($_POST['tf_template_active']) ? '1' : '0';
+            
+            // If this template is being activated, deactivate all others for the same service and type
+            if ($tf_template_active === '1') {
+                $this->deactivate_other_templates($post_id, $tf_template_service, $tf_template_type);
+            }
+            update_post_meta($post_id, 'tf_template_service', $tf_template_service);
+            update_post_meta($post_id, 'tf_template_type', $tf_template_type);
+            update_post_meta($post_id, 'tf_template_active', $tf_template_active);
+
             if($tf_template_type == 'archive'){
                 update_post_meta($post_id, 'tf_archive_template', sanitize_text_field($_POST['tf_archive_template']));
             } else{
@@ -370,6 +375,9 @@ class Template_Builder {
             } else{
                 update_post_meta($post_id, 'tf_single_template', '');
             }
+
+            update_post_meta( $post_id, '_wp_page_template', 'elementor_header_footer' );
+            update_post_meta( $post_id, '_elementor_edit_mode', 'builder' );
             
             $response = array(
                 'post_id' => $post_id,
@@ -381,6 +389,168 @@ class Template_Builder {
             wp_send_json_success($response);
         } else {
             wp_send_json_error();
+        }
+    }
+
+    /**
+     * Assign Archive/Single Templates based on active Elementor templates
+     */
+    function tf_template_builder_custom_template($template) {
+        global $post;
+        
+        // Only proceed if Elementor is loaded
+        if (!did_action('elementor/loaded')) {
+            return $template;
+        }
+        
+        // Check if we're viewing a template builder post
+        if (is_singular('tf_template_builder')) {
+            $document = \Elementor\Plugin::$instance->documents->get_doc_for_frontend($post->ID);
+            
+            if ($document && $document::get_property('support_wp_page_templates')) {
+                $page_template = $document->get_meta('_wp_page_template');
+                $page_template = in_array($page_template, ['elementor_header_footer', 'elementor_canvas']) 
+                    ? $page_template 
+                    : 'elementor_header_footer';
+
+                $template_module = \Elementor\Plugin::$instance->modules_manager->get_modules('page-templates');
+                $template_path = $template_module->get_template_path($page_template);
+
+                // Fallback to kit default template if needed
+                if ('elementor_theme' !== $page_template && $document->is_built_with_elementor()) {
+                    $kit_default_template = \Elementor\Plugin::$instance->kits_manager->get_current_settings('default_page_template');
+                    $template_path = $template_module->get_template_path($kit_default_template);
+                }
+
+                if ($template_path) {
+                    // Set up the content rendering callback
+                    $template_module->set_print_callback(function() use ($post) {
+                        echo \Elementor\Plugin::$instance->frontend->get_builder_content($post->ID, true);
+                    });
+                    
+                    return $template_path;
+                }
+            }
+        }
+        
+        // For service templates (archive/single)
+        $service_post_types = ['tf_hotel', 'tf_tours', 'tf_apartment', 'tf_carrental'];
+        
+        // Check archive pages
+        if (is_post_type_archive($service_post_types)) {
+            $post_type = get_post_type();
+            $active_template = $this->get_active_template($post_type, 'archive');
+            
+            if ($active_template) {
+                return $this->load_elementor_template($active_template);
+            }
+        }
+        // Check single pages
+        elseif (is_singular($service_post_types)) {
+            $post_type = get_post_type();
+            $active_template = $this->get_active_template($post_type, 'single');
+            
+            if ($active_template) {
+                return $this->load_elementor_template($active_template);
+            }
+        }
+
+        return $template;
+    }
+
+    /**
+     * Load Elementor template using Elementor's built-in template system
+     */
+    private function load_elementor_template($template_post) {
+        $document = \Elementor\Plugin::$instance->documents->get_doc_for_frontend($template_post->ID);
+        
+        if ($document && $document::get_property('support_wp_page_templates')) {
+            $page_template = $document->get_meta('_wp_page_template');
+            $page_template = in_array($page_template, ['elementor_header_footer', 'elementor_canvas']) 
+                ? $page_template 
+                : 'elementor_header_footer';
+
+            $template_module = \Elementor\Plugin::$instance->modules_manager->get_modules('page-templates');
+            $template_path = $template_module->get_template_path($page_template);
+
+            // Fallback to kit default template if needed
+            if ('elementor_theme' !== $page_template && !$template_path && $document->is_built_with_elementor()) {
+                $kit_default_template = \Elementor\Plugin::$instance->kits_manager->get_current_settings('default_page_template');
+                $template_path = $template_module->get_template_path($kit_default_template);
+            }
+
+            if ($template_path) {
+                // Set up the content rendering callback
+                $template_module->set_print_callback(function() use ($template_post) {
+                    echo \Elementor\Plugin::$instance->frontend->get_builder_content($template_post->ID, true);
+                });
+                
+                return $template_path;
+            }
+        }
+        
+        return false;
+    }
+
+    /**
+     * Get active template for a service and type
+     */
+    private function get_active_template($service, $type) {
+        $args = [
+            'post_type' => 'tf_template_builder',
+            'posts_per_page' => 1,
+            'meta_query' => [
+                'relation' => 'AND',
+                [
+                    'key' => 'tf_template_service',
+                    'value' => $service,
+                ],
+                [
+                    'key' => 'tf_template_type',
+                    'value' => $type,
+                ],
+                [
+                    'key' => 'tf_template_active',
+                    'value' => '1',
+                ]
+            ]
+        ];
+        
+        $templates = get_posts($args);
+        
+        return !empty($templates) ? $templates[0] : false;
+    }
+
+    /**
+     * Deactivate other templates for the same service and type
+     */
+    private function deactivate_other_templates($current_post_id, $service, $type) {
+        $args = array(
+            'post_type' => 'tf_template_builder',
+            'post_status' => 'publish',
+            'posts_per_page' => -1,
+            'post__not_in' => array($current_post_id),
+            'meta_query' => array(
+                'relation' => 'AND',
+                array(
+                    'key' => 'tf_template_service',
+                    'value' => $service,
+                ),
+                array(
+                    'key' => 'tf_template_type',
+                    'value' => $type,
+                ),
+                array(
+                    'key' => 'tf_template_active',
+                    'value' => '1',
+                )
+            )
+        );
+        
+        $templates = get_posts($args);
+        
+        foreach ($templates as $template) {
+            update_post_meta($template->ID, 'tf_template_active', '0');
         }
     }
 }

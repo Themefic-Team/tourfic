@@ -1133,7 +1133,6 @@ class Search_Form extends Widget_Base {
 		$this->add_control( 'tf_field_bg_color', [
 			'label'     => __( 'Background Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#ffffff',
 			'selectors' => [
 				"{{WRAPPER}} .tf-field-group .tf-field" => 'background-color: {{VALUE}};',
 				"{{WRAPPER}} .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap" => 'background-color: {{VALUE}};', //design-2
