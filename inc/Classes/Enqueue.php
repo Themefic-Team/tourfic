@@ -461,7 +461,7 @@ class Enqueue {
 				'wishlist_removed'       => esc_html__( 'Item removed from wishlist', 'tourfic' ),
 				'wishlist_remove_error'  => esc_html__( 'Failed to remove from wishlist!', 'tourfic' ),
 				'field_required'         => esc_html__( 'This field is required!', 'tourfic' ),
-				'adult'                  => esc_html__( 'Adult', 'tourfic' ),
+				'adult'                  => apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) ),
 				'children'               => esc_html__( 'Children', 'tourfic' ),
 				'infant'                 => esc_html__( 'Infant', 'tourfic' ),
 				'room'                   => esc_html__( 'Room', 'tourfic' ),
