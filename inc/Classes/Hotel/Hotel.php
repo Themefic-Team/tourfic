@@ -2417,7 +2417,7 @@ class Hotel {
                                     <div class="tf-hotel-filter-range"></div>
                                 </div>
 
-                                <h3 class="tf_advance_search_form_type_filter_label" style="margin-top: 20px"><?php esc_html_e( 'Hotel Features', 'tourfic' ); ?></h3>
+                                <h3 class="tf_advance_search_form_feature_filter_label" style="margin-top: 20px"><?php esc_html_e( 'Hotel Features', 'tourfic' ); ?></h3>
 								<?php
 								$tf_hotelfeature = get_terms( array(
 									'taxonomy'     => 'hotel_feature',
@@ -2437,7 +2437,7 @@ class Hotel {
                                     </div>
 								<?php endif; ?>
 
-                                <h3 style="margin-top: 20px"><?php esc_html_e( 'Hotel Types', 'tourfic' ); ?></h3>
+                                <h3 style="margin-top: 20px" class="tf_advance_search_form_type_filter_label"><?php esc_html_e( 'Hotel Types', 'tourfic' ); ?></h3>
 								<?php
 								$hoteltype_args = array(
 									'taxonomy'     => 'hotel_type',
