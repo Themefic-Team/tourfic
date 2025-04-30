@@ -98,6 +98,34 @@ class Helper {
 		}
 	}
 
+    static function tf_hotel_extras_title_price( $post_id, $adult, $child, $key ) {
+		$meta = get_post_meta( $post_id, 'tf_hotels_opt', true );
+		$hotel_extras     = ! empty( $meta['hotel-extra'] ) ? $meta['hotel-extra'] : '';
+
+		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $hotel_extras[$key] ) ) {
+			if ( !empty($hotel_extras[$key]['price']) ) {
+				
+				if ( "fixed" == $hotel_extras[$key]['price_type'] ) {
+					$airport_service_arr = array(
+						'title' => __( 'Fixed Price', 'tourfic' ),
+						'price' => $hotel_extras[$key]['price']
+					);
+				}
+				if ( "person" == $hotel_extras[$key]['price_type'] ) {
+					$airport_service_arr = array(
+						'title' => sprintf( __( 'Adult ( %1$s × %2$s )', 'tourfic' ),
+							$adult,
+							strip_tags( wc_price( $hotel_extras[$key]['price'] ) )
+						),
+						'price' => $hotel_extras[$key]['price'] * $adult
+					);
+				}
+			}
+		}
+
+		return !empty( $airport_service_arr ) ? $airport_service_arr : array( 'title' => '', 'price' => 0 );
+	}
+    
     /**
 	 * Template 3 Compatible to others Themes
 	 *

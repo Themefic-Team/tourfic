@@ -327,6 +327,35 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 				),
 			),
 		),
+
+		//  Hotel Extra
+		'hotel_extra'           => array(
+			'title'  => esc_html__( 'Hotel Extras', 'tourfic' ),
+			'icon'   => 'fa-solid fa-route',
+			'fields' => array(
+				array(
+					'id'    => 'hotel-extras-heading',
+					'type'  => 'heading',
+					'label' => 'Offer Hotel Extras',
+					'subtitle' => esc_html__( 'If you wish to provide additional services that are not included in your current hotel package, you can list them here.', 'tourfic' ),
+				),
+				array(
+					'id'      => 'hotel-extras-docs',
+					'type'    => 'notice',
+					'style'   => 'success',
+					'content' => esc_html__( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tours/tour-extra/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . esc_html__( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
+				),
+				array(
+					'id'    => 'tf-pro-notice',
+					'type'  => 'notice',
+					'class' => 'tf-pro-notice',
+					'notice' => 'info',
+					'icon' => 'ri-information-fill',
+					'content' => wp_kses_post(__( 'Are you interested in enriching your hotel offerings with exciting services? With our Pro package, you can easily add exciting activities such as paragliding, along with meals and hotel accommodations, through our <b>Hotel Extra Services</b>. This feature allows you to customize and expand your services as much as you want, providing a better experience for your customers. <a href="https://tourfic.com/" target="_blank">Upgrade to our Pro package today to take advantage of these fantastic options!</a>', 'tourfic' ) ),
+				),
+			),
+		),
+
 		// Room Details
 		'room_details'     => array(
 			'title'  => __( 'Room Management', 'tourfic' ),

@@ -4714,15 +4714,29 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'    => '',
 					'type'  => 'text',
-					'label' => __( 'Popup Title', 'tourfic' ),
+					'label' => __( 'Hotel Service Popup Title', 'tourfic' ),
 					'is_pro' => true,
 				),
 
 				array(
 					'id'     => '',
 					'type'   => 'textarea',
-					'label'  => __( 'Popup Description', 'tourfic' ),
+					'label'  => __( 'Hotel Service Popup Description', 'tourfic' ),
 					'is_pro' => true,
+				),
+
+				array(
+					'id'    => '',
+					'type'  => 'text',
+					'label' => esc_html__( 'Hotel Extra Popup Title', 'tourfic' ),
+                    'is_pro' => true,
+				),
+
+				array(
+					'id'    => '',
+					'type'  => 'textarea',
+					'label' => esc_html__( 'Hotel Extra Popup Description', 'tourfic' ),
+                    'is_pro' => true,
 				),
 
 				array(
