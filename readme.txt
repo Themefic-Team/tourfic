@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, car-rental, multivendor-marketplace
 Requires at least: 5.4
 Tested up to: 6.8
-Stable tag: 2.16.1
+Stable tag: 2.16.2
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -372,6 +372,12 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
+= 2.16.2 – April 29, 2025 =
+
+- Fixed: Migration-related issue has been resolved.
+- Fixed: JavaScript issue with the map has been addressed.
+- Fixed: Tour pricing issue has been resolved.
+
 = 2.16.1 – April 27, 2025 =
 
 - Fixed: Car design issue on the search page has been resolved.
@@ -423,16 +429,6 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 - Added: iCal export option for apartments.
 - Fixed: Hotel room iCal import issue.
 - Fixed: Apartment availability calendar date selection issue.
-
-= 2.15.20 – March 10, 2025 =
-
-- Fixed: Scrolling for the hotel availability issue has been resolved.
-- Improved: System stability for better performance.
-
-= 2.15.19 – March 08, 2025 =
-
-- Fixed: The import/export issue has been resolved.
-- Improved: System stability for better performance.
 
 **Old Changelog can be found [here](https://themefic.com/tourfic/changelog/)**.
 

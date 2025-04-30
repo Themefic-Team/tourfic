@@ -3028,6 +3028,18 @@ li.tf-filter-item {
     width: calc(100% - 0px);
   }
 }
+.tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content.tf-booking-content-1,
+.tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content.tf-booking-content-1 {
+  max-height: 430px;
+  overflow-y: auto;
+}
+@media only screen and (max-width: 768px) {
+  .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content.tf-booking-content-1,
+  .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content.tf-booking-content-1 {
+    max-height: none;
+    overflow: hidden;
+  }
+}
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content p,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content p {
   color: var(--tf-text-paragraph);
@@ -10061,6 +10073,7 @@ div#tf-destinationautocomplete-list div:before {
 }
 .tf-single-template__one .tf-faq-wrapper .tf-faq-single-inner h4 {
   line-height: 1.5;
+  margin-top: 0;
   margin-bottom: 0;
   font-size: 1.25rem;
   color: var(--tf-text-heading);

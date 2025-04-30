@@ -361,7 +361,7 @@ class Hotel_Offline_Booking extends Without_Payment_Booking{
 			if ( ! empty( $tf_due_amount ) ) {
 				$response['hotel_booking_summery'] .= '<tr>
                     <td align="left">' . sprintf( __( 'Due', 'tourfic' ) ) . '</td>
-                    <td align="right">' . wc_price( $tf_due_amount + $airport_service_arr['price'] ) . '</td>
+                    <td align="right">' . wc_price( $tf_due_amount + $airport_service_arr['price'] + $total_extras_price ) . '</td>
                 </tr>';
 			}
 

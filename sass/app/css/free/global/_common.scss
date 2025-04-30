@@ -1537,6 +1537,14 @@ li.tf-filter-item {
                 @media #{$max768}{
                     width: calc(100% - 0px);
                 }
+                &.tf-booking-content-1{
+                    max-height: 430px;
+                    overflow-y: auto;
+                    @media #{$max768}{
+                        max-height: none;
+                        overflow: hidden;
+                    }
+                }
                 p{
                     color: $color-text;
                     font-size: 1rem;
