@@ -18,15 +18,8 @@
             tf_open_template_popup();
         });
         
-        // Prevent default behavior when clicking title link
-        $(document).on('click', '.post-type-tf_template_builder .row-title', function(e) {
-            e.preventDefault();
-            var post_id = $(this).closest('tr').attr('id').replace('post-', '');
-            tf_load_template_data(post_id);
-        });
-        
-        // Open popup when "Edit" action is clicked
-        $(document).on('click', '.post-type-tf_template_builder .row-actions .edit a', function(e) {
+        // Open popup when "Edit" action or row title is clicked
+        $(document).on('click', '.post-type-tf_template_builder .row-title, .post-type-tf_template_builder .row-actions .edit a', function(e) {
             e.preventDefault();
             var post_id = $(this).closest('tr').attr('id').replace('post-', '');
             tf_load_template_data(post_id);
@@ -58,8 +51,56 @@
             e.preventDefault();
             var service = $('#tf-template-service').val();
             var type = $('#tf-template-type').val();
-
             
+            $.ajax({
+                url: tf_pro_params.ajax_url,
+                type: 'POST',
+                data: {
+                    action: 'tf_get_template_options',
+                    service: service,
+                    type: type,
+                    nonce: tf_pro_params.tf_pro_nonce
+                },
+                beforeSend: function() {
+                    $('.tf-template-preview-loader').show();
+                },
+                success: function(response) {
+                    $('.tf-template-preview-loader').hide();
+                    if (response.success) {
+                        // Update the template options markup
+                        $('.tf-field-imageselect').html(response.data.markup);
+                        
+                        // Add subtitle if single template
+                        // if (type === 'single') {
+                        //     $('.tf-field-imageselect').append('<p class="tf-field-subtitle">You have the option to override this from the settings specific to each individual page.</p>');
+                        // } else {
+                        //     $('.tf-field-imageselect .tf-field-subtitle').remove();
+                        // }
+                    }
+                },
+                error: function(xhr, status, error) {
+                    notyf.error('Error loading template options: ' + error);
+                    $('.tf-template-preview-loader').hide();
+                    // Fallback to blank option
+                    $('.tf-field-imageselect').html(`
+                        <label class="tf-field-label">${type == 'single' ? 'Single Template' : 'Archive Template'}</label>
+                        <div class="tf-fieldset">
+                            <ul class="tf-image-radio-group">
+                                <li class="">
+                                    <label class="tf-image-checkbox">
+                                        <input type="radio" name="tf_${type}_template" value="blank" checked>
+                                        <div class="tf-template-blank"></div>
+                                        <span class="tf-circle-check"></span>
+                                    </label>
+                                    <span class="tf-image-checkbox-footer">
+                                        <span class="tf-template-title">Blank</span>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    `);
+                }
+            });
         });
         
         function tf_load_template_data(post_id) {
@@ -83,7 +124,7 @@
                         $('#tf-template-service').val(data.tf_template_service);
                         $('#tf-template-type').val(data.tf_template_type);
                         $('#tf-template-active').prop('checked', data.tf_template_active == '1');
-                        $('input[name="tf_archive_template"][value="' + data.tf_archive_template + '"]').prop('checked', true);
+                        $('.tf-template-preview').hide();
                         
                         tf_open_template_popup();
                     }
@@ -147,9 +188,10 @@
             $('#tf-post-id').val('');
             $('#tf-template-name').val('');
             $('#tf-template-service').val($('#tf-template-service option:first').val());
-            $('#tf-template-type').val($('#tf-template-type option:first').val());
+            $('#tf-template-type').val($('#tf-template-type option:first').val()).change();
             $('#tf-template-active').prop('checked', false);
-            $('input[name="tf_archive_template"][value="blank"]').prop('checked', true);
+            $('.tf-template-preview').show();
+            $('input[name="tf_template_design"][value="blank"]').prop('checked', true);
         }
     });
 })(jQuery);

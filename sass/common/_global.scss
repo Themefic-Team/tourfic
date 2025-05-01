@@ -487,6 +487,91 @@ Tooltip
     }
 }
 
+/* Toggle */
+.tf-toggle{
+    &__style-1{
+        @include flexbox();
+        gap: 12px;
+
+        .tf-icon {
+            background-color: $color-filling-fg;
+            border-radius: 5px;
+            border: 1px solid $color-border-lite;
+            @media #{$max575}{
+               display: none;
+            }
+            &:hover {
+            cursor: pointer;
+            }
+            .active-view{
+                display: none;
+            }
+        }
+        i {
+            color: $color-primary;
+        }
+        .active {
+            background-color: $color-primary;
+            i {
+            color: $color-white;
+            }
+            .active-view{
+                display: block;
+            }
+            .defult-view{
+                display: none;
+            }
+        }
+        .tf-list-active{
+            .active-view{
+                display: block;
+            }
+            .defult-view{
+                display: none;
+            }
+            &.active{
+                .active-view{
+                    display: none;
+                }
+                .defult-view{
+                    display: block;
+                }
+            }
+        }
+    }
+
+    &__style-2{
+        @include flexbox();
+        list-style: none;
+        gap: 16px;
+
+        li.tf-archive-view-item {
+            width: 32px;
+            height: 32px;
+            @include flexbox();
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            background-color: $color-filling-fg;
+            text-align: center;
+            cursor: pointer;
+            @include transition();
+            border: 0.5px solid $color-border-lite;
+            &:hover {
+                background: $color-brand-lite;
+            }
+
+            &.active {
+                background-color: $color-brand-lite;
+
+                svg path {
+                    stroke: $color-primary;
+                }
+            }
+        }
+    }
+}
+
 /*
 Without Payment Popup
 */

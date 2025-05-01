@@ -16,8 +16,10 @@ class Template_Builder {
 		add_action('manage_tf_template_builder_posts_custom_column', array($this, 'tf_template_render_column'), 10, 2);
         add_action('admin_footer', array($this, 'tf_template_builder_add_popup_html'), 9);
         add_action('wp_ajax_tf_get_template_data', array($this, 'tf_get_template_data_callback'));
+        add_action('wp_ajax_tf_get_template_options', array($this, 'tf_get_template_options_callback'));
         add_action('wp_ajax_tf_save_template_builder', array($this, 'tf_save_template_builder_callback'));
         add_filter('template_include', array($this, 'tf_template_builder_custom_template'));
+        add_action('save_post_tf_template_builder', [$this, 'enforce_elementor_template_on_save'], 20, 3);
 	}
 
 	public function admin_menu() {
@@ -228,61 +230,69 @@ class Template_Builder {
                                     </div>
                                 </div>
 
-                                <div class="tf-field tf-field-imageselect">
-                                    <label class="tf-field-label"><?php echo esc_html__('Select Archive & Search Result Template', 'tourfic'); ?></label>
-                                    <div class="tf-fieldset">
-                                        <ul class="tf-image-radio-group">
-                                            <li class="">
-                                                <label class="tf-image-checkbox">
-                                                    <input type="radio" name="tf_archive_template" value="blank" checked>
-                                                    <div class="tf-template-blank"></div>
-                                                    <span class="tf-circle-check"></span>
-                                                </label>
-                                                <span class="tf-image-checkbox-footer">
-                                                    <span class="tf-template-title"><?php echo esc_html__('Blank', 'tourfic'); ?></span>
-                                                </span>
-                                            </li>
-                                            <li class="">
-                                                <label class="tf-image-checkbox">
-                                                    <input type="radio" name="tf_archive_template" value="design-1">
-                                                    <img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL . "images/template/hotel-archive-design1.jpg"); ?>" alt="Design 1">
-                                                    <span class="tf-circle-check"></span>
-                                                </label>
-                                                <span class="tf-image-checkbox-footer">
-                                                    <span class="tf-template-title"><?php echo esc_html__('Design 1', 'tourfic'); ?></span>
-                                                </span>
-                                            </li>
-                                            <li class="">
-                                                <label class="tf-image-checkbox">
-                                                    <input type="radio" name="tf_archive_template" value="design-2">
-                                                    <img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL . "images/template/hotel-archive-design2.jpg"); ?>" alt="Design 2">
-                                                    <span class="tf-circle-check"></span>
-                                                </label>
-                                                <span class="tf-image-checkbox-footer">
-                                                    <span class="tf-template-title"><?php echo esc_html__('Design 2', 'tourfic'); ?></span>
-                                                </span>
-                                            </li>
-                                            <li class="">
-                                                <label class="tf-image-checkbox">
-                                                    <input type="radio" name="tf_archive_template" value="design-3">
-                                                    <img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL . "images/template/hotel-archive-design3.jpg"); ?>" alt="Design 3">
-                                                    <span class="tf-circle-check"></span>
-                                                </label>
-                                                <span class="tf-image-checkbox-footer">
-                                                    <span class="tf-template-title"><?php echo esc_html__('Design 3', 'tourfic'); ?></span>
-                                                </span>
-                                            </li>
-                                            <li class="">
-                                                <label class="tf-image-checkbox">
-                                                    <input type="radio" name="tf_archive_template" value="default">
-                                                    <img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL . "images/template/hotel-archive-default.jpg"); ?>" alt="Legacy">
-                                                    <span class="tf-circle-check"></span>
-                                                </label>
-                                                <span class="tf-image-checkbox-footer">
-                                                    <span class="tf-template-title"><?php echo esc_html__('Legacy', 'tourfic'); ?></span>
-                                                </span>
-                                            </li>
-                                        </ul>            
+                                <div class="tf-field tf-template-preview">
+                                    <div class="tf-field-imageselect">
+                                        <label class="tf-field-label"><?php echo esc_html__('Select Archive & Search Result Template', 'tourfic'); ?></label>
+                                        <div class="tf-fieldset">
+                                            <ul class="tf-image-radio-group">
+                                                <li class="">
+                                                    <label class="tf-image-checkbox">
+                                                        <input type="radio" name="tf_template_design" value="blank" checked>
+                                                        <div class="tf-template-blank"></div>
+                                                        <span class="tf-circle-check"></span>
+                                                    </label>
+                                                    <span class="tf-image-checkbox-footer">
+                                                        <span class="tf-template-title"><?php echo esc_html__('Blank', 'tourfic'); ?></span>
+                                                    </span>
+                                                </li>
+                                                <li class="">
+                                                    <label class="tf-image-checkbox">
+                                                        <input type="radio" name="tf_template_design" value="design-1">
+                                                        <img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL . "images/template/hotel-archive-design1.jpg"); ?>" alt="Design 1">
+                                                        <span class="tf-circle-check"></span>
+                                                    </label>
+                                                    <span class="tf-image-checkbox-footer">
+                                                        <span class="tf-template-title"><?php echo esc_html__('Design 1', 'tourfic'); ?></span>
+                                                    </span>
+                                                </li>
+                                                <li class="">
+                                                    <label class="tf-image-checkbox">
+                                                        <input type="radio" name="tf_template_design" value="design-2">
+                                                        <img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL . "images/template/hotel-archive-design2.jpg"); ?>" alt="Design 2">
+                                                        <span class="tf-circle-check"></span>
+                                                    </label>
+                                                    <span class="tf-image-checkbox-footer">
+                                                        <span class="tf-template-title"><?php echo esc_html__('Design 2', 'tourfic'); ?></span>
+                                                    </span>
+                                                </li>
+                                                <li class="">
+                                                    <label class="tf-image-checkbox">
+                                                        <input type="radio" name="tf_template_design" value="design-3">
+                                                        <img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL . "images/template/hotel-archive-design3.jpg"); ?>" alt="Design 3">
+                                                        <span class="tf-circle-check"></span>
+                                                    </label>
+                                                    <span class="tf-image-checkbox-footer">
+                                                        <span class="tf-template-title"><?php echo esc_html__('Design 3', 'tourfic'); ?></span>
+                                                    </span>
+                                                </li>
+                                                <li class="">
+                                                    <label class="tf-image-checkbox">
+                                                        <input type="radio" name="tf_template_design" value="default">
+                                                        <img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL . "images/template/hotel-archive-default.jpg"); ?>" alt="Legacy">
+                                                        <span class="tf-circle-check"></span>
+                                                    </label>
+                                                    <span class="tf-image-checkbox-footer">
+                                                        <span class="tf-template-title"><?php echo esc_html__('Legacy', 'tourfic'); ?></span>
+                                                    </span>
+                                                </li>
+                                            </ul>            
+                                        </div>
+                                    </div>
+                                    <!-- Loader Image -->
+                                    <div class="tf-template-preview-loader">
+                                        <div class="tf-template-preview-loader-img">
+                                            <img src="<?php echo esc_url(TF_ASSETS_APP_URL) ?>images/loader.gif" alt="">
+                                        </div>
                                     </div>
                                 </div>
                                 
@@ -309,6 +319,227 @@ class Template_Builder {
         }
     }
 
+    // Add this new method to your class:
+    public function tf_get_template_options_callback() {
+        check_ajax_referer('updates', 'nonce');
+        
+        $service = !empty($_POST['service']) ? sanitize_text_field($_POST['service']) : 'tf_hotel';
+        $type = !empty($_POST['type']) ? sanitize_text_field($_POST['type']) : 'archive';
+        
+        // Define all template options
+        $all_templates = [
+            'tf_hotel' => [
+                'archive' => [
+                    'blank' => [
+                        'title' => esc_html__('Blank', 'tourfic'),
+                        'url' => '',
+                        'is_blank' => true
+                    ],
+                    'design-1' => [
+                        'title' => esc_html__('Design 1', 'tourfic'),
+                        'url' => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-design-1.png"
+                    ],
+                    'design-2' => [
+                        'title' => esc_html__('Design 2', 'tourfic'),
+                        'url' => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-design-2.png"
+                    ],
+                    'design-3' => [
+                        'title' => esc_html__('Design 3', 'tourfic'),
+                        'url' => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-design-3.png",
+                    ],
+                    'default' => [
+                        'title' => esc_html__('Legacy', 'tourfic'),
+                        'url' => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-default.png"
+                    ]
+                ],
+                'single' => [
+                    'blank' => [
+                        'title' => esc_html__('Blank', 'tourfic'),
+                        'url' => '',
+                        'is_blank' => true
+                    ],
+                    'design-1' => [
+                        'title' => esc_html__('Design 1', 'tourfic'),
+                        'url' => TF_ASSETS_ADMIN_URL . "images/template/preview-single-design-1.png",
+                        'preview_link' => 'https://tourfic.com/preview/hotels/tuvo-suites-hotel/'
+                    ],
+                    'design-2' => [
+                        'title' => esc_html__('Design 2', 'tourfic'),
+                        'url' => TF_ASSETS_ADMIN_URL . "images/template/preview-single-design-2.png",
+                        'preview_link' => 'https://tourfic.com/preview/hotels/melbourne-mastlereagh/'
+                    ],
+                    'default' => [
+                        'title' => esc_html__('Legacy', 'tourfic'),
+                        'url' => TF_ASSETS_ADMIN_URL . "images/template/preview-single-default.png",
+                        'preview_link' => 'https://tourfic.com/preview/hotels/rio-ontho-palace/'
+                    ]
+                ]
+            ],
+            'tf_tours' => [
+                'archive' => [
+                    'blank' => [
+                        'title' => esc_html__('Blank', 'tourfic'),
+                        'url' => '',
+                        'is_blank' => true
+                    ],
+                    'design-1' => [
+                        'title' => esc_html__('Design 1', 'tourfic'),
+                        'url' => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-design-1.png"
+                    ],
+                    'design-2' => [
+                        'title' => esc_html__('Design 2', 'tourfic'),
+                        'url' => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-design-2.png"
+                    ],
+                    'design-3' => [
+                        'title' => esc_html__('Design 3', 'tourfic'),
+                        'url' => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-design-3.png",
+                    ],
+                    'default' => [
+                        'title' => esc_html__('Legacy', 'tourfic'),
+                        'url' => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-default.png"
+                    ]
+                ],
+                'single' => [
+                    'blank' => [
+                        'title' => esc_html__('Blank', 'tourfic'),
+                        'url' => '',
+                        'is_blank' => true
+                    ],
+                    'design-1' => [
+                        'title' => esc_html__('Design 1', 'tourfic'),
+                        'url' => TF_ASSETS_ADMIN_URL . "images/template/preview-single-design-1.png",
+                        'preview_link' => 'https://tourfic.com/preview/tours/amplified-nz-tour/'
+                    ],
+                    'design-2' => [
+                        'title' => esc_html__('Design 2', 'tourfic'),
+                        'url' => TF_ASSETS_ADMIN_URL . "images/template/preview-single-design-2.png",
+                        'preview_link' => 'https://tourfic.com/preview/tours/ancient-trails-of-japan/'
+                    ],
+                    'default' => [
+                        'title' => esc_html__('Legacy', 'tourfic'),
+                        'url' => TF_ASSETS_ADMIN_URL . "images/template/preview-single-default.png",
+                        'preview_link' => 'https://tourfic.com/preview/tours/magical-russia/'
+                    ]
+                ]
+            ],
+            'tf_apartment' => [
+                'archive' => [
+                    'blank' => [
+                        'title' => esc_html__('Blank', 'tourfic'),
+                        'url' => '',
+                        'is_blank' => true
+                    ],
+                    'design-1' => [
+                        'title' => esc_html__('Design 1', 'tourfic'),
+                        'url' => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-design-2.png"
+                    ],
+                    'design-2' => [
+                        'title' => esc_html__('Design 2', 'tourfic'),
+                        'url' => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-design-3.png",
+                    ],
+                    'default' => [
+                        'title' => esc_html__('Legacy', 'tourfic'),
+                        'url' => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-default.png"
+                    ]
+                ],
+                'single' => [
+                    'blank' => [
+                        'title' => esc_html__('Blank', 'tourfic'),
+                        'url' => '',
+                        'is_blank' => true
+                    ],
+                    'design-1' => [
+                        'title' => esc_html__('Design 1', 'tourfic'),
+                        'url' => TF_ASSETS_ADMIN_URL . "images/template/preview-single-apt-design-1.png",
+                        'preview_link' => 'https://tourfic.com/preview/apartments/2-bedroom-apartment-in-gamle-oslo/'
+                    ],
+                    'default' => [
+                        'title' => esc_html__('Legacy', 'tourfic'),
+                        'url' => TF_ASSETS_ADMIN_URL . "images/template/preview-single-apt-default.png",
+                        'preview_link' => 'https://tourfic.com/preview/apartments/barcelo-residences-dubai-marina/'
+                    ]
+                ]
+            ],
+            'tf_carrental' => [
+                'archive' => [
+                    'blank' => [
+                        'title' => esc_html__('Blank', 'tourfic'),
+                        'url' => '',
+                        'is_blank' => true
+                    ],
+                    'design-1' => [
+                        'title' => esc_html__('Design 1', 'tourfic'),
+                        'url' => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-car-design-1.png"
+                    ]
+                ],
+                'single' => [
+                    'blank' => [
+                        'title' => esc_html__('Blank', 'tourfic'),
+                        'url' => '',
+                        'is_blank' => true
+                    ],
+                    'design-1' => [
+                        'title' => esc_html__('Design 1', 'tourfic'),
+                        'url' => TF_ASSETS_ADMIN_URL . "images/template/preview-single-car-design-1.png",
+                        'preview_link' => 'https://tourfic.com/preview/cars/honda-city/'
+                    ]
+                ]
+            ]
+        ];
+        
+        // Default to hotel options if service not found
+        if (!isset($all_templates[$service])) {
+            $service = 'tf_hotel';
+        }
+        
+        // Get the specific templates for this service and type
+        $templates = isset($all_templates[$service][$type]) ? $all_templates[$service][$type] : $all_templates['tf_hotel']['archive'];
+        
+        // Generate the markup
+        $markup = '';
+        if($type == 'archive'){
+            $markup .= '<label class="tf-field-label">'. esc_html__('Select Archive Template', 'tourfic') .'</label>';
+        } else {
+            $markup .= '<label class="tf-field-label">'. esc_html__('Select Single Template', 'tourfic') .'</label>';
+        }
+        $markup .= '<div class="tf-fieldset"><ul class="tf-image-radio-group">';
+        
+        foreach ($templates as $value => $option) {
+            $checked = ($value == 'blank') ? 'checked' : '';
+            $markup .= '<li>';
+            $markup .= '<label class="tf-image-checkbox">';
+            $markup .= '<input type="radio" name="tf_template_design" value="' . esc_attr($value) . '" ' . $checked . '>';
+            
+            if (!empty($option['is_blank'])) {
+                $markup .= '<div class="tf-template-blank"></div>';
+            } else {
+                $markup .= '<img src="' . esc_url($option['url']) . '" alt="' . esc_attr($option['title']) . '">';
+            }
+            
+            $markup .= '<span class="tf-circle-check"></span>';
+            $markup .= '</label>';
+            
+            if (!empty($option['preview_link'])) {
+                $markup .= '<a class="tf-image-checkbox-footer" href="' . esc_url($option['preview_link']) . '" target="_blank" title="preview">';
+                $markup .= '<span class="tf-template-title">' . esc_html($option['title']) . '</span>';
+                $markup .= '<i class="dashicons dashicons-external"></i>';
+                $markup .= '</a>';
+            } else {
+                $markup .= '<span class="tf-image-checkbox-footer">';
+                $markup .= '<span class="tf-template-title">' . esc_html($option['title']) . '</span>';
+                $markup .= '</span>';
+            }
+            
+            $markup .= '</li>';
+        }
+        
+        $markup .= '</ul></div>';
+        
+        wp_send_json_success([
+            'markup' => $markup,
+        ]);
+    }
+
     // Get template data for editing
     function tf_get_template_data_callback() {
         check_ajax_referer('updates', 'nonce');
@@ -326,7 +557,7 @@ class Template_Builder {
             'tf_template_service' => get_post_meta($post->ID, 'tf_template_service', true),
             'tf_template_type' => get_post_meta($post->ID, 'tf_template_type', true),
             'tf_template_active' => get_post_meta($post->ID, 'tf_template_active', true),
-            'tf_archive_template' => get_post_meta($post->ID, 'tf_archive_template', true),
+            'tf_template_design' => get_post_meta($post->ID, 'tf_template_design', true),
         );
         
         wp_send_json_success($response);
@@ -355,6 +586,7 @@ class Template_Builder {
             $tf_template_service = !empty($_POST['tf_template_service']) ? sanitize_text_field($_POST['tf_template_service']) : '';
             $tf_template_type = !empty($_POST['tf_template_type']) ? sanitize_text_field($_POST['tf_template_type']) : '';
             $tf_template_active = isset($_POST['tf_template_active']) ? '1' : '0';
+            $tf_template_design = !empty($_POST['tf_template_design']) ? sanitize_text_field($_POST['tf_template_design']) : '';
             
             // If this template is being activated, deactivate all others for the same service and type
             if ($tf_template_active === '1') {
@@ -363,21 +595,45 @@ class Template_Builder {
             update_post_meta($post_id, 'tf_template_service', $tf_template_service);
             update_post_meta($post_id, 'tf_template_type', $tf_template_type);
             update_post_meta($post_id, 'tf_template_active', $tf_template_active);
-
-            if($tf_template_type == 'archive'){
-                update_post_meta($post_id, 'tf_archive_template', sanitize_text_field($_POST['tf_archive_template']));
-            } else{
-                update_post_meta($post_id, 'tf_archive_template', '');
-            }
-
-            if($tf_template_type == 'single'){
-                update_post_meta($post_id, 'tf_single_template', sanitize_text_field($_POST['tf_single_template']));
-            } else{
-                update_post_meta($post_id, 'tf_single_template', '');
-            }
+            update_post_meta($post_id, 'tf_template_design', $tf_template_design);
 
             update_post_meta( $post_id, '_wp_page_template', 'elementor_header_footer' );
             update_post_meta( $post_id, '_elementor_edit_mode', 'builder' );
+
+            // Template import
+            if ( !empty( $tf_template_design ) && $tf_template_design !== 'blank' ) {
+                $service = array(
+                    'tf_hotel' => 'hotel',
+                    'tf_tours' => 'tour',
+                    'tf_apartment' => 'apartment',
+                    'tf_carrental' => 'carrental'
+                );
+                
+                $template_path = TF_ASSETS_PATH . "demo/{$service[$tf_template_service]}/{$tf_template_type}/{$tf_template_design}/content.json";
+    
+                if ( is_file( $template_path ) ) {
+                    require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-base.php';
+                    require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-direct.php';
+    
+                    $wp_filesystem = new \WP_Filesystem_Direct(null);
+                    $fileContent = $wp_filesystem->get_contents($template_path);
+    
+                    if ( !is_null( $fileContent ) ) {
+    
+                        add_filter('elementor/files/allow_unfiltered_upload', '__return_true');
+    
+                        $result = \Elementor\Plugin::$instance->templates_manager->import_template( [
+                            'fileData' => base64_encode( $fileContent ),
+                            'fileName' => 'tourfic-content.json'
+                        ] );
+    
+                        $imported_template_id = $result[0]['template_id'];
+                        $template_data        = get_post_meta( $imported_template_id, '_elementor_data', true );
+                        update_post_meta( $post_id, '_elementor_data', $template_data );
+                        wp_delete_post( $imported_template_id );
+                    }
+                }
+            }
             
             $response = array(
                 'post_id' => $post_id,
@@ -553,4 +809,22 @@ class Template_Builder {
             update_post_meta($template->ID, 'tf_template_active', '0');
         }
     }
+
+    public function enforce_elementor_template_on_save($post_id, $post, $update) {
+        // Only for Elementor-built templates
+        if (did_action('elementor/loaded')) {
+            $page_template = get_post_meta($post_id, '_wp_page_template', true);
+    
+            // Fallback or enforce our required template
+            if (!$page_template || $page_template === 'default') {
+                update_post_meta($post_id, '_wp_page_template', 'elementor_header_footer');
+            }
+    
+            // Optional: force edit mode
+            if (!get_post_meta($post_id, '_elementor_edit_mode', true)) {
+                update_post_meta($post_id, '_elementor_edit_mode', 'builder');
+            }
+        }
+    }
+    
 }

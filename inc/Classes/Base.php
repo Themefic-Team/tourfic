@@ -105,7 +105,7 @@ class Base {
 		// \Tourfic\Classes\Without_Payment_Booking\Hotel_WP_Booking::instance();
 
 		//Template Builder
-		if(function_exists( 'is_tf_pro' ) && is_tf_pro()){
+		if(function_exists( 'is_tf_pro' ) && is_tf_pro() && did_action('elementor/loaded')){
 			\Tourfic\App\Templates\Template_Builder::instance();
 		}
 	}

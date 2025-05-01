@@ -1286,10 +1286,7 @@ trait Action_Helper {
 					'post__in'       => $displayed_results,
 				);
 
-				if(!empty($el_orderby) || !empty($el_order)){
-					$filter_args['orderby'] = $el_orderby;
-					$filter_args['order'] = $el_order;
-				} else {
+				if(isset($ordering_type)){
 					if ( $ordering_type == "default" ) {
 						unset( $filter_args['orderby'] );
 					} else if ( $ordering_type == 'latest') {
@@ -1298,8 +1295,10 @@ trait Action_Helper {
 					}else if ( $ordering_type == 'price-low') {
 						$filter_args['orderby'] = array( 'post__in' => 'DESC' );
 					}
+				} elseif(!empty($el_orderby) || !empty($el_order)){
+					$filter_args['orderby'] = $el_orderby;
+					$filter_args['order'] = $el_order;
 				}
-
 
 				$result_query  = new \WP_Query( $filter_args );
 				$result_query2 = $result_query;

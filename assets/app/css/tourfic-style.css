@@ -548,6 +548,115 @@ Tooltip
   opacity: 1;
 }
 
+/* Toggle */
+.tf-toggle__style-1 {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  gap: 12px;
+}
+
+.tf-toggle__style-1 .tf-icon {
+  background-color: var(--tf-filling-foreground);
+  border-radius: 5px;
+  border: 1px solid var(--tf-border-lite);
+}
+
+@media only screen and (max-width: 575.98px) {
+  .tf-toggle__style-1 .tf-icon {
+    display: none;
+  }
+}
+
+.tf-toggle__style-1 .tf-icon:hover {
+  cursor: pointer;
+}
+
+.tf-toggle__style-1 .tf-icon .active-view {
+  display: none;
+}
+
+.tf-toggle__style-1 i {
+  color: var(--tf-primary);
+}
+
+.tf-toggle__style-1 .active {
+  background-color: var(--tf-primary);
+}
+
+.tf-toggle__style-1 .active i {
+  color: #ffffff;
+}
+
+.tf-toggle__style-1 .active .active-view {
+  display: block;
+}
+
+.tf-toggle__style-1 .active .defult-view {
+  display: none;
+}
+
+.tf-toggle__style-1 .tf-list-active .active-view {
+  display: block;
+}
+
+.tf-toggle__style-1 .tf-list-active .defult-view {
+  display: none;
+}
+
+.tf-toggle__style-1 .tf-list-active.active .active-view {
+  display: none;
+}
+
+.tf-toggle__style-1 .tf-list-active.active .defult-view {
+  display: block;
+}
+
+.tf-toggle__style-2 {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  list-style: none;
+  gap: 16px;
+}
+
+.tf-toggle__style-2 li.tf-archive-view-item {
+  width: 32px;
+  height: 32px;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background-color: var(--tf-filling-foreground);
+  text-align: center;
+  cursor: pointer;
+  -webkit-transition: all 0.25s ease-in-out;
+  -moz-transition: all 0.25s ease-in-out;
+  -o-transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
+  border: 0.5px solid var(--tf-border-lite);
+}
+
+.tf-toggle__style-2 li.tf-archive-view-item:hover {
+  background: var(--tf-brand-lite);
+}
+
+.tf-toggle__style-2 li.tf-archive-view-item.active {
+  background-color: var(--tf-brand-lite);
+}
+
+.tf-toggle__style-2 li.tf-archive-view-item.active svg path {
+  stroke: var(--tf-primary);
+}
+
 /*
 Without Payment Popup
 */
