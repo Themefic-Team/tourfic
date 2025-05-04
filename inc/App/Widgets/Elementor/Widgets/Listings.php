@@ -690,15 +690,6 @@ class Listings extends Widget_Base {
 			],
 		]);
 
-		$this->add_control('show_button',[
-			'label' => __('Show Button', 'tourfic'),
-			'type' => Controls_Manager::SWITCHER,
-			'label_on' => __('Show', 'tourfic'),
-			'label_off' => __('Hide', 'tourfic'),
-			'return_value' => 'yes',
-			'default' => 'yes',
-		]);
-
 		$this->add_control('show_view_details', [
 			'label' => __('Show View Details', 'tourfic'),
 			'type' => Controls_Manager::SWITCHER,
