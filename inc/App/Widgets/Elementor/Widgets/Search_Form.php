@@ -163,7 +163,7 @@ class Search_Form extends Widget_Base {
         $this->add_control('location_icon',[
             'label' => esc_html__('Location Icon', 'tourfic'),
             'default' => [
-                'value' => 'fa-solid fa-location-dot',
+                'value' => 'fas fa-map-marker-alt',
                 'library' => 'fa-solid',
             ],
             'label_block' => true,
@@ -212,8 +212,8 @@ class Search_Form extends Widget_Base {
         $this->add_control('adult_icon',[
             'label' => esc_html__('Adult Icon', 'tourfic'),
             'default' => [
-                'value' => 'fa-regular fa-user',
-                'library' => 'fa',
+                'value' => 'far fa-user',
+                'library' => 'fa-regular',
             ],
             'label_block' => true,
             'type' => Controls_Manager::ICONS,
@@ -249,8 +249,8 @@ class Search_Form extends Widget_Base {
         $this->add_control('children_icon',[
             'label' => esc_html__('Children Icon', 'tourfic'),
             'default' => [
-                'value' => 'fa-solid fa-child',
-                'library' => 'fa',
+                'value' => 'fas fa-child',
+                'library' => 'fa-solid',
             ],
             'label_block' => true,
             'type' => Controls_Manager::ICONS,
@@ -286,8 +286,8 @@ class Search_Form extends Widget_Base {
         $this->add_control('infant_icon', [
             'label' => esc_html__('Infant Icon', 'tourfic'),
             'default' => [
-                'value' => 'fa-regular fa-user',
-                'library' => 'fa',
+                'value' => 'fas fa-child',
+                'library' => 'fa-solid',
             ],
             'label_block' => true,
             'type' => Controls_Manager::ICONS,
@@ -356,7 +356,7 @@ class Search_Form extends Widget_Base {
         $this->add_control('selector_icon',[
             'label' => esc_html__('Selector Icon', 'tourfic'),
             'default' => [
-                'value' => 'fa-solid fa-users',
+                'value' => 'fas fa-users',
                 'library' => 'fa-solid',
             ],
             'label_block' => true,
@@ -392,7 +392,7 @@ class Search_Form extends Widget_Base {
         $this->add_control('date_icon',[
             'label' => esc_html__('Date Icon', 'tourfic'),
             'default' => [
-                'value' => 'fa-solid fa-calendar-days',
+                'value' => 'far fa-calendar-alt',
                 'library' => 'fa-regular',
             ],
             'label_block' => true,
@@ -556,8 +556,8 @@ class Search_Form extends Widget_Base {
         $this->add_control('pickup_date_icon',[
             'label' => esc_html__('Pick-up Date Icon', 'tourfic'),
             'default' => [
-                'value' => 'fa-solid fa-calendar-days',
-                'library' => 'fa-regular',
+                'value' => 'fas fa-calendar-alt',
+                'library' => 'fa-solid',
             ],
             'label_block' => true,
             'type' => Controls_Manager::ICONS,
@@ -594,7 +594,7 @@ class Search_Form extends Widget_Base {
         $this->add_control('pickup_time_icon',[
             'label' => esc_html__('Pick-up Time Icon', 'tourfic'),
             'default' => [
-                'value' => 'fa-regular fa-clock',
+                'value' => 'far fa-clock',
                 'library' => 'fa-regular',
             ],
             'label_block' => true,
@@ -641,8 +641,8 @@ class Search_Form extends Widget_Base {
         $this->add_control('dropoff_date_icon',[
             'label' => esc_html__('Drop-off Date Icon', 'tourfic'),
             'default' => [
-                'value' => 'fa-solid fa-calendar-days',
-                'library' => 'fa-regular',
+                'value' => 'fas fa-calendar-alt',
+                'library' => 'fa-solid',
             ],
             'label_block' => true,
             'type' => Controls_Manager::ICONS,
@@ -679,7 +679,7 @@ class Search_Form extends Widget_Base {
         $this->add_control('dropoff_time_icon',[
             'label' => esc_html__('Drop-off Time Icon', 'tourfic'),
             'default' => [
-                'value' => 'fa-regular fa-clock',
+                'value' => 'far fa-clock',
                 'library' => 'fa-regular',
             ],
             'label_block' => true,

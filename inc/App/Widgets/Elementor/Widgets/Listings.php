@@ -597,7 +597,7 @@ class Listings extends Widget_Base {
 		$this->add_control('location_icon',[
 			'label' => esc_html__('Location Icon', 'tourfic'),
 			'default' => [
-				'value' => 'fa-solid fa-location-dot',
+				'value' => 'fas fa-map-marker-alt',
 				'library' => 'fa-solid',
 			],
 			'label_block' => true,
@@ -4999,20 +4999,8 @@ class Listings extends Widget_Base {
 					</div>
 				<?php endif; ?>
 			</div>
-			<div class="tf-car-details-column tf-flex tf-flex-gap-32">
-				<div class="tf-car-archive-sidebar">
-					<div class="tf-sidebar-header tf-flex tf-flex-space-bttn tf-flex-align-center">
-						<h4><?php esc_html_e("Filter", "tourfic") ?></h4>
-						<button class="filter-reset-btn"><?php esc_html_e("Reset", "tourfic"); ?></button>
-					</div>
-					
-					<?php if ( is_active_sidebar( 'tf_archive_booking_sidebar' ) ) { ?>
-						<?php dynamic_sidebar( 'tf_archive_booking_sidebar' ); ?>
-					<?php } ?>
-
-				</div>
-
-				<div class="tf-car-archive-result">
+			<div class="tf-car-details-column">
+				<div class="tf-car-archive-result" style="width: 100%;">
 					<?php do_action("tf_car_archive_card_items_before"); ?>
 					<div class="tf-car-result archive_ajax_result tf-flex tf-flex-gap-32 <?php echo $listing_layout=="list" ? esc_attr('list-view') : esc_attr('grid-view'); ?> tf-grid-<?php echo esc_attr($grid_column); ?>">
 						<?php
