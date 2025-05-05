@@ -699,6 +699,13 @@
 
             hotelPopupBooking($this);
         });
+
+        $('form .tf-hotel-booking-popup-btn').on("click", function () {
+            e.preventDefault();
+            var $this = $(this);
+
+            hotelPopupBooking($this);
+        });
         
 
         // $(document).on('submit', 'form.tf-room', function (e) {
