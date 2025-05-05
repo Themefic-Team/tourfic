@@ -1745,7 +1745,7 @@
         * @author Jahid
         */
         let tf_hasErrorsFlag = false;
-        $(document).on('click', '.tf-traveller-error', function (e) {
+        $('body').on('click', '.tf-traveller-error', function (e) {
             let hasErrors = [];
             let $this = $(this).closest('.tf-withoutpayment-booking');
             $('.error-text').text("");

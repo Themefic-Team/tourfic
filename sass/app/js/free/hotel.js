@@ -220,7 +220,7 @@
                     } else {
 
                         if (response.redirect_to) {
-                            window.location.replace(response.redirect_to);
+                            // window.location.replace(response.redirect_to);
                         } else {
                             jQuery(document.body).trigger('added_to_cart');
                             $.fancybox.close();
@@ -234,12 +234,6 @@
 
             });
         }
-        // $(document).on('click', '.hotel-room-book', function (e) {
-        //     e.preventDefault();
-
-            
-
-        // });
 
         document.addEventListener('click', function(e) {
             if (e.target && e.target.matches('.hotel-room-book')) {
