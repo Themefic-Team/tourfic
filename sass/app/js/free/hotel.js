@@ -140,9 +140,7 @@
          *
          * tf_hotel_booking
          */
-        $(document).on('click', '.hotel-room-book', function (e) {
-            e.preventDefault();
-
+        const hotelPopupRoomBooking = ($this) => {
             var $this = $(this);
 
             var tf_room_booking_nonce = $("input[name=tf_room_booking_nonce]").val();
@@ -236,7 +234,19 @@
                 },
 
             });
+        }
+        // $(document).on('click', '.hotel-room-book', function (e) {
+        //     e.preventDefault();
 
+            
+
+        // });
+
+        document.addEventListener('click', function(e) {
+            if (e.target && e.target.matches('.hotel-room-book')) {
+                e.preventDefault();
+                hotelPopupRoomBooking(jQuery(e.target));
+            }
         });
 
         /**
@@ -696,8 +706,6 @@
         document.addEventListener('click', function(e) {
             if (e.target && e.target.matches('.tf-hotel-booking-popup-btn')) {
                 e.preventDefault();
-
-                // Wrap with jQuery to maintain compatibility
                 hotelPopupBooking(jQuery(e.target));
             }
         });
