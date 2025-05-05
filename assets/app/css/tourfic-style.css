@@ -4272,6 +4272,13 @@ li.tf-filter-item {
   border: 0px solid;
 }
 
+@media only screen and (max-width: 1024px) {
+  .tf_booking-widget.default-form .tf_form-inner input {
+    font-size: 14px;
+    height: auto;
+  }
+}
+
 .tf_booking-widget.default-form .tf_form-inner input:focus {
   box-shadow: none;
   outline: none;
@@ -4425,12 +4432,51 @@ button.tf-tablinks:focus {
   background: #ffffff;
 }
 
+@media only screen and (max-width: 768px) {
+  .tf_homepage-booking {
+    display: inherit;
+    height: auto;
+  }
+}
+
+.tf_homepage-booking .tf_selectperson-wrap {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+@media only screen and (max-width: 768px) {
+  .tf_homepage-booking .tf_selectperson-wrap {
+    padding: 13px 15px;
+  }
+}
+
 .tf_homepage-booking .tf_selectperson-wrap .tf_person-icon {
   margin-right: 8px;
 }
 
+@media only screen and (max-width: 768px) {
+  .tf_homepage-booking .tf_selectperson-wrap .person-sep {
+    padding: 0 6px;
+  }
+}
+
 .tf_homepage-booking .tf_form-row .tf_label-row {
   margin: 0;
+}
+
+@media only screen and (max-width: 768px) {
+  .tf_homepage-booking .tf_destination-wrap {
+    padding: 10px 5px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .tf_homepage-booking .tf_selectdate-wrap {
+    padding: 10px 15px;
+  }
+  .tf_homepage-booking .tf_selectdate-wrap.tf_more_info_selections {
+    padding: 13px 15px;
+  }
 }
 
 div#tf-locationautocomplete-list div:before {
@@ -7486,18 +7532,23 @@ div#tf-destinationautocomplete-list div:before {
   }
 }
 
+@media only screen and (max-width: 768px) {
+  #tf_car_booking .tf-driver-location-box {
+    padding: 15px;
+  }
+}
+
 @media only screen and (max-width: 1320px) {
-  #tf_car_booking .tf-driver-location {
+  #tf_car_booking .tf-driver-location-box .tf-driver-location {
     max-width: 800px;
     margin-top: -10px;
     gap: 10px;
-    padding-bottom: 70px;
     margin: 0 auto;
   }
 }
 
 @media only screen and (max-width: 768px) {
-  #tf_car_booking .tf-driver-location {
+  #tf_car_booking .tf-driver-location-box .tf-driver-location {
     margin-right: auto;
     margin-left: 4px;
   }
@@ -10300,6 +10351,16 @@ div#tf-destinationautocomplete-list div:before {
   }
 }
 
+.tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select:first-child {
+  width: 37%;
+}
+
+@media only screen and (max-width: 768px) {
+  .tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select:first-child {
+    width: 100%;
+  }
+}
+
 .tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date {
   width: calc(50% - 8px);
 }
@@ -10509,10 +10570,12 @@ div#tf-destinationautocomplete-list div:before {
 
 .tf-archive-search-box-wrapper .tf-driver-location-box .tf-driver-location ul li label input:checked ~ .tf-checkmark:after {
   display: block;
+  border-color: #ffffff;
 }
 
 .tf-archive-search-box-wrapper .tf-driver-location-box .tf-driver-location ul li label input:checked ~ .tf-checkmark {
-  background-color: #ffffff;
+  background-color: var(--tf-primary);
+  border-color: var(--tf-primary);
 }
 
 .tf-archive-search-box-wrapper .tf-driver-location-box .tf-driver-location ul li label .tf-checkmark {
@@ -10521,7 +10584,7 @@ div#tf-destinationautocomplete-list div:before {
   left: 0;
   height: 20px;
   width: 20px;
-  border: 2px solid #F5FAFF;
+  border: 2px solid #808080;
   background-color: transparent;
   border-radius: 5px;
 }
@@ -10534,7 +10597,7 @@ div#tf-destinationautocomplete-list div:before {
   top: 2px;
   width: 7px;
   height: 10px;
-  border: solid #F5FAFF;
+  border: solid #808080;
   border-width: 0 3px 3px 0;
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
@@ -10648,7 +10711,7 @@ div#tf-destinationautocomplete-list div:before {
   left: 0px;
   height: 20px;
   width: 20px;
-  background-color: #ffffff;
+  background-color: var(--tf-primary);
   border-radius: 5px;
   border: 1px solid #808080;
 }

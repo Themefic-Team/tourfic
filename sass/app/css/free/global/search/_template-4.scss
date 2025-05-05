@@ -719,19 +719,24 @@
 }
 
 #tf_car_booking {
-  .tf-driver-location {
-    @media only screen and (max-width: 1320px) {
-      max-width: 800px;
-      margin-top: -10px;
-      gap: 10px;
-      padding-bottom: 70px;
-      margin: 0 auto;
-    }
+  .tf-driver-location-box{
     @media #{$max768} {
-      margin-right: auto;
-      margin-left: 4px;
+      padding: 15px;
+    }
+    .tf-driver-location {
+      @media only screen and (max-width: 1320px) {
+        max-width: 800px;
+        margin-top: -10px;
+        gap: 10px;
+        margin: 0 auto;
+      }
+      @media #{$max768} {
+        margin-right: auto;
+        margin-left: 4px;
+      }
     }
   }
+  
 }
 
 

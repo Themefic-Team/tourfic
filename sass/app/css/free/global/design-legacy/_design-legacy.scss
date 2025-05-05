@@ -765,6 +765,12 @@
             @media #{$max768}{
                 width: 100%;
             }
+            &:first-child{
+                width: 37%;
+                @media #{$max768}{
+                    width: 100%;
+                }
+            }
             .tf-select-date{
                 width: calc(50% - 8px);
                 &:first-child{
@@ -944,9 +950,11 @@
                         }
                         input:checked ~ .tf-checkmark:after {
                             display: block;
+                            border-color: $color-white;
                         }
                         input:checked ~ .tf-checkmark{
-                            background-color: $color-white;
+                            background-color: $color-primary;
+                            border-color: $color-primary;
                         }
                         .tf-checkmark {
                             position: absolute;
@@ -954,7 +962,7 @@
                             left: 0;
                             height: 20px;
                             width: 20px;
-                            border: 2px solid $color-gray-info;
+                            border: 2px solid $color-gray;
                             background-color: transparent;
                             border-radius: 5px;
                             &::after{
@@ -965,7 +973,7 @@
                                 top: 2px;
                                 width: 7px;
                                 height: 10px;
-                                border: solid $color-gray-info;
+                                border: solid $color-gray;
                                 border-width: 0 3px 3px 0;
                                 -webkit-transform: rotate(45deg);
                                 -ms-transform: rotate(45deg);
@@ -1064,7 +1072,7 @@
                                         left: 0px;
                                         height: 20px;
                                         width: 20px;
-                                        background-color: $color-white;
+                                        background-color: $color-primary;
                                         border-radius: 5px;
                                         border: 1px solid $color-gray;
                                     }
