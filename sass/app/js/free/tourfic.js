@@ -1745,7 +1745,7 @@
         * @author Jahid
         */
         let tf_hasErrorsFlag = false;
-        $(document).on('click', '.tf-traveller-error', function (e) {
+        $('body').on('click', '.tf-traveller-error', function (e) {
             let hasErrors = [];
             let $this = $(this).closest('.tf-withoutpayment-booking');
             $('.error-text').text("");
@@ -1791,7 +1791,7 @@
         });
 
         // Booking Confirmation Form Validation
-        $(document).on('click', '.tf-book-confirm-error, .tf-hotel-book-confirm-error', function (e) {
+        $('body').on('click', '.tf-book-confirm-error, .tf-hotel-book-confirm-error', function (e) {
             let hasErrors = [];
             let $this = $(this).closest('.tf-withoutpayment-booking');
             $('.error-text').text("");

@@ -140,7 +140,7 @@
          *
          * tf_hotel_booking
          */
-        $(document).on('click', '.hotel-room-book', function (e) {
+        $('body').on('click', '.hotel-room-book', function (e) {
             e.preventDefault();
 
             var $this = $(this);
@@ -693,14 +693,14 @@
 
             });
         }
-        $(document).on('click', '.tf-hotel-booking-popup-btn', function (e) {
+        $('body').on('click', '.tf-hotel-booking-popup-btn', function (e) {
             e.preventDefault();
             var $this = $(this);
 
             hotelPopupBooking($this);
         });
 
-        $(document).on('submit', 'form.tf-room', function (e) {
+        $('body').on('submit', 'form.tf-room', function (e) {
             e.preventDefault();
 
             var $this = $(this);
