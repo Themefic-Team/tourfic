@@ -704,9 +704,7 @@
             if (e.target && e.target.matches('.tf-hotel-booking-popup-btn')) {
                 e.preventDefault();
                 
-                var $this = $(this);
-
-                hotelPopupBooking($this);
+                alert("Test");
             }
         });
         
