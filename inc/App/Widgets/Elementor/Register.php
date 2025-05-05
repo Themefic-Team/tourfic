@@ -48,6 +48,7 @@ class Register {
         if(function_exists( 'is_tf_pro' ) && is_tf_pro()){
             $widgets_manager->register( \Tourfic\App\Widgets\Elementor\Widgets\Search_Form::instance() );
             $widgets_manager->register( \Tourfic\App\Widgets\Elementor\Widgets\Listings::instance() );
+            $widgets_manager->register( \Tourfic\App\Widgets\Elementor\Widgets\Sidebar::instance() );
         }
     }
 

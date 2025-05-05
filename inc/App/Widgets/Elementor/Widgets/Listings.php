@@ -354,6 +354,20 @@ class Listings extends Widget_Base {
             ]),
 		]);
 
+		$this->add_control( 'show_sidebar', [
+			'label' => esc_html__( 'Show Sidebar', 'tourfic' ),
+			'type' => Controls_Manager::SWITCHER,
+			'label_on' => esc_html__( 'Show', 'tourfic' ),
+			'label_off' => esc_html__( 'Hide', 'tourfic' ),
+			'return_value' => 'yes',
+			'default' => 'yes',
+			'conditions' => $this->tf_display_conditionally([
+                'tf_hotel' => ['design-3'],
+                'tf_tours' => ['design-3'],
+                'tf_apartment' => ['design-2'],
+            ]),
+		]);
+
 	    do_action( 'tf/listings/before-layout/controls', $this );
 
         $this->end_controls_section();
@@ -931,6 +945,35 @@ class Listings extends Widget_Base {
 				'service!' => 'tf_carrental',
 			],
 		]);
+
+		$this->add_responsive_control( "map_width", [
+			'label'           => esc_html__( 'Map Width', 'tourfic' ),
+			'type'            => Controls_Manager::SLIDER,
+			'size_units'      => [
+				'px',
+				'%',
+			],
+			'range'           => [
+				'px'  => [
+					'min'  => 0,
+					'max'  => 1000,
+					'step' => 5,
+				],
+				'%'   => [
+					'min' => 0,
+					'max' => 100,
+				],
+			],
+			'selectors'       => [
+				"{{WRAPPER}} .tf-archive-details .tf-details-right" => 'width: {{SIZE}}{{UNIT}};',
+				"{{WRAPPER}} .tf-archive-details .tf-details-left" => 'width: calc(100% - {{SIZE}}{{UNIT}});',
+			],
+			'conditions' => $this->tf_display_conditionally([
+                'tf_hotel' => ['design-3'],
+                'tf_tours' => ['design-3'],
+                'tf_apartment' => ['design-2'],
+            ]),
+		] );
 
 		$this->end_controls_section();
 	}
@@ -3379,6 +3422,7 @@ class Listings extends Widget_Base {
         $tf_map_settings = !empty(Helper::tfopt('google-page-option')) ? Helper::tfopt('google-page-option') : "default";
         $tf_map_api = !empty(Helper::tfopt('tf-googlemapapi')) ? Helper::tfopt('tf-googlemapapi') : '';
 		$show_total_result = isset( $settings['show_total_result'] ) ? $settings['show_total_result'] : 'yes';
+		$show_sidebar = isset( $settings['show_sidebar'] ) ? $settings['show_sidebar'] : 'yes';
 		$grid_column = isset( $settings['grid_column'] ) ? absint($settings['grid_column']) : 2;
 		$listing_layout_toggle = isset( $settings['listing_layout_toggle'] ) ? $settings['listing_layout_toggle'] : 'yes';
 		if($listing_layout_toggle == 'yes'){
@@ -3417,6 +3461,7 @@ class Listings extends Widget_Base {
 								</div>
 								<!--Available rooms start -->
 								<div class="tf-archive-hotels-wrapper">
+									<?php if($show_sidebar == 'yes') : ?>
 									<div class="tf-archive-filter">
 										<div class="tf-archive-filter-sidebar">
 											<div class="tf-filter-wrapper">
@@ -3437,6 +3482,7 @@ class Listings extends Widget_Base {
 											</div>
 										</div>
 									</div>
+									<?php endif; ?>
 									<div class="tf-archive-top">
 										<?php if($show_total_result == 'yes') : ?>
 										<h5 class="tf-total-results"><?php esc_html_e("Found", "tourfic"); ?>
@@ -3456,10 +3502,13 @@ class Listings extends Widget_Base {
 										</a>
 
 										<ul class="tf-archive-view">
+											<?php if($show_sidebar == 'yes') : ?>
 											<li class="tf-archive-filter-btn">
 												<i class="ri-equalizer-line"></i>
 												<span><?php esc_html_e("All Filter", "tourfic"); ?></span>
 											</li>
+											<?php endif; ?>
+
 											<?php if($listing_layout_toggle == 'yes') : ?>
 											<li class="tf-archive-view-item tf-archive-list-view <?php echo $listing_layout == "list" ? esc_attr('active') : ''; ?>" data-id="list-view">
 												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -5029,7 +5078,6 @@ class Listings extends Widget_Base {
 								<?php Helper::tourfic_posts_navigation($query, $pagination_prev_label, $pagination_next_label); ?>
 							</div>
 						<?php endif; ?>
-                </div>
 					</div>
 					<?php do_action("tf_car_archive_card_items_after"); ?>
 				</div>
