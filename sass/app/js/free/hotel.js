@@ -693,71 +693,63 @@
 
             });
         }
-        // $(document).on('click', 'form .tf-hotel-booking-popup-btn', function (e) {
-        //     e.preventDefault();
-        //     var $this = $(this);
+        $(document).on('click', 'form .tf-hotel-booking-popup-btn', function (e) {
+            e.preventDefault();
+            var $this = $(this);
 
-        //     hotelPopupBooking($this);
-        // });
-
-        setTimeout(function() {
-            $(document).on('click', 'form .tf-hotel-booking-popup-btn', function (e) {
-                e.preventDefault();
-                var $this = $(this);
-                hotelPopupBooking($this);
-            });
-        }, 300); // Delay just to ensure DOM is updated
+            hotelPopupBooking($this);
+        });
         
 
-        $(document).on('submit', 'form.tf-room', function (e) {
-            e.preventDefault();
+        // $(document).on('submit', 'form.tf-room', function (e) {
+        //     e.preventDefault();
 
-            var $this = $(this);
-            var formData = new FormData(this);
+        //     var $this = $(this);
+        //     var formData = new FormData(this);
 
-            // if ($(this).closest('.reserve').find('select[name=hotel_room_selected] option').filter(':selected').val()) {
-            //     var room = $(this).closest('.reserve').find('select[name=hotel_room_selected] option').filter(':selected').val();
-            //     var deposit = $(this).closest('.room-submit-wrap').find('input[name=make_deposit]').is(':checked');
-            // } else {
-            //     var room = $("#hotel_room_number").val();
-            // }
-            var deposit = $this.find("input[name=hotel_room_depo]").val();
-            var airport_service = $this.find('[name="airport_service"]:checked').val();
+        //     // if ($(this).closest('.reserve').find('select[name=hotel_room_selected] option').filter(':selected').val()) {
+        //     //     var room = $(this).closest('.reserve').find('select[name=hotel_room_selected] option').filter(':selected').val();
+        //     //     var deposit = $(this).closest('.room-submit-wrap').find('input[name=make_deposit]').is(':checked');
+        //     // } else {
+        //     //     var room = $("#hotel_room_number").val();
+        //     // }
+        //     var deposit = $this.find("input[name=hotel_room_depo]").val();
+        //     var airport_service = $this.find('[name="airport_service"]:checked').val();
 
-            formData.append('action', 'tf_hotel_booking');
-            formData.append('_ajax_nonce', tf_params.nonce);
-            formData.append('deposit', deposit);
-            formData.append('airport_service', airport_service);
+        //     formData.append('action', 'tf_hotel_booking');
+        //     formData.append('_ajax_nonce', tf_params.nonce);
+        //     formData.append('deposit', deposit);
+        //     formData.append('airport_service', airport_service);
 
 
-            $.ajax({
-                type: 'post',
-                url: tf_params.ajax_url,
-                data: formData,
-                processData: false,
-                contentType: false,
-                beforeSend: function (data) {
-                    $this.block({
-                        message: null,
-                        overlayCSS: {
-                            background: "#fff",
-                            opacity: .5
-                        }
-                    });
-                    $('#tour_room_details_loader').show();
-                    $('.tf-notice-wrapper').html("").hide();
-                },
-                error: function (data) {
-                    console.log(data);
-                },
-                complete: function (data) {
-                    $this.unblock()
-                    $('#tour_room_details_loader').hide();
-                    $('.tf-withoutpayment-booking').removeClass('show');
-                    $this.find('.tf-withoutpayment-booking-confirm').addClass('show');
-                },
-            })
-        });
+        //     $.ajax({
+        //         type: 'post',
+        //         url: tf_params.ajax_url,
+        //         data: formData,
+        //         processData: false,
+        //         contentType: false,
+        //         beforeSend: function (data) {
+        //             $this.block({
+        //                 message: null,
+        //                 overlayCSS: {
+        //                     background: "#fff",
+        //                     opacity: .5
+        //                 }
+        //             });
+        //             $('#tour_room_details_loader').show();
+        //             $('.tf-notice-wrapper').html("").hide();
+        //         },
+        //         error: function (data) {
+        //             console.log(data);
+        //         },
+        //         complete: function (data) {
+        //             $this.unblock()
+        //             $('#tour_room_details_loader').hide();
+        //             $('.tf-withoutpayment-booking').removeClass('show');
+        //             $this.find('.tf-withoutpayment-booking-confirm').addClass('show');
+        //         },
+        //     })
+        // });
 
 
         $(document).on("change", "[name='airport_service']", function (e) {
