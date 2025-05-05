@@ -693,18 +693,21 @@
 
             });
         }
-        $(document).on('click', 'form .tf-hotel-booking-popup-btn', function (e) {
-            e.preventDefault();
-            var $this = $(this);
+        // $(document).on('click', 'form .tf-hotel-booking-popup-btn', function (e) {
+        //     e.preventDefault();
+        //     var $this = $(this);
 
-            hotelPopupBooking($this);
-        });
+        //     hotelPopupBooking($this);
+        // });
 
-        $('form .tf-hotel-booking-popup-btn').on("click", function () {
-            e.preventDefault();
-            var $this = $(this);
+        document.addEventListener('click', function(e) {
+            if (e.target && e.target.matches('.tf-hotel-booking-popup-btn')) {
+                e.preventDefault();
+                
+                var $this = $(this);
 
-            hotelPopupBooking($this);
+                hotelPopupBooking($this);
+            }
         });
         
 
