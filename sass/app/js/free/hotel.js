@@ -584,7 +584,7 @@
         * @Author Foysal
         */
         const hotelPopupBooking = ($this) => {
-            alert("Click");
+
             var tf_room_booking_nonce = $("input[name=tf_room_booking_nonce]").val();
             var post_id = $('input[name=post_id]').val();
             var roomnumber = $this.closest('.reserve').find('select[name=hotel_room_selected]').val();
@@ -651,8 +651,8 @@
                     $('#tour_room_details_loader').show();
                 },
                 complete: function (data) {
-                    // $this.closest(".room-submit-wrap").siblings(".tf-withoutpayment-booking").find('.tf-hotel-booking-content').show()
-                    // $this.unblock();
+                    $this.closest(".room-submit-wrap").siblings(".tf-withoutpayment-booking").find('.tf-hotel-booking-content').show()
+                    $this.unblock();
                 },
                 success: function (data) {
                     $this.unblock();
@@ -693,12 +693,21 @@
 
             });
         }
-        $(document).on('click', '.tf-hotel-booking-popup-btn', function (e) {
-            e.preventDefault();
-            var $this = $(this);
+        // $(document).on('click', 'form .tf-hotel-booking-popup-btn', function (e) {
+        //     e.preventDefault();
+        //     var $this = $(this);
 
-            hotelPopupBooking($this);
-        });
+        //     hotelPopupBooking($this);
+        // });
+
+        setTimeout(function() {
+            $(document).on('click', 'form .tf-hotel-booking-popup-btn', function (e) {
+                e.preventDefault();
+                var $this = $(this);
+                hotelPopupBooking($this);
+            });
+        }, 300); // Delay just to ensure DOM is updated
+        
 
         $(document).on('submit', 'form.tf-room', function (e) {
             e.preventDefault();
