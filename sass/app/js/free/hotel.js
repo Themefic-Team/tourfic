@@ -141,7 +141,6 @@
          * tf_hotel_booking
          */
         const hotelPopupRoomBooking = ($this) => {
-            var $this = $(this);
 
             var tf_room_booking_nonce = $("input[name=tf_room_booking_nonce]").val();
             var post_id = $('input[name=post_id]').val();
