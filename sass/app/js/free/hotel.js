@@ -140,7 +140,10 @@
          *
          * tf_hotel_booking
          */
-        const hotelPopupRoomBooking = ($this) => {
+        $('body').on('click', '.hotel-room-book', function (e) {
+            e.preventDefault();
+
+            var $this = $(this);
 
             var tf_room_booking_nonce = $("input[name=tf_room_booking_nonce]").val();
             var post_id = $('input[name=post_id]').val();
@@ -220,7 +223,7 @@
                     } else {
 
                         if (response.redirect_to) {
-                            // window.location.replace(response.redirect_to);
+                            window.location.replace(response.redirect_to);
                         } else {
                             jQuery(document.body).trigger('added_to_cart');
                             $.fancybox.close();
@@ -233,13 +236,7 @@
                 },
 
             });
-        }
 
-        document.addEventListener('click', function(e) {
-            if (e.target && e.target.matches('.hotel-room-book')) {
-                e.preventDefault();
-                hotelPopupRoomBooking(jQuery(e.target));
-            }
         });
 
         /**
@@ -696,11 +693,11 @@
 
             });
         }
-        document.addEventListener('click', function(e) {
-            if (e.target && e.target.matches('.tf-hotel-booking-popup-btn')) {
-                e.preventDefault();
-                hotelPopupBooking(jQuery(e.target));
-            }
+        $('body').on('click', '.tf-hotel-booking-popup-btn', function (e) {
+            e.preventDefault();
+            var $this = $(this);
+
+            hotelPopupBooking($this);
         });
 
         $(document).on('submit', 'form.tf-room', function (e) {
