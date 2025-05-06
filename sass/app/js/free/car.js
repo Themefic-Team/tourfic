@@ -278,7 +278,7 @@
         * Car Archive Booking Popup
         * @author Jahid
         */
-        $(document).on('click', '.tf-car-quick-booking', function (e) {
+        $('body').on('click', '.tf-car-quick-booking', function (e) {
             e.preventDefault();
             $this = $(this);
             $('.tf-booking-content-wraper').html("");

@@ -64,7 +64,7 @@
          *
          * tf_tours_booking
          */
-        $(document).on('submit', 'form.tf_tours_booking', function (e) {
+        $('body').on('submit', 'form.tf_tours_booking', function (e) {
             e.preventDefault();
 
             var $this = $(this);
