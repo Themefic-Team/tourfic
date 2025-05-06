@@ -11825,6 +11825,11 @@ div#tf-destinationautocomplete-list div:before {
 .page-template-tf-search__two .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content .tf-deposit-content {
   text-align: right;
 }
+.tf-single-template__two .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content .tf-deposit-content .room-deposit-wrap,
+.tf-archive-template__two .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content .tf-deposit-content .room-deposit-wrap,
+.page-template-tf-search__two .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content .tf-deposit-content .room-deposit-wrap {
+  margin-bottom: 10px;
+}
 .tf-single-template__two .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content .tf-deposit-content label,
 .tf-archive-template__two .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content .tf-deposit-content label,
 .page-template-tf-search__two .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content .tf-deposit-content label {
