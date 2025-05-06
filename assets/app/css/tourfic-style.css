@@ -11846,6 +11846,7 @@ div#tf-destinationautocomplete-list div:before {
 .tf-archive-template__two .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content a.tf_btn,
 .page-template-tf-search__two .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content a.tf_btn {
   margin-top: auto;
+  float: right;
 }
 .tf-single-template__two .tf-available-rooms-wrapper .tf-available-room-off,
 .tf-archive-template__two .tf-available-rooms-wrapper .tf-available-room-off,

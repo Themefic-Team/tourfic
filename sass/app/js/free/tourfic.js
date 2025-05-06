@@ -2006,10 +2006,10 @@
             $(".tf-booking-tab-menu ul li:first-child").addClass("active");
             // Reset Content
             $(".tf-booking-content").hide();
-            $(".tf-booking-content:first").show();
+            $(".tf-booking-content.show").show();
             // Reset Pagination
             $(".tf-control-pagination").hide();
-            $(".tf-control-pagination:first").show();
+            $(".tf-control-pagination.show").show();
         });
 
         /*
