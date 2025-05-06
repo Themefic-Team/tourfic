@@ -5,6 +5,8 @@ namespace Tourfic\App\Templates;
 // don't load directly
 defined( 'ABSPATH' ) || exit;
 
+use Tourfic\Classes\Helper;
+
 class Template_Builder {
 	use \Tourfic\Traits\Singleton;
 
@@ -17,6 +19,7 @@ class Template_Builder {
         add_action('admin_footer', array($this, 'tf_template_builder_add_popup_html'), 9);
         add_action('wp_ajax_tf_get_template_data', array($this, 'tf_get_template_data_callback'));
         add_action('wp_ajax_tf_get_template_options', array($this, 'tf_get_template_options_callback'));
+        add_action('wp_ajax_tf_update_term_options', array($this, 'tf_update_term_options_callback'));
         add_action('wp_ajax_tf_save_template_builder', array($this, 'tf_save_template_builder_callback'));
         add_filter('template_include', array($this, 'tf_template_builder_custom_template'));
         add_action('save_post_tf_template_builder', [$this, 'enforce_elementor_template_on_save'], 20, 3);
@@ -104,9 +107,8 @@ class Template_Builder {
 
 		if($post->post_type === 'tf_template_builder' && isset($actions['edit'])){
 			$actions['edit'] = sprintf(
-				'<a title="%1$s" aria-label="%1$s" data-url="%2$s" href="#">%1$s</a>',
-				esc_html__('Edit', 'tourfic'),
-				$this->get_edit_url($post->ID)
+				'<a title="%1$s" aria-label="%1$s" href="#">%1$s</a>',
+				esc_html__('Edit', 'tourfic')
 			);
 		}
 
@@ -155,21 +157,6 @@ class Template_Builder {
 		}
 	}
 
-	public function get_edit_url($post_id) {
-
-		$url = add_query_arg(
-			[
-				'post'   => $post_id,
-				'action' => 'edit',
-			],
-			admin_url('post.php')
-		);
-
-		$url = apply_filters('tf_template_builder_url_edit', $url, $post_id, $this);
-
-		return $url;
-	}
-
     function tf_template_builder_add_popup_html() {
         global $pagenow, $post_type;
         
@@ -195,25 +182,48 @@ class Template_Builder {
                                     </div>
                                 </div>
 
-                                <div class="tf-field tf-field-select">
-                                    <label for="tf-template-service" class="tf-field-label"><?php echo esc_html__('Service', 'tourfic'); ?></label>
-                                    <div class="tf-fieldset">
-                                        <select name="tf_template_service" id="tf-template-service" class="tf-select">
-                                            <option value="tf_hotel"><?php echo esc_html__('Hotel', 'tourfic'); ?></option>
-                                            <option value="tf_tours"><?php echo esc_html__('Tour', 'tourfic'); ?></option>
-                                            <option value="tf_apartment"><?php echo esc_html__('Apartment', 'tourfic'); ?></option>
-                                            <option value="tf_carrental"><?php echo esc_html__('Car Rental', 'tourfic'); ?></option>
-                                        </select>
+                                <div class="tf-field-wrapper">
+                                    <div class="tf-field tf-field-select">
+                                        <label for="tf-template-service" class="tf-field-label"><?php echo esc_html__('Service', 'tourfic'); ?></label>
+                                        <div class="tf-fieldset">
+                                            <select name="tf_template_service" id="tf-template-service" class="tf-select">
+                                                <option value="tf_hotel"><?php echo esc_html__('Hotel', 'tourfic'); ?></option>
+                                                <option value="tf_tours"><?php echo esc_html__('Tour', 'tourfic'); ?></option>
+                                                <option value="tf_apartment"><?php echo esc_html__('Apartment', 'tourfic'); ?></option>
+                                                <option value="tf_carrental"><?php echo esc_html__('Car Rental', 'tourfic'); ?></option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="tf-field tf-field-select">
+                                        <label for="tf-template-type" class="tf-field-label"><?php echo esc_html__('Type', 'tourfic'); ?></label>
+                                        <div class="tf-fieldset">
+                                            <select name="tf_template_type" id="tf-template-type" class="tf-select">
+                                                <option value="archive"><?php echo esc_html__('Archive', 'tourfic'); ?></option>
+                                                <option value="single"><?php echo esc_html__('Single', 'tourfic'); ?></option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
-
-                                <div class="tf-field tf-field-select">
-                                    <label for="tf-template-type" class="tf-field-label"><?php echo esc_html__('Type', 'tourfic'); ?></label>
-                                    <div class="tf-fieldset">
-                                        <select name="tf_template_type" id="tf-template-type" class="tf-select">
-                                            <option value="archive"><?php echo esc_html__('Archive', 'tourfic'); ?></option>
-                                            <option value="single"><?php echo esc_html__('Single', 'tourfic'); ?></option>
-                                        </select>
+                                
+                                <div class="tf-field-wrapper">
+                                    <div class="tf-field tf-field-select tf-field-texonomy">
+                                        <label for="tf-texonomy-type" class="tf-field-label"><?php echo esc_html__('Archive Type', 'tourfic'); ?></label>
+                                        <div class="tf-fieldset">
+                                            <select name="tf_texonomy_type" id="tf-texonomy-type" class="tf-select">
+                                                <option value="all"><?php echo esc_html__('All Archive', 'tourfic'); ?></option>
+                                                <?php foreach (Helper::get_all_taxonomies() as $taxonomy => $taxonomy_data) : ?>
+                                                    <option value="<?php echo esc_attr($taxonomy); ?>"><?php echo esc_html($taxonomy_data->label); ?></option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="tf-field tf-field-select tf-field-term" style="display: none;">
+                                        <label for="tf-taxonomy-term" class="tf-field-label"><?php echo esc_html__('Taxonomy Term', 'tourfic'); ?></label>
+                                        <div class="tf-fieldset">
+                                            <select name="tf_taxonomy_term" id="tf-taxonomy-term" class="tf-select"></select>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -319,7 +329,10 @@ class Template_Builder {
         }
     }
 
-    // Add this new method to your class:
+    /* 
+     * Template markup change on service & type change
+     * Taxonomy markup change on service & type change
+     */
     public function tf_get_template_options_callback() {
         check_ajax_referer('updates', 'nonce');
         
@@ -534,9 +547,81 @@ class Template_Builder {
         }
         
         $markup .= '</ul></div>';
+
+        //taxonomy types
+        $taxonomy_markup = '';
+        if($type == 'archive'){
+            $taxonomy_markup .= '<label for="tf-texonomy-type" class="tf-field-label">'. esc_html__('Archive Type', 'tourfic') .'</label>';
+        } elseif($type == 'single'){
+            $taxonomy_markup .= '<label for="tf-texonomy-type" class="tf-field-label">'. esc_html__('Single Type', 'tourfic') .'</label>';
+        }
+        $taxonomy_markup .= '<div class="tf-fieldset">';
+        $taxonomy_markup .= '<select name="tf_texonomy_type" id="tf-texonomy-type" class="tf-select">';
+
+        if($type == 'archive'){
+            $taxonomy_markup .= '<option value="all">'. esc_html__('All Archives', 'tourfic') .'</option>';
+        } elseif($type == 'single'){
+            $taxonomy_markup .= '<option value="all">'. esc_html__('All Single', 'tourfic') .'</option>';
+        }
+
+        foreach (Helper::get_all_taxonomies($service) as $taxonomy => $taxonomy_data) {
+            $taxonomy_markup .= '<option value="'. esc_attr($taxonomy) .'">'. esc_html($taxonomy_data->label). '</option>';
+        }
+        $taxonomy_markup .= '</select>';
+        $taxonomy_markup .= '</div>';
         
         wp_send_json_success([
             'markup' => $markup,
+            'taxonomy_markup' => $taxonomy_markup
+        ]);
+    }
+
+    /*
+     * Term markup change on taxonomy change
+     */
+    public function tf_update_term_options_callback() {
+        check_ajax_referer('updates', 'nonce');
+        
+        $taxonomy = !empty($_POST['taxonomy']) ? sanitize_text_field($_POST['taxonomy']) : '';
+        $post_id = !empty($_POST['postId']) ? sanitize_text_field($_POST['postId']) : '';
+        
+        if (empty($taxonomy)) {
+            wp_send_json_error(['message' => 'Taxonomy not provided']);
+        }
+        
+        if ($taxonomy === 'all') {
+            wp_send_json_success([
+                'term_markup' => ''
+            ]);
+        }
+
+        // Get taxonomy object to access its label
+        $taxonomy_object = get_taxonomy($taxonomy);
+        $taxonomy_label = $taxonomy_object ? $taxonomy_object->labels->name : __('Terms', 'tourfic');
+        
+        $terms = get_terms([
+            'taxonomy' => $taxonomy,
+            'hide_empty' => false,
+        ]);
+        
+        if (is_wp_error($terms)) {
+            wp_send_json_error(['message' => $terms->get_error_message()]);
+        }
+        if(!empty($post_id)){
+            $selected_term = get_post_meta($post_id, 'tf_taxonomy_term', true);
+        }
+        
+        $term_markup = '';
+        $term_markup .= '<option value="all"' . selected('all', $selected_term, false) . '>' . sprintf(esc_html__('All %s', 'tourfic'), $taxonomy_label) . '</option>';
+        if (!empty($terms)) {
+            foreach ($terms as $term) {
+                $selected = selected($term->slug, $selected_term, false);
+                $term_markup .= '<option value="' . esc_attr($term->slug) . '"' . $selected . '>' . esc_html($term->name) . '</option>';
+            }
+        }
+        
+        wp_send_json_success([
+            'term_markup' => $term_markup
         ]);
     }
 
@@ -556,6 +641,8 @@ class Template_Builder {
             'post_title' => $post->post_title,
             'tf_template_service' => get_post_meta($post->ID, 'tf_template_service', true),
             'tf_template_type' => get_post_meta($post->ID, 'tf_template_type', true),
+            'tf_texonomy_type' => get_post_meta($post->ID, 'tf_texonomy_type', true),
+            'tf_taxonomy_term' => get_post_meta($post->ID, 'tf_taxonomy_term', true),
             'tf_template_active' => get_post_meta($post->ID, 'tf_template_active', true),
             'tf_template_design' => get_post_meta($post->ID, 'tf_template_design', true),
         );
@@ -585,6 +672,8 @@ class Template_Builder {
         if (!is_wp_error($post_id)) {
             $tf_template_service = !empty($_POST['tf_template_service']) ? sanitize_text_field($_POST['tf_template_service']) : '';
             $tf_template_type = !empty($_POST['tf_template_type']) ? sanitize_text_field($_POST['tf_template_type']) : '';
+            $tf_texonomy_type = !empty($_POST['tf_texonomy_type']) ? sanitize_text_field($_POST['tf_texonomy_type']) : '';
+            $tf_taxonomy_term = !empty($_POST['tf_taxonomy_term']) ? sanitize_text_field($_POST['tf_taxonomy_term']) : '';
             $tf_template_active = isset($_POST['tf_template_active']) ? '1' : '0';
             $tf_template_design = !empty($_POST['tf_template_design']) ? sanitize_text_field($_POST['tf_template_design']) : '';
             
@@ -594,6 +683,8 @@ class Template_Builder {
             }
             update_post_meta($post_id, 'tf_template_service', $tf_template_service);
             update_post_meta($post_id, 'tf_template_type', $tf_template_type);
+            update_post_meta($post_id, 'tf_texonomy_type', $tf_texonomy_type);
+            update_post_meta($post_id, 'tf_taxonomy_term', $tf_taxonomy_term);
             update_post_meta($post_id, 'tf_template_active', $tf_template_active);
             update_post_meta($post_id, 'tf_template_design', $tf_template_design);
 

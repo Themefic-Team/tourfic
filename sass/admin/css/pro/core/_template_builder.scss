@@ -126,6 +126,18 @@ Modal
             }
         }
 
+        .tf-field-wrapper{
+            position: relative;
+            margin: 0 -10px;
+            @include flexbox();
+
+            .tf-field{
+                width: calc(100%/2 - 20px);
+                max-width: 100%;
+                padding: 0 10px;
+            }
+        }
+
         .tf-field {
             margin-bottom: 20px;
             position: relative;

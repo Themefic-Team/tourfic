@@ -63,12 +63,19 @@
                 },
                 beforeSend: function() {
                     $('.tf-template-preview-loader').show();
+                    $('select[name="tf_texonomy_type"]').attr('disabled', 'disabled');
+                    $('select[name="tf_taxonomy_term"]').attr('disabled', 'disabled');
                 },
                 success: function(response) {
                     $('.tf-template-preview-loader').hide();
+                    $('select[name="tf_texonomy_type"]').removeAttr('disabled');
+                    $('.tf-field-term').hide();
+                    $('select[name="tf_taxonomy_term"]').removeAttr('disabled');
+                    $('select[name="tf_taxonomy_term"]').html('');
                     if (response.success) {
                         // Update the template options markup
                         $('.tf-field-imageselect').html(response.data.markup);
+                        $('.tf-field-texonomy').html(response.data.taxonomy_markup);
                         
                         // Add subtitle if single template
                         // if (type === 'single') {
@@ -81,6 +88,10 @@
                 error: function(xhr, status, error) {
                     notyf.error('Error loading template options: ' + error);
                     $('.tf-template-preview-loader').hide();
+                    $('select[name="tf_texonomy_type"]').removeAttr('disabled');
+                    $('.tf-field-term').hide();
+                    $('select[name="tf_taxonomy_term"]').removeAttr('disabled');
+                    $('select[name="tf_taxonomy_term"]').html('');
                     // Fallback to blank option
                     $('.tf-field-imageselect').html(`
                         <label class="tf-field-label">${type == 'single' ? 'Single Template' : 'Archive Template'}</label>
@@ -99,6 +110,45 @@
                             </ul>
                         </div>
                     `);
+                }
+            });
+        });
+
+        $(document).on('change', 'select[name="tf_texonomy_type"]', function(e) {
+            e.preventDefault();
+            var postId = $('#tf-post-id').val();
+            var service = $('#tf-template-service').val();
+            var type = $('#tf-template-type').val();
+            var taxonomy = $(this).val();
+            
+            $.ajax({
+                url: tf_pro_params.ajax_url,
+                type: 'POST',
+                data: {
+                    action: 'tf_update_term_options',
+                    postId: postId,
+                    service: service,
+                    type: type,
+                    taxonomy: taxonomy,
+                    nonce: tf_pro_params.tf_pro_nonce
+                },
+                beforeSend: function() {
+                    $('select[name="tf_taxonomy_term"]').attr('disabled', 'disabled');
+                },
+                success: function(response) {
+                    $('select[name="tf_taxonomy_term"]').removeAttr('disabled');
+                    if (response.success) {
+                        if (response.data.term_markup) {
+                            $('.tf-field-term').show();
+                            $('select[name="tf_taxonomy_term"]').html(response.data.term_markup);
+                        } else {
+                            $('.tf-field-term').hide();
+                        }
+                    }
+                },
+                error: function(xhr, status, error) {
+                    notyf.error('Error loading template options: ' + error);
+                    $('select[name="tf_taxonomy_term"]').removeAttr('disabled');
                 }
             });
         });
@@ -123,9 +173,13 @@
                         $('#tf-template-name').val(data.post_title);
                         $('#tf-template-service').val(data.tf_template_service);
                         $('#tf-template-type').val(data.tf_template_type);
+                        $('#tf-texonomy-type').val(data.tf_texonomy_type);
+                        if(data.tf_texonomy_type != 'all'){
+                            $('#tf-texonomy-type').change();
+                        }
                         $('#tf-template-active').prop('checked', data.tf_template_active == '1');
                         $('.tf-template-preview').hide();
-                        
+                        $('.tf-field-term').show();
                         tf_open_template_popup();
                     }
                 },

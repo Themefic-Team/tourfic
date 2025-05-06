@@ -3161,6 +3161,15 @@ class Helper {
         return $mimes;
     }
 
+    static function get_all_taxonomies( $post_type = 'tf_hotel' ){
+        $taxonomies = get_object_taxonomies( $post_type, 'objects' );
+        $taxonomies = array_filter( $taxonomies, function ( $taxonomy ) {
+            return ! in_array( $taxonomy->name, array( 'post_tag', 'category' ) );
+        } );
+
+        return $taxonomies;
+    }
+
 	static function tf_var_dump( $var ) {
 		echo '<pre>';
 		var_dump( $var );
