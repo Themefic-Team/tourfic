@@ -65,12 +65,11 @@
 						echo '<div class="tf-nothing-found" data-post-count="0">' .esc_html__("No Apartments Found!", "tourfic"). '</div>';
 					}
 					?>
+					<div class="tf_posts_navigation">
+						<?php Helper::tourfic_posts_navigation(); ?>
+					</div>
 				</div>
 				<?php do_action("tf_apartment_archive_card_items_after"); ?>
-				
-				<div class="tf_posts_navigation">
-					<?php Helper::tourfic_posts_navigation(); ?>
-				</div>
 
 			</div>
 			<!-- End Content -->
