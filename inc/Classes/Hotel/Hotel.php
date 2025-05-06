@@ -2697,6 +2697,11 @@ class Hotel {
 
             </form>
 		<?php } elseif ( $tf_hotel_selected_template == "design-2" ) { ?>
+			<?php
+			$check_in_out_dates = ! empty( $check_in_out ) ? array_map( 'trim', explode( '-', $check_in_out ) ) : [];
+			$default_check_in_date = ! empty( $check_in_out_dates[0] ) ? \DateTime::createFromFormat( 'Y/m/d', $check_in_out_dates[0] ) : null;
+			$default_check_out_date = ! empty( $check_in_out_dates[1] ) ? \DateTime::createFromFormat( 'Y/m/d', $check_in_out_dates[1] ) : null;
+			?>
 
             <form id="tf-single-hotel-avail" class="tf-booking-form" method="get" autocomplete="off">
 				<?php wp_nonce_field( 'check_room_avail_nonce', 'tf_room_avail_nonce' ); ?>
@@ -2704,10 +2709,10 @@ class Hotel {
                     <div class="tf-booking-form-checkin">
                         <span class="tf-booking-form-title"><?php esc_html_e( "Check in", "tourfic" ); ?></span>
                         <div class="tf-booking-date-wrap">
-                            <span class="tf-booking-date"><?php esc_html_e( "00", "tourfic" ); ?></span>
+                            <span class="tf-booking-date"><?php echo $default_check_in_date ? esc_html( $default_check_in_date->format( 'd' ) ) : esc_html__( '00', 'tourfic' ); ?></span>
                             <span class="tf-booking-month">
 								<span>
-									<?php echo esc_html( gmdate( 'M' ) ); ?>
+									<?php echo $default_check_in_date ? esc_html( $default_check_in_date->format( 'M' ) ) : esc_html( gmdate( 'M' ) ); ?>
 								</span>
 								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
 								<path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
@@ -2720,9 +2725,9 @@ class Hotel {
                     <div class="tf-booking-form-checkout">
                         <span class="tf-booking-form-title"><?php esc_html_e( "Check out", "tourfic" ); ?></span>
                         <div class="tf-booking-date-wrap">
-                            <span class="tf-booking-date"><?php esc_html_e( "00", "tourfic" ); ?></span>
+                            <span class="tf-booking-date"><?php echo $default_check_out_date ? esc_html( $default_check_out_date->format( 'd' ) ) : esc_html__( '00', 'tourfic' ); ?></span>
                             <span class="tf-booking-month">
-								<span><?php echo esc_html( gmdate( 'M' ) ); ?></span>
+								<span><?php echo $default_check_out_date ? esc_html( $default_check_out_date->format( 'M' ) ) : esc_html( gmdate( 'M' ) ); ?></span>
 								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
 								<path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
 								</svg>

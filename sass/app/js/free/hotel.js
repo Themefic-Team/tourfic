@@ -140,9 +140,41 @@
          *
          * tf_hotel_booking
          */
-        $(document).on('click', '.hotel-room-book', function (e) {
-            e.preventDefault();
+        let TfHasErrorsFlag = false;
+        $('body').on('click', '.tf-withoutpayment-booking .tf-traveller-error', function (e) {
+            let hasErrors = [];
+            let $this = $(this).closest('.tf-withoutpayment-booking');
+            $('.error-text').text("");
+            $this.find('.tf-single-travel').each(function () {
+                $(this).find('input, select').each(function () {
+                    if ($(this).attr('data-required') && $(this).attr('data-required') == 1) {
+                        if ($(this).val() == "") {
+                            hasErrors.push(true);
+                        }
+                    }
+                });
+                $(this).find('input[type="radio"], input[type="checkbox"]').each(function () {
+                    if ($(this).attr('data-required')) {
+                        const radioName = $(this).attr('name');
+                        const isChecked = $('input[name="' + radioName + '"]:checked').length > 0;
+                        if (!isChecked) {
+                            hasErrors.push(true);
+                        }
+                    }
+                });
+            });
+            if (hasErrors.includes(true)) {
+                TfHasErrorsFlag = true;
+                return false;
+            }
+            TfHasErrorsFlag = false;
+        });
 
+        $('body').on('click', '.hotel-room-book', function (e) {
+            e.preventDefault();
+            if (TfHasErrorsFlag) {
+                return false;
+            }
             var $this = $(this);
 
             var tf_room_booking_nonce = $("input[name=tf_room_booking_nonce]").val();
@@ -693,14 +725,14 @@
 
             });
         }
-        $(document).on('click', '.tf-hotel-booking-popup-btn', function (e) {
+        $('body').on('click', '.tf-hotel-booking-popup-btn', function (e) {
             e.preventDefault();
             var $this = $(this);
 
             hotelPopupBooking($this);
         });
 
-        $(document).on('submit', 'form.tf-room', function (e) {
+        $('body').on('submit', 'form.tf-room', function (e) {
             e.preventDefault();
 
             var $this = $(this);
