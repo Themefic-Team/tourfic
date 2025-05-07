@@ -17,7 +17,7 @@ class Template_Builder {
 		add_filter('manage_tf_template_builder_posts_columns', array($this, 'tf_template_set_columns'));
 		add_action('manage_tf_template_builder_posts_custom_column', array($this, 'tf_template_render_column'), 10, 2);
         add_action('admin_footer', array($this, 'tf_template_builder_add_popup_html'), 9);
-        add_action('wp_ajax_tf_get_template_data', array($this, 'tf_get_template_data_callback'));
+        add_action('wp_ajax_tf_load_template_markup', array($this, 'tf_load_template_markup_callback'));
         add_action('wp_ajax_tf_get_template_options', array($this, 'tf_get_template_options_callback'));
         add_action('wp_ajax_tf_update_term_options', array($this, 'tf_update_term_options_callback'));
         add_action('wp_ajax_tf_save_template_builder', array($this, 'tf_save_template_builder_callback'));
@@ -123,6 +123,8 @@ class Template_Builder {
 
 		$columns['service']    = esc_html__('Service', 'tourfic');
 		$columns['type']    = esc_html__('Type', 'tourfic');
+		$columns['taxonomy_type']    = esc_html__('Taxonomy Type', 'tourfic');
+		$columns['term']    = esc_html__('Term', 'tourfic');
 		$columns['status']  = esc_html__('Status', 'tourfic');
 		$columns['author']  = esc_html__('Author', 'tourfic');
 		$columns['date']    = esc_html($date_column);
@@ -133,6 +135,8 @@ class Template_Builder {
 	public function tf_template_render_column($column, $post_id) {
         $service = get_post_meta($post_id, 'tf_template_service', true);
         $template_type = get_post_meta($post_id, 'tf_template_type', true);
+        $taxonomy_type = get_post_meta($post_id, 'tf_taxonomy_type', true);
+        $taxonomy_term = get_post_meta($post_id, 'tf_taxonomy_term', true);
         $status = get_post_meta($post_id, 'tf_template_active', true);
         $service_label = [
             'tf_hotel' => esc_html__('Hotel', 'tourfic'),
@@ -149,6 +153,51 @@ class Template_Builder {
 			case 'type':
 				echo esc_html(empty($template_type) ?  '' : ucfirst($template_type));
 				break;
+
+            case 'taxonomy_type':
+                if (empty($taxonomy_type)) {
+                    echo '—';
+                } else {
+                    if ($taxonomy_type === 'all') {
+                        echo esc_html(sprintf(
+                            __('All %s', 'tourfic'), 
+                            ucfirst($template_type)
+                        ));
+                    } else {
+                        // Get taxonomy label from taxonomy object
+                        $taxonomy_object = get_taxonomy($taxonomy_type);
+                        $taxonomy_label = $taxonomy_object ? $taxonomy_object->labels->name : $taxonomy_type;
+                        echo esc_html($taxonomy_label);
+                    }
+                }
+                break;
+    
+            case 'term':
+                if (empty($taxonomy_term)) {
+                    echo '—';
+                } else {
+                    if ($taxonomy_term === 'all') {
+                        if ($taxonomy_type === 'all') {
+                            echo esc_html__('All Items', 'tourfic');
+                        } else {
+                            // For specific taxonomy type, show "All [Taxonomy]"
+                            $taxonomy_object = get_taxonomy($taxonomy_type);
+                            $taxonomy_label = $taxonomy_object ? $taxonomy_object->labels->name : $taxonomy_type;
+                            echo esc_html(sprintf(__('All %s', 'tourfic'), $taxonomy_label));
+                        }
+                    } else {
+                        // Try to get term name
+                        $term_name = $taxonomy_term;
+                        if ($taxonomy_type && $taxonomy_type !== 'all') {
+                            $term = get_term_by('slug', $taxonomy_term, $taxonomy_type);
+                            if ($term && !is_wp_error($term)) {
+                                $term_name = $term->name;
+                            }
+                        }
+                        echo esc_html($term_name);
+                    }
+                }
+                break;
 
 			case 'status':
                 $status_class = $status ? 'active' : 'inactive';
@@ -207,10 +256,10 @@ class Template_Builder {
                                 </div>
                                 
                                 <div class="tf-field-wrapper">
-                                    <div class="tf-field tf-field-select tf-field-texonomy">
-                                        <label for="tf-texonomy-type" class="tf-field-label"><?php echo esc_html__('Archive Type', 'tourfic'); ?></label>
+                                    <div class="tf-field tf-field-select tf-field-taxonomy">
+                                        <label for="tf-taxonomy-type" class="tf-field-label"><?php echo esc_html__('Archive Type', 'tourfic'); ?></label>
                                         <div class="tf-fieldset">
-                                            <select name="tf_texonomy_type" id="tf-texonomy-type" class="tf-select">
+                                            <select name="tf_taxonomy_type" id="tf-taxonomy-type" class="tf-select">
                                                 <option value="all"><?php echo esc_html__('All Archive', 'tourfic'); ?></option>
                                                 <?php foreach (Helper::get_all_taxonomies() as $taxonomy => $taxonomy_data) : ?>
                                                     <option value="<?php echo esc_attr($taxonomy); ?>"><?php echo esc_html($taxonomy_data->label); ?></option>
@@ -551,12 +600,12 @@ class Template_Builder {
         //taxonomy types
         $taxonomy_markup = '';
         if($type == 'archive'){
-            $taxonomy_markup .= '<label for="tf-texonomy-type" class="tf-field-label">'. esc_html__('Archive Type', 'tourfic') .'</label>';
+            $taxonomy_markup .= '<label for="tf-taxonomy-type" class="tf-field-label">'. esc_html__('Archive Type', 'tourfic') .'</label>';
         } elseif($type == 'single'){
-            $taxonomy_markup .= '<label for="tf-texonomy-type" class="tf-field-label">'. esc_html__('Single Type', 'tourfic') .'</label>';
+            $taxonomy_markup .= '<label for="tf-taxonomy-type" class="tf-field-label">'. esc_html__('Single Type', 'tourfic') .'</label>';
         }
         $taxonomy_markup .= '<div class="tf-fieldset">';
-        $taxonomy_markup .= '<select name="tf_texonomy_type" id="tf-texonomy-type" class="tf-select">';
+        $taxonomy_markup .= '<select name="tf_taxonomy_type" id="tf-taxonomy-type" class="tf-select">';
 
         if($type == 'archive'){
             $taxonomy_markup .= '<option value="all">'. esc_html__('All Archives', 'tourfic') .'</option>';
@@ -626,7 +675,7 @@ class Template_Builder {
     }
 
     // Get template data for editing
-    function tf_get_template_data_callback() {
+    function tf_load_template_markup_callback() {
         check_ajax_referer('updates', 'nonce');
         
         $post_id = intval($_POST['post_id']);
@@ -635,13 +684,35 @@ class Template_Builder {
         if (!$post || $post->post_type != 'tf_template_builder') {
             wp_send_json_error();
         }
+
+        //taxonomy types
+        $taxonomy_markup = '';
+        if($type == 'archive'){
+            $taxonomy_markup .= '<label for="tf-taxonomy-type" class="tf-field-label">'. esc_html__('Archive Type', 'tourfic') .'</label>';
+        } elseif($type == 'single'){
+            $taxonomy_markup .= '<label for="tf-taxonomy-type" class="tf-field-label">'. esc_html__('Single Type', 'tourfic') .'</label>';
+        }
+        $taxonomy_markup .= '<div class="tf-fieldset">';
+        $taxonomy_markup .= '<select name="tf_taxonomy_type" id="tf-taxonomy-type" class="tf-select">';
+
+        if($type == 'archive'){
+            $taxonomy_markup .= '<option value="all">'. esc_html__('All Archives', 'tourfic') .'</option>';
+        } elseif($type == 'single'){
+            $taxonomy_markup .= '<option value="all">'. esc_html__('All Single', 'tourfic') .'</option>';
+        }
+
+        foreach (Helper::get_all_taxonomies($service) as $taxonomy => $taxonomy_data) {
+            $taxonomy_markup .= '<option value="'. esc_attr($taxonomy) .'">'. esc_html($taxonomy_data->label). '</option>';
+        }
+        $taxonomy_markup .= '</select>';
+        $taxonomy_markup .= '</div>';
         
         $response = array(
             'ID' => $post->ID,
             'post_title' => $post->post_title,
             'tf_template_service' => get_post_meta($post->ID, 'tf_template_service', true),
             'tf_template_type' => get_post_meta($post->ID, 'tf_template_type', true),
-            'tf_texonomy_type' => get_post_meta($post->ID, 'tf_texonomy_type', true),
+            'tf_taxonomy_type' => get_post_meta($post->ID, 'tf_taxonomy_type', true),
             'tf_taxonomy_term' => get_post_meta($post->ID, 'tf_taxonomy_term', true),
             'tf_template_active' => get_post_meta($post->ID, 'tf_template_active', true),
             'tf_template_design' => get_post_meta($post->ID, 'tf_template_design', true),
@@ -672,18 +743,18 @@ class Template_Builder {
         if (!is_wp_error($post_id)) {
             $tf_template_service = !empty($_POST['tf_template_service']) ? sanitize_text_field($_POST['tf_template_service']) : '';
             $tf_template_type = !empty($_POST['tf_template_type']) ? sanitize_text_field($_POST['tf_template_type']) : '';
-            $tf_texonomy_type = !empty($_POST['tf_texonomy_type']) ? sanitize_text_field($_POST['tf_texonomy_type']) : '';
+            $tf_taxonomy_type = !empty($_POST['tf_taxonomy_type']) ? sanitize_text_field($_POST['tf_taxonomy_type']) : '';
             $tf_taxonomy_term = !empty($_POST['tf_taxonomy_term']) ? sanitize_text_field($_POST['tf_taxonomy_term']) : '';
             $tf_template_active = isset($_POST['tf_template_active']) ? '1' : '0';
             $tf_template_design = !empty($_POST['tf_template_design']) ? sanitize_text_field($_POST['tf_template_design']) : '';
             
             // If this template is being activated, deactivate all others for the same service and type
             if ($tf_template_active === '1') {
-                $this->deactivate_other_templates($post_id, $tf_template_service, $tf_template_type);
+                $this->deactivate_other_templates($post_id, $tf_template_service, $tf_template_type, $tf_taxonomy_type, $tf_taxonomy_term);
             }
             update_post_meta($post_id, 'tf_template_service', $tf_template_service);
             update_post_meta($post_id, 'tf_template_type', $tf_template_type);
-            update_post_meta($post_id, 'tf_texonomy_type', $tf_texonomy_type);
+            update_post_meta($post_id, 'tf_taxonomy_type', $tf_taxonomy_type);
             update_post_meta($post_id, 'tf_taxonomy_term', $tf_taxonomy_term);
             update_post_meta($post_id, 'tf_template_active', $tf_template_active);
             update_post_meta($post_id, 'tf_template_design', $tf_template_design);
@@ -871,7 +942,7 @@ class Template_Builder {
     /**
      * Deactivate other templates for the same service and type
      */
-    private function deactivate_other_templates($current_post_id, $service, $type) {
+    private function deactivate_other_templates($current_post_id, $service, $type, $tf_taxonomy_type, $tf_taxonomy_term) {
         $args = array(
             'post_type' => 'tf_template_builder',
             'post_status' => 'publish',
@@ -890,7 +961,15 @@ class Template_Builder {
                 array(
                     'key' => 'tf_template_active',
                     'value' => '1',
-                )
+                ),
+                array(
+                    'key' => 'tf_taxonomy_type',
+                    'value' => $tf_taxonomy_type,
+                ),
+                array(
+                    'key' => 'tf_taxonomy_term',
+                    'value' => $tf_taxonomy_term,
+                ),
             )
         );
         
@@ -898,6 +977,14 @@ class Template_Builder {
         
         foreach ($templates as $template) {
             update_post_meta($template->ID, 'tf_template_active', '0');
+
+            // Add admin notice for deactivated templates
+            $deactivated_notice = sprintf(
+                __('Template "%s" was deactivated because a new active template was created with the same criteria.', 'tourfic'),
+                get_the_title($template->ID)
+            );
+            
+            set_transient('tf_template_deactivated_' . $template->ID, $deactivated_notice, 60);
         }
     }
 

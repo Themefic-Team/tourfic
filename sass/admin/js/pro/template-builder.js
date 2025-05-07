@@ -63,19 +63,19 @@
                 },
                 beforeSend: function() {
                     $('.tf-template-preview-loader').show();
-                    $('select[name="tf_texonomy_type"]').attr('disabled', 'disabled');
+                    $('select[name="tf_taxonomy_type"]').attr('disabled', 'disabled');
                     $('select[name="tf_taxonomy_term"]').attr('disabled', 'disabled');
                 },
                 success: function(response) {
                     $('.tf-template-preview-loader').hide();
-                    $('select[name="tf_texonomy_type"]').removeAttr('disabled');
+                    $('select[name="tf_taxonomy_type"]').removeAttr('disabled');
                     $('.tf-field-term').hide();
                     $('select[name="tf_taxonomy_term"]').removeAttr('disabled');
                     $('select[name="tf_taxonomy_term"]').html('');
                     if (response.success) {
                         // Update the template options markup
                         $('.tf-field-imageselect').html(response.data.markup);
-                        $('.tf-field-texonomy').html(response.data.taxonomy_markup);
+                        $('.tf-field-taxonomy').html(response.data.taxonomy_markup);
                         
                         // Add subtitle if single template
                         // if (type === 'single') {
@@ -88,7 +88,7 @@
                 error: function(xhr, status, error) {
                     notyf.error('Error loading template options: ' + error);
                     $('.tf-template-preview-loader').hide();
-                    $('select[name="tf_texonomy_type"]').removeAttr('disabled');
+                    $('select[name="tf_taxonomy_type"]').removeAttr('disabled');
                     $('.tf-field-term').hide();
                     $('select[name="tf_taxonomy_term"]').removeAttr('disabled');
                     $('select[name="tf_taxonomy_term"]').html('');
@@ -114,7 +114,7 @@
             });
         });
 
-        $(document).on('change', 'select[name="tf_texonomy_type"]', function(e) {
+        $(document).on('change', 'select[name="tf_taxonomy_type"]', function(e) {
             e.preventDefault();
             var postId = $('#tf-post-id').val();
             var service = $('#tf-template-service').val();
@@ -158,7 +158,7 @@
                 url: tf_pro_params.ajax_url,
                 type: 'POST',
                 data: {
-                    action: 'tf_get_template_data',
+                    action: 'tf_load_template_markup',
                     post_id: post_id,
                     nonce: tf_pro_params.tf_pro_nonce
                 },
@@ -173,9 +173,9 @@
                         $('#tf-template-name').val(data.post_title);
                         $('#tf-template-service').val(data.tf_template_service);
                         $('#tf-template-type').val(data.tf_template_type);
-                        $('#tf-texonomy-type').val(data.tf_texonomy_type);
-                        if(data.tf_texonomy_type != 'all'){
-                            $('#tf-texonomy-type').change();
+                        $('#tf-taxonomy-type').val(data.tf_taxonomy_type);
+                        if(data.tf_taxonomy_type != 'all'){
+                            $('#tf-taxonomy-type').change();
                         }
                         $('#tf-template-active').prop('checked', data.tf_template_active == '1');
                         $('.tf-template-preview').hide();
@@ -242,7 +242,9 @@
             $('#tf-post-id').val('');
             $('#tf-template-name').val('');
             $('#tf-template-service').val($('#tf-template-service option:first').val());
-            $('#tf-template-type').val($('#tf-template-type option:first').val()).change();
+            $('#tf-template-type').val($('#tf-template-type option:first').val());
+            $('#tf-taxonomy-type').val($('#tf-taxonomy-type option:first').val());
+            $('#tf-taxonomy-term').val($('#tf-taxonomy-term option:first').val());
             $('#tf-template-active').prop('checked', false);
             $('.tf-template-preview').show();
             $('input[name="tf_template_design"][value="blank"]').prop('checked', true);
