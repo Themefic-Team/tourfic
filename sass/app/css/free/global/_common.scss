@@ -1418,6 +1418,11 @@ li.tf-filter-item {
             display: flex;
             justify-content: space-between;
             margin-bottom: 24px;
+            @media #{$max768}{
+                padding-top: 12px;
+                padding-bottom: 12px;
+                align-items: center;
+            }
             .tf-booking-tab-menu{
                 ul{
                     margin: 0;

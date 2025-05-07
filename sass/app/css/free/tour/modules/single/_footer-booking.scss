@@ -84,6 +84,7 @@
             
                         @media #{$max768}{
                             flex-grow: 1;
+                            height: 44px;
                         }
                     }
                 }
@@ -177,6 +178,11 @@
             }
         }
         &__two{
+            .tf_tours_main_booking{
+                @media #{$max768}{
+                    display: none;
+                }
+            }
             .tf-bottom-booking-bar {
                 position: fixed;
                 bottom: 0;
@@ -201,19 +207,20 @@
                 }
             
                 @media #{$max768} {
-                    transform: rotateX(0);
                     z-index: 9999;
                     width: 100%;
                 }
                 &.active{
                     transform: rotateX(0deg);
                     width: 100%;
+                    @media #{$max768} {
+                        transform: rotateX(90deg);
+                    }
                 }
             
-                &.mobile-active{
-                    .tf-bottom-booking-fields{
-                        @include flexbox();
-                    }
+                &.tf-mobile-booking-form{
+                    transform: rotateX(0deg);
+                    width: 100%;
             
                     .tf-booking-popup-btn{
                         display: block;
@@ -291,6 +298,7 @@
                     display: flex;
                     @media #{$max768}{
                         justify-content: center;
+                        margin-bottom: 8px;
                     }
                     .tf-booking-form-checkinout{
                         border-right: 1px solid $color-border-lite;
