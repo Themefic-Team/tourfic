@@ -1709,8 +1709,9 @@
   align-items: center;
   gap: 24px;
   transform-origin: bottom;
-  transform: rotateX(90deg);
-  transition: all 0.3s ease-in-out;
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform 0.4s ease, opacity 0.4s ease;
 }
 @media only screen and (max-width: 1024px) {
   .single-tf_tours .tf-single-template__one .tf-bottom-booking-bar {
@@ -1724,13 +1725,15 @@
 }
 @media only screen and (max-width: 768px) {
   .single-tf_tours .tf-single-template__one .tf-bottom-booking-bar {
-    transform: rotateX(0);
+    transform: translateY(0);
+    opacity: 1;
     z-index: 9999;
     width: 100%;
   }
 }
 .single-tf_tours .tf-single-template__one .tf-bottom-booking-bar.active {
-  transform: rotateX(0deg);
+  transform: translateY(0);
+  opacity: 1;
   width: 100%;
 }
 .single-tf_tours .tf-single-template__one .tf-bottom-booking-bar.mobile-active .tf-bottom-booking-fields {
@@ -1910,8 +1913,9 @@
   align-items: center;
   gap: 24px;
   transform-origin: bottom;
-  transform: rotateX(90deg);
-  transition: all 0.3s ease-in-out;
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform 0.4s ease, opacity 0.4s ease;
   width: 100%;
   background: var(--tf-brand-lite);
   box-shadow: none;
@@ -1933,16 +1937,19 @@
   }
 }
 .single-tf_tours .tf-single-template__two .tf-bottom-booking-bar.active {
-  transform: rotateX(0deg);
+  transform: translateY(0);
   width: 100%;
+  opacity: 1;
 }
 @media only screen and (max-width: 768px) {
   .single-tf_tours .tf-single-template__two .tf-bottom-booking-bar.active {
-    transform: rotateX(90deg);
+    transform: translateY(100%);
+    opacity: 0;
   }
 }
 .single-tf_tours .tf-single-template__two .tf-bottom-booking-bar.tf-mobile-booking-form {
-  transform: rotateX(0deg);
+  transform: translateY(0);
+  opacity: 1;
   width: 100%;
 }
 .single-tf_tours .tf-single-template__two .tf-bottom-booking-bar.tf-mobile-booking-form .tf-booking-popup-btn {
@@ -1994,13 +2001,6 @@
 @media only screen and (max-width: 768px) {
   .single-tf_tours .tf-single-template__two .tf-bottom-booking-bar .tf-booking-popup-btn {
     display: none;
-  }
-}
-@media only screen and (max-width: 1024px) {
-  .single-tf_tours .tf-single-template__two .tf-bottom-booking-bar .tf-tours-booking-btn {
-    width: 100%;
-    display: flex;
-    justify-content: center;
   }
 }
 @media only screen and (max-width: 768px) {
