@@ -16035,6 +16035,10 @@ div#tf-destinationautocomplete-list div:before {
   font-size: 1.125rem;
 }
 
+.tf-archive-listing__legacy {
+  padding: 0;
+}
+
 .single-tf_apartment .tf-single-template__two .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-checkin,
 .single-tf_apartment .tf-single-template__two .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-checkout,
 .single-tf_hotel .tf-single-template__two .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-checkin,
@@ -20024,7 +20028,7 @@ div#tf-destinationautocomplete-list div:before {
 
 .tf-archive-booking-form__style-2.tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-locationautocomplete-list,
 .tf-archive-booking-form__style-2.tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-destinationautocomplete-list,
-.tf-archive-booking-form__style-2.tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-apartment-locationautocomplete-list {
+.tf-archive-booking-form__style-2.tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-apartment-location-autocomplete-list {
   position: absolute;
   left: 0;
   top: 100%;
@@ -20041,33 +20045,33 @@ div#tf-destinationautocomplete-list div:before {
 @media only screen and (max-width: 768px) {
   .tf-archive-booking-form__style-2.tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-locationautocomplete-list,
   .tf-archive-booking-form__style-2.tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-destinationautocomplete-list,
-  .tf-archive-booking-form__style-2.tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-apartment-locationautocomplete-list {
+  .tf-archive-booking-form__style-2.tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-apartment-location-autocomplete-list {
     width: 100%;
   }
 }
 
 .tf-archive-booking-form__style-2.tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-locationautocomplete-list::-webkit-scrollbar,
 .tf-archive-booking-form__style-2.tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-destinationautocomplete-list::-webkit-scrollbar,
-.tf-archive-booking-form__style-2.tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-apartment-locationautocomplete-list::-webkit-scrollbar {
+.tf-archive-booking-form__style-2.tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-apartment-location-autocomplete-list::-webkit-scrollbar {
   width: 5px;
 }
 
 .tf-archive-booking-form__style-2.tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-locationautocomplete-list::-webkit-scrollbar-thumb,
 .tf-archive-booking-form__style-2.tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-destinationautocomplete-list::-webkit-scrollbar-thumb,
-.tf-archive-booking-form__style-2.tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-apartment-locationautocomplete-list::-webkit-scrollbar-thumb {
+.tf-archive-booking-form__style-2.tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-apartment-location-autocomplete-list::-webkit-scrollbar-thumb {
   background-color: #aaa;
   border-radius: 4px;
 }
 
 .tf-archive-booking-form__style-2.tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-locationautocomplete-list::-webkit-scrollbar-track,
 .tf-archive-booking-form__style-2.tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-destinationautocomplete-list::-webkit-scrollbar-track,
-.tf-archive-booking-form__style-2.tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-apartment-locationautocomplete-list::-webkit-scrollbar-track {
+.tf-archive-booking-form__style-2.tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-apartment-location-autocomplete-list::-webkit-scrollbar-track {
   background-color: var(--tf-brand-lite);
 }
 
 .tf-archive-booking-form__style-2.tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-locationautocomplete-list div,
 .tf-archive-booking-form__style-2.tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-destinationautocomplete-list div,
-.tf-archive-booking-form__style-2.tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-apartment-locationautocomplete-list div {
+.tf-archive-booking-form__style-2.tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-apartment-location-autocomplete-list div {
   padding: 10px;
   cursor: pointer;
   background-color: #ffffff;
@@ -20079,19 +20083,19 @@ div#tf-destinationautocomplete-list div:before {
 
 .tf-archive-booking-form__style-2.tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-locationautocomplete-list div:last-child,
 .tf-archive-booking-form__style-2.tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-destinationautocomplete-list div:last-child,
-.tf-archive-booking-form__style-2.tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-apartment-locationautocomplete-list div:last-child {
+.tf-archive-booking-form__style-2.tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-apartment-location-autocomplete-list div:last-child {
   margin-bottom: 0px;
 }
 
 .tf-archive-booking-form__style-2.tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-locationautocomplete-list div:hover,
 .tf-archive-booking-form__style-2.tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-destinationautocomplete-list div:hover,
-.tf-archive-booking-form__style-2.tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-apartment-locationautocomplete-list div:hover {
+.tf-archive-booking-form__style-2.tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-apartment-location-autocomplete-list div:hover {
   background: var(--tf-brand-lite);
 }
 
 .tf-archive-booking-form__style-2.tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-locationautocomplete-list div::before,
 .tf-archive-booking-form__style-2.tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-destinationautocomplete-list div::before,
-.tf-archive-booking-form__style-2.tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-apartment-locationautocomplete-list div::before {
+.tf-archive-booking-form__style-2.tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap #tf-apartment-location-autocomplete-list div::before {
   display: none;
 }
 

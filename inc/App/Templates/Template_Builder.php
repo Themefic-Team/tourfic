@@ -224,68 +224,69 @@ class Template_Builder {
                                 <input type="hidden" name="post_id" id="tf-post-id" value="0">
                                 <input type="hidden" name="action" value="tf_save_template_builder">
                                 
-                                <div class="tf-field tf-field-text">
-                                    <label for="tf-template-name" class="tf-field-label"><?php echo esc_html__('Name', 'tourfic'); ?></label>
-                                    <div class="tf-fieldset">
-                                        <input type="text" name="template_name" id="tf-template-name" placeholder="<?php echo esc_attr__('Enter template name', 'tourfic') ?>" required>
-                                    </div>
-                                </div>
-
-                                <div class="tf-field-wrapper">
-                                    <div class="tf-field tf-field-select">
-                                        <label for="tf-template-service" class="tf-field-label"><?php echo esc_html__('Service', 'tourfic'); ?></label>
+                                <div class="tf-fields">
+                                    <div class="tf-field tf-field-text">
+                                        <label for="tf-template-name" class="tf-field-label"><?php echo esc_html__('Name', 'tourfic'); ?></label>
                                         <div class="tf-fieldset">
-                                            <select name="tf_template_service" id="tf-template-service" class="tf-select">
-                                                <option value="tf_hotel"><?php echo esc_html__('Hotel', 'tourfic'); ?></option>
-                                                <option value="tf_tours"><?php echo esc_html__('Tour', 'tourfic'); ?></option>
-                                                <option value="tf_apartment"><?php echo esc_html__('Apartment', 'tourfic'); ?></option>
-                                                <option value="tf_carrental"><?php echo esc_html__('Car Rental', 'tourfic'); ?></option>
-                                            </select>
+                                            <input type="text" name="template_name" id="tf-template-name" placeholder="<?php echo esc_attr__('Enter template name', 'tourfic') ?>" required>
                                         </div>
                                     </div>
 
-                                    <div class="tf-field tf-field-select">
-                                        <label for="tf-template-type" class="tf-field-label"><?php echo esc_html__('Type', 'tourfic'); ?></label>
-                                        <div class="tf-fieldset">
-                                            <select name="tf_template_type" id="tf-template-type" class="tf-select">
-                                                <option value="archive"><?php echo esc_html__('Archive', 'tourfic'); ?></option>
-                                                <option value="single"><?php echo esc_html__('Single', 'tourfic'); ?></option>
-                                            </select>
+                                    <div class="tf-field-wrapper">
+                                        <div class="tf-field tf-field-select">
+                                            <label for="tf-template-service" class="tf-field-label"><?php echo esc_html__('Service', 'tourfic'); ?></label>
+                                            <div class="tf-fieldset">
+                                                <select name="tf_template_service" id="tf-template-service" class="tf-select">
+                                                    <option value="tf_hotel"><?php echo esc_html__('Hotel', 'tourfic'); ?></option>
+                                                    <option value="tf_tours"><?php echo esc_html__('Tour', 'tourfic'); ?></option>
+                                                    <option value="tf_apartment"><?php echo esc_html__('Apartment', 'tourfic'); ?></option>
+                                                    <option value="tf_carrental"><?php echo esc_html__('Car Rental', 'tourfic'); ?></option>
+                                                </select>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="tf-field-wrapper">
-                                    <div class="tf-field tf-field-select tf-field-taxonomy">
-                                        <label for="tf-taxonomy-type" class="tf-field-label"><?php echo esc_html__('Archive Type', 'tourfic'); ?></label>
-                                        <div class="tf-fieldset">
-                                            <select name="tf_taxonomy_type" id="tf-taxonomy-type" class="tf-select">
-                                                <option value="all"><?php echo esc_html__('All Archive', 'tourfic'); ?></option>
-                                                <?php foreach (Helper::get_all_taxonomies() as $taxonomy => $taxonomy_data) : ?>
-                                                    <option value="<?php echo esc_attr($taxonomy); ?>"><?php echo esc_html($taxonomy_data->label); ?></option>
-                                                <?php endforeach; ?>
-                                            </select>
+
+                                        <div class="tf-field tf-field-select">
+                                            <label for="tf-template-type" class="tf-field-label"><?php echo esc_html__('Type', 'tourfic'); ?></label>
+                                            <div class="tf-fieldset">
+                                                <select name="tf_template_type" id="tf-template-type" class="tf-select">
+                                                    <option value="archive"><?php echo esc_html__('Archive', 'tourfic'); ?></option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
                                     
-                                    <div class="tf-field tf-field-select tf-field-term" style="display: none;">
-                                        <label for="tf-taxonomy-term" class="tf-field-label"><?php echo esc_html__('Taxonomy Term', 'tourfic'); ?></label>
-                                        <div class="tf-fieldset">
-                                            <select name="tf_taxonomy_term" id="tf-taxonomy-term" class="tf-select"></select>
+                                    <div class="tf-field-wrapper">
+                                        <div class="tf-field tf-field-select tf-field-taxonomy">
+                                            <label for="tf-taxonomy-type" class="tf-field-label"><?php echo esc_html__('Archive Type', 'tourfic'); ?></label>
+                                            <div class="tf-fieldset">
+                                                <select name="tf_taxonomy_type" id="tf-taxonomy-type" class="tf-select">
+                                                    <option value="all"><?php echo esc_html__('All Archive', 'tourfic'); ?></option>
+                                                    <?php foreach (Helper::get_all_taxonomies() as $taxonomy => $taxonomy_data) : ?>
+                                                        <option value="<?php echo esc_attr($taxonomy); ?>"><?php echo esc_html($taxonomy_data->label); ?></option>
+                                                    <?php endforeach; ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="tf-field tf-field-select tf-field-term" style="display: none;">
+                                            <label for="tf-taxonomy-term" class="tf-field-label"><?php echo esc_html__('Taxonomy Term', 'tourfic'); ?></label>
+                                            <div class="tf-fieldset">
+                                                <select name="tf_taxonomy_term" id="tf-taxonomy-term" class="tf-select"></select>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="tf-field tf-field-switch">
-			                        <label for="tf-template-active" class="tf-field-label"><?php echo esc_html__('Active', 'tourfic'); ?></label>
-                                    <div class="tf-fieldset">
-                                        <label for="tf-template-active" class="tf-switch-label">
-                                            <input type="checkbox" id="tf-template-active" name="tf_template_active" value="" class="tf-switch">
-                                            <span class="tf-switch-slider">
-                                                <span class="tf-switch-on"><?php echo esc_html__('Yes', 'tourfic'); ?></span>
-                                                <span class="tf-switch-off"><?php echo esc_html__('No', 'tourfic'); ?></span>
-                                            </span>
-                                        </label>
+                                    <div class="tf-field tf-field-switch">
+                                        <label for="tf-template-active" class="tf-field-label"><?php echo esc_html__('Active', 'tourfic'); ?></label>
+                                        <div class="tf-fieldset">
+                                            <label for="tf-template-active" class="tf-switch-label">
+                                                <input type="checkbox" id="tf-template-active" name="tf_template_active" value="" class="tf-switch">
+                                                <span class="tf-switch-slider">
+                                                    <span class="tf-switch-on"><?php echo esc_html__('Yes', 'tourfic'); ?></span>
+                                                    <span class="tf-switch-off"><?php echo esc_html__('No', 'tourfic'); ?></span>
+                                                </span>
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -360,6 +361,7 @@ class Template_Builder {
                                         <?php echo esc_html__('Save Changes', 'tourfic'); ?>
                                     </button>
                                     <button type="button" id="tf-edit-with-elementor" class="tf-admin-btn">
+                                        <i class="eicon-elementor"></i>
                                         <?php echo esc_html__('Edit With Elementor', 'tourfic'); ?>
                                     </button>
                                 </div>
@@ -685,40 +687,111 @@ class Template_Builder {
             wp_send_json_error();
         }
 
-        //taxonomy types
-        $taxonomy_markup = '';
-        if($type == 'archive'){
-            $taxonomy_markup .= '<label for="tf-taxonomy-type" class="tf-field-label">'. esc_html__('Archive Type', 'tourfic') .'</label>';
-        } elseif($type == 'single'){
-            $taxonomy_markup .= '<label for="tf-taxonomy-type" class="tf-field-label">'. esc_html__('Single Type', 'tourfic') .'</label>';
-        }
-        $taxonomy_markup .= '<div class="tf-fieldset">';
-        $taxonomy_markup .= '<select name="tf_taxonomy_type" id="tf-taxonomy-type" class="tf-select">';
+        $post_title = $post->post_title;
+        $tf_template_service = get_post_meta($post_id, 'tf_template_service', true);
+        $tf_template_type = get_post_meta($post_id, 'tf_template_type', true);
+        $tf_taxonomy_type = get_post_meta($post_id, 'tf_taxonomy_type', true);
+        $tf_taxonomy_term = get_post_meta($post_id, 'tf_taxonomy_term', true);
+        $tf_template_active = get_post_meta($post_id, 'tf_template_active', true);
 
-        if($type == 'archive'){
-            $taxonomy_markup .= '<option value="all">'. esc_html__('All Archives', 'tourfic') .'</option>';
-        } elseif($type == 'single'){
-            $taxonomy_markup .= '<option value="all">'. esc_html__('All Single', 'tourfic') .'</option>';
-        }
+        ob_start();
+        ?>
+        <div class="tf-field tf-field-text">
+            <label for="tf-template-name" class="tf-field-label"><?php echo esc_html__('Name', 'tourfic'); ?></label>
+            <div class="tf-fieldset">
+                <input type="text" name="template_name" id="tf-template-name" placeholder="<?php echo esc_attr__('Enter template name', 'tourfic') ?>" required value="<?php echo esc_attr($post_title) ?>">
+            </div>
+        </div>
 
-        foreach (Helper::get_all_taxonomies($service) as $taxonomy => $taxonomy_data) {
-            $taxonomy_markup .= '<option value="'. esc_attr($taxonomy) .'">'. esc_html($taxonomy_data->label). '</option>';
-        }
-        $taxonomy_markup .= '</select>';
-        $taxonomy_markup .= '</div>';
+        <div class="tf-field-wrapper">
+            <div class="tf-field tf-field-select">
+                <label for="tf-template-service" class="tf-field-label"><?php echo esc_html__('Service', 'tourfic'); ?></label>
+                <div class="tf-fieldset">
+                    <select name="tf_template_service" id="tf-template-service" class="tf-select">
+                        <option value="tf_hotel" <?php selected($tf_template_service, 'tf_hotel'); ?>><?php echo esc_html__('Hotel', 'tourfic'); ?></option>
+                        <option value="tf_tours" <?php selected($tf_template_service, 'tf_tours'); ?>><?php echo esc_html__('Tour', 'tourfic'); ?></option>
+                        <option value="tf_apartment" <?php selected($tf_template_service, 'tf_apartment'); ?>><?php echo esc_html__('Apartment', 'tourfic'); ?></option>
+                        <option value="tf_carrental" <?php selected($tf_template_service, 'tf_carrental'); ?>><?php echo esc_html__('Car Rental', 'tourfic'); ?></option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="tf-field tf-field-select">
+                <label for="tf-template-type" class="tf-field-label"><?php echo esc_html__('Type', 'tourfic'); ?></label>
+                <div class="tf-fieldset">
+                    <select name="tf_template_type" id="tf-template-type" class="tf-select">
+                        <option value="archive" <?php selected($tf_template_type, 'archive'); ?>><?php echo esc_html__('Archive', 'tourfic'); ?></option>
+                    </select>
+                </div>
+            </div>
+        </div>
         
-        $response = array(
+        <div class="tf-field-wrapper">
+            <div class="tf-field tf-field-select tf-field-taxonomy">
+                <label for="tf-taxonomy-type" class="tf-field-label"><?php echo esc_html__('Archive Type', 'tourfic'); ?></label>
+                <div class="tf-fieldset">
+                    <select name="tf_taxonomy_type" id="tf-taxonomy-type" class="tf-select">
+                        <option value="all" <?php selected($tf_taxonomy_type, 'all'); ?>>
+                            <?php echo ($tf_template_type == 'archive') ? esc_html__('All Archives', 'tourfic') : esc_html__('All Single', 'tourfic'); ?>
+                        </option>
+                        <?php foreach (Helper::get_all_taxonomies($tf_template_service) as $taxonomy => $taxonomy_data) : ?>
+                            <option value="<?php echo esc_attr($taxonomy); ?>" <?php selected($tf_taxonomy_type, $taxonomy); ?>>
+                                <?php echo esc_html($taxonomy_data->label); ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="tf-field tf-field-select tf-field-term" <?php echo ($tf_taxonomy_type == 'all') ? 'style="display: none;"' : ''; ?>>
+                <label for="tf-taxonomy-term" class="tf-field-label"><?php echo esc_html__('Taxonomy Term', 'tourfic'); ?></label>
+                <div class="tf-fieldset">
+                    <select name="tf_taxonomy_term" id="tf-taxonomy-term" class="tf-select">
+                        <?php if ($tf_taxonomy_type && $tf_taxonomy_type != 'all') : ?>
+                            <?php 
+                            $taxonomy_object = get_taxonomy($tf_taxonomy_type);
+                            $taxonomy_label = $taxonomy_object ? $taxonomy_object->labels->name : __('Terms', 'tourfic');
+                            ?>
+                            <option value="all" <?php selected($tf_taxonomy_term, 'all'); ?>>
+                                <?php echo sprintf(esc_html__('All %s', 'tourfic'), $taxonomy_label); ?>
+                            </option>
+                            <?php 
+                            $terms = get_terms([
+                                'taxonomy' => $tf_taxonomy_type,
+                                'hide_empty' => false,
+                            ]);
+                            
+                            if (!is_wp_error($terms)) {
+                                foreach ($terms as $term) {
+                                    echo '<option value="' . esc_attr($term->slug) . '" ' . selected($tf_taxonomy_term, $term->slug, false) . '>' . esc_html($term->name) . '</option>';
+                                }
+                            }
+                            ?>
+                        <?php endif; ?>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="tf-field tf-field-switch">
+            <label for="tf-template-active" class="tf-field-label"><?php echo esc_html__('Active', 'tourfic'); ?></label>
+            <div class="tf-fieldset">
+                <label for="tf-template-active" class="tf-switch-label">
+                    <input type="checkbox" id="tf-template-active" name="tf_template_active" value="1" class="tf-switch" <?php checked($tf_template_active, '1'); ?>>
+                    <span class="tf-switch-slider">
+                        <span class="tf-switch-on"><?php echo esc_html__('Yes', 'tourfic'); ?></span>
+                        <span class="tf-switch-off"><?php echo esc_html__('No', 'tourfic'); ?></span>
+                    </span>
+                </label>
+            </div>
+        </div>
+        <?php
+        $fields_markup = ob_get_clean();
+        
+        wp_send_json_success([
             'ID' => $post->ID,
-            'post_title' => $post->post_title,
-            'tf_template_service' => get_post_meta($post->ID, 'tf_template_service', true),
-            'tf_template_type' => get_post_meta($post->ID, 'tf_template_type', true),
-            'tf_taxonomy_type' => get_post_meta($post->ID, 'tf_taxonomy_type', true),
-            'tf_taxonomy_term' => get_post_meta($post->ID, 'tf_taxonomy_term', true),
-            'tf_template_active' => get_post_meta($post->ID, 'tf_template_active', true),
-            'tf_template_design' => get_post_meta($post->ID, 'tf_template_design', true),
-        );
-        
-        wp_send_json_success($response);
+            'fields_markup' => $fields_markup,
+        ]);
     }
 
     // Save template data
@@ -771,7 +844,7 @@ class Template_Builder {
                     'tf_carrental' => 'carrental'
                 );
                 
-                $template_path = TF_ASSETS_PATH . "demo/{$service[$tf_template_service]}/{$tf_template_type}/{$tf_template_design}/content.json";
+                $template_path = TF_ASSETS_PATH . "demo/{$service[$tf_template_service]}/{$tf_template_type}/{$tf_template_design}.json";
     
                 if ( is_file( $template_path ) ) {
                     require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-base.php';
@@ -857,16 +930,57 @@ class Template_Builder {
         // Check archive pages
         if (is_post_type_archive($service_post_types)) {
             $post_type = get_post_type();
-            $active_template = $this->get_active_template($post_type, 'archive');
+            $active_template = $this->get_active_template($post_type, 'archive', 'all');
+            
+            if ($active_template) {
+                return $this->load_elementor_template($active_template);
+            }
+        } 
+        // Check taxonomy archive pages
+        elseif (is_tax()) {
+            $current_taxonomy = get_queried_object()->taxonomy;
+            $current_term = get_queried_object()->slug;
+            
+            // First try to find a template specific to this term
+            $active_template = $this->get_active_template_by_taxonomy($current_taxonomy, $current_term);
+            
+            if (!$active_template) {
+                // If no term-specific template, try for a taxonomy-wide template
+                $active_template = $this->get_active_template_by_taxonomy($current_taxonomy, 'all');
+            }
             
             if ($active_template) {
                 return $this->load_elementor_template($active_template);
             }
         }
-        // Check single pages
+        // Check single posts
         elseif (is_singular($service_post_types)) {
             $post_type = get_post_type();
-            $active_template = $this->get_active_template($post_type, 'single');
+            $post_id = get_the_ID();
+            
+            // First try to find a template specific to this post's terms
+            $taxonomies = get_object_taxonomies($post_type);
+            $active_template = false;
+            
+            foreach ($taxonomies as $taxonomy) {
+                $terms = wp_get_post_terms($post_id, $taxonomy, ['fields' => 'slugs']);
+                
+                foreach ($terms as $term) {
+                    $active_template = $this->get_active_template($post_type, 'single', $taxonomy, $term);
+                    if ($active_template) break;
+                }
+                
+                if ($active_template) break;
+                
+                // If no term-specific template, try for a taxonomy-wide template
+                $active_template = $this->get_active_template($post_type, 'single', $taxonomy, 'all');
+                if ($active_template) break;
+            }
+            
+            // If no taxonomy/term specific template, try for a general single template
+            if (!$active_template) {
+                $active_template = $this->get_active_template($post_type, 'single', 'all', 'all');
+            }
             
             if ($active_template) {
                 return $this->load_elementor_template($active_template);
@@ -911,9 +1025,9 @@ class Template_Builder {
     }
 
     /**
-     * Get active template for a service and type
+     * Get active template for a service, type, taxonomy and term
      */
-    private function get_active_template($service, $type) {
+    private function get_active_template($service, $type, $taxonomy = 'all') {
         $args = [
             'post_type' => 'tf_template_builder',
             'posts_per_page' => 1,
@@ -926,6 +1040,43 @@ class Template_Builder {
                 [
                     'key' => 'tf_template_type',
                     'value' => $type,
+                ],
+                [
+                    'key' => 'tf_taxonomy_type',
+                    'value' => $taxonomy,
+                ],
+                [
+                    'key' => 'tf_template_active',
+                    'value' => '1',
+                ]
+            ]
+        ];
+        
+        $templates = get_posts($args);
+        
+        return !empty($templates) ? $templates[0] : false;
+    }
+
+    /**
+     * Get active template for a specific taxonomy and term
+     */
+    private function get_active_template_by_taxonomy($taxonomy, $term) {
+        $args = [
+            'post_type' => 'tf_template_builder',
+            'posts_per_page' => 1,
+            'meta_query' => [
+                'relation' => 'AND',
+                [
+                    'key' => 'tf_template_type',
+                    'value' => 'archive',
+                ],
+                [
+                    'key' => 'tf_taxonomy_type',
+                    'value' => $taxonomy,
+                ],
+                [
+                    'key' => 'tf_taxonomy_term',
+                    'value' => $term,
                 ],
                 [
                     'key' => 'tf_template_active',

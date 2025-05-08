@@ -422,6 +422,17 @@ Modal
             }
         }
 
+        .tf-form-actions{
+            display: flex;
+            gap: 16px;
+
+            .tf-admin-btn{
+                i{
+                    margin-right: 8px;
+                }
+            }
+        }
+
         .tf-admin-btn {
             display: inline-flex;
             @include align-items(center);
@@ -464,6 +475,18 @@ Modal
             opacity: 0.5;
             cursor: not-allowed;
             pointer-events: none;
+            }
+        }
+
+        #tf-edit-with-elementor.tf-btn-loading{
+            &:before{
+                border: 2px solid #003c79;
+                border-left-color: transparent;
+            }
+
+            &:hover::before{
+                border: 2px solid #fff;
+                border-left-color: transparent;
             }
         }
     }

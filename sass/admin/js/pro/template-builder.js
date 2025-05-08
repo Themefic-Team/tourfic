@@ -133,6 +133,7 @@
                     nonce: tf_pro_params.tf_pro_nonce
                 },
                 beforeSend: function() {
+                    $('.tf-field-term').show();
                     $('select[name="tf_taxonomy_term"]').attr('disabled', 'disabled');
                 },
                 success: function(response) {
@@ -170,16 +171,8 @@
                     if (response.success) {
                         var data = response.data;
                         $('#tf-post-id').val(data.ID);
-                        $('#tf-template-name').val(data.post_title);
-                        $('#tf-template-service').val(data.tf_template_service);
-                        $('#tf-template-type').val(data.tf_template_type);
-                        $('#tf-taxonomy-type').val(data.tf_taxonomy_type);
-                        if(data.tf_taxonomy_type != 'all'){
-                            $('#tf-taxonomy-type').change();
-                        }
-                        $('#tf-template-active').prop('checked', data.tf_template_active == '1');
+                        $('#tf-template-builder-form .tf-fields').html(data.fields_markup);
                         $('.tf-template-preview').hide();
-                        $('.tf-field-term').show();
                         tf_open_template_popup();
                     }
                 },
@@ -245,6 +238,7 @@
             $('#tf-template-type').val($('#tf-template-type option:first').val());
             $('#tf-taxonomy-type').val($('#tf-taxonomy-type option:first').val());
             $('#tf-taxonomy-term').val($('#tf-taxonomy-term option:first').val());
+            $('.tf-field-term').hide();
             $('#tf-template-active').prop('checked', false);
             $('.tf-template-preview').show();
             $('input[name="tf_template_design"][value="blank"]').prop('checked', true);
