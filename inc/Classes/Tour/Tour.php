@@ -4349,6 +4349,28 @@ class Tour {
 
 		}
 
+		// Group Type Package
+		$allow_package_pricing = ! empty( $meta['allow_package_pricing'] ) ? $meta['allow_package_pricing'] : 0;
+		if(!empty($allow_package_pricing)){
+			$package_pricing = ! empty( $meta['group_package_pricing'] ) ? $meta['group_package_pricing'] : '';
+			
+			$matched_price = null;
+			if( !empty($package_pricing) ){
+				foreach ( $package_pricing as $package ) {
+					$min = (int) $package['min_people'];
+					$max = (int) $package['max_people'];
+					if ( $total_people_booking >= $min && $total_people_booking <= $max ) {
+						$matched_price = $package['group_price'];
+						break;
+					}
+				}
+			}
+
+			if ( $matched_price !== null ) {
+				$group_price = $matched_price;
+			}
+		}
+
 		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_type == 'continuous' ) {
 			$tf_allowed_times = ! empty( $meta['allowed_time'] ) ? $meta['allowed_time'] : '';
 			if ( ! empty( $tf_allowed_times ) && gettype( $tf_allowed_times ) == "string" ) {
