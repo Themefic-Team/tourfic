@@ -100,14 +100,36 @@ class Listings extends Widget_Base {
 		}
 
 		$paged = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
-        $query = new \WP_Query( array(
+        $query_args = array(
             'post_type' => $service,
             'posts_per_page' => !empty( $settings['posts_per_page'] ) ? absint($settings['posts_per_page']) : 10,
             'post_status' => 'publish',
 			'orderby' => !empty( $settings['orderby'] ) ? sanitize_text_field($settings['orderby']) : 'date',
 			'order' => !empty( $settings['order'] ) ? sanitize_text_field($settings['order']) : 'desc',
 			'paged' => $paged,
-        ) );
+        );
+
+		// Check if we're on a taxonomy archive page for the same service
+		if (is_tax()) {
+			$current_taxonomy = get_queried_object()->taxonomy;
+			$current_term = get_queried_object()->slug;
+			
+			// Get all taxonomies for this service
+			$service_taxonomies = get_object_taxonomies($service);
+			
+			// If current taxonomy belongs to this service, filter by it
+			if (in_array($current_taxonomy, $service_taxonomies)) {
+				$query_args['tax_query'] = array(
+					array(
+						'taxonomy' => $current_taxonomy,
+						'field'    => 'slug',
+						'terms'    => $current_term,
+					)
+				);
+			}
+		}
+
+		$query = new \WP_Query( $query_args );
 
 		if ( $service == 'tf_hotel' && $design == "design-1" ) {
 			$this->tf_hotel_design_1( $settings, $query );
@@ -419,6 +441,44 @@ class Listings extends Widget_Base {
 			'default' => 'desc',
 			'toggle'  => false,
 		]);
+
+		// $taxonomies = get_taxonomies([], 'objects');
+		// foreach ($taxonomies as $taxonomy => $object) {
+        //     if (!isset($object->object_type[0]) || !in_array($object->object_type[0], ['tf_hotel', 'tf_tours', 'tf_apartment', 'tf_carrental'])) {
+        //         continue;
+        //     }
+
+		// 	// Get terms for this taxonomy
+		// 	$terms = get_terms([
+		// 		'taxonomy' => $taxonomy,
+		// 		'hide_empty' => false,
+		// 	]);
+	
+		// 	$taxonomy_label = $object ? $object->labels->name : __('Terms', 'tourfic');
+		// 	$term_options = [
+		// 		'all' => sprintf(esc_html__('All %s', 'tourfic'), $taxonomy_label)
+		// 	];
+		// 	if (!is_wp_error($terms)) {
+		// 		foreach ($terms as $term) {
+		// 			$term_options[$term->term_id] = $term->name;
+		// 		}
+		// 	}
+
+        //     $this->add_control(
+        //         $taxonomy . '_ids',
+        //         [
+        //             'label' => $object->label,
+        //             'type' => Controls_Manager::SELECT2,
+        //             'label_block' => true,
+        //             'multiple' => true,
+		// 			'options' => $term_options,
+        //             'condition' => [
+        //                 'service' => $object->object_type,
+        //             ],
+		// 			'description' => sprintf(esc_html__('Leave as "All %s" to include all items', 'tourfic'), $taxonomy_label)
+        //         ]
+        //     );
+        // }
 		
 		$this->add_control('show_image',[
 			'label' => __('Show Image', 'tourfic'),
