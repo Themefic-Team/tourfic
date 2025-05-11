@@ -12,6 +12,55 @@
             }
         });
 
+        const alert_popup = {
+            success: function (title, message) {
+                $.confirm({
+                    icon: 'fa fa-check',
+                    theme: 'modern',
+                    title: title,
+                    content: message,
+                    type: 'green',
+                    typeAnimated: true,
+                    boxWidth: '500px',
+                    animationSpeed: 300,
+                    animation: 'scale',
+                    closeAnimation: 'scale',
+                    animateFromElement: false,
+                    useBootstrap: false,
+                    closeIcon: true,
+                    buttons: {
+                        OK: {
+                            btnClass: 'btn-blue',
+                            
+                        }
+                    }
+                })
+            },
+
+            error: function (title, message) {
+                $.confirm({
+                    icon: 'fa fa-times',
+                    theme: 'modern',
+                    title: title,
+                    content: message,
+                    type: 'red',
+                    typeAnimated: true,
+                    animationSpeed: 300,
+                    animation: 'scale',
+                    closeAnimation: 'scale',
+                    animateFromElement: false,
+                    boxWidth: '500px',
+                    useBootstrap: false,
+                    closeIcon: true,
+                    buttons: {
+                        OK: {
+                            btnClass: 'btn-red',
+                        }
+                    }
+                })
+            }
+        }
+
         /**
          * Airport Service Price
          */
@@ -133,11 +182,7 @@
                             window.open(obj.url, '_blank');
                         }
                     } else {
-                        Swal.fire(
-                            obj.title,
-                            obj.message,
-                            'error'
-                        )
+                        alert_popup.error(obj.title, obj.message);
                     }
                 },
                 error: function () {
@@ -183,11 +228,7 @@
                             window.open(obj.url, '_blank');
                         }
                     } else {
-                        Swal.fire(
-                            obj.title,
-                            obj.message,
-                            'error'
-                        )
+                        alert_popup.error(obj.title, obj.message);
                     }
                 },
                 error: function () {
@@ -554,11 +595,8 @@
                     const obj = JSON.parse(response);
                     if (!obj.success) {
                         if (obj.message) {
-                            Swal.fire(
-                                'Error!',
-                                obj.message,
-                                'error'
-                            )
+                            alert_popup.error(obj.title, obj.message);
+
                             form.find('input').removeClass('error-input');
                             form.find('textarea').removeClass('error-input');
                             form.find('input').closest('.tf-reg-field').find('small.text-danger').remove();
@@ -576,11 +614,8 @@
                             }
                         }
                     } else {
-                        Swal.fire(
-                            'Success!',
-                            obj.message,
-                            'success'
-                        )
+                         alert_popup.success("Success!", obj.message);
+
                         form[0].reset();
                         form.find('input').removeClass('error-input');
                         form.find('textarea').removeClass('error-input');
@@ -650,11 +685,8 @@
                     const obj = JSON.parse(response);
                     if (!obj.success) {
                         if (obj.message) {
-                            Swal.fire(
-                                'Error!',
-                                obj.message,
-                                'error'
-                            )
+                            alert_popup.error("Error!", obj.message);
+
                             form.find('input').removeClass('error-input');
                             form.find('textarea').removeClass('error-input');
                             form.find('input').closest('.tf-reg-field').find('small.text-danger').remove();
@@ -673,17 +705,32 @@
                             }
                         }
                     } else {
-                        Swal.fire(
-                            'Success!',
-                            obj.message,
-                            'success'
-                        ).then((result) => {
-                            if (result.isConfirmed || result.isDismissed) {
-                                if (obj.redirect_url) {
-                                    window.location.href = obj.redirect_url;
+                         $.confirm({
+                            icon: 'fa fa-check',
+                            theme: 'modern',
+                            title: "Success!",
+                            content: obj.message,
+                            type: 'green',
+                            typeAnimated: true,
+                            boxWidth: '500px',
+                            useBootstrap: false,
+                            animation: 'scale',
+                            closeAnimation: 'scale',
+                            animateFromElement: false,
+                            closeIcon: true,
+                            animationSpeed: 300,
+                            buttons: {
+                                OK: {
+                                    btnClass: 'btn-blue',
+                                    action: function() {
+                                        if (obj.redirect_url) {
+                                            window.location.href = obj.redirect_url;
+                                        }
+                                    },
+
                                 }
                             }
-                        });
+                        })
                         form[0].reset();
                         form.find('input').removeClass('error-input');
                         form.find('textarea').removeClass('error-input');
