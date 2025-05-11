@@ -95,7 +95,7 @@ class Apartments extends \Tourfic\Core\Shortcodes {
 									<?php } ?>
 									<p><?php echo wp_kses_post( wp_trim_words( get_the_content(), 10 ) ); ?></p>
 									<div class="tf-recent-room-price">
-                                        <?php echo esc_html("From "); ?>
+                                        <?php echo esc_html__("From ", "tourfic"); ?>
 										<?php echo $min_price["min"] == $discounted_price ? wp_kses_post( wc_price($min_price["min"]) ) : '<del>' . wp_kses_post( wc_price($min_price["min"]) ) . '</del>' . ' ' . wp_kses_post( wc_price( $discounted_price ) ); ?>
                                     </div>
 								</div>
