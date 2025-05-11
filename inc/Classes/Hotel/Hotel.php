@@ -2699,6 +2699,11 @@ class Hotel {
 
             </form>
 		<?php } elseif ( $tf_hotel_selected_template == "design-2" ) { ?>
+			<?php
+			$check_in_out_dates = ! empty( $check_in_out ) ? array_map( 'trim', explode( '-', $check_in_out ) ) : [];
+			$default_check_in_date = ! empty( $check_in_out_dates[0] ) ? \DateTime::createFromFormat( 'Y/m/d', $check_in_out_dates[0] ) : null;
+			$default_check_out_date = ! empty( $check_in_out_dates[1] ) ? \DateTime::createFromFormat( 'Y/m/d', $check_in_out_dates[1] ) : null;
+			?>
 			<div class="tf-archive-booking-form__style-2">
             <form id="tf-single-hotel-avail" class="tf-booking-form" method="get" autocomplete="off">
 				<?php wp_nonce_field( 'check_room_avail_nonce', 'tf_room_avail_nonce' ); ?>
@@ -2706,10 +2711,10 @@ class Hotel {
                     <div class="tf-booking-form-checkin">
                         <span class="tf-booking-form-title"><?php esc_html_e( "Check in", "tourfic" ); ?></span>
                         <div class="tf-booking-date-wrap">
-                            <span class="tf-booking-date"><?php esc_html_e( "00", "tourfic" ); ?></span>
+                            <span class="tf-booking-date"><?php echo $default_check_in_date ? esc_html( $default_check_in_date->format( 'd' ) ) : esc_html__( '00', 'tourfic' ); ?></span>
                             <span class="tf-booking-month">
 								<span>
-									<?php echo esc_html( gmdate( 'M' ) ); ?>
+									<?php echo $default_check_in_date ? esc_html( $default_check_in_date->format( 'M' ) ) : esc_html( gmdate( 'M' ) ); ?>
 								</span>
 								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
 								<path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
@@ -2722,9 +2727,9 @@ class Hotel {
                     <div class="tf-booking-form-checkout">
                         <span class="tf-booking-form-title"><?php esc_html_e( "Check out", "tourfic" ); ?></span>
                         <div class="tf-booking-date-wrap">
-                            <span class="tf-booking-date"><?php esc_html_e( "00", "tourfic" ); ?></span>
+                            <span class="tf-booking-date"><?php echo $default_check_out_date ? esc_html( $default_check_out_date->format( 'd' ) ) : esc_html__( '00', 'tourfic' ); ?></span>
                             <span class="tf-booking-month">
-								<span><?php echo esc_html( gmdate( 'M' ) ); ?></span>
+								<span><?php echo $default_check_out_date ? esc_html( $default_check_out_date->format( 'M' ) ) : esc_html( gmdate( 'M' ) ); ?></span>
 								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
 								<path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
 								</svg>
@@ -3712,7 +3717,7 @@ class Hotel {
 			];
 			$settings['image_size_customize_size'] = $settings['image_size'];
 			$thumbnail_html = Group_Control_Image_Size::get_attachment_image_html( $settings,'image_size_customize' );
-			
+
 			if ( "" === $thumbnail_html && 'yes' === $settings['show_fallback_img'] && !empty( $settings['fallback_img']['url'] ) ) {
 				$settings[ 'image_size_customize' ] = [
 					'id' => $settings['fallback_img']['id'],
@@ -3925,7 +3930,7 @@ class Hotel {
 						<?php if ( $featured_badge == 'yes' && $featured ): ?>
                             <span class="tf-available-labels-featured"><?php echo esc_html( $featured_badge_text ); ?></span>
 						<?php endif; ?>
-						
+
 						<!-- Promotional Tags -->
 						<?php
 						if ( $promotional_tags == 'yes' && sizeof( $hotel_multiple_tags ) > 0 ) {
@@ -3964,7 +3969,7 @@ class Hotel {
 								<?php if( $show_title == 'yes' ): ?>
                                 <h2 class="tf-section-title"><a href="<?php echo esc_url( get_the_permalink() ); ?>"><?php echo esc_html( Helper::tourfic_character_limit_callback( get_the_title(), $title_length ) ); ?></a></h2>
 								<?php endif; ?>
-								
+
 								<!-- Location -->
 								<?php if ( $show_location == 'yes' && ! empty( $address ) ) : ?>
                                     <div class="tf-title-location">
@@ -4025,7 +4030,7 @@ class Hotel {
 						<?php endif; ?>
                     </div>
                     <div class="tf-available-room-content-right">
-						
+
                         <div class="tf-card-pricing-heading">
 							<!-- Discount -->
 							<?php if ( $discount_tag == 'yes' && ! empty( $min_discount_amount ) ) : ?>
@@ -4075,7 +4080,7 @@ class Hotel {
 								<?php echo $min_discount_type == "percent" ? esc_html( $min_discount_amount ) . '%' : wp_kses_post( wc_price( $min_discount_amount ) ) ?><?php esc_html_e( " Off", "tourfic" ); ?>
 							</div>
 						<?php endif; ?>
-						
+
 						<!-- Featured badge -->
 						<?php if ( $featured_badge == 'yes' && $featured ): ?>
 							<div class="tf-tag-item tf-tag-item-featured"><?php echo esc_html( $featured_badge_text ); ?></div>
@@ -4168,7 +4173,7 @@ class Hotel {
 
 						<!-- View Details -->
 						<?php if($show_view_details == 'yes') : ?>
-                        <a href="<?php echo esc_url( $url ); ?>" class="tf_btn tf_btn_gray tf_btn_small"><?php echo esc_html( $view_details_text ); ?></a>	
+                        <a href="<?php echo esc_url( $url ); ?>" class="tf_btn tf_btn_gray tf_btn_small"><?php echo esc_html( $view_details_text ); ?></a>
 						<?php endif; ?>
 					</div>
                 </div>
@@ -4254,7 +4259,7 @@ class Hotel {
                                         </div>
                                     </div>
 									<?php endif; ?>
-									
+
                                     <div class="tf_room_name_inner">
                                         <div class="room_link">
                                             <div class="roomrow_flex">

@@ -59,10 +59,12 @@ class Plugin_Page_Notice extends \Tourfic\Core\TF_Notice {
     }
 
 	function tf_in_plugin_update_message( $data, $response ){
-        if(  isset( $data['update']) && $data["Version"] == "2.16.0") {
+        $versions = array( '2.16.0', '2.16.1' );
+
+        if(  isset( $data['update']) && in_array( $data["new_version"], $versions ) ) {
             return;
         }
-        if ( isset( $data['update'] ) && $data['update'] && $data["new_version"] == '2.16.1') :
+        if ( isset( $data['update'] ) && $data['update'] && $data["new_version"] == '2.16.2') :
             printf( esc_html__('%1$s %2$s The wait is Over! 
             Our %3$s Revamped Design Panel %4$s is now live in this version! We’ve introduced a %3$s new and improved design panel %4$s that enhances usability, organization, and customization options for a smoother experience. 
             This update also includes major  %3$s option panel changes %4$s and %3$s core improvements %4$s.

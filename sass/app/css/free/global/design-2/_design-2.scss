@@ -715,6 +715,9 @@
                     }
                     .tf-deposit-content{
                         text-align: right;
+                        .room-deposit-wrap{
+                            margin-bottom: 10px;
+                        }
                         label{
                             font-size: 0.75rem;
                         }
@@ -729,6 +732,7 @@
                     }
                     a.tf_btn {
                         margin-top: auto;
+                        float: right;
                     }
                 }
             }

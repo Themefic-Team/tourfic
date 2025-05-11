@@ -140,9 +140,41 @@
          *
          * tf_hotel_booking
          */
-        $(document).on('click', '.hotel-room-book', function (e) {
-            e.preventDefault();
+        let TfHasErrorsFlag = false;
+        $('body').on('click', '.tf-withoutpayment-booking .tf-traveller-error', function (e) {
+            let hasErrors = [];
+            let $this = $(this).closest('.tf-withoutpayment-booking');
+            $('.error-text').text("");
+            $this.find('.tf-single-travel').each(function () {
+                $(this).find('input, select').each(function () {
+                    if ($(this).attr('data-required') && $(this).attr('data-required') == 1) {
+                        if ($(this).val() == "") {
+                            hasErrors.push(true);
+                        }
+                    }
+                });
+                $(this).find('input[type="radio"], input[type="checkbox"]').each(function () {
+                    if ($(this).attr('data-required')) {
+                        const radioName = $(this).attr('name');
+                        const isChecked = $('input[name="' + radioName + '"]:checked').length > 0;
+                        if (!isChecked) {
+                            hasErrors.push(true);
+                        }
+                    }
+                });
+            });
+            if (hasErrors.includes(true)) {
+                TfHasErrorsFlag = true;
+                return false;
+            }
+            TfHasErrorsFlag = false;
+        });
 
+        $('body').on('click', '.hotel-room-book', function (e) {
+            e.preventDefault();
+            if (TfHasErrorsFlag) {
+                return false;
+            }
             var $this = $(this);
 
             var tf_room_booking_nonce = $("input[name=tf_room_booking_nonce]").val();
@@ -382,24 +414,28 @@
 
             // Executes when some one click in the search form location
             inp.addEventListener("focus", function () {
-                // if (this.value == '' || !this.value) {
-                    // alert("Working....")
-                    let a = document.createElement("DIV");
-                    a.setAttribute("id", this.id + "autocomplete-list");
-                    a.classList.add("autocomplete-items")
-                    this.parentNode.appendChild(a);
-                    for (const [key, value] of Object.entries(arr)) {
-                        let b = document.createElement("DIV");
-                        b.innerHTML = value;
-                        b.innerHTML += `<input type='hidden' value="${value}" data-slug='${key}'>`;
-                        b.addEventListener("click", function (e) {
-                            let source = this.getElementsByTagName("input")[0];
-                            inp.value = source.value;
-                            inp.closest('input').nextElementSibling.value = source.dataset.slug
-                        });
-                        a.appendChild(b);
-                    }
-                // }
+
+                console.log('click input');
+                closeAllLists();
+
+                let a = document.createElement("DIV");
+                a.setAttribute("id", this.id + "autocomplete-list");
+                a.classList.add("autocomplete-items")
+                this.parentNode.appendChild(a);
+                for (const [key, value] of Object.entries(arr)) {
+                    let b = document.createElement("DIV");
+                    b.innerHTML = value;
+                    b.innerHTML += `<input type='hidden' value="${value}" data-slug='${key}'>`;
+                    b.addEventListener("click", function (e) {
+                        let source = this.getElementsByTagName("input")[0];
+                        inp.value = source.value;
+                        inp.closest('input').nextElementSibling.value = source.dataset.slug;
+                        setTimeout(() => {
+                            closeAllLists();
+                        },100);
+                    });
+                    a.appendChild(b);
+                }
             })
 
             var currentFocus;
@@ -507,15 +543,13 @@
                 }
             }
 
-            function closeAllLists(elmnt) {
-                /*close all autocomplete lists in the document,
-                except the one passed as an argument:*/
-                var x = document.getElementsByClassName("autocomplete-items");
-                for (var i = 0; i < x.length; i++) {
-                    if (elmnt != x[i] && elmnt != inp) {
-                        x[i].parentNode.removeChild(x[i]);
+            function closeAllLists(elmnt = null) {
+                const lists = document.querySelectorAll(".autocomplete-items");
+                lists.forEach(list => {
+                    if (list !== elmnt && list !== inp && list.parentNode) {
+                        list.parentNode.removeChild(list);
                     }
-                }
+                });
             }
 
             /*execute a function when someone clicks in the document:*/
@@ -525,42 +559,49 @@
                     closeAllLists(e.target);
                 }
             });
-        }
 
-            // Hotel Location
-
-            $('#tf-destination-adv').on("click", function (e) {
-                $(".tf-hotel-locations").addClass('tf-locations-show');
-            });
-        
-            $('#tf-destination-adv').on("keyup", function (e) {
-                var location = $(this).val();
-                $("#tf-place-destination").val(location);
-            });
-        
-            $('#tf-location').on("keyup", function (e) {
-                var tf_location = $(this).val();
-                $("#tf-search-hotel").val(tf_location);
-            });
-    
-        
-            $('#ui-id-1').on("click", "li", function (e) {
-        
-                var dest_name = $(this).attr("data-name");
-                var dest_slug = $(this).attr("data-slug");
-        
-                $(".tf-preview-destination").val(dest_name);
-                $("#tf-place-destination").val(dest_slug);
-        
-                setTimeout(function () {
-                    $(".tf-hotel-locations").removeClass('tf-locations-show');
-                }, 100); 
-            });
+            // Close when clicking outside
             $(document).on('click', function (event) {
-                if (!$(event.target).closest("#tf-destination-adv, #ui-id-1").length) {
-                    $(".tf-hotel-locations").removeClass('tf-locations-show');
+                if (!$(event.target).closest("#tf-location").length) {
+                    $("#tf-locationautocomplete-list").hide();
                 }
             });
+        }
+
+        // Hotel Location
+
+        $('#tf-destination-adv').on("click", function (e) {
+            $(".tf-hotel-locations").addClass('tf-locations-show');
+        });
+    
+        $('#tf-destination-adv').on("keyup", function (e) {
+            var location = $(this).val();
+            $("#tf-place-destination").val(location);
+        });
+    
+        $('#tf-location').on("keyup", function (e) {
+            var tf_location = $(this).val();
+            $("#tf-search-hotel").val(tf_location);
+        });
+
+    
+        $('#ui-id-1').on("click", "li", function (e) {
+    
+            var dest_name = $(this).attr("data-name");
+            var dest_slug = $(this).attr("data-slug");
+    
+            $(".tf-preview-destination").val(dest_name);
+            $("#tf-place-destination").val(dest_slug);
+    
+            setTimeout(function () {
+                $(".tf-hotel-locations").removeClass('tf-locations-show');
+            }, 100); 
+        });
+        $(document).on('click', function (event) {
+            if (!$(event.target).closest("#tf-destination-adv, #ui-id-1").length) {
+                $(".tf-hotel-locations").removeClass('tf-locations-show');
+            }
+        });
 
         // Hotel location autocomplete
         var hotel_location_input = document.getElementById("tf-location");
@@ -684,14 +725,14 @@
 
             });
         }
-        $(document).on('click', '.tf-hotel-booking-popup-btn', function (e) {
+        $('body').on('click', '.tf-hotel-booking-popup-btn', function (e) {
             e.preventDefault();
             var $this = $(this);
 
             hotelPopupBooking($this);
         });
 
-        $(document).on('submit', 'form.tf-room', function (e) {
+        $('body').on('submit', 'form.tf-room', function (e) {
             e.preventDefault();
 
             var $this = $(this);

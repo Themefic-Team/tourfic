@@ -188,6 +188,10 @@
             align-items: center;
             input{
                 border: 0px solid;
+                @media #{$max1024}{
+                    font-size: 14px;
+                    height: auto;
+                }
                 &:focus{
                     box-shadow: none;
                     outline: none;
@@ -325,15 +329,41 @@ button.tf-tablinks {
     height: 55px;
     margin: 24px 0 16px;
     background: $color-white;
-
+    @media #{$max768}{
+        display: inherit;
+        height: auto;
+    }
     .tf_selectperson-wrap {
+        padding-left: 15px;
+        padding-right: 15px;
+        @media #{$max768}{
+            padding: 13px 15px;
+        }
         .tf_person-icon {
             margin-right: 8px;
         }
+       .person-sep{
+           @media #{$max768}{
+               padding: 0 6px;
+           }
+       }
     }
     .tf_form-row {
         .tf_label-row {
             margin: 0;
+        }
+    }
+    .tf_destination-wrap {
+        @media #{$max768}{
+            padding: 10px 5px;
+        }
+    }
+    .tf_selectdate-wrap {
+        @media #{$max768}{
+            padding: 10px 15px;
+            &.tf_more_info_selections{
+                padding: 13px 15px;
+            }
         }
     }
 }

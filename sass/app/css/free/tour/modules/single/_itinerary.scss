@@ -362,9 +362,10 @@
                     .tf-itinerary-title {
                         display: flex;
                         justify-content: space-between;
-                        align-items: center;
+                        align-items: baseline;
                         cursor: pointer;
                         user-select: none;
+                        gap: 8px;
                         i{
                             color: $color-text ;
                         }
@@ -380,20 +381,24 @@
                         font-weight: 400;
                         word-wrap: break-word;
                         margin: 0px;
+                        display: flex;
+                        width: 100%;
+                        align-items: first baseline;
                         @media #{$max1024}{
                             font-size: 1rem;
-                        }
-                        @media #{$max768}{
-                            display: flex;
-                            align-items: center;
                         }
                         span.tf-itinerary-time {
                             padding: 8px 16px;
                             margin-right: 16px;
+                            width: max-content;
+                            max-width: 30%;
                             @media #{$max768}{
                                 padding-left: 0;
                                 margin-right: 0;
                             }
+                        }
+                        .tf-itinerary-title-text {
+                            flex: 1;
                         }
                     }
             
