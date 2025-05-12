@@ -2093,6 +2093,70 @@ class Tour {
                     </div>
                 </div>
                 <div class="tf-booking-content-summery">
+					
+					<div class="tf-booking-content show tf-booking-content-1">
+						<p><?php echo esc_html( $tour_popup_extra_text ); ?></p>
+						<div class="tf-booking-content-package">
+							<div class="tf-single-package">
+								<div class="tf-package-select">
+									<input type="radio" id="" name="tf_package" value="1" checked>
+								</div>
+								<div class="tf-package-content">
+									<h3>Ecstatic Shimla 4 Night 5 Day Tour Package</h3>
+									<div class="tf-pacakge-persons">
+										<p>Your host will guide you through the entrance for a seamless, line-free entry. After passing the ticket and security checks, you can explore the Vatican Museums and the Sistine Chapel at your leisure. This is NOT a guided tour.</p>
+										<div class="tf-select-persons">
+											<div class="tf-single-person">
+												<h3><?php echo esc_html__( "Adult", "tourfic" ); ?></h3>
+												<div class="inc-dec">
+													<div class="acr-dec">-</div>
+													<input type="text" name="adults" id="adults" value="0">
+													<div class="acr-inc">+</div>
+												</div>
+											</div>
+											<div class="tf-single-person">
+												<h3><?php echo esc_html__( "Child", "tourfic" ); ?></h3>
+												<div class="inc-dec">
+													<div class="acr-dec">-</div>
+													<input type="text" name="childs" id="childs" value="5">
+													<div class="acr-inc">+</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="tf-single-package">
+								<div class="tf-package-select">
+									<input type="radio" id="" name="tf_package" value="1">
+								</div>
+								<div class="tf-package-content">
+									<h3>Ecstatic Shimla 4 Night 5 Day Tour Package</h3>
+									<div class="tf-pacakge-persons">
+										<p>Your host will guide you through the entrance for a seamless, line-free entry. After passing the ticket and security checks, you can explore the Vatican Museums and the Sistine Chapel at your leisure. This is NOT a guided tour.</p>
+										<div class="tf-select-persons">
+											<div class="tf-single-person">
+												<h3><?php echo esc_html__( "Adult", "tourfic" ); ?></h3>
+												<div class="inc-dec">
+													<div class="acr-dec">-</div>
+													<input type="text" name="adults" id="adults" value="0">
+													<div class="acr-inc">+</div>
+												</div>
+											</div>
+											<div class="tf-single-person">
+												<h3><?php echo esc_html__( "Child", "tourfic" ); ?></h3>
+												<div class="inc-dec">
+													<div class="acr-dec">-</div>
+													<input type="text" name="childs" id="childs" value="5">
+													<div class="acr-inc">+</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 
                     <!-- Popup Tour Extra -->
 					<?php
@@ -4119,7 +4183,7 @@ class Tour {
 		 * People 0 number validation
 		 *
 		 */
-		if ( $total_people == 0 ) {
+		if ( $total_people == 0 && $pricing_rule!='package' ) {
 			$response['errors'][] = esc_html__( 'Please Select Adults/Children/Infant required', 'tourfic' );
 		}
 
@@ -4127,7 +4191,7 @@ class Tour {
 		 * People number validation
 		 *
 		 */
-		if ( $tour_type == 'fixed' ) {
+		if ( $tour_type == 'fixed' && $pricing_rule!='package' ) {
 
 			/* translators: %s: number of people */
 			$min_text = sprintf( _n( '%s person', '%s people', $min_people, 'tourfic' ), $min_people );
@@ -4145,7 +4209,7 @@ class Tour {
 
 			}
 
-		} elseif ( $tour_type == 'continuous' && $custom_avail == false ) {
+		} elseif ( $tour_type == 'continuous' && $custom_avail == false && $pricing_rule!='package' ) {
 
 			/* translators: %s: number of people */
 			$min_text = sprintf( _n( '%s person', '%s people', $min_people, 'tourfic' ), $min_people );
@@ -4163,7 +4227,7 @@ class Tour {
 
 			}
 
-		} elseif ( $tour_type == 'continuous' && $custom_avail == true ) {
+		} elseif ( $tour_type == 'continuous' && $custom_avail == true && $pricing_rule!='package' ) {
 
 			foreach ( $cont_custom_date as $item ) {
 
