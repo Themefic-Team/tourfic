@@ -1411,7 +1411,7 @@ li.tf-filter-item {
             gap: 8px;
         }
         .tf-booking-tabs{
-            padding: 24px;
+            padding: 16px;
             border-bottom: 0.3px solid $color-gray;
             border-radius: 24px;
             background: $color-gray-info;
@@ -1432,7 +1432,7 @@ li.tf-filter-item {
                     }
                     li{
                         display: inline-block;
-                        padding: 16px 32px;
+                        padding: 8px 32px;
                         cursor: pointer;
                         color: $color-text;
                         @media #{$max768}{
@@ -1476,13 +1476,13 @@ li.tf-filter-item {
                             position: absolute;
                             background: transparent;
                             top: 0;
-                            right: -25px;
+                            right: -18px;
                             border-radius: 0px 10px 0px 0px;
                             width: 0;
                             height: 0;
-                            border-top: 28px solid transparent;
-                            border-left: 25px solid $color-primary;
-                            border-bottom: 28px solid transparent;
+                            border-top: 20px solid transparent;
+                            border-left: 20px solid $color-primary;
+                            border-bottom: 20px solid transparent;
                             @media #{$max768}{
                                 position: static;
                                 display: none;
@@ -1524,7 +1524,7 @@ li.tf-filter-item {
             @media #{$max575}{
                 max-height: 280px;
             }
-            padding: 0px 24px;
+            padding: 0px 16px;
             align-items: flex-start;
             align-content: flex-start;
             gap: 24px;
@@ -1538,7 +1538,7 @@ li.tf-filter-item {
                     width: calc(100% - 0px);
                 }
                 &.tf-booking-content-1{
-                    max-height: 430px;
+                    max-height: 380px;
                     overflow-y: auto;
                     @media #{$max768}{
                         max-height: none;
@@ -1778,6 +1778,11 @@ li.tf-filter-item {
                         display: flex;
                         gap: 8px;
                         padding: 8px 12px;
+                        .tf-package-select{
+                            input{
+                                accent-color: $color-brand-dark;
+                            }
+                        }
                         .tf-package-content{
                             h3{
                                 color: $color-heading;
@@ -1789,12 +1794,13 @@ li.tf-filter-item {
                                 p{
                                     color: $color-text;
                                     font-size: 0.875rem;
-                                    margin: 0 0 8px 0;
+                                    margin: 0;
                                 }
                                 .tf-select-persons{
                                     border-radius: 4px;
                                     background: $color-white;
                                     padding: 8px 16px;
+                                    margin-top: 8px;
                                     .tf-single-person{
                                         display: flex;
                                         justify-content: space-between;
@@ -1805,6 +1811,7 @@ li.tf-filter-item {
                                         }
                                         &:last-child{
                                             border: 0px solid;
+                                            padding-top: 16px;
                                         }
                                         h3{
                                             color: $color-heading;
@@ -1838,6 +1845,9 @@ li.tf-filter-item {
                                                 font-size: 1rem;
                                                 font-weight: 500;
                                                 border: 0px solid;
+                                                -webkit-appearance : textfield;
+                                                -moz-appearance : textfield;
+                                                accent-color: $color-brand-dark;
                                                 &:focus{
                                                     outline: none;
                                                 }
@@ -1855,7 +1865,6 @@ li.tf-filter-item {
             }
             .tf-booking-content.show{
                 display: block;
-                overflow: hidden;
             }
             .tf-booking-summery {
                 width: calc(38% - 24px);
@@ -1949,7 +1958,8 @@ li.tf-filter-item {
             }
         }
         .tf-booking-pagination{
-            padding: 0 24px;
+            padding: 0 16px;
+            margin-top: 32px;
             .tf-tax-notice{
                 padding-bottom: 16px;
                 span{
@@ -2078,6 +2088,9 @@ li.tf-filter-item {
                 padding: 0px 0px 24px 0px;
                 align-items: end;
                 display: none;
+                a.tf_btn{
+                    border-radius: 5px;
+                }
                 a{
                     text-decoration: none;
                     display: inline-block;

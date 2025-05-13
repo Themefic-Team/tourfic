@@ -1,3 +1,6 @@
+/*!*********************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[3]!./sass/app/css/free/tourfic.scss ***!
+  \*********************************************************************************************************************************************************************************/
 @charset "UTF-8";
 /* 
 Container
@@ -2861,7 +2864,7 @@ li.tf-filter-item {
 }
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-tabs,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-tabs {
-  padding: 24px;
+  padding: 16px;
   border-bottom: 0.3px solid #808080;
   border-radius: 24px;
   background: #F5FAFF;
@@ -2888,7 +2891,7 @@ li.tf-filter-item {
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li {
   display: inline-block;
-  padding: 16px 32px;
+  padding: 8px 32px;
   cursor: pointer;
   color: var(--tf-text-paragraph);
 }
@@ -2953,13 +2956,13 @@ li.tf-filter-item {
   position: absolute;
   background: transparent;
   top: 0;
-  right: -25px;
+  right: -18px;
   border-radius: 0px 10px 0px 0px;
   width: 0;
   height: 0;
-  border-top: 28px solid transparent;
-  border-left: 25px solid var(--tf-primary);
-  border-bottom: 28px solid transparent;
+  border-top: 20px solid transparent;
+  border-left: 20px solid var(--tf-primary);
+  border-bottom: 20px solid transparent;
 }
 @media only screen and (max-width: 768px) {
   .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul li.active::before,
@@ -2995,7 +2998,7 @@ li.tf-filter-item {
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery {
   display: flex;
-  padding: 0px 24px;
+  padding: 0px 16px;
   align-items: flex-start;
   align-content: flex-start;
   gap: 24px;
@@ -3030,7 +3033,7 @@ li.tf-filter-item {
 }
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content.tf-booking-content-1,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content.tf-booking-content-1 {
-  max-height: 430px;
+  max-height: 380px;
   overflow-y: auto;
 }
 @media only screen and (max-width: 768px) {
@@ -3396,6 +3399,10 @@ li.tf-filter-item {
   gap: 8px;
   padding: 8px 12px;
 }
+.tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-package .tf-single-package .tf-package-select input,
+.tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-package .tf-single-package .tf-package-select input {
+  accent-color: var(--tf-brand-dark);
+}
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-package .tf-single-package .tf-package-content h3,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-package .tf-single-package .tf-package-content h3 {
   color: var(--tf-text-heading);
@@ -3410,13 +3417,14 @@ li.tf-filter-item {
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-package .tf-single-package .tf-package-content .tf-pacakge-persons p {
   color: var(--tf-text-paragraph);
   font-size: 0.875rem;
-  margin: 0 0 8px 0;
+  margin: 0;
 }
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-package .tf-single-package .tf-package-content .tf-pacakge-persons .tf-select-persons,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-package .tf-single-package .tf-package-content .tf-pacakge-persons .tf-select-persons {
   border-radius: 4px;
   background: #ffffff;
   padding: 8px 16px;
+  margin-top: 8px;
 }
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-package .tf-single-package .tf-package-content .tf-pacakge-persons .tf-select-persons .tf-single-person,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-package .tf-single-package .tf-package-content .tf-pacakge-persons .tf-select-persons .tf-single-person {
@@ -3432,6 +3440,7 @@ li.tf-filter-item {
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-package .tf-single-package .tf-package-content .tf-pacakge-persons .tf-select-persons .tf-single-person:last-child,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-package .tf-single-package .tf-package-content .tf-pacakge-persons .tf-select-persons .tf-single-person:last-child {
   border: 0px solid;
+  padding-top: 16px;
 }
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-package .tf-single-package .tf-package-content .tf-pacakge-persons .tf-select-persons .tf-single-person h3,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-package .tf-single-package .tf-package-content .tf-pacakge-persons .tf-select-persons .tf-single-person h3 {
@@ -3471,6 +3480,9 @@ li.tf-filter-item {
   font-size: 1rem;
   font-weight: 500;
   border: 0px solid;
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+  accent-color: var(--tf-brand-dark);
 }
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-package .tf-single-package .tf-package-content .tf-pacakge-persons .tf-select-persons .tf-single-person .inc-dec input:focus,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-package .tf-single-package .tf-package-content .tf-pacakge-persons .tf-select-persons .tf-single-person .inc-dec input:focus {
@@ -3483,7 +3495,6 @@ li.tf-filter-item {
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content.show,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content.show {
   display: block;
-  overflow: hidden;
 }
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-summery,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-summery {
@@ -3583,7 +3594,8 @@ li.tf-filter-item {
 }
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-pagination,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-pagination {
-  padding: 0 24px;
+  padding: 0 16px;
+  margin-top: 32px;
 }
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-pagination .tf-tax-notice,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-pagination .tf-tax-notice {
@@ -3730,6 +3742,10 @@ li.tf-filter-item {
   padding: 0px 0px 24px 0px;
   align-items: end;
   display: none;
+}
+.tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-pagination .tf-control-pagination a.tf_btn,
+.tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-pagination .tf-control-pagination a.tf_btn {
+  border-radius: 5px;
 }
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-pagination .tf-control-pagination a,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-pagination .tf-control-pagination a {

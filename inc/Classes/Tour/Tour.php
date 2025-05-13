@@ -2062,14 +2062,22 @@ class Tour {
 
 							$traveller_info_coll = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['tour-traveler-info'] ) ? $meta['tour-traveler-info'] : $traveller_info_coll_global;
 
+							$pricing_type = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
+							$package_pricing = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
+
+							if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $pricing_type=='package' && $package_pricing ) { ?>
+								<li class="tf-booking-step tf-booking-step-1 active">
+									<i class="ri-box-3-line"></i> <?php echo esc_html__( "Packages", "tourfic" ); ?>
+								</li>
+							<?php } 
 							if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_extras ) { ?>
-                                <li class="tf-booking-step tf-booking-step-1 active">
+                                <li class="tf-booking-step tf-booking-step-2 <?php echo $pricing_type!='package' && empty( $package_pricing ) ? esc_attr( 'active' ) : ''; ?>">
                                     <i class="ri-price-tag-3-line"></i> <?php echo esc_html__( "Tour extra", "tourfic" ); ?>
                                 </li>
 							<?php }
 							if ( $traveller_info_coll ) {
 								?>
-                                <li class="tf-booking-step tf-booking-step-2 <?php echo empty( $tour_extras ) ? esc_attr( 'active' ) : ''; ?> ">
+                                <li class="tf-booking-step tf-booking-step-3 <?php echo empty( $tour_extras ) ? esc_attr( 'active' ) : ''; ?> ">
                                     <i class="ri-group-line"></i> <?php echo esc_html__( "Traveler details", "tourfic" ); ?>
                                 </li>
 							<?php }
@@ -2093,78 +2101,52 @@ class Tour {
                     </div>
                 </div>
                 <div class="tf-booking-content-summery">
-					
-					<div class="tf-booking-content show tf-booking-content-1">
-						<p><?php echo esc_html( $tour_popup_extra_text ); ?></p>
-						<div class="tf-booking-content-package">
-							<div class="tf-single-package">
-								<div class="tf-package-select">
-									<input type="radio" id="" name="tf_package" value="1" checked>
-								</div>
-								<div class="tf-package-content">
-									<h3>Ecstatic Shimla 4 Night 5 Day Tour Package</h3>
-									<div class="tf-pacakge-persons">
-										<p>Your host will guide you through the entrance for a seamless, line-free entry. After passing the ticket and security checks, you can explore the Vatican Museums and the Sistine Chapel at your leisure. This is NOT a guided tour.</p>
-										<div class="tf-select-persons">
-											<div class="tf-single-person">
-												<h3><?php echo esc_html__( "Adult", "tourfic" ); ?></h3>
-												<div class="inc-dec">
-													<div class="acr-dec">-</div>
-													<input type="text" name="adults" id="adults" value="0">
-													<div class="acr-inc">+</div>
-												</div>
-											</div>
-											<div class="tf-single-person">
-												<h3><?php echo esc_html__( "Child", "tourfic" ); ?></h3>
-												<div class="inc-dec">
-													<div class="acr-dec">-</div>
-													<input type="text" name="childs" id="childs" value="5">
-													<div class="acr-inc">+</div>
+					<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $pricing_type=='package' && $package_pricing ) { ?>
+						<div class="tf-booking-content show tf-booking-content-1">
+							<p><?php echo esc_html__( "Choose package:", "tourfic" ); ?></p>
+							<div class="tf-booking-content-package">
+
+								<?php foreach($package_pricing as $key => $pack){ ?>
+									<div class="tf-single-package">
+										<div class="tf-package-select">
+											<input type="radio" id="package-<?php echo esc_attr($key); ?>" name="tf_package" value="<?php echo esc_attr($key); ?>" class="tf-package-radio" <?php echo 1==$key ? esc_attr('checked') : ''; ?> />
+										</div>
+										<div class="tf-package-content">
+										<label for="package-<?php echo esc_attr($key); ?>"><h3><?php echo esc_html($pack['pack_title']); ?></h3></label>
+											<div class="tf-pacakge-persons">
+												<?php echo wp_kses_post( $pack['desc'] ); ?>
+												<div class="tf-select-persons">
+													<div class="tf-single-person">
+														<h3><?php echo esc_html__( "Adult", "tourfic" ); ?></h3>
+														<div class="inc-dec">
+															<div class="acr-dec">-</div>
+															<input type="number" name="adults" id="adults" value="0">
+															<div class="acr-inc">+</div>
+														</div>
+													</div>
+													<div class="tf-single-person">
+														<h3><?php echo esc_html__( "Child", "tourfic" ); ?></h3>
+														<div class="inc-dec">
+															<div class="acr-dec">-</div>
+															<input type="number" name="childs" id="childs" value="0">
+															<div class="acr-inc">+</div>
+														</div>
+													</div>
 												</div>
 											</div>
 										</div>
 									</div>
-								</div>
-							</div>
-							<div class="tf-single-package">
-								<div class="tf-package-select">
-									<input type="radio" id="" name="tf_package" value="1">
-								</div>
-								<div class="tf-package-content">
-									<h3>Ecstatic Shimla 4 Night 5 Day Tour Package</h3>
-									<div class="tf-pacakge-persons">
-										<p>Your host will guide you through the entrance for a seamless, line-free entry. After passing the ticket and security checks, you can explore the Vatican Museums and the Sistine Chapel at your leisure. This is NOT a guided tour.</p>
-										<div class="tf-select-persons">
-											<div class="tf-single-person">
-												<h3><?php echo esc_html__( "Adult", "tourfic" ); ?></h3>
-												<div class="inc-dec">
-													<div class="acr-dec">-</div>
-													<input type="text" name="adults" id="adults" value="0">
-													<div class="acr-inc">+</div>
-												</div>
-											</div>
-											<div class="tf-single-person">
-												<h3><?php echo esc_html__( "Child", "tourfic" ); ?></h3>
-												<div class="inc-dec">
-													<div class="acr-dec">-</div>
-													<input type="text" name="childs" id="childs" value="5">
-													<div class="acr-inc">+</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
+								<?php } ?>
 							</div>
 						</div>
-					</div>
-
+					<?php } ?>
                     <!-- Popup Tour Extra -->
 					<?php
 					// $popup_extra_default_text = "Here we include our tour extra services. If you want take any of the service. Start and end in Edinburgh! With the In-depth Cultural";
 					$tour_popup_extra_text = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( Helper::tfopt( 'tour_popup_extras_text' ) ) ? Helper::tfopt( 'tour_popup_extras_text' ) : '';
 					$traveler_details_text = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( Helper::tfopt( 'tour_traveler_details_text' ) ) ? Helper::tfopt( 'tour_traveler_details_text' ) : '';
 					if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_extras ) { ?>
-                        <div class="tf-booking-content show tf-booking-content-1">
+                        <div class="tf-booking-content tf-booking-content-2 <?php echo $pricing_type!='package' && empty( $package_pricing ) ? esc_attr( 'show' ) : ''; ?>">
                             <p><?php echo esc_html( $tour_popup_extra_text ); ?></p>
                             <div class="tf-booking-content-extra">
 								<?php
@@ -2221,7 +2203,7 @@ class Tour {
 						?>
 
                         <!-- Popup Traveler Info -->
-                        <div class="tf-booking-content tf-booking-content-2 <?php echo empty( $tour_extras ) ? esc_attr( 'show' ) : ''; ?>">
+                        <div class="tf-booking-content tf-booking-content-3 <?php echo empty( $tour_extras ) ? esc_attr( 'show' ) : ''; ?>">
                             <p><?php echo esc_html( $traveler_details_text ); ?></p>
                             <div class="tf-booking-content-traveller">
                                 <div class="tf-traveller-info-box"></div>
