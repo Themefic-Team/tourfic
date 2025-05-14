@@ -854,3 +854,25 @@ if(!function_exists('tf_custom_color_palette_values')){
 		];
 	}
 }
+
+function tf_get_main_post_meta($translated_post_id, $meta_key) {
+	if (function_exists('wpml_get_default_language')) {
+		$default_lang = wpml_get_default_language();
+		$main_post_id = apply_filters('wpml_object_id', $translated_post_id, 'tf_hotel', false, $default_lang);
+	} else {
+		$main_post_id = $translated_post_id;
+	}
+
+	return get_post_meta($main_post_id, $meta_key, true);
+}
+
+function tf_update_main_post_meta($translated_post_id, $meta_key, $value) {
+	if (function_exists('wpml_get_default_language')) {
+		$default_lang = wpml_get_default_language();
+		$main_post_id = apply_filters('wpml_object_id', $translated_post_id, 'tf_hotel', false, $default_lang);
+	} else {
+		$main_post_id = $translated_post_id;
+	}
+
+	update_post_meta($main_post_id, $meta_key, $value);
+}
