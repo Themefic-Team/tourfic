@@ -82,7 +82,13 @@ class Hotel {
          * Backend data
          */
         $meta  = get_post_meta( $hotel_id, 'tf_hotels_opt', true );
-        $rooms = Room::get_hotel_rooms( $hotel_id );
+		// Get the original (default language) post ID using WPML
+		if (function_exists('wpml_get_default_language')) {
+			$original_hotel_id = apply_filters('wpml_object_id', $hotel_id, 'tf_hotel', false, wpml_get_default_language());
+		} else {
+			$original_hotel_id = $hotel_id;
+		}
+        $rooms = Room::get_hotel_rooms( $original_hotel_id );
         $locations           = get_the_terms( $hotel_id, 'hotel_location' );
         $first_location_name = ! empty( $locations ) ? $locations[0]->name : '';
         $room_book_by        = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
@@ -244,6 +250,13 @@ class Hotel {
                         $avail_date = ! empty( $room['avail_date'] ) ? json_decode($room['avail_date'], true) : [];
                     }
 
+					// Get the original (default language) post ID using WPML
+					if ( function_exists( 'wpml_get_default_language' ) ) {
+						$original_hotel_id = apply_filters( 'wpml_object_id', $hotel_id, 'tf_hotel', false, wpml_get_default_language() );
+					} else {
+						$original_hotel_id = $hotel_id;
+					}
+					//room inventory manage
                     if ( ! empty( $order_ids ) && $reduce_num_room == true ) {
 
                         # Get backend available date range as an array
@@ -275,7 +288,7 @@ class Hotel {
 								$tf_orders_select = array(
 									'select' => "post_id,order_details",
 									'post_type' => 'hotel',
-									'query' => " AND ostatus = 'completed' AND order_id = ".$order_id
+									'query' => " AND ostatus = 'completed' AND order_id = ".$order_id." AND post_id = ".$original_hotel_id
 								);
 								$tf_hotel_book_orders = Helper::tourfic_order_table_data($tf_orders_select);
 
