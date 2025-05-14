@@ -114,6 +114,10 @@
             formData.append('tour_extra', tour_extra_total);
             formData.append('tour_extra_quantity', tour_extra_quantity);
 
+            var selectedPackage = $('.tf-booking-content-package input[name="tf_package"]:checked').val();
+            if (selectedPackage !== undefined) {
+                formData.append('selectedPackage', selectedPackage);
+            }
             $.ajax({
                 type: 'post',
                 url: tf_params.ajax_url,

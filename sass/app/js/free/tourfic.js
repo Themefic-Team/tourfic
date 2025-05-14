@@ -1190,12 +1190,21 @@
         $('.acr-inc, .quanity-acr-inc').on('click', function (e) {
             var input = $(this).parent().find('input');
             var max = input.attr('max') ? input.attr('max') : 999;
+            if(input.attr('data-max')){
+                max = input.attr('data-max');
+            }
+
             var step = input.attr('step') ? input.attr('step') : 1;
             if (!input.val()) {
                 input.val(0);
             }
             if (input.val() < max) {
                 input.val(parseInt(input.val()) + parseInt(step)).change();
+            }
+            if(input.val() == max){
+                $(this).addClass('disable');
+            }else{
+                $(this).parent().find('.acr-dec').removeClass('disable');
             }
             // input focus disable
             input.blur();
@@ -1206,12 +1215,20 @@
 
             var input = $(this).parent().find('input');
             var min = input.attr('min') ? input.attr('min') : 0;
+            if(input.attr('data-min')){
+                min = input.attr('data-min');
+            }
             var step = input.attr('step') ? input.attr('step') : 1;
             if (!input.val()) {
                 input.val(0);
             }
             if (input.val() > min) {
                 input.val(input.val() - parseInt(step)).change();
+            }
+            if(input.val() == min){
+                $(this).addClass('disable');
+            }else{
+                $(this).parent().find('.acr-inc').removeClass('disable');
             }
         });
 
@@ -1840,7 +1857,13 @@
             if (tf_hasErrorsFlag) {
                 return false;
             }
-            let step = $(this).attr("data-step");
+            let active_steps = $('.tf_popup_stpes').val();
+            let stepsArray = active_steps.split(',').map(Number);
+            let currentStep = parseInt($(this).attr("data-step"));
+
+            let currentIndex = stepsArray.indexOf(currentStep);
+            let step = stepsArray[currentIndex + 1];
+
             if (step > 1) {
                 for (let i = 1; i <= step; i++) {
                     $('.tf-booking-step-' + i).removeClass("active");
@@ -1858,7 +1881,16 @@
         // Navigation Back
         $(document).on('click', '.tf-step-back', function (e) {
             e.preventDefault();
-            let step = $(this).attr("data-step");
+            
+            let active_steps = $('.tf_popup_stpes').val();
+            let stepsArray = active_steps.split(',').map(Number);
+            let currentStep = parseInt($(this).attr("data-step"));
+
+            // Find the previous available step from active_steps
+            let currentIndex = stepsArray.indexOf(currentStep);
+            let step = (currentIndex > 0) ? stepsArray[currentIndex - 1] : 1;
+            
+            // let step = $(this).attr("data-step");
             if (step == 1) {
                 $('.tf-booking-step').removeClass("active");
                 $('.tf-booking-step').removeClass("done");
@@ -1895,7 +1927,12 @@
             var deposit = $('input[name=deposit]').is(':checked');
             var extras = [];
             var quantity = [];
-
+            var selectedPackage = $('.tf-booking-content-package input[name="tf_package"]:checked').val();
+            if (selectedPackage !== undefined) {
+                var $selectedDiv = $('#package-' + selectedPackage).closest('.tf-single-package');
+                adults = $selectedDiv.find('input[name="adults"]').val();
+                children = $selectedDiv.find('input[name="childs"]').val();
+            }
             $('.tour-extra-single').each(function (e) {
                 let $this = $(this);
 
@@ -1927,7 +1964,8 @@
                 check_in_time: check_in_time,
                 tour_extra: extras,
                 tour_extra_quantity: quantities,
-                deposit: deposit
+                deposit: deposit,
+                selectedPackage: selectedPackage
             };
 
             $.ajax({
@@ -1991,7 +2029,11 @@
         $(document).on('change', '[name*=tf-tour-extra], input[name="extra-quantity"]', function () {
             tourPopupBooking();
         });
-        $(document).on('change', '[name=deposit]', function () {
+        $(document).on('change', '[name=deposit], [name=tf_package]', function () {
+            tourPopupBooking();
+        });
+
+        $('.tf-single-person .acr-inc, .tf-single-person .acr-dec').on('click', function (e) {
             tourPopupBooking();
         });
 

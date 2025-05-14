@@ -49,6 +49,10 @@ function tf_tours_booking_function() {
 	$tour_time    = isset( $_POST['check-in-time'] ) ? sanitize_text_field( $_POST['check-in-time'] ) : null;
 	$make_deposit = ! empty( $_POST['deposit'] ) ? sanitize_text_field( $_POST['deposit'] ) : false;
 
+	// Tour Package
+	$selectedPackage = ! empty( $_POST['selectedPackage'] ) ? $_POST['selectedPackage'] : '';
+	$tf_package_pricing = ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
+	// var_dump($selectedPackage); exit();
 	// Visitor Details
 	$tf_visitor_details = !empty($_POST['traveller']) ? $_POST['traveller'] : "";
 
@@ -577,10 +581,26 @@ function tf_tours_booking_function() {
 
 	} else {
 
-		$group_price    = ! empty( $meta['group_price'] ) ? $meta['group_price'] : 0;
-		$adult_price    = ! empty( $meta['adult_price'] ) ? $meta['adult_price'] : 0;
-		$children_price = ! empty( $meta['child_price'] ) ? $meta['child_price'] : 0;
-		$infant_price   = ! empty( $meta['infant_price'] ) ? $meta['infant_price'] : 0;
+		if($pricing_rule != 'package'){
+			$group_price    = ! empty( $meta['group_price'] ) ? $meta['group_price'] : 0;
+			$adult_price    = ! empty( $meta['adult_price'] ) ? $meta['adult_price'] : 0;
+			$children_price = ! empty( $meta['child_price'] ) ? $meta['child_price'] : 0;
+			$infant_price   = ! empty( $meta['infant_price'] ) ? $meta['infant_price'] : 0;
+		}
+
+		if($pricing_rule == 'package'){
+			$single_package = !empty($tf_package_pricing[$selectedPackage]) ? $tf_package_pricing[$selectedPackage] : '';
+			
+			if ( $single_package['pricing_type'] == 'person' ) {
+				$adult_price    = ! empty( $single_package['adult_price'] ) ? $single_package['adult_price'] : 0;
+				$children_price = ! empty( $single_package['child_price'] ) ? $single_package['child_price'] : 0;
+				$infant_price   = ! empty( $single_package['infant_price'] ) ? $single_package['infant_price'] : 0;
+			}
+			if ( $single_package['pricing_type'] == 'group' ) {
+				$group_price    = ! empty( $single_package['group_price'] ) ? $single_package['group_price'] : 0;
+			}
+var_dump($group_price); exit();
+		}
 
 	}
 
