@@ -1203,6 +1203,7 @@
             }
             if(input.val() == max){
                 $(this).addClass('disable');
+                $(this).parent().find('.acr-dec').removeClass('disable');
             }else{
                 $(this).parent().find('.acr-dec').removeClass('disable');
             }
@@ -1227,6 +1228,7 @@
             }
             if(input.val() == min){
                 $(this).addClass('disable');
+                $(this).parent().find('.acr-inc').removeClass('disable');
             }else{
                 $(this).parent().find('.acr-inc').removeClass('disable');
             }
@@ -1931,7 +1933,15 @@
             if (selectedPackage !== undefined) {
                 var $selectedDiv = $('#package-' + selectedPackage).closest('.tf-single-package');
                 adults = $selectedDiv.find('input[name="adults"]').val();
-                children = $selectedDiv.find('input[name="childs"]').val();
+                children = $selectedDiv.find('input[name="childrens"]').val();
+
+                $('.tf-single-package').each(function () {
+                    var $package = $(this);
+                    var currentKey = $package.find('input[name="tf_package"]').val();
+                    var isSelected = currentKey === selectedPackage;
+            
+                    $package.find('input[type="number"]').prop('disabled', !isSelected);
+                });
             }
             $('.tour-extra-single').each(function (e) {
                 let $this = $(this);
@@ -2036,6 +2046,18 @@
         $('.tf-single-person .acr-inc, .tf-single-person .acr-dec').on('click', function (e) {
             tourPopupBooking();
         });
+
+        $('input[name="tf_package"]').on('change', function () {
+            var selectedKey = $(this).val();
+            $('.tf-single-package').each(function () {
+                var $package = $(this);
+                if ($package.find('input[name="tf_package"]').val() !== selectedKey) {
+                    $package.find('input[type="number"]').prop('disabled', true);
+                } else {
+                    $package.find('input[type="number"]').prop('disabled', false);
+                }
+            });
+        });        
 
         // Popup Close
         $('body').on('click touchstart', '.tf-booking-times span', function (e) {

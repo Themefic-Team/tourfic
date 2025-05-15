@@ -2065,6 +2065,11 @@ class Tour {
 							$pricing_type = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
 							$package_pricing = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
 							$active_steps = []; 
+							if( ($pricing_type!='package' || empty($package_pricing)) && empty( $tour_extras ) && empty( $traveller_info_coll ) && 3 != $tf_booking_by ){ ?>
+								<li class="tf-booking-step tf-booking-step-1 active">
+									<i class="ri-box-3-line"></i> <?php echo esc_html__( "Details", "tourfic" ); ?>
+								</li>
+							<?php }
 							if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $pricing_type=='package' && $package_pricing ) { 
 								$active_steps[1] = 1;
 							?>
@@ -2075,14 +2080,14 @@ class Tour {
 							if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_extras ) { 
 							$active_steps[2] = 2;
 							?>
-                                <li class="tf-booking-step tf-booking-step-2 <?php echo $pricing_type!='package' && empty( $package_pricing ) ? esc_attr( 'active' ) : ''; ?>">
+                                <li class="tf-booking-step tf-booking-step-2 <?php echo ($pricing_type!='package' || empty( $package_pricing )) ? esc_attr( 'active' ) : ''; ?>">
                                     <i class="ri-price-tag-3-line"></i> <?php echo esc_html__( "Tour extra", "tourfic" ); ?>
                                 </li>
 							<?php }
 							if ( $traveller_info_coll ) {
 								$active_steps[3] = 3;
 								?>
-                                <li class="tf-booking-step tf-booking-step-3 <?php echo $pricing_type!='package' && empty( $package_pricing ) && empty( $tour_extras ) ? esc_attr( 'active' ) : ''; ?> ">
+                                <li class="tf-booking-step tf-booking-step-3 <?php echo ($pricing_type!='package' || empty( $package_pricing )) && empty( $tour_extras ) ? esc_attr( 'active' ) : ''; ?> ">
                                     <i class="ri-group-line"></i> <?php echo esc_html__( "Traveler details", "tourfic" ); ?>
                                 </li>
 							<?php }
@@ -2136,7 +2141,7 @@ class Tour {
 														<h3><?php echo esc_html__( "Child", "tourfic" ); ?></h3>
 														<div class="inc-dec">
 															<div class="acr-dec disable">-</div>
-															<input type="number" name="childs" id="childs" value="<?php echo !empty($pack['min_child']) ? esc_attr($pack['min_child']) : 0; ?>" data-min="<?php echo !empty($pack['min_child']) ? esc_attr($pack['min_child']) : ''; ?>" data-max="<?php echo !empty($pack['max_child']) ? esc_attr($pack['max_child']) : ''; ?>">
+															<input type="number" name="childrens" id="childs" value="<?php echo !empty($pack['min_child']) ? esc_attr($pack['min_child']) : 0; ?>" data-min="<?php echo !empty($pack['min_child']) ? esc_attr($pack['min_child']) : ''; ?>" data-max="<?php echo !empty($pack['max_child']) ? esc_attr($pack['max_child']) : ''; ?>" />
 															<div class="acr-inc">+</div>
 														</div>
 													</div>
@@ -2154,7 +2159,7 @@ class Tour {
 					$tour_popup_extra_text = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( Helper::tfopt( 'tour_popup_extras_text' ) ) ? Helper::tfopt( 'tour_popup_extras_text' ) : '';
 					$traveler_details_text = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( Helper::tfopt( 'tour_traveler_details_text' ) ) ? Helper::tfopt( 'tour_traveler_details_text' ) : '';
 					if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_extras ) { ?>
-                        <div class="tf-booking-content tf-booking-content-2 <?php echo $pricing_type!='package' && empty( $package_pricing ) ? esc_attr( 'show' ) : ''; ?>">
+                        <div class="tf-booking-content tf-booking-content-2 <?php echo ($pricing_type!='package' || empty( $package_pricing )) ? esc_attr( 'show' ) : ''; ?>">
                             <p><?php echo esc_html( $tour_popup_extra_text ); ?></p>
                             <div class="tf-booking-content-extra">
 								<?php
@@ -2211,7 +2216,7 @@ class Tour {
 						?>
 
                         <!-- Popup Traveler Info -->
-                        <div class="tf-booking-content tf-booking-content-3 <?php echo $pricing_type!='package' && empty( $package_pricing ) && empty( $tour_extras ) ? esc_attr( 'show' ) : ''; ?>">
+                        <div class="tf-booking-content tf-booking-content-3 <?php echo ($pricing_type!='package' || empty( $package_pricing )) && empty( $tour_extras ) ? esc_attr( 'show' ) : ''; ?>">
                             <p><?php echo esc_html( $traveler_details_text ); ?></p>
                             <div class="tf-booking-content-traveller">
                                 <div class="tf-traveller-info-box"></div>
@@ -2337,7 +2342,7 @@ class Tour {
 					<?php } ?>
 
                     <!-- Popup Booking Summary -->
-                    <div class="tf-booking-summery" style="<?php echo $pricing_type!='package' && empty($package_pricing) && empty( $tour_extras ) && empty( $traveller_info_coll ) && 3 != $tf_booking_by ? esc_attr( "width: 100%;" ) : ''; ?>">
+                    <div class="tf-booking-summery" style="<?php echo ($pricing_type!='package' || empty($package_pricing)) && empty( $tour_extras ) && empty( $traveller_info_coll ) && 3 != $tf_booking_by ? esc_attr( "width: 100%;" ) : ''; ?>">
                         <div class="tf-booking-fixed-summery">
                             <h5><?php echo esc_html__( "Booking Summary", "tourfic" ); ?></h5>
                             <h4><?php echo esc_html( get_the_title( $post_id ) ); ?></h4>
@@ -2382,7 +2387,7 @@ class Tour {
                             </div>
                         </div>
 					<?php } ?>
-					<?php if ( $pricing_type!='package' && empty($package_pricing) && empty( $tour_extras ) && 3 != $tf_booking_by && empty( $traveller_info_coll ) ) { ?>
+					<?php if ( ($pricing_type!='package' || empty($package_pricing)) && empty( $tour_extras ) && 3 != $tf_booking_by && empty( $traveller_info_coll ) ) { ?>
                         <div class="tf-control-pagination show">
                             <button type="submit" class="tf_btn"><?php echo esc_html__( "Continue", "tourfic" ); ?></button>
                         </div>
@@ -2417,7 +2422,7 @@ class Tour {
 					if ( $traveller_info_coll ) { ?>
 
                         <!-- Popup Traveler Info -->
-                        <div class="tf-control-pagination tf-pagination-content-3 <?php echo $pricing_type!='package' && empty( $package_pricing ) && empty( $tour_extras ) ? esc_attr( 'show' ) : ''; ?>">
+                        <div class="tf-control-pagination tf-pagination-content-3 <?php echo ($pricing_type!='package' || empty( $package_pricing )) && empty( $tour_extras ) ? esc_attr( 'show' ) : ''; ?>">
 							<?php
 							if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ($tour_extras || ($pricing_type=='package' && $package_pricing) ) ) { ?>
                                 <a href="#" class="tf-back-control tf-step-back" data-step="3"><i class="fa fa-angle-left"></i><?php echo esc_html__( "Back", "tourfic" ); ?></a>

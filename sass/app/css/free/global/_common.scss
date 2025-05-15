@@ -1499,6 +1499,12 @@ li.tf-filter-item {
                                 border: 1px solid $color-primary;
                             }
                         }
+                        &:only-child {
+                            border-radius: 8px;
+                            @media #{$max768} {
+                                border-radius: 16px;
+                            }
+                        }
                     }
                     li.done{
                         position: relative;
