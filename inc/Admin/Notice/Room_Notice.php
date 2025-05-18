@@ -33,8 +33,7 @@ class Room_Notice extends \Tourfic\Core\TF_Notice {
             ?>
                 <div class="tf-critical-update-notice notice notice-info is-dismissible">
                     <h2><?php echo esc_html__("After Update Support", 'tourfic') ?></h2>
-                    <p><?php echo wp_kses_post( __(' If you experience any inconvenience after updating to <b>Tourfic version 2.16.2 </b>, please don\'t hesitate to reach out to our <a href="https://portal.themefic.com/support/" target="_blank"><b>Support Team</b></a>. We\'re  here to assist you with any inconvenience.', "tourfic")); ?></p>
-		    
+                    <p><?php echo wp_kses_post( __(' If you experience any inconvenience after updating to <b>Tourfic version 2.16.5 </b>, please don\'t hesitate to reach out to our <a href="https://portal.themefic.com/support/" target="_blank"><b>Support Team</b></a>. We\'re  here to assist you with any inconvenience.', "tourfic")); ?></p>
                 </div>
 
                 <script>
