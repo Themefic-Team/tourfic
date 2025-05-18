@@ -21,8 +21,8 @@ class Hotel_CPT extends \Tourfic\Core\Post_Type {
 		parent::__construct();
 
 		$this->set_post_args( array(
-			'name'          => esc_html__( 'Hotels', 'tourfic' ),
-			'singular_name' => esc_html__( 'Hotel', 'tourfic' ),
+			'name'          => apply_filters("tf_hotel_post_type_name_change_plural", esc_html__( 'Hotels', 'tourfic' )),	
+			'singular_name' => apply_filters( "tf_hotel_post_type_name_change_singular", esc_html__( 'Hotel', 'tourfic' )),
 			'slug'          => 'tf_hotel',
 			'menu_icon'     => Menu_Icon::$hotel_icon,
 			'menu_position' => 26.2,
