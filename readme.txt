@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, car-rental, multivendor-marketplace
 Requires at least: 5.4
 Tested up to: 6.8
-Stable tag: 2.16.4
+Stable tag: 2.16.5
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -371,6 +371,11 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 22. Map Template(Pro)
 
 == Changelog ==
+
+= 2.16.5 – May 18, 2025 =
+
+- Fixed: Hotel room inventory issue with WPML compatibility.
+- Improved: Overall system stability. 
 
 = 2.16.4 – May 06, 2025 =
 
