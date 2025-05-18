@@ -2831,7 +2831,7 @@ class Hotel {
                                         </div>
                                     </div>
                                		</div>
-								<?endif; ?>
+								<?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -3045,7 +3045,7 @@ class Hotel {
 								</select>
 							</div>
 						</label>
-					<? endif; ?>
+					<?php endif; ?>
                 </div>
 
                 <div class="tf_booking-dates">
