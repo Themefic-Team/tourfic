@@ -1142,6 +1142,7 @@ class Tour {
 					<?php } ?>
 
                     <input type="hidden" name="post_id" value="<?php echo esc_attr( $post_id ); ?>">
+					<?php if($pricing_rule != 'package') { ?>
                     <div class="tf-booking-person tf-mt-30">
                         <div class="tf-form-title">
                             <p><?php esc_html_e( "Person Info", "tourfic" ); ?></p>
@@ -1252,7 +1253,7 @@ class Tour {
 						<?php
 						?>
                     </div>
-
+					<?php } ?>
                     <div class="tf-tours-booking-btn tf-booking-bttns tf-mt-30">
 						<?php if ( ! empty( $tf_tour_book_now_text ) ) : ?>
                             <div class="tf-btn-wrap">
@@ -1450,6 +1451,7 @@ class Tour {
 					<?php } ?>
 
                     <input type="hidden" name="post_id" value="<?php echo esc_attr( $post_id ); ?>">
+					<?php if($pricing_rule != 'package') { ?>
                     <div class="tf-booking-person tf-tour-booking-box">
                         <div class="tf-form-title">
                             <h3 class="tf-person-info-title"><?php esc_html_e( "Person Info", "tourfic" ); ?></h3>
@@ -1588,6 +1590,7 @@ class Tour {
                             </div>
 						<?php } ?>
                     </div>
+					<?php } ?>
 
                     <div class="tf-tours-booking-btn tf-booking-bttns">
 						<?php if ( ! empty( $tf_tour_book_now_text ) ) : ?>
@@ -1786,6 +1789,7 @@ class Tour {
             <div class="tf-tour-booking-wrap">
 				<?php if ( ( $tf_booking_type == 2 && $tf_hide_booking_form !== 1 && $tf_ext_booking_type !== '2' ) || $tf_booking_type == 1 || $tf_booking_type == 3 ) : ?>
                     <form class="tf_tours_booking">
+						<?php if($pricing_rule != 'package') { ?>
                         <div class="tf_selectperson-wrap">
                             <div class="tf_input-inner">
 							<span class="tf_person-icon">
@@ -1902,7 +1906,7 @@ class Tour {
                                 </div>
                             </div>
                         </div>
-
+						<?php } ?>
                         <div class='tf_form-row'>
                             <label class='tf_label-row'>
                                 <div class='tf_form-inner'>
@@ -2088,7 +2092,7 @@ class Tour {
 								$active_steps[3] = 3;
 								?>
                                 <li class="tf-booking-step tf-booking-step-3 <?php echo ($pricing_type!='package' || empty( $package_pricing )) && empty( $tour_extras ) ? esc_attr( 'active' ) : ''; ?> ">
-                                    <i class="ri-group-line"></i> <?php echo esc_html__( "Traveler details", "tourfic" ); ?>
+                                    <i class="ri-group-line"></i> <?php echo esc_html__( "Traveler info", "tourfic" ); ?>
                                 </li>
 							<?php }
 							$tf_booking_by = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
@@ -2096,7 +2100,7 @@ class Tour {
 								$active_steps[4] = 4;
 								?>
                                 <li class="tf-booking-step tf-booking-step-<?php echo empty( $traveller_info_coll ) ? esc_attr( "3" ) : esc_attr( "4" ); ?> <?php echo empty( $tour_extras ) && empty( $traveller_info_coll ) ? esc_attr( 'active' ) : ''; ?>">
-                                    <i class="ri-calendar-check-line"></i> <?php echo esc_html__( "Booking Confirmation", "tourfic" ); ?>
+                                    <i class="ri-calendar-check-line"></i> <?php echo esc_html__( "Booking info", "tourfic" ); ?>
                                 </li>
 							<?php } ?>
                         </ul>
