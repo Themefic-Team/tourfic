@@ -44,6 +44,7 @@ class TF_Options {
 		add_action( 'save_post', array( $this, 'tf_update_room_avail_date_price' ), 9999, 2 );
 		add_action( 'wp_ajax_tf_add_apartment_availability', array( $this, 'tf_add_apartment_availability' ) );
 		add_action( 'wp_ajax_tf_get_apartment_availability', array( $this, 'tf_get_apartment_availability' ) );
+		add_action( 'wp_ajax_tf_get_tour_availability', array( $this, 'tf_get_tour_availability' ) );
 		add_action( 'save_post', array( $this, 'tf_update_apt_availability_price' ), 99, 2 );
 		add_action( 'wp_ajax_tf_insert_category_data', array( $this, 'tf_insert_category_data_callback' ) );
 		add_action( 'wp_ajax_tf_delete_category_data', array( $this, 'tf_delete_category_data_callback' ) );
@@ -782,6 +783,52 @@ class TF_Options {
 		}
 
 		echo wp_json_encode( $apt_availability_data );
+		die();
+	}
+
+	/*
+     * Get tour availability calendar
+     * @auther Jahid
+     */
+	function tf_get_tour_availability() {
+		// Add nonce for security and authentication.
+		check_ajax_referer( 'updates', '_nonce' );
+
+		// Check if the current user has the required capability.
+		if (!current_user_can('manage_options')) {
+			wp_send_json_error(__('You do not have permission to access this resource.', 'tourfic'));
+			return;
+		}
+
+		$new_post         = isset( $_POST['new_post'] ) && ! empty( $_POST['new_post'] ) ? sanitize_text_field( $_POST['new_post'] ) : '';
+		$tour_id     = isset( $_POST['tour_id'] ) && ! empty( $_POST['tour_id'] ) ? sanitize_text_field( $_POST['tour_id'] ) : '';
+		$tour_availability = isset( $_POST['tour_availability'] ) && ! empty( $_POST['tour_availability'] ) ? sanitize_text_field( $_POST['tour_availability'] ) : '';
+
+		if ( $new_post != 'true' ) {
+			$tour_data        = get_post_meta( $tour_id, 'tf_tours_opt', true );
+			$tour_availability_data = isset( $tour_data['tour_availability'] ) && ! empty( $tour_data['tour_availability'] ) ? json_decode( $tour_data['tour_availability'], true ) : [];
+		} else {
+			$tour_availability_data = json_decode( stripslashes( $tour_availability ), true );
+		}
+
+		if ( ! empty( $tour_availability_data ) && is_array( $tour_availability_data ) ) {
+			$tour_availability_data = array_values( $tour_availability_data );
+			$tour_availability_data = array_map( function ( $item ) {
+				$item['start'] = gmdate( 'Y-m-d', strtotime( $item['check_in'] ) );
+				$item['title'] = $item['pricing_type'] == 'per_night' ? __( 'Price: ', 'tourfic' ) . wc_price( $item['price'] ) : __( 'Adult: ', 'tourfic' ) . wc_price( $item['adult_price'] ) . '<br>' . __( 'Child: ', 'tourfic' ) . wc_price( $item['child_price'] ) . '<br>' . __( 'Infant: ', 'tourfic' ) . wc_price( $item['infant_price'] );
+
+				if ( $item['status'] == 'unavailable' ) {
+					$item['display'] = 'background';
+					$item['color']   = '#003c79';
+				}
+
+				return $item;
+			}, $tour_availability_data );
+		} else {
+			$tour_availability_data = [];
+		}
+
+		echo wp_json_encode( $tour_availability_data );
 		die();
 	}
 

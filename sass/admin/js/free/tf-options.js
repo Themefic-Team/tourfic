@@ -1120,6 +1120,9 @@
             if ($this.hasClass('tf_apartment_availability_by_date')){
                 tfApartmentCalendar();
             }
+            if ($this.hasClass('tf_tour_availability_by_date')){
+                tfTourCalendar();
+            }
         });
 
         /*
@@ -1353,6 +1356,236 @@
             }
         });
 
+         /*
+        * Tour Availability Calendar
+        * @since 2.10.2
+        * @auther: Foysal
+        */
+         var tourCal = function (container) {
+            var self = this;
+            this.container = container;
+            this.calendar = null
+            this.tourCalData = null;
+            this.fullCalendar;
+            this.timeOut;
+            this.fullCalendarOptions = {
+                initialView: 'dayGridMonth',
+                firstDay: 1,
+                headerToolbar: {
+                    start: 'today',
+                    center: 'title',
+                    end: 'prev,next'
+                },
+                displayEventTime: true,
+                selectable: true,
+                select: function ({start, end, startStr, endStr, allDay, jsEvent, view, resource}) {
+                    if (moment(start).isBefore(moment(), 'day') || moment(end).isBefore(moment(), 'day')) {
+                        self.fullCalendar.unselect();
+                        setTourCheckInOut("", "", self.tourCalData);
+                    } else {
+                        var zone = moment(start).format("Z");
+                        zone = zone.split(":");
+                        zone = "" + parseInt(zone[0]) + ":00";
+                        var check_in = moment(start).utcOffset(zone).format(String(tf_options.tf_admin_date_format || "MM/DD/YYYY").toUpperCase());
+                        var check_out = moment(end).utcOffset(zone).subtract(1, 'day').format(String(tf_options.tf_admin_date_format || "MM/DD/YYYY").toUpperCase());
+                        setTourCheckInOut(check_in, check_out, self.tourCalData);
+                    }
+                },
+                events: function ({start, end, startStr, endStr, timeZone}, successCallback, failureCallback) {
+                    $.ajax({
+                        url: tf_options.ajax_url,
+                        dataType: "json",
+                        type: "POST",
+                        data: {
+                            action: "tf_get_tour_availability",
+                            _nonce: tf_admin_params.tf_nonce,
+                            new_post: $('[name="new_post"]').val(),
+                            tour_id: $('[name="tour_id"]').val(),
+                            tour_availability: $('.tour_availability').val(),
+                        },
+                        beforeSend: function () {
+                            $(self.container).css({'pointer-events': 'none', 'opacity': '0.5'});
+                            $(self.calendar).addClass('tf-content-loading');
+                        },
+                        success: function (doc) {
+                            if (typeof doc == "object") {
+                                successCallback(doc);
+                            }
+
+                            $(self.container).css({'pointer-events': 'auto', 'opacity': '1'});
+                            $(self.calendar).removeClass('tf-content-loading');
+                        },
+                        error: function (e) {
+                            console.log(e);
+                        }
+                    });
+                },
+                eventContent: function (arg) {
+                    const title = arg.event.title;
+                    const eventTitleElement = document.createElement('div');
+                    eventTitleElement.classList.add('fc-event-title');
+                    eventTitleElement.innerHTML = title;
+                    return {domNodes: [eventTitleElement]};
+                },
+                eventClick: function ({event, el, jsEvent, view}) {
+                    let startTime = moment(event.start, String(tf_options.tf_admin_date_format || "MM/DD/YYYY").toUpperCase())
+                        .format(String(tf_options.tf_admin_date_format || 'MM/DD/YYYY').toUpperCase());
+                    let endTime;
+                    if (event.end) {
+                        endTime = moment(event.end, String(tf_options.tf_admin_date_format || "MM/DD/YYYY").toUpperCase())
+                            .format(String(tf_options.tf_admin_date_format || 'MM/DD/YYYY').toUpperCase());
+                    } else {
+                        endTime = startTime;
+                    }
+                    setTourCheckInOut(startTime, endTime, self.tourCalData);
+                    let pricingType = $('.tf_tour_pricing_type').val();
+                    if (pricingType === 'per_night') {
+                        if (typeof event.extendedProps.price != 'undefined') {
+                            $("[name='tf_tour_price']", self.tourCalData).val(event.extendedProps.price);
+                        }
+                    } else {
+                        if (typeof event.extendedProps.adult_price != 'undefined') {
+                            $("[name='tf_tour_adult_price']", self.tourCalData).val(event.extendedProps.adult_price);
+                        }
+                        if (typeof event.extendedProps.child_price != 'undefined') {
+                            $("[name='tf_tour_child_price']", self.tourCalData).val(event.extendedProps.child_price);
+                        }
+                        if (typeof event.extendedProps.infant_price != 'undefined') {
+                            $("[name='tf_tour_infant_price']", self.tourCalData).val(event.extendedProps.infant_price);
+                        }
+                    }
+                    if (event.extendedProps.status) {
+                        $("[name='tf_tour_status'] option[value=" + event.extendedProps.status + "]", self.tourCalData).prop("selected", true);
+                    }
+                },
+            };
+            this.init = function () {
+                self.container = jQuery(container);
+                self.calendar = container.querySelector('.tf-tour-cal');
+                self.tourCalData = $('.tf-tour-cal-field', self.container);
+                settourCheckInOut('', '', self.tourCalData);
+                self.initCalendar();
+            }
+            this.initCalendar = function () {
+                if (typeof FullCalendar != 'undefined') {
+                    self.fullCalendar = new FullCalendar.Calendar(self.calendar, self.fullCalendarOptions);
+                    self.fullCalendar.render();
+                }
+            }
+        };
+
+        function settourCheckInOut(check_in, check_out, tourCalData) {
+            $('.tf_tour_check_in', tourCalData).val(check_in);
+            $('.tf_tour_check_out', tourCalData).val(check_out);
+        }
+
+        function tourResetForm(tourCalData) {
+            $('.tf_tour_check_in', tourCalData).val('');
+            $('.tf_tour_check_out', tourCalData).val('');
+            $('[name="tf_tour_price"]', tourCalData).val('');
+            $('[name="tf_tour_adult_price"]', tourCalData).val('');
+            $('[name="tf_tour_child_price"]', tourCalData).val('');
+            $('[name="tf_tour_infant_price"]', tourCalData).val('');
+        }
+
+        const tfTourCalendar = () => {
+            $('.tf-tour-cal-wrap').each(function (index, el) {
+                var tour = new tourCal(el);
+                tour.init();
+
+                let checkIn = $(el).find('[name="tf_tour_check_in"]').flatpickr({
+                    dateFormat: tf_options.tf_admin_date_format || 'MM/DD/YYYY',
+                    minDate: 'today',
+                    altInput: true,
+                    altFormat: tf_options.tf_admin_date_format,
+                    onChange: function (selectedDates, dateStr, instance) {
+                        checkOut.set('minDate', dateStr);
+                    }
+                });
+
+                let checkOut = $(el).find('[name="tf_tour_check_out"]').flatpickr({
+                    dateFormat: tf_options.tf_admin_date_format || 'MM/DD/YYYY',
+                    minDate: 'today',
+                    altInput: true,
+                    altFormat: tf_options.tf_admin_date_format,
+                    onChange: function (selectedDates, dateStr, instance) {
+                        checkIn.set('maxDate', dateStr);
+                    }
+                });
+            });
+        }
+        tfTourCalendar();
+
+        $(document).on('click', '.tf_tour_cal_update', function (e) {
+            e.preventDefault();
+
+            let btn = $(this);
+            let container = btn.closest('.tf-tour-cal-wrap');
+            let containerEl = btn.closest('.tf-tour-cal-wrap')[0];
+            let cal = container.find('.tf-tour-cal');
+            let data = $('input, select', container.find('.tf-tour-cal-field')).serializeArray();
+            let pricingType = $('.tf_tour_pricing_type').val();
+            let tourAvailability = container.find('.tour_availability');
+            data.push({name: 'action', value: 'tf_add_tour_availability'});
+            data.push({name: '_nonce', value: tf_admin_params.tf_nonce});
+            data.push({name: 'pricing_type', value: pricingType});
+            data.push({name: 'tour_availability', value: tourAvailability.val()});
+
+            $.ajax({
+                url: tf_options.ajax_url,
+                type: 'POST',
+                data: data,
+                beforeSend: function () {
+                    container.css({'pointer-events': 'none', 'opacity': '0.5'})
+                    cal.addClass('tf-content-loading');
+                    btn.addClass('tf-btn-loading');
+                },
+                success: function (response) {
+                    if (typeof response == 'object') {
+                        if (response.data.status === true) {
+                            tourAvailability.val(response.data.tour_availability)
+                            notyf.success(response.data.message);
+                            tourResetForm(container);
+
+                            var tour = new tourCal(containerEl);
+                            tour.init();
+                            if (tour.fullCalendar) {
+                                tour.fullCalendar.refetchEvents();
+                            }
+                        } else {
+                            notyf.error(response.data.message);
+                        }
+
+                        container.css({'pointer-events': 'auto', 'opacity': '1'})
+                        cal.removeClass('tf-content-loading');
+                        btn.removeClass('tf-btn-loading');
+                    }
+                },
+                error: function (e) {
+                    console.log(e);
+                    container.css({'pointer-events': 'auto', 'opacity': '1'})
+                    cal.removeClass('tf-content-loading');
+                    btn.removeClass('tf-btn-loading');
+                },
+                complete: function () {
+                    container.css({'pointer-events': 'auto', 'opacity': '1'});
+                    cal.removeClass('tf-content-loading');
+                    btn.removeClass('tf-btn-loading');
+                },
+            });
+        });
+
+        $(document).on('change', '.tf_tour_pricing_type', function (e) {
+            let pricingType = $(this).val();
+
+            if (pricingType === 'per_night') {
+                $('.tf-price-by-night').show();
+                $('.tf-price-by-person').hide();
+            } else if (pricingType === '2') {
+                $('.tf-price-by-person').show();
+                $('.tf-price-by-night').hide();
+            }
+        });
 
         /*
         * Options WP editor
@@ -1807,6 +2040,7 @@
 
             tfHotelCalendar();
             tfApartmentCalendar();
+            tfTourCalendar();
         });
 
         // Select 2 add new category

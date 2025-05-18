@@ -4540,25 +4540,31 @@ a.tf-import-btn, a.tf-export-btn {
 }
 
 .tf-apt-cal-wrap .fc-view-harness,
-.tf-room-cal-wrap .fc-view-harness {
+.tf-room-cal-wrap .fc-view-harness,
+.tf-tour-cal-wrap .fc-view-harness {
   height: 395px !important;
 }
 .tf-apt-cal-wrap .fc-direction-ltr .fc-daygrid-event.fc-event-end,
 .tf-apt-cal-wrap .fc-direction-rtl .fc-daygrid-event.fc-event-start,
 .tf-room-cal-wrap .fc-direction-ltr .fc-daygrid-event.fc-event-end,
-.tf-room-cal-wrap .fc-direction-rtl .fc-daygrid-event.fc-event-start {
+.tf-room-cal-wrap .fc-direction-rtl .fc-daygrid-event.fc-event-start,
+.tf-tour-cal-wrap .fc-direction-ltr .fc-daygrid-event.fc-event-end,
+.tf-tour-cal-wrap .fc-direction-rtl .fc-daygrid-event.fc-event-start {
   font-size: 0.625rem;
 }
 .tf-apt-cal-wrap .fc .fc-bg-event .fc-event-title,
-.tf-room-cal-wrap .fc .fc-bg-event .fc-event-title {
+.tf-room-cal-wrap .fc .fc-bg-event .fc-event-title,
+.tf-tour-cal-wrap .fc .fc-bg-event .fc-event-title {
   font-size: 0.625rem;
 }
 .tf-apt-cal-wrap .fc .fc-daygrid-event,
-.tf-room-cal-wrap .fc .fc-daygrid-event {
+.tf-room-cal-wrap .fc .fc-daygrid-event,
+.tf-tour-cal-wrap .fc .fc-daygrid-event {
   cursor: pointer;
 }
 .tf-apt-cal-wrap table,
-.tf-room-cal-wrap table {
+.tf-room-cal-wrap table,
+.tf-tour-cal-wrap table {
   margin-bottom: 0 !important;
 }
 
