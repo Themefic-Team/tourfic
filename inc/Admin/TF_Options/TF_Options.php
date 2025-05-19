@@ -44,6 +44,8 @@ class TF_Options {
 		add_action( 'save_post', array( $this, 'tf_update_room_avail_date_price' ), 9999, 2 );
 		add_action( 'wp_ajax_tf_add_apartment_availability', array( $this, 'tf_add_apartment_availability' ) );
 		add_action( 'wp_ajax_tf_get_apartment_availability', array( $this, 'tf_get_apartment_availability' ) );
+
+		add_action( 'wp_ajax_tf_add_tour_availability', array( $this, 'tf_add_tour_availability' ) );
 		add_action( 'wp_ajax_tf_get_tour_availability', array( $this, 'tf_get_tour_availability' ) );
 		add_action( 'save_post', array( $this, 'tf_update_apt_availability_price' ), 99, 2 );
 		add_action( 'wp_ajax_tf_insert_category_data', array( $this, 'tf_insert_category_data_callback' ) );
@@ -783,6 +785,93 @@ class TF_Options {
 		}
 
 		echo wp_json_encode( $apt_availability_data );
+		die();
+	}
+
+
+	/*
+	 * Apartment availability calendar update
+	 * @auther Foysal
+	 */
+	function tf_add_tour_availability() {
+		// Add nonce for security and authentication.
+		check_ajax_referer( 'updates', '_nonce' );
+
+		// Check if the current user has the required capability.
+		if (!current_user_can('manage_options')) {
+			wp_send_json_error( [
+				'status'  => false,
+				'message' => __( 'You do not have permission to access this resource.', 'tourfic' )
+			] );
+			return;
+		}
+
+		$date_format         = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
+		$tour_id        = isset( $_POST['tour_id'] ) && ! empty( $_POST['tour_id'] ) ? sanitize_text_field( $_POST['tour_id'] ) : '';
+		$new_post            = isset( $_POST['new_post'] ) && ! empty( $_POST['new_post'] ) ? $_POST['new_post'] : '';
+		$check_in            = isset( $_POST['tf_tour_check_in'] ) && ! empty( $_POST['tf_tour_check_in'] ) ? sanitize_text_field( $_POST['tf_tour_check_in'] ) : '';
+		$check_out           = isset( $_POST['tf_tour_check_out'] ) && ! empty( $_POST['tf_tour_check_out'] ) ? sanitize_text_field( $_POST['tf_tour_check_out'] ) : '';
+		$status              = isset( $_POST['tf_tour_status'] ) && ! empty( $_POST['tf_tour_status'] ) ? sanitize_text_field( $_POST['tf_tour_status'] ) : '';
+		$pricing_type        = isset( $_POST['pricing_type'] ) && ! empty( $_POST['pricing_type'] ) ? sanitize_text_field( $_POST['pricing_type'] ) : '';
+		$tf_tour_price        = isset( $_POST['tf_tour_price'] ) && ! empty( $_POST['tf_tour_price'] ) ? sanitize_text_field( $_POST['tf_tour_price'] ) : '';
+		$tf_tour_adult_price  = isset( $_POST['tf_tour_adult_price'] ) && ! empty( $_POST['tf_tour_adult_price'] ) ? sanitize_text_field( $_POST['tf_tour_adult_price'] ) : '';
+		$tf_tour_child_price  = isset( $_POST['tf_tour_child_price'] ) && ! empty( $_POST['tf_tour_child_price'] ) ? sanitize_text_field( $_POST['tf_tour_child_price'] ) : '';
+		$tf_tour_infant_price = isset( $_POST['tf_tour_infant_price'] ) && ! empty( $_POST['tf_tour_infant_price'] ) ? sanitize_text_field( $_POST['tf_tour_infant_price'] ) : '';
+		$tour_availability    = isset( $_POST['tour_availability'] ) && ! empty( $_POST['tour_availability'] ) ? sanitize_text_field( $_POST['tour_availability'] ) : '';
+
+		if ( empty( $check_in ) || empty( $check_out ) ) {
+			wp_send_json_error( [
+				'status'  => false,
+				'message' => __( 'Please select check in and check out date.', 'tourfic' )
+			] );
+		}
+
+		$check_in  = strtotime( $this->tf_convert_date_format( $check_in, $date_format ) );
+		$check_out = strtotime( $this->tf_convert_date_format( $check_out, $date_format ) );
+		if ( $check_in > $check_out ) {
+			wp_send_json_error( [
+				'status'  => false,
+				'message' => __( 'Check in date must be less than check out date.', 'tourfic' )
+			] );
+		}
+
+		$tour_availability_data = [];
+		for ( $i = $check_in; $i <= $check_out; $i = strtotime( '+1 day', $i ) ) {
+			$tf_tour_date                           = gmdate( 'Y/m/d', $i );
+			$tf_tour_data                           = [
+				'check_in'     => $tf_tour_date,
+				'check_out'    => $tf_tour_date,
+				'pricing_type' => $pricing_type,
+				'price'        => $tf_tour_price,
+				'adult_price'  => $tf_tour_adult_price,
+				'child_price'  => $tf_tour_child_price,
+				'infant_price' => $tf_tour_infant_price,
+				'status'       => $status
+			];
+			$tour_availability_data[ $tf_tour_date ] = $tf_tour_data;
+		}
+
+		$apartment_data = get_post_meta( $tour_id, 'tf_tours_opt', true );
+		if ( $new_post != 'true' ) {
+			$tour_availability = json_decode( $apartment_data['tour_availability'], true );
+			if ( isset( $tour_availability ) && ! empty( $tour_availability ) ) {
+				$tour_availability_data = array_merge( $tour_availability, $tour_availability_data );
+			}
+			$apartment_data['tour_availability'] = wp_json_encode( $tour_availability_data );
+			update_post_meta( $tour_id, 'tf_tours_opt', $apartment_data );
+		} else {
+			$tour_availability = json_decode( stripslashes( $tour_availability ), true );
+			if ( isset( $tour_availability ) && ! empty( $tour_availability ) ) {
+				$tour_availability_data = array_merge( $tour_availability, $tour_availability_data );
+			}
+		}
+
+		wp_send_json_success( [
+			'status'           => true,
+			'message'          => __( 'Availability updated successfully.', 'tourfic' ),
+			'tour_availability' => wp_json_encode( $tour_availability_data ),
+		] );
+
 		die();
 	}
 

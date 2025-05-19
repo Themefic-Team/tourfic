@@ -65,7 +65,7 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
 
                         <div style="width: 100%">
                             <input type="hidden" name="new_post" value="<?php echo $this->value ? 'false' : 'true'; ?>">
-                            <input type="hidden" name="apartment_id" value="<?php echo esc_attr( get_the_ID() ); ?>">
+                            <input type="hidden" name="tour_id" value="<?php echo esc_attr( get_the_ID() ); ?>">
                             <span class="tf_tour_cal_update button button-primary button-large"><?php echo esc_html__( 'Save Calendar', 'tourfic' ); ?></span>
                         </div>
 

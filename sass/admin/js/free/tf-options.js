@@ -39,6 +39,7 @@
 
             tfApartmentCalendar()
             tfHotelCalendar()
+            tfTourCalendar()
         });
 
         /*
@@ -1463,7 +1464,7 @@
                 self.container = jQuery(container);
                 self.calendar = container.querySelector('.tf-tour-cal');
                 self.tourCalData = $('.tf-tour-cal-field', self.container);
-                settourCheckInOut('', '', self.tourCalData);
+                setTourCheckInOut('', '', self.tourCalData);
                 self.initCalendar();
             }
             this.initCalendar = function () {
@@ -1474,7 +1475,7 @@
             }
         };
 
-        function settourCheckInOut(check_in, check_out, tourCalData) {
+        function setTourCheckInOut(check_in, check_out, tourCalData) {
             $('.tf_tour_check_in', tourCalData).val(check_in);
             $('.tf_tour_check_out', tourCalData).val(check_out);
         }
