@@ -46,9 +46,9 @@ class Register {
     
         //Archive
         if(function_exists( 'is_tf_pro' ) && is_tf_pro()){
-            $widgets_manager->register( \Tourfic\App\Widgets\Elementor\Widgets\Search_Form::instance() );
-            $widgets_manager->register( \Tourfic\App\Widgets\Elementor\Widgets\Listings::instance() );
-            $widgets_manager->register( \Tourfic\App\Widgets\Elementor\Widgets\Sidebar::instance() );
+            $widgets_manager->register( \Tourfic\App\Widgets\Elementor\Widgets\Archive\Search_Form::instance() );
+            $widgets_manager->register( \Tourfic\App\Widgets\Elementor\Widgets\Archive\Listings::instance() );
+            $widgets_manager->register( \Tourfic\App\Widgets\Elementor\Widgets\Archive\Sidebar::instance() );
         }
     }
 

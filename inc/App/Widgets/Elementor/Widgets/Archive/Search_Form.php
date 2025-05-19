@@ -1,6 +1,6 @@
 <?php
 
-namespace Tourfic\App\Widgets\Elementor\Widgets;
+namespace Tourfic\App\Widgets\Elementor\Widgets\Archive;
 
 use Elementor\Controls_Manager;
 use Elementor\Icons_Manager;

@@ -250,6 +250,7 @@ class Template_Builder {
                                             <div class="tf-fieldset">
                                                 <select name="tf_template_type" id="tf-template-type" class="tf-select">
                                                     <option value="archive"><?php echo esc_html__('Archive', 'tourfic'); ?></option>
+                                                    <option value="single"><?php echo esc_html__('Single', 'tourfic'); ?></option>
                                                 </select>
                                             </div>
                                         </div>
@@ -721,6 +722,7 @@ class Template_Builder {
                 <div class="tf-fieldset">
                     <select name="tf_template_type" id="tf-template-type" class="tf-select">
                         <option value="archive" <?php selected($tf_template_type, 'archive'); ?>><?php echo esc_html__('Archive', 'tourfic'); ?></option>
+                        <option value="single" <?php selected($tf_template_type, 'single'); ?>><?php echo esc_html__('Single', 'tourfic'); ?></option>
                     </select>
                 </div>
             </div>
