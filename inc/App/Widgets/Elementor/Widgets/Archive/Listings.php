@@ -52,6 +52,8 @@ class Listings extends Widget_Base {
             'cars',
             'rentals',
             'services',
+			'tourfic',
+			'tf'
         ];
     }
 

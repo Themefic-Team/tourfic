@@ -45,6 +45,8 @@ class Search_Form extends Widget_Base {
             'cars',
             'rentals',
             'services',
+			'tourfic',
+			'tf'
         ];
     }
 

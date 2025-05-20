@@ -40,6 +40,8 @@ class Sidebar extends Widget_Base {
 	public function get_keywords(){
         return [
             'sidebar',
+			'tourfic',
+			'tf'
         ];
     }
 
