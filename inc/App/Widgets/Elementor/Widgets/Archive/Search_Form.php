@@ -34,7 +34,7 @@ class Search_Form extends Widget_Base {
 	}
 
 	public function get_categories() {
-		return [ 'tourfic' ];
+		return [ 'tourfic-pro' ];
 	}
 
 	public function get_keywords(){
@@ -45,6 +45,8 @@ class Search_Form extends Widget_Base {
             'cars',
             'rentals',
             'services',
+			'tourfic',
+			'tf'
         ];
     }
 

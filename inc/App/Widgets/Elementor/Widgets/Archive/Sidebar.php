@@ -34,12 +34,14 @@ class Sidebar extends Widget_Base {
 	}
 
 	public function get_categories() {
-		return [ 'tourfic' ];
+		return [ 'tourfic-pro' ];
 	}
 
 	public function get_keywords(){
         return [
             'sidebar',
+			'tourfic',
+			'tf'
         ];
     }
 
