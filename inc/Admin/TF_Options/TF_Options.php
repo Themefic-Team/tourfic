@@ -926,8 +926,7 @@ class TF_Options {
 
 		if ( ! empty( $tour_availability_data ) && is_array( $tour_availability_data ) ) {
 			$tour_availability_data = array_values( $tour_availability_data );
-			$tour_availability_data = array_map( function ( $item ) {
-				$item['start'] = gmdate( 'Y-m-d', strtotime( $item['check_in'] ) );
+			$tour_availability_data = array_map( function ( $item ) {	
 
 				if ( $item['pricing_type'] == 'group' ) {
 					$item['title'] = __( 'Price: ', 'tourfic' ) . wc_price( $item['price'] );
@@ -950,6 +949,9 @@ class TF_Options {
 					}
 				}
 
+				if(!empty($item['title'])){
+					$item['start'] = gmdate( 'Y-m-d', strtotime( $item['check_in'] ) );
+				}
 				if ( $item['status'] == 'unavailable' ) {
 					$item['display'] = 'background';
 					$item['color']   = '#003c79';
@@ -972,7 +974,7 @@ class TF_Options {
                 ?>
 				<div class="tf-single-option tf-single-package">
 					<div class="tf-field-switch">
-						<label for="tf_package_option_<?php echo esc_attr( $item['index'] ); ?>" class="tf-field-label"><?php echo esc_html( $room_option['pack_title'] ); ?></label>
+						<label for="tf_package_option_<?php echo esc_attr( $item['index'] ); ?>" class="tf-field-label"><?php echo esc_html( $item['title'] ); ?></label>
 						<div class="tf-fieldset">
 							<label for="tf_package_option_<?php echo esc_attr( $item['index'] ); ?>" class="tf-switch-label" style="width: 80px">
 								<input type="checkbox" id="tf_package_option_<?php echo esc_attr( $item['index'] ); ?>" name="tf_package_option_<?php echo esc_attr( $item['index'] ); ?>" value="1" class="tf-switch"
