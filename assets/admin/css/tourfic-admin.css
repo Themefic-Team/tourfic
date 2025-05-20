@@ -4596,6 +4596,18 @@ a.tf-import-btn, a.tf-export-btn {
   flex-wrap: wrap;
 }
 
+.tf-single-package .tf-field-switch {
+  width: 160px;
+}
+.tf-single-package .tf-form-fields {
+  width: calc(100% - 160px);
+  display: flex;
+  gap: 12px;
+}
+.tf-single-package .tf-form-fields .tf_option_pricing_type_person {
+  width: 33%;
+}
+
 .tf-single-option {
   display: -webkit-box;
   display: -moz-box;
