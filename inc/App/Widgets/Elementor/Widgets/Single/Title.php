@@ -1,6 +1,6 @@
 <?php
 
-namespace Tourfic\App\Widgets\Elementor\Widgets\Archive;
+namespace Tourfic\App\Widgets\Elementor\Widgets\Single;
 
 use Elementor\Controls_Manager;
 use Elementor\Icons_Manager;
@@ -15,18 +15,18 @@ use Tourfic\Classes\Helper;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Search Form Horizontal
+ * Title
  */
-class Sidebar extends Widget_Base {
+class Title extends Widget_Base {
 
 	use \Tourfic\Traits\Singleton;
 
 	public function get_name() {
-		return 'tf-sidebar';
+		return 'tf-single-title';
 	}
 
 	public function get_title() {
-		return esc_html__( 'Tourfic Sidebar', 'tourfic' );
+		return esc_html__( 'Tourfic Title', 'tourfic' );
 	}
 
 	public function get_icon() {

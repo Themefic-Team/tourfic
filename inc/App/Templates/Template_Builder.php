@@ -968,20 +968,20 @@ class Template_Builder {
                 $terms = wp_get_post_terms($post_id, $taxonomy, ['fields' => 'slugs']);
                 
                 foreach ($terms as $term) {
-                    $active_template = $this->get_active_template($post_type, 'single', $taxonomy, $term);
+                    $active_template = $this->get_single_active_template_by_taxonomy($post_type, 'single', $taxonomy, $term);
                     if ($active_template) break;
                 }
                 
                 if ($active_template) break;
                 
                 // If no term-specific template, try for a taxonomy-wide template
-                $active_template = $this->get_active_template($post_type, 'single', $taxonomy, 'all');
+                $active_template = $this->get_single_active_template_by_taxonomy($post_type, 'single', $taxonomy, 'all');
                 if ($active_template) break;
             }
             
             // If no taxonomy/term specific template, try for a general single template
             if (!$active_template) {
-                $active_template = $this->get_active_template($post_type, 'single', 'all', 'all');
+                $active_template = $this->get_single_active_template_by_taxonomy($post_type, 'single', 'all', 'all');
             }
             
             if ($active_template) {
@@ -1071,6 +1071,43 @@ class Template_Builder {
                 [
                     'key' => 'tf_template_type',
                     'value' => 'archive',
+                ],
+                [
+                    'key' => 'tf_taxonomy_type',
+                    'value' => $taxonomy,
+                ],
+                [
+                    'key' => 'tf_taxonomy_term',
+                    'value' => $term,
+                ],
+                [
+                    'key' => 'tf_template_active',
+                    'value' => '1',
+                ]
+            ]
+        ];
+        
+        $templates = get_posts($args);
+        
+        return !empty($templates) ? $templates[0] : false;
+    }
+
+    /**
+     * Get active template for a service, type, taxonomy and term
+     */
+    private function get_single_active_template_by_taxonomy($service, $type, $taxonomy, $term) {
+        $args = [
+            'post_type' => 'tf_template_builder',
+            'posts_per_page' => 1,
+            'meta_query' => [
+                'relation' => 'AND',
+                [
+                    'key' => 'tf_template_service',
+                    'value' => $service,
+                ],
+                [
+                    'key' => 'tf_template_type',
+                    'value' => $type,
                 ],
                 [
                     'key' => 'tf_taxonomy_type',
