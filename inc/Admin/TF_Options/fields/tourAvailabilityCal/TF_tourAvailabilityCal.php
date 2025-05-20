@@ -36,22 +36,22 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                             <input readonly="readonly" type="text" class="tf_tour_check_out" name="tf_tour_check_out" placeholder="<?php echo esc_html__( 'Check Out', 'tourfic' ); ?>">
                         </div>
 
-                        <div class="tf-field-text tf-price-by-night" style="display: <?php echo esc_attr( $pricing_type == 'group' ? 'block' : 'none' ) ?>; width: calc(50% - 5px)">
+                        <div class="tf-field-text tf-price-by-night" style="display: <?php echo esc_attr( $pricing_type == 'group' ? 'block' : 'none' ) ?>; width: 100%">
                             <label class="tf-field-label"><?php echo esc_html__( 'Price', 'tourfic' ); ?></label>
                             <input type="number" min="0" name="tf_tour_price" placeholder="<?php echo esc_html__( 'Price', 'tourfic' ); ?>">
                         </div>
 
-                        <div class="tf-field-text tf-price-by-person" style="display: <?php echo esc_attr( $pricing_type == 'person' ? 'block' : 'none' ) ?>; width: calc(50% - 5px)">
+                        <div class="tf-field-text tf-price-by-person" style="display: <?php echo esc_attr( $pricing_type == 'person' ? 'block' : 'none' ) ?>; width: calc(33% - 4px)">
                             <label class="tf-field-label"><?php echo esc_html__( 'Adult Price', 'tourfic' ); ?></label>
                             <input type="number" min="0" name="tf_tour_adult_price" placeholder="<?php echo esc_html__( 'Adult Price', 'tourfic' ); ?>">
                         </div>
 
-                        <div class="tf-field-text tf-price-by-person" style="display: <?php echo esc_attr( $pricing_type == 'person' ? 'block' : 'none' ) ?>; width: calc(50% - 5px)">
+                        <div class="tf-field-text tf-price-by-person" style="display: <?php echo esc_attr( $pricing_type == 'person' ? 'block' : 'none' ) ?>; width: calc(33% - 4px)">
                             <label class="tf-field-label"><?php echo esc_html__( 'Child Price', 'tourfic' ); ?></label>
                             <input type="number" min="0" name="tf_tour_child_price" placeholder="<?php echo esc_html__( 'Child Price', 'tourfic' ); ?>">
                         </div>
 
-                        <div class="tf-field-text tf-price-by-person" style="display: <?php echo esc_attr( $pricing_type == 'person' ? 'block' : 'none' ) ?>; width: calc(50% - 5px)">
+                        <div class="tf-field-text tf-price-by-person" style="display: <?php echo esc_attr( $pricing_type == 'person' ? 'block' : 'none' ) ?>; width: calc(33% - 4px)">
                             <label class="tf-field-label"><?php echo esc_html__( 'Infant Price', 'tourfic' ); ?></label>
                             <input type="number" min="0" name="tf_tour_infant_price" placeholder="<?php echo esc_html__( 'Infant Price', 'tourfic' ); ?>">
                         </div>
