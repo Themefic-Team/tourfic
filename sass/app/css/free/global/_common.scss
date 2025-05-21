@@ -1402,7 +1402,7 @@ li.tf-filter-item {
             width: 100%;
         }
         background-color: $color-gray-info;
-        border-radius: 24px;
+        border-radius: 16px;
         text-align: left;
         .tf-single-hotel-service label {
             display: flex;
@@ -1413,7 +1413,7 @@ li.tf-filter-item {
         .tf-booking-tabs{
             padding: 16px;
             border-bottom: 0.3px solid $color-gray;
-            border-radius: 24px;
+            border-radius: 16px 16px 0 0;
             background: $color-gray-info;
             display: flex;
             justify-content: space-between;

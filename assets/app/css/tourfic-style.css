@@ -2846,7 +2846,7 @@ li.tf-filter-item {
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup {
   width: 776px;
   background-color: #F5FAFF;
-  border-radius: 24px;
+  border-radius: 16px;
   text-align: left;
 }
 @media only screen and (max-width: 768px) {
@@ -2866,7 +2866,7 @@ li.tf-filter-item {
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-tabs {
   padding: 16px;
   border-bottom: 0.3px solid #808080;
-  border-radius: 24px;
+  border-radius: 16px 16px 0 0;
   background: #F5FAFF;
   display: flex;
   justify-content: space-between;
@@ -14421,7 +14421,7 @@ div#tf-destinationautocomplete-list div:before {
 .tf-single-template__two .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-tabs,
 .tf-single-template__two .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-tabs {
   background-color: #ffffff;
-  border-bottom: 0.3px solid var(--tf-border-default);
+  border-bottom: 0.3px solid #CCCED1;
 }
 .tf-single-template__two .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul,
 .tf-single-template__two .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul {
