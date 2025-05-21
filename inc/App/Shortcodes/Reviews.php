@@ -41,6 +41,7 @@ class Reviews extends \Tourfic\Core\Shortcodes {
 			$args     = array(
 				'post_type' => $type,
 				'number'    => $number,
+				'status'    => 'approve',
 			);
 			$comments = get_comments( $args );
 
