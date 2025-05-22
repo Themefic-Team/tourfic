@@ -20,6 +20,7 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
 			$meta         = get_post_meta( $post->ID, 'tf_tours_opt', true );
 			$pricing_type = ! empty( $meta['pricing'] ) ? $meta['pricing'] : 'person';
             $tour_package_options = ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : [];
+            $tour_avail_type = ! empty( $meta['type'] ) ? $meta['type'] : 'continuous';
 			if ( Helper::tf_is_woo_active() ) {
 				?>
                 <div class="tf-tour-cal-wrap">
@@ -36,24 +37,113 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                             <input readonly="readonly" type="text" class="tf_tour_check_out" name="tf_tour_check_out" placeholder="<?php echo esc_html__( 'Check Out', 'tourfic' ); ?>">
                         </div>
 
-                        <div class="tf-field-text tf-price-by-night" style="display: <?php echo esc_attr( $pricing_type == 'group' ? 'block' : 'none' ) ?>; width: 100%">
+                        <div class="tf-field-text tf-price-by-night" style="display: <?php echo esc_attr( $tour_avail_type!='fixed' && $pricing_type == 'group' ? 'block' : 'none' ) ?>; width: 100%">
                             <label class="tf-field-label"><?php echo esc_html__( 'Price', 'tourfic' ); ?></label>
                             <input type="number" min="0" name="tf_tour_price" placeholder="<?php echo esc_html__( 'Price', 'tourfic' ); ?>">
                         </div>
 
-                        <div class="tf-field-text tf-price-by-person" style="display: <?php echo esc_attr( $pricing_type == 'person' ? 'block' : 'none' ) ?>; width: calc(33% - 4px)">
+                        <div class="tf-field-text tf-price-by-person" style="display: <?php echo esc_attr( $tour_avail_type!='fixed' && $pricing_type == 'person' ? 'block' : 'none' ) ?>; width: calc(33% - 4px)">
                             <label class="tf-field-label"><?php echo esc_html__( 'Adult Price', 'tourfic' ); ?></label>
                             <input type="number" min="0" name="tf_tour_adult_price" placeholder="<?php echo esc_html__( 'Adult Price', 'tourfic' ); ?>">
                         </div>
 
-                        <div class="tf-field-text tf-price-by-person" style="display: <?php echo esc_attr( $pricing_type == 'person' ? 'block' : 'none' ) ?>; width: calc(33% - 4px)">
+                        <div class="tf-field-text tf-price-by-person" style="display: <?php echo esc_attr( $tour_avail_type!='fixed' && $pricing_type == 'person' ? 'block' : 'none' ) ?>; width: calc(33% - 4px)">
                             <label class="tf-field-label"><?php echo esc_html__( 'Child Price', 'tourfic' ); ?></label>
                             <input type="number" min="0" name="tf_tour_child_price" placeholder="<?php echo esc_html__( 'Child Price', 'tourfic' ); ?>">
                         </div>
 
-                        <div class="tf-field-text tf-price-by-person" style="display: <?php echo esc_attr( $pricing_type == 'person' ? 'block' : 'none' ) ?>; width: calc(33% - 4px)">
+                        <div class="tf-field-text tf-price-by-person" style="display: <?php echo esc_attr( $tour_avail_type!='fixed' && $pricing_type == 'person' ? 'block' : 'none' ) ?>; width: calc(33% - 4px)">
                             <label class="tf-field-label"><?php echo esc_html__( 'Infant Price', 'tourfic' ); ?></label>
                             <input type="number" min="0" name="tf_tour_infant_price" placeholder="<?php echo esc_html__( 'Infant Price', 'tourfic' ); ?>">
+                        </div>
+                        
+                        <div class="tf-field-text tf-price-by-person" style="display: <?php echo esc_attr( $tour_avail_type=='fixed' && ( $pricing_type == 'person' || $pricing_type == 'group' ) ? 'block' : 'none' ) ?>; width: calc(33% - 4px)">
+                            <label class="tf-field-label"><?php echo esc_html__( 'Minimum Person (Required for Search)', 'tourfic' ); ?></label>
+                            <input type="number" min="0" name="tf_tour_min_person">
+                        </div>
+                        <div class="tf-field-text tf-price-by-person" style="display: <?php echo esc_attr( $tour_avail_type=='fixed' && ( $pricing_type == 'person' || $pricing_type == 'group' ) ? 'block' : 'none' ) ?>; width: calc(33% - 4px)">
+                            <label class="tf-field-label"><?php echo esc_html__( 'Maximum Person (Required for Search)', 'tourfic' ); ?></label>
+                            <input type="number" min="0" name="tf_tour_max_person">
+                        </div>
+                        <div class="tf-field-text tf-price-by-person" style="display: <?php echo esc_attr( $tour_avail_type=='fixed' && ( $pricing_type == 'person' || $pricing_type == 'group' ) ? 'block' : 'none' ) ?>; width: calc(33% - 4px)">
+                            <label class="tf-field-label"><?php echo esc_html__( 'Maximum Capacity', 'tourfic' ); ?></label>
+                            <input type="number" min="0" name="tf_tour_max_capacity">
+                        </div>
+
+                        <div class="tf-field tf-field-checkbox tf-months-checkbox" style="width:100%; padding: 0; display: <?php echo esc_attr( $tour_avail_type=='fixed' && ( $pricing_type == 'person' || $pricing_type == 'group' ) ? 'block' : 'none' ) ?>">
+                            <label class="tf-field-label"><?php echo esc_html__( 'Repeat Month', 'tourfic' ); ?></label>
+                            <div class="tf-fieldset">
+                                <ul class="tf-checkbox-group tf-inline" style="margin-bottom: 0">
+                                <li>
+                                    <input type="checkbox" id="tf_tour_repeat_month[01]" name="tf_tour_repeat_month[]" class="tf-group-checkbox" value="01">
+                                    <label for="tf_tour_repeat_month[01]"><?php echo esc_html__( 'January', 'tourfic' ); ?></label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="tf_tour_repeat_month[02]" name="tf_tour_repeat_month[]" class="tf-group-checkbox" value="02">
+                                    <label for="tf_tour_repeat_month[02]"><?php echo esc_html__( 'February', 'tourfic' ); ?></label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="tf_tour_repeat_month[03]" name="tf_tour_repeat_month[]" class="tf-group-checkbox" value="03">
+                                    <label for="tf_tour_repeat_month[03]"><?php echo esc_html__( 'March', 'tourfic' ); ?></label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="tf_tour_repeat_month[04]" name="tf_tour_repeat_month[]" class="tf-group-checkbox" value="04">
+                                    <label for="tf_tour_repeat_month[04]"><?php echo esc_html__( 'April', 'tourfic' ); ?></label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="tf_tour_repeat_month[05]" name="tf_tour_repeat_month[]" class="tf-group-checkbox" value="05">
+                                    <label for="tf_tour_repeat_month[05]"><?php echo esc_html__( 'May', 'tourfic' ); ?></label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="tf_tour_repeat_month[06]" name="tf_tour_repeat_month[]" class="tf-group-checkbox" value="06">
+                                    <label for="tf_tour_repeat_month[06]"><?php echo esc_html__( 'June', 'tourfic' ); ?></label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="tf_tour_repeat_month[07]" name="tf_tour_repeat_month[]" class="tf-group-checkbox" value="07">
+                                    <label for="tf_tour_repeat_month[07]"><?php echo esc_html__( 'July', 'tourfic' ); ?></label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="tf_tour_repeat_month[08]" name="tf_tour_repeat_month[]" class="tf-group-checkbox" value="08">
+                                    <label for="tf_tour_repeat_month[08]"><?php echo esc_html__( 'August', 'tourfic' ); ?></label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="tf_tour_repeat_month[09]" name="tf_tour_repeat_month[]" class="tf-group-checkbox" value="09">
+                                    <label for="tf_tour_repeat_month[09]"><?php echo esc_html__( 'September', 'tourfic' ); ?></label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="tf_tour_repeat_month[10]" name="tf_tour_repeat_month[]" class="tf-group-checkbox" value="10">
+                                    <label for="tf_tour_repeat_month[10]"><?php echo esc_html__( 'October', 'tourfic' ); ?></label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="tf_tour_repeat_month[11]" name="tf_tour_repeat_month[]" class="tf-group-checkbox" value="11">
+                                    <label for="tf_tour_repeat_month[11]"><?php echo esc_html__( 'November', 'tourfic' ); ?></label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="tf_tour_repeat_month[12]" name="tf_tour_repeat_month[]" class="tf-group-checkbox" value="12">
+                                    <label for="tf_tour_repeat_month[12]"><?php echo esc_html__( 'December', 'tourfic' ); ?></label>
+                                </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="tf-field tf-field-checkbox tf-years-checkbox" style="width:100%; padding: 0; display: <?php echo esc_attr( $tour_avail_type=='fixed' && ( $pricing_type == 'person' || $pricing_type == 'group' ) ? 'block' : 'none' ) ?>">
+                            <label class="tf-field-label"><?php echo esc_html__( 'Repeat Year', 'tourfic' ); ?></label>
+                            <div class="tf-fieldset">
+                                <ul class="tf-checkbox-group tf-inline" style="margin-bottom: 0">
+                                    <li>
+                                        <input type="checkbox" id="tf_tour_repeat_year[2025]" name="tf_tour_repeat_year[]" class="tf-group-checkbox" value="2025">
+                                        <label for="tf_tour_repeat_year[2025]"><?php echo esc_html__( '2025', 'tourfic' ); ?></label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="tf_tour_repeat_year[2026]" name="tf_tour_repeat_year[]" class="tf-group-checkbox" value="2026">
+                                        <label for="tf_tour_repeat_year[2026]"><?php echo esc_html__( '2026', 'tourfic' ); ?></label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="tf_tour_repeat_year[2027]" name="tf_tour_repeat_year[]" class="tf-group-checkbox" value="2027">
+                                        <label for="tf_tour_repeat_year[2027]"><?php echo esc_html__( '2027', 'tourfic' ); ?></label>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
 
                         <div class="tf-single-options">
