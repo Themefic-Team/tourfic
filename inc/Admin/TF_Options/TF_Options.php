@@ -846,6 +846,7 @@ class TF_Options {
 		$tour_availability_data = [];
 		$tf_checkin_date = gmdate( 'Y/m/d', $check_in );
 		$tf_checkout_date = gmdate( 'Y/m/d', $check_out );
+		$tf_tour_date = $tf_checkin_date.' - '.$tf_checkout_date;
 		$tf_tour_data = [
 			'check_in'     => $tf_checkin_date,
 			'check_out'    => $tf_checkout_date,
@@ -885,14 +886,15 @@ class TF_Options {
 		$tour_availability_data[ $tf_tour_date ] = $tf_tour_data;
 
 
-		$apartment_data = get_post_meta( $tour_id, 'tf_tours_opt', true );
+		$tour_data = get_post_meta( $tour_id, 'tf_tours_opt', true );
 		if ( $new_post != 'true' ) {
-			$tour_availability = json_decode( $apartment_data['tour_availability'], true );
+			$tour_availability = json_decode( $tour_data['tour_availability'], true );
+
 			if ( isset( $tour_availability ) && ! empty( $tour_availability ) ) {
 				$tour_availability_data = array_merge( $tour_availability, $tour_availability_data );
 			}
-			$apartment_data['tour_availability'] = wp_json_encode( $tour_availability_data );
-			update_post_meta( $tour_id, 'tf_tours_opt', $apartment_data );
+			$tour_data['tour_availability'] = wp_json_encode( $tour_availability_data );
+			update_post_meta( $tour_id, 'tf_tours_opt', $tour_data );
 		} else {
 			$tour_availability = json_decode( stripslashes( $tour_availability ), true );
 			if ( isset( $tour_availability ) && ! empty( $tour_availability ) ) {
