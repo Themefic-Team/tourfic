@@ -857,6 +857,8 @@ class TF_Options {
 			'min_person'   => $tf_tour_min_person,
 			'max_person'   => $tf_tour_max_person,
 			'max_capacity' => $tf_tour_max_capacity,
+			'repeat_month' => $tf_tour_repeat_month,
+			'repeat_year' => $tf_tour_repeat_year,
 			'status'       => $status
 		];
 
@@ -961,6 +963,7 @@ class TF_Options {
 
 				if(!empty($item['title'])){
 					$item['start'] = gmdate( 'Y-m-d', strtotime( $item['check_in'] ) );
+					$item['end'] = gmdate( 'Y-m-d', strtotime( $item['check_out'] ) );
 				}
 				if ( $item['status'] == 'unavailable' ) {
 					$item['display'] = 'background';

@@ -1464,6 +1464,51 @@
                     }
                     setTourCheckInOut(startTime, endTime, self.tourCalData);
                     let pricingType = $('.tf_tour_pricing_type').val();
+                    let availType = $('.tf_tour_avail_type').val();
+
+                    if (typeof event.extendedProps.min_person != 'undefined') {
+                        $("[name='tf_tour_min_person']", self.tourCalData).val(event.extendedProps.min_person);
+                    }
+                    if (typeof event.extendedProps.max_person != 'undefined') {
+                        $("[name='tf_tour_max_person']", self.tourCalData).val(event.extendedProps.max_person);
+                    }
+                    if (typeof event.extendedProps.max_capacity != 'undefined') {
+                        $("[name='tf_tour_max_capacity']", self.tourCalData).val(event.extendedProps.max_capacity);
+                    }
+                    if (typeof event.extendedProps.repeat_month !== 'undefined') {
+                        const selectedMonths = event.extendedProps.repeat_month;
+                    
+                        // Uncheck all first (optional, to reset)
+                        document.querySelectorAll('input[name="tf_tour_repeat_month[]"]').forEach(el => {
+                            el.checked = false;
+                        });
+                    
+                        // Check those in the array
+                        selectedMonths.forEach(month => {
+                            const checkbox = document.querySelector(`input[name="tf_tour_repeat_month[]"][value="${month}"]`);
+                            if (checkbox) {
+                                checkbox.checked = true;
+                            }
+                        });
+                    }
+
+                    if (typeof event.extendedProps.repeat_year !== 'undefined') {
+                        const selectedMonths = event.extendedProps.repeat_year;
+                    
+                        // Uncheck all first (optional, to reset)
+                        document.querySelectorAll('input[name="tf_tour_repeat_year[]"]').forEach(el => {
+                            el.checked = false;
+                        });
+                    
+                        // Check those in the array
+                        selectedMonths.forEach(month => {
+                            const checkbox = document.querySelector(`input[name="tf_tour_repeat_year[]"][value="${month}"]`);
+                            if (checkbox) {
+                                checkbox.checked = true;
+                            }
+                        });
+                    }
+
                     if (pricingType === 'group') {
                         if (typeof event.extendedProps.price != 'undefined') {
                             $("[name='tf_tour_price']", self.tourCalData).val(event.extendedProps.price);
