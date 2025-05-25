@@ -23,6 +23,14 @@ class Template_Builder {
         add_action('wp_ajax_tf_save_template_builder', array($this, 'tf_save_template_builder_callback'));
         add_filter('template_include', array($this, 'tf_template_builder_custom_template'));
         add_action('save_post_tf_template_builder', [$this, 'enforce_elementor_template_on_save'], 20, 3);
+
+        // add_filter('elementor/document/urls/preview', [$this, 'modify_elementor_preview_url'], 10, 2);
+        add_filter('elementor/document/urls/edit', [$this, 'modify_elementor_edit_url'], 10, 2);
+        add_action('elementor/editor/init', [$this, 'setup_editor_post_data']);
+        add_filter('elementor/document/config', [$this, 'modify_elementor_document_config'], 10, 2);
+
+
+        // add_action('elementor/editor/init', [$this, 'elementor_editor_initialized']);
 	}
 
 	public function admin_menu() {
@@ -1195,4 +1203,91 @@ class Template_Builder {
         }
     }
     
+    public function modify_elementor_preview_url($url, $document) {
+        $post = $document->get_post();
+        
+        if ($post->post_type === 'tf_template_builder') {
+            $service = get_post_meta($post->ID, 'tf_template_service', true);
+            $template_type = get_post_meta($post->ID, 'tf_template_type', true);
+            
+            if ($template_type === 'single' && !empty($service)) {
+                // Get a sample post of the selected service type
+                $sample_post = get_posts([
+                    'post_type' => $service,
+                    'posts_per_page' => 1,
+                    'orderby' => 'rand'
+                ]);
+                
+                if (!empty($sample_post)) {
+                    return get_permalink($sample_post[0]->ID) . '?elementor-preview=' . $post->ID . '&ver=' . time();
+                }
+            }
+        }
+        
+        return $url;
+    }
+
+    public function modify_elementor_edit_url($url, $document) {
+        $post = $document->get_post();
+        
+        if ($post->post_type === 'tf_template_builder') {
+            $service = get_post_meta($post->ID, 'tf_template_service', true);
+            $template_type = get_post_meta($post->ID, 'tf_template_type', true);
+            $taxonomy_type = get_post_meta($post->ID, 'tf_taxonomy_type', true);
+            $taxonomy_term = get_post_meta($post->ID, 'tf_taxonomy_term', true);
+            
+            if ($template_type === 'single' && !empty($service)) {
+                // Get a sample post of the selected service type
+                $args = [
+                    'post_type' => $service,
+                    'posts_per_page' => 1,
+                    'orderby' => 'rand'
+                ];
+                if ($taxonomy_type && $taxonomy_type !== 'all') {
+                    $args['tax_query'] = [
+                        [
+                            'taxonomy' => $taxonomy_type,
+                            'field' => 'slug',
+                            'terms' => $taxonomy_term === 'all' ? [] : $taxonomy_term,
+                        ]
+                    ];
+                }
+                $sample_post = get_posts($args);
+                
+                if (!empty($sample_post)) {
+                    // Add the template post ID as a parameter
+                    return add_query_arg('tf_template_id', $sample_post[0]->ID, $url);
+                }
+            }
+        }
+        
+        return $url;
+    }
+
+    public function setup_editor_post_data() {
+        if (!isset($_GET['tf_template_id'])) {
+            return;
+        }
+        
+        $post_id = intval($_GET['tf_template_id']);
+        $post = get_post($post_id);
+        if ($post) {
+            setup_postdata($post);
+        }
+    }
+
+    public function modify_elementor_document_config($config, $post_id) {
+        if (isset($_GET['tf_template_id']) && is_numeric($_GET['tf_template_id'])) {
+            $template_id = intval($_GET['tf_template_id']);
+            $template_post = get_post($template_id);
+            
+            if ($template_post) {
+                // Ensure Elementor loads the template builder post, not the sample post
+                $config['post_id'] = $template_id;
+                $config['post'] = $template_post;
+            }
+        }
+        
+        return $config;
+    }
 }

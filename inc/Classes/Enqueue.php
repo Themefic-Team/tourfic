@@ -25,6 +25,7 @@ class Enqueue {
 		add_action( 'admin_enqueue_scripts', array( $this, 'tf_options_admin_enqueue_scripts' ), 9 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'tf_options_wp_enqueue_scripts' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'tf_global_custom_css' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'tf_elementor_widget_scripts' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'tf_required_taxonomies' ) );
 	}
 
@@ -530,6 +531,18 @@ class Enqueue {
 
 		wp_add_inline_script( 'tourfic', $inline_scripts );
 
+	}
+
+	/* 
+	Elementor Widgets scripts
+	*/
+	function tf_elementor_widget_scripts() {
+		if(!function_exists( 'is_tf_pro' ) && !is_tf_pro()){
+			return;
+		}
+
+		wp_register_style( 'tf-elementor-single-title', TF_PRO_ASSETS_URL . 'app/css/elementor/single/title.min.css', '', TF_VERSION );
+		wp_register_style( 'tf-elementor-single-address', TF_PRO_ASSETS_URL . 'app/css/elementor/single/address.min.css', '', TF_VERSION );
 	}
 
 	/**
