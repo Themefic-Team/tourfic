@@ -127,7 +127,7 @@
         /**
          * Click to go back to hotel availability form
          */
-        $(document).on('click', '.hotel-room-availability', function (e) {
+        $('body').on('click', '.hotel-room-availability', function (e) {
             e.preventDefault();
 
             $('html, body').animate({
@@ -368,7 +368,7 @@
         * @since 2.9.7
         * @author Foysal
         */
-        $(document).on('submit', '#tf_hotel_aval_check', function (e) {
+        $('body').on('submit', '#tf_hotel_aval_check', function (e) {
             e.preventDefault();
             let form = $(this),
                 submitBtn = form.find('.tf-submit'),
@@ -597,7 +597,7 @@
                 $(".tf-hotel-locations").removeClass('tf-locations-show');
             }, 100); 
         });
-        $(document).on('click', function (event) {
+        $('body').on('click', function (event) {
             if (!$(event.target).closest("#tf-destination-adv, #ui-id-1").length) {
                 $(".tf-hotel-locations").removeClass('tf-locations-show');
             }

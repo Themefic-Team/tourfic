@@ -314,7 +314,7 @@
 
         });
 
-        $(document).on('click touchstart', '.tf-booking-content-wraper .booking-next', function (e) {
+        $('body').on('click touchstart', '.tf-booking-content-wraper .booking-next', function (e) {
             e.preventDefault();
             let $this = $(this);
 
@@ -415,7 +415,7 @@
                 return true;
             }
         };
-        $(document).on('click touchstart', '.booking-process', function (e) {
+        $('body').on('click touchstart', '.booking-process', function (e) {
             
             if (e.type === 'touchstart') {
                 $(this).off('click');
@@ -603,7 +603,7 @@
         * Car Search submit
         * @author Jahid
         */
-        $(document).on('submit', '#tf_car_booking', function (e) {
+        $('body').on('submit', '#tf_car_booking', function (e) {
             e.preventDefault();
             let form = $(this),
                 submitBtn = form.find('.tf-submit'),
@@ -836,7 +836,7 @@
         * @author Jahid
         */
 
-        $(document).on('change', '.tf-car-booking-form .tf_pickup_date, .tf-car-booking-form .tf_pickup_time, .tf-car-booking-form .tf_dropoff_date, .tf-car-booking-form .tf_dropoff_time', function (e) {
+        $('body').on('change', '.tf-car-booking-form .tf_pickup_date, .tf-car-booking-form .tf_pickup_time, .tf-car-booking-form .tf_dropoff_date, .tf-car-booking-form .tf_dropoff_time', function (e) {
             
             let extra_ids = $("input[name='selected_extra[]']").map(function() {
                 return $(this).val();
@@ -896,7 +896,7 @@
         * Car Archive View
         * @author Jahid
         */
-         $(document).on('click', '.tf-archive-header .tf-archive-view ul li', function (e) {
+         $('body').on('click', '.tf-archive-header .tf-archive-view ul li', function (e) {
             $('.tf-archive-header .tf-archive-view ul li').removeClass('active');
             let $this = $(this);
             $this.addClass('active');
@@ -930,7 +930,7 @@
         }
 
         // Back to Booking Form
-        $(document).on('click', '.tf-back-to-booking', function (e) {
+        $('body').on('click', '.tf-back-to-booking', function (e) {
             e.preventDefault(); 
             $('.tf-single-booking-bar').fadeOut();
             var bookingBarHeight = $('.tf-single-booking-bar').outerHeight() || 0;
@@ -947,7 +947,7 @@
         });
 
         // Instructions showing
-        $(document).on('click', '.tf-instraction-showing', function (e) {
+        $('body').on('click', '.tf-instraction-showing', function (e) {
             $('.tf-car-instraction-popup').css('display', 'flex');
         });   
 
@@ -963,7 +963,7 @@
         })
 
         // Showing Total into a protections
-        $(document).on('change', '.protection-checkbox', function (e) {
+        $('body').on('change', '.protection-checkbox', function (e) {
             let total_price = 0;
             let prev_total = parseFloat($("#tf_total_proteciton_price").val()) || 0; // Parse as float, default to 0 if empty
             let single_price = parseFloat($(this).parent().parent().find('#tf_single_protection_price').val()) || 0; // Parse as float
@@ -1000,11 +1000,6 @@
 
     
     });
-
-    
-     
-     
-   
 
 })(jQuery, window);
 
