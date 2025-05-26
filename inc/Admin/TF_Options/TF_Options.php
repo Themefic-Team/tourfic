@@ -885,6 +885,59 @@ class TF_Options {
 
 		$tour_availability_data[ $tf_tour_date ] = $tf_tour_data;
 
+		// Set default year/month if empty
+		if (empty($tf_tour_repeat_year)) {
+			$tf_tour_repeat_year = [gmdate('Y', $check_in)];
+		}
+		if (empty($tf_tour_repeat_month)) {
+			$tf_tour_repeat_month = [gmdate('m', $check_in)];
+		}
+
+		// Extract original day/month values
+		$original_checkin_day = gmdate('d', $check_in);
+		$original_checkin_month = gmdate('m', $check_in);
+		$original_checkout_day = gmdate('d', $check_out);
+		$original_checkout_month = gmdate('m', $check_out);
+
+		foreach ($tf_tour_repeat_year as $year) {
+			foreach ($tf_tour_repeat_month as $month) {
+				$month = str_pad($month, 2, '0', STR_PAD_LEFT); // Ensure month is 2 digits
+
+				$new_check_in_str = "$year-$month-$original_checkin_day";
+				$new_check_in = strtotime($new_check_in_str);
+				$tf_checkin_date = gmdate('Y/m/d', $new_check_in);
+
+				// Adjust year if checkout month is before checkin (e.g., spans across years)
+				$checkout_year = ($original_checkout_month < $original_checkin_month) ? $year + 1 : $year;
+				$new_check_out_str = "$checkout_year-$month-$original_checkout_day";
+				$new_check_out = strtotime($new_check_out_str);
+				$tf_checkout_date = gmdate('Y/m/d', $new_check_out);
+
+				// Skip invalid dates (e.g., Feb 30)
+				if (!$new_check_in || !$new_check_out) {
+					continue;
+				}
+
+				$tf_tour_date = $tf_checkin_date . ' - ' . $tf_checkout_date;
+				$tf_tour_data = [
+					'check_in'     => $tf_checkin_date,
+					'check_out'    => $tf_checkout_date,
+					'pricing_type' => $pricing_type,
+					'price'        => $tf_tour_price,
+					'adult_price'  => $tf_tour_adult_price,
+					'child_price'  => $tf_tour_child_price,
+					'infant_price' => $tf_tour_infant_price,
+					'min_person'   => $tf_tour_min_person,
+					'max_person'   => $tf_tour_max_person,
+					'max_capacity' => $tf_tour_max_capacity,
+					'repeat_month' => $tf_tour_repeat_month,
+					'repeat_year'  => $tf_tour_repeat_year,
+					'status'       => $status
+				];
+
+				$tour_availability_data[$tf_tour_date] = $tf_tour_data;
+			}
+		}
 
 		$tour_data = get_post_meta( $tour_id, 'tf_tours_opt', true );
 		if ( $new_post != 'true' ) {
