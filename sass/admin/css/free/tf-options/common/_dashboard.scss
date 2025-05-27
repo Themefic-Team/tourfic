@@ -1,9 +1,19 @@
+.tourfic-settings_page_tf_dashboard{
+    #wpcontent{
+        background-color: #EBF5FF;
+    }
+}
+.tourfic-settings_page_tf_get_help{
+    #wpcontent{
+        background-color: #EBF5FF;
+    }
+}
 .tf-setting-dashboard {
     .tf-setting-top-bar {
         background-color: #ffffff;
         padding: 15px 40px;
         margin-left: -20px;
-        margin-bottom: 30px;
+        margin-bottom: 24px;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -150,15 +160,25 @@
     }
 
     .tf-setting-performace-section {
-        margin: 40px 20px 40px 0;
+        margin: 24px 24px 0px 0;
+        @include flexbox();
+        gap: 24px;
         position: relative;
 
         h2 {
             font-size: 26px;
             font-weight: 600;
-            line-height: 36px;
+            line-height: 1;
             color: $admin-color-heading;
-            margin: 0 0 10px;
+            margin: 0 0 16px;
+        }
+
+        .tf-report-wrapper{
+            @include flex(0 0 70%);
+        }
+
+        .tf-settings-sidebar{
+            @include flex(0 0 calc(30% - 24px));
         }
 
         .tf-performance-grid {
@@ -300,175 +320,118 @@
 
 // get Help page
 .tf-settings-help-center {
-    .tf-help-center-banner {
-        background-color: #ffffff;
-        border-radius: 10px;
-        margin: 40px 20px 40px 0;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0px 20px 0px 40px;
-        @media #{$max1200}{
-            padding-top: 20px;
-            padding-bottom: 20px;
-        }
+    .tf-support-cards{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        margin: 24px 24px 32px 0;
+
         @media #{$max1199}{
-            padding-top: 20px;
-        }
-        @media #{$max575}{
-            display: flow-root;
-            padding: 25px;
+            grid-template-columns: repeat(2, 1fr);
         }
 
-        .tf-help-center-content {
-            width: 45%;
-            @media #{$max575}{
-                width: 100%;
-            }
-            @media #{$max480}{
-                margin-bottom: 20px;
-            }
+        @media #{$max768}{
+            grid-template-columns: 1fr;
+        }
 
-            h2 {
-                color: $admin-color-heading;
-                font-size: 34px;
-                margin: 0;
+        .tf-single-support-card {
+            background-color: #ffffff;
+            border-radius: 16px;
+            padding: 32px;
+            @include flexbox();
+            @include flex-direction(column);
+            @include align-items(flex-start);
+            gap: 24px;
+
+            h3 {
+                font-size: 1.5rem;
+                line-height: 32px;
+                color: #27333F;
+                margin: 0 0 -8px 0;
             }
 
             p {
-                font-size: 1rem;
-                color: #71787C;
+                font-size: 0.938rem;
+                color: #566676;
+                margin: 0;
+            }
+
+            a.tf-link-skip-btn{
+                min-width: inherit;
             }
         }
 
-        .tf-help-center-image {
-            width: 35%;
-            @include flexbox();
+        &.tf-support-cards-4 {
+            padding: 24px;
+            grid-template-columns: repeat(4, 1fr);
+            border-radius: 16px;
+            background: #F6FAFE;
 
-            @media #{$max575}{
-                width: 100%;
-            }
-
-            img {
-                max-width: 100%;
-                position: relative;
-            }
-        }
-    }
-
-    .tf-support-document {
-        margin: 40px 20px 40px 0;
-        display: flex;
-        justify-content: space-between;
-        @media #{$max1199}{
-            display: flow-root;
-        }
-
-        .tf-single-support {
-            background-color: #ffffff;
-            border-radius: 10px;
-            width: 24%;
-            min-height: 270px;
             @media #{$max1199}{
-                width: 48%;
-                margin: 15px 1%;
-                float: left;
+                grid-template-columns: repeat(2, 1fr);
             }
+
             @media #{$max768}{
-                width: 100%;
-                margin: 15px 0%;
-                float: left;
+                grid-template-columns: 1fr;
             }
 
-            a {
-                display: block;
-                padding: 40px;
-                text-decoration: none;
-
-                img {
-                    margin-bottom: 35px;
-                }
-
+            .tf-single-support-card {
                 h3 {
-                    font-size: 1.25rem;
-                    margin: 0;
-                    color: $admin-color-heading;
-                    display: block;
-                    line-height: 24px;
-                }
-
-                span {
-                    display: inline-block;
-                    margin-bottom: 0;
-                    display: inline-block;
-                    border: 2px solid #003c79;
-                    border-radius: 6px;
-                    padding: 9px 16px;
-                    font-size: 0.938rem;
-                    font-weight: 600;
-                    color: #003c79;
-                    margin-top: 20px;
-                    line-height: 1;
-                    transition: .3s all ease;
-
-                    &:hover {
-                        background-color: #003c79;
-                        color: #ffffff;
-                    }
+                    margin: 0 0 -16px 0;
                 }
             }
         }
     }
-
+    
     .tf-settings-faq {
-        margin: 40px 40px 40px 20px;
-        background-color: #ffffff;
-        border-radius: 10px;
-        padding: 40px;
+        margin: 32px 20px 0 0;
 
         h2 {
-            margin: 0 0 30px;
+            margin: 0 0 16px;
             font-size: 1.5rem;
             font-weight: 600;
-            line-height: 28px;
-            color: $admin-color-heading;
+            line-height: 32px;
+            color: #27333F;
         }
 
         .tf-accordion-wrapper {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 24px;
             grid-template-columns: repeat(2, 1fr);
             display: grid;
-            gap: 20px;
+            gap: 24px;
             @media #{$max768}{
                 display: block;
             }
 
             .tf-single-faq {
-                border: 1px solid #E4E6EB;
-                border-radius: 8px;
+                border-radius: 4px;
+                border: 1px solid #EEF2F6;
+                background:  #F8FAFC;
                 @media #{$max768}{
-                    margin: 15px 0px;
+                    margin-bottom: 16px;
                 }
 
                 .tf-faq-title {
-                    display: flex;
-                    align-items: center;
-                    padding: 25px 30px;
+                    @include flexbox();
+                    @include justify-content(space-between);
+                    @include align-items(center);
+                    gap: 16px;
+                    padding: 8px;
                     cursor: pointer;
-                    @media #{$max480}{
-                        padding: 15px 15px;
-                    }
 
                     i {
-                        font-size: 1.125rem;
-                        margin-right: 10px;
-                        color: $admin-color-heading;
+                        font-size: 0.938rem;
+                        color: #566676;
+                        @include transition();
                     }
 
                     h4 {
                         margin: 0;
-                        font-size: 1.25rem;
-                        font-weight: 600;
-                        color: #1d2327;
+                        font-size: 0.938rem;
+                        font-weight: 500;
+                        color: #566676;
                         line-height: 24px;
                         @media #{$max480}{
                             font-size: 1.063rem;
@@ -484,11 +447,13 @@
 
                 .tf-faq-desc {
                     display: none;
-                    padding: 0px 30px 25px 30px;
+                    padding: 16px;
+                    border-top: 1px solid #EEF2F6;
 
                     p {
-                        font-size: 1rem;
-                        color: #44464B;
+                        font-size: 0.938rem;
+                        color: #566676;
+                        margin: 0;
                     }
                 }
             }

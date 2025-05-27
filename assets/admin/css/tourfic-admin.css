@@ -727,7 +727,7 @@ body.tourfic-settings_page_tf-setup-wizard {
 }
 
 .tf-link-skip-btn:hover {
-  box-shadow: 0px 24px 20px 0px rgba(8, 20, 33, 0.08), 0px 8px 16px 0px rgba(8, 20, 33, 0.08), 0px 16px 8px 0px rgba(8, 20, 33, 0.04);
+  box-shadow: 0px 16px 8px 0px rgba(8, 20, 33, 0.04), 0px 8px 16px 0px rgba(8, 20, 33, 0.08), 0px 24px 20px 0px rgba(8, 20, 33, 0.08);
   color: #ffffff;
 }
 
@@ -1275,8 +1275,7 @@ Steps
 }
 
 .tf-setup-step-container .tf-select-service label:before {
-  background: #ffffff
- #ffffff;
+  background: #ffffff #ffffff;
   content: "";
   display: block;
   border-radius: 50%;
@@ -2008,11 +2007,19 @@ Steps
   }
 }
 
+.tourfic-settings_page_tf_dashboard #wpcontent {
+  background-color: #EBF5FF;
+}
+
+.tourfic-settings_page_tf_get_help #wpcontent {
+  background-color: #EBF5FF;
+}
+
 .tf-setting-dashboard .tf-setting-top-bar {
   background-color: #ffffff;
   padding: 15px 40px;
   margin-left: -20px;
-  margin-bottom: 30px;
+  margin-bottom: 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -2170,16 +2177,16 @@ Steps
 }
 
 .tf-setting-dashboard .tf-setting-performace-section {
-  margin: 40px 20px 40px 0;
+  margin: 24px 24px 40px 0;
   position: relative;
 }
 
 .tf-setting-dashboard .tf-setting-performace-section h2 {
   font-size: 26px;
   font-weight: 600;
-  line-height: 36px;
+  line-height: 1;
   color: #000;
-  margin: 0 0 10px;
+  margin: 0 0 16px;
 }
 
 .tf-setting-dashboard .tf-setting-performace-section .tf-performance-grid {
@@ -2341,175 +2348,102 @@ Steps
   height: 40px;
 }
 
-.tf-settings-help-center .tf-help-center-banner {
-  background-color: #ffffff;
-  border-radius: 10px;
-  margin: 40px 20px 40px 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0px 20px 0px 40px;
-}
-
-@media only screen and (max-width: 1200px) {
-  .tf-settings-help-center .tf-help-center-banner {
-    padding-top: 20px;
-    padding-bottom: 20px;
-  }
+.tf-settings-help-center .tf-support-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin: 24px 24px 32px 0;
 }
 
 @media only screen and (max-width: 1199.98px) {
-  .tf-settings-help-center .tf-help-center-banner {
-    padding-top: 20px;
+  .tf-settings-help-center .tf-support-cards {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media only screen and (max-width: 575.98px) {
-  .tf-settings-help-center .tf-help-center-banner {
-    display: flow-root;
-    padding: 25px;
+@media only screen and (max-width: 768px) {
+  .tf-settings-help-center .tf-support-cards {
+    grid-template-columns: 1fr;
   }
 }
 
-.tf-settings-help-center .tf-help-center-banner .tf-help-center-content {
-  width: 45%;
-}
-
-@media only screen and (max-width: 575.98px) {
-  .tf-settings-help-center .tf-help-center-banner .tf-help-center-content {
-    width: 100%;
-  }
-}
-
-@media only screen and (max-width: 480px) {
-  .tf-settings-help-center .tf-help-center-banner .tf-help-center-content {
-    margin-bottom: 20px;
-  }
-}
-
-.tf-settings-help-center .tf-help-center-banner .tf-help-center-content h2 {
-  color: #000;
-  font-size: 34px;
-  margin: 0;
-}
-
-.tf-settings-help-center .tf-help-center-banner .tf-help-center-content p {
-  font-size: 1rem;
-  color: #71787C;
-}
-
-.tf-settings-help-center .tf-help-center-banner .tf-help-center-image {
-  width: 35%;
+.tf-settings-help-center .tf-support-cards .tf-single-support-card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 32px;
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+  gap: 24px;
 }
 
-@media only screen and (max-width: 575.98px) {
-  .tf-settings-help-center .tf-help-center-banner .tf-help-center-image {
-    width: 100%;
-  }
+.tf-settings-help-center .tf-support-cards .tf-single-support-card h3 {
+  font-size: 1.5rem;
+  line-height: 32px;
+  color: #27333F;
+  margin: 0 0 -8px 0;
 }
 
-.tf-settings-help-center .tf-help-center-banner .tf-help-center-image img {
-  max-width: 100%;
-  position: relative;
+.tf-settings-help-center .tf-support-cards .tf-single-support-card p {
+  font-size: 0.938rem;
+  color: #566676;
+  margin: 0;
 }
 
-.tf-settings-help-center .tf-support-document {
-  margin: 40px 20px 40px 0;
-  display: flex;
-  justify-content: space-between;
+.tf-settings-help-center .tf-support-cards .tf-single-support-card a.tf-link-skip-btn {
+  min-width: inherit;
+}
+
+.tf-settings-help-center .tf-support-cards.tf-support-cards-4 {
+  padding: 24px;
+  grid-template-columns: repeat(4, 1fr);
+  border-radius: 16px;
+  background: #F6FAFE;
 }
 
 @media only screen and (max-width: 1199.98px) {
-  .tf-settings-help-center .tf-support-document {
-    display: flow-root;
-  }
-}
-
-.tf-settings-help-center .tf-support-document .tf-single-support {
-  background-color: #ffffff;
-  border-radius: 10px;
-  width: 24%;
-  min-height: 270px;
-}
-
-@media only screen and (max-width: 1199.98px) {
-  .tf-settings-help-center .tf-support-document .tf-single-support {
-    width: 48%;
-    margin: 15px 1%;
-    float: left;
+  .tf-settings-help-center .tf-support-cards.tf-support-cards-4 {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media only screen and (max-width: 768px) {
-  .tf-settings-help-center .tf-support-document .tf-single-support {
-    width: 100%;
-    margin: 15px 0%;
-    float: left;
+  .tf-settings-help-center .tf-support-cards.tf-support-cards-4 {
+    grid-template-columns: 1fr;
   }
 }
 
-.tf-settings-help-center .tf-support-document .tf-single-support a {
-  display: block;
-  padding: 40px;
-  text-decoration: none;
-}
-
-.tf-settings-help-center .tf-support-document .tf-single-support a img {
-  margin-bottom: 35px;
-}
-
-.tf-settings-help-center .tf-support-document .tf-single-support a h3 {
-  font-size: 1.25rem;
-  margin: 0;
-  color: #000;
-  display: block;
-  line-height: 24px;
-}
-
-.tf-settings-help-center .tf-support-document .tf-single-support a span {
-  display: inline-block;
-  margin-bottom: 0;
-  display: inline-block;
-  border: 2px solid #003c79;
-  border-radius: 6px;
-  padding: 9px 16px;
-  font-size: 0.938rem;
-  font-weight: 600;
-  color: #003c79;
-  margin-top: 20px;
-  line-height: 1;
-  transition: .3s all ease;
-}
-
-.tf-settings-help-center .tf-support-document .tf-single-support a span:hover {
-  background-color: #003c79;
-  color: #ffffff;
+.tf-settings-help-center .tf-support-cards.tf-support-cards-4 .tf-single-support-card h3 {
+  margin: 0 0 -16px 0;
 }
 
 .tf-settings-help-center .tf-settings-faq {
-  margin: 40px 40px 40px 20px;
-  background-color: #ffffff;
-  border-radius: 10px;
-  padding: 40px;
+  margin: 32px 20px 0 0;
 }
 
 .tf-settings-help-center .tf-settings-faq h2 {
-  margin: 0 0 30px;
+  margin: 0 0 16px;
   font-size: 1.5rem;
   font-weight: 600;
-  line-height: 28px;
-  color: #000;
+  line-height: 32px;
+  color: #27333F;
 }
 
 .tf-settings-help-center .tf-settings-faq .tf-accordion-wrapper {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 24px;
   grid-template-columns: repeat(2, 1fr);
   display: grid;
-  gap: 20px;
+  gap: 24px;
 }
 
 @media only screen and (max-width: 768px) {
@@ -2519,40 +2453,47 @@ Steps
 }
 
 .tf-settings-help-center .tf-settings-faq .tf-accordion-wrapper .tf-single-faq {
-  border: 1px solid #E4E6EB;
-  border-radius: 8px;
+  border-radius: 4px;
+  border: 1px solid #EEF2F6;
+  background: #F8FAFC;
 }
 
 @media only screen and (max-width: 768px) {
   .tf-settings-help-center .tf-settings-faq .tf-accordion-wrapper .tf-single-faq {
-    margin: 15px 0px;
+    margin-bottom: 16px;
   }
 }
 
 .tf-settings-help-center .tf-settings-faq .tf-accordion-wrapper .tf-single-faq .tf-faq-title {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
   align-items: center;
-  padding: 25px 30px;
+  gap: 16px;
+  padding: 8px;
   cursor: pointer;
 }
 
-@media only screen and (max-width: 480px) {
-  .tf-settings-help-center .tf-settings-faq .tf-accordion-wrapper .tf-single-faq .tf-faq-title {
-    padding: 15px 15px;
-  }
-}
-
 .tf-settings-help-center .tf-settings-faq .tf-accordion-wrapper .tf-single-faq .tf-faq-title i {
-  font-size: 1.125rem;
-  margin-right: 10px;
-  color: #000;
+  font-size: 0.938rem;
+  color: #566676;
+  -webkit-transition: all 0.25s ease-in-out;
+  -moz-transition: all 0.25s ease-in-out;
+  -o-transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
 }
 
 .tf-settings-help-center .tf-settings-faq .tf-accordion-wrapper .tf-single-faq .tf-faq-title h4 {
   margin: 0;
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #1d2327;
+  font-size: 0.938rem;
+  font-weight: 500;
+  color: #566676;
   line-height: 24px;
 }
 
@@ -2568,12 +2509,14 @@ Steps
 
 .tf-settings-help-center .tf-settings-faq .tf-accordion-wrapper .tf-single-faq .tf-faq-desc {
   display: none;
-  padding: 0px 30px 25px 30px;
+  padding: 16px;
+  border-top: 1px solid #EEF2F6;
 }
 
 .tf-settings-help-center .tf-settings-faq .tf-accordion-wrapper .tf-single-faq .tf-faq-desc p {
-  font-size: 1rem;
-  color: #44464B;
+  font-size: 0.938rem;
+  color: #566676;
+  margin: 0;
 }
 
 .tf-setting-license {
