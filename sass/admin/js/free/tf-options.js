@@ -1745,6 +1745,67 @@
             }
         });
 
+        // Enable Custom Availability
+        $(document).on("change", ".tf_tour_custom_avail", function (e) {
+            var $this = $(this);
+            if (this.checked) {
+                $('.tf-months-checkbox').hide();
+                $('.tf-years-checkbox').hide();
+
+                document.querySelectorAll('input[name="tf_tour_repeat_month[]"]').forEach(el => {
+                    el.checked = false;
+                });
+                document.querySelectorAll('input[name="tf_tour_repeat_year[]"]').forEach(el => {
+                    el.checked = false;
+                });
+
+                if($('.tf_tour_custom_pricing_by').val() == 'person'){
+                    $('.tf-tour-person-pricing').show();
+                    $('.tf-tour-group-pricing').hide();
+                }else{
+                    $('.tf-tour-group-pricing').show();
+                    $('.tf-tour-person-pricing').hide();
+                }
+            } else {
+                $('.tf-months-checkbox').show();
+                $('.tf-years-checkbox').show();
+            }
+        });
+
+        // Custom Availability Type
+        $(document).on("change", ".tf_tour_custom_pricing_by", function (e) {
+            var $this = $(this);
+            if($this.val() == 'person'){
+                $('.tf-tour-person-pricing').show();
+                $('.tf-tour-group-pricing').hide();
+            }else{
+                $('.tf-tour-group-pricing').show();
+                $('.tf-tour-person-pricing').hide();
+            }
+        });
+
+        // Tour Type
+        $(document).on("change", ".tf_tour_avail_type", function (e) {
+            var $this = $(this);
+            if($this.val() == 'fixed'){
+                $('.tf-tour-person-pricing').hide();
+                $('.tf-tour-group-pricing').hide();
+
+                $('.tf-months-checkbox').show();
+                $('.tf-years-checkbox').show();
+            }else{
+                $('.tf-months-checkbox').hide();
+                $('.tf-years-checkbox').hide();
+
+                document.querySelectorAll('input[name="tf_tour_repeat_month[]"]').forEach(el => {
+                    el.checked = false;
+                });
+                document.querySelectorAll('input[name="tf_tour_repeat_year[]"]').forEach(el => {
+                    el.checked = false;
+                });
+            }
+        });
+
         /*
         * Options WP editor
         * @author: Sydur

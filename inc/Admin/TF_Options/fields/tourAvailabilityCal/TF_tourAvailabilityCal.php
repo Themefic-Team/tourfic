@@ -37,35 +37,35 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                             <input readonly="readonly" type="text" class="tf_tour_check_out" name="tf_tour_check_out" placeholder="<?php echo esc_html__( 'Check Out', 'tourfic' ); ?>">
                         </div>
 
-                        <div class="tf-field-text tf-price-by-night" style="display: <?php echo esc_attr( $tour_avail_type!='fixed' && $pricing_type == 'group' ? 'block' : 'none' ) ?>; width: 100%">
+                        <div class="tf-field-text tf-tour-group-pricing" style="display: <?php echo esc_attr( $tour_avail_type!='fixed' && $pricing_type == 'group' ? 'block' : 'none' ) ?>; width: 100%">
                             <label class="tf-field-label"><?php echo esc_html__( 'Price', 'tourfic' ); ?></label>
                             <input type="number" min="0" name="tf_tour_price" placeholder="<?php echo esc_html__( 'Price', 'tourfic' ); ?>">
                         </div>
 
-                        <div class="tf-field-text tf-price-by-person" style="display: <?php echo esc_attr( $tour_avail_type!='fixed' && $pricing_type == 'person' ? 'block' : 'none' ) ?>; width: calc(33% - 4px)">
+                        <div class="tf-field-text tf-tour-person-pricing" style="display: <?php echo esc_attr( $tour_avail_type!='fixed' && $pricing_type == 'person' ? 'block' : 'none' ) ?>; width: calc(33% - 4px)">
                             <label class="tf-field-label"><?php echo esc_html__( 'Adult Price', 'tourfic' ); ?></label>
                             <input type="number" min="0" name="tf_tour_adult_price" placeholder="<?php echo esc_html__( 'Adult Price', 'tourfic' ); ?>">
                         </div>
 
-                        <div class="tf-field-text tf-price-by-person" style="display: <?php echo esc_attr( $tour_avail_type!='fixed' && $pricing_type == 'person' ? 'block' : 'none' ) ?>; width: calc(33% - 4px)">
+                        <div class="tf-field-text tf-tour-person-pricing" style="display: <?php echo esc_attr( $tour_avail_type!='fixed' && $pricing_type == 'person' ? 'block' : 'none' ) ?>; width: calc(33% - 4px)">
                             <label class="tf-field-label"><?php echo esc_html__( 'Child Price', 'tourfic' ); ?></label>
                             <input type="number" min="0" name="tf_tour_child_price" placeholder="<?php echo esc_html__( 'Child Price', 'tourfic' ); ?>">
                         </div>
 
-                        <div class="tf-field-text tf-price-by-person" style="display: <?php echo esc_attr( $tour_avail_type!='fixed' && $pricing_type == 'person' ? 'block' : 'none' ) ?>; width: calc(33% - 4px)">
+                        <div class="tf-field-text tf-tour-person-pricing" style="display: <?php echo esc_attr( $tour_avail_type!='fixed' && $pricing_type == 'person' ? 'block' : 'none' ) ?>; width: calc(33% - 4px)">
                             <label class="tf-field-label"><?php echo esc_html__( 'Infant Price', 'tourfic' ); ?></label>
                             <input type="number" min="0" name="tf_tour_infant_price" placeholder="<?php echo esc_html__( 'Infant Price', 'tourfic' ); ?>">
                         </div>
                         
-                        <div class="tf-field-text tf-price-by-person" style="display: <?php echo esc_attr( ( $tour_avail_type=='fixed' || $tour_avail_type=='continuous' ) && ( $pricing_type == 'person' || $pricing_type == 'group' ) ? 'block' : 'none' ) ?>; width: calc(33% - 4px)">
+                        <div class="tf-field-text tf-tour-limitation" style="display: <?php echo esc_attr( ( $tour_avail_type=='fixed' || $tour_avail_type=='continuous' ) && ( $pricing_type == 'person' || $pricing_type == 'group' ) ? 'block' : 'none' ) ?>; width: calc(33% - 4px)">
                             <label class="tf-field-label"><?php echo esc_html__( 'Minimum Person (Required for Search)', 'tourfic' ); ?></label>
                             <input type="number" min="0" name="tf_tour_min_person">
                         </div>
-                        <div class="tf-field-text tf-price-by-person" style="display: <?php echo esc_attr( ( $tour_avail_type=='fixed' || $tour_avail_type=='continuous' ) && ( $pricing_type == 'person' || $pricing_type == 'group' ) ? 'block' : 'none' ) ?>; width: calc(33% - 4px)">
+                        <div class="tf-field-text tf-tour-limitation" style="display: <?php echo esc_attr( ( $tour_avail_type=='fixed' || $tour_avail_type=='continuous' ) && ( $pricing_type == 'person' || $pricing_type == 'group' ) ? 'block' : 'none' ) ?>; width: calc(33% - 4px)">
                             <label class="tf-field-label"><?php echo esc_html__( 'Maximum Person (Required for Search)', 'tourfic' ); ?></label>
                             <input type="number" min="0" name="tf_tour_max_person">
                         </div>
-                        <div class="tf-field-text tf-price-by-person" style="display: <?php echo esc_attr( ( $tour_avail_type=='fixed' || $tour_avail_type=='continuous' ) && ( $pricing_type == 'person' || $pricing_type == 'group' ) ? 'block' : 'none' ) ?>; width: calc(33% - 4px)">
+                        <div class="tf-field-text tf-tour-limitation" style="display: <?php echo esc_attr( ( $tour_avail_type=='fixed' || $tour_avail_type=='continuous' ) && ( $pricing_type == 'person' || $pricing_type == 'group' ) ? 'block' : 'none' ) ?>; width: calc(33% - 4px)">
                             <label class="tf-field-label"><?php echo esc_html__( 'Maximum Capacity', 'tourfic' ); ?></label>
                             <input type="number" min="0" name="tf_tour_max_capacity">
                         </div>
@@ -126,7 +126,7 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                             </div>
                         </div>
 
-                        <div class="tf-field tf-field-checkbox tf-years-checkbox" style="width:100%; padding: 0; display: <?php echo esc_attr( $tour_avail_type=='fixed' && ( $pricing_type == 'person' || $pricing_type == 'group' ) ? 'block' : 'none' ) ?>">
+                        <div class="tf-field tf-field-checkbox tf-years-checkbox" style="width:100%; padding: 0; display: <?php echo esc_attr( ($tour_avail_type =='fixed' || $tour_avail_type =='continuous') && ( $pricing_type == 'person' || $pricing_type == 'group' ) ? 'block' : 'none' ) ?>">
                             <label class="tf-field-label"><?php echo esc_html__( 'Repeat Year', 'tourfic' ); ?></label>
                             <div class="tf-fieldset">
                                 <ul class="tf-checkbox-group tf-inline" style="margin-bottom: 0">
@@ -199,9 +199,9 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                 </div>
                                 </div>
                             </div>
-                            </div>
+                        </div>
 
-                        <div class="tf-single-options">
+                        <div class="tf-single-options tf-tour-packages">
 						<?php if ( $pricing_type == 'package' ) {
 							if ( ! empty( $tour_package_options ) ) {
 								foreach ( $tour_package_options as $key => $room_option ) {
