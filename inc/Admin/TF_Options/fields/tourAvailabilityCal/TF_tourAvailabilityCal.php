@@ -146,7 +146,7 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                             </div>
                         </div>
 
-                        <div class="tf-field tf-field-repeater" style="width:100%;">
+                        <div class="tf-field tf-field-repeater" style="width:100%; display: <?php echo esc_attr( ($tour_avail_type =='fixed' || $tour_avail_type =='continuous') && ( $pricing_type == 'person' || $pricing_type == 'group' ) ? 'block' : 'none' ) ?>">
                             <label for="allowed_time[0][allowed_time]" class="tf-field-label"><?php echo esc_html__( 'Allowed Time', 'tourfic' ); ?> </label>
                             <div class="tf-fieldset">
                                 <div id="tf-repeater-1" class="tf-repeater allowed_time" data-max-index="0">
