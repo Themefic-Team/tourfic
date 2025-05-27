@@ -827,6 +827,8 @@ class TF_Options {
 		$tf_tour_repeat_month = isset( $_POST['tf_tour_repeat_month'] ) && ! empty( $_POST['tf_tour_repeat_month'] ) ? $_POST['tf_tour_repeat_month'] : '';
 		$tf_tour_repeat_year = isset( $_POST['tf_tour_repeat_year'] ) && ! empty( $_POST['tf_tour_repeat_year'] ) ? $_POST['tf_tour_repeat_year'] : '';
 
+		$tf_tour_allowed_time = isset( $_POST['allowed_time'] ) && ! empty( $_POST['allowed_time'] ) ? $_POST['allowed_time'] : ''; 
+		
 		if ( empty( $check_in ) || empty( $check_out ) ) {
 			wp_send_json_error( [
 				'status'  => false,
@@ -860,6 +862,7 @@ class TF_Options {
 			'max_capacity' => $tf_tour_max_capacity,
 			'repeat_month' => $tf_tour_repeat_month,
 			'repeat_year' => $tf_tour_repeat_year,
+			'allowed_time' => !empty($tf_tour_allowed_time) ? $tf_tour_allowed_time : '',
 			'status'       => $status
 		];
 
@@ -932,6 +935,7 @@ class TF_Options {
 					'max_capacity' => $tf_tour_max_capacity,
 					'repeat_month' => $tf_tour_repeat_month,
 					'repeat_year'  => $tf_tour_repeat_year,
+					'allowed_time' => !empty($tf_tour_allowed_time) ? $tf_tour_allowed_time : '',
 					'status'       => $status
 				];
 

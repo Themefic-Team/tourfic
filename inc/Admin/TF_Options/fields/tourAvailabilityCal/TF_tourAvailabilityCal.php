@@ -57,20 +57,20 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                             <input type="number" min="0" name="tf_tour_infant_price" placeholder="<?php echo esc_html__( 'Infant Price', 'tourfic' ); ?>">
                         </div>
                         
-                        <div class="tf-field-text tf-price-by-person" style="display: <?php echo esc_attr( $tour_avail_type=='fixed' && ( $pricing_type == 'person' || $pricing_type == 'group' ) ? 'block' : 'none' ) ?>; width: calc(33% - 4px)">
+                        <div class="tf-field-text tf-price-by-person" style="display: <?php echo esc_attr( ( $tour_avail_type=='fixed' || $tour_avail_type=='continuous' ) && ( $pricing_type == 'person' || $pricing_type == 'group' ) ? 'block' : 'none' ) ?>; width: calc(33% - 4px)">
                             <label class="tf-field-label"><?php echo esc_html__( 'Minimum Person (Required for Search)', 'tourfic' ); ?></label>
                             <input type="number" min="0" name="tf_tour_min_person">
                         </div>
-                        <div class="tf-field-text tf-price-by-person" style="display: <?php echo esc_attr( $tour_avail_type=='fixed' && ( $pricing_type == 'person' || $pricing_type == 'group' ) ? 'block' : 'none' ) ?>; width: calc(33% - 4px)">
+                        <div class="tf-field-text tf-price-by-person" style="display: <?php echo esc_attr( ( $tour_avail_type=='fixed' || $tour_avail_type=='continuous' ) && ( $pricing_type == 'person' || $pricing_type == 'group' ) ? 'block' : 'none' ) ?>; width: calc(33% - 4px)">
                             <label class="tf-field-label"><?php echo esc_html__( 'Maximum Person (Required for Search)', 'tourfic' ); ?></label>
                             <input type="number" min="0" name="tf_tour_max_person">
                         </div>
-                        <div class="tf-field-text tf-price-by-person" style="display: <?php echo esc_attr( $tour_avail_type=='fixed' && ( $pricing_type == 'person' || $pricing_type == 'group' ) ? 'block' : 'none' ) ?>; width: calc(33% - 4px)">
+                        <div class="tf-field-text tf-price-by-person" style="display: <?php echo esc_attr( ( $tour_avail_type=='fixed' || $tour_avail_type=='continuous' ) && ( $pricing_type == 'person' || $pricing_type == 'group' ) ? 'block' : 'none' ) ?>; width: calc(33% - 4px)">
                             <label class="tf-field-label"><?php echo esc_html__( 'Maximum Capacity', 'tourfic' ); ?></label>
                             <input type="number" min="0" name="tf_tour_max_capacity">
                         </div>
 
-                        <div class="tf-field tf-field-checkbox tf-months-checkbox" style="width:100%; padding: 0; display: <?php echo esc_attr( $tour_avail_type=='fixed' && ( $pricing_type == 'person' || $pricing_type == 'group' ) ? 'block' : 'none' ) ?>">
+                        <div class="tf-field tf-field-checkbox tf-months-checkbox" style="width:100%; padding: 0; display: <?php echo esc_attr( ( $tour_avail_type=='fixed' || $tour_avail_type=='continuous' ) && ( $pricing_type == 'person' || $pricing_type == 'group' ) ? 'block' : 'none' ) ?>">
                             <label class="tf-field-label"><?php echo esc_html__( 'Repeat Month', 'tourfic' ); ?></label>
                             <div class="tf-fieldset">
                                 <ul class="tf-checkbox-group tf-inline" style="margin-bottom: 0">
@@ -145,6 +145,61 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                 </ul>
                             </div>
                         </div>
+
+                        <div class="tf-field tf-field-repeater" style="width:100%;">
+                            <label for="allowed_time[0][allowed_time]" class="tf-field-label"><?php echo esc_html__( 'Allowed Time', 'tourfic' ); ?> </label>
+                            <div class="tf-fieldset">
+                                <div id="tf-repeater-1" class="tf-repeater allowed_time" data-max-index="0">
+                                <div class="tf-repeater-wrap tf_tour_allowed_times tf-repeater-wrap-allowed_time ui-sortable">
+
+                                </div>
+                                <div class=" tf-single-repeater-clone tf-single-repeater-clone-allowed_time">
+                                    <div class="tf-single-repeater tf-single-repeater-allowed_time">
+                                    <input type="hidden" name="tf_parent_field" value="">
+                                    <input type="hidden" name="tf_repeater_count" value="0">
+                                    <input type="hidden" name="tf_current_field" value="allowed_time">
+                                    <div class="tf-repeater-header">
+                                        <span class="tf-repeater-icon tf-repeater-icon-collapse">
+                                        <i class="fa-solid fa-angle-up"></i>
+                                        </span>
+                                        <span class="tf-repeater-title"><?php echo esc_html__( 'Allowed Time', 'tourfic' ); ?></span>
+                                        <div class="tf-repeater-icon-absulate">
+                                        <span class="tf-repeater-icon tf-repeater-icon-move">
+                                            <i class="fa-solid fa-up-down-left-right"></i>
+                                        </span>
+                                        <span class="tf-repeater-icon tf-repeater-icon-clone" data-repeater-max="">
+                                            <i class="fa-solid fa-copy"></i>
+                                        </span>
+                                        <span class="tf-repeater-icon tf-repeater-icon-delete">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </span>
+                                        </div>
+                                    </div>
+                                    <div class="tf-repeater-content-wrap">
+                                        <div class="tf-field tf-field-time" style="width: calc(50% - 6px);">
+                                        <label class="tf-field-label"> <?php echo esc_html__( 'Time', 'tourfic' ); ?> </label>
+                                        
+                                        <div class="tf-fieldset">
+                                            <input type="text" name="allowed_time[time][]" placeholder="Select Time" value="" class="flatpickr flatpickr-input" data-format="h:i K" readonly="readonly">
+                                            <i class="fa-regular fa-clock"></i>
+                                        </div>
+                                        </div>
+                                        <div class="tf-field tf-field-number" style="width: calc(50% - 6px);">
+                                        <label class="tf-field-label"> <?php echo esc_html__( 'Maximum Capacity', 'tourfic' ); ?> </label>
+                                        
+                                        <div class="tf-fieldset">
+                                            <input type="number" name="allowed_time[cont_max_capacity][]" id="allowed_time[cont_max_capacity]" value="">
+                                        </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                                <div class="tf-repeater-add tf-repeater-add-allowed_time">
+                                    <span data-repeater-id="allowed_time" data-repeater-max="" class="tf-repeater-icon tf-repeater-icon-add tf-repeater-add-allowed_time"><?php echo esc_html__( 'Add New Time', 'tourfic' ); ?> </span>
+                                </div>
+                                </div>
+                            </div>
+                            </div>
 
                         <div class="tf-single-options">
 						<?php if ( $pricing_type == 'package' ) {
