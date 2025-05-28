@@ -434,7 +434,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 					<h3><?php echo __('Helpful Resources', 'tourfic');  ?></h3>
 					<div class="tf-quick-access-wrapper">
 						<div class="tf-access-item">
-							<a href="https://themefic.com/docs/uacf7/" target="_blank">
+							<a href="https://themefic.com/docs/tourfic/" target="_blank">
 								<span class="icon"><i class="fa-solid fa-folder-open"></i></span>
 								<?php echo _e( 'Documentation', 'tourfic' ); ?>
 							</a>
@@ -446,19 +446,19 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 							</a>
 						</div>
 						<div class="tf-access-item">
-							<a href="https://www.facebook.com/groups/ultimate.cf7" target="_blank">
+							<a href="https://www.facebook.com/groups/tourfic/" target="_blank">
 								<span class="icon"><i class="fa-solid fa-users"></i></span>
 								<?php echo _e( 'Join our Community', 'tourfic' ); ?>
 							</a>
 						</div>
 						<div class="tf-access-item">
-							<a href="https://app.loopedin.io/ultimate-addons-for-contact-form-7" target="_blank">
+							<a href="https://app.loopedin.io/tourfic" target="_blank">
 								<span class="icon"><i class="fa-solid fa-road-circle-check"></i></span>
 								<?php echo _e( 'See our Roadmap', 'tourfic' ); ?>
 							</a>
 						</div>
 						<div class="tf-access-item">
-							<a href="https://app.loopedin.io/ultimate-addons-for-contact-form-7#/ideas" target="_blank">
+							<a href="https://portal.themefic.com/hire-us/" target="_blank">
 								<span class="icon"><i class="fa-solid fa-lightbulb"></i></span>
 								<?php echo _e( 'Request a Feature', 'tourfic' ); ?>
 							</a>
@@ -661,7 +661,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 							</svg>
 							<h3><?php esc_html_e("Want Something Custom?","tourfic"); ?></h3>
 							<p><?php esc_html_e("Got a feature in mind? Tell us—our team would love to hear it!","tourfic"); ?></p>
-							<a href="<?php echo esc_url('https://portal.themefic.com/support/') ?>" target="_blank" class="tf-link-skip-btn"><?php esc_html_e("Request a feature","tourfic"); ?></a>
+							<a href="<?php echo esc_url('https://portal.themefic.com/hire-us/') ?>" target="_blank" class="tf-link-skip-btn"><?php esc_html_e("Request a feature","tourfic"); ?></a>
 						</div>
 
 						<!-- Help Center -->
@@ -678,7 +678,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 							</svg>
 							<h3><?php esc_html_e("Need a Hand?","tourfic"); ?></h3>
 							<p><?php esc_html_e("Find answers, ask questions, and connect with other Tourfic users.","tourfic"); ?></p>
-							<a href="<?php echo esc_url('https://portal.themefic.com/support/') ?>" target="_blank" class="tf-link-skip-btn"><?php esc_html_e("Join the community","tourfic"); ?></a>
+							<a href="<?php echo esc_url('https://www.facebook.com/groups/tourfic/') ?>" target="_blank" class="tf-link-skip-btn"><?php esc_html_e("Join the community","tourfic"); ?></a>
 						</div>
 					</div>
 

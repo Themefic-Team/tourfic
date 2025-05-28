@@ -3027,7 +3027,7 @@ var frame, gframe;
     
     /* Plugin insatall from dashboard sidebar */
     jQuery(document).ready(function($) {
-        $('.plugin-button').not('.pro').on('click', function(e) {
+        $('.tf-plugin-button').not('.pro').on('click', function(e) {
             e.preventDefault();
 
             let button = $(this);
@@ -3068,7 +3068,7 @@ var frame, gframe;
                             button.contents().first().replaceWith('Activate');
                             button.data('action', 'activate').removeClass('install').addClass('activate');
                         } else if (action === 'activate') {
-                            button.replaceWith('<span class="plugin-button plugin-status active">Activated</span>');
+                            button.replaceWith('<span class="tf-plugin-button tf-plugin-status active">Activated</span>');
                         }
                     } else {
                         button.contents().first().replaceWith(originalText);
