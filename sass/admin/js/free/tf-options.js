@@ -1411,7 +1411,7 @@
                         zone = zone.split(":");
                         zone = "" + parseInt(zone[0]) + ":00";
                         var check_in = moment(start).utcOffset(zone).format(String(tf_options.tf_admin_date_format || "MM/DD/YYYY").toUpperCase());
-                        var check_out = moment(end).utcOffset(zone).format(String(tf_options.tf_admin_date_format || "MM/DD/YYYY").toUpperCase());
+                        var check_out = moment(end).utcOffset(zone).subtract(1, 'day').format(String(tf_options.tf_admin_date_format || "MM/DD/YYYY").toUpperCase());
                         setTourCheckInOut(check_in, check_out, self.tourCalData);
                     }
                 },
@@ -1609,6 +1609,10 @@
                                 $("[name='tf_option_child_price_" + i + "']", self.roomCalData).val(event.extendedProps["tf_option_child_price_" + i]);
                                 $("[name='tf_option_infant_price_" + i + "']", self.roomCalData).val(event.extendedProps["tf_option_infant_price_" + i]);
                             }
+                        }
+                        if(typeof event.extendedProps.options_count == 'undefined'){
+                            $(".tf_option_pricing_type_person input").val('');
+                            $(".tf_option_pricing_type_group input").val('');
                         }
                     }
                     if (event.extendedProps.status) {
