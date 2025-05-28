@@ -245,7 +245,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 				<?php \Tourfic\Classes\Helper::tf_dashboard_header(); ?>
 
 				<div class="tf-setting-preview">
-					<div class="tf-setting-performace-section">
+					<div class="tf-setting-overview-section">
 						<h2><?php esc_html_e("Overview","tourfic"); ?></h2>
 						<div class="tf-performance-grid">
 							<div class="tf-single-performance-grid">
@@ -396,7 +396,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
 							<?php if(class_exists('WooCommerce')): ?>
 								<div class="tf-order-report">
-									<canvas id="tf_months" width="800" height="450"></canvas>
+									<canvas id="tf_months" height="450"></canvas>
 								</div>
 							<?php else : ?>
 								<div class="tf-field-notice-inner tf-notice-danger" style="margin-top: 20px;">
@@ -416,94 +416,68 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
 		public function tf_settings_sidebar() {
 			?>
-			<div class="uacf7-sidebar">
-				<div class="uacf7-sidebar-wrap">
-					<!-- promo banner  -->
-					<?php echo apply_filters('uacf7_dashboard_fomo_banner', ''); ?>
-						
-					<div class="uacf7-sidebar-content">
+			<div class="tf-sidebar-content">
+				<div class="tf-customization-quote">
+                    <div class="tf-quote-header">
+                        <i class="fa-solid fa-code"></i>
+                        <h3><?php echo __('Need help building your Travel, Hotel, or Rental Website?', 'tourfic');  ?></h3>
+                    </div>
+                    <div class="tf-quote-content">
+                        <p><?php echo __('Let our expert team craft a custom WordPress site tailored to your business—whether you\'re running a hotel, tour agency, or vacation rental. Optimized for performance, bookings, and conversions.', 'tourfic'); ?></p>
+						<a href="<?php echo esc_url('https://portal.themefic.com/hire-us/' ); ?>" target="_blank" class="tf-admin-btn tf-btn-secondary"><?php echo __('Get Free Quote', 'tourfic');  ?></a>								
+                    </div>
+                </div>
 
-						<?php echo $this->tf_get_sidebar_plugin_list(); ?>
+				<?php echo $this->tf_get_sidebar_plugin_list(); ?>
 
-						<div class="customization-quote">
-							<div class="quote-header">
-								<i class="fa-solid fa-code"></i>
-								<a href="<?php echo esc_url('https://portal.themefic.com/hire-us/' ); ?>" target="_blank" ><?php echo __('Get Free Quote', 'ultimate-addons-cf7');  ?></a>
-							</div>
-							<div class="quote-content">
-								<h3><?php echo __('Need Help Customizing Your WordPress Site?', 'ultimate-addons-cf7');  ?></h3>
-								<p><?php echo __('Want to tweak a theme, adjust a plugin like Ultra Addons or add custom functionality to your site? Our expert WordPress developers can tailor it just the way you need. We only charge $29/hour.', 'ultimate-addons-cf7');  ?></p>								
-							</div>
+				<div class="tf-quick-access">
+					<h3><?php echo __('Helpful Resources', 'tourfic');  ?></h3>
+					<div class="tf-quick-access-wrapper">
+						<div class="tf-access-item">
+							<a href="https://themefic.com/docs/uacf7/" target="_blank">
+								<span class="icon"><i class="fa-solid fa-folder-open"></i></span>
+								<?php echo _e( 'Documentation', 'tourfic' ); ?>
+							</a>
 						</div>
-
-						<div class="quick-access">
-							<h3><?php echo __('Helpful Resources', 'ultimate-addons-cf7');  ?></h3>
-							<div class="quick-access-wrapper">
-								<div class="access-item">
-									<a href="https://themefic.com/docs/uacf7/" target="_blank">
-										<span class="icon"><i class="fa-solid fa-folder-open"></i></span>
-										<?php echo _e( 'Documentation', 'ultimate-addons-cf7' ); ?>
-									</a>
-								</div>
-								<div class="access-item">
-									<a href="https://portal.themefic.com/support/" target="_blank">
-										<span class="icon"><i class="fa-solid fa-headset"></i></span>
-										<?php echo _e( 'Get Support', 'ultimate-addons-cf7' ); ?>
-									</a>
-								</div>
-								<div class="access-item">
-									<a href="https://www.facebook.com/groups/ultimate.cf7" target="_blank">
-										<span class="icon"><i class="fa-solid fa-users"></i></span>
-										<?php echo _e( 'Join our Community', 'ultimate-addons-cf7' ); ?>
-									</a>
-								</div>
-								<div class="access-item">
-									<a href="https://app.loopedin.io/ultimate-addons-for-contact-form-7" target="_blank">
-										<span class="icon"><i class="fa-solid fa-road-circle-check"></i></span>
-										<?php echo _e( 'See our Roadmap', 'ultimate-addons-cf7' ); ?>
-									</a>
-								</div>
-								<div class="access-item">
-									<a href="https://app.loopedin.io/ultimate-addons-for-contact-form-7#/ideas" target="_blank">
-										<span class="icon"><i class="fa-solid fa-lightbulb"></i></span>
-										<?php echo _e( 'Request a Feature', 'ultimate-addons-cf7' ); ?>
-									</a>
-								</div>
-							</div>
+						<div class="tf-access-item">
+							<a href="https://portal.themefic.com/support/" target="_blank">
+								<span class="icon"><i class="fa-solid fa-headset"></i></span>
+								<?php echo _e( 'Get Support', 'tourfic' ); ?>
+							</a>
 						</div>
-
+						<div class="tf-access-item">
+							<a href="https://www.facebook.com/groups/ultimate.cf7" target="_blank">
+								<span class="icon"><i class="fa-solid fa-users"></i></span>
+								<?php echo _e( 'Join our Community', 'tourfic' ); ?>
+							</a>
+						</div>
+						<div class="tf-access-item">
+							<a href="https://app.loopedin.io/ultimate-addons-for-contact-form-7" target="_blank">
+								<span class="icon"><i class="fa-solid fa-road-circle-check"></i></span>
+								<?php echo _e( 'See our Roadmap', 'tourfic' ); ?>
+							</a>
+						</div>
+						<div class="tf-access-item">
+							<a href="https://app.loopedin.io/ultimate-addons-for-contact-form-7#/ideas" target="_blank">
+								<span class="icon"><i class="fa-solid fa-lightbulb"></i></span>
+								<?php echo _e( 'Request a Feature', 'tourfic' ); ?>
+							</a>
+						</div>
 					</div>
 				</div>
+
 			</div>
 			<?php
 		}
 
 		public function tf_get_sidebar_plugin_list(){
-
 			$plugins = [
-				// [
-				// 	'name'       => 'UACF7',
-				// 	'slug'       => 'ultimate-addons-for-contact-form-7',
-				// 	'file_name'  => 'ultimate-addons-for-contact-form-7',
-				// 	'subtitle'   => '40+ Essential Addons for Contact Form 7',
-				// 	'image'      => 'https://ps.w.org/ultimate-addons-for-contact-form-7/assets/icon-128x128.png',
-				// 	// 'pro'        => [
-				// 	// 	'slug'      => 'ultimate-addons-for-contact-form-7-pro',
-				// 	// 	'file_name' => 'ultimate-addons-for-contact-form-7-pro',
-				// 	// 	'url'       => 'https://cf7addons.com/pricing/',
-				// 	// ],
-				// ],
 				[
 					'name'       => 'Hydra',
 					'slug'       => 'hydra-booking',
 					'file_name'  => 'hydra-booking',
 					'subtitle'   => 'All in One Appointment Booking System',
 					'image'      => 'https://ps.w.org/hydra-booking/assets/icon-128x128.jpg',
-					// 'pro'        => [
-					// 	'slug'      => 'hydra-booking-pro',
-					// 	'file_name' => 'hydra-booking-pro',
-					// 	'url'       => 'https://hydrabooking.com/',
-					// ],
 				],
 				[
 					'name'       => 'BEAF',
@@ -511,23 +485,13 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 					'file_name'  => 'before-and-after-gallery',
 					'subtitle'   => 'Ultimate Before After Image Slider & Gallery',
 					'image'      => 'https://ps.w.org/beaf-before-and-after-gallery/assets/icon-128x128.png',
-					// 'pro'        => [
-					// 	'slug'      => 'beaf-before-and-after-gallery-pro',
-					// 	'file_name' => 'before-and-after-gallery-pro',
-					// 	'url'       => 'https://themefic.com/plugins/beaf/pro/',
-					// ],
 				],
 				[
-					'name'       => 'Tourfic',
-					'slug'       => 'tourfic',
-					'file_name'  => 'tourfic',
-					'subtitle'   => 'Travel, Hotel Booking & Car Rental WP Plugin',
-					'image'      => 'https://ps.w.org/tourfic/assets/icon-128x128.gif',
-					// 'pro'        => [
-					// 	'slug'      => 'tourfic-pro',
-					// 	'file_name' => 'tourfic-pro',
-					// 	'url'       => 'https://themefic.com/tourfic/',
-					// ],
+					'name'       => 'UACF7',
+					'slug'       => 'ultimate-addons-for-contact-form-7',
+					'file_name'  => 'ultimate-addons-for-contact-form-7',
+					'subtitle'   => '40+ Essential Addons for Contact Form 7',
+					'image'      => 'https://ps.w.org/ultimate-addons-for-contact-form-7/assets/icon-128x128.png',
 				],
 				[
 					'name'       => 'Instantio',
@@ -535,26 +499,8 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 					'file_name'  => 'instantio',
 					'subtitle'   => 'WooCommerce Quick & Direct Checkout',
 					'image'      => 'https://ps.w.org/instantio/assets/icon-128x128.png',
-					// 'pro'        => [
-					// 	'slug'      => 'wooinstant',
-					// 	'file_name' => 'wooinstant',
-					// 	'url'       => 'https://themefic.com/instantio/',
-					// ],
 				],
-				// [
-				// 	'name'       => 'Before After Slider for WooCommerce – eBEAF',
-				// 	'slug'       => 'before-after-for-woocommerce',
-				// 	'file_name'  => 'before-after-for-woocommerce',
-				// 	'image'      => 'https://ps.w.org/before-after-for-woocommerce/assets/icon-128x128.gif',
-				// 	'pro_url'    => '',
-				// 	'pro'        => [
-				// 		'slug'      => 'before-after-for-woocommerce-pro',
-				// 		'file_name' => 'before-after-for-woocommerce-pro',
-				// 		'url'       => 'https://themefic.com/plugins/ebeaf/pro/',
-				// 	],
-				// ],
 			];
-
 			?>
 
 			<ul>
@@ -571,41 +517,40 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 						$pro_installed = file_exists(WP_PLUGIN_DIR . '/' . $pro_path);
 						$pro_activated = $pro_installed && is_plugin_active($pro_path);
 					}
-
 					?>
 
-					<li class="plugin-item <?php echo esc_attr($plugin['slug'] == 'hydra-booking' ? 'featured' : ''); ?>" data-plugin-slug="<?php echo esc_attr($plugin['slug']); ?>">
-						<div class="plugin-info-wrapper">
-							<div class="plugin-info">
+					<li class="tf-plugin-item <?php echo esc_attr($plugin['slug'] == 'hydra-booking' ? 'featured' : ''); ?>" data-plugin-slug="<?php echo esc_attr($plugin['slug']); ?>">
+						<div class="tf-plugin-info-wrapper">
+							<div class="tf-plugin-info">
 								<img src="<?php echo esc_url($plugin['image']); ?>" alt="<?php echo esc_attr($plugin['name']); ?>" class="<?php echo esc_attr($plugin['name'] == 'BEAF' ? 'beaf-logo' : ''); ?>" width="40" height="40">
-								<div class="plugin-btn">
+								<div class="tf-plugin-btn">
 									<span class="badge free">Free</span>
 									<?php if (!$installed): ?>
-										<button class="plugin-button install" data-action="install" data-plugin="<?php echo esc_attr($plugin['slug']); ?>" data-plugin_filename="<?php echo esc_attr($plugin['file_name']); ?>">
+										<button class="tf-plugin-button install" data-action="install" data-plugin="<?php echo esc_attr($plugin['slug']); ?>" data-plugin_filename="<?php echo esc_attr($plugin['file_name']); ?>">
 											Install <span class="loader"></span>
 										</button>
 									<?php elseif (!$activated): ?>
-										<button class="plugin-button activate" data-action="activate" data-plugin="<?php echo esc_attr($plugin['slug']); ?>" data-plugin_filename="<?php echo esc_attr($plugin['file_name']); ?>" >
+										<button class="tf-plugin-button activate" data-action="activate" data-plugin="<?php echo esc_attr($plugin['slug']); ?>" data-plugin_filename="<?php echo esc_attr($plugin['file_name']); ?>" >
 											Activate <span class="loader"></span>
 										</button>
 									<?php else: ?>
-										<span class="plugin-button plugin-status active">Activated</span>
+										<span class="tf-plugin-button tf-plugin-status active">Activated</span>
 									<?php endif; ?>
 
 									<?php if (!empty($plugin['pro'])): ?>
 										<?php if (!$pro_installed): ?>
-											<a href="<?php echo esc_url($plugin['pro']['url']); ?>" class="plugin-button pro" target="_blank">Get Pro</a>
+											<a href="<?php echo esc_url($plugin['pro']['url']); ?>" class="tf-plugin-button pro" target="_blank">Get Pro</a>
 										<?php elseif (!$pro_activated): ?>
-											<button class="plugin-button activate-pro" data-action="activate" data-plugin="<?php echo esc_attr($plugin['pro']['slug']); ?>" data-plugin_filename="<?php echo esc_attr($plugin['pro']['file_name']); ?>">
+											<button class="tf-plugin-button activate-pro" data-action="activate" data-plugin="<?php echo esc_attr($plugin['pro']['slug']); ?>" data-plugin_filename="<?php echo esc_attr($plugin['pro']['file_name']); ?>">
 												Activate Pro <span class="loader"></span>
 											</button>
 										<?php else: ?>
-											<span class="plugin-button plugin-status active-pro">Pro Activated</span>
+											<span class="tf-plugin-button tf-plugin-status active-pro">Pro Activated</span>
 										<?php endif; ?>
 									<?php endif; ?>
 								</div>
 							</div>
-							<div class="uacf7-plugin-content">
+							<div class="tf-plugin-content">
 								<h4><?php echo esc_html($plugin['name']); ?></h4>
 								<p><?php echo esc_html($plugin['subtitle']); ?></p>
 								<strong></strong>
@@ -621,7 +566,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 		}
 
 		public function themefic_manage_plugin() {
-			check_ajax_referer('themefic_plugin_nonce', 'security');
+			check_ajax_referer('updates', 'security');
 
 			if (!current_user_can('install_plugins')) {
 				wp_send_json_error('You do not have permission to perform this action.');
