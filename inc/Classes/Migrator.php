@@ -1498,6 +1498,7 @@ class Migrator {
 			$meta = get_post_meta( $post_id, 'tf_tours_opt', true );
 			$tour_type = ! empty( $meta['type'] ) ? $meta['type'] : '';
 			$pricing_rule = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
+			$tour_availability_data = [];
 			if($tour_type=='fixed'){
 				$tf_start_date = ! empty( $meta['fixed_availability']['date']['from'] ) ? $meta['fixed_availability']['date']['from'] : '';
 				$tf_end_date = ! empty( $meta['fixed_availability']['date']['to'] ) ? $meta['fixed_availability']['date']['to'] : '';
@@ -1552,29 +1553,9 @@ class Migrator {
 								'max_capacity' => $max_capacity,
 								'repeat_month' => $tf_tour_repeat_month,
 								'repeat_year'  => $tf_tour_repeat_year,
-								'allowed_time' => !empty($tf_tour_allowed_time) ? $tf_tour_allowed_time : '',
+								'allowed_time' => '',
 								'status'       => 'available'
 							];
-
-							if($pricing_type == 'package') {
-								if ( $options_count != 0 ) {
-									$options_data = [
-										'options_count' => $options_count,
-									];
-									for ( $j = 0; $j <= $options_count - 1; $j ++ ) {
-										$options_data[ 'tf_package_option_' . $j ]         = isset( $_POST[ 'tf_package_option_' . $j ] ) && ! empty( $_POST[ 'tf_package_option_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_package_option_' . $j ] ) : '';
-										$options_data[ 'tf_option_title_' . $j ]        = isset( $_POST[ 'tf_option_title_' . $j ] ) && ! empty( $_POST[ 'tf_option_title_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_title_' . $j ] ) : '';
-										$options_data[ 'tf_option_pricing_type_' . $j ] = isset( $_POST[ 'tf_option_pricing_type_' . $j ] ) && ! empty( $_POST[ 'tf_option_pricing_type_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_pricing_type_' . $j ] ) : '';
-										$options_data[ 'tf_option_group_price_' . $j ]   = isset( $_POST[ 'tf_option_group_price_' . $j ] ) && ! empty( $_POST[ 'tf_option_group_price_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_group_price_' . $j ] ) : '';
-										$options_data[ 'tf_option_adult_price_' . $j ]  = isset( $_POST[ 'tf_option_adult_price_' . $j ] ) && ! empty( $_POST[ 'tf_option_adult_price_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_adult_price_' . $j ] ) : '';
-										$options_data[ 'tf_option_child_price_' . $j ]  = isset( $_POST[ 'tf_option_child_price_' . $j ] ) && ! empty( $_POST[ 'tf_option_child_price_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_child_price_' . $j ] ) : '';
-										$options_data[ 'tf_option_infant_price_' . $j ]  = isset( $_POST[ 'tf_option_infant_price_' . $j ] ) && ! empty( $_POST[ 'tf_option_infant_price_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_infant_price_' . $j ] ) : '';
-									}
-								}
-								if ( ! empty( $options_data ) ) {
-									$tf_tour_data = array_merge( $tf_tour_data, $options_data );
-								}
-							}
 
 							$tour_availability_data[$tf_tour_date] = $tf_tour_data;
 						}
@@ -1586,6 +1567,86 @@ class Migrator {
 				$custom_avail = ! empty( $meta['custom_avail'] ) ? $meta['custom_avail'] : false;
 				if ( $custom_avail == true ) {
 					$pricing_rule = ! empty( $meta['custom_pricing_by'] ) ? $meta['custom_pricing_by'] : 'person';
+
+					$cont_custom_date = ! empty( $meta['cont_custom_date'] ) ? $meta['cont_custom_date'] : '';
+					if ( ! empty( $cont_custom_date ) && gettype( $cont_custom_date ) == "string" ) {
+						$cont_custom_date_unserial = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
+							return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
+						}, $cont_custom_date );
+						$cont_custom_date          = unserialize( $cont_custom_date_unserial );
+					}
+
+					if(!empty($cont_custom_date)){
+						$custom_pricing_by = ! empty( $meta['custom_pricing_by'] ) ? $meta['custom_pricing_by'] : '';
+						foreach($cont_custom_date as $date){
+							$tf_start_date = ! empty( $date['date']['from'] ) ? $date['date']['from'] : '';
+							$tf_end_date = ! empty( $date['date']['to'] ) ? $date['date']['to'] : '';
+
+							$min_seat = ! empty( $date['min_people'] ) ? $date['min_people'] : '';
+							$max_seat = ! empty( $date['max_people'] ) ? $date['max_people'] : '';
+							$max_capacity = ! empty( $date['max_capacity'] ) ? $date['max_capacity'] : '';
+
+							$adult_price = ! empty( $date['adult_price'] ) ? $date['adult_price'] : '';
+							$child_price = ! empty( $date['child_price'] ) ? $date['child_price'] : '';
+							$infant_price = ! empty( $date['infant_price'] ) ? $date['infant_price'] : '';
+							$group_price = ! empty( $date['group_price'] ) ? $date['group_price'] : '';
+
+							if(!empty($tf_start_date) && !empty($tf_end_date)){
+								$allowed_time = ! empty( $date['allowed_time'] ) ? $date['allowed_time'] : '';
+								$tf_tour_allowed_time = [];
+								if(!empty($allowed_time)){
+									$times = [];
+									$max_capacity = [];
+									foreach($allowed_time as $time){
+										$times[$time['time']] = $time['time'];
+										$max_capacity[$time['max_capacity']] = $time['max_capacity'];
+									}
+									$tf_tour_allowed_time = [
+										'time' => $times,
+										'cont_max_capacity' => $max_capacity
+									];
+								}
+								$tf_tour_date = $tf_start_date . ' - ' . $tf_end_date;
+								$tf_tour_data = [
+									'check_in'     => $tf_start_date,
+									'check_out'    => $tf_end_date,
+									'pricing_type' => $custom_pricing_by,
+									'price'        => $group_price,
+									'adult_price'  => $adult_price,
+									'child_price'  => $child_price,
+									'infant_price' => $infant_price,
+									'min_person'   => $min_seat,
+									'max_person'   => $max_seat,
+									'max_capacity' => $max_capacity,
+									'repeat_month' => '',
+									'repeat_year'  => '',
+									'allowed_time' => !empty($tf_tour_allowed_time) ? $tf_tour_allowed_time : '',
+									'status'       => 'available'
+								];
+
+								$tour_availability_data[$tf_tour_date] = $tf_tour_data;
+							}
+						}
+					}else{
+						$cont_min_people = ! empty( $meta['cont_min_people'] ) ? $meta['cont_min_people'] : '';
+						$cont_max_people = ! empty( $meta['cont_max_people'] ) ? $meta['cont_max_people'] : '';
+						$cont_max_capacity = ! empty( $meta['cont_max_capacity'] ) ? $meta['cont_max_capacity'] : '';
+
+						$allowed_time = ! empty( $meta['allowed_time'] ) ? $meta['allowed_time'] : '';
+						$tf_tour_allowed_time = [];
+						if(!empty($allowed_time)){
+							$times = [];
+							$max_capacity = [];
+							foreach($allowed_time as $time){
+								$times[$time['time']] = $time['time'];
+								$max_capacity[$time['cont_max_capacity']] = $time['cont_max_capacity'];
+							}
+							$tf_tour_allowed_time = [
+								'time' => $times,
+								'cont_max_capacity' => $max_capacity
+							];
+						}
+					}
 				}
 			}
 
