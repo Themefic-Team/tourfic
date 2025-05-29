@@ -1647,7 +1647,9 @@ class Migrator {
 							'cont_max_capacity' => $max_capacity
 						];
 					}
-
+					
+					$disabled_day = ! empty( $meta['disabled_day'] ) ? $meta['disabled_day'] : '';
+					var_dump($disabled_day); exit;
 					$disable_range = ! empty( $meta['disable_range'] ) ? $meta['disable_range'] : '';
 					if(!empty($disable_range)){
 						foreach($disable_range as $disable){
@@ -1705,8 +1707,6 @@ class Migrator {
 			}
 
 			$meta['tour_availability'] = wp_json_encode( $tour_availability_data );
-			// echo "<pre>";
-			// var_dump($tour_availability_data); exit();
 
 		endwhile;
 		wp_reset_postdata();
