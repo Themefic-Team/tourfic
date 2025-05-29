@@ -458,7 +458,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 							</a>
 						</div>
 						<div class="tf-access-item">
-							<a href="https://portal.themefic.com/hire-us/" target="_blank">
+							<a href="https://app.loopedin.io/tourfic#/ideas-board" target="_blank">
 								<span class="icon"><i class="fa-solid fa-lightbulb"></i></span>
 								<?php echo _e( 'Request a Feature', 'tourfic' ); ?>
 							</a>
@@ -472,6 +472,13 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
 		public function tf_get_sidebar_plugin_list(){
 			$plugins = [
+				[
+					'name'       => 'Instantio',
+					'slug'       => 'instantio',
+					'file_name'  => 'instantio',
+					'subtitle'   => 'WooCommerce Quick & Direct Checkout',
+					'image'      => 'https://ps.w.org/instantio/assets/icon-128x128.png',
+				],
 				[
 					'name'       => 'Hydra',
 					'slug'       => 'hydra-booking',
@@ -493,13 +500,6 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 					'subtitle'   => '40+ Essential Addons for Contact Form 7',
 					'image'      => 'https://ps.w.org/ultimate-addons-for-contact-form-7/assets/icon-128x128.png',
 				],
-				[
-					'name'       => 'Instantio',
-					'slug'       => 'instantio',
-					'file_name'  => 'instantio',
-					'subtitle'   => 'WooCommerce Quick & Direct Checkout',
-					'image'      => 'https://ps.w.org/instantio/assets/icon-128x128.png',
-				],
 			];
 			?>
 
@@ -519,7 +519,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 					}
 					?>
 
-					<li class="tf-plugin-item <?php echo esc_attr($plugin['slug'] == 'hydra-booking' ? 'featured' : ''); ?>" data-plugin-slug="<?php echo esc_attr($plugin['slug']); ?>">
+					<li class="tf-plugin-item <?php echo esc_attr($plugin['slug'] == 'instantio' ? 'featured' : ''); ?>" data-plugin-slug="<?php echo esc_attr($plugin['slug']); ?>">
 						<div class="tf-plugin-info-wrapper">
 							<div class="tf-plugin-info">
 								<img src="<?php echo esc_url($plugin['image']); ?>" alt="<?php echo esc_attr($plugin['name']); ?>" class="<?php echo esc_attr($plugin['name'] == 'BEAF' ? 'beaf-logo' : ''); ?>" width="40" height="40">
@@ -649,8 +649,8 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 									</clipPath>
 								</defs>
 							</svg>
-							<h3><?php esc_html_e("Let's Get You Started","tourfic"); ?></h3>
-							<p><?php esc_html_e("Quickly configure Tourfic without changing your current settings.","tourfic"); ?></p>
+							<h3><?php esc_html_e("Get Started Quickly","tourfic"); ?></h3>
+							<p><?php esc_html_e("Use our guided setup wizard to get up and running fast.","tourfic"); ?></p>
 							<a href="<?php echo esc_url(admin_url( 'admin.php?page=tf-setup-wizard' )) ?>" target="_blank" class="tf-link-skip-btn"><?php esc_html_e("Setup Wizard","tourfic"); ?></a>
 						</div>
 
@@ -659,9 +659,9 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 							<svg xmlns="http://www.w3.org/2000/svg" width="49" height="48" viewBox="0 0 49 48" fill="none">
 								<path fill-rule="evenodd" clip-rule="evenodd" d="M8.21669 40.9014C9.68335 41.6348 11.1667 42.0014 12.6667 42.0014C14.8667 42.0014 16.75 41.218 18.3167 39.6514C19.8833 38.0848 20.6667 36.2014 20.6667 34.0014C20.6667 32.3348 20.0833 30.918 18.9167 29.7514C17.75 28.5848 16.3333 28.0014 14.6667 28.0014C13 28.0014 11.5833 28.5848 10.4167 29.7514C9.25003 30.918 8.66669 32.3348 8.66669 34.0014C8.66669 35.3014 8.21669 36.293 7.31669 36.9764C6.41669 37.6598 5.53335 38.0014 4.66669 38.0014C5.56669 39.2014 6.75003 40.168 8.21669 40.9014ZM18.6667 24.5014L24.1667 30.0014L42.0667 12.1014C42.4667 11.7014 42.6667 11.2347 42.6667 10.7014C42.6667 10.1681 42.4667 9.70139 42.0667 9.30139L39.3667 6.60139C38.9667 6.20139 38.4917 6.00971 37.9417 6.02639C37.3917 6.04305 36.9333 6.23471 36.5667 6.60139L18.6667 24.5014ZM34.3667 43.001L34.9667 46.001H38.9667L39.5669 43.001C39.9667 42.8344 40.3417 42.6594 40.6919 42.476C41.0417 42.2926 41.4001 42.0676 41.7667 41.801L44.6667 42.701L46.6667 39.301L44.3667 37.301C44.4335 36.8676 44.4667 36.4344 44.4667 36.001C44.4667 35.5676 44.4335 35.1344 44.3667 34.701L46.6667 32.701L44.6667 29.301L41.7667 30.201C41.4001 29.9344 41.0417 29.7094 40.6919 29.526C40.3417 29.3426 39.9667 29.1676 39.5669 29.001L38.9667 26.001H34.9667L34.3667 29.001C33.9667 29.1676 33.5917 29.3426 33.2417 29.526C32.8917 29.7094 32.5335 29.9344 32.1667 30.201L29.2667 29.301L27.2667 32.701L29.5667 34.701C29.5001 35.1344 29.4667 35.5676 29.4667 36.001C29.4667 36.4344 29.5001 36.8676 29.5667 37.301L27.2667 39.301L29.2667 42.701L32.1667 41.801C32.5335 42.0676 32.8917 42.2926 33.2417 42.476C33.5917 42.6594 33.9667 42.8344 34.3667 43.001ZM39.7917 38.826C39.0085 39.6094 38.0667 40.001 36.9667 40.001C35.8667 40.001 34.9251 39.6094 34.1417 38.826C33.3585 38.0426 32.9667 37.101 32.9667 36.001C32.9667 34.901 33.3585 33.9594 34.1417 33.176C34.9251 32.3926 35.8667 32.001 36.9667 32.001C38.0667 32.001 39.0085 32.3926 39.7917 33.176C40.5751 33.9594 40.9667 34.901 40.9667 36.001C40.9667 37.101 40.5751 38.0426 39.7917 38.826Z" fill="#FFC100"/>
 							</svg>
-							<h3><?php esc_html_e("Want Something Custom?","tourfic"); ?></h3>
-							<p><?php esc_html_e("Got a feature in mind? Tell us—our team would love to hear it!","tourfic"); ?></p>
-							<a href="<?php echo esc_url('https://portal.themefic.com/hire-us/') ?>" target="_blank" class="tf-link-skip-btn"><?php esc_html_e("Request a feature","tourfic"); ?></a>
+							<h3><?php esc_html_e("Need a Custom Solution?","tourfic"); ?></h3>
+							<p><?php esc_html_e("We offer tailored plugin solutions based on your specific needs.","tourfic"); ?></p>
+							<a href="<?php echo esc_url('https://portal.themefic.com/hire-us/') ?>" target="_blank" class="tf-link-skip-btn"><?php esc_html_e("Request Customization","tourfic"); ?></a>
 						</div>
 
 						<!-- Help Center -->
@@ -677,7 +677,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 								</defs>
 							</svg>
 							<h3><?php esc_html_e("Need a Hand?","tourfic"); ?></h3>
-							<p><?php esc_html_e("Find answers, ask questions, and connect with other Tourfic users.","tourfic"); ?></p>
+							<p><?php esc_html_e("Get expert support and connect with fellow Tourfic users.","tourfic"); ?></p>
 							<a href="<?php echo esc_url('https://www.facebook.com/groups/tourfic/') ?>" target="_blank" class="tf-link-skip-btn"><?php esc_html_e("Join the community","tourfic"); ?></a>
 						</div>
 					</div>
@@ -696,7 +696,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 								<path fill-rule="evenodd" clip-rule="evenodd" d="M6 36C4.9 36 3.95834 35.6084 3.175 34.825C2.39166 34.0416 2 33.1 2 32V8C2 6.9 2.39166 5.95834 3.175 5.175C3.95834 4.39166 4.9 4 6 4H38C39.1 4 40.0416 4.39166 40.825 5.175C41.6084 5.95834 42 6.9 42 8V24.985C41.6776 24.9504 41.3514 24.9332 41.0222 24.9332C39.1838 24.9332 37.4752 25.502 36.01 26.5794C34.5538 25.4944 32.8506 24.9332 31.0258 24.9332C29.2432 24.9332 27.5512 25.4282 26.0524 26.4152C24.556 27.4006 23.4338 28.7556 22.725 30.3858C21.98 32.0994 21.807 33.93 22.216 35.7522C22.2348 35.8352 22.2544 35.9178 22.275 36H6ZM22 22L38 12V8L22 18L6 8V12L22 22ZM44.5574 37.4666L36.024 46.0002L27.4904 37.4666C26.7996 36.7352 26.3424 35.8716 26.119 34.876C25.8954 33.8806 25.9868 32.9154 26.3932 31.9808C26.7996 31.0462 27.4194 30.3046 28.2524 29.756C29.0854 29.2074 30.0098 28.9332 31.0258 28.9332C32.0416 28.9332 32.9458 29.248 33.7382 29.8778C34.5306 30.5078 35.2924 31.168 36.024 31.8588C36.7148 31.168 37.4664 30.5078 38.2792 29.8778C39.092 29.248 40.0062 28.9332 41.0222 28.9332C42.038 28.9332 42.9524 29.2176 43.765 29.7864C44.5778 30.3554 45.1872 31.1072 45.5936 32.0418C46 32.9764 46.1016 33.9414 45.8984 34.937C45.6952 35.9326 45.2482 36.7758 44.5574 37.4666Z" fill="#27BE69"/>
 							</svg>
 							<h3><?php esc_html_e("Email Support","tourfic"); ?></h3>
-							<p><?php echo esc_html__('Have questions? Get expert help via email.', 'tourfic'); ?></p>
+							<p><?php echo esc_html__('Have needs? Our team offers tailored solutions.', 'tourfic'); ?></p>
 							<a href="https://portal.themefic.com/support/" target="_blank" class="tf-link-skip-btn"><?php esc_html_e("Contact Us","tourfic"); ?></a>
 						</div>
 
@@ -705,7 +705,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 								<path fill-rule="evenodd" clip-rule="evenodd" d="M5.9 32.6L2 46L15.4 42.1C16.7667 42.7334 18.1667 43.2084 19.6 43.525C21.0334 43.8416 22.5 44 24 44C26.7666 44 29.3666 43.475 31.8 42.425C34.2334 41.375 36.35 39.95 38.15 38.15C39.95 36.35 41.375 34.2334 42.425 31.8C43.475 29.3666 44 26.7666 44 24C44 21.2334 43.475 18.6333 42.425 16.2C41.375 13.7667 39.95 11.65 38.15 9.85C36.35 8.05 34.2334 6.625 31.8 5.575C29.3666 4.525 26.7666 4 24 4C21.2334 4 18.6333 4.525 16.2 5.575C13.7667 6.625 11.65 8.05 9.85 9.85C8.05 11.65 6.625 13.7667 5.575 16.2C4.525 18.6333 4 21.2334 4 24C4 25.5 4.15834 26.9666 4.475 28.4C4.79166 29.8334 5.26666 31.2334 5.9 32.6ZM17.425 25.425C17.0417 25.8084 16.5667 26 16 26C15.4333 26 14.9583 25.8084 14.575 25.425C14.1917 25.0416 14 24.5666 14 24C14 23.4334 14.1917 22.9584 14.575 22.575C14.9583 22.1916 15.4333 22 16 22C16.5667 22 17.0417 22.1916 17.425 22.575C17.8083 22.9584 18 23.4334 18 24C18 24.5666 17.8083 25.0416 17.425 25.425ZM25.425 25.425C25.0416 25.8084 24.5666 26 24 26C23.4334 26 22.9584 25.8084 22.575 25.425C22.1916 25.0416 22 24.5666 22 24C22 23.4334 22.1916 22.9584 22.575 22.575C22.9584 22.1916 23.4334 22 24 22C24.5666 22 25.0416 22.1916 25.425 22.575C25.8084 22.9584 26 23.4334 26 24C26 24.5666 25.8084 25.0416 25.425 25.425ZM32 26C32.5666 26 33.0416 25.8084 33.425 25.425C33.8084 25.0416 34 24.5666 34 24C34 23.4334 33.8084 22.9584 33.425 22.575C33.0416 22.1916 32.5666 22 32 22C31.4334 22 30.9584 22.1916 30.575 22.575C30.1916 22.9584 30 23.4334 30 24C30 24.5666 30.1916 25.0416 30.575 25.425C30.9584 25.8084 31.4334 26 32 26Z" fill="#295BFF"/>
 							</svg>
 							<h3><?php esc_html_e("Live Chat","tourfic"); ?></h3>
-							<p><?php echo esc_html__('Chat with our team for instant support.', 'tourfic'); ?></p>
+							<p><?php echo esc_html__('Need help? Chat with our support team directly.', 'tourfic'); ?></p>
 							<a href="https://themefic.com/tourfic/" target="_blank" class="tf-link-skip-btn"><?php esc_html_e("Chat Now","tourfic"); ?></a>
 						</div>
 
@@ -714,7 +714,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 								<path fill-rule="evenodd" clip-rule="evenodd" d="M12 16H18L14 8H18L22 16H28L24 8H28L32 16H38L34 8H40C41.1 8 42.0416 8.39166 42.825 9.175C43.6084 9.95834 44 10.9 44 12V24.5094C41.7324 22.9276 38.9744 22 36 22C28.268 22 22 28.268 22 36C22 37.39 22.2026 38.7326 22.5798 40H8C6.9 40 5.95834 39.6084 5.175 38.825C4.39166 38.0416 4 37.1 4 36V12C4 10.9 4.39166 9.95834 5.175 9.175C5.95834 8.39166 6.9 8 8 8L12 16ZM46 36C46 41.5228 41.5228 46 36 46C30.4772 46 26 41.5228 26 36C26 30.4772 30.4772 26 36 26C41.5228 26 46 30.4772 46 36ZM33.5 31L41.5 36L33.5 41V31Z" fill="#BE277C"/>
 							</svg>
 							<h3><?php esc_html_e("Video Tutorials","tourfic"); ?></h3>
-							<p><?php echo esc_html__('Quick videos to guide you through Tourfic.', 'tourfic'); ?></p>
+							<p><?php echo esc_html__('Watch videos that walk you through Tourfic.', 'tourfic'); ?></p>
 							<a href="https://www.youtube.com/playlist?list=PLY0rtvOwg0ylCl7NTwNHUPq-eY1qwUH_N" target="_blank" class="tf-link-skip-btn"><?php esc_html_e("Watch Video","tourfic"); ?></a>
 						</div>
 					</div>
