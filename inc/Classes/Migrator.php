@@ -1584,7 +1584,7 @@ class Migrator {
 
 							$min_seat = ! empty( $date['min_people'] ) ? $date['min_people'] : '';
 							$max_seat = ! empty( $date['max_people'] ) ? $date['max_people'] : '';
-							$max_capacity = ! empty( $date['max_capacity'] ) ? $date['max_capacity'] : '';
+							$total_capacity = ! empty( $date['max_capacity'] ) ? $date['max_capacity'] : '';
 
 							$adult_price = ! empty( $date['adult_price'] ) ? $date['adult_price'] : '';
 							$child_price = ! empty( $date['child_price'] ) ? $date['child_price'] : '';
@@ -1617,7 +1617,7 @@ class Migrator {
 									'infant_price' => $infant_price,
 									'min_person'   => $min_seat,
 									'max_person'   => $max_seat,
-									'max_capacity' => $max_capacity,
+									'max_capacity' => $total_capacity,
 									'repeat_month' => '',
 									'repeat_year'  => '',
 									'allowed_time' => !empty($tf_tour_allowed_time) ? $tf_tour_allowed_time : '',
@@ -1627,31 +1627,86 @@ class Migrator {
 								$tour_availability_data[$tf_tour_date] = $tf_tour_data;
 							}
 						}
-					}else{
-						$cont_min_people = ! empty( $meta['cont_min_people'] ) ? $meta['cont_min_people'] : '';
-						$cont_max_people = ! empty( $meta['cont_max_people'] ) ? $meta['cont_max_people'] : '';
-						$cont_max_capacity = ! empty( $meta['cont_max_capacity'] ) ? $meta['cont_max_capacity'] : '';
+					}
+				}else{
+					$cont_min_people = ! empty( $meta['cont_min_people'] ) ? $meta['cont_min_people'] : '';
+					$cont_max_people = ! empty( $meta['cont_max_people'] ) ? $meta['cont_max_people'] : '';
+					$cont_max_capacity = ! empty( $meta['cont_max_capacity'] ) ? $meta['cont_max_capacity'] : '';
 
-						$allowed_time = ! empty( $meta['allowed_time'] ) ? $meta['allowed_time'] : '';
-						$tf_tour_allowed_time = [];
-						if(!empty($allowed_time)){
-							$times = [];
-							$max_capacity = [];
-							foreach($allowed_time as $time){
-								$times[$time['time']] = $time['time'];
-								$max_capacity[$time['cont_max_capacity']] = $time['cont_max_capacity'];
+					$allowed_time = ! empty( $meta['allowed_time'] ) ? $meta['allowed_time'] : '';
+					$tf_tour_allowed_time = [];
+					if(!empty($allowed_time)){
+						$times = [];
+						$max_capacity = [];
+						foreach($allowed_time as $time){
+							$times[$time['time']] = $time['time'];
+							$max_capacity[$time['cont_max_capacity']] = $time['cont_max_capacity'];
+						}
+						$tf_tour_allowed_time = [
+							'time' => $times,
+							'cont_max_capacity' => $max_capacity
+						];
+					}
+
+					$disable_range = ! empty( $meta['disable_range'] ) ? $meta['disable_range'] : '';
+					if(!empty($disable_range)){
+						foreach($disable_range as $disable){
+							if(!empty($disable['date']['from'])){
+								$tf_checkin_date = $disable['date']['from'];
+								$tf_checkout_date = !empty($disable['date']['to']) ? $disable['date']['to'] : $disable['date']['from'];
+								$tf_tour_date = $tf_checkin_date . ' - ' . $tf_checkout_date;
+								$tf_tour_data = [
+									'check_in'     => $tf_checkin_date,
+									'check_out'    => $tf_checkout_date,
+									'pricing_type' => '',
+									'price'        => '',
+									'adult_price'  => '',
+									'child_price'  => '',
+									'infant_price' => '',
+									'min_person'   => '',
+									'max_person'   => '',
+									'max_capacity' => '',
+									'repeat_month' => '',
+									'repeat_year'  => '',
+									'allowed_time' => '',
+									'status'       => 'unavailable'
+								];
+
+								$tour_availability_data[$tf_tour_date] = $tf_tour_data;
 							}
-							$tf_tour_allowed_time = [
-								'time' => $times,
-								'cont_max_capacity' => $max_capacity
+						}
+					}
+
+					$disable_specific = ! empty( $meta['disable_specific'] ) ? $meta['disable_specific'] : '';
+					$disable_specific = !empty($disable_specific) ? explode(",",$disable_specific) : [];
+					if(!empty($disable_specific)){
+						foreach($disable_specific as $disable){
+							$tf_tour_date = $disable . ' - ' . $disable;
+							$tf_tour_data = [
+								'check_in'     => $disable,
+								'check_out'    => $disable,
+								'pricing_type' => '',
+								'price'        => '',
+								'adult_price'  => '',
+								'child_price'  => '',
+								'infant_price' => '',
+								'min_person'   => '',
+								'max_person'   => '',
+								'max_capacity' => '',
+								'repeat_month' => '',
+								'repeat_year'  => '',
+								'allowed_time' => '',
+								'status'       => 'unavailable'
 							];
+							$tour_availability_data[$tf_tour_date] = $tf_tour_data;
 						}
 					}
 				}
 			}
 
 			$meta['tour_availability'] = wp_json_encode( $tour_availability_data );
-
+			// echo "<pre>";
+			// var_dump($tour_availability_data); exit();
 
 		endwhile;
 		wp_reset_postdata();
