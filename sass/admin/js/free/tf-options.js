@@ -1512,72 +1512,81 @@
                     }
 
                     // Selected Time
-                    const allowedTime = event.extendedProps.allowed_time;
-                    const times = allowedTime.time || [];
-                    const capacities = allowedTime.cont_max_capacity || [];
-
-                    // More specific selector with error handling
-                    const container = document.querySelector('.tf_tour_allowed_times');
-
-                    if (!container) {
-                        console.error('Container element not found!');
-                        return;
-                    }
-
-                    // Clear old content safely
-                    while (container.firstChild) {
-                        container.removeChild(container.firstChild);
-                    }
-
-                    // Accumulate repeaterHTML
                     let allRepeaterHTML = '';
-                    if(times.length > 0){
-                        times.forEach((time, index) => {
-                            if (!time) return;
-                            const capacity = capacities[index] || '';
+                    if (typeof event.extendedProps.allowed_time != 'undefined') {
+                        const allowedTime = event.extendedProps.allowed_time;
+                        const times = Array.isArray(allowedTime.time)
+                            ? allowedTime.time
+                            : (typeof allowedTime.time === 'object' && allowedTime.time !== null)
+                                ? Object.values(allowedTime.time)
+                                : [];
 
-                            allRepeaterHTML += `
-                                <div class="tf-single-repeater tf-single-repeater-allowed_time">
-                                    <input type="hidden" name="tf_parent_field" value="">
-                                    <input type="hidden" name="tf_repeater_count" value="${index + 1}">
-                                    <input type="hidden" name="tf_current_field" value="allowed_time">
-                                    <div class="tf-repeater-header">
-                                        <span class="tf-repeater-icon tf-repeater-icon-collapse">
-                                            <i class="fa-solid fa-angle-up"></i>
-                                        </span>
-                                        <span class="tf-repeater-title">Allowed Time</span>
-                                        <div class="tf-repeater-icon-absulate">
-                                            <span class="tf-repeater-icon tf-repeater-icon-move">
-                                                <i class="fa-solid fa-up-down-left-right"></i>
+                        const capacities = Array.isArray(allowedTime.cont_max_capacity)
+                            ? allowedTime.cont_max_capacity
+                            : (typeof allowedTime.cont_max_capacity === 'object' && allowedTime.cont_max_capacity !== null)
+                                ? Object.values(allowedTime.cont_max_capacity)
+                                : [];
+                        // More specific selector with error handling
+                        const container = document.querySelector('.tf_tour_allowed_times');
+
+                        if (!container) {
+                            console.error('Container element not found!');
+                            return;
+                        }
+
+                        // Clear old content safely
+                        while (container.firstChild) {
+                            container.removeChild(container.firstChild);
+                        }
+
+                        
+                        if(times.length > 0){
+                            times.forEach((time, index) => {
+                                if (!time) return;
+                                const capacity = capacities[index] || '';
+
+                                allRepeaterHTML += `
+                                    <div class="tf-single-repeater tf-single-repeater-allowed_time">
+                                        <input type="hidden" name="tf_parent_field" value="">
+                                        <input type="hidden" name="tf_repeater_count" value="${index + 1}">
+                                        <input type="hidden" name="tf_current_field" value="allowed_time">
+                                        <div class="tf-repeater-header">
+                                            <span class="tf-repeater-icon tf-repeater-icon-collapse">
+                                                <i class="fa-solid fa-angle-up"></i>
                                             </span>
-                                            <span class="tf-repeater-icon tf-repeater-icon-clone" data-repeater-max="">
-                                                <i class="fa-solid fa-copy"></i>
-                                            </span>
-                                            <span class="tf-repeater-icon tf-repeater-icon-delete">
-                                                <i class="fa-solid fa-trash"></i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="tf-repeater-content-wrap">
-                                        <div class="tf-field tf-field-time" style="width: calc(50% - 6px);">
-                                            <label class="tf-field-label"> Time </label>
-                                            <div class="tf-fieldset">
-                                                <input type="text" name="allowed_time[time][]" placeholder="Select Time" value="${time}" class="flatpickr flatpickr-input" data-format="h:i K" readonly="readonly">
-                                                <i class="fa-regular fa-clock"></i>
+                                            <span class="tf-repeater-title">Allowed Time</span>
+                                            <div class="tf-repeater-icon-absulate">
+                                                <span class="tf-repeater-icon tf-repeater-icon-move">
+                                                    <i class="fa-solid fa-up-down-left-right"></i>
+                                                </span>
+                                                <span class="tf-repeater-icon tf-repeater-icon-clone" data-repeater-max="">
+                                                    <i class="fa-solid fa-copy"></i>
+                                                </span>
+                                                <span class="tf-repeater-icon tf-repeater-icon-delete">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </span>
                                             </div>
                                         </div>
-                                        <div class="tf-field tf-field-number" style="width: calc(50% - 6px);">
-                                            <label class="tf-field-label"> Maximum Capacity </label>
-                                            <div class="tf-fieldset">
-                                                <input type="number" name="allowed_time[cont_max_capacity][]" value="${capacity}">
+                                        <div class="tf-repeater-content-wrap">
+                                            <div class="tf-field tf-field-time" style="width: calc(50% - 6px);">
+                                                <label class="tf-field-label"> Time </label>
+                                                <div class="tf-fieldset">
+                                                    <input type="text" name="allowed_time[time][]" placeholder="Select Time" value="${time}" class="flatpickr flatpickr-input" data-format="h:i K" readonly="readonly">
+                                                    <i class="fa-regular fa-clock"></i>
+                                                </div>
+                                            </div>
+                                            <div class="tf-field tf-field-number" style="width: calc(50% - 6px);">
+                                                <label class="tf-field-label"> Maximum Capacity </label>
+                                                <div class="tf-fieldset">
+                                                    <input type="number" name="allowed_time[cont_max_capacity][]" value="${capacity}">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            `;
-                        });
+                                `;
+                            });
+                        }
                     }
-
                     // Append only if there's valid time
                     if (allRepeaterHTML) {
                         $('.tf_tour_allowed_times').append(allRepeaterHTML);
