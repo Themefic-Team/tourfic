@@ -1648,8 +1648,6 @@ class Migrator {
 						];
 					}
 					
-					$disabled_day = ! empty( $meta['disabled_day'] ) ? $meta['disabled_day'] : '';
-					var_dump($disabled_day); exit;
 					$disable_range = ! empty( $meta['disable_range'] ) ? $meta['disable_range'] : '';
 					if(!empty($disable_range)){
 						foreach($disable_range as $disable){
@@ -1701,6 +1699,35 @@ class Migrator {
 								'status'       => 'unavailable'
 							];
 							$tour_availability_data[$tf_tour_date] = $tf_tour_data;
+						}
+					}
+
+					$disabled_day = ! empty( $meta['disabled_day'] ) ? $meta['disabled_day'] : '';
+					if(!empty($disabled_day)){
+						for ( $i = 0; $i <= 50; $i ++ ) {
+							$tf_room_date                     = gmdate( 'Y/m/d', strtotime( "+$i day" ) );
+							$day_number = gmdate( 'w', strtotime( $tf_room_date ) );
+							
+							if (in_array($day_number, $disabled_day)){
+								$tf_tour_date = $tf_room_date . ' - ' . $tf_room_date;
+								$tf_tour_data = [
+									'check_in'    => $tf_room_date,
+									'check_out'   => $tf_room_date,
+									'pricing_type' => '',
+									'price'        => '',
+									'adult_price'  => '',
+									'child_price'  => '',
+									'infant_price' => '',
+									'min_person'   => '',
+									'max_person'   => '',
+									'max_capacity' => '',
+									'repeat_month' => '',
+									'repeat_year'  => '',
+									'allowed_time' => '',
+									'status'       => 'unavailable'
+								];
+								$tour_availability_data[$tf_tour_date] = $tf_tour_data;
+							}
 						}
 					}
 				}
