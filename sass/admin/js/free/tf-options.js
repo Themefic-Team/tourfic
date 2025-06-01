@@ -1763,16 +1763,27 @@
                     el.checked = false;
                 });
 
-                if($('.tf_tour_custom_pricing_by').val() == 'person'){
+                if( $('.tf_tour_custom_pricing_by').val() == 'person' && $('.tf_tour_pricing_type').val() != 'package' ){
                     $('.tf-tour-person-pricing').show();
                     $('.tf-tour-group-pricing').hide();
-                }else{
+                }
+                if( $('.tf_tour_custom_pricing_by').val() == 'group' && $('.tf_tour_pricing_type').val() != 'package' ){
                     $('.tf-tour-group-pricing').show();
                     $('.tf-tour-person-pricing').hide();
                 }
             } else {
-                $('.tf-months-checkbox').show();
-                $('.tf-years-checkbox').show();
+                if( $('.tf_tour_pricing_type').val() != 'package' ){
+                    $('.tf-months-checkbox').show();
+                    $('.tf-years-checkbox').show();
+                }
+            }
+        });
+
+        // Tour Map Initialize based on Tab
+        $(document).on("click", "#tf_tours_opt .tf-tablinks", function (e) {
+            var $this = $(this);
+            if ($this.attr('data-tab')=='availability'){
+                tfTourCalendar();
             }
         });
 

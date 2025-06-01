@@ -1732,7 +1732,9 @@ class Migrator {
 					}
 				}
 			}
-
+			// echo "<pre>";
+			// var_dump($tour_availability_data);
+			// exit;
 			$meta['tour_availability'] = wp_json_encode( $tour_availability_data );
 
 		endwhile;
