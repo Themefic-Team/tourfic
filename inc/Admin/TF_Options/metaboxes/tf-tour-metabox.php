@@ -405,6 +405,9 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 						'person' => __( 'Per Person', 'tourfic' ),
 					],
 					'default'  => 'person',
+					'attributes' => array(
+						'class' => 'tf_tour_pricing_type',
+					),
 				),
 				array(
 					'id'          => 'adult_price',
@@ -535,89 +538,15 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 						'continuous' => __( 'Continuous', 'tourfic' ),
 					],
 					'default'  => 'continuous',
-
-				),
-				/**
-				 * Custom: No
-				 *
-				 * Continuous Availability
-				 */
-				array(
-					'id'          => 'cont_min_people',
-					'type'        => 'number',
-					'label'       => __( 'Minimum Person (Required for Search)', 'tourfic' ),
-					'subtitle'    => __( 'Specify the minimum person required to book this tour.', 'tourfic' ),
-					'dependency'  => array(
-						array( 'type', '==', 'continuous' ),
-					),
-					'default'     => 1,
-					'field_width' => '50',
-				),
-				array(
-					'id'          => 'cont_max_people',
-					'type'        => 'number',
-					'label'       => __( 'Maximum Person (Required for Search)', 'tourfic' ),
-					'subtitle'    => __( 'Indicate the maximum number of persons this package can be booked for each booking.', 'tourfic' ),
-					'dependency'  => array(
-						array( 'type', '==', 'continuous' ),
-					),
-					'field_width' => '50',
-				),
-				array(
-					'id'          => 'cont_max_capacity',
-					'type'        => 'number',
-					'label'       => __( 'Maximum Capacity', 'tourfic' ),
-					'subtitle'    => __( 'Indicate the maximum number of people (including adults and children) allowed per day for this tour.', 'tourfic' ),
-					'dependency'  => array(
-						array( 'type', '==', 'continuous' ),
+					'attributes' => array(
+						'class' => 'tf_tour_avail_type',
 					),
 				),
 				array(
-					'id'         => 'Disabled_Dates',
-					'type'       => 'heading',
-					'content'    => __( 'Disable Days & Dates', 'tourfic' ),
-					'dependency' => array(
-						array( 'type', '==', 'continuous' ),
-					),
+					'id'         => 'tour_availability',
+					'type'       => 'tourAvailabilityCal',
+					'label'      => esc_html__( 'Availability Calendar', 'tourfic' ),
 				),
-				array(
-					'id'           => 'disable_range',
-					'type'         => 'repeater',
-					'label'        => __( 'Disable Date Range', 'tourfic' ),
-					'button_title' => __( 'Add New Date', 'tourfic' ),
-					'max'          => 2,
-					'dependency'   => array(
-						array( 'type', '==', 'continuous' ),
-					),
-					'field_title'  => 'date',
-					'fields'       => array(
-
-						array(
-							'id'         => 'date',
-							'type'       => 'date',
-							'label'      => __( 'Select date range', 'tourfic' ),
-							'subtitle'    => __( 'Specify the date range when this tour will be unavailable for booking.', 'tourfic' ),
-							'format'     => 'Y/m/d',
-							'range'      => true,
-							'label_from' => 'Start Date',
-							'label_to'   => 'End Date',
-							'multiple'   => true,
-							'attributes' => array(
-								'autocomplete' => 'off',
-							),
-						),
-
-					),
-				),
-				array(
-					'id'    => 'tf-pro-notice',
-					'type'  => 'notice',
-					'class' => 'tf-pro-notice',
-					'notice' => 'info',
-					'icon' => 'ri-information-fill',
-					'content' => wp_kses_post(__( 'We\'re offering some extra features like <b>fixed tour type</b>, <b>custom availability</b>, <b>allowed time</b>, <b>select day to disable</b>, <b>disable specific dates</b> in our pro plan. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of these fantastic options!</a>', 'tourfic' )),
-				),
-
 			),
 		),
 
