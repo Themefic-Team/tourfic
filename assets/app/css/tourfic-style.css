@@ -1488,6 +1488,10 @@ i {
   }
 }
 
+.sp-0 {
+  padding: 0;
+}
+
 .sp-20 {
   padding: 20px 0;
 }
@@ -10759,6 +10763,11 @@ div#tf-destinationautocomplete-list div:before {
 .tf-single-template__one,
 .tf-archive-template__one {
   padding: 56px 0px;
+}
+
+.tf-single-template__one.sp-0,
+.tf-archive-template__one.sp-0 {
+  padding: 0px;
 }
 
 .tf-single-template__one .tf-btn,

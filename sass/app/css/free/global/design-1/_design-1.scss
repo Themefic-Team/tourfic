@@ -2,6 +2,9 @@
 .tf-archive-template {
     &__one{
         padding: 56px 0px;
+        &.sp-0{
+            padding: 0px;
+        }
         .tf-btn{
             height: auto;
         }

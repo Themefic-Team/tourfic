@@ -13,7 +13,6 @@
       display: flex;
       gap: 8px;
       padding-bottom: 8px;
-      
       @media #{$max1024} {
         margin-top: -43px;
       }
@@ -177,7 +176,6 @@
           gap: 16px;
           row-gap: 40px;
         }
-
         .tf-search__form__field.tf-mx-width {
           max-width: 132px;
           @media #{$max1024} {

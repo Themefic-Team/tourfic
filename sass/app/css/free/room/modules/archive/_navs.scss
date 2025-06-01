@@ -1,0 +1,46 @@
+.post-type-archive-tf_carrental,
+.tax-carrental_location,
+.tax-carrental_brand,
+.page-template-tf-search{
+    .tf-archive-template{
+        &__one{
+            .tf-archive-header{
+                .tf-archive-view{
+                    ul{
+                        margin: 0px;
+                        padding: 0;
+                        li{
+                            height: 52px;
+                            width: 52px;
+                            display: flex;
+                            border-radius: 8px;
+                            background: $color-filling-fg;
+                            align-items: center;
+                            justify-content: center;
+                            cursor: pointer;
+                            i{
+                                color: $color-text;
+                            }
+                            &.active{
+                                background-color: $color-primary;
+                                i{
+                                    color: $color-white;
+                                }
+                            }
+                        }
+                    }
+                }
+                .tf-total-result-bar{
+                    text-align: right;
+                    display: flex;
+                    gap: 2px;
+                    span{
+                        color: $color-text;
+                        font-size: 1rem;
+                        font-weight: 400;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -69,6 +69,7 @@ class Enqueue {
 			'carrentals' => 'tf_carrental',
 			'tour' => 'tf_tours',
 			'hotel' => 'tf_hotel',
+			'room' => 'tf_room'
 		];
 
 		$tax_post_type = '';

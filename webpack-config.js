@@ -48,6 +48,7 @@ const CarAppScss = glob.sync('./sass/app/css/free/car/car.scss');
 const ApartmentAppScss = glob.sync('./sass/app/css/free/apartment/apartment.scss');
 const TourAppScss = glob.sync('./sass/app/css/free/tour/tour.scss');
 const HotelAppScss = glob.sync('./sass/app/css/free/hotel/hotel.scss');
+const RoomAppScss = glob.sync('./sass/app/css/free/room/room.scss');
 
 StyleEntryPoints['tourfic/assets/app/css/tourfic-style'] = appScss;
 StyleEntryPoints['tourfic-pro/assets/app/css/tourfic-pro'] = proAppScss;
@@ -61,6 +62,7 @@ StyleEntryPoints['tourfic/assets/app/css/tourfic-carrentals'] = CarAppScss;
 StyleEntryPoints['tourfic/assets/app/css/tourfic-apartment'] = ApartmentAppScss;
 StyleEntryPoints['tourfic/assets/app/css/tourfic-tour'] = TourAppScss;
 StyleEntryPoints['tourfic/assets/app/css/tourfic-hotel'] = HotelAppScss;
+StyleEntryPoints['tourfic/assets/app/css/tourfic-room'] = RoomAppScss;
 
 
 const JSconfig = {
