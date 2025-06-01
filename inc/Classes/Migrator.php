@@ -1732,10 +1732,13 @@ class Migrator {
 					}
 				}
 			}
-			// echo "<pre>";
-			// var_dump($tour_availability_data);
-			// exit;
+			
 			$meta['tour_availability'] = wp_json_encode( $tour_availability_data );
+
+			// echo "<pre>";
+			// var_dump($meta);
+			// exit;
+			update_post_meta($post_id, 'tf_tours_opt', $meta);
 
 		endwhile;
 		wp_reset_postdata();

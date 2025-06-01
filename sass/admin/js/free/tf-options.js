@@ -1477,36 +1477,38 @@
                     }
                     if (typeof event.extendedProps.repeat_month !== 'undefined') {
                         const selectedMonths = event.extendedProps.repeat_month;
-                    
-                        // Uncheck all first (optional, to reset)
-                        document.querySelectorAll('input[name="tf_tour_repeat_month[]"]').forEach(el => {
-                            el.checked = false;
-                        });
-                    
-                        // Check those in the array
-                        selectedMonths.forEach(month => {
-                            const checkbox = document.querySelector(`input[name="tf_tour_repeat_month[]"][value="${month}"]`);
-                            if (checkbox) {
-                                checkbox.checked = true;
-                            }
-                        });
+                        if(event.extendedProps.repeat_month!=''){
+                            // Uncheck all first (optional, to reset)
+                            document.querySelectorAll('input[name="tf_tour_repeat_month[]"]').forEach(el => {
+                                el.checked = false;
+                            });
+                        
+                            // Check those in the array
+                            selectedMonths.forEach(month => {
+                                const checkbox = document.querySelector(`input[name="tf_tour_repeat_month[]"][value="${month}"]`);
+                                if (checkbox) {
+                                    checkbox.checked = true;
+                                }
+                            });
+                        }
                     }
 
-                    if (typeof event.extendedProps.repeat_year !== 'undefined') {
-                        const selectedMonths = event.extendedProps.repeat_year;
-                    
-                        // Uncheck all first (optional, to reset)
-                        document.querySelectorAll('input[name="tf_tour_repeat_year[]"]').forEach(el => {
-                            el.checked = false;
-                        });
-                    
-                        // Check those in the array
-                        selectedMonths.forEach(month => {
-                            const checkbox = document.querySelector(`input[name="tf_tour_repeat_year[]"][value="${month}"]`);
-                            if (checkbox) {
-                                checkbox.checked = true;
-                            }
-                        });
+                    if (typeof event.extendedProps.repeat_year != 'undefined') {
+                        const selectedYears = event.extendedProps.repeat_year;
+                        if(event.extendedProps.repeat_year!=''){
+                            // Uncheck all first (optional, to reset)
+                            document.querySelectorAll('input[name="tf_tour_repeat_year[]"]').forEach(el => {
+                                el.checked = false;
+                            });
+                        
+                            // Check those in the array
+                            selectedYears.forEach(month => {
+                                const checkbox = document.querySelector(`input[name="tf_tour_repeat_year[]"][value="${month}"]`);
+                                if (checkbox) {
+                                    checkbox.checked = true;
+                                }
+                            });
+                        }
                     }
 
                     // Selected Time
@@ -1529,50 +1531,52 @@
 
                     // Accumulate repeaterHTML
                     let allRepeaterHTML = '';
-                    times.forEach((time, index) => {
-                        if (!time) return;
-                        const capacity = capacities[index] || '';
+                    if(times.length > 0){
+                        times.forEach((time, index) => {
+                            if (!time) return;
+                            const capacity = capacities[index] || '';
 
-                        allRepeaterHTML += `
-                            <div class="tf-single-repeater tf-single-repeater-allowed_time">
-                                <input type="hidden" name="tf_parent_field" value="">
-                                <input type="hidden" name="tf_repeater_count" value="${index + 1}">
-                                <input type="hidden" name="tf_current_field" value="allowed_time">
-                                <div class="tf-repeater-header">
-                                    <span class="tf-repeater-icon tf-repeater-icon-collapse">
-                                        <i class="fa-solid fa-angle-up"></i>
-                                    </span>
-                                    <span class="tf-repeater-title">Allowed Time</span>
-                                    <div class="tf-repeater-icon-absulate">
-                                        <span class="tf-repeater-icon tf-repeater-icon-move">
-                                            <i class="fa-solid fa-up-down-left-right"></i>
+                            allRepeaterHTML += `
+                                <div class="tf-single-repeater tf-single-repeater-allowed_time">
+                                    <input type="hidden" name="tf_parent_field" value="">
+                                    <input type="hidden" name="tf_repeater_count" value="${index + 1}">
+                                    <input type="hidden" name="tf_current_field" value="allowed_time">
+                                    <div class="tf-repeater-header">
+                                        <span class="tf-repeater-icon tf-repeater-icon-collapse">
+                                            <i class="fa-solid fa-angle-up"></i>
                                         </span>
-                                        <span class="tf-repeater-icon tf-repeater-icon-clone" data-repeater-max="">
-                                            <i class="fa-solid fa-copy"></i>
-                                        </span>
-                                        <span class="tf-repeater-icon tf-repeater-icon-delete">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="tf-repeater-content-wrap">
-                                    <div class="tf-field tf-field-time" style="width: calc(50% - 6px);">
-                                        <label class="tf-field-label"> Time </label>
-                                        <div class="tf-fieldset">
-                                            <input type="text" name="allowed_time[time][]" placeholder="Select Time" value="${time}" class="flatpickr flatpickr-input" data-format="h:i K" readonly="readonly">
-                                            <i class="fa-regular fa-clock"></i>
+                                        <span class="tf-repeater-title">Allowed Time</span>
+                                        <div class="tf-repeater-icon-absulate">
+                                            <span class="tf-repeater-icon tf-repeater-icon-move">
+                                                <i class="fa-solid fa-up-down-left-right"></i>
+                                            </span>
+                                            <span class="tf-repeater-icon tf-repeater-icon-clone" data-repeater-max="">
+                                                <i class="fa-solid fa-copy"></i>
+                                            </span>
+                                            <span class="tf-repeater-icon tf-repeater-icon-delete">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </span>
                                         </div>
                                     </div>
-                                    <div class="tf-field tf-field-number" style="width: calc(50% - 6px);">
-                                        <label class="tf-field-label"> Maximum Capacity </label>
-                                        <div class="tf-fieldset">
-                                            <input type="number" name="allowed_time[cont_max_capacity][]" value="${capacity}">
+                                    <div class="tf-repeater-content-wrap">
+                                        <div class="tf-field tf-field-time" style="width: calc(50% - 6px);">
+                                            <label class="tf-field-label"> Time </label>
+                                            <div class="tf-fieldset">
+                                                <input type="text" name="allowed_time[time][]" placeholder="Select Time" value="${time}" class="flatpickr flatpickr-input" data-format="h:i K" readonly="readonly">
+                                                <i class="fa-regular fa-clock"></i>
+                                            </div>
+                                        </div>
+                                        <div class="tf-field tf-field-number" style="width: calc(50% - 6px);">
+                                            <label class="tf-field-label"> Maximum Capacity </label>
+                                            <div class="tf-fieldset">
+                                                <input type="number" name="allowed_time[cont_max_capacity][]" value="${capacity}">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        `;
-                    });
+                            `;
+                        });
+                    }
 
                     // Append only if there's valid time
                     if (allRepeaterHTML) {
