@@ -2231,7 +2231,7 @@ class Helper {
 		<div class="tf-archive-search-box">
 			<div class="tf-archive-search-box-wrapper">
 				<div class="tf-date-select-box tf-flex tf-flex-gap-8">
-					<div class="tf-date-single-select tf-flex tf-flex-gap-8 tf-flex-space-bttn tf-pick-drop-location <?php echo !empty($_GET['same_location']) && 'on'==$_GET['same_location'] ? esc_attr('active') : ''; ?>">
+					<div class="tf-date-single-select tf-flex tf-flex-gap-8 tf-flex-space-bttn tf-pick-drop-location <?php echo !isset( $_GET['same_location'] ) || 'on'==$_GET['same_location'] ? esc_attr('active') : ''; ?>">
 						<div class="tf-select-date">
 							<div class="tf-flex tf-flex-gap-4">
 								<div class="icon">
@@ -2253,7 +2253,6 @@ class Helper {
 								</div>
 							</div>
 						</div>
-
 						<div class="tf-select-date">
 							<div class="tf-flex tf-flex-gap-4">
 								<div class="icon">
@@ -2362,10 +2361,12 @@ class Helper {
                         ?>
 						<ul>
 							<li>
-								<label><?php esc_html_e("Return in the same location", "tourfic"); ?>
-									<input type="checkbox" name="same_location" <?php echo !empty($_GET['same_location']) && 'on'==$_GET['same_location'] ? esc_attr('checked') : ''; ?>>
-									<span class="tf-checkmark"></span>
-								</label>
+								<label>
+                                    <?php esc_html_e("Return in the same location", "tourfic"); ?>
+                                    <input type="checkbox" name="same_location" <?php echo !isset($_GET['same_location']) || $_GET['same_location'] === 'on' ? esc_attr('checked') : ''; ?>>
+                                    <span class="tf-checkmark"></span>
+                                </label>
+
 							</li>
 							<li>
 								<label><?php esc_html_e("Age of driver ", "tourfic"); ?>

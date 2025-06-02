@@ -533,7 +533,9 @@
 
             if(tf_params.location_car_search){
                 let same_location = $('input[name="same_location"]:checked').val();
+                console.log(same_location);
                 if('on'==same_location){
+                    console.log('on');
                     if ($.trim($('#tf_pickup_location').val()) == '') {
                         if ($('#tf-required').length === 0) {
                             if($('.tf-driver-location').length === 1){
