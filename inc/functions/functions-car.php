@@ -121,8 +121,6 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 		'dropoff_time'     => $dropoff_time
 	), $url );
 
-	error_log(print_r($url, true));
-
 	// Car Info 
 	$passengers = ! empty( $meta['passengers'] ) ? $meta['passengers'] : '';
 	$baggage = ! empty( $meta['baggage'] ) ? $meta['baggage'] : '';

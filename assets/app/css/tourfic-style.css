@@ -9979,10 +9979,10 @@ div#tf-destinationautocomplete-list div:before {
   position: absolute;
   height: 15px;
   width: 15px;
-  top: 0;
+  top: 1px;
   border: 2px solid #808080;
   background-color: transparent;
-  border-radius: 5px;
+  border-radius: 2px;
 }
 
 .post-type-archive-tf_carrental .tf-archive-template__one .tf-car-booking-popup .tf-booking-popup-warp .tf-booking-content-wraper .tf-protection-content .tf-protection-featured table tr th .tf-protection-select label .tf-checkmark::after,

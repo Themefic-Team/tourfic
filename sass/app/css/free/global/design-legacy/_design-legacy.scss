@@ -528,10 +528,10 @@
                                                     position: absolute;
                                                     height: 15px;
                                                     width: 15px;
-                                                    top: 0;
+                                                    top: 1px;
                                                     border: 2px solid $color-gray;
                                                     background-color: transparent;
-                                                    border-radius: 5px;
+                                                    border-radius: 2px;
                                                     &::after{
                                                         content: "";
                                                         position: absolute;
