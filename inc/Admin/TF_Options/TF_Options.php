@@ -1001,7 +1001,7 @@ class TF_Options {
 
 				if(!empty($item['title'])){
 					$item['start'] = gmdate( 'Y-m-d', strtotime( $item['check_in'] ) );
-					$item['end'] = gmdate( 'Y-m-d', strtotime( $item['check_out'] ) );
+					$item['end'] = gmdate('Y-m-d', strtotime($item['check_out'] . ' +1 day'));
 				}
 				if ( $item['status'] == 'unavailable' ) {
 					$item['customClass']   = 'tf_tour_disable_date';

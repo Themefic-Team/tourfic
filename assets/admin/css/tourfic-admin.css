@@ -4603,6 +4603,27 @@ a.tf-import-btn, a.tf-export-btn {
   flex-wrap: wrap;
 }
 
+.tf-bulk-popup {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+.tf-bulk-popup .bulk-popup-content {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 14px;
+  width: 560px;
+  max-height: 360px;
+  overflow-y: auto;
+}
+
 .tf-single-package .tf-field-switch {
   width: 160px;
 }

@@ -1463,7 +1463,7 @@
                         .format(String(tf_options.tf_admin_date_format || 'MM/DD/YYYY').toUpperCase());
                     let endTime;
                     if (event.end) {
-                        endTime = moment(event.end, String(tf_options.tf_admin_date_format || "MM/DD/YYYY").toUpperCase())
+                        endTime = moment(event.end, String(tf_options.tf_admin_date_format || "MM/DD/YYYY").toUpperCase()).subtract(1, 'days')
                             .format(String(tf_options.tf_admin_date_format || 'MM/DD/YYYY').toUpperCase());
                     } else {
                         endTime = startTime;
