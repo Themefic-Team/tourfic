@@ -16,6 +16,11 @@
 
     .fc .fc-daygrid-event {
         cursor: pointer;
+        &.tf_tour_disable_date{
+            background-color: #003c79 !important;
+            border-color: #003c79 !important;
+            opacity: .3;
+        }
     }
 
     table {

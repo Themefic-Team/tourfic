@@ -1452,6 +1452,12 @@
                     eventTitleElement.innerHTML = title;
                     return {domNodes: [eventTitleElement]};
                 },
+                eventDidMount: function (arg) {
+                    const customClass = arg.event.extendedProps.customClass || '';
+                    if(customClass){
+                        arg.el.classList.add(customClass);
+                    }
+                },
                 eventClick: function ({event, el, jsEvent, view}) {
                     let startTime = moment(event.start, String(tf_options.tf_admin_date_format || "MM/DD/YYYY").toUpperCase())
                         .format(String(tf_options.tf_admin_date_format || 'MM/DD/YYYY').toUpperCase());

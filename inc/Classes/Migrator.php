@@ -1610,7 +1610,7 @@ class Migrator {
 									$tf_tour_data = [
 										'check_in'     => $tf_start_date,
 										'check_out'    => $tf_end_date,
-										'pricing_type' => '',
+										'pricing_type' => $custom_pricing_by,
 										'price'        => $group_price,
 										'adult_price'  => $adult_price,
 										'child_price'  => $child_price,
@@ -1658,7 +1658,7 @@ class Migrator {
 									$tf_tour_data = [
 										'check_in'     => $tf_checkin_date,
 										'check_out'    => $tf_checkout_date,
-										'pricing_type' => '',
+										'pricing_type' => $pricing_rule,
 										'price'        => '',
 										'adult_price'  => '',
 										'child_price'  => '',
@@ -1685,7 +1685,7 @@ class Migrator {
 								$tf_tour_data = [
 									'check_in'     => $disable,
 									'check_out'    => $disable,
-									'pricing_type' => '',
+									'pricing_type' => $pricing_rule,
 									'price'        => '',
 									'adult_price'  => '',
 									'child_price'  => '',

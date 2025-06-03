@@ -1004,11 +1004,7 @@ class TF_Options {
 					$item['end'] = gmdate( 'Y-m-d', strtotime( $item['check_out'] ) );
 				}
 				if ( $item['status'] == 'unavailable' ) {
-					$item['title'] = '';
-					$item['start'] = gmdate( 'Y-m-d', strtotime( $item['check_in'] ) );
-					$item['end'] = gmdate( 'Y-m-d', strtotime( $item['check_out'] ) );
-					$item['display'] = 'background';
-					$item['color']   = '#003c79';
+					$item['customClass']   = 'tf_tour_disable_date';
 				}
 
 				return $item;
