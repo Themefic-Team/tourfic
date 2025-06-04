@@ -162,12 +162,16 @@
     .tf-setting-overview-section {
         margin: 24px 24px 0px 0;
         position: relative;
-
         .tf-performance-grid {
             display: flex;
+            flex-wrap: wrap;
             justify-content: space-between;
+            row-gap: 20px;
             @media #{$max1199}{
-                display: flow-root;
+                display: flex;
+                flex-wrap: wrap;
+                column-gap: 16px;
+                justify-content: flex-start;
             }
 
             .tf-single-performance-grid {
@@ -176,19 +180,23 @@
                 background-color: #ffffff;
                 display: flex;
                 flex-wrap: wrap;
-                margin-bottom: 15px;
-                width: 16.5%;
+                flex-basis: calc(16.5% - 0px);
                 @media #{$max1650}{
                     padding: 12px;
                 }
                 @media #{$max1199}{
-                    width: 42%;
-                    margin: 15px 1%;
-                    float: left;
+                    flex-basis: calc(30% - 10px);
+                }
+                @media #{$max1024}{
+                    flex-basis: calc(33.33% - 35px);
+                    margin: 0;
                 }
                 @media #{$max768}{
-                    width: 94%;
-                    margin: 15px 0px;
+                    width: inherit;
+                    flex-basis: calc(50% - 35px);
+                }
+                @media #{$max480}{
+                    flex-basis: 100%;
                 }
 
                 .tf-single-performance-icon {
@@ -244,7 +252,9 @@
         @include flexbox();
         gap: 24px;
         position: relative;
-
+        @media #{$max1024}{
+            flex-direction: column;
+        }
         h2 {
             font-size: 26px;
             font-weight: 600;
@@ -300,7 +310,11 @@
         .tf-report-filter {
             display: flex;
             justify-content: space-between;
-
+            align-items: center;
+            @media #{$max640}{
+                flex-direction: column;
+                align-items: flex-start;
+            }
             .tf-month-filter {
                 margin-bottom: 15px;
                 display: inline-block;
@@ -337,6 +351,12 @@
                     margin: 0;
 
                     @media #{$max1650} {
+                        grid-template-columns: 1fr;
+                    }
+                    @media #{$max1024} {
+                        grid-template-columns: 1fr 1fr;
+                    }
+                    @media #{$max640} {
                         grid-template-columns: 1fr;
                     }
                 }

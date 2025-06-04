@@ -1275,7 +1275,8 @@ Steps
 }
 
 .tf-setup-step-container .tf-select-service label:before {
-  background: #ffffff #ffffff;
+  background: #ffffff
+ #ffffff;
   content: "";
   display: block;
   border-radius: 50%;
@@ -2183,12 +2184,17 @@ Steps
 
 .tf-setting-dashboard .tf-setting-overview-section .tf-performance-grid {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
+  row-gap: 20px;
 }
 
 @media only screen and (max-width: 1199.98px) {
   .tf-setting-dashboard .tf-setting-overview-section .tf-performance-grid {
-    display: flow-root;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 16px;
+    justify-content: flex-start;
   }
 }
 
@@ -2198,8 +2204,7 @@ Steps
   background-color: #ffffff;
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: 15px;
-  width: 16.5%;
+  flex-basis: calc(16.5% - 0px);
 }
 
 @media only screen and (max-width: 1650px) {
@@ -2210,16 +2215,27 @@ Steps
 
 @media only screen and (max-width: 1199.98px) {
   .tf-setting-dashboard .tf-setting-overview-section .tf-performance-grid .tf-single-performance-grid {
-    width: 42%;
-    margin: 15px 1%;
-    float: left;
+    flex-basis: calc(30% - 10px);
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .tf-setting-dashboard .tf-setting-overview-section .tf-performance-grid .tf-single-performance-grid {
+    flex-basis: calc(33.33% - 35px);
+    margin: 0;
   }
 }
 
 @media only screen and (max-width: 768px) {
   .tf-setting-dashboard .tf-setting-overview-section .tf-performance-grid .tf-single-performance-grid {
-    width: 94%;
-    margin: 15px 0px;
+    width: inherit;
+    flex-basis: calc(50% - 35px);
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .tf-setting-dashboard .tf-setting-overview-section .tf-performance-grid .tf-single-performance-grid {
+    flex-basis: 100%;
   }
 }
 
@@ -2289,6 +2305,12 @@ Steps
   position: relative;
 }
 
+@media only screen and (max-width: 1024px) {
+  .tf-setting-dashboard .tf-setting-performace-section {
+    flex-direction: column;
+  }
+}
+
 .tf-setting-dashboard .tf-setting-performace-section h2 {
   font-size: 26px;
   font-weight: 600;
@@ -2351,6 +2373,14 @@ Steps
 .tf-setting-dashboard .tf-setting-performace-section .tf-report-filter {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+
+@media only screen and (max-width: 640px) {
+  .tf-setting-dashboard .tf-setting-performace-section .tf-report-filter {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 .tf-setting-dashboard .tf-setting-performace-section .tf-report-filter .tf-month-filter {
@@ -2388,6 +2418,18 @@ Steps
 }
 
 @media only screen and (max-width: 1650px) {
+  .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content ul {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content ul {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media only screen and (max-width: 640px) {
   .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-sidebar-content ul {
     grid-template-columns: 1fr;
   }
