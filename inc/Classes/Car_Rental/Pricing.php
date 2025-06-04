@@ -17,6 +17,7 @@ class Pricing {
 		$pricing_by = !empty($meta["price_by"]) ? $meta["price_by"] : 'day';
 		$initial_pricing = !empty($meta["car_rent"]) ? $meta["car_rent"] : 0;
 
+        error_log(print_r($initial_pricing, true));
         $price_type = $pricing_by;
 
 		$pricing_type = !empty($meta["pricing_type"]) ? $meta["pricing_type"] : 'day_hour';
@@ -78,10 +79,13 @@ class Pricing {
 
         }
         elseif( !empty($tf_pickup_date) && !empty($tf_dropoff_date) && 'day_hour'==$pricing_type && !empty($day_pricing) ){
+          
 
             // Combine date and time
             $pickup_datetime = new \DateTime("$tf_pickup_date $tf_pickup_time");
             $dropoff_datetime = new \DateTime("$tf_dropoff_date $tf_dropoff_time");
+
+     
 
             // Calculate the difference
             $interval = $pickup_datetime->diff($dropoff_datetime);

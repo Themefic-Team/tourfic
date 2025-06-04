@@ -1729,16 +1729,20 @@ class Helper {
         $adults_name = apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) );
 
 
+        // Pull options from settings or set fallback values
         $time_interval = !empty(self::tfopt('time_interval')) ? intval(self::tfopt('time_interval')) : 30;
-        $start_time_str = !empty(self::tfopt('start_time')) ? self::tfopt('start_time') : '12:00';
+        $start_time_str = !empty(self::tfopt('start_time')) ? self::tfopt('start_time') : '00:00'; 
         $end_time_str   = !empty(self::tfopt('end_time')) ? self::tfopt('end_time') : '23:30';
         $default_time_str = '10:00';
 
+        // Convert string times to timestamps
         $start_time = strtotime($start_time_str);
         $end_time   = strtotime($end_time_str);
         $default_time = date('g:i A', strtotime($default_time_str));
 
+        // Use selected time from GET or fall back to default
         $selected_pickup_time = !empty($_GET['pickup-time']) ? esc_html($_GET['pickup-time']) : $default_time;
+        $selected_dropoff_time = !empty($_GET['dropoff-time']) ? esc_html($_GET['dropoff-time']) : $default_time;
 
 		if ( ( is_post_type_archive( 'tf_hotel' ) && $tf_hotel_arc_selected_template == "design-1" ) ||
              ( is_post_type_archive( 'tf_tours' ) && $tf_tour_arc_selected_template == "design-1" ) ||
@@ -2303,31 +2307,43 @@ class Helper {
 						</div>
 
 						<div class="tf-select-date">
-								<div class="tf-flex tf-flex-gap-4">
-									<div class="icon">
-									    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <g clip-path="url(#clip0_257_3728)">
-                                            <path d="M9.99996 4.99996V9.99996L13.3333 11.6666M18.3333 9.99996C18.3333 14.6023 14.6023 18.3333 9.99996 18.3333C5.39759 18.3333 1.66663 14.6023 1.66663 9.99996C1.66663 5.39759 5.39759 1.66663 9.99996 1.66663C14.6023 1.66663 18.3333 5.39759 18.3333 9.99996Z" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </g>
-                                        <defs>
-                                            <clipPath id="clip0_257_3728">
-                                            <rect width="20" height="20" fill="white"/>
-                                            </clipPath>
-                                        </defs>
-                                        </svg>
-								    </div>
+							<div class="tf-flex tf-flex-gap-4">
+                                <div class="icon">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g clip-path="url(#clip0_257_3728)">
+                                        <path d="M9.99996 4.99996V9.99996L13.3333 11.6666M18.3333 9.99996C18.3333 14.6023 14.6023 18.3333 9.99996 18.3333C5.39759 18.3333 1.66663 14.6023 1.66663 9.99996C1.66663 5.39759 5.39759 1.66663 9.99996 1.66663C14.6023 1.66663 18.3333 5.39759 18.3333 9.99996Z" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_257_3728">
+                                        <rect width="20" height="20" fill="white"/>
+                                        </clipPath>
+                                    </defs>
+                                    </svg>
+                                </div>
 								<div class="info-select">
                                     <h5><?php esc_html_e("Time", "tourfic"); ?></h5>
-                                    <select name="tf_pickup_time" class="tf_pickup_time">
-                                        <?php
-                                            for ($time = $start_time; $time <= $end_time; $time += $time_interval * 60) {
-                                                $time_label = date("g:i A", $time);
-                                                var_dump($time_label);
-                                                $selected = ($selected_pickup_time === $time_label) ? 'selected' : '';
-                                                echo '<option value="' . esc_attr($time_label) . '" ' . $selected . '>' . esc_html($time_label) . '</option>';
-                                            }
-                                        ?>
-                                    </select>
+                                    <div class="selected-pickup-time">
+                                        <div class="text">
+                                            <?php echo esc_html($selected_pickup_time); ?>
+                                        </div>
+                                        <div class="icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                <path d="M5 7.5L10 12.5L15 7.5" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="tf_pickup_time" class="tf_pickup_time" id="tf_pickup_time" value="<?php echo esc_attr($selected_pickup_time); ?>">
+                                    <div class="tf-select-time">
+                                        <ul class="time-options-list tf-pickup-time">
+                                            <?php
+                                                for ($time = $start_time; $time <= $end_time; $time += $time_interval * 60) {
+                                                    $time_label = date("g:i A", $time);
+                                                    $selected = ($selected_pickup_time === $time_label) ? 'selected' : '';
+                                                    echo '<li value="' . esc_attr($time_label) . '" ' . $selected . '>' . esc_html($time_label) . '</li>';
+                                                }
+                                            ?>
+                                        </ul>
+                                    </div>
                                 </div>
 							</div>
 						</div>
@@ -2349,23 +2365,44 @@ class Helper {
 						</div>
 
 						<div class="tf-select-date">
-								<div class="tf-flex tf-flex-gap-4">
-									<div class="icon">
-									    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <g clip-path="url(#clip0_257_3728)">
-                                            <path d="M9.99996 4.99996V9.99996L13.3333 11.6666M18.3333 9.99996C18.3333 14.6023 14.6023 18.3333 9.99996 18.3333C5.39759 18.3333 1.66663 14.6023 1.66663 9.99996C1.66663 5.39759 5.39759 1.66663 9.99996 1.66663C14.6023 1.66663 18.3333 5.39759 18.3333 9.99996Z" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </g>
-                                        <defs>
-                                            <clipPath id="clip0_257_3728">
-                                            <rect width="20" height="20" fill="white"/>
-                                            </clipPath>
-                                        </defs>
-                                        </svg>
-								    </div>
+                            <div class="tf-flex tf-flex-gap-4">
+                                <div class="icon">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g clip-path="url(#clip0_257_3728)">
+                                        <path d="M9.99996 4.99996V9.99996L13.3333 11.6666M18.3333 9.99996C18.3333 14.6023 14.6023 18.3333 9.99996 18.3333C5.39759 18.3333 1.66663 14.6023 1.66663 9.99996C1.66663 5.39759 5.39759 1.66663 9.99996 1.66663C14.6023 1.66663 18.3333 5.39759 18.3333 9.99996Z" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_257_3728">
+                                        <rect width="20" height="20" fill="white"/>
+                                        </clipPath>
+                                    </defs>
+                                    </svg>
+                                </div>
 								<div class="info-select">
-									<h5><?php esc_html_e("Time", "tourfic"); ?></h5>
-									<input type="text" placeholder="Drop Off Time" class="tf_dropoff_time" value="<?php echo !empty($_GET['dropoff-time']) ? esc_html($_GET['dropoff-time']) : '' ?>" />
-								</div>
+                                    <h5><?php esc_html_e("Time", "tourfic"); ?></h5>
+                                    <div class="selected-dropoff-time">
+                                        <div class="text">
+                                            <?php echo esc_html($selected_dropoff_time); ?>
+                                        </div>
+                                        <div class="icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                <path d="M5 7.5L10 12.5L15 7.5" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="tf_dropoff_time" class="tf_dropoff_time" id="tf_dropoff_time" value="<?php echo esc_attr($selected_dropoff_time); ?>">
+                                    <div class="tf-select-time">
+                                        <ul class="time-options-list tf-dropoff-time">
+                                            <?php
+                                                for ($time = $start_time; $time <= $end_time; $time += $time_interval * 60) {
+                                                    $time_label = date("g:i A", $time);
+                                                    $selected = ($selected_dropoff_time === $time_label) ? 'selected' : '';
+                                                    echo '<li value="' . esc_attr($time_label) . '" ' . $selected . '>' . esc_html($time_label) . '</li>';
+                                                }
+                                            ?>
+                                        </ul>
+                                    </div>
+                                </div>
 							</div>
 						</div>
 					</div>
@@ -2411,7 +2448,7 @@ class Helper {
                                 $(".tf-archive-template__one .tf_dropoff_date").on("click", function () {
                                     $("#tf_pickup_date").trigger("click");
                                 });
-                                $("#tf_pickup_date").flatpickr({
+                                $(".tf-archive-template__one #tf_pickup_date").flatpickr({
                                     enableTime: false,
                                     mode: "range",
                                     dateFormat: "Y/m/d",
@@ -2444,44 +2481,6 @@ class Helper {
                                         }
                                     }
                                 }
-
-								// Initialize the pickup time picker
-								var pickupTimeFlatpickr = $(".tf_pickup_time").flatpickr({
-									enableTime: true,
-									noCalendar: true,
-									dateFormat: "H:i",
-                                    disableMobile: "true",
-
-									// flatpickr locale
-									<?php self::tf_flatpickr_locale(); ?>
-
-									onReady: function (selectedDates, dateStr, instance) {
-										instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-									},
-									onChange: function (selectedDates, dateStr, instance) {
-										instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-										// Update minDate for the dropoff date picker
-										dropoffTimeFlatpickr.set("minTime", dateStr);
-									}
-								});
-
-								var dropoffTimeFlatpickr = $(".tf_dropoff_time").flatpickr({
-									enableTime: true,
-									noCalendar: true,
-									dateFormat: "H:i",
-                                    disableMobile: "true",
-									// flatpickr locale
-									<?php self::tf_flatpickr_locale(); ?>
-
-									onReady: function (selectedDates, dateStr, instance) {
-										instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-									},
-									onChange: function (selectedDates, dateStr, instance) {
-										instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-										// Update minDate for the dropoff date picker
-										dropoffFlatpickr.set("minDate", dateStr);
-									}
-								});
 
 							});
 						})(jQuery);

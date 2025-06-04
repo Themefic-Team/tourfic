@@ -631,6 +631,8 @@ function tf_car_booking_pupup_callback() {
 	$dropoff_date = ! empty( $_POST['dropoff_date'] ) ? $_POST['dropoff_date'] : '';
 	$dropoff_time = ! empty( $_POST['dropoff_time'] ) ? $_POST['dropoff_time'] : '';
 
+
+
  	?>
 
 	<div class="tf-booking-tabs">
@@ -912,11 +914,13 @@ function tf_car_price_calculation_callback() {
 	$tf_dropoff_date  = isset( $_POST['dropoff_date'] ) ? sanitize_text_field( $_POST['dropoff_date'] ) : '';
 	$tf_pickup_time  = isset( $_POST['pickup_time'] ) ? sanitize_text_field( $_POST['pickup_time'] ) : '';
 	$tf_dropoff_time  = isset( $_POST['dropoff_time'] ) ? sanitize_text_field( $_POST['dropoff_time'] ) : '';
+
 	$extra_ids  = isset( $_POST['extra_ids'] ) ? $_POST['extra_ids'] : '';
 	$extra_qty  = isset( $_POST['extra_qty'] ) ? $_POST['extra_qty'] : '';
 
 	$meta = get_post_meta( $post_id, 'tf_carrental_opt', true );
 	$get_prices = Pricing::set_total_price($meta, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time);
+	
 	$total_prices = $get_prices['sale_price'] ? $get_prices['sale_price'] : 0;
 
 	if(!empty($extra_ids)){
@@ -957,9 +961,11 @@ function tf_car_price_calculation_callback() {
 		$less_current_day = true;
 	}
 
+
 	// Get the final "before" date and time (ensured to not be before today)
 	$beforeDate = $pickupDateTime->format('Y/m/d');
 	$beforeTime = $pickupDateTime->format('H:i');
+
 
 	$cancellation = '';
 	

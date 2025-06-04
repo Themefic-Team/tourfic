@@ -1,11 +1,6 @@
 (function ($, win) {
-    
-
     $(document).ready(function () {
        
-
-        
-
         // Create an instance of Notyf
         const notyf = new Notyf({
             ripple: true,
@@ -210,9 +205,56 @@
             tourfic_car_autocomplete(car_dropoff_input, car_locations);
         }
 
+
+        /*
+        * Car Search Form Pickup & Dropoff Time
+        * @author Mofazzal Hossain
+        */
         $(".tf-booking-popup-header .tf-close-popup").on("click", function (e) {
             e.preventDefault();
             $('.tf-car-booking-popup').hide();
+        });
+
+        // Open time options
+        $('.selected-dropoff-time, .selected-pickup-time').on('click', function () {
+            const $infoSelect = $(this).closest('.info-select');
+            const $dropdown = $infoSelect.find('.time-options-list');
+            const isOpen = $dropdown.is(':visible');
+
+            $('.time-options-list').slideUp(200);
+            $('.selected-dropoff-time, .selected-pickup-time').removeClass('active');
+
+            if (!isOpen) {
+                $dropdown.slideDown(200);
+                $(this).addClass('active');
+            }
+        });
+
+        // Select time
+        $('.tf-pickup-time li, .tf-dropoff-time li').on('click', function () {
+            const selected = $(this).attr('value');
+            const $infoSelect = $(this).closest('.info-select');
+
+            if ($(this).closest('ul').hasClass('tf-pickup-time')) {
+                $('.tf_pickup_time').val(selected);
+                $('.tf_dropoff_time').val(selected);
+                $('.selected-pickup-time .text').text(selected);
+                $('.selected-dropoff-time .text').text(selected);
+            } else {
+                $('.tf_dropoff_time').val(selected);
+                $('.selected-dropoff-time .text').text(selected);
+            }
+
+            $('.time-options-list').slideUp(200);
+            $('.selected-dropoff-time, .selected-pickup-time').removeClass('active');
+        });
+
+        // Click outside to close dropdown
+        $('body').on('click', function (e) {
+            if (!$(e.target).closest('.info-select').length) {
+                $('.time-options-list').slideUp(200);
+                $('.selected-dropoff-time, .selected-pickup-time').removeClass('active');
+            }
         });
 
 
@@ -231,6 +273,10 @@
             let dropoff_date = $('.tf_dropoff_date').val();
             let pickup_time = $('.tf_pickup_time').val();
             let dropoff_time = $('.tf_dropoff_time').val();
+
+            pickup_time = convertTo24HourFormat(pickup_time);
+            dropoff_time = convertTo24HourFormat(dropoff_time);
+
             let post_id = $('#post_id').val();
 
             if( !pickup || !dropoff || !pickup_date || !dropoff_date || !pickup_time || !dropoff_time ){
@@ -468,6 +514,9 @@
                 let pickup_time = $('.tf_pickup_time').val();
                 let dropoff_time = $('.tf_dropoff_time').val();
 
+                pickup_time = convertTo24HourFormat(pickup_time);
+                dropoff_time = convertTo24HourFormat(dropoff_time);
+
                 if( !pickup || !dropoff || !pickup_date || !dropoff_date || !pickup_time || !dropoff_time ){
                     $('.error-notice').show();
                     $('.error-notice').text('Fill up the all fields');
@@ -483,6 +532,10 @@
             let dropoff_date = $('.tf_dropoff_date').val();
             let pickup_time = $('.tf_pickup_time').val();
             let dropoff_time = $('.tf_dropoff_time').val();
+
+            pickup_time = convertTo24HourFormat(pickup_time);
+            dropoff_time = convertTo24HourFormat(dropoff_time);
+
             let post_id = $('#post_id').val();
             var protection = $('input[name="protections[]"]:checked').map(function() {
                 return $(this).val();  // Get the value of each checked checkbox
@@ -836,7 +889,7 @@
         * @author Jahid
         */
 
-        $(document).on('change', '.tf-car-booking-form .tf_pickup_date, .tf-car-booking-form .tf_pickup_time, .tf-car-booking-form .tf_dropoff_date, .tf-car-booking-form .tf_dropoff_time', function (e) {
+        $(document).on('change', '.tf-car-booking-form .tf_pickup_date, .tf-car-booking-form .tf-pickup-time li, .tf-car-booking-form .tf_dropoff_date, .tf-car-booking-form .tf-dropoff-time li', function (e) {
             
             let extra_ids = $("input[name='selected_extra[]']").map(function() {
                 return $(this).val();
@@ -850,6 +903,10 @@
             let dropoff_date = $('.tf_dropoff_date').val();
             let pickup_time = $('.tf_pickup_time').val();
             let dropoff_time = $('.tf_dropoff_time').val();
+
+            pickup_time = convertTo24HourFormat(pickup_time);
+            dropoff_time = convertTo24HourFormat(dropoff_time);
+
             let post_id = $('#post_id').val();
 
             if( !pickup_date || !dropoff_date || !pickup_time || !dropoff_time ){
@@ -1001,11 +1058,24 @@
     
     });
 
-    
-     
-     
-   
-
 })(jQuery, window);
 
 
+function convertTo24HourFormat(timeStr) {
+    const date = new Date("1970-01-01T" + timeStr);
+    if (!isNaN(date.getTime())) {
+        return date.toTimeString().split(' ')[0].substring(0, 5); 
+    }
+
+    const parts = timeStr.match(/(\d{1,2}):(\d{2})\s?(AM|PM)/i);
+    if (!parts) return timeStr; 
+
+    let hour = parseInt(parts[1], 10);
+    const minute = parts[2];
+    const period = parts[3].toUpperCase();
+
+    if (period === "PM" && hour !== 12) hour += 12;
+    if (period === "AM" && hour === 12) hour = 0;
+
+    return `${hour.toString().padStart(2, '0')}:${minute}`;
+}

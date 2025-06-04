@@ -7,9 +7,23 @@ use \Tourfic\App\TF_Review;
 <?php
 $tf_pickup_date = !empty($_GET['pickup_date']) ? $_GET['pickup_date'] : '';
 $tf_dropoff_date = !empty($_GET['dropoff_date']) ? $_GET['dropoff_date'] : '';
-$tf_pickup_time = !empty($_GET['pickup_time']) ? $_GET['pickup_time'] : '';
-$tf_dropoff_time = !empty($_GET['dropoff_time']) ? $_GET['dropoff_time'] : '';
-$total_prices = Pricing::set_total_price($meta, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time); 
+
+// Pull options from settings or set fallback values
+$time_interval = !empty(Helper::tfopt('time_interval')) ? intval(Helper::tfopt('time_interval')) : 30;
+$start_time_str = !empty(Helper::tfopt('start_time')) ? Helper::tfopt('start_time') : '00:00'; 
+$end_time_str   = !empty(Helper::tfopt('end_time')) ? Helper::tfopt('end_time') : '23:30';
+$default_time_str = '10:00';
+
+// Convert string times to timestamps
+$start_time = strtotime($start_time_str);
+$end_time   = strtotime($end_time_str);
+$default_time = date('g:i A', strtotime($default_time_str));
+
+// Use selected time from GET or fall back to default
+$selected_pickup_time = !empty($_GET['pickup_time']) ? esc_html($_GET['pickup_time']) : $default_time;
+$selected_dropoff_time = !empty($_GET['dropoff_time']) ? esc_html($_GET['dropoff_time']) : $default_time;
+
+$total_prices = Pricing::set_total_price($meta, $tf_pickup_date, $tf_dropoff_date, $start_time_str, $end_time_str); 
 $tf_cars_slug = get_option('car_slug');
 ?>
 <div class="tf-single-template__one">
@@ -341,8 +355,8 @@ $tf_cars_slug = get_option('car_slug');
                                     </div>
                                     <div class="info-select">
                                         <h5><?php esc_html_e("Pick-up", "tourfic"); ?></h5>
-                                        <input type="text" placeholder="Pick Up Location" id="tf_pickup_location" value="<?php echo !empty($_GET['pickup']) ? esc_html($_GET['pickup']) : '' ?>" />
-                                        <input type="hidden" id="tf_pickup_location_id" value="<?php echo !empty($_GET['pickup']) ? esc_html($_GET['pickup']) : '' ?>" />
+                                        <input type="text" placeholder="Pick Up Location" id="tf_pickup_location" value="<?php echo !empty($_GET['pickup']) ? esc_html($_GET['pickup']) : ''; ?>" />
+                                        <input type="hidden" id="tf_pickup_location_id" value="<?php echo !empty($_GET['pickup']) ? esc_html($_GET['pickup']) : ''; ?>" />
                                     </div>
                                 </div>
                             </div>
@@ -363,8 +377,8 @@ $tf_cars_slug = get_option('car_slug');
                                     </div>
                                     <div class="info-select">
                                         <h5><?php esc_html_e("Drop-off", "tourfic"); ?></h5>
-                                        <input type="text" placeholder="Drop Off Location" id="tf_dropoff_location" value="<?php echo !empty($_GET['dropoff']) ? esc_html($_GET['dropoff']) : '' ?>" />
-                                        <input type="hidden" id="tf_dropoff_location_id" value="<?php echo !empty($_GET['pickup']) ? esc_html($_GET['pickup']) : '' ?>" />
+                                        <input type="text" placeholder="Drop Off Location" id="tf_dropoff_location" value="<?php echo !empty($_GET['dropoff']) ? esc_html($_GET['dropoff']) : ''; ?>" />
+                                        <input type="hidden" id="tf_dropoff_location_id" value="<?php echo !empty($_GET['dropoff']) ? esc_html($_GET['dropoff']) : ''; ?>" />
                                     </div>
                                 </div>
                             </div>
@@ -380,7 +394,7 @@ $tf_cars_slug = get_option('car_slug');
                                     </div>
                                     <div class="info-select">
                                         <h5><?php esc_html_e("Pick-up date", "tourfic"); ?></h5>
-                                        <input type="text" placeholder="Pick Up Date" class="tf_pickup_date" value="<?php echo !empty($_GET['pickup_date']) ? esc_html($_GET['pickup_date']) : '' ?>" />
+                                        <input type="text" placeholder="Pick Up Date" id="tf_pickup_date" class="tf_pickup_date" value="<?php echo !empty($_GET['pickup_date']) ? esc_html($_GET['pickup_date']) : date('Y/m/d', strtotime('+1 day')); ?>" />
                                     </div>
                                 </div>
                             </div>
@@ -399,9 +413,30 @@ $tf_cars_slug = get_option('car_slug');
                                         </defs>
                                         </svg>
                                     </div>
-                                    <div class="info-select">
+                                   <div class="info-select">
                                         <h5><?php esc_html_e("Time", "tourfic"); ?></h5>
-                                        <input type="text" placeholder="Pick Up Time" class="tf_pickup_time" value="<?php echo !empty($_GET['pickup_time']) ? esc_html($_GET['pickup_time']) : '' ?>" />
+                                        <div class="selected-pickup-time">
+                                            <div class="text">
+                                                <?php echo esc_html($selected_pickup_time); ?>
+                                            </div>
+                                            <div class="icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                    <path d="M5 7.5L10 12.5L15 7.5" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="tf_pickup_time" class="tf_pickup_time" id="tf_pickup_time" value="<?php echo esc_attr($selected_pickup_time); ?>">
+                                        <div class="tf-select-time">
+                                            <ul class="time-options-list tf-pickup-time">
+                                                <?php
+                                                    for ($time = $start_time; $time <= $end_time; $time += $time_interval * 60) {
+                                                        $time_label = date("g:i A", $time);
+                                                        $selected = ($selected_pickup_time === $time_label) ? 'selected' : '';
+                                                        echo '<li value="' . esc_attr($time_label) . '" ' . $selected . '>' . esc_html($time_label) . '</li>';
+                                                    }
+                                                ?>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -417,7 +452,7 @@ $tf_cars_slug = get_option('car_slug');
                                     </div>
                                     <div class="info-select">
                                         <h5><?php esc_html_e("Drop-off date", "tourfic"); ?></h5>
-                                        <input type="text" placeholder="Drop Off Date" class="tf_dropoff_date" value="<?php echo !empty($_GET['dropoff_date']) ? esc_html($_GET['dropoff_date']) : '' ?>" />
+                                        <input type="text" placeholder="Drop Off Date" id="tf_dropoff_date" class="tf_dropoff_date" value="<?php echo !empty($_GET['dropoff_date']) ? esc_html($_GET['dropoff_date']) : date('Y/m/d', strtotime('+2 day')); ?>" />
                                     </div>
                                 </div>
                             </div>
@@ -438,8 +473,28 @@ $tf_cars_slug = get_option('car_slug');
                                     </div>
                                     <div class="info-select">
                                         <h5><?php esc_html_e("Time", "tourfic"); ?></h5>
-                                        <input type="text" placeholder="Drop Off Time" class="tf_dropoff_time" value="<?php echo !empty($_GET['dropoff_time']) ? esc_html($_GET['dropoff_time']) : '' ?>" />
-                                        <input type="hidden" value="<?php echo esc_attr($post_id); ?>" id="post_id" />
+                                        <div class="selected-dropoff-time">
+                                            <div class="text">
+                                                <?php echo esc_html($selected_dropoff_time); ?>
+                                            </div>
+                                            <div class="icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                    <path d="M5 7.5L10 12.5L15 7.5" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="tf_dropoff_time" class="tf_dropoff_time" id="tf_dropoff_time" value="<?php echo esc_attr($selected_dropoff_time); ?>">
+                                        <div class="tf-select-time">
+                                            <ul class="time-options-list tf-dropoff-time">
+                                                <?php
+                                                    for ($time = $start_time; $time <= $end_time; $time += $time_interval * 60) {
+                                                        $time_label = date("g:i A", $time);
+                                                        $selected = ($selected_dropoff_time === $time_label) ? 'selected' : '';
+                                                        echo '<li value="' . esc_attr($time_label) . '" ' . $selected . '>' . esc_html($time_label) . '</li>';
+                                                    }
+                                                ?>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -515,95 +570,6 @@ $tf_cars_slug = get_option('car_slug');
                         <?php } ?>
 
                         <?php do_action( 'tf_car_cancellation', $post_id ); ?>
-
-                        <script>
-                        (function ($) {
-                        $(document).ready(function () {
-
-                            // flatpickr locale first day of Week
-                            <?php Helper::tf_flatpickr_locale( "root" ); ?>
-
-                            // Initialize the pickup date picker
-                            var pickupFlatpickr = $(".tf_pickup_date").flatpickr({
-                                enableTime: false,
-                                dateFormat: "Y/m/d",
-                                minDate: "today",
-                                disableMobile: "true",
-
-                                // flatpickr locale
-                                <?php Helper::tf_flatpickr_locale(); ?>
-
-                                onReady: function (selectedDates, dateStr, instance) {
-                                    instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-                                },
-                                onChange: function (selectedDates, dateStr, instance) {
-                                    instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-                                    // Update minDate for the dropoff date picker
-                                    dropoffFlatpickr.set("minDate", dateStr);
-                                }
-                            });
-
-                            // Initialize the dropoff date picker
-                            var dropoffFlatpickr = $(".tf_dropoff_date").flatpickr({
-                                enableTime: false,
-                                dateFormat: "Y/m/d",
-                                minDate: "today",
-                                disableMobile: "true",
-
-                                // flatpickr locale
-                                <?php Helper::tf_flatpickr_locale(); ?>
-
-                                onReady: function (selectedDates, dateStr, instance) {
-                                    instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-                                },
-                                onChange: function (selectedDates, dateStr, instance) {
-                                    instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-                                }
-                            });
-
-                            // Initialize the pickup time picker
-                            var pickupTimeFlatpickr = $(".tf_pickup_time").flatpickr({
-                                enableTime: true,
-                                noCalendar: true,
-                                dateFormat: "H:i",
-                                disableMobile: "true",
-
-                                // flatpickr locale
-                                <?php Helper::tf_flatpickr_locale(); ?>
-
-                                onReady: function (selectedDates, dateStr, instance) {
-                                    instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-                                },
-                                onChange: function (selectedDates, dateStr, instance) {
-                                    instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-                                    // Update minDate for the dropoff date picker
-                                    dropoffTimeFlatpickr.set("minTime", dateStr);
-                                }
-                            });
-
-                            var dropoffTimeFlatpickr = $(".tf_dropoff_time").flatpickr({
-                                enableTime: true,
-                                noCalendar: true,
-                                dateFormat: "H:i",
-                                disableMobile: "true",
-                                // flatpickr locale
-                                <?php Helper::tf_flatpickr_locale(); ?>
-
-                                onReady: function (selectedDates, dateStr, instance) {
-                                    instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-                                },
-                                onChange: function (selectedDates, dateStr, instance) {
-                                    instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-                                    // Update minDate for the dropoff date picker
-                                    dropoffFlatpickr.set("minDate", dateStr);
-                                }
-                            });
-
-                        });
-                    })(jQuery);
-
-                    </script>
-            
                     </div>
                     <div class="tf-mobile-booking-btn">
                         <button><?php esc_html_e("Book Now", "tourfic"); ?></button>
@@ -946,3 +912,48 @@ $tf_cars_slug = get_option('car_slug');
         </div>
     </div>
 </div>
+ <script>
+    (function ($) {
+        $(document).ready(function () {
+            // flatpickr locale first day of Week
+            <?php Helper::tf_flatpickr_locale( "root" ); ?>
+
+            $(".tf-single-template__one #tf_dropoff_date").on("click", function () {
+                $(".tf-single-template__one #tf_pickup_date").trigger("click");
+            });
+            $(".tf-single-template__one #tf_pickup_date").flatpickr({
+                enableTime: false,
+                mode: "range",
+                dateFormat: "Y/m/d",
+                minDate: "today",
+                // flatpickr locale
+                <?php Helper::tf_flatpickr_locale(); ?>
+
+                onReady: function (selectedDates, dateStr, instance) {
+                    dateSetToFields(selectedDates, instance);
+                },
+
+                onChange: function (selectedDates, dateStr, instance) {
+                    dateSetToFields(selectedDates, instance);
+                },
+                <?php if(! empty( $check_in_out )){ ?>
+                    defaultDate: <?php echo wp_json_encode( explode( '-', $check_in_out ) ) ?>,
+                <?php } ?>
+            });
+
+            function dateSetToFields(selectedDates, instance) {
+                if (selectedDates.length === 2) {
+                    if (selectedDates[0]) {
+                        const startDate = flatpickr.formatDate(selectedDates[0], "Y/m/d");
+                        $(".tf-single-template__one #tf_pickup_date").val(startDate);
+                    }
+                    if (selectedDates[1]) {
+                        const endDate = flatpickr.formatDate(selectedDates[1], "Y/m/d");
+                        $(".tf-single-template__one #tf_dropoff_date").val(endDate);
+                    }
+                }
+            }
+
+        });
+    })(jQuery);
+</script>
