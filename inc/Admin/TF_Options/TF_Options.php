@@ -826,10 +826,15 @@ class TF_Options {
 
 		$tf_tour_repeat_month = isset( $_POST['tf_tour_repeat_month'] ) && ! empty( $_POST['tf_tour_repeat_month'] ) ? $_POST['tf_tour_repeat_month'] : '';
 		$tf_tour_repeat_year = isset( $_POST['tf_tour_repeat_year'] ) && ! empty( $_POST['tf_tour_repeat_year'] ) ? $_POST['tf_tour_repeat_year'] : '';
+		$tf_tour_repeat_week = isset( $_POST['tf_tour_repeat_week'] ) && ! empty( $_POST['tf_tour_repeat_week'] ) ? $_POST['tf_tour_repeat_week'] : '';
+		$tf_tour_repeat_day = isset( $_POST['tf_tour_repeat_day'] ) && ! empty( $_POST['tf_tour_repeat_day'] ) ? $_POST['tf_tour_repeat_day'] : '';
+
 
 		$tf_tour_allowed_time = isset( $_POST['allowed_time'] ) && ! empty( $_POST['allowed_time'] ) ? $_POST['allowed_time'] : ''; 
 		
-		if ( empty( $check_in ) || empty( $check_out ) ) {
+		$bulk_edit_option = isset( $_POST['bulk_edit_option'] ) && ! empty( $_POST['bulk_edit_option'] ) ? $_POST['bulk_edit_option'] : ''; 
+
+		if ( empty($bulk_edit_option) && ( empty( $check_in ) || empty( $check_out ) ) ) {
 			wp_send_json_error( [
 				'status'  => false,
 				'message' => __( 'Please select check in and check out date.', 'tourfic' )
@@ -847,79 +852,169 @@ class TF_Options {
 
 		$tour_availability_data = [];
 
-		// Set default year/month if empty
-		if (empty($tf_tour_repeat_year)) {
-			$tf_tour_repeat_year = [gmdate('Y', $check_in)];
-		}
-		if (empty($tf_tour_repeat_month)) {
-			$tf_tour_repeat_month = [gmdate('m', $check_in)];
-		}
+		if ( !empty($bulk_edit_option) ) {
+			if (!empty($tf_tour_repeat_year)) {
+				foreach ($tf_tour_repeat_year as $year) {
+					if (!empty($tf_tour_repeat_month)) {
+						foreach ($tf_tour_repeat_month as $month) {
 
-		// Extract original day/month values
-		$original_checkin_day = gmdate('d', $check_in);
-		$original_checkin_month = gmdate('m', $check_in);
-		$original_checkout_day = gmdate('d', $check_out);
-		$original_checkout_month = gmdate('m', $check_out);
+							// Date Number wise
+							foreach ($tf_tour_repeat_day as $day) {
+								$month = str_pad($month, 2, '0', STR_PAD_LEFT);
 
-		foreach ($tf_tour_repeat_year as $year) {
-			foreach ($tf_tour_repeat_month as $month) {
-				$month = str_pad($month, 2, '0', STR_PAD_LEFT); // Ensure month is 2 digits
+								$new_check_in_str = "$year-$month-$day";
+								$new_check_in = strtotime($new_check_in_str);
+								$tf_checkin_date = gmdate('Y/m/d', $new_check_in);
+								$day_number = gmdate( 'w', strtotime( $tf_checkin_date ) );
 
-				$new_check_in_str = "$year-$month-$original_checkin_day";
-				$new_check_in = strtotime($new_check_in_str);
-				$tf_checkin_date = gmdate('Y/m/d', $new_check_in);
+								$tf_tour_date = $tf_checkin_date . ' - ' . $tf_checkin_date;
+								$tf_tour_data = [
+									'check_in'     => $tf_checkin_date,
+									'check_out'    => $tf_checkin_date,
+									'pricing_type' => $pricing_type,
+									'price'        => $tf_tour_price,
+									'adult_price'  => $tf_tour_adult_price,
+									'child_price'  => $tf_tour_child_price,
+									'infant_price' => $tf_tour_infant_price,
+									'min_person'   => $tf_tour_min_person,
+									'max_person'   => $tf_tour_max_person,
+									'max_capacity' => $tf_tour_max_capacity,
+									'repeat_month' => $tf_tour_repeat_month,
+									'repeat_year'  => $tf_tour_repeat_year,
+									'allowed_time' => !empty($tf_tour_allowed_time) ? $tf_tour_allowed_time : '',
+									'status'       => $status
+								];
 
-				// Adjust year if checkout month is before checkin (e.g., spans across years)
-				$checkout_year = ($original_checkout_month < $original_checkin_month) ? $year + 1 : $year;
-				$new_check_out_str = "$checkout_year-$month-$original_checkout_day";
-				$new_check_out = strtotime($new_check_out_str);
-				$tf_checkout_date = gmdate('Y/m/d', $new_check_out);
+								if($pricing_type == 'package') {
+									if ( $options_count != 0 ) {
+										$options_data = [
+											'options_count' => $options_count,
+										];
+										for ( $j = 0; $j <= $options_count - 1; $j ++ ) {
+											$options_data[ 'tf_package_option_' . $j ]         = isset( $_POST[ 'tf_package_option_' . $j ] ) && ! empty( $_POST[ 'tf_package_option_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_package_option_' . $j ] ) : '';
+											$options_data[ 'tf_option_title_' . $j ]        = isset( $_POST[ 'tf_option_title_' . $j ] ) && ! empty( $_POST[ 'tf_option_title_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_title_' . $j ] ) : '';
+											$options_data[ 'tf_option_pricing_type_' . $j ] = isset( $_POST[ 'tf_option_pricing_type_' . $j ] ) && ! empty( $_POST[ 'tf_option_pricing_type_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_pricing_type_' . $j ] ) : '';
+											$options_data[ 'tf_option_group_price_' . $j ]   = isset( $_POST[ 'tf_option_group_price_' . $j ] ) && ! empty( $_POST[ 'tf_option_group_price_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_group_price_' . $j ] ) : '';
+											$options_data[ 'tf_option_adult_price_' . $j ]  = isset( $_POST[ 'tf_option_adult_price_' . $j ] ) && ! empty( $_POST[ 'tf_option_adult_price_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_adult_price_' . $j ] ) : '';
+											$options_data[ 'tf_option_child_price_' . $j ]  = isset( $_POST[ 'tf_option_child_price_' . $j ] ) && ! empty( $_POST[ 'tf_option_child_price_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_child_price_' . $j ] ) : '';
+											$options_data[ 'tf_option_infant_price_' . $j ]  = isset( $_POST[ 'tf_option_infant_price_' . $j ] ) && ! empty( $_POST[ 'tf_option_infant_price_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_infant_price_' . $j ] ) : '';
+										}
+									}
+									if ( ! empty( $options_data ) ) {
+										$tf_tour_data = array_merge( $tf_tour_data, $options_data );
+									}
+								}
 
-				// Skip invalid dates (e.g., Feb 30)
-				if (!$new_check_in || !$new_check_out) {
-					continue;
-				}
+								$tour_availability_data[$tf_tour_date] = $tf_tour_data;
+							}
 
-				$tf_tour_date = $tf_checkin_date . ' - ' . $tf_checkout_date;
-				$tf_tour_data = [
-					'check_in'     => $tf_checkin_date,
-					'check_out'    => $tf_checkout_date,
-					'pricing_type' => $pricing_type,
-					'price'        => $tf_tour_price,
-					'adult_price'  => $tf_tour_adult_price,
-					'child_price'  => $tf_tour_child_price,
-					'infant_price' => $tf_tour_infant_price,
-					'min_person'   => $tf_tour_min_person,
-					'max_person'   => $tf_tour_max_person,
-					'max_capacity' => $tf_tour_max_capacity,
-					'repeat_month' => $tf_tour_repeat_month,
-					'repeat_year'  => $tf_tour_repeat_year,
-					'allowed_time' => !empty($tf_tour_allowed_time) ? $tf_tour_allowed_time : '',
-					'status'       => $status
-				];
+							// Date Day wise
+							if(!empty($tf_tour_repeat_week)){
+								$month = str_pad($month, 2, '0', STR_PAD_LEFT);
+								$days_in_month = cal_days_in_month(CAL_GREGORIAN, $month, $year);
 
-				if($pricing_type == 'package') {
-					if ( $options_count != 0 ) {
-						$options_data = [
-							'options_count' => $options_count,
-						];
-						for ( $j = 0; $j <= $options_count - 1; $j ++ ) {
-							$options_data[ 'tf_package_option_' . $j ]         = isset( $_POST[ 'tf_package_option_' . $j ] ) && ! empty( $_POST[ 'tf_package_option_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_package_option_' . $j ] ) : '';
-							$options_data[ 'tf_option_title_' . $j ]        = isset( $_POST[ 'tf_option_title_' . $j ] ) && ! empty( $_POST[ 'tf_option_title_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_title_' . $j ] ) : '';
-							$options_data[ 'tf_option_pricing_type_' . $j ] = isset( $_POST[ 'tf_option_pricing_type_' . $j ] ) && ! empty( $_POST[ 'tf_option_pricing_type_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_pricing_type_' . $j ] ) : '';
-							$options_data[ 'tf_option_group_price_' . $j ]   = isset( $_POST[ 'tf_option_group_price_' . $j ] ) && ! empty( $_POST[ 'tf_option_group_price_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_group_price_' . $j ] ) : '';
-							$options_data[ 'tf_option_adult_price_' . $j ]  = isset( $_POST[ 'tf_option_adult_price_' . $j ] ) && ! empty( $_POST[ 'tf_option_adult_price_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_adult_price_' . $j ] ) : '';
-							$options_data[ 'tf_option_child_price_' . $j ]  = isset( $_POST[ 'tf_option_child_price_' . $j ] ) && ! empty( $_POST[ 'tf_option_child_price_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_child_price_' . $j ] ) : '';
-							$options_data[ 'tf_option_infant_price_' . $j ]  = isset( $_POST[ 'tf_option_infant_price_' . $j ] ) && ! empty( $_POST[ 'tf_option_infant_price_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_infant_price_' . $j ] ) : '';
+								for ($day = 1; $day <= $days_in_month; $day++) {
+									$day = str_pad($day, 2, '0', STR_PAD_LEFT);
+									$date_str = "$year-$month-$day";
+									$timestamp = strtotime($date_str);
+
+									if ($timestamp === false) {
+										continue;
+									}
+									$day_number = (int) gmdate('w', $timestamp);
+
+									if (!in_array((string) $day_number, $tf_tour_repeat_week)) {
+										continue;
+									}
+									$tf_checkin_date = gmdate('Y/m/d', $timestamp);
+									$tf_tour_date = $tf_checkin_date . ' - ' . $tf_checkin_date;
+
+									$tf_tour_data = [
+										'check_in'     => $tf_checkin_date,
+										'check_out'    => $tf_checkin_date,
+										'pricing_type' => $pricing_type,
+										'price'        => $tf_tour_price,
+										'adult_price'  => $tf_tour_adult_price,
+										'child_price'  => $tf_tour_child_price,
+										'infant_price' => $tf_tour_infant_price,
+										'min_person'   => $tf_tour_min_person,
+										'max_person'   => $tf_tour_max_person,
+										'max_capacity' => $tf_tour_max_capacity,
+										'repeat_month' => $tf_tour_repeat_month,
+										'repeat_year'  => $tf_tour_repeat_year,
+										'allowed_time' => !empty($tf_tour_allowed_time) ? $tf_tour_allowed_time : '',
+										'status'       => $status
+									];
+	
+									if($pricing_type == 'package') {
+										if ( $options_count != 0 ) {
+											$options_data = [
+												'options_count' => $options_count,
+											];
+											for ( $j = 0; $j <= $options_count - 1; $j ++ ) {
+												$options_data[ 'tf_package_option_' . $j ]         = isset( $_POST[ 'tf_package_option_' . $j ] ) && ! empty( $_POST[ 'tf_package_option_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_package_option_' . $j ] ) : '';
+												$options_data[ 'tf_option_title_' . $j ]        = isset( $_POST[ 'tf_option_title_' . $j ] ) && ! empty( $_POST[ 'tf_option_title_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_title_' . $j ] ) : '';
+												$options_data[ 'tf_option_pricing_type_' . $j ] = isset( $_POST[ 'tf_option_pricing_type_' . $j ] ) && ! empty( $_POST[ 'tf_option_pricing_type_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_pricing_type_' . $j ] ) : '';
+												$options_data[ 'tf_option_group_price_' . $j ]   = isset( $_POST[ 'tf_option_group_price_' . $j ] ) && ! empty( $_POST[ 'tf_option_group_price_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_group_price_' . $j ] ) : '';
+												$options_data[ 'tf_option_adult_price_' . $j ]  = isset( $_POST[ 'tf_option_adult_price_' . $j ] ) && ! empty( $_POST[ 'tf_option_adult_price_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_adult_price_' . $j ] ) : '';
+												$options_data[ 'tf_option_child_price_' . $j ]  = isset( $_POST[ 'tf_option_child_price_' . $j ] ) && ! empty( $_POST[ 'tf_option_child_price_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_child_price_' . $j ] ) : '';
+												$options_data[ 'tf_option_infant_price_' . $j ]  = isset( $_POST[ 'tf_option_infant_price_' . $j ] ) && ! empty( $_POST[ 'tf_option_infant_price_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_infant_price_' . $j ] ) : '';
+											}
+										}
+										if ( ! empty( $options_data ) ) {
+											$tf_tour_data = array_merge( $tf_tour_data, $options_data );
+										}
+									}
+	
+									$tour_availability_data[$tf_tour_date] = $tf_tour_data;
+								}
+							}
 						}
 					}
-					if ( ! empty( $options_data ) ) {
-						$tf_tour_data = array_merge( $tf_tour_data, $options_data );
+				}
+			}
+		}else{
+			$tf_checkin_date = gmdate( 'Y/m/d', $check_in );
+			$tf_checkout_date = gmdate( 'Y/m/d', $check_out );
+			$tf_tour_date = $tf_checkin_date . ' - ' . $tf_checkout_date;
+			$tf_tour_data = [
+				'check_in'     => $tf_checkin_date,
+				'check_out'    => $tf_checkout_date,
+				'pricing_type' => $pricing_type,
+				'price'        => $tf_tour_price,
+				'adult_price'  => $tf_tour_adult_price,
+				'child_price'  => $tf_tour_child_price,
+				'infant_price' => $tf_tour_infant_price,
+				'min_person'   => $tf_tour_min_person,
+				'max_person'   => $tf_tour_max_person,
+				'max_capacity' => $tf_tour_max_capacity,
+				'repeat_month' => $tf_tour_repeat_month,
+				'repeat_year'  => $tf_tour_repeat_year,
+				'allowed_time' => !empty($tf_tour_allowed_time) ? $tf_tour_allowed_time : '',
+				'status'       => $status
+			];
+
+			if($pricing_type == 'package') {
+				if ( $options_count != 0 ) {
+					$options_data = [
+						'options_count' => $options_count,
+					];
+					for ( $j = 0; $j <= $options_count - 1; $j ++ ) {
+						$options_data[ 'tf_package_option_' . $j ]         = isset( $_POST[ 'tf_package_option_' . $j ] ) && ! empty( $_POST[ 'tf_package_option_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_package_option_' . $j ] ) : '';
+						$options_data[ 'tf_option_title_' . $j ]        = isset( $_POST[ 'tf_option_title_' . $j ] ) && ! empty( $_POST[ 'tf_option_title_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_title_' . $j ] ) : '';
+						$options_data[ 'tf_option_pricing_type_' . $j ] = isset( $_POST[ 'tf_option_pricing_type_' . $j ] ) && ! empty( $_POST[ 'tf_option_pricing_type_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_pricing_type_' . $j ] ) : '';
+						$options_data[ 'tf_option_group_price_' . $j ]   = isset( $_POST[ 'tf_option_group_price_' . $j ] ) && ! empty( $_POST[ 'tf_option_group_price_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_group_price_' . $j ] ) : '';
+						$options_data[ 'tf_option_adult_price_' . $j ]  = isset( $_POST[ 'tf_option_adult_price_' . $j ] ) && ! empty( $_POST[ 'tf_option_adult_price_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_adult_price_' . $j ] ) : '';
+						$options_data[ 'tf_option_child_price_' . $j ]  = isset( $_POST[ 'tf_option_child_price_' . $j ] ) && ! empty( $_POST[ 'tf_option_child_price_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_child_price_' . $j ] ) : '';
+						$options_data[ 'tf_option_infant_price_' . $j ]  = isset( $_POST[ 'tf_option_infant_price_' . $j ] ) && ! empty( $_POST[ 'tf_option_infant_price_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_infant_price_' . $j ] ) : '';
 					}
 				}
-
-				$tour_availability_data[$tf_tour_date] = $tf_tour_data;
+				if ( ! empty( $options_data ) ) {
+					$tf_tour_data = array_merge( $tf_tour_data, $options_data );
+				}
 			}
+
+			$tour_availability_data[$tf_tour_date] = $tf_tour_data;
 		}
 
 		$tour_data = get_post_meta( $tour_id, 'tf_tours_opt', true );

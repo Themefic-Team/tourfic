@@ -26,6 +26,29 @@
     table {
         margin-bottom: 0 !important;
     }
+    .bulk-popup-content{
+        display: flex; 
+        gap: 10px; 
+        flex-wrap: wrap; 
+        margin-top: 15px;
+        .tf-bulk-edit-header{
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 14px;
+            h3{
+                margin: 0;
+            }
+        }
+        .tf-bulk-repeater-section{
+            display: none;
+        }
+        .tf-field.tf-field-repeater{
+            padding-bottom: 0px;
+        }
+    }
 }
 
 .tf-room-cal-field a.button-primary {
@@ -53,7 +76,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 999;
+    z-index: 99999;
     .bulk-popup-content{
         background-color: #fff;
         border-radius: 10px;
@@ -61,6 +84,13 @@
         width: 560px;
         max-height: 360px;
         overflow-y: auto;
+        .tf-repeater .tf-repeater-add .tf-repeater-icon{
+            font-size: 12px;
+            padding: 6px 10px;
+        }
+        .tf-mb-5{
+            margin-bottom: 10px;
+        }
     }
 }
 .tf-single-package{
@@ -75,6 +105,11 @@
             width: 33%
         }
     }
+}
+.tf-tour-limitation-group {
+    display: flex;
+    gap: 8px;
+    flex-wrap: nowrap;
 }
 .tf-single-option{
     @include flexbox();

@@ -4580,6 +4580,39 @@ a.tf-import-btn, a.tf-export-btn {
 .tf-tour-cal-wrap table {
   margin-bottom: 0 !important;
 }
+.tf-apt-cal-wrap .bulk-popup-content,
+.tf-room-cal-wrap .bulk-popup-content,
+.tf-tour-cal-wrap .bulk-popup-content {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 15px;
+}
+.tf-apt-cal-wrap .bulk-popup-content .tf-bulk-edit-header,
+.tf-room-cal-wrap .bulk-popup-content .tf-bulk-edit-header,
+.tf-tour-cal-wrap .bulk-popup-content .tf-bulk-edit-header {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 14px;
+}
+.tf-apt-cal-wrap .bulk-popup-content .tf-bulk-edit-header h3,
+.tf-room-cal-wrap .bulk-popup-content .tf-bulk-edit-header h3,
+.tf-tour-cal-wrap .bulk-popup-content .tf-bulk-edit-header h3 {
+  margin: 0;
+}
+.tf-apt-cal-wrap .bulk-popup-content .tf-bulk-repeater-section,
+.tf-room-cal-wrap .bulk-popup-content .tf-bulk-repeater-section,
+.tf-tour-cal-wrap .bulk-popup-content .tf-bulk-repeater-section {
+  display: none;
+}
+.tf-apt-cal-wrap .bulk-popup-content .tf-field.tf-field-repeater,
+.tf-room-cal-wrap .bulk-popup-content .tf-field.tf-field-repeater,
+.tf-tour-cal-wrap .bulk-popup-content .tf-field.tf-field-repeater {
+  padding-bottom: 0px;
+}
 
 .tf-room-cal-field a.button-primary {
   background-color: #003c79;
@@ -4613,7 +4646,7 @@ a.tf-import-btn, a.tf-export-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 999;
+  z-index: 99999;
 }
 .tf-bulk-popup .bulk-popup-content {
   background-color: #fff;
@@ -4622,6 +4655,13 @@ a.tf-import-btn, a.tf-export-btn {
   width: 560px;
   max-height: 360px;
   overflow-y: auto;
+}
+.tf-bulk-popup .bulk-popup-content .tf-repeater .tf-repeater-add .tf-repeater-icon {
+  font-size: 12px;
+  padding: 6px 10px;
+}
+.tf-bulk-popup .bulk-popup-content .tf-mb-5 {
+  margin-bottom: 10px;
 }
 
 .tf-single-package .tf-field-switch {
@@ -4634,6 +4674,12 @@ a.tf-import-btn, a.tf-export-btn {
 }
 .tf-single-package .tf-form-fields .tf_option_pricing_type_person {
   width: 33%;
+}
+
+.tf-tour-limitation-group {
+  display: flex;
+  gap: 8px;
+  flex-wrap: nowrap;
 }
 
 .tf-single-option {

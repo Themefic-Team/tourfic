@@ -1840,6 +1840,26 @@
             }
         });
 
+        // Bulk Popup Open
+        $(document).on("click", ".tf_tour_cal_bulk_edit", function (e) {
+            $('.tf-tour-cal-field').addClass('tf-bulk-popup');
+            $('.tf-bulk-repeater-section').show();
+            $('.tf-check-dates').hide();
+            $('.tf_tour_cal_bulk_edit').hide();
+            $('.tf-bulk-edit-header').css('display', 'flex');
+            $('.tf_bulk_edit_option').val('1');
+        });
+
+        // Bulk Popup Close
+        $(document).on("click", ".tf_tour_bulk_close", function (e) {
+            $('.tf-tour-cal-field').removeClass('tf-bulk-popup');
+            $('.tf-bulk-repeater-section').hide();
+            $('.tf-check-dates').show();
+            $('.tf_tour_cal_bulk_edit').show();
+            $('.tf-bulk-edit-header').hide();
+            $('.tf_bulk_edit_option').val('');
+        });
+
         /*
         * Options WP editor
         * @author: Sydur
