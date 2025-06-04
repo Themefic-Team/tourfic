@@ -1666,6 +1666,29 @@
             $('[name="tf_tour_adult_price"]', tourCalData).val('');
             $('[name="tf_tour_child_price"]', tourCalData).val('');
             $('[name="tf_tour_infant_price"]', tourCalData).val('');
+            $('[name="tf_tour_min_person"]', tourCalData).val('');
+            $('[name="tf_tour_max_person"]', tourCalData).val('');
+            $('[name="tf_tour_max_capacity"]', tourCalData).val('');
+
+            // Uncheck all first (optional, to reset)
+            document.querySelectorAll('input[name="tf_tour_repeat_year[]"]').forEach(el => {
+                el.checked = false;
+            });
+            document.querySelectorAll('input[name="tf_tour_repeat_year[]"]').forEach(el => {
+                el.checked = false;
+            });
+            document.querySelectorAll('input[name="tf_tour_repeat_week[]"]').forEach(el => {
+                el.checked = false;
+            });
+            document.querySelectorAll('input[name="tf_tour_repeat_day[]"]').forEach(el => {
+                el.checked = false;
+            });
+
+            // More specific selector with error handling
+            const container = document.querySelector('.tf_tour_allowed_times');
+            while (container.firstChild) {
+                container.removeChild(container.firstChild);
+            }
         }
 
         const tfTourCalendar = () => {
@@ -1752,6 +1775,7 @@
                     container.css({'pointer-events': 'auto', 'opacity': '1'});
                     cal.removeClass('tf-content-loading');
                     btn.removeClass('tf-btn-loading');
+                    $('.tf-tour-cal-field').removeClass('tf-bulk-popup');
                 },
             });
         });
