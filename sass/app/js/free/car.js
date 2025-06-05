@@ -204,58 +204,13 @@
         if (car_dropoff_input) {
             tourfic_car_autocomplete(car_dropoff_input, car_locations);
         }
-
-
-        /*
-        * Car Search Form Pickup & Dropoff Time
-        * @author Mofazzal Hossain
-        */
+        
         $(".tf-booking-popup-header .tf-close-popup").on("click", function (e) {
             e.preventDefault();
             $('.tf-car-booking-popup').hide();
         });
 
-        // Open time options
-        $('.selected-dropoff-time, .selected-pickup-time').on('click', function () {
-            const $infoSelect = $(this).closest('.info-select');
-            const $dropdown = $infoSelect.find('.time-options-list');
-            const isOpen = $dropdown.is(':visible');
-
-            $('.time-options-list').slideUp(200);
-            $('.selected-dropoff-time, .selected-pickup-time').removeClass('active');
-
-            if (!isOpen) {
-                $dropdown.slideDown(200);
-                $(this).addClass('active');
-            }
-        });
-
-        // Select time
-        $('.tf-pickup-time li, .tf-dropoff-time li').on('click', function () {
-            const selected = $(this).attr('value');
-            const $infoSelect = $(this).closest('.info-select');
-
-            if ($(this).closest('ul').hasClass('tf-pickup-time')) {
-                $('.tf_pickup_time').val(selected);
-                $('.tf_dropoff_time').val(selected);
-                $('.selected-pickup-time .text').text(selected);
-                $('.selected-dropoff-time .text').text(selected);
-            } else {
-                $('.tf_dropoff_time').val(selected);
-                $('.selected-dropoff-time .text').text(selected);
-            }
-
-            $('.time-options-list').slideUp(200);
-            $('.selected-dropoff-time, .selected-pickup-time').removeClass('active');
-        });
-
-        // Click outside to close dropdown
-        $('body').on('click', function (e) {
-            if (!$(e.target).closest('.info-select').length) {
-                $('.time-options-list').slideUp(200);
-                $('.selected-dropoff-time, .selected-pickup-time').removeClass('active');
-            }
-        });
+       
 
 
         /*
@@ -661,7 +616,7 @@
             let form = $(this),
                 submitBtn = form.find('.tf-submit'),
                 formData = new FormData(form[0]);
-            
+            console.log(formData);
             formData.append('action', 'tf_car_search');
             formData.append('_nonce', tf_params.nonce);
 
@@ -888,9 +843,15 @@
         * Car Single Price Calculation
         * @author Jahid
         */
+        $('body').on('change', '.tf-car-booking-form .tf_pickup_date, .tf-car-booking-form .tf_dropoff_date', function (e) {
+            handleBookingInputChange();
+        });
 
-        $(document).on('change', '.tf-car-booking-form .tf_pickup_date, .tf-car-booking-form .tf-pickup-time li, .tf-car-booking-form .tf_dropoff_date, .tf-car-booking-form .tf-dropoff-time li', function (e) {
-            
+        $('body').on('click', '.tf-car-booking-form .tf-pickup-time li, .tf-car-booking-form .tf-dropoff-time li', function (e) {
+            handleBookingInputChange();
+        });
+
+        function handleBookingInputChange() {
             let extra_ids = $("input[name='selected_extra[]']").map(function() {
                 return $(this).val();
             }).get();
@@ -946,7 +907,7 @@
                     }
                 }
             });
-        });
+        };
 
 
         /*

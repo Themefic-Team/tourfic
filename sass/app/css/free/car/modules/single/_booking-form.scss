@@ -59,9 +59,7 @@
                                 margin-top: 0px;
                                 margin-bottom: 8px;
                             }
-                            input,
-                            .selected-pickup-time,
-                            .selected-dropoff-time{
+                            input{
                                 min-width: auto;
                                 width: 100%;
                                 color: $color-text;
@@ -82,71 +80,6 @@
                                 }
                                 &::placeholder{
                                     color: $color-text;
-                                }
-                                .icon{
-                                    svg{
-                                        position: absolute;
-                                        right: 0;
-                                        top: 50%;
-                                        transform: translateY(-50%);
-                                        transition: transform 0.3s ease;
-                                    }
-                                }
-                                &.active{
-                                    svg{
-                                        transform: translateY(-50%) rotate(180deg);
-                                        transition: transform 0.3s ease;
-                                    }
-                                }
-                            }
-                           
-                            .tf-select-time{
-                                position: absolute;
-                                top: 44px;
-                                left: -40px;
-                                right: 0;
-                                border-radius: 8px;
-                                min-width: 212px;
-                                background: #F8FAFC;
-                                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-                                z-index: 999;
-                                .time-options-list {
-                                    max-height: 258px;
-                                    overflow-y: auto;
-                                    display: none;
-                                    padding: 4px 8px 4px 4px;
-                                    list-style: none;
-                                    margin-right: 4px;
-                                    @media #{$max768}{
-                                        min-width: 180px;
-                                        padding-right: 10px;
-                                    }
-                                    &::-webkit-scrollbar {
-                                        width: 4px;
-                                    }
-                                    &::-webkit-scrollbar-thumb {
-                                        background: #566676;
-                                        border-radius: 16px;
-                                    }
-
-                                    &::-webkit-scrollbar-track {
-                                        background: transparent;
-                                        margin-right: 4px;
-                                    }
-                                    li {
-                                        padding: 8px 12px;
-                                        font-size: 16px;
-                                        font-weight: 700;
-                                        cursor: pointer;
-                                        background: $color-white;
-                                        margin-bottom: 2px;
-                                        &:hover {
-                                            background: #f3f3f3;
-                                        }
-                                        &:last-child{
-                                            margin-bottom: 0;
-                                        }
-                                    }
                                 }
                             }
                             .autocomplete-items{

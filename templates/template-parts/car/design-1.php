@@ -483,6 +483,7 @@ $tf_cars_slug = get_option('car_slug');
                                                 </svg>
                                             </div>
                                         </div>
+                                        <input type="hidden" value="<?php echo esc_attr($post_id); ?>" id="post_id" />
                                         <input type="hidden" name="tf_dropoff_time" class="tf_dropoff_time" id="tf_dropoff_time" value="<?php echo esc_attr($selected_dropoff_time); ?>">
                                         <div class="tf-select-time">
                                             <ul class="time-options-list tf-dropoff-time">
