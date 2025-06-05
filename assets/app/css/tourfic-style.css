@@ -10464,9 +10464,10 @@ div#tf-destinationautocomplete-list div:before {
   flex-wrap: nowrap;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 991.98px) {
   .tf-archive-search-box-wrapper .tf-date-select-box {
     flex-wrap: wrap;
+    justify-content: flex-start;
   }
 }
 
@@ -10477,6 +10478,12 @@ div#tf-destinationautocomplete-list div:before {
   width: 33.33%;
 }
 
+@media only screen and (max-width: 991.98px) {
+  .tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select {
+    width: 49%;
+  }
+}
+
 @media only screen and (max-width: 768px) {
   .tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select {
     width: 100%;
@@ -10485,6 +10492,12 @@ div#tf-destinationautocomplete-list div:before {
 
 .tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select:first-child {
   width: 37%;
+}
+
+@media only screen and (max-width: 991.98px) {
+  .tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select:first-child {
+    width: 49%;
+  }
 }
 
 @media only screen and (max-width: 768px) {

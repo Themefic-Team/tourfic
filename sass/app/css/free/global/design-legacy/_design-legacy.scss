@@ -754,19 +754,26 @@
     .tf-date-select-box{
         padding: 8px;
         flex-wrap: nowrap;
-        @media #{$max768}{
+        @media #{$max991}{
             flex-wrap: wrap;
+            justify-content: flex-start;
         }
         .tf-date-single-select{
             border-radius: 8px;
             background: $color-filling-bg;
             padding: 16px;
             width: 33.33%;
+            @media #{$max991}{
+                width: 49%;
+            }
             @media #{$max768}{
                 width: 100%;
             }
             &:first-child{
                 width: 37%;
+                @media #{$max991}{
+                    width: 49%;
+                }
                 @media #{$max768}{
                     width: 100%;
                 }
