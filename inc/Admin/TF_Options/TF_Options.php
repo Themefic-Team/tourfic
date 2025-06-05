@@ -1073,10 +1073,19 @@ class TF_Options {
 			$tour_availability_data = array_values( $tour_availability_data );
 			$tour_availability_data = array_map( function ( $item ) {	
 
+				$time_string = '';
+				$active_times =  $item['allowed_time'] ? $item['allowed_time'] : ''; 
+				if(!empty($active_times["time"])){
+					$active_time = implode(', ', array_filter($active_times['time']));
+				}
+				if(!empty($active_time)){
+					$time_string = 'Time: '.$active_time;
+				}
+				
 				if ( $item['pricing_type'] == 'group' ) {
-					$item['title'] = __( 'Price: ', 'tourfic' ) . wc_price( $item['price'] );
+					$item['title'] = __( 'Price: ', 'tourfic' ) . wc_price( $item['price'] ) . '<br>'. $time_string;
 				} elseif ( $item['pricing_type'] == 'person' ) {
-					$item['title'] = __( 'Adult: ', 'tourfic' ) . wc_price( $item['adult_price'] ) . '<br>' . __( 'Child: ', 'tourfic' ) . wc_price( $item['child_price'] ). '<br>' . __( 'Infant: ', 'tourfic' ) . wc_price( $item['infant_price'] );
+					$item['title'] = __( 'Adult: ', 'tourfic' ) . wc_price( $item['adult_price'] ) . '<br>' . __( 'Child: ', 'tourfic' ) . wc_price( $item['child_price'] ). '<br>' . __( 'Infant: ', 'tourfic' ) . wc_price( $item['infant_price'] ). '<br>'. $time_string;
 				} elseif ( $item['pricing_type'] == 'package' ) {
 					$item['title'] = '';
 					if ( ! empty( $item['options_count'] ) ) {
@@ -1092,6 +1101,7 @@ class TF_Options {
                             }
 						}
 					}
+					$item['title'] .=  $time_string;
 				}
 
 				if(!empty($item['title'])){
