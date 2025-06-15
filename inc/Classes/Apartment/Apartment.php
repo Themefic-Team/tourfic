@@ -1744,24 +1744,20 @@ class Apartment {
                                     for (var date in apt_availability) {
                                         let d = new Date(date);
 
-                                        if (d.getTime() >= checkInDate.getTime() && d.getTime() <= checkOutDate.getTime()) {
+                                        if (d.getTime() >= checkInDate.getTime() && d.getTime() < checkOutDate.getTime()) {
+											var availabilityData = apt_availability[date];
+											var pricing_type = availabilityData.pricing_type;
+											var price = availabilityData.price ? parseFloat(availabilityData.price) : 0;
+											var adultPrice = availabilityData.adult_price ? parseFloat(availabilityData.adult_price) : 0;
+											var childPrice = availabilityData.child_price ? parseFloat(availabilityData.child_price) : 0;
+											var infantPrice = availabilityData.infant_price ? parseFloat(availabilityData.infant_price) : 0;
 
-                                            if (d.getTime() !== checkInDate.getTime()) {
-                                                var availabilityData = apt_availability[date];
-                                                var pricing_type = availabilityData.pricing_type;
-                                                var price = availabilityData.price ? parseFloat(availabilityData.price) : 0;
-                                                var adultPrice = availabilityData.adult_price ? parseFloat(availabilityData.adult_price) : 0;
-                                                var childPrice = availabilityData.child_price ? parseFloat(availabilityData.child_price) : 0;
-                                                var infantPrice = availabilityData.infant_price ? parseFloat(availabilityData.infant_price) : 0;
-
-                                                if (pricing_type === 'per_night' && price > 0) {
-                                                    total_price += price;
-                                                } else if (pricing_type === 'per_person') {
-                                                    var totalPersonPrice = (adultPrice * $('#adults').val()) + (childPrice * $('#children').val()) + (infantPrice * $('#infant').val());
-                                                    total_price += totalPersonPrice;
-                                                    // console.log('total_price', total_price);
-                                                }
-                                            }
+											if (pricing_type === 'per_night' && price > 0) {
+												total_price += price;
+											} else if (pricing_type === 'per_person') {
+												var totalPersonPrice = (adultPrice * $('#adults').val()) + (childPrice * $('#children').val()) + (infantPrice * $('#infant').val());
+												total_price += totalPersonPrice;
+											}
                                         }
                                     }
 
