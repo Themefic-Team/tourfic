@@ -4,6 +4,7 @@ namespace Tourfic\Admin\Backend_Booking;
 
 defined( 'ABSPATH' ) || exit;
 
+use Mpdf\Tag\Em;
 use Tourfic\Classes\Helper;
 use \Tourfic\Core\TF_Backend_Booking;
 use \Tourfic\Classes\Apartment\Pricing as APT_Price;
@@ -389,16 +390,15 @@ class TF_Apartment_Backend_Booking extends TF_Backend_Booking {
 			$total_price = APT_Price::instance( $apt_id )->set_dates( $check_from, $check_to)->set_persons( $adult_count, $child_count, $infant_count )->set_total_price()->get_total_price();
 		}
 
-
-		if ( $apt_data['max_adults'] < $adult_count ) {
+		if ( !empty($apt_data['max_adults']) && $apt_data['max_adults'] < $adult_count ) {
 			/* translators: %s max adults */
 			$response['fieldErrors']['tf_apartment_adults_number_error'] = sprintf( esc_html__( "You can't book more than %s adults", 'tourfic' ), $apt_data['max_adults'] ? $apt_data['max_adults'] : 0 );
 		}
-		if ( $apt_data['max_children'] < $child_count ) {
+		if ( !empty($apt_data['max_children']) && $apt_data['max_children'] < $child_count ) {
 			/* translators: %s max children */
 			$response['fieldErrors']['tf_apartment_children_number_error'] = sprintf( esc_html__( "You can't book more than %s children", 'tourfic' ), $apt_data['max_children'] ? $apt_data['max_children'] : 0 );
 		}
-		if ( $apt_data['max_infants'] < $infant_count ) {
+		if ( !empty($apt_data['max_infants']) && $apt_data['max_infants'] < $infant_count ) {
 			/* translators: %s max infants */
 			$response['fieldErrors']['tf_apartment_infant_number_error'] = sprintf( esc_html__( "You can't book more than %s infants", 'tourfic' ), $apt_data['max_infants'] ? $apt_data['max_infants'] : 0 );
 		}

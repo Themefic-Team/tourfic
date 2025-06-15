@@ -12,3 +12,4 @@ inc/.DS_Store
 *.map
 yarn*
 *.css.js
+pnpm*
