@@ -247,6 +247,6 @@ function tf_active_template_settings_callback() {
 	//all code goes here if need
 	update_option( 'tourfic_template_installed', true );
 }
-
+ 
 //Register activation hook
 register_activation_hook( __FILE__, 'tf_active_template_settings_callback' );
