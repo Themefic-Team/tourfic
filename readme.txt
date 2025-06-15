@@ -374,6 +374,7 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 = 2.16.6 – June 15, 2025 =
 
+- Improved: Updated layout of the settings page.
 - Fixed: Issue with apartment availability price calculation.
 - Fixed: Problem with displaying customer booking details(Pro).
 - Fixed: iCal unavailable dates now reset correctly when the dates become available(Pro).
