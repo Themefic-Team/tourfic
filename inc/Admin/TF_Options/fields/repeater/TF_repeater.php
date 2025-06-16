@@ -49,7 +49,8 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 							
 							foreach ( $data as $key => $value ) :
 								if( "cont_custom_date" == $this->field['id'] ){
-									$value[$field_title] = esc_html__('Custom Dates', 'tourfic');
+									$variation = !empty($value['variation_type']) ? ' ('. $value['variation_type'] . ')' : '';
+									$value[$field_title] = $value[$field_title]['from'] . ' - ' . $value[$field_title]['to'] . $variation;
 								}
 							?>
                             <div class="tf-single-repeater tf-single-repeater-<?php echo esc_attr($this->field['id']);?>">
