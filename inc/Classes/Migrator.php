@@ -1648,6 +1648,35 @@ class Migrator {
 							];
 						}
 						
+						//add next 3 years availability
+						for ( $i = strtotime( gmdate( 'Y-m-d' ) ); $i <= strtotime( '+3 year', strtotime( gmdate( 'Y-m-d' ) ) ); $i = strtotime( '+1 day', $i ) ) {
+							$tf_tour_inc_date = gmdate( 'Y/m/d', $i );
+
+							$tf_tour_adult_price  = $pricing_rule == 'person' && ! empty( $meta['adult_price'] ) ? $meta['adult_price'] : '';
+							$tf_tour_child_price  = $pricing_rule == 'person' && ! empty( $meta['child_price'] ) ? $meta['child_price'] : '';
+							$tf_tour_infant_price  = $pricing_rule == 'person' && ! empty( $meta['infant_price'] ) ? $meta['infant_price'] : '';
+							$tf_tour_group_price  = $pricing_rule == 'group' && ! empty( $meta['group_price'] ) ? $meta['group_price'] : '';
+
+							$tf_tour_date = $tf_tour_inc_date . ' - ' . $tf_tour_inc_date;
+							$tf_tour_data = [
+								'check_in'    => $tf_tour_inc_date,
+								'check_out'   => $tf_tour_inc_date,
+								'pricing_type' => $pricing_rule,
+								'price'        => $tf_tour_group_price,
+								'adult_price'  => $tf_tour_adult_price,
+								'child_price'  => $tf_tour_child_price,
+								'infant_price' => $tf_tour_infant_price,
+								'min_person'   => $cont_min_people,
+								'max_person'   => $cont_max_people,
+								'max_capacity' => $cont_max_capacity,
+								'repeat_month' => '',
+								'repeat_year'  => '',
+								'allowed_time' => '',
+								'status'       => 'available'
+							];
+							$tour_availability_data[$tf_tour_date] = $tf_tour_data;
+						}
+
 						$disable_range = ! empty( $meta['disable_range'] ) ? $meta['disable_range'] : '';
 						if(!empty($disable_range)){
 							foreach($disable_range as $disable){
