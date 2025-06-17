@@ -81,25 +81,35 @@ function tf_tours_booking_function() {
 		return;
 	}
 
-	if ( $tour_type == 'fixed' ) {
+	$tour_availability = ! empty( $meta['tour_availability'] ) ? json_decode($meta['tour_availability'], true) : '';
 
-		if( !empty($meta['fixed_availability']) && gettype($meta['fixed_availability'])=="string" ){
-            $tf_tour_fixed_avail = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
-                return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
-            }, $meta['fixed_availability'] );
-            $tf_tour_fixed_date = unserialize( $tf_tour_fixed_avail );
-			$start_date = ! empty( $tf_tour_fixed_date['date']['from'] ) ? $tf_tour_fixed_date['date']['from'] : '';
-			$end_date   = ! empty( $tf_tour_fixed_date['date']['to'] ) ? $tf_tour_fixed_date['date']['to'] : '';
-			$min_people = ! empty( $tf_tour_fixed_date['min_seat'] ) ? $tf_tour_fixed_date['min_seat'] : '';
-			$max_people = ! empty( $tf_tour_fixed_date['max_seat'] ) ? $tf_tour_fixed_date['max_seat'] : '';
-			$tf_tour_booking_limit = ! empty( $tf_tour_fixed_date['max_capacity'] ) ? $tf_tour_fixed_date['max_capacity'] : 0;
-		}else{
-			$start_date = ! empty( $meta['fixed_availability']['date']['from'] ) ? $meta['fixed_availability']['date']['from'] : '';
-			$end_date   = ! empty( $meta['fixed_availability']['date']['to'] ) ? $meta['fixed_availability']['date']['to'] : '';
-			$min_people = ! empty( $meta['fixed_availability']['min_seat'] ) ? $meta['fixed_availability']['min_seat'] : '';
-			$max_people = ! empty( $meta['fixed_availability']['max_seat'] ) ? $meta['fixed_availability']['max_seat'] : '';
-			$tf_tour_booking_limit = ! empty( $meta['fixed_availability']['max_capacity'] ) ? $meta['fixed_availability']['max_capacity'] : 0; 
+	$matched_availability = null;
+	if ( $tour_date && is_array($tour_availability) ) {
+		$input_date = strtotime($tour_date);
+
+		foreach ( $tour_availability as $date_range => $details ) {
+			if ( !isset($details['check_in'], $details['check_out'], $details['status']) ) {
+				continue;
+			}
+
+			$check_in  = strtotime(trim($details['check_in']));
+			$check_out = strtotime(trim($details['check_out']));
+			$status    = $details['status'];
+
+			if ( $status === 'available' && $input_date >= $check_in && $input_date <= $check_out ) {
+				$matched_availability = $details;
+				break; // Stop loop after first match
+			}
 		}
+	}
+	
+	if ( $tour_type == 'fixed' && !empty($matched_availability) ) {
+
+		$start_date            = ! empty( $matched_availability['check_in'] ) ? $matched_availability['check_in'] : '';
+		$end_date              = ! empty( $matched_availability['check_out'] ) ? $matched_availability['check_out'] : '';
+		$min_people            = ! empty( $matched_availability['min_person'] ) ? $matched_availability['min_person'] : '';
+		$max_people            = ! empty( $matched_availability['max_person'] ) ? $matched_availability['max_person'] : '';
+		$tf_tour_booking_limit = ! empty( $matched_availability['max_capacity'] ) ? $matched_availability['max_capacity'] : 0;
 
 		if(!function_exists("selected_day_diff")) {
 			function selected_day_diff ($start_date, $end_date) {

@@ -1134,7 +1134,7 @@ class Tour {
                         <input type='text' name='check-in-out-date' id='check-in-out-date' class='tf-field tours-check-in-out' onkeypress="return false;" placeholder='<?php esc_html_e( "Select Date", "tourfic" ); ?>'
                                value='' required/>
                     </div>
-					<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_type != 'fixed' &&  !empty( $allowed_times ) ) { ?>
+					<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_type != 'fixed' ) { ?>
                         <div class="tf-field-group check-in-time-div tf-mt-8" id="" style="display: none;">
                             <i class="fa-regular fa-clock"></i>
                             <select class="tf-field" name="check-in-time" id="" style="min-width: 100px;"></select>
@@ -4021,9 +4021,7 @@ class Tour {
 			}
 		}
 
-		// var_dump($matched_availability);
-
-		if ( $tour_type == 'fixed' && !empty($matched_availability)) {
+		if ( $tour_type == 'fixed' && !empty($matched_availability) ) {
 
 			$start_date            = ! empty( $matched_availability['check_in'] ) ? $matched_availability['check_in'] : '';
 			$end_date              = ! empty( $matched_availability['check_out'] ) ? $matched_availability['check_out'] : '';
@@ -4396,22 +4394,11 @@ class Tour {
 			} ) );
 		}
 
+		$group_price    = ! empty( $matched_availability['price'] ) ? $matched_availability['price'] : 0;
+		$adult_price    = ! empty( $matched_availability['adult_price'] ) ? $matched_availability['adult_price'] : 0;
+		$children_price = ! empty( $matched_availability['child_price'] ) ? $matched_availability['child_price'] : 0;
+		$infant_price   = ! empty( $matched_availability['infant_price'] ) ? $matched_availability['infant_price'] : 0;
 
-		if ( $tour_type === 'continuous' && ! empty( $tf_cont_custom_date ) && ! empty( $seasional_price ) ) {
-
-			$group_price    = ! empty( $seasional_price[0]['group_price'] ) ? $seasional_price[0]['group_price'] : 0;
-			$adult_price    = ! empty( $seasional_price[0]['adult_price'] ) ? $seasional_price[0]['adult_price'] : 0;
-			$children_price = ! empty( $seasional_price[0]['child_price'] ) ? $seasional_price[0]['child_price'] : 0;
-			$infant_price   = ! empty( $seasional_price[0]['infant_price'] ) ? $seasional_price[0]['infant_price'] : 0;
-
-		} else {
-
-			$group_price    = ! empty( $meta['group_price'] ) ? $meta['group_price'] : 0;
-			$adult_price    = ! empty( $meta['adult_price'] ) ? $meta['adult_price'] : 0;
-			$children_price = ! empty( $meta['child_price'] ) ? $meta['child_price'] : 0;
-			$infant_price   = ! empty( $meta['infant_price'] ) ? $meta['infant_price'] : 0;
-
-		}
 
 		// Group Type Package
 		$allow_package_pricing = ! empty( $meta['allow_package_pricing'] ) ? $meta['allow_package_pricing'] : 0;
@@ -4436,18 +4423,11 @@ class Tour {
 		}
 
 		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_type == 'continuous' ) {
-			$tf_allowed_times = ! empty( $meta['allowed_time'] ) ? $meta['allowed_time'] : '';
-			if ( ! empty( $tf_allowed_times ) && gettype( $tf_allowed_times ) == "string" ) {
-				$tf_tour_conti_custom_date = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
-					return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
-				}, $tf_allowed_times );
-				$tf_allowed_times          = unserialize( $tf_tour_conti_custom_date );
-			}
+			$has_valid_time = !empty(array_filter($allowed_times_field['time'], function($t) {
+				return trim($t) !== '';
+			}));
 
-			if ( ! empty( $tf_allowed_times ) && empty( $tour_time_title ) ) {
-				$response['errors'][] = esc_html__( 'Please select time', 'tourfic' );
-			}
-			if ( ! empty( $seasional_price[0]['allowed_time'] ) && empty( $tour_time_title ) ) {
+			if ( ! empty( $allowed_times_field ) && empty( $tour_time_title ) && $has_valid_time ) {
 				$response['errors'][] = esc_html__( 'Please select time', 'tourfic' );
 			}
 		}

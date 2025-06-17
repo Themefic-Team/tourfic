@@ -6,6 +6,9 @@
                     background: $color-filling-fg;
                     @include bd-radius(5px);
                 
+                    .check-in-time-div{
+                        display: none;
+                    }
                 }
                 .tf-booking-price{
                     border-bottom: 1px solid $color-border-lite;
