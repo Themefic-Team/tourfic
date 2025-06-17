@@ -4082,7 +4082,6 @@ class Tour {
 		} elseif ( $tour_type == 'continuous' && !empty($matched_availability) ) {
 
 			$pricing_rule = ! empty( $matched_availability['pricing_type'] ) ? $matched_availability['pricing_type'] : '';
-			$cont_custom_date = ! empty( $meta['cont_custom_date'] ) ? $meta['cont_custom_date'] : '';
 
 			$min_people = ! empty( $matched_availability['min_person'] ) ? $matched_availability['min_person'] : '';
 			$max_people = ! empty( $matched_availability['max_person'] ) ? $matched_availability['max_person'] : '';
@@ -4299,13 +4298,20 @@ class Tour {
 					}
 
 				} else {
-					if ( ! empty( $allowed_times_field[ $tour_time ]['time'] ) ) {
-						$tour_time_title = $allowed_times_field[ $tour_time ]['time'];
+					$tour_time_title  = '';
+					$tf_tour_booking_limit = '';
+
+					if (!empty($allowed_times_field['time']) && is_array($allowed_times_field['time'])) {
+						foreach ($allowed_times_field['time'] as $index => $time) {
+							if (trim($time) === $tour_time) {
+								$tour_time_title     = $time;
+								$tf_tour_booking_limit = isset($allowed_times_field['cont_max_capacity'][$index]) ? $allowed_times_field['cont_max_capacity'][$index] : '';
+								break;
+							}
+						}
 					}
 
-					if ( ! empty( $allowed_times_field[ $tour_time ]['max_capacity'] ) ) {
-						$tf_tour_booking_limit = $allowed_times_field[ $tour_time ]['max_capacity'];
-
+					if ( ! empty( $tf_tour_booking_limit ) ) {
 						foreach ( $tf_tour_book_orders as $order ) {
 							$tour_id       = $order['post_id'];
 							$order_details = json_decode( $order['order_details'] );
@@ -4376,23 +4382,6 @@ class Tour {
 		 *
 		 * Tour type continuous and custom availability is true
 		 */
-		$tf_cont_custom_date = ! empty( $meta['cont_custom_date'] ) ? $meta['cont_custom_date'] : '';
-		if ( ! empty( $tf_cont_custom_date ) && gettype( $tf_cont_custom_date ) == "string" ) {
-			$tf_tour_conti_custom_date = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
-				return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
-			}, $tf_cont_custom_date );
-			$tf_cont_custom_date       = unserialize( $tf_tour_conti_custom_date );
-		}
-
-		$tour = strtotime( $tour_date );
-		if ( isset( $custom_avail ) && true == $custom_avail ) {
-			$seasional_price = array_values( array_filter( $tf_cont_custom_date, function ( $value ) use ( $tour ) {
-				$seasion_start = strtotime( $value['date']['from'] );
-				$seasion_end   = strtotime( $value['date']['to'] );
-
-				return $seasion_start <= $tour && $seasion_end >= $tour;
-			} ) );
-		}
 
 		$group_price    = ! empty( $matched_availability['price'] ) ? $matched_availability['price'] : 0;
 		$adult_price    = ! empty( $matched_availability['adult_price'] ) ? $matched_availability['adult_price'] : 0;
