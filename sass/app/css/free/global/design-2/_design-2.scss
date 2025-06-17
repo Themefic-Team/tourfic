@@ -2904,8 +2904,11 @@
                     }
                 }
             }
-            .tf-field-calander.check-in-time-div .tf-field{
-                padding: 18.7px 40px;
+            .tf-field-calander.check-in-time-div{ 
+                display: none;
+                .tf-field{
+                    padding: 18.7px 40px;
+                }
             }
             .tf-tours-booking-btn.tf-booking-bttns{
                 a{

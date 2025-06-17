@@ -261,6 +261,8 @@ class Enqueue {
 			$custom_avail               = ! empty( $meta['custom_avail'] ) ? $meta['custom_avail'] : '';
 			$tour_date_format_for_users = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 
+			$tour_availability          = ! empty( $meta['tour_availability'] ) ? json_decode($meta['tour_availability']) : '';
+			
 			// Same Day Booking
 			$disable_same_day = ! empty( $meta['disable_same_day'] ) ? $meta['disable_same_day'] : '';
 			if ( $tour_type == 'fixed' ) {
@@ -362,77 +364,13 @@ class Enqueue {
 			$single_tour_form_data['tour_type']                 = $tour_type;
 			$single_tour_form_data['allowed_times']             = wp_json_encode( $allowed_times ?? [] );
 			$single_tour_form_data['custom_avail']              = ! empty( $custom_avail ) ? $custom_avail : false;
-			$single_tour_form_data['cont_custom_date']          = ! empty( $cont_custom_date ) ? $cont_custom_date : '';
 			$single_tour_form_data['first_day_of_week'] = !empty(Helper::tfopt("tf-week-day-flatpickr")) ? Helper::tfopt("tf-week-day-flatpickr") : 0;
 			$single_tour_form_data['select_time_text'] = esc_html__( "Select Time", "tourfic" );
 			$single_tour_form_data['date_format']      = esc_html( $tour_date_format_for_users );
 			$single_tour_form_data['flatpickr_locale'] = ! empty( get_locale() ) ? get_locale() : 'en_US';
-			$single_tour_form_data['disabled_day']     = ! empty( $disabled_day ) ? $disabled_day : '';
-			$single_tour_form_data['disable_range']    = ! empty( $disable_range ) ? $disable_range : '';
-			$single_tour_form_data['disable_specific'] = ! empty( $disable_specific ) ? $disable_specific : '';
+
 			$single_tour_form_data['disable_same_day'] = $disable_same_day;
-
-			$single_tour_form_data['enable'] = array();
-			if ( $tour_type && $tour_type == 'fixed' ) {
-				if ( ! empty( $departure_date ) && ! empty( $tour_repeat_months ) ) {
-					$enable_repeat_dates = Tour::fixed_tour_start_date_changer( $departure_date, $tour_repeat_months );
-				}
-
-				if ( ( $repeated_fixed_tour_switch == 1 ) && ! empty( $enable_repeat_dates ) && ( $enable_repeat_dates > 0 ) ) {
-
-					$single_tour_form_data['defaultDate'] = esc_html( Tour::tf_nearest_default_day( $enable_repeat_dates ) );
-
-					foreach ( $enable_repeat_dates as $enable_date ) {
-						$single_tour_form_data['enable'][] = esc_html( $enable_date );
-					}
-				} else {
-					$single_tour_form_data['defaultDate'] = esc_html( $departure_date );
-					$single_tour_form_data['enable']      = array(
-						esc_html( $departure_date )
-					);
-				}
-			} elseif ( $tour_type && $tour_type == 'continuous' ) {
-				if ( $custom_avail && $custom_avail == true ) {
-					if( is_array($cont_custom_date)) {
-						foreach ( $cont_custom_date as $item ) {
-							$single_tour_form_data['enable'][] = array(
-								'from' => esc_attr( $item["date"]["from"] ),
-								'to'   => esc_attr( $item["date"]["to"] )
-							);
-						}
-					}
-				}
-				if ( $custom_avail == false ) {
-					if ( $disabled_day || $disable_range || $disable_specific || $disable_same_day ) {
-						$single_tour_form_data['disable'] = array();
-						if ( $disabled_day ) {
-							$single_tour_form_data['disable'][] = "function (date) {
-                                    return (date.getDay() === 8";
-							foreach ( $disabled_day as $dis_day ) {
-								$single_tour_form_data['disable'][] = '|| date.getDay() === ' . esc_attr( $dis_day );
-							}
-							$single_tour_form_data['disable'][] = ");";
-						}
-						if ( !empty($disable_range) && is_array($disable_range) ) {
-							foreach ( $disable_range as $d_item ) {
-								$single_tour_form_data['disable'][] = array(
-									'from' => esc_attr( $d_item["date"]["from"] ),
-									'to'   => esc_attr( $d_item["date"]["to"] )
-								);
-							}
-						}
-						if ( $disable_same_day ) {
-							$single_tour_form_data['disable'][] = '"today"';
-							if ( $disable_specific ) {
-								$single_tour_form_data['disable'][] = ",";
-							}
-						}
-						if ( $disable_specific ) {
-							$single_tour_form_data['disable'][] = '"' . esc_attr( $disable_specific ) . '"';
-						}
-					}
-				}
-			}
+			$single_tour_form_data['tour_availability'] = $tour_availability;
 
 
 		}

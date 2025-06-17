@@ -14371,6 +14371,9 @@ div#tf-destinationautocomplete-list div:before {
 .tf-single-template__two .tf_tours_booking .tf-field-calander .tf-field::placeholder {
   color: var(--tf-text-paragraph);
 }
+.tf-single-template__two .tf_tours_booking .tf-field-calander.check-in-time-div {
+  display: none;
+}
 .tf-single-template__two .tf_tours_booking .tf-field-calander.check-in-time-div .tf-field {
   padding: 18.7px 40px;
 }
