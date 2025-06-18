@@ -280,9 +280,6 @@ class Enqueue {
 
 		}
 
-		// var_dump(Helper::tf_templates_body_class());
-		// die();
-
 		/**
 		 * Custom
 		 */

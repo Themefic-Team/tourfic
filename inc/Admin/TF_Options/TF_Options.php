@@ -952,7 +952,7 @@ class TF_Options {
 												'options_count' => $options_count,
 											];
 											for ( $j = 0; $j <= $options_count - 1; $j ++ ) {
-												$options_data[ 'tf_package_option_' . $j ]         = isset( $_POST[ 'tf_package_option_' . $j ] ) && ! empty( $_POST[ 'tf_package_option_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_package_option_' . $j ] ) : '';
+												// $options_data[ 'tf_package_option_' . $j ]         = isset( $_POST[ 'tf_package_option_' . $j ] ) && ! empty( $_POST[ 'tf_package_option_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_package_option_' . $j ] ) : '';
 												$options_data[ 'tf_option_title_' . $j ]        = isset( $_POST[ 'tf_option_title_' . $j ] ) && ! empty( $_POST[ 'tf_option_title_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_title_' . $j ] ) : '';
 												$options_data[ 'tf_option_pricing_type_' . $j ] = isset( $_POST[ 'tf_option_pricing_type_' . $j ] ) && ! empty( $_POST[ 'tf_option_pricing_type_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_pricing_type_' . $j ] ) : '';
 												$options_data[ 'tf_option_group_price_' . $j ]   = isset( $_POST[ 'tf_option_group_price_' . $j ] ) && ! empty( $_POST[ 'tf_option_group_price_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_group_price_' . $j ] ) : '';
@@ -1130,7 +1130,7 @@ class TF_Options {
 				<div class="tf-single-option tf-single-package">
 					<div class="tf-field-switch">
 						<label for="tf_package_option_<?php echo esc_attr( $item['index'] ); ?>" class="tf-field-label"><?php echo esc_html( $item['title'] ); ?></label>
-						<div class="tf-fieldset">
+						<!-- <div class="tf-fieldset">
 							<label for="tf_package_option_<?php echo esc_attr( $item['index'] ); ?>" class="tf-switch-label" style="width: 80px">
 								<input type="checkbox" id="tf_package_option_<?php echo esc_attr( $item['index'] ); ?>" name="tf_package_option_<?php echo esc_attr( $item['index'] ); ?>" value="1" class="tf-switch"
 										checked="checked">
@@ -1139,7 +1139,7 @@ class TF_Options {
 									<span class="tf-switch-off"><?php echo esc_html__('Disable', 'tourfic') ?></span>
 								</span>
 							</label>
-						</div>
+						</div> -->
 					</div>
 					<div class="tf-form-fields">
 						<div class="tf-field-text tf_option_pricing_type_group" style="display: <?php echo $item['type'] == 'group' ? 'block' : 'none' ?>; width: 100%">

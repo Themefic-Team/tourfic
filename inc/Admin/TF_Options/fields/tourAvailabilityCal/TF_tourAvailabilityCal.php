@@ -387,16 +387,7 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                         <div class="tf-single-option tf-single-package">
                                             <div class="tf-field-switch">
                                                 <label for="tf_package_option_<?php echo esc_attr( $key ); ?>" class="tf-field-label"><?php echo esc_html( $room_option['pack_title'] ); ?></label>
-                                                <div class="tf-fieldset">
-                                                    <label for="tf_package_option_<?php echo esc_attr( $key ); ?>" class="tf-switch-label" style="width: 80px">
-                                                        <input type="checkbox" id="tf_package_option_<?php echo esc_attr( $key ); ?>" name="tf_package_option_<?php echo esc_attr( $key ); ?>" value="1" class="tf-switch"
-                                                            checked="checked">
-                                                        <span class="tf-switch-slider">
-                                                            <span class="tf-switch-on"><?php echo esc_html__('Enable', 'tourfic') ?></span>
-                                                            <span class="tf-switch-off"><?php echo esc_html__('Disable', 'tourfic') ?></span>
-                                                        </span>
-                                                    </label>
-                                                </div>
+                                                
                                             </div>
                                             <div class="tf-form-fields">
                                                 <div class="tf-field-text tf_option_pricing_type_group" style="display: <?php echo $option_pricing_type == 'group' ? 'block' : 'none' ?>; width: 100%">
