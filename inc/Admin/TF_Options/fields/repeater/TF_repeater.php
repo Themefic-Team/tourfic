@@ -49,8 +49,7 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 							
 							foreach ( $data as $key => $value ) :
 								if( "cont_custom_date" == $this->field['id'] ){
-									$variation = !empty($value['variation_type']) ? ' ('. $value['variation_type'] . ')' : '';
-									$value[$field_title] = $value[$field_title]['from'] . ' - ' . $value[$field_title]['to'] . $variation;
+									$value[$field_title] = $value[$field_title]['from'] . ' - ' . $value[$field_title]['to'];
 								}
 							?>
                             <div class="tf-single-repeater tf-single-repeater-<?php echo esc_attr($this->field['id']);?>">
@@ -61,7 +60,13 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 									<span class="tf-repeater-icon tf-repeater-icon-collapse">
 										<i class="fa-solid fa-angle-down"></i>
 									</span>
-									<span class="tf-repeater-title"><?php echo !empty($value[$field_title]) && is_string($value[$field_title]) ? esc_html($value[$field_title]) : esc_html($label) ?>  </span>
+									<span class="tf-repeater-title">
+										<?php 
+											$repeater_title = !empty($value[$field_title]) && is_string($value[$field_title]) ? $value[$field_title] : $label;
+											$repeater_title = apply_filters('tf_repeater_title', $repeater_title, $value, $field_title, $this->field);
+											echo esc_html($repeater_title);
+										?>
+									</span>
 									<div class="tf-repeater-icon-absulate">
 										<span class="tf-repeater-icon tf-repeater-icon-move">
 											<i class="fa-solid fa-up-down-left-right"></i>

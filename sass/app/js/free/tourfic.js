@@ -1892,6 +1892,7 @@
             let infant = $('#infant').val();
             let post_id = $('input[name=post_id]').val();
             let check_in_time = $('select[name=check-in-time] option').filter(':selected').val();
+            let variation_type = $('select[name=tf-tour-variation] option').filter(':selected').val();
             var deposit = $('input[name=deposit]').is(':checked');
             var extras = [];
             var quantity = [];
@@ -1925,6 +1926,7 @@
                 infant: infant,
                 check_in_date: check_in_date,
                 check_in_time: check_in_time,
+                variation_type: variation_type,
                 tour_extra: extras,
                 tour_extra_quantity: quantities,
                 deposit: deposit

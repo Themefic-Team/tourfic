@@ -78,8 +78,6 @@
 * {*}_single_booking_details_after_title_text - **file:** `TF_Booking_Details.php` - **dynamic:** `tf_tour/tf_hotel/tf_apartment`
 * tf_{*}_booking_details_customer_section_title_change - **file:** `TF_Booking_Details.php` - **dynamic:** `tour/hotel/apartment`
 
-
-
 #### Enquiry
 * tf_hotel_enquiry_page_title - **file:** `Hotel_Enquiry.php`
 * tf_hotel_enquiry_menu_title - **file:** `Hotel_Enquiry.php`
@@ -91,7 +89,7 @@
 * tf_apartment_enquiry_menu_title - **file:** `Apartment_Enquiry.php`
 * tf_apartment_enquiry_page_heading - **file:** `Apartment_Enquiry.php`
 
-### Search Form
+#### Search Form
 * tf_hotel_search_form_tab_button_text - **file:** `Search_form.php`
 * tf_tour_search_form_tab_button_text - **file:** `Search_form.php`
 * tf_apartment_search_form_tab_button_text - **file:** `Search_form.php`
@@ -99,12 +97,18 @@
 * tf_tour_search_form_submit_button_text - **file:** `Tour.php`
 * tf_apartment_search_form_submit_button_text - **file:** `Apartment.php`
 
-### Archive
+#### Archive
 * tf_archive_post_order - **file:** `archive.php, archive-tours.php` **note:** `WP_Query order param`
 * tf_archive_post_orderby - **file:** `archive.php, archive-tours.php` **note:** `WP_Query orderby param`
 
+#### Tourfic Settings
+* tf_repeater_title - **file:** `TF_repeater.php`
+
 
 ### Action hook
+
+#### Tour
+*tf_tour_booking_form_after_check_in_date - **file:** `Tour.php`
 
 #### Backend Booking
 * tf_before_{*}_backend_booking_form - **file:** `TF_Backend_Booking.php` - **dynamic:** `tour/hotel/apartment`

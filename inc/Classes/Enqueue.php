@@ -313,7 +313,8 @@ class Enqueue {
 								'date'  => $v['date'],
 								'times' => array_map( function ( $v ) {
 									return $v['time'];
-								}, $v['allowed_time'] ?? [] )
+								}, $v['allowed_time'] ?? [] ),
+								'variation_type' => ! empty( $v['variation_type'] ) ? $v['variation_type'] : '',
 							];
 						}, $tf_tour_unserial_custom_date );
 					}
@@ -327,7 +328,8 @@ class Enqueue {
 								'date'  => $v['date'],
 								'times' => array_map( function ( $v ) {
 									return $v['time'];
-								}, $v['allowed_time'] ?? [] )
+								}, $v['allowed_time'] ?? [] ),
+								'variation_type' => ! empty( $v['variation_type'] ) ? $v['variation_type'] : '',
 							];
 						}
 					}, $meta['cont_custom_date'] );
@@ -360,7 +362,7 @@ class Enqueue {
 
 			$single_tour_form_data['tf_tour_selected_template'] = $tf_tour_selected_template;
 			$single_tour_form_data['tour_type']                 = $tour_type;
-			$single_tour_form_data['allowed_times']             = wp_json_encode( $allowed_times ?? [] );
+			$single_tour_form_data['allowed_times']             = wp_json_encode( apply_filters( 'tf_single_tour_form_data_allowed_times', $allowed_times ?? [] ) );
 			$single_tour_form_data['custom_avail']              = ! empty( $custom_avail ) ? $custom_avail : false;
 			$single_tour_form_data['cont_custom_date']          = ! empty( $cont_custom_date ) ? $cont_custom_date : '';
 			$single_tour_form_data['first_day_of_week'] = !empty(Helper::tfopt("tf-week-day-flatpickr")) ? Helper::tfopt("tf-week-day-flatpickr") : 0;
