@@ -767,9 +767,6 @@
             tour_date_options.disable = [];
             tour_date_options.disable.push("today");
         }
-        
-        // remove empty attributes from tour_date_options object
-        // tour_date_options = Object.fromEntries(Object.entries(tour_date_options).filter(([_, v]) => v != '' ));
 
         if(tf_params.tour_form_data.tf_tour_selected_template === 'design-1') {
             $(".tours-check-in-out").flatpickr(tour_date_options);

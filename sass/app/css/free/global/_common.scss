@@ -1802,6 +1802,7 @@ li.tf-filter-item {
                             }
                         }
                         .tf-package-content{
+                            width: calc(100% - 20px);
                             h3{
                                 color: $color-heading;
                                 font-size: 1rem;
