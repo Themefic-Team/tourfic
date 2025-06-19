@@ -368,7 +368,7 @@ class Enqueue {
 		// JS end
 		$inline_scripts .= '}); })(jQuery);';
 
-		wp_add_inline_script( 'tourfic', $inline_scripts );
+		// wp_add_inline_script( 'tourfic', $inline_scripts );
 
 	}
 
