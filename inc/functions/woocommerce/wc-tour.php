@@ -207,7 +207,7 @@ function tf_tours_booking_function() {
 		$pricing_rule = ! empty( $matched_availability['pricing_type'] ) ? $matched_availability['pricing_type'] : '';
 		$min_people = ! empty( $matched_availability['min_person'] ) ? $matched_availability['min_person'] : '';
 		$max_people = ! empty( $matched_availability['max_person'] ) ? $matched_availability['max_person'] : '';
-		$allowed_times_field = ! empty( $matched_availability['allowed_time'] ) ? $matched_availability['allowed_time'] : '';
+		$allowed_times_field = ! empty( $matched_availability['allowed_time'] ) ? $matched_availability['allowed_time'] : [''];
 
 
 		// Daily Tour Booking Capacity && Tour Order retrive from Tourfic Order Table
@@ -412,7 +412,7 @@ function tf_tours_booking_function() {
 			}
 
 
-			$allowed_times_field = ! empty( $matched_availability['allowed_time'] ) ? $matched_availability['allowed_time'] : '';
+			$allowed_times_field = ! empty( $matched_availability['allowed_time'] ) ? $matched_availability['allowed_time'] : [''];
 
 			// Daily Tour Booking Capacity && tour order retrive form tourfic order table
 			$tf_orders_select = array(
@@ -609,7 +609,7 @@ function tf_tours_booking_function() {
 
 	}
 
-	if ( function_exists('is_tf_pro') && is_tf_pro() && $tour_type == 'continuous' ) {
+	if ( function_exists('is_tf_pro') && is_tf_pro() && $tour_type == 'continuous' && !empty($allowed_times_field['time']) ) {
 		$has_valid_time = !empty(array_filter($allowed_times_field['time'], function($t) {
 			return trim($t) !== '';
 		}));

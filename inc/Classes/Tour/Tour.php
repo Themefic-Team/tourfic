@@ -3129,6 +3129,56 @@ class Tour {
 		// Get tour meta options
 		$meta = get_post_meta( get_the_ID(), 'tf_tours_opt', true );
 
+		$tour_availability          = ! empty( $meta['tour_availability'] ) ? json_decode($meta['tour_availability']) : '';
+
+		$tour_found = [];
+		$all_days_available = true;
+
+		$tour_availability = !empty($meta['tour_availability']) ? json_decode($meta['tour_availability']) : null;
+
+		if (!empty($check_in_out) && !empty($tour_availability)) {
+			[$input_start, $input_end] = array_map('trim', explode(' - ', $check_in_out));
+			$start_ts = strtotime($input_start);
+			$end_ts   = strtotime($input_end);
+
+			// Loop through each day in range
+			for ($date = $start_ts; $date <= $end_ts; $date = strtotime('+1 day', $date)) {
+				$current_day = date('Y/m/d', $date);
+				$found = false;
+
+				// Check if current day exists in any available date range
+				foreach ($tour_availability as $range => $data) {
+					if (!isset($data->status) || $data->status !== 'available') {
+						continue;
+					}
+
+					[$range_start, $range_end] = array_map('trim', explode(' - ', $range));
+					$range_start_ts = strtotime($range_start);
+					$range_end_ts   = strtotime($range_end);
+
+					if ($date >= $range_start_ts && $date <= $range_end_ts) {
+						$tour_found[$current_day] = $data;
+						$found = true;
+						break;
+					}
+				}
+
+				if (!$found) {
+					$all_days_available = false;
+					break;
+				}
+			}
+		}
+
+		if ($all_days_available && !empty($tour_found)) {
+			echo "<pre>✅ Matched for all days:\n";
+			var_dump($tour_found);
+			echo "</pre>";
+		} else {
+			echo "❌ One or more dates are unavailable.";
+		}
+
+
 		// Set initial tour availability status
 		$has_tour = false;
 
@@ -3804,7 +3854,7 @@ class Tour {
 
 			$min_people = ! empty( $matched_availability['min_person'] ) ? $matched_availability['min_person'] : '';
 			$max_people = ! empty( $matched_availability['max_person'] ) ? $matched_availability['max_person'] : '';
-			$allowed_times_field = ! empty( $matched_availability['allowed_time'] ) ? $matched_availability['allowed_time'] : '';
+			$allowed_times_field = ! empty( $matched_availability['allowed_time'] ) ? $matched_availability['allowed_time'] : [''];
 
 
 			// Daily Tour Booking Capacity && Tour Order retrive from Tourfic Order Table
@@ -3979,7 +4029,7 @@ class Tour {
 				}
 
 
-				$allowed_times_field = ! empty( $matched_availability['allowed_time'] ) ? $matched_availability['allowed_time'] : '';
+				$allowed_times_field = ! empty( $matched_availability['allowed_time'] ) ? $matched_availability['allowed_time'] : [''];
 
 				// Daily Tour Booking Capacity && tour order retrive form tourfic order table
 				$tf_orders_select    = array(
@@ -4130,7 +4180,7 @@ class Tour {
 			}
 		}
 
-		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_type == 'continuous' ) {
+		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_type == 'continuous' && !empty($allowed_times_field['time']) ) {
 			$has_valid_time = !empty(array_filter($allowed_times_field['time'], function($t) {
 				return trim($t) !== '';
 			}));
