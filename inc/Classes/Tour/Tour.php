@@ -3138,6 +3138,9 @@ class Tour {
 
 		if (!empty($check_in_out) && !empty($tour_availability)) {
 			[$input_start, $input_end] = array_map('trim', explode(' - ', $check_in_out));
+			if(empty($input_end)){
+				$input_end = $input_start;
+			}
 			$start_ts = strtotime($input_start);
 			$end_ts   = strtotime($input_end);
 
