@@ -1090,10 +1090,10 @@ class TF_Options {
 					$item['title'] = '';
 					if ( ! empty( $item['options_count'] ) ) {
 						for ( $i = 0; $i <= $item['options_count'] - 1; $i ++ ) {
-							if ( $item[ 'tf_package_option_' . $i ] == '1' && $item['tf_option_pricing_type_'.$i] == 'group') {
+							if ( $item['tf_option_pricing_type_'.$i] == 'group') {
 								$item['title'] .= __( 'Title: ', 'tourfic' ) . $item['tf_option_title_'.$i] . '<br>';
 								$item['title'] .= __( 'Price: ', 'tourfic' ) . wc_price($item['tf_option_group_price_'.$i]). '<br><br>';
-							} else if($item[ 'tf_package_option_' . $i ] == '1' && $item['tf_option_pricing_type_'.$i] == 'person'){
+							} else if($item['tf_option_pricing_type_'.$i] == 'person'){
 								$item['title'] .= __( 'Title: ', 'tourfic' ) . $item['tf_option_title_'.$i] . '<br>';
 								$item['title'] .= __( 'Adult: ', 'tourfic' ) . wc_price($item['tf_option_adult_price_'.$i]). '<br>';
 								$item['title'] .= __( 'Child: ', 'tourfic' ) . wc_price($item['tf_option_child_price_'.$i]). '<br>';
