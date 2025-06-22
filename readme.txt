@@ -376,6 +376,7 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 - Compatibility: Compatible with the Hello Elementor theme.
 - Compatibility: Compatible with the Elementor Plugin(v3.29).
+- Compatibility: Compatible with the WooCommerce Plugin(v9.9).
 
 = 2.16.6 – June 15, 2025 =
 
