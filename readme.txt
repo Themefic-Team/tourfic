@@ -374,9 +374,10 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 = 2.16.7 – June 22, 2025 =
 
-- Compatibility: Compatible with the Hello Elementor theme.
-- Compatibility: Compatible with the Elementor Plugin(v3.29).
-- Compatibility: Compatible with the WooCommerce Plugin(v9.9).
+- Compatibility: Now fully compatible with the Hello Elementor theme.
+- Compatibility: Compatible with Elementor plugin (v3.29).
+- Compatibility: Compatible with WooCommerce plugin (v9.9).
+- Fixed: Backend booking issue has been resolved.
 
 = 2.16.6 – June 15, 2025 =
 
