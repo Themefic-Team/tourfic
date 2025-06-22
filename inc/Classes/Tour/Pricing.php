@@ -374,10 +374,40 @@ class Pricing {
 			}
 		}
 
+		$discount_type    = !empty($meta['discount_type']) ? $meta['discount_type'] : 'none';
+		$discounted_price = !empty($meta['discount_price']) ? $meta['discount_price'] : 0;
+		if($discount_type == 'percent' || $discount_type == 'fixed') {
+			if($discount_type == 'percent') {
+				if(!empty($min_adult_price)){
+					$min_adult_price = number_format( $min_adult_price - (( $min_adult_price / 100 ) * $discounted_price) , 2, '.', '' );
+				}
+				if(!empty($min_child_price)){
+					$min_child_price = number_format( $min_child_price - (( $min_child_price / 100 ) * $discounted_price) , 2, '.', '' );
+				}
+				if(!empty($min_infant_price)){
+					$min_infant_price = number_format( $min_infant_price - (( $min_infant_price / 100 ) * $discounted_price) , 2, '.', '' );
+				}
+				if(!empty($min_group_price)){
+					$min_group_price = number_format( $min_group_price - (( $min_group_price / 100 ) * $discounted_price) , 2, '.', '' );
+				}
+			} else if($discount_type == 'fixed') {
+				if(!empty($min_adult_price)){
+					$min_adult_price = number_format( ( $min_adult_price - $discounted_price ), 2, '.', '' );
+				}
+				if(!empty($min_child_price)){
+					$min_child_price = number_format( ( $min_child_price - $discounted_price ), 2, '.', '' );
+				}
+				if(!empty($min_infant_price)){
+					$min_infant_price = number_format( ( $min_infant_price - $discounted_price ), 2, '.', '' );
+				}
+				if(!empty($min_group_price)){
+					$min_group_price = number_format( ( $min_group_price - $discounted_price ), 2, '.', '' );
+				}
+			}
+		}
 		return array(
 			'adult_price' => $min_adult_price,
 			'child_price'    => $min_child_price,
-			'infant_price'      => $min_infant_price,
 			'infant_price'      => $min_infant_price,
 			'group_price'      => $min_group_price,
 		);
