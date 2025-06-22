@@ -915,11 +915,6 @@ function tf_car_price_calculation_callback() {
 	$tf_pickup_time  = isset( $_POST['pickup_time'] ) ? sanitize_text_field( $_POST['pickup_time'] ) : '';
 	$tf_dropoff_time  = isset( $_POST['dropoff_time'] ) ? sanitize_text_field( $_POST['dropoff_time'] ) : '';
 
-	error_log(print_r($post_id, true));
-	error_log(print_r($tf_pickup_date, true));
-	error_log(print_r($tf_dropoff_date, true));
-	error_log(print_r($tf_pickup_time, true));
-	error_log(print_r($tf_dropoff_time, true));
 
 	$extra_ids  = isset( $_POST['extra_ids'] ) ? $_POST['extra_ids'] : '';
 	$extra_qty  = isset( $_POST['extra_qty'] ) ? $_POST['extra_qty'] : '';

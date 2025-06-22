@@ -65,10 +65,20 @@ class Car_Rental
 
 
         // Pull options from settings or set fallback values
-        $time_interval = !empty(Helper::tfopt('time_interval')) ? intval(Helper::tfopt('time_interval')) : 30;
-        $start_time_str = !empty(Helper::tfopt('start_time')) ? Helper::tfopt('start_time') : '00:00'; 
-        $end_time_str   = !empty(Helper::tfopt('end_time')) ? Helper::tfopt('end_time') : '23:30';
+        $disable_car_time_slot = !empty(Helper::tfopt('disable-car-time-slots')) ? boolval(Helper::tfopt('disable-car-time-slots')) : false;
+        $time_interval = 30;
+        $start_time_str = '00:00';
+        $end_time_str   = '23:30';
         $default_time_str = '10:00';
+        if($disable_car_time_slot){
+            $time_interval = !empty(Helper::tfopt('car_time_interval')) ? intval(Helper::tfopt('car_time_interval')) : 30;
+            $start_time_str = !empty(Helper::tfopt('car_start_time')) ? Helper::tfopt('car_start_time') : '00:00'; 
+            $end_time_str   = !empty(Helper::tfopt('car_end_time')) ? Helper::tfopt('car_end_time') : '23:30';
+        }
+
+        if ( strtotime($start_time_str) >= strtotime('10:00') ) {
+            $default_time_str = $start_time_str;
+        }
 
         // Convert string times to timestamps
         $start_time = strtotime($start_time_str);

@@ -17,7 +17,6 @@ class Pricing {
 		$pricing_by = !empty($meta["price_by"]) ? $meta["price_by"] : 'day';
 		$initial_pricing = !empty($meta["car_rent"]) ? $meta["car_rent"] : 0;
 
-        error_log(print_r($initial_pricing, true));
         $price_type = $pricing_by;
 
 		$pricing_type = !empty($meta["pricing_type"]) ? $meta["pricing_type"] : 'day_hour';
