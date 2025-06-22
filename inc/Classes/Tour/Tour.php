@@ -971,10 +971,14 @@ class Tour {
 		$disable_child_price    = ! empty( $meta['disable_child_price'] ) ? $meta['disable_child_price'] : false;
 		$disable_infant_price   = ! empty( $meta['disable_infant_price'] ) ? $meta['disable_infant_price'] : false;
 		$pricing_rule           = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
-		$group_price            = ! empty( $meta['group_price'] ) ? $meta['group_price'] : false;
-		$adult_price            = ! empty( $meta['adult_price'] ) ? $meta['adult_price'] : false;
-		$child_price            = ! empty( $meta['child_price'] ) ? $meta['child_price'] : false;
-		$infant_price           = ! empty( $meta['infant_price'] ) ? $meta['infant_price'] : false;
+
+		// Available Prices
+		$avail_prices = Pricing::instance( $post_id )->get_avail_price();
+
+		$group_price            = ! empty( $avail_prices['group_price'] ) ? $avail_prices['group_price'] : false;
+		$adult_price            = ! empty( $avail_prices['adult_price'] ) ? $avail_prices['adult_price'] : false;
+		$child_price            = ! empty( $avail_prices['child_price'] ) ? $avail_prices['child_price'] : false;
+		$infant_price           = ! empty( $avail_prices['infant_price'] ) ? $avail_prices['infant_price'] : false;
 		$tour_extras            = isset( $meta['tour-extra'] ) ? $meta['tour-extra'] : null;
 		$tf_hide_external_price = true;
 
@@ -986,8 +990,7 @@ class Tour {
 			$tour_extras          = unserialize( $tour_extras_unserial );
 
 		}
-		
-		
+
 		// Single Template Check
 		$tf_tour_layout_conditions = ! empty( $meta['tf_single_tour_layout_opt'] ) ? $meta['tf_single_tour_layout_opt'] : 'global';
 		if ( "single" == $tf_tour_layout_conditions ) {
