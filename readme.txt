@@ -374,7 +374,8 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 = 2.16.7 – June 22, 2025 =
 
-- Fixed: Compatibility issue with the Hello Elementor theme has been resolved.
+- Compatibility: Compatible with the Hello Elementor theme.
+- Compatibility: Compatible with the Elementor Plugin(v3.29).
 
 = 2.16.6 – June 15, 2025 =
 
