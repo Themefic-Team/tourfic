@@ -47,6 +47,7 @@ class TF_Options {
 
 		add_action( 'wp_ajax_tf_add_tour_availability', array( $this, 'tf_add_tour_availability' ) );
 		add_action( 'wp_ajax_tf_get_tour_availability', array( $this, 'tf_get_tour_availability' ) );
+		add_action( 'wp_ajax_tf_reset_tour_availability', array( $this, 'tf_reset_tour_availability' ) );
 		add_action( 'save_post', array( $this, 'tf_update_apt_availability_price' ), 99, 2 );
 		add_action( 'wp_ajax_tf_insert_category_data', array( $this, 'tf_insert_category_data_callback' ) );
 		add_action( 'wp_ajax_tf_delete_category_data', array( $this, 'tf_delete_category_data_callback' ) );
@@ -1178,6 +1179,27 @@ class TF_Options {
 		die();
 	}
 
+	/*
+     * Reset tour availability calendar
+     * @auther Jahid
+     */
+	function tf_reset_tour_availability() {
+		// Add nonce for security and authentication.
+		check_ajax_referer( 'updates', '_nonce' );
+
+		$tour_id     = isset( $_POST['tour_id'] ) && ! empty( $_POST['tour_id'] ) ? sanitize_text_field( $_POST['tour_id'] ) : '';
+		
+		$tour_data = get_post_meta( $tour_id, 'tf_tours_opt', true );
+		$tour_data['tour_availability'] = [];
+
+		update_post_meta( $tour_id, 'tf_tours_opt', $tour_data );
+		wp_send_json_success( [
+			'status'           => true,
+			'message'          => __( 'Availability Reset Successfully.', 'tourfic' ),
+			'tour_availability' => [],
+		] );
+		wp_die();
+	}
 	/*
      * Update apt_availability price based on pricing type
      * @auther Foysal

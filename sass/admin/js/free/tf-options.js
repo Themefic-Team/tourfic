@@ -1730,6 +1730,66 @@
             });
         });
 
+        // Reset Calendar Data
+        $(document).on("click", ".tf_tour_cal_reset", function (e) {
+            e.preventDefault();
+            $('.tf-reset-confirmation-box').css('display', 'flex');
+        });
+        $(document).on('click', '.tf-reset-confirmation-box .tf-confirmed-btn', function (e) {
+            e.preventDefault();
+            let btn = $(this);
+            let container = btn.closest('.tf-tour-cal-wrap');
+            let containerEl = btn.closest('.tf-tour-cal-wrap')[0];
+            let cal = container.find('.tf-tour-cal');
+            let tourAvailability = container.find('.tour_availability');
+            $.ajax({
+                url: tf_options.ajax_url,
+                type: 'POST',
+                data: {
+                    'action': 'tf_reset_tour_availability',
+                    '_nonce': tf_admin_params.tf_nonce,
+                    'tour_id': $('#post_ID').val()
+                },
+                beforeSend: function () {
+                    container.css({'pointer-events': 'none', 'opacity': '0.5'})
+                    cal.addClass('tf-content-loading');
+                    btn.addClass('tf-btn-loading');
+                },
+                success: function (response) {
+                    if (response.data.status === true) {
+                        tourAvailability.val(response.data.tour_availability)
+                        notyf.success(response.data.message);
+                        tourResetForm(container);
+
+                        var tour = new tourCal(containerEl);
+                        tour.init();
+                        if (tour.fullCalendar) {
+                            tour.fullCalendar.refetchEvents();
+                        }
+                        $('.tf-reset-confirmation-box').hide();
+                    } else {
+                        notyf.error(response.data.message);
+                    }
+
+                    container.css({'pointer-events': 'auto', 'opacity': '1'})
+                    cal.removeClass('tf-content-loading');
+                    btn.removeClass('tf-btn-loading');
+
+                },
+                error: function (e) {
+                    container.css({'pointer-events': 'auto', 'opacity': '1'})
+                    cal.removeClass('tf-content-loading');
+                    btn.removeClass('tf-btn-loading');
+                },
+                complete: function () {
+                    container.css({'pointer-events': 'auto', 'opacity': '1'});
+                    cal.removeClass('tf-content-loading');
+                    btn.removeClass('tf-btn-loading');
+                    $('.tf-tour-cal-field').removeClass('tf-bulk-popup');
+                },
+            });
+        });
+
         $(document).on('change', '.tf_tour_pricing_type', function (e) {
             let pricingType = $(this).val();
 

@@ -4720,6 +4720,9 @@ a.tf-import-btn, a.tf-export-btn {
   animation: tf-rotate 450ms infinite linear;
 }
 
+.tf-reset-confirmation-box {
+  display: none;
+}
 .tf-reset-confirmation-box .tf-confirmation-content {
   width: 280px;
   padding: 24px;
