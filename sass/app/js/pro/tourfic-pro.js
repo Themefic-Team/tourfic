@@ -1102,6 +1102,7 @@ const TFQRSCANER = () => {
                                 jQuery(".tf-final-submission-form").hide();
                                 jQuery(".tf-scanner-preloader").hide();
                                 jQuery(".tf-final-submission-feedback").show();
+                                jQuery(".tf-tour-infos").html(response.tf_qr_code_result);
                             }
                             if (response.qr_code_response == "false") {
                                 jQuery(".tf-final-submission-form").hide();

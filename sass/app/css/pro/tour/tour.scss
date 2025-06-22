@@ -6,7 +6,7 @@
 .tf-scanner-section{
     padding: 50px 0px;
     min-width: 340px;
-    width: 340px;
+    width: 450px;
     text-align: center;
     margin: 0 auto;
     a.tf_btn{
@@ -99,6 +99,11 @@
                     width: 100%;
                     gap: 16px;
                 }
+            }
+
+            .tf-tour-infos{
+                text-align: left;
+                margin-bottom: 20px;
             }
         }
         .tf-final-error-feedback{
