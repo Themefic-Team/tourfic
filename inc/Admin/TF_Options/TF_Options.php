@@ -879,8 +879,6 @@ class TF_Options {
 									'min_person'   => $tf_tour_min_person,
 									'max_person'   => $tf_tour_max_person,
 									'max_capacity' => $tf_tour_max_capacity,
-									'repeat_month' => $tf_tour_repeat_month,
-									'repeat_year'  => $tf_tour_repeat_year,
 									'allowed_time' => !empty($tf_tour_allowed_time) ? $tf_tour_allowed_time : '',
 									'status'       => $status
 								];
@@ -940,8 +938,6 @@ class TF_Options {
 										'min_person'   => $tf_tour_min_person,
 										'max_person'   => $tf_tour_max_person,
 										'max_capacity' => $tf_tour_max_capacity,
-										'repeat_month' => $tf_tour_repeat_month,
-										'repeat_year'  => $tf_tour_repeat_year,
 										'allowed_time' => !empty($tf_tour_allowed_time) ? $tf_tour_allowed_time : '',
 										'status'       => $status
 									];
@@ -988,8 +984,6 @@ class TF_Options {
 				'min_person'   => $tf_tour_min_person,
 				'max_person'   => $tf_tour_max_person,
 				'max_capacity' => $tf_tour_max_capacity,
-				'repeat_month' => $tf_tour_repeat_month,
-				'repeat_year'  => $tf_tour_repeat_year,
 				'allowed_time' => !empty($tf_tour_allowed_time) ? $tf_tour_allowed_time : '',
 				'status'       => $status
 			];

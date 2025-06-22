@@ -1552,8 +1552,6 @@ class Migrator {
 									'min_person'   => $min_seat,
 									'max_person'   => $max_seat,
 									'max_capacity' => $max_capacity,
-									'repeat_month' => $tf_tour_repeat_month,
-									'repeat_year'  => $tf_tour_repeat_year,
 									'allowed_time' => '',
 									'status'       => 'available'
 								];
@@ -1618,8 +1616,6 @@ class Migrator {
 										'min_person'   => $min_seat,
 										'max_person'   => $max_seat,
 										'max_capacity' => $total_capacity,
-										'repeat_month' => '',
-										'repeat_year'  => '',
 										'allowed_time' => !empty($tf_tour_allowed_time) ? $tf_tour_allowed_time : '',
 										'status'       => 'available'
 									];
@@ -1648,8 +1644,8 @@ class Migrator {
 							];
 						}
 						
-						//add next 3 years availability
-						for ( $i = strtotime( gmdate( 'Y-m-d' ) ); $i <= strtotime( '+3 year', strtotime( gmdate( 'Y-m-d' ) ) ); $i = strtotime( '+1 day', $i ) ) {
+						//add next 1 years availability
+						for ( $i = strtotime( gmdate( 'Y-m-d' ) ); $i <= strtotime( '+1 year', strtotime( gmdate( 'Y-m-d' ) ) ); $i = strtotime( '+1 day', $i ) ) {
 							$tf_tour_inc_date = gmdate( 'Y/m/d', $i );
 
 							$tf_tour_adult_price  = $pricing_rule == 'person' && ! empty( $meta['adult_price'] ) ? $meta['adult_price'] : '';
@@ -1669,8 +1665,6 @@ class Migrator {
 								'min_person'   => $cont_min_people,
 								'max_person'   => $cont_max_people,
 								'max_capacity' => $cont_max_capacity,
-								'repeat_month' => '',
-								'repeat_year'  => '',
 								'allowed_time' => '',
 								'status'       => 'available'
 							];
@@ -1695,8 +1689,6 @@ class Migrator {
 										'min_person'   => '',
 										'max_person'   => '',
 										'max_capacity' => '',
-										'repeat_month' => '',
-										'repeat_year'  => '',
 										'allowed_time' => '',
 										'status'       => 'unavailable'
 									];
@@ -1722,8 +1714,6 @@ class Migrator {
 									'min_person'   => '',
 									'max_person'   => '',
 									'max_capacity' => '',
-									'repeat_month' => '',
-									'repeat_year'  => '',
 									'allowed_time' => '',
 									'status'       => 'unavailable'
 								];
@@ -1750,8 +1740,6 @@ class Migrator {
 										'min_person'   => '',
 										'max_person'   => '',
 										'max_capacity' => '',
-										'repeat_month' => '',
-										'repeat_year'  => '',
 										'allowed_time' => '',
 										'status'       => 'unavailable'
 									];

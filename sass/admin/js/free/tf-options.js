@@ -1481,41 +1481,6 @@
                     if (typeof event.extendedProps.max_capacity != 'undefined') {
                         $("[name='tf_tour_max_capacity']", self.tourCalData).val(event.extendedProps.max_capacity);
                     }
-                    if (typeof event.extendedProps.repeat_month !== 'undefined') {
-                        const selectedMonths = event.extendedProps.repeat_month;
-                        if(event.extendedProps.repeat_month!=''){
-                            // Uncheck all first (optional, to reset)
-                            document.querySelectorAll('input[name="tf_tour_repeat_month[]"]').forEach(el => {
-                                el.checked = false;
-                            });
-                        
-                            // Check those in the array
-                            selectedMonths.forEach(month => {
-                                const checkbox = document.querySelector(`input[name="tf_tour_repeat_month[]"][value="${month}"]`);
-                                if (checkbox) {
-                                    checkbox.checked = true;
-                                }
-                            });
-                        }
-                    }
-
-                    if (typeof event.extendedProps.repeat_year != 'undefined') {
-                        const selectedYears = event.extendedProps.repeat_year;
-                        if(event.extendedProps.repeat_year!=''){
-                            // Uncheck all first (optional, to reset)
-                            document.querySelectorAll('input[name="tf_tour_repeat_year[]"]').forEach(el => {
-                                el.checked = false;
-                            });
-                        
-                            // Check those in the array
-                            selectedYears.forEach(month => {
-                                const checkbox = document.querySelector(`input[name="tf_tour_repeat_year[]"][value="${month}"]`);
-                                if (checkbox) {
-                                    checkbox.checked = true;
-                                }
-                            });
-                        }
-                    }
 
                     // Selected Time
                     let allRepeaterHTML = '';
@@ -1621,7 +1586,6 @@
                     } else {
                         if(event.extendedProps.options_count != 0) {
                             for (var i = 0; i <= event.extendedProps.options_count - 1; i++) {
-                                $("[name='tf_package_option_" + i + "']", self.roomCalData).prop('checked', event.extendedProps["tf_package_option_" + i] == 1);
 
                                 $("[name='tf_option_group_price_" + i + "']", self.roomCalData).val(event.extendedProps["tf_option_group_price_" + i]);
                                 $("[name='tf_option_adult_price_" + i + "']", self.roomCalData).val(event.extendedProps["tf_option_adult_price_" + i]);
@@ -1669,20 +1633,6 @@
             $('[name="tf_tour_min_person"]', tourCalData).val('');
             $('[name="tf_tour_max_person"]', tourCalData).val('');
             $('[name="tf_tour_max_capacity"]', tourCalData).val('');
-
-            // Uncheck all first (optional, to reset)
-            document.querySelectorAll('input[name="tf_tour_repeat_year[]"]').forEach(el => {
-                el.checked = false;
-            });
-            document.querySelectorAll('input[name="tf_tour_repeat_year[]"]').forEach(el => {
-                el.checked = false;
-            });
-            document.querySelectorAll('input[name="tf_tour_repeat_week[]"]').forEach(el => {
-                el.checked = false;
-            });
-            document.querySelectorAll('input[name="tf_tour_repeat_day[]"]').forEach(el => {
-                el.checked = false;
-            });
 
             // More specific selector with error handling
             const container = document.querySelector('.tf_tour_allowed_times');
@@ -1792,75 +1742,11 @@
             }
         });
 
-        // Enable Custom Availability
-        $(document).on("change", ".tf_tour_custom_avail", function (e) {
-            var $this = $(this);
-            if (this.checked) {
-                $('.tf-months-checkbox').hide();
-                $('.tf-years-checkbox').hide();
-
-                document.querySelectorAll('input[name="tf_tour_repeat_month[]"]').forEach(el => {
-                    el.checked = false;
-                });
-                document.querySelectorAll('input[name="tf_tour_repeat_year[]"]').forEach(el => {
-                    el.checked = false;
-                });
-
-                if( $('.tf_tour_custom_pricing_by').val() == 'person' && $('.tf_tour_pricing_type').val() != 'package' ){
-                    $('.tf-tour-person-pricing').show();
-                    $('.tf-tour-group-pricing').hide();
-                }
-                if( $('.tf_tour_custom_pricing_by').val() == 'group' && $('.tf_tour_pricing_type').val() != 'package' ){
-                    $('.tf-tour-group-pricing').show();
-                    $('.tf-tour-person-pricing').hide();
-                }
-            } else {
-                if( $('.tf_tour_pricing_type').val() != 'package' ){
-                    $('.tf-months-checkbox').show();
-                    $('.tf-years-checkbox').show();
-                }
-            }
-        });
-
         // Tour Map Initialize based on Tab
         $(document).on("click", "#tf_tours_opt .tf-tablinks", function (e) {
             var $this = $(this);
             if ($this.attr('data-tab')=='availability'){
                 tfTourCalendar();
-            }
-        });
-
-        // Custom Availability Type
-        $(document).on("change", ".tf_tour_custom_pricing_by", function (e) {
-            var $this = $(this);
-            if($this.val() == 'person'){
-                $('.tf-tour-person-pricing').show();
-                $('.tf-tour-group-pricing').hide();
-            }else{
-                $('.tf-tour-group-pricing').show();
-                $('.tf-tour-person-pricing').hide();
-            }
-        });
-
-        // Tour Type
-        $(document).on("change", ".tf_tour_avail_type", function (e) {
-            var $this = $(this);
-            if($this.val() == 'fixed'){
-                $('.tf-tour-person-pricing').hide();
-                $('.tf-tour-group-pricing').hide();
-
-                $('.tf-months-checkbox').show();
-                $('.tf-years-checkbox').show();
-            }else{
-                $('.tf-months-checkbox').hide();
-                $('.tf-years-checkbox').hide();
-
-                document.querySelectorAll('input[name="tf_tour_repeat_month[]"]').forEach(el => {
-                    el.checked = false;
-                });
-                document.querySelectorAll('input[name="tf_tour_repeat_year[]"]').forEach(el => {
-                    el.checked = false;
-                });
             }
         });
 

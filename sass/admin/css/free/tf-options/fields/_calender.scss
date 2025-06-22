@@ -66,7 +66,8 @@
     gap: 10px;
     flex-wrap: wrap;
 }
-.tf-bulk-popup{
+.tf-bulk-popup,
+.tf-reset-confirmation-box{
     position: fixed;
     left: 0;
     top: 0;
@@ -78,7 +79,7 @@
     justify-content: center;
     z-index: 99999;
     .bulk-popup-content{
-        background-color: #fff;
+        background-color: $color-white;
         border-radius: 10px;
         padding: 14px;
         width: 560px;
@@ -142,7 +143,35 @@
     }
 
 }
-
+.tf-reset-confirmation-box{
+    .tf-confirmation-content{
+        width: 280px;
+        padding: 24px;
+        background-color: $color-white;
+        border-radius: 10px;
+        h3{
+            margin: 0 0 35px 0;
+        }
+        .tf-confirmation-actions{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            button{
+                border-radius: 8px;
+                border: 1px solid $color-success-light;
+                font-size: 14px;
+                background-color: transparent;
+                cursor: pointer;
+                padding: 10px;
+                &.tf-confirmed-btn{
+                    background-color: #003c79;
+                    border-color: #003c79;
+                    color: $color-white;
+                }
+            }
+        }
+    }
+}
 @-webkit-keyframes tf-rotate {
     100% {
         -webkit-transform: rotate(360deg);

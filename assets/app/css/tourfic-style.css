@@ -3524,6 +3524,13 @@ li.tf-filter-item {
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-package .tf-single-package .tf-package-content .tf-pacakge-persons .tf-select-persons .tf-single-person .inc-dec input:focus {
   outline: none;
 }
+.tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-package .tf-single-package .tf-package-content .tf-pacakge-persons .tf-select-persons .tf-single-person .inc-dec input::-webkit-outer-spin-button,
+.tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-package .tf-single-package .tf-package-content .tf-pacakge-persons .tf-select-persons .tf-single-person .inc-dec input::-webkit-inner-spin-button,
+.tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-package .tf-single-package .tf-package-content .tf-pacakge-persons .tf-select-persons .tf-single-person .inc-dec input::-webkit-outer-spin-button,
+.tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-package .tf-single-package .tf-package-content .tf-pacakge-persons .tf-select-persons .tf-single-person .inc-dec input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-package .tf-single-package:has(.tf-package-radio:checked) .tf-pacakge-persons,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-package .tf-single-package:has(.tf-package-radio:checked) .tf-pacakge-persons {
   display: block;

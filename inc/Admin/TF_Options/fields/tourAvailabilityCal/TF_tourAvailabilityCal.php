@@ -323,7 +323,53 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                 </div>
                             </div>
 
-                            <div class="tf-field tf-field-repeater" style="width:100%; display: <?php echo esc_attr( ($tour_avail_type =='fixed' || $tour_avail_type =='continuous') && ( $pricing_type == 'person' || $pricing_type == 'group' ) ? 'block' : 'none' ) ?>">
+                            <div class="tf-single-options tf-tour-packages">
+                            <?php if ( $pricing_type == 'package' ) {
+                                if ( ! empty( $tour_package_options ) ) {
+                                    foreach ( $tour_package_options as $key => $room_option ) {
+                                        $option_pricing_type = ! empty( $room_option['pricing_type'] ) ? $room_option['pricing_type'] : 'person';
+                                        ?>
+                                        <div class="tf-single-option tf-single-package">
+                                            <div class="tf-field-switch">
+                                                <label for="tf_package_option_<?php echo esc_attr( $key ); ?>" class="tf-field-label"><?php echo esc_html( $room_option['pack_title'] ); ?></label>
+                                                
+                                            </div>
+                                            <div class="tf-form-fields">
+                                                <div class="tf-field-text tf_option_pricing_type_group" style="display: <?php echo $option_pricing_type == 'group' ? 'block' : 'none' ?>; width: 100%">
+                                                    <label class="tf-field-label"><?php echo esc_html__( 'Group Price', 'tourfic' ); ?></label>
+                                                    <div class="tf-fieldset">
+                                                        <input type="number" min="0" name="tf_option_group_price_<?php echo esc_attr( $key ); ?>" placeholder="<?php echo esc_attr__( 'Group Price', 'tourfic' ); ?>">
+                                                    </div>
+                                                </div>
+                                                <div class="tf-field-text tf_option_pricing_type_person" style="display: <?php echo $option_pricing_type == 'person' ? 'block' : 'none' ?>;">
+                                                    <label class="tf-field-label"><?php echo esc_html__( 'Adult Price', 'tourfic' ); ?></label>
+                                                    <div class="tf-fieldset">
+                                                        <input type="number" min="0" name="tf_option_adult_price_<?php echo esc_attr( $key ); ?>" placeholder="<?php echo esc_attr__( 'Adult Price', 'tourfic' ); ?>">
+                                                    </div>
+                                                </div>
+                                                <div class="tf-field-text tf_option_pricing_type_person" style="display: <?php echo $option_pricing_type == 'person' ? 'block' : 'none' ?>;">
+                                                    <label class="tf-field-label"><?php echo esc_html__( 'Child Price', 'tourfic' ); ?></label>
+                                                    <div class="tf-fieldset">
+                                                        <input type="number" min="0" name="tf_option_child_price_<?php echo esc_attr( $key ); ?>" placeholder="<?php echo esc_attr__( 'Child Price', 'tourfic' ); ?>">
+                                                    </div>
+                                                </div>
+                                                <div class="tf-field-text tf_option_pricing_type_person" style="display: <?php echo $option_pricing_type == 'person' ? 'block' : 'none' ?>;">
+                                                    <label class="tf-field-label"><?php echo esc_html__( 'Infant Price', 'tourfic' ); ?></label>
+                                                    <div class="tf-fieldset">
+                                                        <input type="number" min="0" name="tf_option_infant_price_<?php echo esc_attr( $key ); ?>" placeholder="<?php echo esc_attr__( 'Infant Price', 'tourfic' ); ?>">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <input type="hidden" name="tf_option_title_<?php echo esc_attr( $key ); ?>" value="<?php echo esc_attr($room_option['pack_title']); ?>"/>
+                                            <input type="hidden" name="tf_option_pricing_type_<?php echo esc_attr( $key ); ?>" value="<?php echo esc_attr($option_pricing_type); ?>"/>
+                                        </div>
+                                        <?php
+                                    }
+                                }
+                            } ?>
+                            </div>
+
+                            <div class="tf-field tf-field-repeater" style="width:100%; display: <?php echo esc_attr( ($tour_avail_type =='fixed' || $tour_avail_type =='continuous') ? 'block' : 'none' ) ?>">
                                 <label for="allowed_time[0][allowed_time]" class="tf-field-label"><?php echo esc_html__( 'Allowed Time', 'tourfic' ); ?> </label>
                                 <div class="tf-fieldset">
                                     <div id="tf-repeater-1" class="tf-repeater allowed_time" data-max-index="0">
@@ -378,52 +424,6 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                 </div>
                             </div>
 
-                            <div class="tf-single-options tf-tour-packages">
-                            <?php if ( $pricing_type == 'package' ) {
-                                if ( ! empty( $tour_package_options ) ) {
-                                    foreach ( $tour_package_options as $key => $room_option ) {
-                                        $option_pricing_type = ! empty( $room_option['pricing_type'] ) ? $room_option['pricing_type'] : 'person';
-                                        ?>
-                                        <div class="tf-single-option tf-single-package">
-                                            <div class="tf-field-switch">
-                                                <label for="tf_package_option_<?php echo esc_attr( $key ); ?>" class="tf-field-label"><?php echo esc_html( $room_option['pack_title'] ); ?></label>
-                                                
-                                            </div>
-                                            <div class="tf-form-fields">
-                                                <div class="tf-field-text tf_option_pricing_type_group" style="display: <?php echo $option_pricing_type == 'group' ? 'block' : 'none' ?>; width: 100%">
-                                                    <label class="tf-field-label"><?php echo esc_html__( 'Group Price', 'tourfic' ); ?></label>
-                                                    <div class="tf-fieldset">
-                                                        <input type="number" min="0" name="tf_option_group_price_<?php echo esc_attr( $key ); ?>" placeholder="<?php echo esc_attr__( 'Group Price', 'tourfic' ); ?>">
-                                                    </div>
-                                                </div>
-                                                <div class="tf-field-text tf_option_pricing_type_person" style="display: <?php echo $option_pricing_type == 'person' ? 'block' : 'none' ?>;">
-                                                    <label class="tf-field-label"><?php echo esc_html__( 'Adult Price', 'tourfic' ); ?></label>
-                                                    <div class="tf-fieldset">
-                                                        <input type="number" min="0" name="tf_option_adult_price_<?php echo esc_attr( $key ); ?>" placeholder="<?php echo esc_attr__( 'Adult Price', 'tourfic' ); ?>">
-                                                    </div>
-                                                </div>
-                                                <div class="tf-field-text tf_option_pricing_type_person" style="display: <?php echo $option_pricing_type == 'person' ? 'block' : 'none' ?>;">
-                                                    <label class="tf-field-label"><?php echo esc_html__( 'Child Price', 'tourfic' ); ?></label>
-                                                    <div class="tf-fieldset">
-                                                        <input type="number" min="0" name="tf_option_child_price_<?php echo esc_attr( $key ); ?>" placeholder="<?php echo esc_attr__( 'Child Price', 'tourfic' ); ?>">
-                                                    </div>
-                                                </div>
-                                                <div class="tf-field-text tf_option_pricing_type_person" style="display: <?php echo $option_pricing_type == 'person' ? 'block' : 'none' ?>;">
-                                                    <label class="tf-field-label"><?php echo esc_html__( 'Infant Price', 'tourfic' ); ?></label>
-                                                    <div class="tf-fieldset">
-                                                        <input type="number" min="0" name="tf_option_infant_price_<?php echo esc_attr( $key ); ?>" placeholder="<?php echo esc_attr__( 'Infant Price', 'tourfic' ); ?>">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <input type="hidden" name="tf_option_title_<?php echo esc_attr( $key ); ?>" value="<?php echo esc_attr($room_option['pack_title']); ?>"/>
-                                            <input type="hidden" name="tf_option_pricing_type_<?php echo esc_attr( $key ); ?>" value="<?php echo esc_attr($option_pricing_type); ?>"/>
-                                        </div>
-                                        <?php
-                                    }
-                                }
-                            } ?>
-                            </div>
-
                             <div class="tf-field-select" style="width: calc(50% - 5px)">
                                 <label class="tf-field-label"><?php echo esc_html__( 'Status', 'tourfic' ); ?></label>
                                 <select name="tf_tour_status" class="tf-select">
@@ -432,11 +432,23 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                 </select>
                             </div>
 
+                            <div class="tf-reset-confirmation-box">
+                                <div class="tf-confirmation-content">
+                                    <h3><?php echo esc_html__( 'Are you sure you want to reset this calendar?', 'tourfic' ); ?></h3>
+                                    <div class="tf-confirmation-actions">
+                                        <button class="tf-cancel-btn"><?php echo esc_html__( 'Cancel', 'tourfic' ); ?></button>
+                                        <button class="tf-confirmed-btn"><?php echo esc_html__( 'Confirmed', 'tourfic' ); ?></button>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div style="width: 100%; display: flex; justify-content: space-between;">
                                 <input type="hidden" name="new_post" value="<?php echo $this->value ? 'false' : 'true'; ?>">
                                 <input type="hidden" name="tour_id" value="<?php echo esc_attr( get_the_ID() ); ?>">
                                 <input type="hidden" name="bulk_edit_option" class="tf_bulk_edit_option">
                                 <span class="tf_tour_cal_update button button-primary button-large"><?php echo esc_html__( 'Save Calendar', 'tourfic' ); ?></span>
+
+                                <span class="tf_tour_cal_reset button button-primary button-large"><?php echo esc_html__( 'Reset Calendar', 'tourfic' ); ?></span>
 
                                 <span class="tf_tour_cal_bulk_edit button button-primary button-large"><?php echo esc_html__( 'Bulk Edit', 'tourfic' ); ?></span>
                             </div>
