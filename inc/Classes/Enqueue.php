@@ -25,6 +25,7 @@ class Enqueue {
 		add_action( 'admin_enqueue_scripts', array( $this, 'tf_options_admin_enqueue_scripts' ), 9 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'tf_options_wp_enqueue_scripts' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'tf_global_custom_css' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'tf_custom_css_conflicts_resolve' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'tf_required_taxonomies' ) );
 	}
 
@@ -156,7 +157,7 @@ class Enqueue {
 		 * v4.6.13
 		 */
 		if ( $flatpickr_cdn ) {
-			wp_enqueue_style( 'tf-flatpickr', '//cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css', array(), TF_VERSION );
+			wp_enqueue_style( 'tf-flatpickr', '//cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css', array( ), TF_VERSION );
 			wp_enqueue_script( 'tf-flatpickr', '//cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js', array( 'jquery' ), TF_VERSION, true );
 			if ( in_array( $flatpickr_locale, $allowed_locale ) ) {
 				wp_enqueue_script( 'flatpickr-locale', TF_ASSETS_URL . 'app/libs/flatpickr/l10n/' . $flatpickr_locale . '.min.js', array( 'jquery' ), TF_VERSION, true );
@@ -1287,6 +1288,25 @@ class Enqueue {
 
 		if (wp_style_is('tf-app-style', 'enqueued')) {
 			wp_add_inline_style('tf-app-style', apply_filters('tf-global-css', $output));
+		}
+	}
+
+	public function tf_custom_css_conflicts_resolve() {
+		$output = '';
+
+		if( wp_get_theme() && wp_get_theme()->get( 'TextDomain' ) === 'hello-elementor' ) {
+			$output .= <<<'EOD'
+			/* Fix for Hello Elementor theme flatpicker conflict */
+
+			.flatpickr-months .flatpickr-current-month {
+				display: flex;
+				gap: 8px;
+			}
+			EOD;
+		}
+
+		if (wp_style_is('tf-app-style', 'enqueued')) {
+			wp_add_inline_style('tf-app-style', apply_filters('tf-custom-css-conflict-resolve', $output));
 		}
 	}
 
