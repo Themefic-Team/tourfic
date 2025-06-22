@@ -9,9 +9,9 @@
  * Domain Path:     /lang/
  * Version:         2.16.6
  * Tested up to:    6.8
- * WC tested up to: 9.8
+ * WC tested up to: 9.9
  * Requires PHP:    7.4
- * Elementor tested up to: 3.28
+ * Elementor tested up to: 3.29
  */
 
 // Don't load directly
@@ -25,7 +25,7 @@ final class Tourfic {
 	 * @var string
 	 */
 
-	const VERSION = '2.16.6';
+	const VERSION = '2.16.7';
 
 	/**
 	 * Minimum PHP version required.
