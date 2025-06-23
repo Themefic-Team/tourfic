@@ -20,6 +20,8 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
 			$meta         = get_post_meta( $post->ID, 'tf_tours_opt', true );
 			$pricing_type = ! empty( $meta['pricing'] ) ? $meta['pricing'] : 'person';
             $tour_package_options = ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : [];
+            $group_package_option = ! empty( $meta['allow_package_pricing'] ) ? $meta['allow_package_pricing'] : '';
+            $group_package_pricing = ! empty( $meta['group_package_pricing'] ) ? $meta['group_package_pricing'] : '';
             $tour_avail_type = ! empty( $meta['type'] ) ? $meta['type'] : 'continuous';
 			if ( Helper::tf_is_woo_active() ) {
 				?>
@@ -288,7 +290,7 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                 <input readonly="readonly" type="text" class="tf_tour_check_out" name="tf_tour_check_out" placeholder="<?php echo esc_html__( 'Check Out', 'tourfic' ); ?>">
                             </div>
 
-                            <div class="tf-field-text tf-tour-group-pricing" style="display: <?php echo esc_attr($pricing_type == 'group' ? 'block' : 'none' ) ?>; width: 100%">
+                            <div class="tf-field-text tf-tour-group-pricing" style="display: <?php echo esc_attr($pricing_type == 'group' && ( empty($group_package_option) || empty($group_package_pricing) ) ? 'block' : 'none' ) ?>; width: 100%">
                                 <label class="tf-field-label"><?php echo esc_html__( 'Price', 'tourfic' ); ?></label>
                                 <input type="number" min="0" name="tf_tour_price" placeholder="<?php echo esc_html__( 'Price', 'tourfic' ); ?>">
                             </div>
@@ -323,8 +325,9 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                 </div>
                             </div>
 
+                            <?php if ( $pricing_type == 'package' ) { ?>
                             <div class="tf-single-options tf-tour-packages">
-                            <?php if ( $pricing_type == 'package' ) {
+                                <?php
                                 if ( ! empty( $tour_package_options ) ) {
                                     foreach ( $tour_package_options as $key => $room_option ) {
                                         $option_pricing_type = ! empty( $room_option['pricing_type'] ) ? $room_option['pricing_type'] : 'person';
@@ -366,8 +369,38 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                         <?php
                                     }
                                 }
-                            } ?>
+                                ?>
                             </div>
+                            <?php } ?>
+
+                            <?php 
+                            if ( $pricing_type == 'group' && !empty($group_package_option) && !empty($group_package_pricing) ) {  
+                            ?>
+                            <div class="tf-single-options tf-group-packages">
+                                    <?php
+                                    foreach ( $group_package_pricing as $key => $pack ) {
+                                    ?>
+                                        <div class="tf-single-option tf-single-package">
+                                            <div class="tf-field-switch">
+                                                <label for="tf_package_option_<?php echo esc_attr( $key ); ?>" class="tf-field-label"><?php echo esc_html( $room_option['pack_title'] ); ?></label>
+                                                
+                                            </div>
+                                            <div class="tf-form-fields">
+                                                <div class="tf-field-text tf_option_pricing_type_group" style="width: 100%">
+                                                    <label class="tf-field-label"><?php echo esc_html__( 'Group Price', 'tourfic' ); ?></label>
+                                                    <div class="tf-fieldset">
+                                                        <input type="number" min="0" name="tf_option_group_price_<?php echo esc_attr( $key ); ?>" placeholder="<?php echo esc_attr__( 'Group Price', 'tourfic' ); ?>">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <input type="hidden" name="tf_option_title_<?php echo esc_attr( $key ); ?>" value="<?php echo esc_attr($room_option['pack_title']); ?>"/>
+                                            <input type="hidden" name="tf_option_pricing_type_<?php echo esc_attr( $key ); ?>" value="group"/>
+                                        </div>
+                                    <?php
+                                    }
+                                ?>
+                            </div>
+                            <?php } ?>
 
                             <div class="tf-field tf-field-repeater" style="width:100%; display: <?php echo esc_attr( ($tour_avail_type =='fixed' || $tour_avail_type =='continuous') ? 'block' : 'none' ) ?>">
                                 <label for="allowed_time[0][allowed_time]" class="tf-field-label"><?php echo esc_html__( 'Allowed Time', 'tourfic' ); ?> </label>
