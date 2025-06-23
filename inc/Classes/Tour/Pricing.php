@@ -303,9 +303,13 @@ class Pricing {
 		$pricing_rule                     = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
 		$tour_availability_data = isset( $meta['tour_availability'] ) && ! empty( $meta['tour_availability'] ) ? json_decode( $meta['tour_availability'], true ) : [];
 		$min_adult_price = null;
+		$min_adult_sale_price = null;
 		$min_child_price = null;
+		$min_child_sale_price = null;
 		$min_infant_price = null;
+		$min_infant_sale_price = null;
 		$min_group_price = null;
+		$min_group_sale_price = null;
 
 		foreach ($tour_availability_data as $data) {
 			if ($data['status'] !== 'available') {
@@ -379,37 +383,49 @@ class Pricing {
 		if($discount_type == 'percent' || $discount_type == 'fixed') {
 			if($discount_type == 'percent') {
 				if(!empty($min_adult_price)){
+					$min_adult_sale_price = $min_adult_price;
 					$min_adult_price = number_format( $min_adult_price - (( $min_adult_price / 100 ) * $discounted_price) , 2, '.', '' );
 				}
 				if(!empty($min_child_price)){
+					$min_child_sale_price = $min_child_price;
 					$min_child_price = number_format( $min_child_price - (( $min_child_price / 100 ) * $discounted_price) , 2, '.', '' );
 				}
 				if(!empty($min_infant_price)){
+					$min_infant_sale_price = $min_infant_price;
 					$min_infant_price = number_format( $min_infant_price - (( $min_infant_price / 100 ) * $discounted_price) , 2, '.', '' );
 				}
 				if(!empty($min_group_price)){
+					$min_group_sale_price = $min_group_price;
 					$min_group_price = number_format( $min_group_price - (( $min_group_price / 100 ) * $discounted_price) , 2, '.', '' );
 				}
 			} else if($discount_type == 'fixed') {
 				if(!empty($min_adult_price)){
+					$min_adult_sale_price = $min_adult_price;
 					$min_adult_price = number_format( ( $min_adult_price - $discounted_price ), 2, '.', '' );
 				}
 				if(!empty($min_child_price)){
+					$min_child_sale_price = $min_child_price;
 					$min_child_price = number_format( ( $min_child_price - $discounted_price ), 2, '.', '' );
 				}
 				if(!empty($min_infant_price)){
+					$min_infant_sale_price = $min_infant_price;
 					$min_infant_price = number_format( ( $min_infant_price - $discounted_price ), 2, '.', '' );
 				}
 				if(!empty($min_group_price)){
+					$min_group_sale_price = $min_group_price;
 					$min_group_price = number_format( ( $min_group_price - $discounted_price ), 2, '.', '' );
 				}
 			}
 		}
 		return array(
 			'adult_price' => $min_adult_price,
+			'sale_adult_price' => $min_adult_sale_price,
 			'child_price'    => $min_child_price,
+			'sale_child_price'    => $min_child_sale_price,
 			'infant_price'      => $min_infant_price,
+			'sale_infant_price'      => $min_infant_sale_price,
 			'group_price'      => $min_group_price,
+			'sale_group_price'      => $min_group_sale_price,
 		);
 	}
 

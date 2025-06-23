@@ -974,7 +974,7 @@ class Tour {
 
 		// Available Prices
 		$avail_prices = Pricing::instance( $post_id )->get_avail_price();
-
+		// var_dump($avail_prices);
 		$group_price            = ! empty( $avail_prices['group_price'] ) ? $avail_prices['group_price'] : false;
 		$adult_price            = ! empty( $avail_prices['adult_price'] ) ? $avail_prices['adult_price'] : false;
 		$child_price            = ! empty( $avail_prices['child_price'] ) ? $avail_prices['child_price'] : false;
@@ -1248,8 +1248,8 @@ class Tour {
 
 										if ( $tf_hide_external_price ) : ?>
                                             <div class="acr-adult-price">
-												<?php if ( $pricing_rule == 'person' && ( ! empty( $tour_price->wc_sale_adult ) || ! empty( $tour_price->wc_adult ) ) ) {
-													echo ! empty( $tour_price->wc_sale_adult ) ? '<del>' . esc_html( wp_strip_all_tags( $tour_price->wc_adult ) ) . '</del>' . " " . wp_kses_post( $tour_price->wc_sale_adult ) : wp_kses_post( $tour_price->wc_adult );
+												<?php if ( $pricing_rule == 'person' && ( ! empty( $avail_prices['sale_adult_price'] ) || ! empty( $adult_price ) ) ) {
+													echo ! empty( $avail_prices['sale_adult_price'] ) ? '<del>' . esc_html( wp_strip_all_tags( wc_price($avail_prices['sale_adult_price']) ) ) . '</del>' . " " . wp_kses_post( wc_price($adult_price) ) : wp_kses_post( wc_price($adult_price) );
 												} ?>
                                             </div>
 										<?php endif; ?>
@@ -1292,8 +1292,8 @@ class Tour {
 										<?php esc_html_e( 'Children', 'tourfic' ); ?>
 										<?php if ( $tf_hide_external_price ) : ?>
                                             <div class="acr-child-price">
-												<?php if ( $pricing_rule == 'person' && ( ! empty( $tour_price->wc_sale_child ) || ! empty( $tour_price->wc_child ) ) ) {
-													echo ! empty( $tour_price->wc_sale_child ) ? '<del>' . esc_html( wp_strip_all_tags( $tour_price->wc_child ) ) . '</del>' . " " . wp_kses_post( $tour_price->wc_sale_child ) : wp_kses_post( $tour_price->wc_child );
+												<?php if ( $pricing_rule == 'person' && ( ! empty( $avail_prices['sale_child_price'] ) || ! empty( $child_price ) ) ) {
+													echo ! empty( $avail_prices['sale_child_price'] ) ? '<del>' . esc_html( wp_strip_all_tags( wc_price($avail_prices['sale_child_price']) ) ) . '</del>' . " " . wp_kses_post( wc_price($child_price) ) : wp_kses_post( wc_price($child_price) );
 												} ?>
                                             </div>
 										<?php endif; ?>
@@ -1335,8 +1335,8 @@ class Tour {
 										<?php esc_html_e( 'Infant', 'tourfic' ); ?>
 										<?php if ( $tf_hide_external_price ) : ?>
                                             <div class="acr-infant-price">
-												<?php if ( $pricing_rule == 'person' && ( ! empty( $tour_price->wc_sale_infant ) || ! empty( $tour_price->wc_infant ) ) ) {
-													echo ! empty( $tour_price->wc_sale_infant ) ? '<del>' . esc_html( wp_strip_all_tags( $tour_price->wc_infant ) ) . '</del>' . " " . wp_kses_post( $tour_price->wc_sale_infant ) : wp_kses_post( $tour_price->wc_infant );
+												<?php if ( $pricing_rule == 'person' && ( ! empty( $avail_prices['sale_infant_price'] ) || ! empty( $infant_price ) ) ) {
+													echo ! empty( $avail_prices['sale_infant_price'] ) ? '<del>' . esc_html( wp_strip_all_tags( wc_price($avail_prices['sale_infant_price']) ) ) . '</del>' . " " . wp_kses_post( wc_price($infant_price) ) : wp_kses_post( wc_price($infant_price) );
 												} ?>
                                             </div>
 										<?php endif; ?>
