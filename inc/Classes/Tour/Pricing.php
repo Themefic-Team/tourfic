@@ -316,60 +316,62 @@ class Pricing {
 				continue;
 			}
 
-			if($data['pricing_type'] != 'package'){
+			if($pricing_rule != 'package' && $data['pricing_type'] != 'package'){
 				// Adult Price
-				if (!empty($data['adult_price']) && is_numeric($data['adult_price'])) {
+				if (!empty($data['adult_price'])) {
 					if (is_null($min_adult_price) || $data['adult_price'] < $min_adult_price) {
 						$min_adult_price = $data['adult_price'];
 					}
 				}
 
 				// Child Price
-				if (!empty($data['child_price']) && is_numeric($data['child_price'])) {
+				if (!empty($data['child_price'])) {
 					if (is_null($min_child_price) || $data['child_price'] < $min_child_price) {
 						$min_child_price = $data['child_price'];
 					}
 				}
 
 				// Infant Price
-				if (!empty($data['infant_price']) && is_numeric($data['infant_price'])) {
+				if (!empty($data['infant_price'])) {
 					if (is_null($min_infant_price) || $data['infant_price'] < $min_infant_price) {
 						$min_infant_price = $data['infant_price'];
 					}
 				}
 
 				// Group Price
-				if (!empty($data['price']) && is_numeric($data['price'])) {
+				if (!empty($data['price'])) {
 					if (is_null($min_group_price) || $data['price'] < $min_group_price) {
 						$min_group_price = $data['price'];
 					}
 				}
 			}
-			if($data['pricing_type'] == 'package'){
+			
+			if( $pricing_rule == 'package' && $data['pricing_type'] == 'package'){
 				if(!empty($data['options_count'])){
 					for($i = 0; $i < $data['options_count']; $i++){
 
-						if (!empty($data['tf_option_adult_price_'.$i]) && is_numeric('tf_option_adult_price_'.$i)) {
-							if (is_null($min_adult_price) || 'tf_option_adult_price_'.$i < $min_adult_price) {
-								$min_adult_price = 'tf_option_adult_price_'.$i;
+						if (!empty($data['tf_option_adult_price_'.$i])) {
+							if (is_null($min_adult_price) || $data['tf_option_adult_price_'.$i] < $min_adult_price) {
+								$min_adult_price = $data['tf_option_adult_price_'.$i];
+								
 							}
 						}
 
-						if (!empty($data['tf_option_child_price_'.$i]) && is_numeric('tf_option_child_price_'.$i)) {
-							if (is_null($min_adult_price) || 'tf_option_child_price_'.$i < $min_adult_price) {
-								$min_adult_price = 'tf_option_child_price_'.$i;
+						if (!empty($data['tf_option_child_price_'.$i])) {
+							if (is_null($min_child_price) || $data['tf_option_child_price_'.$i] < $min_child_price) {
+								$min_child_price = $data['tf_option_child_price_'.$i];
 							}
 						}
 
-						if (!empty($data['tf_option_infant_price_'.$i]) && is_numeric('tf_option_infant_price_'.$i)) {
-							if (is_null($min_adult_price) || 'tf_option_infant_price_'.$i < $min_adult_price) {
-								$min_adult_price = 'tf_option_infant_price_'.$i;
+						if (!empty($data['tf_option_infant_price_'.$i])) {
+							if (is_null($min_infant_price) || $data['tf_option_infant_price_'.$i] < $min_infant_price) {
+								$min_infant_price = $data['tf_option_infant_price_'.$i];
 							}
 						}
 
-						if (!empty($data['tf_option_group_price_'.$i]) && is_numeric('tf_option_group_price_'.$i)) {
-							if (is_null($min_adult_price) || 'tf_option_group_price_'.$i < $min_adult_price) {
-								$min_adult_price = 'tf_option_group_price_'.$i;
+						if (!empty($data['tf_option_group_price_'.$i])) {
+							if (is_null($min_group_price) || $data['tf_option_group_price_'.$i] < $min_group_price) {
+								$min_group_price = $data['tf_option_group_price_'.$i];
 							}
 						}
 

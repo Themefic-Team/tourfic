@@ -172,8 +172,8 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                 <div class="tf-single-details-wrapper tf-mt-30">
                     <div class="tf-single-details-inner tf-flex">
                         <div class="tf-tour-details-left">
-
 							<?php
+                            $avail_prices = Pricing::instance( $post_id )->get_avail_price();
 							if ( ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour-layout'] ) ) {
 								foreach ( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour-layout'] as $section ) {
 									if ( ! empty( $section['status'] ) && $section['status'] == "1" && ! empty( $section['slug'] ) ) {
@@ -211,8 +211,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                                 $tour_price = [];
                                                 $tf_pricing_rule = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
                                                 $tour_single_price_settings = !empty(Helper::tfopt('tour_archive_price_minimum_settings')) ? Helper::tfopt('tour_archive_price_minimum_settings') : 'all';
-
-                                                $avail_prices = Pricing::instance( $post_id )->get_avail_price();
+                                                
                                                 $min_sale_price = null;
                                                 if( $tf_pricing_rule  && $tf_pricing_rule == 'person' ){
                                                     if($tour_single_price_settings == 'all') {
@@ -286,9 +285,9 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                                     $tf_tour_min_price      = !empty($tour_price) ? min( $tour_price ) : 0;
                                                     
                                                     if ( ! empty( $min_sale_price ) ) {
-                                                        echo wp_kses_post($tf_tour_min_price). " " . "<span><del>" . wp_kses_post(wp_strip_all_tags(wc_price( $min_sale_price ))) . "</del></span>";
+                                                        echo wp_kses_post(wp_strip_all_tags(wc_price($tf_tour_min_price))). " " . "<span><del>" . wp_kses_post(wp_strip_all_tags(wc_price( $min_sale_price ))) . "</del></span>";
                                                     } else {
-                                                        echo wp_kses_post($tf_tour_min_price);
+                                                        echo wp_kses_post(wp_strip_all_tags(wc_price($tf_tour_min_price)));
                                                     }
                                                     ?>
                                                     </p>

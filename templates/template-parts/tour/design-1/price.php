@@ -4,7 +4,8 @@
         <!-- Single Tour short details -->
         <div class="tf-short-info">
             <ul class="tf-list">
-				<?php if ( ! empty( $tour_duration ) ) { ?>
+				<?php 
+				if ( ! empty( $tour_duration ) ) { ?>
                     <li class="tf-flex tf-flex-gap-8">
                         <i class="fa-regular fa-clock"></i>
 						<?php echo esc_html( $tour_duration ); ?>
@@ -102,15 +103,15 @@
 
 					} elseif ( $pricing_rule == 'person' ) {
 
-						if ( ! $disable_adult && ! empty( $tour_price->adult ) ) {
+						if ( ! $disable_adult && ! empty( $avail_prices['adult_price'] ) ) {
 							echo '<li data="adult" class="person-info active"><i class="fa-solid fa-user"></i><p>' . esc_html__( "Adult", "tourfic" ) . '</p></li>';
 						}
-						if ( ! $disable_child && ! empty( $tour_price->child ) ) {
-                            $active_class = $disable_adult || empty( $tour_price->adult) ? 'active' : '';
+						if ( ! $disable_child && ! empty( $avail_prices['child_price'] ) ) {
+                            $active_class = $disable_adult || empty( $avail_prices['adult_price']) ? 'active' : '';
 							echo '<li data="child" class="person-info '. esc_attr($active_class) .'"><i class="fa-solid fa-child"></i><p>' . esc_html__( "Child", "tourfic" ) . '</p></li>';
 						}
-						if ( ! $disable_adult && ( ! $disable_infant && ! empty( $tour_price->infant ) ) ) {
-                            $active_class = ($disable_adult || empty( $tour_price->adult)) && ($disable_child || empty( $tour_price->child )) ? 'active' : '';
+						if ( ! $disable_adult && ( ! $disable_infant && ! empty( $avail_prices['infant_price'] ) ) ) {
+                            $active_class = ($disable_adult || empty( $avail_prices['adult_price'])) && ($disable_child || empty( $avail_prices['child_price'] )) ? 'active' : '';
 							echo '<li data="infant" class="person-info '. esc_attr($active_class) .'"><i class="fa-solid fa-baby"></i><p>' . esc_html__( "Infant", "tourfic" ) . '</p></li>';
 						}
 					}
@@ -120,28 +121,28 @@
 			<?php if ( $pricing_rule == 'group' ) { ?>
                 <div class="tf-trip-pricing tf-flex tf-group active">
                     <span class="tf-price-label"> <?php esc_html_e( "From", "tourfic" ); ?></span>
-                    <span class="tf-price-amount"><?php echo isset($tour_price->wc_sale_group) ? wp_kses_post($tour_price->wc_sale_group) : wp_kses_post($tour_price->wc_group); ?></span>
+                    <span class="tf-price-amount"><?php echo wp_kses_post(wc_price($avail_prices['group_price'])); ?></span>
                     <span class="tf-price-label-bttm"><?php esc_html_e( "Per Group", "tourfic" ); ?></span>
                 </div>
 			<?php } elseif ( $pricing_rule == 'person' ) { ?>
-				<?php if ( ! $disable_adult && ! empty( $tour_price->adult ) ) { ?>
+				<?php if ( ! $disable_adult && ! empty( $avail_prices['adult_price'] ) ) { ?>
                     <div class="tf-trip-pricing tf-flex tf-adult active">
                         <span class="tf-price-label"> <?php esc_html_e( "From", "tourfic" ); ?></span>
-                        <span class="tf-price-amount"><?php echo isset($tour_price->wc_sale_adult) ? wp_kses_post($tour_price->wc_sale_adult) : wp_kses_post($tour_price->wc_adult); ?></span>
+                        <span class="tf-price-amount"><?php echo wp_kses_post(wc_price($avail_prices['adult_price'])); ?></span>
                         <span class="tf-price-label-bttm"><?php esc_html_e( "Per Adult", "tourfic" ); ?></span>
                     </div>
 				<?php }
-				if ( ! $disable_child && ! empty( $tour_price->child ) ) { ?>
-                    <div class="tf-trip-pricing tf-flex tf-child <?php echo $disable_adult || empty( $tour_price->adult ) ? esc_attr('active') : ''; ?>">
+				if ( ! $disable_child && ! empty( $avail_prices['child_price'] ) ) { ?>
+                    <div class="tf-trip-pricing tf-flex tf-child <?php echo $disable_adult || empty( $avail_prices['adult_price'] ) ? esc_attr('active') : ''; ?>">
                         <span class="tf-price-label"> <?php esc_html_e( "From", "tourfic" ); ?></span>
-                        <span class="tf-price-amount"><?php echo isset( $tour_price->wc_sale_child ) ? wp_kses_post($tour_price->wc_sale_child) : wp_kses_post($tour_price->wc_child); ?></span>
+                        <span class="tf-price-amount"><?php echo wp_kses_post(wc_price($avail_prices['child_price'])); ?></span>
                         <span class="tf-price-label-bttm"><?php esc_html_e( "Per Child", "tourfic" ); ?></span>
                     </div>
 				<?php }
-				if ( ! $disable_adult && ( ! $disable_infant && ! empty( $tour_price->infant ) ) ) { ?>
-                    <div class="tf-trip-pricing tf-flex tf-infant <?php echo ($disable_adult || empty( $tour_price->adult)) && ($disable_child || empty( $tour_price->child )) ? esc_attr('active') : ''; ?>">
+				if ( ! $disable_adult && ( ! $disable_infant && ! empty( $avail_prices['infant_price'] ) ) ) { ?>
+                    <div class="tf-trip-pricing tf-flex tf-infant <?php echo ($disable_adult || empty( $avail_prices['adult_price'])) && ($disable_child || empty( $avail_prices['child_price'] )) ? esc_attr('active') : ''; ?>">
                         <span class="tf-price-label"> <?php esc_html_e( "From", "tourfic" ); ?></span>
-                        <span class="tf-price-amount"><?php echo isset($tour_price->wc_sale_infant) ? wp_kses_post($tour_price->wc_sale_infant) : wp_kses_post($tour_price->wc_infant); ?></span>
+                        <span class="tf-price-amount"><?php echo wp_kses_post(wc_price($avail_prices['infant_price'])); ?></span>
                         <span class="tf-price-label-bttm"><?php esc_html_e( "Per Infant", "tourfic" ); ?></span>
                     </div>
 				<?php } ?>
