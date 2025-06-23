@@ -11,18 +11,29 @@ $tf_dropoff_date = !empty($_GET['dropoff_date']) ? $_GET['dropoff_date'] : '';
 
 // Pull options from settings or set fallback values
 $disable_car_time_slot = !empty(Helper::tfopt('disable-car-time-slots')) ? boolval(Helper::tfopt('disable-car-time-slots')) : false;
+$car_time_slots = !empty(Helper::tfopt('car_time_slots')) ? Helper::tfopt('car_time_slots') : '';
+$unserialize_car_time_slots = !empty($car_time_slots) ? unserialize($car_time_slots) : array();
+
 $time_interval = 30;
 $start_time_str = '00:00';
 $end_time_str   = '23:30';
 $default_time_str = '10:00';
+$next_current_day = date('l', strtotime('+1 day'));
+
 if($disable_car_time_slot){
     $time_interval = !empty(Helper::tfopt('car_time_interval')) ? intval(Helper::tfopt('car_time_interval')) : 30;
-    $start_time_str = !empty(Helper::tfopt('car_start_time')) ? Helper::tfopt('car_start_time') : '00:00'; 
-    $end_time_str   = !empty(Helper::tfopt('car_end_time')) ? Helper::tfopt('car_end_time') : '23:30';
-}
-
-if ( strtotime($start_time_str) >= strtotime('10:00') ) {
-    $default_time_str = $start_time_str;
+    if (!empty($unserialize_car_time_slots)) {
+        foreach ($unserialize_car_time_slots as $slot) {
+            if (isset($slot['day']) && strtolower($slot['day']) == strtolower($next_current_day)) {
+                $start_time_str = !empty($slot['pickup_time']) ? $slot['pickup_time'] : $start_time_str;
+                $end_time_str   = !empty($slot['drop_time']) ? $slot['drop_time'] : $end_time_str;
+                if ( strtotime($start_time_str) >= strtotime('10:00') ) {
+                    $default_time_str = $start_time_str;
+                }
+                break; 
+            }
+        }
+    }
 }
 
 // Convert string times to timestamps
@@ -893,8 +904,8 @@ $tf_cars_slug = get_option('car_slug');
             </div>
             <?php } ?>
             <?php
-            // Review moderation notice
-            echo wp_kses_post( TF_Review::tf_pending_review_notice( $post_id ) ?? '' );
+                // Review moderation notice
+                echo wp_kses_post( TF_Review::tf_pending_review_notice( $post_id ) ?? '' );
             ?>
             <?php
 
@@ -944,7 +955,6 @@ $tf_cars_slug = get_option('car_slug');
                 onReady: function (selectedDates, dateStr, instance) {
                     dateSetToFields(selectedDates, instance);
                 },
-
                 onChange: function (selectedDates, dateStr, instance) {
                     dateSetToFields(selectedDates, instance);
                 },
@@ -955,6 +965,8 @@ $tf_cars_slug = get_option('car_slug');
 
             function dateSetToFields(selectedDates, instance) {
                 if (selectedDates.length === 2) {
+                    const startDay = flatpickr.formatDate(selectedDates[0], "l");
+                    const endDay = flatpickr.formatDate(selectedDates[1], "l");
                     if (selectedDates[0]) {
                         const startDate = flatpickr.formatDate(selectedDates[0], "Y/m/d");
                         $(".tf-single-template__one #tf_pickup_date").val(startDate);
@@ -963,9 +975,22 @@ $tf_cars_slug = get_option('car_slug');
                         const endDate = flatpickr.formatDate(selectedDates[1], "Y/m/d");
                         $(".tf-single-template__one #tf_dropoff_date").val(endDate);
                     }
+
+                    $.ajax({
+                        url: <?php echo wp_json_encode( admin_url( 'admin-ajax.php' ) ) ?>,
+                        type: 'POST',
+                        data: {
+                            action: 'get_car_time_slots',
+                            pickup_day: startDay,
+                            drop_day: endDay
+                        },
+                        success: function(response) {
+                            console.log('Pickup Time:', response.pickup_time);
+                            console.log('Drop Time:', response.drop_time);
+                        }
+                    });
                 }
             }
-
         });
     })(jQuery);
 </script>

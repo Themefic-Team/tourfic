@@ -1959,6 +1959,40 @@ trait Action_Helper {
 		die();
 	}
 
+	/**
+	 * Search form date time slot availability
+	 *
+	 * Author: Mofazzal Hossain
+	 *
+	 * Ajax function
+	 */
+	function tf_car_time_slots_callback() {
+		$pickup_day = isset($_POST['pickup_day']) ? sanitize_text_field($_POST['pickup_day']) : '';
+		$drop_day   = isset($_POST['drop_day']) ? sanitize_text_field($_POST['drop_day']) : '';
+
+		$car_time_slots = !empty(Helper::tfopt('car_time_slots')) ? Helper::tfopt('car_time_slots') : '';
+		$unserialize_car_time_slots = !empty($car_time_slots) ? unserialize($car_time_slots) : array();
+
+		$pickup_time = $drop_time = '';
+
+		if (!empty($unserialize_car_time_slots)) {
+			foreach ($unserialize_car_time_slots as $slot) {
+				if (isset($slot['day'])) {
+					if (strtolower($slot['day']) == strtolower($pickup_day)) {
+						$pickup_time = $slot['pickup_time'];
+					}
+					if (strtolower($slot['day']) == strtolower($drop_day)) {
+						$drop_time = $slot['drop_time'];
+					}
+				}
+			}
+		}
+		wp_send_json(array(
+			'pickup_time' => $pickup_time,
+			'drop_time'   => $drop_time,
+		));
+	}
+
 	private function tf_get_sorting_data($ordering_type, $results, $post_type) {
         global $wpdb;
         $sort_results = [];

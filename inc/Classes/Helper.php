@@ -15,7 +15,6 @@ class Helper {
 	public function __construct() {
 		add_action( 'admin_footer', array( $this, 'tf_admin_footer' ) );
 		add_action( 'wp_footer', array($this, 'tf_ask_question_modal') );
-
 		add_filter( 'rest_prepare_taxonomy', array( $this, 'tf_remove_metabox_gutenburg' ), 10, 3 );
 		add_filter( 'rest_user_query', array( $this, 'tf_gutenberg_author_dropdown_roles' ), 10, 2 );
 		add_action( "wp_ajax_tf_shortcode_type_to_location", array( $this, 'tf_shortcode_type_to_location_callback' ) );
@@ -30,6 +29,9 @@ class Helper {
 		// tax filter
 		add_action( 'wp_ajax_nopriv_tf_trigger_filter', array( $this, 'tf_search_result_ajax_sidebar' ) );
 		add_action( 'wp_ajax_tf_trigger_filter', array( $this, 'tf_search_result_ajax_sidebar' ) );
+
+		add_action( 'wp_ajax_nopriv_get_car_time_slots', array( $this, 'tf_car_time_slots_callback' ) );
+		add_action( 'wp_ajax_get_car_time_slots', array( $this, 'tf_car_time_slots_callback' ) );
 
 
 		add_action( 'admin_init', array( $this, 'tf_admin_role_caps' ), 999 );
@@ -3047,7 +3049,7 @@ class Helper {
 
     static function tf_flatpickr_locale( $placement = 0 ) {
 
-		$flatpickr_locale     = ! empty( get_locale() ) ? get_locale() : 'en_US';
+		$flatpickr_locale     = ! empty( get_locale() ) ? get_locale() : 'en_US';http://tourfic.test/wp-admin/edit.php?post_type=tf_carrental
 		$allowed_locale       = array( 'ar', 'bn_BD', 'de_DE', 'es_ES', 'fr_FR', 'hi_IN', 'it_IT', 'nl_NL', 'ru_RU', 'zh_CN' );
 		$tf_first_day_of_week = ! empty( self::tfopt( "tf-week-day-flatpickr" ) ) ? self::tfopt( "tf-week-day-flatpickr" ) : 0;
 
