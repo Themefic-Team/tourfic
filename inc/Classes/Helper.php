@@ -2104,7 +2104,6 @@ class Helper {
 							<?php self::tf_flatpickr_locale( "root" ); ?>
 
                             $(".tf-archive-template__two .tf-booking-date-wrap").on("click", function () {
-
                                 $("#check-in-out-date").trigger("click");
                             });
                             $("#check-in-out-date").flatpickr({
@@ -2179,7 +2178,6 @@ class Helper {
 							<?php self::tf_flatpickr_locale( "root" ); ?>
 
                             $(".tf-archive-template__two .tf-booking-date-wrap").on("click", function () {
-
                                 $("#check-in-out-date").trigger("click");
                             });
                             $("#check-in-out-date").flatpickr({
@@ -2535,7 +2533,7 @@ class Helper {
                             <label for="guests">
                                 <?php esc_html_e("Guests", "tourfic"); ?>
                             </label>
-                            <div class="tf_acrselection tf-search-field">
+                            <div class="tf_acrselection tf-search-field tf-booking-adult-child-infant">
                                 <div class="acr-select">
                                     <input type="tel" name="guests" id="guests" min="1" value="1" readonly="">
                                     <div class="tf-archive-guest-info">
@@ -2553,27 +2551,13 @@ class Helper {
                                     <div class="acr-select">
                                         <div class="acr-dec">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                                <g clip-path="url(#clip0_3229_13094)">
-                                                    <rect x="4.16602" y="9.16675" width="11.6667" height="1.66667" fill="#595349"/>
-                                                </g>
-                                                <defs>
-                                                    <clipPath id="clip0_3229_13094">
-                                                        <rect width="20" height="20" fill="white"/>
-                                                    </clipPath>
-                                                </defs>
+                                                <path d="M4.16666 10H15.8333" stroke="#EE5509" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                             </svg>
                                         </div>
                                         <input type="tel" name="adults" id="adults" min="1" value="1" readonly>
                                         <div class="acr-inc">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                                <g clip-path="url(#clip0_3229_13100)">
-                                                    <path d="M9.16602 9.16675V4.16675H10.8327V9.16675H15.8327V10.8334H10.8327V15.8334H9.16602V10.8334H4.16602V9.16675H9.16602Z" fill="#595349"/>
-                                                </g>
-                                                <defs>
-                                                    <clipPath id="clip0_3229_13100">
-                                                        <rect width="20" height="20" fill="white"/>
-                                                    </clipPath>
-                                                </defs>
+                                                <path d="M4.16666 9.99996H15.8333M9.99999 4.16663V15.8333" stroke="#EE5509" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                             </svg>
                                         </div>
                                     </div>
@@ -2584,27 +2568,30 @@ class Helper {
                                     <div class="acr-select">
                                         <div class="acr-dec">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                                <g clip-path="url(#clip0_3229_13094)">
-                                                    <rect x="4.16602" y="9.16675" width="11.6667" height="1.66667" fill="#595349"/>
-                                                </g>
-                                                <defs>
-                                                    <clipPath id="clip0_3229_13094">
-                                                        <rect width="20" height="20" fill="white"/>
-                                                    </clipPath>
-                                                </defs>
+                                                <path d="M4.16666 10H15.8333" stroke="#EE5509" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                             </svg>
                                         </div>
                                         <input type="tel" name="childrens" id="children" min="0" value="0" readonly>
                                         <div class="acr-inc">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                                <g clip-path="url(#clip0_3229_13100)">
-                                                    <path d="M9.16602 9.16675V4.16675H10.8327V9.16675H15.8327V10.8334H10.8327V15.8334H9.16602V10.8334H4.16602V9.16675H9.16602Z" fill="#595349"/>
-                                                </g>
-                                                <defs>
-                                                    <clipPath id="clip0_3229_13100">
-                                                        <rect width="20" height="20" fill="white"/>
-                                                    </clipPath>
-                                                </defs>
+                                                <path d="M4.16666 9.99996H15.8333M9.99999 4.16663V15.8333" stroke="#EE5509" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="tf_acrselection">
+                                    <div class="acr-label"><?php esc_html_e( "Infant", "tourfic" ); ?></div>
+                                    <div class="acr-select">
+                                        <div class="acr-dec">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                <path d="M4.16666 10H15.8333" stroke="#EE5509" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                        </div>
+                                        <input type="tel" name="infant" id="infant" min="0" value="0" readonly>
+                                        <div class="acr-inc">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                <path d="M4.16666 9.99996H15.8333M9.99999 4.16663V15.8333" stroke="#EE5509" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                             </svg>
                                         </div>
                                     </div>
@@ -2634,7 +2621,7 @@ class Helper {
                                     mode: "range",
                                     dateFormat: "d-m-Y",
                                     minDate: "today",
-
+                                    showMonths: $(window).width() >= 1240 ? 2 : 1,
                                     // flatpickr locale
                                     <?php self::tf_flatpickr_locale(); ?>
 

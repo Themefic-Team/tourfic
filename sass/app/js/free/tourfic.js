@@ -2271,13 +2271,13 @@
         })
 
         $(document).on("mouseup", function (e) {
-            var container = $(".tf-single-template__two .tf_acrselection-wrap, .tf-archive-template__two .tf_acrselection-wrap");
+            var container = $(".tf-single-template__two .tf_acrselection-wrap, .tf-archive-template__two .tf_acrselection-wrap, .tf-archive-template__one .tf_acrselection-wrap");
             if (!container.is(e.target) && container.has(e.target).length === 0) {
-                $(".tf-single-template__two .tf-booking-form-guest-and-room .tf_acrselection-wrap, .tf-archive-template__two .tf-booking-form-guest-and-room .tf_acrselection-wrap").removeClass("tf-show");
+                $(".tf-single-template__two .tf-booking-form-guest-and-room .tf_acrselection-wrap, .tf-archive-template__two .tf-booking-form-guest-and-room .tf_acrselection-wrap, .tf-archive-template__one .tf_acrselection-wrap").removeClass("tf-show");
             }
         });
-        $(".tf-single-template__two .tf-booking-form-guest-and-room, .tf-archive-template__two .tf-booking-form-guest-and-room").on("click", function () {
-            $(".tf-single-template__two .tf-booking-form-guest-and-room .tf_acrselection-wrap, .tf-archive-template__two .tf-booking-form-guest-and-room .tf_acrselection-wrap").addClass("tf-show");
+        $(".tf-single-template__two .tf-booking-form-guest-and-room, .tf-archive-template__two .tf-booking-form-guest-and-room, .tf-archive-template__one .tf-booking-adult-child-infant").on("click", function () {
+            $(".tf-single-template__two .tf-booking-form-guest-and-room .tf_acrselection-wrap, .tf-archive-template__two .tf-booking-form-guest-and-room .tf_acrselection-wrap, .tf-archive-template__one .tf_acrselection-wrap").addClass("tf-show");
         });
 
         $(".tf-single-template__two .tf-review-open").on("click", function () {

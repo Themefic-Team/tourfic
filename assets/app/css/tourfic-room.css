@@ -1731,64 +1731,101 @@
   margin-top: 10px;
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-header .tf-archive-view ul,
-.tax-carrental_location .tf-archive-template__one .tf-archive-header .tf-archive-view ul,
-.tax-carrental_brand .tf-archive-template__one .tf-archive-header .tf-archive-view ul,
-.page-template-tf-search .tf-archive-template__one .tf-archive-header .tf-archive-view ul {
-  margin: 0px;
-  padding: 0;
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-search-box .tf-archive-search-box-wrapper .tf-select-guests,
+.page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-archive-search-box-wrapper .tf-select-guests {
+  position: relative;
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-header .tf-archive-view ul li,
-.tax-carrental_location .tf-archive-template__one .tf-archive-header .tf-archive-view ul li,
-.tax-carrental_brand .tf-archive-template__one .tf-archive-header .tf-archive-view ul li,
-.page-template-tf-search .tf-archive-template__one .tf-archive-header .tf-archive-view ul li {
-  height: 52px;
-  width: 52px;
-  display: flex;
-  border-radius: 8px;
-  background: var(--tf-filling-foreground);
-  align-items: center;
-  justify-content: center;
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-search-box .tf-archive-search-box-wrapper .tf-select-guests .tf_acrselection,
+.page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-archive-search-box-wrapper .tf-select-guests .tf_acrselection {
   cursor: pointer;
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-header .tf-archive-view ul li i,
-.tax-carrental_location .tf-archive-template__one .tf-archive-header .tf-archive-view ul li i,
-.tax-carrental_brand .tf-archive-template__one .tf-archive-header .tf-archive-view ul li i,
-.page-template-tf-search .tf-archive-template__one .tf-archive-header .tf-archive-view ul li i {
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-search-box .tf-archive-search-box-wrapper .tf-select-guests .tf_acrselection-wrap,
+.page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-archive-search-box-wrapper .tf-select-guests .tf_acrselection-wrap {
+  display: unset;
+  min-width: 302px;
+  top: 60%;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s;
+  border-radius: 12px;
+  background: #F8FDFD;
+  padding: 6px;
+  right: inherit;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-search-box .tf-archive-search-box-wrapper .tf-select-guests .tf_acrselection-wrap.tf-show,
+.page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-archive-search-box-wrapper .tf-select-guests .tf_acrselection-wrap.tf-show {
+  visibility: visible;
+  opacity: 1;
+  top: 110%;
+  margin-top: 0;
+  display: block !important;
+}
+
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-search-box .tf-archive-search-box-wrapper .tf-select-guests .tf_acrselection-wrap .tf_acrselection,
+.page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-archive-search-box-wrapper .tf-select-guests .tf_acrselection-wrap .tf_acrselection {
+  border-radius: 8px;
+  background: #ffffff;
+  margin-bottom: 4px;
+}
+
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-search-box .tf-archive-search-box-wrapper .tf-select-guests .tf_acrselection-wrap .tf_acrselection:last-child,
+.page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-archive-search-box-wrapper .tf-select-guests .tf_acrselection-wrap .tf_acrselection:last-child {
+  margin-bottom: 0;
+}
+
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-search-box .tf-archive-search-box-wrapper .tf-select-guests .tf_acrselection-wrap .tf_acrselection .acr-label,
+.page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-archive-search-box-wrapper .tf-select-guests .tf_acrselection-wrap .tf_acrselection .acr-label {
+  padding: 8px 8px 8px 20px;
   color: var(--tf-text-paragraph);
+  font-size: 1.25rem;
+  font-weight: 600;
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-header .tf-archive-view ul li.active,
-.tax-carrental_location .tf-archive-template__one .tf-archive-header .tf-archive-view ul li.active,
-.tax-carrental_brand .tf-archive-template__one .tf-archive-header .tf-archive-view ul li.active,
-.page-template-tf-search .tf-archive-template__one .tf-archive-header .tf-archive-view ul li.active {
-  background-color: var(--tf-primary);
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-search-box .tf-archive-search-box-wrapper .tf-select-guests .tf_acrselection-wrap .tf_acrselection .acr-select,
+.page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-archive-search-box-wrapper .tf-select-guests .tf_acrselection-wrap .tf_acrselection .acr-select {
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: #ffffff;
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-header .tf-archive-view ul li.active i,
-.tax-carrental_location .tf-archive-template__one .tf-archive-header .tf-archive-view ul li.active i,
-.tax-carrental_brand .tf-archive-template__one .tf-archive-header .tf-archive-view ul li.active i,
-.page-template-tf-search .tf-archive-template__one .tf-archive-header .tf-archive-view ul li.active i {
-  color: #ffffff;
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-search-box .tf-archive-search-box-wrapper .tf-select-guests .tf_acrselection-wrap .tf_acrselection .acr-dec,
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-search-box .tf-archive-search-box-wrapper .tf-select-guests .tf_acrselection-wrap .tf_acrselection .acr-inc,
+.page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-archive-search-box-wrapper .tf-select-guests .tf_acrselection-wrap .tf_acrselection .acr-dec,
+.page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-archive-search-box-wrapper .tf-select-guests .tf_acrselection-wrap .tf_acrselection .acr-inc {
+  min-width: 32px;
+  min-height: 32px;
+  border-radius: 32px;
+  background: #DCE5E5;
+  backdrop-filter: blur(16px);
+  padding: 0;
+  border: 0;
 }
 
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-header .tf-total-result-bar,
-.tax-carrental_location .tf-archive-template__one .tf-archive-header .tf-total-result-bar,
-.tax-carrental_brand .tf-archive-template__one .tf-archive-header .tf-total-result-bar,
-.page-template-tf-search .tf-archive-template__one .tf-archive-header .tf-total-result-bar {
-  text-align: right;
-  display: flex;
-  gap: 2px;
-}
-
-.post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-header .tf-total-result-bar span,
-.tax-carrental_location .tf-archive-template__one .tf-archive-header .tf-total-result-bar span,
-.tax-carrental_brand .tf-archive-template__one .tf-archive-header .tf-total-result-bar span,
-.page-template-tf-search .tf-archive-template__one .tf-archive-header .tf-total-result-bar span {
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-search-box .tf-archive-search-box-wrapper .tf-select-guests .tf_acrselection-wrap .tf_acrselection input,
+.page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-archive-search-box-wrapper .tf-select-guests .tf_acrselection-wrap .tf_acrselection input {
+  background: transparent;
+  border: 0;
+  text-align: center;
   color: var(--tf-text-paragraph);
-  font-size: 1rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-room-details,
+.page-template-tf-search .tf-archive-template__one .tf-archive-room-details {
+  background-color: var(--tf-filling-foreground);
+  padding: 48px 0;
+}
+
+.post-type-archive-tf_room .tf-archive-template__one .tf-archive-room-details .tf-archive-header .tf-total-result-bar h3,
+.page-template-tf-search .tf-archive-template__one .tf-archive-room-details .tf-archive-header .tf-total-result-bar h3 {
+  color: var(--tf-text-heading);
+  font-size: 1.563rem;
   font-weight: 400;
 }
 

@@ -91,6 +91,73 @@
                             margin-top: 10px;
                         }
                     }
+
+                    .tf-select-guests{
+                        position: relative;
+                        .tf_acrselection{
+                            cursor: pointer;
+                        }
+                        .tf_acrselection-wrap {
+                            display: unset;
+                            min-width: 302px;
+                            top: 60%;
+                            opacity: 0;
+                            visibility: hidden;
+                            transition: 0.3s;
+                            border-radius: 12px;
+                            background: #F8FDFD;
+                            padding: 6px;
+                            right: inherit;
+                                left: 50%;
+                                transform: translateX(-50%);
+                            &.tf-show {
+                                visibility: visible;
+                                opacity: 1;
+                                
+                                top: 110%;
+                                margin-top: 0;
+                                display: block!important;
+                            }
+                            .tf_acrselection{
+                                border-radius: 8px;
+                                background: $color-white;
+                                margin-bottom: 4px;
+                                &:last-child{
+                                    margin-bottom: 0;   
+                                }
+                                .acr-label{
+                                    padding: 8px 8px 8px 20px;
+                                    color: $color-text;
+                                    font-size: 1.25rem;
+                                    font-weight: 600;
+                                }
+                                .acr-select {
+                                    padding: 8px 10px;
+                                    border-radius: 8px;
+                                    background: $color-white;
+                                }
+                                .acr-dec,
+                                .acr-inc{
+                                    min-width: 32px;
+                                    min-height: 32px;
+                                    border-radius: 32px;
+                                    background: #DCE5E5;
+                                    backdrop-filter: blur(16px);
+                                    padding: 0;
+                                    border: 0;
+                                }
+                                input {
+                                    background: transparent;
+                                    border: 0;
+                                    text-align: center;
+                                    color: $color-text;
+                                    font-size: 1.25rem;
+                                    font-weight: 600;
+                                }
+                            }
+                          
+                        }
+                    }   
                 }
             }
         }
