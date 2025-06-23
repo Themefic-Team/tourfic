@@ -70,7 +70,7 @@ class Base {
 
 			// Admin Notices
 			\Tourfic\Admin\Notice_Update::instance();
-			Room_Notice::instance();
+			// Room_Notice::instance();
 			Plugin_Page_Notice::instance();
 		}
 		// Promo Notice
