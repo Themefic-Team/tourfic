@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, car-rental, multivendor-marketplace
 Requires at least: 5.4
 Tested up to: 6.8
-Stable tag: 2.16.7
+Stable tag: 2.16.8
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -372,6 +372,13 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
+= 2.16.8 – June 24, 2025 =
+
+- Improved: Car rental design, including archive, single, and search form layouts.
+- Updated: Search date filter for car rentals.
+- Fixed: Responsive issues in the car search form.
+- Added: Operating time slots feature.
+
 = 2.16.7 – June 22, 2025 =
 
 - Compatibility: Now fully compatible with the Hello Elementor theme.
@@ -398,34 +405,6 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 - Fixed: Guest booking required field handling.
 - Fixed: Double pagination issue on apartment listings.
 - Improved: Minor design tweaks on preview layout.
-
-= 2.16.3 – May 05, 2025 =
-
-- Fixed: jQuery Confirm Notice issue resolved.
-
-= 2.16.2 – April 29, 2025 =
-
-- Fixed: Migration-related issue has been resolved.
-- Fixed: JavaScript issue with the map has been addressed.
-- Fixed: Tour pricing issue has been resolved.
-
-= 2.16.1 – April 27, 2025 =
-
-- Fixed: Car design issue on the search page has been resolved.
-- Fixed: JavaScript conflict issue has been resolved.
-- Fixed: Popup display issue has been resolved.
-
-= 2.16.0 – April 26, 2025 =
-
-- Added: Container width option has been added.
-- Added: Car rental demo data has been added to the quick setup wizard.
-- Improved: Assets revamped for better performance.
-- Introduced: New design settings panel for enhanced customization.
-- Improved: Template view updated according to the new design panel.
-- Improved: New color palette introduced for consistent design.
-- Improved: Frontend design improvements for better user experience.
-- Improved: Overall system stability has been improved.
-- Fixed: Minor issues and improved frontend dashboard settings.
 
 **Old Changelog can be found [here](https://themefic.com/tourfic/changelog/)**.
 
