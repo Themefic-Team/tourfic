@@ -173,7 +173,7 @@ class Car_Rental
                         </div>
                         <div class="tf_availability_checker_box">
                             <input type="hidden" name="type" value="tf_carrental" class="tf-post-type" />
-                            <button><?php echo esc_html_e("Check availability", "tourfic"); ?></button>
+                            <button class="tf_btn"><?php echo esc_html_e("Check availability", "tourfic"); ?></button>
                         </div>
                     </div>
                 </div>

@@ -1820,7 +1820,7 @@ class Hotel {
 							if ( $author ) { ?>
                                 <input type="hidden" name="tf-author" value="<?php echo esc_attr( $author ); ?>" class="tf-post-type"/>
 							<?php } ?>
-                            <button><?php echo esc_html_e( "Check availability", "tourfic" ); ?></button>
+                            <button class="tf_btn"><?php echo esc_html_e( "Check availability", "tourfic" ); ?></button>
                         </div>
                     </div>
                 </div>
