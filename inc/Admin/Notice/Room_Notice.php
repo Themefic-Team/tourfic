@@ -54,10 +54,6 @@ class Room_Notice extends \Tourfic\Core\TF_Notice {
 
 	function tf_disable_critical_update_admin_notice() {
         update_option( $this->notice_id, 1 );
-        echo "<pre>";
-        print_r($this->notice_id);
-        echo "</pre>";
-        die(); // added by - Sunvi
         wp_die();
     }
 
