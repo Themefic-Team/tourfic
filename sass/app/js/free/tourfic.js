@@ -533,7 +533,9 @@
 
             if(tf_params.location_car_search){
                 let same_location = $('input[name="same_location"]:checked').val();
+                console.log(same_location);
                 if('on'==same_location){
+                    console.log('on');
                     if ($.trim($('#tf_pickup_location').val()) == '') {
                         if ($('#tf-required').length === 0) {
                             if($('.tf-driver-location').length === 1){
@@ -2724,6 +2726,54 @@
                     }
                 }
             });
+        });
+
+
+         /*
+        * Car Search Form Pickup & Dropoff Time
+        * @author Mofazzal Hossain
+        */
+
+        // Open time options
+        $('body').on('click' , '.selected-pickup-time, .selected-dropoff-time', function () {
+            const $infoSelect = $(this).closest('.info-select');
+            const $dropdown = $infoSelect.find('.time-options-list');
+            const isOpen = $dropdown.is(':visible');
+
+            $('.time-options-list').slideUp(200);
+            $('.selected-dropoff-time, .selected-pickup-time').removeClass('active');
+
+            if (!isOpen) {
+                $dropdown.slideDown(200);
+                $(this).addClass('active');
+            }
+        });
+
+        // Select time
+        $('.tf-pickup-time li, .tf-dropoff-time li').on('click', function () {
+            const selected = $(this).attr('value');
+            const $infoSelect = $(this).closest('.info-select');
+
+            if ($(this).closest('ul').hasClass('tf-pickup-time')) {
+                $('.tf_pickup_time').val(selected);
+                $('.tf_dropoff_time').val(selected);
+                $('.selected-pickup-time .text').text(selected);
+                $('.selected-dropoff-time .text').text(selected);
+            } else {
+                $('.tf_dropoff_time').val(selected);
+                $('.selected-dropoff-time .text').text(selected);
+            }
+
+            $('.time-options-list').slideUp(200);
+            $('.selected-dropoff-time, .selected-pickup-time').removeClass('active');
+        });
+
+        // Click outside to close dropdown
+        $('body').on('click', function (e) {
+            if (!$(e.target).closest('.info-select').length) {
+                $('.time-options-list').slideUp(200);
+                $('.selected-dropoff-time, .selected-pickup-time').removeClass('active');
+            }
         });
     });
 
