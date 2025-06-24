@@ -1849,44 +1849,7 @@ TF_Settings::option( 'tf_settings', array(
 					),
 					'dependency' => array( 'disable-car-time-slots', '==', '1' ),
 				),
-				array(
-					'id'          => 'car_time_slots',
-					'label'       => __( 'Car Time Slots (7 Days)', 'tourfic' ),
-					'type'        => 'repeater',
-					'field_title'  => 'day',
-					'button_title' => __( 'Add New Time', 'tourfic' ),
-					'fields'      => array(
-						array(
-							'id'    => 'day',
-							'type'  => 'hidden',
-							'value' => 'day',
-						),
-						array(
-							'id'          => 'pickup_time',
-							'label'       => __( 'Pickup Time', 'tourfic' ),
-							'type'        => 'time',
-							'format'      => 'H:i',
-							'field_width' => '50',
-						),
-						array(
-							'id'          => 'drop_time',
-							'label'       => __( 'Drop Time', 'tourfic' ),
-							'type'        => 'time',
-							'format'      => 'H:i',
-							'field_width' => '50',
-						),
-					),
-					'default' => array(
-						array( 'day' => 'Saturday', 'pickup_time' => '', 'drop_time' => '' ),
-						array( 'day' => 'Sunday', 'pickup_time' => '', 'drop_time' => '' ),
-						array( 'day' => 'Monday', 'pickup_time' => '', 'drop_time' => '' ),
-						array( 'day' => 'Tuesday', 'pickup_time' => '', 'drop_time' => '' ),
-						array( 'day' => 'Wednesday', 'pickup_time' => '', 'drop_time' => '' ),
-						array( 'day' => 'Thursday', 'pickup_time' => '', 'drop_time' => '' ),
-						array( 'day' => 'Friday', 'pickup_time' => '', 'drop_time' => '' ),
-					),
-					'dependency' => array( 'disable-car-time-slots', '==', '1' ),
-				),
+				
 			),
 		),
 
