@@ -745,23 +745,24 @@
             },
 
         };
-        
-        tour_date_options.minDate = "today";
-        tour_date_options.disableMobile = "true";
-        tour_date_options.enable = Object.entries(tf_params.tour_form_data.tour_availability)
-        .filter(([dateRange, data]) => data.status === "available")
-        .map(([dateRange, data]) => {
-            const [fromRaw, toRaw] = dateRange.split(' - ').map(str => str.trim());
+        if (tf_params.tour_form_data.disable_same_day) {
+            tour_date_options.minDate = "today";
+            tour_date_options.disableMobile = "true";
+            tour_date_options.enable = Object.entries(tf_params.tour_form_data.tour_availability)
+            .filter(([dateRange, data]) => data.status === "available")
+            .map(([dateRange, data]) => {
+                const [fromRaw, toRaw] = dateRange.split(' - ').map(str => str.trim());
 
-            const today = new Date();
-            const formattedToday = today.getFullYear() + '/' + (today.getMonth() + 1) + '/' + today.getDate();
-            let fromDate = fromRaw;
+                const today = new Date();
+                const formattedToday = today.getFullYear() + '/' + (today.getMonth() + 1) + '/' + today.getDate();
+                let fromDate = fromRaw;
 
-            return {
-                from: fromDate,
-                to: toRaw
-            };
-        });
+                return {
+                    from: fromDate,
+                    to: toRaw
+                };
+            });
+        }
 
         if (tf_params.tour_form_data.disable_same_day) {
             tour_date_options.disable = [];

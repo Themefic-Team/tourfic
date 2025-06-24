@@ -1813,6 +1813,11 @@
             });
         });
 
+        $(document).on("click", ".tf-reset-confirmation-box .tf-cancel-btn", function (e) {
+            e.preventDefault();
+            $('.tf-reset-confirmation-box').hide();
+        });
+
         $(document).on('change', '.tf_tour_pricing_type', function (e) {
             let pricingType = $(this).val();
 
