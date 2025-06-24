@@ -1020,6 +1020,8 @@ class TF_Options {
 					];
 					for ( $j = 0; $j <= $group_options_count - 1; $j ++ ) {
 						$options_data[ 'tf_option_title_' . $j ]        = isset( $_POST[ 'tf_option_title_' . $j ] ) && ! empty( $_POST[ 'tf_option_title_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_title_' . $j ] ) : '';
+						$options_data[ 'tf_option_min_person_' . $j ]   = isset( $_POST[ 'tf_option_min_person_' . $j ] ) && ! empty( $_POST[ 'tf_option_min_person_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_min_person_' . $j ] ) : '';
+						$options_data[ 'tf_option_max_person_' . $j ]   = isset( $_POST[ 'tf_option_max_person_' . $j ] ) && ! empty( $_POST[ 'tf_option_max_person_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_max_person_' . $j ] ) : '';
 						$options_data[ 'tf_option_group_price_' . $j ]   = isset( $_POST[ 'tf_option_group_price_' . $j ] ) && ! empty( $_POST[ 'tf_option_group_price_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_group_price_' . $j ] ) : '';
 					}
 				}
@@ -1218,10 +1220,22 @@ class TF_Options {
 						<label for="tf_package_option_<?php echo esc_attr( $item['index'] ); ?>" class="tf-field-label"><?php echo esc_html( $item['title'] ); ?></label>
 					</div>
 					<div class="tf-form-fields">
-						<div class="tf-field-text tf_option_pricing_type_group" style="width: 100%">
+						<div class="tf-field-text tf_option_pricing_type_group">
+							<label class="tf-field-label"><?php echo esc_html__( 'Minimum Person', 'tourfic' ); ?></label>
+							<div class="tf-fieldset">
+								<input type="number" min="0" name="tf_option_min_person_<?php echo esc_attr( $item['index'] ); ?>" />
+							</div>
+						</div>
+						<div class="tf-field-text tf_option_pricing_type_group">
+							<label class="tf-field-label"><?php echo esc_html__( 'Maximum Person', 'tourfic' ); ?></label>
+							<div class="tf-fieldset">
+								<input type="number" min="0" name="tf_option_max_person_<?php echo esc_attr( $item['index'] ); ?>" />
+							</div>
+						</div>
+						<div class="tf-field-text tf_option_pricing_type_group">
 							<label class="tf-field-label"><?php echo esc_html__( 'Group Price', 'tourfic' ); ?></label>
 							<div class="tf-fieldset">
-								<input type="number" min="0" name="tf_option_group_price_<?php echo esc_attr( $item['index'] ); ?>" placeholder="<?php echo esc_attr__( 'Group Price', 'tourfic' ); ?>">
+								<input type="number" min="0" name="tf_option_group_price_<?php echo esc_attr( $item['index'] ); ?>" />
 							</div>
 						</div>
 					</div>

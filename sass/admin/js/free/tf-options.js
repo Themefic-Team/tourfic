@@ -1608,7 +1608,8 @@
                     } else {
                         if(event.extendedProps.options_count != 0) {
                             for (var i = 0; i <= event.extendedProps.options_count - 1; i++) {
-
+                                $("[name='tf_option_min_person_" + i + "']", self.roomCalData).val(event.extendedProps["tf_option_min_person_" + i]);
+                                $("[name='tf_option_max_person_" + i + "']", self.roomCalData).val(event.extendedProps["tf_option_max_person_" + i]);
                                 $("[name='tf_option_group_price_" + i + "']", self.roomCalData).val(event.extendedProps["tf_option_group_price_" + i]);
                                 $("[name='tf_option_adult_price_" + i + "']", self.roomCalData).val(event.extendedProps["tf_option_adult_price_" + i]);
                                 $("[name='tf_option_child_price_" + i + "']", self.roomCalData).val(event.extendedProps["tf_option_child_price_" + i]);

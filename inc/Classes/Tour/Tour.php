@@ -3265,6 +3265,10 @@ class Tour {
 		$disable_infant_price = ! empty( $meta['disable_infant_price'] ) ? $meta['disable_infant_price'] : false;
 		$tf_package_pricing = ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
 
+		// Group Type Package
+		$allow_package_pricing = ! empty( $meta['allow_package_pricing'] ) ? $meta['allow_package_pricing'] : '';
+		$group_package_pricing = ! empty( $meta['group_package_pricing'] ) ? $meta['group_package_pricing'] : '';
+
 		/**
 		 * If fixed is selected but pro is not activated
 		 *
@@ -3492,7 +3496,7 @@ class Tour {
 		 * People number validation
 		 *
 		 */
-		if ( $tour_type == 'fixed' && $pricing_rule!='package' ) {
+		if ( $tour_type == 'fixed' && $pricing_rule!='package' && ( empty($allow_package_pricing) && empty($group_package_pricing) ) ) {
 
 			/* translators: %s: number of people */
 			$min_text = sprintf( _n( '%s person', '%s people', $min_people, 'tourfic' ), $min_people );
@@ -3510,7 +3514,7 @@ class Tour {
 
 			}
 
-		} elseif ( $tour_type == 'continuous' && $pricing_rule!='package' ) {
+		} elseif ( $tour_type == 'continuous' && $pricing_rule!='package' && ( empty($allow_package_pricing) && empty($group_package_pricing) ) ) {
 
 			// Backend continuous date values
 			$back_date_from     = ! empty( $matched_availability['check_in'] ) ? $matched_availability['check_in'] : '';
@@ -3670,11 +3674,36 @@ class Tour {
 		$children_price = ! empty( $matched_availability['child_price'] ) ? $matched_availability['child_price'] : 0;
 		$infant_price   = ! empty( $matched_availability['infant_price'] ) ? $matched_availability['infant_price'] : 0;
 
+		if( $pricing_rule=='group' && !empty($allow_package_pricing) && !empty($group_package_pricing) ){
+			$max_allowed = 0;
+			$matched_price = '';
+			$found_valid_option = false;
 
-		// Group Type Package
-		$allow_package_pricing = ! empty( $meta['allow_package_pricing'] ) ? $meta['allow_package_pricing'] : '';
-		$group_package_pricing = ! empty( $meta['group_package_pricing'] ) ? $meta['group_package_pricing'] : '';
+			for ( $i = 0; $i < (int) $matched_availability['options_count']; $i++ ) {
+				$min = (int) $matched_availability[ 'tf_option_min_person_' . $i ];
+				$max = (int) $matched_availability[ 'tf_option_max_person_' . $i ];
+				$price = $matched_availability[ 'tf_option_group_price_' . $i ];
+				$title = $matched_availability[ 'tf_option_title_' . $i ];
 
+				// Keep track of the highest max_person across all options
+				if ( $max > $max_allowed ) {
+					$max_allowed = $max;
+				}
+
+				// Find a matching price bracket
+				if ( $total_people >= $min && $total_people <= $max ) {
+					$found_valid_option = true;
+					$matched_price = $price;
+					break;
+				}
+			}
+
+			if ( $total_people > $max_allowed ) {
+				$response['errors'][] = sprintf( esc_html__( 'Maximum %1$s allowed', 'tourfic' ), $max_allowed );
+			} elseif ( $found_valid_option ) {
+				$group_price = $matched_price;
+			}
+		}
 
 		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_type == 'continuous' && !empty($allowed_times_field['time']) ) {
 			$has_valid_time = !empty(array_filter($allowed_times_field['time'], function($t) {

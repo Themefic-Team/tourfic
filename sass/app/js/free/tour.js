@@ -745,7 +745,7 @@
             },
 
         };
-        if (tf_params.tour_form_data.disable_same_day) {
+        if (tf_params.tour_form_data.tour_availability) {
             tour_date_options.minDate = "today";
             tour_date_options.disableMobile = "true";
             tour_date_options.enable = Object.entries(tf_params.tour_form_data.tour_availability)
