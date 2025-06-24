@@ -953,7 +953,17 @@
   font-size: 1rem;
   font-weight: 400;
   border: 0px solid;
-  padding: 0;
+  padding-left: 0px;
+  box-shadow: none;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+}
+
+@media only screen and (max-width: 575.98px) {
+  .single-tf_carrental .tf-single-template__one .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input {
+    font-size: 0.875rem;
+  }
 }
 
 .single-tf_carrental .tf-single-template__one .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input:focus {
@@ -963,7 +973,6 @@
 
 .single-tf_carrental .tf-single-template__one .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input::placeholder {
   color: var(--tf-text-paragraph);
-  opacity: 1;
 }
 
 .single-tf_carrental .tf-single-template__one .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .autocomplete-items {
@@ -1728,9 +1737,17 @@
 }
 
 .post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input,
+.post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .selected-pickup-time,
+.post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .selected-dropoff-time,
 .tax-carrental_location .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input,
+.tax-carrental_location .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .selected-pickup-time,
+.tax-carrental_location .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .selected-dropoff-time,
 .tax-carrental_brand .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input,
-.page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input {
+.tax-carrental_brand .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .selected-pickup-time,
+.tax-carrental_brand .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .selected-dropoff-time,
+.page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input,
+.page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .selected-pickup-time,
+.page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .selected-dropoff-time {
   min-width: auto;
   width: 100%;
   color: var(--tf-text-paragraph);
@@ -1740,29 +1757,55 @@
   padding-left: 0px;
   box-shadow: none;
   background: transparent;
+  cursor: pointer;
+  position: relative;
 }
 
 @media only screen and (max-width: 575.98px) {
   .post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input,
+  .post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .selected-pickup-time,
+  .post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .selected-dropoff-time,
   .tax-carrental_location .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input,
+  .tax-carrental_location .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .selected-pickup-time,
+  .tax-carrental_location .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .selected-dropoff-time,
   .tax-carrental_brand .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input,
-  .page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input {
+  .tax-carrental_brand .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .selected-pickup-time,
+  .tax-carrental_brand .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .selected-dropoff-time,
+  .page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input,
+  .page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .selected-pickup-time,
+  .page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .selected-dropoff-time {
     font-size: 0.875rem;
   }
 }
 
 .post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input:focus,
+.post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .selected-pickup-time:focus,
+.post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .selected-dropoff-time:focus,
 .tax-carrental_location .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input:focus,
+.tax-carrental_location .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .selected-pickup-time:focus,
+.tax-carrental_location .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .selected-dropoff-time:focus,
 .tax-carrental_brand .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input:focus,
-.page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input:focus {
+.tax-carrental_brand .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .selected-pickup-time:focus,
+.tax-carrental_brand .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .selected-dropoff-time:focus,
+.page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input:focus,
+.page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .selected-pickup-time:focus,
+.page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .selected-dropoff-time:focus {
   outline: none;
   box-shadow: none;
 }
 
 .post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input::placeholder,
+.post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .selected-pickup-time::placeholder,
+.post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .selected-dropoff-time::placeholder,
 .tax-carrental_location .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input::placeholder,
+.tax-carrental_location .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .selected-pickup-time::placeholder,
+.tax-carrental_location .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .selected-dropoff-time::placeholder,
 .tax-carrental_brand .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input::placeholder,
-.page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input::placeholder {
+.tax-carrental_brand .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .selected-pickup-time::placeholder,
+.tax-carrental_brand .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .selected-dropoff-time::placeholder,
+.page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input::placeholder,
+.page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .selected-pickup-time::placeholder,
+.page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select .selected-dropoff-time::placeholder {
   color: var(--tf-text-paragraph);
 }
 

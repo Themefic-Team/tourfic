@@ -1275,7 +1275,8 @@ Steps
 }
 
 .tf-setup-step-container .tf-select-service label:before {
-  background: #ffffff #ffffff;
+  background: #ffffff
+ #ffffff;
   content: "";
   display: block;
   border-radius: 50%;
@@ -4807,6 +4808,30 @@ Steps
 
 .tf-field-disable .tf-repeater {
   pointer-events: none;
+}
+
+.car_time_slots .tf-repeater-icon-absulate,
+.car_time_slots .tf-repeater-add-car_time_slots,
+.car_time_slots .tf-field.tf-field-hidden {
+  display: none;
+}
+
+.car_time_slots .tf-single-repeater {
+  margin-bottom: 12px;
+}
+
+.car_time_slots .tf-single-repeater:last-child {
+  margin-bottom: 0;
+}
+
+.car_time_slots .tf-single-repeater .tf-repeater-header {
+  width: auto;
+  padding: 12px 16px;
+}
+
+.car_time_slots .tf-single-repeater .tf-repeater-header .tf-repeater-icon {
+  position: absolute;
+  right: 5px;
 }
 
 .tf-tablist ul.tf-nav-tabs {
