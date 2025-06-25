@@ -237,6 +237,10 @@ while ( have_posts() ) : the_post();
 	}
 
 	# Get Pricing
+	$group_price    = ! empty( $meta['group_price'] ) ? $meta['group_price'] : 0;
+	$adult_price    = ! empty( $meta['adult_price'] ) ? $meta['adult_price'] : 0;
+	$children_price = ! empty( $meta['child_price'] ) ? $meta['child_price'] : 0;
+	$infant_price   = ! empty( $meta['infant_price'] ) ? $meta['infant_price'] : 0;
 	$tour_price = new Tour_Price( $meta );
 
 	// Single Template
