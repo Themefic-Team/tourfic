@@ -2034,12 +2034,12 @@ class Tour {
 						</span>
                 </div>
                 <img src="<?php echo esc_url( TF_ASSETS_APP_URL ) ?>images/thank-you.gif" alt="Thank You">
-                <h2>
+                <div class="tf-tour-without-payment-booking-confirm-msg-container">
 					<?php
-					$booking_confirmation_msg = ! empty( Helper::tfopt( 'booking-confirmation-msg' ) ) ? Helper::tfopt( 'booking-confirmation-msg' ) : 'Booked Successfully';
-					echo esc_html( $booking_confirmation_msg );
+					$booking_confirmation_msg = ! empty( Helper::tfopt( 'booking-confirmation-msg' ) ) ? Helper::tfopt( 'booking-confirmation-msg' ) : '<h2>Booked Successfully</h2>';
+					echo wp_kses_post( $booking_confirmation_msg );
 					?>
-                </h2>
+                </div>
             </div>
         </div>
         <div class="tf-withoutpayment-booking">
