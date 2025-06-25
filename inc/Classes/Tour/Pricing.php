@@ -664,22 +664,76 @@ class Pricing {
 				if ( ! empty( $meta['group_price'] ) ) {
 					$tftours_min_maxprices[] = $meta['group_price'];
 				}
-				if ( ! empty( $meta['cont_custom_date'] ) ) {
-					foreach ( $meta['cont_custom_date'] as $minmax ) {
-						if ( ! empty( $minmax['adult_price'] ) ) {
-							$tftours_min_maxprices[] = $minmax['adult_price'];
+				
+				$tour_availability_data = isset( $meta['tour_availability'] ) && ! empty( $meta['tour_availability'] ) ? json_decode( $meta['tour_availability'], true ) : [];
+
+				$allow_package_pricing = ! empty( $meta['allow_package_pricing'] ) ? $meta['allow_package_pricing'] : '';
+				$group_package_pricing = ! empty( $meta['group_package_pricing'] ) ? $meta['group_package_pricing'] : '';
+
+				foreach ($tour_availability_data as $data) {
+					if ($data['status'] !== 'available') {
+						continue;
+					}
+		
+					if($data['pricing_type'] == 'person'){
+						// Adult Price
+						if (!empty($data['adult_price'])) {
+							$tftours_min_maxprices[] = $data['adult_price'];
 						}
-						if ( ! empty( $minmax['child_price'] ) ) {
-							$tftours_min_maxprices[] = $minmax['child_price'];
+		
+						// Child Price
+						if (!empty($data['child_price'])) {
+							$tftours_min_maxprices[] = $data['child_price'];
+						} 
+		
+						// Infant Price
+						if (!empty($data['infant_price'])) {
+							$tftours_min_maxprices[] = $data['infant_price'];
+						} 
+					}
+		
+					if($data['pricing_type'] == 'group' && !empty($allow_package_pricing) && !empty($group_package_pricing) ){
+						if(!empty($data['options_count'])){
+							for($i = 0; $i < $data['options_count']; $i++){
+								if (!empty($data['tf_option_group_price_'.$i])) {
+									$tftours_min_maxprices[] = $data['tf_option_group_price_'.$i];
+								}
+							}
 						}
-						if ( ! empty( $minmax['infant_price'] ) ) {
-							$tftours_min_maxprices[] = $minmax['infant_price'];
+					}
+		
+					if($pricing_rule == 'group' && $data['pricing_type'] == 'group' && (empty($allow_package_pricing) || empty($group_package_pricing)) ){
+						// Group Price
+						if (!empty($data['price'])) {
+							$tftours_min_maxprices[] = $data['price'];
 						}
-						if ( ! empty( $minmax['group_price'] ) ) {
-							$tftours_min_maxprices[] = $minmax['group_price'];
+					}
+					
+					if( $pricing_rule == 'package' && $data['pricing_type'] == 'package'){
+						if(!empty($data['options_count'])){
+							for($i = 0; $i < $data['options_count']; $i++){
+		
+								if (!empty($data['tf_option_adult_price_'.$i])) {
+									$tftours_min_maxprices[] = $data['tf_option_adult_price_'.$i];
+								}
+		
+								if (!empty($data['tf_option_child_price_'.$i])) {
+									$tftours_min_maxprices[] = $data['tf_option_child_price_'.$i];
+								}
+		
+								if (!empty($data['tf_option_infant_price_'.$i])) {
+									$tftours_min_maxprices[] = $data['tf_option_infant_price_'.$i];
+								}
+		
+								if (!empty($data['tf_option_group_price_'.$i])) {
+									$tftours_min_maxprices[] = $data['tf_option_group_price_'.$i];
+								}
+		
+							}
 						}
 					}
 				}
+
 			endwhile;
 
 		endif;
