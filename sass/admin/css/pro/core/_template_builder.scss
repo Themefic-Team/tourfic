@@ -124,6 +124,17 @@ Modal
                 font-weight: 600;
                 line-height: 32px;
                 letter-spacing: -0.75px;
+                @include flexbox();
+                @include align-items(center);
+                gap: 16px;
+
+                .tf-field{
+                    margin-bottom: 0;
+
+                    .tf-fieldset{
+                        margin-top: 0;
+                    }
+                }
             }
             .tf-modal-close {
                 top: 20px;
@@ -330,7 +341,7 @@ Modal
             flex-wrap: wrap;
             gap: 16px;
             border-radius: 12px;
-            border: 1px solid var(--UI-50, #EEF2F6);
+            border: 1px solid #EEF2F6;
             background: linear-gradient(180deg, #FFFCFA 0%, #FFFAFC 100%), #FFF;
             padding: 16px;
         
@@ -365,20 +376,12 @@ Modal
                             line-height: 1;
                         }
                     }
-
-                    .tf-template-blank{
-                        height: 290px;
-                        width: 100%;
-                        cursor: pointer;
-                        border: 1px solid #EDF0F2;
-                        border-radius: 5px;
-                    }
         
                     img {
                         object-fit: cover;
                         object-position: top;
                         width: 100%;
-                        height: 290px;
+                        height: 225px;
                         transition: object-position 2s ease-in-out, border-color 0.3s ease-in-out;
             
                         &:hover {
@@ -411,13 +414,14 @@ Modal
                 }
                 span.tf-template-title{
                     display: block;
-                    text-align: center;
-                    font-weight: 500;
+                    color: #27333F;
+                    font-size: 15px;
+                    line-height: 24px;
                 }
                 .tf-image-checkbox-footer{
                     @include flexbox();
                     @include align-items(center);
-                    @include justify-content(center);
+                    @include justify-content(flex-start);
                     margin-top: 8px;
                     gap: 8px;
                     color: $neutral70;
@@ -453,7 +457,7 @@ Modal
             display: inline-flex;
             @include align-items(center);
             border-radius: 8px;
-            background: var(--Primary-50, #EBF5FF);
+            background: #EBF5FF;
             color: #003C79;
             padding: 12px 32px;
             border: none;
