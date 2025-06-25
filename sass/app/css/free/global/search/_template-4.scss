@@ -198,6 +198,11 @@
               text-transform: lowercase;
             }
           }
+          .tf-select-time{
+            li{
+              color: $color-text;
+            }
+          }
         }
       }
       &__right {

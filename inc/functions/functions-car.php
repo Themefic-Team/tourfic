@@ -178,7 +178,7 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 		];
 		$settings['image_size_customize_size'] = $settings['image_size'];
 		$thumbnail_html = Group_Control_Image_Size::get_attachment_image_html( $settings,'image_size_customize' );
-		
+
 		if ( "" === $thumbnail_html && 'yes' === $settings['show_fallback_img'] && !empty( $settings['fallback_img']['url'] ) ) {
 			$settings[ 'image_size_customize' ] = [
 				'id' => $settings['fallback_img']['id'],
@@ -219,9 +219,6 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 					if(!empty($badge['title']) && $key < 4){
 					?>
 					<li>
-						<?php if(!empty($badge['badge_icon'])){ ?>
-						<i class="<?php echo esc_attr($badge['badge_icon']); ?>"></i>
-						<?php } ?>
 						<?php echo esc_html($badge['title']); ?>
 					</li>
 					<?php }}} ?>
@@ -705,6 +702,8 @@ function tf_car_booking_pupup_callback() {
 	$dropoff_date = ! empty( $_POST['dropoff_date'] ) ? $_POST['dropoff_date'] : '';
 	$dropoff_time = ! empty( $_POST['dropoff_time'] ) ? $_POST['dropoff_time'] : '';
 
+
+
  	?>
 
 	<div class="tf-booking-tabs">
@@ -986,11 +985,14 @@ function tf_car_price_calculation_callback() {
 	$tf_dropoff_date  = isset( $_POST['dropoff_date'] ) ? sanitize_text_field( $_POST['dropoff_date'] ) : '';
 	$tf_pickup_time  = isset( $_POST['pickup_time'] ) ? sanitize_text_field( $_POST['pickup_time'] ) : '';
 	$tf_dropoff_time  = isset( $_POST['dropoff_time'] ) ? sanitize_text_field( $_POST['dropoff_time'] ) : '';
+
+
 	$extra_ids  = isset( $_POST['extra_ids'] ) ? $_POST['extra_ids'] : '';
 	$extra_qty  = isset( $_POST['extra_qty'] ) ? $_POST['extra_qty'] : '';
 
 	$meta = get_post_meta( $post_id, 'tf_carrental_opt', true );
 	$get_prices = Pricing::set_total_price($meta, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time);
+
 	$total_prices = $get_prices['sale_price'] ? $get_prices['sale_price'] : 0;
 
 	if(!empty($extra_ids)){
@@ -1031,9 +1033,11 @@ function tf_car_price_calculation_callback() {
 		$less_current_day = true;
 	}
 
+
 	// Get the final "before" date and time (ensured to not be before today)
 	$beforeDate = $pickupDateTime->format('Y/m/d');
 	$beforeTime = $pickupDateTime->format('H:i');
+
 
 	$cancellation = '';
 	

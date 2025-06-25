@@ -123,3 +123,25 @@
 .tf-field-disable .tf-repeater {
   pointer-events: none;
 }
+
+.car_time_slots{
+  .tf-repeater-icon-absulate,
+  .tf-repeater-add-car_time_slots,
+  .tf-field.tf-field-hidden{
+    display: none;
+  }
+  .tf-single-repeater{
+    margin-bottom: 12px;
+    &:last-child{
+      margin-bottom: 0;
+    }
+    .tf-repeater-header{
+      width: auto;
+      padding: 12px 16px;
+      .tf-repeater-icon{
+        position: absolute;
+        right: 5px;
+      }
+    }
+  }
+}
