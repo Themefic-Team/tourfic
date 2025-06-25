@@ -3119,6 +3119,7 @@ li.tf-filter-item {
 .tf-withoutpayment-booking .tf-confirm-popup img,
 .tf-withoutpayment-booking-confirm .tf-confirm-popup img {
   width: 320px;
+  padding-top: 8px;
 }
 
 .tf-withoutpayment-booking .tf-confirm-popup h2,
@@ -3136,6 +3137,12 @@ li.tf-filter-item {
   .tf-withoutpayment-booking-confirm .tf-confirm-popup h2 {
     font-size: 1.5rem;
   }
+}
+
+.tf-withoutpayment-booking .tf-confirm-popup .tf-tour-without-payment-booking-confirm-msg-container,
+.tf-withoutpayment-booking-confirm .tf-confirm-popup .tf-tour-without-payment-booking-confirm-msg-container {
+  padding: 16px;
+  color: var(--tf-text-heading);
 }
 
 .tf-withoutpayment-booking .tf-confirm-popup .tf-booking-times,
