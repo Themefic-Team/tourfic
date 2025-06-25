@@ -69,12 +69,6 @@ while ( have_posts() ) : the_post();
 
 	// tour type meta
 	$tour_type = ! empty( $meta['type'] ) ? $meta['type'] : '';
-	// Repeated Fixed Tour meta
-	if(!empty($tour_type) && ($tour_type == 'fixed')) {
-		$tf_start_date = ! empty( $meta['fixed_availability']['date']['from'] ) ? $meta['fixed_availability']['date']['from'] : '';
-		$tf_repeated_fixed_tour_switch = ! empty( $meta['fixed_availability']["tf-repeat-months-switch"] ) ? $meta['fixed_availability']["tf-repeat-months-switch"] : 0;
-		$tf_tour_repeat_months = ($tf_repeated_fixed_tour_switch == 1) && !empty($meta['fixed_availability']['tf-repeat-months-checkbox']) ? $meta['fixed_availability']['tf-repeat-months-checkbox'] : array();
-	}
 
 	// date format for users
 	$tf_tour_date_format_for_users  = !empty(Helper::tfopt( "tf-date-format-for-users")) ? Helper::tfopt( "tf-date-format-for-users") : "Y/m/d";

@@ -972,13 +972,17 @@ class Tour {
 		$disable_infant_price   = ! empty( $meta['disable_infant_price'] ) ? $meta['disable_infant_price'] : false;
 		$pricing_rule           = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
 
+		$group_price    = ! empty( $meta['group_price'] ) ? $meta['group_price'] : 0;
+		$adult_price    = ! empty( $meta['adult_price'] ) ? $meta['adult_price'] : 0;
+		$children_price = ! empty( $meta['child_price'] ) ? $meta['child_price'] : 0;
+		$infant_price   = ! empty( $meta['infant_price'] ) ? $meta['infant_price'] : 0;
+
 		// Available Prices
 		$avail_prices = Pricing::instance( $post_id )->get_avail_price();
-		// var_dump($avail_prices);
-		$group_price            = ! empty( $avail_prices['group_price'] ) ? $avail_prices['group_price'] : false;
-		$adult_price            = ! empty( $avail_prices['adult_price'] ) ? $avail_prices['adult_price'] : false;
-		$child_price            = ! empty( $avail_prices['child_price'] ) ? $avail_prices['child_price'] : false;
-		$infant_price           = ! empty( $avail_prices['infant_price'] ) ? $avail_prices['infant_price'] : false;
+		$group_price            = ! empty( $avail_prices['group_price'] ) ? $avail_prices['group_price'] : $group_price;
+		$adult_price            = ! empty( $avail_prices['adult_price'] ) ? $avail_prices['adult_price'] : $adult_price;
+		$child_price            = ! empty( $avail_prices['child_price'] ) ? $avail_prices['child_price'] : $children_price;
+		$infant_price           = ! empty( $avail_prices['infant_price'] ) ? $avail_prices['infant_price'] : $infant_price;
 		$tour_extras            = isset( $meta['tour-extra'] ) ? $meta['tour-extra'] : null;
 		$tf_hide_external_price = true;
 
@@ -3314,7 +3318,7 @@ class Tour {
 			$min_people            = ! empty( $matched_availability['min_person'] ) ? $matched_availability['min_person'] : '';
 			$max_people            = ! empty( $matched_availability['max_person'] ) ? $matched_availability['max_person'] : '';
 			$tf_tour_booking_limit = ! empty( $matched_availability['max_capacity'] ) ? $matched_availability['max_capacity'] : 0;
-
+			$pricing_rule = ! empty( $matched_availability['pricing_type'] ) ? $matched_availability['pricing_type'] : '';
 			// Fixed tour maximum capacity limit
 
 			if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $start_date ) && ! empty( $end_date ) ) {
@@ -3663,13 +3667,19 @@ class Tour {
 			$response['errors'][] = esc_html__( 'Unknown Error! Please try again.', 'tourfic' );
 		}
 
+
+		$group_price    = ! empty( $meta['group_price'] ) ? $meta['group_price'] : 0;
+		$adult_price    = ! empty( $meta['adult_price'] ) ? $meta['adult_price'] : 0;
+		$children_price = ! empty( $meta['child_price'] ) ? $meta['child_price'] : 0;
+		$infant_price   = ! empty( $meta['infant_price'] ) ? $meta['infant_price'] : 0;
+
 		/**
 		 * Price by date range
 		 *
 		 * Tour type continuous and custom availability is true
 		 */
 
-		$group_price    = ! empty( $matched_availability['price'] ) ? $matched_availability['price'] : 0;
+		$group_price    = ! empty( $matched_availability['price'] ) ? $matched_availability['price'] : $group_price;
 		$adult_price    = ! empty( $matched_availability['adult_price'] ) ? $matched_availability['adult_price'] : 0;
 		$children_price = ! empty( $matched_availability['child_price'] ) ? $matched_availability['child_price'] : 0;
 		$infant_price   = ! empty( $matched_availability['infant_price'] ) ? $matched_availability['infant_price'] : 0;
@@ -3682,8 +3692,7 @@ class Tour {
 			for ( $i = 0; $i < (int) $matched_availability['options_count']; $i++ ) {
 				$min = (int) $matched_availability[ 'tf_option_min_person_' . $i ];
 				$max = (int) $matched_availability[ 'tf_option_max_person_' . $i ];
-				$price = $matched_availability[ 'tf_option_group_price_' . $i ];
-				$title = $matched_availability[ 'tf_option_title_' . $i ];
+				$price =  !empty($matched_availability[ 'tf_option_group_price_' . $i ]) ? $matched_availability[ 'tf_option_group_price_' . $i ] : 0;
 
 				// Keep track of the highest max_person across all options
 				if ( $max > $max_allowed ) {
@@ -3734,7 +3743,7 @@ class Tour {
 				$response['errors'][] = esc_html__( 'An adult is required for children booking!', 'tourfic' );
 			}
 
-		} else if ( $pricing_rule == 'group' && (empty($allow_package_pricing) || empty($group_package_pricing)) ) {
+		} else if ( $pricing_rule == 'group' ) {
 
 			if ( empty( $group_price ) ) {
 				$response['errors'][] = esc_html__( 'Group price is blank!', 'tourfic' );

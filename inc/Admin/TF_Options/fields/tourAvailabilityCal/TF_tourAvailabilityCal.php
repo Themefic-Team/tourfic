@@ -310,7 +310,7 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                     <input type="number" min="0" name="tf_tour_infant_price" placeholder="<?php echo esc_html__( 'Infant Price', 'tourfic' ); ?>">
                                 </div>
                             </div>
-                            <div class="tf-tour-limitation-group" style="display: <?php echo empty($group_package_option) || empty($group_package_pricing) ? 'block' : 'none' ?>">
+                            <div class="tf-tour-limitation-group" style="display: <?php echo $pricing_type == 'person' || (empty($group_package_option) || empty($group_package_pricing)) ? 'flex' : 'none' ?>">
                                 <div class="tf-field-text tf-tour-limitation" style="display: <?php echo esc_attr( ( $tour_avail_type=='fixed' || $tour_avail_type=='continuous' ) && ( $pricing_type == 'person' || $pricing_type == 'group' ) ? 'block' : 'none' ) ?>; width: calc(33% - 4px)">
                                     <label class="tf-field-label"><?php echo esc_html__( 'Minimum Person (Required for Search)', 'tourfic' ); ?></label>
                                     <input type="number" min="0" name="tf_tour_min_person">
