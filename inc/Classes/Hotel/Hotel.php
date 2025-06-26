@@ -3770,11 +3770,7 @@ class Hotel {
 		}
 
 		//Featured badge
-		if(!empty($settings)){
-			$featured_badge_text = isset($settings['featured_badge_text']) ? sanitize_text_field($settings['featured_badge_text']) : esc_html( "HOT DEAL" );
-		} else {
-			$featured_badge_text = !empty( $meta['featured_text'] ) ? esc_html( $meta['featured_text'] ) : esc_html( "HOT DEAL" );
-		}
+		$featured_badge_text = !empty( $meta['featured_text'] ) ? esc_html( $meta['featured_text'] ) : esc_html( "HOT DEAL" );
 
 		if ( $tf_hotel_arc_selected_template == "design-1" ) {
 			?>
@@ -4010,7 +4006,7 @@ class Hotel {
 								<?php if ( $discount_tag == 'yes' && ! empty( $min_discount_amount ) ) { ?>
                                     <div class="tf-available-room-off">
                                         <span>
-                                            <?php echo $min_discount_type == "percent" ? esc_html( $min_discount_amount ) . '%' : wp_kses_post( wc_price( $min_discount_amount ) ) ?><?php esc_html_e( "Off ", "tourfic" ); ?>
+                                            <?php echo $min_discount_type == "percent" ? esc_html( $min_discount_amount ) . '%' : wp_kses_post( wc_price( $min_discount_amount ) ) ?><?php esc_html_e( " Off ", "tourfic" ); ?>
                                         </span>
                                     </div>
 								<?php } ?>
@@ -4061,7 +4057,7 @@ class Hotel {
 							<?php if ( $discount_tag == 'yes' && ! empty( $min_discount_amount ) ) : ?>
                                 <div class="tf-available-room-off">
                                     <span>
-                                        <?php echo $min_discount_type == "percent" ? esc_html( $min_discount_amount ) . '%' : wp_kses_post( wc_price( $min_discount_amount ) ) ?><?php esc_html_e( "Off ", "tourfic" ); ?>
+                                        <?php echo $min_discount_type == "percent" ? esc_html( $min_discount_amount ) . '%' : wp_kses_post( wc_price( $min_discount_amount ) ) ?><?php esc_html_e( " Off ", "tourfic" ); ?>
                                     </span>
                                 </div>
 							<?php endif; ?>

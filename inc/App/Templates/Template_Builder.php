@@ -11,75 +11,57 @@ class Template_Builder {
 	use \Tourfic\Traits\Singleton;
 
 	public function __construct() {
-		add_action('admin_menu', array($this, 'admin_menu'));
-		add_action('init', array($this, 'tf_template_builder_post_type'));
-		add_filter('post_row_actions', array($this, 'tf_template_post_row_actions'), 20, 2);
-		add_filter('manage_tf_template_builder_posts_columns', array($this, 'tf_template_set_columns'));
-		add_action('manage_tf_template_builder_posts_custom_column', array($this, 'tf_template_render_column'), 10, 2);
-        add_action('admin_footer', array($this, 'tf_template_builder_add_popup_html'), 9);
-        add_action('wp_ajax_tf_load_template_markup', array($this, 'tf_load_template_markup_callback'));
-        add_action('wp_ajax_tf_get_template_options', array($this, 'tf_get_template_options_callback'));
-        add_action('wp_ajax_tf_update_term_options', array($this, 'tf_update_term_options_callback'));
-        add_action('wp_ajax_tf_save_template_builder', array($this, 'tf_save_template_builder_callback'));
-        add_filter('template_include', array($this, 'tf_template_builder_custom_template'));
-        add_action('save_post_tf_template_builder', [$this, 'enforce_elementor_template_on_save'], 20, 3);
-	}
-
-	public function admin_menu() {
-
+		// add_action('admin_menu', array($this, 'admin_menu'));
         if ( did_action( 'elementor/loaded' ) ) {
-            add_submenu_page(
-                'tf_settings',
-                esc_html__('Template Builder', 'tourfic'),
-                esc_html__('Template Builder', 'tourfic'),
-                'manage_options',
-                'edit.php?post_type=tf_template_builder',
-            );
-        } else {
-            add_submenu_page(
-                'tf_settings',
-                esc_html__('Template Builder', 'tourfic'),
-                esc_html__('Template Builder', 'tourfic'),
-                'manage_options',
-                'tf_template_builder',
-                function () {
-                    ?>
-                    <div class="wrap">
-                        <h1><?php echo esc_html__('Template Builder', 'tourfic'); ?></h1>
-                        <div class="notice notice-error" style="margin-top: 20px;">
-                            <p><?php esc_html_e('Please install and activate Elementor to use the Template Builder.', 'tourfic'); ?></p>
-
-                            <?php
-                            $plugin_slug = 'elementor/elementor.php';
-
-                            // Elementor not installed
-                            if ( ! file_exists( WP_PLUGIN_DIR . '/elementor/elementor.php' ) ) {
-                                $install_url = wp_nonce_url(
-                                    self_admin_url( 'update.php?action=install-plugin&plugin=elementor' ),
-                                    'install-plugin_elementor'
-                                );
-                                echo '<p><a href="' . esc_url( $install_url ) . '" class="button button-primary">';
-                                esc_html_e( 'Install Elementor', 'tourfic' );
-                                echo '</a></p>';
-                            }
-                            // Elementor installed but inactive
-                            elseif ( current_user_can( 'activate_plugins' ) && ! is_plugin_active( $plugin_slug ) ) {
-                                $activate_url = wp_nonce_url(
-                                    self_admin_url( 'plugins.php?action=activate&plugin=' . $plugin_slug ),
-                                    'activate-plugin_' . $plugin_slug
-                                );
-                                echo '<p><a href="' . esc_url( $activate_url ) . '" class="button button-primary">';
-                                esc_html_e( 'Activate Elementor', 'tourfic' );
-                                echo '</a></p>';
-                            }
-                            ?>
-                        </div>
-                    </div>
-                    <?php
-                }
-            );
-        } 
+            add_action('init', array($this, 'tf_template_builder_post_type'));
+            add_filter('post_row_actions', array($this, 'tf_template_post_row_actions'), 20, 2);
+            add_filter('manage_tf_template_builder_posts_columns', array($this, 'tf_template_set_columns'));
+            add_action('manage_tf_template_builder_posts_custom_column', array($this, 'tf_template_render_column'), 10, 2);
+            add_action('admin_footer', array($this, 'tf_template_builder_add_popup_html'), 9);
+            add_action('wp_ajax_tf_load_template_markup', array($this, 'tf_load_template_markup_callback'));
+            add_action('wp_ajax_tf_get_template_options', array($this, 'tf_get_template_options_callback'));
+            add_action('wp_ajax_tf_update_term_options', array($this, 'tf_update_term_options_callback'));
+            add_action('wp_ajax_tf_save_template_builder', array($this, 'tf_save_template_builder_callback'));
+            add_filter('template_include', array($this, 'tf_template_builder_custom_template'));
+            add_action('save_post_tf_template_builder', [$this, 'enforce_elementor_template_on_save'], 20, 3);
+        }
 	}
+
+	static function tf_template_builder_elementor_check() {
+        ?>
+        <div class="wrap">
+            <h1><?php echo esc_html__('Template Builder', 'tourfic'); ?></h1>
+            <div class="notice notice-error" style="margin-top: 20px;">
+                <p><?php esc_html_e('Please install and activate Elementor to use the Template Builder.', 'tourfic'); ?></p>
+
+                <?php
+                $plugin_slug = 'elementor/elementor.php';
+
+                // Elementor not installed
+                if ( ! file_exists( WP_PLUGIN_DIR . '/elementor/elementor.php' ) ) {
+                    $install_url = wp_nonce_url(
+                        self_admin_url( 'update.php?action=install-plugin&plugin=elementor' ),
+                        'install-plugin_elementor'
+                    );
+                    echo '<p><a href="' . esc_url( $install_url ) . '" class="button button-primary">';
+                    esc_html_e( 'Install Elementor', 'tourfic' );
+                    echo '</a></p>';
+                }
+                // Elementor installed but inactive
+                elseif ( current_user_can( 'activate_plugins' ) && ! is_plugin_active( $plugin_slug ) ) {
+                    $activate_url = wp_nonce_url(
+                        self_admin_url( 'plugins.php?action=activate&plugin=' . $plugin_slug ),
+                        'activate-plugin_' . $plugin_slug
+                    );
+                    echo '<p><a href="' . esc_url( $activate_url ) . '" class="button button-primary">';
+                    esc_html_e( 'Activate Elementor', 'tourfic' );
+                    echo '</a></p>';
+                }
+                ?>
+            </div>
+        </div>
+        <?php
+    }
 
 	public function tf_template_builder_post_type() {
 		$labels = [

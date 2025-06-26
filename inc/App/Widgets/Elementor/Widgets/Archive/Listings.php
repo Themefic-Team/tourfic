@@ -566,19 +566,6 @@ class Listings extends Widget_Base {
 			],
 		]);
 
-		$this->add_control('featured_badge_text', [
-			'label' => esc_html__('Featured Badge Text', 'tourfic'),
-			'type' => Controls_Manager::TEXT,
-			'dynamic'     => [ 'active' => true ],
-			'label_block' => false,
-			'default' => esc_html__('Hot Deal', 'tourfic'),
-			'condition' => [
-				'featured_badge' => 'yes',
-				'show_image' => 'yes',
-				'service!' => 'tf_carrental',
-			],
-		]);
-
 		$this->add_control('discount_tag', [
 			'label' => __('Discount Tag', 'tourfic'),
 			'type' => Controls_Manager::SWITCHER,
@@ -3226,7 +3213,6 @@ class Listings extends Widget_Base {
 			'gallery' => $settings['gallery'] ?? 'yes',
 			'tour_infos' => $settings['tour_infos'] ?? 'yes',
 			'featured_badge' => $settings['featured_badge'] ?? 'yes',
-			'featured_badge_text' => $settings['featured_badge_text'] ?? 'Hot Deal',
 			'discount_tag' => $settings['discount_tag'] ?? 'yes',
 			'promotional_tags' => $settings['promotional_tags'] ?? 'yes',
 			'show_title' => $settings['show_title'] ?? 'yes',
