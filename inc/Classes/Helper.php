@@ -724,6 +724,9 @@ class Helper {
 
                         <input type="hidden" name="place" id="tf-place" value="<?php echo esc_attr( $place_value ) ?? ''; ?> "/>
                     </div>
+
+                    <?php do_action('tf_search_result_sidebar_form_before_personal_fields', $post_type); ?>
+
                     <div class="tf-field-group tf-mt-16 tf_acrselection">
                         <div class="tf-field tf-flex">
                             <div class="acr-label tf-flex">
@@ -772,6 +775,8 @@ class Helper {
                             </div>
                         </div>
 					<?php } ?>
+
+                    <?php do_action('tf_search_result_sidebar_form_after_personal_fields', $post_type); ?>
 
                     <div class="tf-field-group tf-mt-8">
                         <i class="fa-solid fa-calendar-days"></i>
@@ -1778,6 +1783,7 @@ class Helper {
                         <input type="hidden" id="tf-place" name="place" value="<?php echo ! empty( $taxonomy_slug ) ? esc_attr( $taxonomy_slug ) : ''; ?>"/>
 
                     </div>
+                    <?php do_action('tf_archive_sidebar_form_before_personal_fields', $post_type) ?>
                     <div class="tf-field-group tf-mt-16 tf_acrselection">
                         <div class="tf-field tf-flex">
                             <div class="acr-label tf-flex">
@@ -1825,6 +1831,8 @@ class Helper {
                             </div>
                         </div>
 					<?php } ?>
+
+                    <?php do_action('tf_archive_sidebar_form_after_personal_fields', $post_type) ?>
 
                     <div class="tf-field-group tf-mt-8">
                         <i class="fa-solid fa-calendar-days"></i>
