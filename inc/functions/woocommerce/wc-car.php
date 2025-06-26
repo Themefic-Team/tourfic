@@ -53,11 +53,13 @@ function tf_car_booking_callback() {
 	$car_booking_by = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : '1';
 	$tf_booking_url = !empty( $meta['booking-url'] ) ? esc_url($meta['booking-url']) : '';
 	$tf_booking_query_url = !empty( $meta['booking-query'] ) ? $meta['booking-query'] : 'pickup={pickup}&dropoff={dropoff}&pickup_date={pickup_date}&dropoff_date={dropoff_date}';
+
 	$tf_booking_attribute = !empty( $meta['booking-attribute'] ) ? $meta['booking-attribute'] : '';
 
 	$product_id    = get_post_meta( $post_id, 'product_id', true );
 	$get_prices = Pricing::set_total_price($meta, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time);
 	
+
 	$total_prices = $get_prices['sale_price'] ? $get_prices['sale_price'] : 0;
 
 	$response      = array();

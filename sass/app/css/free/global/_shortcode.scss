@@ -186,6 +186,7 @@
             padding: 0;
             display: flex;
             align-items: center;
+            position: relative;
             input{
                 border: 0px solid;
                 @media #{$max1024}{
@@ -701,6 +702,14 @@ div#tf-destinationautocomplete-list {
                                     @include align-items(center);
                                     @media #{$max1024}{
                                         font-size: 0.75rem;
+                                    }
+                                }
+                                .selected-dropoff-time,
+                                .selected-pickup-time{
+                                    color: white;
+                                    font-size: 1.2rem;
+                                    path{
+                                        stroke: white;
                                     }
                                 }
                             }
