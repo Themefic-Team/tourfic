@@ -83,8 +83,10 @@
                     color: $color-heading;
                     font-size: 1rem;
                     height: 20px;
+                    min-height: auto;
+                    margin-top: 0;
                     outline: none;
-                    font-weight: 600;
+                    font-weight: normal;
                 }
 
                 .tf-archive-guest-info {
