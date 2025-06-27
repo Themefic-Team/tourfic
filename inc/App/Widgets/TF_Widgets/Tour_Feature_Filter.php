@@ -41,7 +41,7 @@ class Tour_Feature_Filter extends \WP_Widget {
         //check if is Tours
         $posttype = isset( $_GET['type'] ) ? $_GET['type'] : get_post_type();
 
-        if ( $posttype == 'tf_tours' ) {
+        if ( is_admin() || $posttype == 'tf_tours' ) {
             extract( $args );
             $title = apply_filters( 'widget_title', $instance['title'] );
 

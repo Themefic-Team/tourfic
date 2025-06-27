@@ -41,7 +41,7 @@ class Car_Engine_Filter extends \WP_Widget {
         //check if is Car
         $posttype = isset( $_GET['type'] ) ? $_GET['type'] : get_post_type();
 
-        if ( $posttype == 'tf_carrental' ) {
+        if ( is_admin() || $posttype == 'tf_carrental' ) {
             extract( $args );
             $title = apply_filters( 'widget_title', $instance['title'] );
 

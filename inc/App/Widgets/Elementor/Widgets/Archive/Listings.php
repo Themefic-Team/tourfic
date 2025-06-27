@@ -793,7 +793,7 @@ class Listings extends Widget_Base {
 
         $this->add_control( 'pagination_prev_label', [
 			'label' => __('Previous Label', 'tourfic'),
-			'default' => __('« Previous', 'tourfic'),
+			'default' => __('<< Previous', 'tourfic'),
 			'condition' => [
 				'show_pagination' => 'yes',
 			]
@@ -801,7 +801,7 @@ class Listings extends Widget_Base {
 
         $this->add_control( 'pagination_next_label', [
 			'label' => __('Next Label', 'tourfic'),
-			'default' => __('Next »', 'tourfic'),
+			'default' => __('Next >>', 'tourfic'),
 			'condition' => [
 				'show_pagination' => 'yes',
 			]
