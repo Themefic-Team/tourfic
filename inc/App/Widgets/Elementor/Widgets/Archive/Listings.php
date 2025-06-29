@@ -315,7 +315,6 @@ class Listings extends Widget_Base {
 				'1' => esc_html__('1', 'tourfic'),
 				'2' => esc_html__('2', 'tourfic'),
 				'3' => esc_html__('3', 'tourfic'),
-				'4' => esc_html__('4', 'tourfic'),
 			],
 			'toggle' => true,
 			'conditions' => [

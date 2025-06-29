@@ -13685,7 +13685,7 @@ div#tf-destinationautocomplete-list div:before {
 
 .tf-archive-listing__one .tf-car-archive-result .tf-car-result.tf-grid-3 .tf-single-car-view,
 .tf-archive-template__one .tf-car-archive-result .tf-car-result.tf-grid-3 .tf-single-car-view {
-  width: calc(100% / 3 - 16px);
+  width: calc(100% / 3 - 22px);
 }
 
 @media only screen and (max-width: 1024px) {

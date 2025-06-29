@@ -1569,7 +1569,7 @@
 
                 &.tf-grid-3{
                     .tf-single-car-view {
-                        width: calc(100% / 3 - 16px);
+                        width: calc(100% / 3 - 22px);
                         @media #{$max1024}{
                             width: calc(100% / 2 - 12px);
                         }
