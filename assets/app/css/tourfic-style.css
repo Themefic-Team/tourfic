@@ -9501,7 +9501,7 @@ div#tf-destinationautocomplete-list div:before {
   border-radius: 0;
   margin: 0;
   padding: 0;
-  display: flow-root;
+  display: flex;
 }
 
 .tf-sidebar__design-1 .tf-car-archive-sidebar .tf_widget .tf-category-lists ul li.hidden {
