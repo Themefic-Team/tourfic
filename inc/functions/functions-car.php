@@ -407,11 +407,22 @@ function tf_car_availability_response($car_meta, array &$not_found, $pickup='', 
 
 	$has_car = false;
 	$pricing_type = !empty($car_meta["pricing_type"]) ? $car_meta["pricing_type"] : 'day_hour';
+	$price_by = !empty($car_meta["price_by"]) ? $car_meta["price_by"] : 'day';
+	
+	$date_pricing = !empty($car_meta["date_prices"]) ? $car_meta["date_prices"] : '';
+	$day_pricing = !empty($car_meta["day_prices"]) ? $car_meta["day_prices"] : '';
 
-	$date_pricing = !empty($meta["date_prices"]) ? $meta["date_prices"] : '';
-	$day_pricing = !empty($meta["day_prices"]) ? $meta["day_prices"] : '';
+	$custom_availability = !empty($car_meta["custom_availability"]) ? $car_meta["custom_availability"] : '0';
+	$pricing_type = !empty($car_meta["pricing_type"]) ? $car_meta["pricing_type"] : 'day_hour';
+	$base_price = !empty($car_meta["car_rent"]) ? $car_meta["car_rent"] : 0;
 
-	if( !empty($tf_pickup_date) && !empty($tf_dropoff_date) && 'date'==$pricing_type && !empty($date_pricing) ){
+	if(!empty($tf_startprice) && !empty($tf_endprice) && $custom_availability == '0' && ('day' == $price_by || 'hour' == $price_by) ){
+		if ( ! empty( $base_price ) && $tf_startprice <= $base_price && $base_price <= $tf_endprice ) {
+			$has_car = true;
+		} else {
+			$has_car = false;
+		}
+	}elseif( !empty($tf_pickup_date) && !empty($tf_dropoff_date) && 'date'==$pricing_type && !empty($date_pricing) ){
 
 		if ( ! empty( $tf_startprice ) && ! empty( $tf_endprice ) ) {
 
