@@ -10543,6 +10543,9 @@ div#tf-destinationautocomplete-list div:before {
   padding-left: 0px;
   box-shadow: none;
   background: transparent;
+  padding: 3px;
+  margin-top: 0;
+  min-height: auto;
 }
 
 .tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date .info-select input:focus {
