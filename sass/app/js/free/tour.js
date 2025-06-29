@@ -663,15 +663,6 @@
             }
         });
 
-        /**
-         * Single tour booking form
-         */
-        const allowed_times = tf_params.tour_form_data.allowed_times ? JSON.parse(tf_params.tour_form_data.allowed_times) : [];
-        const custom_avail = tf_params.tour_form_data.custom_avail;
-        if (custom_avail == false && Object.keys(allowed_times).length > 0) {
-            populateTimeSelect(allowed_times); // Pass the entire object, not just the values
-        }
-
         // First Day of Week
         //const first_day_of_week = tf_params.tour_form_data.flatpickr_locale;
 
