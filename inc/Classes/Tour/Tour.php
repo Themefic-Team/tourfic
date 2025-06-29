@@ -2134,9 +2134,9 @@ class Tour {
 							<?php } ?>
                         </div>
 					<?php }
-
+					
 					if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ( $tour_extras ) ) { ?>
-                        <div class="tf-control-pagination tf-pagination-content-2 <?php echo $pricing_type!='package' && empty( $package_pricing ) ? esc_attr( 'show' ) : ''; ?>">
+                        <div class="tf-control-pagination tf-pagination-content-2 <?php echo $pricing_type!='package' || empty( $package_pricing ) ? esc_attr( 'show' ) : ''; ?>">
 							<?php
 							if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $pricing_type=='package' && $package_pricing ) { ?>
                                 <a href="#" class="tf-back-control tf-step-back" data-step="2"><i class="fa fa-angle-left"></i><?php echo esc_html__( "Back", "tourfic" ); ?></a>
