@@ -27,7 +27,11 @@
        
         if( $(".widget_tf_price_filters").length > 0 ){
 
-            const post_type = $(document).find('input[name="post_id"]').attr("data-post-type");
+            let urlParams = new URLSearchParams(window.location.search);
+            let post_type = urlParams.get('type');
+            if(!post_type){
+                post_type = $(document).find('input[name="post_id"]').attr("data-post-type");
+            }
             if( post_type == 'tf_hotel' || post_type == 'tf_tours' || post_type == 'tf_apartment' || post_type == 'tf_carrental' ){
                 $.ajax({
                     type: 'POST',
