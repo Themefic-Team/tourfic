@@ -21,53 +21,65 @@
                     </li>
 				<?php }
 
-				if ( $tour_type == 'continuous' ) {
-					if ( $custom_avail ) {
-						$tf_max_people   = array();
-						$tf_max_capacity = array();
-						$tf_custom_date  = ! empty( $meta['cont_custom_date'] ) ? $meta['cont_custom_date'] : '';
-						if ( ! empty( $tf_custom_date ) && gettype( $tf_custom_date ) == "string" ) {
-							$tf_tour_conti_avail = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
-								return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
-							}, $tf_custom_date );
-							$tf_custom_date      = unserialize( $tf_tour_conti_avail );
+					
+				$tour_availability_data = isset( $meta['tour_availability'] ) && ! empty( $meta['tour_availability'] ) ? json_decode( $meta['tour_availability'], true ) : [];
+				$allow_package_pricing = ! empty( $meta['allow_package_pricing'] ) ? $meta['allow_package_pricing'] : '';
+				$group_package_pricing = ! empty( $meta['group_package_pricing'] ) ? $meta['group_package_pricing'] : '';
+				$tf_package_pricing = ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
+
+				$tf_max_people = [];
+				$tf_max_capacity = [];
+				if( !empty($tour_availability_data) && ('person'==$pricing_rule || 'group'==$pricing_rule) ){
+					foreach ($tour_availability_data as $data) {
+						if ($data['status'] !== 'available') {
+							continue;
 						}
-						if(is_array($tf_custom_date)) {
-							foreach ( $tf_custom_date as $item ) {
-							$max_people = ! empty( $item['max_people'] ) ? $item['max_people'] : '';
-							if ( ! empty( $max_people ) ) {
-								$tf_max_people [] = $max_people;
+		
+						if($data['pricing_type'] == 'person'){
+							if (!empty($data['max_person'])) {
+								$tf_max_people [] = $data['max_person'];
+							} 
+							if (!empty($data['max_capacity'])) {
+								$tf_max_capacity [] = $data['max_capacity'];
+							} 
+						}
+		
+						if($data['pricing_type'] == 'group' && !empty($allow_package_pricing) && !empty($group_package_pricing) ){
+							if(!empty($data['options_count'])){
+								for($i = 0; $i < $data['options_count']; $i++){
+									if (!empty($data['tf_option_max_person_'.$i])) {
+										$tf_max_people [] = $data['tf_option_max_person_'.$i];
+									}
+								}
 							}
-							$max_capacity = ! empty( $item['max_capacity'] ) ? $item['max_capacity'] : '';
-							if ( ! empty( $max_capacity ) ) {
-								$tf_max_capacity [] = $max_capacity;
+						}
+		
+						if($data['pricing_type'] == 'group' && (empty($allow_package_pricing) || empty($group_package_pricing)) ){
+							if (!empty($data['max_person'])) {
+								$tf_max_people [] = $data['max_person'];
+							} 
+							if (!empty($data['max_capacity'])) {
+								$tf_max_capacity [] = $data['max_capacity'];
 							}
 						}
-						}
-						if ( ! empty( $tf_max_capacity ) ) {
-							$tf_tour_booking_limit = max( $tf_max_capacity );
-						}
-						if ( ! empty( $tf_max_people ) ) {
-							$max_people = max( $tf_max_people );
-						}
-					} else {
-						$tf_tour_booking_limit = ! empty( $meta['cont_max_capacity'] ) ? $meta['cont_max_capacity'] : 0;
-						$max_people            = ! empty( $meta['cont_max_people'] ) ? $meta['cont_max_people'] : 0;
+						
+
 					}
 				}
 
-				if ( $tour_type == 'fixed' ) {
-					if ( ! empty( $meta['fixed_availability'] ) && gettype( $meta['fixed_availability'] ) == "string" ) {
-						$tf_tour_fixed_avail   = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {
-							return ( $match[1] == strlen( $match[2] ) ) ? $match[0] : 's:' . strlen( $match[2] ) . ':"' . $match[2] . '";';
-						}, $meta['fixed_availability'] );
-						$tf_tour_fixed_date    = unserialize( $tf_tour_fixed_avail );
-						$max_people            = ! empty( $tf_tour_fixed_date['max_seat'] ) ? $tf_tour_fixed_date['max_seat'] : '';
-						$tf_tour_booking_limit = ! empty( $tf_tour_fixed_date['max_capacity'] ) ? $tf_tour_fixed_date['max_capacity'] : 0;
-					} else {
-						$max_people            = ! empty( $meta['fixed_availability']['max_seat'] ) ? $meta['fixed_availability']['max_seat'] : '';
-						$tf_tour_booking_limit = ! empty( $meta['fixed_availability']['max_capacity'] ) ? $meta['fixed_availability']['max_capacity'] : 0;
+				if('package'==$pricing_rule && !empty($tf_package_pricing)){
+					foreach($tf_package_pricing as $package){
+						if (!empty($package['max_adult'])) {
+							$tf_max_people [] = $package['max_adult'];
+						} 
 					}
+				}
+
+				if ( ! empty( $tf_max_capacity ) ) {
+					$tf_tour_booking_limit = max( $tf_max_capacity );
+				}
+				if ( ! empty( $tf_max_people ) ) {
+					$max_people = max( $tf_max_people );
 				}
 
 				if ( ! empty( $tf_tour_booking_limit ) || ! empty( $max_people ) ) { ?>

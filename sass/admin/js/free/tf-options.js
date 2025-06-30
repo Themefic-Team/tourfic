@@ -764,6 +764,9 @@
             tfSelect2Int($this);
         });
 
+        // Clear Default Select in Tour Backend Booking
+        $('.tf-backend-booking-card-wrap #tf_available_tours').val(null).trigger('change');
+
         function TfFormatOption(option) {
             if (!option.id) {
               return option.text;
