@@ -225,16 +225,10 @@ while ( have_posts() ) : the_post();
 	 */
 	$pricing_rule = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
 	$tour_type    = ! empty( $meta['type'] ) ? $meta['type'] : '';
-	if ( $tour_type && $tour_type == 'continuous' ) {
-		$custom_avail = ! empty( $meta['custom_avail'] ) ? $meta['custom_avail'] : false;
-	}
 	$discount_type  = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : 'none';
 	$disable_adult  = ! empty( $meta['disable_adult_price'] ) ? $meta['disable_adult_price'] : false;
 	$disable_child  = ! empty( $meta['disable_child_price'] ) ? $meta['disable_child_price'] : false;
 	$disable_infant = ! empty( $meta['disable_infant_price'] ) ? $meta['disable_infant_price'] : false;
-	if ( $tour_type == 'continuous' && $custom_avail == true ) {
-		$pricing_rule = ! empty( $meta['custom_pricing_by'] ) ? $meta['custom_pricing_by'] : 'person';
-	}
 
 	# Get Pricing
 	$group_price    = ! empty( $meta['group_price'] ) ? $meta['group_price'] : 0;

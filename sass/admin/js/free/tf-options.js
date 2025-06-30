@@ -759,7 +759,6 @@
             }
         
         }
-
         $('select.tf-select2').each(function () {
             var $this = $(this);
             tfSelect2Int($this);

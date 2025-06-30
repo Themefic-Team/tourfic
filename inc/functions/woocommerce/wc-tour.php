@@ -606,14 +606,14 @@ function tf_tours_booking_function() {
 			}
 
 			// Find a matching price bracket
-			if ( $total_people >= $min && $total_people <= $max ) {
+			if ( $total_people_booking >= $min && $total_people_booking <= $max ) {
 				$found_valid_option = true;
 				$matched_price = $price;
 				break;
 			}
 		}
 
-		if ( $total_people > $max_allowed ) {
+		if ( $total_people_booking > $max_allowed ) {
 			$response['errors'][] = sprintf( esc_html__( 'Maximum %1$s allowed', 'tourfic' ), $max_allowed );
 		} elseif ( $found_valid_option ) {
 			$group_price = $matched_price;

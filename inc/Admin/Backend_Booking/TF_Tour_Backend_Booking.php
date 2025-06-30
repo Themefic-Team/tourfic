@@ -33,6 +33,7 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 						'label'      => esc_html__( 'Available Tours', 'tourfic' ),
 						'type'       => 'select2',
 						'options'    => 'posts',
+						'placeholder' => esc_html__( 'Select Tour', 'tourfic' ),
 						'query_args' => array(
 							'post_type'      => 'tf_tours',
 							'posts_per_page' => - 1,
