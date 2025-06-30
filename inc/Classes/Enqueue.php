@@ -242,6 +242,26 @@ class Enqueue {
 		wp_enqueue_script('map-marker-label', TF_ASSETS_URL . 'app/libs/markerwithlabel.js', array(), TOURFIC, true);
 
 		/**
+		 * Hotel Min and Max Price
+		 */
+		$hotel_min_max_price = HotelPricing::get_min_max_price_from_all_hotel();
+
+		/**
+		 * Tour Min and Max Price
+		 */
+		$tour_min_max_price = TourPricing::get_min_max_price_from_all_tour();
+
+		/*
+		 * Apartment Min and Max Price
+		 */
+		$tf_apartment_min_max_price = ApartmentPricing::get_min_max_price_from_all_apartment();
+
+		/**
+		 * Cars Min and Max Price
+		 */
+		$tf_car_min_max_price = get_cars_min_max_price();
+		
+		/**
 		 * Tour booking form
 		 */
 		global $post;
