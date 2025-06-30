@@ -48,9 +48,6 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 					 	if(is_array($data)):
 							
 							foreach ( $data as $key => $value ) :
-								if( "cont_custom_date" == $this->field['id'] ){
-									$value[$field_title] = esc_html__('Custom Dates', 'tourfic');
-								}
 							?>
                             <div class="tf-single-repeater tf-single-repeater-<?php echo esc_attr($this->field['id']);?>">
 							<input type="hidden" name="tf_parent_field" value="<?php echo esc_attr($this->parent_field); ?>">
