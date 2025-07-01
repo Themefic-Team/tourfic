@@ -1429,7 +1429,7 @@ class Helper {
             <div class="tf-booking-form-submit">
 	            <?php $ptype = esc_attr( $_GET['type'] ) ?? get_post_type(); ?>
                 <input type="hidden" name="type" value="<?php echo esc_attr($ptype); ?>" class="tf-post-type"/>
-                <button class="tf_btn tf_btn_full tf-submit"><?php esc_html_e( 'Search Now', 'tourfic' ); ?></button>
+                <button class="tf_btn tf-submit"><?php esc_html_e( 'Search Now', 'tourfic' ); ?></button>
             </div>
 
 			<?php if ( $post_type == 'tf_hotel' || $post_type == 'tf_tours' || $post_type == 'tf_apartment' ) : ?>
