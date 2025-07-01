@@ -2963,32 +2963,48 @@ class Tour {
 		// Get tour meta options
 		$meta = get_post_meta( get_the_ID(), 'tf_tours_opt', true );
 
+		$avail_persons = Pricing::instance( get_the_ID() )->get_min_max_person();
+
+		// Total People
+		$total_people = intval( $adults ) + intval( $child );
+		$people_counter = 0;
+		// Max & Min People Check
+		if ( ! empty( $avail_persons['max_person'] ) && $avail_persons['max_person'] >= $total_people && $avail_persons['max_person'] != 0 && ! empty( $avail_persons['min_person'] ) && $avail_persons['min_person'] <= $total_people && $avail_persons['min_person'] != 0 ) {
+			$people_counter ++;
+		}
+
+		if ( empty($avail_persons['max_person']) || empty($avail_persons['min_person']) ) {
+			$people_counter ++;
+		}
+
 		// Set initial tour availability status
 		$has_tour = false;
 
-		if ( ! empty( $startprice ) && ! empty( $endprice ) ) {
-			if ( ! empty( $meta['adult_price'] ) ) {
-				if ( $startprice <= $meta['adult_price'] && $meta['adult_price'] <= $endprice ) {
-					$has_tour = true;
+		if ( $people_counter > 0 ) {
+			if ( ! empty( $startprice ) && ! empty( $endprice ) ) {
+				if ( ! empty( $meta['adult_price'] ) ) {
+					if ( $startprice <= $meta['adult_price'] && $meta['adult_price'] <= $endprice ) {
+						$has_tour = true;
+					}
 				}
-			}
-			if ( ! empty( $meta['child_price'] ) ) {
-				if ( $startprice <= $meta['child_price'] && $meta['child_price'] <= $endprice ) {
-					$has_tour = true;
+				if ( ! empty( $meta['child_price'] ) ) {
+					if ( $startprice <= $meta['child_price'] && $meta['child_price'] <= $endprice ) {
+						$has_tour = true;
+					}
 				}
-			}
-			if ( ! empty( $meta['infant_price'] ) ) {
-				if ( $startprice <= $meta['infant_price'] && $meta['infant_price'] <= $endprice ) {
-					$has_tour = true;
+				if ( ! empty( $meta['infant_price'] ) ) {
+					if ( $startprice <= $meta['infant_price'] && $meta['infant_price'] <= $endprice ) {
+						$has_tour = true;
+					}
 				}
-			}
-			if ( ! empty( $meta['group_price'] ) ) {
-				if ( $startprice <= $meta['group_price'] && $meta['group_price'] <= $endprice ) {
-					$has_tour = true;
+				if ( ! empty( $meta['group_price'] ) ) {
+					if ( $startprice <= $meta['group_price'] && $meta['group_price'] <= $endprice ) {
+						$has_tour = true;
+					}
 				}
+			} else {
+				$has_tour = true;
 			}
-		} else {
-			$has_tour = true;
 		}
 		
 		if ( $has_tour ) {

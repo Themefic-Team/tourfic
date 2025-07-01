@@ -445,6 +445,113 @@ class Pricing {
 		);
 	}
 
+	function get_min_max_person( $period = '') {
+		
+		$tour_price                       = [];
+		$meta                             = $this->meta;
+		$pricing_rule                     = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
+		$tour_availability_data = isset( $meta['tour_availability'] ) && ! empty( $meta['tour_availability'] ) ? json_decode( $meta['tour_availability'], true ) : [];
+		$allow_package_pricing = ! empty( $meta['allow_package_pricing'] ) ? $meta['allow_package_pricing'] : '';
+		$group_package_pricing = ! empty( $meta['group_package_pricing'] ) ? $meta['group_package_pricing'] : '';
+		
+		$min_person = null;
+		$max_person = null;
+		if(!empty($tour_availability_data)){
+			foreach ($tour_availability_data as $data) {
+				if ($data['status'] !== 'available') {
+					continue;
+				}
+
+				if($data['pricing_type'] == 'person'){
+					if (!empty($data['min_person'])) {
+						if (is_null($min_person) || $data['min_person'] < $min_person) {
+							$min_person = $data['min_person'];
+						}
+					}
+					if (!empty($data['max_person'])) {
+						if (is_null($max_person) || $data['max_person'] > $max_person) {
+							$max_person = $data['max_person'];
+						}
+					}
+				}
+
+				if($data['pricing_type'] == 'group' && !empty($allow_package_pricing) && !empty($group_package_pricing) ){
+					if(!empty($data['options_count'])){
+						for($i = 0; $i < $data['options_count']; $i++){
+							if (!empty($data['tf_option_min_person_'.$i])) {
+								if (is_null($min_person) || $data['tf_option_min_person_'.$i] < $min_person) {
+									$min_person = $data['tf_option_min_person_'.$i];
+								}
+							}
+							if (!empty($data['tf_option_max_person_'.$i])) {
+								if (is_null($max_person) || $data['tf_option_max_person_'.$i] > $max_person) {
+									$max_person = $data['tf_option_max_person_'.$i];
+								}
+							}
+						}
+					}
+				}
+
+				if($data['pricing_type'] == 'group' && (empty($allow_package_pricing) || empty($group_package_pricing)) ){
+					if (!empty($data['min_person'])) {
+						if (is_null($min_person) || $data['min_person'] < $min_person) {
+							$min_person = $data['min_person'];
+						}
+					}
+					if (!empty($data['max_person'])) {
+						if (is_null($max_person) || $data['max_person'] > $max_person) {
+							$max_person = $data['max_person'];
+						}
+					}
+				}
+
+			}
+		}
+
+		$package_pricing = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
+		if(!empty($package_pricing)){
+			foreach($package_pricing as $package){
+				if (!empty($package['min_adult'])) {
+					if (is_null($min_person) || $package['min_adult'] < $min_person) {
+						$min_person = $package['min_adult'];
+					}
+				}
+				if (!empty($package['max_adult'])) {
+					if (is_null($max_person) || $package['max_adult'] > $max_person) {
+						$max_person = $package['max_adult'];
+					}
+				}
+
+				if (!empty($package['min_child'])) {
+					if (is_null($min_person) || $package['min_child'] < $min_person) {
+						$min_person = $package['min_child'];
+					}
+				}
+				if (!empty($package['max_child'])) {
+					if (is_null($max_person) || $package['max_child'] > $max_person) {
+						$max_person = $package['max_child'];
+					}
+				}
+
+				if (!empty($package['min_infant'])) {
+					if (is_null($min_person) || $package['min_infant'] < $min_person) {
+						$min_person = $package['min_infant'];
+					}
+				}
+				if (!empty($package['max_infant'])) {
+					if (is_null($max_person) || $package['max_infant'] > $max_person) {
+						$max_person = $package['max_infant'];
+					}
+				}
+			}
+		}
+
+		return array(
+			'min_person' => $min_person,
+			'max_person' => $max_person,
+		);
+	}
+
 	/*
 	 * Get min price html
 	 */
