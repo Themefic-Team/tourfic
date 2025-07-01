@@ -509,7 +509,7 @@ class Pricing {
 		}
 
 		$package_pricing = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
-		if(!empty($package_pricing)){
+		if(!empty($package_pricing) && $pricing_rule=='package'){
 			foreach($package_pricing as $package){
 				if (!empty($package['min_adult'])) {
 					if (is_null($min_person) || $package['min_adult'] < $min_person) {
