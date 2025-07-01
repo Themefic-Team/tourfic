@@ -1828,6 +1828,9 @@ li.tf-filter-item {
                                         &:first-child{
                                             padding-bottom: 16px;
                                         }
+                                        &:nth-child(2){
+                                            padding: 16px 0;
+                                        }
                                         &:last-child{
                                             border: 0px solid;
                                             padding-top: 16px;
