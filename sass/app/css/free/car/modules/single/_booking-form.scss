@@ -66,14 +66,20 @@
                                 font-size: 1rem;
                                 font-weight: 400;
                                 border: 0px solid;
-                                padding: 0;
+                                padding-left: 0px;
+                                box-shadow: none;
+                                background: transparent;
+                                cursor: pointer;
+                                position: relative;
+                                @media #{$max575}{
+                                    font-size: 0.875rem;
+                                }
                                 &:focus{
                                     outline: none;
                                     box-shadow: none;
                                 }
                                 &::placeholder{
                                     color: $color-text;
-                                    opacity: 1;
                                 }
                             }
                             .autocomplete-items{

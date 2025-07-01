@@ -2325,11 +2325,11 @@
         $('.tf-archive-template__three .acr-inc , .tf-archive-template__three .acr-dec').on('click', function () {
 
             if ($('input#infant').length) {
-                var guest = Number($('input#adults').val()) + Number($('input#children').val()) + Number($('input#infant').val());
+                var guest = Number($('input#adults').val() ? $('input#adults').val() : 0 ) + Number($('input#children').val() ? $('input#children').val() : 0) + Number($('input#infant').val() ? $('input#infant').val() : 0);
             } else {
-                var guest = Number($('input#adults').val()) + Number($('input#children').val());
-                var adult = Number($('input#adults').val());
-                var children = Number($('input#children').val());
+                var guest = Number($('input#adults').val() ? $('input#adults').val() : 0 ) + Number($('input#children').val() ? $('input#children').val() : 0);
+                var adult = Number($('input#adults').val() ? $('input#adults').val() : 0 );
+                var children = Number($('input#children').val() ? $('input#children').val() : 0);
             }
             if (guest.toString().length < 2) {
                 guest = '0' + guest;
@@ -2724,6 +2724,54 @@
                     }
                 }
             });
+        });
+
+
+         /*
+        * Car Search Form Pickup & Dropoff Time
+        * @author Mofazzal Hossain
+        */
+
+        // Open time options
+        $('body').on('click' , '.selected-pickup-time, .selected-dropoff-time', function () {
+            const $infoSelect = $(this).closest('.info-select');
+            const $dropdown = $infoSelect.find('.time-options-list');
+            const isOpen = $dropdown.is(':visible');
+
+            $('.time-options-list').slideUp(200);
+            $('.selected-dropoff-time, .selected-pickup-time').removeClass('active');
+
+            if (!isOpen) {
+                $dropdown.slideDown(200);
+                $(this).addClass('active');
+            }
+        });
+
+        // Select time
+        $('.tf-pickup-time li, .tf-dropoff-time li').on('click', function () {
+            const selected = $(this).attr('value');
+            const $infoSelect = $(this).closest('.info-select');
+
+            if ($(this).closest('ul').hasClass('tf-pickup-time')) {
+                $('.tf_pickup_time').val(selected);
+                $('.tf_dropoff_time').val(selected);
+                $('.selected-pickup-time .text').text(selected);
+                $('.selected-dropoff-time .text').text(selected);
+            } else {
+                $('.tf_dropoff_time').val(selected);
+                $('.selected-dropoff-time .text').text(selected);
+            }
+
+            $('.time-options-list').slideUp(200);
+            $('.selected-dropoff-time, .selected-pickup-time').removeClass('active');
+        });
+
+        // Click outside to close dropdown
+        $('body').on('click', function (e) {
+            if (!$(e.target).closest('.info-select').length) {
+                $('.time-options-list').slideUp(200);
+                $('.selected-dropoff-time, .selected-pickup-time').removeClass('active');
+            }
         });
     });
 

@@ -24,6 +24,7 @@ if ( $rooms ) :
 		$tf_hide_price        = ! empty( $meta['hide_price'] ) ? $meta['hide_price'] : '';
 		$tf_ext_booking_type  = ! empty( $meta['external-booking-type'] ) ? $meta['external-booking-type'] : '1';
 		$tf_ext_booking_code  = ! empty( $meta['booking-code'] ) ? $meta['booking-code'] : '';
+		$adults_name = apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) );
 	}
 	if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
 		$external_search_info = array(
@@ -226,7 +227,7 @@ if ( $rooms ) :
                                                 <span class="icon-text tf-d-b">x<?php echo esc_html($adult_number); ?></span>
                                             </div>
                                             <div class="tf-top">
-												<?php esc_html_e( 'Number of Adults', 'tourfic' ); ?>
+												<?php esc_html_e( 'Number of '. $adults_name .'s', 'tourfic' ); ?>
                                                 <i class="tool-i"></i>
                                             </div>
                                         </div>
@@ -285,7 +286,7 @@ if ( $rooms ) :
                                             <span class="icon-text tf-d-b">x<?php echo esc_html($adult_number); ?></span>
                                         </div>
                                         <div class="tf-top">
-											<?php esc_html_e( 'Number of Adults', 'tourfic' ); ?>
+											<?php esc_html_e( 'Number of ' . $adults_name . 's', 'tourfic' ); ?>
                                             <i class="tool-i"></i>
                                         </div>
                                     </div>

@@ -479,11 +479,11 @@ class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
 
 		$room_data = $this->tf_get_room_data( intval( $field['tf_available_hotels'] ), $field['tf_available_rooms'] );
 
-		if ( $field['tf_hotel_rooms_number'] * $room_data['adult'] < $field['tf_hotel_adults_number'] ) {
+		if ( (int) $field['tf_hotel_rooms_number'] * (int) $room_data['adult'] < $field['tf_hotel_adults_number'] ) {
 			/* translators: %s maximum adult number */
 			$response['fieldErrors']['tf_hotel_adults_number_error'] = sprintf(esc_html__( "You can't book more than %s adults", 'tourfic' ), $field['tf_hotel_rooms_number'] * $room_data['adult']);
 		}
-		if ( $field['tf_hotel_rooms_number'] * $room_data['child'] < $field['tf_hotel_children_number'] ) {
+		if ( (int) $field['tf_hotel_rooms_number'] * (int) $room_data['child'] < $field['tf_hotel_children_number'] ) {
 			/* translators: %s maximum child number */
 			$response['fieldErrors']['tf_hotel_children_number_error'] = sprintf(esc_html__( "You can't book more than %s children", 'tourfic' ), $field['tf_hotel_rooms_number'] * $room_data['child']);
 		}

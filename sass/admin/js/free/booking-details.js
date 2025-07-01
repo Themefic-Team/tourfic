@@ -291,7 +291,7 @@
          */
         $(document).on('click', '.tf-voucher-preview .tf-preview-btn a', function (e) {
             e.preventDefault();
-            $(".tf-voucher-quick-view-box").show();
+            $(".tf-voucher-quick-view-box").css('display', 'flex');
         });
 
         /**

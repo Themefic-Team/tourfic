@@ -82,7 +82,13 @@ class Hotel {
          * Backend data
          */
         $meta  = get_post_meta( $hotel_id, 'tf_hotels_opt', true );
-        $rooms = Room::get_hotel_rooms( $hotel_id );
+		// Get the original (default language) post ID using WPML
+		if (function_exists('wpml_get_default_language')) {
+			$original_hotel_id = apply_filters('wpml_object_id', $hotel_id, 'tf_hotel', false, wpml_get_default_language());
+		} else {
+			$original_hotel_id = $hotel_id;
+		}
+        $rooms = Room::get_hotel_rooms( $original_hotel_id );
         $locations           = get_the_terms( $hotel_id, 'hotel_location' );
         $first_location_name = ! empty( $locations ) ? $locations[0]->name : '';
         $room_book_by        = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
@@ -244,6 +250,13 @@ class Hotel {
                         $avail_date = ! empty( $room['avail_date'] ) ? json_decode($room['avail_date'], true) : [];
                     }
 
+					// Get the original (default language) post ID using WPML
+					if ( function_exists( 'wpml_get_default_language' ) ) {
+						$original_hotel_id = apply_filters( 'wpml_object_id', $hotel_id, 'tf_hotel', false, wpml_get_default_language() );
+					} else {
+						$original_hotel_id = $hotel_id;
+					}
+					//room inventory manage
                     if ( ! empty( $order_ids ) && $reduce_num_room == true ) {
 
                         # Get backend available date range as an array
@@ -275,7 +288,7 @@ class Hotel {
 								$tf_orders_select = array(
 									'select' => "post_id,order_details",
 									'post_type' => 'hotel',
-									'query' => " AND ostatus = 'completed' AND order_id = ".$order_id
+									'query' => " AND ostatus = 'completed' AND order_id = ".$order_id." AND post_id = ".$original_hotel_id
 								);
 								$tf_hotel_book_orders = Helper::tourfic_order_table_data($tf_orders_select);
 
@@ -1596,6 +1609,7 @@ class Hotel {
 		// date format for users output
 		$hotel_date_format_for_users   = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 		$hotel_location_field_required = ! empty( Helper::tfopt( "required_location_hotel_search" ) ) ? Helper::tfopt( "required_location_hotel_search" ) : 0;
+		$adults_name = apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) );
 
 		$disable_hotel_child_search = ! empty( Helper::tfopt( 'disable_hotel_child_search' ) ) ? Helper::tfopt( 'disable_hotel_child_search' ) : '';
 		if ( ! empty( $design ) && 2 == $design ) {
@@ -1687,7 +1701,7 @@ class Hotel {
                                 <div class="tf_acrselection-wrap">
                                     <div class="tf_acrselection-inner">
                                         <div class="tf_acrselection">
-                                            <div class="acr-label"><?php esc_html_e( 'Adults', 'tourfic' ); ?></div>
+                                            <div class="acr-label"><?php esc_html_e( $adults_name . 's', 'tourfic' ); ?></div>
                                             <div class="acr-select">
                                                 <div class="acr-dec">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -1921,7 +1935,7 @@ class Hotel {
 									<h5><?php esc_html_e("Guests & Rooms", "tourfic"); ?></h5>
 									<div class="tf_selectperson-wrap">
 										<div class="tf_input-inner">
-											<div class="adults-text"><?php echo esc_html__( '1 Adults', 'tourfic' ); ?></div>
+											<div class="adults-text"><?php echo esc_html__( '1 '. $adults_name . 's', 'tourfic' ); ?></div>
 											<?php if ( empty( $disable_hotel_child_search ) ) : ?>
 												<div class="person-sep"></div>
 												<div class="child-text"><?php echo esc_html__( '0 Children', 'tourfic' ); ?></div>
@@ -1933,7 +1947,7 @@ class Hotel {
 										<div class="tf_acrselection-wrap">
 											<div class="tf_acrselection-inner">
 												<div class="tf_acrselection">
-													<div class="acr-label"><?php esc_html_e( 'Adults', 'tourfic' ); ?></div>
+													<div class="acr-label"><?php esc_html_e( $adults_name . 's', 'tourfic' ); ?></div>
 													<div class="acr-select">
 														<div class="acr-dec">-</div>
 														<input type="number" name="adults" id="adults" min="1" value="1" readonly>
@@ -2325,7 +2339,7 @@ class Hotel {
                         <span class="tf_person-icon tf-search-form-field-icon">
                             <i class="fas fa-user"></i>
                         </span>
-                            <div class="adults-text"><?php echo esc_html__( '1 Adults', 'tourfic' ); ?></div>
+                            <div class="adults-text"><?php echo esc_html__( '1 '. $adults_name . 's', 'tourfic' ); ?></div>
 							<?php if ( empty( $disable_hotel_child_search ) ) : ?>
                                 <div class="person-sep"></div>
                                 <div class="child-text"><?php echo esc_html__( '0 Children', 'tourfic' ); ?></div>
@@ -2337,7 +2351,7 @@ class Hotel {
                         <div class="tf_acrselection-wrap">
                             <div class="tf_acrselection-inner">
                                 <div class="tf_acrselection">
-                                    <div class="acr-label"><?php esc_html_e( 'Adults', 'tourfic' ); ?></div>
+                                    <div class="acr-label"><?php esc_html_e( $adults_name . 's', 'tourfic' ); ?></div>
                                     <div class="acr-select">
                                         <div class="acr-dec">-</div>
                                         <input type="number" name="adults" id="adults" min="1" value="1" readonly>
@@ -2407,16 +2421,16 @@ class Hotel {
                             <div class="tf_input-inner">
                                 <label class="tf_label-row" style="width: 100%;">
                                     <span class="tf-label"><?php esc_html_e( 'More', 'tourfic' ); ?></span>
-                                    <span style="text-decoration: none; display: block; cursor: pointer;"><?php esc_html_e( 'Filter', 'tourfic' ); ?>  <i class="fas fa-angle-down"></i></span>
+                                    <span style="text-decoration: none; display: block; cursor: pointer;"><?php esc_html_e( apply_filters("tf_search_form_advance_filter_label", 'Filter'), 'tourfic' ); ?>  <i class="fas fa-angle-down"></i></span>
                                 </label>
                             </div>
                             <div class="tf-more-info">
-                                <h3><?php esc_html_e( 'Filter Price', 'tourfic' ); ?></h3>
+                                <h3 class="tf_advance_search_form_price_filter_label"><?php esc_html_e( 'Filter Price', 'tourfic' ); ?></h3>
                                 <div class="tf-filter-price-range">
                                     <div class="tf-hotel-filter-range"></div>
                                 </div>
 
-                                <h3 style="margin-top: 20px"><?php esc_html_e( 'Hotel Features', 'tourfic' ); ?></h3>
+                                <h3 class="tf_advance_search_form_feature_filter_label" style="margin-top: 20px"><?php esc_html_e( 'Hotel Features', 'tourfic' ); ?></h3>
 								<?php
 								$tf_hotelfeature = get_terms( array(
 									'taxonomy'     => 'hotel_feature',
@@ -2436,15 +2450,16 @@ class Hotel {
                                     </div>
 								<?php endif; ?>
 
-                                <h3 style="margin-top: 20px"><?php esc_html_e( 'Hotel Types', 'tourfic' ); ?></h3>
+                                <h3 style="margin-top: 20px" class="tf_advance_search_form_type_filter_label"><?php esc_html_e( 'Hotel Types', 'tourfic' ); ?></h3>
 								<?php
-								$tf_hoteltype = get_terms( array(
+								$hoteltype_args = array(
 									'taxonomy'     => 'hotel_type',
 									'orderby'      => 'title',
 									'order'        => 'ASC',
 									'hide_empty'   => true,
 									'hierarchical' => 0,
-								) );
+								);
+								$tf_hoteltype = get_terms( apply_filters("tf_hotel_search_form_advance_type_args", $hoteltype_args) );
 								if ( $tf_hoteltype ) : ?>
                                     <div class="tf-hotel-types" style="overflow: hidden">
 										<?php foreach ( $tf_hoteltype as $term ) : ?>
@@ -2633,6 +2648,8 @@ class Hotel {
 
 		$tf_hotel_book_avaibality_button_text = ! empty( Helper::tfopt( 'hotel_booking_check_button_text' ) ) ? stripslashes( sanitize_text_field( Helper::tfopt( 'hotel_booking_check_button_text' ) ) ) : "Booking Availability";
 		$hotel_location_field_required        = ! empty( Helper::tfopt( "required_location_hotel_search" ) ) ? Helper::tfopt( "required_location_hotel_search" ) : 1;
+		$adults_name = apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) );
+		$child_field_hidden = apply_filters( 'tf_hotel_child_field_hidden', 1 );
 
 		if ( $tf_hotel_selected_template == "design-1" ) { ?>
             <form id="tf-single-hotel-avail" class="widget tf-hotel-booking-sidebar tf-booking-form" method="get" autocomplete="off">
@@ -2643,7 +2660,7 @@ class Hotel {
                         <div class="tf-field tf-flex">
                             <div class="acr-label tf-flex">
                                 <i class="fa-regular fa-user"></i>
-								<?php esc_html_e( 'Adults', 'tourfic' ); ?>
+								<?php esc_html_e( $adults_name . 's', 'tourfic' ); ?>
                             </div>
                             <div class="acr-select">
                                 <div class="acr-dec">-</div>
@@ -2652,19 +2669,21 @@ class Hotel {
                             </div>
                         </div>
                     </div>
-                    <div class="tf-field-group tf_acrselection">
-                        <div class="tf-field tf-flex">
-                            <div class="acr-label tf-flex">
-                                <i class="fa-solid fa-child"></i>
-								<?php esc_html_e( 'Children', 'tourfic' ); ?>
-                            </div>
-                            <div class="acr-select">
-                                <div class="acr-dec">-</div>
-                                <input type="number" name="children" id="children" min="0" value="<?php echo ! empty( $child ) ? esc_attr( $child ) : '0'; ?>">
-                                <div class="acr-inc">+</div>
-                            </div>
-                        </div>
-                    </div>
+					<?php if( !empty( $child_field_hidden ) ): ?>
+						<div class="tf-field-group tf_acrselection">
+							<div class="tf-field tf-flex">
+								<div class="acr-label tf-flex">
+									<i class="fa-solid fa-child"></i>
+									<?php esc_html_e( 'Children', 'tourfic' ); ?>
+								</div>
+								<div class="acr-select">
+									<div class="acr-dec">-</div>
+									<input type="number" name="children" id="children" min="0" value="<?php echo ! empty( $child ) ? esc_attr( $child ) : '0'; ?>">
+									<div class="acr-inc">+</div>
+								</div>
+							</div>
+						</div>
+					<?php endif; ?>
                 </div>
 
                 <div class="tf_booking-dates">
@@ -2752,7 +2771,7 @@ class Hotel {
                         <div class="tf_acrselection-wrap">
                             <div class="tf_acrselection-inner">
                                 <div class="tf_acrselection">
-                                    <div class="acr-label"><?php esc_html_e( "Adults", "tourfic" ); ?></div>
+                                    <div class="acr-label"><?php esc_html_e( $adults_name . "s", "tourfic" ); ?></div>
                                     <div class="acr-select">
                                         <div class="acr-dec">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -2781,7 +2800,8 @@ class Hotel {
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tf_acrselection">
+								<?php if( !empty( $child_field_hidden ) ): ?>
+                                	<div class="tf_acrselection">
                                     <div class="acr-label"><?php esc_html_e( "Children", "tourfic" ); ?></div>
                                     <div class="acr-select">
                                         <div class="acr-dec">
@@ -2810,7 +2830,8 @@ class Hotel {
                                             </svg>
                                         </div>
                                     </div>
-                                </div>
+                               		</div>
+								<?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -2923,7 +2944,7 @@ class Hotel {
                                 <svg class="tf-hotel-booking-form-icon" width="13" height="15" viewBox="0 0 13 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M6.125 7.75C8.03906 7.75 9.625 6.19141 9.625 4.25C9.625 2.33594 8.03906 0.75 6.125 0.75C4.18359 0.75 2.625 2.33594 2.625 4.25C2.625 6.19141 4.18359 7.75 6.125 7.75ZM6.125 1.625C7.54688 1.625 8.75 2.82812 8.75 4.25C8.75 5.69922 7.54688 6.875 6.125 6.875C4.67578 6.875 3.5 5.69922 3.5 4.25C3.5 2.82812 4.67578 1.625 6.125 1.625ZM7.49219 9.0625H4.73047C2.10547 9.0625 0 11.1953 0 13.8203C0 14.3398 0.410156 14.75 0.929688 14.75H11.293C11.8125 14.75 12.25 14.3398 12.25 13.8203C12.25 11.1953 10.1172 9.0625 7.49219 9.0625ZM11.293 13.875H0.929688C0.902344 13.875 0.875 13.8477 0.875 13.8203C0.875 11.6875 2.59766 9.9375 4.73047 9.9375H7.49219C9.625 9.9375 11.375 11.6875 11.375 13.8203C11.375 13.8477 11.3203 13.875 11.293 13.875Z" fill="#6E655E"/>
                                 </svg>
-                                <?php esc_html_e( 'Adults', 'tourfic' ); ?>
+                                <?php esc_html_e( $adults_name . 's', 'tourfic' ); ?>
                             </div>
                             <div class="acr-select">
                                 <div class="acr-dec">
@@ -2940,29 +2961,31 @@ class Hotel {
                             </div>
                         </div>
                     </div>
-                    <div class="tf-field-group tf_acrselection tf_acrselection-child">
-                        <div class="tf-field tf-flex">
-                            <div class="acr-label tf-flex">
-                                <svg class="tf-hotel-booking-form-icon" width="10" height="15" viewBox="0 0 10 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M7.125 2.5C7.125 3.48438 6.33203 4.25 5.34766 4.25C4.39062 4.25 3.59766 3.48438 3.59766 2.5C3.59766 1.54297 4.39062 0.75 5.34766 0.75C6.33203 0.75 7.125 1.54297 7.125 2.5ZM5.34766 1.625C4.88281 1.625 4.47266 2.03516 4.47266 2.5C4.47266 2.99219 4.88281 3.375 5.34766 3.375C5.83984 3.375 6.25 2.99219 6.25 2.5C6.25 2.03516 5.83984 1.625 5.34766 1.625ZM1.79297 9.30859C1.68359 9.5 1.41016 9.58203 1.19141 9.44531C1 9.30859 0.917969 9.0625 1.05469 8.84375L2.25781 6.875C2.91406 5.78125 4.08984 5.125 5.375 5.125C6.63281 5.125 7.80859 5.78125 8.46484 6.875L9.66797 8.84375C9.80469 9.0625 9.72266 9.30859 9.53125 9.44531C9.3125 9.58203 9.03906 9.5 8.92969 9.30859L7.72656 7.33984C7.67188 7.25781 7.61719 7.17578 7.53516 7.09375V14.3125C7.53516 14.5586 7.34375 14.75 7.09766 14.75C6.87891 14.75 6.66016 14.5586 6.66016 14.3125V11.25H4.0625V14.3125C4.0625 14.5586 3.84375 14.75 3.625 14.75C3.37891 14.75 3.1875 14.5586 3.1875 14.3125V7.09375C3.10547 7.17578 3.05078 7.25781 2.99609 7.33984L1.79297 9.30859ZM6.66016 10.375V6.35547C6.27734 6.13672 5.83984 6 5.375 6C4.88281 6 4.44531 6.13672 4.0625 6.35547V10.375H6.66016Z" fill="#6E655E"/>
-                                </svg>
-                                <?php esc_html_e( 'Children', 'tourfic' ); ?>
-                            </div>
-                            <div class="acr-select">
-                                <div class="acr-dec">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <path d="M19 11H5V13H19V11Z" fill="#FF6B00"/>
-                                    </svg>
-                                </div>
-                                <input type="number" name="children" id="children" min="0" value="<?php echo ! empty( $child ) ? esc_attr( $child ) : '0'; ?>">
-                                <div class="acr-inc">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z" fill="#FF6B00"/>
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+					<?php if( !empty( $child_field_hidden ) ): ?>
+						<div class="tf-field-group tf_acrselection tf_acrselection-child">
+							<div class="tf-field tf-flex">
+								<div class="acr-label tf-flex">
+									<svg class="tf-hotel-booking-form-icon" width="10" height="15" viewBox="0 0 10 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path d="M7.125 2.5C7.125 3.48438 6.33203 4.25 5.34766 4.25C4.39062 4.25 3.59766 3.48438 3.59766 2.5C3.59766 1.54297 4.39062 0.75 5.34766 0.75C6.33203 0.75 7.125 1.54297 7.125 2.5ZM5.34766 1.625C4.88281 1.625 4.47266 2.03516 4.47266 2.5C4.47266 2.99219 4.88281 3.375 5.34766 3.375C5.83984 3.375 6.25 2.99219 6.25 2.5C6.25 2.03516 5.83984 1.625 5.34766 1.625ZM1.79297 9.30859C1.68359 9.5 1.41016 9.58203 1.19141 9.44531C1 9.30859 0.917969 9.0625 1.05469 8.84375L2.25781 6.875C2.91406 5.78125 4.08984 5.125 5.375 5.125C6.63281 5.125 7.80859 5.78125 8.46484 6.875L9.66797 8.84375C9.80469 9.0625 9.72266 9.30859 9.53125 9.44531C9.3125 9.58203 9.03906 9.5 8.92969 9.30859L7.72656 7.33984C7.67188 7.25781 7.61719 7.17578 7.53516 7.09375V14.3125C7.53516 14.5586 7.34375 14.75 7.09766 14.75C6.87891 14.75 6.66016 14.5586 6.66016 14.3125V11.25H4.0625V14.3125C4.0625 14.5586 3.84375 14.75 3.625 14.75C3.37891 14.75 3.1875 14.5586 3.1875 14.3125V7.09375C3.10547 7.17578 3.05078 7.25781 2.99609 7.33984L1.79297 9.30859ZM6.66016 10.375V6.35547C6.27734 6.13672 5.83984 6 5.375 6C4.88281 6 4.44531 6.13672 4.0625 6.35547V10.375H6.66016Z" fill="#6E655E"/>
+									</svg>
+									<?php esc_html_e( 'Children', 'tourfic' ); ?>
+								</div>
+								<div class="acr-select">
+									<div class="acr-dec">
+										<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+											<path d="M19 11H5V13H19V11Z" fill="#FF6B00"/>
+										</svg>
+									</div>
+									<input type="number" name="children" id="children" min="0" value="<?php echo ! empty( $child ) ? esc_attr( $child ) : '0'; ?>">
+									<div class="acr-inc">
+										<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+											<path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z" fill="#FF6B00"/>
+										</svg>
+									</div>
+								</div>
+							</div>
+						</div>
+					<?php endif; ?>
                 </div>
                 <div class="tf_form-row">
 					<?php
@@ -2990,11 +3013,11 @@ class Hotel {
                             <i class="fas fa-user-friends"></i>
                             <select name="adults" id="adults" class="">
 								<?php
-								echo '<option value="1">1 ' . esc_html__( "Adult", "tourfic" ) . '</option>';
+								echo '<option value="1">1 ' . esc_html__( $adults_name, "tourfic" ) . '</option>';
 								if ( $max_adults_numbers > 1 ) {
 									foreach ( range( 2, $max_adults_numbers ) as $value ) {
 										$selected = $value == $adults ? 'selected' : null;
-										echo '<option ' . esc_attr( $selected ) . ' value="' . esc_attr( $value ) . '">' . esc_html( $value ) . ' ' . esc_html__( "Adults", "tourfic" ) . '</option>';
+										echo '<option ' . esc_attr( $selected ) . ' value="' . esc_attr( $value ) . '">' . esc_html( $value ) . ' ' . esc_html__( $adults_name . "s", "tourfic" ) . '</option>';
 									}
 								}
 								?>
@@ -3005,22 +3028,24 @@ class Hotel {
                 </div>
 
                 <div class="tf_form-row">
-                    <label class="tf_label-row">
-                        <div class="tf_form-inner">
-                            <i class="fas fa-child"></i>
-                            <select name="children" id="children" class="">
-								<?php
-								echo '<option value="0">0 ' . esc_html__( "Children", "tourfic" ) . '</option>';
-								if ( $max_childs_numbers > 0 ) {
-									foreach ( range( 1, $max_childs_numbers ) as $value ) {
-										$selected = $value == $child ? 'selected' : null;
-										echo '<option ' . esc_attr( $selected ) . ' value="' . esc_attr( $value ) . '">' . esc_html( $value ) . ' ' . esc_html__( "Children", "tourfic" ) . '</option>';
+					<?php if( !empty( $child_field_hidden ) ): ?>
+						<label class="tf_label-row">
+							<div class="tf_form-inner">
+								<i class="fas fa-child"></i>
+								<select name="children" id="children" class="">
+									<?php
+									echo '<option value="0">0 ' . esc_html__( "Children", "tourfic" ) . '</option>';
+									if ( $max_childs_numbers > 0 ) {
+										foreach ( range( 1, $max_childs_numbers ) as $value ) {
+											$selected = $value == $child ? 'selected' : null;
+											echo '<option ' . esc_attr( $selected ) . ' value="' . esc_attr( $value ) . '">' . esc_html( $value ) . ' ' . esc_html__( "Children", "tourfic" ) . '</option>';
+										}
 									}
-								}
-								?>
-                            </select>
-                        </div>
-                    </label>
+									?>
+								</select>
+							</div>
+						</label>
+					<?php endif; ?>
                 </div>
 
                 <div class="tf_booking-dates">
@@ -4168,6 +4193,7 @@ class Hotel {
 		$tf_hotel_selected_check = ! empty( $tf_hotel_single_template ) ? $tf_hotel_single_template : $tf_hotel_global_template;
 
 		$tf_hotel_selected_template = $tf_hotel_selected_check;
+		$adults_name = apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) );
 
 		$rooms                       = Room::get_hotel_rooms( $_POST['post_id'] );
 		if ( $tf_hotel_selected_template == "design-1" || $tf_hotel_selected_template == "default" ) {
@@ -4301,7 +4327,7 @@ class Hotel {
                                             <li><i class="ri-hotel-bed-line"></i> <?php echo esc_html( $bed ); ?> <?php esc_html_e( ' Beds', 'tourfic' ); ?></li>
 										<?php } ?>
 										<?php if ( $adult_number ) { ?>
-                                            <li><i class="ri-user-2-line"></i> <?php echo esc_html( $adult_number ); ?> <?php esc_html_e( 'Adults', 'tourfic' ); ?></li>
+                                            <li><i class="ri-user-2-line"></i> <?php echo esc_html( $adult_number ); ?> <?php esc_html_e( $adults_name . 's', 'tourfic' ); ?></li>
 										<?php }
 										if ( $child_number ) { ?>
                                             <li>
@@ -4423,7 +4449,7 @@ class Hotel {
                                                     <span class="icon-text tf-d-b">x<?php echo esc_html( $adult_number ); ?></span>
                                                 </div>
                                                 <div class="tf-top">
-													<?php esc_html_e( 'Number of Adults', 'tourfic' ); ?>
+													<?php esc_html_e( 'Number of '. $adults_name . 's', 'tourfic' ); ?>
                                                     <i class="tool-i"></i>
                                                 </div>
                                             </div>
@@ -4500,7 +4526,7 @@ class Hotel {
                                         <li><i class="ri-hotel-bed-line"></i> <?php echo esc_html( $bed ); ?><?php esc_html_e( ' Beds', 'tourfic' ); ?></li>
 									<?php } ?>
 									<?php if ( $adult_number ) { ?>
-                                        <li><i class="ri-user-2-line"></i> <?php echo esc_html( $adult_number ); ?><?php esc_html_e( ' Adults', 'tourfic' ); ?></li>
+                                        <li><i class="ri-user-2-line"></i> <?php echo esc_html( $adult_number ); ?><?php esc_html_e(' ' . $adults_name . 's', 'tourfic' ); ?></li>
 									<?php } ?>
 									<?php if ( $child_number ) { ?>
                                         <li><i class="ri-user-smile-line"></i><?php echo esc_html( $child_number ); ?><?php esc_html_e( ' Child', 'tourfic' ); ?></li>
@@ -4555,6 +4581,7 @@ class Hotel {
 					$child_number        = ! empty( $room['child'] ) ? $room['child'] : '0';
 					$num_room            = ! empty( $room['num-room'] ) ? $room['num-room'] : '0';
 					$room_preview_img     = get_the_post_thumbnail_url( $_room->ID, 'full' );
+					$adults_name = apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) );
 					?>
                     <div class="tf-room-modal-inner">
                         <div class="tf-room-modal-gallery <?php echo empty( $tf_room_gallery ) ? esc_attr('tf-room-modal-no-gallery') : ''?>">
@@ -4694,7 +4721,7 @@ class Hotel {
                                             <span class="icon-text tf-d-b">x<?php echo esc_html( $adult_number ); ?></span>
                                         </div>
                                         <div class="tf-top">
-											<?php esc_html_e( 'Number of Adults', 'tourfic' ); ?>
+											<?php esc_html_e( 'Number of '. $adults_name . 's', 'tourfic' ); ?>
                                             <i class="tool-i"></i>
                                         </div>
                                     </div>

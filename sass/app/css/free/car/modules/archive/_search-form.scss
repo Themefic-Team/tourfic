@@ -57,7 +57,9 @@
                                     margin-bottom: 8px;
                                     margin-top: 0px;
                                 }
-                                input{
+                                input,
+                                .selected-pickup-time,
+                                .selected-dropoff-time{
                                     min-width: auto;
                                     width: 100%;
                                     color: $color-text;
@@ -67,6 +69,8 @@
                                     padding-left: 0px;
                                     box-shadow: none;
                                     background: transparent;
+                                    cursor: pointer;
+                                    position: relative;
                                     @media #{$max575}{
                                         font-size: 0.875rem;
                                     }
@@ -78,6 +82,7 @@
                                         color: $color-text;
                                     }
                                 }
+                               
                                 .autocomplete-items{
                                     position: absolute;
                                     z-index: 99;

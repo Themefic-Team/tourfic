@@ -1811,6 +1811,47 @@ TF_Settings::option( 'tf_settings', array(
 				),
 			),
 		),
+		'car_operating_hours' => array(
+			'title'  => __( 'Operating Hours', 'tourfic' ),
+			'parent' => 'car_option',
+			'icon'   => 'fa fa-hourglass-half',
+			'fields' => array(
+				array(
+					'id'    => 'label_off_heading',
+					'type'  => 'heading',
+					'label' => __( 'Operating Hours Settings', 'tourfic' ),
+					'subtitle'   => __( 'These options can be overridden from Operating Hours Settings.', 'tourfic' ),
+				),
+
+				array(
+					'id'      => 'apartment-option-notice',
+					'type'    => 'notice',
+					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/settings/car-options/#Single_Page_Settings" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+				),
+
+				array(
+					'id'        => 'disable-car-time-slots',
+					'type'      => 'switch',
+					'label'     => __( 'Modify Time Slots', 'tourfic' ),
+					'label_on'  => __( 'Yes', 'tourfic' ),
+					'label_off' => __( 'No', 'tourfic' ),
+					'default'   => false
+				),
+				array(
+					'id'       => 'car_time_interval',
+					'type'     => 'number',
+					'label'    => __( 'Time Interval', 'tourfic' ),
+					'subtitle' => __( 'Set the time interval for search form time slots.', 'tourfic' ),
+					'default'  => '30',
+					'attributes' => array(
+						'min' => '10',
+						'max' => '60',
+					),
+					'dependency' => array( 'disable-car-time-slots', '==', '1' ),
+				),
+				
+			),
+		),
 
 		//Frontend Dashboard
 		'frontend_dashboard'    => array(

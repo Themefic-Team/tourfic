@@ -78,10 +78,13 @@ class Pricing {
 
         }
         elseif( !empty($tf_pickup_date) && !empty($tf_dropoff_date) && 'day_hour'==$pricing_type && !empty($day_pricing) ){
+          
 
             // Combine date and time
             $pickup_datetime = new \DateTime("$tf_pickup_date $tf_pickup_time");
             $dropoff_datetime = new \DateTime("$tf_dropoff_date $tf_dropoff_time");
+
+     
 
             // Calculate the difference
             $interval = $pickup_datetime->diff($dropoff_datetime);
