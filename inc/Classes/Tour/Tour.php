@@ -1875,6 +1875,14 @@ class Tour {
 															<div class="acr-inc">+</div>
 														</div>
 													</div>
+													<div class="tf-single-person">
+														<h3><?php echo esc_html__( "Infant", "tourfic" ); ?></h3>
+														<div class="inc-dec">
+															<div class="acr-dec disable">-</div>
+															<input type="number" name="infants" id="infant" value="<?php echo !empty($pack['min_infant']) ? esc_attr($pack['min_infant']) : 0; ?>" data-min="<?php echo !empty($pack['min_infant']) ? esc_attr($pack['min_infant']) : ''; ?>" data-max="<?php echo !empty($pack['max_infant']) ? esc_attr($pack['max_infant']) : ''; ?>" />
+															<div class="acr-inc">+</div>
+														</div>
+													</div>
 												</div>
 											</div>
 										</div>
@@ -3585,9 +3593,9 @@ class Tour {
 		 */
 
 		$group_price    = ! empty( $matched_availability['price'] ) ? $matched_availability['price'] : $group_price;
-		$adult_price    = ! empty( $matched_availability['adult_price'] ) ? $matched_availability['adult_price'] : 0;
-		$children_price = ! empty( $matched_availability['child_price'] ) ? $matched_availability['child_price'] : 0;
-		$infant_price   = ! empty( $matched_availability['infant_price'] ) ? $matched_availability['infant_price'] : 0;
+		$adult_price    = ! empty( $matched_availability['adult_price'] ) ? $matched_availability['adult_price'] : $adult_price;
+		$children_price = ! empty( $matched_availability['child_price'] ) ? $matched_availability['child_price'] : $children_price;
+		$infant_price   = ! empty( $matched_availability['infant_price'] ) ? $matched_availability['infant_price'] : $infant_price;
 
 		if( $pricing_rule=='group' && !empty($allow_package_pricing) && !empty($group_package_pricing) ){
 			$max_allowed = 0;
@@ -3696,6 +3704,22 @@ class Tour {
 		if ( ! array_key_exists( 'errors', $response ) || count( $response['errors'] ) == 0 ) {
 
 
+			# Set pricing based on pricing rule
+			if( $pricing_rule == 'package') {
+				$single_package = !empty($tf_package_pricing[$selectedPackage]) ? $tf_package_pricing[$selectedPackage] : '';
+				
+				if ( ! empty( $single_package['pricing_type'] == 'person' ) ) {
+					$adult_price = !empty($matched_availability['tf_option_adult_price_'.$selectedPackage]) ? $matched_availability['tf_option_adult_price_'.$selectedPackage] : 0;
+					$children_price = !empty($matched_availability['tf_option_child_price_'.$selectedPackage]) ? $matched_availability['tf_option_child_price_'.$selectedPackage] : 0;
+					$infant_price = !empty($matched_availability['tf_option_infant_price_'.$selectedPackage]) ? $matched_availability['tf_option_infant_price_'.$selectedPackage] : 0;
+					$tf_tours_data_price = ( $adult_price * $adults ) + ( $children * $children_price ) + ( $infant * $infant_price );
+				}
+				if ( ! empty( $single_package['pricing_type'] == 'group' ) ) {
+					$group_price = !empty($matched_availability['tf_option_group_price_'.$selectedPackage]) ? $matched_availability['tf_option_group_price_'.$selectedPackage] : 0;
+					$tf_tours_data_price = $group_price;
+				}
+			}
+
 			# Discount informations
 			$discount_type    = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : '';
 			$discounted_price = ! empty( $meta['discount_price'] ) ? $meta['discount_price'] : '';
@@ -3717,26 +3741,6 @@ class Tour {
 
 			}
 
-
-			# Set pricing based on pricing rule
-			if ( $pricing_rule == 'group' ) {
-				$tf_tours_data_price = $group_price;
-			} elseif( $pricing_rule == 'person') {
-				$tf_tours_data_price = ( $adult_price * $adults ) + ( $children * $children_price ) + ( $infant * $infant_price );
-			} elseif( $pricing_rule == 'package') {
-				$single_package = !empty($tf_package_pricing[$selectedPackage]) ? $tf_package_pricing[$selectedPackage] : '';
-				
-				if ( ! empty( $single_package['pricing_type'] == 'person' ) ) {
-					$adult_price = !empty($matched_availability['tf_option_adult_price_'.$selectedPackage]) ? $matched_availability['tf_option_adult_price_'.$selectedPackage] : 0;
-					$children_price = !empty($matched_availability['tf_option_child_price_'.$selectedPackage]) ? $matched_availability['tf_option_child_price_'.$selectedPackage] : 0;
-					$infant_price = !empty($matched_availability['tf_option_infant_price_'.$selectedPackage]) ? $matched_availability['tf_option_infant_price_'.$selectedPackage] : 0;
-					$tf_tours_data_price = ( $adult_price * $adults ) + ( $children * $children_price ) + ( $infant * $infant_price );
-				}
-				if ( ! empty( $single_package['pricing_type'] == 'group' ) ) {
-					$group_price = !empty($matched_availability['tf_option_group_price_'.$selectedPackage]) ? $matched_availability['tf_option_group_price_'.$selectedPackage] : 0;
-					$tf_tours_data_price = $group_price;
-				}
-			}
 			if ( ! empty( $_POST['deposit'] ) && $_POST['deposit'] == "true" ) {
 				if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['allow_deposit'] ) && $meta['allow_deposit'] == '1' && ! empty( $meta['deposit_amount'] ) ) {
 
@@ -3856,8 +3860,10 @@ class Tour {
                         <td align="right">' . wc_price( $infant_price * $infant ) . '</td>
                     </tr>';
 				}
+				$tf_tours_data_price = ( $adult_price * $adults ) + ( $children * $children_price ) + ( $infant * $infant_price );
 			} elseif($pricing_rule == "group") {
 				if ( ! empty( $group_price ) ) {
+					$tf_tours_data_price = $group_price;
 					$response['traveller_summery'] .= '<tr>
                         <td align="left">' . esc_html__( 'Group Price', 'tourfic' ) . '</td>
                         <td align="right">' . wc_price( $group_price ) . '</td>
@@ -3866,8 +3872,6 @@ class Tour {
 			} elseif($pricing_rule == "package") {
 				$single_package = !empty($tf_package_pricing[$selectedPackage]) ? $tf_package_pricing[$selectedPackage] : '';
 				if ( ! empty( $single_package['pricing_type'] == 'person' ) ) {
-					$adult_price = !empty($matched_availability['tf_option_adult_price_'.$selectedPackage]) ? $matched_availability['tf_option_adult_price_'.$selectedPackage] : 0;
-					$children_price = !empty($matched_availability['tf_option_child_price_'.$selectedPackage]) ? $matched_availability['tf_option_child_price_'.$selectedPackage] : 0;
 
 					if ( ! empty( $adult_price ) && ! empty( $adults ) ) {
 						$response['traveller_summery'] .= '<tr>
@@ -3881,10 +3885,17 @@ class Tour {
 							<td align="right">' . wc_price( $children_price * $children ) . '</td>
 						</tr>';
 					}
+					if ( ! empty( $infant_price ) && ! empty( $infant ) ) {
+						$response['traveller_summery'] .= '<tr>
+							<td align="left">' . $infant . esc_html__( ' infant', 'tourfic' ) . ' (' . wc_price( $infant_price ) . '/' . $single_package['pricing_type'] . ')</td>
+							<td align="right">' . wc_price( $infant_price * $infant ) . '</td>
+						</tr>';
+					}
+					$tf_tours_data_price = ( $adult_price * $adults ) + ( $children * $children_price ) + ( $infant * $infant_price );
 				}
 				if ( ! empty( $single_package['pricing_type'] == 'group' ) ) {
-					$group_price = !empty($matched_availability['tf_option_group_price_'.$selectedPackage]) ? $matched_availability['tf_option_group_price_'.$selectedPackage] : 0;
 					if ( ! empty( $group_price ) ) {
+						$tf_tours_data_price = $group_price;
 						$response['traveller_summery'] .= '<tr>
 							<td align="left">' . esc_html__( 'Group Price', 'tourfic' ) . '</td>
 							<td align="right">' . wc_price( $group_price ) . '</td>

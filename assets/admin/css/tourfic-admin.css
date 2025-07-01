@@ -1,10 +1,4 @@
-/*!*****************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[3]!./sass/admin/css/free/tourfic-admin.scss ***!
-  \*****************************************************************************************************************************************************************************************/
 @import url(https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&display=swap);
-/*!*********************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[3]!./sass/admin/css/free/tourfic-admin.scss (1) ***!
-  \*********************************************************************************************************************************************************************************************/
 /*
 Button
 */
@@ -6524,17 +6518,16 @@ a.tf-import-btn, a.tf-export-btn {
   left: 0;
   top: 0;
   display: none;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 .tf-voucher-quick-view-box .voucher-quick-view {
   border-radius: 24px;
   border: 1px solid #f0f0f1;
   background: #ffffff;
-  position: fixed;
-  left: 50%;
-  top: 25%;
   z-index: 999;
   max-width: 700px;
-  margin-left: -350px;
 }
 .tf-voucher-quick-view-box .voucher-quick-view .tf-voucher-details-preview-header {
   padding: 16px;

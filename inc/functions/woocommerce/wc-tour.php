@@ -111,7 +111,7 @@ function tf_tours_booking_function() {
 			}
 		}
 	}
-	// var_dump($matched_availability); exit();
+
 	if ( $tour_type == 'fixed' && !empty($matched_availability) ) {
 
 		$start_date            = ! empty( $matched_availability['check_in'] ) ? $matched_availability['check_in'] : '';
@@ -211,7 +211,7 @@ function tf_tours_booking_function() {
 			}
 		}
 
-	} elseif ( $tour_type == 'continuous' ) {
+	} elseif ( $tour_type == 'continuous' && !empty($matched_availability) ) {
 
 		$pricing_rule = ! empty( $matched_availability['pricing_type'] ) ? $matched_availability['pricing_type'] : '';
 		$min_people = ! empty( $matched_availability['min_person'] ) ? $matched_availability['min_person'] : '';
@@ -1286,6 +1286,7 @@ function tf_add_order_tour_details_checkout_order_processed( $order_id, $posted_
 			$price = $item->get_subtotal();
 			$due = $item->get_meta( 'Due', true );
 			$tour_extra = $item->get_meta( 'Tour Extra', true );
+			$package = $item->get_meta( 'Package', true );
 			$adult = $item->get_meta( 'Adults', true );
 			$child = $item->get_meta( 'Children', true );
 			$infants = $item->get_meta( 'Infants', true );
@@ -1304,6 +1305,7 @@ function tf_add_order_tour_details_checkout_order_processed( $order_id, $posted_
 				'tour_date' => $tour_date,
 				'tour_time' => $tour_time,
 				'tour_extra' => $tour_extra,
+				'package' => $package,
 				'adult' => $adult,
 				'child' => $child,
 				'infants' => $infants,
