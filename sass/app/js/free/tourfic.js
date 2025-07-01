@@ -533,9 +533,7 @@
 
             if(tf_params.location_car_search){
                 let same_location = $('input[name="same_location"]:checked').val();
-                console.log(same_location);
                 if('on'==same_location){
-                    console.log('on');
                     if ($.trim($('#tf_pickup_location').val()) == '') {
                         if ($('#tf-required').length === 0) {
                             if($('.tf-driver-location').length === 1){
@@ -698,9 +696,7 @@
             }, 3000);
             const inputElement = $(this).parent().find("#share_link_input");
             if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(inputElement.val()).then(() => {
-                    console.log("Copied to clipboard!");
-                });
+                navigator.clipboard.writeText(inputElement.val()).then(() => {});
             } else {
                 const tempInput = document.createElement("textarea");
                 tempInput.value = inputElement.val();
@@ -2131,9 +2127,7 @@
 
 
             if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(inputElement.val()).then(() => {
-                    console.log("Copied to clipboard!");
-                });
+                navigator.clipboard.writeText(inputElement.val()).then(() => {});
             } else {
                 const tempInput = document.createElement("textarea");
                 tempInput.value = inputElement.val();

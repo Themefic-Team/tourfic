@@ -616,7 +616,6 @@
             let form = $(this),
                 submitBtn = form.find('.tf-submit'),
                 formData = new FormData(form[0]);
-            console.log(formData);
             formData.append('action', 'tf_car_search');
             formData.append('_nonce', tf_params.nonce);
 

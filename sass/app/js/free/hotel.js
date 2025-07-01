@@ -414,8 +414,6 @@
 
             // Executes when some one click in the search form location
             inp.addEventListener("focus", function () {
-
-                console.log('click input');
                 closeAllLists();
 
                 let a = document.createElement("DIV");
