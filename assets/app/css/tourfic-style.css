@@ -9732,7 +9732,6 @@ div#tf-destinationautocomplete-list div:before {
 }
 .tf-single-template__one .tf-single-head i {
   color: var(--tf-primary);
-  margin-right: 5px;
 }
 .tf-single-template__one .tf-single-head a {
   text-decoration: none;
