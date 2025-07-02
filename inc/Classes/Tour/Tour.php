@@ -3799,13 +3799,25 @@ class Tour {
 				$single_package = !empty($tf_package_pricing[$selectedPackage]) ? $tf_package_pricing[$selectedPackage] : '';
 				
 				if ( ! empty( $single_package['pricing_type'] == 'person' ) ) {
-					$adult_price = !empty($matched_availability['tf_option_adult_price_'.$selectedPackage]) ? $matched_availability['tf_option_adult_price_'.$selectedPackage] : 0;
-					$children_price = !empty($matched_availability['tf_option_child_price_'.$selectedPackage]) ? $matched_availability['tf_option_child_price_'.$selectedPackage] : 0;
-					$infant_price = !empty($matched_availability['tf_option_infant_price_'.$selectedPackage]) ? $matched_availability['tf_option_infant_price_'.$selectedPackage] : 0;
+					// Default Adult Price from Package
+					$pack_default_adult = !empty($single_package['adult_price']) ? $single_package['adult_price'] : 0;
+					// Selected Package Adult Price
+					$adult_price = !empty($matched_availability['tf_option_adult_price_'.$selectedPackage]) ? $matched_availability['tf_option_adult_price_'.$selectedPackage] : $pack_default_adult;
+					// Default Child Price from Package
+					$pack_default_child = !empty($single_package['child_price']) ? $single_package['child_price'] : 0;
+					// Selected Package Child Price
+					$children_price = !empty($matched_availability['tf_option_child_price_'.$selectedPackage]) ? $matched_availability['tf_option_child_price_'.$selectedPackage] : $pack_default_child;
+					// Default Infant Price from Package
+					$pack_default_infant = !empty($single_package['infant_price']) ? $single_package['infant_price'] : 0;
+					// Selected Package Infant Price
+					$infant_price = !empty($matched_availability['tf_option_infant_price_'.$selectedPackage]) ? $matched_availability['tf_option_infant_price_'.$selectedPackage] : $pack_default_infant;
 					$tf_tours_data_price = ( $adult_price * $adults ) + ( $children * $children_price ) + ( $infant * $infant_price );
 				}
 				if ( ! empty( $single_package['pricing_type'] == 'group' ) ) {
-					$group_price = !empty($matched_availability['tf_option_group_price_'.$selectedPackage]) ? $matched_availability['tf_option_group_price_'.$selectedPackage] : 0;
+					// Default Group Price from Package
+					$pack_default_group = !empty($single_package['group_price']) ? $single_package['group_price'] : 0;
+					// Selected Package Group Price
+					$group_price = !empty($matched_availability['tf_option_group_price_'.$selectedPackage]) ? $matched_availability['tf_option_group_price_'.$selectedPackage] : $pack_default_group;
 					$tf_tours_data_price = $group_price;
 				}
 			}
