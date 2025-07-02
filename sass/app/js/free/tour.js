@@ -736,7 +736,9 @@
             },
 
         };
-        if (tf_params.tour_form_data.tour_availability) {
+        
+        
+        if (typeof tf_params.tour_form_data.tour_availability === 'object' && tf_params.tour_form_data.tour_availability && Object.keys(tf_params.tour_form_data.tour_availability).length > 0) {
             tour_date_options.minDate = "today";
             tour_date_options.disableMobile = "true";
             tour_date_options.enable = Object.entries(tf_params.tour_form_data.tour_availability)

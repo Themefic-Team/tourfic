@@ -410,6 +410,49 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					),
 				),
 				array(
+					'id'          => 'adult_price',
+					'type'        => 'number',
+					'label'       => __( 'Price for Adult', 'tourfic' ),
+					'subtitle'    => __( 'Insert amount only', 'tourfic' ),
+					'dependency'  => [
+						array( 'pricing', '==', 'person' ),
+						[ 'disable_adult_price', '==', 'false' ]
+					],
+					'attributes'  => array(
+						'min' => '0',
+					),
+					'field_width' => '33.33',
+				),
+				array(
+					'id'          => 'child_price',
+					'type'        => 'number',
+					'dependency'  => [
+						array( 'pricing', '==', 'person' ),
+						[ 'disable_child_price', '==', 'false' ]
+					],
+					'label'       => __( 'Price for Child', 'tourfic' ),
+					'subtitle'    => __( 'Insert amount only', 'tourfic' ),
+					'attributes'  => array(
+						'min' => '0',
+					),
+					'field_width' => '33.33',
+				),
+				array(
+					'id'          => 'infant_price',
+					'type'        => 'number',
+					'dependency'  => [
+						array( 'pricing', '==', 'person' ),
+						[ 'disable_infant_price', '==', 'false' ],
+						[ 'disable_adult_price', '==', 'false' ],
+					],
+					'label'       => __( 'Price for Infant', 'tourfic' ),
+					'subtitle'    => __( 'Insert amount only', 'tourfic' ),
+					'attributes'  => array(
+						'min' => '0',
+					),
+					'field_width' => '33.33',
+				),
+				array(
 					'id'       => 'discount_type',
 					'type'     => 'select',
 					'label'    => __( 'Discount Type', 'tourfic' ),
