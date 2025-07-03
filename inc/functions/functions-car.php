@@ -4,6 +4,8 @@ defined( 'ABSPATH' ) || exit;
 use \Tourfic\Classes\Helper;
 use \Tourfic\App\TF_Review;
 use \Tourfic\Classes\Car_Rental\Pricing;
+use \Elementor\Group_Control_Image_Size;
+use \Elementor\Icons_Manager;
 
 /**
  * WooCommerce Car Functions
@@ -107,7 +109,7 @@ wp_send_json( $response );
 wp_die();
 }
 
-function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = '', $dropoff_date = '', $pickup_time = '', $dropoff_time = ''){
+function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = '', $dropoff_date = '', $pickup_time = '', $dropoff_time = '', $settings = []){
 	$post_id = get_the_ID();
 	$meta = get_post_meta( $post_id, 'tf_carrental_opt', true );
 	// Single link
@@ -156,18 +158,59 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 	$car_protection_section_status = ! empty( $meta['protection_section'] ) ? $meta['protection_section'] : '';
 	$car_protection_content = ! empty( $meta['protection_content'] ) ? $meta['protection_content'] : '';
 	$car_protections = ! empty( $meta['protections'] ) ? $meta['protections'] : '';
+
+	//elementor settings
+	$show_image = isset($settings['show_image']) ? $settings['show_image'] : 'yes';
+	$promotional_tags = isset($settings['promotional_tags']) ? $settings['promotional_tags'] : 'yes';
+	$show_title = isset($settings['show_title']) ? $settings['show_title'] : 'yes';
+	$title_length = isset($settings['title_length']) ? absint($settings['title_length']) : 55;
+	$show_review = isset($settings['show_review']) ? $settings['show_review'] : 'yes';
+	$show_price = isset($settings['show_price']) ? $settings['show_price'] : 'yes';
+	$car_infos = isset($settings['car_infos']) ? $settings['car_infos'] : ['mileage', 'fuel_type', 'engine_year', 'transmission_type', 'passenger_capacity', 'luggage_capacity'];
+	$show_view_details = isset($settings['show_view_details']) ? $settings['show_view_details'] : 'yes';
+	$view_details_text = isset($settings['view_details_text']) ? sanitize_text_field($settings['view_details_text']) : esc_html__('Details', 'tourfic');
+
+	// Thumbnail
+	$thumbnail_html = '';
+	if ( !empty($settings) && $show_image == 'yes' ) {
+		$settings[ 'image_size_customize' ] = [
+			'id' => get_post_thumbnail_id(),
+		];
+		$settings['image_size_customize_size'] = $settings['image_size'];
+		$thumbnail_html = Group_Control_Image_Size::get_attachment_image_html( $settings,'image_size_customize' );
+
+		if ( "" === $thumbnail_html && 'yes' === $settings['show_fallback_img'] && !empty( $settings['fallback_img']['url'] ) ) {
+			$settings[ 'image_size_customize' ] = [
+				'id' => $settings['fallback_img']['id'],
+			];
+			$settings['image_size_customize_size'] = $settings['image_size'];
+			$thumbnail_html = Group_Control_Image_Size::get_attachment_image_html( $settings,'image_size_customize' );
+		} elseif("" === $thumbnail_html && 'yes' !== $settings['show_fallback_img']) {
+			$thumbnail_html = '<img src="' . esc_url( TF_ASSETS_APP_URL ) . "images/feature-default.jpg" . '" class="attachment-full size-full wp-post-image">';
+		}
+	}
 ?>
 <div class="tf-single-car-view">
+	<!-- Thumbnail -->
+	<?php if($show_image == 'yes'): ?>
 	<div class="tf-car-image">
 		<?php
-		if ( has_post_thumbnail() ) {
+		if ( ! empty( $thumbnail_html ) ) {
+			echo wp_kses_post( $thumbnail_html );
+		} elseif ( has_post_thumbnail() ) {
 			the_post_thumbnail( 'full' );
 		} else {
 			echo '<img src="' . esc_url(TF_ASSETS_APP_URL) . "images/feature-default.jpg" . '">';
 		}
 		?>
 		<div class="tf-other-infos tf-flex">
-			<?php TF_Review::tf_archive_single_rating(); ?>
+			<!-- Review -->
+			<?php if( $show_review == 'yes' ): ?>
+				<?php TF_Review::tf_archive_single_rating(); ?>
+			<?php endif; ?>
+
+			<!-- Promotional Tags -->
+			<?php if ( $promotional_tags == 'yes') : ?>
 			<div class="tf-tags-box">
 				<ul>
 					<?php
@@ -181,13 +224,19 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 					<?php }}} ?>
 				</ul>
 			</div>
+			<?php endif; ?>
 		</div>
 	</div>
-	<div class="tf-car-details">
+	<?php endif; ?>
+
+	<div class="tf-car-details" style="<?php echo $show_image != 'yes' ? 'width: 100%;' : ''; ?>">
 		<div class="tf-car-content">
-			<a href="<?php echo esc_url( $url ); ?>"><h3 class="tf-mb-24"><?php the_title(); ?></h3></a>
+			<!-- Title -->
+			<?php if( $show_title == 'yes' ): ?>
+				<h3 class="tf-mb-24"><a href="<?php echo esc_url( $url ); ?>"><?php echo esc_html( Helper::tourfic_character_limit_callback( get_the_title(), $title_length ) ); ?></a></h3>
+			<?php endif; ?>
 			<ul class="list-items tf-mb-24">
-			
+				<?php if(!empty($car_infos) && is_array($car_infos) && in_array('mileage', $car_infos)) : ?>
 				<li class="list">
 					<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<g clip-path="url(#clip0_1049_4385)">
@@ -203,8 +252,9 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 					</svg>
 					<p><?php echo $unlimited_mileage ? esc_html_e("Unlimited", "tourfic") : $total_mileage.' '.$mileage_type; ?></p>
 				</li>
+				<?php endif; ?>
 
-				<?php if(!empty($fuel_types)){ ?>
+				<?php if(!empty($fuel_types) && !empty($car_infos) && is_array($car_infos) && in_array('fuel_type', $car_infos)){ ?>
 					<li class="list">
 					<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<g clip-path="url(#clip0_1055_4099)">
@@ -224,7 +274,7 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 					</li>
 				<?php } ?>
 
-				<?php if(!empty($engine_years)){ ?>
+				<?php if(!empty($engine_years) && !empty($car_infos) && is_array($car_infos) && in_array('engine_year', $car_infos)){ ?>
 					<li class="list">
 					<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<path d="M12 16.5C12 16.697 12.0388 16.8921 12.1142 17.074C12.1895 17.256 12.3001 17.4214 12.4393 17.5607C12.5786 17.6999 12.744 17.8105 12.926 17.8858C13.1079 17.9612 13.303 18 13.5 18C13.697 18 13.8921 17.9612 14.074 17.8858C14.256 17.8105 14.4214 17.6999 14.5607 17.5607C14.6999 17.4214 14.8105 17.256 14.8858 17.074C14.9612 16.8921 15 16.697 15 16.5C15 16.303 14.9612 16.1079 14.8858 15.926C14.8105 15.744 14.6999 15.5786 14.5607 15.4393C14.4214 15.3001 14.256 15.1895 14.074 15.1142C13.8921 15.0388 13.697 15 13.5 15C13.303 15 13.1079 15.0388 12.926 15.1142C12.744 15.1895 12.5786 15.3001 12.4393 15.4393C12.3001 15.5786 12.1895 15.744 12.1142 15.926C12.0388 16.1079 12 16.303 12 16.5Z" stroke="#566676" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
@@ -240,6 +290,7 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 					</li>
 				<?php } ?>
 
+				<?php if(!empty($car_infos) && is_array($car_infos) && in_array('transmission_type', $car_infos)) : ?>
 				<li class="list">
 				<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<g clip-path="url(#clip0_1049_4515)">
@@ -260,8 +311,9 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 				</svg>
 				<p><?php echo $auto_transmission ? esc_html_e("Auto", "tourfic") : esc_html_e("Manual", "tourfic"); ?></p>
 				</li>
+				<?php endif; ?>
 
-				<?php if(!empty($passengers)){ ?>
+				<?php if(!empty($passengers) && !empty($car_infos) && is_array($car_infos) && in_array('passenger_capacity', $car_infos)){ ?>
 				<li class="list">
 				<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<g clip-path="url(#clip0_1050_4532)">
@@ -278,7 +330,7 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 				</li>
 				<?php } ?>
 
-        		<?php if(!empty($baggage)){ ?>
+        		<?php if(!empty($baggage) && !empty($car_infos) && is_array($car_infos) && in_array('luggage_capacity', $car_infos)){ ?>
 				<li class="list">
 				<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<path d="M10.0003 5.19983C7.893 5.19983 5.69021 5.19983 3.84363 5.52986C2.9585 5.68804 2.26121 6.36397 2.07119 7.24281C1.77173 8.62763 1.77173 9.91936 1.77173 11.8855C1.77173 13.8517 1.77173 15.1434 2.07119 16.5283C2.26121 17.4071 2.9585 18.083 3.84363 18.2413C5.69021 18.5713 7.893 18.5713 10.0003 18.5713C12.1076 18.5713 14.3104 18.5713 16.157 18.2413C17.0421 18.083 17.7394 17.4071 17.9294 16.5283C18.2288 15.1434 18.2288 13.8517 18.2288 11.8855C18.2288 9.91936 18.2288 8.62763 17.9294 7.24281C17.7394 6.36397 17.0421 5.68804 16.157 5.52986C14.3104 5.19983 12.1076 5.19983 10.0003 5.19983Z" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -310,14 +362,33 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 
 				</div>
 			</div>
+			<!-- Price -->
+			<?php if($show_price == 'yes') : ?>
 			<div class="tf-price-info">
 				<?php
 				$total_prices = Pricing::set_total_price($meta, $pickup_date, $dropoff_date, $pickup_time, $dropoff_time);
 				?>
 				<h3><?php echo $total_prices['sale_price'] ? wc_price($total_prices['sale_price']) : '' ?> <small>/ <?php echo esc_html($total_prices['type']); ?></small></h3>
 			</div>
-			<a class="view-more" href="<?php echo esc_url( $url ); ?>"><?php esc_html_e("Details", "tourfic"); ?></a>
-		
+			<?php endif; ?>
+
+			<!-- View Details -->
+			<?php if($show_view_details == 'yes') : ?>
+			<?php if(!empty($pickup_date) && !empty($dropoff_date)){ ?>
+				<input type="hidden" value="<?php echo esc_attr($pickup_date); ?>" id="pickup_date">
+				<input type="hidden" value="<?php echo esc_attr($dropoff_date); ?>" id="dropoff_date">
+				<input type="hidden" value="<?php echo esc_attr($pickup_time); ?>" id="pickup_time">
+				<input type="hidden" value="<?php echo esc_attr($dropoff_time); ?>" id="dropoff_time">
+				<input type="hidden" value="<?php echo esc_attr($post_id); ?>" id="post_id">
+				<?php if('2'==$car_booking_by){ ?>
+					<button class="quick-booking"><?php echo esc_html( $view_details_text ); ?></button>
+				<?php }else{ ?>
+					<button class="<?php echo (empty($car_protection_section_status) || empty($car_protections)) && '3'!=$car_booking_by ? esc_attr('quick-booking') : esc_attr('tf-car-quick-booking'); ?>"><?php echo esc_html( $view_details_text ); ?></button>
+				<?php } ?>
+			<?php }else{ ?>
+				<a class="view-more" href="<?php echo esc_url( $url ); ?>"><?php echo esc_html( $view_details_text ); ?></a>
+			<?php } ?>
+			<?php endif; ?>
 		</div>
 	</div>
 </div>
@@ -336,11 +407,22 @@ function tf_car_availability_response($car_meta, array &$not_found, $pickup='', 
 
 	$has_car = false;
 	$pricing_type = !empty($car_meta["pricing_type"]) ? $car_meta["pricing_type"] : 'day_hour';
+	$price_by = !empty($car_meta["price_by"]) ? $car_meta["price_by"] : 'day';
+	
+	$date_pricing = !empty($car_meta["date_prices"]) ? $car_meta["date_prices"] : '';
+	$day_pricing = !empty($car_meta["day_prices"]) ? $car_meta["day_prices"] : '';
 
-	$date_pricing = !empty($meta["date_prices"]) ? $meta["date_prices"] : '';
-	$day_pricing = !empty($meta["day_prices"]) ? $meta["day_prices"] : '';
+	$custom_availability = !empty($car_meta["custom_availability"]) ? $car_meta["custom_availability"] : '0';
+	$pricing_type = !empty($car_meta["pricing_type"]) ? $car_meta["pricing_type"] : 'day_hour';
+	$base_price = !empty($car_meta["car_rent"]) ? $car_meta["car_rent"] : 0;
 
-	if( !empty($tf_pickup_date) && !empty($tf_dropoff_date) && 'date'==$pricing_type && !empty($date_pricing) ){
+	if(!empty($tf_startprice) && !empty($tf_endprice) && $custom_availability == '0' && ('day' == $price_by || 'hour' == $price_by) ){
+		if ( ! empty( $base_price ) && $tf_startprice <= $base_price && $base_price <= $tf_endprice ) {
+			$has_car = true;
+		} else {
+			$has_car = false;
+		}
+	}elseif( !empty($tf_pickup_date) && !empty($tf_dropoff_date) && 'date'==$pricing_type && !empty($date_pricing) ){
 
 		if ( ! empty( $tf_startprice ) && ! empty( $tf_endprice ) ) {
 
@@ -921,7 +1003,7 @@ function tf_car_price_calculation_callback() {
 
 	$meta = get_post_meta( $post_id, 'tf_carrental_opt', true );
 	$get_prices = Pricing::set_total_price($meta, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time);
-	
+
 	$total_prices = $get_prices['sale_price'] ? $get_prices['sale_price'] : 0;
 
 	if(!empty($extra_ids)){
