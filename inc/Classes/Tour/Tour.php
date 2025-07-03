@@ -1129,6 +1129,12 @@ class Tour {
 		if ( $tf_tour_selected_template == "design-1" ) {
 			if ( ( $tf_booking_type == 2 && $tf_hide_booking_form !== 1 && $tf_ext_booking_type !== '2' ) || $tf_booking_type == 1 || $tf_booking_type == 3 ) : ?>
                 <form class="tf_tours_booking tf_tours_main_booking">
+
+					<?php
+					if ( self::tf_booking_popup( $post_id ) ) {
+						echo wp_kses( self::tf_booking_popup( $post_id ), Helper::tf_custom_wp_kses_allow_tags() );
+					}
+					?>
                     <div class="tf-field-group tf-mt-8">
                         <i class="fa-sharp fa-solid fa-calendar-days"></i>
                         <input type='text' name='check-in-out-date' id='check-in-out-date' class='tf-field tours-check-in-out' onkeypress="return false;" placeholder='<?php esc_html_e( "Select Date", "tourfic" ); ?>'
@@ -1271,11 +1277,6 @@ class Tour {
 
 				<form class="tf_tours_booking tf_tours_bottom_booking">
                     <input type="hidden" name="post_id" value="<?php echo esc_attr( $post_id ); ?>">
-					<?php
-					if ( self::tf_booking_popup( $post_id ) ) {
-						echo wp_kses( self::tf_booking_popup( $post_id ), Helper::tf_custom_wp_kses_allow_tags() );
-					}
-					?>
                     <!-- bottom bar -->
                     <div class="tf-bottom-booking-bar">
                         <div class="tf-bottom-booking-fields">
@@ -1446,6 +1447,12 @@ class Tour {
 		<?php } elseif ( $tf_tour_selected_template == "design-2" ) { ?>
 			<?php if ( ( $tf_booking_type == 2 && $tf_hide_booking_form !== 1 && $tf_ext_booking_type !== '2' ) || $tf_booking_type == 1 || $tf_booking_type == 3 ) : ?>
                 <form class="tf_tours_booking tf_tours_main_booking">
+
+					<?php
+					if ( self::tf_booking_popup( $post_id ) ) {
+						echo wp_kses( self::tf_booking_popup( $post_id ), Helper::tf_custom_wp_kses_allow_tags() );
+					}
+					?>
                     <div class="tf-field-group tf-mt-8 tf-field-calander">
                         <i class="fa-sharp fa-solid fa-calendar-days"></i>
                         <input type='text' name='check-in-out-date' id='check-in-out-date' class='tf-field tours-check-in-out' onkeypress="return false;" placeholder='<?php esc_html_e( "Select Date", "tourfic" ); ?>'
@@ -1778,11 +1785,7 @@ class Tour {
                     
                     <input type="hidden" name="post_id" value="<?php echo esc_attr( $post_id ); ?>">
                     
-					<?php
-					if ( self::tf_booking_popup( $post_id ) ) {
-						echo wp_kses( self::tf_booking_popup( $post_id ), Helper::tf_custom_wp_kses_allow_tags() );
-					}
-					?>
+					
 
                     <!-- bottom bar -->
 					<?php if ( ! empty( $tf_tour_book_now_text ) ) : ?>
