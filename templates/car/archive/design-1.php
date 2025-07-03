@@ -74,10 +74,13 @@ $tf_car_arc_banner = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template'
                                     }
                                 }
                             } else {
-                                echo '<div class="tf-nothing-found" data-post-count="0" >' .esc_html__("No Tours Found!", "tourfic"). '</div>';
+                                echo '<div class="tf-nothing-found" data-post-count="0" >' .esc_html__("No Cars Found!", "tourfic"). '</div>';
                             }
                             ?>
 
+                            <div class="tf-pagination-bar">
+                                <?php Helper::tourfic_posts_navigation(); ?>
+                            </div>
                         </div>
                         <?php do_action("tf_car_archive_card_items_after"); ?>
 

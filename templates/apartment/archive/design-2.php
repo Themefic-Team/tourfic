@@ -17,9 +17,7 @@
 
         <div class="tf-archive-search-form tf-booking-form-wrapper" style="<?php echo !empty($tf_apartment_arc_banner) ? 'background-image: url('.esc_url($tf_apartment_arc_banner).')' : ''; ?>">
             <div class="tf-container">
-                <form action="<?php echo esc_url(Helper::tf_booking_search_action()); ?>" method="get" autocomplete="off" class="tf_archive_search_result tf-hotel-side-booking tf-booking-form">
-                    <?php Helper::tf_archive_sidebar_search_form('tf_apartment'); ?>
-                </form>
+                <?php Helper::tf_archive_sidebar_search_form('tf_apartment'); ?>
             </div>
         </div>
 

@@ -172,6 +172,26 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 				);
 			}
 
+			// Template Builder
+			if ( did_action( 'elementor/loaded' ) ) {
+				add_submenu_page(
+					'tf_settings',
+					esc_html__('Template Builder', 'tourfic'),
+					esc_html__('Template Builder', 'tourfic'),
+					'manage_options',
+					'edit.php?post_type=tf_template_builder',
+				);
+			} else {
+				add_submenu_page(
+					'tf_settings',
+					esc_html__('Template Builder', 'tourfic'),
+					esc_html__('Template Builder', 'tourfic'),
+					'manage_options',
+					'tf_template_builder',
+					array( '\Tourfic\App\Templates\Template_Builder', 'tf_template_builder_elementor_check' )
+				);
+			} 
+
 			if ( function_exists('is_tf_pro') ) {
 				//License Info submenu
 				add_submenu_page(

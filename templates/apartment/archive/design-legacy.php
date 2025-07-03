@@ -74,13 +74,14 @@
 			</div>
 			<!-- End Content -->
 
-			
 			<!-- Start Sidebar -->
 			<div class="tf-search-right">
-				<?php
-				// Location: functions.php
-				Helper::tf_archive_sidebar_search_form('tf_apartment');
-				?>
+				<?php Helper::tf_archive_sidebar_search_form('tf_apartment');?>
+				<?php if ( is_active_sidebar( 'tf_archive_booking_sidebar' ) ) { ?>
+                    <div id="tf__booking_sidebar">
+                        <?php dynamic_sidebar( 'tf_archive_booking_sidebar' ); ?>
+                    </div>
+                <?php } ?>
 			</div>
 			<!-- End Sidebar -->
 		</div>

@@ -192,6 +192,14 @@ h3.section-heading {
         display: block;
     }
     .tf_form-inner {
+        svg{
+            width: 20px;
+            height: 20px;
+        }
+        i{
+            font-size: 18px;
+        }
+
         input[type=text] {
             width: 100%;
             background: transparent;
@@ -299,7 +307,6 @@ h3.section-heading {
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
-        background-color: $color-white;
         color: $color-brand-dark;
         border-color: $color-brand-dark;
         border: 1px solid $color-brand-dark;
@@ -331,7 +338,6 @@ h3.section-heading {
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
-        background-color: $color-white;
         color: $color-brand-dark;
         border-color: $color-brand-dark;
         border: 1px solid $color-brand-dark;
