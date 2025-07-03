@@ -150,7 +150,7 @@ class TF_Options {
 	 * Field Base
 	 * @author Foysal
 	 */
-	public function field( $field, $value, $settings_id = '', $parent = '' ) {
+	public function field( $field, $value, $settings_id = '', $parent = '', $related_value = '' ) {
 		if ( $field['type'] == 'repeater' ) {
 			$id = ( ! empty( $settings_id ) ) ? $settings_id . '[' . $field['id'] . '][0]' . '[' . $field['id'] . ']' : $field['id'] . '[0]' . '[' . $field['id'] . ']';
 		} else {
@@ -238,7 +238,7 @@ class TF_Options {
 				<?php
 				$fieldClass = 'TF_' . $field['type'];
 				if ( class_exists( $fieldClass ) ) {
-					$_field = new $fieldClass( $field, $value, $settings_id, $parent );
+					$_field = new $fieldClass( $field, $value, $settings_id, $parent, $related_value );
 					$_field->render();
 				} else {
 					echo '<p>' . esc_html__( 'Field not found!', 'tourfic' ) . '</p>';
