@@ -2882,6 +2882,14 @@ li.tf-filter-item {
   justify-content: space-between;
   margin-bottom: 24px;
 }
+@media only screen and (max-width: 768px) {
+  .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-tabs,
+  .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-tabs {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    align-items: center;
+  }
+}
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-tabs .tf-booking-tab-menu ul {
   margin: 0;
@@ -10420,7 +10428,6 @@ div#tf-destinationautocomplete-list div:before {
 }
 .tf-single-template__one .tf-single-head i {
   color: var(--tf-primary);
-  margin-right: 5px;
 }
 .tf-single-template__one .tf-single-head a {
   text-decoration: none;
