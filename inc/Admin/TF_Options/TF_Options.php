@@ -218,7 +218,7 @@ class TF_Options {
         <div class="tf-field tf-field-<?php echo esc_attr( $field['type'] ); ?> <?php echo esc_attr( $class ); ?> <?php echo ! empty( $visible ) ? wp_kses_post( $visible ) : ''; ?>" <?php echo ! empty( $depend ) ? wp_kses_post( $depend ) : ''; ?>
              style="<?php echo esc_attr( $field_style ); ?>">
 
-			<?php if ( ! empty( $field['label'] ) ): ?>
+			<?php if ( ! empty( $field['label'] ) && $field['type']!='switch' ){ ?>
                 <label for="<?php echo esc_attr( $id ) ?>" class="tf-field-label">
 					<?php echo esc_html( $field['label'] ) ?>
 					<?php if ( $is_pro ): ?>
@@ -228,11 +228,7 @@ class TF_Options {
                         <div class="tf-csf-badge"><span class="tf-upcoming"><?php esc_html_e( "Upcoming", "tourfic" ); ?></span></div>
 					<?php endif; ?>
                 </label>
-			<?php endif; ?>
-
-			<?php if ( ! empty( $field['subtitle'] ) ) : ?>
-                <span class="tf-field-sub-title"><?php echo wp_kses_post( $field['subtitle'] ) ?></span>
-			<?php endif; ?>
+			<?php } ?>
 
             <div class="tf-fieldset">
 				<?php
@@ -245,6 +241,11 @@ class TF_Options {
 				}
 				?>
             </div>
+
+			<?php if ( ! empty( $field['subtitle'] ) ) : ?>
+                <span class="tf-field-sub-title"><?php echo wp_kses_post( $field['subtitle'] ) ?></span>
+			<?php endif; ?>
+
 			<?php if ( ! empty( $field['description'] ) ): ?>
                 <p class="description"><?php echo wp_kses_post( $field['description'] ) ?></p>
 			<?php endif; ?>

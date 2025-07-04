@@ -2992,11 +2992,13 @@ Steps
   font-style: normal;
   margin-bottom: 3px;
   font-weight: 600;
-  font-size: 1rem;
-  color: #000;
+  font-size: 17px;
+  color: #27333F;
   display: flex !important;
   align-items: center;
-  line-height: 20px;
+  line-height: 25.5px;
+  letter-spacing: -0.25px;
+  margin-bottom: 4px;
 }
 .tf-field .tf-field-label .tf-csf-badge {
   margin-left: 13px;
@@ -3018,16 +3020,16 @@ Steps
 .tf-field .tf-fieldset {
   font-style: normal;
   font-size: 0.875rem;
-  margin-top: 15px;
 }
 .tf-field .tf-fieldset a {
   font-style: normal;
   font-weight: 600;
 }
 .tf-field .tf-field-sub-title {
-  color: #87888B;
-  font-size: 0.875rem;
+  color: #566676;
+  font-size: 13px;
   margin-bottom: 0px;
+  margin-top: 4px;
   display: block;
 }
 
@@ -3713,11 +3715,19 @@ Steps
   color: #295BFF;
 }
 
+.tf-field-switch .tf-inline-switch {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.tf-field-switch .tf-inline-switch .tf-field-label {
+  margin-bottom: 0px;
+}
 .tf-field-switch .tf-switch-label {
   position: relative;
   display: inline-block;
-  width: 62px;
-  height: 28px;
+  width: 32px;
+  height: 24px;
   border-radius: 32px;
 }
 .tf-field-switch .tf-switch-label input {
@@ -3730,7 +3740,7 @@ Steps
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #DEE6EE;
+  background-color: #95A3B2;
   border-radius: 20px;
   -webkit-transition: all 0.4s ease-in-out;
   -moz-transition: all 0.4s ease-in-out;
@@ -3740,12 +3750,12 @@ Steps
 .tf-field-switch .tf-switch-label .tf-switch-slider::before {
   position: absolute;
   content: "";
-  height: 20px;
-  width: 20px;
+  height: 16px;
+  width: 16px;
   border-radius: 50px;
   top: 4px;
   left: 4px;
-  background-color: #ECF2F8;
+  background-color: #FFFFFF;
   filter: drop-shadow(0px 2px 4px rgba(12, 31, 49, 0.12));
   -webkit-transition: all 0.4s ease-in-out;
   -moz-transition: all 0.4s ease-in-out;
@@ -3775,11 +3785,11 @@ Steps
   opacity: 1;
 }
 .tf-field-switch .tf-switch-label input:checked + .tf-switch-slider {
-  background-color: #21A159;
+  background-color: #003C79;
 }
 .tf-field-switch .tf-switch-label input:checked + .tf-switch-slider:before {
   left: 100%;
-  margin-left: -24px;
+  margin-left: -20px;
   background-color: #ffffff;
   filter: drop-shadow(0px 2px 4px rgba(12, 31, 49, 0.12));
 }
@@ -4374,18 +4384,21 @@ Steps
 
 .tf-field-number input {
   width: 100%;
-  padding: 12px 8px 12px 12px;
-  border: 1px solid #c4cbd4;
-  background-color: #f5f8ff;
   border-radius: 4px;
   height: 40px;
-  color: #363e4a;
-  font-size: 0.875rem;
+  color: #566676;
+  font-size: 15px;
+  padding: 8px 8px 8px 12px;
+  border: 1px solid #D9E0E8;
+  background: #F5F9FF;
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
 }
 .tf-field-number input:focus {
-  background: #ffffff;
-  box-shadow: 0 0 0 2px #2979ff;
+  background: transparent;
+  box-shadow: none;
   border-radius: 4px;
+  border: 1px solid #D9E0E8;
 }
 .tf-field-number input::-webkit-input-placeholder {
   color: #a6b1bf;
@@ -4406,6 +4419,10 @@ Steps
 }
 .tf-field-number input::placeholder {
   color: #a6b1bf;
+}
+.tf-field-number input::-webkit-outer-spin-button, .tf-field-number input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 .tf-field-number .tf-unit-price-box {
   border-radius: 4px;
@@ -4432,8 +4449,7 @@ Steps
   box-shadow: none;
   border: none;
 }
-.tf-field-number .tf-unit-price-box input::-webkit-outer-spin-button,
-.tf-field-number .tf-unit-price-box input::-webkit-inner-spin-button {
+.tf-field-number .tf-unit-price-box input::-webkit-outer-spin-button, .tf-field-number .tf-unit-price-box input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }

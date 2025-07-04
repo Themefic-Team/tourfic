@@ -10,11 +10,13 @@
     font-style: normal;
     margin-bottom: 3px;
     font-weight: 600;
-    font-size: 1rem;
-    color: $admin-color-heading;
+    font-size: 17px;
+    color: $tf_text_title;
     display: flex !important;
     align-items: center;
-    line-height: 20px;
+    line-height: 25.5px;
+    letter-spacing: -0.25px;
+    margin-bottom: 4px;
 
     .tf-csf-badge {
       margin-left: 13px;
@@ -47,7 +49,6 @@
   .tf-fieldset {
     font-style: normal;
     font-size: 0.875rem;
-    margin-top: 15px;
     a {
       font-style: normal;
       font-weight: 600;
@@ -55,9 +56,10 @@
   }
 
   .tf-field-sub-title {
-    color: #87888B;
-    font-size: 0.875rem;
+    color: $tf_text_paragraph;
+    font-size: 13px;
     margin-bottom: 0px;
+    margin-top: 4px;
     display: block;
   }
 }
