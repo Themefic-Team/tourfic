@@ -1380,6 +1380,7 @@ li.tf-filter-item {
         }
         img{
             width: 320px;
+            padding-top: 8px;
         }
         h2{
             text-align: center;
@@ -1392,6 +1393,10 @@ li.tf-filter-item {
             @media #{$max768} {
                 font-size: 1.5rem;
             }
+        }
+        .tf-tour-without-payment-booking-confirm-msg-container {
+            padding: 16px;
+            color: $color-heading;
         }
         .tf-booking-times {
             position: absolute;
@@ -1424,6 +1429,11 @@ li.tf-filter-item {
             display: flex;
             justify-content: space-between;
             margin-bottom: 24px;
+            @media #{$max768}{
+                padding-top: 12px;
+                padding-bottom: 12px;
+                align-items: center;
+            }
             .tf-booking-tab-menu{
                 ul{
                     margin: 0;
