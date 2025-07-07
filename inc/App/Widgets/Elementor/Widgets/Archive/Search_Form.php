@@ -2058,7 +2058,7 @@ class Search_Form extends Widget_Base {
             <div class="tf-archive-booking-form__style-1 tf-archive-search-box tf-car-archive-search-box ">
                 <div class="tf-archive-search-box-wrapper tf_archive_search_result">
                     <div class="tf-date-select-box tf-flex tf-flex-gap-8">
-                        <div class="tf-date-single-select tf-flex tf-flex-gap-8 tf-flex-space-bttn tf-pick-drop-location <?php echo !empty($_GET['same_location']) && 'on'==$_GET['same_location'] ? esc_attr('active') : ''; ?>">
+                        <div class="tf-date-single-select tf-flex tf-flex-gap-8 tf-flex-space-bttn tf-pick-drop-location active">
                             <div class="tf-select-date">
                                 <div class="tf-flex tf-flex-gap-4">
                                     <div class="icon">
@@ -2148,14 +2148,14 @@ class Search_Form extends Widget_Base {
                             <ul>
                                 <li>
                                     <label><?php echo !empty($settings['return_same_location_text']) ? esc_attr($settings['return_same_location_text']) : esc_html__( 'Return in the same location', 'tourfic' ); ?>
-                                        <input type="checkbox" name="same_location" <?php echo !empty($_GET['same_location']) && 'on'==$_GET['same_location'] ? esc_attr('checked') : ''; ?>>
+                                        <input type="checkbox" name="same_location" checked>
                                         <span class="tf-checkmark"></span>
                                     </label>
                                 </li>
                                 <li>
                                     <label><?php esc_html_e("Age of driver ", "tourfic"); ?>
                                     <?php echo esc_attr($car_driver_min_age); ?>-<?php echo esc_attr($car_driver_max_age); ?>?
-                                        <input type="checkbox" name="driver_age" <?php echo !empty($_GET['driver_age']) && 'on'==$_GET['driver_age'] ? esc_attr('checked') : ''; ?>>
+                                        <input type="checkbox" name="driver_age" checked>
                                         <span class="tf-checkmark"></span>
                                     </label>
                                 </li>
