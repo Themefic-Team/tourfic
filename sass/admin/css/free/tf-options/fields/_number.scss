@@ -93,4 +93,27 @@
       }
     }
   }
+  .tf-number-range{
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+
+    .tf-number-field-box{
+      border-radius: 4px;
+      border: 1px solid $tf_border_default;
+      background: $tf_fill_white;
+      height: 40px;
+      padding: 8px 8px 8px 12px;
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      input{
+        height: 24px;
+        border: 0px solid;
+        background: transparent;
+      }
+    }
+  }
 }

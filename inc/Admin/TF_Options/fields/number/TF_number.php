@@ -12,7 +12,9 @@ if ( ! class_exists( 'TF_number' ) ) {
 		public function render() {
 			$type = ( ! empty( $this->field['type'] ) ) ? $this->field['type'] : 'number';
 			$placeholder = ( ! empty( $this->field['placeholder'] ) ) ? 'placeholder="' . $this->field['placeholder'] . '"' : '';
-			if($this->field['related']){ 
+			$related_placeholder = ( ! empty( $this->field['related_placeholder'] ) ) ? 'related_placeholder="' . $this->field['related_placeholder'] . '"' : '';
+
+			if(empty($this->field['range']) && !empty($this->field['related'])){ 
 				echo '<div class="tf-unit-price-box"><input type="' . esc_attr( $type ) . '" name="' . esc_attr( $this->field_name() ) . '" id="' . esc_attr( $this->field_name() ) . '" value="' . esc_attr($this->value) . '" ' . wp_kses_post($placeholder) . ' '. wp_kses_post($this->field_attributes()) .'/>';
 
 				echo '<select name="' . esc_attr($this->related_field_name()) . '" id="' . esc_attr( $this->related_field_name() ) . '">';
@@ -28,6 +30,20 @@ if ( ! class_exists( 'TF_number' ) ) {
 					}
 				}
 				echo '</select></div>';
+			}else if(empty($this->field['related']) && !empty($this->field['range'])){ 
+				$field_icon = !empty($this->field['icon']) ? '<i class="'.$this->field['icon'].'"></i>' : '';
+				echo '<div class="tf-number-range">
+				<div class="tf-number-field-box">'. $field_icon . '
+				<input type="' . esc_attr( $type ) . '" name="' . esc_attr( $this->field_name() ) . '" id="' . esc_attr( $this->field_name() ) . '" value="' . esc_attr($this->value) . '" ' . wp_kses_post($placeholder) . ' '. wp_kses_post($this->field_attributes()) .'/></div>';
+
+				echo '<svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M15.5 6.66797L18.8333 10.0013L15.5 13.3346" stroke="#95A3B2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+				<path d="M2.1665 10H18.8332" stroke="#95A3B2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+				</svg>';
+
+				echo '<div class="tf-number-field-box">'. $field_icon . '
+				<input type="' . esc_attr( $type ) . '" name="' . esc_attr( $this->related_field_name() ) . '" id="' . esc_attr( $this->related_field_name() ) . '" value="' . esc_attr($this->related_value) . '" ' . wp_kses_post($related_placeholder) . ' '. wp_kses_post($this->field_attributes()) .'/>';
+				echo '</div></div>';
 			}else{
 				echo '<input type="' . esc_attr( $type ) . '" name="' . esc_attr( $this->field_name() ) . '" id="' . esc_attr( $this->field_name() ) . '" value="' . esc_attr($this->value) . '" ' . wp_kses_post($placeholder) . ' '. wp_kses_post($this->field_attributes()) .'/>';
 			}

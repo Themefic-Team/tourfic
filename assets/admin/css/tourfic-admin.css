@@ -3156,19 +3156,19 @@ Steps
 
 .tf-field-textarea textarea {
   width: 100% !important;
-  height: 180px;
-  padding: 12px 8px 12px 12px;
-  border: 1px solid #c4cbd4;
-  background-color: #f5f8ff;
-  border-radius: 4px;
-  color: #363e4a;
-  font-size: 0.875rem;
+  height: 120px;
+  padding: 8px 8px 8px 12px;
+  color: #566676;
+  font-size: 15px;
   width: 100%;
+  border-radius: 4px;
+  border: 1px solid #D9E0E8;
+  background: #F5F9FF;
+  line-height: 24px;
 }
 .tf-field-textarea textarea:focus {
   background: #ffffff;
-  box-shadow: 0 0 0 2px #2979ff;
-  border-radius: 4px;
+  box-shadow: none;
 }
 
 .tf-field-select select.tf-select {
@@ -3954,76 +3954,67 @@ Steps
   font-size: 1rem;
 }
 
-.tf-repeater {
-  margin-bottom: 8px;
+.tf-field-repeater {
+  border-radius: 8px;
+  border: 1px solid #F2F5F7;
+  background: #FFFFFF;
+  padding: 16px;
 }
-.tf-repeater .tf-single-repeater-clone {
+.tf-field-repeater .tf-repeater .tf-single-repeater-clone {
   display: none;
 }
-.tf-repeater .tf-repeater-header {
+.tf-field-repeater .tf-repeater .tf-repeater-header {
   display: flex;
   width: 100%;
-  padding: 8px 0;
-  background: #D8E6FF;
   position: relative;
-  border-radius: 5px 5px 0px 0px;
   align-items: center;
-  cursor: pointer;
 }
-.tf-repeater .tf-repeater-header .tf-repeater-icon {
-  padding: 8px;
+.tf-field-repeater .tf-repeater .tf-repeater-header:hover .tf-repeater-icon-move {
+  opacity: 1;
+}
+.tf-field-repeater .tf-repeater .tf-repeater-header .tf-repeater-header-info {
+  border-radius: 4px;
+  background: #F5F9FF;
+  width: 100%;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+}
+.tf-field-repeater .tf-repeater .tf-repeater-header .tf-repeater-icon {
+  padding: 4px;
   cursor: pointer;
   text-align: center;
-  display: inline-block;
-  border-radius: 4px;
+  display: inline-flex;
   font-size: 1rem;
   line-height: 24px;
   height: 24px;
   width: 24px;
+  border-radius: 6px;
+  border: 1px solid #D9E0E8;
+  background: #FFFFFF;
+  box-sizing: border-box;
 }
-.tf-repeater .tf-repeater-header .tf-repeater-icon-move {
-  color: #76a9ff;
+.tf-field-repeater .tf-repeater .tf-repeater-header .tf-repeater-icon-move {
+  cursor: pointer;
+  opacity: 0;
+  transition: 0.3s all ease;
 }
-.tf-repeater .tf-repeater-header .tf-repeater-icon-move:hover {
-  background-color: #c4daff;
-  transition: 0.4s;
-  color: #2979ff;
-}
-.tf-repeater .tf-repeater-header .tf-repeater-icon-clone {
-  color: #76a9ff;
-}
-.tf-repeater .tf-repeater-header .tf-repeater-icon-clone:hover {
-  background-color: #c4daff;
-  transition: 0.4s;
-  color: #2979ff;
-}
-.tf-repeater .tf-repeater-header .tf-repeater-icon-delete {
-  color: #f8877f;
-}
-.tf-repeater .tf-repeater-header .tf-repeater-icon-delete:hover {
-  background-color: #fccbc8;
-  transition: 0.4s;
-  color: #dc3545;
-}
-.tf-repeater .tf-repeater-header .tf-repeater-title {
+.tf-field-repeater .tf-repeater .tf-repeater-header .tf-repeater-title {
   display: inline-block;
-  width: 100%;
   margin-right: 120px;
   font-style: normal;
-  font-weight: 600;
-  font-size: 1rem;
+  font-weight: 400;
+  font-size: 15px;
   line-height: 24px;
 }
-.tf-repeater .tf-repeater-header .tf-repeater-icon-absulate {
+.tf-field-repeater .tf-repeater .tf-repeater-header .tf-repeater-icon-absulate {
   position: absolute;
   right: 8px;
   top: 8px;
 }
-.tf-repeater .tf-repeater-content-wrap {
-  border: 1px solid #F0F2F4;
+.tf-field-repeater .tf-repeater .tf-repeater-content-wrap {
   background-color: #ffffff;
-  padding: 10px 24px;
-  box-shadow: 0px 5px 10px 1px #f5f5f5;
+  padding: 10px 1px 0px 15px;
   overflow: hidden;
   display: -webkit-box;
   display: -moz-box;
@@ -4036,7 +4027,7 @@ Steps
   -webkit-justify-content: space-between;
   justify-content: space-between;
 }
-.tf-repeater .tf-repeater-add .tf-repeater-icon {
+.tf-field-repeater .tf-repeater .tf-repeater-add .tf-repeater-icon {
   color: #003C79;
   font-size: 15px;
   font-weight: 600;
@@ -4046,12 +4037,12 @@ Steps
   gap: 8px;
   cursor: pointer;
 }
-.tf-repeater .tf-single-repeater {
-  margin-bottom: 24px;
+.tf-field-repeater .tf-repeater .tf-single-repeater {
+  margin-bottom: 16px;
   border-radius: 5px;
   overflow: hidden;
 }
-.tf-repeater .tf-field-notice-inner {
+.tf-field-repeater .tf-repeater .tf-field-notice-inner {
   margin-bottom: 24px;
 }
 
@@ -4507,6 +4498,28 @@ Steps
   outline: none;
   box-shadow: none;
   border: none;
+}
+.tf-field-number .tf-number-range {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+.tf-field-number .tf-number-range .tf-number-field-box {
+  border-radius: 4px;
+  border: 1px solid #D9E0E8;
+  background: #FFFFFF;
+  height: 40px;
+  padding: 8px 8px 8px 12px;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+.tf-field-number .tf-number-range .tf-number-field-box input {
+  height: 24px;
+  border: 0px solid;
+  background: transparent;
 }
 
 textarea.tf-exp-imp-field {

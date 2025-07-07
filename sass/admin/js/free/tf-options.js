@@ -2265,7 +2265,7 @@
         });
 
         // Repeater show hide
-        $(document).on('click', '.tf-repeater-title, .tf-repeater-icon-collapse', function () {
+        $(document).on('click', '.tf-repeater-icon-collapse', function () {
             var tf_repater_fieldname = $(this).closest('.tf-single-repeater').find('input[name=tf_current_field]').val();
             $(this).closest('.tf-single-repeater-' + tf_repater_fieldname + '').find('.tf-repeater-content-wrap').slideToggle();
             $(this).closest('.tf-single-repeater-' + tf_repater_fieldname + '').children('.tf-repeater-content-wrap').toggleClass('hide');
