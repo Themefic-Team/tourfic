@@ -788,18 +788,6 @@ class Search_Form extends Widget_Base {
 			],
 		] );
 
-		$this->add_responsive_control( "tf_form_wrap_margin", [
-			'label'      => __( 'Margin', 'tourfic' ),
-			'type'       => Controls_Manager::DIMENSIONS,
-			'size_units' => [
-				'px',
-				'em',
-				'%',
-			],
-			'selectors'  => [
-				"{{WRAPPER}} .tf_archive_search_result" => $this->tf_apply_dim( 'margin' ),
-			],
-		] );
 		$this->add_responsive_control( "tf_form_wrap_padding", [
 			'label'      => __( 'Padding', 'tourfic' ),
 			'type'       => Controls_Manager::DIMENSIONS,
@@ -827,15 +815,13 @@ class Search_Form extends Widget_Base {
 				"{{WRAPPER}} .tf_archive_search_result" => $this->tf_apply_dim( 'border-radius' ),
 			],
 		] );
-		$this->add_group_control( Group_Control_Background::get_type(), [
-			'name'      => "tf_form_wrap_bg_color",
+        $this->add_control( 'tf_form_wrap_bg_color', [
 			'label'     => __( 'Background Color', 'tourfic' ),
-			'types'     => [
-				'classic',
-				'gradient',
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .tf_archive_search_result" => 'background-color: {{VALUE}};',
 			],
-			'selector'  => "{{WRAPPER}} .tf_archive_search_result",
-		] );
+		]);
 
 		$this->add_group_control( Group_Control_Box_Shadow::get_type(), [
 			'label'    => __( 'Form Shadow', 'tourfic' ),
@@ -1041,40 +1027,20 @@ class Search_Form extends Widget_Base {
                 'service' => 'tf_carrental',
             ],
 		] );
-		$this->add_group_control( Group_Control_Background::get_type(), [
-			'name'      => "tf_input_wrapper_bg_color",
+        $this->add_control( 'tf_input_wrapper_bg_color', [
 			'label'     => __( 'Background Color', 'tourfic' ),
-			'types'     => [
-				'classic',
-				'gradient',
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .tf-date-select-box .tf-date-single-select" => 'background-color: {{VALUE}};',
 			],
-			'selector'  => "{{WRAPPER}} .tf-date-select-box .tf-date-single-select",
             'condition' => [
                 'service' => 'tf_carrental',
             ],
-		] );
-
+		]);
 		
 		$this->add_control( 'tf_form_input_fields_heading', [
 			'type'  => Controls_Manager::HEADING,
 			'label' => __( 'Form Input Fields', 'tourfic' ),
-		] );
-		$this->add_responsive_control( "tf_form_field_margin", [
-			'label'      => __( 'Margin', 'tourfic' ),
-			'type'       => Controls_Manager::DIMENSIONS,
-			'size_units' => [
-				'px',
-				'em',
-				'%',
-			],
-			'selectors'  => [
-				"{{WRAPPER}} .tf-field-group .tf-field, {{WRAPPER}} .tf_form-row .tf_form-inner" => $this->tf_apply_dim( 'margin' ),
-			],
-            'conditions' => $this->tf_display_conditionally([
-                'tf_hotel' => ['design-1', 'default'],
-                'tf_tours' => ['design-1', 'default'],
-                'tf_apartment' => ['default'],
-            ]),
 		] );
 
         $this->start_controls_tabs( "tabs_form_fields_padding" );
@@ -1222,14 +1188,12 @@ class Search_Form extends Widget_Base {
 				"{{WRAPPER}} .tf-submit-button button svg path" => 'fill: {{VALUE}};',
 			],
 		] );
-		$this->add_group_control( Group_Control_Background::get_type(), [
-			'name'     => "btn_bg_color",
-			'label'    => __( 'Background Color', 'tourfic' ),
-			'types'    => [
-				'classic',
-				'gradient',
+		$this->add_control( 'btn_bg_color', [
+			'label'     => __( 'Background Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .tf_btn" => 'background-color: {{VALUE}};',
 			],
-			'selector' => "{{WRAPPER}} .tf_btn",
 		] );
 		$this->add_group_control( Group_Control_Border::get_type(), [
 			'name'     => "btn_border",
@@ -1261,28 +1225,18 @@ class Search_Form extends Widget_Base {
 				"{{WRAPPER}} .tf-submit-button button:hover svg path" => 'fill: {{VALUE}};',
 			],
 		] );
-		$this->add_group_control( Group_Control_Background::get_type(), [
-			'name'     => "btn_bg_color_hover",
-			'label'    => __( 'Background Color', 'tourfic' ),
-			'types'    => [
-				'classic',
-				'gradient',
+		$this->add_control( 'btn_bg_color_hover', [
+			'label'     => __( 'Background Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .tf_btn:hover" => 'background-color: {{VALUE}};',
 			],
-			'selector' => "{{WRAPPER}} .tf_btn:hover",
 		] );
-		$this->add_group_control( Group_Control_Border::get_type(), [
-			'name'     => "btn_border_hover",
-			'selector' => "{{WRAPPER}} .tf_btn:hover",
-		] );
-		$this->add_control( "btn_border_radius_hover", [
-			'label'      => __( 'Border Radius', 'tourfic' ),
-			'type'       => Controls_Manager::DIMENSIONS,
-			'size_units' => [
-				'px',
-				'%',
-			],
-			'selectors'  => [
-				"{{WRAPPER}} .tf_btn:hover" => $this->tf_apply_dim( 'border-radius' ),
+		$this->add_control( 'btn_border_color_hover', [
+			'label'     => __( 'Border Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .tf_btn:hover" => 'border-color: {{VALUE}};',
 			],
 		] );
 		$this->end_controls_tab();
