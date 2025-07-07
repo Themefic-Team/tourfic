@@ -221,6 +221,23 @@ class TF_Options {
 			<?php if ( ! empty( $field['label'] ) && $field['type']!='switch' ){ ?>
                 <label for="<?php echo esc_attr( $id ) ?>" class="tf-field-label">
 					<?php echo esc_html( $field['label'] ) ?>
+					<?php if ( ! empty( $field['subtitle'] ) ) : ?>
+					<span class="tf-desc-tooltip">
+						<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<g clip-path="url(#clip0_1017_4247)">
+								<path d="M8.00016 10.6654V7.9987M8.00016 5.33203H8.00683M14.6668 7.9987C14.6668 11.6806 11.6821 14.6654 8.00016 14.6654C4.31826 14.6654 1.3335 11.6806 1.3335 7.9987C1.3335 4.3168 4.31826 1.33203 8.00016 1.33203C11.6821 1.33203 14.6668 4.3168 14.6668 7.9987Z" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+							</g>
+							<defs>
+								<clipPath id="clip0_1017_4247">
+								<rect width="16" height="16" fill="white"/>
+								</clipPath>
+							</defs>
+						</svg>
+						<div class="tf-desc-tooltip-content">
+							<?php echo wp_kses_post( $field['subtitle'] ) ?>
+						</div>
+					</span>
+					<?php endif; ?>
 					<?php if ( $is_pro ): ?>
                         <div class="tf-csf-badge"><span class="tf-pro"><?php esc_html_e( "Pro", "tourfic" ); ?></span></div>
 					<?php endif; ?>
@@ -242,12 +259,8 @@ class TF_Options {
 				?>
             </div>
 
-			<?php if ( ! empty( $field['subtitle'] ) ) : ?>
-                <span class="tf-field-sub-title"><?php echo wp_kses_post( $field['subtitle'] ) ?></span>
-			<?php endif; ?>
-
 			<?php if ( ! empty( $field['description'] ) ): ?>
-                <p class="description"><?php echo wp_kses_post( $field['description'] ) ?></p>
+                <span class="tf-field-sub-title"><?php echo wp_kses_post( $field['description'] ) ?></span>
 			<?php endif; ?>
         </div>
 		<?php

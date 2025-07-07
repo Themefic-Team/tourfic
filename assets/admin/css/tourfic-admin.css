@@ -3000,6 +3000,49 @@ Steps
   letter-spacing: -0.25px;
   margin-bottom: 4px;
 }
+.tf-field .tf-field-label .tf-desc-tooltip {
+  margin-left: 4px;
+  position: relative;
+  display: flex;
+}
+.tf-field .tf-field-label .tf-desc-tooltip .tf-desc-tooltip-content {
+  position: absolute;
+  width: 124px;
+  border-radius: 8px;
+  background: #27333F;
+  padding: 8px 12px;
+  color: #FFFFFF;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 16px;
+  z-index: 9;
+  left: 50%;
+  margin-left: -74px;
+  bottom: 30px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.tf-field .tf-field-label .tf-desc-tooltip .tf-desc-tooltip-content::before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  border-radius: 3px;
+  background: #27333F;
+  left: 50%;
+  margin-left: -8px;
+  bottom: -4px;
+  transform: rotate(45deg);
+  z-index: -1;
+}
+.tf-field .tf-field-label .tf-desc-tooltip svg {
+  cursor: pointer;
+}
+.tf-field .tf-field-label .tf-desc-tooltip svg:hover + .tf-desc-tooltip-content {
+  opacity: 1;
+  visibility: visible;
+}
 .tf-field .tf-field-label .tf-csf-badge {
   margin-left: 13px;
 }
@@ -3050,51 +3093,53 @@ Steps
 .tf-field-text input, .tf-field-password input {
   width: 100%;
   padding: 12px 8px 12px 12px;
-  border: 1px solid #c4cbd4;
-  background-color: #f5f8ff;
+  height: 40px;
+  color: #566676;
+  font-size: 15px;
+  padding: 8px 8px 8px 12px;
+  border: 1px solid #D9E0E8;
+  background: #F5F9FF;
   border-radius: 4px;
-  height: 48px;
-  color: #363e4a;
-  font-size: 0.875rem;
 }
 .tf-field-ical input:focus,
 .tf-field-ical_export input:focus,
 .tf-field-text input:focus, .tf-field-password input:focus {
-  background: #ffffff;
-  box-shadow: 0 0 0 2px #2979ff;
+  background: transparent;
+  box-shadow: none;
   border-radius: 4px;
+  border: 1px solid #D9E0E8;
 }
 .tf-field-ical input::-webkit-input-placeholder,
 .tf-field-ical_export input::-webkit-input-placeholder,
 .tf-field-text input::-webkit-input-placeholder, .tf-field-password input::-webkit-input-placeholder {
-  color: #a6b1bf;
+  color: #566676;
 }
 .tf-field-ical input::-ms-input-placeholder,
 .tf-field-ical_export input::-ms-input-placeholder,
 .tf-field-text input::-ms-input-placeholder, .tf-field-password input::-ms-input-placeholder {
-  color: #a6b1bf;
+  color: #566676;
 }
 .tf-field-ical input input:-ms-input-placeholder,
 .tf-field-ical_export input input:-ms-input-placeholder,
 .tf-field-text input input:-ms-input-placeholder, .tf-field-password input input:-ms-input-placeholder {
-  color: #a6b1bf;
+  color: #566676;
 }
 .tf-field-ical input::-moz-placeholder,
 .tf-field-ical_export input::-moz-placeholder,
 .tf-field-text input::-moz-placeholder, .tf-field-password input::-moz-placeholder {
   opacity: 1;
-  color: #a6b1bf;
+  color: #566676;
 }
 .tf-field-ical input:-moz-placeholder,
 .tf-field-ical_export input:-moz-placeholder,
 .tf-field-text input:-moz-placeholder, .tf-field-password input:-moz-placeholder {
   opacity: 1;
-  color: #a6b1bf;
+  color: #566676;
 }
 .tf-field-ical input::placeholder,
 .tf-field-ical_export input::placeholder,
 .tf-field-text input::placeholder, .tf-field-password input::placeholder {
-  color: #a6b1bf;
+  color: #566676;
 }
 .tf-field-ical input:read-only,
 .tf-field-ical_export input:read-only,
@@ -3129,17 +3174,19 @@ Steps
 .tf-field-select select.tf-select {
   width: 100%;
   max-width: 100%;
-  padding: 12px 8px 12px 12px;
-  border: 1px solid #c4cbd4;
-  background-color: #f5f8ff;
+  padding: 8px 8px 8px 12px;
+  border: 1px solid #D9E0E8;
+  background-color: #FFFFFF;
   border-radius: 4px;
-  height: 48px;
-  color: #363e4a;
-  font-size: 0.875rem;
-  line-height: 22px;
+  height: 40px;
+  color: #27333F;
+  font-size: 15px;
+  line-height: 24px;
 }
 .tf-field-select select.tf-select:focus {
   outline: none;
+  border-color: #D9E0E8;
+  box-shadow: none;
 }
 
 .tf-field-select2 .select2-container {
@@ -3147,11 +3194,11 @@ Steps
 }
 .tf-field-select2 .select2-container .select2-selection {
   width: 100%;
-  padding: 2px 8px 0 12px;
-  border: 1px solid #c4cbd4;
-  background-color: #f5f8ff;
+  padding: 4px 8px 0 12px;
+  border: 1px solid #D9E0E8;
+  background: #F5F9FF;
   border-radius: 4px;
-  min-height: 48px;
+  min-height: 40px;
   color: #363e4a;
   font-size: 0.875rem;
 }
@@ -3194,7 +3241,7 @@ Steps
   word-break: keep-all;
 }
 .tf-field-select2 .select2-container--default .select2-selection--single .select2-selection__arrow {
-  height: 48px;
+  height: 40px;
 }
 .tf-field-select2 .tf-select-box-option .tf-add-category {
   margin-top: 16px;
@@ -3990,18 +4037,14 @@ Steps
   justify-content: space-between;
 }
 .tf-repeater .tf-repeater-add .tf-repeater-icon {
-  padding: 8px 15px;
-  cursor: pointer;
-  text-align: center;
-  line-height: 0;
-  display: inline-block;
-  line-height: 24px;
-  background-color: #003c79;
-  border-radius: 4px;
-  font-size: 1rem;
+  color: #003C79;
+  font-size: 15px;
   font-weight: 600;
-  color: #ffffff;
-  letter-spacing: 0.5px;
+  line-height: 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
 }
 .tf-repeater .tf-single-repeater {
   margin-bottom: 24px;

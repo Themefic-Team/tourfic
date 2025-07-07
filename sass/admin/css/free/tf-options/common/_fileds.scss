@@ -18,6 +18,51 @@
     letter-spacing: -0.25px;
     margin-bottom: 4px;
 
+    .tf-desc-tooltip{
+      margin-left: 4px;
+      position: relative;
+      display: flex;
+      .tf-desc-tooltip-content{
+        position: absolute;
+        width: 124px;
+        border-radius: 8px;
+        background: $tf_text_title;
+        padding: 8px 12px;
+        color: $tf_fill_white;
+        font-size: 11px;
+        font-weight: 600;
+        line-height: 16px;
+        z-index: 9;
+        left: 50%;
+        margin-left: -74px;
+        bottom: 30px;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+        &::before{
+          position: absolute;
+          content: "";
+          height: 16px;
+          width: 16px;
+          border-radius: 3px;
+          background: $tf_text_title;
+          left: 50%;
+          margin-left: -8px;
+          bottom: -4px;
+          transform: rotate(45deg);
+          z-index: -1;
+        }
+      }
+      svg{
+        cursor: pointer;
+        &:hover{
+          +.tf-desc-tooltip-content{
+            opacity: 1;
+            visibility: visible;
+          }
+        }
+      }
+    }
     .tf-csf-badge {
       margin-left: 13px;
       .tf-pro {

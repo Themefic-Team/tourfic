@@ -95,18 +95,14 @@
 
   .tf-repeater-add {
     .tf-repeater-icon {
-      padding: 8px 15px;
-      cursor: pointer;
-      text-align: center;
-      line-height: 0;
-      display: inline-block;
-      line-height: 24px;
-      background-color: #003c79;
-      border-radius: 4px;
-      font-size: 1rem;
+      color: $tf_primary_default;
+      font-size: 15px;
       font-weight: 600;
-      color: #ffffff;
-      letter-spacing: 0.5px;
+      line-height: 24px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
     }
   }
 

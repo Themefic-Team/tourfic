@@ -40,6 +40,9 @@ if ( ! class_exists( 'TF_switch' ) ) {
 					</span>
 				</label>
 			</div>
+			<?php if ( ! empty( $this->field['subtitle'] ) ): ?>
+                <span class="tf-field-sub-title"><?php echo wp_kses_post( $this->field['subtitle'] ) ?></span>
+			<?php endif; ?>
 			<?php
 		}
 
