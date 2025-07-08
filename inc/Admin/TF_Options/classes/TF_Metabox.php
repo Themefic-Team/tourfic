@@ -175,6 +175,22 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 								}
 
 							}
+							if ( ! empty( $field['related_name'] ) ) {
+								$data = isset( $metabox_request[ $field['related_name'] ] ) ? $metabox_request[ $field['related_name'] ] : '';
+
+								$fieldClass = 'TF_' . $field['type'];
+								$data       = $fieldClass == 'TF_map' ||  $fieldClass == 'TF_color' ? serialize( $data ) : $data;
+
+								if ( class_exists( $fieldClass ) ) {
+									$_field                            = new $fieldClass( $field, $data, $this->metabox_id );
+									$tf_meta_box_value[ $field['related_name'] ] = $_field->sanitize();
+
+									if( !empty($field['is_related_search_able']) ){
+										update_post_meta( $post_id, 'tf_search_'.$field['related_name'], $_field->sanitize() );
+									}
+								}
+
+							}
 						}
 					}
 				}

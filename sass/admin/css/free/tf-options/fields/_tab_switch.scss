@@ -51,6 +51,8 @@
             background: $tf_fill_foreground;
             padding: 4px 16px;
             display: none;
+            flex-wrap: wrap;
+            justify-content: space-between;
         }
     }
 }

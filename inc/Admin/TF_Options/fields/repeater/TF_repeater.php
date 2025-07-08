@@ -67,6 +67,43 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 									<div class="tf-repeater-header-info">
 										<span class="tf-repeater-title"><?php echo !empty($value[$field_title]) && is_string($value[$field_title]) ? esc_html($value[$field_title]) : esc_html($label) ?>  </span>
 										<div class="tf-repeater-icon-absulate">
+											<?php
+											foreach ( $this->field['fields'] as $rkey => $re_field ) :
+												if($rkey==0 && $re_field['type'] == 'switch' && $this->field['enable_disable']){
+													if(!empty($this->parent_field)){
+														$parent_field = $this->parent_field.'[' . $this->field['id'] . '][' . $key . ']';
+													}else{
+														$parent_field = '[' . $this->field['id'] . '][' . $key . ']';
+													}
+
+													$id = ( ! empty( $this->settings_id ) ) ? $this->settings_id . '[' . $this->field['id'] . '][00]' . '[' . $re_field['id'] . ']' : $this->field['id'] . '[00]' . '[' . $re_field['id'] . ']';
+
+													$related_name = ( ! empty( $this->settings_id ) ) ? $this->settings_id . '[' . $this->field['related_name'] . '][00]' . '[' . $re_field['related_name'] . ']' : $this->field['related_name'] . '[00]' . '[' . $re_field['related_name'] . ']'; 
+
+													if ( isset( $tf_meta_box_value[ $id ] ) ) {
+														$value = isset( $tf_meta_box_value[ $id ] ) ? $tf_meta_box_value[ $id ] : '';
+													} else {
+														$value = ( isset( $re_field['id'] ) && isset( $data[ $key ][ $re_field['id'] ] ) ) ? $data[ $key ][ $re_field['id'] ] : '';
+													}
+
+													if ( isset( $tf_meta_box_value[ $related_name ] ) ) {
+														$related_value = isset( $tf_meta_box_value[ $related_name ] ) ? $tf_meta_box_value[ $related_name ] : '';
+													} else {
+														$related_value = ( isset( $re_field['related_name'] ) && isset( $data[ $key ][ $re_field['related_name'] ] ) ) ? $data[ $key ][ $re_field['related_name'] ] : '';
+													}
+
+													if(isset($re_field['validate']) && $re_field['validate'] == 'no_space_no_special'){
+														//remove special characters, replace space with underscore and convert to lowercase
+														$value = sanitize_title(str_replace(' ', '_', strtolower($value)));
+													}
+
+													$value = ($re_field['type'] == 'text' || $re_field['type'] == 'textarea') ? stripslashes($value) : $value;
+
+													$tf_option = new \Tourfic\Admin\TF_Options\TF_Options();
+													$tf_option->field( $re_field, $value, $this->settings_id, $parent_field, $related_value);
+												}
+											endforeach;
+											?>
 											<span class="tf-repeater-icon tf-repeater-icon-delete">
 												<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 												<path d="M2 4H14" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -104,8 +141,9 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 								</div>
                                 <div class="tf-repeater-content-wrap hide" style="display: none">
 									<?php
-									foreach ( $this->field['fields'] as $re_field ) :
-
+									foreach ( $this->field['fields'] as $rkey => $re_field ) :
+										if($rkey==0 && $re_field['type'] == 'switch' && $this->field['enable_disable'])
+                    					continue;
 										if($re_field['type'] == 'editor'){
 											$re_field['wp_editor'] = 'wp_editor';
 										}

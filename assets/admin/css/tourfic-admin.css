@@ -4012,11 +4012,22 @@ Steps
   position: absolute;
   right: 8px;
   top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.tf-field-repeater .tf-repeater .tf-repeater-header .tf-repeater-icon-absulate .tf-field-switch {
+  width: auto !important;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+}
+.tf-field-repeater .tf-repeater .tf-repeater-header .tf-repeater-icon-absulate .tf-field-switch .tf-field-label {
+  display: none !important;
 }
 .tf-field-repeater .tf-repeater .tf-repeater-content-wrap {
   background-color: #ffffff;
   padding: 10px 1px 0px 15px;
-  overflow: hidden;
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -4041,7 +4052,6 @@ Steps
 .tf-field-repeater .tf-repeater .tf-single-repeater {
   margin-bottom: 16px;
   border-radius: 5px;
-  overflow: hidden;
 }
 .tf-field-repeater .tf-repeater .tf-field-notice-inner {
   margin-bottom: 24px;
@@ -5185,6 +5195,8 @@ a.tf-import-btn, a.tf-export-btn {
   background: #FFFCF5;
   padding: 4px 16px;
   display: none;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .tf-backend-tour-booking h1,

@@ -70,6 +70,18 @@
         position: absolute;
         right: 8px;
         top: 8px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        .tf-field-switch{
+          width: auto !important;
+          padding: 0;
+          display: inline-flex;
+          align-items: center;
+          .tf-field-label{
+            display: none !important;
+          }
+        }
       }
 
     }
@@ -77,7 +89,6 @@
     .tf-repeater-content-wrap {
       background-color: #ffffff;
       padding: 10px 1px 0px 15px;
-      overflow: hidden;
       @include flexbox();
       @include flex-wrap(wrap);
       @include justify-content(space-between);
@@ -99,7 +110,6 @@
     .tf-single-repeater {
       margin-bottom: 16px;
       border-radius: 5px;
-      overflow: hidden;
     }
     .tf-field-notice-inner {
       margin-bottom: 24px;
