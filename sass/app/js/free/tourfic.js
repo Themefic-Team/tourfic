@@ -56,6 +56,12 @@
                                         },
                                         grid: false,
                                         theme: "dark",
+                                        onFinish: function () {
+                                            if($(".filter-reset-btn").length>0){
+                                                $(".filter-reset-btn").show();
+                                            }
+                                            makeFilter();
+                                        }
                                     };
                                     if ( parseInt( response.data?.tf_tours?.min ) != 0 && parseInt( response.data?.tf_tours?.max ) != 0) {
                                         $('.tf-tour-filter-range').alRangeSlider(tf_tour_range_options);
@@ -76,12 +82,25 @@
                                         grid: false,
                                         theme: "dark",
                                         onFinish: function () {
+                                            if($(".filter-reset-btn").length>0){
+                                                $(".filter-reset-btn").show();
+                                            }
                                             makeFilter();
                                         }
                                     };
                                     if ( parseInt( response.data?.tf_tours?.min ) != 0 && parseInt( response.data?.tf_tours?.max ) != 0) {
                                         $('.tf-tour-result-price-range').alRangeSlider(tf_tours_search_range);
                                     }
+
+                                // Store in global variable or object
+                                window.tf_price_ranges = {
+                                    min: parseInt(response.data?.tf_tours?.min),
+                                    max: parseInt(response.data?.tf_tours?.max)
+                                };
+                                if(tf_search_page_params.get('from') && tf_search_page_params.get('to')){
+                                    window.tf_price_ranges.min = parseInt(tf_search_page_params.get('from'));
+                                    window.tf_price_ranges.max = parseInt(tf_search_page_params.get('to'));
+                                }
                             } else if( post_type == 'tf_hotel' ) { 
                                         let tf_hotel_range_options = {
                                             range: {
@@ -95,6 +114,12 @@
                                             },
                                             grid: false,
                                             theme: "dark",
+                                            onFinish: function () {
+                                                if($(".filter-reset-btn").length>0){
+                                                    $(".filter-reset-btn").show();
+                                                }
+                                                makeFilter();
+                                            }
                                         };
                                         if ( response.data?.tf_hotel?.min != 0 && response.data?.tf_hotel?.max != 0) {
                                             $('.tf-hotel-filter-range').alRangeSlider(tf_hotel_range_options);
@@ -115,14 +140,26 @@
                                             grid: false,
                                             theme: "dark",
                                             onFinish: function () {
+                                                if($(".filter-reset-btn").length>0){
+                                                    $(".filter-reset-btn").show();
+                                                }
                                                 makeFilter();
                                             }
                                         };
                                         if ( response.data?.tf_hotel?.min != 0 && response.data?.tf_hotel?.max != 0) {
                                             $('.tf-hotel-result-price-range').alRangeSlider(tf_hotel_search_range);
                                         }
-                            } else if( post_type == 'tf_apartment' ) {
 
+                                // Store in global variable or object
+                                window.tf_price_ranges = {
+                                    min: parseInt(response.data?.tf_hotel?.min),
+                                    max: parseInt(response.data?.tf_hotel?.max)
+                                };
+                                if(tf_search_page_params.get('from') && tf_search_page_params.get('to')){
+                                    window.tf_price_ranges.min = parseInt(tf_search_page_params.get('from'));
+                                    window.tf_price_ranges.max = parseInt(tf_search_page_params.get('to'));
+                                }
+                            } else if( post_type == 'tf_apartment' ) {
                                 let tf_apartment_range_options = {
                                     range: {
                                         min: parseInt( response.data?.tf_apartment?.min ),
@@ -155,11 +192,24 @@
                                     grid: false,
                                     theme: "dark",
                                     onFinish: function () {
+                                        if($(".filter-reset-btn").length>0){
+                                            $(".filter-reset-btn").show();
+                                        }
                                         makeFilter();
                                     }
                                 };
                                 if ( parseInt(  response.data?.tf_apartment?.min ) != 0 && parseInt( response.data?.tf_apartment?.max ) != 0) {
                                     $('.tf-apartment-result-price-range').alRangeSlider(tf_apartment_search_range);
+                                }
+
+                                // Store in global variable or object
+                                window.tf_price_ranges = {
+                                    min: parseInt(response.data?.tf_apartment?.min),
+                                    max: parseInt(response.data?.tf_apartment?.max)
+                                };
+                                if(tf_search_page_params.get('from') && tf_search_page_params.get('to')){
+                                    window.tf_price_ranges.min = parseInt(tf_search_page_params.get('from'));
+                                    window.tf_price_ranges.max = parseInt(tf_search_page_params.get('to'));
                                 }
                             } else if( post_type == 'tf_carrental' ) {
                                 var tf_search_page_params = new window.URLSearchParams(window.location.search);
@@ -176,14 +226,24 @@
                                     grid: false,
                                     theme: "dark",
                                     onFinish: function () {
-                                        if($(".tf-filter-reset-btn").length>0){
-                                            $(".tf-filter-reset-btn").show();
+                                        if($(".filter-reset-btn").length>0){
+                                            $(".filter-reset-btn").show();
                                         }
                                         makeFilter();
                                     }
                                 };
                                 if ( parseInt( response.data?.tf_carrental?.min ) != 0 && parseInt( response.data?.tf_carrental?.max ) != 0) {
                                     $('.tf-car-result-price-range').alRangeSlider(tf_car_search_range);
+                                }
+                                
+                                // Store in global variable or object
+                                window.tf_price_ranges = {
+                                    min: parseInt(response.data?.tf_carrental?.min),
+                                    max: parseInt(response.data?.tf_carrental?.max)
+                                };
+                                if(tf_search_page_params.get('from') && tf_search_page_params.get('to')){
+                                    window.tf_price_ranges.min = parseInt(tf_search_page_params.get('from'));
+                                    window.tf_price_ranges.max = parseInt(tf_search_page_params.get('to'));
                                 }
                 
                                 var tf_search_page_params = new window.URLSearchParams(window.location.search);
@@ -200,14 +260,19 @@
                                     grid: false,
                                     theme: "dark",
                                     onFinish: function () {
-                                        if($(".tf-filter-reset-btn").length>0){
-                                            $(".tf-filter-reset-btn").show();
+                                        if($(".filter-reset-btn").length>0){
+                                            $(".filter-reset-btn").show();
                                         }
                                         makeFilter();
                                     }
                                 };
                                 if ( parseInt( response.data?.tf_carrental?.min_seat ) != 0 && parseInt( response.data?.tf_carrental?.max_seat ) != 0) {
                                     $('.tf-car-result-seat-range').alRangeSlider(tf_car_search_seat_range);
+                                }
+                                window.tf_price_ranges = {
+                                    ...window.tf_price_ranges,
+                                    min_seat: parseInt(response.data?.tf_carrental?.min_seat),
+                                    max_seat: parseInt(response.data?.tf_carrental?.max_seat)
                                 }
                             } 
                         }
@@ -509,7 +574,46 @@
         // Archive Page Filter Reset
         $(document).on('click', '.filter-reset-btn', function (e) {
             e.preventDefault();
+
+            // Reset checkboxes
             $('[name*=tf_filters],[name*=tf_hotel_types],[name*=tf_features],[name*=tour_features],[name*=tf_attractions],[name*=tf_activities],[name*=tf_tour_types],[name*=tf_apartment_features],[name*=tf_apartment_types], [name*=car_category],[name*=car_fueltype],[name*=car_engine_year]').prop('checked', false);
+            
+            // Reset price sliders
+            if ($('.tf-hotel-filter-range').length > 0) {
+                $('.tf-hotel-filter-range').alRangeSlider('update', {
+                    values: { from: window.tf_price_ranges.min, to: window.tf_price_ranges.max },
+                });
+            }
+            if ($('.tf-hotel-result-price-range').length > 0) {
+                $('.tf-hotel-result-price-range').alRangeSlider('update', {
+                    values: { from: window.tf_price_ranges.min, to: window.tf_price_ranges.max },
+                });
+            }
+
+            if ($('.tf-tour-filter-range').length > 0) {
+                $('.tf-tour-filter-range').alRangeSlider('update', {
+                    values: { from: window.tf_price_ranges.min, to: window.tf_price_ranges.max },
+                });
+            }
+
+            if ($('.tf-apartment-filter-range').length > 0) {
+                $('.tf-apartment-filter-range').alRangeSlider('update', {
+                    values: { from: window.tf_price_ranges.min, to: window.tf_price_ranges.max },
+                });
+            }
+
+            if ($('.tf-car-result-price-range').length > 0) {
+                $('.tf-car-result-price-range').alRangeSlider('update', {
+                    values: { from: window.tf_price_ranges.min, to: window.tf_price_ranges.max },
+                });
+            }
+
+            if ($('.tf-car-result-seat-range').length > 0) {
+                $('.tf-car-result-seat-range').alRangeSlider('update', {
+                    values: { from: window.tf_price_ranges.min_seat, to: window.tf_price_ranges.max_seat },
+                });
+            }
+            
             makeFilter();
             $(".filter-reset-btn").hide();
 

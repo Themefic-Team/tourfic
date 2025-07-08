@@ -690,7 +690,7 @@
                     line-height: 1.5;
                 }
 
-                button {
+                button.filter-reset-btn {
                     margin: 0;
                     padding: 0;
                     border: none;
@@ -701,6 +701,7 @@
                     background-color: transparent;
                     letter-spacing: 0.15px;
                     cursor: pointer;
+                    display: none;
 
                     @media #{$max1024}{
                         font-size: 0.75rem;

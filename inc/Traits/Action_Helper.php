@@ -1265,6 +1265,11 @@ trait Action_Helper {
 			}
 			$post_per_page = self::tfopt( 'posts_per_page' ) ? self::tfopt( 'posts_per_page' ) : 10;
 
+			//elementor settigns
+			$post_per_page = !empty($elSettings['posts_per_page']) ? $elSettings['posts_per_page'] : $post_per_page;
+			$el_orderby = !empty($elSettings['orderby'] ) ? $elSettings['orderby'] : '';
+			$el_order = !empty($elSettings['order']) ? $elSettings['order'] : '';
+
 			$total_filtered_results = count( $tf_total_filters );
 			$current_page           = ! empty( $_POST['page'] ) ? absint( $_POST['page'] ) : 1;
 			$offset                 = ( $current_page - 1 ) * $post_per_page;
@@ -1272,11 +1277,6 @@ trait Action_Helper {
 			$sorting_data = $this->tf_get_sorting_data( $ordering_type, $displayed_results, $posttype );
 
 			$displayed_results = !empty( $sorting_data ) ? $sorting_data : $displayed_results;
-
-			//elementor settigns
-			$post_per_page = !empty($elSettings['posts_per_page']) ? $elSettings['posts_per_page'] : $post_per_page;
-			$el_orderby = !empty($elSettings['orderby'] ) ? $elSettings['orderby'] : '';
-			$el_order = !empty($elSettings['order']) ? $elSettings['order'] : '';
 
 			if ( ! empty( $displayed_results ) ) {
 				$filter_args = array(
