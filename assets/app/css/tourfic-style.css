@@ -5182,7 +5182,6 @@ div#tf-destinationautocomplete-list div:before {
 
 .tf-shortcode-design-2-tab .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_availability_checker_box {
   width: 222px;
-  background-color: var(--tf-primary);
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;

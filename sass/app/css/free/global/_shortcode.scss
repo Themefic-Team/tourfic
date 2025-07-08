@@ -822,7 +822,6 @@ div#tf-destinationautocomplete-list {
                 }
                 .tf_availability_checker_box{
                     width: 222px;
-                    background-color: $color-primary;
                     @include flexbox();
                     
                     @media #{$max1024}{
