@@ -1317,6 +1317,143 @@ class Listings extends Widget_Base {
 		$this->end_controls_tabs();
 		/*-----ends Button tabs--------*/
 
+		$this->add_control( 'tf_filter_btn_heading', [
+			'type'  => Controls_Manager::HEADING,
+			'label' => __( 'Filter Button', 'tourfic' ),
+			'conditions' => $this->tf_display_conditionally([
+                'tf_hotel' => ['design-3'],
+                'tf_tours' => ['design-3'],
+                'tf_apartment' => ['design-2'],
+            ]),
+		] );
+
+		$this->add_responsive_control( "filter_btn_padding", [
+			'label'      => __( 'Padding', 'tourfic' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .tf-archive-view li.tf-archive-filter-btn" => $this->tf_apply_dim( 'padding' ),
+			],
+			'conditions' => $this->tf_display_conditionally([
+                'tf_hotel' => ['design-3'],
+                'tf_tours' => ['design-3'],
+                'tf_apartment' => ['design-2'],
+            ]),
+		] );
+
+		$this->start_controls_tabs( "tabs_filter_btn_style" );
+		/*-----Button NORMAL state------ */
+		$this->start_controls_tab( "tab_filter_btn_normal", [
+			'label' => __( 'Normal', 'tourfic' ),
+			'conditions' => $this->tf_display_conditionally([
+                'tf_hotel' => ['design-3'],
+                'tf_tours' => ['design-3'],
+                'tf_apartment' => ['design-2'],
+            ]),
+		] );
+		$this->add_control( 'tf_filter_btn_color', [
+			'label'     => __( 'Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .tf-archive-view li.tf-archive-filter-btn" => 'color: {{VALUE}};',
+			],
+			'conditions' => $this->tf_display_conditionally([
+                'tf_hotel' => ['design-3'],
+                'tf_tours' => ['design-3'],
+                'tf_apartment' => ['design-2'],
+            ]),
+		] );
+		$this->add_control( 'filter_btn_bg_color', [
+			'label'     => __( 'Background Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .tf-archive-view li.tf-archive-filter-btn" => 'background-color: {{VALUE}};',
+			],
+			'conditions' => $this->tf_display_conditionally([
+                'tf_hotel' => ['design-3'],
+                'tf_tours' => ['design-3'],
+                'tf_apartment' => ['design-2'],
+            ]),
+		] );
+		$this->add_group_control( Group_Control_Border::get_type(), [
+			'name'     => "filter_btn_border",
+			'selector' => "{{WRAPPER}} .tf-archive-view li.tf-archive-filter-btn",
+			'conditions' => $this->tf_display_conditionally([
+                'tf_hotel' => ['design-3'],
+                'tf_tours' => ['design-3'],
+                'tf_apartment' => ['design-2'],
+            ]),
+		] );
+		$this->add_control( "filter_btn_border_radius", [
+			'label'      => __( 'Border Radius', 'tourfic' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .tf-archive-view li.tf-archive-filter-btn" => $this->tf_apply_dim( 'border-radius' ),
+			],
+			'conditions' => $this->tf_display_conditionally([
+                'tf_hotel' => ['design-3'],
+                'tf_tours' => ['design-3'],
+                'tf_apartment' => ['design-2'],
+            ]),
+		] );
+		$this->end_controls_tab();
+
+		/*-----Button HOVER state------ */
+		$this->start_controls_tab( "tab_filter_btn_hover", [
+			'label' => __( 'Hover', 'tourfic' ),
+			'conditions' => $this->tf_display_conditionally([
+                'tf_hotel' => ['design-3'],
+                'tf_tours' => ['design-3'],
+                'tf_apartment' => ['design-2'],
+            ]),
+		] );
+		$this->add_control( "filter_btn_color_hover", [
+			'label'     => __( 'Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .tf-archive-view li.tf-archive-filter-btn:hover" => 'color: {{VALUE}};',
+			],
+			'conditions' => $this->tf_display_conditionally([
+                'tf_hotel' => ['design-3'],
+                'tf_tours' => ['design-3'],
+                'tf_apartment' => ['design-2'],
+            ]),
+		] );
+		$this->add_control( 'filter_btn_bg_color_hover', [
+			'label'     => __( 'Background Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .tf-archive-view li.tf-archive-filter-btn:hover" => 'background-color: {{VALUE}};',
+			],
+			'conditions' => $this->tf_display_conditionally([
+                'tf_hotel' => ['design-3'],
+                'tf_tours' => ['design-3'],
+                'tf_apartment' => ['design-2'],
+            ]),
+		] );
+		$this->add_control( 'filter_btn_border_color_hover', [
+			'label'     => __( 'Border Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .tf-archive-view li.tf-archive-filter-btn:hover" => 'border-color: {{VALUE}};',
+			],
+			'conditions' => $this->tf_display_conditionally([
+                'tf_hotel' => ['design-3'],
+                'tf_tours' => ['design-3'],
+                'tf_apartment' => ['design-2'],
+            ]),
+		] );
+		$this->end_controls_tab();
+		$this->end_controls_tabs();
+		/*-----ends Button tabs--------*/
+
 		$this->end_controls_section();
 	}
 

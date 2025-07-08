@@ -235,7 +235,7 @@
                                 if ( parseInt( response.data?.tf_carrental?.min ) != 0 && parseInt( response.data?.tf_carrental?.max ) != 0) {
                                     $('.tf-car-result-price-range').alRangeSlider(tf_car_search_range);
                                 }
-                                
+
                                 // Store in global variable or object
                                 window.tf_price_ranges = {
                                     min: parseInt(response.data?.tf_carrental?.min),
@@ -807,7 +807,7 @@
             const inputElement = $(this).parent().find("#share_link_input");
             if (navigator.clipboard && navigator.clipboard.writeText) {
                 navigator.clipboard.writeText(inputElement.val()).then(() => {
-                    console.log("Copied to clipboard!");
+                    
                 });
             } else {
                 const tempInput = document.createElement("textarea");
@@ -2240,7 +2240,7 @@
 
             if (navigator.clipboard && navigator.clipboard.writeText) {
                 navigator.clipboard.writeText(inputElement.val()).then(() => {
-                    console.log("Copied to clipboard!");
+                    
                 });
             } else {
                 const tempInput = document.createElement("textarea");
@@ -2792,13 +2792,15 @@
         /*
         * Map toggle btn for mobile
         */
-        $(document).on('click', '.tf-archive-template__three .tf-mobile-map-btn', function (e) {
+        $(document).on('click', '.tf-archive-template__three .tf-mobile-map-btn, .tf-archive-listing__three .tf-mobile-map-btn', function (e) {
             e.preventDefault();
             $('.tf-archive-template__three .tf-details-right').css('display', 'block');
+            $('.tf-archive-listing__three .tf-details-right').css('display', 'block');
         });
-        $(document).on('click', '.tf-archive-template__three .tf-mobile-list-btn', function (e) {
+        $(document).on('click', '.tf-archive-template__three .tf-mobile-list-btn, .tf-archive-listing__three .tf-mobile-list-btn', function (e) {
             e.preventDefault();
             $('.tf-archive-template__three .tf-details-right').css('display', 'none');
+            $('.tf-archive-listing__three .tf-details-right').css('display', 'none');
         });
 
         /*
