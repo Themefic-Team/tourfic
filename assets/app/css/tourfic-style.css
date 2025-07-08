@@ -13496,7 +13496,7 @@ div#tf-destinationautocomplete-list div:before {
 .tf-single-template__two .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content .tf-available-room-content-left span.tf-others-benefits-title,
 .tf-archive-template__two .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content .tf-available-room-content-left span.tf-others-benefits-title,
 .page-template-tf-search__two .tf-available-rooms-wrapper .tf-available-room .tf-available-room-content .tf-available-room-content-left span.tf-others-benefits-title {
-  color: var(--tf-text-heading);
+  color: var(--tf-text-paragraph);
   font-size: 1rem;
   font-weight: 600;
   margin-bottom: 16px;
@@ -15815,7 +15815,6 @@ div#tf-destinationautocomplete-list div:before {
 .tf-single-template__two .tf-hero-section-wrap .tf-container .tf-hero-content .tf-hero-bottom-area .tf-head-title h1 {
   color: #ffffff;
   margin-bottom: 16px;
-  line-height: initial;
   font-size: 2.375rem;
 }
 
