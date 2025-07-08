@@ -73,6 +73,21 @@ class TF_Duplicator {
 			update_post_meta($tf_duplicate_post, 'tf_carrental_opt', $meta);
 		}
 		if( "tf_room"==$postType ){
+			$hotel_id    = ! empty( $meta['tf_hotel'] ) ? $meta['tf_hotel'] : '';
+			//insert in hotel tf_rooms field
+			if(!empty($hotel_id)){
+				$hotel_meta = get_post_meta( $hotel_id, 'tf_hotels_opt', true );
+				$hotel_meta = is_array($hotel_meta) ? $hotel_meta : [];
+				if(! empty( $hotel_meta['tf_rooms'] ) && is_array($hotel_meta['tf_rooms'])){
+					array_push($hotel_meta['tf_rooms'], $tf_duplicate_post);
+				} else {
+					$hotel_meta['tf_rooms'] = array($tf_duplicate_post);
+				}
+				
+				update_post_meta($hotel_id, 'tf_hotels_opt', $hotel_meta);
+			}
+			//update room unique_id
+			$meta['unique_id'] = uniqid();
 			update_post_meta($tf_duplicate_post, 'tf_room_opt', $meta);
 		}
 

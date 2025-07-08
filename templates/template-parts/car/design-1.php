@@ -985,8 +985,6 @@ $tf_cars_slug = get_option('car_slug');
                             drop_day: endDay
                         },
                         success: function(response) {
-                            console.log('Pickup Time:', response.pickup_time);
-                            console.log('Drop Time:', response.drop_time);
                         }
                     });
                 }

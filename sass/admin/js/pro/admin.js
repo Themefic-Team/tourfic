@@ -68,11 +68,8 @@
             };
             
             jQuery.post( tf_pro_params.ajax_url, data, function(response) {
-                //console.log(response);
-                //console.log(response.data.activateUrl);
             })
             .success(function(response) {
-                //console.log(response);
                 location.reload();
             });
         });
@@ -92,8 +89,6 @@
             };
 
             jQuery.post( tf_pro_params.ajax_url, data, function(response) {
-                //console.log(response);
-                //console.log(response.data.activateUrl);
             })
             .success(function(response) {
                 location.reload();
