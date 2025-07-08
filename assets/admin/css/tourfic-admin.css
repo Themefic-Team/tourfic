@@ -3959,6 +3959,7 @@ Steps
   border: 1px solid #F2F5F7;
   background: #FFFFFF;
   padding: 16px;
+  margin: 12px 0px;
 }
 .tf-field-repeater .tf-repeater .tf-single-repeater-clone {
   display: none;
@@ -4515,6 +4516,7 @@ Steps
   display: flex;
   align-items: center;
   box-sizing: border-box;
+  width: calc(50% - 12px);
 }
 .tf-field-number .tf-number-range .tf-number-field-box input {
   height: 24px;
@@ -5130,6 +5132,59 @@ a.tf-import-btn, a.tf-export-btn {
 }
 .tf-field-switch_group .tf-switch-label input:checked + .tf-switch-slider .tf-switch-off {
   opacity: 0;
+}
+
+.tf-field-tab_switch .tf-tab-switch-box .tf-tab-field-header {
+  border-radius: 4px 4px 0px 0px;
+  border-bottom: 1px solid #D9E0E8;
+  background: #F5F9FF;
+  padding: 8px 12px;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+.tf-field-tab_switch .tf-tab-switch-box .tf-tab-field-header .field-label {
+  color: #27333F;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 24px;
+}
+.tf-field-tab_switch .tf-tab-switch-box .tf-tab-field-header .tf-field-collapas {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.tf-field-tab_switch .tf-tab-switch-box .tf-tab-field-header .tf-field-collapas i {
+  display: flex;
+  width: 24px;
+  height: 24px;
+  justify-content: center;
+  border-radius: 6px;
+  border: 1px solid #D9E0E8;
+  background: #FFFFFF;
+  line-height: 26px;
+  cursor: pointer;
+}
+.tf-field-tab_switch .tf-tab-switch-box .tf-tab-field-header .tf-field-collapas i.rotated {
+  transform: rotate(180deg);
+}
+.tf-field-tab_switch .tf-tab-switch-box .tf-tab-field-header .tf-field-collapas .tf-field {
+  padding: 0;
+  width: 32px !important;
+}
+.tf-field-tab_switch .tf-tab-switch-box .tf-tab-field-header .tf-field-collapas .tf-field .tf-inline-switch {
+  justify-content: end;
+  width: 32px;
+}
+.tf-field-tab_switch .tf-tab-switch-box .tf-tab-field-header .tf-field-collapas .tf-field .tf-inline-switch .tf-field-label {
+  display: none !important;
+}
+.tf-field-tab_switch .tf-tab-switch-box .tf-tab-field-content {
+  border-radius: 0px 0px 4px 4px;
+  border: 1px solid #F2F5F7;
+  background: #FFFCF5;
+  padding: 4px 16px;
+  display: none;
 }
 
 .tf-backend-tour-booking h1,

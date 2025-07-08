@@ -218,7 +218,7 @@ class TF_Options {
         <div class="tf-field tf-field-<?php echo esc_attr( $field['type'] ); ?> <?php echo esc_attr( $class ); ?> <?php echo ! empty( $visible ) ? wp_kses_post( $visible ) : ''; ?>" <?php echo ! empty( $depend ) ? wp_kses_post( $depend ) : ''; ?>
              style="<?php echo esc_attr( $field_style ); ?>">
 
-			<?php if ( ! empty( $field['label'] ) && $field['type']!='switch' ){ ?>
+			<?php if ( ! empty( $field['label'] ) && $field['type']!='switch' && $field['type']!='tab_switch' ){ ?>
                 <label for="<?php echo esc_attr( $id ) ?>" class="tf-field-label">
 					<?php echo esc_html( $field['label'] ) ?>
 					<?php if ( ! empty( $field['subtitle'] ) ) : ?>

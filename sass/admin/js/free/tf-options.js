@@ -2299,6 +2299,12 @@
             placeholder: "tf-switch-drag-highlight"
         });
 
+        // Repeater show hide
+        $(document).on('click', '.tf-field-tab_switch .tf-field-collapas i', function () {
+            $(this).toggleClass('rotated');
+            $(this).closest('.tf-tab-switch-box').find('.tf-tab-field-content').slideToggle(200);
+        });
+
         // TAB jquery
         $(document).on('click', '.tf-tab-item', function () {
             var $this = $(this);
