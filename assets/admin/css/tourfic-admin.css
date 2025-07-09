@@ -4871,6 +4871,119 @@ a.tf-import-btn, a.tf-export-btn {
   color: #ffffff;
 }
 
+.tf-tour-cal-wrap .tf-tour-cal {
+  border-radius: 8px;
+  border: 1px solid #F2F5F7;
+  background: #FFFFFF;
+  padding: 24px;
+}
+.tf-tour-cal-wrap .tf-tour-cal .fc-header-toolbar {
+  margin-bottom: 16px;
+}
+.tf-tour-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-toolbar-title {
+  padding: 0 !important;
+  color: #27333F;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 24px;
+}
+.tf-tour-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group {
+  border-radius: 8px;
+  border: 0.5px solid #F2F5F7;
+  background: #FFFFFF;
+  padding: 6px 8px;
+  gap: 20px;
+}
+.tf-tour-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group .fc-button {
+  background-color: transparent;
+  border: 0px;
+  padding: 0;
+}
+.tf-tour-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group .fc-button .fc-icon-chevron-left::before,
+.tf-tour-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group .fc-button .fc-icon-chevron-right::before {
+  color: #566676;
+}
+.tf-tour-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group .fc-button:focus {
+  outline: none;
+  box-shadow: none;
+}
+.tf-tour-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group .fc-button.fc-next-button {
+  position: relative;
+}
+.tf-tour-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group .fc-button.fc-next-button::after {
+  position: absolute;
+  content: "";
+  width: 8px;
+  height: 8px;
+  background-color: #566676;
+  border-radius: 50%;
+  left: -14px;
+  top: 8.5px;
+}
+.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table {
+  border: 0px;
+}
+.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header th {
+  border: 0px;
+}
+.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header {
+  border-top: 0.5px solid #F2F5F7;
+  margin-bottom: 16px !important;
+}
+.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header tr th {
+  border: 0px;
+  padding-top: 12px;
+}
+.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header tr th a {
+  color: #27333F;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 20px;
+  padding: 0;
+}
+.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body > td {
+  border: 0px solid;
+}
+.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr:last-child {
+  margin-bottom: 0px;
+}
+.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td {
+  width: calc((100% - 48px) / 7);
+  border-radius: 8px;
+  border: 0.5px solid #F2F5F7;
+  background: #FFFFFF;
+}
+.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-daygrid-day-top {
+  flex-direction: row;
+}
+.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-daygrid-day-top a {
+  padding: 8px;
+  color: #27333F;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 24px;
+}
+.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-h-event {
+  border-radius: 4px;
+  border: 0px;
+  border-left: 1px solid #002AB3;
+  background: #EBEFFF;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-left: 8px;
+}
+.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-h-event .fc-event-title {
+  color: #002AB3;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 16px;
+}
+
 @-webkit-keyframes tf-rotate {
   100% {
     -webkit-transform: rotate(360deg);

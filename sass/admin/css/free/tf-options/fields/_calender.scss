@@ -173,6 +173,137 @@
         }
     }
 }
+
+// Tour Calender
+.tf-tour-cal-wrap{
+    .tf-tour-cal{
+        border-radius: 8px;
+        border: 1px solid $tf_border_faint;
+        background: $tf_fill_white;
+        padding: 24px;
+        .fc-header-toolbar{
+            margin-bottom: 16px;
+            .fc-toolbar-title{
+                padding: 0 !important;
+                color: $tf_text_title;
+                font-size: 15px;
+                font-weight: 600;
+                line-height: 24px;
+            }
+            .fc-button-group{
+                border-radius: 8px;
+                border: 0.5px solid $tf_border_faint;
+                background: $tf_fill_white;
+                padding: 6px 8px;
+                gap: 20px;
+                .fc-button{
+                    background-color: transparent;
+                    border: 0px;
+                    padding: 0;
+                    .fc-icon-chevron-left::before,
+                    .fc-icon-chevron-right::before {
+                        color: $tf_text_paragraph;
+                    }
+                    &:focus{
+                        outline: none;
+                        box-shadow: none;
+                    }
+                    &.fc-next-button{
+                        position: relative;
+                        &::after{
+                            position: absolute;
+                            content: "";
+                            width: 8px;
+                            height: 8px;
+                            background-color: $tf_text_paragraph;
+                            border-radius: 50%;
+                            left: -14px;
+                            top: 8.5px;
+                        }
+                    }
+                }
+            }
+        }
+        .fc-view-harness{
+            table{
+                border: 0px;
+                .fc-scrollgrid-section-header{
+                    th{
+                        border: 0px;
+                    }
+
+                    .fc-col-header {
+                        border-top: 0.5px solid $tf_border_faint;
+                        margin-bottom: 16px !important;
+                        tr{
+                            th{
+                                border: 0px;
+                                padding-top: 12px;
+                                a{
+                                    color: $tf_text_title;
+                                    font-size: 13px;
+                                    font-weight: 400;
+                                    line-height: 20px;
+                                    padding: 0;
+                                }
+                            }
+                        }
+                    }
+                }
+                .fc-scrollgrid-section-body{
+                    > td{
+                        border: 0px solid;
+                    }
+                    .fc-daygrid-body{
+                        .fc-scrollgrid-sync-table{
+                            tbody{
+                                tr{
+                                    display: flex;
+                                    gap: 8px;
+                                    margin-bottom: 8px;
+                                    &:last-child{
+                                        margin-bottom: 0px;
+                                    }
+                                    td{
+                                        width: calc((100% - 48px) / 7); 
+                                        border-radius: 8px;
+                                        border: 0.5px solid $tf_border_faint;
+                                        background: $tf_fill_white;
+                                        .fc-daygrid-day-top{
+                                            flex-direction: row;
+                                            a{
+                                                padding: 8px;
+                                                color: $tf_text_title;
+                                                font-size: 15px;
+                                                font-weight: 600;
+                                                line-height: 24px; 
+                                            }
+                                        }
+                                        .fc-h-event{
+                                            border-radius: 4px;
+                                            border: 0px;
+                                            border-left: 1px solid $tf_info_text;
+                                            background: $tf_info_background;
+                                            padding-top: 6px;
+                                            padding-bottom: 6px;
+                                            padding-left: 8px;
+                                            .fc-event-title{
+                                                color: $tf_info_text;
+                                                font-size: 11px;
+                                                font-weight: 600;
+                                                line-height: 16px;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 @-webkit-keyframes tf-rotate {
     100% {
         -webkit-transform: rotate(360deg);
