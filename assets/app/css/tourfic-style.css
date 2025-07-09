@@ -5206,6 +5206,7 @@ div#tf-destinationautocomplete-list div:before {
   cursor: pointer;
   transition: .3s all ease;
   align-items: center;
+  border-radius: 0;
 }
 
 .tf-shortcode-design-2-tab .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_availability_checker_box button:hover {

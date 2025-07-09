@@ -838,6 +838,7 @@ div#tf-destinationautocomplete-list {
                         cursor: pointer;
                         transition: .3s all ease;
                         align-items: center;
+                        border-radius: 0;
                         &:hover{
                             background-color: $color-brand-dark;
                         }

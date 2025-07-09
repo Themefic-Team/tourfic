@@ -2260,7 +2260,6 @@ class Hotel {
                         });
 
                         function dateSetToFields(selectedDates, instance) {
-                            console.log(selectedDates);
                             if (selectedDates.length === 2) {
                                 const monthNames = [
                                     "Jan", "Feb", "Mar", "Apr", "May", "Jun",

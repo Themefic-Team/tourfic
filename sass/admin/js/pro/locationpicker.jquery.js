@@ -210,8 +210,6 @@
                             gmapContext.settings.onlocationnotfound(place.name);
                             return;
                         }
-                        // console.log(place.formatted_address);
-                        // console.log(place);
                         gmapContext.locationName = place.name + ", " + place.formatted_address;
 
                         GmUtility.setPosition(gmapContext, place.geometry.location, function (context) {
