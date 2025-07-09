@@ -15,6 +15,7 @@
                 }
                 @media #{$max768}{
                     max-width: 450px;
+                    display: none;
                 }
                 .tf_btn {
                     border-radius: 2px;
@@ -38,6 +39,23 @@
                     }
                     @media #{$max575}{
                         flex-direction: column;;
+                    }
+                    @media #{$max768}{
+                        display: none;
+                    }
+                    &.show{
+                        display: flex;
+                    }
+                    .tf-tours-booking-btn{
+                        @media #{$max575}{
+                            width: 80%;
+                        }
+                    }
+                }
+                .tf-booking-mobile-btn{
+                    display: none;
+                    @media #{$max768}{
+                        display: block;
                     }
                 }
                 .tf_selectperson-wrap {
@@ -116,7 +134,8 @@
                     }
                 }
 
-                &.tf-tours-fixed{
+                &.tf-tours-fixed,
+                &.tf-tours-fixed-default{
                     width: 100%;
                     z-index: 9999;
                     background-color: $color-brand-dark;
@@ -129,6 +148,7 @@
                     @media #{$max768}{
                         padding: 8px 10px;
                         border-radius: 0;
+                        display: block !important;
                     }
                     .tf_acrselection-wrap {
                         position: absolute;

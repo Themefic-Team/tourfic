@@ -42,7 +42,7 @@ class Apartment_Features_Filter extends \WP_Widget {
 		//check if is Apartment
 		$posttype = isset( $_GET['type'] ) ? $_GET['type'] : get_post_type();
 
-		if ( $posttype == 'tf_apartment' ) {
+		if ( is_admin() || $posttype == 'tf_apartment' ) {
 			extract( $args );
 			$title = apply_filters( 'widget_title', $instance['title'] );
 

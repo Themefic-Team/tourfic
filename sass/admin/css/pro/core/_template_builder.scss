@@ -59,7 +59,8 @@ Modal
 
         &-small{
             .tf-modal-content {
-                width: 50%;
+                width: 712px;
+                padding: 24px;
             }
         }
         &-extra-small{
@@ -118,7 +119,22 @@ Modal
             margin-bottom: 20px;
             h2{
                 margin: 0;
+                color: #27333F;
                 font-size: 24px;
+                font-weight: 600;
+                line-height: 32px;
+                letter-spacing: -0.75px;
+                @include flexbox();
+                @include align-items(center);
+                gap: 16px;
+
+                .tf-field{
+                    margin-bottom: 0;
+
+                    .tf-fieldset{
+                        margin-top: 0;
+                    }
+                }
             }
             .tf-modal-close {
                 top: 20px;
@@ -139,7 +155,7 @@ Modal
         }
 
         .tf-field {
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             position: relative;
 
             .tf-field-label {
@@ -149,16 +165,22 @@ Modal
                 font-size: 1rem;
                 color: $admin-color-heading;
                 line-height: 20px;
+                color: #27333F;
+                font-size: 13px;
             }
 
             .tf-fieldset {
-            font-style: normal;
-            font-size: 0.875rem;
-            margin-top: 10px;
-            a {
                 font-style: normal;
-                font-weight: 600;
+                font-size: 0.875rem;
+                margin-top: 10px;
+                a {
+                    font-style: normal;
+                    font-weight: 600;
+                }
             }
+
+            &.tf-template-preview{
+                margin-bottom: 32px;
             }
         }
 
@@ -166,12 +188,12 @@ Modal
             input {
                 width: 100%;
                 padding: 8px 12px;
-                border: 1px solid $slate20;
-                background-color: $blue0;
                 border-radius: 4px;
                 height: 40px;
                 color: $slate80;
                 font-size: 0.875rem;
+                border: 1px solid  #EEF2F6;
+                background: #F8FAFC;
         
                 &:focus {
                     background: #ffffff;
@@ -222,8 +244,8 @@ Modal
                 width: 100%;
                 max-width: 100%;
                 padding: 8px 12px;
-                border: 1px solid $slate20;
-                background-color: $blue0;
+                border: 1px solid  #EEF2F6;
+                background: #F8FAFC;
                 border-radius: 4px;
                 height: 40px;
                 color: $slate80;
@@ -244,7 +266,7 @@ Modal
             border-radius: 32px;
         
             input {
-                    display: none;
+                display: none;
             }
         
             .tf-switch-slider {
@@ -317,7 +339,11 @@ Modal
             display: flex;
             align-items: initial;
             flex-wrap: wrap;
-            gap: 20px;
+            gap: 16px;
+            border-radius: 12px;
+            border: 1px solid #EEF2F6;
+            background: linear-gradient(180deg, #FFFCFA 0%, #FFFAFC 100%), #FFF;
+            padding: 16px;
         
             li {
                 flex: 0 0 calc(100%/3 - 14px);
@@ -350,20 +376,12 @@ Modal
                             line-height: 1;
                         }
                     }
-
-                    .tf-template-blank{
-                        height: 250px;
-                        width: 100%;
-                        cursor: pointer;
-                        border: 1px solid #EDF0F2;
-                        border-radius: 5px;
-                    }
         
                     img {
                         object-fit: cover;
                         object-position: top;
                         width: 100%;
-                        height: 250px;
+                        height: 225px;
                         transition: object-position 2s ease-in-out, border-color 0.3s ease-in-out;
             
                         &:hover {
@@ -377,7 +395,7 @@ Modal
                     &> img {
                         cursor: pointer;
                         border: 1px solid #EDF0F2;
-                        border-radius: 5px;
+                        border-radius: 8px;
                     }
                     &> input:checked + img {
                         box-shadow: 0 0 0 2px #21A159;
@@ -396,13 +414,14 @@ Modal
                 }
                 span.tf-template-title{
                     display: block;
-                    text-align: center;
-                    font-weight: 500;
+                    color: #27333F;
+                    font-size: 15px;
+                    line-height: 24px;
                 }
                 .tf-image-checkbox-footer{
                     @include flexbox();
                     @include align-items(center);
-                    @include justify-content(center);
+                    @include justify-content(flex-start);
                     margin-top: 8px;
                     gap: 8px;
                     color: $neutral70;
@@ -424,6 +443,7 @@ Modal
 
         .tf-form-actions{
             display: flex;
+            justify-content: flex-end;
             gap: 16px;
 
             .tf-admin-btn{
@@ -436,11 +456,12 @@ Modal
         .tf-admin-btn {
             display: inline-flex;
             @include align-items(center);
-            background-color: #ffffff;
-            color: #003c79;
-            padding: 10px 25px;
-            border: 1px solid #003c79;
-            border-radius: 4px;
+            border-radius: 8px;
+            background: #EBF5FF;
+            color: #003C79;
+            padding: 12px 32px;
+            border: none;
+            border-radius: 8px;
             font-weight: 500;
             text-decoration: none;
             cursor: pointer;
@@ -448,26 +469,41 @@ Modal
             @include transition(all, 0.3s);
         
             i {
-            margin-right: 8px;
-            font-size: 1.125rem;
+                margin-right: 8px;
+                font-size: 1.125rem;
+            }
+            svg {
+                width: 24px;
+                height: 24px;
+                margin-right: 8px;
             }
         
             &:hover {
-            background-color: #003c79;
-            color: #ffffff;
+                background: linear-gradient(0deg, #0051A3 0%, #003C79 100%);
+                box-shadow: 0px 16px 8px 0px rgba(8, 20, 33, 0.04), 0px 8px 16px 0px rgba(8, 20, 33, 0.08), 0px 24px 20px 0px rgba(8, 20, 33, 0.08);
+                color: #ffffff;
+
+                
             }
         
             &.tf-btn-secondary {
-            background-color: #003c79;
-            border-color: #003c79;
-            color: #ffffff;
-            font-weight: 600;
-        
-            &:hover {
-                background-color: #001f3e;
-                border-color: #001f3e;
+                background: linear-gradient(180deg, #0051A3 0%, #003C79 100%);
                 color: #ffffff;
+                font-weight: 600;
+            
+                &:hover {
+                    background: linear-gradient(0deg, #0051A3 0%, #003C79 100%);
+                    box-shadow: 0px 16px 8px 0px rgba(8, 20, 33, 0.04), 0px 8px 16px 0px rgba(8, 20, 33, 0.08), 0px 24px 20px 0px rgba(8, 20, 33, 0.08);
+                    color: #ffffff;
+                }
             }
+
+            &#tf-edit-with-elementor{
+                &:hover{
+                    svg path{
+                        fill: #fff;
+                    }
+                }
             }
         
             //disabled

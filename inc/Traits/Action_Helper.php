@@ -1265,6 +1265,11 @@ trait Action_Helper {
 			}
 			$post_per_page = self::tfopt( 'posts_per_page' ) ? self::tfopt( 'posts_per_page' ) : 10;
 
+			//elementor settigns
+			$post_per_page = !empty($elSettings['posts_per_page']) ? $elSettings['posts_per_page'] : $post_per_page;
+			$el_orderby = !empty($elSettings['orderby'] ) ? $elSettings['orderby'] : '';
+			$el_order = !empty($elSettings['order']) ? $elSettings['order'] : '';
+
 			$total_filtered_results = count( $tf_total_filters );
 			$current_page           = ! empty( $_POST['page'] ) ? absint( $_POST['page'] ) : 1;
 			$offset                 = ( $current_page - 1 ) * $post_per_page;
@@ -1272,11 +1277,6 @@ trait Action_Helper {
 			$sorting_data = $this->tf_get_sorting_data( $ordering_type, $displayed_results, $posttype );
 
 			$displayed_results = !empty( $sorting_data ) ? $sorting_data : $displayed_results;
-
-			//elementor settigns
-			$post_per_page = !empty($elSettings['posts_per_page']) ? $elSettings['posts_per_page'] : $post_per_page;
-			$el_orderby = !empty($elSettings['orderby'] ) ? $elSettings['orderby'] : '';
-			$el_order = !empty($elSettings['order']) ? $elSettings['order'] : '';
 
 			if ( ! empty( $displayed_results ) ) {
 				$filter_args = array(
@@ -1968,6 +1968,40 @@ trait Action_Helper {
 		wp_reset_postdata();
 
 		die();
+	}
+
+	/**
+	 * Search form date time slot availability
+	 *
+	 * Author: Mofazzal Hossain
+	 *
+	 * Ajax function
+	 */
+	function tf_car_time_slots_callback() {
+		$pickup_day = isset($_POST['pickup_day']) ? sanitize_text_field($_POST['pickup_day']) : '';
+		$drop_day   = isset($_POST['drop_day']) ? sanitize_text_field($_POST['drop_day']) : '';
+
+		$car_time_slots = !empty(Helper::tfopt('car_time_slots')) ? Helper::tfopt('car_time_slots') : '';
+		$unserialize_car_time_slots = !empty($car_time_slots) ? unserialize($car_time_slots) : array();
+
+		$pickup_time = $drop_time = '';
+
+		if (!empty($unserialize_car_time_slots)) {
+			foreach ($unserialize_car_time_slots as $slot) {
+				if (isset($slot['day'])) {
+					if (strtolower($slot['day']) == strtolower($pickup_day)) {
+						$pickup_time = $slot['pickup_time'];
+					}
+					if (strtolower($slot['day']) == strtolower($drop_day)) {
+						$drop_time = $slot['drop_time'];
+					}
+				}
+			}
+		}
+		wp_send_json(array(
+			'pickup_time' => $pickup_time,
+			'drop_time'   => $drop_time,
+		));
 	}
 
 	private function tf_get_sorting_data($ordering_type, $results, $post_type) {

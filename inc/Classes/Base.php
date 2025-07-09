@@ -70,7 +70,7 @@ class Base {
 
 			// Admin Notices
 			\Tourfic\Admin\Notice_Update::instance();
-			Room_Notice::instance();
+			// Room_Notice::instance();
 			Plugin_Page_Notice::instance();
 		}
 		// Promo Notice
@@ -105,7 +105,7 @@ class Base {
 		// \Tourfic\Classes\Without_Payment_Booking\Hotel_WP_Booking::instance();
 
 		//Template Builder
-		if(function_exists( 'is_tf_pro' ) && is_tf_pro() && did_action('elementor/loaded')){
+		if(function_exists( 'is_tf_pro' ) && is_tf_pro()){
 			\Tourfic\App\Templates\Template_Builder::instance();
 		}
 	}

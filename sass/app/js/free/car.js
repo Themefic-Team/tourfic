@@ -1,11 +1,6 @@
 (function ($, win) {
-    
-
     $(document).ready(function () {
        
-
-        
-
         // Create an instance of Notyf
         const notyf = new Notyf({
             ripple: true,
@@ -209,11 +204,13 @@
         if (car_dropoff_input) {
             tourfic_car_autocomplete(car_dropoff_input, car_locations);
         }
-
+        
         $(".tf-booking-popup-header .tf-close-popup").on("click", function (e) {
             e.preventDefault();
             $('.tf-car-booking-popup').hide();
         });
+
+       
 
 
         /*
@@ -231,6 +228,10 @@
             let dropoff_date = $('.tf_dropoff_date').val();
             let pickup_time = $('.tf_pickup_time').val();
             let dropoff_time = $('.tf_dropoff_time').val();
+
+            pickup_time = convertTo24HourFormat(pickup_time);
+            dropoff_time = convertTo24HourFormat(dropoff_time);
+
             let post_id = $('#post_id').val();
 
             if( !pickup || !dropoff || !pickup_date || !dropoff_date || !pickup_time || !dropoff_time ){
@@ -468,6 +469,9 @@
                 let pickup_time = $('.tf_pickup_time').val();
                 let dropoff_time = $('.tf_dropoff_time').val();
 
+                pickup_time = convertTo24HourFormat(pickup_time);
+                dropoff_time = convertTo24HourFormat(dropoff_time);
+
                 if( !pickup || !dropoff || !pickup_date || !dropoff_date || !pickup_time || !dropoff_time ){
                     $('.error-notice').show();
                     $('.error-notice').text('Fill up the all fields');
@@ -483,6 +487,10 @@
             let dropoff_date = $('.tf_dropoff_date').val();
             let pickup_time = $('.tf_pickup_time').val();
             let dropoff_time = $('.tf_dropoff_time').val();
+
+            pickup_time = convertTo24HourFormat(pickup_time);
+            dropoff_time = convertTo24HourFormat(dropoff_time);
+
             let post_id = $('#post_id').val();
             var protection = $('input[name="protections[]"]:checked').map(function() {
                 return $(this).val();  // Get the value of each checked checkbox
@@ -608,7 +616,6 @@
             let form = $(this),
                 submitBtn = form.find('.tf-submit'),
                 formData = new FormData(form[0]);
-            
             formData.append('action', 'tf_car_search');
             formData.append('_nonce', tf_params.nonce);
 
@@ -835,9 +842,15 @@
         * Car Single Price Calculation
         * @author Jahid
         */
+        $('body').on('change', '.tf-car-booking-form .tf_pickup_date, .tf-car-booking-form .tf_dropoff_date', function (e) {
+            handleBookingInputChange();
+        });
 
-        $(document).on('change', '.tf-car-booking-form .tf_pickup_date, .tf-car-booking-form .tf_pickup_time, .tf-car-booking-form .tf_dropoff_date, .tf-car-booking-form .tf_dropoff_time', function (e) {
-            
+        $('body').on('click', '.tf-car-booking-form .tf-pickup-time li, .tf-car-booking-form .tf-dropoff-time li', function (e) {
+            handleBookingInputChange();
+        });
+
+        function handleBookingInputChange() {
             let extra_ids = $("input[name='selected_extra[]']").map(function() {
                 return $(this).val();
             }).get();
@@ -850,6 +863,10 @@
             let dropoff_date = $('.tf_dropoff_date').val();
             let pickup_time = $('.tf_pickup_time').val();
             let dropoff_time = $('.tf_dropoff_time').val();
+
+            pickup_time = convertTo24HourFormat(pickup_time);
+            dropoff_time = convertTo24HourFormat(dropoff_time);
+
             let post_id = $('#post_id').val();
 
             if( !pickup_date || !dropoff_date || !pickup_time || !dropoff_time ){
@@ -889,7 +906,7 @@
                     }
                 }
             });
-        });
+        };
 
 
         /*
@@ -1001,11 +1018,24 @@
     
     });
 
-    
-     
-     
-   
-
 })(jQuery, window);
 
 
+function convertTo24HourFormat(timeStr) {
+    const date = new Date("1970-01-01T" + timeStr);
+    if (!isNaN(date.getTime())) {
+        return date.toTimeString().split(' ')[0].substring(0, 5); 
+    }
+
+    const parts = timeStr.match(/(\d{1,2}):(\d{2})\s?(AM|PM)/i);
+    if (!parts) return timeStr; 
+
+    let hour = parseInt(parts[1], 10);
+    const minute = parts[2];
+    const period = parts[3].toUpperCase();
+
+    if (period === "PM" && hour !== 12) hour += 12;
+    if (period === "AM" && hour === 12) hour = 0;
+
+    return `${hour.toString().padStart(2, '0')}:${minute}`;
+}

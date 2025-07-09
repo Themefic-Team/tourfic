@@ -969,7 +969,6 @@ class Apartment {
                         });
 
                         function dateSetToFields(selectedDates, instance) {
-                            console.log(selectedDates);
                             if (selectedDates.length === 2) {
                                 const monthNames = [
                                     "Jan", "Feb", "Mar", "Apr", "May", "Jun",
@@ -1746,24 +1745,20 @@ class Apartment {
                                     for (var date in apt_availability) {
                                         let d = new Date(date);
 
-                                        if (d.getTime() >= checkInDate.getTime() && d.getTime() <= checkOutDate.getTime()) {
+                                        if (d.getTime() >= checkInDate.getTime() && d.getTime() < checkOutDate.getTime()) {
+											var availabilityData = apt_availability[date];
+											var pricing_type = availabilityData.pricing_type;
+											var price = availabilityData.price ? parseFloat(availabilityData.price) : 0;
+											var adultPrice = availabilityData.adult_price ? parseFloat(availabilityData.adult_price) : 0;
+											var childPrice = availabilityData.child_price ? parseFloat(availabilityData.child_price) : 0;
+											var infantPrice = availabilityData.infant_price ? parseFloat(availabilityData.infant_price) : 0;
 
-                                            if (d.getTime() !== checkInDate.getTime()) {
-                                                var availabilityData = apt_availability[date];
-                                                var pricing_type = availabilityData.pricing_type;
-                                                var price = availabilityData.price ? parseFloat(availabilityData.price) : 0;
-                                                var adultPrice = availabilityData.adult_price ? parseFloat(availabilityData.adult_price) : 0;
-                                                var childPrice = availabilityData.child_price ? parseFloat(availabilityData.child_price) : 0;
-                                                var infantPrice = availabilityData.infant_price ? parseFloat(availabilityData.infant_price) : 0;
-
-                                                if (pricing_type === 'per_night' && price > 0) {
-                                                    total_price += price;
-                                                } else if (pricing_type === 'per_person') {
-                                                    var totalPersonPrice = (adultPrice * $('#adults').val()) + (childPrice * $('#children').val()) + (infantPrice * $('#infant').val());
-                                                    total_price += totalPersonPrice;
-                                                    // console.log('total_price', total_price);
-                                                }
-                                            }
+											if (pricing_type === 'per_night' && price > 0) {
+												total_price += price;
+											} else if (pricing_type === 'per_person') {
+												var totalPersonPrice = (adultPrice * $('#adults').val()) + (childPrice * $('#children').val()) + (infantPrice * $('#infant').val());
+												total_price += totalPersonPrice;
+											}
                                         }
                                     }
 
@@ -2083,11 +2078,7 @@ class Apartment {
 		}
 
 		//Featured badge
-		if(!empty($settings)){
-			$featured_badge_text = isset($settings['featured_badge_text']) ? sanitize_text_field($settings['featured_badge_text']) : esc_html( "HOT DEAL" );
-		} else {
-			$featured_badge_text = !empty( $meta['featured_text'] ) ? esc_html( $meta['featured_text'] ) : esc_html( "HOT DEAL" );
-		}
+		$featured_badge_text = !empty( $meta['featured_text'] ) ? esc_html( $meta['featured_text'] ) : esc_html( "HOT DEAL" );
 
 		if ( $tf_apartment_arc_selected_template == "design-1" ) {
 		$first_gallery_image = explode(',', $gallery);
@@ -2224,7 +2215,7 @@ class Apartment {
 							<div class="tf-available-room-off">
 								<span>
 									<?php echo $apartment_discount_type=="percent" ? wp_kses_post( $apartment_discount_amount ).'%' : wp_kses_post(wc_price($apartment_discount_amount)); ?> 
-									<?php esc_html_e( "Off ", "tourfic" ); ?>
+									<?php esc_html_e( " Off ", "tourfic" ); ?>
 								</span>
 							</div>
 						<?php } ?>

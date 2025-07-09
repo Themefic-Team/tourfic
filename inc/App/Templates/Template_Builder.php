@@ -11,37 +11,65 @@ class Template_Builder {
 	use \Tourfic\Traits\Singleton;
 
 	public function __construct() {
-		add_action('admin_menu', array($this, 'admin_menu'));
-		add_action('init', array($this, 'tf_template_builder_post_type'));
-		add_filter('post_row_actions', array($this, 'tf_template_post_row_actions'), 20, 2);
-		add_filter('manage_tf_template_builder_posts_columns', array($this, 'tf_template_set_columns'));
-		add_action('manage_tf_template_builder_posts_custom_column', array($this, 'tf_template_render_column'), 10, 2);
-        add_action('admin_footer', array($this, 'tf_template_builder_add_popup_html'), 9);
-        add_action('wp_ajax_tf_load_template_markup', array($this, 'tf_load_template_markup_callback'));
-        add_action('wp_ajax_tf_get_template_options', array($this, 'tf_get_template_options_callback'));
-        add_action('wp_ajax_tf_update_term_options', array($this, 'tf_update_term_options_callback'));
-        add_action('wp_ajax_tf_save_template_builder', array($this, 'tf_save_template_builder_callback'));
-        add_filter('template_include', array($this, 'tf_template_builder_custom_template'));
-        add_action('save_post_tf_template_builder', [$this, 'enforce_elementor_template_on_save'], 20, 3);
+		// add_action('admin_menu', array($this, 'admin_menu'));
+        if ( did_action( 'elementor/loaded' ) ) {
+            add_action('init', array($this, 'tf_template_builder_post_type'));
+            add_filter('post_row_actions', array($this, 'tf_template_post_row_actions'), 20, 2);
+            add_filter('manage_tf_template_builder_posts_columns', array($this, 'tf_template_set_columns'));
+            add_action('manage_tf_template_builder_posts_custom_column', array($this, 'tf_template_render_column'), 10, 2);
+            add_action('admin_footer', array($this, 'tf_template_builder_add_popup_html'), 9);
+            add_action('wp_ajax_tf_load_template_markup', array($this, 'tf_load_template_markup_callback'));
+            add_action('wp_ajax_tf_get_template_options', array($this, 'tf_get_template_options_callback'));
+            add_action('wp_ajax_tf_update_term_options', array($this, 'tf_update_term_options_callback'));
+            add_action('wp_ajax_tf_save_template_builder', array($this, 'tf_save_template_builder_callback'));
+            add_filter('template_include', array($this, 'tf_template_builder_custom_template'));
+            add_action('save_post_tf_template_builder', [$this, 'enforce_elementor_template_on_save'], 20, 3);
 
-        // add_filter('elementor/document/urls/preview', [$this, 'modify_elementor_preview_url'], 10, 2);
-        add_filter('elementor/document/urls/edit', [$this, 'modify_elementor_edit_url'], 10, 2);
-        add_action('elementor/editor/init', [$this, 'setup_editor_post_data']);
-        add_filter('elementor/document/config', [$this, 'modify_elementor_document_config'], 10, 2);
+            // add_filter('elementor/document/urls/preview', [$this, 'modify_elementor_preview_url'], 10, 2);
+            add_filter('elementor/document/urls/edit', [$this, 'modify_elementor_edit_url'], 10, 2);
+            add_action('elementor/editor/init', [$this, 'setup_editor_post_data']);
+            add_filter('elementor/document/config', [$this, 'modify_elementor_document_config'], 10, 2);
 
 
-        // add_action('elementor/editor/init', [$this, 'elementor_editor_initialized']);
+            // add_action('elementor/editor/init', [$this, 'elementor_editor_initialized']);
+        }
 	}
 
-	public function admin_menu() {
-		add_submenu_page(
-            'tf_settings',
-			esc_html__('Template Builder', 'tourfic'),
-			esc_html__('Template Builder', 'tourfic'),
-			'manage_options',
-			'edit.php?post_type=tf_template_builder',
-		);
-	}
+	static function tf_template_builder_elementor_check() {
+        ?>
+        <div class="wrap">
+            <h1><?php echo esc_html__('Template Builder', 'tourfic'); ?></h1>
+            <div class="notice notice-error" style="margin-top: 20px;">
+                <p><?php esc_html_e('Please install and activate Elementor to use the Template Builder.', 'tourfic'); ?></p>
+
+                <?php
+                $plugin_slug = 'elementor/elementor.php';
+
+                // Elementor not installed
+                if ( ! file_exists( WP_PLUGIN_DIR . '/elementor/elementor.php' ) ) {
+                    $install_url = wp_nonce_url(
+                        self_admin_url( 'update.php?action=install-plugin&plugin=elementor' ),
+                        'install-plugin_elementor'
+                    );
+                    echo '<p><a href="' . esc_url( $install_url ) . '" class="button button-primary">';
+                    esc_html_e( 'Install Elementor', 'tourfic' );
+                    echo '</a></p>';
+                }
+                // Elementor installed but inactive
+                elseif ( current_user_can( 'activate_plugins' ) && ! is_plugin_active( $plugin_slug ) ) {
+                    $activate_url = wp_nonce_url(
+                        self_admin_url( 'plugins.php?action=activate&plugin=' . $plugin_slug ),
+                        'activate-plugin_' . $plugin_slug
+                    );
+                    echo '<p><a href="' . esc_url( $activate_url ) . '" class="button button-primary">';
+                    esc_html_e( 'Activate Elementor', 'tourfic' );
+                    echo '</a></p>';
+                }
+                ?>
+            </div>
+        </div>
+        <?php
+    }
 
 	public function tf_template_builder_post_type() {
 		$labels = [
@@ -223,16 +251,29 @@ class Template_Builder {
             <div class="tf-modal tf-modal-small" id="tf-template-builder-popup">
                 <div class="tf-modal-dialog">
                     <div class="tf-modal-content">
-                        <div class="tf-modal-header">
-                            <h2><?php echo esc_html__('Build Your Template', 'tourfic'); ?></h2>
-                            <a data-dismiss="modal" class="tf-modal-close">&#10005;</a>
-                        </div>
                         <div class="tf-modal-body">
                             <form id="tf-template-builder-form">
                                 <input type="hidden" name="post_id" id="tf-post-id" value="0">
                                 <input type="hidden" name="action" value="tf_save_template_builder">
                                 
                                 <div class="tf-fields">
+                                    <div class="tf-modal-header">
+                                        <h2>
+                                            <?php echo esc_html__('Build Your Template', 'tourfic'); ?>
+                                            <div class="tf-field tf-field-switch">
+                                                <div class="tf-fieldset">
+                                                    <label for="tf-template-active" class="tf-switch-label">
+                                                        <input type="checkbox" id="tf-template-active" name="tf_template_active" value="" class="tf-switch">
+                                                        <span class="tf-switch-slider">
+                                                            <span class="tf-switch-on"><?php echo esc_html__('Yes', 'tourfic'); ?></span>
+                                                            <span class="tf-switch-off"><?php echo esc_html__('No', 'tourfic'); ?></span>
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </h2>
+                                        <a data-dismiss="modal" class="tf-modal-close">&#10005;</a>
+                                    </div>
                                     <div class="tf-field tf-field-text">
                                         <label for="tf-template-name" class="tf-field-label"><?php echo esc_html__('Name', 'tourfic'); ?></label>
                                         <div class="tf-fieldset">
@@ -284,19 +325,6 @@ class Template_Builder {
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div class="tf-field tf-field-switch">
-                                        <label for="tf-template-active" class="tf-field-label"><?php echo esc_html__('Active', 'tourfic'); ?></label>
-                                        <div class="tf-fieldset">
-                                            <label for="tf-template-active" class="tf-switch-label">
-                                                <input type="checkbox" id="tf-template-active" name="tf_template_active" value="" class="tf-switch">
-                                                <span class="tf-switch-slider">
-                                                    <span class="tf-switch-on"><?php echo esc_html__('Yes', 'tourfic'); ?></span>
-                                                    <span class="tf-switch-off"><?php echo esc_html__('No', 'tourfic'); ?></span>
-                                                </span>
-                                            </label>
-                                        </div>
-                                    </div>
                                 </div>
 
                                 <div class="tf-field tf-template-preview">
@@ -307,7 +335,7 @@ class Template_Builder {
                                                 <li class="">
                                                     <label class="tf-image-checkbox">
                                                         <input type="radio" name="tf_template_design" value="blank" checked>
-                                                        <div class="tf-template-blank"></div>
+                                                        <img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL . "images/template/tb-design-blank.png"); ?>" alt="Blank">
                                                         <span class="tf-circle-check"></span>
                                                     </label>
                                                     <span class="tf-image-checkbox-footer">
@@ -317,7 +345,7 @@ class Template_Builder {
                                                 <li class="">
                                                     <label class="tf-image-checkbox">
                                                         <input type="radio" name="tf_template_design" value="design-1">
-                                                        <img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL . "images/template/hotel-archive-design1.jpg"); ?>" alt="Design 1">
+                                                        <img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL . "images/template/tb-hotel-design-1.png"); ?>" alt="Design 1">
                                                         <span class="tf-circle-check"></span>
                                                     </label>
                                                     <span class="tf-image-checkbox-footer">
@@ -327,7 +355,7 @@ class Template_Builder {
                                                 <li class="">
                                                     <label class="tf-image-checkbox">
                                                         <input type="radio" name="tf_template_design" value="design-2">
-                                                        <img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL . "images/template/hotel-archive-design2.jpg"); ?>" alt="Design 2">
+                                                        <img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL . "images/template/tb-hotel-design-2.png"); ?>" alt="Design 2">
                                                         <span class="tf-circle-check"></span>
                                                     </label>
                                                     <span class="tf-image-checkbox-footer">
@@ -337,7 +365,7 @@ class Template_Builder {
                                                 <li class="">
                                                     <label class="tf-image-checkbox">
                                                         <input type="radio" name="tf_template_design" value="design-3">
-                                                        <img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL . "images/template/hotel-archive-design3.jpg"); ?>" alt="Design 3">
+                                                        <img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL . "images/template/tb-hotel-design-3.png"); ?>" alt="Design 3">
                                                         <span class="tf-circle-check"></span>
                                                     </label>
                                                     <span class="tf-image-checkbox-footer">
@@ -347,7 +375,7 @@ class Template_Builder {
                                                 <li class="">
                                                     <label class="tf-image-checkbox">
                                                         <input type="radio" name="tf_template_design" value="default">
-                                                        <img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL . "images/template/hotel-archive-default.jpg"); ?>" alt="Legacy">
+                                                        <img src="<?php echo esc_url(TF_ASSETS_ADMIN_URL . "images/template/tb-hotel-design-legacy.png"); ?>" alt="Legacy">
                                                         <span class="tf-circle-check"></span>
                                                     </label>
                                                     <span class="tf-image-checkbox-footer">
@@ -366,12 +394,22 @@ class Template_Builder {
                                 </div>
                                 
                                 <div class="tf-form-actions">
-                                    <button type="submit" id="tf-save-template" class="tf-admin-btn tf-btn-secondary">
-                                        <?php echo esc_html__('Save Changes', 'tourfic'); ?>
-                                    </button>
                                     <button type="button" id="tf-edit-with-elementor" class="tf-admin-btn">
-                                        <i class="eicon-elementor"></i>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <mask id="mask0_747_79" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="29" height="29">
+                                            <path d="M28.5 0.5V28.5H0.5V0.5H28.5Z" fill="white" stroke="white"/>
+                                        </mask>
+                                        <g mask="url(#mask0_747_79)">
+                                            <path d="M12 0C5.37193 0 0 5.37193 0 12C0 18.6259 5.37193 24 12 24C18.6281 24 24 18.6281 24 12C23.9978 5.37193 18.6259 0 12 0ZM9.00054 16.9984H7.00164V6.99948H9.00054V16.9984ZM16.9984 16.9984H10.9994V14.9995H16.9984V16.9984ZM16.9984 12.9983H10.9994V10.9994H16.9984V12.9983ZM16.9984 8.99838H10.9994V6.99948H16.9984V8.99838Z" fill="#003C79"/>
+                                        </g>
+                                        </svg>
                                         <?php echo esc_html__('Edit With Elementor', 'tourfic'); ?>
+                                    </button>
+                                    <button type="submit" id="tf-save-template" class="tf-admin-btn tf-btn-secondary">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M17 21V14C17 13.7348 16.8946 13.4804 16.7071 13.2929C16.5196 13.1054 16.2652 13 16 13H8C7.73478 13 7.48043 13.1054 7.29289 13.2929C7.10536 13.4804 7 13.7348 7 14V21M7 3V7C7 7.26522 7.10536 7.51957 7.29289 7.70711C7.48043 7.89464 7.73478 8 8 8H15M15.2 3C15.7275 3.00751 16.2307 3.22317 16.6 3.6L20.4 7.4C20.7768 7.76926 20.9925 8.27246 21 8.8V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H15.2Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                        <?php echo esc_html__('Save Changes', 'tourfic'); ?>
                                     </button>
                                 </div>
                             </form>
@@ -405,158 +443,158 @@ class Template_Builder {
                 'archive' => [
                     'blank' => [
                         'title' => esc_html__('Blank', 'tourfic'),
-                        'url' => '',
+                        'url' => TF_ASSETS_ADMIN_URL . 'images/template/tb-design-blank.png',
                         'is_blank' => true
                     ],
                     'design-1' => [
                         'title' => esc_html__('Design 1', 'tourfic'),
-                        'url' => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-design-1.png"
+                        'url' => TF_ASSETS_ADMIN_URL . "images/template/tb-hotel-design-1.png"
                     ],
                     'design-2' => [
                         'title' => esc_html__('Design 2', 'tourfic'),
-                        'url' => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-design-2.png"
+                        'url' => TF_ASSETS_ADMIN_URL . "images/template/tb-hotel-design-2.png"
                     ],
                     'design-3' => [
                         'title' => esc_html__('Design 3', 'tourfic'),
-                        'url' => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-design-3.png",
+                        'url' => TF_ASSETS_ADMIN_URL . "images/template/tb-hotel-design-3.png",
                     ],
                     'default' => [
                         'title' => esc_html__('Legacy', 'tourfic'),
-                        'url' => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-default.png"
+                        'url' => TF_ASSETS_ADMIN_URL . "images/template/tb-hotel-design-legacy.png"
                     ]
                 ],
-                'single' => [
-                    'blank' => [
-                        'title' => esc_html__('Blank', 'tourfic'),
-                        'url' => '',
-                        'is_blank' => true
-                    ],
-                    'design-1' => [
-                        'title' => esc_html__('Design 1', 'tourfic'),
-                        'url' => TF_ASSETS_ADMIN_URL . "images/template/preview-single-design-1.png",
-                        'preview_link' => 'https://tourfic.com/preview/hotels/tuvo-suites-hotel/'
-                    ],
-                    'design-2' => [
-                        'title' => esc_html__('Design 2', 'tourfic'),
-                        'url' => TF_ASSETS_ADMIN_URL . "images/template/preview-single-design-2.png",
-                        'preview_link' => 'https://tourfic.com/preview/hotels/melbourne-mastlereagh/'
-                    ],
-                    'default' => [
-                        'title' => esc_html__('Legacy', 'tourfic'),
-                        'url' => TF_ASSETS_ADMIN_URL . "images/template/preview-single-default.png",
-                        'preview_link' => 'https://tourfic.com/preview/hotels/rio-ontho-palace/'
-                    ]
-                ]
+                // 'single' => [
+                //     'blank' => [
+                //         'title' => esc_html__('Blank', 'tourfic'),
+                //         'url' => TF_ASSETS_ADMIN_URL . 'images/template/tb-design-blank.png',
+                //         'is_blank' => true
+                //     ],
+                //     'design-1' => [
+                //         'title' => esc_html__('Design 1', 'tourfic'),
+                //         'url' => TF_ASSETS_ADMIN_URL . "images/template/preview-single-design-1.png",
+                //         'preview_link' => 'https://tourfic.com/preview/hotels/tuvo-suites-hotel/'
+                //     ],
+                //     'design-2' => [
+                //         'title' => esc_html__('Design 2', 'tourfic'),
+                //         'url' => TF_ASSETS_ADMIN_URL . "images/template/preview-single-design-2.png",
+                //         'preview_link' => 'https://tourfic.com/preview/hotels/melbourne-mastlereagh/'
+                //     ],
+                //     'default' => [
+                //         'title' => esc_html__('Legacy', 'tourfic'),
+                //         'url' => TF_ASSETS_ADMIN_URL . "images/template/preview-single-default.png",
+                //         'preview_link' => 'https://tourfic.com/preview/hotels/rio-ontho-palace/'
+                //     ]
+                // ]
             ],
             'tf_tours' => [
                 'archive' => [
                     'blank' => [
                         'title' => esc_html__('Blank', 'tourfic'),
-                        'url' => '',
+                        'url' => TF_ASSETS_ADMIN_URL . 'images/template/tb-design-blank.png',
                         'is_blank' => true
                     ],
                     'design-1' => [
                         'title' => esc_html__('Design 1', 'tourfic'),
-                        'url' => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-design-1.png"
+                        'url' => TF_ASSETS_ADMIN_URL . "images/template/tb-tour-design-1.png"
                     ],
                     'design-2' => [
                         'title' => esc_html__('Design 2', 'tourfic'),
-                        'url' => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-design-2.png"
+                        'url' => TF_ASSETS_ADMIN_URL . "images/template/tb-tour-design-2.png"
                     ],
                     'design-3' => [
                         'title' => esc_html__('Design 3', 'tourfic'),
-                        'url' => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-design-3.png",
+                        'url' => TF_ASSETS_ADMIN_URL . "images/template/tb-tour-design-3.png",
                     ],
                     'default' => [
                         'title' => esc_html__('Legacy', 'tourfic'),
-                        'url' => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-default.png"
+                        'url' => TF_ASSETS_ADMIN_URL . "images/template/tb-tour-design-legacy.png"
                     ]
                 ],
-                'single' => [
-                    'blank' => [
-                        'title' => esc_html__('Blank', 'tourfic'),
-                        'url' => '',
-                        'is_blank' => true
-                    ],
-                    'design-1' => [
-                        'title' => esc_html__('Design 1', 'tourfic'),
-                        'url' => TF_ASSETS_ADMIN_URL . "images/template/preview-single-design-1.png",
-                        'preview_link' => 'https://tourfic.com/preview/tours/amplified-nz-tour/'
-                    ],
-                    'design-2' => [
-                        'title' => esc_html__('Design 2', 'tourfic'),
-                        'url' => TF_ASSETS_ADMIN_URL . "images/template/preview-single-design-2.png",
-                        'preview_link' => 'https://tourfic.com/preview/tours/ancient-trails-of-japan/'
-                    ],
-                    'default' => [
-                        'title' => esc_html__('Legacy', 'tourfic'),
-                        'url' => TF_ASSETS_ADMIN_URL . "images/template/preview-single-default.png",
-                        'preview_link' => 'https://tourfic.com/preview/tours/magical-russia/'
-                    ]
-                ]
+                // 'single' => [
+                //     'blank' => [
+                //         'title' => esc_html__('Blank', 'tourfic'),
+                //         'url' => TF_ASSETS_ADMIN_URL . 'images/template/tb-design-blank.png',
+                //         'is_blank' => true
+                //     ],
+                //     'design-1' => [
+                //         'title' => esc_html__('Design 1', 'tourfic'),
+                //         'url' => TF_ASSETS_ADMIN_URL . "images/template/preview-single-design-1.png",
+                //         'preview_link' => 'https://tourfic.com/preview/tours/amplified-nz-tour/'
+                //     ],
+                //     'design-2' => [
+                //         'title' => esc_html__('Design 2', 'tourfic'),
+                //         'url' => TF_ASSETS_ADMIN_URL . "images/template/preview-single-design-2.png",
+                //         'preview_link' => 'https://tourfic.com/preview/tours/ancient-trails-of-japan/'
+                //     ],
+                //     'default' => [
+                //         'title' => esc_html__('Legacy', 'tourfic'),
+                //         'url' => TF_ASSETS_ADMIN_URL . "images/template/preview-single-default.png",
+                //         'preview_link' => 'https://tourfic.com/preview/tours/magical-russia/'
+                //     ]
+                // ]
             ],
             'tf_apartment' => [
                 'archive' => [
                     'blank' => [
                         'title' => esc_html__('Blank', 'tourfic'),
-                        'url' => '',
+                        'url' => TF_ASSETS_ADMIN_URL . 'images/template/tb-design-blank.png',
                         'is_blank' => true
                     ],
                     'design-1' => [
                         'title' => esc_html__('Design 1', 'tourfic'),
-                        'url' => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-design-2.png"
+                        'url' => TF_ASSETS_ADMIN_URL . "images/template/tb-apartment-design-1.png"
                     ],
                     'design-2' => [
                         'title' => esc_html__('Design 2', 'tourfic'),
-                        'url' => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-design-3.png",
+                        'url' => TF_ASSETS_ADMIN_URL . "images/template/tb-apartment-design-2.png"
                     ],
                     'default' => [
                         'title' => esc_html__('Legacy', 'tourfic'),
-                        'url' => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-default.png"
+                        'url' => TF_ASSETS_ADMIN_URL . "images/template/tb-apartment-design-legacy.png"
                     ]
                 ],
-                'single' => [
-                    'blank' => [
-                        'title' => esc_html__('Blank', 'tourfic'),
-                        'url' => '',
-                        'is_blank' => true
-                    ],
-                    'design-1' => [
-                        'title' => esc_html__('Design 1', 'tourfic'),
-                        'url' => TF_ASSETS_ADMIN_URL . "images/template/preview-single-apt-design-1.png",
-                        'preview_link' => 'https://tourfic.com/preview/apartments/2-bedroom-apartment-in-gamle-oslo/'
-                    ],
-                    'default' => [
-                        'title' => esc_html__('Legacy', 'tourfic'),
-                        'url' => TF_ASSETS_ADMIN_URL . "images/template/preview-single-apt-default.png",
-                        'preview_link' => 'https://tourfic.com/preview/apartments/barcelo-residences-dubai-marina/'
-                    ]
-                ]
+                // 'single' => [
+                //     'blank' => [
+                //         'title' => esc_html__('Blank', 'tourfic'),
+                //         'url' => TF_ASSETS_ADMIN_URL . 'images/template/tb-design-blank.png',
+                //         'is_blank' => true
+                //     ],
+                //     'design-1' => [
+                //         'title' => esc_html__('Design 1', 'tourfic'),
+                //         'url' => TF_ASSETS_ADMIN_URL . "images/template/preview-single-apt-design-1.png",
+                //         'preview_link' => 'https://tourfic.com/preview/apartments/2-bedroom-apartment-in-gamle-oslo/'
+                //     ],
+                //     'default' => [
+                //         'title' => esc_html__('Legacy', 'tourfic'),
+                //         'url' => TF_ASSETS_ADMIN_URL . "images/template/preview-single-apt-default.png",
+                //         'preview_link' => 'https://tourfic.com/preview/apartments/barcelo-residences-dubai-marina/'
+                //     ]
+                // ]
             ],
             'tf_carrental' => [
                 'archive' => [
                     'blank' => [
                         'title' => esc_html__('Blank', 'tourfic'),
-                        'url' => '',
+                        'url' => TF_ASSETS_ADMIN_URL . 'images/template/tb-design-blank.png',
                         'is_blank' => true
                     ],
                     'design-1' => [
                         'title' => esc_html__('Design 1', 'tourfic'),
-                        'url' => TF_ASSETS_ADMIN_URL . "images/template/preview-archive-car-design-1.png"
+                        'url' => TF_ASSETS_ADMIN_URL . "images/template/tb-car-design-1.png"
                     ]
                 ],
-                'single' => [
-                    'blank' => [
-                        'title' => esc_html__('Blank', 'tourfic'),
-                        'url' => '',
-                        'is_blank' => true
-                    ],
-                    'design-1' => [
-                        'title' => esc_html__('Design 1', 'tourfic'),
-                        'url' => TF_ASSETS_ADMIN_URL . "images/template/preview-single-car-design-1.png",
-                        'preview_link' => 'https://tourfic.com/preview/cars/honda-city/'
-                    ]
-                ]
+                // 'single' => [
+                //     'blank' => [
+                //         'title' => esc_html__('Blank', 'tourfic'),
+                //         'url' => TF_ASSETS_ADMIN_URL . 'images/template/tb-design-blank.png',
+                //         'is_blank' => true
+                //     ],
+                //     'design-1' => [
+                //         'title' => esc_html__('Design 1', 'tourfic'),
+                //         'url' => TF_ASSETS_ADMIN_URL . "images/template/preview-single-car-design-1.png",
+                //         'preview_link' => 'https://tourfic.com/preview/cars/honda-city/'
+                //     ]
+                // ]
             ]
         ];
         
@@ -582,13 +620,7 @@ class Template_Builder {
             $markup .= '<li>';
             $markup .= '<label class="tf-image-checkbox">';
             $markup .= '<input type="radio" name="tf_template_design" value="' . esc_attr($value) . '" ' . $checked . '>';
-            
-            if (!empty($option['is_blank'])) {
-                $markup .= '<div class="tf-template-blank"></div>';
-            } else {
-                $markup .= '<img src="' . esc_url($option['url']) . '" alt="' . esc_attr($option['title']) . '">';
-            }
-            
+            $markup .= '<img src="' . esc_url($option['url']) . '" alt="' . esc_attr($option['title']) . '">';
             $markup .= '<span class="tf-circle-check"></span>';
             $markup .= '</label>';
             
@@ -646,7 +678,7 @@ class Template_Builder {
         $post_id = !empty($_POST['postId']) ? sanitize_text_field($_POST['postId']) : '';
         
         if (empty($taxonomy)) {
-            wp_send_json_error(['message' => 'Taxonomy not provided']);
+            wp_send_json_error(['message' => __('Taxonomy not provided', 'tourfic')]);
         }
         
         if ($taxonomy === 'all') {
@@ -705,6 +737,23 @@ class Template_Builder {
 
         ob_start();
         ?>
+        <div class="tf-modal-header">
+            <h2>
+                <?php echo esc_html__('Build Your Template', 'tourfic'); ?>
+                <div class="tf-field tf-field-switch">
+                    <div class="tf-fieldset">
+                        <label for="tf-template-active" class="tf-switch-label">
+                            <input type="checkbox" id="tf-template-active" name="tf_template_active" value="" class="tf-switch" <?php checked($tf_template_active, '1'); ?>>
+                            <span class="tf-switch-slider">
+                                <span class="tf-switch-on"><?php echo esc_html__('Yes', 'tourfic'); ?></span>
+                                <span class="tf-switch-off"><?php echo esc_html__('No', 'tourfic'); ?></span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+            </h2>
+            <a data-dismiss="modal" class="tf-modal-close">&#10005;</a>
+        </div>
         <div class="tf-field tf-field-text">
             <label for="tf-template-name" class="tf-field-label"><?php echo esc_html__('Name', 'tourfic'); ?></label>
             <div class="tf-fieldset">
@@ -780,19 +829,6 @@ class Template_Builder {
                         <?php endif; ?>
                     </select>
                 </div>
-            </div>
-        </div>
-
-        <div class="tf-field tf-field-switch">
-            <label for="tf-template-active" class="tf-field-label"><?php echo esc_html__('Active', 'tourfic'); ?></label>
-            <div class="tf-fieldset">
-                <label for="tf-template-active" class="tf-switch-label">
-                    <input type="checkbox" id="tf-template-active" name="tf_template_active" value="1" class="tf-switch" <?php checked($tf_template_active, '1'); ?>>
-                    <span class="tf-switch-slider">
-                        <span class="tf-switch-on"><?php echo esc_html__('Yes', 'tourfic'); ?></span>
-                        <span class="tf-switch-off"><?php echo esc_html__('No', 'tourfic'); ?></span>
-                    </span>
-                </label>
             </div>
         </div>
         <?php
@@ -1131,9 +1167,9 @@ class Template_Builder {
                 ]
             ]
         ];
-        
+
         $templates = get_posts($args);
-        
+
         return !empty($templates) ? $templates[0] : false;
     }
 
@@ -1205,11 +1241,11 @@ class Template_Builder {
     
     public function modify_elementor_preview_url($url, $document) {
         $post = $document->get_post();
-        
+
         if ($post->post_type === 'tf_template_builder') {
             $service = get_post_meta($post->ID, 'tf_template_service', true);
             $template_type = get_post_meta($post->ID, 'tf_template_type', true);
-            
+
             if ($template_type === 'single' && !empty($service)) {
                 // Get a sample post of the selected service type
                 $sample_post = get_posts([
@@ -1217,25 +1253,25 @@ class Template_Builder {
                     'posts_per_page' => 1,
                     'orderby' => 'rand'
                 ]);
-                
+
                 if (!empty($sample_post)) {
                     return get_permalink($sample_post[0]->ID) . '?elementor-preview=' . $post->ID . '&ver=' . time();
                 }
             }
         }
-        
+
         return $url;
     }
 
     public function modify_elementor_edit_url($url, $document) {
         $post = $document->get_post();
-        
+
         if ($post->post_type === 'tf_template_builder') {
             $service = get_post_meta($post->ID, 'tf_template_service', true);
             $template_type = get_post_meta($post->ID, 'tf_template_type', true);
             $taxonomy_type = get_post_meta($post->ID, 'tf_taxonomy_type', true);
             $taxonomy_term = get_post_meta($post->ID, 'tf_taxonomy_term', true);
-            
+
             if ($template_type === 'single' && !empty($service)) {
                 // Get a sample post of the selected service type
                 $args = [
@@ -1253,14 +1289,14 @@ class Template_Builder {
                     ];
                 }
                 $sample_post = get_posts($args);
-                
+
                 if (!empty($sample_post)) {
                     // Add the template post ID as a parameter
                     return add_query_arg('tf_template_id', $sample_post[0]->ID, $url);
                 }
             }
         }
-        
+
         return $url;
     }
 
@@ -1268,7 +1304,7 @@ class Template_Builder {
         if (!isset($_GET['tf_template_id'])) {
             return;
         }
-        
+
         $post_id = intval($_GET['tf_template_id']);
         $post = get_post($post_id);
         if ($post) {
@@ -1280,14 +1316,14 @@ class Template_Builder {
         if (isset($_GET['tf_template_id']) && is_numeric($_GET['tf_template_id'])) {
             $template_id = intval($_GET['tf_template_id']);
             $template_post = get_post($template_id);
-            
+
             if ($template_post) {
                 // Ensure Elementor loads the template builder post, not the sample post
                 $config['post_id'] = $template_id;
                 $config['post'] = $template_post;
             }
         }
-        
+
         return $config;
     }
 }

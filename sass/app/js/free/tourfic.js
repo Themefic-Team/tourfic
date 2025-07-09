@@ -27,7 +27,11 @@
        
         if( $(".widget_tf_price_filters").length > 0 ){
 
-            const post_type = $(document).find('input[name="post_id"]').attr("data-post-type");
+            let urlParams = new URLSearchParams(window.location.search);
+            let post_type = urlParams.get('type');
+            if(!post_type){
+                post_type = $(document).find('input[name="post_id"]').attr("data-post-type");
+            }
             if( post_type == 'tf_hotel' || post_type == 'tf_tours' || post_type == 'tf_apartment' || post_type == 'tf_carrental' ){
                 $.ajax({
                     type: 'POST',
@@ -52,6 +56,12 @@
                                         },
                                         grid: false,
                                         theme: "dark",
+                                        onFinish: function () {
+                                            if($(".filter-reset-btn").length>0){
+                                                $(".filter-reset-btn").show();
+                                            }
+                                            makeFilter();
+                                        }
                                     };
                                     if ( parseInt( response.data?.tf_tours?.min ) != 0 && parseInt( response.data?.tf_tours?.max ) != 0) {
                                         $('.tf-tour-filter-range').alRangeSlider(tf_tour_range_options);
@@ -72,12 +82,25 @@
                                         grid: false,
                                         theme: "dark",
                                         onFinish: function () {
+                                            if($(".filter-reset-btn").length>0){
+                                                $(".filter-reset-btn").show();
+                                            }
                                             makeFilter();
                                         }
                                     };
                                     if ( parseInt( response.data?.tf_tours?.min ) != 0 && parseInt( response.data?.tf_tours?.max ) != 0) {
                                         $('.tf-tour-result-price-range').alRangeSlider(tf_tours_search_range);
                                     }
+
+                                // Store in global variable or object
+                                window.tf_price_ranges = {
+                                    min: parseInt(response.data?.tf_tours?.min),
+                                    max: parseInt(response.data?.tf_tours?.max)
+                                };
+                                if(tf_search_page_params.get('from') && tf_search_page_params.get('to')){
+                                    window.tf_price_ranges.min = parseInt(tf_search_page_params.get('from'));
+                                    window.tf_price_ranges.max = parseInt(tf_search_page_params.get('to'));
+                                }
                             } else if( post_type == 'tf_hotel' ) { 
                                         let tf_hotel_range_options = {
                                             range: {
@@ -91,6 +114,12 @@
                                             },
                                             grid: false,
                                             theme: "dark",
+                                            onFinish: function () {
+                                                if($(".filter-reset-btn").length>0){
+                                                    $(".filter-reset-btn").show();
+                                                }
+                                                makeFilter();
+                                            }
                                         };
                                         if ( response.data?.tf_hotel?.min != 0 && response.data?.tf_hotel?.max != 0) {
                                             $('.tf-hotel-filter-range').alRangeSlider(tf_hotel_range_options);
@@ -111,14 +140,26 @@
                                             grid: false,
                                             theme: "dark",
                                             onFinish: function () {
+                                                if($(".filter-reset-btn").length>0){
+                                                    $(".filter-reset-btn").show();
+                                                }
                                                 makeFilter();
                                             }
                                         };
                                         if ( response.data?.tf_hotel?.min != 0 && response.data?.tf_hotel?.max != 0) {
                                             $('.tf-hotel-result-price-range').alRangeSlider(tf_hotel_search_range);
                                         }
-                            } else if( post_type == 'tf_apartment' ) {
 
+                                // Store in global variable or object
+                                window.tf_price_ranges = {
+                                    min: parseInt(response.data?.tf_hotel?.min),
+                                    max: parseInt(response.data?.tf_hotel?.max)
+                                };
+                                if(tf_search_page_params.get('from') && tf_search_page_params.get('to')){
+                                    window.tf_price_ranges.min = parseInt(tf_search_page_params.get('from'));
+                                    window.tf_price_ranges.max = parseInt(tf_search_page_params.get('to'));
+                                }
+                            } else if( post_type == 'tf_apartment' ) {
                                 let tf_apartment_range_options = {
                                     range: {
                                         min: parseInt( response.data?.tf_apartment?.min ),
@@ -151,11 +192,24 @@
                                     grid: false,
                                     theme: "dark",
                                     onFinish: function () {
+                                        if($(".filter-reset-btn").length>0){
+                                            $(".filter-reset-btn").show();
+                                        }
                                         makeFilter();
                                     }
                                 };
                                 if ( parseInt(  response.data?.tf_apartment?.min ) != 0 && parseInt( response.data?.tf_apartment?.max ) != 0) {
                                     $('.tf-apartment-result-price-range').alRangeSlider(tf_apartment_search_range);
+                                }
+
+                                // Store in global variable or object
+                                window.tf_price_ranges = {
+                                    min: parseInt(response.data?.tf_apartment?.min),
+                                    max: parseInt(response.data?.tf_apartment?.max)
+                                };
+                                if(tf_search_page_params.get('from') && tf_search_page_params.get('to')){
+                                    window.tf_price_ranges.min = parseInt(tf_search_page_params.get('from'));
+                                    window.tf_price_ranges.max = parseInt(tf_search_page_params.get('to'));
                                 }
                             } else if( post_type == 'tf_carrental' ) {
                                 var tf_search_page_params = new window.URLSearchParams(window.location.search);
@@ -172,14 +226,24 @@
                                     grid: false,
                                     theme: "dark",
                                     onFinish: function () {
-                                        if($(".tf-filter-reset-btn").length>0){
-                                            $(".tf-filter-reset-btn").show();
+                                        if($(".filter-reset-btn").length>0){
+                                            $(".filter-reset-btn").show();
                                         }
                                         makeFilter();
                                     }
                                 };
                                 if ( parseInt( response.data?.tf_carrental?.min ) != 0 && parseInt( response.data?.tf_carrental?.max ) != 0) {
                                     $('.tf-car-result-price-range').alRangeSlider(tf_car_search_range);
+                                }
+
+                                // Store in global variable or object
+                                window.tf_price_ranges = {
+                                    min: parseInt(response.data?.tf_carrental?.min),
+                                    max: parseInt(response.data?.tf_carrental?.max)
+                                };
+                                if(tf_search_page_params.get('from') && tf_search_page_params.get('to')){
+                                    window.tf_price_ranges.min = parseInt(tf_search_page_params.get('from'));
+                                    window.tf_price_ranges.max = parseInt(tf_search_page_params.get('to'));
                                 }
                 
                                 var tf_search_page_params = new window.URLSearchParams(window.location.search);
@@ -196,14 +260,19 @@
                                     grid: false,
                                     theme: "dark",
                                     onFinish: function () {
-                                        if($(".tf-filter-reset-btn").length>0){
-                                            $(".tf-filter-reset-btn").show();
+                                        if($(".filter-reset-btn").length>0){
+                                            $(".filter-reset-btn").show();
                                         }
                                         makeFilter();
                                     }
                                 };
                                 if ( parseInt( response.data?.tf_carrental?.min_seat ) != 0 && parseInt( response.data?.tf_carrental?.max_seat ) != 0) {
                                     $('.tf-car-result-seat-range').alRangeSlider(tf_car_search_seat_range);
+                                }
+                                window.tf_price_ranges = {
+                                    ...window.tf_price_ranges,
+                                    min_seat: parseInt(response.data?.tf_carrental?.min_seat),
+                                    max_seat: parseInt(response.data?.tf_carrental?.max_seat)
                                 }
                             } 
                         }
@@ -505,7 +574,46 @@
         // Archive Page Filter Reset
         $(document).on('click', '.filter-reset-btn', function (e) {
             e.preventDefault();
+
+            // Reset checkboxes
             $('[name*=tf_filters],[name*=tf_hotel_types],[name*=tf_features],[name*=tour_features],[name*=tf_attractions],[name*=tf_activities],[name*=tf_tour_types],[name*=tf_apartment_features],[name*=tf_apartment_types], [name*=car_category],[name*=car_fueltype],[name*=car_engine_year]').prop('checked', false);
+            
+            // Reset price sliders
+            if ($('.tf-hotel-filter-range').length > 0) {
+                $('.tf-hotel-filter-range').alRangeSlider('update', {
+                    values: { from: window.tf_price_ranges.min, to: window.tf_price_ranges.max },
+                });
+            }
+            if ($('.tf-hotel-result-price-range').length > 0) {
+                $('.tf-hotel-result-price-range').alRangeSlider('update', {
+                    values: { from: window.tf_price_ranges.min, to: window.tf_price_ranges.max },
+                });
+            }
+
+            if ($('.tf-tour-filter-range').length > 0) {
+                $('.tf-tour-filter-range').alRangeSlider('update', {
+                    values: { from: window.tf_price_ranges.min, to: window.tf_price_ranges.max },
+                });
+            }
+
+            if ($('.tf-apartment-filter-range').length > 0) {
+                $('.tf-apartment-filter-range').alRangeSlider('update', {
+                    values: { from: window.tf_price_ranges.min, to: window.tf_price_ranges.max },
+                });
+            }
+
+            if ($('.tf-car-result-price-range').length > 0) {
+                $('.tf-car-result-price-range').alRangeSlider('update', {
+                    values: { from: window.tf_price_ranges.min, to: window.tf_price_ranges.max },
+                });
+            }
+
+            if ($('.tf-car-result-seat-range').length > 0) {
+                $('.tf-car-result-seat-range').alRangeSlider('update', {
+                    values: { from: window.tf_price_ranges.min_seat, to: window.tf_price_ranges.max_seat },
+                });
+            }
+            
             makeFilter();
             $(".filter-reset-btn").hide();
 
@@ -699,7 +807,7 @@
             const inputElement = $(this).parent().find("#share_link_input");
             if (navigator.clipboard && navigator.clipboard.writeText) {
                 navigator.clipboard.writeText(inputElement.val()).then(() => {
-                    console.log("Copied to clipboard!");
+                    
                 });
             } else {
                 const tempInput = document.createElement("textarea");
@@ -2132,7 +2240,7 @@
 
             if (navigator.clipboard && navigator.clipboard.writeText) {
                 navigator.clipboard.writeText(inputElement.val()).then(() => {
-                    console.log("Copied to clipboard!");
+                    
                 });
             } else {
                 const tempInput = document.createElement("textarea");
@@ -2327,11 +2435,11 @@
         $('.tf-archive-booking-form__style-3 .acr-inc , .tf-archive-booking-form__style-3 .acr-dec').on('click', function () {
 
             if ($('input#infant').length) {
-                var guest = Number($('input#adults').val()) + Number($('input#children').val()) + Number($('input#infant').val());
+                var guest = Number($('input#adults').val() ? $('input#adults').val() : 0 ) + Number($('input#children').val() ? $('input#children').val() : 0) + Number($('input#infant').val() ? $('input#infant').val() : 0);
             } else {
-                var guest = Number($('input#adults').val()) + Number($('input#children').val());
-                var adult = Number($('input#adults').val());
-                var children = Number($('input#children').val());
+                var guest = Number($('input#adults').val() ? $('input#adults').val() : 0 ) + Number($('input#children').val() ? $('input#children').val() : 0);
+                var adult = Number($('input#adults').val() ? $('input#adults').val() : 0 );
+                var children = Number($('input#children').val() ? $('input#children').val() : 0);
             }
             if (guest.toString().length < 2) {
                 guest = '0' + guest;
@@ -2684,13 +2792,15 @@
         /*
         * Map toggle btn for mobile
         */
-        $(document).on('click', '.tf-archive-template__three .tf-mobile-map-btn', function (e) {
+        $(document).on('click', '.tf-archive-template__three .tf-mobile-map-btn, .tf-archive-listing__three .tf-mobile-map-btn', function (e) {
             e.preventDefault();
             $('.tf-archive-template__three .tf-details-right').css('display', 'block');
+            $('.tf-archive-listing__three .tf-details-right').css('display', 'block');
         });
-        $(document).on('click', '.tf-archive-template__three .tf-mobile-list-btn', function (e) {
+        $(document).on('click', '.tf-archive-template__three .tf-mobile-list-btn, .tf-archive-listing__three .tf-mobile-list-btn', function (e) {
             e.preventDefault();
             $('.tf-archive-template__three .tf-details-right').css('display', 'none');
+            $('.tf-archive-listing__three .tf-details-right').css('display', 'none');
         });
 
         /*
@@ -2726,6 +2836,54 @@
                     }
                 }
             });
+        });
+
+
+         /*
+        * Car Search Form Pickup & Dropoff Time
+        * @author Mofazzal Hossain
+        */
+
+        // Open time options
+        $('body').on('click' , '.selected-pickup-time, .selected-dropoff-time', function () {
+            const $infoSelect = $(this).closest('.info-select');
+            const $dropdown = $infoSelect.find('.time-options-list');
+            const isOpen = $dropdown.is(':visible');
+
+            $('.time-options-list').slideUp(200);
+            $('.selected-dropoff-time, .selected-pickup-time').removeClass('active');
+
+            if (!isOpen) {
+                $dropdown.slideDown(200);
+                $(this).addClass('active');
+            }
+        });
+
+        // Select time
+        $('.tf-pickup-time li, .tf-dropoff-time li').on('click', function () {
+            const selected = $(this).attr('value');
+            const $infoSelect = $(this).closest('.info-select');
+
+            if ($(this).closest('ul').hasClass('tf-pickup-time')) {
+                $('.tf_pickup_time').val(selected);
+                $('.tf_dropoff_time').val(selected);
+                $('.selected-pickup-time .text').text(selected);
+                $('.selected-dropoff-time .text').text(selected);
+            } else {
+                $('.tf_dropoff_time').val(selected);
+                $('.selected-dropoff-time .text').text(selected);
+            }
+
+            $('.time-options-list').slideUp(200);
+            $('.selected-dropoff-time, .selected-pickup-time').removeClass('active');
+        });
+
+        // Click outside to close dropdown
+        $('body').on('click', function (e) {
+            if (!$(e.target).closest('.info-select').length) {
+                $('.time-options-list').slideUp(200);
+                $('.selected-dropoff-time, .selected-pickup-time').removeClass('active');
+            }
         });
     });
 

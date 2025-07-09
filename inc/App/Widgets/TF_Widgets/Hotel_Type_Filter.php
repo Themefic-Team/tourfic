@@ -43,7 +43,7 @@ class Hotel_Type_Filter extends \WP_Widget {
         //check if is Hotel
         $posttype = isset( $_GET['type'] ) ? $_GET['type'] : get_post_type();
 
-        if ( $posttype == 'tf_hotel' ) {
+        if ( is_admin() || $posttype == 'tf_hotel' ) {
             extract( $args );
             $title = apply_filters( 'widget_title', $instance['title'] );
 

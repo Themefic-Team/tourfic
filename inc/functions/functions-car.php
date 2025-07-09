@@ -178,7 +178,7 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 		];
 		$settings['image_size_customize_size'] = $settings['image_size'];
 		$thumbnail_html = Group_Control_Image_Size::get_attachment_image_html( $settings,'image_size_customize' );
-		
+
 		if ( "" === $thumbnail_html && 'yes' === $settings['show_fallback_img'] && !empty( $settings['fallback_img']['url'] ) ) {
 			$settings[ 'image_size_customize' ] = [
 				'id' => $settings['fallback_img']['id'],
@@ -219,9 +219,6 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 					if(!empty($badge['title']) && $key < 4){
 					?>
 					<li>
-						<?php if(!empty($badge['badge_icon'])){ ?>
-						<i class="<?php echo esc_attr($badge['badge_icon']); ?>"></i>
-						<?php } ?>
 						<?php echo esc_html($badge['title']); ?>
 					</li>
 					<?php }}} ?>
@@ -410,11 +407,22 @@ function tf_car_availability_response($car_meta, array &$not_found, $pickup='', 
 
 	$has_car = false;
 	$pricing_type = !empty($car_meta["pricing_type"]) ? $car_meta["pricing_type"] : 'day_hour';
+	$price_by = !empty($car_meta["price_by"]) ? $car_meta["price_by"] : 'day';
+	
+	$date_pricing = !empty($car_meta["date_prices"]) ? $car_meta["date_prices"] : '';
+	$day_pricing = !empty($car_meta["day_prices"]) ? $car_meta["day_prices"] : '';
 
-	$date_pricing = !empty($meta["date_prices"]) ? $meta["date_prices"] : '';
-	$day_pricing = !empty($meta["day_prices"]) ? $meta["day_prices"] : '';
+	$custom_availability = !empty($car_meta["custom_availability"]) ? $car_meta["custom_availability"] : '0';
+	$pricing_type = !empty($car_meta["pricing_type"]) ? $car_meta["pricing_type"] : 'day_hour';
+	$base_price = !empty($car_meta["car_rent"]) ? $car_meta["car_rent"] : 0;
 
-	if( !empty($tf_pickup_date) && !empty($tf_dropoff_date) && 'date'==$pricing_type && !empty($date_pricing) ){
+	if(!empty($tf_startprice) && !empty($tf_endprice) && $custom_availability == '0' && ('day' == $price_by || 'hour' == $price_by) ){
+		if ( ! empty( $base_price ) && $tf_startprice <= $base_price && $base_price <= $tf_endprice ) {
+			$has_car = true;
+		} else {
+			$has_car = false;
+		}
+	}elseif( !empty($tf_pickup_date) && !empty($tf_dropoff_date) && 'date'==$pricing_type && !empty($date_pricing) ){
 
 		if ( ! empty( $tf_startprice ) && ! empty( $tf_endprice ) ) {
 
@@ -705,6 +713,8 @@ function tf_car_booking_pupup_callback() {
 	$dropoff_date = ! empty( $_POST['dropoff_date'] ) ? $_POST['dropoff_date'] : '';
 	$dropoff_time = ! empty( $_POST['dropoff_time'] ) ? $_POST['dropoff_time'] : '';
 
+
+
  	?>
 
 	<div class="tf-booking-tabs">
@@ -986,11 +996,14 @@ function tf_car_price_calculation_callback() {
 	$tf_dropoff_date  = isset( $_POST['dropoff_date'] ) ? sanitize_text_field( $_POST['dropoff_date'] ) : '';
 	$tf_pickup_time  = isset( $_POST['pickup_time'] ) ? sanitize_text_field( $_POST['pickup_time'] ) : '';
 	$tf_dropoff_time  = isset( $_POST['dropoff_time'] ) ? sanitize_text_field( $_POST['dropoff_time'] ) : '';
+
+
 	$extra_ids  = isset( $_POST['extra_ids'] ) ? $_POST['extra_ids'] : '';
 	$extra_qty  = isset( $_POST['extra_qty'] ) ? $_POST['extra_qty'] : '';
 
 	$meta = get_post_meta( $post_id, 'tf_carrental_opt', true );
 	$get_prices = Pricing::set_total_price($meta, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time);
+
 	$total_prices = $get_prices['sale_price'] ? $get_prices['sale_price'] : 0;
 
 	if(!empty($extra_ids)){
@@ -1031,9 +1044,11 @@ function tf_car_price_calculation_callback() {
 		$less_current_day = true;
 	}
 
+
 	// Get the final "before" date and time (ensured to not be before today)
 	$beforeDate = $pickupDateTime->format('Y/m/d');
 	$beforeTime = $pickupDateTime->format('H:i');
+
 
 	$cancellation = '';
 	
