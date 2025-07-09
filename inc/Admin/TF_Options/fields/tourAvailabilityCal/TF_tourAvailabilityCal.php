@@ -305,43 +305,28 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                         </div>
                                         <div class=" tf-single-repeater-clone tf-single-repeater-clone-allowed_time">
                                             <div class="tf-single-repeater tf-single-repeater-allowed_time">
-                                            <input type="hidden" name="tf_parent_field" value="">
-                                            <input type="hidden" name="tf_repeater_count" value="0">
-                                            <input type="hidden" name="tf_current_field" value="allowed_time">
-                                            <div class="tf-repeater-header">
-                                                <span class="tf-repeater-icon tf-repeater-icon-collapse">
-                                                <i class="fa-solid fa-angle-up"></i>
-                                                </span>
-                                                <span class="tf-repeater-title"><?php echo esc_html__( 'Allowed Time', 'tourfic' ); ?></span>
-                                                <div class="tf-repeater-icon-absulate">
-                                                <span class="tf-repeater-icon tf-repeater-icon-move">
-                                                    <i class="fa-solid fa-up-down-left-right"></i>
-                                                </span>
-                                                <span class="tf-repeater-icon tf-repeater-icon-clone" data-repeater-max="">
-                                                    <i class="fa-solid fa-copy"></i>
-                                                </span>
-                                                <span class="tf-repeater-icon tf-repeater-icon-delete">
-                                                    <i class="fa-solid fa-trash"></i>
-                                                </span>
+                                                <input type="hidden" name="tf_parent_field" value="">
+                                                <input type="hidden" name="tf_repeater_count" value="0">
+                                                <input type="hidden" name="tf_current_field" value="allowed_time">
+                                                <div class="tf-repeater-content-wrap">
+                                                    <div class="tf-field tf-field-time" style="width: calc(50% - 6px);">
+                                                        <div class="tf-fieldset">
+                                                            <input type="text" name="allowed_time[time][]" placeholder="Select Time" value="" class="flatpickr flatpickr-input" data-format="h:i K" readonly="readonly">
+                                                            <i class="fa-regular fa-clock"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tf-field tf-field-number" style="width: calc(50% - 6px);">
+                                                        <div class="tf-fieldset">
+                                                            <input type="number" name="allowed_time[cont_max_capacity][]" id="allowed_time[cont_max_capacity]" value="" placeholder="<?php echo esc_html__( 'Maximum Capacity', 'tourfic' ); ?>">
+                                                        </div>
+                                                    </div>
+                                                    <span class="tf-repeater-icon tf-repeater-icon-delete">
+                                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M15 5L5 15" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        <path d="M5 5L15 15" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        </svg>
+                                                    </span>
                                                 </div>
-                                            </div>
-                                            <div class="tf-repeater-content-wrap">
-                                                <div class="tf-field tf-field-time" style="width: calc(50% - 6px);">
-                                                <label class="tf-field-label"> <?php echo esc_html__( 'Time', 'tourfic' ); ?> </label>
-                                                
-                                                <div class="tf-fieldset">
-                                                    <input type="text" name="allowed_time[time][]" placeholder="Select Time" value="" class="flatpickr flatpickr-input" data-format="h:i K" readonly="readonly">
-                                                    <i class="fa-regular fa-clock"></i>
-                                                </div>
-                                                </div>
-                                                <div class="tf-field tf-field-number" style="width: calc(50% - 6px);">
-                                                <label class="tf-field-label"> <?php echo esc_html__( 'Maximum Capacity', 'tourfic' ); ?> </label>
-                                                
-                                                <div class="tf-fieldset">
-                                                    <input type="number" name="allowed_time[cont_max_capacity][]" id="allowed_time[cont_max_capacity]" value="">
-                                                </div>
-                                                </div>
-                                            </div>
                                             </div>
                                         </div>
                                         <div class="tf-repeater-add tf-repeater-add-allowed_time">
@@ -512,11 +497,19 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                 <input type="hidden" name="new_post" value="<?php echo $this->value ? 'false' : 'true'; ?>">
                                 <input type="hidden" name="tour_id" value="<?php echo esc_attr( get_the_ID() ); ?>">
                                 <input type="hidden" name="bulk_edit_option" class="tf_bulk_edit_option">
-                                <span class="tf_tour_cal_update button button-primary button-large"><?php echo esc_html__( 'Save Calendar', 'tourfic' ); ?></span>
+                                <div class="tf-save-calendar">
+                                    <span class="tf_tour_cal_update button button-primary button-large"><?php echo esc_html__( 'Save', 'tourfic' ); ?></span>
 
-                                <span class="tf_tour_cal_reset button button-primary button-large"><?php echo esc_html__( 'Reset Calendar', 'tourfic' ); ?></span>
-
-                                <span class="tf_tour_cal_bulk_edit button button-primary button-large"><?php echo esc_html__( 'Bulk Edit', 'tourfic' ); ?></span>
+                                    <span class="tf_tour_cal_reset button button-secondary button-large"><?php echo esc_html__( 'Reset Calendar', 'tourfic' ); ?></span>
+                                </div>
+                                <span class="tf_tour_cal_bulk_edit button button-secondary button-large">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 20H21" stroke="#003C79" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M16.5 3.50023C16.8978 3.1024 17.4374 2.87891 18 2.87891C18.2786 2.87891 18.5544 2.93378 18.8118 3.04038C19.0692 3.14699 19.303 3.30324 19.5 3.50023C19.697 3.69721 19.8532 3.93106 19.9598 4.18843C20.0665 4.4458 20.1213 4.72165 20.1213 5.00023C20.1213 5.2788 20.0665 5.55465 19.9598 5.81202C19.8532 6.06939 19.697 6.30324 19.5 6.50023L7 19.0002L3 20.0002L4 16.0002L16.5 3.50023Z" stroke="#003C79" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M15 5L18 8" stroke="#003C79" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>    
+                                    <?php echo esc_html__( 'Bulk Edit', 'tourfic' ); ?>
+                                </span>
                             </div>
 
                         </div>

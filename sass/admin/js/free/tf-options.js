@@ -1541,44 +1541,32 @@
                                 const capacity = capacities[index] || '';
 
                                 allRepeaterHTML += `
-                                    <div class="tf-single-repeater tf-single-repeater-allowed_time">
-                                        <input type="hidden" name="tf_parent_field" value="">
-                                        <input type="hidden" name="tf_repeater_count" value="${index + 1}">
-                                        <input type="hidden" name="tf_current_field" value="allowed_time">
-                                        <div class="tf-repeater-header">
-                                            <span class="tf-repeater-icon tf-repeater-icon-collapse">
-                                                <i class="fa-solid fa-angle-up"></i>
-                                            </span>
-                                            <span class="tf-repeater-title">Allowed Time</span>
-                                            <div class="tf-repeater-icon-absulate">
-                                                <span class="tf-repeater-icon tf-repeater-icon-move">
-                                                    <i class="fa-solid fa-up-down-left-right"></i>
-                                                </span>
-                                                <span class="tf-repeater-icon tf-repeater-icon-clone" data-repeater-max="">
-                                                    <i class="fa-solid fa-copy"></i>
-                                                </span>
-                                                <span class="tf-repeater-icon tf-repeater-icon-delete">
-                                                    <i class="fa-solid fa-trash"></i>
-                                                </span>
+                                <div class="tf-single-repeater tf-single-repeater-allowed_time">
+                                    <input type="hidden" name="tf_parent_field" value="">
+                                    <input type="hidden" name="tf_repeater_count" value="${index + 1}">
+                                    <input type="hidden" name="tf_current_field" value="allowed_time">
+                                    <div class="tf-repeater-content-wrap">
+                                        <div class="tf-field tf-field-time" style="width: calc(50% - 6px);">
+                                            <div class="tf-fieldset">
+                                                <input type="text" name="allowed_time[time][]" placeholder="Select Time" value="${time}" class="flatpickr flatpickr-input" data-format="h:i K" readonly="readonly">
+                                                <i class="fa-regular fa-clock"></i>
                                             </div>
                                         </div>
-                                        <div class="tf-repeater-content-wrap">
-                                            <div class="tf-field tf-field-time" style="width: calc(50% - 6px);">
-                                                <label class="tf-field-label"> Time </label>
-                                                <div class="tf-fieldset">
-                                                    <input type="text" name="allowed_time[time][]" placeholder="Select Time" value="${time}" class="flatpickr flatpickr-input" data-format="h:i K" readonly="readonly">
-                                                    <i class="fa-regular fa-clock"></i>
-                                                </div>
-                                            </div>
-                                            <div class="tf-field tf-field-number" style="width: calc(50% - 6px);">
-                                                <label class="tf-field-label"> Maximum Capacity </label>
-                                                <div class="tf-fieldset">
-                                                    <input type="number" name="allowed_time[cont_max_capacity][]" value="${capacity}">
-                                                </div>
+                                        <div class="tf-field tf-field-number" style="width: calc(50% - 6px);">
+                                            <div class="tf-fieldset">
+                                                <input type="number" name="allowed_time[cont_max_capacity][]" id="allowed_time[cont_max_capacity]" value="${capacity}" placeholder="Maximum Capacity">
                                             </div>
                                         </div>
+                                        <span class="tf-repeater-icon tf-repeater-icon-delete">
+                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M15 5L5 15" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                <path d="M5 5L15 15" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                        </span>
                                     </div>
-                                `;
+                                </div>
+                            `;
+
                             });
                         }
                     }

@@ -3094,7 +3094,7 @@ Steps
   width: 100%;
   padding: 12px 8px 12px 12px;
   height: 40px;
-  color: #566676;
+  color: #27333F;
   font-size: 15px;
   padding: 8px 8px 8px 12px;
   border: 1px solid #D9E0E8;
@@ -3112,34 +3112,34 @@ Steps
 .tf-field-ical input::-webkit-input-placeholder,
 .tf-field-ical_export input::-webkit-input-placeholder,
 .tf-field-text input::-webkit-input-placeholder, .tf-field-password input::-webkit-input-placeholder {
-  color: #566676;
+  color: #27333F;
 }
 .tf-field-ical input::-ms-input-placeholder,
 .tf-field-ical_export input::-ms-input-placeholder,
 .tf-field-text input::-ms-input-placeholder, .tf-field-password input::-ms-input-placeholder {
-  color: #566676;
+  color: #27333F;
 }
 .tf-field-ical input input:-ms-input-placeholder,
 .tf-field-ical_export input input:-ms-input-placeholder,
 .tf-field-text input input:-ms-input-placeholder, .tf-field-password input input:-ms-input-placeholder {
-  color: #566676;
+  color: #27333F;
 }
 .tf-field-ical input::-moz-placeholder,
 .tf-field-ical_export input::-moz-placeholder,
 .tf-field-text input::-moz-placeholder, .tf-field-password input::-moz-placeholder {
   opacity: 1;
-  color: #566676;
+  color: #27333F;
 }
 .tf-field-ical input:-moz-placeholder,
 .tf-field-ical_export input:-moz-placeholder,
 .tf-field-text input:-moz-placeholder, .tf-field-password input:-moz-placeholder {
   opacity: 1;
-  color: #566676;
+  color: #27333F;
 }
 .tf-field-ical input::placeholder,
 .tf-field-ical_export input::placeholder,
 .tf-field-text input::placeholder, .tf-field-password input::placeholder {
-  color: #566676;
+  color: #27333F;
 }
 .tf-field-ical input:read-only,
 .tf-field-ical_export input:read-only,
@@ -3945,11 +3945,12 @@ Steps
   width: 100%;
   padding: 12px 8px 12px 12px;
   border: none;
-  background-color: #f5f8ff;
+  border: 1px solid #D9E0E8;
+  background: #F5F9FF;
   border-radius: 4px;
-  height: 48px;
-  color: #363e4a;
-  font-size: 0.875rem;
+  height: 40px;
+  color: #27333F;
+  font-size: 15px;
   border: 1px solid #c4cbd4;
 }
 .tf-field-time input:focus {
@@ -3958,31 +3959,31 @@ Steps
   border-radius: 4px;
 }
 .tf-field-time input::-webkit-input-placeholder {
-  color: #a6b1bf;
+  color: #27333F;
 }
 .tf-field-time input::-ms-input-placeholder {
-  color: #a6b1bf;
+  color: #27333F;
 }
 .tf-field-time input input:-ms-input-placeholder {
-  color: #a6b1bf;
+  color: #27333F;
 }
 .tf-field-time input::-moz-placeholder {
   opacity: 1;
-  color: #a6b1bf;
+  color: #27333F;
 }
 .tf-field-time input:-moz-placeholder {
   opacity: 1;
-  color: #a6b1bf;
+  color: #27333F;
 }
 .tf-field-time input::placeholder {
-  color: #a6b1bf;
+  color: #27333F;
 }
 .tf-field-time i {
   position: absolute;
   top: 50%;
   right: 8px;
   transform: translateY(-50%);
-  color: #a6b1bf;
+  color: #27333F;
   font-size: 1rem;
 }
 
@@ -4463,7 +4464,7 @@ Steps
   width: 100%;
   border-radius: 4px;
   height: 40px;
-  color: #566676;
+  color: #27333F;
   font-size: 15px;
   padding: 8px 8px 8px 12px;
   border: 1px solid #D9E0E8;
@@ -4478,24 +4479,24 @@ Steps
   border: 1px solid #D9E0E8;
 }
 .tf-field-number input::-webkit-input-placeholder {
-  color: #a6b1bf;
+  color: #27333F;
 }
 .tf-field-number input::-ms-input-placeholder {
-  color: #a6b1bf;
+  color: #27333F;
 }
 .tf-field-number input input:-ms-input-placeholder {
-  color: #a6b1bf;
+  color: #27333F;
 }
 .tf-field-number input::-moz-placeholder {
   opacity: 1;
-  color: #a6b1bf;
+  color: #27333F;
 }
 .tf-field-number input:-moz-placeholder {
   opacity: 1;
-  color: #a6b1bf;
+  color: #27333F;
 }
 .tf-field-number input::placeholder {
-  color: #a6b1bf;
+  color: #27333F;
 }
 .tf-field-number input::-webkit-outer-spin-button, .tf-field-number input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -4514,7 +4515,7 @@ Steps
 }
 .tf-field-number .tf-unit-price-box input {
   border: 0px solid;
-  color: #566676;
+  color: #27333F;
   text-align: center;
   font-size: 15px;
   background-color: transparent;
@@ -5029,6 +5030,41 @@ a.tf-import-btn, a.tf-export-btn {
   border: 0;
   padding: 0;
   margin: 0;
+}
+.tf-tour-cal-wrap .tf-date-time-selection .tf-field-repeater .tf-repeater-content-wrap {
+  padding: 0 1px 0 0;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 16px;
+}
+.tf-tour-cal-wrap .tf-date-time-selection .tf-field-repeater .tf-repeater-content-wrap .tf-field {
+  padding: 0;
+}
+.tf-tour-cal-wrap .tf-date-time-selection .tf-field-repeater .tf-repeater-content-wrap .tf-repeater-icon-delete {
+  cursor: pointer;
+}
+.tf-tour-cal-wrap .tf-save-calendar {
+  display: flex;
+  gap: 16px;
+}
+.tf-tour-cal-wrap .button-primary,
+.tf-tour-cal-wrap .button-secondary {
+  border-radius: 8px;
+  background: #EBF5FF;
+  color: #003C79;
+  border-radius: 8px;
+  padding: 12px 32px !important;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 24px !important;
+  border: 0px solid;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.tf-tour-cal-wrap .button-primary {
+  background: linear-gradient(180deg, #0051A3 0%, #003C79 100%);
+  color: #FFFFFF;
 }
 
 @-webkit-keyframes tf-rotate {

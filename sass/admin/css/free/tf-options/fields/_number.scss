@@ -4,7 +4,7 @@
     width: 100%;
     border-radius: 4px;
     height: 40px;
-    color: $tf_text_paragraph;
+    color: $tf_text_title;
     font-size: 15px;
     padding: 8px 8px 8px 12px;
     border: 1px solid $tf_border_default;
@@ -20,29 +20,29 @@
     }
 
     &::-webkit-input-placeholder {
-      color: $slate30;
+      color: $tf_text_title;
     }
 
     &::-ms-input-placeholder {
-      color: $slate30;
+      color: $tf_text_title;
     }
 
     input:-ms-input-placeholder {
-      color: $slate30;
+      color: $tf_text_title;
     }
 
     &::-moz-placeholder {
       opacity: 1;
-      color: $slate30;
+      color: $tf_text_title;
     }
 
     &:-moz-placeholder {
       opacity: 1;
-      color: $slate30;
+      color: $tf_text_title;
     }
 
     &::placeholder {
-      color: $slate30;
+      color: $tf_text_title;
     }
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {
@@ -63,7 +63,7 @@
     }
     input{
       border: 0px solid;
-      color: $tf_text_paragraph;
+      color: $tf_text_title;
       text-align: center;
       font-size: 15px;
       background-color: transparent;

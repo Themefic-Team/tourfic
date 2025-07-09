@@ -316,7 +316,42 @@
             border: 0;
             padding: 0;
             margin: 0;
+            .tf-repeater-content-wrap{
+                padding: 0 1px 0 0;
+                flex-wrap: nowrap;
+                align-items: center;
+                gap: 16px;
+                .tf-field{
+                    padding: 0;
+                }
+                .tf-repeater-icon-delete{
+                    cursor: pointer;
+                }
+            }
         }
+    }
+    .tf-save-calendar{
+        display: flex;
+        gap: 16px;
+    }
+    .button-primary,
+    .button-secondary{
+        border-radius: 8px;
+        background: $tf_fill_alternative;
+        color: $tf_primary_default;
+        border-radius: 8px;
+        padding: 12px 32px !important;
+        font-size: 15px;
+        font-weight: 600;
+        line-height: 24px !important;
+        border: 0px solid;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    .button-primary{
+        background: linear-gradient(180deg, #0051A3 0%, #003C79 100%);
+        color: $tf_fill_white;
     }
 }
 @-webkit-keyframes tf-rotate {
