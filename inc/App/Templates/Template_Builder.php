@@ -699,6 +699,7 @@ class Template_Builder {
         if (is_wp_error($terms)) {
             wp_send_json_error(['message' => $terms->get_error_message()]);
         }
+        $selected_term = '';
         if(!empty($post_id)){
             $selected_term = get_post_meta($post_id, 'tf_taxonomy_term', true);
         }
@@ -920,8 +921,19 @@ class Template_Builder {
                 'post_id' => $post_id,
                 'message' => esc_html__('Template saved successfully.', 'tourfic'),
             );
+            // If it's a single template and no preview post was selected, get the most recent one
+            if ($tf_template_type === 'single') {
+                $preview_post = $this->get_preview_post_for_service($tf_template_service);
+                if ($preview_post) {
+                    $tf_preview_post_id = $preview_post->ID;
+                }
+            }
             if($edit_with_elementor){
-                $response['edit_url'] = add_query_arg(array('post' => $post_id, 'action' => 'elementor'), admin_url('post.php'));
+                $response['edit_url'] = add_query_arg(array(
+                    'post' => $post_id, 
+                    'action' => 'elementor',
+                    'tf_preview_post_id' => $tf_preview_post_id
+                ), admin_url('post.php'));
             }
             wp_send_json_success($response);
         } else {
@@ -1025,7 +1037,7 @@ class Template_Builder {
             
             // If no taxonomy/term specific template, try for a general single template
             if (!$active_template) {
-                $active_template = $this->get_single_active_template_by_taxonomy($post_type, 'single', 'all', 'all');
+                $active_template = $this->get_single_active_template_by_taxonomy($post_type, 'single', 'all', '');
             }
             
             if ($active_template) {
@@ -1034,6 +1046,18 @@ class Template_Builder {
         }
 
         return $template;
+    }
+
+    private function get_preview_post_for_service($service) {
+        $args = [
+            'post_type' => $service,
+            'posts_per_page' => 1,
+            'orderby' => 'rand'
+        ];
+        
+        $posts = get_posts($args);
+        
+        return !empty($posts) ? $posts[0] : false;
     }
 
     /**
@@ -1245,17 +1269,33 @@ class Template_Builder {
         if ($post->post_type === 'tf_template_builder') {
             $service = get_post_meta($post->ID, 'tf_template_service', true);
             $template_type = get_post_meta($post->ID, 'tf_template_type', true);
+            $taxonomy_type = get_post_meta($post->ID, 'tf_taxonomy_type', true);
+            $taxonomy_term = get_post_meta($post->ID, 'tf_taxonomy_term', true);
 
             if ($template_type === 'single' && !empty($service)) {
-                // Get a sample post of the selected service type
-                $sample_post = get_posts([
+                // Fallback to finding a random post
+                $args = [
                     'post_type' => $service,
                     'posts_per_page' => 1,
                     'orderby' => 'rand'
-                ]);
+                ];
+                
+                // Apply taxonomy filters if set
+                if ($taxonomy_type && $taxonomy_type !== 'all') {
+                    $args['tax_query'] = [
+                        [
+                            'taxonomy' => $taxonomy_type,
+                            'field' => 'slug',
+                            'terms' => $taxonomy_term === 'all' ? [] : $taxonomy_term,
+                        ]
+                    ];
+                }
+                
+                $posts = get_posts($args);
+                $preview_post_id = !empty($posts) ? $posts[0]->ID : 0;
 
-                if (!empty($sample_post)) {
-                    return get_permalink($sample_post[0]->ID) . '?elementor-preview=' . $post->ID . '&ver=' . time();
+                if (!empty($preview_post_id)) {
+                    return get_permalink($preview_post_id) . '?elementor-preview=' . $post->ID . '&ver=' . time();
                 }
             }
         }
@@ -1292,7 +1332,7 @@ class Template_Builder {
 
                 if (!empty($sample_post)) {
                     // Add the template post ID as a parameter
-                    return add_query_arg('tf_template_id', $sample_post[0]->ID, $url);
+                    return add_query_arg('tf_preview_post_id', $sample_post[0]->ID, $url);
                 }
             }
         }
@@ -1301,26 +1341,48 @@ class Template_Builder {
     }
 
     public function setup_editor_post_data() {
-        if (!isset($_GET['tf_template_id'])) {
+        if (!isset($_GET['tf_preview_post_id'])) {
             return;
         }
 
-        $post_id = intval($_GET['tf_template_id']);
-        $post = get_post($post_id);
-        if ($post) {
-            setup_postdata($post);
+        $post_id = intval($_GET['tf_preview_post_id']);
+        $preview_post = get_post($post_id);
+        if ($preview_post) {
+            global $post, $wp_query;
+        
+            // Store original post
+            $original_post = $post;
+            
+            // Set up the preview post data
+            $post = $preview_post;
+            setup_postdata($preview_post);
+            
+            // Filter to ensure Elementor uses our preview post for dynamic content
+            add_filter('elementor/frontend/builder_content_data', function($data) use ($preview_post) {
+                $data['post_id'] = $preview_post->ID;
+                $data['post'] = $preview_post;
+                return $data;
+            });
+            
+            // // Restore original post when editor is done
+            add_action('elementor/editor/after_enqueue_scripts', function() use ($original_post) {
+                wp_reset_postdata();
+                global $post;
+                $post = $original_post;
+                setup_postdata($post);
+            });
         }
     }
 
     public function modify_elementor_document_config($config, $post_id) {
-        if (isset($_GET['tf_template_id']) && is_numeric($_GET['tf_template_id'])) {
-            $template_id = intval($_GET['tf_template_id']);
-            $template_post = get_post($template_id);
+        if (isset($_GET['tf_preview_post_id']) && is_numeric($_GET['tf_preview_post_id'])) {
+            $tf_preview_post_id = intval($_GET['tf_preview_post_id']);
+            $tf_preview_post = get_post($tf_preview_post_id);
 
-            if ($template_post) {
+            if ($tf_preview_post) {
                 // Ensure Elementor loads the template builder post, not the sample post
-                $config['post_id'] = $template_id;
-                $config['post'] = $template_post;
+                $config['post_id'] = $tf_preview_post_id;
+                $config['post'] = $tf_preview_post;
             }
         }
 
