@@ -3153,6 +3153,38 @@ Steps
   box-shadow: none;
   border: 1px solid #c4cbd4;
 }
+.tf-field-ical .tf-field-text-group,
+.tf-field-ical_export .tf-field-text-group,
+.tf-field-text .tf-field-text-group, .tf-field-password .tf-field-text-group {
+  border-radius: 4px;
+  border: 1px solid #D9E0E8;
+  background: #FFFFFF;
+  height: 40px;
+  padding: 8px 8px 8px 12px;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+.tf-field-ical .tf-field-text-group i,
+.tf-field-ical_export .tf-field-text-group i,
+.tf-field-text .tf-field-text-group i, .tf-field-password .tf-field-text-group i {
+  color: #95A3B2;
+}
+.tf-field-ical .tf-field-text-group input,
+.tf-field-ical_export .tf-field-text-group input,
+.tf-field-text .tf-field-text-group input, .tf-field-password .tf-field-text-group input {
+  height: 24px;
+  border: 0px solid;
+  background: transparent;
+  box-shadow: none;
+}
+.tf-field-ical .tf-field-text-group input:focus,
+.tf-field-ical_export .tf-field-text-group input:focus,
+.tf-field-text .tf-field-text-group input:focus, .tf-field-password .tf-field-text-group input:focus {
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
 
 .tf-field-textarea textarea {
   width: 100% !important;
@@ -4982,6 +5014,21 @@ a.tf-import-btn, a.tf-export-btn {
   font-size: 11px;
   font-weight: 600;
   line-height: 16px;
+}
+.tf-tour-cal-wrap .tf-date-time-selection {
+  border-radius: 8px;
+  border: 1px solid #F2F5F7;
+  background: #FFFFFF;
+  padding: 24px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+.tf-tour-cal-wrap .tf-date-time-selection .tf-field-repeater {
+  border: 0;
+  padding: 0;
+  margin: 0;
 }
 
 @-webkit-keyframes tf-rotate {

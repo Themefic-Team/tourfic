@@ -303,6 +303,21 @@
             }
         }
     }
+    .tf-date-time-selection{
+        border-radius: 8px;
+        border: 1px solid $tf_border_faint;
+        background: $tf_fill_white;
+        padding: 24px;
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 24px;
+        .tf-field-repeater{
+            border: 0;
+            padding: 0;
+            margin: 0;
+        }
+    }
 }
 @-webkit-keyframes tf-rotate {
     100% {
