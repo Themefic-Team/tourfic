@@ -618,18 +618,6 @@ class Search_Form extends Widget_Base {
                 'service' => 'tf_carrental',
             ],
         ]);
-
-        $this->add_control('pickup_time_placeholder_text', [
-            'label' => esc_html__('Pick-up Time Placeholder Text', 'tourfic'),
-            'type' => Controls_Manager::TEXT,
-            'dynamic' => [
-                'active' => true,
-            ],
-            'default'   => 'Pick Up Time',
-            'condition' => [
-                'service' => 'tf_carrental',
-            ],
-        ]);
         
         //Drop-off date & time
         $this->add_control('dropoff_date_head',[
@@ -699,18 +687,6 @@ class Search_Form extends Widget_Base {
                 'active' => true,
             ],
             'default'   => 'Time',
-            'condition' => [
-                'service' => 'tf_carrental',
-            ],
-        ]);
-
-        $this->add_control('dropoff_time_placeholder_text', [
-            'label' => esc_html__('Drop-off Time Placeholder Text', 'tourfic'),
-            'type' => Controls_Manager::TEXT,
-            'dynamic' => [
-                'active' => true,
-            ],
-            'default'   => 'Drop Off Time',
             'condition' => [
                 'service' => 'tf_carrental',
             ],
@@ -1326,6 +1302,30 @@ class Search_Form extends Widget_Base {
 		$disable_hotel_child_search      = ! empty( Helper::tfopt( 'disable_hotel_child_search' ) ) ? Helper::tfopt( 'disable_hotel_child_search' ) : '';
 		$disable_apartment_child_search  = ! empty( Helper::tfopt( 'disable_apartment_child_search' ) ) ? Helper::tfopt( 'disable_apartment_child_search' ) : '';
 		$disable_apartment_infant_search = ! empty( Helper::tfopt( 'disable_apartment_infant_search' ) ) ? Helper::tfopt( 'disable_apartment_infant_search' ) : '';
+
+        // Pull options from settings or set fallback values
+        $disable_car_time_slot = !empty(Helper::tfopt('disable-car-time-slots')) ? boolval(Helper::tfopt('disable-car-time-slots')) : false;
+        $time_interval = 30;
+        $start_time_str = '00:00';
+        $end_time_str   = '23:30';
+        $default_time_str = '10:00';
+        if($disable_car_time_slot){
+            $time_interval = !empty(Helper::tfopt('car_time_interval')) ? intval(Helper::tfopt('car_time_interval')) : 30;
+            $start_time_str = !empty(Helper::tfopt('car_start_time')) ? Helper::tfopt('car_start_time') : '00:00';
+            $end_time_str   = !empty(Helper::tfopt('car_end_time')) ? Helper::tfopt('car_end_time') : '23:30';
+        }
+
+        if ( strtotime($start_time_str) >= strtotime('10:00') ) {
+            $default_time_str = $start_time_str;
+        }
+        // Convert string times to timestamps
+        $start_time = strtotime($start_time_str);
+        $end_time   = strtotime($end_time_str);
+        $default_time = date('g:i A', strtotime($default_time_str));
+
+        // Use selected time from GET or fall back to default
+        $selected_pickup_time = !empty($_GET['pickup-time']) ? esc_html($_GET['pickup-time']) : $default_time;
+        $selected_dropoff_time = !empty($_GET['dropoff-time']) ? esc_html($_GET['dropoff-time']) : $default_time;
 
 		if ( ( $service == 'tf_hotel' && $design == "design-1" ) || ( $service == 'tf_tours' && $design == "design-1" ) ) {
 			?>
@@ -2048,7 +2048,7 @@ class Search_Form extends Widget_Base {
                                     </div>
                                     <div class="info-select">
                                         <label><?php echo !empty($settings['pickup_date_label']) ? esc_attr($settings['pickup_date_label']) : esc_html__( 'Pick-up date', 'tourfic' ); ?></label>
-                                        <input type="text" placeholder="<?php echo !empty($settings['pickup_date_placeholder_text']) ? esc_attr($settings['pickup_date_placeholder_text']) : esc_html__( 'Pick Up Date', 'tourfic' ); ?>" class="tf_pickup_date" value="<?php echo !empty($_GET['pickup-date']) ? esc_html($_GET['pickup-date']) : '' ?>" />
+                                        <input type="text" placeholder="<?php echo !empty($settings['pickup_date_placeholder_text']) ? esc_attr($settings['pickup_date_placeholder_text']) : esc_html__( 'Pick Up Date', 'tourfic' ); ?>" class="tf_pickup_date" value="<?php echo !empty($_GET['pickup_date']) ? esc_html($_GET['pickup_date']) : date('Y/m/d', strtotime('+1 day')); ?>" />
                                     </div>
                                 </div>
                             </div>
@@ -2059,8 +2059,29 @@ class Search_Form extends Widget_Base {
                                         <?php echo wp_kses( $pickup_time_icon_html, Helper::tf_custom_wp_kses_allow_tags() ); ?>
                                     </div>
                                     <div class="info-select">
-                                        <label><?php echo !empty($settings['pickup_time_label']) ? esc_attr($settings['pickup_time_label']) : esc_html__( 'Time', 'tourfic' ); ?></label>
-                                        <input type="text" placeholder="<?php echo !empty($settings['pickup_time_placeholder_text']) ? esc_attr($settings['pickup_time_placeholder_text']) : esc_html__( 'Pick Up Time', 'tourfic' ); ?>" class="tf_pickup_time" value="<?php echo !empty($_GET['pickup-time']) ? esc_html($_GET['pickup-time']) : '' ?>" />
+                                        <h5><?php echo !empty($settings['pickup_time_label']) ? esc_attr($settings['pickup_time_label']) : esc_html__( 'Time', 'tourfic' ); ?></h5>
+                                        <div class="selected-pickup-time">
+                                            <div class="text">
+                                                <?php echo esc_html($selected_pickup_time); ?>
+                                            </div>
+                                            <div class="icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                    <path d="M5 7.5L10 12.5L15 7.5" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="tf_pickup_time" class="tf_pickup_time" id="tf_pickup_time" value="<?php echo esc_attr($selected_pickup_time); ?>">
+                                        <div class="tf-select-time">
+                                            <ul class="time-options-list tf-pickup-time">
+                                                <?php
+                                                    for ($time = $start_time; $time <= $end_time; $time += $time_interval * 60) {
+                                                        $time_label = date("g:i A", $time);
+                                                        $selected = ($selected_pickup_time === $time_label) ? 'selected' : '';
+                                                        echo '<li value="' . esc_attr($time_label) . '" ' . $selected . '>' . esc_html($time_label) . '</li>';
+                                                    }
+                                                ?>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -2074,7 +2095,7 @@ class Search_Form extends Widget_Base {
                                     </div>
                                     <div class="info-select">
                                         <label><?php echo !empty($settings['dropoff_date_label']) ? esc_attr($settings['dropoff_date_label']) : esc_html__( 'Drop-off date', 'tourfic' ); ?></label>
-                                        <input type="text" placeholder="<?php echo !empty($settings['dropoff_date_placeholder_text']) ? esc_attr($settings['dropoff_date_placeholder_text']) : esc_html__( 'Drop Off Date', 'tourfic' ); ?>" class="tf_dropoff_date" value="<?php echo !empty($_GET['dropoff-date']) ? esc_html($_GET['dropoff-date']) : '' ?>" />
+                                        <input type="text" placeholder="<?php echo !empty($settings['dropoff_date_placeholder_text']) ? esc_attr($settings['dropoff_date_placeholder_text']) : esc_html__( 'Drop Off Date', 'tourfic' ); ?>" class="tf_dropoff_date" value="<?php echo !empty($_GET['dropoff-date']) ? esc_html($_GET['dropoff-date']) : date('Y/m/d', strtotime('+2 day')) ?>" />
                                     </div>
                                 </div>
                             </div>
@@ -2085,8 +2106,29 @@ class Search_Form extends Widget_Base {
                                         <?php echo wp_kses( $dropoff_time_icon_html, Helper::tf_custom_wp_kses_allow_tags() ); ?>
                                     </div>
                                     <div class="info-select">
-                                        <label><?php echo !empty($settings['dropoff_time_label']) ? esc_attr($settings['dropoff_time_label']) : esc_html__( 'Time', 'tourfic' ); ?></label>
-                                        <input type="text" placeholder="<?php echo !empty($settings['dropoff_time_placeholder_text']) ? esc_attr($settings['dropoff_time_placeholder_text']) : esc_html__( 'Drop Off Time', 'tourfic' ); ?>" class="tf_dropoff_time" value="<?php echo !empty($_GET['dropoff-time']) ? esc_html($_GET['dropoff-time']) : '' ?>" />
+                                        <h5><?php echo !empty($settings['dropoff_time_label']) ? esc_attr($settings['dropoff_time_label']) : esc_html__( 'Time', 'tourfic' ); ?></h5>
+                                        <div class="selected-dropoff-time">
+                                            <div class="text">
+                                                <?php echo esc_html($selected_dropoff_time); ?>
+                                            </div>
+                                            <div class="icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                    <path d="M5 7.5L10 12.5L15 7.5" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="tf_dropoff_time" class="tf_dropoff_time" id="tf_dropoff_time" value="<?php echo esc_attr($selected_dropoff_time); ?>">
+                                        <div class="tf-select-time">
+                                            <ul class="time-options-list tf-dropoff-time">
+                                                <?php
+                                                    for ($time = $start_time; $time <= $end_time; $time += $time_interval * 60) {
+                                                        $time_label = date("g:i A", $time);
+                                                        $selected = ($selected_dropoff_time === $time_label) ? 'selected' : '';
+                                                        echo '<li value="' . esc_attr($time_label) . '" ' . $selected . '>' . esc_html($time_label) . '</li>';
+                                                    }
+                                                ?>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -2164,45 +2206,6 @@ class Search_Form extends Widget_Base {
                                             instance.element.value = dateStr.replace(/[a-z]+/g, '-');
                                         }
                                     });
-
-                                    // Initialize the pickup time picker
-                                    var pickupTimeFlatpickr = $(".tf_pickup_time").flatpickr({
-                                        enableTime: true,
-                                        noCalendar: true,
-                                        dateFormat: "H:i",
-                                        disableMobile: "true",
-
-                                        // flatpickr locale
-                                        <?php Helper::tf_flatpickr_locale(); ?>
-
-                                        onReady: function (selectedDates, dateStr, instance) {
-                                            instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-                                        },
-                                        onChange: function (selectedDates, dateStr, instance) {
-                                            instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-                                            // Update minDate for the dropoff date picker
-                                            dropoffTimeFlatpickr.set("minTime", dateStr);
-                                        }
-                                    });
-
-                                    var dropoffTimeFlatpickr = $(".tf_dropoff_time").flatpickr({
-                                        enableTime: true,
-                                        noCalendar: true,
-                                        dateFormat: "H:i",
-                                        disableMobile: "true",
-                                        // flatpickr locale
-                                        <?php Helper::tf_flatpickr_locale(); ?>
-
-                                        onReady: function (selectedDates, dateStr, instance) {
-                                            instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-                                        },
-                                        onChange: function (selectedDates, dateStr, instance) {
-                                            instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-                                            // Update minDate for the dropoff date picker
-                                            dropoffFlatpickr.set("minDate", dateStr);
-                                        }
-                                    });
-
                                 });
                             })(jQuery);
 
