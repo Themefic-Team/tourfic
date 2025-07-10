@@ -5069,27 +5069,27 @@ a.tf-import-btn, a.tf-export-btn {
 .tf-tour-cal-wrap .tf-single-options .tf-single-repeater:last-child {
   margin-bottom: 0px;
 }
-.tf-tour-cal-wrap .tf-single-options .tf-single-repeater .tf-field-tab_switch .tf-fieldset {
+.tf-tour-cal-wrap .tf-single-options .tf-single-repeater .tf-field-accordion .tf-fieldset {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
-.tf-tour-cal-wrap .tf-single-options .tf-single-repeater .tf-field-tab_switch .tf-fieldset .tf-field-repeater {
+.tf-tour-cal-wrap .tf-single-options .tf-single-repeater .tf-field-accordion .tf-fieldset .tf-field-repeater {
   padding: 16px;
 }
-.tf-tour-cal-wrap .tf-single-options .tf-single-repeater .tf-field-tab_switch .tf-fieldset .tf-field-repeater .tf-single-repeater:last-child {
+.tf-tour-cal-wrap .tf-single-options .tf-single-repeater .tf-field-accordion .tf-fieldset .tf-field-repeater .tf-single-repeater:last-child {
   margin-bottom: 16px;
 }
-.tf-tour-cal-wrap .tf-single-options .tf-single-repeater .tf-field-tab_switch .tf-fieldset .tf-field-repeater .tf-single-repeater .tf-repeater-content-wrap {
+.tf-tour-cal-wrap .tf-single-options .tf-single-repeater .tf-field-accordion .tf-fieldset .tf-field-repeater .tf-single-repeater .tf-repeater-content-wrap {
   padding: 0;
   align-items: center;
   gap: 16px;
   flex-wrap: nowrap;
 }
-.tf-tour-cal-wrap .tf-single-options .tf-single-repeater .tf-field-tab_switch .tf-fieldset .tf-field-repeater .tf-single-repeater .tf-repeater-content-wrap .tf-field {
+.tf-tour-cal-wrap .tf-single-options .tf-single-repeater .tf-field-accordion .tf-fieldset .tf-field-repeater .tf-single-repeater .tf-repeater-content-wrap .tf-field {
   padding: 0;
 }
-.tf-tour-cal-wrap .tf-single-options .tf-single-repeater .tf-field-tab_switch .tf-fieldset .tf-field-repeater .tf-single-repeater .tf-repeater-content-wrap .tf-repeater-icon-delete {
+.tf-tour-cal-wrap .tf-single-options .tf-single-repeater .tf-field-accordion .tf-fieldset .tf-field-repeater .tf-single-repeater .tf-repeater-content-wrap .tf-repeater-icon-delete {
   cursor: pointer;
 }
 
@@ -5366,7 +5366,7 @@ a.tf-import-btn, a.tf-export-btn {
   opacity: 0;
 }
 
-.tf-field-tab_switch .tf-tab-switch-box .tf-tab-field-header {
+.tf-field-accordion .tf-tab-switch-box .tf-tab-field-header {
   border-radius: 4px 4px 0px 0px;
   border-bottom: 1px solid #D9E0E8;
   background: #F5F9FF;
@@ -5375,18 +5375,18 @@ a.tf-import-btn, a.tf-export-btn {
   justify-content: space-between;
   gap: 8px;
 }
-.tf-field-tab_switch .tf-tab-switch-box .tf-tab-field-header .field-label {
+.tf-field-accordion .tf-tab-switch-box .tf-tab-field-header .field-label {
   color: #27333F;
   font-size: 15px;
   font-weight: 400;
   line-height: 24px;
 }
-.tf-field-tab_switch .tf-tab-switch-box .tf-tab-field-header .tf-field-collapas {
+.tf-field-accordion .tf-tab-switch-box .tf-tab-field-header .tf-field-collapas {
   display: flex;
   align-items: center;
   gap: 8px;
 }
-.tf-field-tab_switch .tf-tab-switch-box .tf-tab-field-header .tf-field-collapas i {
+.tf-field-accordion .tf-tab-switch-box .tf-tab-field-header .tf-field-collapas i {
   display: flex;
   width: 24px;
   height: 24px;
@@ -5397,21 +5397,21 @@ a.tf-import-btn, a.tf-export-btn {
   line-height: 26px;
   cursor: pointer;
 }
-.tf-field-tab_switch .tf-tab-switch-box .tf-tab-field-header .tf-field-collapas i.rotated {
+.tf-field-accordion .tf-tab-switch-box .tf-tab-field-header .tf-field-collapas i.rotated {
   transform: rotate(180deg);
 }
-.tf-field-tab_switch .tf-tab-switch-box .tf-tab-field-header .tf-field-collapas .tf-field {
+.tf-field-accordion .tf-tab-switch-box .tf-tab-field-header .tf-field-collapas .tf-field {
   padding: 0;
   width: 32px !important;
 }
-.tf-field-tab_switch .tf-tab-switch-box .tf-tab-field-header .tf-field-collapas .tf-field .tf-inline-switch {
+.tf-field-accordion .tf-tab-switch-box .tf-tab-field-header .tf-field-collapas .tf-field .tf-inline-switch {
   justify-content: end;
   width: 32px;
 }
-.tf-field-tab_switch .tf-tab-switch-box .tf-tab-field-header .tf-field-collapas .tf-field .tf-inline-switch .tf-field-label {
+.tf-field-accordion .tf-tab-switch-box .tf-tab-field-header .tf-field-collapas .tf-field .tf-inline-switch .tf-field-label {
   display: none !important;
 }
-.tf-field-tab_switch .tf-tab-switch-box .tf-tab-field-content {
+.tf-field-accordion .tf-tab-switch-box .tf-tab-field-content {
   border-radius: 0px 0px 4px 4px;
   border: 1px solid #F2F5F7;
   background: #FFFCF5;

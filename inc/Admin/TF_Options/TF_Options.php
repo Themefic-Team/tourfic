@@ -218,7 +218,7 @@ class TF_Options {
         <div class="tf-field tf-field-<?php echo esc_attr( $field['type'] ); ?> <?php echo esc_attr( $class ); ?> <?php echo ! empty( $visible ) ? wp_kses_post( $visible ) : ''; ?>" <?php echo ! empty( $depend ) ? wp_kses_post( $depend ) : ''; ?>
              style="<?php echo esc_attr( $field_style ); ?>">
 
-			<?php if ( ! empty( $field['label'] ) && $field['type']!='switch' && $field['type']!='tab_switch' ){ ?>
+			<?php if ( ! empty( $field['label'] ) && $field['type']!='switch' && $field['type']!='accordion' ){ ?>
                 <label for="<?php echo esc_attr( $id ) ?>" class="tf-field-label">
 					<?php echo esc_html( $field['label'] ) ?>
 					<?php if ( ! empty( $field['subtitle'] ) ) : ?>
@@ -1198,7 +1198,7 @@ class TF_Options {
 					</div>
 
 					<div class="tf-repeater-content-wrap" style="display: none;">
-						<div class="tf-field tf-field-tab_switch" style="width: 100%;">
+						<div class="tf-field tf-field-accordion" style="width: 100%;">
 							<div class="tf-fieldset">
 
 								<div id="adult_tabs" class="tf-tab-switch-box"  style="display: <?php echo $item['type'] == 'person' ? 'block' : 'none' ?>;">
@@ -1414,7 +1414,7 @@ class TF_Options {
 								<input type="hidden" name="tf_option_title_<?php echo esc_attr( $item['index'] ); ?>" value="<?php echo esc_attr($item['title']); ?>"/>
 								<input type="hidden" name="tf_option_pricing_type_<?php echo esc_attr( $item['index'] ); ?>" value="<?php echo esc_attr($item['type']); ?>"/>
 							</div>
-						</div> <!-- .tf-field-tab_switch -->
+						</div> <!-- .tf-field-accordion -->
 					</div> <!-- .tf-repeater-content-wrap -->
 				</div> <!-- .tf-single-repeater -->
             <?php

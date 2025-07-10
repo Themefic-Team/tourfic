@@ -5,8 +5,8 @@ use Tourfic\Classes\Helper;
 
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'TF_Tab_Switch' ) ) {
-	class TF_Tab_Switch extends TF_Fields {
+if ( ! class_exists( 'TF_Accordion' ) ) {
+	class TF_Accordion extends TF_Fields {
 
 		public function __construct( $field, $value = '', $settings_id = '', $parent_field = '' ) {
 			parent::__construct( $field, $value, $settings_id, $parent_field );
