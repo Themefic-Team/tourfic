@@ -2298,6 +2298,11 @@
             
         });
 
+        // Repeater show hide
+        $(document).on('click', '.tf-avail-repeater-collapse', function () {
+            $(this).closest('.tf-single-repeater').find('.tf-repeater-content-wrap').slideToggle(200);
+        });
+
         // TAB jquery
         $(document).on('click', '.tf-tab-item', function () {
             var $this = $(this);

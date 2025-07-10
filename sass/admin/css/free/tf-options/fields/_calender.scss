@@ -353,6 +353,40 @@
         background: linear-gradient(180deg, #0051A3 0%, #003C79 100%);
         color: $tf_fill_white;
     }
+    .tf-single-options{
+        .tf-single-repeater{
+            &:last-child{
+                margin-bottom: 0px;
+            }
+            .tf-field-tab_switch{
+                .tf-fieldset{
+                    display: flex;
+                    flex-direction: column;
+                    gap: 16px;
+                    .tf-field-repeater{
+                        padding: 16px;
+                        .tf-single-repeater{
+                            &:last-child{
+                                margin-bottom: 16px;
+                            }
+                            .tf-repeater-content-wrap{
+                                padding: 0;
+                                align-items: center;
+                                gap: 16px;
+                                flex-wrap: nowrap;
+                                .tf-field{
+                                    padding: 0;
+                                }
+                                .tf-repeater-icon-delete{
+                                    cursor: pointer;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 @-webkit-keyframes tf-rotate {
     100% {

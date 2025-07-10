@@ -5066,6 +5066,32 @@ a.tf-import-btn, a.tf-export-btn {
   background: linear-gradient(180deg, #0051A3 0%, #003C79 100%);
   color: #FFFFFF;
 }
+.tf-tour-cal-wrap .tf-single-options .tf-single-repeater:last-child {
+  margin-bottom: 0px;
+}
+.tf-tour-cal-wrap .tf-single-options .tf-single-repeater .tf-field-tab_switch .tf-fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.tf-tour-cal-wrap .tf-single-options .tf-single-repeater .tf-field-tab_switch .tf-fieldset .tf-field-repeater {
+  padding: 16px;
+}
+.tf-tour-cal-wrap .tf-single-options .tf-single-repeater .tf-field-tab_switch .tf-fieldset .tf-field-repeater .tf-single-repeater:last-child {
+  margin-bottom: 16px;
+}
+.tf-tour-cal-wrap .tf-single-options .tf-single-repeater .tf-field-tab_switch .tf-fieldset .tf-field-repeater .tf-single-repeater .tf-repeater-content-wrap {
+  padding: 0;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: nowrap;
+}
+.tf-tour-cal-wrap .tf-single-options .tf-single-repeater .tf-field-tab_switch .tf-fieldset .tf-field-repeater .tf-single-repeater .tf-repeater-content-wrap .tf-field {
+  padding: 0;
+}
+.tf-tour-cal-wrap .tf-single-options .tf-single-repeater .tf-field-tab_switch .tf-fieldset .tf-field-repeater .tf-single-repeater .tf-repeater-content-wrap .tf-repeater-icon-delete {
+  cursor: pointer;
+}
 
 @-webkit-keyframes tf-rotate {
   100% {
