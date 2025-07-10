@@ -25,12 +25,33 @@ class Template_Builder {
             add_filter('template_include', array($this, 'tf_template_builder_custom_template'));
             add_action('save_post_tf_template_builder', [$this, 'enforce_elementor_template_on_save'], 20, 3);
 
-            // add_filter('elementor/document/urls/preview', [$this, 'modify_elementor_preview_url'], 10, 2);
             add_filter('elementor/document/urls/edit', [$this, 'modify_elementor_edit_url'], 10, 2);
             add_action('elementor/editor/init', [$this, 'setup_editor_post_data']);
             add_filter('elementor/document/config', [$this, 'modify_elementor_document_config'], 10, 2);
 
+            add_action('elementor/editor/after_enqueue_scripts', function() {
+                ?>
+                <script>
+                (function($){
+                    window.elementor.on('panel:widget:drag:stop', () => {
+                        // Force the preview to re-render
+                        if (window.elementorPreview && window.elementorPreview.render) {
+                            window.elementorPreview.render();
+                        }
+                    });
 
+                    // Also when content updates, for example when settings change
+                    window.elementor.channels.editor.on('section:activated', () => {
+                        setTimeout(() => {
+                            if (window.elementorPreview && window.elementorPreview.render) {
+                                window.elementorPreview.render();
+                            }
+                        }, 500); // slight delay to let section content apply
+                    });
+                })(jQuery);
+                </script>
+                <?php
+            });
             // add_action('elementor/editor/init', [$this, 'elementor_editor_initialized']);
         }
 	}
@@ -1262,46 +1283,6 @@ class Template_Builder {
             }
         }
     }
-    
-    public function modify_elementor_preview_url($url, $document) {
-        $post = $document->get_post();
-
-        if ($post->post_type === 'tf_template_builder') {
-            $service = get_post_meta($post->ID, 'tf_template_service', true);
-            $template_type = get_post_meta($post->ID, 'tf_template_type', true);
-            $taxonomy_type = get_post_meta($post->ID, 'tf_taxonomy_type', true);
-            $taxonomy_term = get_post_meta($post->ID, 'tf_taxonomy_term', true);
-
-            if ($template_type === 'single' && !empty($service)) {
-                // Fallback to finding a random post
-                $args = [
-                    'post_type' => $service,
-                    'posts_per_page' => 1,
-                    'orderby' => 'rand'
-                ];
-                
-                // Apply taxonomy filters if set
-                if ($taxonomy_type && $taxonomy_type !== 'all') {
-                    $args['tax_query'] = [
-                        [
-                            'taxonomy' => $taxonomy_type,
-                            'field' => 'slug',
-                            'terms' => $taxonomy_term === 'all' ? [] : $taxonomy_term,
-                        ]
-                    ];
-                }
-                
-                $posts = get_posts($args);
-                $preview_post_id = !empty($posts) ? $posts[0]->ID : 0;
-
-                if (!empty($preview_post_id)) {
-                    return get_permalink($preview_post_id) . '?elementor-preview=' . $post->ID . '&ver=' . time();
-                }
-            }
-        }
-
-        return $url;
-    }
 
     public function modify_elementor_edit_url($url, $document) {
         $post = $document->get_post();
@@ -1371,6 +1352,9 @@ class Template_Builder {
                 $post = $original_post;
                 setup_postdata($post);
             });
+
+            
+
         }
     }
 
