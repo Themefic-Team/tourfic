@@ -13,6 +13,20 @@ if ( ! class_exists( 'TF_Tab_Switch' ) ) {
 		}
 
 		public function render() {
+
+            if(!is_array($this->value)){
+                $tf_rep_value = preg_replace_callback('!s:(\d+):"(.*?)";!', function ($match) {
+                    return 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+                }, $this->value);
+
+                if (@unserialize($tf_rep_value) !== false || $tf_rep_value === 'b:0;') {
+                    $data = @unserialize($tf_rep_value);
+                } else {
+                    $data = [];
+                }
+            }else{
+                $data = $this->value;
+            }
 			?>
             <div id="<?php echo isset( $this->field['id'] ) ? esc_attr( $this->field['id'] ) : '' ?>" class="tf-tab-switch-box">
                 <div class="tf-tab-field-header">
@@ -23,23 +37,20 @@ if ( ! class_exists( 'TF_Tab_Switch' ) ) {
                     <i class="fa fa-angle-down" aria-hidden="true"></i>
                     <?php foreach ( $this->field['fields'] as $key => $field ) :
                     if($key==0){
-                        $parent  = '[' . $this->field['id'] . ']';
-                        $default = isset( $field['default'] ) ? $field['default'] : '';
-                        $value   = isset( $tf_meta_box_value[ $field['id'] ] ) ? $tf_meta_box_value[ $field['id'] ] : $default;
-
-                        if ( ! empty( $this->value ) ) {
-                                            
-                            $data = ( ! is_array( $this->value ) ) ? unserialize( $this->value ) : $this->value;
-                            if ( is_array( $data ) ) {
-                                if ( isset( $data[ $field['id'] ] ) ) {
-                                    $value = ( isset( $field['id'] ) ) ? $data[ $field['id'] ] : '';
-                                    $value = ($field['type'] == 'text' || $field['type'] == 'textarea') ? stripslashes($value) : $value;
-                                } else {
-                                    $value = $default;
-                                }
-                            }
+                        if(!empty($this->parent_field)){
+                            $parent = $this->parent_field.'[' . $this->field['id'] . '][' . $key . ']';
+                        }else{
+                            $parent = '[' . $this->field['id'] . '][' . $key . ']';
                         }
                         
+                        $id = ( ! empty( $this->settings_id ) ) ? $this->settings_id . '[' . $this->field['id'] . '][00]' . '[' . $field['id'] . ']' : $this->field['id'] . '[00]' . '[' . $field['id'] . ']';
+    
+                        if ( isset( $tf_meta_box_value[ $id ] ) ) {
+                            $value = isset( $tf_meta_box_value[ $id ] ) ? $tf_meta_box_value[ $id ] : '';
+                        } else {
+                            $value = ( isset( $field['id'] ) && isset( $data[ $key ][ $field['id'] ] ) ) ? $data[ $key ][ $field['id'] ] : '';
+                        }
+
                         // sanitize Wp Editor Field
                         $value = ( $field['type'] == 'editor' ) ? wp_kses_post($value) : $value;
 
@@ -55,21 +66,18 @@ if ( ! class_exists( 'TF_Tab_Switch' ) ) {
                 foreach ( $this->field['fields'] as $key => $field ) :
                     if($key==0)
                     continue;
-                    $parent  = '[' . $this->field['id'] . ']';
-                    $default = isset( $field['default'] ) ? $field['default'] : '';
-                    $value   = isset( $tf_meta_box_value[ $field['id'] ] ) ? $tf_meta_box_value[ $field['id'] ] : $default;
+                    if(!empty($this->parent_field)){
+                        $parent = $this->parent_field.'[' . $this->field['id'] . '][' . $key . ']';
+                    }else{
+                        $parent = '[' . $this->field['id'] . '][' . $key . ']';
+                    }
                     
-                    if ( ! empty( $this->value ) ) {
-										
-                        $data = ( ! is_array( $this->value ) ) ? unserialize( $this->value ) : $this->value;
-                        if ( is_array( $data ) ) {
-                            if ( isset( $data[ $field['id'] ] ) ) {
-                                $value = ( isset( $field['id'] ) ) ? $data[ $field['id'] ] : '';
-                                $value = ($field['type'] == 'text' || $field['type'] == 'textarea') ? stripslashes($value) : $value;
-                            } else {
-                                $value = $default;
-                            }
-                        }
+                    $id = ( ! empty( $this->settings_id ) ) ? $this->settings_id . '[' . $this->field['id'] . '][00]' . '[' . $field['id'] . ']' : $this->field['id'] . '[00]' . '[' . $field['id'] . ']';
+
+                    if ( isset( $tf_meta_box_value[ $id ] ) ) {
+                        $value = isset( $tf_meta_box_value[ $id ] ) ? $tf_meta_box_value[ $id ] : '';
+                    } else {
+                        $value = ( isset( $field['id'] ) && isset( $data[ $key ][ $field['id'] ] ) ) ? $data[ $key ][ $field['id'] ] : '';
                     }
                     
                     // sanitize Wp Editor Field
