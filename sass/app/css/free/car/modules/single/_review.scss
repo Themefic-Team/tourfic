@@ -48,11 +48,15 @@
                             font-weight: 700;
                             cursor: pointer;
                             border: 0px solid;
+                            &::placeholder{
+                                color: $color-white;
+                            }
                         }
                     }
                     textarea{
                         background: transparent;
                         border-color: $color-brand-lite;
+                        
                     }
                 }
                 .tf-review-data{

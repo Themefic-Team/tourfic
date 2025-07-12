@@ -746,6 +746,10 @@
   border: 0px solid;
 }
 
+.single-tf_carrental .tf-single-template__one .tf-review-section .tf-review-form-container .tf-review-submit input[type="submit"]::placeholder {
+  color: #ffffff;
+}
+
 .single-tf_carrental .tf-single-template__one .tf-review-section .tf-review-form-container textarea {
   background: transparent;
   border-color: var(--tf-brand-lite);

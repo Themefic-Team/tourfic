@@ -117,7 +117,7 @@
 .single-tf_apartment .tf-single-template__legacy .tf-apartment-title .tf-title-right .tf-wishlist-button {
   font-size: 0.875rem;
   cursor: pointer;
-  color: #808080;
+  color: var(--tf-text-paragraph);
   display: flex;
   align-items: center;
   gap: 8px;
@@ -1328,7 +1328,7 @@
 }
 
 .single-tf_apartment .tf-single-template__legacy #apartment-map .tf-map-content-wrapper .about-location .surroundings_subtitle {
-  color: #808080;
+  color: var(--tf-text-paragraph);
   font-size: 1rem;
   margin: 0 0 30px 0;
   font-weight: 400;

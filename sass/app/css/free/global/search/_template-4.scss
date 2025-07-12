@@ -150,6 +150,9 @@
             padding: 8px;
             border-radius: 4px;
             cursor: pointer;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
             &::before {
               font-size: 0.875rem;
               line-height: 1.85;
@@ -158,9 +161,6 @@
             &:hover {
               background: $color-brand-lite;
               color: $color-text;
-              text-overflow: ellipsis;
-              overflow: hidden;
-              white-space: nowrap;
             }
           }
         }

@@ -219,7 +219,8 @@ h3.section-heading {
             background-size: 12px 12px;
             cursor: pointer;
             background-position: 95% 50%;
-            
+            font-size: 0.875rem;
+            color: $color-text;
             &:focus {
                 background: transparent;
                 border: 0;
@@ -645,6 +646,9 @@ h3.section-heading {
             color: $color-text;
             box-shadow: none;
             width: 100%;
+            &::placeholder {
+                color: $color-text;
+            }
         }
     }
     .tf-visitor-info {
