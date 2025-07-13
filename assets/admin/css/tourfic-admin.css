@@ -5135,6 +5135,11 @@ a.tf-import-btn, a.tf-export-btn {
   gap: 16px;
   flex-wrap: wrap;
 }
+.tf-tour-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset {
+  display: flex;
+  gap: 16px;
+  flex-direction: column;
+}
 .tf-tour-cal-wrap .tf-save-calendar {
   display: flex;
   gap: 16px;

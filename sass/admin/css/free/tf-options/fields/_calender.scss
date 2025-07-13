@@ -410,6 +410,15 @@
             flex-wrap: wrap;
         }
     }
+    .tf-package-field-repeater{
+        .tf-field-accordion{
+            .tf-fieldset{
+                display: flex;
+                gap: 16px;
+                flex-direction: column;
+            }
+        }
+    }
     .tf-save-calendar{
         display: flex;
         gap: 16px;

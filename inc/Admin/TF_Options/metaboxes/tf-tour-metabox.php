@@ -410,10 +410,27 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					),
 				),
 				array(
+					'id'          => 'disable_adult_price',
+					'type'        => 'switch',
+					'label'       => esc_html__( 'Disable Adult', 'tourfic' ),
+					'field_width' => 33.33,
+				),
+				array(
+					'id'          => 'disable_child_price',
+					'type'        => 'switch',
+					'label'       => esc_html__( 'Disable Child', 'tourfic' ),
+					'field_width' => 33.33,
+				),
+				array(
+					'id'          => 'disable_infant_price',
+					'type'        => 'switch',
+					'label'       => esc_html__( 'Disable Infant', 'tourfic' ),
+					'field_width' => 33.33,
+				),
+				array(
 					'id'          => 'adult_price',
 					'type'        => 'number',
-					'label'       => __( 'Price for Adult', 'tourfic' ),
-					'subtitle'    => __( 'Insert amount only', 'tourfic' ),
+					'description'    => esc_html__( 'Type number only, ex. 250', 'tourfic' ),
 					'dependency'  => [
 						array( 'pricing', '==', 'person' ),
 						[ 'disable_adult_price', '==', 'false' ]
@@ -421,7 +438,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'attributes'  => array(
 						'min' => '0',
 					),
-					'field_width' => '33.33',
+					'field_width' => 33.33,
 				),
 				array(
 					'id'          => 'child_price',
@@ -430,12 +447,11 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 						array( 'pricing', '==', 'person' ),
 						[ 'disable_child_price', '==', 'false' ]
 					],
-					'label'       => __( 'Price for Child', 'tourfic' ),
-					'subtitle'    => __( 'Insert amount only', 'tourfic' ),
+					'description'    => esc_html__( 'Type number only, ex. 250', 'tourfic' ),
 					'attributes'  => array(
 						'min' => '0',
 					),
-					'field_width' => '33.33',
+					'field_width' => 33.33,
 				),
 				array(
 					'id'          => 'infant_price',
@@ -445,54 +461,27 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 						[ 'disable_infant_price', '==', 'false' ],
 						[ 'disable_adult_price', '==', 'false' ],
 					],
-					'label'       => __( 'Price for Infant', 'tourfic' ),
-					'subtitle'    => __( 'Insert amount only', 'tourfic' ),
+					'description'    => esc_html__( 'Type number only, ex. 250', 'tourfic' ),
 					'attributes'  => array(
 						'min' => '0',
 					),
-					'field_width' => '33.33',
-				),
-				array(
-					'id'       => 'discount_type',
-					'type'     => 'select',
-					'label'    => __( 'Discount Type', 'tourfic' ),
-					'subtitle' => __( 'Set a discount for this tour to incentivize bookings. Choose between a fixed amount off or a percentage-based reduction.', 'tourfic' ),
-					'options'  => array(
-						'none'    => __( 'None', 'tourfic' ),
-						'percent' => __( 'Percent', 'tourfic' ),
-						'fixed'   => __( 'Fixed', 'tourfic' ),
-					),
-					'default'  => 'none',
+					'field_width' => 33.33,
 				),
 				array(
 					'id'         => 'discount_price',
 					'type'       => 'number',
-					'label'      => __( 'Discount Price', 'tourfic' ),
-					'subtitle'   => __( 'Insert amount only', 'tourfic' ),
+					'label'      => esc_html__( 'Discount Price', 'tourfic' ),
+					'subtitle'   => esc_html__( 'Insert amount only', 'tourfic' ),
 					'attributes' => array(
 						'min' => '0',
 					),
-					'dependency' => array(
-						array( 'discount_type', '!=', 'none' ),
+					'related'   => true,
+					'related_name' => 'discount_type',
+					'related_options'  => array(
+						'none'    => esc_html__( 'None', 'tourfic' ),
+						'percent' => esc_html__( 'Percent', 'tourfic' ),
+						'fixed'   => esc_html__( 'Fixed', 'tourfic' ),
 					),
-				),
-				array(
-					'id'          => 'disable_adult_price',
-					'type'        => 'switch',
-					'label'       => __( 'Disable adult price', 'tourfic' ),
-					'field_width' => '33.33',
-				),
-				array(
-					'id'          => 'disable_child_price',
-					'type'        => 'switch',
-					'label'       => __( 'Disable children price', 'tourfic' ),
-					'field_width' => '33.33',
-				),
-				array(
-					'id'          => 'disable_infant_price',
-					'type'        => 'switch',
-					'label'       => __( 'Disable infant price', 'tourfic' ),
-					'field_width' => '33.33',
 				),
 				array(
 					'id'      => 'price_deposit',

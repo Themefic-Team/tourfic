@@ -549,8 +549,8 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                 </div>
                             </div>
 
-                            <?php if ( $pricing_type == 'package' ) { ?>
-                                <div class="tf-field-repeater" style="width: 100%">
+                            <?php if ( $pricing_type == 'package' && function_exists( 'is_tf_pro' ) && is_tf_pro() ) { ?>
+                                <div class="tf-field-repeater tf-package-field-repeater" style="width: 100%">
                                 <div class="tf-repeater">
                                 <div class="tf-field" style="padding-top: 0px">
                                     <label class="tf-field-label"><?php echo esc_html__('Packages', 'status'); ?></label>
