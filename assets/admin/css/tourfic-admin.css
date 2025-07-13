@@ -4748,18 +4748,96 @@ a.tf-import-btn, a.tf-export-btn {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  border-bottom: 1px solid #ddd;
-  padding-bottom: 14px;
+  margin-bottom: 14px;
 }
 .tf-apt-cal-wrap .bulk-popup-content .tf-bulk-edit-header h3,
 .tf-room-cal-wrap .bulk-popup-content .tf-bulk-edit-header h3,
 .tf-tour-cal-wrap .bulk-popup-content .tf-bulk-edit-header h3 {
   margin: 0;
+  font-size: 24px;
+  color: #27333F;
+  color: #27333F;
+  font-weight: 600;
+  line-height: 32px;
+  letter-spacing: -0.75px;
+}
+.tf-apt-cal-wrap .bulk-popup-content .tf-bulk-edit-header .tf_tour_bulk_close,
+.tf-room-cal-wrap .bulk-popup-content .tf-bulk-edit-header .tf_tour_bulk_close,
+.tf-tour-cal-wrap .bulk-popup-content .tf-bulk-edit-header .tf_tour_bulk_close {
+  cursor: pointer;
 }
 .tf-apt-cal-wrap .bulk-popup-content .tf-bulk-repeater-section,
 .tf-room-cal-wrap .bulk-popup-content .tf-bulk-repeater-section,
 .tf-tour-cal-wrap .bulk-popup-content .tf-bulk-repeater-section {
   display: none;
+  border-radius: 8px;
+  border: 1px solid #F2F5F7;
+  background: #FFFFFF;
+  padding: 16px;
+}
+.tf-apt-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-field-checkbox,
+.tf-room-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-field-checkbox,
+.tf-tour-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-field-checkbox {
+  margin-bottom: 16px;
+}
+.tf-apt-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-field-checkbox > label,
+.tf-room-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-field-checkbox > label,
+.tf-tour-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-field-checkbox > label {
+  margin-bottom: 8px;
+}
+.tf-apt-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-checkbox-group,
+.tf-room-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-checkbox-group,
+.tf-tour-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-checkbox-group {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin: 0;
+}
+.tf-apt-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-checkbox-group li,
+.tf-room-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-checkbox-group li,
+.tf-tour-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-checkbox-group li {
+  margin: 0;
+}
+.tf-apt-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-checkbox-group li label,
+.tf-room-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-checkbox-group li label,
+.tf-tour-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-checkbox-group li label {
+  color: #27333F;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 20px;
+  padding-left: 26px;
+}
+.tf-apt-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-checkbox-group li label::before,
+.tf-room-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-checkbox-group li label::before,
+.tf-tour-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-checkbox-group li label::before {
+  top: 0;
+  height: 16px;
+  width: 16px;
+  border: 2px solid #D9E0E8;
+  border-radius: 4px;
+}
+.tf-apt-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-weeks-checkbox ul li,
+.tf-room-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-weeks-checkbox ul li,
+.tf-tour-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-weeks-checkbox ul li {
+  width: calc(25% - 16px);
+}
+.tf-apt-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-days-checkbox ul li,
+.tf-room-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-days-checkbox ul li,
+.tf-tour-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-days-checkbox ul li {
+  width: calc(9.0909090909% - 16px);
+}
+.tf-apt-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-months-checkbox ul li,
+.tf-apt-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-years-checkbox ul li,
+.tf-room-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-months-checkbox ul li,
+.tf-room-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-years-checkbox ul li,
+.tf-tour-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-months-checkbox ul li,
+.tf-tour-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-years-checkbox ul li {
+  width: calc(16.6666666667% - 16px);
+}
+.tf-apt-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-years-checkbox,
+.tf-room-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-years-checkbox,
+.tf-tour-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-years-checkbox {
+  margin-bottom: 0px;
 }
 .tf-apt-cal-wrap .bulk-popup-content .tf-field.tf-field-repeater,
 .tf-room-cal-wrap .bulk-popup-content .tf-field.tf-field-repeater,
@@ -4805,16 +4883,16 @@ a.tf-import-btn, a.tf-export-btn {
 .tf-bulk-popup .bulk-popup-content,
 .tf-reset-confirmation-box .bulk-popup-content {
   background-color: #ffffff;
-  border-radius: 10px;
-  padding: 14px;
-  width: 560px;
+  border-radius: 16px;
+  box-shadow: 0px 4px 140px 0px rgba(0, 0, 0, 0.25);
+  padding: 24px;
+  width: 736px;
   max-height: 360px;
   overflow-y: auto;
 }
 .tf-bulk-popup .bulk-popup-content .tf-repeater .tf-repeater-add .tf-repeater-icon,
 .tf-reset-confirmation-box .bulk-popup-content .tf-repeater .tf-repeater-add .tf-repeater-icon {
   font-size: 12px;
-  padding: 6px 10px;
 }
 .tf-bulk-popup .bulk-popup-content .tf-mb-5,
 .tf-reset-confirmation-box .bulk-popup-content .tf-mb-5 {
@@ -4877,8 +4955,8 @@ a.tf-import-btn, a.tf-export-btn {
   display: none;
 }
 .tf-reset-confirmation-box .tf-confirmation-content {
-  width: 280px;
-  padding: 24px;
+  width: 320px;
+  padding: 40px;
   background-color: #ffffff;
   border-radius: 10px;
 }
@@ -4892,16 +4970,19 @@ a.tf-import-btn, a.tf-export-btn {
 }
 .tf-reset-confirmation-box .tf-confirmation-content .tf-confirmation-actions button {
   border-radius: 8px;
-  border: 1px solid #dceddd;
-  font-size: 14px;
-  background-color: transparent;
+  background: #EBF5FF;
+  color: #003C79;
+  border-radius: 8px;
+  padding: 12px 32px !important;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 24px !important;
+  border: 0px solid;
   cursor: pointer;
-  padding: 10px;
 }
 .tf-reset-confirmation-box .tf-confirmation-content .tf-confirmation-actions button.tf-confirmed-btn {
-  background-color: #003c79;
-  border-color: #003c79;
-  color: #ffffff;
+  background: linear-gradient(180deg, #0051A3 0%, #003C79 100%);
+  color: #FFFFFF;
 }
 
 .tf-tour-cal-wrap .tf-tour-cal {

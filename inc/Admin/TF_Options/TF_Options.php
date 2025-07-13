@@ -1020,6 +1020,7 @@ class TF_Options {
 						$options_data[ 'tf_option_adult_price_' . $j ]  = isset( $_POST[ 'tf_option_adult_price_' . $j ] ) && ! empty( $_POST[ 'tf_option_adult_price_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_adult_price_' . $j ] ) : '';
 						$options_data[ 'tf_option_child_price_' . $j ]  = isset( $_POST[ 'tf_option_child_price_' . $j ] ) && ! empty( $_POST[ 'tf_option_child_price_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_child_price_' . $j ] ) : '';
 						$options_data[ 'tf_option_infant_price_' . $j ]  = isset( $_POST[ 'tf_option_infant_price_' . $j ] ) && ! empty( $_POST[ 'tf_option_infant_price_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_infant_price_' . $j ] ) : '';
+						$options_data[ 'tf_option_group_discount_' . $j ]  = isset( $_POST[ 'tf_option_' . $j.'_group_discount' ] ) && ! empty( $_POST[ 'tf_option_' . $j.'_group_discount' ] ) ? $_POST[ 'tf_option_' . $j.'_group_discount' ] : '';
 					}
 				}
 				if ( ! empty( $options_data ) ) {
@@ -1346,7 +1347,9 @@ class TF_Options {
 										<div class="tf-field tf-field-repeater" style="width:100%;">
 											<div class="tf-fieldset">
 												<div id="tf-repeater-1" class="tf-repeater group_discount_package" data-max-index="0">
-												<div class="tf-repeater-wrap tf-repeater-wrap-group_discount_package ui-sortable"></div>
+												<div class="tf-repeater-wrap tf-repeater-wrap-group_discount_package ui-sortable tf-group-discount-package_<?php echo esc_attr( $item['index'] ); ?>">
+
+												</div>
 												<div class=" tf-single-repeater-clone tf-single-repeater-clone-group_discount_package">
 													<div class="tf-single-repeater tf-single-repeater-group_discount_package">
 													<input type="hidden" name="tf_parent_field" value="[group_tabs]">
@@ -1360,7 +1363,7 @@ class TF_Options {
 															<div class="tf-number-range">
 															<div class="tf-number-field-box">
 																<i class="fa-regular fa-user"></i>
-																<input type="number" name="group_discount[min_person][]" value="" min="0" placeholder="<?php echo esc_html('Min Person', 'tourfic'); ?>">
+																<input type="number" name="tf_option_<?php echo esc_attr( $item['index'] ); ?>_group_discount[min_person][]" value="" min="0" placeholder="<?php echo esc_html('Min Person', 'tourfic'); ?>">
 															</div>
 															<svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 																<path d="M15.5 6.66797L18.8333 10.0013L15.5 13.3346" stroke="#95A3B2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -1368,14 +1371,14 @@ class TF_Options {
 															</svg>
 															<div class="tf-number-field-box">
 																<i class="fa-regular fa-user"></i>
-																<input type="number" name="group_discount[max_person][]" value="" min="0" placeholder="<?php echo esc_html('Max Person', 'tourfic'); ?>">
+																<input type="number" name="tf_option_<?php echo esc_attr( $item['index'] ); ?>_group_discount[max_person][]" value="" min="0" placeholder="<?php echo esc_html('Max Person', 'tourfic'); ?>">
 															</div>
 															</div>
 														</div>
 														</div>
 														<div class="tf-field tf-field-number  " style="width:calc(33% - 10px);">
 														<div class="tf-fieldset">
-															<input type="number" name="group_discount[price][]" value="" min="0" placeholder="<?php echo esc_html('Price', 'tourfic'); ?>">
+															<input type="number" name="tf_option_<?php echo esc_attr( $item['index'] ); ?>_group_discount[price][]" value="" min="0" placeholder="<?php echo esc_html('Price', 'tourfic'); ?>">
 														</div>
 														</div>
 

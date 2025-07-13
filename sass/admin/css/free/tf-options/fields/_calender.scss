@@ -36,14 +36,80 @@
             align-items: center;
             justify-content: space-between;
             width: 100%;
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 14px;
+            margin-bottom: 14px;
             h3{
                 margin: 0;
+                font-size: 24px;
+                color: $tf_text_title;
+                color: #27333F;
+                font-weight: 600;
+                line-height: 32px;
+                letter-spacing: -0.75px;
+            }
+            .tf_tour_bulk_close{
+                cursor: pointer;
             }
         }
         .tf-bulk-repeater-section{
             display: none;
+            border-radius: 8px;
+            border: 1px solid $tf_border_faint;
+            background: $tf_fill_white;
+            padding: 16px;
+            .tf-field-checkbox{
+                margin-bottom: 16px;
+                > label{
+                    margin-bottom: 8px;
+                }
+            }
+            .tf-checkbox-group{
+                display: flex;
+                gap: 16px;
+                flex-wrap: wrap;
+                margin: 0;
+                li{
+                    margin: 0;
+                    label{
+                        color: $tf_text_title;
+                        font-size: 13px;
+                        font-weight: 400;
+                        line-height: 20px;
+                        padding-left: 26px;
+                        &::before{
+                            top: 0;
+                            height: 16px;
+                            width: 16px;
+                            border: 2px solid $tf_border_default;
+                            border-radius: 4px;
+                        }
+                    }
+                }
+            }
+            .tf-weeks-checkbox{
+                ul{
+                    li{
+                        width: calc(100%/4 - 16px);
+                    }
+                }
+            }
+            .tf-days-checkbox{
+                ul{
+                    li{
+                        width: calc(100%/11 - 16px);
+                    }
+                }
+            }
+            .tf-months-checkbox,
+            .tf-years-checkbox{
+                ul{
+                    li{
+                        width: calc(100%/6 - 16px);
+                    }
+                }
+            }
+            .tf-years-checkbox{
+                margin-bottom: 0px;
+            }
         }
         .tf-field.tf-field-repeater{
             padding-bottom: 0px;
@@ -80,14 +146,14 @@
     z-index: 99999;
     .bulk-popup-content{
         background-color: $color-white;
-        border-radius: 10px;
-        padding: 14px;
-        width: 560px;
+        border-radius: 16px;
+        box-shadow: 0px 4px 140px 0px rgba(0, 0, 0, 0.25);
+        padding: 24px;
+        width: 736px;
         max-height: 360px;
         overflow-y: auto;
         .tf-repeater .tf-repeater-add .tf-repeater-icon{
             font-size: 12px;
-            padding: 6px 10px;
         }
         .tf-mb-5{
             margin-bottom: 10px;
@@ -146,8 +212,8 @@
 .tf-reset-confirmation-box{
     display: none;
     .tf-confirmation-content{
-        width: 280px;
-        padding: 24px;
+        width: 320px;
+        padding: 40px;
         background-color: $color-white;
         border-radius: 10px;
         h3{
@@ -159,15 +225,18 @@
             justify-content: space-between;
             button{
                 border-radius: 8px;
-                border: 1px solid $color-success-light;
-                font-size: 14px;
-                background-color: transparent;
+                background: $tf_fill_alternative;
+                color: $tf_primary_default;
+                border-radius: 8px;
+                padding: 12px 32px !important;
+                font-size: 15px;
+                font-weight: 600;
+                line-height: 24px !important;
+                border: 0px solid;
                 cursor: pointer;
-                padding: 10px;
                 &.tf-confirmed-btn{
-                    background-color: #003c79;
-                    border-color: #003c79;
-                    color: $color-white;
+                    background: linear-gradient(180deg, #0051A3 0%, #003C79 100%);
+                    color: $tf_fill_white;
                 }
             }
         }

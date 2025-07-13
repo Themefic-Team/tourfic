@@ -1604,6 +1604,63 @@
                                 $("[name='tf_option_adult_price_" + i + "']", self.roomCalData).val(event.extendedProps["tf_option_adult_price_" + i]);
                                 $("[name='tf_option_child_price_" + i + "']", self.roomCalData).val(event.extendedProps["tf_option_child_price_" + i]);
                                 $("[name='tf_option_infant_price_" + i + "']", self.roomCalData).val(event.extendedProps["tf_option_infant_price_" + i]);
+                                console.log(event.extendedProps["tf_option_group_discount_" + i]);
+
+                                const discountData = event.extendedProps["tf_option_group_discount_" + i];
+                                let allGroupDiscountRepeaterHTML = '';
+
+                                if (discountData && Array.isArray(discountData.min_person)) {
+                                    discountData.min_person.forEach((min, index) => {
+                                        if (!min) return;
+                                        const max = discountData.max_person[index] || '';
+                                        const price = discountData.price[index] || '';
+
+                                        allGroupDiscountRepeaterHTML += `
+                                            <div class="tf-single-repeater tf-single-repeater-group_discount_package">
+                                                <input type="hidden" name="tf_parent_field" value="[group_tabs]">
+                                                <input type="hidden" name="tf_repeater_count" value="${index + 1}">
+                                                <input type="hidden" name="tf_current_field" value="group_discount_package">
+                                                
+                                                <div class="tf-repeater-content-wrap" style="display: none;">
+                                                    <div class="tf-field tf-field-number" style="width:calc(66% - 10px);">
+                                                        <div class="tf-fieldset">
+                                                            <div class="tf-number-range">
+                                                                <div class="tf-number-field-box">
+                                                                    <i class="fa-regular fa-user"></i>
+                                                                    <input type="number" name="tf_option_${i}_group_discount[min_person][]" value="${min}" min="0" placeholder="Min Person">
+                                                                </div>
+                                                                <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path d="M15.5 6.66797L18.8333 10.0013L15.5 13.3346" stroke="#95A3B2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                                    <path d="M2.1665 10H18.8332" stroke="#95A3B2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                                </svg>
+                                                                <div class="tf-number-field-box">
+                                                                    <i class="fa-regular fa-user"></i>
+                                                                    <input type="number" name="tf_option_${i}_group_discount[max_person][]" value="${max}" min="0" placeholder="Max Person">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tf-field tf-field-number" style="width:calc(33% - 10px);">
+                                                        <div class="tf-fieldset">
+                                                            <input type="number" name="tf_option_${i}_group_discount[price][]" value="${price}" min="0" placeholder="Price">
+                                                        </div>
+                                                    </div>
+
+                                                    <span class="tf-repeater-icon tf-repeater-icon-delete">
+                                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M15 5L5 15" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                            <path d="M5 5L15 15" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                        </svg>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        `;
+                                    });
+                                }
+                                if (allGroupDiscountRepeaterHTML) {
+                                    $('.tf-group-discount-package_'+i).append(allGroupDiscountRepeaterHTML);
+                                }
+
                             }
                         }
                         if(typeof event.extendedProps.options_count == 'undefined'){
@@ -1835,6 +1892,9 @@
             $('.tf-bulk-repeater-section').show();
             $('.tf-check-dates').hide();
             $('.tf_tour_cal_bulk_edit').hide();
+            $('.tf_tour_cal_reset').hide();
+            $('.bulk-popup-content .tf-repeater-wrap-group_discount_package').html('');
+            $('.bulk-popup-content .tf_tour_allowed_times').html('');
             $('.tf-bulk-edit-header').css('display', 'flex');
             $('.tf_bulk_edit_option').val('1');
         });
@@ -1844,6 +1904,9 @@
             $('.tf-tour-cal-field').removeClass('tf-bulk-popup');
             $('.tf-bulk-repeater-section').hide();
             $('.tf-check-dates').show();
+            $('.tf_tour_cal_reset').show();
+            $('.bulk-popup-content .tf-repeater-wrap-group_discount_package').html('');
+            $('.bulk-popup-content .tf_tour_allowed_times').html('');
             $('.tf_tour_cal_bulk_edit').show();
             $('.tf-bulk-edit-header').hide();
             $('.tf_bulk_edit_option').val('');

@@ -31,8 +31,12 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                         <div class="bulk-popup-content">
 
                             <div class="tf-bulk-edit-header">
-                                <h3><?php echo esc_html__( 'Bulk Edit', 'tourfic' ); ?></h3>
-                                <span class="tf_tour_bulk_close button button-large"><?php echo esc_html__( 'Close', 'tourfic' ); ?></span>
+                                <h3><?php echo esc_html__( 'Bulk price edit', 'tourfic' ); ?></h3>
+                                <span class="tf_tour_bulk_close">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M18 6L6 18M6 6L18 18" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </span>
                             </div>
                             <div class="tf-bulk-repeater-section">
                                 <div class="tf-field tf-field-checkbox tf-weeks-checkbox" style="width:100%; padding: 0;">
@@ -204,7 +208,7 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                     </div>
                                 </div>
                                 <div class="tf-field tf-field-checkbox tf-months-checkbox" style="width:100%; padding: 0;">
-                                    <label class="tf-field-label"><?php echo esc_html__( 'Repeat Month', 'tourfic' ); ?></label>
+                                    <label class="tf-field-label"><?php echo esc_html__( 'Months (*)', 'tourfic' ); ?></label>
                                     <div class="tf-fieldset">
                                         <ul class="tf-checkbox-group tf-inline" style="margin-bottom: 0">
                                             <li>
@@ -260,7 +264,7 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                 </div>
 
                                 <div class="tf-field tf-field-checkbox tf-years-checkbox" style="width:100%; padding: 0;">
-                                    <label class="tf-field-label"><?php echo esc_html__( 'Repeat Year', 'tourfic' ); ?></label>
+                                    <label class="tf-field-label"><?php echo esc_html__( 'Years (*)', 'tourfic' ); ?></label>
                                     <div class="tf-fieldset">
                                         <ul class="tf-checkbox-group tf-inline" style="margin-bottom: 0">
                                             <li>
