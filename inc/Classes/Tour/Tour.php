@@ -1849,10 +1849,20 @@ class Tour {
 							<p><?php echo esc_html__( "Choose package:", "tourfic" ); ?></p>
 							<div class="tf-booking-content-package">
 
-								<?php foreach($package_pricing as $key => $pack){ ?>
+								<?php 
+									$tf_first_key = '';
+									foreach($package_pricing as $key => $pack){ 
+									if(empty($pack['pack_status'])){
+										continue;
+									}
+									if ($tf_first_key === '') {
+										$tf_first_key = $key;
+									}
+
+									?>
 									<div class="tf-single-package">
 										<div class="tf-package-select">
-											<input type="radio" id="package-<?php echo esc_attr($key); ?>" name="tf_package" value="<?php echo esc_attr($key); ?>" class="tf-package-radio" <?php echo 1==$key ? esc_attr('checked') : ''; ?> />
+											<input type="radio" id="package-<?php echo esc_attr($key); ?>" name="tf_package" value="<?php echo esc_attr($key); ?>" class="tf-package-radio" <?php echo $tf_first_key==$key ? esc_attr('checked') : ''; ?> />
 										</div>
 										<div class="tf-package-content">
 										<label for="package-<?php echo esc_attr($key); ?>"><h3><?php echo esc_html($pack['pack_title']); ?></h3></label>
@@ -1863,7 +1873,7 @@ class Tour {
 														<h3><?php echo esc_html__( "Adult", "tourfic" ); ?></h3>
 														<div class="inc-dec">
 															<div class="acr-dec disable">-</div>
-															<input type="number" name="adults" id="adults" value="<?php echo !empty($pack['min_adult']) ? esc_attr($pack['min_adult']) : 0; ?>" data-min="<?php echo !empty($pack['min_adult']) ? esc_attr($pack['min_adult']) : ''; ?>" data-max="<?php echo !empty($pack['max_adult']) ? esc_attr($pack['max_adult']) : ''; ?>" />
+															<input type="number" name="adults" id="adults" value="<?php echo !empty($pack['adult_tabs'][2]['min_adult']) ? esc_attr($pack['adult_tabs'][2]['min_adult']) : 1; ?>" data-min="<?php echo !empty($pack['adult_tabs'][2]['min_adult']) ? esc_attr($pack['adult_tabs'][2]['min_adult']) : ''; ?>" data-max="<?php echo !empty($pack['adult_tabs'][3]['max_adult']) ? esc_attr($pack['adult_tabs'][3]['max_adult']) : ''; ?>" />
 															<div class="acr-inc">+</div>
 														</div>
 													</div>
@@ -1871,7 +1881,7 @@ class Tour {
 														<h3><?php echo esc_html__( "Child", "tourfic" ); ?></h3>
 														<div class="inc-dec">
 															<div class="acr-dec disable">-</div>
-															<input type="number" name="childrens" id="childs" value="<?php echo !empty($pack['min_child']) ? esc_attr($pack['min_child']) : 0; ?>" data-min="<?php echo !empty($pack['min_child']) ? esc_attr($pack['min_child']) : ''; ?>" data-max="<?php echo !empty($pack['max_child']) ? esc_attr($pack['max_child']) : ''; ?>" />
+															<input type="number" name="childrens" id="childs" value="<?php echo !empty($pack['child_tabs'][2]['min_child']) ? esc_attr($pack['child_tabs'][2]['min_child']) : 0; ?>" data-min="<?php echo !empty($pack['child_tabs'][2]['min_child']) ? esc_attr($pack['child_tabs'][2]['min_child']) : ''; ?>" data-max="<?php echo !empty($pack['child_tabs'][3]['max_child']) ? esc_attr($pack['child_tabs'][3]['max_child']) : ''; ?>" />
 															<div class="acr-inc">+</div>
 														</div>
 													</div>
@@ -1879,7 +1889,7 @@ class Tour {
 														<h3><?php echo esc_html__( "Infant", "tourfic" ); ?></h3>
 														<div class="inc-dec">
 															<div class="acr-dec disable">-</div>
-															<input type="number" name="infants" id="infant" value="<?php echo !empty($pack['min_infant']) ? esc_attr($pack['min_infant']) : 0; ?>" data-min="<?php echo !empty($pack['min_infant']) ? esc_attr($pack['min_infant']) : ''; ?>" data-max="<?php echo !empty($pack['max_infant']) ? esc_attr($pack['max_infant']) : ''; ?>" />
+															<input type="number" name="infants" id="infant" value="<?php echo !empty($pack['infant_tabs'][2]['min_infant']) ? esc_attr($pack['infant_tabs'][2]['min_infant']) : 0; ?>" data-min="<?php echo !empty($pack['infant_tabs'][2]['min_infant']) ? esc_attr($pack['infant_tabs'][2]['min_infant']) : ''; ?>" data-max="<?php echo !empty($pack['infant_tabs'][3]['max_infant']) ? esc_attr($pack['infant_tabs'][3]['max_infant']) : ''; ?>" />
 															<div class="acr-inc">+</div>
 														</div>
 													</div>
@@ -3797,25 +3807,25 @@ class Tour {
 			# Set pricing based on pricing rule
 			if( $pricing_rule == 'package') {
 				$single_package = !empty($tf_package_pricing[$selectedPackage]) ? $tf_package_pricing[$selectedPackage] : '';
-				
-				if ( ! empty( $single_package['pricing_type'] == 'person' ) ) {
+
+				if ( !empty($single_package) && ! empty( $single_package['pricing_type'] == 'person' ) ) {
 					// Default Adult Price from Package
-					$pack_default_adult = !empty($single_package['adult_price']) ? $single_package['adult_price'] : 0;
+					$pack_default_adult = !empty($single_package['adult_tabs'][1]['adult_price']) ? $single_package['adult_tabs'][1]['adult_price'] : 0;
 					// Selected Package Adult Price
 					$adult_price = !empty($matched_availability['tf_option_adult_price_'.$selectedPackage]) ? $matched_availability['tf_option_adult_price_'.$selectedPackage] : $pack_default_adult;
 					// Default Child Price from Package
-					$pack_default_child = !empty($single_package['child_price']) ? $single_package['child_price'] : 0;
+					$pack_default_child = !empty($single_package['child_tabs'][1]['child_price']) ? $single_package['child_tabs'][1]['child_price'] : 0;
 					// Selected Package Child Price
 					$children_price = !empty($matched_availability['tf_option_child_price_'.$selectedPackage]) ? $matched_availability['tf_option_child_price_'.$selectedPackage] : $pack_default_child;
 					// Default Infant Price from Package
-					$pack_default_infant = !empty($single_package['infant_price']) ? $single_package['infant_price'] : 0;
+					$pack_default_infant = !empty($single_package['infant_tabs'][1]['infant_price']) ? $single_package['infant_tabs'][1]['infant_price'] : 0;
 					// Selected Package Infant Price
 					$infant_price = !empty($matched_availability['tf_option_infant_price_'.$selectedPackage]) ? $matched_availability['tf_option_infant_price_'.$selectedPackage] : $pack_default_infant;
 					$tf_tours_data_price = ( $adult_price * $adults ) + ( $children * $children_price ) + ( $infant * $infant_price );
 				}
-				if ( ! empty( $single_package['pricing_type'] == 'group' ) ) {
+				if ( !empty($single_package) && ! empty( $single_package['pricing_type'] == 'group' ) ) {
 					// Default Group Price from Package
-					$pack_default_group = !empty($single_package['group_price']) ? $single_package['group_price'] : 0;
+					$pack_default_group = !empty($single_package['group_tabs'][1]['group_price']) ? $single_package['group_tabs'][1]['group_price'] : 0;
 					// Selected Package Group Price
 					$group_price = !empty($matched_availability['tf_option_group_price_'.$selectedPackage]) ? $matched_availability['tf_option_group_price_'.$selectedPackage] : $pack_default_group;
 					$tf_tours_data_price = $group_price;
@@ -3973,7 +3983,7 @@ class Tour {
 				}
 			} elseif($pricing_rule == "package") {
 				$single_package = !empty($tf_package_pricing[$selectedPackage]) ? $tf_package_pricing[$selectedPackage] : '';
-				if ( ! empty( $single_package['pricing_type'] == 'person' ) ) {
+				if ( !empty($single_package) && ! empty( $single_package['pricing_type'] == 'person' ) ) {
 
 					if ( ! empty( $adult_price ) && ! empty( $adults ) ) {
 						$response['traveller_summery'] .= '<tr>
@@ -3995,7 +4005,7 @@ class Tour {
 					}
 					$tf_tours_data_price = ( $adult_price * $adults ) + ( $children * $children_price ) + ( $infant * $infant_price );
 				}
-				if ( ! empty( $single_package['pricing_type'] == 'group' ) ) {
+				if ( !empty($single_package) && ! empty( $single_package['pricing_type'] == 'group' ) ) {
 					if ( ! empty( $group_price ) ) {
 						$tf_tours_data_price = $group_price;
 						$response['traveller_summery'] .= '<tr>

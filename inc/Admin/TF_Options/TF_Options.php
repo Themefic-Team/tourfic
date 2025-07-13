@@ -1182,7 +1182,7 @@ class TF_Options {
 				if(empty($item)){
 					continue;
 				}
-				if(empty($item['pack_status'])){
+				if(empty($package_pricing[$key]['pack_status'])){
 					continue;
 				}
                 ?>
