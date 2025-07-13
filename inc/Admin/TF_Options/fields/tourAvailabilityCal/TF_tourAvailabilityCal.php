@@ -562,6 +562,9 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                 <?php
                                 if ( ! empty( $tour_package_options ) ) {
                                     foreach ( $tour_package_options as $key => $item ) {
+                                        if(empty($item['pack_status'])){
+                                            continue;
+                                        }
                                         $option_pricing_type = ! empty( $room_option['pricing_type'] ) ? $room_option['pricing_type'] : 'person';
                                         ?>
 

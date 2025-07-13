@@ -1182,6 +1182,9 @@ class TF_Options {
 				if(empty($item)){
 					continue;
 				}
+				if(empty($item['pack_status'])){
+					continue;
+				}
                 ?>
 				<div class="tf-single-repeater">
 					<div class="tf-repeater-header">
