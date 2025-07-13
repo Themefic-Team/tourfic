@@ -65,6 +65,8 @@
                     $('.tf-template-preview-loader').show();
                     $('select[name="tf_taxonomy_type"]').attr('disabled', 'disabled');
                     $('select[name="tf_taxonomy_term"]').attr('disabled', 'disabled');
+                    $('#tf-save-template').attr('disabled', 'disabled');
+                    $('#tf-edit-with-elementor').attr('disabled', 'disabled');
                 },
                 success: function(response) {
                     $('.tf-template-preview-loader').hide();
@@ -72,6 +74,8 @@
                     $('.tf-field-term').hide();
                     $('select[name="tf_taxonomy_term"]').removeAttr('disabled');
                     $('select[name="tf_taxonomy_term"]').html('');
+                    $('#tf-save-template').removeAttr('disabled');
+                    $('#tf-edit-with-elementor').removeAttr('disabled');
                     if (response.success) {
                         // Update the template options markup
                         $('.tf-field-imageselect').html(response.data.markup);

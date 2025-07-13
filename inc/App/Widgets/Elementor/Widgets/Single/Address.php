@@ -67,16 +67,16 @@ class Address extends Widget_Base {
         do_action( 'tf/single-address/before-content/controls', $this );
 
         //service
-		$this->add_control('service',[
-			'type'     => Controls_Manager::SELECT,
-			'label'    => esc_html__( 'Service', 'tourfic' ),
-			'options'  => [
-				'tf_hotel'     => esc_html__( 'Hotel', 'tourfic' ),
-				'tf_tours'     => esc_html__( 'Tour', 'tourfic' ),
-				'tf_apartment' => esc_html__( 'Apartment', 'tourfic' ),
-			],
-			'default'  => 'tf_hotel',
-		]);
+		// $this->add_control('service',[
+		// 	'type'     => Controls_Manager::SELECT,
+		// 	'label'    => esc_html__( 'Service', 'tourfic' ),
+		// 	'options'  => [
+		// 		'tf_hotel'     => esc_html__( 'Hotel', 'tourfic' ),
+		// 		'tf_tours'     => esc_html__( 'Tour', 'tourfic' ),
+		// 		'tf_apartment' => esc_html__( 'Apartment', 'tourfic' ),
+		// 	],
+		// 	'default'  => 'tf_hotel',
+		// ]);
 		
 		$this->add_control('address_icon',[
 			'label' => esc_html__('Address Icon', 'tourfic'),
@@ -200,12 +200,11 @@ class Address extends Widget_Base {
 
 	protected function render() {
 		$settings  = $this->get_settings_for_display();
-        $service   = !empty( $settings['service'] ) ? $settings['service'] : 'tf_hotel';
         $show_location   = !empty( $settings['show_location'] ) ? $settings['show_location'] : '';
         $post_id   = get_the_ID();
 		$post_type = get_post_type();
         $locations = $address = '';
-        if($service == 'tf_hotel' && $post_type == 'tf_hotel'){
+        if($post_type == 'tf_hotel'){
             $post_meta = get_post_meta($post_id, 'tf_hotels_opt', true);
             $locations = ! empty( get_the_terms( $post_id, 'hotel_location' ) ) ? get_the_terms( $post_id, 'hotel_location' ) : '';
             if ( $locations ) {
@@ -218,10 +217,16 @@ class Address extends Widget_Base {
             if( !empty($post_meta['map']) && Helper::tf_data_types($post_meta['map'])){
                 $address = !empty( Helper::tf_data_types($post_meta['map'])['address'] ) ? Helper::tf_data_types($post_meta['map'])['address'] : '';
             }
-        } elseif($service == 'tf_tours' && $post_type == 'tf_tours'){
-            $post_meta_key = 'tf_tours_opt';
-        } elseif($service == 'tf_apartment' && $post_type == 'tf_apartment'){
-            $post_meta_key = 'tf_apartment_opt';
+        } elseif($post_type == 'tf_tours'){
+			$post_meta = get_post_meta($post_id, 'tf_tours_opt', true);
+			if( !empty($post_meta['location']) && Helper::tf_data_types($post_meta['location'])){
+				$address = !empty( Helper::tf_data_types($post_meta['location'])['address'] ) ? Helper::tf_data_types($post_meta['location'])['address'] : '';
+			}
+        } elseif($post_type == 'tf_apartment'){
+			$post_meta = get_post_meta($post_id, 'tf_apartment_opt', true);
+			if( !empty($post_meta['map']) && Helper::tf_data_types($post_meta['map'])){
+                $address = !empty( Helper::tf_data_types($post_meta['map'])['address'] ) ? Helper::tf_data_types($post_meta['map'])['address'] : '';
+            }
         } else {
 			return;
 		}
@@ -241,19 +246,17 @@ class Address extends Widget_Base {
         }
         ?>
 		<div class="tf-title-meta">
-            <?php if ( $locations ) : ?>
-                <?php if ( !empty( $address ) ) {
-                    echo '<div class="tf-address">'. wp_kses( $address_icon_html, Helper::tf_custom_wp_kses_allow_tags() ) . wp_kses_post($address) . '</div>';
-                } ?>
-				<?php if($show_location == 'yes'): ?>
-					<a href="<?php echo esc_url($first_location_url); ?>" class="more-hotel tf-d-ib">
-						<?php
-						/* translators: %s location name */
-						printf( esc_html__( ' - Show more hotels in %s', 'tourfic' ), esc_html($first_location_name) );
-						?>
-					</a>
-				<?php endif; ?>
-            <?php endif; ?>
+			<?php if ( !empty( $address ) ) {
+				echo '<div class="tf-address">'. wp_kses( $address_icon_html, Helper::tf_custom_wp_kses_allow_tags() ) . wp_kses_post($address) . '</div>';
+			} ?>
+			<?php if($post_type == 'tf_hotel' && $show_location == 'yes'): ?>
+				<a href="<?php echo esc_url($first_location_url); ?>" class="more-hotel tf-d-ib">
+					<?php
+					/* translators: %s location name */
+					printf( esc_html__( ' - Show more hotels in %s', 'tourfic' ), esc_html($first_location_name) );
+					?>
+				</a>
+			<?php endif; ?>
         </div>
         <?php
 	}

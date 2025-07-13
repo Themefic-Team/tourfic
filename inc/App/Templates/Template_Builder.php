@@ -27,32 +27,6 @@ class Template_Builder {
 
             add_filter('elementor/document/urls/edit', [$this, 'modify_elementor_edit_url'], 10, 2);
             add_action('elementor/editor/init', [$this, 'setup_editor_post_data']);
-            add_filter('elementor/document/config', [$this, 'modify_elementor_document_config'], 10, 2);
-
-            add_action('elementor/editor/after_enqueue_scripts', function() {
-                ?>
-                <script>
-                (function($){
-                    window.elementor.on('panel:widget:drag:stop', () => {
-                        // Force the preview to re-render
-                        if (window.elementorPreview && window.elementorPreview.render) {
-                            window.elementorPreview.render();
-                        }
-                    });
-
-                    // Also when content updates, for example when settings change
-                    window.elementor.channels.editor.on('section:activated', () => {
-                        setTimeout(() => {
-                            if (window.elementorPreview && window.elementorPreview.render) {
-                                window.elementorPreview.render();
-                            }
-                        }, 500); // slight delay to let section content apply
-                    });
-                })(jQuery);
-                </script>
-                <?php
-            });
-            // add_action('elementor/editor/init', [$this, 'elementor_editor_initialized']);
         }
 	}
 
@@ -1345,31 +1319,13 @@ class Template_Builder {
                 return $data;
             });
             
-            // // Restore original post when editor is done
+            // Restore original post when editor is done
             add_action('elementor/editor/after_enqueue_scripts', function() use ($original_post) {
                 wp_reset_postdata();
                 global $post;
                 $post = $original_post;
                 setup_postdata($post);
             });
-
-            
-
         }
-    }
-
-    public function modify_elementor_document_config($config, $post_id) {
-        if (isset($_GET['tf_preview_post_id']) && is_numeric($_GET['tf_preview_post_id'])) {
-            $tf_preview_post_id = intval($_GET['tf_preview_post_id']);
-            $tf_preview_post = get_post($tf_preview_post_id);
-
-            if ($tf_preview_post) {
-                // Ensure Elementor loads the template builder post, not the sample post
-                $config['post_id'] = $tf_preview_post_id;
-                $config['post'] = $tf_preview_post;
-            }
-        }
-
-        return $config;
     }
 }
