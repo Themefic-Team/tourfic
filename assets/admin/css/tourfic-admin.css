@@ -5124,6 +5124,17 @@ a.tf-import-btn, a.tf-export-btn {
 .tf-tour-cal-wrap .tf-date-time-selection .tf-field-repeater .tf-repeater-content-wrap .tf-repeater-icon-delete {
   cursor: pointer;
 }
+.tf-tour-cal-wrap .tf-field-group-box {
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #F2F5F7;
+  background: #FFFFFF;
+}
+.tf-tour-cal-wrap .tf-field-group-box .tf-fieldset {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
 .tf-tour-cal-wrap .tf-save-calendar {
   display: flex;
   gap: 16px;

@@ -399,6 +399,17 @@
             }
         }
     }
+    .tf-field-group-box{
+        padding: 16px;
+        border-radius: 8px;
+        border: 1px solid $tf_border_faint;
+        background: $tf_fill_white;
+        .tf-fieldset{
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+    }
     .tf-save-calendar{
         display: flex;
         gap: 16px;

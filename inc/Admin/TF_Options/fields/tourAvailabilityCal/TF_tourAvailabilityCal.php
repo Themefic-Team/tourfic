@@ -363,38 +363,189 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                 </div>
                             </div>
 
-                            <div class="tf-field-text tf-tour-group-pricing" style="display: <?php echo esc_attr($pricing_type == 'group' && ( empty($group_package_option) || empty($group_package_pricing) ) ? 'block' : 'none' ) ?>; width: 100%">
-                                <label class="tf-field-label"><?php echo esc_html__( 'Price', 'tourfic' ); ?></label>
-                                <input type="number" min="0" name="tf_tour_price" placeholder="<?php echo esc_html__( 'Price', 'tourfic' ); ?>">
-                            </div>
-                            <div class="tf-tour-limitation-group">
-                                <div class="tf-field-text tf-tour-person-pricing" style="display: <?php echo esc_attr( $pricing_type == 'person' ? 'block' : 'none' ) ?>; width: calc(33% - 4px)">
-                                    <label class="tf-field-label"><?php echo esc_html__( 'Adult Price', 'tourfic' ); ?></label>
-                                    <input type="number" min="0" name="tf_tour_adult_price" placeholder="<?php echo esc_html__( 'Adult Price', 'tourfic' ); ?>">
-                                </div>
+                            <div class="tf-field tf-field-accordion tf-field-group-box" style="width: 100%; display: <?php echo esc_attr( $pricing_type == 'person' || $pricing_type == 'group' ? 'block' : 'none' ) ?>;">
+                                <div class="tf-fieldset">
 
-                                <div class="tf-field-text tf-tour-person-pricing" style="display: <?php echo esc_attr( $pricing_type == 'person' ? 'block' : 'none' ) ?>; width: calc(33% - 4px)">
-                                    <label class="tf-field-label"><?php echo esc_html__( 'Child Price', 'tourfic' ); ?></label>
-                                    <input type="number" min="0" name="tf_tour_child_price" placeholder="<?php echo esc_html__( 'Child Price', 'tourfic' ); ?>">
-                                </div>
+                                    <div id="adult_tabs" class="tf-tab-switch-box"  style="width: 100%; display: <?php echo esc_attr( $pricing_type == 'person' ? 'block' : 'none' ) ?>;">
+                                        <div class="tf-tab-field-header">
+                                            <div class="field-label"><?php echo esc_html__( 'Adult', 'tourfic' ); ?></div>
+                                            <div class="tf-field-collapas">
+                                                <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
 
-                                <div class="tf-field-text tf-tour-person-pricing" style="display: <?php echo esc_attr( $pricing_type == 'person' ? 'block' : 'none' ) ?>; width: calc(33% - 4px)">
-                                    <label class="tf-field-label"><?php echo esc_html__( 'Infant Price', 'tourfic' ); ?></label>
-                                    <input type="number" min="0" name="tf_tour_infant_price" placeholder="<?php echo esc_html__( 'Infant Price', 'tourfic' ); ?>">
-                                </div>
-                            </div>
-                            <div class="tf-tour-limitation-group" style="display: <?php echo $pricing_type == 'person' || (empty($group_package_option) || empty($group_package_pricing)) ? 'flex' : 'none' ?>">
-                                <div class="tf-field-text tf-tour-limitation" style="display: <?php echo esc_attr( ( $tour_avail_type=='fixed' || $tour_avail_type=='continuous' ) && ( $pricing_type == 'person' || $pricing_type == 'group' ) ? 'block' : 'none' ) ?>; width: calc(33% - 4px)">
-                                    <label class="tf-field-label"><?php echo esc_html__( 'Minimum Person (Required for Search)', 'tourfic' ); ?></label>
-                                    <input type="number" min="0" name="tf_tour_min_person">
-                                </div>
-                                <div class="tf-field-text tf-tour-limitation" style="display: <?php echo esc_attr( ( $tour_avail_type=='fixed' || $tour_avail_type=='continuous' ) && ( $pricing_type == 'person' || $pricing_type == 'group' ) ? 'block' : 'none' ) ?>; width: calc(33% - 4px)">
-                                    <label class="tf-field-label"><?php echo esc_html__( 'Maximum Person (Required for Search)', 'tourfic' ); ?></label>
-                                    <input type="number" min="0" name="tf_tour_max_person">
-                                </div>
-                                <div class="tf-field-text tf-tour-limitation" style="display: <?php echo esc_attr( ( $tour_avail_type=='fixed' || $tour_avail_type=='continuous' ) && ( $pricing_type == 'person' || $pricing_type == 'group' ) ? 'block' : 'none' ) ?>; width: calc(33% - 4px)">
-                                    <label class="tf-field-label"><?php echo esc_html__( 'Maximum Capacity of this tour', 'tourfic' ); ?></label>
-                                    <input type="number" min="0" name="tf_tour_max_capacity">
+                                        <div class="tf-tab-field-content">
+                                            <div class="tf-field tf-field-number" style="width: 100%;">
+                                                <label for="" class="tf-field-label">
+                                                <?php echo esc_html__( 'Price for Adult', 'tourfic' ); ?>
+                                                    <span class="tf-desc-tooltip">
+                                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <g clip-path="url(#clip0_1017_4247)">
+                                                                <path d="M8.00016 10.6654V7.9987M8.00016 5.33203H8.00683M14.6668 7.9987C14.6668 11.6806 11.6821 14.6654 8.00016 14.6654C4.31826 14.6654 1.3335 11.6806 1.3335 7.9987C1.3335 4.3168 4.31826 1.33203 8.00016 1.33203C11.6821 1.33203 14.6668 4.3168 14.6668 7.9987Z" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                            </g>
+                                                            <defs>
+                                                                <clipPath id="clip0_1017_4247">
+                                                                    <rect width="16" height="16" fill="white"/>
+                                                                </clipPath>
+                                                            </defs>
+                                                        </svg>
+                                                        <div class="tf-desc-tooltip-content">
+                                                        <?php echo esc_html__( 'Insert amount only.', 'tourfic' ); ?>
+                                                        </div>
+                                                    </span>
+                                                </label>
+
+                                                <div class="tf-fieldset">
+                                                    <input type="number" name="tf_tour_adult_price" min="0">
+                                                </div>
+                                            </div>
+                                        </div> <!-- .tf-tab-field-content -->
+                                    </div> <!-- #adult_tabs -->
+
+                                    <div id="child_tabs" class="tf-tab-switch-box"  style="width: 100%; display: <?php echo esc_attr( $pricing_type == 'person' ? 'block' : 'none' ) ?>;">
+                                        <div class="tf-tab-field-header">
+                                            <div class="field-label"><?php echo esc_html__( 'Child', 'tourfic' ); ?></div>
+                                            <div class="tf-field-collapas">
+                                                <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+
+                                        <div class="tf-tab-field-content">
+                                            <div class="tf-field tf-field-number" style="width: 100%;">
+                                                <label for="" class="tf-field-label">
+                                                <?php echo esc_html__( 'Price for Child', 'tourfic' ); ?>
+                                                    <span class="tf-desc-tooltip">
+                                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <g clip-path="url(#clip0_1017_4247)">
+                                                                <path d="M8.00016 10.6654V7.9987M8.00016 5.33203H8.00683M14.6668 7.9987C14.6668 11.6806 11.6821 14.6654 8.00016 14.6654C4.31826 14.6654 1.3335 11.6806 1.3335 7.9987C1.3335 4.3168 4.31826 1.33203 8.00016 1.33203C11.6821 1.33203 14.6668 4.3168 14.6668 7.9987Z" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                            </g>
+                                                            <defs>
+                                                                <clipPath id="clip0_1017_4247">
+                                                                    <rect width="16" height="16" fill="white"/>
+                                                                </clipPath>
+                                                            </defs>
+                                                        </svg>
+                                                        <div class="tf-desc-tooltip-content">
+                                                        <?php echo esc_html__( 'Insert amount only.', 'tourfic' ); ?>
+                                                        </div>
+                                                    </span>
+                                                </label>
+
+                                                <div class="tf-fieldset">
+                                                    <input type="number" name="tf_tour_child_price" min="0">
+                                                </div>
+                                            </div>
+                                        </div> <!-- .tf-tab-field-content -->
+                                    </div> <!-- #child_tabs -->
+
+                                    <div id="infant_tabs" class="tf-tab-switch-box"  style="width: 100%; display: <?php echo esc_attr( $pricing_type == 'person' ? 'block' : 'none' ) ?>;">
+                                        <div class="tf-tab-field-header">
+                                            <div class="field-label"><?php echo esc_html__( 'Infant', 'tourfic' ); ?></div>
+                                            <div class="tf-field-collapas">
+                                                <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+
+                                        <div class="tf-tab-field-content">
+                                            <div class="tf-field tf-field-number" style="width: 100%;">
+                                                <label for="" class="tf-field-label">
+                                                <?php echo esc_html__( 'Price for Infant', 'tourfic' ); ?>
+                                                    <span class="tf-desc-tooltip">
+                                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <g clip-path="url(#clip0_1017_4247)">
+                                                                <path d="M8.00016 10.6654V7.9987M8.00016 5.33203H8.00683M14.6668 7.9987C14.6668 11.6806 11.6821 14.6654 8.00016 14.6654C4.31826 14.6654 1.3335 11.6806 1.3335 7.9987C1.3335 4.3168 4.31826 1.33203 8.00016 1.33203C11.6821 1.33203 14.6668 4.3168 14.6668 7.9987Z" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                            </g>
+                                                            <defs>
+                                                                <clipPath id="clip0_1017_4247">
+                                                                    <rect width="16" height="16" fill="white"/>
+                                                                </clipPath>
+                                                            </defs>
+                                                        </svg>
+                                                        <div class="tf-desc-tooltip-content">
+                                                        <?php echo esc_html__( 'Insert amount only.', 'tourfic' ); ?>
+                                                        </div>
+                                                    </span>
+                                                </label>
+
+                                                <div class="tf-fieldset">
+                                                    <input type="number" name="tf_tour_infant_price" min="0">
+                                                </div>
+                                            </div>
+                                        </div> <!-- .tf-tab-field-content -->
+                                    </div> <!-- #infant_tabs -->
+
+                                    <div id="group_tabs" class="tf-tab-switch-box"  style="width: 100%; display: <?php echo esc_attr( $pricing_type == 'group' ? 'block' : 'none' ) ?>;">
+                                        <div class="tf-tab-field-header">
+                                            <div class="field-label"><?php echo esc_html__( 'Group', 'tourfic' ); ?></div>
+                                            <div class="tf-field-collapas">
+                                                <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+
+                                        <div class="tf-tab-field-content">
+                                            <div class="tf-field tf-field-number" style="width: 100%;">
+                                                <label for="" class="tf-field-label">
+                                                <?php echo esc_html__( 'Price for group', 'tourfic' ); ?>
+                                                    <span class="tf-desc-tooltip">
+                                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <g clip-path="url(#clip0_1017_4247)">
+                                                                <path d="M8.00016 10.6654V7.9987M8.00016 5.33203H8.00683M14.6668 7.9987C14.6668 11.6806 11.6821 14.6654 8.00016 14.6654C4.31826 14.6654 1.3335 11.6806 1.3335 7.9987C1.3335 4.3168 4.31826 1.33203 8.00016 1.33203C11.6821 1.33203 14.6668 4.3168 14.6668 7.9987Z" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                            </g>
+                                                            <defs>
+                                                                <clipPath id="clip0_1017_4247">
+                                                                    <rect width="16" height="16" fill="white"/>
+                                                                </clipPath>
+                                                            </defs>
+                                                        </svg>
+                                                        <div class="tf-desc-tooltip-content">
+                                                        <?php echo esc_html__( 'Insert amount only.', 'tourfic' ); ?>
+                                                        </div>
+                                                    </span>
+                                                </label>
+
+                                                <div class="tf-fieldset">
+                                                    <input type="number" name="tf_tour_price" min="0">
+                                                </div>
+                                            </div>
+                                        </div> <!-- .tf-tab-field-content -->
+                                    </div> <!-- #group_tabs -->
+                                    
+                                    <div class="tf-field tf-field-number" style="width:calc(33% - 10px);">
+                                        <label for="" class="tf-field-label">
+                                            <?php echo esc_html__( 'Min', 'tourfic' ); ?>
+                                        </label>    
+                                        <div class="tf-fieldset">
+                                            <input type="number" name="tf_tour_min_person" id="tf_tour_min_person" value="" min="0">            
+                                        </div>
+                                        <span class="tf-field-sub-title">
+                                            <?php echo esc_html__( 'Minimum Person (Required for Search)', 'tourfic' ); ?>
+                                        </span>
+                                    </div>
+
+                                    <div class="tf-field tf-field-number" style="width:calc(33% - 10px);">
+                                        <label for="" class="tf-field-label">
+                                            <?php echo esc_html__( 'Max', 'tourfic' ); ?>
+                                        </label>    
+                                        <div class="tf-fieldset">
+                                            <input type="number" name="tf_tour_max_person" id="tf_tour_max_person" value="" min="0">            
+                                        </div>
+                                        <span class="tf-field-sub-title">
+                                            <?php echo esc_html__( 'Maximum Person (Required for Search)', 'tourfic' ); ?>
+                                        </span>
+                                    </div>
+
+                                    <div class="tf-field tf-field-number" style="width:calc(33% - 10px);">
+                                        <label for="" class="tf-field-label">
+                                            <?php echo esc_html__( 'Capacity', 'tourfic' ); ?>
+                                        </label>    
+                                        <div class="tf-fieldset">
+                                            <input type="number" name="tf_tour_max_capacity" id="tf_tour_max_capacity" value="" min="0">            
+                                        </div>
+                                        <span class="tf-field-sub-title">
+                                            <?php echo esc_html__( 'Maximum Capacity of this tour', 'tourfic' ); ?>
+                                        </span>
+                                    </div>
+                                
                                 </div>
                             </div>
 
