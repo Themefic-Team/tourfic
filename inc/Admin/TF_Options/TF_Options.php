@@ -1103,6 +1103,7 @@ class TF_Options {
 
 		$group_package_option = ! empty( $tour_data['allow_package_pricing'] ) ? $tour_data['allow_package_pricing'] : '';
         $group_package_pricing = ! empty( $tour_data['group_package_pricing'] ) ? $tour_data['group_package_pricing'] : '';
+        $package_pricing = ! empty( $tour_data['package_pricing'] ) ? $tour_data['package_pricing'] : '';
 
 		if ( ! empty( $tour_availability_data ) && is_array( $tour_availability_data ) ) {
 			$tour_availability_data = array_values( $tour_availability_data );
@@ -1343,7 +1344,8 @@ class TF_Options {
 												<input type="number" name="tf_option_group_price_<?php echo esc_attr( $item['index'] ); ?>" min="0">
 											</div>
 										</div>
-
+										<?php 
+										if(!empty($package_pricing[$item['index']]['group_tabs'][4]['group_discount'])){ ?>
 										<div class="tf-field tf-field-repeater" style="width:100%;">
 											<div class="tf-fieldset">
 												<div id="tf-repeater-1" class="tf-repeater group_discount_package" data-max-index="0">
@@ -1409,6 +1411,7 @@ class TF_Options {
 												</div>
 											</div>
 										</div>
+										<?php } ?>
 
 
 									</div> <!-- .tf-tab-field-content -->

@@ -550,51 +550,269 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                             </div>
 
                             <?php if ( $pricing_type == 'package' ) { ?>
-                            <div class="tf-single-options tf-tour-packages">
+                                <div class="tf-field-repeater" style="width: 100%">
+                                <div class="tf-repeater">
+                                <div class="tf-field" style="padding-top: 0px">
+                                    <label class="tf-field-label"><?php echo esc_html__('Packages', 'status'); ?></label>
+                                    <div class="tf-field-sub-title">
+                                        <?php echo esc_html__('You can add, customize any packages from here.', 'tourfic'); ?>
+                                    </div>
+                                </div>
+                                <div class="tf-repeater-wrap">
                                 <?php
                                 if ( ! empty( $tour_package_options ) ) {
-                                    foreach ( $tour_package_options as $key => $room_option ) {
+                                    foreach ( $tour_package_options as $key => $item ) {
                                         $option_pricing_type = ! empty( $room_option['pricing_type'] ) ? $room_option['pricing_type'] : 'person';
                                         ?>
-                                        <div class="tf-single-option tf-single-package">
-                                            <div class="tf-field-switch">
-                                                <label for="tf_package_option_<?php echo esc_attr( $key ); ?>" class="tf-field-label"><?php echo esc_html( $room_option['pack_title'] ); ?></label>
-                                                
-                                            </div>
-                                            <div class="tf-form-fields">
-                                                <div class="tf-field-text tf_option_pricing_type_group" style="display: <?php echo $option_pricing_type == 'group' ? 'block' : 'none' ?>; width: 100%">
-                                                    <label class="tf-field-label"><?php echo esc_html__( 'Group Price', 'tourfic' ); ?></label>
-                                                    <div class="tf-fieldset">
-                                                        <input type="number" min="0" name="tf_option_group_price_<?php echo esc_attr( $key ); ?>" placeholder="<?php echo esc_attr__( 'Group Price', 'tourfic' ); ?>">
-                                                    </div>
-                                                </div>
-                                                <div class="tf-field-text tf_option_pricing_type_person" style="display: <?php echo $option_pricing_type == 'person' ? 'block' : 'none' ?>;">
-                                                    <label class="tf-field-label"><?php echo esc_html__( 'Adult Price', 'tourfic' ); ?></label>
-                                                    <div class="tf-fieldset">
-                                                        <input type="number" min="0" name="tf_option_adult_price_<?php echo esc_attr( $key ); ?>" placeholder="<?php echo esc_attr__( 'Adult Price', 'tourfic' ); ?>">
-                                                    </div>
-                                                </div>
-                                                <div class="tf-field-text tf_option_pricing_type_person" style="display: <?php echo $option_pricing_type == 'person' ? 'block' : 'none' ?>;">
-                                                    <label class="tf-field-label"><?php echo esc_html__( 'Child Price', 'tourfic' ); ?></label>
-                                                    <div class="tf-fieldset">
-                                                        <input type="number" min="0" name="tf_option_child_price_<?php echo esc_attr( $key ); ?>" placeholder="<?php echo esc_attr__( 'Child Price', 'tourfic' ); ?>">
-                                                    </div>
-                                                </div>
-                                                <div class="tf-field-text tf_option_pricing_type_person" style="display: <?php echo $option_pricing_type == 'person' ? 'block' : 'none' ?>;">
-                                                    <label class="tf-field-label"><?php echo esc_html__( 'Infant Price', 'tourfic' ); ?></label>
-                                                    <div class="tf-fieldset">
-                                                        <input type="number" min="0" name="tf_option_infant_price_<?php echo esc_attr( $key ); ?>" placeholder="<?php echo esc_attr__( 'Infant Price', 'tourfic' ); ?>">
+
+                                        <div class="tf-single-repeater">
+                                            <div class="tf-repeater-header">
+                                                <div class="tf-repeater-header-info">
+                                                    <span class="tf-repeater-title"><?php echo esc_html( $item['pack_title'] ); ?></span>
+                                                    <div class="tf-repeater-icon-absulate">
+                                                        <span class="tf-repeater-icon tf-repeater-icon-collapse tf-avail-repeater-collapse">
+                                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M8 13.332H14" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                <path d="M11 2.33218C11.2652 2.06697 11.6249 1.91797 12 1.91797C12.1857 1.91797 12.3696 1.95455 12.5412 2.02562C12.7128 2.09669 12.8687 2.20086 13 2.33218C13.1313 2.4635 13.2355 2.61941 13.3066 2.79099C13.3776 2.96257 13.4142 3.14647 13.4142 3.33218C13.4142 3.5179 13.3776 3.7018 13.3066 3.87338C13.2355 4.04496 13.1313 4.20086 13 4.33218L4.66667 12.6655L2 13.3322L2.66667 10.6655L11 2.33218Z" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                <path d="M10 3.33203L12 5.33203" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                            </svg>
+                                                        </span>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <input type="hidden" name="tf_option_title_<?php echo esc_attr( $key ); ?>" value="<?php echo esc_attr($room_option['pack_title']); ?>"/>
-                                            <input type="hidden" name="tf_option_pricing_type_<?php echo esc_attr( $key ); ?>" value="<?php echo esc_attr($option_pricing_type); ?>"/>
-                                        </div>
+
+                                            <div class="tf-repeater-content-wrap" style="display: none;">
+                                                <div class="tf-field tf-field-accordion" style="width: 100%;">
+                                                    <div class="tf-fieldset">
+
+                                                        <div id="adult_tabs" class="tf-tab-switch-box"  style="display: <?php echo $option_pricing_type == 'person' ? 'block' : 'none' ?>;">
+                                                            <div class="tf-tab-field-header">
+                                                                <div class="field-label"><?php echo esc_html__( 'Adult', 'tourfic' ); ?></div>
+                                                                <div class="tf-field-collapas">
+                                                                    <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="tf-tab-field-content">
+                                                                <div class="tf-field tf-field-number" style="width: 100%;">
+                                                                    <label for="tf_tours_opt[adult_tabs][adult_price]" class="tf-field-label">
+                                                                    <?php echo esc_html__( 'Price for Adult', 'tourfic' ); ?>
+                                                                        <span class="tf-desc-tooltip">
+                                                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                                <g clip-path="url(#clip0_1017_4247)">
+                                                                                    <path d="M8.00016 10.6654V7.9987M8.00016 5.33203H8.00683M14.6668 7.9987C14.6668 11.6806 11.6821 14.6654 8.00016 14.6654C4.31826 14.6654 1.3335 11.6806 1.3335 7.9987C1.3335 4.3168 4.31826 1.33203 8.00016 1.33203C11.6821 1.33203 14.6668 4.3168 14.6668 7.9987Z" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                                </g>
+                                                                                <defs>
+                                                                                    <clipPath id="clip0_1017_4247">
+                                                                                        <rect width="16" height="16" fill="white"/>
+                                                                                    </clipPath>
+                                                                                </defs>
+                                                                            </svg>
+                                                                            <div class="tf-desc-tooltip-content">
+                                                                            <?php echo esc_html__( 'Insert amount only.', 'tourfic' ); ?>
+                                                                            </div>
+                                                                        </span>
+                                                                    </label>
+
+                                                                    <div class="tf-fieldset">
+                                                                        <input type="number" name="tf_option_adult_price_<?php echo esc_attr( $key ); ?>" min="0">
+                                                                    </div>
+                                                                </div>
+                                                            </div> <!-- .tf-tab-field-content -->
+                                                        </div> <!-- #adult_tabs -->
+
+                                                        <div id="child_tabs" class="tf-tab-switch-box"  style="display: <?php echo $option_pricing_type == 'person' ? 'block' : 'none' ?>;">
+                                                            <div class="tf-tab-field-header">
+                                                                <div class="field-label"><?php echo esc_html__( 'Child', 'tourfic' ); ?></div>
+                                                                <div class="tf-field-collapas">
+                                                                    <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="tf-tab-field-content">
+                                                                <div class="tf-field tf-field-number" style="width: 100%;">
+                                                                    <label for="" class="tf-field-label">
+                                                                    <?php echo esc_html__( 'Price for Child', 'tourfic' ); ?>
+                                                                        <span class="tf-desc-tooltip">
+                                                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                                <g clip-path="url(#clip0_1017_4247)">
+                                                                                    <path d="M8.00016 10.6654V7.9987M8.00016 5.33203H8.00683M14.6668 7.9987C14.6668 11.6806 11.6821 14.6654 8.00016 14.6654C4.31826 14.6654 1.3335 11.6806 1.3335 7.9987C1.3335 4.3168 4.31826 1.33203 8.00016 1.33203C11.6821 1.33203 14.6668 4.3168 14.6668 7.9987Z" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                                </g>
+                                                                                <defs>
+                                                                                    <clipPath id="clip0_1017_4247">
+                                                                                        <rect width="16" height="16" fill="white"/>
+                                                                                    </clipPath>
+                                                                                </defs>
+                                                                            </svg>
+                                                                            <div class="tf-desc-tooltip-content">
+                                                                            <?php echo esc_html__( 'Insert amount only.', 'tourfic' ); ?>
+                                                                            </div>
+                                                                        </span>
+                                                                    </label>
+
+                                                                    <div class="tf-fieldset">
+                                                                        <input type="number" name="tf_option_child_price_<?php echo esc_attr( $key ); ?>" min="0">
+                                                                    </div>
+                                                                </div>
+                                                            </div> <!-- .tf-tab-field-content -->
+                                                        </div> <!-- #child_tabs -->
+
+                                                        <div id="infant_tabs" class="tf-tab-switch-box"  style="display: <?php echo $option_pricing_type == 'person' ? 'block' : 'none' ?>;">
+                                                            <div class="tf-tab-field-header">
+                                                                <div class="field-label"><?php echo esc_html__( 'Infant', 'tourfic' ); ?></div>
+                                                                <div class="tf-field-collapas">
+                                                                    <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="tf-tab-field-content">
+                                                                <div class="tf-field tf-field-number" style="width: 100%;">
+                                                                    <label for="" class="tf-field-label">
+                                                                    <?php echo esc_html__( 'Price for Infant', 'tourfic' ); ?>
+                                                                        <span class="tf-desc-tooltip">
+                                                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                                <g clip-path="url(#clip0_1017_4247)">
+                                                                                    <path d="M8.00016 10.6654V7.9987M8.00016 5.33203H8.00683M14.6668 7.9987C14.6668 11.6806 11.6821 14.6654 8.00016 14.6654C4.31826 14.6654 1.3335 11.6806 1.3335 7.9987C1.3335 4.3168 4.31826 1.33203 8.00016 1.33203C11.6821 1.33203 14.6668 4.3168 14.6668 7.9987Z" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                                </g>
+                                                                                <defs>
+                                                                                    <clipPath id="clip0_1017_4247">
+                                                                                        <rect width="16" height="16" fill="white"/>
+                                                                                    </clipPath>
+                                                                                </defs>
+                                                                            </svg>
+                                                                            <div class="tf-desc-tooltip-content">
+                                                                            <?php echo esc_html__( 'Insert amount only.', 'tourfic' ); ?>
+                                                                            </div>
+                                                                        </span>
+                                                                    </label>
+
+                                                                    <div class="tf-fieldset">
+                                                                        <input type="number" name="tf_option_infant_price_<?php echo esc_attr( $key ); ?>" min="0">
+                                                                    </div>
+                                                                </div>
+                                                            </div> <!-- .tf-tab-field-content -->
+                                                        </div> <!-- #infant_tabs -->
+
+                                                        <div id="group_tabs" class="tf-tab-switch-box"  style="display: <?php echo $option_pricing_type == 'group' ? 'block' : 'none' ?>;">
+                                                            <div class="tf-tab-field-header">
+                                                                <div class="field-label"><?php echo esc_html__( 'Group', 'tourfic' ); ?></div>
+                                                                <div class="tf-field-collapas">
+                                                                    <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="tf-tab-field-content">
+                                                                <div class="tf-field tf-field-number" style="width: 100%;">
+                                                                    <label for="" class="tf-field-label">
+                                                                    <?php echo esc_html__( 'Price for Group', 'tourfic' ); ?>
+                                                                        <span class="tf-desc-tooltip">
+                                                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                                <g clip-path="url(#clip0_1017_4247)">
+                                                                                    <path d="M8.00016 10.6654V7.9987M8.00016 5.33203H8.00683M14.6668 7.9987C14.6668 11.6806 11.6821 14.6654 8.00016 14.6654C4.31826 14.6654 1.3335 11.6806 1.3335 7.9987C1.3335 4.3168 4.31826 1.33203 8.00016 1.33203C11.6821 1.33203 14.6668 4.3168 14.6668 7.9987Z" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                                </g>
+                                                                                <defs>
+                                                                                    <clipPath id="clip0_1017_4247">
+                                                                                        <rect width="16" height="16" fill="white"/>
+                                                                                    </clipPath>
+                                                                                </defs>
+                                                                            </svg>
+                                                                            <div class="tf-desc-tooltip-content">
+                                                                            <?php echo esc_html__( 'Insert amount only.', 'tourfic' ); ?>
+                                                                            </div>
+                                                                        </span>
+                                                                    </label>
+
+                                                                    <div class="tf-fieldset">
+                                                                        <input type="number" name="tf_option_group_price_<?php echo esc_attr( $key ); ?>" min="0">
+                                                                    </div>
+                                                                </div>
+                                                                <?php 
+                                                                if(!empty($item['group_tabs'][4]['group_discount'])){ ?>
+                                                                <div class="tf-field tf-field-repeater" style="width:100%;">
+                                                                    <div class="tf-fieldset">
+                                                                        <div id="tf-repeater-1" class="tf-repeater group_discount_package" data-max-index="0">
+                                                                        <div class="tf-repeater-wrap tf-repeater-wrap-group_discount_package ui-sortable tf-group-discount-package_<?php echo esc_attr( $item['index'] ); ?>">
+
+                                                                        </div>
+                                                                        <div class=" tf-single-repeater-clone tf-single-repeater-clone-group_discount_package">
+                                                                            <div class="tf-single-repeater tf-single-repeater-group_discount_package">
+                                                                            <input type="hidden" name="tf_parent_field" value="[group_tabs]">
+                                                                            <input type="hidden" name="tf_repeater_count" value="0">
+                                                                            <input type="hidden" name="tf_current_field" value="group_discount_package">
+                                                                            
+                                                                            <div class="tf-repeater-content-wrap" style="display: none;">
+                                                                                <div class="tf-field tf-field-number  " style="width:calc(66% - 10px);">
+                                                                                    
+                                                                                <div class="tf-fieldset">
+                                                                                    <div class="tf-number-range">
+                                                                                    <div class="tf-number-field-box">
+                                                                                        <i class="fa-regular fa-user"></i>
+                                                                                        <input type="number" name="tf_option_<?php echo esc_attr( $key ); ?>_group_discount[min_person][]" value="" min="0" placeholder="<?php echo esc_html('Min Person', 'tourfic'); ?>">
+                                                                                    </div>
+                                                                                    <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                                        <path d="M15.5 6.66797L18.8333 10.0013L15.5 13.3346" stroke="#95A3B2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                                                        <path d="M2.1665 10H18.8332" stroke="#95A3B2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                                                    </svg>
+                                                                                    <div class="tf-number-field-box">
+                                                                                        <i class="fa-regular fa-user"></i>
+                                                                                        <input type="number" name="tf_option_<?php echo esc_attr( $key ); ?>_group_discount[max_person][]" value="" min="0" placeholder="<?php echo esc_html('Max Person', 'tourfic'); ?>">
+                                                                                    </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                </div>
+                                                                                <div class="tf-field tf-field-number  " style="width:calc(33% - 10px);">
+                                                                                <div class="tf-fieldset">
+                                                                                    <input type="number" name="tf_option_<?php echo esc_attr( $key ); ?>_group_discount[price][]" value="" min="0" placeholder="<?php echo esc_html('Price', 'tourfic'); ?>">
+                                                                                </div>
+                                                                                </div>
+
+                                                                                    <span class="tf-repeater-icon tf-repeater-icon-delete">
+                                                                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                                    <path d="M15 5L5 15" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                                    <path d="M5 5L15 15" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                                    </svg>
+                                                                                </span>
+                                                                            </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="tf-repeater-add tf-repeater-add-group_discount_package">
+                                                                            <span data-repeater-id="group_discount_package" data-repeater-max="" class="tf-repeater-icon tf-repeater-icon-add tf-repeater-add-group_discount_package">
+                                                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                                <g clip-path="url(#clip0_1017_2374)">
+                                                                                <path d="M9.99984 18.3346C14.6022 18.3346 18.3332 14.6037 18.3332 10.0013C18.3332 5.39893 14.6022 1.66797 9.99984 1.66797C5.39746 1.66797 1.6665 5.39893 1.6665 10.0013C1.6665 14.6037 5.39746 18.3346 9.99984 18.3346Z" stroke="#003C79" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                                                <path d="M6.6665 10H13.3332" stroke="#003C79" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                                                <path d="M10 6.66797V13.3346" stroke="#003C79" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                                                </g>
+                                                                                <defs>
+                                                                                <clipPath id="clip0_1017_2374">
+                                                                                    <rect width="20" height="20" fill="white"></rect>
+                                                                                </clipPath>
+                                                                                </defs>
+                                                                            </svg><?php echo esc_html('Add New Discount', 'tourfic'); ?></span>
+                                                                        </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <?php } ?>
+
+
+                                                            </div> <!-- .tf-tab-field-content -->
+                                                        </div> <!-- #group_tabs -->
+
+                                                        <input type="hidden" name="tf_option_title_<?php echo esc_attr( $key ); ?>" value="<?php echo esc_attr($item['pack_title']); ?>"/>
+                                                        <input type="hidden" name="tf_option_pricing_type_<?php echo esc_attr( $key ); ?>" value="<?php echo esc_attr($option_pricing_type); ?>"/>
+                                                    </div>
+                                                </div> <!-- .tf-field-accordion -->
+                                            </div> <!-- .tf-repeater-content-wrap -->
+                                        </div> <!-- .tf-single-repeater -->
+
                                         <?php
                                     }
                                 }
                                 ?>
-                            </div>
+                            </div> <!-- .tf-repeater-wrap -->
+                            </div> <!-- .tf-repeater -->
+                            </div> <!-- .tf-field-repeater -->
                             <?php } ?>
 
                             <?php 
