@@ -327,6 +327,12 @@
                     @media #{$max1024}{
                         font-size: 0.875rem;
                     }
+
+                    svg {
+                        path{
+                            fill: $color-text;
+                        }
+                    }
                 }
                 .tf-booking-date-wrap {
                     display: flex;
@@ -1591,9 +1597,6 @@
                 .tf-tour-booking-box,
                 .tf_tours_booking > .tf-tours-booking-btn,
                 .tf-bottom-booking-bar{
-                    // @media #{$max768} {
-                    //     display: none;
-                    // }
                     .tf-bottom-booking-field{
                         @media #{$max768} {
                             width: auto;
@@ -2775,6 +2778,11 @@
                 font-weight: 400;
                 color: $color-text;
                 padding: 0px;
+                svg{
+                    path,rect{
+                        fill: $color-text;
+                    }
+                }
             }
 
             .acr-select input[type=tel] {
@@ -3417,6 +3425,13 @@
                             width: 100%;
                             align-items: center;
                             position: relative;
+
+                            svg{
+                                path{
+                                    stroke: $color-text;
+                                }
+                            }
+
                             input{
                                 padding: 9px;
                                 border: none;
@@ -3611,6 +3626,11 @@
                                 @media #{$max768}{
                                     float: left;
                                 }
+                                svg{
+                                    path{
+                                        fill: $color-text;
+                                    }
+                                }
                             }
                         }
                     }
@@ -3726,37 +3746,43 @@
                     color: $color-white;
                     padding: 12px 16px;
                 }
-               .tf-archive-ordering #tf-orderby {
-                    background-color: $color-filling-bg;
-                    color: $color-text;
-                    padding: 15px 36px 15px 15px;
-                    height: 100%;
-                    background-position: calc(100% - 12px) 50%;
-                    border: none;
-                    border-radius: 0px;
-                    font-size: 1rem;
-                    background-size: 16px;
-                    -webkit-appearance: none;
-                    appearance: none;
-                    -moz-appearance: none;
-                    background-image: url('https://www.svgrepo.com/show/80156/down-arrow.svg');
-                    background-repeat: no-repeat;
-                    background-size: 12px 12px;
-                    cursor: pointer;
+               .tf-archive-ordering {
+                    position: relative;
+                    #tf-orderby {
+                        background-color: $color-filling-bg;
+                        color: $color-text;
+                        padding: 15px 36px 15px 15px;
+                        height: 100%;
+                        background-position: calc(100% - 12px) 50%;
+                        border: none;
+                        border-radius: 0px;
+                        font-size: 1rem;
+                        -webkit-appearance: none;
+                        appearance: none;
+                        -moz-appearance: none;
+                        cursor: pointer;
 
-                    &:focus-visible {
-                        outline: none;
-                    }
+                        &:focus-visible {
+                            outline: none;
+                        }
 
-                    @media #{$max1024}{
-                        font-size: 0.875rem;
-                        padding: 10px 36px 10px 10px;
-                        background-size: 14px;
+                        @media #{$max1024}{
+                            font-size: 0.875rem;
+                            padding: 10px 36px 10px 10px;
+                            background-size: 14px;
+                        }
+                        @media #{$max575}{
+                            max-width: 150px;
+                        }
                     }
-                    @media #{$max575}{
-                        max-width: 150px;
+                    i {
+                        position: absolute;
+                        top: 50%;
+                        right: 12px;
+                        transform: translateY(-50%);
+                        color: $color-text;
                     }
-               }
+                }
             }
             .tf-archive-available-rooms {
                 .tf-available-room {

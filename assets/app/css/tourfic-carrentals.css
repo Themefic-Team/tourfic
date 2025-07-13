@@ -401,10 +401,6 @@
   position: relative;
 }
 
-.single-tf_carrental .tf-single-template__one .tf-car-info ul li i {
-  font-size: 1.25rem;
-}
-
 @media only screen and (max-width: 1024px) {
   .single-tf_carrental .tf-single-template__one .tf-car-info ul li {
     width: calc(33% - 8px);
@@ -426,6 +422,14 @@
 .single-tf_carrental .tf-single-template__one .tf-car-info ul li:hover .tf-car-info-tooltip {
   visibility: visible;
   opacity: 1;
+}
+
+.single-tf_carrental .tf-single-template__one .tf-car-info ul li i {
+  font-size: 1.25rem;
+}
+
+.single-tf_carrental .tf-single-template__one .tf-car-info ul li svg path {
+  stroke: var(--tf-text-paragraph);
 }
 
 .single-tf_carrental .tf-single-template__one .tf-car-info ul li .tf-car-info-tooltip {
@@ -931,6 +935,10 @@
 
 .single-tf_carrental .tf-single-template__one .tf-date-select-box .tf-date-single-select .tf-select-date .tf-flex {
   flex-wrap: nowrap;
+}
+
+.single-tf_carrental .tf-single-template__one .tf-date-select-box .tf-date-single-select .tf-select-date .icon svg path {
+  stroke: var(--tf-text-paragraph);
 }
 
 .single-tf_carrental .tf-single-template__one .tf-date-select-box .tf-date-single-select .tf-select-date:first-child {
@@ -1719,6 +1727,13 @@
 .tax-carrental_brand .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .tf-flex,
 .page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .tf-flex {
   flex-wrap: nowrap;
+}
+
+.post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .icon svg path,
+.tax-carrental_location .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .icon svg path,
+.tax-carrental_brand .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .icon svg path,
+.page-template-tf-search .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .icon svg path {
+  stroke: var(--tf-text-paragraph);
 }
 
 .post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-search-box .tf-date-select-box .tf-date-single-select .tf-select-date .info-select,

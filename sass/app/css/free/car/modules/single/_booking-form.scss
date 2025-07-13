@@ -45,6 +45,13 @@
                         .tf-flex{
                             flex-wrap: nowrap;
                         }
+                        .icon{
+                            svg{
+                                path{
+                                    stroke: $color-text;
+                                }
+                            }
+                        }
                         &:first-child{
                             border-right: 1px solid $color-border-lite;
                         }

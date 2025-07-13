@@ -3022,6 +3022,7 @@ class Hotel {
 								?>
 
                             </select>
+							<i class="fas fa-chevron-down"></i>
                         </div>
                     </label>
                 </div>
@@ -3042,6 +3043,7 @@ class Hotel {
 									}
 									?>
 								</select>
+								<i class="fas fa-chevron-down"></i>
 							</div>
 						</label>
 					<?php endif; ?>

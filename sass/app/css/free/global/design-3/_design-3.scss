@@ -59,6 +59,11 @@
 
                 .tf-search-field-icon {
                     @include flexbox();
+                    svg{
+                        path{
+                            fill: $color-text;
+                        }
+                    }
                 }
 
                 .tf-search-field-content {
@@ -113,6 +118,12 @@
                     }
                     .tf-search-field-checkout{
                         padding-left: 0;
+                    }
+                }
+
+                svg{
+                    path{
+                        fill: $color-text;
                     }
                 }
             }

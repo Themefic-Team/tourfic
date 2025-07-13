@@ -790,6 +790,13 @@
                 .tf-flex{
                     flex-wrap: nowrap;
                 }
+                .icon{
+                    svg{
+                        path{
+                            stroke: $color-text;
+                        }
+                    }
+                }
                 .info-select{
                     width: 100%;
                     position: relative;

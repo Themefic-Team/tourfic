@@ -1788,11 +1788,7 @@ h3.section-heading {
   -webkit-appearance: none;
   appearance: none;
   -moz-appearance: none;
-  background-image: url("https://www.svgrepo.com/show/80156/down-arrow.svg");
-  background-repeat: no-repeat;
-  background-size: 12px 12px;
   cursor: pointer;
-  background-position: 95% 50%;
   font-size: 0.875rem;
   color: var(--tf-text-paragraph);
 }
@@ -1823,6 +1819,11 @@ h3.section-heading {
 .tf-hotel-side-booking .tf_form-inner i {
   color: var(--tf-text-paragraph);
   font-size: 1rem;
+}
+
+.tf-hotel-side-booking .tf_form-inner i:last-child {
+  position: absolute;
+  right: 12px;
 }
 
 .tf-hotel-side-booking #check-in-out-date {
@@ -4101,6 +4102,11 @@ li.tf-filter-item {
   transition: transform 0.3s ease;
 }
 
+.info-select .selected-pickup-time .icon svg path,
+.info-select .selected-dropoff-time .icon svg path {
+  stroke: var(--tf-text-paragraph);
+}
+
 .info-select .selected-pickup-time.active svg,
 .info-select .selected-dropoff-time.active svg {
   transform: translateY(-50%) rotate(180deg);
@@ -4151,7 +4157,7 @@ li.tf-filter-item {
 
 .info-select .tf-select-time .time-options-list li {
   padding: 8px 12px;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 700;
   cursor: pointer;
   background: #ffffff;
@@ -5666,6 +5672,10 @@ div#tf-destinationautocomplete-list div:before {
   }
 }
 
+.search-result-inner .tf-search-left .tf-action-top .tf-list-grid .tf-archive-ordering {
+  position: relative;
+}
+
 .search-result-inner .tf-search-left .tf-action-top .tf-list-grid .tf-archive-ordering #tf-orderby {
   height: 100%;
   padding: 8px 30px 8px 8px;
@@ -5678,9 +5688,6 @@ div#tf-destinationautocomplete-list div:before {
   -webkit-appearance: none;
   appearance: none;
   -moz-appearance: none;
-  background-image: url("https://www.svgrepo.com/show/80156/down-arrow.svg");
-  background-repeat: no-repeat;
-  background-size: 12px 12px;
   cursor: pointer;
 }
 
@@ -5688,6 +5695,13 @@ div#tf-destinationautocomplete-list div:before {
   .search-result-inner .tf-search-left .tf-action-top .tf-list-grid .tf-archive-ordering #tf-orderby {
     max-width: 160px;
   }
+}
+
+.search-result-inner .tf-search-left .tf-action-top .tf-list-grid .tf-archive-ordering i {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
 }
 
 @media only screen and (max-width: 1024px) {
@@ -10529,6 +10543,10 @@ div#tf-destinationautocomplete-list div:before {
   flex-wrap: nowrap;
 }
 
+.tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date .icon svg path {
+  stroke: var(--tf-text-paragraph);
+}
+
 .tf-archive-search-box-wrapper .tf-date-select-box .tf-date-single-select .tf-select-date .info-select {
   width: 100%;
   position: relative;
@@ -11802,6 +11820,7 @@ div#tf-destinationautocomplete-list div:before {
 
 .tf-archive-template__one .tf-archive-head .tf-search-layout .tf-sorting-selection-warper form {
   height: 100%;
+  position: relative;
 }
 
 .tf-archive-template__one .tf-archive-head .tf-search-layout .tf-sorting-selection-warper form select {
@@ -11810,15 +11829,9 @@ div#tf-destinationautocomplete-list div:before {
   -webkit-appearance: none;
   appearance: none;
   -moz-appearance: none;
-  background-image: url("https://www.svgrepo.com/show/80156/down-arrow.svg");
-  background-repeat: no-repeat;
-  background-size: 12px 12px;
-  background-position: calc(100% - 16px);
-  padding: 14px;
-  background-position: calc(100% - 12px) 50%;
-  font-size: inherit;
-  font-weight: inherit;
-  color: inherit;
+  padding: 6px 14px;
+  font-size: 1rem;
+  color: var(--tf-text-paragraph);
   box-sizing: border-box;
   border: 1px solid var(--tf-border-lite);
   background-color: var(--tf-filling-background);
@@ -11830,6 +11843,14 @@ div#tf-destinationautocomplete-list div:before {
     height: auto;
     padding: 8px;
   }
+}
+
+.tf-archive-template__one .tf-archive-head .tf-search-layout .tf-sorting-selection-warper form i {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  color: var(--tf-text-paragraph);
 }
 
 .tf-archive-template__one .tf-archive-head .tf-icon {
@@ -13038,6 +13059,12 @@ div#tf-destinationautocomplete-list div:before {
   .page-template-tf-search__two .tf-booking-form-wrapper .tf-booking-form span.tf-booking-month {
     font-size: 0.875rem;
   }
+}
+
+.tf-single-template__two .tf-booking-form-wrapper .tf-booking-form span.tf-booking-month svg path,
+.tf-archive-template__two .tf-booking-form-wrapper .tf-booking-form span.tf-booking-month svg path,
+.page-template-tf-search__two .tf-booking-form-wrapper .tf-booking-form span.tf-booking-month svg path {
+  fill: var(--tf-text-paragraph);
 }
 
 .tf-single-template__two .tf-booking-form-wrapper .tf-booking-form .tf-booking-date-wrap,
@@ -16387,6 +16414,12 @@ div#tf-destinationautocomplete-list div:before {
   padding: 0px;
 }
 
+.tf-single-template__two .tf-search-date-wrapper .acr-dec svg path, .tf-single-template__two .tf-search-date-wrapper .acr-dec svg rect,
+.tf-single-template__two .tf-search-date-wrapper .acr-inc svg path,
+.tf-single-template__two .tf-search-date-wrapper .acr-inc svg rect {
+  fill: var(--tf-text-paragraph);
+}
+
 .tf-single-template__two .tf-search-date-wrapper .acr-select input[type=tel] {
   width: 34px;
   height: 48px;
@@ -17206,6 +17239,11 @@ div#tf-destinationautocomplete-list div:before {
   position: relative;
 }
 
+.tf-archive-template__two .tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap svg path,
+.page-template-tf-search__two .tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap svg path {
+  stroke: var(--tf-text-paragraph);
+}
+
 .tf-archive-template__two .tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap input,
 .page-template-tf-search__two .tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location .tf-booking-location-wrap input {
   padding: 9px;
@@ -17529,6 +17567,11 @@ div#tf-destinationautocomplete-list div:before {
   }
 }
 
+.tf-archive-template__two .tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-guest-and-room .tf-booking-form-guest-and-room-inner .tf-arrow-icons svg path,
+.page-template-tf-search__two .tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-guest-and-room .tf-booking-form-guest-and-room-inner .tf-arrow-icons svg path {
+  fill: var(--tf-text-paragraph);
+}
+
 .tf-archive-template__two .tf-archive-search-form .tf-booking-form .tf-booking-form-fields.tf-tour-archive-block .tf-booking-form-checkin,
 .page-template-tf-search__two .tf-archive-search-form .tf-booking-form .tf-booking-form-fields.tf-tour-archive-block .tf-booking-form-checkin {
   max-width: none;
@@ -17690,6 +17733,11 @@ div#tf-destinationautocomplete-list div:before {
   padding: 12px 16px;
 }
 
+.tf-archive-template__two .tf-available-archive-hetels-wrapper .tf-archive-available-rooms-head .tf-archive-ordering,
+.page-template-tf-search__two .tf-available-archive-hetels-wrapper .tf-archive-available-rooms-head .tf-archive-ordering {
+  position: relative;
+}
+
 .tf-archive-template__two .tf-available-archive-hetels-wrapper .tf-archive-available-rooms-head .tf-archive-ordering #tf-orderby,
 .page-template-tf-search__two .tf-available-archive-hetels-wrapper .tf-archive-available-rooms-head .tf-archive-ordering #tf-orderby {
   background-color: var(--tf-filling-background);
@@ -17700,13 +17748,9 @@ div#tf-destinationautocomplete-list div:before {
   border: none;
   border-radius: 0px;
   font-size: 1rem;
-  background-size: 16px;
   -webkit-appearance: none;
   appearance: none;
   -moz-appearance: none;
-  background-image: url("https://www.svgrepo.com/show/80156/down-arrow.svg");
-  background-repeat: no-repeat;
-  background-size: 12px 12px;
   cursor: pointer;
 }
 
@@ -17729,6 +17773,15 @@ div#tf-destinationautocomplete-list div:before {
   .page-template-tf-search__two .tf-available-archive-hetels-wrapper .tf-archive-available-rooms-head .tf-archive-ordering #tf-orderby {
     max-width: 150px;
   }
+}
+
+.tf-archive-template__two .tf-available-archive-hetels-wrapper .tf-archive-available-rooms-head .tf-archive-ordering i,
+.page-template-tf-search__two .tf-available-archive-hetels-wrapper .tf-archive-available-rooms-head .tf-archive-ordering i {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  color: var(--tf-text-paragraph);
 }
 
 .tf-archive-template__two .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room,
@@ -18420,6 +18473,10 @@ div#tf-destinationautocomplete-list div:before {
   display: flex;
 }
 
+.tf-archive-template__three .tf-search-fields .tf-search-field .tf-search-field-icon svg path {
+  fill: var(--tf-text-paragraph);
+}
+
 .tf-archive-template__three .tf-search-fields .tf-search-field .tf-search-field-content {
   display: -webkit-box;
   display: -moz-box;
@@ -18489,6 +18546,10 @@ div#tf-destinationautocomplete-list div:before {
   .tf-archive-template__three .tf-search-fields .tf-search-field-checkinout .tf-search-field-checkout {
     padding-left: 0;
   }
+}
+
+.tf-archive-template__three .tf-search-fields .tf-search-field-checkinout svg path {
+  fill: var(--tf-text-paragraph);
 }
 
 .tf-archive-template__three .tf-search-fields #tf-check-out {

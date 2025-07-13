@@ -769,21 +769,16 @@
                     }
                     form{
                         height: 100%;
+                        position: relative;
                         select {
                             height: 100%;
                             border-radius: 5px;
                             -webkit-appearance: none;
                             appearance: none;
                             -moz-appearance: none;
-                            background-image: url('https://www.svgrepo.com/show/80156/down-arrow.svg');
-                            background-repeat: no-repeat;
-                            background-size: 12px 12px;
-                            background-position: calc(100% - 16px);
-                            padding: 14px;
-                            background-position: calc(100% - 12px) 50%;
-                            font-size: inherit;
-                            font-weight: inherit;
-                            color: inherit;
+                            padding: 6px 14px;
+                            font-size: 1rem;
+                            color: $color-text;
                             box-sizing: border-box;
                             border: 1px solid $color-border-lite;
                             background-color: $color-filling-bg;
@@ -792,6 +787,13 @@
                                 height: auto;
                                 padding: 8px;
                             }
+                        }
+                        i{
+                            position: absolute;
+                            top: 50%;
+                            right: 12px;
+                            transform: translateY(-50%);
+                            color: $color-text;
                         }
                     }
                 }

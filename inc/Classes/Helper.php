@@ -1528,6 +1528,7 @@ class Helper {
 									echo '<option ' . esc_attr( $selected ) . ' value="' . esc_attr( $value ) . '">' . esc_html( $value ) . ' ' . esc_html__( $adults_name . 's', 'tourfic' ) . '</option>';
 								} ?>
                             </select>
+                            <i class="fas fa-chevron-down"></i>
                         </div>
                     </label>
                 </div>
@@ -1545,6 +1546,7 @@ class Helper {
 									} ?>
 
                                 </select>
+                                <i class="fas fa-chevron-down"></i>
                             </div>
                         </label>
                     </div>
@@ -1565,6 +1567,7 @@ class Helper {
 									} ?>
 
                                 </select>
+                                <i class="fas fa-chevron-down"></i>
                             </div>
                         </label>
                     </div>
@@ -1585,6 +1588,7 @@ class Helper {
 									} ?>
 
                                 </select>
+                                <i class="fas fa-chevron-down"></i>
                             </div>
                         </label>
                     </div>
@@ -1601,6 +1605,7 @@ class Helper {
 										echo '<option ' . esc_attr( $selected ) . ' value="' . esc_attr( $value ) . '">' . esc_html( $value ) . ' ' . esc_html__( "Rooms", "tourfic" ) . '</option>';
 									} ?>
                                 </select>
+                                <i class="fas fa-chevron-down"></i>
                             </div>
                         </label>
                     </div>
@@ -2823,6 +2828,7 @@ class Helper {
 								}
 								?>
                             </select>
+                            <i class="fas fa-chevron-down"></i>
                         </div>
                     </label>
                 </div>
@@ -2843,6 +2849,7 @@ class Helper {
 								}
 								?>
                             </select>
+                            <i class="fas fa-chevron-down"></i>
                         </div>
                     </label>
                 </div>
@@ -2860,6 +2867,7 @@ class Helper {
 									} ?>
 
                                 </select>
+                                <i class="fas fa-chevron-down"></i>
                             </div>
                         </label>
                     </div>
@@ -2878,6 +2886,7 @@ class Helper {
 									}
 									?>
                                 </select>
+                                <i class="fas fa-chevron-down"></i>
                             </div>
                         </label>
                     </div>

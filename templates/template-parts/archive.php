@@ -828,6 +828,7 @@ elseif( ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-2
                         <option value="price-high"><?php echo esc_html__( 'Sort By Price: High to Low', 'tourfic' ); ?></option>
                         <option value="price-low"><?php echo esc_html__( 'Sort By Price: Low to High', 'tourfic' ); ?></option>
                     </select>
+                    <i class="fas fa-chevron-down"></i>
                 </form>
             </div>
         </div>

@@ -48,27 +48,33 @@
                     }
                 }
             
-                .tf-archive-ordering #tf-orderby{
-                    height: 100%;
-                    padding: 8px 30px 8px 8px;
-                    background-position: calc(100% - 8px) 54%;
-                    border-radius: 4px;
-                    font-size: 1rem;
-                    color: $color-text;
-                    background-color: $color-filling-bg;
-                    border-color: $color-border-lite;
-                    -webkit-appearance: none;
-                    appearance: none;
-                    -moz-appearance: none;
-                    background-image: url('https://www.svgrepo.com/show/80156/down-arrow.svg');
-                    background-repeat: no-repeat;
-                    background-size: 12px 12px;
-                    cursor: pointer;
-           
-                    @media #{$max575}{
-                        max-width: 160px;
+                .tf-archive-ordering{
+                    position: relative;
+                    #tf-orderby{
+                        height: 100%;
+                        padding: 8px 30px 8px 8px;
+                        background-position: calc(100% - 8px) 54%;
+                        border-radius: 4px;
+                        font-size: 1rem;
+                        color: $color-text;
+                        background-color: $color-filling-bg;
+                        border-color: $color-border-lite;
+                        -webkit-appearance: none;
+                        appearance: none;
+                        -moz-appearance: none;
+                        cursor: pointer;
+            
+                        @media #{$max575}{
+                            max-width: 160px;
+                        }
                     }
-                }
+                    i{
+                        position: absolute;
+                        top: 50%;
+                        right: 12px;
+                        transform: translateY(-50%);
+                    }
+                } 
             }
         }
         

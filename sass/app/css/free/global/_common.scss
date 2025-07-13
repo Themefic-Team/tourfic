@@ -214,11 +214,7 @@ h3.section-heading {
             -webkit-appearance: none;
             appearance: none;
             -moz-appearance: none;
-            background-image: url("https://www.svgrepo.com/show/80156/down-arrow.svg");
-            background-repeat: no-repeat;
-            background-size: 12px 12px;
             cursor: pointer;
-            background-position: 95% 50%;
             font-size: 0.875rem;
             color: $color-text;
             &:focus {
@@ -245,6 +241,10 @@ h3.section-heading {
         i {
             color: $color-text;
             font-size: 1rem;
+            &:last-child {
+                position: absolute;
+                right: 12px;
+            }
         }
     }
     #check-in-out-date {
@@ -2035,6 +2035,9 @@ li.tf-filter-item {
                 top: 50%;
                 transform: translateY(-50%);
                 transition: transform 0.3s ease;
+                path{
+                    stroke: $color-text;
+                }
             }
         }
         &.active{
@@ -2080,7 +2083,7 @@ li.tf-filter-item {
             }
             li {
                 padding: 8px 12px;
-                font-size: 16px;
+                font-size: 1rem;
                 font-weight: 700;
                 cursor: pointer;
                 background: $color-white;
