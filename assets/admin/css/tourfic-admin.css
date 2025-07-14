@@ -4816,6 +4816,11 @@ a.tf-import-btn, a.tf-export-btn {
   border: 2px solid #D9E0E8;
   border-radius: 4px;
 }
+.tf-apt-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-checkbox-group li label::after,
+.tf-room-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-checkbox-group li label::after,
+.tf-tour-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-checkbox-group li label::after {
+  top: -1px;
+}
 .tf-apt-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-weeks-checkbox ul li,
 .tf-room-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-weeks-checkbox ul li,
 .tf-tour-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-weeks-checkbox ul li {

@@ -82,6 +82,9 @@
                             border: 2px solid $tf_border_default;
                             border-radius: 4px;
                         }
+                        &::after{
+                            top: -1px;
+                        }
                     }
                 }
             }
