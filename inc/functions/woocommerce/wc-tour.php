@@ -514,36 +514,49 @@ function tf_tours_booking_function() {
 
 	}
 
-	if( $pricing_rule=='group' && !empty($allow_package_pricing) && !empty($group_package_pricing) ){
-		$max_allowed = 0;
-		$matched_price = '';
-		$found_valid_option = false;
+	$single_package = !empty($tf_package_pricing[$selectedPackage]) ? $tf_package_pricing[$selectedPackage] : '';
 
-		for ( $i = 0; $i < (int) $matched_availability['options_count']; $i++ ) {
-			$min = (int) $matched_availability[ 'tf_option_min_person_' . $i ];
-			$max = (int) $matched_availability[ 'tf_option_max_person_' . $i ];
-			$price = $matched_availability[ 'tf_option_group_price_' . $i ];
-			$title = $matched_availability[ 'tf_option_title_' . $i ];
+	if ( $pricing_rule=='package' && !empty($single_package) && $single_package['pricing_type'] == 'group' ) {
+		$pack_max_people = !empty($single_package['group_tabs'][3]['max_person']) ? $single_package['group_tabs'][3]['max_person'] : 0;
 
-			// Keep track of the highest max_person across all options
-			if ( $max > $max_allowed ) {
-				$max_allowed = $max;
-			}
-
-			// Find a matching price bracket
-			if ( $total_people >= $min && $total_people <= $max ) {
-				$found_valid_option = true;
-				$matched_price = $price;
-				break;
-			}
-		}
-
-		if ( $total_people > $max_allowed ) {
-			$response['errors'][] = sprintf( esc_html__( 'Maximum %1$s allowed', 'tourfic' ), $max_allowed );
-		} elseif ( $found_valid_option ) {
-			$group_price = $matched_price;
+		$max_text = sprintf( _n( '%s person', '%s people', $pack_max_people, 'tourfic' ), $pack_max_people );
+		// echo $total_people_booking;
+		if ( $total_people_booking > $pack_max_people && $pack_max_people > 0 ) {
+			/* translators: %1$s: maximum number of people, %2$s: start date, %3$s: end date */
+			$response['errors'][] = sprintf( esc_html__( 'Maximum %1$s allowed', 'tourfic' ), $max_text );
 		}
 	}
+
+	// if( $pricing_rule=='group' && !empty($allow_package_pricing) && !empty($group_package_pricing) ){
+	// 	$max_allowed = 0;
+	// 	$matched_price = '';
+	// 	$found_valid_option = false;
+
+	// 	for ( $i = 0; $i < (int) $matched_availability['options_count']; $i++ ) {
+	// 		$min = (int) $matched_availability[ 'tf_option_min_person_' . $i ];
+	// 		$max = (int) $matched_availability[ 'tf_option_max_person_' . $i ];
+	// 		$price = $matched_availability[ 'tf_option_group_price_' . $i ];
+	// 		$title = $matched_availability[ 'tf_option_title_' . $i ];
+
+	// 		// Keep track of the highest max_person across all options
+	// 		if ( $max > $max_allowed ) {
+	// 			$max_allowed = $max;
+	// 		}
+
+	// 		// Find a matching price bracket
+	// 		if ( $total_people >= $min && $total_people <= $max ) {
+	// 			$found_valid_option = true;
+	// 			$matched_price = $price;
+	// 			break;
+	// 		}
+	// 	}
+
+	// 	if ( $total_people > $max_allowed ) {
+	// 		$response['errors'][] = sprintf( esc_html__( 'Maximum %1$s allowed', 'tourfic' ), $max_allowed );
+	// 	} elseif ( $found_valid_option ) {
+	// 		$group_price = $matched_price;
+	// 	}
+	// }
 
 	/**
 	 * Check errors
@@ -590,60 +603,113 @@ function tf_tours_booking_function() {
 	$children_price = ! empty( $matched_availability['child_price'] ) ? $matched_availability['child_price'] : $children_price ;
 	$infant_price   = ! empty( $matched_availability['infant_price'] ) ? $matched_availability['infant_price'] : $infant_price;
 
-	if( $pricing_rule=='group' && !empty($allow_package_pricing) && !empty($group_package_pricing) ){
-		$max_allowed = 0;
-		$matched_price = '';
-		$found_valid_option = false;
+	// if( $pricing_rule=='group' && !empty($allow_package_pricing) && !empty($group_package_pricing) ){
+	// 	$max_allowed = 0;
+	// 	$matched_price = '';
+	// 	$found_valid_option = false;
 
-		for ( $i = 0; $i < (int) $matched_availability['options_count']; $i++ ) {
-			$min = (int) $matched_availability[ 'tf_option_min_person_' . $i ];
-			$max = (int) $matched_availability[ 'tf_option_max_person_' . $i ];
-			$price =  !empty($matched_availability[ 'tf_option_group_price_' . $i ]) ? $matched_availability[ 'tf_option_group_price_' . $i ] : 0;
+	// 	for ( $i = 0; $i < (int) $matched_availability['options_count']; $i++ ) {
+	// 		$min = (int) $matched_availability[ 'tf_option_min_person_' . $i ];
+	// 		$max = (int) $matched_availability[ 'tf_option_max_person_' . $i ];
+	// 		$price =  !empty($matched_availability[ 'tf_option_group_price_' . $i ]) ? $matched_availability[ 'tf_option_group_price_' . $i ] : 0;
 
-			// Keep track of the highest max_person across all options
-			if ( $max > $max_allowed ) {
-				$max_allowed = $max;
-			}
+	// 		// Keep track of the highest max_person across all options
+	// 		if ( $max > $max_allowed ) {
+	// 			$max_allowed = $max;
+	// 		}
 
-			// Find a matching price bracket
-			if ( $total_people_booking >= $min && $total_people_booking <= $max ) {
-				$found_valid_option = true;
-				$matched_price = $price;
-				break;
-			}
-		}
+	// 		// Find a matching price bracket
+	// 		if ( $total_people_booking >= $min && $total_people_booking <= $max ) {
+	// 			$found_valid_option = true;
+	// 			$matched_price = $price;
+	// 			break;
+	// 		}
+	// 	}
 
-		if ( $total_people_booking > $max_allowed ) {
-			$response['errors'][] = sprintf( esc_html__( 'Maximum %1$s allowed', 'tourfic' ), $max_allowed );
-		} elseif ( $found_valid_option ) {
-			$group_price = $matched_price;
-		}
-	}
+	// 	if ( $total_people_booking > $max_allowed ) {
+	// 		$response['errors'][] = sprintf( esc_html__( 'Maximum %1$s allowed', 'tourfic' ), $max_allowed );
+	// 	} elseif ( $found_valid_option ) {
+	// 		$group_price = $matched_price;
+	// 	}
+	// }
 
 	if($pricing_rule == 'package'){
 		$single_package = !empty($tf_package_pricing[$selectedPackage]) ? $tf_package_pricing[$selectedPackage] : '';
 		
 		if ( $single_package['pricing_type'] == 'person' ) {
 			// Default Adult Price from Package
-			$pack_default_adult = !empty($single_package['adult_price']) ? $single_package['adult_price'] : 0;
+			$pack_default_adult = !empty($single_package['adult_tabs'][1]['adult_price']) ? $single_package['adult_tabs'][1]['adult_price'] : 0;
 			// Selected Package Adult Price
 			$adult_price = !empty($matched_availability['tf_option_adult_price_'.$selectedPackage]) ? $matched_availability['tf_option_adult_price_'.$selectedPackage] : $pack_default_adult;
 
 			// Default Child Price from Package
-			$pack_default_child = !empty($single_package['child_price']) ? $single_package['child_price'] : 0;
+			$pack_default_child = !empty($single_package['child_tabs'][1]['child_price']) ? $single_package['child_tabs'][1]['child_price'] : 0;
 			// Selected Package Child Price
 			$children_price = !empty($matched_availability['tf_option_child_price_'.$selectedPackage]) ? $matched_availability['tf_option_child_price_'.$selectedPackage] : $pack_default_child;
 
 			// Default Infant Price from Package
-			$pack_default_infant = !empty($single_package['infant_price']) ? $single_package['infant_price'] : 0;
+			$pack_default_infant = !empty($single_package['infant_tabs'][1]['infant_price']) ? $single_package['infant_tabs'][1]['infant_price'] : 0;
 			// Selected Package Infant Price
 			$infant_price = !empty($matched_availability['tf_option_infant_price_'.$selectedPackage]) ? $matched_availability['tf_option_infant_price_'.$selectedPackage] : $pack_default_infant;
 		}
 		if ( $single_package['pricing_type'] == 'group' ) {
 			// Default Group Price from Package
-			$pack_default_group = !empty($single_package['group_price']) ? $single_package['group_price'] : 0;
+			$pack_default_group = !empty($single_package['group_tabs'][1]['group_price']) ? $single_package['group_tabs'][1]['group_price'] : 0;
 			// Selected Package Group Price
 			$group_price = !empty($matched_availability['tf_option_group_price_'.$selectedPackage]) ? $matched_availability['tf_option_group_price_'.$selectedPackage] : $pack_default_group;
+
+			$tf_option_group_discount = !empty($matched_availability['tf_option_group_discount_'.$selectedPackage]) ? $matched_availability['tf_option_group_discount_'.$selectedPackage] : [];
+					
+			if(!empty($tf_option_group_discount)){
+				$group_discount_price = null;
+
+				$min_persons = $tf_option_group_discount['min_person'];
+				$max_persons = $tf_option_group_discount['max_person'];
+				$prices      = $tf_option_group_discount['price'];
+
+				for ( $i = 0; $i < count( $min_persons ); $i++ ) {
+					// Skip empty values
+					if ( empty( $min_persons[$i] ) || empty( $max_persons[$i] ) || empty( $prices[$i] ) ) {
+						continue;
+					}
+
+					$min = (int) $min_persons[$i];
+					$max = (int) $max_persons[$i];
+
+					if ( $total_people_booking >= $min && $total_people_booking <= $max ) {
+						$group_discount_price = $prices[$i];
+						break;
+					}
+				}
+
+				if ( $group_discount_price !== null ) {
+					$group_price = $group_discount_price;
+				}
+			}else{
+				if ( !empty($single_package) && $single_package['pricing_type'] == 'group' ) {
+					if(!empty($single_package['group_tabs'][4]['group_discount'])){
+						$group_discounts = !empty($single_package['group_tabs'][5]['group_discount_package']) ? $single_package['group_tabs'][5]['group_discount_package'] : [];
+		
+						$matched_discount_price = null;
+						if(!empty($group_discounts)){
+							foreach ( $group_discounts as $discount ) {
+								$min = (int) $discount['min_person'];
+								$max = (int) $discount['max_person'];
+		
+								if ( $total_people_booking >= $min && $total_people_booking <= $max ) {
+									$matched_discount_price = $discount['discount_price'];
+									break; // Stop execution after finding the first match
+								}
+							}
+						}
+		
+						if ( $matched_discount_price !== null ) {
+							// Discount found
+							$group_price = $matched_discount_price;
+						}
+					}
+				}
+			}
 		}
 	}
 
@@ -795,27 +861,27 @@ function tf_tours_booking_function() {
 			$without_payment_price     = ( $adult_price * $adults ) + ( $children * $children_price ) + ( $infant * $infant_price );
 		} elseif( $pricing_rule == 'package' ) {
 			$single_package = !empty($tf_package_pricing[$selectedPackage]) ? $tf_package_pricing[$selectedPackage] : '';
-			if ( $single_package['pricing_type'] == 'person' ) {
+			if ( !empty($single_package) && $single_package['pricing_type'] == 'person' ) {
 				// Default Adult Price from Package
-				$pack_default_adult = !empty($single_package['adult_price']) ? $single_package['adult_price'] : 0;
+				$pack_default_adult = !empty($single_package['adult_tabs'][1]['adult_price']) ? $single_package['adult_tabs'][1]['adult_price'] : 0;
 				// Selected Package Adult Price
 				$adult_price = !empty($matched_availability['tf_option_adult_price_'.$selectedPackage]) ? $matched_availability['tf_option_adult_price_'.$selectedPackage] : $pack_default_adult;
 
 				// Default Child Price from Package
-				$pack_default_child = !empty($single_package['child_price']) ? $single_package['child_price'] : 0;
+				$pack_default_child = !empty($single_package['child_tabs'][1]['child_price']) ? $single_package['child_tabs'][1]['child_price'] : 0;
 				// Selected Package Child Price
 				$children_price = !empty($matched_availability['tf_option_child_price_'.$selectedPackage]) ? $matched_availability['tf_option_child_price_'.$selectedPackage] : $pack_default_child;
 
 				// Default Infant Price from Package
-				$pack_default_infant = !empty($single_package['infant_price']) ? $single_package['infant_price'] : 0;
+				$pack_default_infant = !empty($single_package['infant_tabs'][1]['infant_price']) ? $single_package['infant_tabs'][1]['infant_price'] : 0;
 				// Selected Package Infant Price
 				$infant_price = !empty($matched_availability['tf_option_infant_price_'.$selectedPackage]) ? $matched_availability['tf_option_infant_price_'.$selectedPackage] : $pack_default_infant;
 				
 				$without_payment_price = ( $adult_price * $adults ) + ( $children * $children_price ) + ( $infant * $infant_price );
 			}
-			if ( $single_package['pricing_type'] == 'group' ) {
+			if ( !empty($single_package) && $single_package['pricing_type'] == 'group' ) {
 				// Default Group Price from Package
-				$pack_default_group = !empty($single_package['group_price']) ? $single_package['group_price'] : 0;
+				$pack_default_group = !empty($single_package['group_tabs'][1]['group_price']) ? $single_package['group_tabs'][1]['group_price'] : 0;
 				// Selected Package Group Price
 				$group_price = !empty($matched_availability['tf_option_group_price_'.$selectedPackage]) ? $matched_availability['tf_option_group_price_'.$selectedPackage] : $pack_default_group;
 
@@ -937,13 +1003,13 @@ function tf_tours_booking_function() {
 				$tf_tours_data['tf_tours_data']['infants']   = $infant . " × " . wp_strip_all_tags(wc_price( $infant_price ));
 			} elseif( $pricing_rule == 'package' ) {
 				$single_package = !empty($tf_package_pricing[$selectedPackage]) ? $tf_package_pricing[$selectedPackage] : '';
-				if ( $single_package['pricing_type'] == 'person' ) {
+				if ( !empty($single_package) && $single_package['pricing_type'] == 'person' ) {
 					$tf_tours_data['tf_tours_data']['price']     = ( $adult_price * $adults ) + ( $children * $children_price ) + ( $infant * $infant_price );
 					$tf_tours_data['tf_tours_data']['adults']    = $adults . " × " . wp_strip_all_tags(wc_price( $adult_price ));
 					$tf_tours_data['tf_tours_data']['childrens'] = $children . " × " . wp_strip_all_tags(wc_price( $children_price ));
 					$tf_tours_data['tf_tours_data']['infants']   = $infant . " × " . wp_strip_all_tags(wc_price( $infant_price ));
 				}
-				if ( $single_package['pricing_type'] == 'group' ) {
+				if ( !empty($single_package) && $single_package['pricing_type'] == 'group' ) {
 					$tf_tours_data['tf_tours_data']['price']     = $group_price;
 					$tf_tours_data['tf_tours_data']['adults']    = $adults;
 					$tf_tours_data['tf_tours_data']['childrens'] = $children;

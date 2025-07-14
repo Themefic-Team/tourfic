@@ -565,7 +565,7 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                         if(empty($item['pack_status'])){
                                             continue;
                                         }
-                                        $option_pricing_type = ! empty( $room_option['pricing_type'] ) ? $room_option['pricing_type'] : 'person';
+                                        $option_pricing_type = ! empty( $item['pricing_type'] ) ? $item['pricing_type'] : 'person';
                                         ?>
 
                                         <div class="tf-single-repeater">
@@ -734,7 +734,7 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                                                 <div class="tf-field tf-field-repeater" style="width:100%;">
                                                                     <div class="tf-fieldset">
                                                                         <div id="tf-repeater-1" class="tf-repeater group_discount_package" data-max-index="0">
-                                                                        <div class="tf-repeater-wrap tf-repeater-wrap-group_discount_package ui-sortable tf-group-discount-package_<?php echo esc_attr( $item['index'] ); ?>">
+                                                                        <div class="tf-repeater-wrap tf-repeater-wrap-group_discount_package ui-sortable tf-group-discount-package_<?php echo esc_attr( $key ); ?>">
 
                                                                         </div>
                                                                         <div class=" tf-single-repeater-clone tf-single-repeater-clone-group_discount_package">

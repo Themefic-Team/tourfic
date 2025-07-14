@@ -3655,6 +3655,17 @@ class Tour {
 
 		}
 
+		$single_package = !empty($tf_package_pricing[$selectedPackage]) ? $tf_package_pricing[$selectedPackage] : '';
+
+		if ( $pricing_rule=='package' && !empty($single_package) && $single_package['pricing_type'] == 'group' ) {
+			$pack_max_people = !empty($single_package['group_tabs'][3]['max_person']) ? $single_package['group_tabs'][3]['max_person'] : 0;
+
+			$max_text = sprintf( _n( '%s person', '%s people', $pack_max_people, 'tourfic' ), $pack_max_people );
+			if ( $total_people_booking > $pack_max_people && $pack_max_people > 0 ) {
+				/* translators: %1$s: maximum number of people, %2$s: start date, %3$s: end date */
+				$response['errors'][] = sprintf( esc_html__( 'Maximum %1$s allowed', 'tourfic' ), $max_text );
+			}
+		}
 		/**
 		 * Check errors
 		 *
@@ -3697,35 +3708,35 @@ class Tour {
 		$children_price = ! empty( $matched_availability['child_price'] ) ? $matched_availability['child_price'] : $children_price;
 		$infant_price   = ! empty( $matched_availability['infant_price'] ) ? $matched_availability['infant_price'] : $infant_price;
 
-		if( $pricing_rule=='group' && !empty($allow_package_pricing) && !empty($group_package_pricing) ){
-			$max_allowed = 0;
-			$matched_price = '';
-			$found_valid_option = false;
+		// if( $pricing_rule=='group' && !empty($allow_package_pricing) && !empty($group_package_pricing) ){
+		// 	$max_allowed = 0;
+		// 	$matched_price = '';
+		// 	$found_valid_option = false;
 
-			for ( $i = 0; $i < (int) $matched_availability['options_count']; $i++ ) {
-				$min = (int) $matched_availability[ 'tf_option_min_person_' . $i ];
-				$max = (int) $matched_availability[ 'tf_option_max_person_' . $i ];
-				$price =  !empty($matched_availability[ 'tf_option_group_price_' . $i ]) ? $matched_availability[ 'tf_option_group_price_' . $i ] : 0;
+		// 	for ( $i = 0; $i < (int) $matched_availability['options_count']; $i++ ) {
+		// 		$min = (int) $matched_availability[ 'tf_option_min_person_' . $i ];
+		// 		$max = (int) $matched_availability[ 'tf_option_max_person_' . $i ];
+		// 		$price =  !empty($matched_availability[ 'tf_option_group_price_' . $i ]) ? $matched_availability[ 'tf_option_group_price_' . $i ] : 0;
 
-				// Keep track of the highest max_person across all options
-				if ( $max > $max_allowed ) {
-					$max_allowed = $max;
-				}
+		// 		// Keep track of the highest max_person across all options
+		// 		if ( $max > $max_allowed ) {
+		// 			$max_allowed = $max;
+		// 		}
 
-				// Find a matching price bracket
-				if ( $total_people_booking >= $min && $total_people_booking <= $max ) {
-					$found_valid_option = true;
-					$matched_price = $price;
-					break;
-				}
-			}
+		// 		// Find a matching price bracket
+		// 		if ( $total_people_booking >= $min && $total_people_booking <= $max ) {
+		// 			$found_valid_option = true;
+		// 			$matched_price = $price;
+		// 			break;
+		// 		}
+		// 	}
 
-			if ( $total_people_booking > $max_allowed ) {
-				$response['errors'][] = sprintf( esc_html__( 'Maximum %1$s allowed', 'tourfic' ), $max_allowed );
-			} elseif ( $found_valid_option ) {
-				$group_price = $matched_price;
-			}
-		}
+		// 	if ( $total_people_booking > $max_allowed ) {
+		// 		$response['errors'][] = sprintf( esc_html__( 'Maximum %1$s allowed', 'tourfic' ), $max_allowed );
+		// 	} elseif ( $found_valid_option ) {
+		// 		$group_price = $matched_price;
+		// 	}
+		// }
 
 		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_type == 'continuous' && !empty($allowed_times_field['time']) ) {
 			$has_valid_time = !empty(array_filter($allowed_times_field['time'], function($t) {
@@ -3808,7 +3819,7 @@ class Tour {
 			if( $pricing_rule == 'package') {
 				$single_package = !empty($tf_package_pricing[$selectedPackage]) ? $tf_package_pricing[$selectedPackage] : '';
 
-				if ( !empty($single_package) && ! empty( $single_package['pricing_type'] == 'person' ) ) {
+				if ( !empty($single_package) && $single_package['pricing_type'] == 'person' ) {
 					// Default Adult Price from Package
 					$pack_default_adult = !empty($single_package['adult_tabs'][1]['adult_price']) ? $single_package['adult_tabs'][1]['adult_price'] : 0;
 					// Selected Package Adult Price
@@ -3823,11 +3834,65 @@ class Tour {
 					$infant_price = !empty($matched_availability['tf_option_infant_price_'.$selectedPackage]) ? $matched_availability['tf_option_infant_price_'.$selectedPackage] : $pack_default_infant;
 					$tf_tours_data_price = ( $adult_price * $adults ) + ( $children * $children_price ) + ( $infant * $infant_price );
 				}
-				if ( !empty($single_package) && ! empty( $single_package['pricing_type'] == 'group' ) ) {
+				if ( !empty($single_package) && $single_package['pricing_type'] == 'group' ) {
 					// Default Group Price from Package
 					$pack_default_group = !empty($single_package['group_tabs'][1]['group_price']) ? $single_package['group_tabs'][1]['group_price'] : 0;
 					// Selected Package Group Price
 					$group_price = !empty($matched_availability['tf_option_group_price_'.$selectedPackage]) ? $matched_availability['tf_option_group_price_'.$selectedPackage] : $pack_default_group;
+
+					$tf_option_group_discount = !empty($matched_availability['tf_option_group_discount_'.$selectedPackage]) ? $matched_availability['tf_option_group_discount_'.$selectedPackage] : [];
+					
+					if(!empty($tf_option_group_discount)){
+						$group_discount_price = null;
+
+						$min_persons = $tf_option_group_discount['min_person'];
+						$max_persons = $tf_option_group_discount['max_person'];
+						$prices      = $tf_option_group_discount['price'];
+
+						for ( $i = 0; $i < count( $min_persons ); $i++ ) {
+							// Skip empty values
+							if ( empty( $min_persons[$i] ) || empty( $max_persons[$i] ) || empty( $prices[$i] ) ) {
+								continue;
+							}
+
+							$min = (int) $min_persons[$i];
+							$max = (int) $max_persons[$i];
+
+							if ( $total_people_booking >= $min && $total_people_booking <= $max ) {
+								$group_discount_price = $prices[$i];
+								break;
+							}
+						}
+
+						if ( $group_discount_price !== null ) {
+							$group_price = $group_discount_price;
+						}
+					}else{
+						if ( !empty($single_package) && $single_package['pricing_type'] == 'group' ) {
+							if(!empty($single_package['group_tabs'][4]['group_discount'])){
+								$group_discounts = !empty($single_package['group_tabs'][5]['group_discount_package']) ? $single_package['group_tabs'][5]['group_discount_package'] : [];
+				
+								$matched_discount_price = null;
+								if(!empty($group_discounts)){
+									foreach ( $group_discounts as $discount ) {
+										$min = (int) $discount['min_person'];
+										$max = (int) $discount['max_person'];
+				
+										if ( $total_people_booking >= $min && $total_people_booking <= $max ) {
+											$matched_discount_price = $discount['discount_price'];
+											break; // Stop execution after finding the first match
+										}
+									}
+								}
+				
+								if ( $matched_discount_price !== null ) {
+									// Discount found
+									$group_price = $matched_discount_price;
+								}
+							}
+						}
+					}
+
 					$tf_tours_data_price = $group_price;
 				}
 			}
@@ -3983,7 +4048,7 @@ class Tour {
 				}
 			} elseif($pricing_rule == "package") {
 				$single_package = !empty($tf_package_pricing[$selectedPackage]) ? $tf_package_pricing[$selectedPackage] : '';
-				if ( !empty($single_package) && ! empty( $single_package['pricing_type'] == 'person' ) ) {
+				if ( !empty($single_package) && $single_package['pricing_type'] == 'person' ) {
 
 					if ( ! empty( $adult_price ) && ! empty( $adults ) ) {
 						$response['traveller_summery'] .= '<tr>
@@ -4005,7 +4070,7 @@ class Tour {
 					}
 					$tf_tours_data_price = ( $adult_price * $adults ) + ( $children * $children_price ) + ( $infant * $infant_price );
 				}
-				if ( !empty($single_package) && ! empty( $single_package['pricing_type'] == 'group' ) ) {
+				if ( !empty($single_package) && $single_package['pricing_type'] == 'group' ) {
 					if ( ! empty( $group_price ) ) {
 						$tf_tours_data_price = $group_price;
 						$response['traveller_summery'] .= '<tr>
@@ -4040,44 +4105,6 @@ class Tour {
                 </tr>
             </tfoot>
         </table>';
-
-
-		// $response['tour_packages'] = '';
-		// $package_pricing = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
-		// foreach ( $package_pricing as $key => $pack ) {
-		// 	if(!empty($matched_availability['tf_package_option_'.$key])){
-		// 	$response['tour_packages'] .= '
-		// 	<div class="tf-single-package">
-		// 		<div class="tf-package-select">
-		// 			<input type="radio" id="package-' . esc_attr( $key ) . '" name="tf_package" value="' . esc_attr( $key ) . '" class="tf-package-radio" ' . ( 1 == $key ? 'checked' : '' ) . ' />
-		// 		</div>
-		// 		<div class="tf-package-content">
-		// 			<label for="package-' . esc_attr( $key ) . '"><h3>' . esc_html( $pack['pack_title'] ) . '</h3></label>
-		// 			<div class="tf-pacakge-persons">
-		// 				' . wp_kses_post( $pack['desc'] ) . '
-		// 				<div class="tf-select-persons">
-		// 					<div class="tf-single-person">
-		// 						<h3>' . esc_html__( "Adult", "tourfic" ) . '</h3>
-		// 						<div class="inc-dec">
-		// 							<div class="acr-dec disable">-</div>
-		// 							<input type="number" name="adults" id="adults" value="' . ( ! empty( $pack['min_adult'] ) ? esc_attr( $pack['min_adult'] ) : 0 ) . '" data-min="' . esc_attr( $pack['min_adult'] ?? '' ) . '" data-max="' . esc_attr( $pack['max_adult'] ?? '' ) . '" />
-		// 							<div class="acr-inc">+</div>
-		// 						</div>
-		// 					</div>
-		// 					<div class="tf-single-person">
-		// 						<h3>' . esc_html__( "Child", "tourfic" ) . '</h3>
-		// 						<div class="inc-dec">
-		// 							<div class="acr-dec disable">-</div>
-		// 							<input type="number" name="childrens" id="childs" value="' . ( ! empty( $pack['min_child'] ) ? esc_attr( $pack['min_child'] ) : 0 ) . '" data-min="' . esc_attr( $pack['min_child'] ?? '' ) . '" data-max="' . esc_attr( $pack['max_child'] ?? '' ) . '" />
-		// 							<div class="acr-inc">+</div>
-		// 						</div>
-		// 					</div>
-		// 				</div>
-		// 			</div>
-		// 		</div>
-		// 	</div>';
-		// 	}
-		// }
 
 
 		} else {

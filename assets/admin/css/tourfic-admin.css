@@ -4810,7 +4810,7 @@ a.tf-import-btn, a.tf-export-btn {
 .tf-apt-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-checkbox-group li label::before,
 .tf-room-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-checkbox-group li label::before,
 .tf-tour-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-checkbox-group li label::before {
-  top: 0;
+  top: -2px;
   height: 16px;
   width: 16px;
   border: 2px solid #D9E0E8;
@@ -5072,6 +5072,9 @@ a.tf-import-btn, a.tf-export-btn {
   border: 0.5px solid #F2F5F7;
   background: #FFFFFF;
 }
+.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td.fc-day-today {
+  background-color: rgba(255, 220, 40, 0.15);
+}
 .tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-daygrid-day-top {
   flex-direction: row;
 }
@@ -5139,6 +5142,15 @@ a.tf-import-btn, a.tf-export-btn {
   display: flex;
   gap: 16px;
   flex-direction: column;
+}
+.tf-tour-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset #group_tabs .tf-field-repeater {
+  padding-bottom: 16px;
+}
+.tf-tour-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset #group_tabs .tf-field-repeater .group_discount_package .tf-repeater-content-wrap {
+  padding: 0;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: nowrap;
 }
 .tf-tour-cal-wrap .tf-save-calendar {
   display: flex;

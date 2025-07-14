@@ -76,7 +76,7 @@
                         line-height: 20px;
                         padding-left: 26px;
                         &::before{
-                            top: 0;
+                            top: -2px;
                             height: 16px;
                             width: 16px;
                             border: 2px solid $tf_border_default;
@@ -338,6 +338,9 @@
                                         border-radius: 8px;
                                         border: 0.5px solid $tf_border_faint;
                                         background: $tf_fill_white;
+                                        &.fc-day-today{
+                                            background-color: rgba(255,220,40,.15);
+                                        }
                                         .fc-daygrid-day-top{
                                             flex-direction: row;
                                             a{
@@ -416,6 +419,19 @@
                 display: flex;
                 gap: 16px;
                 flex-direction: column;
+                #group_tabs{
+                    .tf-field-repeater{
+                        padding-bottom: 16px;
+                        .group_discount_package{
+                            .tf-repeater-content-wrap{
+                                padding: 0;
+                                align-items: center;
+                                gap: 16px;
+                                flex-wrap: nowrap;
+                            }
+                        }
+                    }
+                }
             }
         }
     }

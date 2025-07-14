@@ -146,6 +146,7 @@
                     if (response.without_payment == 'false') {
                         if (response.status == 'error') {
                             $.fancybox.close();
+                            $('#tour_room_details_loader').hide();
                             if (response.errors) {
                                 response.errors.forEach(function (text) {
                                     notyf.error(text);
