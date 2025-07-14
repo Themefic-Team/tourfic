@@ -65,18 +65,6 @@ class Address extends Widget_Base {
         ]);
 
         do_action( 'tf/single-address/before-content/controls', $this );
-
-        //service
-		// $this->add_control('service',[
-		// 	'type'     => Controls_Manager::SELECT,
-		// 	'label'    => esc_html__( 'Service', 'tourfic' ),
-		// 	'options'  => [
-		// 		'tf_hotel'     => esc_html__( 'Hotel', 'tourfic' ),
-		// 		'tf_tours'     => esc_html__( 'Tour', 'tourfic' ),
-		// 		'tf_apartment' => esc_html__( 'Apartment', 'tourfic' ),
-		// 	],
-		// 	'default'  => 'tf_hotel',
-		// ]);
 		
 		$this->add_control('address_icon',[
 			'label' => esc_html__('Address Icon', 'tourfic'),
