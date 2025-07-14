@@ -55,7 +55,7 @@
             border-radius: 8px;
             border: 1px solid $tf_border_faint;
             background: $tf_fill_white;
-            padding: 16px;
+            padding: 24px;
             .tf-field-checkbox{
                 margin-bottom: 16px;
                 > label{
@@ -403,7 +403,7 @@
         }
     }
     .tf-field-group-box{
-        padding: 16px;
+        padding: 24px;
         border-radius: 8px;
         border: 1px solid $tf_border_faint;
         background: $tf_fill_white;
@@ -411,9 +411,13 @@
             display: flex;
             gap: 16px;
             flex-wrap: wrap;
+            .tf-field{
+                padding: 0;
+            }
         }
     }
     .tf-package-field-repeater{
+        padding: 24px;
         .tf-field-accordion{
             .tf-fieldset{
                 display: flex;

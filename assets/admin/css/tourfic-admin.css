@@ -4773,7 +4773,7 @@ a.tf-import-btn, a.tf-export-btn {
   border-radius: 8px;
   border: 1px solid #F2F5F7;
   background: #FFFFFF;
-  padding: 16px;
+  padding: 24px;
 }
 .tf-apt-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-field-checkbox,
 .tf-room-cal-wrap .bulk-popup-content .tf-bulk-repeater-section .tf-field-checkbox,
@@ -5128,7 +5128,7 @@ a.tf-import-btn, a.tf-export-btn {
   cursor: pointer;
 }
 .tf-tour-cal-wrap .tf-field-group-box {
-  padding: 16px;
+  padding: 24px;
   border-radius: 8px;
   border: 1px solid #F2F5F7;
   background: #FFFFFF;
@@ -5137,6 +5137,12 @@ a.tf-import-btn, a.tf-export-btn {
   display: flex;
   gap: 16px;
   flex-wrap: wrap;
+}
+.tf-tour-cal-wrap .tf-field-group-box .tf-fieldset .tf-field {
+  padding: 0;
+}
+.tf-tour-cal-wrap .tf-package-field-repeater {
+  padding: 24px;
 }
 .tf-tour-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset {
   display: flex;
