@@ -3331,7 +3331,7 @@ class Tour {
 			$min_people            = ! empty( $matched_availability['min_person'] ) ? $matched_availability['min_person'] : '';
 			$max_people            = ! empty( $matched_availability['max_person'] ) ? $matched_availability['max_person'] : '';
 			$tf_tour_booking_limit = ! empty( $matched_availability['max_capacity'] ) ? $matched_availability['max_capacity'] : 0;
-			$pricing_rule = ! empty( $matched_availability['pricing_type'] ) ? $matched_availability['pricing_type'] : '';
+			// $pricing_rule = ! empty( $matched_availability['pricing_type'] ) ? $matched_availability['pricing_type'] : '';
 			// Fixed tour maximum capacity limit
 
 			if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $start_date ) && ! empty( $end_date ) ) {
@@ -3384,7 +3384,7 @@ class Tour {
 
 		} elseif ( $tour_type == 'continuous' && !empty($matched_availability) ) {
 
-			$pricing_rule = ! empty( $matched_availability['pricing_type'] ) ? $matched_availability['pricing_type'] : '';
+			// $pricing_rule = ! empty( $matched_availability['pricing_type'] ) ? $matched_availability['pricing_type'] : '';
 
 			$min_people = ! empty( $matched_availability['min_person'] ) ? $matched_availability['min_person'] : '';
 			$max_people = ! empty( $matched_availability['max_person'] ) ? $matched_availability['max_person'] : '';
