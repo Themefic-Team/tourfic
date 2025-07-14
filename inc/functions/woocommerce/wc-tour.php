@@ -885,6 +885,59 @@ function tf_tours_booking_function() {
 				// Selected Package Group Price
 				$group_price = !empty($matched_availability['tf_option_group_price_'.$selectedPackage]) ? $matched_availability['tf_option_group_price_'.$selectedPackage] : $pack_default_group;
 
+				$tf_option_group_discount = !empty($matched_availability['tf_option_group_discount_'.$selectedPackage]) ? $matched_availability['tf_option_group_discount_'.$selectedPackage] : [];
+					
+				if(!empty($tf_option_group_discount)){
+					$group_discount_price = null;
+
+					$min_persons = $tf_option_group_discount['min_person'];
+					$max_persons = $tf_option_group_discount['max_person'];
+					$prices      = $tf_option_group_discount['price'];
+
+					for ( $i = 0; $i < count( $min_persons ); $i++ ) {
+						// Skip empty values
+						if ( empty( $min_persons[$i] ) || empty( $max_persons[$i] ) || empty( $prices[$i] ) ) {
+							continue;
+						}
+
+						$min = (int) $min_persons[$i];
+						$max = (int) $max_persons[$i];
+
+						if ( $total_people_booking >= $min && $total_people_booking <= $max ) {
+							$group_discount_price = $prices[$i];
+							break;
+						}
+					}
+
+					if ( $group_discount_price !== null ) {
+						$group_price = $group_discount_price;
+					}
+				}else{
+					if ( !empty($single_package) && $single_package['pricing_type'] == 'group' ) {
+						if(!empty($single_package['group_tabs'][4]['group_discount'])){
+							$group_discounts = !empty($single_package['group_tabs'][5]['group_discount_package']) ? $single_package['group_tabs'][5]['group_discount_package'] : [];
+			
+							$matched_discount_price = null;
+							if(!empty($group_discounts)){
+								foreach ( $group_discounts as $discount ) {
+									$min = (int) $discount['min_person'];
+									$max = (int) $discount['max_person'];
+			
+									if ( $total_people_booking >= $min && $total_people_booking <= $max ) {
+										$matched_discount_price = $discount['discount_price'];
+										break; // Stop execution after finding the first match
+									}
+								}
+							}
+			
+							if ( $matched_discount_price !== null ) {
+								// Discount found
+								$group_price = $matched_discount_price;
+							}
+						}
+					}
+				}
+
 				$without_payment_price = $group_price;
 			}
 		}
