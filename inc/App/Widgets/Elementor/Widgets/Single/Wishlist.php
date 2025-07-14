@@ -67,6 +67,17 @@ class Wishlist extends Widget_Base {
         ]);
 
         do_action( 'tf/single-wishlist/before-content/controls', $this );
+
+        //icon type
+        $this->add_control('icon_type',[
+			'type'     => Controls_Manager::SELECT,
+			'label'    => esc_html__( 'Icon Type', 'tourfic' ),
+			'options'  => [
+				'simple'     => esc_html__( 'Simple', 'tourfic' ),
+				'rounded'     => esc_html__( 'Rounded', 'tourfic' ),
+			],
+			'default'  => 'rounded',
+		]);
 		
 		$this->add_control('wishlist_icon',[
 			'label' => esc_html__('Wishlist Icon', 'tourfic'),
@@ -101,68 +112,127 @@ class Wishlist extends Widget_Base {
 			'tab'   => Controls_Manager::TAB_STYLE,
 		]);
 
-		$this->add_control( 'tf_wishlist_color', [
-			'label'     => __( 'Color', 'tourfic' ),
-			'type'      => Controls_Manager::COLOR,
-			'selectors'  => [
-				'{{WRAPPER}} .tf-wishlist' => 'color: {{VALUE}};',
-			],
-		]);
-
-		$this->add_group_control( Group_Control_Typography::get_type(), [
-            'label'    => __( 'Typography', 'tourfic' ),
-			'name'     => "tf_wishlist_typography",
-			'selector' => "{{WRAPPER}} .tf-wishlist",
-		]);
-
-		$this->add_responsive_control( "tf_wishlist_icon_size", [
+        $this->add_responsive_control( "tf_wishlist_icon_size", [
 			'label'      => esc_html__( 'Icon Size', 'tourfic' ),
 			'type'       => Controls_Manager::SLIDER,
 			'size_units' => [
 				'px',
 				'rem',
-				'%',
 			],
 			'range'      => [
 				'px' => [
-					'min'  => 0,
+					'min'  => 5,
 					'max'  => 50,
 					'step' => 1,
 				],
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .tf-wishlist i" => 'font-size: {{SIZE}}{{UNIT}}',
-				"{{WRAPPER}} .tf-wishlist svg" => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}',
+				"{{WRAPPER}} .tf-wishlist-icon i" => 'font-size: {{SIZE}}{{UNIT}}',
 			],
 		] );
 
-		$this->add_control( "tf_wishlist_icon_color", [
+        $this->add_responsive_control( "tf_wishlist_icon_box_size", [
+			'label'      => esc_html__( 'Box Size', 'tourfic' ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [
+				'px',
+				'rem',
+			],
+			'range'      => [
+				'px' => [
+					'min'  => 30,
+					'max'  => 100,
+					'step' => 1,
+				],
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .tf-wishlist-icon i" => 'height: {{SIZE}}{{UNIT}} !important; width: {{SIZE}}{{UNIT}} !important;',
+				"{{WRAPPER}} .tf-wishlist-icon" => 'height: {{SIZE}}{{UNIT}} !important; width: {{SIZE}}{{UNIT}} !important;',
+			],
+            'condition' => [
+				'icon_type' => 'rounded',
+			],
+		] );
+
+		$this->start_controls_tabs( "tabs_wishlist_icon_style" );
+		/*-----Button NORMAL state------ */
+		$this->start_controls_tab( "tab_wishlist_icon_normal", [
+			'label' => __( 'Normal', 'tourfic' ),
+		] );
+		$this->add_control( 'tf_wishlist_icon_color', [
 			'label'     => __( 'Icon Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
-				"{{WRAPPER}} .tf-wishlist i" => 'color: {{VALUE}}',
-				"{{WRAPPER}} .tf-wishlist svg path" => 'fill: {{VALUE}}',
+				"{{WRAPPER}} .tf-wishlist-icon i" => 'color: {{VALUE}};',
 			],
 		] );
-
-		$this->add_control( 'tf_link_type_heading', [
-			'type'  => Controls_Manager::HEADING,
-			'label' => __( 'Link Style', 'tourfic' ),
-		] );
-
-		$this->add_control( 'tf_link_color', [
-			'label'     => __( 'Link Color', 'tourfic' ),
+		$this->add_control( 'wishlist_icon_bg_color', [
+			'label'     => __( 'Background Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
-			'selectors'  => [
-				'{{WRAPPER}} .more-hotel' => 'color: {{VALUE}};',
+			'selectors' => [
+				"{{WRAPPER}} .tf-wishlist-icon i" => 'background-color: {{VALUE}};',
 			],
-		]);
+            'condition' => [
+				'icon_type' => 'rounded',
+			],
+		] );
+		$this->add_group_control( Group_Control_Border::get_type(), [
+			'name'     => "wishlist_icon_border",
+			'selector' => "{{WRAPPER}} .tf-wishlist-icon i",
+            'condition' => [
+				'icon_type' => 'rounded',
+			],
+		] );
+		$this->add_control( "wishlist_icon_border_radius", [
+			'label'      => __( 'Border Radius', 'tourfic' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .tf-wishlist-icon i" => $this->tf_apply_dim( 'border-radius' ),
+			],
+            'condition' => [
+				'icon_type' => 'rounded',
+			],
+		] );
+		$this->end_controls_tab();
 
-		$this->add_group_control( Group_Control_Typography::get_type(), [
-            'label'    => __( 'Link Typography', 'tourfic' ),
-			'name'     => "tf_link_typography",
-			'selector' => "{{WRAPPER}} .more-hotel",
-		]);
+		/*-----Button HOVER state------ */
+		$this->start_controls_tab( "tab_wishlist_icon_hover", [
+			'label' => __( 'Active', 'tourfic' ),
+		] );
+		$this->add_control( "wishlist_icon_color_hover", [
+			'label'     => __( 'Icon Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .tf-wishlist-icon:hover i" => 'color: {{VALUE}};',
+			],
+		] );
+		$this->add_control( 'wishlist_icon_bg_color_hover', [
+			'label'     => __( 'Background Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .tf-wishlist-icon i:hover" => 'background-color: {{VALUE}};',
+			],
+            'condition' => [
+				'icon_type' => 'rounded',
+			],
+		] );
+		$this->add_control( 'wishlist_icon_border_color_hover', [
+			'label'     => __( 'Border Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .tf-wishlist-icon i:hover" => 'border-color: {{VALUE}};',
+			],
+            'condition' => [
+				'icon_type' => 'rounded',
+			],
+		] );
+		$this->end_controls_tab();
+		$this->end_controls_tabs();
+		/*-----ends Button tabs--------*/
 
 		$this->end_controls_section();
 	}
@@ -172,7 +242,6 @@ class Wishlist extends Widget_Base {
         $post_id   = get_the_ID();
         $post_type = get_post_type();
         $has_in_wishlist = Wishlist_Class::tf_has_item_in_wishlist( $post_id );
-        $wishlist = '';
         $disable_wishlist_sec = 0;
         
         // Get post meta based on post type
@@ -181,10 +250,10 @@ class Wishlist extends Widget_Base {
             $disable_wishlist_sec = !empty($post_meta['h-wishlist']) ? $post_meta['h-wishlist'] : 0;
         } elseif ($post_type == 'tf_tours') {
             $post_meta = get_post_meta($post_id, 'tf_tours_opt', true);
-            // Add disable_wishlist_sec logic if needed for tours
-        } elseif ($post_type == 'tf_apartment') {
-            $post_meta = get_post_meta($post_id, 'tf_apartment_opt', true);
-            // Add disable_wishlist_sec logic if needed for apartments
+	        $disable_wishlist_sec = ! empty( $post_meta['t-wishlist'] ) ? $post_meta['t-wishlist'] : 0;
+        } elseif ($post_type == 'tf_carrental') {
+            $post_meta = get_post_meta($post_id, 'tf_carrental_opt', true);
+	        $disable_wishlist_sec = ! empty( $post_meta['c-wishlist'] ) ? $post_meta['c-wishlist'] : 0;
         } else {
             return;
         }
@@ -225,17 +294,30 @@ class Wishlist extends Widget_Base {
                 $wishlist_data_attrs
             );
         }
+
+        //icon type
+        $icon_type = !empty($settings['icon_type']) ? $settings['icon_type'] : 'rounded';
         
         // Render wishlist if not disabled and conditions are met
         if ($disable_wishlist_sec != 1 && Helper::tfopt('wl-bt-for') && in_array('1', Helper::tfopt('wl-bt-for'))) {
             $show_for_logged_in = is_user_logged_in() && Helper::tfopt('wl-for') && in_array('li', Helper::tfopt('wl-for'));
             $show_for_logged_out = !is_user_logged_in() && Helper::tfopt('wl-for') && in_array('lo', Helper::tfopt('wl-for'));
+            $icon_class = $icon_type == 'rounded' ? "tf-icon tf-wishlist-icon" : "tf-wishlist-icon tf-wishlist-button";
             
             if ($show_for_logged_in || $show_for_logged_out) {
-                echo '<div class="tf-icon tf-wishlist-box">';
+                echo '<div class="'. esc_attr($icon_class) .'">';
                 echo wp_kses($wishlist_icon_html, Helper::tf_custom_wp_kses_allow_tags());
                 echo '</div>';
             }
         }
     }
+
+    /**
+	 * Apply CSS property to the widget
+     * @param $css_property
+     * @return string
+     */
+	public function tf_apply_dim( $css_property, $important = false ) {
+		return "{$css_property}: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}} " . ($important ? '!important' : '') . ";";
+	}
 }
