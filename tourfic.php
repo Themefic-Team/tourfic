@@ -63,10 +63,9 @@ final class Tourfic {
 		if ( is_null( self::$_instance ) ) {
 			self::$_instance = new self();
 		}
-
 		return self::$_instance;
 	}
-
+	
 	/**
 	 * Tourfic Constructor.
 	 */
