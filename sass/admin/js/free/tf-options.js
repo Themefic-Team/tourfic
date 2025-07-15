@@ -1785,6 +1785,14 @@
                         cal.removeClass('tf-content-loading');
                         btn.removeClass('tf-btn-loading');
                     }
+
+                    $('.tf-check-dates').show();
+                    $('.tf_tour_cal_reset').show();
+                    $('.tf_tour_cal_bulk_edit').show();
+                    $('.tf-tour-cal-field').removeClass('tf-bulk-popup');
+                    $('.tf-bulk-repeater-section').hide();
+                    $('.tf-bulk-edit-header').hide();
+                    $('.tf-field-group-box .tf-tab-switch-box .tf-tab-field-content').hide();
                 },
                 error: function (e) {
                     console.log(e);
@@ -1796,7 +1804,14 @@
                     container.css({'pointer-events': 'auto', 'opacity': '1'});
                     cal.removeClass('tf-content-loading');
                     btn.removeClass('tf-btn-loading');
+
+                    $('.tf-check-dates').show();
+                    $('.tf_tour_cal_reset').show();
+                    $('.tf_tour_cal_bulk_edit').show();
                     $('.tf-tour-cal-field').removeClass('tf-bulk-popup');
+                    $('.tf-bulk-repeater-section').hide();
+                    $('.tf-bulk-edit-header').hide();
+                    $('.tf-field-group-box .tf-tab-switch-box .tf-tab-field-content').hide();
                 },
             });
         });
