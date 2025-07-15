@@ -1,7 +1,7 @@
 .tf-field-heading {
   padding: 24px;
   margin: 0 -24px;
-  background-color: $slate5;
+  background-color: $tf_fill_alternative;
 
   .tf-field-heading-inner {
     @include flexbox();

@@ -37,14 +37,9 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 				array(
 					'id'    => 'hotel-general-heading',
 					'type'  => 'heading',
-					'label' => 'General Settings',
-					'subtitle' => esc_html__( 'These are some common settings specific to this Hotel.', 'tourfic' ),
-				),
-				array(
-					'id'      => 'hotel-general-docs',
-					'type'    => 'notice',
-					'style'   => 'success',
-					'content' => esc_html__( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/how-it-works/add-new-hotel/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . esc_html__( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
+					'title' => 'General Settings',
+					'content' => esc_html__( 'These are some common settings specific to this Hotel.', 'tourfic' ),
+					'docs' => esc_url('https://themefic.com/docs/tourfic/how-it-works/add-new-hotel/')
 				),
 				array(
 					'id'        => 'featured',
@@ -104,7 +99,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 				array(
 					'id'      => 'Booking-Type',
 					'type'    => 'heading',
-					'content' => esc_html__( 'Booking Settings', 'tourfic' ),
+					'title' => esc_html__( 'Booking Settings', 'tourfic' ),
 					'class'   => 'tf-field-class',
 				),
 				array(
@@ -133,14 +128,9 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 				array(
 					'id'    => 'hotel-location-heading',
 					'type'  => 'heading',
-					'label' => 'Location Settings',
-					'subtitle' => esc_html__( 'The location of a hotel is a crucial element for every booking. Set your hotel locations in this section.', 'tourfic' ),
-				),
-				array(
-					'id'      => 'hotel-location-docs',
-					'type'    => 'notice',
-					'style'   => 'success',
-					'content' => esc_html__( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/how-it-works/hotel-location/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . esc_html__( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
+					'title' => 'Location Settings',
+					'content' => esc_html__( 'The location of a hotel is a crucial element for every booking. Set your hotel locations in this section.', 'tourfic' ),
+					'docs' => esc_url('https://themefic.com/docs/tourfic/how-it-works/hotel-location/')
 				),
 				array(
 					'id'       => 'map',
@@ -165,7 +155,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 				array(
 					'id'      => 'nearby-places-heading',
 					'type'    => 'heading',
-					'content' => esc_html__( 'Nearby Places', 'tourfic' ),
+					'title' => esc_html__( 'Nearby Places', 'tourfic' ),
 					'class'   => 'tf-field-class',
 				),
 				array(
@@ -216,7 +206,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 				array(
 					'id'      => 'facilities-heading',
 					'type'    => 'heading',
-					'content' => esc_html__( 'Hotel Facilities', 'tourfic' ),
+					'title' => esc_html__( 'Hotel Facilities', 'tourfic' ),
 					'class'   => 'tf-field-class',
 				),
 				array(
@@ -276,14 +266,9 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 				array(
 					'id'    => 'hotel-image-heading',
 					'type'  => 'heading',
-					'label' => 'Upload Images & Videos',
-					'subtitle' => __( 'Images and videos are effective methods for showcasing your hotel to guests and have the potential to increase bookings.', 'tourfic' ),
-				),
-				array(
-					'id'      => 'hotel-image-docs',
-					'type'    => 'notice',
-					'style'   => 'success',
-					'content' => __( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/how-it-works/add-new-hotel/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
+					'title' => 'Upload Images & Videos',
+					'content' => esc_html__( 'Images and videos are effective methods for showcasing your hotel to guests and have the potential to increase bookings.', 'tourfic' ),
+					'docs' => esc_url('https://themefic.com/docs/tourfic/how-it-works/add-new-hotel/')
 				),
 				array(
 					'id'       => 'gallery',
@@ -308,14 +293,9 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 				array(
 					'id'    => 'hotel-service-heading',
 					'type'  => 'heading',
-					'label' => 'Additional Hotel Services',
-					'subtitle' => __( 'This section includes additional services which your hotel may offer. You may offer these services for free, or opt to charge your guests for them.', 'tourfic' ),
-				),
-				array(
-					'id'      => 'hotel-service-docs',
-					'type'    => 'notice',
-					'style'   => 'success',
-					'content' => __( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/how-it-works/hotel-services/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
+					'title' => 'Additional Hotel Services',
+					'content' => esc_html__( 'This section includes additional services which your hotel may offer. You may offer these services for free, or opt to charge your guests for them.', 'tourfic' ),
+					'docs' => esc_url('https://themefic.com/docs/tourfic/how-it-works/hotel-services/')
 				),
 				array(
 					'id'    => 'tf-pro-notice',
@@ -336,14 +316,9 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 				array(
 					'id'    => 'hotel-extras-heading',
 					'type'  => 'heading',
-					'label' => 'Offer Hotel Extras',
-					'subtitle' => esc_html__( 'If you wish to provide additional services that are not included in your current hotel package, you can list them here.', 'tourfic' ),
-				),
-				array(
-					'id'      => 'hotel-extras-docs',
-					'type'    => 'notice',
-					'style'   => 'success',
-					'content' => esc_html__( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tours/tour-extra/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . esc_html__( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
+					'title' => 'Offer Hotel Extras',
+					'content' => esc_html__( 'If you wish to provide additional services that are not included in your current hotel package, you can list them here.', 'tourfic' ),
+					'docs' => esc_url('https://themefic.com/docs/tourfic/tours/tour-extra/')
 				),
 				array(
 					'id'    => 'tf-pro-notice',
@@ -364,14 +339,9 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 				array(
 					'id'    => 'hotel-room-heading',
 					'type'  => 'heading',
-					'label' => 'Create & Manage Your Hotel Rooms',
-					'subtitle' => __( 'In this section, you are provided with the tools to create and manage your hotel room offerings. ', 'tourfic' ),
-				),
-				array(
-					'id'      => 'notice',
-					'type'    => 'notice',
-					'notice'  => 'info',
-					'content' => __( 'This section includes Hotel Room Management settings.', 'tourfic' ). ' <a href="https://themefic.com/docs/tourfic/how-it-works/room-management/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
+					'title' => 'Create & Manage Your Hotel Rooms',
+					'content' => esc_html__( 'In this section, you are provided with the tools to create and manage your hotel room offerings. ', 'tourfic' ),
+					'docs' => esc_url('https://themefic.com/docs/tourfic/how-it-works/room-management/')
 				),
 				array(
 					'id'    => 'room-section-title',
@@ -413,14 +383,9 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 				array(
 					'id'    => 'hotel-faq-heading',
 					'type'  => 'heading',
-					'label' => 'FAQ Section',
-					'subtitle' => __( 'This section is designed to help users find answers to common questions.', 'tourfic' ),
-				),
-				array(
-					'id'      => 'hotel-faq-docs',
-					'type'    => 'notice',
-					'style'   => 'success',
-					'content' => __( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/how-it-works/hotel-f-a-q/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
+					'title' => 'FAQ Section',
+					'content' => esc_html__( 'This section is designed to help users find answers to common questions.', 'tourfic' ),
+					'docs' => esc_url('https://themefic.com/docs/tourfic/how-it-works/hotel-f-a-q/')
 				),
 				array(
 					'id'    => 'faq-section-title',
@@ -462,7 +427,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 				array(
 					'id'      => 'enquiry-section',
 					'type'    => 'heading',
-					'content' => __( 'Hotel Enquiry Form', 'tourfic' ),
+					'title' => __( 'Hotel Enquiry Form', 'tourfic' ),
 					'class'   => 'tf-field-class',
 				),
 				array(
@@ -513,7 +478,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 				array(
 					'id'      => 'tf-hotel-tags-heading',
 					'type'    => 'heading',
-					'label' => __( 'Hotel tags', 'tourfic' ),
+					'title' => __( 'Hotel tags', 'tourfic' ),
 					'class'   => 'tf-field-class',
 				),
 				array(
@@ -559,14 +524,9 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 				array(
 					'id'    => 'hotel-tnc-heading',
 					'type'  => 'heading',
-					'label' => 'Terms & Conditions Section',
-					'subtitle' => __( 'Include your set of regulations and guidelines that guests must agree to in order to use the service provided in your hotel. ', 'tourfic' ),
-				),
-				array(
-					'id'      => 'hotel-tnc-docs',
-					'type'    => 'notice',
-					'style'   => 'success',
-					'content' => __( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/how-it-works/terms-conditions/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
+					'title' => 'Terms & Conditions Section',
+					'content' => esc_html__( 'Include your set of regulations and guidelines that guests must agree to in order to use the service provided in your hotel. ', 'tourfic' ),
+					'docs' => esc_url('https://themefic.com/docs/tourfic/how-it-works/terms-conditions/')
 				),
 				array(
 					'id'    => 'tc-section-title',
@@ -591,20 +551,9 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 				array(
 					'id'    => 'hotel-settings-heading',
 					'type'  => 'heading',
-					'label' => 'Other Settings',
-					'subtitle' => __( 'These are some additional settings specific to this Hotel. Note that some of these settings may override the global settings. ', 'tourfic' ),
-				),
-				array(
-					'id'      => 'hotel-settings-docs',
-					'type'    => 'notice',
-					'style'   => 'success',
-					'content' => __( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/how-it-works/hotel-settings/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
-				),
-				array(
-					'id'    => 'settings',
-					'type'  => 'heading',
-					'label' => __( 'Settings', 'tourfic' ),
-					'class' => 'tf-field-class',
+					'title' => 'Other Settings',
+					'content' => esc_html__( 'These are some additional settings specific to this Hotel. Note that some of these settings may override the global settings. ', 'tourfic' ),
+					'docs' => esc_url('https://themefic.com/docs/tourfic/how-it-works/hotel-settings/')
 				),
 				array(
 					'id'        => 'h-review',
@@ -636,7 +585,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 				array(
 					'id'      => 'different-sections',
 					'type'    => 'heading',
-					'content' => __( 'Titles / Heading of Different Sections', 'tourfic' ),
+					'title' => __( 'Titles / Heading of Different Sections', 'tourfic' ),
 					'class'   => 'tf-field-class',
 				),
 				array(
