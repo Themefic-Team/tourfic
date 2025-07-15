@@ -1275,8 +1275,7 @@ Steps
 }
 
 .tf-setup-step-container .tf-select-service label:before {
-  background: #ffffff
- #ffffff;
+  background: #ffffff #ffffff;
   content: "";
   display: block;
   border-radius: 50%;
@@ -7605,18 +7604,17 @@ a.tf-import-btn, a.tf-export-btn {
   left: 0;
   top: 0;
   display: none;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 .tf-voucher-quick-view-box .voucher-quick-view {
   border-radius: 24px;
   border: 1px solid #f0f0f1;
   background: #ffffff;
-  position: fixed;
-  left: 50%;
-  top: 25%;
   z-index: 999;
   max-width: 700px;
-  margin-left: -350px;
 }
 
 .tf-voucher-quick-view-box .voucher-quick-view .tf-voucher-details-preview-header {

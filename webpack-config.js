@@ -14,7 +14,12 @@ const tfepAdminJs = glob.sync('./sass/admin/js/addon/tfepiping/*.js');
 const tfepAppJs = glob.sync('./sass/app/js/addon/tfepiping/*.js');
 const iCalAdminJs = glob.sync('./sass/admin/js/addon/ical/*.js');
 const proAppJs = glob.sync('./sass/app/js/pro/*.js');
-const proAdminJs = ['./sass/admin/js/pro/locationpicker.jquery.js','./sass/admin/js/pro/locationpicker-custom.js','./sass/admin/js/pro/admin.js'];
+const proAdminJs = [
+    './sass/admin/js/pro/locationpicker.jquery.js',
+    './sass/admin/js/pro/locationpicker-custom.js',
+    './sass/admin/js/pro/template-builder.js',
+    './sass/admin/js/pro/admin.js'
+];
 
 //tourfic free
 entryPoints['tourfic/assets/app/js/tourfic-scripts'] = freeAppJs;

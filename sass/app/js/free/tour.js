@@ -620,28 +620,88 @@
          * Single tour sticky booking bar - template 1
          * @author Foysal
          */
-        if ($('.tf-tour-booking-box').length > 0) {
+        if ($('.tf-single-template__one .tf-booking-form').length > 0) {
             $(window).on("scroll", function () {
-                let bookingBox = $('.tf-tour-booking-box');
-                let bottomBar = $('.tf-bottom-booking-bar');
-                let footer = $('.footer');
+                let bookingBox = $('.tf-single-template__one .tf_tours_main_booking');
+                var sticky = $('.tf-single-template__one .tf_tours_bottom_booking .tf-bottom-booking-bar'),
+                    scroll = $(window).scrollTop(),
+                    footer = $('footer');
+            
                 if (footer.length === 0) {
                     return; 
                 }
                 let boxOffset = bookingBox.offset().top + bookingBox.outerHeight();
-                let footerOffset = footer.offset().top;
-                var scrollTop = $(window).scrollTop();
-                let windowHeight = $(window).height();
-
-                if (scrollTop > boxOffset && scrollTop + windowHeight < footerOffset) {
-                    bottomBar.addClass('active');
+                var footerOffset = footer.offset().top,
+                    windowHeight = $(window).height();
+            
+                if (scroll >= boxOffset) {
+                    if (scroll + windowHeight >= footerOffset) {
+                        sticky.removeClass('active'); 
+                    } else {
+                        sticky.addClass('active');
+                    }
                 } else {
-                    bottomBar.removeClass('active');
+                    sticky.removeClass('active');
+                }
+            });
+        }
+        /**
+         * Single tour sticky booking bar - template 2
+         * @author Foysal
+         */
+        if ($('.tf-single-template__two .tf_tours_main_booking').length > 0) {
+            $(window).on("scroll", function () {
+                let bookingBox = $('.tf-single-template__two .tf_tours_main_booking');
+                var sticky = $('.tf-single-template__two .tf_tours_bottom_booking .tf-bottom-booking-bar'),
+                    scroll = $(window).scrollTop(),
+                    footer = $('footer');
+            
+                if (footer.length === 0) {
+                    return; 
+                }
+                let boxOffset = bookingBox.offset().top + bookingBox.outerHeight();
+                var footerOffset = footer.offset().top,
+                    windowHeight = $(window).height();
+            
+                if (scroll >= boxOffset) {
+                    if (scroll + windowHeight >= footerOffset) {
+                        sticky.removeClass('active'); 
+                    } else {
+                        sticky.addClass('active');
+                    }
+                } else {
+                    sticky.removeClass('active');
                 }
             });
         }
 
-        $('.tf-booking-mobile-btn').on('click', function (e) {
+        //Template Legacy Mobile Booking Btn
+        $('.tf-single-template__legacy .tf-booking-mobile-btn .tf_btn').on('click', function (e) {
+            e.preventDefault();
+            $('.tf-single-template__legacy .tf-booking-mobile-btn').hide();
+            $('.tf-single-template__legacy .tf-tour-booking-wrap .tf_tours_booking').addClass('show');
+        });
+
+        function applyResponsiveClass() {
+            if($('.tf-single-template__legacy .tf-tour-booking-wrap').length > 0){
+                if ($(window).width() <= 768) {
+                $('.tf-single-template__legacy .tf-tour-booking-wrap').addClass('tf-tours-fixed-default');
+                } else {
+                $('.tf-single-template__legacy .tf-tour-booking-wrap').removeClass('tf-tours-fixed-default');
+                }
+            }
+          }
+        
+          // Run on page load
+          applyResponsiveClass();
+        
+          // Run on window resize
+          $(window).resize(function () {
+            applyResponsiveClass();
+          });
+
+        //Template 2 Mobile Booking Btn
+        $('.tf-single-template__one .tf-booking-mobile-btn').on('click', function (e) {
             e.preventDefault();
             e.stopPropagation();
             $(this).closest('.tf-bottom-booking-bar').toggleClass('mobile-active');

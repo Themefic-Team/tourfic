@@ -187,9 +187,8 @@ abstract Class TF_Booking_Details {
             </div>
 
             <?php }
+            do_action( 'tf_google_calendar_notice_box' );
         }
-
-        do_action( 'tf_google_calendar_notice_box' );
 
     }
 
@@ -887,6 +886,15 @@ abstract Class TF_Booking_Details {
                                                 <th><?php esc_html_e("Extra", "tourfic"); ?></th>
                                                 <td>:</td>
                                                 <td><?php echo wp_kses_post($tf_tour_details->tour_extra); ?></td>
+                                            </tr>
+                                        <?php } ?>
+                                        <?php 
+                                        if(!empty($tf_tour_details->package)){
+                                        ?>
+                                            <tr>
+                                                <th><?php esc_html_e("Package", "tourfic"); ?></th>
+                                                <td>:</td>
+                                                <td><?php echo wp_kses_post($tf_tour_details->package); ?></td>
                                             </tr>
                                         <?php } ?>
                                         <?php if(!empty($tf_tour_details->airport_service_fee)){ ?>
