@@ -698,8 +698,6 @@ div#tf-destinationautocomplete-list {
                                     font-weight: 400;
                                     line-height: 1.3;
                                     color: $color-white;
-                                    @include flexbox();
-                                    @include align-items(center);
                                     @media #{$max1024}{
                                         font-size: 0.75rem;
                                     }
@@ -776,10 +774,6 @@ div#tf-destinationautocomplete-list {
                                 }
                                 .tf_check_arrow{
                                     text-align: right;
-                                    position: absolute;
-                                    left: 100%;
-                                    top: 50%;
-                                    transform: translateY(-50%);
                                 }
                             }
                         }
@@ -839,12 +833,20 @@ div#tf-destinationautocomplete-list {
                         transition: .3s all ease;
                         align-items: center;
                         border-radius: 0;
+                        display: block;
                         &:hover{
                             background-color: $color-brand-dark;
                         }
                         @media #{$max1024}{
                             font-size: 0.75rem;
                             padding: 15px 32px;
+                            @include flexbox();
+                        }
+                        span{
+                            display: block;
+                            @media #{$max1024}{
+                                display: inline-block;
+                            }
                         }
                     }
                 }
