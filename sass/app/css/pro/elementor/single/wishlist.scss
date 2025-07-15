@@ -1,4 +1,4 @@
-.tf-icon {
+.tf-wishlist-icon.tf-icon {
     height: 50px;
     width: 50px;
     background: #fff;
@@ -6,21 +6,24 @@
     align-items: center;
     justify-content: center;
     border-radius: 50px;
-}
-.tf-icon:hover {
-    cursor: pointer;
-}
-.tf-icon:hover i {
-    transform: scale(1.2);
-    color: var(--tf-primary);
-}
-.tf-icon i {
-    transition: all .3s ease;
-    height: 50px;
-    width: 50px;
-    background: var(--tf-filling-foreground);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50px;
+
+    i {
+        transition: all .3s ease;
+        height: 50px;
+        width: 50px;
+        background: var(--tf-filling-foreground);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50px;
+    }
+
+    &:hover {
+        cursor: pointer;
+
+        i {
+            transform: scale(1.2);
+            color: var(--tf-primary);
+        }
+    }
 }
