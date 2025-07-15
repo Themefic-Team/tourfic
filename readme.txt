@@ -378,14 +378,14 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
-= 2.16.9 – July 03, 2025 =
+= 2.16.9 – July 15, 2025 =
 
 - Added: Theme Builder support for all Archive, Taxonomy, and Term pages.
 - Added: Elementor support for all Archive, Taxonomy, and Term pages.
 - Added: Elementor Page Builder support for Archive pages.
-- Improved: Footer booking form layout on tour pages.
-- Fixed: Apartment location dropdown design issue in Template 1.
-- Fixed: Car price filter issue.
+- Improved: Layout of the footer booking form on tour pages.
+- Fixed: Design issue with the apartment location dropdown in Template 1.
+- Fixed: Price filter issue on car listings.
 - Fixed: Pagination issue on the Car Archive page.
 
 = 2.16.8 – June 24, 2025 =
