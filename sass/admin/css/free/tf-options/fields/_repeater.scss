@@ -4,6 +4,9 @@
   background: $tf_fill_white;
   padding: 16px;
   margin: 12px 0px;
+  .tf-field-repeater-desc{
+    margin-bottom: 16px;
+  }
   .tf-repeater {
     .tf-single-repeater-clone {
       display: none;

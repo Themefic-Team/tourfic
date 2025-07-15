@@ -3666,7 +3666,7 @@ Steps
 }
 
 .tf-field-heading {
-  padding: 16px 24px;
+  padding: 24px;
   margin: 0 -24px;
   background-color: #f0f2f4;
 }
@@ -3676,6 +3676,8 @@ Steps
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
+  gap: 32px;
+  align-items: end;
 }
 .tf-field-heading .tf-field-heading-inner .tf-field-heading-icon {
   margin-right: 10px;
@@ -3692,22 +3694,48 @@ Steps
   align-items: center;
   -webkit-justify-content: center;
   justify-content: center;
-  background-color: #2979ff;
+  background-color: #EBF5FF;
   color: #ffffff;
   border-radius: 4px;
+  flex-wrap: nowrap;
 }
 .tf-field-heading .tf-field-heading-inner .tf-field-heading-content {
   color: #000;
   font-size: 0.875rem;
   font-weight: 600;
+  width: 100%;
 }
 .tf-field-heading .tf-field-heading-inner .tf-field-heading-content h3 {
   margin: 0;
+  color: #27333F;
+  font-size: 24px;
+  font-style: normal;
   font-weight: 600;
-  color: #363e4a;
+  line-height: 32px;
+  letter-spacing: -0.75px;
+}
+.tf-field-heading .tf-field-heading-inner .tf-field-heading-content p {
+  color: #566676;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 20px; /* 153.846% */
+  margin: 0;
 }
 .tf-field-heading .tf-field-heading-inner .tf-field-heading-content.has-content h3 {
-  margin-bottom: 10px;
+  margin-bottom: 4px;
+}
+.tf-field-heading .tf-field-heading-inner .tf-heading-docs a {
+  display: flex;
+  text-decoration: none;
+  color: #003C79;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 20px; /* 153.846% */
+  gap: 8px;
+}
+.tf-field-heading .tf-field-heading-inner .tf-heading-docs a:focus {
+  outline: none;
+  box-shadow: none;
 }
 
 .tf-field-notice-inner {
@@ -3806,7 +3834,7 @@ Steps
   position: relative;
   display: inline-block;
   width: 32px;
-  height: 24px;
+  height: 20px;
   border-radius: 32px;
 }
 .tf-field-switch .tf-switch-label input {
@@ -3820,7 +3848,7 @@ Steps
   right: 0;
   bottom: 0;
   background-color: #95A3B2;
-  border-radius: 20px;
+  border-radius: 50px;
   -webkit-transition: all 0.4s ease-in-out;
   -moz-transition: all 0.4s ease-in-out;
   -o-transition: all 0.4s ease-in-out;
@@ -3829,10 +3857,10 @@ Steps
 .tf-field-switch .tf-switch-label .tf-switch-slider::before {
   position: absolute;
   content: "";
-  height: 16px;
-  width: 16px;
+  height: 14px;
+  width: 14px;
   border-radius: 50px;
-  top: 4px;
+  top: 3px;
   left: 4px;
   background-color: #FFFFFF;
   filter: drop-shadow(0px 2px 4px rgba(12, 31, 49, 0.12));
@@ -3868,7 +3896,7 @@ Steps
 }
 .tf-field-switch .tf-switch-label input:checked + .tf-switch-slider:before {
   left: 100%;
-  margin-left: -20px;
+  margin-left: -18px;
   background-color: #ffffff;
   filter: drop-shadow(0px 2px 4px rgba(12, 31, 49, 0.12));
 }
@@ -3993,6 +4021,9 @@ Steps
   background: #FFFFFF;
   padding: 16px;
   margin: 12px 0px;
+}
+.tf-field-repeater .tf-field-repeater-desc {
+  margin-bottom: 16px;
 }
 .tf-field-repeater .tf-repeater .tf-single-repeater-clone {
   display: none;

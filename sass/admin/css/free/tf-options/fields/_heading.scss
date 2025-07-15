@@ -1,10 +1,12 @@
 .tf-field-heading {
-  padding: 16px 24px;
+  padding: 24px;
   margin: 0 -24px;
   background-color: $slate5;
 
   .tf-field-heading-inner {
     @include flexbox();
+    gap: 32px;
+    align-items: end;
 
     .tf-field-heading-icon {
       margin-right: 10px;
@@ -14,24 +16,52 @@
       @include flexbox();
       @include align-items(center);
       @include justify-content(center);
-      background-color: $admin-color-primary;
+      background-color: $tf_fill_alternative;
       color: #ffffff;
-      border-radius: 4px
+      border-radius: 4px;
+      flex-wrap: nowrap;
     }
 
     .tf-field-heading-content {
       color: $admin-color-heading;
       font-size: 0.875rem;
       font-weight: 600;
+      width: 100%;
       h3 {
         margin: 0;
+        color: $tf_text_title;
+        font-size: 24px;
+        font-style: normal;
         font-weight: 600;
-        color: $slate80;
+        line-height: 32px;
+        letter-spacing: -0.75px;
+      }
+      p{
+        color: $tf_text_paragraph;
+        font-size: 13px;
+        font-weight: 400;
+        line-height: 20px; /* 153.846% */
+        margin: 0;
       }
 
       &.has-content {
         h3 {
-          margin-bottom: 10px;
+          margin-bottom: 4px;
+        }
+      }
+    }
+    .tf-heading-docs{
+      a{
+        display: flex;
+        text-decoration: none;
+        color: $tf_primary_default;
+        font-size: 13px;
+        font-weight: 600;
+        line-height: 20px; /* 153.846% */
+        gap: 8px;
+        &:focus{
+          outline: none;
+          box-shadow: none;
         }
       }
     }

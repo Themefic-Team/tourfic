@@ -28,9 +28,22 @@ if ( ! class_exists( 'TF_heading' ) ) {
                         <span class="tf-field-sub-title"><?php echo esc_html( $this->field['sub_title'] ); ?></span>
 					<?php endif; ?>
 					<?php if ( ! empty( $this->field['content'] ) ): ?>
-                        <div class="tf-field-heading-main-content"><?php echo wp_kses_post( $this->field['content'] ); ?></div>
+                        <div class="tf-field-heading-main-content">
+							<p><?php echo wp_kses_post( $this->field['content'] ); ?></p>
+						</div>
 					<?php endif; ?>
                 </div>
+				<?php if(!empty($this->field['docs'])){ ?>
+				<div class="tf-heading-docs">
+					<a href="<?php echo esc_url($this->field['docs']); ?>" target="_blank">
+						<?php echo esc_html__( 'Documentation', 'tourfic' ); ?>
+						<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M5.8335 5.83203H14.1668V14.1654" stroke="#003C79" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+							<path d="M5.8335 14.1654L14.1668 5.83203" stroke="#003C79" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+						</svg>
+					</a>
+				</div>
+				<?php } ?>
 
             </div>
 			<?php
