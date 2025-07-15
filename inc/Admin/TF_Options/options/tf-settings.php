@@ -64,13 +64,9 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'      => 'general-notice-heading',
 					'type'  => 'heading',
-					'label' => __( 'General Settings', 'tourfic' ),
-					'subtitle'   => __( 'This section contains the general settings for Tourfic.', 'tourfic' ),
-				),
-				array(
-					'id'      => 'general-option-notice-one',
-					'type'    => 'notice',
-					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-general-settings/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+					'title' => esc_html__( 'General Settings', 'tourfic' ),
+					'content'   => esc_html__( 'This section contains the general settings for Tourfic.', 'tourfic' ),
+					'docs' => esc_url('https://themefic.com/docs/tourfic/tourfic-settings/tourfic-general-settings/')
 				),
 				array(
 					'id'       => 'disable-services',
@@ -150,8 +146,8 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'       => 'template_heading',
 					'type'     => 'heading',
-					'label'    => esc_html__( 'Template Settings', 'tourfic' ),
-					'subtitle' => esc_html__( 'Select your preferred template from our current offering of two options, with more on the way!', 'tourfic' ),
+					'title'    => esc_html__( 'Template Settings', 'tourfic' ),
+					'content' => esc_html__( 'Select your preferred template from our current offering of two options, with more on the way!', 'tourfic' ),
 				),
 				array(
 					'id'    => 'tf-template',
@@ -167,7 +163,7 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'      => 'hotel-title',
 									'type'    => 'heading',
-									'content' => esc_html__( 'Hotel Single Page', 'tourfic' ),
+									'title' => esc_html__( 'Hotel Single Page', 'tourfic' ),
 									'class'   => 'tf-field-class',
 								),
 								array(
@@ -299,7 +295,7 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'      => 'hotel-title',
 									'type'    => 'heading',
-									'content' => esc_html__( 'Hotel Archive & Search Result Page', 'tourfic' ),
+									'title' => esc_html__( 'Hotel Archive & Search Result Page', 'tourfic' ),
 									'class'   => 'tf-field-class',
 								),
 								array(
@@ -370,7 +366,7 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'      => 'tour-title',
 									'type'    => 'heading',
-									'content' => esc_html__( 'Tour Single Page', 'tourfic' ),
+									'title' => esc_html__( 'Tour Single Page', 'tourfic' ),
 									'class'   => 'tf-field-class',
 								),
 								array(
@@ -529,7 +525,7 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'      => 'tour-title',
 									'type'    => 'heading',
-									'content' => esc_html__( 'Tour Archive & Search Result Page', 'tourfic' ),
+									'title' => esc_html__( 'Tour Archive & Search Result Page', 'tourfic' ),
 									'class'   => 'tf-field-class',
 								),
 								array(
@@ -601,7 +597,7 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'      => 'apartment-title',
 									'type'    => 'heading',
-									'content' => esc_html__( 'Apartment Single Page', 'tourfic' ),
+									'title' => esc_html__( 'Apartment Single Page', 'tourfic' ),
 									'class'   => 'tf-field-class',
 								),
 								array(
@@ -692,7 +688,7 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'      => 'apartment-title',
 									'type'    => 'heading',
-									'content' => esc_html__( 'Apartment Archive & Search Result Page', 'tourfic' ),
+									'title' => esc_html__( 'Apartment Archive & Search Result Page', 'tourfic' ),
 									'class'   => 'tf-field-class',
 								),
 								array(
@@ -760,7 +756,7 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'      => 'car-title',
 									'type'    => 'heading',
-									'content' => __( 'Car Single Page', 'tourfic' ),
+									'title' => __( 'Car Single Page', 'tourfic' ),
 									'class'   => 'tf-field-class',
 								),
 								array(
@@ -827,7 +823,7 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'      => 'car-title',
 									'type'    => 'heading',
-									'content' => __( 'Car Archive & Search Result Page', 'tourfic' ),
+									'title' => __( 'Car Archive & Search Result Page', 'tourfic' ),
 									'class'   => 'tf-field-class',
 								),
 								array(
@@ -893,8 +889,8 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'       => 'container_heading',
 					'type'     => 'heading',
-					'label'    => esc_html__( 'Container Settings', 'tourfic' ),
-					'subtitle' => esc_html__( 'Select your preferred container layout', 'tourfic' ),
+					'title'    => esc_html__( 'Container Settings', 'tourfic' ),
+					'content' => esc_html__( 'Select your preferred container layout', 'tourfic' ),
 				),
 				array(
 					'id'       => 'tf-container',
@@ -937,8 +933,8 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'       => 'appearance_heading',
 					'type'     => 'heading',
-					'label'    => esc_html__( 'Preset Colors', 'tourfic' ),
-					'subtitle' => esc_html__( 'These colors will be used throughout your website. Choose between these presets or create your own custom palette.', 'tourfic' ),
+					'title'    => esc_html__( 'Preset Colors', 'tourfic' ),
+					'content' => esc_html__( 'These colors will be used throughout your website. Choose between these presets or create your own custom palette.', 'tourfic' ),
 				),
 				array(
 					'id'       => 'color-palette-template',
@@ -1373,13 +1369,9 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'       => 'signle_tour_heading',
 					'type'     => 'heading',
-					'label'    => __( 'Global Settings for Single Tours Page', 'tourfic' ),
-					'subtitle' => __( 'These options can be overridden from Single Tour Settings.', 'tourfic' ),
-				),
-				array(
-					'id'      => 'tour-option-notice-one',
-					'type'    => 'notice',
-					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-tours-options/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+					'title'    => __( 'Global Settings for Single Tours Page', 'tourfic' ),
+					'content' => __( 'These options can be overridden from Single Tour Settings.', 'tourfic' ),
+					'docs' => esc_url('https://themefic.com/docs/tourfic/tourfic-settings/tourfic-tours-options/')
 				),
 
 				array(
@@ -1568,14 +1560,9 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'        => 'label_off_heading',
 					'type'      => 'heading',
-					'label'     => __( 'Global Settings for Single Hotel Page', 'tourfic' ),
-					'sub_title' => __( 'These options can be overridden from Single Hotel Settings.', 'tourfic' ),
-				),
-
-				array(
-					'id'      => 'hotel-option-notice-one',
-					'type'    => 'notice',
-					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-hotel-options/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+					'title'     => __( 'Global Settings for Single Hotel Page', 'tourfic' ),
+					'content' => __( 'These options can be overridden from Single Hotel Settings.', 'tourfic' ),
+					'docs' => esc_url('https://themefic.com/docs/tourfic/tourfic-settings/tourfic-hotel-options/')
 				),
 				array(
 					'id'        => 'h-review',
@@ -1663,12 +1650,8 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'    => 'hotel_room_heading',
 					'type'  => 'heading',
-					'label' => __( 'Global Configuration for Hotel Rooms', 'tourfic' ),
-				),
-				array(
-					'id'      => 'hotel-option-notice-two',
-					'type'    => 'notice',
-					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-hotel-options/#room" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+					'title' => __( 'Global Configuration for Hotel Rooms', 'tourfic' ),
+					'docs' => esc_url('https://themefic.com/docs/tourfic/tourfic-settings/tourfic-hotel-options/#room')
 				),
 				array(
 					'id'       => 'enable_child_age_limit',
@@ -1704,14 +1687,9 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'    => 'label_off_heading',
 					'type'  => 'heading',
-					'label' => __( 'Single Apartment Settings', 'tourfic' ),
-					'subtitle'   => __( 'These options can be overridden from Single Apartment Settings.', 'tourfic' ),
-				),
-
-				array(
-					'id'      => 'apartment-option-notice',
-					'type'    => 'notice',
-					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/apartment-options/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+					'title' => __( 'Single Apartment Settings', 'tourfic' ),
+					'content'   => __( 'These options can be overridden from Single Apartment Settings.', 'tourfic' ),
+					'docs' => esc_url('https://themefic.com/docs/tourfic/tourfic-settings/apartment-options/')
 				),
 				array(
 					'id'           => 'amenities_cats',
@@ -1784,14 +1762,9 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'    => 'label_off_heading',
 					'type'  => 'heading',
-					'label' => __( 'Single Car Settings', 'tourfic' ),
-					'subtitle'   => __( 'These options can be overridden from Single Car Settings.', 'tourfic' ),
-				),
-
-				array(
-					'id'      => 'apartment-option-notice',
-					'type'    => 'notice',
-					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/settings/car-options/#Single_Page_Settings" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+					'title' => __( 'Single Car Settings', 'tourfic' ),
+					'content'   => __( 'These options can be overridden from Single Car Settings.', 'tourfic' ),
+					'docs' => esc_url('https://themefic.com/docs/tourfic/settings/car-options/#Single_Page_Settings')
 				),
 
 				array(
@@ -2092,7 +2065,7 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'      => 'pabbly-title',
 									'type'    => 'heading',
-									'content' => __( 'Pabbly', 'tourfic' ),
+									'title' => __( 'Pabbly', 'tourfic' ),
 									'class'   => 'tf-field-class',
 								),
 								array(
@@ -2118,7 +2091,7 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'      => 'zapier-title',
 									'type'    => 'heading',
-									'content' => __( 'Zapier', 'tourfic' ),
+									'title' => __( 'Zapier', 'tourfic' ),
 									'class'   => 'tf-field-class',
 								),
 								array(
@@ -2225,15 +2198,10 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'      => 'search-option-heading',
 					'type'    => 'heading',
-					'label' => __( 'Search Page Settings', 'tourfic' ),
-					'subtitle'   => __( 'These settings apply to the search result page of Hotels/Tours/Apartments.', 'tourfic' ),
+					'title' => __( 'Search Page Settings', 'tourfic' ),
+					'content'   => __( 'These settings apply to the search result page of Hotels/Tours/Apartments.', 'tourfic' ),
 					'class'   => 'tf-field-class',
-				),
-				array(
-					'id'      => 'search-option-notice',
-					'type'    => 'notice',
-					'style'   => 'success',
-					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/search-page/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+					'docs' => esc_url('https://themefic.com/docs/tourfic/tourfic-settings/search-page/')
 				),
 				// Registration
 				array(
@@ -2261,7 +2229,7 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'       => 'hotel_search_heading',
 					'type'     => 'heading',
-					'label'    => __( 'Hotel Search', 'tourfic' ),
+					'title'    => __( 'Hotel Search', 'tourfic' ),
 				),
 				array(
 					'id'        => 'date_hotel_search',
@@ -2302,7 +2270,7 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'       => 'tour_search_heading',
 					'type'     => 'heading',
-					'label'    => __( 'Tour Search', 'tourfic' ),
+					'title'    => __( 'Tour Search', 'tourfic' ),
 				),
 				array(
 					'id'        => 'date_tour_search',
@@ -2351,7 +2319,7 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'       => 'apartment_search_heading',
 					'type'     => 'heading',
-					'label'    => __( 'Apartment Search', 'tourfic' ),
+					'title'    => __( 'Apartment Search', 'tourfic' ),
 				),
 				array(
 					'id'        => 'date_apartment_search',
@@ -2380,7 +2348,7 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'       => 'car_search_heading',
 					'type'     => 'heading',
-					'label'    => __( 'Car Search', 'tourfic' ),
+					'title'    => __( 'Car Search', 'tourfic' ),
 				),
 				array(
 					'id'        => 'pick_drop_car_search',
@@ -2741,7 +2709,7 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'      => 'map_settings_heading',
 					'type'    => 'heading',
-					'content' => __( 'Map Settings', 'tourfic' )
+					'title' => __( 'Map Settings', 'tourfic' )
 				),
 				array(
 					'id'       => 'google-page-option',
@@ -2779,15 +2747,10 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'      => 'wishlist_heading',
 					'type'    => 'heading',
-					'label' => __( 'Wishlist Settings', 'tourfic' ),
-					'subtitle' => __( 'The wishlist feature enables customers to curate a collection of hotels, tours, and apartments they are interested in or plan to book in the future.', 'tourfic' ),
-				),
-				array(
-					'id'      => 'wishlistsettings-official-docs',
-					'type'    => 'notice',
-					'style'   => 'success',
-					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-miscellaneous/#wishlist-settings" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
-				),
+					'title' => __( 'Wishlist Settings', 'tourfic' ),
+					'content' => __( 'The wishlist feature enables customers to curate a collection of hotels, tours, and apartments they are interested in or plan to book in the future.', 'tourfic' ),
+					'docs' => esc_url('https://themefic.com/docs/tourfic/tourfic-settings/tourfic-miscellaneous/#wishlist-settings')
+ 				),
 
 				array(
 					'id'      => 'wl-for',
@@ -2843,13 +2806,9 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'      => 'permalink_heading',
 					'type'    => 'heading',
-					'label' => __( 'Permalink Settings', 'tourfic' ),
-					'subtitle' => __( 'Select the URL structure for your Hotels, Tours, and Apartments listings.', 'tourfic' ),
-				),
-				array(
-					'id'      => 'permalink_notice',
-					'type'    => 'notice',
-					'content' => __( 'Anything confusing? <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-miscellaneous/#permalink-settings" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>Read Documentation</strong></a>', 'tourfic' ),
+					'title' => __( 'Permalink Settings', 'tourfic' ),
+					'content' => __( 'Select the URL structure for your Hotels, Tours, and Apartments listings.', 'tourfic' ),
+					'docs' => esc_url('https://themefic.com/docs/tourfic/tourfic-settings/tourfic-miscellaneous/#permalink-settings')
 				),
 
 				array(
@@ -2901,14 +2860,9 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'      => 'review_heading',
 					'type'    => 'heading',
-					'label' => __( 'Review Settings', 'tourfic' ),
-					'subtitle' => __( 'Configure your Hotel/Tour/Apartment Customer Review Section through this settings panel.', 'tourfic' ),
-				),
-				array(
-					'id'      => 'review-settings-official-docs',
-					'type'    => 'notice',
-					'style'   => 'success',
-					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-miscellaneous/#review-settings" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+					'title' => __( 'Review Settings', 'tourfic' ),
+					'content' => __( 'Configure your Hotel/Tour/Apartment Customer Review Section through this settings panel.', 'tourfic' ),
+					'docs' => esc_url('https://themefic.com/docs/tourfic/tourfic-settings/tourfic-miscellaneous/#review-settings')
 				),
 				array(
 					'id'      => 'r-for',
@@ -3121,14 +3075,9 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'      => 'optimization_heading',
 					'type'    => 'heading',
-					'label' => __( 'Minification Settings', 'tourfic' ),
-					'subtitle'  => __( "Enhance your website's performance by activating the minification for the files listed below. After enabling each setting, please conduct a thorough test of your site to ensure that these changes do not negatively impact your website's functionality.", 'tourfic' ),
-				),
-				array(
-					'id'      => 'optimize-settings-official-docs',
-					'type'    => 'notice',
-					'style'   => 'success',
-					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/optimization-settings/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+					'title' => __( 'Minification Settings', 'tourfic' ),
+					'content'  => __( "Enhance your website's performance by activating the minification for the files listed below. After enabling each setting, please conduct a thorough test of your site to ensure that these changes do not negatively impact your website's functionality.", 'tourfic' ),
+					'docs' => esc_url('https://themefic.com/docs/tourfic/tourfic-settings/optimization-settings/')
 				),
 				array(
 					'id'        => 'css_min',
@@ -3155,7 +3104,7 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'      => 'cdn_heading',
 					'type'    => 'heading',
-					'content' => __( 'CDN Settings', 'tourfic' ),
+					'title' => __( 'CDN Settings', 'tourfic' ),
 				),
 
 				array(
@@ -3260,8 +3209,8 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'       => 'affiliate_heading',
 					'type'     => 'heading',
-					'label'    => __( 'Affiliate Settings', 'tourfic' ),
-					'subtitle' => __( 'Use these options if you want to show 3rd party data and earn commission from them. Currently, we only allow Booking.com and TravelPayout. Gradually more options would be added.', 'tourfic' ),
+					'title'    => __( 'Affiliate Settings', 'tourfic' ),
+					'content' => __( 'Use these options if you want to show 3rd party data and earn commission from them. Currently, we only allow Booking.com and TravelPayout. Gradually more options would be added.', 'tourfic' ),
 				),
 				array(
 					'id'       => 'tf-affiliate',
@@ -3329,7 +3278,7 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'    => 'admin_email_heading',
 									'type'  => 'heading',
-									'label' => __( 'Admin Email Setting', 'tourfic' ),
+									'title' => __( 'Admin Email Setting', 'tourfic' ),
 								),
 								array(
 									'id'      => 'admin_email_subject',
@@ -3471,15 +3420,10 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'      => 'qr-code-title',
 					'type'    => 'heading',
-					'label'    => __( 'Tour QR Code', 'tourfic' ),
-					'subtitle' => __( 'Configure the QR code generation for your tours here. This will allow for the creation of unique QR codes that can be scanned for tour information or check-ins.', 'tourfic' ),
+					'title'    => __( 'Tour QR Code', 'tourfic' ),
+					'content' => __( 'Configure the QR code generation for your tours here. This will allow for the creation of unique QR codes that can be scanned for tour information or check-ins.', 'tourfic' ),
 					'class'   => 'tf-field-class',
-				),
-				array(
-					'id'      => 'qrcode-official-docs',
-					'type'    => 'notice',
-					'style'   => 'success',
-					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/qr-code/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+					'docs' => esc_url('https://themefic.com/docs/tourfic/tourfic-settings/qr-code/')
 				),
 				array(
 					'id'    => 'qr_logo',
@@ -3541,8 +3485,8 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'       => 'integration_heading',
 					'type'     => 'heading',
-					'label'    => __( 'Tourfic Integration Settings', 'tourfic' ),
-					'subtitle' => __( 'For integration with other systems, we currently support connections via Pabbly, Zapier and Google Calendar only.', 'tourfic' ),
+					'title'    => __( 'Tourfic Integration Settings', 'tourfic' ),
+					'content' => __( 'For integration with other systems, we currently support connections via Pabbly, Zapier and Google Calendar only.', 'tourfic' ),
 				),
 				array(
 					'id'     => 'tf-integration',
@@ -3557,7 +3501,7 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'      => 'hotel-title',
 									'type'    => 'heading',
-									'content' => __( 'Hotel Integration', 'tourfic' ),
+									'title' => __( 'Hotel Integration', 'tourfic' ),
 									'class'   => 'tf-field-class',
 								),
 								array(
@@ -3603,7 +3547,7 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'      => 'tour-title',
 									'type'    => 'heading',
-									'content' => __( 'Tour Integration', 'tourfic' ),
+									'title' => __( 'Tour Integration', 'tourfic' ),
 									'class'   => 'tf-field-class',
 								),
 								array(
@@ -3649,7 +3593,7 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'      => 'apartment-title',
 									'type'    => 'heading',
-									'content' => __( 'Apartment Integration', 'tourfic' ),
+									'title' => __( 'Apartment Integration', 'tourfic' ),
 									'class'   => 'tf-field-class',
 								),
 								array(
@@ -3695,7 +3639,7 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'      => 'woocommerce-title',
 									'type'    => 'heading',
-									'content' => __( 'WooCommerce Integration', 'tourfic' ),
+									'title' => __( 'WooCommerce Integration', 'tourfic' ),
 									'class'   => 'tf-field-class',
 								),
 								array(
@@ -3755,7 +3699,7 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'      => 'hotel-title',
 									'type'    => 'heading',
-									'content' => __( 'Hotel', 'tourfic' ),
+									'title' => __( 'Hotel', 'tourfic' ),
 									'class'   => 'tf-field-class',
 								),
 								array(
@@ -3801,7 +3745,7 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'      => 'tour-title',
 									'type'    => 'heading',
-									'content' => __( 'Tour Integration', 'tourfic' ),
+									'title' => __( 'Tour Integration', 'tourfic' ),
 									'class'   => 'tf-field-class',
 								),
 								array(
@@ -3847,7 +3791,7 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'      => 'apartment-title',
 									'type'    => 'heading',
-									'content' => __( 'Apartment Integration', 'tourfic' ),
+									'title' => __( 'Apartment Integration', 'tourfic' ),
 									'class'   => 'tf-field-class',
 								),
 								array(
@@ -3893,7 +3837,7 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'      => 'woocommerce-title',
 									'type'    => 'heading',
-									'content' => __( 'WooCommerce Integration', 'tourfic' ),
+									'title' => __( 'WooCommerce Integration', 'tourfic' ),
 									'class'   => 'tf-field-class',
 								),
 								array(
@@ -3953,7 +3897,7 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'      => 'woocommerce-title',
 									'type'    => 'heading',
-									'content' => __( 'Google Calendar Integration', 'tourfic' ),
+									'title' => __( 'Google Calendar Integration', 'tourfic' ),
 									'class'   => 'tf-field-class',
 								),
 								array(
@@ -4017,14 +3961,8 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'       => 'integration_heading',
 					'type'     => 'heading',
-					'label'    => esc_html__( 'Cancellation Settings', 'tourfic' ),
-				),
-				array(
-					'id'      => 'cancellation-official-docs',
-					'type'    => 'cancellation-official-docs',
-					'type'    => 'notice',
-					'style'   => 'success',
-					'content' => esc_html__( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/settings/cancellation-settings/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . esc_html__( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+					'title'    => esc_html__( 'Cancellation Settings', 'tourfic' ),
+					'docs' => esc_url('https://themefic.com/docs/tourfic/settings/cancellation-settings/')
 				),
 				array(
 					'id'      => 'timezone-title',
@@ -4047,7 +3985,7 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'      => 'hotel-title',
 					'type'    => 'heading',
-					'content' => esc_html__( 'Hotel', 'tourfic' ),
+					'title' => esc_html__( 'Hotel', 'tourfic' ),
 					'class'   => 'tf-field-class',
 				),
 				array(
@@ -4062,7 +4000,7 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'      => 'tour-title',
 					'type'    => 'heading',
-					'content' => esc_html__( 'Tour', 'tourfic' ),
+					'title' => esc_html__( 'Tour', 'tourfic' ),
 					'class'   => 'tf-field-class',
 				),
 				array(
@@ -4077,7 +4015,7 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'      => 'apartment-title',
 					'type'    => 'heading',
-					'content' => esc_html__( 'Apartment', 'tourfic' ),
+					'title' => esc_html__( 'Apartment', 'tourfic' ),
 					'class'   => 'tf-field-class',
 				),
 				array(
@@ -4103,8 +4041,9 @@ TF_Settings::option( 'tf_settings', array(
 			'fields' => array(
 				array(
 					'id'      => 'export-import-notice-one',
-					'type'    => 'notice',
-					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/settings/import-export/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+					'type'    => 'heading',
+					'title'   => esc_html__('Import/Export', 'tourfic'),
+					'docs' => esc_url('https://themefic.com/docs/tourfic/settings/import-export/'),
 				),
 				array(
 					'id' => 'backup',
@@ -4142,7 +4081,7 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'       => 'itinerary-builder-heading',
 									'type'     => 'heading',
-									'subtitle' => __( 'You can create your own Itinerary using Tourfic\'s Itinerary builder. The builder can be found on Single Tour Settings', 'tourfic' ),
+									'content' => __( 'You can create your own Itinerary using Tourfic\'s Itinerary builder. The builder can be found on Single Tour Settings', 'tourfic' ),
 								),
 								array(
 									'id'           => '',
@@ -4246,7 +4185,7 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'      => 'tour_pdf_downloader_section',
 									'type'    => 'heading',
-									'content' => __( 'Tour Itinerary Downloader Section', 'tourfic' ),
+									'title' => __( 'Tour Itinerary Downloader Section', 'tourfic' ),
 								),
 								array(
 									'id'    => '',
@@ -4275,8 +4214,8 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'      => 'tour_settings',
 									'type'    => 'heading',
-									'label' => __( 'Thumbnail Settings in PDF', 'tourfic' ),
-									'subtitle' => esc_html__( 'These settings will adjust the height and width of the main tour image in the itinerary.', 'tourfic' ),
+									'title' => __( 'Thumbnail Settings in PDF', 'tourfic' ),
+									'content' => esc_html__( 'These settings will adjust the height and width of the main tour image in the itinerary.', 'tourfic' ),
 								),
 								array(
 									'id'          => '',
@@ -4297,7 +4236,7 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'      => 'companey_info_heading',
 									'type'    => 'heading',
-									'content' => __( 'Default Company Info in PDF', 'tourfic' ),
+									'title' => __( 'Default Company Info in PDF', 'tourfic' ),
 								),
 								array(
 									'id'      => 'tour-option-notice-one',
@@ -4341,7 +4280,7 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'    => 'export_heading',
 									'type'  => 'heading',
-									'label' => __( 'Talk to Expert Section', 'tourfic' ),
+									'title' => __( 'Talk to Expert Section', 'tourfic' ),
 								),
 								array(
 									'id'      => '',
@@ -4420,8 +4359,8 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'       => 'signle_tour_fonts',
 									'type'     => 'heading',
-									'label'    => __( 'PDF Downloader Font Support', 'tourfic' ),
-									'subtitle' => __( 'If your site\'s language is not English, then upload your language font. Otherwise, your Downloader PDF may not work properly.', 'tourfic' ),
+									'title'    => __( 'PDF Downloader Font Support', 'tourfic' ),
+									'content' => __( 'If your site\'s language is not English, then upload your language font. Otherwise, your Downloader PDF may not work properly.', 'tourfic' ),
 								),
 								array(
 									'id'     => '',
@@ -4468,13 +4407,9 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'    => 'signle_tour_heading',
 					'type'  => 'heading',
-					'label' => __( 'Settings for Partial Payment', 'tourfic' ),
-					'subtitle'  => __( 'This option will appear as Popup during Booking.', 'tourfic' ),
-				),
-				array(
-					'id'      => 'tour-option-notice-two',
-					'type'    => 'notice',
-					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-tours-options/#partial_payment" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+					'title' => __( 'Settings for Partial Payment', 'tourfic' ),
+					'content'  => __( 'This option will appear as Popup during Booking.', 'tourfic' ),
+					'docs' => esc_url('https://themefic.com/docs/tourfic/tourfic-settings/tourfic-tours-options/#partial_payment')
 				),
 
 				array(
@@ -4509,13 +4444,9 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'       => 'confirmation_fields_heading',
 					'type'     => 'heading',
-					'label'    => __( 'Settings for Without Payment Option', 'tourfic' ),
-					'subtitle' => __( 'Activating the "Without Payment" booking option will enable the use of this section.', 'tourfic' ),
-				),
-				array(
-					'id'      => 'tour-option-notice-four',
-					'type'    => 'notice',
-					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-tours-options/#Without_payment_Book" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+					'title'    => __( 'Settings for Without Payment Option', 'tourfic' ),
+					'content' => __( 'Activating the "Without Payment" booking option will enable the use of this section.', 'tourfic' ),
+					'docs' => esc_url('https://themefic.com/docs/tourfic/tourfic-settings/tourfic-tours-options/#Without_payment_Book')
 				),
 				array(
 					'id'           => '',
@@ -4703,13 +4634,9 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'    => 'hotel_popup_heading',
 					'type'  => 'heading',
-					'label' => __( 'Settings for Popup', 'tourfic' ),
-					'subtitle'   => __( 'The popup will appear when you enable the airport pickup service.', 'tourfic' ),
-				),
-				array(
-					'id'      => 'hotel-option-notice-three',
-					'type'    => 'notice',
-					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-hotel-options/#popup" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+					'title' => __( 'Settings for Popup', 'tourfic' ),
+					'content'   => __( 'The popup will appear when you enable the airport pickup service.', 'tourfic' ),
+					'docs' => esc_url('https://themefic.com/docs/tourfic/tourfic-settings/tourfic-hotel-options/#popup')
 				),
 				array(
 					'id'    => '',
@@ -4758,13 +4685,9 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'       => 'confirmation_fields_heading',
 					'type'     => 'heading',
-					'label'    => __( 'Settings for Without Payment Option', 'tourfic' ),
-					'subtitle' => __( 'Activating the "Without Payment" booking option will enable the use of this section.', 'tourfic' ),
-				),
-				array(
-					'id'      => 'tour-option-notice-four',
-					'type'    => 'notice',
-					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/settings/car-options/#Without_Payment_Settings" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+					'title'    => __( 'Settings for Without Payment Option', 'tourfic' ),
+					'content' => __( 'Activating the "Without Payment" booking option will enable the use of this section.', 'tourfic' ),
+					'docs' => esc_url('https://themefic.com/docs/tourfic/settings/car-options/#Without_Payment_Settings')
 				),
 				array(
 					'id'           => 'book-confirm-field',
