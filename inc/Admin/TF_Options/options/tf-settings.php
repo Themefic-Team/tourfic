@@ -3954,12 +3954,6 @@ TF_Settings::option( 'tf_settings', array(
 					'docs' => esc_url('https://themefic.com/docs/tourfic/settings/cancellation-settings/')
 				),
 				array(
-					'id'      => 'timezone-title',
-					'type'    => 'heading',
-					'content' => esc_html__( 'Time Zone', 'tourfic' ),
-					'class'   => 'tf-field-class',
-				),
-				array(
 					'id'       => 'cancellation_time_zone',
 					'type'     => 'select2',
 					'label'    => esc_html__( 'Select Time Zone', 'tourfic' ),
