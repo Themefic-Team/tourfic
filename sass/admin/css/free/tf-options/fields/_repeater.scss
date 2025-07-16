@@ -1,9 +1,11 @@
 .tf-field-repeater{
-  border-radius: 8px;
-  border: 1px solid $tf_border_faint;
-  background: $tf_fill_white;
-  padding: 16px;
   margin: 12px 0px;
+   > .tf-fieldset{
+    border-radius: 8px;
+    border: 1px solid $tf_border_faint;
+    background: $tf_fill_white;
+    padding: 16px;
+  }
   .tf-field-repeater-desc{
     margin-bottom: 16px;
   }

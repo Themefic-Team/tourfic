@@ -421,6 +421,9 @@
     }
     .tf-package-field-repeater{
         padding: 24px;
+        border-radius: 8px;
+        border: 1px solid $tf_border_faint;
+        background: $tf_fill_white;
         .tf-field-accordion{
             .tf-fieldset{
                 display: flex;
