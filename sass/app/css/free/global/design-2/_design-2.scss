@@ -267,6 +267,7 @@
                             }
                             .tf-booking-form-guest-and-room-inner{
                                 width: 100%;
+                                position: relative;
                             }
                         }
                     }
@@ -3623,6 +3624,9 @@
                             }
                             .tf-arrow-icons{
                                 text-align: right;
+                                position: absolute;
+                                right: 18px;
+                                bottom: 0;
                                 @media #{$max768}{
                                     float: left;
                                 }

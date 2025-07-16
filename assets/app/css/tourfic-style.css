@@ -5138,6 +5138,9 @@ div#tf-destinationautocomplete-list div:before {
 
 .tf-shortcode-design-2-tab .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields .tf_guest_info .tf_input-inner .tf_form_inners .tf_check_arrow {
   text-align: right;
+  position: absolute;
+  right: 0;
+  top: 23px;
 }
 
 .tf-shortcode-design-2-tab .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields .tf_guest_info .tf_acrselection-wrap {
@@ -12944,6 +12947,7 @@ div#tf-destinationautocomplete-list div:before {
 .tf-archive-template__two .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-fields > div.tf-booking-form-guest-and-room .tf-booking-form-guest-and-room-inner,
 .page-template-tf-search__two .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-fields > div.tf-booking-form-guest-and-room .tf-booking-form-guest-and-room-inner {
   width: 100%;
+  position: relative;
 }
 
 .tf-single-template__two .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-checkout,
@@ -17562,6 +17566,9 @@ div#tf-destinationautocomplete-list div:before {
 .tf-archive-template__two .tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-guest-and-room .tf-booking-form-guest-and-room-inner .tf-arrow-icons,
 .page-template-tf-search__two .tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-guest-and-room .tf-booking-form-guest-and-room-inner .tf-arrow-icons {
   text-align: right;
+  position: absolute;
+  right: 18px;
+  bottom: 0;
 }
 
 @media only screen and (max-width: 768px) {
