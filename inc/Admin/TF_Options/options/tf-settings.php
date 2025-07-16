@@ -1503,6 +1503,12 @@ TF_Settings::option( 'tf_settings', array(
 			'icon'   => 'fa fa-cog',
 			'fields' => array(
 				array(
+					'id'      => 'tour-option-notice-three',
+					'type'    => 'heading',
+					'title'   => esc_html__( 'Itinerary Settings', 'tourfic' ),
+					'docs'    => esc_url('https://themefic.com/docs/tourfic/tourfic-settings/tourfic-tours-options/#itinerary')
+				),
+				array(
 					'id'   => 'itinerary-builder-setings',
 					'type' => 'tab',
 					'tabs' => array(
@@ -1511,11 +1517,6 @@ TF_Settings::option( 'tf_settings', array(
 							'title'  => 'Itinerary Builder Settings',
 							'icon'   => 'fa fa-gear',
 							'fields' => array(
-								array(
-									'id'      => 'tour-option-notice-three',
-									'type'    => 'notice',
-									'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-tours-options/#itinerary" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
-								),
 								array(
 									'id'      => 'tour-option-itinerary-notice',
 									'type'    => 'notice',
@@ -1529,11 +1530,6 @@ TF_Settings::option( 'tf_settings', array(
 							'title'  => 'Itinerary Downloader Settings',
 							'icon'   => 'fa fa-gear',
 							'fields' => array(
-								array(
-									'id'      => 'tour-option-notice-three',
-									'type'    => 'notice',
-									'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-tours-options/#itinerary" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
-								),
 								array(
 									'id'      => 'tour-option-itinerary-notice',
 									'type'    => 'notice',
@@ -1833,6 +1829,12 @@ TF_Settings::option( 'tf_settings', array(
 			'icon'   => 'fas fa-user',
 			'fields' => array(
 				array(
+					'id'      => 'user-option-notice',
+					'type'    => 'heading',
+					'title'    => esc_html__( 'User Options', 'tourfic' ),
+					'docs'    => esc_url('https://themefic.com/docs/tourfic/tourfic-settings/user-option/')
+				),
+				array(
 					'id'   => 'tf_user_permission',
 					'type' => 'tab',
 					'tabs' => array(
@@ -1841,11 +1843,6 @@ TF_Settings::option( 'tf_settings', array(
 							'title'  => 'Vendor Settings',
 							'icon'   => 'fa fa-gear',
 							'fields' => array(
-								array(
-									'id'      => 'user-option-notice',
-									'type'    => 'notice',
-									'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/user-option/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
-								),
 								array(
 									'id'       => '',
 									'type'     => 'checkbox',
@@ -1907,11 +1904,6 @@ TF_Settings::option( 'tf_settings', array(
 							'title'  => 'Manager Settings',
 							'icon'   => 'fa fa-gear',
 							'fields' => array(
-								array(
-									'id'      => 'user-option-notice',
-									'type'    => 'notice',
-									'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/user-option/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
-								),
 								array(
 									'id'       => '',
 									'type'     => 'checkbox',
@@ -2388,6 +2380,12 @@ TF_Settings::option( 'tf_settings', array(
 			'icon'   => 'fas fa-user',
 			'fields' => array(
 				array(
+					'id'      => 'loginsettings-official-docs',
+					'type'    => 'heading',
+					'title'      => esc_html__( 'Login & Register', 'tourfic' ),
+					'docs' => esc_url( 'https://themefic.com/docs/tourfic/tourfic-settings/tourfic-miscellaneous/'),
+				),
+				array(
 					'id'   => 'log_reg_settings',
 					'type' => 'tab',
 					'tabs' => array(
@@ -2396,12 +2394,6 @@ TF_Settings::option( 'tf_settings', array(
 							'title'  => 'Login Settings',
 							'icon'   => 'fa fa-gear',
 							'fields' => array(
-								array(
-									'id'      => 'loginsettings-official-docs',
-									'type'    => 'notice',
-									'style'   => 'success',
-									'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-miscellaneous/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
-								),
 								array(
 									'id'         => '',
 									'type'       => 'select',
@@ -2459,12 +2451,6 @@ TF_Settings::option( 'tf_settings', array(
 							'title'  => 'Register Settings',
 							'icon'   => 'fa fa-gear',
 							'fields' => array(
-								array(
-									'id'      => 'registersettings-official-docs',
-									'type'    => 'notice',
-									'style'   => 'success',
-									'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-miscellaneous/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
-								),
 								array(
 									'id'         => '',
 									'type'       => 'select',
@@ -4048,6 +4034,12 @@ TF_Settings::option( 'tf_settings', array(
 			'icon'   => 'fa fa-cog',
 			'fields' => array(
 				array(
+					'id'      => 'tour-option-notice-three',
+					'type'    => 'heading',
+					'title'   => esc_html__( 'Itinerary Settings', 'tourfic' ),
+					'docs'    => esc_url('https://themefic.com/docs/tourfic/tourfic-settings/tourfic-tours-options/#itinerary')
+				),
+				array(
 					'id'   => 'itinerary-builder-setings',
 					'type' => 'tab',
 					'tabs' => array(
@@ -4056,11 +4048,6 @@ TF_Settings::option( 'tf_settings', array(
 							'title'  => 'Itinerary Builder Settings',
 							'icon'   => 'fa fa-gear',
 							'fields' => array(
-								array(
-									'id'      => 'tour-option-notice-three',
-									'type'    => 'notice',
-									'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-tours-options/#itinerary" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
-								),
 								array(
 									'id'       => 'itinerary-builder-heading',
 									'type'     => 'heading',
@@ -4152,11 +4139,6 @@ TF_Settings::option( 'tf_settings', array(
 							'title'  => 'Itinerary Downloader Settings',
 							'icon'   => 'fa fa-gear',
 							'fields' => array(
-								array(
-									'id'      => 'tour-option-notice-three',
-									'type'    => 'notice',
-									'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-tours-options/#itinerary" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
-								),
 								array(
 									'id'       => '',
 									'type'     => 'switch',
