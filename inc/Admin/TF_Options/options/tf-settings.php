@@ -3086,7 +3086,6 @@ TF_Settings::option( 'tf_settings', array(
 					'subtitle'  => __( 'Enable/disable Minification of CSS files included with Tourfic.', 'tourfic' ),
 					'label_on'  => __( 'Enabled', 'tourfic' ),
 					'label_off' => __( 'Disabled', 'tourfic' ),
-					'width'     => 100,
 					'default'   => true,
 				),
 
@@ -3097,7 +3096,6 @@ TF_Settings::option( 'tf_settings', array(
 					'subtitle'  => __( 'Enable/disable Minification of JS files included with Tourfic.', 'tourfic' ),
 					'label_on'  => __( 'Enabled', 'tourfic' ),
 					'label_off' => __( 'Disabled', 'tourfic' ),
-					'width'     => 100,
 					'default'   => true,
 				),
 
@@ -3114,7 +3112,6 @@ TF_Settings::option( 'tf_settings', array(
 					'subtitle'  => __( 'Enable/disable Cloudflare CDN for Flatpickr CSS & JS', 'tourfic' ),
 					'label_on'  => __( 'Enabled', 'tourfic' ),
 					'label_off' => __( 'Disabled', 'tourfic' ),
-					'width'     => 100,
 				),
 
 				array(
@@ -3124,7 +3121,6 @@ TF_Settings::option( 'tf_settings', array(
 					'subtitle'  => __( 'Enable/disable Cloudflare CDN for Fancybox CSS & JS', 'tourfic' ),
 					'label_on'  => __( 'Enabled', 'tourfic' ),
 					'label_off' => __( 'Disabled', 'tourfic' ),
-					'width'     => 100,
 				),
 
 				array(
@@ -3134,7 +3130,6 @@ TF_Settings::option( 'tf_settings', array(
 					'subtitle'  => __( 'Enable/disable Cloudflare CDN for Slick CSS & JS', 'tourfic' ),
 					'label_on'  => __( 'Enabled', 'tourfic' ),
 					'label_off' => __( 'Disabled', 'tourfic' ),
-					'width'     => 100,
 				),
 
 				array(
@@ -3144,7 +3139,6 @@ TF_Settings::option( 'tf_settings', array(
 					'subtitle'  => __( 'Enable/disable Cloudflare CDN for Font Awesome CSS', 'tourfic' ),
 					'label_on'  => __( 'Enabled', 'tourfic' ),
 					'label_off' => __( 'Disabled', 'tourfic' ),
-					'width'     => 100,
 				),
 				array(
 					'id'        => 'select2_cdn',
@@ -3153,7 +3147,6 @@ TF_Settings::option( 'tf_settings', array(
 					'subtitle'  => __( 'Enable/disable Cloudflare CDN for Select2', 'tourfic' ),
 					'label_on'  => __( 'Enabled', 'tourfic' ),
 					'label_off' => __( 'Disabled', 'tourfic' ),
-					'width'     => 100,
 				),
 				
 				array(
@@ -3163,7 +3156,6 @@ TF_Settings::option( 'tf_settings', array(
 					'subtitle'  => __( 'Enable/disable Cloudflare CDN for Remix Icon', 'tourfic' ),
 					'label_on'  => __( 'Enabled', 'tourfic' ),
 					'label_off' => __( 'Disabled', 'tourfic' ),
-					'width'     => 100,
 				),
 				
 				array(
@@ -3173,7 +3165,6 @@ TF_Settings::option( 'tf_settings', array(
 					'subtitle'  => __( 'Enable/disable Cloudflare CDN for Leaflet', 'tourfic' ),
 					'label_on'  => __( 'Enabled', 'tourfic' ),
 					'label_off' => __( 'Disabled', 'tourfic' ),
-					'width'     => 100,
 				),
 				
 				array(
@@ -3183,7 +3174,6 @@ TF_Settings::option( 'tf_settings', array(
 					'subtitle'  => __( 'Enable/disable Cloudflare CDN for jQuery Confirm', 'tourfic' ),
 					'label_on'  => __( 'Enabled', 'tourfic' ),
 					'label_off' => __( 'Disabled', 'tourfic' ),
-					'width'     => 100,
 				),
 				
 				array(
@@ -3193,7 +3183,6 @@ TF_Settings::option( 'tf_settings', array(
 					'subtitle'  => __( 'Enable/disable Cloudflare CDN for Chart Js', 'tourfic' ),
 					'label_on'  => __( 'Enabled', 'tourfic' ),
 					'label_off' => __( 'Disabled', 'tourfic' ),
-					'width'     => 100,
 				),
 			),
 		),
