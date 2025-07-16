@@ -286,18 +286,18 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
 
                             <div class="tf-date-time-selection">
                                 <div class="tf-field-text tf-check-dates" style="width: calc(50% - 12px)">
-                                    <label class="tf-field-label"><?php echo esc_html__( 'Check In', 'tourfic' ); ?></label>
+                                    <label class="tf-field-label"><?php echo esc_html__( 'Tour starts', 'tourfic' ); ?></label>
                                     <div class="tf-field-text-group">
                                         <i class="fa-solid fa-calendar-days"></i>
-                                        <input readonly="readonly" type="text" class="tf_tour_check_in" name="tf_tour_check_in" placeholder="<?php echo esc_html__( 'Check In', 'tourfic' ); ?>">
+                                        <input readonly="readonly" type="text" class="tf_tour_check_in" name="tf_tour_check_in" placeholder="<?php echo esc_html__( 'Tour starts', 'tourfic' ); ?>">
                                     </div>
                                 </div>
 
                                 <div class="tf-field-text tf-check-dates" style="width: calc(50% - 12px)">
-                                    <label class="tf-field-label"><?php echo esc_html__( 'Check Out', 'tourfic' ); ?></label>
+                                    <label class="tf-field-label"><?php echo esc_html__( 'Tour ends', 'tourfic' ); ?></label>
                                     <div class="tf-field-text-group">
                                         <i class="fa-solid fa-calendar-days"></i>
-                                        <input readonly="readonly" type="text" class="tf_tour_check_out" name="tf_tour_check_out" placeholder="<?php echo esc_html__( 'Check Out', 'tourfic' ); ?>">
+                                        <input readonly="readonly" type="text" class="tf_tour_check_out" name="tf_tour_check_out" placeholder="<?php echo esc_html__( 'Tour ends', 'tourfic' ); ?>">
                                     </div>
                                 </div>
 
@@ -355,7 +355,7 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                 </div>
 
                                 <div class="tf-field-select" style="width: 100%">
-                                    <label class="tf-field-label"><?php echo esc_html__( 'Status', 'tourfic' ); ?></label>
+                                    <label class="tf-field-label"><?php echo esc_html__( 'Booking status', 'tourfic' ); ?></label>
                                     <select name="tf_tour_status" class="tf-select">
                                         <option value="available"><?php echo esc_html__( 'Available', 'tourfic' ); ?></option>
                                         <option value="unavailable"><?php echo esc_html__( 'Unavailable', 'tourfic' ); ?></option>
@@ -370,7 +370,7 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                         <div class="tf-tab-field-header">
                                             <div class="field-label"><?php echo esc_html__( 'Adult', 'tourfic' ); ?></div>
                                             <div class="tf-field-collapas">
-                                                <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                                <i class="fa fa-angle-up" aria-hidden="true"></i>
                                             </div>
                                         </div>
 
@@ -406,7 +406,7 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                         <div class="tf-tab-field-header">
                                             <div class="field-label"><?php echo esc_html__( 'Child', 'tourfic' ); ?></div>
                                             <div class="tf-field-collapas">
-                                                <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                                <i class="fa fa-angle-up" aria-hidden="true"></i>
                                             </div>
                                         </div>
 
@@ -442,7 +442,7 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                         <div class="tf-tab-field-header">
                                             <div class="field-label"><?php echo esc_html__( 'Infant', 'tourfic' ); ?></div>
                                             <div class="tf-field-collapas">
-                                                <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                                <i class="fa fa-angle-up" aria-hidden="true"></i>
                                             </div>
                                         </div>
 
@@ -478,7 +478,7 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                         <div class="tf-tab-field-header">
                                             <div class="field-label"><?php echo esc_html__( 'Group', 'tourfic' ); ?></div>
                                             <div class="tf-field-collapas">
-                                                <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                                <i class="fa fa-angle-up" aria-hidden="true"></i>
                                             </div>
                                         </div>
 
@@ -592,7 +592,7 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                                             <div class="tf-tab-field-header">
                                                                 <div class="field-label"><?php echo esc_html__( 'Adult', 'tourfic' ); ?></div>
                                                                 <div class="tf-field-collapas">
-                                                                    <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                                                    <i class="fa fa-angle-up" aria-hidden="true"></i>
                                                                 </div>
                                                             </div>
 
@@ -628,7 +628,7 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                                             <div class="tf-tab-field-header">
                                                                 <div class="field-label"><?php echo esc_html__( 'Child', 'tourfic' ); ?></div>
                                                                 <div class="tf-field-collapas">
-                                                                    <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                                                    <i class="fa fa-angle-up" aria-hidden="true"></i>
                                                                 </div>
                                                             </div>
 
@@ -664,7 +664,7 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                                             <div class="tf-tab-field-header">
                                                                 <div class="field-label"><?php echo esc_html__( 'Infant', 'tourfic' ); ?></div>
                                                                 <div class="tf-field-collapas">
-                                                                    <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                                                    <i class="fa fa-angle-up" aria-hidden="true"></i>
                                                                 </div>
                                                             </div>
 
@@ -700,7 +700,7 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                                             <div class="tf-tab-field-header">
                                                                 <div class="field-label"><?php echo esc_html__( 'Group', 'tourfic' ); ?></div>
                                                                 <div class="tf-field-collapas">
-                                                                    <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                                                    <i class="fa fa-angle-up" aria-hidden="true"></i>
                                                                 </div>
                                                             </div>
 

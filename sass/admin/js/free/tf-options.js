@@ -2366,7 +2366,7 @@
         });
 
         // Repeater show hide
-        $(document).on('click', '.tf-field-accordion .tf-field-collapas i', function () {
+        $(document).on('click', '.tf-field-accordion .tf-tab-field-header', function () {
             $(this).toggleClass('rotated');
             $(this).closest('.tf-tab-switch-box').find('.tf-tab-field-content').slideToggle(200, function () {
                 if ($(this).is(':visible')) {

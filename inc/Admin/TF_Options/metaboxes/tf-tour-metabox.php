@@ -373,7 +373,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'id'       => 'pricing',
 					'type'     => 'select',
 					'label'    => esc_html__( 'How will you charge guests?', 'tourfic' ),
-					'description' => esc_html__('Best for fixed itineraries', 'tourfic'),
+					'subtitle' => esc_html__('Best for fixed itineraries', 'tourfic'),
 					'class'    => 'pricing',
 					'options'  => [
 						'person' => __( 'Per Person', 'tourfic' ),
@@ -458,11 +458,6 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					),
 				),
 				array(
-					'id'      => 'price_deposit',
-					'type'    => 'heading',
-					'title' => __( 'Deposit', 'tourfic' ),
-				),
-				array(
 					'id'    => 'tf-pro-notice',
 					'type'  => 'notice',
 					'class' => 'tf-pro-notice',
@@ -502,7 +497,6 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 				array(
 					'id'         => 'tour_availability',
 					'type'       => 'tourAvailabilityCal',
-					'label'      => esc_html__( 'Availability Calendar', 'tourfic' ),
 				),
 			),
 		),

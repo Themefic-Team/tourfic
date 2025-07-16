@@ -5525,6 +5525,10 @@ a.tf-import-btn, a.tf-export-btn {
   display: flex;
   justify-content: space-between;
   gap: 8px;
+  cursor: pointer;
+}
+.tf-field-accordion .tf-tab-switch-box .tf-tab-field-header.rotated .tf-field-collapas i {
+  transform: rotate(180deg);
 }
 .tf-field-accordion .tf-tab-switch-box .tf-tab-field-header .field-label {
   color: #27333F;
@@ -5546,10 +5550,6 @@ a.tf-import-btn, a.tf-export-btn {
   border: 1px solid #D9E0E8;
   background: #FFFFFF;
   line-height: 26px;
-  cursor: pointer;
-}
-.tf-field-accordion .tf-tab-switch-box .tf-tab-field-header .tf-field-collapas i.rotated {
-  transform: rotate(180deg);
 }
 .tf-field-accordion .tf-tab-switch-box .tf-tab-field-header .tf-field-collapas .tf-field {
   padding: 0;
@@ -5567,7 +5567,7 @@ a.tf-import-btn, a.tf-export-btn {
   border: 1px solid #F2F5F7;
   background: #FFFCF5;
   padding: 4px 16px;
-  display: none;
+  display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 }

@@ -1215,7 +1215,7 @@ class TF_Options {
 									<div class="tf-tab-field-header">
 										<div class="field-label"><?php echo esc_html__( 'Adult', 'tourfic' ); ?></div>
 										<div class="tf-field-collapas">
-											<i class="fa fa-angle-down" aria-hidden="true"></i>
+											<i class="fa fa-angle-up" aria-hidden="true"></i>
 										</div>
 									</div>
 
@@ -1251,7 +1251,7 @@ class TF_Options {
 									<div class="tf-tab-field-header">
 										<div class="field-label"><?php echo esc_html__( 'Child', 'tourfic' ); ?></div>
 										<div class="tf-field-collapas">
-											<i class="fa fa-angle-down" aria-hidden="true"></i>
+											<i class="fa fa-angle-up" aria-hidden="true"></i>
 										</div>
 									</div>
 
@@ -1287,7 +1287,7 @@ class TF_Options {
 									<div class="tf-tab-field-header">
 										<div class="field-label"><?php echo esc_html__( 'Infant', 'tourfic' ); ?></div>
 										<div class="tf-field-collapas">
-											<i class="fa fa-angle-down" aria-hidden="true"></i>
+											<i class="fa fa-angle-up" aria-hidden="true"></i>
 										</div>
 									</div>
 
@@ -1323,7 +1323,7 @@ class TF_Options {
 									<div class="tf-tab-field-header">
 										<div class="field-label"><?php echo esc_html__( 'Group', 'tourfic' ); ?></div>
 										<div class="tf-field-collapas">
-											<i class="fa fa-angle-down" aria-hidden="true"></i>
+											<i class="fa fa-angle-up" aria-hidden="true"></i>
 										</div>
 									</div>
 

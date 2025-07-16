@@ -34,7 +34,7 @@ if ( ! class_exists( 'TF_Accordion' ) ) {
                         <?php echo esc_html( $this->field['label'] ) ?>
                     </div>
                     <div class="tf-field-collapas">
-                    <i class="fa fa-angle-down" aria-hidden="true"></i>
+                    <i class="fa fa-angle-up" aria-hidden="true"></i>
                     <?php foreach ( $this->field['fields'] as $key => $field ) :
                     if($key==0 && $this->field['enable_disable']){
                         if(!empty($this->parent_field)){
