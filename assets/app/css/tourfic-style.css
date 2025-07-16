@@ -4957,7 +4957,7 @@ div#tf-destinationautocomplete-list div:before {
 @media only screen and (max-width: 575.98px) {
   .tf-shortcode-design-2-tab .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields .tf_checkin_date {
     width: 25%;
-    padding-right: 5px;
+    padding-right: 10px;
     padding-left: 0px;
   }
 }
@@ -5045,7 +5045,7 @@ div#tf-destinationautocomplete-list div:before {
 
 @media only screen and (max-width: 575.98px) {
   .tf-shortcode-design-2-tab .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields .tf_checkin_date.tf_check_inout_dates {
-    padding-left: 5px;
+    padding-left: 10px;
   }
 }
 
@@ -5075,7 +5075,7 @@ div#tf-destinationautocomplete-list div:before {
 
 @media only screen and (max-width: 575.98px) {
   .tf-shortcode-design-2-tab .tf_booking-widget-design-2 .tf_hotel_searching .tf_form_innerbody .tf_form_fields .tf_guest_info {
-    padding-left: 5px;
+    padding-left: 10px;
     width: 50%;
   }
 }

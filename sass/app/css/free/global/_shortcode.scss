@@ -660,7 +660,7 @@ div#tf-destinationautocomplete-list {
                         }
                         @media #{$max575}{
                             width: 25%;
-                            padding-right: 5px;
+                            padding-right: 10px;
                             padding-left: 0px;
                         }
                         .tf-check-in-out-date,
@@ -716,7 +716,7 @@ div#tf-destinationautocomplete-list {
                     .tf_checkin_date.tf_check_inout_dates{
                         padding-left: 24px;
                         @media #{$max575}{
-                            padding-left: 5px;
+                            padding-left: 10px;
                         }
                     }
                     .tf_guest_info{
@@ -736,7 +736,7 @@ div#tf-destinationautocomplete-list {
                             padding-right: 0px;
                         }
                         @media #{$max575}{
-                            padding-left: 5px;
+                            padding-left: 10px;
                             width: 50%;
                         }
                         .tf_input-inner{
