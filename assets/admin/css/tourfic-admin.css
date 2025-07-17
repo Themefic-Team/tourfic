@@ -4086,6 +4086,30 @@ Steps
   -webkit-justify-content: space-between;
   justify-content: space-between;
 }
+.tf-field-repeater .tf-repeater .tf-repeater-content-wrap .tf-action-button-group {
+  display: flex;
+  gap: 24px;
+  margin-top: 12px;
+}
+.tf-field-repeater .tf-repeater .tf-repeater-content-wrap .tf-action-button-group .button-primary,
+.tf-field-repeater .tf-repeater .tf-repeater-content-wrap .tf-action-button-group .button-secondary {
+  border-radius: 8px;
+  background: #EBF5FF;
+  color: #003C79;
+  border-radius: 8px;
+  padding: 12px 32px !important;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 24px !important;
+  border: 0px solid;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.tf-field-repeater .tf-repeater .tf-repeater-content-wrap .tf-action-button-group .button-primary {
+  background: linear-gradient(180deg, #0051A3 0%, #003C79 100%);
+  color: #FFFFFF;
+}
 .tf-field-repeater .tf-repeater .tf-repeater-add .tf-repeater-icon {
   color: #003C79;
   font-size: 15px;

@@ -2378,6 +2378,15 @@
             
         });
 
+        // Repeater Pacakge Cancel
+        $(document).on('click', '.tf-action-button-group .tf_tour_package_cancel', function () {
+            $(this).closest('.tf-repeater-content-wrap').hide();
+        });
+
+        $(document).on('click', '.tf-action-button-group .tf_tour_package_deleted', function () {
+            $(this).closest('.tf-single-repeater').empty();
+        });
+
         // Repeater show hide
         $(document).on('click', '.tf-avail-repeater-collapse', function () {
             $(this).closest('.tf-single-repeater').find('.tf-repeater-content-wrap').slideToggle(200);

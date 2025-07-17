@@ -178,6 +178,12 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 									endforeach;
 									$num ++;
 									?>
+									<?php if($this->field['id']=='package_pricing'){ ?>
+									<div class="tf-action-button-group">
+										<span class="tf_tour_package_cancel button button-secondary"><?php echo esc_html__('Cancel', 'tourfic'); ?></span>
+										<span class="tf_tour_package_save button button-primary"><?php echo esc_html__('Save', 'tourfic'); ?></span>
+									</div>
+									<?php } ?>
                                 </div>
                             </div>
 						<?php endforeach; endif; endif; ?>
@@ -248,6 +254,13 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 								$tf_option = new \Tourfic\Admin\TF_Options\TF_Options();
 								$tf_option->field( $re_field, $value, '_____' . $this->settings_id, $parent );
 							} ?>
+							<?php if($this->field['id']=='package_pricing'){ ?>
+							<div class="tf-action-button-group">
+								<span class="tf_tour_package_deleted button button-secondary"><?php echo esc_html__('Cancel', 'tourfic'); ?></span>
+								<span class="tf_tour_package_save button button-primary"><?php echo esc_html__('Save', 'tourfic'); ?></span>
+							</div>
+							<?php } ?>
+
                         </div>
                     </div>
 
