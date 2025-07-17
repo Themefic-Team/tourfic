@@ -12797,6 +12797,7 @@ div#tf-destinationautocomplete-list div:before {
   .tf-archive-template__two .tf-content-wrapper .tf-archive-details .tf-available-room .tf-available-room-content .tf-available-room-content-left .tf-card-heading-info .tf-mobile.tf-pricing-info,
   .page-template-tf-search__two .tf-content-wrapper .tf-archive-details .tf-available-room .tf-available-room-content .tf-available-room-content-left .tf-card-heading-info .tf-mobile.tf-pricing-info {
     align-items: start;
+    width: 100%;
   }
 }
 
@@ -12848,6 +12849,7 @@ div#tf-destinationautocomplete-list div:before {
   .tf-archive-template__two .tf-content-wrapper .tf-archive-details .tf-available-room .tf-available-room-content .tf-available-room-content-right a,
   .page-template-tf-search__two .tf-content-wrapper .tf-archive-details .tf-available-room .tf-available-room-content .tf-available-room-content-right a {
     width: auto;
+    float: left;
   }
 }
 
