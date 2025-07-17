@@ -1211,7 +1211,7 @@ class TF_Options {
 						<div class="tf-field tf-field-accordion" style="width: 100%;">
 							<div class="tf-fieldset">
 
-								<div id="adult_tabs" class="tf-tab-switch-box"  style="display: <?php echo $item['type'] == 'person' ? 'block' : 'none' ?>;">
+								<div id="adult_tabs" class="tf-tab-switch-box"  style="display: <?php echo $item['type'] == 'person' && !empty($package_pricing[$key]['adult_tabs'][0]['disable_adult_price']) ? 'block' : 'none' ?>;">
 									<div class="tf-tab-field-header">
 										<div class="tf-field-collapas">
 											<div class="field-label"><?php echo esc_html__( 'Adult', 'tourfic' ); ?></div>
@@ -1247,7 +1247,7 @@ class TF_Options {
 									</div> <!-- .tf-tab-field-content -->
 								</div> <!-- #adult_tabs -->
 
-								<div id="child_tabs" class="tf-tab-switch-box"  style="display: <?php echo $item['type'] == 'person' ? 'block' : 'none' ?>;">
+								<div id="child_tabs" class="tf-tab-switch-box"  style="display: <?php echo $item['type'] == 'person' && !empty($package_pricing[$key]['child_tabs'][0]['disable_child_price']) ? 'block' : 'none' ?>;">
 									<div class="tf-tab-field-header">
 										<div class="tf-field-collapas">
 											<div class="field-label"><?php echo esc_html__( 'Child', 'tourfic' ); ?></div>
@@ -1283,7 +1283,7 @@ class TF_Options {
 									</div> <!-- .tf-tab-field-content -->
 								</div> <!-- #child_tabs -->
 
-								<div id="infant_tabs" class="tf-tab-switch-box"  style="display: <?php echo $item['type'] == 'person' ? 'block' : 'none' ?>;">
+								<div id="infant_tabs" class="tf-tab-switch-box"  style="display: <?php echo $item['type'] == 'person' && !empty($package_pricing[$key]['infant_tabs'][0]['disable_infant_price']) ? 'block' : 'none' ?>;">
 									<div class="tf-tab-field-header">
 										<div class="tf-field-collapas">
 											<div class="field-label"><?php echo esc_html__( 'Infant', 'tourfic' ); ?></div>

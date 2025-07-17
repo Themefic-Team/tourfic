@@ -1869,6 +1869,7 @@ class Tour {
 											<div class="tf-pacakge-persons">
 												<?php echo wp_kses_post( $pack['desc'] ); ?>
 												<div class="tf-select-persons">
+													<?php if(!empty($package_pricing[$key]['adult_tabs'][0]['disable_adult_price'])){ ?>
 													<div class="tf-single-person">
 														<h3><?php echo esc_html__( "Adult", "tourfic" ); ?></h3>
 														<div class="inc-dec">
@@ -1877,6 +1878,8 @@ class Tour {
 															<div class="acr-inc">+</div>
 														</div>
 													</div>
+													<?php } if(!empty($package_pricing[$key]['child_tabs'][0]['disable_child_price'])){
+													?>
 													<div class="tf-single-person">
 														<h3><?php echo esc_html__( "Child", "tourfic" ); ?></h3>
 														<div class="inc-dec">
@@ -1885,6 +1888,8 @@ class Tour {
 															<div class="acr-inc">+</div>
 														</div>
 													</div>
+													<?php } if(!empty($package_pricing[$key]['infant_tabs'][0]['disable_infant_price'])){
+													?>
 													<div class="tf-single-person">
 														<h3><?php echo esc_html__( "Infant", "tourfic" ); ?></h3>
 														<div class="inc-dec">
@@ -1893,6 +1898,7 @@ class Tour {
 															<div class="acr-inc">+</div>
 														</div>
 													</div>
+													<?php } ?>
 												</div>
 											</div>
 										</div>
