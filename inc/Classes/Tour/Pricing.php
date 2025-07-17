@@ -58,7 +58,8 @@ class Pricing {
 
 	function get_discount() {
 		$meta            = $this->meta;
-		$discount_type   = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : '';
+		$allow_discount    = ! empty( $meta['allow_discount'] ) ? $meta['allow_discount'] : '';
+		$discount_type   = !empty($allow_discount) && ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : '';
 		$discount_amount = ( $discount_type == 'fixed' || $discount_type == 'percent' ) && ! empty( $meta["discount_price"] ) ? $meta["discount_price"] : 0;
 
 		return array(
@@ -214,15 +215,16 @@ class Pricing {
 		//get the lowest price from all available room price
 		$tf_tour_min_price      = !empty($tour_price) ? min( $tour_price ) : 0;
 		$tf_tour_full_price     = !empty($tour_price) ? min( $tour_price ) : 0;
+		$allow_discount    = ! empty( $meta['allow_discount'] ) ? $meta['allow_discount'] : '';
 		$tf_tour_discount_type  = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : '';
 		$tf_tour_discount_price = ! empty( $meta['discount_price'] ) ? $meta['discount_price'] : '';
         $tf_tour_min_discount = 0;
         if ( ! empty( $tf_tour_discount_type ) && ! empty( $tf_tour_min_price ) && ! empty( $tf_tour_discount_price ) ) {
-			if ( $tf_tour_discount_type == "percent" ) {
+			if ( !empty($allow_discount) && $tf_tour_discount_type == "percent" ) {
 				$tf_tour_min_discount = ( $tf_tour_min_price * $tf_tour_discount_price ) / 100;
 				$tf_tour_min_price    = $tf_tour_min_price - $tf_tour_min_discount;
 			}
-			if ( $tf_tour_discount_type == "fixed" ) {
+			if ( !empty($allow_discount) && $tf_tour_discount_type == "fixed" ) {
 				$tf_tour_min_discount = $tf_tour_discount_price;
 				$tf_tour_min_price    = $tf_tour_min_price - $tf_tour_discount_price;
 			}
@@ -426,9 +428,10 @@ class Pricing {
 			}
 		}
 
+		$allow_discount    = ! empty( $meta['allow_discount'] ) ? $meta['allow_discount'] : '';
 		$discount_type    = !empty($meta['discount_type']) ? $meta['discount_type'] : 'none';
 		$discounted_price = !empty($meta['discount_price']) ? $meta['discount_price'] : 0;
-		if($discount_type == 'percent' || $discount_type == 'fixed') {
+		if(!empty($allow_discount) && ($discount_type == 'percent' || $discount_type == 'fixed')) {
 			if($discount_type == 'percent') {
 				if(!empty($min_adult_price)){
 					$min_adult_sale_price = $min_adult_price;

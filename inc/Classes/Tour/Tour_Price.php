@@ -29,6 +29,7 @@ class Tour_Price {
         # Get tour type
         $tour_type = !empty($meta['type']) ? $meta['type'] : 'continuous';
     
+        $allow_discount    = ! empty( $meta['allow_discount'] ) ? $meta['allow_discount'] : '';
         # Get discounts
         $discount_type    = !empty($meta['discount_type']) ? $meta['discount_type'] : 'none';
         $discounted_price = !empty($meta['discount_price']) ? $meta['discount_price'] : 0;
@@ -128,28 +129,28 @@ class Tour_Price {
          */
         if($pricing_rule == 'group') {
         
-            if($discount_type == 'percent') {
+            if(!empty($allow_discount) && $discount_type == 'percent') {
                 $sale_price = number_format( $price - (( $price / 100 ) * $discounted_price) , 2, '.', '' );
-            } else if($discount_type == 'fixed') {
+            } else if(!empty($allow_discount) && $discount_type == 'fixed') {
                 $sale_price = number_format( ( $price - $discounted_price ), 2, '.', '' );
             }
 
             # WooCommerce Price
             $wc_price = wc_price($price);
 
-            if($discount_type == 'percent' || $discount_type == 'fixed') {
+            if(!empty($allow_discount) && ($discount_type == 'percent' || $discount_type == 'fixed')) {
                 $wc_sale_price = wc_price($sale_price);
             }
 
         } else {
         
-            if($discount_type == 'percent') {
+            if(!empty($allow_discount) && $discount_type == 'percent') {
 
                 $adult_price  ? $sale_adult_price  = number_format( $adult_price - (( $adult_price / 100 ) * $discounted_price) , 2, '.', '' ) : 0;
                 $child_price  ? $sale_child_price  = number_format( $child_price - (( $child_price / 100 ) * $discounted_price) , 2, '.', '' ) : 0;
                 $infant_price ? $sale_infant_price = number_format( $infant_price - (( $infant_price / 100 ) * $discounted_price) , 2, '.', '' ) : 0;
 
-            } else if($discount_type == 'fixed') {
+            } else if(!empty($allow_discount) && $discount_type == 'fixed') {
 
                 $adult_price  ? $sale_adult_price  = number_format( ( $adult_price - $discounted_price ), 2, '.', '' ) : 0;
                 $child_price  ? $sale_child_price  = number_format( ( $child_price - $discounted_price ), 2, '.', '' ) : 0;
@@ -162,7 +163,7 @@ class Tour_Price {
             $wc_child_price  = wc_price($child_price);
             $wc_infant_price = wc_price($infant_price);
 
-            if($discount_type == 'percent' || $discount_type == 'fixed') {
+            if(!empty($allow_discount) && ($discount_type == 'percent' || $discount_type == 'fixed')) {
                 $wc_sale_adult_price  = !empty($sale_adult_price) ? wc_price($sale_adult_price) : 0;
                 $wc_sale_child_price  = !empty($sale_child_price) ? wc_price($sale_child_price) : 0;
                 $wc_sale_infant_price = !empty($sale_infant_price) ? wc_price($sale_infant_price) : 0;

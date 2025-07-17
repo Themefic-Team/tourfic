@@ -2352,6 +2352,7 @@ class Tour {
 		}
 
 		$tf_tour_arc_selected_template = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['tour-archive'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['tour-archive'] : 'design-1';
+		$allow_discount    = ! empty( $meta['allow_discount'] ) ? $meta['allow_discount'] : '';
 		$tf_discount_type   = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : '';
 		$tf_discount_amount = ! empty( $meta['discount_price'] ) ? $meta['discount_price'] : '';
 
@@ -2362,7 +2363,7 @@ class Tour {
                     <div class="tf-tag-items">
                         <div class="tf-features-box tf-flex">
 							<?php
-							if ( ! empty( $tf_discount_type ) && $tf_discount_type != "none" && ! empty( $tf_discount_amount ) ) {
+							if ( !empty($allow_discount) && ! empty( $tf_discount_type ) && $tf_discount_type != "none" && ! empty( $tf_discount_amount ) ) {
 								?>
                                 <div class="tf-discount"><?php echo $tf_discount_type == "percent" ? esc_attr( $tf_discount_amount ) . "%" : wp_kses_post( wc_price( $tf_discount_amount ) ); ?><?php esc_html_e( "Off", "tourfic" ); ?></div>
 							<?php } ?>
@@ -2528,7 +2529,7 @@ class Tour {
                             </div>
                             <div class="tf-mobile tf-pricing-info">
 								<?php
-								if ( ! empty( $tf_discount_type ) && $tf_discount_type != "none" && ! empty( $tf_discount_amount ) ) {
+								if ( !empty($allow_discount) && ! empty( $tf_discount_type ) && $tf_discount_type != "none" && ! empty( $tf_discount_amount ) ) {
 									?>
                                     <div class="tf-available-room-off">
 							<span>
@@ -2597,7 +2598,7 @@ class Tour {
                     <div class="tf-available-room-content-right">
                         <div class="tf-card-pricing-heading">
 							<?php
-							if ( ! empty( $tf_discount_type ) && $tf_discount_type != "none" && ! empty( $tf_discount_amount ) ) {
+							if ( !empty($allow_discount) && ! empty( $tf_discount_type ) && $tf_discount_type != "none" && ! empty( $tf_discount_amount ) ) {
 								?>
                                 <div class="tf-available-room-off">
 							<span>
@@ -2642,7 +2643,7 @@ class Tour {
                     </a>
 
 					<div class="tf-tag-items">
-						<?php if ( ! empty( $tf_discount_type ) && $tf_discount_type != "none" && ! empty( $tf_discount_amount ) ) {?>
+						<?php if ( !empty($allow_discount) && ! empty( $tf_discount_type ) && $tf_discount_type != "none" && ! empty( $tf_discount_amount ) ) {?>
 							<div class="tf-tag-item">
 								<?php echo $tf_discount_type == "percent" ? esc_attr( $tf_discount_amount ) . "%" : wp_kses_post( wc_price( $tf_discount_amount ) ); ?><?php esc_html_e( " Off", "tourfic" ); ?>
 							</div>
@@ -3898,18 +3899,19 @@ class Tour {
 			}
 
 			# Discount informations
+			$allow_discount    = ! empty( $meta['allow_discount'] ) ? $meta['allow_discount'] : '';
 			$discount_type    = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : '';
 			$discounted_price = ! empty( $meta['discount_price'] ) ? $meta['discount_price'] : '';
 
 			# Calculate discounted price
-			if ( $discount_type == 'percent' ) {
+			if ( !empty($allow_discount) && $discount_type == 'percent' ) {
 
 				$adult_price    = floatval( preg_replace( '/[^\d.]/', '', number_format( $adult_price - ( ( $adult_price / 100 ) * $discounted_price ), 2 ) ) );
 				$children_price = floatval( preg_replace( '/[^\d.]/', '', number_format( $children_price - ( ( $children_price / 100 ) * $discounted_price ), 2 ) ) );
 				$infant_price   = floatval( preg_replace( '/[^\d.]/', '', number_format( $infant_price - ( ( $infant_price / 100 ) * $discounted_price ), 2 ) ) );
 				$group_price    = floatval( preg_replace( '/[^\d.]/', '', number_format( $group_price - ( ( $group_price / 100 ) * $discounted_price ), 2 ) ) );
 
-			} elseif ( $discount_type == 'fixed' ) {
+			} elseif ( !empty($allow_discount) && $discount_type == 'fixed' ) {
 
 				$adult_price    = floatval( preg_replace( '/[^\d.]/', '', number_format( ( $adult_price - $discounted_price ), 2 ) ) );
 				$children_price = floatval( preg_replace( '/[^\d.]/', '', number_format( ( $children_price - $discounted_price ), 2 ) ) );
