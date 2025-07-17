@@ -28,7 +28,9 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                 <div class="tf-tour-cal-wrap">
                     <div class='tf-tour-cal'></div>
                     <div class="tf-tour-cal-field">
+
                         <div class="bulk-popup-content">
+                        <div class="bulk-popup-content-box">
 
                             <div class="tf-bulk-edit-header">
                                 <h3><?php echo esc_html__( 'Bulk price edit', 'tourfic' ); ?></h3>
@@ -889,6 +891,8 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                             </div>
 
                         </div>
+                        </div>
+
                     </div>
                     <input type="hidden" class="tour_availability" name="<?php echo esc_attr( $this->field_name() ); ?>" id="<?php echo esc_attr( $this->field_name() ); ?>"
                            value='<?php echo esc_attr( $this->value ); ?>'/>

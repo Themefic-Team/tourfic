@@ -2328,6 +2328,8 @@
 
             // Dependency value
             TF_dependency();
+            // Copy Message
+            notyf.success('Duplicated Successfully');
         });
 
         // Repeater show hide

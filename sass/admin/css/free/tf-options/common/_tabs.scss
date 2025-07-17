@@ -33,7 +33,7 @@
   .tf-admin-tab {
     border-right: 1px solid $slate10;
     background-color: $tf_fill_white;
-    min-width: 236px;
+    min-width: 242px;
     @include transition(all, 0.3s, ease);
     @media #{$max1024}{
       display: none;
@@ -135,7 +135,7 @@
   }
 
   .tf-tab-wrapper {
-    @include flex(0 0 calc(100% - 280px));
+    @include flex(0 0 calc(100% - 242px));
     @media #{$max1024}{
       flex: 0 0 calc(100% - 0px);
     }

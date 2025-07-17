@@ -518,7 +518,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 		),
 		// Terms & conditions
 		'terms_conditions' => array(
-			'title'  => __( 'Terms & Conditions', 'tourfic' ),
+			'title'  => __( 'Policy', 'tourfic' ),
 			'icon'   => 'fa-regular fa-square-check',
 			'fields' => array(
 				array(

@@ -1602,7 +1602,7 @@ Steps
 .tf-admin-meta-box .tf-admin-tab {
   border-right: 1px solid #e1e5ea;
   background-color: #FFFFFF;
-  min-width: 236px;
+  min-width: 242px;
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;
@@ -1716,9 +1716,9 @@ Steps
   left: 0;
 }
 .tf-admin-meta-box .tf-tab-wrapper {
-  -webkit-flex: 0 0 calc(100% - 280px);
-  -ms-flex: 0 0 calc(100% - 280px);
-  flex: 0 0 calc(100% - 280px);
+  -webkit-flex: 0 0 calc(100% - 242px);
+  -ms-flex: 0 0 calc(100% - 242px);
+  flex: 0 0 calc(100% - 242px);
 }
 @media only screen and (max-width: 1024px) {
   .tf-admin-meta-box .tf-tab-wrapper {
@@ -4750,10 +4750,14 @@ a.tf-import-btn, a.tf-export-btn {
 .tf-apt-cal-wrap .bulk-popup-content,
 .tf-room-cal-wrap .bulk-popup-content,
 .tf-tour-cal-wrap .bulk-popup-content {
+  margin-top: 15px;
+}
+.tf-apt-cal-wrap .bulk-popup-content .bulk-popup-content-box,
+.tf-room-cal-wrap .bulk-popup-content .bulk-popup-content-box,
+.tf-tour-cal-wrap .bulk-popup-content .bulk-popup-content-box {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
-  margin-top: 15px;
 }
 .tf-apt-cal-wrap .bulk-popup-content .tf-bulk-edit-header,
 .tf-room-cal-wrap .bulk-popup-content .tf-bulk-edit-header,
@@ -4906,8 +4910,32 @@ a.tf-import-btn, a.tf-export-btn {
   box-shadow: 0px 4px 140px 0px rgba(0, 0, 0, 0.25);
   padding: 24px;
   width: 736px;
+}
+.tf-bulk-popup .bulk-popup-content .bulk-popup-content-box,
+.tf-reset-confirmation-box .bulk-popup-content .bulk-popup-content-box {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
   max-height: 360px;
   overflow-y: auto;
+  scroll-behavior: smooth;
+  scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+  scrollbar-width: thin;
+}
+.tf-bulk-popup .bulk-popup-content .bulk-popup-content-box::-webkit-scrollbar,
+.tf-reset-confirmation-box .bulk-popup-content .bulk-popup-content-box::-webkit-scrollbar {
+  width: 6px;
+}
+.tf-bulk-popup .bulk-popup-content .bulk-popup-content-box::-webkit-scrollbar-track,
+.tf-reset-confirmation-box .bulk-popup-content .bulk-popup-content-box::-webkit-scrollbar-track {
+  background: transparent;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.tf-bulk-popup .bulk-popup-content .bulk-popup-content-box::-webkit-scrollbar-thumb,
+.tf-reset-confirmation-box .bulk-popup-content .bulk-popup-content-box::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
 }
 .tf-bulk-popup .bulk-popup-content .tf-repeater .tf-repeater-add .tf-repeater-icon,
 .tf-reset-confirmation-box .bulk-popup-content .tf-repeater .tf-repeater-add .tf-repeater-icon {

@@ -868,16 +868,17 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 		 */
 		if ( ! array_key_exists( 'errors', $response ) || count( $response['errors'] ) == 0 ) {
 			# Discount informations
+			$allow_discount    = ! empty( $meta['allow_discount'] ) ? $meta['allow_discount'] : '';
 			$discount_type    = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : '';
 			$discounted_price = ! empty( $meta['discount_price'] ) ? $meta['discount_price'] : '';
 
 			# Calculate discounted price
-			if ( $discount_type == 'percent' ) {
+			if ( !empty($allow_discount) && $discount_type == 'percent' ) {
 				$adult_price    = floatval( preg_replace( '/[^\d.]/', '', number_format( $adult_price - ( ( $adult_price / 100 ) * $discounted_price ), 2 ) ) );
 				$children_price = floatval( preg_replace( '/[^\d.]/', '', number_format( $children_price - ( ( $children_price / 100 ) * $discounted_price ), 2 ) ) );
 				$infant_price   = floatval( preg_replace( '/[^\d.]/', '', number_format( $infant_price - ( ( $infant_price / 100 ) * $discounted_price ), 2 ) ) );
 				$group_price    = floatval( preg_replace( '/[^\d.]/', '', number_format( $group_price - ( ( $group_price / 100 ) * $discounted_price ), 2 ) ) );
-			} elseif ( $discount_type == 'fixed' ) {
+			} elseif ( !empty($allow_discount) && $discount_type == 'fixed' ) {
 				$adult_price    = floatval( preg_replace( '/[^\d.]/', '', number_format( ( $adult_price - $discounted_price ), 2 ) ) );
 				$children_price = floatval( preg_replace( '/[^\d.]/', '', number_format( ( $children_price - $discounted_price ), 2 ) ) );
 				$infant_price   = floatval( preg_replace( '/[^\d.]/', '', number_format( ( $infant_price - $discounted_price ), 2 ) ) );

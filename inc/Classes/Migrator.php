@@ -1756,10 +1756,8 @@ class Migrator {
 				}
 				
 				$meta['tour_availability'] = wp_json_encode( $tour_availability_data );
+				$meta['allow_discount'] = '1';
 
-				// echo "<pre>";
-				// var_dump($tour_availability_data);
-				// exit;
 				update_post_meta($post_id, 'tf_tours_opt', $meta);
 
 			endwhile;

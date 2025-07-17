@@ -442,13 +442,20 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'field_width' => 33.33,
 				),
 				array(
+					'id'      => 'allow_discount',
+					'type'    => 'switch',
+					'label'   => esc_html__( 'Discount', 'tourfic' ),
+					'description' => esc_html__( 'Limited-time offers work best! Use discounts for early birds, groups, or last-minute deals.', 'tourfic' ),
+				),
+				array(
 					'id'         => 'discount_price',
 					'type'       => 'number',
-					'label'      => esc_html__( 'Discount', 'tourfic' ),
 					'description'   => esc_html__( 'Enter value (e.g., ‘50’ for $50 off or 10% off)', 'tourfic' ),
 					'attributes' => array(
 						'min' => '0',
 					),
+					'placeholder' => esc_html__('Amount', 'tourfic'),
+					'dependency'  => array( 'allow_discount', '!=', 'false' ),
 					'related'   => true,
 					'related_name' => 'discount_type',
 					'related_options'  => array(

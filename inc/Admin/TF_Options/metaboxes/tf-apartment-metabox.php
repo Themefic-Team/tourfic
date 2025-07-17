@@ -629,7 +629,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 
 		//enquiry section
 		'a_enquiry'  => array(
-			'title'  => __( 'Apartment Enquiry', 'tourfic' ),
+			'title'  => __( 'Enquiry', 'tourfic' ),
 			'icon'   => 'fa-solid fa-clipboard-question',
 			'fields' => array(
 				array(
