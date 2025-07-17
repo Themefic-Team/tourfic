@@ -5539,21 +5539,22 @@ a.tf-import-btn, a.tf-export-btn {
   display: flex;
   justify-content: space-between;
   gap: 8px;
+  align-items: center;
+}
+.tf-field-accordion .tf-tab-switch-box .tf-tab-field-header .tf-field-collapas {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
   cursor: pointer;
 }
-.tf-field-accordion .tf-tab-switch-box .tf-tab-field-header.rotated .tf-field-collapas i {
+.tf-field-accordion .tf-tab-switch-box .tf-tab-field-header .tf-field-collapas.rotated i {
   transform: rotate(180deg);
 }
-.tf-field-accordion .tf-tab-switch-box .tf-tab-field-header .field-label {
+.tf-field-accordion .tf-tab-switch-box .tf-tab-field-header .tf-field-collapas .field-label {
   color: #27333F;
   font-size: 15px;
   font-weight: 400;
   line-height: 24px;
-}
-.tf-field-accordion .tf-tab-switch-box .tf-tab-field-header .tf-field-collapas {
-  display: flex;
-  align-items: center;
-  gap: 8px;
 }
 .tf-field-accordion .tf-tab-switch-box .tf-tab-field-header .tf-field-collapas i {
   display: flex;
@@ -5565,15 +5566,15 @@ a.tf-import-btn, a.tf-export-btn {
   background: #FFFFFF;
   line-height: 26px;
 }
-.tf-field-accordion .tf-tab-switch-box .tf-tab-field-header .tf-field-collapas .tf-field {
+.tf-field-accordion .tf-tab-switch-box .tf-tab-field-header .tf-field.tf-field-switch {
   padding: 0;
   width: 32px !important;
 }
-.tf-field-accordion .tf-tab-switch-box .tf-tab-field-header .tf-field-collapas .tf-field .tf-inline-switch {
+.tf-field-accordion .tf-tab-switch-box .tf-tab-field-header .tf-field.tf-field-switch .tf-inline-switch {
   justify-content: end;
   width: 32px;
 }
-.tf-field-accordion .tf-tab-switch-box .tf-tab-field-header .tf-field-collapas .tf-field .tf-inline-switch .tf-field-label {
+.tf-field-accordion .tf-tab-switch-box .tf-tab-field-header .tf-field.tf-field-switch .tf-inline-switch .tf-field-label {
   display: none !important;
 }
 .tf-field-accordion .tf-tab-switch-box .tf-tab-field-content {

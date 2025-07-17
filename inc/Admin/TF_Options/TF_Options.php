@@ -1213,8 +1213,8 @@ class TF_Options {
 
 								<div id="adult_tabs" class="tf-tab-switch-box"  style="display: <?php echo $item['type'] == 'person' ? 'block' : 'none' ?>;">
 									<div class="tf-tab-field-header">
-										<div class="field-label"><?php echo esc_html__( 'Adult', 'tourfic' ); ?></div>
 										<div class="tf-field-collapas">
+											<div class="field-label"><?php echo esc_html__( 'Adult', 'tourfic' ); ?></div>
 											<i class="fa fa-angle-up" aria-hidden="true"></i>
 										</div>
 									</div>
@@ -1249,8 +1249,8 @@ class TF_Options {
 
 								<div id="child_tabs" class="tf-tab-switch-box"  style="display: <?php echo $item['type'] == 'person' ? 'block' : 'none' ?>;">
 									<div class="tf-tab-field-header">
-										<div class="field-label"><?php echo esc_html__( 'Child', 'tourfic' ); ?></div>
 										<div class="tf-field-collapas">
+											<div class="field-label"><?php echo esc_html__( 'Child', 'tourfic' ); ?></div>
 											<i class="fa fa-angle-up" aria-hidden="true"></i>
 										</div>
 									</div>
@@ -1285,8 +1285,8 @@ class TF_Options {
 
 								<div id="infant_tabs" class="tf-tab-switch-box"  style="display: <?php echo $item['type'] == 'person' ? 'block' : 'none' ?>;">
 									<div class="tf-tab-field-header">
-										<div class="field-label"><?php echo esc_html__( 'Infant', 'tourfic' ); ?></div>
 										<div class="tf-field-collapas">
+											<div class="field-label"><?php echo esc_html__( 'Infant', 'tourfic' ); ?></div>
 											<i class="fa fa-angle-up" aria-hidden="true"></i>
 										</div>
 									</div>
@@ -1321,8 +1321,8 @@ class TF_Options {
 
 								<div id="group_tabs" class="tf-tab-switch-box"  style="display: <?php echo $item['type'] == 'group' ? 'block' : 'none' ?>;">
 									<div class="tf-tab-field-header">
-										<div class="field-label"><?php echo esc_html__( 'Group', 'tourfic' ); ?></div>
 										<div class="tf-field-collapas">
+											<div class="field-label"><?php echo esc_html__( 'Group', 'tourfic' ); ?></div>
 											<i class="fa fa-angle-up" aria-hidden="true"></i>
 										</div>
 									</div>

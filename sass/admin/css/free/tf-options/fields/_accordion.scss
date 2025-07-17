@@ -8,24 +8,23 @@
             display: flex;
             justify-content: space-between;
             gap: 8px;
-            cursor: pointer;
-            &.rotated{
-                .tf-field-collapas{
+            align-items: center;
+            .tf-field-collapas{
+                display: flex;
+                width: 100%;
+                justify-content: space-between;
+                cursor: pointer;
+                &.rotated{
                     i{
                         transform: rotate(180deg);
                     }
                 }
-            }
-            .field-label{
-                color: $tf_text_title;
-                font-size: 15px;
-                font-weight: 400;
-                line-height: 24px;
-            }
-            .tf-field-collapas{
-                display: flex;
-                align-items: center;
-                gap: 8px;
+                .field-label{
+                    color: $tf_text_title;
+                    font-size: 15px;
+                    font-weight: 400;
+                    line-height: 24px;
+                }
                 i{
                     display: flex;
                     width: 24px;
@@ -36,19 +35,21 @@
                     background: $tf_fill_white;
                     line-height: 26px;
                 }
-                .tf-field{
-                    padding: 0;
-                    width: 32px !important;
-                    .tf-inline-switch{
-                        justify-content: end;
-                        width: 32px;
-                        .tf-field-label{
-                            display: none !important;
-                        }
+            }
+
+            .tf-field.tf-field-switch{
+                padding: 0;
+                width: 32px !important;
+                .tf-inline-switch{
+                    justify-content: end;
+                    width: 32px;
+                    .tf-field-label{
+                        display: none !important;
                     }
                 }
             }
         }
+
         .tf-tab-field-content{
             border-radius: 0px 0px 4px 4px;
             border: 1px solid $tf_border_faint;

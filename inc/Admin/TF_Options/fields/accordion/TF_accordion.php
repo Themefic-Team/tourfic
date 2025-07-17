@@ -30,11 +30,12 @@ if ( ! class_exists( 'TF_Accordion' ) ) {
 			?>
             <div id="<?php echo isset( $this->field['id'] ) ? esc_attr( $this->field['id'] ) : '' ?>" class="tf-tab-switch-box">
                 <div class="tf-tab-field-header">
-                    <div class="field-label">
-                        <?php echo esc_html( $this->field['label'] ) ?>
-                    </div>
                     <div class="tf-field-collapas">
-                    <i class="fa fa-angle-up" aria-hidden="true"></i>
+                        <div class="field-label">
+                            <?php echo esc_html( $this->field['label'] ) ?>
+                        </div>
+                        <i class="fa fa-angle-up" aria-hidden="true"></i>
+                    </div>
                     <?php foreach ( $this->field['fields'] as $key => $field ) :
                     if($key==0 && $this->field['enable_disable']){
                         if(!empty($this->parent_field)){
@@ -44,11 +45,13 @@ if ( ! class_exists( 'TF_Accordion' ) ) {
                         }
                         
                         $id = ( ! empty( $this->settings_id ) ) ? $this->settings_id . '[' . $this->field['id'] . '][00]' . '[' . $field['id'] . ']' : $this->field['id'] . '[00]' . '[' . $field['id'] . ']';
-    
+
+                        $default = isset( $field['default'] ) ? $field['default'] : '';
+
                         if ( isset( $tf_meta_box_value[ $id ] ) ) {
-                            $value = isset( $tf_meta_box_value[ $id ] ) ? $tf_meta_box_value[ $id ] : '';
+                            $value = isset( $tf_meta_box_value[ $id ] ) ? $tf_meta_box_value[ $id ] : $default;
                         } else {
-                            $value = ( isset( $field['id'] ) && isset( $data[ $key ][ $field['id'] ] ) ) ? $data[ $key ][ $field['id'] ] : '';
+                            $value = ( isset( $field['id'] ) && isset( $data[ $key ][ $field['id'] ] ) ) ? $data[ $key ][ $field['id'] ] : $default;
                         }
 
                         // sanitize Wp Editor Field
@@ -59,7 +62,6 @@ if ( ! class_exists( 'TF_Accordion' ) ) {
                     }
 
                     endforeach; ?>
-                    </div>
                 </div>
                 <div class="tf-tab-field-content">
                 <?php
@@ -74,10 +76,12 @@ if ( ! class_exists( 'TF_Accordion' ) ) {
                     
                     $id = ( ! empty( $this->settings_id ) ) ? $this->settings_id . '[' . $this->field['id'] . '][00]' . '[' . $field['id'] . ']' : $this->field['id'] . '[00]' . '[' . $field['id'] . ']';
 
+                    $default = isset( $field['default'] ) ? $field['default'] : '';
+
                     if ( isset( $tf_meta_box_value[ $id ] ) ) {
-                        $value = isset( $tf_meta_box_value[ $id ] ) ? $tf_meta_box_value[ $id ] : '';
+                        $value = isset( $tf_meta_box_value[ $id ] ) ? $tf_meta_box_value[ $id ] : $default;
                     } else {
-                        $value = ( isset( $field['id'] ) && isset( $data[ $key ][ $field['id'] ] ) ) ? $data[ $key ][ $field['id'] ] : '';
+                        $value = ( isset( $field['id'] ) && isset( $data[ $key ][ $field['id'] ] ) ) ? $data[ $key ][ $field['id'] ] : $default;
                     }
                     
                     // sanitize Wp Editor Field
