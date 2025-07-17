@@ -50,6 +50,7 @@ class Register {
             $widgets_manager->register( \Tourfic\App\Widgets\Elementor\Widgets\Archive\Search_Form::instance() );
             $widgets_manager->register( \Tourfic\App\Widgets\Elementor\Widgets\Archive\Listings::instance() );
             $widgets_manager->register( \Tourfic\App\Widgets\Elementor\Widgets\Archive\Sidebar::instance() );
+            $widgets_manager->register( \Tourfic\App\Widgets\Elementor\Widgets\Archive\Banner::instance() );
         }
     }
 
