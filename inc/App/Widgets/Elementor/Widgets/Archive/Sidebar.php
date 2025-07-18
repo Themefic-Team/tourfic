@@ -269,7 +269,7 @@ class Sidebar extends Widget_Base {
                 <?php endif; ?>
             </div>
         <?php elseif($design == 'design-2'): ?>
-            <div class="tf-sidebar__design-2">
+            <div class="tf-sidebar__design-2 tf-archive-template__two" style="padding: 0;">
                 <div class="tf-details-right tf-sitebar-widgets tf-archive-right">
                     <div class="tf-filter-wrapper">
                         <div class="tf-filter-title">

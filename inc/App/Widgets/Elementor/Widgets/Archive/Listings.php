@@ -3322,7 +3322,7 @@ class Listings extends Widget_Base {
 		$pagination_prev_label = isset( $settings['pagination_prev_label'] ) ? $settings['pagination_prev_label'] : '';
 		$pagination_next_label = isset( $settings['pagination_next_label'] ) ? $settings['pagination_next_label'] : '';
 		?>
-        <div class="tf-archive-listing-wrap tf-archive-listing__two" data-design="design-2">
+        <div class="tf-archive-listing-wrap tf-archive-listing__two tf-archive-template__two" data-design="design-2" style="padding: 0;">
 			<!--Available rooms start -->
 			<div class="tf-available-archive-hetels-wrapper tf-available-rooms-wrapper" id="tf-hotel-rooms">
 				<div class="tf-archive-available-rooms-head tf-available-rooms-head">
@@ -3424,7 +3424,7 @@ class Listings extends Widget_Base {
 		$pagination_prev_label = isset( $settings['pagination_prev_label'] ) ? $settings['pagination_prev_label'] : '';
 		$pagination_next_label = isset( $settings['pagination_next_label'] ) ? $settings['pagination_next_label'] : '';
 		?>
-		<div class="tf-archive-listing-wrap tf-archive-listing__three"  data-design="design-3">
+		<div class="tf-archive-listing-wrap tf-archive-listing__three tf-archive-template__three"  data-design="design-3">
 			<?php if ($query->have_posts()) : ?>
 				<div class="tf-archive-details-wrap">
 					<div class="tf-archive-details">
@@ -4098,7 +4098,7 @@ class Listings extends Widget_Base {
 		$pagination_prev_label = isset( $settings['pagination_prev_label'] ) ? $settings['pagination_prev_label'] : '';
 		$pagination_next_label = isset( $settings['pagination_next_label'] ) ? $settings['pagination_next_label'] : '';
 		?>
-		<div class="tf-archive-listing-wrap tf-archive-listing__three"  data-design="design-3">
+		<div class="tf-archive-listing-wrap tf-archive-listing__three tf-archive-template__three" data-design="design-3">
 			<?php if ($query->have_posts()) : ?>
 				<div class="tf-archive-details-wrap">
 					<div class="tf-archive-details">
@@ -4610,7 +4610,7 @@ class Listings extends Widget_Base {
 		$pagination_prev_label = isset( $settings['pagination_prev_label'] ) ? $settings['pagination_prev_label'] : '';
 		$pagination_next_label = isset( $settings['pagination_next_label'] ) ? $settings['pagination_next_label'] : '';
 		?>
-		<div class="tf-archive-listing-wrap tf-archive-listing__three"  data-design="design-3">
+		<div class="tf-archive-listing-wrap tf-archive-listing__three tf-archive-template__three" data-design="design-3">
 			<?php if ($query->have_posts()) : ?>
 				<div class="tf-archive-details-wrap">
 					<div class="tf-archive-details">
