@@ -47,6 +47,7 @@ class TF_Options {
 
 		add_action( 'wp_ajax_tf_add_tour_availability', array( $this, 'tf_add_tour_availability' ) );
 		add_action( 'wp_ajax_tf_get_tour_availability', array( $this, 'tf_get_tour_availability' ) );
+		add_action( 'wp_ajax_save_tour_package_pricing', array( $this, 'save_tour_package_pricing' ) );
 		add_action( 'wp_ajax_tf_reset_tour_availability', array( $this, 'tf_reset_tour_availability' ) );
 		add_action( 'save_post', array( $this, 'tf_update_apt_availability_price' ), 99, 2 );
 		add_action( 'wp_ajax_tf_insert_category_data', array( $this, 'tf_insert_category_data_callback' ) );
@@ -1485,6 +1486,81 @@ class TF_Options {
 			'options_html' => $options_html,
 		) );
 		die();
+	}
+
+	/*
+     * Save Tour Package
+     * @auther Jahid
+     */
+	function save_tour_package_pricing(){
+		// Add nonce for security and authentication.
+		check_ajax_referer( 'updates', 'nonce' );
+
+		// Check if the current user has the required capability.
+		if (!current_user_can('manage_options')) {
+			wp_send_json_error( [
+				'status'  => false,
+				'message' => __( 'You do not have permission to access this resource.', 'tourfic' )
+			] );
+			return;
+		}
+
+		$post_id = isset($_POST['post_id']) ? intval($_POST['post_id']) : 0;
+		$package_index = isset($_POST['package_index']) ? intval($_POST['package_index']) : null;
+		$package_data = isset($_POST['package_data']) ? $_POST['package_data'] : array();
+
+
+		// Get existing data
+		$existing = get_post_meta($post_id, 'tf_tours_opt', true) ?: ['package_pricing' => []];
+
+		// Sanitize the incoming data
+		$sanitized_package = $this->recursive_sanitize_package($package_data);
+
+		// Update just this package
+		$existing['package_pricing'][$package_index] = $sanitized_package;
+
+		// Save back to post meta
+		update_post_meta($post_id, 'tf_tours_opt', $existing);
+
+		wp_send_json_success('Package saved');
+	}
+
+	private function recursive_sanitize_package($data) {
+		if (!is_array($data)) {
+			return sanitize_text_field($data);
+		}
+	
+		$sanitized = [];
+		
+		foreach ($data as $key => $value) {
+			if (is_array($value)) {
+				$sanitized[$key] = $this->recursive_sanitize_package($value);
+			} else {
+				switch (true) {
+					case $key === 'pack_title':
+						$sanitized[$key] = sanitize_text_field($value);
+						break;
+					case $key === 'desc':
+						$sanitized[$key] = sanitize_textarea_field($value);
+						break;
+					case strpos($key, 'price') !== false:
+					case preg_match('/^(min|max)_/', $key):
+						$sanitized[$key] = is_numeric($value) ? floatval($value) : 0;
+						break;
+					case strpos($key, 'disable_') === 0:
+					case $key === 'pack_status':
+						$sanitized[$key] = $value ? 1 : 0;
+						break;
+					case $key === 'pricing_type':
+						$sanitized[$key] = in_array($value, ['person', 'group']) ? $value : 'person';
+						break;
+					default:
+						$sanitized[$key] = sanitize_text_field($value);
+				}
+			}
+		}
+		
+		return $sanitized;
 	}
 
 	/*

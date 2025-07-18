@@ -1881,6 +1881,108 @@
             $('.tf-reset-confirmation-box').hide();
         });
 
+        // Save Package
+        $(document).on('click', ".tf_tour_package_save", function(e) {
+            e.preventDefault();
+            
+            var $repeater = $(this).closest('.tf-single-repeater-package_pricing');
+            var data = {};
+            var packageIndex = null;
+
+            // First pass: Find the package index
+            $repeater.find('[name^="tf_tours_opt[package_pricing]"]').each(function() {
+                var name = $(this).attr('name');
+                var matches = name.match(/tf_tours_opt\[package_pricing\]\[(\d+)\]/);
+                if (matches && matches[1]) {
+                    packageIndex = matches[1];
+                    return false; // Exit loop once we find the index
+                }
+            });
+
+            if (packageIndex === null) {
+                alert('Could not determine package index');
+                return;
+            }
+
+            // Second pass: Collect all data with proper structure
+            var packageData = {
+                pack_status: '',
+                pack_title: '',
+                pricing_type: 'person',
+                desc: '',
+                adult_tabs: [{}, {}, {}, {}],
+                child_tabs: [{}, {}, {}, {}],
+                infant_tabs: [{}, {}, {}, {}],
+                group_tabs: [{}, {}, {}, {}]
+            };
+
+            $repeater.find('input, select, textarea').each(function() {
+                var $el = $(this);
+                var name = $el.attr('name');
+                
+                // Skip system fields
+                if (name === 'tf_parent_field' || name === 'tf_repeater_count' || name === 'tf_current_field') {
+                    return;
+                }
+
+                // Extract the field path
+                var path = name.replace(/^tf_tours_opt\[package_pricing\]\[\d+\]/, '')
+                            .replace(/^\[|\]$/g, '')
+                            .split('][');
+                
+                // Build the nested structure
+                var current = packageData;
+                for (var i = 0; i < path.length; i++) {
+                    var key = path[i];
+                    
+                    // Handle numeric array indexes
+                    if (!isNaN(key) && i > 0) {
+                        key = parseInt(key);
+                    }
+                    
+                    if (i === path.length - 1) {
+                        // Set the value
+                        if ($el.attr('type') === 'checkbox') {
+                            current[key] = $el.is(':checked') ? $el.val() : '';
+                        } else {
+                            current[key] = $el.val();
+                        }
+                    } else {
+                        // Create nested objects if they don't exist
+                        if (current[key] === undefined) {
+                            current[key] = isNaN(path[i+1]) ? {} : [];
+                        }
+                        current = current[key];
+                    }
+                }
+            });
+    
+            // Prepare AJAX data
+            var ajaxData = {
+                action: 'save_tour_package_pricing',
+                post_id: $('#post_ID').val(),
+                package_index: packageIndex,
+                package_data: packageData,
+                nonce: tf_admin_params.tf_nonce
+            };
+    
+            // UI feedback
+            var $button = $(this);
+            $button.text('Saving...').prop('disabled', true);
+    
+            $.post(tf_options.ajax_url, ajaxData, function(response) {
+                if (response.success) {
+                    notyf.success('Package saved successfully!');
+                } else {
+                    notyf.error('There is an error!');
+                }
+                $button.text('Save').prop('disabled', false);
+            }).fail(function(xhr, status, error) {
+                notyf.error('There is an error!');
+                $button.text('Save').prop('disabled', false);
+            });
+        });
+
         $(document).on('change', '.tf_tour_pricing_type', function (e) {
             let pricingType = $(this).val();
 
