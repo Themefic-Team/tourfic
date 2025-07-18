@@ -3322,7 +3322,7 @@ class Listings extends Widget_Base {
 		$pagination_prev_label = isset( $settings['pagination_prev_label'] ) ? $settings['pagination_prev_label'] : '';
 		$pagination_next_label = isset( $settings['pagination_next_label'] ) ? $settings['pagination_next_label'] : '';
 		?>
-        <div class="tf-archive-listing-wrap tf-archive-listing__two tf-archive-template__two" data-design="design-2" style="padding: 0;">
+        <div class="tf-archive-listing-wrap tf-archive-listing__two" data-design="design-2">
 			<!--Available rooms start -->
 			<div class="tf-available-archive-hetels-wrapper tf-available-rooms-wrapper" id="tf-hotel-rooms">
 				<div class="tf-archive-available-rooms-head tf-available-rooms-head">
@@ -3330,9 +3330,9 @@ class Listings extends Widget_Base {
 					<span class="tf-total-results"><?php esc_html_e("Total", "tourfic"); ?> <span><?php echo esc_html( $post_count ); ?></span> <?php esc_html_e("hotels available", "tourfic"); ?></span>
 					<?php endif; ?>
 					
-					<div class="tf-archive-filter-showing">
+					<a class="tf-archive-filter-showing" href="#tf__booking_sidebar">
 						<i class="ri-equalizer-line"></i>
-					</div>
+					</a>
 
 					<?php if($show_sorting == 'yes') : ?>
 					<div class="tf-sorting-selection-warper">
@@ -3996,9 +3996,9 @@ class Listings extends Widget_Base {
 					<span class="tf-total-results"><?php esc_html_e("Total", "tourfic"); ?> <span><?php echo esc_html($tf_total_results); ?></span> <?php esc_html_e("Tours available", "tourfic"); ?></span>
 					<?php endif; ?>
 
-					<div class="tf-archive-filter-showing">
+					<a class="tf-archive-filter-showing" href="#tf__booking_sidebar">
 						<i class="ri-equalizer-line"></i>
-					</div>
+					</a>
 
 					<?php if($show_sorting == 'yes') : ?>
 					<div class="tf-sorting-selection-warper">
@@ -4523,9 +4523,9 @@ class Listings extends Widget_Base {
 					<span class="tf-total-results"><?php esc_html_e("Total", "tourfic"); ?> <span><?php echo esc_html( $post_count ); ?></span> <?php esc_html_e("apartments available", "tourfic"); ?></span>
 					<?php endif; ?>
 
-					<div class="tf-archive-filter-showing">
+					<a class="tf-archive-filter-showing" href="#tf__booking_sidebar">
 						<i class="ri-equalizer-line"></i>
-					</div>
+					</a>
 					
 					<?php if($show_sorting == 'yes') : ?>
 					<div class="tf-sorting-selection-warper">
