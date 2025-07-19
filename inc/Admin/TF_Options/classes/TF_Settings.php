@@ -173,7 +173,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 			}
 
 			// Template Builder
-			if ( did_action( 'elementor/loaded' ) ) {
+			if ( did_action( 'elementor/loaded' ) && function_exists('is_tf_pro')) {
 				add_submenu_page(
 					'tf_settings',
 					esc_html__('Template Builder', 'tourfic'),
@@ -181,7 +181,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 					'manage_options',
 					'edit.php?post_type=tf_template_builder',
 				);
-			} else {
+			} elseif (function_exists('is_tf_pro')) {
 				add_submenu_page(
 					'tf_settings',
 					esc_html__('Template Builder', 'tourfic'),

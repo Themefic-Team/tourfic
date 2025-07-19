@@ -24,6 +24,9 @@ class Template_Builder {
             add_action('wp_ajax_tf_save_template_builder', array($this, 'tf_save_template_builder_callback'));
             add_filter('template_include', array($this, 'tf_template_builder_custom_template'));
             add_action('save_post_tf_template_builder', [$this, 'enforce_elementor_template_on_save'], 20, 3);
+
+            add_filter('elementor/document/urls/edit', [$this, 'modify_elementor_edit_url'], 10, 2);
+            add_action('elementor/editor/init', [$this, 'setup_editor_post_data']);
         }
 	}
 
@@ -1194,4 +1197,44 @@ class Template_Builder {
         }
     }
     
+    public function modify_elementor_edit_url($url, $document) {
+        $post = $document->get_post();
+
+        if ($post->post_type === 'tf_template_builder') {
+            $template_type = get_post_meta($post->ID, 'tf_template_type', true);
+            $service = get_post_meta($post->ID, 'tf_template_service', true);
+
+            if ($template_type === 'archive' && $service) {
+                // Append service param to the URL
+                return add_query_arg('tf_archive_service', $service, $url);
+            }
+        }
+
+        return $url;
+    }
+
+    public function setup_editor_post_data() {
+        // ARCHIVE PREVIEW
+        if (isset($_GET['tf_archive_service'])) {
+            $post_type = sanitize_key($_GET['tf_archive_service']);
+
+            global $wp_query;
+
+            // Mock an archive query
+            $wp_query = new \WP_Query([
+                'post_type' => $post_type,
+                'posts_per_page' => 10,
+                'orderby' => 'rand',
+            ]);
+
+            // Ensure Elementor knows it's an archive
+            add_filter('elementor/utils/is_archive_template', '__return_true');
+            add_filter('elementor_pro/utils/is_archive_template', '__return_true');
+            add_filter('elementor_pro/utils/get_preview_query_vars', function($vars) use ($post_type) {
+                $vars['post_type'] = $post_type;
+                return $vars;
+            });
+        }
+    }
+
 }
