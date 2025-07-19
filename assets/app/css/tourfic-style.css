@@ -14569,7 +14569,6 @@ div#tf-destinationautocomplete-list div:before {
   .tf-archive-template__two .tf-available-room .tf-available-room-content .tf-available-room-content-left .tf-card-heading-info .tf-mobile.tf-pricing-info,
   .tf-archive-listing__two .tf-available-room .tf-available-room-content .tf-available-room-content-left .tf-card-heading-info .tf-mobile.tf-pricing-info,
   .page-template-tf-search__two .tf-available-room .tf-available-room-content .tf-available-room-content-left .tf-card-heading-info .tf-mobile.tf-pricing-info {
-    display: flex;
     width: 120px;
     flex-direction: column;
     align-items: end;

@@ -3330,9 +3330,9 @@ class Listings extends Widget_Base {
 					<span class="tf-total-results"><?php esc_html_e("Total", "tourfic"); ?> <span><?php echo esc_html( $post_count ); ?></span> <?php esc_html_e("hotels available", "tourfic"); ?></span>
 					<?php endif; ?>
 					
-					<div class="tf-archive-filter-showing">
+					<a class="tf-archive-filter-showing" href="#tf__booking_sidebar">
 						<i class="ri-equalizer-line"></i>
-					</div>
+					</a>
 
 					<?php if($show_sorting == 'yes') : ?>
 					<div class="tf-sorting-selection-warper">
@@ -3424,7 +3424,7 @@ class Listings extends Widget_Base {
 		$pagination_prev_label = isset( $settings['pagination_prev_label'] ) ? $settings['pagination_prev_label'] : '';
 		$pagination_next_label = isset( $settings['pagination_next_label'] ) ? $settings['pagination_next_label'] : '';
 		?>
-		<div class="tf-archive-listing-wrap tf-archive-listing__three"  data-design="design-3">
+		<div class="tf-archive-listing-wrap tf-archive-listing__three tf-archive-template__three"  data-design="design-3">
 			<?php if ($query->have_posts()) : ?>
 				<div class="tf-archive-details-wrap">
 					<div class="tf-archive-details">
@@ -3996,9 +3996,9 @@ class Listings extends Widget_Base {
 					<span class="tf-total-results"><?php esc_html_e("Total", "tourfic"); ?> <span><?php echo esc_html($tf_total_results); ?></span> <?php esc_html_e("Tours available", "tourfic"); ?></span>
 					<?php endif; ?>
 
-					<div class="tf-archive-filter-showing">
+					<a class="tf-archive-filter-showing" href="#tf__booking_sidebar">
 						<i class="ri-equalizer-line"></i>
-					</div>
+					</a>
 
 					<?php if($show_sorting == 'yes') : ?>
 					<div class="tf-sorting-selection-warper">
@@ -4098,7 +4098,7 @@ class Listings extends Widget_Base {
 		$pagination_prev_label = isset( $settings['pagination_prev_label'] ) ? $settings['pagination_prev_label'] : '';
 		$pagination_next_label = isset( $settings['pagination_next_label'] ) ? $settings['pagination_next_label'] : '';
 		?>
-		<div class="tf-archive-listing-wrap tf-archive-listing__three"  data-design="design-3">
+		<div class="tf-archive-listing-wrap tf-archive-listing__three tf-archive-template__three" data-design="design-3">
 			<?php if ($query->have_posts()) : ?>
 				<div class="tf-archive-details-wrap">
 					<div class="tf-archive-details">
@@ -4523,9 +4523,9 @@ class Listings extends Widget_Base {
 					<span class="tf-total-results"><?php esc_html_e("Total", "tourfic"); ?> <span><?php echo esc_html( $post_count ); ?></span> <?php esc_html_e("apartments available", "tourfic"); ?></span>
 					<?php endif; ?>
 
-					<div class="tf-archive-filter-showing">
+					<a class="tf-archive-filter-showing" href="#tf__booking_sidebar">
 						<i class="ri-equalizer-line"></i>
-					</div>
+					</a>
 					
 					<?php if($show_sorting == 'yes') : ?>
 					<div class="tf-sorting-selection-warper">
@@ -4610,7 +4610,7 @@ class Listings extends Widget_Base {
 		$pagination_prev_label = isset( $settings['pagination_prev_label'] ) ? $settings['pagination_prev_label'] : '';
 		$pagination_next_label = isset( $settings['pagination_next_label'] ) ? $settings['pagination_next_label'] : '';
 		?>
-		<div class="tf-archive-listing-wrap tf-archive-listing__three"  data-design="design-3">
+		<div class="tf-archive-listing-wrap tf-archive-listing__three tf-archive-template__three" data-design="design-3">
 			<?php if ($query->have_posts()) : ?>
 				<div class="tf-archive-details-wrap">
 					<div class="tf-archive-details">

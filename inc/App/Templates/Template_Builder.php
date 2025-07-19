@@ -1267,6 +1267,11 @@ class Template_Builder {
             $taxonomy_type = get_post_meta($post->ID, 'tf_taxonomy_type', true);
             $taxonomy_term = get_post_meta($post->ID, 'tf_taxonomy_term', true);
 
+            if ($template_type === 'archive' && $service) {
+                // Append service param to the URL
+                return add_query_arg('tf_archive_service', $service, $url);
+            }
+
             if ($template_type === 'single' && !empty($service)) {
                 // Get a sample post of the selected service type
                 $args = [
@@ -1296,8 +1301,30 @@ class Template_Builder {
     }
 
     public function setup_editor_post_data() {
-        if (!isset($_GET['tf_preview_post_id'])) {
+        if (!isset($_GET['tf_preview_post_id']) || !isset($_GET['tf_archive_service'])) {
             return;
+        }
+
+        // ARCHIVE PREVIEW
+        if (isset($_GET['tf_archive_service'])) {
+            $post_type = sanitize_key($_GET['tf_archive_service']);
+
+            global $wp_query;
+
+            // Mock an archive query
+            $wp_query = new \WP_Query([
+                'post_type' => $post_type,
+                'posts_per_page' => 10,
+                'orderby' => 'rand',
+            ]);
+
+            // Ensure Elementor knows it's an archive
+            add_filter('elementor/utils/is_archive_template', '__return_true');
+            add_filter('elementor_pro/utils/is_archive_template', '__return_true');
+            add_filter('elementor_pro/utils/get_preview_query_vars', function($vars) use ($post_type) {
+                $vars['post_type'] = $post_type;
+                return $vars;
+            });
         }
 
         $post_id = intval($_GET['tf_preview_post_id']);

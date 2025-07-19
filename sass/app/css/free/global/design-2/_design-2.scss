@@ -170,7 +170,7 @@
                         .tf-mobile.tf-pricing-info{
                             display: none;
                             @media #{$max768} {
-                                display: flex;
+                                // display: flex;
                                 width: 120px;
                                 flex-direction: column;
                                 align-items: end;
