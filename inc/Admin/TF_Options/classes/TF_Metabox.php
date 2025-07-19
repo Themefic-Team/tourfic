@@ -110,7 +110,7 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 									$value   = isset( $tf_meta_box_value[ $field['id'] ] ) ? $tf_meta_box_value[ $field['id'] ] : $default;
 
 									$related_default = isset( $field['related_default'] ) ? $field['default'] : '';
-									$related_value   = isset( $tf_meta_box_value[ $field['related_name'] ] ) ? $tf_meta_box_value[ $field['related_name'] ] : $related_default;
+									$related_value   = !empty($field['related_name']) && isset( $tf_meta_box_value[ $field['related_name'] ] ) ? $tf_meta_box_value[ $field['related_name'] ] : $related_default;
 									
 									$tf_option = new \Tourfic\Admin\TF_Options\TF_Options();
 									$tf_option->field( $field, $value, $this->metabox_id, '',  $related_value);

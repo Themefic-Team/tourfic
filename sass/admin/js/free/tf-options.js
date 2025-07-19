@@ -1913,9 +1913,10 @@
                 adult_tabs: [{}, {}, {}, {}],
                 child_tabs: [{}, {}, {}, {}],
                 infant_tabs: [{}, {}, {}, {}],
-                group_tabs: [{}, {}, {}, {}]
+                group_tabs: [{}, {}, {}, {}, {}, {}]
             };
 
+            // Collect all form data
             $repeater.find('input, select, textarea').each(function() {
                 var $el = $(this);
                 var name = $el.attr('name');
@@ -1943,7 +1944,7 @@
                     if (i === path.length - 1) {
                         // Set the value
                         if ($el.attr('type') === 'checkbox') {
-                            current[key] = $el.is(':checked') ? $el.val() : '';
+                            current[key] = $el.is(':checked') ? ($el.val() || '1') : '';
                         } else {
                             current[key] = $el.val();
                         }
@@ -1956,6 +1957,43 @@
                     }
                 }
             });
+
+            // Handle group discount repeater fields - filter out empty discounts
+            var discountRepeaters = [];
+            $repeater.find('.tf-single-repeater-group_discount_package').each(function() {
+                var $repeaterItem = $(this);
+                var discountData = {};
+                var hasValidDiscount = false;
+                
+                $repeaterItem.find('input[type="number"]').each(function() {
+                    var name = $(this).attr('name').match(/\[group_discount_package\]\[(\d+)\]\[([^\]]+)\]/);
+                    if (name && name[1] && name[2]) {
+                        var val = $(this).val();
+                        discountData[name[2]] = val;
+                        
+                        // Check if this is a discount_price with a valid value
+                        if (name[2] === 'discount_price' && val && parseFloat(val) > 0) {
+                            hasValidDiscount = true;
+                        }
+                    }
+                });
+                
+                // Only include discounts with valid discount_price
+                if (hasValidDiscount && Object.keys(discountData).length > 0) {
+                    discountRepeaters.push(discountData);
+                }
+            });
+
+            // Add discount repeater data to package if we have valid discounts
+            if (discountRepeaters.length > 0) {
+                packageData.group_tabs[5] = {
+                    group_discount_package: discountRepeaters
+                };
+            } else {
+                // Remove discount data if no valid discounts
+                packageData.group_tabs[5] = [];
+            }
+
     
             // Prepare AJAX data
             var ajaxData = {
@@ -1972,6 +2010,8 @@
     
             $.post(tf_options.ajax_url, ajaxData, function(response) {
                 if (response.success) {
+                    $repeater.find(' > .tf-repeater-header .tf-repeater-title').html(packageData.pack_title);
+                    $repeater.find('.tf-repeater-content-wrap').hide();
                     notyf.success('Package saved successfully!');
                 } else {
                     notyf.error('There is an error!');
@@ -2467,6 +2507,17 @@
         // switch-group Drag and  show
         $(".tf-switch-group-wrap").sortable({
             placeholder: "tf-switch-drag-highlight"
+        });
+
+        // Discount Repeater Add
+        $(document).on('click', '.tf-repeater-add-group_discount_package', function (e) {
+            e.preventDefault();
+        
+            // Find the closest repeater container
+            var $repeater = $(this).closest('.tf-repeater');
+            
+            // Find the clone template
+            var $clone = $repeater.find('.tf-repeater-wrap-group_discount_package .tf-single-repeater .tf-repeater-content-wrap').show();
         });
 
         // Repeater show hide

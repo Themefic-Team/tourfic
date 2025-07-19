@@ -1544,11 +1544,13 @@ class TF_Options {
 						$sanitized[$key] = sanitize_textarea_field($value);
 						break;
 					case strpos($key, 'price') !== false:
+					case strpos($key, 'discount_price') !== false:
 					case preg_match('/^(min|max)_/', $key):
 						$sanitized[$key] = is_numeric($value) ? floatval($value) : 0;
 						break;
 					case strpos($key, 'disable_') === 0:
 					case $key === 'pack_status':
+					case $key === 'group_discount':
 						$sanitized[$key] = $value ? 1 : 0;
 						break;
 					case $key === 'pricing_type':
