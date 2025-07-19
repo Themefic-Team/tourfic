@@ -5056,6 +5056,26 @@ a.tf-import-btn, a.tf-export-btn {
   color: #FFFFFF;
 }
 
+.tf-tour-cal-wrap {
+  position: relative;
+}
+.tf-tour-cal-wrap .tf-tour-sync-btn {
+  position: absolute;
+  right: 134px;
+  top: 26px;
+}
+.tf-tour-cal-wrap .tf-tour-sync-btn .sync-icon {
+  border-radius: 8px;
+  border: 0.5px solid #F2F5F7;
+  background: #FFFFFF;
+  padding: 8px;
+  cursor: pointer;
+  height: 32px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .tf-tour-cal-wrap .tf-tour-cal {
   border-radius: 8px;
   border: 1px solid #F2F5F7;
@@ -5078,6 +5098,8 @@ a.tf-import-btn, a.tf-export-btn {
   background: #FFFFFF;
   padding: 6px 8px;
   gap: 20px;
+  height: 32px;
+  align-items: center;
 }
 .tf-tour-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group .fc-button {
   background-color: transparent;

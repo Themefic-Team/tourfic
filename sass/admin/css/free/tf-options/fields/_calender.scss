@@ -278,6 +278,24 @@
 
 // Tour Calender
 .tf-tour-cal-wrap{
+    position: relative;
+    .tf-tour-sync-btn{
+        position: absolute;
+        right: 134px;
+        top: 26px;
+        .sync-icon{
+            border-radius: 8px;
+            border: 0.5px solid $tf_border_faint;
+            background: $tf_fill_white;
+            padding: 8px;
+            cursor: pointer;
+            height: 32px;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
     .tf-tour-cal{
         border-radius: 8px;
         border: 1px solid $tf_border_faint;
@@ -298,6 +316,8 @@
                 background: $tf_fill_white;
                 padding: 6px 8px;
                 gap: 20px;
+                height: 32px;
+                align-items: center;
                 .fc-button{
                     background-color: transparent;
                     border: 0px;
