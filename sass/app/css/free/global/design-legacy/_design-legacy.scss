@@ -132,7 +132,7 @@
     .tf-single-template{
         &__one{
             .tf-single-car-details-warper{
-                padding: 32px 0;
+                padding-bottom: 32px;
                 display: flex;
                 gap: 32px;
                 @media #{$max768}{
@@ -754,6 +754,8 @@
     .tf-date-select-box{
         padding: 8px;
         flex-wrap: nowrap;
+        padding-bottom: 0;
+        margin-top: 0;
         @media #{$max991}{
             flex-wrap: wrap;
             justify-content: flex-start;
