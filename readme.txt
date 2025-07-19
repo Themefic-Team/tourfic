@@ -378,7 +378,7 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
-= 2.16.9 – July 15, 2025 =
+= 2.16.9 – July 19, 2025 =
 
 - Added: Theme Builder support for all Archive, Taxonomy, and Term pages.
 - Added: Elementor support for all Archive, Taxonomy, and Term pages.
