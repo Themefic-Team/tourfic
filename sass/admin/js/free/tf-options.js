@@ -1460,7 +1460,7 @@
                             if (typeof doc == "object") {
                                 successCallback(doc?.avail_data);
                             }
-                            $('.tf-single-options').html(doc?.options_html);
+                            $('.tf-package-field-repeater').html(doc?.options_html);
                             $(self.container).css({'pointer-events': 'auto', 'opacity': '1'});
                             $(self.calendar).removeClass('tf-content-loading');
                         },
@@ -2041,6 +2041,12 @@
             if ($this.attr('data-tab')=='availability'){
                 tfTourCalendar();
             }
+        });
+
+        // Calendar Sync
+        $(document).on("click", ".tf-tour-cal-wrap .tf-tour-sync-btn .sync-icon", function (e) {
+            e.preventDefault();
+            tfTourCalendar();
         });
 
         // Bulk Popup Open

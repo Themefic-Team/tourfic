@@ -1175,7 +1175,6 @@ class TF_Options {
 
 		ob_start();
         if($pricing_by == 'package' && function_exists( 'is_tf_pro' ) && is_tf_pro()){ ?>
-			<div class="tf-field-repeater tf-package-field-repeater" style="width: 100%">
 			<div class="tf-repeater">
 			<div class="tf-field" style="padding-top: 0px">
 				<label class="tf-field-label"><?php echo esc_html__('Packages', 'status'); ?></label>
@@ -1436,7 +1435,6 @@ class TF_Options {
             } ?>
 			</div> <!-- .tf-repeater-wrap -->
 			</div> <!-- .tf-repeater -->
-			</div> <!-- .tf-field-repeater -->
        <?php }
 		$options_html .= ob_get_clean();
 
