@@ -17,18 +17,28 @@
         * window url on change tab click
         * @author: Foysal
         */
-        $(window).on('hashchange load', function () {
+        function activateTabFromHash() {
             let hash = window.location.hash;
-            let query = window.location.search;
             let slug = hash.replace('#tab=', '');
 
             if (hash) {
-                let selectedTab = $('.tf-tablinks[data-tab="' + slug + '"]'),
-                    parentDiv = selectedTab.closest('.tf-admin-tab-item');
-
-                selectedTab.trigger('click');
-                parentDiv.trigger('click');
+                let selectedTab = $('.tf-tablinks[data-tab="' + slug + '"]');
+                let selectedContent = $('#' + slug);
+                if (selectedTab.length) {
+                    $('.tf-admin-tab .tf-tablinks').removeClass('active');
+                    $('.tf-tab-wrapper .tf-tab-content').removeClass('active');
+                    selectedTab.addClass('active');
+                    selectedContent.addClass('active');
+                }
             }
+        }
+    
+        // Run once on page load
+        activateTabFromHash();
+
+        $(window).on('hashchange load', function () {
+            let hash = window.location.hash;
+            let query = window.location.search;
 
             if (query.indexOf('dashboard') > -1) {
                 let submenu = $("#toplevel_page_tf_settings").find(".wp-submenu");
