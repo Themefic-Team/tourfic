@@ -1876,11 +1876,21 @@
             });
         });
 
-        $(document).on("click", ".tf-reset-confirmation-box .tf-cancel-btn", function (e) {
+        $(document).on("click", ".tf-reset-confirmation-box .tf-cancel-btn, .tf-reset-confirmation-box .tf_tour_bulk_close svg", function (e) {
             e.preventDefault();
             $('.tf-reset-confirmation-box').hide();
         });
 
+        $(document).on("click", ".tf-reset-confirmation-box", function (e) {
+            if (!$(e.target).closest('.tf-confirmation-content').length) {
+                $(this).hide(); // Hide the popup
+            }
+        });
+
+        // add pacakge
+        $(document).on("click", ".tf-repeater-add-package_pricing", function (e) {
+            $(this).hide(); // Hide the popup
+        });
         // Save Package
         $(document).on('click', ".tf_tour_package_save", function(e) {
             e.preventDefault();
@@ -2012,6 +2022,7 @@
                 if (response.success) {
                     $repeater.find(' > .tf-repeater-header .tf-repeater-title').html(packageData.pack_title);
                     $repeater.find('.tf-repeater-content-wrap').hide();
+                    $('.tf-repeater-add-package_pricing').show();
                     notyf.success('Package saved successfully!');
                 } else {
                     notyf.error('There is an error!');
@@ -2041,12 +2052,6 @@
             if ($this.attr('data-tab')=='availability'){
                 tfTourCalendar();
             }
-        });
-
-        // Calendar Sync
-        $(document).on("click", ".tf-tour-cal-wrap .tf-tour-sync-btn .sync-icon", function (e) {
-            e.preventDefault();
-            tfTourCalendar();
         });
 
         // Bulk Popup Open
@@ -2540,10 +2545,12 @@
         // Repeater Pacakge Cancel
         $(document).on('click', '.tf-action-button-group .tf_tour_package_cancel', function () {
             $(this).closest('.tf-repeater-content-wrap').hide();
+            $('.tf-repeater-add-package_pricing').show();
         });
 
         $(document).on('click', '.tf-action-button-group .tf_tour_package_deleted', function () {
             $(this).closest('.tf-single-repeater').empty();
+            $('.tf-repeater-add-package_pricing').show();
         });
 
         // Repeater show hide

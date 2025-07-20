@@ -26,13 +26,6 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
 			if ( Helper::tf_is_woo_active() ) {
 				?>
                 <div class="tf-tour-cal-wrap">
-                    <div class="tf-tour-sync-btn">
-                        <div class="sync-icon">
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M2.5 10C2.5 8.01088 3.29018 6.10322 4.6967 4.6967C6.10322 3.29018 8.01088 2.5 10 2.5C12.0967 2.50789 14.1092 3.32602 15.6167 4.78333L17.5 6.66667M17.5 6.66667V2.5M17.5 6.66667H13.3333M17.5 10C17.5 11.9891 16.7098 13.8968 15.3033 15.3033C13.8968 16.7098 11.9891 17.5 10 17.5C7.90329 17.4921 5.89081 16.674 4.38333 15.2167L2.5 13.3333M2.5 13.3333H6.66667M2.5 13.3333V17.5" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </div>
-                    </div>
                     <div class='tf-tour-cal'></div>
                     <div class="tf-tour-cal-field">
 
@@ -870,7 +863,14 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
 
                             <div class="tf-reset-confirmation-box">
                                 <div class="tf-confirmation-content">
-                                    <h3><?php echo esc_html__( 'Are you sure you want to reset this calendar?', 'tourfic' ); ?></h3>
+                                    <div class="tf-confirmation-header">
+                                        <h3><?php echo esc_html__( 'Are you sure you want to reset this calendar?', 'tourfic' ); ?></h3>
+                                        <span class="tf_tour_bulk_close">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M18 6L6 18M6 6L18 18" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                        </span>
+                                    </div>
                                     <div class="tf-confirmation-actions">
                                         <button class="tf-cancel-btn"><?php echo esc_html__( 'Cancel', 'tourfic' ); ?></button>
                                         <button class="tf-confirmed-btn"><?php echo esc_html__( 'Confirmed', 'tourfic' ); ?></button>

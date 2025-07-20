@@ -4246,7 +4246,7 @@ Steps
   border-radius: 8px;
   border: 1px solid #F2F5F7;
   background: #FFFFFF;
-  padding: 16px;
+  padding: 16px 16px 16px 0px;
 }
 .tf-field-repeater .tf-field-repeater-desc {
   margin-bottom: 16px;
@@ -4352,6 +4352,9 @@ Steps
 .tf-field-repeater .tf-repeater .tf-repeater-content-wrap .tf-action-button-group .button-primary {
   background: linear-gradient(180deg, #0051A3 0%, #003C79 100%);
   color: #FFFFFF;
+}
+.tf-field-repeater .tf-repeater .tf-repeater-add {
+  margin-left: 16px;
 }
 .tf-field-repeater .tf-repeater .tf-repeater-add .tf-repeater-icon {
   color: #003C79;
@@ -5224,6 +5227,15 @@ a.tf-import-btn, a.tf-export-btn {
   background-color: rgba(0, 0, 0, 0.3);
   border-radius: 4px;
 }
+.tf-bulk-popup .bulk-popup-content .bulk-popup-content-box .tf-date-time-selection,
+.tf-reset-confirmation-box .bulk-popup-content .bulk-popup-content-box .tf-date-time-selection {
+  border: 0px solid;
+  padding: 0px;
+}
+.tf-bulk-popup .bulk-popup-content .bulk-popup-content-box .tf-date-time-selection .tf-field-select,
+.tf-reset-confirmation-box .bulk-popup-content .bulk-popup-content-box .tf-date-time-selection .tf-field-select {
+  width: calc(100% - 2px) !important;
+}
 .tf-bulk-popup .bulk-popup-content .tf-repeater .tf-repeater-add .tf-repeater-icon,
 .tf-reset-confirmation-box .bulk-popup-content .tf-repeater .tf-repeater-add .tf-repeater-icon {
   font-size: 12px;
@@ -5294,13 +5306,20 @@ a.tf-import-btn, a.tf-export-btn {
   background-color: #ffffff;
   border-radius: 10px;
 }
-.tf-reset-confirmation-box .tf-confirmation-content h3 {
+.tf-reset-confirmation-box .tf-confirmation-content .tf-confirmation-header {
+  display: flex;
+  gap: 8px;
+}
+.tf-reset-confirmation-box .tf-confirmation-content .tf-confirmation-header h3 {
   margin: 0 0 35px 0;
+}
+.tf-reset-confirmation-box .tf-confirmation-content .tf-confirmation-header .tf_tour_bulk_close svg {
+  cursor: pointer;
 }
 .tf-reset-confirmation-box .tf-confirmation-content .tf-confirmation-actions {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 16px;
 }
 .tf-reset-confirmation-box .tf-confirmation-content .tf-confirmation-actions button {
   border-radius: 8px;
@@ -5319,26 +5338,6 @@ a.tf-import-btn, a.tf-export-btn {
   color: #FFFFFF;
 }
 
-.tf-tour-cal-wrap {
-  position: relative;
-}
-.tf-tour-cal-wrap .tf-tour-sync-btn {
-  position: absolute;
-  right: 134px;
-  top: 26px;
-}
-.tf-tour-cal-wrap .tf-tour-sync-btn .sync-icon {
-  border-radius: 8px;
-  border: 0.5px solid #F2F5F7;
-  background: #FFFFFF;
-  padding: 8px;
-  cursor: pointer;
-  height: 32px;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 .tf-tour-cal-wrap .tf-tour-cal {
   border-radius: 8px;
   border: 1px solid #F2F5F7;
@@ -5351,7 +5350,7 @@ a.tf-import-btn, a.tf-export-btn {
 .tf-tour-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-toolbar-title {
   padding: 0 !important;
   color: #27333F;
-  font-size: 15px;
+  font-size: 15px !important;
   font-weight: 600;
   line-height: 24px;
 }
@@ -5368,6 +5367,8 @@ a.tf-import-btn, a.tf-export-btn {
   background-color: transparent;
   border: 0px;
   padding: 0;
+  position: relative;
+  top: -1px;
 }
 .tf-tour-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group .fc-button .fc-icon-chevron-left::before,
 .tf-tour-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group .fc-button .fc-icon-chevron-right::before {
@@ -5502,6 +5503,12 @@ a.tf-import-btn, a.tf-export-btn {
   border-radius: 8px;
   border: 1px solid #F2F5F7;
   background: #FFFFFF;
+}
+.tf-tour-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater:last-child {
+  margin-bottom: 0px;
+}
+.tf-tour-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-content-wrap {
+  padding-left: 0px;
 }
 .tf-tour-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset {
   display: flex;
