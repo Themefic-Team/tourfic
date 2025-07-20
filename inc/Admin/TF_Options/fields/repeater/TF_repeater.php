@@ -78,7 +78,9 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 
 													$id = ( ! empty( $this->settings_id ) ) ? $this->settings_id . '[' . $this->field['id'] . '][00]' . '[' . $re_field['id'] . ']' : $this->field['id'] . '[00]' . '[' . $re_field['id'] . ']';
 
-													$related_name = ( ! empty( $this->settings_id ) ) ? $this->settings_id . '[' . $this->field['related_name'] . '][00]' . '[' . $re_field['related_name'] . ']' : $this->field['related_name'] . '[00]' . '[' . $re_field['related_name'] . ']'; 
+													if(!empty($this->field['related_name'])){
+														$related_name = ( ! empty( $this->settings_id ) ) ? $this->settings_id . '[' . $this->field['related_name'] . '][00]' . '[' . $re_field['related_name'] . ']' : $this->field['related_name'] . '[00]' . '[' . $re_field['related_name'] . ']'; 
+													}
 
 													if ( isset( $tf_meta_box_value[ $id ] ) ) {
 														$value = isset( $tf_meta_box_value[ $id ] ) ? $tf_meta_box_value[ $id ] : '';
@@ -86,10 +88,14 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 														$value = ( isset( $re_field['id'] ) && isset( $data[ $key ][ $re_field['id'] ] ) ) ? $data[ $key ][ $re_field['id'] ] : '';
 													}
 
-													if ( isset( $tf_meta_box_value[ $related_name ] ) ) {
-														$related_value = isset( $tf_meta_box_value[ $related_name ] ) ? $tf_meta_box_value[ $related_name ] : '';
-													} else {
-														$related_value = ( isset( $re_field['related_name'] ) && isset( $data[ $key ][ $re_field['related_name'] ] ) ) ? $data[ $key ][ $re_field['related_name'] ] : '';
+													if(!empty($this->field['related_name'])){
+														if ( isset( $tf_meta_box_value[ $related_name ] ) ) {
+															$related_value = isset( $tf_meta_box_value[ $related_name ] ) ? $tf_meta_box_value[ $related_name ] : '';
+														} else {
+															$related_value = ( isset( $re_field['related_name'] ) && isset( $data[ $key ][ $re_field['related_name'] ] ) ) ? $data[ $key ][ $re_field['related_name'] ] : '';
+														}
+													}else{
+														$related_value = '';
 													}
 
 													if(isset($re_field['validate']) && $re_field['validate'] == 'no_space_no_special'){
@@ -152,7 +158,9 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 
 										$id = ( ! empty( $this->settings_id ) ) ? $this->settings_id . '[' . $this->field['id'] . '][00]' . '[' . $re_field['id'] . ']' : $this->field['id'] . '[00]' . '[' . $re_field['id'] . ']';
 
-										$related_name = ( ! empty( $this->settings_id ) ) ? $this->settings_id . '[' . $this->field['related_name'] . '][00]' . '[' . $re_field['related_name'] . ']' : $this->field['related_name'] . '[00]' . '[' . $re_field['related_name'] . ']'; 
+										if(!empty($this->field['related_name'])){
+											$related_name = ( ! empty( $this->settings_id ) ) ? $this->settings_id . '[' . $this->field['related_name'] . '][00]' . '[' . $re_field['related_name'] . ']' : $this->field['related_name'] . '[00]' . '[' . $re_field['related_name'] . ']'; 
+										}
 
 										if ( isset( $tf_meta_box_value[ $id ] ) ) {
 											$value = isset( $tf_meta_box_value[ $id ] ) ? $tf_meta_box_value[ $id ] : '';
@@ -160,10 +168,14 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 											$value = ( isset( $re_field['id'] ) && isset( $data[ $key ][ $re_field['id'] ] ) ) ? $data[ $key ][ $re_field['id'] ] : '';
 										}
 
-										if ( isset( $tf_meta_box_value[ $related_name ] ) ) {
-											$related_value = isset( $tf_meta_box_value[ $related_name ] ) ? $tf_meta_box_value[ $related_name ] : '';
-										} else {
-											$related_value = ( isset( $re_field['related_name'] ) && isset( $data[ $key ][ $re_field['related_name'] ] ) ) ? $data[ $key ][ $re_field['related_name'] ] : '';
+										if(!empty($this->field['related_name'])){
+											if ( isset( $tf_meta_box_value[ $related_name ] ) ) {
+												$related_value = isset( $tf_meta_box_value[ $related_name ] ) ? $tf_meta_box_value[ $related_name ] : '';
+											} else {
+												$related_value = ( isset( $re_field['related_name'] ) && isset( $data[ $key ][ $re_field['related_name'] ] ) ) ? $data[ $key ][ $re_field['related_name'] ] : '';
+											}
+										}else{
+											$related_value = '';
 										}
 
 										if(isset($re_field['validate']) && $re_field['validate'] == 'no_space_no_special'){
