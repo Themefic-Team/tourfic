@@ -17,14 +17,19 @@
         * window url on change tab click
         * @author: Foysal
         */
-        function activateTabFromHash() {
-            let hash = window.location.hash;
-            let slug = hash.replace('#tab=', '');
 
-            if (hash) {
+        function activateTabFromHash(hash = '') {
+            if (!hash) {
+                hash = window.location.hash;
+            }
+    
+            let slug = hash.replace('#tab=', '');
+    
+            if (slug) {
                 let selectedTab = $('.tf-tablinks[data-tab="' + slug + '"]');
                 let selectedContent = $('#' + slug);
-                if (selectedTab.length) {
+    
+                if (selectedTab.length && selectedContent.length) {
                     $('.tf-admin-tab .tf-tablinks').removeClass('active');
                     $('.tf-tab-wrapper .tf-tab-content').removeClass('active');
                     selectedTab.addClass('active');
@@ -33,9 +38,24 @@
             }
         }
     
-        // Run once on page load
-        activateTabFromHash();
+        // Save current tab hash before post update
+        $('.post-type-tf_tours #post, .post-type-tf_hotel #post, .post-type-tf_room #post, .post-type-tf_apartment #post, .post-type-tf_carrental #post, .post-type-tf_email_templates #post').on('submit', function () {
+            localStorage.setItem('tf_saved_tab_hash', window.location.hash);
+        });
+    
+        // Restore saved hash and activate tab
+        let savedHash = localStorage.getItem('tf_saved_tab_hash');
+        if (savedHash) {
+            localStorage.removeItem('tf_saved_tab_hash');
+            window.location.hash = savedHash;
+            activateTabFromHash(savedHash);
+        } else {
+            // Run on initial page load
+            activateTabFromHash();
+        }
 
+        
+        
         $(window).on('hashchange load', function () {
             let hash = window.location.hash;
             let query = window.location.search;
