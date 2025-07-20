@@ -971,9 +971,15 @@ function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data,
 		$order_type = $item->get_meta( '_order_type', true );
 		if ( "hotel" == $order_type ) {
 			$post_id   = $item->get_meta( '_post_id', true );
+			// Get the original (default language) post ID using WPML
+			if (function_exists('wpml_get_default_language')) {
+				$original_post_id = apply_filters('wpml_object_id', $post_id, 'tf_hotel', false, wpml_get_default_language());
+			} else {
+				$original_post_id = $post_id;
+			}
 			$unique_id = $item->get_meta( '_unique_id', true );
-			$meta      = get_post_meta( $post_id, 'tf_hotels_opt', true );
-			$rooms     = Room::get_hotel_rooms( $post_id );
+			$meta      = get_post_meta( $original_post_id, 'tf_hotels_opt', true );
+			$rooms     = Room::get_hotel_rooms( $original_post_id );
 
 			if ( ! empty( $rooms ) ) {
 				foreach ( $rooms as $_room ) {
@@ -1129,6 +1135,13 @@ function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data,
 
 			$iteminfo = array_combine( $iteminfo_keys, $iteminfo_values );
 
+			// Get the original (default language) post ID using WPML
+			if (function_exists('wpml_get_default_language')) {
+				$original_post_id = apply_filters('wpml_object_id', $post_id, 'tf_hotel', false, wpml_get_default_language());
+			} else {
+				$original_post_id = $post_id;
+			}
+
 			global $wpdb;
 			$wpdb->query(
 				$wpdb->prepare(
@@ -1137,7 +1150,7 @@ function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data,
 				VALUES ( %d, %d, %s, %d, %s, %s, %s, %s, %s, %s, %d, %s, %s, %s )",
 					array(
 						$order_id,
-						sanitize_key( $post_id ),
+						sanitize_key( $original_post_id ),
 						$order_type,
 						$room_selected,
 						$unique_id,
@@ -1192,9 +1205,15 @@ function tf_add_order_id_room_checkout_order_processed_block_checkout( $order ) 
 		$order_type = $item->get_meta( '_order_type', true );
 		if ( "hotel" == $order_type ) {
 			$post_id   = $item->get_meta( '_post_id', true );
+			// Get the original (default language) post ID using WPML
+			if (function_exists('wpml_get_default_language')) {
+				$original_post_id = apply_filters('wpml_object_id', $post_id, 'tf_hotel', false, wpml_get_default_language());
+			} else {
+				$original_post_id = $post_id;
+			}
 			$unique_id = $item->get_meta( '_unique_id', true );
-			$meta      = get_post_meta( $post_id, 'tf_hotels_opt', true );
-			$rooms     = Room::get_hotel_rooms( $post_id );
+			$meta      = get_post_meta( $original_post_id, 'tf_hotels_opt', true );
+			$rooms     = Room::get_hotel_rooms( $original_post_id );
 
 			# Get and Loop Over Room Meta
 			if ( ! empty( $rooms ) ) {
@@ -1351,6 +1370,13 @@ function tf_add_order_id_room_checkout_order_processed_block_checkout( $order ) 
 
 			$iteminfo = array_combine( $iteminfo_keys, $iteminfo_values );
 
+			// Get the original (default language) post ID using WPML
+			if (function_exists('wpml_get_default_language')) {
+				$original_post_id = apply_filters('wpml_object_id', $post_id, 'tf_hotel', false, wpml_get_default_language());
+			} else {
+				$original_post_id = $post_id;
+			}
+
 			global $wpdb;
 			$wpdb->query(
 				$wpdb->prepare(
@@ -1359,7 +1385,7 @@ function tf_add_order_id_room_checkout_order_processed_block_checkout( $order ) 
 				VALUES ( %d, %d, %s, %d, %s, %s, %s, %s, %s, %s, %d, %s, %s, %s )",
 					array(
 						$order_id,
-						sanitize_key( $post_id ),
+						sanitize_key( $original_post_id ),
 						$order_type,
 						$room_selected,
 						$unique_id,

@@ -1,7 +1,7 @@
 .search-result-wrapper {
     padding: 30px 0;
 }
-.search-result-inner {
+.search-result-inner{
     display: grid;
     grid-template-columns: 73% 27%;
     @media #{$max1024} {
@@ -10,6 +10,9 @@
     @media #{$max768} {
         grid-template-columns: 100%;
     }
+}
+.tf-archive-listing__legacy,
+.search-result-inner {
     .tf-search-left {
         padding-right: 16px;
         @media #{$max768} {
@@ -21,7 +24,7 @@
             justify-content: space-between;
             padding: 10px 0;
             margin-bottom: 15px;
-          
+
             .tf-result-counter-info{
                 display: flex;
                 .tf-counter-title{
@@ -30,7 +33,7 @@
             }
             @media #{$max575} {
                 gap: 8px;
-               
+
             }
             .tf-list-grid {
                 display: flex;
@@ -42,6 +45,8 @@
                     margin-left: 10px;
                     font-size: 1.25rem;
                     text-decoration: none;
+                    justify-content: center;
+                    align-items: center;
                     color: $color-primary;
                     @media #{$max768}{
                         display: none;
@@ -62,7 +67,7 @@
                     background-repeat: no-repeat;
                     background-size: 12px 12px;
                     cursor: pointer;
-           
+
                     @media #{$max575}{
                         max-width: 160px;
                     }
@@ -154,6 +159,17 @@
                 display: grid;
                 grid-template-columns: 1fr 1fr;
                 gap: 10px;
+
+                &.tf-grid-1{
+                    grid-template-columns: 1fr;
+                    gap: 0;
+                }
+                &.tf-grid-3{
+                    grid-template-columns: 1fr 1fr 1fr;
+                }
+                &.tf-grid-4{
+                    grid-template-columns: 1fr 1fr 1fr 1fr;
+                }
                 .single-tour-wrap {
                     width: 100%;
                     padding: 0 5px;
@@ -222,6 +238,7 @@
     }
 }
 .single-tour-wrap{
+    margin: 16px 0;
     transition: all 0.3s ease-out;
     * {
         transition: all 0.3s ease-out;
@@ -229,12 +246,26 @@
     @media #{$max768} {
         margin-bottom: 0px;
     }
+
+    &:first-child {
+        margin-top: 0;
+    }
+
+    .tf-map-link{
+        i{
+            margin-right: 4px;
+        }
+        svg{
+            margin-right: 4px;
+            width: 16px;
+            height: 16px;
+        }
+    }
     .single-tour-inner {
         overflow: hidden;
         width: 100%;
         min-height: 149px;
         padding: 20px;
-        margin: 16px 0;
         border: 1px solid $color-border-lite;
         background: $color-filling-fg;
         border-radius: 4px;
@@ -385,11 +416,17 @@
                     font-weight: bold;
                     margin-left: 5px;
                 }
+                ins{
+                    background-color: transparent;
+                }
             }
             .tf-tour-price {
                 .amount {
                     font-weight: bold;
                     margin-left: 5px;
+                }
+                ins{
+                    background-color: transparent;
                 }
             }
             .tf_property_block_main_row {
@@ -408,11 +445,10 @@
                     flex-grow: 1;
                     .tf-hotel__title-wrap {
                         margin-bottom: 4px;
-                        a{
-                            display: block;
-                            .tourfic_hotel-title {
-                                display: inline-block;
-                                margin: 0;
+                        .tourfic_hotel-title{
+                            margin: 0;
+                            a{
+                                display: block;
                                 padding-right: 2px;
                                 font-size: 1.5rem;
                                 color: $color-heading;
@@ -491,11 +527,6 @@
         .single-tour-inner {
             background: $color-filling-fg;
             border-color: $color-border-lite;
-        }
-    }
-    &:first-child {
-        .single-tour-inner {
-            margin-top: 0;
         }
     }
 }
@@ -819,7 +850,7 @@
                         @media #{$max768}{
                             width: 100%;
                         }
-                        
+
                         .tf-sidebar-header{
                             margin-bottom: 32px;
                             h4{
@@ -897,7 +928,7 @@
                                             -moz-user-select: none;
                                             -ms-user-select: none;
                                             user-select: none;
-                                            
+
                                             input{
                                                 position: absolute;
                                                 opacity: 0;

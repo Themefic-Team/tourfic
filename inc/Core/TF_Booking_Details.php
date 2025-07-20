@@ -187,8 +187,7 @@ abstract Class TF_Booking_Details {
             </div>
 
             <?php }
-        
-        do_action( 'tf_google_calendar_notice_box' );
+            do_action( 'tf_google_calendar_notice_box' );
         }
 
     }

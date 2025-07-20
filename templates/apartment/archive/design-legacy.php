@@ -65,23 +65,23 @@
 						echo '<div class="tf-nothing-found" data-post-count="0">' .esc_html__("No Apartments Found!", "tourfic"). '</div>';
 					}
 					?>
+					<div class="tf_posts_navigation">
+						<?php Helper::tourfic_posts_navigation(); ?>
+					</div>
 				</div>
 				<?php do_action("tf_apartment_archive_card_items_after"); ?>
-				
-				<div class="tf_posts_navigation">
-					<?php Helper::tourfic_posts_navigation(); ?>
-				</div>
 
 			</div>
 			<!-- End Content -->
 
-			
 			<!-- Start Sidebar -->
 			<div class="tf-search-right">
-				<?php
-				// Location: functions.php
-				Helper::tf_archive_sidebar_search_form('tf_apartment');
-				?>
+				<?php Helper::tf_archive_sidebar_search_form('tf_apartment');?>
+				<?php if ( is_active_sidebar( 'tf_archive_booking_sidebar' ) ) { ?>
+                    <div id="tf__booking_sidebar">
+                        <?php dynamic_sidebar( 'tf_archive_booking_sidebar' ); ?>
+                    </div>
+                <?php } ?>
 			</div>
 			<!-- End Sidebar -->
 		</div>

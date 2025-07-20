@@ -14,9 +14,9 @@
                 @include align-items(center);
                 gap: 24px;
                 transform-origin: bottom;
-                transform: rotateX(90deg);
-                transition: all 0.3s ease-in-out;
-            
+                transform: translateY(100%);
+                opacity: 0;
+                transition: transform 0.4s ease, opacity 0.4s ease;
                 @media #{$max1024} {
                     @include flex-wrap();
                     padding: 16px;
@@ -25,12 +25,14 @@
                 }
             
                 @media #{$max768}{
-                    transform: rotateX(0);
+                    transform: translateY(0);
+                    opacity: 1;
                     z-index: 9999;
                     width: 100%;
                 }
                 &.active{
-                    transform: rotateX(0deg);
+                    transform: translateY(0);
+                    opacity: 1;
                     width: 100%;
                 }
             
@@ -84,6 +86,7 @@
             
                         @media #{$max768}{
                             flex-grow: 1;
+                            height: 44px;
                         }
                     }
                 }
@@ -177,19 +180,25 @@
             }
         }
         &__two{
+            .tf_tours_main_booking{
+                @media #{$max768}{
+                    display: none;
+                }
+            }
             .tf-bottom-booking-bar {
                 position: fixed;
                 bottom: 0;
                 left: 0;
-                padding: 32px;
+                padding: 16px;
                 z-index: 9999;
                 @include flexbox();
                 @include justify-content(center);
                 @include align-items(center);
                 gap: 24px;
                 transform-origin: bottom;
-                transform: rotateX(90deg);
-                transition: all 0.3s ease-in-out;
+                transform: translateY(100%);
+                opacity: 0;
+                transition: transform 0.4s ease, opacity 0.4s ease;
                 width: 100%;
                 background: $color-brand-lite;
                 box-shadow: none;
@@ -201,19 +210,23 @@
                 }
             
                 @media #{$max768} {
-                    transform: rotateX(0);
                     z-index: 9999;
                     width: 100%;
                 }
                 &.active{
-                    transform: rotateX(0deg);
+                    transform: translateY(0);
                     width: 100%;
+                    opacity: 1;
+                    @media #{$max768} {
+                        transform: translateY(100%);
+                        opacity: 0;
+                    }
                 }
             
-                &.mobile-active{
-                    .tf-bottom-booking-fields{
-                        @include flexbox();
-                    }
+                &.tf-mobile-booking-form{
+                    transform: translateY(0);
+                    opacity: 1;
+                    width: 100%;
             
                     .tf-booking-popup-btn{
                         display: block;
@@ -271,11 +284,6 @@
                 }
                 
                 .tf-tours-booking-btn {
-                    @media #{$max1024} {
-                        width: 100%;
-                        display: flex;
-                        justify-content: center;
-                    }
                     @media #{$max768} {
                         width: 100%;
                         display: block;
@@ -291,6 +299,7 @@
                     display: flex;
                     @media #{$max768}{
                         justify-content: center;
+                        margin-bottom: 8px;
                     }
                     .tf-booking-form-checkinout{
                         border-right: 1px solid $color-border-lite;

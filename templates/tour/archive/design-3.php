@@ -17,9 +17,7 @@ $tf_map_api = !empty(Helper::tfopt('tf-googlemapapi')) ? Helper::tfopt('tf-googl
 
         <div class="tf-archive-search-form tf-booking-form-wrapper" style="<?php echo !empty($tf_tour_arc_banner) ? 'background-image: url('.esc_url($tf_tour_arc_banner).')' : ''; ?>">
             <div class="tf-container">
-                <form action="<?php echo esc_url(Helper::tf_booking_search_action()); ?>" method="get" autocomplete="off" class="tf_archive_search_result tf-hotel-side-booking tf-booking-form">
-                    <?php Helper::tf_archive_sidebar_search_form('tf_tours'); ?>
-                </form>
+                <?php Helper::tf_archive_sidebar_search_form('tf_tours'); ?>
             </div>
         </div>
 

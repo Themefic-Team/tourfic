@@ -1,0 +1,30 @@
+.elementor-panel #elementor-panel-category-tourfic .elementor-element .icon,
+.elementor-panel #elementor-panel-category-tourfic .elementor-element .title{
+    color:#29306f;
+}
+.elementor-panel #elementor-panel-category-tourfic .elementor-element:hover .icon,
+.elementor-panel #elementor-panel-category-tourfic .elementor-element:hover .title,
+.elementor-panel #elementor-panel-category-tourfic .elementor-element:focus .icon,
+.elementor-panel #elementor-panel-category-tourfic .elementor-element:focus .title {
+    color:#2bc8c7;
+}
+
+.elementor-panel #elementor-panel-category-tourfic .elementor-element .icon {
+    position: relative;
+    -webkit-transition: all .2s;
+    transition: all .2s;
+}
+.elementor-panel .elementor-element .icon .tf:after {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    content: "";
+    background-image: url("../../../assets/app/images/tf-elementor-icon.png");
+    background-repeat: no-repeat;
+    height: 15px;
+    width:15px;
+    /*opacity: .5;*/
+}
+.elementor-panel .elementor-element:hover .icon .tf:after{
+    opacity: 1;
+}

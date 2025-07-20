@@ -18,13 +18,14 @@ class Enqueue {
 	public function __construct() {
 		add_filter( 'wp_enqueue_scripts', array( $this, 'tf_dequeue_scripts' ), 9999 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'tf_enqueue_scripts' ) );
-		// add_action( 'elementor/editor/after_enqueue_scripts', array( $this, 'tf_enqueue_scripts' ) );
+		add_action( 'elementor/editor/before_enqueue_scripts', array( $this, 'elementor_editor_scripts' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'tf_enqueue_admin_scripts' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'tf_dequeue_theplus_script_on_settings_page' ), 9999 );
 
 		add_action( 'admin_enqueue_scripts', array( $this, 'tf_options_admin_enqueue_scripts' ), 9 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'tf_options_wp_enqueue_scripts' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'tf_global_custom_css' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'tf_custom_css_conflicts_resolve' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'tf_required_taxonomies' ) );
 	}
 
@@ -156,7 +157,7 @@ class Enqueue {
 		 * v4.6.13
 		 */
 		if ( $flatpickr_cdn ) {
-			wp_enqueue_style( 'tf-flatpickr', '//cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css', array(), TF_VERSION );
+			wp_enqueue_style( 'tf-flatpickr', '//cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css', array( ), TF_VERSION );
 			wp_enqueue_script( 'tf-flatpickr', '//cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js', array( 'jquery' ), TF_VERSION, true );
 			if ( in_array( $flatpickr_locale, $allowed_locale ) ) {
 				wp_enqueue_script( 'flatpickr-locale', TF_ASSETS_URL . 'app/libs/flatpickr/l10n/' . $flatpickr_locale . '.min.js', array( 'jquery' ), TF_VERSION, true );
@@ -321,7 +322,7 @@ class Enqueue {
 				'wishlist_removed'       => esc_html__( 'Item removed from wishlist', 'tourfic' ),
 				'wishlist_remove_error'  => esc_html__( 'Failed to remove from wishlist!', 'tourfic' ),
 				'field_required'         => esc_html__( 'This field is required!', 'tourfic' ),
-				'adult'                  => esc_html__( 'Adult', 'tourfic' ),
+				'adult'                  => apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) ),
 				'children'               => esc_html__( 'Children', 'tourfic' ),
 				'infant'                 => esc_html__( 'Infant', 'tourfic' ),
 				'room'                   => esc_html__( 'Room', 'tourfic' ),
@@ -1150,6 +1151,25 @@ class Enqueue {
 		}
 	}
 
+	public function tf_custom_css_conflicts_resolve() {
+		$output = '';
+
+		if( wp_get_theme() && wp_get_theme()->get( 'TextDomain' ) === 'hello-elementor' ) {
+			$output .= <<<'EOD'
+			/* Fix for Hello Elementor theme flatpicker conflict */
+
+			.flatpickr-months .flatpickr-current-month {
+				display: flex;
+				gap: 8px;
+			}
+			EOD;
+		}
+
+		if (wp_style_is('tf-app-style', 'enqueued')) {
+			wp_add_inline_style('tf-app-style', apply_filters('tf-custom-css-conflict-resolve', $output));
+		}
+	}
+
 	function tf_required_taxonomies( $hook ) {
 		if ( ! in_array( $hook, array( 'post.php', 'post-new.php' ) ) ) {
 			return;
@@ -1263,6 +1283,23 @@ class Enqueue {
 
 	}
 
+	/**
+	 * Elementor editor scripts
+	 */
+	function elementor_editor_scripts() {
+		wp_enqueue_style(
+			'tf-elementor-editor',
+			TF_ASSETS_URL . 'admin/css/tf-elementor.css',
+			null,
+			TF_VERSION
+		);
 
-
+		// wp_enqueue_script(
+		// 	'tf-elementor-editor',
+		// 	TF_ASSETS_URL . 'admin/js/tf-elementor-editor.js',
+		// 	[ 'elementor-editor', 'jquery' ],
+		// 	TF_VERSION,
+		// 	true
+		// );
+	}
 }

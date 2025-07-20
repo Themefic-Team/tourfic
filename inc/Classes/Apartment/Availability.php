@@ -72,7 +72,7 @@ class Availability {
 
 					$date_stt = strtotime($key);
 
-					if( $date_stt > $check_in_stt && $date_stt <= $check_out_stt && $single_avail['status'] === 'available' ) {
+					if( $date_stt >= $check_in_stt && $date_stt < $check_out_stt && $single_avail['status'] === 'available' ) {
 
 						if ( $pricing_type === 'per_night' ) {
 							// $prices[] = $date_stt > $check_in_stt && $date_stt < $check_out_stt;

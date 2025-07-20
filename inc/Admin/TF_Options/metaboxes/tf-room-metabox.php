@@ -4,7 +4,9 @@ defined( 'ABSPATH' ) || exit;
 $badge_up     = '<div class="tf-csf-badge"><span class="tf-upcoming">' . __( "Upcoming", "tourfic" ) . '</span></div>';
 $badge_pro    = '<div class="tf-csf-badge"><span class="tf-pro">' . __( "Pro Feature", "tourfic" ) . '</span></div>';
 $badge_up_pro = '<div class="tf-csf-badge"><span class="tf-upcoming">' . __( "Upcoming", "tourfic" ) . '</span><span class="tf-pro">' . __( "Pro Feature", "tourfic" ) . '</span></div>';
-
+$hotel_name = apply_filters( 'tf_hotel_post_type_name_change_singular', esc_html__( 'Hotel', 'tourfic' ) );
+$hotels_name = apply_filters( 'tf_hotel_post_type_name_change_plural', esc_html__( 'Hotels', 'tourfic' ) );
+$adults_name = apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) );
 
 TF_Metabox::metabox( 'tf_room_opt', array(
 	'title'     => 'Room Settings',
@@ -27,8 +29,8 @@ TF_Metabox::metabox( 'tf_room_opt', array(
 					'id'          => 'tf_hotel',
 					'type'        => 'select2',
 					'placeholder' => __( 'Select a Hotel', 'tourfic' ),
-					'label'       => __( 'Select Hotel (Required)', 'tourfic' ),
-					'subtitle'    => __( 'Select the hotel where this room will be added', 'tourfic' ),
+					'label'       => __( 'Select ' . $hotel_name . ' (Required)', 'tourfic' ),
+					'subtitle'    => __( 'Select the '. strtolower($hotel_name) . ' where this room will be added', 'tourfic' ),
 					'options'     => 'posts',
 					'query_args'  => array(
 						'post_type'      => 'tf_hotel',
@@ -96,8 +98,8 @@ TF_Metabox::metabox( 'tf_room_opt', array(
                 array(
                     'id'          => 'adult',
                     'type'        => 'number',
-                    'label'       => __( 'Number of Adults', 'tourfic' ),
-                    'subtitle'    => __( 'Max number of adults allowed in the room.', 'tourfic' ),
+                    'label'       => __( 'Number of ' . $adults_name .'s', 'tourfic' ),
+                    'subtitle'    => __( 'Max number of '. strtolower($adults_name) .'s allowed in the room.', 'tourfic' ),
                     'attributes'  => array(
                         'min' => '0',
                     ),
@@ -109,6 +111,7 @@ TF_Metabox::metabox( 'tf_room_opt', array(
                     'type'        => 'number',
                     'label'       => __( 'Number of Child', 'tourfic' ),
                     'subtitle'    => __( 'Max number of children allowed in the room.', 'tourfic' ),
+                    'class'       => 'tf_room_child_field',
                     'attributes'  => array(
                         'min' => '0',
                     ),
@@ -121,6 +124,7 @@ TF_Metabox::metabox( 'tf_room_opt', array(
                     'label'       => __( 'Child age limit', 'tourfic' ),
                     'subtitle'    => __( 'Maximum age of a children.', 'tourfic' ),
                     'description' => __( 'keep blank if don\'t want to add', 'tourfic' ),
+                    'class'       => 'tf_room_child_age_field',
                     'attributes'  => array(
                         'min' => '0',
                     ),
@@ -232,7 +236,7 @@ TF_Metabox::metabox( 'tf_room_opt', array(
                 array(
                     'id'          => '',
                     'type'        => 'text',
-                    'label'       => __( 'Price per Adult', 'tourfic' ),
+                    'label'       => __( 'Price per ' . $adults_name, 'tourfic' ),
                     'is_pro'      => true,
                     'dependency'  => array( 'pricing-by', '==', '2' ),
                     'field_width' => 50,

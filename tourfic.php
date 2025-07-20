@@ -7,11 +7,11 @@
  * Author URI:      https://themefic.com
  * Text Domain:     tourfic
  * Domain Path:     /lang/
- * Version:         2.16.2
+ * Version:         2.16.9
  * Tested up to:    6.8
- * WC tested up to: 9.8
+ * WC tested up to: 9.9
  * Requires PHP:    7.4
- * Elementor tested up to: 3.28
+ * Elementor tested up to: 3.29
  */
 
 // Don't load directly
@@ -25,7 +25,7 @@ final class Tourfic {
 	 * @var string
 	 */
 
-	const VERSION = '2.16.2';
+	const VERSION = '2.16.9';
 
 	/**
 	 * Minimum PHP version required.
@@ -63,10 +63,9 @@ final class Tourfic {
 		if ( is_null( self::$_instance ) ) {
 			self::$_instance = new self();
 		}
-
 		return self::$_instance;
 	}
-
+	
 	/**
 	 * Tourfic Constructor.
 	 */
@@ -247,6 +246,6 @@ function tf_active_template_settings_callback() {
 	//all code goes here if need
 	update_option( 'tourfic_template_installed', true );
 }
-
+ 
 //Register activation hook
 register_activation_hook( __FILE__, 'tf_active_template_settings_callback' );
