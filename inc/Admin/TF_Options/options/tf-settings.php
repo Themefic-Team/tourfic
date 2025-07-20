@@ -1788,14 +1788,9 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'    => 'label_off_heading',
 					'type'  => 'heading',
-					'label' => __( 'Operating Hours Settings', 'tourfic' ),
-					'subtitle'   => __( 'These options can be overridden from Operating Hours Settings.', 'tourfic' ),
-				),
-
-				array(
-					'id'      => 'apartment-option-notice',
-					'type'    => 'notice',
-					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/settings/car-options/#Single_Page_Settings" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+					'title' => __( 'Operating Hours Settings', 'tourfic' ),
+					'content'   => __( 'These options can be overridden from Operating Hours Settings.', 'tourfic' ),
+					'docs'  => esc_url('https://themefic.com/docs/tourfic/settings/car-options/#Single_Page_Settings')
 				),
 
 				array(
