@@ -183,6 +183,13 @@
             // Firefox scrollbar styling
             scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
             scrollbar-width: thin;
+            .tf-date-time-selection{
+                border: 0px solid;
+                padding: 0px;
+                .tf-field-select{
+                    width: calc(100% - 2px) !important;
+                }
+            }
         }
 
         .tf-repeater .tf-repeater-add .tf-repeater-icon{
@@ -249,13 +256,22 @@
         padding: 40px;
         background-color: $color-white;
         border-radius: 10px;
-        h3{
-            margin: 0 0 35px 0;
+        .tf-confirmation-header{
+            display: flex;
+            gap: 8px;
+            h3{
+                margin: 0 0 35px 0;
+            }
+            .tf_tour_bulk_close{
+                svg{
+                    cursor: pointer;
+                }
+            }
         }
         .tf-confirmation-actions{
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            gap: 16px;
             button{
                 border-radius: 8px;
                 background: $tf_fill_alternative;
@@ -278,24 +294,6 @@
 
 // Tour Calender
 .tf-tour-cal-wrap{
-    position: relative;
-    .tf-tour-sync-btn{
-        position: absolute;
-        right: 134px;
-        top: 26px;
-        .sync-icon{
-            border-radius: 8px;
-            border: 0.5px solid $tf_border_faint;
-            background: $tf_fill_white;
-            padding: 8px;
-            cursor: pointer;
-            height: 32px;
-            box-sizing: border-box;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-    }
     .tf-tour-cal{
         border-radius: 8px;
         border: 1px solid $tf_border_faint;
@@ -306,7 +304,7 @@
             .fc-toolbar-title{
                 padding: 0 !important;
                 color: $tf_text_title;
-                font-size: 15px;
+                font-size: 15px !important;
                 font-weight: 600;
                 line-height: 24px;
             }
@@ -322,6 +320,8 @@
                     background-color: transparent;
                     border: 0px;
                     padding: 0;
+                    position: relative;
+                    top: -1px;
                     .fc-icon-chevron-left::before,
                     .fc-icon-chevron-right::before {
                         color: $tf_text_paragraph;
@@ -474,6 +474,16 @@
         border-radius: 8px;
         border: 1px solid $tf_border_faint;
         background: $tf_fill_white;
+        .tf-repeater-wrap{
+            .tf-single-repeater{
+                &:last-child{
+                    margin-bottom: 0px;
+                }
+                .tf-repeater-content-wrap{
+                    padding-left: 0px;
+                }
+            }
+        }
         .tf-field-accordion{
             .tf-fieldset{
                 display: flex;

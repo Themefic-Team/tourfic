@@ -17,18 +17,48 @@
         * window url on change tab click
         * @author: Foysal
         */
+
+        function activateTabFromHash(hash = '') {
+            if (!hash) {
+                hash = window.location.hash;
+            }
+    
+            let slug = hash.replace('#tab=', '');
+    
+            if (slug) {
+                let selectedTab = $('.tf-tablinks[data-tab="' + slug + '"]');
+                let selectedContent = $('#' + slug);
+    
+                if (selectedTab.length && selectedContent.length) {
+                    $('.tf-admin-tab .tf-tablinks').removeClass('active');
+                    $('.tf-tab-wrapper .tf-tab-content').removeClass('active');
+                    selectedTab.addClass('active');
+                    selectedContent.addClass('active');
+                }
+            }
+        }
+    
+        // Save current tab hash before post update
+        $('.post-type-tf_tours #post, .post-type-tf_hotel #post, .post-type-tf_room #post, .post-type-tf_apartment #post, .post-type-tf_carrental #post, .post-type-tf_email_templates #post').on('submit', function () {
+            localStorage.setItem('tf_saved_tab_hash', window.location.hash);
+        });
+    
+        // Restore saved hash and activate tab
+        let savedHash = localStorage.getItem('tf_saved_tab_hash');
+        if (savedHash) {
+            localStorage.removeItem('tf_saved_tab_hash');
+            window.location.hash = savedHash;
+            activateTabFromHash(savedHash);
+        } else {
+            // Run on initial page load
+            activateTabFromHash();
+        }
+
+        
+        
         $(window).on('hashchange load', function () {
             let hash = window.location.hash;
             let query = window.location.search;
-            let slug = hash.replace('#tab=', '');
-
-            if (hash) {
-                let selectedTab = $('.tf-tablinks[data-tab="' + slug + '"]'),
-                    parentDiv = selectedTab.closest('.tf-admin-tab-item');
-
-                selectedTab.trigger('click');
-                parentDiv.trigger('click');
-            }
 
             if (query.indexOf('dashboard') > -1) {
                 let submenu = $("#toplevel_page_tf_settings").find(".wp-submenu");
@@ -1876,11 +1906,21 @@
             });
         });
 
-        $(document).on("click", ".tf-reset-confirmation-box .tf-cancel-btn", function (e) {
+        $(document).on("click", ".tf-reset-confirmation-box .tf-cancel-btn, .tf-reset-confirmation-box .tf_tour_bulk_close svg", function (e) {
             e.preventDefault();
             $('.tf-reset-confirmation-box').hide();
         });
 
+        $(document).on("click", ".tf-reset-confirmation-box", function (e) {
+            if (!$(e.target).closest('.tf-confirmation-content').length) {
+                $(this).hide(); // Hide the popup
+            }
+        });
+
+        // add pacakge
+        $(document).on("click", ".tf-repeater-add-package_pricing", function (e) {
+            $(this).hide(); // Hide the popup
+        });
         // Save Package
         $(document).on('click', ".tf_tour_package_save", function(e) {
             e.preventDefault();
@@ -2012,6 +2052,7 @@
                 if (response.success) {
                     $repeater.find(' > .tf-repeater-header .tf-repeater-title').html(packageData.pack_title);
                     $repeater.find('.tf-repeater-content-wrap').hide();
+                    $('.tf-repeater-add-package_pricing').show();
                     notyf.success('Package saved successfully!');
                 } else {
                     notyf.error('There is an error!');
@@ -2041,12 +2082,6 @@
             if ($this.attr('data-tab')=='availability'){
                 tfTourCalendar();
             }
-        });
-
-        // Calendar Sync
-        $(document).on("click", ".tf-tour-cal-wrap .tf-tour-sync-btn .sync-icon", function (e) {
-            e.preventDefault();
-            tfTourCalendar();
         });
 
         // Bulk Popup Open
@@ -2540,10 +2575,12 @@
         // Repeater Pacakge Cancel
         $(document).on('click', '.tf-action-button-group .tf_tour_package_cancel', function () {
             $(this).closest('.tf-repeater-content-wrap').hide();
+            $('.tf-repeater-add-package_pricing').show();
         });
 
         $(document).on('click', '.tf-action-button-group .tf_tour_package_deleted', function () {
             $(this).closest('.tf-single-repeater').empty();
+            $('.tf-repeater-add-package_pricing').show();
         });
 
         // Repeater show hide

@@ -4,7 +4,7 @@
     border-radius: 8px;
     border: 1px solid $tf_border_faint;
     background: $tf_fill_white;
-    padding: 16px;
+    padding: 16px 16px 16px 0px;
   }
   .tf-field-repeater-desc{
     margin-bottom: 16px;
@@ -124,6 +124,7 @@
     }
 
     .tf-repeater-add {
+      margin-left: 16px;
       .tf-repeater-icon {
         color: $tf_primary_default;
         font-size: 15px;
