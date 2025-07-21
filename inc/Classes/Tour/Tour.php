@@ -376,6 +376,7 @@ class Tour {
 												<div class="person-sep"></div>
 												<div class="infant-text"><?php esc_html_e( '0 Infant', 'tourfic' ); ?></div>
 											<?php } ?>
+											<?php do_action( 'tf_tour_search_form_after_person_text' ); ?>
 										</div>
 										<div class="tf_acrselection-wrap">
 											<div class="tf_acrselection-inner">
@@ -410,6 +411,7 @@ class Tour {
 														</div>
 													</div>
 												<?php } ?>
+												<?php do_action( 'tf_tour_search_form_after_person_selection' ); ?>
 											</div>
 										</div>
 									</div>
@@ -781,6 +783,7 @@ class Tour {
                                 <div class="person-sep"></div>
                                 <div class="infant-text"><?php esc_html_e( '0 Infant', 'tourfic' ); ?></div>
 							<?php } ?>
+							<?php do_action( 'tf_tour_search_form_after_person_text' ); ?>
                         </div>
                         <div class="tf_acrselection-wrap">
                             <div class="tf_acrselection-inner">
@@ -815,6 +818,7 @@ class Tour {
                                         </div>
                                     </div>
 								<?php } ?>
+								<?php do_action( 'tf_tour_search_form_after_person_selection' ); ?>
                             </div>
                         </div>
                     </div>
