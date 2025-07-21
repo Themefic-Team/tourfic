@@ -5338,23 +5338,55 @@ a.tf-import-btn, a.tf-export-btn {
   color: #FFFFFF;
 }
 
-.tf-tour-cal-wrap .tf-tour-cal {
+.tf-tour-cal-wrap .tf-tour-cal,
+.tf-tour-cal-wrap .tf-apt-cal,
+.tf-tour-cal-wrap .tf-room-cal,
+.tf-apt-cal-wrap .tf-tour-cal,
+.tf-apt-cal-wrap .tf-apt-cal,
+.tf-apt-cal-wrap .tf-room-cal,
+.tf-room-cal-wrap .tf-tour-cal,
+.tf-room-cal-wrap .tf-apt-cal,
+.tf-room-cal-wrap .tf-room-cal {
   border-radius: 8px;
   border: 1px solid #F2F5F7;
   background: #FFFFFF;
   padding: 24px;
 }
-.tf-tour-cal-wrap .tf-tour-cal .fc-header-toolbar {
+.tf-tour-cal-wrap .tf-tour-cal .fc-header-toolbar,
+.tf-tour-cal-wrap .tf-apt-cal .fc-header-toolbar,
+.tf-tour-cal-wrap .tf-room-cal .fc-header-toolbar,
+.tf-apt-cal-wrap .tf-tour-cal .fc-header-toolbar,
+.tf-apt-cal-wrap .tf-apt-cal .fc-header-toolbar,
+.tf-apt-cal-wrap .tf-room-cal .fc-header-toolbar,
+.tf-room-cal-wrap .tf-tour-cal .fc-header-toolbar,
+.tf-room-cal-wrap .tf-apt-cal .fc-header-toolbar,
+.tf-room-cal-wrap .tf-room-cal .fc-header-toolbar {
   margin-bottom: 16px;
 }
-.tf-tour-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-toolbar-title {
+.tf-tour-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-toolbar-title,
+.tf-tour-cal-wrap .tf-apt-cal .fc-header-toolbar .fc-toolbar-title,
+.tf-tour-cal-wrap .tf-room-cal .fc-header-toolbar .fc-toolbar-title,
+.tf-apt-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-toolbar-title,
+.tf-apt-cal-wrap .tf-apt-cal .fc-header-toolbar .fc-toolbar-title,
+.tf-apt-cal-wrap .tf-room-cal .fc-header-toolbar .fc-toolbar-title,
+.tf-room-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-toolbar-title,
+.tf-room-cal-wrap .tf-apt-cal .fc-header-toolbar .fc-toolbar-title,
+.tf-room-cal-wrap .tf-room-cal .fc-header-toolbar .fc-toolbar-title {
   padding: 0 !important;
   color: #27333F;
   font-size: 15px !important;
   font-weight: 600;
   line-height: 24px;
 }
-.tf-tour-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group {
+.tf-tour-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group,
+.tf-tour-cal-wrap .tf-apt-cal .fc-header-toolbar .fc-button-group,
+.tf-tour-cal-wrap .tf-room-cal .fc-header-toolbar .fc-button-group,
+.tf-apt-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group,
+.tf-apt-cal-wrap .tf-apt-cal .fc-header-toolbar .fc-button-group,
+.tf-apt-cal-wrap .tf-room-cal .fc-header-toolbar .fc-button-group,
+.tf-room-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group,
+.tf-room-cal-wrap .tf-apt-cal .fc-header-toolbar .fc-button-group,
+.tf-room-cal-wrap .tf-room-cal .fc-header-toolbar .fc-button-group {
   border-radius: 8px;
   border: 0.5px solid #F2F5F7;
   background: #FFFFFF;
@@ -5363,7 +5395,15 @@ a.tf-import-btn, a.tf-export-btn {
   height: 32px;
   align-items: center;
 }
-.tf-tour-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group .fc-button {
+.tf-tour-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group .fc-button,
+.tf-tour-cal-wrap .tf-apt-cal .fc-header-toolbar .fc-button-group .fc-button,
+.tf-tour-cal-wrap .tf-room-cal .fc-header-toolbar .fc-button-group .fc-button,
+.tf-apt-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group .fc-button,
+.tf-apt-cal-wrap .tf-apt-cal .fc-header-toolbar .fc-button-group .fc-button,
+.tf-apt-cal-wrap .tf-room-cal .fc-header-toolbar .fc-button-group .fc-button,
+.tf-room-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group .fc-button,
+.tf-room-cal-wrap .tf-apt-cal .fc-header-toolbar .fc-button-group .fc-button,
+.tf-room-cal-wrap .tf-room-cal .fc-header-toolbar .fc-button-group .fc-button {
   background-color: transparent;
   border: 0px;
   padding: 0;
@@ -5371,17 +5411,57 @@ a.tf-import-btn, a.tf-export-btn {
   top: -1px;
 }
 .tf-tour-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group .fc-button .fc-icon-chevron-left::before,
-.tf-tour-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group .fc-button .fc-icon-chevron-right::before {
+.tf-tour-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group .fc-button .fc-icon-chevron-right::before,
+.tf-tour-cal-wrap .tf-apt-cal .fc-header-toolbar .fc-button-group .fc-button .fc-icon-chevron-left::before,
+.tf-tour-cal-wrap .tf-apt-cal .fc-header-toolbar .fc-button-group .fc-button .fc-icon-chevron-right::before,
+.tf-tour-cal-wrap .tf-room-cal .fc-header-toolbar .fc-button-group .fc-button .fc-icon-chevron-left::before,
+.tf-tour-cal-wrap .tf-room-cal .fc-header-toolbar .fc-button-group .fc-button .fc-icon-chevron-right::before,
+.tf-apt-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group .fc-button .fc-icon-chevron-left::before,
+.tf-apt-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group .fc-button .fc-icon-chevron-right::before,
+.tf-apt-cal-wrap .tf-apt-cal .fc-header-toolbar .fc-button-group .fc-button .fc-icon-chevron-left::before,
+.tf-apt-cal-wrap .tf-apt-cal .fc-header-toolbar .fc-button-group .fc-button .fc-icon-chevron-right::before,
+.tf-apt-cal-wrap .tf-room-cal .fc-header-toolbar .fc-button-group .fc-button .fc-icon-chevron-left::before,
+.tf-apt-cal-wrap .tf-room-cal .fc-header-toolbar .fc-button-group .fc-button .fc-icon-chevron-right::before,
+.tf-room-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group .fc-button .fc-icon-chevron-left::before,
+.tf-room-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group .fc-button .fc-icon-chevron-right::before,
+.tf-room-cal-wrap .tf-apt-cal .fc-header-toolbar .fc-button-group .fc-button .fc-icon-chevron-left::before,
+.tf-room-cal-wrap .tf-apt-cal .fc-header-toolbar .fc-button-group .fc-button .fc-icon-chevron-right::before,
+.tf-room-cal-wrap .tf-room-cal .fc-header-toolbar .fc-button-group .fc-button .fc-icon-chevron-left::before,
+.tf-room-cal-wrap .tf-room-cal .fc-header-toolbar .fc-button-group .fc-button .fc-icon-chevron-right::before {
   color: #566676;
 }
-.tf-tour-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group .fc-button:focus {
+.tf-tour-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group .fc-button:focus,
+.tf-tour-cal-wrap .tf-apt-cal .fc-header-toolbar .fc-button-group .fc-button:focus,
+.tf-tour-cal-wrap .tf-room-cal .fc-header-toolbar .fc-button-group .fc-button:focus,
+.tf-apt-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group .fc-button:focus,
+.tf-apt-cal-wrap .tf-apt-cal .fc-header-toolbar .fc-button-group .fc-button:focus,
+.tf-apt-cal-wrap .tf-room-cal .fc-header-toolbar .fc-button-group .fc-button:focus,
+.tf-room-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group .fc-button:focus,
+.tf-room-cal-wrap .tf-apt-cal .fc-header-toolbar .fc-button-group .fc-button:focus,
+.tf-room-cal-wrap .tf-room-cal .fc-header-toolbar .fc-button-group .fc-button:focus {
   outline: none;
   box-shadow: none;
 }
-.tf-tour-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group .fc-button.fc-next-button {
+.tf-tour-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group .fc-button.fc-next-button,
+.tf-tour-cal-wrap .tf-apt-cal .fc-header-toolbar .fc-button-group .fc-button.fc-next-button,
+.tf-tour-cal-wrap .tf-room-cal .fc-header-toolbar .fc-button-group .fc-button.fc-next-button,
+.tf-apt-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group .fc-button.fc-next-button,
+.tf-apt-cal-wrap .tf-apt-cal .fc-header-toolbar .fc-button-group .fc-button.fc-next-button,
+.tf-apt-cal-wrap .tf-room-cal .fc-header-toolbar .fc-button-group .fc-button.fc-next-button,
+.tf-room-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group .fc-button.fc-next-button,
+.tf-room-cal-wrap .tf-apt-cal .fc-header-toolbar .fc-button-group .fc-button.fc-next-button,
+.tf-room-cal-wrap .tf-room-cal .fc-header-toolbar .fc-button-group .fc-button.fc-next-button {
   position: relative;
 }
-.tf-tour-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group .fc-button.fc-next-button::after {
+.tf-tour-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group .fc-button.fc-next-button::after,
+.tf-tour-cal-wrap .tf-apt-cal .fc-header-toolbar .fc-button-group .fc-button.fc-next-button::after,
+.tf-tour-cal-wrap .tf-room-cal .fc-header-toolbar .fc-button-group .fc-button.fc-next-button::after,
+.tf-apt-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group .fc-button.fc-next-button::after,
+.tf-apt-cal-wrap .tf-apt-cal .fc-header-toolbar .fc-button-group .fc-button.fc-next-button::after,
+.tf-apt-cal-wrap .tf-room-cal .fc-header-toolbar .fc-button-group .fc-button.fc-next-button::after,
+.tf-room-cal-wrap .tf-tour-cal .fc-header-toolbar .fc-button-group .fc-button.fc-next-button::after,
+.tf-room-cal-wrap .tf-apt-cal .fc-header-toolbar .fc-button-group .fc-button.fc-next-button::after,
+.tf-room-cal-wrap .tf-room-cal .fc-header-toolbar .fc-button-group .fc-button.fc-next-button::after {
   position: absolute;
   content: "";
   width: 8px;
@@ -5391,58 +5471,162 @@ a.tf-import-btn, a.tf-export-btn {
   left: -14px;
   top: 8.5px;
 }
-.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table {
+.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table,
+.tf-tour-cal-wrap .tf-apt-cal .fc-view-harness table,
+.tf-tour-cal-wrap .tf-room-cal .fc-view-harness table,
+.tf-apt-cal-wrap .tf-tour-cal .fc-view-harness table,
+.tf-apt-cal-wrap .tf-apt-cal .fc-view-harness table,
+.tf-apt-cal-wrap .tf-room-cal .fc-view-harness table,
+.tf-room-cal-wrap .tf-tour-cal .fc-view-harness table,
+.tf-room-cal-wrap .tf-apt-cal .fc-view-harness table,
+.tf-room-cal-wrap .tf-room-cal .fc-view-harness table {
   border: 0px;
 }
-.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header th {
+.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header th,
+.tf-tour-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-header th,
+.tf-tour-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-header th,
+.tf-apt-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header th,
+.tf-apt-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-header th,
+.tf-apt-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-header th,
+.tf-room-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header th,
+.tf-room-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-header th,
+.tf-room-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-header th {
   border: 0px;
 }
-.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header {
+.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header,
+.tf-tour-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header,
+.tf-tour-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header,
+.tf-apt-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header,
+.tf-apt-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header,
+.tf-apt-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header,
+.tf-room-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header,
+.tf-room-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header,
+.tf-room-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header {
   border-top: 0.5px solid #F2F5F7;
   margin-bottom: 16px !important;
 }
-.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header tr th {
+.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header tr th,
+.tf-tour-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header tr th,
+.tf-tour-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header tr th,
+.tf-apt-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header tr th,
+.tf-apt-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header tr th,
+.tf-apt-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header tr th,
+.tf-room-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header tr th,
+.tf-room-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header tr th,
+.tf-room-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header tr th {
   border: 0px;
   padding-top: 12px;
 }
-.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header tr th a {
+.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header tr th a,
+.tf-tour-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header tr th a,
+.tf-tour-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header tr th a,
+.tf-apt-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header tr th a,
+.tf-apt-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header tr th a,
+.tf-apt-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header tr th a,
+.tf-room-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header tr th a,
+.tf-room-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header tr th a,
+.tf-room-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header tr th a {
   color: #27333F;
   font-size: 13px;
   font-weight: 400;
   line-height: 20px;
   padding: 0;
 }
-.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body > td {
+.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body > td,
+.tf-tour-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-body > td,
+.tf-tour-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-body > td,
+.tf-apt-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body > td,
+.tf-apt-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-body > td,
+.tf-apt-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-body > td,
+.tf-room-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body > td,
+.tf-room-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-body > td,
+.tf-room-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-body > td {
   border: 0px solid;
 }
-.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr {
+.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr,
+.tf-tour-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr,
+.tf-tour-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr,
+.tf-apt-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr,
+.tf-apt-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr,
+.tf-apt-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr,
+.tf-room-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr,
+.tf-room-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr,
+.tf-room-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr {
   display: flex;
   gap: 8px;
   margin-bottom: 8px;
 }
-.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr:last-child {
+.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr:last-child,
+.tf-tour-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr:last-child,
+.tf-tour-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr:last-child,
+.tf-apt-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr:last-child,
+.tf-apt-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr:last-child,
+.tf-apt-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr:last-child,
+.tf-room-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr:last-child,
+.tf-room-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr:last-child,
+.tf-room-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr:last-child {
   margin-bottom: 0px;
 }
-.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td {
+.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td,
+.tf-tour-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td,
+.tf-tour-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td,
+.tf-apt-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td,
+.tf-apt-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td,
+.tf-apt-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td,
+.tf-room-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td,
+.tf-room-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td,
+.tf-room-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td {
   width: calc((100% - 48px) / 7);
   border-radius: 8px;
   border: 0.5px solid #F2F5F7;
   background: #FFFFFF;
 }
-.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td.fc-day-today {
+.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td.fc-day-today,
+.tf-tour-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td.fc-day-today,
+.tf-tour-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td.fc-day-today,
+.tf-apt-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td.fc-day-today,
+.tf-apt-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td.fc-day-today,
+.tf-apt-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td.fc-day-today,
+.tf-room-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td.fc-day-today,
+.tf-room-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td.fc-day-today,
+.tf-room-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td.fc-day-today {
   background-color: rgba(255, 220, 40, 0.15);
 }
-.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-daygrid-day-top {
+.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-daygrid-day-top,
+.tf-tour-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-daygrid-day-top,
+.tf-tour-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-daygrid-day-top,
+.tf-apt-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-daygrid-day-top,
+.tf-apt-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-daygrid-day-top,
+.tf-apt-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-daygrid-day-top,
+.tf-room-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-daygrid-day-top,
+.tf-room-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-daygrid-day-top,
+.tf-room-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-daygrid-day-top {
   flex-direction: row;
 }
-.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-daygrid-day-top a {
+.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-daygrid-day-top a,
+.tf-tour-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-daygrid-day-top a,
+.tf-tour-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-daygrid-day-top a,
+.tf-apt-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-daygrid-day-top a,
+.tf-apt-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-daygrid-day-top a,
+.tf-apt-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-daygrid-day-top a,
+.tf-room-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-daygrid-day-top a,
+.tf-room-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-daygrid-day-top a,
+.tf-room-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-daygrid-day-top a {
   padding: 8px;
   color: #27333F;
   font-size: 15px;
   font-weight: 600;
   line-height: 24px;
 }
-.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-h-event {
+.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-h-event,
+.tf-tour-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-h-event,
+.tf-tour-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-h-event,
+.tf-apt-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-h-event,
+.tf-apt-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-h-event,
+.tf-apt-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-h-event,
+.tf-room-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-h-event,
+.tf-room-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-h-event,
+.tf-room-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-h-event {
   border-radius: 4px;
   border: 0px;
   border-left: 1px solid #002AB3;
@@ -5451,13 +5635,40 @@ a.tf-import-btn, a.tf-export-btn {
   padding-bottom: 6px;
   padding-left: 8px;
 }
-.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-h-event .fc-event-title {
+.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-h-event .fc-event-title,
+.tf-tour-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-h-event .fc-event-title,
+.tf-tour-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-h-event .fc-event-title,
+.tf-apt-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-h-event .fc-event-title,
+.tf-apt-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-h-event .fc-event-title,
+.tf-apt-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-h-event .fc-event-title,
+.tf-room-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-h-event .fc-event-title,
+.tf-room-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-h-event .fc-event-title,
+.tf-room-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-body .fc-daygrid-body .fc-scrollgrid-sync-table tbody tr td .fc-h-event .fc-event-title {
   color: #002AB3;
   font-size: 11px;
   font-weight: 600;
   line-height: 16px;
 }
-.tf-tour-cal-wrap .tf-date-time-selection {
+.tf-tour-cal-wrap .tf-apt-cal-field,
+.tf-tour-cal-wrap .tf-room-cal-field,
+.tf-apt-cal-wrap .tf-apt-cal-field,
+.tf-apt-cal-wrap .tf-room-cal-field,
+.tf-room-cal-wrap .tf-apt-cal-field,
+.tf-room-cal-wrap .tf-room-cal-field {
+  border-radius: 8px;
+  border: 1px solid #F2F5F7;
+  background: #FFFFFF;
+  padding: 24px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  box-sizing: border-box;
+  justify-content: space-between;
+}
+.tf-tour-cal-wrap .tf-date-time-selection,
+.tf-apt-cal-wrap .tf-date-time-selection,
+.tf-room-cal-wrap .tf-date-time-selection {
   border-radius: 8px;
   border: 1px solid #F2F5F7;
   background: #FFFFFF;
@@ -5467,69 +5678,101 @@ a.tf-import-btn, a.tf-export-btn {
   flex-wrap: wrap;
   gap: 24px;
 }
-.tf-tour-cal-wrap .tf-date-time-selection .tf-field-repeater {
+.tf-tour-cal-wrap .tf-date-time-selection .tf-field-repeater,
+.tf-apt-cal-wrap .tf-date-time-selection .tf-field-repeater,
+.tf-room-cal-wrap .tf-date-time-selection .tf-field-repeater {
   border: 0;
   padding: 0;
   margin: 0;
 }
-.tf-tour-cal-wrap .tf-date-time-selection .tf-field-repeater .tf-repeater-content-wrap {
+.tf-tour-cal-wrap .tf-date-time-selection .tf-field-repeater .tf-repeater-content-wrap,
+.tf-apt-cal-wrap .tf-date-time-selection .tf-field-repeater .tf-repeater-content-wrap,
+.tf-room-cal-wrap .tf-date-time-selection .tf-field-repeater .tf-repeater-content-wrap {
   padding: 0 1px 0 0;
   flex-wrap: nowrap;
   align-items: center;
   gap: 16px;
 }
-.tf-tour-cal-wrap .tf-date-time-selection .tf-field-repeater .tf-repeater-content-wrap .tf-field {
+.tf-tour-cal-wrap .tf-date-time-selection .tf-field-repeater .tf-repeater-content-wrap .tf-field,
+.tf-apt-cal-wrap .tf-date-time-selection .tf-field-repeater .tf-repeater-content-wrap .tf-field,
+.tf-room-cal-wrap .tf-date-time-selection .tf-field-repeater .tf-repeater-content-wrap .tf-field {
   padding: 0;
 }
-.tf-tour-cal-wrap .tf-date-time-selection .tf-field-repeater .tf-repeater-content-wrap .tf-repeater-icon-delete {
+.tf-tour-cal-wrap .tf-date-time-selection .tf-field-repeater .tf-repeater-content-wrap .tf-repeater-icon-delete,
+.tf-apt-cal-wrap .tf-date-time-selection .tf-field-repeater .tf-repeater-content-wrap .tf-repeater-icon-delete,
+.tf-room-cal-wrap .tf-date-time-selection .tf-field-repeater .tf-repeater-content-wrap .tf-repeater-icon-delete {
   cursor: pointer;
 }
-.tf-tour-cal-wrap .tf-field-group-box {
+.tf-tour-cal-wrap .tf-field-group-box,
+.tf-apt-cal-wrap .tf-field-group-box,
+.tf-room-cal-wrap .tf-field-group-box {
   padding: 24px;
   border-radius: 8px;
   border: 1px solid #F2F5F7;
   background: #FFFFFF;
 }
-.tf-tour-cal-wrap .tf-field-group-box .tf-fieldset {
+.tf-tour-cal-wrap .tf-field-group-box .tf-fieldset,
+.tf-apt-cal-wrap .tf-field-group-box .tf-fieldset,
+.tf-room-cal-wrap .tf-field-group-box .tf-fieldset {
   display: flex;
   gap: 16px;
   flex-wrap: wrap;
 }
-.tf-tour-cal-wrap .tf-field-group-box .tf-fieldset .tf-field {
+.tf-tour-cal-wrap .tf-field-group-box .tf-fieldset .tf-field,
+.tf-apt-cal-wrap .tf-field-group-box .tf-fieldset .tf-field,
+.tf-room-cal-wrap .tf-field-group-box .tf-fieldset .tf-field {
   padding: 0;
 }
-.tf-tour-cal-wrap .tf-package-field-repeater {
+.tf-tour-cal-wrap .tf-package-field-repeater,
+.tf-apt-cal-wrap .tf-package-field-repeater,
+.tf-room-cal-wrap .tf-package-field-repeater {
   padding: 24px;
   border-radius: 8px;
   border: 1px solid #F2F5F7;
   background: #FFFFFF;
 }
-.tf-tour-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater:last-child {
+.tf-tour-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater:last-child,
+.tf-apt-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater:last-child,
+.tf-room-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater:last-child {
   margin-bottom: 0px;
 }
-.tf-tour-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-content-wrap {
+.tf-tour-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-content-wrap,
+.tf-apt-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-content-wrap,
+.tf-room-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-content-wrap {
   padding-left: 0px;
 }
-.tf-tour-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset {
+.tf-tour-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset,
+.tf-apt-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset,
+.tf-room-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset {
   display: flex;
   gap: 16px;
   flex-direction: column;
 }
-.tf-tour-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset #group_tabs .tf-field-repeater {
+.tf-tour-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset #group_tabs .tf-field-repeater,
+.tf-apt-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset #group_tabs .tf-field-repeater,
+.tf-room-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset #group_tabs .tf-field-repeater {
   padding-bottom: 16px;
 }
-.tf-tour-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset #group_tabs .tf-field-repeater .group_discount_package .tf-repeater-content-wrap {
+.tf-tour-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset #group_tabs .tf-field-repeater .group_discount_package .tf-repeater-content-wrap,
+.tf-apt-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset #group_tabs .tf-field-repeater .group_discount_package .tf-repeater-content-wrap,
+.tf-room-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset #group_tabs .tf-field-repeater .group_discount_package .tf-repeater-content-wrap {
   padding: 0;
   align-items: center;
   gap: 16px;
   flex-wrap: nowrap;
 }
-.tf-tour-cal-wrap .tf-save-calendar {
+.tf-tour-cal-wrap .tf-save-calendar,
+.tf-apt-cal-wrap .tf-save-calendar,
+.tf-room-cal-wrap .tf-save-calendar {
   display: flex;
   gap: 16px;
 }
 .tf-tour-cal-wrap .button-primary,
-.tf-tour-cal-wrap .button-secondary {
+.tf-tour-cal-wrap .button-secondary,
+.tf-apt-cal-wrap .button-primary,
+.tf-apt-cal-wrap .button-secondary,
+.tf-room-cal-wrap .button-primary,
+.tf-room-cal-wrap .button-secondary {
   border-radius: 8px;
   background: #EBF5FF;
   color: #003C79;
@@ -5539,39 +5782,69 @@ a.tf-import-btn, a.tf-export-btn {
   font-weight: 600;
   line-height: 24px !important;
   border: 0px solid;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 8px;
 }
-.tf-tour-cal-wrap .button-primary {
+.tf-tour-cal-wrap .button-primary,
+.tf-apt-cal-wrap .button-primary,
+.tf-room-cal-wrap .button-primary {
   background: linear-gradient(180deg, #0051A3 0%, #003C79 100%);
   color: #FFFFFF;
 }
-.tf-tour-cal-wrap .tf-single-options .tf-single-repeater:last-child {
+.tf-tour-cal-wrap .tf-single-options .tf-single-repeater:last-child,
+.tf-apt-cal-wrap .tf-single-options .tf-single-repeater:last-child,
+.tf-room-cal-wrap .tf-single-options .tf-single-repeater:last-child {
   margin-bottom: 0px;
 }
-.tf-tour-cal-wrap .tf-single-options .tf-single-repeater .tf-field-accordion .tf-fieldset {
+.tf-tour-cal-wrap .tf-single-options .tf-single-repeater .tf-field-accordion .tf-fieldset,
+.tf-apt-cal-wrap .tf-single-options .tf-single-repeater .tf-field-accordion .tf-fieldset,
+.tf-room-cal-wrap .tf-single-options .tf-single-repeater .tf-field-accordion .tf-fieldset {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
-.tf-tour-cal-wrap .tf-single-options .tf-single-repeater .tf-field-accordion .tf-fieldset .tf-field-repeater {
+.tf-tour-cal-wrap .tf-single-options .tf-single-repeater .tf-field-accordion .tf-fieldset .tf-field-repeater,
+.tf-apt-cal-wrap .tf-single-options .tf-single-repeater .tf-field-accordion .tf-fieldset .tf-field-repeater,
+.tf-room-cal-wrap .tf-single-options .tf-single-repeater .tf-field-accordion .tf-fieldset .tf-field-repeater {
   padding: 16px;
 }
-.tf-tour-cal-wrap .tf-single-options .tf-single-repeater .tf-field-accordion .tf-fieldset .tf-field-repeater .tf-single-repeater:last-child {
+.tf-tour-cal-wrap .tf-single-options .tf-single-repeater .tf-field-accordion .tf-fieldset .tf-field-repeater .tf-single-repeater:last-child,
+.tf-apt-cal-wrap .tf-single-options .tf-single-repeater .tf-field-accordion .tf-fieldset .tf-field-repeater .tf-single-repeater:last-child,
+.tf-room-cal-wrap .tf-single-options .tf-single-repeater .tf-field-accordion .tf-fieldset .tf-field-repeater .tf-single-repeater:last-child {
   margin-bottom: 16px;
 }
-.tf-tour-cal-wrap .tf-single-options .tf-single-repeater .tf-field-accordion .tf-fieldset .tf-field-repeater .tf-single-repeater .tf-repeater-content-wrap {
+.tf-tour-cal-wrap .tf-single-options .tf-single-repeater .tf-field-accordion .tf-fieldset .tf-field-repeater .tf-single-repeater .tf-repeater-content-wrap,
+.tf-apt-cal-wrap .tf-single-options .tf-single-repeater .tf-field-accordion .tf-fieldset .tf-field-repeater .tf-single-repeater .tf-repeater-content-wrap,
+.tf-room-cal-wrap .tf-single-options .tf-single-repeater .tf-field-accordion .tf-fieldset .tf-field-repeater .tf-single-repeater .tf-repeater-content-wrap {
   padding: 0;
   align-items: center;
   gap: 16px;
   flex-wrap: nowrap;
 }
-.tf-tour-cal-wrap .tf-single-options .tf-single-repeater .tf-field-accordion .tf-fieldset .tf-field-repeater .tf-single-repeater .tf-repeater-content-wrap .tf-field {
+.tf-tour-cal-wrap .tf-single-options .tf-single-repeater .tf-field-accordion .tf-fieldset .tf-field-repeater .tf-single-repeater .tf-repeater-content-wrap .tf-field,
+.tf-apt-cal-wrap .tf-single-options .tf-single-repeater .tf-field-accordion .tf-fieldset .tf-field-repeater .tf-single-repeater .tf-repeater-content-wrap .tf-field,
+.tf-room-cal-wrap .tf-single-options .tf-single-repeater .tf-field-accordion .tf-fieldset .tf-field-repeater .tf-single-repeater .tf-repeater-content-wrap .tf-field {
   padding: 0;
 }
-.tf-tour-cal-wrap .tf-single-options .tf-single-repeater .tf-field-accordion .tf-fieldset .tf-field-repeater .tf-single-repeater .tf-repeater-content-wrap .tf-repeater-icon-delete {
+.tf-tour-cal-wrap .tf-single-options .tf-single-repeater .tf-field-accordion .tf-fieldset .tf-field-repeater .tf-single-repeater .tf-repeater-content-wrap .tf-repeater-icon-delete,
+.tf-apt-cal-wrap .tf-single-options .tf-single-repeater .tf-field-accordion .tf-fieldset .tf-field-repeater .tf-single-repeater .tf-repeater-content-wrap .tf-repeater-icon-delete,
+.tf-room-cal-wrap .tf-single-options .tf-single-repeater .tf-field-accordion .tf-fieldset .tf-field-repeater .tf-single-repeater .tf-repeater-content-wrap .tf-repeater-icon-delete {
   cursor: pointer;
+}
+
+.tf-apt-cal-wrap,
+.tf-room-cal-wrap {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.tf-apt-cal-wrap .tf-apt-cal,
+.tf-apt-cal-wrap .tf-room-cal,
+.tf-room-cal-wrap .tf-apt-cal,
+.tf-room-cal-wrap .tf-room-cal {
+  width: 100%;
 }
 
 @-webkit-keyframes tf-rotate {

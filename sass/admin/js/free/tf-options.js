@@ -949,8 +949,8 @@
                 initialView: 'dayGridMonth',
                 firstDay: 1,
                 headerToolbar: {
-                    start: 'today',
-                    center: 'title',
+                    start: 'title',
+                    center: '',
                     end: 'prev,next'
                 },
                 displayEventTime: true,
@@ -1218,8 +1218,8 @@
                 initialView: 'dayGridMonth',
                 firstDay: 1,
                 headerToolbar: {
-                    start: 'today',
-                    center: 'title',
+                    start: 'title',
+                    center: '',
                     end: 'prev,next'
                 },
                 displayEventTime: true,

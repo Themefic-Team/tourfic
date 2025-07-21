@@ -293,8 +293,12 @@
 }
 
 // Tour Calender
-.tf-tour-cal-wrap{
-    .tf-tour-cal{
+.tf-tour-cal-wrap,
+.tf-apt-cal-wrap,
+.tf-room-cal-wrap{
+    .tf-tour-cal,
+    .tf-apt-cal,
+    .tf-room-cal{
         border-radius: 8px;
         border: 1px solid $tf_border_faint;
         background: $tf_fill_white;
@@ -428,6 +432,19 @@
             }
         }
     }
+    .tf-apt-cal-field,
+    .tf-room-cal-field{
+        border-radius: 8px;
+        border: 1px solid $tf_border_faint;
+        background: $tf_fill_white;
+        padding: 24px;
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 24px;
+        box-sizing: border-box;
+        justify-content: space-between;
+    }
     .tf-date-time-selection{
         border-radius: 8px;
         border: 1px solid $tf_border_faint;
@@ -520,7 +537,7 @@
         font-weight: 600;
         line-height: 24px !important;
         border: 0px solid;
-        display: flex;
+        display: inline-flex;
         align-items: center;
         gap: 8px;
     }
@@ -561,6 +578,18 @@
                 }
             }
         }
+    }
+}
+
+.tf-apt-cal-wrap,
+.tf-room-cal-wrap{
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    width: 100%;
+    .tf-apt-cal,
+    .tf-room-cal{
+        width: 100%;
     }
 }
 @-webkit-keyframes tf-rotate {
