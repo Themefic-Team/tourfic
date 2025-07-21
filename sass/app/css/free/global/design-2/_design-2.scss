@@ -2294,6 +2294,7 @@
                                         padding: 0;
                                         height: 0px;
                                         width: 0px;
+                                        border: 0;
                                     }
                                 }
                             }
@@ -2381,7 +2382,7 @@
                                 display: flex;
                                 align-items: center;
                                 justify-content: center;
-                                background: $color-brand-dark;
+                                background-color: $color-gray-linear;
                                 color: $color-white;
                                 background-size: cover;
                                 background-position: center;
@@ -2594,6 +2595,7 @@
                         &.tf-place{
                             display: flex;
                             flex: 1;
+                            align-items: center;
                             .tf-icon{
                                 width: auto;
                                 height: auto;
@@ -3119,6 +3121,7 @@
                                 li {
                                     width: 25%;
                                     display: flex;
+                                    align-items: center;
                                     @media #{$max768}{
                                         width: 50%;
                                     }

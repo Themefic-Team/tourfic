@@ -299,6 +299,7 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
                                     <option value="price-high">Sort By Price: High to Low</option>
                                     <option value="price-low">Sort By Price: Low to High</option>
                                 </select>
+								<i class="fas fa-chevron-down"></i>
                             </form>
                         </div>
 					</div>
@@ -532,6 +533,7 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 								<option value="price-high"><?php echo esc_html__( 'Sort By Price: High to Low', 'tourfic' ); ?></option>
 								<option value="price-low"><?php echo esc_html__( 'Sort By Price: Low to High', 'tourfic' ); ?></option>
 							</select>
+							<i class="fas fa-chevron-down"></i>
 						</form>
 					</div>
 				</div>
@@ -1583,6 +1585,7 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
                                     <option value="price-high"><?php echo esc_html__( 'Sort By Price: High to Low', 'tourfic' ); ?></option>
                                     <option value="price-low"><?php echo esc_html__( 'Sort By Price: Low to High', 'tourfic' ); ?></option>
                                 </select>
+								<i class="fas fa-chevron-down"></i>
                             </form>
                         </div>
 					</div>

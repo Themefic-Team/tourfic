@@ -656,12 +656,11 @@ div#tf-destinationautocomplete-list {
                         @media #{$max768}{
                             width: 30%;
                             float: left;
-                            padding-left: 0px;
+                            padding-left: 24px;
                         }
                         @media #{$max575}{
-                            width: 25%;
-                            padding-right: 10px;
-                            padding-left: 0px;
+                            padding-right: 12px;
+                            padding-left: 12px;
                         }
                         .tf-check-in-out-date,
                         .tf-tour-check-in-out-date,
@@ -736,8 +735,8 @@ div#tf-destinationautocomplete-list {
                             padding-right: 0px;
                         }
                         @media #{$max575}{
-                            padding-left: 10px;
-                            width: 50%;
+                            padding-left: 12px;
+                            width: 36%;
                         }
                         .tf_input-inner{
                             display: flow-root;

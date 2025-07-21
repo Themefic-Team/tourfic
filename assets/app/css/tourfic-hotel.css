@@ -833,7 +833,7 @@
 }
 
 .single-tf_hotel .tf-single-template__legacy .tf_features .tf-feature-list .single-feature-box i {
-  color: #198754;
+  color: var(--tf-text-paragraph);
 }
 
 .single-tf_hotel .tf-single-template__legacy .tf_features .tf-feature-list .single-feature-box .feature-list-title {
@@ -1295,7 +1295,6 @@
 .single-tf_hotel .tf-single-template__one .tf-hotel-location-map .tf-hotel-location-preview {
   position: relative;
   margin-bottom: 0px;
-  border: 1px solid var(--tf-border-lite);
   line-height: 0;
 }
 
