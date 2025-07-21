@@ -5493,6 +5493,55 @@ a.tf-import-btn, a.tf-export-btn {
 .tf-room-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-header th {
   border: 0px;
 }
+.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller,
+.tf-tour-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller,
+.tf-tour-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller,
+.tf-apt-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller,
+.tf-apt-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller,
+.tf-apt-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller,
+.tf-room-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller,
+.tf-room-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller,
+.tf-room-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller {
+  scroll-behavior: smooth;
+  scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+  scrollbar-width: thin;
+}
+.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar,
+.tf-tour-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar,
+.tf-tour-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar,
+.tf-apt-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar,
+.tf-apt-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar,
+.tf-apt-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar,
+.tf-room-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar,
+.tf-room-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar,
+.tf-room-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar {
+  width: 6px;
+}
+.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar-track,
+.tf-tour-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar-track,
+.tf-tour-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar-track,
+.tf-apt-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar-track,
+.tf-apt-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar-track,
+.tf-apt-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar-track,
+.tf-room-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar-track,
+.tf-room-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar-track,
+.tf-room-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar-track {
+  background: transparent;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar-thumb,
+.tf-tour-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar-thumb,
+.tf-tour-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar-thumb,
+.tf-apt-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar-thumb,
+.tf-apt-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar-thumb,
+.tf-apt-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar-thumb,
+.tf-room-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar-thumb,
+.tf-room-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar-thumb,
+.tf-room-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-scroller::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+}
 .tf-tour-cal-wrap .tf-tour-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header,
 .tf-tour-cal-wrap .tf-apt-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header,
 .tf-tour-cal-wrap .tf-room-cal .fc-view-harness table .fc-scrollgrid-section-header .fc-col-header,
