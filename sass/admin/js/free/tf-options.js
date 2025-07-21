@@ -896,7 +896,7 @@
                 // Extract the option title and type using the dynamic index
                 let optionType = $(this).find(`[name="tf_tours_opt[package_pricing][${index}][pricing_type]"]`).val();
                 let optionTitle = $(this).find(`[name="tf_tours_opt[package_pricing][${index}][pack_title]"]`).val();
-                if (index !== undefined) {
+                if (optionTitle !== undefined) {
                     optionsArr[index] = {
                         index: index,
                         title: optionTitle,
