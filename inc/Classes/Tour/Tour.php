@@ -2115,6 +2115,8 @@ class Tour {
 															</div>
 														</div>
 													<?php } ?>
+
+													<?php do_action( 'tf_tour_package_persons', $package_pricing, $key, $pack ); ?>
 												</div>
 											</div>
 										</div>

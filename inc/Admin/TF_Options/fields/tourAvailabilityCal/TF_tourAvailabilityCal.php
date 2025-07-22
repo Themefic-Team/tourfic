@@ -511,6 +511,8 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                             </div>
                                         </div> <!-- .tf-tab-field-content -->
                                     </div> <!-- #group_tabs -->
+
+                                    <?php echo do_action('tf_tour_availability_cal_pricing_fields', $pricing_type); ?>
                                     
                                     <div class="tf-field tf-field-number" style="width:calc(33% - 10px);">
                                         <label for="" class="tf-field-label">
@@ -803,6 +805,8 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
 
                                                             </div> <!-- .tf-tab-field-content -->
                                                         </div> <!-- #group_tabs -->
+
+                                                        <?php echo do_action('tf_tour_availability_cal_package_pricing_fields', $item, $key); ?>
 
                                                         <input type="hidden" name="tf_option_title_<?php echo esc_attr( $key ); ?>" value="<?php echo esc_attr($item['pack_title']); ?>"/>
                                                         <input type="hidden" name="tf_option_pricing_type_<?php echo esc_attr( $key ); ?>" value="<?php echo esc_attr($option_pricing_type); ?>"/>

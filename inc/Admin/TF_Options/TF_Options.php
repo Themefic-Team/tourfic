@@ -1425,6 +1425,8 @@ class TF_Options {
 									</div> <!-- .tf-tab-field-content -->
 								</div> <!-- #group_tabs -->
 
+								<?php echo do_action('tf_tour_availability_cal_option_package_pricing_fields', $package_pricing, $item, $key); ?>
+
 								<input type="hidden" name="tf_option_title_<?php echo esc_attr( $item['index'] ); ?>" value="<?php echo esc_attr($item['title']); ?>"/>
 								<input type="hidden" name="tf_option_pricing_type_<?php echo esc_attr( $item['index'] ); ?>" value="<?php echo esc_attr($item['type']); ?>"/>
 							</div>

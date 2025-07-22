@@ -132,6 +132,8 @@
 							echo '<li data="infant" class="person-info '. esc_attr($active_class) .'"><i class="fa-solid fa-baby"></i><p>' . esc_html__( "Infant", "tourfic" ) . '</p></li>';
 						}
 					}
+
+					do_action( 'tf_tour_single_person_info_after', get_the_ID() );
 					?>
                 </ul>
             </div>
@@ -164,6 +166,8 @@
                     </div>
 				<?php } ?>
 			<?php } ?>
+
+			<?php do_action( 'tf_tour_single_trip_pricing_after', get_the_ID() ); ?>
 		<?php endif; ?>
     </div>
 </div>
