@@ -284,11 +284,11 @@
                         width: 100%;
                         border-left: none;
                         &>thead{
-                            background-color: $color-primary;
+                            background-color: $color-filling-fg;
                             tr{
                                 th{
                                     text-align: left;
-                                    color: $color-white;
+                                    color: $color-text;
                                     border: 0px solid;
                                     border-radius: 5px 5px 0px 0px;
                                     padding: 13px 30px;

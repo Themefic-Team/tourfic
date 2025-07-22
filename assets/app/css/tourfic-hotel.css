@@ -474,12 +474,12 @@
 }
 
 .single-tf_hotel .tf-single-template__one .tf-rooms-sections .tf-rooms .tf-availability-table > thead {
-  background-color: var(--tf-primary);
+  background-color: var(--tf-filling-foreground);
 }
 
 .single-tf_hotel .tf-single-template__one .tf-rooms-sections .tf-rooms .tf-availability-table > thead tr th {
   text-align: left;
-  color: #ffffff;
+  color: var(--tf-text-paragraph);
   border: 0px solid;
   border-radius: 5px 5px 0px 0px;
   padding: 13px 30px;

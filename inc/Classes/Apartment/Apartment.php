@@ -2152,7 +2152,7 @@ class Apartment {
 				</div>
 			</div>
 		</div>
-        <?php } elseif ( $tf_apartment_arc_selected_template == "design-2" ) { ?>
+        <?php } elseif ( $tf_apartment_arc_selected_template == "design-2" && function_exists( 'is_tf_pro' ) && is_tf_pro()) { ?>
             <div class="tf-archive-hotel" data-id="<?php echo esc_attr(get_the_ID()); ?>">
                 <div class="tf-archive-hotel-thumb">
                     <a href="<?php echo esc_url( $url ); ?>">

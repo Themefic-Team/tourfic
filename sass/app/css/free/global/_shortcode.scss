@@ -588,6 +588,9 @@ div#tf-destinationautocomplete-list {
                     @media #{$max768}{
                         display: flow-root;
                     }
+                    @media #{$max575}{
+                        padding: 20px 16px;
+                    }
                     .tf-label{
                         font-size: 1rem;
                         font-weight: 600;
@@ -654,14 +657,15 @@ div#tf-destinationautocomplete-list {
                             padding-right: 24px;
                         }
                         @media #{$max768}{
-                            width: 30%;
+                            width: 25%;
                             float: left;
-                            padding-left: 24px;
+                            padding-left: 0;
                         }
                         @media #{$max575}{
                             padding-right: 12px;
-                            padding-left: 12px;
+                            padding-left: 0;
                         }
+                
                         .tf-check-in-out-date,
                         .tf-tour-check-in-out-date,
                         .tf-apartment-check-in-out-date{
@@ -714,8 +718,12 @@ div#tf-destinationautocomplete-list {
                     }
                     .tf_checkin_date.tf_check_inout_dates{
                         padding-left: 24px;
+                        @media #{$max768}{
+                            padding-left: 24px;
+                            width: 32%;
+                        }
                         @media #{$max575}{
-                            padding-left: 10px;
+                            padding-left: 16px;
                         }
                     }
                     .tf_guest_info{
@@ -735,7 +743,7 @@ div#tf-destinationautocomplete-list {
                             padding-right: 0px;
                         }
                         @media #{$max575}{
-                            padding-left: 12px;
+                            padding-left: 16px;
                             width: 36%;
                         }
                         .tf_input-inner{

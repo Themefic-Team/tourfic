@@ -615,6 +615,10 @@
                 display: inline-block;
                 padding-left: 25px;
                 font-weight: 400;
+                @media #{$max1024} {
+                    padding-right: 25px;
+                    line-height: 1.5;
+                }
                 input{
                     display: none;
                 }
@@ -628,6 +632,9 @@
                 background-color: $color-white;
                 border-radius: 5px;
                 border: 1px solid $color-border-lite;
+                @media #{$max1024} {
+                    top: 0px;
+                }
             }
     
             input[type=checkbox] {
