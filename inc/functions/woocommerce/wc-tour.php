@@ -204,7 +204,7 @@ function tf_tours_booking_function() {
 				if( $tf_total_people > 0 && $tf_total_people==$tf_tour_booking_limit ){
 					$response['errors'][] = esc_html__( 'Booking limit is Reached this Tour', 'tourfic' );
 				}
-				if( $tf_total_people!=$tf_tour_booking_limit && $tf_today_limit < $total_people_booking && $pricing_rule!='package' ){
+				if( $tf_total_people!=$tf_tour_booking_limit && $tf_today_limit < $total_people_booking ){
 					/* translators: %1$s Limit  */
 					$response['errors'][] = sprintf( esc_html__( 'Only %1$s Adult/Children are available this Tour', 'tourfic' ), $tf_today_limit );
 				}
@@ -300,7 +300,7 @@ function tf_tours_booking_function() {
 			if( $tf_total_people > 0 && $tf_total_people==$tf_tour_booking_limit ){
 				$response['errors'][] = esc_html__( 'Booking limit is Reached this Date', 'tourfic' );
 			}
-			if( $tf_total_people!=$tf_tour_booking_limit && $tf_today_limit < $total_people_booking && $pricing_rule!='package' ){ 
+			if( $tf_total_people!=$tf_tour_booking_limit && $tf_today_limit < $total_people_booking ){ 
 				/* translators: %1$s Limit  */
 				$response['errors'][] = sprintf( esc_html__( 'Only %1$s Adult/Children are available this Date', 'tourfic' ), $tf_today_limit );
 			}

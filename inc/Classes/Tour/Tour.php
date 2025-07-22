@@ -3287,36 +3287,36 @@ class Tour {
 			$min_person = null;
 			$max_person = null;
 			foreach($package_pricing as $package){
-				if (!empty($package['min_adult'])) {
-					if (is_null($min_person) || $package['min_adult'] < $min_person) {
-						$min_person = $package['min_adult'];
+				if (!empty($package['adult_tabs'][2]['min_adult'])) {
+					if (is_null($min_person) || $package['adult_tabs'][2]['min_adult'] < $min_person) {
+						$min_person = $package['adult_tabs'][2]['min_adult'];
 					}
 				}
-				if (!empty($package['max_adult'])) {
-					if (is_null($max_person) || $package['max_adult'] > $max_person) {
-						$max_person = $package['max_adult'];
-					}
-				}
-
-				if (!empty($package['min_child'])) {
-					if (is_null($min_person) || $package['min_child'] < $min_person) {
-						$min_person = $package['min_child'];
-					}
-				}
-				if (!empty($package['max_child'])) {
-					if (is_null($max_person) || $package['max_child'] > $max_person) {
-						$max_person = $package['max_child'];
+				if (!empty($package['adult_tabs'][3]['max_adult'])) {
+					if (is_null($max_person) || $package['adult_tabs'][3]['max_adult'] > $max_person) {
+						$max_person = $package['adult_tabs'][3]['max_adult'];
 					}
 				}
 
-				if (!empty($package['min_infant'])) {
-					if (is_null($min_person) || $package['min_infant'] < $min_person) {
-						$min_person = $package['min_infant'];
+				if (!empty($package['child_tabs'][2]['min_child'])) {
+					if (is_null($min_person) || $package['child_tabs'][2]['min_child'] < $min_person) {
+						$min_person = $package['child_tabs'][2]['min_child'];
 					}
 				}
-				if (!empty($package['max_infant'])) {
-					if (is_null($max_person) || $package['max_infant'] > $max_person) {
-						$max_person = $package['max_infant'];
+				if (!empty($package['child_tabs'][3]['max_child'])) {
+					if (is_null($max_person) || $package['child_tabs'][3]['max_child'] > $max_person) {
+						$max_person = $package['child_tabs'][3]['max_child'];
+					}
+				}
+
+				if (!empty($package['infant_tabs'][2]['min_infant'])) {
+					if (is_null($min_person) || $package['infant_tabs'][2]['min_infant'] < $min_person) {
+						$min_person = $package['infant_tabs'][2]['min_infant'];
+					}
+				}
+				if (!empty($package['infant_tabs'][3]['max_infant'])) {
+					if (is_null($max_person) || $package['infant_tabs'][3]['max_infant'] > $max_person) {
+						$max_person = $package['infant_tabs'][3]['max_infant'];
 					}
 				}
 			}
@@ -3442,8 +3442,11 @@ class Tour {
 		}
 		// Get tour meta options
 		$meta = get_post_meta( get_the_ID(), 'tf_tours_opt', true );
+		$pricing_type = !empty($meta['pricing']) ? $meta['pricing'] : 'person';
 
 		$avail_persons = Pricing::instance( get_the_ID() )->get_min_max_person();
+
+		$package_pricing = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
 
 		// Total People
 		$total_people = intval( $adults ) + intval( $child );
@@ -3462,24 +3465,52 @@ class Tour {
 
 		if ( $people_counter > 0 ) {
 			if ( ! empty( $startprice ) && ! empty( $endprice ) ) {
-				if ( ! empty( $meta['adult_price'] ) ) {
-					if ( $startprice <= $meta['adult_price'] && $meta['adult_price'] <= $endprice ) {
-						$has_tour = true;
+				if($pricing_type=='person'){
+					if ( ! empty( $meta['adult_price'] ) ) {
+						if ( $startprice <= $meta['adult_price'] && $meta['adult_price'] <= $endprice ) {
+							$has_tour = true;
+						}
+					}
+					if ( ! empty( $meta['child_price'] ) ) {
+						if ( $startprice <= $meta['child_price'] && $meta['child_price'] <= $endprice ) {
+							$has_tour = true;
+						}
+					}
+					if ( ! empty( $meta['infant_price'] ) ) {
+						if ( $startprice <= $meta['infant_price'] && $meta['infant_price'] <= $endprice ) {
+							$has_tour = true;
+						}
 					}
 				}
-				if ( ! empty( $meta['child_price'] ) ) {
-					if ( $startprice <= $meta['child_price'] && $meta['child_price'] <= $endprice ) {
-						$has_tour = true;
+				if($pricing_type=='group'){
+					if ( ! empty( $meta['group_price'] ) ) {
+						if ( $startprice <= $meta['group_price'] && $meta['group_price'] <= $endprice ) {
+							$has_tour = true;
+						}
 					}
 				}
-				if ( ! empty( $meta['infant_price'] ) ) {
-					if ( $startprice <= $meta['infant_price'] && $meta['infant_price'] <= $endprice ) {
-						$has_tour = true;
-					}
-				}
-				if ( ! empty( $meta['group_price'] ) ) {
-					if ( $startprice <= $meta['group_price'] && $meta['group_price'] <= $endprice ) {
-						$has_tour = true;
+				if($pricing_type=='package' && !empty($package_pricing)){
+					foreach($package_pricing as $package){
+						if (!empty($package['adult_tabs'][1]['adult_price'])) {
+							if ( $startprice <= $package['adult_tabs'][1]['adult_price'] && $package['adult_tabs'][1]['adult_price'] <= $endprice ) {
+								$has_tour = true;
+							}
+						}
+						if (!empty($package['child_tabs'][1]['child_price'])) {
+							if ( $startprice <= $package['child_tabs'][1]['child_price'] && $package['child_tabs'][1]['child_price'] <= $endprice ) {
+								$has_tour = true;
+							}
+						}
+						if (!empty($package['infant_tabs'][1]['infant_price'])) {
+							if ( $startprice <= $package['infant_tabs'][1]['infant_price'] && $package['infant_tabs'][1]['infant_price'] <= $endprice ) {
+								$has_tour = true;
+							}
+						}
+						if (!empty($package['group_tabs'][1]['group_price'])) {
+							if ( $startprice <= $package['group_tabs'][1]['group_price'] && $package['group_tabs'][1]['group_price'] <= $endprice ) {
+								$has_tour = true;
+							}
+						}
 					}
 				}
 			} else {
@@ -3727,7 +3758,6 @@ class Tour {
 			$min_people            = ! empty( $matched_availability['min_person'] ) ? $matched_availability['min_person'] : '';
 			$max_people            = ! empty( $matched_availability['max_person'] ) ? $matched_availability['max_person'] : '';
 			$tf_tour_booking_limit = ! empty( $matched_availability['max_capacity'] ) ? $matched_availability['max_capacity'] : 0;
-			// $pricing_rule = ! empty( $matched_availability['pricing_type'] ) ? $matched_availability['pricing_type'] : '';
 			// Fixed tour maximum capacity limit
 
 			if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $start_date ) && ! empty( $end_date ) ) {

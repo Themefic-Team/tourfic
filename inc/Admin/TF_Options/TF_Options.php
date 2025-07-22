@@ -578,19 +578,19 @@ class TF_Options {
                             </label>
                         </div>
                     </div>
-                    <div class="tf-field-text tf_option_pricing_type_room" style="display: <?php echo $item['type'] == 'per_room' ? 'block' : 'none' ?>; width: calc(100% - 90px)">
+                    <div class="tf-field-number tf_option_pricing_type_room" style="display: <?php echo $item['type'] == 'per_room' ? 'block' : 'none' ?>; width: calc(100% - 90px)">
                         <label class="tf-field-label"><?php echo esc_html__( 'Room Price', 'tourfic' ); ?></label>
                         <div class="tf-fieldset">
                             <input type="number" min="0" name="tf_option_room_price_<?php echo esc_attr( $item['index'] ); ?>" placeholder="<?php echo esc_attr__( 'Room Price', 'tourfic' ); ?>">
                         </div>
                     </div>
-                    <div class="tf-field-text tf_option_pricing_type_person" style="display: <?php echo $item['type'] == 'per_person' ? 'block' : 'none' ?>; width: calc((100% - 80px)/2 - -5px)">
+                    <div class="tf-field-number tf_option_pricing_type_person" style="display: <?php echo $item['type'] == 'per_person' ? 'block' : 'none' ?>; width: calc((100% - 80px)/2 - -5px)">
                         <label class="tf-field-label"><?php echo esc_html__( 'Adult Price', 'tourfic' ); ?></label>
                         <div class="tf-fieldset">
                             <input type="number" min="0" name="tf_option_adult_price_<?php echo esc_attr( $item['index'] ); ?>" placeholder="<?php echo esc_attr__( 'Adult Price', 'tourfic' ); ?>">
                         </div>
                     </div>
-                    <div class="tf-field-text tf_option_pricing_type_person" style="display: <?php echo $item['type'] == 'per_person' ? 'block' : 'none' ?>; width: calc((100% - 80px)/2 - -5px)">
+                    <div class="tf-field-number tf_option_pricing_type_person" style="display: <?php echo $item['type'] == 'per_person' ? 'block' : 'none' ?>; width: calc((100% - 80px)/2 - -5px)">
                         <label class="tf-field-label"><?php echo esc_html__( 'Child Price', 'tourfic' ); ?></label>
                         <div class="tf-fieldset">
                             <input type="number" min="0" name="tf_option_child_price_<?php echo esc_attr( $item['index'] ); ?>" placeholder="<?php echo esc_attr__( 'Child Price', 'tourfic' ); ?>">
@@ -1134,7 +1134,7 @@ class TF_Options {
 						for ( $i = 0; $i <= $item['options_count'] - 1; $i ++ ) {
 							if ( $item['tf_option_pricing_type_'.$i] == 'group') {
 								$item['title'] .= __( 'Title: ', 'tourfic' ) . $item['tf_option_title_'.$i] . '<br>';
-								$item['title'] .= __( 'Price: ', 'tourfic' ) . wc_price($item['tf_option_group_price_'.$i]). '<br><br>';
+								$item['title'] .= __( 'Group Price: ', 'tourfic' ) . wc_price($item['tf_option_group_price_'.$i]). '<br><br>';
 							} else if($item['tf_option_pricing_type_'.$i] == 'person'){
 								$item['title'] .= __( 'Title: ', 'tourfic' ) . $item['tf_option_title_'.$i] . '<br>';
 								$item['title'] .= __( 'Adult: ', 'tourfic' ) . wc_price($item['tf_option_adult_price_'.$i]). '<br>';
