@@ -5809,18 +5809,79 @@ a.tf-import-btn, a.tf-export-btn {
   gap: 16px;
   flex-direction: column;
 }
+.tf-tour-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset .tf-package-time-fields,
+.tf-apt-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset .tf-package-time-fields,
+.tf-room-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset .tf-package-time-fields {
+  margin: 0;
+  padding: 0;
+}
+.tf-tour-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset .tf-package-time-fields .tf-fieldset,
+.tf-apt-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset .tf-package-time-fields .tf-fieldset,
+.tf-room-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset .tf-package-time-fields .tf-fieldset {
+  padding: 0;
+  border: 0px solid;
+}
+.tf-tour-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset .tf-package-time-fields .tf-fieldset .tf_tour_allowed_times .tf-single-repeater,
+.tf-apt-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset .tf-package-time-fields .tf-fieldset .tf_tour_allowed_times .tf-single-repeater,
+.tf-room-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset .tf-package-time-fields .tf-fieldset .tf_tour_allowed_times .tf-single-repeater {
+  margin-bottom: 16px;
+}
+.tf-tour-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset .tf-package-time-fields .tf-fieldset .tf_tour_allowed_times .tf-single-repeater .tf-repeater-content-wrap,
+.tf-apt-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset .tf-package-time-fields .tf-fieldset .tf_tour_allowed_times .tf-single-repeater .tf-repeater-content-wrap,
+.tf-room-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset .tf-package-time-fields .tf-fieldset .tf_tour_allowed_times .tf-single-repeater .tf-repeater-content-wrap {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 16px;
+  padding: 0;
+}
+.tf-tour-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset .tf-package-time-fields .tf-fieldset .tf_tour_allowed_times .tf-single-repeater .tf-repeater-content-wrap .tf-field,
+.tf-apt-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset .tf-package-time-fields .tf-fieldset .tf_tour_allowed_times .tf-single-repeater .tf-repeater-content-wrap .tf-field,
+.tf-room-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset .tf-package-time-fields .tf-fieldset .tf_tour_allowed_times .tf-single-repeater .tf-repeater-content-wrap .tf-field {
+  padding: 0;
+}
+.tf-tour-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset .tf-package-time-fields .tf-fieldset .tf-repeater-add,
+.tf-apt-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset .tf-package-time-fields .tf-fieldset .tf-repeater-add,
+.tf-room-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset .tf-package-time-fields .tf-fieldset .tf-repeater-add {
+  margin: 0;
+}
 .tf-tour-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset #group_tabs .tf-field-repeater,
 .tf-apt-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset #group_tabs .tf-field-repeater,
 .tf-room-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset #group_tabs .tf-field-repeater {
   padding-bottom: 16px;
+  margin: 0;
+  padding: 0;
 }
-.tf-tour-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset #group_tabs .tf-field-repeater .group_discount_package .tf-repeater-content-wrap,
-.tf-apt-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset #group_tabs .tf-field-repeater .group_discount_package .tf-repeater-content-wrap,
-.tf-room-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset #group_tabs .tf-field-repeater .group_discount_package .tf-repeater-content-wrap {
+.tf-tour-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset #group_tabs .tf-field-repeater .tf-fieldset,
+.tf-apt-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset #group_tabs .tf-field-repeater .tf-fieldset,
+.tf-room-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset #group_tabs .tf-field-repeater .tf-fieldset {
+  padding: 0;
+  border: 0px solid;
+  background: transparent;
+}
+.tf-tour-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset #group_tabs .tf-field-repeater .tf-fieldset .group_discount_package .tf-single-repeater,
+.tf-apt-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset #group_tabs .tf-field-repeater .tf-fieldset .group_discount_package .tf-single-repeater,
+.tf-room-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset #group_tabs .tf-field-repeater .tf-fieldset .group_discount_package .tf-single-repeater {
+  margin-bottom: 16px;
+}
+.tf-tour-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset #group_tabs .tf-field-repeater .tf-fieldset .group_discount_package .tf-single-repeater .tf-repeater-content-wrap,
+.tf-apt-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset #group_tabs .tf-field-repeater .tf-fieldset .group_discount_package .tf-single-repeater .tf-repeater-content-wrap,
+.tf-room-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset #group_tabs .tf-field-repeater .tf-fieldset .group_discount_package .tf-single-repeater .tf-repeater-content-wrap {
   padding: 0;
   align-items: center;
   gap: 16px;
   flex-wrap: nowrap;
+  background-color: transparent;
+}
+.tf-tour-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset #group_tabs .tf-field-repeater .tf-fieldset .group_discount_package .tf-single-repeater .tf-repeater-content-wrap .tf-field,
+.tf-apt-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset #group_tabs .tf-field-repeater .tf-fieldset .group_discount_package .tf-single-repeater .tf-repeater-content-wrap .tf-field,
+.tf-room-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset #group_tabs .tf-field-repeater .tf-fieldset .group_discount_package .tf-single-repeater .tf-repeater-content-wrap .tf-field {
+  padding: 0;
+}
+.tf-tour-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset #group_tabs .tf-field-repeater .tf-fieldset .tf-repeater-add,
+.tf-apt-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset #group_tabs .tf-field-repeater .tf-fieldset .tf-repeater-add,
+.tf-room-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset #group_tabs .tf-field-repeater .tf-fieldset .tf-repeater-add {
+  margin: 0;
 }
 .tf-tour-cal-wrap .tf-save-calendar,
 .tf-apt-cal-wrap .tf-save-calendar,

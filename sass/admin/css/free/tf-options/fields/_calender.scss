@@ -537,15 +537,58 @@
                 display: flex;
                 gap: 16px;
                 flex-direction: column;
+                .tf-package-time-fields{
+                    margin: 0;
+                    padding: 0;
+                    .tf-fieldset{
+                        padding: 0;
+                        border: 0px solid;
+                        .tf_tour_allowed_times{
+                            .tf-single-repeater{
+                                margin-bottom: 16px;
+                                .tf-repeater-content-wrap{
+                                    display: flex;
+                                    flex-wrap: nowrap;
+                                    align-items: center;
+                                    gap: 16px;
+                                    padding: 0;
+                                    .tf-field{
+                                        padding: 0;
+                                    }
+                                }
+                            }
+                        }
+                        .tf-repeater-add{
+                            margin: 0;
+                        }
+                    }
+                }
                 #group_tabs{
                     .tf-field-repeater{
                         padding-bottom: 16px;
-                        .group_discount_package{
-                            .tf-repeater-content-wrap{
-                                padding: 0;
-                                align-items: center;
-                                gap: 16px;
-                                flex-wrap: nowrap;
+                        margin: 0;
+                        padding: 0;
+                        .tf-fieldset{
+                            padding: 0;
+                            border: 0px solid;
+                            background: transparent;
+                            .group_discount_package{
+                                .tf-single-repeater{
+                                    margin-bottom: 16px;
+                                    .tf-repeater-content-wrap{
+                                        padding: 0;
+                                        align-items: center;
+                                        gap: 16px;
+                                        flex-wrap: nowrap;
+                                        background-color: transparent;
+                                        .tf-field{
+                                            padding: 0;
+                                        }
+                                    }
+                                }
+                            }
+                            .tf-repeater-add{
+                                margin: 0;
                             }
                         }
                     }

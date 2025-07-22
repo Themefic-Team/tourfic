@@ -1601,7 +1601,7 @@
                         }
                     }
                     // Append only if there's valid time
-                    if (allRepeaterHTML) {
+                    if (pricingType!='package' && allRepeaterHTML) {
                         $('.tf_tour_allowed_times').append(allRepeaterHTML);
                         // Re-initialize flatpickr on the newly added inputs
                         $('.tf_tour_allowed_times .flatpickr-input').flatpickr({
@@ -1634,7 +1634,6 @@
                                 $("[name='tf_option_adult_price_" + i + "']", self.roomCalData).val(event.extendedProps["tf_option_adult_price_" + i]);
                                 $("[name='tf_option_child_price_" + i + "']", self.roomCalData).val(event.extendedProps["tf_option_child_price_" + i]);
                                 $("[name='tf_option_infant_price_" + i + "']", self.roomCalData).val(event.extendedProps["tf_option_infant_price_" + i]);
-                                console.log(event.extendedProps["tf_option_group_discount_" + i]);
 
                                 const discountData = event.extendedProps["tf_option_group_discount_" + i];
                                 let allGroupDiscountRepeaterHTML = '';
@@ -1689,6 +1688,48 @@
                                 }
                                 if (allGroupDiscountRepeaterHTML) {
                                     $('.tf-group-discount-package_'+i).append(allGroupDiscountRepeaterHTML);
+                                }
+
+                                // package times
+                                const packageTimesData = event.extendedProps["tf_option_group_discount_" + i];
+                                let allPackageRepeaterHTML = '';
+
+                                if (packageTimesData && Array.isArray(packageTimesData.time)) {
+                                    packageTimesData.time.forEach((time, index) => {
+                                        if (!time) return;
+                                        const capacity = packageTimesData.cont_max_capacity[index] || '';
+
+                                        allPackageRepeaterHTML += `
+                                            <div class="tf-single-repeater tf-single-repeater-allowed_time">
+                                                <input type="hidden" name="tf_parent_field" value="">
+                                                <input type="hidden" name="tf_repeater_count" value="${index + 1}">
+                                                <input type="hidden" name="tf_current_field" value="allowed_time">
+                                                <div class="tf-repeater-content-wrap">
+                                                    <div class="tf-field tf-field-time" style="width: calc(50% - 6px);">
+                                                        <div class="tf-fieldset">
+                                                            <input type="text" name="tf_option_${optionIndex}_allowed_time[time][]" placeholder="Select Time" value="${time}" class="flatpickr flatpickr-input" data-format="h:i K" readonly="readonly">
+                                                            <i class="fa-regular fa-clock"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tf-field tf-field-number" style="width: calc(50% - 6px);">
+                                                        <div class="tf-fieldset">
+                                                            <input type="number" name="tf_option_${optionIndex}_allowed_time[cont_max_capacity][]" value="${capacity}" placeholder="Maximum Capacity">
+                                                        </div>
+                                                    </div>
+                                                    <span class="tf-repeater-icon tf-repeater-icon-delete">
+                                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M15 5L5 15" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                            <path d="M5 5L15 15" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        </svg>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        `;
+                                    });
+                                }
+
+                                if (allGroupDiscountRepeaterHTML) {
+                                    $('.ttf-tour-package-allowed-time_'+i).append(allGroupDiscountRepeaterHTML);
                                 }
 
                             }
@@ -2559,6 +2600,17 @@
             
             // Find the clone template
             var $clone = $repeater.find('.tf-repeater-wrap-group_discount_package .tf-single-repeater .tf-repeater-content-wrap').show();
+        });
+
+        // Package Time Repeater Add
+        $(document).on('click', '.tf-package-add-allowed-time', function (e) {
+            e.preventDefault();
+        
+            // Find the closest repeater container
+            var $repeater = $(this).closest('.tf-repeater');
+            
+            // Find the clone template
+            var $clone = $repeater.find('.tf_tour_allowed_times .tf-single-repeater .tf-repeater-content-wrap').show();
         });
 
         // Repeater show hide
