@@ -70,7 +70,7 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'      => 'general-option-notice-one',
 					'type'    => 'notice',
-					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-general-settings/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="'. Helper::tf_utm_generator("https://themefic.com/docs/tourfic/tourfic-settings/tourfic-general-settings/", array( 'utm_medium' => 'settings_doc_general-settings' )) .'" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
 				),
 				array(
 					'id'       => 'disable-services',
@@ -1522,13 +1522,13 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'      => 'tour-option-notice-three',
 									'type'    => 'notice',
-									'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-tours-options/#itinerary" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+									'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="' . Helper::tf_utm_generator("https://themefic.com/docs/tourfic/tourfic-settings/tourfic-tours-options/#itinerary", array( 'utm_medium' => 'settings_doc_tour-itinerary' )) . '" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
 								),
 								array(
 									'id'      => 'tour-option-itinerary-notice',
 									'type'    => 'notice',
 									'class'	  => 'tour-option-itinerary-notice',
-									'content' => __('By default, you can create your entire Tour Itinerary using our Default Itinerary editor found in the Single Tour settings. For access to an Itinerary builder with enhanced advanced features, please consider upgrading to our <a href="https://tourfic.com/" target="_blank"><b>Pro version.</b></a>', 'tourfic'),
+									'content' => __('By default, you can create your entire Tour Itinerary using our Default Itinerary editor found in the Single Tour settings. For access to an Itinerary builder with enhanced advanced features, please consider upgrading to our <a href="'.  Helper::tf_utm_generator("https://tourfic.com/", array( 'utm_medium' => 'settings_pro-itinerary' ))  .'" target="_blank"><b>Pro version.</b></a>', 'tourfic'),
 								),
 							),
 						),
@@ -1540,7 +1540,7 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'      => 'tour-option-notice-three',
 									'type'    => 'notice',
-									'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-tours-options/#itinerary" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+									'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="' . Helper::tf_utm_generator("https://themefic.com/docs/tourfic/tourfic-settings/tourfic-tours-options/#itinerary", array( 'utm_medium' => 'settings_doc_tour-itinerary' )) . '" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
 								),
 								array(
 									'id'      => 'tour-option-itinerary-notice',
@@ -1575,7 +1575,7 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'      => 'hotel-option-notice-one',
 					'type'    => 'notice',
-					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-hotel-options/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="'. Helper::tf_utm_generator("https://themefic.com/docs/tourfic/tourfic-settings/tourfic-hotel-options/", array( 'utm_medium' => 'settings_doc_hotel-options' )) .'" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
 				),
 				array(
 					'id'        => 'h-review',
@@ -1668,7 +1668,7 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'      => 'hotel-option-notice-two',
 					'type'    => 'notice',
-					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-hotel-options/#room" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="'. Helper::tf_utm_generator("https://themefic.com/docs/tourfic/tourfic-settings/tourfic-hotel-options/#room", array( 'utm_medium' => 'settings_doc_hotel-options_room' )) .'" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
 				),
 				array(
 					'id'       => 'enable_child_age_limit',
@@ -1711,7 +1711,7 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'      => 'apartment-option-notice',
 					'type'    => 'notice',
-					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/apartment-options/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="'. Helper::tf_utm_generator("https://themefic.com/docs/tourfic/tourfic-settings/apartment-options/", array( 'utm_medium' => 'settings_doc_apartment-options' )) .'" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
 				),
 				array(
 					'id'           => 'amenities_cats',
@@ -1791,7 +1791,7 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'      => 'apartment-option-notice',
 					'type'    => 'notice',
-					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/settings/car-options/#Single_Page_Settings" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="'. Helper::tf_utm_generator("https://themefic.com/docs/tourfic/settings/car-options/#Single_Page_Settings", array( 'utm_medium' => 'settings_doc_car-options_single' )).'" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
 				),
 
 				array(
@@ -1826,7 +1826,7 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'      => 'apartment-option-notice',
 					'type'    => 'notice',
-					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/settings/car-options/#Single_Page_Settings" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="'. Helper::tf_utm_generator("https://themefic.com/docs/tourfic/settings/car-options/#Single_Page_Settings", array( 'utm_medium' => 'settings_doc_car-options_single' )) .'" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
 				),
 
 				array(
@@ -1912,7 +1912,7 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'      => 'user-option-notice',
 									'type'    => 'notice',
-									'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/user-option/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+									'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="'. Helper::tf_utm_generator("https://themefic.com/docs/tourfic/tourfic-settings/user-option/", array( 'utm_medium' => 'settings_doc_user-option' )) .'" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
 								),
 								array(
 									'id'       => '',
@@ -1978,7 +1978,7 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'      => 'user-option-notice',
 									'type'    => 'notice',
-									'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/user-option/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+									'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="'. Helper::tf_utm_generator("https://themefic.com/docs/tourfic/tourfic-settings/user-option/", array( 'utm_medium' => 'settings_doc_user-option' )) . '" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
 								),
 								array(
 									'id'       => '',
@@ -2274,7 +2274,7 @@ TF_Settings::option( 'tf_settings', array(
 					'id'      => 'search-option-notice',
 					'type'    => 'notice',
 					'style'   => 'success',
-					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/search-page/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="'. Helper::tf_utm_generator("https://themefic.com/docs/tourfic/tourfic-settings/search-page/", array( 'utm_medium' => 'settings_doc_search-page' )) .'" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
 				),
 				// Registration
 				array(
@@ -2473,7 +2473,7 @@ TF_Settings::option( 'tf_settings', array(
 									'id'      => 'loginsettings-official-docs',
 									'type'    => 'notice',
 									'style'   => 'success',
-									'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-miscellaneous/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+									'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="'.  Helper::tf_utm_generator("https://themefic.com/docs/tourfic/tourfic-settings/tourfic-miscellaneous/", array( 'utm_medium' => 'settings_doc_miscellaneous' )) .'" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
 								),
 								array(
 									'id'         => '',
@@ -2536,7 +2536,7 @@ TF_Settings::option( 'tf_settings', array(
 									'id'      => 'registersettings-official-docs',
 									'type'    => 'notice',
 									'style'   => 'success',
-									'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-miscellaneous/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+									'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="'.  Helper::tf_utm_generator("https://themefic.com/docs/tourfic/tourfic-settings/tourfic-miscellaneous/", array( 'utm_medium' => 'settings_doc_miscellaneous' )) .'" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
 								),
 								array(
 									'id'         => '',
@@ -2647,7 +2647,7 @@ TF_Settings::option( 'tf_settings', array(
 									'id'      => 'customfield-official-docs',
 									'type'    => 'notice',
 									'style'   => 'success',
-									'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-miscellaneous/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+									'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="' . Helper::tf_utm_generator("https://themefic.com/docs/tourfic/tourfic-settings/tourfic-miscellaneous/", array( 'utm_medium' => 'settings_doc_miscellaneous' )) . '" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
 								),
 								array(
 									'id'           => '',
@@ -2827,7 +2827,7 @@ TF_Settings::option( 'tf_settings', array(
 					'id'      => 'wishlistsettings-official-docs',
 					'type'    => 'notice',
 					'style'   => 'success',
-					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-miscellaneous/#wishlist-settings" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="'. Helper::tf_utm_generator("https://themefic.com/docs/tourfic/tourfic-settings/tourfic-miscellaneous/#wishlist-settings", array( 'utm_medium' => 'settings_doc_miscellaneous_wishlist' )) .'" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
 				),
 
 				array(
@@ -2890,7 +2890,7 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'      => 'permalink_notice',
 					'type'    => 'notice',
-					'content' => __( 'Anything confusing? <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-miscellaneous/#permalink-settings" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>Read Documentation</strong></a>', 'tourfic' ),
+					'content' => __( 'Anything confusing? <a href="' .  Helper::tf_utm_generator("https://themefic.com/docs/tourfic/tourfic-settings/tourfic-miscellaneous/#permalink-settings", array( 'utm_medium' => 'settings_doc_miscellaneous_permalink' )) .'" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>Read Documentation</strong></a>', 'tourfic' ),
 				),
 
 				array(
@@ -2949,7 +2949,7 @@ TF_Settings::option( 'tf_settings', array(
 					'id'      => 'review-settings-official-docs',
 					'type'    => 'notice',
 					'style'   => 'success',
-					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-miscellaneous/#review-settings" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="'. Helper::tf_utm_generator("https://themefic.com/docs/tourfic/tourfic-settings/tourfic-miscellaneous/#review-settings", array( 'utm_medium' => 'settings_doc_miscellaneous_review' )) .'" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
 				),
 				array(
 					'id'      => 'r-for',
@@ -3169,7 +3169,7 @@ TF_Settings::option( 'tf_settings', array(
 					'id'      => 'optimize-settings-official-docs',
 					'type'    => 'notice',
 					'style'   => 'success',
-					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/optimization-settings/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="'.Helper::tf_utm_generator("https://themefic.com/docs/tourfic/tourfic-settings/optimization-settings/", array( 'utm_medium' => 'settings_doc_optimization' )).'" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
 				),
 				array(
 					'id'        => 'css_min',
@@ -3520,7 +3520,7 @@ TF_Settings::option( 'tf_settings', array(
 					'id'      => 'qrcode-official-docs',
 					'type'    => 'notice',
 					'style'   => 'success',
-					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/qr-code/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="'.Helper::tf_utm_generator("https://themefic.com/docs/tourfic/tourfic-settings/qr-code/", array( 'utm_medium' => 'settings_doc_qr-code' )).'" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
 				),
 				array(
 					'id'    => 'qr_logo',
@@ -3791,7 +3791,7 @@ TF_Settings::option( 'tf_settings', array(
 									'type'    => 'zapier-official-docs',
 									'type'    => 'notice',
 									'style'   => 'success',
-									'content' => __( 'Anything confusing? ', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/pabbly-vs-zapier-integrations/zapier-integration/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+									'content' => __( 'Anything confusing? ', 'tourfic' ) . ' <a href="'.Helper::tf_utm_generator("https://themefic.com/docs/tourfic/pabbly-vs-zapier-integrations/zapier-integration/", array( 'utm_medium' => 'settings_doc_integrations_zapier' )).'" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
 								),
 								array(
 									'id'      => 'hotel-title',
@@ -3989,7 +3989,7 @@ TF_Settings::option( 'tf_settings', array(
 									'type'    => 'google-calendar-official-docs',
 									'type'    => 'notice',
 									'style'   => 'success',
-									'content' => __( 'Anything confusing? ', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/settings/integration/#Google_Calendar_Setup" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+									'content' => __( 'Anything confusing? ', 'tourfic' ) . ' <a href="'.Helper::tf_utm_generator("https://themefic.com/docs/tourfic/settings/integration/#Google_Calendar_Setup", array( 'utm_medium' => 'settings_doc_integration_google-cal' )).'" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
 								),
 								array(
 									'id'      => 'woocommerce-title',
@@ -4065,7 +4065,7 @@ TF_Settings::option( 'tf_settings', array(
 					'type'    => 'cancellation-official-docs',
 					'type'    => 'notice',
 					'style'   => 'success',
-					'content' => esc_html__( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/settings/cancellation-settings/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . esc_html__( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+					'content' => esc_html__( 'Anything confusing?', 'tourfic' ) . ' <a href="'.Helper::tf_utm_generator("https://themefic.com/docs/tourfic/settings/cancellation-settings/", array( 'utm_medium' => 'settings_doc_cancellation' )).'" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . esc_html__( 'Read Documentation', 'tourfic' ) . '</strong></a>',
 				),
 				array(
 					'id'      => 'timezone-title',
@@ -4145,7 +4145,7 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'      => 'export-import-notice-one',
 					'type'    => 'notice',
-					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/settings/import-export/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="'.Helper::tf_utm_generator("https://themefic.com/docs/tourfic/settings/import-export/", array( 'utm_medium' => 'settings_doc_import-export' )).'" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
 				),
 				array(
 					'id' => 'backup',
@@ -4178,7 +4178,7 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'      => 'tour-option-notice-three',
 									'type'    => 'notice',
-									'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-tours-options/#itinerary" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+									'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="'. Helper::tf_utm_generator("https://themefic.com/docs/tourfic/tourfic-settings/tourfic-tours-options/#itinerary", array( 'utm_medium' => 'settings_doc_tours_itinerary' )) .'" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
 								),
 								array(
 									'id'       => 'itinerary-builder-heading',
@@ -4274,7 +4274,7 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'      => 'tour-option-notice-three',
 									'type'    => 'notice',
-									'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-tours-options/#itinerary" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+									'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="'. Helper::tf_utm_generator("https://themefic.com/docs/tourfic/tourfic-settings/tourfic-tours-options/#itinerary", array( 'utm_medium' => 'settings_doc_tours_itinerary' ))  .'" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
 								),
 								array(
 									'id'       => '',
@@ -4515,7 +4515,7 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'      => 'tour-option-notice-two',
 					'type'    => 'notice',
-					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-tours-options/#partial_payment" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="'. Helper::tf_utm_generator("https://themefic.com/docs/tourfic/tourfic-settings/tourfic-tours-options/#partial_payment", array( 'utm_medium' => 'settings_doc_tours_partial-payment' )) .'" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
 				),
 
 				array(
@@ -4556,7 +4556,7 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'      => 'tour-option-notice-four',
 					'type'    => 'notice',
-					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-tours-options/#Without_payment_Book" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="'.  Helper::tf_utm_generator("https://themefic.com/docs/tourfic/tourfic-settings/tourfic-tours-options/#Without_payment_Book", array( 'utm_medium' => 'settings_doc_tours_without-payment' )) .'" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
 				),
 				array(
 					'id'           => '',
@@ -4750,7 +4750,7 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'      => 'hotel-option-notice-three',
 					'type'    => 'notice',
-					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-hotel-options/#popup" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="'. Helper::tf_utm_generator("https://themefic.com/docs/tourfic/tourfic-settings/tourfic-hotel-options/#popup", array( 'utm_medium' => 'settings_doc_hotels_popup' )) .'" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
 				),
 				array(
 					'id'    => '',
@@ -4791,7 +4791,7 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'      => 'tour-option-notice-four',
 					'type'    => 'notice',
-					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/settings/car-options/#Without_Payment_Settings" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+					'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="'. Helper::tf_utm_generator("https://themefic.com/docs/tourfic/settings/car-options/#Without_Payment_Settings", array( 'utm_medium' => 'settings_doc_cars_without-payment' )) .'" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
 				),
 				array(
 					'id'           => 'book-confirm-field',
