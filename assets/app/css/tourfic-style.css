@@ -9340,6 +9340,14 @@ div#tf-destinationautocomplete-list div:before {
   flex: 5;
 }
 
+@media only screen and (max-width: 768px) {
+  .single-tf_hotel .tf-single-template__legacy .tf-faq-items-wrapper,
+  .single-tf_tours .tf-single-template__legacy .tf-faq-items-wrapper,
+  .single-tf_apartment .tf-single-template__legacy .tf-faq-items-wrapper {
+    margin-top: 10px;
+  }
+}
+
 .single-tf_hotel .tf-single-template__legacy #tf-faq-item,
 .single-tf_tours .tf-single-template__legacy #tf-faq-item,
 .single-tf_apartment .tf-single-template__legacy #tf-faq-item {
@@ -11628,39 +11636,6 @@ div#tf-destinationautocomplete-list div:before {
 .tf-single-template__one .tf-booking-form .tf-booking-person .tf-field .acr-label i {
   position: static;
   margin-right: 5px;
-}
-
-.tf-single-template__one .tf-ask-enquiry {
-  text-align: center;
-}
-
-.tf-single-template__one .tf-ask-enquiry i {
-  text-align: center;
-  background-color: var(--tf-brand-lite);
-  border-radius: 50%;
-  color: var(--tf-primary);
-  margin: auto;
-  margin-bottom: 25px;
-  font-size: 1.875rem;
-  height: 80px;
-  width: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.tf-single-template__one .tf-ask-enquiry h3 {
-  font-size: 1.5rem;
-  color: var(--tf-text-heading);
-}
-
-.tf-single-template__one .tf-ask-enquiry p {
-  margin-top: 5px;
-  margin-bottom: 25px;
-}
-
-.tf-single-template__one .tf-ask-enquiry .tf-btn a:hover {
-  background-color: var(--tf-brand-dark);
 }
 
 .tf-single-template__one .tf-faq-wrapper .tf-faq-inner .tf-faq-single {
@@ -15450,6 +15425,7 @@ div#tf-destinationautocomplete-list div:before {
 
 .tf-single-template__two .tf-send-inquiry i {
   font-size: 4rem;
+  line-height: 1;
 }
 
 .tf-single-template__two .tf-send-inquiry h3 {

@@ -1,10 +1,8 @@
-.single-tf_hotel{
+.single-tf_tours{
     .tf-single-template{
-     
-        &__legacy,
-        &__one{
-            .tf-hotel-faqs-section{
-                .tf-hotel-enquiry{
+        &__legacy{
+            .tour-faq{
+                .tf-tour-enquiry{
                     flex-basis: 32%;
                     padding-right: 30px;
                     @media #{$max768}{
@@ -41,39 +39,6 @@
                             a:hover{
                                 background-color: $color-brand-dark;
                             }
-                        }
-                    }
-                }
-            }
-        }
-        &__one{
-            .tf-hotel-faqs{
-                flex-basis: 68%;
-                @media #{$max768}{
-                    flex-basis: 100%;
-                    margin-top: 30px;
-                }
-                .tf-faq-wrapper{
-                    .tf-faq-single {
-                        border-bottom: 0px solid;
-                        .tf-faq-single-inner{
-                            margin: 0px 0px 30px 0px;
-                            background: $color-filling-fg;
-                            transition: .3s all ease;
-                            @media #{$max768}{
-                                margin: 0px 0px 20px 0px;
-                            }
-                            &:hover{
-                                background: $color-brand-lite;
-                            }
-                            h3{
-                                font-size: 1.25rem;
-                            }
-                        }
-                    }
-                    .tf-faq-single.active {
-                        .tf-faq-single-inner{
-                            background: $color-brand-lite;
                         }
                     }
                 }

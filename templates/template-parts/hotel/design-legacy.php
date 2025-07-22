@@ -275,7 +275,7 @@ $price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings'
 
                                     <a href="https://www.google.com/maps/search/<?php echo esc_attr( $address ); ?>">
                                         <div class="tf-btn-wrap">
-                                            <span class="tf_btn tf_btn_full"><?php esc_html_e( 'Show on Map', 'tourfic' ); ?></span>
+                                            <span class="tf_btn tf_btn_secondary tf_btn_full"><?php esc_html_e( 'Show on Map', 'tourfic' ); ?></span>
                                         </div>
                                     </a>
 
@@ -287,7 +287,7 @@ $price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings'
 
                                     <a href="https://www.google.com/maps/search/<?php echo esc_attr( $address ); ?>">
                                         <div class="tf-btn-wrap">
-                                            <span class="tf_btn tf_btn_full"><?php esc_html_e( 'Show on Map', 'tourfic' ); ?></span>
+                                            <span class="tf_btn tf_btn_secondary tf_btn_full"><?php esc_html_e( 'Show on Map', 'tourfic' ); ?></span>
                                         </div>
                                     </a>
                                     <script>
@@ -312,7 +312,7 @@ $price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings'
 
                                     <a href="https://www.google.com/maps/search/<?php echo esc_attr( $address ); ?>">
                                         <div class="tf-btn-wrap">
-                                            <span class="tf_btn tf_btn_full"><?php esc_html_e( 'Show on Map', 'tourfic' ); ?></span>
+                                            <span class="tf_btn tf_btn_secondary tf_btn_full"><?php esc_html_e( 'Show on Map', 'tourfic' ); ?></span>
                                         </div>
                                     </a>
 
@@ -380,7 +380,7 @@ $price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings'
 
                                 <a  href="https://www.google.com/maps/search/<?php echo esc_attr( $address ); ?>">
                                     <div class="tf-btn-wrap">
-                                        <span class="tf_btn tf_btn_full"><?php esc_html_e( 'Show on Map', 'tourfic' ); ?></span>
+                                        <span class="tf_btn tf_btn_secondary tf_btn_full"><?php esc_html_e( 'Show on Map', 'tourfic' ); ?></span>
                                     </div>
                                 </a>
 
@@ -392,7 +392,7 @@ $price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings'
 
                                 <a href="https://www.google.com/maps/search/<?php echo esc_attr( $address ); ?>">
                                     <div class="tf-btn-wrap">
-                                        <span class="tf_btn tf_btn_full"><?php esc_html_e( 'Show on Map', 'tourfic' ); ?></span>
+                                        <span class="tf_btn tf_btn_secondary tf_btn_full"><?php esc_html_e( 'Show on Map', 'tourfic' ); ?></span>
                                     </div>
                                 </a>
                                 <script>
@@ -416,7 +416,7 @@ $price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings'
 
                                 <a href="https://www.google.com/maps/search/<?php echo esc_attr( $address ); ?>">
                                     <div class="tf-btn-wrap">
-                                        <span class="tf_btn tf_btn_full"><?php esc_html_e( 'Show on Map', 'tourfic' ); ?></span>
+                                        <span class="tf_btn tf_btn_secondary tf_btn_full"><?php esc_html_e( 'Show on Map', 'tourfic' ); ?></span>
                                     </div>
                                 </a>
                             </div>
@@ -865,13 +865,10 @@ $price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings'
 
     <!-- FAQ section Start -->
 	<?php if ( $faqs ): ?>
-        <div class="tf-faq-wrapper hotel-faq sp-50">
+        <div class="tf-hotel-faqs-section sp-50 tf-template-section">
             <div class="tf-container">
-                <div class="tf-faq-sec-title">
-                    <h2 class="section-heading"><?php echo ! empty( $meta['faq-section-title'] ) ? esc_html( $meta['faq-section-title'] ) : ''; ?></h2>
-                </div>
-
-                <div class="tf-faq-content-wrapper">
+                <h2 class="section-heading tf-section-title"><?php echo ! empty( $meta['faq-section-title'] ) ? esc_html( $meta['faq-section-title'] ) : ''; ?></h2>
+                <div class="tf-section-flex tf-flex">
 					<?php
 					$tf_enquiry_section_status = ! empty( $meta['h-enquiry-section'] ) ? $meta['h-enquiry-section'] : "";
 					$tf_enquiry_section_icon   = ! empty( $meta['h-enquiry-option-icon'] ) ? esc_html( $meta['h-enquiry-option-icon'] ) : '';
@@ -881,36 +878,39 @@ $price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings'
 
 					if ( ! empty( $tf_enquiry_section_status ) && ( ! empty( $tf_enquiry_section_icon ) || ! empty( $tf_enquiry_section_title ) || ! empty( $enquery_button_text ) ) ) {
 						?>
-                        <div class="tf-ask-question">
-                            <div class="default-enquiry-title-section">
-								<?php
-								if ( ! empty( $tf_enquiry_section_icon ) ) {
-									?>
-                                    <i class="<?php echo esc_attr( $tf_enquiry_section_icon ); ?>" aria-hidden="true"></i>
-									<?php
-								}
-								if ( ! empty( $tf_enquiry_section_title ) ) {
-									?>
-                                    <h3><?php echo esc_html( $tf_enquiry_section_title ); ?></h3>
-									<?php
-								}
-								?>
+                        <div class="tf-hotel-enquiry">
+                            <div class="tf-ask-enquiry">
+                                <div class="default-enquiry-title-section">
+                                    <?php
+                                    if ( ! empty( $tf_enquiry_section_icon ) ) {
+                                        ?>
+                                        <i class="<?php echo esc_attr( $tf_enquiry_section_icon ); ?>" aria-hidden="true"></i>
+                                        <?php
+                                    }
+                                    if ( ! empty( $tf_enquiry_section_title ) ) {
+                                        ?>
+                                        <h3><?php echo esc_html( $tf_enquiry_section_title ); ?></h3>
+                                        <?php
+                                    }
+                                    ?>
+
+                                </div>
+                                <?php
+                                if ( ! empty( $tf_enquiry_section_des ) ) {
+                                    ?>
+                                    <p><?php echo wp_kses_post( $tf_enquiry_section_des ); ?></p>
+                                    <?php
+                                }
+                                if ( ! empty( $tf_enquiry_section_button ) ) {
+                                    ?>
+                                    <div class="tf-btn-wrap"><a href="https://www.google.com/maps/search/<?php echo esc_attr( $address ); ?>" data-target="#tf-ask-modal" class="tf-modal-btn tf_btn tf_btn_full"><span><?php echo esc_html( $tf_enquiry_section_button ); ?></span></a></div>
+                                    <?php
+                                }
+                                ?>
 
                             </div>
-							<?php
-							if ( ! empty( $tf_enquiry_section_des ) ) {
-								?>
-                                <p><?php echo wp_kses_post( $tf_enquiry_section_des ); ?></p>
-								<?php
-							}
-							if ( ! empty( $tf_enquiry_section_button ) ) {
-								?>
-                                <div class="tf-btn-wrap"><a href="https://www.google.com/maps/search/<?php echo esc_attr( $address ); ?>" data-target="#tf-ask-modal" class="tf-modal-btn tf_btn tf_btn_full"><span><?php echo esc_html( $tf_enquiry_section_button ); ?></span></a></div>
-								<?php
-							}
-							?>
-
                         </div>
+                        
 					<?php } ?>
                     <div class="tf-faq-items-wrapper">
 						<?php foreach ( $faqs as $key => $faq ): ?>

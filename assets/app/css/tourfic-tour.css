@@ -777,6 +777,53 @@
   }
 }
 
+.single-tf_tours .tf-single-template__legacy .tour-faq .tf-tour-enquiry {
+  flex-basis: 32%;
+  padding-right: 30px;
+}
+
+@media only screen and (max-width: 768px) {
+  .single-tf_tours .tf-single-template__legacy .tour-faq .tf-tour-enquiry {
+    flex-basis: 100%;
+    padding-right: 0px;
+  }
+}
+
+.single-tf_tours .tf-single-template__legacy .tour-faq .tf-tour-enquiry .tf-ask-enquiry {
+  background-color: var(--tf-filling-foreground);
+  padding: 30px;
+  text-align: center;
+}
+
+.single-tf_tours .tf-single-template__legacy .tour-faq .tf-tour-enquiry .tf-ask-enquiry i {
+  text-align: center;
+  background-color: var(--tf-brand-lite);
+  border-radius: 50%;
+  color: var(--tf-primary);
+  margin: auto;
+  margin-bottom: 25px;
+  font-size: 1.875rem;
+  height: 80px;
+  width: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.single-tf_tours .tf-single-template__legacy .tour-faq .tf-tour-enquiry .tf-ask-enquiry h3 {
+  font-size: 1.5rem;
+  color: var(--tf-text-heading);
+}
+
+.single-tf_tours .tf-single-template__legacy .tour-faq .tf-tour-enquiry .tf-ask-enquiry p {
+  margin-top: 5px;
+  margin-bottom: 25px;
+}
+
+.single-tf_tours .tf-single-template__legacy .tour-faq .tf-tour-enquiry .tf-ask-enquiry .tf-btn a:hover {
+  background-color: var(--tf-brand-dark);
+}
+
 .single-tf_tours .tf-single-template__legacy .tf-inc-exc-wrapper {
   background-position: center center;
   background-size: cover;
