@@ -18008,6 +18008,7 @@ div#tf-destinationautocomplete-list div:before {
 .page-template-tf-search__two .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-left .tf-section-title-and-location .tf-title-location {
   display: inline-flex;
   margin-top: 6px;
+  margin-bottom: 10px;
 }
 
 @media only screen and (max-width: 1024px) {
