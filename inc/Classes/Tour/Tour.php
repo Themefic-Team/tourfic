@@ -1056,6 +1056,9 @@ class Tour {
                         <div class="tf-form-title">
                             <p><?php esc_html_e( "Person Info", "tourfic" ); ?></p>
                         </div>
+
+						<?php do_action( 'tf_tour_single_before_person_selection' ); ?>
+						
 						<?php if ( ( ! $disable_adult_price && $pricing_rule == 'person' && $adult_price != false ) || ( ! $disable_adult_price && $pricing_rule == 'group' && $group_price != false ) ) :
 							?>
 							<div class="tf-field-group tf-mt-16 tf_acrselection">
@@ -1104,6 +1107,8 @@ class Tour {
 								</div>
 							</div>
 						<?php } ?>
+
+						<?php do_action( 'tf_tour_single_after_person_selection' ); ?>
 
                     </div>
 					<?php } ?>
@@ -1154,7 +1159,7 @@ class Tour {
 											<?php endif; ?>
 											<div class="infant-text"><?php echo ( ! empty( $infant ) ? esc_attr( $infant ) : '0' ) . ' ' . esc_html__( "Infant", "tourfic" ); ?></div>
 										<?php } ?>
-										
+										<?php do_action('tf_tour_single_bottom_booking_bar_after_person_text'); ?>
                                     </div>
                                     <div class="tf_acrselection-wrap" style="display: none;">
                                         <div class="tf_acrselection-inner">
@@ -1192,6 +1197,7 @@ class Tour {
 												</div>
 											<?php } ?>
 											
+											<?php do_action('tf_tour_single_bottom_booking_bar_after_person_selection'); ?>
                                         </div>
                                     </div>
                                 </div>
