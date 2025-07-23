@@ -416,6 +416,10 @@
                 filter_xhr.abort();
             }
 
+            wp.hooks.applyFilters('tf_search_filter_ajax_data', formData, {
+                posttype: posttype,
+            });
+
             //var pagination_url = '/?place=' + dest + '&adults=' + adults + '&children=' + children + '&type=' + posttype;
             //formData.append('pagination_url', pagination_url);
             filter_xhr = $.ajax({

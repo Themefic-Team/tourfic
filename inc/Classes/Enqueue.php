@@ -301,10 +301,11 @@ class Enqueue {
 
 		}
 
+		wp_enqueue_script('wp-hooks');
 		/**
 		 * Custom
 		 */
-		wp_enqueue_script( 'tourfic', TF_ASSETS_APP_URL . 'js/tourfic-scripts' . $min_js . '.js', '', TF_VERSION, true );
+		wp_enqueue_script( 'tourfic', TF_ASSETS_APP_URL . 'js/tourfic-scripts' . $min_js . '.js', array('wp-hooks'), TF_VERSION, true );
 		wp_localize_script( 'tourfic', 'tf_params',
 			array(
 				'nonce'                  => wp_create_nonce( 'tf_ajax_nonce' ),
