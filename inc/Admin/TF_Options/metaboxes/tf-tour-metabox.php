@@ -442,6 +442,21 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'field_width' => 33.33,
 				),
 				array(
+					'id'         => 'min_person',
+					'type'       => 'number',
+					'icon'		 => 'fa-regular fa-user',
+					'label'      => esc_html__( 'Number of Persons', 'tourfic' ),
+					'placeholder' => esc_html__( 'Min', 'tourfic' ),
+					'attributes' => array(
+						'min' => '0',
+					),
+					'range'   => true,
+					'related_name' => 'max_person',
+					'related_placeholder' => esc_html__( 'Max', 'tourfic' ),
+					'description' => esc_html__('Indicate the minimum and maximum number of persons this package can be booked for each booking.','tourfic'),
+					'dependency' => array( 'pricing', '!=', 'package' ),
+				),
+				array(
 					'id'      => 'allow_discount',
 					'type'    => 'switch',
 					'label'   => esc_html__( 'Discount', 'tourfic' ),

@@ -12,7 +12,7 @@ if ( ! class_exists( 'TF_number' ) ) {
 		public function render() {
 			$type = ( ! empty( $this->field['type'] ) ) ? $this->field['type'] : 'number';
 			$placeholder = ( ! empty( $this->field['placeholder'] ) ) ? 'placeholder="' . $this->field['placeholder'] . '"' : '';
-			$related_placeholder = ( ! empty( $this->field['related_placeholder'] ) ) ? 'related_placeholder="' . $this->field['related_placeholder'] . '"' : '';
+			$related_placeholder = ( ! empty( $this->field['related_placeholder'] ) ) ? 'placeholder="' . $this->field['related_placeholder'] . '"' : '';
 
 			if(empty($this->field['range']) && !empty($this->field['related'])){ 
 				echo '<div class="tf-unit-price-box"><input type="' . esc_attr( $type ) . '" name="' . esc_attr( $this->field_name() ) . '" id="' . esc_attr( $this->field_name() ) . '" value="' . esc_attr($this->value) . '" ' . wp_kses_post($placeholder) . ' '. wp_kses_post($this->field_attributes()) .'/>';

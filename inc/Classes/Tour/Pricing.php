@@ -581,6 +581,11 @@ class Pricing {
 			}
 		}
 
+		if(empty($tour_availability_data) && ($pricing_rule=='group' || $pricing_rule=='person')){
+			$min_person = !empty($meta['min_person']) ? $meta['min_person'] : 0;
+			$max_person = !empty($meta['max_person']) ? $meta['max_person'] : 0;
+		}
+
 		return array(
 			'min_person' => $min_person,
 			'max_person' => $max_person,

@@ -592,6 +592,24 @@ function tf_tours_booking_function() {
 	// 	}
 	// }
 
+	// Min and check, when availability is empty
+	if ( $pricing_rule!='package' && empty($matched_availability) ) {
+		$pack_max_people = !empty($meta['max_person']) ? $meta['max_person'] : 0;
+		$pack_min_people = !empty($meta['min_person']) ? $meta['min_person'] : 0;
+
+		$max_text = sprintf( _n( '%s person', '%s people', $pack_max_people, 'tourfic' ), $pack_max_people );
+		if ( $total_people_booking > $pack_max_people && $pack_max_people > 0 ) {
+			/* translators: %1$s: maximum number of people, %2$s: start date, %3$s: end date */
+			$response['errors'][] = sprintf( esc_html__( 'Maximum %1$s allowed', 'tourfic' ), $max_text );
+		}
+
+		$min_text = sprintf( _n( '%s person', '%s people', $pack_min_people, 'tourfic' ), $pack_min_people );
+		if ( $total_people_booking < $pack_min_people && $pack_min_people > 0 ) {
+			/* translators: %1$s: Minimum number of people, %2$s: start date, %3$s: end date */
+			$response['errors'][] = sprintf( esc_html__( 'Minimum %1$s required', 'tourfic' ), $min_text );
+		}
+	}
+
 	/**
 	 * Check errors
 	 *
