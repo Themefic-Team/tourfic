@@ -2044,6 +2044,7 @@
                 var $selectedDiv = $('#package-' + selectedPackage).closest('.tf-single-package');
                 adults = $selectedDiv.find('input[name="adults"]').val();
                 children = $selectedDiv.find('input[name="childrens"]').val();
+                check_in_time = $selectedDiv.find('select[name=package_start_time] option').filter(':selected').val();
 
                 $('.tf-single-package').each(function () {
                     var $package = $(this);
@@ -2125,6 +2126,23 @@
                         if ($('.tf-booking-traveller-info').length > 0) {
                             $('.tf-booking-traveller-info').html(response.traveller_summery);
                         }
+                        if (response.pacakge_times && typeof response.pacakge_times === 'object') {
+                            Object.entries(response.pacakge_times).forEach(([key, times]) => {
+                                const wrapper = $(`.tf-package-times-${key}`);
+                                wrapper.css('display', 'flex');
+                                const select = wrapper.find('select[name="package_start_time"]');
+                                if (select.length && select.children('option').length === 0) {                        
+                                    // Add placeholder option first
+                                    select.append(`<option value="" disabled selected>Time</option>`);
+
+                                    // Then add time options
+                                    times.forEach((time) => {
+                                        select.append(`<option value="${time}">${time}</option>`);
+                                    });
+                                }
+                            });
+                        }
+                        
                         $('.tf-withoutpayment-booking').addClass('show');
                     }
                 },

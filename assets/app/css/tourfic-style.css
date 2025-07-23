@@ -3470,7 +3470,7 @@ li.tf-filter-item {
 }
 .tf-withoutpayment-booking .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-package .tf-single-package .tf-package-content .tf-pacakge-persons .tf-pacakge-times,
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-content-summery .tf-booking-content .tf-booking-content-package .tf-single-package .tf-package-content .tf-pacakge-persons .tf-pacakge-times {
-  display: flex;
+  display: none;
   gap: 16px;
   justify-content: space-between;
   align-items: center;

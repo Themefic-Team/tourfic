@@ -2060,8 +2060,7 @@ class Tour {
 															</clipPath>
 														</defs>
 														</svg>
-														<select name="start_time" id="start_time">
-															<option value="12.00">12.00 AM</option>
+														<select name="package_start_time" id="package_start_time">
 														</select>
 													</div>
 												</div>
@@ -3706,7 +3705,7 @@ class Tour {
 		$tour_date = ! empty( $_POST['check_in_date'] ) ? sanitize_text_field( $_POST['check_in_date'] ) : '';
 		$tour_time = isset( $_POST['check_in_time'] ) ? sanitize_text_field( $_POST['check_in_time'] ) : null;
 		$selectedPackage = ! empty( $_POST['selectedPackage'] ) ? $_POST['selectedPackage'] : '';
-
+		// var_dump($tour_time);
 
 		$post_id              = isset( $_POST['post_id'] ) ? intval( sanitize_text_field( $_POST['post_id'] ) ) : '';
 		$meta                 = get_post_meta( $post_id, 'tf_tours_opt', true );
@@ -4546,6 +4545,25 @@ class Tour {
 			# Show errors
 			$response['status'] = 'error';
 
+		}
+
+		// var_dump($matched_availability); exit();
+		if(!empty($matched_availability['options_count'])){
+			$filtered_times = [];
+
+			foreach ($matched_availability as $key => $value) {
+				if (strpos($key, 'tf_option_times_') === 0 && is_array($value)) {
+					$index = str_replace('tf_option_times_', '', $key);
+
+					// Check if 'time' exists and contains at least one non-empty value
+					if (!empty($value['time']) && array_filter($value['time'])) {
+						$filtered_times[$index] = array_values(array_filter($value['time']));
+					}
+				}
+			}
+			if(!empty($filtered_times)){
+				$response['pacakge_times'] = $filtered_times;
+			}
 		}
 
 		echo wp_json_encode( $response );
