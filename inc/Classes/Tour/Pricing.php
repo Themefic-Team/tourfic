@@ -401,27 +401,27 @@ class Pricing {
 		}
 		if(!$is_package_price && !empty($package_pricing)){
 			foreach($package_pricing as $package){
-				if (!empty($package['adult_price'])) {
-					if (is_null($min_adult_price) || $package['adult_price'] < $min_adult_price) {
-						$min_adult_price = $package['adult_price'];
+				if (!empty($package['adult_tabs'][1]['adult_price'])) {
+					if (is_null($min_adult_price) || $package['adult_tabs'][1]['adult_price'] < $min_adult_price) {
+						$min_adult_price = $package['adult_tabs'][1]['adult_price'];
 					}
 				}
 
-				if (!empty($package['child_price'])) {
-					if (is_null($min_child_price) || $package['child_price'] < $min_child_price) {
-						$min_child_price = $package['child_price'];
+				if (!empty($package['child_tabs'][1]['child_price'])) {
+					if (is_null($min_child_price) || $package['child_tabs'][1]['child_price'] < $min_child_price) {
+						$min_child_price = $package['child_tabs'][1]['child_price'];
 					}
 				}
 
-				if (!empty($package['infant_price'])) {
-					if (is_null($min_infant_price) || $package['infant_price'] < $min_infant_price) {
-						$min_infant_price = $package['infant_price'];
+				if (!empty($package['infant_tabs'][1]['infant_price'])) {
+					if (is_null($min_infant_price) || $package['infant_tabs'][1]['infant_price'] < $min_infant_price) {
+						$min_infant_price = $package['infant_tabs'][1]['infant_price'];
 					}
 				}
 
-				if (!empty($package['group_price'])) {
-					if (is_null($min_group_price) || $package['group_price'] < $min_group_price) {
-						$min_group_price = $package['group_price'];
+				if (!empty($package['group_tabs'][1]['group_price'])) {
+					if (is_null($min_group_price) || $package['group_tabs'][1]['group_price'] < $min_group_price) {
+						$min_group_price = $package['group_tabs'][1]['group_price'];
 					}
 				}
 
@@ -510,35 +510,35 @@ class Pricing {
 					}
 				}
 
-				if($data['pricing_type'] == 'group' && !empty($allow_package_pricing) && !empty($group_package_pricing) ){
-					if(!empty($data['options_count'])){
-						for($i = 0; $i < $data['options_count']; $i++){
-							if (!empty($data['tf_option_min_person_'.$i])) {
-								if (is_null($min_person) || $data['tf_option_min_person_'.$i] < $min_person) {
-									$min_person = $data['tf_option_min_person_'.$i];
-								}
-							}
-							if (!empty($data['tf_option_max_person_'.$i])) {
-								if (is_null($max_person) || $data['tf_option_max_person_'.$i] > $max_person) {
-									$max_person = $data['tf_option_max_person_'.$i];
-								}
-							}
-						}
-					}
-				}
+				// if($data['pricing_type'] == 'group' && !empty($allow_package_pricing) && !empty($group_package_pricing) ){
+				// 	if(!empty($data['options_count'])){
+				// 		for($i = 0; $i < $data['options_count']; $i++){
+				// 			if (!empty($data['tf_option_min_person_'.$i])) {
+				// 				if (is_null($min_person) || $data['tf_option_min_person_'.$i] < $min_person) {
+				// 					$min_person = $data['tf_option_min_person_'.$i];
+				// 				}
+				// 			}
+				// 			if (!empty($data['tf_option_max_person_'.$i])) {
+				// 				if (is_null($max_person) || $data['tf_option_max_person_'.$i] > $max_person) {
+				// 					$max_person = $data['tf_option_max_person_'.$i];
+				// 				}
+				// 			}
+				// 		}
+				// 	}
+				// }
 
-				if($data['pricing_type'] == 'group' && (empty($allow_package_pricing) || empty($group_package_pricing)) ){
-					if (!empty($data['min_person'])) {
-						if (is_null($min_person) || $data['min_person'] < $min_person) {
-							$min_person = $data['min_person'];
-						}
-					}
-					if (!empty($data['max_person'])) {
-						if (is_null($max_person) || $data['max_person'] > $max_person) {
-							$max_person = $data['max_person'];
-						}
-					}
-				}
+				// if($data['pricing_type'] == 'group' && (empty($allow_package_pricing) || empty($group_package_pricing)) ){
+				// 	if (!empty($data['min_person'])) {
+				// 		if (is_null($min_person) || $data['min_person'] < $min_person) {
+				// 			$min_person = $data['min_person'];
+				// 		}
+				// 	}
+				// 	if (!empty($data['max_person'])) {
+				// 		if (is_null($max_person) || $data['max_person'] > $max_person) {
+				// 			$max_person = $data['max_person'];
+				// 		}
+				// 	}
+				// }
 
 			}
 		}
@@ -546,36 +546,47 @@ class Pricing {
 		$package_pricing = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
 		if(!empty($package_pricing) && $pricing_rule=='package'){
 			foreach($package_pricing as $package){
-				if (!empty($package['min_adult'])) {
-					if (is_null($min_person) || $package['min_adult'] < $min_person) {
-						$min_person = $package['min_adult'];
+				if (!empty($package['adult_tabs'][2]['min_adult'])) {
+					if (is_null($min_person) || $package['adult_tabs'][2]['min_adult'] < $min_person) {
+						$min_person = $package['adult_tabs'][2]['min_adult'];
 					}
 				}
-				if (!empty($package['max_adult'])) {
-					if (is_null($max_person) || $package['max_adult'] > $max_person) {
-						$max_person = $package['max_adult'];
-					}
-				}
-
-				if (!empty($package['min_child'])) {
-					if (is_null($min_person) || $package['min_child'] < $min_person) {
-						$min_person = $package['min_child'];
-					}
-				}
-				if (!empty($package['max_child'])) {
-					if (is_null($max_person) || $package['max_child'] > $max_person) {
-						$max_person = $package['max_child'];
+				if (!empty($package['adult_tabs'][3]['max_adult'])) {
+					if (is_null($max_person) || $package['adult_tabs'][3]['max_adult'] > $max_person) {
+						$max_person = $package['adult_tabs'][3]['max_adult'];
 					}
 				}
 
-				if (!empty($package['min_infant'])) {
-					if (is_null($min_person) || $package['min_infant'] < $min_person) {
-						$min_person = $package['min_infant'];
+				if (!empty($package['child_tabs'][2]['min_child'])) {
+					if (is_null($min_person) || $package['child_tabs'][2]['min_child'] < $min_person) {
+						$min_person = $package['child_tabs'][2]['min_child'];
 					}
 				}
-				if (!empty($package['max_infant'])) {
-					if (is_null($max_person) || $package['max_infant'] > $max_person) {
-						$max_person = $package['max_infant'];
+				if (!empty($package['child_tabs'][3]['max_child'])) {
+					if (is_null($max_person) || $package['child_tabs'][3]['max_child'] > $max_person) {
+						$max_person = $package['child_tabs'][3]['max_child'];
+					}
+				}
+
+				if (!empty($package['infant_tabs'][2]['min_infant'])) {
+					if (is_null($min_person) || $package['infant_tabs'][2]['min_infant'] < $min_person) {
+						$min_person = $package['infant_tabs'][2]['min_infant'];
+					}
+				}
+				if (!empty($package['infant_tabs'][3]['max_infant'])) {
+					if (is_null($max_person) || $package['infant_tabs'][3]['max_infant'] > $max_person) {
+						$max_person = $package['infant_tabs'][3]['max_infant'];
+					}
+				}
+
+				if (!empty($package['group_tabs'][2]['min_person'])) {
+					if (is_null($min_person) || $package['group_tabs'][2]['min_person'] < $min_person) {
+						$min_person = $package['group_tabs'][2]['min_person'];
+					}
+				}
+				if (!empty($package['group_tabs'][3]['max_person'])) {
+					if (is_null($max_person) || $package['group_tabs'][3]['max_person'] > $max_person) {
+						$max_person = $package['group_tabs'][3]['max_person'];
 					}
 				}
 			}
