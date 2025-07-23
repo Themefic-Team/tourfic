@@ -944,15 +944,21 @@
                     url: tf_params.ajax_url,
                     data: data,
                     beforeSend: function (data) {
-                        notyf.success(tf_params.wishlist_add)
+                        window.wishlistNotification = notyf.success({
+                            message: tf_params.wishlist_add
+                        });
                     },
                     success: function (response) {
                         if (response.success) {
                             wishIconFill(targetNode);
-                            notyf.success({
-                                message: response.data,
-                                duration: 4e3
-                            });
+                            setTimeout(function() {
+                                if (window.wishlistNotification) {
+                                    notyf.dismiss(window.wishlistNotification);
+                                }
+                                notyf.success({
+                                    message: response.data,
+                                });
+                            }, 400); 
                         }
                     }
                 });
@@ -960,12 +966,19 @@
             } else {
                 /* For guest */
                 if (addWish(data) === true) {
-                    notyf.success(tf_params.wishlist_add)
-                    wishIconFill(targetNode);
-                    notyf.success({
-                        message: tf_params.wishlist_added,
-                        duration: 4e3
+                    window.wishlistNotification = notyf.success({
+                        message: tf_params.wishlist_add
                     });
+                    wishIconFill(targetNode);
+                    
+                    setTimeout(function() {
+                        if (window.wishlistNotification) {
+                            notyf.dismiss(window.wishlistNotification);
+                        }
+                        notyf.success({
+                            message: tf_params.wishlist_add_success || 'Added to wishlist successfully'
+                        });
+                    }, 1000);
                 } else notyf.error(tf_params.wishlist_add_error);
 
             }
@@ -2767,6 +2780,27 @@
             if (!$(e.target).closest('.info-select').length) {
                 $('.time-options-list').slideUp(200);
                 $('.selected-dropoff-time, .selected-pickup-time').removeClass('active');
+            }
+        });
+
+        // Offset scroll to available room
+        $('.tf-available-room-content-right .tf_btn').on('click', function(e){
+            var target = $(this).attr('href');
+            if (target.startsWith('#')) {
+                console.log('clicked');
+                e.preventDefault();
+
+                var offset = 200;
+                if (window.innerWidth <= 768) {
+                    offset = 100;
+                }
+
+                var targetElement = $(target);
+                if (targetElement.length) {
+                    $('html, body').animate({
+                        scrollTop: targetElement.offset().top - offset
+                    }, 600);
+                }
             }
         });
     });

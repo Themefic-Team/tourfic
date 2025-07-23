@@ -40,7 +40,7 @@ $price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings'
 	<?php do_action( 'tf_before_container' ); ?>
 
     <!-- Start title area -->
-    <div class="tf-title-area tf-hotel-title sp-20">
+    <div class="tf-title-area tf-hotel-title sp-b-20">
         <div class="tf-container">
             <div class="tf-title-wrap">
                 <div class="tf-title-left">

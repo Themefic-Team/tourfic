@@ -421,6 +421,16 @@
 
             //Tourfic review reply
             .tf-review-reply{
+                .tf-review-replay-data{
+                    border-bottom: 1px solid $color-border-lite;
+                    padding-bottom: 30px;
+                    margin-bottom: 30px;
+                    &:last-child{
+                        border-bottom: none;
+                        padding-bottom: 0px;
+                        margin-bottom: 0px;
+                    }
+                }
                 .tf-review-details{
                     .tf-review-ratings {
                         i {

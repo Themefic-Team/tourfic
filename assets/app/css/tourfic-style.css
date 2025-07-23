@@ -1488,6 +1488,14 @@ body {
   padding: 20px 0;
 }
 
+.sp-b-20 {
+  padding-bottom: 20px;
+}
+
+.sp-t-20 {
+  padding-top: 20px;
+}
+
 .sp-30 {
   padding: 30px 0;
 }
@@ -1580,11 +1588,17 @@ h3.section-heading {
   margin-top: 0;
   margin-bottom: 6px;
   color: var(--tf-text-heading);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 @media only screen and (max-width: 768px) {
   .tf-title-area h1 {
     font-size: 1.75rem;
+    line-height: 1.3;
   }
 }
 
@@ -1597,6 +1611,7 @@ h3.section-heading {
 .tf-title-area .tf-title-wrap {
   display: flex;
   justify-content: space-between;
+  gap: 20px;
 }
 
 @media only screen and (max-width: 768px) {
@@ -1619,6 +1634,14 @@ h3.section-heading {
   display: inline-block;
 }
 
+.tf-title-area .tf-title-wrap .tf-title-left .tf-map-link .tf-d-ib {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
 .tf-title-area .tf-title-wrap .tf-title-left .tf-map-link a {
   color: var(--tf-primary);
 }
@@ -1632,7 +1655,6 @@ h3.section-heading {
 @media only screen and (max-width: 768px) {
   .tf-title-area .tf-title-wrap .tf-title-right {
     margin-top: 15px;
-    justify-content: end;
   }
 }
 
@@ -11482,6 +11504,18 @@ div#tf-destinationautocomplete-list div:before {
   border-radius: 7px;
 }
 
+.tf-single-template__one .tf-review-wrapper .tf-review-reply .tf-review-replay-data {
+  border-bottom: 1px solid var(--tf-border-lite);
+  padding-bottom: 30px;
+  margin-bottom: 30px;
+}
+
+.tf-single-template__one .tf-review-wrapper .tf-review-reply .tf-review-replay-data:last-child {
+  border-bottom: none;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}
+
 .tf-single-template__one .tf-review-wrapper .tf-review-reply .tf-review-details .tf-review-ratings i {
   color: var(--tf-primary);
 }
@@ -12503,6 +12537,14 @@ div#tf-destinationautocomplete-list div:before {
 .tf-archive-template__legacy,
 .page-template-tf-search__legacy {
   padding: 40px 0px;
+}
+
+@media only screen and (max-width: 768px) {
+  .tf-single-template__legacy,
+  .tf-archive-template__legacy,
+  .page-template-tf-search__legacy {
+    padding: 32px 0px;
+  }
 }
 
 .tf-single-template__two,
@@ -15872,6 +15914,11 @@ div#tf-destinationautocomplete-list div:before {
   color: #ffffff;
   margin-bottom: 16px;
   font-size: 2.375rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -15884,15 +15931,6 @@ div#tf-destinationautocomplete-list div:before {
   .tf-single-template__two .tf-hero-section-wrap .tf-container .tf-hero-content .tf-hero-bottom-area .tf-head-title h1 {
     font-size: 1.25rem;
     margin-bottom: 8px;
-  }
-}
-
-@media only screen and (max-width: 575.98px) {
-  .tf-single-template__two .tf-hero-section-wrap .tf-container .tf-hero-content .tf-hero-bottom-area .tf-head-title h1 {
-    display: -webkit-box;
-    overflow: hidden;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
   }
 }
 
@@ -15926,6 +15964,11 @@ div#tf-destinationautocomplete-list div:before {
 .tf-single-template__two .tf-hero-section-wrap .tf-container .tf-hero-content .tf-hero-bottom-area .tf-head-title .tf-title-meta a {
   color: #ffffff;
   font-size: 1.3rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -17806,9 +17849,10 @@ div#tf-destinationautocomplete-list div:before {
 @media only screen and (max-width: 1024px) {
   .tf-archive-template__two .tf-available-archive-hetels-wrapper .tf-archive-available-rooms-head .tf-archive-ordering #tf-orderby,
   .page-template-tf-search__two .tf-available-archive-hetels-wrapper .tf-archive-available-rooms-head .tf-archive-ordering #tf-orderby {
-    font-size: 0.875rem;
+    font-size: 1rem;
     padding: 10px 36px 10px 10px;
     background-size: 14px;
+    background: transparent;
   }
 }
 

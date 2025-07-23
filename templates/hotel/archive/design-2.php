@@ -46,9 +46,6 @@
                     <div class="tf-available-archive-hetels-wrapper tf-available-rooms-wrapper" id="tf-hotel-rooms">
                         <div class="tf-archive-available-rooms-head tf-available-rooms-head">
                             <span class="tf-total-results"><?php esc_html_e("Total", "tourfic"); ?> <span><?php echo esc_html( $post_count ); ?></span> <?php esc_html_e("hotels available", "tourfic"); ?></span>
-                            <div class="tf-archive-filter-showing">
-                                <i class="ri-equalizer-line"></i>
-                            </div>
                             <div class="tf-sorting-selection-warper">
                                 <form class="tf-archive-ordering" method="get">
                                     <select class="tf-orderby" name="tf-orderby" id="tf-orderby">
@@ -62,6 +59,9 @@
                                     </select>
                                     <i class="fas fa-chevron-down"></i>
                                 </form>
+                            </div>
+                            <div class="tf-archive-filter-showing">
+                                <i class="ri-equalizer-line"></i>
                             </div>
                         </div>
                         

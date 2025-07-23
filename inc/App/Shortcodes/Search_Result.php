@@ -519,9 +519,6 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 							esc_html_e("tours available", "tourfic");
 						} ?>
 					</span>
-					<div class="tf-archive-filter-showing">
-						<i class="ri-equalizer-line"></i>
-					</div>
 					<div class="tf-sorting-selection-warper">
 						<form class="tf-archive-ordering" method="get">
 							<select class="tf-orderby" name="tf-orderby" id="tf-orderby">
@@ -535,6 +532,9 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 							</select>
 							<i class="fas fa-chevron-down"></i>
 						</form>
+					</div>
+					<div class="tf-archive-filter-showing">
+						<i class="ri-equalizer-line"></i>
 					</div>
 				</div>
 

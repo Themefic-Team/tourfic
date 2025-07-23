@@ -1236,7 +1236,7 @@
 
 .single-tf_hotel .tf-single-template__one .tf-review-wrapper .tf-review-reply {
   border-bottom: 1px solid var(--tf-border-lite);
-  padding-bottom: 50px;
+  padding-bottom: 30px;
 }
 
 @media only screen and (max-width: 768px) {

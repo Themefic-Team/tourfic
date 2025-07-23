@@ -129,9 +129,12 @@
          */
         $(document).on('click', '.hotel-room-availability', function (e) {
             e.preventDefault();
-
+            var offset = 200;
+            if (window.innerWidth <= 768) {
+                offset = 100;
+            }
             $('html, body').animate({
-                scrollTop: $("#tf-single-hotel-avail").offset().top
+                scrollTop: $("#tf-single-hotel-avail").offset().top - offset
             }, 500);
         });
 
