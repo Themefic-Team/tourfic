@@ -4547,7 +4547,6 @@ class Tour {
 
 		}
 
-		// var_dump($matched_availability); exit();
 		if(!empty($matched_availability['options_count'])){
 			$filtered_times = [];
 
