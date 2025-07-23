@@ -117,6 +117,9 @@
             var selectedPackage = $('.tf-booking-content-package input[name="tf_package"]:checked').val();
             if (selectedPackage !== undefined) {
                 formData.append('selectedPackage', selectedPackage);
+                var $selectedDiv = $('#package-' + selectedPackage).closest('.tf-single-package');
+                var check_in_time = $selectedDiv.find('select[name=package_start_time] option').filter(':selected').val();
+                formData.append('check-in-time', check_in_time);
             }
             $.ajax({
                 type: 'post',

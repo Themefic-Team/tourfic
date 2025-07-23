@@ -1027,6 +1027,7 @@ class TF_Options {
 						$options_data[ 'tf_option_child_price_' . $j ]  = isset( $_POST[ 'tf_option_child_price_' . $j ] ) && ! empty( $_POST[ 'tf_option_child_price_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_child_price_' . $j ] ) : '';
 						$options_data[ 'tf_option_infant_price_' . $j ]  = isset( $_POST[ 'tf_option_infant_price_' . $j ] ) && ! empty( $_POST[ 'tf_option_infant_price_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_infant_price_' . $j ] ) : '';
 						$options_data[ 'tf_option_group_discount_' . $j ]  = isset( $_POST[ 'tf_option_' . $j.'_group_discount' ] ) && ! empty( $_POST[ 'tf_option_' . $j.'_group_discount' ] ) ? $_POST[ 'tf_option_' . $j.'_group_discount' ] : '';
+						$options_data[ 'tf_option_times_' . $j ]  = isset( $_POST[ 'tf_option_' . $j.'_allowed_time' ] ) && ! empty( $_POST[ 'tf_option_' . $j.'_allowed_time' ] ) ? $_POST[ 'tf_option_' . $j.'_allowed_time' ] : '';
 					}
 				}
 				if ( ! empty( $options_data ) ) {
@@ -1116,14 +1117,15 @@ class TF_Options {
 			$tour_availability_data = array_map( function ( $item ) use ($group_package_option, $group_package_pricing) {	
 
 				$time_string = '';
-				$active_times =  $item['allowed_time'] ? $item['allowed_time'] : ''; 
-				if(!empty($active_times["time"])){
-					$active_time = implode(', ', array_filter($active_times['time']));
+				if($item['pricing_type'] == 'group' || $item['pricing_type'] == 'person'){
+					$active_times =  $item['allowed_time'] ? $item['allowed_time'] : '';
+					if(!empty($active_times["time"])){
+						$active_time = implode(', ', array_filter($active_times['time']));
+					}
+					if(!empty($active_time)){
+						$time_string = 'Time: '.$active_time;
+					}
 				}
-				if(!empty($active_time)){
-					$time_string = 'Time: '.$active_time;
-				}
-				
 				if ( $item['pricing_type'] == 'group' && (empty($group_package_option) || empty($group_package_pricing)) ) {
 					$item['title'] = __( 'Price: ', 'tourfic' ) . wc_price( $item['price'] ) . '<br>'. $time_string;
 				} elseif ( $item['pricing_type'] == 'person' ) {
@@ -1132,18 +1134,24 @@ class TF_Options {
 					$item['title'] = '';
 					if ( ! empty( $item['options_count'] ) ) {
 						for ( $i = 0; $i <= $item['options_count'] - 1; $i ++ ) {
+							$package_active_times =  $item['tf_option_times_'.$i] ? $item['tf_option_times_'.$i] : '';
+							if(!empty($package_active_times["time"])){
+								$package_active_time = implode(', ', array_filter($package_active_times['time']));
+							}
+
 							if ( $item['tf_option_pricing_type_'.$i] == 'group') {
 								$item['title'] .= __( 'Title: ', 'tourfic' ) . $item['tf_option_title_'.$i] . '<br>';
-								$item['title'] .= __( 'Group Price: ', 'tourfic' ) . wc_price($item['tf_option_group_price_'.$i]). '<br><br>';
+								$item['title'] .= __( 'Group Price: ', 'tourfic' ) . wc_price($item['tf_option_group_price_'.$i]). '<br>';
+								$item['title'] .=  !empty($package_active_time) ? 'Time: '.$package_active_time. '<br><br>' : '';
 							} else if($item['tf_option_pricing_type_'.$i] == 'person'){
 								$item['title'] .= __( 'Title: ', 'tourfic' ) . $item['tf_option_title_'.$i] . '<br>';
 								$item['title'] .= __( 'Adult: ', 'tourfic' ) . wc_price($item['tf_option_adult_price_'.$i]). '<br>';
 								$item['title'] .= __( 'Child: ', 'tourfic' ) . wc_price($item['tf_option_child_price_'.$i]). '<br>';
-								$item['title'] .= __( 'Infant: ', 'tourfic' ) . wc_price($item['tf_option_infant_price_'.$i]). '<br><br>';
+								$item['title'] .= __( 'Infant: ', 'tourfic' ) . wc_price($item['tf_option_infant_price_'.$i]). '<br>';
+								$item['title'] .=  !empty($package_active_time) ? 'Time: '.$package_active_time. '<br><br>' : '';
                             }
 						}
 					}
-					$item['title'] .=  $time_string;
 				} elseif ( $item['pricing_type'] == 'group' && !empty($group_package_option) && !empty($group_package_pricing) ) {
 					$item['title'] = '';
 					if ( ! empty( $item['options_count'] ) ) {
@@ -1425,7 +1433,61 @@ class TF_Options {
 									</div> <!-- .tf-tab-field-content -->
 								</div> <!-- #group_tabs -->
 
-								<?php echo do_action('tf_tour_availability_cal_option_package_pricing_fields', $package_pricing, $item, $key); ?>
+                                <?php echo do_action('tf_tour_availability_cal_option_package_pricing_fields', $package_pricing, $item, $key); ?>
+
+								<!-- repeated package times -->
+								<div class="tf-field tf-field-repeater tf-package-time-fields">
+									<div class="tf-fieldset">
+										<div id="tf-repeater-1" class="tf-repeater allowed_time" data-max-index="0">
+										<div class="tf-repeater-wrap tf_tour_allowed_times tf-repeater-wrap-allowed_time ui-sortable tf-tour-package-allowed-time_<?php echo esc_attr( $item['index'] ); ?>">
+
+										</div>
+										<div class=" tf-single-repeater-clone tf-single-repeater-clone-allowed_time">
+											<div class="tf-single-repeater tf-single-repeater-allowed_time">
+												<input type="hidden" name="tf_parent_field" value="">
+												<input type="hidden" name="tf_repeater_count" value="0">
+												<input type="hidden" name="tf_current_field" value="allowed_time">
+												<div class="tf-repeater-content-wrap">
+													<div class="tf-field tf-field-time" style="width: calc(50% - 6px);">
+														<div class="tf-fieldset">
+															<input type="text" name="tf_option_<?php echo esc_attr( $item['index'] ); ?>_allowed_time[time][]" placeholder="Select Time" value="" class="flatpickr flatpickr-input" data-format="h:i K" readonly="readonly">
+															<i class="fa-regular fa-clock"></i>
+														</div>
+													</div>
+													<div class="tf-field tf-field-number" style="width: calc(50% - 6px);">
+														<div class="tf-fieldset">
+															<input type="number" name="tf_option_<?php echo esc_attr( $item['index'] ); ?>_allowed_time[cont_max_capacity][]" id="allowed_time[cont_max_capacity]" value="" placeholder="<?php echo esc_html__( 'Maximum Capacity', 'tourfic' ); ?>">
+														</div>
+													</div>
+													<span class="tf-repeater-icon tf-repeater-icon-delete">
+														<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+														<path d="M15 5L5 15" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+														<path d="M5 5L15 15" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+														</svg>
+													</span>
+												</div>
+											</div>
+										</div>
+										<div class="tf-repeater-add tf-repeater-add-allowed_time tf-package-add-allowed-time">
+											<span data-repeater-id="allowed_time" data-repeater-max="" class="tf-repeater-icon tf-repeater-icon-add tf-repeater-add-allowed_time">
+												<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+													<g clip-path="url(#clip0_1017_2374)">
+														<path d="M9.99984 18.3346C14.6022 18.3346 18.3332 14.6037 18.3332 10.0013C18.3332 5.39893 14.6022 1.66797 9.99984 1.66797C5.39746 1.66797 1.6665 5.39893 1.6665 10.0013C1.6665 14.6037 5.39746 18.3346 9.99984 18.3346Z" stroke="#003C79" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+														<path d="M6.6665 10H13.3332" stroke="#003C79" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+														<path d="M10 6.66797V13.3346" stroke="#003C79" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+													</g>
+													<defs>
+														<clipPath id="clip0_1017_2374">
+														<rect width="20" height="20" fill="white"/>
+														</clipPath>
+													</defs>
+												</svg>
+												<?php echo esc_html__( 'Add Start Time', 'tourfic' ); ?>
+											</span>
+										</div>
+										</div>
+									</div>
+								</div>
 
 								<input type="hidden" name="tf_option_title_<?php echo esc_attr( $item['index'] ); ?>" value="<?php echo esc_attr($item['title']); ?>"/>
 								<input type="hidden" name="tf_option_pricing_type_<?php echo esc_attr( $item['index'] ); ?>" value="<?php echo esc_attr($item['type']); ?>"/>

@@ -1823,6 +1823,7 @@ li.tf-filter-item {
                                 color: $color-heading;
                                 font-size: 1rem;
                                 font-weight: 500;
+                                margin: 0;
                             }
                             .tf-pacakge-persons{
                                 display: none;
@@ -1830,6 +1831,40 @@ li.tf-filter-item {
                                     color: $color-text;
                                     font-size: 0.875rem;
                                     margin: 0;
+                                }
+                                .tf-pacakge-times{
+                                    display: none;
+                                    gap: 16px;
+                                    justify-content: space-between;
+                                    align-items: center;
+                                    margin-top: 8px;
+                                    h5{
+                                        color: $color-heading;
+                                        font-size: 16px;
+                                        font-weight: 500;
+                                        line-height: 20px; /* 125% */
+                                        margin: 0;
+                                    }
+                                    .tf-package-time{
+                                        border-radius: 4px;
+                                        background: $tf_fill_white;
+                                        padding: 8px 24px;
+                                        display: flex;
+                                        gap: 4px;
+                                        align-items: center;
+                                        select{
+                                            border: 0px solid;
+                                            width: 72px;
+                                            height: 20px;
+                                            padding: 0;
+                                            color: $color-heading;
+                                            text-align: center;
+                                            font-size: 16px;
+                                            font-weight: 500;
+                                            line-height: 20px;
+                                            background: $tf_fill_white;
+                                        }
+                                    }
                                 }
                                 .tf-select-persons{
                                     border-radius: 4px;
@@ -1855,6 +1890,7 @@ li.tf-filter-item {
                                             color: $color-heading;
                                             font-size: 1rem;
                                             font-weight: 500;
+                                            margin: 0;
                                         }
                                         .inc-dec{
                                             display: flex;
