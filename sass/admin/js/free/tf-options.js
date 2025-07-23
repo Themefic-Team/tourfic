@@ -1602,7 +1602,7 @@
                     }
                     // Append only if there's valid time
                     if (pricingType!='package' && allRepeaterHTML) {
-                        $('.tf_tour_allowed_times').append(allRepeaterHTML);
+                        $('.tf_tour_saved_allowed_times').append(allRepeaterHTML);
                         // Re-initialize flatpickr on the newly added inputs
                         $('.tf_tour_allowed_times .flatpickr-input').flatpickr({
                             enableTime: true,
@@ -1691,7 +1691,7 @@
                                 }
 
                                 // package times
-                                const packageTimesData = event.extendedProps["tf_option_group_discount_" + i];
+                                const packageTimesData = event.extendedProps["tf_option_times_" + i];
                                 let allPackageRepeaterHTML = '';
 
                                 if (packageTimesData && Array.isArray(packageTimesData.time)) {
@@ -1704,16 +1704,16 @@
                                                 <input type="hidden" name="tf_parent_field" value="">
                                                 <input type="hidden" name="tf_repeater_count" value="${index + 1}">
                                                 <input type="hidden" name="tf_current_field" value="allowed_time">
-                                                <div class="tf-repeater-content-wrap">
+                                                <div class="tf-repeater-content-wrap" style="display: none;">
                                                     <div class="tf-field tf-field-time" style="width: calc(50% - 6px);">
                                                         <div class="tf-fieldset">
-                                                            <input type="text" name="tf_option_${optionIndex}_allowed_time[time][]" placeholder="Select Time" value="${time}" class="flatpickr flatpickr-input" data-format="h:i K" readonly="readonly">
+                                                            <input type="text" name="tf_option_${i}_allowed_time[time][]" placeholder="Select Time" value="${time}" class="flatpickr flatpickr-input" data-format="h:i K" readonly="readonly">
                                                             <i class="fa-regular fa-clock"></i>
                                                         </div>
                                                     </div>
                                                     <div class="tf-field tf-field-number" style="width: calc(50% - 6px);">
                                                         <div class="tf-fieldset">
-                                                            <input type="number" name="tf_option_${optionIndex}_allowed_time[cont_max_capacity][]" value="${capacity}" placeholder="Maximum Capacity">
+                                                            <input type="number" name="tf_option_${i}_allowed_time[cont_max_capacity][]" value="${capacity}" placeholder="Maximum Capacity">
                                                         </div>
                                                     </div>
                                                     <span class="tf-repeater-icon tf-repeater-icon-delete">
@@ -1728,8 +1728,15 @@
                                     });
                                 }
 
-                                if (allGroupDiscountRepeaterHTML) {
-                                    $('.ttf-tour-package-allowed-time_'+i).append(allGroupDiscountRepeaterHTML);
+                                if (allPackageRepeaterHTML) {
+                                    $('.tf-tour-package-allowed-time_'+i).html(allPackageRepeaterHTML);
+
+                                    // Re-initialize flatpickr on the newly added inputs
+                                    $('.tf_tour_allowed_times .flatpickr-input').flatpickr({
+                                        enableTime: true,
+                                        noCalendar: true,
+                                        dateFormat: "h:i K"
+                                    });
                                 }
 
                             }

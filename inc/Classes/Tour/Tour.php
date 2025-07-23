@@ -2047,6 +2047,24 @@ class Tour {
 										<label for="package-<?php echo esc_attr($key); ?>"><h3><?php echo esc_html($pack['pack_title']); ?></h3></label>
 											<div class="tf-pacakge-persons">
 												<?php echo wp_kses_post( $pack['desc'] ); ?>
+												<div class="tf-pacakge-times tf-package-times-<?php echo esc_attr($key); ?>">
+													<h5><?php echo esc_html__( "Choose time", "tourfic" ); ?></h5>
+													<div class="tf-package-time">
+														<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+														<g clip-path="url(#clip0_530_266)">
+															<path d="M8.00004 4.00001V8.00001L10.6667 9.33334M14.6667 8.00001C14.6667 11.6819 11.6819 14.6667 8.00004 14.6667C4.31814 14.6667 1.33337 11.6819 1.33337 8.00001C1.33337 4.31811 4.31814 1.33334 8.00004 1.33334C11.6819 1.33334 14.6667 4.31811 14.6667 8.00001Z" stroke="#333D46" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+														</g>
+														<defs>
+															<clipPath id="clip0_530_266">
+															<rect width="16" height="16" fill="white"/>
+															</clipPath>
+														</defs>
+														</svg>
+														<select name="start_time" id="start_time">
+															<option value="12.00">12.00 AM</option>
+														</select>
+													</div>
+												</div>
 												<div class="tf-select-persons">
 													<?php if($pack['pricing_type']=='person'){ ?>
 														<?php if(!empty($package_pricing[$key]['adult_tabs'][0]['disable_adult_price'])){ ?>

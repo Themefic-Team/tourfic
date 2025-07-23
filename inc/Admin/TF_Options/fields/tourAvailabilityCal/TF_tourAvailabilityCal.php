@@ -306,7 +306,7 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                 <div class="tf-field tf-field-repeater" style="width:100%; display: <?php echo esc_attr( $pricing_type == 'person' || $pricing_type == 'group' ? 'block' : 'none' ) ?>;">
                                     <div class="tf-fieldset">
                                         <div id="tf-repeater-1" class="tf-repeater allowed_time" data-max-index="0">
-                                        <div class="tf-repeater-wrap tf_tour_allowed_times tf-repeater-wrap-allowed_time ui-sortable">
+                                        <div class="tf-repeater-wrap tf_tour_allowed_times tf_tour_saved_allowed_times tf-repeater-wrap-allowed_time ui-sortable">
 
                                         </div>
                                         <div class=" tf-single-repeater-clone tf-single-repeater-clone-allowed_time">
@@ -808,7 +808,7 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                                         <div class="tf-field tf-field-repeater tf-package-time-fields" style="width:100%; display: <?php echo esc_attr( ($tour_avail_type =='fixed' || $tour_avail_type =='continuous') ? 'block' : 'none' ) ?>">
                                                             <div class="tf-fieldset">
                                                                 <div id="tf-repeater-1" class="tf-repeater allowed_time" data-max-index="0">
-                                                                <div class="tf-repeater-wrap tf_tour_allowed_times tf-repeater-wrap-allowed_time ui-sortable tf-tour-package-allowed-time_<?php echo esc_attr( $key ); ?>">
+                                                                <div class="tf-repeater-wrap tf_tour_allowed_times tf_tour_allowed_times tf-repeater-wrap-allowed_time ui-sortable tf-tour-package-allowed-time_<?php echo esc_attr( $key ); ?>">
 
                                                                 </div>
                                                                 <div class=" tf-single-repeater-clone tf-single-repeater-clone-allowed_time">

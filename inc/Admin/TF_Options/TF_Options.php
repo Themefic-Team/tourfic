@@ -1144,13 +1144,13 @@ class TF_Options {
 							if ( $item['tf_option_pricing_type_'.$i] == 'group') {
 								$item['title'] .= __( 'Title: ', 'tourfic' ) . $item['tf_option_title_'.$i] . '<br>';
 								$item['title'] .= __( 'Group Price: ', 'tourfic' ) . wc_price($item['tf_option_group_price_'.$i]). '<br>';
-								$item['title'] .=  $package_time_string ? $package_time_string : '';
+								$item['title'] .=  $package_time_string ? $package_time_string. '<br><br>' : '';
 							} else if($item['tf_option_pricing_type_'.$i] == 'person'){
 								$item['title'] .= __( 'Title: ', 'tourfic' ) . $item['tf_option_title_'.$i] . '<br>';
 								$item['title'] .= __( 'Adult: ', 'tourfic' ) . wc_price($item['tf_option_adult_price_'.$i]). '<br>';
 								$item['title'] .= __( 'Child: ', 'tourfic' ) . wc_price($item['tf_option_child_price_'.$i]). '<br>';
 								$item['title'] .= __( 'Infant: ', 'tourfic' ) . wc_price($item['tf_option_infant_price_'.$i]). '<br>';
-								$item['title'] .=  $package_time_string ? $package_time_string : '';
+								$item['title'] .=  $package_time_string ? $package_time_string. '<br><br>' : '';
                             }
 						}
 					}

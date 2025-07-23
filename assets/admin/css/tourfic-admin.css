@@ -5840,6 +5840,11 @@ a.tf-import-btn, a.tf-export-btn {
 .tf-room-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset .tf-package-time-fields .tf-fieldset .tf_tour_allowed_times .tf-single-repeater .tf-repeater-content-wrap .tf-field {
   padding: 0;
 }
+.tf-tour-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset .tf-package-time-fields .tf-fieldset .tf_tour_allowed_times .tf-single-repeater .tf-repeater-content-wrap .tf-repeater-icon-delete svg,
+.tf-apt-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset .tf-package-time-fields .tf-fieldset .tf_tour_allowed_times .tf-single-repeater .tf-repeater-content-wrap .tf-repeater-icon-delete svg,
+.tf-room-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset .tf-package-time-fields .tf-fieldset .tf_tour_allowed_times .tf-single-repeater .tf-repeater-content-wrap .tf-repeater-icon-delete svg {
+  cursor: pointer;
+}
 .tf-tour-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset .tf-package-time-fields .tf-fieldset .tf-repeater-add,
 .tf-apt-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset .tf-package-time-fields .tf-fieldset .tf-repeater-add,
 .tf-room-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset .tf-package-time-fields .tf-fieldset .tf-repeater-add {

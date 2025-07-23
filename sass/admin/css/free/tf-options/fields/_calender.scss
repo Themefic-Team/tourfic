@@ -555,6 +555,11 @@
                                     .tf-field{
                                         padding: 0;
                                     }
+                                    .tf-repeater-icon-delete{
+                                        svg{
+                                            cursor: pointer;
+                                        }
+                                    }
                                 }
                             }
                         }
