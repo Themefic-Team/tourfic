@@ -2100,6 +2100,7 @@
                 if (response.success) {
                     $repeater.find(' > .tf-repeater-header .tf-repeater-title').html(packageData.pack_title);
                     $repeater.find('.tf-repeater-content-wrap').hide();
+                    $repeater.find('.tf-repeater-header .package-action-hide').addClass('show');
                     $('.tf-repeater-add-package_pricing').show();
                     notyf.success('Package saved successfully!');
                 } else {

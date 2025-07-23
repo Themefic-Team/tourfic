@@ -243,6 +243,39 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 									endforeach;
 									?>
 
+										<span class="tf-repeater-icon tf-repeater-icon-delete <?php echo $this->field['id']=='package_pricing' ? esc_attr('package-action-hide') : ''; ?>">
+											<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M2 4H14" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+											<path d="M12.6668 4V13.3333C12.6668 14 12.0002 14.6667 11.3335 14.6667H4.66683C4.00016 14.6667 3.3335 14 3.3335 13.3333V4" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+											<path d="M5.3335 3.9987V2.66536C5.3335 1.9987 6.00016 1.33203 6.66683 1.33203H9.3335C10.0002 1.33203 10.6668 1.9987 10.6668 2.66536V3.9987" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+											</svg>
+										</span>
+										<span class="tf-repeater-icon tf-repeater-icon-collapse <?php echo $this->field['id']=='package_pricing' ? esc_attr('package-action-hide') : ''; ?>">
+											<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M8 13.332H14" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+											<path d="M11 2.33218C11.2652 2.06697 11.6249 1.91797 12 1.91797C12.1857 1.91797 12.3696 1.95455 12.5412 2.02562C12.7128 2.09669 12.8687 2.20086 13 2.33218C13.1313 2.4635 13.2355 2.61941 13.3066 2.79099C13.3776 2.96257 13.4142 3.14647 13.4142 3.33218C13.4142 3.5179 13.3776 3.7018 13.3066 3.87338C13.2355 4.04496 13.1313 4.20086 13 4.33218L4.66667 12.6655L2 13.3322L2.66667 10.6655L11 2.33218Z" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+											<path d="M10 3.33203L12 5.33203" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+											</svg>
+										</span>
+										<?php
+										if(empty($this->field['drag_only']) || !$this->field['drag_only']){
+										?>
+										<span class="tf-repeater-icon tf-repeater-icon-clone <?php echo $this->field['id']=='package_pricing' ? esc_attr('package-action-hide') : ''; ?>" data-repeater-max = "<?php if(isset($this->field['max'])){ echo esc_attr($this->field['max']); }  ?>">
+											<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<g clip-path="url(#clip0_986_42872)">
+												<path d="M13.3335 5.33203H6.66683C5.93045 5.33203 5.3335 5.92898 5.3335 6.66536V13.332C5.3335 14.0684 5.93045 14.6654 6.66683 14.6654H13.3335C14.0699 14.6654 14.6668 14.0684 14.6668 13.332V6.66536C14.6668 5.92898 14.0699 5.33203 13.3335 5.33203Z" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+												<path d="M2.66683 10.6654C1.9335 10.6654 1.3335 10.0654 1.3335 9.33203V2.66536C1.3335 1.93203 1.9335 1.33203 2.66683 1.33203H9.3335C10.0668 1.33203 10.6668 1.93203 10.6668 2.66536" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+											</g>
+											<defs>
+												<clipPath id="clip0_986_42872">
+												<rect width="16" height="16" fill="white"/>
+												</clipPath>
+											</defs>
+											</svg>
+										</span>
+										
+										<?php } ?>
+
 								</div>
 							</div>
 						</div>

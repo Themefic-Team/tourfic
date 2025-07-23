@@ -87,6 +87,12 @@
             display: none !important;
           }
         }
+        .package-action-hide{
+          display: none;
+          &.show{
+            display: flex;
+          }
+        }
       }
 
     }

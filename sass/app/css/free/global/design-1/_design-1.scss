@@ -786,6 +786,7 @@
                             border: 1px solid $color-border-lite;
                             background-color: $color-filling-bg;
                             cursor: pointer;
+                            height: 50px;
                             @media #{$max575}{
                                 height: auto;
                                 padding: 8px;

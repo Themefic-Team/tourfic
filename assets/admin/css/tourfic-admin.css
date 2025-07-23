@@ -4315,6 +4315,12 @@ Steps
 .tf-field-repeater .tf-repeater .tf-repeater-header .tf-repeater-icon-absulate .tf-field-switch .tf-field-label {
   display: none !important;
 }
+.tf-field-repeater .tf-repeater .tf-repeater-header .tf-repeater-icon-absulate .package-action-hide {
+  display: none;
+}
+.tf-field-repeater .tf-repeater .tf-repeater-header .tf-repeater-icon-absulate .package-action-hide.show {
+  display: flex;
+}
 .tf-field-repeater .tf-repeater .tf-repeater-content-wrap {
   background-color: #ffffff;
   padding: 10px 1px 0px 15px;
