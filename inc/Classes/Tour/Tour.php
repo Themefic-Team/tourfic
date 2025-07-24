@@ -3419,7 +3419,9 @@ class Tour {
 						}
 					}
 				}else{
-					$has_tour = true;
+					if( empty($tour_availability) ){
+						$has_tour = true;
+					}
 				}
 			}
 		}
