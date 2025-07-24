@@ -606,7 +606,7 @@
                                 }
                             }
                         }
-                        span.tf-others-benefits-title {
+                        .tf-others-benefits-title {
                             color: $color-text;
                             font-size: 1rem;
                             font-weight: 600;
@@ -774,15 +774,16 @@
                 margin-bottom: 16px;
                 gap: 16px;
             }
-            &>span{
-                color: $color-text;
+            h3{
+                color: $color-heading;
                 font-size: 1.5rem;
+                font-weight: 600;
                 flex: 1;
                 @media #{$max1024}{
                     font-size: 0.875rem;
                 }
             }
-            > h2{
+            h2{
                 @media only screen and (max-width: 1280px) {
                     font-size: 1rem;
                 }
@@ -2231,11 +2232,9 @@
                         }
                         @media #{$max768}{
                             margin-top: 64px;
-                            padding-right: 16px;
                         }
                         @media #{$max575}{
                             margin-top: 16px;
-                            padding-right: 16px;
                         }
 
                         a.tf-share-toggle,
@@ -2326,7 +2325,7 @@
                             padding: 0px 0 32px 0;
                         }
                         @media #{$max768}{
-                            padding: 0px 16px 16px 16px;
+                            padding: 0px 0 16px 16px;
                         }
                         @media #{$max575}{
                             padding-left: 0;
@@ -3075,6 +3074,9 @@
                             display: flex;
                             gap: 32px;
                             flex-wrap: wrap;
+                            @media #{$max768}{
+                                gap: 16px;
+                            }
                             li {
                                 a {
                                     text-decoration: none;
@@ -3101,15 +3103,17 @@
                             p {
                                 margin: 0;
                                 padding: 0;
-                            }s
+                            }
                             .tf-short-description{
                                 @media #{$max768}{
                                     font-size: 0.875rem;
                                 }
                             }
-                            span.tf-see-description,
-                            span.tf-see-less-description{
+                            .tf-see-description,
+                            .tf-see-less-description{
                                 cursor: pointer;
+                                color: $color-text;
+                                display: inline-block;
                                 @media #{$max768}{
                                     font-size: 0.875rem;
                                 }
@@ -3122,7 +3126,7 @@
                             }
                         }
                         .tf-overview-popular-facilities {
-                            span.tf-popular-facilities-title {
+                            .tf-popular-facilities-title {
                                 color: $color-text;
                                 font-size: 1rem;
                                 display: block;
@@ -3141,12 +3145,13 @@
                                     width: 25%;
                                     display: flex;
                                     align-items: center;
-                                    @media #{$max768}{
-                                        width: 50%;
-                                    }
-                                    @media only screen and (max-width: 1280px) {
+                                    @media (max-width: 1280px) {
                                         width: 33%;
                                     }
+                                    @media #{$max575}{
+                                        width: 50%;
+                                    }
+                                    
                                     i{
                                         margin-right: 8px;
                                         font-size: 1.25rem;

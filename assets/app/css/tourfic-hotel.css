@@ -158,6 +158,13 @@
   margin-top: -20px;
 }
 
+@media only screen and (max-width: 768px) {
+  .single-tf_hotel .tf-single-template__legacy .tf-room-section {
+    margin-top: 0;
+    padding-bottom: 0;
+  }
+}
+
 .single-tf_hotel .tf-single-template__legacy .tf-room-section .tf-room-filter .tf-room-checkbox, .single-tf_hotel .tf-single-template__legacy .tf-room-section .tf-room-filter h3 {
   color: var(--tf-text-heading);
   list-style: none;
@@ -1240,6 +1247,12 @@
 }
 
 @media only screen and (max-width: 768px) {
+  .single-tf_hotel .tf-single-template__legacy .review-section {
+    padding-bottom: 0;
+  }
+}
+
+@media only screen and (max-width: 768px) {
   .single-tf_hotel .tf-single-template__legacy .review-section .reviews .section-heading {
     text-align: center;
   }
@@ -1258,7 +1271,6 @@
 @media only screen and (max-width: 1024px) {
   .single-tf_hotel .tf-single-template__legacy .popupmap-for-mobile {
     display: block;
-    margin-top: 15px;
   }
 }
 
@@ -1269,7 +1281,6 @@
 @media only screen and (max-width: 1024px) {
   .single-tf_hotel .tf-single-template__legacy .map-for-mobile {
     display: block;
-    margin-top: 15px;
   }
 }
 
@@ -1282,6 +1293,12 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+@media only screen and (max-width: 1024px) {
+  .single-tf_hotel .tf-single-template__legacy .show-on-map {
+    margin-bottom: 0;
+  }
 }
 
 .single-tf_hotel .tf-single-template__legacy .show-on-map iframe {

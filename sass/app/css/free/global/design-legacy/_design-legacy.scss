@@ -33,20 +33,26 @@
                     flex-wrap: wrap;
                 }
             }
-            .tf-toc-wrap{
-                background-color: transparent;
-                td {
-                    white-space: break-spaces;
+            .toc-section{
+                @media #{$max768}{
+                    padding-bottom: 18px;
                 }
-                .tf-toc-inner{
-                    p{
-                        margin-bottom: 0;
+                .tf-toc-wrap{
+                    background-color: transparent;
+                    td {
+                        white-space: break-spaces;
                     }
-                    table{
-                        margin-top: 15px;
+                    .tf-toc-inner{
+                        p{
+                            margin-bottom: 0;
+                        }
+                        table{
+                            margin-top: 15px;
+                        }
                     }
                 }
             }
+            
             .tf-highlight-wrapper{
                 background-color: $color-filling-fg;
             }

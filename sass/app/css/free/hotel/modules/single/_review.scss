@@ -111,6 +111,9 @@
 
         &__legacy{
             .review-section{
+                @media #{$max768}{
+                    padding-bottom: 0;
+                }
                 .reviews{
                     .section-heading{
                         @media #{$max768}{

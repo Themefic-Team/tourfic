@@ -3,6 +3,10 @@
         &__legacy{
             .tf-room-section{
                 margin-top: -20px;
+                @media #{$max768}{
+                    margin-top: 0;
+                    padding-bottom: 0;
+                }
                 .tf-room-filter .tf-room-checkbox, .tf-room-filter h3 {
                     color: $color-heading;
                     list-style: none;

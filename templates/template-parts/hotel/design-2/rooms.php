@@ -70,7 +70,7 @@ $price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings'
 <!--Available rooms start -->
 <div class="tf-available-rooms-wrapper" id="tf-hotel-rooms">
     <div class="tf-available-rooms-head">
-        <span class=""><?php echo ! empty( $meta["room-section-title"] ) ? esc_html( $meta["room-section-title"] ) : ''; ?></span>
+        <h3 class=""><?php echo ! empty( $meta["room-section-title"] ) ? esc_html( $meta["room-section-title"] ) : ''; ?></h3>
         <div class="tf-filter">
             <i class="ri-equalizer-line"></i>
         </div>

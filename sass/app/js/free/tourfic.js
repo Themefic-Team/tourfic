@@ -2232,13 +2232,13 @@
         });
 
         // Full Description Showing
-        $('.tf-single-template__two span.tf-see-description, .tf-archive-template__three span.tf-see-description, .single-tf_carrental .tf-single-template__one span.tf-see-description').on('click', function () {
+        $('.tf-single-template__two .tf-see-description, .tf-archive-template__three .tf-see-description, .single-tf_carrental .tf-single-template__one .tf-see-description').on('click', function () {
             $('.tf-short-description').slideUp();
             $('.tf-full-description').slideDown();
         });
 
         // See Less Description Showing
-        $('.tf-single-template__two span.tf-see-less-description, .tf-single-template__three span.tf-see-less-description, .single-tf_carrental .tf-single-template__one span.tf-see-less-description').on('click', function () {
+        $('.tf-single-template__two .tf-see-less-description, .tf-single-template__three .tf-see-less-description, .single-tf_carrental .tf-single-template__one .tf-see-less-description').on('click', function () {
             $('.tf-full-description').slideUp();
             $('.tf-short-description').slideDown();
         });

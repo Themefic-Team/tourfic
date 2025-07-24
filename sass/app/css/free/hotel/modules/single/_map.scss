@@ -5,7 +5,6 @@
                 display: none;
                 @media #{$max1024}{
                     display: block;
-                    margin-top: 15px;
                 }
 
             }
@@ -13,7 +12,6 @@
                 display: none;
                 @media #{$max1024}{
                     display: block;
-                    margin-top: 15px;
                 }
             }
             .show-on-map {
@@ -21,6 +19,9 @@
                 @include flexbox();
                 flex-direction: column;
                 gap: 10px;
+                @media #{$max1024}{
+                    margin-bottom: 0;
+                }
                 iframe {
                     height: 130px;
                 }

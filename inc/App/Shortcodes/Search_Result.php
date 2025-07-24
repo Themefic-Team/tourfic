@@ -509,7 +509,7 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
                    ( $post_type == "tf_apartment" && $tf_apartment_arc_selected_template == "design-1" ) ) { ?>
 			<div class="tf-available-archive-hetels-wrapper tf-available-rooms-wrapper" id="tf-hotel-rooms">
 				<div class="tf-archive-available-rooms-head tf-available-rooms-head">
-					<span class="tf-total-results">
+					<h3 class="tf-total-results">
 							<?php esc_html_e("Total", "tourfic"); ?> <span><?php echo esc_html( $total_posts ); ?></span>
 						<?php if($post_type == "tf_hotel"){
 							esc_html_e("hotels available", "tourfic");
@@ -518,7 +518,7 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 						}else{
 							esc_html_e("tours available", "tourfic");
 						} ?>
-					</span>
+					</h3>
 					<div class="tf-sorting-selection-warper">
 						<form class="tf-archive-ordering" method="get">
 							<select class="tf-orderby" name="tf-orderby" id="tf-orderby">
