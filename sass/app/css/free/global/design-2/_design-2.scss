@@ -345,6 +345,9 @@
                     gap: 6px;
                     cursor: pointer;
                 }
+                .tf-duration{
+                    line-height: 1;
+                }
                 .tf_label-row{
                     span#tf-required{
                         font-size: 0.75rem;
@@ -1837,12 +1840,15 @@
                     margin-bottom: 24px;
                 }
             }
-            .slick-track{
-                display: flex;
-                margin-left: 0;
-                .slick-slide{
-                    height: inherit;
-                    margin: 0;
+            .slick-list{
+                margin: 0 -10px!important;
+                .slick-track{
+                    display: flex;
+                    margin-left: 0;
+                    .slick-slide{
+                        height: inherit;
+                        margin: 0;
+                    }
                 }
             }
             .tf-slider-item{
@@ -1972,6 +1978,42 @@
             }
             .slick-prev.pull-left.slick-arrow{
                 right: 120px;
+            }
+
+            .tf-upcomming-tours-list-outter{
+                .slick-arrow{
+                    left: unset;
+                    right: 0;
+                    top: -45px;
+                    width: auto;
+                    height: auto;
+                    @media #{$max768}{
+                        top: -40px;
+                    }
+                   
+                    &::before{
+                        font-family: 'Remixicon';
+                        font-size: 1.5rem;
+                        color: $color-primary;
+                        @media #{$max768}{
+                            font-size: 1.25rem;
+                        }
+                    }
+                    &.slick-prev{
+                        right: 40px;
+                        @media #{$max1024}{
+                           right: 30px;
+                        }
+                        &::before{
+                           content: '\ea60';
+                        }
+                    }
+                    &.slick-next{
+                        &::before{
+                            content: '\ea6c';
+                        }
+                    }
+                }
             }
         }
 
@@ -2630,8 +2672,9 @@
             }
         }
         .tf-single-widgets h3{
-            font-size: 1.875rem;
+            font-size: 2rem;
             margin-bottom: 0;
+            line-height: 1.2;
             @media #{$max1024}{
                 font-size: 1.25rem;
             }
@@ -2893,10 +2936,10 @@
                 h3.tf-person-info-title{
                     color: $color-heading;
                     font-size: 2rem;
-                    font-weight: 400;
+                    font-weight: 700;
                     margin: 0;
                     @media #{$max1024}{
-                        font-size: 1.5rem;
+                        font-size: 1.25rem;
                     }
                 }
             }
@@ -3257,24 +3300,24 @@
                         .tf-highlights-wrapper {
                             display: flex;
                             gap: 24px;
-                            padding: 32px 0;
+                            padding: 32px;
                             background: $color-filling-fg;
                             border-radius: 0px;
                             box-shadow: none;
                             @include align-items(center);
                             @media #{$max1024}{
-                                padding: 16px 0px 16px 16px;
+                                padding: 16px;
                             }
                             .tf-highlights-icon {
                                 width: 230px;
-                                padding-left: 15px;
+                                height: 230px;
                                 @media #{$max1024}{
                                     display: none;
                                 }
                                 svg,
                                 img {
-                                    width: 230px;
-                                    height: 230px;
+                                    width: 100%;
+                                    height: 100%;
                                     object-fit: cover;
                                 }
                                 svg path{
@@ -3299,12 +3342,16 @@
                                 p{
                                     margin: 0;
                                 }
-                                ul {
+                                ul,
+                                ol {
                                     margin: 0px 0px 0px 13px;;
                                     padding: 0;
                                     display: flex;
                                     gap: 16px;
                                     flex-direction: column;
+                                    li{
+                                        list-style: unset;
+                                    }
                                 }
                             }
                         }
@@ -3427,7 +3474,7 @@
                         width: 100%;
                         display: flow-root;
                         padding: 0;
-                        padding-bottom: 8px;
+                        padding-bottom: 15px;
                     }
                     .tf-booking-form-location {
                         display: flex;
@@ -3450,7 +3497,7 @@
                             width: 100%;
                             padding: 0px;
                             border-right: 0px solid;
-                            margin-bottom: 12px;
+                            margin-bottom: 15px;
                         }
                         .tf-booking-location-wrap {
                             display: flex;
@@ -3744,6 +3791,7 @@
                                 float: left;
                                 padding-left: 20px;
                                 padding-right: 0px;
+                                margin: 0;
                             }
                             .tf-booking-date{
                                 @media only screen and (min-width: 1025px) and (max-width: 1165px) {
@@ -3812,6 +3860,7 @@
                         }
                         @media #{$max575}{
                             max-width: 150px;
+                            font-size: 0.875rem;
                         }
                     }
                     i {
@@ -3820,6 +3869,9 @@
                         right: 12px;
                         transform: translateY(-50%);
                         color: $color-text;
+                        @media #{$max575}{
+                            font-size: 0.875rem;
+                        }
                     }
                 }
             }
@@ -3981,12 +4033,16 @@
                                         font-size: 0.875rem;
                                     }
                                     .location-icon{
+                                        line-height: 1;
                                         i{
                                             margin-right: 8px;
                                             font-size: 1.25rem;
                                             @media #{$max1024}{
                                                 font-size: 0.875rem;
                                             }
+                                        }
+                                        span{
+                                            line-height: 1.3;
                                         }
                                     }
                                     

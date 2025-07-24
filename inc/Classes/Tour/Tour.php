@@ -1908,6 +1908,7 @@ class Tour {
                         <div class='tf_form-row'>
                             <label class='tf_label-row'>
                                 <div class='tf_form-inner'>
+									<i class="fa-sharp fa-solid fa-calendar-days"></i>
                                     <input type='text' name='check-in-out-date' id='check-in-out-date' class='tours-check-in-out' onkeypress="return false;" placeholder='<?php esc_html_e( "Select Date", "tourfic" ); ?>'
                                            value=''
                                            required/>

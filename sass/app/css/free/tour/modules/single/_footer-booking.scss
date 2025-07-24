@@ -83,7 +83,8 @@
                         height: 56px;
             
                         @media #{$max768}{
-                            flex-grow: 1;
+                            flex: 1;
+                            height: auto;
                         }
                     }
                 }
@@ -126,7 +127,7 @@
                         background-color: $color-white;
             
                         @media #{$max768}{
-                            flex-grow: 1;
+                            flex: 1;
                             width: 100%;
                         }
                     }

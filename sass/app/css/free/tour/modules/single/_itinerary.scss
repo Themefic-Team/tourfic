@@ -347,7 +347,7 @@
                     padding: 0px;
                     .tf-single-itinerary {
                         background: $color-filling-fg;
-                        padding: 16px 32px;
+                        padding: 16px;
                         display: flex;
                         flex-direction: column;
                         gap: 24px;
@@ -392,10 +392,7 @@
                             margin-right: 16px;
                             width: max-content;
                             max-width: 30%;
-                            @media #{$max768}{
-                                padding-left: 0;
-                                margin-right: 0;
-                            }
+                            background-color: $color-brand-lite;
                         }
                         .tf-itinerary-title-text {
                             flex: 1;

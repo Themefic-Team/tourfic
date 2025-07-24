@@ -2100,11 +2100,11 @@
 .single-tf_apartment .tf-single-template__two #tf-apartment-booking .tf-apartment-form-fields .tf-apartment-guest-row .tf_selectperson-wrap .tf-form-title h3.tf-person-info-title {
   color: var(--tf-text-heading);
   font-size: 2rem;
-  font-weight: 400;
+  font-weight: 700;
   margin: 0px;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1024px) {
   .single-tf_apartment .tf-single-template__two #tf-apartment-booking .tf-apartment-form-fields .tf-apartment-guest-row .tf_selectperson-wrap .tf-form-title h3.tf-person-info-title {
     font-size: 1.25rem;
   }

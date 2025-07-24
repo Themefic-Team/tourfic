@@ -26,6 +26,9 @@
         .tf-single-head{
             .tf-head-info{
                 align-items: baseline;
+                @media #{$max768}{
+                    gap: 16px;
+                }
                 .tf-icon {
                     height: 50px;
                     width: 50px;
@@ -34,9 +37,17 @@
                     align-items: center;
                     justify-content: center;
                     border-radius: 50px;
+                    @media #{$max768}{
+                        width: 32px;
+                        height: 32px;
+                    }
                     i{
                         margin-right: 0;
+                        @media #{$max768}{
+                            font-size: 0.875rem;
+                        }
                     }
+                    
                 }
                 .tf-icon:hover {
                     cursor: pointer;
@@ -54,6 +65,10 @@
                     align-items: center;
                     justify-content: center;
                     border-radius: 50px;
+                    @media #{$max768}{
+                        width: 32px;
+                        height: 32px;
+                    }
                 }
                 .tf-share{
                     a{
@@ -724,6 +739,39 @@
         .tf-hotel-descriptions{
             p{
                 margin-bottom: 0;
+            }
+        }
+
+     
+        // Inquery Box
+        .tf-ask-enquiry{
+            background: $color-filling-fg;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+            i{
+                font-size: 4rem;
+                line-height: 1;
+            }
+            h3{
+                color: $color-heading;
+                font-size: 2rem;
+                font-weight: 700;
+                line-height: 1.2;
+                margin: 0;
+                text-align: center;
+                @media #{$max1024}{
+                    font-size: 1.25rem;
+                }
+            }
+            p{
+                text-align: center;
+                font-size: 1rem;
+                margin: 0;
+                @media #{$max768}{
+                    font-size: 0.875rem;
+                }
             }
         }
     }

@@ -66,6 +66,7 @@
             
                         @media #{$max575}{
                             max-width: 160px;
+                            font-size: 0.875rem;
                         }
                     }
                     i{
@@ -73,6 +74,9 @@
                         top: 50%;
                         right: 12px;
                         transform: translateY(-50%);
+                        @media #{$max575}{
+                            font-size: 0.875rem;
+                        }
                     }
                 } 
             }

@@ -716,7 +716,8 @@ div#tf-destinationautocomplete-list {
                             }
                         }
                     }
-                    .tf_checkin_date.tf_check_inout_dates{
+                    .tf_checkin_date.tf_check_inout_dates,
+                    .tf_checkin_date.tf_tour_check_in_out_date{
                         padding-left: 24px;
                         @media #{$max768}{
                             padding-left: 24px;
@@ -949,7 +950,17 @@ div#tf-destinationautocomplete-list {
                 }
             }
         }
+
+        &#tf_tour_aval_check{
+            .tf_checkin_date{
+                @media #{$max768}{
+                    width: 30%;
+                }
+            }
+        }
     }
+
+    
 }
 .tf_tf_booking-widget-wrap {
     z-index: 999;
