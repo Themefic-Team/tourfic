@@ -801,6 +801,10 @@
                 i{
                     color: $color-text
                 }
+                svg{
+                    height: 20px;
+                    width: 20px;
+                }
                 .tf-flex{
                     flex-wrap: nowrap;
                 }
@@ -814,6 +818,7 @@
                 .info-select{
                     width: 100%;
                     position: relative;
+                    label,
                     h5{
                         color: $color-heading;
                         font-size: 0.75rem;
@@ -1043,6 +1048,15 @@
             }
         }
     }
+}
+
+.tf-car-archive-search-box{
+    label input:checked ~ .tf-checkmark{
+        background-color: $color-primary !important;
+    }
+}
+.tf-car-archive-search-box .tf-driver-location-box .tf-driver-location ul li label .tf-checkmark{
+    border: 2px solid $color-gray;
 }
 
 .tf-archive-template{

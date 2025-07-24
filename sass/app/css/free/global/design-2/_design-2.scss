@@ -1,5 +1,6 @@
 .tf-single-template,
 .tf-archive-template,
+.tf-archive-listing,
 .page-template-tf-search{
     &__legacy{
         padding: 40px 0px;
@@ -111,26 +112,108 @@
                         width: 100%;
                     }
                 }
-                .tf-available-room{
-                    .tf-available-room-gallery{
+            }
+        }
+        .tf-available-room{
+            .tf-available-room-gallery{
+                @media #{$max768} {
+                    height: 120px;
+                    max-width: none;
+                }
+                .tf-room-gallery:nth-child(n+2){
+                    @media #{$max768} {
+                        width: 48px;
+                        height: 28px;
+                    }
+                    svg{
                         @media #{$max768} {
-                            height: 120px;
-                            max-width: none;
+                            width: 10px;
                         }
-                        .tf-room-gallery:nth-child(n+2){
+                    }
+                }
+            }
+            .tf-available-room-content{
+                @media #{$max768} {
+                    width: auto;
+                    display: flow-root;
+                }
+                .tf-available-room-content-left{
+                    @media #{$max768} {
+                        width: 100%;
+                    }
+                    .tf-card-heading-info{
+                        @media #{$max768} {
+                            display: flex;
+                            justify-content: space-between;
+                            margin-bottom: 24px;
+                        }
+                        @media #{$max575} {
+                            flex-direction: column;
+                            margin-bottom: 12px;
+                        }
+                        .tf-section-title-and-location{
                             @media #{$max768} {
-                                width: 48px;
-                                height: 28px;
+                                margin-bottom: 0px;
+                                width: calc(100% - 124px);
                             }
-                            svg{
+                            @media #{$max575} {
+                                width: 100%;
+                                margin-bottom: 12px;
+                            }
+                            h2{
                                 @media #{$max768} {
-                                    width: 10px;
+                                    margin-bottom: 6px;
+                                }
+                            }
+                            .tf-title-location{
+                                @media #{$max768} {
+                                    margin: 0px;
+                                }
+                            }
+                        }
+                        .tf-mobile.tf-pricing-info{
+                            display: none;
+                            @media #{$max768} {
+                                // display: flex;
+                                width: 120px;
+                                flex-direction: column;
+                                align-items: end;
+                            }
+                            @media #{$max575} {
+                                align-items: start;
+                            }
+                            .tf-price-from{
+                                .amount{
+                                    @media #{$max768} {
+                                        color: $color-text;
+                                        font-size: 1.25rem;
+                                        font-weight: 400;
+                                    }
                                 }
                             }
                         }
                     }
-                    .tf-available-room-content{
+                    ul{
                         @media #{$max768} {
+                            margin-bottom: 24px;
+                        }
+                    }
+                }
+                .tf-available-room-content-right{
+                    @media #{$max768} {
+                        width: 100%;
+                        display: flow-root;
+                    }
+                    .tf-card-pricing-heading{
+                        @media #{$max768} {
+                            display: none;
+                        }
+                    }
+                    a{
+                        @media #{$max768} {
+                            width: 100%;
+                        }
+                        @media #{$max575} {
                             width: auto;
                             display: flow-root;
                         }
@@ -694,6 +777,9 @@
                                     }
                                 }
                             }
+                            ins{
+                                background-color: transparent;
+                            }
                         }
                         .tf-available-room-select {
                             color: $color-text;
@@ -1079,52 +1165,12 @@
                 }
             }
         }
-        .tf_acrselection-wrap {
-            display: unset;
-            top: 80%;
-            opacity: 0;
-            visibility: hidden;
-            transition: 0.3s;
-            background: $color-filling-bg;
-            &.tf-show {
-                visibility: visible;
-                opacity: 1;
-                top: 116%;
-                display: block !important;
-            }
-            .acr-label{
-                color: $color-text;
-                font-size: 1rem;
-                font-weight: 600;
-            }
-            .acr-select{
-                text-align: right;
-                width: 96px;
-                input[type=tel]{
-                    width: 34px;
-                    height: 48px;
-                    border: 1px solid $color-border-lite;
-                    font-size: 1rem;
-                    font-weight: 600;
-                    color: $color-text;
-                    text-align: center;
-                    padding-left: 0px;
-                    padding-right: 0px;
-                    border-radius: 20px;
-                    background: $color-filling-fg;
-                }
-                .acr-dec,
-                .acr-inc{
-                    background: transparent;
-                    border: none;
-                    font-size: 1.938rem;
-                    font-weight: 400;
-                    color: $color-text;
-                    padding: 0px;
-                }
-            }
-        }
+
     }
+}
+
+.tf-archive-listing__legacy{
+    padding: 0;
 }
 
 // Single Global Start
@@ -1530,7 +1576,7 @@
                         @media #{$max1024}{
                             width: 100%;
                         }
-                      
+
                     }
                 }
             }
@@ -1607,7 +1653,7 @@
                 }
             }
             .tf-search-date-wrapper.tf-single-widgets{
-             
+
                 .tf-section-title,
                 .tf_tours_booking > .tf-field-group,
                 .tf_tours_booking > .check-in-time-div,
@@ -1626,7 +1672,7 @@
                     }
                 }
             }
-         
+
             #tf-tour-reviews{
                 @media #{$max768} {
                     padding-bottom: 32px;
@@ -3373,6 +3419,7 @@
 // Single Global End
 
 // Archive Global Start
+.tf-archive-listing,
 .tf-archive-template,
 .page-template-tf-search{
     &__two{
@@ -3989,7 +4036,7 @@
                         .tf-available-room-content-left {
                             display: flex;
                             flex-direction: column;
-                            
+
                             .tf-section-title-and-location {
                                 a {
                                     text-decoration: none;
@@ -4045,7 +4092,11 @@
                                             line-height: 1.3;
                                         }
                                     }
-                                    
+                                    svg{
+                                        margin-right: 8px;
+                                        height: 18px;
+                                        width: 18px;
+                                    }
                                 }
                             }
 
@@ -4265,40 +4316,623 @@
         }
     }
 }
-// Archive Global End
 
-/* .tf_template_3_single_hotel .flatpickr-calendar {
-    left: 320px !important;
-  
-    @media only screen and (max-width: 1920px) {
-      left: 240px !important;
+.tf-archive-booking-form__style-2{
+    background: $color-filling-fg;
+    .tf-booking-form {
+        display: flex;
+        margin: 0;
+
+        .tf-booking-form-fields {
+            display: flex;
+            width: 78%;
+            padding: 24px;
+            padding-right: 0;
+            @media #{$max1024}{
+                width: calc(100% - 150px);
+            }
+            &>div {
+                width: 32%;
+                border-right: 1px solid $color-border-lite;
+                display: flex;
+                flex-direction: column;
+                position: relative;
+                &.tf-booking-form-guest-and-room {
+                    width: 36%;
+                    padding-left: 25px;
+                    align-items: start;
+                    border-right: none;
+                    cursor: pointer;
+                }
+            }
+        }
+        .tf-booking-form-location {
+            display: flex;
+            align-items: flex-start;
+            padding-right: 25px;
+            padding-left: 0;
+            @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                padding-right: 10px;
+                width: 25%;
+            }
+            @media only screen and (max-width: 1200px){
+                padding-right: 28px;
+                padding-left: 4px;
+            }
+            @media #{$max1024}{
+                padding-right: 15px;
+                padding-left: 0px;
+            }
+            @media #{$max768} {
+                width: 100%;
+                padding: 0px;
+                border-right: 0px solid;
+                margin-bottom: 12px;
+            }
+            .tf-booking-location-wrap {
+                display: flex;
+                flex-direction: row;
+                background: $color-filling-bg;
+                padding: 0 12px;
+                width: 100%;
+                align-items: center;
+                position: relative;
+
+                i,
+                svg{
+                    font-size: 16px;
+                }
+                svg{
+                    width: 16px;
+                    height: 16px;
+                }
+
+                input{
+                    padding: 9px;
+                    border: none;
+                    outline: none;
+                    width: 100%;
+                    background: transparent;
+                    box-shadow: none;
+                    font-size: 0.75rem;
+                    color: $color-text;
+                    &::placeholder{
+                        color: $color-text;
+                    }
+                }
+
+                #tf-locationautocomplete-list,
+                #tf-destinationautocomplete-list,
+                #tf-apartment-locationautocomplete-list{
+                    position: absolute;
+                    left: 0;
+                    top: 100%;
+                    width: 250px;
+                    background: $color-brand-lite;
+                    z-index: 999;
+                    max-height: 200px;
+                    overflow: auto;
+                    scrollbar-width: thin;
+                    scrollbar-color: $scrollbar-color;
+                    padding: 8px;
+                    @media #{$max768} {
+                        width: 100%;
+                    }
+                    &::-webkit-scrollbar{
+                        width: 5px;
+                    }
+                    &::-webkit-scrollbar-thumb {
+                        background-color: $scrollbar-thumb-color;
+                        border-radius: 4px;
+                    }
+                    &::-webkit-scrollbar-track {
+                        background-color: $color-brand-lite;
+                    }
+                    div{
+                        padding: 10px;
+                        cursor: pointer;
+                        background-color: $color-white;
+                        margin-bottom: 4px;
+                        color: $color-text;
+                        display: block;
+                        transition: .3s all ease;
+                        &:last-child{
+                            margin-bottom: 0px;
+                        }
+                        &:hover{
+                            background: $color-brand-lite;
+                        }
+                        &::before{
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+        .tf-booking-form-checkout,
+        .tf-booking-form-checkin {
+            padding-left: 25px;
+            padding-right: 25px;
+            @media only screen and (max-width: 1200px){
+                padding-right: 28px;
+                padding-left: 28px;
+            }
+            @media #{$max1024}{
+                padding-right: 15px;
+                padding-left: 15px;
+            }
+            input {
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                opacity: 0;
+            }
+        }
+        .tf-booking-form-checkin{
+            max-width: 146px;
+        }
+        .tf-booking-form-checkout{
+            max-width: 155px;
+        }
+        .tf-booking-date {
+            color: $color-text;
+            font-size: 1.5rem;
+            text-align: right;
+            margin-right: 5px;
+            @media #{$max1024}{
+                font-size: 1.25rem;
+            }
+        }
+        span.tf-booking-form-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: $color-text;
+            @media #{$max1024}{
+                font-size: 0.875rem;
+            }
+        }
+        span.tf-booking-month {
+            color: $color-text;
+            font-size: 1rem;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            text-transform: capitalize;
+            @media #{$max1024}{
+                font-size: 0.875rem;
+            }
+        }
+        .tf-booking-date-wrap {
+            display: flex;
+            gap: 6px;
+            cursor: pointer;
+        }
+        .tf_label-row{
+            span#tf-required{
+                font-size: 0.75rem;
+                color: $color-danger;
+            }
+        }
+        .tf-booking-guest-and-room-wrap {
+            display: flex;
+            gap: 6px;
+            margin-top: 4px;
+            text-transform: capitalize;
+        }
+        .tf-booking-person-count span {
+            margin-right: 12px;
+        }
+        .tf-cancellation-refundable-text {
+            display: flex;
+            flex-direction: column;
+        }
+        .tf-booking-form-submit {
+            width: 22%;
+            @media #{$max1024}{
+                width: 150px;
+            }
+            button {
+                height: 100%;
+                width: 100%;
+                @include align-items(center);
+            }
+        }
+
+        .tf-arrow-icons{
+            text-align: right;
+        }
     }
-    
-    @media only screen and (max-width: 1280px) {
-      left: 100px !important;
+
+    .tf_acrselection-wrap {
+        display: unset;
+        top: 80%;
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.3s;
+        background: $color-filling-bg;
+        &.tf-show {
+            visibility: visible;
+            opacity: 1;
+            top: 116%;
+            display: block !important;
+        }
+        .acr-label{
+            color: $color-text;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .acr-select{
+            text-align: right;
+            width: 96px;
+            input[type=tel]{
+                width: 34px;
+                height: 48px;
+                border: 1px solid $color-border-lite;
+                font-size: 1rem;
+                font-weight: 600;
+                color: $color-text;
+                text-align: center;
+                padding-left: 0px;
+                padding-right: 0px;
+                border-radius: 20px;
+                background: $color-filling-fg;
+            }
+            .acr-dec,
+            .acr-inc{
+                background: transparent;
+                border: none;
+                font-size: 1.938rem;
+                font-weight: 400;
+                color: $color-text;
+                padding: 0px;
+            }
+        }
     }
-  
-    @media only screen and (max-width: 1024px) {
-      left: 80px !important;
-    } 
-  
-    @media only screen and (max-width: 660px) {
-      left: 20px !important;
+    &.tf-archive-search-form {
+        width: 100%;
+        @media #{$max768}{
+            width: auto;
+        }
+        .tf_archive_search_result{
+            @media #{$max768} {
+                padding: 16px;
+                display: none;
+            }
+            .tf-booking-form-submit{
+                @media #{$max768} {
+                    width: 100%;
+                }
+            }
+        }
+        .tf-booking-form {
+            .tf-booking-form-fields {
+                @media #{$max768} {
+                    width: 100%;
+                    display: flow-root;
+                    padding: 0;
+                    padding-bottom: 8px;
+                }
+                .tf-booking-form-location {
+                    display: flex;
+                    align-items: flex-start;
+                    padding-right: 25px;
+                    padding-left: 0;
+                    @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                        padding-right: 10px;
+                        width: 25%;
+                    }
+                    @media only screen and (max-width: 1200px){
+                        padding-right: 28px;
+                        padding-left: 4px;
+                    }
+                    @media #{$max1024}{
+                        padding-right: 15px;
+                        padding-left: 0px;
+                    }
+                    @media #{$max768} {
+                        width: 100%;
+                        padding: 0px;
+                        border-right: 0px solid;
+                        margin-bottom: 12px;
+                    }
+                    .tf-booking-location-wrap {
+                        display: flex;
+                        flex-direction: row;
+                        background: $color-filling-bg;
+                        padding: 0 12px;
+                        width: 100%;
+                        align-items: center;
+                        position: relative;
+                        input{
+                            padding: 9px;
+                            border: none;
+                            outline: none;
+                            width: 100%;
+                            background: transparent;
+                            box-shadow: none;
+                            font-size: 0.75rem;
+                            color: $color-text;
+                            &::placeholder{
+                                color: $color-text;
+                            }
+                        }
+
+                        #tf-locationautocomplete-list,
+                        #tf-destinationautocomplete-list,
+                        #tf-apartment-location-autocomplete-list{
+                            position: absolute;
+                            left: 0;
+                            top: 100%;
+                            width: 250px;
+                            background: $color-brand-lite;
+                            z-index: 999;
+                            max-height: 200px;
+                            overflow: auto;
+                            scrollbar-width: thin;
+                            scrollbar-color: $scrollbar-color;
+                            padding: 8px;
+                            @media #{$max768} {
+                                width: 100%;
+                            }
+                            &::-webkit-scrollbar{
+                                width: 5px;
+                            }
+                            &::-webkit-scrollbar-thumb {
+                                background-color: $scrollbar-thumb-color;
+                                border-radius: 4px;
+                            }
+                            &::-webkit-scrollbar-track {
+                                background-color: $color-brand-lite;
+                            }
+                            div{
+                                padding: 10px;
+                                cursor: pointer;
+                                background-color: $color-white;
+                                margin-bottom: 4px;
+                                color: $color-text;
+                                display: block;
+                                transition: .3s all ease;
+                                &:last-child{
+                                    margin-bottom: 0px;
+                                }
+                                &:hover{
+                                    background: $color-brand-lite;
+                                }
+                                &::before{
+                                    display: none;
+                                }
+                            }
+                        }
+                    }
+                }
+                .tf-booking-form-checkin{
+                    @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                        padding-left: 10px;
+                        padding-right: 10px;
+                        max-width: none;
+                        width: 20%;
+                    }
+                    @media #{$max768} {
+                        width: 31%;
+                        float: left;
+                        padding: 0px;
+                        max-width: none;
+                    }
+                    @media #{$max575} {
+                        width: 50%;
+                    }
+                    .tf-booking-date{
+                        @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                            font-size: 1.25rem;
+                        }
+                    }
+                    .tf-duration span{
+                        @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                            margin: 0px 5px;
+                        }
+                    }
+                }
+                .tf-booking-form-checkout{
+                    @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                        padding-left: 10px;
+                        padding-right: 10px;
+                        max-width: none;
+                        width: 20%;
+                    }
+                    @media #{$max768} {
+                        width: 31%;
+                        float: left;
+                        padding: 0px;
+                        padding-left: 20px;
+                        max-width: none;
+                    }
+                    @media #{$max575} {
+                        width: 50%;
+                        float: left;
+                        max-width: none;
+                    }
+                    .tf-booking-date{
+                        @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                            font-size: 1.25rem;
+                        }
+                    }
+                    .tf-duration span{
+                        @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                            margin: 0px 5px;
+                        }
+                    }
+                }
+
+                .tf-booking-form-guest-and-room {
+                    padding-left: 40px;
+                    padding-right: 40px;
+                    min-width: 200px;
+                    @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                        padding-left: 10px;
+                        padding-right: 10px;
+                        width: 35%;
+                        min-width: auto;
+                    }
+                    @media only screen and (max-width: 1200px){
+                        padding-right: 28px;
+                        padding-left: 28px;
+                    }
+                    @media #{$max1024}{
+                        padding-right: 15px;
+                        padding-left: 20px;
+                        min-width: 160px;
+                    }
+                    @media #{$max768} {
+                        width: 31%;
+                        float: left;
+                        padding-right: 0px;
+                        min-width: auto;
+                    }
+                    @media #{$max575} {
+                        padding-left: 0px;
+                    }
+                    .tf-booking-date{
+                        @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                            font-size: 1.25rem;
+                        }
+                    }
+                    .tf-booking-form-guest-and-room-inner {
+                        .tf-booking-guest-and-room-wrap.tf-archive-guest-info {
+                            margin-top: 8px;
+                            color: $color-text;
+                            display: -webkit-box;
+                            display: -ms-flexbox;
+                            display: flex;
+                            -webkit-box-align: center;
+                            -ms-flex-align: center;
+                            align-items: center;
+                            gap: 5px;
+                            @media #{$max768}{
+                                gap: 8px;
+                                float: left;
+                                margin-top: 0;
+                                line-height: normal;
+                            }
+                            span{
+                                font-size: 1.5rem;
+                                margin-bottom: -3px;
+                                color: $color-text;
+                                display: -webkit-box;
+                                display: -ms-flexbox;
+                                display: flex;
+                                -webkit-box-align: center;
+                                -ms-flex-align: center;
+                                align-items: center;
+                                gap: 5px;
+                                @media #{$max1024}{
+                                    font-size: 1.25rem;
+                                }
+                                @media #{$max575}{
+                                    line-height: inherit;
+                                }
+                            }
+                        }
+                        .tf-arrow-icons{
+                            text-align: right;
+                            @media #{$max768}{
+                                float: left;
+                            }
+                        }
+                    }
+                }
+                &.tf-tour-archive-block{
+                    .tf-booking-form-checkin{
+                        max-width: none;
+                        width: 37%;
+                        @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                            padding-left: 10px;
+                            padding-right: 10px;
+                        }
+                        @media #{$max768} {
+                            width: 50%;
+                            float: left;
+                            padding: 0px;
+                        }
+                        .tf-booking-date{
+                            @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                                font-size: 1.25rem;
+                            }
+                        }
+                        .tf-duration span{
+                            @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                                margin: 0px 5px;
+                            }
+                        }
+                        .tf-tour-searching-date-block{
+                            display: flex;
+                            align-items: center;
+                            .tf-duration{
+                                span{
+                                    font-size: 1.5rem;
+                                    margin: 0px 15px;
+                                    color: $color-text;
+                                    @media #{$max1024}{
+                                        margin: 0px 5px;
+                                    }
+                                }
+                            }
+                            span.tf-booking-month{
+                                flex-direction: row;
+                                svg{
+                                    margin-left: 4px;
+                                }
+                            }
+                        }
+                    }
+                    .tf-booking-form-checkout{
+                        @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                            padding-left: 10px;
+                            padding-right: 10px;
+                        }
+                        .tf-booking-date{
+                            @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                                font-size: 1.25rem;
+                            }
+                        }
+                        .tf-duration span{
+                            @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                                margin: 0px 5px;
+                            }
+                        }
+                    }
+                    .tf-booking-form-guest-and-room{
+                        @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                            padding-left: 10px;
+                            padding-right: 10px;
+                            width: 20%;
+                            min-width: auto;
+                        }
+                        @media #{$max768} {
+                            width: 50%;
+                            float: left;
+                            padding-left: 20px;
+                            padding-right: 0px;
+                        }
+                        .tf-booking-date{
+                            @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                                font-size: 1.25rem;
+                            }
+                        }
+                        span.tf-booking-month{
+                            flex-direction: row;
+                            svg{
+                                margin-left: 4px;
+                            }
+                        }
+                    }
+                    .tf-booking-form-location{
+                        @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                            padding-right: 10px;
+                        }
+                    }
+                }
+            }
+        }
     }
 }
-  
-.tf_template_3_hotel_archive .flatpickr-calendar {
-    left: 495px !important;
-  
-    @media only screen and (max-width: 1280px) {
-      left: 285px !important;
-    }
-    
-    @media #{$max1024}{
-      left: 170px !important;
-    }
-  
-    @media only screen and (max-width: 660px) {
-      left: 30px !important;
-    }
-} */

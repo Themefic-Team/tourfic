@@ -94,7 +94,7 @@ class TF_Setup_Wizard {
                     </div>
                     <div class="tf-setup-header-right">
                         <span class="get-help-link"><?php esc_html_e( 'Having troubles?', 'tourfic' ) ?> 
-                        <a class="" target="_blank" href="https://portal.themefic.com/support/"><?php esc_html_e( 'Get help', 'tourfic' ) ?></a></span>
+                        <a class="" target="_blank" href="<?php echo esc_url( "https://portal.themefic.com/support/?utm_source=tourfic_" . parse_url( get_site_url(), PHP_URL_HOST ) .  "&utm_medium=setup_wizard_get_help&utm_campaign=tourfic_plugin_installation" ); ?>"><?php esc_html_e( 'Get help', 'tourfic' ) ?></a></span>
                     </div>
                 </div>
                 <form method="post" id="tf-setup-wizard-form" data-skip-steps="">

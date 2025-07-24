@@ -18,7 +18,7 @@ class Enqueue {
 	public function __construct() {
 		add_filter( 'wp_enqueue_scripts', array( $this, 'tf_dequeue_scripts' ), 9999 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'tf_enqueue_scripts' ) );
-		// add_action( 'elementor/editor/after_enqueue_scripts', array( $this, 'tf_enqueue_scripts' ) );
+		add_action( 'elementor/editor/before_enqueue_scripts', array( $this, 'elementor_editor_scripts' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'tf_enqueue_admin_scripts' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'tf_dequeue_theplus_script_on_settings_page' ), 9999 );
 
@@ -434,12 +434,7 @@ class Enqueue {
 					}
 				}
 			}
-
-
 		}
-
-		// var_dump(Helper::tf_templates_body_class());
-		// die();
 
 		/**
 		 * Custom
@@ -1423,6 +1418,23 @@ class Enqueue {
 
 	}
 
+	/**
+	 * Elementor editor scripts
+	 */
+	function elementor_editor_scripts() {
+		wp_enqueue_style(
+			'tf-elementor-editor',
+			TF_ASSETS_URL . 'admin/css/tf-elementor.css',
+			null,
+			TF_VERSION
+		);
 
-
+		// wp_enqueue_script(
+		// 	'tf-elementor-editor',
+		// 	TF_ASSETS_URL . 'admin/js/tf-elementor-editor.js',
+		// 	[ 'elementor-editor', 'jquery' ],
+		// 	TF_VERSION,
+		// 	true
+		// );
+	}
 }

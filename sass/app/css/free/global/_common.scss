@@ -200,6 +200,14 @@ h3.section-heading {
         display: block;
     }
     .tf_form-inner {
+        svg{
+            width: 20px;
+            height: 20px;
+        }
+        i{
+            font-size: 18px;
+        }
+
         input[type=text] {
             width: 100%;
             background: transparent;
@@ -308,7 +316,6 @@ h3.section-heading {
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
-        background-color: $color-white;
         color: $color-brand-dark;
         border-color: $color-brand-dark;
         border: 1px solid $color-brand-dark;
@@ -340,7 +347,6 @@ h3.section-heading {
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
-        background-color: $color-white;
         color: $color-brand-dark;
         border-color: $color-brand-dark;
         border: 1px solid $color-brand-dark;
@@ -1386,6 +1392,7 @@ li.tf-filter-item {
         }
         img{
             width: 320px;
+            padding-top: 8px;
         }
         h2{
             text-align: center;
@@ -1398,6 +1405,10 @@ li.tf-filter-item {
             @media #{$max768} {
                 font-size: 1.5rem;
             }
+        }
+        .tf-tour-without-payment-booking-confirm-msg-container {
+            padding: 16px;
+            color: $color-heading;
         }
         .tf-booking-times {
             position: absolute;
@@ -1430,6 +1441,11 @@ li.tf-filter-item {
             display: flex;
             justify-content: space-between;
             margin-bottom: 24px;
+            @media #{$max768}{
+                padding-top: 12px;
+                padding-bottom: 12px;
+                align-items: center;
+            }
             .tf-booking-tab-menu{
                 ul{
                     margin: 0;

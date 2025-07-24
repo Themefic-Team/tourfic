@@ -155,7 +155,6 @@
             }
             i{
                 color: $color-primary;
-                margin-right: 5px;
             }
             a{
                 text-decoration: none;
@@ -779,8 +778,11 @@
 // Single Global End
 
 // Archive Global Start
+.tf-archive-listing,
 .tf-archive-template{
     &__one{
+        position: relative;
+        
         .tf-archive-head {
             @media #{$max575}{
                 gap: 12px;
@@ -798,7 +800,6 @@
                         height: 100%;
                         position: relative;
                         select {
-                            height: 100%;
                             border-radius: 5px;
                             -webkit-appearance: none;
                             appearance: none;
@@ -873,70 +874,29 @@
         }
         .tf-result-previews{
             position: relative;
-            #tf_ajax_searchresult_loader {
-                position: absolute;
-                top: 0;
-                left: 0;
+        }
+        #tf_ajax_searchresult_loader {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            z-index: 99999;
+            display: none;
+            #tf-searchresult-loader-img {
+                display: flex;
+                align-items: center;
+                justify-content: center;
                 height: 100%;
-                width: 100%;
-                z-index: 99999;
-                display: none;
-                #tf-searchresult-loader-img {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    height: 100%;
-                    img {
-                        width: 120px;
-                    }
+                img {
+                    width: 120px;
                 }
             }
         }
         label input:checked ~ .tf-checkmark{
             background-color: $color-primary !important;
         }
-        .tf-archive-right{
-            .tf-destination-box{
-                .autocomplete-items {
-                    max-height: 120px;
-                    overflow: scroll;
-                    overflow-x: hidden;
-                    position: absolute;
-                    border: 1px solid $color-border-lite;
-                    border-bottom: none;
-                    border-top: none;
-                    z-index: 99;
-                    top: 100%;
-                    left: 0;
-                    right: 0;
-                    div{
-                        padding: 10px;
-                        cursor: pointer;
-                        background-color: $color-white;
-                        border-bottom: 1px solid $color-border-lite;
-                        color: $color-text;
-                    }
-                }
-            }
-            .tf_acrselection{
-                .tf-field{
-                    align-items: center;
-                    justify-content: space-between;
-                    padding: 10px 20px;
-                    .acr-label{
-                        align-items: center;
-                        i{
-                            position: static;
-                            margin-right: 5px;
-                        }
-                    }
-                }
-            }
-            .tf-booking-bttns{
-                button{
-                    width: 100%;
-                }
-            }
+        .tf-archive-right{  
             .tf-related-single{
                 border-top: 1px solid $color-border-lite;
                 margin-bottom: $tf-space-24;
@@ -1133,6 +1093,36 @@
                         flex-basis: 100%;
                     }
                 }
+
+                &.tf-grid-1{
+                    .tf-item-card {
+                        flex-basis: 100%;
+                    }
+                }
+
+                &.tf-grid-3{
+                    .tf-item-card {
+                        flex-basis: calc(100% / 3 - 16px);
+                        @media #{$max1024}{
+                            flex-basis: calc(100% / 2 - 12px);
+                        }
+                        @media #{$max768}{
+                            flex-basis: calc(100% - 0px);
+                        }
+                    }
+                }
+
+                &.tf-grid-4{
+                    .tf-item-card {
+                        flex-basis: calc(100% / 4 - 18px);
+                        @media #{$max1024}{
+                            flex-basis: calc(100% / 2 - 12px);
+                        }
+                        @media #{$max768}{
+                            flex-basis: calc(100% - 0px);
+                        }
+                    }
+                }
             }
             
             .tf-layout-list{
@@ -1200,8 +1190,8 @@
                             border-radius: 50px;
                             font-size: 0.75rem;
                             color: $color-heading;
-                            margin-right: 10px;
                             font-weight: 600;
+                            margin-right: 10px;
                         }
                         .tf-feature{
                             background: $color-primary;
@@ -1209,7 +1199,6 @@
                             border-radius: 50px;
                             font-size: 0.75rem;
                             color: $color-white;
-                            margin-right: 5px;
                             font-weight: 600;
                         }
                     }
@@ -1218,7 +1207,6 @@
                         display: flex;
                         flex-direction: column;
                         max-height: 90%;
-                        overflow: hidden;
                         position: absolute;
                         top: 20px;
                         left: 20px;
@@ -1263,6 +1251,16 @@
                             line-height: 1.5;
                             position: relative;
                             top: 2px;
+                        }
+                        svg{
+                            position: relative;
+                            top: 2px;
+                            width: 16px;
+                            height: 16px;
+
+                            path{
+                                fill: $color-primary;
+                            }
                         }
                     }
                     .tf-title {
@@ -1346,6 +1344,10 @@
                     border-top: 1px solid $color-border-lite;
                     padding-top: 16px;
 
+                    ins{
+                        background-color: transparent;
+                    }
+
                     .tf-booking-bttns{
                         .tf_btn{
                             font-weight: 500;
@@ -1401,6 +1403,659 @@
                 }
             }
 
+        }
+
+        /* Carrental archive listing */
+        .tf-car-archive-result{
+            width: calc(100% - 390px);
+            @media #{$max1024}{
+                width: calc(100% - 322px);
+            }
+            @media #{$max768}{
+                width: 100%;
+            }
+            &.tf-car-lists-widgets{
+                width: 100%;
+                .tf-single-car-view{
+                    width: calc(33% - 18px);
+                    @media #{$max1199}{
+                        width: calc(50% - 16px);
+                    }
+                    @media #{$max768}{
+                        width: 100%;
+                    }
+                }
+            }
+            .tf-heading{
+                text-align: center;
+                h2{
+                    color: $color-heading;
+                    font-size: 2.375rem;
+                    font-weight: 400;
+                    margin-bottom: 16px;
+                }
+                p{
+                    color: $color-text;
+                    font-size: 1rem;
+                    font-weight: 400;
+                    margin-bottom: 56px;
+                }
+            }
+            .tf-car-result{
+                flex-wrap: wrap;
+                .tf-single-car-view{
+                    border-radius: 16px;
+                    background: $color-filling-fg;
+                    width: calc(50% - 16px);
+                    @media #{$max1024}{
+                        width: 100%;
+                    }
+                    .tf-car-image{
+                        position: relative;
+                        img{
+                            border-radius: 16px;
+                            height: 200px;
+                            width: 100%;
+                            object-fit: cover;
+                        }
+                        .tf-other-infos{
+                            position: absolute;
+                            left: 0;
+                            top: 0;
+                            right: 0;
+                            bottom: 0;
+                            padding: 16px;
+                            justify-content: space-between;
+                            gap: 8px;
+                            .tf-reviews-box{
+                                span{
+                                    border-radius: 8px;
+                                    background: rgba(255, 255, 255, 0.24);
+                                    backdrop-filter: blur(32px);
+                                    display: inline-block;
+                                    padding: 0 8px;
+                                    color: $color-text;
+                                    font-size: 1rem;
+                                    font-weight: 400;
+                                    i{
+                                        color: $color-primary;
+                                    }
+                                }
+                            }
+                            .tf-tags-box{
+                                max-width: 155px;
+                                ul{
+                                    margin: 0;
+                                    padding: 0;
+                                    list-style: none;
+                                    li{
+                                        border-radius: 8px;
+                                        background: $color-primary;
+                                        backdrop-filter: blur(32px);
+                                        padding: 4px 8px;
+                                        color: $color-white;
+                                        font-size: 1rem;
+                                        font-weight: 400;
+                                        margin-bottom: 8px;
+                                        &:last-child{
+                                            margin-bottom: 0px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .tf-car-details{
+                        padding: 24px 16px 16px 16px;
+                        h3{
+                            margin-top: 0px;
+                            
+                            a{
+                                font-size: 1.313rem;
+                                font-weight: 700;
+                                color: $color-heading;
+                                text-decoration: none;
+                            }
+                        }
+                        ul{
+                            list-style: none;
+                            margin-top: 0;
+                            margin-left: 0;
+                            margin-right: 0;
+                            padding: 0;
+                            display: flex;
+                            align-items: flex-start;
+                            flex-wrap: wrap;
+                            gap: 16px 8px;
+                            li{
+                                color: $color-text;
+                                font-size: 0.938rem;
+                                font-weight: 400;
+                                display: flex;
+                                width: calc(33.3333% - 8px);
+                                @media #{$max1024}{
+                                    width: calc(50% - 16px);
+                                }
+                                svg{
+                                    height: 20px;
+                                    width: 20px;
+                                    path{
+                                        stroke: $color-text;
+                                    }
+                                }
+                                p{
+                                    width: 100%;
+                                    margin: 0;
+                                    padding-left: 4px;
+                                }
+                            }
+                        }
+                        .tf-booking-btn{
+                            align-items: center;
+                            .tf-price-info{
+                                h3{
+                                    color: $color-heading;
+                                    font-size: 1.75rem;
+                                    font-weight: 600;
+                                    margin: 0;
+                                    small{
+                                        color: $color-text;
+                                        font-size: 1rem;
+                                        font-weight: 400;
+                                        text-transform: capitalize;
+                                    }
+                                }
+                            }
+                            button,
+                            a.view-more{
+                                border-radius: 8px;
+                                border: 1px solid $color-primary;
+                                padding: 12px 32px;
+                                color: $color-primary;
+                                font-size: 1rem;
+                                font-weight: 700;
+                                background-color: $color-white;
+                                cursor: pointer;
+                                text-decoration: none;
+                                transition: .3s all ease;
+                                
+                                &:hover{
+                                    border: 1px solid $color-primary;
+                                    background: $color-primary;
+                                    color: $color-white;
+                                }
+                            }
+                            .tf-car-booking-popup{
+                                display: none;
+                            }
+                        }
+                    }
+                }
+
+                &.tf-grid-1{
+                    .tf-single-car-view {
+                        width: 100%;
+                    }
+                }
+
+                &.tf-grid-3{
+                    .tf-single-car-view {
+                        width: calc(100% / 3 - 22px);
+                        @media #{$max1024}{
+                            width: calc(100% / 2 - 12px);
+                        }
+                        @media #{$max768}{
+                            width: calc(100% - 0px);
+                        }
+                    }
+                }
+
+                &.tf-grid-4{
+                    .tf-single-car-view {
+                        width: calc(100% / 4 - 18px);
+                        @media #{$max1024}{
+                            width: calc(100% / 2 - 12px);
+                        }
+                        @media #{$max768}{
+                            width: calc(100% - 0px);
+                        }
+                    }
+                }
+
+                &.list-view{
+                    .tf-single-car-view{
+                        width: 100%;
+                        display: flex;
+                        @media #{$max1024}{
+                            display: flow-root;
+                        }
+                        .tf-car-image{
+                            width: 280px;
+                            height: 200px;
+                            @media #{$max1024}{
+                                width: 100%;
+                            }
+                            img{
+                                width: 100%;
+                                height: 200px;
+                            }
+                            .tf-other-infos{
+                                display: flow-root;
+                                .tf-tags-box{
+                                    margin-top: 8px;
+                                    max-width: none;
+                                    ul{
+                                        li{
+                                            display: inline-block;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        .tf-car-details{
+                            width: calc(100% - 280px);
+                            @media #{$max1024}{
+                                width: calc(100% - 200px);
+                            }
+                            display: flex;
+                            padding: 24px;
+                            justify-content: space-between;
+                            @media #{$max1024}{
+                                display: flow-root;
+                                width: 100%;
+                            }
+                            .tf-car-content{
+                                width: calc(100% - 196px);
+                                @media #{$max1024}{
+                                    width: 100%;
+                                }
+                                h3{
+                                    margin-bottom: 16px;
+                                }
+                                ul{
+                                    margin: 0;
+                                    @media #{$max1024}{
+                                        margin-bottom: 24px;
+                                    }
+                                    li{
+                                        width: calc(50% - 16px);
+                                    }
+                                }
+                            }
+                            .tf-booking-btn{
+                                flex-direction: column;
+                                @media #{$max1024}{
+                                    flex-direction: row;
+                                }
+                                button{
+                                    margin-top: auto;
+                                }
+                            }
+                        }
+                    }
+                }
+
+               /*  .tf_posts_navigation{
+                    width: 100%;
+                    .page-numbers{
+                        background: $color-brand-lite;
+                        color: $color-text;
+                        border-radius: 8px;
+                        border: 1px solid $color-border-lite;
+                        &.current{
+                            background: $color-primary;
+                            color: $color-text;
+                        }
+                    }
+                } */
+                .tf-pagination-bar{
+                    display: block;
+                    width: 100%;
+                    @media #{$max768}{
+                        margin-bottom: 30px;
+                    }
+                    .tf_posts_navigation,#tf_posts_navigation_bar{
+                        margin-top: 40px;
+                        width: 100%;
+                        display: flex;
+                        gap: 10px;
+                        .page-numbers {
+                            font-size: 0.875rem;
+                            color: $color-primary;
+                            text-decoration: none;
+                            padding: 8px 16px;
+                            background: $color-white;
+                            box-shadow: 0px 10px 18px rgba(88, 128, 160, 0.05);
+                            border-radius: 5px;
+                            display: inline-block;
+                            border: 1px solid $color-border-lite;
+                        }
+                        .page-numbers.current{
+                            background: $color-primary;
+                            color: $color-white;
+                            border-color: $color-white;
+                        }
+                    }
+                }
+                .tf_posts_navigation.tf_posts_ajax_navigation,
+                .tf_posts_navigation.tf_posts_page_navigation{
+                    margin-top: 40px;
+                    width: 100%;
+                    .page-numbers {
+                        font-size: 0.875rem;
+                        color: $color-primary;
+                        text-decoration: none;
+                        padding: 12px 18px;
+                        background: $color-white;
+                        box-shadow: 0px 10px 18px rgba(88, 128, 160, 0.05);
+                        border-radius: 5px;
+                        display: inline-block;
+                    }
+                    .page-numbers.current{
+                        background: $color-primary;
+                        color: $color-white;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* Nav */
+.tf-archive-car-listing__one{
+    .tf-archive-header{
+        .tf-archive-view{
+            ul{
+                margin: 0px;
+                padding: 0;
+                li{
+                    height: 52px;
+                    width: 52px;
+                    display: flex;
+                    border-radius: 8px;
+                    background: $color-filling-fg;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+                    i{
+                        color: $color-text;
+                    }
+                    &.active{
+                        background-color: $color-primary;
+                        i{
+                            color: $color-white;
+                        }
+                    }
+                }
+            }
+        }
+        .tf-total-result-bar{
+            text-align: right;
+            display: flex;
+            gap: 2px;
+            span{
+                color: $color-text;
+                font-size: 1rem;
+                font-weight: 400;
+            }
+        }
+    }
+}
+
+/* Sidebar */
+.tf-archive-car-listing__one{
+    .tf-car-details-column{
+        .tf-car-archive-sidebar{
+            width: 358px;
+            border-radius: 16px;
+            background: $color-filling-fg;
+            padding: 32px;
+            @media #{$max1024}{
+                width: 280px;
+            }
+            @media #{$max768}{
+                width: 100%;
+            }
+            
+            .tf-sidebar-header{
+                margin-bottom: 32px;
+                h4{
+                    color: $color-heading;
+                    font-size: 1rem;
+                    font-weight: 400;
+                    margin: 0;
+                }
+                button{
+                    color: $color-text;
+                    font-size: 1rem;
+                    font-weight: 400;
+                    background-color: transparent;
+                    padding: 0px;
+                    border: 0px solid;
+                    cursor: pointer;
+                    display: none;
+                }
+            }
+            .tf_widget{
+                margin-bottom: 32px;
+                background: transparent;
+                border: 0;
+                border-radius: 0;
+                &:last-child{
+                    margin-bottom: 0px;
+                }
+                .tf-widget-title{
+                    background: transparent;
+                    padding: 0;
+                    height: auto;
+                    border: 0;
+                    box-shadow: none;
+                    border-radius: 0px;
+                    span{
+                        color: $color-text;
+                        font-size: 1rem;
+                        font-weight: 400;
+                        margin-bottom: 16px;
+                        cursor: auto;
+                    }
+                    i{
+                        display: none;
+                    }
+                }
+                .tf-category-lists{
+                    ul{
+                        margin: 0;
+                        padding: 0;
+                        list-style: none;
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 8px;
+                        li{
+                            width: 100%;
+                            background: transparent;
+                            border-radius: 0;
+                            margin: 0;
+                            padding: 0;
+                            display: flow-root;
+                            &.hidden{
+                                display: none;
+                            }
+                            label{
+                                color: $color-gray-light;
+                                color: $color-text;
+                                font-size: 1rem;
+                                font-weight: 400;
+                                display: block;
+                                position: relative;
+                                padding-left: 35px;
+                                margin-bottom: 0px;
+                                cursor: pointer;
+                                -webkit-user-select: none;
+                                -moz-user-select: none;
+                                -ms-user-select: none;
+                                user-select: none;
+                                
+                                input{
+                                    position: absolute;
+                                    opacity: 0;
+                                    cursor: pointer;
+                                    height: 0;
+                                    width: 0;
+                                }
+                                input:checked ~ .tf-checkmark:after {
+                                    display: block;
+                                }
+                                input:checked ~ .tf-checkmark{
+                                    background-color: transparent;
+                                }
+                                .tf-checkmark {
+                                    position: absolute;
+                                    top: 0;
+                                    left: 0;
+                                    height: 20px;
+                                    width: 20px;
+                                    border: 2px solid $color-gray;
+                                    background-color: transparent;
+                                    border-radius: 5px;
+                                    &::after{
+                                        content: "";
+                                        position: absolute;
+                                        display: none;
+                                        left: 5px;
+                                        top: 2px;
+                                        width: 7px;
+                                        height: 10px;
+                                        border: solid $color-gray;
+                                        border-width: 0 3px 3px 0;
+                                        -webkit-transform: rotate(45deg);
+                                        -ms-transform: rotate(45deg);
+                                        transform: rotate(45deg);
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    a{
+                        text-decoration: none;
+                        color: $color-text;
+                        font-size: 1rem;
+                        font-weight: 400;
+                        text-align: left;
+                        margin-top: 8px;
+                    }
+                }
+                .al-range-slider__track{
+                    border-radius: 4px;
+                    background: $color-brand-lite;
+                    margin: 0 0 28px 0;
+                }
+                .al-range-slider__tooltip{
+                    bottom: -30px;
+                    background: transparent;
+                    color: $color-text;
+                }
+                .al-range-slider_dark .al-range-slider__bar{
+                    background-color: $color-text;
+                }
+                .al-range-slider__knob{
+                    border-radius: 12px;
+                    border: 1.5px solid $color-border;
+                    background: $color-filling-bg;
+                    width: 24px;
+                    height: 24px;
+                }
+                &.widget_tf_seat_filters{
+                    .al-range-slider__knob{
+                        &::before{
+                            content: "\f6c0";
+                            position: absolute;
+                            font-family: "FontAwesome";
+                            color: $color-primary;
+                            height: 100%;
+                            width: 100%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                        }
+                    }
+                }
+                &.widget_tf_car_engine_filter{
+                    .tf-category-lists{
+                        ul{
+                            gap: 8px;
+                            li{
+                                width: calc(33% - 5px);
+                                label{
+                                    background: $color-filling-bg;
+                                    border-radius: 8px;
+                                    margin: 0;
+                                    padding: 0;
+                                    font-size: 1rem;
+                                    font-weight: 400;
+                                    padding: 4px 8px;
+                                    text-align: center;
+                                    z-index: 0;
+                                }
+                                &.active{
+                                    label{
+                                        background: $color-primary;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.tf-archive-booking-form__style-1{
+    .tf-destination-box{
+        .autocomplete-items {
+            max-height: 120px;
+            overflow: scroll;
+            overflow-x: hidden;
+            position: absolute;
+            border: 1px solid $color-border-lite;
+            border-bottom: none;
+            border-top: none;
+            z-index: 99;
+            top: 100%;
+            left: 0;
+            right: 0;
+            div{
+                padding: 10px;
+                cursor: pointer;
+                background-color: $color-white;
+                border-bottom: 1px solid $color-border-lite;
+                color: $color-text;
+            }
+        }
+    }
+    .tf_acrselection{
+        .tf-field{
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            .acr-label{
+                align-items: center;
+                i,
+                svg{
+                    position: static;
+                    margin-right: 5px;
+                }
+                svg{
+                    width: 16px;
+                    height: 16px;
+                }
+            }
+        }
+    }
+    .tf-booking-bttns{
+        button{
+            width: 100%;
         }
     }
 }

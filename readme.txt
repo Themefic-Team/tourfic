@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, car-rental, multivendor-marketplace
 Requires at least: 5.4
 Tested up to: 6.8
-Stable tag: 2.16.8
+Stable tag: 2.16.9
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -139,7 +139,7 @@ Furthermore, an array of indispensable features solidifies Tourfic's position as
 * Ajax-based filter system
 
 = 🎉  WISHLIST =
-* Wishlist for Hotels, Tours & Apartment
+* Wishlist for Hotels, Tours & Apartments
 * Dedicated Wishlist Page
 * Wishlist for logged-in and log-out users (Pro)
 
@@ -151,7 +151,7 @@ Furthermore, an array of indispensable features solidifies Tourfic's position as
 * Delete old review fields
 
 = 🎉  PAYMENT METHOD SUPPORT =
-* Literally any Payment Methods Powered by WooCommerce (Paypal, Stripe, Authorize.net etc)
+* Literally any Payment Methods Powered by WooCommerce (PayPal, Stripe, Authorize.net etc)
 
 = 🎉  BOOKING DATA ON DASHBOARD =
 * Default Analytics Tool Provided by WooCommerce
@@ -190,6 +190,12 @@ In short, Tourfic has all the features to make it the best Multi vendor hotel / 
 = 🎉  API BASED AFFILIATE INTEGRATION =
 * Booking.com Affiliate Program (Pro)
 * TravelPayouts Affiliate Program (Pro)
+
+= 🎉  PAGE BUILDER SUPPORT =
+* Added: Elementor support for Tour Archive pages.
+* Added: Elementor support for Hotel Archive pages.
+* Added: Elementor support for Apartments Archive pages.
+* Added: Elementor support for Cars Archive pages.
 
 = 🎉  MISCELLANEOUS =
 * Email piping for customer enquery 
@@ -372,6 +378,16 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
+= 2.16.9 – July 19, 2025 =
+
+- Added: Theme Builder support for all Archive, Taxonomy, and Term pages.
+- Added: Elementor support for all Archive, Taxonomy, and Term pages.
+- Added: Elementor Page Builder support for Archive pages.
+- Improved: Layout of the footer booking form on tour pages.
+- Fixed: Design issue with the apartment location dropdown in Template 1.
+- Fixed: Price filter issue on car listings.
+- Fixed: Pagination issue on the Car Archive page.
+
 = 2.16.8 – June 24, 2025 =
 
 - Improved: Car rental design, including archive, single, and search form layouts.
@@ -392,19 +408,6 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 - Fixed: Issue with apartment availability price calculation.
 - Fixed: Problem with displaying customer booking details(Pro).
 - Fixed: iCal unavailable dates now reset correctly when the dates become available(Pro).
-
-= 2.16.5 – May 18, 2025 =
-
-- Fixed: Hotel room inventory issue with WPML compatibility.
-- Improved: Overall system stability. 
-
-= 2.16.4 – May 06, 2025 =
-
-- Fixed: Booking thank you message issue.
-- Fixed: Default date selection issue.
-- Fixed: Guest booking required field handling.
-- Fixed: Double pagination issue on apartment listings.
-- Improved: Minor design tweaks on preview layout.
 
 **Old Changelog can be found [here](https://themefic.com/tourfic/changelog/)**.
 

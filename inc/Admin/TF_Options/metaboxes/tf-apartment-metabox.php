@@ -187,7 +187,6 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'type'        => 'number',
 					'label'       => esc_html__( 'Price Per Night', 'tourfic' ),
 					'subtitle'    => esc_html__( 'The total booking cost is calculated by multiplying the nightly rate by the number of nights stayed, from check-in to check-out.', 'tourfic' ),
-					'field_width' => 50,
 					'attributes'  => array( 'min' => 0 ),
 					'dependency' => array( 'pricing_type', '==', 'per_night' ),
 				),
@@ -204,7 +203,8 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'label'       => esc_html__( 'Maximum Adults', 'tourfic' ),
 					'subtitle'    => esc_html__( 'Max number of adults allowed in the apartment.', 'tourfic' ),
 					'field_width' => 33.33,
-					'attributes'  => array( 'min' => 1 )
+					'attributes'  => array( 'min' => 1 ),
+					'default' => 1
 				),
 				array(
 					'id'          => 'max_children',
