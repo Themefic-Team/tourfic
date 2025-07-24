@@ -11512,13 +11512,13 @@ div#tf-destinationautocomplete-list div:before {
   border-radius: 7px;
 }
 
-.tf-single-template__one .tf-review-wrapper .tf-review-reply .tf-review-replay-data {
+.tf-single-template__one .tf-review-wrapper .tf-review-reply .tf-review-reply-data {
   border-bottom: 1px solid var(--tf-border-lite);
-  padding-bottom: 30px;
-  margin-bottom: 30px;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
 }
 
-.tf-single-template__one .tf-review-wrapper .tf-review-reply .tf-review-replay-data:last-child {
+.tf-single-template__one .tf-review-wrapper .tf-review-reply .tf-review-reply-data:last-child {
   border-bottom: none;
   padding-bottom: 0px;
   margin-bottom: 0px;
