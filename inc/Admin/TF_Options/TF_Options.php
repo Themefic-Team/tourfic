@@ -876,6 +876,23 @@ class TF_Options {
 			] );
 		}
 
+		if($pricing_type == 'person') {
+			if(empty($tf_tour_adult_price)){
+				$tf_tour_adult_price = !empty( $meta['adult_price'] ) ? $meta['adult_price'] : '';
+			}
+			if(empty($tf_tour_child_price)){
+				$tf_tour_child_price = !empty( $meta['child_price'] ) ? $meta['child_price'] : '';
+			}
+			if(empty($tf_tour_infant_price)){
+				$tf_tour_infant_price = !empty( $meta['infant_price'] ) ? $meta['infant_price'] : '';
+			}
+		}
+		if($pricing_type == 'group') {
+			if(empty($tf_tour_price)){
+				$tf_tour_price = !empty( $meta['group_price'] ) ? $meta['group_price'] : '';
+			}
+		}
+
 		$tour_availability_data = [];
 
 		if ( !empty($bulk_edit_option) ) {
