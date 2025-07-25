@@ -235,6 +235,8 @@ class Tour {
                                                 </div>
                                             </div>
 										<?php } ?>
+
+										<?php do_action( 'tf_tour_search_form_after_person_selection', $design ); ?>
                                     </div>
                                 </div>
 
@@ -376,7 +378,7 @@ class Tour {
 												<div class="person-sep"></div>
 												<div class="infant-text"><?php esc_html_e( '0 Infant', 'tourfic' ); ?></div>
 											<?php } ?>
-											<?php do_action( 'tf_tour_search_form_after_person_text' ); ?>
+											<?php do_action( 'tf_tour_search_form_after_person_text', $design ); ?>
 										</div>
 										<div class="tf_acrselection-wrap">
 											<div class="tf_acrselection-inner">
@@ -411,7 +413,7 @@ class Tour {
 														</div>
 													</div>
 												<?php } ?>
-												<?php do_action( 'tf_tour_search_form_after_person_selection' ); ?>
+												<?php do_action( 'tf_tour_search_form_after_person_selection', $design ); ?>
 											</div>
 										</div>
 									</div>
@@ -582,6 +584,9 @@ class Tour {
 								</div>
 							</div>
 						<?php endif; ?>
+
+						<?php do_action( 'tf_tour_search_form_after_person_selection', $design ); ?>
+
 						<!-- Divider -->
 						<div class="tf-search__form__divider"></div>
 						<!-- Check-in -->
@@ -783,7 +788,7 @@ class Tour {
                                 <div class="person-sep"></div>
                                 <div class="infant-text"><?php esc_html_e( '0 Infant', 'tourfic' ); ?></div>
 							<?php } ?>
-							<?php do_action( 'tf_tour_search_form_after_person_text' ); ?>
+							<?php do_action( 'tf_tour_search_form_after_person_text', $design ); ?>
                         </div>
                         <div class="tf_acrselection-wrap">
                             <div class="tf_acrselection-inner">
@@ -818,7 +823,7 @@ class Tour {
                                         </div>
                                     </div>
 								<?php } ?>
-								<?php do_action( 'tf_tour_search_form_after_person_selection' ); ?>
+								<?php do_action( 'tf_tour_search_form_after_person_selection', $design ); ?>
                             </div>
                         </div>
                     </div>

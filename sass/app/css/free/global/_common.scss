@@ -455,6 +455,7 @@ h3.section-heading {
     .tf_input-inner {
         @include flexbox();
         @include align-items(center);
+        @include flex-wrap(wrap);
         cursor: pointer;
     }
     .person-sep {

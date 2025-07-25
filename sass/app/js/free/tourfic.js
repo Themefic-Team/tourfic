@@ -1387,87 +1387,19 @@
 
         });
 
-        // Shortcode Design 2 Adults change trigger
-        $(document).on('change', '.adults-style2', function () {
-            let thisEml = $(this);
-            let thisVal = thisEml.val();
-            let $this = $(this).closest('.tf_hotel-shortcode-design-2');
-            // Declare child outside the if block
-            let child = 0;
-
-            if (thisEml.parent().parent().siblings().find('.childs-style2').length > 0) {
-                child = parseInt(thisEml.parent().parent().siblings().find('.childs-style2').val());
-            } else {
-                child = parseInt(0);
-            }
-            // Declare intant outside the if block
-            let intant = 0;
-
-            if (thisEml.parent().parent().siblings().find('.infant-style2').length > 0) {
-                intant = parseInt(thisEml.parent().parent().siblings().find('.childs-style2').val());
-            } else {
-                intant = parseInt(0);
-            }
-            let total_people = child + intant + parseInt(thisVal);
-            if (total_people > 1) {
-                $this.find(".tf_guest_number .guest").text(total_people);
-            }
-        });
-        // Shortcode Design 2 Childs change trigger
-        $(document).on('change', '.childs-style2', function () {
-            let thisEml = $(this);
-            let thisVal = thisEml.val();
-            let $this = $(this).closest('.tf_hotel-shortcode-design-2');
-
-            // Declare adults outside the if block
-            let adults = 0;
-
-            if (thisEml.parent().parent().siblings().find('.adults-style2').length > 0) {
-                adults = parseInt(thisEml.parent().parent().siblings().find('.adults-style2').val());
-            } else {
-                adults = parseInt(0);
-            }
-            // Declare intant outside the if block
-            let intant = 0;
-
-            if (thisEml.parent().parent().siblings().find('.infant-style2').length > 0) {
-                intant = parseInt(thisEml.parent().parent().siblings().find('.infant-style2').val());
-            } else {
-                intant = parseInt(0);
-            }
-
-            let total_people = adults + intant + parseInt(thisVal);
-            if (total_people > 1) {
-                $this.find(".tf_guest_number .guest").text(total_people);
-            }
-        });
-        // Shortcode Design 2 Infants change trigger
-        $(document).on('change', '.infant-style2', function () {
-            let thisEml = $(this);
-            let thisVal = thisEml.val();
-            let $this = $(this).closest('.tf_hotel-shortcode-design-2');
-
-            // Declare adults outside the if block
-            let adults = 0;
-
-            if (thisEml.parent().parent().siblings().find('.adults-style2').length > 0) {
-                adults = parseInt(thisEml.parent().parent().siblings().find('.adults-style2').val());
-            } else {
-                adults = parseInt(0);
-            }
-
-            // Declare child outside the if block
-            let child = 0;
-
-            if (thisEml.parent().parent().siblings().find('.childs-style2').length > 0) {
-                child = parseInt(thisEml.parent().parent().siblings().find('.childs-style2').val());
-            } else {
-                child = parseInt(0);
-            }
-
-            let total_people = adults + child + parseInt(thisVal);
-            if (total_people > 1) {
-                $this.find(".tf_guest_number .guest").text(total_people);
+        // Handle all traveler category inputs with a single function
+        $(document).on('change', '.tf_hotel-shortcode-design-2 .tf_acrselection input[type="tel"]', function() {
+            const $form = $(this).closest('.tf_hotel-shortcode-design-2');
+            let totalPeople = 0;
+            
+            // Sum all traveler inputs in the form
+            $form.find('.tf_acrselection input[type="tel"]').each(function() {
+                const value = parseInt($(this).val()) || 0;
+                totalPeople += value;
+            });
+            
+            if (totalPeople > 0) {
+                $form.find(".tf_guest_number .guest").text(totalPeople);
             }
         });
 
@@ -2437,6 +2369,7 @@
             } else {
                 var guest = Number($('input#adults').val() ? $('input#adults').val() : 0) + Number($('input#children').val() ? $('input#children').val() : 0);
             }
+            wp.hooks.applyFilters('tf_guest_count', guest);
             if (guest.toString().length < 2) {
                 guest = '0' + guest;
             }
