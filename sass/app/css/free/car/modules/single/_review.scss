@@ -135,6 +135,14 @@
                     margin-top: 32px;
                     .tf-reviews-item{
                         flex-wrap: nowrap;
+                        margin-bottom: 20px;
+                        padding-bottom: 20px;
+                        border-bottom: 1px solid $color-border-lite;
+                        &:last-child{
+                            margin-bottom: 0px;
+                            padding-bottom: 0px;
+                            border-bottom: 0;
+                        }
                         .tf-reviews-avater{
                             img{
                                 width: 56px;

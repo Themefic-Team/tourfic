@@ -189,6 +189,9 @@
                                     a{
                                         color: $color-text;
                                     }
+                                    &:last-child{
+                                        font-weight: 700;
+                                    }
                                 }
                             }
                         }
@@ -1039,6 +1042,7 @@
                 line-height: 1.5;
                 border: 0px solid;
                 cursor: pointer;
+                width: 100%;
                 transition: .3s all ease;
                 &:hover{
                     background: $color-brand-dark;

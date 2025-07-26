@@ -406,7 +406,6 @@
             if (max_seat) {
                 formData.append('max_seat', max_seat);
             }
-
             if(mapCoordinates.length === 4){
                 formData.append('mapCoordinates', mapCoordinates.join(','));
                 formData.append('mapFilter', true);

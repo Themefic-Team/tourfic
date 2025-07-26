@@ -614,7 +614,7 @@
         $(document).on('submit', '#tf_car_booking', function (e) {
             e.preventDefault();
             let form = $(this),
-                submitBtn = form.find('.tf-submit'),
+                submitBtn = form.find('button[type="submit"]'),
                 formData = new FormData(form[0]);
             formData.append('action', 'tf_car_search');
             formData.append('_nonce', tf_params.nonce);
@@ -631,7 +631,6 @@
                 contentType: false,
                 processData: false,
                 beforeSend: function () {
-                    form.css({'opacity': '0.5', 'pointer-events': 'none'});
                     submitBtn.addClass('tf-btn-loading');
                 },
                 success: function (response) {
@@ -908,6 +907,37 @@
             });
         };
 
+        /*
+        * Car menu scroll
+        * @author Mofazzal Hossain
+        */
+        let $scrollContainer = $('.tf-details-menu ul');
+
+        $scrollContainer.on('click', 'li', function (e) {
+            let $item = $(this);
+
+            // Remove previous active and set new one
+            $scrollContainer.find('li').removeClass('active');
+            $item.addClass('active');
+
+            scrollToItem($item);
+        });
+
+        function scrollToItem($item) {
+            let container = $scrollContainer.get(0);
+            let containerLeft = container.scrollLeft;
+            let containerWidth = $scrollContainer.outerWidth();
+            let itemLeft = $item.position().left + containerLeft;
+            let itemWidth = $item.outerWidth();
+
+            let scrollTo = itemLeft - (containerWidth / 2) + (itemWidth / 2);
+
+            // Animate scroll
+            $scrollContainer.animate({
+                scrollLeft: scrollTo
+            }, 400);
+        }
+
 
         /*
         * Car Archive View
@@ -927,21 +957,43 @@
             }
         });
 
+        /*
+        * Booking Bar Show
+        * @author Mofazzal Hossain
+        */
         if($('.tf-single-car-details-warper .tf-details-menu').length){
-            // Booking Bar Show
-            $(window).scroll(function() {
+            $(window).on('scroll resize', function () {
                 // Check the position of the target div
-                var targetOffset = $('.tf-single-car-details-warper .tf-details-menu').offset().top;
-                var targetHeight = $('.tf-single-car-details-warper .tf-details-menu').outerHeight(); // Get the full height of the div including padding
+                var $target = $('.tf-single-car-details-warper .tf-details-menu');
+                var $bookingBar = $('.tf-single-booking-bar');
+                var $header = $('header');
+                var $desktopHeader = $('.tft-header-desktop');
+                
+                var targetOffset = $target.offset().top;
+                var targetHeight = $target.outerHeight();
                 var targetBottom = targetOffset + targetHeight;
 
                 var scrollPosition = $(window).scrollTop();
+
+                // Calculate header height if exists
+                var headerHeight = ($header.hasClass('tf-navbar-shrink')) ? $header.outerHeight() : 0;
+
+                // Apply top based on header height
+                $bookingBar.css('top', headerHeight + 'px');
         
-                // If the user has scrolled past the target div, show the other div
+                // Toggle booking bar visibility
                 if (scrollPosition > targetBottom) {
-                    $('.tf-single-booking-bar').fadeIn(); // You can change this to show() or add animations
+                    $bookingBar.fadeIn(function () {
+                        if ($bookingBar.is(':visible')) {
+                            $header.css("box-shadow", "none");
+                            $desktopHeader.css("box-shadow", "none");
+                        }
+                    });
                 } else {
-                    $('.tf-single-booking-bar').fadeOut();
+                    $bookingBar.fadeOut(function () {
+                        $header.css("box-shadow", ""); 
+                        $desktopHeader.css("box-shadow", "");
+                    });
                 }
             });
         }

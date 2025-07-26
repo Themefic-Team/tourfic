@@ -250,6 +250,7 @@
                             border: 0px solid;
                             cursor: pointer;
                             transition: .3s all ease;
+                            width: 100%;
                             &:hover{
                                 background: $color-brand-dark;
                             }

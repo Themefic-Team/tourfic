@@ -2,14 +2,15 @@
     .tf-single-template{
         &__one{
             .tf-single-booking-bar{
-                background: $color-filling-fg;
+                background: $color-white;
                 padding: 16px 0px;
                 position: fixed;
                 left: 0;
                 top: 0;
                 width: 100%;
-                z-index: 9999;
+                z-index: 999;
                 display: none;
+                box-shadow: 0 48px 64px 0 rgba(2, 12, 21, 0.05);
                 .tf-top-booking-bar{
                     @media #{$max1024}{
                         gap: 16px;
@@ -21,7 +22,7 @@
                         justify-content: space-between;
                         width: 100%;
                     }
-                    @media #{$max767}{
+                    @media #{$max768}{
                         display: none;
                     }
                     .tf-price-header{
@@ -63,40 +64,33 @@
                 position: relative;
                 overflow: hidden;
                 &::before{
-                    background: linear-gradient(90deg, rgba(217, 217, 217, 0.00) 0%, $color-gray-light 100%);
+                    background: linear-gradient(90deg, rgba(255, 255, 255, 0.00) 0%, #FFF 100%);
                     position: absolute;
                     content: "";
                     right: 0;
                     top: 0;
                     height: 100%;
                     width: 92px;
-                    z-index: -1;
                 }
                 ul{
                     margin: 0;
                     padding: 0;
                     overflow-x: auto;
+                    overflow-y: hidden;
                     width: 100%;
                     display: block ruby;
                     scrollbar-width: thin;
                     scrollbar-color: $scrollbar-color;
                     display: flex;
+                    flex-wrap: nowrap;
                     white-space: nowrap;
+                    scrollbar-width: none;
+                    -ms-overflow-style: none;
+                    user-select: none;
                     &::-webkit-scrollbar {
-                        width: 4px;
+                        display: none;
                     }
-
-                    &::-webkit-scrollbar-track {
-                        background: $color-brand-lite;
-                    }
-                    &::-webkit-scrollbar-thumb {
-                        background-color: $scrollbar-thumb-color;
-                        border-radius: 4px;
-
-                        &:hover {
-                            background-color: $color-gray-light;
-                        }
-                    }
+                   
                     li{
                         display: inline-block;
                         margin-right: 8px;

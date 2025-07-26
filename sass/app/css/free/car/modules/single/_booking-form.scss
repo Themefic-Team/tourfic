@@ -273,34 +273,6 @@
                 }
             }
 
-            .tf-mobile-booking-btn{
-                display: none;
-                background: $color-brand-lite;
-                padding: 8px;
-                @media #{$max768}{
-                    display: block;
-                    position: fixed;
-                    left: 0;
-                    bottom: 0;
-                    right: 0;
-                    z-index: 9999;
-                }
-                button{
-                    padding: 16px 32px;
-                    border-radius: 8px;
-                    background: $color-primary;
-                    color: $color-white;
-                    font-size: 1rem;
-                    font-weight: 700;
-                    cursor: pointer;
-                    width: 100%;
-                    border: 0px solid;
-                    transition: .3s all ease;
-                    &:hover{
-                        background: $color-brand-dark;
-                    }
-                }
-            }
         }
     }
 }

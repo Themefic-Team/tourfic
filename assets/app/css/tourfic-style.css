@@ -762,7 +762,7 @@ body .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf
 .tax-carrental_brand .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-reviews-box span i,
 .page-template-tf-search .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-reviews-box span i,
 body .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-reviews-box span i {
-  color: var(--tf-primary);
+  color: #FFBF0F;
 }
 
 .post-type-archive-tf_carrental .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box,
@@ -6551,6 +6551,10 @@ div#tf-destinationautocomplete-list div:before {
 }
 
 /* Car search */
+.page-template-tf-search .tf-archive-template__one {
+  padding: 0;
+}
+
 .page-template-tf-search .tf-archive-template__one .tf-archive-car-banner {
   background: #F1F3F4;
   height: 350px;
@@ -6838,6 +6842,7 @@ div#tf-destinationautocomplete-list div:before {
 
 .page-template-tf-search .tf-archive-template__one .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-sidebar .tf_widget.widget_tf_car_engine_filter .tf-category-lists ul li.active label {
   background: var(--tf-primary);
+  color: #ffffff;
 }
 
 .page-template-tf-search .tf-archive-template__one .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-sidebar .tf_widget a {
@@ -10275,6 +10280,10 @@ div#tf-destinationautocomplete-list div:before {
   color: var(--tf-text-paragraph);
 }
 
+.single-tf_carrental .tf-single-template__one .tf-single-car-details-warper .tf-car-details-column .tf-car-title .breadcrumb ul li:last-child {
+  font-weight: 700;
+}
+
 .single-tf_carrental .tf-single-template__one .tf-single-car-details-warper .tf-car-details-column .tf-template-part {
   width: 100%;
 }
@@ -11612,6 +11621,7 @@ div#tf-destinationautocomplete-list div:before {
   line-height: 1.5;
   border: 0px solid;
   cursor: pointer;
+  width: 100%;
   transition: .3s all ease;
 }
 
@@ -13630,7 +13640,7 @@ div#tf-destinationautocomplete-list div:before {
 
 .tf-archive-listing__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-reviews-box span i,
 .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-reviews-box span i {
-  color: var(--tf-primary);
+  color: #FFBF0F;
 }
 
 .tf-archive-listing__one .tf-car-archive-result .tf-car-result .tf-single-car-view .tf-car-image .tf-other-infos .tf-tags-box,
