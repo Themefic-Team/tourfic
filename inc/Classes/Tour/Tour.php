@@ -3329,7 +3329,6 @@ class Tour {
 				}
 			}
 		}
-		Helper::tf_var_dump($traveler_category_prices);
 		
 		$package_pricing = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
 		if(!empty($package_pricing) && $pricing_rule=='package'){
@@ -3368,6 +3367,22 @@ class Tour {
 						$max_person = $package['infant_tabs'][3]['max_infant'];
 					}
 				}
+
+				//Get traveler category min and max person
+				if (!empty($traveler_categories) && is_array($traveler_categories)) {
+					foreach ($traveler_categories as $category_slug => $count) {
+						if (!empty($package["{$category_slug}_tabs"][2]["min_{$category_slug}"])) {
+							if (is_null($min_person) || $package["{$category_slug}_tabs"][2]["min_{$category_slug}"] < $min_person) {
+								$min_person = $package["{$category_slug}_tabs"][2]["min_{$category_slug}"];
+							}
+						}
+						if (!empty($package["{$category_slug}_tabs"][3]["max_{$category_slug}"])) {
+							if (is_null($max_person) || $package["{$category_slug}_tabs"][3]["max_{$category_slug}"] > $max_person) {
+								$max_person = $package["{$category_slug}_tabs"][3]["max_{$category_slug}"];
+							}
+						}
+					}
+				}
 			}
 		}
 
@@ -3379,19 +3394,34 @@ class Tour {
 			$child_price = !empty($meta['child_price']) ? $meta['child_price'] : 0;
 			$infant_price = !empty($meta['infant_price']) ? $meta['infant_price'] : 0;
 			$group_price = !empty($meta['group_price']) ? $meta['group_price'] : 0;
+
+			// Get traveler category prices from meta if not in availability
+			if (!empty($traveler_categories) && is_array($traveler_categories)) {
+				foreach ($traveler_categories as $category_slug => $count) {
+					if (!empty($meta[$category_slug . '_price'])) {
+						$traveler_category_prices[$category_slug] = $meta[$category_slug . '_price'];
+					}
+				}
+			}
 		}
 
 		// Set initial tour availability status
 		$has_tour = false;
 
-		// Total People
+		// Total People - include traveler categories in the count
 		$total_people = intval( $adults ) + intval( $child );
+		if (!empty($traveler_categories) && is_array($traveler_categories)) {
+			foreach ($traveler_categories as $category_count) {
+				$total_people += intval($category_count);
+			}
+		}
 		$people_counter = 0;
 
 		// Max & Min People Check
 		if ( ! empty( $max_person ) && $max_person >= $total_people && $max_person != 0 && ! empty( $min_person ) && $min_person <= $total_people && $min_person != 0 ) {
 			$people_counter ++;
 		}
+		var_dump($total_people, $min_person, $max_person, $people_counter);
 		if ( $people_counter > 0 ) {
 			$show_fixed_tour = [];
 			if ( ! empty( $first_match ) ) {
@@ -3413,6 +3443,16 @@ class Tour {
 					if ( ! empty( $infant_price ) ) {
 						if ( $startprice <= $infant_price && $infant_price <= $endprice ) {
 							$has_tour = true;
+						}
+					}
+
+					// Check traveler category prices
+					if (!$has_tour && !empty($traveler_category_prices)) {
+						foreach ($traveler_category_prices as $category_price) {
+							if ($startprice <= $category_price && $category_price <= $endprice) {
+								$has_tour = true;
+								break;
+							}
 						}
 					}
 				} else {
@@ -3457,6 +3497,18 @@ class Tour {
 						if (!empty($first_match->$group_property_name)) {
 							if ( $startprice <= $first_match->$group_property_name && $first_match->$group_property_name <= $endprice) {
 								$has_tour = true;
+							}
+						}
+
+						// Check traveler category prices
+						if (!$has_tour && !empty($traveler_categories)) {
+							foreach ($traveler_categories as $category_slug => $count) {
+								$category_property_name = "tf_option_{$category_slug}_price_{$i}";
+								if (!empty($first_match->$category_property_name)) {
+									if ( $startprice <= $first_match->$category_property_name && $first_match->$category_property_name <= $endprice) {
+										$has_tour = true;
+									}
+								}
 							}
 						}
 					}
