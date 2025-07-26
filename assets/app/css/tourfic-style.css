@@ -10000,12 +10000,14 @@ div#tf-destinationautocomplete-list div:before {
   text-transform: capitalize;
   letter-spacing: 0.5px;
   font-size: 0.813rem;
+  line-height: 1;
 }
 
 .single-tf_hotel .tf-single-template__legacy .tf_features i,
 .single-tf_tours .tf-single-template__legacy .tf_features i,
 .single-tf_apartment .tf-single-template__legacy .tf_features i {
   color: var(--tf-text-paragraph);
+  line-height: 1;
 }
 
 .single-tf_hotel .tf-single-template__legacy .tf_features .single-feature-box,
@@ -16047,7 +16049,7 @@ div#tf-destinationautocomplete-list div:before {
   .tf-archive-template__two .tf-details-right,
   .tf-archive-listing__two .tf-details-right,
   .page-template-tf-search__two .tf-details-right {
-    width: 320px;
+    width: 380px;
   }
 }
 

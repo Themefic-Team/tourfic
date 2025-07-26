@@ -307,6 +307,7 @@
   bottom: 0;
   left: 0%;
   right: 0;
+  border-radius: 0;
 }
 
 @media only screen and (max-width: 768px) {
@@ -1500,6 +1501,7 @@
 
 .single-tf_tours .tf-single-template__one .tf-itinerary-wrapper.tf-mb-50 .tf-itinerary-downloader-option p {
   color: var(--tf-text-paragraph);
+  margin-bottom: 0;
 }
 
 .single-tf_tours .tf-single-template__two .tf-itinerary-wrapper {
@@ -1689,10 +1691,6 @@
   flex-direction: row;
   flex-wrap: wrap;
   gap: 12px 10px;
-}
-
-.single-tf_tours .tf-single-template__two .tf-itinerary-wrapper .tf-itinerary-wrapper .tf-itinerary-content-details ul li {
-  width: calc(50% - 5px);
 }
 
 .single-tf_tours .tf-single-template__two .tf-itinerary-wrapper .section-title h2 {

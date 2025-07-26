@@ -297,6 +297,7 @@
                     
                     p{
                         color: $color-text;
+                        margin-bottom: 0;
                     }
                     
                 }
@@ -456,10 +457,6 @@
                         flex-direction: row;
                         flex-wrap: wrap;
                         gap: 12px 10px;
-                    }
-            
-                    .tf-itinerary-content-details ul li {
-                        width: calc(50% - 5px);
                     }
                 }
             

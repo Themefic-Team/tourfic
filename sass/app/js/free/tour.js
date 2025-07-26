@@ -627,7 +627,7 @@
                     scroll = $(window).scrollTop(),
                     footer = $('footer');
             
-                if (footer.length === 0) {
+                if (footer.length === 0 || bookingBox.length === 0 || sticky.length === 0) {
                     return; 
                 }
                 let boxOffset = bookingBox.offset().top + bookingBox.outerHeight();
