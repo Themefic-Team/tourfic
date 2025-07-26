@@ -25,6 +25,9 @@
                         border-radius: 50%;
                         border: 1px solid $color-border-lite;
                         background: $color-filling-fg;
+                        path {
+                            fill: $color-text;
+                        }
 
                     }
                 }

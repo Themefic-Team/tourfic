@@ -1427,6 +1427,12 @@
   }
 }
 
+@media only screen and (max-width: 575.98px) {
+  .single-tf_tours .tf-single-template__one .tf-itinerary-wrapper .tf-single-itinerary-item .tf-itinerary-content-box .ininerary-other-gallery a.tf-gallery-more::before {
+    content: "→";
+  }
+}
+
 .single-tf_tours .tf-single-template__one .tf-itinerary-wrapper .tf-single-itinerary-item:first-child {
   padding-top: 0px;
 }

@@ -692,6 +692,10 @@
   background: var(--tf-filling-foreground);
 }
 
+.single-tf_apartment .tf-single-template__legacy .tf-apartment-rooms .slick-arrow svg path {
+  fill: var(--tf-text-paragraph);
+}
+
 .single-tf_apartment .tf-single-template__legacy .tf-apartment-rooms .slick-prev {
   left: 0;
 }
@@ -1714,7 +1718,7 @@
 
 .single-tf_apartment .tf-single-template__legacy .tf-related-apartment .tf-apartment-item .tf-related-apartment-content span {
   font-size: 0.875rem;
-  color: #808080;
+  color: var(--tf-text-paragraph);
   margin: 0;
 }
 

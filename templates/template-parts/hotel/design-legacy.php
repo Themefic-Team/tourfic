@@ -121,7 +121,7 @@ $price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings'
 					<?php if ( ! $disable_share_opt == '1' ) { ?>
                         <div class="tf-share">
                             <a href="#dropdown-share-center" class="share-toggle"
-                               data-toggle="true"><i class="fas fa-share-alt"></i></a>
+                               data-toggle="true"><i class="ri-share-line"></i></a>
                             <div id="dropdown-share-center" class="share-tour-content">
                                 <ul class="tf-dropdown-content">
                                     <li>

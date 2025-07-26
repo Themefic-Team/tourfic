@@ -226,6 +226,9 @@
                                     @media #{$max1024}{
                                         text-align: center;
                                     }
+                                    @media #{$max575}{
+                                        content: "→";
+                                    }
                                 }
                             }
                         }
