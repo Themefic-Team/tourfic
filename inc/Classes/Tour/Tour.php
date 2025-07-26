@@ -3421,7 +3421,7 @@ class Tour {
 		if ( ! empty( $max_person ) && $max_person >= $total_people && $max_person != 0 && ! empty( $min_person ) && $min_person <= $total_people && $min_person != 0 ) {
 			$people_counter ++;
 		}
-		var_dump($total_people, $min_person, $max_person, $people_counter);
+		
 		if ( $people_counter > 0 ) {
 			$show_fixed_tour = [];
 			if ( ! empty( $first_match ) ) {
@@ -3546,21 +3546,50 @@ class Tour {
 	 *
 	 */
 	static function tf_filter_tour_by_without_date( $period, &$total_posts, array &$not_found, array $data = [] ): void {
-		if ( isset( $data[3] ) && isset( $data[4] ) ) {
-			[ $adults, $child, $check_in_out, $startprice, $endprice ] = $data;
+		// Extract data with traveler categories
+		if (isset($data[3]) && is_array($data[3]) && isset($data[4]) && isset($data[5])) {
+			// Case with prices and traveler categories
+			[$adults, $child, $check_in_out, $traveler_categories, $startprice, $endprice] = $data;
+		} elseif (isset($data[3]) && isset($data[4])) {
+			// Legacy case with prices but no traveler categories
+			[$adults, $child, $check_in_out, $startprice, $endprice] = $data;
+			$traveler_categories = [];
+		} elseif (isset($data[2]) && is_array($data[2])) {
+			// Case without prices but with traveler categories
+			[$adults, $child, $check_in_out, $traveler_categories] = $data;
+			$startprice = $endprice = null;
 		} else {
-			[ $adults, $child, $check_in_out ] = $data;
+			// Legacy case without prices or traveler categories
+			[$adults, $child, $check_in_out] = $data;
+			$startprice = $endprice = null;
+			$traveler_categories = [];
 		}
+
 		// Get tour meta options
 		$meta = get_post_meta( get_the_ID(), 'tf_tours_opt', true );
 		$pricing_type = !empty($meta['pricing']) ? $meta['pricing'] : 'person';
 
 		$avail_persons = Pricing::instance( get_the_ID() )->get_min_max_person();
-
 		$package_pricing = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
 
-		// Total People
+		// Get traveler category prices if available
+		$traveler_category_prices = [];
+		if (!empty($traveler_categories) && is_array($traveler_categories)) {
+			foreach ($traveler_categories as $category_slug => $count) {
+				if (!empty($meta[$category_slug . '_price'])) {
+					$traveler_category_prices[$category_slug] = $meta[$category_slug . '_price'];
+				}
+			}
+		}
+
+		// Total People - include traveler categories in the count
 		$total_people = intval( $adults ) + intval( $child );
+		if (!empty($traveler_categories) && is_array($traveler_categories)) {
+			foreach ($traveler_categories as $category_count) {
+				$total_people += intval($category_count);
+			}
+		}
+		
 		$people_counter = 0;
 		// Max & Min People Check
 		if ( ! empty( $avail_persons['max_person'] ) && $avail_persons['max_person'] >= $total_people && $avail_persons['max_person'] != 0 && ! empty( $avail_persons['min_person'] ) && $avail_persons['min_person'] <= $total_people && $avail_persons['min_person'] != 0 ) {
@@ -3586,6 +3615,16 @@ class Tour {
 					if ( ! empty( $meta['infant_price'] ) ) {
 						if ( $startprice <= $meta['infant_price'] && $meta['infant_price'] <= $endprice ) {
 							$has_tour = true;
+						}
+					}
+
+					// Check traveler category prices
+					if (!$has_tour && !empty($traveler_category_prices)) {
+						foreach ($traveler_category_prices as $category_price) {
+							if ($startprice <= $category_price && $category_price <= $endprice) {
+								$has_tour = true;
+								break;
+							}
 						}
 					}
 				}
@@ -3616,6 +3655,17 @@ class Tour {
 						if (!empty($package['group_tabs'][1]['group_price'])) {
 							if ( $startprice <= $package['group_tabs'][1]['group_price'] && $package['group_tabs'][1]['group_price'] <= $endprice ) {
 								$has_tour = true;
+							}
+						}
+
+						// Check traveler category prices
+						if (!$has_tour && !empty($traveler_categories)) {
+							foreach ($traveler_categories as $category_slug => $count) {
+								if (!empty($package["{$category_slug}_tabs"][1]["{$category_slug}_price"])) {
+									if ( $startprice <= $package["{$category_slug}_tabs"][1]["{$category_slug}_price"] && $package["{$category_slug}_tabs"][1]["{$category_slug}_price"] <= $endprice ) {
+										$has_tour = true;
+									}
+								}
 							}
 						}
 					}
