@@ -929,6 +929,13 @@ class TF_Options {
 									}
 								}
 
+								$tf_tour_data = apply_filters('tf_tour_availability_data_before_save', $tf_tour_data, [
+									'tour_id' => $tour_id,
+									'pricing_type' => $pricing_type,
+									'options_count' => $options_count,
+									'group_options_count' => $group_options_count
+								]);
+
 								$tour_availability_data[$tf_tour_date] = $tf_tour_data;
 							}
 
@@ -987,6 +994,13 @@ class TF_Options {
 											$tf_tour_data = array_merge( $tf_tour_data, $options_data );
 										}
 									}
+
+									$tf_tour_data = apply_filters('tf_tour_availability_data_before_save', $tf_tour_data, [
+										'tour_id' => $tour_id,
+										'pricing_type' => $pricing_type,
+										'options_count' => $options_count,
+										'group_options_count' => $group_options_count
+									]);
 	
 									$tour_availability_data[$tf_tour_date] = $tf_tour_data;
 								}
@@ -1051,6 +1065,13 @@ class TF_Options {
 					$tf_tour_data = array_merge( $tf_tour_data, $options_data );
 				}
 			}
+
+			$tf_tour_data = apply_filters('tf_tour_availability_data_before_save', $tf_tour_data, [
+				'tour_id' => $tour_id,
+				'pricing_type' => $pricing_type,
+				'options_count' => $options_count,
+				'group_options_count' => $group_options_count
+			]);
 
 			$tour_availability_data[$tf_tour_date] = $tf_tour_data;
 		}
@@ -1130,6 +1151,7 @@ class TF_Options {
 					$item['title'] = __( 'Price: ', 'tourfic' ) . wc_price( $item['price'] ) . '<br>'. $time_string;
 				} elseif ( $item['pricing_type'] == 'person' ) {
 					$item['title'] = __( 'Adult: ', 'tourfic' ) . wc_price( $item['adult_price'] ) . '<br>' . __( 'Child: ', 'tourfic' ) . wc_price( $item['child_price'] ). '<br>' . __( 'Infant: ', 'tourfic' ) . wc_price( $item['infant_price'] ). '<br>'. $time_string;
+					$item = apply_filters('tf_tour_availability_item_before_display', $item, '');
 				} elseif ( $item['pricing_type'] == 'package' ) {
 					$item['title'] = '';
 					if ( ! empty( $item['options_count'] ) ) {
@@ -1150,6 +1172,7 @@ class TF_Options {
 								$item['title'] .= __( 'Infant: ', 'tourfic' ) . wc_price($item['tf_option_infant_price_'.$i]). '<br>';
 								$item['title'] .=  !empty($package_active_time) ? 'Time: '.$package_active_time. '<br><br>' : '';
                             }
+							$item = apply_filters('tf_tour_availability_item_before_display', $item, $i);
 						}
 					}
 				} elseif ( $item['pricing_type'] == 'group' && !empty($group_package_option) && !empty($group_package_pricing) ) {
@@ -1172,6 +1195,8 @@ class TF_Options {
 				if ( $item['status'] == 'unavailable' ) {
 					$item['customClass']   = 'tf_tour_disable_date';
 				}
+
+				// $item = apply_filters('tf_tour_availability_item_before_display', $item);
 
 				return $item;
 			}, $tour_availability_data );

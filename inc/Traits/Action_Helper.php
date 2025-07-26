@@ -825,6 +825,11 @@ trait Action_Helper {
 			}
 		}
 
+		$data = apply_filters('tf_search_filter_ajax_data_before_process', $data, [
+			'posttype' => $posttype,
+			'shortcode' => false,
+		]);
+
 		if ( ! empty( $check_in_out ) ) {
 			list( $tf_form_start, $tf_form_end ) = explode( ' - ', $check_in_out );
 		}

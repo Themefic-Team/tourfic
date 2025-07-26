@@ -77,6 +77,11 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 			}
 		}
 
+		$data = apply_filters('tf_search_filter_ajax_data_before_process', $data, [
+			'posttype' => $post_type,
+			'shortcode' => true,
+		]);
+
 		// Gird or List View
 		if(!empty($_GET['type']) && $_GET['type'] == "tf_hotel"){
 			$tf_defult_views = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel_archive_view'] ) ? Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel_archive_view'] : 'list';

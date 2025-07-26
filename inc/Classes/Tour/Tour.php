@@ -3242,10 +3242,23 @@ class Tour {
 	 *
 	 */
 	static function tf_filter_tour_by_date( $period, &$total_posts, array &$not_found, array $data = [] ): void {
-		if ( isset( $data[3] ) && isset( $data[4] ) ) {
-			[ $adults, $child, $check_in_out, $startprice, $endprice ] = $data;
+		// Extract data with traveler categories
+		if (isset($data[3]) && is_array($data[3]) && isset($data[4]) && isset($data[5])) {
+			// Case with prices and traveler categories
+			[$adults, $child, $check_in_out, $traveler_categories, $startprice, $endprice] = $data;
+		} elseif (isset($data[3]) && isset($data[4])) {
+			// Legacy case with prices but no traveler categories
+			[$adults, $child, $check_in_out, $startprice, $endprice] = $data;
+			$traveler_categories = [];
+		} elseif (isset($data[2]) && is_array($data[2])) {
+			// Case without prices but with traveler categories
+			[$adults, $child, $check_in_out, $traveler_categories] = $data;
+			$startprice = $endprice = null;
 		} else {
-			[ $adults, $child, $check_in_out ] = $data;
+			// Legacy case without prices or traveler categories
+			[$adults, $child, $check_in_out] = $data;
+			$startprice = $endprice = null;
+			$traveler_categories = [];
 		}
 		// Get tour meta options
 		$meta = get_post_meta( get_the_ID(), 'tf_tours_opt', true );
@@ -3305,6 +3318,18 @@ class Tour {
 		$infant_price = !empty($first_match->infant_price) ? $first_match->infant_price : 0;
 		$group_price = !empty($first_match->price) ? $first_match->price : 0;
 		$pricing_type = !empty($first_match->pricing_type) ? $first_match->pricing_type : '';
+
+		// Get traveler category prices if available
+		$traveler_category_prices = [];
+		if (!empty($traveler_categories) && is_array($traveler_categories)) {
+			foreach ($traveler_categories as $category_slug => $count) {
+				$price_key = $category_slug . '_price';
+				if (!empty($first_match->$price_key)) {
+					$traveler_category_prices[$category_slug] = $first_match->$price_key;
+				}
+			}
+		}
+		Helper::tf_var_dump($traveler_category_prices);
 		
 		$package_pricing = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
 		if(!empty($package_pricing) && $pricing_rule=='package'){

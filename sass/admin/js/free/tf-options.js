@@ -1625,6 +1625,16 @@
                         if (typeof event.extendedProps.infant_price != 'undefined') {
                             $("[name='tf_tour_infant_price']", self.tourCalData).val(event.extendedProps.infant_price);
                         }
+
+                        $.each(tf_options.tour_traveler_category, function(index, category) {
+                            var categorySlug = category.traveler_slug;
+                            if (categorySlug) {
+                                var priceField = $("[name='tf_tour_" + categorySlug + "_price']", self.tourCalData);
+                                if (priceField.length) {
+                                    priceField.val(event.extendedProps[categorySlug + '_price'] || '');
+                                }
+                            }
+                        })
                     } else {
                         if(event.extendedProps.options_count != 0) {
                             for (var i = 0; i <= event.extendedProps.options_count - 1; i++) {
@@ -1634,6 +1644,16 @@
                                 $("[name='tf_option_adult_price_" + i + "']", self.roomCalData).val(event.extendedProps["tf_option_adult_price_" + i]);
                                 $("[name='tf_option_child_price_" + i + "']", self.roomCalData).val(event.extendedProps["tf_option_child_price_" + i]);
                                 $("[name='tf_option_infant_price_" + i + "']", self.roomCalData).val(event.extendedProps["tf_option_infant_price_" + i]);
+
+                                $.each(tf_options.tour_traveler_category, function(index, category) {
+                                    var categorySlug = category.traveler_slug;
+                                    if (categorySlug) {
+                                        var priceField = $("[name='tf_option_" + categorySlug + "_price_" + i + "']", self.tourCalData);
+                                        if (priceField.length) {
+                                            priceField.val(event.extendedProps["tf_option_" + categorySlug + "_price_" + i] || '');
+                                        }
+                                    }
+                                })
 
                                 const discountData = event.extendedProps["tf_option_group_discount_" + i];
                                 let allGroupDiscountRepeaterHTML = '';
@@ -1749,6 +1769,7 @@
                     if (event.extendedProps.status) {
                         $("[name='tf_tour_status'] option[value=" + event.extendedProps.status + "]", self.tourCalData).prop("selected", true);
                     }
+                    wp.hooks.doAction('tf_tour_availability_event_click', event, self.tourCalData, pricingType);
                 },
             };
             this.init = function () {
