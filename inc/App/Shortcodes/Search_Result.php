@@ -765,6 +765,9 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 						<span><?php echo esc_html( $total_posts ); ?> </span>
 					</div>
 					<span><?php echo ')'; ?> </span>
+					<div class="tf-archive-filter-showing">
+						<i class="ri-equalizer-line"></i>
+					</div>
 				</div>
 			</div>
 			<div class="tf-car-details-column tf-flex tf-flex-gap-32">

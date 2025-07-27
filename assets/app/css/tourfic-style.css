@@ -6194,6 +6194,10 @@ div#tf-destinationautocomplete-list div:before {
   color: var(--tf-primary);
 }
 
+.single-tour-wrap .single-tour-inner .tourfic-single-right .tf_property_block_main_row .tf_item_main_block .tf-map-link i {
+  margin-right: 5px;
+}
+
 .single-tour-wrap .single-tour-inner .tourfic-single-right .sr_rooms_table_block {
   margin-top: 8px;
 }
@@ -6492,6 +6496,14 @@ div#tf-destinationautocomplete-list div:before {
   color: var(--tf-primary);
 }
 
+.tf-room-filter {
+  display: none;
+}
+
+.tf-room-filter.tf-filter-show {
+  display: block;
+}
+
 .tf-room-filter .tf-room-checkbox {
   display: flex;
   gap: 10px 30px;
@@ -6506,13 +6518,14 @@ div#tf-destinationautocomplete-list div:before {
   cursor: pointer;
   width: 100%;
   display: inline-block;
-  padding-left: 25px;
+  padding-left: 30px;
   font-weight: 400;
+  line-height: 1.2;
 }
 
 .tf-room-filter .tf-room-checkbox .tf-checkmark {
   position: absolute;
-  top: 4px;
+  top: 0px;
   left: 1px;
   height: 20px;
   width: 20px;
@@ -6626,6 +6639,18 @@ div#tf-destinationautocomplete-list div:before {
   font-weight: 400;
 }
 
+.page-template-tf-search .tf-archive-template__one .tf-archive-car-details-warper .tf-archive-header .tf-total-result-bar .tf-archive-filter-showing {
+  display: none;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 1024px) {
+  .page-template-tf-search .tf-archive-template__one .tf-archive-car-details-warper .tf-archive-header .tf-total-result-bar .tf-archive-filter-showing {
+    display: block;
+    margin-left: 10px;
+  }
+}
+
 .page-template-tf-search .tf-archive-template__one .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-sidebar {
   width: 358px;
   border-radius: 16px;
@@ -6635,7 +6660,8 @@ div#tf-destinationautocomplete-list div:before {
 
 @media only screen and (max-width: 1024px) {
   .page-template-tf-search .tf-archive-template__one .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-sidebar {
-    width: 280px;
+    width: 100%;
+    display: none;
   }
 }
 
@@ -6643,6 +6669,10 @@ div#tf-destinationautocomplete-list div:before {
   .page-template-tf-search .tf-archive-template__one .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-sidebar {
     width: 100%;
   }
+}
+
+.page-template-tf-search .tf-archive-template__one .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-sidebar.tf-filter-show {
+  display: block;
 }
 
 .page-template-tf-search .tf-archive-template__one .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-sidebar .tf-sidebar-header {
@@ -12739,6 +12769,7 @@ div#tf-destinationautocomplete-list div:before {
   border: 1px solid var(--tf-border-lite);
   background-color: var(--tf-filling-background);
   cursor: pointer;
+  height: 100%;
 }
 
 @media only screen and (max-width: 575.98px) {
@@ -13528,13 +13559,6 @@ div#tf-destinationautocomplete-list div:before {
 @media only screen and (max-width: 1024px) {
   .tf-archive-listing__one .tf-car-archive-result,
   .tf-archive-template__one .tf-car-archive-result {
-    width: calc(100% - 322px);
-  }
-}
-
-@media only screen and (max-width: 768px) {
-  .tf-archive-listing__one .tf-car-archive-result,
-  .tf-archive-template__one .tf-car-archive-result {
     width: 100%;
   }
 }
@@ -13609,7 +13633,7 @@ div#tf-destinationautocomplete-list div:before {
   width: calc(50% - 16px);
 }
 
-@media only screen and (max-width: 1024px) {
+@media only screen and (max-width: 768px) {
   .tf-archive-listing__one .tf-car-archive-result .tf-car-result .tf-single-car-view,
   .tf-archive-template__one .tf-car-archive-result .tf-car-result .tf-single-car-view {
     width: 100%;
@@ -14083,6 +14107,18 @@ div#tf-destinationautocomplete-list div:before {
   font-weight: 400;
 }
 
+.tf-archive-car-listing__one .tf-archive-header .tf-total-result-bar .tf-archive-filter-showing {
+  display: none;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 1024px) {
+  .tf-archive-car-listing__one .tf-archive-header .tf-total-result-bar .tf-archive-filter-showing {
+    display: block;
+    margin-left: 10px;
+  }
+}
+
 /* Sidebar */
 .tf-archive-car-listing__one .tf-car-details-column .tf-car-archive-sidebar {
   width: 358px;
@@ -14093,7 +14129,8 @@ div#tf-destinationautocomplete-list div:before {
 
 @media only screen and (max-width: 1024px) {
   .tf-archive-car-listing__one .tf-car-details-column .tf-car-archive-sidebar {
-    width: 280px;
+    width: 100%;
+    display: none;
   }
 }
 
@@ -14101,6 +14138,10 @@ div#tf-destinationautocomplete-list div:before {
   .tf-archive-car-listing__one .tf-car-details-column .tf-car-archive-sidebar {
     width: 100%;
   }
+}
+
+.tf-archive-car-listing__one .tf-car-details-column .tf-car-archive-sidebar.tf-filter-show {
+  display: block;
 }
 
 .tf-archive-car-listing__one .tf-car-details-column .tf-car-archive-sidebar .tf-sidebar-header {
@@ -16044,6 +16085,7 @@ div#tf-destinationautocomplete-list div:before {
   .tf-archive-listing__two .tf-available-rooms-head .tf-archive-filter-showing,
   .page-template-tf-search__two .tf-available-rooms-head .tf-archive-filter-showing {
     display: block;
+    margin-left: 10px;
   }
 }
 
@@ -19041,7 +19083,7 @@ div#tf-destinationautocomplete-list div:before {
 .tf-single-template__two .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-overview-description .tf-see-description,
 .tf-single-template__two .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-overview-description .tf-see-less-description {
   cursor: pointer;
-  color: var(--tf-text-paragraph);
+  color: var(--tf-primary);
   display: inline-block;
 }
 
@@ -19050,6 +19092,11 @@ div#tf-destinationautocomplete-list div:before {
   .tf-single-template__two .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-overview-description .tf-see-less-description {
     font-size: 0.875rem;
   }
+}
+
+.tf-single-template__two .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-overview-description .tf-see-description:hover,
+.tf-single-template__two .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-overview-description .tf-see-less-description:hover {
+  color: var(--tf-brand-dark);
 }
 
 .tf-single-template__two .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-overview-description .tf-full-description {

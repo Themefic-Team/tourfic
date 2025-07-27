@@ -37,6 +37,9 @@ $tf_car_arc_banner = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template'
 							<span><?php echo esc_html( $post_count ); ?> </span>
 						</div>
 						<span><?php echo ')'; ?> </span>
+                        <div class="tf-archive-filter-showing">
+                            <i class="ri-equalizer-line"></i>
+                        </div>
                     </div>
                 </div>
                 <div class="tf-car-details-column tf-flex tf-flex-gap-32">

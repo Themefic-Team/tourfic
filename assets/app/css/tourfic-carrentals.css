@@ -491,9 +491,16 @@
 .single-tf_carrental .tf-single-template__one .tf-short-description .tf-see-less-description,
 .single-tf_carrental .tf-single-template__one .tf-full-description .tf-see-description,
 .single-tf_carrental .tf-single-template__one .tf-full-description .tf-see-less-description {
-  color: var(--tf-text-paragraph);
+  color: var(--tf-primary);
   cursor: pointer;
   display: inline-block;
+}
+
+.single-tf_carrental .tf-single-template__one .tf-short-description .tf-see-description:hover,
+.single-tf_carrental .tf-single-template__one .tf-short-description .tf-see-less-description:hover,
+.single-tf_carrental .tf-single-template__one .tf-full-description .tf-see-description:hover,
+.single-tf_carrental .tf-single-template__one .tf-full-description .tf-see-less-description:hover {
+  color: var(--tf-brand-dark);
 }
 
 .single-tf_carrental .tf-single-template__one .tf-full-description {
@@ -2216,6 +2223,24 @@
   font-weight: 400;
 }
 
+.post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-header .tf-total-result-bar .tf-archive-filter-showing,
+.tax-carrental_location .tf-archive-template__one .tf-archive-header .tf-total-result-bar .tf-archive-filter-showing,
+.tax-carrental_brand .tf-archive-template__one .tf-archive-header .tf-total-result-bar .tf-archive-filter-showing,
+.page-template-tf-search .tf-archive-template__one .tf-archive-header .tf-total-result-bar .tf-archive-filter-showing {
+  display: none;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 1024px) {
+  .post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-header .tf-total-result-bar .tf-archive-filter-showing,
+  .tax-carrental_location .tf-archive-template__one .tf-archive-header .tf-total-result-bar .tf-archive-filter-showing,
+  .tax-carrental_brand .tf-archive-template__one .tf-archive-header .tf-total-result-bar .tf-archive-filter-showing,
+  .page-template-tf-search .tf-archive-template__one .tf-archive-header .tf-total-result-bar .tf-archive-filter-showing {
+    display: block;
+    margin-left: 10px;
+  }
+}
+
 .post-type-archive-tf_carrental .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar,
 .tax-carrental_location .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar,
 .tax-carrental_brand .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar,
@@ -2231,7 +2256,8 @@
   .tax-carrental_location .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar,
   .tax-carrental_brand .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar,
   .page-template-tf-search .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar {
-    width: 280px;
+    width: 100%;
+    display: none;
   }
 }
 
@@ -2242,6 +2268,13 @@
   .page-template-tf-search .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar {
     width: 100%;
   }
+}
+
+.post-type-archive-tf_carrental .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar.tf-filter-show,
+.tax-carrental_location .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar.tf-filter-show,
+.tax-carrental_brand .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar.tf-filter-show,
+.page-template-tf-search .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar.tf-filter-show {
+  display: block;
 }
 
 .post-type-archive-tf_carrental .tf-archive-template__one .tf-car-details-column .tf-car-archive-sidebar .tf-sidebar-header,

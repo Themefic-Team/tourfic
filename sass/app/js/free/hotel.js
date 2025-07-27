@@ -90,7 +90,7 @@
                             scrollTop: $("#rooms").offset().top
                         }, 500);
                         $("#rooms").html(data);
-                        $('.tf-room-filter').show();
+                        $('.tf-room-filter').addClass('tf-filter-show');
                         $("#tf-single-hotel-avail .tf-submit").removeClass('tf-btn-loading');
                      } else {
                          notyf.error(tf_params.no_room_found);

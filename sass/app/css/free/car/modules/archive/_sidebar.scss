@@ -11,10 +11,16 @@
                     background: $color-filling-fg;
                     padding: 32px;
                     @media #{$max1024}{
-                        width: 280px;
+                        width: 100%;
+                        display: none;
+
                     }
                     @media #{$max768}{
                         width: 100%;
+                    }
+
+                    &.tf-filter-show{
+                        display: block;
                     }
                     
                     .tf-sidebar-header{

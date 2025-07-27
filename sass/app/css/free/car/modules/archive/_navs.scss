@@ -40,6 +40,14 @@
                         font-size: 1rem;
                         font-weight: 400;
                     }
+                    .tf-archive-filter-showing{
+                        display: none;
+                        cursor: pointer;
+                        @media #{$max1024}{
+                            display: block;
+                            margin-left: 10px;
+                        }
+                    }
                 }
             }
         }

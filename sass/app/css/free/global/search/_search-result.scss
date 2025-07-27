@@ -437,6 +437,11 @@
                             }
                         }
                     }
+                    .tf-map-link {
+                        i{
+                            margin-right: 5px;
+                        }
+                    }
                 }
             }
             .sr_rooms_table_block {
@@ -701,6 +706,10 @@
 }
 
 .tf-room-filter{
+    display: none;
+    &.tf-filter-show{
+        display: block;
+    }
     .tf-room-checkbox {
         display: flex;
         gap: 10px 30px;
@@ -712,12 +721,13 @@
             cursor: pointer;
             width: 100%;
             display: inline-block;
-            padding-left: 25px;
+            padding-left: 30px;
             font-weight: 400;
+            line-height: 1.2;
         }
         .tf-checkmark {
             position: absolute;
-            top: 4px;
+            top: 0px;
             left: 1px;
             height: 20px;
             width: 20px;
@@ -824,6 +834,14 @@
                             font-size: 1rem;
                             font-weight: 400;
                         }
+                        .tf-archive-filter-showing{
+                            display: none;
+                            cursor: pointer;
+                            @media #{$max1024}{
+                                display: block;
+                                margin-left: 10px;
+                            }
+                        }
                     }
                 }
 
@@ -834,10 +852,15 @@
                         background: $color-filling-fg;
                         padding: 32px;
                         @media #{$max1024}{
-                            width: 280px;
+                            width: 100%;
+                            display: none;
                         }
                         @media #{$max768}{
                             width: 100%;
+                        }
+
+                        &.tf-filter-show{
+                            display: block;
                         }
                         
                         .tf-sidebar-header{

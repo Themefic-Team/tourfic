@@ -15,9 +15,12 @@
                 }
                 .tf-see-description,
                 .tf-see-less-description{
-                    color: $color-text;
+                    color: $color-primary;
                     cursor: pointer;
                     display: inline-block;
+                    &:hover{
+                        color: $color-brand-dark;
+                    }
                 }
             }
             .tf-full-description{

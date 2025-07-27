@@ -2328,9 +2328,13 @@
             $('.tf-archive-right').toggleClass('tf-filter-show');
         });
 
+        $('.tf-archive-template__one .tf-archive-filter-showing').on('click', function () {
+            $('.tf-car-archive-sidebar').toggleClass('tf-filter-show');
+        });
+
         $(document).on('click touchstart', function (event) {
-            if (!$(event.target).closest(".tf-archive-filter-showing, .tf-details-right").length) {
-                $(".tf-details-right").removeClass('tf-filter-show');
+            if (!$(event.target).closest(".tf-archive-filter-showing, .tf-details-right, .tf-car-archive-sidebar").length) {
+                $(".tf-details-right, .tf-car-archive-sidebar").removeClass('tf-filter-show');
             }
         });
 

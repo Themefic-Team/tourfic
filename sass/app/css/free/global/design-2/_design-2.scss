@@ -514,10 +514,11 @@
                         }
                     }
                 }
+                &.tf-filter-show{
+                    display: block;
+                }
             }
-            .tf-room-filter.tf-filter-show{
-                display: block;
-            }
+
             .tf-available-rooms {
                 display: flex;
                 flex-direction: column;
@@ -884,6 +885,7 @@
                 display: none;
                 @media #{$max1024}{
                     display: block;
+                    margin-left: 10px;
                 }
             }
             .tf-filter{
@@ -3202,10 +3204,13 @@
                             .tf-see-description,
                             .tf-see-less-description{
                                 cursor: pointer;
-                                color: $color-text;
+                                color: $color-primary;
                                 display: inline-block;
                                 @media #{$max768}{
                                     font-size: 0.875rem;
+                                }
+                                &:hover{
+                                    color: $color-brand-dark;
                                 }
                             }
                             .tf-full-description{

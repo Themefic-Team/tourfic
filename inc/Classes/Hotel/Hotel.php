@@ -5051,7 +5051,7 @@ class Hotel {
 		if ( ! empty( $features ) && $feature_filter ):
 			?>
             <!-- Filter by feature  -->
-            <div class="tf-room-filter" style="display: none">
+            <div class="tf-room-filter">
                 <h5 class="tf-room-feature-title"><?php echo esc_html__( 'Filter Rooms based on features', 'tourfic' ); ?></h5>
                 <ul class="tf-room-checkbox">
 					<?php

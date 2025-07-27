@@ -45,6 +45,7 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
 		}
 	}
 }
+$feature_filter = ! empty( Helper::tfopt( 'feature-filter' ) ) ? Helper::tfopt( 'feature-filter' ) : false;
 $price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings' ) ) ? Helper::tfopt( 'hotel_archive_price_minimum_settings' ) : 'all';
 ?>
 <div id="room-availability" class="tf-pt-16">
@@ -71,9 +72,11 @@ $price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings'
 <div class="tf-available-rooms-wrapper" id="tf-hotel-rooms">
     <div class="tf-available-rooms-head">
         <h3 class=""><?php echo ! empty( $meta["room-section-title"] ) ? esc_html( $meta["room-section-title"] ) : ''; ?></h3>
-        <div class="tf-filter">
-            <i class="ri-equalizer-line"></i>
-        </div>
+        <?php if($feature_filter): ?>
+			<div class="tf-filter">
+				<i class="ri-equalizer-line"></i>
+			</div>
+		<?php endif; ?>
     </div>
 	<?php do_action( 'tf_hotel_features_filter', $rm_features, 10 ) ?>
     <!--Available rooms start -->
