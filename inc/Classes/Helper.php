@@ -100,6 +100,21 @@ class Helper {
 		}
 	}
 
+    static function is_all_unavailable($tour_availability) {
+        if (empty($tour_availability) || !is_object($tour_availability)) {
+            return false;
+        }
+    
+        foreach ($tour_availability as $availability) {
+            if (!isset($availability->status) || $availability->status !== 'unavailable') {
+                return false;
+            }
+        }
+    
+        return true;
+    }
+    
+
     static function tf_hotel_extras_title_price( $post_id, $adult, $child, $key ) {
 		$meta = get_post_meta( $post_id, 'tf_hotels_opt', true );
 		$hotel_extras     = ! empty( $meta['hotel-extra'] ) ? $meta['hotel-extra'] : '';

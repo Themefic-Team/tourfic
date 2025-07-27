@@ -297,7 +297,7 @@ class Enqueue {
 
 			$single_tour_form_data['disable_same_day'] = $disable_same_day;
 			$single_tour_form_data['tour_availability'] = $tour_availability;
-
+			$single_tour_form_data['is_all_unavailable'] = Helper::is_all_unavailable($tour_availability);
 
 		}
 
