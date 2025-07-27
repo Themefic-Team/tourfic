@@ -805,7 +805,7 @@
         };
         
         
-        if (typeof tf_params.tour_form_data.tour_availability === 'object' && tf_params.tour_form_data.tour_availability && Object.keys(tf_params.tour_form_data.tour_availability).length > 0) {
+        if (!tf_params.tour_form_data.is_all_unavailable && typeof tf_params.tour_form_data.tour_availability === 'object' && tf_params.tour_form_data.tour_availability && Object.keys(tf_params.tour_form_data.tour_availability).length > 0) {
             tour_date_options.minDate = "today";
             tour_date_options.disableMobile = "true";
             tour_date_options.enable = Object.entries(tf_params.tour_form_data.tour_availability)
@@ -824,8 +824,25 @@
             });
         }
 
+        tour_date_options.disable = [];
+        if (tf_params.tour_form_data.is_all_unavailable && typeof tf_params.tour_form_data.tour_availability === 'object' && tf_params.tour_form_data.tour_availability && Object.keys(tf_params.tour_form_data.tour_availability).length > 0) {
+            tour_date_options.disable = Object.entries(tf_params.tour_form_data.tour_availability)
+            .filter(([dateRange, data]) => data.status === "unavailable")
+            .map(([dateRange, data]) => {
+                const [fromRaw, toRaw] = dateRange.split(' - ').map(str => str.trim());
+
+                const today = new Date();
+                const formattedToday = today.getFullYear() + '/' + (today.getMonth() + 1) + '/' + today.getDate();
+                let fromDate = fromRaw;
+
+                return {
+                    from: fromDate,
+                    to: toRaw
+                };
+            });
+        }
+
         if (tf_params.tour_form_data.disable_same_day) {
-            tour_date_options.disable = [];
             tour_date_options.disable.push("today");
         }
 

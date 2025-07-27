@@ -1508,6 +1508,9 @@ class Migrator {
 					$max_seat = ! empty( $meta['fixed_availability']['max_seat'] ) ? $meta['fixed_availability']['max_seat'] : '';
 					$max_capacity = ! empty( $meta['fixed_availability']['max_capacity'] ) ? $meta['fixed_availability']['max_capacity'] : '';
 					
+					$meta['min_person'] = $min_seat;
+					$meta['max_person'] = $max_seat;
+
 					$tf_start_date  = strtotime( $this->tf_convert_date_format( $tf_start_date, $date_format ) );
 					$tf_end_date = strtotime( $this->tf_convert_date_format( $tf_end_date, $date_format ) );
 
@@ -1628,6 +1631,9 @@ class Migrator {
 						$cont_min_people = ! empty( $meta['cont_min_people'] ) ? $meta['cont_min_people'] : '';
 						$cont_max_people = ! empty( $meta['cont_max_people'] ) ? $meta['cont_max_people'] : '';
 						$cont_max_capacity = ! empty( $meta['cont_max_capacity'] ) ? $meta['cont_max_capacity'] : '';
+
+						$meta['min_person'] = $cont_min_people;
+						$meta['max_person'] = $cont_max_people;
 
 						$allowed_time = ! empty( $meta['allowed_time'] ) ? $meta['allowed_time'] : '';
 						$tf_tour_allowed_time = [];

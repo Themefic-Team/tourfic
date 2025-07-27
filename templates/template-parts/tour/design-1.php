@@ -522,6 +522,13 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                                         echo !empty( $tour_price->wc_sale_child ) ? wp_kses_post($tour_price->wc_sale_child) : wp_kses_post($tour_price->wc_child);
 
                                                     }
+                                                } else if ( $pricing_rule == 'package' ) {
+                                                    if ( ! $disable_adult && ! empty( $tour_price->adult ) ) {
+                                                        echo !empty($tour_price->wc_sale_adult) ? wp_kses_post($tour_price->wc_sale_adult) : wp_kses_post($tour_price->wc_adult);
+                                                    } else if ( ! $disable_child && ! empty( $tour_price->child ) ) {
+                                                        echo !empty( $tour_price->wc_sale_child ) ? wp_kses_post($tour_price->wc_sale_child) : wp_kses_post($tour_price->wc_child);
+
+                                                    }
                                                 }
                                                 ?>
                                                 </span>

@@ -1,6 +1,7 @@
 <?php
 
 namespace Tourfic\Classes\Tour;
+use Tourfic\Classes\Helper;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -39,8 +40,9 @@ class Tour_Price {
         $tour_availability_data = isset( $meta['tour_availability'] ) && ! empty( $meta['tour_availability'] ) ? json_decode( $meta['tour_availability'], true ) : [];
 		$allow_package_pricing = ! empty( $meta['allow_package_pricing'] ) ? $meta['allow_package_pricing'] : '';
 		$group_package_pricing = ! empty( $meta['group_package_pricing'] ) ? $meta['group_package_pricing'] : '';
+		$package_pricing = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
 
-		if(!empty($tour_availability_data)){
+		if(!empty($tour_availability_data) && Helper::is_all_unavailable($tour_availability_data)){
             $adult_price = null;
             $child_price = null;
             $infant_price = null;
@@ -122,6 +124,39 @@ class Tour_Price {
 			if($pricing_rule == 'group'){
 				$price = !empty($meta['group_price']) ? $meta['group_price'] : 0;
 			}
+            if($pricing_rule == 'package' && !empty($package_pricing)){
+                $adult_price = null;
+                $child_price = null;
+                $infant_price = null;
+                $price = null;
+                foreach($package_pricing as $package){
+
+                    if (!empty($package['adult_tabs'][1]['adult_price'])) {
+                        if (is_null($adult_price) || $package['adult_tabs'][1]['adult_price'] < $adult_price) {
+                            $adult_price = $package['adult_tabs'][1]['adult_price'];
+                        }
+                    }
+
+                    if (!empty($package['child_tabs'][1]['child_price'])) {
+                        if (is_null($child_price) || $package['child_tabs'][1]['child_price'] < $child_price) {
+                            $child_price = $package['child_tabs'][1]['child_price'];
+                        }
+                    }
+
+                    if (!empty($package['infant_tabs'][1]['infant_price'])) {
+                        if (is_null($infant_price) || $package['infant_tabs'][1]['infant_price'] < $infant_price) {
+                            $infant_price = $package['infant_tabs'][1]['infant_price'];
+                        }
+                    }
+
+                    if (!empty($package['group_tabs'][1]['group_price'])) {
+                        if (is_null($price) || $package['group_tabs'][1]['group_price'] < $price) {
+                            $price = $package['group_tabs'][1]['group_price'];
+                        }
+                    }
+
+                }
+            }
 		}
 
         /**
