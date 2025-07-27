@@ -1113,7 +1113,7 @@ class Tour {
 							</div>
 						<?php } ?>
 
-						<?php do_action( 'tf_tour_single_after_person_selection' ); ?>
+						<?php do_action( 'tf_tour_single_after_person_selection', $tf_tour_selected_template, $post_id ); ?>
 
                     </div>
 					<?php } ?>
@@ -1402,6 +1402,7 @@ class Tour {
                                 </div>
                             </div>
 						<?php } ?>
+						<?php do_action( 'tf_tour_single_after_person_selection', $tf_tour_selected_template, $post_id ); ?>
                     </div>
 					<?php } ?>
 

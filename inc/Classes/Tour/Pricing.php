@@ -468,7 +468,7 @@ class Pricing {
 				}
 			}
 		}
-		return array(
+		$price_array =  array(
 			'adult_price' => $min_adult_price,
 			'sale_adult_price' => $min_adult_sale_price,
 			'child_price'    => $min_child_price,
@@ -478,6 +478,17 @@ class Pricing {
 			'group_price'      => $min_group_price,
 			'sale_group_price'      => $min_group_sale_price,
 		);
+
+		/**
+		 * Hook to allow adding traveler category prices
+		 * 
+		 * @param array $price_array The current price array
+		 * @param array $meta The tour meta data
+		 * @param string $period The period if specified
+		 */
+		$price_array = apply_filters('tf_tour_avail_prices', $price_array, $meta, $period);
+
+		return $price_array;
 	}
 
 	function get_min_max_person( $period = '') {
