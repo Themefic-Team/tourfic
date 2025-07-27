@@ -1752,6 +1752,7 @@ class Helper {
  		$tf_hotel_arc_selected_template     = ! empty( self::tf_data_types( self::tfopt( 'tf-template' ) )['hotel-archive'] ) ? self::tf_data_types( self::tfopt( 'tf-template' ) )['hotel-archive'] : 'design-1';
  		$tf_apartment_arc_selected_template = ! empty( self::tf_data_types( self::tfopt( 'tf-template' ) )['apartment-archive'] ) ? self::tf_data_types( self::tfopt( 'tf-template' ) )['apartment-archive'] : 'default';
  		$tf_car_arc_selected_template       = ! empty( self::tf_data_types( self::tfopt( 'tf-template' ) )['car-archive'] ) ? self::tf_data_types( self::tfopt( 'tf-template' ) )['car-archive'] : 'design-1';
+        $design = $post_type == 'tf_hotel' ? $tf_hotel_arc_selected_template : ( $post_type == 'tf_tours' ? $tf_tour_arc_selected_template : $tf_apartment_arc_selected_template );
 
 		$hotel_location_field_required      = ! empty( self::tfopt( "required_location_hotel_search" ) ) ? self::tfopt( "required_location_hotel_search" ) : 0;
 		$tour_location_field_required       = ! empty( self::tfopt( "required_location_tour_search" ) ) ? self::tfopt( "required_location_tour_search" ) : 0;
@@ -1814,7 +1815,7 @@ class Helper {
 
                     </div>
 
-                    <?php do_action('tf_archive_sidebar_form_before_personal_fields', $post_type) ?>
+                    <?php do_action('tf_sidebar_form_before_personal_fields', $post_type) ?>
                     
                     <div class="tf-field-group tf-mt-16 tf_acrselection">
                         <div class="tf-field tf-flex">
@@ -1864,7 +1865,7 @@ class Helper {
                         </div>
 					<?php } ?>
 
-                    <?php do_action('tf_sidebar_form_after_personal_fields', $post_type) ?>
+                    <?php do_action('tf_sidebar_form_after_personal_fields', $post_type, $design) ?>
 
                     <div class="tf-field-group tf-mt-8">
                         <i class="fa-solid fa-calendar-days"></i>
@@ -2112,6 +2113,9 @@ class Helper {
                                         </div>
                                     </div>
                                     <?php } ?>
+
+                                    <?php do_action('tf_sidebar_form_after_personal_fields', $post_type, $design) ?>
+
                                     <?php if ( $post_type == 'tf_hotel' ) { ?>
                                         <div class="tf_acrselection">
                                             <div class="acr-label"><?php esc_html_e( "Rooms", "tourfic" ); ?></div>
@@ -2651,12 +2655,7 @@ class Helper {
                                 <div class="tf-search-field-content">
                                     <span class="tf-search-field-label"><?php esc_html_e( "Persons", "tourfic" ); ?></span>
                                     <div class="tf-archive-guest-info">
-                                        <span class="tf-adult"><?php esc_html_e( "1", "tourfic" ); ?></span> <?php $post_type == "tf_hotels" ? esc_html_e( $adults_name, "tourfic" ) : esc_html_e( "adult", "tourfic" ) ; ?>
-                                        <?php if ( ($post_type == 'tf_tours' && empty( $disable_child_search )) ||
-                                                ( $post_type == 'tf_apartment' && empty( $disable_apartment_child_search ) )
-                                        ) { ?>
-                                        , <span class="tf-children"><?php esc_html_e( "0", "tourfic" ); ?></span> <?php esc_html_e( "children", "tourfic" ); ?>
-                                        <?php } ?>
+                                        <span class="tf-guest"><?php echo esc_html__('01', 'tourfic'); ?> </span> <?php esc_html_e( "guest", "tourfic" ); ?>
                                     </div>
                                 </div>
                             </div>
@@ -2729,6 +2728,9 @@ class Helper {
                                     </div>
                                 </div>
                                 <?php } ?>
+
+                                <?php do_action('tf_sidebar_form_after_personal_fields', $post_type, $design) ?>
+
                                 <?php if ( $post_type == 'tf_hotel' ) { ?>
                                     <div class="tf_acrselection">
                                         <div class="acr-label"><?php esc_html_e( "Rooms", "tourfic" ); ?></div>
@@ -2905,6 +2907,8 @@ class Helper {
                         </label>
                     </div>
 				<?php endif; ?>
+
+                <?php do_action('tf_sidebar_form_after_personal_fields', $post_type, $design) ?>
 
 				<?php if ( $post_type == 'tf_hotel' ) { ?>
                     <div class="tf_form-row">
