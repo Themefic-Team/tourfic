@@ -749,65 +749,67 @@ class Pricing {
 				$allow_package_pricing = ! empty( $meta['allow_package_pricing'] ) ? $meta['allow_package_pricing'] : '';
 				$group_package_pricing = ! empty( $meta['group_package_pricing'] ) ? $meta['group_package_pricing'] : '';
 
-				foreach ($tour_availability_data as $data) {
-					if ($data['status'] !== 'available') {
-						continue;
-					}
-		
-					if($data['pricing_type'] == 'person'){
-						// Adult Price
-						if (!empty($data['adult_price'])) {
-							$tftours_min_maxprices[] = $data['adult_price'];
+				if(!empty($tour_availability_data)){
+					foreach ($tour_availability_data as $data) {
+						if ($data['status'] !== 'available') {
+							continue;
 						}
-		
-						// Child Price
-						if (!empty($data['child_price'])) {
-							$tftours_min_maxprices[] = $data['child_price'];
-						} 
-		
-						// Infant Price
-						if (!empty($data['infant_price'])) {
-							$tftours_min_maxprices[] = $data['infant_price'];
-						} 
-					}
-		
-					// if($data['pricing_type'] == 'group' && !empty($allow_package_pricing) && !empty($group_package_pricing) ){
-					// 	if(!empty($data['options_count'])){
-					// 		for($i = 0; $i < $data['options_count']; $i++){
-					// 			if (!empty($data['tf_option_group_price_'.$i])) {
-					// 				$tftours_min_maxprices[] = $data['tf_option_group_price_'.$i];
-					// 			}
-					// 		}
-					// 	}
-					// }
-		
-					if($pricing_rule == 'group' && $data['pricing_type'] == 'group' ){
-						// Group Price
-						if (!empty($data['price'])) {
-							$tftours_min_maxprices[] = $data['price'];
+			
+						if($data['pricing_type'] == 'person'){
+							// Adult Price
+							if (!empty($data['adult_price'])) {
+								$tftours_min_maxprices[] = $data['adult_price'];
+							}
+			
+							// Child Price
+							if (!empty($data['child_price'])) {
+								$tftours_min_maxprices[] = $data['child_price'];
+							} 
+			
+							// Infant Price
+							if (!empty($data['infant_price'])) {
+								$tftours_min_maxprices[] = $data['infant_price'];
+							} 
 						}
-					}
-					
-					if( $pricing_rule == 'package' && $data['pricing_type'] == 'package'){
-						if(!empty($data['options_count'])){
-							for($i = 0; $i < $data['options_count']; $i++){
-		
-								if (!empty($data['tf_option_adult_price_'.$i])) {
-									$tftours_min_maxprices[] = $data['tf_option_adult_price_'.$i];
+			
+						// if($data['pricing_type'] == 'group' && !empty($allow_package_pricing) && !empty($group_package_pricing) ){
+						// 	if(!empty($data['options_count'])){
+						// 		for($i = 0; $i < $data['options_count']; $i++){
+						// 			if (!empty($data['tf_option_group_price_'.$i])) {
+						// 				$tftours_min_maxprices[] = $data['tf_option_group_price_'.$i];
+						// 			}
+						// 		}
+						// 	}
+						// }
+			
+						if($pricing_rule == 'group' && $data['pricing_type'] == 'group' ){
+							// Group Price
+							if (!empty($data['price'])) {
+								$tftours_min_maxprices[] = $data['price'];
+							}
+						}
+						
+						if( $pricing_rule == 'package' && $data['pricing_type'] == 'package'){
+							if(!empty($data['options_count'])){
+								for($i = 0; $i < $data['options_count']; $i++){
+			
+									if (!empty($data['tf_option_adult_price_'.$i])) {
+										$tftours_min_maxprices[] = $data['tf_option_adult_price_'.$i];
+									}
+			
+									if (!empty($data['tf_option_child_price_'.$i])) {
+										$tftours_min_maxprices[] = $data['tf_option_child_price_'.$i];
+									}
+			
+									if (!empty($data['tf_option_infant_price_'.$i])) {
+										$tftours_min_maxprices[] = $data['tf_option_infant_price_'.$i];
+									}
+			
+									if (!empty($data['tf_option_group_price_'.$i])) {
+										$tftours_min_maxprices[] = $data['tf_option_group_price_'.$i];
+									}
+			
 								}
-		
-								if (!empty($data['tf_option_child_price_'.$i])) {
-									$tftours_min_maxprices[] = $data['tf_option_child_price_'.$i];
-								}
-		
-								if (!empty($data['tf_option_infant_price_'.$i])) {
-									$tftours_min_maxprices[] = $data['tf_option_infant_price_'.$i];
-								}
-		
-								if (!empty($data['tf_option_group_price_'.$i])) {
-									$tftours_min_maxprices[] = $data['tf_option_group_price_'.$i];
-								}
-		
 							}
 						}
 					}
