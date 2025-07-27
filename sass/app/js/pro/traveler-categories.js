@@ -12,5 +12,19 @@
 
             return formData;
         });
+
+        wp.hooks.addFilter('tf_guest_count', 'tfProNameSpace', function(guest) {
+            
+            $.each(tf_pro_params.tour_traveler_category, function(index, category) {
+                if (category.traveler_slug && category.traveler_slug !== '') {
+                    var value = $('#' + category.traveler_slug).val();
+                    if (value) {
+                        guest += Number(value);
+                    }
+                }
+            });
+
+            return guest;
+        });
     });
 })(jQuery);

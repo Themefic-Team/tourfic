@@ -2369,7 +2369,7 @@
             } else {
                 var guest = Number($('input#adults').val() ? $('input#adults').val() : 0) + Number($('input#children').val() ? $('input#children').val() : 0);
             }
-            wp.hooks.applyFilters('tf_guest_count', guest);
+            var guest = wp.hooks.applyFilters('tf_guest_count', guest);
             if (guest.toString().length < 2) {
                 guest = '0' + guest;
             }
@@ -2389,7 +2389,7 @@
                 var adult = Number($('input#adults').val() ? $('input#adults').val() : 0);
                 var children = Number($('input#children').val() ? $('input#children').val() : 0);
             }
-
+            var guest = wp.hooks.applyFilters('tf_guest_count', guest);
             if (guest.toString().length < 2) {
                 guest = '0' + guest;
             }
@@ -2460,6 +2460,7 @@
                 var adult = Number($('input#adults').val() ? $('input#adults').val() : 0 );
                 var children = Number($('input#children').val() ? $('input#children').val() : 0);
             }
+            var guest = wp.hooks.applyFilters('tf_guest_count', guest);
             if (guest.toString().length < 2) {
                 guest = '0' + guest;
             }

@@ -25,7 +25,7 @@ if( !empty($_GET['type']) && $_GET['type']=="tf_tours" ){
                     $tf_children = !empty($_GET['children']) ? absint( sanitize_key($_GET['children']) ) : 0;
                     ?>
                         <div class="tf-title-meta">
-                            <p>( <?php echo esc_html( $tf_adults + $tf_children ); ?> <?php esc_html_e("Guest", "tourfic"); ?>, <?php echo !empty($_GET['check-in-out-date']) ? esc_html( $_GET['check-in-out-date'] ) : '' ?> )</p>
+                            <p>( <?php echo apply_filters('tf_guest_count', esc_html( $tf_adults + $tf_children )); ?> <?php esc_html_e("Guest", "tourfic"); ?>, <?php echo !empty($_GET['check-in-out-date']) ? esc_html( $_GET['check-in-out-date'] ) : '' ?> )</p>
                         </div>
                     <?php } if( !empty($_GET['type']) && "tf_hotel"==$_GET['type'] ){ ?>
                     <div class="tf-title-meta">
