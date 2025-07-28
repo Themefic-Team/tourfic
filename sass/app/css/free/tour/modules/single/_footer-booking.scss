@@ -180,11 +180,11 @@
             }
         }
         &__two{
-            .tf_tours_main_booking{
-                @media #{$max768}{
-                    display: none;
-                }
-            }
+            // .tf_tours_main_booking{
+            //     @media #{$max768}{
+            //         display: none;
+            //     }
+            // }
             .tf-bottom-booking-bar {
                 position: fixed;
                 bottom: 0;

@@ -2086,7 +2086,7 @@
 
             });
         }
-        $('.tf-booking-popup-btn').on('click', function(e){
+        $('body').on('click', '.tf-booking-popup-btn', function (e) {
             e.preventDefault();
             $(".tf-withoutpayment-booking input[type='text'], .tf-withoutpayment-booking input[type='email'], .tf-withoutpayment-booking input[type='date'], .tf-withoutpayment-booking select, .tf-withoutpayment-booking textarea").val("");
 
