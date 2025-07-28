@@ -23,7 +23,7 @@
                 hash = window.location.hash;
             }
     
-            let slug = hash.replace('#tab=', '');
+            let slug = hash.replace('#tab=', '').split('&')[0];
     
             if (slug) {
                 let selectedTab = $('.tf-tablinks[data-tab="' + slug + '"]');
