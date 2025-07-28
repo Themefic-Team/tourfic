@@ -9,6 +9,7 @@ use Tourfic\Classes\Helper;
 use Tourfic\Classes\Hotel\Hotel;
 use Tourfic\Classes\Hotel\Pricing as HotelPricing;
 use Tourfic\Classes\Tour\Pricing as TourPricing;
+use Tourfic\Classes\Car_Rental\Pricing as CarPricing;
 use Tourfic\Classes\Tour\Tour;
 use Tourfic\Classes\Room\Room;
 
@@ -88,7 +89,7 @@ class Enqueue {
                 }
             }
         }
-
+	
 		/*
 		 * Ubuntu font load for hotel, tour, apartment template 3
 		 */
@@ -435,6 +436,11 @@ class Enqueue {
 				}
 			}
 		}
+
+		$hotel_min_max_price = HotelPricing::instance($post_id)->get_min_max_price_from_all_hotel();
+		$tour_min_max_price = TourPricing::instance($post_id)->get_min_max_price_from_all_tour();
+		$tf_apartment_min_max_price = ApartmentPricing::instance($post_id)->get_min_max_price_from_all_apartment();
+		// $tf_car_min_max_price = CarPricing::instance($post_id)->get_total_trips($post_id);
 
 		/**
 		 * Custom

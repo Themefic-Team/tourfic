@@ -5,9 +5,10 @@ use \Tourfic\Classes\Car_Rental\Pricing;
 use \Tourfic\App\TF_Review;
 ?>
 <?php
+
+$booking_btn_text = !empty(Helper::tfopt('car_booking_form_button_text')) ? Helper::tfopt('car_booking_form_button_text') : 'Continue';
 $tf_pickup_date = !empty($_GET['pickup_date']) ? $_GET['pickup_date'] : '';
 $tf_dropoff_date = !empty($_GET['dropoff_date']) ? $_GET['dropoff_date'] : '';
-
 
 // Pull options from settings or set fallback values
 $disable_car_time_slot = !empty(Helper::tfopt('disable-car-time-slots')) ? boolval(Helper::tfopt('disable-car-time-slots')) : false;
@@ -533,7 +534,7 @@ $tf_cars_slug = get_option('car_slug');
                             }
                             if( function_exists( 'is_tf_pro' ) && is_tf_pro() && '2'==$car_booking_by ){ ?>
                                 <button class="tf_btn tf-flex tf-flex-align-center tf-flex-justify-center booking-process tf-final-step tf-flex-gap-8">
-                                    <?php esc_html_e( apply_filters("tf_car_booking_form_submit_button_text", 'Continue' ), 'tourfic' ); ?>
+                                    <?php esc_html_e( apply_filters("tf_car_booking_form_submit_button_text", $booking_btn_text ), 'tourfic' ); ?>
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M7.5 15L12.5 10L7.5 5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
@@ -557,7 +558,7 @@ $tf_cars_slug = get_option('car_slug');
                                     </div>
                                 <?php }else{ ?>
                                     <button class="tf_btn tf-flex tf-flex-align-center tf-flex-justify-center tf-flex-gap-8 <?php echo (empty($car_protection_section_status) || empty($car_protections)) && '3'!=$car_booking_by ? esc_attr('booking-process tf-final-step') : esc_attr('tf-car-booking'); ?>">
-                                        <?php esc_html_e( apply_filters("tf_car_booking_form_submit_button_text", 'Continue' ), 'tourfic' ); ?>
+                                        <?php esc_html_e( apply_filters("tf_car_booking_form_submit_button_text", $booking_btn_text ), 'tourfic' ); ?>
                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M7.5 15L12.5 10L7.5 5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                         </svg>
