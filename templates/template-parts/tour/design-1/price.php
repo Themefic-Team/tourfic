@@ -133,7 +133,7 @@
 						}
 					}
 
-					do_action( 'tf_tour_single_person_info_after', get_the_ID() );
+					do_action( 'tf_tour_single_person_info_after', get_the_ID(), 'design-1' );
 					?>
                 </ul>
             </div>
@@ -167,7 +167,7 @@
 				<?php } ?>
 			<?php } ?>
 
-			<?php do_action( 'tf_tour_single_trip_pricing_after', get_the_ID() ); ?>
+			<?php do_action( 'tf_tour_single_trip_pricing_after', get_the_ID(), 'design-1'); ?>
 		<?php endif; ?>
     </div>
 </div>

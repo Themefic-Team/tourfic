@@ -212,9 +212,8 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                         <?php echo ( !empty($avail_prices['sale_child_price']) ) ? '<del>' . wp_kses_post(wp_strip_all_tags(wc_price($avail_prices['sale_child_price']))) . '</del>' : ''; ?>
                                     </div>
 
-                            <?php }
-                            if ( !$disable_adult && (! $disable_infant && ! empty( $avail_prices['infant_price'] )) ) { ?>
-
+                                <?php }
+                                if ( !$disable_adult && (! $disable_infant && ! empty( $avail_prices['infant_price'] )) ) { ?>
                                     <div class="tf-price infant-price tf-d-n">
                                         <span class="sale-price">
                                             <?php echo wp_kses_post(wp_strip_all_tags(wc_price($avail_prices['infant_price']))); ?>
@@ -223,9 +222,8 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                     </div>
 
                                 <?php } ?>
-                                <?php
-                            }
-                            ?>
+                                <?php do_action( 'tf_tour_single_trip_pricing_after', get_the_ID(), 'default'); ?>
+                            <?php } ?>
                             <ul class="tf-price-tab">
                                 <?php
                                 if ( $pricing_rule == 'group' ) {
@@ -243,7 +241,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                 if ( !$disable_adult && (! $disable_infant && ! empty( $avail_prices['infant_price'] )) ) {
                                     echo '<li id="infant">' . esc_html__( "Infant", "tourfic" ) . '</li>';
                                 }
-
+                                do_action( 'tf_tour_single_person_info_after', get_the_ID(), 'default' );
                                 }
                                 ?>
                             </ul>
