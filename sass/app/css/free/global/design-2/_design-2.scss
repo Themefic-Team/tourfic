@@ -4102,6 +4102,11 @@
                                     }
                                     span{
                                         line-height: 1.3;
+                                        overflow: hidden;
+                                        text-overflow: ellipsis;
+                                        display: -webkit-box;
+                                        -webkit-line-clamp: 2;
+                                        -webkit-box-orient: vertical;
                                     }
                                     svg{
                                         margin-right: 8px;
@@ -4849,6 +4854,7 @@
                         }
                         .tf-arrow-icons{
                             text-align: right;
+                            right: -20px;
                             @media #{$max768}{
                                 float: left;
                             }

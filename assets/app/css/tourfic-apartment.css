@@ -1065,6 +1065,7 @@
 
 .single-tf_apartment .tf-single-template__two .tf-aprtment-rules-section .aprtment-inc-exc .aprtment-single-rules ul li .rules-icon {
   width: 16px;
+  margin-top: 3px;
 }
 
 .single-tf_apartment .tf-single-template__two .tf-aprtment-rules-section .aprtment-inc-exc .aprtment-single-rules ul li .rules-content span {
@@ -1413,18 +1414,35 @@
   padding: 40px;
 }
 
+@media only screen and (max-width: 768px) {
+  .single-tf_apartment .tf-single-template__legacy .tf-apartment-faq .tf-faq-content-wrapper {
+    padding: 20px;
+  }
+}
+
 .single-tf_apartment .tf-single-template__legacy .tf-apartment-faq .tf-faq-items-wrapper {
   display: flex;
   flex-direction: column;
   align-self: stretch;
-  gap: 16px;
+  gap: 20px;
+}
+
+@media only screen and (max-width: 768px) {
+  .single-tf_apartment .tf-single-template__legacy .tf-apartment-faq .tf-faq-items-wrapper {
+    gap: 16px;
+  }
 }
 
 .single-tf_apartment .tf-single-template__legacy .tf-apartment-faq #tf-faq-item {
   border-radius: 8px;
-  border-bottom: none;
-  padding: 8px 0;
+  padding: 0 0 20px;
   margin-bottom: 0;
+}
+
+@media only screen and (max-width: 768px) {
+  .single-tf_apartment .tf-single-template__legacy .tf-apartment-faq #tf-faq-item {
+    padding-bottom: 16px;
+  }
 }
 
 .single-tf_apartment .tf-single-template__legacy .tf-apartment-faq #tf-faq-item .tf-faq-title {
@@ -1437,6 +1455,7 @@
   -ms-flex-align: center;
   align-items: center;
   gap: 8px;
+  padding: 0;
 }
 
 .single-tf_apartment .tf-single-template__legacy .tf-apartment-faq #tf-faq-item .tf-faq-title h4 {
@@ -1484,6 +1503,7 @@
   background-color: transparent;
   padding: 0;
   color: var(--tf-text-paragraph);
+  margin-top: 10px;
 }
 
 .single-tf_apartment .tf-single-template__legacy .tf-apartment-faq .tf-faq-desc p {

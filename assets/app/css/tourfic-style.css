@@ -7034,19 +7034,13 @@ div#tf-destinationautocomplete-list div:before {
   .tf-booking-forms-wrapper .tf-search__form__fieldset {
     max-width: 500px;
     margin: auto;
-    gap: 30px;
+    gap: 24px;
   }
 }
 
 @media only screen and (max-width: 575.98px) {
   .tf-booking-forms-wrapper .tf-search__form__fieldset {
     max-width: 100%;
-  }
-}
-
-@media only screen and (max-width: 320px) {
-  .tf-booking-forms-wrapper .tf-search__form__fieldset {
-    gap: 25px;
   }
 }
 
@@ -7219,6 +7213,12 @@ div#tf-destinationautocomplete-list div:before {
   min-width: 500px;
 }
 
+@media (max-width: 1500px) {
+  .tf-booking-forms-wrapper .tf-search__form__car__fieldset .tf-search__form__fieldset__left.tf-pick-drop-location.active .tf_pickup_location {
+    min-width: auto;
+  }
+}
+
 @media only screen and (max-width: 768px) {
   .tf-booking-forms-wrapper .tf-search__form__car__fieldset .tf-search__form__fieldset__left.tf-pick-drop-location.active .tf_pickup_location {
     min-width: auto;
@@ -7303,13 +7303,6 @@ div#tf-destinationautocomplete-list div:before {
   .tf-booking-forms-wrapper .tf-search__form__car__fieldset .tf-search__form__fieldset__middle .tf-search__form__group .tf-time-head svg {
     width: 16px;
     height: auto;
-  }
-}
-
-@media only screen and (max-width: 1320px) {
-  .tf-booking-forms-wrapper .tf-search__form__car__fieldset .tf-search__form__fieldset__right .tf-search__form__submit {
-    position: absolute;
-    bottom: 40px;
   }
 }
 
@@ -7721,8 +7714,14 @@ div#tf-destinationautocomplete-list div:before {
   max-width: 1678px;
   display: flex;
   color: #ffffff;
-  margin: auto;
   margin-top: 20px;
+}
+
+@media (max-width: 1320px) {
+  .tf-booking-forms-wrapper .tf-search__form .tf-driver-location {
+    display: none;
+    margin-top: 0;
+  }
 }
 
 .tf-booking-forms-wrapper .tf-search__form .tf-driver-location ul {
@@ -7784,6 +7783,16 @@ div#tf-destinationautocomplete-list div:before {
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
+}
+
+.tf-booking-forms-wrapper .tf-search__form .tf-driver-location.tf-mobile-location {
+  display: none;
+}
+
+@media (max-width: 1320px) {
+  .tf-booking-forms-wrapper .tf-search__form .tf-driver-location.tf-mobile-location {
+    display: block;
+  }
 }
 
 @media only screen and (max-width: 768px) {
@@ -10104,6 +10113,7 @@ div#tf-destinationautocomplete-list div:before {
 .single-tf_tours .tf-single-template__legacy .toc-section .tf-toc-wrap .tf-toc-inner table,
 .single-tf_apartment .tf-single-template__legacy .toc-section .tf-toc-wrap .tf-toc-inner table {
   margin-top: 15px;
+  margin-bottom: 0;
 }
 
 .single-tf_hotel .tf-single-template__legacy .tf-highlight-wrapper,
@@ -11815,6 +11825,11 @@ div#tf-destinationautocomplete-list div:before {
 .tf-single-template__one .tf-template-section:last-child p,
 .tf-archive-template__one .tf-template-section:last-child p {
   margin-bottom: 0;
+}
+
+.tf-single-template__one .tf-template-section:last-child table,
+.tf-archive-template__one .tf-template-section:last-child table {
+  margin-top: 15px;
 }
 
 .tf-single-template__one .tf-section-title,
@@ -20559,6 +20574,11 @@ div#tf-destinationautocomplete-list div:before {
 .tf-archive-template__two .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-left .tf-section-title-and-location .tf-title-location span,
 .page-template-tf-search__two .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-left .tf-section-title-and-location .tf-title-location span {
   line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .tf-archive-listing__two .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-left .tf-section-title-and-location .tf-title-location svg,
@@ -21632,6 +21652,7 @@ div#tf-destinationautocomplete-list div:before {
 
 .tf-archive-booking-form__style-2.tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-guest-and-room .tf-booking-form-guest-and-room-inner .tf-arrow-icons {
   text-align: right;
+  right: -20px;
 }
 
 @media only screen and (max-width: 768px) {
