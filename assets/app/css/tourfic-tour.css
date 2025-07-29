@@ -2241,12 +2241,6 @@
   align-items: center;
 }
 
-@media only screen and (max-width: 768px) {
-  .single-tf_tours .tf-single-template__two .tf_tours_main_booking {
-    display: none;
-  }
-}
-
 .single-tf_tours .tf-single-template__two .tf-bottom-booking-bar {
   position: fixed;
   bottom: 0;
@@ -2546,7 +2540,7 @@
   top: 100%;
   display: block;
   margin-top: 0px;
-  bottom: 162%;
+  bottom: 130%;
   top: auto;
 }
 
@@ -2644,12 +2638,6 @@ div#tf-contact-info {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
-}
-
-@media only screen and (max-width: 768px) {
-  .single-tf_tours .tf-single-template__one .tf-tour-details-right .tf-tour-booking-box .tf_tours_main_booking {
-    display: none;
-  }
 }
 
 .single-tf_tours .tf-single-template__one .tf-tour-details-right .tf-booking-price {

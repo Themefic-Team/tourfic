@@ -1288,7 +1288,7 @@
         });
         // Close
         document.addEventListener("click", function (event) {
-            if (!$(event.target).closest(".tf_selectperson-wrap, .tf_acrselection-wrap").length) {
+            if (!$(event.target).closest(".tf_selectperson-wrap, .tf_acrselection-wrap, .tf-booking-form-guest-and-room").length) {
                 $(".tf_acrselection-wrap, .tf_person-selection-wrap").slideUp("fast");
             }
         });
@@ -2086,7 +2086,7 @@
 
             });
         }
-        $('.tf-booking-popup-btn').on('click', function(e){
+        $('body').on('click', '.tf-booking-popup-btn', function (e) {
             e.preventDefault();
             $(".tf-withoutpayment-booking input[type='text'], .tf-withoutpayment-booking input[type='email'], .tf-withoutpayment-booking input[type='date'], .tf-withoutpayment-booking select, .tf-withoutpayment-booking textarea").val("");
 

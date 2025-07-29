@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, car-rental, multivendor-marketplace
 Requires at least: 5.4
 Tested up to: 6.8
-Stable tag: 2.16.9
+Stable tag: 2.16.10
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -340,7 +340,7 @@ Yes, You can create a multi vendor hotel booking system wordpress with Tourfic.
 
 Yes, with Tourfic pro, you can create such marketplace hotel and tour marketplace and car rental marketplace easily.
 
-= Can Tourfic be used as a bus booking wordpress plugin? =
+= Can Tourfic be used as a bus booking WordPress plugin? =
 
 Yes, you can use our car rental function and use it for Cab booking, Bike rental and Bus booking.
 
@@ -378,6 +378,10 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
+= 2.16.9 – July 29, 2025 =
+
+- Fixed: Responsive booking form issue resolved.
+
 = 2.16.9 – July 19, 2025 =
 
 - Added: Theme Builder support for all Archive, Taxonomy, and Term pages.
@@ -401,13 +405,6 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 - Compatibility: Compatible with Elementor plugin (v3.29).
 - Compatibility: Compatible with WooCommerce plugin (v9.9).
 - Fixed: Backend booking issue has been resolved.
-
-= 2.16.6 – June 15, 2025 =
-
-- Improved: Updated layout of the settings page.
-- Fixed: Issue with apartment availability price calculation.
-- Fixed: Problem with displaying customer booking details(Pro).
-- Fixed: iCal unavailable dates now reset correctly when the dates become available(Pro).
 
 **Old Changelog can be found [here](https://themefic.com/tourfic/changelog/)**.
 
