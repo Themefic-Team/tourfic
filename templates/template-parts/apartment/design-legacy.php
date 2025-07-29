@@ -397,8 +397,14 @@ use \Tourfic\Classes\Apartment\Apartment;
 						<?php Apartment::tf_apartment_single_booking_form( $comments, $disable_review_sec ); ?>
                     </div>
 					<?php
+                    $enquiry_section        = ! empty( $meta['enquiry-section'] ) ? $meta['enquiry-section'] : '';
+                    $enquiry_section_icon   = ! empty( $meta['apartment-enquiry-icon'] ) ? $meta['apartment-enquiry-icon'] : '';
+                    $enquiry_section_title  = ! empty( $meta['enquiry-title'] ) ? $meta['enquiry-title'] : '';
+                    $enquiry_section_des    = ! empty( $meta['enquiry-content'] ) ? $meta['enquiry-content'] : '';
+                    $enquiry_section_button = ! empty( $meta['enquiry-btn'] ) ? $meta['enquiry-btn'] : '';
 					$post_author_id = get_post_field( 'post_author', get_the_ID() );
 					$author_info    = get_userdata( $post_author_id );
+                    if(!empty($enquiry_section)){
 					?>
                     <div class="host-details">
                         <div class="host-top">
@@ -428,6 +434,7 @@ use \Tourfic\Classes\Apartment\Apartment;
                             <a href="javaScript:void(0);" data-target="#tf-ask-modal" class="tf-modal-btn tf_btn tf_btn_white tf_btn_full"><i class="fas fa-phone"></i><?php esc_html_e( 'Contact Host', 'tourfic' ) ?></a>
                         </div>
                     </div>
+                    <?php } ?>
                 </div>
             </div>
         </div>
@@ -589,13 +596,7 @@ use \Tourfic\Classes\Apartment\Apartment;
 	<?php endif; ?>
 
 	<?php
-	$enquiry_section        = ! empty( $meta['enquiry-section'] ) ? $meta['enquiry-section'] : '';
-	$enquiry_section_icon   = ! empty( $meta['apartment-enquiry-icon'] ) ? $meta['apartment-enquiry-icon'] : '';
-	$enquiry_section_title  = ! empty( $meta['enquiry-title'] ) ? $meta['enquiry-title'] : '';
-	$enquiry_section_des    = ! empty( $meta['enquiry-content'] ) ? $meta['enquiry-content'] : '';
-	$enquiry_section_button = ! empty( $meta['enquiry-btn'] ) ? $meta['enquiry-btn'] : '';
-
-	if ( $enquiry_section === '1' && ( ! empty( $enquiry_section_icon ) || ! empty( $enquiry_section_title ) || ! empty( $enquiry_section_button ) ) ):
+	if ( !empty($enquiry_section) && ( ! empty( $enquiry_section_icon ) || ! empty( $enquiry_section_title ) || ! empty( $enquiry_section_button ) ) ):
 		?>
         <div class="tf-ask-question apartment-question">
             <div class="tf-container">
