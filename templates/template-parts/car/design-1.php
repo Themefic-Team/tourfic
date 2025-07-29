@@ -357,7 +357,26 @@ $tf_cars_slug = get_option('car_slug');
                     </div>
                     <?php } ?>
 
-
+                    <?php
+                    $exits_by_default = false;
+                    $tf_pickup_location = !empty($_GET['pickup']) ? esc_html($_GET['pickup']) : '';
+                    $tf_dropoff_location = !empty($_GET['dropoff']) ? esc_html($_GET['dropoff']) : '';
+                    $tf_pickup_location_title = !empty($_GET['pickup']) ? esc_html($_GET['pickup']) : '';
+                    $tf_dropoff_location_title = !empty($_GET['dropoff']) ? esc_html($_GET['dropoff']) : '';
+                    if(!empty($pickup_location) && !empty($dropoff_location)){
+                        $exits_by_default = true;
+                        $pickup_term   = get_term($pickup_location, 'carrental_location');
+                        $dropoff_term  = get_term($dropoff_location, 'carrental_location');
+                    
+                        if (!is_wp_error($pickup_term) && !is_wp_error($dropoff_term)) {
+                            $tf_pickup_location_title = !empty($pickup_term->name) ? $pickup_term->name : '';
+                            $tf_pickup_location = $pickup_term->slug;
+                    
+                            $tf_dropoff_location_title = !empty($dropoff_term->name) ? $dropoff_term->name : '';
+                            $tf_dropoff_location = $dropoff_term->slug;
+                        }
+                    }
+                    ?>
                     <div class="tf-date-select-box">
 
                         <div class="tf-date-single-select tf-flex tf-flex-gap-8 tf-flex-space-bttn">
@@ -377,8 +396,8 @@ $tf_cars_slug = get_option('car_slug');
                                     </div>
                                     <div class="info-select">
                                         <h5><?php esc_html_e("Pick-up", "tourfic"); ?></h5>
-                                        <input type="text" placeholder="Pick Up Location" id="tf_pickup_location" value="<?php echo !empty($_GET['pickup']) ? esc_html($_GET['pickup']) : ''; ?>" />
-                                        <input type="hidden" id="tf_pickup_location_id" value="<?php echo !empty($_GET['pickup']) ? esc_html($_GET['pickup']) : ''; ?>" />
+                                        <input type="text" placeholder="Pick Up Location" id="tf_pickup_location" value="<?php echo $tf_pickup_location_title; ?>" <?php echo $exits_by_default ? esc_attr('readonly') : ''; ?> class="<?php echo $exits_by_default ? esc_attr('location-readonly') : ''; ?>" />
+                                        <input type="hidden" id="tf_pickup_location_id" value="<?php echo $tf_pickup_location; ?>" />
                                     </div>
                                 </div>
                             </div>
@@ -399,8 +418,8 @@ $tf_cars_slug = get_option('car_slug');
                                     </div>
                                     <div class="info-select">
                                         <h5><?php esc_html_e("Drop-off", "tourfic"); ?></h5>
-                                        <input type="text" placeholder="Drop Off Location" id="tf_dropoff_location" value="<?php echo !empty($_GET['dropoff']) ? esc_html($_GET['dropoff']) : ''; ?>" />
-                                        <input type="hidden" id="tf_dropoff_location_id" value="<?php echo !empty($_GET['dropoff']) ? esc_html($_GET['dropoff']) : ''; ?>" />
+                                        <input type="text" placeholder="Drop Off Location" id="tf_dropoff_location" value="<?php echo $tf_dropoff_location_title; ?>" <?php echo $exits_by_default ? esc_attr('readonly') : ''; ?> class="<?php echo $exits_by_default ? esc_attr('location-readonly') : ''; ?>" />
+                                        <input type="hidden" id="tf_dropoff_location_id" value="<?php echo $tf_dropoff_location; ?>" />
                                     </div>
                                 </div>
                             </div>

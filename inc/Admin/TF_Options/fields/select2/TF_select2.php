@@ -62,7 +62,7 @@ if ( ! class_exists( 'TF_select2' ) ) {
 					} else {
 						$selected = selected( $this->value, $key, false );
 					}
-					if($this->field['options'] == 'posts' && $this->field['id'] == 'tf_hotel' && $placeholder){
+					if( $placeholder){
 						echo '<option value="">' . esc_html( $placeholder ) . '</option>';
 					}
 					if($this->field['options'] == 'posts' && $this->field['id'] == 'tf_rooms'){

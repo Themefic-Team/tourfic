@@ -53,6 +53,38 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 					],
 				),
 				array(
+					'id'    => 'car-pickup-dropoff-heading',
+					'type'  => 'heading',
+					'label' => 'Pickup & Dropoff Settings',
+					'subtitle' => esc_html__( 'If you add pickup and drop-off locations, the car will only be available within those specified areas.', 'tourfic' ),
+				),
+				array(
+					'id'         => 'pickup_location',
+					'type'       => 'select2',
+					'label'      => __( 'Pickup', 'tourfic' ),
+					'options'    => 'terms',
+					'query_args' => array(
+						'taxonomy'   => 'carrental_location',
+						'hide_empty' => false,
+					),
+					'default'    => '',
+					'placeholder' => __( 'Select', 'tourfic' ),
+					'field_width' => 50,
+				),
+				array(
+					'id'         => 'dropoff_location',
+					'type'       => 'select2',
+					'label'      => __( 'Dropoff', 'tourfic' ),
+					'options'    => 'terms',
+					'query_args' => array(
+						'taxonomy'   => 'carrental_location',
+						'hide_empty' => false,
+					),
+					'default'    => '',
+					'placeholder' => __( 'Select', 'tourfic' ),
+					'field_width' => 50
+				),
+				array(
 					'id'    => 'car-location-heading',
 					'type'  => 'heading',
 					'label' => 'Location Settings',

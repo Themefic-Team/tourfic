@@ -12,6 +12,14 @@
       min-height: 48px;
       color: $slate80;
       font-size: 0.875rem;
+      .select2-selection__rendered{
+        display: inline-flex;
+        align-items: center;
+        height: 100%;
+      }
+      ul.select2-selection__rendered{
+        display: initial;
+      }
 
       .select2-selection__choice {
         background-color: $slate10;
@@ -40,6 +48,7 @@
 
       .select2-selection__clear {
         margin-top: 0;
+        height: 100%;
       }
     }
     .select2-search--inline .select2-search__field {

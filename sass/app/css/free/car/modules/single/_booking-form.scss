@@ -81,6 +81,9 @@
                                 &::placeholder{
                                     color: $color-text;
                                 }
+                                &.location-readonly{
+                                    pointer-events: none;
+                                }
                             }
                             .autocomplete-items{
                                 position: absolute;

@@ -205,6 +205,10 @@ while ( have_posts() ) : the_post();
 	// Map Type
 	$tf_openstreet_map = ! empty( Helper::tfopt( 'google-page-option' ) ) ? Helper::tfopt( 'google-page-option' ) : "default";
 
+	// Pickup & Dropoff Location
+	$pickup_location  = ! empty( $meta['pickup_location'] ) ? $meta['pickup_location'] : '';
+	$dropoff_location  = ! empty( $meta['dropoff_location'] ) ? $meta['dropoff_location'] : '';
+
 	// Single Template Style
 	$tf_car_layout_conditions = ! empty( $meta['tf_single_car_layout_opt'] ) ? $meta['tf_single_car_layout_opt'] : 'global';
 	if("single"==$tf_car_layout_conditions){
