@@ -5,11 +5,11 @@
                 .tf-tour-booking-box  {
                     background: $color-filling-fg;
                     @include bd-radius(5px);
-                    .tf_tours_main_booking{
-                        @media #{$max768}{
-                            display: none;
-                        }
-                    }
+                    // .tf_tours_main_booking{
+                    //     @media #{$max768}{
+                    //         display: none;
+                    //     }
+                    // }
                 }
                 .tf-booking-price{
                     border-bottom: 1px solid $color-border-lite;
