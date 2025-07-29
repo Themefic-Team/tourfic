@@ -629,9 +629,17 @@
 
         $(document).on('submit', '.tf-option-form.tf-ajax-save', function (e) {
             e.preventDefault();
-            let $this = $(this),
-                submitBtn = $this.find('.tf-submit-btn'),
-                data = new FormData(this);
+            let $form = $(this),
+            submitBtn = $form.find('.tf-submit-btn'),
+            data = new FormData(this);
+
+            // Ensure checkboxes have a value even if unchecked
+            $form.find('input[type="checkbox"].tf-switch').each(function () {
+                const checkbox = this;
+                const name = $(checkbox).attr('name');
+                data.set(name, checkbox.checked ? '1' : '');
+            });
+            
             var fontsfile = $('.itinerary-fonts-file').prop("files");
             if (typeof fontsfile !== "undefined") {
                 for (var i = 0; i < fontsfile.length; i++) {
