@@ -4728,6 +4728,9 @@ class Tour {
 			'allow_discount' => $allow_discount,
 			'discount_type' => $discount_type,
 			'discounted_price' => $discounted_price,
+			'tf_tours_data_price' => $tf_tours_data_price,
+			'tour_extra_total' => $tour_extra_total,
+			'total_price' => &$tf_tours_data_price, // Pass by reference
 		] );
 
 		} else {
