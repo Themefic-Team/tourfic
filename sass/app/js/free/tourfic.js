@@ -2025,6 +2025,8 @@
                 selectedPackage: selectedPackage
             };
 
+            wp.hooks.applyFilters('tf_tour_booking_popup_data', data, selectedPackage);
+
             $.ajax({
                 type: 'post',
                 url: tf_params.ajax_url,

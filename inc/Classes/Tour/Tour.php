@@ -4719,6 +4719,16 @@ class Tour {
             </tfoot>
         </table>';
 
+		$response['traveller_summery'] = apply_filters( 'tf_tour_booking_popup_traveler_summary', $response['traveller_summery'], [
+			'meta' => $meta,
+			'matched_availability' => $matched_availability,
+			'pricing_rule' => $pricing_rule,
+			'tf_package_pricing' => $tf_package_pricing ?? null,
+			'selectedPackage' => $selectedPackage ?? null,
+			'allow_discount' => $allow_discount,
+			'discount_type' => $discount_type,
+			'discounted_price' => $discounted_price,
+		] );
 
 		} else {
 			# Show errors
