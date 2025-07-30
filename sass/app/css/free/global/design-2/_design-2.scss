@@ -1532,11 +1532,6 @@
                     }
                     .tf-booking-form-checkin,
                     .tf-booking-form-checkout{
-                        @media only screen and (max-width: 1600px) {
-                            max-width: none;
-                            padding-left: 78px;
-                            padding-right: 78px;
-                        }
                         @media only screen and (max-width: 1366px) {
                             max-width: none;
                             padding-left: 48px;

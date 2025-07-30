@@ -17056,15 +17056,6 @@ div#tf-destinationautocomplete-list div:before {
   }
 }
 
-@media only screen and (max-width: 1600px) {
-  .single-tf_hotel .tf-single-template__two .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-checkin,
-  .single-tf_hotel .tf-single-template__two .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-checkout {
-    max-width: none;
-    padding-left: 78px;
-    padding-right: 78px;
-  }
-}
-
 @media only screen and (max-width: 1366px) {
   .single-tf_hotel .tf-single-template__two .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-checkin,
   .single-tf_hotel .tf-single-template__two .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-checkout {
