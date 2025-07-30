@@ -1980,6 +1980,7 @@
                 var $selectedDiv = $('#package-' + selectedPackage).closest('.tf-single-package');
                 adults = $selectedDiv.find('input[name="adults"]').val();
                 children = $selectedDiv.find('input[name="childrens"]').val();
+                infant = $selectedDiv.find('input[name="infants"]').val();
                 check_in_time = $selectedDiv.find('select[name=package_start_time] option').filter(':selected').val();
 
                 $('.tf-single-package').each(function () {
