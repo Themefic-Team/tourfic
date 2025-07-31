@@ -42,8 +42,8 @@ function tf_tours_booking_function() {
 	$adults       = isset( $_POST['adults'] ) ? intval( sanitize_text_field( $_POST['adults'] ) ) : 0;
 	$children     = isset( $_POST['childrens'] ) ? intval( sanitize_text_field( $_POST['childrens'] ) ) : 0;
 	$infant       = isset( $_POST['infants'] ) ? intval( sanitize_text_field( $_POST['infants'] ) ) : 0;
-	$total_people = $adults + $children + $infant;
-	$total_people_booking = $adults + $children;
+	$total_people = apply_filters('tf_tour_booking_person_count', $adults + $children + $infant, $adults, $children, $infant);
+	$total_people_booking = apply_filters('tf_tour_booking_inventory_person_count', $adults + $children, $adults, $children, $infant);
 	// Tour date
 	$tour_date    = ! empty( $_POST['check-in-out-date'] ) ? sanitize_text_field( $_POST['check-in-out-date'] ) : '';
 	$tour_time    = isset( $_POST['check-in-time'] ) ? sanitize_text_field( $_POST['check-in-time'] ) : null;
@@ -1017,6 +1017,17 @@ function tf_tours_booking_function() {
 			}
 		}
 
+		$without_payment_price = apply_filters( 'tf_tour_without_booking_after_price_calculation', $without_payment_price, [
+			'meta' => $meta,
+			'matched_availability' => $matched_availability,
+			'pricing_rule' => $pricing_rule,
+			'tf_package_pricing' => $tf_package_pricing ?? null,
+			'selectedPackage' => $selectedPackage ?? null,
+			'allow_discount' => $allow_discount,
+			'discount_type' => $discount_type,
+			'discounted_price' => $discounted_price,
+		]);
+
 		if ( is_user_logged_in() ) {
 			$current_user = wp_get_current_user();
 			// get user id
@@ -1145,6 +1156,17 @@ function tf_tours_booking_function() {
 					$tf_tours_data['tf_tours_data']['infants']   = $infant;
 				}
 			}
+
+			$tf_tours_data = apply_filters('tf_tour_data_before_add_to_cart', $tf_tours_data, [
+				'meta' => $meta,
+				'matched_availability' => $matched_availability,
+				'pricing_rule' => $pricing_rule,
+				'tf_package_pricing' => $tf_package_pricing ?? null,
+				'selectedPackage' => $selectedPackage ?? null,
+				'allow_discount' => $allow_discount,
+				'discount_type' => $discount_type,
+				'discounted_price' => $discounted_price,
+			]);
 
 			# Deposit information
 			Helper::tf_get_deposit_amount( $meta, $tf_tours_data['tf_tours_data']['price'], $deposit_amount, $has_deposit );
