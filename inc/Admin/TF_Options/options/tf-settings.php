@@ -3144,7 +3144,7 @@ TF_Settings::option( 'tf_settings', array(
 				array(
 					'id'       => 'tf_delete_old_complete_review_button',
 					'type'     => 'callback',
-					'function' => array( '\Tourfic\App\TF_Review', 'tf_delete_old_complete_review_button' ),
+					'function' => array( '\Tourfic\App\TF_Review', 'tf_delete_old_complete_review_buttonss' ),
 				),
 
 			),
