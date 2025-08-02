@@ -85,7 +85,7 @@
                     flex-direction: column;
                     gap: 32px;
                     @media only screen and (max-width: 1366px) {
-                        width: calc(100% - 323px);
+                        width: calc(100% - 170px);
                     }
                     @media #{$max1024}{
                         width: calc(100% - 246px);
@@ -154,7 +154,7 @@
                         .tf-section-title-and-location{
                             @media #{$max768} {
                                 margin-bottom: 0px;
-                                width: calc(100% - 124px);
+                                width: calc(100% - 0px);
                             }
                             @media #{$max575} {
                                 width: 100%;
@@ -210,13 +210,11 @@
                         }
                     }
                     a{
-                        @media #{$max768} {
-                            width: 100%;
-                        }
                         @media #{$max575} {
-                            width: auto;
-                            display: flow-root;
+                            width: 100%;
+                            padding: 10px 16px;
                         }
+                      
                         .tf-available-room-content-left{
                             @media #{$max768} {
                                 width: 100%;
@@ -647,6 +645,12 @@
                         }
                         @media #{$max1024}{
                             width: calc(100% - 177px);
+                        }
+                        @media #{$max768}{
+                            width: calc(100% - 100px);
+                        }
+                        @media #{$max575}{
+                            width: 100%;
                         }
                         h3 {
                             margin-bottom: 20px;
@@ -1381,6 +1385,9 @@
                         max-width: none;
                         display: grid;
                         grid-template-columns: 2fr 1fr;
+                        @media #{$max1024}{
+                            grid-template-columns: 1fr;
+                        }
                         .tf-room-image{
                             height: 140px;
                             position: relative;
@@ -1398,13 +1405,31 @@
                         .tf-room-gallerys{
                             display: grid;
                             gap: 10px;
+                            @media #{$max575}{
+                                display: flex;
+                            }
                             .tf-room-gallery{
                                 height: 66px;
                                 width: 100%;
+                                @media #{$max1024}{
+                                    height: auto;
+                                    width: auto;
+                                    flex: 1;
+                                }
                                 img{
                                     height: 66px;
                                     width: 100%;
                                     object-fit: cover;
+                                    @media #{$max1024}{
+                                        height: auto;
+                                    }
+                                }
+                                &:last-child{
+                                    @media #{$max1024}{
+                                       height: 66px;
+                                       width: 105px;
+                                       flex: inherit;
+                                    }
                                 }
                             }
                         }
@@ -1419,6 +1444,10 @@
                         @media #{$max768} {
                             padding: 16px;
                         }
+                        @media #{$max575} {
+                            padding-top: 5px;
+                        }
+
                         .tf-available-room-content-left{
                             width: 100%;
                             .room-heading-price{
@@ -1426,6 +1455,10 @@
                                 justify-content: space-between;
                                 gap: 30px;
                                 margin-bottom: 16px;
+                                @media #{$max575}{
+                                    flex-direction: column;
+                                    gap: 10px;
+                                }
                                 h2{
                                     margin: 0;
                                     font-size: 1.25rem;
@@ -3950,6 +3983,9 @@
                             width: 100%;
                             max-width: 100%;
                         }
+                        @media #{$max575}{
+                            min-height: 250px;
+                        }
                         .tf-room-gallery {
                             &:nth-child(n+1) {
                                 position: absolute;
@@ -4034,7 +4070,7 @@
                             width: 100%;
                         }
                         @media #{$max575}{
-                            padding: 20px 16px;
+                            flex-direction: column;
                         }
                         .tf-available-room-content-left {
                             display: flex;
@@ -4082,6 +4118,9 @@
                                         margin-bottom: 36px;
                                         font-size: 0.875rem;
                                     }
+                                    @media #{$max575}{
+                                        margin-bottom: 0;
+                                    }
                                     .location-icon{
                                         line-height: 1;
                                         i{
@@ -4116,7 +4155,11 @@
                             width: 196px;
                             @media #{$max768}{
                                 margin-top: 16px;
+                            }
+                            @media #{$max575}{
+                                margin-top: 0;
                                 width: 100%;
+                                align-items: start;
                             }
                             .tf-cancellation-refundable-text {
                                 margin-bottom: 48px;
