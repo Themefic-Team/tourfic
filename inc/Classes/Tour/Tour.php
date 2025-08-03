@@ -3251,14 +3251,14 @@ class Tour {
 	 */
 	static function tf_filter_tour_by_date( $period, &$total_posts, array &$not_found, array $data = [] ): void {
 		// Extract data with traveler categories
-		if (isset($data[3]) && is_array($data[3]) && isset($data[4]) && isset($data[5])) {
+		if (isset($data[3]) && isset($data[4]) && isset($data[5]) && is_array($data[5])) {
 			// Case with prices and traveler categories
-			[$adults, $child, $check_in_out, $traveler_categories, $startprice, $endprice] = $data;
+			[$adults, $child, $check_in_out, $startprice, $endprice, $traveler_categories] = $data;
 		} elseif (isset($data[3]) && isset($data[4])) {
 			// Legacy case with prices but no traveler categories
 			[$adults, $child, $check_in_out, $startprice, $endprice] = $data;
 			$traveler_categories = [];
-		} elseif (isset($data[2]) && is_array($data[2])) {
+		} elseif (isset($data[3]) && is_array($data[3])) {
 			// Case without prices but with traveler categories
 			[$adults, $child, $check_in_out, $traveler_categories] = $data;
 			$startprice = $endprice = null;
@@ -3268,6 +3268,7 @@ class Tour {
 			$startprice = $endprice = null;
 			$traveler_categories = [];
 		}
+
 		// Get tour meta options
 		$meta = get_post_meta( get_the_ID(), 'tf_tours_opt', true );
 
@@ -3557,14 +3558,14 @@ class Tour {
 	 */
 	static function tf_filter_tour_by_without_date( $period, &$total_posts, array &$not_found, array $data = [] ): void {
 		// Extract data with traveler categories
-		if (isset($data[3]) && is_array($data[3]) && isset($data[4]) && isset($data[5])) {
+		if (isset($data[3]) && isset($data[4]) && isset($data[5]) && is_array($data[5])) {
 			// Case with prices and traveler categories
-			[$adults, $child, $check_in_out, $traveler_categories, $startprice, $endprice] = $data;
+			[$adults, $child, $check_in_out, $startprice, $endprice, $traveler_categories] = $data;
 		} elseif (isset($data[3]) && isset($data[4])) {
 			// Legacy case with prices but no traveler categories
 			[$adults, $child, $check_in_out, $startprice, $endprice] = $data;
 			$traveler_categories = [];
-		} elseif (isset($data[2]) && is_array($data[2])) {
+		} elseif (isset($data[3]) && is_array($data[3])) {
 			// Case without prices but with traveler categories
 			[$adults, $child, $check_in_out, $traveler_categories] = $data;
 			$startprice = $endprice = null;
