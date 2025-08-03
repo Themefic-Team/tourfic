@@ -1473,7 +1473,6 @@ trait Action_Helper {
 							}
 
 							if ( ! empty( $data ) ) {
-								Helper::tf_var_dump($data);
 								if ( isset( $data[3] ) && isset( $data[4] ) ) {
 									[ $adults, $child, $check_in_out, $startprice, $endprice ] = $data;
 									if ( $tour_meta["tour_as_featured"] ) {
