@@ -83,7 +83,7 @@
                 .single-tour-wrap {
                     width: 100%;
                     flex: none;
-                    margin-bottom: 0px;
+                    margin-bottom: 20px;
                 }
                 .tourfic-single-left {
                     margin-bottom: 16px;
@@ -95,7 +95,7 @@
                 }
                 .tourfic-single-right {
                     padding: 0;
-                    height: 100%;
+                    height: auto;
                 }
                 .roomrow_flex {
                     padding: 0;
@@ -342,7 +342,7 @@
             padding: 0 0 0 16px;
             .tf-archive-rating-wrapper {
                 @media #{$max768} {
-                    margin-top: 20px;
+                    margin: 15px 0;
                 }
                 .tf-archive-rating {
                     width: 40px;

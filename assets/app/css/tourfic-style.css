@@ -319,13 +319,13 @@ Modal
 
 @media only screen and (max-width: 1366px) {
   .tf-modal-extra-small .tf-modal-content {
-    width: 40%;
+    width: 50%;
   }
 }
 
 @media only screen and (max-width: 1024px) {
   .tf-modal-extra-small .tf-modal-content {
-    width: 50%;
+    width: 90%;
   }
 }
 
@@ -5775,7 +5775,7 @@ div#tf-destinationautocomplete-list div:before {
   .search-result-inner .tf-search-left .archive_ajax_result .single-tour-wrap {
     width: 100%;
     flex: none;
-    margin-bottom: 0px;
+    margin-bottom: 20px;
   }
   .search-result-inner .tf-search-left .archive_ajax_result .tourfic-single-left {
     margin-bottom: 16px;
@@ -5787,7 +5787,7 @@ div#tf-destinationautocomplete-list div:before {
   }
   .search-result-inner .tf-search-left .archive_ajax_result .tourfic-single-right {
     padding: 0;
-    height: 100%;
+    height: auto;
   }
   .search-result-inner .tf-search-left .archive_ajax_result .roomrow_flex {
     padding: 0;
@@ -6072,7 +6072,7 @@ div#tf-destinationautocomplete-list div:before {
 
 @media only screen and (max-width: 768px) {
   .single-tour-wrap .single-tour-inner .tourfic-single-right .tf-archive-rating-wrapper {
-    margin-top: 20px;
+    margin: 15px 0;
   }
 }
 
@@ -10212,6 +10212,7 @@ div#tf-destinationautocomplete-list div:before {
   -ms-flex-align: center;
   align-items: center;
   padding: 20px 0;
+  gap: 10px;
 }
 
 .single-tf_hotel .tf-single-template__legacy #tf-faq-item .tf-faq-title h4,
@@ -10219,6 +10220,7 @@ div#tf-destinationautocomplete-list div:before {
 .single-tf_apartment .tf-single-template__legacy #tf-faq-item .tf-faq-title h4 {
   font-size: 1.125rem;
   margin-bottom: 0;
+  flex: 1;
 }
 
 .single-tf_hotel .tf-single-template__legacy #tf-faq-item .tf-faq-title.active,
@@ -12586,12 +12588,12 @@ div#tf-destinationautocomplete-list div:before {
 
 .tf-single-template__one .tf-faq-wrapper .tf-faq-single-inner .tf-faq-collaps {
   padding: 24px;
+  gap: 10px;
 }
 
 @media only screen and (max-width: 575.98px) {
   .tf-single-template__one .tf-faq-wrapper .tf-faq-single-inner .tf-faq-collaps {
     flex-wrap: nowrap;
-    gap: 5px;
   }
 }
 
@@ -12613,6 +12615,7 @@ div#tf-destinationautocomplete-list div:before {
   margin-bottom: 0;
   font-size: 1.25rem;
   color: var(--tf-text-heading);
+  flex: 1;
 }
 
 .tf-single-template__one .tf-list {
@@ -13340,7 +13343,7 @@ div#tf-destinationautocomplete-list div:before {
 @media only screen and (max-width: 768px) {
   .tf-archive-listing__one .tf-search-results-list .tf-item-card .tf-item-details,
   .tf-archive-template__one .tf-search-results-list .tf-item-card .tf-item-details {
-    padding: 24px 24px;
+    padding: 20px;
   }
 }
 
@@ -13390,6 +13393,13 @@ div#tf-destinationautocomplete-list div:before {
 .tf-archive-listing__one .tf-search-results-list .tf-item-card .tf-item-details .tf-title-meta svg path,
 .tf-archive-template__one .tf-search-results-list .tf-item-card .tf-item-details .tf-title-meta svg path {
   fill: var(--tf-primary);
+}
+
+@media only screen and (max-width: 575.98px) {
+  .tf-archive-listing__one .tf-search-results-list .tf-item-card .tf-item-details .tf-title,
+  .tf-archive-template__one .tf-search-results-list .tf-item-card .tf-item-details .tf-title {
+    margin-top: 10px;
+  }
 }
 
 .tf-archive-listing__one .tf-search-results-list .tf-item-card .tf-item-details .tf-title h2,
@@ -13479,6 +13489,13 @@ div#tf-destinationautocomplete-list div:before {
   align-items: center;
 }
 
+@media only screen and (max-width: 575.98px) {
+  .tf-archive-listing__one .tf-search-results-list .tf-item-card .tf-item-details .tf-reviews,
+  .tf-archive-template__one .tf-search-results-list .tf-item-card .tf-item-details .tf-reviews {
+    margin-top: 5px;
+  }
+}
+
 .tf-archive-listing__one .tf-search-results-list .tf-item-card .tf-item-details .tf-reviews .tf-avarage-review,
 .tf-archive-template__one .tf-search-results-list .tf-item-card .tf-item-details .tf-reviews .tf-avarage-review {
   font-size: 0.75rem;
@@ -13488,6 +13505,12 @@ div#tf-destinationautocomplete-list div:before {
 .tf-archive-template__one .tf-search-results-list .tf-item-card .tf-post-footer {
   border-top: 1px solid var(--tf-border-lite);
   padding-top: 16px;
+  gap: 10px;
+}
+
+.tf-archive-listing__one .tf-search-results-list .tf-item-card .tf-post-footer .tf-pricing,
+.tf-archive-template__one .tf-search-results-list .tf-item-card .tf-post-footer .tf-pricing {
+  flex: 1;
 }
 
 .tf-archive-listing__one .tf-search-results-list .tf-item-card .tf-post-footer ins,
@@ -17362,7 +17385,7 @@ div#tf-destinationautocomplete-list div:before {
 
 @media only screen and (max-width: 575.98px) {
   .tf-single-template__two .tf-questions-wrapper {
-    padding: 24px;
+    padding: 16px;
   }
 }
 
@@ -17432,6 +17455,7 @@ div#tf-destinationautocomplete-list div:before {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 10px;
 }
 
 .tf-single-template__two .tf-questions-wrapper .tf-questions .tf-questions-col .tf-question .tf-question-desc {

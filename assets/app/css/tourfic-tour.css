@@ -2349,12 +2349,6 @@
   align-items: center;
 }
 
-@media only screen and (max-width: 768px) {
-  .single-tf_tours .tf-single-template__two .tf_tours_main_booking {
-    display: none;
-  }
-}
-
 .single-tf_tours .tf-single-template__two .tf-bottom-booking-bar {
   position: fixed;
   bottom: 0;
@@ -2654,7 +2648,7 @@
   top: 100%;
   display: block;
   margin-top: 0px;
-  bottom: 162%;
+  bottom: 130%;
   top: auto;
 }
 

@@ -180,11 +180,7 @@
             }
         }
         &__two{
-            .tf_tours_main_booking{
-                @media #{$max768}{
-                    display: none;
-                }
-            }
+          
             .tf-bottom-booking-bar {
                 position: fixed;
                 bottom: 0;
@@ -429,7 +425,7 @@
                             top: 100%;
                             display: block;
                             margin-top: 0px;
-                            bottom: 162%;
+                            bottom: 130%;
                             top: auto;
                             @media #{$max1024}{
                                 bottom: 131%;

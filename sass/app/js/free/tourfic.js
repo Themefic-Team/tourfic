@@ -1298,7 +1298,7 @@
         });
         // Close
         document.addEventListener("click", function (event) {
-            if (!$(event.target).closest(".tf_selectperson-wrap, .tf_acrselection-wrap").length) {
+            if (!$(event.target).closest(".tf_selectperson-wrap, .tf_acrselection-wrap, .tf-booking-form-guest-and-room").length) {
                 $(".tf_acrselection-wrap, .tf_person-selection-wrap").slideUp("fast");
             }
         });

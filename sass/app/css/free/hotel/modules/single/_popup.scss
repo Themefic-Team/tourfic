@@ -1,6 +1,12 @@
 .fancybox-slide {
     #tour_room_details_qv.tf-hotel-design-1-popup{
         padding: 0px;
+        .tf-hotel-quick-view{
+            @media #{$max768}{
+                flex-direction: column;
+                overflow-x: hidden;
+            }
+        }
         .tf-hotel-details-qc-gallelry{
             width: 545px;
 
@@ -24,9 +30,18 @@
                 min-height: 50px;
                 max-height: 50px;
             }
+            .slick-next{
+                @media #{$max768}{
+                    right: 5px;
+                }
+            }
         }
         .fancybox-button.fancybox-close-small{
             right: 20px;
+            color: $color-primary;
+            @media #{$max768}{
+                right: 5px;
+            }
         }
         .tf-hotel-details-info{
             padding-right: 25px;
@@ -71,5 +86,7 @@
                 }
             }
         }
+
+       
     }
 }

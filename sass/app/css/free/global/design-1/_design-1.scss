@@ -659,9 +659,9 @@
                 }
                 .tf-faq-collaps{
                     padding: 24px;
+                    gap: 10px;
                     @media #{$max575}{
                         flex-wrap: nowrap;
-                        gap: 5px;
                     }
                     &:hover{
                         cursor: pointer;
@@ -681,6 +681,8 @@
                     margin-bottom: 0;
                     font-size: 1.25rem;
                     color: $color-heading;
+                    flex: 1;
+                    
                 }
             }
         }
@@ -1238,7 +1240,7 @@
                     padding: 20px $tf-space-30;
                    
                     @media #{$max768} {
-                        padding: $tf-space-24 $tf-space-24;
+                        padding: 20px;
                     }
                     @media #{$max575} {
                         flex-basis: 100%;
@@ -1275,6 +1277,9 @@
                         }
                     }
                     .tf-title {
+                        @media #{$max575}{
+                            margin-top: 10px;
+                        }
                         h2 {
                             font-size: 1.375rem;
                             line-height: 1.5;
@@ -1345,6 +1350,9 @@
                     .tf-reviews{
                         gap: 8px;
                         align-items: center;
+                        @media #{$max575}{
+                            margin-top: 5px;
+                        }
                         .tf-avarage-review{
                             font-size: 0.75rem;
                         }
@@ -1354,7 +1362,10 @@
                 .tf-post-footer {
                     border-top: 1px solid $color-border-lite;
                     padding-top: 16px;
-
+                    gap: 10px;
+                    .tf-pricing{
+                        flex: 1;
+                    }
                     ins{
                         background-color: transparent;
                     }

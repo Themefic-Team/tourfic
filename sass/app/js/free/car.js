@@ -34,10 +34,6 @@
 
             $('.tf-details-menu ul li[data-menu="' + $currentmenu + '"]').addClass('active');
         });
-
-       
-        
-        
         
         // Car Location Autocomplete
 

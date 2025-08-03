@@ -1379,6 +1379,13 @@
   padding: 0px;
 }
 
+@media only screen and (max-width: 768px) {
+  .fancybox-slide #tour_room_details_qv.tf-hotel-design-1-popup .tf-hotel-quick-view {
+    flex-direction: column;
+    overflow-x: hidden;
+  }
+}
+
 .fancybox-slide #tour_room_details_qv.tf-hotel-design-1-popup .tf-hotel-details-qc-gallelry {
   width: 545px;
 }
@@ -1406,8 +1413,21 @@
   max-height: 50px;
 }
 
+@media only screen and (max-width: 768px) {
+  .fancybox-slide #tour_room_details_qv.tf-hotel-design-1-popup .tf-details-qc-slider-nav .slick-next {
+    right: 5px;
+  }
+}
+
 .fancybox-slide #tour_room_details_qv.tf-hotel-design-1-popup .fancybox-button.fancybox-close-small {
   right: 20px;
+  color: var(--tf-primary);
+}
+
+@media only screen and (max-width: 768px) {
+  .fancybox-slide #tour_room_details_qv.tf-hotel-design-1-popup .fancybox-button.fancybox-close-small {
+    right: 5px;
+  }
 }
 
 .fancybox-slide #tour_room_details_qv.tf-hotel-design-1-popup .tf-hotel-details-info {

@@ -100,9 +100,11 @@
                     @include flexbox();
                     @include align-items(center);
                     padding: 20px 0;
+                    gap: 10px;
                     h4{
                         font-size: 1.125rem;
                         margin-bottom: 0;
+                        flex: 1;
                     }
                     &.active {
                         margin-bottom: 0;

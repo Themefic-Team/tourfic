@@ -1774,7 +1774,7 @@
             padding: 32px;
             background-color: $color-filling-fg;
             @media #{$max575}{
-                padding: 24px;
+                padding: 16px;
             }
             h2{
                 color: $color-heading;
@@ -1830,6 +1830,7 @@
                                 display: flex;
                                 justify-content: space-between;
                                 align-items: center;
+                                gap: 10px;
                             }
                         }
                         .tf-question-desc {
