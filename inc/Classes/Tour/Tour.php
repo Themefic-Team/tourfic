@@ -2457,7 +2457,7 @@ class Tour {
 	/**
 	 * Tours Archive
 	 */
-	static function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out = '', $startprice = '', $endprice = '', $settings = [] ) {
+	static function tf_tour_archive_single_item( $adults = '', $child = '', $check_in_out = '', $startprice = '', $endprice = '', $settings = [], $traveler_categories = [] ) {
 
 		// get post id
 		$post_id = get_the_ID();
@@ -2494,6 +2494,23 @@ class Tour {
 		}
 		// room
 		$infant = ! empty( $_GET['infant'] ) ? sanitize_text_field( $_GET['infant'] ) : '';
+
+		// Traveler categories
+		if (empty($traveler_categories)) {
+			$traveler_categories = [];
+			$enable_traveler_category = !empty(Helper::tfopt('enable_traveler_category')) ? Helper::tfopt('enable_traveler_category') : '';
+			$tour_traveler_category = !empty(Helper::tf_data_types(tfopt('tour_traveler_category'))) ? Helper::tf_data_types(tfopt('tour_traveler_category')) : [];
+			
+			if ($enable_traveler_category && !empty($tour_traveler_category)) {
+				foreach ($tour_traveler_category as $category) {
+					$category_slug = !empty($category['traveler_slug']) ? sanitize_title($category['traveler_slug']) : '';
+					if ($category_slug && isset($_GET[$category_slug])) {
+						$traveler_categories[$category_slug] = sanitize_text_field($_GET[$category_slug]);
+					}
+				}
+			}
+		}
+		
 		// Check-in & out date
 		if ( empty( $check_in_out ) ) {
 			$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( $_GET['check-in-out-date'] ) : '';
@@ -2527,14 +2544,22 @@ class Tour {
 			$period = '';
 		}
 
-
 		// Single link
 		$url = get_the_permalink();
-		$url = add_query_arg( array(
-			'adults'   => $adults,
+		$query_args = [
+			'adults' => $adults,
 			'children' => $child,
-			'infant'   => $infant
-		), $url );
+			'infant' => $infant
+		];
+		
+		// Add traveler categories to URL if they exist
+		if (!empty($traveler_categories)) {
+			foreach ($traveler_categories as $slug => $value) {
+				$query_args[$slug] = $value;
+			}
+		}
+		
+		$url = add_query_arg($query_args, $url);
 
 		// Tour Starting Price
 		$tour_price = [];
@@ -3251,7 +3276,7 @@ class Tour {
 	 */
 	static function tf_filter_tour_by_date( $period, &$total_posts, array &$not_found, array $data = [] ): void {
 		// Extract data with traveler categories
-		if (isset($data[3]) && isset($data[4]) && isset($data[5]) && is_array($data[5])) {
+		if (isset($data[5]) && is_array($data[5])) {
 			// Case with prices and traveler categories
 			[$adults, $child, $check_in_out, $startprice, $endprice, $traveler_categories] = $data;
 		} elseif (isset($data[3]) && isset($data[4])) {
@@ -3558,7 +3583,7 @@ class Tour {
 	 */
 	static function tf_filter_tour_by_without_date( $period, &$total_posts, array &$not_found, array $data = [] ): void {
 		// Extract data with traveler categories
-		if (isset($data[3]) && isset($data[4]) && isset($data[5]) && is_array($data[5])) {
+		if (isset($data[5]) && is_array($data[5])) {
 			// Case with prices and traveler categories
 			[$adults, $child, $check_in_out, $startprice, $endprice, $traveler_categories] = $data;
 		} elseif (isset($data[3]) && isset($data[4])) {

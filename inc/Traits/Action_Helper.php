@@ -1472,24 +1472,29 @@ trait Action_Helper {
                                 }
 							}
 
-							if ( ! empty( $data ) ) {
-								if ( isset( $data[3] ) && isset( $data[4] ) ) {
-									[ $adults, $child, $check_in_out, $startprice, $endprice ] = $data;
-									if ( $tour_meta["tour_as_featured"] ) {
-										Tour::tf_tour_archive_single_item( $adults, $child, $check_in_out, $startprice, $endprice, $elSettings );
-									}
+							if (!empty($data)) {
+								if (isset($data[5]) && is_array($data[5])) {
+									// Case with prices and traveler categories
+									[$adults, $child, $check_in_out, $startprice, $endprice, $traveler_categories] = $data;
+									Tour::tf_tour_archive_single_item($adults, $child, $check_in_out, $startprice, $endprice, $elSettings, $traveler_categories);
+								} elseif (isset($data[3]) && isset($data[4])) {
+									// Case with prices but no traveler categories
+									[$adults, $child, $check_in_out, $startprice, $endprice] = $data;
+									Tour::tf_tour_archive_single_item($adults, $child, $check_in_out, $startprice, $endprice, $elSettings);
+								} elseif (isset($data[3]) && is_array($data[3])) {
+									// Case without prices but with traveler categories
+									[$adults, $child, $check_in_out, $traveler_categories] = $data;
+									Tour::tf_tour_archive_single_item($adults, $child, $check_in_out, '', '', $elSettings, $traveler_categories);
 								} else {
-									[ $adults, $child, $check_in_out ] = $data;
-
-									if ( $tour_meta["tour_as_featured"] ) {
-										Tour::tf_tour_archive_single_item( $adults, $child, $check_in_out, '', '', $elSettings );
-									}
+									// Legacy case without prices or traveler categories
+									[$adults, $child, $check_in_out] = $data;
+									Tour::tf_tour_archive_single_item($adults, $child, $check_in_out, '', '', $elSettings);
 								}
 							} else {
-								if ( $tour_meta["tour_as_featured"] ) {
-									Tour::tf_tour_archive_single_item('', '', '', '', '', $elSettings );
-								}
+								Tour::tf_tour_archive_single_item('', '', '', '', '', $elSettings);
 							}
+
+
 						} elseif ( $posttype == 'tf_apartment' ) {
 							$apartment_meta = get_post_meta( get_the_ID(), 'tf_apartment_opt', true );
 							if ( ! $apartment_meta["apartment_as_featured"] ) {
@@ -1775,22 +1780,26 @@ trait Action_Helper {
 									];
 								}
 							}
-							if ( ! empty( $data ) ) {
-								if ( isset( $data[3] ) && isset( $data[4] ) ) {
-									[ $adults, $child, $check_in_out, $startprice, $endprice ] = $data;
-									if ( ! $tour_meta["tour_as_featured"] ) {
-										Tour::tf_tour_archive_single_item( $adults, $child, $check_in_out, $startprice, $endprice, $elSettings );
-									}
+							if (!empty($data)) {
+								if (isset($data[5]) && is_array($data[5])) {
+									// Case with prices and traveler categories
+									[$adults, $child, $check_in_out, $startprice, $endprice, $traveler_categories] = $data;
+									Tour::tf_tour_archive_single_item($adults, $child, $check_in_out, $startprice, $endprice, $elSettings, $traveler_categories);
+								} elseif (isset($data[3]) && isset($data[4])) {
+									// Case with prices but no traveler categories
+									[$adults, $child, $check_in_out, $startprice, $endprice] = $data;
+									Tour::tf_tour_archive_single_item($adults, $child, $check_in_out, $startprice, $endprice, $elSettings);
+								} elseif (isset($data[3]) && is_array($data[3])) {
+									// Case without prices but with traveler categories
+									[$adults, $child, $check_in_out, $traveler_categories] = $data;
+									Tour::tf_tour_archive_single_item($adults, $child, $check_in_out, '', '', $elSettings, $traveler_categories);
 								} else {
-									[ $adults, $child, $check_in_out ] = $data;
-									if ( ! $tour_meta["tour_as_featured"] ) {
-										Tour::tf_tour_archive_single_item( $adults, $child, $check_in_out, '', '', $elSettings );
-									}
+									// Legacy case without prices or traveler categories
+									[$adults, $child, $check_in_out] = $data;
+									Tour::tf_tour_archive_single_item($adults, $child, $check_in_out, '', '', $elSettings);
 								}
 							} else {
-								if ( ! $tour_meta["tour_as_featured"] ) {
-									Tour::tf_tour_archive_single_item('', '', '', '', '', $elSettings );
-								}
+								Tour::tf_tour_archive_single_item('', '', '', '', '', $elSettings);
 							}
 						} elseif ( $posttype == 'tf_apartment' ) {
 							$apartment_meta = get_post_meta( get_the_ID(), 'tf_apartment_opt', true );
