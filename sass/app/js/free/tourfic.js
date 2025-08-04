@@ -2424,7 +2424,7 @@
             var post_type = $(this).attr("data-type");
 
             var data = {
-                action: 'tf_hotel_archive_popup_qv',
+                action: 'tf_archive_gallery_popup_qv',
                 _nonce: tf_params.nonce,
                 post_id: post_id,
                 post_type: post_type

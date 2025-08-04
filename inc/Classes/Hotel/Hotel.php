@@ -32,8 +32,6 @@ class Hotel {
 		add_action( 'wp_ajax_nopriv_tf_hotel_airport_service_price', array( $this, 'tf_hotel_airport_service_callback' ) );
 		add_action( 'wp_ajax_tf_tour_details_qv', array( $this, 'tf_hotel_quickview_callback' ) );
 		add_action( 'wp_ajax_nopriv_tf_tour_details_qv', array( $this, 'tf_hotel_quickview_callback' ) );
-		add_action( 'wp_ajax_tf_hotel_archive_popup_qv', array( $this, 'tf_hotel_archive_popup_qv_callback' ) );
-		add_action( 'wp_ajax_nopriv_tf_hotel_archive_popup_qv', array( $this, 'tf_hotel_archive_popup_qv_callback' ) );
 		add_action( 'wp_ajax_tf_hotel_search', array( $this, 'tf_hotel_search_ajax_callback' ) );
 		add_action( 'wp_ajax_nopriv_tf_hotel_search', array( $this, 'tf_hotel_search_ajax_callback' ) );
 		add_action( 'tf_hotel_features_filter', array( $this, 'tf_hotel_filter_by_features' ), 10, 1 );
@@ -4373,7 +4371,7 @@ class Hotel {
 		$rooms                       = Room::get_hotel_rooms( $_POST['post_id'] );
 		if ( $tf_hotel_selected_template == "design-1" || $tf_hotel_selected_template == "default" ) {
 			?>
-            <div class="tf-hotel-quick-view" style="display: flex">
+            <div class="tf-hotel-quick-view">
 				<?php
 				foreach ( $rooms as $_room ) :
 					$room = get_post_meta( $_room->ID, 'tf_room_opt', true );
@@ -4424,16 +4422,15 @@ class Hotel {
                                     slidesToShow: 1,
                                     slidesToScroll: 1,
                                     arrows: <?php echo $tf_hotel_selected_template == "design-1" ? "false" : "true" ?>,
-                                    fade: false,
+                                    // fade: false,
                                     adaptiveHeight: true,
                                     infinite: true,
-                                    useTransform: true,
+                                    // useTransform: true,
                                     speed: 400,
-                                    cssEase: 'cubic-bezier(0.77, 0, 0.18, 1)',
+                                    // cssEase: 'cubic-bezier(0.77, 0, 0.18, 1)',
                                 });
 
-                                jQuery('.tf-details-qc-slider-nav')
-                                    .on('init', function (event, slick) {
+                                jQuery('.tf-details-qc-slider-nav').on('init', function (event, slick) {
                                         jQuery('.tf-details-qc-slider-nav .slick-slide.slick-current').addClass('is-active');
                                     })
                                     .slick({
@@ -4964,49 +4961,6 @@ class Hotel {
 		wp_die();
 	}
 
-	/**
-	 * Ajax hotel Archive Hotel Gallery quick view
-	 * @author Jahid
-	 */
-	function tf_hotel_archive_popup_qv_callback() {
-		// Check nonce security
-		if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_nonce'] ) ), 'tf_ajax_nonce' ) ) {
-			return;
-		}
-
-		if ( ! empty( $_POST['post_type'] ) && "tf_hotel" == $_POST['post_type'] ) {
-			$meta    = get_post_meta( $_POST['post_id'], 'tf_hotels_opt', true );
-			$gallery = ! empty( $meta['gallery'] ) ? $meta['gallery'] : '';
-			if ( $gallery ) {
-				$gallery_ids = explode( ',', $gallery ); // Comma seperated list to array
-			}
-		}
-
-		if ( ! empty( $_POST['post_type'] ) && "tf_tours" == $_POST['post_type'] ) {
-			$meta    = get_post_meta( $_POST['post_id'], 'tf_tours_opt', true );
-			$gallery = ! empty( $meta['tour_gallery'] ) ? $meta['tour_gallery'] : '';
-			if ( $gallery ) {
-				$gallery_ids = explode( ',', $gallery ); // Comma seperated list to array
-			}
-		}
-
-		if ( ! empty( $_POST['post_type'] ) && "tf_apartment" == $_POST['post_type'] ) {
-			$meta    = get_post_meta( $_POST['post_id'], 'tf_apartment_opt', true );
-			$gallery = ! empty( $meta['apartment_gallery'] ) ? $meta['apartment_gallery'] : '';
-			if ( $gallery ) {
-				$gallery_ids = explode( ',', $gallery ); // Comma seperated list to array
-			}
-		}
-
-		if ( ! empty( $gallery_ids ) ) {
-			foreach ( $gallery_ids as $key => $gallery_item_id ) {
-				$image_url = wp_get_attachment_url( $gallery_item_id, 'full' );
-				?>
-                <img src="<?php echo esc_url( $image_url ); ?>" alt="" class="tf-popup-image">
-			<?php }
-		}
-		wp_die();
-	}
 
 	/*
      * Hotel search ajax

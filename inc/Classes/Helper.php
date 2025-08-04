@@ -80,6 +80,11 @@ class Helper {
 
         add_action( 'wp_ajax_tf_get_min_max_price', array( $this, 'tf_get_min_max_price_callback' ) );
 		add_action( 'wp_ajax_nopriv_tf_get_min_max_price', array( $this, 'tf_get_min_max_price_callback' ) );
+
+        // archive gallery popup
+        add_action( 'wp_ajax_tf_archive_gallery_popup_qv', array( $this, 'tf_archive_gallery_popup_qv_callback' ) );
+		add_action( 'wp_ajax_nopriv_tf_archive_gallery_popup_qv', array( $this, 'tf_archive_gallery_popup_qv_callback' ) );
+
 	}
 
 	static function tfopt( $option = '', $default = null ) {
@@ -3228,4 +3233,49 @@ class Helper {
         $query_string = http_build_query( $utm_params );
         return esc_url( $url . ( strpos( $url, '?' ) === false ? '?' : '&' ) . $query_string );
     }
+
+    /**
+	 * Archive Gallery Popup
+    */
+    function tf_archive_gallery_popup_qv_callback() {
+		// Check nonce security
+		if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_nonce'] ) ), 'tf_ajax_nonce' ) ) {
+			return;
+		}
+
+		if ( ! empty( $_POST['post_type'] ) && "tf_hotel" == $_POST['post_type'] ) {
+			$meta    = get_post_meta( $_POST['post_id'], 'tf_hotels_opt', true );
+			$gallery = ! empty( $meta['gallery'] ) ? $meta['gallery'] : '';
+			if ( $gallery ) {
+				$gallery_ids = explode( ',', $gallery ); // Comma seperated list to array
+			}
+		}
+
+		if ( ! empty( $_POST['post_type'] ) && "tf_tours" == $_POST['post_type'] ) {
+			$meta    = get_post_meta( $_POST['post_id'], 'tf_tours_opt', true );
+			$gallery = ! empty( $meta['tour_gallery'] ) ? $meta['tour_gallery'] : '';
+			if ( $gallery ) {
+				$gallery_ids = explode( ',', $gallery ); // Comma seperated list to array
+			}
+		}
+
+		if ( ! empty( $_POST['post_type'] ) && "tf_apartment" == $_POST['post_type'] ) {
+			$meta    = get_post_meta( $_POST['post_id'], 'tf_apartment_opt', true );
+			$gallery = ! empty( $meta['apartment_gallery'] ) ? $meta['apartment_gallery'] : '';
+			if ( $gallery ) {
+				$gallery_ids = explode( ',', $gallery ); // Comma seperated list to array
+			}
+		}
+
+		if ( ! empty( $gallery_ids ) ) {
+			foreach ( $gallery_ids as $key => $gallery_item_id ) {
+				$image_url = wp_get_attachment_url( $gallery_item_id, 'full' );
+				?>
+                <img src="<?php echo esc_url( $image_url ); ?>" alt="" class="tf-popup-image">
+			<?php }
+		}
+		wp_die();
+	}
+
+
 }
