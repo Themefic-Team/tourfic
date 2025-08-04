@@ -842,7 +842,7 @@
                     }
                 },
                 {
-                    breakpoint: 600,
+                    breakpoint: 767,
                     settings: {
                         slidesToShow: 2,
                         slidesToScroll: 1
@@ -2294,6 +2294,10 @@
             $(this).find('.tf-question-desc').slideToggle();
         });
 
+        $(".tf-question .tf-question-desc").on("click", function(e) {
+            e.stopPropagation();
+        });
+
         $(".tf-single-template__two .tf-hero-hotel.tf-popup-buttons").on("click", function (e) {
             e.preventDefault();
             $("#tour_room_details_loader").show();
@@ -2326,6 +2330,9 @@
         //Archive Filter Showing
         $('.tf-archive-template__two .tf-archive-filter-showing').on('click', function () {
             $('.tf-archive-right').toggleClass('tf-filter-show');
+        });
+        $('.tf-archive-template__two .tf-close-sidebar').on('click', function () {
+            $('.tf-archive-right').removeClass('tf-filter-show');
         });
 
         $('.tf-archive-template__one .tf-archive-filter-showing').on('click', function () {
@@ -2415,6 +2422,7 @@
             $("#tour_room_details_loader").show();
             var post_id = $(this).attr("data-id");
             var post_type = $(this).attr("data-type");
+
             var data = {
                 action: 'tf_hotel_archive_popup_qv',
                 _nonce: tf_params.nonce,
@@ -2431,6 +2439,10 @@
                     $(".tf-hotel-popup").addClass("tf-show")
                     $("#tour_room_details_loader").hide();
 
+                },
+                error: function(xhr, status, error) {
+                    console.error('AJAX Error:', status, error);
+                    console.log('Response:', xhr.responseText);
                 }
             });
         });

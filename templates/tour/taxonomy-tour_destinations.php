@@ -81,6 +81,9 @@ if( $post_type == "tf_tours" && $tf_tour_arc_selected_template=="design-1" ){
                 </div>
                 <div class="tf-details-right tf-sitebar-widgets tf-archive-right">
                     <div class="tf-filter-wrapper">
+                        <div class="tf-close-sidebar">
+                            <i class="fa-solid fa-xmark"></i>
+                        </div>
                         <div class="tf-filter-title">
                             <h2 class="tf-section-title"><?php esc_html_e("Filter", "tourfic"); ?></h2>
                             <button class="filter-reset-btn"><?php esc_html_e("Reset", "tourfic"); ?></button>

@@ -10,7 +10,7 @@
             }
             .map-for-mobile {
                 display: none;
-                @media #{$max1024}{
+                @media #{$max768}{
                     display: block;
                 }
             }
@@ -19,7 +19,7 @@
                 @include flexbox();
                 flex-direction: column;
                 gap: 10px;
-                @media #{$max1024}{
+                @media #{$max768}{
                     margin-bottom: 0;
                 }
                 iframe {
@@ -37,7 +37,7 @@
             }
             .hero-right{
                 .show-on-map{
-                    @media #{$max1024}{
+                    @media #{$max768}{
                         display: none;
                     }
                 }

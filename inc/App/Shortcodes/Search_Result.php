@@ -536,6 +536,16 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 					<div class="tf-archive-filter-showing">
 						<i class="ri-equalizer-line"></i>
 					</div>
+					<h3 class="tf-total-results tf-mobile-results">
+							<?php esc_html_e("Total", "tourfic"); ?> <span><?php echo esc_html( $total_posts ); ?></span>
+						<?php if($post_type == "tf_hotel"){
+							esc_html_e("hotels available", "tourfic");
+						}elseif($post_type == "tf_apartment"){
+							esc_html_e("apartments available", "tourfic");
+						}else{
+							esc_html_e("tours available", "tourfic");
+						} ?>
+					</h3>
 				</div>
 
 				<!-- Loader Image -->

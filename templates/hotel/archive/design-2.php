@@ -39,7 +39,7 @@
                     <!--Available rooms start -->
                     <div class="tf-available-archive-hetels-wrapper tf-available-rooms-wrapper" id="tf-hotel-rooms">
                         <div class="tf-archive-available-rooms-head tf-available-rooms-head">
-                            <h3 class="tf-total-results"><?php esc_html_e("Total", "tourfic"); ?> <span><?php echo esc_html( $post_count ); ?></span> <?php esc_html_e("hotels available", "tourfic"); ?></h3>
+                            <h3 class="tf-total-results tf-desktop-results"><?php esc_html_e("Total", "tourfic"); ?> <span><?php echo esc_html( $post_count ); ?></span> <?php esc_html_e("hotels available", "tourfic"); ?></h3>
                             <div class="tf-sorting-selection-warper">
                                 <form class="tf-archive-ordering" method="get">
                                     <select class="tf-orderby" name="tf-orderby" id="tf-orderby">
@@ -57,6 +57,7 @@
                             <div class="tf-archive-filter-showing">
                                 <i class="ri-equalizer-line"></i>
                             </div>
+                            <h3 class="tf-total-results tf-mobile-results"><?php esc_html_e("Total", "tourfic"); ?> <span><?php echo esc_html( $post_count ); ?></span> <?php esc_html_e("hotels available", "tourfic"); ?></h3>
                         </div>
                         
                         <!-- Loader Image -->
@@ -104,6 +105,9 @@
                 </div>
                 <div class="tf-details-right tf-sitebar-widgets tf-archive-right">
                     <div class="tf-filter-wrapper">
+                        <div class="tf-close-sidebar">
+                            <i class="fa-solid fa-xmark"></i>
+                        </div>
                         <div class="tf-filter-title">
                             <h2 class="tf-section-title"><?php esc_html_e("Filter", "tourfic"); ?></h2>
                             <button class="filter-reset-btn"><?php esc_html_e("Reset", "tourfic"); ?></button>

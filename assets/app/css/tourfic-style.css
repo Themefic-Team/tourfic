@@ -6967,12 +6967,7 @@ div#tf-destinationautocomplete-list div:before {
 .tf-search-tabs__design--4 .tf-booking-forms-wrapper {
   margin-top: 0;
   position: relative;
-}
-
-@media only screen and (max-width: 1366px) {
-  .tf-search-tabs__design--4 .tf-booking-forms-wrapper {
-    overflow: hidden;
-  }
+  overflow-x: clip;
 }
 
 .tf-search-tabs__design--4 .tf-booking-form-tab-mobile {
@@ -7793,6 +7788,7 @@ div#tf-destinationautocomplete-list div:before {
 @media (max-width: 1320px) {
   .tf-booking-forms-wrapper .tf-search__form .tf-driver-location.tf-mobile-location {
     display: block;
+    margin: 0;
   }
 }
 
@@ -15444,6 +15440,15 @@ div#tf-destinationautocomplete-list div:before {
   margin-bottom: 0px;
 }
 
+@media only screen and (max-width: 575.98px) {
+  .tf-single-template__two .tf-available-rooms-wrapper .tf-available-rooms .tf-nothing-found,
+  .tf-archive-template__two .tf-available-rooms-wrapper .tf-available-rooms .tf-nothing-found,
+  .tf-archive-listing__two .tf-available-rooms-wrapper .tf-available-rooms .tf-nothing-found,
+  .page-template-tf-search__two .tf-available-rooms-wrapper .tf-available-rooms .tf-nothing-found {
+    text-align: center;
+  }
+}
+
 .tf-single-template__two .tf-available-rooms-wrapper .tf-available-room,
 .tf-archive-template__two .tf-available-rooms-wrapper .tf-available-room,
 .tf-archive-listing__two .tf-available-rooms-wrapper .tf-available-room,
@@ -16090,6 +16095,16 @@ div#tf-destinationautocomplete-list div:before {
   }
 }
 
+@media only screen and (max-width: 575.98px) {
+  .tf-single-template__two .tf-available-rooms-head,
+  .tf-archive-template__two .tf-available-rooms-head,
+  .tf-archive-listing__two .tf-available-rooms-head,
+  .page-template-tf-search__two .tf-available-rooms-head {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
 .tf-single-template__two .tf-available-rooms-head h3,
 .tf-archive-template__two .tf-available-rooms-head h3,
 .tf-archive-listing__two .tf-available-rooms-head h3,
@@ -16106,6 +16121,32 @@ div#tf-destinationautocomplete-list div:before {
   .tf-archive-listing__two .tf-available-rooms-head h3,
   .page-template-tf-search__two .tf-available-rooms-head h3 {
     font-size: 0.875rem;
+  }
+}
+
+@media only screen and (max-width: 575.98px) {
+  .tf-single-template__two .tf-available-rooms-head h3.tf-desktop-results,
+  .tf-archive-template__two .tf-available-rooms-head h3.tf-desktop-results,
+  .tf-archive-listing__two .tf-available-rooms-head h3.tf-desktop-results,
+  .page-template-tf-search__two .tf-available-rooms-head h3.tf-desktop-results {
+    display: none;
+  }
+}
+
+.tf-single-template__two .tf-available-rooms-head h3.tf-mobile-results,
+.tf-archive-template__two .tf-available-rooms-head h3.tf-mobile-results,
+.tf-archive-listing__two .tf-available-rooms-head h3.tf-mobile-results,
+.page-template-tf-search__two .tf-available-rooms-head h3.tf-mobile-results {
+  display: none;
+}
+
+@media only screen and (max-width: 575.98px) {
+  .tf-single-template__two .tf-available-rooms-head h3.tf-mobile-results,
+  .tf-archive-template__two .tf-available-rooms-head h3.tf-mobile-results,
+  .tf-archive-listing__two .tf-available-rooms-head h3.tf-mobile-results,
+  .page-template-tf-search__two .tf-available-rooms-head h3.tf-mobile-results {
+    display: block;
+    grid-column: 1 / -1;
   }
 }
 
@@ -16134,6 +16175,16 @@ div#tf-destinationautocomplete-list div:before {
   .page-template-tf-search__two .tf-available-rooms-head .tf-archive-filter-showing {
     display: block;
     margin-left: 10px;
+  }
+}
+
+@media only screen and (max-width: 575.98px) {
+  .tf-single-template__two .tf-available-rooms-head .tf-archive-filter-showing,
+  .tf-archive-template__two .tf-available-rooms-head .tf-archive-filter-showing,
+  .tf-archive-listing__two .tf-available-rooms-head .tf-archive-filter-showing,
+  .page-template-tf-search__two .tf-available-rooms-head .tf-archive-filter-showing {
+    width: fit-content;
+    margin-left: auto;
   }
 }
 
@@ -17445,6 +17496,10 @@ div#tf-destinationautocomplete-list div:before {
   top: 16px;
   right: 16px;
   transform: rotate(180deg);
+}
+
+.tf-single-template__two .tf-questions-wrapper .tf-questions .tf-questions-col .tf-question .tf-faq-head {
+  cursor: pointer;
 }
 
 .tf-single-template__two .tf-questions-wrapper .tf-questions .tf-questions-col .tf-question .tf-faq-head span {
@@ -20321,6 +20376,7 @@ div#tf-destinationautocomplete-list div:before {
   .page-template-tf-search__two .tf-available-archive-hetels-wrapper .tf-archive-available-rooms-head .tf-archive-ordering #tf-orderby {
     max-width: 150px;
     font-size: 0.875rem;
+    padding: 0;
   }
 }
 
@@ -20339,6 +20395,7 @@ div#tf-destinationautocomplete-list div:before {
   .tf-archive-template__two .tf-available-archive-hetels-wrapper .tf-archive-available-rooms-head .tf-archive-ordering i,
   .page-template-tf-search__two .tf-available-archive-hetels-wrapper .tf-archive-available-rooms-head .tf-archive-ordering i {
     font-size: 0.875rem;
+    right: auto;
   }
 }
 
@@ -20831,6 +20888,24 @@ div#tf-destinationautocomplete-list div:before {
   .tf-archive-template__two .tf-filter-wrapper,
   .page-template-tf-search__two .tf-filter-wrapper {
     gap: 16px;
+  }
+}
+
+.tf-archive-listing__two .tf-filter-wrapper .tf-close-sidebar,
+.tf-archive-template__two .tf-filter-wrapper .tf-close-sidebar,
+.page-template-tf-search__two .tf-filter-wrapper .tf-close-sidebar {
+  display: none;
+}
+
+@media only screen and (max-width: 1024px) {
+  .tf-archive-listing__two .tf-filter-wrapper .tf-close-sidebar,
+  .tf-archive-template__two .tf-filter-wrapper .tf-close-sidebar,
+  .page-template-tf-search__two .tf-filter-wrapper .tf-close-sidebar {
+    position: absolute;
+    right: 17px;
+    top: 12px;
+    display: block;
+    color: #ff6055;
   }
 }
 

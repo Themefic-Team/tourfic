@@ -530,6 +530,11 @@
                         }
                     }
                 }
+                .tf-nothing-found{
+                    @media #{$max575}{
+                        text-align: center;
+                    }
+                }
             }
             .tf-available-room {
                 background: $color-filling-bg;
@@ -869,6 +874,10 @@
                 margin-bottom: 16px;
                 gap: 16px;
             }
+            @media #{$max575}{
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+            }
             h3{
                 color: $color-heading;
                 font-size: 1.5rem;
@@ -876,6 +885,18 @@
                 flex: 1;
                 @media #{$max1024}{
                     font-size: 0.875rem;
+                }
+                &.tf-desktop-results{
+                    @media #{$max575}{
+                        display: none;
+                    }
+                }
+                &.tf-mobile-results{
+                    display: none;
+                    @media #{$max575}{
+                        display: block;
+                        grid-column: 1 / -1;
+                    }
                 }
             }
             h2{
@@ -891,6 +912,11 @@
                     display: block;
                     margin-left: 10px;
                 }
+                @media #{$max575}{
+                    width: fit-content;
+                    margin-left: auto;
+                }
+         
             }
             .tf-filter{
                 padding: 0px;
@@ -1822,6 +1848,7 @@
                             }
                         }
                         .tf-faq-head{
+                            cursor: pointer;
                             span {
                                 color: $color-text;
                                 font-size: 1rem;
@@ -3945,6 +3972,7 @@
                         @media #{$max575}{
                             max-width: 150px;
                             font-size: 0.875rem;
+                            padding: 0;
                         }
                     }
                     i {
@@ -3955,6 +3983,7 @@
                         color: $color-text;
                         @media #{$max575}{
                             font-size: 0.875rem;
+                            right: auto;
                         }
                     }
                 }
@@ -4231,6 +4260,16 @@
             gap: 32px;
             @media #{$max1024}{
                 gap: 16px;
+            }
+            .tf-close-sidebar {
+                display: none;
+                @media #{$max1024}{
+                    position: absolute;
+                    right: 17px;
+                    top: 12px;
+                    display: block;
+                    color: $color-danger;
+                }
             }
             .tf-filter-title {
                 display: flex;

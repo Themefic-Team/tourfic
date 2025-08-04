@@ -66,9 +66,7 @@
   .tf-booking-forms-wrapper {
     margin-top: 0;
     position: relative;
-    @media only screen and (max-width: 1366px) {
-      overflow: hidden;
-    }
+    overflow-x: clip;
   }
   .tf-booking-form-tab-mobile{
     display: none;
@@ -700,6 +698,7 @@
         display: none;
         @media (max-width: 1320px) {
           display: block;
+          margin: 0;
         }
       }
     }

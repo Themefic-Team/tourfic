@@ -1872,6 +1872,7 @@
 @media only screen and (max-width: 1024px) {
   .single-tf_tours .tf-single-template__one .upcomming-tours .tf-upcomming-tours-list-outter .tf-post-box-lists {
     flex-basis: calc(100%/2 - 12px);
+    margin: 0 8px !important;
   }
 }
 
@@ -1937,9 +1938,11 @@
   height: auto;
   padding: 0;
   display: flow-root;
-  margin: 0 15px 15px;
-  margin-left: 15px;
-  margin-left: 0;
+  margin: 0 8px;
+}
+
+.single-tf_tours .tf-single-template__one .upcomming-tours .tf-upcomming-tours-list-outter .tf-slider-item:last-child {
+  margin-right: 0;
 }
 
 .single-tf_tours .tf-single-template__legacy .tf-single-tour-pricing {

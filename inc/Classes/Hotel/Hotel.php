@@ -4973,6 +4973,7 @@ class Hotel {
 		if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_nonce'] ) ), 'tf_ajax_nonce' ) ) {
 			return;
 		}
+
 		if ( ! empty( $_POST['post_type'] ) && "tf_hotel" == $_POST['post_type'] ) {
 			$meta    = get_post_meta( $_POST['post_id'], 'tf_hotels_opt', true );
 			$gallery = ! empty( $meta['gallery'] ) ? $meta['gallery'] : '';

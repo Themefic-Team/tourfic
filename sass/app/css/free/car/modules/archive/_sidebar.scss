@@ -40,6 +40,9 @@
                             border: 0px solid;
                             cursor: pointer;
                             display: none;
+                            &:hover{
+                                color: $color-primary;
+                            }
                         }
                     }
                     .tf_widget{
@@ -207,6 +210,7 @@
                                         &.active{
                                             label{
                                                 background: $color-primary;
+                                                color: $color-white;
                                             }
                                         }
                                     }
