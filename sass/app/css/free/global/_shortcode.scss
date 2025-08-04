@@ -811,6 +811,10 @@ div#tf-destinationautocomplete-list {
                                     padding-right: 0px;
                                     border-radius: 20px;
                                     background: $color-filling-bg;
+                                    @media #{$max575}{
+                                        width: 30px;
+                                        height: 30px;
+                                    }
                                 }
                                 .acr-dec,
                                 .acr-inc{

@@ -2081,7 +2081,12 @@ li.tf-filter-item {
         background: #F8FAFC;
         box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         z-index: 999;
-        
+        @media #{$max768}{
+            min-width: 180px;
+        }
+        @media #{$max575}{
+            min-width: 150px;
+        }
         .time-options-list {
             max-height: 258px;
             overflow-y: auto;
@@ -2090,7 +2095,6 @@ li.tf-filter-item {
             list-style: none;
             margin-right: 4px;
             @media #{$max768}{
-                min-width: 180px;
                 padding-right: 10px;
             }
             &::-webkit-scrollbar {
@@ -2123,4 +2127,106 @@ li.tf-filter-item {
     }
 }
 
-
+// Room Details
+.fancybox-slide {
+    #tour_room_details_qv {
+        border-radius: 4px;
+        padding: 30px;
+        cursor: auto;
+        @media #{$max768}{
+            max-height: 80%;
+            padding: 20px;
+        }
+        .tf-hotel-quick-view{
+            @include flexbox();
+            @media #{$max768}{
+                flex-direction: column;
+            }
+            .tf-hotel-details-qc-gallelry{
+                width: 545px;
+                @media #{$max1024} {
+                    width: 55%;
+                }
+                @media #{$max768}{
+                    width: 100%;
+                }
+                img{
+                    width: 100%;
+                }
+                .tf-details-qc-slider-nav{
+                    .tf-details-qcs{
+                        &.is-active{
+                            img{
+                                border: 2px solid $color-primary;
+                            }
+                        }
+                    }
+                    img{
+                        cursor: pointer;
+                    }
+                }
+                .slick-arrow{
+                    z-index: 1;
+                    &.slick-prev{
+                        @media #{$max1024} {
+                            left: -5px;
+                        }
+                        @media #{$max768}{
+                            left: -10px;
+                        }
+                    }
+                    &.slick-next{
+                        @media #{$max1024}{
+                            right: -5px;
+                        }
+                        @media #{$max768}{
+                            right: -10px;
+                        }
+                    }
+                }
+            }  
+            .tf-hotel-details-info{
+                width: 440px;
+                padding-left: 35px;
+                max-height: 470px;
+                padding-top: 0;
+                overflow-y: auto;
+                @media #{$max1024}{
+                max-width: 550px;
+                padding-left: 0;
+                margin-top: 30px;
+                width: 100%;
+                @media #{$max1024}{
+                    padding-left: 16px;
+                    padding-right: 16px;
+                    max-width: 100%;
+                    margin-top: 0;
+                }
+                @media #{$max768}{
+                   margin-top: 16px;
+                   padding: 0;
+                }
+                }
+                .tf-room-title.description{
+                    .tf-tooltip{
+                        margin-left: 15px;
+                        &:first-child{
+                            margin-left: 0;
+                        }   
+                    }
+                    .room-features{
+                        margin: 10px 0;
+                    }
+                }
+                .pax{
+                    .tf-tooltip{
+                        margin-right: 15px;
+                        &:last-child{
+                            margin-right: 0;
+                        }   
+                    }
+                }
+            }
+        }
+    }
+}

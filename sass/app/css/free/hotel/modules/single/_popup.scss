@@ -11,6 +11,9 @@
             width: 545px;
 
             @media #{$max1024} {
+                width: 55%;
+            }
+            @media #{$max768}{
                 width: 100%;
             }
         }
@@ -52,12 +55,16 @@
             overflow-y: auto;
 
             @media #{$max1024}{
-                padding-right: 10px;
-                padding-left: 10px;
+                padding-right: 16px;
+                padding-left: 16px;
                 margin: 0;
                 overflow: auto;
                 max-height: none;
                 width: 100%;
+            }
+            @media #{$max768} {
+                padding-left: 10px;
+                padding-right: 10px;
             }
             .tf-template-1.tf-room-adv-info{
                 ul{

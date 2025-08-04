@@ -4422,12 +4422,18 @@ class Hotel {
                                     slidesToShow: 1,
                                     slidesToScroll: 1,
                                     arrows: <?php echo $tf_hotel_selected_template == "design-1" ? "false" : "true" ?>,
-                                    // fade: false,
+                                    fade: false,
                                     adaptiveHeight: true,
                                     infinite: true,
-                                    // useTransform: true,
+                                    useTransform: true,
                                     speed: 400,
-                                    // cssEase: 'cubic-bezier(0.77, 0, 0.18, 1)',
+                                    cssEase: 'cubic-bezier(0.77, 0, 0.18, 1)',
+									responsive: [{
+										breakpoint: 640,
+										settings: {
+											arrows: false
+										}	
+									}]
                                 });
 
                                 jQuery('.tf-details-qc-slider-nav').on('init', function (event, slick) {

@@ -2968,6 +2968,10 @@
                 padding-right: 0px;
                 border-radius: 20px;
                 background: $color-filling-bg;
+                @media #{$max575}{
+                    width: 30px;
+                    height: 30px;
+                }
             }
 
             form {
@@ -4674,6 +4678,10 @@
                 padding-right: 0px;
                 border-radius: 20px;
                 background: $color-filling-fg;
+                @media #{$max575}{
+                    width: 30px;
+                    height: 30px;
+                }
             }
             .acr-dec,
             .acr-inc{

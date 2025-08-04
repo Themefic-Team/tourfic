@@ -248,6 +248,11 @@
                     border-radius: 4px;
                     border: 0.2px solid $color-border-lite;
                     background: $color-filling-bg;
+
+                    @media #{$max575}{
+                        width: 30px;
+                        height: 30px;
+                    }
                 }
 
                 .acr-dec,
@@ -1436,6 +1441,10 @@
                 border-radius: 4px;
                 border: 0.2px solid $color-border-lite;
                 background: $color-filling-bg;
+                @media #{$max575}{
+                    width: 30px;
+                    height: 30px;
+                }
             }
 
             .acr-dec,

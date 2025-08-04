@@ -41,15 +41,14 @@
                 }
 
                 .tf-apartment-default-design-room-slider {
-
                     &::after {
                         content: '';
                         position: absolute;
                         top: 0;
-                        right: -1px;
-                        width: 100%;
+                        right: 0;
+                        width: 50px;
                         height: 100%;
-                        background: linear-gradient(270deg, $color-white -0.06%, rgba(255, 255, 255, 0.00) 15.54%);
+                        background: linear-gradient(270deg, $color-white -0.06%, rgba(255, 255, 255, 0.00) 100%);
                         border-radius: 8px;
                     }
                 }
