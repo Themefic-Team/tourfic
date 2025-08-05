@@ -4131,9 +4131,13 @@
                                 a {
                                     text-decoration: none;
                                     color: inherit;
+                                    display: block;
+                                    transition: all 0.2s linear;
                                 }
-                                a:hover {
-                                    color: inherit;
+                                &:hover{
+                                    a{
+                                        color: $color-primary;
+                                    }
                                 }
                             }
                             ul{

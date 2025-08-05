@@ -20807,12 +20807,14 @@ div#tf-destinationautocomplete-list div:before {
 .page-template-tf-search__two .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-left .tf-section-title-and-location a {
   text-decoration: none;
   color: inherit;
+  display: block;
+  transition: all 0.2s linear;
 }
 
-.tf-archive-listing__two .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-left .tf-section-title-and-location a:hover,
-.tf-archive-template__two .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-left .tf-section-title-and-location a:hover,
-.page-template-tf-search__two .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-left .tf-section-title-and-location a:hover {
-  color: inherit;
+.tf-archive-listing__two .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-left .tf-section-title-and-location:hover a,
+.tf-archive-template__two .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-left .tf-section-title-and-location:hover a,
+.page-template-tf-search__two .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-left .tf-section-title-and-location:hover a {
+  color: var(--tf-primary);
 }
 
 .tf-archive-listing__two .tf-available-archive-hetels-wrapper .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-left ul,
@@ -23243,8 +23245,8 @@ div#tf-destinationautocomplete-list div:before {
   color: inherit;
 }
 
-.tf-archive-listing__three .tf-archive-details .tf-archive-hotel .tf-archive-hotel-content .tf-archive-hotel-content-left .tf-section-title a:hover,
-.tf-archive-template__three .tf-archive-details .tf-archive-hotel .tf-archive-hotel-content .tf-archive-hotel-content-left .tf-section-title a:hover {
+.tf-archive-listing__three .tf-archive-details .tf-archive-hotel .tf-archive-hotel-content .tf-archive-hotel-content-left .tf-section-title:hover a,
+.tf-archive-template__three .tf-archive-details .tf-archive-hotel .tf-archive-hotel-content .tf-archive-hotel-content-left .tf-section-title:hover a {
   color: var(--tf-primary);
 }
 
