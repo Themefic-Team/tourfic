@@ -963,6 +963,7 @@
                 // Check the position of the target div
                 var $target = $('.tf-single-car-details-warper .tf-details-menu');
                 var $bookingBar = $('.tf-single-booking-bar');
+                var $wpAdminBar = $('#wpadminbar');
                 var $header = $('header');
                 var $desktopHeader = $('.tft-header-desktop');
                 
@@ -972,14 +973,22 @@
 
                 var scrollPosition = $(window).scrollTop();
 
-                // Calculate header height if exists
-                var headerHeight = ($header.hasClass('tf-navbar-shrink')) ? $header.outerHeight() : 0;
-
-                // Apply top based on header height
-                $bookingBar.css('top', headerHeight + 'px');
-        
-                // Toggle booking bar visibility
-                if (scrollPosition > targetBottom) {
+                // Calculate heights
+                var wpAdminBarHeight = $wpAdminBar.length ? $wpAdminBar.outerHeight() : 0;
+                var headerHeight = $header.length ? $header.outerHeight() : 0;
+                
+                if($header.hasClass('tf-navbar-shrink')) {
+                    headerHeight = $header.outerHeight();
+                }else {
+                    headerHeight = 0;
+                }
+                
+                // Total offset is admin bar + header heights
+                var totalOffset = wpAdminBarHeight + headerHeight;
+                $bookingBar.css('top', totalOffset + 'px');
+                
+                // Adjust scroll position check to account for the total offset
+                if (scrollPosition + totalOffset > targetBottom) {
                     $bookingBar.fadeIn(function () {
                         if ($bookingBar.is(':visible')) {
                             $header.css("box-shadow", "none");
@@ -1000,10 +1009,16 @@
             e.preventDefault(); 
             $('.tf-single-booking-bar').fadeOut();
             var bookingBarHeight = $('.tf-single-booking-bar').outerHeight() || 0;
+            var $wpAdminBar = $('#wpadminbar');
+            var $header = $('header');
+            var wpAdminBarHeight = $wpAdminBar.length ? $wpAdminBar.outerHeight() : 0;
+            var headerHeight = $header.length ? $header.outerHeight() : 0;
+            var totalOffset = wpAdminBarHeight + headerHeight;
+            
             $('html, body').animate({
-                scrollTop: $('.tf-date-select-box').offset().top - bookingBarHeight
-            }); 
-        });        
+                scrollTop: $('.tf-date-select-box').offset().top - totalOffset
+            }, 1000); 
+        });     
 
         // Social Share
         $('.single-tf_carrental .tf-single-template__one .tf-share-toggle').on("click", function (e) {
