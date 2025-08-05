@@ -32,7 +32,8 @@ $taxonomy_slug = $term->slug;
 $max = '2';
 
 $tf_location_meta      = get_term_meta( $term->term_id, 'tf_tour_destination', true );
-$tf_location_image = ! empty( $tf_location_meta['image'] ) ? $tf_location_meta['image'] : '';
+$tf_tour_arc_banner = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour_archive_design_2_bannar'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour_archive_design_2_bannar'] : '';
+$tf_location_image = ! empty( $tf_location_meta['image'] ) ? $tf_location_meta['image'] : $tf_tour_arc_banner;
 
 $tf_tour_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['tour-archive'] : 'design-1';
 

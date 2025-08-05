@@ -327,13 +327,9 @@
         &__one{
             .tf-archive-car-details-warper{
                 padding: 0px 0px 56px 0px;
-                @media #{$max1024}{
-                    padding-left: 15px;
-                    padding-right: 15px;
-                }
+    
                 @media #{$max575}{
-                    padding-left: 10px;
-                    padding-right: 10px;
+                    padding-bottom: 40px;
                 }
                 .tf-archive-search-box{
                     border-radius: 24px;

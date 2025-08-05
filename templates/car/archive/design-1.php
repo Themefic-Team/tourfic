@@ -46,6 +46,9 @@ $tf_car_arc_banner = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template'
                     
                     <div class="tf-car-archive-sidebar">
                         <div class="tf-sidebar-header tf-flex tf-flex-space-bttn tf-flex-align-center">
+                            <div class="tf-close-sidebar">
+                                <i class="fa-solid fa-xmark"></i>
+                            </div>
                             <h4><?php esc_html_e("Filter", "tourfic") ?></h4>
                             <button class="filter-reset-btn"><?php esc_html_e("Reset", "tourfic"); ?></button>
                         </div>

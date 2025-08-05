@@ -6738,7 +6738,7 @@ div#tf-destinationautocomplete-list div:before {
 
 @media only screen and (max-width: 575.98px) {
   .page-template-tf-search .tf-archive-template__one .tf-archive-car-banner {
-    margin: 0 16px;
+    margin: 16px 16px 0;
   }
 }
 
@@ -6810,6 +6810,7 @@ div#tf-destinationautocomplete-list div:before {
   border-radius: 16px;
   background: var(--tf-filling-foreground);
   padding: 32px;
+  position: relative;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -6849,6 +6850,20 @@ div#tf-destinationautocomplete-list div:before {
   border: 0px solid;
   cursor: pointer;
   display: none;
+}
+
+.page-template-tf-search .tf-archive-template__one .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-sidebar .tf-sidebar-header .tf-close-sidebar {
+  display: none;
+}
+
+@media only screen and (max-width: 1024px) {
+  .page-template-tf-search .tf-archive-template__one .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-sidebar .tf-sidebar-header .tf-close-sidebar {
+    position: absolute;
+    right: 17px;
+    top: 12px;
+    display: block;
+    color: #ff6055;
+  }
 }
 
 .page-template-tf-search .tf-archive-template__one .tf-archive-car-details-warper .tf-car-details-column .tf-car-archive-sidebar .tf_widget {
@@ -10688,23 +10703,12 @@ div#tf-destinationautocomplete-list div:before {
   padding: 0px 0px 56px 0px;
 }
 
-@media only screen and (max-width: 1024px) {
-  .post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-car-details-warper,
-  .tax-carrental_location .tf-archive-template__one .tf-archive-car-details-warper,
-  .tax-carrental_brand .tf-archive-template__one .tf-archive-car-details-warper,
-  .page-template-tf-search .tf-archive-template__one .tf-archive-car-details-warper {
-    padding-left: 15px;
-    padding-right: 15px;
-  }
-}
-
 @media only screen and (max-width: 575.98px) {
   .post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-car-details-warper,
   .tax-carrental_location .tf-archive-template__one .tf-archive-car-details-warper,
   .tax-carrental_brand .tf-archive-template__one .tf-archive-car-details-warper,
   .page-template-tf-search .tf-archive-template__one .tf-archive-car-details-warper {
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-bottom: 40px;
   }
 }
 
@@ -15236,7 +15240,7 @@ div#tf-destinationautocomplete-list div:before {
 .tf-archive-template__two .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-fields > div.tf-booking-form-guest-and-room .tf-booking-form-guest-and-room-inner,
 .tf-archive-listing__two .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-fields > div.tf-booking-form-guest-and-room .tf-booking-form-guest-and-room-inner,
 .page-template-tf-search__two .tf-booking-form-wrapper .tf-booking-form .tf-booking-form-fields > div.tf-booking-form-guest-and-room .tf-booking-form-guest-and-room-inner {
-  width: 100%;
+  width: fit-content;
   position: relative;
 }
 
@@ -16256,6 +16260,31 @@ div#tf-destinationautocomplete-list div:before {
   .page-template-tf-search__two .tf-available-rooms-head {
     display: grid;
     grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media only screen and (max-width: 575.98px) {
+  .tf-single-template__two .tf-available-rooms-head .tf-total-results,
+  .tf-archive-template__two .tf-available-rooms-head .tf-total-results,
+  .tf-archive-listing__two .tf-available-rooms-head .tf-total-results,
+  .page-template-tf-search__two .tf-available-rooms-head .tf-total-results {
+    display: none;
+  }
+}
+
+.tf-single-template__two .tf-available-rooms-head .tf-total-results.tf-mobile-results,
+.tf-archive-template__two .tf-available-rooms-head .tf-total-results.tf-mobile-results,
+.tf-archive-listing__two .tf-available-rooms-head .tf-total-results.tf-mobile-results,
+.page-template-tf-search__two .tf-available-rooms-head .tf-total-results.tf-mobile-results {
+  display: none;
+}
+
+@media only screen and (max-width: 575.98px) {
+  .tf-single-template__two .tf-available-rooms-head .tf-total-results.tf-mobile-results,
+  .tf-archive-template__two .tf-available-rooms-head .tf-total-results.tf-mobile-results,
+  .tf-archive-listing__two .tf-available-rooms-head .tf-total-results.tf-mobile-results,
+  .page-template-tf-search__two .tf-available-rooms-head .tf-total-results.tf-mobile-results {
+    display: block;
   }
 }
 
@@ -19854,6 +19883,14 @@ div#tf-destinationautocomplete-list div:before {
   }
 }
 
+@media only screen and (max-width: 1024px) {
+  .tf-archive-listing__two .tf-archive-search-form .tf-booking-form .tf-booking-form-fields > div,
+  .tf-archive-template__two .tf-archive-search-form .tf-booking-form .tf-booking-form-fields > div,
+  .page-template-tf-search__two .tf-archive-search-form .tf-booking-form .tf-booking-form-fields > div {
+    width: 20%;
+  }
+}
+
 .tf-archive-listing__two .tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location,
 .tf-archive-template__two .tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location,
 .page-template-tf-search__two .tf-archive-search-form .tf-booking-form .tf-booking-form-fields .tf-booking-form-location {
@@ -21688,6 +21725,7 @@ div#tf-destinationautocomplete-list div:before {
   align-items: flex-start;
   padding-right: 25px;
   padding-left: 0;
+  width: 24%;
 }
 
 @media only screen and (min-width: 1025px) and (max-width: 1165px) {

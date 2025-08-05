@@ -338,6 +338,7 @@
                         display: flex;
                         flex-direction: column;
                         position: relative;
+                        
                         &.tf-booking-form-guest-and-room {
                             width: 30%;
                             padding-left: 25px;
@@ -353,7 +354,7 @@
                                 padding-left: 0;
                             }
                             .tf-booking-form-guest-and-room-inner{
-                                width: 100%;
+                                width: fit-content;
                                 position: relative;
                             }
                         }
@@ -877,6 +878,17 @@
             @media #{$max575}{
                 display: grid;
                 grid-template-columns: 1fr 1fr;
+            }
+            .tf-total-results{
+                @media #{$max575}{
+                    display: none;
+                }
+                &.tf-mobile-results{
+                    display: none;
+                    @media #{$max575}{
+                        display: block;
+                    }
+                }
             }
             h3{
                 color: $color-heading;
@@ -3589,6 +3601,11 @@
                         padding: 0;
                         padding-bottom: 15px;
                     }
+                    &>div{
+                        @media #{$max1024}{
+                            width: 20%;
+                        }
+                    }
                     .tf-booking-form-location {
                         display: flex;
                         align-items: flex-start;
@@ -4723,6 +4740,7 @@
                     align-items: flex-start;
                     padding-right: 25px;
                     padding-left: 0;
+                    width: 24%;
                     @media only screen and (min-width: 1025px) and (max-width: 1165px) {
                         padding-right: 10px;
                         width: 25%;

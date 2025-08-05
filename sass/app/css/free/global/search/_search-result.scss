@@ -786,7 +786,7 @@
                 background-size: cover;
                 background-position: center;
                 @media #{$max575}{
-                    margin: 0 16px;
+                    margin: 16px 16px 0;
                 }
                 .tf-banner-content{
                     height: 100%;
@@ -851,6 +851,7 @@
                         border-radius: 16px;
                         background: $color-filling-fg;
                         padding: 32px;
+                        position: relative;
                         @media #{$max1024}{
                             width: 100%;
                             display: none;
@@ -865,6 +866,7 @@
                         
                         .tf-sidebar-header{
                             margin-bottom: 32px;
+                           
                             h4{
                                 color: $color-heading;
                                 font-size: 1rem;
@@ -880,6 +882,16 @@
                                 border: 0px solid;
                                 cursor: pointer;
                                 display: none;
+                            }
+                            .tf-close-sidebar {
+                                display: none;
+                                @media #{$max1024}{
+                                    position: absolute;
+                                    right: 17px;
+                                    top: 12px;
+                                    display: block;
+                                    color: $color-danger;
+                                }
                             }
                         }
                         .tf_widget{

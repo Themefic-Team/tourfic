@@ -2331,8 +2331,10 @@
         $('.tf-archive-template__two .tf-archive-filter-showing').on('click', function () {
             $('.tf-archive-right').toggleClass('tf-filter-show');
         });
-        $('.tf-archive-template__two .tf-close-sidebar').on('click', function () {
-            $('.tf-archive-right').removeClass('tf-filter-show');
+
+        // Archive Filter Close
+        $(document).on('click', '.tf-close-sidebar', function () {
+            $(this).closest('.tf-filter-show').removeClass('tf-filter-show');
         });
 
         $('.tf-archive-template__one .tf-archive-filter-showing').on('click', function () {
