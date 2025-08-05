@@ -257,7 +257,7 @@
   left: 0;
   top: 0;
   width: 100%;
-  z-index: 999;
+  z-index: 9999;
   display: none;
   box-shadow: 0 48px 64px 0 rgba(2, 12, 21, 0.05);
 }
