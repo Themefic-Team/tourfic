@@ -17780,19 +17780,13 @@ div#tf-destinationautocomplete-list div:before {
 
 @media only screen and (max-width: 768px) {
   .tf-single-template__two .tf-related-items-section {
-    padding: 32px;
+    padding: 32px 0;
   }
 }
 
 @media only screen and (max-width: 575.98px) {
   .tf-single-template__two .tf-related-items-section {
-    padding: 16px;
-  }
-}
-
-@media only screen and (max-width: 768px) {
-  .tf-single-template__two .tf-related-items-section {
-    padding: 16px;
+    padding: 16px 0;
   }
 }
 
@@ -17835,12 +17829,14 @@ div#tf-destinationautocomplete-list div:before {
 @media only screen and (max-width: 1024px) {
   .tf-single-template__two .tf-related-items-section .tf-slider-item {
     padding: 0px 4px;
+    margin: 0 8px !important;
   }
 }
 
 @media only screen and (max-width: 768px) {
   .tf-single-template__two .tf-related-items-section .tf-slider-item {
     padding: 0px 12px;
+    margin: 0 !important;
   }
 }
 
