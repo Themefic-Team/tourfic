@@ -131,14 +131,14 @@
                 processData: false,
                 contentType: false,
                 beforeSend: function (data) {
-                    // $this.block({
-                    //     message: null,
-                    //     overlayCSS: {
-                    //         background: "#fff",
-                    //         opacity: .5
-                    //     }
-                    // });
-                    // $('#tour_room_details_loader').show();
+                    $this.block({
+                        message: null,
+                        overlayCSS: {
+                            background: "#fff",
+                            opacity: .5
+                        }
+                    });
+                    $('#tour_room_details_loader').show();
                     $('.tf-notice-wrapper').html("").hide();
                 },
                 complete: function (data) {
@@ -163,7 +163,7 @@
                         } else {
 
                             if (response.redirect_to) {
-                                //window.location.replace(response.redirect_to);
+                                window.location.replace(response.redirect_to);
                             } else {
                                 jQuery(document.body).trigger('added_to_cart');
                                 $('#tour_room_details_loader').hide();

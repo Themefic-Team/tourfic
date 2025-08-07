@@ -1563,6 +1563,8 @@ function tf_add_order_tour_details_checkout_order_processed( $order_id, $posted_
 				'tax_info' => wp_json_encode($fee_sums)
 			];
 
+			$iteminfo = apply_filters( 'tf_tour_order_item_info', $iteminfo, $item);
+
 			$tf_integration_order_data[] = [
 				'tour_date' => $tour_date,
 				'tour_time' => $tour_time,
@@ -1786,6 +1788,8 @@ function tf_add_order_tour_details_checkout_order_processed_block_checkout( $ord
 				'visitor_details' => $visitor_details,
 				'tax_info' => wp_json_encode($fee_sums)
 			];
+
+			$iteminfo = apply_filters( 'tf_tour_order_item_info', $iteminfo, $item);
 
 			$tf_integration_order_data[] = [
 				'tour_date' => $tour_date,

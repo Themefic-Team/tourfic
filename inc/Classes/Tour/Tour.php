@@ -3885,8 +3885,8 @@ class Tour {
 		$adults               = isset( $_POST['adults'] ) ? intval( sanitize_text_field( $_POST['adults'] ) ) : 0;
 		$children             = isset( $_POST['children'] ) ? intval( sanitize_text_field( $_POST['children'] ) ) : 0;
 		$infant               = isset( $_POST['infant'] ) ? intval( sanitize_text_field( $_POST['infant'] ) ) : 0;
-		$total_people         = $adults + $children + $infant;
-		$total_people_booking = $adults + $children;
+		$total_people 		  = apply_filters('tf_tour_booking_person_count', $adults + $children + $infant, $adults, $children, $infant);
+		$total_people_booking = apply_filters('tf_tour_booking_inventory_person_count', $adults + $children, $adults, $children, $infant);
 		// Tour date
 		$tour_date = ! empty( $_POST['check_in_date'] ) ? sanitize_text_field( $_POST['check_in_date'] ) : '';
 		$tour_time = isset( $_POST['check_in_time'] ) ? sanitize_text_field( $_POST['check_in_time'] ) : null;
@@ -3989,6 +3989,14 @@ class Tour {
 
 				$tf_total_people = $tf_total_adults + $tf_total_childrens;
 
+				// Allow filtering of total people count
+        		$tf_total_people = apply_filters('tf_fixed_tour_total_people_before_inventory_check', $tf_total_people, [
+					'post_id' => $post_id,
+					'start_date' => $start_date,
+					'end_date' => $end_date,
+					'tf_tour_book_orders' => $tf_tour_book_orders,
+				]);
+
 				if ( ! empty( $tf_tour_booking_limit ) ) {
 					$tf_today_limit = $tf_tour_booking_limit - $tf_total_people;
 					if ( $tf_total_people > 0 && $tf_total_people == $tf_tour_booking_limit ) {
@@ -3996,7 +4004,7 @@ class Tour {
 					}
 					if ( $tf_total_people != $tf_tour_booking_limit && $tf_today_limit < $total_people_booking && $pricing_rule!='package' ) {
 						/* translators: %1$s: available seats */
-						$response['errors'][] = sprintf( esc_html__( 'Only %1$s Adult/Children are available this Tour', 'tourfic' ), $tf_today_limit );
+						$response['errors'][] = sprintf( esc_html__( 'Only %1$s Person are available this Tour', 'tourfic' ), $tf_today_limit );
 					}
 				}
 			}
@@ -4085,6 +4093,16 @@ class Tour {
 			}
 			$tf_total_people = $tf_total_adults + $tf_total_childrens;
 
+			// Allow filtering of total people count
+			$tf_total_people = apply_filters('tf_continuous_tour_total_people_before_inventory_check', $tf_total_people, [
+				'tour_id' => $tour_id,
+				'tour_date' => $tour_date,
+				'tour_time' => $tour_time,
+				'tour_time_title' => $tour_time_title,
+				'allowed_times_field' => $allowed_times_field,
+				'tf_tour_book_orders' => $tf_tour_book_orders,
+			]);
+
 			if ( ! empty( $tf_tour_booking_limit ) ) {
 				$tf_today_limit = $tf_tour_booking_limit - $tf_total_people;
 
@@ -4093,7 +4111,7 @@ class Tour {
 				}
 				if ( $tf_total_people != $tf_tour_booking_limit && $tf_today_limit < $total_people_booking && $pricing_rule!='package' ) {
 					/* translators: %1$s: available seats */
-					$response['errors'][] = sprintf( esc_html__( 'Only %1$s Adult/Children are available this Date', 'tourfic' ), $tf_today_limit );
+					$response['errors'][] = sprintf( esc_html__( 'Only %1$s Person are available this Date', 'tourfic' ), $tf_today_limit );
 				}
 			}
 

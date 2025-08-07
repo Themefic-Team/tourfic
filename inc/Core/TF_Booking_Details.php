@@ -689,7 +689,7 @@ abstract Class TF_Booking_Details {
 
                                         <!-- Adults Count -->
                                         <?php 
-                                        $tf_total_visitor = 0;
+                                        $tf_total_visitor = apply_filters('tf_booking_total_visitor_details', 0, $tf_tour_details);
                                         $book_adult  = !empty( $tf_tour_details->adult ) ? $tf_tour_details->adult : '';
                                         if(!empty($book_adult)){
                                             $tf_total_adult = explode( " × ", $book_adult );
@@ -840,6 +840,7 @@ abstract Class TF_Booking_Details {
                                             </tr>
                                        <?php } ?>
 
+                                       <?php do_action('tf_booking_details_after_other_details', $tf_tour_details); ?>
                                     </table>
                                 </div>
                             </div>
@@ -1651,6 +1652,7 @@ abstract Class TF_Booking_Details {
                         </div>
                     <?php } ?>
 
+                    <?php do_action('tf_booking_popup_after_other_details', $tf_tour_details); ?>
                 </div>
             </div>
 
