@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, car-rental, multivendor-marketplace
 Requires at least: 5.4
 Tested up to: 6.8
-Stable tag: 2.16.11
+Stable tag: 2.16.12
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -21,7 +21,8 @@ Ultimate Hotel, Travel, Car Rental & Tour Booking WordPress plugin. Build a webs
 👉 Buy Pro Version: [Click Here](https://themefic.com/tourfic/pricing/?utm_source=wp_readme&utm_medium=tourfic_top_slot&utm_campaign=pro_link)
 👉 Video Guide on [Youtube](https://www.youtube.com/playlist?list=PLY0rtvOwg0ylCl7NTwNHUPq-eY1qwUH_N)
 👉 Our [Documentation](https://themefic.com/docs/tourfic/?utm_source=wp_readme&utm_medium=tourfic_top_slot&utm_campaign=plugin_docs)
-👉 Join Our [Community](https://community.themefic.com/feed/?utm_source=wp_readme&utm_medium=tourfic_top_slot&utm_campaign=plugin_community)
+👉 Get Support: [Click Here](https://portal.themefic.com/support/?utm_source=wp_readme&utm_medium=tourfic_top_slot&utm_campaign=plugin_support)
+👉 Join Our [Facebook Group](https://www.facebook.com/groups/tourfic)
 
 Tourfic stands as the premier choice for building an Advanced Travel, Apartment Booking, Car Rental, and Hotel booking website on WordPress. Designed to integrate effortlessly with WooCommerce, this plugin offers a user-intuitive interface and sophisticated pricing function, enabling effective management of your online booking and payment systems.
 
@@ -253,9 +254,13 @@ With shortcodes, you can embed important functions and features into pages or po
 
 You can find all our available shortcodes [here](https://themefic.com/docs/tourfic/shortcodes/).
 
+### Join our Community to stay updated
+
+Join our [Facebook group](https://www.facebook.com/groups/tourfic) to stay informed with latest news and updates about Tourfic.
+
 ### Our Support
 
-Yes, we provide full support on the WordPress.org forums & [Our Website](https://portal.themefic.com/support/). You can also Join Our [Community](https://community.themefic.com/feed/?utm_source=wp_readme&utm_medium=tourfic_support_slot&utm_campaign=plugin_community) to stay informed with the latest news and updates.  Check our [Support Policy](https://themefic.com/support-policy/).
+We provide full support on the WordPress.org forums & [Our Website](https://portal.themefic.com/support/). Check our [Support Policy](https://themefic.com/support-policy/).
 
 ### Privacy Policy
 Tourfic uses [Appsero](https://appsero.com/) SDK to collect some telemetry data. Appsero SDK does not gather any data by default. The SDK only starts gathering basic telemetry data when a user allows it via the admin notice. Appsero SDK DOES NOT IMMEDIATELY start gathering data, without confirmation from users in any case. We use this data to troubleshoot problems faster, make product improvements & ensure a great user experience for all our users.
@@ -373,9 +378,14 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
+= 2.16.12 – August 11, 2025 =
+
+- Updated: Readme.txt file updated.
+- Compatibility: Compatible with WooCommerce v10.0.
+
 = 2.16.11 – August 10, 2025 =
 
-- Updated: Community platform added for the plugin.
+- Updated: Readme.txt file updated.
 
 = 2.16.10 – July 29, 2025 =
 
