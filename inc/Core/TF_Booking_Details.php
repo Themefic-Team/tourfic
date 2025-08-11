@@ -1304,6 +1304,15 @@ abstract Class TF_Booking_Details {
             $wpdb->prepare("UPDATE {$wpdb->prefix}tf_order_data SET ostatus=%s WHERE id=%s", sanitize_title( $tf_status ), sanitize_key($tf_order_id))
             );
 
+            /**
+             * Dynamic hook that fires after order status is changed.
+             *
+             * @param int    $order_id        The order ID.
+             * @param string $new_status      The new order status.
+             * @param object $order_data      The order data object.
+             */
+            do_action('tf_order_status_changed', $tf_order->order_id, $tf_status, $tf_order);
+
             if ( 'offline'== $tf_order->payment_method && ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-integration' ) )['tf-new-order-google-calendar'] ) && Helper::tf_data_types( Helper::tfopt( 'tf-integration' ) )['tf-new-order-google-calendar'] == "1" ) {
 
 				/**
@@ -1442,6 +1451,15 @@ abstract Class TF_Booking_Details {
                     $wpdb->query(
                     $wpdb->prepare("UPDATE {$wpdb->prefix}tf_order_data SET ostatus=%s WHERE id=%s", sanitize_title( $tf_status ), sanitize_key($order))
                     );
+
+                    /**
+                     * Dynamic hook that fires after order status is changed.
+                     *
+                     * @param int    $order_id        The order ID.
+                     * @param string $new_status      The new order status.
+                     * @param object $order_data      The order data object.
+                     */
+                    do_action('tf_order_status_changed', $tf_single_order->order_id, $tf_status, $tf_single_order);
     
                     if ( 'offline'== $tf_single_order->payment_method && ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-integration' ) )['tf-new-order-google-calendar'] ) && Helper::tf_data_types( Helper::tfopt( 'tf-integration' ) )['tf-new-order-google-calendar'] == "1" ) {
 
