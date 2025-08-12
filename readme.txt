@@ -1,9 +1,9 @@
-=== Tourfic – Ultimate Travel Booking, Hotel Booking & Car Rental WordPress Plugin | WooCommerce Booking ===
+=== Tourfic — Travel, Hotel & Car Rental Booking for WooCommerce ===
 Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi, hasanet
 Tags: travel-booking, hotel-booking, tour-booking, car-rental, multivendor-marketplace
 Requires at least: 5.4
 Tested up to: 6.8
-Stable tag: 2.16.12
+Stable tag: 2.16.13
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -12,7 +12,7 @@ Ultimate Hotel, Travel, Car Rental & Tour Booking WordPress plugin. Build a webs
 
 == Description ==
 
-## THE BEST HOTEL BOOKING, TRAVEL BOOKING, CAR RENTAL, TOUR BOOKING & VACATION RENTAL PLUGIN FOR WORDPRESS - TOURFIC
+## HOTEL BOOKING, TRAVEL BOOKING, CAR RENTAL, TOUR BOOKING & VACATION RENTAL PLUGIN FOR WORDPRESS – TOURFIC
 
 👉 Our Official Website: [Click Here](https://themefic.com/tourfic/?utm_source=wp_readme&utm_medium=tourfic_top_slot&utm_campaign=website)
 👉 Live Demo Link: [Click Here](https://tourfic-demo.themefic.com/?utm_source=wp_readme&utm_medium=tourfic_top_slot&utm_campaign=demo_link)
@@ -185,7 +185,7 @@ Furthermore, an array of indispensable features solidifies Tourfic's position as
 * Email verification for vendors (Pro)
 * Frontend Dashboard for Vendors (Pro)
 
-In short, Tourfic has all the features to make it the best Multi vendor hotel / travel / car rental booking system WordPress plugin.
+In short, Tourfic includes all the features for a multi-vendor hotel, travel, Apartment and car rental booking system in WordPress.
 
 = 🎉  API BASED AFFILIATE INTEGRATION =
 * Booking.com Affiliate Program (Pro)
@@ -227,7 +227,7 @@ We believe the free version is good enough for most businesses. However, we have
 * Efficiently construct a professional website for your tour operator or travel agency, streamlining your online presence.
 * Implement a hotel reservation and room booking system tailored to your hotel's website, enhancing guest booking experiences.
 * Develop a user-friendly apartment booking system, optimizing your website for higher occupancy rates.
-* Launch your professional tour operator and travel agency website in just 59 minutes, mirroring the functionality of industry giants like Booking.com, Agoda, Hotels.com, and Airbnb.
+* Launch your tour operator and travel agency website with features similar to popular platforms like Booking.com, Agoda, Hotels.com, and Airbnb.
 * Establish your online tour business and monetize your tours globally through seamless integration with WooCommerce payment solutions.
 <hr>
 
@@ -323,7 +323,7 @@ system, enhancing your e-commerce platform with robust booking capabilities.
 
 Indeed, with Tourfic, crafting a professional WooCommerce travel agency website is straightforward. For step-by-step instructions, refer to this [video](https://youtu.be/99jUEJQIxkg).
 = Can Tourfic serve as a Room Reservation Plugin for WordPress? =
-Yes, Tourfic is perfectly suited to function as a WordPress Room Booking Plugin, enabling you to create a streamlined booking system on your WordPress site.
+Yes, Tourfic works well as a WordPress Room Booking Plugin, allowing you to create a smooth booking system on your WordPress site.
 = Can Tourfic be utilized for WooCommerce Accommodation Bookings? =
 
 Absolutely, Tourfic allows you to effortlessly establish a professional-grade accommodation booking website. For a detailed guide, watch this [video](https://youtu.be/xeVkabWobDU).
@@ -378,35 +378,10 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
-= 2.16.12 – August 11, 2025 =
+= 2.16.13 – August 13, 2025 =
 
 - Updated: Readme.txt file updated.
 - Compatibility: Compatible with WooCommerce v10.0.
-
-= 2.16.11 – August 10, 2025 =
-
-- Updated: Readme.txt file updated.
-
-= 2.16.10 – July 29, 2025 =
-
-- Fixed: Responsive booking form issue resolved.
-
-= 2.16.9 – July 19, 2025 =
-
-- Added: Theme Builder support for all Archive, Taxonomy, and Term pages.
-- Added: Elementor support for all Archive, Taxonomy, and Term pages.
-- Added: Elementor Page Builder support for Archive pages.
-- Improved: Layout of the footer booking form on tour pages.
-- Fixed: Design issue with the apartment location dropdown in Template 1.
-- Fixed: Price filter issue on car listings.
-- Fixed: Pagination issue on the Car Archive page.
-
-= 2.16.8 – June 24, 2025 =
-
-- Improved: Car rental design, including archive, single, and search form layouts.
-- Updated: Search date filter for car rentals.
-- Fixed: Responsive issues in the car search form.
-- Added: Operating time slots feature.
 
 **Old Changelog can be found [here](https://themefic.com/tourfic/changelog/)**.
 
