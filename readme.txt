@@ -16,9 +16,7 @@ Ultimate Hotel, Travel, Car Rental & Tour Booking WordPress plugin. Build a webs
 
 👉 Our Official Website: [Click Here](https://themefic.com/tourfic/?utm_source=wp_readme&utm_medium=tourfic_top_slot&utm_campaign=website)
 👉 Live Demo Link: [Click Here](https://tourfic-demo.themefic.com/?utm_source=wp_readme&utm_medium=tourfic_top_slot&utm_campaign=demo_link)
-👉 Explore Pro: [Play with Backend Options](https://app.instawp.io/launch?t=tourfic-backend-demo&d=v2)
 👉 Need a WordPress Theme? Use [Travelfic](https://wordpress.org/themes/travelfic/)
-👉 Buy Pro Version: [Click Here](https://themefic.com/tourfic/pricing/?utm_source=wp_readme&utm_medium=tourfic_top_slot&utm_campaign=pro_link)
 👉 Video Guide on [Youtube](https://www.youtube.com/playlist?list=PLY0rtvOwg0ylCl7NTwNHUPq-eY1qwUH_N)
 👉 Our [Documentation](https://themefic.com/docs/tourfic/?utm_source=wp_readme&utm_medium=tourfic_top_slot&utm_campaign=plugin_docs)
 👉 Get Support: [Click Here](https://portal.themefic.com/support/?utm_source=wp_readme&utm_medium=tourfic_top_slot&utm_campaign=plugin_support)
@@ -198,7 +196,7 @@ In short, Tourfic includes all the features for a multi-vendor hotel, travel, Ap
 * Added: Elementor support for Cars Archive pages.
 
 = 🎉  MISCELLANEOUS =
-* Email piping for customer enquery 
+* Email piping for customer enquery
 * Compatible with Woocommerce Tax settings
 * Complete Style Panel
 * Easy to use Option Panel
