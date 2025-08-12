@@ -5064,6 +5064,12 @@ a.tf-import-btn, a.tf-export-btn {
   justify-content: space-between;
   width: 100%;
   margin-bottom: 14px;
+  position: sticky;
+  top: 0;
+  z-index: 99;
+  left: 0;
+  width: 100%;
+  background: #fff;
 }
 .tf-apt-cal-wrap .bulk-popup-content .tf-bulk-edit-header h3,
 .tf-room-cal-wrap .bulk-popup-content .tf-bulk-edit-header h3,

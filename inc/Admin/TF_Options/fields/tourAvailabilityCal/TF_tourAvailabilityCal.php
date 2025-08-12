@@ -941,6 +941,7 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
 
                                     <span class="tf_tour_cal_reset button button-secondary button-large"><?php echo esc_html__( 'Reset Calendar', 'tourfic' ); ?></span>
                                 </div>
+                                <?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) { ?>
                                 <span class="tf_tour_cal_bulk_edit button button-secondary button-large">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M12 20H21" stroke="#003C79" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -949,6 +950,7 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                     </svg>    
                                     <?php echo esc_html__( 'Bulk Edit', 'tourfic' ); ?>
                                 </span>
+                                <?php } ?>
                             </div>
 
                         </div>

@@ -1781,6 +1781,12 @@
             $('[name="tf_tour_min_person"]', tourCalData).val('');
             $('[name="tf_tour_max_person"]', tourCalData).val('');
             $('[name="tf_tour_max_capacity"]', tourCalData).val('');
+            $('[name="tf_tour_repeat_day[]"], [name="tf_tour_repeat_month[]"], [name="tf_tour_repeat_year[]"], [name="tf_tour_repeat_week[]"]')
+            .prop('checked', false)
+            .val('');
+            $('.bulk-popup-content-box #adult_tabs input, .bulk-popup-content-box #child_tabs input, .bulk-popup-content-box #infant_tabs input, .bulk-popup-content-box #group_tabs input').val('');
+
+
 
             // More specific selector with error handling
             const container = document.querySelector('.tf_tour_allowed_times');
