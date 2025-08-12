@@ -291,7 +291,7 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                     <label class="tf-field-label"><?php echo esc_html__( 'Tour starts', 'tourfic' ); ?></label>
                                     <div class="tf-field-text-group">
                                         <i class="fa-solid fa-calendar-days"></i>
-                                        <input readonly="readonly" type="text" class="tf_tour_check_in" name="tf_tour_check_in" placeholder="<?php echo esc_html__( 'Tour starts', 'tourfic' ); ?>">
+                                        <input readonly="readonly" type="text" class="tf_tour_check_in" name="tf_tour_check_in" placeholder="<?php echo esc_html__( 'Select tour start date', 'tourfic' ); ?>">
                                     </div>
                                 </div>
 
@@ -299,7 +299,7 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                     <label class="tf-field-label"><?php echo esc_html__( 'Tour ends', 'tourfic' ); ?></label>
                                     <div class="tf-field-text-group">
                                         <i class="fa-solid fa-calendar-days"></i>
-                                        <input readonly="readonly" type="text" class="tf_tour_check_out" name="tf_tour_check_out" placeholder="<?php echo esc_html__( 'Tour ends', 'tourfic' ); ?>">
+                                        <input readonly="readonly" type="text" class="tf_tour_check_out" name="tf_tour_check_out" placeholder="<?php echo esc_html__( 'Select tour end date', 'tourfic' ); ?>">
                                     </div>
                                 </div>
 

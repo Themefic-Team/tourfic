@@ -27,7 +27,7 @@ if ( ! class_exists( 'TF_switch' ) ) {
 			}
 			?>
 			<div class="tf-inline-switch">
-				<span for="<?php echo esc_attr( $id ) ?>" class="tf-field-label">
+				<span class="tf-field-label">
 					<?php echo esc_html( $this->field['label'] ) ?>
 				</span>
 				<label for="<?php echo esc_attr( $this->field_name() ); ?>" class="tf-switch-label" <?php echo wp_kses_post( $width ); ?>>

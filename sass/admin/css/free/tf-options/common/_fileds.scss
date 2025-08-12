@@ -35,7 +35,7 @@
         z-index: 9;
         left: 50%;
         margin-left: -74px;
-        bottom: 30px;
+        bottom: 25px;
         opacity: 0;
         visibility: hidden;
         transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -53,14 +53,15 @@
           z-index: -1;
         }
       }
+
+      &:hover{
+        .tf-desc-tooltip-content{
+          opacity: 1;
+          visibility: visible;
+        }
+      }
       svg{
         cursor: pointer;
-        &:hover{
-          +.tf-desc-tooltip-content{
-            opacity: 1;
-            visibility: visible;
-          }
-        }
       }
     }
     .tf-csf-badge {

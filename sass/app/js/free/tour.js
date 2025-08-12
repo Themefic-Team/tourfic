@@ -822,6 +822,8 @@
                     to: toRaw
                 };
             });
+        }else{
+            tour_date_options.minDate = "today";
         }
 
         tour_date_options.disable = [];
