@@ -2,7 +2,7 @@
 /**
  * Plugin Name:     Tourfic - Travel, Hotel, and Apartment Booking Solution for WooCommerce
  * Plugin URI:      https://themefic.com/tourfic
- * Description:     The Ultimate WordPress plugin for tour, travel, accommodation, and hotel bookings. Effortlessly manage your entire online travel booking system, including orders and any WooCommerce payment method.
+ * Description:     The ultimate plugin for tour, travel, accommodation, and hotel bookings. Effortlessly manage your entire online travel booking system, including orders and any WooCommerce payment method.
  * Author:          Themefic
  * Author URI:      https://themefic.com
  * Text Domain:     tourfic
