@@ -2,16 +2,16 @@
 /**
  * Plugin Name:     Tourfic - Travel, Hotel, and Apartment Booking Solution for WooCommerce
  * Plugin URI:      https://themefic.com/tourfic
- * Description:     The Ultimate WordPress plugin for tour, travel, accommodation, and hotel bookings. Effortlessly manage your entire online travel booking system, including orders and any WooCommerce payment method.
+ * Description:     The ultimate plugin for tour, travel, accommodation, and hotel bookings. Effortlessly manage your entire online travel booking system, including orders and any WooCommerce payment method.
  * Author:          Themefic
  * Author URI:      https://themefic.com
  * Text Domain:     tourfic
  * Domain Path:     /lang/
- * Version:         2.16.12
+ * Version:         2.16.13
  * Tested up to:    6.8
  * WC tested up to: 10.0
  * Requires PHP:    7.4
- * Elementor tested up to: 3.29
+ * Elementor tested up to: 3.31
  */
 
 // Don't load directly
@@ -25,7 +25,7 @@ final class Tourfic {
 	 * @var string
 	 */
 
-	const VERSION = '2.16.12';
+	const VERSION = '2.16.13';
 
 	/**
 	 * Minimum PHP version required.
@@ -50,7 +50,7 @@ final class Tourfic {
 	protected static $_instance = null;
 
 	/**
-	 * Main Tourfic Instance. 
+	 * Main Tourfic Instance.
 	 *
 	 * Ensures only one instance of Tourfic is loaded or can be loaded.
 	 *
@@ -65,7 +65,7 @@ final class Tourfic {
 		}
 		return self::$_instance;
 	}
-	
+
 	/**
 	 * Tourfic Constructor.
 	 */
@@ -246,6 +246,6 @@ function tf_active_template_settings_callback() {
 	//all code goes here if need
 	update_option( 'tourfic_template_installed', true );
 }
- 
+
 //Register activation hook
 register_activation_hook( __FILE__, 'tf_active_template_settings_callback' );
