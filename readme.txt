@@ -378,6 +378,10 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 = 2.16.13 – August 13, 2025 =
 
+- Improved system stability.
+
+= 2.16.12 – August 11, 2025 =
+
 - Updated: Readme.txt file updated.
 - Compatibility: Compatible with WooCommerce v10.0.
 
