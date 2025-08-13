@@ -106,16 +106,28 @@ class Hotel_Offline_Booking extends Without_Payment_Booking{
 			if ( $day_difference < $min_max_days["min_stay"] && $min_max_days["min_stay"] > 0 ) {
 				if ( $min_max_days["uid"] == $unique_id ) {
 					if ( $min_max_days["max_stay"] == 0 ) {
-						$response['errors'][] = __( "Your Stay Requirement is Minimum {$min_max_days['min_stay']} Days", 'tourfic' );
+						// translators: %d is the minimum number of stay days required.
+						$response['errors'][] = sprintf( __( 'Your Stay Requirement is Minimum %d Days', 'tourfic' ),
+							intval( $min_max_days['min_stay'] )
+						);
+
 					} else {
-						$response['errors'][] = __( "Your Stay Requirement is Minimum {$min_max_days['min_stay']} Days to Maximum {$min_max_days['max_stay']}", 'tourfic' );
+						// translators: %1$d is minimum stay days, %2$d is maximum stay days.
+						$response['errors'][] = sprintf(__( 'Your Stay Requirement is Minimum %1$d Days to Maximum %2$d Days', 'tourfic' ),
+							intval( $min_max_days['min_stay'] ),
+							intval( $min_max_days['max_stay'] )
+						);
 
 
 					}
 				}
 			} else if ( $day_difference > $min_max_days["max_stay"] && $min_max_days["max_stay"] > 0 ) {
 				if ( $min_max_days["uid"] == $unique_id ) {
-					$response['errors'][] = __( "Your Maximum Stay Requirement is {$min_max_days['max_stay']} Days", 'tourfic' );
+					// translators: %d is the maximum stay days allowed.
+					$response['errors'][] = sprintf(__( 'Your Maximum Stay Requirement is %d Days', 'tourfic' ),
+						intval( $min_max_days['max_stay'] )
+					);
+
 				}
 			}
 		}
@@ -267,7 +279,7 @@ class Hotel_Offline_Booking extends Without_Payment_Booking{
 						if ( "text" == $field['reg-fields-type'] || "number" == $field['reg-fields-type'] || "email" == $field['reg-fields-type'] || "date" == $field['reg-fields-type'] ) {
 							$response['guest_info'] .= '
                             <div class="traveller-single-info">
-                                <label for="' . $field['reg-field-name'] . $guest_in . '">' . sprintf( __( '%s', 'tourfic' ), $field['reg-field-label'] ) . '</label>
+                                <label for="' . $field['reg-field-name'] . $guest_in . '">' . esc_html( $field['reg-field-label'] ) . '</label>
                                 <input type="' . $field['reg-fields-type'] . '" name="guest[' . $guest_in . '][' . $field['reg-field-name'] . ']" data-required="' . $reg_field_required . '" id="' . $field['reg-field-name'] . $guest_in . '"' . $number_field_min_attribuite .' />
                                 <div class="error-text" data-error-for="' . $field['reg-field-name'] . $guest_in . '"></div>
                             </div>';
@@ -275,7 +287,7 @@ class Hotel_Offline_Booking extends Without_Payment_Booking{
 						if ( "select" == $field['reg-fields-type'] && ! empty( $field['reg-options'] ) ) {
 							$response['guest_info'] .= '
                             <div class="traveller-single-info">
-                                <label for="' . $field['reg-field-name'] . $guest_in . '">' . sprintf( __( '%s', 'tourfic' ), $field['reg-field-label'] ) . '</label>
+                                <label for="' . $field['reg-field-name'] . $guest_in . '">' . esc_html( $field['reg-field-label'] ) . '</label>
                                 <select id="' . $field['reg-field-name'] . $guest_in . '" name="guest[' . $guest_in . '][' . $field['reg-field-name'] . ']" data-required="' . $field['reg-field-required'] . '"><option value="">' . sprintf( __( 'Select One', 'tourfic' ) ) . '</option>';
 							foreach ( $field['reg-options'] as $sfield ) {
 								if ( ! empty( $sfield['option-label'] ) && ! empty( $sfield['option-value'] ) ) {
@@ -289,14 +301,14 @@ class Hotel_Offline_Booking extends Without_Payment_Booking{
 						if ( ( "checkbox" == $field['reg-fields-type'] || "radio" == $field['reg-fields-type'] ) && ! empty( $field['reg-options'] ) ) {
 							$response['guest_info'] .= '
                             <div class="traveller-single-info">
-                            <label for="' . $field['reg-field-name'] . $guest_in . '">' . sprintf( __( '%s', 'tourfic' ), $field['reg-field-label'] ) . '</label>
+                            <label for="' . $field['reg-field-name'] . $guest_in . '">' . esc_html( $field['reg-field-label'] ) . '</label>
                             ';
 							foreach ( $field['reg-options'] as $sfield ) {
 								if ( ! empty( $sfield['option-label'] ) && ! empty( $sfield['option-value'] ) ) {
 									$response['guest_info'] .= '
                                         <div class="tf-single-checkbox">
                                         <input type="' . esc_attr( $field['reg-fields-type'] ) . '" name="guest[' . $guest_in . '][' . $field['reg-field-name'] . '][]" id="' . $sfield['option-value'] . $guest_in . '" value="' . $sfield['option-value'] . '" data-required="' . $field['reg-field-required'] . '" />
-                                        <label for="' . $sfield['option-value'] . $guest_in . '">' . sprintf( __( '%s', 'tourfic' ), $sfield['option-label'] ) . '</label></div>';
+                                        <label for="' . $sfield['option-value'] . $guest_in . '">' . esc_html( $sfield['option-label'] ) . '</label></div>';
 								}
 							}
 							$response['guest_info'] .= '
@@ -324,7 +336,9 @@ class Hotel_Offline_Booking extends Without_Payment_Booking{
 
 			if ( ! empty( $room_selected ) ) {
 				$response['hotel_booking_summery'] .= '<tr>
-                    <td align="left">' . sprintf( __( '%1$s Room × %2$s Night', 'tourfic' ), $room_selected, $day_difference ) . '</td>
+                    <td align="left">' . 
+					/* translators: 1: total room, 2: total night */
+					sprintf( __( '%1$s Room × %2$s Night', 'tourfic' ), $room_selected, $day_difference ) . '</td>
                     <td align="right">' . wc_price( $price_total ) . '</td>
                 </tr>';
 			}

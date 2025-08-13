@@ -190,8 +190,8 @@ class Template_Builder {
                     echo '—';
                 } else {
                     if ($taxonomy_type === 'all') {
-                        echo esc_html(sprintf(
-                            __('All %s', 'tourfic'), 
+                        // translators: %s is the template type (e.g., "hotel", "tour").
+                        echo esc_html(sprintf( __('All %s', 'tourfic'), 
                             ucfirst($template_type)
                         ));
                     } else {
@@ -214,6 +214,7 @@ class Template_Builder {
                             // For specific taxonomy type, show "All [Taxonomy]"
                             $taxonomy_object = get_taxonomy($taxonomy_type);
                             $taxonomy_label = $taxonomy_object ? $taxonomy_object->labels->name : $taxonomy_type;
+                            // translators: %s will be the taxonomy name.
                             echo esc_html(sprintf(__('All %s', 'tourfic'), $taxonomy_label));
                         }
                     } else {
@@ -699,6 +700,7 @@ class Template_Builder {
         }
         
         $term_markup = '';
+        // translators: %s will be the taxonomy name.
         $term_markup .= '<option value="all"' . selected('all', $selected_term, false) . '>' . sprintf(esc_html__('All %s', 'tourfic'), $taxonomy_label) . '</option>';
         if (!empty($terms)) {
             foreach ($terms as $term) {
@@ -807,7 +809,9 @@ class Template_Builder {
                             $taxonomy_label = $taxonomy_object ? $taxonomy_object->labels->name : __('Terms', 'tourfic');
                             ?>
                             <option value="all" <?php selected($tf_taxonomy_term, 'all'); ?>>
-                                <?php echo sprintf(esc_html__('All %s', 'tourfic'), $taxonomy_label); ?>
+                                <?php 
+                                // translators: %s will be the taxonomy name.
+                                echo sprintf(esc_html__('All %s', 'tourfic'), $taxonomy_label); ?>
                             </option>
                             <?php 
                             $terms = get_terms([
@@ -1171,8 +1175,8 @@ class Template_Builder {
             update_post_meta($template->ID, 'tf_template_active', '0');
 
             // Add admin notice for deactivated templates
-            $deactivated_notice = sprintf(
-                __('Template "%s" was deactivated because a new active template was created with the same criteria.', 'tourfic'),
+            // translators: %s will be the template id
+            $deactivated_notice = sprintf( __('Template "%s" was deactivated because a new active template was created with the same criteria.', 'tourfic'),
                 get_the_title($template->ID)
             );
             

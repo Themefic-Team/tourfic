@@ -423,7 +423,7 @@ class Tour {
 				<div class="tf-driver-location-box">
 					<div class="tf-submit-button">
 						<input type="hidden" name="type" value="tf_tours" class="tf-post-type"/>
-						<button type="submit" class="tf_btn tf-flex-align-center"><?php echo esc_html__( apply_filters("tf_tour_search_form_submit_button_text", 'Search' ), 'tourfic' ); ?>  <i class="ri-search-line"></i></button>
+						<button type="submit" class="tf_btn tf-flex-align-center"><?php echo esc_html( apply_filters("tf_tour_search_form_submit_button_text", 'Search' ), 'tourfic' ); ?>  <i class="ri-search-line"></i></button>
 					</div>
 				</div>
 				</div>
@@ -650,7 +650,7 @@ class Tour {
 						<!-- Submit Button -->
 						<input type="hidden" name="type" value="tf_tours" class="tf-post-type" />
 						<button type="submit" class="tf-search__form__submit tf_btn">
-							<?php echo esc_html__(apply_filters("tf_tour_search_form_submit_button_text", 'Search'), 'tourfic'); ?>
+							<?php echo esc_html(apply_filters("tf_tour_search_form_submit_button_text", 'Search'), 'tourfic'); ?>
 							<svg class="tf-search__form__submit__icon" width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 								<path d="M15.75 14.7188L11.5625 10.5312C12.4688 9.4375 12.9688 8.03125 12.9688 6.5C12.9688 2.9375 10.0312 0 6.46875 0C2.875 0 0 2.9375 0 6.5C0 10.0938 2.90625 13 6.46875 13C7.96875 13 9.375 12.5 10.5 11.5938L14.6875 15.7812C14.8438 15.9375 15.0312 16 15.25 16C15.4375 16 15.625 15.9375 15.75 15.7812C16.0625 15.5 16.0625 15.0312 15.75 14.7188ZM1.5 6.5C1.5 3.75 3.71875 1.5 6.5 1.5C9.25 1.5 11.5 3.75 11.5 6.5C11.5 9.28125 9.25 11.5 6.5 11.5C3.71875 11.5 1.5 9.28125 1.5 6.5Z" fill="white" />
 							</svg>
@@ -1957,13 +1957,13 @@ class Tour {
 			endif; ?>
 			<?php if ( $tf_booking_type == 2 && $tf_hide_booking_form == 1 ): ?>
                 <div class="tf-btn-wrap">
-                    <a href="<?php echo esc_url( $tf_booking_url ) ?>" target="_blank" class="tf_btn tf_btn_full tf_btn_sharp tf-tour-external-booking-button" style="margin-top: 10px;"><?php esc_html_e( $tf_tour_single_book_now_text, 'tourfic' ); ?></a>
+                    <a href="<?php echo esc_url( $tf_booking_url ) ?>" target="_blank" class="tf_btn tf_btn_full tf_btn_sharp tf-tour-external-booking-button" style="margin-top: 10px;"><?php echo esc_html( $tf_tour_single_book_now_text); ?></a>
                 </div>
 				<?php if ( ! empty( $tf_tour_book_now_text ) ) : ?>
                     <div class="tf-mobile-booking-btn">
 						<span>
 							<a href="<?php echo esc_url( $tf_booking_url ) ?>" target="_blank" class="tf_btn tf_btn_full tf_btn_sharp tf-tour-external-booking-button"
-                               style="margin-top: 10px;"><?php esc_html_e( $tf_tour_single_book_now_text, 'tourfic' ); ?></a>
+                               style="margin-top: 10px;"><?php echo esc_html( $tf_tour_single_book_now_text); ?></a>
 						</span>
                     </div>
 				<?php endif; ?>

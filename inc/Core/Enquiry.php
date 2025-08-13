@@ -66,9 +66,12 @@ abstract class Enquiry {
 						</div>
 						<div class="tf-filter-options">
 							<div class="tf-order-status-filter">
-								<select class="tf-tour-filter-options tf-filter-hotel-name tf-enquiry-filter-<?php esc_html_e( !empty($args['name']) ? strtolower($args['name']) : ''); ?>-name">
-									<?php $hotel_enquiry_title = esc_html__( sprintf( "%s Enquiry Details", $args['name'] ), 'tourfic' ); ?>
-									<option value=""><?php esc_html($hotel_enquiry_title); ?></option>
+								<select class="tf-tour-filter-options tf-filter-hotel-name tf-enquiry-filter-<?php echo esc_html( !empty($args['name']) ? strtolower($args['name']) : ''); ?>-name">
+								<?php 
+								/* translators: %s hotel name */
+								$hotel_enquiry_title = sprintf( esc_html__( '%s Enquiry Details', 'tourfic' ), $args['name'] );
+								?>
+									<option value=""><?php echo esc_html($hotel_enquiry_title); ?></option>
 									<?php
 									$tf_posts_list       = array(
 										'posts_per_page' => - 1,
@@ -112,7 +115,10 @@ abstract class Enquiry {
 					</div>
 				</div>
 				<form class="tf-enquiry-right-search-filter">
-					<input type="number" value="" placeholder="<?php esc_html_e("Search by " . $args["name"] . " ID") ?>" id="tf-searching-enquiry-key">
+					<input type="number" value="" placeholder="<?php
+					// translators: %s is the item name.
+					printf( esc_html__( 'Search by %s ID', 'tourfic' ), esc_html( $args['name'] ) );
+					?>" id="tf-searching-enquiry-key">
 					<button class="tf-search-by-id" type="submit">
 						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 							<path d="M17.5 17.5L14.5834 14.5833M16.6667 9.58333C16.6667 13.4954 13.4954 16.6667 9.58333 16.6667C5.67132 16.6667 2.5 13.4954 2.5 9.58333C2.5 5.67132 5.67132 2.5 9.58333 2.5C13.4954 2.5 16.6667 5.67132 16.6667 9.58333Z" stroke="#87888B" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -232,8 +238,25 @@ abstract class Enquiry {
 													<i class="ri-information-fill"></i>
 												</div>
 												<div class="tf-field-notice-content has-content">
-												<?php echo wp_kses_post(sprintf(__("We're offering some extra filter features like %1s replied %2s, %1s not replied %2s, %1s not responded %2s, and %1s not responded %2s in our pro plan.", 'tourfic'), '<b>', '</b>', '<b>', '</b>', '<b>', '</b>', '<b>', '</b>')) ?> <a href="https://themefic.com/tourfic/pricing" target="_blank"> <?php echo esc_html__("Upgrade to our pro package today to take advantage of these fantastic options!", 'tourfic') ?></a>                
-												</div>
+												<?php
+												// translators: 1: opening <b> tag, 2: closing </b> tag, 3: opening <b> tag, 4: closing </b> tag, 5: opening <b> tag, 6: closing </b> tag, 7: opening <b> tag, 8: closing </b> tag.
+												echo wp_kses_post( sprintf(
+														__(
+															"We're offering some extra filter features like %1\$s replied %2\$s, %3\$s not replied %4\$s, %5\$s not responded %6\$s, and %7\$s not responded %8\$s in our pro plan.",
+															'tourfic'
+														),
+														'<b>', '</b>',
+														'<b>', '</b>',
+														'<b>', '</b>',
+														'<b>', '</b>'
+													)
+												);
+												?>
+												<a href="https://themefic.com/tourfic/pricing" target="_blank">
+													<?php esc_html_e( 'Upgrade to our pro package today to take advantage of these fantastic options!', 'tourfic' ); ?>
+												</a>
+											</div>
+
 											</div>
 										</div>
 									</div>
@@ -338,9 +361,9 @@ abstract class Enquiry {
 			<div class="tf_booking_wrap_header">
 				<div class="tf-enquiry-single-header-details">
 					<div class="tf-single-enquiry-header-logo">
-						<img src="<?php echo esc_url( esc_url(TF_ASSETS_APP_URL.'images/tourfic-logo-icon-blue.png') ); ?>" alt="<?php esc_html_e( get_the_title($data["post_id"])) ?>">
+						<img src="<?php echo esc_url( esc_url(TF_ASSETS_APP_URL.'images/tourfic-logo-icon-blue.png') ); ?>" alt="<?php echo esc_html( get_the_title( $data['post_id'] ) ); ?>">
 					</div>
-					<h1 class="wp-heading-inline"> <?php esc_html_e( get_the_title($data["post_id"])) . esc_html_e(" / ID #") . esc_html_e($data["id"]) ?></h1>
+					<h1 class="wp-heading-inline"> <?php echo esc_html( get_the_title($data["post_id"])); ?> <?php echo esc_html(" / ID #"); ?><?php echo esc_html($data["id"]) ?></h1>
 				</div>
 			</div>
 			<!-- Header Wrap - End -->
@@ -389,7 +412,7 @@ abstract class Enquiry {
 						<?php $display = count($reply_data) > 0 ? '' : 'display:none;' ?>
 						<div class="tf-enquiry-details tf-single-enquiry-reply-wrapper" style="<?php echo esc_attr($display); ?>"> <!-- Enquiry mail Reply Wrapper - Start -->
 							<div class="tf-enquiry-details-single-heading">
-								<h2><?php esc_html_e('To:', 'tourfic') ; ?> <span class="tf-single-enquiry-reply-mail"> <?php esc_html_e( $data["uemail"]); ?> </span></h2>
+								<h2><?php esc_html_e('To:', 'tourfic') ; ?> <span class="tf-single-enquiry-reply-mail"> <?php echo esc_html( $data["uemail"]); ?> </span></h2>
 							</div>
 							<hr class="enqury-single-title-line">
 							<div class="tf-single-enquiry-accordion">
@@ -409,15 +432,42 @@ abstract class Enquiry {
 													<span class="tf-single-accordion-dash"><?php esc_html_e('―', 'tourfic') ?></span>
 													<span class="tf-single-accordion-subject">
 														<?php if( $email_body_setting == 'html'): ?>
-															<?php echo !empty($reply["reply_message_html"]) ? ( wp_kses_post( strlen( strip_tags( $reply["reply_message_html"] ) ) > 75 ? esc_html__( Helper::tourfic_character_limit_callback( strip_tags( $reply["reply_message_html"] ), 75 ) , 'tourfic' ) : esc_html__( strip_tags( $reply["reply_message_html"] ) ), 'tourfic' )) : esc_html__( Helper::tourfic_character_limit_callback( strip_tags( $reply["reply_message"] ), 75 ), "tourfic"); ?>
+															<?php
+															if ( ! empty( $reply['reply_message_html'] ) ) {
+																$plain_text = strip_tags( $reply['reply_message_html'] );
+																$output = strlen( $plain_text ) > 75
+																	? Helper::tourfic_character_limit_callback( $plain_text, 75 )
+																	: $plain_text;
+																echo wp_kses_post( esc_html( $output ) );
+															} else {
+																$plain_text = strip_tags( $reply['reply_message'] );
+																$output = Helper::tourfic_character_limit_callback( $plain_text, 75 );
+																echo esc_html( $output );
+															}
+															?>
 														<?php elseif( $email_body_setting == 'text'): ?>
-															<?php echo !empty($reply["reply_message_text"]) ? ( wp_kses_post( strlen( $reply["reply_message_text"] ) > 75 ? esc_html__( Helper::tourfic_character_limit_callback( $reply["reply_message_text"], 75 ) , 'tourfic' ) : esc_html__( $reply["reply_message_text"] ) , 'tourfic' )) :  esc_html__( Helper::tourfic_character_limit_callback( strip_tags( $reply["reply_message"] ), 75 ), "tourfic"); ?>
+															<?php
+															if ( ! empty( $reply['reply_message_text'] ) ) {
+																$message_text = $reply['reply_message_text'];
+																$output = strlen( $message_text ) > 75
+																	? Helper::tourfic_character_limit_callback( $message_text, 75 )
+																	: $message_text;
+
+																echo wp_kses_post( esc_html( $output ) );
+															} else {
+																$plain_text = strip_tags( $reply['reply_message'] );
+																$output = Helper::tourfic_character_limit_callback( $plain_text, 75 );
+
+																echo esc_html( $output );
+															}
+															?>
+
 														<?php endif; ?>
 													</span>
 												</div>
 												<div class="tf-single-enquiry-accordion-head-right">
 													<?php // esc_html_e( date( "M d, Y h:i:s A", strtotime($reply["submit_time"])) ); ?>
-													<?php  esc_html_e( self::time_elapsed_string( $reply["submit_time"]) ); ?>
+													<?php  echo esc_html( self::time_elapsed_string( $reply["submit_time"]) ); ?>
 												</div>
 											</div>
 											<div id="tf-single-enquiry-accordion-<?php echo esc_attr($key) ?>" class="tf-single-enquiry-collapse">
@@ -488,7 +538,22 @@ abstract class Enquiry {
 										<i class="ri-information-fill"></i>
 									</div>
                 					<div class="tf-field-notice-content has-content">
-									<?php echo wp_kses_post(sprintf(__("We're offering some exiting features like %1s sending reply from enquiry details page %2s and %1s get replies using email piping %2s in our pro plan.", 'tourfic'), '<b>', '</b>', '<b>', '</b>')) ?> <a href="https://themefic.com/tourfic/pricing" target="_blank"> <?php echo esc_html__("Upgrade to our pro package today to take advantage of these fantastic options!", 'tourfic') ?></a>                
+									<?php
+									// translators: 1: opening <b> tag, 2: closing </b> tag, 3: opening <b> tag, 4: closing </b> tag.
+									echo wp_kses_post( sprintf(
+											__(
+												"We're offering some exiting features like %1\$s sending reply from enquiry details page %2\$s and %3\$s get replies using email piping %4\$s in our pro plan.",
+												'tourfic'
+											),
+											'<b>', '</b>',
+											'<b>', '</b>'
+										)
+									);
+									?>
+									<a href="https://themefic.com/tourfic/pricing" target="_blank">
+										<?php esc_html_e( 'Upgrade to our pro package today to take advantage of these fantastic options!', 'tourfic' ); ?>
+									</a>
+             
 									</div>
             					</div>
 			            	</div>
@@ -498,13 +563,13 @@ abstract class Enquiry {
 				<div class="tf-single-enquiry-right"> <!-- Enquiry Details Right - Start -->
 					<div class="tf-enquiry-single-log-details">
 						<div class="tf-singe-enquiry-log-details-heading">
-							<h2> <?php esc_html_e("Log Details #", 'tourfic') . esc_html_e($data["id"]); ?> </h2>
+							<h2> <?php esc_html_e("Log Details #", 'tourfic'); ?><?php echo esc_html($data["id"]); ?> </h2>
 							<div class="enquiry-details-status">
 								<svg xmlns="http://www.w3.org/2000/svg" width="6" height="6" viewBox="0 0 6 6" fill="none">
 									<circle cx="3" cy="3" r="3" fill="#27BE69"/>
 								</svg>
 
-								<div class="enquiry-status-value"> <?php !empty( $data["enquiry_status"] ) ? esc_html_e(ucfirst( $data["enquiry_status"] ), 'tourfic') : '' ?> </div>
+								<div class="enquiry-status-value"> <?php echo !empty( $data["enquiry_status"] ) ? esc_html(ucfirst( $data["enquiry_status"] )) : '' ?> </div>
 							</div>
 						</div>
 						<hr class="enqury-single-title-line">
@@ -540,7 +605,7 @@ abstract class Enquiry {
 											</clipPath>
 										</defs>
 									</svg>
-									<span class="tf-single-enquiry-log-details-single-value"> <?php echo esc_html__($server_data["browser_name"], 'tourfic'); ?> </span>
+									<span class="tf-single-enquiry-log-details-single-value"> <?php echo esc_html($server_data["browser_name"]); ?> </span>
 								</div>
 								<div class="tf-single-enquiry-log-details-single"> <!-- Single Log Details Device - Start -->
 									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -605,6 +670,7 @@ abstract class Enquiry {
 			} elseif ($minutes == 1) {
 				return '1 minute ago';
 			} else {
+				/* translators: %s number of minutes */
 				return sprintf(esc_html__('%s minutes ago', 'tourfic'), $minutes);
 			}
 		}
@@ -1053,11 +1119,19 @@ abstract class Enquiry {
 		$post_type = get_post_type( $post_id ) == "tf_tours" ? esc_html__("Tour", 'tourfic') : ( get_post_type( $post_id ) == "tf_hotel" ? esc_html__( "Hotel", 'tourfic') : esc_html__( "Apartment", 'tourfic') );
 		$subject = "";
 
-		if( $type == "new" ) {
-			$subject .= sprintf( esc_html__( "New Enquiry #%1s: Someone Asked Question about your %2s - %3s  ", 'tourfic' ), $last_id, $post_type, $post_name );
-		} elseif( $type == "reply" ) {
-			$subject .= sprintf( esc_html__( "New Response #%1s: A New Response is Added to Enquiry Details", 'tourfic' ), $last_id );
-		}
+		if ( $type === "new" ) {
+			/* translators: 1: enquiry ID, 2: post type, 3: post name */
+			$subject .= sprintf( esc_html__( 'New Enquiry #%1$s: Someone Asked Question about your %2$s - %3$s', 'tourfic' ),
+				$last_id,
+				$post_type,
+				$post_name
+			);
+		} elseif ( $type === "reply" ) {
+			/* translators: 1: enquiry ID */
+			$subject .= sprintf( esc_html__( 'New Response #%1$s: A New Response is Added to Enquiry Details', 'tourfic' ),
+				$last_id
+			);
+		}		
 
 		$from = "From: " . get_option( 'blogname' ) . " <" . get_option( 'admin_email' ) . ">\r\n";
 		$headers[] = 'Content-Type: text/html; charset=UTF-8';
