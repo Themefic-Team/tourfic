@@ -728,7 +728,7 @@ class Helper {
                         <div class="tf-field tf-flex">
                             <div class="acr-label tf-flex">
                                 <i class="fa-regular fa-user"></i>
-								<?php $post_type == "tf_hotel" ?  esc_html_e( $adults_name . 's', 'tourfic' ) : esc_html_e( 'Adults', 'tourfic' ); ?>
+								<?php echo $post_type == "tf_hotel" ? esc_html( $adults_name . 's' ) : esc_html__( 'Adults', 'tourfic' ); ?>
                             </div>
                             <div class="acr-select">
                                 <div class="acr-dec">-</div>
@@ -934,9 +934,9 @@ class Helper {
                 <div class="tf-booking-form-guest-and-room">
 					<?php if ( $post_type == 'tf_hotel' ) { ?>
                         <div class="tf-booking-form-guest-and-room-inner">
-                            <span class="tf-booking-form-title"><?php $post_type == "tf_hotel" ? esc_html_e( apply_filters("tf_hotel_guest_name_change", "guest") . "s & rooms", "tourfic" ) : esc_html_e( "Guests & rooms", "tourfic" ); ?></span>
+                            <span class="tf-booking-form-title"><?php echo $post_type == "tf_hotel" ? esc_html( apply_filters("tf_hotel_guest_name_change", "guest") . "s & rooms") : esc_html__( "Guests & rooms", "tourfic" ); ?></span>
                             <div class="tf-booking-guest-and-room-wrap tf-archive-guest-info">
-                                <span class="tf-guest"><?php echo esc_html( $adult + $children ) ?> </span> <?php esc_html_e( apply_filters("tf_hotel_guest_name_change", "guest"), "tourfic" ); ?> <span
+                                <span class="tf-guest"><?php echo esc_html( $adult + $children ) ?> </span> <?php echo esc_html( apply_filters("tf_hotel_guest_name_change", "guest")); ?> <span
                                         class="tf-room"><?php echo esc_html( $room ); ?></span> <?php esc_html_e( "Rooms", "tourfic" ); ?>
                             </div>
                             <div class="tf-arrow-icons">
@@ -948,13 +948,13 @@ class Helper {
 					<?php }
 					if ( $post_type == 'tf_tours' || $post_type == 'tf_apartment' ) { ?>
                         <div class="tf-booking-form-guest-and-room-inner">
-                            <span class="tf-booking-form-title"><?php $post_type == "tf_hotel" ? esc_html_e( $adults_name . 's', 'tourfic' ) : esc_html_e( "Guests", "tourfic" ); ?></span>
+                            <span class="tf-booking-form-title"><?php echo $post_type == "tf_hotel" ? esc_html( $adults_name . 's' ) : esc_html__( "Guests", "tourfic" ); ?></span>
                             <div class="tf-booking-guest-and-room-wrap">
 						<span class="tf-guest tf-booking-date">
 							0<?php echo esc_html( $adult + $children ) ?>
 						</span>
                                 <span class="tf-booking-month">
-							<span><?php $post_type == "tf_hotels" ? esc_html_e( $adults_name . 's', 'tourfic' ) : esc_html_e( "Guest", "tourfic" ); ?></span>
+							<span><?php echo $post_type == "tf_hotels" ? esc_html( $adults_name . 's' ) : esc_html__( "Guest", "tourfic" ); ?></span>
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
 							<path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
 							</svg>
@@ -966,7 +966,7 @@ class Helper {
                     <div class="tf_acrselection-wrap">
                         <div class="tf_acrselection-inner">
                             <div class="tf_acrselection">
-                                <div class="acr-label"><?php $post_type == "tf_hotel" ?  esc_html_e( $adults_name . 's', 'tourfic' ) : esc_html_e( 'Adults', 'tourfic' ); ?></div>
+                                <div class="acr-label"><?php echo $post_type == "tf_hotel" ?  esc_html( $adults_name . 's' ) : esc_html__( 'Adults', 'tourfic' ); ?></div>
                                 <div class="acr-select">
                                     <div class="acr-dec">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -1293,9 +1293,9 @@ class Helper {
                                 </svg>
                             </div>
                             <div class="tf-search-field-content">
-                                <span class="tf-search-field-label"><?php $post_type == "tf_hotel" ? esc_html_e( $adults_name . "s & rooms", "tourfic" ) : esc_html_e( "Guests & rooms", "tourfic" ); ?></span>
+                                <span class="tf-search-field-label"><?php echo $post_type == "tf_hotel" ? esc_html( $adults_name . "s & rooms" ) : esc_html__( "Guests & rooms", "tourfic" ); ?></span>
                                 <div class="tf-archive-guest-info">
-                                    <span class="tf-guest"><?php echo esc_html( (int) $adult + (int) $children ) ?> </span> <?php $post_type == "tf_hotel" ? esc_html_e( apply_filters("tf_hotel_guest_name_change", "guest") . 's', 'tourfic' ) : esc_html_e( "guest", "tourfic" ); ?>
+                                    <span class="tf-guest"><?php echo esc_html( (int) $adult + (int) $children ) ?> </span> <?php echo $post_type == "tf_hotel" ? esc_html( apply_filters("tf_hotel_guest_name_change", "guest") . 's' ) : esc_html__( "guest", "tourfic" ); ?>
                                     <span class="tf-room"><?php echo esc_html( $room ); ?></span> <?php esc_html_e( "Rooms", "tourfic" ); ?>
                                 </div>
                             </div>
@@ -1326,7 +1326,7 @@ class Helper {
                     <div class="tf_acrselection-wrap">
                         <div class="tf_acrselection-inner">
                             <div class="tf_acrselection">
-                                <div class="acr-label"><?php $post_type == "tf_hotel" ?  esc_html_e( $adults_name . 's', 'tourfic' ) : esc_html_e( 'Adults', 'tourfic' ); ?></div>
+                                <div class="acr-label"><?php echo $post_type == "tf_hotel" ?  esc_html( $adults_name . 's') : esc_html__( 'Adults', 'tourfic' ); ?></div>
                                 <div class="acr-select">
                                     <div class="acr-dec">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -1521,10 +1521,10 @@ class Helper {
                         <div class="tf_form-inner">
                             <i class="fas fa-user-friends"></i>
                             <select name="adults" id="adults" class="">
-                                <option <?php echo 1 == $adult ? 'selected' : null ?> value="1">1 <?php $post_type == "tf_hotel" ? esc_html__( $adults_name, "tourfic" ) : esc_html_e( 'Adult', 'tourfic' ); ?></option>
+                                <option <?php echo 1 == $adult ? 'selected' : null ?> value="1">1 <?php echo $post_type == "tf_hotel" ? esc_html( $adults_name ) : esc_html__( 'Adult', 'tourfic' ); ?></option>
 								<?php foreach ( range( 2, 8 ) as $value ) {
 									$selected = $value == $adult ? 'selected' : null;
-									echo '<option ' . esc_attr( $selected ) . ' value="' . esc_attr( $value ) . '">' . esc_html( $value ) . ' ' . esc_html__( $adults_name . 's', 'tourfic' ) . '</option>';
+									echo '<option ' . esc_attr( $selected ) . ' value="' . esc_attr( $value ) . '">' . esc_html( $value ) . ' ' . esc_html( $adults_name . 's') . '</option>';
 								} ?>
                             </select>
                         </div>
@@ -1780,7 +1780,7 @@ class Helper {
                         <div class="tf-field tf-flex">
                             <div class="acr-label tf-flex">
                                 <i class="fa-regular fa-user"></i>
-								<?php $post_type == "tf_hotel" ?  esc_html_e( $adults_name . 's', 'tourfic' ) : esc_html_e( 'Adults', 'tourfic' ); ?>
+								<?php echo $post_type == "tf_hotel" ?  esc_html( $adults_name . 's' ) : esc_html__( 'Adults', 'tourfic' ); ?>
                             </div>
                             <div class="acr-select">
                                 <div class="acr-dec">-</div>
@@ -1975,9 +1975,9 @@ class Helper {
                         <div class="tf-booking-form-guest-and-room">
                             <?php if ( $post_type == 'tf_hotel' ) { ?>
                                 <div class="tf-booking-form-guest-and-room-inner">
-                                    <span class="tf-booking-form-title"><?php $post_type == "tf_hotel" ? esc_html_e( apply_filters("tf_hotel_guest_name_change", "guest") . "s & rooms", "tourfic" ) : esc_html_e( "Guests & rooms", "tourfic" ); ?></span>
+                                    <span class="tf-booking-form-title"><?php echo $post_type == "tf_hotel" ? esc_html( apply_filters("tf_hotel_guest_name_change", "guest") . "s & rooms") : esc_html__( "Guests & rooms", "tourfic" ); ?></span>
                                     <div class="tf-booking-guest-and-room-wrap tf-archive-guest-info">
-                                        <span class="tf-guest"><?php esc_html_e( "01", "tourfic" ); ?></span> <?php $post_type == "tf_hotel" ? esc_html_e( apply_filters("tf_hotel_guest_name_change", "guest") . 's', 'tourfic' ) : esc_html_e( "guest", "tourfic" ); ?> <span
+                                        <span class="tf-guest"><?php esc_html_e( "01", "tourfic" ); ?></span> <?php echo $post_type == "tf_hotel" ? esc_html( apply_filters("tf_hotel_guest_name_change", "guest") . 's' ) : esc_html__( "guest", "tourfic" ); ?> <span
                                                 class="tf-room"><?php esc_html_e( "01", "tourfic" ); ?></span> <?php esc_html_e( "rooms", "tourfic" ); ?>
                                     </div>
                                     <div class="tf-arrow-icons">
@@ -1988,13 +1988,13 @@ class Helper {
                                 </div>
                             <?php } else { ?>
                                 <div class="tf-booking-form-guest-and-room-inner">
-                                    <span class="tf-booking-form-title"><?php $post_type == "tf_hotel" ? esc_html_e( $adults_name . 's', 'tourfic' ) : esc_html_e( "Guests", "tourfic" ); ?></span>
+                                    <span class="tf-booking-form-title"><?php echo $post_type == "tf_hotel" ? esc_html( $adults_name . 's') : esc_html__( "Guests", "tourfic" ); ?></span>
                                     <div class="tf-booking-guest-and-room-wrap">
                                 <span class="tf-guest tf-booking-date">
                                     <?php esc_html_e( "01", "tourfic" ); ?>
                                 </span>
                                         <span class="tf-booking-month">
-                                    <span><?php $post_type == "tf_hotel" ? esc_html_e( $adults_name . 's', 'tourfic' ) : esc_html_e( "guest", "tourfic" ); ?></span>
+                                    <span><?php echo $post_type == "tf_hotel" ? esc_html( $adults_name . 's') : esc_html__( "guest", "tourfic" ); ?></span>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
                                     <path d="M8 11.1641L4 7.16406H12L8 11.1641Z" fill="#595349"/>
                                     </svg>
@@ -2006,7 +2006,7 @@ class Helper {
                             <div class="tf_acrselection-wrap">
                                 <div class="tf_acrselection-inner">
                                     <div class="tf_acrselection">
-                                        <div class="acr-label"><?php $post_type == "tf_hotel" ?  esc_html_e( $adults_name . 's', 'tourfic' ) : esc_html_e( 'Adults', 'tourfic' ); ?></div>
+                                        <div class="acr-label"><?php echo $post_type == "tf_hotel" ?  esc_html( $adults_name . 's' ) : esc_html__( 'Adults', 'tourfic' ); ?></div>
                                         <div class="acr-select">
                                             <div class="acr-dec">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -2592,7 +2592,7 @@ class Helper {
                                 <div class="tf-search-field-content">
                                     <span class="tf-search-field-label"><?php esc_html_e( "Guests & rooms", "tourfic" ); ?></span>
                                     <div class="tf-archive-guest-info">
-                                        <span class="tf-guest"><?php esc_html_e( "01", "tourfic" ); ?></span> <?php esc_html_e( apply_filters("tf_hotel_guest_name_change", "guest"), "tourfic" ); ?>
+                                        <span class="tf-guest"><?php esc_html_e( "01", "tourfic" ); ?></span> <?php echo esc_html( apply_filters("tf_hotel_guest_name_change", "guest") ); ?>
                                         <span class="tf-room"><?php esc_html_e( "01", "tourfic" ); ?></span> <?php esc_html_e( "rooms", "tourfic" ); ?>
                                     </div>
                                 </div>
@@ -2609,7 +2609,7 @@ class Helper {
                                 <div class="tf-search-field-content">
                                     <span class="tf-search-field-label"><?php esc_html_e( "Persons", "tourfic" ); ?></span>
                                     <div class="tf-archive-guest-info">
-                                        <span class="tf-adult"><?php esc_html_e( "1", "tourfic" ); ?></span> <?php $post_type == "tf_hotels" ? esc_html_e( $adults_name, "tourfic" ) : esc_html_e( "adult", "tourfic" ) ; ?>
+                                        <span class="tf-adult"><?php esc_html_e( "1", "tourfic" ); ?></span> <?php echo $post_type == "tf_hotels" ? esc_html( $adults_name ) : esc_html__( "adult", "tourfic" ) ; ?>
                                         <?php if ( ($post_type == 'tf_tours' && empty( $disable_child_search )) ||
                                                 ( $post_type == 'tf_apartment' && empty( $disable_apartment_child_search ) )
                                         ) { ?>
@@ -2623,7 +2623,7 @@ class Helper {
                         <div class="tf_acrselection-wrap">
                             <div class="tf_acrselection-inner">
                                 <div class="tf_acrselection">
-                                    <div class="acr-label"><?php $post_type == "tf_hotel" ?  esc_html_e( $adults_name . 's', 'tourfic' ) : esc_html_e( 'Adults', 'tourfic' ); ?></div>
+                                    <div class="acr-label"><?php echo $post_type == "tf_hotel" ?  esc_html( $adults_name . 's' ) : esc_html__( 'Adults', 'tourfic' ); ?></div>
                                     <div class="acr-select">
                                         <div class="acr-dec">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -2816,9 +2816,9 @@ class Helper {
                             <i class="fas fa-user-friends"></i>
                             <select name="adults" id="adults" class="">
 								<?php
-								echo '<option value="1">1 ' .  esc_html__($adults_name , "tourfic" ) . '</option>';
+								echo '<option value="1">1 ' .  esc_html($adults_name) . '</option>';
 								foreach ( range( 2, 8 ) as $value ) {
-									echo '<option value="' . esc_attr( $value ) . '">' . esc_html( $value ) . ' ' . esc_html__( $adults_name . "s", "tourfic" ) . '</option>';
+									echo '<option value="' . esc_attr( $value ) . '">' . esc_html( $value ) . ' ' . esc_html( $adults_name . "s" ) . '</option>';
 								}
 								?>
                             </select>
@@ -3023,8 +3023,9 @@ class Helper {
         if ( empty( $wp_query ) ) {
             global $wp_query;
         }
-        $prev_text = empty( $prev_text ) ? __( '&laquo; Previous' ) : $prev_text;
-		$next_text = empty( $next_text ) ?__( 'Next &raquo;' ) : $next_text;
+        $prev_text = empty( $prev_text ) ? __( '&laquo; Previous', 'tourfic' ) : $prev_text;
+        $next_text = empty( $next_text ) ? __( 'Next &raquo;', 'tourfic' ) : $next_text;
+
         $max_num_pages = $wp_query->max_num_pages;
         $paged = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
         if ( $max_num_pages > 1 ) {

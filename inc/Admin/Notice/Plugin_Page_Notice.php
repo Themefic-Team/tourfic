@@ -64,12 +64,26 @@ class Plugin_Page_Notice extends \Tourfic\Core\TF_Notice {
         if(  isset( $data['update']) && in_array( $data["new_version"], $versions ) ) {
             return;
         }
-        if ( isset( $data['update'] ) && $data['update'] && $data["new_version"] == '2.16.2') :
-            printf( esc_html__('%1$s %2$s The wait is Over! 
-            Our %3$s Revamped Design Panel %4$s is now live in this version! We’ve introduced a %3$s new and improved design panel %4$s that enhances usability, organization, and customization options for a smoother experience. 
-            This update also includes major  %3$s option panel changes %4$s and %3$s core improvements %4$s.
-            %3$s %5$s ⚠️ Please make sure to take a full backup or any necessary precautions before updating the plugin to avoid any compatibility issues. %4$s %6$s %1$s  %7$s', 'tourfic'), 
-            '<br>', '<div style="padding-left: 26px; padding-right: 12px;">', '<b>', '</b>', '<span style="color: red; margin-bottom:">', '</div>', '</div>' ) ;
-        endif;
+        if ( isset( $data['update'] ) && $data['update'] && $data["new_version"] == '2.16.2' ) :
+
+            printf(
+                wp_kses_post(
+                    // translators: 1: line break <br>, 2: container div start, 3: opening bold tag <b>, 4: closing bold tag </b>, 5: warning span <span style="color:red;">, 6: container div end, 7: closing outer div end.
+                    sprintf( __('%1$s %2$s The wait is Over! 
+                        Our %3$s Revamped Design Panel %4$s is now live in this version! We’ve introduced a %3$s new and improved design panel %4$s that enhances usability, organization, and customization options for a smoother experience. 
+                        This update also includes major  %3$s option panel changes %4$s and %3$s core improvements %4$s.
+                        %3$s %5$s ⚠️ Please make sure to take a full backup or any necessary precautions before updating the plugin to avoid any compatibility issues. %4$s %6$s %1$s  %7$s', 'tourfic'),
+                        '<br>',
+                        '<div style="padding-left: 26px; padding-right: 12px;">',
+                        '<b>',
+                        '</b>',
+                        '<span style="color: red; margin-bottom:">',
+                        '</div>',
+                        '</div>'
+                    )
+                )
+            );
+        
+        endif;        
     }
 }

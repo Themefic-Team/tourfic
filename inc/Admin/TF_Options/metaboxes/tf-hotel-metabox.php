@@ -41,7 +41,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'id'    => 'hotel-general-heading',
 					'type'  => 'heading',
 					'label' => 'General Settings',
-					'subtitle' => esc_html__( 'These are some common settings specific to this ' . $hotel_name . '.', 'tourfic' ),
+					'subtitle' => esc_html( 'These are some common settings specific to this ' . $hotel_name . '.' ),
 				),
 				array(
 					'id'      => 'hotel-general-docs',
@@ -52,8 +52,8 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 				array(
 					'id'        => 'featured',
 					'type'      => 'switch',
-					'label'     => esc_html__( 'Featured ' . $hotel_name, 'tourfic' ),
-					'subtitle' => esc_html__( 'Enable this option to feature this '. strtolower($hotel_name) .' at the top of search results.', 'tourfic' ),
+					'label'     => esc_html( 'Featured ' . $hotel_name),
+					'subtitle' => esc_html( 'Enable this option to feature this '. strtolower($hotel_name) .' at the top of search results.' ),
 					'label_on'  => esc_html__( 'Yes', 'tourfic' ),
 					'label_off' => esc_html__( 'No', 'tourfic' ),
 					'default'   => false,
@@ -61,16 +61,16 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 				array(
 					'id'          => 'featured_text',
 					'type'        => 'text',
-					'label'       => esc_html__( $hotel_name . ' Featured Text', 'tourfic' ),
-					'subtitle'    => esc_html__( 'Enter Featured ' .$hotel_name . ' Text', 'tourfic' ),
-					'placeholder' => esc_html__( 'Enter Featured ' . $hotel_name . ' Text', 'tourfic' ),
+					'label'       => esc_html( $hotel_name . ' Featured Text' ),
+					'subtitle'    => esc_html( 'Enter Featured ' .$hotel_name . ' Text' ),
+					'placeholder' => esc_html( 'Enter Featured ' . $hotel_name . ' Text' ),
 					'default' => esc_html__( 'Hot Deal', 'tourfic' ),
 					'dependency'  => array( 'featured', '==', true ),
 				),
 				array(
 					'id'       => 'tf_single_hotel_layout_opt',
 					'type'     => 'select',
-					'label'    => esc_html__( 'Single ' . $hotel_name . ' Template Settings', 'tourfic' ),
+					'label'    => esc_html( 'Single ' . $hotel_name . ' Template Settings' ),
 					'subtitle' => esc_html__( 'You can keep the Global Template settings or choose a different layout for this hotel.', 'tourfic' ),
 					'options'  => [
 						'global' => esc_html__( 'Global Settings', 'tourfic' ),
@@ -81,7 +81,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 				array(
 					'id'       => 'tf_single_hotel_template',
 					'type'     => 'imageselect',
-					'label'    => esc_html__( 'Single ' . $hotel_name . ' Page Layout', 'tourfic' ),
+					'label'    => esc_html( 'Single ' . $hotel_name . ' Page Layout' ),
 					'options'   	=> array(
 						'design-1' => array(
 							'title' => esc_html__('Design 1', 'tourfic'),
