@@ -1184,7 +1184,7 @@ class TF_Handle_Emails {
                     $meta                    = get_post_meta( $vendor_confirmation_template_id, 'tf_email_templates_metabox', true );
                     $brand_logo              = ! empty( $meta['brand_logo'] ) ? $meta['brand_logo'] : '';
                     $sale_notification_email = ! empty( $meta['sale_notification_email'] ) ? $meta['sale_notification_email'] : '';
-                    $email_subject           = ! empty( $meta['email_subject'] ) ? $meta['email_subject'] :  __( 'Your order confirmed', 'tourfic-pro' );;
+                    $email_subject           = ! empty( $meta['email_subject'] ) ? $meta['email_subject'] :  __( 'Your order confirmed', 'tourfic' );;
                     $email_from_name         = ! empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
                     $email_from_email        = ! empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
                     $order_email_heading     = ! empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';
@@ -1315,7 +1315,7 @@ class TF_Handle_Emails {
                         $meta                    = get_post_meta( $vendor_confirmation_template_id, 'tf_email_templates_metabox', true );
                         $brand_logo              = ! empty( $meta['brand_logo'] ) ? $meta['brand_logo'] : '';
                         $sale_notification_email = ! empty( $meta['sale_notification_email'] ) ? $meta['sale_notification_email'] : '';
-                        $email_subject           = ! empty( $meta['email_subject'] ) ? $meta['email_subject'] :  __( 'Your order confirmed', 'tourfic-pro' );;
+                        $email_subject           = ! empty( $meta['email_subject'] ) ? $meta['email_subject'] :  __( 'Your order confirmed', 'tourfic' );;
                         $email_from_name         = ! empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
                         $email_from_email        = ! empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
                         $order_email_heading     = ! empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';
@@ -1359,7 +1359,7 @@ class TF_Handle_Emails {
                         $meta                    = get_post_meta( $customer_confirmation_template_id, 'tf_email_templates_metabox', true );
                         $brand_logo              = ! empty( $meta['brand_logo'] ) ? $meta['brand_logo'] : '';
                         $sale_notification_email = ! empty( $meta['sale_notification_email'] ) ? $meta['sale_notification_email'] : '';
-                        $email_subject           = ! empty( $meta['email_subject'] ) ? $meta['email_subject'] : __( 'Your order received', 'tourfic-pro' );
+                        $email_subject           = ! empty( $meta['email_subject'] ) ? $meta['email_subject'] : __( 'Your order received', 'tourfic' );
                         $email_from_name         = ! empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
                         $email_from_email        = ! empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
                         $order_email_heading     = ! empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';

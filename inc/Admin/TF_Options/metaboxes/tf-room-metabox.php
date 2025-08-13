@@ -25,23 +25,32 @@ TF_Metabox::metabox( 'tf_room_opt', array(
 					'subtitle' => __( 'These are some common settings specific to this Room', 'tourfic' ),
 				),
 				array(
-					'id'      => 'notice',
-					'type'    => 'notice',
-					'notice'  => 'info',
-					'content' => __( 'This section includes '. $hotel_name . ' Room Management settings.', 'tourfic' ). ' <a href="https://themefic.com/docs/tourfic/how-it-works/room-management/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
-				),
-				array(
-					'id'          => 'tf_hotel',
-					'type'        => 'select2',
-					'placeholder' => __( 'Select a Hotel', 'tourfic' ),
-					'label'       => __( 'Select ' . $hotel_name . ' (Required)', 'tourfic' ),
-					'subtitle'    => __( 'Select the '. strtolower($hotel_name) . ' where this room will be added', 'tourfic' ),
-					'options'     => 'posts',
-					'query_args'  => array(
-						'post_type'      => 'tf_hotel',
-						'posts_per_page' => - 1,
-					)
-				),
+                    'id'      => 'notice',
+                    'type'    => 'notice',
+                    'notice'  => 'info',
+                    /* translators: %s is the hotel name */
+                    'content' => wp_kses_post(sprintf(__( 'This section includes %s Room Management settings.', 'tourfic' ),
+                            $hotel_name
+                        )
+                    ) . ' <a href="https://themefic.com/docs/tourfic/how-it-works/room-management/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' 
+                      . __( 'Check our Documentation', 'tourfic' ) 
+                      . '</strong></a>',
+                ),
+                
+                array(
+                    'id'          => 'tf_hotel',
+                    'type'        => 'select2',
+                    'placeholder' => __( 'Select a Hotel', 'tourfic' ),
+                    /* translators: %s is the hotel name */
+                    'label'       => sprintf( __( 'Select %s (Required)', 'tourfic' ), $hotel_name ),
+                    /* translators: %s is the lowercased hotel name */
+                    'subtitle'    => sprintf( __( 'Select the %s where this room will be added', 'tourfic' ), strtolower( $hotel_name ) ),
+                    'options'     => 'posts',
+                    'query_args'  => array(
+                        'post_type'      => 'tf_hotel',
+                        'posts_per_page' => -1,
+                    ),
+                ),                
 				array(
 					'id'          => 'unique_id',
 					'class'       => 'unique-id',
@@ -104,14 +113,16 @@ TF_Metabox::metabox( 'tf_room_opt', array(
                 array(
                     'id'          => 'adult',
                     'type'        => 'number',
-                    'label'       => __( 'Number of ' . $adults_name .'s', 'tourfic' ),
-                    'subtitle'    => __( 'Max number of '. strtolower($adults_name) .'s allowed in the room.', 'tourfic' ),
+                    /* translators: %s is the adults label/name */
+                    'label'       => sprintf( __( 'Number of %s', 'tourfic' ), $adults_name ),
+                    /* translators: %s is the lowercased adults label/name */
+                    'subtitle'    => sprintf( __( 'Max number of %s allowed in the room.', 'tourfic' ), strtolower( $adults_name ) ),
                     'attributes'  => array(
                         'min' => '0',
                     ),
-                    'field_width' => 33.33,
-                    'is_search_able' => true
-                ),
+                    'field_width'    => 33.33,
+                    'is_search_able' => true,
+                ),                
                 array(
                     'id'          => 'child',
                     'type'        => 'number',
@@ -242,11 +253,12 @@ TF_Metabox::metabox( 'tf_room_opt', array(
                 array(
                     'id'          => '',
                     'type'        => 'text',
-                    'label'       => __( 'Price per ' . $adults_name, 'tourfic' ),
+                    /* translators: %s is the adults label/name */
+                    'label'       => sprintf( __( 'Price per %s', 'tourfic' ), $adults_name ),
                     'is_pro'      => true,
                     'dependency'  => array( 'pricing-by', '==', '2' ),
                     'field_width' => 50,
-                ),
+                ),                
 
                 array(
                     'id'          => '',

@@ -137,7 +137,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'id'    => 'hotel-location-heading',
 					'type'  => 'heading',
 					'label' => 'Location Settings',
-					'subtitle' => esc_html__( 'The location of a ' . strtolower($hotel_name) . ' is a crucial element for every booking. Set your ' . strtolower($hotel_name) . ' locations in this section.', 'tourfic' ),
+					'subtitle' => esc_html( 'The location of a ' . strtolower($hotel_name) . ' is a crucial element for every booking. Set your ' . strtolower($hotel_name) . ' locations in this section.' ),
 				),
 				array(
 					'id'      => 'hotel-location-docs',
@@ -150,8 +150,16 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'class'    => 'gmaps',
 					'type'     => 'map',
 					'label'    => esc_html__( 'Dynamic Location Search', 'tourfic' ),
-					/* translators: %s is the link to the Google Maps API Key settings */
-					'subtitle' => sprintf( wp_kses_post(__( 'Enter the specific address you wish to use for the ' . strtolower($hotel_name) . ' and select the correct option from the suggested addresses. This will be used to hyperlink address and display the address on the front-end map. <strong>Google Maps is also available for location. Simply set up your <a href="%s" target="_blank">Google Maps API Key</a></strong>', 'tourfic' )), esc_url( admin_url('admin.php?page=tf_settings#tab=map_settings') ) ),
+					// translators: %s is the link to the Google Maps API Key settings page.
+					'subtitle' => wp_kses_post(sprintf(__( 
+								'Enter the specific address you wish to use for the %1$s and select the correct option from the suggested addresses. This will be used to hyperlink the address and display it on the front-end map. <strong>Google Maps is also available for location. Simply set up your <a href="%2$s" target="_blank">Google Maps API Key</a></strong>', 
+								'tourfic' 
+							),
+							strtolower( $hotel_name ),
+							esc_url( admin_url( 'admin.php?page=tf_settings#tab=map_settings' ) )
+						)
+					),
+
 					'height'   => '250px',
 					'settings' => array(
 						'scrollWheelZoom' => true,
@@ -184,7 +192,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 				array(
 					'id'           => 'nearby-places',
 					'type'         => 'repeater',
-					'label'        => esc_html__( 'Insert / Create your ' . strtolower($hotel_name) . ' Place', 'tourfic' ),
+					'label'        => esc_html( 'Insert / Create your ' . strtolower($hotel_name) . ' Place' ),
 					'button_title' => esc_html__( 'Add New Place', 'tourfic' ),
 					'class'        => 'tf-field-class',
 					'field_title'  => 'place-title',
@@ -200,7 +208,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'id'          => 'place-dist',
 							'type'        => 'text',
 							'label'       => esc_html__( 'Place Distance and Unit', 'tourfic' ),
-							'subtitle'    => esc_html__( 'Distance of the place from the ' . $hotel_name . ' with Unit', 'tourfic' ),
+							'subtitle'    => esc_html( 'Distance of the place from the ' . $hotel_name . ' with Unit' ),
 							'field_width' => 50,
 							'attributes'  => array(
 								'min' => '0',
@@ -219,7 +227,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 				array(
 					'id'      => 'facilities-heading',
 					'type'    => 'heading',
-					'content' => esc_html__( $hotel_name . ' Facilities', 'tourfic' ),
+					'content' => esc_html( $hotel_name . ' Facilities' ),
 					'class'   => 'tf-field-class',
 				),
 				array(
@@ -235,7 +243,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 				array(
 					'id'           => 'hotel-facilities',
 					'type'         => 'repeater',
-					'label'        => esc_html__( 'Insert / Create ' . $hotel_name . ' Facilities', 'tourfic' ),
+					'label'        => esc_html( 'Insert / Create ' . $hotel_name . ' Facilities' ),
 					'button_title' => esc_html__( 'Add New', 'tourfic' ),
 					'class'        => 'tf-field-class',
 					'fields'       => array(
@@ -280,7 +288,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'id'    => 'hotel-image-heading',
 					'type'  => 'heading',
 					'label' => 'Upload Images & Videos',
-					'subtitle' => __( 'Images and videos are effective methods for showcasing your ' . strtolower($hotel_name) . ' to guests and have the potential to increase bookings.', 'tourfic' ),
+					'subtitle' => esc_html( 'Images and videos are effective methods for showcasing your ' . strtolower($hotel_name) . ' to guests and have the potential to increase bookings.' ),
 				),
 				array(
 					'id'      => 'hotel-image-docs',
@@ -291,29 +299,42 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 				array(
 					'id'       => 'gallery',
 					'type'     => 'gallery',
-					'label'    => __( $hotel_name . ' Gallery', 'tourfic' ),
-					'subtitle' => __( 'Add multiple images to craft a captivating gallery for your ' . strtolower($hotel_name) . ', giving potential customers a visual tour.', 'tourfic' ),
+					'label'    => esc_html( $hotel_name . ' Gallery'),
+					'subtitle' => esc_html( 'Add multiple images to craft a captivating gallery for your ' . strtolower($hotel_name) . ', giving potential customers a visual tour.' ),
 				),
 				array(
 					'id'          => 'video',
 					'type'        => 'text',
-					'label'       => __( $hotel_name . ' Video', 'tourfic' ),
-					'subtitle'    => __( 'If you have an enticing video of your ' . $hotel_name . ', simply upload it to YouTube or Vimeo and insert the URL here to showcase it to your guests.', 'tourfic' ),
+					'label'       => esc_html( $hotel_name . ' Video'),
+					'subtitle'    => esc_html( 'If you have an enticing video of your ' . $hotel_name . ', simply upload it to YouTube or Vimeo and insert the URL here to showcase it to your guests.' ),
 					'placeholder' => __( 'Input full URL here (no embed code)', 'tourfic' ),
 				),
 			),
 		),
 		// Hotel Details
 		'hotel_service'    => array(
-			'title'  => __( $hotel_name . ' Services', 'tourfic' ),
+			// translators: %s is the hotel name.
+			'title' => sprintf(__( '%s Services', 'tourfic' ),
+				$hotel_name
+			),
+
 			'icon'   => 'fa-solid fa-van-shuttle',
 			'fields' => array(
 				array(
 					'id'    => 'hotel-service-heading',
 					'type'  => 'heading',
-					'label' => 'Additional ' . $hotel_name . ' Services',
-					'subtitle' => __( 'This section includes additional services which your ' . strtolower($hotel_name) . ' may offer. You may offer these services for free, or opt to charge your guests for them.', 'tourfic' ),
-				),
+					// translators: %s is the hotel name.
+					'label' => sprintf(__( 'Additional %s Services', 'tourfic' ),
+						$hotel_name
+					),
+					// translators: %s is the hotel name in lowercase.
+					'subtitle' => sprintf(__( 
+							'This section includes additional services which your %s may offer. You may offer these services for free, or opt to charge your guests for them.', 
+							'tourfic' 
+						),
+						strtolower( $hotel_name )
+					),
+				),				
 				array(
 					'id'      => 'hotel-service-docs',
 					'type'    => 'notice',
@@ -321,13 +342,23 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'content' => __( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/how-it-works/hotel-services/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
 				),
 				array(
-					'id'    => 'tf-pro-notice',
-					'type'  => 'notice',
-					'class' => 'tf-pro-notice',
+					'id'     => 'tf-pro-notice',
+					'type'   => 'notice',
+					'class'  => 'tf-pro-notice',
 					'notice' => 'info',
-					'icon' => 'ri-information-fill',
-					'content' => wp_kses_post(__( 'Do you need to add ' . strtolower($hotel_name) . ' airport services such as pickup, dropoff, or both? Our Pro plan includes the <b>' . strtolower($hotel_name) . ' service</b> feature, allowing you to easily add these services with pricing options <b>per person</b>, <b>fixed</b>, or <b>complimentary</b>. Enhance your guest experience by integrating these convenient services seamlessly into your offerings. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of this fantastic option!</a>', 'tourfic') ),
+					'icon'   => 'ri-information-fill',
+				
+					/* translators: 1: lowercased hotel name, 2: lowercased hotel name again. */
+					'content' => wp_kses_post( sprintf(__( 
+								'Do you need to add %1$s airport services such as pickup, dropoff, or both? Our Pro plan includes the <b>%2$s service</b> feature, allowing you to easily add these services with pricing options <b>per person</b>, <b>fixed</b>, or <b>complimentary</b>. Enhance your guest experience by integrating these convenient services seamlessly into your offerings. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of this fantastic option!</a>', 
+								'tourfic' 
+							),
+							strtolower( $hotel_name ),
+							strtolower( $hotel_name )
+						)
+					),
 				),
+				
 			),
 		),
 		// Room Details
@@ -338,15 +369,21 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 				array(
 					'id'    => 'hotel-room-heading',
 					'type'  => 'heading',
-					'label' => 'Create & Manage Your ' . $hotel_name . ' Rooms',
-					'subtitle' => __( 'In this section, you are provided with the tools to create and manage your ' . strtolower($hotel_name) . ' room offerings. ', 'tourfic' ),
+					/* translators: %s is the hotel name. */
+					'label' => sprintf( __( 'Create & Manage Your %s Rooms', 'tourfic' ), $hotel_name ),
+					/* translators: %s is the lowercased hotel name. */
+					'subtitle' => sprintf( __( 'In this section, you are provided with the tools to create and manage your %s room offerings.', 'tourfic' ), strtolower( $hotel_name ) ),
 				),
 				array(
-					'id'      => 'notice',
-					'type'    => 'notice',
-					'notice'  => 'info',
-					'content' => __( 'This section includes ' . $hotel_name . ' Room Management settings.', 'tourfic' ). ' <a href="https://themefic.com/docs/tourfic/how-it-works/room-management/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
+					'id'     => 'notice',
+					'type'   => 'notice',
+					'notice' => 'info',
+					/* translators: %s is the hotel name. */
+					'content' => sprintf( __( 'This section includes %s Room Management settings.', 'tourfic' ), 
+						$hotel_name 
+					) . ' <a href="https://themefic.com/docs/tourfic/how-it-works/room-management/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
 				),
+				
 				array(
 					'id'    => 'room-section-title',
 					'type'  => 'text',
@@ -356,27 +393,34 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 				array(
 					'id'          => 'tf_rooms',
 					'type'        => 'select2',
-					'label'        => __( 'Manage your ' . strtolower($hotel_name) . ' rooms', 'tourfic' ),
-					'subtitle'     => esc_html__('Select an existing '. strtolower($hotel_name) . ' room, if available. Note: Rooms already assigned to a ' . strtolower($hotel_name) . ' cannot be selected.', 'tourfic'),
+					/* translators: %s is the lowercased hotel name. */
+					'label'       => sprintf( __( 'Manage your %s rooms', 'tourfic' ), strtolower( $hotel_name ) ),
+					/* translators: %1$s is the lowercased hotel name and %2$s is return hotel name. */
+					'subtitle'    => sprintf( esc_html__( 'Select an existing %1$s room, if available. Note: Rooms already assigned to a %2$s cannot be selected.', 'tourfic' ), strtolower( $hotel_name ), strtolower( $hotel_name ) ),
 					'placeholder' => __( 'Select Rooms', 'tourfic' ),
 					'options'     => 'posts',
-					'multiple'   => true,
+					'multiple'    => true,
 					'query_args'  => array(
 						'post_type'      => 'tf_room',
-						'posts_per_page' => - 1,
+						'posts_per_page' => -1,
 					),
-					'inline_add_new' => true,
-					'inline_delete' => true,
-					'add_button_text' => esc_html__('Add New Room', 'tourfic')
+					'inline_add_new'  => true,
+					'inline_delete'   => true,
+					'add_button_text' => esc_html__( 'Add New Room', 'tourfic' ),
 				),
+				
 				array(
-					'id'    => 'tf-pro-notice',
-					'type'  => 'notice',
-					'class' => 'tf-pro-notice',
+					'id'     => 'tf-pro-notice',
+					'type'   => 'notice',
+					'class'  => 'tf-pro-notice',
 					'notice' => 'info',
-					'icon' => 'ri-information-fill',
-					'content' => wp_kses_post(__( 'We\'re offering some extra features in every rooms like <b>child age limit</b>, <b>' . strtolower($hotel_name) . ' room custom availability</b>, <b>deposit</b>, <b>ical sync</b> and <b>per person basis pricing</b> in our pro plan. <a href="https://tourfic.com/" target="_blank"> Upgrade to our pro package today to take advantage of these fantastic options!</a>', 'tourfic' )),
-				),
+					'icon'   => 'ri-information-fill',
+					/* translators: %s is the lowercased hotel name. */
+					'content' => wp_kses_post(sprintf(__( 'We\'re offering some extra features in every room like <b>child age limit</b>, <b>%s room custom availability</b>, <b>deposit</b>, <b>ical sync</b> and <b>per person basis pricing</b> in our pro plan. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of these fantastic options!</a>', 'tourfic' ),
+							strtolower( $hotel_name )
+						)
+					),
+				),				
 			),
 		),
 		// FAQ Details
@@ -407,7 +451,11 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'id'           => 'faq',
 					'type'         => 'repeater',
 					'label'        => __( 'Add Your Questions', 'tourfic' ),
-					'subtitle'    => __( 'Click the button below to add Frequently Asked Questions (FAQs) for your ' . strtolower($hotel_name) . '. Feel free to add as many as needed. Additionally, you can duplicate or rearrange each FAQ using the icons on the right side.', 'tourfic' ),
+					/* translators: %s is the lowercased hotel name. */
+					'subtitle' => sprintf(__( 'Click the button below to add Frequently Asked Questions (FAQs) for your %s. Feel free to add as many as needed. Additionally, you can duplicate or rearrange each FAQ using the icons on the right side.', 'tourfic' ),
+						strtolower( $hotel_name )
+					),
+
 					'button_title' => __( 'Add New FAQ', 'tourfic' ),
 					'field_title'  => 'title',
 					'fields'       => array(
@@ -436,13 +484,15 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 				array(
 					'id'      => 'enquiry-section',
 					'type'    => 'heading',
-					'content' => __( $hotel_name . ' Enquiry Form', 'tourfic' ),
+					/* translators: %s is the hotel name */
+					'content' => sprintf( __( '%s Enquiry Form', 'tourfic' ), $hotel_name ),
 					'class'   => 'tf-field-class',
 				),
 				array(
 					'id'        => 'h-enquiry-section',
 					'type'      => 'switch',
-					'label'     => __( 'Enable '. $hotel_name . ' Enquiry Form Option', 'tourfic' ),
+					/* translators: %s is the hotel name */
+					'label'     => sprintf( __( 'Enable %s Enquiry Form Option', 'tourfic' ), $hotel_name ),
 					'label_on'  => __( 'Yes', 'tourfic' ),
 					'label_off' => __( 'No', 'tourfic' ),
 					'default'   => true
@@ -450,11 +500,12 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 				array(
 					'id'       => 'h-enquiry-option-icon',
 					'type'     => 'icon',
-					'label'    => __( $hotel_name . ' Enquiry icon', 'tourfic' ),
+					/* translators: %s is the hotel name */
+					'label'    => sprintf( __( '%s Enquiry icon', 'tourfic' ), $hotel_name ),
 					'subtitle' => __( 'Choose an Icon', 'tourfic' ),
 					'default'  => 'fa fa-question-circle-o',
 					'dependency' => array( 'h-enquiry-section', '==', '1' ),
-				),
+				),				
 				array(
 					'id'         => 'h-enquiry-option-title',
 					'type'       => 'text',
@@ -485,16 +536,20 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 			'icon'   => 'fa fa-list',
 			'fields' => array(
 				array(
-					'id'      => 'tf-hotel-tags-heading',
-					'type'    => 'heading',
-					'label' => __( $hotel_name . ' tags', 'tourfic' ),
-					'class'   => 'tf-field-class',
+					'id'    => 'tf-hotel-tags-heading',
+					'type'  => 'heading',
+					/* translators: %s is the hotel name */
+					'label' => sprintf( __( '%s tags', 'tourfic' ), $hotel_name ),
+					'class' => 'tf-field-class',
 				),
 				array(
 					'id'           => 'tf-hotel-tags',
 					'type'         => 'repeater',
 					'label'        => __( 'Promotional Tags', 'tourfic' ),
-					'subtitle' => __('Add some keywords that highlight your '. strtolower($hotel_name) . '\'s Unique Selling Point (USP). This tag will be displayed on both the Archive Page and the Search Results Page.', 'tourfic'),
+					/* translators: %s is the hotel name */
+					'subtitle'     => sprintf(__( 'Add some keywords that highlight your %s\'s Unique Selling Point (USP). This tag will be displayed on both the Archive Page and the Search Results Page.', 'tourfic' ),
+						strtolower( $hotel_name )
+					),
 					'button_title' => __( 'Add / Insert New Tag', 'tourfic' ),
 					'field_title'  => 'hotel-tag-title',
 					'fields'       => array(
@@ -552,9 +607,11 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 				array(
 					'id'    => 'tc',
 					'type'  => 'editor',
-					'label' => __( $hotel_name . ' Terms & Conditions', 'tourfic' ),
-					'subtitle'    => __( "Enter your "  . $hotel_name . "'s terms and conditions in the text editor provided below.", 'tourfic' ),
-				),
+					/* translators: %s is the hotel name */
+					'label' => sprintf( __( '%s Terms & Conditions', 'tourfic' ), $hotel_name ),
+					/* translators: %s is the hotel name */
+					'subtitle' => sprintf( __( 'Enter your %s\'s terms and conditions in the text editor provided below.', 'tourfic' ), $hotel_name ),
+				),				
 			),
 		),
 		// Settings
@@ -565,9 +622,12 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 				array(
 					'id'    => 'hotel-settings-heading',
 					'type'  => 'heading',
-					'label' => 'Other Settings',
-					'subtitle' => __( 'These are some additional settings specific to this '. $hotel_name . '. Note that some of these settings may override the global settings. ', 'tourfic' ),
-				),
+					'label' => __( 'Other Settings', 'tourfic' ),
+					/* translators: %s is the hotel name */
+					'subtitle' => sprintf(__( 'These are some additional settings specific to this %s. Note that some of these settings may override the global settings.', 'tourfic' ),
+						$hotel_name
+					),
+				),				
 				array(
 					'id'      => 'hotel-settings-docs',
 					'type'    => 'notice',
