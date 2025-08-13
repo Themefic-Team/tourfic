@@ -898,7 +898,7 @@ class Tour {
                             'd.m.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/,
                             'm.d.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/
                         };
-                        const dateRegex = regexMap['<?php echo $tour_date_format_for_users; ?>'];
+                        const dateRegex = regexMap['<?php echo esc_attr($tour_date_format_for_users); ?>'];
 
                         // flatpickr first day of Week
 						<?php Helper::tf_flatpickr_locale( 'root' ); ?>

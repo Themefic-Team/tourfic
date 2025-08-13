@@ -160,7 +160,7 @@ class Car_Rental
                                                         for ($time = $start_time; $time <= $end_time; $time += $time_interval * 60) {
                                                             $time_label = date("g:i A", $time);
                                                             $selected = ($selected_pickup_time === $time_label) ? 'selected' : '';
-                                                            echo '<li value="' . esc_attr($time_label) . '" ' . $selected . '>' . esc_html($time_label) . '</li>';
+                                                            echo '<li value="' . esc_attr($time_label) . '" ' . esc_attr($selected) . '>' . esc_html($time_label) . '</li>';
                                                         }
                                                     ?>
                                                 </ul>
@@ -187,7 +187,7 @@ class Car_Rental
                                                     </div>
                                                 </span>
                                             </div>
-                                            <input type="hidden" name="dropoff-date" class="tf_search_dropoff_date" placeholder="<?php esc_html_e('Enter Drop-off date', 'tourfic'); ?>" value="<?php echo date('Y/m/d', strtotime('+2 day')); ?>">
+                                            <input type="hidden" name="dropoff-date" class="tf_search_dropoff_date" placeholder="<?php esc_html_e('Enter Drop-off date', 'tourfic'); ?>" value="<?php echo esc_attr( date('Y/m/d', strtotime('+2 day')) ); ?>">
                                         </div>
 
                                         <div class="tf_checkin_dates info-select">
@@ -208,7 +208,7 @@ class Car_Rental
                                                         for ($time = $start_time; $time <= $end_time; $time += $time_interval * 60) {
                                                             $time_label = date("g:i A", $time);
                                                             $selected = ($selected_dropoff_time === $time_label) ? 'selected' : '';
-                                                            echo '<li value="' . esc_attr($time_label) . '" ' . $selected . '>' . esc_html($time_label) . '</li>';
+                                                            echo '<li value="' . esc_attr($time_label) . '" ' . esc_attr($selected) . '>' . esc_html($time_label) . '</li>';
                                                         }
                                                     ?>
                                                 </ul>
@@ -378,7 +378,7 @@ class Car_Rental
                                                 for ($time = $start_time; $time <= $end_time; $time += $time_interval * 60) {
                                                     $time_label = date("g:i A", $time);
                                                     $selected = ($selected_pickup_time === $time_label) ? 'selected' : '';
-                                                    echo '<li value="' . esc_attr($time_label) . '" ' . $selected . '>' . esc_html($time_label) . '</li>';
+                                                    echo '<li value="' . esc_attr($time_label) . '" ' . esc_attr($selected) . '>' . esc_html($time_label) . '</li>';
                                                 }
                                             ?>
                                         </ul>
@@ -436,7 +436,7 @@ class Car_Rental
                                                 for ($time = $start_time; $time <= $end_time; $time += $time_interval * 60) {
                                                     $time_label = date("g:i A", $time);
                                                     $selected = ($selected_dropoff_time === $time_label) ? 'selected' : '';
-                                                    echo '<li value="' . esc_attr($time_label) . '" ' . $selected . '>' . esc_html($time_label) . '</li>';
+                                                    echo '<li value="' . esc_attr($time_label) . '" ' . esc_attr($selected) . '>' . esc_html($time_label) . '</li>';
                                                 }
                                             ?>
                                         </ul>
@@ -612,7 +612,7 @@ class Car_Rental
                                                 for ($time = $start_time; $time <= $end_time; $time += $time_interval * 60) {
                                                     $time_label = date("g:i A", $time);
                                                     $selected = ($selected_pickup_time === $time_label) ? 'selected' : '';
-                                                    echo '<li value="' . esc_attr($time_label) . '" ' . $selected . '>' . esc_html($time_label) . '</li>';
+                                                    echo '<li value="' . esc_attr($time_label) . '" ' . esc_attr($selected) . '>' . esc_html($time_label) . '</li>';
                                                 }
                                             ?>
                                         </ul>
@@ -669,7 +669,7 @@ class Car_Rental
                                                 for ($time = $start_time; $time <= $end_time; $time += $time_interval * 60) {
                                                     $time_label = date("g:i A", $time);
                                                     $selected = ($selected_dropoff_time === $time_label) ? 'selected' : '';
-                                                    echo '<li value="' . esc_attr($time_label) . '" ' . $selected . '>' . esc_html($time_label) . '</li>';
+                                                    echo '<li value="' . esc_attr($time_label) . '" ' . esc_attr($selected) . '>' . esc_html($time_label) . '</li>';
                                                 }
                                             ?>
                                         </ul>
@@ -815,7 +815,7 @@ class Car_Rental
                                         <div class="tf-search-form-field-icon">
                                             <i class="fa-solid fa-calendar-days"></i>
                                         </div>
-                                        <input type="text" name="pickup-date" class="tf_pickup_date" placeholder="<?php esc_html_e('Enter Pickup date', 'tourfic'); ?>" value="<?php echo date('Y/m/d', strtotime('+1 day')); ?>">
+                                        <input type="text" name="pickup-date" class="tf_pickup_date" placeholder="<?php esc_html_e('Enter Pickup date', 'tourfic'); ?>" value="<?php echo esc_attr(date('Y/m/d', strtotime('+1 day'))); ?>">
                                     </div>
                                 </label>
                             </div>
@@ -848,7 +848,7 @@ class Car_Rental
                                                     for ($time = $start_time; $time <= $end_time; $time += $time_interval * 60) {
                                                         $time_label = date("g:i A", $time);
                                                         $selected = ($selected_pickup_time === $time_label) ? 'selected' : '';
-                                                        echo '<li value="' . esc_attr($time_label) . '" ' . $selected . '>' . esc_html($time_label) . '</li>';
+                                                        echo '<li value="' . esc_attr($time_label) . '" ' . esc_attr($selected) . '>' . esc_html($time_label) . '</li>';
                                                     }
                                                 ?>
                                             </ul>
@@ -868,7 +868,7 @@ class Car_Rental
                                         <div class="tf-search-form-field-icon">
                                             <i class="fa-solid fa-calendar-days"></i>
                                         </div>
-                                        <input type="text" name="dropoff-date" class="tf_dropoff_date" placeholder="<?php esc_html_e('Enter Dropoff date', 'tourfic'); ?>" value="<?php echo date('Y/m/d', strtotime('+2 day')); ?>">
+                                        <input type="text" name="dropoff-date" class="tf_dropoff_date" placeholder="<?php esc_html_e('Enter Dropoff date', 'tourfic'); ?>" value="<?php echo esc_attr(date('Y/m/d', strtotime('+2 day'))); ?>">
                                     </div>
                                 </label>
                             </div>
@@ -901,7 +901,7 @@ class Car_Rental
                                                     for ($time = $start_time; $time <= $end_time; $time += $time_interval * 60) {
                                                         $time_label = date("g:i A", $time);
                                                         $selected = ($selected_dropoff_time === $time_label) ? 'selected' : '';
-                                                        echo '<li value="' . esc_attr($time_label) . '" ' . $selected . '>' . esc_html($time_label) . '</li>';
+                                                        echo '<li value="' . esc_attr($time_label) . '" ' . esc_attr($selected) . '>' . esc_html($time_label) . '</li>';
                                                     }
                                                 ?>
                                             </ul>

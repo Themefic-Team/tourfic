@@ -2506,7 +2506,7 @@ class Hotel {
                             'd.m.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/,
                             'm.d.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/
                         };
-                        const dateRegex = regexMap['<?php echo $hotel_date_format_for_users; ?>'];
+                        const dateRegex = regexMap['<?php echo esc_attr($hotel_date_format_for_users); ?>'];
 
                         $("#tf_hotel_aval_check #check-in-out-date").flatpickr({
                             enableTime: false,
@@ -2864,7 +2864,7 @@ class Hotel {
                             'd.m.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/,
                             'm.d.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/
                         };
-                        const dateRegex = regexMap['<?php echo $hotel_date_format_for_users; ?>'];
+                        const dateRegex = regexMap['<?php echo esc_attr($hotel_date_format_for_users); ?>'];
 
                         if ($(window).width() >= 1240) {
                             month = 2;
@@ -3097,7 +3097,7 @@ class Hotel {
 						'd.m.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/,
 						'm.d.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/
 					};
-					const dateRegex = regexMap['<?php echo $hotel_date_format_for_users; ?>'];
+					const dateRegex = regexMap['<?php echo esc_attr($hotel_date_format_for_users); ?>'];
 
                     const checkinoutdateange = flatpickr(".tf-hotel-booking-sidebar #check-in-out-date", {
                         enableTime: false,
@@ -3156,7 +3156,7 @@ class Hotel {
         <!-- Loader Image -->
         <div id="tour_room_details_loader">
             <div id="tour-room-details-loader-img">
-                <img src="<?php echo TF_ASSETS_APP_URL ?>images/loader.gif" alt="Loader">
+                <img src="<?php echo esc_url(TF_ASSETS_APP_URL . 'images/loader.gif') ?>" alt="Loader">
             </div>
         </div>
         <div class="tf-withoutpayment-booking-confirm">
@@ -3170,7 +3170,7 @@ class Hotel {
                         </svg>
                     </span>
                 </div>
-                <img src="<?php echo TF_ASSETS_APP_URL ?>images/thank-you.gif" alt="Thank You">
+                <img src="<?php echo esc_url(TF_ASSETS_APP_URL . 'images/thank-you.gif') ?>" alt="Thank You">
                 <h2>
 					<?php
 					$booking_confirmation_msg = ! empty( Helper::tfopt( 'hotel-booking-confirmation-msg' ) ) ? Helper::tfopt( 'hotel-booking-confirmation-msg' ) : esc_html__('Booked Successfully', 'tourfic');
@@ -3186,19 +3186,19 @@ class Hotel {
                         <ul>
 							<?php if ( $airport_service_type && ( $room_book_by != 2 || empty( $room_book_url ) ) ) { ?>
                                 <li class="tf-booking-step tf-booking-step-1 active">
-                                    <i class="ri-price-tag-3-line"></i> <?php echo __( "Airport Service", "tourfic" ); ?>
+                                    <i class="ri-price-tag-3-line"></i> <?php echo esc_html__( "Airport Service", "tourfic" ); ?>
                                 </li>
 							<?php }
 							if ( $enable_guest_info ) {
 								?>
                                 <li class="tf-booking-step tf-booking-step-2 <?php echo empty( $airport_service_type ) ? esc_attr( 'active' ) : ''; ?> ">
-                                    <i class="ri-group-line"></i> <?php echo __( "Guest details", "tourfic" ); ?>
+                                    <i class="ri-group-line"></i> <?php echo esc_html__( "Guest details", "tourfic" ); ?>
                                 </li>
 							<?php }
 							if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && 3 == $room_book_by ) {
 								?>
                                 <li class="tf-booking-step tf-booking-step-3 <?php echo empty( $airport_service_type ) && empty( $enable_guest_info ) ? esc_attr( 'active' ) : ''; ?>">
-                                    <i class="ri-calendar-check-line"></i> <?php echo __( "Booking Confirmation", "tourfic" ); ?>
+                                    <i class="ri-calendar-check-line"></i> <?php echo esc_html__( "Booking Confirmation", "tourfic" ); ?>
                                 </li>
 							<?php } ?>
                         </ul>
@@ -3228,25 +3228,25 @@ class Hotel {
 										$airport_service = self::tf_hotel_airport_service_title_price( $post_id, $adult, $child, $single_service_type );
 										?>
                                         <div class="tf-single-hotel-service tour-extra-single">
-                                            <label for="service-<?php echo esc_attr( $key ) . '_' . $room_id; ?>">
+                                            <label for="service-<?php echo esc_attr( $key ) . '_' . esc_attr($room_id); ?>">
                                                 <div class="tf-service-radio">
-                                                    <input type="radio" value="<?php echo esc_attr( $single_service_type ); ?>" id="service-<?php echo esc_attr( $key) . '_' . $room_id; ?>" name="airport_service">
+                                                    <input type="radio" value="<?php echo esc_attr( $single_service_type ); ?>" id="service-<?php echo esc_attr( $key) . '_' . esc_attr($room_id); ?>" name="airport_service">
                                                 </div>
                                                 <div class="tf-service-content">
                                                     <h5>
 														<?php
 														if ( "pickup" == $single_service_type ) {
-															_e( 'Pickup Service', 'tourfic' );
+															esc_html_e( 'Pickup Service', 'tourfic' );
 														}
 														if ( "dropoff" == $single_service_type ) {
-															_e( 'Drop-off Service', 'tourfic' );
+															esc_html_e( 'Drop-off Service', 'tourfic' );
 														}
 														if ( "both" == $single_service_type ) {
-															_e( 'Pickup & Drop-off Service', 'tourfic' );
+															esc_html_e( 'Pickup & Drop-off Service', 'tourfic' );
 														}
 														?>
                                                     </h5>
-													<p><?php echo $airport_service['title']; ?> = <?php echo wc_price( $airport_service['price'] ); ?></p>
+													<p><?php echo esc_html($airport_service['title']); ?> = <?php echo wp_kses_post(wc_price( $airport_service['price'] )); ?></p>
                                                 </div>
                                             </label>
                                         </div>

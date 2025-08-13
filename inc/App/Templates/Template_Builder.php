@@ -811,7 +811,7 @@ class Template_Builder {
                             <option value="all" <?php selected($tf_taxonomy_term, 'all'); ?>>
                                 <?php 
                                 // translators: %s will be the taxonomy name.
-                                echo sprintf(esc_html__('All %s', 'tourfic'), $taxonomy_label); ?>
+                                echo sprintf(esc_html__('All %s', 'tourfic'), esc_html($taxonomy_label)); ?>
                             </option>
                             <?php 
                             $terms = get_terms([
@@ -961,7 +961,7 @@ class Template_Builder {
                 if ($template_path) {
                     // Set up the content rendering callback
                     $template_module->set_print_callback(function() use ($post) {
-                        echo \Elementor\Plugin::$instance->frontend->get_builder_content($post->ID, true);
+                        echo wp_kses_post( \Elementor\Plugin::$instance->frontend->get_builder_content($post->ID, true) );
                     });
                     
                     return $template_path;
@@ -1059,7 +1059,7 @@ class Template_Builder {
             if ($template_path) {
                 // Set up the content rendering callback
                 $template_module->set_print_callback(function() use ($template_post) {
-                    echo \Elementor\Plugin::$instance->frontend->get_builder_content($template_post->ID, true);
+                    echo wp_kses_post( \Elementor\Plugin::$instance->frontend->get_builder_content($template_post->ID, true) );
                 });
                 
                 return $template_path;

@@ -142,7 +142,7 @@ abstract class Enquiry {
 			}
 		}
 		?>
-		<div class="<?php echo apply_filters( $post_type . '_booking_oder_table_class', "tf-order-table-responsive") ?> tf-enquiry-table">
+		<div class="<?php echo esc_attr(apply_filters( $post_type . '_booking_oder_table_class', "tf-order-table-responsive")) ?> tf-enquiry-table">
             <table class="wp-list-table table" cellpadding="0" cellspacing="0">
                 <thead>
 					<tr>
@@ -424,7 +424,7 @@ abstract class Enquiry {
 												<div class="tf-single-enquiry-accordion-head-left">
 													<?php if( !empty( $reply["type"]) && "response" == $reply["type"]) : ?>
 														<i class="ri-reply-all-line tf-enquiry-response-user"></i>
-														<?php echo !empty( $reply["reply_user"]) ? $reply["reply_user"] : esc_html__("User", "tourfic"); ?>
+														<?php echo !empty( $reply["reply_user"]) ? esc_html($reply["reply_user"]) : esc_html__("User", "tourfic"); ?>
 													<?php else: ?>
 														<i class="ri-reply-all-line"></i>
 														<?php esc_html_e("You", 'tourfic') ?>
@@ -474,9 +474,9 @@ abstract class Enquiry {
 												<div class="tf-single-accordion-body">
 													<?php
 														if( $email_body_setting == 'html' ) {
-															echo !empty($reply["reply_message_html"]) ? wp_kses_post($reply["reply_message_html"]) : $reply["reply_message"];
+															echo !empty($reply["reply_message_html"]) ? wp_kses_post($reply["reply_message_html"]) : wp_kses_post($reply["reply_message"]);
 														} else if( $email_body_setting == 'text' ) {
-															echo !empty($reply["reply_message_text"]) ? wp_kses_post(wpautop($reply["reply_message_text"])) : $reply["reply_message"];
+															echo !empty($reply["reply_message_text"]) ? wp_kses_post(wpautop($reply["reply_message_text"])) : wp_kses_post($reply["reply_message"]);
 														}
 													?>
 												</div>
@@ -511,7 +511,7 @@ abstract class Enquiry {
 									<input type="hidden" class="tf-enquiry-reply-name" value="<?php echo esc_html($data["uname"]); ?>">
 									<input type="hidden" class="tf-enquiry-reply-id" value="<?php echo esc_html($data["id"]); ?>">
 									<input type="hidden" class="tf-enquiry-reply-post-id" value="<?php echo esc_html($data["post_id"]); ?>">
-									<input type="hidden" name="tf-enquiry-reply-post-userID" value="<?php echo $_SESSION['WP']['userId']; ?>" />
+									<input type="hidden" name="tf-enquiry-reply-post-userID" value="<?php echo esc_attr($_SESSION['WP']['userId']); ?>" />
 
 									<button class="tf-enquiry-reply-button" type="submit"> 
 										<?php esc_html_e('Send', 'tourfic') ?>
@@ -1146,9 +1146,9 @@ abstract class Enquiry {
 			<div style="width:100%">
 				<p> <?php echo esc_html__("Hello", 'tourfic') ?> <b><?php echo esc_html( $author_name ) ?></b></p>
 				<?php if( $type = 'new'): ?>
-					<p> <?php echo esc_html__("A new enquiry has been added to your dashboard", 'tourfic') ?> <?php echo !empty($name) ? esc_html__('by ', 'tourfic') . $name : '' ?></p>
+					<p> <?php echo esc_html__("A new enquiry has been added to your dashboard", 'tourfic') ?> <?php echo !empty($name) ? esc_html__('by ', 'tourfic') . esc_html($name) : '' ?></p>
 				<?php elseif( $type == "reply"): ?>
-					<p> <?php echo esc_html__("A new response has been added to", 'tourfic'); ?> #<?php echo esc_html($last_id) ?> <?php echo !empty($name) ? esc_html__('by ', 'tourfic') . $name : '' ?></p>
+					<p> <?php echo esc_html__("A new response has been added to", 'tourfic'); ?> #<?php echo esc_html($last_id) ?> <?php echo !empty($name) ? esc_html__('by ', 'tourfic') . esc_html($name) : '' ?></p>
 				<?php endif; ?>
 				<?php if( !empty( $body )): ?>
 					<h4>Enquiry Body</h4>

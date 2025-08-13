@@ -372,7 +372,7 @@ abstract Class TF_Booking_Details {
 
         <?php do_action( $this->booking_args["post_type"] . '_before_booking_order_table'); ?>
 
-        <div class="<?php echo apply_filters( $this->booking_args["post_type"] . '_booking_oder_table_class', "tf-order-table-responsive") ?>" style="<?php echo !empty($_GET['nonce']) ? esc_attr('display: block') : '' ?>">
+        <div class="<?php echo esc_html( apply_filters( $this->booking_args["post_type"] . '_booking_oder_table_class', "tf-order-table-responsive") ) ?>" style="<?php echo !empty($_GET['nonce']) ? esc_attr('display: block') : '' ?>">
             <table class="wp-list-table table" cellpadding="0" cellspacing="0">
                 <thead>
                 <tr>
@@ -964,8 +964,17 @@ abstract Class TF_Booking_Details {
                                 foreach($tf_visitors_details as $visitor){
                             ?>
                             <div class="tf-grid-single">
-                                <?php /* translators: %s Visitor. */ ?>
-                                <h3><?php echo $tf_order_details->post_type == 'tour' ? sprintf( esc_html__("Visitor %s", "tourfic"), $visitor_count ) : ( $tf_order_details->post_type == 'hotel' ? sprintf( esc_html__("Guest %s", "tourfic"), $visitor_count ) : '' ) ?></h3>
+                                <h3>
+                                <?php 
+                                if ( $tf_order_details->post_type == 'tour' ) {
+                                    /* translators: %s Visitor. */
+                                    echo esc_html( sprintf( __( 'Visitor %s', 'tourfic' ), intval( $visitor_count ) ) );
+                                } elseif ( $tf_order_details->post_type == 'hotel' ) {
+                                    /* translators: %s Visitor. */
+                                    echo esc_html( sprintf( __( 'Guest %s', 'tourfic' ), intval( $visitor_count ) ) );
+                                }
+                                ?>
+                                </h3>
                                 <div class="tf-single-box">
                                     <table class="table" cellpadding="0" callspacing="0">
                                         <?php 
