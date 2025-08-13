@@ -3666,7 +3666,7 @@ Steps
   z-index: 9;
   left: 50%;
   margin-left: -74px;
-  bottom: 30px;
+  bottom: 25px;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -3686,13 +3686,13 @@ Steps
   z-index: -1;
 }
 
-.tf-field .tf-field-label .tf-desc-tooltip svg {
-  cursor: pointer;
-}
-
-.tf-field .tf-field-label .tf-desc-tooltip svg:hover + .tf-desc-tooltip-content {
+.tf-field .tf-field-label .tf-desc-tooltip:hover .tf-desc-tooltip-content {
   opacity: 1;
   visibility: visible;
+}
+
+.tf-field .tf-field-label .tf-desc-tooltip svg {
+  cursor: pointer;
 }
 
 .tf-field .tf-field-label .tf-csf-badge {
@@ -4865,6 +4865,7 @@ Steps
   font-weight: 400;
   font-size: 15px;
   line-height: 24px;
+  cursor: pointer;
 }
 
 .tf-field-repeater .tf-repeater .tf-repeater-header .tf-repeater-icon-absulate {
@@ -5749,6 +5750,12 @@ a.tf-import-btn, a.tf-export-btn {
   justify-content: space-between;
   width: 100%;
   margin-bottom: 14px;
+  position: sticky;
+  top: 0;
+  z-index: 99;
+  left: 0;
+  width: 100%;
+  background: #fff;
 }
 
 .tf-apt-cal-wrap .bulk-popup-content .tf-bulk-edit-header h3,

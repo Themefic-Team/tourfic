@@ -1802,6 +1802,12 @@
             $('[name="tf_tour_min_person"]', tourCalData).val('');
             $('[name="tf_tour_max_person"]', tourCalData).val('');
             $('[name="tf_tour_max_capacity"]', tourCalData).val('');
+            $('[name="tf_tour_repeat_day[]"], [name="tf_tour_repeat_month[]"], [name="tf_tour_repeat_year[]"], [name="tf_tour_repeat_week[]"]')
+            .prop('checked', false)
+            .val('');
+            $('.bulk-popup-content-box #adult_tabs input, .bulk-popup-content-box #child_tabs input, .bulk-popup-content-box #infant_tabs input, .bulk-popup-content-box #group_tabs input').val('');
+
+
 
             // More specific selector with error handling
             const container = document.querySelector('.tf_tour_allowed_times');
@@ -2132,6 +2138,22 @@
                 notyf.error('There is an error!');
                 $button.text('Save').prop('disabled', false);
             });
+        });
+
+        // Package Dependancy
+        $(".group_discount_switcher").each(function() {
+            let $switcher = $(this);
+            let $checkbox = $switcher.find('input[type="checkbox"]');
+            let $box = $switcher.next(".group_discount_package_box");
+
+            $box.toggle($checkbox.is(":checked"));
+        });
+
+        $(document).on("change", ".group_discount_switcher input[type='checkbox']", function() {
+            let $switcher = $(this).closest(".group_discount_switcher");
+            let $box = $switcher.next(".group_discount_package_box");
+
+            $box.toggle($(this).is(":checked"));
         });
 
         $(document).on('change', '.tf_tour_pricing_type', function (e) {
@@ -2586,7 +2608,7 @@
         });
 
         // Repeater show hide
-        $(document).on('click', '.tf-repeater-icon-collapse', function () {
+        $(document).on('click', '.tf-repeater-icon-collapse, .tf-repeater-title', function () {
             var tf_repater_fieldname = $(this).closest('.tf-single-repeater').find('input[name=tf_current_field]').val();
             $(this).closest('.tf-single-repeater-' + tf_repater_fieldname + '').find('.tf-repeater-content-wrap').slideToggle();
             $(this).closest('.tf-single-repeater-' + tf_repater_fieldname + '').children('.tf-repeater-content-wrap').toggleClass('hide');

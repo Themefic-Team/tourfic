@@ -2124,7 +2124,7 @@ class Tour {
 															<h3><?php echo esc_html__( "Adult", "tourfic" ); ?></h3>
 															<div class="inc-dec">
 																<div class="acr-dec disable">-</div>
-																<input type="number" name="adults" id="adults" value="<?php echo !empty($pack['adult_tabs'][2]['min_adult']) ? esc_attr($pack['adult_tabs'][2]['min_adult']) : 1; ?>" data-min="<?php echo !empty($pack['adult_tabs'][2]['min_adult']) ? esc_attr($pack['adult_tabs'][2]['min_adult']) : ''; ?>" data-max="<?php echo !empty($pack['adult_tabs'][3]['max_adult']) ? esc_attr($pack['adult_tabs'][3]['max_adult']) : ''; ?>" />
+																<input type="number" name="adults" id="adults" value="1" />
 																<div class="acr-inc">+</div>
 															</div>
 														</div>
@@ -2132,7 +2132,7 @@ class Tour {
 															<h3><?php echo esc_html__( "Child", "tourfic" ); ?></h3>
 															<div class="inc-dec">
 																<div class="acr-dec disable">-</div>
-																<input type="number" name="childrens" id="childs" value="<?php echo !empty($pack['child_tabs'][2]['min_child']) ? esc_attr($pack['child_tabs'][2]['min_child']) : 0; ?>" data-min="<?php echo !empty($pack['child_tabs'][2]['min_child']) ? esc_attr($pack['child_tabs'][2]['min_child']) : ''; ?>" data-max="<?php echo !empty($pack['child_tabs'][3]['max_child']) ? esc_attr($pack['child_tabs'][3]['max_child']) : ''; ?>" />
+																<input type="number" name="childrens" id="childs" value="0" />
 																<div class="acr-inc">+</div>
 															</div>
 														</div>
@@ -2140,7 +2140,7 @@ class Tour {
 															<h3><?php echo esc_html__( "Infant", "tourfic" ); ?></h3>
 															<div class="inc-dec">
 																<div class="acr-dec disable">-</div>
-																<input type="number" name="infants" id="infant" value="<?php echo !empty($pack['infant_tabs'][2]['min_infant']) ? esc_attr($pack['infant_tabs'][2]['min_infant']) : 0; ?>" data-min="<?php echo !empty($pack['infant_tabs'][2]['min_infant']) ? esc_attr($pack['infant_tabs'][2]['min_infant']) : ''; ?>" data-max="<?php echo !empty($pack['infant_tabs'][3]['max_infant']) ? esc_attr($pack['infant_tabs'][3]['max_infant']) : ''; ?>" />
+																<input type="number" name="infants" id="infant" value="0" />
 																<div class="acr-inc">+</div>
 															</div>
 														</div>

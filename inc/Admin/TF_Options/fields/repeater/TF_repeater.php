@@ -110,13 +110,6 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 												}
 											endforeach;
 											?>
-											<span class="tf-repeater-icon tf-repeater-icon-delete">
-												<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-												<path d="M2 4H14" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-												<path d="M12.6668 4V13.3333C12.6668 14 12.0002 14.6667 11.3335 14.6667H4.66683C4.00016 14.6667 3.3335 14 3.3335 13.3333V4" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-												<path d="M5.3335 3.9987V2.66536C5.3335 1.9987 6.00016 1.33203 6.66683 1.33203H9.3335C10.0002 1.33203 10.6668 1.9987 10.6668 2.66536V3.9987" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-												</svg>
-											</span>
 											<span class="tf-repeater-icon tf-repeater-icon-collapse">
 												<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 												<path d="M8 13.332H14" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -140,8 +133,15 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 												</defs>
 												</svg>
 											</span>
-											
 											<?php } ?>
+
+											<span class="tf-repeater-icon tf-repeater-icon-delete">
+												<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+												<path d="M2 4H14" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+												<path d="M12.6668 4V13.3333C12.6668 14 12.0002 14.6667 11.3335 14.6667H4.66683C4.00016 14.6667 3.3335 14 3.3335 13.3333V4" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+												<path d="M5.3335 3.9987V2.66536C5.3335 1.9987 6.00016 1.33203 6.66683 1.33203H9.3335C10.0002 1.33203 10.6668 1.9987 10.6668 2.66536V3.9987" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+												</svg>
+											</span>
 										</div>
 									</div>
 								</div>
@@ -157,9 +157,9 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 										}
 
 										$id = ( ! empty( $this->settings_id ) ) ? $this->settings_id . '[' . $this->field['id'] . '][00]' . '[' . $re_field['id'] . ']' : $this->field['id'] . '[00]' . '[' . $re_field['id'] . ']';
-
-										if(!empty($this->field['related_name'])){
-											$related_name = ( ! empty( $this->settings_id ) ) ? $this->settings_id . '[' . $this->field['related_name'] . '][00]' . '[' . $re_field['related_name'] . ']' : $this->field['related_name'] . '[00]' . '[' . $re_field['related_name'] . ']'; 
+										
+										if(!empty($re_field['related_name'])){
+											$related_name = ( ! empty( $this->settings_id ) ) && !empty($this->field['related_name']) ? $this->settings_id . '[' . $this->field['related_name'] . '][00]' . '[' . $re_field['related_name'] . ']' : ''; 
 										}
 
 										if ( isset( $tf_meta_box_value[ $id ] ) ) {
@@ -168,7 +168,7 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 											$value = ( isset( $re_field['id'] ) && isset( $data[ $key ][ $re_field['id'] ] ) ) ? $data[ $key ][ $re_field['id'] ] : '';
 										}
 
-										if(!empty($this->field['related_name'])){
+										if(!empty($re_field['related_name'])){
 											if ( isset( $tf_meta_box_value[ $related_name ] ) ) {
 												$related_value = isset( $tf_meta_box_value[ $related_name ] ) ? $tf_meta_box_value[ $related_name ] : '';
 											} else {
@@ -242,14 +242,6 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 										}
 									endforeach;
 									?>
-
-										<span class="tf-repeater-icon tf-repeater-icon-delete <?php echo $this->field['id']=='package_pricing' ? esc_attr('package-action-hide') : ''; ?>">
-											<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-											<path d="M2 4H14" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-											<path d="M12.6668 4V13.3333C12.6668 14 12.0002 14.6667 11.3335 14.6667H4.66683C4.00016 14.6667 3.3335 14 3.3335 13.3333V4" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-											<path d="M5.3335 3.9987V2.66536C5.3335 1.9987 6.00016 1.33203 6.66683 1.33203H9.3335C10.0002 1.33203 10.6668 1.9987 10.6668 2.66536V3.9987" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-											</svg>
-										</span>
 										<span class="tf-repeater-icon tf-repeater-icon-collapse <?php echo $this->field['id']=='package_pricing' ? esc_attr('package-action-hide') : ''; ?>">
 											<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 											<path d="M8 13.332H14" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -273,8 +265,14 @@ if ( ! class_exists( 'TF_Repeater' ) ) {
 											</defs>
 											</svg>
 										</span>
-										
 										<?php } ?>
+										<span class="tf-repeater-icon tf-repeater-icon-delete <?php echo $this->field['id']=='package_pricing' ? esc_attr('package-action-hide') : ''; ?>">
+											<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M2 4H14" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+											<path d="M12.6668 4V13.3333C12.6668 14 12.0002 14.6667 11.3335 14.6667H4.66683C4.00016 14.6667 3.3335 14 3.3335 13.3333V4" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+											<path d="M5.3335 3.9987V2.66536C5.3335 1.9987 6.00016 1.33203 6.66683 1.33203H9.3335C10.0002 1.33203 10.6668 1.9987 10.6668 2.66536V3.9987" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+											</svg>
+										</span>
 
 								</div>
 							</div>

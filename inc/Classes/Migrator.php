@@ -1499,6 +1499,7 @@ class Migrator {
 				$meta = get_post_meta( $post_id, 'tf_tours_opt', true );
 				$tour_type = ! empty( $meta['type'] ) ? $meta['type'] : '';
 				$pricing_rule = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
+				$discount_type = ! empty( $meta['discount_type'] ) ? $meta['discount_type'] : 'none';
 				$tour_availability_data = [];
 				if($tour_type=='fixed'){
 					$tf_start_date = ! empty( $meta['fixed_availability']['date']['from'] ) ? $meta['fixed_availability']['date']['from'] : '';
@@ -1762,7 +1763,9 @@ class Migrator {
 				}
 				
 				$meta['tour_availability'] = wp_json_encode( $tour_availability_data );
-				$meta['allow_discount'] = '1';
+				if($discount_type!='none'){
+					$meta['allow_discount'] = '1';
+				}
 
 				update_post_meta($post_id, 'tf_tours_opt', $meta);
 
