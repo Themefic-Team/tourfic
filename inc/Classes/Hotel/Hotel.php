@@ -3286,7 +3286,7 @@ class Hotel {
                             <p><?php echo esc_html( $hotel_guest_details_text ); ?></p>
                             <div class="tf-booking-content-traveller">
                                 <div class="tf-single-tour-traveller">
-                                    <h4><?php echo __( "Billing details", "tourfic" ); ?></h4>
+                                    <h4><?php esc_html_e( "Billing details", "tourfic" ); ?></h4>
                                     <div class="traveller-info billing-details">
 										<?php
 										$confirm_book_fields = ! empty( Helper::tfopt( 'hotel-book-confirm-field' ) ) ? Helper::tf_data_types( Helper::tfopt( 'hotel-book-confirm-field' ) ) : '';
@@ -3294,47 +3294,47 @@ class Hotel {
 										if ( empty( $confirm_book_fields ) ) {
 											?>
                                             <div class="traveller-single-info tf-confirm-fields">
-                                                <label for="tf_first_name"><?php echo __( "First Name", "tourfic" ); ?></label>
+                                                <label for="tf_first_name"><?php esc_html_e( "First Name", "tourfic" ); ?></label>
                                                 <input type="text" name="booking_confirm[tf_first_name]" id="tf_first_name" data-required="1"/>
                                                 <div class="error-text" data-error-for="tf_first_name"></div>
                                             </div>
                                             <div class="traveller-single-info tf-confirm-fields">
-                                                <label for="tf_last_name"><?php echo __( "Last Name", "tourfic" ); ?></label>
+                                                <label for="tf_last_name"><?php esc_html_e( "Last Name", "tourfic" ); ?></label>
                                                 <input type="text" name="booking_confirm[tf_last_name]" id="tf_last_name" data-required="1"/>
                                                 <div class="error-text" data-error-for="tf_last_name"></div>
                                             </div>
                                             <div class="traveller-single-info tf-confirm-fields">
-                                                <label for="tf_email"><?php echo __( "Email", "tourfic" ); ?></label>
+                                                <label for="tf_email"><?php esc_html_e( "Email", "tourfic" ); ?></label>
                                                 <input type="email" name="booking_confirm[tf_email]" id="tf_email" data-required="1"/>
                                                 <div class="error-text" data-error-for="tf_email"></div>
                                             </div>
                                             <div class="traveller-single-info tf-confirm-fields">
-                                                <label for="tf_phone"><?php echo __( "Phone", "tourfic" ); ?></label>
+                                                <label for="tf_phone"><?php esc_html_e( "Phone", "tourfic" ); ?></label>
                                                 <input type="text" name="booking_confirm[tf_phone]" id="tf_phone" data-required="1"/>
                                                 <div class="error-text" data-error-for="tf_phone"></div>
                                             </div>
                                             <div class="traveller-single-info tf-confirm-fields">
-                                                <label for="tf_country"><?php echo __( "Country", "tourfic" ); ?></label>
+                                                <label for="tf_country"><?php esc_html_e( "Country", "tourfic" ); ?></label>
                                                 <input type="text" name="booking_confirm[tf_country]" id="tf_country" data-required="1"/>
                                                 <div class="error-text" data-error-for="tf_country"></div>
                                             </div>
                                             <div class="traveller-single-info tf-confirm-fields">
-                                                <label for="tf_street_address"><?php echo __( "Street address", "tourfic" ); ?></label>
+                                                <label for="tf_street_address"><?php esc_html_e( "Street address", "tourfic" ); ?></label>
                                                 <input type="text" name="booking_confirm[tf_street_address]" id="tf_street_address" data-required="1"/>
                                                 <div class="error-text" data-error-for="tf_street_address"></div>
                                             </div>
                                             <div class="traveller-single-info tf-confirm-fields">
-                                                <label for="tf_town_city"><?php echo __( "Town / City", "tourfic" ); ?></label>
+                                                <label for="tf_town_city"><?php esc_html_e( "Town / City", "tourfic" ); ?></label>
                                                 <input type="text" name="booking_confirm[tf_town_city]" id="tf_town_city" data-required="1"/>
                                                 <div class="error-text" data-error-for="tf_town_city"></div>
                                             </div>
                                             <div class="traveller-single-info tf-confirm-fields">
-                                                <label for="tf_state_country"><?php echo __( "State / County", "tourfic" ); ?></label>
+                                                <label for="tf_state_country"><?php esc_html_e( "State / County", "tourfic" ); ?></label>
                                                 <input type="text" name="booking_confirm[tf_state_country]" id="tf_state_country" data-required="1"/>
                                                 <div class="error-text" data-error-for="tf_state_country"></div>
                                             </div>
                                             <div class="traveller-single-info tf-confirm-fields">
-                                                <label for="tf_postcode"><?php echo __( "Postcode / ZIP", "tourfic" ); ?></label>
+                                                <label for="tf_postcode"><?php esc_html_e( "Postcode / ZIP", "tourfic" ); ?></label>
                                                 <input type="text" name="booking_confirm[tf_postcode]" id="tf_postcode" data-required="1"/>
                                                 <div class="error-text" data-error-for="tf_postcode"></div>
                                             </div>
@@ -3380,7 +3380,7 @@ class Hotel {
                                                                 <div class="tf-single-checkbox">
                                                                     <input type="<?php echo esc_attr( $field['reg-fields-type'] ); ?>" name="booking_confirm[<?php echo esc_attr( $field['reg-field-name'] ); ?>][]"
                                                                            id="<?php echo esc_attr( $sfield['option-value'] ); ?>" value="<?php echo esc_html( $sfield['option-value'] ); ?>"
-                                                                           data-required="<?php echo $field['reg-field-required']; ?>"/>
+                                                                           data-required="<?php echo esc_attr($field['reg-field-required']); ?>"/>
                                                                     <label for="<?php echo esc_attr( $sfield['option-value'] ); ?>">
 																	<?php 
 																	// Output the field label safely without translation, since it's dynamic content
@@ -3405,8 +3405,8 @@ class Hotel {
                     <!-- Popup Booking Summery -->
                     <div class="tf-booking-summery" style="<?php echo empty( $airport_service_type ) && empty( $enable_guest_info ) && 3 != $room_book_by ? esc_attr( "width: 100%;" ) : ''; ?>">
                         <div class="tf-booking-fixed-summery">
-                            <h5><?php echo __( "Booking summery", "tourfic" ); ?></h5>
-                            <h4><?php echo get_the_title( $post_id ); ?></h4>
+                            <h5><?php esc_html_e( "Booking summery", "tourfic" ); ?></h5>
+                            <h4><?php echo esc_html(get_the_title( $post_id )); ?></h4>
                         </div>
                         <div class="tf-booking-traveller-info">
 
@@ -3418,7 +3418,7 @@ class Hotel {
                 <div class="tf-booking-pagination tf-hotel-booking-pagination">
 					<?php if ( empty( $airport_service_type ) && 3 != $room_book_by && empty( $enable_guest_info ) ) { ?>
                         <div class="tf-control-pagination show">
-                            <button class="hotel-room-book tf_btn" type="submit"><?php echo __( "Continue", "tourfic" ); ?></button>
+                            <button class="hotel-room-book tf_btn" type="submit"><?php esc_html_e( "Continue", "tourfic" ); ?></button>
                         </div>
 						<?php
 					}
@@ -3426,10 +3426,10 @@ class Hotel {
                         <div class="tf-control-pagination show tf-pagination-content-1">
 							<?php
 							if ( 3 != $room_book_by && empty( $enable_guest_info ) ) { ?>
-                                <button type="submit" class="hotel-room-book tf_btn"><?php echo !empty( tfopt( 'hotel_service_popup_action' ) ) ? tfopt( 'hotel_service_popup_action' ) : __( "Continue", "tourfic" ); ?></button>
+                                <button type="submit" class="hotel-room-book tf_btn"><?php echo !empty( tfopt( 'hotel_service_popup_action' ) ) ? esc_html(tfopt( 'hotel_service_popup_action' )) : esc_html__( "Continue", "tourfic" ); ?></button>
 							<?php } else { ?>
                                 <a href="#" class="tf-next-control tf-tabs-control tf_btn"
-                                   data-step="<?php echo 3 == $room_book_by && empty( $enable_guest_info ) ? esc_attr( "3" ) : esc_attr( "2" ); ?>"><?php echo !empty( tfopt( 'hotel_service_popup_action' ) ) ? tfopt( 'hotel_service_popup_action' ) : __( "Continue", "tourfic" ); ?></a>
+                                   data-step="<?php echo 3 == $room_book_by && empty( $enable_guest_info ) ? esc_attr( "3" ) : esc_attr( "2" ); ?>"><?php echo !empty( tfopt( 'hotel_service_popup_action' ) ) ? esc_html(tfopt( 'hotel_service_popup_action' )) : esc_html__( "Continue", "tourfic" ); ?></a>
 							<?php } ?>
                         </div>
 					<?php }
@@ -3439,13 +3439,13 @@ class Hotel {
                         <div class="tf-control-pagination tf-pagination-content-2 <?php echo empty( $airport_service_type ) ? esc_attr( 'show' ) : ''; ?>">
 							<?php
 							if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $airport_service_type ) { ?>
-                                <a href="#" class="tf-back-control tf-step-back" data-step="1"><i class="fa fa-angle-left"></i><?php echo __( "Back", "tourfic" ); ?></a>
+                                <a href="#" class="tf-back-control tf-step-back" data-step="1"><i class="fa fa-angle-left"></i><?php echo esc_html__( "Back", "tourfic" ); ?></a>
 							<?php }
 							if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && 3 == $room_book_by ) {
 								?>
-                                <a href="#" class="tf-next-control tf-tabs-control tf_btn tf-traveller-error" data-step="3"><?php echo __( "Continue", "tourfic" ); ?></a>
+                                <a href="#" class="tf-next-control tf-tabs-control tf_btn tf-traveller-error" data-step="3"><?php echo esc_html__( "Continue", "tourfic" ); ?></a>
 							<?php } else { ?>
-                                <button type="submit" class="tf-traveller-error tf_btn <?php echo !empty( $room_book_by ) && 3 != $room_book_by ? 'hotel-room-book' : '';  ?>"><?php echo __( "Continue", "tourfic" ); ?></button>
+                                <button type="submit" class="tf-traveller-error tf_btn <?php echo !empty( $room_book_by ) && 3 != $room_book_by ? 'hotel-room-book' : '';  ?>"><?php echo esc_html__( "Continue", "tourfic" ); ?></button>
 							<?php } ?>
                         </div>
 					<?php }
@@ -3456,9 +3456,9 @@ class Hotel {
                         <div class="tf-control-pagination tf-pagination-content-3 <?php echo empty( $airport_service_type ) && empty( $enable_guest_info ) ? esc_attr( 'show' ) : ''; ?>">
 							<?php
 							if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ( $airport_service_type || $enable_guest_info ) ) { ?>
-                                <a href="#" class="tf-back-control tf-step-back" data-step="2"><i class="fa fa-angle-left"></i><?php echo __( "Back", "tourfic" ); ?></a>
+                                <a href="#" class="tf-back-control tf-step-back" data-step="2"><i class="fa fa-angle-left"></i><?php echo esc_html__( "Back", "tourfic" ); ?></a>
 							<?php } ?>
-                            <button type="submit" class="tf-hotel-book-confirm-error tf_btn"><?php echo __( "Continue", "tourfic" ); ?></button>
+                            <button type="submit" class="tf-hotel-book-confirm-error tf_btn"><?php echo esc_html__( "Continue", "tourfic" ); ?></button>
                         </div>
 					<?php } ?>
                 </div>
