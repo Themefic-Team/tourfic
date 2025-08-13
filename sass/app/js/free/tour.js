@@ -178,6 +178,7 @@
                     }
                 },
                 error: function (data) {
+                    $('#tour_room_details_loader').hide();
                     console.log(data);
                 },
 
@@ -848,6 +849,8 @@
         if (tf_params.tour_form_data.disable_same_day) {
             tour_date_options.disable.push("today");
         }
+
+        tour_date_options = wp.hooks.applyFilters('tf_tour_date_options', tour_date_options);
 
         if(tf_params.tour_form_data.tf_tour_selected_template === 'design-1') {
             $(".tours-check-in-out").flatpickr(tour_date_options);

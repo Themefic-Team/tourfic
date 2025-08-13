@@ -2067,6 +2067,10 @@
                         }
                         if (response.pacakge_times && typeof response.pacakge_times === 'object') {
                             Object.entries(response.pacakge_times).forEach(([key, times]) => {
+                                if (!Array.isArray(times)) {
+                                    return;
+                                }
+
                                 const wrapper = $(`.tf-package-times-${key}`);
                                 wrapper.css('display', 'flex');
                                 const select = wrapper.find('select[name="package_start_time"]');
@@ -2081,6 +2085,10 @@
                                 }
                             });
                         }
+
+                        wp.hooks.doAction('tf_tour_booking_popup_times_ui', response, {
+                            request: data,
+                        });
                         
                         $('.tf-withoutpayment-booking').addClass('show');
                     }

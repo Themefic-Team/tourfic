@@ -238,8 +238,7 @@
                     
                 },
                 success: function (data) {
-                    $('.tf-preloader-box').hide();
-                    // location.reload();
+                    location.reload();
                 },
                 error: function (data) {
                     console.log(data);

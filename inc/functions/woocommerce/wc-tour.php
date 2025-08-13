@@ -209,6 +209,12 @@ function tf_tours_booking_function() {
 					$response['errors'][] = sprintf( esc_html__( 'Only %1$s Adult/Children are available this Tour', 'tourfic' ), $tf_today_limit );
 				}
 			}
+
+			$response['errors'] = apply_filters('tf_tour_booking_limit_errors', $response['errors'], [
+				'post_id' => $post_id,
+				'tour_type' => $tour_type,
+				'tf_tour_booking_limit' => $tf_tour_booking_limit ?? null,
+			]);
 		}
 
 	} elseif ( $tour_type == 'continuous' && !empty($matched_availability) ) {
@@ -322,6 +328,12 @@ function tf_tours_booking_function() {
 				$response['errors'][] = sprintf( esc_html__( 'Only %1$s Adult/Children are available this Date', 'tourfic' ), $tf_today_limit );
 			}
 		}
+
+		$response['errors'] = (array) apply_filters('tf_tour_booking_limit_errors', $response['errors'] ?? [], [
+			'post_id' => $post_id,
+			'tour_type' => $tour_type,
+			'tf_tour_booking_limit' => $tf_tour_booking_limit ?? null,
+		]);
 
 	}
 
@@ -544,6 +556,12 @@ function tf_tours_booking_function() {
 					$response['errors'][] = sprintf( esc_html__( 'Only %1$s Adult/Children are available this Date', 'tourfic' ), $tf_today_limit );
 				}
 			}
+
+			$response['errors'] = apply_filters('tf_tour_booking_limit_errors', $response['errors'], [
+				'post_id' => $post_id,
+				'tour_type' => $tour_type,
+				'tf_tour_booking_limit' => $tf_tour_booking_limit ?? null,
+			]);
 		}
 
 	}
@@ -1645,6 +1663,15 @@ add_action( 'woocommerce_order_status_changed', 'tf_add_google_calendar_on_statu
 
 function tf_add_google_calendar_on_status_change( $order_id, $old_status, $new_status, $order ) {
 	$order_items = $order->get_items();
+
+	/**
+	 * Dynamic hook that fires after order status is changed.
+	 *
+	 * @param int    $order_id        The order ID.
+	 * @param string $new_status      The new order status.
+	 * @param object $order_data      The order data object.
+	 */
+	do_action('tf_order_status_changed', $order_id, $new_status, $order);
 
 	if ( ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-integration' ) )['tf-new-order-google-calendar'] ) &&
 			Helper::tf_data_types( Helper::tfopt( 'tf-integration' ) )['tf-new-order-google-calendar'] == "1" ) {

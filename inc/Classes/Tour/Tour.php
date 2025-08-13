@@ -4801,6 +4801,10 @@ class Tour {
 			}
 		}
 
+		$response = apply_filters('tf_tour_booking_popup_response', $response, [
+			'matched_availability' => $matched_availability,
+		]);
+
 		echo wp_json_encode( $response );
 		die();
 	}
