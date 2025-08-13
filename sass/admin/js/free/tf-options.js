@@ -2119,6 +2119,22 @@
             });
         });
 
+        // Package Dependancy
+        $(".group_discount_switcher").each(function() {
+            let $switcher = $(this);
+            let $checkbox = $switcher.find('input[type="checkbox"]');
+            let $box = $switcher.next(".group_discount_package_box");
+
+            $box.toggle($checkbox.is(":checked"));
+        });
+
+        $(document).on("change", ".group_discount_switcher input[type='checkbox']", function() {
+            let $switcher = $(this).closest(".group_discount_switcher");
+            let $box = $switcher.next(".group_discount_package_box");
+
+            $box.toggle($(this).is(":checked"));
+        });
+
         $(document).on('change', '.tf_tour_pricing_type', function (e) {
             let pricingType = $(this).val();
 
