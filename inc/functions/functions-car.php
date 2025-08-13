@@ -50,7 +50,7 @@ if(!empty($car_extra_pass)){
 	$total_extra = Pricing::set_extra_price($meta, $pickup_date, $dropoff_date, $pickup_time, $dropoff_time, $car_extra_pass, $extra_qty);
 	$total_prices = $total_prices + $total_extra['price'];
 }
-
+/* translators: %1$s will return total price */
 $response['total_price'] = sprintf( esc_html__( 'Total: %1$s', 'tourfic' ), wc_price($total_prices) );
 
 $total_days = 1;
@@ -774,7 +774,7 @@ function tf_car_booking_pupup_callback() {
 									</label>
 								</div>
 								<div class="tf-single-protection-title tf-flex">
-								<?php echo !empty($protection['title']) ? esc_html($protection['title']) : ''; ?> (<?php esc_html_e("Per "); ?><?php echo esc_html($protection['price_by']); ?>) <?php echo !empty($protection["protection_required"]) ? esc_html('*') : ''; ?> 
+								<?php echo !empty($protection['title']) ? esc_html($protection['title']) : ''; ?> (<?php esc_html_e("Per ", "tourfic"); ?><?php echo esc_html($protection['price_by']); ?>) <?php echo !empty($protection["protection_required"]) ? esc_html('*') : ''; ?> 
 								<?php if(!empty($protection['content'])){ ?>
 								<div class="tf-info-tooltip">
 									<i class="ri-information-line"></i>
@@ -1088,7 +1088,7 @@ function tf_car_price_calculation_callback() {
 			if (!empty($twobestRefundPolicy)) {
 				foreach ($twobestRefundPolicy as $policy) {
 					$policyType = $policy['cancellation_type'] === 'free' ? esc_html__('Fully refundable', 'tourfic') : esc_html__('Charged', 'tourfic');
-					$policyTime = $policy['before_cancel_time'] . ' ' . esc_html__($policy['cancellation-times'] === 'day' ? 'days' : 'hours', 'tourfic');
+					$policyTime = $policy['before_cancel_time'] . ' ' . $policy['cancellation-times'] === 'day' ? esc_html__('days', 'tourfic') : esc_html__('hours', 'tourfic');
 					$refundAmount = !empty($policy['refund_amount']) ? $policy['refund_amount'] . ' ' . esc_html__('% refund', 'tourfic') : '';
 
 
@@ -1122,6 +1122,7 @@ function tf_car_price_calculation_callback() {
 
     // Send response
     wp_send_json_success( [
+		/* translators: %s will return total price */
         'total_price' => sprintf( esc_html__( 'Total: %1$s', 'tourfic' ), wc_price( $total_prices ) ),
         'cancellation' => $cancellation,
     ] );

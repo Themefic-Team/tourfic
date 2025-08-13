@@ -262,7 +262,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                                 <span class="icon-text tf-d-b">x<?php echo esc_html( $adult_number ); ?></span>
                             </div>
                             <div class="tf-top">
-								<?php esc_html_e( 'Number of Adult' .  apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) ) . 's', 'tourfic' ); ?>
+								<?php echo esc_html( 'Number of Adult' .  apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) ) . 's' ); ?>
                                 <i class="tool-i"></i>
                             </div>
                         </div>
@@ -404,7 +404,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                             <span class="icon-text tf-d-b">x<?php echo esc_html( $adult_number ); ?></span>
                         </div>
                         <div class="tf-top">
-							<?php esc_html_e( 'Number of ' .  apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) ) . 's', 'tourfic' ); ?>
+							<?php echo esc_html( 'Number of ' .  apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) ) . 's' ); ?>
                             <i class="tool-i"></i>
                         </div>
                     </div>
@@ -2102,7 +2102,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                                 <span class="icon-text tf-d-b">x<?php echo esc_html( $adult_number ); ?></span>
                             </div>
                             <div class="tf-top">
-								<?php esc_html_e( 'Number of '.  apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) ) .'s', 'tourfic' ); ?>
+								<?php echo esc_html( 'Number of '.  apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) ) .'s' ); ?>
                                 <i class="tool-i"></i>
                             </div>
                         </div>
@@ -2233,7 +2233,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                             <span class="icon-text tf-d-b">x<?php echo esc_html( $adult_number ); ?></span>
                         </div>
                         <div class="tf-top">
-							<?php esc_html_e( 'Number of Adult'.  apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) ) . 's', 'tourfic' ); ?>
+							<?php echo esc_html( 'Number of Adult'.  apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) ) . 's' ); ?>
                             <i class="tool-i"></i>
                         </div>
                     </div>

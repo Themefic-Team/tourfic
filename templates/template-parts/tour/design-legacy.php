@@ -247,7 +247,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                         </div>
                     <?php endif; ?>
                     <?php if ($tf_booking_type == 2 && $tf_hide_booking_form == 1):?>
-                        <a href="<?php echo esc_url($tf_booking_url) ?>" target="_blank" class="tf_btn" style="margin-left: 16px;"><?php esc_html_e($tf_tour_single_book_now_text, 'tourfic'); ?></a>
+                        <a href="<?php echo esc_url($tf_booking_url) ?>" target="_blank" class="tf_btn" style="margin-left: 16px;"><?php echo esc_html($tf_tour_single_book_now_text); ?></a>
                     <?php endif; ?>
                 </div>
             </div>
