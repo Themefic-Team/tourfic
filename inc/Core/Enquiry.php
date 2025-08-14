@@ -434,13 +434,13 @@ abstract class Enquiry {
 														<?php if( $email_body_setting == 'html'): ?>
 															<?php
 															if ( ! empty( $reply['reply_message_html'] ) ) {
-																$plain_text = strip_tags( $reply['reply_message_html'] );
+																$plain_text = wp_strip_all_tags( $reply['reply_message_html'] );
 																$output = strlen( $plain_text ) > 75
 																	? Helper::tourfic_character_limit_callback( $plain_text, 75 )
 																	: $plain_text;
 																echo wp_kses_post( esc_html( $output ) );
 															} else {
-																$plain_text = strip_tags( $reply['reply_message'] );
+																$plain_text = wp_strip_all_tags( $reply['reply_message'] );
 																$output = Helper::tourfic_character_limit_callback( $plain_text, 75 );
 																echo esc_html( $output );
 															}
@@ -455,7 +455,7 @@ abstract class Enquiry {
 
 																echo wp_kses_post( esc_html( $output ) );
 															} else {
-																$plain_text = strip_tags( $reply['reply_message'] );
+																$plain_text = wp_strip_all_tags( $reply['reply_message'] );
 																$output = Helper::tourfic_character_limit_callback( $plain_text, 75 );
 
 																echo esc_html( $output );
