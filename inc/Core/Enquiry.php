@@ -202,8 +202,8 @@ abstract class Enquiry {
 								<?php 
 								$date_format = !empty(Helper::tfopt("tf-date-format-for-users")) ? Helper::tfopt("tf-date-format-for-users") : get_option('date_format');
 								list($date, $time) = explode(" ", $submit_time);
-								$formateed_time = date( get_option('time_format'), strtotime($time));
-								$formateed_date = date( $date_format, strtotime($date));
+								$formateed_time = gmdate( get_option('time_format'), strtotime($time));
+								$formateed_date = gmdate( $date_format, strtotime($date));
 								?>
 								<div class="email-time-date">
 									<span class="email-date"><?php echo $formateed_date ? esc_html( $formateed_date ) : ''; ?></span>
@@ -343,8 +343,8 @@ abstract class Enquiry {
 		$date_time_format = self::convert_to_wp_timezone( $data["created_at"] );
 
 		list($date, $time) = explode(" ", $date_time_format);
-		$formateed_date = date( "M d, Y", strtotime($date));
-		$formateed_time = date( "h:i:s A", strtotime($time));
+		$formateed_date = gmdate( "M d, Y", strtotime($date));
+		$formateed_time = gmdate( "h:i:s A", strtotime($time));
 		$reply_data = !empty( $data["reply_data"] ) ? json_decode($data["reply_data"], true) : array();
 		$reply_user = isset( $_POST['user_name'] ) ? sanitize_text_field( $_POST['user_name'] ) : '';
 		$current_user = wp_get_current_user();

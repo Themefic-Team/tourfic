@@ -448,7 +448,7 @@ class Map_Filter extends \WP_Widget {
                                                             'content' => base64_encode($infoWindowtext)
                                                         ];
                                                     }
-                                                    echo apply_filters("tf_apartment_archive_single_featured_card_design_one", Apartment::tf_apartment_archive_single_item());
+                                                    echo wp_kses_post(apply_filters("tf_apartment_archive_single_featured_card_design_one", Apartment::tf_apartment_archive_single_item()));
                                                 }
                                             }
                                             while ( $loop->have_posts() ) {
@@ -668,7 +668,7 @@ class Map_Filter extends \WP_Widget {
                                                             'content' => base64_encode($infoWindowtext)
                                                         ];
                                                     }
-                                                    echo apply_filters("tf_apartment_archive_single_featured_card_design_one", Apartment::tf_apartment_archive_single_item());
+                                                    echo wp_kses_post(apply_filters("tf_apartment_archive_single_featured_card_design_one", Apartment::tf_apartment_archive_single_item()));
                                                 }
                                             }
                                             wp_reset_query();
