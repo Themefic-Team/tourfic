@@ -707,45 +707,29 @@ abstract class Enquiry {
 	public function enquiry_table_data( $post_type = '', $post_id = '', $status = '', $offset = 0, $per_page = 0 ) {
 
 		 global $wpdb;
-		 $query = "SELECT * FROM {$wpdb->prefix}tf_enquiry_data WHERE ";
 		 $enquiry_data = array();
  
-		 if( !empty($post_type) ) {
-			$query .= sprintf(' post_type = "%s"', $post_type);
-		 }
-
-		if(!empty($post_type) && ( !empty($post_id) || !empty($status)) ) {
-			$query .= ' AND';
+		$tf_filter_query = "";
+		if ( $post_id ) {
+			$tf_filter_query .= " AND post_id = '$post_id'";
 		}
-		 
-		if( !empty($post_id) ) {
-			$query.= sprintf(' post_id = %d', $post_id );
-		 }
-
-		 if( !empty($post_type) && !empty($post_id) && !empty($status) ) {
-			$query .= ' AND';
-		 }
-		 
-		 if( !empty($status) ) {
-
+		if( !empty($status) ) {
 			if( $status == 'not-replied') {
-				$query.= sprintf(' enquiry_status != "%s"', 'replied' );
+				$tf_filter_query .= sprintf(' AND enquiry_status != "%s"', 'replied' );
 			} elseif( $status == 'not-responded') {
-				$query.= sprintf(' enquiry_status != "%s"', 'responded' );
+				$tf_filter_query .= sprintf(' AND enquiry_status != "%s"', 'responded' );
 			} else {
-				$query.= sprintf(' enquiry_status = "%s"', $status );
+				$tf_filter_query .= sprintf(' AND enquiry_status = "%s"', $status );
 			}
-		 }
+		}
 
-		 $query .= " ORDER BY id DESC";
+		if( !empty( $offset ) && !empty( $per_page ) ) {
+			$tf_filter_query .= sprintf(' LIMIT %d, %d', $offset, $per_page);
+		}
 
-		 if( !empty( $offset ) && !empty( $per_page ) ) {
-			$query .= sprintf(' LIMIT %d, %d', $offset, $per_page);
-		 }
+		$results = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_enquiry_data WHERE post_type = %s {$tf_filter_query} ORDER BY id DESC", $post_type ), ARRAY_A );
 
-		 $results = $wpdb->get_results( $wpdb->prepare( $query ), ARRAY_A );
-
-		 if( !empty($results) ) {
+		if( !empty($results) ) {
 			foreach( $results as $result ) {
 				$enquiry_data[] = array(
 					'id' => $result['id'],
