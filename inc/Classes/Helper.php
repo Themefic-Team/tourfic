@@ -1747,7 +1747,7 @@ class Helper {
         // Convert string times to timestamps
         $start_time = strtotime($start_time_str);
         $end_time   = strtotime($end_time_str);
-        $default_time = date('g:i A', strtotime($default_time_str));
+        $default_time = gmdate('g:i A', strtotime($default_time_str));
 
         // Use selected time from GET or fall back to default
         $selected_pickup_time = !empty($_GET['pickup-time']) ? esc_html($_GET['pickup-time']) : $default_time;
@@ -2309,7 +2309,7 @@ class Helper {
 								</div>
 								<div class="info-select">
 									<h5><?php esc_html_e("Pick-up date", "tourfic"); ?></h5>
-									<input type="text" placeholder="Pick Up Date" id="tf_pickup_date" class="tf_pickup_date" value="<?php echo !empty($_GET['pickup-date']) ? esc_html($_GET['pickup-date']) : esc_attr(date('Y/m/d', strtotime('+1 day'))); ?>" />
+									<input type="text" placeholder="Pick Up Date" id="tf_pickup_date" class="tf_pickup_date" value="<?php echo !empty($_GET['pickup-date']) ? esc_html($_GET['pickup-date']) : esc_attr(gmdate('Y/m/d', strtotime('+1 day'))); ?>" />
 								</div>
 							</div>
 						</div>
@@ -2345,7 +2345,7 @@ class Helper {
                                         <ul class="time-options-list tf-pickup-time">
                                             <?php
                                                 for ($time = $start_time; $time <= $end_time; $time += $time_interval * 60) {
-                                                    $time_label = date("g:i A", $time);
+                                                    $time_label = gmdate("g:i A", $time);
                                                     $selected = ($selected_pickup_time === $time_label) ? 'selected' : '';
                                                     echo '<li value="' . esc_attr($time_label) . '" ' . esc_attr($selected) . '>' . esc_html($time_label) . '</li>';
                                                 }
@@ -2367,7 +2367,7 @@ class Helper {
 								</div>
 								<div class="info-select">
 									<h5><?php esc_html_e("Drop-off date", "tourfic"); ?></h5>
-									<input type="text" placeholder="Drop Off Date" id="tf_dropoff_date" class="tf_dropoff_date" value="<?php echo !empty($_GET['dropoff-date']) ? esc_html($_GET['dropoff-date']) : esc_attr(date('Y-m-d', strtotime('+2 day'))); ?>" readonly='' />
+									<input type="text" placeholder="Drop Off Date" id="tf_dropoff_date" class="tf_dropoff_date" value="<?php echo !empty($_GET['dropoff-date']) ? esc_html($_GET['dropoff-date']) : esc_attr(gmdate('Y-m-d', strtotime('+2 day'))); ?>" readonly='' />
 								</div>
 							</div>
 						</div>
@@ -2403,7 +2403,7 @@ class Helper {
                                         <ul class="time-options-list tf-dropoff-time">
                                             <?php
                                                 for ($time = $start_time; $time <= $end_time; $time += $time_interval * 60) {
-                                                    $time_label = date("g:i A", $time);
+                                                    $time_label = gmdate("g:i A", $time);
                                                     $selected = ($selected_dropoff_time === $time_label) ? 'selected' : '';
                                                     echo '<li value="' . esc_attr($time_label) . '" ' . esc_attr($selected) . '>' . esc_html($time_label) . '</li>';
                                                 }
@@ -3046,7 +3046,7 @@ class Helper {
 
     static function tf_flatpickr_locale( $placement = 0 ) {
 
-		$flatpickr_locale     = ! empty( get_locale() ) ? get_locale() : 'en_US';http://tourfic.test/wp-admin/edit.php?post_type=tf_carrental
+		$flatpickr_locale     = ! empty( get_locale() ) ? get_locale() : 'en_US';
 		$allowed_locale       = array( 'ar', 'bn_BD', 'de_DE', 'es_ES', 'fr_FR', 'hi_IN', 'it_IT', 'nl_NL', 'ru_RU', 'zh_CN' );
 		$tf_first_day_of_week = ! empty( self::tfopt( "tf-week-day-flatpickr" ) ) ? self::tfopt( "tf-week-day-flatpickr" ) : 0;
 
