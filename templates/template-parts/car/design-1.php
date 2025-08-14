@@ -18,7 +18,7 @@ $time_interval = 30;
 $start_time_str = '00:00';
 $end_time_str   = '23:30';
 $default_time_str = '10:00';
-$next_current_day = date('l', strtotime('+1 day'));
+$next_current_day = gmdate('l', strtotime('+1 day'));
 
 if($disable_car_time_slot){
     $time_interval = !empty(Helper::tfopt('car_time_interval')) ? intval(Helper::tfopt('car_time_interval')) : 30;
@@ -39,7 +39,7 @@ if($disable_car_time_slot){
 // Convert string times to timestamps
 $start_time = strtotime($start_time_str);
 $end_time   = strtotime($end_time_str);
-$default_time = date('g:i A', strtotime($default_time_str));
+$default_time = gmdate('g:i A', strtotime($default_time_str));
 
 // Use selected time from GET or fall back to default
 $selected_pickup_time = !empty($_GET['pickup_time']) ? esc_html($_GET['pickup_time']) : $default_time;
@@ -416,7 +416,7 @@ $tf_cars_slug = get_option('car_slug');
                                     </div>
                                     <div class="info-select">
                                         <h5><?php esc_html_e("Pick-up date", "tourfic"); ?></h5>
-                                        <input type="text" placeholder="<?php esc_html_e("Pick Up Date", "tourfic"); ?>" id="tf_pickup_date" class="tf_pickup_date" value="<?php echo !empty($_GET['pickup_date']) ? esc_html($_GET['pickup_date']) : esc_attr(date('Y/m/d', strtotime('+1 day'))); ?>" />
+                                        <input type="text" placeholder="<?php esc_html_e("Pick Up Date", "tourfic"); ?>" id="tf_pickup_date" class="tf_pickup_date" value="<?php echo !empty($_GET['pickup_date']) ? esc_html($_GET['pickup_date']) : esc_attr(gmdate('Y/m/d', strtotime('+1 day'))); ?>" />
                                     </div>
                                 </div>
                             </div>
@@ -452,7 +452,7 @@ $tf_cars_slug = get_option('car_slug');
                                             <ul class="time-options-list tf-pickup-time">
                                                 <?php
                                                     for ($time = $start_time; $time <= $end_time; $time += $time_interval * 60) {
-                                                        $time_label = date("g:i A", $time);
+                                                        $time_label = gmdate("g:i A", $time);
                                                         $selected = ($selected_pickup_time === $time_label) ? 'selected' : '';
                                                         echo '<li value="' . esc_attr($time_label) . '" ' . esc_attr($selected) . '>' . esc_html($time_label) . '</li>';
                                                     }
@@ -474,7 +474,7 @@ $tf_cars_slug = get_option('car_slug');
                                     </div>
                                     <div class="info-select">
                                         <h5><?php esc_html_e("Drop-off date", "tourfic"); ?></h5>
-                                        <input type="text" placeholder="Drop Off Date" id="tf_dropoff_date" class="tf_dropoff_date" value="<?php echo !empty($_GET['dropoff_date']) ? esc_html($_GET['dropoff_date']) : esc_attr(date('Y/m/d', strtotime('+2 day'))); ?>" />
+                                        <input type="text" placeholder="Drop Off Date" id="tf_dropoff_date" class="tf_dropoff_date" value="<?php echo !empty($_GET['dropoff_date']) ? esc_html($_GET['dropoff_date']) : esc_attr(gmdate('Y/m/d', strtotime('+2 day'))); ?>" />
                                     </div>
                                 </div>
                             </div>
@@ -511,7 +511,7 @@ $tf_cars_slug = get_option('car_slug');
                                             <ul class="time-options-list tf-dropoff-time">
                                                 <?php
                                                     for ($time = $start_time; $time <= $end_time; $time += $time_interval * 60) {
-                                                        $time_label = date("g:i A", $time);
+                                                        $time_label = gmdate("g:i A", $time);
                                                         $selected = ($selected_dropoff_time === $time_label) ? 'selected' : '';
                                                         echo '<li value="' . esc_attr($time_label) . '" ' . esc_attr($selected) . '>' . esc_html($time_label) . '</li>';
                                                     }
