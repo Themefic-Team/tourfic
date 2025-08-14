@@ -51,8 +51,8 @@ class TF_Review {
              *
              * v1.19.5
              */
-            wp_enqueue_script( 'jquery-validate', '//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js', array( 'jquery' ), TF_VERSION, true );
-    
+            wp_enqueue_script( 'jquery-validate', TF_ASSETS_APP_URL . 'libs/jquery-validate/jquery.validate.min.js', array( 'jquery' ), TF_VERSION, true );
+            
             $data = '
             
                 jQuery(document).ready(function($) {
