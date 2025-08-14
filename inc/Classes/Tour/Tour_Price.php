@@ -194,9 +194,9 @@ class Tour_Price {
             }
 
             # WooCommerce Price
-            $wc_adult_price  = wc_price($adult_price);
-            $wc_child_price  = wc_price($child_price);
-            $wc_infant_price = wc_price($infant_price);
+            $wc_adult_price  = !empty($adult_price) ? wc_price($adult_price) : 0;
+            $wc_child_price  = !empty($child_price) ? wc_price($child_price) : 0;
+            $wc_infant_price = !empty($infant_price) ? wc_price($infant_price) : 0;
 
             if(!empty($allow_discount) && ($discount_type == 'percent' || $discount_type == 'fixed')) {
                 $wc_sale_adult_price  = !empty($sale_adult_price) ? wc_price($sale_adult_price) : 0;
