@@ -1159,7 +1159,7 @@ class Apartment {
 						'd.m.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/,
 						'm.d.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/
 					};
-					const dateRegex = regexMap['<?php echo $date_format_change_apartments; ?>'];
+					const dateRegex = regexMap['<?php echo esc_attr($date_format_change_apartments); ?>'];
 
                     $("#tf_apartment_booking #check-in-out-date").flatpickr({
                         enableTime: false,
@@ -1886,7 +1886,7 @@ class Apartment {
 						'd.m.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/,
 						'm.d.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/
 					};
-					const dateRegex = regexMap['<?php echo $date_format_change_appartments; ?>'];
+					const dateRegex = regexMap['<?php echo esc_attr($date_format_change_appartments); ?>'];
 
                     const checkinoutdateange = flatpickr("#tf-apartment-booking #check-in-out-date", {
                         enableTime: false,

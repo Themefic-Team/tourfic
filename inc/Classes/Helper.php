@@ -804,7 +804,7 @@ class Helper {
                             'd.m.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/,
                             'm.d.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/
                         };
-                        const dateRegex = regexMap['<?php echo $date_format_for_users; ?>'];
+                        const dateRegex = regexMap['<?php echo esc_attr($date_format_for_users); ?>'];
 
                         $(".tf-hotel-side-booking #check-in-out-date").flatpickr({
                             enableTime: false,
@@ -1151,7 +1151,7 @@ class Helper {
                                 'd.m.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/,
                                 'm.d.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/
                             };
-                            const dateRegex = regexMap['<?php echo $date_format_for_users; ?>'];
+                            const dateRegex = regexMap['<?php echo esc_attr($date_format_for_users); ?>'];
 
                             // flatpickr locale
 							<?php self::tf_flatpickr_locale( "root" ); ?>
@@ -1653,7 +1653,7 @@ class Helper {
                             'd.m.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/,
                             'm.d.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/
                         };
-                        const dateRegex = regexMap['<?php echo $date_format_for_users; ?>'];
+                        const dateRegex = regexMap['<?php echo esc_attr($date_format_for_users); ?>'];
 
                         $(".tf-hotel-side-booking #check-in-out-date").flatpickr({
                             enableTime: false,
@@ -1855,7 +1855,7 @@ class Helper {
                                 'd.m.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/,
                                 'm.d.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/
                             };
-                            const dateRegex = regexMap['<?php echo $date_format_for_users; ?>'];
+                            const dateRegex = regexMap['<?php echo esc_attr($date_format_for_users); ?>'];
                             let calander = flatpickr(this, {
                                 enableTime: false,
                                 minDate: "today",
@@ -2188,7 +2188,7 @@ class Helper {
                                         'd.m.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/,
                                         'm.d.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/
                                     };
-                                    const dateRegex = regexMap['<?php echo $date_format_for_users; ?>'];
+                                    const dateRegex = regexMap['<?php echo esc_attr($date_format_for_users); ?>'];
 
                                     // flatpickr locale first day of Week
                                     <?php self::tf_flatpickr_locale( "root" ); ?>
@@ -2309,7 +2309,7 @@ class Helper {
 								</div>
 								<div class="info-select">
 									<h5><?php esc_html_e("Pick-up date", "tourfic"); ?></h5>
-									<input type="text" placeholder="Pick Up Date" id="tf_pickup_date" class="tf_pickup_date" value="<?php echo !empty($_GET['pickup-date']) ? esc_html($_GET['pickup-date']) : date('Y/m/d', strtotime('+1 day')); ?>" />
+									<input type="text" placeholder="Pick Up Date" id="tf_pickup_date" class="tf_pickup_date" value="<?php echo !empty($_GET['pickup-date']) ? esc_html($_GET['pickup-date']) : esc_attr(date('Y/m/d', strtotime('+1 day'))); ?>" />
 								</div>
 							</div>
 						</div>
@@ -2347,7 +2347,7 @@ class Helper {
                                                 for ($time = $start_time; $time <= $end_time; $time += $time_interval * 60) {
                                                     $time_label = date("g:i A", $time);
                                                     $selected = ($selected_pickup_time === $time_label) ? 'selected' : '';
-                                                    echo '<li value="' . esc_attr($time_label) . '" ' . $selected . '>' . esc_html($time_label) . '</li>';
+                                                    echo '<li value="' . esc_attr($time_label) . '" ' . esc_attr($selected) . '>' . esc_html($time_label) . '</li>';
                                                 }
                                             ?>
                                         </ul>
@@ -2367,7 +2367,7 @@ class Helper {
 								</div>
 								<div class="info-select">
 									<h5><?php esc_html_e("Drop-off date", "tourfic"); ?></h5>
-									<input type="text" placeholder="Drop Off Date" id="tf_dropoff_date" class="tf_dropoff_date" value="<?php echo !empty($_GET['dropoff-date']) ? esc_html($_GET['dropoff-date']) : date('Y-m-d', strtotime('+2 day')); ?>" readonly='' />
+									<input type="text" placeholder="Drop Off Date" id="tf_dropoff_date" class="tf_dropoff_date" value="<?php echo !empty($_GET['dropoff-date']) ? esc_html($_GET['dropoff-date']) : esc_attr(date('Y-m-d', strtotime('+2 day'))); ?>" readonly='' />
 								</div>
 							</div>
 						</div>
@@ -2405,7 +2405,7 @@ class Helper {
                                                 for ($time = $start_time; $time <= $end_time; $time += $time_interval * 60) {
                                                     $time_label = date("g:i A", $time);
                                                     $selected = ($selected_dropoff_time === $time_label) ? 'selected' : '';
-                                                    echo '<li value="' . esc_attr($time_label) . '" ' . $selected . '>' . esc_html($time_label) . '</li>';
+                                                    echo '<li value="' . esc_attr($time_label) . '" ' . esc_attr($selected) . '>' . esc_html($time_label) . '</li>';
                                                 }
                                             ?>
                                         </ul>
@@ -2918,7 +2918,7 @@ class Helper {
                                 'd.m.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/,
                                 'm.d.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/
                             };
-                            const dateRegex = regexMap['<?php echo $date_format_for_users; ?>'];
+                            const dateRegex = regexMap['<?php echo esc_attr($date_format_for_users); ?>'];
                             let calander = flatpickr(this, {
                                 enableTime: false,
                                 minDate: "today",
