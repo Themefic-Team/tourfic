@@ -1037,7 +1037,7 @@ abstract class Enquiry {
 			$to = $reply_mail;
 			$from = "From: " . get_option( 'blogname' ) . " <" . get_option( 'admin_email' ) . ">\r\n";
 			$subject = esc_html__("Re: Response to Your Enquiry About ", 'tourfic') . esc_html( get_the_title( $post_id ) ) . " - " . esc_html("#".$enquiry_id);
-			$header_uid = rand( 10000000, 99999999 );
+			$header_uid = wp_rand( 10000000, 99999999 );
 			$headers = array('Content-Type: text/html; charset=UTF-8');
 			$headers[] = $from;
 			$headers[] = 'Reply-To: ' . $reply_to_email;
@@ -1136,7 +1136,7 @@ abstract class Enquiry {
 		$from = "From: " . get_option( 'blogname' ) . " <" . get_option( 'admin_email' ) . ">\r\n";
 		$headers[] = 'Content-Type: text/html; charset=UTF-8';
 		$headers[] = $from;
-		$headers[] = 'Reply-To: no-reply@' . parse_url( site_url() )["host"];
+		$headers[] = 'Reply-To: no-reply@' . wp_parse_url( site_url() )["host"];
 		$dashboard_link = get_option("tf_dashboard_page_id") ? get_permalink(get_option("tf_dashboard_page_id")) : site_url('my-account/');
 		$email_content = '';
 
