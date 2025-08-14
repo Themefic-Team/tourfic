@@ -30,7 +30,8 @@ if(!function_exists('tf_hotel_facilities_categories')) {
 }
 
 TF_Metabox::metabox( 'tf_hotels_opt', array(
-	'title'     => $hotel_name . ' Settings',
+	/* translators: %s is the hotel name */
+	'title' => sprintf( __( '%s Settings', 'tourfic' ), $hotel_name ),
 	'post_type' => 'tf_hotel',
 	'sections'  => array(
 		'general' => array(
@@ -41,7 +42,8 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'id'    => 'hotel-general-heading',
 					'type'  => 'heading',
 					'label' => 'General Settings',
-					'subtitle' => esc_html( 'These are some common settings specific to this ' . $hotel_name . '.' ),
+					/* translators: %s is the hotel name */
+					'subtitle' => sprintf( esc_html__( 'These are some common settings specific to this %s.', 'tourfic' ), $hotel_name ),
 				),
 				array(
 					'id'      => 'hotel-general-docs',
@@ -52,8 +54,10 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 				array(
 					'id'        => 'featured',
 					'type'      => 'switch',
-					'label'     => esc_html( 'Featured ' . $hotel_name),
-					'subtitle' => esc_html( 'Enable this option to feature this '. strtolower($hotel_name) .' at the top of search results.' ),
+					/* translators: %s is the hotel name */
+					'label'    => sprintf( esc_html__( 'Featured %s', 'tourfic' ), $hotel_name ),
+					/* translators: %s is the hotel name */
+					'subtitle' => sprintf( esc_html__( 'Enable this option to feature this %s at the top of search results.', 'tourfic' ), strtolower( $hotel_name ) ),
 					'label_on'  => esc_html__( 'Yes', 'tourfic' ),
 					'label_off' => esc_html__( 'No', 'tourfic' ),
 					'default'   => false,
@@ -61,27 +65,32 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 				array(
 					'id'          => 'featured_text',
 					'type'        => 'text',
-					'label'       => esc_html( $hotel_name . ' Featured Text' ),
-					'subtitle'    => esc_html( 'Enter Featured ' .$hotel_name . ' Text' ),
-					'placeholder' => esc_html( 'Enter Featured ' . $hotel_name . ' Text' ),
-					'default' => esc_html__( 'Hot Deal', 'tourfic' ),
+					/* translators: %s is the hotel name */
+					'label'       => sprintf( esc_html__( '%s Featured Text', 'tourfic' ), $hotel_name ),
+					/* translators: %s is the hotel name */
+					'subtitle'    => sprintf( esc_html__( 'Enter Featured %s Text', 'tourfic' ), $hotel_name ),
+					/* translators: %s is the hotel name */
+					'placeholder' => sprintf( esc_html__( 'Enter Featured %s Text', 'tourfic' ), $hotel_name ),
+					'default'     => esc_html__( 'Hot Deal', 'tourfic' ),
 					'dependency'  => array( 'featured', '==', true ),
 				),
 				array(
 					'id'       => 'tf_single_hotel_layout_opt',
 					'type'     => 'select',
-					'label'    => esc_html( 'Single ' . $hotel_name . ' Template Settings' ),
+					/* translators: %s is the hotel name */
+					'label'    => sprintf( esc_html__( 'Single %s Template Settings', 'tourfic' ), $hotel_name ),
 					'subtitle' => esc_html__( 'You can keep the Global Template settings or choose a different layout for this hotel.', 'tourfic' ),
 					'options'  => [
 						'global' => esc_html__( 'Global Settings', 'tourfic' ),
 						'single' => esc_html__( 'Single Settings', 'tourfic' ),
 					],
 					'default'  => 'global',
-				),
+				),				
 				array(
 					'id'       => 'tf_single_hotel_template',
 					'type'     => 'imageselect',
-					'label'    => esc_html( 'Single ' . $hotel_name . ' Page Layout' ),
+					/* translators: %s is the hotel name */
+					'label' => sprintf( esc_html__( 'Single %s Page Layout', 'tourfic' ), $hotel_name ),
 					'options'   	=> array(
 						'design-1' => array(
 							'title' => esc_html__('Design 1', 'tourfic'),
@@ -136,8 +145,12 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 				array(
 					'id'    => 'hotel-location-heading',
 					'type'  => 'heading',
-					'label' => 'Location Settings',
-					'subtitle' => esc_html( 'The location of a ' . strtolower($hotel_name) . ' is a crucial element for every booking. Set your ' . strtolower($hotel_name) . ' locations in this section.' ),
+					'label' => esc_html__( 'Location Settings', 'tourfic' ),
+					/* translators: %1$s is the hotel name in lowercase, %2$s is the hotel name in lowercase */
+					'subtitle' => sprintf(esc_html__( 'The location of a %1$s is a crucial element for every booking. Set your %2$s locations in this section.', 'tourfic' ),
+						strtolower( $hotel_name ),
+						strtolower( $hotel_name )
+					),
 				),
 				array(
 					'id'      => 'hotel-location-docs',
@@ -192,7 +205,10 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 				array(
 					'id'           => 'nearby-places',
 					'type'         => 'repeater',
-					'label'        => esc_html( 'Insert / Create your ' . strtolower($hotel_name) . ' Place' ),
+					/* translators: %s is the hotel name */
+					'label' => sprintf(esc_html__( 'Insert / Create your %s Place', 'tourfic' ),
+						strtolower($hotel_name)
+					),
 					'button_title' => esc_html__( 'Add New Place', 'tourfic' ),
 					'class'        => 'tf-field-class',
 					'field_title'  => 'place-title',
@@ -208,7 +224,10 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 							'id'          => 'place-dist',
 							'type'        => 'text',
 							'label'       => esc_html__( 'Place Distance and Unit', 'tourfic' ),
-							'subtitle'    => esc_html( 'Distance of the place from the ' . $hotel_name . ' with Unit' ),
+							/* translators: %s is the hotel name */
+							'subtitle' => sprintf(esc_html__( 'Distance of the place from the %s with Unit', 'tourfic' ),
+								$hotel_name
+							),
 							'field_width' => 50,
 							'attributes'  => array(
 								'min' => '0',
@@ -227,7 +246,10 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 				array(
 					'id'      => 'facilities-heading',
 					'type'    => 'heading',
-					'content' => esc_html( $hotel_name . ' Facilities' ),
+					/* translators: %s is the hotel name */
+					'content' => sprintf(esc_html__( '%s Facilities', 'tourfic' ),
+						$hotel_name
+					),
 					'class'   => 'tf-field-class',
 				),
 				array(
@@ -243,7 +265,10 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 				array(
 					'id'           => 'hotel-facilities',
 					'type'         => 'repeater',
-					'label'        => esc_html( 'Insert / Create ' . $hotel_name . ' Facilities' ),
+					/* translators: %s is the hotel name */
+					'label' => sprintf(esc_html__( 'Insert / Create %s Facilities', 'tourfic' ),
+						$hotel_name
+					),
 					'button_title' => esc_html__( 'Add New', 'tourfic' ),
 					'class'        => 'tf-field-class',
 					'fields'       => array(
@@ -288,7 +313,10 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'id'    => 'hotel-image-heading',
 					'type'  => 'heading',
 					'label' => 'Upload Images & Videos',
-					'subtitle' => esc_html( 'Images and videos are effective methods for showcasing your ' . strtolower($hotel_name) . ' to guests and have the potential to increase bookings.' ),
+					/* translators: %s is the hotel name */
+					'subtitle' => sprintf(esc_html__( 'Images and videos are effective methods for showcasing your %s to guests and have the potential to increase bookings.', 'tourfic' ),
+						strtolower( $hotel_name )
+					),
 				),
 				array(
 					'id'      => 'hotel-image-docs',
@@ -299,16 +327,20 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 				array(
 					'id'       => 'gallery',
 					'type'     => 'gallery',
-					'label'    => esc_html( $hotel_name . ' Gallery'),
-					'subtitle' => esc_html( 'Add multiple images to craft a captivating gallery for your ' . strtolower($hotel_name) . ', giving potential customers a visual tour.' ),
+					/* translators: %s is the hotel name */
+					'label'    => sprintf( esc_html__( '%s Gallery', 'tourfic' ), $hotel_name ),
+					/* translators: %s is the hotel name */
+					'subtitle' => sprintf( esc_html__( 'Add multiple images to craft a captivating gallery for your %s, giving potential customers a visual tour.', 'tourfic' ), strtolower( $hotel_name ) ),
 				),
 				array(
 					'id'          => 'video',
 					'type'        => 'text',
-					'label'       => esc_html( $hotel_name . ' Video'),
-					'subtitle'    => esc_html( 'If you have an enticing video of your ' . $hotel_name . ', simply upload it to YouTube or Vimeo and insert the URL here to showcase it to your guests.' ),
+					/* translators: %s is the hotel name */
+					'label'       => sprintf( esc_html__( '%s Video', 'tourfic' ), $hotel_name ),
+					/* translators: %s is the hotel name */
+					'subtitle'    => sprintf( esc_html__( 'If you have an enticing video of your %s, simply upload it to YouTube or Vimeo and insert the URL here to showcase it to your guests.', 'tourfic' ), $hotel_name ),
 					'placeholder' => __( 'Input full URL here (no embed code)', 'tourfic' ),
-				),
+				),				
 			),
 		),
 		// Hotel Details
