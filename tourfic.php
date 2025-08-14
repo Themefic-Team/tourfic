@@ -160,8 +160,8 @@ final class Tourfic {
 		$locale = apply_filters( 'plugin_locale', get_locale(), 'tourfic' );
 		// Allow upgrade safe, site specific language files in /wp-content/languages/tourfic/
 		load_textdomain( 'tourfic', WP_LANG_DIR . '/tourfic/tourfic-' . $locale . '.mo' );
-		// Then check for a language file in /wp-content/plugins/tourfic/lang/ (this will be overriden by any file already loaded)
-		load_plugin_textdomain( 'tourfic', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
+		// // Then check for a language file in /wp-content/plugins/tourfic/lang/ (this will be overriden by any file already loaded)
+		// load_plugin_textdomain( 'tourfic', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
 	}
 
 	/**
