@@ -1473,7 +1473,7 @@ class Search_Form extends Widget_Base {
                                 'd.m.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/,
                                 'm.d.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/
                             };
-                            const dateRegex = regexMap['<?php echo $date_format_for_users; ?>'];
+                            const dateRegex = regexMap['<?php echo esc_html($date_format_for_users); ?>'];
                             let calander = flatpickr(this, {
                                 enableTime: false,
                                 minDate: "today",
@@ -1811,7 +1811,7 @@ class Search_Form extends Widget_Base {
                                             'd.m.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/,
                                             'm.d.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/
                                         };
-                                        const dateRegex = regexMap['<?php echo $date_format_for_users; ?>'];
+                                        const dateRegex = regexMap['<?php echo esc_html($date_format_for_users); ?>'];
 
                                         // flatpickr locale first day of Week
                                         <?php Helper::tf_flatpickr_locale( "root" ); ?>
@@ -2053,7 +2053,7 @@ class Search_Form extends Widget_Base {
                                     </div>
                                     <div class="info-select">
                                         <label><?php echo !empty($settings['pickup_date_label']) ? esc_attr($settings['pickup_date_label']) : esc_html__( 'Pick-up date', 'tourfic' ); ?></label>
-                                        <input type="text" placeholder="<?php echo !empty($settings['pickup_date_placeholder_text']) ? esc_attr($settings['pickup_date_placeholder_text']) : esc_html__( 'Pick Up Date', 'tourfic' ); ?>" class="tf_pickup_date" value="<?php echo !empty($_GET['pickup_date']) ? esc_html($_GET['pickup_date']) : gmdate('Y/m/d', strtotime('+1 day')); ?>" />
+                                        <input type="text" placeholder="<?php echo !empty($settings['pickup_date_placeholder_text']) ? esc_attr($settings['pickup_date_placeholder_text']) : esc_html__( 'Pick Up Date', 'tourfic' ); ?>" class="tf_pickup_date" value="<?php echo !empty($_GET['pickup_date']) ? esc_html($_GET['pickup_date']) : esc_html(gmdate('Y/m/d', strtotime('+1 day'))); ?>" />
                                     </div>
                                 </div>
                             </div>
@@ -2082,7 +2082,7 @@ class Search_Form extends Widget_Base {
                                                     for ($time = $start_time; $time <= $end_time; $time += $time_interval * 60) {
                                                         $time_label = gmdate("g:i A", $time);
                                                         $selected = ($selected_pickup_time === $time_label) ? 'selected' : '';
-                                                        echo '<li value="' . esc_attr($time_label) . '" ' . $selected . '>' . esc_html($time_label) . '</li>';
+                                                        echo '<li value="' . esc_attr($time_label) . '" ' . esc_attr($selected) . '>' . esc_html($time_label) . '</li>';
                                                     }
                                                 ?>
                                             </ul>
@@ -2100,7 +2100,7 @@ class Search_Form extends Widget_Base {
                                     </div>
                                     <div class="info-select">
                                         <label><?php echo !empty($settings['dropoff_date_label']) ? esc_attr($settings['dropoff_date_label']) : esc_html__( 'Drop-off date', 'tourfic' ); ?></label>
-                                        <input type="text" placeholder="<?php echo !empty($settings['dropoff_date_placeholder_text']) ? esc_attr($settings['dropoff_date_placeholder_text']) : esc_html__( 'Drop Off Date', 'tourfic' ); ?>" class="tf_dropoff_date" value="<?php echo !empty($_GET['dropoff-date']) ? esc_html($_GET['dropoff-date']) : gmdate('Y/m/d', strtotime('+2 day')) ?>" />
+                                        <input type="text" placeholder="<?php echo !empty($settings['dropoff_date_placeholder_text']) ? esc_attr($settings['dropoff_date_placeholder_text']) : esc_html__( 'Drop Off Date', 'tourfic' ); ?>" class="tf_dropoff_date" value="<?php echo !empty($_GET['dropoff-date']) ? esc_html($_GET['dropoff-date']) : esc_html(gmdate('Y/m/d', strtotime('+2 day'))) ?>" />
                                     </div>
                                 </div>
                             </div>
@@ -2129,7 +2129,7 @@ class Search_Form extends Widget_Base {
                                                     for ($time = $start_time; $time <= $end_time; $time += $time_interval * 60) {
                                                         $time_label = gmdate("g:i A", $time);
                                                         $selected = ($selected_dropoff_time === $time_label) ? 'selected' : '';
-                                                        echo '<li value="' . esc_attr($time_label) . '" ' . $selected . '>' . esc_html($time_label) . '</li>';
+                                                        echo '<li value="' . esc_attr($time_label) . '" ' . esc_attr($selected) . '>' . esc_html($time_label) . '</li>';
                                                     }
                                                 ?>
                                             </ul>
@@ -2713,7 +2713,7 @@ class Search_Form extends Widget_Base {
                                 'd.m.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/,
                                 'm.d.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/
                             };
-                            const dateRegex = regexMap['<?php echo $date_format_for_users; ?>'];
+                            const dateRegex = regexMap['<?php echo esc_html($date_format_for_users); ?>'];
                             let calander = flatpickr(this, {
                                 enableTime: false,
                                 minDate: "today",

@@ -448,7 +448,7 @@ class Map_Filter extends \WP_Widget {
                                                             'content' => base64_encode($infoWindowtext)
                                                         ];
                                                     }
-                                                    echo wp_kses_post(apply_filters("tf_apartment_archive_single_featured_card_design_one", Apartment::tf_apartment_archive_single_item()));
+                                                    echo wp_kses(apply_filters("tf_apartment_archive_single_featured_card_design_one", Apartment::tf_apartment_archive_single_item()), Helper::tf_custom_wp_kses_allow_tags());
                                                 }
                                             }
                                             while ( $loop->have_posts() ) {
@@ -668,7 +668,7 @@ class Map_Filter extends \WP_Widget {
                                                             'content' => base64_encode($infoWindowtext)
                                                         ];
                                                     }
-                                                    echo wp_kses_post(apply_filters("tf_apartment_archive_single_featured_card_design_one", Apartment::tf_apartment_archive_single_item()));
+                                                    echo wp_kses(apply_filters("tf_apartment_archive_single_featured_card_design_one", Apartment::tf_apartment_archive_single_item()), Helper::tf_custom_wp_kses_allow_tags());
                                                 }
                                             }
                                             wp_reset_query();

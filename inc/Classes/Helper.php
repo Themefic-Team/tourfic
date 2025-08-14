@@ -3087,10 +3087,7 @@ class Helper {
 
 		if ( ! empty( $placement ) && ! empty( $flatpickr_locale ) && $placement == "root" ) {
 
-			echo esc_html( <<<EOD
-				window.flatpickr.l10ns.$flatpickr_locale.firstDayOfWeek = $tf_first_day_of_week;
-			EOD
-			);
+			echo esc_html( "window.flatpickr.l10ns.$flatpickr_locale.firstDayOfWeek = $tf_first_day_of_week");
 
 		} else {
 			echo 'locale: "' . esc_html( $flatpickr_locale ) . '",';
@@ -3210,7 +3207,7 @@ class Helper {
 	}
 
     static function tf_utm_generator( $url, $utm_params = array() ) {
-        $host_url = parse_url( get_site_url(), PHP_URL_HOST );
+        $host_url = wp_parse_url( get_site_url(), PHP_URL_HOST );
         $utm_params = array_merge( array(
             'utm_source'   => 'tourfic_' . $host_url,
             'utm_medium'   => 'plugin',
