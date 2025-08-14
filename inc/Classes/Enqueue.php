@@ -1290,14 +1290,12 @@ class Enqueue {
 		$output = '';
 
 		if( wp_get_theme() && wp_get_theme()->get( 'TextDomain' ) === 'hello-elementor' ) {
-			$output .= <<<'EOD'
-			/* Fix for Hello Elementor theme flatpicker conflict */
-
+			$output .= '
 			.flatpickr-months .flatpickr-current-month {
 				display: flex;
 				gap: 8px;
 			}
-			EOD;
+			';
 		}
 
 		if (wp_style_is('tf-app-style', 'enqueued')) {
