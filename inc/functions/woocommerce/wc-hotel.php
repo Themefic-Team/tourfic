@@ -625,7 +625,7 @@ function tf_hotel_booking_callback() {
 				'payment_method'   => "offline",
 				'customer_id'	   => $tf_offline_user_id,
 				'status'           => 'processing',
-				'order_date'       => date( 'Y-m-d H:i:s' ),
+				'order_date'       => gmdate( 'Y-m-d H:i:s' ),
 			);
 
 			$response['without_payment'] = 'true';

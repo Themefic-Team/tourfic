@@ -3534,9 +3534,9 @@ class Hotel {
 							// translators: 1: adult count, 2: adult price, 3: child count, 4: child price.
 							'title' => sprintf( __( 'Adult ( %1$s × %2$s ) + Child ( %3$s × %4$s )', 'tourfic' ),
 								$adult,
-								strip_tags( wc_price( $service_adult_fee ) ),
+								wp_strip_all_tags( wc_price( $service_adult_fee ) ),
 								$child,
-								strip_tags( wc_price( $service_child_fee ) )
+								wp_strip_all_tags( wc_price( $service_child_fee ) )
 							),
 							'price' => $airport_service_price_total
 						);
@@ -3545,7 +3545,7 @@ class Hotel {
 							// translators: 1: adult count, 2: adult price.
 							'title' => sprintf( __( 'Adult ( %1$s × %2$s )', 'tourfic' ),
 								$adult,
-								strip_tags( wc_price( $service_adult_fee ) )
+								wp_strip_all_tags( wc_price( $service_adult_fee ) )
 							),
 							'price' => $airport_service_price_total
 						);
@@ -3583,9 +3583,9 @@ class Hotel {
 							// translators: 1: adult count, 2: adult price, 3: child count, 4: child price.
 							'title' => sprintf( __( 'Adult ( %1$s × %2$s ) + Child ( %3$s × %4$s )', 'tourfic' ),
 								$adult,
-								strip_tags( wc_price( $service_adult_fee ) ),
+								wp_strip_all_tags( wc_price( $service_adult_fee ) ),
 								$child,
-								strip_tags( wc_price( $service_child_fee ) )
+								wp_strip_all_tags( wc_price( $service_child_fee ) )
 							),
 							'price' => $airport_service_price_total
 						);
@@ -3594,7 +3594,7 @@ class Hotel {
 							// translators: 1: adult count, 2: adult price.
 							'title' => sprintf( __( 'Adult ( %1$s × %2$s )', 'tourfic' ),
 								$adult,
-								strip_tags( wc_price( $service_adult_fee ) )
+								wp_strip_all_tags( wc_price( $service_adult_fee ) )
 							),
 							'price' => $airport_service_price_total
 						);
@@ -3812,13 +3812,11 @@ class Hotel {
 
 								if ( ! empty( $hotel_tag_name ) ) {
 									echo wp_kses_post(
-										<<<EOD
-											<div class="tf-multiple-tag-item" style="color: $tag_font_color; background-color: $tag_background_color ">
-												<span class="tf-multiple-tag">$hotel_tag_name</span>
-											</div>
-										EOD
+										'<div class="tf-multiple-tag-item" style="color: ' . esc_attr( $tag_font_color ) . '; background-color: ' . esc_attr( $tag_background_color ) . '">
+											<span class="tf-multiple-tag">' . esc_html( $hotel_tag_name ) . '</span>
+										</div>'
 									);
-								}
+								}								
 							}
 						}
 						?>
@@ -3970,12 +3968,10 @@ class Hotel {
 								$tag_font_color       = ! empty( $tag["hotel-tag-color-settings"]["font"] ) ? $tag["hotel-tag-color-settings"]["font"] : "#fff";
 
 								if ( ! empty( $hotel_tag_name ) ) {
-									echo wp_kses_post(
-										<<<EOD
-										<span class="tf-multiple-tag" style="color: $tag_font_color; background-color: $tag_background_color ">$hotel_tag_name</span>
-									EOD
-									);
-								}
+									echo '<span class="tf-multiple-tag" style="color: ' . esc_attr( $tag_font_color ) . '; background-color: ' . esc_attr( $tag_background_color ) . '">'
+										. wp_kses_post( $hotel_tag_name ) .
+									'</span>';
+								}								
 							}
 						}
 						?>
@@ -4125,12 +4121,10 @@ class Hotel {
 								$tag_font_color       = ! empty( $tag["hotel-tag-color-settings"]["font"] ) ? $tag["hotel-tag-color-settings"]["font"] : "#fff";
 
 								if ( ! empty( $hotel_tag_name ) ) {
-									echo wp_kses_post(
-										<<<EOD
-										<div class="tf-tag-item tf-multiple-tag" style="color: $tag_font_color; background-color: $tag_background_color ">$hotel_tag_name</div>
-									EOD
-									);
-								}
+									echo '<div class="tf-tag-item tf-multiple-tag" style="color: ' . esc_attr( $tag_font_color ) . '; background-color: ' . esc_attr( $tag_background_color ) . '">'
+										. wp_kses_post( $hotel_tag_name ) .
+									'</div>';
+								}								
 							}
 						}
 						?>
@@ -4229,12 +4223,11 @@ class Hotel {
 									$tag_font_color       = ! empty( $tag["hotel-tag-color-settings"]["font"] ) ? $tag["hotel-tag-color-settings"]["font"] : "#fff";
 
 									if ( ! empty( $hotel_tag_name ) ) {
-										echo wp_kses_post(
-											<<<EOD
-											<span class="default-single-tag" style="color: $tag_font_color; background-color: $tag_background_color">$hotel_tag_name</span>
-										EOD
-										);
+										echo '<span class="default-single-tag" style="color: ' . esc_attr( $tag_font_color ) . '; background-color: ' . esc_attr( $tag_background_color ) . '">'
+											. wp_kses_post( $hotel_tag_name ) .
+										'</span>';
 									}
+									
 								}
 							}
 							?>
