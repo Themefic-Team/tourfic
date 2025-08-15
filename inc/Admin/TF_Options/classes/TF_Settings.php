@@ -214,9 +214,6 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 		 * @author Jahid, Foysal
 		 */
 		public function tf_dashboard_page() {
-            $current_page_url = $this->get_current_page_url();
-            $query_string = $this->get_query_string($current_page_url);
-
 			?>
 			<div class="tf-setting-dashboard">
 				<!-- dashboard-header-include -->
@@ -883,8 +880,6 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
 			// Retrieve an existing value from the database.
 			$tf_option_value = get_option( $this->option_id );
-			$current_page_url = $this->get_current_page_url();
-			$query_string = $this->get_query_string($current_page_url);
 
 			// Set default values.
 			if ( empty( $tf_option_value ) ) {
@@ -1126,7 +1121,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 												// Invalid file type or extension
 												$response    = [
 													'status'  => 'error',
-													'message' => __( 'Invalid file type or extension', 'tourfic' ),
+													'message' => esc_html__( 'Invalid file type or extension', 'tourfic' ),
 												];
 												echo wp_json_encode($response);
 												wp_die();
@@ -1160,7 +1155,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 		public function tf_ajax_save_options() {
 			$response    = [
 				'status'  => 'error',
-				'message' => __( 'Something went wrong!', 'tourfic' ),
+				'message' => esc_html__( 'Something went wrong!', 'tourfic' ),
 			];
 
 			if( isset( $_POST['tf_option_nonce'] ) || wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['tf_option_nonce'])), 'tf_option_nonce_action' ) ) {
@@ -1171,20 +1166,20 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 					if(empty($tf_import_option) || !is_array($tf_import_option)){
 						$response    = [
 							'status'  => 'error',
-							'message' => __( 'Your imported data is not valid', 'tourfic' ),
+							'message' => esc_html__( 'Your imported data is not valid', 'tourfic' ),
 						];
 					}else{
 						$this->save_options();
 						$response = [
 							'status'  => 'success',
-							'message' => __( 'Options imported successfully!', 'tourfic' ),
+							'message' => esc_html__( 'Options imported successfully!', 'tourfic' ),
 						];
 					}
 				}else{
 					$this->save_options();
 					$response = [
 						'status'  => 'success',
-						'message' => __( 'Options saved successfully!', 'tourfic' ),
+						'message' => esc_html__( 'Options saved successfully!', 'tourfic' ),
 					];
 
 				}
@@ -1201,7 +1196,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 		public function tf_ajax_reset_options() {
 			$response    = [
 				'status'  => 'error',
-				'message' => __( 'Something went wrong!', 'tourfic' ),
+				'message' => esc_html__( 'Something went wrong!', 'tourfic' ),
 			];
 
 
@@ -1213,19 +1208,19 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 					update_option( 'tf_settings', '' );
 					$response = [
 						'status'  => 'success',
-						'message' => __( 'Options Reset successfully!', 'tourfic' ),
+						'message' => esc_html__( 'Options Reset successfully!', 'tourfic' ),
 					];
 				} else {
 					$response    = [
 						'status'  => 'error',
-						'message' => __( 'Settings are fresh, nothing to reset.', 'tourfic' ),
+						'message' => esc_html__( 'Settings are fresh, nothing to reset.', 'tourfic' ),
 					];
 				}
 
 			} else {
 				$response    = [
 					'status'  => 'error',
-					'message' => __( 'Something went wrong!', 'tourfic' ),
+					'message' => esc_html__( 'Something went wrong!', 'tourfic' ),
 				];
 			}
 
@@ -1341,24 +1336,13 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 			} else {
 				$response = [
 					'status'  => 'error',
-					'message' => __( 'Something went wrong!', 'tourfic' ),
+					'message' => esc_html__( 'Something went wrong!', 'tourfic' ),
 				];
 			}
 
 			echo wp_json_encode( $response );
 			wp_die();
 		}
-
-		/*
-		 * Get current page url
-		 * @return string
-		 * @author Foysal
-		 */
-		public function get_current_page_url() {
-            $page_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-
-            return $page_url;
-        }
 
         /*
          * Get query string from url
@@ -1384,7 +1368,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 	        // Check if the current user has the required capability.
 	        if (!current_user_can('manage_options')) {
 		        $response['status'] = 'error';
-		        $response['message'] = __('You do not have permission to access this resource.', 'tourfic');
+		        $response['message'] = esc_html__('You do not have permission to access this resource.', 'tourfic');
 		        echo wp_json_encode($response);
                 die();
 	        }

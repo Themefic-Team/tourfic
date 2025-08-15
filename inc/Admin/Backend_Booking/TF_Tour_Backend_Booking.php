@@ -79,7 +79,7 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 						'class'   => 'tf-pro-notice',
 						'notice'  => 'info',
 						'icon'    => 'ri-information-fill',
-						'content' => wp_kses_post( __( 'We\'re offering some extra booking features like <b>tour time</b> and <b>tour extra features</b> in our pro plan. <a href="https://tourfic.com/" target="_blank"> Upgrade to our pro package today to take advantage of these fantastic options!</a>', 'tourfic' ) ),
+						'content' => wp_kses_post( esc_html__( 'We\'re offering some extra booking features like <b>tour time</b> and <b>tour extra features</b> in our pro plan. <a href="https://tourfic.com/" target="_blank"> Upgrade to our pro package today to take advantage of these fantastic options!</a>', 'tourfic' ) ),
 					),
 				),
 			),
@@ -133,7 +133,7 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 
 		// Check if the current user has the required capability.
 		if (!current_user_can('manage_options')) {
-			wp_send_json_error(__('You do not have permission to access this resource.', 'tourfic'));
+			wp_send_json_error(esc_html__('You do not have permission to access this resource.', 'tourfic'));
 			return;
 		}
 

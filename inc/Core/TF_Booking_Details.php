@@ -30,7 +30,7 @@ abstract Class TF_Booking_Details {
         add_submenu_page(
             'edit.php?post_type=' . $booking_args['post_type'],
             $booking_args['menu_title'],
-            __( 'Booking Details', 'tourfic' ),
+            esc_html__( 'Booking Details', 'tourfic' ),
             $booking_args['capability'],
             $booking_args['menu_slug'],
             array( $this, 'tf_booking_page_callback' )
@@ -850,7 +850,7 @@ abstract Class TF_Booking_Details {
                     <!-- Pricing Details -->
                     <div class="customers-order-date details-box">
                         <h4>
-                            <?php echo esc_html( apply_filters( 'tf_' . $this->booking_args["booking_type"] . 'booking_details_pricing_section_title_change',  __( "Pricing details",  "tourfic"  ))); ?>
+                            <?php echo esc_html( apply_filters( 'tf_' . $this->booking_args["booking_type"] . 'booking_details_pricing_section_title_change',  esc_html__( "Pricing details",  "tourfic"  ))); ?>
                         </h4>
                         <div class="tf-grid-box tf-pricing-grid-box">
 
@@ -968,10 +968,10 @@ abstract Class TF_Booking_Details {
                                 <?php 
                                 if ( $tf_order_details->post_type == 'tour' ) {
                                     /* translators: %s Visitor. */
-                                    echo esc_html( sprintf( __( 'Visitor %s', 'tourfic' ), intval( $visitor_count ) ) );
+                                    echo esc_html( sprintf( esc_html__( 'Visitor %s', 'tourfic' ), intval( $visitor_count ) ) );
                                 } elseif ( $tf_order_details->post_type == 'hotel' ) {
                                     /* translators: %s Visitor. */
-                                    echo esc_html( sprintf( __( 'Guest %s', 'tourfic' ), intval( $visitor_count ) ) );
+                                    echo esc_html( sprintf( esc_html__( 'Guest %s', 'tourfic' ), intval( $visitor_count ) ) );
                                 }
                                 ?>
                                 </h3>
@@ -1294,7 +1294,7 @@ abstract Class TF_Booking_Details {
 		if ((in_array( 'administrator', (array) $user->roles ) && !current_user_can('manage_options')) ||
             (in_array( 'tf_vendor', (array) $user->roles ) && !current_user_can('tf_vendor_options')) ||
             (in_array( 'tf_manager', (array) $user->roles ) && !current_user_can('tf_manager_options'))) {
-			wp_send_json_error(__('You do not have permission to access this resource.', 'tourfic'));
+			wp_send_json_error(esc_html__('You do not have permission to access this resource.', 'tourfic'));
 			return;
 		}
 
@@ -1341,7 +1341,7 @@ abstract Class TF_Booking_Details {
 
         // Check if the current user has the required capability.
 		if (!current_user_can('manage_options')) {
-			wp_send_json_error(__('You do not have permission to access this resource.', 'tourfic'));
+			wp_send_json_error(esc_html__('You do not have permission to access this resource.', 'tourfic'));
 			return;
 		}
 
@@ -1374,7 +1374,7 @@ abstract Class TF_Booking_Details {
 		if ((in_array( 'administrator', (array) $user->roles ) && !current_user_can('manage_options')) ||
             (in_array( 'tf_vendor', (array) $user->roles ) && !current_user_can('tf_vendor_options')) ||
             (in_array( 'tf_manager', (array) $user->roles ) && !current_user_can('tf_manager_options'))) {
-			wp_send_json_error(__('You do not have permission to access this resource.', 'tourfic'));
+			wp_send_json_error(esc_html__('You do not have permission to access this resource.', 'tourfic'));
 			return;
 		}
 
@@ -1427,7 +1427,7 @@ abstract Class TF_Booking_Details {
 		if ((in_array( 'administrator', (array) $user->roles ) && !current_user_can('manage_options')) ||
             (in_array( 'tf_vendor', (array) $user->roles ) && !current_user_can('tf_vendor_options')) ||
             (in_array( 'tf_manager', (array) $user->roles ) && !current_user_can('tf_manager_options'))) {
-			wp_send_json_error(__('You do not have permission to access this resource.', 'tourfic'));
+			wp_send_json_error(esc_html__('You do not have permission to access this resource.', 'tourfic'));
 			return;
 		}
 

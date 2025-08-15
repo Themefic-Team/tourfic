@@ -698,7 +698,7 @@ function display_cart_item_custom_meta_data( $item_data, $cart_item ) {
 	}
 	if ( isset( $cart_item['tf_hotel_data']['option'] ) ) {
 		$item_data[] = array(
-			'key'   => __( 'Option', 'tourfic' ),
+			'key'   => esc_html__( 'Option', 'tourfic' ),
 			'value' => $cart_item['tf_hotel_data']['option'],
 		);
 	}

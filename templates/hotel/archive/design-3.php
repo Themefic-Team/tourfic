@@ -322,7 +322,7 @@
                     <div class="tf-nothing-found" data-post-count="0">
                     <?php 
                     /* translators: %s is the hotel name */
-                    echo esc_html( sprintf( __( 'No %s Found!', 'tourfic' ), $hotels_name ) ); 
+                    echo esc_html( sprintf( esc_html__( 'No %s Found!', 'tourfic' ), $hotels_name ) ); 
                     ?>
 
                     </div>

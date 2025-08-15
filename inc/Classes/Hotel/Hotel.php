@@ -3483,7 +3483,7 @@ class Hotel {
 					if ( $child != 0 ) {
 						$airport_service_arr = array(
 							// translators: 1: adult count, 2: adult price, 3: child count, 4: child price.
-							'title' => sprintf( __( 'Adult ( %1$s × %2$s ) + Child ( %3$s × %4$s )', 'tourfic' ),
+							'title' => sprintf( esc_html__( 'Adult ( %1$s × %2$s ) + Child ( %3$s × %4$s )', 'tourfic' ),
 								intval( $adult ),
 								wp_kses_post( wc_price( $service_adult_fee ) ),
 								intval( $child ),
@@ -3494,7 +3494,7 @@ class Hotel {
 					} else {
 						$airport_service_arr = array(
 							// translators: 1: adult count, 2: adult price.
-							'title' => sprintf(__( 'Adult ( %1$s × %2$s )', 'tourfic' ),
+							'title' => sprintf(esc_html__( 'Adult ( %1$s × %2$s )', 'tourfic' ),
 								intval( $adult ),
 								wp_kses_post( wc_price( $service_adult_fee ) )
 							),
@@ -3507,18 +3507,18 @@ class Hotel {
 					$airport_service_total       += $airport_service_price_total;
 
 					$airport_service_arr = array(
-						'title' => __( 'Fixed Price', 'tourfic' ),
+						'title' => esc_html__( 'Fixed Price', 'tourfic' ),
 						'price' => $airport_service_price_total
 					);
 				}
 				if ( "free" == $airport_pickup_price['airport_pickup_price_type'] ) {
 					$airport_service_arr = array(
-						'title' => __( 'Free', 'tourfic' ),
+						'title' => esc_html__( 'Free', 'tourfic' ),
 						'price' => 0
 					);
 				}
 
-				$airport_service_arr['label'] = __( 'Pickup Service', 'tourfic' );
+				$airport_service_arr['label'] = esc_html__( 'Pickup Service', 'tourfic' );
 			}
 			if ( "dropoff" == $airport_service ) {
 				$airport_pickup_price = ! empty( Helper::tf_data_types($meta['airport_dropoff_price']) ) ? Helper::tf_data_types($meta['airport_dropoff_price']) : '';
@@ -3532,7 +3532,7 @@ class Hotel {
 					if ( $child != 0 ) {
 						$airport_service_arr = array(
 							// translators: 1: adult count, 2: adult price, 3: child count, 4: child price.
-							'title' => sprintf( __( 'Adult ( %1$s × %2$s ) + Child ( %3$s × %4$s )', 'tourfic' ),
+							'title' => sprintf( esc_html__( 'Adult ( %1$s × %2$s ) + Child ( %3$s × %4$s )', 'tourfic' ),
 								$adult,
 								wp_strip_all_tags( wc_price( $service_adult_fee ) ),
 								$child,
@@ -3543,7 +3543,7 @@ class Hotel {
 					} else {
 						$airport_service_arr = array(
 							// translators: 1: adult count, 2: adult price.
-							'title' => sprintf( __( 'Adult ( %1$s × %2$s )', 'tourfic' ),
+							'title' => sprintf( esc_html__( 'Adult ( %1$s × %2$s )', 'tourfic' ),
 								$adult,
 								wp_strip_all_tags( wc_price( $service_adult_fee ) )
 							),
@@ -3556,18 +3556,18 @@ class Hotel {
 					$airport_service_total       += $airport_service_price_total;
 
 					$airport_service_arr = array(
-						'title' => __( 'Fixed Price', 'tourfic' ),
+						'title' => esc_html__( 'Fixed Price', 'tourfic' ),
 						'price' => $airport_service_price_total
 					);
 				}
 				if ( "free" == $airport_pickup_price['airport_pickup_price_type'] ) {
 					$airport_service_arr = array(
-						'title' => __( 'Free', 'tourfic' ),
+						'title' => esc_html__( 'Free', 'tourfic' ),
 						'price' => 0
 					);
 				}
 
-				$airport_service_arr['label'] = __( 'Drop-off Service', 'tourfic' );
+				$airport_service_arr['label'] = esc_html__( 'Drop-off Service', 'tourfic' );
 			}
 			if ( "both" == $airport_service ) {
 				$airport_pickup_price = ! empty( Helper::tf_data_types($meta['airport_pickup_dropoff_price']) ) ? Helper::tf_data_types($meta['airport_pickup_dropoff_price']) : '';
@@ -3581,7 +3581,7 @@ class Hotel {
 					if ( $child != 0 ) {
 						$airport_service_arr = array(
 							// translators: 1: adult count, 2: adult price, 3: child count, 4: child price.
-							'title' => sprintf( __( 'Adult ( %1$s × %2$s ) + Child ( %3$s × %4$s )', 'tourfic' ),
+							'title' => sprintf( esc_html__( 'Adult ( %1$s × %2$s ) + Child ( %3$s × %4$s )', 'tourfic' ),
 								$adult,
 								wp_strip_all_tags( wc_price( $service_adult_fee ) ),
 								$child,
@@ -3592,7 +3592,7 @@ class Hotel {
 					} else {
 						$airport_service_arr = array(
 							// translators: 1: adult count, 2: adult price.
-							'title' => sprintf( __( 'Adult ( %1$s × %2$s )', 'tourfic' ),
+							'title' => sprintf( esc_html__( 'Adult ( %1$s × %2$s )', 'tourfic' ),
 								$adult,
 								wp_strip_all_tags( wc_price( $service_adult_fee ) )
 							),
@@ -3605,18 +3605,18 @@ class Hotel {
 					$airport_service_total       += $airport_service_price_total;
 
 					$airport_service_arr = array(
-						'title' => __( 'Fixed Price', 'tourfic' ),
+						'title' => esc_html__( 'Fixed Price', 'tourfic' ),
 						'price' => $airport_service_price_total
 					);
 				}
 				if ( "free" == $airport_pickup_price['airport_pickup_price_type'] ) {
 					$airport_service_arr = array(
-						'title' => __( 'Free', 'tourfic' ),
+						'title' => esc_html__( 'Free', 'tourfic' ),
 						'price' => 0
 					);
 				}
 
-				$airport_service_arr['label'] = __( 'Pickup & Drop-off Service', 'tourfic' );
+				$airport_service_arr['label'] = esc_html__( 'Pickup & Drop-off Service', 'tourfic' );
 			}
 		}
 

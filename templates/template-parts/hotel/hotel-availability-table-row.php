@@ -716,7 +716,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
                                 <?php } ?>
                                 <?php if ( $adult_number ) { ?>
                                     <li><i class="ri-user-2-line"></i> <?php echo esc_html( $adult_number ); ?><?php echo esc_html( $adult_number ); ?><?php 
-									echo ' ' . esc_html( apply_filters( 'tf_hotel_adults_title_change', __( 'Adult', 'tourfic' ) ) ) . 's';
+									echo ' ' . esc_html( apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) ) ) . 's';
 									?>
 									</li>
                                 <?php } ?>
@@ -886,7 +886,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 						<?php if ( $adult_number ) { ?>
                             <li><i class="ri-user-2-line"></i> <?php echo esc_html( $adult_number ); ?><?php echo esc_html( $adult_number ); ?>
 							<?php 
-							echo ' ' . esc_html( apply_filters( 'tf_hotel_adults_title_change', __( 'Adult', 'tourfic' ) ) ) . 's';
+							echo ' ' . esc_html( apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) ) ) . 's';
 							?>
 							</li>
 						<?php } ?>
@@ -1245,7 +1245,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 						<?php if ( $adult_number ) { ?>
                             <li><i class="ri-user-2-line"></i> <?php echo esc_html( $adult_number ); ?><?php echo esc_html( $adult_number ); ?>
 							<?php 
-							echo ' ' . esc_html( apply_filters( 'tf_hotel_adults_title_change', __( 'Adult', 'tourfic' ) ) ) . 's';
+							echo ' ' . esc_html( apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) ) ) . 's';
 							?>
 							</li>
 						<?php } ?>
@@ -1548,7 +1548,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 									<?php if ( $adult_number ) { ?>
                                         <li><i class="ri-user-2-line"></i> <?php echo esc_html( $adult_number ); ?><?php echo esc_html( $adult_number ); ?>
 										<?php 
-										echo ' ' . esc_html( apply_filters( 'tf_hotel_adults_title_change', __( 'Adult', 'tourfic' ) ) ) . 's';
+										echo ' ' . esc_html( apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) ) ) . 's';
 										?>
 										</li>
 									<?php } ?>
@@ -1710,7 +1710,7 @@ if ( $tf_hotel_selected_template_check == "design-1" ) {
 								<?php if ( $adult_number ) { ?>
                                     <li><i class="ri-user-2-line"></i> <?php echo esc_html( $adult_number ); ?><?php echo esc_html( $adult_number ); ?>
 									<?php 
-									echo ' ' . esc_html( apply_filters( 'tf_hotel_adults_title_change', __( 'Adult', 'tourfic' ) ) ) . 's';
+									echo ' ' . esc_html( apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) ) ) . 's';
 									?>
 									</li>
 								<?php } ?>

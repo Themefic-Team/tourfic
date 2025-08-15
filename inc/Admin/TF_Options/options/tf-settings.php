@@ -1530,7 +1530,7 @@ TF_Settings::option( 'tf_settings', array(
 									'class'   => 'tour-option-itinerary-notice',
 									'content' => sprintf(
 										/* translators: %s is the Pro version URL */
-										__( 'By default, you can create your entire Tour Itinerary using our Default Itinerary editor found in the Single Tour settings. For access to an Itinerary builder with enhanced advanced features, please consider upgrading to our <a href="%s" target="_blank"><b>Pro version.</b></a>', 'tourfic' ),
+										esc_html__( 'By default, you can create your entire Tour Itinerary using our Default Itinerary editor found in the Single Tour settings. For access to an Itinerary builder with enhanced advanced features, please consider upgrading to our <a href="%s" target="_blank"><b>Pro version.</b></a>', 'tourfic' ),
 										esc_url( Helper::tf_utm_generator( "https://tourfic.com/", array( 'utm_medium' => 'settings_pro-itinerary' ) ) )
 									),
 								),								
@@ -2095,15 +2095,15 @@ TF_Settings::option( 'tf_settings', array(
 								/*array(
 									'id'        => 'reg-pop',
 									'type'      => 'switch',
-									'label'     => __( 'Registration Form Popup', 'tourfic' ),
-									'subtitle'  => __( 'Add class <code>tf-reg-popup</code> to trigger the popup', 'tourfic' ),
+									'label'     => esc_html__( 'Registration Form Popup', 'tourfic' ),
+									'subtitle'  => esc_html__( 'Add class <code>tf-reg-popup</code> to trigger the popup', 'tourfic' ),
 									'is_pro'   => true,
 								),*/
 
 								array(
 									'id'      => 'notice',
 									'type'    => 'notice',
-									'content' => wp_kses(__( 'Use shortcode <code>[tf_registration_form]</code> to show registration form in post/page/widget.', 'tourfic' ), Helper::tf_custom_wp_kses_allow_tags() ),
+									'content' => wp_kses(esc_html__( 'Use shortcode <code>[tf_registration_form]</code> to show registration form in post/page/widget.', 'tourfic' ), Helper::tf_custom_wp_kses_allow_tags() ),
 								),
 								array(
 									'id'       => 'email-verify',
@@ -2122,7 +2122,7 @@ TF_Settings::option( 'tf_settings', array(
 								array(
 									'id'      => 'notice_shortcode',
 									'type'    => 'notice',
-									'content' => wp_kses(__( 'Use shortcode <code>[tf_login_form]</code> to show login form in post/page/widget.', 'tourfic' ), Helper::tf_custom_wp_kses_allow_tags() ),
+									'content' => wp_kses(esc_html__( 'Use shortcode <code>[tf_login_form]</code> to show login form in post/page/widget.', 'tourfic' ), Helper::tf_custom_wp_kses_allow_tags() ),
 								),
 								array(
 									'id'         => 'partner_commission',
@@ -3992,8 +3992,8 @@ TF_Settings::option( 'tf_settings', array(
 					'label'    => esc_html__( 'Select Time Zone', 'tourfic' ),
 					'subtitle' => esc_html__( 'Choose your time-zone', 'tourfic' ),
 					'options' => [
-						'America/New_York' => __( '(UTC-05:00) New York', 'tourfic' ),
-						'Asia/Dhaka'  => __( '(UTC+06:00) Dhaka', 'tourfic' ),
+						'America/New_York' => esc_html__( '(UTC-05:00) New York', 'tourfic' ),
+						'Asia/Dhaka'  => esc_html__( '(UTC+06:00) Dhaka', 'tourfic' ),
 					],
 					'default' => 'America/New_York',
 					'is_pro'  => true,

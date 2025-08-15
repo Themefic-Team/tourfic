@@ -33,8 +33,8 @@ class Plugin_Page_Notice extends \Tourfic\Core\TF_Notice {
             ?>
                 <!-- <div class="tf-critical-update-notice notice notice-info is-dismissible">
                     <h2></?php echo esc_html__("The Wait is Over! Our Revamped Design Panel will be Introducing Soon!", 'tourfic') ?></h2>
-                    <p></?php echo wp_kses_post( __('We’re excited to announce that our <b>revamped design panel</b> is finally here! In the upcoming update, we’re bringing a <b>new and improved design panel</b> that enhances usability, organization, and customization options for a smoother experience. ', "tourfic")); ?></p>
-                    <p></?php echo wp_kses_post( __('Want to know what’s new in this update? Read <a href="https://themefic.com/tourfic-v2-16-0-optimized-design-coming-soon/" target="_blank"><b>this blog</b></a> to explore all the exciting changes.', "tourfic")); ?></p>
+                    <p></?php echo wp_kses_post( esc_html__('We’re excited to announce that our <b>revamped design panel</b> is finally here! In the upcoming update, we’re bringing a <b>new and improved design panel</b> that enhances usability, organization, and customization options for a smoother experience. ', "tourfic")); ?></p>
+                    <p></?php echo wp_kses_post( esc_html__('Want to know what’s new in this update? Read <a href="https://themefic.com/tourfic-v2-16-0-optimized-design-coming-soon/" target="_blank"><b>this blog</b></a> to explore all the exciting changes.', "tourfic")); ?></p>
                 </div> -->
 
                 <script>
@@ -69,7 +69,7 @@ class Plugin_Page_Notice extends \Tourfic\Core\TF_Notice {
             printf(
                 wp_kses_post(
                     // translators: 1: line break <br>, 2: container div start, 3: opening bold tag <b>, 4: closing bold tag </b>, 5: warning span <span style="color:red;">, 6: container div end, 7: closing outer div end.
-                    sprintf( __('%1$s %2$s The wait is Over! 
+                    sprintf( esc_html__('%1$s %2$s The wait is Over! 
                         Our %3$s Revamped Design Panel %4$s is now live in this version! We’ve introduced a %3$s new and improved design panel %4$s that enhances usability, organization, and customization options for a smoother experience. 
                         This update also includes major  %3$s option panel changes %4$s and %3$s core improvements %4$s.
                         %3$s %5$s ⚠️ Please make sure to take a full backup or any necessary precautions before updating the plugin to avoid any compatibility issues. %4$s %6$s %1$s  %7$s', 'tourfic'),

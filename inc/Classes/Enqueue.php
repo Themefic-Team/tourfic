@@ -1233,17 +1233,17 @@ class Enqueue {
 		$default_post_types = array(
 			'tf_hotel'     => array(
 				'hotel_location' => array(
-					'message' => __( 'Please select a location before publishing this hotel', 'tourfic' )
+					'message' => esc_html__( 'Please select a location before publishing this hotel', 'tourfic' )
 				)
 			),
 			'tf_tours'     => array(
 				'tour_destination' => array(
-					'message' => __( 'Please select a destination before publishing this tour', 'tourfic' )
+					'message' => esc_html__( 'Please select a destination before publishing this tour', 'tourfic' )
 				)
 			),
 			'tf_apartment' => array(
 				'apartment_location' => array(
-					'message' => __( 'Please select a location before publishing this apartment', 'tourfic' )
+					'message' => esc_html__( 'Please select a location before publishing this apartment', 'tourfic' )
 				)
 			)
 		);
@@ -1297,7 +1297,7 @@ class Enqueue {
 			if ( ! isset( $config['message'] ) || $taxonomy === $config ) {
 				$post_type_labels = get_post_type_labels( get_post_type_object( $post_type ) );
 				/* translators: %s taxonomy singular name, translators: %s: post type singular name */
-				$config['message'] = sprintf( __( 'Please choose at least one %1$s before publishing this %2$s.', 'tourfic' ), $taxonomy_labels->singular_name, $post_type_labels->singular_name );
+				$config['message'] = sprintf( esc_html__( 'Please choose at least one %1$s before publishing this %2$s.', 'tourfic' ), $taxonomy_labels->singular_name, $post_type_labels->singular_name );
 			}
 
 			$post_types[ $post_type ][ $taxonomy ]['message'] = $config['message'];
@@ -1317,18 +1317,18 @@ class Enqueue {
 			'error'                            => false,
 			'tf_nonce'                         => wp_create_nonce( 'updates' ),
 			'ajax_url'                         => admin_url( 'admin-ajax.php' ),
-			'deleting_old_review_fields'       => __( 'Deleting old review fields...', 'tourfic' ),
-			'deleting_room_order_ids'          => __( 'Deleting order ids...', 'tourfic' ),
-			'tour_location_required'           => __( 'Tour Location is a required field!', 'tourfic' ),
-			'hotel_location_required'          => __( 'Hotel Location is a required field!', 'tourfic' ),
-			'apartment_location_required'      => __( 'Apartment Location is a required field!', 'tourfic' ),
-			'installing'                       => __( 'Installing...', 'tourfic' ),
-			'activating'                       => __( 'Activating...', 'tourfic' ),
-			'installed'                        => __( 'Installed', 'tourfic' ),
-			'activated'                        => __( 'Activated', 'tourfic' ),
-			'install_failed'                   => __( 'Install failed', 'tourfic' ),
+			'deleting_old_review_fields'       => esc_html__( 'Deleting old review fields...', 'tourfic' ),
+			'deleting_room_order_ids'          => esc_html__( 'Deleting order ids...', 'tourfic' ),
+			'tour_location_required'           => esc_html__( 'Tour Location is a required field!', 'tourfic' ),
+			'hotel_location_required'          => esc_html__( 'Hotel Location is a required field!', 'tourfic' ),
+			'apartment_location_required'      => esc_html__( 'Apartment Location is a required field!', 'tourfic' ),
+			'installing'                       => esc_html__( 'Installing...', 'tourfic' ),
+			'activating'                       => esc_html__( 'Activating...', 'tourfic' ),
+			'installed'                        => esc_html__( 'Installed', 'tourfic' ),
+			'activated'                        => esc_html__( 'Activated', 'tourfic' ),
+			'install_failed'                   => esc_html__( 'Install failed', 'tourfic' ),
 			'i18n'                             => array(
-				'no_services_selected' => __( 'Please select at least one service.', 'tourfic' ),
+				'no_services_selected' => esc_html__( 'Please select at least one service.', 'tourfic' ),
 			)
 		) );
 

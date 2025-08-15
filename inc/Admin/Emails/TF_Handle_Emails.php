@@ -58,7 +58,7 @@ class TF_Handle_Emails {
            ' . $order_email_heading . '
            </h1>
            <h2 style="font-size:16px;font-weight:500;line-height:20px;color:#ffffff;font-family: Inter,sans-serif">
-                ' . __('Order Number : ', 'tourfic') . '#{booking_id}
+                ' . esc_html__('Order Number : ', 'tourfic') . '#{booking_id}
            </h2>
        </div>';
         $email_body_open .= '</div>';
@@ -546,54 +546,54 @@ class TF_Handle_Emails {
             array(
                 'order'              => array(
                     'admin'    => array(
-                        'heading'         => __( 'New Order Received', 'tourfic' ),
-                        'greeting'        => __( 'Dear Admin,', 'tourfic' ),
-                        'greeting_byline' => __( 'A new booking has been made on your website. Booking details are listed below.', 'tourfic' ),
+                        'heading'         => esc_html__( 'New Order Received', 'tourfic' ),
+                        'greeting'        => esc_html__( 'Dear Admin,', 'tourfic' ),
+                        'greeting_byline' => esc_html__( 'A new booking has been made on your website. Booking details are listed below.', 'tourfic' ),
                     ),
                     'vendor'   => array(
-                        'heading'         => __( 'New Order Received', 'tourfic' ),
-                        'greeting'        => __( 'Dear Vendor,', 'tourfic' ),
-                        'greeting_byline' => __( 'A new booking has been made on your website. Booking details are listed below.', 'tourfic' ),
+                        'heading'         => esc_html__( 'New Order Received', 'tourfic' ),
+                        'greeting'        => esc_html__( 'Dear Vendor,', 'tourfic' ),
+                        'greeting_byline' => esc_html__( 'A new booking has been made on your website. Booking details are listed below.', 'tourfic' ),
                     ),
                     'customer' => array(
-                        'heading'         => __( 'Booking Confirmation', 'tourfic' ),
-                        'greeting'        => __( 'Dear Customer,', 'tourfic' ),
-                        'greeting_byline' => __( 'A new booking has been made on your website. Booking details are listed below.', 'tourfic' ),
+                        'heading'         => esc_html__( 'Booking Confirmation', 'tourfic' ),
+                        'greeting'        => esc_html__( 'Dear Customer,', 'tourfic' ),
+                        'greeting_byline' => esc_html__( 'A new booking has been made on your website. Booking details are listed below.', 'tourfic' ),
 
                     ),
                 ),
                 'order_confirmation' => array(
                     'admin'    => array(
-                        'heading'         => __( 'A Payment has been received for #{booking_id}', 'tourfic' ),
-                        'greeting'        => __( 'Dear Admin,', 'tourfic' ),
-                        'greeting_byline' => __( 'A payment has been received for #{booking_id}. The payment details are listed below.', 'tourfic' ),
+                        'heading'         => esc_html__( 'A Payment has been received for #{booking_id}', 'tourfic' ),
+                        'greeting'        => esc_html__( 'Dear Admin,', 'tourfic' ),
+                        'greeting_byline' => esc_html__( 'A payment has been received for #{booking_id}. The payment details are listed below.', 'tourfic' ),
                     ),
                     'vendor'   => array(
-                        'heading'         => __( 'A Payment has been received for #{booking_id}', 'tourfic' ),
-                        'greeting'        => __( 'Dear Vendor,', 'tourfic' ),
-                        'greeting_byline' => __( 'A payment has been received for #{booking_id}. The payment details are listed below.', 'tourfic' ),
+                        'heading'         => esc_html__( 'A Payment has been received for #{booking_id}', 'tourfic' ),
+                        'greeting'        => esc_html__( 'Dear Vendor,', 'tourfic' ),
+                        'greeting_byline' => esc_html__( 'A payment has been received for #{booking_id}. The payment details are listed below.', 'tourfic' ),
                     ),
                     'customer' => array(
-                        'heading'         => __( 'Your booking has been confirmed.', 'tourfic' ),
-                        'greeting'        => __( 'Dear {fullname},', 'tourfic' ),
-                        'greeting_byline' => __( 'Your booking has been confirmed. Your booking and payment information is listed below.', 'tourfic' ),
+                        'heading'         => esc_html__( 'Your booking has been confirmed.', 'tourfic' ),
+                        'greeting'        => esc_html__( 'Dear {fullname},', 'tourfic' ),
+                        'greeting_byline' => esc_html__( 'Your booking has been confirmed. Your booking and payment information is listed below.', 'tourfic' ),
                     ),
                 ),
                 'cancellation'  => array(
                     'admin'    => array(
-                        'heading'         => __( 'A booking has been cancelled', 'tourfic' ),
-                        'greeting'        => __( 'Dear Admin,', 'tourfic' ),
-                        'greeting_byline' => __( 'A booking has been cancelled. The booking details are listed below.', 'tourfic' ),
+                        'heading'         => esc_html__( 'A booking has been cancelled', 'tourfic' ),
+                        'greeting'        => esc_html__( 'Dear Admin,', 'tourfic' ),
+                        'greeting_byline' => esc_html__( 'A booking has been cancelled. The booking details are listed below.', 'tourfic' ),
                     ),
                     'vendor'   => array(
-                        'heading'         => __( 'A booking has been cancelled', 'tourfic' ),
-                        'greeting'        => __( 'Dear Vendor,', 'tourfic' ),
-                        'greeting_byline' => __( 'A booking has been cancelled. The booking details are listed below.', 'tourfic' ),
+                        'heading'         => esc_html__( 'A booking has been cancelled', 'tourfic' ),
+                        'greeting'        => esc_html__( 'Dear Vendor,', 'tourfic' ),
+                        'greeting_byline' => esc_html__( 'A booking has been cancelled. The booking details are listed below.', 'tourfic' ),
                     ),
                     'customer' => array(
-                        'heading'         => __( 'Your booking has been cancelled.', 'tourfic' ),
-                        'greeting'        => __( 'Dear {fullname},', 'tourfic' ),
-                        'greeting_byline' => __( 'Your booking has been cancelled. Your booking and payment information is listed below.', 'tourfic' ),
+                        'heading'         => esc_html__( 'Your booking has been cancelled.', 'tourfic' ),
+                        'greeting'        => esc_html__( 'Dear {fullname},', 'tourfic' ),
+                        'greeting_byline' => esc_html__( 'Your booking has been cancelled. Your booking and payment information is listed below.', 'tourfic' ),
                     ),
                 ),
 
@@ -661,13 +661,13 @@ class TF_Handle_Emails {
         $order                   = wc_get_order( $order_id );
         $order_billing_email     = $order->get_billing_email();
         $email_settings          = self::$tf_email_settings;
-        $order_email_heading     = !empty( $email_settings['order_email_heading'] ) ? $email_settings['order_email_heading'] : __( 'Your order received' , 'tourfic' );
+        $order_email_heading     = !empty( $email_settings['order_email_heading'] ) ? $email_settings['order_email_heading'] : esc_html__( 'Your order received' , 'tourfic' );
         $brand_logo              = !empty( $email_settings['brand_logo'] ) ? $email_settings['brand_logo'] : '';
         $email_heading_bg        = !empty( $email_settings['email_heading_bg'] ) ? $email_settings['email_heading_bg']['bg_color'] : '#0209AF';
         $send_notifcation        = !empty( $email_settings['send_notification'] ) ? $email_settings['send_notification'] : '';
         $sale_notification_email = !empty( $email_settings['sale_notification_email'] ) ? $email_settings['sale_notification_email'] : get_bloginfo( 'admin_email' );
         $admin_email_disable     = !empty( $email_settings['admin_email_disable'] ) ? $email_settings['admin_email_disable'] : false;
-        $admin_email_subject     = !empty( $email_settings['admin_email_subject'] ) ? $email_settings['admin_email_subject'] . " # " . $order_id :  __( 'New Booking on ','tourfic' ) . get_bloginfo( 'name' ) . " # " . $order_id;
+        $admin_email_subject     = !empty( $email_settings['admin_email_subject'] ) ? $email_settings['admin_email_subject'] . " # " . $order_id :  esc_html__( 'New Booking on ','tourfic' ) . get_bloginfo( 'name' ) . " # " . $order_id;
         $email_from_name         = !empty( $email_settings['email_from_name'] ) ? $email_settings['email_from_name'] : get_bloginfo( 'name' );
         $email_from_email        = !empty( $email_settings['email_from_email'] ) ? $email_settings['email_from_email'] : get_bloginfo( 'admin_email' );
         $email_content_type      = !empty( $email_settings['email_content_type'] ) ? $email_settings['email_content_type'] : 'text/html';
@@ -710,14 +710,14 @@ class TF_Handle_Emails {
                 }
             } else {
                 //send static default mail
-                $default_mail = '<p>' . __( 'Dear Admin', 'tourfic' ) . '</p></br>';
-                $default_mail .= '<p>' . __( 'You have received a new booking. The details are as follows:', 'tourfic' ) . '</p></br>';
-                $default_mail .= __( '{booking_details}', 'tourfic' ) . '</br>';
-                $default_mail .= '<strong>' . __( 'Customer details', 'tourfic' ) . '</strong>' . '</br>';
-                $default_mail .= __( '{customer_details}', 'tourfic' ) . '</br>';
-                $default_mail .= '<p>' . __( 'Thank you', 'tourfic' ) . '</p>';
-                $default_mail .= __( 'Regards', 'tourfic' ) . '</br>';
-                $default_mail .= __( '{site_name}', 'tourfic' ) . '</br>';
+                $default_mail = '<p>' . esc_html__( 'Dear Admin', 'tourfic' ) . '</p></br>';
+                $default_mail .= '<p>' . esc_html__( 'You have received a new booking. The details are as follows:', 'tourfic' ) . '</p></br>';
+                $default_mail .= esc_html__( '{booking_details}', 'tourfic' ) . '</br>';
+                $default_mail .= '<strong>' . esc_html__( 'Customer details', 'tourfic' ) . '</strong>' . '</br>';
+                $default_mail .= esc_html__( '{customer_details}', 'tourfic' ) . '</br>';
+                $default_mail .= '<p>' . esc_html__( 'Thank you', 'tourfic' ) . '</p>';
+                $default_mail .= esc_html__( 'Regards', 'tourfic' ) . '</br>';
+                $default_mail .= esc_html__( '{site_name}', 'tourfic' ) . '</br>';
 
                 $default_mail = $this->replace_mail_tags( $default_mail , $order_id );
 
@@ -729,7 +729,7 @@ class TF_Handle_Emails {
         //send mail to vendor
         if ( !empty( $send_notifcation ) && $send_notifcation == 'admin_vendor' ) {
 
-            $vendor_email_subject          = !empty( $email_settings['admin_email_subject'] ) ? $email_settings['admin_email_subject'] :  __( 'Your email subject','tourfic' );;
+            $vendor_email_subject          = !empty( $email_settings['admin_email_subject'] ) ? $email_settings['admin_email_subject'] :  esc_html__( 'Your email subject','tourfic' );;
             $vendor_from_name              = !empty( $email_settings['vendor_from_name'] ) ? $email_settings['vendor_from_name'] : '';
             $vendor_from_email             = !empty( $email_settings['vendor_from_email'] ) ? $email_settings['vendor_from_email'] : '';
             $vendor_booking_email_template = !empty( $email_settings['vendor_booking_email_template'] ) ? $email_settings['vendor_booking_email_template'] : $this->get_email_template( 'order_confirmation', '', 'vendor');;
@@ -748,14 +748,14 @@ class TF_Handle_Emails {
                 }
             } else {
                 //send default mail
-                $default_mail = '<p>' . __( 'Dear Admin', 'tourfic' ) . '</p></br>';
-                $default_mail .= '<p>' . __( 'You have received a new booking. The details are as follows:', 'tourfic' ) . '</p></br>';
-                $default_mail .= __( '{booking_details}', 'tourfic' ) . '</br>';
-                $default_mail .=  '<strong>' . __( 'Customer details', 'tourfic' ) . '</strong>' . '</br>';
-                $default_mail .= __( '{customer_details}', 'tourfic' ) . '</br>';
-                $default_mail .= __( 'Thank you', 'tourfic' ) . '</br>';
-                $default_mail .= __( 'Regards', 'tourfic' ) . '</br>';
-                $default_mail .= __( '{site_name}', 'tourfic' ) . '</br>';
+                $default_mail = '<p>' . esc_html__( 'Dear Admin', 'tourfic' ) . '</p></br>';
+                $default_mail .= '<p>' . esc_html__( 'You have received a new booking. The details are as follows:', 'tourfic' ) . '</p></br>';
+                $default_mail .= esc_html__( '{booking_details}', 'tourfic' ) . '</br>';
+                $default_mail .=  '<strong>' . esc_html__( 'Customer details', 'tourfic' ) . '</strong>' . '</br>';
+                $default_mail .= esc_html__( '{customer_details}', 'tourfic' ) . '</br>';
+                $default_mail .= esc_html__( 'Thank you', 'tourfic' ) . '</br>';
+                $default_mail .= esc_html__( 'Regards', 'tourfic' ) . '</br>';
+                $default_mail .= esc_html__( '{site_name}', 'tourfic' ) . '</br>';
 
                 $default_mail = $this->replace_mail_tags( $default_mail , $order_id );
                 $vendors_email = $this->tf_get_vendor_emails( $order_id );
@@ -770,7 +770,7 @@ class TF_Handle_Emails {
         //customer email settings
         $customer_email_address          = $order_billing_email;
         $disable_customer_email          = !empty( $email_settings['customer_email_disable'] ) ? $email_settings['customer_email_disable'] : false;
-        $customer_email_subject          = !empty( $email_settings['customer_confirm_email_subject'] ) ? $email_settings['customer_confirm_email_subject'] :  __( 'Your booking has been confirmed','tourfic' );;
+        $customer_email_subject          = !empty( $email_settings['customer_confirm_email_subject'] ) ? $email_settings['customer_confirm_email_subject'] :  esc_html__( 'Your booking has been confirmed','tourfic' );;
         $customer_email_subject          = str_replace( '{booking_id}', $order_id, $customer_email_subject );
         $customer_from_name              = !empty( $email_settings['customer_from_name'] ) ? $email_settings['customer_from_name'] : '';
         $customer_from_email             = !empty( $email_settings['customer_from_email'] ) ? $email_settings['customer_from_email'] : '';
@@ -792,14 +792,14 @@ class TF_Handle_Emails {
                 wp_mail( $customer_email_address, $customer_email_subject, $customer_email_body_full, $headers );
             } else {
                 //send default mail
-                $default_mail = '<p>' . __( 'Dear', 'tourfic' ) . ' {fullname}</p></br>';
-                $default_mail .= '<p>' . __( 'Thank you for your booking. The details are as follows:', 'tourfic' ) . '</p></br>';
-                $default_mail .= __( '{booking_details}', 'tourfic' ) . '</br>';
-                $default_mail .= '<strong>' .__( 'Shipping Details', 'tourfic' ) . '</strong>' . '</br>';
-                $default_mail .= __( '{customer_details}', 'tourfic' ) . '</br>';
-                $default_mail .= __( 'Thank you', 'tourfic' ) . '</br>';
-                $default_mail .= __( 'Regards', 'tourfic' ) . '</br>';
-                $default_mail .= __( '{site_name}', 'tourfic' ) . '</br>';
+                $default_mail = '<p>' . esc_html__( 'Dear', 'tourfic' ) . ' {fullname}</p></br>';
+                $default_mail .= '<p>' . esc_html__( 'Thank you for your booking. The details are as follows:', 'tourfic' ) . '</p></br>';
+                $default_mail .= esc_html__( '{booking_details}', 'tourfic' ) . '</br>';
+                $default_mail .= '<strong>' .esc_html__( 'Shipping Details', 'tourfic' ) . '</strong>' . '</br>';
+                $default_mail .= esc_html__( '{customer_details}', 'tourfic' ) . '</br>';
+                $default_mail .= esc_html__( 'Thank you', 'tourfic' ) . '</br>';
+                $default_mail .= esc_html__( 'Regards', 'tourfic' ) . '</br>';
+                $default_mail .= esc_html__( '{site_name}', 'tourfic' ) . '</br>';
 
                 $default_mail = $this->replace_mail_tags( $default_mail , $order_id );
 
@@ -842,7 +842,7 @@ class TF_Handle_Emails {
                     $meta                    = get_post_meta( $admin_confirmation_template_id, 'tf_email_templates_metabox', true );
                     $brand_logo              = ! empty( $meta['brand_logo'] ) ? $meta['brand_logo'] : '';
                     $sale_notification_email = ! empty( $meta['sale_notification_email'] ) ? $meta['sale_notification_email'] : '';
-                    $email_subject           = ! empty( $meta['email_subject'] ) ? $meta['email_subject'] :  __( 'Your order confirmed', 'tourfic' );;
+                    $email_subject           = ! empty( $meta['email_subject'] ) ? $meta['email_subject'] :  esc_html__( 'Your order confirmed', 'tourfic' );;
                     $email_from_name         = ! empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
                     $email_from_email        = ! empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
                     $order_email_heading     = ! empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';
@@ -891,7 +891,7 @@ class TF_Handle_Emails {
                         $meta                    = get_post_meta( $vendor_confirmation_template_id, 'tf_email_templates_metabox', true );
                         $brand_logo              = ! empty( $meta['brand_logo'] ) ? $meta['brand_logo'] : '';
                         $sale_notification_email = ! empty( $meta['sale_notification_email'] ) ? $meta['sale_notification_email'] : '';
-                        $email_subject           = ! empty( $meta['email_subject'] ) ? $meta['email_subject'] :  __( 'Your order confirmed', 'tourfic' );
+                        $email_subject           = ! empty( $meta['email_subject'] ) ? $meta['email_subject'] :  esc_html__( 'Your order confirmed', 'tourfic' );
                         $email_from_name         = ! empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
                         $email_from_email        = ! empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
                         $order_email_heading     = ! empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';
@@ -939,7 +939,7 @@ class TF_Handle_Emails {
                     $meta                    = get_post_meta( $customer_confirmation_template_id, 'tf_email_templates_metabox', true );
                     $brand_logo              = ! empty( $meta['brand_logo'] ) ? $meta['brand_logo'] : '';
                     $sale_notification_email = ! empty( $meta['sale_notification_email'] ) ? $meta['sale_notification_email'] : '';
-                    $email_subject           = ! empty( $meta['email_subject'] ) ? $meta['email_subject'] : __( 'Your order received', 'tourfic' );
+                    $email_subject           = ! empty( $meta['email_subject'] ) ? $meta['email_subject'] : esc_html__( 'Your order received', 'tourfic' );
                     $email_from_name         = ! empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
                     $email_from_email        = ! empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
                     $order_email_heading     = ! empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';
@@ -1000,7 +1000,7 @@ class TF_Handle_Emails {
                     $meta                    = get_post_meta( $admin_cancellation_template_id, 'tf_email_templates_metabox', true );
                     $brand_logo              = ! empty( $meta['brand_logo'] ) ? $meta['brand_logo'] : '';
                     $sale_notification_email = ! empty( $meta['sale_notification_email'] ) ? $meta['sale_notification_email'] : get_bloginfo( 'admin_email' );
-                    $email_subject           = ! empty( $meta['email_subject'] ) ? $meta['email_subject'] :  __( 'Your order cancelled', 'tourfic' );
+                    $email_subject           = ! empty( $meta['email_subject'] ) ? $meta['email_subject'] :  esc_html__( 'Your order cancelled', 'tourfic' );
                     $email_from_name         = ! empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
                     $email_from_email        = ! empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
                     $order_email_heading     = ! empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';
@@ -1038,7 +1038,7 @@ class TF_Handle_Emails {
                     $meta                    = get_post_meta( $vendor_cancellation_template_id, 'tf_email_templates_metabox', true );
                     $brand_logo              = ! empty( $meta['brand_logo'] ) ? $meta['brand_logo'] : '';
                     $sale_notification_email = ! empty( $meta['sale_notification_email'] ) ? $meta['sale_notification_email'] : '';
-                    $email_subject           = ! empty( $meta['email_subject'] ) ? $meta['email_subject'] :  __( 'Your order cancelled', 'tourfic' );
+                    $email_subject           = ! empty( $meta['email_subject'] ) ? $meta['email_subject'] :  esc_html__( 'Your order cancelled', 'tourfic' );
                     $email_from_name         = ! empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
                     $email_from_email        = ! empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
                     $order_email_heading     = ! empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';
@@ -1077,7 +1077,7 @@ class TF_Handle_Emails {
                     $meta                    = get_post_meta( $customer_cancellation_template_id, 'tf_email_templates_metabox', true );
                     $brand_logo              = ! empty( $meta['brand_logo'] ) ? $meta['brand_logo'] : '';
                     $sale_notification_email = ! empty( $meta['sale_notification_email'] ) ? $meta['sale_notification_email'] : $order_billing_email;
-                    $email_subject           = ! empty( $meta['email_subject'] ) ? $meta['email_subject'] :  __( 'Your order cancelled', 'tourfic' );
+                    $email_subject           = ! empty( $meta['email_subject'] ) ? $meta['email_subject'] :  esc_html__( 'Your order cancelled', 'tourfic' );
                     $email_from_name         = ! empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
                     $email_from_email        = ! empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
                     $order_email_heading     = ! empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';
@@ -1137,7 +1137,7 @@ class TF_Handle_Emails {
                     $meta                    = get_post_meta( $admin_confirmation_template_id, 'tf_email_templates_metabox', true );
                     $brand_logo              = ! empty( $meta['brand_logo'] ) ? $meta['brand_logo'] : '';
                     $sale_notification_email = ! empty( $meta['sale_notification_email'] ) ? $meta['sale_notification_email'] : '';
-                    $email_subject           = ! empty( $meta['email_subject'] ) ? $meta['email_subject'] :  __( 'Your order confirmed', 'tourfic' );;
+                    $email_subject           = ! empty( $meta['email_subject'] ) ? $meta['email_subject'] :  esc_html__( 'Your order confirmed', 'tourfic' );;
                     $email_from_name         = ! empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
                     $email_from_email        = ! empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
                     $order_email_heading     = ! empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';
@@ -1184,7 +1184,7 @@ class TF_Handle_Emails {
                     $meta                    = get_post_meta( $vendor_confirmation_template_id, 'tf_email_templates_metabox', true );
                     $brand_logo              = ! empty( $meta['brand_logo'] ) ? $meta['brand_logo'] : '';
                     $sale_notification_email = ! empty( $meta['sale_notification_email'] ) ? $meta['sale_notification_email'] : '';
-                    $email_subject           = ! empty( $meta['email_subject'] ) ? $meta['email_subject'] :  __( 'Your order confirmed', 'tourfic' );;
+                    $email_subject           = ! empty( $meta['email_subject'] ) ? $meta['email_subject'] :  esc_html__( 'Your order confirmed', 'tourfic' );;
                     $email_from_name         = ! empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
                     $email_from_email        = ! empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
                     $order_email_heading     = ! empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';
@@ -1227,7 +1227,7 @@ class TF_Handle_Emails {
                     $meta                    = get_post_meta( $customer_confirmation_template_id, 'tf_email_templates_metabox', true );
                     $brand_logo              = ! empty( $meta['brand_logo'] ) ? $meta['brand_logo'] : '';
                     $sale_notification_email = ! empty( $meta['sale_notification_email'] ) ? $meta['sale_notification_email'] : '';
-                    $email_subject           = ! empty( $meta['email_subject'] ) ? $meta['email_subject'] : __( 'Your order received', 'tourfic' );
+                    $email_subject           = ! empty( $meta['email_subject'] ) ? $meta['email_subject'] : esc_html__( 'Your order received', 'tourfic' );
                     $email_from_name         = ! empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
                     $email_from_email        = ! empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
                     $order_email_heading     = ! empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';
@@ -1272,7 +1272,7 @@ class TF_Handle_Emails {
 		if ((in_array( 'administrator', (array) $user->roles ) && !current_user_can('manage_options')) || 
             (in_array( 'tf_vendor', (array) $user->roles ) && !current_user_can('tf_vendor_options')) || 
             (in_array( 'tf_manager', (array) $user->roles ) && !current_user_can('tf_manager_options'))) {
-			wp_send_json_error(__('You do not have permission to access this resource.', 'tourfic'));
+			wp_send_json_error(esc_html__('You do not have permission to access this resource.', 'tourfic'));
 			return;
 		}
         
@@ -1315,7 +1315,7 @@ class TF_Handle_Emails {
                         $meta                    = get_post_meta( $vendor_confirmation_template_id, 'tf_email_templates_metabox', true );
                         $brand_logo              = ! empty( $meta['brand_logo'] ) ? $meta['brand_logo'] : '';
                         $sale_notification_email = ! empty( $meta['sale_notification_email'] ) ? $meta['sale_notification_email'] : '';
-                        $email_subject           = ! empty( $meta['email_subject'] ) ? $meta['email_subject'] :  __( 'Your order confirmed', 'tourfic' );;
+                        $email_subject           = ! empty( $meta['email_subject'] ) ? $meta['email_subject'] :  esc_html__( 'Your order confirmed', 'tourfic' );;
                         $email_from_name         = ! empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
                         $email_from_email        = ! empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
                         $order_email_heading     = ! empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';
@@ -1359,7 +1359,7 @@ class TF_Handle_Emails {
                         $meta                    = get_post_meta( $customer_confirmation_template_id, 'tf_email_templates_metabox', true );
                         $brand_logo              = ! empty( $meta['brand_logo'] ) ? $meta['brand_logo'] : '';
                         $sale_notification_email = ! empty( $meta['sale_notification_email'] ) ? $meta['sale_notification_email'] : '';
-                        $email_subject           = ! empty( $meta['email_subject'] ) ? $meta['email_subject'] : __( 'Your order received', 'tourfic' );
+                        $email_subject           = ! empty( $meta['email_subject'] ) ? $meta['email_subject'] : esc_html__( 'Your order received', 'tourfic' );
                         $email_from_name         = ! empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
                         $email_from_email        = ! empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
                         $order_email_heading     = ! empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';
@@ -1411,7 +1411,7 @@ class TF_Handle_Emails {
                         
                         $meta                    = get_post_meta( $vendor_confirmation_template_id, 'tf_email_templates_metabox', true );
                         $brand_logo              = ! empty( $meta['brand_logo'] ) ? $meta['brand_logo'] : '';
-                        $email_subject           = ! empty( $meta['email_subject'] ) ? $meta['email_subject'] :  __( 'Your order confirmed', 'tourfic' );;
+                        $email_subject           = ! empty( $meta['email_subject'] ) ? $meta['email_subject'] :  esc_html__( 'Your order confirmed', 'tourfic' );;
                         $email_from_name         = ! empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
                         $email_from_email        = ! empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
                         $order_email_heading     = ! empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';
@@ -1459,7 +1459,7 @@ class TF_Handle_Emails {
                         $meta                    = get_post_meta( $customer_confirmation_template_id, 'tf_email_templates_metabox', true );
                         $brand_logo              = ! empty( $meta['brand_logo'] ) ? $meta['brand_logo'] : '';
                         $sale_notification_email = ! empty( $meta['sale_notification_email'] ) ? $meta['sale_notification_email'] : '';
-                        $email_subject           = ! empty( $meta['email_subject'] ) ? $meta['email_subject'] : __( 'Your order received', 'tourfic' );
+                        $email_subject           = ! empty( $meta['email_subject'] ) ? $meta['email_subject'] : esc_html__( 'Your order received', 'tourfic' );
                         $email_from_name         = ! empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
                         $email_from_email        = ! empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
                         $order_email_heading     = ! empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';
@@ -1490,7 +1490,7 @@ class TF_Handle_Emails {
                 $order                   = wc_get_order( $order_id );
                 $order_billing_email     = $order->get_billing_email();
                 $email_settings          = self::$tf_email_settings;
-                $order_email_heading     = !empty( $email_settings['order_email_heading'] ) ? $email_settings['order_email_heading'] : __( 'Your order received' , 'tourfic' );
+                $order_email_heading     = !empty( $email_settings['order_email_heading'] ) ? $email_settings['order_email_heading'] : esc_html__( 'Your order received' , 'tourfic' );
                 $brand_logo              = !empty( $email_settings['brand_logo'] ) ? $email_settings['brand_logo'] : '';
                 $email_heading_bg        = !empty( $email_settings['email_heading_bg'] ) ? $email_settings['email_heading_bg']['bg_color'] : '#0209AF';
                 
@@ -1522,7 +1522,7 @@ class TF_Handle_Emails {
                 //send mail to vendor
                 if( ! empty ( $tf_mail_type ) && $tf_mail_type == "vendor" ){
 
-                    $vendor_email_subject          = !empty( $email_settings['admin_email_subject'] ) ? $email_settings['admin_email_subject'] :  __( 'Your email subject','tourfic' );;
+                    $vendor_email_subject          = !empty( $email_settings['admin_email_subject'] ) ? $email_settings['admin_email_subject'] :  esc_html__( 'Your email subject','tourfic' );;
                     $vendor_booking_email_template = !empty( $email_settings['vendor_booking_email_template'] ) ? $email_settings['vendor_booking_email_template'] : $this->get_email_template( 'order_confirmation', '', 'vendor');;
 
                     //replace mail tags to actual value
@@ -1539,14 +1539,14 @@ class TF_Handle_Emails {
                         }
                     } else {
                         //send default mail
-                        $default_mail = '<p>' . __( 'Dear Admin', 'tourfic' ) . '</p></br>';
-                        $default_mail .= '<p>' . __( 'You have received a new booking. The details are as follows:', 'tourfic' ) . '</p></br>';
-                        $default_mail .= __( '{booking_details}', 'tourfic' ) . '</br>';
-                        $default_mail .= '<strong>' . __( 'Customer details', 'tourfic' ) . '</strong>' . '</br>';
-                        $default_mail .= __( '{customer_details}', 'tourfic' ) . '</br>';
-                        $default_mail .= __( 'Thank you', 'tourfic' ) . '</br>';
-                        $default_mail .= __( 'Regards', 'tourfic' ) . '</br>';
-                        $default_mail .= __( '{site_name}', 'tourfic' ) . '</br>';
+                        $default_mail = '<p>' . esc_html__( 'Dear Admin', 'tourfic' ) . '</p></br>';
+                        $default_mail .= '<p>' . esc_html__( 'You have received a new booking. The details are as follows:', 'tourfic' ) . '</p></br>';
+                        $default_mail .= esc_html__( '{booking_details}', 'tourfic' ) . '</br>';
+                        $default_mail .= '<strong>' . esc_html__( 'Customer details', 'tourfic' ) . '</strong>' . '</br>';
+                        $default_mail .= esc_html__( '{customer_details}', 'tourfic' ) . '</br>';
+                        $default_mail .= esc_html__( 'Thank you', 'tourfic' ) . '</br>';
+                        $default_mail .= esc_html__( 'Regards', 'tourfic' ) . '</br>';
+                        $default_mail .= esc_html__( '{site_name}', 'tourfic' ) . '</br>';
 
                         $default_mail = $this->replace_mail_tags( $default_mail , $order_id );
                         $vendors_email = $this->tf_get_vendor_emails( $order_id );
@@ -1561,7 +1561,7 @@ class TF_Handle_Emails {
 
                 //customer email settings
                 $customer_email_address          = $order_billing_email;
-                $customer_email_subject          = !empty( $email_settings['customer_confirm_email_subject'] ) ? $email_settings['customer_confirm_email_subject'] :  __( 'Your email subject','tourfic' );;
+                $customer_email_subject          = !empty( $email_settings['customer_confirm_email_subject'] ) ? $email_settings['customer_confirm_email_subject'] :  esc_html__( 'Your email subject','tourfic' );;
                 $customer_email_subject          = str_replace( '{booking_id}', $order_id, $customer_email_subject );
                 $customer_from_name              = !empty( $email_settings['customer_from_name'] ) ? $email_settings['customer_from_name'] : '';
                 $customer_from_email             = !empty( $email_settings['customer_from_email'] ) ? $email_settings['customer_from_email'] : '';
@@ -1584,14 +1584,14 @@ class TF_Handle_Emails {
                         wp_mail( $customer_email_address, $customer_email_subject, $customer_email_body_full, $headers );
                     } else {
                         //send default mail
-                        $default_mail = '<p>' . __( 'Dear', 'tourfic' ) . ' {fullname}</p></br>';
-                        $default_mail .= '<p>' . __( 'Thank you for your booking. The details are as follows:', 'tourfic' ) . '</p></br>';
-                        $default_mail .= __( '{booking_details}', 'tourfic' ) . '</br>';
-                        $default_mail .= '<strong>' . __( 'Shipping Details', 'tourfic' ) . '</strong>' . '</br>';
-                        $default_mail .= __( '{customer_details}', 'tourfic' ) . '</br>';
-                        $default_mail .= __( 'Thank you', 'tourfic' ) . '</br>';
-                        $default_mail .= __( 'Regards', 'tourfic' ) . '</br>';
-                        $default_mail .= __( '{site_name}', 'tourfic' ) . '</br>';
+                        $default_mail = '<p>' . esc_html__( 'Dear', 'tourfic' ) . ' {fullname}</p></br>';
+                        $default_mail .= '<p>' . esc_html__( 'Thank you for your booking. The details are as follows:', 'tourfic' ) . '</p></br>';
+                        $default_mail .= esc_html__( '{booking_details}', 'tourfic' ) . '</br>';
+                        $default_mail .= '<strong>' . esc_html__( 'Shipping Details', 'tourfic' ) . '</strong>' . '</br>';
+                        $default_mail .= esc_html__( '{customer_details}', 'tourfic' ) . '</br>';
+                        $default_mail .= esc_html__( 'Thank you', 'tourfic' ) . '</br>';
+                        $default_mail .= esc_html__( 'Regards', 'tourfic' ) . '</br>';
+                        $default_mail .= esc_html__( '{site_name}', 'tourfic' ) . '</br>';
 
                         $default_mail = $this->replace_mail_tags( $default_mail , $order_id );
 

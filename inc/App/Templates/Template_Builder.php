@@ -191,7 +191,7 @@ class Template_Builder {
                 } else {
                     if ($taxonomy_type === 'all') {
                         // translators: %s is the template type (e.g., "hotel", "tour").
-                        echo esc_html(sprintf( __('All %s', 'tourfic'), 
+                        echo esc_html(sprintf( esc_html__('All %s', 'tourfic'), 
                             ucfirst($template_type)
                         ));
                     } else {
@@ -215,7 +215,7 @@ class Template_Builder {
                             $taxonomy_object = get_taxonomy($taxonomy_type);
                             $taxonomy_label = $taxonomy_object ? $taxonomy_object->labels->name : $taxonomy_type;
                             // translators: %s will be the taxonomy name.
-                            echo esc_html(sprintf(__('All %s', 'tourfic'), $taxonomy_label));
+                            echo esc_html(sprintf(esc_html__('All %s', 'tourfic'), $taxonomy_label));
                         }
                     } else {
                         // Try to get term name
@@ -674,7 +674,7 @@ class Template_Builder {
         $post_id = !empty($_POST['postId']) ? sanitize_text_field($_POST['postId']) : '';
         
         if (empty($taxonomy)) {
-            wp_send_json_error(['message' => __('Taxonomy not provided', 'tourfic')]);
+            wp_send_json_error(['message' => esc_html__('Taxonomy not provided', 'tourfic')]);
         }
         
         if ($taxonomy === 'all') {
@@ -685,7 +685,7 @@ class Template_Builder {
 
         // Get taxonomy object to access its label
         $taxonomy_object = get_taxonomy($taxonomy);
-        $taxonomy_label = $taxonomy_object ? $taxonomy_object->labels->name : __('Terms', 'tourfic');
+        $taxonomy_label = $taxonomy_object ? $taxonomy_object->labels->name : esc_html__('Terms', 'tourfic');
         
         $terms = get_terms([
             'taxonomy' => $taxonomy,
@@ -806,7 +806,7 @@ class Template_Builder {
                         <?php if ($tf_taxonomy_type && $tf_taxonomy_type != 'all') : ?>
                             <?php 
                             $taxonomy_object = get_taxonomy($tf_taxonomy_type);
-                            $taxonomy_label = $taxonomy_object ? $taxonomy_object->labels->name : __('Terms', 'tourfic');
+                            $taxonomy_label = $taxonomy_object ? $taxonomy_object->labels->name : esc_html__('Terms', 'tourfic');
                             ?>
                             <option value="all" <?php selected($tf_taxonomy_term, 'all'); ?>>
                                 <?php 
@@ -1176,7 +1176,7 @@ class Template_Builder {
 
             // Add admin notice for deactivated templates
             // translators: %s will be the template id
-            $deactivated_notice = sprintf( __('Template "%s" was deactivated because a new active template was created with the same criteria.', 'tourfic'),
+            $deactivated_notice = sprintf( esc_html__('Template "%s" was deactivated because a new active template was created with the same criteria.', 'tourfic'),
                 get_the_title($template->ID)
             );
             

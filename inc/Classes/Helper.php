@@ -3025,8 +3025,8 @@ class Helper {
         if ( empty( $wp_query ) ) {
             global $wp_query;
         }
-        $prev_text = empty( $prev_text ) ? __( '&laquo; Previous', 'tourfic' ) : $prev_text;
-        $next_text = empty( $next_text ) ? __( 'Next &raquo;', 'tourfic' ) : $next_text;
+        $prev_text = empty( $prev_text ) ? esc_html__( '&laquo; Previous', 'tourfic' ) : $prev_text;
+        $next_text = empty( $next_text ) ? esc_html__( 'Next &raquo;', 'tourfic' ) : $next_text;
 
         $max_num_pages = $wp_query->max_num_pages;
         $paged = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;

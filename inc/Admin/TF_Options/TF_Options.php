@@ -296,7 +296,7 @@ class TF_Options {
 
 		// Check if the current user has the required capability.
 		if (!current_user_can('manage_options')) {
-			wp_send_json_error(__('You do not have permission to access this resource.', 'tourfic'));
+			wp_send_json_error(esc_html__('You do not have permission to access this resource.', 'tourfic'));
 			return;
 		}
 
@@ -333,7 +333,7 @@ class TF_Options {
 
 		// Check if the current user has the required capability.
 		if (!current_user_can('manage_options')) {
-			wp_send_json_error(__('You do not have permission to access this resource.', 'tourfic'));
+			wp_send_json_error(esc_html__('You do not have permission to access this resource.', 'tourfic'));
 			return;
 		}
 
@@ -376,7 +376,7 @@ class TF_Options {
 		if (!current_user_can('manage_options')) {
 			wp_send_json_error( [
 				'status'  => false,
-				'message' => __( 'You do not have permission to access this resource.', 'tourfic' )
+				'message' => esc_html__( 'You do not have permission to access this resource.', 'tourfic' )
 			] );
 			return;
 		}
@@ -397,7 +397,7 @@ class TF_Options {
 		if ( empty( $check_in ) || empty( $check_out ) ) {
 			wp_send_json_error( [
 				'status'  => false,
-				'message' => __( 'Please select check in and check out date.', 'tourfic' )
+				'message' => esc_html__( 'Please select check in and check out date.', 'tourfic' )
 			] );
 		}
 
@@ -406,7 +406,7 @@ class TF_Options {
 		if ( $check_in > $check_out ) {
 			wp_send_json_error( [
 				'status'  => false,
-				'message' => __( 'Check in date must be less than check out date.', 'tourfic' )
+				'message' => esc_html__( 'Check in date must be less than check out date.', 'tourfic' )
 			] );
 		}
 
@@ -463,7 +463,7 @@ class TF_Options {
 
 		wp_send_json_success( [
 			'status'     => true,
-			'message'    => __( 'Availability updated successfully.', 'tourfic' ),
+			'message'    => esc_html__( 'Availability updated successfully.', 'tourfic' ),
 			'avail_date' => wp_json_encode( $room_avail_data ),
 		] );
 
@@ -480,7 +480,7 @@ class TF_Options {
 
 		// Check if the current user has the required capability.
 		if (!current_user_can('manage_options')) {
-			wp_send_json_error(__('You do not have permission to access this resource.', 'tourfic'));
+			wp_send_json_error(esc_html__('You do not have permission to access this resource.', 'tourfic'));
 			return;
 		}
 
@@ -501,20 +501,20 @@ class TF_Options {
 			$room_avail_data = array_map( function ( $item ) {
 				$item['start'] = gmdate( 'Y-m-d', strtotime( $item['check_in'] ) );
 				if ( $item['price_by'] == '1' ) {
-					$item['title'] = __( 'Price: ', 'tourfic' ) . wc_price( $item['price'] );
+					$item['title'] = esc_html__( 'Price: ', 'tourfic' ) . wc_price( $item['price'] );
 				} elseif ( $item['price_by'] == '2' ) {
-					$item['title'] = __( 'Adult: ', 'tourfic' ) . wc_price( $item['adult_price'] ) . '<br>' . __( 'Child: ', 'tourfic' ) . wc_price( $item['child_price'] );
+					$item['title'] = esc_html__( 'Adult: ', 'tourfic' ) . wc_price( $item['adult_price'] ) . '<br>' . esc_html__( 'Child: ', 'tourfic' ) . wc_price( $item['child_price'] );
 				} elseif ( $item['price_by'] == '3' ) {
 					$item['title'] = '';
 					if ( ! empty( $item['options_count'] ) ) {
 						for ( $i = 0; $i <= $item['options_count'] - 1; $i ++ ) {
 							if ( $item[ 'tf_room_option_' . $i ] == '1' && $item['tf_option_pricing_type_'.$i] == 'per_room') {
-								$item['title'] .= __( 'Title: ', 'tourfic' ) . $item['tf_option_title_'.$i] . '<br>';
-								$item['title'] .= __( 'Price: ', 'tourfic' ) . wc_price($item['tf_option_room_price_'.$i]). '<br><br>';
+								$item['title'] .= esc_html__( 'Title: ', 'tourfic' ) . $item['tf_option_title_'.$i] . '<br>';
+								$item['title'] .= esc_html__( 'Price: ', 'tourfic' ) . wc_price($item['tf_option_room_price_'.$i]). '<br><br>';
 							} else if($item[ 'tf_room_option_' . $i ] == '1' && $item['tf_option_pricing_type_'.$i] == 'per_person'){
-								$item['title'] .= __( 'Title: ', 'tourfic' ) . $item['tf_option_title_'.$i] . '<br>';
-								$item['title'] .= __( 'Adult: ', 'tourfic' ) . wc_price($item['tf_option_adult_price_'.$i]). '<br>';
-								$item['title'] .= __( 'Child: ', 'tourfic' ) . wc_price($item['tf_option_child_price_'.$i]). '<br><br>';
+								$item['title'] .= esc_html__( 'Title: ', 'tourfic' ) . $item['tf_option_title_'.$i] . '<br>';
+								$item['title'] .= esc_html__( 'Adult: ', 'tourfic' ) . wc_price($item['tf_option_adult_price_'.$i]). '<br>';
+								$item['title'] .= esc_html__( 'Child: ', 'tourfic' ) . wc_price($item['tf_option_child_price_'.$i]). '<br><br>';
                             }
 						}
 					}
@@ -656,7 +656,7 @@ class TF_Options {
 		if (!current_user_can('manage_options')) {
 			wp_send_json_error( [
 				'status'  => false,
-				'message' => __( 'You do not have permission to access this resource.', 'tourfic' )
+				'message' => esc_html__( 'You do not have permission to access this resource.', 'tourfic' )
 			] );
 			return;
 		}
@@ -677,7 +677,7 @@ class TF_Options {
 		if ( empty( $check_in ) || empty( $check_out ) ) {
 			wp_send_json_error( [
 				'status'  => false,
-				'message' => __( 'Please select check in and check out date.', 'tourfic' )
+				'message' => esc_html__( 'Please select check in and check out date.', 'tourfic' )
 			] );
 		}
 
@@ -695,7 +695,7 @@ class TF_Options {
 		if ( $check_in > $check_out ) {
 			wp_send_json_error( [
 				'status'  => false,
-				'message' => __( 'Check in date must be less than check out date.', 'tourfic' )
+				'message' => esc_html__( 'Check in date must be less than check out date.', 'tourfic' )
 			] );
 		}
 
@@ -732,7 +732,7 @@ class TF_Options {
 
 		wp_send_json_success( [
 			'status'           => true,
-			'message'          => __( 'Availability updated successfully.', 'tourfic' ),
+			'message'          => esc_html__( 'Availability updated successfully.', 'tourfic' ),
 			'apt_availability' => wp_json_encode( $apt_availability_data ),
 		] );
 
@@ -749,7 +749,7 @@ class TF_Options {
 
 		// Check if the current user has the required capability.
 		if (!current_user_can('manage_options')) {
-			wp_send_json_error(__('You do not have permission to access this resource.', 'tourfic'));
+			wp_send_json_error(esc_html__('You do not have permission to access this resource.', 'tourfic'));
 			return;
 		}
 
@@ -768,7 +768,7 @@ class TF_Options {
 			$apt_availability_data = array_values( $apt_availability_data );
 			$apt_availability_data = array_map( function ( $item ) {
 				$item['start'] = gmdate( 'Y-m-d', strtotime( $item['check_in'] ) );
-				$item['title'] = $item['pricing_type'] == 'per_night' ? __( 'Price: ', 'tourfic' ) . wc_price( $item['price'] ) : __( 'Adult: ', 'tourfic' ) . wc_price( $item['adult_price'] ) . '<br>' . __( 'Child: ', 'tourfic' ) . wc_price( $item['child_price'] ) . '<br>' . __( 'Infant: ', 'tourfic' ) . wc_price( $item['infant_price'] );
+				$item['title'] = $item['pricing_type'] == 'per_night' ? esc_html__( 'Price: ', 'tourfic' ) . wc_price( $item['price'] ) : esc_html__( 'Adult: ', 'tourfic' ) . wc_price( $item['adult_price'] ) . '<br>' . esc_html__( 'Child: ', 'tourfic' ) . wc_price( $item['child_price'] ) . '<br>' . esc_html__( 'Infant: ', 'tourfic' ) . wc_price( $item['infant_price'] );
 
 				if ( $item['status'] == 'unavailable' ) {
 					$item['display'] = 'background';

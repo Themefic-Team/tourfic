@@ -241,7 +241,7 @@ abstract class Enquiry {
 												<?php
 												// translators: 1: opening <b> tag, 2: closing </b> tag, 3: opening <b> tag, 4: closing </b> tag, 5: opening <b> tag, 6: closing </b> tag, 7: opening <b> tag, 8: closing </b> tag.
 												echo wp_kses_post( sprintf(
-														__(
+														esc_html__(
 															"We're offering some extra filter features like %1\$s replied %2\$s, %3\$s not replied %4\$s, %5\$s not responded %6\$s, and %7\$s not responded %8\$s in our pro plan.",
 															'tourfic'
 														),
@@ -541,7 +541,7 @@ abstract class Enquiry {
 									<?php
 									// translators: 1: opening <b> tag, 2: closing </b> tag, 3: opening <b> tag, 4: closing </b> tag.
 									echo wp_kses_post( sprintf(
-											__(
+											esc_html__(
 												"We're offering some exiting features like %1\$s sending reply from enquiry details page %2\$s and %3\$s get replies using email piping %4\$s in our pro plan.",
 												'tourfic'
 											),

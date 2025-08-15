@@ -2349,7 +2349,7 @@ trait Action_Helper {
 				array(
 					'parent' => 'site-name',
 					'id'     => 'view-vendor-dashboard-link',
-					'title'  => __( 'Visit Vendor Dashboard', 'tourfic' ),
+					'title'  => esc_html__( 'Visit Vendor Dashboard', 'tourfic' ),
 					'href'   => $tf_dashboard_page_link,
 				)
 			);
@@ -2423,7 +2423,7 @@ trait Action_Helper {
 			<p>
 			<?php
 			// translators: %1$s opening strong tag, %2$s closing strong tag, highlighting the "QUICK CHECKOUT" feature.
-			echo wp_kses_post( sprintf( __(
+			echo wp_kses_post( sprintf( esc_html__(
 						'Instantio plugin is required for the %1$s"QUICK CHECKOUT"%2$s feature of Tourfic. Please install and activate Instantio to ensure this feature works seamlessly.',
 						'tourfic'
 					),
@@ -2448,7 +2448,7 @@ trait Action_Helper {
 		<?php
 		} else {
 			// translators: 1: opening <strong><a> tag, 2: closing </a></strong> tag, 3: opening <b> tag, 4: closing </b> tag.
-			$notice = sprintf( __( 'The %1$sInstantio%2$s plugin is inactive. Please activate it to enable the %3$s "QUICK CHECKOUT" %4$s for Tourfic.', 'tourfic' ),
+			$notice = sprintf( esc_html__( 'The %1$sInstantio%2$s plugin is inactive. Please activate it to enable the %3$s "QUICK CHECKOUT" %4$s for Tourfic.', 'tourfic' ),
 				'<strong><a href="https://wordpress.org/plugins/instantio/" target="_blank">',
 				'</a></strong>',
 				'<b>',
