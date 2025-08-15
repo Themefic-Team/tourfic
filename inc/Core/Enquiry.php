@@ -768,10 +768,10 @@ abstract class Enquiry {
 		$post_title = get_the_title( $post_id );
 
 		// Server Details
-		$user_agent = isset( $_SERVER['HTTP_USER_AGENT'] ) ? $_SERVER['HTTP_USER_AGENT'] : '';
+		$user_agent = isset( $_SERVER['HTTP_USER_AGENT'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ) ) : '';
 		$browser_name = $this->tf_get_browser_name( $user_agent );
 		$os_name = php_uname( 's' );
-		$ip_address = isset( $_SERVER['REMOTE_ADDR'] ) ? $_SERVER['REMOTE_ADDR'] : '';
+		$ip_address = isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : '';
 
 		$server_details = array(
 			'browser_name' => $browser_name,

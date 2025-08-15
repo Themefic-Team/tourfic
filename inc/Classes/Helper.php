@@ -504,11 +504,13 @@ class Helper {
 		}
 	}
 
-	function get_current_url() {
-		$protocol = is_ssl() ? 'https://' : 'http://';
-
-		return ( $protocol ) . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-	}
+    function get_current_url() {
+        $protocol = is_ssl() ? 'https://' : 'http://';
+        $host     = isset( $_SERVER['HTTP_HOST'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ) ) : '';
+        $uri      = isset( $_SERVER['REQUEST_URI'] ) ? esc_url_raw( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
+    
+        return $protocol . $host . $uri;
+    }    
 
 	/**
 	 * Hotel gallery video content initialize by this hook
