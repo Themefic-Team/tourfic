@@ -1976,7 +1976,7 @@ TF_Settings::option( 'tf_settings', array(
 						),
 						array(
 							'id'     => 'manager_permission',
-							'title'  => esc_html__('Manager Settings'),
+							'title'  => esc_html__('Manager Settings', 'tourfic'),
 							'icon'   => 'fa fa-gear',
 							'fields' => array(
 								array(

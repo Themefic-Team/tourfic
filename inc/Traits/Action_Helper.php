@@ -804,8 +804,8 @@ trait Action_Helper {
 		
 		$elSettings = !empty($_POST['elSettings']) ? json_decode(stripslashes($_POST['elSettings']), true) : [];
 
-		// Author Id if any
-		$tf_author_ids = ! empty( $_POST['tf_author'] ) ? $_POST['tf_author'] : '';
+		// Author ID if any (single value)
+		$tf_author_ids = isset( $_POST['tf_author'] ) ? intval( $_POST['tf_author'] ) : 0;
 
 		if ( ! empty( $startprice ) && ! empty( $endprice ) ) {
 			if ( $posttype == "tf_tours" ) {

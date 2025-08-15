@@ -99,7 +99,7 @@ class Wishlist {
 
 		if ( isset( $_POST ) ) {
 			if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
-				$ids = $_POST['ids'];
+				$ids = isset( $_POST['ids'] ) ? intval( $_POST['ids'] ) : 0;
 				wp_send_json_success( $this->tf_generate_table( $ids ) );
 			}
 		}
