@@ -12,6 +12,7 @@
  * WC tested up to: 10.0
  * Requires PHP:    7.4
  * Elementor tested up to: 3.29
+ * Requires Plugins: woocommerce
  * License:     GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  */
