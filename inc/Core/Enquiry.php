@@ -472,7 +472,6 @@ abstract class Enquiry {
 													</span>
 												</div>
 												<div class="tf-single-enquiry-accordion-head-right">
-													<?php // esc_html_e( date( "M d, Y h:i:s A", strtotime($reply["submit_time"])) ); ?>
 													<?php  echo esc_html( self::time_elapsed_string( $reply["submit_time"]) ); ?>
 												</div>
 											</div>
