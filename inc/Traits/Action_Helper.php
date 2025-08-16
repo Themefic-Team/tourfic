@@ -758,15 +758,15 @@ trait Action_Helper {
 		$tf_tour_types         = !empty( $_POST['tf_tour_types'] ) ? explode( ',', sanitize_text_field( $_POST['tf_tour_types'] ) ) : null;
 		$tf_apartment_features = !empty( $_POST['tf_apartment_features'] ) ? explode( ',', sanitize_text_field( $_POST['tf_apartment_features'] ) ) : null;
 		$tf_apartment_types    = !empty( $_POST['tf_apartment_types'] ) ? explode( ',', sanitize_text_field( $_POST['tf_apartment_types'] ) ) : null;
-		$posttype              = !empty( $_POST['type'] ) ? sanitize_text_field( $_POST['type'] ) : 'tf_hotel';
-		$ordering_type 		   = !empty( $_POST["tf_ordering"] ) ? $_POST["tf_ordering"] : 'default';
+		$posttype              = !empty( $_POST['type'] ) ? sanitize_text_field( wp_unslash($_POST['type']) ) : 'tf_hotel';
+		$ordering_type 		   = !empty( $_POST["tf_ordering"] ) ? sanitize_text_field(wp_unslash($_POST["tf_ordering"])) : 'default';
 		# Separate taxonomy input for filter query
 		$place_taxonomy  = $posttype == 'tf_tours' ? 'tour_destination' : ( $posttype == 'tf_apartment' ? 'apartment_location' : 'hotel_location' );
 		$filter_taxonomy = $posttype == 'tf_tours' ? 'null' : 'hotel_feature';
 		# Take dates for filter query
-		$checkin    = isset( $_POST['checkin'] ) ? trim( $_POST['checkin'] ) : array();
-		$startprice = ! empty( $_POST['startprice'] ) ? $_POST['startprice'] : '';
-		$endprice   = ! empty( $_POST['endprice'] ) ? $_POST['endprice'] : '';
+		$checkin    = isset( $_POST['checkin'] ) ? sanitize_text_field( wp_unslash( $_POST['checkin'] ) ) : array();
+		$startprice = ! empty( $_POST['startprice'] ) ? sanitize_text_field( wp_unslash( $_POST['startprice'] ) ) : '';
+		$endprice   = ! empty( $_POST['endprice'] ) ? sanitize_text_field( wp_unslash( $_POST['endprice'] ) ) : '';
 
         //Map Template only
         $mapFilter = !empty($_POST['mapFilter']) ? sanitize_text_field($_POST['mapFilter']) : false;
@@ -2259,7 +2259,7 @@ trait Action_Helper {
 		//Nonce Verification
 		check_ajax_referer( 'updates', '_nonce' );
 
-		$term_name = $_POST['termName'] ? sanitize_text_field( $_POST['termName'] ) : 'tf_hotel';
+		$term_name = !empty($_POST['termName']) ? sanitize_text_field( $_POST['termName'] ) : 'tf_hotel';
 
 		$terms = get_terms( array(
 			'taxonomy'   => $term_name,

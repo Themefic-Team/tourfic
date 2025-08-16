@@ -136,7 +136,7 @@ abstract class Enquiry {
 		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 
 			if ( isset( $_GET['paged'] ) ) {
-				$paged = $_GET['paged'];
+				$paged = sanitize_text_field( wp_unslash( $_GET['paged'] ) );
 			} else {
 				$paged = 1;
 			}
@@ -318,21 +318,27 @@ abstract class Enquiry {
 		<?php 
 	}
 
-	function enquiry_details_pagination($page){
-        $currentURL = home_url($_SERVER['REQUEST_URI']);
-        $BaseURL = strtok($currentURL, '?');
-        $queryString = isset($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] : '';
-        
-        parse_str($queryString, $currentURLParams);
-
-        if (array_key_exists('paged', $currentURLParams)) {
-            $currentURLParams['paged'] = $page;
-            $updatedQuery = http_build_query($currentURLParams);
-            return $updatedUrl = $BaseURL . '?' . $updatedQuery;
-        } else {
-            return $updatedUrl = $currentURL . '&paged=' . $page;
-        }
-    }
+	function enquiry_details_pagination( $page ) {
+		// Safely get request URI
+		$request_uri = isset( $_SERVER['REQUEST_URI'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
+		$query_str   = isset( $_SERVER['QUERY_STRING'] ) ? sanitize_text_field( wp_unslash( $_SERVER['QUERY_STRING'] ) ) : '';
+	
+		// Use WordPress helper instead of raw $_SERVER when possible
+		$current_url = home_url( $request_uri );
+		$base_url    = strtok( $current_url, '?' );
+	
+		// Parse existing query args
+		$current_params = [];
+		if ( ! empty( $query_str ) ) {
+			parse_str( $query_str, $current_params );
+		}
+	
+		// Force page to be integer
+		$current_params['paged'] = absint( $page );
+	
+		// Rebuild the URL
+		return esc_url( $base_url . '?' . http_build_query( $current_params ) );
+	}	
 
 	public function single_enquiry_details($data) {
 
@@ -511,7 +517,10 @@ abstract class Enquiry {
 									<input type="hidden" class="tf-enquiry-reply-name" value="<?php echo esc_html($data["uname"]); ?>">
 									<input type="hidden" class="tf-enquiry-reply-id" value="<?php echo esc_html($data["id"]); ?>">
 									<input type="hidden" class="tf-enquiry-reply-post-id" value="<?php echo esc_html($data["post_id"]); ?>">
-									<input type="hidden" name="tf-enquiry-reply-post-userID" value="<?php echo esc_attr($_SESSION['WP']['userId']); ?>" />
+									<input type="hidden" name="tf-enquiry-reply-post-userID" value="<?php 
+										echo isset( $_SESSION['WP']['userId'] ) ? esc_attr( sanitize_text_field( wp_unslash( $_SESSION['WP']['userId'] ) ) ) : ''; 
+									?>" />
+
 
 									<button class="tf-enquiry-reply-button" type="submit"> 
 										<?php esc_html_e('Send', 'tourfic') ?>
@@ -900,8 +909,15 @@ abstract class Enquiry {
 			wp_die();
 		}
 
-		$enquiry_ids = isset( $_POST['selected_items'] ) ? $_POST['selected_items'] : array();
-		$bulk_action = isset( $_POST['bulk_action'] ) ? $_POST['bulk_action'] : '';
+		$enquiry_ids = array();
+		if ( isset( $_POST['selected_items'] ) ) {
+			if ( is_array( $_POST['selected_items'] ) ) {
+				$enquiry_ids = array_map( 'absint', wp_unslash( $_POST['selected_items'] ) ); // IDs → ensure integers
+			} else {
+				$enquiry_ids = array( absint( wp_unslash( $_POST['selected_items'] ) ) );
+			}
+		}
+		$bulk_action = isset( $_POST['bulk_action'] ) ? sanitize_text_field( wp_unslash( $_POST['bulk_action'] ) ) : '';
 
 		if ( empty( $enquiry_ids ) ) {
 			$response['status'] = 'error';
@@ -961,12 +977,19 @@ abstract class Enquiry {
 		$response = array();
 		global $wpdb;
 		global $current_user;
-		$reply_data = $wpdb->get_results( 
-			$wpdb->prepare(
-				"SELECT reply_data FROM {$wpdb->prefix}tf_enquiry_data WHERE id= %s",
-				$_POST['enquiry_id']
-			)
-		);
+		$reply_data = array();
+
+		if ( isset( $_POST['enquiry_id'] ) ) {
+			$enquiry_id = absint( wp_unslash( $_POST['enquiry_id'] ) ); // sanitize as integer
+
+			$reply_data = $wpdb->get_results( 
+				$wpdb->prepare(
+					"SELECT reply_data FROM {$wpdb->prefix}tf_enquiry_data WHERE id = %d",
+					$enquiry_id
+				)
+			);
+		}
+
 		$reply_data = json_decode( $reply_data[0]->reply_data, true );
 
 		check_ajax_referer('updates', '_ajax_nonce');

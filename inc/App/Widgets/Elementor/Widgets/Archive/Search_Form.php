@@ -1324,8 +1324,8 @@ class Search_Form extends Widget_Base {
         $default_time = gmdate('g:i A', strtotime($default_time_str));
 
         // Use selected time from GET or fall back to default
-        $selected_pickup_time = !empty($_GET['pickup-time']) ? esc_html($_GET['pickup-time']) : $default_time;
-        $selected_dropoff_time = !empty($_GET['dropoff-time']) ? esc_html($_GET['dropoff-time']) : $default_time;
+        $selected_pickup_time = !empty($_GET['pickup-time']) ? esc_html(sanitize_text_field( wp_unslash($_GET['pickup-time']))) : $default_time;
+        $selected_dropoff_time = !empty($_GET['dropoff-time']) ? esc_html(sanitize_text_field( wp_unslash($_GET['dropoff-time']))) : $default_time;
 
 		if ( ( $service == 'tf_hotel' && $design == "design-1" ) || ( $service == 'tf_tours' && $design == "design-1" ) ) {
 			?>
@@ -2025,8 +2025,8 @@ class Search_Form extends Widget_Base {
                                     </div>
                                     <div class="info-select">
                                         <label><?php echo !empty($settings['pickup_loc_label']) ? esc_attr($settings['pickup_loc_label']) : esc_html__( 'Pick-up', 'tourfic' ); ?></label>
-                                        <input type="text" placeholder="<?php echo !empty($settings['pickup_loc_placeholder_text']) ? esc_attr($settings['pickup_loc_placeholder_text']) : esc_html__( 'Pick Up Location', 'tourfic' ); ?>" id="tf_pickup_location" value="<?php echo !empty($_GET['pickup-name']) ? esc_html($_GET['pickup-name']) : '' ?>" />
-                                        <input type="hidden" id="tf_pickup_location_id" value="<?php echo !empty($_GET['pickup']) ? esc_html($_GET['pickup']) : '' ?>" />
+                                        <input type="text" placeholder="<?php echo !empty($settings['pickup_loc_placeholder_text']) ? esc_attr($settings['pickup_loc_placeholder_text']) : esc_html__( 'Pick Up Location', 'tourfic' ); ?>" id="tf_pickup_location" value="<?php echo !empty($_GET['pickup-name']) ? esc_html(sanitize_text_field( wp_unslash($_GET['pickup-name']) ) ) : '' ?>" />
+                                        <input type="hidden" id="tf_pickup_location_id" value="<?php echo !empty($_GET['pickup']) ? esc_html(sanitize_text_field( wp_unslash($_GET['pickup']) ) ) : '' ?>" />
                                     </div>
                                 </div>
                             </div>
@@ -2038,8 +2038,8 @@ class Search_Form extends Widget_Base {
                                     </div>
                                     <div class="info-select">
                                         <label><?php echo !empty($settings['dropoff_loc_label']) ? esc_attr($settings['dropoff_loc_label']) : esc_html__( 'Drop-off', 'tourfic' ); ?></label>
-                                        <input type="text" placeholder="<?php echo !empty($settings['dropoff_loc_placeholder_text']) ? esc_attr($settings['dropoff_loc_placeholder_text']) : esc_html__( 'Drop Off Location', 'tourfic' ); ?>" id="tf_dropoff_location" value="<?php echo !empty($_GET['dropoff-name']) ? esc_html($_GET['dropoff-name']) : '' ?>" />
-                                        <input type="hidden" id="tf_dropoff_location_id" value="<?php echo !empty($_GET['dropoff']) ? esc_html($_GET['dropoff']) : '' ?>" />
+                                        <input type="text" placeholder="<?php echo !empty($settings['dropoff_loc_placeholder_text']) ? esc_attr($settings['dropoff_loc_placeholder_text']) : esc_html__( 'Drop Off Location', 'tourfic' ); ?>" id="tf_dropoff_location" value="<?php echo !empty($_GET['dropoff-name']) ? esc_html(sanitize_text_field( wp_unslash($_GET['dropoff-name']))) : '' ?>" />
+                                        <input type="hidden" id="tf_dropoff_location_id" value="<?php echo !empty($_GET['dropoff']) ? esc_html(sanitize_text_field( wp_unslash($_GET['dropoff']))) : '' ?>" />
                                     </div>
                                 </div>
                             </div>
@@ -2053,7 +2053,7 @@ class Search_Form extends Widget_Base {
                                     </div>
                                     <div class="info-select">
                                         <label><?php echo !empty($settings['pickup_date_label']) ? esc_attr($settings['pickup_date_label']) : esc_html__( 'Pick-up date', 'tourfic' ); ?></label>
-                                        <input type="text" placeholder="<?php echo !empty($settings['pickup_date_placeholder_text']) ? esc_attr($settings['pickup_date_placeholder_text']) : esc_html__( 'Pick Up Date', 'tourfic' ); ?>" class="tf_pickup_date" value="<?php echo !empty($_GET['pickup_date']) ? esc_html($_GET['pickup_date']) : esc_html(gmdate('Y/m/d', strtotime('+1 day'))); ?>" />
+                                        <input type="text" placeholder="<?php echo !empty($settings['pickup_date_placeholder_text']) ? esc_attr($settings['pickup_date_placeholder_text']) : esc_html__( 'Pick Up Date', 'tourfic' ); ?>" class="tf_pickup_date" value="<?php echo !empty($_GET['pickup_date']) ? esc_html(sanitize_text_field( wp_unslash($_GET['pickup_date']))) : esc_html(gmdate('Y/m/d', strtotime('+1 day'))); ?>" />
                                     </div>
                                 </div>
                             </div>
@@ -2100,7 +2100,7 @@ class Search_Form extends Widget_Base {
                                     </div>
                                     <div class="info-select">
                                         <label><?php echo !empty($settings['dropoff_date_label']) ? esc_attr($settings['dropoff_date_label']) : esc_html__( 'Drop-off date', 'tourfic' ); ?></label>
-                                        <input type="text" placeholder="<?php echo !empty($settings['dropoff_date_placeholder_text']) ? esc_attr($settings['dropoff_date_placeholder_text']) : esc_html__( 'Drop Off Date', 'tourfic' ); ?>" class="tf_dropoff_date" value="<?php echo !empty($_GET['dropoff-date']) ? esc_html($_GET['dropoff-date']) : esc_html(gmdate('Y/m/d', strtotime('+2 day'))) ?>" />
+                                        <input type="text" placeholder="<?php echo !empty($settings['dropoff_date_placeholder_text']) ? esc_attr($settings['dropoff_date_placeholder_text']) : esc_html__( 'Drop Off Date', 'tourfic' ); ?>" class="tf_dropoff_date" value="<?php echo !empty($_GET['dropoff-date']) ? esc_html(sanitize_text_field( wp_unslash($_GET['dropoff-date']))) : esc_html(gmdate('Y/m/d', strtotime('+2 day'))) ?>" />
                                     </div>
                                 </div>
                             </div>

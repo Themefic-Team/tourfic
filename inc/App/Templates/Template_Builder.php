@@ -843,8 +843,8 @@ class Template_Builder {
     function tf_save_template_builder_callback() {
         check_ajax_referer('updates', 'nonce');
         
-        $edit_with_elementor = isset($_POST['edit_with_elementor']) ? $_POST['edit_with_elementor'] : false;
-        $post_id = intval($_POST['post_id']);
+        $edit_with_elementor = isset($_POST['edit_with_elementor']) ? sanitize_text_field( wp_unslash( $_POST['edit_with_elementor'] ) ) : false;
+        $post_id = intval(wp_unslash($_POST['post_id']));
         $post_data = array(
             'post_title' => sanitize_text_field($_POST['template_name']),
             'post_type' => 'tf_template_builder',
