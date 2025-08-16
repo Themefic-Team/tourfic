@@ -15,7 +15,13 @@ use Tourfic\Classes\Room\Room;
 class Enqueue {
 	use \Tourfic\Traits\Singleton;
 
+	protected $css_min;
+	protected $js_min;
+
 	public function __construct() {
+		$this->css_min = ! empty( Helper::tfopt( 'css_min' ) ) ? '.min' : '';
+		$this->js_min  = ! empty( Helper::tfopt( 'js_min' ) ) ? '.min' : '';	
+
 		add_filter( 'wp_enqueue_scripts', array( $this, 'tf_dequeue_scripts' ), 9999 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'tf_enqueue_scripts' ) );
 		add_action( 'elementor/editor/before_enqueue_scripts', array( $this, 'elementor_editor_scripts' ) );
@@ -56,9 +62,7 @@ class Enqueue {
 	 */
 	function tf_enqueue_scripts() {
 		$flatpickr_locale = ! empty( get_locale() ) ? get_locale() : 'en_US';
-		$allowed_locale   = array( 'ar', 'bn_BD', 'de_DE', 'es_ES', 'fr_FR', 'hi_IN', 'it_IT', 'nl_NL', 'ru_RU', 'zh_CN' );
-		$min_css          = ! empty( Helper::tfopt( 'css_min' ) ) ? '.min' : '';
-		$min_js           = ! empty( Helper::tfopt( 'js_min' ) ) ? '.min' : '';		
+		$allowed_locale   = array( 'ar', 'bn_BD', 'de_DE', 'es_ES', 'fr_FR', 'hi_IN', 'it_IT', 'nl_NL', 'ru_RU', 'zh_CN' );	
 		$tf_disable_services = ! empty( Helper::tfopt( 'disable-services' ) ) ? Helper::tfopt( 'disable-services' ) : [];
 		$tf_services = [
 			'apartment' => 'tf_apartment',
@@ -110,11 +114,11 @@ class Enqueue {
 		}
 
 		//Updated CSS
-		wp_enqueue_style( 'tf-app-style', TF_ASSETS_URL . 'app/css/tourfic-style' . $min_css . '.css', null, TF_VERSION );
+		wp_enqueue_style( 'tf-app-style', TF_ASSETS_URL . 'app/css/tourfic-style' . $this->css_min . '.css', null, TF_VERSION );
 	
 		foreach ($tf_services as $key => $post_type) {
 			if (!in_array($key, $tf_disable_services) && (is_singular($post_type) || is_post_type_archive($post_type) || $post_type == $tax_post_type)) {
-				wp_enqueue_style("tf-app-{$key}", TF_ASSETS_URL . "app/css/tourfic-{$key}" . $min_css . ".css", null, TF_VERSION);
+				wp_enqueue_style("tf-app-{$key}", TF_ASSETS_URL . "app/css/tourfic-{$key}" . $this->css_min . ".css", null, TF_VERSION);
 			}
 		}
 
@@ -410,7 +414,7 @@ class Enqueue {
 		/**
 		 * Custom
 		 */
-		wp_enqueue_script( 'tourfic', TF_ASSETS_APP_URL . 'js/tourfic-scripts' . $min_js . '.js', '', TF_VERSION, true );
+		wp_enqueue_script( 'tourfic', TF_ASSETS_APP_URL . 'js/tourfic-scripts' . $this->js_min . '.js', '', TF_VERSION, true );
 		wp_localize_script( 'tourfic', 'tf_params',
 			array(
 				'nonce'                  => wp_create_nonce( 'tf_ajax_nonce' ),
@@ -944,7 +948,7 @@ class Enqueue {
 
 			wp_enqueue_script( 'tf-fullcalender', TF_ASSETS_ADMIN_URL . 'js/lib/fullcalender.min.js', array( 'jquery' ), TF_VERSION, true );
 
-			wp_enqueue_script( 'tf-admin', TF_ASSETS_ADMIN_URL . 'js/tourfic-admin-scripts.min.js', array( 'jquery', 'wp-data', 'wp-editor', 'wp-edit-post' ), TF_VERSION, true );
+			wp_enqueue_script( 'tf-admin', TF_ASSETS_ADMIN_URL . 'js/tourfic-admin-scripts'. $this->js_min .'.js', array( 'jquery', 'wp-data', 'wp-editor', 'wp-edit-post' ), TF_VERSION, true );
 			wp_localize_script( 'tf-admin', 'tf_admin_params',
 				array(
 					'tf_nonce'                         => wp_create_nonce( 'updates' ),
