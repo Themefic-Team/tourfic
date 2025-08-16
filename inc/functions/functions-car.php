@@ -34,10 +34,15 @@ if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field(wp_un
 	return;
 }
 $response = [];
-$meta = get_post_meta( $_POST['post_id'], 'tf_carrental_opt', true );
+$post_id = isset( $_POST['post_id'] ) ? absint( wp_unslash( $_POST['post_id'] ) ) : 0;
+// Get meta safely
+$meta = get_post_meta( $post_id, 'tf_carrental_opt', true );
+
 $car_extra = !empty($meta['extras']) ? $meta['extras'] : '';
-$car_extra_pass = !empty($_POST['extra_key']) ? $_POST['extra_key'] : '';
-$extra_qty = !empty($_POST['qty']) ? $_POST['qty'] : '';
+// Extra key from POST
+$car_extra_pass = isset( $_POST['extra_key'] ) ? sanitize_text_field( wp_unslash( $_POST['extra_key'] ) ) : '';
+// Quantity from POST
+$extra_qty = isset( $_POST['qty'] ) ? absint( wp_unslash( $_POST['qty'] ) ) : 0;
 $pickup_date = !empty($_POST['pickup_date']) ? sanitize_text_field($_POST['pickup_date']) : '';
 $dropoff_date = !empty($_POST['dropoff_date']) ? sanitize_text_field($_POST['dropoff_date']) : '';
 $pickup_time = !empty($_POST['pickup_time']) ? sanitize_text_field($_POST['pickup_time']) : '';
@@ -602,8 +607,8 @@ if ( ! function_exists( 'tf_car_search_ajax_callback' ) ) {
 		];
 
 		if('on'==$_POST['same_location']){
-			$_POST['dropoff-name'] = !empty($_POST['pickup-name']) ? $_POST['pickup-name'] : '';
-			$_POST['dropoff'] = !empty($_POST['pickup']) ? $_POST['pickup'] : '';
+			$_POST['dropoff-name'] = !empty($_POST['pickup-name']) ? sanitize_text_field( wp_unslash($_POST['pickup-name']) ) : '';
+			$_POST['dropoff'] = !empty($_POST['pickup']) ? sanitize_text_field( wp_unslash($_POST['pickup']) ) : '';
 		}
 
 		if ( Helper::tfopt( 'pick_drop_car_search' ) && (empty( $_POST['pickup-name'] ) || empty( $_POST['dropoff-name'] )) ) {
@@ -697,7 +702,8 @@ function tf_car_booking_pupup_callback() {
 	/**
 	 * Get car meta values
 	 */
-	$meta = get_post_meta( $_POST['post_id'], 'tf_carrental_opt', true );
+	$post_id = isset( $_POST['post_id'] ) ? absint( wp_unslash( $_POST['post_id'] ) ) : 0;
+	$meta = get_post_meta( $post_id, 'tf_carrental_opt', true );
 	// Booking
 	$car_booking_by = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : '1';
 
@@ -707,11 +713,11 @@ function tf_car_booking_pupup_callback() {
 	$car_protections = ! empty( $meta['protections'] ) ? $meta['protections'] : '';
 	$car_protection_tab_title = ! empty( $meta['protection_tab_title'] ) ? esc_html($meta['protection_tab_title']) : esc_html('Protection');
 
-	$pickup_date = ! empty( $_POST['pickup_date'] ) ? $_POST['pickup_date'] : '';
-	$pickup_time = ! empty( $_POST['pickup_time'] ) ? $_POST['pickup_time'] : '';
+	$pickup_date = ! empty( $_POST['pickup_date'] ) ? sanitize_text_field( wp_unslash($_POST['pickup_date']) ) : '';
+	$pickup_time = ! empty( $_POST['pickup_time'] ) ? sanitize_text_field( wp_unslash($_POST['pickup_time']) ) : '';
 
-	$dropoff_date = ! empty( $_POST['dropoff_date'] ) ? $_POST['dropoff_date'] : '';
-	$dropoff_time = ! empty( $_POST['dropoff_time'] ) ? $_POST['dropoff_time'] : '';
+	$dropoff_date = ! empty( $_POST['dropoff_date'] ) ? sanitize_text_field( wp_unslash($_POST['dropoff_date']) ) : '';
+	$dropoff_time = ! empty( $_POST['dropoff_time'] ) ? sanitize_text_field( wp_unslash($_POST['dropoff_time']) ) : '';
 
 
 
@@ -998,8 +1004,12 @@ function tf_car_price_calculation_callback() {
 	$tf_dropoff_time  = isset( $_POST['dropoff_time'] ) ? sanitize_text_field( $_POST['dropoff_time'] ) : '';
 
 
-	$extra_ids  = isset( $_POST['extra_ids'] ) ? $_POST['extra_ids'] : '';
-	$extra_qty  = isset( $_POST['extra_qty'] ) ? $_POST['extra_qty'] : '';
+	$extra_ids = isset( $_POST['extra_ids'] ) && is_array( $_POST['extra_ids'] )
+    ? array_map( 'sanitize_text_field', wp_unslash( $_POST['extra_ids'] ) )
+    : [];
+	$extra_qty = isset( $_POST['extra_qty'] ) && is_array( $_POST['extra_qty'] )
+    ? array_map( 'sanitize_text_field', wp_unslash( $_POST['extra_qty'] ) )
+    : [];
 
 	$meta = get_post_meta( $post_id, 'tf_carrental_opt', true );
 	$get_prices = Pricing::set_total_price($meta, $tf_pickup_date, $tf_dropoff_date, $tf_pickup_time, $tf_dropoff_time);

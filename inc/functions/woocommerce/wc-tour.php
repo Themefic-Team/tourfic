@@ -50,10 +50,10 @@ function tf_tours_booking_function() {
 	$make_deposit = ! empty( $_POST['deposit'] ) ? sanitize_text_field( $_POST['deposit'] ) : false;
 
 	// Visitor Details
-	$tf_visitor_details = !empty($_POST['traveller']) ? $_POST['traveller'] : "";
+	$tf_visitor_details = !empty($_POST['traveller']) ? array_map( 'sanitize_text_field', wp_unslash( $_POST['traveller'] ) ) : "";
 
 	// Booking Confirmation Details
-	$tf_confirmation_details = !empty($_POST['booking_confirm']) ? $_POST['booking_confirm'] : "";
+	$tf_confirmation_details = !empty($_POST['booking_confirm']) ? array_map( 'sanitize_text_field', wp_unslash( $_POST['booking_confirm'] ) ) : "";
 
 	// Booking Type
 	$tf_booking_type = function_exists('is_tf_pro') && is_tf_pro() ? ( !empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1 ) : 1;
@@ -320,8 +320,9 @@ function tf_tours_booking_function() {
 	
 	$tour_extra_meta = ! empty( $meta['tour-extra'] ) ? $meta['tour-extra'] : '';
 	if(!empty($tour_extra_meta)){
-		$tours_extra = explode(',', $_POST['tour_extra']);
-		$tour_extra_quantity = explode(',', $_POST["tour_extra_quantity"]);
+		$tours_extra = isset( $_POST['tour_extra'] ) && ! empty( $_POST['tour_extra'] ) ? array_map( 'sanitize_text_field', explode( ',', wp_unslash( $_POST['tour_extra'] ) ) ) : [];
+		$tour_extra_quantity = isset( $_POST['tour_extra_quantity'] ) && ! empty( $_POST['tour_extra_quantity'] ) ? array_map( 'absint', explode( ',', wp_unslash( $_POST['tour_extra_quantity'] ) ) ) : [];
+
 		foreach($tours_extra as $extra_key => $extra){
 			$tour_extra_pricetype = !empty( $tour_extra_meta[$extra]['price_type'] ) ? $tour_extra_meta[$extra]['price_type'] : 'fixed';
 			if( $tour_extra_pricetype=="fixed" ){

@@ -300,10 +300,11 @@ class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
 			'children' => 0,
 		);
 
-		$hotel_id = isset( $_POST['hotel_id'] ) ? $_POST['hotel_id'] : '';
-		$room_id  = isset( $_POST['room_id'] ) ? $_POST['room_id'] : '';
-		$from  = isset( $_POST['from'] ) ? $_POST['from'] : '';
-		$to  = isset( $_POST['to'] ) ? $_POST['to'] : '';
+		$hotel_id = isset( $_POST['hotel_id'] ) ? absint( wp_unslash( $_POST['hotel_id'] ) ) : 0;
+		$room_id  = isset( $_POST['room_id'] ) ? absint( wp_unslash( $_POST['room_id'] ) ) : 0;
+		$from     = isset( $_POST['from'] ) ? sanitize_text_field( wp_unslash( $_POST['from'] ) ) : '';
+		$to       = isset( $_POST['to'] ) ? sanitize_text_field( wp_unslash( $_POST['to'] ) ) : '';
+
 
 		if ( ! empty( $hotel_id ) && ! empty( $room_id ) ) {
 			$rooms = Room::get_hotel_rooms( $hotel_id);

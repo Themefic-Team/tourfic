@@ -4730,8 +4730,22 @@ class Tour {
 		$tour_extra_title_arr = [];
 		$tour_extra_meta      = ! empty( $meta['tour-extra'] ) ? $meta['tour-extra'] : '';
 		if ( ! empty( $tour_extra_meta ) ) {
-			$tours_extra         = explode( ',', $_POST['tour_extra'] );
-			$tour_extra_quantity = explode( ',', $_POST["tour_extra_quantity"] );
+			$tours_extra = array();
+			if ( ! empty( $_POST['tour_extra'] ) ) {
+				$tours_extra = array_map(
+					'sanitize_text_field',
+					explode( ',', wp_unslash( $_POST['tour_extra'] ) )
+				);
+			}
+
+			$tour_extra_quantity = array();
+			if ( ! empty( $_POST['tour_extra_quantity'] ) ) {
+				$tour_extra_quantity = array_map(
+					'intval',
+					explode( ',', wp_unslash( $_POST['tour_extra_quantity'] ) )
+				);
+			}
+
 			foreach ( $tours_extra as $extra_key => $extra ) {
 				$tour_extra_pricetype = ! empty( $tour_extra_meta[ $extra ]['price_type'] ) ? $tour_extra_meta[ $extra ]['price_type'] : 'fixed';
 				if ( $tour_extra_pricetype == "fixed" ) {

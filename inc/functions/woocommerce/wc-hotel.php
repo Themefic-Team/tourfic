@@ -51,8 +51,8 @@ function tf_hotel_booking_callback() {
 
 
 	// Without Payment Booking Data
-	$tf_without_payment_guest_info = !empty( $_POST['guest'] ) ? $_POST['guest'] : '';
-	$tf_without_payment_confirmation_details = !empty( $_POST['booking_confirm'] ) ? $_POST['booking_confirm'] : array();
+	$tf_without_payment_guest_info = !empty( $_POST['guest'] ) ? array_map( 'sanitize_text_field', explode( ',', wp_unslash( $_POST['guest'] ) ) ) : '';
+	$tf_without_payment_confirmation_details = !empty( $_POST['booking_confirm'] ) ? array_map( 'sanitize_text_field', explode( ',', wp_unslash( $_POST['booking_confirm'] ) ) ) : array();
 	$tf_without_payment_booking_fields = !empty( Helper::tfopt( 'hotel-book-confirm-field' ) ) ? Helper::tf_data_types( Helper::tfopt( 'hotel-book-confirm-field' ) ) : '';
 
 	// Check errors

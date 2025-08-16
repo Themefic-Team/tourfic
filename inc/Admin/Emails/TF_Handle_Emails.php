@@ -1276,9 +1276,9 @@ class TF_Handle_Emails {
 			return;
 		}
         
-        $tf_mail_type = !empty($_POST['status']) ? esc_attr( $_POST['status'] ) : '';
-        $order_id = !empty($_POST['order_id']) ? esc_attr( $_POST['order_id'] ) : '';
-        $db_id = !empty($_POST['id']) ? esc_attr( $_POST['id'] ) : '';
+        $tf_mail_type = !empty($_POST['status']) ? sanitize_text_field( wp_unslash( $_POST['status'] ) ) : '';
+        $order_id = !empty($_POST['order_id']) ? sanitize_text_field( wp_unslash( $_POST['order_id'] ) ) : '';
+        $db_id = !empty($_POST['id']) ? intval( wp_unslash( $_POST['id'] ) ) : '';
 
         global $wpdb;
         $tf_db_order = $wpdb->get_row( $wpdb->prepare( "SELECT id, billing_details, shipping_details, order_details, payment_method FROM {$wpdb->prefix}tf_order_data WHERE id = %s",sanitize_key( $db_id ) ) );

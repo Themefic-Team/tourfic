@@ -2559,7 +2559,7 @@ class Hotel {
 		}
 
 		//get children ages
-		$children_ages = isset( $_GET['children_ages'] ) ? $_GET['children_ages'] : '';
+		$children_ages = isset( $_GET['children_ages'] ) ? sanitize_text_field($_GET['children_ages']) : '';
 		// Adults
 		$adults = ! empty( $_GET['adults'] ) ? sanitize_text_field( $_GET['adults'] ) : '';
 		// children
@@ -2709,7 +2709,7 @@ class Hotel {
 
                 <div class="tf_form-row">
 					<?php
-					$ptype = isset( $_GET['type'] ) ? esc_attr( $_GET['type'] ) : get_post_type();
+					$ptype = isset( $_GET['type'] ) ? sanitize_text_field( wp_unslash($_GET['type']) ) : get_post_type();
 					?>
                     <input type="hidden" name="type" value="<?php echo esc_attr( $ptype ); ?>" class="tf-post-type"/>
                     <input type="hidden" name="post_id" value="<?php echo esc_attr( get_the_ID() ); ?>"/>
@@ -2847,7 +2847,7 @@ class Hotel {
                 </div>
                 <div class="tf-booking-form-submit">
 					<?php
-					$ptype = isset( $_GET['type'] ) ? esc_attr( $_GET['type'] ) : get_post_type();
+					$ptype = isset( $_GET['type'] ) ? sanitize_text_field( wp_unslash( $_GET['type'] ) ) : get_post_type();
 					?>
                     <input type="hidden" name="type" value="<?php echo esc_html( $ptype ); ?>" class="tf-post-type"/>
                     <input type="hidden" name="post_id" value="<?php echo esc_html( get_the_ID() ); ?>"/>
@@ -2998,7 +2998,7 @@ class Hotel {
                 </div>
                 <div class="tf_form-row">
 					<?php
-					$ptype = isset( $_GET['type'] ) ? esc_attr( $_GET['type'] ) : get_post_type();
+					$ptype = isset( $_GET['type'] ) ? sanitize_text_field( wp_unslash( $_GET['type'] ) ) : get_post_type();
 					?>
                     <input type="hidden" name="type" value="<?php echo esc_attr( $ptype ); ?>" class="tf-post-type"/>
                     <input type="hidden" name="post_id" value="<?php echo esc_attr( get_the_ID() ); ?>"/>
@@ -3071,7 +3071,7 @@ class Hotel {
 
                 <div class="tf_form-row">
 					<?php
-					$ptype = isset( $_GET['type'] ) ? esc_attr( $_GET['type'] ) : get_post_type();
+					$ptype = isset( $_GET['type'] ) ? sanitize_text_field( wp_unslash( $_GET['type'] ) ) : get_post_type();
 					?>
                     <input type="hidden" name="type" value="<?php echo esc_attr( $ptype ); ?>" class="tf-post-type"/>
                     <input type="hidden" name="post_id" value="<?php echo esc_attr( get_the_ID() ); ?>"/>
@@ -3676,7 +3676,14 @@ class Hotel {
 		 * get children ages
 		 * @since 2.8.6
 		 */
-		$children_ages_array = isset( $_GET['children_ages'] ) ? rest_sanitize_array( $_GET['children_ages'] ) : '';
+		$children_ages_array = array();
+		if ( isset( $_GET['children_ages'] ) && is_array( $_GET['children_ages'] ) ) {
+			$children_ages_array = array_map(
+				'absint', // or sanitize_text_field if values aren’t numbers
+				wp_unslash( $_GET['children_ages'] )
+			);
+		}
+
 		if ( is_array( $children_ages_array ) && ! empty( $children_ages_array ) ) {
 			$children_ages = implode( ',', $children_ages_array );
 		} else {
@@ -4362,7 +4369,8 @@ class Hotel {
 		if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_nonce'] ) ), 'tf_ajax_nonce' ) ) {
 			return;
 		}
-		$meta = get_post_meta( $_POST['post_id'], 'tf_hotels_opt', true );
+		$post_id = isset( $_POST['post_id'] ) ? intval( wp_unslash( $_POST['post_id'] ) ) : 0;
+		$meta = get_post_meta( $post_id, 'tf_hotels_opt', true );
 
 		// Single Template Style
 		$tf_hotel_layout_conditions = ! empty( $meta['tf_single_hotel_layout_opt'] ) ? $meta['tf_single_hotel_layout_opt'] : 'global';
@@ -4376,7 +4384,7 @@ class Hotel {
 		$tf_hotel_selected_template = $tf_hotel_selected_check;
 		$adults_name = apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) );
 
-		$rooms                       = Room::get_hotel_rooms( $_POST['post_id'] );
+		$rooms                       = Room::get_hotel_rooms( $post_id );
 		if ( $tf_hotel_selected_template == "design-1" || $tf_hotel_selected_template == "default" ) {
 			?>
             <div class="tf-hotel-quick-view" style="display: flex">
@@ -4979,8 +4987,10 @@ class Hotel {
 		if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_nonce'] ) ), 'tf_ajax_nonce' ) ) {
 			return;
 		}
+		$post_id = isset( $_POST['post_id'] ) ? intval( wp_unslash( $_POST['post_id'] ) ) : 0;
+
 		if ( ! empty( $_POST['post_type'] ) && "tf_hotel" == $_POST['post_type'] ) {
-			$meta    = get_post_meta( $_POST['post_id'], 'tf_hotels_opt', true );
+			$meta    = get_post_meta( $post_id, 'tf_hotels_opt', true );
 			$gallery = ! empty( $meta['gallery'] ) ? $meta['gallery'] : '';
 			if ( $gallery ) {
 				$gallery_ids = explode( ',', $gallery ); // Comma seperated list to array
@@ -4988,7 +4998,7 @@ class Hotel {
 		}
 
 		if ( ! empty( $_POST['post_type'] ) && "tf_tours" == $_POST['post_type'] ) {
-			$meta    = get_post_meta( $_POST['post_id'], 'tf_tours_opt', true );
+			$meta    = get_post_meta( $post_id, 'tf_tours_opt', true );
 			$gallery = ! empty( $meta['tour_gallery'] ) ? $meta['tour_gallery'] : '';
 			if ( $gallery ) {
 				$gallery_ids = explode( ',', $gallery ); // Comma seperated list to array
@@ -4996,7 +5006,7 @@ class Hotel {
 		}
 
 		if ( ! empty( $_POST['post_type'] ) && "tf_apartment" == $_POST['post_type'] ) {
-			$meta    = get_post_meta( $_POST['post_id'], 'tf_apartment_opt', true );
+			$meta    = get_post_meta( $post_id, 'tf_apartment_opt', true );
 			$gallery = ! empty( $meta['apartment_gallery'] ) ? $meta['apartment_gallery'] : '';
 			if ( $gallery ) {
 				$gallery_ids = explode( ',', $gallery ); // Comma seperated list to array

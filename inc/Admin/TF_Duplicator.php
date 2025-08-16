@@ -32,7 +32,7 @@ class TF_Duplicator {
 	function tf_duplicate_post_data_function() {
 
 		// Verify nonce
-		check_ajax_referer('tf_duplicate_nonce_' . $_POST['postID'], 'security');
+		check_ajax_referer('tf_duplicate_nonce_' . intval($_POST['postID']), 'security');
 
 		$postID   = isset($_POST['postID']) ? intval($_POST['postID']) : 0;
 		$postType = isset($_POST['postType']) ? sanitize_text_field($_POST['postType']) : '';

@@ -1355,40 +1355,51 @@ class TF_Setup_Wizard {
 
 		$tf_settings            = !empty( get_option( 'tf_settings' ) ) ? get_option( 'tf_settings' ) : array();
 		$tf_services            = array( 'hotel', 'tour', 'apartment', 'carrentals' );
-		$services               = isset( $_POST['tf-services'] ) ? $_POST['tf-services'] : [];
-		$search_page            = isset( $_POST['tf-search-result-page'] ) ? $_POST['tf-search-result-page'] : '';
-		$search_result_per_page = isset( $_POST['tf-search-result-posts-per-page'] ) ? $_POST['tf-search-result-posts-per-page'] : '';
-		$wishlist_page          = isset( $_POST['tf-wishlist-page'] ) ? $_POST['tf-wishlist-page'] : '';
-		$auto_publish           = isset( $_POST['tf-auto-publish-review'] ) ? $_POST['tf-auto-publish-review'] : '';
-		$hotel_review           = isset( $_POST['tf-hotel-review-section'] ) ? $_POST['tf-hotel-review-section'] : '';
-		$hotel_share            = isset( $_POST['tf-hotel-share-option'] ) ? $_POST['tf-hotel-share-option'] : '';
-		$hotel_permalink        = isset( $_POST['tf-hotel-permalink'] ) ? $_POST['tf-hotel-permalink'] : '';
-		$hotel_demo_data        = isset( $_POST['tf-hotel-demo-data-import'] ) ? $_POST['tf-hotel-demo-data-import'] : '';
-		$tour_review            = isset( $_POST['tf-tour-review-section'] ) ? $_POST['tf-tour-review-section'] : '';
-		$tour_related           = isset( $_POST['tf-tour-related-section'] ) ? $_POST['tf-tour-related-section'] : '';
-		$tour_permalink         = isset( $_POST['tf-tour-permalink'] ) ? $_POST['tf-tour-permalink'] : '';
-		$tour_demo_data         = isset( $_POST['tf-tour-demo-data-import'] ) ? $_POST['tf-tour-demo-data-import'] : '';
-		$apartment_review       = isset( $_POST['tf-apartment-review-section'] ) ? $_POST['tf-apartment-review-section'] : '';
-		$apartment_share        = isset( $_POST['tf-apartment-share-option'] ) ? $_POST['tf-apartment-share-option'] : '';
-		$apartment_permalink    = isset( $_POST['tf-apartment-permalink'] ) ? $_POST['tf-apartment-permalink'] : '';
-		$apartment_demo_data    = isset( $_POST['tf-apartment-demo-data-import'] ) ? $_POST['tf-apartment-demo-data-import'] : '';
-		$car_share        = isset( $_POST['tf-car-share-option'] ) ? $_POST['tf-car-share-option'] : '';
-		$car_permalink    = isset( $_POST['tf-car-permalink'] ) ? $_POST['tf-car-permalink'] : '';
-		$car_demo_data    = isset( $_POST['tf-car-demo-data-import'] ) ? $_POST['tf-car-demo-data-import'] : '';
+        $services = [];
+        if ( isset( $_POST['tf-services'] ) && ! empty( $_POST['tf-services'] ) ) {
+            $services = array_map( 'sanitize_text_field', wp_unslash( $_POST['tf-services'] ) );
+        }
+
+        $search_page            = isset( $_POST['tf-search-result-page'] ) ? absint( wp_unslash( $_POST['tf-search-result-page'] ) ) : 0;
+        $search_result_per_page = isset( $_POST['tf-search-result-posts-per-page'] ) ? absint( wp_unslash( $_POST['tf-search-result-posts-per-page'] ) ) : 10;
+
+        $wishlist_page          = isset( $_POST['tf-wishlist-page'] ) ? absint( wp_unslash( $_POST['tf-wishlist-page'] ) ) : 0;
+        $auto_publish           = isset( $_POST['tf-auto-publish-review'] ) ? sanitize_text_field( wp_unslash( $_POST['tf-auto-publish-review'] ) ) : '';
+        $hotel_review           = isset( $_POST['tf-hotel-review-section'] ) ? sanitize_text_field( wp_unslash( $_POST['tf-hotel-review-section'] ) ) : '';
+        $hotel_share            = isset( $_POST['tf-hotel-share-option'] ) ? sanitize_text_field( wp_unslash( $_POST['tf-hotel-share-option'] ) ) : '';
+        $hotel_permalink        = isset( $_POST['tf-hotel-permalink'] ) ? sanitize_title( wp_unslash( $_POST['tf-hotel-permalink'] ) ) : '';
+        $hotel_demo_data        = isset( $_POST['tf-hotel-demo-data-import'] ) ? sanitize_text_field( wp_unslash( $_POST['tf-hotel-demo-data-import'] ) ) : '';
+
+        $tour_review            = isset( $_POST['tf-tour-review-section'] ) ? sanitize_text_field( wp_unslash( $_POST['tf-tour-review-section'] ) ) : '';
+        $tour_related           = isset( $_POST['tf-tour-related-section'] ) ? sanitize_text_field( wp_unslash( $_POST['tf-tour-related-section'] ) ) : '';
+        $tour_permalink         = isset( $_POST['tf-tour-permalink'] ) ? sanitize_title( wp_unslash( $_POST['tf-tour-permalink'] ) ) : '';
+        $tour_demo_data         = isset( $_POST['tf-tour-demo-data-import'] ) ? sanitize_text_field( wp_unslash( $_POST['tf-tour-demo-data-import'] ) ) : '';
+
+        $apartment_review       = isset( $_POST['tf-apartment-review-section'] ) ? sanitize_text_field( wp_unslash( $_POST['tf-apartment-review-section'] ) ) : '';
+        $apartment_share        = isset( $_POST['tf-apartment-share-option'] ) ? sanitize_text_field( wp_unslash( $_POST['tf-apartment-share-option'] ) ) : '';
+        $apartment_permalink    = isset( $_POST['tf-apartment-permalink'] ) ? sanitize_title( wp_unslash( $_POST['tf-apartment-permalink'] ) ) : '';
+        $apartment_demo_data    = isset( $_POST['tf-apartment-demo-data-import'] ) ? sanitize_text_field( wp_unslash( $_POST['tf-apartment-demo-data-import'] ) ) : '';
+
+        $car_share              = isset( $_POST['tf-car-share-option'] ) ? sanitize_text_field( wp_unslash( $_POST['tf-car-share-option'] ) ) : '';
+        $car_permalink          = isset( $_POST['tf-car-permalink'] ) ? sanitize_title( wp_unslash( $_POST['tf-car-permalink'] ) ) : '';
+        $car_demo_data          = isset( $_POST['tf-car-demo-data-import'] ) ? sanitize_text_field( wp_unslash( $_POST['tf-car-demo-data-import'] ) ) : '';
 
 		// Template Step
-		$tf_hotel_single      = isset( $_POST['tf_single_hotel'] ) ? $_POST['tf_single_hotel'] : 'design-1';
-		$tf_hotel_archive     = isset( $_POST['tf_hotel_archive'] ) ? $_POST['tf_hotel_archive'] : 'design-1';
-		$tf_tour_single       = isset( $_POST['tf_single_tour'] ) ? $_POST['tf_single_tour'] : 'design-1';
-		$tf_tour_archive      = isset( $_POST['tf_tour_archive'] ) ? $_POST['tf_tour_archive'] : 'design-1';
-		$tf_apartment_single  = isset( $_POST['tf_single_apartment'] ) ? $_POST['tf_single_apartment'] : 'default';
-		$tf_apartment_archive = isset( $_POST['tf_apartment_archive'] ) ? $_POST['tf_apartment_archive'] : 'default';
+		$tf_hotel_single      = isset( $_POST['tf_single_hotel'] ) ? sanitize_text_field( wp_unslash($_POST['tf_single_hotel']) ) : 'design-1';
+		$tf_hotel_archive     = isset( $_POST['tf_hotel_archive'] ) ? sanitize_text_field( wp_unslash($_POST['tf_hotel_archive'] )) : 'design-1';
+		$tf_tour_single       = isset( $_POST['tf_single_tour'] ) ? sanitize_text_field( wp_unslash($_POST['tf_single_tour']) ) : 'design-1';
+		$tf_tour_archive      = isset( $_POST['tf_tour_archive'] ) ? sanitize_text_field( wp_unslash($_POST['tf_tour_archive']) ) : 'design-1';
+		$tf_apartment_single  = isset( $_POST['tf_single_apartment'] ) ? sanitize_text_field( wp_unslash($_POST['tf_single_apartment']) ) : 'default';
+		$tf_apartment_archive = isset( $_POST['tf_apartment_archive'] ) ? sanitize_text_field( wp_unslash($_POST['tf_apartment_archive']) ) : 'default';
 
-        $tf_car_single  = isset( $_POST['tf_single_car'] ) ? $_POST['tf_single_car'] : 'design-1';
-		$tf_car_archive = isset( $_POST['tf_car_archive'] ) ? $_POST['tf_car_archive'] : 'design-1';
+        $tf_car_single  = isset( $_POST['tf_single_car'] ) ? sanitize_text_field( wp_unslash($_POST['tf_single_car']) ) : 'design-1';
+		$tf_car_archive = isset( $_POST['tf_car_archive'] ) ? sanitize_text_field( wp_unslash($_POST['tf_car_archive']) ) : 'design-1';
 
 		//skip steps
-		$skip_steps = isset( $_POST['tf-skip-steps'] ) ? $_POST['tf-skip-steps'] : [];
+        $skip_steps = isset( $_POST['tf-skip-steps'] ) 
+        ? array_map( 'sanitize_text_field', (array) wp_unslash( $_POST['tf-skip-steps'] ) ) 
+        : [];
+
 		$skip_steps = explode( ',', $skip_steps );
 
 		if ( ! in_array( 2, $skip_steps ) ) {
