@@ -1353,6 +1353,14 @@ class TF_Setup_Wizard {
 			return;
 		}
 
+        // Check if the current user has the required capability.
+        if (!current_user_can('manage_options')) {
+            $response['success'] = false;
+            $response['message'] = esc_html__('You do not have permission to access this resource.', 'tourfic');
+            echo wp_json_encode($response);
+            die();
+        }
+
 		$tf_settings            = !empty( get_option( 'tf_settings' ) ) ? get_option( 'tf_settings' ) : array();
 		$tf_services            = array( 'hotel', 'tour', 'apartment', 'carrentals' );
 		$services               = isset( $_POST['tf-services'] ) ? $_POST['tf-services'] : [];
