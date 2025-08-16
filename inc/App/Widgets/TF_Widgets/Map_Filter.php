@@ -98,13 +98,13 @@ class Map_Filter extends \WP_Widget {
             extract($args);
             echo wp_kses_post($before_widget);
             if (!empty($_GET['type']) && $_GET['type'] == "tf_tours" && !empty($_GET['from']) && !empty($_GET['to'])) {
-                $this->widget_html($button_title, $_GET['type']);
+                $this->widget_html($button_title, sanitize_text_field( wp_unslash($_GET['type']) ));
             }
             if (!empty($_GET['type']) && $_GET['type'] == "tf_hotel" && !empty($_GET['from']) && !empty($_GET['to'])) {
-                $this->widget_html($button_title, $_GET['type']);
+                $this->widget_html($button_title, sanitize_text_field( wp_unslash($_GET['type']) ));
             }
             if (!empty($_GET['type']) && $_GET['type'] == "tf_apartment" && !empty($_GET['from']) && !empty($_GET['to'])) {
-                $this->widget_html($button_title, $_GET['type']);
+                $this->widget_html($button_title, sanitize_text_field( wp_unslash($_GET['type']) ));
             }
         } ?>
         <!-- End Price Range widget -->

@@ -459,7 +459,15 @@ class Hotel {
                          * @since 1.6.9
                          * @author Abu Hena
                          */
-                        $filtered_features = ! empty( $_POST['features'] ) ? $_POST['features'] : array();
+						$filtered_features = array();
+						if ( isset( $_POST['features'] ) ) {
+							if ( is_array( $_POST['features'] ) ) {
+								$filtered_features = array_map( 'sanitize_text_field', wp_unslash( $_POST['features'] ) );
+							} else {
+								$filtered_features = array( sanitize_text_field( wp_unslash( $_POST['features'] ) ) );
+							}
+						}
+
                         $room_features     = ! empty( $room['features'] ) ? $room['features'] : '';
                         if ( ! empty( $room_features ) && is_array( $room_features ) ) {
                             $feature_result = array_intersect( $filtered_features, $room_features );
@@ -1598,15 +1606,15 @@ class Hotel {
 			$_GET = array_map( 'stripslashes_deep', $_GET );
 		}
 		// location
-		$location = ! empty( $_GET['place'] ) ? esc_html( $_GET['place'] ) : '';
+		$location = ! empty( $_GET['place'] ) ? sanitize_text_field( wp_unslash( $_GET['place'] ) ) : '';
 		// Adults
-		$adults = ! empty( $_GET['adults'] ) ? esc_html( $_GET['adults'] ) : '';
+		$adults = ! empty( $_GET['adults'] ) ? absint( wp_unslash( $_GET['adults'] ) ) : '';
 		// children
-		$child = ! empty( $_GET['children'] ) ? esc_html( $_GET['children'] ) : '';
+		$child = ! empty( $_GET['children'] ) ? absint( wp_unslash( $_GET['children'] ) ) : '';
 		// room
-		$room = ! empty( $_GET['room'] ) ? esc_html( $_GET['room'] ) : '';
+		$room = ! empty( $_GET['room'] ) ? absint( wp_unslash( $_GET['room'] ) ) : '';
 		// Check-in & out date
-		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? esc_html( $_GET['check-in-out-date'] ) : '';
+		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( wp_unslash( $_GET['check-in-out-date'] ) ) : '';
 
 		// date format for users output
 		$hotel_date_format_for_users   = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
