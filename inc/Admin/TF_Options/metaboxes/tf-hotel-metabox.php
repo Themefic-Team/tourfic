@@ -571,7 +571,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'id'    => 'tf-hotel-tags-heading',
 					'type'  => 'heading',
 					/* translators: %s is the hotel name */
-					'label' => sprintf( esc_html__( '%s tags', 'tourfic' ), $hotel_name ),
+					'label' => sprintf( esc_html__( '%s tags', 'tourfic' ), esc_html($hotel_name) ),
 					'class' => 'tf-field-class',
 				),
 				array(

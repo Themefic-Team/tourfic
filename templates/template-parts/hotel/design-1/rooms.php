@@ -227,8 +227,10 @@ if ( $rooms ) :
                                                 <span class="icon-text tf-d-b">x<?php echo esc_html($adult_number); ?></span>
                                             </div>
                                             <div class="tf-top">
-											<?php echo esc_html( 'Number of '. $adults_name .'s' ); ?>
-
+												<?php 
+												/* translators: %s: Label for adults (e.g. Adult, Person) */
+												printf( esc_html__( 'Number of %ss', 'tourfic' ), esc_html( $adults_name ) ); 
+												?>
                                                 <i class="tool-i"></i>
                                             </div>
                                         </div>
@@ -287,7 +289,10 @@ if ( $rooms ) :
                                             <span class="icon-text tf-d-b">x<?php echo esc_html($adult_number); ?></span>
                                         </div>
                                         <div class="tf-top">
-											<?php echo esc_html( 'Number of ' . $adults_name . 's' ); ?>
+											<?php 
+											/* translators: %s: Label for adults (e.g. Adult, Person) */
+											printf( esc_html__( 'Number of %ss', 'tourfic' ), esc_html( $adults_name ) ); 
+											?>
                                             <i class="tool-i"></i>
                                         </div>
                                     </div>

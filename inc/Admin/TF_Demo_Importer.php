@@ -68,7 +68,7 @@ class TF_Demo_Importer {
 		return array(
 			'data' => $image_data,
 			'content_type' => $content_type,
-			'filename' => basename(parse_url($image_url, PHP_URL_PATH)),
+			'filename' => basename(wp_parse_url($image_url, PHP_URL_PATH)),
 			'filesize' => strlen($image_data),
 		);
 	}

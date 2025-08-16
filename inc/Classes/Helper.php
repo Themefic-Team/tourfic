@@ -1977,10 +1977,27 @@ class Helper {
                         <div class="tf-booking-form-guest-and-room">
                             <?php if ( $post_type == 'tf_hotel' ) { ?>
                                 <div class="tf-booking-form-guest-and-room-inner">
-                                    <span class="tf-booking-form-title"><?php echo $post_type == "tf_hotel" ? esc_html( apply_filters("tf_hotel_guest_name_change", "guest") . "s & rooms") : esc_html__( "Guests & rooms", "tourfic" ); ?></span>
+                                    <span class="tf-booking-form-title">
+                                        <?php 
+                                        if ( $post_type == "tf_hotel" ) {
+                                            /* translators: %s: Guest label, e.g. "guest" */
+                                            echo sprintf( esc_html__( '%ss & rooms', 'tourfic' ), esc_html( apply_filters( 'tf_hotel_guest_name_change', 'guest' ) ) );
+                                        } else {
+                                            echo esc_html__( 'Guests & rooms', 'tourfic' );
+                                        }
+                                        ?>
+                                    </span>
                                     <div class="tf-booking-guest-and-room-wrap tf-archive-guest-info">
-                                        <span class="tf-guest"><?php esc_html_e( "01", "tourfic" ); ?></span> <?php echo $post_type == "tf_hotel" ? esc_html( apply_filters("tf_hotel_guest_name_change", "guest") . 's' ) : esc_html__( "guest", "tourfic" ); ?> <span
-                                                class="tf-room"><?php esc_html_e( "01", "tourfic" ); ?></span> <?php esc_html_e( "rooms", "tourfic" ); ?>
+                                        <span class="tf-guest"><?php esc_html_e( "01", "tourfic" ); ?></span> 
+                                        <?php 
+                                        if ( $post_type == "tf_hotel" ) {
+                                            /* translators: %s: Guest label, e.g. "guest" */
+                                            echo sprintf( esc_html__( '%ss', 'tourfic' ), esc_html( apply_filters( 'tf_hotel_guest_name_change', 'guest' ) ) );
+                                        } else {
+                                            echo esc_html__( 'guest', 'tourfic' );
+                                        }
+                                        ?>
+                                        <span class="tf-room"><?php esc_html_e( "01", "tourfic" ); ?></span> <?php esc_html_e( "rooms", "tourfic" ); ?>
                                     </div>
                                     <div class="tf-arrow-icons">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
