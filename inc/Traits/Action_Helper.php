@@ -239,7 +239,7 @@ trait Action_Helper {
 		if ( ! current_user_can( 'edit_user', $user_id ) ) {
 			return false;
 		}
-		update_user_meta( $user_id, 'language', $_POST['language'] );
+		update_user_meta( $user_id, 'language', sanitize_text_field( wp_unslash($_POST['language']) ) );
 	}
 
 	/*
