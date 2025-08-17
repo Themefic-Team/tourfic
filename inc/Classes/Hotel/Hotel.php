@@ -1602,9 +1602,7 @@ class Hotel {
 	 * Called in shortcodes
 	 */
 	static function tf_hotel_search_form_horizontal( $classes, $title, $subtitle, $author, $advanced, $design ) {
-		if ( isset( $_GET ) ) {
-			$_GET = array_map( 'stripslashes_deep', $_GET );
-		}
+
 		// location
 		$location = ! empty( $_GET['place'] ) ? sanitize_text_field( wp_unslash( $_GET['place'] ) ) : '';
 		// Adults
@@ -2553,10 +2551,6 @@ class Hotel {
 	 * Single Hotel Sidebar Booking Form
 	 */
 	static function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
-
-		if ( isset( $_GET ) ) {
-			$_GET = array_map( 'stripslashes_deep', $_GET );
-		}
 
 		//get children ages
 		$children_ages = isset( $_GET['children_ages'] ) ? sanitize_text_field($_GET['children_ages']) : '';

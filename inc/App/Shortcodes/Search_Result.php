@@ -21,11 +21,6 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 
 	function render( $atts, $content = null ) {
 
-		// Unwanted Slashes Remove
-		if ( isset( $_GET ) ) {
-			$_GET = array_map( 'stripslashes_deep', $_GET );
-		}
-
 		// Get post type
 		$post_type = isset( $_GET['type'] ) ? sanitize_text_field( $_GET['type'] ) : '';
 		if ( empty( $post_type ) ) {
