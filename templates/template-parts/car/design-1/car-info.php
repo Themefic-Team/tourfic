@@ -90,10 +90,10 @@
                 </clipPath>
             </defs>
             </svg>
-            <?php echo $unlimited_mileage ? esc_html_e("Unlimited", "tourfic") : esc_html($total_mileage).' '.esc_html($mileage_type); ?>
+            <?php echo $unlimited_mileage ? esc_html__("Unlimited", "tourfic") : esc_html($total_mileage).' '.esc_html($mileage_type); ?>
 
             <div class="tf-car-info-tooltip">
-                <span><?php echo $unlimited_mileage ? esc_html_e("Unlimited mileage", "tourfic") : esc_html($total_mileage).' '.esc_html($mileage_type); ?> <?php esc_html_e("is included in this rental.", "tourfic"); ?></span>
+                <span><?php echo $unlimited_mileage ? esc_html__("Unlimited mileage", "tourfic") : esc_html($total_mileage).' '.esc_html($mileage_type); ?> <?php esc_html_e("is included in this rental.", "tourfic"); ?></span>
             </div>
         </li>
         <li class="tf-flex tf-flex-align-center tf-flex-gap-6">
@@ -114,9 +114,9 @@
                 </clipPath>
             </defs>
             </svg>
-            <?php echo $auto_transmission ? esc_html_e("Auto", "tourfic") : esc_html_e("Manual", "tourfic"); ?>
+            <?php echo $auto_transmission ? esc_html__("Auto", "tourfic") : esc_html__("Manual", "tourfic"); ?>
             <div class="tf-car-info-tooltip">
-                <span><?php esc_html_e("This car has", "tourfic"); ?> <?php echo $auto_transmission ? esc_html_e("an automatic", "tourfic") : esc_html_e("manual", "tourfic"); ?> <?php esc_html_e("transmission", "tourfic"); ?></span>
+                <span><?php esc_html_e("This car has", "tourfic"); ?> <?php echo $auto_transmission ? esc_html__("an automatic", "tourfic") : esc_html__("manual", "tourfic"); ?> <?php esc_html_e("transmission", "tourfic"); ?></span>
             </div>
         </li>
         
