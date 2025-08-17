@@ -789,9 +789,12 @@ trait Action_Helper {
 		}
 		$tf_driver_age  = isset( $_POST['driver_age'] ) ? sanitize_text_field( $_POST['driver_age'] ) : '';
 
-		$category = ( $_POST['category'] ) ? explode( ',', sanitize_text_field( $_POST['category'] ) ) : null;
-		$fuel_type = ( $_POST['fuel_type'] ) ? explode( ',', sanitize_text_field( $_POST['fuel_type'] ) ) : null;
-		$engine_year = ( $_POST['engine_year'] ) ? explode( ',', sanitize_text_field( $_POST['engine_year'] ) ) : null;
+		$tf_category = !empty( $_POST['category'] ) ? sanitize_text_field( $_POST['category'] ) : null;
+		$category = !empty( $tf_category ) ? explode( ',', $tf_category ) : null;
+		$tf_fuel_type = !empty( $_POST['fuel_type'] ) ? sanitize_text_field( $_POST['fuel_type'] ) : null;
+		$fuel_type = !empty( $tf_fuel_type ) ? explode( ',', $tf_fuel_type ) : null;
+		$tf_engine_year = !empty( $_POST['engine_year'] ) ? sanitize_text_field( $_POST['engine_year'] ) : null;
+		$engine_year = !empty( $tf_engine_year ) ? explode( ',', $tf_engine_year ) : null;
 
 		$tf_startprice  = isset( $_POST['startprice'] ) ? sanitize_text_field( $_POST['startprice'] ) : '';
 		$tf_endprice  = isset( $_POST['endprice'] ) ? sanitize_text_field( $_POST['endprice'] ) : '';

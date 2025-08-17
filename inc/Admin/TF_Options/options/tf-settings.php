@@ -1530,7 +1530,7 @@ TF_Settings::option( 'tf_settings', array(
 									'class'   => 'tour-option-itinerary-notice',
 									'content' => sprintf(
 										/* translators: %s is the Pro version URL */
-										esc_html__( 'By default, you can create your entire Tour Itinerary using our Default Itinerary editor found in the Single Tour settings. For access to an Itinerary builder with enhanced advanced features, please consider upgrading to our <a href="%s" target="_blank"><b>Pro version.</b></a>', 'tourfic' ),
+										__( 'By default, you can create your entire Tour Itinerary using our Default Itinerary editor found in the Single Tour settings. For access to an Itinerary builder with enhanced advanced features, please consider upgrading to our <a href="%s" target="_blank"><b>Pro version.</b></a>', 'tourfic' ),
 										esc_url( Helper::tf_utm_generator( "https://tourfic.com/", array( 'utm_medium' => 'settings_pro-itinerary' ) ) )
 									),
 								),								
@@ -1550,7 +1550,7 @@ TF_Settings::option( 'tf_settings', array(
 									'id'      => 'tour-option-itinerary-notice',
 									'type'    => 'notice',
 									'class'	  => 'tour-option-itinerary-notice',
-									'content' => esc_html__('By default, you can create your entire Tour Itinerary using our Default Itinerary editor found in the Single Tour settings. For access to an Itinerary builder with enhanced advanced features, please consider upgrading to our <b>Pro version.</b>', 'tourfic'),
+									'content' => __('By default, you can create your entire Tour Itinerary using our Default Itinerary editor found in the Single Tour settings. For access to an Itinerary builder with enhanced advanced features, please consider upgrading to our <b>Pro version.</b>', 'tourfic'),
 								),
 							),
 						),
@@ -2896,7 +2896,7 @@ TF_Settings::option( 'tf_settings', array(
 					'type'    => 'notice',
 					'content' => sprintf(
 						/* translators: %s is the documentation URL */
-						esc_html__( 'Anything confusing? <a href="%s" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>Read Documentation</strong></a>', 'tourfic' ),
+						__( 'Anything confusing? <a href="%s" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>Read Documentation</strong></a>', 'tourfic' ),
 						esc_url( Helper::tf_utm_generator( "https://themefic.com/docs/tourfic/tourfic-settings/tourfic-miscellaneous/#permalink-settings", array( 'utm_medium' => 'settings_doc_miscellaneous_permalink' ) ) )
 					),
 				),				

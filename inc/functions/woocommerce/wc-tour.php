@@ -320,8 +320,11 @@ function tf_tours_booking_function() {
 	
 	$tour_extra_meta = ! empty( $meta['tour-extra'] ) ? $meta['tour-extra'] : '';
 	if(!empty($tour_extra_meta)){
-		$tours_extra = isset( $_POST['tour_extra'] ) && ! empty( $_POST['tour_extra'] ) ? array_map( 'sanitize_text_field', explode( ',', wp_unslash( $_POST['tour_extra'] ) ) ) : [];
-		$tour_extra_quantity = isset( $_POST['tour_extra_quantity'] ) && ! empty( $_POST['tour_extra_quantity'] ) ? array_map( 'absint', explode( ',', wp_unslash( $_POST['tour_extra_quantity'] ) ) ) : [];
+		$tf_tours_extra = isset( $_POST['tour_extra'] ) && ! empty( $_POST['tour_extra'] ) ?  sanitize_text_field(wp_unslash( $_POST['tour_extra'] )) : [];
+		$tours_extra = ! empty( $tf_tours_extra ) ? explode( ',', $tf_tours_extra ) : [];
+
+		$tf_tour_extra_quantity = isset( $_POST['tour_extra_quantity'] ) && ! empty( $_POST['tour_extra_quantity'] ) ? sanitize_text_field( wp_unslash( $_POST['tour_extra_quantity'] ) ) : [];
+		$tour_extra_quantity = ! empty( $tf_tour_extra_quantity ) ? explode( ',', $tf_tour_extra_quantity ) : [];
 
 		foreach($tours_extra as $extra_key => $extra){
 			$tour_extra_pricetype = !empty( $tour_extra_meta[$extra]['price_type'] ) ? $tour_extra_meta[$extra]['price_type'] : 'fixed';

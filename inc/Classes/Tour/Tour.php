@@ -4730,47 +4730,38 @@ class Tour {
 		$tour_extra_title_arr = [];
 		$tour_extra_meta      = ! empty( $meta['tour-extra'] ) ? $meta['tour-extra'] : '';
 		if ( ! empty( $tour_extra_meta ) ) {
-			$tours_extra = array();
-			if ( ! empty( $_POST['tour_extra'] ) ) {
-				$tours_extra = array_map(
-					'sanitize_text_field',
-					explode( ',', wp_unslash( $_POST['tour_extra'] ) )
-				);
-			}
+			$tf_tour_extra = !empty($_POST['tour_extra']) ? sanitize_text_field($_POST['tour_extra']) : '';
+			$tours_extra         = !empty($tf_tour_extra) ? explode( ',', $tf_tour_extra ) : [];
+			$tf_tour_extra_quantity = !empty($_POST['tour_extra_quantity']) ? sanitize_text_field($_POST['tour_extra_quantity']) : '';
+			$tour_extra_quantity = !empty($tf_tour_extra_quantity) ? explode( ',', $tf_tour_extra_quantity ) : [];
 
-			$tour_extra_quantity = array();
-			if ( ! empty( $_POST['tour_extra_quantity'] ) ) {
-				$tour_extra_quantity = array_map(
-					'intval',
-					explode( ',', wp_unslash( $_POST['tour_extra_quantity'] ) )
-				);
-			}
-
-			foreach ( $tours_extra as $extra_key => $extra ) {
-				$tour_extra_pricetype = ! empty( $tour_extra_meta[ $extra ]['price_type'] ) ? $tour_extra_meta[ $extra ]['price_type'] : 'fixed';
-				if ( $tour_extra_pricetype == "fixed" ) {
-					if ( ! empty( $tour_extra_meta[ $extra ]['title'] ) && ! empty( $tour_extra_meta[ $extra ]['price'] ) ) {
-						$tour_extra_total       += $tour_extra_meta[ $extra ]['price'];
-						$tour_extra_title_arr[] = array(
-							'title' => $tour_extra_meta[ $extra ]['title'],
-							'price' => $tour_extra_meta[ $extra ]['price']
-						);
-					}
-				} else if ( $tour_extra_pricetype == "quantity" ) {
-					if ( ! empty( $tour_extra_meta[ $extra ]['title'] ) && ! empty( $tour_extra_meta[ $extra ]['price'] ) ) {
-						$tour_extra_total       += $tour_extra_meta[ $extra ]['price'] * $tour_extra_quantity[ $extra_key ];
-						$tour_extra_title_arr[] = array(
-							'title' => $tour_extra_meta[ $extra ]['title'] . " x " . $tour_extra_quantity[ $extra_key ],
-							'price' => $tour_extra_meta[ $extra ]['price'] * $tour_extra_quantity[ $extra_key ]
-						);
-					}
-				} else {
-					if ( ! empty( $tour_extra_meta[ $extra ]['price'] ) && ! empty( $tour_extra_meta[ $extra ]['title'] ) ) {
-						$tour_extra_total       += ( $tour_extra_meta[ $extra ]['price'] * $total_people );
-						$tour_extra_title_arr[] = array(
-							'title' => $tour_extra_meta[ $extra ]['title'],
-							'price' => $tour_extra_meta[ $extra ]['price'] * $total_people
-						);
+			if(!empty($tours_extra)){
+				foreach ( $tours_extra as $extra_key => $extra ) {
+					$tour_extra_pricetype = ! empty( $tour_extra_meta[ $extra ]['price_type'] ) ? $tour_extra_meta[ $extra ]['price_type'] : 'fixed';
+					if ( $tour_extra_pricetype == "fixed" ) {
+						if ( ! empty( $tour_extra_meta[ $extra ]['title'] ) && ! empty( $tour_extra_meta[ $extra ]['price'] ) ) {
+							$tour_extra_total       += $tour_extra_meta[ $extra ]['price'];
+							$tour_extra_title_arr[] = array(
+								'title' => $tour_extra_meta[ $extra ]['title'],
+								'price' => $tour_extra_meta[ $extra ]['price']
+							);
+						}
+					} else if ( $tour_extra_pricetype == "quantity" ) {
+						if ( ! empty( $tour_extra_meta[ $extra ]['title'] ) && ! empty( $tour_extra_meta[ $extra ]['price'] ) ) {
+							$tour_extra_total       += $tour_extra_meta[ $extra ]['price'] * $tour_extra_quantity[ $extra_key ];
+							$tour_extra_title_arr[] = array(
+								'title' => $tour_extra_meta[ $extra ]['title'] . " x " . $tour_extra_quantity[ $extra_key ],
+								'price' => $tour_extra_meta[ $extra ]['price'] * $tour_extra_quantity[ $extra_key ]
+							);
+						}
+					} else {
+						if ( ! empty( $tour_extra_meta[ $extra ]['price'] ) && ! empty( $tour_extra_meta[ $extra ]['title'] ) ) {
+							$tour_extra_total       += ( $tour_extra_meta[ $extra ]['price'] * $total_people );
+							$tour_extra_title_arr[] = array(
+								'title' => $tour_extra_meta[ $extra ]['title'],
+								'price' => $tour_extra_meta[ $extra ]['price'] * $total_people
+							);
+						}
 					}
 				}
 			}

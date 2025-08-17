@@ -24,7 +24,7 @@ class Hotel_Offline_Booking extends Without_Payment_Booking{
     function without_payment_booking_popup_callback() {
 		// Check nonce security
 		if ( ! isset( $_POST['tf_room_booking_nonce'] ) || 
-			! wp_verify_nonce( wp_unslash( $_POST['tf_room_booking_nonce'] ), 'check_room_booking_nonce' ) ) {
+			! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['tf_room_booking_nonce'] ) ), 'check_room_booking_nonce' ) ) {
 			return;
 		}
 
