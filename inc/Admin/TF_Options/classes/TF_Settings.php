@@ -380,7 +380,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 							<?php endif; ?>
 						</div>
 						<div class="tf-settings-sidebar">
-							<?php echo wp_kses_post($this->tf_settings_sidebar()); ?>
+							<?php echo wp_kses($this->tf_settings_sidebar(), Helper::tf_custom_wp_kses_allow_tags()); ?>
 						</div>
 					</div>
 				</div>
@@ -403,7 +403,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
                     </div>
                 </div>
 
-				<?php echo wp_kses_post($this->tf_get_sidebar_plugin_list()); ?>
+				<?php echo wp_kses($this->tf_get_sidebar_plugin_list(), Helper::tf_custom_wp_kses_allow_tags()); ?>
 
 				<div class="tf-quick-access">
 					<h3><?php esc_html_e('Helpful Resources', 'tourfic');  ?></h3>

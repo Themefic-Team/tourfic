@@ -31,7 +31,7 @@ class Notice_Update extends \Tourfic\Core\TF_Notice {
                     <p>
                         <?php
                         /* translators: %s: URL */
-                        echo sprintf( wp_kses_post( esc_html__('<b style="color:#d63638;">NOTICE: </b> Please <a href="%s"><b>Activate</b></a> your Tourfic Pro license. You can get your license key from our Client Portal -> Support -> License Keys.','tourfic') ),
+                        echo sprintf( wp_kses_post( __('<b style="color:#d63638;">NOTICE: </b> Please <a href="%s"><b>Activate</b></a> your Tourfic Pro license. You can get your license key from our Client Portal -> Support -> License Keys.','tourfic') ),
                         esc_url( admin_url() ).'admin.php?page=tf_license_info'
                         );
                         ?>
