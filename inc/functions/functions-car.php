@@ -250,7 +250,7 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 						</clipPath>
 					</defs>
 					</svg>
-					<p><?php echo $unlimited_mileage ? esc_html_e("Unlimited", "tourfic") : esc_html($total_mileage).' '.esc_html($mileage_type); ?></p>
+					<p><?php echo $unlimited_mileage ? esc_html__("Unlimited", "tourfic") : esc_html($total_mileage).' '.esc_html($mileage_type); ?></p>
 				</li>
 				<?php endif; ?>
 
@@ -309,7 +309,7 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 					</clipPath>
 				</defs>
 				</svg>
-				<p><?php echo $auto_transmission ? esc_html_e("Auto", "tourfic") : esc_html_e("Manual", "tourfic"); ?></p>
+				<p><?php echo $auto_transmission ? esc_html__("Auto", "tourfic") : esc_html__("Manual", "tourfic"); ?></p>
 				</li>
 				<?php endif; ?>
 
