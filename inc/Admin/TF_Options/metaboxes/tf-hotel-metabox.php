@@ -134,7 +134,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'class' => 'tf-pro-notice',
 					'notice' => 'info',
 					'icon' => 'ri-information-fill',
-					'content' => wp_kses_post(esc_html__( 'We\'re offering some additional features like <b>external booking</b>, <b>taxable hotel</b>, <b>tax class for Woocommerce</b> in our pro plan. The external booking option provides seamless integration with external booking systems, enhancing your booking capabilities significantly. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of this fantastic option!</a>', 'tourfic' ) ),
+					'content' => wp_kses_post(__( 'We\'re offering some additional features like <b>external booking</b>, <b>taxable hotel</b>, <b>tax class for Woocommerce</b> in our pro plan. The external booking option provides seamless integration with external booking systems, enhancing your booking capabilities significantly. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of this fantastic option!</a>', 'tourfic' ) ),
 				),
 			),
 		),
@@ -164,7 +164,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'type'     => 'map',
 					'label'    => esc_html__( 'Dynamic Location Search', 'tourfic' ),
 					// translators: %s is the link to the Google Maps API Key settings page.
-					'subtitle' => wp_kses_post(sprintf(esc_html__( 'Enter the specific address you wish to use for the %1$s and select the correct option from the suggested addresses. This will be used to hyperlink the address and display it on the front-end map. <strong>Google Maps is also available for location. Simply set up your <a href="%2$s" target="_blank">Google Maps API Key</a></strong>', 'tourfic'),
+					'subtitle' => wp_kses_post(sprintf(__( 'Enter the specific address you wish to use for the %1$s and select the correct option from the suggested addresses. This will be used to hyperlink the address and display it on the front-end map. <strong>Google Maps is also available for location. Simply set up your <a href="%2$s" target="_blank">Google Maps API Key</a></strong>', 'tourfic'),
 							strtolower( $hotel_name ),
 							esc_url( admin_url( 'admin.php?page=tf_settings#tab=map_settings' ) )
 						)
@@ -375,7 +375,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'icon'   => 'ri-information-fill',
 				
 					/* translators: 1: lowercased hotel name, 2: lowercased hotel name again. */
-					'content' => wp_kses_post( sprintf(esc_html__( 'Do you need to add %1$s airport services such as pickup, dropoff, or both? Our Pro plan includes the <b>%2$s service</b> feature, allowing you to easily add these services with pricing options <b>per person</b>, <b>fixed</b>, or <b>complimentary</b>. Enhance your guest experience by integrating these convenient services seamlessly into your offerings. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of this fantastic option!</a>', 'tourfic' ),
+					'content' => wp_kses_post( sprintf(__( 'Do you need to add %1$s airport services such as pickup, dropoff, or both? Our Pro plan includes the <b>%2$s service</b> feature, allowing you to easily add these services with pricing options <b>per person</b>, <b>fixed</b>, or <b>complimentary</b>. Enhance your guest experience by integrating these convenient services seamlessly into your offerings. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of this fantastic option!</a>', 'tourfic' ),
 							strtolower( $hotel_name ),
 							strtolower( $hotel_name )
 						)
@@ -439,7 +439,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 					'notice' => 'info',
 					'icon'   => 'ri-information-fill',
 					/* translators: %s is the lowercased hotel name. */
-					'content' => wp_kses_post(sprintf(esc_html__( 'We\'re offering some extra features in every room like <b>child age limit</b>, <b>%s room custom availability</b>, <b>deposit</b>, <b>ical sync</b> and <b>per person basis pricing</b> in our pro plan. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of these fantastic options!</a>', 'tourfic' ),
+					'content' => wp_kses_post(sprintf(__( 'We\'re offering some extra features in every room like <b>child age limit</b>, <b>%s room custom availability</b>, <b>deposit</b>, <b>ical sync</b> and <b>per person basis pricing</b> in our pro plan. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of these fantastic options!</a>', 'tourfic' ),
 							strtolower( $hotel_name )
 						)
 					),

@@ -29,7 +29,7 @@ TF_Metabox::metabox( 'tf_room_opt', array(
                     'type'    => 'notice',
                     'notice'  => 'info',
                     /* translators: %s is the hotel name */
-                    'content' => wp_kses_post(sprintf(esc_html__( 'This section includes %s Room Management settings.', 'tourfic' ),
+                    'content' => wp_kses_post(sprintf(__( 'This section includes %s Room Management settings.', 'tourfic' ),
                             $hotel_name
                         )
                     ) . ' <a href="https://themefic.com/docs/tourfic/how-it-works/room-management/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' 
@@ -212,7 +212,7 @@ TF_Metabox::metabox( 'tf_room_opt', array(
 					'class' => 'tf-pro-notice',
 					'notice' => 'info',
 					'icon' => 'ri-information-fill',
-					'content' => wp_kses_post(esc_html__( 'We\'re offering some extra features like <b>booking cancellation</b> in our pro plan. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of these fantastic options!</a>', 'tourfic' )),
+					'content' => wp_kses_post(__( 'We\'re offering some extra features like <b>booking cancellation</b> in our pro plan. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of these fantastic options!</a>', 'tourfic' )),
 				),
 			),
 		),
@@ -314,7 +314,7 @@ TF_Metabox::metabox( 'tf_room_opt', array(
 					'class' => 'tf-pro-notice',
 					'notice' => 'info',
 					'icon' => 'ri-information-fill',
-					'content' => wp_kses_post(esc_html__( 'We\'re offering some extra features like <b>deposit</b> in our pro plan. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of these fantastic options!</a>', 'tourfic' )),
+					'content' => wp_kses_post(__( 'We\'re offering some extra features like <b>deposit</b> in our pro plan. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of these fantastic options!</a>', 'tourfic' )),
 				),
 			),
 		),
@@ -378,7 +378,7 @@ TF_Metabox::metabox( 'tf_room_opt', array(
 					'class' => 'tf-pro-notice',
 					'notice' => 'info',
 					'icon' => 'ri-information-fill',
-					'content' => wp_kses_post(esc_html__( 'We\'re offering some extra features like <b>Availability Calendar</b> in our pro plan. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of these fantastic options!</a>', 'tourfic' )),
+					'content' => wp_kses_post(__( 'We\'re offering some extra features like <b>Availability Calendar</b> in our pro plan. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of these fantastic options!</a>', 'tourfic' )),
 				),
 			),
 		),
@@ -398,7 +398,7 @@ TF_Metabox::metabox( 'tf_room_opt', array(
 					'class' => 'tf-pro-notice',
 					'notice' => 'info',
 					'icon' => 'ri-information-fill',
-					'content' => wp_kses_post(esc_html__( 'We\'re offering some extra features like <b>iCal synchronization</b> in our pro plan. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of these fantastic options!</a>', 'tourfic' )),
+					'content' => wp_kses_post(__( 'We\'re offering some extra features like <b>iCal synchronization</b> in our pro plan. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of these fantastic options!</a>', 'tourfic' )),
 				),
 			),
 		),
