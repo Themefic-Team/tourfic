@@ -79,7 +79,7 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 						'class'   => 'tf-pro-notice',
 						'notice'  => 'info',
 						'icon'    => 'ri-information-fill',
-						'content' => wp_kses_post( esc_html__( 'We\'re offering some extra booking features like <b>tour time</b> and <b>tour extra features</b> in our pro plan. <a href="https://tourfic.com/" target="_blank"> Upgrade to our pro package today to take advantage of these fantastic options!</a>', 'tourfic' ) ),
+						'content' => wp_kses_post( __( 'We\'re offering some extra booking features like <b>tour time</b> and <b>tour extra features</b> in our pro plan. <a href="https://tourfic.com/" target="_blank"> Upgrade to our pro package today to take advantage of these fantastic options!</a>', 'tourfic' ) ),
 					),
 				),
 			),
@@ -375,112 +375,6 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 		$response = array(
 			'success' => false,
 		);
-
-		$field = [];
-		foreach ( $_POST as $key => $value ) {
-			$field[ $key ] = $value;
-		}
-
-		$required_fields = array(
-			'tf_tours_booked_by',
-			'tf_customer_first_name',
-			'tf_customer_email',
-			'tf_customer_phone',
-			'tf_customer_country',
-			'tf_customer_address',
-			'tf_customer_city',
-			'tf_customer_state',
-			'tf_customer_zip',
-			'tf_tour_date',
-			'tf_available_tours',
-			'tf_tour_adults_number'
-		);
-
-
-		foreach ( $required_fields as $required_field ) {
-			if ( empty( $field[ $required_field ] ) ) {
-				$response['fieldErrors'][ $required_field . '_error' ] = esc_html__( 'The field is required', 'tourfic' );
-			}
-		}
-
-		if ( ! array_key_exists( "fieldErrors", $response ) || ! $response['fieldErrors'] ) {
-			$res              = $this->tf_get_tour_total_price( intval( $field['tf_available_tours'] ), $field['tf_tour_date'], $field['tf_tour_time'] ?? '', $field['tf_tour_extras'] ?? '', intval( $field['tf_tour_adults_number'] ), intval( $field['tf_tour_children_number'] ), intval( $field['tf_tour_infants_number'] ) );
-			$billing_details  = array(
-				'billing_first_name' => $field['tf_customer_first_name'],
-				'billing_last_name'  => $field['tf_customer_last_name'],
-				'billing_company'    => '',
-				'billing_address_1'  => $field['tf_customer_address'],
-				'billing_address_2'  => $field['tf_customer_address_2'],
-				'billing_city'       => $field['tf_customer_city'],
-				'billing_state'      => $field['tf_customer_state'],
-				'billing_postcode'   => $field['tf_customer_zip'],
-				'billing_country'    => $field['tf_customer_country'],
-				'billing_email'      => $field['tf_customer_email'],
-				'billing_phone'      => $field['tf_customer_phone'],
-			);
-			$shipping_details = array(
-				'shipping_first_name' => $field['tf_customer_first_name'],
-				'shipping_last_name'  => $field['tf_customer_last_name'],
-				'shipping_company'    => '',
-				'shipping_address_1'  => $field['tf_customer_address'],
-				'shipping_address_2'  => $field['tf_customer_address_2'],
-				'shipping_city'       => $field['tf_customer_city'],
-				'shipping_state'      => $field['tf_customer_state'],
-				'shipping_postcode'   => $field['tf_customer_zip'],
-				'shipping_country'    => $field['tf_customer_country'],
-				'shipping_phone'      => $field['tf_customer_phone'],
-				'tf_email'            => $field['tf_customer_email'],
-			);
-
-			if ( $field['tf_tour_date'] ) {
-				list( $tour_in, $tour_out ) = explode( ' - ', $field['tf_tour_date'] );
-			}
-
-			$order_details = [
-				'order_by'    => $field['tf_tour_booked_by'],
-				'tour_date'   => $res['tour_date'],
-				'tour_time'   => $res['tf_tour_time_title'],
-				'tour_extra'  => $res['tf_tour_extra_title'],
-				'adult'       => $field['tf_tour_adults_number'],
-				'child'       => $field['tf_tour_children_number'],
-				'infants'     => $field['tf_tour_infants_number'],
-				'total_price' => $res['tf_tour_price'],
-				'due_price'   => '',
-			];
-
-			$order_data = array(
-				'post_id'          => intval( $field['tf_available_tours'] ),
-				'post_type'        => 'tour',
-				'room_number'      => null,
-				'check_in'         => $tour_in,
-				'check_out'        => $tour_out,
-				'billing_details'  => $billing_details,
-				'shipping_details' => $shipping_details,
-				'order_details'    => $order_details,
-				'payment_method'   => "offline",
-				'status'           => 'processing',
-				'order_date'       => gmdate( 'Y-m-d H:i:s' ),
-			);
-			if ( ! array_key_exists( 'errors', $res['response'] ) || count( $res['response']['errors'] ) == 0 ) {
-				$order_id = Helper::tf_set_order( $order_data );
-
-				if ( ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-integration' ) )['tf-new-order-google-calendar'] ) && Helper::tf_data_types( Helper::tfopt( 'tf-integration' ) )['tf-new-order-google-calendar'] == "1" ) {
-
-					/**
-					 * Filters the data passed to the Google Calendar integration.
-					 *
-					 * @param int    $order_id   The order ID.
-					 * @param array  $order_data The items in the order.
-					 * @param string $type Order type
-					 */
-					apply_filters( 'tf_after_booking_completed_calendar_data', $order_id, $order_data, '' );
-				}
-				$response['success'] = true;
-				$response['message'] = esc_html__( 'Your booking has been successfully submitted.', 'tourfic' );
-			} else {
-				$response['errors'] = $res['response']['errors'];
-			}
-		}
 
 		echo wp_json_encode( $response );
 		die();
