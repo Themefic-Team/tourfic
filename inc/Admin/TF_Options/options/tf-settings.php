@@ -2286,7 +2286,8 @@ TF_Settings::option( 'tf_settings', array(
 					'type'        => 'select2',
 					'placeholder' => esc_html__( 'Select a page', 'tourfic' ),
 					'label'       => esc_html__( 'Select Search Result Page', 'tourfic' ),
-					'description' => esc_html__( 'This page will be used to show the Search form Results. Please make sure Page template: <code>Tourfic - Search Result</code> is selected while creating this page.', 'tourfic' ),
+					/* translators: %s: Page template name wrapped in <code> tag */
+					'description' => sprintf( esc_html__( 'This page will be used to show the Search form Results. Please make sure Page template: %s is selected while creating this page.', 'tourfic' ), '<code>' . esc_html__( 'Tourfic - Search Result', 'tourfic' ) . '</code>' ),
 					'options'     => 'posts',
 					'query_args'  => array(
 						'post_type'      => 'page',
