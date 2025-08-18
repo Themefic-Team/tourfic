@@ -547,39 +547,6 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 			include_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
 			include_once ABSPATH . 'wp-admin/includes/plugin.php';
 
-			if ($plugin_action === 'install') {
-				$api = plugins_api('plugin_information', ['slug' => $plugin_slug]);
-
-				if (is_wp_error($api)) {
-					wp_send_json_error($api->get_error_message());
-				}
-
-				$upgrader = new Plugin_Upgrader(new WP_Ajax_Upgrader_Skin());
-				$install_result = $upgrader->install($api->download_link);
-
-				if (is_wp_error($install_result)) {
-					wp_send_json_error($install_result->get_error_message());
-				}
-
-				wp_send_json_success(['message' => 'Installed successfully.']);
-			}
-
-			if ($plugin_action === 'activate') {
-				$plugin_path = WP_PLUGIN_DIR . '/' . $plugin_slug . '/' . $plugin_filename . '.php';
-
-				if (!file_exists($plugin_path)) {
-					wp_send_json_error('Plugin file not found.');
-				}
-
-				$activate_result = activate_plugin($plugin_path);
-
-				if (is_wp_error($activate_result)) {
-					wp_send_json_error($activate_result->get_error_message());
-				}
-
-				wp_send_json_success(['message' => 'Activated successfully.']);
-			}
-
 			wp_send_json_error('Invalid action.');
 		}
 

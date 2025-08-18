@@ -1522,24 +1522,6 @@ class TF_Setup_Wizard {
 
 	public function tf_travelfic_toolkit_activate_callabck() {
 		check_ajax_referer( 'updates', '_ajax_nonce' );
-		// Check user capabilities
-		if ( ! current_user_can( 'install_plugins' ) ) {
-			wp_send_json_error( 'Permission denied' );
-		}
-		//Activation
-		$activate_plugin         = activate_plugin( 'travelfic-toolkit/travelfic-toolkit.php' );
-		$toolkit_activate_plugin = activate_plugin( 'travelfic-toolkit/travelfic-toolkit.php' );
-
-		if ( is_plugin_active( 'travelfic-toolkit/travelfic-toolkit.php' ) ) {
-			wp_send_json_success( 'Toolkit activated successfully.' );
-		} else {
-			$result = activate_plugin( 'travelfic-toolkit/travelfic-toolkit.php' );
-			if ( is_wp_error( $result ) ) {
-				wp_send_json_error( 'Error: ' . $result->get_error_message() );
-			} else {
-				wp_send_json_success( 'Toolkit activated successfully!' );
-			}
-		}
 		wp_die();
 	}
 
@@ -1562,21 +1544,6 @@ class TF_Setup_Wizard {
 
 	public function tf_ajax_activate_woo_callback() {
 		check_ajax_referer( 'updates', '_ajax_nonce' );
-		// Check user capabilities
-		if ( ! current_user_can( 'install_plugins' ) ) {
-			wp_send_json_error( 'Permission denied' );
-		}
-
-		if ( is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
-			wp_send_json_success( 'WooCommerce activated successfully.' );
-		} else {
-			$result = activate_plugin( 'woocommerce/woocommerce.php' );
-			if ( is_wp_error( $result ) ) {
-				wp_send_json_error( 'Error: ' . $result->get_error_message() );
-			} else {
-				wp_send_json_success( 'WooCommerce activated successfully!' );
-			}
-		}
 		wp_die();
 	}
 }
