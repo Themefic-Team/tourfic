@@ -4155,7 +4155,7 @@ class Tour {
     */
 	function tf_tours_custom_status_creation() {
 		register_post_status( 'expired', array(
-			'label'                     => _x( 'Expired', 'post', 'tourfic'),
+			'label'                     => esc_html(_x( 'Expired', 'post', 'tourfic')),
 			/* translators: %s: number of posts */
 			'label_count'               => _n_noop( 'Expired <span class="count">(%s)</span>', 'Expired <span class="count">(%s)</span>', 'tourfic'),
 			'public'                    => true,
