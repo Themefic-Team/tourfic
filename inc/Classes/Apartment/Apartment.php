@@ -343,9 +343,7 @@ class Apartment {
 	}
 
 	public static function tf_apartment_search_form_horizontal( $classes, $title, $subtitle, $advanced, $design ) {
-		if ( isset( $_GET ) ) {
-			$_GET = array_map( 'stripslashes_deep', $_GET );
-		}
+		
 		// Check-in & out date
 		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( wp_unslash( $_GET['check-in-out-date'] ) ) : '';
 

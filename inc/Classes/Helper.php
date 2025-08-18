@@ -650,11 +650,6 @@ class Helper {
 	 */
 	static function tf_search_result_sidebar_form( $placement = 'single' ) {
 
-		// Unwanted Slashes Remove
-		if ( isset( $_GET ) ) {
-			$_GET = array_map( 'stripslashes_deep', $_GET );
-		}
-
 		// Get post type
 		$post_type                     = sanitize_text_field( wp_unslash($_GET['type']) ) ?? '';
 		$place_title                   = '';
