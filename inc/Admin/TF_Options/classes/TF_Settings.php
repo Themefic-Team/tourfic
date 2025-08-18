@@ -424,64 +424,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 								];
 								?>
 
-								<ul>
-									<?php foreach ($plugins as $plugin): 
-										$plugin_path = $plugin['slug'] . '/' . $plugin['file_name'] . '.php';
-										$installed = file_exists(WP_PLUGIN_DIR . '/' . $plugin_path);
-										$activated = $installed && is_plugin_active($plugin_path);
 
-										$pro_installed = false;
-										$pro_activated = false;
-										
-										if (!empty($plugin['pro'])) {
-											$pro_path = $plugin['pro']['slug'] . '/' . $plugin['pro']['file_name'] . '.php';
-											$pro_installed = file_exists(WP_PLUGIN_DIR . '/' . $pro_path);
-											$pro_activated = $pro_installed && is_plugin_active($pro_path);
-										}
-										?>
-
-										<li class="tf-plugin-item <?php echo esc_attr($plugin['slug'] == 'instantio' ? 'featured' : ''); ?>" data-plugin-slug="<?php echo esc_attr($plugin['slug']); ?>">
-											<div class="tf-plugin-info-wrapper">
-												<div class="tf-plugin-info">
-													<img src="<?php echo esc_url($plugin['image']); ?>" alt="<?php echo esc_attr($plugin['name']); ?>" class="<?php echo esc_attr($plugin['name'] == 'BEAF' ? 'beaf-logo' : ''); ?>" width="40" height="40">
-													<div class="tf-plugin-btn">
-														<span class="badge free">Free</span>
-														<?php if (!$installed): ?>
-															<button class="tf-plugin-button install" data-action="install" data-plugin="<?php echo esc_attr($plugin['slug']); ?>" data-plugin_filename="<?php echo esc_attr($plugin['file_name']); ?>">
-																Install <span class="loader"></span>
-															</button>
-														<?php elseif (!$activated): ?>
-															<button class="tf-plugin-button activate" data-action="activate" data-plugin="<?php echo esc_attr($plugin['slug']); ?>" data-plugin_filename="<?php echo esc_attr($plugin['file_name']); ?>" >
-																Activate <span class="loader"></span>
-															</button>
-														<?php else: ?>
-															<span class="tf-plugin-button tf-plugin-status active">Activated</span>
-														<?php endif; ?>
-
-														<?php if (!empty($plugin['pro'])): ?>
-															<?php if (!$pro_installed): ?>
-																<a href="<?php echo esc_url($plugin['pro']['url']); ?>" class="tf-plugin-button pro" target="_blank">Get Pro</a>
-															<?php elseif (!$pro_activated): ?>
-																<button class="tf-plugin-button activate-pro" data-action="activate" data-plugin="<?php echo esc_attr($plugin['pro']['slug']); ?>" data-plugin_filename="<?php echo esc_attr($plugin['pro']['file_name']); ?>">
-																	Activate Pro <span class="loader"></span>
-																</button>
-															<?php else: ?>
-																<span class="tf-plugin-button tf-plugin-status active-pro">Pro Activated</span>
-															<?php endif; ?>
-														<?php endif; ?>
-													</div>
-												</div>
-												<div class="tf-plugin-content">
-													<h4><?php echo esc_html($plugin['name']); ?></h4>
-													<p><?php echo esc_html($plugin['subtitle']); ?></p>
-													<strong></strong>
-												</div>
-											</div>
-										</li>
-
-									<?php endforeach; ?>
-
-								</ul>
 
 								<div class="tf-quick-access">
 									<h3><?php esc_html_e('Helpful Resources', 'tourfic');  ?></h3>
