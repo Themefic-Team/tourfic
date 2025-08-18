@@ -621,8 +621,34 @@ if ( ! function_exists( 'tf_car_search_ajax_callback' ) ) {
 			wp_die();
 		}
 
-		
-		$response['query_string'] = str_replace( '&action=tf_hotel_search', '', http_build_query( $_POST ) );
+		// Whitelist allowed fields
+		$allowed_fields = [
+			'pickup-name',
+			'pickup',
+			'dropoff-name',
+			'dropoff',
+			'pickup-date',
+			'pickup-time',
+			'dropoff-date',
+			'dropoff-time',
+			'type',
+			'from',
+			'to',
+			'_nonce',
+		];
+
+		$fields = [];
+		foreach ( $allowed_fields as $key ) {
+			if ( isset( $_POST[ $key ] ) ) {
+				if ( is_array( $_POST[ $key ] ) ) {
+					$fields[ $key ] = array_map( 'sanitize_text_field', wp_unslash( $_POST[ $key ] ) );
+				} else {
+					$fields[ $key ] = sanitize_text_field( wp_unslash( $_POST[ $key ] ) );
+				}
+			}
+		}
+
+		$response['query_string'] = http_build_query( $fields );
 		$response['status']       = 'success';
 
 		echo wp_json_encode( $response );

@@ -4084,16 +4084,38 @@ class Tour {
 			$response['message'] = esc_html__( 'Please select a date', 'tourfic' );
 		}
 
-		if ( Helper::tfopt( 'date_tour_search' ) ) {
-			if ( ! empty( $_POST['check-in-out-date'] ) ) {
-				$response['query_string'] = str_replace( '&action=tf_tour_search', '', http_build_query( $_POST ) );
-				$response['status']       = 'success';
+		// Whitelist only fields needed for search
+		$allowed_fields = [
+			'place-name',
+			'place',
+			'adults',
+			'children',
+			'infant',
+			'check-in-out-date',
+			'type',
+			'types',
+			'from',
+			'to',
+			'_nonce',
+		];
+
+		$fields = [];
+		foreach ( $allowed_fields as $key ) {
+			if ( isset( $_POST[ $key ] ) ) {
+				if ( is_array( $_POST[ $key ] ) ) {
+					$fields[ $key ] = array_map( 'sanitize_text_field', wp_unslash( $_POST[ $key ] ) );
+				} else {
+					$fields[ $key ] = sanitize_text_field( wp_unslash( $_POST[ $key ] ) );
+				}
 			}
-		} else {
-			if ( ! Helper::tfopt( 'required_location_tour_search' ) || ! empty( $_POST['place'] ) ) {
-				$response['query_string'] = str_replace( '&action=tf_tour_search', '', http_build_query( $_POST ) );
-				$response['status']       = 'success';
-			}
+		}
+
+		// Success response if validation passes
+		if ( ( Helper::tfopt( 'date_tour_search' ) && ! empty( $fields['check-in-out-date'] ) )
+			|| ( ! Helper::tfopt( 'date_tour_search' ) && ( ! Helper::tfopt( 'required_location_tour_search' ) || ! empty( $fields['place'] ) ) ) ) {
+
+			$response['query_string'] = http_build_query( $fields );
+			$response['status']       = 'success';
 		}
 
 		echo wp_json_encode( $response );

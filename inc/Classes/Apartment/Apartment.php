@@ -318,23 +318,44 @@ class Apartment {
 		if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['_nonce'])), 'tf_ajax_nonce' ) ) {
 			return;
 		}
+		
 		$response = [
-			'status'  => 'success',
+			'status'  => 'error',
 			'message' => '',
 		];
 
-		if ( Helper::tfopt( 'date_apartment_search' ) && ( ! isset( $_POST['check-in-out-date'] ) || empty( $_POST['check-in-out-date'] ) ) ) {
+		// Validation
+		if ( Helper::tfopt( 'date_apartment_search' ) && empty( $_POST['check-in-out-date'] ) ) {
 			$response['message'] = esc_html__( 'Please select a date', 'tourfic' );
-			$response['status'] = 'error';
-		}
+		} else {
+			// Whitelist allowed fields
+			$allowed_fields = [
+				'place-name',
+				'place',
+				'adults',
+				'children',
+				'infant',
+				'check-in-out-date',
+				'type',
+				'types',
+				'features',
+				'from',
+				'to',
+				'_nonce',
+			];
 
-		if ( Helper::tfopt( 'date_apartment_search' ) ) {
-			if ( ! empty( $_POST['check-in-out-date'] ) ) {
-				$response['query_string'] = str_replace( '&action=tf_apartments_search', '', http_build_query( $_POST ) );
-				$response['status']       = 'success';
+			$fields = [];
+			foreach ( $allowed_fields as $key ) {
+				if ( isset( $_POST[ $key ] ) ) {
+					if ( is_array( $_POST[ $key ] ) ) {
+						$fields[ $key ] = array_map( 'sanitize_text_field', wp_unslash( $_POST[ $key ] ) );
+					} else {
+						$fields[ $key ] = sanitize_text_field( wp_unslash( $_POST[ $key ] ) );
+					}
+				}
 			}
-		}else{
-			$response['query_string'] = str_replace( '&action=tf_apartments_search', '', http_build_query( $_POST ) );
+
+			$response['query_string'] = http_build_query( $fields );
 			$response['status']       = 'success';
 		}
 
