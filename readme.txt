@@ -286,61 +286,73 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 4. Go through the Quick Setup wizard for the basic setup.
 5. Check our Documentation & YouTube videos for further instruction.
 
+== External Services ==
+
+This plugin connects to Google Maps (https://maps.google.com) to display map locations in hotel, tour, apartment, and car rental templates. It sends the location address or latitude/longitude to Google Maps when a map is displayed. This service is provided by Google: [Terms of Service](https://maps.google.com/help/terms_maps) , [Privacy Policy](https://policies.google.com/privacy)
+
+This plugin connects to OpenStreetMap (https://www.openstreetmap.org) to display map locations as an alternative mapping service. It sends the location address or latitude/longitude to OpenStreetMap when a map is displayed. This service is provided by the OpenStreetMap Foundation: [Terms of Use](https://wiki.osmfoundation.org/wiki/Terms_of_Use), [Privacy Policy](https://wiki.osmfoundation.org/wiki/Privacy_Policy)
+
+This plugin connects to QuickChart.io (https://quickchart.io) to generate QR codes for booking details. It sends the booking URL or identifier to QuickChart.io in order to create the QR code image. This service is provided by QuickChart.io: [Terms of Service]( https://quickchart.io/terms/), [Privacy Policy](https://quickchart.io/privacy/)
+
+This plugin connects to the Themefic API (https://api.themefic.com) to display promotional notices and retrieve plugin-related information. It may send the site URL, plugin version, and related information to Themefic’s server. This service is provided by Themefic: Terms of Service – https://themefic.com/terms/, Privacy Policy – https://themefic.com/privacy-policy/
+
 == Frequently Asked Questions ==
 
 = How can I report security bugs? =
 
-You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team help validate, triage and handle any security vulnerabilities. [Report a security vulnerability](https://patchstack.com/database/vdp/tourfic).
+Security issues can be reported via the Patchstack Vulnerability Disclosure Program. The Patchstack team helps validate and handle any vulnerabilities. [Report a security vulnerability](https://patchstack.com/database/vdp/tourfic).
 
 = What is Tourfic? =
 
-Tourfic is the WordPress plugin for Hotel Booking, Travel Booking and Vacation Rental. Users also consider it as a WordPress Room Booking Plugin.
+Tourfic is a WordPress plugin for Hotel, Travel, and Vacation Rental bookings. It’s also widely used as a Room Booking plugin.
 
 = How to install Tourfic? =
 
-* Download and unzip the plugin. Upload the unzipped folder to the wp-contents/plugins folder of your WordPress installation.
-* Active the plugin from the WordPress Plugins administration page OR, Go to WP admin panel, click 'Plugins' -> 'Add new'. In the search input box, type 'Tourfic'.
-* Install and activate the plugin.
-* Go through the Quick setup wizard for the basic setup.
-* Check our [Documentation](https://themefic.com/docs/tourfic/getting-started/installation/) & [YouTube videos](https://www.youtube.com/playlist?list=PLY0rtvOwg0ylCl7NTwNHUPq-eY1qwUH_N) for further instruction.
+* Download and unzip the plugin, then upload it to wp-content/plugins.  
+* Activate from the WordPress Plugins page OR install via WP Admin → Plugins → Add New → Search "Tourfic".  
+* Run the Quick Setup wizard.  
+* For details, see our [Documentation](https://themefic.com/docs/tourfic/getting-started/installation/) or [YouTube videos](https://www.youtube.com/playlist?list=PLY0rtvOwg0ylCl7NTwNHUPq-eY1qwUH_N).
 
-= Is the Free version fully free or is there a gap? =
+= Is the Free version fully free? =
 
-Indeed, Tourfic is entirely free and available on WordPress.org, ensuring the free version remains accessible at no cost. Additionally, a Pro version, enriched with advanced features, is available for purchase through our [official website](https://themefic.com/tourfic/pricing).
+Yes, Tourfic is 100% free on WordPress.org. A Pro version with advanced features is also available on our [website](https://themefic.com/tourfic/pricing).
 
-= Can I create a WordPress Hotel Booking system with Tourfic? =
+= Can I build a Hotel Booking system with Tourfic? =
 
-Absolutely, Tourfic enables you to effortlessly build a professional Hotel Booking WordPress website. For guidance, watch this [video](https://youtu.be/xeVkabWobDU).
+Yes, Tourfic lets you easily create a professional hotel booking website. [Watch video](https://youtu.be/xeVkabWobDU).
 
-= Can I create a Tour Booking manager for WooCommerce using Tourfic? =
+= Can I create a Tour Booking manager with WooCommerce? =
 
-Yes, Tourfic offers the functionality to seamlessly integrate a WooCommerce tour booking
-system, enhancing your e-commerce platform with robust booking capabilities.
+Yes, Tourfic integrates with WooCommerce to manage tour bookings.
 
-= Can I create a Travel Booking WordPress website with Tourfic? =
+= Can I create a Travel Booking website with Tourfic? =
 
-Indeed, with Tourfic, crafting a professional WooCommerce travel agency website is straightforward. For step-by-step instructions, refer to this [video](https://youtu.be/99jUEJQIxkg).
-= Can Tourfic serve as a Room Reservation Plugin for WordPress? =
-Yes, Tourfic works well as a WordPress Room Booking Plugin, allowing you to create a smooth booking system on your WordPress site.
-= Can Tourfic be utilized for WooCommerce Accommodation Bookings? =
+Yes, you can build a WooCommerce-powered travel booking site. [Watch video](https://youtu.be/99jUEJQIxkg).
 
-Absolutely, Tourfic allows you to effortlessly establish a professional-grade accommodation booking website. For a detailed guide, watch this [video](https://youtu.be/xeVkabWobDU).
+= Can Tourfic serve as a Room Reservation plugin? =
 
-= Can I create a website similar to Booking.com or Agoda with Tourfic? =
+Yes, it works well for WordPress room reservations.
 
-Yes, you can create a professional tour operator and travel agency website similar to popular platforms like Booking.com, Agoda, Hotels.com, Airbnb, and more.
+= Can Tourfic be used for Accommodation Bookings? =
 
-= Can I create a multi hotel booking system in WordPress? =
+Yes, you can set up a complete accommodation booking site. [Watch video](https://youtu.be/xeVkabWobDU).
 
-Yes, You can create a multi vendor hotel booking system wordpress with Tourfic.
+= Can I build a site like Booking.com or Agoda with Tourfic? =
 
-= Can I create a travel marketplace and hotel marketplace in WordPress? =
+Yes, Tourfic can create travel agency sites similar to Booking.com, Agoda, Hotels.com, Airbnb, and more.
 
-Yes, with Tourfic pro, you can create such marketplace hotel and tour marketplace and car rental marketplace easily.
+= Can I create a Multi-Hotel Booking system? =
 
-= Can Tourfic be used as a bus booking WordPress plugin? =
+Yes, Tourfic supports multi-vendor hotel booking websites.
 
-Yes, you can use our car rental function and use it for Cab booking, Bike rental and Bus booking.
+= Can I create a Travel or Hotel Marketplace? =
+
+Yes, with Tourfic Pro you can build hotel, tour, and car rental marketplaces.
+
+= Can Tourfic be used as a Bus Booking plugin? =
+
+Yes, our car rental module can also handle cab, bike, and bus bookings.
+
 
 = Is the free version supported? =
 
@@ -376,23 +388,13 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
-= 2.16.13 – August 13, 2025 =
+= 2.16.13 – August 19, 2025 =
 
 - Improved system stability.
 
-= 2.16.12 – August 11, 2025 =
-
-- Updated: Readme.txt file updated.
-- Compatibility: Compatible with WooCommerce v10.0.
 
 **Old Changelog can be found [here](https://themefic.com/tourfic/changelog/)**.
 
 = 1.0.0 - 23/03/2021 =
 
 - Initial stable release
-
-== Upgrade Notice ==
-
-= 2.9.20 =
-
-Please make sure you BACKUP your website before updating.
