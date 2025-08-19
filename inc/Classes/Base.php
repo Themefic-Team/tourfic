@@ -51,7 +51,6 @@ class Base {
 		\Tourfic\Admin\Enquiry\Apartment_Enquiry::instance();
 
 		if(is_admin()) {
-			\Tourfic\Admin\TF_Setup_Wizard::instance();
 			\Tourfic\Admin\TF_Options\TF_Options::instance();
 
 			// Backend Bookings

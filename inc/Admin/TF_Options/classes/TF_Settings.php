@@ -524,7 +524,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 							</svg>
 							<h3><?php esc_html_e("Get Started Quickly","tourfic"); ?></h3>
 							<p><?php esc_html_e("Use our guided setup wizard to get up and running fast.","tourfic"); ?></p>
-							<a href="<?php echo esc_url(admin_url( 'admin.php?page=tf-setup-wizard' )) ?>" target="" class="tf-link-skip-btn"><?php esc_html_e("Setup Wizard","tourfic"); ?></a>
+							<a href="#" target="" class="tf-link-skip-btn"><?php esc_html_e("Setup Wizard","tourfic"); ?></a>
 						</div>
 
 						<!-- Customization -->
