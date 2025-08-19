@@ -61,31 +61,31 @@ class Title extends Widget_Base {
         do_action( 'tf/single-title/before-content/controls', $this );
 		
 		$this->add_control('tf-title-tag',[
-			'label' => __('Title Tag', 'tourfic'),
+			'label' => esc_html__('Title Tag', 'tourfic'),
 			'type' => Controls_Manager::CHOOSE,
 			'options' => [
 				'h1'  => [
-					'title' => __('H1', 'tourfic'),
+					'title' => esc_html__('H1', 'tourfic'),
 					'icon' => 'eicon-editor-h1'
 				],
 				'h2'  => [
-					'title' => __('H2', 'tourfic'),
+					'title' => esc_html__('H2', 'tourfic'),
 					'icon' => 'eicon-editor-h2'
 				],
 				'h3'  => [
-					'title' => __('H3', 'tourfic'),
+					'title' => esc_html__('H3', 'tourfic'),
 					'icon' => 'eicon-editor-h3'
 				],
 				'h4'  => [
-					'title' => __('H4', 'tourfic'),
+					'title' => esc_html__('H4', 'tourfic'),
 					'icon' => 'eicon-editor-h4'
 				],
 				'h5'  => [
-					'title' => __('H5', 'tourfic'),
+					'title' => esc_html__('H5', 'tourfic'),
 					'icon' => 'eicon-editor-h5'
 				],
 				'h6'  => [
-					'title' => __('H6', 'tourfic'),
+					'title' => esc_html__('H6', 'tourfic'),
 					'icon' => 'eicon-editor-h6'
 				]
 			],
@@ -94,19 +94,19 @@ class Title extends Widget_Base {
 		]);
 
 		$this->add_responsive_control('title-align',[
-			'label' => __('Alignment', 'tourfic'),
+			'label' => esc_html__('Alignment', 'tourfic'),
 			'type' => Controls_Manager::CHOOSE,
 			'options' => [
 				'left' => [
-					'title' => __('Left', 'tourfic'),
+					'title' => esc_html__('Left', 'tourfic'),
 					'icon' => 'eicon-text-align-left',
 				],
 				'center' => [
-					'title' => __('Center', 'tourfic'),
+					'title' => esc_html__('Center', 'tourfic'),
 					'icon' => 'eicon-text-align-center',
 				],
 				'right' => [
-					'title' => __('Right', 'tourfic'),
+					'title' => esc_html__('Right', 'tourfic'),
 					'icon' => 'eicon-text-align-right',
 				],
 			],
@@ -123,12 +123,12 @@ class Title extends Widget_Base {
 
     protected function tf_title_style_controls() {
 		$this->start_controls_section( 'title_style', [
-			'label' => __( 'Title Style', 'tourfic' ),
+			'label' => esc_html__( 'Title Style', 'tourfic' ),
 			'tab'   => Controls_Manager::TAB_STYLE,
 		]);
 
 		$this->add_control( 'tf_title_color', [
-			'label'     => __( 'Title Color', 'tourfic' ),
+			'label'     => esc_html__( 'Title Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors'  => [
 				'{{WRAPPER}} .tf-post-title' => 'color: {{VALUE}};',
@@ -136,7 +136,7 @@ class Title extends Widget_Base {
 		]);
 
 		$this->add_group_control( Group_Control_Typography::get_type(), [
-            'label'    => __( 'Title Typography', 'tourfic' ),
+            'label'    => esc_html__( 'Title Typography', 'tourfic' ),
 			'name'     => "tf_title_typography",
 			'selector' => "{{WRAPPER}} .tf-post-title",
 		]);

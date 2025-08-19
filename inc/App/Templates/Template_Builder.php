@@ -1301,10 +1301,6 @@ class Template_Builder {
     }
 
     public function setup_editor_post_data() {
-        if (!isset($_GET['tf_preview_post_id']) || !isset($_GET['tf_archive_service'])) {
-            return;
-        }
-
         // ARCHIVE PREVIEW
         if (isset($_GET['tf_archive_service'])) {
             $post_type = sanitize_key($_GET['tf_archive_service']);
@@ -1327,32 +1323,35 @@ class Template_Builder {
             });
         }
 
-        $post_id = intval($_GET['tf_preview_post_id']);
-        $preview_post = get_post($post_id);
-        if ($preview_post) {
-            global $post, $wp_query;
-        
-            // Store original post
-            $original_post = $post;
+        // SINGLE PREVIEW
+        if(isset($_GET['tf_preview_post_id'])){
+            $post_id = intval($_GET['tf_preview_post_id']);
+            $preview_post = get_post($post_id);
+            if ($preview_post) {
+                global $post, $wp_query;
             
-            // Set up the preview post data
-            $post = $preview_post;
-            setup_postdata($preview_post);
-            
-            // Filter to ensure Elementor uses our preview post for dynamic content
-            add_filter('elementor/frontend/builder_content_data', function($data) use ($preview_post) {
-                $data['post_id'] = $preview_post->ID;
-                $data['post'] = $preview_post;
-                return $data;
-            });
-            
-            // Restore original post when editor is done
-            add_action('elementor/editor/after_enqueue_scripts', function() use ($original_post) {
-                wp_reset_postdata();
-                global $post;
-                $post = $original_post;
-                setup_postdata($post);
-            });
+                // Store original post
+                $original_post = $post;
+                
+                // Set up the preview post data
+                $post = $preview_post;
+                setup_postdata($preview_post);
+                
+                // Filter to ensure Elementor uses our preview post for dynamic content
+                add_filter('elementor/frontend/builder_content_data', function($data) use ($preview_post) {
+                    $data['post_id'] = $preview_post->ID;
+                    $data['post'] = $preview_post;
+                    return $data;
+                });
+                
+                // Restore original post when editor is done
+                add_action('elementor/editor/after_enqueue_scripts', function() use ($original_post) {
+                    wp_reset_postdata();
+                    global $post;
+                    $post = $original_post;
+                    setup_postdata($post);
+                });
+            }
         }
     }
 }

@@ -42,6 +42,7 @@ class Share extends Widget_Base {
         return [
             'share',
 			'tourfic',
+			'socail',
 			'tf'
         ];
     }
@@ -67,13 +68,13 @@ class Share extends Widget_Base {
         do_action( 'tf/single-share/before-content/controls', $this );
 
         $this->add_control('share_style',[
-            'label' => __('Share Style', 'tourfic'),
+            'label' => esc_html__('Share Style', 'tourfic'),
             'type' => \Elementor\Controls_Manager::SELECT,
             'default' => 'style1',
             'options' => [
-                'style1' => __('Style 1 - Dropdown Icons', 'tourfic'),
-                'style2' => __('Style 2 - Off Canvas', 'tourfic'),
-                'style3' => __('Style 3 - Dropdown with Labels', 'tourfic'),
+                'style1' => esc_html__('Style 1 - Dropdown Icons', 'tourfic'),
+                'style2' => esc_html__('Style 2 - Off Canvas', 'tourfic'),
+                'style3' => esc_html__('Style 3 - Dropdown with Labels', 'tourfic'),
             ],
         ]);
 
@@ -100,7 +101,7 @@ class Share extends Widget_Base {
 		]);
 
         $this->add_control('share_icons', [
-			'label' => __('Share Icons', 'tourfic'),
+			'label' => esc_html__('Share Icons', 'tourfic'),
 			'type' => Controls_Manager::SELECT2,
 			'label_block' => true,
 			'multiple' => true,
@@ -121,7 +122,7 @@ class Share extends Widget_Base {
 
     protected function tf_share_style_controls() {
 		$this->start_controls_section( 'share_style_section', [
-			'label' => __( 'Share Style', 'tourfic' ),
+			'label' => esc_html__( 'Share Icon Style', 'tourfic' ),
 			'tab'   => Controls_Manager::TAB_STYLE,
 		]);
 
@@ -140,7 +141,7 @@ class Share extends Widget_Base {
 				],
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .tf-share-icon i" => 'font-size: {{SIZE}}{{UNIT}}',
+				"{{WRAPPER}} .share-toggle i" => 'font-size: {{SIZE}}{{UNIT}}',
 			],
 		] );
 
@@ -170,17 +171,17 @@ class Share extends Widget_Base {
 		$this->start_controls_tabs( "tabs_share_icon_style" );
 		/*-----Button NORMAL state------ */
 		$this->start_controls_tab( "tab_share_icon_normal", [
-			'label' => __( 'Normal', 'tourfic' ),
+			'label' => esc_html__( 'Normal', 'tourfic' ),
 		] );
 		$this->add_control( 'tf_share_icon_color', [
-			'label'     => __( 'Icon Color', 'tourfic' ),
+			'label'     => esc_html__( 'Icon Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
 				"{{WRAPPER}} .tf-share-icon i" => 'color: {{VALUE}};',
 			],
 		] );
 		$this->add_control( 'share_icon_bg_color', [
-			'label'     => __( 'Background Color', 'tourfic' ),
+			'label'     => esc_html__( 'Background Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
 				"{{WRAPPER}} .tf-share-icon i" => 'background-color: {{VALUE}};',
@@ -197,7 +198,7 @@ class Share extends Widget_Base {
 			],
 		] );
 		$this->add_control( "share_icon_border_radius", [
-			'label'      => __( 'Border Radius', 'tourfic' ),
+			'label'      => esc_html__( 'Border Radius', 'tourfic' ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
 				'px',
@@ -214,17 +215,17 @@ class Share extends Widget_Base {
 
 		/*-----Button HOVER state------ */
 		$this->start_controls_tab( "tab_share_icon_hover", [
-			'label' => __( 'Active', 'tourfic' ),
+			'label' => esc_html__( 'Active', 'tourfic' ),
 		] );
 		$this->add_control( "share_icon_color_hover", [
-			'label'     => __( 'Icon Color', 'tourfic' ),
+			'label'     => esc_html__( 'Icon Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
 				"{{WRAPPER}} .tf-share-icon:hover i" => 'color: {{VALUE}};',
 			],
 		] );
 		$this->add_control( 'share_icon_bg_color_hover', [
-			'label'     => __( 'Background Color', 'tourfic' ),
+			'label'     => esc_html__( 'Background Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
 				"{{WRAPPER}} .tf-share-icon i:hover" => 'background-color: {{VALUE}};',
@@ -234,7 +235,7 @@ class Share extends Widget_Base {
 			],
 		] );
 		$this->add_control( 'share_icon_border_color_hover', [
-			'label'     => __( 'Border Color', 'tourfic' ),
+			'label'     => esc_html__( 'Border Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
 				"{{WRAPPER}} .tf-share-icon i:hover" => 'border-color: {{VALUE}};',
@@ -287,7 +288,6 @@ class Share extends Widget_Base {
         }
 
         //icon type
-        $icon_type = !empty($settings['icon_type']) ? $settings['icon_type'] : 'rounded';
         $style = !empty($settings['share_style']) ? $settings['share_style'] : 'style1';
         
         if ( $disable_share_opt !== '1' ):
@@ -358,7 +358,7 @@ class Share extends Widget_Base {
                         </li>
                     </ul>
                     <a href="#dropdown-share-center" class="tf-share-toggle tf-icon tf-social-box" data-toggle="true">
-                        <i class="ri-share-line"></i>
+                        <?php echo wp_kses($share_icon_html, Helper::tf_custom_wp_kses_allow_tags()); ?>
                     </a>
                 </div>
                 <?php
@@ -366,15 +366,15 @@ class Share extends Widget_Base {
             // Style 3: Dropdown with text labels
             elseif ($style == 'style3') {
                 $network_labels = [
-                    'facebook' => __('Share on Facebook', 'tourfic'),
-                    'twitter' => __('Share on Twitter', 'tourfic'),
-                    'linkedin' => __('Share on Linkedin', 'tourfic'),
-                    'pinterest' => __('Share on Pinterest', 'tourfic')
+                    'facebook' => esc_html__('Share on Facebook', 'tourfic'),
+                    'twitter' => esc_html__('Share on Twitter', 'tourfic'),
+                    'linkedin' => esc_html__('Share on Linkedin', 'tourfic'),
+                    'pinterest' => esc_html__('Share on Pinterest', 'tourfic')
                 ];
                 ?>
                 <div class="tf-share">
                     <a href="#dropdown-share-center" class="share-toggle" data-toggle="true">
-                        <i class="fas fa-share-alt"></i>
+                        <?php echo wp_kses($share_icon_html, Helper::tf_custom_wp_kses_allow_tags()); ?>
                     </a>
                     <div id="dropdown-share-center" class="share-tour-content">
                         <ul class="tf-dropdown-content">

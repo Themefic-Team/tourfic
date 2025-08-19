@@ -78,28 +78,28 @@ class Address extends Widget_Base {
 		]);
 
         $this->add_control('show_location',[
-			'label' => __('Show Location Link?', 'tourfic'),
+			'label' => esc_html__('Show Location Link?', 'tourfic'),
 			'type' => Controls_Manager::SWITCHER,
-			'label_on' => __('Show', 'tourfic'),
-			'label_off' => __('Hide', 'tourfic'),
+			'label_on' => esc_html__('Show', 'tourfic'),
+			'label_off' => esc_html__('Hide', 'tourfic'),
 			'return_value' => 'yes',
 			'default' => 'yes',
 		]);
 
 		$this->add_responsive_control('address-align',[
-			'label' => __('Alignment', 'tourfic'),
+			'label' => esc_html__('Alignment', 'tourfic'),
 			'type' => Controls_Manager::CHOOSE,
 			'options' => [
 				'flex-start' => [
-					'title' => __('Left', 'tourfic'),
+					'title' => esc_html__('Left', 'tourfic'),
 					'icon' => 'eicon-text-align-left',
 				],
 				'center' => [
-					'title' => __('Center', 'tourfic'),
+					'title' => esc_html__('Center', 'tourfic'),
 					'icon' => 'eicon-text-align-center',
 				],
 				'flex-end' => [
-					'title' => __('Right', 'tourfic'),
+					'title' => esc_html__('Right', 'tourfic'),
 					'icon' => 'eicon-text-align-right',
 				],
 			],
@@ -116,12 +116,12 @@ class Address extends Widget_Base {
 
     protected function tf_address_style_controls() {
 		$this->start_controls_section( 'address_style', [
-			'label' => __( 'Address Style', 'tourfic' ),
+			'label' => esc_html__( 'Address Style', 'tourfic' ),
 			'tab'   => Controls_Manager::TAB_STYLE,
 		]);
 
 		$this->add_control( 'tf_address_color', [
-			'label'     => __( 'Color', 'tourfic' ),
+			'label'     => esc_html__( 'Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors'  => [
 				'{{WRAPPER}} .tf-address' => 'color: {{VALUE}};',
@@ -129,7 +129,7 @@ class Address extends Widget_Base {
 		]);
 
 		$this->add_group_control( Group_Control_Typography::get_type(), [
-            'label'    => __( 'Typography', 'tourfic' ),
+            'label'    => esc_html__( 'Typography', 'tourfic' ),
 			'name'     => "tf_address_typography",
 			'selector' => "{{WRAPPER}} .tf-address",
 		]);
@@ -156,7 +156,7 @@ class Address extends Widget_Base {
 		] );
 
 		$this->add_control( "tf_address_icon_color", [
-			'label'     => __( 'Icon Color', 'tourfic' ),
+			'label'     => esc_html__( 'Icon Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
 				"{{WRAPPER}} .tf-address i" => 'color: {{VALUE}}',
@@ -166,11 +166,11 @@ class Address extends Widget_Base {
 
 		$this->add_control( 'tf_link_type_heading', [
 			'type'  => Controls_Manager::HEADING,
-			'label' => __( 'Link Style', 'tourfic' ),
+			'label' => esc_html__( 'Link Style', 'tourfic' ),
 		] );
 
 		$this->add_control( 'tf_link_color', [
-			'label'     => __( 'Link Color', 'tourfic' ),
+			'label'     => esc_html__( 'Link Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors'  => [
 				'{{WRAPPER}} .more-hotel' => 'color: {{VALUE}};',
@@ -178,7 +178,7 @@ class Address extends Widget_Base {
 		]);
 
 		$this->add_group_control( Group_Control_Typography::get_type(), [
-            'label'    => __( 'Link Typography', 'tourfic' ),
+            'label'    => esc_html__( 'Link Typography', 'tourfic' ),
 			'name'     => "tf_link_typography",
 			'selector' => "{{WRAPPER}} .more-hotel",
 		]);

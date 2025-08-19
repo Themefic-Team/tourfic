@@ -104,7 +104,7 @@ class Wishlist extends Widget_Base {
 
     protected function tf_wishlist_style_controls() {
 		$this->start_controls_section( 'wishlist_style', [
-			'label' => __( 'Wishlist Style', 'tourfic' ),
+			'label' => esc_html__( 'Wishlist Style', 'tourfic' ),
 			'tab'   => Controls_Manager::TAB_STYLE,
 		]);
 
@@ -153,17 +153,17 @@ class Wishlist extends Widget_Base {
 		$this->start_controls_tabs( "tabs_wishlist_icon_style" );
 		/*-----Button NORMAL state------ */
 		$this->start_controls_tab( "tab_wishlist_icon_normal", [
-			'label' => __( 'Normal', 'tourfic' ),
+			'label' => esc_html__( 'Normal', 'tourfic' ),
 		] );
 		$this->add_control( 'tf_wishlist_icon_color', [
-			'label'     => __( 'Icon Color', 'tourfic' ),
+			'label'     => esc_html__( 'Icon Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
 				"{{WRAPPER}} .tf-wishlist-icon i" => 'color: {{VALUE}};',
 			],
 		] );
 		$this->add_control( 'wishlist_icon_bg_color', [
-			'label'     => __( 'Background Color', 'tourfic' ),
+			'label'     => esc_html__( 'Background Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
 				"{{WRAPPER}} .tf-wishlist-icon i" => 'background-color: {{VALUE}};',
@@ -180,7 +180,7 @@ class Wishlist extends Widget_Base {
 			],
 		] );
 		$this->add_control( "wishlist_icon_border_radius", [
-			'label'      => __( 'Border Radius', 'tourfic' ),
+			'label'      => esc_html__( 'Border Radius', 'tourfic' ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
 				'px',
@@ -197,17 +197,17 @@ class Wishlist extends Widget_Base {
 
 		/*-----Button HOVER state------ */
 		$this->start_controls_tab( "tab_wishlist_icon_hover", [
-			'label' => __( 'Active', 'tourfic' ),
+			'label' => esc_html__( 'Active', 'tourfic' ),
 		] );
 		$this->add_control( "wishlist_icon_color_hover", [
-			'label'     => __( 'Icon Color', 'tourfic' ),
+			'label'     => esc_html__( 'Icon Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
 				"{{WRAPPER}} .tf-wishlist-icon:hover i" => 'color: {{VALUE}};',
 			],
 		] );
 		$this->add_control( 'wishlist_icon_bg_color_hover', [
-			'label'     => __( 'Background Color', 'tourfic' ),
+			'label'     => esc_html__( 'Background Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
 				"{{WRAPPER}} .tf-wishlist-icon i:hover" => 'background-color: {{VALUE}};',
@@ -217,7 +217,7 @@ class Wishlist extends Widget_Base {
 			],
 		] );
 		$this->add_control( 'wishlist_icon_border_color_hover', [
-			'label'     => __( 'Border Color', 'tourfic' ),
+			'label'     => esc_html__( 'Border Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
 				"{{WRAPPER}} .tf-wishlist-icon i:hover" => 'border-color: {{VALUE}};',
