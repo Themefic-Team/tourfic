@@ -2,20 +2,20 @@
 /**
  * Plugin Name:     Tourfic - Travel, Hotel, and Apartment Booking Solution for WooCommerce
  * Plugin URI:      https://themefic.com/tourfic
- * Description:     The Ultimate WordPress plugin for tour, travel, accommodation, and hotel bookings. Effortlessly manage your entire online travel booking system, including orders and any WooCommerce payment method.
+ * Description:     The ultimate plugin for tour, travel, accommodation, and hotel bookings. Effortlessly manage your entire online travel booking system, including orders and any WooCommerce payment method.
  * Author:          Themefic
  * Author URI:      https://themefic.com
  * Text Domain:     tourfic
  * Domain Path:     /lang/
- * Version:         2.16.12
+ * Version:         2.16.13
  * Tested up to:    6.8
  * WC tested up to: 10.0
  * Requires PHP:    7.4
- * Elementor tested up to: 3.29
  * Requires Plugins: woocommerce
- * License:     GPLv2 or later
+ * Elementor tested up to: 3.31
+ * License: GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
- */
+*/
 
 // Don't load directly
 defined( 'ABSPATH' ) || exit;
@@ -28,7 +28,7 @@ final class Tourfic {
 	 * @var string
 	 */
 
-	const VERSION = '2.16.12';
+	const VERSION = '2.16.13';
 
 	/**
 	 * Minimum PHP version required.
