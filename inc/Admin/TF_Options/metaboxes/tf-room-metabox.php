@@ -21,14 +21,9 @@ TF_Metabox::metabox( 'tf_room_opt', array(
 				array(
 					'id'    => 'hotel-room-heading',
 					'type'  => 'heading',
-					'label' => 'General Settings',
-					'subtitle' => __( 'These are some common settings specific to this Room', 'tourfic' ),
-				),
-				array(
-					'id'      => 'notice',
-					'type'    => 'notice',
-					'notice'  => 'info',
-					'content' => __( 'This section includes '. $hotel_name . ' Room Management settings.', 'tourfic' ). ' <a href="https://themefic.com/docs/tourfic/how-it-works/room-management/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
+					'title' => 'General Settings',
+					'content' => __( 'These are some common settings specific to this Room', 'tourfic' ),
+                    'docs' => esc_url('https://themefic.com/docs/tourfic/how-it-works/room-management/')
 				),
 				array(
 					'id'          => 'tf_hotel',
@@ -69,7 +64,6 @@ TF_Metabox::metabox( 'tf_room_opt', array(
                     'subtitle'  => __( 'Enable/disable this Room', 'tourfic' ),
                     'label_on'  => __( 'Enabled', 'tourfic' ),
                     'label_off' => __( 'Disabled', 'tourfic' ),
-                    'width'     => 100,
                     'default'   => true,
                 ),
 				array(
@@ -88,7 +82,7 @@ TF_Metabox::metabox( 'tf_room_opt', array(
                 array(
                     'id'      => 'Details',
                     'type'    => 'heading',
-                    'content' => __( 'Details', 'tourfic' ),
+                    'title' => __( 'Details', 'tourfic' ),
                     'class'   => 'tf-field-class',
                 ),
                 array(
@@ -168,7 +162,7 @@ TF_Metabox::metabox( 'tf_room_opt', array(
                 array(
                     'id'      => 'minimum_maximum_stay_requirements',
                     'type'    => 'heading',
-                    'content' => __( 'Stay Requirements', 'tourfic' ),
+                    'title' => __( 'Stay Requirements', 'tourfic' ),
                     'class'   => 'tf-field-class',
                 ),
                 array(
@@ -192,8 +186,8 @@ TF_Metabox::metabox( 'tf_room_opt', array(
                 array(
 					'id'    => 'room-cancellation-heading',
 					'type'  => 'heading',
-					'label' => 'Cancellation Condition',
-					'subtitle' => __( 'Define and customize booking cancellation policies for your offerings. This section allows you to set different cancellation rules, such as timeframes for free cancellations, partial refunds, or no refunds.', 'tourfic' ),
+					'title' => 'Cancellation Condition',
+					'content' => __( 'Define and customize booking cancellation policies for your offerings. This section allows you to set different cancellation rules, such as timeframes for free cancellations, partial refunds, or no refunds.', 'tourfic' ),
 				),
 				array(
 					'id'    => 'tf-pro-notice',
@@ -213,7 +207,7 @@ TF_Metabox::metabox( 'tf_room_opt', array(
                 array(
                     'id'      => 'Room Pricing',
                     'type'    => 'heading',
-                    'content' => __( 'Pricing', 'tourfic' ),
+                    'title' => __( 'Pricing', 'tourfic' ),
                     'class'   => 'tf-field-class',
                 ),
                 array(
@@ -293,7 +287,7 @@ TF_Metabox::metabox( 'tf_room_opt', array(
                 array(
                     'id'      => 'Deposit',
                     'type'    => 'heading',
-                    'content' => __( 'Deposit', 'tourfic' ),
+                    'title' => __( 'Deposit', 'tourfic' ),
                     'class'   => 'tf-field-class',
                 ),
                 array(
@@ -314,7 +308,7 @@ TF_Metabox::metabox( 'tf_room_opt', array(
                 array(
                     'id'      => 'Availability',
                     'type'    => 'heading',
-                    'content' => __( 'Availability Settings', 'tourfic' ),
+                    'title' => __( 'Availability Settings', 'tourfic' ),
                     'class'   => 'tf-field-class',
                 ),
                 array(
@@ -349,7 +343,7 @@ TF_Metabox::metabox( 'tf_room_opt', array(
                 array(
                     'id'         => 'tf-others-heading',
                     'type'       => 'heading',
-                    'content'    => __( 'Other', 'tourfic' ),
+                    'title'    => __( 'Other', 'tourfic' ),
                     'dependency' => array( 'reduce_num_room', '==', '1' ),
                     'class'      => 'tf-field-class',
                 ),
@@ -378,7 +372,7 @@ TF_Metabox::metabox( 'tf_room_opt', array(
                 array(
                     'id'      => 'ical',
                     'type'    => 'heading',
-                    'content' => __( 'iCal Sync', 'tourfic' ),
+                    'title' => __( 'iCal Sync', 'tourfic' ),
                 ),
                 array(
 					'id'    => 'tf-pro-notice',

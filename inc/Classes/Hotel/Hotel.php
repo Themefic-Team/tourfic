@@ -3143,12 +3143,15 @@ class Hotel {
 		$room_meta                    = get_post_meta( $room_id, 'tf_room_opt', true );
 		$enable_airport_service   = ! empty( $meta['airport_service'] ) ? $meta['airport_service'] : '';
 		$airport_service_type     = ! empty( $meta['airport_service_type'] ) ? $meta['airport_service_type'] : '';
+		$hotel_extras     = ! empty( $meta['hotel-extra'] ) ? $meta['hotel-extra'] : '';
+		$hotel_extra_option     = ! empty( $meta['hotel_extra_option'] ) ? $meta['hotel_extra_option'] : '';
 		$room_book_by             = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
 		$room_book_url            = ! empty( $meta['booking-url'] ) ? $meta['booking-url'] : '';
 		$room_allow_deposit       = ! empty( $room_meta['allow_deposit'] ) ? $room_meta['allow_deposit'] : '';
 		$room_deposit_type       = ! empty( $room_meta['deposit_type'] ) ? $room_meta['deposit_type'] : '';
 		$room_deposit_amount       = ! empty( $room_meta['deposit_amount'] ) ? $room_meta['deposit_amount'] : 0;
 		$airport_service_type     = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $enable_airport_service ) && ! empty( $airport_service_type ) ? $airport_service_type : null;
+		$hotel_extras     = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $hotel_extra_option ) && ! empty( $hotel_extras ) ? $hotel_extras : null;
 		$enable_guest_info_global = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( Helper::tfopt( 'enable_guest_info' ) ) ? Helper::tfopt( 'enable_guest_info' ) : 0;
 		$enable_guest_info        = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $meta['enable_guest_info'] ) ? $meta['enable_guest_info'] : $enable_guest_info_global;
 		$hotel_guest_details_text = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( Helper::tfopt( 'hotel_guest_details_text' ) ) ? Helper::tfopt( 'hotel_guest_details_text' ) : '';
@@ -3184,20 +3187,20 @@ class Hotel {
                 <div class="tf-booking-tabs">
                     <div class="tf-booking-tab-menu">
                         <ul>
-							<?php if ( $airport_service_type && ( $room_book_by != 2 || empty( $room_book_url ) ) ) { ?>
+							<?php if ( ($airport_service_type || $hotel_extras) && ( $room_book_by != 2 || empty( $room_book_url ) ) ) { ?>
                                 <li class="tf-booking-step tf-booking-step-1 active">
-                                    <i class="ri-price-tag-3-line"></i> <?php echo __( "Airport Service", "tourfic" ); ?>
+                                    <i class="ri-price-tag-3-line"></i> <?php echo __( "Hotel Service", "tourfic" ); ?>
                                 </li>
 							<?php }
 							if ( $enable_guest_info ) {
 								?>
-                                <li class="tf-booking-step tf-booking-step-2 <?php echo empty( $airport_service_type ) ? esc_attr( 'active' ) : ''; ?> ">
+                                <li class="tf-booking-step tf-booking-step-2 <?php echo empty( $airport_service_type ) && empty( $hotel_extras ) ? esc_attr( 'active' ) : ''; ?> ">
                                     <i class="ri-group-line"></i> <?php echo __( "Guest details", "tourfic" ); ?>
                                 </li>
 							<?php }
 							if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && 3 == $room_book_by ) {
 								?>
-                                <li class="tf-booking-step tf-booking-step-3 <?php echo empty( $airport_service_type ) && empty( $enable_guest_info ) ? esc_attr( 'active' ) : ''; ?>">
+                                <li class="tf-booking-step tf-booking-step-3 <?php echo empty( $airport_service_type ) && empty( $hotel_extras ) && empty( $enable_guest_info ) ? esc_attr( 'active' ) : ''; ?>">
                                     <i class="ri-calendar-check-line"></i> <?php echo __( "Booking Confirmation", "tourfic" ); ?>
                                 </li>
 							<?php } ?>
@@ -3216,63 +3219,70 @@ class Hotel {
                 <div class="tf-booking-content-summery">
 
 					<?php
-					if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $airport_service_type ) { ?>
+					if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ($airport_service_type || $hotel_extras) ) { ?>
                         <div class="tf-booking-content tf-hotel-booking-content tf-booking-content-1">
-                            <div class="tf-hotel-services-text">
-                                <h3><?php echo !empty( tfopt( 'hotel_service_popup_title' ) ) ? __( tfopt( 'hotel_service_popup_title' ), 'tourfic' ) : '' ?></h3>
-                                <p><?php echo !empty( tfopt( 'hotel_service_popup_subtile') ) ? __( tfopt( 'hotel_service_popup_subtile'), 'tourfic' ) : '' ; ?></p>
-                            </div>
-                            <div class="tf-booking-content-service">
-								<?php if ( ! empty( $airport_service_type ) ) { ?>
+							<?php if ( ! empty( $airport_service_type ) ) { ?>
+								<div class="tf-hotel-services-text">
+									<h3><?php echo !empty( tfopt( 'hotel_service_popup_title' ) ) ? __( tfopt( 'hotel_service_popup_title' ), 'tourfic' ) : '' ?></h3>
+									<p><?php echo !empty( tfopt( 'hotel_service_popup_subtile') ) ? __( tfopt( 'hotel_service_popup_subtile'), 'tourfic' ) : '' ; ?></p>
+								</div>
+								<div class="tf-booking-content-service">
+									<select name="airport_service">
+										<option value=""><?php _e( '- Select Service -', 'tourfic' ) ?></option>
 									<?php foreach ( $airport_service_type as $key => $single_service_type ) {
 										$airport_service = self::tf_hotel_airport_service_title_price( $post_id, $adult, $child, $single_service_type );
 										?>
-                                        <div class="tf-single-hotel-service tour-extra-single">
-                                            <label for="service-<?php echo esc_attr( $key ) . '_' . $room_id; ?>">
-                                                <div class="tf-service-radio">
-                                                    <input type="radio" value="<?php echo esc_attr( $single_service_type ); ?>" id="service-<?php echo esc_attr( $key) . '_' . $room_id; ?>" name="airport_service">
-                                                </div>
-                                                <div class="tf-service-content">
-                                                    <h5>
-														<?php
-														if ( "pickup" == $single_service_type ) {
-															_e( 'Pickup Service', 'tourfic' );
-														}
-														if ( "dropoff" == $single_service_type ) {
-															_e( 'Drop-off Service', 'tourfic' );
-														}
-														if ( "both" == $single_service_type ) {
-															_e( 'Pickup & Drop-off Service', 'tourfic' );
-														}
-														?>
-                                                    </h5>
-													<p><?php echo $airport_service['title']; ?> = <?php echo wc_price( $airport_service['price'] ); ?></p>
-                                                </div>
-                                            </label>
-                                        </div>
+										<option value="<?php echo esc_attr( $single_service_type ); ?>">
+											<?php
+											if ( "pickup" == $single_service_type ) {
+												_e( 'Pickup Service', 'tourfic' );
+											}
+											if ( "dropoff" == $single_service_type ) {
+												_e( 'Drop-off Service', 'tourfic' );
+											}
+											if ( "both" == $single_service_type ) {
+												_e( 'Pickup & Drop-off Service', 'tourfic' );
+											}
+											?>
+
+											<?php echo $airport_service['title']; ?> = <?php echo wc_price( $airport_service['price'] ); ?>
+										</option>
 									<?php } ?>
+									</select>
+								</div>
+							<?php } ?>
+							<!-- Hotel Extra -->
+							<?php if ( ! empty( $hotel_extras ) ) { ?>
+							<div class="tf-hotel-services-text">
+                                <h3><?php echo !empty( tfopt( 'hotel_extra_popup_title' ) ) ? __( tfopt( 'hotel_extra_popup_title' ), 'tourfic' ) : '' ?></h3>
+                                <p><?php echo !empty( tfopt( 'hotel_extra_popup_subtile') ) ? __( tfopt( 'hotel_extra_popup_subtile'), 'tourfic' ) : '' ; ?></p>
+                            </div>
+							<div class="tf-booking-content-service">
+								<?php foreach ( $hotel_extras as $key => $extra ) {
+									$extra_service = Helper::tf_hotel_extras_title_price( $post_id, $adult, $child, $key );
+									?>
 									<div class="tf-single-hotel-service tour-extra-single">
-										<label for="service-no_<?php echo esc_attr($room_id); ?>">
+										<label for="service-<?php echo esc_attr( $key ) . '_' . $room_id; ?>">
 											<div class="tf-service-radio">
-												<input type="radio" value="" id="service-no_<?php echo esc_attr($room_id); ?>" name="airport_service">
+												<input type="checkbox" value="<?php echo esc_attr( $key ); ?>" id="service-<?php echo esc_attr( $key) . '_' . $room_id; ?>" name="extra_service">
 											</div>
 											<div class="tf-service-content">
 												<h5>
-													<?php echo esc_html__("No Service", 'tourfic'); ?>
+													<?php esc_html_e($extra['title']);?>
 												</h5>
+												<p><?php echo $extra_service['title']; ?> = <?php echo wc_price( $extra_service['price'] ); ?></p>
 											</div>
 										</label>
-										<p></p>
 									</div>
 								<?php } ?>
-
                             </div>
+							<?php } ?>
                         </div>
 					<?php }
 					if ( $enable_guest_info ) {
 						?>
                         <!-- Popup Traveler Info -->
-                        <div class="tf-booking-content tf-booking-content-2 <?php echo empty( $airport_service_type ) ? esc_attr( 'show' ) : ''; ?>">
+                        <div class="tf-booking-content tf-booking-content-2 <?php echo empty( $airport_service_type ) && empty($hotel_extras) ? esc_attr( 'show' ) : ''; ?>">
                             <p><?php echo __( $hotel_guest_details_text, "tourfic" ); ?></p>
                             <div class="tf-booking-content-traveller">
                                 <div class="tf-traveller-info-box"></div>
@@ -3282,7 +3292,7 @@ class Hotel {
 					if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && 3 == $room_book_by ) {
 						?>
                         <!-- Popup Booking Confirmation -->
-                        <div class="tf-booking-content tf-booking-content-3 <?php echo empty( $airport_service_type ) && empty( $enable_guest_info ) ? esc_attr( 'show' ) : ''; ?>">
+                        <div class="tf-booking-content tf-booking-content-3 <?php echo empty( $airport_service_type ) && empty($hotel_extras) && empty( $enable_guest_info ) ? esc_attr( 'show' ) : ''; ?>">
                             <p><?php _e( $hotel_guest_details_text, "tourfic" ); ?></p>
                             <div class="tf-booking-content-traveller">
                                 <div class="tf-single-tour-traveller">
@@ -3399,7 +3409,7 @@ class Hotel {
 					<?php } ?>
 
                     <!-- Popup Booking Summery -->
-                    <div class="tf-booking-summery" style="<?php echo empty( $airport_service_type ) && empty( $enable_guest_info ) && 3 != $room_book_by ? esc_attr( "width: 100%;" ) : ''; ?>">
+                    <div class="tf-booking-summery" style="<?php echo empty( $airport_service_type ) && empty($hotel_extras) && empty( $enable_guest_info ) && 3 != $room_book_by ? esc_attr( "width: 100%;" ) : ''; ?>">
                         <div class="tf-booking-fixed-summery">
                             <h5><?php echo __( "Booking summery", "tourfic" ); ?></h5>
                             <h4><?php echo get_the_title( $post_id ); ?></h4>
@@ -3412,13 +3422,13 @@ class Hotel {
 
                 <!-- Popup Footer Control & Partial Payment -->
                 <div class="tf-booking-pagination tf-hotel-booking-pagination">
-					<?php if ( empty( $airport_service_type ) && 3 != $room_book_by && empty( $enable_guest_info ) ) { ?>
+					<?php if ( empty( $airport_service_type ) && empty( $hotel_extras ) && 3 != $room_book_by && empty( $enable_guest_info ) ) { ?>
                         <div class="tf-control-pagination show">
                             <button class="hotel-room-book tf_btn" type="submit"><?php echo __( "Continue", "tourfic" ); ?></button>
                         </div>
 						<?php
 					}
-					if ( function_exists( 'is_tf_pro' ) && is_tf_pro() &&  $airport_service_type ) { ?>
+					if ( function_exists( 'is_tf_pro' ) && is_tf_pro() &&  ($airport_service_type || $hotel_extras) ) { ?>
                         <div class="tf-control-pagination show tf-pagination-content-1">
 							<?php
 							if ( 3 != $room_book_by && empty( $enable_guest_info ) ) { ?>
@@ -3432,9 +3442,9 @@ class Hotel {
 					if ( $enable_guest_info ) { ?>
 
                         <!-- Popup Traveler Info -->
-                        <div class="tf-control-pagination tf-pagination-content-2 <?php echo empty( $airport_service_type ) ? esc_attr( 'show' ) : ''; ?>">
+                        <div class="tf-control-pagination tf-pagination-content-2 <?php echo empty( $airport_service_type ) && empty( $hotel_extras ) ? esc_attr( 'show' ) : ''; ?>">
 							<?php
-							if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $airport_service_type ) { ?>
+							if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ($airport_service_type || $hotel_extras) ) { ?>
                                 <a href="#" class="tf-back-control tf-step-back" data-step="1"><i class="fa fa-angle-left"></i><?php echo __( "Back", "tourfic" ); ?></a>
 							<?php }
 							if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && 3 == $room_book_by ) {
@@ -3449,9 +3459,9 @@ class Hotel {
 						?>
 
                         <!-- Popup Booking Confirmation -->
-                        <div class="tf-control-pagination tf-pagination-content-3 <?php echo empty( $airport_service_type ) && empty( $enable_guest_info ) ? esc_attr( 'show' ) : ''; ?>">
+                        <div class="tf-control-pagination tf-pagination-content-3 <?php echo empty( $airport_service_type ) && empty( $hotel_extras ) && empty( $enable_guest_info ) ? esc_attr( 'show' ) : ''; ?>">
 							<?php
-							if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ( $airport_service_type || $enable_guest_info ) ) { ?>
+							if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ( $airport_service_type || $hotel_extras || $enable_guest_info ) ) { ?>
                                 <a href="#" class="tf-back-control tf-step-back" data-step="2"><i class="fa fa-angle-left"></i><?php echo __( "Back", "tourfic" ); ?></a>
 							<?php } ?>
                             <button type="submit" class="tf-hotel-book-confirm-error tf_btn"><?php echo __( "Continue", "tourfic" ); ?></button>
@@ -3612,6 +3622,7 @@ class Hotel {
 
 		return !empty( $airport_service_arr ) ? $airport_service_arr : array( 'title' => '', 'price' => 0 );
 	}
+
 
 	/**
 	 * Hotel Archive Single Item Layout

@@ -1205,23 +1205,6 @@ trait Action_Helper {
 
 				} elseif ( $posttype == 'tf_tours' ) {
 					if ( empty( $check_in_out ) ) {
-						/**
-						 * Check if minimum and maximum people limit matches with the search query
-						 */
-						$total_person = intval( $adults ) + intval( $child );
-						$meta         = get_post_meta( get_the_ID(), 'tf_tours_opt', true );
-
-						//skip the tour if the search form total people  exceeds the maximum number of people in tour
-						if ( ! empty( $meta['cont_max_people'] ) && $meta['cont_max_people'] < $total_person && $meta['cont_max_people'] != 0 ) {
-							$total_posts --;
-							continue;
-						}
-
-						//skip the tour if the search form total people less than the maximum number of people in tour
-						if ( ! empty( $meta['cont_min_people'] ) && $meta['cont_min_people'] > $total_person && $meta['cont_min_people'] != 0 ) {
-							$total_posts --;
-							continue;
-						}
 						Tour::tf_filter_tour_by_without_date( $period, $total_posts, $not_found, $data );
 					} else {
 						Tour::tf_filter_tour_by_date( $period, $total_posts, $not_found, $data );
@@ -1413,6 +1396,7 @@ trait Action_Helper {
 							if ( function_exists( 'is_tf_pro' ) && is_tf_pro()) {
                                 $count ++;
                                 $map            = ! empty( $tour_meta['location'] ) ? Helper::tf_data_types( $tour_meta['location'] ) : '';
+								$allow_discount    = ! empty( $tour_meta['allow_discount'] ) ? $tour_meta['allow_discount'] : '';
                                 $discount_type  = ! empty( $tour_meta['discount_type'] ) ? $tour_meta['discount_type'] : '';
                                 $discount_price = ! empty( $tour_meta['discount_price'] ) ? $tour_meta['discount_price'] : '';
 
@@ -1450,7 +1434,7 @@ trait Action_Helper {
                                                 ?>
                                             </a>
 
-                                            <?php if ( $discount_type !== 'none' && ! empty( $discount_price ) ) : ?>
+                                            <?php if ( !empty($allow_discount) && $discount_type !== 'none' && ! empty( $discount_price ) ) : ?>
                                                 <div class="tf-map-item-discount">
                                                     <?php echo $discount_type == "percent" ? wp_kses_post($discount_price . '%') : wp_kses_post(wc_price( $discount_price )) ?>
 													<?php esc_html_e( " Off", "tourfic" ); ?>
@@ -1716,6 +1700,7 @@ trait Action_Helper {
 							if (function_exists( 'is_tf_pro' ) && is_tf_pro()) {
 								$count ++;
 								$map            = ! empty( $tour_meta['location'] ) ? Helper::tf_data_types( $tour_meta['location'] ) : '';
+								$allow_discount    = ! empty( $tour_meta['allow_discount'] ) ? $tour_meta['allow_discount'] : '';
 								$discount_type  = ! empty( $tour_meta['discount_type'] ) ? $tour_meta['discount_type'] : '';
 								$discount_price = ! empty( $tour_meta['discount_price'] ) ? $tour_meta['discount_price'] : '';
 
@@ -1753,7 +1738,7 @@ trait Action_Helper {
 												?>
                                             </a>
 
-											<?php if ( $discount_type !== 'none' && ! empty( $discount_price ) ) : ?>
+											<?php if ( !empty($allow_discount) && $discount_type !== 'none' && ! empty( $discount_price ) ) : ?>
                                                 <div class="tf-map-item-discount">
 													<?php echo $discount_type == "percent" ? wp_kses_post($discount_price . '%') : wp_kses_post(wc_price( $discount_price )) ?>
 													<?php esc_html_e( " Off", "tourfic" ); ?>
