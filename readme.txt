@@ -390,8 +390,9 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 = 2.16.13 – August 19, 2025 =
 
-- Improved system stability.
-
+- System stability has been improved.
+- Code structure has been improved.
+- Updated readme.txt info
 
 **Old Changelog can be found [here](https://themefic.com/tourfic/changelog/)**.
 
