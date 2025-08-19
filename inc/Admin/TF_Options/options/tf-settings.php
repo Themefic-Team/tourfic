@@ -2596,7 +2596,7 @@ TF_Settings::option( 'tf_settings', array(
 									'id'      => 'customfield-official-docs',
 									'type'    => 'notice',
 									'style'   => 'success',
-									'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tourfic-settings/tourfic-miscellaneous/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+									'content' => __( 'Anything confusing?', 'tourfic' ) . ' <a href="' . Helper::tf_utm_generator("https://themefic.com/docs/tourfic/tourfic-settings/tourfic-miscellaneous/", array( 'utm_medium' => 'settings_doc_miscellaneous' )) . '" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
 								),
 								array(
 									'id'           => '',
@@ -3705,7 +3705,7 @@ TF_Settings::option( 'tf_settings', array(
 									'type'    => 'zapier-official-docs',
 									'type'    => 'notice',
 									'style'   => 'success',
-									'content' => __( 'Anything confusing? ', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/pabbly-vs-zapier-integrations/zapier-integration/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+									'content' => __( 'Anything confusing? ', 'tourfic' ) . ' <a href="'.Helper::tf_utm_generator("https://themefic.com/docs/tourfic/pabbly-vs-zapier-integrations/zapier-integration/", array( 'utm_medium' => 'settings_doc_integrations_zapier' )).'" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
 								),
 								array(
 									'id'      => 'hotel-title',
@@ -3903,7 +3903,7 @@ TF_Settings::option( 'tf_settings', array(
 									'type'    => 'google-calendar-official-docs',
 									'type'    => 'notice',
 									'style'   => 'success',
-									'content' => __( 'Anything confusing? ', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/settings/integration/#Google_Calendar_Setup" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
+									'content' => __( 'Anything confusing? ', 'tourfic' ) . ' <a href="'.Helper::tf_utm_generator("https://themefic.com/docs/tourfic/settings/integration/#Google_Calendar_Setup", array( 'utm_medium' => 'settings_doc_integration_google-cal' )).'" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . __( 'Read Documentation', 'tourfic' ) . '</strong></a>',
 								),
 								array(
 									'id'      => 'woocommerce-title',
