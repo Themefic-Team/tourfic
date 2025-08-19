@@ -21,11 +21,6 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 
 	function render( $atts, $content = null ) {
 
-		// Unwanted Slashes Remove
-		if ( isset( $_GET ) ) {
-			$_GET = array_map( 'stripslashes_deep', $_GET );
-		}
-
 		// Get post type
 		$post_type = isset( $_GET['type'] ) ? sanitize_text_field( $_GET['type'] ) : '';
 		if ( empty( $post_type ) ) {
@@ -91,7 +86,7 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 		}
 
 		$paged          = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
-		$checkInOutDate = ! empty( $_GET['check-in-out-date'] ) ? explode( ' - ', $_GET['check-in-out-date'] ) : '';
+		$checkInOutDate = ! empty( $_GET['check-in-out-date'] ) ? explode( ' - ', sanitize_text_field( wp_unslash($_GET['check-in-out-date'])) ) : '';
 		if ( ! empty( $checkInOutDate ) ) {
 			$period = new \DatePeriod(
 				new \DateTime( $checkInOutDate[0] ),
@@ -161,7 +156,7 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 			$args['tax_query'][] = array(
 				'taxonomy' => $post_type == 'tf_hotel' ? 'hotel_feature' : 'apartment_feature',
 				'field'    => 'slug',
-				'terms'    => $_GET['features'],
+				'terms'    => sanitize_text_field( wp_unslash($_GET['features']) ),
 			);
 		}
 		// Hotel/Tour/Apartment Types
@@ -169,7 +164,7 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 			$args['tax_query'][] = array(
 				'taxonomy' => $post_type == 'tf_hotel' ? 'hotel_type' : ($post_type == 'tf_tours' ? 'tour_type' : 'apartment_type'),
 				'field'    => 'slug',
-				'terms'    => $_GET['types'],
+				'terms'    => sanitize_text_field( wp_unslash($_GET['types']) ),
 			);
 		}
 

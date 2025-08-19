@@ -214,9 +214,6 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 		 * @author Jahid, Foysal
 		 */
 		public function tf_dashboard_page() {
-            $current_page_url = $this->get_current_page_url();
-            $query_string = $this->get_query_string($current_page_url);
-
 			?>
 			<div class="tf-setting-dashboard">
 				<!-- dashboard-header-include -->
@@ -383,164 +380,95 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 							<?php endif; ?>
 						</div>
 						<div class="tf-settings-sidebar">
-							<?php echo $this->tf_settings_sidebar(); ?>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<?php
-		}
-
-		public function tf_settings_sidebar() {
-			?>
-			<div class="tf-sidebar-content">
-				<div class="tf-customization-quote">
-                    <div class="tf-quote-header">
-                        <i class="fa-solid fa-code"></i>
-                        <h3><?php echo __('Need help building your Travel, Hotel, or Rental Website?', 'tourfic');  ?></h3>
-                    </div>
-                    <div class="tf-quote-content">
-                        <p><?php echo __('Let our expert team craft a custom WordPress site tailored to your business—whether you\'re running a hotel, tour agency, or vacation rental. Optimized for performance, bookings, and conversions.', 'tourfic'); ?></p>
-						<a href="<?php echo esc_url( Helper::tf_utm_generator( 'https://portal.themefic.com/hire-us/', array( 'utm_medium' => 'dashboard_free_quote' ) ) ); ?>" target="_blank" class="tf-admin-btn tf-btn-secondary"><?php echo __('Get Free Quote', 'tourfic');  ?></a>								
-                    </div>
-                </div>
-
-				<?php echo $this->tf_get_sidebar_plugin_list(); ?>
-
-				<div class="tf-quick-access">
-					<h3><?php echo __('Helpful Resources', 'tourfic');  ?></h3>
-					<div class="tf-quick-access-wrapper">
-						<div class="tf-access-item">
-							<a href="<?php echo esc_url( Helper::tf_utm_generator( 'https://themefic.com/docs/tourfic/', array( 'utm_medium' => 'dashboard_doc_link' ) ) ); ?>" target="_blank">
-								<span class="icon"><i class="fa-solid fa-folder-open"></i></span>
-								<?php echo _e( 'Documentation', 'tourfic' ); ?>
-							</a>
-						</div>
-						<div class="tf-access-item">
-							<a href="<?php echo esc_url( Helper::tf_utm_generator( 'https://portal.themefic.com/support/', array( 'utm_medium' => 'dashboard_support_link' ) ) ); ?>" target="_blank">
-								<span class="icon"><i class="fa-solid fa-headset"></i></span>
-								<?php echo _e( 'Get Support', 'tourfic' ); ?>
-							</a>
-						</div>
-						<div class="tf-access-item">
-							<a href="https://www.facebook.com/groups/tourfic/" target="_blank">
-								<span class="icon"><i class="fa-solid fa-users"></i></span>
-								<?php echo _e( 'Join our Community', 'tourfic' ); ?>
-							</a>
-						</div>
-						<div class="tf-access-item">
-							<a href="https://app.loopedin.io/tourfic" target="_blank">
-								<span class="icon"><i class="fa-solid fa-road-circle-check"></i></span>
-								<?php echo _e( 'See our Roadmap', 'tourfic' ); ?>
-							</a>
-						</div>
-						<div class="tf-access-item">
-							<a href="https://app.loopedin.io/tourfic#/ideas-board" target="_blank">
-								<span class="icon"><i class="fa-solid fa-lightbulb"></i></span>
-								<?php echo _e( 'Request a Feature', 'tourfic' ); ?>
-							</a>
-						</div>
-					</div>
-				</div>
-
-			</div>
-			<?php
-		}
-
-		public function tf_get_sidebar_plugin_list(){
-			$plugins = [
-				[
-					'name'       => 'Instantio',
-					'slug'       => 'instantio',
-					'file_name'  => 'instantio',
-					'subtitle'   => 'WooCommerce Quick & Direct Checkout',
-					'image'      => 'https://ps.w.org/instantio/assets/icon-128x128.png',
-				],
-				[
-					'name'       => 'Hydra',
-					'slug'       => 'hydra-booking',
-					'file_name'  => 'hydra-booking',
-					'subtitle'   => 'All in One Appointment Booking System',
-					'image'      => 'https://ps.w.org/hydra-booking/assets/icon-128x128.jpg',
-				],
-				[
-					'name'       => 'BEAF',
-					'slug'       => 'beaf-before-and-after-gallery',
-					'file_name'  => 'before-and-after-gallery',
-					'subtitle'   => 'Ultimate Before After Image Slider & Gallery',
-					'image'      => 'https://ps.w.org/beaf-before-and-after-gallery/assets/icon-128x128.png',
-				],
-				[
-					'name'       => 'UACF7',
-					'slug'       => 'ultimate-addons-for-contact-form-7',
-					'file_name'  => 'ultimate-addons-for-contact-form-7',
-					'subtitle'   => '40+ Essential Addons for Contact Form 7',
-					'image'      => 'https://ps.w.org/ultimate-addons-for-contact-form-7/assets/icon-128x128.png',
-				],
-			];
-			?>
-
-			<ul>
-				<?php foreach ($plugins as $plugin): 
-					$plugin_path = $plugin['slug'] . '/' . $plugin['file_name'] . '.php';
-					$installed = file_exists(WP_PLUGIN_DIR . '/' . $plugin_path);
-					$activated = $installed && is_plugin_active($plugin_path);
-
-					$pro_installed = false;
-					$pro_activated = false;
-					
-					if (!empty($plugin['pro'])) {
-						$pro_path = $plugin['pro']['slug'] . '/' . $plugin['pro']['file_name'] . '.php';
-						$pro_installed = file_exists(WP_PLUGIN_DIR . '/' . $pro_path);
-						$pro_activated = $pro_installed && is_plugin_active($pro_path);
-					}
-					?>
-
-					<li class="tf-plugin-item <?php echo esc_attr($plugin['slug'] == 'instantio' ? 'featured' : ''); ?>" data-plugin-slug="<?php echo esc_attr($plugin['slug']); ?>">
-						<div class="tf-plugin-info-wrapper">
-							<div class="tf-plugin-info">
-								<img src="<?php echo esc_url($plugin['image']); ?>" alt="<?php echo esc_attr($plugin['name']); ?>" class="<?php echo esc_attr($plugin['name'] == 'BEAF' ? 'beaf-logo' : ''); ?>" width="40" height="40">
-								<div class="tf-plugin-btn">
-									<span class="badge free">Free</span>
-									<?php if (!$installed): ?>
-										<button class="tf-plugin-button install" data-action="install" data-plugin="<?php echo esc_attr($plugin['slug']); ?>" data-plugin_filename="<?php echo esc_attr($plugin['file_name']); ?>">
-											Install <span class="loader"></span>
-										</button>
-									<?php elseif (!$activated): ?>
-										<button class="tf-plugin-button activate" data-action="activate" data-plugin="<?php echo esc_attr($plugin['slug']); ?>" data-plugin_filename="<?php echo esc_attr($plugin['file_name']); ?>" >
-											Activate <span class="loader"></span>
-										</button>
-									<?php else: ?>
-										<span class="tf-plugin-button tf-plugin-status active">Activated</span>
-									<?php endif; ?>
-
-									<?php if (!empty($plugin['pro'])): ?>
-										<?php if (!$pro_installed): ?>
-											<a href="<?php echo esc_url($plugin['pro']['url']); ?>" class="tf-plugin-button pro" target="_blank">Get Pro</a>
-										<?php elseif (!$pro_activated): ?>
-											<button class="tf-plugin-button activate-pro" data-action="activate" data-plugin="<?php echo esc_attr($plugin['pro']['slug']); ?>" data-plugin_filename="<?php echo esc_attr($plugin['pro']['file_name']); ?>">
-												Activate Pro <span class="loader"></span>
-											</button>
-										<?php else: ?>
-											<span class="tf-plugin-button tf-plugin-status active-pro">Pro Activated</span>
-										<?php endif; ?>
-									<?php endif; ?>
+							<div class="tf-sidebar-content">
+								<div class="tf-customization-quote">
+									<div class="tf-quote-header">
+										<i class="fa-solid fa-code"></i>
+										<h3><?php esc_html_e('Need help building your Travel, Hotel, or Rental Website?', 'tourfic');  ?></h3>
+									</div>
+									<div class="tf-quote-content">
+										<p><?php esc_html_e('Let our expert team craft a custom WordPress site tailored to your business—whether you\'re running a hotel, tour agency, or vacation rental. Optimized for performance, bookings, and conversions.', 'tourfic'); ?></p>
+										<a href="<?php echo esc_url( Helper::tf_utm_generator( 'https://portal.themefic.com/hire-us/', array( 'utm_medium' => 'dashboard_free_quote' ) ) ); ?>" target="_blank" class="tf-admin-btn tf-btn-secondary"><?php esc_html_e('Get Free Quote', 'tourfic');  ?></a>								
+									</div>
 								</div>
-							</div>
-							<div class="tf-plugin-content">
-								<h4><?php echo esc_html($plugin['name']); ?></h4>
-								<p><?php echo esc_html($plugin['subtitle']); ?></p>
-								<strong></strong>
+
+								<?php $plugins = [
+									[
+										'name'       => 'Instantio',
+										'slug'       => 'instantio',
+										'file_name'  => 'instantio',
+										'subtitle'   => 'WooCommerce Quick & Direct Checkout',
+										'image'      => 'https://ps.w.org/instantio/assets/icon-128x128.png',
+									],
+									[
+										'name'       => 'Hydra',
+										'slug'       => 'hydra-booking',
+										'file_name'  => 'hydra-booking',
+										'subtitle'   => 'All in One Appointment Booking System',
+										'image'      => 'https://ps.w.org/hydra-booking/assets/icon-128x128.jpg',
+									],
+									[
+										'name'       => 'BEAF',
+										'slug'       => 'beaf-before-and-after-gallery',
+										'file_name'  => 'before-and-after-gallery',
+										'subtitle'   => 'Ultimate Before After Image Slider & Gallery',
+										'image'      => 'https://ps.w.org/beaf-before-and-after-gallery/assets/icon-128x128.png',
+									],
+									[
+										'name'       => 'UACF7',
+										'slug'       => 'ultimate-addons-for-contact-form-7',
+										'file_name'  => 'ultimate-addons-for-contact-form-7',
+										'subtitle'   => '40+ Essential Addons for Contact Form 7',
+										'image'      => 'https://ps.w.org/ultimate-addons-for-contact-form-7/assets/icon-128x128.png',
+									],
+								];
+								?>
+
+
+
+								<div class="tf-quick-access">
+									<h3><?php esc_html_e('Helpful Resources', 'tourfic');  ?></h3>
+									<div class="tf-quick-access-wrapper">
+										<div class="tf-access-item">
+											<a href="<?php echo esc_url( Helper::tf_utm_generator( 'https://themefic.com/docs/tourfic/', array( 'utm_medium' => 'dashboard_doc_link' ) ) ); ?>" target="_blank">
+												<span class="icon"><i class="fa-solid fa-folder-open"></i></span>
+												<?php esc_html_e( 'Documentation', 'tourfic' ); ?>
+											</a>
+										</div>
+										<div class="tf-access-item">
+											<a href="<?php echo esc_url( Helper::tf_utm_generator( 'https://portal.themefic.com/support/', array( 'utm_medium' => 'dashboard_support_link' ) ) ); ?>" target="_blank">
+												<span class="icon"><i class="fa-solid fa-headset"></i></span>
+												<?php esc_html_e( 'Get Support', 'tourfic' ); ?>
+											</a>
+										</div>
+										<div class="tf-access-item">
+											<a href="https://www.facebook.com/groups/tourfic/" target="_blank">
+												<span class="icon"><i class="fa-solid fa-users"></i></span>
+												<?php esc_html_e( 'Join our Community', 'tourfic' ); ?>
+											</a>
+										</div>
+										<div class="tf-access-item">
+											<a href="https://app.loopedin.io/tourfic" target="_blank">
+												<span class="icon"><i class="fa-solid fa-road-circle-check"></i></span>
+												<?php esc_html_e( 'See our Roadmap', 'tourfic' ); ?>
+											</a>
+										</div>
+										<div class="tf-access-item">
+											<a href="https://app.loopedin.io/tourfic#/ideas-board" target="_blank">
+												<span class="icon"><i class="fa-solid fa-lightbulb"></i></span>
+												<?php esc_html_e( 'Request a Feature', 'tourfic' ); ?>
+											</a>
+										</div>
+									</div>
+								</div>
+
 							</div>
 						</div>
-					</li>
+					</div>
+				</div>
+			</div>
 
-				<?php endforeach; ?>
-
-			</ul>
-
-			<?php 
+			<?php
 		}
 
 		public function themefic_manage_plugin() {
@@ -561,39 +489,6 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 			include_once ABSPATH . 'wp-admin/includes/plugin-install.php';
 			include_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
 			include_once ABSPATH . 'wp-admin/includes/plugin.php';
-
-			if ($plugin_action === 'install') {
-				$api = plugins_api('plugin_information', ['slug' => $plugin_slug]);
-
-				if (is_wp_error($api)) {
-					wp_send_json_error($api->get_error_message());
-				}
-
-				$upgrader = new Plugin_Upgrader(new WP_Ajax_Upgrader_Skin());
-				$install_result = $upgrader->install($api->download_link);
-
-				if (is_wp_error($install_result)) {
-					wp_send_json_error($install_result->get_error_message());
-				}
-
-				wp_send_json_success(['message' => 'Installed successfully.']);
-			}
-
-			if ($plugin_action === 'activate') {
-				$plugin_path = WP_PLUGIN_DIR . '/' . $plugin_slug . '/' . $plugin_filename . '.php';
-
-				if (!file_exists($plugin_path)) {
-					wp_send_json_error('Plugin file not found.');
-				}
-
-				$activate_result = activate_plugin($plugin_path);
-
-				if (is_wp_error($activate_result)) {
-					wp_send_json_error($activate_result->get_error_message());
-				}
-
-				wp_send_json_success(['message' => 'Activated successfully.']);
-			}
 
 			wp_send_json_error('Invalid action.');
 		}
@@ -629,7 +524,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 							</svg>
 							<h3><?php esc_html_e("Get Started Quickly","tourfic"); ?></h3>
 							<p><?php esc_html_e("Use our guided setup wizard to get up and running fast.","tourfic"); ?></p>
-							<a href="<?php echo esc_url(admin_url( 'admin.php?page=tf-setup-wizard' )) ?>" target="" class="tf-link-skip-btn"><?php esc_html_e("Setup Wizard","tourfic"); ?></a>
+							<a href="#" target="" class="tf-link-skip-btn"><?php esc_html_e("Setup Wizard","tourfic"); ?></a>
 						</div>
 
 						<!-- Customization -->
@@ -883,8 +778,6 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
 			// Retrieve an existing value from the database.
 			$tf_option_value = get_option( $this->option_id );
-			$current_page_url = $this->get_current_page_url();
-			$query_string = $this->get_query_string($current_page_url);
 
 			// Set default values.
 			if ( empty( $tf_option_value ) ) {
@@ -1126,7 +1019,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 												// Invalid file type or extension
 												$response    = [
 													'status'  => 'error',
-													'message' => __( 'Invalid file type or extension', 'tourfic' ),
+													'message' => esc_html__( 'Invalid file type or extension', 'tourfic' ),
 												];
 												echo wp_json_encode($response);
 												wp_die();
@@ -1160,35 +1053,43 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 		public function tf_ajax_save_options() {
 			$response    = [
 				'status'  => 'error',
-				'message' => __( 'Something went wrong!', 'tourfic' ),
+				'message' => esc_html__( 'Something went wrong!', 'tourfic' ),
 			];
 
-			if( isset( $_POST['tf_option_nonce'] ) || wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['tf_option_nonce'])), 'tf_option_nonce_action' ) ) {
+			// Check if a nonce is valid.
+			if (  !isset( $_POST['tf_option_nonce'] ) || !wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['tf_option_nonce'] ) ), 'tf_option_nonce_action' ) ) {
+				return;
+			}
 
-				if(isset($_POST['tf_import_option']) && !empty(wp_unslash( trim( $_POST['tf_import_option']) )) ){
+			// Check if the current user has the required capability.
+	        if (!current_user_can('manage_options')) {
+		        $response['status'] = 'error';
+		        $response['message'] = esc_html__('You do not have permission to access this resource.', 'tourfic');
+		        echo wp_json_encode($response);
+                die();
+	        }
 
-					$tf_import_option = json_decode( wp_unslash( trim( $_POST['tf_import_option']) ), true );
-					if(empty($tf_import_option) || !is_array($tf_import_option)){
-						$response    = [
-							'status'  => 'error',
-							'message' => __( 'Your imported data is not valid', 'tourfic' ),
-						];
-					}else{
-						$this->save_options();
-						$response = [
-							'status'  => 'success',
-							'message' => __( 'Options imported successfully!', 'tourfic' ),
-						];
-					}
+			if(isset($_POST['tf_import_option']) && !empty(wp_unslash( trim( $_POST['tf_import_option']) )) ){
+
+				$tf_import_option = json_decode( wp_unslash( trim( $_POST['tf_import_option']) ), true );
+				if(empty($tf_import_option) || !is_array($tf_import_option)){
+					$response    = [
+						'status'  => 'error',
+						'message' => esc_html__( 'Your imported data is not valid', 'tourfic' ),
+					];
 				}else{
 					$this->save_options();
 					$response = [
 						'status'  => 'success',
-						'message' => __( 'Options saved successfully!', 'tourfic' ),
+						'message' => esc_html__( 'Options imported successfully!', 'tourfic' ),
 					];
-
 				}
-
+			}else{
+				$this->save_options();
+				$response = [
+					'status'  => 'success',
+					'message' => esc_html__( 'Options saved successfully!', 'tourfic' ),
+				];
 			}
 
 			do_action("tourfic_settings_save_hook");
@@ -1201,31 +1102,32 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 		public function tf_ajax_reset_options() {
 			$response    = [
 				'status'  => 'error',
-				'message' => __( 'Something went wrong!', 'tourfic' ),
+				'message' => esc_html__( 'Something went wrong!', 'tourfic' ),
 			];
 
+			// Check if a nonce is valid.
+			if (  !isset( $_POST['tf_option_nonce'] ) || !wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['tf_option_nonce'] ) ), 'tf_option_nonce_action' ) ) {
+				return;
+			}
 
-			if( isset( $_POST['tf_option_nonce'] ) || wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['tf_option_nonce'])), 'tf_option_nonce_action' ) ) {
+			// Check if the current user has the required capability.
+	        if (!current_user_can('manage_options')) {
+		        $response['status'] = 'error';
+		        $response['message'] = esc_html__('You do not have permission to access this resource.', 'tourfic');
+		        echo wp_json_encode($response);
+                die();
+	        }
 
-				!empty( get_option( 'tf_settings' ) ) ?  : '';
-
-				if( !empty( get_option( 'tf_settings' ) ) ) {
-					update_option( 'tf_settings', '' );
-					$response = [
-						'status'  => 'success',
-						'message' => __( 'Options Reset successfully!', 'tourfic' ),
-					];
-				} else {
-					$response    = [
-						'status'  => 'error',
-						'message' => __( 'Settings are fresh, nothing to reset.', 'tourfic' ),
-					];
-				}
-
+			if( !empty( get_option( 'tf_settings' ) ) ) {
+				update_option( 'tf_settings', '' );
+				$response = [
+					'status'  => 'success',
+					'message' => esc_html__( 'Options Reset successfully!', 'tourfic' ),
+				];
 			} else {
 				$response    = [
 					'status'  => 'error',
-					'message' => __( 'Something went wrong!', 'tourfic' ),
+					'message' => esc_html__( 'Settings are fresh, nothing to reset.', 'tourfic' ),
 				];
 			}
 
@@ -1234,131 +1136,125 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 		}
 
 		public function tf_search_settings_autocomplete_callback() {
-			if( isset( $_POST['tf_option_nonce'] ) || wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['tf_option_nonce'])), 'tf_option_nonce_action' ) ) {
-				$all_settings = $this->pre_tabs;
-				$fields = [];
-				$path = '';
+			// Check if a nonce is valid.
+			if (  !isset( $_POST['tf_option_nonce'] ) || !wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['tf_option_nonce'] ) ), 'tf_option_nonce_action' ) ) {
+				return;
+			}
 
-				foreach ( $all_settings as $section => $data ) {
+			// Check if the current user has the required capability.
+	        if (!current_user_can('manage_options')) {
+		        $response['status'] = 'error';
+		        $response['message'] = esc_html__('You do not have permission to access this resource.', 'tourfic');
+		        echo wp_json_encode($response);
+                die();
+	        }
+			
+			$all_settings = $this->pre_tabs;
+			$fields = [];
+			$path = '';
 
-					$parent = $parent_title = '';
-					$icon = $data['icon'];
+			foreach ( $all_settings as $section => $data ) {
 
-					if( !empty( $data["fields"]) ) {
-						$path = $data['title'];
-						foreach ( $data["fields"] as $field ) {
+				$parent = $parent_title = '';
+				$icon = $data['icon'];
 
-							if ( !empty( $field['tabs'] )) {
-								foreach( $field['tabs'] as $key => $tab) {
-									
-									if ( !empty( $tab['fields'] )) {
-										foreach ( $tab['fields'] as $tab_field ) {
-											$fields[] = array(
-												'parent' => $parent_title,
-												'parent_id' => $section,
-												'tab_id' => $tab['id'] ? $tab['id'] : '',
-												'field_title' => !empty( $tab_field["label"] ) ? $tab_field["label"] : ( !empty( $tab_field['title'] ) ? $tab_field['title'] : ( !empty( $tab_field['heading'] ) ?  !empty( $tab_field['heading'] ) : ''  )),
-												'section' => $tab['title'],
-												'icon' => $icon,
-												'path' => $path,
-												'id' => $tab_field['id'],
-											);
-										}
+				if( !empty( $data["fields"]) ) {
+					$path = $data['title'];
+					foreach ( $data["fields"] as $field ) {
+
+						if ( !empty( $field['tabs'] )) {
+							foreach( $field['tabs'] as $key => $tab) {
+								
+								if ( !empty( $tab['fields'] )) {
+									foreach ( $tab['fields'] as $tab_field ) {
+										$fields[] = array(
+											'parent' => $parent_title,
+											'parent_id' => $section,
+											'tab_id' => $tab['id'] ? $tab['id'] : '',
+											'field_title' => !empty( $tab_field["label"] ) ? $tab_field["label"] : ( !empty( $tab_field['title'] ) ? $tab_field['title'] : ( !empty( $tab_field['heading'] ) ?  !empty( $tab_field['heading'] ) : ''  )),
+											'section' => $tab['title'],
+											'icon' => $icon,
+											'path' => $path,
+											'id' => $tab_field['id'],
+										);
 									}
-
 								}
+
 							}
-
-							$fields[] = array(
-								'parent' => $parent_title,
-								'parent_id' => $section,
-								'field_title' => !empty( $field["label"] ) ? $field["label"] : ( !empty( $field['title'] ) ? $field['title'] : ( !empty( $field['heading'] ) ?  !empty( $field['heading'] ) : ''  )),
-								'section' => $data['title'],
-								'icon' => $icon,
-								'path' => $path,
-								'id' => $field['id'],
-							);
 						}
-					}
 
-					if( !empty( $data["sub_section"])) {
-						foreach ( $data["sub_section"] as $key => $sub_section ) {
-
-							$parent_id = $key;
-
-							if( isset( $sub_section["parent"] )) {
-								$parent = $sub_section["parent"];
-								$parent = !empty($parent) ? $all_settings[$parent] : '';
-								$parent_title = !empty($parent) ? $parent['title'] : '';
-								$icon = !empty($parent) ? $parent['icon'] : $data['icon'];
-							}
-
-							!empty( $parent_title ) ? $path = $parent_title . ' > ' . $sub_section['title'] : $path = $sub_section[$key]['title'];
-							if ( !empty( $sub_section["fields"])) {
-
-								foreach ( $sub_section["fields"] as $field ) {
-
-									if ( !empty( $field['tabs'] )) {
-										foreach( $field['tabs'] as $key => $tab) {
-											
-											if ( !empty( $tab['fields'] )) {
-												foreach ( $tab['fields'] as $tab_field ) {
-													$fields[] = array(
-														'parent' => $parent_title,
-														'parent_id' => $parent_id,
-														'tab_id' => $tab['id'] ? $tab['id'] : '',
-														'field_title' => !empty( $tab_field["label"] ) ? $tab_field["label"] : ( !empty( $tab_field['title'] ) ? $tab_field['title'] : ( !empty( $tab_field['heading'] ) ?  !empty( $tab_field['heading'] ) : ''  )),
-														'section' => $tab['title'],
-														'icon' => $icon,
-														'path' => $path,
-														'id' => $tab_field['id'],
-													);
-												}
-											}
-		
-										}
-									}
-									$fields[] = array(
-										'parent' => $parent_title,
-										'parent_id' => $parent_id,
-										'field_title' => !empty( $field["label"] ) ? $field["label"] : ( !empty( $field['title'] ) ? $field['title'] : ( !empty( $field['heading'] ) ?  !empty( $field['heading'] ) : ''  )),
-										'section' => $data['title'],
-										'icon' => $icon,
-										'path' => $path,
-										'id' => $field['id'],
-									);
-								}
-							} 
-						}
+						$fields[] = array(
+							'parent' => $parent_title,
+							'parent_id' => $section,
+							'field_title' => !empty( $field["label"] ) ? $field["label"] : ( !empty( $field['title'] ) ? $field['title'] : ( !empty( $field['heading'] ) ?  !empty( $field['heading'] ) : ''  )),
+							'section' => $data['title'],
+							'icon' => $icon,
+							'path' => $path,
+							'id' => $field['id'],
+						);
 					}
 				}
 
-				$response = [
-					'status'  => 'success',
-					'message' => $fields,
-				];
-				
-			} else {
-				$response = [
-					'status'  => 'error',
-					'message' => __( 'Something went wrong!', 'tourfic' ),
-				];
+				if( !empty( $data["sub_section"])) {
+					foreach ( $data["sub_section"] as $key => $sub_section ) {
+
+						$parent_id = $key;
+
+						if( isset( $sub_section["parent"] )) {
+							$parent = $sub_section["parent"];
+							$parent = !empty($parent) ? $all_settings[$parent] : '';
+							$parent_title = !empty($parent) ? $parent['title'] : '';
+							$icon = !empty($parent) ? $parent['icon'] : $data['icon'];
+						}
+
+						!empty( $parent_title ) ? $path = $parent_title . ' > ' . $sub_section['title'] : $path = $sub_section[$key]['title'];
+						if ( !empty( $sub_section["fields"])) {
+
+							foreach ( $sub_section["fields"] as $field ) {
+
+								if ( !empty( $field['tabs'] )) {
+									foreach( $field['tabs'] as $key => $tab) {
+										
+										if ( !empty( $tab['fields'] )) {
+											foreach ( $tab['fields'] as $tab_field ) {
+												$fields[] = array(
+													'parent' => $parent_title,
+													'parent_id' => $parent_id,
+													'tab_id' => $tab['id'] ? $tab['id'] : '',
+													'field_title' => !empty( $tab_field["label"] ) ? $tab_field["label"] : ( !empty( $tab_field['title'] ) ? $tab_field['title'] : ( !empty( $tab_field['heading'] ) ?  !empty( $tab_field['heading'] ) : ''  )),
+													'section' => $tab['title'],
+													'icon' => $icon,
+													'path' => $path,
+													'id' => $tab_field['id'],
+												);
+											}
+										}
+	
+									}
+								}
+								$fields[] = array(
+									'parent' => $parent_title,
+									'parent_id' => $parent_id,
+									'field_title' => !empty( $field["label"] ) ? $field["label"] : ( !empty( $field['title'] ) ? $field['title'] : ( !empty( $field['heading'] ) ?  !empty( $field['heading'] ) : ''  )),
+									'section' => $data['title'],
+									'icon' => $icon,
+									'path' => $path,
+									'id' => $field['id'],
+								);
+							}
+						} 
+					}
+				}
 			}
+
+			$response = [
+				'status'  => 'success',
+				'message' => $fields,
+			];
 
 			echo wp_json_encode( $response );
 			wp_die();
 		}
-
-		/*
-		 * Get current page url
-		 * @return string
-		 * @author Foysal
-		 */
-		public function get_current_page_url() {
-            $page_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-
-            return $page_url;
-        }
 
         /*
          * Get query string from url
@@ -1384,7 +1280,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 	        // Check if the current user has the required capability.
 	        if (!current_user_can('manage_options')) {
 		        $response['status'] = 'error';
-		        $response['message'] = __('You do not have permission to access this resource.', 'tourfic');
+		        $response['message'] = esc_html__('You do not have permission to access this resource.', 'tourfic');
 		        echo wp_json_encode($response);
                 die();
 	        }

@@ -224,7 +224,7 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
                             <h2 class="tf-section-title"><?php esc_html_e( "Book This Tour", "tourfic" ); ?></h2>
                             <div class="tf-btn-wrap">
                                 <a href="<?php echo esc_url( $tf_booking_url ) ?>" target="_blank" class="tf_btn tf_btn_full tf_btn_sharp tf-tour-external-booking-button"
-                                   style="margin-top: 10px;"><?php esc_html_e( $tf_tour_single_book_now_text, 'tourfic' ); ?></a>
+                                   style="margin-top: 10px;"><?php echo esc_html( $tf_tour_single_book_now_text ); ?></a>
                             </div>
                         </div>
 					<?php endif; ?>

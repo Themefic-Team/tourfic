@@ -11,11 +11,11 @@
 						<?php
 						if ( $tour_duration > 1 ) {
 							$dur_string         = 's';
-							$duration_time_html = $duration_time . $dur_string;
+							$_duration_time = $duration_time . $dur_string;
 						} else {
-							$duration_time_html = $duration_time;
+							$_duration_time = $duration_time;
 						}
-						echo " " . esc_html( $duration_time_html );
+						echo " " . esc_html( $_duration_time );
 						?>
                     </li>
 				<?php }

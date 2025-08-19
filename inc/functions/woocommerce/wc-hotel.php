@@ -51,8 +51,12 @@ function tf_hotel_booking_callback() {
 
 
 	// Without Payment Booking Data
-	$tf_without_payment_guest_info = !empty( $_POST['guest'] ) ? $_POST['guest'] : '';
-	$tf_without_payment_confirmation_details = !empty( $_POST['booking_confirm'] ) ? $_POST['booking_confirm'] : array();
+	$without_payment_guest_info = !empty( $_POST['guest'] ) ? sanitize_text_field( $_POST['guest'] ) : '';
+	$tf_without_payment_guest_info = !empty( $without_payment_guest_info ) ? explode( ',', $without_payment_guest_info ) : '';
+
+	$without_payment_confirmation_details = !empty( $_POST['booking_confirm'] ) ? sanitize_text_field( $_POST['booking_confirm'] ) : array();
+	$tf_without_payment_confirmation_details = !empty( $without_payment_confirmation_details ) ? explode( ',', $without_payment_confirmation_details ) : array();
+
 	$tf_without_payment_booking_fields = !empty( Helper::tfopt( 'hotel-book-confirm-field' ) ) ? Helper::tf_data_types( Helper::tfopt( 'hotel-book-confirm-field' ) ) : '';
 
 	// Check errors
@@ -625,7 +629,7 @@ function tf_hotel_booking_callback() {
 				'payment_method'   => "offline",
 				'customer_id'	   => $tf_offline_user_id,
 				'status'           => 'processing',
-				'order_date'       => date( 'Y-m-d H:i:s' ),
+				'order_date'       => gmdate( 'Y-m-d H:i:s' ),
 			);
 
 			$response['without_payment'] = 'true';
@@ -698,7 +702,7 @@ function display_cart_item_custom_meta_data( $item_data, $cart_item ) {
 	}
 	if ( isset( $cart_item['tf_hotel_data']['option'] ) ) {
 		$item_data[] = array(
-			'key'   => __( 'Option', 'tourfic' ),
+			'key'   => esc_html__( 'Option', 'tourfic' ),
 			'value' => $cart_item['tf_hotel_data']['option'],
 		);
 	}

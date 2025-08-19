@@ -76,14 +76,14 @@
                                     the_post();
                                     $apartment_meta = get_post_meta( get_the_ID() , 'tf_apartment_opt', true );
                                     if ( !empty($apartment_meta[ "apartment_as_featured" ] )) {
-                                        echo apply_filters("tf_apartment_archive_single_featured_card_design_one", Apartment::tf_apartment_archive_single_item());
+                                        echo wp_kses(apply_filters("tf_apartment_archive_single_featured_card_design_one", Apartment::tf_apartment_archive_single_item()), Helper::tf_custom_wp_kses_allow_tags());
                                     }
                                 } 
                                 while ( have_posts() ) {
                                     the_post();
                                     $apartment_meta = get_post_meta( get_the_ID() , 'tf_apartment_opt', true );
                                     if ( empty($apartment_meta[ "apartment_as_featured" ] )) {
-                                        echo apply_filters("tf_apartment_archive_single_card_design_one", Apartment::tf_apartment_archive_single_item());
+                                        echo wp_kses(apply_filters("tf_apartment_archive_single_card_design_one", Apartment::tf_apartment_archive_single_item()), Helper::tf_custom_wp_kses_allow_tags());
                                     }
                                 }
                             } else {

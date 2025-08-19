@@ -252,6 +252,8 @@ class Apartment {
 				<div class="tf-popup-body">
 					<div class="tf-popup-left">
 						<?php 
+						$post_id = isset( $_POST['post_id'] ) ? intval( wp_unslash( $_POST['post_id'] ) ) : 0;
+
 						if ( ! empty( $tf_room_gallery_ids ) ) {
 						foreach ( $tf_room_gallery_ids as $key => $gallery_item_id ) {
 						$image_url = wp_get_attachment_url( $gallery_item_id, 'full' );
@@ -259,7 +261,7 @@ class Apartment {
 						?>
 						<img src="<?php echo esc_url($image_url); ?>" alt="<?php esc_html_e("Room Image","tourfic"); ?>" class="tf-popup-image">
 						<?php } } }else{ 
-						$aprt_thumbnail_url = get_the_post_thumbnail_url( $_POST['post_id'] );
+						$aprt_thumbnail_url = get_the_post_thumbnail_url( $post_id );
 						if(!empty($aprt_thumbnail_url)){	
 						?>
 						<img src="<?php echo esc_url($aprt_thumbnail_url); ?>" alt="<?php esc_html_e("Room Image","tourfic"); ?>" class="tf-popup-image">
@@ -316,23 +318,44 @@ class Apartment {
 		if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['_nonce'])), 'tf_ajax_nonce' ) ) {
 			return;
 		}
+		
 		$response = [
-			'status'  => 'success',
+			'status'  => 'error',
 			'message' => '',
 		];
 
-		if ( Helper::tfopt( 'date_apartment_search' ) && ( ! isset( $_POST['check-in-out-date'] ) || empty( $_POST['check-in-out-date'] ) ) ) {
+		// Validation
+		if ( Helper::tfopt( 'date_apartment_search' ) && empty( $_POST['check-in-out-date'] ) ) {
 			$response['message'] = esc_html__( 'Please select a date', 'tourfic' );
-			$response['status'] = 'error';
-		}
+		} else {
+			// Whitelist allowed fields
+			$allowed_fields = [
+				'place-name',
+				'place',
+				'adults',
+				'children',
+				'infant',
+				'check-in-out-date',
+				'type',
+				'types',
+				'features',
+				'from',
+				'to',
+				'_nonce',
+			];
 
-		if ( Helper::tfopt( 'date_apartment_search' ) ) {
-			if ( ! empty( $_POST['check-in-out-date'] ) ) {
-				$response['query_string'] = str_replace( '&action=tf_apartments_search', '', http_build_query( $_POST ) );
-				$response['status']       = 'success';
+			$fields = [];
+			foreach ( $allowed_fields as $key ) {
+				if ( isset( $_POST[ $key ] ) ) {
+					if ( is_array( $_POST[ $key ] ) ) {
+						$fields[ $key ] = array_map( 'sanitize_text_field', wp_unslash( $_POST[ $key ] ) );
+					} else {
+						$fields[ $key ] = sanitize_text_field( wp_unslash( $_POST[ $key ] ) );
+					}
+				}
 			}
-		}else{
-			$response['query_string'] = str_replace( '&action=tf_apartments_search', '', http_build_query( $_POST ) );
+
+			$response['query_string'] = http_build_query( $fields );
 			$response['status']       = 'success';
 		}
 
@@ -341,11 +364,9 @@ class Apartment {
 	}
 
 	public static function tf_apartment_search_form_horizontal( $classes, $title, $subtitle, $advanced, $design ) {
-		if ( isset( $_GET ) ) {
-			$_GET = array_map( 'stripslashes_deep', $_GET );
-		}
+		
 		// Check-in & out date
-		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? esc_html( $_GET['check-in-out-date'] ) : '';
+		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( wp_unslash( $_GET['check-in-out-date'] ) ) : '';
 
 		// date format for apartments
 		$date_format_change_apartments = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
@@ -713,7 +734,7 @@ class Apartment {
 				<div class="tf-driver-location-box">
 					<div class="tf-submit-button">
 						<input type="hidden" name="type" value="tf_apartment" class="tf-post-type"/>
-						<button type="submit" class="tf_btn tf-flex-align-center"><?php esc_html_e( apply_filters("tf_apartment_search_form_submit_button_text", 'Search' ), 'tourfic' ); ?> <i class="ri-search-line"></i></button>
+						<button type="submit" class="tf_btn tf-flex-align-center"><?php echo esc_html( apply_filters("tf_apartment_search_form_submit_button_text", 'Search' )); ?> <i class="ri-search-line"></i></button>
 					</div>
 				</div>
 				</div>
@@ -932,7 +953,7 @@ class Apartment {
                         <!-- Submit Button -->
                         <input type="hidden" name="type" value="tf_apartment" class="tf-post-type" />
                         <button type="submit" class="tf-search__form__submit tf_btn">
-                            <?php esc_html_e(apply_filters("tf_apartment_search_form_submit_button_text", 'Search'), 'tourfic'); ?>
+                            <?php echo esc_html(apply_filters("tf_apartment_search_form_submit_button_text", 'Search')); ?>
                             <svg class="tf-search__form__submit__icon" width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M15.75 14.7188L11.5625 10.5312C12.4688 9.4375 12.9688 8.03125 12.9688 6.5C12.9688 2.9375 10.0312 0 6.46875 0C2.875 0 0 2.9375 0 6.5C0 10.0938 2.90625 13 6.46875 13C7.96875 13 9.375 12.5 10.5 11.5938L14.6875 15.7812C14.8438 15.9375 15.0312 16 15.25 16C15.4375 16 15.625 15.9375 15.75 15.7812C16.0625 15.5 16.0625 15.0312 15.75 14.7188ZM1.5 6.5C1.5 3.75 3.71875 1.5 6.5 1.5C9.25 1.5 11.5 3.75 11.5 6.5C11.5 9.28125 9.25 11.5 6.5 11.5C3.71875 11.5 1.5 9.28125 1.5 6.5Z" fill="white" />
                             </svg>
@@ -1159,7 +1180,7 @@ class Apartment {
 						'd.m.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/,
 						'm.d.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/
 					};
-					const dateRegex = regexMap['<?php echo $date_format_change_apartments; ?>'];
+					const dateRegex = regexMap['<?php echo esc_attr($date_format_change_apartments); ?>'];
 
                     $("#tf_apartment_booking #check-in-out-date").flatpickr({
                         enableTime: false,
@@ -1237,7 +1258,7 @@ class Apartment {
 		$adults       = ! empty( $_GET['adults'] ) ? sanitize_text_field( $_GET['adults'] ) : '';
 		$child        = ! empty( $_GET['children'] ) ? sanitize_text_field( $_GET['children'] ) : '';
 		$infant       = ! empty( $_GET['infant'] ) ? sanitize_text_field( $_GET['infant'] ) : '';
-		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? $_GET['check-in-out-date'] : '';
+		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( wp_unslash($_GET['check-in-out-date']) ) : '';
         $check_in_out_arr = explode(" - ", $check_in_out);
         $check_in = ! empty( $check_in_out_arr[0] ) ? $check_in_out_arr[0] : '';
         $check_out = ! empty( $check_in_out_arr[1] ) ? $check_in_out_arr[1] : '';
@@ -1446,7 +1467,7 @@ class Apartment {
 			<?php endif; ?>
 
             <div class="tf_form-row">
-				<?php $ptype = isset( $_GET['type'] ) ? esc_attr($_GET['type']) : get_post_type(); ?>
+				<?php $ptype = isset( $_GET['type'] ) ? sanitize_text_field( wp_unslash($_GET['type']) ) : get_post_type(); ?>
                 <input type="hidden" name="type" value="<?php echo esc_attr( $ptype ); ?>" class="tf-post-type"/>
                 <input type="hidden" name="post_id" value="<?php echo esc_attr( get_the_ID() ); ?>"/>
 
@@ -1621,7 +1642,7 @@ class Apartment {
 			<?php endif; ?>
 
             <div class="tf_form-row">
-				<?php $ptype = isset( $_GET['type'] ) ? esc_attr($_GET['type']) : get_post_type(); ?>
+				<?php $ptype = isset( $_GET['type'] ) ? sanitize_text_field( wp_unslash($_GET['type']) ) : get_post_type(); ?>
                 <input type="hidden" name="type" value="<?php echo esc_attr( $ptype); ?>" class="tf-post-type"/>
                 <input type="hidden" name="post_id" value="<?php echo esc_attr( get_the_ID() ); ?>"/>
 
@@ -1886,7 +1907,7 @@ class Apartment {
 						'd.m.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/,
 						'm.d.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/
 					};
-					const dateRegex = regexMap['<?php echo $date_format_change_appartments; ?>'];
+					const dateRegex = regexMap['<?php echo esc_attr($date_format_change_appartments); ?>'];
 
                     const checkinoutdateange = flatpickr("#tf-apartment-booking #check-in-out-date", {
                         enableTime: false,

@@ -423,7 +423,7 @@ class Tour {
 				<div class="tf-driver-location-box">
 					<div class="tf-submit-button">
 						<input type="hidden" name="type" value="tf_tours" class="tf-post-type"/>
-						<button type="submit" class="tf_btn tf-flex-align-center"><?php echo esc_html__( apply_filters("tf_tour_search_form_submit_button_text", 'Search' ), 'tourfic' ); ?>  <i class="ri-search-line"></i></button>
+						<button type="submit" class="tf_btn tf-flex-align-center"><?php echo esc_html( apply_filters("tf_tour_search_form_submit_button_text", 'Search' ) ); ?>  <i class="ri-search-line"></i></button>
 					</div>
 				</div>
 				</div>
@@ -650,7 +650,7 @@ class Tour {
 						<!-- Submit Button -->
 						<input type="hidden" name="type" value="tf_tours" class="tf-post-type" />
 						<button type="submit" class="tf-search__form__submit tf_btn">
-							<?php echo esc_html__(apply_filters("tf_tour_search_form_submit_button_text", 'Search'), 'tourfic'); ?>
+							<?php echo esc_html(apply_filters("tf_tour_search_form_submit_button_text", 'Search')); ?>
 							<svg class="tf-search__form__submit__icon" width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 								<path d="M15.75 14.7188L11.5625 10.5312C12.4688 9.4375 12.9688 8.03125 12.9688 6.5C12.9688 2.9375 10.0312 0 6.46875 0C2.875 0 0 2.9375 0 6.5C0 10.0938 2.90625 13 6.46875 13C7.96875 13 9.375 12.5 10.5 11.5938L14.6875 15.7812C14.8438 15.9375 15.0312 16 15.25 16C15.4375 16 15.625 15.9375 15.75 15.7812C16.0625 15.5 16.0625 15.0312 15.75 14.7188ZM1.5 6.5C1.5 3.75 3.71875 1.5 6.5 1.5C9.25 1.5 11.5 3.75 11.5 6.5C11.5 9.28125 9.25 11.5 6.5 11.5C3.71875 11.5 1.5 9.28125 1.5 6.5Z" fill="white" />
 							</svg>
@@ -898,7 +898,7 @@ class Tour {
                             'd.m.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/,
                             'm.d.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/
                         };
-                        const dateRegex = regexMap['<?php echo $tour_date_format_for_users; ?>'];
+                        const dateRegex = regexMap['<?php echo esc_attr($tour_date_format_for_users); ?>'];
 
                         // flatpickr first day of Week
 						<?php Helper::tf_flatpickr_locale( 'root' ); ?>
@@ -1957,13 +1957,13 @@ class Tour {
 			endif; ?>
 			<?php if ( $tf_booking_type == 2 && $tf_hide_booking_form == 1 ): ?>
                 <div class="tf-btn-wrap">
-                    <a href="<?php echo esc_url( $tf_booking_url ) ?>" target="_blank" class="tf_btn tf_btn_full tf_btn_sharp tf-tour-external-booking-button" style="margin-top: 10px;"><?php esc_html_e( $tf_tour_single_book_now_text, 'tourfic' ); ?></a>
+                    <a href="<?php echo esc_url( $tf_booking_url ) ?>" target="_blank" class="tf_btn tf_btn_full tf_btn_sharp tf-tour-external-booking-button" style="margin-top: 10px;"><?php echo esc_html( $tf_tour_single_book_now_text); ?></a>
                 </div>
 				<?php if ( ! empty( $tf_tour_book_now_text ) ) : ?>
                     <div class="tf-mobile-booking-btn">
 						<span>
 							<a href="<?php echo esc_url( $tf_booking_url ) ?>" target="_blank" class="tf_btn tf_btn_full tf_btn_sharp tf-tour-external-booking-button"
-                               style="margin-top: 10px;"><?php esc_html_e( $tf_tour_single_book_now_text, 'tourfic' ); ?></a>
+                               style="margin-top: 10px;"><?php echo esc_html( $tf_tour_single_book_now_text); ?></a>
 						</span>
                     </div>
 				<?php endif; ?>
@@ -4084,16 +4084,38 @@ class Tour {
 			$response['message'] = esc_html__( 'Please select a date', 'tourfic' );
 		}
 
-		if ( Helper::tfopt( 'date_tour_search' ) ) {
-			if ( ! empty( $_POST['check-in-out-date'] ) ) {
-				$response['query_string'] = str_replace( '&action=tf_tour_search', '', http_build_query( $_POST ) );
-				$response['status']       = 'success';
+		// Whitelist only fields needed for search
+		$allowed_fields = [
+			'place-name',
+			'place',
+			'adults',
+			'children',
+			'infant',
+			'check-in-out-date',
+			'type',
+			'types',
+			'from',
+			'to',
+			'_nonce',
+		];
+
+		$fields = [];
+		foreach ( $allowed_fields as $key ) {
+			if ( isset( $_POST[ $key ] ) ) {
+				if ( is_array( $_POST[ $key ] ) ) {
+					$fields[ $key ] = array_map( 'sanitize_text_field', wp_unslash( $_POST[ $key ] ) );
+				} else {
+					$fields[ $key ] = sanitize_text_field( wp_unslash( $_POST[ $key ] ) );
+				}
 			}
-		} else {
-			if ( ! Helper::tfopt( 'required_location_tour_search' ) || ! empty( $_POST['place'] ) ) {
-				$response['query_string'] = str_replace( '&action=tf_tour_search', '', http_build_query( $_POST ) );
-				$response['status']       = 'success';
-			}
+		}
+
+		// Success response if validation passes
+		if ( ( Helper::tfopt( 'date_tour_search' ) && ! empty( $fields['check-in-out-date'] ) )
+			|| ( ! Helper::tfopt( 'date_tour_search' ) && ( ! Helper::tfopt( 'required_location_tour_search' ) || ! empty( $fields['place'] ) ) ) ) {
+
+			$response['query_string'] = http_build_query( $fields );
+			$response['status']       = 'success';
 		}
 
 		echo wp_json_encode( $response );
@@ -4155,7 +4177,7 @@ class Tour {
     */
 	function tf_tours_custom_status_creation() {
 		register_post_status( 'expired', array(
-			'label'                     => _x( 'Expired', 'post', 'tourfic'),
+			'label'                     => esc_html(_x( 'Expired', 'post', 'tourfic')),
 			/* translators: %s: number of posts */
 			'label_count'               => _n_noop( 'Expired <span class="count">(%s)</span>', 'Expired <span class="count">(%s)</span>', 'tourfic'),
 			'public'                    => true,
@@ -4730,33 +4752,38 @@ class Tour {
 		$tour_extra_title_arr = [];
 		$tour_extra_meta      = ! empty( $meta['tour-extra'] ) ? $meta['tour-extra'] : '';
 		if ( ! empty( $tour_extra_meta ) ) {
-			$tours_extra         = explode( ',', $_POST['tour_extra'] );
-			$tour_extra_quantity = explode( ',', $_POST["tour_extra_quantity"] );
-			foreach ( $tours_extra as $extra_key => $extra ) {
-				$tour_extra_pricetype = ! empty( $tour_extra_meta[ $extra ]['price_type'] ) ? $tour_extra_meta[ $extra ]['price_type'] : 'fixed';
-				if ( $tour_extra_pricetype == "fixed" ) {
-					if ( ! empty( $tour_extra_meta[ $extra ]['title'] ) && ! empty( $tour_extra_meta[ $extra ]['price'] ) ) {
-						$tour_extra_total       += $tour_extra_meta[ $extra ]['price'];
-						$tour_extra_title_arr[] = array(
-							'title' => $tour_extra_meta[ $extra ]['title'],
-							'price' => $tour_extra_meta[ $extra ]['price']
-						);
-					}
-				} else if ( $tour_extra_pricetype == "quantity" ) {
-					if ( ! empty( $tour_extra_meta[ $extra ]['title'] ) && ! empty( $tour_extra_meta[ $extra ]['price'] ) ) {
-						$tour_extra_total       += $tour_extra_meta[ $extra ]['price'] * $tour_extra_quantity[ $extra_key ];
-						$tour_extra_title_arr[] = array(
-							'title' => $tour_extra_meta[ $extra ]['title'] . " x " . $tour_extra_quantity[ $extra_key ],
-							'price' => $tour_extra_meta[ $extra ]['price'] * $tour_extra_quantity[ $extra_key ]
-						);
-					}
-				} else {
-					if ( ! empty( $tour_extra_meta[ $extra ]['price'] ) && ! empty( $tour_extra_meta[ $extra ]['title'] ) ) {
-						$tour_extra_total       += ( $tour_extra_meta[ $extra ]['price'] * $total_people );
-						$tour_extra_title_arr[] = array(
-							'title' => $tour_extra_meta[ $extra ]['title'],
-							'price' => $tour_extra_meta[ $extra ]['price'] * $total_people
-						);
+			$tf_tour_extra = !empty($_POST['tour_extra']) ? sanitize_text_field($_POST['tour_extra']) : '';
+			$tours_extra         = !empty($tf_tour_extra) ? explode( ',', $tf_tour_extra ) : [];
+			$tf_tour_extra_quantity = !empty($_POST['tour_extra_quantity']) ? sanitize_text_field($_POST['tour_extra_quantity']) : '';
+			$tour_extra_quantity = !empty($tf_tour_extra_quantity) ? explode( ',', $tf_tour_extra_quantity ) : [];
+
+			if(!empty($tours_extra)){
+				foreach ( $tours_extra as $extra_key => $extra ) {
+					$tour_extra_pricetype = ! empty( $tour_extra_meta[ $extra ]['price_type'] ) ? $tour_extra_meta[ $extra ]['price_type'] : 'fixed';
+					if ( $tour_extra_pricetype == "fixed" ) {
+						if ( ! empty( $tour_extra_meta[ $extra ]['title'] ) && ! empty( $tour_extra_meta[ $extra ]['price'] ) ) {
+							$tour_extra_total       += $tour_extra_meta[ $extra ]['price'];
+							$tour_extra_title_arr[] = array(
+								'title' => $tour_extra_meta[ $extra ]['title'],
+								'price' => $tour_extra_meta[ $extra ]['price']
+							);
+						}
+					} else if ( $tour_extra_pricetype == "quantity" ) {
+						if ( ! empty( $tour_extra_meta[ $extra ]['title'] ) && ! empty( $tour_extra_meta[ $extra ]['price'] ) ) {
+							$tour_extra_total       += $tour_extra_meta[ $extra ]['price'] * $tour_extra_quantity[ $extra_key ];
+							$tour_extra_title_arr[] = array(
+								'title' => $tour_extra_meta[ $extra ]['title'] . " x " . $tour_extra_quantity[ $extra_key ],
+								'price' => $tour_extra_meta[ $extra ]['price'] * $tour_extra_quantity[ $extra_key ]
+							);
+						}
+					} else {
+						if ( ! empty( $tour_extra_meta[ $extra ]['price'] ) && ! empty( $tour_extra_meta[ $extra ]['title'] ) ) {
+							$tour_extra_total       += ( $tour_extra_meta[ $extra ]['price'] * $total_people );
+							$tour_extra_title_arr[] = array(
+								'title' => $tour_extra_meta[ $extra ]['title'],
+								'price' => $tour_extra_meta[ $extra ]['price'] * $total_people
+							);
+						}
 					}
 				}
 			}

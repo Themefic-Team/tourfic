@@ -116,6 +116,11 @@ if ( ! class_exists( 'TF_Taxonomy_Metabox' ) ) {
 				return;
 			}
 
+			// Check if the current user has the required capability.
+	        if (!current_user_can('manage_options')) {
+		        wp_die( 'You do not have sufficient permissions to access this page.' );
+	        }
+
 			$tf_taxonomy_value = array();
 			$taxonomy_request  = ( ! empty( $_POST[ $this->taxonomy_id ] ) ) ? $_POST[ $this->taxonomy_id ] : array();
 

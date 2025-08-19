@@ -190,8 +190,8 @@ class Template_Builder {
                     echo '—';
                 } else {
                     if ($taxonomy_type === 'all') {
-                        echo esc_html(sprintf(
-                            __('All %s', 'tourfic'), 
+                        // translators: %s is the template type (e.g., "hotel", "tour").
+                        echo esc_html(sprintf( esc_html__('All %s', 'tourfic'), 
                             ucfirst($template_type)
                         ));
                     } else {
@@ -214,7 +214,8 @@ class Template_Builder {
                             // For specific taxonomy type, show "All [Taxonomy]"
                             $taxonomy_object = get_taxonomy($taxonomy_type);
                             $taxonomy_label = $taxonomy_object ? $taxonomy_object->labels->name : $taxonomy_type;
-                            echo esc_html(sprintf(__('All %s', 'tourfic'), $taxonomy_label));
+                            // translators: %s will be the taxonomy name.
+                            echo esc_html(sprintf(esc_html__('All %s', 'tourfic'), $taxonomy_label));
                         }
                     } else {
                         // Try to get term name
@@ -673,7 +674,7 @@ class Template_Builder {
         $post_id = !empty($_POST['postId']) ? sanitize_text_field($_POST['postId']) : '';
         
         if (empty($taxonomy)) {
-            wp_send_json_error(['message' => __('Taxonomy not provided', 'tourfic')]);
+            wp_send_json_error(['message' => esc_html__('Taxonomy not provided', 'tourfic')]);
         }
         
         if ($taxonomy === 'all') {
@@ -684,7 +685,7 @@ class Template_Builder {
 
         // Get taxonomy object to access its label
         $taxonomy_object = get_taxonomy($taxonomy);
-        $taxonomy_label = $taxonomy_object ? $taxonomy_object->labels->name : __('Terms', 'tourfic');
+        $taxonomy_label = $taxonomy_object ? $taxonomy_object->labels->name : esc_html__('Terms', 'tourfic');
         
         $terms = get_terms([
             'taxonomy' => $taxonomy,
@@ -699,6 +700,7 @@ class Template_Builder {
         }
         
         $term_markup = '';
+        // translators: %s will be the taxonomy name.
         $term_markup .= '<option value="all"' . selected('all', $selected_term, false) . '>' . sprintf(esc_html__('All %s', 'tourfic'), $taxonomy_label) . '</option>';
         if (!empty($terms)) {
             foreach ($terms as $term) {
@@ -804,10 +806,12 @@ class Template_Builder {
                         <?php if ($tf_taxonomy_type && $tf_taxonomy_type != 'all') : ?>
                             <?php 
                             $taxonomy_object = get_taxonomy($tf_taxonomy_type);
-                            $taxonomy_label = $taxonomy_object ? $taxonomy_object->labels->name : __('Terms', 'tourfic');
+                            $taxonomy_label = $taxonomy_object ? $taxonomy_object->labels->name : esc_html__('Terms', 'tourfic');
                             ?>
                             <option value="all" <?php selected($tf_taxonomy_term, 'all'); ?>>
-                                <?php echo sprintf(esc_html__('All %s', 'tourfic'), $taxonomy_label); ?>
+                                <?php 
+                                // translators: %s will be the taxonomy name.
+                                echo sprintf(esc_html__('All %s', 'tourfic'), esc_html($taxonomy_label)); ?>
                             </option>
                             <?php 
                             $terms = get_terms([
@@ -839,8 +843,8 @@ class Template_Builder {
     function tf_save_template_builder_callback() {
         check_ajax_referer('updates', 'nonce');
         
-        $edit_with_elementor = isset($_POST['edit_with_elementor']) ? $_POST['edit_with_elementor'] : false;
-        $post_id = intval($_POST['post_id']);
+        $edit_with_elementor = isset($_POST['edit_with_elementor']) ? sanitize_text_field( wp_unslash( $_POST['edit_with_elementor'] ) ) : false;
+        $post_id = intval(wp_unslash($_POST['post_id']));
         $post_data = array(
             'post_title' => sanitize_text_field($_POST['template_name']),
             'post_type' => 'tf_template_builder',
@@ -957,7 +961,7 @@ class Template_Builder {
                 if ($template_path) {
                     // Set up the content rendering callback
                     $template_module->set_print_callback(function() use ($post) {
-                        echo \Elementor\Plugin::$instance->frontend->get_builder_content($post->ID, true);
+                        echo wp_kses_post( \Elementor\Plugin::$instance->frontend->get_builder_content($post->ID, true) );
                     });
                     
                     return $template_path;
@@ -1055,7 +1059,7 @@ class Template_Builder {
             if ($template_path) {
                 // Set up the content rendering callback
                 $template_module->set_print_callback(function() use ($template_post) {
-                    echo \Elementor\Plugin::$instance->frontend->get_builder_content($template_post->ID, true);
+                    echo wp_kses_post( \Elementor\Plugin::$instance->frontend->get_builder_content($template_post->ID, true) );
                 });
                 
                 return $template_path;
@@ -1171,8 +1175,8 @@ class Template_Builder {
             update_post_meta($template->ID, 'tf_template_active', '0');
 
             // Add admin notice for deactivated templates
-            $deactivated_notice = sprintf(
-                __('Template "%s" was deactivated because a new active template was created with the same criteria.', 'tourfic'),
+            // translators: %s will be the template id
+            $deactivated_notice = sprintf( esc_html__('Template "%s" was deactivated because a new active template was created with the same criteria.', 'tourfic'),
                 get_the_title($template->ID)
             );
             

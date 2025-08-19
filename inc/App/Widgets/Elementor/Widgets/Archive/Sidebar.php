@@ -101,12 +101,12 @@ class Sidebar extends Widget_Base {
 
     protected function tf_sidebar_style_controls() {
 		$this->start_controls_section( 'sidebar_style_general', [
-			'label' => __( 'Sidebar Style', 'tourfic' ),
+			'label' => esc_html__( 'Sidebar Style', 'tourfic' ),
 			'tab'   => Controls_Manager::TAB_STYLE,
 		] );
 
 		$this->add_responsive_control( "tf_sidebar_margin", [
-			'label'      => __( 'Margin', 'tourfic' ),
+			'label'      => esc_html__( 'Margin', 'tourfic' ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
 				'px',
@@ -120,7 +120,7 @@ class Sidebar extends Widget_Base {
 			],
 		] );
 		$this->add_responsive_control( "tf_sidebar_padding", [
-			'label'      => __( 'Padding', 'tourfic' ),
+			'label'      => esc_html__( 'Padding', 'tourfic' ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
 				'px',
@@ -135,7 +135,7 @@ class Sidebar extends Widget_Base {
 		] );
 		$this->add_group_control( Group_Control_Background::get_type(), [
 			'name'      => "tf_sidebar_bg_color",
-			'label'     => __( 'Background Color', 'tourfic' ),
+			'label'     => esc_html__( 'Background Color', 'tourfic' ),
 			'types'     => [
 				'classic',
 				'gradient',
@@ -151,7 +151,7 @@ class Sidebar extends Widget_Base {
                             {{WRAPPER}} .tf-sidebar__design-2 .tf-archive-right",
 		] );
 		$this->add_control( "tf_sidebar_border_radius", [
-			'label'      => __( 'Border Radius', 'tourfic' ),
+			'label'      => esc_html__( 'Border Radius', 'tourfic' ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
 				'px',
@@ -165,7 +165,7 @@ class Sidebar extends Widget_Base {
 		] );
 
 		$this->add_group_control( Group_Control_Box_Shadow::get_type(), [
-			'label'    => __( 'Box Shadow', 'tourfic' ),
+			'label'    => esc_html__( 'Box Shadow', 'tourfic' ),
 			'name'     => 'tf_sidebar_shadow',
 			'selector' => "{{WRAPPER}} .tf-sidebar__design-1 #tf__booking_sidebar,
                             {{WRAPPER}} .tf-sidebar__design-1 .tf-car-archive-sidebar,
@@ -180,7 +180,7 @@ class Sidebar extends Widget_Base {
 
     protected function tf_widget_style_controls() {
 		$this->start_controls_section( 'widget_style', [
-			'label' => __( 'Widget Style', 'tourfic' ),
+			'label' => esc_html__( 'Widget Style', 'tourfic' ),
 			'tab'   => Controls_Manager::TAB_STYLE,
 		]);
 
@@ -208,7 +208,7 @@ class Sidebar extends Widget_Base {
 		]);
 
 		$this->add_control( 'tf_widget_title_color', [
-			'label'     => __( 'Title Color', 'tourfic' ),
+			'label'     => esc_html__( 'Title Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors'  => [
 				'{{WRAPPER}} .tf-widget-title span' => 'color: {{VALUE}};',
@@ -216,7 +216,7 @@ class Sidebar extends Widget_Base {
 		]);
 
 		$this->add_group_control( Group_Control_Typography::get_type(), [
-            'label'    => __( 'Title Typography', 'tourfic' ),
+            'label'    => esc_html__( 'Title Typography', 'tourfic' ),
 			'name'     => "tf_widget_title_typography",
 			'selector' => "{{WRAPPER}} .tf-widget-title span",
 		]);

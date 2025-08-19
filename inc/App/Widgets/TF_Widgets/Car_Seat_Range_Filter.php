@@ -36,7 +36,7 @@ class Car_Seat_Range_Filter extends \WP_Widget {
     public function widget( $args, $instance ) {
 
         //check if is Car
-        $posttype = isset( $_GET['type'] ) ? $_GET['type'] : get_post_type();
+        $posttype = isset( $_GET['type'] ) ? sanitize_text_field( wp_unslash($_GET['type']) ) : get_post_type();
        
         if ( $posttype == 'tf_carrental' ) {
             extract( $args );
