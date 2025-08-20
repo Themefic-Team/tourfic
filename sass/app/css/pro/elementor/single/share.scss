@@ -14,29 +14,45 @@
     .tf-icon {
         height: 50px;
         width: 50px;
-        background: #fff;
+        background: var(--tf-filling-foreground);
         display: flex;
         align-items: center;
         justify-content: center;
         border-radius: 50px;
+        transition: all .3s ease-in-out;
 
         i {
-            transition: all .3s ease;
-            height: 50px;
-            width: 50px;
-            background: var(--tf-filling-foreground);
+            transition: all .3s ease-in-out;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 50px;
+        }
+
+        svg{
+            height: 22px;
+            width: 22px;
+
+            path{
+                fill: var(--tf-primary);
+            }
         }
 
         &:hover {
             cursor: pointer;
 
             i {
-                transform: scale(1.2);
                 color: var(--tf-primary);
+            }
+        }
+    }
+
+    .share-toggle{
+        svg{
+            height: 22px;
+            width: 22px;
+
+            path{
+                fill: var(--tf-primary);
             }
         }
     }

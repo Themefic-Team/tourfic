@@ -77,17 +77,6 @@ class Share extends Widget_Base {
                 'style3' => esc_html__('Style 3 - Dropdown with Labels', 'tourfic'),
             ],
         ]);
-
-        //icon type
-        $this->add_control('icon_type',[
-			'type'     => Controls_Manager::SELECT,
-			'label'    => esc_html__( 'Icon Type', 'tourfic' ),
-			'options'  => [
-				'simple'     => esc_html__( 'Simple', 'tourfic' ),
-				'rounded'     => esc_html__( 'Rounded', 'tourfic' ),
-			],
-			'default'  => 'rounded',
-		]);
 		
 		$this->add_control('share_icon',[
 			'label' => esc_html__('Share Icon', 'tourfic'),
@@ -142,6 +131,9 @@ class Share extends Widget_Base {
 			],
 			'selectors'  => [
 				"{{WRAPPER}} .share-toggle i" => 'font-size: {{SIZE}}{{UNIT}}',
+				"{{WRAPPER}} .tf-share-toggle i" => 'font-size: {{SIZE}}{{UNIT}}',
+				"{{WRAPPER}} .share-toggle svg" => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}',
+				"{{WRAPPER}} .tf-share-toggle svg" => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}',
 			],
 		] );
 
@@ -160,11 +152,11 @@ class Share extends Widget_Base {
 				],
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .tf-share-icon i" => 'height: {{SIZE}}{{UNIT}} !important; width: {{SIZE}}{{UNIT}} !important;',
-				"{{WRAPPER}} .tf-share-icon" => 'height: {{SIZE}}{{UNIT}} !important; width: {{SIZE}}{{UNIT}} !important;',
+				"{{WRAPPER}} .share-toggle" => 'height: {{SIZE}}{{UNIT}} !important; width: {{SIZE}}{{UNIT}} !important;',
+				"{{WRAPPER}} .tf-share-toggle" => 'height: {{SIZE}}{{UNIT}} !important; width: {{SIZE}}{{UNIT}} !important;',
 			],
             'condition' => [
-				'icon_type' => 'rounded',
+				'share_style' => ['style1', 'style2'],
 			],
 		] );
 
@@ -177,24 +169,28 @@ class Share extends Widget_Base {
 			'label'     => esc_html__( 'Icon Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
-				"{{WRAPPER}} .tf-share-icon i" => 'color: {{VALUE}};',
+				"{{WRAPPER}} .share-toggle i" => 'color: {{VALUE}};',
+				"{{WRAPPER}} .tf-share-toggle i" => 'color: {{VALUE}};',
+				"{{WRAPPER}} .share-toggle svg path" => 'fill: {{VALUE}};',
+				"{{WRAPPER}} .tf-share-toggle svg path" => 'fill: {{VALUE}};',
 			],
 		] );
 		$this->add_control( 'share_icon_bg_color', [
 			'label'     => esc_html__( 'Background Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
-				"{{WRAPPER}} .tf-share-icon i" => 'background-color: {{VALUE}};',
+				"{{WRAPPER}} .share-toggle" => 'background-color: {{VALUE}};',
+				"{{WRAPPER}} .tf-share-toggle" => 'background-color: {{VALUE}};',
 			],
             'condition' => [
-				'icon_type' => 'rounded',
+				'share_style' => ['style1', 'style2'],
 			],
 		] );
 		$this->add_group_control( Group_Control_Border::get_type(), [
 			'name'     => "share_icon_border",
-			'selector' => "{{WRAPPER}} .tf-share-icon i",
+			'selector' => "{{WRAPPER}} .share-toggle, {{WRAPPER}} .tf-share-toggle",
             'condition' => [
-				'icon_type' => 'rounded',
+				'share_style' => ['style1', 'style2'],
 			],
 		] );
 		$this->add_control( "share_icon_border_radius", [
@@ -205,43 +201,49 @@ class Share extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .tf-share-icon i" => $this->tf_apply_dim( 'border-radius' ),
+				"{{WRAPPER}} .share-toggle" => $this->tf_apply_dim( 'border-radius' ),
+				"{{WRAPPER}} .tf-share-toggle" => $this->tf_apply_dim( 'border-radius' ),
 			],
             'condition' => [
-				'icon_type' => 'rounded',
+				'share_style' => ['style1', 'style2'],
 			],
 		] );
 		$this->end_controls_tab();
 
 		/*-----Button HOVER state------ */
 		$this->start_controls_tab( "tab_share_icon_hover", [
-			'label' => esc_html__( 'Active', 'tourfic' ),
+			'label' => esc_html__( 'Hover', 'tourfic' ),
 		] );
 		$this->add_control( "share_icon_color_hover", [
 			'label'     => esc_html__( 'Icon Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
-				"{{WRAPPER}} .tf-share-icon:hover i" => 'color: {{VALUE}};',
+				"{{WRAPPER}} .share-toggle:hover i" => 'color: {{VALUE}};',
+				"{{WRAPPER}} .tf-share-toggle:hover i" => 'color: {{VALUE}};',
+				"{{WRAPPER}} .share-toggle:hover svg path" => 'fill: {{VALUE}};',
+				"{{WRAPPER}} .tf-share-toggle:hover svg path" => 'fill: {{VALUE}};',
 			],
 		] );
 		$this->add_control( 'share_icon_bg_color_hover', [
 			'label'     => esc_html__( 'Background Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
-				"{{WRAPPER}} .tf-share-icon i:hover" => 'background-color: {{VALUE}};',
+				"{{WRAPPER}} .share-toggle:hover" => 'background-color: {{VALUE}};',
+				"{{WRAPPER}} .tf-share-toggle:hover" => 'background-color: {{VALUE}};',
 			],
             'condition' => [
-				'icon_type' => 'rounded',
+				'share_style' => ['style1', 'style2'],
 			],
 		] );
 		$this->add_control( 'share_icon_border_color_hover', [
 			'label'     => esc_html__( 'Border Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
-				"{{WRAPPER}} .tf-share-icon i:hover" => 'border-color: {{VALUE}};',
+				"{{WRAPPER}} .share-toggle:hover" => 'border-color: {{VALUE}};',
+				"{{WRAPPER}} .tf-share-toggle:hover" => 'border-color: {{VALUE}};',
 			],
             'condition' => [
-				'icon_type' => 'rounded',
+				'share_style' => ['style1', 'style2'],
 			],
 		] );
 		$this->end_controls_tab();
