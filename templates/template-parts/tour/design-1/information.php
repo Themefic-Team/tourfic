@@ -1,6 +1,8 @@
-
 <!-- Trip Features -->
-<?php if ( $tour_duration || $info_tour_type || $group_size || $language ) {  
+<?php 
+// Don't load directly
+defined( 'ABSPATH' ) || exit;
+if ( $tour_duration || $info_tour_type || $group_size || $language ) {  
     ?>
     <div class="tf-trip-feature-blocks tf-mb-56 tf-template-section">
         <div class="tf-features-block-inner tf-flex tf-flex-space-bttn tf-flex-gap-16">

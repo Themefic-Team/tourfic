@@ -1,4 +1,7 @@
 <?php
+// Don't load directly
+defined( 'ABSPATH' ) || exit;
+
 if($terms_and_conditions){ ?>
 <!-- Hotel Policies Starts -->
 <div class="tf-policies-wrapper tf-section" id="tf-tour-policies">

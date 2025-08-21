@@ -1,4 +1,7 @@
-
+<?php
+// Don't load directly
+defined( 'ABSPATH' ) || exit;
+?>
 <!-- Single trip description -->
 <div class="tf-trip-description tf-mb-56 tf-template-section">
     <h2 class="tf-title tf-section-title"><?php echo !empty($meta['description-section-title']) ? esc_html($meta['description-section-title']) : ''; ?></h2>

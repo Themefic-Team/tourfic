@@ -1,5 +1,6 @@
 <?php
-
+// Don't load directly
+defined( 'ABSPATH' ) || exit;
 use \Tourfic\Classes\Helper;
 use \Tourfic\App\TF_Review;
 use \Tourfic\Classes\Tour\Tour;

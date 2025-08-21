@@ -1,4 +1,6 @@
 <?php 
+// Don't load directly
+defined( 'ABSPATH' ) || exit;
 if($highlights){ ?>
 <!-- Tour Highlights  -->
 <div class="tf-highlights-wrapper tf-mb-56 tf-box tf-template-section">

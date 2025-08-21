@@ -1,5 +1,8 @@
 <!-- Tour include exclude -->
-<?php if($inc || $exc){ ?>
+<?php 
+// Don't load directly
+defined( 'ABSPATH' ) || exit;
+if($inc || $exc){ ?>
 <div class="tf-inex-wrapper tf-mb-50 tf-template-section">
     <div class="tf-inex-inner tf-flex tf-flex-gap-24">
         <?php if ( $inc ) { ?>
