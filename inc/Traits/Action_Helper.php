@@ -1266,10 +1266,10 @@ trait Action_Helper {
 				}
 				echo '<div class="tf-nothing-found" data-post-count="0">' . esc_html__( 'Nothing Found!', 'tourfic' ) . '</div>';
 			}
-			$post_per_page = self::tfopt( 'posts_per_page' ) ? self::tfopt( 'posts_per_page' ) : 10;
+			$post_per_page = self::tfopt( 'posts_per_page' ) ? absint( wp_unslash(self::tfopt( 'posts_per_page' ))) : 10;
 
 			//elementor settigns
-			$post_per_page = !empty($elSettings['posts_per_page']) ? $elSettings['posts_per_page'] : $post_per_page;
+			$post_per_page = !empty($elSettings['posts_per_page']) ? absint( wp_unslash($elSettings['posts_per_page'])) : $post_per_page;
 			$el_orderby = !empty($elSettings['orderby'] ) ? $elSettings['orderby'] : '';
 			$el_order = !empty($elSettings['order']) ? $elSettings['order'] : '';
 
