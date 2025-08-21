@@ -2,6 +2,8 @@
 /**
  * Template: Hotel Location Archive
  */
+// Don't load directly
+defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\Classes\Helper;
 use \Tourfic\Classes\Hotel\Hotel;

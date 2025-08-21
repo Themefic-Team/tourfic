@@ -2,6 +2,8 @@
 /**
  * Template: Tour Destination Archive
  */
+// Don't load directly
+defined( 'ABSPATH' ) || exit;
 
  use \Tourfic\Classes\Helper;
 

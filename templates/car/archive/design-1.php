@@ -1,4 +1,7 @@
 <?php 
+// Don't load directly
+defined( 'ABSPATH' ) || exit;
+
 use \Tourfic\Classes\Helper;
 $tf_defult_views = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['car_archive_view'] ) ? Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['car_archive_view'] : 'grid';
 

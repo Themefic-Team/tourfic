@@ -1,4 +1,7 @@
-
+<?php
+// Don't load directly
+defined( 'ABSPATH' ) || exit;
+?>
 <div class="tf-main-wrapper tf-archive-template__legacy" data-fullwidth="true">
 	<?php
 

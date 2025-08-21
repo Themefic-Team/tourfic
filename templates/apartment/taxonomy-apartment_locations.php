@@ -1,4 +1,7 @@
 <?php
+// Don't load directly
+defined( 'ABSPATH' ) || exit;
+
 /**
  * Template: Apartment Location Archive
  * @author Foysal

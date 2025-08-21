@@ -1,5 +1,6 @@
 <?php
-
+// Don't load directly
+defined( 'ABSPATH' ) || exit;
 use \Tourfic\Classes\Helper;
 use \Tourfic\Classes\Hotel\Pricing;
 use \Tourfic\Classes\Hotel\Hotel;

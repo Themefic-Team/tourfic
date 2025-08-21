@@ -1,4 +1,8 @@
-<?php if ( $features ) { ?>
+<?php 
+// Don't load directly
+defined( 'ABSPATH' ) || exit;
+
+if ( $features ) { ?>
     <div class="tf-hotel-single-features tf-mb-50 tf-template-section">
         <h2 class="tf-title tf-section-title"><?php echo !empty($meta['popular-section-title']) ? esc_html($meta['popular-section-title']) : ''; ?></h2>
         <ul>

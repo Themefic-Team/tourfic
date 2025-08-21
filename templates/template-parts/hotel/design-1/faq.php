@@ -1,4 +1,8 @@
-<?php if ( $faqs ): ?>
+<?php 
+// Don't load directly
+defined( 'ABSPATH' ) || exit;
+
+if ( $faqs ): ?>
 <div class="tf-hotel-faqs-section tf-mb-50 tf-template-section">
     <h2 class="tf-title tf-section-title" ><?php echo !empty($meta['faq-section-title']) ? esc_html($meta['faq-section-title']) : ''; ?></h2>
     <div class="tf-section-flex tf-flex">
