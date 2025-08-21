@@ -1,6 +1,8 @@
 <?php
 
 namespace Tourfic\Admin;
+# don't load directly
+defined( 'ABSPATH' ) || exit;
 
 class TF_Duplicator {
 	use \Tourfic\Traits\Singleton;

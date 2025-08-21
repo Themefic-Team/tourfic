@@ -1,6 +1,8 @@
 <?php
-
 namespace Tourfic\Classes\Woocommerce;
+
+# don't load directly
+defined( 'ABSPATH' ) || exit;
 
 class Product_Extend extends \WC_Product_Data_Store_CPT implements \WC_Object_Data_Store_Interface, \WC_Product_Data_Store_Interface {
 

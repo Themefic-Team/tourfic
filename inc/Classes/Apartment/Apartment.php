@@ -2,10 +2,8 @@
 
 namespace Tourfic\Classes\Apartment;
 
-// do not load directly
-if ( ! defined( 'ABSPATH' ) ) {
-	die;
-}
+# don't load directly
+defined( 'ABSPATH' ) || exit;
 
 use Tourfic\Classes\Helper;
 use Tourfic\Classes\Apartment\Pricing as Apt_Pricing;

@@ -1,6 +1,9 @@
 <?php
 
 namespace Tourfic\Classes\Apartment;
+# don't load directly
+defined( 'ABSPATH' ) || exit;
+
 class Availability {
 
 	public static function instance( $apt_id ) {

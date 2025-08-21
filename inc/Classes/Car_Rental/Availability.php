@@ -1,6 +1,8 @@
 <?php
-
 namespace Tourfic\Classes\Car_Rental;
+# don't load directly
+defined( 'ABSPATH' ) || exit;
+
 use \Tourfic\Classes\Helper;
 class Availability {
 
