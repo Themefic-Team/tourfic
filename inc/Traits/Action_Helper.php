@@ -2243,7 +2243,17 @@ trait Action_Helper {
 		//    if ( ! wp_verify_nonce( $nonce, 'tf_affiliate_active' ) ) {
 		//        wp_send_json_error( $response );
 		//    }
-		
+		if ( current_user_can( 'activate_plugins' ) ) {
+			$plugin = 'tourfic-affiliate/tourfic-affiliate.php';
+			$result = activate_plugin( $plugin );
+			if ( is_wp_error( $result ) ) {
+				$response['message'] = $result->get_error_message();
+			} else {
+				$response['status']  = 'success';
+				$response['message'] = esc_html__( 'Tourfic Affiliate activated successfully.', 'tourfic' );
+			}
+		}
+
 		echo wp_json_encode( $response );
 		die();
 	}
