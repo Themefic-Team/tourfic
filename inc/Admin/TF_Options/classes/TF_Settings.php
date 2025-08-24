@@ -1005,8 +1005,8 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 										$allowed_mime_types = array('application/octet-stream', 'font/ttf', 'font/otf', 'font/woff', 'font/woff2', 'application/vnd.ms-fontobject');
 										for($i = 0; $i < count($_FILES['file']['name']); $i++) {
 											
-											$tf_font_filename = $_FILES['file']['name'][$i];
-											$uploaded_file_tmp = $_FILES['file']['tmp_name'][$i];
+											$tf_font_filename = sanitize_file_name( wp_unslash($_FILES['file']['name'][$i]) );
+											$uploaded_file_tmp = sanitize_file_name( wp_unslash($_FILES['file']['tmp_name'][$i]) );
 											$checked = wp_check_filetype_and_ext( $uploaded_file_tmp, $tf_font_filename);
 											if (isset($checked['ext']) && in_array($checked["ext"], $allowed_ext) && in_array($checked['type'], $allowed_mime_types)) {
 												$destination_path = $tf_itinerary_fonts .'/'. $tf_font_filename;

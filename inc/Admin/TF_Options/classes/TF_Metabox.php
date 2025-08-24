@@ -183,36 +183,7 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 				delete_post_meta( $post_id, $this->metabox_id );
 			}
 
-			/**
-			 * Hotel and Tour Pabbly Integration
-			 * @author Jahid
-			 */
-			if( !empty($_POST['post_type']) && $_POST['post_type']=="tf_hotel" ){
-				$tf_metabox_request   = ( ! empty( $_POST[ 'tf_hotels_opt' ] ) ) ? $_POST[ 'tf_hotels_opt' ] : array();
-			}
-			if( !empty($_POST['post_type']) && $_POST['post_type']=="tf_tours" ){
-				$tf_metabox_request   = ( ! empty( $_POST[ 'tf_tours_opt' ] ) ) ? $_POST[ 'tf_tours_opt' ] : array();
-			}
-			if( !empty($_POST['post_type']) && $_POST['post_type']=="tf_apartment" ){
-				$tf_metabox_request   = ( ! empty( $_POST[ 'tf_apartment_opt' ] ) ) ? $_POST[ 'tf_apartment_opt' ] : array();
-			}
-			if( !empty($_POST['post_type']) && $_POST['post_type']=="tf_carrental" ){
-				$tf_metabox_request   = ( ! empty( $_POST[ 'tf_carrental_opt' ] ) ) ? $_POST[ 'tf_carrental_opt' ] : array();
-			}
-			$post_basic_info = array(
-				'post_id' => sanitize_key( $post_id ),
-				'post_title' => !empty($_POST['post_title']) ? sanitize_text_field( $_POST['post_title'] ) : '',
-				'post_content' => !empty($_POST['content']) ? sanitize_text_field( $_POST['content'] ) : '',
-				'post_status' => !empty($_POST['post_status']) ? sanitize_text_field( $_POST['post_status'] ) : '',
-				'post_thumbnail' => !empty( get_the_post_thumbnail_url($post_id,'full') ) ?  get_the_post_thumbnail_url($post_id,'full') : '',
-				'post_date' => get_the_date( 'Y-m-d H:i:s', $post_id )
-			);
-			if ( function_exists('is_tf_pro') && is_tf_pro() ) {
-				if( (!empty($_POST['post_type']) && $_POST['post_type']=="tf_hotel") || (!empty($_POST['post_type']) && $_POST['post_type']=="tf_tours") || (!empty($_POST['post_type']) && $_POST['post_type']=="tf_apartment") ){
-				do_action( 'tf_services_pabbly_form_trigger', $post_id, $post_basic_info, $tf_metabox_request );
-				do_action( 'tf_services_zapier_form_trigger', $post_id, $post_basic_info, $tf_metabox_request );
-				}
-			}
+			
 		}
 
 	}
