@@ -136,15 +136,6 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 						'scrollWheelZoom' => true,
 					)
 				),
-				//Property Surroundings
-				array(
-					'id'    => 'tf-pro-notice',
-					'type'  => 'notice',
-					'class' => 'tf-pro-notice',
-					'notice' => 'info',
-					'icon' => 'ri-information-fill',
-					'content' => wp_kses_post(__( 'We\'re offering an additional feature called <b>property surroundings</b> in our pro plan. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of this fantastic option!</a>', 'tourfic' ) ),
-				),
 			),
 		),
 		// Booking
@@ -277,28 +268,12 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					),
 					'default' => '1',
 				),
-				array(
-					'id'    => 'tf-pro-notice',
-					'type'  => 'notice',
-					'class' => 'tf-pro-notice',
-					'notice' => 'info',
-					'icon' => 'ri-information-fill',
-					'content' => wp_kses_post(__( 'We\'re offering some extra features like <b>per person pricing</b>, <b>external booking</b>, <b>taxable apartment</b>, <b>tax class for Woocommerce</b> in our pro plan, also you can add unlimited additional fees for apartment. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of these fantastic option!</a>', 'tourfic')),
-				),
 
 				array(
 					'id'    => 'apartment-cancellation-heading',
 					'type'  => 'heading',
 					'label' => 'Cancellation Condition',
 					'subtitle' => esc_html__( 'Define and customize booking cancellation policies for your offerings. This section allows you to set different cancellation rules, such as timeframes for free cancellations, partial refunds, or no refunds.', 'tourfic' ),
-				),
-				array(
-					'id'    => 'tf-pro-notice',
-					'type'  => 'notice',
-					'class' => 'tf-pro-notice',
-					'notice' => 'info',
-					'icon' => 'ri-information-fill',
-					'content' => wp_kses_post(__( 'We\'re offering some extra features like <b>booking cancellation</b> in our pro plan. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of these fantastic options!</a>', 'tourfic' )),
 				),
 			),
 		),
@@ -310,14 +285,6 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 					'id'      => 'Availability',
 					'type'    => 'heading',
 					'content' => esc_html__( 'Availability', 'tourfic' ),
-				),
-				array(
-					'id'    => 'tf-pro-notice',
-					'type'  => 'notice',
-					'class' => 'tf-pro-notice',
-					'notice' => 'info',
-					'icon' => 'ri-information-fill',
-					'content' => wp_kses_post(__( 'Are you looking to enhance the booking system for your apartment? Our pro package offers a powerful feature that includes <strong>custom availability settings</strong> and <strong>iCal sync</strong>. This integration will streamline your operations and improve the booking experience, giving a significant boost to your apartment business. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of these fantastic option!</a>', 'tourfic' ) ),
 				),
 
 			),

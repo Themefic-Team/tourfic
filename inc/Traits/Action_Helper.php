@@ -805,7 +805,7 @@ trait Action_Helper {
         $car_driver_max_age = ! empty( self::tf_data_types( self::tfopt( 'tf-template' ) )['car_archive_driver_max_age'] ) ? self::tf_data_types( self::tfopt( 'tf-template' ) )['car_archive_driver_max_age'] : 40;
 		// Cars Data End
 		
-		$elSettings = !empty($_POST['elSettings']) ? json_decode(stripslashes($_POST['elSettings']), true) : [];
+		$elSettings = [];
 
 		// Author ID if any (single value)
 		$tf_author_ids = isset( $_POST['tf_author'] ) ? intval( $_POST['tf_author'] ) : 0;

@@ -221,49 +221,7 @@ abstract class Enquiry {
 								?>
 							</td>
 						</tr>
-						<?php if ( ! defined( 'TF_PRO' ) && $tf_key == 15 ) { ?>
-							<tr class="pro-row" style="text-align: center; background-color: #ededf8">
-								<td colspan="8" style="text-align: center;">
-									<a href="https://tourfic.com/" target="_blank">
-										<h3 class="tf-admin-btn tf-btn-secondary" style="color:#fff;margin: 15px 0;"><?php esc_html_e( 'Upgrade to Pro Version to See More', 'tourfic' ); ?></h3>
-									</a>
-								</td>
-							</tr>
-							<tr class="pro-row pro-notice-row" style="text-align: center; background-color: #ededf8">
-								<td colspan="8" style="text-align: center;">
-									<div class="tf-field tf-field-notice tf-pro-notice " style="width:100%;">
-										<div class="tf-fieldset">
-											<div class="tf-field-notice-inner tf-notice-info">
-												<div class="tf-field-notice-icon">
-													<i class="ri-information-fill"></i>
-												</div>
-												<div class="tf-field-notice-content has-content">
-												<?php
-												// translators: 1: opening <b> tag, 2: closing </b> tag, 3: opening <b> tag, 4: closing </b> tag, 5: opening <b> tag, 6: closing </b> tag, 7: opening <b> tag, 8: closing </b> tag.
-												echo wp_kses_post( sprintf(
-														esc_html__(
-															"We're offering some extra filter features like %1\$s replied %2\$s, %3\$s not replied %4\$s, %5\$s not responded %6\$s, and %7\$s not responded %8\$s in our pro plan.",
-															'tourfic'
-														),
-														'<b>', '</b>',
-														'<b>', '</b>',
-														'<b>', '</b>',
-														'<b>', '</b>'
-													)
-												);
-												?>
-												<a href="https://themefic.com/tourfic/pricing" target="_blank">
-													<?php esc_html_e( 'Upgrade to our pro package today to take advantage of these fantastic options!', 'tourfic' ); ?>
-												</a>
-											</div>
-
-											</div>
-										</div>
-									</div>
-								</td>
-							</tr>
-						<?php break;}
-						$tf_key ++;
+						<?php 
 					} ?>
 				<?php else: ?>
 					<tr class="no-result-found" style="text-align: center">

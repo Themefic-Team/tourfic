@@ -292,14 +292,6 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'default'    => 'none',
 					'inline_add_new' => true
 				),
-				array(
-					'id'    => 'tf-pro-notice',
-					'type'  => 'notice',
-					'class' => 'tf-pro-notice',
-					'notice' => 'info',
-					'icon' => 'ri-information-fill',
-					'content' => wp_kses_post(__( 'We\'re offering some extra features like <b>tour type</b> in our pro plan. <a href="https://tourfic.com/" target="_blank"> Upgrade to our pro package today to take advantage of these fantastic options!</a>', 'tourfic' ) ),
-				),
 			),
 		),
 		// Contact Info
@@ -366,14 +358,6 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'type'  => 'heading',
 					'label' => 'Offer Tour Extras',
 					'subtitle' => esc_html__( 'If you wish to provide additional services that are not included in your current tour package, you can list them here.', 'tourfic' ),
-				),
-				array(
-					'id'    => 'tf-pro-notice',
-					'type'  => 'notice',
-					'class' => 'tf-pro-notice',
-					'notice' => 'info',
-					'icon' => 'ri-information-fill',
-					'content' => wp_kses_post(__( 'Are you interested in enriching your tour offerings with exciting services? With our Pro package, you can easily add exciting activities such as paragliding, along with meals and hotel accommodations, through our <b>Tour Extra Services</b>. This feature allows you to customize and expand your services as much as you want, providing a better experience for your customers. <a href="https://tourfic.com/" target="_blank">Upgrade to our Pro package today to take advantage of these fantastic options!</a>', 'tourfic' ) ),
 				),
 			),
 		),
@@ -497,14 +481,6 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'content' => esc_html__( 'Deposit', 'tourfic' ),
 				),
 
-				array(
-					'id'    => 'tf-pro-notice',
-					'type'  => 'notice',
-					'class' => 'tf-pro-notice',
-					'notice' => 'info',
-					'icon' => 'ri-information-fill',
-					'content' => wp_kses_post(__( 'Are you interested in collecting upfront or partial payments for your tours? Our <b>deposit option</b> allows you to set an upfront payment, either as a <b>percentage</b> or a <b>fixed</b> amount, which travelers can pay at the time of booking. Our pro package also include <b>group pricing</b> for a group of travelers. <a href="https://tourfic.com/" target="_blank">Upgrade to our Pro package today to take advantage of this fantastic option!</a>', 'tourfic' ) ),
-				),
 			),
 		),
 
@@ -609,14 +585,6 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 
 					),
 				),
-				array(
-					'id'    => 'tf-pro-notice',
-					'type'  => 'notice',
-					'class' => 'tf-pro-notice',
-					'notice' => 'info',
-					'icon' => 'ri-information-fill',
-					'content' => wp_kses_post(__( 'We\'re offering some extra features like <b>fixed tour type</b>, <b>custom availability</b>, <b>allowed time</b>, <b>select day to disable</b>, <b>disable specific dates</b> in our pro plan. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of these fantastic options!</a>', 'tourfic' )),
-				),
 
 			),
 		),
@@ -663,14 +631,6 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'subtitle'  => esc_html__( 'With this option, you can change the text of the booking form button for this tour', 'tourfic' ),
 					'default'    => esc_html__('Book Now', 'tourfic'),
 				),
-				array(
-					'id'    => 'tf-pro-notice',
-					'type'  => 'notice',
-					'class' => 'tf-pro-notice',
-					'notice' => 'info',
-					'icon' => 'ri-information-fill',
-					'content' => wp_kses_post(__( 'We\'re offering some extra features like <b>minimum days for booking</b>, <b>enable traveler info</b>, <b>external booking</b>, <b>booking without payment</b>, <b>taxable tour</b>, <b>tax class for Woocommerce</b> in our pro plan. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of these fantastic options!</a>', 'tourfic' ) ),
-				),
 
 				array(
 					'id'    => 'tour-cancellation-heading',
@@ -678,14 +638,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'label' => 'Cancellation Condition',
 					'subtitle' => esc_html__( 'Define and customize booking cancellation policies for your offerings. This section allows you to set different cancellation rules, such as timeframes for free cancellations, partial refunds, or no refunds.', 'tourfic' ),
 				),
-				array(
-					'id'    => 'tf-pro-notice',
-					'type'  => 'notice',
-					'class' => 'tf-pro-notice',
-					'notice' => 'info',
-					'icon' => 'ri-information-fill',
-					'content' => wp_kses_post(__( 'We\'re offering some extra features like <b>booking cancellation</b> in our pro plan. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of these fantastic options!</a>', 'tourfic' )),
-				),
+
 			),
 		),
 		// // Exclude/Include
@@ -824,14 +777,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'label' => esc_html__( 'Itinerary Downloader Settings', 'tourfic' ),
 					'subtitle' => esc_html__( 'These are some additional settings specific to the Itinerary PDF downloader. Note that some of these settings may override the global settings. ', 'tourfic' ),
 				),
-				array(
-					'id'    => 'tf-pro-notice',
-					'type'  => 'notice',
-					'class' => 'tf-pro-notice',
-					'notice' => 'info',
-					'icon' => 'ri-information-fill',
-					'content' => wp_kses_post(__( 'We\'re offering some advanced itinerary features inside every repeater like <b>duration</b>, <b>itinerary gallery</b>, <b>custom itinerary options</b>, <b>meals</b>, <b>location</b>, <b>altitude</b>. Also our pro package includes a feature that allows customers to <b>download</b> the detailed itinerary directly from the frontend as a <b>PDF</b>. This enhancement is perfect for travelers offline access or who wish to share their itinerary with others. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of these fantastic option!</a>', 'tourfic') ),
-				),
+
 			),
 		),
 

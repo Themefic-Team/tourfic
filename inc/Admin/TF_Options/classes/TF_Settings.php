@@ -938,17 +938,6 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 			$tf_option_value = array();
 			$option_request  = ( ! empty( $_POST[ $this->option_id ] ) ) ? $_POST[ $this->option_id ] : array();
 
-			if(isset($_POST['tf_import_option']) && !empty(wp_unslash( trim( $_POST['tf_import_option']) ))){
-
-				$tf_import_option = json_decode( wp_unslash( trim( $_POST['tf_import_option']) ), true );
-
-				do_action( 'tf_setting_import_before_save', $tf_import_option );
-
-				// $option_request = !empty($tf_import_option) && is_array($tf_import_option) ? $tf_import_option : $option_request;
-				update_option( $this->option_id, $tf_import_option );
-				return;
-			}
-
 			if ( ! empty( $option_request ) && ! empty( $this->option_sections ) ) {
 				foreach ( $this->option_sections as $section ) {
 					if ( ! empty( $section['fields'] ) ) {
@@ -1069,28 +1058,12 @@ if ( ! class_exists( 'TF_Settings' ) ) {
                 die();
 	        }
 
-			if(isset($_POST['tf_import_option']) && !empty(wp_unslash( trim( $_POST['tf_import_option']) )) ){
-
-				$tf_import_option = json_decode( wp_unslash( trim( $_POST['tf_import_option']) ), true );
-				if(empty($tf_import_option) || !is_array($tf_import_option)){
-					$response    = [
-						'status'  => 'error',
-						'message' => esc_html__( 'Your imported data is not valid', 'tourfic' ),
-					];
-				}else{
-					$this->save_options();
-					$response = [
-						'status'  => 'success',
-						'message' => esc_html__( 'Options imported successfully!', 'tourfic' ),
-					];
-				}
-			}else{
-				$this->save_options();
-				$response = [
-					'status'  => 'success',
-					'message' => esc_html__( 'Options saved successfully!', 'tourfic' ),
-				];
-			}
+			
+			$this->save_options();
+			$response = [
+				'status'  => 'success',
+				'message' => esc_html__( 'Options saved successfully!', 'tourfic' ),
+			];
 
 			do_action("tourfic_settings_save_hook");
 

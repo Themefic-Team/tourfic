@@ -1,6 +1,5 @@
 /******/ (() => { // webpackBootstrap
-var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
+// This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
 (() => {
 (function ($, win) {
     $(document).ready(function () {
@@ -581,7 +580,7 @@ var __webpack_exports__ = {};
 })(jQuery, window);
 })();
 
-// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
+// This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
 (() => {
 (function ($, win) {
     $(document).ready(function () {
@@ -1627,7 +1626,7 @@ function convertTo24HourFormat(timeStr) {
 
 })();
 
-// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
+// This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
 (() => {
 (function ($, win) {
     $(document).ready(function () {
@@ -2438,7 +2437,7 @@ function convertTo24HourFormat(timeStr) {
 })(jQuery, window);
 })();
 
-// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
+// This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
 (() => {
 (function ($, win) {
     $(document).ready(function () {
@@ -3390,7 +3389,7 @@ function convertTo24HourFormat(timeStr) {
 })(jQuery, window);
 })();
 
-// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
+// This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
 (() => {
 (function ($, win) {
     $(document).ready(function () {

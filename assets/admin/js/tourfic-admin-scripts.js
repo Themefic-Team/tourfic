@@ -1,6 +1,5 @@
 /******/ (() => { // webpackBootstrap
-var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
+// This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
 (() => {
 (function ($) {
 
@@ -343,7 +342,7 @@ var __webpack_exports__ = {};
 })(jQuery);
 })();
 
-// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
+// This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
 (() => {
 (function ($) {
     $(document).ready(function () {
@@ -1127,7 +1126,7 @@ var __webpack_exports__ = {};
 })(jQuery);
 })();
 
-// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
+// This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
 (() => {
 (function ($) {
     $(document).ready(function () {
@@ -1767,7 +1766,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 })();
 
-// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
+// This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
 (() => {
 ;(function($) {
 
@@ -2007,7 +2006,7 @@ document.addEventListener('DOMContentLoaded', function() {
 })(jQuery);
 })();
 
-// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
+// This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
 (() => {
 const {select, dispatch} = wp.data;
 
@@ -2056,7 +2055,7 @@ let rpc_check_interval = setInterval(TfPrePublishCheck, 500);
 
 })();
 
-// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
+// This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
 (() => {
 jQuery(function ($) {
 
@@ -2126,7 +2125,7 @@ jQuery(function ($) {
 });
 })();
 
-// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
+// This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
 (() => {
 (function ($) {
     $(document).ready(function () {
@@ -2492,7 +2491,7 @@ jQuery(function ($) {
 })(jQuery);
 })();
 
-// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
+// This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
 (() => {
 (function ($) {
     'use strict';

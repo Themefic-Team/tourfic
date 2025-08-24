@@ -73,14 +73,6 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 						),
 						'field_width' => 33.33,
 					),
-					array(
-						'id'      => 'tf-pro-notice',
-						'type'    => 'notice',
-						'class'   => 'tf-pro-notice',
-						'notice'  => 'info',
-						'icon'    => 'ri-information-fill',
-						'content' => wp_kses_post( __( 'We\'re offering some extra booking features like <b>tour time</b> and <b>tour extra features</b> in our pro plan. <a href="https://tourfic.com/" target="_blank"> Upgrade to our pro package today to take advantage of these fantastic options!</a>', 'tourfic' ) ),
-					),
 				),
 			),
 		);

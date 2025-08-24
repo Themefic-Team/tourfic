@@ -2,8 +2,6 @@
 // don't load directly
 defined( 'ABSPATH' ) || exit;
 $badge_up     = '<div class="tf-csf-badge"><span class="tf-upcoming">' .esc_html__( "Upcoming", "tourfic" ) . '</span></div>';
-$badge_pro    = '<div class="tf-csf-badge"><span class="tf-pro">' .esc_html__( "Pro Feature", "tourfic" ) . '</span></div>';
-$badge_up_pro = '<div class="tf-csf-badge"><span class="tf-upcoming">' .esc_html__( "Upcoming", "tourfic" ) . '</span><span class="tf-pro">' .esc_html__( "Pro Feature", "tourfic" ) . '</span></div>';
 $hotel_name = apply_filters( 'tf_hotel_post_type_name_change_singular', esc_html__( 'Hotel', 'tourfic' ) );
 $hotels_name = apply_filters( 'tf_hotel_post_type_name_change_plural', esc_html__( 'Hotels', 'tourfic' ) );
 $adults_name = apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) );
@@ -206,14 +204,6 @@ TF_Metabox::metabox( 'tf_room_opt', array(
 					'label' => 'Cancellation Condition',
 					'subtitle' => esc_html__( 'Define and customize booking cancellation policies for your offerings. This section allows you to set different cancellation rules, such as timeframes for free cancellations, partial refunds, or no refunds.', 'tourfic' ),
 				),
-				array(
-					'id'    => 'tf-pro-notice',
-					'type'  => 'notice',
-					'class' => 'tf-pro-notice',
-					'notice' => 'info',
-					'icon' => 'ri-information-fill',
-					'content' => wp_kses_post(__( 'We\'re offering some extra features like <b>booking cancellation</b> in our pro plan. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of these fantastic options!</a>', 'tourfic' )),
-				),
 			),
 		),
 
@@ -233,8 +223,6 @@ TF_Metabox::metabox( 'tf_room_opt', array(
                     'label'   => esc_html__( 'Room Pricing Logic', 'tourfic' ),
                     'options' => array(
                         '1' => esc_html__( 'Room Basis', 'tourfic' ),
-                        '2' => esc_html__( 'Person Basis (Pro)', 'tourfic' ),
-                        '3' => esc_html__( 'Option Basis (Pro)', 'tourfic' ),
                     ),
                     'default' => '1',
                     'attributes'  => array(
@@ -249,24 +237,6 @@ TF_Metabox::metabox( 'tf_room_opt', array(
                     'subtitle'   => esc_html__( 'Enter the per-night rate for the room.', 'tourfic' ),
                     'dependency' => array( 'pricing-by', '==', '1' ),
                     'is_search_able' => true
-                ),
-                array(
-                    'id'          => '',
-                    'type'        => 'text',
-                    /* translators: %s is the adults label/name */
-                    'label'       => sprintf( esc_html__( 'Price per %s', 'tourfic' ), $adults_name ),
-                    'is_pro'      => true,
-                    'dependency'  => array( 'pricing-by', '==', '2' ),
-                    'field_width' => 50,
-                ),                
-
-                array(
-                    'id'          => '',
-                    'type'        => 'text',
-                    'label'       => esc_html__( 'Price per Children', 'tourfic' ),
-                    'is_pro'      => true,
-                    'dependency'  => array( 'pricing-by', '==', '2' ),
-                    'field_width' => 50,
                 ),
                 array(
                     'id'       => 'discount_hotel_type',
@@ -308,14 +278,6 @@ TF_Metabox::metabox( 'tf_room_opt', array(
                     'content' => esc_html__( 'Deposit', 'tourfic' ),
                     'class'   => 'tf-field-class',
                 ),
-                array(
-					'id'    => 'tf-pro-notice',
-					'type'  => 'notice',
-					'class' => 'tf-pro-notice',
-					'notice' => 'info',
-					'icon' => 'ri-information-fill',
-					'content' => wp_kses_post(__( 'We\'re offering some extra features like <b>deposit</b> in our pro plan. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of these fantastic options!</a>', 'tourfic' )),
-				),
 			),
 		),
 
@@ -352,13 +314,6 @@ TF_Metabox::metabox( 'tf_room_opt', array(
                 ),
                
                 array(
-                    'id'        => '',
-                    'type'      => 'room_availability',
-                    'label'     => esc_html__( 'Availability Calendar', 'tourfic' ),
-                    'is_pro'  => true,
-                    'dependency' => array( 'avil_by_date', '!=', 'false' ),
-                ),
-                array(
                     'id'         => 'tf-others-heading',
                     'type'       => 'heading',
                     'content'    => esc_html__( 'Other', 'tourfic' ),
@@ -372,14 +327,6 @@ TF_Metabox::metabox( 'tf_room_opt', array(
                     'function'   => 'tf_remove_order_ids_from_room',
                 ),
 
-                array(
-					'id'    => 'tf-pro-notice',
-					'type'  => 'notice',
-					'class' => 'tf-pro-notice',
-					'notice' => 'info',
-					'icon' => 'ri-information-fill',
-					'content' => wp_kses_post(__( 'We\'re offering some extra features like <b>Availability Calendar</b> in our pro plan. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of these fantastic options!</a>', 'tourfic' )),
-				),
 			),
 		),
 
@@ -392,14 +339,6 @@ TF_Metabox::metabox( 'tf_room_opt', array(
                     'type'    => 'heading',
                     'content' => esc_html__( 'iCal Sync', 'tourfic' ),
                 ),
-                array(
-					'id'    => 'tf-pro-notice',
-					'type'  => 'notice',
-					'class' => 'tf-pro-notice',
-					'notice' => 'info',
-					'icon' => 'ri-information-fill',
-					'content' => wp_kses_post(__( 'We\'re offering some extra features like <b>iCal synchronization</b> in our pro plan. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of these fantastic options!</a>', 'tourfic' )),
-				),
 			),
 		),
 
