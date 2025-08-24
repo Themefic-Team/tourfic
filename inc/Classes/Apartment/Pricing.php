@@ -142,19 +142,7 @@ class Pricing {
 		$additional_fee_type   = ! empty( $meta["fee_type"] ) ? $meta["fee_type"] : '';
 
 
-		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-			if( count($additional_fees) > 0 ) {
-				foreach($additional_fees as $fee) {
-					if($fee['fee_type'] == 'per_night') {
-						$this->all_fees += $fee['additional_fee'] * $total_days;
-					} else if($fee['fee_type'] == 'per_person') {
-						$this->all_fees += $fee['additional_fee'] * $total_person;
-					} else {
-						$this->all_fees += $fee['additional_fee'];
-					}
-				}
-			}
-		} else {
+		
 			if($additional_fee_type == 'per_night') {
 				$this->all_fees += $additional_fee * $total_days;
 			} else if($additional_fee_type == 'per_person') {
@@ -162,7 +150,7 @@ class Pricing {
 			} else {
 				$this->all_fees += $additional_fee;
 			}
-		}
+		
 
 		return $this;
 	}
@@ -277,7 +265,7 @@ class Pricing {
 		$pricing_type        = ! empty( $meta['pricing_type'] ) ? $meta['pricing_type'] : 'per_night';
 		$adult_price         = ! empty( $meta['adult_price'] ) ? $meta['adult_price'] : 0;
 		$enable_availability = ! empty( $meta['enable_availability'] ) ? $meta['enable_availability'] : '';
-		if ( $enable_availability === '1' && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+		if ( $enable_availability === '1' ) {
 			$apt_availability = ! empty( $meta['apt_availability'] ) ? json_decode( $meta['apt_availability'], true ) : [];
 
 			if ( ! empty( $apt_availability ) && is_array( $apt_availability ) ) {
@@ -376,7 +364,7 @@ class Pricing {
 				$pricing_type        = ! empty( $meta['pricing_type'] ) ? $meta['pricing_type'] : 'per_night';
 				$adult_price         = ! empty( $meta['adult_price'] ) ? $meta['adult_price'] : 0;
 				$enable_availability = ! empty( $meta['enable_availability'] ) ? $meta['enable_availability'] : '';
-				if ( $enable_availability === '1' && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+				if ( $enable_availability === '1' ) {
 					$apt_availability = ! empty( $meta['apt_availability'] ) ? json_decode( $meta['apt_availability'], true ) : [];
 
 					if ( ! empty( $apt_availability ) && is_array( $apt_availability ) ) {

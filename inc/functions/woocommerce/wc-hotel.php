@@ -230,7 +230,7 @@ function tf_hotel_booking_callback() {
 		/**
 		 * Calculate Pricing
 		 */
-		if ( $avail_by_date && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+		if ( $avail_by_date ) {
 
 			if ( ! $price_multi_day ) {
 				if ( $check_in && $check_out ) {
@@ -397,7 +397,7 @@ function tf_hotel_booking_callback() {
 		}
 
 		# Airport Service Fee
-		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $tf_room_data['tf_hotel_data']['air_serivice_avail'] ) && 1 == $tf_room_data['tf_hotel_data']['air_serivice_avail'] ) {
+		if ( ! empty( $tf_room_data['tf_hotel_data']['air_serivice_avail'] ) && 1 == $tf_room_data['tf_hotel_data']['air_serivice_avail'] ) {
 			if ( "pickup" == $airport_service ) {
 				$airport_pickup_price = ! empty( $meta['airport_pickup_price'] ) ? $meta['airport_pickup_price'] : '';
 				if ( ! empty( $airport_pickup_price ) && gettype( $airport_pickup_price ) == "string" ) {
@@ -558,7 +558,7 @@ function tf_hotel_booking_callback() {
 		if ( $deposit == "true" ) {
 
 			Helper::tf_get_deposit_amount( $room_meta, $price_total, $deposit_amount, $has_deposit );
-			if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $has_deposit == true && ! empty( $deposit_amount ) ) {
+			if ( $has_deposit == true && ! empty( $deposit_amount ) ) {
 				$tf_room_data['tf_hotel_data']['price_total'] = $deposit_amount;
 				if ( ! empty( $airport_service ) ) {
 					$tf_room_data['tf_hotel_data']['due'] = ( $price_total + $airport_service_price_total ) - $deposit_amount;
@@ -574,12 +574,12 @@ function tf_hotel_booking_callback() {
 		}
 		// Booking Type
 		$tf_booking_type = $tf_booking_url = $tf_booking_query_url = $tf_booking_attribute = '';
-		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+
 			$tf_booking_type      = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
 			$tf_booking_url       = ! empty( $meta['booking-url'] ) ? esc_url( $meta['booking-url'] ) : '';
 			$tf_booking_query_url = ! empty( $meta['booking-query'] ) ? $meta['booking-query'] : 'adult={adult}&child={child}&room={room}';
 			$tf_booking_attribute = ! empty( $meta['booking-attribute'] ) ? $meta['booking-attribute'] : '';
-		}
+		
 		if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
 			$external_search_info = array(
 				'{adult}'    => $adult,
@@ -634,7 +634,7 @@ function tf_hotel_booking_callback() {
 
 			$response['without_payment'] = 'true';
 			$order_id = Helper::tf_set_order( $without_payment_order_data );
-			if ( function_exists('is_tf_pro') && is_tf_pro() && !empty($order_id) ) {
+			if ( !empty($order_id) ) {
 				do_action( 'tf_offline_payment_booking_confirmation', $order_id, $without_payment_order_data );
 
 				if ( ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-integration' ) )['tf-new-order-google-calendar'] ) && Helper::tf_data_types( Helper::tfopt( 'tf-integration' ) )['tf-new-order-google-calendar'] == "1" ) {
@@ -1131,7 +1131,7 @@ function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data,
 	 * New Order Pabbly Integration
 	 * @author Jahid
 	 */
-	if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $tf_integration_order_status ) ) {
+	if ( ! empty( $tf_integration_order_status ) ) {
 		do_action( 'tf_new_order_pabbly_form_trigger', $tf_integration_order_data, $billinginfo, $shippinginfo, $tf_integration_order_status );
 		do_action( 'tf_new_order_zapier_form_trigger', $tf_integration_order_data, $billinginfo, $shippinginfo, $tf_integration_order_status );
 	}
@@ -1366,7 +1366,7 @@ function tf_add_order_id_room_checkout_order_processed_block_checkout( $order ) 
 	 * New Order Pabbly Integration
 	 * @author Jahid
 	 */
-	if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $tf_integration_order_status ) ) {
+	if ( ! empty( $tf_integration_order_status ) ) {
 		do_action( 'tf_new_order_pabbly_form_trigger', $tf_integration_order_data, $billinginfo, $shippinginfo, $tf_integration_order_status );
 		do_action( 'tf_new_order_zapier_form_trigger', $tf_integration_order_data, $billinginfo, $shippinginfo, $tf_integration_order_status );
 	}

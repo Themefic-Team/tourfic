@@ -2218,9 +2218,9 @@ class Search_Form extends Widget_Base {
                     </div>
                 </div>
             </div>
-        <?php } elseif ( ( $service == 'tf_hotel' && $design == "design-3" && function_exists( 'is_tf_pro' ) && is_tf_pro()) ||
-            ( $service == 'tf_tours' && $design == "design-3" && function_exists( 'is_tf_pro' ) && is_tf_pro()) ||
-            ( $service == 'tf_apartment' && $design == "design-2" && function_exists( 'is_tf_pro' ) && is_tf_pro())
+        <?php } elseif ( ( $service == 'tf_hotel' && $design == "design-3" ) ||
+            ( $service == 'tf_tours' && $design == "design-3" ) ||
+            ( $service == 'tf_apartment' && $design == "design-2" )
         ){
             ?>
             <form class="tf-archive-booking-form__style-3 tf_archive_search_result tf-hotel-side-booking tf-booking-form" action="<?php echo esc_url(  Helper::tf_booking_search_action() ); ?>" method="get" autocomplete="off">

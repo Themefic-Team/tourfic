@@ -440,7 +440,7 @@ use \Tourfic\Classes\Apartment\Apartment;
         <div id="apartment-map" class="tf-apartment-map-wrapper">
             <div class="tf-container">
                 <div class="tf-row">
-                    <div class="tf-map-content-wrapper <?php echo empty( $map['address'] ) || empty( $meta['surroundings_places'] ) ? 'tf-map-content-full' : ''; ?> <?php echo ! function_exists( 'is_tf_pro' ) ? 'tf-map-content-full' : '' ?>">
+                    <div class="tf-map-content-wrapper <?php echo empty( $map['address'] ) || empty( $meta['surroundings_places'] ) ? 'tf-map-content-full' : ''; ?>">
 						<?php if ( ! empty( $map['address'] ) ): ?>
                             <div class="tf-apartment-map">
                                 <h2 class="section-heading"><?php echo ! empty( $meta['location_title'] ) ? esc_html( $meta['location_title'] ) : ''; ?></h2>
@@ -466,7 +466,7 @@ use \Tourfic\Classes\Apartment\Apartment;
                             </div>
 						<?php endif; ?>
 
-						<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && isset( $meta['surroundings_places'] ) && ! empty( Helper::tf_data_types( $meta['surroundings_places'] ) ) ): ?>
+						<?php if ( isset( $meta['surroundings_places'] ) && ! empty( Helper::tf_data_types( $meta['surroundings_places'] ) ) ): ?>
                             <div class="about-location">
 								<?php if ( ! empty( $meta['surroundings_sec_title'] ) ): ?>
                                     <h3 class="surroundings_sec_title"><?php echo esc_html( $meta['surroundings_sec_title'] ); ?></h3>

@@ -1256,14 +1256,6 @@ trait Action_Helper {
 			}
 
 			if ( empty( $tf_total_filters ) ) {
-				if ( function_exists( 'is_tf_pro' ) && is_tf_pro() &&
-                     (Hotel::template( 'archive' ) == 'design-3' ||
-                      Tour::template( 'archive' ) == 'design-3' ||
-                      Apartment::template( 'archive' ) == 'design-2' ) ) {
-					?>
-                    <div id="map-datas" style="display: none"><?php echo wp_json_encode([]); ?></div>
-					<?php
-				}
 				echo '<div class="tf-nothing-found" data-post-count="0">' . esc_html__( 'Nothing Found!', 'tourfic' ) . '</div>';
 			}
 			$post_per_page = self::tfopt( 'posts_per_page' ) ? absint( wp_unslash(self::tfopt( 'posts_per_page' ))) : 10;

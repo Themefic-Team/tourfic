@@ -100,12 +100,6 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 			'field_width' => 50,
 		);
 
-		if( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-			array_pop( $this->settings['tf_booking_fields']['fields']);
-			array_push( $this->settings['tf_booking_fields']['fields'], $tf_tour_time );
-			array_push( $this->settings['tf_booking_fields']['fields'], $tf_tour_extras );
-		}
-
 
 		$this->set_settings( $this->settings);
 	}
@@ -318,7 +312,7 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 			}
 		}
 		$tour_extras_select_array = [];
-		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_extras ) {
+		if ( $tour_extras ) {
 			if (
 				( ! empty( $tour_extras[0]['title'] ) && ! empty( $tour_extras[0]['desc'] ) && ! empty( $tour_extras[0]['price'] ) ) ||
 				( ! empty( $tour_extras[1]['title'] ) && ! empty( $tour_extras[1]['desc'] ) && ! empty( $tour_extras[1]['price'] ) )
@@ -391,7 +385,7 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 		 * show error
 		 * @return
 		 */
-		if ( $tour_type == 'fixed' && function_exists( 'is_tf_pro' ) && ! is_tf_pro() ) {
+		if ( $tour_type == 'fixed' ) {
 			$response['errors'][] = esc_html__( 'Fixed Availability is selected but Tourfic Pro is not activated!', 'tourfic' );
 			$response['status']   = 'error';
 			echo wp_json_encode( $response );
@@ -423,7 +417,7 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 
 			// Fixed tour maximum capacity limit
 
-			if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $start_date ) && ! empty( $end_date ) ) {
+			if ( ! empty( $start_date ) && ! empty( $end_date ) ) {
 
 				// Tour Order retrieve from Tourfic Order Table
 				$tf_orders_select    = array(
@@ -580,7 +574,7 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 		 *
 		 * @return
 		 */
-		if ( $tour_type == 'continuous' && $custom_avail == true && function_exists( 'is_tf_pro' ) && ! is_tf_pro() ) {
+		if ( $tour_type == 'continuous' && $custom_avail == true ) {
 			$response['errors'][] = esc_html__( 'Custom Continous Availability is selected but Tourfic Pro is not activated!', 'tourfic' );
 			$response['status']   = 'error';
 			echo wp_json_encode( $response );
@@ -840,7 +834,7 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 			$infant_price   = ! empty( $meta['infant_price'] ) ? $meta['infant_price'] : 0;
 		}
 
-		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tour_type == 'continuous' ) {
+		if ( $tour_type == 'continuous' ) {
 			$tf_allowed_times = ! empty( $meta['allowed_time'] ) ? $meta['allowed_time'] : '';
 			if ( ! empty( $tf_allowed_times ) && gettype( $tf_allowed_times ) == "string" ) {
 				$tf_tour_conti_custom_date = preg_replace_callback( '!s:(\d+):"(.*?)";!', function ( $match ) {

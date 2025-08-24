@@ -98,16 +98,6 @@ abstract class Enquiry {
 							<select class="tf-tour-filter-options tf-filter-mail-option-enquiry">
 									<option value=""><?php esc_html_e( "Filters", "tourfic" ); ?></option>
 									<option value="unread"><?php esc_html_e( "Unread", "tourfic" ); ?></option>
-									<?php if( function_exists( 'is_tf_pro' ) && is_tf_pro() ): ?>
-										<option value="replied"><?php esc_html_e( "Replied", "tourfic" ); ?></option>
-										<option value="not-replied"><?php esc_html_e( "Not Replied", "tourfic" ); ?></option>
-										
-										<?php if( is_plugin_active( 'tourfic-email-piping/tourfic-email-piping.php' ) ) : ?>
-											<option value="responded"><?php esc_html_e( "Responded", "tourfic" ); ?></option>
-											<option value="not-responded"><?php esc_html_e( "Not Responded", "tourfic" ); ?></option>
-										<?php endif; ?>
-
-									<?php endif; ?>
 								</select>
 							</div>
 						</div>
@@ -133,14 +123,13 @@ abstract class Enquiry {
 
 		$post_type = !empty($data) ? $data[0]["post_type"] : '';
 
-		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 
 			if ( isset( $_GET['paged'] ) ) {
 				$paged = sanitize_text_field( wp_unslash( $_GET['paged'] ) );
 			} else {
 				$paged = 1;
 			}
-		}
+		
 		?>
 		<div class="<?php echo esc_attr(apply_filters( $post_type . '_booking_oder_table_class', "tf-order-table-responsive")) ?> tf-enquiry-table">
             <table class="wp-list-table table" cellpadding="0" cellspacing="0">
@@ -175,7 +164,7 @@ abstract class Enquiry {
 				if( !empty( $data )) :
 					foreach ( $data as $enquiry ) { ?>
 						<?php 
-							$tr_unread_class = $enquiry["status"] == 'unread' ? 'tf-enquiry-unread' : ( $enquiry["status"] == 'responded' && function_exists( 'is_tf_pro' ) && is_tf_pro() ? 'tf-enquiry-responded' : '' );
+							$tr_unread_class = $enquiry["status"] == 'unread' ? 'tf-enquiry-unread' : ( $enquiry["status"] == 'responded' ? 'tf-enquiry-responded' : '' );
 							$submit_time = self::convert_to_wp_timezone($enquiry["submit_time"]);
 						
 						?>
@@ -236,7 +225,6 @@ abstract class Enquiry {
 					<tr>
 						<th colspan="8">
 							<ul class="tf-booking-details-pagination">
-								<?php if( function_exists( 'is_tf_pro' ) && is_tf_pro() ): ?>
 									<?php if ( ! empty( $paged ) && $paged >= 2 ) { ?>
 									<li><a href="<?php echo esc_url($this->enquiry_details_pagination( $paged - 1 )); ?>">
 											<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -266,7 +254,6 @@ abstract class Enquiry {
 												</svg>
 											</a></li>
 									<?php } ?>
-								<?php endif; ?>
 							</ul>
 						</th>
 					</tr>
@@ -366,7 +353,6 @@ abstract class Enquiry {
 							</div>
 						</div>
 					</div> <!-- Enquiry mail Details Wrapper - End -->
-					<?php if( function_exists( 'is_tf_pro' ) && is_tf_pro() ): ?>
 						<?php if( count($reply_data) == 0 ): ?>
 							<div class="tf-single-enquiry-reply-mail-button">
 								<span> <?php esc_html_e( "Reply to Email", 'tourfic') ?> </span>
@@ -496,35 +482,7 @@ abstract class Enquiry {
 								</form>
 							</div>
 						</div> <!-- Enquiry mail Reply Wrapper - End -->
-					<?php else: ?>
-						<div class="tf-field tf-field-notice tf-pro-notice " style="width:100%;">
-							<div class="tf-fieldset">
-				            	<div class="tf-field-notice-inner tf-notice-info">
-									<div class="tf-field-notice-icon">
-										<i class="ri-information-fill"></i>
-									</div>
-                					<div class="tf-field-notice-content has-content">
-									<?php
-									// translators: 1: opening <b> tag, 2: closing </b> tag, 3: opening <b> tag, 4: closing </b> tag.
-									echo wp_kses_post( sprintf(
-											esc_html__(
-												"We're offering some exiting features like %1\$s sending reply from enquiry details page %2\$s and %3\$s get replies using email piping %4\$s in our pro plan.",
-												'tourfic'
-											),
-											'<b>', '</b>',
-											'<b>', '</b>'
-										)
-									);
-									?>
-									<a href="https://themefic.com/tourfic/pricing" target="_blank">
-										<?php esc_html_e( 'Upgrade to our pro package today to take advantage of these fantastic options!', 'tourfic' ); ?>
-									</a>
-             
-									</div>
-            					</div>
-			            	</div>
-			        	</div>
-					<?php endif; ?>
+					
 				</div> <!-- Enquiry Details Left - End -->
 				<div class="tf-single-enquiry-right"> <!-- Enquiry Details Right - Start -->
 					<div class="tf-enquiry-single-log-details">
@@ -764,10 +722,9 @@ abstract class Enquiry {
 		 * Enquiry Pabbly Integration
 		 * @author Jahid
 		 */
-		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 			do_action( 'enquiry_pabbly_form_trigger', $post_id, $name, $email, $question );
 			do_action( 'enquiry_zapier_form_trigger', $post_id, $name, $email, $question );
-		}
+		
 
 		if ( "tf_hotel" == get_post_type( $post_id ) ) {
 			$send_email_to[] = ! empty( Helper::tfopt( 'h-enquiry-email' ) ) ? sanitize_email( Helper::tfopt( 'h-enquiry-email' ) ) : sanitize_email( get_option( 'admin_email' ) );
@@ -780,7 +737,7 @@ abstract class Enquiry {
 		$tf_vendor_email_enable_setting = ! empty( Helper::tfopt( 'email_template_settings' )['enable_vendor_enquiry_email'] ) ? Helper::tfopt( 'email_template_settings' )['enable_vendor_enquiry_email'] : 0;
 
 
-		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ( $tf_vendor_email_enable_setting == 1 ) ) {
+		if ( ( $tf_vendor_email_enable_setting == 1 ) ) {
 			if ( in_array( "tf_vendor", $tf_user_roles ) ) {
 				if ( "tf_hotel" == get_post_type( $post_id ) ) {
 					$send_email_to[] = ! empty( $author_mail ) ? $author_mail : '';
@@ -841,7 +798,7 @@ abstract class Enquiry {
 			$response['msg']    = esc_html__( 'Message sent failed!', 'tourfic' );
 		}
 
-		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tf_vendor_email_enable_setting != 1 ) {
+		if ( $tf_vendor_email_enable_setting != 1 ) {
 			if ( in_array( "tf_vendor", $tf_user_roles ) ) {
 				if( self::tf_vendor_default_enquiry_mail( $author_mail, $post_id, $name, $question, $this->last_id ) ) {
 				} else {
@@ -1166,10 +1123,9 @@ abstract class Enquiry {
 
 	function tf_enquiry_response_schedule_callback() {
 
-		if( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-		} else {
+		
 			self::tf_enquiry_update_response_unschedule();
-		}
+		
 
 
 		if( empty( get_option("tfep_enquiry_update_response") )) {

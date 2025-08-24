@@ -195,7 +195,7 @@ use \Tourfic\Classes\Apartment\Pricing as Apt_Pricing;
                 <?php Apartment::tf_apartment_single_booking_form( $comments, $disable_review_sec ); ?>
             </div>
 
-            <?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && isset( $meta['surroundings_places'] ) && ! empty( Helper::tf_data_types( $meta['surroundings_places'] ) ) ): ?>
+            <?php if ( isset( $meta['surroundings_places'] ) && ! empty( Helper::tf_data_types( $meta['surroundings_places'] ) ) ): ?>
             <div class="tf-whats-around tf-single-widgets">
                 <?php if ( ! empty( $meta['surroundings_sec_title'] ) ): ?>
                     <h3 class="tf-section-title"><?php echo esc_html( $meta['surroundings_sec_title'] ); ?></h3>

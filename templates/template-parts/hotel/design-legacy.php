@@ -9,7 +9,7 @@ use \Tourfic\Classes\Hotel\Hotel;
 
 $tf_booking_type = '1';
 $tf_booking_url  = $tf_booking_query_url = $tf_booking_attribute = $tf_hide_booking_form = $tf_hide_price = $tf_ext_booking_type = $tf_ext_booking_code = '';
-if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+
 	$tf_booking_type      = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
 	$tf_booking_url       = ! empty( $meta['booking-url'] ) ? esc_url( $meta['booking-url'] ) : '';
 	$tf_booking_query_url = ! empty( $meta['booking-query'] ) ? $meta['booking-query'] : 'adult={adult}&child={child}&room={room}';
@@ -18,7 +18,7 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 	$tf_hide_price        = ! empty( $meta['hide_price'] ) ? $meta['hide_price'] : '';
     $tf_ext_booking_type = ! empty( $meta['external-booking-type'] ) ? $meta['external-booking-type'] : '1';
     $tf_ext_booking_code = !empty( $meta['booking-code'] ) ? $meta['booking-code'] : '';
-}
+
 if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
 	$external_search_info = array(
 		'{adult}'    => ! empty( $adult ) ? $adult : 1,
@@ -267,7 +267,7 @@ $price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings'
                             </div>
 						<?php } ?>
                     </div>
-					<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ( ! empty( $address ) || ( ! empty( $address_latitude ) && ! empty( $address_longitude ) ) ) ) { ?>
+					<?php if ( ( ! empty( $address ) || ( ! empty( $address_latitude ) && ! empty( $address_longitude ) ) ) ) { ?>
                         <div class="popupmap-for-mobile">
 							<?php
 							if ( $tf_openstreet_map != "default" ) { ?>
@@ -373,7 +373,7 @@ $price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings'
                                                 class="fas fa-map-marker-alt"></i><?php esc_html_e( 'Show on map', 'tourfic' ); ?></span></a></div>
                         </div>
 					<?php } ?>
-					<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ( ! empty( $address ) || ( ! empty( $address_latitude ) && ! empty( $address_longitude ) ) ) ) { ?>
+					<?php if ( ( ! empty( $address ) || ( ! empty( $address_latitude ) && ! empty( $address_longitude ) ) ) ) { ?>
 						<?php
 						if ( $tf_openstreet_map != "default" ) { ?>
                             <div class="tf-hotel-location-preview show-on-map">

@@ -159,7 +159,7 @@ class Hotel_Offline_Booking extends Without_Payment_Booking{
 			/**
 			 * Calculate Pricing
 			 */
-			if ( $avail_by_date && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+			if ( $avail_by_date ) {
 
 				// Check availability by date option
 				$period = new \DatePeriod(
@@ -238,7 +238,7 @@ class Hotel_Offline_Booking extends Without_Payment_Booking{
 			if ( $deposit == "true" ) {
 
 				Helper::tf_get_deposit_amount( $room_meta, $price_total, $deposit_amount, $has_deposit );
-				if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $has_deposit == true && ! empty( $deposit_amount ) ) {
+				if ( $has_deposit == true && ! empty( $deposit_amount ) ) {
 						if ( ! empty( $airport_service ) ) {
 							$tf_due_amount = ( $price_total + $airport_service_arr['price'] ) - $deposit_amount;
 						} else {

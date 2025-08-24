@@ -70,12 +70,6 @@ class TF_Search_horizontal extends \Elementor\Widget_Base {
 			'carrentals' => esc_html__( 'Car', 'tourfic' ),
 		);
 
-		if ( function_exists('is_tf_pro') && is_tf_pro() ) {
-			$types['booking']   = esc_html__( 'Booking.com', 'tourfic' );
-			$types['tp-flight'] = esc_html__( 'TravelPayouts Flight', 'tourfic' );
-			$types['tp-hotel']  = esc_html__( 'TravelPayouts Hotel', 'tourfic' );
-		}
-
 		return $types;
 	}
 

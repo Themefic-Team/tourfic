@@ -330,10 +330,9 @@ class Woocommerce {
 		 * @author Jahid
 		 */
 	
-		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 			do_action( 'tf_new_order_pabbly_form_trigger', $tf_integration_order_data, $billinginfo, $shippinginfo, $tf_integration_order_status );
 			do_action( 'tf_new_order_zapier_form_trigger', $tf_integration_order_data, $billinginfo, $shippinginfo, $tf_integration_order_status );
-		}
+		
 	
 	}
 

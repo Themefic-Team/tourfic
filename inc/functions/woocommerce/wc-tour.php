@@ -56,10 +56,10 @@ function tf_tours_booking_function() {
 	$tf_confirmation_details = !empty($_POST['booking_confirm']) ? array_map( 'sanitize_text_field', wp_unslash( $_POST['booking_confirm'] ) ) : "";
 
 	// Booking Type
-	$tf_booking_type = function_exists('is_tf_pro') && is_tf_pro() ? ( !empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1 ) : 1;
-	$tf_booking_url = function_exists('is_tf_pro') && is_tf_pro() ? ( !empty( $meta['booking-url'] ) ? esc_url($meta['booking-url']) : '' ) : '';
-	$tf_booking_query_url = function_exists('is_tf_pro') && is_tf_pro() ? ( !empty( $meta['booking-query'] ) ? $meta['booking-query'] : 'adult={adult}&child={child}&infant={infant}' ) : '';
-	$tf_booking_attribute = function_exists('is_tf_pro') && is_tf_pro() ? ( !empty( $meta['booking-attribute'] ) ? $meta['booking-attribute'] : '' ) : '';
+	$tf_booking_type =!empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
+	$tf_booking_url = !empty( $meta['booking-url'] ) ? esc_url($meta['booking-url']) : '';
+	$tf_booking_query_url = !empty( $meta['booking-query'] ) ? $meta['booking-query'] : 'adult={adult}&child={child}&infant={infant}';
+	$tf_booking_attribute = !empty( $meta['booking-attribute'] ) ? $meta['booking-attribute'] : '';
 
 	/**
 	 * If fixed is selected but pro is not activated
@@ -68,7 +68,7 @@ function tf_tours_booking_function() {
 	 *
 	 * @return
 	 */
-	if ( $tour_type == 'fixed' && function_exists('is_tf_pro') && ! is_tf_pro() ) {
+	if ( $tour_type == 'fixed' ) {
 		$response['errors'][] = esc_html__( 'Fixed Availability is selected but Tourfic Pro is not activated!', 'tourfic' );
 		$response['status']   = 'error';
 		echo wp_json_encode( $response );
@@ -141,7 +141,7 @@ function tf_tours_booking_function() {
 
 		// Fixed tour maximum capacity limit
 	
-		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && !empty($start_date) && !empty($end_date) ) {
+		if ( !empty($start_date) && !empty($end_date) ) {
 			
 			// Tour Order retrive from Tourfic Order Table
 			$tf_orders_select = array(
@@ -300,7 +300,7 @@ function tf_tours_booking_function() {
 	 *
 	 * @return
 	 */
-	if ( $tour_type == 'continuous' && $custom_avail == true && function_exists('is_tf_pro') && ! is_tf_pro() ) {
+	if ( $tour_type == 'continuous' && $custom_avail == true ) {
 		$response['errors'][] = esc_html__( 'Custom Continous Availability is selected but Tourfic Pro is not activated!', 'tourfic' );
 		$response['status']   = 'error';
 		echo wp_json_encode( $response );
@@ -588,7 +588,7 @@ function tf_tours_booking_function() {
 
 	}
 
-	if ( function_exists('is_tf_pro') && is_tf_pro() && $tour_type == 'continuous' ) {
+	if (  $tour_type == 'continuous' ) {
 		$tf_allowed_times = ! empty( $meta['allowed_time'] ) ? $meta['allowed_time'] : '';
 		if( !empty($tf_allowed_times) && gettype($tf_allowed_times)=="string" ){
 			$tf_tour_conti_custom_date = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
@@ -780,7 +780,7 @@ function tf_tours_booking_function() {
 		);
 		$response['without_payment'] = 'true';
 		$order_id = Helper::tf_set_order( $order_data );
-		if ( function_exists('is_tf_pro') && is_tf_pro() && !empty($order_id) ) {
+		if (  !empty($order_id) ) {
 			do_action( 'tf_offline_payment_booking_confirmation', $order_id, $order_data );
 
 			if ( ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-integration' ) )['tf-new-order-google-calendar'] ) && Helper::tf_data_types( Helper::tfopt( 'tf-integration' ) )['tf-new-order-google-calendar'] == "1" ) {
@@ -857,7 +857,7 @@ function tf_tours_booking_function() {
 
 			# Deposit information
 			Helper::tf_get_deposit_amount( $meta, $tf_tours_data['tf_tours_data']['price'], $deposit_amount, $has_deposit );
-			if ( function_exists('is_tf_pro') && is_tf_pro() && $has_deposit == true && $make_deposit == true ) {
+			if (  $has_deposit == true && $make_deposit == true ) {
 				$tf_tours_data['tf_tours_data']['due']   = $tf_tours_data['tf_tours_data']['price'] - $deposit_amount;
 				$tf_tours_data['tf_tours_data']['price'] = $deposit_amount;
 			}
@@ -1295,7 +1295,7 @@ function tf_add_order_tour_details_checkout_order_processed( $order_id, $posted_
 	 * @author Jahid
 	 */
 
-	if ( function_exists('is_tf_pro') && is_tf_pro() && !empty($tf_integration_order_status) ) {
+	if (  !empty($tf_integration_order_status) ) {
 		do_action( 'tf_new_order_pabbly_form_trigger', $tf_integration_order_data, $billinginfo, $shippinginfo, $tf_integration_order_status);
 		do_action( 'tf_new_order_zapier_form_trigger', $tf_integration_order_data, $billinginfo, $shippinginfo, $tf_integration_order_status);
 	} 
@@ -1519,7 +1519,7 @@ function tf_add_order_tour_details_checkout_order_processed_block_checkout( $ord
 	 * @author Jahid
 	 */
 
-	if ( function_exists('is_tf_pro') && is_tf_pro() && !empty($tf_integration_order_status) ) {
+	if (  !empty($tf_integration_order_status) ) {
 		do_action( 'tf_new_order_pabbly_form_trigger', $tf_integration_order_data, $billinginfo, $shippinginfo, $tf_integration_order_status);
 		do_action( 'tf_new_order_zapier_form_trigger', $tf_integration_order_data, $billinginfo, $shippinginfo, $tf_integration_order_status);
 	}

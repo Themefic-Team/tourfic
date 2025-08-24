@@ -62,12 +62,11 @@ class Tour_External_Listings extends \Tourfic\Core\Shortcodes {
 						$post_comments = get_comments( array( 'post_id' => $post_id ) );
 						$meta  = get_post_meta( $post_id, 'tf_tours_opt', true );
 
-						if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 							$tf_booking_type      = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
 							$tf_booking_url       = ! empty( $meta['booking-url'] ) ? esc_url( $meta['booking-url'] ) : '';
 							$tf_booking_query_url = ! empty( $meta['booking-query'] ) ? $meta['booking-query'] : 'adult={adult}&child={child}&room={room}';
 							$tf_booking_attribute = ! empty( $meta['booking-attribute'] ) ? $meta['booking-attribute'] : '';
-						}
+						
 						if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
 							$external_search_info = array(
 								'{adult}'    => ! empty( $adult ) ? $adult : 1,

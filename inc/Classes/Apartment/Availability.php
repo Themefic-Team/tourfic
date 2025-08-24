@@ -67,7 +67,7 @@ class Availability {
 		$total_price = 0;
 		$prices = array();
 		
-		if ( $enable_availability === '1' && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+		if ( $enable_availability === '1' ) {
 			$apt_availability = ! empty( $meta['apt_availability'] ) ? json_decode( $meta['apt_availability'], true ) : [];
 
 			if ( ! empty( $apt_availability ) && is_array( $apt_availability ) ) {

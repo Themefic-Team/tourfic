@@ -8,14 +8,14 @@ use \Tourfic\Classes\Tour\Tour_Price;
 
 $tf_booking_type = '1';
 $tf_booking_url = $tf_booking_query_url = $tf_booking_attribute = $tf_hide_booking_form = $tf_hide_price = '';
-if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-	$tf_booking_type      = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
-	$tf_booking_url       = ! empty( $meta['booking-url'] ) ? esc_url( $meta['booking-url'] ) : '';
-	$tf_booking_query_url = ! empty( $meta['booking-query'] ) ? $meta['booking-query'] : 'adult={adult}&child={child}&infant={infant}';
-	$tf_booking_attribute = ! empty( $meta['booking-attribute'] ) ? $meta['booking-attribute'] : '';
-	$tf_hide_booking_form = ! empty( $meta['hide_booking_form'] ) ? $meta['hide_booking_form'] : '';
-	$tf_hide_price        = ! empty( $meta['hide_price'] ) ? $meta['hide_price'] : '';
-}
+
+$tf_booking_type      = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
+$tf_booking_url       = ! empty( $meta['booking-url'] ) ? esc_url( $meta['booking-url'] ) : '';
+$tf_booking_query_url = ! empty( $meta['booking-query'] ) ? $meta['booking-query'] : 'adult={adult}&child={child}&infant={infant}';
+$tf_booking_attribute = ! empty( $meta['booking-attribute'] ) ? $meta['booking-attribute'] : '';
+$tf_hide_booking_form = ! empty( $meta['hide_booking_form'] ) ? $meta['hide_booking_form'] : '';
+$tf_hide_price        = ! empty( $meta['hide_price'] ) ? $meta['hide_price'] : '';
+
 if( 2==$tf_booking_type && !empty($tf_booking_url) ){
 	$external_search_info = array(
 		'{adult}'    => !empty($adults) ? $adults : 1,
@@ -365,7 +365,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
     <!-- Highlight section end -->
     <?php endif; ?>
 
-    <?php if( function_exists( 'is_tf_pro' ) && is_tf_pro() ) : ?> 
+
         <?php if ( $features && !empty($meta["features"])) { ?>
         <!-- Start features -->
         <div class="tf_features sp-50">
@@ -393,7 +393,6 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
         </div>
         <!-- End features -->
     <?php } ?>
-    <?php endif; ?>
     <!-- Include-Exclude section Start -->
     <?php
     if ( $inc || $exc ) :
@@ -433,11 +432,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
     <!-- Include-Exclude section End -->
 
     <!-- Travel Itinerary section Start -->
-    <?php
-    if ( function_exists('is_tf_pro') && is_tf_pro() ) {
-        do_action( 'after_itinerary_builder', $itineraries, $itinerary_map );
-    } else {
-        ?>
+
         <!-- Travel Itinerary section Start -->
         <?php if ( $itineraries ) { ?>
             <div class="tf-travel-itinerary-wrapper sp-50">
@@ -509,7 +504,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
         <?php endif; ?>
         <?php
         }
-    } 
+
     ?>
     <!-- Travel Itinerary section End -->
 

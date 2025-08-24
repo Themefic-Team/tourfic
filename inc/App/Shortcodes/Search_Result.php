@@ -874,9 +874,9 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 
 			</div>
 			<?php
-		} elseif ( ( $post_type == "tf_tours" && $tf_tour_arc_selected_template == "design-3" && function_exists( 'is_tf_pro' ) && is_tf_pro()) ||
-		           ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template == "design-3" && function_exists( 'is_tf_pro' ) && is_tf_pro()) ||
-		           ( $post_type == "tf_apartment" && $tf_apartment_arc_selected_template == "design-2" && function_exists( 'is_tf_pro' ) && is_tf_pro()) ) {
+		} elseif ( ( $post_type == "tf_tours" && $tf_tour_arc_selected_template == "design-3") ||
+		           ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template == "design-3") ||
+		           ( $post_type == "tf_apartment" && $tf_apartment_arc_selected_template == "design-2") ) {
 
 			if($post_type == "tf_hotel") {
 				$found_post_label = esc_html__( "Hotels", "tourfic" );

@@ -1,12 +1,5 @@
 <!-- Tour itenarary -->
-<?php
-// Don't load directly
-defined( 'ABSPATH' ) || exit;
 
-if ( function_exists('is_tf_pro') && is_tf_pro() ) {
-    do_action( 'after_itinerary_builder', $itineraries, $itinerary_map );
-} else {
-?>
 <!-- Travel Itinerary section Start -->
 <?php if ( $itineraries ) { ?>
 <div class="tf-itinerary-wrapper tf-mb-50 tf-template-section">
@@ -71,4 +64,4 @@ if ( function_exists('is_tf_pro') && is_tf_pro() ) {
 </div>
 <?php endif; ?>
 
-<?php }} ?>
+<?php } ?>

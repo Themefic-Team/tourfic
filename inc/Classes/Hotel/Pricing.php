@@ -145,7 +145,7 @@ class Pricing {
 				$avail_by_date = $room_meta['avil_by_date'] ?? 1;
 				$current_date  = strtotime( "today" );
 
-				if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $avail_by_date == "1" ) {
+				if (  $avail_by_date == "1" ) {
 					$avail_date = json_decode( $room_meta['avail_date'], true );
 					if ( ! empty( $avail_date ) && is_array( $avail_date ) ) {
 						foreach ( $avail_date as $singleavailroom ) {
@@ -397,7 +397,7 @@ class Pricing {
 			    $pricing_by = ! empty( $b_room['pricing-by'] ) ? $b_room['pricing-by'] : 1;
 			    $avail_by_date = !empty($b_room['avil_by_date']) ? $b_room['avil_by_date'] : false;
 
-			    if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $avail_by_date ) {
+			    if (  $avail_by_date ) {
 				    $avail_date = json_decode( $b_room['avail_date'], true );
 
 				    if ( ! empty( $avail_date ) ) {
@@ -912,7 +912,7 @@ class Pricing {
 		$hotel_discount_amount = ! empty( $room_meta["discount_hotel_price"] ) ? $room_meta["discount_hotel_price"] : 0;
 		$option_type = '';
 
-		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $avail_by_date == true) {
+		if ( $avail_by_date == true) {
 			$repeat_by_date  = ! empty( $room_meta['avail_date'] ) ? json_decode( $room_meta['avail_date'], true ) : [];
 			$discount_prices = array();
 			$prices          = array();
@@ -1198,7 +1198,7 @@ class Pricing {
 		$adult_count = ! empty( $persons['adult'] ) ? $persons['adult'] : 0;
 		$child_count = ! empty( $persons['child'] ) ? $persons['child'] : 0;
 
-		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $airport_service == 1 ) {
+		if ( $airport_service == 1 ) {
 			if ( "pickup" == $service_type ) {
 				$airport_pickup_price = ! empty( $meta['airport_pickup_price'] ) ? Helper::tf_data_types( $meta['airport_pickup_price'] ) : '';
 
@@ -1254,7 +1254,7 @@ class Pricing {
 		$child_count = ! empty( $persons['child'] ) ? $persons['child'] : 0;
 		$days        = ! empty( $this->days ) ? $this->days : 0;
 
-		if ( $avail_by_date == 1 && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+		if ( $avail_by_date == 1 ) {
 
 			$availability_price = $this->get_availability_total_price();
 			$total_price        = $availability_price['total_price'];
@@ -1433,7 +1433,7 @@ class Pricing {
 							}
 						}
 
-						if ( $avail_by_date == '1' && function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $room_meta['avail_date'] ) ) {
+						if ( $avail_by_date == '1' && ! empty( $room_meta['avail_date'] ) ) {
 							$avail_date = json_decode( $room_meta['avail_date'], true );
 							if ( ! empty( $avail_date ) && is_array( $avail_date ) ) {
 								foreach ( $avail_date as $singleavailroom ) {

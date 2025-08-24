@@ -10,7 +10,6 @@ use Tourfic\Admin\Booking_Details\Apartment_Booking_Details;
 use Tourfic\Admin\Booking_Details\Hotel_Booking_Details;
 use Tourfic\Admin\Booking_Details\Tour_Booking_Details;
 use Tourfic\Admin\Booking_Details\Car_Booking_Details;
-use Tourfic\Admin\TF_Promo_Notice;
 use Tourfic\App\Widgets\TF_Widget_Base;
 use Tourfic\Admin\Notice\Room_Notice;
 use Tourfic\Admin\Notice\Plugin_Page_Notice;
@@ -72,8 +71,7 @@ class Base {
 			// Room_Notice::instance();
 			Plugin_Page_Notice::instance();
 		}
-		// Promo Notice
-		TF_Promo_Notice::instance();
+		
 		if ( Helper::tf_is_woo_active() ) {
 			TF_Widget_Base::instance();
 		}

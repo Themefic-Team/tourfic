@@ -1,10 +1,4 @@
-<?php
-defined( 'ABSPATH' ) || exit;
 
-if ( function_exists('is_tf_pro') && is_tf_pro() ) {
-    do_action( 'after_itinerary_builder', $itineraries, $itinerary_map );
-} else {
-?>
 <?php if ( $itineraries ) { ?>
 <div class="tf-itinerary-wrapper" id="tf-tour-itinerary">
     <div class="section-title">
@@ -72,4 +66,3 @@ if ( function_exists('is_tf_pro') && is_tf_pro() ) {
         </div>
         <!-- Map End -->
 	<?php endif; ?>
-<?php } ?>

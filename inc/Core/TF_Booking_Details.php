@@ -78,7 +78,7 @@ abstract Class TF_Booking_Details {
 					$tf_filter_query .= " AND ostatus = '$tf_payment_perms'";
 				}
 
-				if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+				
 
 					if ( isset( $_GET['paged'] ) ) {
 						$paged = sanitize_text_field( wp_unslash( $_GET['paged'] ) );
@@ -107,14 +107,7 @@ abstract Class TF_Booking_Details {
 
 					$tf_order_details_result = Helper::tourfic_order_table_data( $tf_orders_select );
 
-				} else {
-					$tf_orders_select        = array(
-						'select'    => "*",
-						'post_type' => $booking_type,
-						'query'     => " $tf_filter_query ORDER BY id DESC LIMIT 15"
-					);
-					$tf_order_details_result = Helper::tourfic_order_table_data( $tf_orders_select );
-				}
+
 			?>
             <div class="wrap tf_booking_details_wrap" style="margin-right: 20px;">
                 <div id="tf-booking-status-loader">
@@ -128,7 +121,7 @@ abstract Class TF_Booking_Details {
                     <div class="tf_header_wrap_button">
                         <?php
                         $_tf_integration_settings = get_option( '_tf_integration_settings' ) ? get_option( '_tf_integration_settings' ) : array();
-                        if ( function_exists('is_tf_pro') && is_tf_pro() && !empty($_tf_integration_settings['google_calendar']['tf_google_calendar']['refresh_token']) && !empty( Helper::tf_data_types(Helper::tfopt( 'tf-integration' ))['tf-new-order-google-calendar'] ) && Helper::tf_data_types(Helper::tfopt( 'tf-integration' ))['tf-new-order-google-calendar']=="1" ){ ?>
+                        if ( !empty($_tf_integration_settings['google_calendar']['tf_google_calendar']['refresh_token']) && !empty( Helper::tf_data_types(Helper::tfopt( 'tf-integration' ))['tf-new-order-google-calendar'] ) && Helper::tf_data_types(Helper::tfopt( 'tf-integration' ))['tf-new-order-google-calendar']=="1" ){ ?>
                         <div class="tf-google-sync-button">
                             <button class="tf-google-calendar-sync" data-bookingtype="<?php echo esc_attr($this->booking_args["booking_type"]); ?>"><?php esc_html_e("Sync Booking", "tourfic"); ?></button>
                         </div>
@@ -490,7 +483,6 @@ abstract Class TF_Booking_Details {
                     <tr>
                         <th colspan="8">
                             <ul class="tf-booking-details-pagination">
-                                <?php if( function_exists( 'is_tf_pro' ) && is_tf_pro() ): ?>
                                     <?php if ( ! empty( $paged ) && $paged >= 2 ) { ?>
                                         <li><a href="<?php echo esc_url($this->tf_booking_details_pagination( $paged - 1 )); ?>">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -520,7 +512,6 @@ abstract Class TF_Booking_Details {
                                                 </svg>
                                             </a></li>
                                     <?php } ?>
-                                <?php endif; ?>
                             </ul>
                         </th>
                     </tr>
@@ -944,7 +935,7 @@ abstract Class TF_Booking_Details {
                         </div>
                     </div>
 
-                    <?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && $tf_order_details->post_type == 'tour' ||  $tf_order_details->post_type == 'hotel' ) { ?>
+                    <?php if ( $tf_order_details->post_type == 'tour' ||  $tf_order_details->post_type == 'hotel' ) { ?>
                     <!-- Visitor Details -->
                     <div class="customers-order-date details-box">
                         <h4>
@@ -1029,9 +1020,8 @@ abstract Class TF_Booking_Details {
                     
                     <!-- Voucher details -->
                     <?php 
-                    if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
                         $this->voucher_details( $tf_tour_details, $tf_order_details, $tf_billing_details );
-                    }
+                    
                     ?>
 
                 </div>

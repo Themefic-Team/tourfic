@@ -1231,7 +1231,7 @@ class Apartment {
 
 		$tf_booking_type = '1';
 		$tf_booking_url  = $tf_booking_query_url = $tf_booking_attribute = $tf_hide_booking_form = $tf_hide_price = $tf_ext_booking_type = $tf_booking_code = '';
-		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+		
 			$tf_booking_type      = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
 			$tf_ext_booking_type = ! empty( $meta['external-booking-type'] ) ? $meta['external-booking-type'] : 1;
 			$tf_booking_code = ! empty( $meta['booking-code'] ) ? $meta['booking-code'] : '';
@@ -1240,18 +1240,16 @@ class Apartment {
 			$tf_booking_attribute = ! empty( $meta['booking-attribute'] ) ? $meta['booking-attribute'] : '';
 			$tf_hide_booking_form = ! empty( $meta['hide_booking_form'] ) ? $meta['hide_booking_form'] : '';
 			$tf_hide_price        = ! empty( $meta['hide_price'] ) ? $meta['hide_price'] : '';
-		}
+		
 
 		// date format for apartment
 		$date_format_change_appartments = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 
-		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-			$additional_fees = ! empty( $meta['additional_fees'] ) ? Helper::tf_data_types( $meta['additional_fees'] ) : array();
-		} else {
+		
 			$additional_fee_label = ! empty( $meta['additional_fee_label'] ) ? $meta['additional_fee_label'] : '';
 			$additional_fee       = ! empty( $meta['additional_fee'] ) ? $meta['additional_fee'] : 0;
 			$fee_type             = ! empty( $meta['fee_type'] ) ? $meta['fee_type'] : '';
-		}
+		
 
 		$adults       = ! empty( $_GET['adults'] ) ? sanitize_text_field( $_GET['adults'] ) : '';
 		$child        = ! empty( $_GET['children'] ) ? sanitize_text_field( $_GET['children'] ) : '';
@@ -1263,7 +1261,7 @@ class Apartment {
 
 		$apt_disable_dates = [];
 		$tf_apt_enable_dates = [];
-		if ( $enable_availability === '1' && ! empty( $apt_availability ) && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+		if ( $enable_availability === '1' && ! empty( $apt_availability ) ) {
 			$apt_availability_arr = json_decode( $apt_availability, true );
 			//iterate all the available disabled dates
 			if ( ! empty( $apt_availability_arr ) && is_array( $apt_availability_arr ) ) {
@@ -1493,14 +1491,8 @@ class Apartment {
                     <span class="days-total-price tf-price-list-price"></span>
                 </li>
 
-				<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ): ?>
-					<?php foreach ( $additional_fees as $key => $additional_fee ) : ?>
-                        <li class="additional-fee-wrap" style="display: none">
-                            <span class="additional-fee-label tf-price-list-label"><?php echo esc_html( $additional_fee['additional_fee_label'] ); ?></span>
-                            <span class="additional-fee-<?php echo esc_attr( $key ) ?> tf-price-list-price"></span>
-                        </li>
-					<?php endforeach; ?>
-				<?php elseif ( ! empty( $additional_fee_label ) && ! empty( $additional_fee ) ): ?>
+				
+				<?php if ( ! empty( $additional_fee_label ) && ! empty( $additional_fee ) ): ?>
                     <li class="additional-fee-wrap" style="display: none">
                         <span class="additional-fee-label tf-price-list-label"><?php echo esc_html( $additional_fee_label ); ?></span>
                         <span class="additional-fee tf-price-list-price"></span>
@@ -1669,14 +1661,8 @@ class Apartment {
                     <span class="days-total-price tf-price-list-price"></span>
                 </li>
 
-				<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ): ?>
-					<?php foreach ( $additional_fees as $key => $additional_fee ) : ?>
-                        <li class="additional-fee-wrap" style="display: none">
-                            <span class="additional-fee-label tf-price-list-label"><?php echo esc_html( $additional_fee['additional_fee_label'] ); ?></span>
-                            <span class="additional-fee-<?php echo esc_attr( $key ) ?> tf-price-list-price"></span>
-                        </li>
-					<?php endforeach; ?>
-				<?php elseif ( ! empty( $additional_fee_label ) && ! empty( $additional_fee ) ): ?>
+				
+				<?php if ( ! empty( $additional_fee_label ) && ! empty( $additional_fee ) ): ?>
                     <li class="additional-fee-wrap" style="display: none">
                         <span class="additional-fee-label tf-price-list-label"><?php echo esc_html( $additional_fee_label ); ?></span>
                         <span class="additional-fee tf-price-list-price"></span>
@@ -1810,28 +1796,6 @@ class Apartment {
                                 let totalPerson = parseInt($('.tf_acrselection #adults').val()) + parseInt($('.tf_acrselection #children').val()) + parseInt($('.tf_acrselection #infant').val());
 
                                 //additional fee
-								<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ): ?>
-								<?php foreach ($additional_fees as $key => $item) : ?>
-                                let additional_fee_<?php echo esc_html( $key ) ?> = <?php echo esc_html( $item['additional_fee'] ); ?>;
-                                let additional_fee_html_<?php echo esc_html( $key ) ?> = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>';
-                                let totalAdditionalFee_<?php echo esc_html ( $key ) ?> = 0;
-
-								<?php if ( $item['fee_type'] == 'per_night' ): ?>
-                                totalAdditionalFee_<?php echo esc_html( $key ) ?> = additional_fee_<?php echo esc_html( $key ) ?> * days;
-								<?php elseif($item['fee_type'] == 'per_person'): ?>
-                                totalAdditionalFee_<?php echo esc_html( $key ) ?> = additional_fee_<?php echo esc_html( $key ) ?> * totalPerson;
-								<?php else: ?>
-                                totalAdditionalFee_<?php echo esc_html( $key ) ?> = additional_fee_<?php echo esc_html( $key ) ?>;
-								<?php endif; ?>
-
-                                if (totalAdditionalFee_<?php echo esc_html( $key ) ?> > 0 ) {
-                                    $('.additional-fee-wrap').show();
-                                    total_price = total_price + totalAdditionalFee_<?php echo esc_html( $key ) ?>;
-                                    additional_fee_html_<?php echo esc_html( $key ) ?> = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>'.replace('0.00', totalAdditionalFee_<?php echo esc_html( $key ) ?>.toFixed(2));
-                                }
-                                $('.additional-fee-wrap .additional-fee-<?php echo esc_html( $key ) ?>').html(additional_fee_html_<?php echo esc_html( $key ) ?>);
-								<?php endforeach; ?>
-								<?php else: ?>
 								<?php if ( ! empty( $additional_fee ) ): ?>
                                 let additional_fee = <?php echo esc_html( $additional_fee ); ?>;
                                 let additional_fee_html = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>';
@@ -1851,7 +1815,6 @@ class Apartment {
                                     additional_fee_html = '<?php echo wp_kses_post(wc_price( 0 ));	; ?>'.replace('0.00', totalAdditionalFee.toFixed(2));
                                 }
                                 $('.additional-fee-wrap .additional-fee').html(additional_fee_html);
-								<?php endif; ?>
 								<?php endif; ?>
                                 //end additional fee
 

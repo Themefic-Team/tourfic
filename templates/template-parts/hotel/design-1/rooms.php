@@ -18,7 +18,7 @@ if ( $rooms ) :
 	}
 
 	$tf_booking_url = $tf_booking_query_url = $tf_booking_attribute = $tf_hide_booking_form = $tf_hide_price = $tf_ext_booking_type = $tf_ext_booking_code = '';
-	if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+	
 		$tf_booking_type      = ! empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1;
 		$tf_booking_url       = ! empty( $meta['booking-url'] ) ? esc_url( $meta['booking-url'] ) : '';
 		$tf_booking_query_url = ! empty( $meta['booking-query'] ) ? $meta['booking-query'] : 'adult={adult}&child={child}&room={room}';
@@ -28,7 +28,7 @@ if ( $rooms ) :
 		$tf_ext_booking_type  = ! empty( $meta['external-booking-type'] ) ? $meta['external-booking-type'] : '1';
 		$tf_ext_booking_code  = ! empty( $meta['booking-code'] ) ? $meta['booking-code'] : '';
 		$adults_name = apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) );
-	}
+	
 	if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
 		$external_search_info = array(
 			'{adult}'    => ! empty( $adult ) ? $adult : 1,

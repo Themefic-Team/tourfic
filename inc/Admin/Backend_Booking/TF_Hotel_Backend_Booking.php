@@ -105,10 +105,6 @@ class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
 			'field_width' => 50,
 		);
 
-		if( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-			array_pop( $this->settings['tf_booking_fields']['fields']);
-			array_push( $this->settings['tf_booking_fields']['fields'], $hotel_services_setting );
-		}
 
 		$this->set_settings( $this->settings );
 	}
@@ -230,23 +226,9 @@ class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
 						$avail_date = ! empty( $room['avail_date'] ) ? json_decode($room['avail_date'], true) : [];
 					}
 
-					if ( $avil_by_date && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-
-						foreach ( $period as $date ) {
-							$available_rooms = array_values( array_filter( $avail_date, function ( $date_availability ) use ( $date ) {
-								$date_availability_from = strtotime( $date_availability['check_in'] . ' 00:00' );
-								$date_availability_to   = strtotime( $date_availability['check_out'] . ' 23:59' );
-
-								return strtotime( $date->format( 'd-M-Y' ) ) >= $date_availability_from && strtotime( $date->format( 'd-M-Y' ) ) <= $date_availability_to;
-							} ) );
-
-							if ( is_iterable( $available_rooms ) && count( $available_rooms ) >= 1 ) {
-								$room_array[ $room['unique_id'] ] = get_the_title($_room->ID);
-							}
-						}
-					} else {
+				
 						$room_array[ $room['unique_id'] ] = get_the_title($_room->ID);
-					}
+					
 				}
 			}
 		}
@@ -257,7 +239,7 @@ class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
 		);
 		$hotel_service_avail = ! empty( $meta['airport_service'] ) ? $meta['airport_service'] : '';
 		$hotel_service_type  = ! empty( $meta['airport_service_type'] ) ? $meta['airport_service_type'] : '';
-		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $hotel_service_avail ) && ! empty( $hotel_service_type ) ) {
+		if ( ! empty( $hotel_service_avail ) && ! empty( $hotel_service_type ) ) {
 			foreach ( $hotel_service_type as $single_service_type ) {
 				if ( "pickup" == $single_service_type ) {
 					$hotel_services['pickup'] = esc_html__( 'Pickup Service', 'tourfic' );
@@ -474,7 +456,7 @@ class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
 		/**
 		 * Calculate Pricing
 		 */
-		if ( $avail_by_date && function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
+		if ( $avail_by_date ) {
 
 			// Check availability by date option
 			$period = new \DatePeriod(
@@ -531,7 +513,7 @@ class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
 		}
 
 		# Airport Service Fee
-		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( $airport_service ) && $airport_service == 1 ) {
+		if ( ! empty( $airport_service ) && $airport_service == 1 ) {
 			if ( "pickup" == $service_type ) {
 				$airport_pickup_price = ! empty( $meta['airport_pickup_price'] ) ? $meta['airport_pickup_price'] : '';
 				if ( ! empty( $airport_pickup_price ) && gettype( $airport_pickup_price ) == "string" ) {

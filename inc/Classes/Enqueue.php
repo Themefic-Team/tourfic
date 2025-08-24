@@ -94,7 +94,7 @@ class Enqueue {
 		global $post;
 		$post_id   = ! empty( $post->ID ) ? $post->ID : '';
 		$post_type = ! empty( $post->post_type ) ? $post->post_type : '';
-		if(function_exists( 'is_tf_pro' ) && is_tf_pro()){
+		
 			if ( $post_type == 'tf_hotel' && ! empty( $post_id ) || is_post_type_archive( 'tf_hotel' ) ||
 			     $post_type == 'tf_tours' && ! empty( $post_id ) || is_post_type_archive( 'tf_tours' ) ||
 			     $post_type == 'tf_apartment' && ! empty( $post_id ) || is_post_type_archive( 'tf_apartment' )) {
@@ -111,7 +111,7 @@ class Enqueue {
 					wp_enqueue_style( 'tf-template-4-font', '//fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap', null, TF_VERSION );
 				}
 			}
-		}
+		
 
 		//Updated CSS
 		wp_enqueue_style( 'tf-app-style', TF_ASSETS_URL . 'app/css/tourfic-style' . $this->css_min . '.css', null, TF_VERSION );
@@ -124,7 +124,6 @@ class Enqueue {
 
 		if ( get_post_type() == 'tf_tours' ) {
 
-			if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
 				wp_enqueue_script( 'Chart-js',  TF_ASSETS_APP_URL . 'libs/chart/chart.js', array( 'jquery' ), '2.6.0', true );
 				$meta        = get_post_meta( get_the_ID(), 'tf_tours_opt', true );
 				$itineraries = ! empty( $meta['itinerary'] ) ? $meta['itinerary'] : null;
@@ -148,7 +147,7 @@ class Enqueue {
 				$showitinerarychart  = ! empty( Helper::tf_data_types( Helper::tfopt( 'itinerary-builder-setings' ) )['itinerary-chart'] ) ? Helper::tf_data_types( Helper::tfopt( 'itinerary-builder-setings' ) )['itinerary-chart'] : false;
 				$showitinerarystatus = ! empty( Helper::tf_data_types( Helper::tfopt( 'itinerary-builder-setings' ) )['itinerary-status'] ) ? Helper::tf_data_types( Helper::tfopt( 'itinerary-builder-setings' ) )['itinerary-status'] : false;
 				$elevvationmode      = ! empty( Helper::tf_data_types( Helper::tfopt( 'itinerary-builder-setings' ) )['elevtion_type'] ) && Helper::tf_data_types( Helper::tfopt( 'itinerary-builder-setings' ) )['elevtion_type'] == "Feet" ? "Feet" : "Meter";
-			}
+			
 		}
 
 		/**
@@ -982,7 +981,7 @@ class Enqueue {
 			wp_enqueue_script( 'Chart-js',  TF_ASSETS_APP_URL . 'libs/chart/chart.js', array( 'jquery' ), '2.6.0', true );
 			wp_enqueue_script( 'tf-flatpickr', TF_ASSETS_APP_URL . 'libs/flatpickr/flatpickr.min.js', array( 'jquery' ), TF_VERSION, true );
 
-			$tf_google_map = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( Helper::tfopt( 'google-page-option' ) ) ? Helper::tfopt( 'google-page-option' ) : "false";
+			$tf_google_map = ! empty( Helper::tfopt( 'google-page-option' ) ) ? Helper::tfopt( 'google-page-option' ) : "false";
 			if ( $tf_google_map != "googlemap" ) {
 				wp_enqueue_script( 'tf-leaflet',  TF_ASSETS_APP_URL . 'libs/leaflet/leaflet.js', array( 'jquery' ), '1.9', true );
 				wp_enqueue_style( 'tf-leaflet', TF_ASSETS_APP_URL . 'libs/leaflet/leaflet.css', array(), '1.9' );
@@ -999,7 +998,7 @@ class Enqueue {
 			wp_enqueue_script( 'wp-color-picker' );
 		}
 
-		$tf_google_map = function_exists( 'is_tf_pro' ) && is_tf_pro() && ! empty( Helper::tfopt( 'google-page-option' ) ) ? Helper::tfopt( 'google-page-option' ) : "false";
+		$tf_google_map = ! empty( Helper::tfopt( 'google-page-option' ) ) ? Helper::tfopt( 'google-page-option' ) : "false";
 		wp_localize_script( 'tf-admin', 'tf_options', array(
 			'ajax_url'             => admin_url( 'admin-ajax.php' ),
 			'nonce'                => wp_create_nonce( 'tf_options_nonce' ),
