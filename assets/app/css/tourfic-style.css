@@ -18928,8 +18928,7 @@ div#tf-destinationautocomplete-list div:before {
 }
 
 @media only screen and (max-width: 768px) {
-  .tf-single-template__two .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-overview-description s
-.tf-short-description {
+  .tf-single-template__two .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-overview-description .tf-short-description {
     font-size: 0.875rem;
   }
 }

@@ -54,6 +54,7 @@ class Register {
 
             //Single
             $widgets_manager->register( \Tourfic\App\Widgets\Elementor\Widgets\Single\Title::instance() );
+            $widgets_manager->register( \Tourfic\App\Widgets\Elementor\Widgets\Single\Description::instance() );
             $widgets_manager->register( \Tourfic\App\Widgets\Elementor\Widgets\Single\Address::instance() );
             $widgets_manager->register( \Tourfic\App\Widgets\Elementor\Widgets\Single\Wishlist::instance() );
             $widgets_manager->register( \Tourfic\App\Widgets\Elementor\Widgets\Single\Share::instance() );
