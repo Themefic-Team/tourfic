@@ -172,38 +172,6 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 				);
 			}
 
-			// Template Builder
-			if ( did_action( 'elementor/loaded' ) && function_exists('is_tf_pro')) {
-				add_submenu_page(
-					'tf_settings',
-					esc_html__('Template Builder', 'tourfic'),
-					esc_html__('Template Builder', 'tourfic'),
-					'manage_options',
-					'edit.php?post_type=tf_template_builder',
-				);
-			} elseif (function_exists('is_tf_pro')) {
-				add_submenu_page(
-					'tf_settings',
-					esc_html__('Template Builder', 'tourfic'),
-					esc_html__('Template Builder', 'tourfic'),
-					'manage_options',
-					'tf_template_builder',
-					array( '\Tourfic\App\Templates\Template_Builder', 'tf_template_builder_elementor_check' )
-				);
-			} 
-
-			if ( function_exists('is_tf_pro') ) {
-				//License Info submenu
-				add_submenu_page(
-					$this->option_id,
-					esc_html__('License Info', 'tourfic'),
-					esc_html__('License Info', 'tourfic'),
-					'manage_options',
-					'tf_license_info',
-					array( $this,'tf_license_info_callback'),
-				);
-			}
-
 			// remove first submenu
 			remove_submenu_page( $this->option_id, $this->option_id );
 
@@ -936,7 +904,10 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 			}
 
 			$tf_option_value = array();
-			$option_request  = ( ! empty( $_POST[ $this->option_id ] ) ) ? $_POST[ $this->option_id ] : array();
+			$option_request = array();
+			if ( ! empty( $_POST[ $this->option_id ] ) ) {
+				$option_request = $this->recursive_sanitize( wp_unslash( $_POST[ $this->option_id ] ) ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+			}
 
 			if ( ! empty( $option_request ) && ! empty( $this->option_sections ) ) {
 				foreach ( $this->option_sections as $section ) {
@@ -1268,5 +1239,20 @@ if ( ! class_exists( 'TF_Settings' ) ) {
             echo wp_json_encode($response);
             die();
         }
+
+		/**
+		 * Recursively sanitize an array or a scalar value.
+		 *
+		 * @param mixed $data
+		 * @return mixed
+		 */
+		private function recursive_sanitize( $data ) {
+			if ( is_array( $data ) ) {
+				return array_map( array( $this, 'recursive_sanitize' ), $data );
+			}
+
+			// Default sanitization for scalar values
+			return sanitize_text_field( wp_unslash( $data ) );
+		}
 	}
 }

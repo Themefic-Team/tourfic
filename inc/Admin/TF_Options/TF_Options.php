@@ -84,11 +84,9 @@ class TF_Options {
 	 * @author Foysal
 	 */
 	public function load_metaboxes() {
-		if ( $this->is_tf_pro_active() ) {
-			$metaboxes = glob( TF_PRO_ADMIN_PATH . 'tf-options/metaboxes/*.php' );
-		} else {
+		
 			$metaboxes = glob( $this->tf_options_file_path( 'metaboxes/*.php' ) );
-		}
+		
 
 		/*if( !empty( $pro_metaboxes ) ) {
 			$metaboxes = array_merge( $metaboxes, $pro_metaboxes );
@@ -107,11 +105,9 @@ class TF_Options {
 	 * @author Foysal
 	 */
 	public function load_options() {
-		if ( $this->is_tf_pro_active() ) {
-			$options = glob( TF_PRO_ADMIN_PATH . 'tf-options/options/*.php' );
-		} else {
+		
 			$options = glob( $this->tf_options_file_path( 'options/*.php' ) );
-		}
+		
 
 		if ( ! empty( $options ) ) {
 			foreach ( $options as $option ) {
@@ -127,11 +123,9 @@ class TF_Options {
 	 * @author Foysal
 	 */
 	public function load_taxonomy() {
-		if ( $this->is_tf_pro_active() ) {
-			$taxonomies = glob( TF_PRO_ADMIN_PATH . 'tf-options/taxonomies/*.php' );
-		} else {
+		
 			$taxonomies = glob( $this->tf_options_file_path( 'taxonomies/*.php' ) );
-		}
+		
 
 		if ( ! empty( $taxonomies ) ) {
 			foreach ( $taxonomies as $taxonomy ) {
@@ -155,15 +149,8 @@ class TF_Options {
 
 		$class = isset( $field['class'] ) ? $field['class'] : '';
 
-		$is_pro   = isset( $field['is_pro'] ) ? $field['is_pro'] : '';
+	
 		$badge_up = isset( $field['badge_up'] ) ? $field['badge_up'] : '';
-
-		if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
-			$is_pro = false;
-		}
-		if ( $is_pro == true ) {
-			$class .= ' tf-field-disable tf-field-pro';
-		}
 		if ( $badge_up == true ) {
 			$class .= ' tf-field-disable tf-field-upcoming';
 		}
@@ -217,9 +204,6 @@ class TF_Options {
 			<?php if ( ! empty( $field['label'] ) ): ?>
                 <label for="<?php echo esc_attr( $id ) ?>" class="tf-field-label">
 					<?php echo esc_html( $field['label'] ) ?>
-					<?php if ( $is_pro ): ?>
-                        <div class="tf-csf-badge"><span class="tf-pro"><?php esc_html_e( "Pro", "tourfic" ); ?></span></div>
-					<?php endif; ?>
 					<?php if ( $badge_up ): ?>
                         <div class="tf-csf-badge"><span class="tf-upcoming"><?php esc_html_e( "Upcoming", "tourfic" ); ?></span></div>
 					<?php endif; ?>
@@ -246,14 +230,6 @@ class TF_Options {
 			<?php endif; ?>
         </div>
 		<?php
-	}
-
-	public function is_tf_pro_active() {
-		if ( is_plugin_active( 'tourfic-pro/tourfic-pro.php' ) && defined( 'TF_PRO' ) ) {
-			return true;
-		}
-
-		return false;
 	}
 
 	function get_icon_list() {

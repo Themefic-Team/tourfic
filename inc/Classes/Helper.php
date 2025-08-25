@@ -48,10 +48,6 @@ class Helper {
         add_filter( 'excerpt_more', array( $this, 'tf_tours_excerpt_more' ) );
 
 		is_admin() ? add_filter( 'plugin_action_links_' . 'tourfic/tourfic.php', array( $this, 'tf_plugin_action_links' ) ) : '';
-		is_plugin_active( 'tourfic-pro/tourfic-pro.php' ) && function_exists( 'is_tf_pro' ) && ! is_tf_pro() ? add_filter( 'plugin_action_links_' . 'tourfic-pro/tourfic-pro.php', array(
-			$this,
-			'tf_pro_plugin_licence_action_links'
-		) ) : '';
 		add_action( 'admin_menu', array( $this, 'tf_documentation_page_integration' ), 999 );
 		add_action( 'add_meta_boxes', array( $this, 'tf_hotel_tour_docs' ) );
 		add_action( 'admin_menu', array( $this, 'tf_documentation_page_integration' ), 999 );

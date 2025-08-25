@@ -467,15 +467,6 @@ abstract Class TF_Booking_Details {
                         </td>
                     </tr>
 					<?php
-					if ( ! defined( 'TF_PRO' ) && $tf_key == 15 ) { ?>
-                        <tr class="pro-row" style="text-align: center; background-color: #ededf8">
-                            <td colspan="8" style="text-align: center;">
-                                <a href="https://tourfic.com/" target="_blank">
-                                    <h3 class="tf-admin-btn tf-btn-secondary" style="color:#fff;margin: 15px 0;"><?php esc_html_e( 'Upgrade to Pro Version to See More', 'tourfic' ); ?></h3>
-                                </a>
-                            </td>
-                        </tr>
-					<?php }
 					$tf_key ++;
 				} ?>
                 </tbody>

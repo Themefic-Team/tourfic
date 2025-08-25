@@ -454,7 +454,7 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
 		//show related tour based on selected tours
 		$selected_ids = ! empty( Helper::tfopt( 'tf-related-tours' ) ) ? Helper::tfopt( 'tf-related-tours' ) : array();
 
-		if ( $related_tour_type == 'selected' && defined( 'TF_PRO' ) ) {
+		if ( $related_tour_type == 'selected' ) {
 			if ( in_array( $post_id, $selected_ids ) ) {
 				$index = array_search( $post_id, $selected_ids );
 

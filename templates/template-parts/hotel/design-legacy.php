@@ -260,7 +260,7 @@ $price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings'
 					<?php } ?>
                     <!-- End gallery-->
                     <div class="map-for-mobile">
-						<?php if ( ! defined( 'TF_PRO' ) && ( $address ) ) { ?>
+						<?php if ( $address ) { ?>
                             <div class="show-on-map">
                                 <div class="tf-btn-wrap"><a href="https://www.google.com/maps/search/<?php echo esc_attr( $address ); ?>" target="_blank" class="tf_btn tf_btn_full"><span><i
                                                     class="fas fa-map-marker-alt"></i><?php esc_html_e( 'Show on map', 'tourfic' ); ?></span></a></div>
@@ -367,7 +367,7 @@ $price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings'
                     <!-- End features -->
                 </div>
                 <div class="hero-right">
-					<?php if ( ! defined( 'TF_PRO' ) && ( $address ) ) { ?>
+					<?php if ( $address ) { ?>
                         <div class="show-on-map">
                             <div class="tf-btn-wrap"><a href="https://www.google.com/maps/search/<?php echo esc_attr( $address ); ?>" target="_blank" class="tf_btn tf_btn_full"><span><i
                                                 class="fas fa-map-marker-alt"></i><?php esc_html_e( 'Show on map', 'tourfic' ); ?></span></a></div>

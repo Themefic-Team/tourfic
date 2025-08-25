@@ -17,7 +17,7 @@ if ( ! class_exists( 'TF_colorpalette' ) ) {
 					$checked = $key == $this->value ? ' checked' : '';
                     $disable_checked = !empty($value['disabled']) ? ' disabled' : '';
 					?>
-                    <li class="<?php echo isset( $value['is_pro'] ) && $value['is_pro'] ? 'tf-pro-item' : '' ?>">
+                    <li class="">
                         <label class="tf-colors-checkbox">
 
                             <div class="tf-colors-box">

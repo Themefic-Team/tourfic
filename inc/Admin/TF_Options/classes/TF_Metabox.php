@@ -148,7 +148,10 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 			}
 
 			$tf_meta_box_value = array();
-			$metabox_request   = ( ! empty( $_POST[ $this->metabox_id ] ) ) ? $_POST[ $this->metabox_id ] : array();
+			$metabox_request = array();
+			if ( ! empty( $_POST[ $this->metabox_id ] ) ) {
+				$metabox_request = $this->recursive_sanitize( wp_unslash( $_POST[ $this->metabox_id ] ) ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+			}
 
 			if ( ! empty( $metabox_request ) && ! empty( $this->metabox_sections ) ) {
 				foreach ( $this->metabox_sections as $section ) {
@@ -185,6 +188,22 @@ if ( ! class_exists( 'TF_Metabox' ) ) {
 
 			
 		}
+
+		/**
+		 * Recursively sanitize an array or a scalar value.
+		 *
+		 * @param mixed $data
+		 * @return mixed
+		 */
+		private function recursive_sanitize( $data ) {
+			if ( is_array( $data ) ) {
+				return array_map( array( $this, 'recursive_sanitize' ), $data );
+			}
+
+			// Default sanitization for scalar values
+			return sanitize_text_field( wp_unslash( $data ) );
+		}
+
 
 	}
 }
