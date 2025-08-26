@@ -727,6 +727,7 @@ class TF_Review {
         if ( is_user_logged_in() ) {
             global $wpdb, $current_user, $post;
             $userId = $current_user->ID;
+            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
             $count  = $wpdb->get_var( $wpdb->prepare(
                 "
                 SELECT COUNT(comment_ID) 

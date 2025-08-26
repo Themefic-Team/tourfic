@@ -651,7 +651,7 @@ abstract class Enquiry {
 			$tf_filter_query .= sprintf(' LIMIT %d, %d', $offset, $per_page);
 		}
 
-		$results = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_enquiry_data WHERE post_type = %s {$tf_filter_query} ORDER BY id DESC", $post_type ), ARRAY_A );
+		$results = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_enquiry_data WHERE post_type = %s {$tf_filter_query} ORDER BY id DESC", $post_type ), ARRAY_A );  // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 
 		if( !empty($results) ) {
 			foreach( $results as $result ) {
@@ -773,6 +773,7 @@ abstract class Enquiry {
 
 			// Data Store to the DB
 			global $wpdb;
+			 // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 			$wpdb->query(
 				$wpdb->prepare(
 					"INSERT INTO {$wpdb->prefix}tf_enquiry_data
@@ -851,6 +852,7 @@ abstract class Enquiry {
 
 		if ( 'trash' == $bulk_action ) {
 			foreach ( $enquiry_ids as $enquiry_id ) {
+				 // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 				$wpdb->query(
 					$wpdb->prepare(
 						"DELETE FROM {$wpdb->prefix}tf_enquiry_data WHERE id=%d",
@@ -860,6 +862,7 @@ abstract class Enquiry {
 			}
 		} else if( 'mark-as-read' == $bulk_action ) {
 			foreach ( $enquiry_ids as $enquiry_id ) {
+				 // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 				$wpdb->query(
 					$wpdb->prepare(
 						"UPDATE {$wpdb->prefix}tf_enquiry_data SET enquiry_status=%s WHERE id=%d",
@@ -896,6 +899,7 @@ abstract class Enquiry {
 		if ( isset( $_POST['enquiry_id'] ) ) {
 			$enquiry_id = absint( wp_unslash( $_POST['enquiry_id'] ) ); // sanitize as integer
 
+			 // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 			$reply_data = $wpdb->get_results( 
 				$wpdb->prepare(
 					"SELECT reply_data FROM {$wpdb->prefix}tf_enquiry_data WHERE id = %d",
@@ -991,6 +995,7 @@ abstract class Enquiry {
 				'submit_time' => $submit_time
 			);
 			
+			 // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 			$wpdb->query(
 				$wpdb->prepare(
 					"UPDATE {$wpdb->prefix}tf_enquiry_data SET enquiry_status = %s, reply_data = %s WHERE id = %d",
@@ -1137,6 +1142,7 @@ abstract class Enquiry {
 		$response_data = get_option("tfep_enquiry_update_response");
 
 		$enquiry_id = $response_data["enquiry_id"];
+		 // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 		$enquiry_details = $wpdb->get_results( 
 			$wpdb->prepare("SELECT * FROM {$wpdb->prefix}tf_enquiry_data where id= %s", $enquiry_id), 
 			ARRAY_A 

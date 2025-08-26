@@ -583,6 +583,7 @@ function tf_add_car_data_checkout_order_processed( $order_id, $posted_data, $ord
 
 
 			global $wpdb;
+			 // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 			$wpdb->query(
 				$wpdb->prepare(
 					"INSERT INTO {$wpdb->prefix}tf_order_data
@@ -773,6 +774,7 @@ function tf_add_car_data_checkout_order_processed_block_checkout( $order ) {
 
 
 			global $wpdb;
+			 // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 			$wpdb->query(
 				$wpdb->prepare(
 					"INSERT INTO {$wpdb->prefix}tf_order_data

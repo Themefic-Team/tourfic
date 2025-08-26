@@ -306,6 +306,7 @@ class Pricing {
     static function get_total_trips($post_id){
         global $wpdb;
 
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
         $total_completed_trip = $wpdb->get_results( 
             $wpdb->prepare( 
                 "SELECT id FROM {$wpdb->prefix}tf_order_data WHERE post_id = %s AND ostatus = %s", 

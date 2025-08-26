@@ -941,8 +941,8 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 										// extension want to allow
 										$allowed_ext = array('ttf', 'otf', 'woff', 'woff2', 'eot');
 										$allowed_mime_types = array('application/octet-stream', 'font/ttf', 'font/otf', 'font/woff', 'font/woff2', 'application/vnd.ms-fontobject');
-										$file_name = !empty($_FILES['file']['name']) ? $_FILES['file']['name'] : [];
-										$file_tmp_name = !empty($_FILES['file']['tmp_name']) ? $_FILES['file']['tmp_name'] : [];
+										$file_name = !empty($_FILES['file']['name']) ? sanitize_file_name(wp_unslash($_FILES['file']['name'])) : [];
+										$file_tmp_name = !empty($_FILES['file']['tmp_name']) ? sanitize_file_name(wp_unslash($_FILES['file']['tmp_name'])) : [];
 										for($i = 0; $i < count($file_name); $i++) {
 											
 											$tf_font_filename = sanitize_file_name( wp_unslash($file_name[$i]) );

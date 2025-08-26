@@ -44,7 +44,7 @@ abstract Class TF_Booking_Details {
         if ( ! empty( $_GET['order_id'] ) && ! empty( $_GET['action'] ) && ! empty( $_GET['book_id'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 			global $wpdb;
-			$tf_order_details = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_order_data WHERE id = %s AND order_id = %s", sanitize_key( $_GET['book_id'] ), sanitize_key( $_GET['order_id'] ) ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$tf_order_details = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_order_data WHERE id = %s AND order_id = %s", sanitize_key( $_GET['book_id'] ), sanitize_key( $_GET['order_id'] ) ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 
 			$this->tf_single_booking_details( $booking_type, $tf_order_details );
 
@@ -533,7 +533,7 @@ abstract Class TF_Booking_Details {
                 </div>
                 <?php
                 global $wpdb;
-                $tf_order_details = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_order_data WHERE id = %s AND order_id = %s",sanitize_key( $_GET['book_id'] ), sanitize_key( $_GET['order_id'] ) ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotValidated
+                $tf_order_details = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_order_data WHERE id = %s AND order_id = %s",sanitize_key( $_GET['book_id'] ), sanitize_key( $_GET['order_id'] ) ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotValidated, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
                 ?>
                 <input type="hidden" id="tf_email_order_id" value="<?php 
                     echo isset( $_GET['order_id'] ) ? esc_attr( sanitize_text_field( wp_unslash( $_GET['order_id'] ) ) ) : '';  // phpcs:ignore WordPress.Security.NonceVerification.Recommended
@@ -1292,10 +1292,11 @@ abstract Class TF_Booking_Details {
         $tf_status = !empty($_POST['status']) ? sanitize_text_field( wp_unslash( $_POST['status'] ) ) : "";
     
         global $wpdb;
-        $tf_order = $wpdb->get_row( $wpdb->prepare( "SELECT id, order_id, payment_method FROM {$wpdb->prefix}tf_order_data WHERE id = %s",sanitize_key( $tf_order_id ) ) );
+        $tf_order = $wpdb->get_row( $wpdb->prepare( "SELECT id, order_id, payment_method FROM {$wpdb->prefix}tf_order_data WHERE id = %s",sanitize_key( $tf_order_id ) ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
     
         // Order Status Update into Database
         if(!empty($tf_order)){
+             // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
             $wpdb->query(
             $wpdb->prepare("UPDATE {$wpdb->prefix}tf_order_data SET ostatus=%s WHERE id=%s", sanitize_title( $tf_status ), sanitize_key($tf_order_id))
             );
@@ -1346,12 +1347,13 @@ abstract Class TF_Booking_Details {
         }
     
         global $wpdb;
-        $tf_order = $wpdb->get_row( $wpdb->prepare( "SELECT id,order_details FROM {$wpdb->prefix}tf_order_data WHERE id = %s",sanitize_key( $tf_order_id ) ) );
+        $tf_order = $wpdb->get_row( $wpdb->prepare( "SELECT id,order_details FROM {$wpdb->prefix}tf_order_data WHERE id = %s",sanitize_key( $tf_order_id ) ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
         $tf_order_details = json_decode($tf_order->order_details);
         $tf_order_details->visitor_details = wp_json_encode($tf_visitor_details);
     
         // Visitor Details Update
         if(!empty($tf_order)){
+             // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
             $wpdb->query(
                 $wpdb->prepare("UPDATE {$wpdb->prefix}tf_order_data SET order_details=%s WHERE id=%s", wp_json_encode($tf_order_details), sanitize_key($tf_order_id))
             );
@@ -1390,14 +1392,15 @@ abstract Class TF_Booking_Details {
         );
     
         global $wpdb;
-        $tf_order = $wpdb->get_row( $wpdb->prepare( "SELECT id FROM {$wpdb->prefix}tf_order_data WHERE id = %s",sanitize_key( $tf_order_id ) ) );
-        $tf_woo_order_id = $wpdb->get_row( $wpdb->prepare( "SELECT order_id FROM {$wpdb->prefix}tf_order_data WHERE id = %s",sanitize_key( $tf_order_id ) ) );
-        $tf_order_post_type = $wpdb->get_row( $wpdb->prepare( "SELECT post_type FROM {$wpdb->prefix}tf_order_data WHERE id = %s",sanitize_key( $tf_order_id ) ) );
+        $tf_order = $wpdb->get_row( $wpdb->prepare( "SELECT id FROM {$wpdb->prefix}tf_order_data WHERE id = %s",sanitize_key( $tf_order_id ) ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+        $tf_woo_order_id = $wpdb->get_row( $wpdb->prepare( "SELECT order_id FROM {$wpdb->prefix}tf_order_data WHERE id = %s",sanitize_key( $tf_order_id ) ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+        $tf_order_post_type = $wpdb->get_row( $wpdb->prepare( "SELECT post_type FROM {$wpdb->prefix}tf_order_data WHERE id = %s",sanitize_key( $tf_order_id ) ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
     
         $tf_order_uni_id = !empty($tf_woo_order_id) ? get_option("tf_order_uni_" . $tf_woo_order_id->order_id) : "";
     
         // Checkinout Status Update into Database
         if(!empty($tf_order)){
+             // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
             $wpdb->query(
                 $wpdb->prepare("UPDATE {$wpdb->prefix}tf_order_data SET checkinout=%s, checkinout_by=%s WHERE id=%s", sanitize_title( $tf_checkinout ), wp_json_encode( $ft_checkinout_by ), sanitize_key($tf_order_id))
             );
@@ -1441,6 +1444,7 @@ abstract Class TF_Booking_Details {
         global $wpdb;
         foreach($tf_orders as $order){
             if("trash"==$tf_status){
+                 // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
                 $wpdb->query(
                     $wpdb->prepare( "DELETE FROM {$wpdb->prefix}tf_order_data WHERE id = %s",sanitize_key( $order ) )
                 );
@@ -1449,6 +1453,7 @@ abstract Class TF_Booking_Details {
     
                 // Order Status Update into Database
                 if(!empty($tf_single_order)){
+                     // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
                     $wpdb->query(
                     $wpdb->prepare("UPDATE {$wpdb->prefix}tf_order_data SET ostatus=%s WHERE id=%s", sanitize_title( $tf_status ), sanitize_key($order))
                     );
@@ -1483,7 +1488,7 @@ abstract Class TF_Booking_Details {
         check_ajax_referer('updates', '_ajax_nonce');
 
         global $wpdb;
-        $tf_order_details = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_order_data WHERE id = %s",sanitize_key( $_POST['id'] ) ) );$tf_billing_details = json_decode($tf_order_details->billing_details); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotValidated
+        $tf_order_details = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_order_data WHERE id = %s",sanitize_key( $_POST['id'] ) ) );$tf_billing_details = json_decode($tf_order_details->billing_details); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotValidated, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
         $tf_tour_details = json_decode($tf_order_details->order_details);
         ?>
 

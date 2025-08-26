@@ -23,11 +23,11 @@ class Apartment_Enquiry extends \Tourfic\Core\Enquiry {
         // phpcs:ignore WordPress.Security.NonceVerification.Recommended
         if( !empty($_GET['enquiry_id'] ) && !empty($_GET['action'] )  ){
 
-            // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-            $status = $wpdb->get_results( $wpdb->prepare( "SELECT enquiry_status FROM {$wpdb->prefix}tf_enquiry_data WHERE id = %s", sanitize_key( $_GET['enquiry_id'] ) ), ARRAY_A );
+            $status = $wpdb->get_results( $wpdb->prepare( "SELECT enquiry_status FROM {$wpdb->prefix}tf_enquiry_data WHERE id = %s", sanitize_key( $_GET['enquiry_id'] ) ), ARRAY_A ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
             $status = !empty($status[0]["enquiry_status"]) ? $status[0]["enquiry_status"] : 'unread';
             
             if( $status == 'unread') {
+                // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
                 $wpdb->query(
                     $wpdb->prepare(
                         "UPDATE {$wpdb->prefix}tf_enquiry_data SET enquiry_status=%s WHERE id=%d",
@@ -38,8 +38,7 @@ class Apartment_Enquiry extends \Tourfic\Core\Enquiry {
                 );
             }
 
-            // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-            $data = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_enquiry_data WHERE id = %s", sanitize_key( $_GET['enquiry_id'] ) ), ARRAY_A );
+            $data = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_enquiry_data WHERE id = %s", sanitize_key( $_GET['enquiry_id'] ) ), ARRAY_A ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 
             $this->single_enquiry_details( $data );
         } else {

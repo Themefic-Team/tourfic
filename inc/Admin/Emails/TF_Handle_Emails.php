@@ -133,7 +133,7 @@ class TF_Handle_Emails {
 
         global $wpdb;
         $taxs_summations = 0;
-        $tf_book_orders = $wpdb->get_results( $wpdb->prepare( "SELECT order_details FROM {$wpdb->prefix}tf_order_data WHERE order_id = %s", $order_id ), ARRAY_A );
+        $tf_book_orders = $wpdb->get_results( $wpdb->prepare( "SELECT order_details FROM {$wpdb->prefix}tf_order_data WHERE order_id = %s", $order_id ), ARRAY_A ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
         if(!empty($tf_book_orders)){
             foreach($tf_book_orders as $sbook){
                 $tf_order_details = !empty($sbook['order_details']) ? json_decode($sbook['order_details']) : '';
@@ -302,7 +302,7 @@ class TF_Handle_Emails {
 
         //Booking URL
         global $wpdb;
-        $tf_order_details = $wpdb->get_row( $wpdb->prepare( "SELECT id FROM {$wpdb->prefix}tf_order_data WHERE order_id = %s",sanitize_key( $order_id ) ) );
+        $tf_order_details = $wpdb->get_row( $wpdb->prepare( "SELECT id FROM {$wpdb->prefix}tf_order_data WHERE order_id = %s",sanitize_key( $order_id ) ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 
         if('tour'==$order_data['post_type']){
             $order_url = esc_url(admin_url() . 'edit.php?post_type=tf_tours&page=tf_tours_booking&order_id=' . $order_id . '&book_id=' . $tf_order_details->id . '&action=preview');
@@ -1102,12 +1102,12 @@ class TF_Handle_Emails {
         $db_id = !empty($_POST['id']) ? intval( wp_unslash( $_POST['id'] ) ) : '';
 
         global $wpdb;
-        $tf_db_order = $wpdb->get_row( $wpdb->prepare( "SELECT id, billing_details, shipping_details, order_details, payment_method FROM {$wpdb->prefix}tf_order_data WHERE id = %s",sanitize_key( $db_id ) ) );
+        $tf_db_order = $wpdb->get_row( $wpdb->prepare( "SELECT id, billing_details, shipping_details, order_details, payment_method FROM {$wpdb->prefix}tf_order_data WHERE id = %s",sanitize_key( $db_id ) ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
         
         // Offline Order Email
         if(!empty($tf_db_order) && "offline"==$tf_db_order->payment_method){
 
-            $tf_db_order_arr = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_order_data WHERE id = %s",sanitize_key( $db_id ) ),ARRAY_A );
+            $tf_db_order_arr = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_order_data WHERE id = %s",sanitize_key( $db_id ) ),ARRAY_A ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 
             $tf_db_order_arr['order_details'] = !empty($tf_db_order_arr['order_details']) ? json_decode($tf_db_order_arr['order_details'], true) : '';
             $tf_db_order_arr['shipping_details'] = !empty($tf_db_order_arr['shipping_details']) ? json_decode($tf_db_order_arr['shipping_details'], true) : '';

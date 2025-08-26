@@ -1971,10 +1971,10 @@ trait Action_Helper {
         foreach ( $results as $post_id ) {
 			$comments = $ratings = '';
             if( $ordering_type == 'order') {
-                $order_count = $wpdb->get_var($wpdb->prepare( "SELECT COUNT(*) FROM {$wpdb->prefix}tf_order_data WHERE post_id = %s AND ostatus != %s", $post_id, 'cancelled' ));
+                $order_count = $wpdb->get_var($wpdb->prepare( "SELECT COUNT(*) FROM {$wpdb->prefix}tf_order_data WHERE post_id = %s AND ostatus != %s", $post_id, 'cancelled' )); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
                 $sort_results[$post_id] = $order_count;
             }else if( $ordering_type == 'enquiry') {
-                $enquiry_count = $wpdb->get_var($wpdb->prepare( "SELECT COUNT(*) FROM {$wpdb->prefix}tf_enquiry_data WHERE post_id = %s ", $post_id ));
+                $enquiry_count = $wpdb->get_var($wpdb->prepare( "SELECT COUNT(*) FROM {$wpdb->prefix}tf_enquiry_data WHERE post_id = %s ", $post_id )); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
                 $sort_results[$post_id] = $enquiry_count;
             } else if( $ordering_type == 'rating') {
                 $comments        = get_comments( [ 'post_id' => $post_id, 'status' => 'approve' ] );

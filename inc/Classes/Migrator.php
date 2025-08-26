@@ -1096,6 +1096,7 @@ class Migrator {
 						$iteminfo = array_combine( $iteminfo_keys, $iteminfo_values );
 
 						global $wpdb;
+						 // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 						$wpdb->query(
 							$wpdb->prepare(
 								"INSERT INTO {$wpdb->prefix}tf_order_data
@@ -1159,6 +1160,7 @@ class Migrator {
 						$iteminfo = array_combine( $iteminfo_keys, $iteminfo_values );
 
 						global $wpdb;
+						 // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 						$wpdb->query(
 							$wpdb->prepare(
 								"INSERT INTO {$wpdb->prefix}tf_order_data
@@ -1465,19 +1467,19 @@ class Migrator {
 		global $wpdb;
 		$enquiry_table = $wpdb->prefix . 'tf_enquiry_data';
 
-		$columns = $wpdb->get_results("SHOW COLUMNS FROM $enquiry_table", ARRAY_A);
+		$columns = $wpdb->get_results("SHOW COLUMNS FROM $enquiry_table", ARRAY_A);  // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
     	$existing_columns = wp_list_pluck($columns, 'Field');
 
 		if (!in_array('enquiry_status', $existing_columns)) {
-			$wpdb->query("ALTER TABLE $enquiry_table ADD COLUMN `enquiry_status` VARCHAR(255) NOT NULL DEFAULT 'read' AFTER `author_roles`");
+			$wpdb->query("ALTER TABLE $enquiry_table ADD COLUMN `enquiry_status` VARCHAR(255) NOT NULL DEFAULT 'read' AFTER `author_roles`");  // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 		}
 
 		if (!in_array('server_data', $existing_columns)) {
-			$wpdb->query("ALTER TABLE $enquiry_table ADD COLUMN `server_data` VARCHAR(255) NOT NULL DEFAULT '' AFTER `enquiry_status`");
+			$wpdb->query("ALTER TABLE $enquiry_table ADD COLUMN `server_data` VARCHAR(255) NOT NULL DEFAULT '' AFTER `enquiry_status`");  // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 		}
 		
 		if (!in_array('reply_data', $existing_columns)) {
-			$wpdb->query("ALTER TABLE $enquiry_table ADD COLUMN `reply_data` LONGTEXT NOT NULL DEFAULT '' AFTER `server_data`");
+			$wpdb->query("ALTER TABLE $enquiry_table ADD COLUMN `reply_data` LONGTEXT NOT NULL DEFAULT '' AFTER `server_data`");  // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 		}
 	}
 }

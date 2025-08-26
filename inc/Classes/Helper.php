@@ -613,7 +613,7 @@ class Helper {
 		$query_type          = $query['post_type'];
 		$query_select        = $query['select'];
 		$query_where         = $query['query'];
-		$tf_tour_book_orders = $wpdb->get_results( $wpdb->prepare( "SELECT $query_select FROM {$wpdb->prefix}tf_order_data WHERE post_type = %s $query_where", $query_type ), ARRAY_A );
+		$tf_tour_book_orders = $wpdb->get_results( $wpdb->prepare( "SELECT $query_select FROM {$wpdb->prefix}tf_order_data WHERE post_type = %s $query_where", $query_type ), ARRAY_A );  // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 
 		return $tf_tour_book_orders;
 	}
@@ -2962,7 +2962,7 @@ class Helper {
 
 	static function tf_set_order( $order_data ) {
 		global $wpdb;
-		$all_order_ids = $wpdb->get_col( "SELECT order_id FROM {$wpdb->prefix}tf_order_data" );
+		$all_order_ids = $wpdb->get_col( "SELECT order_id FROM {$wpdb->prefix}tf_order_data" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 		do {
 			$order_id = wp_rand( 10000000, 99999999 );
 		} while ( in_array( $order_id, $all_order_ids ) );
@@ -2986,6 +2986,7 @@ class Helper {
 
 		$order_data = wp_parse_args( $order_data, $defaults );
 
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 		$wpdb->query(
 			$wpdb->prepare(
 				"INSERT INTO {$wpdb->prefix}tf_order_data

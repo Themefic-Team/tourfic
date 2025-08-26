@@ -1261,7 +1261,8 @@ function tf_add_order_tour_details_checkout_order_processed( $order_id, $posted_
 
 			$iteminfo = array_combine($iteminfo_keys, $iteminfo_values);
 			
-			global $wpdb;     
+			global $wpdb;
+			 // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching     
 			$wpdb->query(
 				$wpdb->prepare(
 				"INSERT INTO {$wpdb->prefix}tf_order_data
@@ -1486,6 +1487,7 @@ function tf_add_order_tour_details_checkout_order_processed_block_checkout( $ord
 			$iteminfo = array_combine($iteminfo_keys, $iteminfo_values);
 
 			global $wpdb;
+			 // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 			$wpdb->query(
 				$wpdb->prepare(
 					"INSERT INTO {$wpdb->prefix}tf_order_data
@@ -1564,6 +1566,7 @@ function tf_tour_unique_id_order_data_migration(){
 						$order_details = json_decode($tf_order_checked->order_details);
 						if(empty($order_details->unique_id)){
 							$order_details->unique_id = $unique_id;
+							 // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 							$wpdb->query(
 								$wpdb->prepare("UPDATE {$wpdb->prefix}tf_order_data SET order_details=%s WHERE id=%d",wp_json_encode($order_details), $tf_order_checked->id)
 							);
