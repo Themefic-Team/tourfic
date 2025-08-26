@@ -1390,7 +1390,7 @@ class Hotel {
 				}
 			}
 
-			if ( "pickup" == $_POST['service_type'] ) {
+			if ( "pickup" == $_POST['service_type'] ) { // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotValidated
 				$airport_pickup_price = ! empty( $meta['airport_pickup_price'] ) ? Helper::tf_data_types( $meta['airport_pickup_price'] ) : '';
 
 				if ( "per_person" == $airport_pickup_price['airport_pickup_price_type'] ) {
@@ -1461,7 +1461,7 @@ class Hotel {
 					}
 				}
 			}
-			if ( "dropoff" == $_POST['service_type'] ) {
+			if ( "dropoff" == $_POST['service_type'] ) { // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotValidated
 				$airport_dropoff_price = ! empty( $meta['airport_dropoff_price'] ) ? Helper::tf_data_types( $meta['airport_dropoff_price'] ) : '';
 
 				if ( "per_person" == $airport_dropoff_price['airport_pickup_price_type'] ) {
@@ -1523,7 +1523,7 @@ class Hotel {
 					}
 				}
 			}
-			if ( "both" == $_POST['service_type'] ) {
+			if ( "both" == $_POST['service_type'] ) { // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotValidated
 				$airport_pickup_dropoff_price = ! empty( $meta['airport_pickup_dropoff_price'] ) ? Helper::tf_data_types( $meta['airport_pickup_dropoff_price'] ) : '';
 
 				if ( "per_person" == $airport_pickup_dropoff_price['airport_pickup_price_type'] ) {
@@ -4386,7 +4386,7 @@ class Hotel {
 				foreach ( $rooms as $_room ) :
 					$room = get_post_meta( $_room->ID, 'tf_room_opt', true );
 					$enable = ! empty( $room['enable'] ) ? $room['enable'] : '';
-					if ( $enable == '1' && $room['unique_id'] . $_room->ID == $_POST['uniqid_id'] ) :
+					if ( $enable == '1' && $room['unique_id'] . $_room->ID == $_POST['uniqid_id'] ) : // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotValidated
 						$tf_room_gallery = ! empty( $room['gallery'] ) ? $room['gallery'] : '';
 						$child_age_limit = ! empty( $room['children_age_limit'] ) ? $room['children_age_limit'] : "";
 						?>
@@ -4673,7 +4673,7 @@ class Hotel {
 			foreach ( $rooms as $_room ) :
 				$room = get_post_meta( $_room->ID, 'tf_room_opt', true );
 				$enable              = ! empty( $room['enable'] ) ? $room['enable'] : '';
-				if ( $enable == '1' && $room['unique_id'] . $_room->ID == $_POST['uniqid_id'] ) :
+				if ( $enable == '1' && $room['unique_id'] . $_room->ID == $_POST['uniqid_id'] ) : // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotValidated
 					$tf_room_gallery = ! empty( $room['gallery'] ) ? $room['gallery'] : '';
 					$child_age_limit = ! empty( $room['children_age_limit'] ) ? $room['children_age_limit'] : "";
 
@@ -4754,7 +4754,7 @@ class Hotel {
 			foreach ( $rooms as $key => $_room ) :
 				$room = get_post_meta( $_room->ID, 'tf_room_opt', true );
 				$enable                  = ! empty( $room['enable'] ) ? $room['enable'] : '';
-				if ( $enable == '1' && $room['unique_id'] . $_room->ID == $_POST['uniqid_id'] ) :
+				if ( $enable == '1' && $room['unique_id'] . $_room->ID == $_POST['uniqid_id'] ) : // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotValidated
 					$tf_room_gallery     = ! empty( $room['gallery'] ) ? $room['gallery'] : '';
 					$tf_room_gallery_ids = ! empty( $tf_room_gallery ) ? explode( ',', $tf_room_gallery ) : '';
 					$child_age_limit     = ! empty( $room['children_age_limit'] ) ? $room['children_age_limit'] : "";

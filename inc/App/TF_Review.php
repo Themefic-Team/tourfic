@@ -177,6 +177,8 @@ class TF_Review {
 			wp_send_json_error(esc_html__('You do not have permission to access this resource.', 'tourfic'));
 			return;
 		}
+
+        $deleteAll = !empty($_POST['deleteAll']) ? sanitize_text_field(wp_unslash($_POST['deleteAll'])) : 'no';
     
         global $wpdb;
     
@@ -202,13 +204,13 @@ class TF_Review {
                 update_comment_meta( $comment->comment_ID, TF_COMMENT_META, $review );
                 $review = get_comment_meta( $comment->comment_ID, TF_COMMENT_META, true );
     
-                if ( count( $review ) == 0 && $_POST['deleteAll'] == 'yes' ) {
+                if ( count( $review ) == 0 && $deleteAll == 'yes' ) {
                     wp_delete_comment( $comment, true );
                 }
     
             } else {
     
-                if ( $_POST['deleteAll'] == 'yes' ) {
+                if ( $deleteAll == 'yes' ) {
                     wp_delete_comment( $comment, true );
                 }
     

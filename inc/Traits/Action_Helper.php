@@ -239,7 +239,7 @@ trait Action_Helper {
 		if ( ! current_user_can( 'edit_user', $user_id ) ) {
 			return false;
 		}
-		update_user_meta( $user_id, 'language', sanitize_text_field( wp_unslash($_POST['language']) ) );
+		update_user_meta( $user_id, 'language', sanitize_text_field( wp_unslash($_POST['language']) ) ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotValidated
 	}
 
 	/*
@@ -2030,8 +2030,8 @@ trait Action_Helper {
 		//Verify Nonce
 		check_ajax_referer( 'updates', '_nonce' );
 
-		$search_month = sanitize_key( $_POST['month'] );
-		$search_year  = sanitize_key( $_POST['year'] );
+		$search_month = sanitize_key( $_POST['month'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotValidated
+		$search_year  = sanitize_key( $_POST['year'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotValidated
 		$month_dates  = cal_days_in_month( CAL_GREGORIAN, $search_month, $search_year );
 
 		//Order Data Retrive

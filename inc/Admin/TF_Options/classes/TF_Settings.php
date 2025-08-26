@@ -941,10 +941,12 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 										// extension want to allow
 										$allowed_ext = array('ttf', 'otf', 'woff', 'woff2', 'eot');
 										$allowed_mime_types = array('application/octet-stream', 'font/ttf', 'font/otf', 'font/woff', 'font/woff2', 'application/vnd.ms-fontobject');
-										for($i = 0; $i < count($_FILES['file']['name']); $i++) {
+										$file_name = !empty($_FILES['file']['name']) ? $_FILES['file']['name'] : [];
+										$file_tmp_name = !empty($_FILES['file']['tmp_name']) ? $_FILES['file']['tmp_name'] : [];
+										for($i = 0; $i < count($file_name); $i++) {
 											
-											$tf_font_filename = sanitize_file_name( wp_unslash($_FILES['file']['name'][$i]) );
-											$uploaded_file_tmp = sanitize_file_name( wp_unslash($_FILES['file']['tmp_name'][$i]) );
+											$tf_font_filename = sanitize_file_name( wp_unslash($file_name[$i]) );
+											$uploaded_file_tmp = sanitize_file_name( wp_unslash($file_tmp_name[$i]) );
 											$checked = wp_check_filetype_and_ext( $uploaded_file_tmp, $tf_font_filename);
 											if (isset($checked['ext']) && in_array($checked["ext"], $allowed_ext) && in_array($checked['type'], $allowed_mime_types)) {
 												$destination_path = $tf_itinerary_fonts .'/'. $tf_font_filename;

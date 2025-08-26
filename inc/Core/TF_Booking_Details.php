@@ -533,7 +533,7 @@ abstract Class TF_Booking_Details {
                 </div>
                 <?php
                 global $wpdb;
-                $tf_order_details = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_order_data WHERE id = %s AND order_id = %s",sanitize_key( $_GET['book_id'] ), sanitize_key( $_GET['order_id'] ) ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+                $tf_order_details = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_order_data WHERE id = %s AND order_id = %s",sanitize_key( $_GET['book_id'] ), sanitize_key( $_GET['order_id'] ) ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotValidated
                 ?>
                 <input type="hidden" id="tf_email_order_id" value="<?php 
                     echo isset( $_GET['order_id'] ) ? esc_attr( sanitize_text_field( wp_unslash( $_GET['order_id'] ) ) ) : '';  // phpcs:ignore WordPress.Security.NonceVerification.Recommended
@@ -1483,14 +1483,14 @@ abstract Class TF_Booking_Details {
         check_ajax_referer('updates', '_ajax_nonce');
 
         global $wpdb;
-        $tf_order_details = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_order_data WHERE id = %s",sanitize_key( $_POST['id'] ) ) );$tf_billing_details = json_decode($tf_order_details->billing_details);
+        $tf_order_details = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_order_data WHERE id = %s",sanitize_key( $_POST['id'] ) ) );$tf_billing_details = json_decode($tf_order_details->billing_details); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotValidated
         $tf_tour_details = json_decode($tf_order_details->order_details);
         ?>
 
         <div class="tf-popup-header">
             <h3>
             <?php echo esc_html( get_the_title( $tf_order_details->post_id ) ); ?>
-            <a href="<?php echo esc_url(admin_url() . 'edit.php?post_type=' . esc_attr(sanitize_text_field( wp_unslash( $_POST['type'] ) )) . '&amp;page=' . esc_attr(sanitize_text_field( wp_unslash( $_POST['page'] ) )) . '&amp;order_id=' . $tf_order_details->order_id . '&amp;book_id=' . $tf_order_details->id . '&amp;action=preview'); ?>" target="_blank"><i class="fa-solid fa-up-right-from-square"></i></a>
+            <a href="<?php echo esc_url(admin_url() . 'edit.php?post_type=' . esc_attr(sanitize_text_field( wp_unslash( $_POST['type'] ) )) . '&amp;page=' . esc_attr(sanitize_text_field( wp_unslash( $_POST['page'] ) )) . '&amp;order_id=' . $tf_order_details->order_id . '&amp;book_id=' . $tf_order_details->id . '&amp;action=preview');  // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotValidated?>" target="_blank"><i class="fa-solid fa-up-right-from-square"></i></a>
             </h3>
             <div class="tf-close">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">

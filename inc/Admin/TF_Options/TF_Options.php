@@ -844,9 +844,9 @@ class TF_Options {
 		//Verify Nonce
 		check_ajax_referer( 'updates', '_nonce' );
 
-		$categoryName = sanitize_title( wp_unslash($_POST['categoryName'] ));
-		$categoryTitle = sanitize_text_field( wp_unslash($_POST['categoryTitle'] ));
-		$parentCategory = sanitize_key( $_POST['parentCategory'] );
+		$categoryName = !empty($_POST['categoryName']) ? sanitize_title( wp_unslash($_POST['categoryName'] )) : '';
+		$categoryTitle = !empty($_POST['categoryTitle']) ? sanitize_text_field( wp_unslash($_POST['categoryTitle'] )) : '';
+		$parentCategory = !empty($_POST['parentCategory']) ? sanitize_key( $_POST['parentCategory'] ) : '';
 
 		$response = [];
 		if ( !empty($categoryName) && !empty($categoryTitle) ) {
@@ -879,8 +879,8 @@ class TF_Options {
 		//Verify Nonce
 		check_ajax_referer( 'updates', '_nonce' );
 
-		$categoryName = sanitize_title( wp_unslash($_POST['categoryName'] ));
-		$term_id = intval($_POST['term_id']);
+		$categoryName = !empty($_POST['categoryName']) ? sanitize_title( wp_unslash($_POST['categoryName'] )) : '';
+		$term_id = !empty($_POST['term_id']) ? intval($_POST['term_id']) : '';
 
 		$response = [];
 
@@ -949,8 +949,8 @@ class TF_Options {
 		//Verify Nonce
 		check_ajax_referer( 'updates', '_nonce' );
 
-		$categoryName = sanitize_title( wp_unslash($_POST['categoryName']) );
-		$term_id = intval($_POST['term_id']);
+		$categoryName = !empty($_POST['categoryName']) ? sanitize_title( wp_unslash($_POST['categoryName']) ) : '';
+		$term_id = !empty($_POST['term_id']) ? intval($_POST['term_id']) : '';
 
 		$response = [];
 

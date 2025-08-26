@@ -647,7 +647,7 @@ class Helper {
 	static function tf_search_result_sidebar_form( $placement = 'single' ) {
 
 		// Get post type
-		$post_type                     = sanitize_text_field( wp_unslash($_GET['type']) ) ?? ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$post_type                     = !empty($_GET['type']) ? sanitize_text_field( wp_unslash($_GET['type']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$place_title                   = '';
 		$date_format_for_users         = ! empty( self::tfopt( "tf-date-format-for-users" ) ) ? self::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 		$hotel_location_field_required = ! empty( self::tfopt( "required_location_hotel_search" ) ) ? self::tfopt( "required_location_hotel_search" ) : 0;

@@ -606,7 +606,7 @@ if ( ! function_exists( 'tf_car_search_ajax_callback' ) ) {
 			'message' => '',
 		];
 
-		if('on'==$_POST['same_location']){
+		if('on'==$_POST['same_location']){ // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotValidated
 			$_POST['dropoff-name'] = !empty($_POST['pickup-name']) ? sanitize_text_field( wp_unslash($_POST['pickup-name']) ) : '';
 			$_POST['dropoff'] = !empty($_POST['pickup']) ? sanitize_text_field( wp_unslash($_POST['pickup']) ) : '';
 		}

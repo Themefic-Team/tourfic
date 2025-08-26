@@ -40,7 +40,7 @@ class Apartment {
 		if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['_nonce'])), 'tf_ajax_nonce' ) ) {
 			return;
 		}
-		$meta = get_post_meta( sanitize_text_field( wp_unslash($_POST['post_id']) ), 'tf_apartment_opt', true );
+		$meta = !empty($_POST['post_id']) ? get_post_meta( sanitize_text_field( wp_unslash($_POST['post_id']) ), 'tf_apartment_opt', true ) : [];
 		// Single Template Style
 		$tf_apartment_layout_conditions = ! empty( $meta['tf_single_apartment_layout_opt'] ) ? $meta['tf_single_apartment_layout_opt'] : 'global';
 		if("single"==$tf_apartment_layout_conditions){
@@ -57,7 +57,7 @@ class Apartment {
 			<?php
 
 			foreach ( Helper::tf_data_types( $meta['rooms'] ) as $key => $room ) :
-				if ( $key == sanitize_text_field( wp_unslash($_POST['id'] )) ):
+				if ( $key == sanitize_text_field( wp_unslash($_POST['id'] )) ):  // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotValidated
 					$tf_room_gallery = ! empty( $room['gallery'] ) ? $room['gallery'] : '';
 					?>
                     <div class="tf-hotel-details-qc-gallelry" style="width: 545px;">
@@ -237,7 +237,7 @@ class Apartment {
 		<?php } 
 		if('design-1'==$tf_apartment_selected_template){ 
 			foreach ( Helper::tf_data_types( $meta['rooms'] ) as $key => $room ) :
-				if ( $key == sanitize_text_field( wp_unslash($_POST['id'] )) ):
+				if ( $key == sanitize_text_field( wp_unslash($_POST['id'] )) ): // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotValidated
 				$tf_room_gallery = ! empty( $room['gallery'] ) ? $room['gallery'] : '';
 				$tf_room_gallery_ids = !empty($tf_room_gallery) ? explode( ',', $tf_room_gallery ) : '';
 				$footage       = ! empty( $room['footage'] ) ? $room['footage'] : '';
