@@ -1332,7 +1332,7 @@ class Migrator {
 					}
 				}
 			}
-			wp_reset_query();
+			wp_reset_postdata();
 
 		}
 		if ( "tf_room" == $type ) {
@@ -1369,7 +1369,7 @@ class Migrator {
 					}
 				}
 			}
-			wp_reset_query();
+			wp_reset_postdata();
 
 		}
 		if ( "tf_tours" == $type ) {
@@ -1410,7 +1410,7 @@ class Migrator {
 					}
 				}
 			}
-			wp_reset_query();
+			wp_reset_postdata();
 		}
 		if ( "tf_apartment" == $type ) {
 			$searchable_keys = [
@@ -1446,7 +1446,7 @@ class Migrator {
 					}
 				}
 			}
-			wp_reset_query();
+			wp_reset_postdata();
 		}
 	}
 

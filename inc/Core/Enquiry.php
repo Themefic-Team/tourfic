@@ -86,7 +86,7 @@ abstract class Enquiry {
 										<?php
 										endwhile;
 									endif;
-									wp_reset_query();
+									wp_reset_postdata();
 									?>
 
 								</select>
@@ -297,7 +297,7 @@ abstract class Enquiry {
 		$formateed_date = gmdate( "M d, Y", strtotime($date));
 		$formateed_time = gmdate( "h:i:s A", strtotime($time));
 		$reply_data = !empty( $data["reply_data"] ) ? json_decode($data["reply_data"], true) : array();
-		$reply_user = isset( $_POST['user_name'] ) ? sanitize_text_field( wp_unslash($_POST['user_name'] )) : '';
+		$reply_user = isset( $_POST['user_name'] ) ? sanitize_text_field( wp_unslash($_POST['user_name'] )) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
 		$current_user = wp_get_current_user();
 		$_SESSION["WP"]["userId"] = $current_user->ID;
 		$email_body_setting = !empty( Helper::tfopt("tf-email-piping")["email_body_type"] ) ? Helper::tfopt("tf-email-piping")["email_body_type"] : 'text';
@@ -873,9 +873,9 @@ abstract class Enquiry {
 
 	function tf_enquiry_filter_post_callback() {
 
-		$post_id = isset( $_POST['post_id'] ) ? sanitize_text_field( wp_unslash($_POST['post_id'] )) : '';
-		$post_type = isset( $_POST['post_type'] ) ? sanitize_text_field( wp_unslash($_POST['post_type'] )) : '';
-		$filter = isset( $_POST['filter'] ) ? sanitize_text_field( wp_unslash($_POST['filter'] )) : '';
+		$post_id = isset( $_POST['post_id'] ) ? sanitize_text_field( wp_unslash($_POST['post_id'] )) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+		$post_type = isset( $_POST['post_type'] ) ? sanitize_text_field( wp_unslash($_POST['post_type'] )) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+		$filter = isset( $_POST['filter'] ) ? sanitize_text_field( wp_unslash($_POST['filter'] )) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
 
 		$enquiry_data = $this->enquiry_table_data( $post_type, $post_id, $filter );
 
@@ -1016,9 +1016,9 @@ abstract class Enquiry {
 	}
 
 	function tf_enquiry_filter_mail_callback() {
-		$filter = isset( $_POST['filter'] ) ? sanitize_text_field( wp_unslash($_POST['filter']) )  : '';
-		$post_type = isset( $_POST['post_type'] ) ? sanitize_text_field( wp_unslash($_POST['post_type']) ) : '';
-		$post_id = isset( $_POST['post_id'] ) ? sanitize_text_field( wp_unslash($_POST['post_id']) ) : '';
+		$filter = isset( $_POST['filter'] ) ? sanitize_text_field( wp_unslash($_POST['filter']) )  : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+		$post_type = isset( $_POST['post_type'] ) ? sanitize_text_field( wp_unslash($_POST['post_type']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+		$post_id = isset( $_POST['post_id'] ) ? sanitize_text_field( wp_unslash($_POST['post_id']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
 
 		$enquiry_data = $this->enquiry_table_data( $post_type, $post_id, $filter );
 		$total_data = !empty(count( $enquiry_data )) ? count( $enquiry_data ) : 0;

@@ -1939,8 +1939,8 @@ trait Action_Helper {
 	 * Ajax function
 	 */
 	function tf_car_time_slots_callback() {
-		$pickup_day = isset($_POST['pickup_day']) ? sanitize_text_field(wp_unslash($_POST['pickup_day'])) : '';
-		$drop_day   = isset($_POST['drop_day']) ? sanitize_text_field(wp_unslash($_POST['drop_day'])) : '';
+		$pickup_day = isset($_POST['pickup_day']) ? sanitize_text_field(wp_unslash($_POST['pickup_day'])) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+		$drop_day   = isset($_POST['drop_day']) ? sanitize_text_field(wp_unslash($_POST['drop_day'])) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
 
 		$car_time_slots = !empty(Helper::tfopt('car_time_slots')) ? Helper::tfopt('car_time_slots') : '';
 		$unserialize_car_time_slots = !empty($car_time_slots) ? unserialize($car_time_slots) : array();

@@ -259,7 +259,7 @@ abstract Class TF_Booking_Details {
 								<?php
 								endwhile;
 							endif;
-							wp_reset_query();
+							wp_reset_postdata();
 							?>
                         </select>
                     </div>
@@ -345,7 +345,7 @@ abstract Class TF_Booking_Details {
 								<?php
 								endwhile;
 							endif;
-							wp_reset_query();
+							wp_reset_postdata();
 							?>
                         </select>
                     </div>

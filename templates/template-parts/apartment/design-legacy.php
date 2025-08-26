@@ -694,7 +694,7 @@ use \Tourfic\Classes\Apartment\Apartment;
 						<?php
 						endif;
 					endwhile;
-					wp_reset_query(); ?>
+					wp_reset_postdata(); ?>
                 </div>
             </div>
         </div>

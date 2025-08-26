@@ -127,8 +127,6 @@ if ( ! class_exists( 'TF_Taxonomy_Metabox' ) ) {
 				$taxonomy_request = array_map('sanitize_text_field', wp_unslash($_POST[ $this->taxonomy_id ]));
 			}
 
-			// var_dump($taxonomy_request); exit;
-
 			if ( ! empty( $taxonomy_request ) && ! empty( $this->taxonomy_fields ) ) {
 				foreach ( $this->taxonomy_fields as $field ) {
 

@@ -32,7 +32,7 @@ class Wishlist {
 				// data to save
 				$data = [
 					'post_type' => !empty($_POST['type']) ? sanitize_text_field( wp_unslash( $_POST['type'] ) ): '',
-					'post_id'   => !empty($_POST['post'])absint( wp_unslash( $_POST['post'] ) ) : '',
+					'post_id'   => !empty($_POST['post']) ? absint( wp_unslash( $_POST['post'] ) ) : '',
 				];
 
 				if (is_user_logged_in()) {

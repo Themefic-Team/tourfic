@@ -504,7 +504,7 @@ class Pricing {
 			endwhile;
 
 		endif;
-		wp_reset_query();
+		wp_reset_postdata();
 		if ( ! empty( $tftours_min_maxprices ) && count( $tftours_min_maxprices ) > 1 ) {
 			$tour_max_price_val = max( $tftours_min_maxprices );
 			$tour_min_price_val = min( $tftours_min_maxprices );

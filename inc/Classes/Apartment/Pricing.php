@@ -386,7 +386,7 @@ class Pricing {
 
 		$min_max_price = array_filter($min_max_price);
 
-		wp_reset_query();
+		wp_reset_postdata();
 
 		if ( ! empty( $min_max_price ) && count( $min_max_price ) > 1 ) {
 			$max_price = max( $min_max_price );

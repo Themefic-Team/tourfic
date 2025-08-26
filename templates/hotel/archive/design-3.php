@@ -274,7 +274,7 @@ defined( 'ABSPATH' ) || exit;
                                             }
                                             Hotel::tf_hotel_archive_single_item();
                                         }
-                                        wp_reset_query();
+                                        wp_reset_postdata();
                                         ?>
                                         <div id="map-datas" style="display: none"><?php echo array_filter($locations) ? wp_json_encode(array_values($locations)) : wp_json_encode([]); ?></div>
                                         <div class="tf-pagination-bar">
