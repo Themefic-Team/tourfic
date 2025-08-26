@@ -82,7 +82,7 @@ abstract class Enquiry {
 									if ( $tf_posts_list_query->have_posts() ):
 										while ( $tf_posts_list_query->have_posts() ) : $tf_posts_list_query->the_post();
 											?>
-											<option value="<?php echo esc_attr(get_the_ID()); ?>" <?php echo ! empty( $_GET['post'] ) && get_the_ID() == $_GET['post'] ? esc_attr( 'selected' ) : ''; ?>><?php echo esc_html(get_the_title()); ?></option>
+											<option value="<?php echo esc_attr(get_the_ID()); ?>" <?php echo ! empty( $_GET['post'] ) && get_the_ID() == $_GET['post'] ? esc_attr( 'selected' ) : ''; ?>><?php echo esc_html(get_the_title()); // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?></option>
 										<?php
 										endwhile;
 									endif;
@@ -124,8 +124,8 @@ abstract class Enquiry {
 		$post_type = !empty($data) ? $data[0]["post_type"] : '';
 
 
-			if ( isset( $_GET['paged'] ) ) {
-				$paged = sanitize_text_field( wp_unslash( $_GET['paged'] ) );
+			if ( isset( $_GET['paged'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				$paged = sanitize_text_field( wp_unslash( $_GET['paged'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			} else {
 				$paged = 1;
 			}

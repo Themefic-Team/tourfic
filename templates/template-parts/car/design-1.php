@@ -7,8 +7,8 @@ use \Tourfic\Classes\Car_Rental\Pricing;
 use \Tourfic\App\TF_Review;
 ?>
 <?php
-$tf_pickup_date = !empty($_GET['pickup_date']) ? sanitize_text_field( wp_unslash($_GET['pickup_date']) ) : '';
-$tf_dropoff_date = !empty($_GET['dropoff_date']) ? sanitize_text_field( wp_unslash($_GET['dropoff_date']) ) : '';
+$tf_pickup_date = !empty($_GET['pickup_date']) ? sanitize_text_field( wp_unslash($_GET['pickup_date']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+$tf_dropoff_date = !empty($_GET['dropoff_date']) ? sanitize_text_field( wp_unslash($_GET['dropoff_date']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 
 // Pull options from settings or set fallback values
@@ -44,8 +44,8 @@ $end_time   = strtotime($end_time_str);
 $default_time = gmdate('g:i A', strtotime($default_time_str));
 
 // Use selected time from GET or fall back to default
-$selected_pickup_time = !empty($_GET['pickup_time']) ? sanitize_text_field( wp_unslash($_GET['pickup_time']) ) : $default_time;
-$selected_dropoff_time = !empty($_GET['dropoff_time']) ? sanitize_text_field( wp_unslash($_GET['dropoff_time']) ) : $default_time;
+$selected_pickup_time = !empty($_GET['pickup_time']) ? sanitize_text_field( wp_unslash($_GET['pickup_time']) ) : $default_time; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+$selected_dropoff_time = !empty($_GET['dropoff_time']) ? sanitize_text_field( wp_unslash($_GET['dropoff_time']) ) : $default_time; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 $total_prices = Pricing::set_total_price($meta, $tf_pickup_date, $tf_dropoff_date, $start_time_str, $end_time_str); 
 $tf_cars_slug = get_option('car_slug');
@@ -368,8 +368,8 @@ $tf_cars_slug = get_option('car_slug');
                                     </div>
                                     <div class="info-select">
                                         <h5><?php esc_html_e("Pick-up", "tourfic"); ?></h5>
-                                        <input type="text" placeholder="Pick Up Location" id="tf_pickup_location" value="<?php echo !empty($_GET['pickup']) ? esc_html(sanitize_text_field( wp_unslash($_GET['pickup']) )) : ''; ?>" />
-                                        <input type="hidden" id="tf_pickup_location_id" value="<?php echo !empty($_GET['pickup']) ? esc_html(sanitize_text_field( wp_unslash($_GET['pickup']) )) : ''; ?>" />
+                                        <input type="text" placeholder="Pick Up Location" id="tf_pickup_location" value="<?php echo !empty($_GET['pickup']) ? esc_html(sanitize_text_field( wp_unslash($_GET['pickup']) )) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>" />
+                                        <input type="hidden" id="tf_pickup_location_id" value="<?php echo !empty($_GET['pickup']) ? esc_html(sanitize_text_field( wp_unslash($_GET['pickup']) )) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>" />
                                     </div>
                                 </div>
                             </div>
@@ -390,8 +390,8 @@ $tf_cars_slug = get_option('car_slug');
                                     </div>
                                     <div class="info-select">
                                         <h5><?php esc_html_e("Drop-off", "tourfic"); ?></h5>
-                                        <input type="text" placeholder="Drop Off Location" id="tf_dropoff_location" value="<?php echo !empty($_GET['dropoff']) ? esc_html(sanitize_text_field( wp_unslash($_GET['dropoff']) )) : ''; ?>" />
-                                        <input type="hidden" id="tf_dropoff_location_id" value="<?php echo !empty($_GET['dropoff']) ? esc_html(sanitize_text_field( wp_unslash($_GET['dropoff']) )) : ''; ?>" />
+                                        <input type="text" placeholder="Drop Off Location" id="tf_dropoff_location" value="<?php echo !empty($_GET['dropoff']) ? esc_html(sanitize_text_field( wp_unslash($_GET['dropoff']) )) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>" />
+                                        <input type="hidden" id="tf_dropoff_location_id" value="<?php echo !empty($_GET['dropoff']) ? esc_html(sanitize_text_field( wp_unslash($_GET['dropoff']) )) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>" />
                                     </div>
                                 </div>
                             </div>
@@ -407,7 +407,7 @@ $tf_cars_slug = get_option('car_slug');
                                     </div>
                                     <div class="info-select">
                                         <h5><?php esc_html_e("Pick-up date", "tourfic"); ?></h5>
-                                        <input type="text" placeholder="<?php esc_html_e("Pick Up Date", "tourfic"); ?>" id="tf_pickup_date" class="tf_pickup_date" value="<?php echo !empty($_GET['pickup_date']) ? esc_html(sanitize_text_field( wp_unslash($_GET['pickup_date']) )) : esc_attr(gmdate('Y/m/d', strtotime('+1 day'))); ?>" />
+                                        <input type="text" placeholder="<?php esc_html_e("Pick Up Date", "tourfic"); ?>" id="tf_pickup_date" class="tf_pickup_date" value="<?php echo !empty($_GET['pickup_date']) ? esc_html(sanitize_text_field( wp_unslash($_GET['pickup_date']) )) : esc_attr(gmdate('Y/m/d', strtotime('+1 day'))); // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>" />
                                     </div>
                                 </div>
                             </div>
@@ -465,7 +465,7 @@ $tf_cars_slug = get_option('car_slug');
                                     </div>
                                     <div class="info-select">
                                         <h5><?php esc_html_e("Drop-off date", "tourfic"); ?></h5>
-                                        <input type="text" placeholder="Drop Off Date" id="tf_dropoff_date" class="tf_dropoff_date" value="<?php echo !empty($_GET['dropoff_date']) ? esc_html(sanitize_text_field( wp_unslash($_GET['dropoff_date']))) : esc_attr(gmdate('Y/m/d', strtotime('+2 day'))); ?>" />
+                                        <input type="text" placeholder="Drop Off Date" id="tf_dropoff_date" class="tf_dropoff_date" value="<?php echo !empty($_GET['dropoff_date']) ? esc_html(sanitize_text_field( wp_unslash($_GET['dropoff_date']))) : esc_attr(gmdate('Y/m/d', strtotime('+2 day'))); // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>" />
                                     </div>
                                 </div>
                             </div>

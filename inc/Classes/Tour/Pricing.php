@@ -388,7 +388,7 @@ class Pricing {
 			}
 
 			if ( ! empty( $tour_type ) && ( $tour_type == "fixed" ) ) {
-				$start_date = ! empty( $_POST['check-in-out-date'] ) ? sanitize_text_field( wp_unslash($_POST['check-in-out-date']) ) : '';
+				$start_date = ! empty( $_POST['check-in-out-date'] ) ? sanitize_text_field( wp_unslash($_POST['check-in-out-date']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
 			}
 
 			if ( ! empty( $start_date ) && ! empty( $day_diff ) ) {

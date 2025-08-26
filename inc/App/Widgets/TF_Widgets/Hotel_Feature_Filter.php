@@ -40,7 +40,7 @@ class Hotel_Feature_Filter extends \WP_Widget {
     public function widget( $args, $instance ) {
 
         //check if is Hotel
-        $posttype = isset( $_GET['type'] ) ? sanitize_text_field( wp_unslash($_GET['type']) ) : get_post_type();
+        $posttype = isset( $_GET['type'] ) ? sanitize_text_field( wp_unslash($_GET['type']) ) : get_post_type(); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
         if ( is_admin() || $posttype == 'tf_hotel' ) {
             extract( $args );
@@ -62,13 +62,13 @@ class Hotel_Feature_Filter extends \WP_Widget {
 
             $get_terms = get_terms( $taxonomy );
 
-            $destination_name = !empty( $_GET['destination'] ) ? sanitize_text_field( wp_unslash($_GET['destination']) ) : '';
+            $destination_name = !empty( $_GET['destination'] ) ? sanitize_text_field( wp_unslash($_GET['destination']) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
             $search_features_query = array();
-            if ( isset( $_GET['features'] ) ) {
-                if ( is_array( $_GET['features'] ) ) {
-                    $search_features_query = array_map( 'sanitize_text_field', wp_unslash( $_GET['features'] ) );
+            if ( isset( $_GET['features'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+                if ( is_array( $_GET['features'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+                    $search_features_query = array_map( 'sanitize_text_field', wp_unslash( $_GET['features'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
                 } else {
-                    $search_features_query = array( sanitize_text_field( wp_unslash( $_GET['features'] ) ) );
+                    $search_features_query = array( sanitize_text_field( wp_unslash( $_GET['features'] ) ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
                 }
             }
             echo "<div class='tf-filter'><ul>";

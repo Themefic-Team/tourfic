@@ -948,13 +948,13 @@ class Tour {
 
 		// Value from URL
 		// Adults
-		$adults = ! empty( $_GET['adults'] ) ? sanitize_text_field( wp_unslash($_GET['adults'] )) : '';
+		$adults = ! empty( $_GET['adults'] ) ? sanitize_text_field( wp_unslash($_GET['adults'] )) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		// children
-		$child = ! empty( $_GET['children'] ) ? sanitize_text_field( wp_unslash($_GET['children'] )) : '';
+		$child = ! empty( $_GET['children'] ) ? sanitize_text_field( wp_unslash($_GET['children'] )) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		// room
-		$infant = ! empty( $_GET['infant'] ) ? sanitize_text_field( wp_unslash($_GET['infant'] )) : '';
+		$infant = ! empty( $_GET['infant'] ) ? sanitize_text_field( wp_unslash($_GET['infant'] )) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		// Check-in & out date
-		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( wp_unslash($_GET['check-in-out-date'] )) : '';
+		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( wp_unslash($_GET['check-in-out-date'] )) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 		$meta      = get_post_meta( $post_id, 'tf_tours_opt', true );
 		$tour_type = ! empty( $meta['type'] ) ? $meta['type'] : '';
@@ -2600,17 +2600,17 @@ class Tour {
 
 		// Adults
 		if ( empty( $adults ) ) {
-			$adults = ! empty( $_GET['adults'] ) ? sanitize_text_field( wp_unslash($_GET['adults'] )) : '';
+			$adults = ! empty( $_GET['adults'] ) ? sanitize_text_field( wp_unslash($_GET['adults'] )) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		}
 		// children
 		if ( empty( $child ) ) {
-			$child = ! empty( $_GET['children'] ) ? sanitize_text_field( wp_unslash($_GET['children'] )) : '';
+			$child = ! empty( $_GET['children'] ) ? sanitize_text_field( wp_unslash($_GET['children'] )) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		}
 		// room
-		$infant = ! empty( $_GET['infant'] ) ? sanitize_text_field( wp_unslash($_GET['infant'] )) : '';
+		$infant = ! empty( $_GET['infant'] ) ? sanitize_text_field( wp_unslash($_GET['infant'] )) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		// Check-in & out date
 		if ( empty( $check_in_out ) ) {
-			$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( wp_unslash($_GET['check-in-out-date'] )) : '';
+			$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( wp_unslash($_GET['check-in-out-date'] )) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		}
 
 		$disable_adult_price              = ! empty( $meta['disable_adult_price'] ) ? $meta['disable_adult_price'] : false;

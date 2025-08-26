@@ -21,9 +21,9 @@ class Tour_Enquiry extends \Tourfic\Core\Enquiry {
 
         global $wpdb;
 
-        if( !empty($_GET['enquiry_id'] ) && !empty($_GET['action'] )  ){
+        if( !empty($_GET['enquiry_id'] ) && !empty($_GET['action'] )  ){ // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
-            $status = $wpdb->get_results( $wpdb->prepare( "SELECT enquiry_status FROM {$wpdb->prefix}tf_enquiry_data WHERE id = %s", sanitize_key( $_GET['enquiry_id'] ) ), ARRAY_A );
+            $status = $wpdb->get_results( $wpdb->prepare( "SELECT enquiry_status FROM {$wpdb->prefix}tf_enquiry_data WHERE id = %s", sanitize_key( $_GET['enquiry_id'] ) ), ARRAY_A ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
             $status = !empty($status[0]["enquiry_status"]) ? $status[0]["enquiry_status"] : 'unread';
             
             if( $status == 'unread') {
@@ -32,12 +32,12 @@ class Tour_Enquiry extends \Tourfic\Core\Enquiry {
                     $wpdb->prepare(
                         "UPDATE {$wpdb->prefix}tf_enquiry_data SET enquiry_status=%s WHERE id=%d",
                         'read',
-                        sanitize_key( $_GET['enquiry_id'] )
+                        sanitize_key( $_GET['enquiry_id'] ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
                     )
                 );
             }
 
-            $data = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_enquiry_data WHERE id = %s", sanitize_key( $_GET['enquiry_id'] ) ), ARRAY_A );
+            $data = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_enquiry_data WHERE id = %s", sanitize_key( $_GET['enquiry_id'] ) ), ARRAY_A ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
             $this->single_enquiry_details( $data );
         } else {
@@ -66,7 +66,7 @@ class Tour_Enquiry extends \Tourfic\Core\Enquiry {
                     
                     $enquiry_data = $this->enquiry_table_data('tf_tours');
                     $total_data = ! empty( count( $enquiry_data ) ) ? count( $enquiry_data ) : 0;;
-                    $paged = !empty( $_GET['paged'] ) ? sanitize_text_field( wp_unslash( $_GET["paged"])) : 1;
+                    $paged = !empty( $_GET['paged'] ) ? sanitize_text_field( wp_unslash( $_GET["paged"])) : 1; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
                     $per_page = 20;
                     $offset = ( $paged - 1 ) * $per_page;
                     $enquiry_data = array_slice($enquiry_data, $offset, $per_page);

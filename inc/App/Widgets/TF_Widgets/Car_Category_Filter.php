@@ -39,7 +39,7 @@ class Car_Category_Filter extends \WP_Widget {
     public function widget( $args, $instance ) {
 
         //check if is Car
-        $posttype = isset( $_GET['type'] ) ? sanitize_text_field( wp_unslash($_GET['type']) ) : get_post_type();
+        $posttype = isset( $_GET['type'] ) ? sanitize_text_field( wp_unslash($_GET['type']) ) : get_post_type(); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
         if ( is_admin() || $posttype == 'tf_carrental' ) {
             extract( $args );

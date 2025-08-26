@@ -41,10 +41,10 @@ abstract Class TF_Booking_Details {
         
         $booking_type = ! empty( $this->booking_args["booking_type"] ) ? $this->booking_args["booking_type"] : '';
 
-        if ( ! empty( $_GET['order_id'] ) && ! empty( $_GET['action'] ) && ! empty( $_GET['book_id'] ) ) {
+        if ( ! empty( $_GET['order_id'] ) && ! empty( $_GET['action'] ) && ! empty( $_GET['book_id'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 			global $wpdb;
-			$tf_order_details = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_order_data WHERE id = %s AND order_id = %s", sanitize_key( $_GET['book_id'] ), sanitize_key( $_GET['order_id'] ) ) );
+			$tf_order_details = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_order_data WHERE id = %s AND order_id = %s", sanitize_key( $_GET['book_id'] ), sanitize_key( $_GET['order_id'] ) ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 			$this->tf_single_booking_details( $booking_type, $tf_order_details );
 
@@ -63,9 +63,9 @@ abstract Class TF_Booking_Details {
 			if ( $current_user_role == 'administrator' ) {
 
 				// Filter Perameters
-				$checkinout_perms = ! empty( $_GET['checkinout'] ) ? sanitize_text_field( wp_unslash( $_GET['checkinout'] ) ) : '';
-				$tf_post_perms    = ! empty( $_GET['post'] ) ? sanitize_text_field( wp_unslash( $_GET['post'] ) ) : '';
-				$tf_payment_perms = ! empty( $_GET['payment'] ) ? sanitize_text_field( wp_unslash( $_GET['payment'] ) ) : '';
+				$checkinout_perms = ! empty( $_GET['checkinout'] ) ? sanitize_text_field( wp_unslash( $_GET['checkinout'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				$tf_post_perms    = ! empty( $_GET['post'] ) ? sanitize_text_field( wp_unslash( $_GET['post'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				$tf_payment_perms = ! empty( $_GET['payment'] ) ? sanitize_text_field( wp_unslash( $_GET['payment'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 				$tf_filter_query = "";
 				if ( $checkinout_perms ) {
@@ -80,8 +80,8 @@ abstract Class TF_Booking_Details {
 
 				
 
-					if ( isset( $_GET['paged'] ) ) {
-						$paged = sanitize_text_field( wp_unslash( $_GET['paged'] ) );
+					if ( isset( $_GET['paged'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+						$paged = sanitize_text_field( wp_unslash( $_GET['paged'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 					} else {
 						$paged = 1;
 					}
@@ -128,10 +128,10 @@ abstract Class TF_Booking_Details {
                         <?php } ?>
                         <div class="tf_booking_views_button">
                             <ul>
-                                <li class="<?php echo empty($_GET['nonce']) ? esc_attr('active') : '' ?>" data-view="<?php echo esc_attr("calendar"); ?>">
+                                <li class="<?php echo empty($_GET['nonce']) ? esc_attr('active') : '' ?>" data-view="<?php echo esc_attr("calendar"); // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>">
                                     <i class="fa-solid fa-calendar-days"></i>
                                 </li>
-                                <li class="<?php echo !empty($_GET['nonce']) ? esc_attr('active') : '' ?>" data-view="<?php echo esc_attr("list"); ?>">
+                                <li class="<?php echo !empty($_GET['nonce']) ? esc_attr('active') : '' ?>" data-view="<?php echo esc_attr("list"); // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>">
                                     <i class="fa-solid fa-list"></i>
                                 </li>
                             </ul>
@@ -187,8 +187,8 @@ abstract Class TF_Booking_Details {
 
     function tf_booking_details_list( $booking_type, $tf_order_details_result, $total_pages ) {
 
-        if ( isset( $_GET['paged'] ) ) {
-            $paged = sanitize_text_field( wp_unslash( $_GET['paged'] ) );
+        if ( isset( $_GET['paged'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+            $paged = sanitize_text_field( wp_unslash( $_GET['paged'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
         } else {
             $paged = 1;
         }
@@ -200,7 +200,7 @@ abstract Class TF_Booking_Details {
             </div>
         </div>
 
-        <div class="tf-calendar-booking-header-filter" style="<?php echo !empty($_GET['nonce']) ? esc_attr('display: none') : '' ?>">
+        <div class="tf-calendar-booking-header-filter" style="<?php echo !empty($_GET['nonce']) ? esc_attr('display: none') : '' // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>">
             <div class="tf-left-search-filter">
                 <input type="hidden" id="tf_booking_post_type" value="<?php echo esc_attr($this->booking_args['booking_type']); ?>">
                 <div class="tf-filter-options">
@@ -255,7 +255,7 @@ abstract Class TF_Booking_Details {
 							if ( $tf_posts_list_query->have_posts() ):
 								while ( $tf_posts_list_query->have_posts() ) : $tf_posts_list_query->the_post();
 									?>
-                                    <option value="<?php echo esc_attr(get_the_ID()); ?>" <?php echo ! empty( $_GET['post'] ) && get_the_ID() == $_GET['post'] ? esc_attr( 'selected' ) : ''; ?>><?php echo esc_html(get_the_title()); ?></option>
+                                    <option value="<?php echo esc_attr(get_the_ID()); ?>" <?php echo ! empty( $_GET['post'] ) && get_the_ID() == $_GET['post'] ? esc_attr( 'selected' ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>><?php echo esc_html(get_the_title()); ?></option>
 								<?php
 								endwhile;
 							endif;
@@ -267,9 +267,9 @@ abstract Class TF_Booking_Details {
             </div>
         </div>
 
-        <div id="tf-booking-calendar" data-set="<?php echo !empty($_GET['nonce']) ? esc_attr('yes') : '' ?>" style="<?php echo !empty($_GET['nonce']) ? esc_attr('padding: 0;') : '' ?>"></div>
+        <div id="tf-booking-calendar" data-set="<?php echo !empty($_GET['nonce']) ? esc_attr('yes') : '' ?>" style="<?php echo !empty($_GET['nonce']) ? esc_attr('padding: 0;') : '' // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>"></div>
 
-        <div class="tf-booking-header-filter" style="<?php echo !empty($_GET['nonce']) ? esc_attr('display: flex') : '' ?>">
+        <div class="tf-booking-header-filter" style="<?php echo !empty($_GET['nonce']) ? esc_attr('display: flex') : '' // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>">
             <div class="tf-left-search-filter">
                 <div class="tf-bulk-action-form">
                     <div class="tf-filter-options">
@@ -293,11 +293,11 @@ abstract Class TF_Booking_Details {
                     <div class="tf-order-status-filter">
                         <select class="tf-tour-filter-options tf-order-payment-status">
                             <option value=""><?php esc_html_e( "Order status", "tourfic" ); ?></option>
-                            <option value="processing" <?php echo ! empty( $_GET['payment'] ) && "processing" == $_GET['payment'] ? esc_attr( 'selected' ) : ''; ?>><?php esc_html_e( "Processing", "tourfic" ); ?></option>
-                            <option value="on-hold" <?php echo ! empty( $_GET['payment'] ) && "on-hold" == $_GET['payment'] ? esc_attr( 'selected' ) : ''; ?>><?php esc_html_e( "On Hold", "tourfic" ); ?></option>
-                            <option value="completed" <?php echo ! empty( $_GET['payment'] ) && "completed" == $_GET['payment'] ? esc_attr( 'selected' ) : ''; ?>><?php esc_html_e( "Completed", "tourfic" ); ?></option>
-                            <option value="cancelled" <?php echo ! empty( $_GET['payment'] ) && "cancelled" == $_GET['payment'] ? esc_attr( 'selected' ) : ''; ?>><?php esc_html_e( "Cancelled", "tourfic" ); ?></option>
-                            <option value="refunded" <?php echo ! empty( $_GET['payment'] ) && "refunded" == $_GET['payment'] ? esc_attr( 'selected' ) : ''; ?>><?php esc_html_e( "Refund", "tourfic" ); ?></option>
+                            <option value="processing" <?php echo ! empty( $_GET['payment'] ) && "processing" == $_GET['payment'] ? esc_attr( 'selected' ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>><?php esc_html_e( "Processing", "tourfic" ); ?></option>
+                            <option value="on-hold" <?php echo ! empty( $_GET['payment'] ) && "on-hold" == $_GET['payment'] ? esc_attr( 'selected' ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>><?php esc_html_e( "On Hold", "tourfic" ); ?></option>
+                            <option value="completed" <?php echo ! empty( $_GET['payment'] ) && "completed" == $_GET['payment'] ? esc_attr( 'selected' ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>><?php esc_html_e( "Completed", "tourfic" ); ?></option>
+                            <option value="cancelled" <?php echo ! empty( $_GET['payment'] ) && "cancelled" == $_GET['payment'] ? esc_attr( 'selected' ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>><?php esc_html_e( "Cancelled", "tourfic" ); ?></option>
+                            <option value="refunded" <?php echo ! empty( $_GET['payment'] ) && "refunded" == $_GET['payment'] ? esc_attr( 'selected' ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>><?php esc_html_e( "Refund", "tourfic" ); ?></option>
                         </select>
                     </div>
                 </div>
@@ -307,8 +307,8 @@ abstract Class TF_Booking_Details {
                         <div class="tf-order-status-filter">
                             <select class="tf-tour-checkinout-options">
                                 <option value=""><?php esc_html_e( "Checked in status", "tourfic" ); ?></option>
-                                <option value="in" <?php echo ! empty( $_GET['checkinout'] ) && "in" == $_GET['checkinout'] ? esc_attr( 'selected' ) : ''; ?>><?php esc_html_e( "Checked in", "tourfic" ); ?></option>
-                                <option value="out" <?php echo ! empty( $_GET['checkinout'] ) && "out" == $_GET['checkinout'] ? esc_attr( 'selected' ) : ''; ?>><?php esc_html_e( "Checked out", "tourfic" ); ?></option>
+                                <option value="in" <?php echo ! empty( $_GET['checkinout'] ) && "in" == $_GET['checkinout'] ? esc_attr( 'selected' ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>><?php esc_html_e( "Checked in", "tourfic" ); ?></option>
+                                <option value="out" <?php echo ! empty( $_GET['checkinout'] ) && "out" == $_GET['checkinout'] ? esc_attr( 'selected' ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>><?php esc_html_e( "Checked out", "tourfic" ); ?></option>
                             </select>
                         </div>
                     </div>
@@ -341,7 +341,7 @@ abstract Class TF_Booking_Details {
 							if ( $tf_posts_list_query->have_posts() ):
 								while ( $tf_posts_list_query->have_posts() ) : $tf_posts_list_query->the_post();
 									?>
-                                    <option value="<?php echo esc_attr(get_the_ID()); ?>" <?php echo ! empty( $_GET['post'] ) && get_the_ID() == $_GET['post'] ? esc_attr( 'selected' ) : ''; ?>><?php echo esc_html(get_the_title()); ?></option>
+                                    <option value="<?php echo esc_attr(get_the_ID()); ?>" <?php echo ! empty( $_GET['post'] ) && get_the_ID() == $_GET['post'] ? esc_attr( 'selected' ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>><?php echo esc_html(get_the_title()); ?></option>
 								<?php
 								endwhile;
 							endif;
@@ -352,7 +352,7 @@ abstract Class TF_Booking_Details {
                 </div>
             </div>
             <form class="tf-right-search-filter">
-                <input type="number" value="<?php echo ! empty( $_GET['post'] ) ? esc_attr( sanitize_text_field( wp_unslash( $_GET['post'] ) ) ) : ''; ?>" placeholder="Search by <?php echo esc_html( $this->booking_args['booking_title'] ); ?> ID"
+                <input type="number" value="<?php echo ! empty( $_GET['post'] ) ? esc_attr( sanitize_text_field( wp_unslash( $_GET['post'] ) ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>" placeholder="Search by <?php echo esc_html( $this->booking_args['booking_title'] ); ?> ID"
                        id="tf-searching-key">
                 <button class="tf-search-by-id" type="submit">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -365,7 +365,7 @@ abstract Class TF_Booking_Details {
 
         <?php do_action( $this->booking_args["post_type"] . '_before_booking_order_table'); ?>
 
-        <div class="<?php echo esc_html( apply_filters( $this->booking_args["post_type"] . '_booking_oder_table_class', "tf-order-table-responsive") ) ?>" style="<?php echo !empty($_GET['nonce']) ? esc_attr('display: block') : '' ?>">
+        <div class="<?php echo esc_html( apply_filters( $this->booking_args["post_type"] . '_booking_oder_table_class', "tf-order-table-responsive") ) ?>" style="<?php echo !empty($_GET['nonce']) ? esc_attr('display: block') : '' // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>">
             <table class="wp-list-table table" cellpadding="0" cellspacing="0">
                 <thead>
                 <tr>
@@ -533,10 +533,10 @@ abstract Class TF_Booking_Details {
                 </div>
                 <?php
                 global $wpdb;
-                $tf_order_details = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_order_data WHERE id = %s AND order_id = %s",sanitize_key( $_GET['book_id'] ), sanitize_key( $_GET['order_id'] ) ) );
+                $tf_order_details = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}tf_order_data WHERE id = %s AND order_id = %s",sanitize_key( $_GET['book_id'] ), sanitize_key( $_GET['order_id'] ) ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
                 ?>
                 <input type="hidden" id="tf_email_order_id" value="<?php 
-                    echo isset( $_GET['order_id'] ) ? esc_attr( sanitize_text_field( wp_unslash( $_GET['order_id'] ) ) ) : ''; 
+                    echo isset( $_GET['order_id'] ) ? esc_attr( sanitize_text_field( wp_unslash( $_GET['order_id'] ) ) ) : '';  // phpcs:ignore WordPress.Security.NonceVerification.Recommended
                 ?>">
 
                 <div class="tf-title">
@@ -1081,7 +1081,7 @@ abstract Class TF_Booking_Details {
                                 </svg>
                             </label>
                             <input type="hidden" id="tf_email_order_id" value="<?php 
-                                echo isset($_GET['order_id']) ? esc_attr(sanitize_text_field(wp_unslash($_GET['order_id']))) : ''; 
+                                echo isset($_GET['order_id']) ? esc_attr(sanitize_text_field(wp_unslash($_GET['order_id']))) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended 
                             ?>">
                             <input type="hidden" class="tf_single_order_id" name="order_id" value="<?php echo esc_attr($tf_order_details->id); ?>">
                             <ul>

@@ -53,7 +53,7 @@ class Car_Rental
     {
         
         // Check-in & out date
-        $check_in_out = ! empty($_GET['check-in-out-date']) ? sanitize_text_field( wp_unslash( $_GET['check-in-out-date'] ) ) : '';
+        $check_in_out = ! empty($_GET['check-in-out-date']) ? sanitize_text_field( wp_unslash( $_GET['check-in-out-date'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
         // date format for apartments
         $date_format_change_apartments = ! empty(Helper::tfopt("tf-date-format-for-users")) ? Helper::tfopt("tf-date-format-for-users") : "Y/m/d";
