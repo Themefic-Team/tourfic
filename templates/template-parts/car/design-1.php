@@ -942,7 +942,7 @@ $tf_cars_slug = get_option('car_slug');
             <?php Helper::tf_flatpickr_locale( "root" ); ?>
 
             $(".tf-single-template__one #tf_dropoff_date").on("click", function () {
-                $(".tf-single-template__one #tf_pickup_date").trigger("click");
+                $(this).closest(".tf-single-template__one").find("#tf_pickup_date").trigger("click");
             });
             $(".tf-single-template__one #tf_pickup_date").flatpickr({
                 enableTime: false,

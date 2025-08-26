@@ -929,7 +929,7 @@ class Car_Rental
                         <?php Helper::tf_flatpickr_locale('root'); ?>
 
                         $(".tf_dropoff_date").on("click", function () {
-                            $(".tf_pickup_date").trigger("click");
+                            $(this).closest("#tf_car_booking").find(".tf_pickup_date").trigger("click");
                         });
                         // Initialize the pickup date picker
                         var pickupFlatpickr = $(".tf_pickup_date").flatpickr({

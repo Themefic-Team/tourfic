@@ -44,14 +44,13 @@
         function tourfic_car_autocomplete(inp, arr) {
             /*the autocomplete function takes two arguments,
             the text field element and an array of possible autocompleted values:*/
-
             // Executes when some one click in the search form location
             inp.addEventListener("focus", function () {
                     closeAllLists();
                     let a = document.createElement("DIV");
                     a.setAttribute("id", this.id + "-autocomplete-list");
                     a.setAttribute("class", "autocomplete-items");
-                    this.parentNode.appendChild(a);
+                    inp.parentNode.appendChild(a);
                     for (const [key, value] of Object.entries(arr)) {
                         let b = document.createElement("DIV");
                         b.innerHTML = value;
@@ -67,7 +66,7 @@
                         a.appendChild(b);
                     }
                 // }
-            })
+            });
 
             var currentFocus;
             /*execute a function when someone writes in the text field:*/
@@ -81,7 +80,7 @@
                 a.setAttribute("id", this.id + "autocomplete-list");
                 a.setAttribute("class", "autocomplete-items");
                 /*append the DIV element as a child of the autocomplete container:*/
-                this.parentNode.appendChild(a);
+                inp.parentNode.appendChild(a);
                 var $notfound = [];
                 /*for each item in the array...*/
                 for (const [key, value] of Object.entries(arr)) {
@@ -194,15 +193,19 @@
         }
 
         // Car location autocomplete
-        var car_pickup_input = document.getElementById("tf_pickup_location");
+        var car_pickup_inputs  = document.querySelectorAll("#tf_pickup_location");
         var car_locations = tf_params.car_locations;
-        if (car_pickup_input) {
-            tourfic_car_autocomplete(car_pickup_input, car_locations);
+        if (car_pickup_inputs ) {
+            car_pickup_inputs.forEach(function(inp) {
+                tourfic_car_autocomplete(inp, car_locations);
+            });
         }
 
-        var car_dropoff_input = document.getElementById("tf_dropoff_location");
-        if (car_dropoff_input) {
-            tourfic_car_autocomplete(car_dropoff_input, car_locations);
+        var car_dropoff_inputs = document.querySelectorAll("#tf_dropoff_location");
+        if (car_dropoff_inputs) {
+            car_dropoff_inputs.forEach(function(inp) {
+                tourfic_car_autocomplete(inp, car_locations);
+            })
         }
         
         $(".tf-booking-popup-header .tf-close-popup").on("click", function (e) {
