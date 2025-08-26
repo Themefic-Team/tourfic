@@ -974,7 +974,7 @@ class Enqueue {
 					'i18n'                             => array(
 						'no_services_selected' => esc_html__( 'Please select at least one service.', 'tourfic' ),
 					),
-					'is_pro'                           => true,
+					
 				)
 			);
 

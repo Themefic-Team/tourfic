@@ -123,7 +123,7 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 			return;
 		}
 
-		$tour_id      = isset( $_POST['tour_id'] ) ? sanitize_text_field( $_POST['tour_id'] ) : '';
+		$tour_id      = isset( $_POST['tour_id'] ) ? sanitize_text_field( wp_unslash( $_POST['tour_id']) ) : '';
 		$meta         = get_post_meta( $tour_id, 'tf_tours_opt', true );
 		$tour_type    = ! empty( $meta['type'] ) ? $meta['type'] : '';
 		$custom_avail = ! empty( $meta['custom_avail'] ) ? $meta['custom_avail'] : '';

@@ -35,18 +35,18 @@ class Hotel_Offline_Booking extends Without_Payment_Booking{
 		 *
 		 * With errors
 		 */
-		$post_id         = isset( $_POST['post_id'] ) ? intval( sanitize_text_field( $_POST['post_id'] ) ) : null;
-		$room_id         = isset( $_POST['room_id'] ) ? intval( sanitize_text_field( $_POST['room_id'] ) ) : null;
-		$unique_id       = isset( $_POST['unique_id'] ) ? intval( sanitize_text_field( $_POST['unique_id'] ) ) : null;
-		$location        = isset( $_POST['location'] ) ? sanitize_text_field( $_POST['location'] ) : '';
-		$adult           = isset( $_POST['adult'] ) ? intval( sanitize_text_field( $_POST['adult'] ) ) : '0';
-		$child           = isset( $_POST['child'] ) ? intval( sanitize_text_field( $_POST['child'] ) ) : '0';
-		$children_ages   = isset( $_POST['children_ages'] ) ? sanitize_text_field( $_POST['children_ages'] ) : '0';
-		$room_selected   = isset( $_POST['room'] ) ? intval( sanitize_text_field( $_POST['room'] ) ) : '0';
-		$check_in        = isset( $_POST['check_in_date'] ) ? sanitize_text_field( $_POST['check_in_date'] ) : '';
-		$check_out       = isset( $_POST['check_out_date'] ) ? sanitize_text_field( $_POST['check_out_date'] ) : '';
-		$deposit         = isset( $_POST['deposit'] ) ? sanitize_text_field( $_POST['deposit'] ) : false;
-		$airport_service = isset( $_POST['airport_service'] ) ? sanitize_text_field( $_POST['airport_service'] ) : '';
+		$post_id         = isset( $_POST['post_id'] ) ? intval( sanitize_text_field(wp_unslash( $_POST['post_id'] ) )) : null;
+		$room_id         = isset( $_POST['room_id'] ) ? intval( sanitize_text_field(wp_unslash( $_POST['room_id'] ) )) : null;
+		$unique_id       = isset( $_POST['unique_id'] ) ? intval( sanitize_text_field(wp_unslash( $_POST['unique_id'] ) )) : null;
+		$location        = isset( $_POST['location'] ) ? sanitize_text_field(wp_unslash( $_POST['location'] )) : '';
+		$adult           = isset( $_POST['adult'] ) ? intval( sanitize_text_field(wp_unslash( $_POST['adult'] ) )) : '0';
+		$child           = isset( $_POST['child'] ) ? intval( sanitize_text_field(wp_unslash( $_POST['child'] ) )) : '0';
+		$children_ages   = isset( $_POST['children_ages'] ) ? sanitize_text_field(wp_unslash( $_POST['children_ages'] )) : '0';
+		$room_selected   = isset( $_POST['room'] ) ? intval( sanitize_text_field(wp_unslash( $_POST['room'] ) )) : '0';
+		$check_in        = isset( $_POST['check_in_date'] ) ? sanitize_text_field(wp_unslash( $_POST['check_in_date'] )) : '';
+		$check_out       = isset( $_POST['check_out_date'] ) ? sanitize_text_field(wp_unslash( $_POST['check_out_date'] )) : '';
+		$deposit         = isset( $_POST['deposit'] ) ? sanitize_text_field(wp_unslash( $_POST['deposit'] )) : false;
+		$airport_service = isset( $_POST['airport_service'] ) ? sanitize_text_field(wp_unslash( $_POST['airport_service'] )) : '';
 		$total_people    = $adult + $child;
 
 		# Calculate night number

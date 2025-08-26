@@ -113,10 +113,10 @@ class TF_Apartment_Backend_Booking extends TF_Backend_Booking {
 			return;
 		}
 
-		$apartment_id = isset( $_POST['apartment_id'] ) ? sanitize_text_field( $_POST['apartment_id'] ) : 0;
+		$apartment_id = isset( $_POST['apartment_id'] ) ? sanitize_text_field( wp_unslash( $_POST['apartment_id']) ) : 0;
 		$meta = get_post_meta( $apartment_id, 'tf_apartment_opt', true );
-		$from         = isset( $_POST['from'] ) ? sanitize_text_field( $_POST['from'] ) : '';
-		$to           = isset( $_POST['to'] ) ? sanitize_text_field( $_POST['to'] ) : '';
+		$from         = isset( $_POST['from'] ) ? sanitize_text_field( wp_unslash( $_POST['from']) ) : '';
+		$to           = isset( $_POST['to'] ) ? sanitize_text_field( wp_unslash( $_POST['to']) ) : '';
 
 		$additional_fees = ! empty( $meta["additional_fees"] ) ? $meta["additional_fees"] : array();
 
@@ -244,9 +244,9 @@ class TF_Apartment_Backend_Booking extends TF_Backend_Booking {
 			return;
 		}
 
-		$apartment_id = isset( $_POST['apartment_id'] ) ? sanitize_text_field( $_POST['apartment_id'] ) : '';
-		$from         = isset( $_POST['from'] ) ? sanitize_text_field( $_POST['from'] ) : '';
-		$to           = isset( $_POST['to'] ) ? sanitize_text_field( $_POST['to'] ) : '';
+		$apartment_id = isset( $_POST['apartment_id'] ) ? sanitize_text_field( wp_unslash( $_POST['apartment_id']) ) : '';
+		$from         = isset( $_POST['from'] ) ? sanitize_text_field( wp_unslash( $_POST['from']) ) : '';
+		$to           = isset( $_POST['to'] ) ? sanitize_text_field( wp_unslash( $_POST['to']) ) : '';
 
 		$loop = new \WP_Query( array(
 			'post_type'      => 'tf_apartment',

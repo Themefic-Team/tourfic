@@ -85,7 +85,7 @@ class Room {
 		}
 
 		# Get post id
-		$room_id = isset( $_POST['post_id'] ) ? sanitize_text_field( $_POST['post_id'] ) : '';
+		$room_id = isset( $_POST['post_id'] ) ? sanitize_text_field( wp_unslash($_POST['post_id']) ) : '';
 		# Get hotel meta
 		$meta = get_post_meta( $room_id, 'tf_room_opt', true );
 

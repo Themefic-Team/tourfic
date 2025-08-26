@@ -66,7 +66,7 @@ class Tour_Enquiry extends \Tourfic\Core\Enquiry {
                     
                     $enquiry_data = $this->enquiry_table_data('tf_tours');
                     $total_data = ! empty( count( $enquiry_data ) ) ? count( $enquiry_data ) : 0;;
-                    $paged = !empty( $_GET['paged'] ) ? sanitize_text_field( $_GET["paged"]) : 1;
+                    $paged = !empty( $_GET['paged'] ) ? sanitize_text_field( wp_unslash( $_GET["paged"])) : 1;
                     $per_page = 20;
                     $offset = ( $paged - 1 ) * $per_page;
                     $enquiry_data = array_slice($enquiry_data, $offset, $per_page);

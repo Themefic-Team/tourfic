@@ -297,7 +297,7 @@ abstract class Enquiry {
 		$formateed_date = gmdate( "M d, Y", strtotime($date));
 		$formateed_time = gmdate( "h:i:s A", strtotime($time));
 		$reply_data = !empty( $data["reply_data"] ) ? json_decode($data["reply_data"], true) : array();
-		$reply_user = isset( $_POST['user_name'] ) ? sanitize_text_field( $_POST['user_name'] ) : '';
+		$reply_user = isset( $_POST['user_name'] ) ? sanitize_text_field( wp_unslash($_POST['user_name'] )) : '';
 		$current_user = wp_get_current_user();
 		$_SESSION["WP"]["userId"] = $current_user->ID;
 		$email_body_setting = !empty( Helper::tfopt("tf-email-piping")["email_body_type"] ) ? Helper::tfopt("tf-email-piping")["email_body_type"] : 'text';
@@ -683,9 +683,9 @@ abstract class Enquiry {
 			wp_die();
 		}
 
-		$name     = isset( $_POST['your-name'] ) ? sanitize_text_field( $_POST['your-name'] ) : null;
-		$email    = isset( $_POST['your-email'] ) ? sanitize_email( $_POST['your-email'] ) : null;
-		$question = isset( $_POST['your-question'] ) ? sanitize_text_field( $_POST['your-question'] ) : null;
+		$name     = isset( $_POST['your-name'] ) ? sanitize_text_field( wp_unslash($_POST['your-name']) ) : null;
+		$email    = isset( $_POST['your-email'] ) ? sanitize_email( wp_unslash($_POST['your-email']) ) : null;
+		$question = isset( $_POST['your-question'] ) ? sanitize_text_field( wp_unslash($_POST['your-question']) ) : null;
 		$from = "From: " . get_option( 'blogname' ) . " <" . get_option( 'admin_email' ) . ">\r\n";
 
 		$post_id    = isset( $_POST['post_id'] ) ? intval( $_POST['post_id'] ) : null;
@@ -873,9 +873,9 @@ abstract class Enquiry {
 
 	function tf_enquiry_filter_post_callback() {
 
-		$post_id = isset( $_POST['post_id'] ) ? sanitize_text_field( $_POST['post_id'] ) : '';
-		$post_type = isset( $_POST['post_type'] ) ? sanitize_text_field( $_POST['post_type'] ) : '';
-		$filter = isset( $_POST['filter'] ) ? sanitize_text_field ( $_POST['filter'] ) : '';
+		$post_id = isset( $_POST['post_id'] ) ? sanitize_text_field( wp_unslash($_POST['post_id'] )) : '';
+		$post_type = isset( $_POST['post_type'] ) ? sanitize_text_field( wp_unslash($_POST['post_type'] )) : '';
+		$filter = isset( $_POST['filter'] ) ? sanitize_text_field( wp_unslash($_POST['filter'] )) : '';
 
 		$enquiry_data = $this->enquiry_table_data( $post_type, $post_id, $filter );
 
@@ -908,11 +908,11 @@ abstract class Enquiry {
 
 		check_ajax_referer('updates', '_ajax_nonce');
 
-		$reply_mail = isset( $_POST['reply_mail'] ) ? sanitize_text_field( $_POST['reply_mail'] ) : '';
-		$reply_message = isset( $_POST['reply_message'] ) ? wp_kses_post( $_POST['reply_message'] ) : '';
-		$post_id = isset( $_POST['post_id'] ) ? sanitize_text_field( $_POST['post_id'] ) : '';
+		$reply_mail = isset( $_POST['reply_mail'] ) ? sanitize_text_field( wp_unslash($_POST['reply_mail'] )) : '';
+		$reply_message = isset( $_POST['reply_message'] ) ? wp_kses_post( wp_unslash($_POST['reply_message'] )) : '';
+		$post_id = isset( $_POST['post_id'] ) ? sanitize_text_field( wp_unslash($_POST['post_id'] )) : '';
 		$post_type = !empty( $post_id ) ? get_post_type( $post_id ) : '';
-		$enquiry_id = isset( $_POST['enquiry_id'] ) ? sanitize_text_field( $_POST['enquiry_id'] ) : '';
+		$enquiry_id = isset( $_POST['enquiry_id'] ) ? sanitize_text_field( wp_unslash($_POST['enquiry_id'] )) : '';
 
 		$connection_type = !empty( Helper::tfopt("tf-email-piping")["connection_type"]) ? Helper::tfopt("tf-email-piping")["connection_type"] : 'imap';
 		$connection_mail = $enquiry_mail_setting = '';
@@ -1016,9 +1016,9 @@ abstract class Enquiry {
 	}
 
 	function tf_enquiry_filter_mail_callback() {
-		$filter = isset( $_POST['filter'] ) ? sanitize_text_field( $_POST['filter'] )  : '';
-		$post_type = isset( $_POST['post_type'] ) ? sanitize_text_field( $_POST['post_type'] ) : '';
-		$post_id = isset( $_POST['post_id'] ) ? sanitize_text_field( $_POST['post_id'] ) : '';
+		$filter = isset( $_POST['filter'] ) ? sanitize_text_field( wp_unslash($_POST['filter']) )  : '';
+		$post_type = isset( $_POST['post_type'] ) ? sanitize_text_field( wp_unslash($_POST['post_type']) ) : '';
+		$post_id = isset( $_POST['post_id'] ) ? sanitize_text_field( wp_unslash($_POST['post_id']) ) : '';
 
 		$enquiry_data = $this->enquiry_table_data( $post_type, $post_id, $filter );
 		$total_data = !empty(count( $enquiry_data )) ? count( $enquiry_data ) : 0;

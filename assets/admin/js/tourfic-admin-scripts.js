@@ -1,5 +1,6 @@
 /******/ (() => { // webpackBootstrap
-// This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
 (() => {
 (function ($) {
 
@@ -342,7 +343,7 @@
 })(jQuery);
 })();
 
-// This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
+// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
 (() => {
 (function ($) {
     $(document).ready(function () {
@@ -1126,7 +1127,7 @@
 })(jQuery);
 })();
 
-// This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
+// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
 (() => {
 (function ($) {
     $(document).ready(function () {
@@ -1766,7 +1767,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 })();
 
-// This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
+// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
 (() => {
 ;(function($) {
 
@@ -2006,7 +2007,7 @@ document.addEventListener('DOMContentLoaded', function() {
 })(jQuery);
 })();
 
-// This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
+// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
 (() => {
 const {select, dispatch} = wp.data;
 
@@ -2055,7 +2056,7 @@ let rpc_check_interval = setInterval(TfPrePublishCheck, 500);
 
 })();
 
-// This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
+// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
 (() => {
 jQuery(function ($) {
 
@@ -2125,7 +2126,7 @@ jQuery(function ($) {
 });
 })();
 
-// This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
+// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
 (() => {
 (function ($) {
     $(document).ready(function () {
@@ -2491,7 +2492,7 @@ jQuery(function ($) {
 })(jQuery);
 })();
 
-// This entry needs to be wrapped in an IIFE because it needs to be isolated against other entry modules.
+// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
 (() => {
 (function ($) {
     'use strict';
@@ -3936,11 +3937,7 @@ jQuery(function ($) {
             $(this).closest('.tf-repeater').attr("data-max-index", maxIndex);
 
             $this_parent.find('.tf-repeater-wrap .tf-field-notice-inner').remove();
-            // Chacked maximum repeater
-            if (!tf_admin_params.is_pro && max != '' && count >= max) {
-                $this_parent.find('.tf-repeater-wrap').append('<div class="tf-field-notice-inner tf-notice-danger" style="display: block;">You have reached limit in free version. Please subscribe to Pro for unlimited access</div>');
-                return false;
-            }
+            
 
             // Repeater Count Add Value
             add_value.find(':input[name="tf_repeater_count"]').val(maxIndex);
@@ -4104,11 +4101,7 @@ jQuery(function ($) {
             $(this).closest('.tf-repeater').attr("data-max-index", maxIndex);
 
             $this_parent.find('.tf-field-notice-inner').remove();
-            // Chacked maximum repeater
-            if (!tf_admin_params.is_pro && max != '' && count >= max) {
-                $this_parent.append('<div class="tf-field-notice-inner tf-notice-danger" style="display: block;">You have reached limit in free version. Please subscribe to Pro for unlimited access</div>');
-                return false;
-            }
+            
 
             let repeatDateField = clone_value.find('.tf-field-date');
 

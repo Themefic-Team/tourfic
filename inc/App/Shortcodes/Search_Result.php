@@ -22,7 +22,7 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 	function render( $atts, $content = null ) {
 
 		// Get post type
-		$post_type = isset( $_GET['type'] ) ? sanitize_text_field( $_GET['type'] ) : '';
+		$post_type = isset( $_GET['type'] ) ? sanitize_text_field(wp_unslash($_GET['type'] )) : '';
 		if ( empty( $post_type ) ) {
 			echo '<h3>' . esc_html__(" Please select fields from the search form! ", "tourfic") . '</h3>';
 
@@ -30,14 +30,14 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 		}
 		// Get hotel location or tour destination
 		$taxonomy     = $post_type == 'tf_hotel' ? 'hotel_location' : ( $post_type == 'tf_tours' ? 'tour_destination' : 'apartment_location' );
-		$place        = isset( $_GET['place'] ) ? sanitize_text_field( $_GET['place'] ) : '';
-		$adults       = isset( $_GET['adults'] ) ? sanitize_text_field( $_GET['adults'] ) : '';
-		$child        = isset( $_GET['children'] ) ? sanitize_text_field( $_GET['children'] ) : '';
-		$infant       = isset( $_GET['infant'] ) ? sanitize_text_field( $_GET['infant'] ) : '';
-		$room         = isset( $_GET['room'] ) ? sanitize_text_field( $_GET['room'] ) : '';
-		$check_in_out = isset( $_GET['check-in-out-date'] ) ? sanitize_text_field( $_GET['check-in-out-date'] ) : '';
+		$place        = isset( $_GET['place'] ) ? sanitize_text_field(wp_unslash( $_GET['place'] ) ): '';
+		$adults       = isset( $_GET['adults'] ) ? sanitize_text_field(wp_unslash( $_GET['adults'] ) ): '';
+		$child        = isset( $_GET['children'] ) ? sanitize_text_field(wp_unslash( $_GET['children'] ) ): '';
+		$infant       = isset( $_GET['infant'] ) ? sanitize_text_field(wp_unslash( $_GET['infant'] ) ): '';
+		$room         = isset( $_GET['room'] ) ? sanitize_text_field(wp_unslash( $_GET['room'] ) ): '';
+		$check_in_out = isset( $_GET['check-in-out-date'] ) ? sanitize_text_field(wp_unslash( $_GET['check-in-out-date'] ) ): '';
 		//get children ages
-		//$children_ages = isset( $_GET['children_ages'] ) ? sanitize_text_field($_GET['children_ages']) : '';
+		//$children_ages = isset( $_GET['children_ages'] ) ? sanitize_text_field(wp_unslash($_GET['children_ages']) ): '';
 
 
 		// Price Range
@@ -45,12 +45,12 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 		$endprice   = isset( $_GET['to'] ) ? absint( sanitize_key( $_GET['to'] ) ) : '';
 
 		// Cars Data Start
-		$pickup   = isset( $_GET['pickup'] ) ? sanitize_text_field( $_GET['pickup'] ) : '';
-		$dropoff = isset( $_GET['dropoff'] ) ? sanitize_text_field( $_GET['dropoff'] ) : '';
-		$tf_pickup_date  = isset( $_GET['pickup-date'] ) ? sanitize_text_field( $_GET['pickup-date'] ) : '';
-		$tf_dropoff_date  = isset( $_GET['dropoff-date'] ) ? sanitize_text_field( $_GET['dropoff-date'] ) : '';
-		$tf_pickup_time  = isset( $_GET['pickup-time'] ) ? sanitize_text_field( $_GET['pickup-time'] ) : '';
-		$tf_dropoff_time  = isset( $_GET['dropoff-time'] ) ? sanitize_text_field( $_GET['dropoff-time'] ) : '';
+		$pickup   = isset( $_GET['pickup'] ) ? sanitize_text_field(wp_unslash( $_GET['pickup'] ) ): '';
+		$dropoff = isset( $_GET['dropoff'] ) ? sanitize_text_field(wp_unslash( $_GET['dropoff'] ) ): '';
+		$tf_pickup_date  = isset( $_GET['pickup-date'] ) ? sanitize_text_field(wp_unslash( $_GET['pickup-date'] ) ): '';
+		$tf_dropoff_date  = isset( $_GET['dropoff-date'] ) ? sanitize_text_field(wp_unslash( $_GET['dropoff-date'] ) ): '';
+		$tf_pickup_time  = isset( $_GET['pickup-time'] ) ? sanitize_text_field(wp_unslash( $_GET['pickup-time'] ) ): '';
+		$tf_dropoff_time  = isset( $_GET['dropoff-time'] ) ? sanitize_text_field(wp_unslash( $_GET['dropoff-time'] ) ): '';
 		// Cars Data End
 
 		// Author Id if any

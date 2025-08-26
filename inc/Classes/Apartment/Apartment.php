@@ -40,7 +40,7 @@ class Apartment {
 		if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['_nonce'])), 'tf_ajax_nonce' ) ) {
 			return;
 		}
-		$meta = get_post_meta( sanitize_text_field( $_POST['post_id'] ), 'tf_apartment_opt', true );
+		$meta = get_post_meta( sanitize_text_field( wp_unslash($_POST['post_id']) ), 'tf_apartment_opt', true );
 		// Single Template Style
 		$tf_apartment_layout_conditions = ! empty( $meta['tf_single_apartment_layout_opt'] ) ? $meta['tf_single_apartment_layout_opt'] : 'global';
 		if("single"==$tf_apartment_layout_conditions){
@@ -57,7 +57,7 @@ class Apartment {
 			<?php
 
 			foreach ( Helper::tf_data_types( $meta['rooms'] ) as $key => $room ) :
-				if ( $key == sanitize_text_field( $_POST['id'] ) ):
+				if ( $key == sanitize_text_field( wp_unslash($_POST['id'] )) ):
 					$tf_room_gallery = ! empty( $room['gallery'] ) ? $room['gallery'] : '';
 					?>
                     <div class="tf-hotel-details-qc-gallelry" style="width: 545px;">
@@ -237,7 +237,7 @@ class Apartment {
 		<?php } 
 		if('design-1'==$tf_apartment_selected_template){ 
 			foreach ( Helper::tf_data_types( $meta['rooms'] ) as $key => $room ) :
-				if ( $key == sanitize_text_field( $_POST['id'] ) ):
+				if ( $key == sanitize_text_field( wp_unslash($_POST['id'] )) ):
 				$tf_room_gallery = ! empty( $room['gallery'] ) ? $room['gallery'] : '';
 				$tf_room_gallery_ids = !empty($tf_room_gallery) ? explode( ',', $tf_room_gallery ) : '';
 				$footage       = ! empty( $room['footage'] ) ? $room['footage'] : '';
@@ -1251,9 +1251,9 @@ class Apartment {
 			$fee_type             = ! empty( $meta['fee_type'] ) ? $meta['fee_type'] : '';
 		
 
-		$adults       = ! empty( $_GET['adults'] ) ? sanitize_text_field( $_GET['adults'] ) : '';
-		$child        = ! empty( $_GET['children'] ) ? sanitize_text_field( $_GET['children'] ) : '';
-		$infant       = ! empty( $_GET['infant'] ) ? sanitize_text_field( $_GET['infant'] ) : '';
+		$adults       = ! empty( $_GET['adults'] ) ? sanitize_text_field( wp_unslash($_GET['adults']) ) : '';
+		$child        = ! empty( $_GET['children'] ) ? sanitize_text_field( wp_unslash($_GET['children'] )) : '';
+		$infant       = ! empty( $_GET['infant'] ) ? sanitize_text_field( wp_unslash($_GET['infant'] )) : '';
 		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( wp_unslash($_GET['check-in-out-date']) ) : '';
         $check_in_out_arr = explode(" - ", $check_in_out);
         $check_in = ! empty( $check_in_out_arr[0] ) ? $check_in_out_arr[0] : '';

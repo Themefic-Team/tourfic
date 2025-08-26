@@ -132,8 +132,8 @@ class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
 			return;
 		}
 
-		$from = isset( $_POST['from'] ) ? sanitize_text_field( $_POST['from'] ) : '';
-		$to   = isset( $_POST['to'] ) ? sanitize_text_field( $_POST['to'] ) : '';
+		$from = isset( $_POST['from'] ) ? sanitize_text_field( wp_unslash( $_POST['from']) ) : '';
+		$to   = isset( $_POST['to'] ) ? sanitize_text_field( wp_unslash( $_POST['to']) ) : '';
 
 		$loop = new \WP_Query( array(
 			'post_type'      => 'tf_hotel',
@@ -181,9 +181,9 @@ class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
 			return;
 		}
 
-		$hotel_id = isset( $_POST['hotel_id'] ) ? sanitize_text_field( $_POST['hotel_id'] ) : '';
-		$from     = isset( $_POST['from'] ) ? sanitize_text_field( $_POST['from'] ) : '';
-		$to       = isset( $_POST['to'] ) ? sanitize_text_field( $_POST['to'] ) : '';
+		$hotel_id = isset( $_POST['hotel_id'] ) ? sanitize_text_field( wp_unslash( $_POST['hotel_id']) ) : '';
+		$from     = isset( $_POST['from'] ) ? sanitize_text_field( wp_unslash( $_POST['from']) ) : '';
+		$to       = isset( $_POST['to'] ) ? sanitize_text_field( wp_unslash( $_POST['to']) ) : '';
 
 		// Custom avail
 		if ( empty( $to ) ) {

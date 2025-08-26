@@ -58,11 +58,11 @@ class Hotel {
         /**
          * Form data
          */
-        $hotel_id          = ! empty( $_POST['post_id'] ) ? sanitize_text_field( $_POST['post_id'] ) : '';
-        $form_adult        = ! empty( $_POST['adult'] ) ? sanitize_text_field( $_POST['adult'] ) : 0;
-        $form_child        = ! empty( $_POST['child'] ) ? sanitize_text_field( $_POST['child'] ) : 0;
-        $children_ages     = ! empty( $_POST['children_ages'] ) ? sanitize_text_field( $_POST['children_ages'] ) : '';
-        $form_check_in_out = ! empty( $_POST['check_in_out'] ) ? sanitize_text_field( $_POST['check_in_out'] ) : '';
+        $hotel_id          = ! empty( $_POST['post_id'] ) ? sanitize_text_field(wp_unslash( $_POST['post_id'] ) ): '';
+        $form_adult        = ! empty( $_POST['adult'] ) ? sanitize_text_field(wp_unslash( $_POST['adult'] )) : 0;
+        $form_child        = ! empty( $_POST['child'] ) ? sanitize_text_field(wp_unslash( $_POST['child'] )) : 0;
+        $children_ages     = ! empty( $_POST['children_ages'] ) ? sanitize_text_field(wp_unslash( $_POST['children_ages'] ) ): '';
+        $form_check_in_out = ! empty( $_POST['check_in_out'] ) ? sanitize_text_field(wp_unslash( $_POST['check_in_out'] ) ): '';
 
 
         $form_total_person = $form_adult + $form_child;
@@ -1221,14 +1221,14 @@ class Hotel {
 
 		if ( 1 == $airport_service ) {
 
-			$room_id       = isset( $_POST['roomid'] ) ? intval( sanitize_text_field( $_POST['roomid'] ) ) : null;
-			$option_id     = isset( $_POST['option_id'] ) ? sanitize_text_field( $_POST['option_id'] ) : null;
-			$adult         = isset( $_POST['hoteladult'] ) ? intval( sanitize_text_field( $_POST['hoteladult'] ) ) : '0';
-			$child         = isset( $_POST['hotelchildren'] ) ? intval( sanitize_text_field( $_POST['hotelchildren'] ) ) : '0';
-			$room_selected = isset( $_POST['room'] ) ? intval( sanitize_text_field( $_POST['room'] ) ) : '0';
-			$check_in      = isset( $_POST['check_in_date'] ) ? sanitize_text_field( $_POST['check_in_date'] ) : '';
-			$check_out     = isset( $_POST['check_out_date'] ) ? sanitize_text_field( $_POST['check_out_date'] ) : '';
-			$deposit       = isset( $_POST['deposit'] ) ? sanitize_text_field( $_POST['deposit'] ) : false;
+			$room_id       = isset( $_POST['roomid'] ) ? intval( sanitize_text_field(wp_unslash( $_POST['roomid'] ) )) : null;
+			$option_id     = isset( $_POST['option_id'] ) ? sanitize_text_field(wp_unslash( $_POST['option_id'] )) : null;
+			$adult         = isset( $_POST['hoteladult'] ) ? intval( sanitize_text_field(wp_unslash( $_POST['hoteladult'] ) )) : '0';
+			$child         = isset( $_POST['hotelchildren'] ) ? intval( sanitize_text_field(wp_unslash( $_POST['hotelchildren'] ) )) : '0';
+			$room_selected = isset( $_POST['room'] ) ? intval( sanitize_text_field(wp_unslash( $_POST['room'] ) )) : '0';
+			$check_in      = isset( $_POST['check_in_date'] ) ? sanitize_text_field(wp_unslash( $_POST['check_in_date'] )) : '';
+			$check_out     = isset( $_POST['check_out_date'] ) ? sanitize_text_field(wp_unslash( $_POST['check_out_date'] )) : '';
+			$deposit       = isset( $_POST['deposit'] ) ? sanitize_text_field(wp_unslash( $_POST['deposit'] )) : false;
 
 			# Calculate night number
 			$day_difference = self::calculate_days( $check_in, $check_out );
@@ -2553,15 +2553,15 @@ class Hotel {
 	static function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
 
 		//get children ages
-		$children_ages = isset( $_GET['children_ages'] ) ? sanitize_text_field($_GET['children_ages']) : '';
+		$children_ages = isset( $_GET['children_ages'] ) ? sanitize_text_field(wp_unslash($_GET['children_ages']) ): '';
 		// Adults
-		$adults = ! empty( $_GET['adults'] ) ? sanitize_text_field( $_GET['adults'] ) : '';
+		$adults = ! empty( $_GET['adults'] ) ? sanitize_text_field(wp_unslash( $_GET['adults'] ) ): '';
 		// children
-		$child = ! empty( $_GET['children'] ) ? sanitize_text_field( $_GET['children'] ) : '';
+		$child = ! empty( $_GET['children'] ) ? sanitize_text_field(wp_unslash( $_GET['children'] ) ): '';
 		// Check-in & out date
-		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( $_GET['check-in-out-date'] ) : '';
+		$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field(wp_unslash( $_GET['check-in-out-date'] ) ): '';
 		//get features
-		$features = ! empty( $_GET['features'] ) ? sanitize_text_field( $_GET['features'] ) : '';
+		$features = ! empty( $_GET['features'] ) ? sanitize_text_field(wp_unslash( $_GET['features'] ) ): '';
 
 		// date format for users output
 		$hotel_date_format_for_users = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
@@ -3659,11 +3659,11 @@ class Hotel {
 		 */
 		// Adults
 		if ( empty( $adults ) ) {
-			$adults = ! empty( $_GET['adults'] ) ? sanitize_text_field( $_GET['adults'] ) : '';
+			$adults = ! empty( $_GET['adults'] ) ? sanitize_text_field( wp_unslash($_GET['adults'] )) : '';
 		}
 		// children
 		if ( empty( $child ) ) {
-			$child = ! empty( $_GET['children'] ) ? sanitize_text_field( $_GET['children'] ) : '';
+			$child = ! empty( $_GET['children'] ) ? sanitize_text_field( wp_unslash($_GET['children'] )) : '';
 		}
 
 		/**
@@ -3685,11 +3685,11 @@ class Hotel {
 		}
 		// room
 		if ( empty( $room ) ) {
-			$room = ! empty( $_GET['room'] ) ? sanitize_text_field( $_GET['room'] ) : '';
+			$room = ! empty( $_GET['room'] ) ? sanitize_text_field( wp_unslash($_GET['room'] )) : '';
 		}
 		// Check-in & out date
 		if ( empty( $check_in_out ) ) {
-			$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( $_GET['check-in-out-date'] ) : '';
+			$check_in_out = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( wp_unslash($_GET['check-in-out-date'] )) : '';
 		}
 		if ( $check_in_out ) {
 			$form_check_in      = substr( $check_in_out, 0, 10 );

@@ -69,11 +69,7 @@ class TF_Search_advanced extends \Elementor\Widget_Base {
 			'apartment' => esc_html__( 'Apartment', 'tourfic' ),
 		);
 
-		if ( defined( 'TF_PRO' ) ) {
-			$types['booking']   = esc_html__( 'Booking.com', 'tourfic' );
-			$types['tp-flight'] = esc_html__( 'TravelPayouts Flight', 'tourfic' );
-			$types['tp-hotel']  = esc_html__( 'TravelPayouts Hotel', 'tourfic' );
-		}
+		
 
 		return $types;
 	}

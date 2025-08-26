@@ -40,8 +40,6 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 			add_action( 'wp_ajax_tf_search_settings_autocomplete', array( $this, 'tf_search_settings_autocomplete_callback' ) );
 
             add_action( 'wp_ajax_tf_export_data', array( $this, 'tf_export_data' ) );
-			
-			add_action('wp_ajax_themefic_manage_plugin', array( $this, 'themefic_manage_plugin' ) );
         }
 
         public static function option( $key, $params = array() ) {
@@ -439,27 +437,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 			<?php
 		}
 
-		public function themefic_manage_plugin() {
-			check_ajax_referer('updates', 'security');
-
-			if (!current_user_can('install_plugins')) {
-				wp_send_json_error('You do not have permission to perform this action.');
-			}
-
-			$plugin_slug = isset($_POST['plugin_slug']) ? sanitize_text_field($_POST['plugin_slug']) : '';
-			$plugin_filename = isset($_POST['plugin_filename']) ? sanitize_text_field($_POST['plugin_filename']) : '';
-			$plugin_action = isset($_POST['plugin_action']) ? sanitize_text_field($_POST['plugin_action']) : '';
-
-			if (!$plugin_slug || !$plugin_action) {
-				wp_send_json_error('Invalid request.');
-			}
-
-			include_once ABSPATH . 'wp-admin/includes/plugin-install.php';
-			include_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
-			include_once ABSPATH . 'wp-admin/includes/plugin.php';
-
-			wp_send_json_error('Invalid action.');
-		}
+		
 
 		/**
 		 * Get Help Page

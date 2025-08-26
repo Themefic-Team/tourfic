@@ -1441,11 +1441,7 @@
             $(this).closest('.tf-repeater').attr("data-max-index", maxIndex);
 
             $this_parent.find('.tf-repeater-wrap .tf-field-notice-inner').remove();
-            // Chacked maximum repeater
-            if (!tf_admin_params.is_pro && max != '' && count >= max) {
-                $this_parent.find('.tf-repeater-wrap').append('<div class="tf-field-notice-inner tf-notice-danger" style="display: block;">You have reached limit in free version. Please subscribe to Pro for unlimited access</div>');
-                return false;
-            }
+            
 
             // Repeater Count Add Value
             add_value.find(':input[name="tf_repeater_count"]').val(maxIndex);
@@ -1609,11 +1605,7 @@
             $(this).closest('.tf-repeater').attr("data-max-index", maxIndex);
 
             $this_parent.find('.tf-field-notice-inner').remove();
-            // Chacked maximum repeater
-            if (!tf_admin_params.is_pro && max != '' && count >= max) {
-                $this_parent.append('<div class="tf-field-notice-inner tf-notice-danger" style="display: block;">You have reached limit in free version. Please subscribe to Pro for unlimited access</div>');
-                return false;
-            }
+            
 
             let repeatDateField = clone_value.find('.tf-field-date');
 

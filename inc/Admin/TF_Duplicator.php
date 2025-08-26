@@ -33,11 +33,11 @@ class TF_Duplicator {
 
 	function tf_duplicate_post_data_function() {
 
+		$postID   = isset($_POST['postID']) ? intval($_POST['postID']) : 0;
 		// Verify nonce
 		check_ajax_referer('tf_duplicate_nonce_' . intval($_POST['postID']), 'security');
 
-		$postID   = isset($_POST['postID']) ? intval($_POST['postID']) : 0;
-		$postType = isset($_POST['postType']) ? sanitize_text_field($_POST['postType']) : '';
+		$postType = isset($_POST['postType']) ? sanitize_text_field(wp_unslash( $_POST['postType'])) : '';
 		
 		if( "tf_hotel"==$postType ){
 			$meta = get_post_meta( $postID, 'tf_hotels_opt', true );

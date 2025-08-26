@@ -9,7 +9,7 @@ use \Tourfic\Classes\Helper;
 
 class TF_Vat {
 	public function __construct() {
-		if ( Helper::tf_is_woo_active() && ! defined( 'TF_PRO' ) ) {
+		if ( Helper::tf_is_woo_active()) {
 			add_action( 'woocommerce_before_calculate_totals', array( $this, 'tf_cart_item_tax_class_for_default_taxs' ) );
 		}
 	}
