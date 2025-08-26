@@ -435,6 +435,7 @@ if ( $disable_related_sec !== '1' ) {
         'posts_per_page' => 8,
         'orderby'        => 'title',
         'order'          => 'ASC',
+        // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
         'tax_query'      => array( // WPCS: slow query ok.
             array(
                 'taxonomy' => 'apartment_location',

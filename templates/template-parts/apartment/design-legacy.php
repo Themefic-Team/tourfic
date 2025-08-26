@@ -654,6 +654,7 @@ use \Tourfic\Classes\Apartment\Apartment;
 		'posts_per_page' => 8,
 		'orderby'        => 'title',
 		'order'          => 'ASC',
+        // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 		'tax_query'      => array( // WPCS: slow query ok.
 			array(
 				'taxonomy' => 'apartment_location',
@@ -662,7 +663,7 @@ use \Tourfic\Classes\Apartment\Apartment;
 			),
 		),
 	);
-    $related_args = array_merge( $args, array( 'post__not_in' => array( $post_id ) ) );
+    $related_args = array_merge( $args, array( 'post__not_in' => array( $post_id ) ) ); // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_post__not_in
 	$related_apartment = new WP_Query( $args );
 	$related_apartment_check = new WP_Query( $related_args );
 

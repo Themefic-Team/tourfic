@@ -1561,7 +1561,7 @@ function tf_tour_unique_id_order_data_migration(){
 					$post_id   = wc_get_order_item_meta( $item_key, '_tour_id', true );
 					$unique_id   = wc_get_order_item_meta( $item_key, '_tour_unique_id', true );
 
-					$tf_order_checked = $wpdb->get_row( $wpdb->prepare("SELECT id,order_details FROM {$wpdb->prefix}tf_order_data WHERE order_id=%s AND post_id=%s",$item,$post_id) );
+					$tf_order_checked = $wpdb->get_row( $wpdb->prepare("SELECT id,order_details FROM {$wpdb->prefix}tf_order_data WHERE order_id=%s AND post_id=%s",$item,$post_id) );// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 					if( !empty($tf_order_checked) && !empty($unique_id) ){
 						$order_details = json_decode($tf_order_checked->order_details);
 						if(empty($order_details->unique_id)){

@@ -36,6 +36,7 @@ class Tours extends \Tourfic\Core\Shortcodes {
 		//Check if destination selected/choosen
 		if ( ! empty( $destinations ) && $destinations !== 'all' ) {
 			$destinations      = explode( ',', $destinations );
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 			$args['tax_query'] = array(
 				'relation' => 'AND',
 				array(

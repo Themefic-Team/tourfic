@@ -443,6 +443,7 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
 			'posts_per_page' => 8,
 			'orderby'        => 'title',
 			'order'          => 'ASC',
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 			'tax_query'      => array(
 				array(
 					'taxonomy' => 'tour_destination',

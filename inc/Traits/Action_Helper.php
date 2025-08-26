@@ -865,7 +865,7 @@ trait Action_Helper {
 		}
 
 		if ( $search && 'undefined'!=$search ) {
-
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 			$args['tax_query'] = array(
 				'relation' => 'AND',
 				array(
@@ -1073,6 +1073,7 @@ trait Action_Helper {
 
 		// Car Data Filter Start
 		if(!empty($pickup) && "undefined"!=$pickup){
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 			$args['tax_query'] = array(
 				'relation' => 'AND',
 				array(
@@ -1084,6 +1085,7 @@ trait Action_Helper {
 		}
 
 		if(!empty($tf_min_seat) && !empty($tf_max_seat)){
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 			$args['meta_query'] = array(
 				array(
 					'key' => 'tf_search_passengers',
@@ -1095,6 +1097,7 @@ trait Action_Helper {
 		}
 
 		if(!empty($tf_startprice) && !empty($tf_endprice) && $posttype == 'tf_carrental'){
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 			$args['meta_query'] = array(
 				array(
 					'key' => 'tf_search_car_rent',
@@ -1106,6 +1109,7 @@ trait Action_Helper {
 		}
 
 		if(!empty($tf_driver_age) && 'on'==$tf_driver_age && $posttype == 'tf_carrental'){
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 			$args['meta_query'] = array(
 				array(
 					'key' => 'tf_search_driver_age',

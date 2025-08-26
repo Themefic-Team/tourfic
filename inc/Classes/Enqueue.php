@@ -524,8 +524,8 @@ class Enqueue {
 			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ?: '.min';
 
 			$assets_path = str_replace( array( 'http:', 'https:' ), '', WC()->plugin_url() ) . '/assets/';
-			wp_register_script( 'select2', WC()->plugin_url() . '/assets/js/select2/select2.full' . $suffix . '.js', array( 'jquery' ), '4.0.3' );
-			wp_register_style( 'select2', WC()->plugin_url() . '/assets/css/select2.css' );
+			wp_register_script( 'select2', WC()->plugin_url() . '/assets/js/select2/select2.full' . $suffix . '.js', array( 'jquery' ), '4.0.3', true );
+			wp_register_style( 'select2', WC()->plugin_url() . '/assets/css/select2.css', [], '4.0.3' );
 
 			wp_enqueue_script( 'select2' );
 			wp_enqueue_style( 'select2' );

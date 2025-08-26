@@ -24,6 +24,7 @@ $args = array(
     'post_type' => $post_type,
     'orderby'   => apply_filters( 'tf_archive_post_orderby', 'date' ),
     'order'     => apply_filters( 'tf_archive_post_order', 'DESC' ),
+    // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
     'tax_query' => array(
         array (
             'taxonomy' => $taxonomy,

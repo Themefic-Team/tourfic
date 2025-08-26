@@ -35,6 +35,7 @@ class Recent_Blog extends \Tourfic\Core\Shortcodes {
 		//Check if category selected/choosen
 		if ( ! empty( $cats ) && $cats !== 'all' ) {
 			$cats              = explode( ',', $cats );
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 			$args['tax_query'] = array(
 				'relation' => 'AND',
 				array(

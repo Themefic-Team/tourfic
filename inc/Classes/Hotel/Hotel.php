@@ -5231,6 +5231,7 @@ class Hotel {
 			'post_type'      => 'tf_hotel',
 			'post_status'    => 'publish',
 			'posts_per_page' => - 1,
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 			'tax_query'      => array(
 				'relation' => 'AND',
 				array(

@@ -39,6 +39,7 @@ class Hotels extends \Tourfic\Core\Shortcodes {
 
 		if ( ! empty( $locations ) && $locations !== 'all' ) {
 			$locations         = explode( ',', $locations );
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 			$args['tax_query'] = array(
 				'relation' => 'AND',
 				array(

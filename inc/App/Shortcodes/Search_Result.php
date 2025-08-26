@@ -136,7 +136,7 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 			foreach ( $taxonomy_query->get_terms() as $term ) {
 				$place_ids[] = $term->term_id;
 			}
-
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 			$args['tax_query'] = array(
 				'relation' => 'AND',
 				array(
@@ -152,6 +152,7 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 
 		// Hotel/Apartment Features
 		if ( ! empty( $_GET['features'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 			$args['tax_query'][] = array(
 				'taxonomy' => $post_type == 'tf_hotel' ? 'hotel_feature' : 'apartment_feature',
 				'field'    => 'slug',
@@ -160,6 +161,7 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 		}
 		// Hotel/Tour/Apartment Types
 		if ( ! empty( $_GET['types'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 			$args['tax_query'][] = array(
 				'taxonomy' => $post_type == 'tf_hotel' ? 'hotel_type' : ($post_type == 'tf_tours' ? 'tour_type' : 'apartment_type'),
 				'field'    => 'slug',
@@ -169,6 +171,7 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 
 		// Car Data Filter Start
 		if(!empty($pickup)){
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 			$args['tax_query'] = array(
 				'relation' => 'AND',
 				array(
@@ -180,6 +183,7 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 		}
 
 		if(!empty($startprice) && !empty($endprice) && $post_type == 'tf_carrental'){
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 			$args['meta_query'] = array(
 				array(
 					'key' => 'tf_search_car_rent',
@@ -192,6 +196,7 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 		$car_driver_min_age = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['car_archive_driver_min_age'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['car_archive_driver_min_age'] : 18;
         $car_driver_max_age = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['car_archive_driver_max_age'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['car_archive_driver_max_age'] : 40;
 		if(!empty($_GET['driver_age']) && 'on'==$_GET['driver_age'] && $post_type == 'tf_carrental'){ // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 			$args['meta_query'] = array(
 				array(
 					'key' => 'tf_search_driver_age',

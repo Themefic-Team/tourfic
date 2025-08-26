@@ -28,6 +28,7 @@ abstract class Shortcodes {
 
 		if ( ! empty( $location ) && $location !== 'all' ) {
 			$locations         = explode( ',', $location );
+			// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 			$args['tax_query'] = array(
 				'relation' => 'AND',
 				array(

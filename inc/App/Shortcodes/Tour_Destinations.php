@@ -62,6 +62,7 @@ class Tour_Destinations extends \Tourfic\Core\Shortcodes {
 						$taxonomy_query = new \WP_Query( array(
 							'post_status' => $tf_tour_posts_status,
 							'posts_per_page' => -1,
+							// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 							'tax_query' => array(
 								array(
 									'taxonomy' => 'tour_destination',
