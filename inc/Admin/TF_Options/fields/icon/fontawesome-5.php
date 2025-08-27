@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 function fontawesome_five_icons() {
 	$icons = array(
 		'fab fa-500px',

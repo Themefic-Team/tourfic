@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 function remix_icon() {
 	$remix_icons = array(
 		'ri-24-hours-fill',

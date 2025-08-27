@@ -2,9 +2,7 @@
 
 use Tourfic\Classes\Room\Room;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	die;
-} // Cannot access directly.
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 /**
  *
  * Field: hotel_room

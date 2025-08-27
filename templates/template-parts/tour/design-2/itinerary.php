@@ -1,4 +1,7 @@
-
+<?php 
+// Don't load directly
+defined( 'ABSPATH' ) || exit;
+?>
 <?php if ( $itineraries ) { ?>
 <div class="tf-itinerary-wrapper" id="tf-tour-itinerary">
     <div class="section-title">

@@ -1,4 +1,7 @@
-<!-- Tour itenarary -->
+<?php 
+// Don't load directly
+defined( 'ABSPATH' ) || exit;
+?>
 
 <!-- Travel Itinerary section Start -->
 <?php if ( $itineraries ) { ?>

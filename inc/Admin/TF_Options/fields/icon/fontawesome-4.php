@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 function fontawesome_four_icons() {
 	$icons = array(
 		'fa fa-glass',

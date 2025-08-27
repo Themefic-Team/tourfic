@@ -2,10 +2,7 @@
 
 namespace Tourfic\Admin\Notice;
 
-// do not allow direct access
-if ( ! defined( 'ABSPATH' ) ) {
-    exit;
-}
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 class Plugin_Page_Notice extends \Tourfic\Core\TF_Notice {
 
