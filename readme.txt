@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, car-rental, multivendor-marketplace
 Requires at least: 5.4
 Tested up to: 6.8
-Stable tag: 2.16.13
+Stable tag: 2.16.14
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -281,16 +281,18 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 == Installation ==
 
 1. Download and unzip the plugin. Upload the unzipped folder to the wp-contents/plugins folder of your WordPress installation.
-2. Active the plugin from the WordPress Plugins administration page OR, Go to WP admin panel, click 'Plugins' -> 'Add new'. In the search input box, type 'Tourfic'.
+2. Activate the plugin from the WordPress Plugins administration page OR, go to the WP admin panel, click 'Plugins' -> 'Add new'. In the search input box, type 'Tourfic'.
 3. Install and activate the plugin.
 4. Go through the Quick Setup wizard for the basic setup.
-5. Check our Documentation & YouTube videos for further instruction.
+5. Check our Documentation & YouTube videos for further instructions.
 
 == External Services ==
 
 This plugin connects to Google Maps (https://maps.google.com) to display map locations in hotel, tour, apartment, and car rental templates. It sends the location address or latitude/longitude to Google Maps when a map is displayed. This service is provided by Google: [Terms of Service](https://maps.google.com/help/terms_maps) , [Privacy Policy](https://policies.google.com/privacy)
 
 This plugin connects to OpenStreetMap (https://www.openstreetmap.org) to display map locations as an alternative mapping service. It sends the location address or latitude/longitude to OpenStreetMap when a map is displayed. This service is provided by the OpenStreetMap Foundation: [Terms of Use](https://wiki.osmfoundation.org/wiki/Terms_of_Use), [Privacy Policy](https://wiki.osmfoundation.org/wiki/Privacy_Policy)
+
+This plugin uses the OpenStreetMap Nominatim API (https://nominatim.openstreetmap.org) to fetch address details from latitude and longitude in the admin area. It sends coordinate data when users interact with location fields. This service is provided by the OpenStreetMap Foundation: [Terms of Use](https://operations.osmfoundation.org/policies/nominatim/)
 
 This plugin connects to QuickChart.io (https://quickchart.io) to generate QR codes for booking details. It sends the booking URL or identifier to QuickChart.io in order to create the QR code image. This service is provided by QuickChart.io: [Terms of Service]( https://quickchart.io/terms/), [Privacy Policy](https://quickchart.io/privacy/)
 
@@ -388,11 +390,12 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
-= 2.16.13 – August 19, 2025 =
+= 2.16.14 – August 27, 2025 =
 
-- System stability has been improved.
-- Code structure has been improved.
-- Updated readme.txt info
+- Addressed plugin review feedback.
+- Improved security and code quality.
+- Updated readme.txt info for OpenStreetMap.
+- Performance and stability improvements.
 
 **Old Changelog can be found [here](https://themefic.com/tourfic/changelog/)**.
 
