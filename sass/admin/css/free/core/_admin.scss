@@ -31,13 +31,9 @@
       }
     }
   }
-  .csf-field.tf-csf-pro {
-    cursor: pointer;
-  }
+ 
 }
-.tf-csf-disable.tf-csf-pro {
-  z-index: 9999999999;
-}
+
 .tf-csf-badge {
   .tf-upcoming {
     display: inline-block;
@@ -51,18 +47,6 @@
     line-height: 13px;
     background: #006600;
     margin-right: 5px;
-  }
-  .tf-pro {
-    display: inline-block;
-    color: #ffffff;
-    padding: 3px 10px 3px 10px;
-    border-radius: 3px;
-    text-align: center;
-    margin: 5px 0 0 0;
-    font-size: 0.75rem;
-    font-weight: 600;
-    line-height: 13px;
-    background: #b30000;
   }
 }
 #tf_room_opt {

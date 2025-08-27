@@ -433,14 +433,6 @@ Fontawesome
   z-index: 10;
 }
 
-.csf-section .csf-field.tf-csf-pro {
-  cursor: pointer;
-}
-
-.tf-csf-disable.tf-csf-pro {
-  z-index: 9999999999;
-}
-
 .tf-csf-badge .tf-upcoming {
   display: inline-block;
   color: #ffffff;
@@ -453,19 +445,6 @@ Fontawesome
   line-height: 13px;
   background: #006600;
   margin-right: 5px;
-}
-
-.tf-csf-badge .tf-pro {
-  display: inline-block;
-  color: #ffffff;
-  padding: 3px 10px 3px 10px;
-  border-radius: 3px;
-  text-align: center;
-  margin: 5px 0 0 0;
-  font-size: 0.75rem;
-  font-weight: 600;
-  line-height: 13px;
-  background: #b30000;
 }
 
 #tf_room_opt .unique-id {
@@ -2482,24 +2461,6 @@ Steps
   color: #382673;
 }
 
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info .tf-plugin-button.pro, .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info .tf-plugin-button.activate-pro {
-  color: #ff9800;
-}
-
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info .tf-plugin-status.active {
-  color: #382673;
-  opacity: 0.8;
-}
-
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info .tf-plugin-status.active-pro {
-  color: #ff5722;
-  opacity: 0.8;
-}
-
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info .tf-plugin-button.activate-pro {
-  color: #ff5722;
-}
-
 .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-info .badge.free {
   background: rgba(0, 165, 140, 0.101961);
   color: #00a58c;
@@ -2517,19 +2478,6 @@ Steps
   100% {
     transform: rotate(360deg);
   }
-}
-
-.tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-button:not(.active):not(.active-pro) {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background 0.3s;
-  position: relative;
-  background-color: transparent;
-  flex-direction: column;
 }
 
 .tf-setting-dashboard .tf-setting-performace-section .tf-settings-sidebar .tf-plugin-button.loading {
@@ -3577,11 +3525,6 @@ Steps
   margin-left: 13px;
 }
 
-.tf-field .tf-field-label .tf-csf-badge .tf-pro {
-  background-color: #F44336 !important;
-  margin: 0;
-}
-
 .tf-field .tf-field-label .tf-csf-badge .tf-upcoming {
   background-color: #006600 !important;
   margin: 0;
@@ -4350,33 +4293,6 @@ Steps
 .tour-option-itinerary-notice .tf-field-notice-content {
   font-size: 1rem;
   line-height: 1.5;
-}
-
-.tf-pro-notice .tf-field-notice-inner {
-  background-color: #EBEFFF;
-  border: 1.5px solid #295BFF;
-}
-
-.tf-pro-notice .tf-field-notice-inner .tf-field-notice-icon {
-  font-size: 1.5rem;
-  color: #295BFF;
-  margin-right: 8px;
-}
-
-.tf-pro-notice .tf-field-notice-inner .tf-field-notice-content {
-  color: #000;
-  font-size: 0.875rem;
-  line-height: 1.6;
-  align-self: center;
-  font-weight: 400;
-}
-
-.tf-pro-notice .tf-field-notice-inner .tf-field-notice-content b {
-  font-weight: 600;
-}
-
-.tf-pro-notice .tf-field-notice-inner .tf-field-notice-content a {
-  color: #295BFF;
 }
 
 .tf-field-switch .tf-switch-label {
@@ -5330,29 +5246,6 @@ a.tf-import-btn, a.tf-export-btn {
 .tf-image-radio-group li a.tf-image-checkbox-footer:hover {
   text-decoration: underline;
   color: #2979ff;
-}
-
-.tf-image-radio-group li.tf-pro-item {
-  position: relative;
-}
-
-.tf-image-radio-group li.tf-pro-item .tf-image-checkbox-pro-badge {
-  position: absolute;
-  top: -1px;
-  right: -2px;
-  background-color: #295BFF;
-  padding: 3px 10px;
-  color: #ffffff;
-  font-size: 0.75rem;
-  font-weight: 600;
-  line-height: 13px;
-  border-radius: 3px;
-  z-index: 9;
-}
-
-.tf-image-radio-group li.tf-pro-item img {
-  opacity: .5;
-  cursor: not-allowed;
 }
 
 .tf-apt-cal-wrap .fc-view-harness,
@@ -7897,27 +7790,6 @@ a.tf-import-btn, a.tf-export-btn {
   font-style: normal;
   font-weight: 400;
   line-height: 1.12;
-}
-
-.tf-enquiry-table .pro-notice-row {
-  border-top: none;
-}
-
-.tf-enquiry-table .pro-notice-row .tf-pro-notice {
-  padding: 0px 0px;
-}
-
-.tf-enquiry-table .pro-notice-row .tf-pro-notice .tf-fieldset {
-  margin-top: 0px;
-}
-
-.tf-enquiry-table .pro-notice-row .tf-pro-notice .tf-field-notice-inner {
-  justify-content: center;
-}
-
-.tf-enquiry-table .pro-notice-row .tf-pro-notice .tf-field-notice-inner a {
-  text-decoration: underline;
-  color: #295BFF;
 }
 
 .tf-enquiry-details-header-filter {

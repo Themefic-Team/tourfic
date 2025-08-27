@@ -437,20 +437,7 @@
                 .tf-plugin-button.activate {
                     color: #382673; 
                 }
-                .tf-plugin-button.pro, .tf-plugin-button.activate-pro {
-                    color: #ff9800; 
-                }
-                .tf-plugin-status.active {
-                    color: #382673; 
-                    opacity: 0.8; 
-                }
-                .tf-plugin-status.active-pro {
-                    color: #ff5722; 
-                    opacity: 0.8; 
-                }
-                .tf-plugin-button.activate-pro{
-                    color: #ff5722;
-                }
+                
 
                 .badge.free {
                     background: rgba(0,165,140,.1019607843);
@@ -469,18 +456,7 @@
             }
 
             /* Loader */
-            .tf-plugin-button:not(.active):not(.active-pro) {
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                border: none;
-                border-radius: 4px;
-                cursor: pointer;
-                transition: background 0.3s;
-                position: relative;
-                background-color: transparent;
-                flex-direction: column;
-            }
+            
 
             .tf-plugin-button.loading {
                 background: #ccc;

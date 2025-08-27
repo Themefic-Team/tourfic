@@ -71,33 +71,4 @@
       line-height: 1.5;
     }
   }
-
-  .tf-pro-notice {
-    .tf-field-notice-inner {
-      background-color: #EBEFFF;
-      border: 1.5px solid #295BFF;
-
-      .tf-field-notice-icon {
-        font-size: 1.5rem;
-        color: #295BFF;
-        margin-right: 8px;
-      }
-
-      .tf-field-notice-content {
-        color: $admin-color-heading;
-        font-size: 0.875rem;
-        line-height: 1.6;
-        align-self: center;
-        font-weight: 400;
-
-        b {
-          font-weight: 600;
-        }
-
-        a {
-          color: #295BFF;
-        }
-      }
-    } 
-  }
 // }

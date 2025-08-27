@@ -244,7 +244,7 @@ $tf_ext_booking_code = '';
                                     <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $address_latitude ); ?>,<?php echo esc_attr( $address_longitude ); ?>&output=embed" width="100%" height="258" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                                 <?php } ?>
 
-                                <!-- Pro Code -->
+                                
                                 <?php if ( ( ! empty( $address ) || (! empty( $address_latitude ) && ! empty( $address_longitude ) ) ) ) { ?>
                                     <?php 
                                     if( $tf_openstreet_map!="default" ){ ?>

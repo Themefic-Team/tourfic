@@ -11,9 +11,9 @@ class TF_Handle_Emails {
 
     //free email settings
     protected static $tf_email_settings;
-    //Pro metabox email settings
+  
     protected static $tf_mb_email_settings;
-    //Pro email template settings
+
     protected static $tf_email_template_settings;
 
     /**
@@ -24,10 +24,10 @@ class TF_Handle_Emails {
         self::$tf_email_template_settings = !empty( Helper::tfopt( 'email_template_settings' ) ) ? Helper::tfopt( 'email_template_settings' ) : array();
         
         
-        //send mail if Tourfic pro is active
+
         //send confirmation mail
         add_action( 'woocommerce_thankyou', array( $this, 'send_email' ), 10, 1 );
-        //send pro confirmation mail
+ 
         add_action( 'woocommerce_thankyou', array( $this, 'send_confirmation_email_pro' ), 10, 1 );
         //send cancellation mail
         add_action( 'woocommerce_order_status_cancelled', array( $this, 'send_cancellation_email_pro' ), 10, 1 );
