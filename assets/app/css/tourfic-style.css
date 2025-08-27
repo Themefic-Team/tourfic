@@ -1797,7 +1797,7 @@ h3.section-heading {
   -webkit-appearance: none;
   appearance: none;
   -moz-appearance: none;
-  background-image: url("https://www.svgrepo.com/show/80156/down-arrow.svg");
+  background-image: url("../../app/images/down-arrow.svg");
   background-repeat: no-repeat;
   background-size: 12px 12px;
   cursor: pointer;
@@ -5706,7 +5706,7 @@ div#tf-destinationautocomplete-list div:before {
   -webkit-appearance: none;
   appearance: none;
   -moz-appearance: none;
-  background-image: url("https://www.svgrepo.com/show/80156/down-arrow.svg");
+  background-image: url("../../app/images/down-arrow.svg");
   background-repeat: no-repeat;
   background-size: 12px 12px;
   cursor: pointer;
@@ -12625,7 +12625,7 @@ div#tf-destinationautocomplete-list div:before {
   -webkit-appearance: none;
   appearance: none;
   -moz-appearance: none;
-  background-image: url("https://www.svgrepo.com/show/80156/down-arrow.svg");
+  background-image: url("../../app/images/down-arrow.svg");
   background-repeat: no-repeat;
   background-size: 12px 12px;
   background-position: calc(100% - 16px);
@@ -19122,7 +19122,7 @@ div#tf-destinationautocomplete-list div:before {
   -webkit-appearance: none;
   appearance: none;
   -moz-appearance: none;
-  background-image: url("https://www.svgrepo.com/show/80156/down-arrow.svg");
+  background-image: url("../../app/images/down-arrow.svg");
   background-repeat: no-repeat;
   background-size: 12px 12px;
   cursor: pointer;
