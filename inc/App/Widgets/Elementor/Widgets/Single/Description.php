@@ -69,12 +69,12 @@ class Description extends Widget_Base {
 			'default' => '',
 		]);
 
-		$this->add_control('posts_per_page', [
-            'label' => __('Posts Per Page', 'tourfic'),
+		$this->add_control('content_length', [
+            'label' => __('Content Length', 'tourfic'),
             'type' => Controls_Manager::NUMBER,
-            'default' => 100,
+            'default' => 300,
             'min' => 1,
-            'max' => 1000,
+            'max' => 5000,
             'step' => 1,
 			'condition' => [
 				'limit_content' => 'yes',
@@ -100,7 +100,7 @@ class Description extends Widget_Base {
 			],
 			'toggle' => true,
 			'selectors' => [
-				'{{WRAPPER}} .tf-head-title' => 'text-align: {{VALUE}};',
+				'{{WRAPPER}} .tf-single-description' => 'text-align: {{VALUE}};',
 			]
 		]);
 
@@ -134,12 +134,15 @@ class Description extends Widget_Base {
 
 	protected function render() {
 		$settings  = $this->get_settings_for_display();
+        $limit_content   = !empty( $settings['limit_content'] ) ? $settings['limit_content'] : '';
+        $content_length   = !empty( $settings['content_length'] ) ? $settings['content_length'] : '300';
         ?>
         <div class="tf-single-template__two tf-single-description">
+			<?php if($limit_content == 'yes'):  ?>
             <div class="tf-short-description">
                 <?php 
-                if(strlen(get_the_content()) > 300 ){
-                    echo esc_html( wp_strip_all_tags(\Tourfic\Classes\Helper::tourfic_character_limit_callback(get_the_content(), 300)) ) . '<span class="tf-see-description">See more</span>';
+                if(strlen(get_the_content()) > $content_length ){
+                    echo esc_html( wp_strip_all_tags(\Tourfic\Classes\Helper::tourfic_character_limit_callback(get_the_content(), $content_length)) ) . '<span class="tf-see-description">See more</span>';
                 }else{
                     the_content(); 
                 }
@@ -151,6 +154,9 @@ class Description extends Widget_Base {
                     echo '<span class="tf-see-less-description"> See less</span>';
                 ?>
             </div>
+			<?php else: ?>
+				<?php the_content(); ?>
+			<?php endif; ?>
         </div>
         <?php
 	}
