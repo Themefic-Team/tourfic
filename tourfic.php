@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name:     Tourfic - Travel, Hotel, and Apartment Booking Solution for WooCommerce
+ * Plugin Name:     Tourfic — Travel, Hotel & Car Rental Booking for WooCommerce
  * Plugin URI:      https://themefic.com/tourfic
  * Description:     The ultimate plugin for tour, travel, accommodation, and hotel bookings. Effortlessly manage your entire online travel booking system, including orders and any WooCommerce payment method.
  * Author:          Themefic
