@@ -381,12 +381,12 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 		$total_people_booking = $adults + $children;
 
 		/**
-		 * If fixed is selected but pro is not activated
+		 * If fixed is selected
 		 * show error
 		 * @return
 		 */
 		if ( $tour_type == 'fixed' ) {
-			$response['errors'][] = esc_html__( 'Fixed Availability is selected but Tourfic Pro is not activated!', 'tourfic' );
+			$response['errors'][] = esc_html__( 'Fixed Availability is selected', 'tourfic' );
 			$response['status']   = 'error';
 			echo wp_json_encode( $response );
 			die();
@@ -568,14 +568,14 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 		}
 
 		/**
-		 * If continuous custom availability is selected but pro is not activated
+		 * If continuous custom availability is selected
 		 *
 		 * Show error
 		 *
 		 * @return
 		 */
 		if ( $tour_type == 'continuous' && $custom_avail == true ) {
-			$response['errors'][] = esc_html__( 'Custom Continous Availability is selected but Tourfic Pro is not activated!', 'tourfic' );
+			$response['errors'][] = esc_html__( 'Custom Continous Availability is selected', 'tourfic' );
 			$response['status']   = 'error';
 			echo wp_json_encode( $response );
 			die();

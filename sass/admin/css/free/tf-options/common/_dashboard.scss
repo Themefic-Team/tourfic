@@ -747,68 +747,7 @@
     }
 }
 
-.tf-setting-license {
-    margin: 40px 40px 40px 20px;
 
-    .tf-setting-license-tabs {
-        ul {
-            margin: 0;
-            margin-left: 40px;
-
-            li.active {
-                display: inline-block;
-                border: none;
-                margin: 0;
-                line-height: 18px;
-                text-decoration: none;
-                font-weight: 600;
-                position: relative;
-                background-color: #ffffff;
-                border-radius: 5px 5px 0px 0px;
-
-                &:before {
-                    position: absolute;
-                    content: "";
-                    width: 16px;
-                    height: 16px;
-                    background-color: #ffffff;
-                    bottom: -8px;
-                    left: -5px;
-                    transform: rotate(45deg);
-                }
-
-                &:after {
-                    position: absolute;
-                    content: "";
-                    width: 16px;
-                    height: 16px;
-                    background-color: #ffffff;
-                    bottom: -8px;
-                    right: -5px;
-                    transform: rotate(45deg);
-                }
-
-                span {
-                    display: inline-block;
-                    padding: 14px 22px;
-                    color: $admin-color-heading;
-                    font-size: 1.125rem;
-                    text-decoration: none;
-
-                    i {
-                        margin-right: 5px;
-                    }
-                }
-            }
-        }
-    }
-
-    .tf-setting-license-field {
-        background-color: #ffffff;
-        border-radius: 8px;
-        padding: 0px 20px;
-    }
-}
 
 .tf-swal-settings-reset-alert #swal2-title {
     line-height: 1.2;

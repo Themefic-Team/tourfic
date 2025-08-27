@@ -983,30 +983,6 @@ class Migrator {
 			flush_rewrite_rules( true );
 			update_option( 'tf_migrate_data_204_210_2022', 2 );
 		}
-
-
-		if ( empty( get_option( 'tf_license_data_migrate_data_204_210_2022' ) ) ) {
-
-			/** License Migrate */
-
-			$old_setting_option = get_option( 'tourfic_opt' );
-			if ( ! empty( $old_setting_option['license-key'] ) && ! empty( $old_setting_option['license-email'] ) ) {
-				$tf_settings['license-key']   = $old_setting_option['license-key'];
-				$tf_settings['license-email'] = $old_setting_option['license-email'];
-				update_option( 'tf_license_settings', $tf_settings ) || add_option( 'tf_license_settings', $tf_settings );
-			} else {
-				$tf_setting_option            = ! empty( get_option( 'tf_settings' ) ) ? get_option( 'tf_settings' ) : array();
-				$tf_settings['license-key']   = ! empty( $tf_setting_option['license-key'] ) ? $tf_setting_option['license-key'] : '';
-				$tf_settings['license-email'] = ! empty( $tf_setting_option['license-email'] ) ? $tf_setting_option['license-email'] : '';
-				update_option( 'tf_license_settings', $tf_settings ) || add_option( 'tf_license_settings', $tf_settings );
-			}
-
-			wp_cache_flush();
-			flush_rewrite_rules( true );
-			update_option( 'tf_license_data_migrate_data_204_210_2022', 2 );
-		}
-
-
 	}
 
 	function tf_admin_order_data_migration() {

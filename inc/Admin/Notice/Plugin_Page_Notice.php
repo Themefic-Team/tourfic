@@ -27,16 +27,9 @@ class Plugin_Page_Notice extends \Tourfic\Core\TF_Notice {
 
     // Red Color: style="color:#d63638;
 
-    // License activation notice for Tourfic Pro
     function tf_plugin_admin_notice( ) { 
 		if ( get_option( $this->notice_id ) < 1 ) {
             ?>
-                <!-- <div class="tf-critical-update-notice notice notice-info is-dismissible">
-                    <h2></?php echo esc_html__("The Wait is Over! Our Revamped Design Panel will be Introducing Soon!", 'tourfic') ?></h2>
-                    <p></?php echo wp_kses_post( esc_html__('We’re excited to announce that our <b>revamped design panel</b> is finally here! In the upcoming update, we’re bringing a <b>new and improved design panel</b> that enhances usability, organization, and customization options for a smoother experience. ', "tourfic")); ?></p>
-                    <p></?php echo wp_kses_post( esc_html__('Want to know what’s new in this update? Read <a href="https://themefic.com/tourfic-v2-16-0-optimized-design-coming-soon/" target="_blank"><b>this blog</b></a> to explore all the exciting changes.', "tourfic")); ?></p>
-                </div> -->
-
                 <script>
                     jQuery(document).ready(function($) {
                         $(document).on('click', '.tf-critical-update-notice .notice-dismiss', function( event ) {

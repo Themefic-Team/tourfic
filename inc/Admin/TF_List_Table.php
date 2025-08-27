@@ -48,7 +48,6 @@ class TF_List_Table extends \WP_List_Table {
 		return $item[ $column_name ];
 	}
 
-	//if result more than 15 then add pro row
 	public function display_rows() {
 		foreach ( $this->items as $key => $item ) {
 			$this->single_row( $item );

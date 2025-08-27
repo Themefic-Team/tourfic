@@ -23,7 +23,6 @@ class Notice_Update extends \Tourfic\Core\TF_Notice {
         $this->type = 'admin_notice';
     }
 
-    // License activation notice for Tourfic Pro
     function tf_plugin_admin_notice( ) { 
         
     }

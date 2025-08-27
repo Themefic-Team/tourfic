@@ -655,7 +655,6 @@ class Enqueue {
 		$tf_options_screens          = array(
 			'toplevel_page_tf_settings',
 			'tourfic-settings_page_tf_get_help',
-			'tourfic-settings_page_tf_license_info',
 			'tourfic-settings_page_tf_dashboard',
 			'tourfic-settings_page_tf_shortcodes',
 			'tourfic-vendor_page_tf_vendor_reports',

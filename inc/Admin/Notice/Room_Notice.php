@@ -26,8 +26,6 @@ class Room_Notice extends \Tourfic\Core\TF_Notice {
     }
 
     // Red Color: style="color:#d63638;
-
-    // License activation notice for Tourfic Pro
     function tf_plugin_admin_notice( ) { 
 		if ( get_option( $this->notice_id ) < 1 ) {
             ?>
