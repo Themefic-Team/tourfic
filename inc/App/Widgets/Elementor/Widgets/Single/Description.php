@@ -60,6 +60,27 @@ class Description extends Widget_Base {
 
         do_action( 'tf/single-description/before-content/controls', $this );
 
+		$this->add_control('limit_content',[
+			'label' => esc_html__('Limit Content', 'tourfic'),
+			'type' => Controls_Manager::SWITCHER,
+			'label_on' => esc_html__('Yes', 'tourfic'),
+			'label_off' => esc_html__('No', 'tourfic'),
+			'return_value' => 'yes',
+			'default' => '',
+		]);
+
+		$this->add_control('posts_per_page', [
+            'label' => __('Posts Per Page', 'tourfic'),
+            'type' => Controls_Manager::NUMBER,
+            'default' => 100,
+            'min' => 1,
+            'max' => 1000,
+            'step' => 1,
+			'condition' => [
+				'limit_content' => 'yes',
+			],
+        ]);
+
 		$this->add_responsive_control('description-align',[
 			'label' => esc_html__('Alignment', 'tourfic'),
 			'type' => Controls_Manager::CHOOSE,
