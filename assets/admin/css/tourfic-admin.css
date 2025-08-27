@@ -579,38 +579,6 @@ button.tf-order-remove {
   font-size: 1rem;
 }
 
-.tf-license-activate {
-  display: inline-block;
-}
-
-.tf-license-activate p.submit {
-  margin: 0px !important;
-}
-
-.tf-license-activate p.submit input {
-  background-color: #003C79 !important;
-  border-color: #003C79 !important;
-  color: #ffffff;
-  padding: 4px 25px;
-  font-size: 1rem;
-}
-
-.el-license-active-btn {
-  display: inline-block;
-}
-
-.el-license-active-btn p.submit {
-  margin: 0px !important;
-}
-
-.el-license-active-btn p.submit input {
-  background-color: #003C79 !important;
-  border-color: #003C79 !important;
-  color: #ffffff;
-  padding: 4px 25px;
-  font-size: 1rem;
-}
-
 input.select2-search__field {
   width: 100% !important;
   min-width: 150px !important;
@@ -2853,67 +2821,6 @@ Steps
   font-size: 0.938rem;
   color: #566676;
   margin: 0;
-}
-
-.tf-setting-license {
-  margin: 40px 40px 40px 20px;
-}
-
-.tf-setting-license .tf-setting-license-tabs ul {
-  margin: 0;
-  margin-left: 40px;
-}
-
-.tf-setting-license .tf-setting-license-tabs ul li.active {
-  display: inline-block;
-  border: none;
-  margin: 0;
-  line-height: 18px;
-  text-decoration: none;
-  font-weight: 600;
-  position: relative;
-  background-color: #ffffff;
-  border-radius: 5px 5px 0px 0px;
-}
-
-.tf-setting-license .tf-setting-license-tabs ul li.active:before {
-  position: absolute;
-  content: "";
-  width: 16px;
-  height: 16px;
-  background-color: #ffffff;
-  bottom: -8px;
-  left: -5px;
-  transform: rotate(45deg);
-}
-
-.tf-setting-license .tf-setting-license-tabs ul li.active:after {
-  position: absolute;
-  content: "";
-  width: 16px;
-  height: 16px;
-  background-color: #ffffff;
-  bottom: -8px;
-  right: -5px;
-  transform: rotate(45deg);
-}
-
-.tf-setting-license .tf-setting-license-tabs ul li.active span {
-  display: inline-block;
-  padding: 14px 22px;
-  color: #000;
-  font-size: 1.125rem;
-  text-decoration: none;
-}
-
-.tf-setting-license .tf-setting-license-tabs ul li.active span i {
-  margin-right: 5px;
-}
-
-.tf-setting-license .tf-setting-license-field {
-  background-color: #ffffff;
-  border-radius: 8px;
-  padding: 0px 20px;
 }
 
 .tf-swal-settings-reset-alert #swal2-title {
