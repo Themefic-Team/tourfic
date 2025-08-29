@@ -9,7 +9,7 @@ use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Typography;
 use Elementor\Widget_Base;
-
+use Tourfic\App\TF_Review;
 use Tourfic\Classes\Helper;
 
 // don't load directly
@@ -141,27 +141,191 @@ class Gallery extends Widget_Base {
         $post_id   = get_the_ID();
         $post_type = get_post_type();
 
+		/**
+		 * Review query
+		 */
+		$args           = array(
+			'post_id' => $post_id,
+			'status'  => 'approve',
+			'type'    => 'comment',
+		);
+		$comments_query = new \WP_Comment_Query( $args );
+		$comments       = $comments_query->comments;
+
+		if($post_type == 'tf_hotel'){
+            $meta = get_post_meta($post_id, 'tf_hotels_opt', true);
+			$disable_review_sec   = ! empty( $meta['h-review'] ) ? $meta['h-review'] : '';
+			$gallery = ! empty( $meta['gallery'] ) ? $meta['gallery'] : '';
+			if ( $gallery ) {
+				$gallery_ids = explode( ',', $gallery ); // Comma seperated list to array
+			}
+			$video = ! empty( $meta['video'] ) ? $meta['video'] : '';
+
+        } elseif($post_type == 'tf_tours'){
+			$meta = get_post_meta($post_id, 'tf_tours_opt', true);
+			$disable_review_sec   = ! empty( $meta['t-review'] ) ? $meta['t-review'] : '';
+			$gallery = ! empty( $meta['tour_gallery'] ) ? $meta['tour_gallery'] : array();
+			if ( $gallery ) {
+				$gallery_ids = explode( ',', $gallery );
+			}
+			
+        } elseif($post_type == 'tf_apartment'){
+			$meta = get_post_meta($post_id, 'tf_apartment_opt', true);
+			$disable_review_sec  = ! empty( $meta['disable-apartment-review'] ) ? $meta['disable-apartment-review'] : '';
+			$gallery = ! empty( $meta['apartment_gallery'] ) ? $meta['apartment_gallery'] : '';
+			if ( $gallery ) {
+				$gallery_ids = explode( ',', $gallery ); // Comma seperated list to array
+			}
+			$video = ! empty( $meta['video'] ) ? $meta['video'] : '';
+			
+        } else {
+			return;
+		}
+		$s_review = ! empty( Helper::tfopt( 'h-review' ) ) ? Helper::tfopt( 'h-review' ) : 0;
+		$disable_review_sec = ! empty( $disable_review_sec ) ? $disable_review_sec : $s_review;
+
         //gallery style
         $style = !empty($settings['gallery_style']) ? $settings['gallery_style'] : 'style1';
-        
        
-        // Style 1: Dropdown with icons only
+        // Style 1: Bottom Nav
         if ($style == 'style1') {
             ?>
-            
+            <div class="tf-single-gallery__style-1 tf-hero-gallery">
+				<div class="tf-gallery-featured <?php echo empty($gallery_ids) ? esc_attr('tf-without-gallery-featured') : ''; ?>">
+					<img src="<?php echo !empty(wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' )) ? esc_url( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) : esc_url(TF_ASSETS_APP_URL.'images/feature-default.jpg'); ?>" alt="<?php esc_html_e( 'Hotel Image', 'tourfic' ); ?>">
+					
+					<div class="featured-meta-gallery-videos">
+						<div class="featured-column tf-gallery-box">
+							<?php if ( ! empty( $gallery_ids ) ) :?>
+							<a id="featured-gallery" href="#" class="tf-tour-gallery">
+								<i class="fa-solid fa-camera-retro"></i><?php echo esc_html__("Gallery","tourfic"); ?>
+							</a>
+							<?php endif; ?>
+						</div>
+
+						<?php if ( !empty($video) ) : ?>
+						<div class="featured-column tf-video-box">
+							<a class="tf-tour-video" id="featured-video" data-fancybox="tour-video" href="<?php echo esc_url($video); ?>">
+								<i class="fa-solid fa-video"></i> <?php echo esc_html__("Video","tourfic"); ?>
+							</a>
+						</div>
+						<?php endif; ?>
+					</div>
+
+					<div class="tf-single-review-box">
+					<?php if ( ! $disable_review_sec == '1' ) : ?>
+						<?php if($comments): ?>
+							<a href="#tf-review" class="tf-single-rating">
+								<span><?php echo wp_kses_post( TF_Review::tf_total_avg_rating( $comments )); ?></span> (<?php TF_Review::tf_based_on_text( count( $comments ) ); ?>)
+							</a>
+						<?php else: ?>
+							<a href="#tf-review" class="tf-single-rating">
+								<span><?php esc_html_e( "0.0", "tourfic" ) ?></span> (<?php esc_html_e( "0 review", "tourfic" ) ?>)
+							</a>
+						<?php endif; ?>
+					<?php endif; ?>
+					</div>
+				</div>
+
+				<div class="tf-gallery">
+					<?php 
+					$gallery_count = 1;
+					if ( ! empty( $gallery_ids ) ) :
+						foreach ( $gallery_ids as $key => $gallery_item_id ) :
+						$image_url = wp_get_attachment_url( $gallery_item_id, 'full' );
+						?>
+						<a class="<?php echo $gallery_count==5 ? esc_attr( 'tf-gallery-more' ) : ''; ?>" id="tour-gallery" href="<?php echo esc_url($image_url); ?>" data-fancybox="tour-gallery">
+							<img src="<?php echo esc_url($image_url); ?>">
+						</a>
+						<?php $gallery_count++; 
+						endforeach;
+					endif; ?>
+				</div>
+			</div>
             <?php
         }
-        // Style 2: Off-canvas style
+        // Style 2: Slider
         elseif ($style == 'style2') {
             ?>
-            
-            <?php
-        }
-        // Style 3: Dropdown with text labels
-        elseif ($style == 'style3') {
-            ?>
+            <div class="tf-single-gallery__style-2 tf-hero-gallery">
+				<div class="tf-top-review">
+					<?php if ( $comments && ! $disable_review_sec == '1' ) { ?>
+						<a href="#tf-review">
+							<div class="tf-single-rating">
+								<i class="fas fa-star"></i> <span><?php echo wp_kses_post( TF_Review::tf_total_avg_rating( $comments ) ); ?></span> (<?php TF_Review::tf_based_on_text( count( $comments ) ); ?>)
+							</div>
+						</a>
+					<?php } ?>
+				</div>
+				
+				<?php if ( ! empty( $gallery_ids ) ) { ?>
+					<div class="tf-gallery-wrap">
+						<div class="list-single-main-media fl-wrap" id="sec1">
+							<div class="single-slider-wrapper fl-wrap">
+								<div class="tf_slider-for fl-wrap tf-slick-slider">
+									<?php foreach ( $gallery_ids as $attachment_id ) {
+										echo '<div class="slick-slide-item">';
+										echo '<a href="' . esc_url( wp_get_attachment_url( $attachment_id, 'tf_gallery_thumb' ) ) . '" class="slick-slide-item-link" data-fancybox="hotel-gallery">';
+										echo wp_get_attachment_image( $attachment_id, 'tf_gallery_thumb' );
+										echo '</a>';
+										echo '</div>';
+									} ?>
+								</div>
+								<div class="swiper-button-prev sw-btn"></div>
+								<div class="swiper-button-next sw-btn"></div>
 
-            <?php
+								<?php Helper::tf_hotel_gallery_video( $meta ); ?>
+							</div>
+						</div>
+					</div>
+				<?php } else { ?>
+					<div class="tf-gallery-wrap">
+						<div class="list-single-main-media fl-wrap" id="sec1">
+							<div class="single-slider-wrapper fl-wrap">
+								<div class="tf_slider-for fl-wrap tf-slick-slider">
+
+									<a href="<?php echo ! empty( get_the_post_thumbnail_url( $post_id, 'tf_gallery_thumb' ) ) ? esc_url( get_the_post_thumbnail_url( $post_id, 'tf_gallery_thumb' ) ) : esc_url( TF_ASSETS_APP_URL . 'images/feature-default.jpg' ); ?>"
+										class="slick-slide-item-link" data-fancybox="hotel-gallery">
+										<img src="<?php echo ! empty( get_the_post_thumbnail_url( $post_id, 'tf_gallery_thumb' ) ) ? esc_url( get_the_post_thumbnail_url( $post_id, 'tf_gallery_thumb' ) ) : esc_url( TF_ASSETS_APP_URL . 'images/feature-default.jpg' ); ?>"
+												alt="">
+									</a>
+								</div>
+								<?php Helper::tf_hotel_gallery_video( $meta ); ?>
+							</div>
+						</div>
+					</div>
+				<?php } ?>
+			</div>
+            <?php if ( \Elementor\Plugin::$instance->editor->is_edit_mode() ): ?>
+			<script>
+				jQuery(document).ready(function ($) {
+					'use strict';
+				
+					var sbp = $('.swiper-button-prev'),
+						sbn = $('.swiper-button-next');
+
+					$('.single-slider-wrapper .tf_slider-for').slick({
+						slide: '.slick-slide-item',
+						slidesToShow: 1,
+						slidesToScroll: 1,
+						arrows: false,
+						fade: false,
+						dots: false,
+						centerMode: false,
+						variableWidth: false,
+						adaptiveHeight: true
+					});
+
+					sbp.on("click", function () {
+						$(this).closest(".single-slider-wrapper").find('.tf_slider-for').slick('slickPrev');
+					});
+
+					sbn.on("click", function () {
+						$(this).closest(".single-slider-wrapper").find('.tf_slider-for').slick('slickNext');
+					});
+				});	
+			</script>
+			<?php endif;
         }
     }
 
