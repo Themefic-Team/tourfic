@@ -83,7 +83,9 @@ const JSconfig = {
     output: {
         path: path.resolve(__dirname, '../'),
         filename: '[name].js',
-        clean: false
+        iife: false,
+        clean: false,
+        module: false
     },
     optimization: {
         minimize: false

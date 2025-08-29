@@ -673,7 +673,7 @@ class Map_Filter extends \WP_Widget {
                                             }
                                             wp_reset_postdata();
                                             ?>
-                                            <div id="map-datas" style="display: none"><?php echo array_filter($locations) ? wp_json_encode(array_values($locations)) : []; ?></div>
+                                            <div id="map-datas" style="display: none"><?php echo array_filter( $locations ) ? esc_html(wp_json_encode( array_values( $locations ) )) : esc_html( wp_json_encode( [] ) ); ?></div>
                                             <div class="tf-pagination-bar">
                                                 <?php Helper::tourfic_posts_navigation(); ?>
                                             </div>

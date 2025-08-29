@@ -1883,7 +1883,7 @@ trait Action_Helper {
 
 					if ( Hotel::template( 'archive' ) == 'design-3' || Tour::template( 'archive' ) == 'design-3' || Apartment::template( 'archive' ) == 'design-2' ) {
 						?>
-                        <div id="map-datas" style="display: none"><?php echo array_filter( $locations ) ? wp_json_encode( array_values( $locations ) ) : wp_json_encode([]); ?></div>
+                        <div id="map-datas" style="display: none"><?php echo array_filter( $locations ) ? esc_html(wp_json_encode( array_values( $locations ) )) : esc_html( wp_json_encode( [] ) ); ?></div>
 						<?php
 					}
 				} else {

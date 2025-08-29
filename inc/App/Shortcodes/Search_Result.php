@@ -1536,7 +1536,7 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 
 							}
                             ?>
-                            <div id="map-datas" style="display: none"><?php echo array_filter( $locations ) ? wp_json_encode( array_values( $locations ) ) : []; ?></div>
+                            <div id="map-datas" style="display: none"><?php echo array_filter( $locations ) ? esc_html(wp_json_encode( array_values( $locations ) )) : esc_html( wp_json_encode( [] ) ); ?></div>
                             <?php
 						}
 						$total_pages = ceil( $total_filtered_results / $post_per_page );

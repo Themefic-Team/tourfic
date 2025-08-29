@@ -1202,7 +1202,7 @@ class Enqueue {
 		";
 
 		if (wp_style_is('tf-app-style', 'enqueued')) {
-			wp_add_inline_style('tf-app-style', apply_filters('tf-global-css', $output));
+			wp_add_inline_style('tf-app-style', apply_filters('tf-global-css', esc_html( $output )));
 		}
 	}
 
@@ -1219,7 +1219,7 @@ class Enqueue {
 		}
 
 		if (wp_style_is('tf-app-style', 'enqueued')) {
-			wp_add_inline_style('tf-app-style', apply_filters('tf-custom-css-conflict-resolve', $output));
+			wp_add_inline_style('tf-app-style', apply_filters('tf-custom-css-conflict-resolve', esc_html( $output )));
 		}
 	}
 
