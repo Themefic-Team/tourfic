@@ -280,7 +280,8 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                     }else{
                                         $duration_time_html = $duration_time;
                                     }
-                                        echo " " . esc_html( $duration_time_html )?>
+                                    echo esc_html( " " . $duration_time_html )
+                                    ?>
                                 </span></p>
                                 <?php if( $night ){ ?>
                                 <p>
