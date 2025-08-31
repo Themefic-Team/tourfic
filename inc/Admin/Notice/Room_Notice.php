@@ -33,19 +33,6 @@ class Room_Notice extends \Tourfic\Core\TF_Notice {
                     <h2><?php echo esc_html__("After Update Support", 'tourfic') ?></h2>
                     <p><?php echo wp_kses_post( esc_html__(' If you experience any inconvenience after updating to <b>Tourfic version 2.16.5 </b>, please don\'t hesitate to reach out to our <a href="https://portal.themefic.com/support/" target="_blank"><b>Support Team</b></a>. We\'re  here to assist you with any inconvenience.', "tourfic")); ?></p>
                 </div>
-
-                <script>
-                    jQuery(document).ready(function($) {
-                        $(document).on('click', '.tf-critical-update-notice .notice-dismiss', function( event ) {
-                            data = {
-                                action : 'tf_disable_critical_update_admin_notice',
-                            };
-
-                            $.post(ajaxurl, data, function (response) {
-                            });
-                        });
-                    });
-                </script>
             <?php
         }
 	}

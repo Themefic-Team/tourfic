@@ -1834,57 +1834,6 @@ class Hotel {
                 </div>
 
             </form>
-            <script>
-                (function ($) {
-                    $(document).ready(function () {
-
-                        // flatpickr locale first day of Week
-						<?php Helper::tf_flatpickr_locale( "root" ); ?>
-
-                        $(".tf_check_inout_dates").on("click", function () {
-                            $(".tf-check-in-out-date").trigger("click");
-                        });
-                        $(".tf-check-in-out-date").flatpickr({
-                            enableTime: false,
-                            mode: "range",
-                            dateFormat: "Y/m/d",
-                            minDate: "today",
-
-                            // flatpickr locale
-							<?php Helper::tf_flatpickr_locale(); ?>
-
-                            onReady: function (selectedDates, dateStr, instance) {
-                                instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-                                dateSetToFields(selectedDates, instance);
-                            },
-                            onChange: function (selectedDates, dateStr, instance) {
-                                instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-                                dateSetToFields(selectedDates, instance);
-                            }
-                        });
-
-                        function dateSetToFields(selectedDates, instance) {
-                            if (selectedDates.length === 2) {
-                                const monthNames = [
-                                    "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-                                    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-                                ];
-                                if (selectedDates[0]) {
-                                    const startDate = selectedDates[0];
-                                    $(".tf_hotel_check_in_out_date .tf_checkin_dates span.date").html(startDate.getDate());
-                                    $(".tf_hotel_check_in_out_date .tf_checkin_dates span.month span").html(monthNames[startDate.getMonth()]);
-                                }
-                                if (selectedDates[1]) {
-                                    const endDate = selectedDates[1];
-                                    $(".tf_hotel_check_in_out_date .tf_checkout_dates span.date").html(endDate.getDate());
-                                    $(".tf_hotel_check_in_out_date .tf_checkout_dates span.month span").html(monthNames[endDate.getMonth()]);
-                                }
-                            }
-                        }
-
-                    });
-                })(jQuery);
-            </script>
 		<?php }elseif( !empty($design) && 3==$design ){ ?>
 			<form class="tf-archive-search-box-wrapper <?php echo esc_attr( $classes ); ?>" id="tf_hotel_aval_check" method="get" autocomplete="off" action="<?php echo esc_url( Helper::tf_booking_search_action() ); ?>">
 				<div class="tf-date-selection-form">
@@ -2018,35 +1967,6 @@ class Hotel {
 				</div>
 
             </form>
-
-            <script>
-                (function ($) {
-                    $(document).ready(function () {
-						// flatpickr First Day of Week
-						<?php Helper::tf_flatpickr_locale( 'root' ); ?>
-
-						$("#tf_hotel_aval_check #check-in-out-date").flatpickr({
-							enableTime: false,
-							mode: "range",
-							dateFormat: "Y/m/d",
-							altInput: true,
-							altFormat: '<?php echo esc_html( $hotel_date_format_for_users ); ?>',
-							minDate: "today",
-
-							// flatpickr locale
-							<?php Helper::tf_flatpickr_locale(); ?>
-
-							onReady: function (selectedDates, dateStr, instance) {
-								instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-							},
-							onChange: function (selectedDates, dateStr, instance) {
-								instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-								instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
-							}
-						});
-					});
-                })(jQuery);
-            </script>
         <?php } elseif (!empty($design) && 4 == $design) { ?>
             <form class="tf-archive-search-box-wrapper tf-search__form tf-shortcode-design-4 <?php echo esc_attr($classes); ?>" id="tf_hotel_aval_check" method="get" autocomplete="off" action="<?php echo esc_url(Helper::tf_booking_search_action()); ?>">
                 <fieldset class="tf-search__form__fieldset">
@@ -2238,58 +2158,6 @@ class Hotel {
                     </div>
                 </fieldset>
             </form>
-
-            <script>
-                (function($) {
-                    $(document).ready(function() {
-                        // flatpickr locale first day of Week
-                        <?php Helper::tf_flatpickr_locale("root"); ?>
-
-                        $(".tf_check_inout_dates").on("click", function() {
-                            $(".tf-check-in-out-date").trigger("click");
-                        });
-                        $(".tf-check-in-out-date").flatpickr({
-                            enableTime: false,
-                            mode: "range",
-                            dateFormat: "Y/m/d",
-                            minDate: "today",
-
-                            // flatpickr locale
-                            <?php Helper::tf_flatpickr_locale(); ?>
-
-                            onReady: function(selectedDates, dateStr, instance) {
-                                instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-                                dateSetToFields(selectedDates, instance);
-                            },
-                            onChange: function(selectedDates, dateStr, instance) {
-                                instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-                                dateSetToFields(selectedDates, instance);
-                            }
-                        });
-
-                        function dateSetToFields(selectedDates, instance) {
-                            if (selectedDates.length === 2) {
-                                const monthNames = [
-                                    "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-                                    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-                                ];
-                                if (selectedDates[0]) {
-                                    const startDate = selectedDates[0];
-                                    $(".tf_checkin_dates span.date").html(startDate.getDate());
-                                    $(".tf_checkin_dates span.month").html(monthNames[startDate.getMonth()]);
-                                    $(".tf_checkin_dates span.year").html(startDate.getFullYear());
-                                }
-                                if (selectedDates[1]) {
-                                    const endDate = selectedDates[1];
-                                    $(".tf_checkout_dates span.date").html(endDate.getDate());
-                                    $(".tf_checkout_dates span.month").html(monthNames[endDate.getMonth()]);
-                                    $(".tf_checkout_dates span.year").html(endDate.getFullYear());
-                                }
-                            }
-                        }
-                    });
-                })(jQuery);
-            </script>
         <?php } else { ?>
             <form class="tf_booking-widget <?php echo esc_attr( $classes ); ?>" id="tf_hotel_aval_check" method="get" autocomplete="off" action="<?php echo esc_url( Helper::tf_booking_search_action() ); ?>">
                 <div class="tf_homepage-booking">
@@ -2494,55 +2362,7 @@ class Hotel {
 
             </form>
 
-            <script>
-                (function ($) {
-                    $(document).ready(function () {
-
-                        // flatpickr First Day of Week
-						<?php Helper::tf_flatpickr_locale( 'root' ); ?>
-
-						const regexMap = {
-                            'Y/m/d': /(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/,
-                            'd/m/Y': /(\d{2}\/\d{2}\/\d{4}).*(\d{2}\/\d{2}\/\d{4})/,
-                            'm/d/Y': /(\d{2}\/\d{2}\/\d{4}).*(\d{2}\/\d{2}\/\d{4})/,
-                            'Y-m-d': /(\d{4}-\d{2}-\d{2}).*(\d{4}-\d{2}-\d{2})/,
-                            'd-m-Y': /(\d{2}-\d{2}-\d{4}).*(\d{2}-\d{2}-\d{4})/,
-                            'm-d-Y': /(\d{2}-\d{2}-\d{4}).*(\d{2}-\d{2}-\d{4})/,
-                            'Y.m.d': /(\d{4}\.\d{2}\.\d{2}).*(\d{4}\.\d{2}\.\d{2})/,
-                            'd.m.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/,
-                            'm.d.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/
-                        };
-                        const dateRegex = regexMap['<?php echo esc_attr($hotel_date_format_for_users); ?>'];
-
-                        $("#tf_hotel_aval_check #check-in-out-date").flatpickr({
-                            enableTime: false,
-                            mode: "range",
-                            dateFormat: "Y/m/d",
-                            altInput: true,
-                            altFormat: '<?php echo esc_html( $hotel_date_format_for_users ); ?>',
-                            minDate: "today",
-
-                            // flatpickr locale
-							<?php Helper::tf_flatpickr_locale(); ?>
-
-                            onReady: function (selectedDates, dateStr, instance) {
-                                instance.element.value = dateStr.replace(/(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/g, function (match, date1, date2) {
-                                    return `${date1} - ${date2}`;
-                                });
-                            },
-                            onChange: function (selectedDates, dateStr, instance) {
-                                instance.element.value = dateStr.replace(/(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/g, function (match, date1, date2) {
-									return `${date1} - ${date2}`;
-								});
-								instance.altInput.value = instance.altInput.value.replace( dateRegex, function (match, d1, d2) {
-									return `${d1} - ${d2}`;
-								});
-                            }
-                        });
-
-                    });
-                })(jQuery);
-            </script>
+           
 			<?php
 		}
 	}
@@ -2849,81 +2669,6 @@ class Hotel {
                     <button type="submit" class="tf_btn tf_btn_large tf_btn_sharp tf-submit"><?php echo esc_html( $tf_hotel_book_avaibality_button_text ); ?></button>
                 </div>
             </form>
-
-            <script>
-                (function ($) {
-                    $(document).ready(function () {
-                        var selectedTemplate = '<?php echo esc_html( $tf_hotel_selected_template ); ?>';
-                        var month = 1;
-						const regexMap = {
-                            'Y/m/d': /(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/,
-                            'd/m/Y': /(\d{2}\/\d{2}\/\d{4}).*(\d{2}\/\d{2}\/\d{4})/,
-                            'm/d/Y': /(\d{2}\/\d{2}\/\d{4}).*(\d{2}\/\d{2}\/\d{4})/,
-                            'Y-m-d': /(\d{4}-\d{2}-\d{2}).*(\d{4}-\d{2}-\d{2})/,
-                            'd-m-Y': /(\d{2}-\d{2}-\d{4}).*(\d{2}-\d{2}-\d{4})/,
-                            'm-d-Y': /(\d{2}-\d{2}-\d{4}).*(\d{2}-\d{2}-\d{4})/,
-                            'Y.m.d': /(\d{4}\.\d{2}\.\d{2}).*(\d{4}\.\d{2}\.\d{2})/,
-                            'd.m.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/,
-                            'm.d.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/
-                        };
-                        const dateRegex = regexMap['<?php echo esc_attr($hotel_date_format_for_users); ?>'];
-
-                        if ($(window).width() >= 1240) {
-                            month = 2;
-                        }
-
-                        // flatpickr locale first day of Week
-						<?php Helper::tf_flatpickr_locale( "root" ); ?>
-
-                        $(".tf-single-template__two .tf-booking-date-wrap").on("click", function () {
-                            $(".tf-check-in-out-date").trigger("click");
-                        });
-                        $(".tf-check-in-out-date").flatpickr({
-                            enableTime: false,
-                            mode: "range",
-                            dateFormat: "Y/m/d",
-                            minDate: "today",
-                            showMonths: selectedTemplate == "design-2" ? month : 1,
-
-                            // flatpickr locale
-							<?php Helper::tf_flatpickr_locale(); ?>
-
-                            onReady: function (selectedDates, dateStr, instance) {
-                                instance.element.value = dateStr.replace(/(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/g, function (match, date1, date2) {
-									return `${date1} - ${date2}`;
-								});
-                            },
-                            onChange: function (selectedDates, dateStr, instance) {
-                                instance.element.value = dateStr.replace(/(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/g, function (match, date1, date2) {
-									return `${date1} - ${date2}`;
-								});
-                                dateSetToFields(selectedDates, instance);
-                            },
-                            defaultDate: <?php echo wp_json_encode( explode( '-', $check_in_out ) ) ?>,
-                        });
-
-                        function dateSetToFields(selectedDates, instance) {
-                            if (selectedDates.length === 2) {
-                                const monthNames = [
-                                    "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-                                    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-                                ];
-                                if (selectedDates[0]) {
-                                    const startDate = selectedDates[0];
-                                    $(".tf-single-template__two .tf-booking-form-checkin span.tf-booking-date").html(startDate.getDate());
-                                    $(".tf-single-template__two .tf-booking-form-checkin span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
-                                }
-                                if (selectedDates[1]) {
-                                    const endDate = selectedDates[1];
-                                    $(".tf-single-template__two .tf-booking-form-checkout span.tf-booking-date").html(endDate.getDate());
-                                    $(".tf-single-template__two .tf-booking-form-checkout span.tf-booking-month span").html(monthNames[endDate.getMonth()]);
-                                }
-                            }
-                        }
-
-                    });
-                })(jQuery);
-            </script>
 			</div>
 		<?php } elseif($tf_hotel_selected_template == "design-3" ) { ?>
             <form id="tf-single-hotel-avail" class="tf-hotel-booking-sidebar tf-booking-form" method="get" autocomplete="off">
@@ -3081,60 +2826,6 @@ class Hotel {
 
             </form>
 		<?php } ?>
-        <script>
-            (function ($) {
-                $(document).ready(function () {
-
-                    // First Day of Week
-					<?php Helper::tf_flatpickr_locale( "root" ); ?>
-
-					const regexMap = {
-						'Y/m/d': /(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/,
-						'd/m/Y': /(\d{2}\/\d{2}\/\d{4}).*(\d{2}\/\d{2}\/\d{4})/,
-						'm/d/Y': /(\d{2}\/\d{2}\/\d{4}).*(\d{2}\/\d{2}\/\d{4})/,
-						'Y-m-d': /(\d{4}-\d{2}-\d{2}).*(\d{4}-\d{2}-\d{2})/,
-						'd-m-Y': /(\d{2}-\d{2}-\d{4}).*(\d{2}-\d{2}-\d{4})/,
-						'm-d-Y': /(\d{2}-\d{2}-\d{4}).*(\d{2}-\d{2}-\d{4})/,
-						'Y.m.d': /(\d{4}\.\d{2}\.\d{2}).*(\d{4}\.\d{2}\.\d{2})/,
-						'd.m.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/,
-						'm.d.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/
-					};
-					const dateRegex = regexMap['<?php echo esc_attr($hotel_date_format_for_users); ?>'];
-
-                    const checkinoutdateange = flatpickr(".tf-hotel-booking-sidebar #check-in-out-date", {
-                        enableTime: false,
-                        mode: "range",
-                        minDate: "today",
-                        altInput: true,
-                        altFormat: '<?php echo esc_html( $hotel_date_format_for_users ); ?>',
-                        dateFormat: "Y/m/d",
-                        onReady: function (selectedDates, dateStr, instance) {
-                            instance.element.value = dateStr.replace(/(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/g, function (match, date1, date2) {
-								return `${date1} - ${date2}`;
-							});
-                            instance.altInput.value = instance.altInput.value.replace( dateRegex, function (match, d1, d2) {
-								return `${d1} - ${d2}`;
-							});
-                        },
-                        onChange: function (selectedDates, dateStr, instance) {
-                            instance.element.value = dateStr.replace(/(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/g, function (match, date1, date2) {
-								return `${date1} - ${date2}`;
-							});
-                            instance.altInput.value = instance.altInput.value.replace( dateRegex, function (match, d1, d2) {
-								return `${d1} - ${d2}`;
-							});
-                        },
-                        defaultDate: <?php echo wp_json_encode( explode( '-', $check_in_out ) ) ?>,
-						<?php
-						// Flatpickr locale for translation
-						Helper::tf_flatpickr_locale();
-						?>
-                    });
-
-                });
-            })(jQuery);
-        </script>
-
 		<?php
 	}
 
@@ -4426,66 +4117,6 @@ class Hotel {
 									<?php }
 								} ?>
                             </div>
-
-                            <script>
-                                jQuery('.tf-details-qc-slider-single').slick({
-                                    slidesToShow: 1,
-                                    slidesToScroll: 1,
-                                    arrows: <?php echo $tf_hotel_selected_template == "design-1" ? "false" : "true" ?>,
-                                    fade: false,
-                                    adaptiveHeight: true,
-                                    infinite: true,
-                                    useTransform: true,
-                                    speed: 400,
-                                    cssEase: 'cubic-bezier(0.77, 0, 0.18, 1)',
-                                });
-
-                                jQuery('.tf-details-qc-slider-nav')
-                                    .on('init', function (event, slick) {
-                                        jQuery('.tf-details-qc-slider-nav .slick-slide.slick-current').addClass('is-active');
-                                    })
-                                    .slick({
-                                        slidesToShow: 7,
-                                        slidesToScroll: 7,
-                                        dots: false,
-                                        focusOnSelect: false,
-                                        infinite: false,
-                                        responsive: [{
-                                            breakpoint: 1024,
-                                            settings: {
-                                                slidesToShow: 5,
-                                                slidesToScroll: 5,
-                                            }
-                                        }, {
-                                            breakpoint: 640,
-                                            settings: {
-                                                slidesToShow: 4,
-                                                slidesToScroll: 4,
-                                            }
-                                        }, {
-                                            breakpoint: 420,
-                                            settings: {
-                                                slidesToShow: 3,
-                                                slidesToScroll: 3,
-                                            }
-                                        }]
-                                    });
-
-                                jQuery('.tf-details-qc-slider-single').on('afterChange', function (event, slick, currentSlide) {
-                                    jQuery('.tf-details-qc-slider-nav').slick('slickGoTo', currentSlide);
-                                    var currrentNavSlideElem = '.tf-details-qc-slider-nav .slick-slide[data-slick-index="' + currentSlide + '"]';
-                                    jQuery('.tf-details-qc-slider-nav .slick-slide.is-active').removeClass('is-active');
-                                    jQuery(currrentNavSlideElem).addClass('is-active');
-                                });
-
-                                jQuery('.tf-details-qc-slider-nav').on('click', '.slick-slide', function (event) {
-                                    event.preventDefault();
-                                    var goToSingleSlide = jQuery(this).data('slick-index');
-
-                                    jQuery('.tf-details-qc-slider-single').slick('slickGoTo', goToSingleSlide);
-                                });
-                            </script>
-
                         </div>
                         <div class="tf-hotel-details-info">
 							<?php
@@ -4787,66 +4418,6 @@ class Hotel {
 					                    }
 				                    } ?>
                                 </div>
-
-                                <script>
-                                    jQuery('.tf-room-gallery-slider').slick({
-                                        slidesToShow: 1,
-                                        slidesToScroll: 1,
-                                        arrows: false,
-                                        fade: false,
-                                        adaptiveHeight: true,
-                                        infinite: true,
-                                        useTransform: true,
-                                        speed: 400,
-                                        cssEase: 'cubic-bezier(0.77, 0, 0.18, 1)',
-                                    });
-
-                                    jQuery('.tf-room-gallery-slider-nav')
-                                        .on('init', function (event, slick) {
-                                            jQuery('.tf-room-gallery-slider-nav .slick-slide.slick-current').addClass('is-active');
-                                        })
-                                        .slick({
-                                            slidesToShow: 5,
-                                            slidesToScroll: 5,
-                                            dots: false,
-                                            focusOnSelect: false,
-                                            infinite: false,
-                                            centerMode: false,
-                                            responsive: [{
-                                                breakpoint: 1024,
-                                                settings: {
-                                                    slidesToShow: 4,
-                                                    slidesToScroll: 4,
-                                                }
-                                            }, {
-                                                breakpoint: 640,
-                                                settings: {
-                                                    slidesToShow: 3,
-                                                    slidesToScroll: 3,
-                                                }
-                                            }, {
-                                                breakpoint: 420,
-                                                settings: {
-                                                    slidesToShow: 2,
-                                                    slidesToScroll: 2,
-                                                }
-                                            }]
-                                        });
-
-                                    jQuery('.tf-room-gallery-slider').on('afterChange', function (event, slick, currentSlide) {
-                                        jQuery('.tf-room-gallery-slider-nav').slick('slickGoTo', currentSlide);
-                                        var currrentNavSlideElem = '.tf-room-gallery-slider-nav .slick-slide[data-slick-index="' + currentSlide + '"]';
-                                        jQuery('.tf-room-gallery-slider-nav .slick-slide.is-active').removeClass('is-active');
-                                        jQuery(currrentNavSlideElem).addClass('is-active');
-                                    });
-
-                                    jQuery('.tf-room-gallery-slider-nav').on('click', '.slick-slide', function (event) {
-                                        event.preventDefault();
-                                        var goToSingleSlide = jQuery(this).data('slick-index');
-
-                                        jQuery('.tf-room-gallery-slider').slick('slickGoTo', goToSingleSlide);
-                                    });
-                                </script>
 		                    <?php elseif ( ! empty( $room_preview_img ) ) : ?>
                                 <img src="<?php echo esc_url( $room_preview_img ); ?>" alt="<?php esc_html_e( "Room Image", "tourfic" ); ?>">
 		                    <?php else: ?>

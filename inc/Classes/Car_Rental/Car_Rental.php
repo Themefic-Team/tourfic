@@ -225,60 +225,6 @@ class Car_Rental
                 </div>
 
             </form>
-            <script>
-                (function($) {
-                    $(document).ready(function() {
-
-                        // flatpickr locale first day of Week
-                        <?php Helper::tf_flatpickr_locale("root"); ?>
-
-                        $(".tf-car-search-dropoff-date").on("click", function() {
-                            $(".tf-car-search-pickup-date").trigger("click");
-                        });
-                        var pickupFlatpickr = $(".tf-car-search-pickup-date").flatpickr({
-                            enableTime: false,
-                            mode: "range",
-                            dateFormat: "Y/m/d",
-                            minDate: "today",
-                            showMonths: $(window).width() >= 1240 ? 2 : 1,
-
-                            // flatpickr locale
-                            <?php Helper::tf_flatpickr_locale(); ?>
-
-                            onReady: function (selectedDates, dateStr, instance) {
-                                dateSetToFields(selectedDates, instance);
-                            },
-
-                            onChange: function (selectedDates, dateStr, instance) {
-                                dateSetToFields(selectedDates, instance);
-                            },
-                            <?php if(! empty( $check_in_out )){ ?>
-                                defaultDate: <?php echo wp_json_encode( explode( '-', $check_in_out ) ) ?>,
-                            <?php } ?>
-                        });
-
-                        function dateSetToFields(selectedDates, instance) {
-                            const monthNames = [
-                                "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-                                "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-                            ];
-                            if (selectedDates[0]) {
-                                const startDate = selectedDates[0];
-                                $(".tf-car-search-pickup-date span.date").html(startDate.getDate());
-                                $(".tf-car-search-pickup-date span.month span").html(monthNames[startDate.getMonth()]);
-                                $('.tf_search_pickup_date').val(flatpickr.formatDate(startDate, "Y/m/d"));
-                            }
-                            if (selectedDates[1]) {
-                                const endDate = selectedDates[1];
-                                $(".tf-car-search-dropoff-date span.date").html(endDate.getDate());
-                                $(".tf-car-search-dropoff-date span.month span").html(monthNames[endDate.getMonth()]);
-                                $(".tf_search_dropoff_date").val(flatpickr.formatDate(endDate, "Y/m/d"));
-                            }
-                        }
-
-                    });
-                })(jQuery);
-            </script>
         <?php } elseif (!empty($design) && 3 == $design) { ?>
             <form class="tf-archive-search-box-wrapper <?php echo esc_attr($classes); ?>" id="tf_car_booking" method="get" autocomplete="off" action="<?php echo esc_url(Helper::tf_booking_search_action()); ?>">
                 <div class="tf-date-select-box tf-flex tf-flex-gap-8 tf-date-selection-form">
@@ -475,54 +421,6 @@ class Car_Rental
                     </div>
                 </div>
             </form>
-
-            <script>
-                (function($) {
-                    $(document).ready(function() {
-
-                        // flatpickr locale first day of Week
-                        <?php Helper::tf_flatpickr_locale('root'); ?>
-
-                        $(".tf_dropoff_date").on("click", function () {
-                            $(".tf_pickup_date").trigger("click");
-                        });
-                        $(".tf_pickup_date").flatpickr({
-                            enableTime: false,
-                            mode: "range",
-                            dateFormat: "Y/m/d",
-                            minDate: "today",
-                            showMonths: $(window).width() >= 1240 ? 2 : 1,
-                            // flatpickr locale
-                            <?php Helper::tf_flatpickr_locale(); ?>
-
-                            onReady: function (selectedDates, dateStr, instance) {
-                                dateSetToFields(selectedDates, instance);
-                            },
-
-                            onChange: function (selectedDates, dateStr, instance) {
-                                dateSetToFields(selectedDates, instance);
-                            },
-                            <?php if(! empty( $check_in_out )){ ?>
-                                defaultDate: <?php echo wp_json_encode( explode( '-', $check_in_out ) ) ?>,
-                            <?php } ?>
-                        });
-
-                        function dateSetToFields(selectedDates, instance) {
-                            if (selectedDates.length === 2) {
-                                if (selectedDates[0]) {
-                                    const startDate = flatpickr.formatDate(selectedDates[0], "Y/m/d");
-                                    $(".tf_pickup_date").val(startDate);
-                                }
-                                if (selectedDates[1]) {
-                                    const endDate = flatpickr.formatDate(selectedDates[1], "Y/m/d");
-                                    $(".tf-select-date .tf_dropoff_date").val(endDate);
-                                }
-                            }
-                        }
-
-                    });
-                })(jQuery);
-            </script>
         <?php } elseif (!empty($design) && 4 == $design) { ?>
             <form class="tf-archive-search-box-wrapper tf-search__form tf-shortcode-design-4 <?php echo esc_attr($classes); ?>" id="tf_car_booking" method="get" autocomplete="off" action="<?php echo esc_url(Helper::tf_booking_search_action()); ?>">
                 <fieldset class="tf-search__form__fieldset tf-search__form__car__fieldset">
@@ -711,61 +609,6 @@ class Car_Rental
                     </ul>
                 </div>
             </form>
-            <script>
-                (function($) {
-                    $(document).ready(function() {
-                        // flatpickr locale first day of Week
-                        <?php Helper::tf_flatpickr_locale("root"); ?>
-
-                        $(".tf_dropoff_date").on("click", function() {
-                            $(".tf_pickup_date").trigger("click");
-                        });
-
-                        var pickupFlatpickr = $(".tf_pickup_date").flatpickr({
-                            enableTime: false,
-                            mode: "range",
-                            dateFormat: "Y/m/d",
-                            minDate: "today",
-                            showMonths: $(window).width() >= 1240 ? 2 : 1,
-
-                            // flatpickr locale
-                            <?php Helper::tf_flatpickr_locale(); ?>
-
-                            onReady: function (selectedDates, dateStr, instance) {
-                                dateSetToFields(selectedDates, instance);
-                            },
-
-                            onChange: function (selectedDates, dateStr, instance) {
-                                dateSetToFields(selectedDates, instance);
-                            },
-                            <?php if(! empty( $check_in_out )){ ?>
-                                defaultDate: <?php echo wp_json_encode( explode( '-', $check_in_out ) ) ?>,
-                            <?php } ?>
-                        });
-
-                        function dateSetToFields(selectedDates, instance) {
-                            const monthNames = [
-                                "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-                                "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-                            ];
-                            if (selectedDates[0]) {
-                                const startDate = selectedDates[0];
-                                $(".tf_pickup_date .date").html(startDate.getDate());
-                                $(".tf_pickup_date .month").html(monthNames[startDate.getMonth()]);
-                                $(".tf_pickup_date .year").html(startDate.getFullYear());
-                                $(".tf_pickup_date_input").val(flatpickr.formatDate(startDate, "Y/m/d"));
-                            }
-                            if (selectedDates[1]) {
-                                const endDate = selectedDates[1];
-                                $(".tf_dropoff_date .date").html(endDate.getDate());
-                                $(".tf_dropoff_date .month").html(monthNames[endDate.getMonth()]);
-                                $(".tf_dropoff_date .year").html(endDate.getFullYear());
-                                $(".tf_dropoff_date_input").val(flatpickr.formatDate(endDate, "Y/m/d"));
-                            }
-                        }
-                    });
-                })(jQuery);
-            </script>
 
         <?php } else { ?>
             <form class="tf_booking-widget <?php echo esc_attr($classes); ?>" id="tf_car_booking" method="get" autocomplete="off" action="<?php echo esc_url(Helper::tf_booking_search_action()); ?>">
@@ -918,59 +761,7 @@ class Car_Rental
                 </div>
 
             </form>
-
-            <script>
-                (function($) {
-                    $(document).ready(function() {
-
-                        // flatpickr locale first day of Week
-                        <?php Helper::tf_flatpickr_locale('root'); ?>
-
-                        $(".tf_dropoff_date").on("click", function () {
-                            $(".tf_pickup_date").trigger("click");
-                        });
-                        // Initialize the pickup date picker
-                        var pickupFlatpickr = $(".tf_pickup_date").flatpickr({
-                            enableTime: false,
-                            mode: "range",
-                            dateFormat: "Y/m/d",
-                            minDate: "today",
-                            showMonths: $(window).width() >= 1240 ? 2 : 1,
-
-                            <?php Helper::tf_flatpickr_locale(); ?>
-
-                            onReady: function (selectedDates, dateStr, instance) {
-                                dateSetToFields(selectedDates, instance);
-                            },
-
-                            onChange: function (selectedDates, dateStr, instance) {
-                                dateSetToFields(selectedDates, instance);
-                            },
-                            <?php if(! empty( $check_in_out )){ ?>
-                                defaultDate: <?php echo wp_json_encode( explode( '-', $check_in_out ) ) ?>,
-                            <?php } ?>
-                        });
-
-                        function dateSetToFields(selectedDates, instance) {
-                            if (selectedDates.length === 2) {
-                                if (selectedDates[0]) {
-                                    const startDate = flatpickr.formatDate(selectedDates[0], "Y/m/d");
-                                    $("#tf-car-booking-form .tf_pickup_date").val(startDate);
-                                }
-                                if (selectedDates[1]) {
-                                    const endDate = flatpickr.formatDate(selectedDates[1], "Y/m/d");
-                                    $("#tf-car-booking-form .tf_dropoff_date").val(endDate);
-                                }
-                            }
-                        }
-
-                    
-                       
-
-                    });
-                })(jQuery);
-            </script>
-<?php
+            <?php
         }
     }
 }

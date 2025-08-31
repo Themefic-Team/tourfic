@@ -34,19 +34,6 @@ class Notice_Update extends \Tourfic\Core\TF_Notice {
                 <div class="tf-critical-update-notice notice notice-error is-dismissible">
                     <p><?php esc_html_e( '<b style="color:#d63638;">NOTICE: </b>To provide you with a better and improved experience for the coming days, we have completely revamped our options panel for the <b>Hotel</b> post type. This includes a complete restructuring of the <b>Features</b> section. If you added any icons on the features, then you need to re-add the icons again. Please watch this <a href="https://themefic.com/docs/tourfic/updated-features-section-for-hotel/" target="_blank"><b>video</b></a> to know how to do it. ', 'tourfic' ); ?></p>
                 </div>
-
-                <script>
-                    jQuery(document).ready(function($) {
-                        $(document).on('click', '.tf-critical-update-notice .notice-dismiss', function( event ) {
-                            data = {
-                                action : 'tf_disable_critical_update_admin_notice',
-                            };
-
-                            $.post(ajaxurl, data, function (response) {
-                            });
-                        });
-                    });
-                </script>
             <?php
         }
     }

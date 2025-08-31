@@ -78,50 +78,6 @@ class Reviews extends \Tourfic\Core\Shortcodes {
 			}
 			?>
 		</div>
-		<script>
-            /**
-             * Init the reviews slider
-             */
-            jQuery('document').ready(function ($) {
-
-                $(".tf-reviews-slider").each(function () {
-                    var $this = $(this);
-                    $this.slick({
-                        dots: <?php echo wp_json_encode( filter_var( $dots, FILTER_VALIDATE_BOOLEAN ) ); ?>,
-                        arrows: <?php echo wp_json_encode( filter_var( $arrows, FILTER_VALIDATE_BOOLEAN ) ); ?>,
-                        slidesToShow: <?php echo (int) absint( $count ); ?>,
-                        infinite: <?php echo wp_json_encode( filter_var( $infinite, FILTER_VALIDATE_BOOLEAN ) ); ?>,
-                        speed: <?php echo (int) absint( $speed ); ?>,
-                        autoplay: <?php echo wp_json_encode( filter_var( $autoplay, FILTER_VALIDATE_BOOLEAN ) ); ?>,
-                        autoplaySpeed: <?php echo (int) absint( $speed ); ?>,
-                        slidesToScroll: <?php echo (int) absint( $slidesToScroll ); ?>,
-                        responsive: [
-                            {
-                                breakpoint: 1024,
-                                settings: {
-                                    slidesToShow: 3,
-                                    slidesToScroll: 1,
-                                }
-                            },
-                            {
-                                breakpoint: 600,
-                                settings: {
-                                    slidesToShow: 2,
-                                    slidesToScroll: 1
-                                }
-                            },
-                            {
-                                breakpoint: 480,
-                                settings: {
-                                    slidesToShow: 1,
-                                    slidesToScroll: 1
-                                }
-                            }
-                        ]
-                    });
-                })
-            })
-		</script>
 		<?php
 		return ob_get_clean();
 	}

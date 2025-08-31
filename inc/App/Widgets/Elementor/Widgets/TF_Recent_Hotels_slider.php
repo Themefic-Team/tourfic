@@ -199,46 +199,6 @@ class TF_Recent_Hotels_slider extends \Elementor\Widget_Base {
 
         echo do_shortcode('[tf_recent_hotel title="' .$title. '" subtitle="' .$subtitle. '" count="' .$count. '" slidestoshow="' .$slidestoshow. '"]');
 
-		if ( \Elementor\Plugin::$instance->editor->is_edit_mode() ): ?>
-			<script>
-				jQuery('.recent-hotel-slider .tf-slider-items-wrapper').slick({
-				dots: true,
-				arrows: false,
-				infinite: true,
-				speed: 300,
-				//autoplay: true,
-				autoplaySpeed: 2000,
-				slidesToShow: 3,
-				slidesToScroll: 1,
-				responsive: [
-					{
-						breakpoint: 1024,
-						settings: {
-							slidesToShow: 3,
-							slidesToScroll: 1,
-							infinite: true,
-							dots: true
-						}
-					},
-					{
-						breakpoint: 600,
-						settings: {
-							slidesToShow: 2,
-							slidesToScroll: 1
-						}
-					},
-					{
-						breakpoint: 480,
-						settings: {
-							slidesToShow: 1,
-							slidesToScroll: 1
-						}
-					}
-				]
-			});
-		</script>
-
-		<?php endif;
 	}
 
 

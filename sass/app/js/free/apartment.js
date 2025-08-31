@@ -137,6 +137,204 @@
             });
         }
         
+        jQuery('.tf-details-qc-slider-single').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: true,
+            fade: false,
+            adaptiveHeight: true,
+            infinite: true,
+            useTransform: true,
+            speed: 400,
+            cssEase: 'cubic-bezier(0.77, 0, 0.18, 1)',
+        });
+
+        jQuery('.tf-details-qc-slider-nav')
+            .on('init', function (event, slick) {
+                jQuery('.tf-details-qc-slider-nav .slick-slide.slick-current').addClass('is-active');
+            })
+            .slick({
+                slidesToShow: 7,
+                slidesToScroll: 7,
+                dots: false,
+                focusOnSelect: false,
+                infinite: false,
+                responsive: [{
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 5,
+                        slidesToScroll: 5,
+                    }
+                }, {
+                    breakpoint: 640,
+                    settings: {
+                        slidesToShow: 4,
+                        slidesToScroll: 4,
+                    }
+                }, {
+                    breakpoint: 420,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                    }
+                }]
+            });
+
+        jQuery('.tf-details-qc-slider-single').on('afterChange', function (event, slick, currentSlide) {
+            jQuery('.tf-details-qc-slider-nav').slick('slickGoTo', currentSlide);
+            var currrentNavSlideElem = '.tf-details-qc-slider-nav .slick-slide[data-slick-index="' + currentSlide + '"]';
+            jQuery('.tf-details-qc-slider-nav .slick-slide.is-active').removeClass('is-active');
+            jQuery(currrentNavSlideElem).addClass('is-active');
+        });
+
+        jQuery('.tf-details-qc-slider-nav').on('click', '.slick-slide', function (event) {
+            event.preventDefault();
+            var goToSingleSlide = jQuery(this).data('slick-index');
+
+            jQuery('.tf-details-qc-slider-single').slick('slickGoTo', goToSingleSlide);
+        });
+
+        $(".tf_apartment_check_in_out_date").on("click", function(){
+            $(".tf-apartment-check-in-out-date").trigger("click");
+        });
+        $(".tf-apartment-check-in-out-date").flatpickr({
+            enableTime: false,
+            mode: "range",
+            dateFormat: "Y/m/d",
+            minDate: "today",
+            
+            onReady: function (selectedDates, dateStr, instance) {
+                instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                dateSetToFields(selectedDates, instance);
+            },
+            onChange: function (selectedDates, dateStr, instance) {
+                instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                dateSetToFields(selectedDates, instance);
+            },
+        });
+
+        function dateSetToFields(selectedDates, instance) {
+            if (selectedDates.length === 2) {
+                const monthNames = [
+                    "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+                ];
+                if(selectedDates[0]){
+                    const startDate = selectedDates[0];
+                    $(".tf_apartment_check_in_out_date .tf_checkin_dates span.date").html(startDate.getDate());
+                    $(".tf_apartment_check_in_out_date .tf_checkin_dates span.month span").html(monthNames[startDate.getMonth()]);
+                }
+                if(selectedDates[1]){
+                    const endDate = selectedDates[1];
+                    $(".tf_apartment_check_in_out_date .tf_checkout_dates span.date").html(endDate.getDate());
+                    $(".tf_apartment_check_in_out_date .tf_checkout_dates span.month span").html(monthNames[endDate.getMonth()]);
+                }
+            }
+        }
+
+        $(".tf_apt_check_in_out_date").on("click", function() {
+            $(".tf-apt-check-in-out-date").trigger("click");
+        });
+        $(".tf-apt-check-in-out-date").flatpickr({
+            enableTime: false,
+            mode: "range",
+            dateFormat: "Y/m/d",
+            minDate: "today",
+            onReady: function(selectedDates, dateStr, instance) {
+                instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                dateSetToFieldsTwo(selectedDates, instance);
+            },
+            onChange: function(selectedDates, dateStr, instance) {
+                instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                dateSetToFieldsTwo(selectedDates, instance);
+            }
+        });
+
+        function dateSetToFieldsTwo(selectedDates, instance) {
+            if (selectedDates.length === 2) {
+                const monthNames = [
+                    "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+                ];
+                if (selectedDates[0]) {
+                    const startDate = selectedDates[0];
+                    $(".tf_checkin_dates span.date").html(startDate.getDate());
+                    $(".tf_checkin_dates span.month").html(monthNames[startDate.getMonth()]);
+                    $(".tf_checkin_dates span.year").html(startDate.getFullYear());
+                }
+                if (selectedDates[1]) {
+                    const endDate = selectedDates[1];
+                    $(".tf_checkout_dates span.date").html(endDate.getDate());
+                    $(".tf_checkout_dates span.month").html(monthNames[endDate.getMonth()]);
+                    $(".tf_checkout_dates span.year").html(endDate.getFullYear());
+                }
+            }
+        }
+
+        $("#tf_apartment_booking #check-in-out-date").flatpickr({
+            enableTime: false,
+            mode: "range",
+            dateFormat: "Y/m/d",
+            altInput: true,
+            altFormat: tf_params.date_format_for_users,
+            minDate: "today",
+            onReady: function (selectedDates, dateStr, instance) {
+                instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
+            },
+            onChange: function (selectedDates, dateStr, instance) {
+                instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
+            }
+        });
+
+        const regexMap = {
+            'Y/m/d': /(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/,
+            'd/m/Y': /(\d{2}\/\d{2}\/\d{4}).*(\d{2}\/\d{2}\/\d{4})/,
+            'm/d/Y': /(\d{2}\/\d{2}\/\d{4}).*(\d{2}\/\d{2}\/\d{4})/,
+            'Y-m-d': /(\d{4}-\d{2}-\d{2}).*(\d{4}-\d{2}-\d{2})/,
+            'd-m-Y': /(\d{2}-\d{2}-\d{4}).*(\d{2}-\d{2}-\d{4})/,
+            'm-d-Y': /(\d{2}-\d{2}-\d{4}).*(\d{2}-\d{2}-\d{4})/,
+            'Y.m.d': /(\d{4}\.\d{2}\.\d{2}).*(\d{4}\.\d{2}\.\d{2})/,
+            'd.m.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/,
+            'm.d.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/
+        };
+        const dateRegex = regexMap[tf_params.date_format_for_users];
+
+        $("#tf_apartment_booking #check-in-out-date").flatpickr({
+            enableTime: false,
+            mode: "range",
+            dateFormat: "Y/m/d",
+            altInput: true,
+            altFormat: tf_params.date_format_for_users,
+            minDate: "today",
+            onReady: function (selectedDates, dateStr, instance) {
+                instance.element.value = dateStr.replace(/(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/g, function (match, date1, date2) {
+                    return `${date1} - ${date2}`;
+                });
+                instance.altInput.value = instance.altInput.value.replace(dateRegex, function (match, date1, date2) {
+                    return `${date1} - ${date2}`;
+                });
+            },
+            onChange: function (selectedDates, dateStr, instance) {
+                instance.element.value = dateStr.replace(/(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/g, function (match, date1, date2) {
+                    return `${date1} - ${date2}`;
+                });
+                instance.altInput.value = instance.altInput.value.replace( dateRegex, function (match, d1, d2) {
+                    return `${d1} - ${d2}`;
+                });
+            }
+        });
+
+        const map = L.map('apartment-location').setView([tf_params.single_apartment_data.address_latitude, tf_params.single_apartment_data.address_longitude], tf_params.single_apartment_data.address_zoom);
+
+        const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 20,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+
+        const marker = L.marker([tf_params.single_apartment_data.address_latitude, tf_params.single_apartment_data.address_longitude], {alt: tf_params.single_apartment_data.address}).addTo(map)
+            .bindPopup(tf_params.single_apartment_data.address);
 
         /**
          * Ajax apartment booking

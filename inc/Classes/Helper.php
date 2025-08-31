@@ -782,52 +782,6 @@ class Helper {
                     </div>
                 </form>
             </div>
-            <script>
-                (function ($) {
-                    $(document).ready(function () {
-
-                        const regexMap = {
-                            'Y/m/d': /(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/,
-                            'd/m/Y': /(\d{2}\/\d{2}\/\d{4}).*(\d{2}\/\d{2}\/\d{4})/,
-                            'm/d/Y': /(\d{2}\/\d{2}\/\d{4}).*(\d{2}\/\d{2}\/\d{4})/,
-                            'Y-m-d': /(\d{4}-\d{2}-\d{2}).*(\d{4}-\d{2}-\d{2})/,
-                            'd-m-Y': /(\d{2}-\d{2}-\d{4}).*(\d{2}-\d{2}-\d{4})/,
-                            'm-d-Y': /(\d{2}-\d{2}-\d{4}).*(\d{2}-\d{2}-\d{4})/,
-                            'Y.m.d': /(\d{4}\.\d{2}\.\d{2}).*(\d{4}\.\d{2}\.\d{2})/,
-                            'd.m.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/,
-                            'm.d.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/
-                        };
-                        const dateRegex = regexMap['<?php echo esc_attr($date_format_for_users); ?>'];
-
-                        $(".tf-hotel-side-booking #check-in-out-date").flatpickr({
-                            enableTime: false,
-                            minDate: "today",
-                            altInput: true,
-                            altFormat: '<?php echo esc_html( $date_format_for_users ); ?>',
-                            mode: "range",
-                            dateFormat: "Y/m/d",
-                            onReady: function (selectedDates, dateStr, instance) {
-                                instance.element.value = dateStr.replace(/(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/g, function (match, date1, date2) {
-									return `${date1} - ${date2}`;
-								});
-                                instance.altInput.value = instance.altInput.value.replace( dateRegex, function (match, d1, d2) {
-                                    return `${d1} - ${d2}`;
-                                })
-                            },
-                            onChange: function (selectedDates, dateStr, instance) {
-                                instance.element.value = dateStr.replace(/(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/g, function (match, date1, date2) {
-									return `${date1} - ${date2}`;
-								});
-                                instance.altInput.value = instance.altInput.value.replace( dateRegex, function (match, d1, d2) {
-                                    return `${d1} - ${d2}`;
-                                })
-                            },
-                            defaultDate: <?php echo wp_json_encode( explode( '-', $date ) ) ?>,
-                        });
-
-                    });
-                })(jQuery);
-            </script>
 
 			<?php if ( is_active_sidebar( 'tf_search_result' ) ) { ?>
                 <div id="tf__booking_sidebar">

@@ -48,6 +48,148 @@
 
         window.flatpickr.l10ns[tf_flatpickr_locale()].firstDayOfWeek = tf_params.tour_form_data.first_day_of_week;
 
+        $(".tf_tour_check_in_out_date").on("click", function () {
+            $(".tf-tour-check-in-out-date").trigger("click");
+        });
+        $(".tf-tour-check-in-out-date").flatpickr({
+            enableTime: false,
+            mode: "range",
+            dateFormat: "Y/m/d",
+            minDate: "today",
+            onReady: function (selectedDates, dateStr, instance) {
+                instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                dateSetToFieldsTwo(selectedDates, instance);
+            },
+            onChange: function (selectedDates, dateStr, instance) {
+                instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                dateSetToFieldsTwo(selectedDates, instance);
+            },
+        });
+
+        function dateSetToFieldsTwo(selectedDates, instance) {
+            if (selectedDates.length === 2) {
+                const monthNames = [
+                    "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+                ];
+                if (selectedDates[0]) {
+                    const startDate = selectedDates[0];
+                    $(".tf_tour_check_in_out_date .tf_checkin_dates span.date").html(startDate.getDate());
+                    $(".tf_tour_check_in_out_date .tf_checkin_dates span.month span").html(monthNames[startDate.getMonth()]);
+                }
+                if (selectedDates[1]) {
+                    const endDate = selectedDates[1];
+                    $(".tf_tour_check_in_out_date .tf_checkout_dates span.date").html(endDate.getDate());
+                    $(".tf_tour_check_in_out_date .tf_checkout_dates span.month span").html(monthNames[endDate.getMonth()]);
+                }
+            }
+        }
+
+        $("#tf_tour_aval_check #check-in-out-date").flatpickr({
+            enableTime: false,
+            mode: "range",
+            altInput: true,
+            dateFormat: "Y/m/d",
+            altFormat: tf_params.date_format_for_users,
+            minDate: "today",
+            onReady: function (selectedDates, dateStr, instance) {
+                instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
+            },
+            onChange: function (selectedDates, dateStr, instance) {
+                instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
+            },
+        });
+
+        $(".tf-shortcode-design-4 .tf_tour_check_in_out_date").on("click", function() {
+            $(".tf-shortcode-design-4 .tf-tour-check-in-out-date").trigger("click");
+        });
+        $(".tf-shortcode-design-4 .tf-tour-check-in-out-date").flatpickr({
+            enableTime: false,
+            mode: "range",
+            dateFormat: "Y/m/d",
+            minDate: "today",
+            onReady: function(selectedDates, dateStr, instance) {
+                instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                dateSetToFieldsThree(selectedDates, instance);
+            },
+            onChange: function(selectedDates, dateStr, instance) {
+                instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                dateSetToFieldsThree(selectedDates, instance);
+            }
+        });
+
+        function dateSetToFieldsThree(selectedDates, instance) {
+            if (selectedDates.length === 2) {
+                const monthNames = [
+                    "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+                ];
+                if (selectedDates[0]) {
+                    const startDate = selectedDates[0];
+                    $(".tf-shortcode-design-4 .tf_checkin_dates span.date").html(startDate.getDate());
+                    $(".tf-shortcode-design-4 .tf_checkin_dates span.month").html(monthNames[startDate.getMonth()]);
+                    $(".tf-shortcode-design-4 .tf_checkin_dates span.year").html(startDate.getFullYear());
+                }
+                if (selectedDates[1]) {
+                    const endDate = selectedDates[1];
+                    $(".tf-shortcode-design-4 .tf_checkout_dates span.date").html(endDate.getDate());
+                    $(".tf-shortcode-design-4 .tf_checkout_dates span.month").html(monthNames[endDate.getMonth()]);
+                    $(".tf-shortcode-design-4 .tf_checkout_dates span.year").html(endDate.getFullYear());
+                }
+            }
+        }
+
+        const regexMap = {
+            'Y/m/d': /(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/,
+            'd/m/Y': /(\d{2}\/\d{2}\/\d{4}).*(\d{2}\/\d{2}\/\d{4})/,
+            'm/d/Y': /(\d{2}\/\d{2}\/\d{4}).*(\d{2}\/\d{2}\/\d{4})/,
+            'Y-m-d': /(\d{4}-\d{2}-\d{2}).*(\d{4}-\d{2}-\d{2})/,
+            'd-m-Y': /(\d{2}-\d{2}-\d{4}).*(\d{2}-\d{2}-\d{4})/,
+            'm-d-Y': /(\d{2}-\d{2}-\d{4}).*(\d{2}-\d{2}-\d{4})/,
+            'Y.m.d': /(\d{4}\.\d{2}\.\d{2}).*(\d{4}\.\d{2}\.\d{2})/,
+            'd.m.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/,
+            'm.d.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/
+        };
+        const dateRegex = regexMap[tf_params.date_format_for_users];
+
+        $("#tf_tour_aval_check #check-in-out-date").flatpickr({
+            enableTime: false,
+            mode: "range",
+            altInput: true,
+            dateFormat: "Y/m/d",
+            altFormat: tf_params.date_format_for_users,
+            minDate: "today",
+
+            onReady: function (selectedDates, dateStr, instance) {
+                instance.element.value = dateStr.replace(/(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/g, function (match, date1, date2) {
+                return `${date1} - ${date2}`;
+                });
+                instance.altInput.value = instance.altInput.value.replace( dateRegex, function (match, d1, d2) {
+                    return `${d1} - ${d2}`;
+                });
+            },
+            onChange: function (selectedDates, dateStr, instance) {
+                instance.element.value = dateStr.replace(/(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/g, function (match, date1, date2) {
+                    return `${date1} - ${date2}`;
+                });
+                instance.altInput.value = instance.altInput.value.replace( dateRegex, function (match, d1, d2) {
+                    return `${d1} - ${d2}`;
+                });
+            },
+        });
+
+        const map = L.map('tour-location').setView([tf_params.tour_form_data.location_latitude, tf_params.tour_form_data.location_longitude], tf_params.tour_form_data.location_zoom);
+        
+        const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 20,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+
+        const marker = L.marker([tf_params.tour_form_data.location_latitude, tf_params.tour_form_data.location_longitude], {alt: tf_params.tour_form_data.location}).addTo(map)
+            .bindPopup(tf_params.tour_form_data.location);
+
         // Create an instance of Notyf
         const notyf = new Notyf({
             ripple: true,

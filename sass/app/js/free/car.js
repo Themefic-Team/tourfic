@@ -12,6 +12,203 @@
             },
         });
 
+        $(".tf-car-search-dropoff-date").on("click", function() {
+            $(".tf-car-search-pickup-date").trigger("click");
+        });
+        var pickupFlatpickr = $(".tf-car-search-pickup-date").flatpickr({
+            enableTime: false,
+            mode: "range",
+            dateFormat: "Y/m/d",
+            minDate: "today",
+            showMonths: $(window).width() >= 1240 ? 2 : 1,
+
+            onReady: function (selectedDates, dateStr, instance) {
+                dateSetToFields(selectedDates, instance);
+            },
+
+            onChange: function (selectedDates, dateStr, instance) {
+                dateSetToFields(selectedDates, instance);
+            },
+        });
+
+        function dateSetToFields(selectedDates, instance) {
+            const monthNames = [
+                "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+            ];
+            if (selectedDates[0]) {
+                const startDate = selectedDates[0];
+                $(".tf-car-search-pickup-date span.date").html(startDate.getDate());
+                $(".tf-car-search-pickup-date span.month span").html(monthNames[startDate.getMonth()]);
+                $('.tf_search_pickup_date').val(flatpickr.formatDate(startDate, "Y/m/d"));
+            }
+            if (selectedDates[1]) {
+                const endDate = selectedDates[1];
+                $(".tf-car-search-dropoff-date span.date").html(endDate.getDate());
+                $(".tf-car-search-dropoff-date span.month span").html(monthNames[endDate.getMonth()]);
+                $(".tf_search_dropoff_date").val(flatpickr.formatDate(endDate, "Y/m/d"));
+            }
+        }
+
+        $(".tf_dropoff_date").on("click", function () {
+            $(".tf_pickup_date").trigger("click");
+        });
+        $(".tf_pickup_date").flatpickr({
+            enableTime: false,
+            mode: "range",
+            dateFormat: "Y/m/d",
+            minDate: "today",
+            showMonths: $(window).width() >= 1240 ? 2 : 1,
+
+            onReady: function (selectedDates, dateStr, instance) {
+                dateSetToFieldsTwo(selectedDates, instance);
+            },
+
+            onChange: function (selectedDates, dateStr, instance) {
+                dateSetToFieldsTwo(selectedDates, instance);
+            },
+        });
+
+        function dateSetToFieldsTwo(selectedDates, instance) {
+            if (selectedDates.length === 2) {
+                if (selectedDates[0]) {
+                    const startDate = flatpickr.formatDate(selectedDates[0], "Y/m/d");
+                    $(".tf_pickup_date").val(startDate);
+                }
+                if (selectedDates[1]) {
+                    const endDate = flatpickr.formatDate(selectedDates[1], "Y/m/d");
+                    $(".tf-select-date .tf_dropoff_date").val(endDate);
+                }
+            }
+        }
+
+        $(".tf-shortcode-design-4 .tf_dropoff_date").on("click", function() {
+            $(".tf-shortcode-design-4 .tf_pickup_date").trigger("click");
+        });
+
+        var pickupFlatpickr = $(".tf-shortcode-design-4 .tf_pickup_date").flatpickr({
+            enableTime: false,
+            mode: "range",
+            dateFormat: "Y/m/d",
+            minDate: "today",
+            showMonths: $(window).width() >= 1240 ? 2 : 1,
+
+            onReady: function (selectedDates, dateStr, instance) {
+                dateSetToFieldsFour(selectedDates, instance);
+            },
+
+            onChange: function (selectedDates, dateStr, instance) {
+                dateSetToFieldsFour(selectedDates, instance);
+            },
+        });
+
+        function dateSetToFieldsFour(selectedDates, instance) {
+            const monthNames = [
+                "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+            ];
+            if (selectedDates[0]) {
+                const startDate = selectedDates[0];
+                $(".tf-shortcode-design-4 .tf_pickup_date .date").html(startDate.getDate());
+                $(".tf-shortcode-design-4 .tf_pickup_date .month").html(monthNames[startDate.getMonth()]);
+                $(".tf-shortcode-design-4 .tf_pickup_date .year").html(startDate.getFullYear());
+                $(".tf-shortcode-design-4 .tf_pickup_date_input").val(flatpickr.formatDate(startDate, "Y/m/d"));
+            }
+            if (selectedDates[1]) {
+                const endDate = selectedDates[1];
+                $(".tf-shortcode-design-4 .tf_dropoff_date .date").html(endDate.getDate());
+                $(".tf-shortcode-design-4 .tf_dropoff_date .month").html(monthNames[endDate.getMonth()]);
+                $(".tf-shortcode-design-4 .tf_dropoff_date .year").html(endDate.getFullYear());
+                $(".tf-shortcode-design-4 .tf_dropoff_date_input").val(flatpickr.formatDate(endDate, "Y/m/d"));
+            }
+        }
+
+        $(".tf_booking-widget .tf_dropoff_date").on("click", function () {
+            $(".tf_booking-widget .tf_pickup_date").trigger("click");
+        });
+        // Initialize the pickup date picker
+        var pickupFlatpickr = $(".tf_booking-widget .tf_pickup_date").flatpickr({
+            enableTime: false,
+            mode: "range",
+            dateFormat: "Y/m/d",
+            minDate: "today",
+            showMonths: $(window).width() >= 1240 ? 2 : 1,
+
+            onReady: function (selectedDates, dateStr, instance) {
+                dateSetToFieldsFive(selectedDates, instance);
+            },
+
+            onChange: function (selectedDates, dateStr, instance) {
+                dateSetToFieldsFive(selectedDates, instance);
+            },
+        });
+
+        function dateSetToFieldsFive(selectedDates, instance) {
+            if (selectedDates.length === 2) {
+                if (selectedDates[0]) {
+                    const startDate = flatpickr.formatDate(selectedDates[0], "Y/m/d");
+                    $("#tf-car-booking-form .tf_pickup_date").val(startDate);
+                }
+                if (selectedDates[1]) {
+                    const endDate = flatpickr.formatDate(selectedDates[1], "Y/m/d");
+                    $("#tf-car-booking-form .tf_dropoff_date").val(endDate);
+                }
+            }
+        }
+
+        $(".tf-single-template__one #tf_dropoff_date").on("click", function () {
+            $(".tf-single-template__one #tf_pickup_date").trigger("click");
+        });
+        $(".tf-single-template__one #tf_pickup_date").flatpickr({
+            enableTime: false,
+            mode: "range",
+            dateFormat: "Y/m/d",
+            minDate: "today",
+
+            onReady: function (selectedDates, dateStr, instance) {
+                dateSetToFieldsSingle(selectedDates, instance);
+            },
+            onChange: function (selectedDates, dateStr, instance) {
+                dateSetToFieldsSingle(selectedDates, instance);
+            },
+        });
+
+        function dateSetToFieldsSingle(selectedDates, instance) {
+            if (selectedDates.length === 2) {
+                const startDay = flatpickr.formatDate(selectedDates[0], "l");
+                const endDay = flatpickr.formatDate(selectedDates[1], "l");
+                if (selectedDates[0]) {
+                    const startDate = flatpickr.formatDate(selectedDates[0], "Y/m/d");
+                    $(".tf-single-template__one #tf_pickup_date").val(startDate);
+                }
+                if (selectedDates[1]) {
+                    const endDate = flatpickr.formatDate(selectedDates[1], "Y/m/d");
+                    $(".tf-single-template__one #tf_dropoff_date").val(endDate);
+                }
+
+                $.ajax({
+                    url: tf_params.ajax_url,
+                    type: 'POST',
+                    data: {
+                        action: 'get_car_time_slots',
+                        pickup_day: startDay,
+                        drop_day: endDay
+                    },
+                    success: function(response) {
+                    }
+                });
+            }
+        }
+
+        const map = L.map('car-location').setView([tf_params.single_car_data.address_latitude, tf_params.single_car_data.address_longitude], tf_params.single_car_data.address_zoom);
+
+        const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 20,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+
+        const marker = L.marker([tf_params.single_car_data.address_latitude, tf_params.single_car_data.address_longitude], {alt: tf_params.single_car_data.address}).addTo(map)
+            .bindPopup(tf_params.single_car_data.address);
         
         // FAQ Accordion
         $('.tf-car-faq-section .tf-faq-head').on("click", function () {

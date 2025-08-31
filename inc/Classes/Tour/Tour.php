@@ -34,9 +34,7 @@ class Tour {
 		add_action( 'wp_ajax_nopriv_tf_tour_search', array( $this, 'tf_tour_search_ajax_callback' ) );
 		add_action( 'wp', array( $this, 'tf_setup_everydate_cron_job' ) );
 		add_action( 'init', array( $this, 'tf_tours_custom_status_creation' ) );
-		add_action( 'admin_footer-edit.php', array( $this, 'tf_tours_custom_status_add_in_quick_edit' ) );
-		add_action( 'admin_footer-post.php', array( $this, 'tf_tours_custom_status_add_in_post_page' ) );
-		add_action( 'admin_footer-post-new.php', array( $this, 'tf_tours_custom_status_add_in_post_page' ) );
+		
 		add_action( 'wp_after_insert_post', array( $this, 'tf_tour_type_assign_taxonomies'), 100, 3 );
 		add_action( 'wp_ajax_nopriv_tf_tour_booking_popup', array( $this, 'tf_tour_booking_popup_callback' ) );
 		add_action( 'wp_ajax_tf_tour_booking_popup', array( $this, 'tf_tour_booking_popup_callback' ) );
@@ -252,57 +250,6 @@ class Tour {
                 </div>
 
             </form>
-            <script>
-                (function ($) {
-                    $(document).ready(function () {
-
-                        // flatpickr locale first day of Week
-						<?php Helper::tf_flatpickr_locale( "root" ); ?>
-
-                        $(".tf_tour_check_in_out_date").on("click", function () {
-                            $(".tf-tour-check-in-out-date").trigger("click");
-                        });
-                        $(".tf-tour-check-in-out-date").flatpickr({
-                            enableTime: false,
-                            mode: "range",
-                            dateFormat: "Y/m/d",
-                            minDate: "today",
-
-                            // flatpickr locale
-							<?php Helper::tf_flatpickr_locale(); ?>
-
-                            onReady: function (selectedDates, dateStr, instance) {
-                                instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-                                dateSetToFields(selectedDates, instance);
-                            },
-                            onChange: function (selectedDates, dateStr, instance) {
-                                instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-                                dateSetToFields(selectedDates, instance);
-                            },
-                        });
-
-                        function dateSetToFields(selectedDates, instance) {
-                            if (selectedDates.length === 2) {
-                                const monthNames = [
-                                    "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-                                    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-                                ];
-                                if (selectedDates[0]) {
-                                    const startDate = selectedDates[0];
-                                    $(".tf_tour_check_in_out_date .tf_checkin_dates span.date").html(startDate.getDate());
-                                    $(".tf_tour_check_in_out_date .tf_checkin_dates span.month span").html(monthNames[startDate.getMonth()]);
-                                }
-                                if (selectedDates[1]) {
-                                    const endDate = selectedDates[1];
-                                    $(".tf_tour_check_in_out_date .tf_checkout_dates span.date").html(endDate.getDate());
-                                    $(".tf_tour_check_in_out_date .tf_checkout_dates span.month span").html(monthNames[endDate.getMonth()]);
-                                }
-                            }
-                        }
-
-                    });
-                })(jQuery);
-            </script>
 		<?php }elseif( !empty($design) && 3==$design ){ ?>
 
 			<form class="tf-archive-search-box-wrapper <?php echo esc_attr( $classes ); ?>" id="tf_tour_aval_check" method="get" autocomplete="off" action="<?php echo esc_url( Helper::tf_booking_search_action() ); ?>">
@@ -428,37 +375,6 @@ class Tour {
 				</div>
 				</div>
             </form>
-
-            <script>
-                (function ($) {
-                    $(document).ready(function () {
-						// flatpickr first day of Week
-						<?php Helper::tf_flatpickr_locale( 'root' ); ?>
-
-						$("#tf_tour_aval_check #check-in-out-date").flatpickr({
-							enableTime: false,
-							mode: "range",
-							altInput: true,
-							dateFormat: "Y/m/d",
-							altFormat: '<?php echo esc_attr( $tour_date_format_for_users ); ?>',
-							minDate: "today",
-
-							// flatpickr locale
-							<?php Helper::tf_flatpickr_locale(); ?>
-
-							onReady: function (selectedDates, dateStr, instance) {
-								instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-								instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
-							},
-							onChange: function (selectedDates, dateStr, instance) {
-								instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-								instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
-							},
-						});
-					});
-                })(jQuery);
-            </script>
-
 		<?php } elseif (!empty($design) && 4 == $design) { ?>
 			<form class="tf-archive-search-box-wrapper tf-search__form tf-shortcode-design-4 <?php echo esc_attr($classes); ?>" id="tf_tour_aval_check" method="get" autocomplete="off" action="<?php echo esc_url(Helper::tf_booking_search_action()); ?>">
 				<fieldset class="tf-search__form__fieldset">
@@ -658,59 +574,6 @@ class Tour {
 					</div>
 				</fieldset>
 			</form>
-			<script>
-				(function($) {
-					$(document).ready(function() {
-						// flatpickr locale first day of Week
-						<?php Helper::tf_flatpickr_locale("root"); ?>
-
-						$(".tf_tour_check_in_out_date").on("click", function() {
-							$(".tf-tour-check-in-out-date").trigger("click");
-						});
-						$(".tf-tour-check-in-out-date").flatpickr({
-							enableTime: false,
-							mode: "range",
-							dateFormat: "Y/m/d",
-							minDate: "today",
-
-							// flatpickr locale
-							<?php Helper::tf_flatpickr_locale(); ?>
-
-							onReady: function(selectedDates, dateStr, instance) {
-								instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-								dateSetToFields(selectedDates, instance);
-							},
-							onChange: function(selectedDates, dateStr, instance) {
-								instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-								dateSetToFields(selectedDates, instance);
-							}
-						});
-
-						function dateSetToFields(selectedDates, instance) {
-							if (selectedDates.length === 2) {
-								const monthNames = [
-									"Jan", "Feb", "Mar", "Apr", "May", "Jun",
-									"Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-								];
-								if (selectedDates[0]) {
-									const startDate = selectedDates[0];
-									$(".tf_checkin_dates span.date").html(startDate.getDate());
-									$(".tf_checkin_dates span.month").html(monthNames[startDate.getMonth()]);
-									$(".tf_checkin_dates span.year").html(startDate.getFullYear());
-								}
-								if (selectedDates[1]) {
-									const endDate = selectedDates[1];
-									$(".tf_checkout_dates span.date").html(endDate.getDate());
-									$(".tf_checkout_dates span.month").html(monthNames[endDate.getMonth()]);
-									$(".tf_checkout_dates span.year").html(endDate.getFullYear());
-								}
-							}
-						}
-					});
-				})(jQuery);
-			</script>
-
-
 		<?php } else { ?>
             <form class="tf_booking-widget <?php echo esc_attr( $classes ); ?>" id="tf_tour_aval_check" method="get" autocomplete="off" action="<?php echo esc_url( Helper::tf_booking_search_action() ); ?>">
                 <div class="tf_homepage-booking">
@@ -883,58 +746,6 @@ class Tour {
                 </div>
 
             </form>
-            <script>
-                (function ($) {
-                    $(document).ready(function () {
-
-						const regexMap = {
-                            'Y/m/d': /(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/,
-                            'd/m/Y': /(\d{2}\/\d{2}\/\d{4}).*(\d{2}\/\d{2}\/\d{4})/,
-                            'm/d/Y': /(\d{2}\/\d{2}\/\d{4}).*(\d{2}\/\d{2}\/\d{4})/,
-                            'Y-m-d': /(\d{4}-\d{2}-\d{2}).*(\d{4}-\d{2}-\d{2})/,
-                            'd-m-Y': /(\d{2}-\d{2}-\d{4}).*(\d{2}-\d{2}-\d{4})/,
-                            'm-d-Y': /(\d{2}-\d{2}-\d{4}).*(\d{2}-\d{2}-\d{4})/,
-                            'Y.m.d': /(\d{4}\.\d{2}\.\d{2}).*(\d{4}\.\d{2}\.\d{2})/,
-                            'd.m.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/,
-                            'm.d.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/
-                        };
-                        const dateRegex = regexMap['<?php echo esc_attr($tour_date_format_for_users); ?>'];
-
-                        // flatpickr first day of Week
-						<?php Helper::tf_flatpickr_locale( 'root' ); ?>
-
-                        $("#tf_tour_aval_check #check-in-out-date").flatpickr({
-                            enableTime: false,
-                            mode: "range",
-                            altInput: true,
-                            dateFormat: "Y/m/d",
-                            altFormat: '<?php echo esc_attr( $tour_date_format_for_users ); ?>',
-                            minDate: "today",
-
-                            // flatpickr locale
-							<?php Helper::tf_flatpickr_locale(); ?>
-
-                            onReady: function (selectedDates, dateStr, instance) {
-                                instance.element.value = dateStr.replace(/(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/g, function (match, date1, date2) {
-								return `${date1} - ${date2}`;
-								});
-								instance.altInput.value = instance.altInput.value.replace( dateRegex, function (match, d1, d2) {
-									return `${d1} - ${d2}`;
-								});
-                            },
-                            onChange: function (selectedDates, dateStr, instance) {
-                                instance.element.value = dateStr.replace(/(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/g, function (match, date1, date2) {
-									return `${date1} - ${date2}`;
-								});
-								instance.altInput.value = instance.altInput.value.replace( dateRegex, function (match, d1, d2) {
-									return `${d1} - ${d2}`;
-								});
-                            },
-                        });
-
-                    });
-                })(jQuery);
-            </script>
 			<?php
 		}
 	}
@@ -4185,28 +3996,6 @@ class Tour {
 			'show_in_admin_all_list'    => true,
 			'show_in_admin_status_list' => true
 		) );
-	}
-
-	function tf_tours_custom_status_add_in_quick_edit() {
-		global $post;
-		if ( ! empty( $post->post_type ) && $post->post_type == 'tf_tours' ) {
-			echo "<script>
-    jQuery(document).ready( function() {
-        jQuery( 'select[name=\"_status\"]' ).append( '<option value=\"expired\">Expired</option>' );      
-    }); 
-    </script>";
-		}
-	}
-
-	function tf_tours_custom_status_add_in_post_page() {
-		global $post;
-		if ( $post->post_type == 'tf_tours' ) {
-			echo "<script>
-        jQuery(document).ready( function() {        
-            jQuery( 'select[name=\"post_status\"]' ).append( '<option value=\"expired\">Expired</option>' );
-        });
-        </script>";
-		}
 	}
 
 	/**

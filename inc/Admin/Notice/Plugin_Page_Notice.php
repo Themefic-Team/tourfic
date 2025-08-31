@@ -26,20 +26,7 @@ class Plugin_Page_Notice extends \Tourfic\Core\TF_Notice {
 
     function tf_plugin_admin_notice( ) { 
 		if ( get_option( $this->notice_id ) < 1 ) {
-            ?>
-                <script>
-                    jQuery(document).ready(function($) {
-                        $(document).on('click', '.tf-critical-update-notice .notice-dismiss', function( event ) {
-                            data = {
-                                action : 'tf_disable_critical_update_admin_notice',
-                            };
-
-                            $.post(ajaxurl, data, function (response) {
-                            });
-                        });
-                    });
-                </script>
-            <?php
+            
         }
 	}
 

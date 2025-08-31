@@ -19,6 +19,80 @@
             });
         }
         
+        const regexMap = {
+            'Y/m/d': /(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/,
+            'd/m/Y': /(\d{2}\/\d{2}\/\d{4}).*(\d{2}\/\d{2}\/\d{4})/,
+            'm/d/Y': /(\d{2}\/\d{2}\/\d{4}).*(\d{2}\/\d{2}\/\d{4})/,
+            'Y-m-d': /(\d{4}-\d{2}-\d{2}).*(\d{4}-\d{2}-\d{2})/,
+            'd-m-Y': /(\d{2}-\d{2}-\d{4}).*(\d{2}-\d{2}-\d{4})/,
+            'm-d-Y': /(\d{2}-\d{2}-\d{4}).*(\d{2}-\d{2}-\d{4})/,
+            'Y.m.d': /(\d{4}\.\d{2}\.\d{2}).*(\d{4}\.\d{2}\.\d{2})/,
+            'd.m.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/,
+            'm.d.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/
+        };
+        const dateRegex = regexMap[tf_params.date_format_for_users];
+
+        $(".tf-hotel-side-booking #check-in-out-date").flatpickr({
+            enableTime: false,
+            minDate: "today",
+            altInput: true,
+            altFormat: tf_params.date_format_for_users,
+            mode: "range",
+            dateFormat: "Y/m/d",
+            onReady: function (selectedDates, dateStr, instance) {
+                instance.element.value = dateStr.replace(/(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/g, function (match, date1, date2) {
+                    return `${date1} - ${date2}`;
+                });
+                instance.altInput.value = instance.altInput.value.replace( dateRegex, function (match, d1, d2) {
+                    return `${d1} - ${d2}`;
+                })
+            },
+            onChange: function (selectedDates, dateStr, instance) {
+                instance.element.value = dateStr.replace(/(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/g, function (match, date1, date2) {
+                    return `${date1} - ${date2}`;
+                });
+                instance.altInput.value = instance.altInput.value.replace( dateRegex, function (match, d1, d2) {
+                    return `${d1} - ${d2}`;
+                })
+            },
+        });
+
+        $(".tf-reviews-slider").each(function () {
+            var $this = $(this);
+            $this.slick({
+                dots: true,
+                arrows: false,
+                slidesToShow: 3,
+                infinite: false,
+                speed: 2000,
+                autoplay: false,
+                autoplaySpeed: 2000,
+                slidesToScroll: 1,
+                responsive: [
+                    {
+                        breakpoint: 1024,
+                        settings: {
+                            slidesToShow: 3,
+                            slidesToScroll: 1,
+                        }
+                    },
+                    {
+                        breakpoint: 600,
+                        settings: {
+                            slidesToShow: 2,
+                            slidesToScroll: 1
+                        }
+                    },
+                    {
+                        breakpoint: 480,
+                        settings: {
+                            slidesToShow: 1,
+                            slidesToScroll: 1
+                        }
+                    }
+                ]
+            });
+        })
 
         /*
          * AJAX load for range filter to prevent performance issue.
