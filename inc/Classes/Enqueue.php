@@ -459,7 +459,7 @@ class Enqueue {
 		/**
 		 * Custom
 		 */
-		wp_enqueue_script( 'tourfic', TF_ASSETS_APP_URL . 'js/tourfic-scripts' . $this->js_min . '.js', '', TF_VERSION, true );
+		wp_enqueue_script( 'tourfic', TF_ASSETS_APP_URL . 'js/tourfic-scripts.js', '', TF_VERSION, true );
 		wp_localize_script( 'tourfic', 'tf_params',
 			array(
 				'nonce'                  => wp_create_nonce( 'tf_ajax_nonce' ),
@@ -550,6 +550,191 @@ class Enqueue {
 
 		wp_add_inline_script( 'tourfic', $inline_scripts );
 
+		if ($post_type == 'tf_apartment' && !empty($post_id) && !is_post_type_archive('tf_apartment')) {
+			// Get apartment meta data needed for the script
+			$meta = get_post_meta($post_id, 'tf_apartment_opt', true);
+			$min_stay = !empty($meta['min_stay']) ? $meta['min_stay'] : 1;
+			$pricing_type = !empty($meta['pricing_type']) ? $meta['pricing_type'] : 'per_night';
+			$enable_availability = !empty($meta['enable_availability']) ? $meta['enable_availability'] : '';
+			$apt_availability = !empty($meta['apt_availability']) ? $meta['apt_availability'] : '';
+			
+			// Get booked dates
+			$booked_dates = Apartment::tf_apartment_booked_days($post_id);
+			
+			// Prepare availability data
+			$apt_disable_dates = [];
+			$tf_apt_enable_dates = [];
+			if ($enable_availability === '1' && !empty($apt_availability)) {
+				$apt_availability_arr = json_decode($apt_availability, true);
+				if (!empty($apt_availability_arr) && is_array($apt_availability_arr)) {
+					foreach ($apt_availability_arr as $date) {
+						if ($date['status'] === 'unavailable') {
+							$apt_disable_dates[] = $date['check_in'];
+						}
+						if ($date['status'] === 'available') {
+							$tf_apt_enable_dates[] = $date['check_in'];
+						}
+					}
+				}
+			}
+			
+			// Get only booked dates
+			$only_booked_dates = is_array($booked_dates) && !empty($booked_dates) ? 
+				array_merge(array_column($booked_dates, "check_in"), array_column($booked_dates, "check_out")) : array();
+			
+			if (!empty($booked_dates) && is_array($booked_dates)) {
+				foreach ($booked_dates as $booked_date) {
+					$booked_date_period[] = new \DatePeriod(
+						new \DateTime($booked_date["check_in"] . ' 00:00'),
+						new \DateInterval('P1D'),
+						new \DateTime($booked_date["check_out"] . ' 23:59')
+					);
+				}
+				foreach ($booked_date_period as $b_date) {
+					foreach ($b_date as $date) {
+						$only_booked_dates[] = $date->format('Y/m/d');
+					}
+				}
+			}
+			
+			$only_booked_dates = !empty($only_booked_dates) ? array_unique($only_booked_dates) : array();
+			
+			if (is_array($tf_apt_enable_dates) && !empty($tf_apt_enable_dates)) {
+				$checked_enable_dates = array_filter($tf_apt_enable_dates, function($date) use($only_booked_dates) {
+					return !in_array($date, $only_booked_dates);
+				});
+			}
+			
+			// Date format
+			$date_format_change_appartments = !empty(Helper::tfopt("tf-date-format-for-users")) ? 
+				Helper::tfopt("tf-date-format-for-users") : "Y/m/d";
+			
+			// Prepare the script
+			$apartment_script = '
+			(function ($) {
+				$(document).ready(function () {
+
+					let minStay = ' . $min_stay . ';
+
+					const bookingCalculation = (selectedDates) => {
+						// Pricing calculation logic would go here
+						// This is a simplified version
+						if (selectedDates[0] && selectedDates[1]) {
+							var diff = Math.abs(selectedDates[1] - selectedDates[0]);
+							var days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+							
+							// Minimum stay validation
+							if (days < minStay) {
+								$(".tf-submit").attr("disabled", "disabled");
+								$(".tf-submit").addClass("disabled");
+								$(".tf-check-in-out-date .tf_label-row .tf-err-msg, .tf-apartment-design-one-form .tf_booking-dates .tf-err-msg").remove();
+								$(".tf-check-in-out-date .tf_label-row, .tf-apartment-design-one-form .tf_booking-dates").append("<span class=\"tf-err-msg\">' . sprintf(esc_html__('Minimum stay is %s nights', 'tourfic'), $min_stay) . '</span>");
+							} else {
+								$(".tf-submit").removeAttr("disabled");
+								$(".tf-submit").removeClass("disabled");
+								$(".tf-check-in-out-date .tf_label-row .tf-err-msg, .tf-apartment-design-one-form .tf_booking-dates .tf-err-msg").remove();
+							}
+						}
+					}
+
+					$(".tf-apartment-design-one-form #check-in-date").on("click", function () {
+						$(".tf-check-out-date .form-control").trigger("click");
+					});
+
+					const regexMap = {
+						"Y/m/d": /(\\d{4}\\/\\d{2}\\/\\d{2}).*(\\d{4}\\/\\d{2}\\/\\d{2})/,
+						"d/m/Y": /(\\d{2}\\/\\d{2}\\/\\d{4}).*(\\d{2}\\/\\d{2}\\/\\d{4})/,
+						"m/d/Y": /(\\d{2}\\/\\d{2}\\/\\d{4}).*(\\d{2}\\/\\d{2}\\/\\d{4})/,
+						"Y-m-d": /(\\d{4}-\\d{2}-\\d{2}).*(\\d{4}-\\d{2}-\\d{2})/,
+						"d-m-Y": /(\\d{2}-\\d{2}-\\d{4}).*(\\d{2}-\\d{2}-\\d{4})/,
+						"m-d-Y": /(\\d{2}-\\d{2}-\\d{4}).*(\\d{2}-\\d{2}-\\d{4})/,
+						"Y.m.d": /(\\d{4}\\.\\d{2}\\.\\d{2}).*(\\d{4}\\.\\d{2}\\.\\d{2})/,
+						"d.m.Y": /(\\d{2}\\.\\d{2}\\.\\d{4}).*(\\d{2}\\.\\d{2}\\.\\d{4})/,
+						"m.d.Y": /(\\d{2}\\.\\d{2}\\.\\d{4}).*(\\d{2}\\.\\d{2}\\.\\d{4})/
+					};
+					const dateRegex = regexMap["' . $date_format_change_appartments . '"];
+
+					const checkinoutdateange = flatpickr("#tf-apartment-booking #check-in-out-date", {
+						enableTime: false,
+						mode: "range",
+						minDate: "today",
+						altInput: true,
+						altFormat: "' . $date_format_change_appartments . '",
+						dateFormat: "Y/m/d",
+						onReady: function (selectedDates, dateStr, instance) {
+							instance.element.value = dateStr.replace(/(\\d{4}\\/\\d{2}\\/\\d{2}).*(\\d{4}\\/\\d{2}\\/\\d{2})/g, function (match, date1, date2) {
+								return `${date1} - ${date2}`;
+							});
+							instance.altInput.value = instance.altInput.value.replace(dateRegex, function (match, d1, d2) {
+								return `${d1} - ${d2}`;
+							});
+							bookingCalculation(selectedDates);
+							dateSetToFields(selectedDates, instance);
+						},
+						onChange: function (selectedDates, dateStr, instance) {
+							instance.element.value = dateStr.replace(/(\\d{4}\\/\\d{2}\\/\\d{2}).*(\\d{4}\\/\\d{2}\\/\\d{2})/g, function (match, date1, date2) {
+								return `${date1} - ${date2}`;
+							});
+							instance.altInput.value = instance.altInput.value.replace(dateRegex, function (match, d1, d2) {
+								return `${d1} - ${d2}`;
+							});
+							bookingCalculation(selectedDates);
+							dateSetToFields(selectedDates, instance);
+						}, ';
+						
+			// Add enable dates if available
+			if (!empty($checked_enable_dates) && is_array($checked_enable_dates)) {
+				$apartment_script .= 'enable: [';
+				foreach ($checked_enable_dates as $date) {
+					$apartment_script .= '"' . $date . '",';
+				}
+				$apartment_script .= '],';
+			}
+			
+			// Add disable dates
+			$apartment_script .= 'disable: [';
+			foreach ($booked_dates as $booked_date) {
+				$apartment_script .= '{
+					from: "' . $booked_date['check_in'] . '",
+					to: "' . $booked_date['check_out'] . '"
+				},';
+			}
+			foreach ($apt_disable_dates as $apt_disable_date) {
+				$apartment_script .= '{
+					from: "' . $apt_disable_date . '",
+					to: "' . $apt_disable_date . '"
+				},';
+			}
+			$apartment_script .= '],';
+			
+			// Add locale and close the flatpickr initialization
+			$apartment_script .= '
+					});
+
+					// Need to change the date format
+					function dateSetToFields(selectedDates, instance) {
+						var dates = instance.altInput.value.split(" - ");
+						if (dates.length === 2) {
+							if (dates[0]) {
+								$(".tf-apartment-design-one-form #check-in-date").val(dates[0]);
+							}
+							if (dates[1]) {
+								$(".tf-apartment-design-one-form #check-out-date").val(dates[1]);
+							}
+						}
+					}
+
+					$(document).on("change", ".tf_acrselection #adults, .tf_acrselection #children, .tf_acrselection #infant", function () {
+						if ($("#tf-apartment-booking #check-in-out-date").val() !== "") {
+							bookingCalculation(checkinoutdateange.selectedDates);
+						}
+					});
+				});
+			})(jQuery);';
+			
+			// Add the inline script
+			wp_add_inline_script('tourfic', $apartment_script);
+		}
 	}
 
 	/**
@@ -996,7 +1181,7 @@ class Enqueue {
 
 			wp_enqueue_script( 'tf-fullcalender', TF_ASSETS_ADMIN_URL . 'js/lib/fullcalender.min.js', array( 'jquery' ), TF_VERSION, true );
 
-			wp_enqueue_script( 'tf-admin', TF_ASSETS_ADMIN_URL . 'js/tourfic-admin-scripts'. $this->js_min .'.js', array( 'jquery', 'wp-data', 'wp-editor', 'wp-edit-post' ), TF_VERSION, true );
+			wp_enqueue_script( 'tf-admin', TF_ASSETS_ADMIN_URL . 'js/tourfic-admin-scripts.js', array( 'jquery', 'wp-data', 'wp-editor', 'wp-edit-post' ), TF_VERSION, true );
 			wp_localize_script( 'tf-admin', 'tf_admin_params',
 				array(
 					'tf_nonce'                         => wp_create_nonce( 'updates' ),

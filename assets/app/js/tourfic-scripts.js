@@ -1,4 +1,3 @@
-var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
 (() => {
 (function ($, win) {
@@ -329,15 +328,17 @@ var __webpack_exports__ = {};
             }
         });
 
-        const map = L.map('apartment-location').setView([tf_params.single_apartment_data.address_latitude, tf_params.single_apartment_data.address_longitude], tf_params.single_apartment_data.address_zoom);
+        if ($('#apartment-location').length) {
+            const map = L.map('apartment-location').setView([tf_params.single_apartment_data.address_latitude, tf_params.single_apartment_data.address_longitude], tf_params.single_apartment_data.address_zoom);
 
-        const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 20,
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(map);
+            const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 20,
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map);
 
-        const marker = L.marker([tf_params.single_apartment_data.address_latitude, tf_params.single_apartment_data.address_longitude], {alt: tf_params.single_apartment_data.address}).addTo(map)
-            .bindPopup(tf_params.single_apartment_data.address);
+            const marker = L.marker([tf_params.single_apartment_data.address_latitude, tf_params.single_apartment_data.address_longitude], {alt: tf_params.single_apartment_data.address}).addTo(map)
+                .bindPopup(tf_params.single_apartment_data.address);
+        }
 
         /**
          * Ajax apartment booking
@@ -982,15 +983,17 @@ var __webpack_exports__ = {};
             }
         }
 
-        const map = L.map('car-location').setView([tf_params.single_car_data.address_latitude, tf_params.single_car_data.address_longitude], tf_params.single_car_data.address_zoom);
+        if ($('#car-location').length) {
+            const map = L.map('car-location').setView([tf_params.single_car_data.address_latitude, tf_params.single_car_data.address_longitude], tf_params.single_car_data.address_zoom);
 
-        const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 20,
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(map);
+            const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 20,
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map);
 
-        const marker = L.marker([tf_params.single_car_data.address_latitude, tf_params.single_car_data.address_longitude], {alt: tf_params.single_car_data.address}).addTo(map)
-            .bindPopup(tf_params.single_car_data.address);
+            const marker = L.marker([tf_params.single_car_data.address_latitude, tf_params.single_car_data.address_longitude], {alt: tf_params.single_car_data.address}).addTo(map)
+                .bindPopup(tf_params.single_car_data.address);
+        }
         
         // FAQ Accordion
         $('.tf-car-faq-section .tf-faq-head').on("click", function () {
@@ -2357,25 +2360,29 @@ function convertTo24HourFormat(timeStr) {
             jQuery('.tf-room-gallery-slider').slick('slickGoTo', goToSingleSlide);
         });
 
-        const map = L.map('hotel-location').setView([tf_params.single_hotel_data.address_latitude, tf_params.single_hotel_data.address_longitude], tf_params.single_hotel_data.address_zoom);
+        if ($('#hotel-location').length) {
+            const map = L.map('hotel-location').setView([tf_params.single_hotel_data.address_latitude, tf_params.single_hotel_data.address_longitude], tf_params.single_hotel_data.address_zoom);
 
-        const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 20,
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(map);
+            const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 20,
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map);
 
-        const marker = L.marker([tf_params.single_hotel_data.address_latitude, tf_params.single_hotel_data.address_longitude], {alt: tf_params.single_hotel_data.address}).addTo(map)
-            .bindPopup(tf_params.single_hotel_data.address);
+            const marker = L.marker([tf_params.single_hotel_data.address_latitude, tf_params.single_hotel_data.address_longitude], {alt: tf_params.single_hotel_data.address}).addTo(map)
+                .bindPopup(tf_params.single_hotel_data.address);
+        }
 
-        const mapMobile = L.map('mobile-hotel-location').setView([tf_params.single_hotel_data.address_latitude, tf_params.single_hotel_data.address_longitude], tf_params.single_hotel_data.address_zoom);
+        if ($('#mobile-hotel-location').length) {
+            const mapMobile = L.map('mobile-hotel-location').setView([tf_params.single_hotel_data.address_latitude, tf_params.single_hotel_data.address_longitude], tf_params.single_hotel_data.address_zoom);
 
-        const tilesMobile = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 20,
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(mapMobile);
+            const tilesMobile = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 20,
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(mapMobile);
 
-        const markerMobile = L.marker([tf_params.single_hotel_data.address_latitude, tf_params.single_hotel_data.address_longitude], {alt: tf_params.single_hotel_data.address}).addTo(map)
-            .bindPopup(tf_params.single_hotel_data.address);
+            const markerMobile = L.marker([tf_params.single_hotel_data.address_latitude, tf_params.single_hotel_data.address_longitude], {alt: tf_params.single_hotel_data.address}).addTo(map)
+                .bindPopup(tf_params.single_hotel_data.address);
+        }
 
         /**
          * Hotel room availability ajax filter
@@ -3356,15 +3363,17 @@ function convertTo24HourFormat(timeStr) {
             },
         });
 
-        const map = L.map('tour-location').setView([tf_params.tour_form_data.location_latitude, tf_params.tour_form_data.location_longitude], tf_params.tour_form_data.location_zoom);
-        
-        const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 20,
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(map);
+        if ($('#tour-location').length) {
+            const map = L.map('tour-location').setView([tf_params.tour_form_data.location_latitude, tf_params.tour_form_data.location_longitude], tf_params.tour_form_data.location_zoom);
+            
+            const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 20,
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map);
 
-        const marker = L.marker([tf_params.tour_form_data.location_latitude, tf_params.tour_form_data.location_longitude], {alt: tf_params.tour_form_data.location}).addTo(map)
-            .bindPopup(tf_params.tour_form_data.location);
+            const marker = L.marker([tf_params.tour_form_data.location_latitude, tf_params.tour_form_data.location_longitude], {alt: tf_params.tour_form_data.location}).addTo(map)
+                .bindPopup(tf_params.tour_form_data.location);
+        }
 
         // Create an instance of Notyf
         const notyf = new Notyf({
@@ -4362,7 +4371,335 @@ function convertTo24HourFormat(timeStr) {
                     }
                 ]
             });
+        });
+
+        $(".tf-archive-template__three #tf-check-out").on('click', function () {
+            $(".tf-search-input.form-control").click();
+        });
+
+        $(".tf-archive-template__three #check-in-out-date").flatpickr({
+            enableTime: false,
+            mode: "range",
+            dateFormat: "Y/m/d",
+            minDate: "today",
+            altInput: true,
+            altFormat: tf_params.date_format_for_users,
+            showMonths: $(window).width() >= 1240 ? 2 : 1,
+
+            onReady: function (selectedDates, dateStr, instance) {
+                instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
+                dateSetToFieldsTempThree(selectedDates, instance);
+            },
+            onChange: function (selectedDates, dateStr, instance) {
+                instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
+                dateSetToFieldsTempThree(selectedDates, instance);
+            },
+        });
+
+        function dateSetToFieldsTempThree(selectedDates, instance) {
+            const format = tf_params.date_format_for_users;
+            if (selectedDates.length === 2) {
+                if (selectedDates[0]) {
+                    let checkInDate = instance.formatDate(selectedDates[0], format);
+                    $(".tf-archive-template__three #tf-check-in").val(checkInDate);
+                }
+
+                if (selectedDates[1]) {
+                    let checkOutDate = instance.formatDate(selectedDates[1], format);
+                    $(".tf-archive-template__three #tf-check-out").val(checkOutDate);
+                }
+            }
+        }
+
+        $(".tf-archive-booking-form__style-3 #tf-check-out").on('click', function () {
+            $(".tf-search-input.form-control").click();
+        });
+
+        $(".tf-archive-booking-form__style-3 #check-in-out-date").flatpickr({
+            enableTime: false,
+            mode: "range",
+            dateFormat: "Y/m/d",
+            minDate: "today",
+            altInput: true,
+            altFormat: tf_params.date_format_for_users,
+            showMonths: $(window).width() >= 1240 ? 2 : 1,
+
+            onReady: function (selectedDates, dateStr, instance) {
+                instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                dateSetToFieldsTemp3(selectedDates, instance);
+            },
+            onChange: function (selectedDates, dateStr, instance) {
+                instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
+                dateSetToFieldsTemp3(selectedDates, instance);
+            },
+        });
+
+        function dateSetToFieldsTemp3(selectedDates, instance) {
+            const format = tf_params.date_format_for_users;
+            if (selectedDates.length === 2) {
+                if (selectedDates[0]) {
+                    let checkInDate = instance.formatDate(selectedDates[0], format);
+                    $(".tf-archive-booking-form__style-3 #tf-check-in").val(checkInDate);
+                }
+
+                if (selectedDates[1]) {
+                    let checkOutDate = instance.formatDate(selectedDates[1], format);
+                    $(".tf-archive-booking-form__style-3 #tf-check-out").val(checkOutDate);
+                }
+            }
+        }
+
+        $(".tf-hotel-side-booking #check-in-out-date").flatpickr({
+            enableTime: false,
+            minDate: "today",
+            altInput: true,
+            altFormat: tf_params.date_format_for_users,
+            mode: "range",
+            dateFormat: "Y/m/d",
+
+            onReady: function (selectedDates, dateStr, instance) {
+                instance.element.value = dateStr.replace(/(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/g, function (match, date1, date2) {
+                    return `${date1} - ${date2}`;
+                });
+                instance.altInput.value = instance.altInput.value.replace( dateRegex, function (match, d1, d2) {
+                    return `${d1} - ${d2}`;
+                });
+            },
+            onChange: function (selectedDates, dateStr, instance) {
+                instance.element.value = dateStr.replace(/(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/g, function (match, date1, date2) {
+                    return `${date1} - ${date2}`;
+                });
+                instance.altInput.value = instance.altInput.value.replace( dateRegex, function (match, d1, d2) {
+                    return `${d1} - ${d2}`;
+                });
+            },
+        });
+
+        $(document).on("focus", ".tf-hotel-side-booking #check-in-out-date", function (e) {
+            let calander = flatpickr(this, {
+                enableTime: false,
+                minDate: "today",
+                mode: "range",
+                dateFormat: "Y/m/d",
+                altInput: true,
+                altFormat: tf_params.date_format_for_users,
+
+                onChange: function (selectedDates, dateStr, instance) {
+                    instance.element.value = dateStr.replace(/(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/g, function (match, date1, date2) {
+                        return `${date1} - ${date2}`;
+                    });
+                    instance.altInput.value = instance.altInput.value.replace( dateRegex, function (match, d1, d2) {
+                        return `${d1} - ${d2}`;
+                    });
+                },
+            });
+
+            // open flatpickr on focus
+            calander.open();
         })
+
+        $(".tf-archive-template__one .tf_dropoff_date").on("click", function () {
+            $("#tf_pickup_date").trigger("click");
+        });
+        $(".tf-archive-template__one #tf_pickup_date").flatpickr({
+            enableTime: false,
+            mode: "range",
+            dateFormat: "Y/m/d",
+            minDate: "today",
+            showMonths: $(window).width() >= 1240 ? 2 : 1,
+
+            onReady: function (selectedDates, dateStr, instance) {
+                dateSetToFieldsCarTempOne(selectedDates, instance);
+            },
+
+            onChange: function (selectedDates, dateStr, instance) {
+                dateSetToFieldsCarTempOne(selectedDates, instance);
+            },
+        });
+
+        function dateSetToFieldsCarTempOne(selectedDates, instance) {
+            if (selectedDates.length === 2) {
+                if (selectedDates[0]) {
+                    const startDate = flatpickr.formatDate(selectedDates[0], "Y/m/d");
+                    $(".tf-archive-template__one #tf_pickup_date").val(startDate);
+                }
+                if (selectedDates[1]) {
+                    const endDate = flatpickr.formatDate(selectedDates[1], "Y/m/d");
+                    $(".tf-archive-template__one .tf-select-date #tf_dropoff_date").val(endDate);
+                }
+            }
+        }
+
+        $(".tf-archive-template__two .tf-tour-archive-block .tf-booking-date-wrap").on("click", function () {
+            $("#check-in-out-date").trigger("click");
+        });
+        $(".tf-archive-template__two .tf-tour-archive-block #check-in-out-date").flatpickr({
+            enableTime: false,
+            mode: "range",
+            dateFormat: "Y/m/d",
+            minDate: "today",
+
+            onReady: function (selectedDates, dateStr, instance) {
+                instance.element.value = dateStr.replace(/(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/g, function (match, date1, date2) {
+                    return `${date1} - ${date2}`;
+                });
+                dateSetToFieldsTempTwoTour(selectedDates, instance);
+            },
+            onChange: function (selectedDates, dateStr, instance) {
+                instance.element.value = dateStr.replace(/(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/g, function (match, date1, date2) {
+                    return `${date1} - ${date2}`;
+                });
+                dateSetToFieldsTempTwoTour(selectedDates, instance);
+            },
+        });
+
+        function dateSetToFieldsTempTwoTour(selectedDates, instance) {
+            if (selectedDates.length === 2) {
+                const monthNames = [
+                    "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+                ];
+                if (selectedDates[0]) {
+                    const startDate = selectedDates[0];
+                    $(".tf-archive-template__two .tf-booking-form-checkin .tf-tour-start-date span.tf-booking-date").html(startDate.getDate());
+                    $(".tf-archive-template__two .tf-booking-form-checkin .tf-tour-start-date span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
+                }
+                if (selectedDates[1]) {
+                    const endDate = selectedDates[1];
+                    $(".tf-archive-template__two .tf-booking-form-checkin .tf-tour-end-date span.tf-booking-date").html(endDate.getDate());
+                    $(".tf-archive-template__two .tf-booking-form-checkin .tf-tour-end-date span.tf-booking-month span").html(monthNames[endDate.getMonth()]);
+                }
+            }
+        }
+
+        $(".tf-archive-template__two .tf-booking-date-wrap").on("click", function () {
+            $("#check-in-out-date").trigger("click");
+        });
+        $(".tf-archive-template__two #check-in-out-date").flatpickr({
+            enableTime: false,
+            mode: "range",
+            dateFormat: "Y/m/d",
+            minDate: "today",
+
+            onReady: function (selectedDates, dateStr, instance) {
+                instance.element.value = dateStr.replace(/(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/g, function (match, date1, date2) {
+                    return `${date1} - ${date2}`;
+                });
+                dateSetToFieldsTempTwo(selectedDates, instance);
+            },
+            onChange: function (selectedDates, dateStr, instance) {
+                instance.element.value = dateStr.replace(/(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/g, function (match, date1, date2) {
+                    return `${date1} - ${date2}`;
+                });
+                dateSetToFieldsTempTwo(selectedDates, instance);
+            },
+        });
+
+        function dateSetToFieldsTempTwo(selectedDates, instance) {
+            if (selectedDates.length === 2) {
+                const monthNames = [
+                    "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+                ];
+                if (selectedDates[0]) {
+                    const startDate = selectedDates[0];
+                    $(".tf-archive-template__two .tf-booking-form-checkin span.tf-booking-date").html(startDate.getDate());
+                    $(".tf-archive-template__two .tf-booking-form-checkin span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
+                }
+                if (selectedDates[1]) {
+                    const endDate = selectedDates[1];
+                    $(".tf-archive-template__two .tf-booking-form-checkout span.tf-booking-date").html(endDate.getDate());
+                    $(".tf-archive-template__two .tf-booking-form-checkout span.tf-booking-month span").html(monthNames[endDate.getMonth()]);
+                }
+            }
+        }
+
+        $(".tf-archive-booking-form__style-2 .tf-tour-archive-block .tf-booking-date-wrap").on("click", function () {
+            $("#check-in-out-date").trigger("click");
+        });
+        $(".tf-archive-booking-form__style-2 .tf-tour-archive-block #check-in-out-date").flatpickr({
+            enableTime: false,
+            mode: "range",
+            dateFormat: "Y/m/d",
+            minDate: "today",
+
+            onReady: function (selectedDates, dateStr, instance) {
+                instance.element.value = dateStr.replace(/(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/g, function (match, date1, date2) {
+                    return `${date1} - ${date2}`;
+                });
+                dateSetToFieldsStyleTwoTour(selectedDates, instance);
+            },
+            onChange: function (selectedDates, dateStr, instance) {
+                instance.element.value = dateStr.replace(/(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/g, function (match, date1, date2) {
+                    return `${date1} - ${date2}`;
+                });
+                dateSetToFieldsStyleTwoTour(selectedDates, instance);
+            },
+        });
+
+        function dateSetToFieldsStyleTwoTour(selectedDates, instance) {
+            if (selectedDates.length === 2) {
+                const monthNames = [
+                    "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+                ];
+                if (selectedDates[0]) {
+                    const startDate = selectedDates[0];
+                    $(".tf-archive-booking-form__style-2 .tf-booking-form-checkin .tf-tour-start-date span.tf-booking-date").html(startDate.getDate());
+                    $(".tf-archive-booking-form__style-2 .tf-booking-form-checkin .tf-tour-start-date span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
+                }
+                if (selectedDates[1]) {
+                    const endDate = selectedDates[1];
+                    $(".tf-archive-booking-form__style-2 .tf-booking-form-checkin .tf-tour-end-date span.tf-booking-date").html(endDate.getDate());
+                    $(".tf-archive-booking-form__style-2 .tf-booking-form-checkin .tf-tour-end-date span.tf-booking-month span").html(monthNames[endDate.getMonth()]);
+                }
+            }
+        }
+
+        $(".tf-archive-booking-form__style-2 .tf-booking-date-wrap").on("click", function () {
+            $("#check-in-out-date").trigger("click");
+        });
+        $(".tf-archive-booking-form__style-2 #check-in-out-date").flatpickr({
+            enableTime: false,
+            mode: "range",
+            dateFormat: "Y/m/d",
+            minDate: "today",
+
+            onReady: function (selectedDates, dateStr, instance) {
+                    instance.element.value = dateStr.replace(/(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/g, function (match, date1, date2) {
+                    return `${date1} - ${date2}`;
+                });
+                dateSetToFieldsStyleTwo(selectedDates, instance);
+            },
+            onChange: function (selectedDates, dateStr, instance) {
+                instance.element.value = dateStr.replace(/(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/g, function (match, date1, date2) {
+                    return `${date1} - ${date2}`;
+                });
+                dateSetToFieldsStyleTwo(selectedDates, instance);
+            },
+        });
+
+        function dateSetToFieldsStyleTwo(selectedDates, instance) {
+            if (selectedDates.length === 2) {
+                const monthNames = [
+                    "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+                ];
+                if (selectedDates[0]) {
+                    const startDate = selectedDates[0];
+                    $(".tf-archive-booking-form__style-2 .tf-booking-form-checkin span.tf-booking-date").html(startDate.getDate());
+                    $(".tf-archive-booking-form__style-2 .tf-booking-form-checkin span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
+                }
+                if (selectedDates[1]) {
+                    const endDate = selectedDates[1];
+                    $(".tf-archive-booking-form__style-2 .tf-booking-form-checkout span.tf-booking-date").html(endDate.getDate());
+                    $(".tf-archive-booking-form__style-2 .tf-booking-form-checkout span.tf-booking-month span").html(monthNames[endDate.getMonth()]);
+                }
+            }
+        }
 
         /*
          * AJAX load for range filter to prevent performance issue.

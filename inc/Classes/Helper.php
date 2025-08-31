@@ -13,7 +13,6 @@ class Helper {
 	use \Tourfic\Traits\Action_Helper;
 
 	public function __construct() {
-		add_action( 'admin_footer', array( $this, 'tf_admin_footer' ) );
 		add_action( 'wp_footer', array($this, 'tf_ask_question_modal') );
 		add_filter( 'rest_prepare_taxonomy', array( $this, 'tf_remove_metabox_gutenburg' ), 10, 3 );
 		add_filter( 'rest_user_query', array( $this, 'tf_gutenberg_author_dropdown_roles' ), 10, 2 );
@@ -1020,140 +1019,7 @@ class Helper {
                 <input type="hidden" name="type" value="<?php echo esc_attr( $ptype ); ?>" class="tf-post-type"/>
                 <button class="tf_btn tf_btn_large tf_btn_sharp tf-submit"><?php esc_html_e( 'Check Availability', 'tourfic' ); ?></button>
             </div>
-			<?php if ( $post_type == 'tf_tours' ) { ?>
-                <script>
-                    (function ($) {
-                        $(document).ready(function () {
-                            // flatpickr locale first day of Week
-							<?php self::tf_flatpickr_locale( "root" ); ?>
-
-                            $(".tf-archive-template__two .tf-booking-date-wrap").on("click", function () {
-                                $("#check-in-out-date").trigger("click");
-                            });
-                            $("#check-in-out-date").flatpickr({
-                                enableTime: false,
-                                mode: "range",
-                                dateFormat: "Y/m/d",
-                                minDate: "today",
-
-                                // flatpickr locale
-								<?php self::tf_flatpickr_locale(); ?>
-
-                                onReady: function (selectedDates, dateStr, instance) {
-                                    instance.element.value = dateStr.replace(/(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/g, function (match, date1, date2) {
-                                        return `${date1} - ${date2}`;
-                                    });
-                                    dateSetToFields(selectedDates, instance);
-                                },
-                                onChange: function (selectedDates, dateStr, instance) {
-                                    instance.element.value = dateStr.replace(/(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/g, function (match, date1, date2) {
-                                        return `${date1} - ${date2}`;
-                                    });
-                                    dateSetToFields(selectedDates, instance);
-                                },
-								<?php
-								if(! empty( $date )){ ?>
-                                defaultDate: <?php echo wp_json_encode( explode( '-', $date ) ) ?>,
-								<?php } ?>
-                            });
-
-                            function dateSetToFields(selectedDates, instance) {
-                                if (selectedDates.length === 2) {
-                                    const monthNames = [
-                                        "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-                                        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-                                    ];
-                                    if (selectedDates[0]) {
-                                        const startDate = selectedDates[0];
-                                        $(".tf-archive-template__two .tf-booking-form-checkin .tf-tour-start-date span.tf-booking-date").html(startDate.getDate());
-                                        $(".tf-archive-template__two .tf-booking-form-checkin .tf-tour-start-date span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
-                                    }
-                                    if (selectedDates[1]) {
-                                        const endDate = selectedDates[1];
-                                        $(".tf-archive-template__two .tf-booking-form-checkin .tf-tour-end-date span.tf-booking-date").html(endDate.getDate());
-                                        $(".tf-archive-template__two .tf-booking-form-checkin .tf-tour-end-date span.tf-booking-month span").html(monthNames[endDate.getMonth()]);
-                                    }
-                                }
-                            }
-
-                        });
-                    })(jQuery);
-                </script>
-			<?php } ?>
-
-			<?php if ( $post_type == 'tf_hotel' || $post_type == 'tf_apartment' ) { ?>
-
-                <script>
-                    (function ($) {
-                        $(document).ready(function () {
-
-                            const regexMap = {
-                                'Y/m/d': /(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/,
-                                'd/m/Y': /(\d{2}\/\d{2}\/\d{4}).*(\d{2}\/\d{2}\/\d{4})/,
-                                'm/d/Y': /(\d{2}\/\d{2}\/\d{4}).*(\d{2}\/\d{2}\/\d{4})/,
-                                'Y-m-d': /(\d{4}-\d{2}-\d{2}).*(\d{4}-\d{2}-\d{2})/,
-                                'd-m-Y': /(\d{2}-\d{2}-\d{4}).*(\d{2}-\d{2}-\d{4})/,
-                                'm-d-Y': /(\d{2}-\d{2}-\d{4}).*(\d{2}-\d{2}-\d{4})/,
-                                'Y.m.d': /(\d{4}\.\d{2}\.\d{2}).*(\d{4}\.\d{2}\.\d{2})/,
-                                'd.m.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/,
-                                'm.d.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/
-                            };
-                            const dateRegex = regexMap['<?php echo esc_attr($date_format_for_users); ?>'];
-
-                            // flatpickr locale
-							<?php self::tf_flatpickr_locale( "root" ); ?>
-
-                            $(".tf-archive-template__two .tf-booking-date-wrap").on("click", function () {
-                                $("#check-in-out-date").trigger("click");
-                            });
-                            $("#check-in-out-date").flatpickr({
-                                enableTime: false,
-                                mode: "range",
-                                dateFormat: "Y/m/d",
-                                minDate: "today",
-
-                                // flatpickr locale
-								<?php self::tf_flatpickr_locale(); ?>
-
-
-                                onReady: function (selectedDates, dateStr, instance) {
-                                    instance.element.value = dateStr.replace(/(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/g, function (match, date1, date2) {
-                                        return `${date1} - ${date2}`;
-                                    });
-                                    dateSetToFields(selectedDates, instance);
-                                },
-                                onChange: function (selectedDates, dateStr, instance) {
-                                    instance.element.value = dateStr.replace(/(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/g, function (match, date1, date2) {
-                                        return `${date1} - ${date2}`;
-                                    });
-                                    dateSetToFields(selectedDates, instance);
-                                },
-                                defaultDate: <?php echo wp_json_encode( explode( '-', $date ) ) ?>,
-                            });
-
-                            function dateSetToFields(selectedDates, instance) {
-                                if (selectedDates.length === 2) {
-                                    const monthNames = [
-                                        "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-                                        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-                                    ];
-                                    if (selectedDates[0]) {
-                                        const startDate = selectedDates[0];
-                                        $(".tf-archive-template__two .tf-booking-form-checkin span.tf-booking-date").html(startDate.getDate());
-                                        $(".tf-archive-template__two .tf-booking-form-checkin span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
-                                    }
-                                    if (selectedDates[1]) {
-                                        const endDate = selectedDates[1];
-                                        $(".tf-archive-template__two .tf-booking-form-checkout span.tf-booking-date").html(endDate.getDate());
-                                        $(".tf-archive-template__two .tf-booking-form-checkout span.tf-booking-month span").html(monthNames[endDate.getMonth()]);
-                                    }
-                                }
-                            }
-
-                        });
-                    })(jQuery);
-                </script>
-			<?php } ?>
+		
 		<?php } elseif ( ( $post_type == "tf_tours" && $tf_tour_arc_selected_template == "design-3" ) ||
 		                 ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template == "design-3" ) ||
 		                 ( $post_type == "tf_apartment" && $tf_apartment_arc_selected_template == "design-2" ) ) { ?>
@@ -1378,64 +1244,6 @@ class Helper {
                 <input type="hidden" name="type" value="<?php echo esc_attr($ptype); ?>" class="tf-post-type"/>
                 <button class="tf_btn tf-submit"><?php esc_html_e( 'Search Now', 'tourfic' ); ?></button>
             </div>
-
-			<?php if ( $post_type == 'tf_hotel' || $post_type == 'tf_tours' || $post_type == 'tf_apartment' ) : ?>
-                <script>
-                    (function ($) {
-                        $(document).ready(function () {
-                            // flatpickr locale first day of Week
-							<?php self::tf_flatpickr_locale( "root" ); ?>
-
-                            $(".tf-archive-template__three #tf-check-out").on('click', function () {
-                                $(".tf-search-input.form-control").click();
-                            });
-
-                            $("#check-in-out-date").flatpickr({
-                                enableTime: false,
-                                mode: "range",
-                                dateFormat: "Y/m/d",
-                                minDate: "today",
-                                altInput: true,
-                                altFormat: '<?php echo esc_html( $date_format_for_users ); ?>',
-                                showMonths: $(window).width() >= 1240 ? 2 : 1,
-
-                                // flatpickr locale
-								<?php self::tf_flatpickr_locale(); ?>
-
-                                onReady: function (selectedDates, dateStr, instance) {
-                                    instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-                                    instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
-                                    dateSetToFields(selectedDates, instance);
-                                },
-                                onChange: function (selectedDates, dateStr, instance) {
-                                    instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-                                    instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
-                                    dateSetToFields(selectedDates, instance);
-                                },
-								<?php if(! empty( $date )){ ?>
-                                defaultDate: <?php echo wp_json_encode( explode( '-', $date ) ) ?>,
-								<?php } ?>
-                            });
-
-                            function dateSetToFields(selectedDates, instance) {
-                                const format = '<?php echo esc_html( $date_format_for_users ); ?>';
-                                if (selectedDates.length === 2) {
-                                    if (selectedDates[0]) {
-                                        let checkInDate = instance.formatDate(selectedDates[0], format);
-                                        $(".tf-archive-template__three #tf-check-in").val(checkInDate);
-                                    }
-
-                                    if (selectedDates[1]) {
-                                        let checkOutDate = instance.formatDate(selectedDates[1], format);
-                                        $(".tf-archive-template__three #tf-check-out").val(checkOutDate);
-                                    }
-                                }
-                            }
-
-                        });
-                    })(jQuery);
-                </script>
-			<?php endif; ?>
 		<?php } else { ?>
             <!-- Start Booking widget -->
             <form class="tf_booking-widget widget tf-hotel-side-booking" method="get" autocomplete="off"
@@ -1582,59 +1390,6 @@ class Helper {
                 </div>
 
             </form>
-            <script>
-                (function ($) {
-                    $(document).ready(function () {
-
-                        // flatpickr locale first day of Week
-						<?php self::tf_flatpickr_locale( "root" ); ?>
-
-                        const regexMap = {
-                            'Y/m/d': /(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/,
-                            'd/m/Y': /(\d{2}\/\d{2}\/\d{4}).*(\d{2}\/\d{2}\/\d{4})/,
-                            'm/d/Y': /(\d{2}\/\d{2}\/\d{4}).*(\d{2}\/\d{2}\/\d{4})/,
-                            'Y-m-d': /(\d{4}-\d{2}-\d{2}).*(\d{4}-\d{2}-\d{2})/,
-                            'd-m-Y': /(\d{2}-\d{2}-\d{4}).*(\d{2}-\d{2}-\d{4})/,
-                            'm-d-Y': /(\d{2}-\d{2}-\d{4}).*(\d{2}-\d{2}-\d{4})/,
-                            'Y.m.d': /(\d{4}\.\d{2}\.\d{2}).*(\d{4}\.\d{2}\.\d{2})/,
-                            'd.m.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/,
-                            'm.d.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/
-                        };
-                        const dateRegex = regexMap['<?php echo esc_attr($date_format_for_users); ?>'];
-
-                        $(".tf-hotel-side-booking #check-in-out-date").flatpickr({
-                            enableTime: false,
-                            minDate: "today",
-                            altInput: true,
-                            altFormat: '<?php echo esc_html( $date_format_for_users ); ?>',
-                            mode: "range",
-                            dateFormat: "Y/m/d",
-
-                            // flatpickr locale
-							<?php self::tf_flatpickr_locale(); ?>
-
-                            onReady: function (selectedDates, dateStr, instance) {
-                                instance.element.value = dateStr.replace(/(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/g, function (match, date1, date2) {
-                                    return `${date1} - ${date2}`;
-                                });
-                                instance.altInput.value = instance.altInput.value.replace( dateRegex, function (match, d1, d2) {
-                                    return `${d1} - ${d2}`;
-                                });
-                            },
-                            onChange: function (selectedDates, dateStr, instance) {
-                                instance.element.value = dateStr.replace(/(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/g, function (match, date1, date2) {
-                                    return `${date1} - ${date2}`;
-                                });
-                                instance.altInput.value = instance.altInput.value.replace( dateRegex, function (match, d1, d2) {
-                                    return `${d1} - ${d2}`;
-                                });
-                            },
-                            defaultDate: <?php echo wp_json_encode( explode( '-', $date ) ) ?>,
-                        });
-
-                    });
-                })(jQuery);
-            </script>
 
 			<?php if ( is_active_sidebar( 'tf_search_result' ) ) { ?>
                 <div id="tf__booking_sidebar">
@@ -1785,51 +1540,6 @@ class Helper {
                     </div>
                 </form>
             </div>
-            <script>
-                (function ($) {
-                    $(document).ready(function () {
-						<?php self::tf_flatpickr_locale( 'root' ); ?>
-
-                        $(document).on("focus", ".tf-hotel-side-booking #check-in-out-date", function (e) {
-                            const regexMap = {
-                                'Y/m/d': /(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/,
-                                'd/m/Y': /(\d{2}\/\d{2}\/\d{4}).*(\d{2}\/\d{2}\/\d{4})/,
-                                'm/d/Y': /(\d{2}\/\d{2}\/\d{4}).*(\d{2}\/\d{2}\/\d{4})/,
-                                'Y-m-d': /(\d{4}-\d{2}-\d{2}).*(\d{4}-\d{2}-\d{2})/,
-                                'd-m-Y': /(\d{2}-\d{2}-\d{4}).*(\d{2}-\d{2}-\d{4})/,
-                                'm-d-Y': /(\d{2}-\d{2}-\d{4}).*(\d{2}-\d{2}-\d{4})/,
-                                'Y.m.d': /(\d{4}\.\d{2}\.\d{2}).*(\d{4}\.\d{2}\.\d{2})/,
-                                'd.m.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/,
-                                'm.d.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/
-                            };
-                            const dateRegex = regexMap['<?php echo esc_attr($date_format_for_users); ?>'];
-                            let calander = flatpickr(this, {
-                                enableTime: false,
-                                minDate: "today",
-                                mode: "range",
-                                dateFormat: "Y/m/d",
-                                altInput: true,
-                                altFormat: '<?php echo esc_html( $date_format_for_users ); ?>',
-
-                                // flatpickr locale
-								<?php self::tf_flatpickr_locale(); ?>
-
-                                onChange: function (selectedDates, dateStr, instance) {
-                                    instance.element.value = dateStr.replace(/(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/g, function (match, date1, date2) {
-                                        return `${date1} - ${date2}`;
-                                    });
-                                    instance.altInput.value = instance.altInput.value.replace( dateRegex, function (match, d1, d2) {
-                                        return `${d1} - ${d2}`;
-                                    });
-                                },
-                            });
-
-                            // open flatpickr on focus
-                            calander.open();
-                        })
-                    });
-                })(jQuery);
-            </script>
 			<?php
 		} elseif ( ( is_post_type_archive( 'tf_hotel' ) && $tf_hotel_arc_selected_template == "design-2" ) ||
                    ( is_post_type_archive( 'tf_tours' ) && $tf_tour_arc_selected_template == "design-2" ) ||
@@ -2074,143 +1784,6 @@ class Helper {
                         <input type="hidden" name="type" value="<?php echo esc_attr( $post_type ); ?>" class="tf-post-type"/>
                         <button class="tf_btn tf_btn_large tf_btn_sharp tf-submit"><?php echo esc_html__( 'Check Availability', 'tourfic' ); ?></button>
                     </div>
-
-                    <?php if ( $post_type == 'tf_tours' ) { ?>
-                        <script>
-                            (function ($) {
-                                $(document).ready(function () {
-                                    // flatpickr locale first day of Week
-                                    <?php self::tf_flatpickr_locale( "root" ); ?>
-
-                                    $(".tf-archive-booking-form__style-2 .tf-booking-date-wrap").on("click", function () {
-
-                                        $("#check-in-out-date").trigger("click");
-                                    });
-                                    $("#check-in-out-date").flatpickr({
-                                        enableTime: false,
-                                        mode: "range",
-                                        dateFormat: "Y/m/d",
-                                        minDate: "today",
-
-                                        // flatpickr locale
-                                        <?php self::tf_flatpickr_locale(); ?>
-
-                                        onReady: function (selectedDates, dateStr, instance) {
-                                            instance.element.value = dateStr.replace(/(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/g, function (match, date1, date2) {
-                                                return `${date1} - ${date2}`;
-                                            });
-                                            dateSetToFields(selectedDates, instance);
-                                        },
-                                        onChange: function (selectedDates, dateStr, instance) {
-                                            instance.element.value = dateStr.replace(/(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/g, function (match, date1, date2) {
-                                                return `${date1} - ${date2}`;
-                                            });
-                                            dateSetToFields(selectedDates, instance);
-                                        },
-                                        <?php
-                                        if(! empty( $check_in_out )){ ?>
-                                        defaultDate: <?php echo wp_json_encode( explode( '-', $check_in_out ) ) ?>,
-                                        <?php } ?>
-                                    });
-
-                                    function dateSetToFields(selectedDates, instance) {
-                                        if (selectedDates.length === 2) {
-                                            const monthNames = [
-                                                "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-                                                "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-                                            ];
-                                            if (selectedDates[0]) {
-                                                const startDate = selectedDates[0];
-                                                $(".tf-archive-booking-form__style-2 .tf-booking-form-checkin .tf-tour-start-date span.tf-booking-date").html(startDate.getDate());
-                                                $(".tf-archive-booking-form__style-2 .tf-booking-form-checkin .tf-tour-start-date span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
-                                            }
-                                            if (selectedDates[1]) {
-                                                const endDate = selectedDates[1];
-                                                $(".tf-archive-booking-form__style-2 .tf-booking-form-checkin .tf-tour-end-date span.tf-booking-date").html(endDate.getDate());
-                                                $(".tf-archive-booking-form__style-2 .tf-booking-form-checkin .tf-tour-end-date span.tf-booking-month span").html(monthNames[endDate.getMonth()]);
-                                            }
-                                        }
-                                    }
-
-                                });
-                            })(jQuery);
-                        </script>
-                    <?php } ?>
-
-                    <?php if ( $post_type == 'tf_hotel' || $post_type == 'tf_apartment' ) { ?>
-                        <script>
-                            (function ($) {
-                                $(document).ready(function () {
-                                    const regexMap = {
-                                        'Y/m/d': /(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/,
-                                        'd/m/Y': /(\d{2}\/\d{2}\/\d{4}).*(\d{2}\/\d{2}\/\d{4})/,
-                                        'm/d/Y': /(\d{2}\/\d{2}\/\d{4}).*(\d{2}\/\d{2}\/\d{4})/,
-                                        'Y-m-d': /(\d{4}-\d{2}-\d{2}).*(\d{4}-\d{2}-\d{2})/,
-                                        'd-m-Y': /(\d{2}-\d{2}-\d{4}).*(\d{2}-\d{2}-\d{4})/,
-                                        'm-d-Y': /(\d{2}-\d{2}-\d{4}).*(\d{2}-\d{2}-\d{4})/,
-                                        'Y.m.d': /(\d{4}\.\d{2}\.\d{2}).*(\d{4}\.\d{2}\.\d{2})/,
-                                        'd.m.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/,
-                                        'm.d.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/
-                                    };
-                                    const dateRegex = regexMap['<?php echo esc_attr($date_format_for_users); ?>'];
-
-                                    // flatpickr locale first day of Week
-                                    <?php self::tf_flatpickr_locale( "root" ); ?>
-
-                                    $(".tf-archive-booking-form__style-2 .tf-booking-date-wrap").on("click", function () {
-
-                                        $("#check-in-out-date").trigger("click");
-                                    });
-                                    $("#check-in-out-date").flatpickr({
-                                        enableTime: false,
-                                        mode: "range",
-                                        dateFormat: "Y/m/d",
-                                        minDate: "today",
-
-                                        // flatpickr locale
-                                        <?php self::tf_flatpickr_locale(); ?>
-
-                                        onReady: function (selectedDates, dateStr, instance) {
-                                                instance.element.value = dateStr.replace(/(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/g, function (match, date1, date2) {
-                                                return `${date1} - ${date2}`;
-                                            });
-                                            dateSetToFields(selectedDates, instance);
-                                        },
-                                        onChange: function (selectedDates, dateStr, instance) {
-                                            instance.element.value = dateStr.replace(/(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/g, function (match, date1, date2) {
-                                                return `${date1} - ${date2}`;
-                                            });
-                                            dateSetToFields(selectedDates, instance);
-                                        },
-                                        <?php
-                                        if(! empty( $check_in_out )){ ?>
-                                        defaultDate: <?php echo wp_json_encode( explode( '-', $check_in_out ) ) ?>,
-                                        <?php } ?>
-                                    });
-
-                                    function dateSetToFields(selectedDates, instance) {
-                                        if (selectedDates.length === 2) {
-                                            const monthNames = [
-                                                "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-                                                "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-                                            ];
-                                            if (selectedDates[0]) {
-                                                const startDate = selectedDates[0];
-                                                $(".tf-archive-booking-form__style-2 .tf-booking-form-checkin span.tf-booking-date").html(startDate.getDate());
-                                                $(".tf-archive-booking-form__style-2 .tf-booking-form-checkin span.tf-booking-month span").html(monthNames[startDate.getMonth()]);
-                                            }
-                                            if (selectedDates[1]) {
-                                                const endDate = selectedDates[1];
-                                                $(".tf-archive-booking-form__style-2 .tf-booking-form-checkout span.tf-booking-date").html(endDate.getDate());
-                                                $(".tf-archive-booking-form__style-2 .tf-booking-form-checkout span.tf-booking-month span").html(monthNames[endDate.getMonth()]);
-                                            }
-                                        }
-                                    }
-
-                                });
-                            })(jQuery);
-                        </script>
-                    <?php } ?>
                 </form>
             </div>
 		<?php
@@ -2410,54 +1983,6 @@ class Helper {
 						<input type="hidden" class="tf-post-type" value="<?php echo esc_attr("tf_carrental"); ?>">
 						<button class="tf-filter-cars"><?php esc_html_e("Search", "tourfic"); ?> <i class="ri-search-line"></i></button>
 					</div>
-
-					<script>
-						(function ($) {
-							$(document).ready(function () {
-								 // flatpickr locale first day of Week
-                                <?php self::tf_flatpickr_locale( "root" ); ?>
-
-                                $(".tf-archive-template__one .tf_dropoff_date").on("click", function () {
-                                    $("#tf_pickup_date").trigger("click");
-                                });
-                                $(".tf-archive-template__one #tf_pickup_date").flatpickr({
-                                    enableTime: false,
-                                    mode: "range",
-                                    dateFormat: "Y/m/d",
-                                    minDate: "today",
-                                    showMonths: $(window).width() >= 1240 ? 2 : 1,
-                                    // flatpickr locale
-                                    <?php self::tf_flatpickr_locale(); ?>
-
-                                    onReady: function (selectedDates, dateStr, instance) {
-                                        dateSetToFields(selectedDates, instance);
-                                    },
-
-                                    onChange: function (selectedDates, dateStr, instance) {
-                                        dateSetToFields(selectedDates, instance);
-                                    },
-                                    <?php if(! empty( $check_in_out )){ ?>
-                                        defaultDate: <?php echo wp_json_encode( explode( '-', $check_in_out ) ) ?>,
-                                    <?php } ?>
-                                });
-
-                                function dateSetToFields(selectedDates, instance) {
-                                    if (selectedDates.length === 2) {
-                                        if (selectedDates[0]) {
-                                            const startDate = flatpickr.formatDate(selectedDates[0], "Y/m/d");
-                                            $(".tf-archive-template__one #tf_pickup_date").val(startDate);
-                                        }
-                                        if (selectedDates[1]) {
-                                            const endDate = flatpickr.formatDate(selectedDates[1], "Y/m/d");
-                                            $(".tf-archive-template__one .tf-select-date #tf_dropoff_date").val(endDate);
-                                        }
-                                    }
-                                }
-
-							});
-						})(jQuery);
-
-					</script>
 				</div>
 			</div>
 		</div>
@@ -2691,63 +2216,6 @@ class Helper {
                     <input type="hidden" name="type" value="<?php echo esc_attr($post_type); ?>" class="tf-post-type"/>
                     <button class="tf_btn tf-submit"><?php esc_html_e( 'Search Now', 'tourfic' ); ?></button>
                 </div>
-
-                <?php if ( $post_type == 'tf_hotel' || $post_type == 'tf_tours' || $post_type == 'tf_apartment' ) : ?>
-                    <script>
-                        (function ($) {
-                            $(document).ready(function () {
-                                // flatpickr locale first day of Week
-                                <?php self::tf_flatpickr_locale( "root" ); ?>
-
-                                $(".tf-archive-booking-form__style-3 #tf-check-out").on('click', function () {
-                                    $(".tf-search-input.form-control").click();
-                                });
-
-                                $("#check-in-out-date").flatpickr({
-                                    enableTime: false,
-                                    mode: "range",
-                                    dateFormat: "Y/m/d",
-                                    minDate: "today",
-                                    altInput: true,
-                                    altFormat: '<?php echo esc_html( $date_format_for_users ); ?>',
-                                    showMonths: $(window).width() >= 1240 ? 2 : 1,
-
-                                    // flatpickr locale
-                                    <?php self::tf_flatpickr_locale(); ?>
-
-                                    onReady: function (selectedDates, dateStr, instance) {
-                                        instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-                                        dateSetToFields(selectedDates, instance);
-                                    },
-                                    onChange: function (selectedDates, dateStr, instance) {
-                                        instance.element.value = dateStr.replace(/[a-z]+/g, '-');
-                                        instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
-                                        dateSetToFields(selectedDates, instance);
-                                    },
-                                    <?php if(! empty( $check_in_out )){ ?>
-                                    defaultDate: <?php echo wp_json_encode( explode( '-', $check_in_out ) ) ?>,
-                                    <?php } ?>
-                                });
-
-                                function dateSetToFields(selectedDates, instance) {
-                                    const format = '<?php echo esc_html( $date_format_for_users ); ?>';
-                                    if (selectedDates.length === 2) {
-                                        if (selectedDates[0]) {
-                                            let checkInDate = instance.formatDate(selectedDates[0], format);
-                                            $(".tf-archive-booking-form__style-3 #tf-check-in").val(checkInDate);
-                                        }
-
-                                        if (selectedDates[1]) {
-                                            let checkOutDate = instance.formatDate(selectedDates[1], format);
-                                            $(".tf-archive-booking-form__style-3 #tf-check-out").val(checkOutDate);
-                                        }
-                                    }
-                                }
-
-                            });
-                        })(jQuery);
-                    </script>
-                <?php endif; ?>
             </form>
 		<?php } else { ?>
             <form class="tf_archive_search_result tf_booking-widget widget tf-hotel-side-booking" method="get" autocomplete="off"
@@ -2864,49 +2332,6 @@ class Helper {
                 </div>
 
             </form>
-
-            <script>
-                (function ($) {
-                    $(document).ready(function () {
-						<?php self::tf_flatpickr_locale( 'root' ); ?>
-
-                        $(document).on("focus", ".tf-hotel-side-booking #check-in-out-date", function (e) {
-                            const regexMap = {
-                                'Y/m/d': /(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/,
-                                'd/m/Y': /(\d{2}\/\d{2}\/\d{4}).*(\d{2}\/\d{2}\/\d{4})/,
-                                'm/d/Y': /(\d{2}\/\d{2}\/\d{4}).*(\d{2}\/\d{2}\/\d{4})/,
-                                'Y-m-d': /(\d{4}-\d{2}-\d{2}).*(\d{4}-\d{2}-\d{2})/,
-                                'd-m-Y': /(\d{2}-\d{2}-\d{4}).*(\d{2}-\d{2}-\d{4})/,
-                                'm-d-Y': /(\d{2}-\d{2}-\d{4}).*(\d{2}-\d{2}-\d{4})/,
-                                'Y.m.d': /(\d{4}\.\d{2}\.\d{2}).*(\d{4}\.\d{2}\.\d{2})/,
-                                'd.m.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/,
-                                'm.d.Y': /(\d{2}\.\d{2}\.\d{4}).*(\d{2}\.\d{2}\.\d{4})/
-                            };
-                            const dateRegex = regexMap['<?php echo esc_attr($date_format_for_users); ?>'];
-                            let calander = flatpickr(this, {
-                                enableTime: false,
-                                minDate: "today",
-                                mode: "range",
-                                dateFormat: "Y/m/d",
-                                altInput: true,
-                                altFormat: '<?php echo esc_html( $date_format_for_users ); ?>',
-
-                                // flatpickr locale
-								<?php self::tf_flatpickr_locale(); ?>
-
-                                onChange: function (selectedDates, dateStr, instance) {
-                                    instance.element.value = dateStr.replace(/(\d{4}\/\d{2}\/\d{2}).*(\d{4}\/\d{2}\/\d{2})/g, function (match, date1, date2) {
-                                        return `${date1} - ${date2}`;
-                                    })
-                                    instance.altInput.value = instance.altInput.value.replace( dateRegex, function (match, d1, d2) {
-                                        return `${d1} - ${d2}`;
-                                    })
-                                },
-                            });
-                        });
-                    });
-                })(jQuery);
-            </script>
 		<?php }
 	}
 

@@ -2257,20 +2257,6 @@ trait Action_Helper {
 		return $args;
 	}
 
-	function tf_admin_footer() {
-
-		$screen = get_current_screen();
-
-		if ( is_admin() && ( $screen->id == 'tf_hotel' ) ) {
-			global $post;
-		?>
-			<script>
-				var post_id = '<?php echo esc_html( $post->ID ); ?>';
-			</script>
-			<?php
-		}
-	}
-
 	function tf_remove_metabox_gutenburg( $response, $taxonomy, $request ) {
 
 		$context = ! empty( $request['context'] ) ? $request['context'] : 'view';
