@@ -628,7 +628,6 @@ class Enqueue {
 								$(".tf-submit").attr("disabled", "disabled");
 								$(".tf-submit").addClass("disabled");
 								$(".tf-check-in-out-date .tf_label-row .tf-err-msg, .tf-apartment-design-one-form .tf_booking-dates .tf-err-msg").remove();
-								$(".tf-check-in-out-date .tf_label-row, .tf-apartment-design-one-form .tf_booking-dates").append("<span class=\"tf-err-msg\">' . sprintf(esc_html__('Minimum stay is %s nights', 'tourfic'), $min_stay) . '</span>");
 							} else {
 								$(".tf-submit").removeAttr("disabled");
 								$(".tf-submit").removeClass("disabled");
