@@ -77,23 +77,31 @@ class Gallery extends Widget_Base {
             ],
         ]);
 
+		$this->add_control('show_review', [
+			'label' => esc_html__('Review Badge', 'tourfic'),
+			'type' => Controls_Manager::SWITCHER,
+			'label_on' => esc_html__('Show', 'tourfic'),
+			'label_off' => esc_html__('Hide', 'tourfic'),
+			'return_value' => 'yes',
+			'default' => 'yes',
+		]);
+
 	    do_action( 'tf/single-gallery/after-content/controls', $this );
 
         $this->end_controls_section();
     }
 
     protected function tf_gallery_style_controls() {
-		$this->start_controls_section( 'share_style_section', [
-			'label' => esc_html__( 'Share Icon Style', 'tourfic' ),
+		$this->start_controls_section( 'gallery_style_section', [
+			'label' => esc_html__( 'Style', 'tourfic' ),
 			'tab'   => Controls_Manager::TAB_STYLE,
 		]);
 
-        $this->add_responsive_control( "tf_share_icon_size", [
-			'label'      => esc_html__( 'Icon Size', 'tourfic' ),
+        $this->add_responsive_control( "tf_nav_item_gap", [
+			'label'      => esc_html__( 'Nav Items Gap', 'tourfic' ),
 			'type'       => Controls_Manager::SLIDER,
 			'size_units' => [
 				'px',
-				'rem',
 			],
 			'range'      => [
 				'px' => [
@@ -103,33 +111,10 @@ class Gallery extends Widget_Base {
 				],
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .share-toggle i" => 'font-size: {{SIZE}}{{UNIT}}',
-				"{{WRAPPER}} .tf-share-toggle i" => 'font-size: {{SIZE}}{{UNIT}}',
-				"{{WRAPPER}} .share-toggle svg" => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}',
-				"{{WRAPPER}} .tf-share-toggle svg" => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}',
-			],
-		] );
-
-        $this->add_responsive_control( "tf_share_icon_box_size", [
-			'label'      => esc_html__( 'Box Size', 'tourfic' ),
-			'type'       => Controls_Manager::SLIDER,
-			'size_units' => [
-				'px',
-				'rem',
-			],
-			'range'      => [
-				'px' => [
-					'min'  => 30,
-					'max'  => 100,
-					'step' => 1,
-				],
-			],
-			'selectors'  => [
-				"{{WRAPPER}} .share-toggle" => 'height: {{SIZE}}{{UNIT}} !important; width: {{SIZE}}{{UNIT}} !important;',
-				"{{WRAPPER}} .tf-share-toggle" => 'height: {{SIZE}}{{UNIT}} !important; width: {{SIZE}}{{UNIT}} !important;',
+				"{{WRAPPER}} .tf-single-gallery__style-1.tf-hero-gallery .tf-gallery" => 'gap: {{SIZE}}{{UNIT}};',
 			],
             'condition' => [
-				'share_style' => ['style1', 'style2'],
+				'gallery_style' => ['style1'],
 			],
 		] );
 
@@ -159,7 +144,6 @@ class Gallery extends Widget_Base {
 			if ( $gallery ) {
 				$gallery_ids = explode( ',', $gallery ); // Comma seperated list to array
 			}
-			$video = ! empty( $meta['video'] ) ? $meta['video'] : '';
 
         } elseif($post_type == 'tf_tours'){
 			$meta = get_post_meta($post_id, 'tf_tours_opt', true);
@@ -168,7 +152,6 @@ class Gallery extends Widget_Base {
 			if ( $gallery ) {
 				$gallery_ids = explode( ',', $gallery );
 			}
-			$video = ! empty( $meta['tour_video'] ) ? $meta['tour_video'] : '';
 			
         } elseif($post_type == 'tf_apartment'){
 			$meta = get_post_meta($post_id, 'tf_apartment_opt', true);
@@ -177,7 +160,6 @@ class Gallery extends Widget_Base {
 			if ( $gallery ) {
 				$gallery_ids = explode( ',', $gallery ); // Comma seperated list to array
 			}
-			$video = ! empty( $meta['video'] ) ? $meta['video'] : '';
 			
         } else {
 			return;
@@ -187,7 +169,8 @@ class Gallery extends Widget_Base {
 
         //gallery style
         $style = !empty($settings['gallery_style']) ? $settings['gallery_style'] : 'style1';
-       
+        $show_review = isset($settings['show_review']) ? $settings['show_review'] : 'yes';
+
         // Style 1: Bottom Nav
         if ($style == 'style1') {
             ?>
@@ -195,8 +178,8 @@ class Gallery extends Widget_Base {
 				<div class="tf-gallery-featured <?php echo empty($gallery_ids) ? esc_attr('tf-without-gallery-featured') : ''; ?>">
 					<img src="<?php echo !empty(wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' )) ? esc_url( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) : esc_url(TF_ASSETS_APP_URL.'images/feature-default.jpg'); ?>" alt="<?php esc_html_e( 'Hotel Image', 'tourfic' ); ?>">
 
+					<?php if ( $show_review == 'yes' && ! $disable_review_sec == '1' ) : ?>
 					<div class="tf-single-review-box">
-					<?php if ( ! $disable_review_sec == '1' ) : ?>
 						<?php if($comments): ?>
 							<a href="#tf-review" class="tf-single-rating">
 								<span><?php echo wp_kses_post( TF_Review::tf_total_avg_rating( $comments )); ?></span> (<?php TF_Review::tf_based_on_text( count( $comments ) ); ?>)
@@ -206,8 +189,8 @@ class Gallery extends Widget_Base {
 								<span><?php esc_html_e( "0.0", "tourfic" ) ?></span> (<?php esc_html_e( "0 review", "tourfic" ) ?>)
 							</a>
 						<?php endif; ?>
-					<?php endif; ?>
 					</div>
+					<?php endif; ?>
 				</div>
 
 				<div class="tf-gallery">
@@ -231,15 +214,15 @@ class Gallery extends Widget_Base {
         elseif ($style == 'style2') {
             ?>
             <div class="tf-single-gallery__style-2 tf-hero-gallery">
-				<div class="tf-top-review">
-					<?php if ( $comments && ! $disable_review_sec == '1' ) { ?>
+				<?php if ( $show_review == 'yes' && $comments && ! $disable_review_sec == '1' ) { ?>
+					<div class="tf-top-review">
 						<a href="#tf-review">
 							<div class="tf-single-rating">
 								<i class="fas fa-star"></i> <span><?php echo wp_kses_post( TF_Review::tf_total_avg_rating( $comments ) ); ?></span> (<?php TF_Review::tf_based_on_text( count( $comments ) ); ?>)
 							</div>
 						</a>
-					<?php } ?>
-				</div>
+					</div>
+				<?php } ?>
 				
 				<?php if ( ! empty( $gallery_ids ) ) { ?>
 					<div class="tf-gallery-wrap">
@@ -256,8 +239,6 @@ class Gallery extends Widget_Base {
 								</div>
 								<div class="swiper-button-prev sw-btn"></div>
 								<div class="swiper-button-next sw-btn"></div>
-
-								<?php Helper::tf_hotel_gallery_video( $meta ); ?>
 							</div>
 						</div>
 					</div>
@@ -273,7 +254,6 @@ class Gallery extends Widget_Base {
 												alt="">
 									</a>
 								</div>
-								<?php Helper::tf_hotel_gallery_video( $meta ); ?>
 							</div>
 						</div>
 					</div>
