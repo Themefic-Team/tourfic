@@ -2059,25 +2059,10 @@ var frame, gframe;
 
                 })
 
-                function updateLocationField(latitude, longitude) {
-                    var apiUrl = 'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + latitude + '&lon=' + longitude;
-
-                    $.ajax({
-                        url: apiUrl,
-                        dataType: 'json',
-                        success: function (data) {
-                            $search_input.val(data.display_name)
-                        },
-                        error: function (jqXHR, textStatus, errorThrown) {
-                            console.error('Error:', textStatus, errorThrown);
-                        }
-                    });
-                }
 
                 mapInit.on('click', function (data) {
                     mapMarker.setLatLng(data.latlng);
                     update_latlng(data.latlng);
-                    updateLocationField(data.latlng.lat, data.latlng.lng)
                 });
 
                 mapInit.on('zoom', function () {
@@ -2092,7 +2077,6 @@ var frame, gframe;
                     let currentLng = e.target._latlng.lng
                     let currentLat = e.target._latlng.lat
 
-                    updateLocationField(currentLat, currentLng)
                 })
 
                 if (!$search_input.length) {
@@ -2111,35 +2095,6 @@ var frame, gframe;
                             response(cache[term]);
                             return;
                         }
-
-                        $.get('https://nominatim.openstreetmap.org/search', {
-                            format: 'json',
-                            q: term,
-                        }, function (results) {
-
-                            var data;
-
-                            if (results.length) {
-                                data = results.map(function (item) {
-                                    return {
-                                        value: item.display_name,
-                                        label: item.display_name,
-                                        lat: item.lat,
-                                        lon: item.lon
-                                    };
-                                }, 'json');
-                            } else {
-                                data = [{
-                                    value: 'no-data',
-                                    label: 'No Results.'
-                                }];
-                            }
-
-
-                            cache[term] = data;
-                            response(data);
-
-                        });
 
                     },
                     select: function (event, ui) {
