@@ -1,0 +1,109 @@
+// Gallery
+@import '../../../../../common/variable';
+@import '../../../../../common/mixin';
+
+//style 1
+.tf-single-faq-section.tf-single-faq-style1{
+    .tf-faq-inner{
+        .tf-faq-single{
+            border-bottom: 1px solid $color-border-lite;
+        }
+        .active{
+            .tf-faq-single-inner{
+                background: $color-filling-fg;
+                @include bd-radius(5px);
+                margin: 0px 0px 30px 0px;
+                .tf-faq-collaps{
+                    .faq-icon{
+                        i.fa-plus{
+                            display: none;
+                        }
+                        i.fa-minus{
+                            color: $color-primary;
+                            display: block;
+                        }
+                    }
+                }
+            }
+        }
+        .tf-faq-single-inner{
+            .tf-faq-content{
+                display: none;
+            }
+        }
+    }
+    .tf-faq-single-inner{
+        .tf-faq-content{
+            padding: 0px 24px 24px 24px;
+            p{
+                margin: 0;
+            }
+        }
+        .tf-faq-collaps{
+            padding: 24px;
+            @media #{$max575}{
+                flex-wrap: nowrap;
+                gap: 5px;
+            }
+            &:hover{
+                cursor: pointer;
+            }
+            .faq-icon{
+                i.fa-plus{
+                display: block;
+                }
+                i.fa-minus{
+                display: none;
+                }
+            }
+        }
+        h4{
+            line-height: 1.5;
+            margin-top: 0;
+            margin-bottom: 0;
+            font-size: 1.25rem;
+            color: $color-heading;
+        }
+    }
+}
+
+//style 2
+.tf-single-faq-section.tf-single-faq-style2{
+    .tf-faq-col{
+        margin-bottom: 16px;
+        &:last-child{
+            margin-bottom: 0px;
+        }
+        &.active{
+        .tf-faq-head{
+            span{
+                i{
+                    transform: rotate(180deg);
+                }
+            }
+        } 
+        }
+        .tf-faq-head{
+            border-radius: 8px;
+            background: $color-gray-light;
+            padding: 8px 16px;
+            cursor: pointer;
+            span{
+                color: $color-text;
+                font-size: 1rem;
+                font-weight: 400;
+                gap: 8px;
+                flex-wrap: nowrap;
+                i{
+                    color: $color-text;
+                }
+            }
+        }
+        .tf-question-desc{
+            color: $color-text;
+            font-size: 0.938rem;
+            padding: 8px 16px;
+            display: none;
+        }
+    }
+}

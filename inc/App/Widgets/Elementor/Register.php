@@ -62,6 +62,7 @@ class Register {
             $widgets_manager->register( \Tourfic\App\Widgets\Elementor\Widgets\Single\Gallery::instance() );
             $widgets_manager->register( \Tourfic\App\Widgets\Elementor\Widgets\Single\Gallery_Button::instance() );
             $widgets_manager->register( \Tourfic\App\Widgets\Elementor\Widgets\Single\Video_Button::instance() );
+            $widgets_manager->register( \Tourfic\App\Widgets\Elementor\Widgets\Single\FAQ::instance() );
         }
     }
 

@@ -406,6 +406,7 @@ class Enqueue {
 			wp_register_style( 'tf-elementor-single-share', TF_PRO_ASSETS_URL . 'app/css/elementor/single/share.min.css', '', TF_VERSION );
 			wp_register_style( 'tf-elementor-single-gallery', TF_PRO_ASSETS_URL . 'app/css/elementor/single/gallery.min.css', '', TF_VERSION );
 			wp_register_style( 'tf-elementor-single-action-btns', TF_PRO_ASSETS_URL . 'app/css/elementor/single/action-btns.min.css', '', TF_VERSION );
+			wp_register_style( 'tf-elementor-single-faq', TF_PRO_ASSETS_URL . 'app/css/elementor/single/faq.min.css', '', TF_VERSION );
 		}
 	}
 
