@@ -72,6 +72,28 @@ class FAQ extends Widget_Base {
             ],
         ]);
 
+        $this->add_control('open_icon',[
+            'label' => esc_html__('Open Tab Icon', 'tourfic'),
+            'default' => [
+                'value' => 'fas fa-minus',
+                'library' => 'fa-solid',
+            ],
+            'label_block' => true,
+            'type' => Controls_Manager::ICONS,
+            'fa4compatibility' => 'open_icon_comp',
+        ]);
+
+        $this->add_control('close_icon',[
+            'label' => esc_html__('Close Tab Icon', 'tourfic'),
+            'default' => [
+                'value' => 'fas fa-plus',
+                'library' => 'fa-solid',
+            ],
+            'label_block' => true,
+            'type' => Controls_Manager::ICONS,
+            'fa4compatibility' => 'close_icon_comp',
+        ]);
+
 	    do_action( 'tf/single-faq/after-content/controls', $this );
 
         $this->end_controls_section();
@@ -109,6 +131,7 @@ class FAQ extends Widget_Base {
             $meta = get_post_meta($post_id, 'tf_hotels_opt', true);
 			$faqs = ! empty( Helper::tf_data_types($meta['faq']) ) ? Helper::tf_data_types($meta['faq']) : '';
 
+            
         } elseif($post_type == 'tf_tours'){
 			$meta = get_post_meta($post_id, 'tf_tours_opt', true);
 			$faqs = ! empty( Helper::tf_data_types($meta['faqs']) ) ? Helper::tf_data_types($meta['faqs']) : '';
