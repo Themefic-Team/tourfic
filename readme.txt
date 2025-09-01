@@ -288,15 +288,29 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 
 == External Services ==
 
-This plugin connects to Google Maps (https://maps.google.com) to display map locations in hotel, tour, apartment, and car rental templates. It sends the location address or latitude/longitude to Google Maps when a map is displayed. This service is provided by Google: [Terms of Service](https://maps.google.com/help/terms_maps) , [Privacy Policy](https://policies.google.com/privacy)
+Google Maps (maps.google.com)
+Use: Display interactive maps on listing and single pages.
+Data sent & when: Location address and/or latitude/longitude are sent when a map is displayed.
+Terms: https://maps.google.com/help/terms_maps
+Privacy: https://policies.google.com/privacy
 
-This plugin connects to OpenStreetMap (https://www.openstreetmap.org) to display map locations as an alternative mapping service. It sends the location address or latitude/longitude to OpenStreetMap when a map is displayed. This service is provided by the OpenStreetMap Foundation: [Terms of Use](https://wiki.osmfoundation.org/wiki/Terms_of_Use), [Privacy Policy](https://wiki.osmfoundation.org/wiki/Privacy_Policy)
+OpenStreetMap Tiles (openstreetmap.org)
+Use: Alternative map tiles for displaying maps on listing and single pages.
+Data sent & when: Location address and/or latitude/longitude are used when a map is displayed.
+Terms: https://wiki.osmfoundation.org/wiki/Terms_of_Use
+Privacy: https://wiki.osmfoundation.org/wiki/Privacy_Policy
 
-This plugin uses the OpenStreetMap Nominatim API (https://nominatim.openstreetmap.org) to fetch address details from latitude and longitude in the admin area. It sends coordinate data when users interact with location fields. This service is provided by the OpenStreetMap Foundation: [Terms of Use](https://operations.osmfoundation.org/policies/nominatim/)
+QuickChart (quickchart.io)
+Use: Generate QR codes for booking details.
+Data sent & when: Booking URL or identifier is sent when generating a QR code image.
+Terms: https://quickchart.io/terms/
+Privacy: https://quickchart.io/privacy/
 
-This plugin connects to QuickChart.io (https://quickchart.io) to generate QR codes for booking details. It sends the booking URL or identifier to QuickChart.io in order to create the QR code image. This service is provided by QuickChart.io: [Terms of Service]( https://quickchart.io/terms/), [Privacy Policy](https://quickchart.io/privacy/)
-
-This plugin connects to the Themefic API (https://api.themefic.com) to display promotional notices and retrieve plugin-related information. It may send the site URL, plugin version, and related information to Themefic’s server. This service is provided by Themefic: Terms of Service – https://themefic.com/terms/, Privacy Policy – https://themefic.com/privacy-policy/
+Themefic API (api.themefic.com)
+Use: Show promotional notices and retrieve plugin-related information.
+Data sent & when: Site URL, plugin name/version, and related metadata may be sent when checking for notices or plugin information.
+Terms: https://themefic.com/terms/
+Privacy: https://themefic.com/privacy-policy/
 
 == Frequently Asked Questions ==
 
@@ -310,9 +324,9 @@ Tourfic is a WordPress plugin for Hotel, Travel, and Vacation Rental bookings. I
 
 = How to install Tourfic? =
 
-* Download and unzip the plugin, then upload it to wp-content/plugins.  
-* Activate from the WordPress Plugins page OR install via WP Admin → Plugins → Add New → Search "Tourfic".  
-* Run the Quick Setup wizard.  
+* Download and unzip the plugin, then upload it to wp-content/plugins.
+* Activate from the WordPress Plugins page OR install via WP Admin → Plugins → Add New → Search "Tourfic".
+* Run the Quick Setup wizard.
 * For details, see our [Documentation](https://themefic.com/docs/tourfic/getting-started/installation/) or [YouTube videos](https://www.youtube.com/playlist?list=PLY0rtvOwg0ylCl7NTwNHUPq-eY1qwUH_N).
 
 = Is the Free version fully free? =
@@ -390,7 +404,7 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
-= 2.16.14 – August 27, 2025 =
+= 2.16.15 – September 01, 2025 =
 
 - Addressed plugin review feedback.
 - Improved security and code quality.
