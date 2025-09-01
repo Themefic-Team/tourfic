@@ -168,6 +168,7 @@ class Gallery extends Widget_Base {
 			if ( $gallery ) {
 				$gallery_ids = explode( ',', $gallery );
 			}
+			$video = ! empty( $meta['tour_video'] ) ? $meta['tour_video'] : '';
 			
         } elseif($post_type == 'tf_apartment'){
 			$meta = get_post_meta($post_id, 'tf_apartment_opt', true);
@@ -193,24 +194,6 @@ class Gallery extends Widget_Base {
             <div class="tf-single-gallery__style-1 tf-hero-gallery">
 				<div class="tf-gallery-featured <?php echo empty($gallery_ids) ? esc_attr('tf-without-gallery-featured') : ''; ?>">
 					<img src="<?php echo !empty(wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' )) ? esc_url( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) : esc_url(TF_ASSETS_APP_URL.'images/feature-default.jpg'); ?>" alt="<?php esc_html_e( 'Hotel Image', 'tourfic' ); ?>">
-					
-					<div class="featured-meta-gallery-videos">
-						<div class="featured-column tf-gallery-box">
-							<?php if ( ! empty( $gallery_ids ) ) :?>
-							<a id="featured-gallery" href="#" class="tf-tour-gallery">
-								<i class="fa-solid fa-camera-retro"></i><?php echo esc_html__("Gallery","tourfic"); ?>
-							</a>
-							<?php endif; ?>
-						</div>
-
-						<?php if ( !empty($video) ) : ?>
-						<div class="featured-column tf-video-box">
-							<a class="tf-tour-video" id="featured-video" data-fancybox="tour-video" href="<?php echo esc_url($video); ?>">
-								<i class="fa-solid fa-video"></i> <?php echo esc_html__("Video","tourfic"); ?>
-							</a>
-						</div>
-						<?php endif; ?>
-					</div>
 
 					<div class="tf-single-review-box">
 					<?php if ( ! $disable_review_sec == '1' ) : ?>

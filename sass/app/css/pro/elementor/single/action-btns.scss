@@ -1,0 +1,43 @@
+// Gallery
+@import '../../../../../common/variable';
+@import '../../../../../common/mixin';
+
+.tf-single-action-btns {
+    a {
+        @include flexbox();
+        @include align-items(center);
+        @include justify-content(center);
+        gap: 8px;
+        text-decoration: none;
+        color: $color-heading;
+        padding: 5px 12px;
+        border-radius: 5px;
+        transition: all .4s ease;
+        min-height: 35px;
+        background: $color-white;
+        border-radius: 5px;
+
+        @media #{$max575}{
+            font-size: 0.875rem;
+            padding: 5px 8px;
+        }
+
+        &:hover{
+            background-color: $color-primary;
+            color: $color-white;
+            transition: all .6s ease;
+
+            svg path{
+                fill: $color-white;
+            }
+        }
+        i{
+            line-height: inherit;
+        }
+        svg{
+            width: 18px;
+            height: 18px;
+            transition: all .4s ease;
+        }
+    }
+}
