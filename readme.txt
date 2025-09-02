@@ -408,7 +408,7 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 - Addressed plugin review feedback.
 - Improved security and code quality.
-- Updated readme.txt info for OpenStreetMap.
+- Updated readme.txt info.
 - Performance and stability improvements.
 
 **Old Changelog can be found [here](https://themefic.com/tourfic/changelog/)**.
