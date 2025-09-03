@@ -422,21 +422,18 @@ class FAQ extends Widget_Base {
             $meta = get_post_meta($post_id, 'tf_hotels_opt', true);
 			$faqs = ! empty( Helper::tf_data_types($meta['faq']) ) ? Helper::tf_data_types($meta['faq']) : '';
 
-
         } elseif($post_type == 'tf_tours'){
 			$meta = get_post_meta($post_id, 'tf_tours_opt', true);
 			$faqs = ! empty( Helper::tf_data_types($meta['faqs']) ) ? Helper::tf_data_types($meta['faqs']) : '';
-			
-			
+
         } elseif($post_type == 'tf_apartment'){
 			$meta = get_post_meta($post_id, 'tf_apartment_opt', true);
 			$faqs = ! empty( Helper::tf_data_types($meta['faq']) ) ? Helper::tf_data_types($meta['faq']) : '';
-			
-			
+
         } elseif($post_type == 'tf_carrental'){
 			$meta = get_post_meta($post_id, 'tf_carrental_opt', true);
 			$faqs = ! empty( Helper::tf_data_types($meta['faq']) ) ? Helper::tf_data_types($meta['faq']) : '';
-			
+            
         } else {
 			return;
 		}
