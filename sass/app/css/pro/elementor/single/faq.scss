@@ -5,7 +5,7 @@
 //style 1
 .tf-single-faq-section.tf-single-faq-style1{
     .tf-faq-inner{
-        .tf-faq-single{
+        .tf-faq-single.has-devider{
             border-bottom: 1px solid $color-border-lite;
         }
         .active{
@@ -66,7 +66,7 @@
                 }
             }
         }
-        h4{
+        .tf-faq-label{
             line-height: 1.5;
             margin-top: 0;
             margin-bottom: 0;

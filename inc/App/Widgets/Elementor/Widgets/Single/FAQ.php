@@ -87,6 +87,18 @@ class FAQ extends Widget_Base {
             'return_value' => 'right',
         ]);
 
+        $this->add_control('tf_faq_item_divider',[
+            'label'        => esc_html__('Item Devider', 'tourfic'),
+            'type'         => Controls_Manager::SWITCHER,
+            'label_on'     => __('Yes', 'tourfic'),
+            'label_off'    => __('No', 'tourfic'),
+            'default'      => 'yes',
+            'return_value' => 'yes',
+            'condition' => [
+				'faq_style' => ['style1'],
+			],
+        ]);
+
         $this->add_control('open_icon',[
             'label' => esc_html__('Open Tab Icon', 'tourfic'),
             'default' => [
@@ -183,7 +195,8 @@ class FAQ extends Widget_Base {
                 ],
             ],
             'selectors'  => [
-                '{{WRAPPER}} .tf-faq-head' => 'gap: {{SIZE}}{{UNIT}};',
+                '{{WRAPPER}} .tf-faq-single-inner .tf-faq-collaps' => 'gap: {{SIZE}}{{UNIT}};',
+                '{{WRAPPER}} .tf-faq-col .tf-faq-head' => 'gap: {{SIZE}}{{UNIT}};',
             ],
         ]);
 
@@ -193,10 +206,6 @@ class FAQ extends Widget_Base {
             [
                 'label'      => __('Item Gap', 'tourfic'),
                 'type'       => Controls_Manager::SLIDER,
-                'default'    => [
-                    'size' => 16,
-                    'unit' => 'px',
-                ],
                 'size_units' => ['px'],
                 'range'      => [
                     'px' => [
@@ -238,15 +247,14 @@ class FAQ extends Widget_Base {
             'label'     => esc_html__('Text Color', 'tourfic'),
             'type'      => Controls_Manager::COLOR,
             'selectors' => [
-                '{{WRAPPER}} .tf-faq-single .tf-faq-head .eael-accordion-tab-title' => 'color: {{VALUE}};',
+                '{{WRAPPER}} .tf-faq-single .tf-faq-head .tf-faq-label' => 'color: {{VALUE}};',
             ],
         ]);
         $this->add_control('tf_faq_tab_icon_color',[
             'label'     => esc_html__('Icon Color', 'tourfic'),
             'type'      => Controls_Manager::COLOR,
             'selectors' => [
-                '{{WRAPPER}} .tf-faq-single .tf-faq-head .fa-accordion-icon' => 'color: {{VALUE}};',
-                '{{WRAPPER}} .tf-faq-single .tf-faq-head .fa-accordion-icon-svg svg' => 'color: {{VALUE}}; fill: {{VALUE}};',
+                '{{WRAPPER}} .tf-faq-single .tf-faq-head i' => 'color: {{VALUE}};',
                 '{{WRAPPER}} .tf-faq-single .tf-faq-head svg' => 'fill: {{VALUE}};',
             ]
         ]);
@@ -289,7 +297,7 @@ class FAQ extends Widget_Base {
                 'label'     => esc_html__('Text Color', 'tourfic'),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .tf-faq-single .tf-faq-head:hover .eael-accordion-tab-title' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .tf-faq-single .tf-faq-head:hover .tf-faq-label' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -299,31 +307,18 @@ class FAQ extends Widget_Base {
                 'label'     => esc_html__('Icon Color', 'tourfic'),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .tf-faq-single .tf-faq-head:hover .fa-accordion-icon' => 'color: {{VALUE}};',
-                    '{{WRAPPER}} .tf-faq-single .tf-faq-head:hover .fa-accordion-icon svg' => 'color: {{VALUE}}; fill: {{VALUE}}',
-                    '{{WRAPPER}} .tf-faq-single .tf-faq-head:hover svg.fa-accordion-icon' => 'fill: {{VALUE}}',
+                    '{{WRAPPER}} .tf-faq-single .tf-faq-head:hover i' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .tf-faq-single .tf-faq-head:hover svg' => 'fill: {{VALUE}}',
                 ]
             ]
         );
-        $this->add_group_control(
-            Group_Control_Border::get_type(),
-            [
-                'name'     => 'tf_faq_tab_border_hover',
-                'label'    => esc_html__('Border', 'tourfic'),
-                'selector' => '{{WRAPPER}} .tf-faq-single .tf-faq-head:hover',
-            ]
-        );
-        $this->add_responsive_control(
-            'tf_faq_tab_border_radius_hover',
-            [
-                'label'      => esc_html__('Border Radius', 'tourfic'),
-                'type'       => Controls_Manager::DIMENSIONS,
-                'size_units' => ['px', 'em', '%'],
-                'selectors'  => [
-                    '{{WRAPPER}} .tf-faq-single .tf-faq-head:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                ],
-            ]
-        );
+        $this->add_control( 'tf_faq_tab_border_hover', [
+			'label'     => __( 'Border Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .tf-faq-single .tf-faq-head:hover" => 'border-color: {{VALUE}};',
+			],
+		] );
         $this->end_controls_tab();
 
         #Active State Tab
@@ -347,7 +342,7 @@ class FAQ extends Widget_Base {
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .tf-faq-single .tf-faq-head.active'                           => 'color: {{VALUE}};',
-                    '{{WRAPPER}} .tf-faq-single .tf-faq-head.active .eael-accordion-tab-title' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .tf-faq-single .tf-faq-head.active .tf-faq-label' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -357,31 +352,18 @@ class FAQ extends Widget_Base {
                 'label'     => esc_html__('Icon Color', 'tourfic'),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .tf-faq-single .tf-faq-head.active .fa-accordion-icon' => 'color: {{VALUE}};',
-                    '{{WRAPPER}} .tf-faq-single .tf-faq-head.active .fa-accordion-icon svg' => 'color: {{VALUE}};fill: {{VALUE}}',
-                    '{{WRAPPER}} .tf-faq-single .tf-faq-head.active svg.fa-accordion-icon' => 'fill: {{VALUE}}',
+                    '{{WRAPPER}} .tf-faq-single .tf-faq-head.active i' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .tf-faq-single .tf-faq-head.active svg' => 'fill: {{VALUE}}',
                 ],
             ]
         );
-        $this->add_group_control(
-            Group_Control_Border::get_type(),
-            [
-                'name'     => 'tf_faq_tab_border_active',
-                'label'    => esc_html__('Border', 'tourfic'),
-                'selector' => '{{WRAPPER}} .tf-faq-single .tf-faq-head.active',
-            ]
-        );
-        $this->add_responsive_control(
-            'tf_faq_tab_border_radius_active',
-            [
-                'label'      => esc_html__('Border Radius', 'tourfic'),
-                'type'       => Controls_Manager::DIMENSIONS,
-                'size_units' => ['px', 'em', '%'],
-                'selectors'  => [
-                    '{{WRAPPER}} .tf-faq-single .tf-faq-head.active' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                ],
-            ]
-        );
+        $this->add_control( 'tf_faq_tab_border_active', [
+			'label'     => __( 'Border Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .tf-faq-single .tf-faq-head.active" => 'border-color: {{VALUE}};',
+			],
+		] );
         $this->end_controls_tab();
         $this->end_controls_tabs();
         $this->end_controls_section();
@@ -393,41 +375,31 @@ class FAQ extends Widget_Base {
             'tab'   => Controls_Manager::TAB_STYLE,
         ]);
 
-        $this->add_group_control(
-            Group_Control_Background::get_type(),
-            [
-                'name'     => 'faq_content_bgtype',
-                'types'    => ['classic', 'gradient'],
-                'selector' => '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-content',
-            ]
-        );
+        $this->add_control( 'faq_content_bgtype', [
+			'label'     => __( 'Background Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .tf-faq-single .tf-faq-content" => 'background-color: {{VALUE}};',
+			],
+		]);
 
         $this->add_control('faq_content_text_color',[
             'label'     => esc_html__('Text Color', 'tourfic'),
             'type'      => Controls_Manager::COLOR,
-            'default'   => '#333',
             'selectors' => [
-                '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-content' => 'color: {{VALUE}};',
+                '{{WRAPPER}} .tf-faq-single .tf-faq-content' => 'color: {{VALUE}};',
             ],
         ]);
         $this->add_group_control(Group_Control_Typography::get_type(),[
             'name'     => 'tf_faq_content_typography',
-            'selector' => '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-content',
+            'selector' => '{{WRAPPER}} .tf-faq-single .tf-faq-content',
         ]);
         $this->add_responsive_control('tf_faq_content_padding',[
             'label'      => esc_html__('Padding', 'tourfic'),
             'type'       => Controls_Manager::DIMENSIONS,
             'size_units' => ['px', 'em', '%'],
             'selectors'  => [
-                '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-content' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ],
-        ]);
-        $this->add_responsive_control('tf_faq_content_margin',[
-            'label'      => esc_html__('Margin', 'tourfic'),
-            'type'       => Controls_Manager::DIMENSIONS,
-            'size_units' => ['px', 'em', '%'],
-            'selectors'  => [
-                '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-content' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                '{{WRAPPER}} .tf-faq-single .tf-faq-content' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
         ]);
         $this->add_group_control(
@@ -435,15 +407,7 @@ class FAQ extends Widget_Base {
             [
                 'name'     => 'tf_faq_content_border',
                 'label'    => esc_html__('Border', 'tourfic'),
-                'selector' => '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-content',
-            ]
-        );
-        $this->add_group_control(
-            Group_Control_Box_Shadow::get_type(),
-            [
-                'name'      => 'tf_faq_content_shadow',
-                'selector'  => '{{WRAPPER}} .eael-adv-accordion .eael-accordion-list .eael-accordion-content',
-                'separator' => 'before',
+                'selector' => '{{WRAPPER}} .tf-faq-single .tf-faq-content',
             ]
         );
         $this->end_controls_section();
@@ -479,7 +443,7 @@ class FAQ extends Widget_Base {
 
         //faq style
         $style = !empty($settings['faq_style']) ? $settings['faq_style'] : 'style1';
-        $show_review = isset($settings['show_review']) ? $settings['show_review'] : 'yes';
+        $item_divider = isset($settings['tf_faq_item_divider']) ? $settings['tf_faq_item_divider'] : 'yes';
         
         if ($style == 'style1') {
             ?>
@@ -489,7 +453,7 @@ class FAQ extends Widget_Base {
                     <?php 
                     $faq_key = 1;    
                     foreach ( $faqs as $key => $faq ): ?>
-                    <div class="tf-faq-single <?php echo $faq_key==1 ? esc_attr( 'active' ) : ''; ?>">
+                    <div class="tf-faq-single <?php echo $faq_key==1 ? esc_attr( 'active' ) : ''; ?> <?php echo $item_divider=='yes' ? esc_attr( 'has-devider' ) : ''; ?>">
                         <div class="tf-faq-single-inner">
                             <div class="tf-faq-collaps tf-faq-head <?php echo $faq_key==1 ? esc_attr( 'active' ) : ''; ?> <?php echo $settings['tf_faq_icon_postion'] === 'right' ? esc_attr('tf-faq-icon-right'): ''; ?>">
                                 <?php if ($settings['tf_faq_icon_postion'] === '') {
@@ -498,7 +462,7 @@ class FAQ extends Widget_Base {
                                     echo '</div>'; 
                                 }?>
 
-                                <h4 class="tf-faq-label"><?php echo esc_html( $faq['title'] ); ?></h4> 
+                                <span class="tf-faq-label"><?php echo esc_html( $faq['title'] ); ?></span> 
 
                                 <?php if ($settings['tf_faq_icon_postion'] === 'right') {
                                     echo '<div class="faq-icon">';
