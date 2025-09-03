@@ -1132,9 +1132,9 @@ class Tour {
                 <form class="tf_tours_booking tf_tours_main_booking">
 
 					<?php
-					if ( self::tf_booking_popup( $post_id ) ) {
-						echo wp_kses( self::tf_booking_popup( $post_id ), Helper::tf_custom_wp_kses_allow_tags() );
-					}
+					// if ( self::tf_booking_popup( $post_id ) ) {
+					// 	echo wp_kses( self::tf_booking_popup( $post_id ), Helper::tf_custom_wp_kses_allow_tags() );
+					// }
 					?>
                     <div class="tf-field-group tf-mt-8">
                         <i class="fa-sharp fa-solid fa-calendar-days"></i>
@@ -1450,9 +1450,9 @@ class Tour {
                 <form class="tf_tours_booking tf_tours_main_booking">
 
 					<?php
-					if ( self::tf_booking_popup( $post_id ) ) {
-						echo wp_kses( self::tf_booking_popup( $post_id ), Helper::tf_custom_wp_kses_allow_tags() );
-					}
+					// if ( self::tf_booking_popup( $post_id ) ) {
+					// 	echo wp_kses( self::tf_booking_popup( $post_id ), Helper::tf_custom_wp_kses_allow_tags() );
+					// }
 					?>
                     <div class="tf-field-group tf-mt-8 tf-field-calander">
                         <i class="fa-sharp fa-solid fa-calendar-days"></i>
