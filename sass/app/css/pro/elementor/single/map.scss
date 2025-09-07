@@ -32,6 +32,7 @@
             align-items: center;
             justify-content: center;
             text-decoration: none;
+            svg,
             i{
                 height: 80px;
                 width: 80px;
@@ -42,6 +43,14 @@
                 border-radius: 50%;
                 padding: 0;
                 font-size: 1.25rem;
+            }
+
+            svg{
+                padding: 24px;
+
+                path{
+                    fill: $color-white; 
+                }
             }
         }
     }

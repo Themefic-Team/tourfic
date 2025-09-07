@@ -65,6 +65,33 @@ class Map extends Widget_Base {
         ]);
 
         do_action( 'tf/single-map/before-content/controls', $this );
+
+        //map height
+        $this->add_responsive_control( 'map_height', [
+            'label'      => esc_html__( 'Map Height', 'tourfic' ),
+            'type'       => Controls_Manager::SLIDER,
+            'size_units' => [ 'px', 'vh' ],
+            'range'      => [
+                'px' => [
+                    'min'  => 100,
+                    'max'  => 1000,
+                    'step' => 1,
+                ],
+                'vh' => [
+                    'min'  => 10,
+                    'max'  => 100,
+                    'step' => 1,
+                ],
+            ],
+            'default'    => [
+                'unit' => 'px',
+                'size' => 260,
+            ],
+            'selectors'  => [
+                '{{WRAPPER}} .tf-single-map iframe' => 'height: {{SIZE}}{{UNIT}};',
+                '{{WRAPPER}} .tf-single-map .tf-single-map-div' => 'height: {{SIZE}}{{UNIT}} !important;',
+            ],
+        ] );
 		
 		$this->add_control('map_icon',[
 			'label' => esc_html__('Map Icon', 'tourfic'),
@@ -77,36 +104,13 @@ class Map extends Widget_Base {
 			'fa4compatibility' => 'map_icon_comp',
 		]);
 
-        $this->add_control('show_location',[
-			'label' => esc_html__('Show Location Link?', 'tourfic'),
+        $this->add_control('show_icon',[
+			'label' => esc_html__('Show Icon?', 'tourfic'),
 			'type' => Controls_Manager::SWITCHER,
 			'label_on' => esc_html__('Show', 'tourfic'),
 			'label_off' => esc_html__('Hide', 'tourfic'),
 			'return_value' => 'yes',
 			'default' => 'yes',
-		]);
-
-		$this->add_responsive_control('map-align',[
-			'label' => esc_html__('Alignment', 'tourfic'),
-			'type' => Controls_Manager::CHOOSE,
-			'options' => [
-				'flex-start' => [
-					'title' => esc_html__('Left', 'tourfic'),
-					'icon' => 'eicon-text-align-left',
-				],
-				'center' => [
-					'title' => esc_html__('Center', 'tourfic'),
-					'icon' => 'eicon-text-align-center',
-				],
-				'flex-end' => [
-					'title' => esc_html__('Right', 'tourfic'),
-					'icon' => 'eicon-text-align-right',
-				],
-			],
-			'toggle' => true,
-			'selectors' => [
-				'{{WRAPPER}} .tf-title-meta' => 'justify-content: {{VALUE}};',
-			]
 		]);
 
 	    do_action( 'tf/single-map/after-content/controls', $this );
@@ -188,14 +192,14 @@ class Map extends Widget_Base {
 
 	protected function render() {
 		$settings  = $this->get_settings_for_display();
-        $show_location   = !empty( $settings['show_location'] ) ? $settings['show_location'] : '';
+        $show_icon   = !empty( $settings['show_icon'] ) ? $settings['show_icon'] : '';
         // Map Type
         $tf_openstreet_map = ! empty( Helper::tfopt( 'google-page-option' ) ) ? Helper::tfopt( 'google-page-option' ) : "default";
         $post_id   = get_the_ID();
 		$post_type = get_post_type();
-        $locations = $address = '';
         if($post_type == 'tf_hotel' || $post_type == 'tf_apartment' || $post_type == 'tf_carrental'){
-            $meta = get_post_meta($post_id, 'tf_hotels_opt', true);
+            $meta_key = $post_type == 'tf_hotel' ? 'tf_hotels_opt' : ( $post_type == 'tf_apartment' ? 'tf_apartment_opt' : 'tf_carrental_opt' );
+            $meta = get_post_meta($post_id, $meta_key, true);
             if( !empty($meta['map']) && Helper::tf_data_types($meta['map'])){
                 $address = !empty( Helper::tf_data_types($meta['map'])['address'] ) ? Helper::tf_data_types($meta['map'])['address'] : '';
                 $address_latitude = !empty( Helper::tf_data_types($meta['map'])['latitude'] ) ? Helper::tf_data_types($meta['map'])['latitude'] : '';
@@ -215,75 +219,56 @@ class Map extends Widget_Base {
         } else {
 			return;
 		}
+
+        //map icon
+		$map_icon_html = '<i class="fa-solid fa-location-dot"></i>';
+		
+        $map_icon_migrated = isset($settings['__fa4_migrated']['map_icon']);
+        $map_icon_is_new = empty($settings['map_icon_comp']);
+
+        if ( $map_icon_is_new || $map_icon_migrated ) {
+            ob_start();
+            Icons_Manager::render_icon( $settings['map_icon'], [ 'aria-hidden' => 'true' ] );
+            $map_icon_html = ob_get_clean();
+        } else{
+            $map_icon_html = '<i class="' . esc_attr( $settings['map_icon_comp'] ) . '"></i>';
+        }
         ?>
-        <div class="tf-hotel-location-map">
-            <?php if ( !defined( 'TF_PRO' ) && !empty( $address ) && $tf_openstreet_map!="default" && (empty($address_latitude) || empty($address_longitude)) ) { ?>
-                <div class="tf-hotel-location-preview show-on-map">
-                <iframe src="https://maps.google.com/maps?q=<?php echo wp_kses_post($address); ?>&output=embed" width="100%" height="258" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                    <a href="https://www.google.com/maps/search/<?php echo wp_kses_post($address); ?>" class="map-pre" target="_blank"><i class="fa-solid fa-location-dot"></i></a>
-                </div>
-            <?php } elseif ( !defined( 'TF_PRO' ) && !empty( $address ) && $tf_openstreet_map=="default" && !empty($address_latitude) && !empty($address_longitude)) {  ?>
-                <div class="tf-hotel-location-preview show-on-map">
-                    <div id="hotel-location"></div>
-                </div>
-                <script>
-                    const map = L.map('hotel-location').setView([<?php echo esc_html($address_latitude); ?>, <?php echo esc_html($address_longitude); ?>], <?php echo esc_html($address_zoom); ?>);
-
-                    const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                        maxZoom: 20,
-                        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                    }).addTo(map);
-
-                    const marker = L.marker([<?php echo esc_html($address_latitude); ?>, <?php echo esc_html($address_longitude); ?>], {alt: '<?php echo esc_html($address); ?>'}).addTo(map)
-                        .bindPopup('<?php echo esc_html($address); ?>');
-                </script>
-            <?php } elseif ( !defined( 'TF_PRO' ) && !empty( $address ) && $tf_openstreet_map=="default" && (empty($address_latitude) || empty($address_longitude)) ) {  ?>
-                <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $address_latitude ); ?>,<?php echo esc_attr( $address_longitude ); ?>&output=embed" width="100%" height="258" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-            <?php } ?>
-
-            <!-- Pro Code -->
+        <div class="tf-hotel-location-map tf-single-map">
             <?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ( ! empty( $address ) || (! empty( $address_latitude ) && ! empty( $address_longitude ) ) ) ) { ?>
-                <?php 
-                if( $tf_openstreet_map!="default" ){ ?>
-                <div class="tf-hotel-location-preview show-on-map">
-                    <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $address_latitude ); ?>,<?php echo esc_attr( $address_longitude ); ?>&output=embed" width="100%" height="290"
-                            style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                <?php if( $tf_openstreet_map!="default" ){ ?>
+                    <div class="tf-hotel-location-preview show-on-map">
+                        <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $address_latitude ); ?>,<?php echo esc_attr( $address_longitude ); ?>&output=embed" width="100%" height="290" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 
-                    <a data-fancybox class="map-pre" data-src="#tf-hotel-google-maps" href="https://www.google.com/maps/search/<?php echo wp_kses_post($address); ?>">
-                        <i class="fa-solid fa-location-dot"></i>
-                    </a>
-
-                </div>
+                        <?php if($show_icon == 'yes'): ?>
+                        <a data-fancybox class="map-pre" data-src="#tf-hotel-google-maps" href="https://www.google.com/maps/search/<?php echo wp_kses_post($address); ?>">
+                            <?php echo wp_kses( $map_icon_html, Helper::tf_custom_wp_kses_allow_tags() ); ?>
+                        </a>
+                        <?php endif; ?>
+                    </div>
                 <?php } ?>
+
                 <?php if (  $tf_openstreet_map=="default" && !empty($address_latitude) && !empty($address_longitude) ) {  ?>
                     <div class="tf-hotel-location-preview show-on-map">
-                        <div id="hotel-location"></div>
+                        <div id="hotel-location" class="tf-single-map-div"></div>
+
+                        <?php if($show_icon == 'yes'): ?>
                         <a data-fancybox class="map-pre" data-src="#tf-hotel-google-maps" href="https://www.google.com/maps/search/<?php echo wp_kses_post($address); ?>">
-                        <i class="fa-solid fa-location-dot"></i>
-                    </a>
+                            <?php echo wp_kses( $map_icon_html, Helper::tf_custom_wp_kses_allow_tags() ); ?>
+                        </a>
+                        <?php endif; ?>
                     </div>
-                    <script>
-                        const map = L.map('hotel-location').setView([<?php echo esc_html($address_latitude); ?>, <?php echo esc_html($address_longitude); ?>], <?php echo esc_html($address_zoom); ?>);
-
-                        const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                            maxZoom: 20,
-                            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                        }).addTo(map);
-
-                        const marker = L.marker([<?php echo esc_html($address_latitude); ?>, <?php echo esc_html($address_longitude); ?>], {alt: '<?php echo esc_html($address); ?>'}).addTo(map)
-                            .bindPopup('<?php echo esc_html($address); ?>');
-                    </script>
                 <?php } ?>
 
                 <?php if (  $tf_openstreet_map=="default" && (empty($address_latitude) || empty($address_longitude)) ) {  ?>
                     <div class="tf-hotel-location-preview show-on-map">
-                        <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $address_latitude ); ?>,<?php echo esc_attr( $address_longitude ); ?>&output=embed" width="100%" height="290"
-                                style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $address_latitude ); ?>,<?php echo esc_attr( $address_longitude ); ?>&output=embed" width="100%" height="290" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 
+                        <?php if($show_icon == 'yes'): ?>
                         <a data-fancybox class="map-pre" data-src="#tf-hotel-google-maps" href="https://www.google.com/maps/search/<?php echo wp_kses_post($address); ?>">
-                            <i class="fa-solid fa-location-dot"></i>
+                            <?php echo wp_kses( $map_icon_html, Helper::tf_custom_wp_kses_allow_tags() ); ?>
                         </a>
-
+                        <?php endif; ?>
                     </div>
                 <?php } ?>
 
@@ -291,16 +276,16 @@ class Map extends Widget_Base {
                     <div class="tf-hotel-google-maps-container">
                         <?php
                         if ( ! empty( $address ) ) { ?>
-                            <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( str_replace( "#", "", $address ) ); ?>&z=17&output=embed" width="100%" height="550" style="border:0;"
-                                    allowfullscreen="" loading="lazy"></iframe>
+                            <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( str_replace( "#", "", $address ) ); ?>&z=17&output=embed" width="100%" height="550" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                         <?php } else { ?>
-                            <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $address_latitude ); ?>,<?php echo esc_attr( $address_longitude ); ?>&z=17&output=embed" width="100%" height="550"
-                                    style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                            <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $address_latitude ); ?>,<?php echo esc_attr( $address_longitude ); ?>&z=17&output=embed" width="100%" height="550" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                         <?php } ?>
                     </div>
                 </div>
             <?php } ?>
         </div>
+
+        
         <?php
 	}
 }

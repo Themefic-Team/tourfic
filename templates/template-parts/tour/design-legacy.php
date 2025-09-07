@@ -480,20 +480,6 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                     <div class="tf-row">
                         <?php if ( $tf_openstreet_map=="default" && !empty($location_latitude) && !empty($location_longitude) && empty($tf_google_map_key) ) {  ?>
                             <div id="tour-location" style="height: 500px;"></div>
-                            <script>
-                            const zoom = <?php echo is_numeric($location_zoom) ? intval($location_zoom) : 2; ?>;
-                            const map = L.map('tour-location').setView([
-                                <?php echo esc_html($location_latitude); ?>, 
-                                <?php echo esc_html($location_longitude); ?>
-                            ], zoom);
-                            const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                                maxZoom: 20,
-                                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                            }).addTo(map);
-
-                            const marker = L.marker([<?php echo esc_html($location_latitude); ?>, <?php echo esc_html($location_longitude); ?>], {alt: '<?php echo esc_html($location); ?>'}).addTo(map)
-                                .bindPopup('<?php echo esc_html($location); ?>');
-                            </script>
                         <?php } ?>
                         <?php
                         if ( $tf_openstreet_map=="default" && (empty($location_latitude) || empty($location_longitude)) && empty($tf_google_map_key) ) {  
