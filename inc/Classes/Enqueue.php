@@ -402,6 +402,7 @@ class Enqueue {
 			wp_register_style( 'tf-elementor-single-title', TF_PRO_ASSETS_URL . 'app/css/elementor/single/title.min.css', '', TF_VERSION );
 			wp_register_style( 'tf-elementor-single-description', TF_PRO_ASSETS_URL . 'app/css/elementor/single/description.min.css', '', TF_VERSION );
 			wp_register_style( 'tf-elementor-single-address', TF_PRO_ASSETS_URL . 'app/css/elementor/single/address.min.css', '', TF_VERSION );
+			wp_register_style( 'tf-elementor-single-map', TF_PRO_ASSETS_URL . 'app/css/elementor/single/map.min.css', '', TF_VERSION );
 			wp_register_style( 'tf-elementor-single-wishlist', TF_PRO_ASSETS_URL . 'app/css/elementor/single/wishlist.min.css', '', TF_VERSION );
 			wp_register_style( 'tf-elementor-single-share', TF_PRO_ASSETS_URL . 'app/css/elementor/single/share.min.css', '', TF_VERSION );
 			wp_register_style( 'tf-elementor-single-gallery', TF_PRO_ASSETS_URL . 'app/css/elementor/single/gallery.min.css', '', TF_VERSION );
