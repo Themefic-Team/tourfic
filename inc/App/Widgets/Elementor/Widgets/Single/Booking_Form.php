@@ -55,10 +55,6 @@ class Booking_Form extends Widget_Base {
         ];
     }
 
-	public function get_style_depends(){
-		return ['tf-elementor-single-booking-form'];
-	}
-
 	protected function register_controls() {
 
 		$this->tf_content_layout_controls();
