@@ -944,7 +944,7 @@ class Tour {
 	 *
 	 * Single Tour Page
 	 */
-	static function tf_single_tour_booking_form( $post_id ) {
+	static function tf_single_tour_booking_form( $post_id, $design = '' ) {
 
 		// Value from URL
 		// Adults
@@ -1005,7 +1005,7 @@ class Tour {
 
 		$tf_tour_selected_check = ! empty( $tf_tour_single_template ) ? $tf_tour_single_template : $tf_tour_global_template;
 
-		$tf_tour_selected_template = $tf_tour_selected_check;
+		$tf_tour_selected_template = !empty($design) ? $design : $tf_tour_selected_check;
 
 		$tf_tour_global_book_now_text = ! empty( Helper::tfopt( 'tour_booking_form_button_text' ) ) ? stripslashes( sanitize_text_field( Helper::tfopt( 'tour_booking_form_button_text' ) ) ) : esc_html__( "Book Now", 'tourfic' );
 		$tf_tour_single_book_now_text = isset($meta['single_tour_booking_form_button_text']) && ! empty( $meta['single_tour_booking_form_button_text'] ) ? stripslashes( sanitize_text_field( $meta['single_tour_booking_form_button_text'] ) ) : esc_html__( "Book Now", 'tourfic' );

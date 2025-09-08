@@ -55,7 +55,7 @@ class Map extends Widget_Base {
 		$this->tf_content_layout_controls();
 
 		do_action( 'tf/single-map/before-style-controls', $this );
-		$this->tf_map_style_controls();
+		// $this->tf_map_style_controls();
 		do_action( 'tf/single-map/after-style-controls', $this );
 	}
 
@@ -117,78 +117,6 @@ class Map extends Widget_Base {
 
         $this->end_controls_section();
     }
-
-    protected function tf_map_style_controls() {
-		$this->start_controls_section( 'map_style', [
-			'label' => esc_html__( 'Map Style', 'tourfic' ),
-			'tab'   => Controls_Manager::TAB_STYLE,
-		]);
-
-		$this->add_control( 'tf_map_color', [
-			'label'     => esc_html__( 'Color', 'tourfic' ),
-			'type'      => Controls_Manager::COLOR,
-			'selectors'  => [
-				'{{WRAPPER}} .tf-map' => 'color: {{VALUE}};',
-			],
-		]);
-
-		$this->add_group_control( Group_Control_Typography::get_type(), [
-            'label'    => esc_html__( 'Typography', 'tourfic' ),
-			'name'     => "tf_map_typography",
-			'selector' => "{{WRAPPER}} .tf-map",
-		]);
-
-		$this->add_responsive_control( "tf_map_icon_size", [
-			'label'      => esc_html__( 'Icon Size', 'tourfic' ),
-			'type'       => Controls_Manager::SLIDER,
-			'size_units' => [
-				'px',
-				'rem',
-				'%',
-			],
-			'range'      => [
-				'px' => [
-					'min'  => 0,
-					'max'  => 50,
-					'step' => 1,
-				],
-			],
-			'selectors'  => [
-				"{{WRAPPER}} .tf-map i" => 'font-size: {{SIZE}}{{UNIT}}',
-				"{{WRAPPER}} .tf-map svg" => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}',
-			],
-		] );
-
-		$this->add_control( "tf_map_icon_color", [
-			'label'     => esc_html__( 'Icon Color', 'tourfic' ),
-			'type'      => Controls_Manager::COLOR,
-			'selectors' => [
-				"{{WRAPPER}} .tf-map i" => 'color: {{VALUE}}',
-				"{{WRAPPER}} .tf-map svg path" => 'fill: {{VALUE}}',
-			],
-		] );
-
-		$this->add_control( 'tf_link_type_heading', [
-			'type'  => Controls_Manager::HEADING,
-			'label' => esc_html__( 'Link Style', 'tourfic' ),
-		] );
-
-		$this->add_control( 'tf_link_color', [
-			'label'     => esc_html__( 'Link Color', 'tourfic' ),
-			'type'      => Controls_Manager::COLOR,
-			'selectors'  => [
-				'{{WRAPPER}} .more-hotel' => 'color: {{VALUE}};',
-			],
-		]);
-
-		$this->add_group_control( Group_Control_Typography::get_type(), [
-            'label'    => esc_html__( 'Link Typography', 'tourfic' ),
-			'name'     => "tf_link_typography",
-			'selector' => "{{WRAPPER}} .more-hotel",
-		]);
-
-		$this->end_controls_section();
-	}
 
 	protected function render() {
 		$settings  = $this->get_settings_for_display();

@@ -139,6 +139,7 @@ class Gallery extends Widget_Base {
 
 		if($post_type == 'tf_hotel'){
             $meta = get_post_meta($post_id, 'tf_hotels_opt', true);
+			$s_review = ! empty( Helper::tfopt( 'h-review' ) ) ? Helper::tfopt( 'h-review' ) : 0;
 			$disable_review_sec   = ! empty( $meta['h-review'] ) ? $meta['h-review'] : '';
 			$gallery = ! empty( $meta['gallery'] ) ? $meta['gallery'] : '';
 			if ( $gallery ) {
@@ -147,6 +148,7 @@ class Gallery extends Widget_Base {
 
         } elseif($post_type == 'tf_tours'){
 			$meta = get_post_meta($post_id, 'tf_tours_opt', true);
+			$s_review  = ! empty( Helper::tfopt( 't-review' ) ) ? Helper::tfopt( 't-review' ) : '';
 			$disable_review_sec   = ! empty( $meta['t-review'] ) ? $meta['t-review'] : '';
 			$gallery = ! empty( $meta['tour_gallery'] ) ? $meta['tour_gallery'] : array();
 			if ( $gallery ) {
@@ -155,6 +157,7 @@ class Gallery extends Widget_Base {
 			
         } elseif($post_type == 'tf_apartment'){
 			$meta = get_post_meta($post_id, 'tf_apartment_opt', true);
+			$s_review  = ! empty( Helper::tfopt( 'disable-apartment-review' ) ) ? Helper::tfopt( 'disable-apartment-review' ) : 0;
 			$disable_review_sec  = ! empty( $meta['disable-apartment-review'] ) ? $meta['disable-apartment-review'] : '';
 			$gallery = ! empty( $meta['apartment_gallery'] ) ? $meta['apartment_gallery'] : '';
 			if ( $gallery ) {
@@ -164,7 +167,6 @@ class Gallery extends Widget_Base {
         } else {
 			return;
 		}
-		$s_review = ! empty( Helper::tfopt( 'h-review' ) ) ? Helper::tfopt( 'h-review' ) : 0;
 		$disable_review_sec = ! empty( $disable_review_sec ) ? $disable_review_sec : $s_review;
 
         //gallery style

@@ -1193,7 +1193,7 @@ class Apartment {
 		}
 	}
 
-	public static function tf_apartment_single_booking_form( $comments, $disable_review_sec ) {
+	public static function tf_apartment_single_booking_form( $comments, $disable_review_sec, $design = '' ) {
 
 		$meta                = get_post_meta( get_the_ID(), 'tf_apartment_opt', true );
 		
@@ -1295,7 +1295,7 @@ class Apartment {
 
 		$tf_apartment_selected_check = !empty($tf_apartment_single_template) ? $tf_apartment_single_template : $tf_apartment_global_template;
 
-		$tf_apartment_selected_template = $tf_apartment_selected_check;
+		$tf_apartment_selected_template = !empty($design) ? $design : $tf_apartment_selected_check;
 
 		if($tf_apartment_selected_template=="design-1"){
 		?>

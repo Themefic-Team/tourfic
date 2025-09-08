@@ -2544,7 +2544,7 @@ class Hotel {
 	/**
 	 * Single Hotel Sidebar Booking Form
 	 */
-	static function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '' ) {
+	static function tf_hotel_sidebar_booking_form( $b_check_in = '', $b_check_out = '', $design = '' ) {
 
 		if ( isset( $_GET ) ) {
 			$_GET = array_map( 'stripslashes_deep', $_GET );
@@ -2645,7 +2645,7 @@ class Hotel {
 
 		$tf_hotel_selected_check = ! empty( $tf_hotel_single_template ) ? $tf_hotel_single_template : $tf_hotel_global_template;
 
-		$tf_hotel_selected_template = $tf_hotel_selected_check;
+		$tf_hotel_selected_template = !empty($design) ? $design : $tf_hotel_selected_check;
 
 		$tf_hotel_book_avaibality_button_text = ! empty( Helper::tfopt( 'hotel_booking_check_button_text' ) ) ? stripslashes( sanitize_text_field( Helper::tfopt( 'hotel_booking_check_button_text' ) ) ) : "Booking Availability";
 		$hotel_location_field_required        = ! empty( Helper::tfopt( "required_location_hotel_search" ) ) ? Helper::tfopt( "required_location_hotel_search" ) : 1;
