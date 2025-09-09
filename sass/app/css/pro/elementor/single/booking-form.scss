@@ -1,0 +1,1848 @@
+@import '../../../../../common/variable';
+@import '../../../../../common/mixin';
+
+.tf-single-hotel-booking-form__style-1{
+    padding: 0;
+}
+.tf-single-hotel-booking-form__style-2{
+    padding: 0;
+
+    .tf-booking-form .tf-booking-form-checkin,
+    .tf-booking-form .tf-booking-form-checkout{
+        max-width: none;
+        padding-left: 45px;
+        padding-right: 45px;
+    } 
+}
+.tf-single-hotel-booking-form__style-3{
+    padding: 0;
+}
+.tf-single-tour-booking-form__style-1{
+    padding: 0;
+
+    .tf-tour-booking-box  {
+        background: $color-filling-fg;
+        @include bd-radius(5px);
+    }
+    .tf-booking-price{
+        border-bottom: 1px solid $color-border-lite;
+        padding-bottom: 12px;
+        
+        p{
+            margin-bottom: 0;
+            font-size: 1.875rem;
+            span{
+                font-size: 0.875rem;
+                font-weight: 400;
+            }
+        }
+    }
+    .tf-form-title{
+        p{
+            margin-bottom: 0;
+        }
+    }
+    .tf-form-title.tf-tour-extra{
+        p{
+            cursor: pointer;
+            background-color: $color-brand-lite;
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            i{
+                float: right;
+            }
+            .fa-minus{
+                display: none;
+            }
+        }
+    }
+    .tf-form-title.tf-tour-extra.active{
+        i{
+            display: none;
+        }
+        .fa-minus{
+            display: block;
+        }
+    }
+    .tf-tour-extra-box{
+        display: none;
+        .tf-tour-extra {
+            padding: 16px 24px;
+            border: 1px solid $color-border-lite;
+            @include bd-radius(5px);;
+            .tf-tour-extra-price{
+                align-items: inherit;
+                .tf-tour-extra-input{
+                    align-items: center;
+                }
+                .woocommerce-Price-amount.amount{
+                    font-weight: 600;
+                    margin-left: 10px;
+                    line-height: 1.2;
+                }
+                p{
+                    line-height: 1.3;
+                }
+                .tf-tour-extra-input{
+                    >p{
+                        line-height: 1;
+                    }
+                }
+            }
+        }
+    }
+    
+    .tf-booking-bttns{
+        button{
+            margin-top: 8px;
+            padding: 12px 20px;
+            width: 260px;
+        }
+    }
+    .tf-tour-booking-advantages{
+        background-color: $color-filling-fg;
+        @include bd-radius(5px);;
+        .tf-head-title{
+            h3{
+                font-size: 1.5rem;
+                color: $color-heading;
+            }
+        }
+        ul{
+            margin: 0px;
+        }
+        li {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: $color-heading;
+            i {
+                height: 38px;
+                width: 38px;
+                background: $color-white;
+                border: 1px solid $color-border-lite;
+                @include bd-radius(5px);;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            a{
+                color: $color-heading;
+                text-decoration: none;
+            }
+        }
+    }
+
+    .tf-bottom-booking-bar {
+        position: fixed;
+        width: calc(100% - 64px);
+        bottom: 0;
+        left: 0;
+        padding: 32px;
+        background-color: rgba(255, 255, 255, .9);
+        z-index: 9999;
+        @include flexbox();
+        @include justify-content(center);
+        @include align-items(center);
+        gap: 24px;
+        transform-origin: bottom;
+        transform: translateY(100%);
+        opacity: 0;
+        transition: transform 0.4s ease, opacity 0.4s ease;
+        @media #{$max1024} {
+            @include flex-wrap();
+            padding: 16px;
+            gap: 8px;
+            width:calc(100% - 32px);
+        }
+    
+        @media #{$max768}{
+            transform: translateY(0);
+            opacity: 1;
+            z-index: 9999;
+            width: 100%;
+        }
+        &.active{
+            transform: translateY(0);
+            opacity: 1;
+            width: 100%;
+        }
+    
+        &.mobile-active{
+            .tf-bottom-booking-fields{
+                @include flexbox();
+            }
+    
+            .tf-booking-popup-btn{
+                display: block;
+            }
+            .tf-booking-mobile-btn{
+                display: none;
+            }
+        }
+    
+        .tf-bottom-booking-fields{
+            @include flexbox();
+            gap: 24px;
+    
+            @media #{$max1024} {
+                width: 100%;
+                gap: 16px;
+                @include justify-content(center);
+            }
+    
+            @media #{$max768}{
+                @include flex-wrap();
+                display: none;
+            }
+        }
+    
+        .tf-bottom-booking-field{
+            @include flexbox();
+            gap: 8px;
+    
+            @media #{$max768}{
+                width: 100%;
+            }
+    
+            input.tf-field, select.tf-field {
+                border-radius: 8px;
+                border: 1px solid $color-primary;
+                padding: 0 16px;
+                background-color: $color-white;
+                outline: none;
+                min-width: 220px;
+                font-size: 1rem;
+                flex: 1;
+                height: 56px;
+    
+                @media #{$max768}{
+                    flex-grow: 1;
+                    height: 44px;
+                }
+            }
+        }
+        .tf-bottom-booking-field.check-in-time-div{
+            display: none;
+        }
+    
+        .tf-bottom-booking-field-icon{
+            height: 56px;
+            width: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            border-radius: 8px;
+            background-color: $color-primary;
+            text-align: center;
+            color: $color-white;
+    
+            @media #{$max768}{
+                height: 44px;
+                width: 44px;
+                font-size: 1.125rem;
+            }
+        }
+    
+        .tf_selectperson-wrap{
+            border-right: none;
+            padding: 0;
+    
+            @media #{$max768}{
+                border-bottom: none;
+                padding: 0;
+            }
+    
+            .tf_input-inner{
+                border-radius: 8px;
+                border: 1px solid $color-brand-dark;
+                padding: 0 16px;
+                background-color: $color-white;
+    
+                @media #{$max768}{
+                    flex-grow: 1;
+                    width: 100%;
+                }
+            }
+        }
+    
+        .tf_acrselection-wrap{
+            left: 64px;
+            right: auto;
+            top: unset;
+            bottom: 100%;
+            width: auto;
+        }
+    
+        .tf-booking-mobile-btn{
+            display: none;
+            @media #{$max768}{
+                display: block;
+            }
+        }
+    
+        
+        .tf-booking-popup-btn{
+            @media #{$max768}{
+                display: none;
+            }
+        }
+        
+        .tf-tours-booking-btn {
+            align-self: stretch;
+            @media #{$max1024}{
+                width: 100%;
+                display: flex;
+                justify-content: center;
+            }
+            @media #{$max768}{
+                width: 100%;
+                display: block;
+            }
+            .tf-btn-wrap{
+                height: 100%;
+                .tf_btn{
+                    height: 100%;
+                    align-items: center;
+                }
+            }
+    
+        }
+    }
+}
+.tf-single-tour-booking-form__style-2{
+    padding: 0;
+
+    .tf-bottom-booking-bar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        padding: 16px;
+        z-index: 9999;
+        @include flexbox();
+        @include justify-content(center);
+        @include align-items(center);
+        gap: 24px;
+        transform-origin: bottom;
+        transform: translateY(100%);
+        opacity: 0;
+        transition: transform 0.4s ease, opacity 0.4s ease;
+        width: 100%;
+        background: $color-brand-lite;
+        box-shadow: none;
+        @media #{$max1024} {
+            @include flex-wrap();
+            padding: 16px;
+            gap: 8px;
+            width:calc(100% - 32px);
+        }
+    
+        @media #{$max768} {
+            z-index: 9999;
+            width: 100%;
+        }
+        &.active{
+            transform: translateY(0);
+            width: 100%;
+            opacity: 1;
+            @media #{$max768} {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+        }
+    
+        &.tf-mobile-booking-form{
+            transform: translateY(0);
+            opacity: 1;
+            width: 100%;
+    
+            .tf-booking-popup-btn{
+                display: block;
+            }
+            .tf-booking-mobile-btn{
+                display: none;
+            }
+        }
+        
+        .tf-bottom-booking-field.check-in-time-div{
+            display: none;
+        }
+    
+        .tf_selectperson-wrap{
+            border-right: none;
+            padding: 0;
+    
+            @media #{$max768} {
+                border-bottom: none;
+                padding: 0;
+            }
+    
+            .tf_input-inner{
+                border-radius: 8px;
+                border: 1px solid $color-brand-dark;
+                padding: 0 16px;
+                background-color: $color-white;
+    
+                @media #{$max768} {
+                    flex-grow: 1;
+                    width: 100%;
+                }
+            }
+        }
+    
+        .tf_acrselection-wrap{
+            left: 64px;
+            right: auto;
+            top: unset;
+            bottom: 100%;
+            width: auto;
+        }
+    
+        .tf-booking-mobile-btn{
+            display: none;
+            @media #{$max768} {
+                display: block;
+            }
+        }
+        
+        .tf-booking-popup-btn{
+            @media #{$max768} {
+                display: none;
+            }
+        }
+        
+        .tf-tours-booking-btn {
+            @media #{$max768} {
+                width: 100%;
+                display: block;
+            }
+            &.tf-booking-bttns{
+                a{
+                    padding: 16px 32px;
+                }
+            }
+        }
+
+        .tf-booking-form-fields{
+            display: flex;
+            @media #{$max768}{
+                justify-content: center;
+                margin-bottom: 8px;
+            }
+            .tf-booking-form-checkinout{
+                border-right: 1px solid $color-border-lite;
+                flex-direction: column;
+                position: relative;
+                padding: 0px 38px;
+                display: flex;
+                @media #{$max768}{
+                    padding: 0px 10px;
+                }
+                span.tf-booking-form-title {
+                    font-size: 1rem;
+                    font-weight: 600;
+                    line-height: 1.3;
+                    margin-bottom: 0px;
+                }
+                .tf-booking-date-wrap {
+                    display: flex;
+                    gap: 6px;
+                    cursor: pointer;
+                    background: transparent;
+                    padding: 0px;
+                    justify-content: start;
+                }
+                .tf-booking-date {
+                    color: $color-text;
+                    font-size: 1.5rem;
+                    font-weight: 400;
+                    line-height: 1.3;
+                    text-align: right;
+                    margin-right: 5px;
+                }
+                span.tf-booking-month {
+                    color: $color-text;
+                    font-size: 1rem;
+                    display: flex;
+                    align-items: center;
+                    span{
+                        margin-right: 5px;
+                    }
+                }
+                input{
+                    position: absolute;
+                    height: 100%;
+                    width: 100%;
+                    opacity: 0;
+                }
+            }
+            .tf-bottom-booking-field.check-in-time-div{
+                select{
+                    border: 0px solid;
+                    min-width: auto;
+                    padding: 0px 38px;
+                    color: $color-text;
+                    font-size: 1rem;
+                    font-weight: 600;
+                    line-height: 1.3;
+                    margin-bottom: 0px;
+                    border-right: 1px solid $color-border-lite;
+                    border-radius: 0px;
+                    background-image: none;
+                    text-align: center;
+                    @media #{$max768}{
+                        padding: 0px 10px;
+                    }
+                }
+            }
+            .tf-booking-form-guest-and-room{
+                position: relative;
+                padding: 0px 38px;
+                @media #{$max768}{
+                    padding: 0px 10px;
+                }
+                .tf-booking-form-title{
+                    font-size: 1rem;
+                    font-weight: 600;
+                    line-height: 1.3;
+                    margin-bottom: 0px;
+                    color: $color-text;
+                }
+                .tf-booking-guest-and-room-wrap{
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                }
+                .tf-guest.tf-booking-date{
+                    color: $color-text;
+                    font-size: 1.5rem;
+                    font-weight: 400;
+                    line-height: 1.3;
+                    min-width: none;
+                    text-align: right;
+                    margin-right: 5px;
+                }
+                .tf-booking-month{
+                    display: flex;
+                    align-items: center;
+                    span{
+                        color: $color-text;
+                        font-size: 1rem;
+                        margin-right: 5px;
+                    }
+                }
+                .tf_acrselection-wrap {
+                    position: absolute;
+                    top: 100%;
+                    right: 0;
+                    margin-top: 12px;
+                    background: $color-white;
+                    padding: 24px 24px 8px;
+                    min-width: 250px;
+                    border-radius: 4px;
+                    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.15);
+                    z-index: 9999;
+                    width: 100%;
+                    display: none;
+                    .acr-select input[type="number"]{
+                        padding-left: 0px;
+                    }
+                }
+                .tf_acrselection-wrap.tf-show{
+                    left: 0;
+                    right: auto;
+                    width: auto;
+                    visibility: visible;
+                    opacity: 1;
+                    top: 100%;
+                    display: block;
+                    margin-top: 0px;
+                    bottom: 130%;
+                    top: auto;
+                    @media #{$max1024}{
+                        bottom: 131%;
+                    }
+                    @media #{$max768}{
+                        left: auto;
+                        right: 0;
+                    }
+                }
+            }
+        }
+        
+    }
+    .tour-external-booking-form {
+        background-color: $color-brand-lite;
+        padding: 24px;
+    
+        .tf-tour-external-booking-button {
+            border: 1px solid $color-primary;
+            background: $color-primary;
+            padding: 12px 32px;
+            justify-content: center;
+            transition: .3s all ease;
+            border-radius: 0px;
+        }
+    }
+}
+.tf-single-tour-booking-form__style-3{
+    padding: 0;
+
+    .tf-tour-booking-wrap {
+        border-radius: 4px;
+        padding: 10px;
+        margin: 0 auto;
+        background: $color-white;
+        box-shadow: 0px 5px 10px rgba(0, 44, 102, 0.2);
+        width: 80%;
+        font-size: 1rem;
+        @media #{$max1024}{
+            width: 95%;
+            font-size: 0.875rem;
+        }
+        @media #{$max768}{
+            max-width: 450px;
+            display: none;
+        }
+        .tf_btn {
+            border-radius: 2px;
+            width: 160px;
+            font-weight: bold;
+            text-transform: uppercase;
+            @media #{$max1024}{
+                width: 100%;
+                margin: auto;
+            }
+        }
+        form.tf_tours_booking {
+            justify-content: space-evenly;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 0;
+            @media #{$max1024}{
+                flex-wrap: wrap;
+            }
+            @media #{$max575}{
+                flex-direction: column;;
+            }
+            @media #{$max768}{
+                display: none;
+            }
+            &.show{
+                display: flex;
+            }
+            .tf-tours-booking-btn{
+                @media #{$max575}{
+                    width: 80%;
+                }
+            }
+        }
+        .tf-booking-mobile-btn{
+            display: none;
+            @media #{$max768}{
+                display: block;
+            }
+        }
+        .tf_selectperson-wrap {
+            color: $color-text;
+            font-weight: 500;
+            border: none;
+            .tf_person-icon{
+                margin-right: 12px;
+            }
+            @media #{$max768}{
+                display: flex;
+                justify-content: center;
+                flex: 1;
+                padding: 10px;
+                height: 40px;
+            }
+            @media #{$max575}{
+                width: 80%;
+            }
+
+            .tf_input-inner *{
+                font-weight: 500;
+                font-size: 16px;
+            }
+        }
+        .tf_form-row {
+            color: $color-text;
+            @media #{$max768}{
+                flex: 1;
+            }
+            @media #{$max575}{
+                width: 80%;
+            }
+            .tf_label-row {
+                margin-bottom: 0;
+            }
+        }
+        .tours-check-in-out {
+            color: $color-text;
+            padding: 0;
+        }
+        .tf_form-inner {
+            input[type="text"] {
+                background: transparent;
+                padding: 5px 15px;
+                border-radius: 2px;
+                @media #{$max1024}{
+                    font-size: 0.875rem;
+                }
+                @media #{$max768}{
+                    max-width: 100%;
+                    height: 40px;
+                }
+                @media #{$max575}{
+                    width: 100%;
+                }
+            }
+            select {
+                background: transparent;
+                border: 1px solid $color-gray;
+                padding: 5px 15px;
+                border-radius: 2px;
+                @media #{$max1024}{
+                    font-size: 0.875rem;
+                }
+                @media #{$max768}{
+                    max-width: 100%;
+                }
+                &:focus {
+                    background: transparent;
+                    border: 0;
+                    outline: 0;
+                }
+            }
+            input[type=text] {
+                &:focus {
+                    background: transparent;
+                    border: 0;
+                    outline: 0;
+                }
+            }
+        }
+
+        &.tf-tours-fixed,
+        &.tf-tours-fixed-default{
+            width: 100%;
+            z-index: 9999;
+            background-color: $color-brand-dark;
+            border-top: 4px solid $color-danger;
+            padding: 8px 0;
+            position: fixed;
+            bottom: 0;
+            left: 0%;
+            right: 0;
+            @media #{$max768}{
+                padding: 8px 10px;
+                border-radius: 0;
+                display: block !important;
+            }
+            .tf_acrselection-wrap {
+                position: absolute;
+                top: unset;
+                left: 0;
+                right: auto;
+                bottom: 100%;
+            }
+            .tf_tours_booking {
+                width: 100%;
+                max-width: 1200px;
+                margin: auto;
+                margin: 0 auto;
+            }
+
+            .tf_selectperson-wrap {
+                background: $color-white;
+                border-radius: 2px;
+                padding: 9px 15px;
+            }
+            .tour-extra {
+                i {
+                    color: $color-white;
+                }
+                a {
+                    color: $color-white;
+                }
+            }
+            button[type="submit"] {
+                padding: 16px;
+            }
+            form.tf_tours_booking {
+                width: 55%;
+                @media #{$max768}{
+                    width: 100%;
+                }
+                @media #{$max575}{
+                    flex-direction: column;
+                }
+            }
+            .tf_form-inner {
+                background: $color-white;
+                border-radius: 2px;
+            }
+            .btn-styled {
+                border: 1px solid $color-primary;
+                background: $color-primary;
+                width: 180px;
+            }
+            
+            @media #{$max768}{
+                max-width: 100%;
+            }
+        }
+    }
+    .check-in-time-div{
+        display: none;
+    }
+}
+.tf-single-apartment-booking-form__style-1{
+    padding: 0;
+
+    #tf-apartment-booking{
+        box-shadow: none;
+        padding: 0px;
+        margin: 0;
+        border: none;
+        border-radius: none;
+        .tf-apartment-form-header{
+            h3{
+                span{
+                    color: $color-primary;
+                    font-size: 2rem;
+                    font-weight: 700;
+                    @media #{$max768}{
+                        font-size: 1.25rem;
+                    }
+                    bdi{
+                        font-size: 2rem;
+                        @media #{$max768}{
+                            font-size: 1.25rem;
+                        }
+                    }
+                }
+                span.per-pricing-type{
+                    font-size: 1.125rem;
+                }
+            }
+        }
+        .tf-apartment-form-fields{
+            background-color: transparent;
+            border: 0px solid;
+            margin: 0;
+            border-radius: none;
+            .tf_booking-dates{
+                .tf-check-in-out-date{
+                    height: 53px;
+                    padding: 16px 32px 16px 16px;
+                    background: $color-white;
+                    margin-bottom: 32px;
+                    .tf_label-row{
+                        display: flex;
+                        align-items: center;
+                        gap: 8px;
+                    }
+                }
+                .tf-aprtment-check-in-out-date{
+                    height: 53px;
+                    padding: 15px 32px 16px 16px;
+                    background: $color-filling-bg;
+                    width: 100%;
+                    box-sizing: border-box;
+    
+                    .tf_label_rows{
+                        display: flex;
+                        align-items: center;
+                        gap: 8px;
+                        input{
+                            border: none;
+                            background-color: rgba(0,0,0,0);
+                            padding: 0;
+                            width: 100%;
+                            color: $color-text;
+                            font-size: 1rem;
+                            text-align: left;
+                            height: auto;
+    
+                            &:focus{
+                                outline: none;
+                                box-shadow: none;
+                            }
+                        }
+                    }
+                }
+            }
+            .tf-apartment-guest-row{
+                border-top: 0px solid $color-border;
+                padding: 0px;
+                .tf_selectperson-wrap{
+                    display: block;
+                    border-right: 0px solid;
+                    @media #{$max575}{
+                        padding-top: 0;
+                    }
+                    .tf-form-title{
+                        margin-bottom: 24px;
+                        h3.tf-person-info-title{
+                            color: $color-heading;
+                            font-size: 2rem;
+                            font-weight: 400;
+                            margin: 0px;
+                            @media #{$max768}{
+                                font-size: 1.25rem;
+                            }
+                        }
+                    }
+    
+                    .tf_acrselection{
+                        margin-bottom: 24px;
+    
+                        &:last-child{
+                            margin-bottom: 0px;
+                        }
+                    }
+                }
+            }
+        }
+        .tf-apartment-price-list {
+            margin: 15px 0 0;
+            padding: 0;
+    
+            li {
+                @include flexbox();
+                @include justify-content(space-between);
+                margin-bottom: 8px;
+                color: $color-text;
+    
+                .tf-price-list-label {
+                    color: $color-text;
+                }
+    
+                .tf-price-list-price {
+                    font-weight: 500;
+                }
+    
+                &.total-price-wrap {
+                    padding-top: 10px;
+                    margin-top: 16px;
+                    border-top: 1px solid $color-info-light;
+                    font-weight: 500;
+                    color: $color-text;
+                }
+    
+                &:last-child {
+                    margin-bottom: 0px;
+                }
+            }
+        }
+    }
+    #tf-apartment-booking .tf-apartment-form-fields .tf_booking-dates {
+        flex-wrap: wrap;
+        margin-bottom: 32px;
+
+        .tf_label-row {
+            margin-top: 8px;
+            .tf-err-msg{
+                color: $color-danger;
+            }
+        }
+    }
+
+    .tf-booking-form .tf-booking-form-checkin,
+    .tf-booking-form .tf-booking-form-checkout{
+        max-width: none;
+        padding-left: 45px;
+        padding-right: 45px;
+    } 
+}
+.tf-single-apartment-booking-form__style-2{
+    padding: 0;
+
+    #tf-apartment-booking {
+        background-color: $color-filling-fg;
+        border-radius: 8px;
+        padding: 32px;
+        margin-bottom: 40px;
+        @media #{$max320}{
+            padding: 16px;
+        }
+    
+        h5 {
+            color: $color-heading;
+            font-weight: 500;
+            font-size: 1.125rem;
+            line-height: 1.5;
+            text-align: center;
+            margin: 0 0 16px 0;
+        }
+    
+        .tf-apartment-form-header {
+            @include flexbox();
+            @include justify-content(space-between);
+            @include align-items(center);
+            margin-bottom: 16px;
+    
+            .tf-apartment-price-per-night {
+                margin: 0;
+    
+                span.tf-apartment-base-price,
+                span.tf-apartment-base-price span {
+                    color: $color-heading;
+                    font-size: 1.5rem;
+                    line-height: 1.5;
+                    font-weight: 600;
+                }
+    
+                span {
+                    color: $color-text;
+                    font-size: 1rem;
+                    font-weight: 400;
+                    letter-spacing: 0.2px;
+                }
+            }
+    
+            .tf-top-review a {
+                text-decoration: none;
+            }
+    
+            .tf-single-rating {
+                color: $color-gray;
+                background-color: transparent;
+                padding: 0;
+                font-size: 0.625rem;
+                @include flexbox();
+                @include align-items(center);
+    
+                i {
+                    color: $color-warning;
+                    font-size: 1rem;
+                    margin-top: -3px;
+                }
+    
+                span {
+                    font-size: 0.875rem;
+                    font-weight: 500;
+                    color: $color-gray;
+                    margin: 0 4px;
+                }
+            }
+        }
+    
+        .tf-apartment-form-fields {
+            background: $color-filling-bg;
+            border: 1px solid $color-border-lite;
+            border-radius: 8px;
+            margin-bottom: 16px;
+    
+            .tf_booking-dates {
+                @include flexbox();
+                @include flex-wrap(wrap);
+    
+                * {
+                    box-sizing: border-box;
+                }
+    
+                .tf-check-in-date,
+                .tf-check-out-date {
+                    @include flex(0 0 50%);
+                    padding: 8px 16px;
+                    text-align: center;
+    
+                    .tf-label {
+                        text-transform: uppercase;
+                        display: inline-block;
+                        color: $color-heading;
+                        text-align: center;
+                        font-size: 0.625rem;
+                        line-height: 1.5;
+                        font-weight: 700;
+                        letter-spacing: 0.2px;
+                    }
+                }
+    
+                .tf-err-msg {
+                    @include flex(0 0 100%);
+                    text-align: center;
+                    font-size: 0.875rem;
+                    color: $color-danger;
+                }
+    
+                .form-control,
+                #check-in-date,
+                #check-out-date {
+                    border: none;
+                    background-color: transparent;
+                    padding: 0;
+                    width: 100%;
+                    color: $color-text;
+                    font-size: 1rem;
+                    font-weight: 400;
+                    line-height: 1.5;
+                    letter-spacing: 0.2px;
+                    cursor: pointer;
+                    text-align: center;
+    
+                    &:focus {
+                        outline: none;
+                    }
+                }
+    
+                .tf-check-out-date {
+                    .tf_label-row {
+                        position: relative;
+                    }
+    
+                    .form-control {
+                        opacity: 0;
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                    }
+                }
+    
+                .tf-check-in-date {
+                    border-right: 1px solid $color-border-lite;
+                }
+    
+                #check-in-out-date {
+                    width: 100%;
+                    opacity: 0;
+                    position: absolute;
+                    bottom: 0;
+                }
+            }
+    
+            .tf-apartment-guest-row {
+                border-top: 1px solid $color-border-lite;
+                padding: 8px 16px;
+    
+                label {
+                    margin-bottom: 0;
+                }
+    
+                .tf-label {
+                    text-transform: uppercase;
+                    display: inline-block;
+                    color: $color-heading;
+                    font-size: 0.625rem;
+                    font-weight: 700;
+                    line-height: 1.5;
+                    letter-spacing: 0.2px;
+                }
+    
+                .tf_selectperson-wrap {
+                    padding: 0;
+                    border: none;
+                    width: 100%;
+                    // color: $color-gray-light;
+    
+                    .tf_acrselection-wrap {
+                        left: 0;
+                        right: 0;
+                        width: auto;
+                    }
+    
+                    .tf_input-inner {
+                        color: $color-text;
+                        font-size: 1rem;
+                        font-weight: 400;
+                        line-height: 1.5;
+                        letter-spacing: 0.2px;
+
+                        *{
+                            font-weight: 400;
+                            font-size: 16px;
+                        }
+                    }
+                }
+            }
+    
+            .tf-err-msg {
+                color: $color-danger;
+                font-weight: 500;
+            }
+        }
+    
+        .tf_btn {
+            height: auto;
+            border-radius: 8px;
+            background: $color-primary;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 500;
+            line-height: 1.5;
+            letter-spacing: 0.5px;
+        }
+
+        .tf-apartment-price-list {
+            margin: 15px 0 0;
+            padding: 0;
+    
+            li {
+                @include flexbox();
+                @include justify-content(space-between);
+                margin-bottom: 8px;
+                color: $color-text;
+    
+                .tf-price-list-label {
+                    color: $color-text;
+                }
+    
+                .tf-price-list-price {
+                    font-weight: 500;
+                }
+    
+                &.total-price-wrap {
+                    padding-top: 10px;
+                    margin-top: 16px;
+                    border-top: 1px solid $color-blue-light;
+                    font-weight: 500;
+                    color: $color-text;
+                }
+    
+                &:last-child {
+                    margin-bottom: 0px;
+                }
+            }
+        }
+    }
+}
+
+.tf-single-car-booking-form__style-1{
+    padding: 0;
+
+    .tf-car-booking-form{
+        width: 440px;
+        @media #{$max1024}{
+            width: 370px;
+        }
+        @media #{$max768}{
+            width: 100%;
+        }
+        .tf-price-header{
+            margin-bottom: 38px;
+            h2{
+                color: $color-heading;
+                font-size: 1.75rem;
+                font-weight: 600;
+                margin-bottom: 8px;
+                del{
+                    color: $color-text;
+                    text-decoration-line: strikethrough;
+                    font-weight: 400;
+                }
+                small.pricing-type{
+                    color: $color-text;
+                    font-size: 1rem;
+                    font-weight: 400;
+                    text-transform: capitalize;
+                }
+            }
+            p{
+                color: $color-text;
+                font-size: 1rem;
+                margin: 0;
+            }
+        }
+        .tf-extra-added-info{
+            border-radius: 16px;
+            background: $color-gray-light;
+            padding: 16px 24px 24px 24px;
+            margin-bottom: 32px;
+            display: none;
+            .tf-extra-added-box{
+                h3{
+                    color: $color-heading;
+                    font-size: 1.313rem;
+                    font-weight: 400;
+                    margin: 0;
+                }
+                .tf-single-added-extra{
+                    border-radius: 8px;
+                    background: $color-white;
+                    padding: 16px;
+                    gap: 8px;
+                    h4{
+                        color: $color-heading;
+                        font-size: 1rem;
+                        font-weight: 400;
+                        margin: 0;
+                        width: calc(100% - 148px);
+                    }
+                    .qty-price{
+                        color: $color-heading;
+                        font-size: 1rem;
+                        font-weight: 400;
+                        width: 140px;
+                        span.price{
+                            margin-left: 10px;
+                        }
+                        i{
+                            color: $color-text;
+                            font-size: 1.25rem;
+                        }
+                        span.delete{
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+        }
+        .tf-add-extra-section{
+            border-radius: 16px;
+            background: $color-gray-light;
+            padding: 16px 24px 24px 24px;
+            margin-bottom: 32px;
+            h3{
+                color: $color-heading;
+                font-size: 1.313rem;
+                font-weight: 400;
+                margin-bottom: 16px;
+                margin-top: 0px;
+            }
+            .tf-car-extra-infos{
+                .tf-car-single-extra{
+                    padding: 12px 16px 0 0px;
+                    border-radius: 8px;
+                    background: $color-gray-light;
+                    .tf-extra-title{
+                        width: calc(100% - 95px);
+                        h4{
+                            color: $color-heading;
+                            font-size: 1rem;
+                            font-weight: 400;
+                            margin-bottom: 8px;
+                            .tf-info-tooltip{
+                                position: relative;
+                                margin-left: 5px;
+                                i{
+                                    font-weight: 400;
+                                }
+                                &:hover{
+                                    .tf-info-tooltip-content{
+                                        visibility: visible;
+                                        opacity: 1;
+                                    }
+                                }
+                                .tf-info-tooltip-content{
+                                    visibility: hidden;
+                                    opacity: 0;
+                                    position: absolute;
+                                    border-radius: 8px;
+                                    background: var(--UI-800, linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), #27333F);
+                                    padding: 8px 12px;
+                                    width: 218px;
+                                    z-index: 0;
+                                    bottom: 30px;
+                                    left: 50%;
+                                    margin-left: -109px;
+                                    transition: .3s all ease;
+                                    &::after{
+                                        position: absolute;
+                                        content: "";
+                                        height: 16px;
+                                        width: 16px;
+                                        background: var(--UI-800, linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), #27333F);
+                                        border-radius: 5px;
+                                        transform: rotate(45deg);
+                                        left: 50%;
+                                        margin-left: -8px;
+                                        bottom: -6px;
+                                        z-index: -1;
+                                    }
+                                    p{
+                                        color: $color-white;
+                                        text-align: center;
+                                        font-size: 0.813rem;
+                                        font-weight: 600;
+                                        margin: 0;
+                                    }
+                                }
+                            }
+                        }
+                        .acr-select{
+                            border-radius: 8px;
+                            background: $color-gray-light;
+                            padding: 4px 8px;
+                            width: auto;
+                            display: inline-flex;
+                            gap: 10px;
+                            height: 32px;
+                            margin-top: 5px;
+                            .acr-dec,
+                            .acr-inc{
+                                color: $color-brand-dark;
+                                border: 0px solid $color-border-lite;
+                                background-color: transparent;
+                                width: auto;
+                                height: auto;
+                                padding: 0;
+                            }
+                            input{
+                                color: $color-text;
+                                font-size: 1rem;
+                                width: 18px;
+                                cursor: not-allowed;
+                                background: transparent;
+                                border: 0px solid;
+                                padding: 0;
+                                text-align: center;
+                                &:focus{
+                                    box-shadow: none;
+                                    outline: none;
+                                }
+                            }
+                        }
+                    }
+                    .tf-extra-price{
+                        text-align: right;
+                        h4{
+                            color: $color-heading;
+                            font-size: 1.313rem;
+                            font-weight: 400;
+                            margin-bottom: 8px;
+                            small{
+                                display: block;
+                                font-size: 1rem;
+                                color: $color-text;
+                            }
+                        }
+                    }
+
+                }
+                .tf-extra-apply-btn{
+                    text-align: right;
+                    button{
+                        padding: 12px 32px;
+                        border-radius: 8px;
+                        background: $color-gray-light;
+                        color:$color-primary;
+                        font-size: 1rem;
+                        font-weight: 700;
+                        cursor: pointer;
+                        border: 1px solid $color-primary;
+                        transition: .3s all ease;
+                        &:hover{
+                            background: $color-primary;
+                            color: $color-white;
+                        }
+                    }
+                }
+            }
+        }
+        .tf-driver-details{
+            border-radius: 16px;
+            background: $color-gray-light;
+            padding: 24px;
+            .tf-driver-details-header{
+                h3{
+                    color: $color-heading;
+                    font-size: 1.313rem;
+                    font-weight: 400;
+                    margin: 0;
+                }
+                span{
+                    color: $color-primary;
+                    font-size: 1rem;
+                    font-weight: 400;
+                    i{
+                        color: $color-primary;
+                    }
+                }
+            }
+            .tf-driver-photo{
+                img{
+                    height: 56px;
+                    width: 56px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                }
+                .tf-driver-info{
+                    width: calc(100% - 72px);
+                    h4{
+                        color: $color-heading;
+                        font-size: 1rem;
+                        font-weight: 700;
+                        margin: 0;
+                    }
+                    p{
+                        color: $color-text;
+                        font-size: 1rem;
+                        font-weight: 400;
+                        margin: 0;
+                    }
+                    
+                    .tf-driver-contact-info{
+                        border-top: 1px solid $color-border-lite;
+                        margin-top: 16px;
+                        padding-top: 16px;
+                        ul{
+                            padding: 0;
+                            margin: 0;
+                            list-style: none;
+                            li{
+                                a{
+                                    position: relative;
+                                    text-decoration: none;
+                                    i{
+                                        font-size: 1.25rem;
+                                    }
+                                    color: $color-primary;
+                                    font-size: 1rem;
+                                    font-weight: 400;
+                                    display: inline-block;
+                                    &:hover{
+                                        .tf-tooltip-info{
+                                            visibility: visible;
+                                            opacity: 1;
+                                        }
+                                    }
+                                    path{
+                                        stroke: $color-primary;
+                                    }
+                                    .tf-tooltip-info{
+                                        visibility: hidden;
+                                        opacity: 0;
+                                        position: absolute;
+                                        border-radius: 8px;
+                                        background: var(--UI-800, linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), #27333F);
+                                        padding: 8px 12px;
+                                        width: 218px;
+                                        z-index: 0;
+                                        bottom: 30px;
+                                        left: 50%;
+                                        margin-left: -109px;
+                                        transition: .3s all ease;
+                                        &::after{
+                                            position: absolute;
+                                            content: "";
+                                            height: 16px;
+                                            width: 16px;
+                                            background: var(--UI-800, linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), #27333F);
+                                            border-radius: 5px;
+                                            transform: rotate(45deg);
+                                            left: 50%;
+                                            margin-left: -8px;
+                                            bottom: -6px;
+                                            z-index: -1;
+                                        }
+                                        p{
+                                            color: $color-white;
+                                            text-align: center;
+                                            font-size: 0.75rem;
+                                            font-weight: 400;
+                                        }
+                                        
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                
+            }
+        }
+
+        .tf-date-select-box{
+            border-radius: 16px;
+            background: $color-filling-fg;
+            padding: 8px 8px 16px 8px;
+            margin-bottom: 32px;
+            @media #{$max768}{
+                position: fixed;
+                left: 0;
+                bottom: 72px;
+                right: 0;
+                z-index: 99999;
+                margin-bottom: 0px;
+                display: none;
+            }
+            &.tf-box-loading{
+                position: relative;
+                @media #{$max768}{
+                    position: fixed;
+                }
+                &::before{
+                    position: absolute;
+                    content: "";
+                    right: 0;
+                    top: 0;
+                    left: 0;
+                    bottom: 0;
+                    background-color: rgba(255,255,255,.5);
+                    z-index: 99;
+                    border-radius: 16px;
+                }
+            }
+            .tf-date-single-select{
+                border-radius: 8px;
+                background: $color-filling-bg;
+                padding: 16px;
+                margin-bottom: 8px;
+                &:last-child{
+                    margin-bottom: 0px;
+                }
+                .tf-select-date{
+                    width: calc(50% - 8px);
+                    .tf-flex{
+                        flex-wrap: nowrap;
+                    }
+                    &:first-child{
+                        border-right: 1px solid $color-border-lite;
+                    }
+
+                    .info-select{
+                        width: 100%;
+                        position: relative;
+                        h5{
+                            color: $color-heading;
+                            font-size: 0.75rem;
+                            font-weight: 400;
+                            margin-top: 0px;
+                            margin-bottom: 8px;
+                        }
+                        input{
+                            min-width: auto;
+                            width: 100%;
+                            color: $color-text;
+                            font-size: 1rem;
+                            font-weight: 400;
+                            border: 0px solid;
+                            padding-left: 0px;
+                            box-shadow: none;
+                            background: transparent;
+                            cursor: pointer;
+                            position: relative;
+                            @media #{$max575}{
+                                font-size: 0.875rem;
+                            }
+                            &:focus{
+                                outline: none;
+                                box-shadow: none;
+                            }
+                            &::placeholder{
+                                color: $color-text;
+                            }
+                        }
+                        .autocomplete-items{
+                            position: absolute;
+                            z-index: 99;
+                            top: 100%;
+                            left: 0;
+                            right: 0;
+                            width: 190px;
+                            max-height: 200px;
+                            overflow: auto;
+                            border-radius: 4px;
+                            background: $color-filling-fg;
+                            padding: 2px;
+                            scrollbar-width: thin;
+                            scrollbar-color: $scrollbar-color;
+        
+                            /* Chrome, Edge, and Safari */
+                            *::-webkit-scrollbar {
+                                width: 5px;
+                            }
+                            *::-webkit-scrollbar-track {
+                                background: $color-white;
+                            }
+                            &::-webkit-scrollbar-thumb {
+                                background-color: $scrollbar-thumb-color;
+                                border-radius: 5px;
+                                border: 3px solid $color-white;
+                            }
+                            
+                            >div{
+                                padding: 8px;
+                                cursor: pointer;
+                                border-radius: 4px;
+                                background: $color-white;
+                                text-transform: capitalize;
+                                color: $color-text;
+                                font-size: 1rem;
+                                margin-bottom: 2px;
+                                transition: .3s all ease;
+                                &:last-child{
+                                    margin-bottom: 0px;
+                                }
+                                &:hover{
+                                    background-color: $color-brand-lite;
+                                }
+                            }
+                        }
+                    }
+                }
+                
+            }
+            .tf-form-submit-btn{
+                padding-top: 8px;
+                .error-notice{
+                    text-align: center;
+                    color: $color-danger;
+                    margin-bottom: 10px;
+                    display: none;
+                }
+                button{
+                    padding: 16px 32px;
+                    border-radius: 8px;
+                    background: $color-primary;
+                    color: $color-white;
+                    font-size: 1rem;
+                    font-weight: 700;
+                    cursor: pointer;
+                    width: 100%;
+                    border: 0px solid;
+                    transition: .3s all ease;
+                    &:hover{
+                        background: $color-brand-dark;
+                    }
+                    &.tf-partial-button{
+                        border: 1px solid $color-primary;
+                        background: transparent;
+                        color: $color-primary;
+                        transition: .3s all ease;
+                        svg{
+                            path{
+                                stroke: $color-primary;
+                            }
+                        }
+                        &:hover{
+                            border: 1px solid $color-brand-dark;
+                            background: $color-brand-dark;
+                            color: $color-white;
+                            svg{
+                                path{
+                                    stroke: $color-white;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .tf-instraction-btn{
+                @media #{$max768}{
+                    display: none;
+                }
+                text-align: center;
+                span{
+                    color: $color-primary;
+                    font-size: 1rem;
+                    font-weight: 400;
+                    margin: 0;
+                    cursor: pointer;
+                }
+            }
+            .tf-cancellation-box{
+                border-radius: 8px;
+                background: $color-white;
+                padding: 16px;
+                margin-top: 16px;
+                display: none;
+                @media #{$max768}{
+                    display: none;
+                }
+                .tf-cancellation-timeline{
+                    margin-top: 12px;
+                    border-bottom: 1px solid $color-border-lite;
+                    .tf-timeline{
+                        ul{
+                            display: flex;
+                            margin: 0;
+                            list-style: none;
+                            li{
+                                border-left: 1px dotted $color-border;
+                                border-right: 1px dotted $color-border;
+                                width: 50%;
+                                padding: 4px;
+                                span.free{
+                                    border-radius: 2px;
+                                    background: $color-success;
+                                    color: $color-white;
+                                    font-size: 1rem;
+                                    font-weight: 400;
+                                    padding: 4px 8px;
+                                    display: block;
+                                    text-align: center;
+                                }
+                                span.paid{
+                                    border-radius: 2px;
+                                    background: $color-brand-dark;
+                                    color: $color-white;
+                                    font-size: 0.75rem;
+                                    font-weight: 400;
+                                    padding: 4px 8px;
+                                    display: block;
+                                    text-align: center;
+                                }
+                            }
+                        }
+                    }
+                    .tf-timeline-text{
+                        padding: 4px 0 16px 0;
+                        ul{
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            margin: 0;
+                            padding: 0;
+                            list-style: none;
+                            li{
+                                color: $color-text;
+                                font-size: 0.75rem;
+                                font-weight: 400;
+                            }
+                        }
+                    }
+                }
+                .tf-cancelltion-popup-btn{
+                    text-align: center;
+                    margin-top: 16px;
+                    a{
+                        color: $color-primary;
+                        font-size: 1rem;
+                        font-weight: 400;
+                        text-decoration: none;
+                        display: inline-block;
+                    }
+                }
+            }
+        }
+
+        .tf-mobile-booking-btn{
+            display: none;
+            background: $color-brand-lite;
+            padding: 8px;
+            @media #{$max768}{
+                display: block;
+                position: fixed;
+                left: 0;
+                bottom: 0;
+                right: 0;
+                z-index: 9999;
+            }
+            button{
+                padding: 16px 32px;
+                border-radius: 8px;
+                background: $color-primary;
+                color: $color-white;
+                font-size: 1rem;
+                font-weight: 700;
+                cursor: pointer;
+                width: 100%;
+                border: 0px solid;
+                transition: .3s all ease;
+                &:hover{
+                    background: $color-brand-dark;
+                }
+            }
+        }
+    }
+}

@@ -55,6 +55,10 @@ class Booking_Form extends Widget_Base {
         ];
     }
 
+	public function get_style_depends(){
+		return ['tf-elementor-single-booking-form'];
+	}
+
 	protected function register_controls() {
 
 		$this->tf_content_layout_controls();
@@ -71,16 +75,23 @@ class Booking_Form extends Widget_Base {
 
         do_action( 'tf/single-booking-form/before-content/controls', $this );
 
-        $this->add_control('booking_form_style',[
-            'label' => esc_html__('Booking Form Style', 'tourfic'),
-            'type' => \Elementor\Controls_Manager::SELECT,
-            'default' => 'style1',
-            'options' => [
-                'style1' => esc_html__('Style 1', 'tourfic'),
-                'style2' => esc_html__('Style 2', 'tourfic'),
-                'style3' => esc_html__('Style 3', 'tourfic'),
-            ],
-        ]);
+		$post_type = $this->get_current_post_type();
+		$options = [
+			'style1' => esc_html__('Style 1', 'tourfic')
+		];
+		if(in_array($post_type, ['tf_hotel', 'tf_tours'])){
+			$options['style2'] = esc_html__('Style 2', 'tourfic');
+			$options['style3'] = esc_html__('Style 3', 'tourfic');
+		}
+		if($post_type == 'tf_apartment'){
+			$options['style2'] = esc_html__('Style 2', 'tourfic');
+		}
+		$this->add_control('booking_form_style',[
+			'label' => esc_html__('Booking Form Style', 'tourfic'),
+			'type' => \Elementor\Controls_Manager::SELECT,
+			'default' => 'style1',
+			'options' => $options,
+		]);
 
 	    do_action( 'tf/single-booking-form/after-content/controls', $this );
 
@@ -145,7 +156,7 @@ class Booking_Form extends Widget_Base {
 		
 		if ($style == 'style1') {
             ?>
-			<div class="tf-single-booking-form__style-1 tf-single-template__one">
+			<div class="tf-single-hotel-booking-form__style-1 tf-single-template__one">
 				<?php if(($tf_booking_type == 2 && $tf_hide_booking_form !== '1' && $tf_ext_booking_type == 1) || ($tf_booking_type == 1) || $tf_booking_type == 3) :?>
 					<div class="tf-tour-booking-box tf-box">
 						<?php Hotel::tf_hotel_sidebar_booking_form('', '', 'design-1'); ?>
@@ -160,7 +171,7 @@ class Booking_Form extends Widget_Base {
             <?php
         } elseif ($style == 'style2') {
             ?>
-			<div class="tf-single-booking-form__style-2 tf-single-template__two">
+			<div class="tf-single-hotel-booking-form__style-2 tf-single-template__two">
 				<div id="room-availability">
 					<span id="availability" class="tf-modify-search-btn">
 						<?php esc_html_e( "Modify search", "tourfic" ); ?>
@@ -183,7 +194,7 @@ class Booking_Form extends Widget_Base {
 			<?php
         } elseif ($style == 'style3') {
             ?>
-			<div class="tf-single-booking-form__style-3 tf-single-template__legacy">
+			<div class="tf-single-hotel-booking-form__style-3 tf-single-template__legacy">
 				<?php if ( ( $tf_booking_type == 2 && $tf_hide_booking_form !== '1' && $tf_ext_booking_type == 1 ) || $tf_booking_type == 1 ||  $tf_booking_type == 3 ) : ?>
 					<div class="tf-hero-booking">
 						<?php Hotel::tf_hotel_sidebar_booking_form('', '', 'default'); ?>
@@ -232,13 +243,12 @@ class Booking_Form extends Widget_Base {
 		
 		if ($style == 'style1') {
             ?>
-			<div class="tf-single-booking-form__style-1 tf-single-template__one">
+			<div class="tf-single-tour-booking-form__style-1 tf-single-template__one">
 				<div class="tf-tour-booking-box tf-box">
 					<?php
 					$hide_price = !empty( Helper::tfopt( 't-hide-start-price' ) ) ? Helper::tfopt( 't-hide-start-price' ) : '';
 					if ( ( $tf_booking_type == 2 && $tf_hide_price !== '1' ) || $tf_booking_type == 1 || $tf_booking_type == 3 ) :
 						if ( isset( $hide_price ) && $hide_price !== '1' ) : ?>
-							<!-- Tourfic Pricing Head -->
 							<div class="tf-booking-form-data">
 								<div class="tf-booking-block">
 									<div class="tf-booking-price">
@@ -331,7 +341,6 @@ class Booking_Form extends Widget_Base {
 							</div>
 						<?php endif;
 					endif; ?>
-					<!-- Tourfic Booking form -->
 					<div class="tf-booking-form">
 						<div class="tf-booking-form-inner tf-mt-24 <?php echo $tf_booking_type == 2 && $tf_hide_price !== '1' ? 'tf-mt-24' : '' ?>">
 							<h3><?php echo ! empty( $meta['booking-section-title'] ) ? esc_html( $meta['booking-section-title'] ) : ''; ?></h3>
@@ -350,7 +359,7 @@ class Booking_Form extends Widget_Base {
             <?php
         } elseif ($style == 'style2') {
             ?>
-			<div class="tf-single-booking-form__style-2 tf-single-template__two">
+			<div class="tf-single-tour-booking-form__style-2 tf-single-template__two">
 				<?php if ( ( $tf_booking_type == 2 && $tf_hide_booking_form !== '1' ) || $tf_booking_type == 1 || $tf_booking_type == 3 ) : ?>
 					<div class="tf-search-date-wrapper tf-single-widgets">
 						<h3 class="tf-section-title"><?php echo ! empty( $meta["booking-section-title"] ) ? esc_html( $meta["booking-section-title"] ) : ''; ?></h3>
@@ -372,7 +381,7 @@ class Booking_Form extends Widget_Base {
 			<?php
         } elseif ($style == 'style3') {
             ?>
-			<div class="tf-single-booking-form__style-3 tf-single-template__legacy">
+			<div class="tf-single-tour-booking-form__style-3 tf-single-template__legacy">
 	            <?php if( ($tf_booking_type == 2 && $tf_hide_booking_form !== '1') || $tf_booking_type == 1 || $tf_booking_type == 3) : ?>
                     <div class="tf-tours-form-wrap">
                         <?php echo wp_kses(Tour::tf_single_tour_booking_form( $this->post_id, 'default' ), Helper::tf_custom_wp_kses_allow_tags()); ?>
@@ -403,7 +412,7 @@ class Booking_Form extends Widget_Base {
 		
 		if ($style == 'style1') {
             ?>
-			<div class="tf-single-booking-form__style-1 tf-single-template__two">
+			<div class="tf-single-apartment-booking-form__style-1 tf-single-template__two">
 				<div class="tf-search-date-wrapper tf-single-widgets">
 					<?php Apartment::tf_apartment_single_booking_form( $comments, $disable_review_sec, 'design-1' ); ?>
 				</div>
@@ -411,7 +420,7 @@ class Booking_Form extends Widget_Base {
             <?php
         } elseif ($style == 'style2') {
             ?>
-			<div class="tf-single-booking-form__style-default tf-single-template__legacy">
+			<div class="tf-single-apartment-booking-form__style-2 tf-single-template__legacy">
 				<div class="apartment-booking-form">
 					<?php Apartment::tf_apartment_single_booking_form( $comments, $disable_review_sec, 'default' ); ?>
 				</div>
@@ -479,7 +488,7 @@ class Booking_Form extends Widget_Base {
 		
 		// if ($style == 'style1') {
 		?>
-		<div class="tf-single-booking-form__style-1 tf-single-template__one">
+		<div class="tf-single-car-booking-form__style-1 tf-single-template__one">
 			<?php do_action("tf_car_before_single_booking_form"); ?>
 			<div class="tf-car-booking-form">
 
@@ -1002,5 +1011,23 @@ class Booking_Form extends Widget_Base {
      */
 	public function tf_apply_dim( $css_property, $important = false ) {
 		return "{$css_property}: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}} " . ($important ? '!important' : '') . ";";
+	}
+
+	/**
+	 * Get the current post type being previewed in Elementor editor
+	 */
+	protected function get_current_post_type() {
+		// Check if we're in Elementor editor and have a preview post ID
+		if (isset($_GET['tf_preview_post_id']) && !empty($_GET['tf_preview_post_id'])) {
+			$preview_post_id = intval($_GET['tf_preview_post_id']);
+			$preview_post = get_post($preview_post_id);
+			
+			if ($preview_post && in_array($preview_post->post_type, ['tf_hotel', 'tf_tours', 'tf_apartment', 'tf_carrental'])) {
+				return $preview_post->post_type;
+			}
+		}
+		
+		// Fallback to regular post type detection
+		return get_post_type();
 	}
 }

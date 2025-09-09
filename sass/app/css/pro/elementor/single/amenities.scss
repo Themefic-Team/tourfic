@@ -1,0 +1,55 @@
+@import '../../../../../common/variable';
+@import '../../../../../common/mixin';
+
+.tf-single-amenities-style1.tf-facilities-wrapper {
+    @media #{$max768}{
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+    h2{
+        color: $color-heading;
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        @media #{$max1024}{
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+        }
+    }
+    .tf-facilities {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 24px 0;
+        margin-bottom: 32px;
+        .tf-facility-item {
+            width: 25%;
+            @media #{$max1024}{
+                width: 50%;
+            }
+            span.single-facilities-title {
+                font-weight: 600;
+                margin-bottom: 10px;
+                display: block;
+                i {
+                    margin-right: 8px;
+                    font-size: 1.25rem;
+                    width: 20px;
+                }
+            }
+            ul {
+                margin: 0;
+                padding: 0;
+                padding-left: 34px;
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                list-style: none;
+            }
+        }
+    }
+}
+
+.tf-single-feature-section.tf-single-feature-style2{
+    
+}

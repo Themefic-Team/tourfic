@@ -32,7 +32,7 @@ class Feature extends Widget_Base {
 	}
 
 	public function get_icon() {
-		return 'tf eicon-help-o';
+		return 'tf eicon-form-vertical';
 	}
 
 	public function get_categories() {
