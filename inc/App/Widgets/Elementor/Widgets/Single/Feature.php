@@ -56,6 +56,7 @@ class Feature extends Widget_Base {
 		$this->tf_content_layout_controls();
 
 		do_action( 'tf/single-feature/before-style-controls', $this );
+		$this->tf_feature_title_style_controls();
 		$this->tf_feature_style_controls();
 		do_action( 'tf/single-feature/after-style-controls', $this );
 	}
@@ -82,7 +83,7 @@ class Feature extends Widget_Base {
         $this->end_controls_section();
     }
 
-    protected function tf_feature_style_controls() {
+    protected function tf_feature_title_style_controls() {
 		$this->start_controls_section( 'feature_title_style', [
 			'label' => esc_html__( 'Feature Title Style', 'tourfic' ),
 			'tab'   => Controls_Manager::TAB_STYLE,
@@ -100,6 +101,110 @@ class Feature extends Widget_Base {
             'label'    => esc_html__( 'Title Typography', 'tourfic' ),
 			'name'     => "tf_title_typography",
 			'selector' => "{{WRAPPER}} .tf-section-title",
+		]);
+
+		$this->end_controls_section();
+	}
+    
+    protected function tf_feature_style_controls() {
+		$this->start_controls_section( 'features_style', [
+			'label' => __( 'Features Style', 'tourfic' ),
+			'tab'   => Controls_Manager::TAB_STYLE,
+		] );
+
+		$this->add_control( 'tf_icon_features_color', [
+			'label'     => __( 'Icon Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors'  => [
+				'{{WRAPPER}} .tf-hotel-single-features ul li i' => 'color: {{VALUE}};',
+			],
+		]);
+
+		$this->add_control( 'tf_features_color', [
+			'label'     => __( 'Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors'  => [
+				'{{WRAPPER}} .tf-hotel-single-features ul li' => 'color: {{VALUE}};',
+				'{{WRAPPER}} .tf-overview-popular-facilities>ul li' => 'color: {{VALUE}};',
+			],
+		]);
+
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+            'label'    => __( 'Typography', 'tourfic' ),
+			'name'     => "tf_features_typography",
+			'selector' => "{{WRAPPER}} .tf-hotel-single-features ul li, {{WRAPPER}} .tf-overview-popular-facilities>ul li",
+		]);
+
+		$this->add_responsive_control( "features_padding", [
+			'label'      => __( 'Padding', 'tourfic' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				'{{WRAPPER}} .tf-hotel-single-features ul li' => $this->tf_apply_dim( 'padding' ),
+			],
+            'condition' => [
+				'feature_style' => ['style1'],
+			],
+		]);
+
+		$this->add_responsive_control( "features_margin", [
+			'label'      => __( 'Margin', 'tourfic' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				'{{WRAPPER}} .tf-hotel-single-features ul li' => $this->tf_apply_dim( 'margin' ), //design-1
+				'{{WRAPPER}} .tf-overview-popular-facilities>ul li' => $this->tf_apply_dim( 'margin' ), //design-2
+			],
+		]);
+
+		$this->add_control( 'features_bg_color', [
+			'label'     => __( 'Background Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors'  => [
+				'{{WRAPPER}} .tf-hotel-single-features ul li' => 'background-color: {{VALUE}};',
+			],
+            'condition' => [
+				'feature_style' => ['style1'],
+			],
+		]);
+
+		$this->add_group_control( Group_Control_Border::get_type(), [
+			'name'     => "features_border",
+			'selector' => "{{WRAPPER}} .tf-hotel-single-features ul li",
+			'condition' => [
+				'feature_style' => ['style1'],
+			],
+		]);
+
+		$this->add_control( "features_border_radius", [
+			'label'      => __( 'Border Radius', 'tourfic' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'%',
+			],
+			'selectors'  => [
+				'{{WRAPPER}} .tf-hotel-single-features ul li' => $this->tf_apply_dim( 'border-radius' ),
+			],
+            'condition' => [
+				'feature_style' => ['style1'],
+			],
+		]);
+
+		$this->add_group_control(Group_Control_Box_Shadow::get_type(), [
+			'name' => 'features_shadow',
+			'selector' => "{{WRAPPER}} .tf-hotel-single-features ul li",
+            'condition' => [
+				'feature_style' => ['style1'],
+			],
 		]);
 
 		$this->end_controls_section();
@@ -151,7 +256,7 @@ class Feature extends Widget_Base {
             ?>
             <div class="tf-single-feature-section tf-single-feature-style2">
                 <div class="tf-overview-popular-facilities">
-                    <span class="tf-popular-facilities-title"><?php echo esc_html($feature_title); ?></span>
+                    <span class="tf-popular-facilities-title tf-section-title"><?php echo esc_html($feature_title); ?></span>
                     <ul>
                         <?php foreach ( $features as $feature ) {
                             $feature_meta = get_term_meta( $feature->term_taxonomy_id, $feature_meta_key, true );
@@ -173,5 +278,14 @@ class Feature extends Widget_Base {
             </div>
 			<?php
         }
+	}
+
+    /**
+	 * Apply CSS property to the widget
+     * @param $css_property
+     * @return string
+     */
+	public function tf_apply_dim( $css_property, $important = false ) {
+		return "{$css_property}: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}} " . ($important ? '!important' : '') . ";";
 	}
 }
