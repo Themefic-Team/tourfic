@@ -94,13 +94,14 @@ class Feature extends Widget_Base {
 			'type'      => Controls_Manager::COLOR,
 			'selectors'  => [
 				'{{WRAPPER}} .tf-section-title' => 'color: {{VALUE}};',
+				'{{WRAPPER}} .tf-single-feature-section.tf-single-feature-style2 .tf-overview-popular-facilities span.tf-popular-facilities-title' => 'color: {{VALUE}};',
 			],
 		]);
 
 		$this->add_group_control( Group_Control_Typography::get_type(), [
             'label'    => esc_html__( 'Title Typography', 'tourfic' ),
 			'name'     => "tf_title_typography",
-			'selector' => "{{WRAPPER}} .tf-section-title",
+			'selector' => "{{WRAPPER}} .tf-section-title, {{WRAPPER}} .tf-single-feature-section.tf-single-feature-style2 .tf-overview-popular-facilities span.tf-popular-facilities-title",
 		]);
 
 		$this->end_controls_section();
@@ -117,6 +118,7 @@ class Feature extends Widget_Base {
 			'type'      => Controls_Manager::COLOR,
 			'selectors'  => [
 				'{{WRAPPER}} .tf-hotel-single-features ul li i' => 'color: {{VALUE}};',
+				'{{WRAPPER}} .tf-overview-popular-facilities>ul li i' => 'color: {{VALUE}};',
 			],
 		]);
 
@@ -230,7 +232,7 @@ class Feature extends Widget_Base {
         
         if ($style == 'style1' && $features) {
             ?>
-            <div class="tf-single-template__one">
+            <div class="tf-single-template__one tf-single-feature-style1">
                 <div class="tf-hotel-single-features tf-template-section">
                     <h2 class="tf-title tf-section-title"><?php echo esc_html($feature_title); ?></h2>
                     <ul>
@@ -256,7 +258,7 @@ class Feature extends Widget_Base {
             ?>
             <div class="tf-single-feature-section tf-single-feature-style2">
                 <div class="tf-overview-popular-facilities">
-                    <span class="tf-popular-facilities-title tf-section-title"><?php echo esc_html($feature_title); ?></span>
+                    <span class="tf-popular-facilities-title"><?php echo esc_html($feature_title); ?></span>
                     <ul>
                         <?php foreach ( $features as $feature ) {
                             $feature_meta = get_term_meta( $feature->term_taxonomy_id, $feature_meta_key, true );
