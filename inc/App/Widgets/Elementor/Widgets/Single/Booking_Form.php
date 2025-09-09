@@ -82,15 +82,6 @@ class Booking_Form extends Widget_Base {
             ],
         ]);
 
-		$this->add_control('show_review', [
-			'label' => esc_html__('Review Badge', 'tourfic'),
-			'type' => Controls_Manager::SWITCHER,
-			'label_on' => esc_html__('Show', 'tourfic'),
-			'label_off' => esc_html__('Hide', 'tourfic'),
-			'return_value' => 'yes',
-			'default' => 'yes',
-		]);
-
 	    do_action( 'tf/single-booking-form/after-content/controls', $this );
 
         $this->end_controls_section();
@@ -141,8 +132,7 @@ class Booking_Form extends Widget_Base {
 			$this->tf_car_booking_form($settings);
         } else {
 			return;
-		}
-        $show_review = isset($settings['show_review']) ? $settings['show_review'] : 'yes';   
+		}   
     }
 
 	private function tf_hotel_booking_form($settings) {

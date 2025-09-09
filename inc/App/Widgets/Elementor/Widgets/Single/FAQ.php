@@ -440,7 +440,7 @@ class FAQ extends Widget_Base {
 
         //faq style
         $style = !empty($settings['faq_style']) ? $settings['faq_style'] : 'style1';
-        $item_divider = isset($settings['tf_faq_item_divider']) ? $settings['tf_faq_item_divider'] : 'yes';
+        $item_divider = isset($settings['tf_faq_item_divider']) ? $settings['tf_faq_item_divider'] : '';
         
         if ($style == 'style1') {
             ?>

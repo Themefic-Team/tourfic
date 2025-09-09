@@ -171,7 +171,7 @@ class Gallery extends Widget_Base {
 
         //gallery style
         $style = !empty($settings['gallery_style']) ? $settings['gallery_style'] : 'style1';
-        $show_review = isset($settings['show_review']) ? $settings['show_review'] : 'yes';
+        $show_review = isset($settings['show_review']) ? $settings['show_review'] : '';
 
         // Style 1: Bottom Nav
         if ($style == 'style1') {
