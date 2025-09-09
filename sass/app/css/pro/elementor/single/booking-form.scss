@@ -970,7 +970,8 @@
         background-color: $color-filling-fg;
         border-radius: 8px;
         padding: 32px;
-        margin-bottom: 40px;
+        margin-bottom: 0px;
+
         @media #{$max320}{
             padding: 16px;
         }
