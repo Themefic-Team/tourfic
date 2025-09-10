@@ -85,22 +85,70 @@ class Amenities extends Widget_Base {
 
     protected function tf_amenities_style_controls() {
 		$this->start_controls_section( 'amenities_title_style', [
-			'label' => esc_html__( 'Amenities Title Style', 'tourfic' ),
+			'label' => esc_html__( 'Amenities Style', 'tourfic' ),
 			'tab'   => Controls_Manager::TAB_STYLE,
 		]);
+
+        $this->add_control( 'tf_title_heading', [
+			'type'  => Controls_Manager::HEADING,
+			'label' => __( 'Title', 'tourfic' ),
+		] );
 
 		$this->add_control( 'tf_title_color', [
 			'label'     => esc_html__( 'Title Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors'  => [
 				'{{WRAPPER}} .tf-section-title' => 'color: {{VALUE}};',
+				'{{WRAPPER}} h2.section-heading' => 'color: {{VALUE}};',
 			],
 		]);
 
 		$this->add_group_control( Group_Control_Typography::get_type(), [
             'label'    => esc_html__( 'Title Typography', 'tourfic' ),
 			'name'     => "tf_title_typography",
-			'selector' => "{{WRAPPER}} .tf-section-title",
+			'selector' => "{{WRAPPER}} .tf-section-title, {{WRAPPER}} .section-heading",
+		]);
+
+        $this->add_control( 'tf_category_heading', [
+			'type'  => Controls_Manager::HEADING,
+			'label' => __( 'Category', 'tourfic' ),
+		] );
+
+		$this->add_control( 'tf_category_color', [
+			'label'     => esc_html__( 'Category Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors'  => [
+				'{{WRAPPER}} .single-facilities-title' => 'color: {{VALUE}};',
+				'{{WRAPPER}} .tf-hotel-facilities-content-area .hotel-facility-item .hotel-single-facility-title' => 'color: {{VALUE}};',
+				'{{WRAPPER}} #tf-amenities-modal .tf-apartment-amenity-cat h3' => 'color: {{VALUE}};',
+			],
+		]);
+
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+            'label'    => esc_html__( 'Category Typography', 'tourfic' ),
+			'name'     => "tf_category_typography",
+			'selector' => "{{WRAPPER}} .single-facilities-title, {{WRAPPER}} .tf-hotel-facilities-content-area .hotel-facility-item .hotel-single-facility-title, {{WRAPPER}} #tf-amenities-modal .tf-apartment-amenity-cat h3",
+		]);
+
+        $this->add_control( 'tf_feature_heading', [
+			'type'  => Controls_Manager::HEADING,
+			'label' => __( 'Feature', 'tourfic' ),
+		] );
+
+		$this->add_control( 'tf_feature_color', [
+			'label'     => esc_html__( 'Feature Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors'  => [
+				'{{WRAPPER}} .tf-facilities .tf-facility-item ul li' => 'color: {{VALUE}};',
+				'{{WRAPPER}} .hotel-facility-item ul li' => 'color: {{VALUE}};',
+				'{{WRAPPER}} .tf-apartment-amenities .tf-apt-amenity' => 'color: {{VALUE}};',
+			],
+		]);
+
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+            'label'    => esc_html__( 'Feature Typography', 'tourfic' ),
+			'name'     => "tf_feature_typography",
+			'selector' => "{{WRAPPER}} .tf-facilities .tf-facility-item ul li, {{WRAPPER}} .hotel-facility-item ul li, {{WRAPPER}} .tf-apartment-amenities .tf-apt-amenity",
 		]);
 
 		$this->end_controls_section();
