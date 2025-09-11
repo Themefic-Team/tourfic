@@ -57,7 +57,8 @@ class Nearby_Places extends Widget_Base {
 		$this->tf_content_layout_controls();
 
 		do_action( 'tf/single-nearby-places/before-style-controls', $this );
-		$this->tf_nearby_places_style_controls();
+		$this->tf_nearby_places_title_style_controls();
+		$this->tf_nearby_places_item_style_controls();
 		do_action( 'tf/single-nearby-places/after-style-controls', $this );
 	}
 
@@ -83,9 +84,9 @@ class Nearby_Places extends Widget_Base {
         $this->end_controls_section();
     }
 
-    protected function tf_nearby_places_style_controls() {
+    protected function tf_nearby_places_title_style_controls() {
 		$this->start_controls_section( 'nearby_places_title_style', [
-			'label' => esc_html__( 'Nearby Places Style', 'tourfic' ),
+			'label' => esc_html__( 'Title Style', 'tourfic' ),
 			'tab'   => Controls_Manager::TAB_STYLE,
 		]);
 
@@ -99,57 +100,78 @@ class Nearby_Places extends Widget_Base {
 			'type'      => Controls_Manager::COLOR,
 			'selectors'  => [
 				'{{WRAPPER}} .tf-section-title' => 'color: {{VALUE}};',
-				'{{WRAPPER}} h2.section-heading' => 'color: {{VALUE}};',
+				'{{WRAPPER}} .surroundings_sec_title' => 'color: {{VALUE}};',
 			],
 		]);
 
 		$this->add_group_control( Group_Control_Typography::get_type(), [
             'label'    => esc_html__( 'Title Typography', 'tourfic' ),
 			'name'     => "tf_title_typography",
-			'selector' => "{{WRAPPER}} .tf-section-title, {{WRAPPER}} .section-heading",
+			'selector' => "{{WRAPPER}} .tf-section-title, {{WRAPPER}} .surroundings_sec_title",
 		]);
 
-        $this->add_control( 'tf_category_heading', [
-			'type'  => Controls_Manager::HEADING,
-			'label' => __( 'Category', 'tourfic' ),
-		] );
+		if($this->get_current_post_type() == 'tf_apartment'){
+			$this->add_control( 'tf_subtitle_heading', [
+				'type'  => Controls_Manager::HEADING,
+				'label' => __( 'Subtitle', 'tourfic' ),
+				'condition' => [
+					'nearby_places_style' => ['style2'],
+				],
+			] );
 
-		$this->add_control( 'tf_category_color', [
-			'label'     => esc_html__( 'Category Color', 'tourfic' ),
-			'type'      => Controls_Manager::COLOR,
+			$this->add_control( 'tf_subtitle_color', [
+				'label'     => esc_html__( 'Subtitle Color', 'tourfic' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors'  => [
+					'{{WRAPPER}} .surroundings_subtitle' => 'color: {{VALUE}};',
+				],
+				'condition' => [
+					'nearby_places_style' => ['style2'],
+				],
+			]);
+
+			$this->add_group_control( Group_Control_Typography::get_type(), [
+				'label'    => esc_html__( 'Subtitle Typography', 'tourfic' ),
+				'name'     => "tf_subtitle_typography",
+				'selector' => "{{WRAPPER}} .surroundings_subtitle",
+				'condition' => [
+					'nearby_places_style' => ['style2'],
+				],
+			]);
+		}
+
+		$this->end_controls_section();
+	}
+
+    protected function tf_nearby_places_item_style_controls() {
+		$this->start_controls_section( 'nearby_places_item_style', [
+			'label' => esc_html__( 'Item Style', 'tourfic' ),
+			'tab'   => Controls_Manager::TAB_STYLE,
+		]);
+
+		$this->add_responsive_control( "item_gap", [
+			'label'      => esc_html__( 'Item Gap', 'tourfic' ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [
+				'px',
+				'em',
+			],
+			'range'      => [
+				'px' => [
+					'min'  => 0,
+					'max'  => 100,
+					'step' => 1,
+				],
+			],
 			'selectors'  => [
-				'{{WRAPPER}} .single-facilities-title' => 'color: {{VALUE}};',
-				'{{WRAPPER}} .tf-hotel-facilities-content-area .hotel-facility-item .hotel-single-facility-title' => 'color: {{VALUE}};',
-				'{{WRAPPER}} #tf-nearby_places-modal .tf-apartment-amenity-cat h3' => 'color: {{VALUE}};',
+				"{{WRAPPER}} .tf-hotel-single-places.tf-hotel-single-places-style1 ul" => 'grid-gap: {{SIZE}}{{UNIT}};',
+				"{{WRAPPER}} .tf-whats-around.tf-hotel-single-places-style2 ul" => 'gap: {{SIZE}}{{UNIT}};',
+				"{{WRAPPER}} .tf-whats-around.tf-apartment-single-places-style1 ul" => 'gap: {{SIZE}}{{UNIT}};',
+				"{{WRAPPER}} .about-location.tf-apartment-single-places-style2 .tf-apartment-surronding-criteria" => 'margin-bottom: {{SIZE}}{{UNIT}};',
 			],
 		]);
 
-		$this->add_group_control( Group_Control_Typography::get_type(), [
-            'label'    => esc_html__( 'Category Typography', 'tourfic' ),
-			'name'     => "tf_category_typography",
-			'selector' => "{{WRAPPER}} .single-facilities-title, {{WRAPPER}} .tf-hotel-facilities-content-area .hotel-facility-item .hotel-single-facility-title, {{WRAPPER}} #tf-nearby_places-modal .tf-apartment-amenity-cat h3",
-		]);
-
-        $this->add_control( 'tf_feature_heading', [
-			'type'  => Controls_Manager::HEADING,
-			'label' => __( 'Feature', 'tourfic' ),
-		] );
-
-		$this->add_control( 'tf_feature_color', [
-			'label'     => esc_html__( 'Feature Color', 'tourfic' ),
-			'type'      => Controls_Manager::COLOR,
-			'selectors'  => [
-				'{{WRAPPER}} .tf-facilities .tf-facility-item ul li' => 'color: {{VALUE}};',
-				'{{WRAPPER}} .hotel-facility-item ul li' => 'color: {{VALUE}};',
-				'{{WRAPPER}} .tf-apartment-nearby_places .tf-apt-amenity' => 'color: {{VALUE}};',
-			],
-		]);
-
-		$this->add_group_control( Group_Control_Typography::get_type(), [
-            'label'    => esc_html__( 'Feature Typography', 'tourfic' ),
-			'name'     => "tf_feature_typography",
-			'selector' => "{{WRAPPER}} .tf-facilities .tf-facility-item ul li, {{WRAPPER}} .hotel-facility-item ul li, {{WRAPPER}} .tf-apartment-nearby_places .tf-apt-amenity",
-		]);
+		
 
 		$this->end_controls_section();
 	}
@@ -290,5 +312,20 @@ class Nearby_Places extends Widget_Base {
 			</div>
 			<?php
         }
+	}
+
+	protected function get_current_post_type() {
+		// Check if we're in Elementor editor and have a preview post ID
+		if (isset($_GET['tf_preview_post_id']) && !empty($_GET['tf_preview_post_id'])) {
+			$preview_post_id = intval($_GET['tf_preview_post_id']);
+			$preview_post = get_post($preview_post_id);
+			
+			if ($preview_post && in_array($preview_post->post_type, ['tf_hotel', 'tf_tours', 'tf_apartment', 'tf_carrental'])) {
+				return $preview_post->post_type;
+			}
+		}
+		
+		// Fallback to regular post type detection
+		return get_post_type();
 	}
 }
