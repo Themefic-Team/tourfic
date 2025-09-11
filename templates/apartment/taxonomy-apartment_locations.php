@@ -36,7 +36,8 @@ $taxonomy_slug = $term->slug;
 $max = '8';
 
 $tf_location_meta      = get_term_meta( $term->term_id, 'tf_apartment_location', true );
-$tf_location_image = ! empty( $tf_location_meta['image'] ) ? $tf_location_meta['image'] : '';
+$tf_apartment_arc_banner = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment_archive_design_1_bannar'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment_archive_design_1_bannar'] : '';
+$tf_location_image = ! empty( $tf_location_meta['image'] ) ? $tf_location_meta['image'] : $tf_apartment_arc_banner;
 
 $tf_apartment_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['apartment-archive'] : 'default';
 if( $post_type == "tf_apartment" && $tf_apartment_arc_selected_template=="design-1" ){

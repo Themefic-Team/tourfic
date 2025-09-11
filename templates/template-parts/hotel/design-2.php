@@ -335,7 +335,7 @@ use \Tourfic\App\TF_Review;
                 ) );
                 ?>
                 <?php if( empty($tf_comment_counts) && $tf_comment_counts == 0 ) : ?>
-                    <button class="tf_btn tf_btn_full tf_btn_sharp tf_btn_large tf-review-open">
+                    <button class="tf_btn tf_btn_secondary tf_btn_full tf_btn_sharp tf_btn_large tf-review-open">
                     <?php esc_html_e("Leave your review", "tourfic"); ?>
                 </button>
                 <?php endif; ?>
@@ -377,10 +377,9 @@ use \Tourfic\App\TF_Review;
                 ?>
                 <div class="tf-send-inquiry tf-single-widgets">
                     <?php 
-                    if (!empty($tf_enquiry_section_icon)) {
-                        ?>
+                    if (!empty($tf_enquiry_section_icon)) { ?>
                         <i class="<?php echo wp_kses_post($tf_enquiry_section_icon); ?>" aria-hidden="true"></i>
-                        <?php
+                    <?php
                     }
                     if(!empty($tf_enquiry_section_title)) {
                         ?>

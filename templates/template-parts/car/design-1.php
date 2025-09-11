@@ -7,9 +7,9 @@ use \Tourfic\Classes\Car_Rental\Pricing;
 use \Tourfic\App\TF_Review;
 ?>
 <?php
+$booking_btn_text = !empty(Helper::tfopt('car_booking_form_button_text')) ? Helper::tfopt('car_booking_form_button_text') : 'Continue';
 $tf_pickup_date = !empty($_GET['pickup_date']) ? sanitize_text_field( wp_unslash($_GET['pickup_date']) ) : '';
 $tf_dropoff_date = !empty($_GET['dropoff_date']) ? sanitize_text_field( wp_unslash($_GET['dropoff_date']) ) : '';
-
 
 // Pull options from settings or set fallback values
 $disable_car_time_slot = !empty(Helper::tfopt('disable-car-time-slots')) ? boolval(Helper::tfopt('disable-car-time-slots')) : false;
@@ -534,8 +534,8 @@ $tf_cars_slug = get_option('car_slug');
                                 $due_amount = ($total_prices['sale_price'] * $car_deposit_amount)/100;
                             }
                             if( function_exists( 'is_tf_pro' ) && is_tf_pro() && '2'==$car_booking_by ){ ?>
-                                <button class="tf-flex tf-flex-align-center tf-flex-justify-center booking-process tf-final-step tf-flex-gap-8">
-                                    <?php echo esc_html( apply_filters("tf_car_booking_form_submit_button_text", 'Continue' ) ); ?>
+                                <button class="tf_btn tf-flex tf-flex-align-center tf-flex-justify-center booking-process tf-final-step tf-flex-gap-8">
+                                    <?php echo esc_html( apply_filters("tf_car_booking_form_submit_button_text", $booking_btn_text ), 'tourfic' ); ?>
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M7.5 15L12.5 10L7.5 5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
@@ -543,7 +543,7 @@ $tf_cars_slug = get_option('car_slug');
                             <?php }else{ ?>
                                 <?php if( function_exists( 'is_tf_pro' ) && is_tf_pro() && !empty($car_allow_deposit) && $car_deposit_type!='none' && !empty($car_deposit_amount) ){  ?>
                                     <div class="tf-partial-payment-button tf-flex tf-flex-direction-column tf-flex-gap-16">
-                                        <button class="tf-flex tf-flex-align-center tf-partial-button tf-flex-justify-center tf-flex-gap-8 <?php echo (empty($car_protection_section_status) || empty($car_protections)) && '3'!=$car_booking_by ? esc_attr('booking-process tf-final-step') : esc_attr('tf-car-booking'); ?>" data-partial="<?php echo esc_attr('yes'); ?>">
+                                        <button class="tf_btn tf-flex tf-flex-align-center tf-partial-button tf-flex-justify-center tf-flex-gap-8 <?php echo (empty($car_protection_section_status) || empty($car_protections)) && '3'!=$car_booking_by ? esc_attr('booking-process tf-final-step') : esc_attr('tf-car-booking'); ?>" data-partial="<?php echo esc_attr('yes'); ?>">
                                             <?php esc_html_e( 'Part Pay', 'tourfic' ); ?> <?php echo wp_kses_post(wc_price($due_amount)); ?>
                                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M11.3299 10.3541L11.6835 10.0006L11.3299 9.64703L7.55867 5.87577L8.03008 5.40437L12.6263 10.0006L8.03008 14.5967L7.55867 14.1253L11.3299 10.3541Z" fill="#566676" stroke="#0866C4"/>
@@ -597,6 +597,12 @@ $tf_cars_slug = get_option('car_slug');
                         <?php do_action( 'tf_car_cancellation', $post_id ); ?>
                     </div>
                     <div class="tf-mobile-booking-btn">
+                        <div class="tf-price-header">
+                            <h2><?php esc_html_e("Total:", "tourfic"); ?> 
+                            <?php if(!empty($total_prices['regular_price'])){ ?><del><?php echo wc_price($total_prices['regular_price']); ?></del>  <?php } ?>
+                            <?php echo $total_prices['sale_price'] ? wc_price($total_prices['sale_price']) : '' ?> <?php if(!empty($total_prices['type'])){ ?><small class="pricing-type">/ <?php echo esc_html($total_prices['type']); ?></small> <?php } ?></h2>
+                            <p><?php echo Pricing::is_taxable($meta); ?></p>
+                        </div>
                         <button><?php esc_html_e("Book Now", "tourfic"); ?></button>
                     </div>
                     <div class="tf-car-booking-popup">

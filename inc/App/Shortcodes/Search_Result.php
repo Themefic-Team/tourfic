@@ -294,6 +294,7 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
                                     <option value="price-high">Sort By Price: High to Low</option>
                                     <option value="price-low">Sort By Price: Low to High</option>
                                 </select>
+								<i class="fas fa-chevron-down"></i>
                             </form>
                         </div>
 					</div>
@@ -503,7 +504,7 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
                    ( $post_type == "tf_apartment" && $tf_apartment_arc_selected_template == "design-1" ) ) { ?>
 			<div class="tf-available-archive-hetels-wrapper tf-available-rooms-wrapper" id="tf-hotel-rooms">
 				<div class="tf-archive-available-rooms-head tf-available-rooms-head">
-					<span class="tf-total-results">
+					<h3 class="tf-total-results">
 							<?php esc_html_e("Total", "tourfic"); ?> <span><?php echo esc_html( $total_posts ); ?></span>
 						<?php if($post_type == "tf_hotel"){
 							esc_html_e("hotels available", "tourfic");
@@ -512,10 +513,7 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 						}else{
 							esc_html_e("tours available", "tourfic");
 						} ?>
-					</span>
-					<div class="tf-archive-filter-showing">
-						<i class="ri-equalizer-line"></i>
-					</div>
+					</h3>
 					<div class="tf-sorting-selection-warper">
 						<form class="tf-archive-ordering" method="get">
 							<select class="tf-orderby" name="tf-orderby" id="tf-orderby">
@@ -527,8 +525,22 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 								<option value="price-high"><?php echo esc_html__( 'Sort By Price: High to Low', 'tourfic' ); ?></option>
 								<option value="price-low"><?php echo esc_html__( 'Sort By Price: Low to High', 'tourfic' ); ?></option>
 							</select>
+							<i class="fas fa-chevron-down"></i>
 						</form>
 					</div>
+					<div class="tf-archive-filter-showing">
+						<i class="ri-equalizer-line"></i>
+					</div>
+					<h3 class="tf-total-results tf-mobile-results">
+							<?php esc_html_e("Total", "tourfic"); ?> <span><?php echo esc_html( $total_posts ); ?></span>
+						<?php if($post_type == "tf_hotel"){
+							esc_html_e("hotels available", "tourfic");
+						}elseif($post_type == "tf_apartment"){
+							esc_html_e("apartments available", "tourfic");
+						}else{
+							esc_html_e("tours available", "tourfic");
+						} ?>
+					</h3>
 				</div>
 
 				<!-- Loader Image -->
@@ -758,12 +770,18 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
 						<span><?php echo esc_html( $total_posts ); ?> </span>
 					</div>
 					<span><?php echo ')'; ?> </span>
+					<div class="tf-archive-filter-showing">
+						<i class="ri-equalizer-line"></i>
+					</div>
 				</div>
 			</div>
 			<div class="tf-car-details-column tf-flex tf-flex-gap-32">
 
 				<div class="tf-car-archive-sidebar">
 					<div class="tf-sidebar-header tf-flex tf-flex-space-bttn tf-flex-align-center">
+						<div class="tf-close-sidebar">
+                            <i class="fa-solid fa-xmark"></i>
+                        </div>
 						<h4><?php esc_html_e("Filter", "tourfic") ?></h4>
 						<button class="filter-reset-btn"><?php esc_html_e("Reset", "tourfic"); ?></button>
 					</div>
@@ -1578,6 +1596,7 @@ class Search_Result extends \Tourfic\Core\Shortcodes {
                                     <option value="price-high"><?php echo esc_html__( 'Sort By Price: High to Low', 'tourfic' ); ?></option>
                                     <option value="price-low"><?php echo esc_html__( 'Sort By Price: Low to High', 'tourfic' ); ?></option>
                                 </select>
+								<i class="fas fa-chevron-down"></i>
                             </form>
                         </div>
 					</div>

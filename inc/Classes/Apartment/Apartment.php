@@ -132,8 +132,8 @@ class Apartment {
                                         }, {
                                             breakpoint: 420,
                                             settings: {
-                                                slidesToShow: 3,
-                                                slidesToScroll: 3,
+                                                slidesToShow: 4,
+                                                slidesToScroll: 4,
                                             }
                                         }]
                                     });
@@ -551,7 +551,7 @@ class Apartment {
 					</div>
 					<div class="tf_availability_checker_box">
 						<input type="hidden" name="type" value="tf_apartment" class="tf-post-type"/>
-						<button><?php echo esc_html_e("Check availability", "tourfic"); ?></button>
+						<button class="tf_btn"><?php echo esc_html_e("Check availability", "tourfic"); ?></button>
 					</div>
 				</div>
 			</div>
@@ -2256,7 +2256,7 @@ class Apartment {
 				</div>
 			</div>
 		</div>
-        <?php } elseif ( $tf_apartment_arc_selected_template == "design-2" ) { ?>
+        <?php } elseif ( $tf_apartment_arc_selected_template == "design-2" && function_exists( 'is_tf_pro' ) && is_tf_pro()) { ?>
             <div class="tf-archive-hotel" data-id="<?php echo esc_attr(get_the_ID()); ?>">
             	<!-- Thumbnail -->
 				<?php if($show_image == 'yes'): ?>    

@@ -212,7 +212,7 @@
         $(document).on('submit', '#tf_apartment_booking', function (e) {
             e.preventDefault();
             let form = $(this),
-                submitBtn = form.find('.tf-submit'),
+                submitBtn = form.find('button[type="submit"]'),
                 formData = new FormData(form[0]);
 
             formData.append('action', 'tf_apartments_search');
@@ -230,12 +230,12 @@
                 contentType: false,
                 processData: false,
                 beforeSend: function () {
-                    form.css({'opacity': '0.5', 'pointer-events': 'none'});
+                    form.css({'pointer-events': 'none'});
                     submitBtn.addClass('tf-btn-loading');
                 },
                 success: function (response) {
                     let obj = JSON.parse(response);
-                    form.css({'opacity': '1', 'pointer-events': 'all'});
+                    form.css({'pointer-events': 'all'});
                     submitBtn.removeClass('tf-btn-loading');
                     if (obj.status === 'error') {
                         notyf.error(obj.message);
@@ -618,10 +618,6 @@
 
             $('.tf-details-menu ul li[data-menu="' + $currentmenu + '"]').addClass('active');
         });
-
-       
-        
-        
         
         // Car Location Autocomplete
 
@@ -1198,7 +1194,7 @@
         $(document).on('submit', '#tf_car_booking', function (e) {
             e.preventDefault();
             let form = $(this),
-                submitBtn = form.find('.tf-submit'),
+                submitBtn = form.find('button[type="submit"]'),
                 formData = new FormData(form[0]);
             formData.append('action', 'tf_car_search');
             formData.append('_nonce', tf_params.nonce);
@@ -1215,12 +1211,12 @@
                 contentType: false,
                 processData: false,
                 beforeSend: function () {
-                    form.css({'opacity': '0.5', 'pointer-events': 'none'});
+                    form.css({'pointer-events': 'none'});
                     submitBtn.addClass('tf-btn-loading');
                 },
                 success: function (response) {
                     let obj = JSON.parse(response);
-                    form.css({'opacity': '1', 'pointer-events': 'all'});
+                    form.css({'pointer-events': 'all'});
                     submitBtn.removeClass('tf-btn-loading');
                     if (obj.status === 'error') {
                         notyf.error(obj.message);
@@ -1492,6 +1488,37 @@
             });
         };
 
+        /*
+        * Car menu scroll
+        * @author Mofazzal Hossain
+        */
+        let $scrollContainer = $('.tf-details-menu ul');
+
+        $scrollContainer.on('click', 'li', function (e) {
+            let $item = $(this);
+
+            // Remove previous active and set new one
+            $scrollContainer.find('li').removeClass('active');
+            $item.addClass('active');
+
+            scrollToItem($item);
+        });
+
+        function scrollToItem($item) {
+            let container = $scrollContainer.get(0);
+            let containerLeft = container.scrollLeft;
+            let containerWidth = $scrollContainer.outerWidth();
+            let itemLeft = $item.position().left + containerLeft;
+            let itemWidth = $item.outerWidth();
+
+            let scrollTo = itemLeft - (containerWidth / 2) + (itemWidth / 2);
+
+            // Animate scroll
+            $scrollContainer.animate({
+                scrollLeft: scrollTo
+            }, 400);
+        }
+
 
         /*
         * Car Archive View
@@ -1511,21 +1538,52 @@
             }
         });
 
+        /*
+        * Booking Bar Show
+        * @author Mofazzal Hossain
+        */
         if($('.tf-single-car-details-warper .tf-details-menu').length){
-            // Booking Bar Show
-            $(window).scroll(function() {
+            $(window).on('scroll resize', function () {
                 // Check the position of the target div
-                var targetOffset = $('.tf-single-car-details-warper .tf-details-menu').offset().top;
-                var targetHeight = $('.tf-single-car-details-warper .tf-details-menu').outerHeight(); // Get the full height of the div including padding
+                var $target = $('.tf-single-car-details-warper .tf-details-menu');
+                var $bookingBar = $('.tf-single-booking-bar');
+                var $wpAdminBar = $('#wpadminbar');
+                var $header = $('header');
+                var $desktopHeader = $('.tft-header-desktop');
+                
+                var targetOffset = $target.offset().top;
+                var targetHeight = $target.outerHeight();
                 var targetBottom = targetOffset + targetHeight;
 
                 var scrollPosition = $(window).scrollTop();
-        
-                // If the user has scrolled past the target div, show the other div
-                if (scrollPosition > targetBottom) {
-                    $('.tf-single-booking-bar').fadeIn(); // You can change this to show() or add animations
+
+                // Calculate heights
+                var wpAdminBarHeight = $wpAdminBar.length ? $wpAdminBar.outerHeight() : 0;
+                var headerHeight = $header.length ? $header.outerHeight() : 0;
+                
+                if($header.hasClass('tf-navbar-shrink')) {
+                    headerHeight = $header.outerHeight();
+                }else {
+                    headerHeight = 0;
+                }
+                
+                // Total offset is admin bar + header heights
+                var totalOffset = wpAdminBarHeight + headerHeight;
+                $bookingBar.css('top', totalOffset + 'px');
+                
+                // Adjust scroll position check to account for the total offset
+                if (scrollPosition + totalOffset > targetBottom) {
+                    $bookingBar.fadeIn(function () {
+                        if ($bookingBar.is(':visible')) {
+                            $header.css("box-shadow", "none");
+                            $desktopHeader.css("box-shadow", "none");
+                        }
+                    });
                 } else {
-                    $('.tf-single-booking-bar').fadeOut();
+                    $bookingBar.fadeOut(function () {
+                        $header.css("box-shadow", ""); 
+                        $desktopHeader.css("box-shadow", "");
+                    });
                 }
             });
         }
@@ -1535,10 +1593,16 @@
             e.preventDefault(); 
             $('.tf-single-booking-bar').fadeOut();
             var bookingBarHeight = $('.tf-single-booking-bar').outerHeight() || 0;
+            var $wpAdminBar = $('#wpadminbar');
+            var $header = $('header');
+            var wpAdminBarHeight = $wpAdminBar.length ? $wpAdminBar.outerHeight() : 0;
+            var headerHeight = $header.length ? $header.outerHeight() : 0;
+            var totalOffset = wpAdminBarHeight + headerHeight;
+            
             $('html, body').animate({
-                scrollTop: $('.tf-date-select-box').offset().top - bookingBarHeight
-            }); 
-        });        
+                scrollTop: $('.tf-date-select-box').offset().top - totalOffset
+            }, 1000); 
+        });     
 
         // Social Share
         $('.single-tf_carrental .tf-single-template__one .tf-share-toggle').on("click", function (e) {
@@ -1720,7 +1784,7 @@ function convertTo24HourFormat(timeStr) {
                             scrollTop: $("#rooms").offset().top
                         }, 500);
                         $("#rooms").html(data);
-                        $('.tf-room-filter').show();
+                        $('.tf-room-filter').addClass('tf-filter-show');
                         $("#tf-single-hotel-avail .tf-submit").removeClass('tf-btn-loading');
                      } else {
                          notyf.error(tf_params.no_room_found);
@@ -1759,9 +1823,12 @@ function convertTo24HourFormat(timeStr) {
          */
         $(document).on('click', '.hotel-room-availability', function (e) {
             e.preventDefault();
-
+            var offset = 200;
+            if (window.innerWidth <= 768) {
+                offset = 100;
+            }
             $('html, body').animate({
-                scrollTop: $("#tf-single-hotel-avail").offset().top
+                scrollTop: $("#tf-single-hotel-avail").offset().top - offset
             }, 500);
         });
 
@@ -2001,7 +2068,7 @@ function convertTo24HourFormat(timeStr) {
         $(document).on('submit', '#tf_hotel_aval_check', function (e) {
             e.preventDefault();
             let form = $(this),
-                submitBtn = form.find('.tf-submit'),
+                submitBtn = form.find('button[type="submit"]'),
                 formData = new FormData(form[0]);
             
             formData.append('action', 'tf_hotel_search');
@@ -2019,12 +2086,12 @@ function convertTo24HourFormat(timeStr) {
                 contentType: false,
                 processData: false,
                 beforeSend: function () {
-                    form.css({'opacity': '0.5', 'pointer-events': 'none'});
+                    form.css({'pointer-events': 'none'});
                     submitBtn.addClass('tf-btn-loading');
                 },
                 success: function (response) {
                     let obj = JSON.parse(response);
-                    form.css({'opacity': '1', 'pointer-events': 'all'});
+                    form.css({'pointer-events': 'all'});
                     submitBtn.removeClass('tf-btn-loading');
                     if (obj.status === 'error') {
                         notyf.error(obj.message);
@@ -2044,7 +2111,6 @@ function convertTo24HourFormat(timeStr) {
 
             // Executes when some one click in the search form location
             inp.addEventListener("focus", function () {
-
                 closeAllLists();
 
                 let a = document.createElement("DIV");
@@ -2733,7 +2799,7 @@ function convertTo24HourFormat(timeStr) {
         $(document).on('submit', '#tf_tour_aval_check', function (e) {
             e.preventDefault();
             let form = $(this),
-                submitBtn = form.find('.tf-submit'),
+                submitBtn = form.find('button[type="submit"]'),
                 formData = new FormData(form[0]);
 
             formData.append('action', 'tf_tour_search');
@@ -2751,12 +2817,12 @@ function convertTo24HourFormat(timeStr) {
                 contentType: false,
                 processData: false,
                 beforeSend: function () {
-                    form.css({'opacity': '0.5', 'pointer-events': 'none'});
+                    form.css({'pointer-events': 'none'});
                     submitBtn.addClass('tf-btn-loading');
                 },
                 success: function (response) {
                     let obj = JSON.parse(response);
-                    form.css({'opacity': '1', 'pointer-events': 'all'});
+                    form.css({'pointer-events': 'all'});
                     submitBtn.removeClass('tf-btn-loading');
                     if (obj.status === 'error') {
                         notyf.error(obj.message);
@@ -3068,7 +3134,7 @@ function convertTo24HourFormat(timeStr) {
                     scroll = $(window).scrollTop(),
                     footer = $('footer');
             
-                if (footer.length === 0) {
+                if (footer.length === 0 || bookingBox.length === 0 || sticky.length === 0) {
                     return; 
                 }
                 let boxOffset = bookingBox.offset().top + bookingBox.outerHeight();
@@ -3799,7 +3865,6 @@ function convertTo24HourFormat(timeStr) {
             if (max_seat) {
                 formData.append('max_seat', max_seat);
             }
-
             if(mapCoordinates.length === 4){
                 formData.append('mapCoordinates', mapCoordinates.join(','));
                 formData.append('mapFilter', true);
@@ -4199,9 +4264,7 @@ function convertTo24HourFormat(timeStr) {
             }, 3000);
             const inputElement = $(this).parent().find("#share_link_input");
             if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(inputElement.val()).then(() => {
-                    
-                });
+                navigator.clipboard.writeText(inputElement.val()).then(() => {});
             } else {
                 const tempInput = document.createElement("textarea");
                 tempInput.value = inputElement.val();
@@ -4238,7 +4301,7 @@ function convertTo24HourFormat(timeStr) {
                     }
                 },
                 {
-                    breakpoint: 600,
+                    breakpoint: 767,
                     settings: {
                         slidesToShow: 2,
                         slidesToScroll: 1
@@ -4449,15 +4512,21 @@ function convertTo24HourFormat(timeStr) {
                     url: tf_params.ajax_url,
                     data: data,
                     beforeSend: function (data) {
-                        notyf.success(tf_params.wishlist_add)
+                        window.wishlistNotification = notyf.success({
+                            message: tf_params.wishlist_add
+                        });
                     },
                     success: function (response) {
                         if (response.success) {
                             wishIconFill(targetNode);
-                            notyf.success({
-                                message: response.data,
-                                duration: 4e3
-                            });
+                            setTimeout(function() {
+                                if (window.wishlistNotification) {
+                                    notyf.dismiss(window.wishlistNotification);
+                                }
+                                notyf.success({
+                                    message: response.data,
+                                });
+                            }, 400); 
                         }
                     }
                 });
@@ -4465,12 +4534,19 @@ function convertTo24HourFormat(timeStr) {
             } else {
                 /* For guest */
                 if (addWish(data) === true) {
-                    notyf.success(tf_params.wishlist_add)
-                    wishIconFill(targetNode);
-                    notyf.success({
-                        message: tf_params.wishlist_added,
-                        duration: 4e3
+                    window.wishlistNotification = notyf.success({
+                        message: tf_params.wishlist_add
                     });
+                    wishIconFill(targetNode);
+                    
+                    setTimeout(function() {
+                        if (window.wishlistNotification) {
+                            notyf.dismiss(window.wishlistNotification);
+                        }
+                        notyf.success({
+                            message: tf_params.wishlist_add_success || 'Added to wishlist successfully'
+                        });
+                    }, 1000);
                 } else notyf.error(tf_params.wishlist_add_error);
 
             }
@@ -5632,9 +5708,7 @@ function convertTo24HourFormat(timeStr) {
 
 
             if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(inputElement.val()).then(() => {
-                    
-                });
+                navigator.clipboard.writeText(inputElement.val()).then(() => {});
             } else {
                 const tempInput = document.createElement("textarea");
                 tempInput.value = inputElement.val();
@@ -5679,6 +5753,10 @@ function convertTo24HourFormat(timeStr) {
             $(this).find('.tf-question-desc').slideToggle();
         });
 
+        $(".tf-question .tf-question-desc").on("click", function(e) {
+            e.stopPropagation();
+        });
+
         $(".tf-single-template__two .tf-hero-hotel.tf-popup-buttons").on("click", function (e) {
             e.preventDefault();
             $("#tour_room_details_loader").show();
@@ -5713,9 +5791,18 @@ function convertTo24HourFormat(timeStr) {
             $('.tf-archive-right').toggleClass('tf-filter-show');
         });
 
+        // Archive Filter Close
+        $(document).on('click', '.tf-close-sidebar', function () {
+            $(this).closest('.tf-filter-show').removeClass('tf-filter-show');
+        });
+
+        $('.tf-archive-template__one .tf-archive-filter-showing').on('click', function () {
+            $('.tf-car-archive-sidebar').toggleClass('tf-filter-show');
+        });
+
         $(document).on('click touchstart', function (event) {
-            if (!$(event.target).closest(".tf-archive-filter-showing, .tf-details-right").length) {
-                $(".tf-details-right").removeClass('tf-filter-show');
+            if (!$(event.target).closest(".tf-archive-filter-showing, .tf-details-right, .tf-car-archive-sidebar").length) {
+                $(".tf-details-right, .tf-car-archive-sidebar").removeClass('tf-filter-show');
             }
         });
 
@@ -5726,13 +5813,13 @@ function convertTo24HourFormat(timeStr) {
         });
 
         // Full Description Showing
-        $('.tf-single-template__two span.tf-see-description, .tf-archive-template__three span.tf-see-description, .single-tf_carrental .tf-single-template__one span.tf-see-description').on('click', function () {
+        $('.tf-single-template__two .tf-see-description, .tf-archive-template__three .tf-see-description, .single-tf_carrental .tf-single-template__one .tf-see-description').on('click', function () {
             $('.tf-short-description').slideUp();
             $('.tf-full-description').slideDown();
         });
 
         // See Less Description Showing
-        $('.tf-single-template__two span.tf-see-less-description, .tf-single-template__three span.tf-see-less-description, .single-tf_carrental .tf-single-template__one span.tf-see-less-description').on('click', function () {
+        $('.tf-single-template__two .tf-see-less-description, .tf-single-template__three .tf-see-less-description, .single-tf_carrental .tf-single-template__one .tf-see-less-description').on('click', function () {
             $('.tf-full-description').slideUp();
             $('.tf-short-description').slideDown();
         });
@@ -5796,8 +5883,9 @@ function convertTo24HourFormat(timeStr) {
             $("#tour_room_details_loader").show();
             var post_id = $(this).attr("data-id");
             var post_type = $(this).attr("data-type");
+
             var data = {
-                action: 'tf_hotel_archive_popup_qv',
+                action: 'tf_archive_gallery_popup_qv',
                 _nonce: tf_params.nonce,
                 post_id: post_id,
                 post_type: post_type
@@ -5812,6 +5900,10 @@ function convertTo24HourFormat(timeStr) {
                     $(".tf-hotel-popup").addClass("tf-show")
                     $("#tour_room_details_loader").hide();
 
+                },
+                error: function(xhr, status, error) {
+                    console.error('AJAX Error:', status, error);
+                    console.log('Response:', xhr.responseText);
                 }
             });
         });
@@ -6276,6 +6368,27 @@ function convertTo24HourFormat(timeStr) {
             if (!$(e.target).closest('.info-select').length) {
                 $('.time-options-list').slideUp(200);
                 $('.selected-dropoff-time, .selected-pickup-time').removeClass('active');
+            }
+        });
+
+        // Offset scroll to available room
+        $('.tf-available-room-content-right .tf_btn').on('click', function(e){
+            var target = $(this).attr('href');
+            if (target.startsWith('#')) {
+                console.log('clicked');
+                e.preventDefault();
+
+                var offset = 200;
+                if (window.innerWidth <= 768) {
+                    offset = 100;
+                }
+
+                var targetElement = $(target);
+                if (targetElement.length) {
+                    $('html, body').animate({
+                        scrollTop: targetElement.offset().top - offset
+                    }, 600);
+                }
             }
         });
     });

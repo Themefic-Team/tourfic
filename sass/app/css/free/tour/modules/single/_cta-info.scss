@@ -4,14 +4,19 @@
             .tf-tour-contact-informations {
                 background-color: $color-filling-fg;
                 padding: 24px;
+                gap: 20px;
                 @media #{$max768}{
                     margin: 32px 0;
+                    gap: 16px;
                 }
                 .tf-contact-details-title {
                     h3 {
                         font-weight: 700;
-                        font-size: 1.5rem;
+                        font-size: 2rem;
                         margin-bottom: 0;
+                        @media #{$max1024}{
+                            font-size: 1.25rem;
+                        }
                     }
                 }
                 .tf-contact-details-items {
@@ -21,6 +26,7 @@
                         margin-top: 5px;
                         margin-bottom: 15px;
                         align-items: center;
+                        line-height: 1.3;
                         
                         a {
                             text-decoration: none;

@@ -173,7 +173,7 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 	$show_price = isset($settings['show_price']) ? $settings['show_price'] : 'yes';
 	$car_infos = isset($settings['car_infos']) ? $settings['car_infos'] : ['mileage', 'fuel_type', 'engine_year', 'transmission_type', 'passenger_capacity', 'luggage_capacity'];
 	$show_view_details = isset($settings['show_view_details']) ? $settings['show_view_details'] : 'yes';
-	$view_details_text = isset($settings['view_details_text']) ? sanitize_text_field($settings['view_details_text']) : esc_html__('Details', 'tourfic');
+	$view_details_text = esc_html__('Details', 'tourfic');
 
 	// Thumbnail
 	$thumbnail_html = '';
@@ -378,22 +378,7 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 			<?php endif; ?>
 
 			<!-- View Details -->
-			<?php if($show_view_details == 'yes') : ?>
-			<?php if(!empty($pickup_date) && !empty($dropoff_date)){ ?>
-				<input type="hidden" value="<?php echo esc_attr($pickup_date); ?>" id="pickup_date">
-				<input type="hidden" value="<?php echo esc_attr($dropoff_date); ?>" id="dropoff_date">
-				<input type="hidden" value="<?php echo esc_attr($pickup_time); ?>" id="pickup_time">
-				<input type="hidden" value="<?php echo esc_attr($dropoff_time); ?>" id="dropoff_time">
-				<input type="hidden" value="<?php echo esc_attr($post_id); ?>" id="post_id">
-				<?php if('2'==$car_booking_by){ ?>
-					<button class="quick-booking"><?php echo esc_html( $view_details_text ); ?></button>
-				<?php }else{ ?>
-					<button class="<?php echo (empty($car_protection_section_status) || empty($car_protections)) && '3'!=$car_booking_by ? esc_attr('quick-booking') : esc_attr('tf-car-quick-booking'); ?>"><?php echo esc_html( $view_details_text ); ?></button>
-				<?php } ?>
-			<?php }else{ ?>
-				<a class="view-more" href="<?php echo esc_url( $url ); ?>"><?php echo esc_html( $view_details_text ); ?></a>
-			<?php } ?>
-			<?php endif; ?>
+			<a class="view-more" href="<?php echo esc_url( $url ); ?>"><?php echo esc_html( $view_details_text ); ?></a>
 		</div>
 	</div>
 </div>
@@ -745,7 +730,7 @@ function tf_car_booking_pupup_callback() {
 	$dropoff_date = ! empty( $_POST['dropoff_date'] ) ? sanitize_text_field( wp_unslash($_POST['dropoff_date']) ) : '';
 	$dropoff_time = ! empty( $_POST['dropoff_time'] ) ? sanitize_text_field( wp_unslash($_POST['dropoff_time']) ) : '';
 
-
+	$booking_btn_text = !empty(Helper::tfopt('car_booking_form_button_text')) ? Helper::tfopt('car_booking_form_button_text') : 'Continue';
 
  	?>
 
@@ -851,7 +836,11 @@ function tf_car_booking_pupup_callback() {
 
 	<div class="tf-booking-bar tf-flex tf-flex-gap-24">
 		<button class="with-charge <?php echo function_exists( 'is_tf_pro' ) && is_tf_pro() && '3'==$car_booking_by ? esc_attr('booking-next') : esc_attr('booking-process'); ?>">
-			<?php esc_html_e("Next", "tourfic"); ?>
+			<?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && '3' == $car_booking_by ) : ?>
+				<?php esc_html_e( "Next", "tourfic" ); ?>
+			<?php else : ?>
+				<?php echo esc_html( $booking_btn_text ); ?>
+			<?php endif; ?>
 			<i class="ri-arrow-right-s-line"></i>
 		</button>
 	</div>

@@ -522,9 +522,9 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                     <p><?php esc_html_e( "Let’s clarify your confusions. Here are some of the Frequently Asked Questions which most of our client asks.", 'tourfic' ); ?></p>
                 </div>
 
-                <div class="tf-faq-content-wrapper">
+                <div class="tf-section-flex tf-flex">
                     <?php 
-                    $tf_enquiry_section_status = !empty($meta['t-enquiry-section']) ? $meta['t-enquiry-section'] : "";
+                    $tf_enquiry_section_status = !empty($meta['t-enquiry-section']) ? $meta['t-enquiry-section'] : 1;
                     $tf_enquiry_section_icon = !empty($meta['t-enquiry-option-icon']) ? esc_html($meta['t-enquiry-option-icon']) : '';
                     $tf_enquiry_section_title = !empty($meta['t-enquiry-option-title']) ? esc_html($meta['t-enquiry-option-title']) : '';
                     $tf_enquiry_section_des = !empty($meta['t-enquiry-option-content']) ? esc_html($meta['t-enquiry-option-content']) : '';
@@ -532,38 +532,39 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
 
                     if(!empty($tf_enquiry_section_status) && ( !empty($tf_enquiry_section_icon) || !empty($tf_enquiry_section_title) || !empty($enquery_button_text))){
                     ?>
-                    
-                    <div class="tf-ask-question">
-                        <div class="default-enquiry-title-section">
-                            <?php
-                            if(!empty($tf_enquiry_section_icon)) {
-                                ?>
-                                <i class="<?php echo esc_attr($tf_enquiry_section_icon) ?>" aria-hidden="true"></i>
+                    <div class="tf-tour-enquiry">
+                        <div class="tf-ask-enquiry">
+                            <div class="default-enquiry-title-section">
                                 <?php
-                            }
-                            if(!empty($tf_enquiry_section_title)) {
+                                if(!empty($tf_enquiry_section_icon)) {
+                                    ?>
+                                    <i class="<?php echo esc_attr($tf_enquiry_section_icon) ?>" aria-hidden="true"></i>
+                                    <?php
+                                }
+                                if(!empty($tf_enquiry_section_title)) {
+                                    ?>
+                                    <h3><?php echo esc_html($tf_enquiry_section_title) ?></h3>
+                                    <?php
+                                }
                                 ?>
-                                <h3><?php echo esc_html($tf_enquiry_section_title) ?></h3>
+                            </div>
+                            <?php
+                            if(!empty($tf_enquiry_section_des)) {
+                                ?>
+                                    <p><?php echo wp_kses_post($tf_enquiry_section_des); ?></p>
+                                <?php
+                                }
+                                ?>
+                            <?php 
+                            if(!empty($enquery_button_text)) {
+                                ?>
+                                <div class="tf-btn-wrap"><a href="javaScript:void(0);" data-target="#tf-ask-modal" class="tf-modal-btn tf_btn">
+                                    <span><?php echo esc_html($enquery_button_text); ?>
+                                </span></a></div>
                                 <?php
                             }
                             ?>
                         </div>
-                        <?php
-                        if(!empty($tf_enquiry_section_des)) {
-                            ?>
-                                <p><?php echo wp_kses_post($tf_enquiry_section_des); ?></p>
-                            <?php
-                            }
-                            ?>
-                        <?php 
-                        if(!empty($enquery_button_text)) {
-                            ?>
-                            <div class="tf-btn-wrap"><a href="javaScript:void(0);" data-target="#tf-ask-modal" class="tf-modal-btn tf_btn">
-                                <span><?php echo esc_html($enquery_button_text); ?>
-                            </span></a></div>
-                            <?php
-                        }
-                        ?>
                     </div>
                     <?php } ?>
                     <div class="tf-faq-items-wrapper">

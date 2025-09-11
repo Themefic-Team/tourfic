@@ -66,9 +66,7 @@
   .tf-booking-forms-wrapper {
     margin-top: 0;
     position: relative;
-    @media only screen and (max-width: 1366px) {
-      overflow: hidden;
-    }
+    overflow-x: clip;
   }
   .tf-booking-form-tab-mobile{
     display: none;
@@ -111,13 +109,10 @@
       @media #{$max768} {
         max-width: 500px;
         margin: auto;
-        gap: 30px;
+        gap: 24px;
       }
       @media #{$max575} {
         max-width: 100%;
-      }
-      @media #{$max320} {
-        gap: 25px;
       }
       &__left {
         max-width: 310px;
@@ -150,6 +145,9 @@
             padding: 8px;
             border-radius: 4px;
             cursor: pointer;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
             &::before {
               font-size: 0.875rem;
               line-height: 1.85;
@@ -158,9 +156,6 @@
             &:hover {
               background: $color-brand-lite;
               color: $color-text;
-              text-overflow: ellipsis;
-              overflow: hidden;
-              white-space: nowrap;
             }
           }
         }
@@ -250,6 +245,9 @@
         &.tf-pick-drop-location.active {
           .tf_pickup_location {
             min-width: 500px;
+            @media (max-width: 1500px) {
+              min-width: auto;
+            }
             @media #{$max768} {
               min-width: auto;
               width: 100%;
@@ -312,14 +310,6 @@
                 height: auto;
               }
             }
-          }
-        }
-      }
-      .tf-search__form__fieldset__right {
-        .tf-search__form__submit {
-          @media only screen and (max-width: 1320px) {
-            position: absolute;
-            bottom: 40px;
           }
         }
       }
@@ -640,6 +630,10 @@
       color: $color-white;
       margin: auto;
       margin-top: 20px;
+      @media (max-width: 1320px) {
+        display: none;
+        margin-top: 0;
+      }
       ul {
         margin: 0;
         padding: 0;
@@ -700,6 +694,13 @@
           }
         }
       }
+      &.tf-mobile-location{
+        display: none;
+        @media (max-width: 1320px) {
+          display: block;
+          margin: 0;
+        }
+      }
     }
   }
 }
@@ -743,8 +744,3 @@
   }
   
 }
-
-
-// .flatpickr-calendar.open{
-//   right: 0;
-// }

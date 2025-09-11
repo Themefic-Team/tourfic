@@ -785,8 +785,8 @@ class TF_Setup_Wizard {
 		$tf_hotel_archive_template     = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['hotel-archive'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['hotel-archive'] : 'design-1';
 		$tf_tour_single_template       = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-tour'] : 'design-1';
 		$tf_tour_archive_template      = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['tour-archive'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['tour-archive'] : 'design-1';
-		$tf_apartment_single_template  = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-apartment'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-apartment'] : 'default';
-		$tf_apartment_archive_template = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['apartment-archive'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['apartment-archive'] : 'default';
+		$tf_apartment_single_template  = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-apartment'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-apartment'] : 'design-1';
+		$tf_apartment_archive_template = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['apartment-archive'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['apartment-archive'] : 'design-1';
         $tf_car_single_template  = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-car'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['single-car'] : 'design-1';
 		$tf_car_archive_template = ! empty( Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['car-archive'] ) ? Helper::tf_data_types( Helper::tfopt( 'tf-template' ) )['car-archive'] : 'design-1';
 		?>

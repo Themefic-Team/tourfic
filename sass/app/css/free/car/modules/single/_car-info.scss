@@ -19,9 +19,6 @@
                         border: 1px solid $color-brand-lite;
                         padding: 8px;
                         position: relative;
-                        i{
-                            font-size: 1.25rem;
-                        }
                         @media #{$max1024}{
                             width: calc(33% - 8px);
                         }
@@ -37,6 +34,17 @@
                                 opacity: 1;
                             }
                         }
+
+                        i{
+                            font-size: 1.25rem;
+                        }
+
+                        svg{
+                            path{
+                                stroke: $color-text;
+                            }
+                        }
+                      
                         .tf-car-info-tooltip{
                             visibility: hidden;
                             opacity: 0;

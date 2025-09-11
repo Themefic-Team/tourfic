@@ -333,6 +333,7 @@ TF_Settings::option( 'tf_settings', array(
 									'label'    => esc_html__( 'Archive & Search Result Banner Image', 'tourfic' ),
 									'subtitle' => esc_html__( 'Upload Banner Image for this hotel archive template.', 'tourfic' ),
 									'library' => 'image',
+									'default' => TF_ASSETS_ADMIN_URL . "images/hotel-placeholder.jpg",
 									'dependency' => array( 'hotel-archive', '==', 'design-2' ),
 								),
 								array(
@@ -341,6 +342,7 @@ TF_Settings::option( 'tf_settings', array(
 									'label'    => esc_html__( 'Archive & Search Result Banner Image', 'tourfic' ),
 									'subtitle' => esc_html__( 'Upload Banner Image for this hotel archive template.', 'tourfic' ),
 									'library' => 'image',
+									'default' => TF_ASSETS_ADMIN_URL . "images/hotel-placeholder.jpg",
 									'dependency' => array( 'hotel-archive', '==', 'design-3' ),
 								),
 								array(
@@ -563,6 +565,7 @@ TF_Settings::option( 'tf_settings', array(
 									'label'    => esc_html__( 'Archive & Search Result Banner Image', 'tourfic' ),
 									'subtitle' => esc_html__( 'Upload Banner Image for this tour archive template.', 'tourfic' ),
 									'library' => 'image',
+									'default' => TF_ASSETS_ADMIN_URL . "images/tour-placeholder.jpg",
 									'dependency' => array( 'tour-archive', '==', 'design-2' ),
 								),
 								array(
@@ -571,6 +574,7 @@ TF_Settings::option( 'tf_settings', array(
 									'label'    => esc_html__( 'Archive & Search Result Banner Image', 'tourfic' ),
 									'subtitle' => esc_html__( 'Upload Banner Image for this tour archive template.', 'tourfic' ),
 									'library' => 'image',
+									'default' => TF_ASSETS_ADMIN_URL . "images/tour-placeholder.jpg",
 									'dependency' => array( 'tour-archive', '==', 'design-3' ),
 								),
 								array(
@@ -722,6 +726,7 @@ TF_Settings::option( 'tf_settings', array(
 									'label'    => esc_html__( 'Archive & Search Result Banner Image', 'tourfic' ),
 									'subtitle' => esc_html__( 'Upload Banner Image for this tour archive template.', 'tourfic' ),
 									'library' => 'image',
+									'default' => TF_ASSETS_ADMIN_URL . "images/apartment-placeholder.webp",
 									'dependency' => array( 'apartment-archive', '==', 'design-1' ),
 								),
 								array(
@@ -730,6 +735,7 @@ TF_Settings::option( 'tf_settings', array(
 									'label'    => esc_html__( 'Archive & Search Result Banner Image', 'tourfic' ),
 									'subtitle' => esc_html__( 'Upload Banner Image for this tour archive template.', 'tourfic' ),
 									'library' => 'image',
+									'default' => TF_ASSETS_ADMIN_URL . "images/apartment-placeholder.webp",
 									'dependency' => array( 'apartment-archive', '==', 'design-2' ),
 								),
 								array(
@@ -853,6 +859,7 @@ TF_Settings::option( 'tf_settings', array(
 									'label'    => esc_html__( 'Archive & Search Result Banner Image', 'tourfic' ),
 									'subtitle' => esc_html__( 'Upload Banner Image for this tour archive template.', 'tourfic' ),
 									'library' => 'image',
+									'default' => TF_ASSETS_ADMIN_URL . "images/carrental-placeholder.png",
 									// 'dependency' => array( 'car-archive', '==', 'design-1' ),
 								),
 								array(

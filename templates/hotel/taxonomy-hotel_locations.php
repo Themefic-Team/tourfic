@@ -36,7 +36,8 @@ $taxonomy_slug = $term->slug;
 $max = '8';
 
 $tf_location_meta      = get_term_meta( $term->term_id, 'tf_hotel_location', true );
-$tf_location_image = ! empty( $tf_location_meta['image'] ) ? $tf_location_meta['image'] : '';
+$tf_hotel_arc_banner = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel_archive_design_2_bannar'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel_archive_design_2_bannar'] : '';
+$tf_location_image = ! empty( $tf_location_meta['image'] ) ? $tf_location_meta['image'] : $tf_hotel_arc_banner;
 
 $tf_hotel_arc_selected_template = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel-archive'] ) ?  Helper::tf_data_types(Helper::tfopt( 'tf-template' ))['hotel-archive'] : 'design-1';
 
@@ -85,6 +86,9 @@ if( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-1" ){
                 </div>
                 <div class="tf-details-right tf-sitebar-widgets tf-archive-right">
                     <div class="tf-filter-wrapper">
+                        <div class="tf-close-sidebar">
+                            <i class="fa-solid fa-xmark"></i>
+                        </div>
                         <div class="tf-filter-title">
                             <h2 class="tf-section-title"><?php esc_html_e("Filter", "tourfic"); ?></h2>
                             <button class="filter-reset-btn"><?php esc_html_e("Reset", "tourfic"); ?></button>

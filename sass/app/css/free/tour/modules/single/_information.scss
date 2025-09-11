@@ -6,10 +6,17 @@
                     display: flex;
                     text-align: center;
                     gap: 35px;
+                    @media #{$max1024}{
+                        gap: 20px;
+                    }
                     @media #{$max768}{
                         display: grid;
                         gap: 2%;
                         grid-template-columns: 48% 48%;
+                    }
+                    @media #{$max575}{
+                        gap: 16px;
+                        grid-template-columns: 1fr;
                     }
                     .tf-single-square-block {
                         width: 100%;

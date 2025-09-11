@@ -80,6 +80,11 @@ class Helper {
 
         add_action( 'wp_ajax_tf_get_min_max_price', array( $this, 'tf_get_min_max_price_callback' ) );
 		add_action( 'wp_ajax_nopriv_tf_get_min_max_price', array( $this, 'tf_get_min_max_price_callback' ) );
+
+        // archive gallery popup
+        add_action( 'wp_ajax_tf_archive_gallery_popup_qv', array( $this, 'tf_archive_gallery_popup_qv_callback' ) );
+		add_action( 'wp_ajax_nopriv_tf_archive_gallery_popup_qv', array( $this, 'tf_archive_gallery_popup_qv_callback' ) );
+
 	}
 
 	static function tfopt( $option = '', $default = null ) {
@@ -931,7 +936,7 @@ class Helper {
                 <div class="tf-booking-form-guest-and-room">
 					<?php if ( $post_type == 'tf_hotel' ) { ?>
                         <div class="tf-booking-form-guest-and-room-inner">
-                            <span class="tf-booking-form-title"><?php echo $post_type == "tf_hotel" ? esc_html( apply_filters("tf_hotel_guest_name_change", "guest") . "s & rooms") : esc_html__( "Guests & rooms", "tourfic" ); ?></span>
+                            <span class="tf-booking-form-title"><?php echo $post_type == "tf_hotel" ? esc_html_e( apply_filters("tf_hotel_guest_name_change", "Guest") . "s & rooms", "tourfic" ) : esc_html_e( "Guests & rooms", "tourfic" ); ?></span>
                             <div class="tf-booking-guest-and-room-wrap tf-archive-guest-info">
                                 <span class="tf-guest"><?php echo esc_html( $adult + $children ) ?> </span> <?php echo esc_html( apply_filters("tf_hotel_guest_name_change", "guest")); ?> <span
                                         class="tf-room"><?php echo esc_html( $room ); ?></span> <?php esc_html_e( "Rooms", "tourfic" ); ?>
@@ -1524,6 +1529,7 @@ class Helper {
 									echo '<option ' . esc_attr( $selected ) . ' value="' . esc_attr( $value ) . '">' . esc_html( $value ) . ' ' . esc_html( $adults_name . 's') . '</option>';
 								} ?>
                             </select>
+                            <i class="fas fa-chevron-down"></i>
                         </div>
                     </label>
                 </div>
@@ -1541,6 +1547,7 @@ class Helper {
 									} ?>
 
                                 </select>
+                                <i class="fas fa-chevron-down"></i>
                             </div>
                         </label>
                     </div>
@@ -1561,6 +1568,7 @@ class Helper {
 									} ?>
 
                                 </select>
+                                <i class="fas fa-chevron-down"></i>
                             </div>
                         </label>
                     </div>
@@ -1581,6 +1589,7 @@ class Helper {
 									} ?>
 
                                 </select>
+                                <i class="fas fa-chevron-down"></i>
                             </div>
                         </label>
                     </div>
@@ -1597,6 +1606,7 @@ class Helper {
 										echo '<option ' . esc_attr( $selected ) . ' value="' . esc_attr( $value ) . '">' . esc_html( $value ) . ' ' . esc_html__( "Rooms", "tourfic" ) . '</option>';
 									} ?>
                                 </select>
+                                <i class="fas fa-chevron-down"></i>
                             </div>
                         </label>
                     </div>
@@ -1972,16 +1982,7 @@ class Helper {
                         <div class="tf-booking-form-guest-and-room">
                             <?php if ( $post_type == 'tf_hotel' ) { ?>
                                 <div class="tf-booking-form-guest-and-room-inner">
-                                    <span class="tf-booking-form-title">
-                                        <?php 
-                                        if ( $post_type == "tf_hotel" ) {
-                                            /* translators: %s: Guest label, e.g. "guest" */
-                                            echo sprintf( esc_html__( '%ss & rooms', 'tourfic' ), esc_html( apply_filters( 'tf_hotel_guest_name_change', 'guest' ) ) );
-                                        } else {
-                                            echo esc_html__( 'Guests & rooms', 'tourfic' );
-                                        }
-                                        ?>
-                                    </span>
+                                    <span class="tf-booking-form-title"><?php $post_type == "tf_hotel" ? esc_html_e( apply_filters("tf_hotel_guest_name_change", "Guest") . "s & rooms", "tourfic" ) : esc_html_e( "Guests & rooms", "tourfic" ); ?></span>
                                     <div class="tf-booking-guest-and-room-wrap tf-archive-guest-info">
                                         <span class="tf-guest"><?php esc_html_e( "01", "tourfic" ); ?></span> 
                                         <?php 
@@ -2836,6 +2837,7 @@ class Helper {
 								}
 								?>
                             </select>
+                            <i class="fas fa-chevron-down"></i>
                         </div>
                     </label>
                 </div>
@@ -2856,6 +2858,7 @@ class Helper {
 								}
 								?>
                             </select>
+                            <i class="fas fa-chevron-down"></i>
                         </div>
                     </label>
                 </div>
@@ -2873,6 +2876,7 @@ class Helper {
 									} ?>
 
                                 </select>
+                                <i class="fas fa-chevron-down"></i>
                             </div>
                         </label>
                     </div>
@@ -2891,6 +2895,7 @@ class Helper {
 									}
 									?>
                                 </select>
+                                <i class="fas fa-chevron-down"></i>
                             </div>
                         </label>
                     </div>
@@ -3231,4 +3236,49 @@ class Helper {
         $query_string = http_build_query( $utm_params );
         return esc_url( $url . ( strpos( $url, '?' ) === false ? '?' : '&' ) . $query_string );
     }
+
+    /**
+	 * Archive Gallery Popup
+    */
+    function tf_archive_gallery_popup_qv_callback() {
+		// Check nonce security
+		if ( ! isset( $_POST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_nonce'] ) ), 'tf_ajax_nonce' ) ) {
+			return;
+		}
+
+		if ( ! empty( $_POST['post_type'] ) && "tf_hotel" == $_POST['post_type'] ) {
+			$meta    = get_post_meta( $_POST['post_id'], 'tf_hotels_opt', true );
+			$gallery = ! empty( $meta['gallery'] ) ? $meta['gallery'] : '';
+			if ( $gallery ) {
+				$gallery_ids = explode( ',', $gallery ); // Comma seperated list to array
+			}
+		}
+
+		if ( ! empty( $_POST['post_type'] ) && "tf_tours" == $_POST['post_type'] ) {
+			$meta    = get_post_meta( $_POST['post_id'], 'tf_tours_opt', true );
+			$gallery = ! empty( $meta['tour_gallery'] ) ? $meta['tour_gallery'] : '';
+			if ( $gallery ) {
+				$gallery_ids = explode( ',', $gallery ); // Comma seperated list to array
+			}
+		}
+
+		if ( ! empty( $_POST['post_type'] ) && "tf_apartment" == $_POST['post_type'] ) {
+			$meta    = get_post_meta( $_POST['post_id'], 'tf_apartment_opt', true );
+			$gallery = ! empty( $meta['apartment_gallery'] ) ? $meta['apartment_gallery'] : '';
+			if ( $gallery ) {
+				$gallery_ids = explode( ',', $gallery ); // Comma seperated list to array
+			}
+		}
+
+		if ( ! empty( $gallery_ids ) ) {
+			foreach ( $gallery_ids as $key => $gallery_item_id ) {
+				$image_url = wp_get_attachment_url( $gallery_item_id, 'full' );
+				?>
+                <img src="<?php echo esc_url( $image_url ); ?>" alt="" class="tf-popup-image">
+			<?php }
+		}
+		wp_die();
+	}
+
+
 }

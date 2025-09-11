@@ -246,7 +246,10 @@ class Tour {
 							if ( $author ) { ?>
                                 <input type="hidden" name="tf-author" value="<?php echo esc_attr( $author ); ?>" class="tf-post-type"/>
 							<?php } ?>
-                            <button><?php echo esc_html_e( "Check availability", "tourfic" ); ?></button>
+                            <button class="tf_btn">
+								<?php echo esc_html__("Check", "tourfic"); ?>
+								<span><?php echo esc_html__("availability", "tourfic"); ?></span>
+							</button>
                         </div>
                     </div>
                 </div>
@@ -2092,6 +2095,7 @@ class Tour {
                         <div class='tf_form-row'>
                             <label class='tf_label-row'>
                                 <div class='tf_form-inner'>
+									<i class="fa-sharp fa-solid fa-calendar-days"></i>
                                     <input type='text' name='check-in-out-date' id='check-in-out-date' class='tours-check-in-out' onkeypress="return false;" placeholder='<?php esc_html_e( "Select Date", "tourfic" ); ?>'
                                            value=''
                                            required/>

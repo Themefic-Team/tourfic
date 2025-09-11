@@ -49,6 +49,25 @@
                     }
                 }
             }
+
+            .tf-title-area{
+                @media #{$max768}{
+                    padding-bottom: 0;
+                }
+                .tf-title-wrap{
+                    align-items: center;
+                    @media #{$max768}{
+                        display: flex;
+                        flex-direction: column-reverse;
+                        align-items: flex-start;
+                    }
+                    .tf-title-right{
+                        @media #{$max768}{
+                            margin: 0 auto;
+                        }
+                    }
+                }   
+            }
         }
     }
 }

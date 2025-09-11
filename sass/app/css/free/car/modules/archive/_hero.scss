@@ -4,6 +4,7 @@
 .page-template-tf-search{
     .tf-archive-template{
         &__one{
+            padding: 0;
             .tf-archive-car-banner{
                 background: $color-gray-light;
                 height: 350px;
@@ -12,7 +13,7 @@
                 background-size: cover;
                 background-position: center;
                 @media #{$max575}{
-                    margin: 0 16px;
+                    margin: 16px 16px 0;
                 }
                 .tf-banner-content{
                     height: 100%;

@@ -87,6 +87,9 @@ class Car_Rental
         $selected_pickup_time = $default_time;
         $selected_dropoff_time = $default_time;
 
+        $car_driver_min_age = ! empty(Helper::tf_data_types(Helper::tfopt('tf-template'))['car_archive_driver_min_age']) ? Helper::tf_data_types(Helper::tfopt('tf-template'))['car_archive_driver_min_age'] : 18;
+        $car_driver_max_age = ! empty(Helper::tf_data_types(Helper::tfopt('tf-template'))['car_archive_driver_max_age']) ? Helper::tf_data_types(Helper::tfopt('tf-template'))['car_archive_driver_max_age'] : 40;
+
         if (!empty($design) && 2 == $design) {
 ?>
             <form class="tf_booking-widget-design-2 tf_hotel-shortcode-design-2" id="tf_car_booking" method="get" autocomplete="off" action="<?php echo esc_url(Helper::tf_booking_search_action()); ?>">
@@ -219,7 +222,7 @@ class Car_Rental
                         </div>
                         <div class="tf_availability_checker_box">
                             <input type="hidden" name="type" value="tf_carrental" class="tf-post-type" />
-                            <button><?php echo esc_html_e("Check availability", "tourfic"); ?></button>
+                            <button class="tf_btn"><?php echo esc_html_e("Check availability", "tourfic"); ?></button>
                         </div>
                     </div>
                 </div>
@@ -447,12 +450,6 @@ class Car_Rental
 
                 <div class="tf-driver-location-box tf-flex tf-flex-space-bttn tf-flex-align-center">
                     <div class="tf-driver-location">
-                        <?php
-                        $car_driver_min_age      = ! empty(Helper::tf_data_types(Helper::tfopt('tf-template'))['car_archive_driver_min_age']) ? Helper::tf_data_types(Helper::tfopt('tf-template'))['car_archive_driver_min_age'] : 18;
-
-                        $car_driver_max_age      = ! empty(Helper::tf_data_types(Helper::tfopt('tf-template'))['car_archive_driver_max_age']) ? Helper::tf_data_types(Helper::tfopt('tf-template'))['car_archive_driver_max_age'] : 40;
-
-                        ?>
                         <ul>
                             <li>
                                 <label><?php esc_html_e("Return in the same location", "tourfic"); ?>
@@ -676,6 +673,24 @@ class Car_Rental
                             </div>
                         </div>
                     </div>
+                    <!-- Driver Location -->
+                    <div class="tf-driver-location tf-mobile-location">
+                        <ul>
+                            <li>
+                                <label><?php esc_html_e("Return in the same location", "tourfic"); ?>
+                                    <input type="checkbox" name="same_location" checked>
+                                    <span class="tf-checkmark"></span>
+                                </label>
+                            </li>
+                            <li>
+                                <label><?php esc_html_e("Age of driver ", "tourfic"); ?>
+                                    <?php echo esc_attr($car_driver_min_age); ?>-<?php echo esc_attr($car_driver_max_age); ?>?
+                                    <input type="checkbox" name="driver_age" checked>
+                                    <span class="tf-checkmark"></span>
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
                     <div class="tf-search__form__fieldset__right">
                         <!-- Submit Button -->
                         <input type="hidden" name="type" value="tf_carrental" class="tf-post-type" />
@@ -688,12 +703,7 @@ class Car_Rental
                     </div>
                 </fieldset>
                 <!-- Driver Location -->
-                <div class="tf-driver-location">
-                    <?php
-                    $car_driver_min_age      = ! empty(Helper::tf_data_types(Helper::tfopt('tf-template'))['car_archive_driver_min_age']) ? Helper::tf_data_types(Helper::tfopt('tf-template'))['car_archive_driver_min_age'] : 18;
-                    $car_driver_max_age      = ! empty(Helper::tf_data_types(Helper::tfopt('tf-template'))['car_archive_driver_max_age']) ? Helper::tf_data_types(Helper::tfopt('tf-template'))['car_archive_driver_max_age'] : 40;
-
-                    ?>
+                <div class="tf-driver-location tf-desktop-location">
                     <ul>
                         <li>
                             <label><?php esc_html_e("Return in the same location", "tourfic"); ?>

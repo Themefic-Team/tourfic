@@ -40,12 +40,18 @@ $tf_car_arc_banner = ! empty( Helper::tf_data_types(Helper::tfopt( 'tf-template'
 							<span><?php echo esc_html( $post_count ); ?> </span>
 						</div>
 						<span><?php echo ')'; ?> </span>
+                        <div class="tf-archive-filter-showing">
+                            <i class="ri-equalizer-line"></i>
+                        </div>
                     </div>
                 </div>
                 <div class="tf-car-details-column tf-flex tf-flex-gap-32">
                     
                     <div class="tf-car-archive-sidebar">
                         <div class="tf-sidebar-header tf-flex tf-flex-space-bttn tf-flex-align-center">
+                            <div class="tf-close-sidebar">
+                                <i class="fa-solid fa-xmark"></i>
+                            </div>
                             <h4><?php esc_html_e("Filter", "tourfic") ?></h4>
                             <button class="filter-reset-btn"><?php esc_html_e("Reset", "tourfic"); ?></button>
                         </div>

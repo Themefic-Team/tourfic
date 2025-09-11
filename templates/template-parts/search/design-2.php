@@ -69,6 +69,9 @@ if( !empty($_GET['type']) && $_GET['type']=="tf_tours" ){
                 </div>
                 <div class="tf-details-right tf-sitebar-widgets tf-archive-right">
                     <div class="tf-filter-wrapper">
+                        <div class="tf-close-sidebar">
+                            <i class="fa-solid fa-xmark"></i>
+                        </div>
                         <div class="tf-filter-title">
                             <h2 class="tf-section-title"><?php esc_html_e("Filter", "tourfic"); ?></h2>
                             <button class="filter-reset-btn" style="display: block;"><?php esc_html_e("Reset", "tourfic"); ?></button>
