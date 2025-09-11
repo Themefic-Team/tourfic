@@ -4595,7 +4595,7 @@ li.tf-filter-item {
 
 .tf_booking-widget.default-form .tf_form-inner {
   padding: 0;
-  display: flex;
+  display: flex !important;
   align-items: center;
   position: relative;
 }

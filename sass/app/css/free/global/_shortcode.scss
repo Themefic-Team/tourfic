@@ -184,7 +184,7 @@
         border: none;
         .tf_form-inner {
             padding: 0;
-            display: flex;
+            display: flex!important;
             align-items: center;
             position: relative;
             input{
