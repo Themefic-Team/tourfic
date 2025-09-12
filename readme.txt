@@ -406,8 +406,8 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 = 2.17.2 – September 12, 2025 =
 
-- Updated readme.txt file info.
-- Improved Plugin System stability.
+- Updated: readme.txt file information.
+- Improved: Plugin system stability.
 
 = 2.17.1 – September 03, 2025 =
 
