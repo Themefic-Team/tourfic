@@ -1,17 +1,16 @@
 <?php
 /**
- * Plugin Name:     Tourfic — Travel, Hotel & Car Rental Booking for WooCommerce
+ * Plugin Name:     Tourfic – Travel Booking, Hotel Booking & Car Rental WordPress Plugin
  * Plugin URI:      https://themefic.com/tourfic
  * Description:     The ultimate plugin for tour, travel, accommodation, and hotel bookings. Effortlessly manage your entire online travel booking system, including orders and any WooCommerce payment method.
  * Author:          Themefic
  * Author URI:      https://themefic.com
  * Text Domain:     tourfic
  * Domain Path:     /lang/
- * Version:         2.17.1
+ * Version:         2.17.2
  * Tested up to:    6.8
  * WC tested up to: 10.0
- * Requires PHP:    7.4
- * Requires Plugins: woocommerce
+ * Requires PHP:    7.4 
  * Elementor tested up to: 3.31
  * License: GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -28,7 +27,7 @@ final class Tourfic {
 	 * @var string
 	 */
 
-	const VERSION = '2.17.1';
+	const VERSION = '2.17.2';
 
 	/**
 	 * Minimum PHP version required.
