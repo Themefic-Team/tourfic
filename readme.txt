@@ -1,9 +1,9 @@
-=== Tourfic — Travel, Hotel & Car Rental Booking for WooCommerce ===
+=== Tourfic – Travel Booking, Hotel Booking & Car Rental WordPress Plugin ===
 Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi, hasanet
 Tags: travel-booking, hotel-booking, tour-booking, car-rental, multivendor-marketplace
 Requires at least: 5.4
 Tested up to: 6.8
-Stable tag: 2.17.1
+Stable tag: 2.17.2
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -403,6 +403,11 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 22. Map Template(Pro)
 
 == Changelog ==
+
+= 2.17.2 – September 12, 2025 =
+
+- Updated readme.txt file info.
+- Improved Plugin System stability.
 
 = 2.17.1 – September 03, 2025 =
 
