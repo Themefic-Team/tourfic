@@ -460,6 +460,7 @@ class Enqueue {
 			wp_register_style( 'tf-elementor-single-enquiry', TF_PRO_ASSETS_URL . 'app/css/elementor/single/enquiry.min.css', '', TF_VERSION );
 			wp_register_style( 'tf-elementor-single-booking-form', TF_PRO_ASSETS_URL . 'app/css/elementor/single/booking-form.min.css', '', TF_VERSION );
 			wp_register_style( 'tf-elementor-single-nearby-places', TF_PRO_ASSETS_URL . 'app/css/elementor/single/nearby-places.min.css', '', TF_VERSION );
+			wp_register_style( 'tf-elementor-single-review', TF_PRO_ASSETS_URL . 'app/css/elementor/single/review.min.css', '', TF_VERSION );
 		}
 	}
 
