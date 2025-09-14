@@ -99,7 +99,25 @@ class Review extends Widget_Base {
 			'tab'   => Controls_Manager::TAB_STYLE,
 		]);
 
-        
+        $this->add_control( 'tf_title_heading', [
+			'type'  => Controls_Manager::HEADING,
+			'label' => __( 'Title', 'tourfic' ),
+		] );
+
+		$this->add_control( 'tf_title_color', [
+			'label'     => esc_html__( 'Title Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors'  => [
+				'{{WRAPPER}} .tf-section-title' => 'color: {{VALUE}};',
+				'{{WRAPPER}} .section-heading' => 'color: {{VALUE}};',
+			],
+		]);
+
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+            'label'    => esc_html__( 'Title Typography', 'tourfic' ),
+			'name'     => "tf_title_typography",
+			'selector' => "{{WRAPPER}} .tf-section-title, {{WRAPPER}} .section-heading",
+		]);
 
 		$this->end_controls_section();
 	}
@@ -650,7 +668,7 @@ class Review extends Widget_Base {
 
 		if ($style == 'design-1') {
 		?>
-        <div class="tf-single-template__one tf-single-review__style-1">
+        <div class="tf-single-template__one tf-car-single-review__style-1">
             <div class="tf-review-section" id="tf-reviews">
             <?php if ( $comments ) {
                 $tf_overall_rate = [];
@@ -658,7 +676,7 @@ class Review extends Widget_Base {
                 TF_Review::tf_get_review_fields( $fields );
                 ?>
                 <?php if(!empty($review_sec_title)){ ?>   
-                    <h3><?php echo esc_html($review_sec_title); ?></h3>
+                    <h3 class="section-heading"><?php echo esc_html($review_sec_title); ?></h3>
                 <?php } ?>
                 <div class="tf-review-data-inner">
 

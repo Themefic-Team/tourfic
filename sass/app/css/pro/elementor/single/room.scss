@@ -1,112 +1,240 @@
 @import '../../../../../common/variable';
 @import '../../../../../common/mixin';
 
-.tf-single-review__style-1{
+.tf-single-hotel-room__style-1{
     padding: 0;
-    .tf-review-wrapper{
-        .no-review{
-            h4{
-                font-size: 1.25rem;
-                color: $color-heading;
+    .tf-rooms-sections{
+        .tf-rooms{
+            @media #{$max768}{
+                overflow-x: scroll;
+                width: auto;
             }
-        }
-        .tf-review-data.tf-box {
-            border-radius: 0px;
-            flex-basis: 20%;
-            box-shadow: none;
-            padding: 0px;
-            .tf-review-data-inner{
-                gap: 0px;
+            .hotel-room-wrap {
+                overflow-x: unset;
             }
-            .tf-review-data{
-                padding: 30px;
-            }
-            .tf-list{
-                margin-top: 0px;
-                text-align: center;
+            .tf-availability-table{
+                background-color: $color-white;
+                box-shadow: 0px 13px 30px 0px rgba(224,232,238,0.32);
+                border-radius: 5px;
+                margin-bottom: 0px;
+                border-collapse: collapse;
                 width: 100%;
-                li{
-                    display: block;
-                }
-            }
-            p,li{
-                text-transform: capitalize;
-            }
-            .tf-review-data-average p {
-                text-align: center;
-                font-size: 1.875rem;
-                color: $color-primary;
-                font-weight: 600;
-                @include bd-radius(5px);;
-                width: 100%;
-                height: 75px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                margin-bottom: 0;
-            }
-            .tf-review-data-label{
-                p{
-                    color: $color-heading;
-                }
-            }
-            .tf-review-all-info {
-                li {
-                    font-size: 0.875rem;
-                    color: $color-primary;
-                }
-            }
-    
-            .tf-review-data-features {
-                padding: 30px;
-            
-                .tf-percent-progress{
-                    column-gap: 70px;
-                    flex-wrap: wrap;
-                    @media #{$max1024}{
-                        column-gap: 24px;
-                    }
-                    @media #{$max768}{
-                        column-gap: 16px;
-                    }
-                }
-                .tf-progress-bar {
-                    height: 7px;
-                    background: $color-brand-lite;
-                    border-radius: 7px;
-                }
-                
-                .tf-progress-item {
-                    width: 42%;
-                    margin-bottom: 16px;
-                    &:nth-child(5),
-                    &:last-child{
-                        margin-bottom: 0;
-                    }
-                    @media #{$max768}{
-                        width: 40%;
-                    }
-                    @media #{$max320}{
-                        width: 100%;
-                    }
-                    @media #{$max1024}{
-                        width: 42%;
-                    }
-                    
-                    .tf-review-feature-label{
-                        p{
-                            margin-bottom: 0;
+                border-left: none;
+                &>thead{
+                    background-color: $color-primary;
+                    tr{
+                        th{
+                            text-align: left;
+                            color: $color-white;
+                            border: 0px solid;
+                            border-radius: 5px 5px 0px 0px;
+                            padding: 13px 30px;
+                            font-size: 1rem;
+                            font-weight: 500;
+                            border: 1px solid $color-border-lite;
                         }
                     }
-                    
                 }
-                
+                &>tbody{
+                    tr{
+                        td{
+                            border: 1px solid $color-border-lite;
+                            padding: 30px;
+                            border-right: none;
+                            vertical-align: top;
+                            text-align-last: left;
+                            @media #{$max768}{
+                                padding: 20px;
+                            }
+                            .tf-room-preview-img{
+                                margin-right: 20px;
+                                border-radius: 4px;
+                                position: relative;
+                                @media #{$max1024}{
+                                    width: 100%;
+                                    margin-bottom: 10px;
+                                    margin-right: 0;
+                                }
+                                img{
+                                    border-radius: 4px;
+                                    height: 100%;
+                                    max-width: 170px;
+                                    min-height: 155px;
+                                }
+                                span{
+                                    display: inline-block;
+                                    font-weight: 500;
+                                    background: $color-primary;
+                                    border-radius: 4px 0px 0px 0px;
+                                    padding: 3px 14px;
+                                    position: absolute;
+                                    left: 0;
+                                    top: 0;
+                                    color: $color-white;
+                                    font-size: 0.875rem;
+                                }
+                                
+                            }
+                            .tf-features-infos{
+                                @media #{$max1024}{
+                                    width: 100%!important;
+                                }
+                                .tf-room-type{
+                                    h3{
+                                        font-size: 1.25rem;
+                                        line-height: normal;
+                                        color: $color-heading;
+                                        a{
+                                            color: $color-heading;
+                                            text-decoration: none;
+                                        }
+                                    }
+                                }
+                                ul{
+                                    margin: 0;
+                                    padding: 0;
+                                    margin-bottom: 15px;
+                                    li{
+                                        display: inline-block;
+                                        background: $color-gray-light;
+                                        border-radius: 5px;
+                                        padding: 10px;
+                                        margin: 5px 10px 5px 0px;
+                                        line-height: 1.3;
+                                        font-size: 0.75rem;
+                                        i,
+                                        img{
+                                            margin-right: 5px;
+                                        }
+                                    }
+                                }
+                                > a{
+                                    color: $color-primary;
+                                }
+                            }
+                            .hotel-room-book{
+                                width: 100%;
+                                margin-top: 10px;
+                            }
+                        }
+                        td.description{
+                            width: 65%;
+                            padding: 30px;
+                            border-left: 0px;
+                            @media #{$max768}{
+                                width: 300px;
+                                padding: 20px;
+                                display: table-caption;
+                                border-top: 0;
+                            }
+                            .tf-room-description-box{
+                                width: 100%;
+                                .tf-room-detail-qv{
+                                    display: block;
+                                    &.tf-room-gallery-info{
+                                        text-decoration: underline;
+                                    }
+                                }
+                            }
+                            .bed-facilities{
+                                margin: 8px 0;
+                                p{
+                                    margin-bottom: 0;
+                                }
+                            }
+                        }
+                        td.pax{
+                            .tf-tooltip{
+                                @media #{$max768}{
+                                    width: 100px
+                                }
+                                .room-detail-icon {
+                                    margin: 15px 0 0 0;
+                                    display: flex;
+                                    align-items: center;
+                                    gap: 10px;
+                                    .room-icon-wrap {
+                                        border: 1px solid $color-border-lite;
+                                        border-radius: 4px;
+                                        padding: 0;
+                                        margin-right: 0;
+                                        width: 40px;
+                                        height: 40px;
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        i{
+                                            font-size: 1rem;
+                                            color: $color-text;
+                                        }
+                                    }
+                                    .icon-text {
+                                        font-size: 0.875rem;
+                                        color: $color-text;
+                                    }
+                                }
+                                &:last-child{
+                                    .room-detail-icon {
+                                        margin-top: 10px;
+                                    }
+                                }
+                            }
+                        }
+                        td.reserve{
+                            .tf-room{
+                                margin-top: 15px;
+                                &>span{
+                                    display: block;
+                                    margin-bottom: 5px;
+                                }
+                            }
+                            .tf-price{
+                                font-size: 1.5rem;
+                                font-weight: 500;
+                                color: $color-heading;
+                                line-height: normal;
+                                @media #{$max768}{
+                                    display: flex;
+                                    flex-direction: column;
+                                    gap: 5px;
+                                }
+                                del{
+                                    font-size: 1.2rem;
+                                    font-weight: 400;
+                                }
+                            }
+                            .price-per-night{
+                                font-size: .875rem;
+                                color: $color-text;
+                            }
+                            .hotel-room-availability{
+                                margin-top: 25px;
+                            }
+                            .room-selection-wrap{
+                                select{
+                                    border: 1px solid $color-border-lite;
+                                    text-align: center;
+                                    padding: 8px;
+                                    cursor: pointer;
+                                }
+                            }
+                        }
+                        td.options{
+                            ul{
+                                list-style: none;
+                                margin-left: 0;
+                                margin-bottom: 0;
+                                li{
+                                    margin-bottom: 4px;
+                                    .room-extra-icon{
+                                        margin-right: 5px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
-        }
-
-        .tf-review-reply{
-            border-bottom: 1px solid $color-border-lite;
-            padding-bottom: 50px;
         }
     }
 }
@@ -481,171 +609,5 @@
         padding: 10px 10px;
         color: $color-text;
         margin: 30px 0 10px 0;
-    }
-}
-
-.tf-car-single-review__style-1{
-    .tf-review-section{
-        margin-bottom: 32px;
-        h3{
-            color: $color-heading;
-            font-size: 1.313rem;
-            font-weight: 400;
-            margin-bottom: 16px;
-            margin-top: 0px;
-        }
-        .tf-review-form-wrapper{
-            p{
-                margin: 0 0 20px 0;
-            }
-        }
-        .tf-clients-reviews ~ .tf-review-form-wrapper{
-            margin-top: 20px;
-        }
-        .tf-review-submit{
-            margin-top: 16px;
-        }
-        .tf-review-form-container{
-            min-width: auto;
-            background:  transparent;
-            form{
-                padding: 32px;
-                background: var(--tf-filling-foreground);
-                border-radius: 8px;
-                @media #{$max575}{
-                    padding: 24px;
-                }
-            }
-            .tf-visitor-info{
-                margin: 20px 0px;
-            }
-            .tf-rating-wrapper{
-                margin-bottom: 20px;
-            }
-            .tf-review-submit{
-                input[type="submit"]{
-                    padding: 16px 32px;
-                    border-radius: 8px;
-                    background: $color-primary;
-                    color: $color-white;
-                    font-size: 1rem;
-                    font-weight: 700;
-                    cursor: pointer;
-                    border: 0px solid;
-                }
-            }
-            textarea{
-                background: transparent;
-                border-color: $color-brand-lite;
-            }
-        }
-        .tf-review-data{
-            margin-bottom: 32px;
-            .tf-review-data-average{
-                .avg-review{
-                    color: $color-text;
-                    font-size: 2.375rem;
-                    font-weight: 700;
-                    i{
-                        font-size: 1.25rem; 
-                        color: $color-primary;
-                    }
-                }
-                .tf-review-all-info{
-                    p{
-                        color: $color-text;
-                        font-size: 1rem;
-                        font-weight: 400;
-                        margin: 0;
-                    }
-                }
-            }
-        }
-
-        .tf-review-data-features {
-            .tf-percent-progress{
-                display: flex;
-                gap: 16px 32px;
-                flex-wrap: wrap;
-            }
-            .tf-progress-bar {
-                height: 5px;
-                background: $color-brand-lite;
-                border-radius: 32px;
-            }
-            
-            .tf-progress-item {
-                width: calc(50% - 16px);
-                @media #{$max768}{
-                    width: 100%;
-                }
-                
-            }
-            
-            .tf-progress-bar {
-                position: relative;
-                margin-bottom: 8px;
-
-                .percent-progress {
-                    position: absolute;
-                    background: $color-primary;
-                    top: 0;
-                    left: 0;
-                    bottom: 0;
-                    border-radius: 7px;
-                }
-            }
-            
-            .tf-review-feature-label{
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: space-between;
-                p{
-                    margin: 0;
-                    color: $color-text;
-                    font-size: 0.75rem;
-                    font-weight: 400;
-                    text-transform: capitalize;
-                    &.feature-rating{
-                        font-weight: 700;
-                    }
-                }
-            }
-        }
-        .tf-clients-reviews{
-            margin-top: 32px;
-            .tf-reviews-item{
-                flex-wrap: nowrap;
-                .tf-reviews-avater{
-                    img{
-                        width: 56px;
-                        height: 56px;
-                        border-radius: 50%;
-                    }
-                }
-                .tf-reviews-text{
-                    width: calc(100% - 62px);
-                    .tf-review-rating{
-                        font-size: 0;
-                        color: $color-primary;
-                        display: flex;
-                        margin-bottom: 8px;
-                        >div{
-                            display: flex;
-                            gap: 8px;
-                            i{
-                                font-size: initial;
-                            }
-                        }
-                    }
-                    .tf-reviews-meta{
-                        font-weight: 700;
-                    }
-                    p{
-                        margin: 15px 0 0 0;
-                    }
-                }
-            }
-        }
     }
 }
