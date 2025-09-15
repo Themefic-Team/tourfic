@@ -961,7 +961,7 @@ class Template_Builder {
                 if ($template_path) {
                     // Set up the content rendering callback
                     $template_module->set_print_callback(function() use ($post) {
-                        echo wp_kses_post( \Elementor\Plugin::$instance->frontend->get_builder_content($post->ID, true) );
+                        echo \Elementor\Plugin::$instance->frontend->get_builder_content($post->ID, true); //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                     });
                     
                     return $template_path;
@@ -1059,7 +1059,7 @@ class Template_Builder {
             if ($template_path) {
                 // Set up the content rendering callback
                 $template_module->set_print_callback(function() use ($template_post) {
-                    echo wp_kses_post( \Elementor\Plugin::$instance->frontend->get_builder_content($template_post->ID, true) );
+                    echo \Elementor\Plugin::$instance->frontend->get_builder_content($template_post->ID, true); //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                 });
                 
                 return $template_path;
