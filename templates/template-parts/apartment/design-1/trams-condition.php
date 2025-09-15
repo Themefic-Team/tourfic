@@ -1,4 +1,7 @@
 <?php 
+// Don't load directly
+defined( 'ABSPATH' ) || exit;
+
 $tc = !empty($meta['terms_and_conditions']) ? $meta['terms_and_conditions'] : '';
 if ( $tc ) { ?>
 <!-- apartment Policies Starts -->        

@@ -39,7 +39,7 @@ class Tour_Type_Filter extends \WP_Widget {
 	public function widget( $args, $instance ) {
 
 		//check if is Hotel
-		$posttype = isset( $_GET['type'] ) ? $_GET['type'] : get_post_type();
+		$posttype = isset( $_GET['type'] ) ? sanitize_text_field( wp_unslash($_GET['type']) ) : get_post_type();
 
 		if ( is_admin() || $posttype == 'tf_tours' ) {
 			extract( $args );
@@ -61,7 +61,15 @@ class Tour_Type_Filter extends \WP_Widget {
 
 			$get_terms = get_terms( $taxonomy );
 
-			$search_types_query = !empty($_GET['types']) ? $_GET['types'] : array();
+			$search_types_query = array();
+            if ( isset( $_GET['types'] ) ) {
+                if ( is_array( $_GET['types'] ) ) {
+                    $search_types_query = array_map( 'sanitize_text_field', wp_unslash( $_GET['types'] ) );
+                } else {
+                    $search_types_query = array( sanitize_text_field( wp_unslash( $_GET['types'] ) ) );
+                }
+            }
+
 			echo "<div class='tf-filter'><ul>";
 			foreach ( $get_terms as $key => $term ) {
 				$id = $term->term_id;

@@ -193,6 +193,9 @@
                                 @media #{$max1024}{
                                     font-size: 0.875rem;
                                 }
+                                @media #{$max575}{
+                                   content: "→";
+                                }
                             }
                         }
                         &:nth-child(1),

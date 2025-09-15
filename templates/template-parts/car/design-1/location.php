@@ -1,3 +1,7 @@
+<?php
+// Don't load directly
+defined( 'ABSPATH' ) || exit;
+?>
 <div class="tf-car-location" id="tf-location">
     <?php if(!empty($location_title)){ ?>   
     <h3><?php echo esc_html($location_title); ?></h3>

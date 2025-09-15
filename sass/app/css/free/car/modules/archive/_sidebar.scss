@@ -10,11 +10,18 @@
                     border-radius: 16px;
                     background: $color-filling-fg;
                     padding: 32px;
+                    position: relative;
                     @media #{$max1024}{
-                        width: 280px;
+                        width: 100%;
+                        display: none;
+
                     }
                     @media #{$max768}{
                         width: 100%;
+                    }
+
+                    &.tf-filter-show{
+                        display: block;
                     }
                     
                     .tf-sidebar-header{
@@ -34,6 +41,19 @@
                             border: 0px solid;
                             cursor: pointer;
                             display: none;
+                            &:hover{
+                                color: $color-primary;
+                            }
+                        }
+                        .tf-close-sidebar {
+                            display: none;
+                            @media #{$max1024}{
+                                position: absolute;
+                                right: 17px;
+                                top: 12px;
+                                display: block;
+                                color: $color-danger;
+                            }
                         }
                     }
                     .tf_widget{
@@ -201,6 +221,7 @@
                                         &.active{
                                             label{
                                                 background: $color-primary;
+                                                color: $color-white;
                                             }
                                         }
                                     }

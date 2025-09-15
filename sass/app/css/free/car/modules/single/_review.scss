@@ -2,7 +2,6 @@
     .tf-single-template{
         &__one{
             .tf-review-section{
-                margin-bottom: 32px;
                 h3{
                     color: $color-heading;
                     font-size: 1.313rem;
@@ -48,11 +47,15 @@
                             font-weight: 700;
                             cursor: pointer;
                             border: 0px solid;
+                            &::placeholder{
+                                color: $color-white;
+                            }
                         }
                     }
                     textarea{
                         background: transparent;
                         border-color: $color-brand-lite;
+                        
                     }
                 }
                 .tf-review-data{
@@ -132,6 +135,14 @@
                     margin-top: 32px;
                     .tf-reviews-item{
                         flex-wrap: nowrap;
+                        margin-bottom: 20px;
+                        padding-bottom: 20px;
+                        border-bottom: 1px solid $color-border-lite;
+                        &:last-child{
+                            margin-bottom: 0px;
+                            padding-bottom: 0px;
+                            border-bottom: 0;
+                        }
                         .tf-reviews-avater{
                             img{
                                 width: 56px;

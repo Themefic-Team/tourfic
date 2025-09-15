@@ -58,10 +58,10 @@ function tf_tours_booking_function() {
 	$tf_package_pricing = ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
 
 	// Visitor Details
-	$tf_visitor_details = !empty($_POST['traveller']) ? $_POST['traveller'] : "";
+	$tf_visitor_details = !empty($_POST['traveller']) ? array_map( 'sanitize_text_field', wp_unslash( $_POST['traveller'] ) ) : "";
 
 	// Booking Confirmation Details
-	$tf_confirmation_details = !empty($_POST['booking_confirm']) ? $_POST['booking_confirm'] : "";
+	$tf_confirmation_details = !empty($_POST['booking_confirm']) ? array_map( 'sanitize_text_field', wp_unslash( $_POST['booking_confirm'] ) ) : "";
 
 	// Booking Type
 	$tf_booking_type = function_exists('is_tf_pro') && is_tf_pro() ? ( !empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1 ) : 1;
@@ -352,8 +352,12 @@ function tf_tours_booking_function() {
 	
 	$tour_extra_meta = ! empty( $meta['tour-extra'] ) ? $meta['tour-extra'] : '';
 	if(!empty($tour_extra_meta)){
-		$tours_extra = explode(',', $_POST['tour_extra']);
-		$tour_extra_quantity = explode(',', $_POST["tour_extra_quantity"]);
+		$tf_tours_extra = isset( $_POST['tour_extra'] ) && ! empty( $_POST['tour_extra'] ) ?  sanitize_text_field(wp_unslash( $_POST['tour_extra'] )) : [];
+		$tours_extra = ! empty( $tf_tours_extra ) ? explode( ',', $tf_tours_extra ) : [];
+
+		$tf_tour_extra_quantity = isset( $_POST['tour_extra_quantity'] ) && ! empty( $_POST['tour_extra_quantity'] ) ? sanitize_text_field( wp_unslash( $_POST['tour_extra_quantity'] ) ) : [];
+		$tour_extra_quantity = ! empty( $tf_tour_extra_quantity ) ? explode( ',', $tf_tour_extra_quantity ) : [];
+
 		foreach($tours_extra as $extra_key => $extra){
 			$tour_extra_pricetype = !empty( $tour_extra_meta[$extra]['price_type'] ) ? $tour_extra_meta[$extra]['price_type'] : 'fixed';
 			if( $tour_extra_pricetype=="fixed" ){
@@ -1162,7 +1166,7 @@ function tf_tours_booking_function() {
 					'{id}' => $post_id,
 					'{title}' => urlencode(get_the_title($post_id)),
 					'{extras}' => sanitize_text_field($_POST["tour_extra"]),
-					'{extras_title}' => urlencode(html_entity_decode(strip_tags($tour_extra_title))),
+					'{extras_title}' => urlencode(html_entity_decode(wp_strip_all_tags($tour_extra_title))),
 				);
 
 				if( $pricing_rule == 'group' ) {

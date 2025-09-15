@@ -5,10 +5,6 @@ body{
     line-height: 1.5;
     font-weight: 400;
 }
-i{
-    line-height: 1.5;
-}
-
 
 .tf-list {
     list-style: none;
@@ -184,6 +180,9 @@ i{
 .tf-mt-24{
     margin-top: 24px;
 }
+.tf-mb-20{
+    margin-bottom: 20px;
+}
 .tf-mb-24{
     margin-bottom: 24px;
 }
@@ -193,6 +192,7 @@ i{
 .tf-mb-30{
     margin-bottom: 30px;
 }
+
 .tf-mt-40{
     margin-top: 40px;
 }
@@ -214,6 +214,12 @@ i{
 
 .sp-20 {
     padding: 20px 0;
+}
+.sp-b-20 {
+    padding-bottom: 20px;
+}
+.sp-t-20 {
+    padding-top: 20px;
 }
 .sp-30 {
     padding: 30px 0;

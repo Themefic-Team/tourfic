@@ -90,7 +90,7 @@
                             scrollTop: $("#rooms").offset().top
                         }, 500);
                         $("#rooms").html(data);
-                        $('.tf-room-filter').show();
+                        $('.tf-room-filter').addClass('tf-filter-show');
                         $("#tf-single-hotel-avail .tf-submit").removeClass('tf-btn-loading');
                      } else {
                          notyf.error(tf_params.no_room_found);
@@ -129,9 +129,12 @@
          */
         $(document).on('click', '.hotel-room-availability', function (e) {
             e.preventDefault();
-
+            var offset = 200;
+            if (window.innerWidth <= 768) {
+                offset = 100;
+            }
             $('html, body').animate({
-                scrollTop: $("#tf-single-hotel-avail").offset().top
+                scrollTop: $("#tf-single-hotel-avail").offset().top - offset
             }, 500);
         });
 
@@ -376,7 +379,7 @@
         $(document).on('submit', '#tf_hotel_aval_check', function (e) {
             e.preventDefault();
             let form = $(this),
-                submitBtn = form.find('.tf-submit'),
+                submitBtn = form.find('button[type="submit"]'),
                 formData = new FormData(form[0]);
             
             formData.append('action', 'tf_hotel_search');
@@ -394,12 +397,12 @@
                 contentType: false,
                 processData: false,
                 beforeSend: function () {
-                    form.css({'opacity': '0.5', 'pointer-events': 'none'});
+                    form.css({'pointer-events': 'none'});
                     submitBtn.addClass('tf-btn-loading');
                 },
                 success: function (response) {
                     let obj = JSON.parse(response);
-                    form.css({'opacity': '1', 'pointer-events': 'all'});
+                    form.css({'pointer-events': 'all'});
                     submitBtn.removeClass('tf-btn-loading');
                     if (obj.status === 'error') {
                         notyf.error(obj.message);
@@ -419,7 +422,6 @@
 
             // Executes when some one click in the search form location
             inp.addEventListener("focus", function () {
-
                 closeAllLists();
 
                 let a = document.createElement("DIV");

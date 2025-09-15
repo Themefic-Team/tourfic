@@ -1,3 +1,6 @@
+<?php // Don't load directly
+defined( 'ABSPATH' ) || exit;
+?>
 <?php if ( $tour_duration || $info_tour_type || $group_size || $language ) { ?>
 <!--Information Section Start -->
 <div class="tf-overview-wrapper">

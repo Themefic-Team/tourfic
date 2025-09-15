@@ -98,13 +98,13 @@ class Map_Filter extends \WP_Widget {
             extract($args);
             echo wp_kses_post($before_widget);
             if (!empty($_GET['type']) && $_GET['type'] == "tf_tours" && !empty($_GET['from']) && !empty($_GET['to'])) {
-                $this->widget_html($button_title, $_GET['type']);
+                $this->widget_html($button_title, sanitize_text_field( wp_unslash($_GET['type']) ));
             }
             if (!empty($_GET['type']) && $_GET['type'] == "tf_hotel" && !empty($_GET['from']) && !empty($_GET['to'])) {
-                $this->widget_html($button_title, $_GET['type']);
+                $this->widget_html($button_title, sanitize_text_field( wp_unslash($_GET['type']) ));
             }
             if (!empty($_GET['type']) && $_GET['type'] == "tf_apartment" && !empty($_GET['from']) && !empty($_GET['to'])) {
-                $this->widget_html($button_title, $_GET['type']);
+                $this->widget_html($button_title, sanitize_text_field( wp_unslash($_GET['type']) ));
             }
         } ?>
         <!-- End Price Range widget -->
@@ -448,7 +448,7 @@ class Map_Filter extends \WP_Widget {
                                                             'content' => base64_encode($infoWindowtext)
                                                         ];
                                                     }
-                                                    echo apply_filters("tf_apartment_archive_single_featured_card_design_one", Apartment::tf_apartment_archive_single_item());
+                                                    echo wp_kses(apply_filters("tf_apartment_archive_single_featured_card_design_one", Apartment::tf_apartment_archive_single_item()), Helper::tf_custom_wp_kses_allow_tags());
                                                 }
                                             }
                                             while ( $loop->have_posts() ) {
@@ -668,7 +668,7 @@ class Map_Filter extends \WP_Widget {
                                                             'content' => base64_encode($infoWindowtext)
                                                         ];
                                                     }
-                                                    echo apply_filters("tf_apartment_archive_single_featured_card_design_one", Apartment::tf_apartment_archive_single_item());
+                                                    echo wp_kses(apply_filters("tf_apartment_archive_single_featured_card_design_one", Apartment::tf_apartment_archive_single_item()), Helper::tf_custom_wp_kses_allow_tags());
                                                 }
                                             }
                                             wp_reset_query();

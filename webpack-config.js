@@ -4,6 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 // Entrypoints Object
 const entryPoints = {};
+const minEntryPoints = {};
 const StyleEntryPoints = {};
 
 const freeAppJs = glob.sync('./sass/app/js/free/*.js');
@@ -23,22 +24,30 @@ const proAdminJs = [
 
 //tourfic free
 entryPoints['tourfic/assets/app/js/tourfic-scripts'] = freeAppJs;
-entryPoints['tourfic/assets/app/js/tourfic-scripts.min'] = freeAppJs;
-entryPoints['tourfic/assets/admin/js/tourfic-admin-scripts.min'] = freeAdminJs;
+minEntryPoints['tourfic/assets/app/js/tourfic-scripts.min'] = freeAppJs;
+entryPoints['tourfic/assets/admin/js/tourfic-admin-scripts'] = freeAdminJs;
+minEntryPoints['tourfic/assets/admin/js/tourfic-admin-scripts.min'] = freeAdminJs;
 //tourfic pro
 entryPoints['tourfic-pro/assets/app/js/tourfic-pro'] = proAppJs;
+minEntryPoints['tourfic-pro/assets/app/js/tourfic-pro.min'] = proAppJs;
 entryPoints['tourfic-pro/assets/admin/js/tourfic-pro-admin'] = proAdminJs;
+minEntryPoints['tourfic-pro/assets/admin/js/tourfic-pro-admin.min'] = proAdminJs;
 
 //tourfic vendor addon
-entryPoints['tourfic-vendor/admin/assets/js/tourfic-vendor-scripts.min'] = vendorAdminJs;
+entryPoints['tourfic-vendor/admin/assets/js/tourfic-vendor-admin'] = vendorAdminJs;
+minEntryPoints['tourfic-vendor/admin/assets/js/tourfic-vendor-admin.min'] = vendorAdminJs;
 entryPoints['tourfic-vendor/public/assets/js/tourfic-vendor'] = vendorAppJs;
+minEntryPoints['tourfic-vendor/public/assets/js/tourfic-vendor.min'] = vendorAppJs;
 
-//tourfic vendor addon
-entryPoints['tourfic-email-piping/assets/admin/js/tourfic-email-piping-scripts.min'] = tfepAdminJs;
-entryPoints['tourfic-email-piping/assets/app/js/tourfic-email-piping-scripts.min'] = tfepAppJs;
+//tourfic email-piping addon
+entryPoints['tourfic-email-piping/assets/admin/js/tourfic-email-piping-scripts'] = tfepAdminJs;
+minEntryPoints['tourfic-email-piping/assets/admin/js/tourfic-email-piping-scripts.min'] = tfepAdminJs;
+entryPoints['tourfic-email-piping/assets/app/js/tourfic-email-piping-scripts'] = tfepAppJs;
+minEntryPoints['tourfic-email-piping/assets/app/js/tourfic-email-piping-scripts.min'] = tfepAppJs;
 
 //tourfic ical addon
-entryPoints['tourfic-ical/assets/admin/js/tourfic-ical.min'] = iCalAdminJs;
+entryPoints['tourfic-ical/assets/admin/js/tourfic-ical'] = iCalAdminJs;
+minEntryPoints['tourfic-ical/assets/admin/js/tourfic-ical.min'] = iCalAdminJs;
 
 // SASS entry points
 const appScss = glob.sync('./sass/app/css/free/tourfic.scss');
@@ -65,8 +74,8 @@ StyleEntryPoints['tourfic/assets/app/css/tourfic-style'] = appScss;
 StyleEntryPoints['tourfic-pro/assets/app/css/tourfic-pro'] = proAppScss;
 StyleEntryPoints['tourfic/assets/admin/css/tourfic-admin'] = adminScss;
 StyleEntryPoints['tourfic-pro/assets/admin/css/tourfic-pro-admin'] = proAdminScss;
-StyleEntryPoints['/tourfic-vendor/admin/assets/css/tourfic-vendor'] = addonAdminScss;
 StyleEntryPoints['/tourfic-vendor/public/assets/css/tourfic-vendor'] = addonAppScss;
+StyleEntryPoints['/tourfic-vendor/admin/assets/css/tourfic-vendor-admin'] = addonAdminScss;
 StyleEntryPoints['/tourfic-email-piping/assets/admin/css/tourfic-email-piping'] = tfepAdminScss;
 StyleEntryPoints['/tourfic-email-piping/assets/app/css/tourfic-email-piping'] = tfepAppScss;
 StyleEntryPoints['tourfic/assets/app/css/tourfic-carrentals'] = CarAppScss;
@@ -77,7 +86,20 @@ StyleEntryPoints['tourfic/assets/app/css/tourfic-hotel'] = HotelAppScss;
 
 const JSconfig = {
     entry: entryPoints,
+    mode: 'development',
+    output: {
+        path: path.resolve(__dirname, '../'),
+        filename: '[name].js',
+        clean: false
+    },
+    optimization: {
+        minimize: false
+    }
+}
 
+const JSminConfig = {
+    entry: minEntryPoints,
+    mode: 'production',
     output: {
         path: path.resolve(__dirname, '../'),
         filename: '[name].js',
@@ -195,4 +217,4 @@ const StyleConfig = {
 }
 
 // Export the config object.
-module.exports = [JSconfig, StyleConfig, styleMinConfig];
+module.exports = [JSconfig, JSminConfig, StyleConfig, styleMinConfig];

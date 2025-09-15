@@ -22,26 +22,34 @@
                     border: 1px solid $color-border-lite;
                     border-radius: 8px;
                     padding: 40px;
+                    @media #{$max768}{
+                        padding: 20px;
+                    }
                 }
             
                 .tf-faq-items-wrapper {
                     display: flex;
                     flex-direction: column;
                     align-self: stretch;
-                    gap: 16px;
+                    gap: 20px;
+                    @media #{$max768}{
+                        gap: 16px;
+                    }
                 }
             
                 #tf-faq-item {
                     border-radius: 8px;
-                    border-bottom: none;
-                    padding: 8px 0;
+                    padding: 0 0 20px;
                     margin-bottom: 0;
+                    @media #{$max768}{
+                        padding-bottom: 16px;
+                    }
             
                     .tf-faq-title {
                         @include flexbox();
                         @include align-items(center);
                         gap: 8px;
-            
+                        padding: 0;
                         h4 {
                             font-size: 1rem;
                             color: $color-heading;
@@ -92,6 +100,7 @@
                         background-color: transparent;
                         padding: 0;
                         color: $color-text;
+                        margin-top: 10px;
                     }
                 }
             

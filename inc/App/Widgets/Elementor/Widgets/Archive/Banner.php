@@ -53,12 +53,12 @@ class Banner extends Widget_Base {
 
     protected function tf_style_general_controls() {
 		$this->start_controls_section( 'banner_style_general', [
-			'label' => __( 'General', 'tourfic' ),
+			'label' => esc_html__( 'General', 'tourfic' ),
 			'tab'   => Controls_Manager::TAB_STYLE,
 		] );
 
 		$this->add_responsive_control('banner_height',[
-			'label'      => __('Height', 'tourfic'),
+			'label'      => esc_html__('Height', 'tourfic'),
 			'type'       => Controls_Manager::SLIDER,
 			'range'      => [
 				'px' => [
@@ -89,7 +89,7 @@ class Banner extends Widget_Base {
 		]);
 		
         $this->add_control( 'tf_banner_title_color', [
-			'label'     => __( 'Color', 'tourfic' ),
+			'label'     => esc_html__( 'Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors'  => [
 				'{{WRAPPER}} .tf-hero-section-wrap .tf-hero-content.tf-archive-hero-content .tf-head-title h1' => 'color: {{VALUE}};',
@@ -98,7 +98,7 @@ class Banner extends Widget_Base {
 		]);
 
 		$this->add_group_control( Group_Control_Typography::get_type(), [
-            'label'    => __( 'Typography', 'tourfic' ),
+            'label'    => esc_html__( 'Typography', 'tourfic' ),
 			'name'     => "tf_banner_title_typography",
 			'selector' => "{{WRAPPER}} .tf-hero-section-wrap .tf-hero-content.tf-archive-hero-content .tf-head-title h1,
                             {{WRAPPER}} .tf-archive-car-banner .tf-banner-content h1",

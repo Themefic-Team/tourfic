@@ -1,11 +1,7 @@
 .single-tf_hotel{
     .tf-single-template{
-        &__legacy{
-            .hotel-faq .tf-faq-sec-title {
-                text-align: left;
-                margin-bottom: 20px;
-            }
-        }
+     
+        &__legacy,
         &__one{
             .tf-hotel-faqs-section{
                 .tf-hotel-enquiry{
@@ -18,39 +14,66 @@
                     .tf-ask-enquiry{
                         background-color: $color-filling-fg;
                         padding: 30px;
+                        text-align: center;
+                        i{
+                            text-align: center;
+                            background-color: $color-brand-lite;
+                            border-radius: 50%;
+                            color: $color-primary;
+                            margin: auto;
+                            margin-bottom: 25px;
+                            font-size: 1.875rem;
+                            height: 80px;
+                            width: 80px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                        }
                         h3{
-                            font-size: 1.563rem;
+                            font-size: 1.5rem;
+                            color: $color-heading;
+                        }
+                        p{
+                            margin-top: 5px;
+                            margin-bottom: 25px;
+                        }
+                        .tf-btn{
+                            a:hover{
+                                background-color: $color-brand-dark;
+                            }
                         }
                     }
                 }
-                .tf-hotel-faqs{
-                    flex-basis: 68%;
-                    @media #{$max768}{
-                        flex-basis: 100%;
-                        margin-top: 30px;
-                    }
-                    .tf-faq-wrapper{
-                        .tf-faq-single {
-                            border-bottom: 0px solid;
-                            .tf-faq-single-inner{
-                                margin: 0px 0px 30px 0px;
-                                background: $color-filling-fg;
-                                transition: .3s all ease;
-                                @media #{$max768}{
-                                    margin: 0px 0px 20px 0px;
-                                }
-                                &:hover{
-                                    background: $color-brand-lite;
-                                }
-                                h3{
-                                    font-size: 1.25rem;
-                                }
+            }
+        }
+        &__one{
+            .tf-hotel-faqs{
+                flex-basis: 68%;
+                @media #{$max768}{
+                    flex-basis: 100%;
+                    margin-top: 30px;
+                }
+                .tf-faq-wrapper{
+                    .tf-faq-single {
+                        border-bottom: 0px solid;
+                        .tf-faq-single-inner{
+                            margin: 0px 0px 30px 0px;
+                            background: $color-filling-fg;
+                            transition: .3s all ease;
+                            @media #{$max768}{
+                                margin: 0px 0px 20px 0px;
                             }
-                        }
-                        .tf-faq-single.active {
-                            .tf-faq-single-inner{
+                            &:hover{
                                 background: $color-brand-lite;
                             }
+                            h3{
+                                font-size: 1.25rem;
+                            }
+                        }
+                    }
+                    .tf-faq-single.active {
+                        .tf-faq-single-inner{
+                            background: $color-brand-lite;
                         }
                     }
                 }

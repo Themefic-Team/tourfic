@@ -1,10 +1,6 @@
 <?php 
-
-
-// do not load directly
-if ( ! defined( 'ABSPATH' ) ) {
-    die();
-}
+// Don't load directly
+defined( 'ABSPATH' ) || exit;
 
 if( !empty( $hotel_facilities_categories ) && !empty( $hotel_facilities ) ){
     ?>

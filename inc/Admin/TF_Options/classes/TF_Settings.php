@@ -214,9 +214,6 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 		 * @author Jahid, Foysal
 		 */
 		public function tf_dashboard_page() {
-            $current_page_url = $this->get_current_page_url();
-            $query_string = $this->get_query_string($current_page_url);
-
 			?>
 			<div class="tf-setting-dashboard">
 				<!-- dashboard-header-include -->
@@ -383,7 +380,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 							<?php endif; ?>
 						</div>
 						<div class="tf-settings-sidebar">
-							<?php echo $this->tf_settings_sidebar(); ?>
+							<?php echo wp_kses_post($this->tf_settings_sidebar()); ?>
 						</div>
 					</div>
 				</div>
@@ -393,6 +390,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 		}
 
 		public function tf_settings_sidebar() {
+			ob_start();
 			?>
 			<div class="tf-sidebar-content">
 				<div class="tf-customization-quote">
@@ -446,6 +444,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
 			</div>
 			<?php
+			return ob_get_clean();
 		}
 
 		public function tf_get_sidebar_plugin_list(){
@@ -883,8 +882,6 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
 			// Retrieve an existing value from the database.
 			$tf_option_value = get_option( $this->option_id );
-			$current_page_url = $this->get_current_page_url();
-			$query_string = $this->get_query_string($current_page_url);
 
 			// Set default values.
 			if ( empty( $tf_option_value ) ) {
@@ -1112,8 +1109,8 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 										$allowed_mime_types = array('application/octet-stream', 'font/ttf', 'font/otf', 'font/woff', 'font/woff2', 'application/vnd.ms-fontobject');
 										for($i = 0; $i < count($_FILES['file']['name']); $i++) {
 											
-											$tf_font_filename = $_FILES['file']['name'][$i];
-											$uploaded_file_tmp = $_FILES['file']['tmp_name'][$i];
+											$tf_font_filename = sanitize_file_name( wp_unslash($_FILES['file']['name'][$i]) );
+											$uploaded_file_tmp = sanitize_file_name( wp_unslash($_FILES['file']['tmp_name'][$i]) );
 											$checked = wp_check_filetype_and_ext( $uploaded_file_tmp, $tf_font_filename);
 											if (isset($checked['ext']) && in_array($checked["ext"], $allowed_ext) && in_array($checked['type'], $allowed_mime_types)) {
 												$destination_path = $tf_itinerary_fonts .'/'. $tf_font_filename;
@@ -1126,7 +1123,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 												// Invalid file type or extension
 												$response    = [
 													'status'  => 'error',
-													'message' => __( 'Invalid file type or extension', 'tourfic' ),
+													'message' => esc_html__( 'Invalid file type or extension', 'tourfic' ),
 												];
 												echo wp_json_encode($response);
 												wp_die();
@@ -1160,35 +1157,43 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 		public function tf_ajax_save_options() {
 			$response    = [
 				'status'  => 'error',
-				'message' => __( 'Something went wrong!', 'tourfic' ),
+				'message' => esc_html__( 'Something went wrong!', 'tourfic' ),
 			];
 
-			if( isset( $_POST['tf_option_nonce'] ) || wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['tf_option_nonce'])), 'tf_option_nonce_action' ) ) {
+			// Check if a nonce is valid.
+			if (  !isset( $_POST['tf_option_nonce'] ) || !wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['tf_option_nonce'] ) ), 'tf_option_nonce_action' ) ) {
+				return;
+			}
 
-				if(isset($_POST['tf_import_option']) && !empty(wp_unslash( trim( $_POST['tf_import_option']) )) ){
+			// Check if the current user has the required capability.
+	        if (!current_user_can('manage_options')) {
+		        $response['status'] = 'error';
+		        $response['message'] = esc_html__('You do not have permission to access this resource.', 'tourfic');
+		        echo wp_json_encode($response);
+                die();
+	        }
 
-					$tf_import_option = json_decode( wp_unslash( trim( $_POST['tf_import_option']) ), true );
-					if(empty($tf_import_option) || !is_array($tf_import_option)){
-						$response    = [
-							'status'  => 'error',
-							'message' => __( 'Your imported data is not valid', 'tourfic' ),
-						];
-					}else{
-						$this->save_options();
-						$response = [
-							'status'  => 'success',
-							'message' => __( 'Options imported successfully!', 'tourfic' ),
-						];
-					}
+			if(isset($_POST['tf_import_option']) && !empty(wp_unslash( trim( $_POST['tf_import_option']) )) ){
+
+				$tf_import_option = json_decode( wp_unslash( trim( $_POST['tf_import_option']) ), true );
+				if(empty($tf_import_option) || !is_array($tf_import_option)){
+					$response    = [
+						'status'  => 'error',
+						'message' => esc_html__( 'Your imported data is not valid', 'tourfic' ),
+					];
 				}else{
 					$this->save_options();
 					$response = [
 						'status'  => 'success',
-						'message' => __( 'Options saved successfully!', 'tourfic' ),
+						'message' => esc_html__( 'Options imported successfully!', 'tourfic' ),
 					];
-
 				}
-
+			}else{
+				$this->save_options();
+				$response = [
+					'status'  => 'success',
+					'message' => esc_html__( 'Options saved successfully!', 'tourfic' ),
+				];
 			}
 
 			do_action("tourfic_settings_save_hook");
@@ -1201,31 +1206,32 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 		public function tf_ajax_reset_options() {
 			$response    = [
 				'status'  => 'error',
-				'message' => __( 'Something went wrong!', 'tourfic' ),
+				'message' => esc_html__( 'Something went wrong!', 'tourfic' ),
 			];
 
+			// Check if a nonce is valid.
+			if (  !isset( $_POST['tf_option_nonce'] ) || !wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['tf_option_nonce'] ) ), 'tf_option_nonce_action' ) ) {
+				return;
+			}
 
-			if( isset( $_POST['tf_option_nonce'] ) || wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['tf_option_nonce'])), 'tf_option_nonce_action' ) ) {
+			// Check if the current user has the required capability.
+	        if (!current_user_can('manage_options')) {
+		        $response['status'] = 'error';
+		        $response['message'] = esc_html__('You do not have permission to access this resource.', 'tourfic');
+		        echo wp_json_encode($response);
+                die();
+	        }
 
-				!empty( get_option( 'tf_settings' ) ) ?  : '';
-
-				if( !empty( get_option( 'tf_settings' ) ) ) {
-					update_option( 'tf_settings', '' );
-					$response = [
-						'status'  => 'success',
-						'message' => __( 'Options Reset successfully!', 'tourfic' ),
-					];
-				} else {
-					$response    = [
-						'status'  => 'error',
-						'message' => __( 'Settings are fresh, nothing to reset.', 'tourfic' ),
-					];
-				}
-
+			if( !empty( get_option( 'tf_settings' ) ) ) {
+				update_option( 'tf_settings', '' );
+				$response = [
+					'status'  => 'success',
+					'message' => esc_html__( 'Options Reset successfully!', 'tourfic' ),
+				];
 			} else {
 				$response    = [
 					'status'  => 'error',
-					'message' => __( 'Something went wrong!', 'tourfic' ),
+					'message' => esc_html__( 'Settings are fresh, nothing to reset.', 'tourfic' ),
 				];
 			}
 
@@ -1234,131 +1240,125 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 		}
 
 		public function tf_search_settings_autocomplete_callback() {
-			if( isset( $_POST['tf_option_nonce'] ) || wp_verify_nonce( sanitize_text_field(wp_unslash($_POST['tf_option_nonce'])), 'tf_option_nonce_action' ) ) {
-				$all_settings = $this->pre_tabs;
-				$fields = [];
-				$path = '';
+			// Check if a nonce is valid.
+			if (  !isset( $_POST['tf_option_nonce'] ) || !wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['tf_option_nonce'] ) ), 'tf_option_nonce_action' ) ) {
+				return;
+			}
 
-				foreach ( $all_settings as $section => $data ) {
+			// Check if the current user has the required capability.
+	        if (!current_user_can('manage_options')) {
+		        $response['status'] = 'error';
+		        $response['message'] = esc_html__('You do not have permission to access this resource.', 'tourfic');
+		        echo wp_json_encode($response);
+                die();
+	        }
+			
+			$all_settings = $this->pre_tabs;
+			$fields = [];
+			$path = '';
 
-					$parent = $parent_title = '';
-					$icon = $data['icon'];
+			foreach ( $all_settings as $section => $data ) {
 
-					if( !empty( $data["fields"]) ) {
-						$path = $data['title'];
-						foreach ( $data["fields"] as $field ) {
+				$parent = $parent_title = '';
+				$icon = $data['icon'];
 
-							if ( !empty( $field['tabs'] )) {
-								foreach( $field['tabs'] as $key => $tab) {
-									
-									if ( !empty( $tab['fields'] )) {
-										foreach ( $tab['fields'] as $tab_field ) {
-											$fields[] = array(
-												'parent' => $parent_title,
-												'parent_id' => $section,
-												'tab_id' => $tab['id'] ? $tab['id'] : '',
-												'field_title' => !empty( $tab_field["label"] ) ? $tab_field["label"] : ( !empty( $tab_field['title'] ) ? $tab_field['title'] : ( !empty( $tab_field['heading'] ) ?  !empty( $tab_field['heading'] ) : ''  )),
-												'section' => $tab['title'],
-												'icon' => $icon,
-												'path' => $path,
-												'id' => $tab_field['id'],
-											);
-										}
+				if( !empty( $data["fields"]) ) {
+					$path = $data['title'];
+					foreach ( $data["fields"] as $field ) {
+
+						if ( !empty( $field['tabs'] )) {
+							foreach( $field['tabs'] as $key => $tab) {
+								
+								if ( !empty( $tab['fields'] )) {
+									foreach ( $tab['fields'] as $tab_field ) {
+										$fields[] = array(
+											'parent' => $parent_title,
+											'parent_id' => $section,
+											'tab_id' => $tab['id'] ? $tab['id'] : '',
+											'field_title' => !empty( $tab_field["label"] ) ? $tab_field["label"] : ( !empty( $tab_field['title'] ) ? $tab_field['title'] : ( !empty( $tab_field['heading'] ) ?  !empty( $tab_field['heading'] ) : ''  )),
+											'section' => $tab['title'],
+											'icon' => $icon,
+											'path' => $path,
+											'id' => $tab_field['id'],
+										);
 									}
-
 								}
+
 							}
-
-							$fields[] = array(
-								'parent' => $parent_title,
-								'parent_id' => $section,
-								'field_title' => !empty( $field["label"] ) ? $field["label"] : ( !empty( $field['title'] ) ? $field['title'] : ( !empty( $field['heading'] ) ?  !empty( $field['heading'] ) : ''  )),
-								'section' => $data['title'],
-								'icon' => $icon,
-								'path' => $path,
-								'id' => $field['id'],
-							);
 						}
-					}
 
-					if( !empty( $data["sub_section"])) {
-						foreach ( $data["sub_section"] as $key => $sub_section ) {
-
-							$parent_id = $key;
-
-							if( isset( $sub_section["parent"] )) {
-								$parent = $sub_section["parent"];
-								$parent = !empty($parent) ? $all_settings[$parent] : '';
-								$parent_title = !empty($parent) ? $parent['title'] : '';
-								$icon = !empty($parent) ? $parent['icon'] : $data['icon'];
-							}
-
-							!empty( $parent_title ) ? $path = $parent_title . ' > ' . $sub_section['title'] : $path = $sub_section[$key]['title'];
-							if ( !empty( $sub_section["fields"])) {
-
-								foreach ( $sub_section["fields"] as $field ) {
-
-									if ( !empty( $field['tabs'] )) {
-										foreach( $field['tabs'] as $key => $tab) {
-											
-											if ( !empty( $tab['fields'] )) {
-												foreach ( $tab['fields'] as $tab_field ) {
-													$fields[] = array(
-														'parent' => $parent_title,
-														'parent_id' => $parent_id,
-														'tab_id' => $tab['id'] ? $tab['id'] : '',
-														'field_title' => !empty( $tab_field["label"] ) ? $tab_field["label"] : ( !empty( $tab_field['title'] ) ? $tab_field['title'] : ( !empty( $tab_field['heading'] ) ?  !empty( $tab_field['heading'] ) : ''  )),
-														'section' => $tab['title'],
-														'icon' => $icon,
-														'path' => $path,
-														'id' => $tab_field['id'],
-													);
-												}
-											}
-		
-										}
-									}
-									$fields[] = array(
-										'parent' => $parent_title,
-										'parent_id' => $parent_id,
-										'field_title' => !empty( $field["label"] ) ? $field["label"] : ( !empty( $field['title'] ) ? $field['title'] : ( !empty( $field['heading'] ) ?  !empty( $field['heading'] ) : ''  )),
-										'section' => $data['title'],
-										'icon' => $icon,
-										'path' => $path,
-										'id' => $field['id'],
-									);
-								}
-							} 
-						}
+						$fields[] = array(
+							'parent' => $parent_title,
+							'parent_id' => $section,
+							'field_title' => !empty( $field["label"] ) ? $field["label"] : ( !empty( $field['title'] ) ? $field['title'] : ( !empty( $field['heading'] ) ?  !empty( $field['heading'] ) : ''  )),
+							'section' => $data['title'],
+							'icon' => $icon,
+							'path' => $path,
+							'id' => $field['id'],
+						);
 					}
 				}
 
-				$response = [
-					'status'  => 'success',
-					'message' => $fields,
-				];
-				
-			} else {
-				$response = [
-					'status'  => 'error',
-					'message' => __( 'Something went wrong!', 'tourfic' ),
-				];
+				if( !empty( $data["sub_section"])) {
+					foreach ( $data["sub_section"] as $key => $sub_section ) {
+
+						$parent_id = $key;
+
+						if( isset( $sub_section["parent"] )) {
+							$parent = $sub_section["parent"];
+							$parent = !empty($parent) ? $all_settings[$parent] : '';
+							$parent_title = !empty($parent) ? $parent['title'] : '';
+							$icon = !empty($parent) ? $parent['icon'] : $data['icon'];
+						}
+
+						!empty( $parent_title ) ? $path = $parent_title . ' > ' . $sub_section['title'] : $path = $sub_section[$key]['title'];
+						if ( !empty( $sub_section["fields"])) {
+
+							foreach ( $sub_section["fields"] as $field ) {
+
+								if ( !empty( $field['tabs'] )) {
+									foreach( $field['tabs'] as $key => $tab) {
+										
+										if ( !empty( $tab['fields'] )) {
+											foreach ( $tab['fields'] as $tab_field ) {
+												$fields[] = array(
+													'parent' => $parent_title,
+													'parent_id' => $parent_id,
+													'tab_id' => $tab['id'] ? $tab['id'] : '',
+													'field_title' => !empty( $tab_field["label"] ) ? $tab_field["label"] : ( !empty( $tab_field['title'] ) ? $tab_field['title'] : ( !empty( $tab_field['heading'] ) ?  !empty( $tab_field['heading'] ) : ''  )),
+													'section' => $tab['title'],
+													'icon' => $icon,
+													'path' => $path,
+													'id' => $tab_field['id'],
+												);
+											}
+										}
+	
+									}
+								}
+								$fields[] = array(
+									'parent' => $parent_title,
+									'parent_id' => $parent_id,
+									'field_title' => !empty( $field["label"] ) ? $field["label"] : ( !empty( $field['title'] ) ? $field['title'] : ( !empty( $field['heading'] ) ?  !empty( $field['heading'] ) : ''  )),
+									'section' => $data['title'],
+									'icon' => $icon,
+									'path' => $path,
+									'id' => $field['id'],
+								);
+							}
+						} 
+					}
+				}
 			}
+
+			$response = [
+				'status'  => 'success',
+				'message' => $fields,
+			];
 
 			echo wp_json_encode( $response );
 			wp_die();
 		}
-
-		/*
-		 * Get current page url
-		 * @return string
-		 * @author Foysal
-		 */
-		public function get_current_page_url() {
-            $page_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-
-            return $page_url;
-        }
 
         /*
          * Get query string from url
@@ -1384,7 +1384,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 	        // Check if the current user has the required capability.
 	        if (!current_user_can('manage_options')) {
 		        $response['status'] = 'error';
-		        $response['message'] = __('You do not have permission to access this resource.', 'tourfic');
+		        $response['message'] = esc_html__('You do not have permission to access this resource.', 'tourfic');
 		        echo wp_json_encode($response);
                 die();
 	        }

@@ -300,7 +300,7 @@
         $(document).on('submit', '#tf_tour_aval_check', function (e) {
             e.preventDefault();
             let form = $(this),
-                submitBtn = form.find('.tf-submit'),
+                submitBtn = form.find('button[type="submit"]'),
                 formData = new FormData(form[0]);
 
             formData.append('action', 'tf_tour_search');
@@ -318,12 +318,12 @@
                 contentType: false,
                 processData: false,
                 beforeSend: function () {
-                    form.css({'opacity': '0.5', 'pointer-events': 'none'});
+                    form.css({'pointer-events': 'none'});
                     submitBtn.addClass('tf-btn-loading');
                 },
                 success: function (response) {
                     let obj = JSON.parse(response);
-                    form.css({'opacity': '1', 'pointer-events': 'all'});
+                    form.css({'pointer-events': 'all'});
                     submitBtn.removeClass('tf-btn-loading');
                     if (obj.status === 'error') {
                         notyf.error(obj.message);
@@ -635,7 +635,7 @@
                     scroll = $(window).scrollTop(),
                     footer = $('footer');
             
-                if (footer.length === 0) {
+                if (footer.length === 0 || bookingBox.length === 0 || sticky.length === 0) {
                     return; 
                 }
                 let boxOffset = bookingBox.offset().top + bookingBox.outerHeight();

@@ -4,6 +4,10 @@
 .page-template-tf-search{
     &__legacy{
         padding: 40px 0px;
+
+        @media #{$max768}{
+            padding: 32px 0px;
+        }
     }
     &__two{
         width: 100%;
@@ -81,7 +85,7 @@
                     flex-direction: column;
                     gap: 32px;
                     @media only screen and (max-width: 1366px) {
-                        width: calc(100% - 323px);
+                        width: calc(100% - 170px);
                     }
                     @media #{$max1024}{
                         width: calc(100% - 246px);
@@ -150,7 +154,7 @@
                         .tf-section-title-and-location{
                             @media #{$max768} {
                                 margin-bottom: 0px;
-                                width: calc(100% - 124px);
+                                width: calc(100% - 0px);
                             }
                             @media #{$max575} {
                                 width: 100%;
@@ -206,11 +210,92 @@
                         }
                     }
                     a{
-                        @media #{$max768} {
-                            width: 100%;
-                        }
                         @media #{$max575} {
-                            width: auto;
+                            width: 100%;
+                            padding: 10px 16px;
+                        }
+                      
+                        .tf-available-room-content-left{
+                            @media #{$max768} {
+                                width: 100%;
+                            }
+                            .tf-card-heading-info{
+                                @media #{$max768} {
+                                    display: flex;
+                                    justify-content: space-between;
+                                   
+                                    margin-bottom: 24px;
+                                }
+                                @media #{$max575} {
+                                    flex-direction: column;
+                                    margin-bottom: 0;
+                                }
+                                .tf-section-title-and-location{
+                                    @media #{$max768} {
+                                        margin-bottom: 0px;
+                                        width: calc(100% - 124px);
+                                    }
+                                    @media #{$max575} {
+                                        width: 100%;
+                                        margin-bottom: 12px;
+                                    }
+                                    h2{
+                                        @media #{$max768} {
+                                            margin-bottom: 6px;
+                                        }
+                                    }
+                                    .tf-title-location{
+                                        @media #{$max768} {
+                                            margin: 0px;
+                                        }
+                                    }
+                                }
+                                .tf-mobile.tf-pricing-info{
+                                    display: none;
+                                    @media #{$max768} {
+                                        display: flex;
+                                        width: 120px;
+                                        flex-direction: column;
+                                        align-items: end;
+                                    }
+                                    @media #{$max575} {
+                                        align-items: start;
+                                        width: 100%;
+                                    }
+                                    .tf-price-from{
+                                        .amount{
+                                            @media #{$max768} {
+                                                color: $color-text;
+                                                font-size: 1.25rem;
+                                                font-weight: 400;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            ul{
+                                @media #{$max768} {
+                                    margin-bottom: 24px;
+                                }
+                            }
+                        }
+                        .tf-available-room-content-right{
+                            @media #{$max768} {
+                                width: 100%;
+                                display: flow-root;
+                            }
+                            .tf-card-pricing-heading{
+                                @media #{$max768} {
+                                    display: none;
+                                }
+                            }
+                            a{
+                                @media #{$max768} {
+                                    width: 100%;
+                                    padding: 10px 16px;
+                                    line-height: 1;
+                                }
+                            }
                         }
                     }
                 }
@@ -248,13 +333,14 @@
                         width: calc(100% - 150px);
                     }
                     &>div {
-                        width: 32%;
+                        width: 30%;
                         border-right: 1px solid $color-border-lite;
                         display: flex;
                         flex-direction: column;
                         position: relative;
+                        
                         &.tf-booking-form-guest-and-room {
-                            width: 36%;
+                            width: 30%;
                             padding-left: 25px;
                             align-items: start;
                             border-right: none;
@@ -263,11 +349,13 @@
                                 width: 38%;
                             }
                             @media #{$max575}{
-                                width: 100%;
+                                width: fit-content;
                                 margin: 12px 0 8px;
+                                padding-left: 0;
                             }
                             .tf-booking-form-guest-and-room-inner{
-                                width: 100%;
+                                width: fit-content;
+                                position: relative;
                             }
                         }
                     }
@@ -328,11 +416,20 @@
                     @media #{$max1024}{
                         font-size: 0.875rem;
                     }
+
+                    svg {
+                        path{
+                            fill: $color-text;
+                        }
+                    }
                 }
                 .tf-booking-date-wrap {
                     display: flex;
                     gap: 6px;
                     cursor: pointer;
+                }
+                .tf-duration{
+                    line-height: 1;
                 }
                 .tf_label-row{
                     span#tf-required{
@@ -416,10 +513,11 @@
                         }
                     }
                 }
+                &.tf-filter-show{
+                    display: block;
+                }
             }
-            .tf-room-filter.tf-filter-show{
-                display: block;
-            }
+
             .tf-available-rooms {
                 display: flex;
                 flex-direction: column;
@@ -431,6 +529,11 @@
                         &:last-child{
                             margin-bottom: 0px;
                         }
+                    }
+                }
+                .tf-nothing-found{
+                    @media #{$max575}{
+                        text-align: center;
                     }
                 }
             }
@@ -536,11 +639,12 @@
                 .tf-available-room-content {
                     width: calc(100% - 230px);
                     display: flex;
+                    flex-wrap: nowrap;
                     justify-content: space-between;
                     padding: 24px;
         
                     .tf-available-room-content-left {
-                        width: 395px;
+                        width: auto;
                         display: flex;
                         flex-direction: column;
                         @media only screen and (max-width: 1366px) {
@@ -548,6 +652,12 @@
                         }
                         @media #{$max1024}{
                             width: calc(100% - 177px);
+                        }
+                        @media #{$max768}{
+                            width: calc(100% - 100px);
+                        }
+                        @media #{$max575}{
+                            width: 100%;
                         }
                         h3 {
                             margin-bottom: 20px;
@@ -565,7 +675,7 @@
                             padding: 0;
                             display: grid;
                             grid-template-columns: 1fr 1fr;
-                            gap: 12px 5px;
+                            gap: 12px 16px;
                             @media #{$max768}{
                                 gap: 8px 5px;
                             }
@@ -595,8 +705,8 @@
                                 }
                             }
                         }
-                        span.tf-others-benefits-title {
-                            color: $color-heading;
+                        .tf-others-benefits-title {
+                            color: $color-text;
                             font-size: 1rem;
                             font-weight: 600;
                             margin-bottom: 16px;
@@ -608,7 +718,7 @@
                         }
                     }
                     .tf-available-room-content-right {
-                        width: 230px;
+                        width: auto;
                         display: flex;
                         flex-direction: column;
                         align-items: flex-end;
@@ -662,7 +772,7 @@
                                     font-weight: 400;
                                 }
                                 .discount-price{
-                                    color: $color-gray;
+                                    color: $color-text;
                                     font-size: 1rem;
                                     display: inline-flex;
                                     gap: 2px;
@@ -766,15 +876,43 @@
                 margin-bottom: 16px;
                 gap: 16px;
             }
-            &>span{
-                color: $color-text;
+            @media #{$max575}{
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+            }
+            .tf-total-results{
+                @media #{$max575}{
+                    display: none;
+                }
+                &.tf-mobile-results{
+                    display: none;
+                    @media #{$max575}{
+                        display: block;
+                    }
+                }
+            }
+            h3{
+                color: $color-heading;
                 font-size: 1.5rem;
+                font-weight: 600;
                 flex: 1;
                 @media #{$max1024}{
                     font-size: 0.875rem;
                 }
+                &.tf-desktop-results{
+                    @media #{$max575}{
+                        display: none;
+                    }
+                }
+                &.tf-mobile-results{
+                    display: none;
+                    @media #{$max575}{
+                        display: block;
+                        grid-column: 1 / -1;
+                    }
+                }
             }
-            > h2{
+            h2{
                 @media only screen and (max-width: 1280px) {
                     font-size: 1rem;
                 }
@@ -785,7 +923,13 @@
                 display: none;
                 @media #{$max1024}{
                     display: block;
+                    margin-left: 10px;
                 }
+                @media #{$max575}{
+                    width: fit-content;
+                    margin-left: auto;
+                }
+         
             }
             .tf-filter{
                 padding: 0px;
@@ -799,7 +943,7 @@
         .tf-details-right {
             width: 480px;
             @media #{$max1600}{
-                width: 320px;
+                width: 380px;
             }
             @media only screen and (max-width: 1366px) {
                 width: 283px;
@@ -821,6 +965,7 @@
                     width: 100%;
                     z-index: 99;
                     top: 200px;
+                    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
                 }
                 @media #{$max768}{
                     top: 100px;
@@ -869,6 +1014,9 @@
                             }
                             label{
                                 padding-left: 30px;
+                                @media #{$max1024}{
+                                    padding-left: 25px;
+                                }
                                 .tf-checkmark{
                                     border-radius: 4px;
                                     border: 1px solid $color-primary;
@@ -1276,6 +1424,9 @@
                         max-width: none;
                         display: grid;
                         grid-template-columns: 2fr 1fr;
+                        @media #{$max1024}{
+                            grid-template-columns: 1fr;
+                        }
                         .tf-room-image{
                             height: 140px;
                             position: relative;
@@ -1293,13 +1444,31 @@
                         .tf-room-gallerys{
                             display: grid;
                             gap: 10px;
+                            @media #{$max575}{
+                                display: flex;
+                            }
                             .tf-room-gallery{
                                 height: 66px;
                                 width: 100%;
+                                @media #{$max1024}{
+                                    height: auto;
+                                    width: auto;
+                                    flex: 1;
+                                }
                                 img{
                                     height: 66px;
                                     width: 100%;
                                     object-fit: cover;
+                                    @media #{$max1024}{
+                                        height: auto;
+                                    }
+                                }
+                                &:last-child{
+                                    @media #{$max1024}{
+                                       height: 66px;
+                                       width: 105px;
+                                       flex: inherit;
+                                    }
                                 }
                             }
                         }
@@ -1314,6 +1483,10 @@
                         @media #{$max768} {
                             padding: 16px;
                         }
+                        @media #{$max575} {
+                            padding-top: 5px;
+                        }
+
                         .tf-available-room-content-left{
                             width: 100%;
                             .room-heading-price{
@@ -1321,6 +1494,10 @@
                                 justify-content: space-between;
                                 gap: 30px;
                                 margin-bottom: 16px;
+                                @media #{$max575}{
+                                    flex-direction: column;
+                                    gap: 10px;
+                                }
                                 h2{
                                     margin: 0;
                                     font-size: 1.25rem;
@@ -1333,7 +1510,7 @@
                                         color: $color-text;
                                         font-weight: 400;
                                         .discount-price {
-                                            color: $color-gray;
+                                            color: $color-text;
                                             font-size: 1rem;
                                             font-weight: 400;
                                             line-height: 1.3;
@@ -1384,6 +1561,9 @@
                                 margin-top: 32px;
                                 @media #{$max768}{
                                     font-size: 0.75rem;
+                                    margin-top: 16px;
+                                    padding: 10px 16px;
+                                    line-height: 1;
                                 }
                             }
                             .tf-available-room-select{
@@ -1424,11 +1604,6 @@
                     }
                     .tf-booking-form-checkin,
                     .tf-booking-form-checkout{
-                        @media only screen and (max-width: 1600px) {
-                            max-width: none;
-                            padding-left: 78px;
-                            padding-right: 78px;
-                        }
                         @media only screen and (max-width: 1366px) {
                             max-width: none;
                             padding-left: 48px;
@@ -1555,9 +1730,6 @@
                 .tf-tour-booking-box,
                 .tf_tours_booking > .tf-tours-booking-btn,
                 .tf-bottom-booking-bar{
-                    // @media #{$max768} {
-                    //     display: none;
-                    // }
                     .tf-bottom-booking-field{
                         @media #{$max768} {
                             width: auto;
@@ -1641,7 +1813,7 @@
             padding: 32px;
             background-color: $color-filling-fg;
             @media #{$max575}{
-                padding: 24px;
+                padding: 16px;
             }
             h2{
                 color: $color-heading;
@@ -1689,6 +1861,7 @@
                             }
                         }
                         .tf-faq-head{
+                            cursor: pointer;
                             span {
                                 color: $color-text;
                                 font-size: 1rem;
@@ -1697,6 +1870,7 @@
                                 display: flex;
                                 justify-content: space-between;
                                 align-items: center;
+                                gap: 10px;
                             }
                         }
                         .tf-question-desc {
@@ -1765,15 +1939,12 @@
             background-color: $color-filling-fg;
 
             @media #{$max768}{
-                padding: 32px;
-
+                padding: 32px 0;
             }
             @media #{$max575}{
-                padding: 16px;
+                padding: 16px 0;
             }
-            @media #{$max768} {
-                padding: 16px;
-            }
+          
             h2{
                 color: $color-heading;
                 font-size: 2rem;
@@ -1784,12 +1955,15 @@
                     margin-bottom: 24px;
                 }
             }
-            .slick-track{
-                display: flex;
-                margin-left: 0;
-                .slick-slide{
-                    height: inherit;
-                    margin: 0;
+            .slick-list{
+                margin: 0 -10px!important;
+                .slick-track{
+                    display: flex;
+                    margin-left: 0;
+                    .slick-slide{
+                        height: inherit;
+                        margin: 0;
+                    }
                 }
             }
             .tf-slider-item{
@@ -1800,9 +1974,11 @@
                 margin-bottom: 0px;
                 @media #{$max1024}{
                     padding: 0px 4px;
+                    margin: 0 8px!important;
                 }
                 @media #{$max768}{
                     padding: 0px 12px;
+                    margin: 0!important;
                 }
                 @media only screen and (min-width: 768px) and (max-width: 970px) {
                     height: auto;
@@ -1920,6 +2096,42 @@
             .slick-prev.pull-left.slick-arrow{
                 right: 120px;
             }
+
+            .tf-upcomming-tours-list-outter{
+                .slick-arrow{
+                    left: unset;
+                    right: 0;
+                    top: -45px;
+                    width: auto;
+                    height: auto;
+                    @media #{$max768}{
+                        top: -40px;
+                    }
+                   
+                    &::before{
+                        font-family: 'Remixicon';
+                        font-size: 1.5rem;
+                        color: $color-primary;
+                        @media #{$max768}{
+                            font-size: 1.25rem;
+                        }
+                    }
+                    &.slick-prev{
+                        right: 40px;
+                        @media #{$max1024}{
+                           right: 30px;
+                        }
+                        &::before{
+                           content: '\ea60';
+                        }
+                    }
+                    &.slick-next{
+                        &::before{
+                            content: '\ea6c';
+                        }
+                    }
+                }
+            }
         }
 
         // Inquery Box
@@ -1942,6 +2154,7 @@
             }
             i{
                 font-size: 4rem;
+                line-height: 1;
             }
             h3{
                 color: $color-heading;
@@ -2178,11 +2391,9 @@
                         }
                         @media #{$max768}{
                             margin-top: 64px;
-                            padding-right: 16px;
                         }
                         @media #{$max575}{
                             margin-top: 16px;
-                            padding-right: 16px;
                         }
 
                         a.tf-share-toggle,
@@ -2252,6 +2463,7 @@
                                         padding: 0;
                                         height: 0px;
                                         width: 0px;
+                                        border: 0;
                                     }
                                 }
                             }
@@ -2272,7 +2484,7 @@
                             padding: 0px 0 32px 0;
                         }
                         @media #{$max768}{
-                            padding: 0px 16px 16px 16px;
+                            padding: 0px 0 16px 16px;
                         }
                         @media #{$max575}{
                             padding-left: 0;
@@ -2286,8 +2498,12 @@
                             h1{
                                 color: $color-white;
                                 margin-bottom: 16px;
-                                line-height: initial;
                                 font-size: 2.375rem;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                display: -webkit-box;
+                                -webkit-line-clamp: 1;
+                                -webkit-box-orient: vertical;
                                 @media #{$max1024}{
                                     font-size: 2rem;
                                 }
@@ -2295,17 +2511,12 @@
                                     font-size: 1.25rem;
                                     margin-bottom: 8px;
                                 }
-                                @media #{$max575}{
-                                    display: -webkit-box;
-                                    overflow: hidden;
-                                    -webkit-line-clamp: 2;
-                                    -webkit-box-orient: vertical;
-                                }
                             }
                             .tf-title-meta {
                                 font-size: 1.5rem;
                                 color: $color-white;
                                 display: flex;
+                                align-items: center;
                                 gap: 8px;
                                 width: 80%;
                                 @media #{$max1024}{
@@ -2316,9 +2527,17 @@
                                     font-size: 0.875rem;
                                     line-height: 1.3;
                                 }
+                                i{
+                                    line-height: 1;
+                                }
                                 a {
                                     color: $color-white;
                                     font-size: 1.3rem;
+                                    overflow: hidden;
+                                    text-overflow: ellipsis;
+                                    display: -webkit-box;
+                                    -webkit-line-clamp: 2;
+                                    -webkit-box-orient: vertical;
                                     @media #{$max1024}{
                                         font-size: 1rem;
                                     }
@@ -2340,7 +2559,7 @@
                                 display: flex;
                                 align-items: center;
                                 justify-content: center;
-                                background: $color-brand-dark;
+                                background-color: $color-gray-linear;
                                 color: $color-white;
                                 background-size: cover;
                                 background-position: center;
@@ -2553,6 +2772,7 @@
                         &.tf-place{
                             display: flex;
                             flex: 1;
+                            align-items: center;
                             .tf-icon{
                                 width: auto;
                                 height: auto;
@@ -2569,8 +2789,9 @@
             }
         }
         .tf-single-widgets h3{
-            font-size: 1.875rem;
+            font-size: 2rem;
             margin-bottom: 0;
+            line-height: 1.2;
             @media #{$max1024}{
                 font-size: 1.25rem;
             }
@@ -2740,6 +2961,11 @@
                 font-weight: 400;
                 color: $color-text;
                 padding: 0px;
+                svg{
+                    path,rect{
+                        fill: $color-text;
+                    }
+                }
             }
 
             .acr-select input[type=tel] {
@@ -2754,6 +2980,10 @@
                 padding-right: 0px;
                 border-radius: 20px;
                 background: $color-filling-bg;
+                @media #{$max575}{
+                    width: 30px;
+                    height: 30px;
+                }
             }
 
             form {
@@ -2827,10 +3057,10 @@
                 h3.tf-person-info-title{
                     color: $color-heading;
                     font-size: 2rem;
-                    font-weight: 400;
+                    font-weight: 700;
                     margin: 0;
                     @media #{$max1024}{
-                        font-size: 1.5rem;
+                        font-size: 1.25rem;
                     }
                 }
             }
@@ -3011,6 +3241,9 @@
                             display: flex;
                             gap: 32px;
                             flex-wrap: wrap;
+                            @media #{$max768}{
+                                gap: 16px;
+                            }
                             li {
                                 a {
                                     text-decoration: none;
@@ -3043,11 +3276,16 @@
                                     font-size: 0.875rem;
                                 }
                             }
-                            span.tf-see-description,
-                            span.tf-see-less-description{
+                            .tf-see-description,
+                            .tf-see-less-description{
                                 cursor: pointer;
+                                color: $color-primary;
+                                display: inline-block;
                                 @media #{$max768}{
                                     font-size: 0.875rem;
+                                }
+                                &:hover{
+                                    color: $color-brand-dark;
                                 }
                             }
                             .tf-full-description{
@@ -3058,7 +3296,7 @@
                             }
                         }
                         .tf-overview-popular-facilities {
-                            span.tf-popular-facilities-title {
+                            .tf-popular-facilities-title {
                                 color: $color-text;
                                 font-size: 1rem;
                                 display: block;
@@ -3076,12 +3314,14 @@
                                 li {
                                     width: 25%;
                                     display: flex;
-                                    @media #{$max768}{
-                                        width: 50%;
-                                    }
-                                    @media only screen and (max-width: 1280px) {
+                                    align-items: center;
+                                    @media (max-width: 1280px) {
                                         width: 33%;
                                     }
+                                    @media #{$max575}{
+                                        width: 50%;
+                                    }
+                                    
                                     i{
                                         margin-right: 8px;
                                         font-size: 1.25rem;
@@ -3187,24 +3427,24 @@
                         .tf-highlights-wrapper {
                             display: flex;
                             gap: 24px;
-                            padding: 32px 0;
+                            padding: 32px;
                             background: $color-filling-fg;
                             border-radius: 0px;
                             box-shadow: none;
                             @include align-items(center);
                             @media #{$max1024}{
-                                padding: 16px 0px 16px 16px;
+                                padding: 16px;
                             }
                             .tf-highlights-icon {
                                 width: 230px;
-                                padding-left: 15px;
+                                height: 230px;
                                 @media #{$max1024}{
                                     display: none;
                                 }
                                 svg,
                                 img {
-                                    width: 230px;
-                                    height: 230px;
+                                    width: 100%;
+                                    height: 100%;
                                     object-fit: cover;
                                 }
                                 svg path{
@@ -3229,12 +3469,16 @@
                                 p{
                                     margin: 0;
                                 }
-                                ul {
+                                ul,
+                                ol {
                                     margin: 0px 0px 0px 13px;;
                                     padding: 0;
                                     display: flex;
                                     gap: 16px;
                                     flex-direction: column;
+                                    li{
+                                        list-style: unset;
+                                    }
                                 }
                             }
                         }
@@ -3303,7 +3547,7 @@
                         }
                         @media #{$max768}{
                             align-items: center;
-                            padding: 0px 16px 16px 16px;
+                            padding: 0px 16px 16px 0px;
                         }
                         h1{
                             color: $color-white;
@@ -3317,21 +3561,394 @@
                     .tf-title-meta {
                         font-size: 1.5rem;
                         line-height: 1.5;
-                        padding-top: 8px;
                         @media #{$max1024}{
-                            margin-top: 6px;
+                            padding-top: 16px;
+                        }
+                        @media #{$max575}{
+                            padding-top: 4px;
                         }
                         p{
                             color: $color-white;
                             margin: 0px;
                             font-size: 1.5rem;
                             line-height: 1.5;
+                            @media #{$max768}{
+                                font-size: 0.875rem;
+                            }
                         }
                     }
                 }
             }
         }
+        .tf-archive-search-form {
+            width: 100%;
+            @media #{$max768}{
+                width: auto;
+            }
+            .tf_archive_search_result{
+                @media #{$max768} {
+                    padding: 16px;
+                    display: none;
+                }
+                .tf-booking-form-submit{
+                    @media #{$max768} {
+                        width: 100%;
+                    }
+                }
+            }
+            .tf-booking-form {
+                .tf-booking-form-fields {
+                    @media #{$max768} {
+                        width: 100%;
+                        display: flow-root;
+                        padding: 0;
+                        padding-bottom: 15px;
+                    }
+                    &>div{
+                        @media #{$max1024}{
+                            width: 20%;
+                        }
+                    }
+                    .tf-booking-form-location {
+                        display: flex;
+                        align-items: flex-start;
+                        padding-right: 25px;
+                        padding-left: 0;
+                        width: 40%;
+                        @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                            padding-right: 10px;
+                            width: 25%;
+                        }
+                        @media only screen and (max-width: 1200px){
+                            padding-right: 28px;
+                            padding-left: 4px;
+                        }
+                        @media #{$max1024}{
+                            padding-right: 15px;
+                            padding-left: 0px;
+                        }
+                        @media #{$max768} {
+                            width: 100%;
+                            padding: 0px;
+                            border-right: 0px solid;
+                            margin-bottom: 15px;
+                        }
+                        .tf-booking-location-wrap {
+                            display: flex;
+                            flex-direction: row;
+                            background: $color-filling-bg;
+                            padding: 0 12px;
+                            width: 100%;
+                            align-items: center;
+                            position: relative;
 
+                            svg{
+                                path{
+                                    stroke: $color-text;
+                                }
+                            }
+
+                            input{
+                                padding: 9px;
+                                border: none;
+                                outline: none;
+                                width: 100%;
+                                background: transparent;
+                                box-shadow: none;
+                                font-size: 0.75rem;
+                                color: $color-text;
+                                &::placeholder{
+                                    color: $color-text;
+                                }
+                            }
+
+                            #tf-locationautocomplete-list,
+                            #tf-destinationautocomplete-list,
+                            #tf-apartment-locationautocomplete-list{
+                                position: absolute;
+                                left: 0;
+                                top: 100%;
+                                width: 250px;
+                                background: $color-brand-lite;
+                                z-index: 999;
+                                max-height: 200px;
+                                overflow: auto;
+                                scrollbar-width: thin;
+                                scrollbar-color: $scrollbar-color;
+                                padding: 8px;
+                                @media #{$max768} {
+                                    width: 100%;
+                                }
+                                &::-webkit-scrollbar{
+                                    width: 5px;
+                                }
+                                &::-webkit-scrollbar-thumb {
+                                    background-color: $scrollbar-thumb-color;
+                                    border-radius: 4px;
+                                }
+                                &::-webkit-scrollbar-track {
+                                    background-color: $color-brand-lite;
+                                }
+                                div{
+                                    padding: 10px;
+                                    cursor: pointer;
+                                    background-color: $color-white;
+                                    margin-bottom: 4px;
+                                    color: $color-text;
+                                    display: block;
+                                    transition: .3s all ease;
+                                    &:last-child{
+                                        margin-bottom: 0px;
+                                    }
+                                    &:hover{
+                                        background: $color-brand-lite;
+                                    }
+                                    &::before{
+                                        display: none;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .tf-booking-form-checkin{
+                        @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                            padding-left: 10px;
+                            padding-right: 10px;
+                            max-width: none;
+                            width: 20%;
+                        }
+                        @media #{$max768} {
+                            width: 31%;
+                            float: left;
+                            padding: 0px;
+                            max-width: none;
+                        }
+                        @media #{$max575} {
+                            width: 50%;
+                        }
+                        .tf-booking-date{
+                            @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                                font-size: 1.25rem;
+                            }
+                        }
+                        .tf-duration span{
+                            @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                                margin: 0px 5px;
+                            }
+                        }
+                    }
+                    .tf-booking-form-checkout{
+                        @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                            padding-left: 10px;
+                            padding-right: 10px;
+                            max-width: none;
+                            width: 20%;
+                        }
+                        @media #{$max768} {
+                            width: 31%;
+                            float: left;
+                            padding: 0px;
+                            padding-left: 20px;
+                            max-width: none;
+                        }
+                        @media #{$max575} {
+                            width: 50%;
+                            float: left;
+                            max-width: none;
+                        }
+                        .tf-booking-date{
+                            @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                                font-size: 1.25rem;
+                            }
+                        }
+                        .tf-duration span{
+                            @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                                margin: 0px 5px;
+                            }
+                        }
+                    }
+
+                    .tf-booking-form-guest-and-room {
+                        padding-left: 25px;
+                        padding-right: 25px;
+                        min-width: 160px;
+                        @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                            padding-left: 10px;
+                            padding-right: 10px;
+                            width: 35%;
+                            min-width: auto;
+                        }
+                        @media only screen and (max-width: 1200px){
+                            padding-right: 28px;
+                            padding-left: 28px;
+                        }
+                        @media #{$max1024}{
+                            padding-right: 15px;
+                            padding-left: 20px;
+                            min-width: 160px;
+                        }
+                        @media #{$max768} {
+                            width: 31%;
+                            float: left;
+                            padding-right: 0px;
+                            min-width: auto;
+                        }
+                        @media #{$max575} {
+                            padding-left: 0px;
+                        }
+                        .tf-booking-date{
+                            @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                                font-size: 1.25rem;
+                            }
+                        }
+                        .tf-booking-form-guest-and-room-inner {
+                            .tf-booking-guest-and-room-wrap.tf-archive-guest-info {
+                                margin-top: 8px;
+                                color: $color-text;
+                                display: -webkit-box;
+                                display: -ms-flexbox;
+                                display: flex;
+                                -webkit-box-align: center;
+                                -ms-flex-align: center;
+                                align-items: center;
+                                gap: 5px;
+                                @media #{$max768}{
+                                    gap: 8px;
+                                    float: left;
+                                    margin-top: 0;
+                                    line-height: normal;
+                                }
+                                span{
+                                    font-size: 1.5rem;
+                                    margin-bottom: -3px;
+                                    color: $color-text;
+                                    display: -webkit-box;
+                                    display: -ms-flexbox;
+                                    display: flex;
+                                    -webkit-box-align: center;
+                                    -ms-flex-align: center;
+                                    align-items: center;
+                                    gap: 5px;
+                                    @media #{$max1024}{
+                                        font-size: 1.25rem;
+                                    }
+                                    @media #{$max575}{
+                                        line-height: inherit;
+                                    }
+                                }
+                            }
+                            .tf-arrow-icons{
+                                text-align: right;
+                                position: absolute;
+                                right: 18px;
+                                bottom: 0;
+                                @media #{$max768}{
+                                    float: left;
+                                    right: 10px;
+                                }
+                                svg{
+                                    path{
+                                        fill: $color-text;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    &.tf-tour-archive-block{
+                        .tf-booking-form-checkin{
+                            max-width: none;
+                            width: 37%;
+                            @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                                padding-left: 10px;
+                                padding-right: 10px;
+                            }
+                            @media #{$max768} {
+                                width: 50%;
+                                float: left;
+                                padding: 0px;
+                            }
+                            .tf-booking-date{
+                                @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                                    font-size: 1.25rem;
+                                }
+                            }
+                            .tf-duration span{
+                                @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                                    margin: 0px 5px;
+                                }
+                            }
+                            .tf-tour-searching-date-block{
+                                display: flex;
+                                align-items: center;
+                                .tf-duration{
+                                    span{
+                                        font-size: 1.5rem;
+                                        margin: 0px 15px;
+                                        color: $color-text;
+                                        @media #{$max1024}{
+                                            margin: 0px 5px;
+                                        }
+                                    }
+                                }
+                                span.tf-booking-month{
+                                    flex-direction: row;
+                                    svg{
+                                        margin-left: 4px;
+                                    }
+                                }
+                            }
+                        }
+                        .tf-booking-form-checkout{
+                            @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                                padding-left: 10px;
+                                padding-right: 10px;
+                            }
+                            .tf-booking-date{
+                                @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                                    font-size: 1.25rem;
+                                }
+                            }
+                            .tf-duration span{
+                                @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                                    margin: 0px 5px;
+                                }
+                            }
+                        }
+                        .tf-booking-form-guest-and-room{
+                            @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                                padding-left: 10px;
+                                padding-right: 10px;
+                                width: 20%;
+                                min-width: auto;
+                            }
+                            @media #{$max768} {
+                                width: 50%;
+                                float: left;
+                                padding-left: 20px;
+                                padding-right: 0px;
+                                margin: 0;
+                            }
+                            .tf-booking-date{
+                                @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                                    font-size: 1.25rem;
+                                }
+                            }
+                            span.tf-booking-month{
+                                flex-direction: row;
+                                svg{
+                                    margin-left: 4px;
+                                }
+                            }
+                        }
+                        .tf-booking-form-location{
+                            @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                                padding-right: 10px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
         .tf-archive-right.tf-filter-show{
             display: block;
         }
@@ -3350,37 +3967,50 @@
                     color: $color-white;
                     padding: 12px 16px;
                 }
-               .tf-archive-ordering #tf-orderby {
-                    background-color: $color-filling-bg;
-                    color: $color-text;
-                    padding: 15px 36px 15px 15px;
-                    height: 100%;
-                    background-position: calc(100% - 12px) 50%;
-                    border: none;
-                    border-radius: 0px;
-                    font-size: 1rem;
-                    background-size: 16px;
-                    -webkit-appearance: none;
-                    appearance: none;
-                    -moz-appearance: none;
-                    background-image: url('https://www.svgrepo.com/show/80156/down-arrow.svg');
-                    background-repeat: no-repeat;
-                    background-size: 12px 12px;
-                    cursor: pointer;
+               .tf-archive-ordering {
+                    position: relative;
+                    #tf-orderby {
+                        background-color: $color-filling-bg;
+                        color: $color-text;
+                        padding: 15px 36px 15px 15px;
+                        height: 100%;
+                        background-position: calc(100% - 12px) 50%;
+                        border: none;
+                        border-radius: 0px;
+                        font-size: 1rem;
+                        -webkit-appearance: none;
+                        appearance: none;
+                        -moz-appearance: none;
+                        cursor: pointer;
 
-                    &:focus-visible {
-                        outline: none;
-                    }
+                        &:focus-visible {
+                            outline: none;
+                        }
 
-                    @media #{$max1024}{
-                        font-size: 0.875rem;
-                        padding: 10px 36px 10px 10px;
-                        background-size: 14px;
+                        @media #{$max1024}{
+                            font-size: 1rem;
+                            padding: 10px 36px 10px 10px;
+                            background-size: 14px;
+                            background: transparent;
+                        }
+                        @media #{$max575}{
+                            max-width: 150px;
+                            font-size: 0.875rem;
+                            padding: 0;
+                        }
                     }
-                    @media #{$max575}{
-                        max-width: 150px;
+                    i {
+                        position: absolute;
+                        top: 50%;
+                        right: 12px;
+                        transform: translateY(-50%);
+                        color: $color-text;
+                        @media #{$max575}{
+                            font-size: 0.875rem;
+                            right: auto;
+                        }
                     }
-               }
+                }
             }
             .tf-archive-available-rooms {
                 .tf-available-room {
@@ -3406,6 +4036,9 @@
                         @media #{$max768}{
                             width: 100%;
                             max-width: 100%;
+                        }
+                        @media #{$max575}{
+                            min-height: 250px;
                         }
                         .tf-room-gallery {
                             &:nth-child(n+1) {
@@ -3491,7 +4124,7 @@
                             width: 100%;
                         }
                         @media #{$max575}{
-                            padding: 20px 16px;
+                            flex-direction: column;
                         }
                         .tf-available-room-content-left {
                             display: flex;
@@ -3501,9 +4134,13 @@
                                 a {
                                     text-decoration: none;
                                     color: inherit;
+                                    display: block;
+                                    transition: all 0.2s linear;
                                 }
-                                a:hover {
-                                    color: inherit;
+                                &:hover{
+                                    a{
+                                        color: $color-primary;
+                                    }
                                 }
                             }
                             ul{
@@ -3526,6 +4163,7 @@
                                 .tf-section-title {
                                     margin: 0 0 10px 0;
                                     font-size: 1.875rem;
+                                    line-height: 1.4;
                                     @media only screen and (max-width: 1200px){
                                         font-size: 1.5rem;
                                     }
@@ -3533,12 +4171,16 @@
                                 .tf-title-location {
                                     display: inline-flex;
                                     margin-top: 6px;
-                                    align-items: center;
+                                    margin-bottom: 10px;
                                     @media #{$max1024}{
                                         margin-bottom: 36px;
                                         font-size: 0.875rem;
                                     }
+                                    @media #{$max575}{
+                                        margin-bottom: 0;
+                                    }
                                     .location-icon{
+                                        line-height: 1;
                                         i{
                                             margin-right: 8px;
                                             font-size: 1.25rem;
@@ -3546,6 +4188,17 @@
                                                 font-size: 0.875rem;
                                             }
                                         }
+                                        span{
+                                            line-height: 1.3;
+                                        }
+                                    }
+                                    span{
+                                        line-height: 1.3;
+                                        overflow: hidden;
+                                        text-overflow: ellipsis;
+                                        display: -webkit-box;
+                                        -webkit-line-clamp: 2;
+                                        -webkit-box-orient: vertical;
                                     }
                                     svg{
                                         margin-right: 8px;
@@ -3559,7 +4212,12 @@
                         .tf-available-room-content-right {
                             width: 196px;
                             @media #{$max768}{
-                                margin-top: 15px;
+                                margin-top: 16px;
+                            }
+                            @media #{$max575}{
+                                margin-top: 0;
+                                width: 100%;
+                                align-items: start;
                             }
                             .tf-cancellation-refundable-text {
                                 margin-bottom: 48px;
@@ -3601,7 +4259,7 @@
                         border: 0.5px solid $color-border-lite;
                         background: $color-filling-bg;
                         height: 40px;
-                        color: $color-gray;
+                        color: $color-text;
                         font-size: 1rem;
                         font-weight: 400;
                         letter-spacing: 0.16px;
@@ -3630,6 +4288,16 @@
             gap: 32px;
             @media #{$max1024}{
                 gap: 16px;
+            }
+            .tf-close-sidebar {
+                display: none;
+                @media #{$max1024}{
+                    position: absolute;
+                    right: 17px;
+                    top: 12px;
+                    display: block;
+                    color: $color-danger;
+                }
             }
             .tf-filter-title {
                 display: flex;
@@ -3786,17 +4454,20 @@
                 width: calc(100% - 150px);
             }
             &>div {
-                width: 32%;
+                width: 30%;
                 border-right: 1px solid $color-border-lite;
                 display: flex;
                 flex-direction: column;
                 position: relative;
                 &.tf-booking-form-guest-and-room {
-                    width: 36%;
+                    width: 30%;
                     padding-left: 25px;
                     align-items: start;
                     border-right: none;
                     cursor: pointer;
+                    @media #{$max575}{
+                        padding-left: 0;
+                    }
                 }
             }
         }
@@ -4031,6 +4702,10 @@
                 padding-right: 0px;
                 border-radius: 20px;
                 background: $color-filling-fg;
+                @media #{$max575}{
+                    width: 30px;
+                    height: 30px;
+                }
             }
             .acr-dec,
             .acr-inc{
@@ -4072,6 +4747,7 @@
                     align-items: flex-start;
                     padding-right: 25px;
                     padding-left: 0;
+                    width: 24%;
                     @media only screen and (min-width: 1025px) and (max-width: 1165px) {
                         padding-right: 10px;
                         width: 25%;
@@ -4219,9 +4895,9 @@
                 }
 
                 .tf-booking-form-guest-and-room {
-                    padding-left: 40px;
-                    padding-right: 40px;
-                    min-width: 200px;
+                    padding-left: 25px;
+                    padding-right: 25px;
+                    min-width: 160px;
                     @media only screen and (min-width: 1025px) and (max-width: 1165px) {
                         padding-left: 10px;
                         padding-right: 10px;
@@ -4289,6 +4965,7 @@
                         }
                         .tf-arrow-icons{
                             text-align: right;
+                            right: -20px;
                             @media #{$max768}{
                                 float: left;
                             }
@@ -4386,6 +5063,38 @@
                         }
                     }
                 }
+            }
+        }
+    }
+}
+
+.post-type-archive-tf_hotel{
+    .tf-archive-booking-form__style-2{
+        .tf-booking-form {
+            .tf-booking-form-fields {
+              .tf-booking-form-location{
+                width: 24%;
+                @media #{$max768}{
+                    width: 100%;
+                }
+              }
+              &>div{
+                width: 24%;
+                &.tf-booking-form-guest-and-room{
+                    width: 36%;
+                    min-width: 200px;
+                    @media #{$max768}{
+                        width: 38%;
+                        min-width: auto;
+                    }
+                    @media #{$max575}{
+                        width: fit-content;
+                        margin: 12px 0 8px;
+                        padding-left: 0;
+                    }
+                }
+              }
+                 
             }
         }
     }

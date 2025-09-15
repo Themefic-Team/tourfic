@@ -1,3 +1,7 @@
+<?php
+// Don't load directly
+defined( 'ABSPATH' ) || exit;
+?>
 <div class="tf-wishlists">
     <table class="table" data-type='<?php echo esc_attr($type) ?>'>
         <thead>

@@ -1,3 +1,7 @@
+<?php
+// Don't load directly
+defined( 'ABSPATH' ) || exit;
+?>
 <div class="tf-archive-template__three">
 
     <div class="tf-content-wrapper">
@@ -196,7 +200,7 @@
                                                     'content' => base64_encode($infoWindowtext)
                                                 ];
                                             }
-                                            echo apply_filters("tf_apartment_archive_single_featured_card_design_one", Apartment::tf_apartment_archive_single_item());
+                                            echo wp_kses(apply_filters("tf_apartment_archive_single_featured_card_design_one", Apartment::tf_apartment_archive_single_item()), Helper::tf_custom_wp_kses_allow_tags());
                                         }
                                         while (have_posts()) {
                                             the_post();
@@ -272,7 +276,7 @@
                                                     'content' => base64_encode($infoWindowtext)
                                                 ];
                                             }
-                                            echo apply_filters("tf_apartment_archive_single_card_design_one", Apartment::tf_apartment_archive_single_item());
+                                            echo wp_kses(apply_filters("tf_apartment_archive_single_card_design_one", Apartment::tf_apartment_archive_single_item()), Helper::tf_custom_wp_kses_allow_tags());
                                         }
                                         wp_reset_query();
                                         ?>

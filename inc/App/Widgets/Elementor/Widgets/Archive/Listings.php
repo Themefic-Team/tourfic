@@ -422,7 +422,7 @@ class Listings extends Widget_Base {
 		]);
 
 		$this->add_control( 'listing_default_layout', [
-			'label'   => __( 'Deafult Layout', 'tourfic' ),
+			'label'   => esc_html__( 'Deafult Layout', 'tourfic' ),
 			'type'    => Controls_Manager::CHOOSE,
 			'options' => [
 				'grid' => [
@@ -447,7 +447,7 @@ class Listings extends Widget_Base {
 		]);
 
         $this->add_control('listing_layout',[
-			'label'   => __( 'Layout', 'tourfic' ),
+			'label'   => esc_html__( 'Layout', 'tourfic' ),
 			'type'    => Controls_Manager::CHOOSE,
 			'options' => [
 				'grid' => [
@@ -566,7 +566,7 @@ class Listings extends Widget_Base {
         ]);
 
 		$this->add_control('posts_per_page', [
-            'label' => __('Posts Per Page', 'tourfic'),
+            'label' => esc_html__('Posts Per Page', 'tourfic'),
             'type' => Controls_Manager::NUMBER,
             'default' => 10,
             'min' => 1,
@@ -575,23 +575,23 @@ class Listings extends Widget_Base {
         ]);
 
         $this->add_control('orderby', [
-            'label' => __('Order By', 'tourfic'),
+            'label' => esc_html__('Order By', 'tourfic'),
             'type' => Controls_Manager::SELECT,
             'options' => [
-				'ID'            => __( 'Post ID', 'tourfic' ),
-				'author'        => __( 'Post Author', 'tourfic' ),
-				'title'         => __( 'Title', 'tourfic' ),
-				'date'          => __( 'Date', 'tourfic' ),
-				'modified'      => __( 'Last Modified Date', 'tourfic' ),
-				'rand'          => __( 'Random', 'tourfic' ),
-				'comment_count' => __( 'Comment Count', 'tourfic' ),
-				'menu_order'    => __( 'Menu Order', 'tourfic' )
+				'ID'            => esc_html__( 'Post ID', 'tourfic' ),
+				'author'        => esc_html__( 'Post Author', 'tourfic' ),
+				'title'         => esc_html__( 'Title', 'tourfic' ),
+				'date'          => esc_html__( 'Date', 'tourfic' ),
+				'modified'      => esc_html__( 'Last Modified Date', 'tourfic' ),
+				'rand'          => esc_html__( 'Random', 'tourfic' ),
+				'comment_count' => esc_html__( 'Comment Count', 'tourfic' ),
+				'menu_order'    => esc_html__( 'Menu Order', 'tourfic' )
 			],
             'default' => 'date',
         ]);
 
         $this->add_control('order', [
-			'label'   => __( 'Order', 'tourfic' ),
+			'label'   => esc_html__( 'Order', 'tourfic' ),
 			'type'    => Controls_Manager::CHOOSE,
 			'options' => [
 				'asc' => [
@@ -619,7 +619,7 @@ class Listings extends Widget_Base {
 		// 		'hide_empty' => false,
 		// 	]);
 	
-		// 	$taxonomy_label = $object ? $object->labels->name : __('Terms', 'tourfic');
+		// 	$taxonomy_label = $object ? $object->labels->name : esc_html__('Terms', 'tourfic');
 		// 	$term_options = [
 		// 		'all' => sprintf(esc_html__('All %s', 'tourfic'), $taxonomy_label)
 		// 	];
@@ -646,10 +646,10 @@ class Listings extends Widget_Base {
         // }
 		
 		$this->add_control('show_image',[
-			'label' => __('Show Image', 'tourfic'),
+			'label' => esc_html__('Show Image', 'tourfic'),
 			'type' => Controls_Manager::SWITCHER,
-			'label_on' => __('Show', 'tourfic'),
-			'label_off' => __('Hide', 'tourfic'),
+			'label_on' => esc_html__('Show', 'tourfic'),
+			'label_off' => esc_html__('Hide', 'tourfic'),
 			'return_value' => 'yes',
 			'default' => 'yes',
 		]);
@@ -664,11 +664,11 @@ class Listings extends Widget_Base {
 		]);
 
         $this->add_control('show_fallback_img',[
-			'label' => __('Default Image', 'tourfic'),
-			'description' => __('Default image will be used if the post does not have a featured image.', 'tourfic'),
+			'label' => esc_html__('Default Image', 'tourfic'),
+			'description' => esc_html__('Default image will be used if the post does not have a featured image.', 'tourfic'),
 			'type' => Controls_Manager::SWITCHER,
-			'label_on' => __('Show', 'tourfic'),
-			'label_off' => __('Hide', 'tourfic'),
+			'label_on' => esc_html__('Show', 'tourfic'),
+			'label_off' => esc_html__('Hide', 'tourfic'),
 			'return_value' => 'yes',
 			'default' => '',
 			'condition' => [
@@ -677,7 +677,7 @@ class Listings extends Widget_Base {
 		]);
 
 		$this->add_control('fallback_img',[
-			'label'             => __( 'Image', 'tourfic' ),
+			'label'             => esc_html__( 'Image', 'tourfic' ),
 			'type'              => Controls_Manager::MEDIA,
 			'condition'         => [
 				'show_fallback_img'    => 'yes',
@@ -689,10 +689,10 @@ class Listings extends Widget_Base {
 		]);
 
 		$this->add_control('gallery', [
-			'label' => __('Gallery', 'tourfic'),
+			'label' => esc_html__('Gallery', 'tourfic'),
 			'type' => Controls_Manager::SWITCHER,
-			'label_on' => __('Show', 'tourfic'),
-			'label_off' => __('Hide', 'tourfic'),
+			'label_on' => esc_html__('Show', 'tourfic'),
+			'label_off' => esc_html__('Hide', 'tourfic'),
 			'return_value' => 'yes',
 			'default' => 'yes',
 			'conditions' => $this->tf_display_conditionally([
@@ -705,10 +705,10 @@ class Listings extends Widget_Base {
 		]);
 
 		$this->add_control('tour_infos', [
-			'label' => __('Tour Information', 'tourfic'),
+			'label' => esc_html__('Tour Information', 'tourfic'),
 			'type' => Controls_Manager::SWITCHER,
-			'label_on' => __('Show', 'tourfic'),
-			'label_off' => __('Hide', 'tourfic'),
+			'label_on' => esc_html__('Show', 'tourfic'),
+			'label_off' => esc_html__('Hide', 'tourfic'),
 			'return_value' => 'yes',
 			'default' => 'yes',
 			'conditions' => $this->tf_display_conditionally([
@@ -717,10 +717,10 @@ class Listings extends Widget_Base {
 		]);
 
 		$this->add_control('featured_badge', [
-			'label' => __('Featured Badge', 'tourfic'),
+			'label' => esc_html__('Featured Badge', 'tourfic'),
 			'type' => Controls_Manager::SWITCHER,
-			'label_on' => __('Show', 'tourfic'),
-			'label_off' => __('Hide', 'tourfic'),
+			'label_on' => esc_html__('Show', 'tourfic'),
+			'label_off' => esc_html__('Hide', 'tourfic'),
 			'return_value' => 'yes',
 			'default' => 'yes',
 			'condition'         => [
@@ -730,10 +730,10 @@ class Listings extends Widget_Base {
 		]);
 
 		$this->add_control('discount_tag', [
-			'label' => __('Discount Tag', 'tourfic'),
+			'label' => esc_html__('Discount Tag', 'tourfic'),
 			'type' => Controls_Manager::SWITCHER,
-			'label_on' => __('Show', 'tourfic'),
-			'label_off' => __('Hide', 'tourfic'),
+			'label_on' => esc_html__('Show', 'tourfic'),
+			'label_off' => esc_html__('Hide', 'tourfic'),
 			'return_value' => 'yes',
 			'default' => 'yes',
 			'conditions' => $this->tf_display_conditionally([
@@ -746,10 +746,10 @@ class Listings extends Widget_Base {
 		]);
 
 		$this->add_control('promotional_tags', [
-			'label' => __('Promotional Tags', 'tourfic'),
+			'label' => esc_html__('Promotional Tags', 'tourfic'),
 			'type' => Controls_Manager::SWITCHER,
-			'label_on' => __('Show', 'tourfic'),
-			'label_off' => __('Hide', 'tourfic'),
+			'label_on' => esc_html__('Show', 'tourfic'),
+			'label_off' => esc_html__('Hide', 'tourfic'),
 			'return_value' => 'yes',
 			'default' => 'yes',
 			'condition'         => [
@@ -758,16 +758,16 @@ class Listings extends Widget_Base {
 		]);
 
 		$this->add_control('show_title',[
-			'label' => __('Show Title', 'tourfic'),
+			'label' => esc_html__('Show Title', 'tourfic'),
 			'type' => Controls_Manager::SWITCHER,
-			'label_on' => __('Show', 'tourfic'),
-			'label_off' => __('Hide', 'tourfic'),
+			'label_on' => esc_html__('Show', 'tourfic'),
+			'label_off' => esc_html__('Hide', 'tourfic'),
 			'return_value' => 'yes',
 			'default' => 'yes',
 		]);
 
 		$this->add_control('title_length',[
-			'label' => __('Title Length', 'tourfic'),
+			'label' => esc_html__('Title Length', 'tourfic'),
 			'type' => Controls_Manager::NUMBER,
 			'default' => 55,
             'min' => 1,
@@ -779,10 +779,10 @@ class Listings extends Widget_Base {
 		]);
 
 		$this->add_control('show_excerpt',[
-			'label' => __('Show Excerpt', 'tourfic'),
+			'label' => esc_html__('Show Excerpt', 'tourfic'),
 			'type' => Controls_Manager::SWITCHER,
-			'label_on' => __('Show', 'tourfic'),
-			'label_off' => __('Hide', 'tourfic'),
+			'label_on' => esc_html__('Show', 'tourfic'),
+			'label_off' => esc_html__('Hide', 'tourfic'),
 			'return_value' => 'yes',
 			'default' => 'yes',
 			'conditions' => $this->tf_display_conditionally([
@@ -793,7 +793,7 @@ class Listings extends Widget_Base {
 		]);
 
 		$this->add_control('excerpt_length',[
-			'label' => __('Excerpt Characters', 'tourfic'),
+			'label' => esc_html__('Excerpt Characters', 'tourfic'),
 			'type' => Controls_Manager::NUMBER,
 			'default' => 100,
 			'min' => 1,
@@ -809,10 +809,10 @@ class Listings extends Widget_Base {
 		]);
 
 	    $this->add_control('show_location',[
-			'label' => __('Show Location', 'tourfic'),
+			'label' => esc_html__('Show Location', 'tourfic'),
 			'type' => Controls_Manager::SWITCHER,
-			'label_on' => __('Show', 'tourfic'),
-			'label_off' => __('Hide', 'tourfic'),
+			'label_on' => esc_html__('Show', 'tourfic'),
+			'label_off' => esc_html__('Hide', 'tourfic'),
 			'return_value' => 'yes',
 			'default' => 'yes',
 			'condition' => [
@@ -836,7 +836,7 @@ class Listings extends Widget_Base {
 		]);
 
 		$this->add_control('location_length',[
-			'label' => __('Location Characters', 'tourfic'),
+			'label' => esc_html__('Location Characters', 'tourfic'),
 			'type' => Controls_Manager::NUMBER,
 			'default' => 120,
 			'min' => 1,
@@ -849,10 +849,10 @@ class Listings extends Widget_Base {
 		]);
 
 		$this->add_control('show_features',[
-			'label' => __('Show Features', 'tourfic'),
+			'label' => esc_html__('Show Features', 'tourfic'),
 			'type' => Controls_Manager::SWITCHER,
-			'label_on' => __('Show', 'tourfic'),
-			'label_off' => __('Hide', 'tourfic'),
+			'label_on' => esc_html__('Show', 'tourfic'),
+			'label_off' => esc_html__('Hide', 'tourfic'),
 			'return_value' => 'yes',
 			'default' => 'yes',
 			'conditions' => $this->tf_display_conditionally([
@@ -863,7 +863,7 @@ class Listings extends Widget_Base {
 		]);
 
 		$this->add_control('features_count',[
-			'label' => __('Features Count', 'tourfic'),
+			'label' => esc_html__('Features Count', 'tourfic'),
 			'type' => Controls_Manager::NUMBER,
 			'default' => 4,
             'min' => 1,
@@ -879,26 +879,26 @@ class Listings extends Widget_Base {
 		]);
 
 		$this->add_control('show_review',[
-			'label' => __('Show Review', 'tourfic'),
+			'label' => esc_html__('Show Review', 'tourfic'),
 			'type' => Controls_Manager::SWITCHER,
-			'label_on' => __('Show', 'tourfic'),
-			'label_off' => __('Hide', 'tourfic'),
+			'label_on' => esc_html__('Show', 'tourfic'),
+			'label_off' => esc_html__('Hide', 'tourfic'),
 			'return_value' => 'yes',
 			'default' => 'yes',
 		]);
 
 		$this->add_control('show_price',[
-			'label' => __('Show Price', 'tourfic'),
+			'label' => esc_html__('Show Price', 'tourfic'),
 			'type' => Controls_Manager::SWITCHER,
-			'label_on' => __('Show', 'tourfic'),
-			'label_off' => __('Hide', 'tourfic'),
+			'label_on' => esc_html__('Show', 'tourfic'),
+			'label_off' => esc_html__('Hide', 'tourfic'),
 			'return_value' => 'yes',
 			'default' => 'yes',
 		]);
 
 		//car infos select2
 		$this->add_control('car_infos', [
-			'label' => __('Car Information', 'tourfic'),
+			'label' => esc_html__('Car Information', 'tourfic'),
 			'type' => Controls_Manager::SELECT2,
 			'label_block' => true,
 			'multiple' => true,
@@ -917,10 +917,10 @@ class Listings extends Widget_Base {
 		]);
 
 		$this->add_control('show_view_details', [
-			'label' => __('Show View Details', 'tourfic'),
+			'label' => esc_html__('Show View Details', 'tourfic'),
 			'type' => Controls_Manager::SWITCHER,
-			'label_on' => __('Show', 'tourfic'),
-			'label_off' => __('Hide', 'tourfic'),
+			'label_on' => esc_html__('Show', 'tourfic'),
+			'label_off' => esc_html__('Hide', 'tourfic'),
 			'return_value' => 'yes',
 			'default' => 'yes',
 		]);
@@ -941,30 +941,30 @@ class Listings extends Widget_Base {
 
 	protected function tf_pagination_controls(){
         $this->start_controls_section('tf_pagination_section', [
-			'label' => __('Pagination', 'tourfic'),
+			'label' => esc_html__('Pagination', 'tourfic'),
 			'tab' => Controls_Manager::TAB_CONTENT,
 		]);
 
         $this->add_control( 'show_pagination', [
-			'label' => __('Show pagination', 'tourfic'),
+			'label' => esc_html__('Show pagination', 'tourfic'),
 			'type' => Controls_Manager::SWITCHER,
-			'label_on' => __('Show', 'tourfic'),
-			'label_off' => __('Hide', 'tourfic'),
+			'label_on' => esc_html__('Show', 'tourfic'),
+			'label_off' => esc_html__('Hide', 'tourfic'),
 			'return_value' => 'yes',
 			'default' => 'yes',
 		]);
 
         $this->add_control( 'pagination_prev_label', [
-			'label' => __('Previous Label', 'tourfic'),
-			'default' => __('<< Previous', 'tourfic'),
+			'label' => esc_html__('Previous Label', 'tourfic'),
+			'default' => esc_html__('<< Previous', 'tourfic'),
 			'condition' => [
 				'show_pagination' => 'yes',
 			]
 		]);
 
         $this->add_control( 'pagination_next_label', [
-			'label' => __('Next Label', 'tourfic'),
-			'default' => __('Next >>', 'tourfic'),
+			'label' => esc_html__('Next Label', 'tourfic'),
+			'default' => esc_html__('Next >>', 'tourfic'),
 			'condition' => [
 				'show_pagination' => 'yes',
 			]
@@ -975,16 +975,16 @@ class Listings extends Widget_Base {
 
 	protected function tf_general_style_controls() {
 		$this->start_controls_section( 'listing_style_general', [
-			'label' => __( 'General', 'tourfic' ),
+			'label' => esc_html__( 'General', 'tourfic' ),
 			'tab'   => Controls_Manager::TAB_STYLE,
 		] );
 
 		//result
 		$this->add_control( 'result_style_toggle', [
-			'label'        => __( 'Search Result', 'tourfic' ),
+			'label'        => esc_html__( 'Search Result', 'tourfic' ),
 			'type'         => Controls_Manager::POPOVER_TOGGLE,
-			'label_off'    => __( 'Controls', 'tourfic' ),
-			'label_on'     => __( 'Custom', 'tourfic' ),
+			'label_off'    => esc_html__( 'Controls', 'tourfic' ),
+			'label_on'     => esc_html__( 'Custom', 'tourfic' ),
 			'return_value' => 'yes',
 			'condition' => [
 				'show_total_result' => 'yes',
@@ -993,7 +993,7 @@ class Listings extends Widget_Base {
 
 		$this->start_popover();
 		$this->add_control( 'tf_result_color', [
-			'label'     => __( 'Text Color', 'tourfic' ),
+			'label'     => esc_html__( 'Text Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
 				"{{WRAPPER}} .tf-archive-head .tf-search-result" => 'color: {{VALUE}};',
@@ -1008,7 +1008,7 @@ class Listings extends Widget_Base {
 			],
 		] );
 		$this->add_responsive_control( "result_margin", [
-			'label'      => __( 'Margin', 'tourfic' ),
+			'label'      => esc_html__( 'Margin', 'tourfic' ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
 				'px',
@@ -1030,7 +1030,7 @@ class Listings extends Widget_Base {
 		$this->end_popover();
 
 		$this->add_group_control( Group_Control_Typography::get_type(), [
-            'label'    => __( 'Result Typography', 'tourfic' ),
+            'label'    => esc_html__( 'Result Typography', 'tourfic' ),
 			'name'     => "tf_result_typography",
 			'selector' => "{{WRAPPER}} .tf-archive-head .tf-search-result, {{WRAPPER}} .tf-available-rooms-head>span.tf-total-results, {{WRAPPER}} .tf-archive-top .tf-total-results, {{WRAPPER}} .tf-action-top .tf-result-counter-info, {{WRAPPER}} .tf-archive-header .tf-total-result-bar",
 			'separator' => 'after',
@@ -1041,10 +1041,10 @@ class Listings extends Widget_Base {
 
 		//sorting
 		$this->add_control( 'sorting_style_toggle', [
-			'label'        => __( 'Sorting', 'tourfic' ),
+			'label'        => esc_html__( 'Sorting', 'tourfic' ),
 			'type'         => Controls_Manager::POPOVER_TOGGLE,
-			'label_off'    => __( 'Controls', 'tourfic' ),
-			'label_on'     => __( 'Custom', 'tourfic' ),
+			'label_off'    => esc_html__( 'Controls', 'tourfic' ),
+			'label_on'     => esc_html__( 'Custom', 'tourfic' ),
 			'return_value' => 'yes',
 			'condition' => [
 				'show_sorting' => 'yes',
@@ -1054,7 +1054,7 @@ class Listings extends Widget_Base {
 
 		$this->start_popover();
 		$this->add_control( 'tf_sorting_color', [
-			'label'     => __( 'Text Color', 'tourfic' ),
+			'label'     => esc_html__( 'Text Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
 				"{{WRAPPER}} .tf-sorting-selection-warper form select#tf-orderby" => 'color: {{VALUE}};',
@@ -1065,7 +1065,7 @@ class Listings extends Widget_Base {
 			],
 		]);
 		$this->add_responsive_control( "sorting_margin", [
-			'label'      => __( 'Margin', 'tourfic' ),
+			'label'      => esc_html__( 'Margin', 'tourfic' ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
 				'px',
@@ -1081,7 +1081,7 @@ class Listings extends Widget_Base {
 			],
 		]);
 		$this->add_responsive_control( "sorting_padding", [
-			'label'      => __( 'Padding', 'tourfic' ),
+			'label'      => esc_html__( 'Padding', 'tourfic' ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
 				'px',
@@ -1097,7 +1097,7 @@ class Listings extends Widget_Base {
 			],
 		] );
 		$this->add_control( 'tf_sorting_bg_color', [
-			'label'     => __( 'Background Color', 'tourfic' ),
+			'label'     => esc_html__( 'Background Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
 				"{{WRAPPER}} .tf-sorting-selection-warper form select#tf-orderby" => 'background-color: {{VALUE}} !important;',
@@ -1113,7 +1113,7 @@ class Listings extends Widget_Base {
 							{{WRAPPER}} .tf-action-top .tf-list-grid .tf-archive-ordering #tf-orderby",
 		] );
 		$this->add_control( "sorting_border_radius", [
-			'label'      => __( 'Border Radius', 'tourfic' ),
+			'label'      => esc_html__( 'Border Radius', 'tourfic' ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
 				'px',
@@ -1129,7 +1129,7 @@ class Listings extends Widget_Base {
 		$this->end_popover();
 
 		$this->add_group_control( Group_Control_Typography::get_type(), [
-            'label'    => __( 'Sorting Typography', 'tourfic' ),
+            'label'    => esc_html__( 'Sorting Typography', 'tourfic' ),
 			'name'     => "tf_sorting_typography",
 			'selector' => "{{WRAPPER}} .tf-sorting-selection-warper form select#tf-orderby",
 			'condition' => [
@@ -1143,7 +1143,7 @@ class Listings extends Widget_Base {
 
 	protected function tf_toggle_btn_style_controls() {
 		$this->start_controls_section( 'toggle_btn_style', [
-			'label' => __( 'Layout Toggle Style', 'tourfic' ),
+			'label' => esc_html__( 'Layout Toggle Style', 'tourfic' ),
 			'tab'   => Controls_Manager::TAB_STYLE,
 			'conditions' => $this->tf_display_conditionally([
                 'tf_hotel' => ['design-1', 'design-3', 'default'],
@@ -1210,10 +1210,10 @@ class Listings extends Widget_Base {
 		$this->start_controls_tabs( "tabs_toggle_icon_style" );
 		/*-----Button NORMAL state------ */
 		$this->start_controls_tab( "tab_toggle_icon_normal", [
-			'label' => __( 'Normal', 'tourfic' ),
+			'label' => esc_html__( 'Normal', 'tourfic' ),
 		] );
 		$this->add_control( 'tf_toggle_icon_color', [
-			'label'     => __( 'Icon Color', 'tourfic' ),
+			'label'     => esc_html__( 'Icon Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
 				"{{WRAPPER}} .tf-archive-head .tf-icon i" => 'color: {{VALUE}};',
@@ -1227,7 +1227,7 @@ class Listings extends Widget_Base {
 			],
 		] );
 		$this->add_control( 'toggle_icon_bg_color', [
-			'label'     => __( 'Background Color', 'tourfic' ),
+			'label'     => esc_html__( 'Background Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
 				"{{WRAPPER}} .tf-archive-head .tf-icon" => 'background-color: {{VALUE}};',
@@ -1244,7 +1244,7 @@ class Listings extends Widget_Base {
 							{{WRAPPER}} .tf-archive-header .tf-archive-view ul li",
 		] );
 		$this->add_control( "toggle_icon_border_radius", [
-			'label'      => __( 'Border Radius', 'tourfic' ),
+			'label'      => esc_html__( 'Border Radius', 'tourfic' ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
 				'px',
@@ -1261,10 +1261,10 @@ class Listings extends Widget_Base {
 
 		/*-----Button HOVER state------ */
 		$this->start_controls_tab( "tab_toggle_icon_hover", [
-			'label' => __( 'Active/Hover', 'tourfic' ),
+			'label' => esc_html__( 'Active/Hover', 'tourfic' ),
 		] );
 		$this->add_control( "toggle_icon_color_hover", [
-			'label'     => __( 'Icon Color', 'tourfic' ),
+			'label'     => esc_html__( 'Icon Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
 				"{{WRAPPER}} .tf-archive-head .tf-icon.active i" => 'color: {{VALUE}};',
@@ -1286,7 +1286,7 @@ class Listings extends Widget_Base {
 			],
 		] );
 		$this->add_control( 'toggle_icon_bg_color_hover', [
-			'label'     => __( 'Background Color', 'tourfic' ),
+			'label'     => esc_html__( 'Background Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
 				"{{WRAPPER}} .tf-archive-head .tf-icon:hover" => 'background-color: {{VALUE}};',
@@ -1300,7 +1300,7 @@ class Listings extends Widget_Base {
 			],
 		] );
 		$this->add_control( 'toggle_icon_border_color_hover', [
-			'label'     => __( 'Border Color', 'tourfic' ),
+			'label'     => esc_html__( 'Border Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
 				"{{WRAPPER}} .tf-archive-head .tf-icon:hover" => 'border-color: {{VALUE}};',
@@ -1319,7 +1319,7 @@ class Listings extends Widget_Base {
 
 		$this->add_control( 'tf_filter_btn_heading', [
 			'type'  => Controls_Manager::HEADING,
-			'label' => __( 'Filter Button', 'tourfic' ),
+			'label' => esc_html__( 'Filter Button', 'tourfic' ),
 			'conditions' => $this->tf_display_conditionally([
                 'tf_hotel' => ['design-3'],
                 'tf_tours' => ['design-3'],
@@ -1328,7 +1328,7 @@ class Listings extends Widget_Base {
 		] );
 
 		$this->add_responsive_control( "filter_btn_padding", [
-			'label'      => __( 'Padding', 'tourfic' ),
+			'label'      => esc_html__( 'Padding', 'tourfic' ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
 				'px',
@@ -1347,7 +1347,7 @@ class Listings extends Widget_Base {
 		$this->start_controls_tabs( "tabs_filter_btn_style" );
 		/*-----Button NORMAL state------ */
 		$this->start_controls_tab( "tab_filter_btn_normal", [
-			'label' => __( 'Normal', 'tourfic' ),
+			'label' => esc_html__( 'Normal', 'tourfic' ),
 			'conditions' => $this->tf_display_conditionally([
                 'tf_hotel' => ['design-3'],
                 'tf_tours' => ['design-3'],
@@ -1355,7 +1355,7 @@ class Listings extends Widget_Base {
             ]),
 		] );
 		$this->add_control( 'tf_filter_btn_color', [
-			'label'     => __( 'Color', 'tourfic' ),
+			'label'     => esc_html__( 'Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
 				"{{WRAPPER}} .tf-archive-view li.tf-archive-filter-btn" => 'color: {{VALUE}};',
@@ -1367,7 +1367,7 @@ class Listings extends Widget_Base {
             ]),
 		] );
 		$this->add_control( 'filter_btn_bg_color', [
-			'label'     => __( 'Background Color', 'tourfic' ),
+			'label'     => esc_html__( 'Background Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
 				"{{WRAPPER}} .tf-archive-view li.tf-archive-filter-btn" => 'background-color: {{VALUE}};',
@@ -1388,7 +1388,7 @@ class Listings extends Widget_Base {
             ]),
 		] );
 		$this->add_control( "filter_btn_border_radius", [
-			'label'      => __( 'Border Radius', 'tourfic' ),
+			'label'      => esc_html__( 'Border Radius', 'tourfic' ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
 				'px',
@@ -1407,7 +1407,7 @@ class Listings extends Widget_Base {
 
 		/*-----Button HOVER state------ */
 		$this->start_controls_tab( "tab_filter_btn_hover", [
-			'label' => __( 'Hover', 'tourfic' ),
+			'label' => esc_html__( 'Hover', 'tourfic' ),
 			'conditions' => $this->tf_display_conditionally([
                 'tf_hotel' => ['design-3'],
                 'tf_tours' => ['design-3'],
@@ -1415,7 +1415,7 @@ class Listings extends Widget_Base {
             ]),
 		] );
 		$this->add_control( "filter_btn_color_hover", [
-			'label'     => __( 'Color', 'tourfic' ),
+			'label'     => esc_html__( 'Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
 				"{{WRAPPER}} .tf-archive-view li.tf-archive-filter-btn:hover" => 'color: {{VALUE}};',
@@ -1427,7 +1427,7 @@ class Listings extends Widget_Base {
             ]),
 		] );
 		$this->add_control( 'filter_btn_bg_color_hover', [
-			'label'     => __( 'Background Color', 'tourfic' ),
+			'label'     => esc_html__( 'Background Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
 				"{{WRAPPER}} .tf-archive-view li.tf-archive-filter-btn:hover" => 'background-color: {{VALUE}};',
@@ -1439,7 +1439,7 @@ class Listings extends Widget_Base {
             ]),
 		] );
 		$this->add_control( 'filter_btn_border_color_hover', [
-			'label'     => __( 'Border Color', 'tourfic' ),
+			'label'     => esc_html__( 'Border Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
 				"{{WRAPPER}} .tf-archive-view li.tf-archive-filter-btn:hover" => 'border-color: {{VALUE}};',
@@ -1459,7 +1459,7 @@ class Listings extends Widget_Base {
 
 	protected function tf_card_style_controls() {
 		$this->start_controls_section( 'card_style', [
-			'label' => __( 'Card Style', 'tourfic' ),
+			'label' => esc_html__( 'Card Style', 'tourfic' ),
 			'tab'   => Controls_Manager::TAB_STYLE,
 		] );
 
@@ -1491,7 +1491,7 @@ class Listings extends Widget_Base {
 		]);
 
 		$this->add_responsive_control( "card_padding", [
-			'label'      => __( 'Padding', 'tourfic' ),
+			'label'      => esc_html__( 'Padding', 'tourfic' ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
 				'px',
@@ -1511,10 +1511,10 @@ class Listings extends Widget_Base {
 		$this->start_controls_tabs( "tabs_card_style" );
 		/*-----Card Normal State------ */
 		$this->start_controls_tab( "tab_card_normal", [
-			'label' => __( 'Normal', 'tourfic' ),
+			'label' => esc_html__( 'Normal', 'tourfic' ),
 		] );
 		$this->add_control( 'card_bg_color', [
-			'label'     => __( 'Background Color', 'tourfic' ),
+			'label'     => esc_html__( 'Background Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
 				"{{WRAPPER}} .tf-search-results-list .tf-item-card" => 'background-color: {{VALUE}};',
@@ -1533,7 +1533,7 @@ class Listings extends Widget_Base {
 							{{WRAPPER}} .tf-car-result .tf-single-car-view",
 		] );
 		$this->add_control( "card_border_radius", [
-			'label'      => __( 'Border Radius', 'tourfic' ),
+			'label'      => esc_html__( 'Border Radius', 'tourfic' ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
 				'px',
@@ -1559,10 +1559,10 @@ class Listings extends Widget_Base {
 
 		/*-----Card Hover State------ */
 		$this->start_controls_tab( "tab_card_hover", [
-			'label' => __( 'Hover', 'tourfic' ),
+			'label' => esc_html__( 'Hover', 'tourfic' ),
 		] );
 		$this->add_control( 'card_bg_color_hover', [
-			'label'     => __( 'Background Color', 'tourfic' ),
+			'label'     => esc_html__( 'Background Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
 				"{{WRAPPER}} .tf-search-results-list .tf-item-card:hover" => 'background-color: {{VALUE}};',
@@ -1573,7 +1573,7 @@ class Listings extends Widget_Base {
 			],
 		] );
 		$this->add_control( 'card_border_hover', [
-			'label'     => __( 'Border Color', 'tourfic' ),
+			'label'     => esc_html__( 'Border Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
 				"{{WRAPPER}} .tf-search-results-list .tf-item-card:hover" => 'border-color: {{VALUE}};',
@@ -1597,11 +1597,11 @@ class Listings extends Widget_Base {
 
 		$this->add_control( 'tf_content_wrapper_heading', [
 			'type'  => Controls_Manager::HEADING,
-			'label' => __( 'Content Wrapper', 'tourfic' ),
+			'label' => esc_html__( 'Content Wrapper', 'tourfic' ),
 		] );
 
 		$this->add_responsive_control( "content_wrapper_padding", [
-			'label'      => __( 'Padding', 'tourfic' ),
+			'label'      => esc_html__( 'Padding', 'tourfic' ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
 				'px',
@@ -1622,7 +1622,7 @@ class Listings extends Widget_Base {
 
 	protected function tf_thumbnail_style_controls() {
 		$this->start_controls_section( 'thumbnail_style', [
-			'label' => __( 'Thumbnail Style', 'tourfic' ),
+			'label' => esc_html__( 'Thumbnail Style', 'tourfic' ),
 			'tab'   => Controls_Manager::TAB_STYLE,
 			'condition' => [
 				'show_image' => 'yes',
@@ -1630,7 +1630,7 @@ class Listings extends Widget_Base {
 		] );
 		
 		$this->add_responsive_control('thumbnail_height',[
-			'label'      => __('Thumbnail Height', 'tourfic'),
+			'label'      => esc_html__('Thumbnail Height', 'tourfic'),
 			'type'       => Controls_Manager::SLIDER,
 			'range'      => [
 				'px' => [
@@ -1664,7 +1664,7 @@ class Listings extends Widget_Base {
 		]);
 		
 		$this->add_responsive_control('thumbnail_width',[
-			'label'      => __('Thumbnail Width', 'tourfic'),
+			'label'      => esc_html__('Thumbnail Width', 'tourfic'),
 			'type'       => Controls_Manager::SLIDER,
 			'range'      => [
 				'px' => [
@@ -1698,7 +1698,7 @@ class Listings extends Widget_Base {
 		]);
 
 		$this->add_control( "thumbnail_border_radius", [
-			'label'      => __( 'Border Radius', 'tourfic' ),
+			'label'      => esc_html__( 'Border Radius', 'tourfic' ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
 				'px',
@@ -1718,7 +1718,7 @@ class Listings extends Widget_Base {
 
 	protected function tf_featured_badge_style_controls() {
 		$this->start_controls_section( 'featured_badge_style', [
-			'label' => __( 'Featured Badge Style', 'tourfic' ),
+			'label' => esc_html__( 'Featured Badge Style', 'tourfic' ),
 			'tab'   => Controls_Manager::TAB_STYLE,
 			'condition' => [
 				'show_image' => 'yes',
@@ -1728,7 +1728,7 @@ class Listings extends Widget_Base {
 		] );
 
 		$this->add_control( 'tf_badge_color', [
-			'label'     => __( 'Color', 'tourfic' ),
+			'label'     => esc_html__( 'Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors'  => [
 				'{{WRAPPER}} .tf-item-card .tf-item-featured .tf-features-box .tf-feature' => 'color: {{VALUE}};', //design-1
@@ -1739,13 +1739,13 @@ class Listings extends Widget_Base {
 		]);
 
 		$this->add_group_control( Group_Control_Typography::get_type(), [
-            'label'    => __( 'Typography', 'tourfic' ),
+            'label'    => esc_html__( 'Typography', 'tourfic' ),
 			'name'     => "tf_badge_typography",
 			'selector' => "{{WRAPPER}} .tf-item-card .tf-item-featured .tf-features-box .tf-feature, {{WRAPPER}} .tf-available-room .tf-available-room-gallery .tf-available-labels span.tf-available-labels-featured, {{WRAPPER}} .tf-archive-hotel-thumb .tf-tag-items .tf-tag-item-featured, {{WRAPPER}} .single-tour-inner .tf-featured-badge span",
 		]);
 
 		$this->add_responsive_control( "featured_badge_padding", [
-			'label'      => __( 'Padding', 'tourfic' ),
+			'label'      => esc_html__( 'Padding', 'tourfic' ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
 				'px',
@@ -1761,7 +1761,7 @@ class Listings extends Widget_Base {
 		]);
 
 		$this->add_control( 'featured_badge_bg_color', [
-			'label'     => __( 'Background Color', 'tourfic' ),
+			'label'     => esc_html__( 'Background Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors'  => [
 				'{{WRAPPER}} .tf-item-card .tf-item-featured .tf-features-box .tf-feature' => 'background-color: {{VALUE}};', //design-1
@@ -1777,7 +1777,7 @@ class Listings extends Widget_Base {
 		]);
 
 		$this->add_control( "featured_badge_border_radius", [
-			'label'      => __( 'Border Radius', 'tourfic' ),
+			'label'      => esc_html__( 'Border Radius', 'tourfic' ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
 				'px',
@@ -1806,7 +1806,7 @@ class Listings extends Widget_Base {
 
 	protected function tf_discount_tag_style_controls() {
 		$this->start_controls_section( 'discount_tag_style', [
-			'label' => __( 'Discount Tag Style', 'tourfic' ),
+			'label' => esc_html__( 'Discount Tag Style', 'tourfic' ),
 			'tab'   => Controls_Manager::TAB_STYLE,
 			'conditions' => $this->tf_display_conditionally([
                 'tf_hotel' => ['design-1', 'design-2', 'design-3'],
@@ -1818,7 +1818,7 @@ class Listings extends Widget_Base {
 		] );
 
 		$this->add_control( 'tf_discount_color', [
-			'label'     => __( 'Color', 'tourfic' ),
+			'label'     => esc_html__( 'Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors'  => [
 				'{{WRAPPER}} .tf-item-card .tf-item-featured .tf-features-box .tf-discount' => 'color: {{VALUE}};', //design-1
@@ -1828,13 +1828,13 @@ class Listings extends Widget_Base {
 		]);
 
 		$this->add_group_control( Group_Control_Typography::get_type(), [
-            'label'    => __( 'Typography', 'tourfic' ),
+            'label'    => esc_html__( 'Typography', 'tourfic' ),
 			'name'     => "tf_discount_typography",
 			'selector' => "{{WRAPPER}} .tf-item-card .tf-item-featured .tf-features-box .tf-discount, {{WRAPPER}} .tf-available-rooms-wrapper .tf-available-room-off, {{WRAPPER}} .tf-archive-hotel-thumb .tf-tag-items .tf-tag-item.tf-tag-item-discount",
 		]);
 
 		$this->add_responsive_control( "discount_padding", [
-			'label'      => __( 'Padding', 'tourfic' ),
+			'label'      => esc_html__( 'Padding', 'tourfic' ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
 				'px',
@@ -1849,7 +1849,7 @@ class Listings extends Widget_Base {
 		]);
 
 		$this->add_control( 'discount_bg_color', [
-			'label'     => __( 'Background Color', 'tourfic' ),
+			'label'     => esc_html__( 'Background Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors'  => [
 				'{{WRAPPER}} .tf-item-card .tf-item-featured .tf-features-box .tf-discount' => 'background-color: {{VALUE}};', //design-1
@@ -1864,7 +1864,7 @@ class Listings extends Widget_Base {
 		]);
 
 		$this->add_control( "discount_border_radius", [
-			'label'      => __( 'Border Radius', 'tourfic' ),
+			'label'      => esc_html__( 'Border Radius', 'tourfic' ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
 				'px',
@@ -1887,7 +1887,7 @@ class Listings extends Widget_Base {
 
 	protected function tf_promotional_tag_style_controls() {
 		$this->start_controls_section( 'promotional_tag_style', [
-			'label' => __( 'Promotional Tag Style', 'tourfic' ),
+			'label' => esc_html__( 'Promotional Tag Style', 'tourfic' ),
 			'tab'   => Controls_Manager::TAB_STYLE,
 			'condition' => [
 				'show_image' => 'yes',
@@ -1896,7 +1896,7 @@ class Listings extends Widget_Base {
 		] );
 
 		$this->add_group_control( Group_Control_Typography::get_type(), [
-            'label'    => __( 'Typography', 'tourfic' ),
+            'label'    => esc_html__( 'Typography', 'tourfic' ),
 			'name'     => "tf_promotional_tag_typography",
 			'selector' => "{{WRAPPER}} .tf-item-featured .tf-tag-items .tf-multiple-tag-item, 
 							{{WRAPPER}} .tf-available-room-gallery .tf-available-labels>span.tf-multiple-tag, 
@@ -1906,7 +1906,7 @@ class Listings extends Widget_Base {
 		]);
 
 		$this->add_responsive_control( "promotional_tag_padding", [
-			'label'      => __( 'Padding', 'tourfic' ),
+			'label'      => esc_html__( 'Padding', 'tourfic' ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
 				'px',
@@ -1932,7 +1932,7 @@ class Listings extends Widget_Base {
 		]);
 
 		$this->add_control( "promotional_tag_border_radius", [
-			'label'      => __( 'Border Radius', 'tourfic' ),
+			'label'      => esc_html__( 'Border Radius', 'tourfic' ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
 				'px',
@@ -1961,7 +1961,7 @@ class Listings extends Widget_Base {
 
 	protected function tf_title_style_controls() {
 		$this->start_controls_section( 'title_style', [
-			'label' => __( 'Title Style', 'tourfic' ),
+			'label' => esc_html__( 'Title Style', 'tourfic' ),
 			'tab'   => Controls_Manager::TAB_STYLE,
 			'condition' => [
 				'show_title' => 'yes',
@@ -1969,7 +1969,7 @@ class Listings extends Widget_Base {
 		]);
 
 		$this->add_control( 'tf_title_color', [
-			'label'     => __( 'Color', 'tourfic' ),
+			'label'     => esc_html__( 'Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors'  => [
 				'{{WRAPPER}} .tf-item-card .tf-item-details .tf-title h2 a' => 'color: {{VALUE}};', //design-1
@@ -1981,7 +1981,7 @@ class Listings extends Widget_Base {
 		]);
 
 		$this->add_control( 'tf_title_hover_color', [
-			'label'     => __( 'Hover Color', 'tourfic' ),
+			'label'     => esc_html__( 'Hover Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors'  => [
 				'{{WRAPPER}} .tf-item-card .tf-item-details .tf-title h2 a:hover' => 'color: {{VALUE}};', //design-1
@@ -1993,7 +1993,7 @@ class Listings extends Widget_Base {
 		]);
 
 		$this->add_group_control( Group_Control_Typography::get_type(), [
-            'label'    => __( 'Typography', 'tourfic' ),
+            'label'    => esc_html__( 'Typography', 'tourfic' ),
 			'name'     => "tf_title_typography",
 			'selector' => "{{WRAPPER}} .tf-item-card .tf-item-details .tf-title h2 a, 
 							{{WRAPPER}} .tf-available-room-content .tf-available-room-content-left .tf-section-title-and-location .tf-section-title a, 
@@ -2003,7 +2003,7 @@ class Listings extends Widget_Base {
 		]);
 
 		$this->add_responsive_control( "title_margin", [
-			'label'      => __( 'Margin', 'tourfic' ),
+			'label'      => esc_html__( 'Margin', 'tourfic' ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
 				'px',
@@ -2024,7 +2024,7 @@ class Listings extends Widget_Base {
 
 	protected function tf_location_style_controls() {
 		$this->start_controls_section( 'location_style', [
-			'label' => __( 'Location Style', 'tourfic' ),
+			'label' => esc_html__( 'Location Style', 'tourfic' ),
 			'tab'   => Controls_Manager::TAB_STYLE,
 			'condition' => [
 				'show_location' => 'yes',
@@ -2033,7 +2033,7 @@ class Listings extends Widget_Base {
 		]);
 
 		$this->add_control( 'tf_location_color', [
-			'label'     => __( 'Color', 'tourfic' ),
+			'label'     => esc_html__( 'Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors'  => [
 				'{{WRAPPER}} .tf-item-card .tf-item-details .tf-title-meta p' => 'color: {{VALUE}};', //design-1
@@ -2044,13 +2044,13 @@ class Listings extends Widget_Base {
 		]);
 
 		$this->add_group_control( Group_Control_Typography::get_type(), [
-            'label'    => __( 'Typography', 'tourfic' ),
+            'label'    => esc_html__( 'Typography', 'tourfic' ),
 			'name'     => "tf_location_typography",
 			'selector' => "{{WRAPPER}} .tf-item-card .tf-item-details .tf-title-meta p, {{WRAPPER}} .tf-available-room-content-left .tf-section-title-and-location .tf-title-location span, {{WRAPPER}} .tf-archive-hotel-content .tf-archive-hotel-content-left .tf-title-location, {{WRAPPER}} .tf_item_main_block .tf-map-link .tf-d-ib",
 		]);
 
 		$this->add_responsive_control( "location_margin", [
-			'label'      => __( 'Margin', 'tourfic' ),
+			'label'      => esc_html__( 'Margin', 'tourfic' ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
 				'px',
@@ -2093,7 +2093,7 @@ class Listings extends Widget_Base {
 		] );
 
 		$this->add_control( "tf_location_icon_color", [
-			'label'     => __( 'Icon Color', 'tourfic' ),
+			'label'     => esc_html__( 'Icon Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
 				"{{WRAPPER}} .tf-item-details .tf-title-meta i" => 'color: {{VALUE}}',
@@ -2112,7 +2112,7 @@ class Listings extends Widget_Base {
 
 	protected function tf_review_style_controls() {
 		$this->start_controls_section( 'review_style', [
-			'label' => __( 'Review Style', 'tourfic' ),
+			'label' => esc_html__( 'Review Style', 'tourfic' ),
 			'tab'   => Controls_Manager::TAB_STYLE,
 			'condition' => [
 				'show_review' => 'yes',
@@ -2120,7 +2120,7 @@ class Listings extends Widget_Base {
 		]);
 
 		$this->add_control( 'tf_review_color', [
-			'label'     => __( 'Color', 'tourfic' ),
+			'label'     => esc_html__( 'Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors'  => [
 				'{{WRAPPER}} .tf-avarage-review' => 'color: {{VALUE}};', //design-1, design-3
@@ -2132,7 +2132,7 @@ class Listings extends Widget_Base {
 		]);
 
 		$this->add_group_control( Group_Control_Typography::get_type(), [
-            'label'    => __( 'Typography', 'tourfic' ),
+            'label'    => esc_html__( 'Typography', 'tourfic' ),
 			'name'     => "tf_review_typography",
 			'selector' => "{{WRAPPER}} .tf-item-details .tf-reviews .tf-avarage-review, 
 							{{WRAPPER}} .tf-available-rating-number, 
@@ -2143,7 +2143,7 @@ class Listings extends Widget_Base {
 		]);
 
 		$this->add_responsive_control( "review_margin", [
-			'label'      => __( 'Margin', 'tourfic' ),
+			'label'      => esc_html__( 'Margin', 'tourfic' ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
 				'px',
@@ -2188,7 +2188,7 @@ class Listings extends Widget_Base {
 		] );
 
 		$this->add_control( "tf_review_icon_color", [
-			'label'     => __( 'Icon Color', 'tourfic' ),
+			'label'     => esc_html__( 'Icon Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
 				"{{WRAPPER}} .tf-item-card .tf-item-details .tf-reviews i" => 'color: {{VALUE}}',
@@ -2205,7 +2205,7 @@ class Listings extends Widget_Base {
 		] );
 
 		$this->add_control( "review_bg_color", [
-			'label'     => __( 'Background Color', 'tourfic' ),
+			'label'     => esc_html__( 'Background Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
 				"{{WRAPPER}} .tf-archive-rating-wrapper .tf-archive-rating" => 'background-color: {{VALUE}}',
@@ -2234,7 +2234,7 @@ class Listings extends Widget_Base {
 		]);
 
 		$this->add_control( "review_border_radius", [
-			'label'      => __( 'Border Radius', 'tourfic' ),
+			'label'      => esc_html__( 'Border Radius', 'tourfic' ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
 				'px',
@@ -2271,7 +2271,7 @@ class Listings extends Widget_Base {
 
 	protected function tf_gallery_style_controls() {
 		$this->start_controls_section( 'gallery_style', [
-			'label' => __( 'Gallery Style', 'tourfic' ),
+			'label' => esc_html__( 'Gallery Style', 'tourfic' ),
 			'tab'   => Controls_Manager::TAB_STYLE,
 			'conditions' => $this->tf_display_conditionally([
                 'tf_hotel' => ['design-2'],
@@ -2304,7 +2304,7 @@ class Listings extends Widget_Base {
 		] );
 
 		$this->add_responsive_control( "gallery_margin", [
-			'label'      => __( 'Margin', 'tourfic' ),
+			'label'      => esc_html__( 'Margin', 'tourfic' ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
 				'px',
@@ -2331,7 +2331,7 @@ class Listings extends Widget_Base {
 
 	protected function tf_features_style_controls() {
 		$this->start_controls_section( 'features_style', [
-			'label' => __( 'Features Style', 'tourfic' ),
+			'label' => esc_html__( 'Features Style', 'tourfic' ),
 			'tab'   => Controls_Manager::TAB_STYLE,
 			'conditions' => $this->tf_display_conditionally([
                 'tf_hotel' => ['design-1', 'design-2', 'design-3', 'default'],
@@ -2343,7 +2343,7 @@ class Listings extends Widget_Base {
 		] );
 
 		$this->add_control( 'tf_icon_features_color', [
-			'label'     => __( 'Icon Color', 'tourfic' ),
+			'label'     => esc_html__( 'Icon Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors'  => [
 				'{{WRAPPER}} .sr_rooms_table_block .room_details .featuredRooms .roomrow_flex .roomName_flex .tf-archive-desc i' => 'color: {{VALUE}};', //design-3
@@ -2356,7 +2356,7 @@ class Listings extends Widget_Base {
 		]);
 
 		$this->add_control( 'tf_features_color', [
-			'label'     => __( 'Color', 'tourfic' ),
+			'label'     => esc_html__( 'Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors'  => [
 				'{{WRAPPER}} .tf-item-details .tf-archive-features ul li' => 'color: {{VALUE}};', //design-1
@@ -2367,13 +2367,13 @@ class Listings extends Widget_Base {
 		]);
 
 		$this->add_group_control( Group_Control_Typography::get_type(), [
-            'label'    => __( 'Typography', 'tourfic' ),
+            'label'    => esc_html__( 'Typography', 'tourfic' ),
 			'name'     => "tf_features_typography",
 			'selector' => "{{WRAPPER}} .tf-item-details .tf-archive-features ul li, {{WRAPPER}} .tf-available-room-content .tf-available-room-content-left ul li, {{WRAPPER}} .tf-archive-hotel-content .tf-archive-hotel-content-left ul li, {{WRAPPER}} .tf-tooltip .tf-top",
 		]);
 
 		$this->add_responsive_control( "features_padding", [
-			'label'      => __( 'Padding', 'tourfic' ),
+			'label'      => esc_html__( 'Padding', 'tourfic' ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
 				'px',
@@ -2394,7 +2394,7 @@ class Listings extends Widget_Base {
 		]);
 
 		$this->add_responsive_control( "features_margin", [
-			'label'      => __( 'Margin', 'tourfic' ),
+			'label'      => esc_html__( 'Margin', 'tourfic' ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
 				'px',
@@ -2410,7 +2410,7 @@ class Listings extends Widget_Base {
 		]);
 
 		$this->add_control( 'features_bg_color', [
-			'label'     => __( 'Background Color', 'tourfic' ),
+			'label'     => esc_html__( 'Background Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors'  => [
 				'{{WRAPPER}} .tf-item-details .tf-archive-features ul li' => 'background-color: {{VALUE}};', //design-1
@@ -2437,7 +2437,7 @@ class Listings extends Widget_Base {
 		]);
 
 		$this->add_control( "features_border_radius", [
-			'label'      => __( 'Border Radius', 'tourfic' ),
+			'label'      => esc_html__( 'Border Radius', 'tourfic' ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
 				'px',
@@ -2467,7 +2467,7 @@ class Listings extends Widget_Base {
 
 		$this->add_control( 'tf_features_view_more_heading', [
 			'type'  => Controls_Manager::HEADING,
-			'label' => __( 'Features View More', 'tourfic' ),
+			'label' => esc_html__( 'Features View More', 'tourfic' ),
 			'conditions' => $this->tf_display_conditionally([
                 'tf_hotel' => ['design-1', 'design-2', 'design-3'],
                 'tf_tours' => ['design-1', 'design-2', 'design-3'],
@@ -2475,7 +2475,7 @@ class Listings extends Widget_Base {
             ]),
 		] );
 		$this->add_control( 'tf_features_more_color', [
-			'label'     => __( 'Color', 'tourfic' ),
+			'label'     => esc_html__( 'Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors'  => [
 				'{{WRAPPER}} .tf-item-details .tf-archive-features ul span' => 'color: {{VALUE}};', //design-1
@@ -2490,7 +2490,7 @@ class Listings extends Widget_Base {
 		]);
 
 		$this->add_group_control( Group_Control_Typography::get_type(), [
-            'label'    => __( 'Typography', 'tourfic' ),
+            'label'    => esc_html__( 'Typography', 'tourfic' ),
 			'name'     => "tf_features_more_typography",
 			'selector' => "{{WRAPPER}} .tf-item-details .tf-archive-features ul span, {{WRAPPER}} .tf-available-room-content .tf-available-room-content-left ul li a, {{WRAPPER}} .tf-archive-hotel-content .tf-archive-hotel-content-left ul li a",
 			'conditions' => $this->tf_display_conditionally([
@@ -2505,7 +2505,7 @@ class Listings extends Widget_Base {
 
 	protected function tf_excerpt_style_controls() {
 		$this->start_controls_section( 'excerpt_style', [
-			'label' => __( 'Excerpt Style', 'tourfic' ),
+			'label' => esc_html__( 'Excerpt Style', 'tourfic' ),
 			'tab'   => Controls_Manager::TAB_STYLE,
 			'conditions' => $this->tf_display_conditionally([
                 'tf_hotel' => ['design-1', 'default'],
@@ -2517,7 +2517,7 @@ class Listings extends Widget_Base {
 		]);
 
 		$this->add_control( 'tf_excerpt_color', [
-			'label'     => __( 'Color', 'tourfic' ),
+			'label'     => esc_html__( 'Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors'  => [
 				'{{WRAPPER}} .tf-item-card .tf-item-details .tf-details p' => 'color: {{VALUE}};', //design-1
@@ -2528,13 +2528,13 @@ class Listings extends Widget_Base {
 		]);
 
 		$this->add_group_control( Group_Control_Typography::get_type(), [
-            'label'    => __( 'Typography', 'tourfic' ),
+            'label'    => esc_html__( 'Typography', 'tourfic' ),
 			'name'     => "tf_excerpt_typography",
 			'selector' => "{{WRAPPER}} .tf-item-card .tf-item-details .tf-details p, {{WRAPPER}} .sr_rooms_table_block .room_details .featuredRooms .tf-archive-shortdesc, {{WRAPPER}} .sr_rooms_table_block .room_details .featuredRooms .tf-archive-shortdesc p, {{WRAPPER}} .tourfic-single-right .tf-tour-desc p",
 		]);
 
 		$this->add_responsive_control( "excerpt_margin", [
-			'label'      => __( 'Margin', 'tourfic' ),
+			'label'      => esc_html__( 'Margin', 'tourfic' ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
 				'px',
@@ -2553,7 +2553,7 @@ class Listings extends Widget_Base {
 
 	protected function tf_car_info_style_controls() {
 		$this->start_controls_section( 'car_info_style', [
-			'label' => __( 'Car Info Style', 'tourfic' ),
+			'label' => esc_html__( 'Car Info Style', 'tourfic' ),
 			'tab'   => Controls_Manager::TAB_STYLE,
 			'condition' => [
 				'service' => 'tf_carrental',
@@ -2561,7 +2561,7 @@ class Listings extends Widget_Base {
 		]);
 
 		$this->add_control( 'tf_car_info_color', [
-			'label'     => __( 'Color', 'tourfic' ),
+			'label'     => esc_html__( 'Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors'  => [
 				'{{WRAPPER}} .tf-car-result .tf-single-car-view .tf-car-details ul li' => 'color: {{VALUE}};',
@@ -2569,7 +2569,7 @@ class Listings extends Widget_Base {
 		]);
 
 		$this->add_group_control( Group_Control_Typography::get_type(), [
-            'label'    => __( 'Typography', 'tourfic' ),
+            'label'    => esc_html__( 'Typography', 'tourfic' ),
 			'name'     => "tf_car_info_typography",
 			'selector' => "{{WRAPPER}} .tf-car-result .tf-single-car-view .tf-car-details ul li",
 		]);
@@ -2594,7 +2594,7 @@ class Listings extends Widget_Base {
 		] );
 
 		$this->add_control( "tf_car_info_icon_color", [
-			'label'     => __( 'Icon Color', 'tourfic' ),
+			'label'     => esc_html__( 'Icon Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
 				"{{WRAPPER}} .tf-car-result .tf-single-car-view .tf-car-details ul li svg path" => 'stroke: {{VALUE}}',
@@ -2648,7 +2648,7 @@ class Listings extends Widget_Base {
 		]);
 
 		$this->add_responsive_control( "car_info_margin", [
-			'label'      => __( 'Margin', 'tourfic' ),
+			'label'      => esc_html__( 'Margin', 'tourfic' ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
 				'px',
@@ -2665,7 +2665,7 @@ class Listings extends Widget_Base {
 
 	protected function tf_price_style_controls() {
 		$this->start_controls_section( 'price_style', [
-			'label' => __( 'Price Style', 'tourfic' ),
+			'label' => esc_html__( 'Price Style', 'tourfic' ),
 			'tab'   => Controls_Manager::TAB_STYLE,
 			'condition' => [
 				'show_price' => 'yes',
@@ -2674,13 +2674,13 @@ class Listings extends Widget_Base {
 
 		$this->add_control( 'tf_price_from_heading', [
 			'type'  => Controls_Manager::HEADING,
-			'label' => __( 'From Text', 'tourfic' ),
+			'label' => esc_html__( 'From Text', 'tourfic' ),
 			'condition' => [
                 'service!' => 'tf_carrental',
 			],
 		] );
 		$this->add_control( 'tf_price_from_color', [
-			'label'     => __( 'Color', 'tourfic' ),
+			'label'     => esc_html__( 'Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors'  => [
 				'{{WRAPPER}} .tf-item-card .tf-post-footer .tf-pricing' => 'color: {{VALUE}};', //design-1
@@ -2695,7 +2695,7 @@ class Listings extends Widget_Base {
 		]);
 
 		$this->add_group_control( Group_Control_Typography::get_type(), [
-            'label'    => __( 'Typography', 'tourfic' ),
+            'label'    => esc_html__( 'Typography', 'tourfic' ),
 			'name'     => "tf_price_from_typography",
 			'selector' => "{{WRAPPER}} .tf-item-card .tf-post-footer .tf-pricing, 
 							{{WRAPPER}} .tf-available-room-price .tf-price-from, 
@@ -2709,10 +2709,10 @@ class Listings extends Widget_Base {
 
 		$this->add_control( 'tf_price_heading', [
 			'type'  => Controls_Manager::HEADING,
-			'label' => __( 'Price', 'tourfic' ),
+			'label' => esc_html__( 'Price', 'tourfic' ),
 		] );
 		$this->add_control( 'tf_price_color', [
-			'label'     => __( 'Color', 'tourfic' ),
+			'label'     => esc_html__( 'Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors'  => [
 				'{{WRAPPER}} .tf-item-card .tf-post-footer .tf-pricing span' => 'color: {{VALUE}};', //design-1
@@ -2725,7 +2725,7 @@ class Listings extends Widget_Base {
 		]);
 
 		$this->add_group_control( Group_Control_Typography::get_type(), [
-            'label'    => __( 'Typography', 'tourfic' ),
+            'label'    => esc_html__( 'Typography', 'tourfic' ),
 			'name'     => "tf_price_typography",
 			'selector' => "{{WRAPPER}} .tf-item-card .tf-post-footer .tf-pricing span, 
 							{{WRAPPER}} .tf-archive-available-rooms .tf-available-room .tf-available-room-content .tf-available-room-content-right .tf-available-room-price .tf-price-from .amount, 
@@ -2738,13 +2738,13 @@ class Listings extends Widget_Base {
 		//price type
 		$this->add_control( 'tf_price_type_heading', [
 			'type'  => Controls_Manager::HEADING,
-			'label' => __( 'Price Type', 'tourfic' ),
+			'label' => esc_html__( 'Price Type', 'tourfic' ),
 			'condition' => [
 				'service' => 'tf_carrental',
 			],
 		] );
 		$this->add_control( 'tf_price_type_color', [
-			'label'     => __( 'Color', 'tourfic' ),
+			'label'     => esc_html__( 'Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors'  => [
 				'{{WRAPPER}} .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn .tf-price-info h3 small' => 'color: {{VALUE}};', //default
@@ -2755,7 +2755,7 @@ class Listings extends Widget_Base {
 		]);
 
 		$this->add_group_control( Group_Control_Typography::get_type(), [
-            'label'    => __( 'Typography', 'tourfic' ),
+            'label'    => esc_html__( 'Typography', 'tourfic' ),
 			'name'     => "tf_price_type_typography",
 			'selector' => "{{WRAPPER}} .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn .tf-price-info h3 small",
 			'condition' => [
@@ -2764,7 +2764,7 @@ class Listings extends Widget_Base {
 		]);
 
 		$this->add_responsive_control( "price_margin", [
-			'label'      => __( 'Margin', 'tourfic' ),
+			'label'      => esc_html__( 'Margin', 'tourfic' ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
 				'px',
@@ -2784,7 +2784,7 @@ class Listings extends Widget_Base {
 
 	protected function tf_button_style_controls() {
 		$this->start_controls_section( "button_style", [
-			'label'      => __( 'View Details Button', 'tourfic' ),
+			'label'      => esc_html__( 'View Details Button', 'tourfic' ),
 			'tab'        => Controls_Manager::TAB_STYLE,
 			'condition' => [
 				'show_view_details' => 'yes',
@@ -2792,7 +2792,7 @@ class Listings extends Widget_Base {
 		] );
 		
 		$this->add_responsive_control( "view_btn_margin", [
-			'label'      => __( 'Margin', 'tourfic' ),
+			'label'      => esc_html__( 'Margin', 'tourfic' ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
 				'px',
@@ -2805,7 +2805,7 @@ class Listings extends Widget_Base {
 		] );
 
 		$this->add_responsive_control( "view_btn_padding", [
-			'label'      => __( 'Padding', 'tourfic' ),
+			'label'      => esc_html__( 'Padding', 'tourfic' ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
 				'px',
@@ -2824,24 +2824,24 @@ class Listings extends Widget_Base {
 		
 		$this->add_control( "tabs_view_btn_colors_heading", [
 			'type'      => Controls_Manager::HEADING,
-			'label'     => __( 'Colors & Border', 'tourfic' ),
+			'label'     => esc_html__( 'Colors & Border', 'tourfic' ),
 			'separator' => 'before',
 		] );
 
 		$this->start_controls_tabs( "tabs_view_btn_style" );
 		/*-----Button NORMAL state------ */
 		$this->start_controls_tab( "tab_view_btn_normal", [
-			'label' => __( 'Normal', 'tourfic' ),
+			'label' => esc_html__( 'Normal', 'tourfic' ),
 		] );
 		$this->add_control( "btn_color", [
-			'label'     => __( 'Text Color', 'tourfic' ),
+			'label'     => esc_html__( 'Text Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
 				"{{WRAPPER}} .tf_btn, {{WRAPPER}} .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn a.view-more" => 'color: {{VALUE}};',
 			],
 		] );
 		$this->add_control( "btn_bg_color", [
-			'label'     => __( 'Background Color', 'tourfic' ),
+			'label'     => esc_html__( 'Background Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
 				"{{WRAPPER}} .tf_btn, {{WRAPPER}} .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn a.view-more" => 'background-color: {{VALUE}};',
@@ -2852,7 +2852,7 @@ class Listings extends Widget_Base {
 			'selector' => "{{WRAPPER}} .tf_btn, {{WRAPPER}} .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn a.view-more",
 		] );
 		$this->add_control( "btn_border_radius", [
-			'label'      => __( 'Border Radius', 'tourfic' ),
+			'label'      => esc_html__( 'Border Radius', 'tourfic' ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
 				'px',
@@ -2866,10 +2866,10 @@ class Listings extends Widget_Base {
 
 		/*-----Button HOVER state------ */
 		$this->start_controls_tab( "tab_search_button_hover", [
-			'label' => __( 'Hover', 'tourfic' ),
+			'label' => esc_html__( 'Hover', 'tourfic' ),
 		] );
 		$this->add_control( "button_color_hover", [
-			'label'     => __( 'Text Color', 'tourfic' ),
+			'label'     => esc_html__( 'Text Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
 				"{{WRAPPER}} .tf_btn:hover, {{WRAPPER}} .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn a.view-more:hover" => 'color: {{VALUE}};',
@@ -2877,14 +2877,14 @@ class Listings extends Widget_Base {
 		] );
 		
 		$this->add_control( "btn_hover_bg_color", [
-			'label'     => __( 'Background Color', 'tourfic' ),
+			'label'     => esc_html__( 'Background Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
 				"{{WRAPPER}} .tf_btn:hover, {{WRAPPER}} .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn a.view-more:hover" => 'background-color: {{VALUE}};',
 			],
 		] );
 		$this->add_control( "btn_hover_border_color", [
-			'label'     => __( 'Border Color', 'tourfic' ),
+			'label'     => esc_html__( 'Border Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
 				"{{WRAPPER}} .tf_btn:hover, {{WRAPPER}} .tf-car-result .tf-single-car-view .tf-car-details .tf-booking-btn a.view-more:hover" => 'border-color: {{VALUE}};',
@@ -2945,7 +2945,7 @@ class Listings extends Widget_Base {
 
 	protected function tf_pagination_style_controls(){
         $this->start_controls_section( 'pagination_style', [
-			'label' => __('Pagination', 'tourfic'),
+			'label' => esc_html__('Pagination', 'tourfic'),
 			'tab'   => Controls_Manager::TAB_STYLE,
 			'condition' => [
 				'show_pagination' => 'yes',
@@ -2953,19 +2953,19 @@ class Listings extends Widget_Base {
 		]);
 
         $this->add_responsive_control('pagination_alignment',[
-			'label' => __('Alignment', 'tourfic'),
+			'label' => esc_html__('Alignment', 'tourfic'),
 			'type' => Controls_Manager::CHOOSE,
 			'options' => [
 				'flex-start' => [
-					'title' => __('Left', 'tourfic'),
+					'title' => esc_html__('Left', 'tourfic'),
 					'icon' => 'eicon-text-align-left',
 				],
 				'center' => [
-					'title' => __('Center', 'tourfic'),
+					'title' => esc_html__('Center', 'tourfic'),
 					'icon' => 'eicon-text-align-center',
 				],
 				'flex-end' => [
-					'title' => __('Right', 'tourfic'),
+					'title' => esc_html__('Right', 'tourfic'),
 					'icon' => 'eicon-text-align-right',
 				],
 			],
@@ -3013,7 +3013,7 @@ class Listings extends Widget_Base {
 		]);
 
 		$this->add_responsive_control( "pagination_padding", [
-			'label'      => __( 'Padding', 'tourfic' ),
+			'label'      => esc_html__( 'Padding', 'tourfic' ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
 				'px',
@@ -3118,7 +3118,7 @@ class Listings extends Widget_Base {
         $this->end_controls_tabs();
 
 		$this->add_control( "pagination_border_radius", [
-			'label'      => __( 'Border Radius', 'tourfic' ),
+			'label'      => esc_html__( 'Border Radius', 'tourfic' ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
 				'px',
@@ -4563,14 +4563,14 @@ class Listings extends Widget_Base {
 							$query->the_post();
 							$apartment_meta = get_post_meta( get_the_ID() , 'tf_apartment_opt', true );
 							if ( !empty($apartment_meta[ "apartment_as_featured" ] )) {
-								echo apply_filters("tf_apartment_archive_single_featured_card_design_one", Apartment::tf_apartment_archive_single_item([ 1, 0, 0, '' ], $settings));
+								echo wp_kses(apply_filters("tf_apartment_archive_single_featured_card_design_one", Apartment::tf_apartment_archive_single_item([ 1, 0, 0, '' ], $settings)), Helper::tf_custom_wp_kses_allow_tags());
 							}
 						} 
 						while ( $query->have_posts() ) {
 							$query->the_post();
 							$apartment_meta = get_post_meta( get_the_ID() , 'tf_apartment_opt', true );
 							if ( empty($apartment_meta[ "apartment_as_featured" ] )) {
-								echo apply_filters("tf_apartment_archive_single_card_design_one", Apartment::tf_apartment_archive_single_item([ 1, 0, 0, '' ], $settings));
+								echo wp_kses(apply_filters("tf_apartment_archive_single_card_design_one", Apartment::tf_apartment_archive_single_item([ 1, 0, 0, '' ], $settings)), Helper::tf_custom_wp_kses_allow_tags());
 							}
 						}
 					} else {
@@ -4781,7 +4781,7 @@ class Listings extends Widget_Base {
 														'content' => base64_encode($infoWindowtext)
 													];
 												}
-												echo apply_filters("tf_apartment_archive_single_featured_card_design_one", Apartment::tf_apartment_archive_single_item([ 1, 0, 0, '' ], $settings));
+												echo wp_kses(apply_filters("tf_apartment_archive_single_featured_card_design_one", Apartment::tf_apartment_archive_single_item([ 1, 0, 0, '' ], $settings)), Helper::tf_custom_wp_kses_allow_tags());
 											}
 											while ($query->have_posts()) {
 												$query->the_post();
@@ -4848,7 +4848,7 @@ class Listings extends Widget_Base {
 														'content' => base64_encode($infoWindowtext)
 													];
 												}
-												echo apply_filters("tf_apartment_archive_single_card_design_one", Apartment::tf_apartment_archive_single_item([ 1, 0, 0, '' ], $settings));
+												echo wp_kses(apply_filters("tf_apartment_archive_single_card_design_one", Apartment::tf_apartment_archive_single_item([ 1, 0, 0, '' ], $settings)), Helper::tf_custom_wp_kses_allow_tags());
 											}
 											wp_reset_query();
 											?>

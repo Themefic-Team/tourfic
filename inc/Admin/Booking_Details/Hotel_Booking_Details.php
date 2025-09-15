@@ -10,7 +10,7 @@ class Hotel_Booking_Details extends \Tourfic\Core\TF_Booking_Details {
 
 		$booking_args = array(
 			'post_type'     => 'tf_hotel',
-			'menu_title'    => __('Hotel Booking Details', 'tourfic'),
+			'menu_title'    => esc_html__('Hotel Booking Details', 'tourfic'),
 			'menu_slug'     => 'tf_hotel_booking',
 			'capability'    => 'edit_tf_hotels',
 			'booking_type'  => 'hotel',

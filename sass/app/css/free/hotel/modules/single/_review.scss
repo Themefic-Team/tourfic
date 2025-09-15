@@ -104,13 +104,16 @@
 
                 .tf-review-reply{
                     border-bottom: 1px solid $color-border-lite;
-                    padding-bottom: 50px;
+                    padding-bottom: 30px;
                 }
             }
         }
 
         &__legacy{
             .review-section{
+                @media #{$max768}{
+                    padding-bottom: 0;
+                }
                 .reviews{
                     .section-heading{
                         @media #{$max768}{

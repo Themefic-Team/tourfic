@@ -1,13 +1,15 @@
 <?php
+// Don't load directly
+defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\Classes\Helper;
 use \Tourfic\Classes\Car_Rental\Pricing;
 use \Tourfic\App\TF_Review;
 ?>
 <?php
-$tf_pickup_date = !empty($_GET['pickup_date']) ? $_GET['pickup_date'] : '';
-$tf_dropoff_date = !empty($_GET['dropoff_date']) ? $_GET['dropoff_date'] : '';
-
+$booking_btn_text = !empty(Helper::tfopt('car_booking_form_button_text')) ? Helper::tfopt('car_booking_form_button_text') : 'Continue';
+$tf_pickup_date = !empty($_GET['pickup_date']) ? sanitize_text_field( wp_unslash($_GET['pickup_date']) ) : '';
+$tf_dropoff_date = !empty($_GET['dropoff_date']) ? sanitize_text_field( wp_unslash($_GET['dropoff_date']) ) : '';
 
 // Pull options from settings or set fallback values
 $disable_car_time_slot = !empty(Helper::tfopt('disable-car-time-slots')) ? boolval(Helper::tfopt('disable-car-time-slots')) : false;
@@ -18,7 +20,7 @@ $time_interval = 30;
 $start_time_str = '00:00';
 $end_time_str   = '23:30';
 $default_time_str = '10:00';
-$next_current_day = date('l', strtotime('+1 day'));
+$next_current_day = gmdate('l', strtotime('+1 day'));
 
 if($disable_car_time_slot){
     $time_interval = !empty(Helper::tfopt('car_time_interval')) ? intval(Helper::tfopt('car_time_interval')) : 30;
@@ -39,11 +41,11 @@ if($disable_car_time_slot){
 // Convert string times to timestamps
 $start_time = strtotime($start_time_str);
 $end_time   = strtotime($end_time_str);
-$default_time = date('g:i A', strtotime($default_time_str));
+$default_time = gmdate('g:i A', strtotime($default_time_str));
 
 // Use selected time from GET or fall back to default
-$selected_pickup_time = !empty($_GET['pickup_time']) ? esc_html($_GET['pickup_time']) : $default_time;
-$selected_dropoff_time = !empty($_GET['dropoff_time']) ? esc_html($_GET['dropoff_time']) : $default_time;
+$selected_pickup_time = !empty($_GET['pickup_time']) ? sanitize_text_field( wp_unslash($_GET['pickup_time']) ) : $default_time;
+$selected_dropoff_time = !empty($_GET['dropoff_time']) ? sanitize_text_field( wp_unslash($_GET['dropoff_time']) ) : $default_time;
 
 $total_prices = Pricing::set_total_price($meta, $tf_pickup_date, $tf_dropoff_date, $start_time_str, $end_time_str); 
 $tf_cars_slug = get_option('car_slug');
@@ -109,11 +111,11 @@ $tf_cars_slug = get_option('car_slug');
                 <div class="tf-top-bar-booking tf-flex tf-flex-gap-32">
                     <div class="tf-price-header">
                         <h2><?php esc_html_e("Total:", "tourfic"); ?> 
-                        <?php echo $total_prices['sale_price'] ? wc_price($total_prices['sale_price']) : '' ?></h2>
-                        <p><?php echo Pricing::is_taxable($meta); ?></p>
+                        <?php echo $total_prices['sale_price'] ? wp_kses_post( wc_price($total_prices['sale_price']) ) : '' ?></h2>
+                        <p><?php echo wp_kses_post(Pricing::is_taxable($meta)); ?></p>
                     </div>
                     <button class="tf-flex tf-flex-align-center tf-flex-justify-center tf-flex-gap-8 tf-back-to-booking">
-                        <?php esc_html_e( apply_filters("tf_car_booking_form_submit_button_text", 'Continue' ), 'tourfic' ); ?>
+                        <?php echo esc_html( apply_filters("tf_car_booking_form_submit_button_text", 'Continue' ) ); ?>
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M7.5 15L12.5 10L7.5 5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
@@ -131,9 +133,9 @@ $tf_cars_slug = get_option('car_slug');
                         <h1><?php the_title(); ?></h1>
                         <div class="breadcrumb">
                             <ul>
-                                <li><a href="<?php echo site_url(); ?>"><?php esc_html_e( "Home", "tourfic" ) ?></a></li>
+                                <li><a href="<?php echo esc_url(site_url()); ?>"><?php esc_html_e( "Home", "tourfic" ) ?></a></li>
                                 <li>/</li>
-                                <li><a href="<?php echo site_url(); ?>/<?php echo esc_attr($tf_cars_slug); ?>"><?php esc_html_e( "Cars", "tourfic" ) ?></a></li>
+                                <li><a href="<?php echo esc_url(site_url()); ?>/<?php echo esc_attr($tf_cars_slug); ?>"><?php esc_html_e( "Cars", "tourfic" ) ?></a></li>
                                 <li>/</li>
                                 <li><?php the_title(); ?></li>
                             </ul>
@@ -154,7 +156,7 @@ $tf_cars_slug = get_option('car_slug');
                                         0.0
                                         <?php } ?>
                                         <i class="fa-solid fa-star"></i>
-                                    </span> (<?php echo Pricing::get_total_trips($post_id); ?> <?php esc_html_e( "trips", "tourfic" ) ?>)
+                                    </span> (<?php echo wp_kses_post( Pricing::get_total_trips($post_id) ); ?> <?php esc_html_e( "trips", "tourfic" ) ?>)
                                 </a>
                             </div>
                             
@@ -341,9 +343,9 @@ $tf_cars_slug = get_option('car_slug');
 
                     <div class="tf-price-header tf-mb-30">
                         <h2><?php esc_html_e("Total:", "tourfic"); ?> 
-                        <?php if(!empty($total_prices['regular_price'])){ ?><del><?php echo wc_price($total_prices['regular_price']); ?></del>  <?php } ?>
-                        <?php echo $total_prices['sale_price'] ? wc_price($total_prices['sale_price']) : '' ?> <?php if(!empty($total_prices['type'])){ ?><small class="pricing-type">/ <?php echo esc_html($total_prices['type']); ?></small> <?php } ?></h2>
-                        <p><?php echo Pricing::is_taxable($meta); ?></p>
+                        <?php if(!empty($total_prices['regular_price'])){ ?><del><?php echo wp_kses_post(wc_price($total_prices['regular_price'])); ?></del>  <?php } ?>
+                        <?php echo $total_prices['sale_price'] ? wp_kses_post(wc_price($total_prices['sale_price'])) : '' ?> <?php if(!empty($total_prices['type'])){ ?><small class="pricing-type">/ <?php echo esc_html($total_prices['type']); ?></small> <?php } ?></h2>
+                        <p><?php echo wp_kses_post(Pricing::is_taxable($meta)); ?></p>
                     </div>
 
                     <?php if(function_exists( 'is_tf_pro' ) && is_tf_pro()){ ?>
@@ -377,8 +379,8 @@ $tf_cars_slug = get_option('car_slug');
                                     </div>
                                     <div class="info-select">
                                         <h5><?php esc_html_e("Pick-up", "tourfic"); ?></h5>
-                                        <input type="text" placeholder="Pick Up Location" id="tf_pickup_location" value="<?php echo !empty($_GET['pickup']) ? esc_html($_GET['pickup']) : ''; ?>" />
-                                        <input type="hidden" id="tf_pickup_location_id" value="<?php echo !empty($_GET['pickup']) ? esc_html($_GET['pickup']) : ''; ?>" />
+                                        <input type="text" placeholder="Pick Up Location" id="tf_pickup_location" value="<?php echo !empty($_GET['pickup']) ? esc_html(sanitize_text_field( wp_unslash($_GET['pickup']) )) : ''; ?>" />
+                                        <input type="hidden" id="tf_pickup_location_id" value="<?php echo !empty($_GET['pickup']) ? esc_html(sanitize_text_field( wp_unslash($_GET['pickup']) )) : ''; ?>" />
                                     </div>
                                 </div>
                             </div>
@@ -399,8 +401,8 @@ $tf_cars_slug = get_option('car_slug');
                                     </div>
                                     <div class="info-select">
                                         <h5><?php esc_html_e("Drop-off", "tourfic"); ?></h5>
-                                        <input type="text" placeholder="Drop Off Location" id="tf_dropoff_location" value="<?php echo !empty($_GET['dropoff']) ? esc_html($_GET['dropoff']) : ''; ?>" />
-                                        <input type="hidden" id="tf_dropoff_location_id" value="<?php echo !empty($_GET['dropoff']) ? esc_html($_GET['dropoff']) : ''; ?>" />
+                                        <input type="text" placeholder="Drop Off Location" id="tf_dropoff_location" value="<?php echo !empty($_GET['dropoff']) ? esc_html(sanitize_text_field( wp_unslash($_GET['dropoff']) )) : ''; ?>" />
+                                        <input type="hidden" id="tf_dropoff_location_id" value="<?php echo !empty($_GET['dropoff']) ? esc_html(sanitize_text_field( wp_unslash($_GET['dropoff']) )) : ''; ?>" />
                                     </div>
                                 </div>
                             </div>
@@ -416,7 +418,7 @@ $tf_cars_slug = get_option('car_slug');
                                     </div>
                                     <div class="info-select">
                                         <h5><?php esc_html_e("Pick-up date", "tourfic"); ?></h5>
-                                        <input type="text" placeholder="Pick Up Date" id="tf_pickup_date" class="tf_pickup_date" value="<?php echo !empty($_GET['pickup_date']) ? esc_html($_GET['pickup_date']) : date('Y/m/d', strtotime('+1 day')); ?>" />
+                                        <input type="text" placeholder="<?php esc_html_e("Pick Up Date", "tourfic"); ?>" id="tf_pickup_date" class="tf_pickup_date" value="<?php echo !empty($_GET['pickup_date']) ? esc_html(sanitize_text_field( wp_unslash($_GET['pickup_date']) )) : esc_attr(gmdate('Y/m/d', strtotime('+1 day'))); ?>" />
                                     </div>
                                 </div>
                             </div>
@@ -452,9 +454,9 @@ $tf_cars_slug = get_option('car_slug');
                                             <ul class="time-options-list tf-pickup-time">
                                                 <?php
                                                     for ($time = $start_time; $time <= $end_time; $time += $time_interval * 60) {
-                                                        $time_label = date("g:i A", $time);
+                                                        $time_label = gmdate("g:i A", $time);
                                                         $selected = ($selected_pickup_time === $time_label) ? 'selected' : '';
-                                                        echo '<li value="' . esc_attr($time_label) . '" ' . $selected . '>' . esc_html($time_label) . '</li>';
+                                                        echo '<li value="' . esc_attr($time_label) . '" ' . esc_attr($selected) . '>' . esc_html($time_label) . '</li>';
                                                     }
                                                 ?>
                                             </ul>
@@ -474,7 +476,7 @@ $tf_cars_slug = get_option('car_slug');
                                     </div>
                                     <div class="info-select">
                                         <h5><?php esc_html_e("Drop-off date", "tourfic"); ?></h5>
-                                        <input type="text" placeholder="Drop Off Date" id="tf_dropoff_date" class="tf_dropoff_date" value="<?php echo !empty($_GET['dropoff_date']) ? esc_html($_GET['dropoff_date']) : date('Y/m/d', strtotime('+2 day')); ?>" />
+                                        <input type="text" placeholder="Drop Off Date" id="tf_dropoff_date" class="tf_dropoff_date" value="<?php echo !empty($_GET['dropoff_date']) ? esc_html(sanitize_text_field( wp_unslash($_GET['dropoff_date']))) : esc_attr(gmdate('Y/m/d', strtotime('+2 day'))); ?>" />
                                     </div>
                                 </div>
                             </div>
@@ -511,9 +513,9 @@ $tf_cars_slug = get_option('car_slug');
                                             <ul class="time-options-list tf-dropoff-time">
                                                 <?php
                                                     for ($time = $start_time; $time <= $end_time; $time += $time_interval * 60) {
-                                                        $time_label = date("g:i A", $time);
+                                                        $time_label = gmdate("g:i A", $time);
                                                         $selected = ($selected_dropoff_time === $time_label) ? 'selected' : '';
-                                                        echo '<li value="' . esc_attr($time_label) . '" ' . $selected . '>' . esc_html($time_label) . '</li>';
+                                                        echo '<li value="' . esc_attr($time_label) . '" ' . esc_attr($selected) . '>' . esc_html($time_label) . '</li>';
                                                     }
                                                 ?>
                                             </ul>
@@ -532,8 +534,8 @@ $tf_cars_slug = get_option('car_slug');
                                 $due_amount = ($total_prices['sale_price'] * $car_deposit_amount)/100;
                             }
                             if( function_exists( 'is_tf_pro' ) && is_tf_pro() && '2'==$car_booking_by ){ ?>
-                                <button class="tf-flex tf-flex-align-center tf-flex-justify-center booking-process tf-final-step tf-flex-gap-8">
-                                    <?php esc_html_e( apply_filters("tf_car_booking_form_submit_button_text", 'Continue' ), 'tourfic' ); ?>
+                                <button class="tf_btn tf-flex tf-flex-align-center tf-flex-justify-center booking-process tf-final-step tf-flex-gap-8">
+                                    <?php echo esc_html( apply_filters("tf_car_booking_form_submit_button_text", $booking_btn_text ), 'tourfic' ); ?>
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M7.5 15L12.5 10L7.5 5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
@@ -541,15 +543,15 @@ $tf_cars_slug = get_option('car_slug');
                             <?php }else{ ?>
                                 <?php if( function_exists( 'is_tf_pro' ) && is_tf_pro() && !empty($car_allow_deposit) && $car_deposit_type!='none' && !empty($car_deposit_amount) ){  ?>
                                     <div class="tf-partial-payment-button tf-flex tf-flex-direction-column tf-flex-gap-16">
-                                        <button class="tf-flex tf-flex-align-center tf-partial-button tf-flex-justify-center tf-flex-gap-8 <?php echo (empty($car_protection_section_status) || empty($car_protections)) && '3'!=$car_booking_by ? esc_attr('booking-process tf-final-step') : esc_attr('tf-car-booking'); ?>" data-partial="<?php echo esc_attr('yes'); ?>">
-                                            <?php esc_html_e( 'Part Pay', 'tourfic' ); ?> <?php echo wc_price($due_amount); ?>
+                                        <button class="tf_btn tf-flex tf-flex-align-center tf-partial-button tf-flex-justify-center tf-flex-gap-8 <?php echo (empty($car_protection_section_status) || empty($car_protections)) && '3'!=$car_booking_by ? esc_attr('booking-process tf-final-step') : esc_attr('tf-car-booking'); ?>" data-partial="<?php echo esc_attr('yes'); ?>">
+                                            <?php esc_html_e( 'Part Pay', 'tourfic' ); ?> <?php echo wp_kses_post(wc_price($due_amount)); ?>
                                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M11.3299 10.3541L11.6835 10.0006L11.3299 9.64703L7.55867 5.87577L8.03008 5.40437L12.6263 10.0006L8.03008 14.5967L7.55867 14.1253L11.3299 10.3541Z" fill="#566676" stroke="#0866C4"/>
                                             </svg>
                                         </button>
 
                                         <button class="tf-flex tf-flex-align-center tf-flex-justify-center tf-flex-gap-8 <?php echo (empty($car_protection_section_status) || empty($car_protections)) && '3'!=$car_booking_by ? esc_attr('booking-process tf-final-step') : esc_attr('tf-car-booking'); ?>" data-partial="<?php echo esc_attr('no'); ?>">
-                                            <?php esc_html_e( 'Full Pay', 'tourfic' ); ?> <?php echo wc_price($total_prices['sale_price']); ?>
+                                            <?php esc_html_e( 'Full Pay', 'tourfic' ); ?> <?php echo wp_kses_post(wc_price($total_prices['sale_price'])); ?>
                                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M7.5 15L12.5 10L7.5 5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                             </svg>
@@ -557,7 +559,7 @@ $tf_cars_slug = get_option('car_slug');
                                     </div>
                                 <?php }else{ ?>
                                     <button class="tf-flex tf-flex-align-center tf-flex-justify-center tf-flex-gap-8 <?php echo (empty($car_protection_section_status) || empty($car_protections)) && '3'!=$car_booking_by ? esc_attr('booking-process tf-final-step') : esc_attr('tf-car-booking'); ?>">
-                                        <?php esc_html_e( apply_filters("tf_car_booking_form_submit_button_text", 'Continue' ), 'tourfic' ); ?>
+                                        <?php echo esc_html( apply_filters("tf_car_booking_form_submit_button_text", 'Continue' ) ); ?>
                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M7.5 15L12.5 10L7.5 5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                         </svg>
@@ -583,7 +585,7 @@ $tf_cars_slug = get_option('car_slug');
 
                                         <?php if(!empty($car_instructions_content)): ?>
                                             <div class="tf-instraction-content-wraper">
-                                                <?php echo $car_instructions_content; ?>
+                                                <?php echo wp_kses_post($car_instructions_content); ?>
                                             </div>    
                                         <?php endif; ?>
 
@@ -595,6 +597,12 @@ $tf_cars_slug = get_option('car_slug');
                         <?php do_action( 'tf_car_cancellation', $post_id ); ?>
                     </div>
                     <div class="tf-mobile-booking-btn">
+                        <div class="tf-price-header">
+                            <h2><?php esc_html_e("Total:", "tourfic"); ?> 
+                            <?php if(!empty($total_prices['regular_price'])){ ?><del><?php echo wc_price($total_prices['regular_price']); ?></del>  <?php } ?>
+                            <?php echo $total_prices['sale_price'] ? wc_price($total_prices['sale_price']) : '' ?> <?php if(!empty($total_prices['type'])){ ?><small class="pricing-type">/ <?php echo esc_html($total_prices['type']); ?></small> <?php } ?></h2>
+                            <p><?php echo Pricing::is_taxable($meta); ?></p>
+                        </div>
                         <button><?php esc_html_e("Book Now", "tourfic"); ?></button>
                     </div>
                     <div class="tf-car-booking-popup">

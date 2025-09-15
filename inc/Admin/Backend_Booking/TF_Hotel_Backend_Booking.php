@@ -140,7 +140,7 @@ class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
 
 		// Check if the current user has the required capability.
 		if (!current_user_can('manage_options')) {
-			wp_send_json_error(__('You do not have permission to access this resource.', 'tourfic'));
+			wp_send_json_error(esc_html__('You do not have permission to access this resource.', 'tourfic'));
 			return;
 		}
 
@@ -189,7 +189,7 @@ class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
 
 		// Check if the current user has the required capability.
 		if (!current_user_can('manage_options')) {
-			wp_send_json_error(__('You do not have permission to access this resource.', 'tourfic'));
+			wp_send_json_error(esc_html__('You do not have permission to access this resource.', 'tourfic'));
 			return;
 		}
 
@@ -291,7 +291,7 @@ class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
 
 		// Check if the current user has the required capability.
 		if (!current_user_can('manage_options')) {
-			wp_send_json_error(__('You do not have permission to access this resource.', 'tourfic'));
+			wp_send_json_error(esc_html__('You do not have permission to access this resource.', 'tourfic'));
 			return;
 		}
 		
@@ -300,10 +300,11 @@ class TF_Hotel_Backend_Booking extends TF_Backend_Booking {
 			'children' => 0,
 		);
 
-		$hotel_id = isset( $_POST['hotel_id'] ) ? $_POST['hotel_id'] : '';
-		$room_id  = isset( $_POST['room_id'] ) ? $_POST['room_id'] : '';
-		$from  = isset( $_POST['from'] ) ? $_POST['from'] : '';
-		$to  = isset( $_POST['to'] ) ? $_POST['to'] : '';
+		$hotel_id = isset( $_POST['hotel_id'] ) ? absint( wp_unslash( $_POST['hotel_id'] ) ) : 0;
+		$room_id  = isset( $_POST['room_id'] ) ? absint( wp_unslash( $_POST['room_id'] ) ) : 0;
+		$from     = isset( $_POST['from'] ) ? sanitize_text_field( wp_unslash( $_POST['from'] ) ) : '';
+		$to       = isset( $_POST['to'] ) ? sanitize_text_field( wp_unslash( $_POST['to'] ) ) : '';
+
 
 		if ( ! empty( $hotel_id ) && ! empty( $room_id ) ) {
 			$rooms = Room::get_hotel_rooms( $hotel_id);

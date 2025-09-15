@@ -36,9 +36,14 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 				array(
 					'id'    => 'tour-general-heading',
 					'type'  => 'heading',
-					'title' => esc_html__( 'General Settings', 'tourfic' ),
-					'content' => esc_html__( 'These are some common settings specific to this Tour Package.', 'tourfic' ),
-					'docs' => esc_url('https://themefic.com/docs/tourfic/tours/tourfic-hotel-general-settings/')
+					'label' => 'General Settings',
+					'subtitle' => esc_html__( 'These are some common settings specific to this Tour Package.', 'tourfic' ),
+				),
+				array(
+					'id'      => 'tour-general-docs',
+					'type'    => 'notice',
+					'style'   => 'success',
+					'content' => esc_html__( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tours/tourfic-hotel-general-settings/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . esc_html__( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
 				),
 				array(
 					'id'       => 'tour_as_featured',
@@ -116,9 +121,14 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 				array(
 					'id'    => 'tour-location-heading',
 					'type'  => 'heading',
-					'title' => esc_html__( 'Location Settings', 'tourfic' ),
-					'content' => esc_html__( 'The location of a tour is a crucial element for every tour package. Set your tour locations in this section.', 'tourfic' ),
-					'docs' => esc_url('https://themefic.com/docs/tourfic/tours/tour-location-settings/')
+					'label' => 'Location Settings',
+					'subtitle' => esc_html__( 'The location of a tour is a crucial element for every tour package. Set your tour locations in this section.', 'tourfic' ),
+				),
+				array(
+					'id'      => 'tour-location-docs',
+					'type'    => 'notice',
+					'style'   => 'success',
+					'content' => esc_html__( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tours/tour-location-settings/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . esc_html__( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
 				),
 				array(
 					'id'       => 'location',
@@ -145,49 +155,54 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 				array(
 					'id'    => 'tour-info-heading',
 					'type'  => 'heading',
-					'title' => esc_html__( 'Tour Information Section', 'tourfic' ),
-					'content' => esc_html__( 'Ensure to furnish customers with all the essential information they need to fully understand your tour package.', 'tourfic' ),
-					'docs' => esc_url('https://themefic.com/docs/tourfic/tours/tour-information/')
+					'label' => 'Tour Information Section',
+					'subtitle' => esc_html__( 'Ensure to furnish customers with all the essential information they need to fully understand your tour package.', 'tourfic' ),
+				),
+				array(
+					'id'      => 'tour-info-docs',
+					'type'    => 'notice',
+					'style'   => 'success',
+					'content' => esc_html__( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tours/tour-information/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . esc_html__( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
 				),
 				array(
 					'id'          => 'duration',
 					'type'        => 'text',
-					'label'       => __( 'Tour Duration', 'tourfic' ),
-					'subtitle'    => __( 'E.g. 3', 'tourfic' ),
+					'label'       => esc_html__( 'Tour Duration', 'tourfic' ),
+					'subtitle'    => esc_html__( 'E.g. 3', 'tourfic' ),
 					'field_width' => 50,
 				),				
 				array(
 					'id'      => 'duration_time',
 					'type'    => 'select',
-					'label'   => __( 'Duration time', 'tourfic' ),
-					'subtitle'    => __( 'E.g. Days', 'tourfic' ),
+					'label'   => esc_html__( 'Duration time', 'tourfic' ),
+					'subtitle'    => esc_html__( 'E.g. Days', 'tourfic' ),
 					'options' => array(
-						'Day' => __( 'Days', 'tourfic' ),
-						'Hour' => __( 'Hours', 'tourfic' ),
-						'Minute' => __( 'Minutes', 'tourfic' ),
+						'Day' => esc_html__( 'Days', 'tourfic' ),
+						'Hour' => esc_html__( 'Hours', 'tourfic' ),
+						'Minute' => esc_html__( 'Minutes', 'tourfic' ),
 					),
 					'field_width' => 50,
 				),
 				array(
 					'id'          => 'language',
 					'type'        => 'text',
-					'label'       => __( 'Tour Languages', 'tourfic' ),
-					'subtitle'    => __( 'Include multiple languages separated by comma (,)', 'tourfic' ),
+					'label'       => esc_html__( 'Tour Languages', 'tourfic' ),
+					'subtitle'    => esc_html__( 'Include multiple languages separated by comma (,)', 'tourfic' ),
 					'field_width' => 50,
 				),
 				array(
 					'id'          => 'night',
 					'type'        => 'switch',
-					'label'       => __( 'Multiply Pricing By Night', 'tourfic' ),
-					'subtitle'    => __( 'The total booking cost is calculated by multiplying the nightly rate by the number of nights booked.', 'tourfic' ),
+					'label'       => esc_html__( 'Multiply Pricing By Night', 'tourfic' ),
+					'subtitle'    => esc_html__( 'The total booking cost is calculated by multiplying the nightly rate by the number of nights booked.', 'tourfic' ),
 					'field_width' => '50',
 				),
 				
 				array(
 					'id'          => 'night_count',
 					'type'        => 'number',
-					'label'       => __( 'Total nights', 'tourfic' ),
-					'subtitle'    => __( 'E.g. 2', 'tourfic' ),
+					'label'       => esc_html__( 'Total nights', 'tourfic' ),
+					'subtitle'    => esc_html__( 'E.g. 2', 'tourfic' ),
 					'field_width' => '50',
 					'dependency'  => array(
 						array( 'night', '==', 'true' ),
@@ -196,77 +211,79 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 				array(
 					'id'          => 'group_size',
 					'type'        => 'text',
-					'label'       => __( 'Group Size', 'tourfic' ),
-					'subtitle'    => __( 'E.g. 10 people', 'tourfic' ),
+					'label'       => esc_html__( 'Group Size', 'tourfic' ),
+					'subtitle'    => esc_html__( 'E.g. 10 people', 'tourfic' ),
 					'field_width' => '50',
 				),
 				array(
 					'id'          => 'refund_des',
 					'type'        => 'text',
-					'label'       => __( 'Refund Text', 'tourfic' ),
-					'subtitle'    => __( 'If you have any refund policy, you can add them here.', 'tourfic' ),
+					'label'       => esc_html__( 'Refund Text', 'tourfic' ),
+					'subtitle'    => esc_html__( 'If you have any refund policy, you can add them here.', 'tourfic' ),
 					'field_width' => 100,
 				),
 				array(
-					'id'    => 'highlights-sections',
-					'type'  => 'heading',
-					'title' => esc_html__( 'Description Icons', 'tourfic' ),
+					'id'      => 'description-icon-sections',
+					'type'    => 'heading',
+					'content' => esc_html__( 'Description Icons', 'tourfic' ),
+					'class'   => 'tf-field-class',
 				),
 				array(
 					'id'       => 'tf-tour-duration-icon',
 					'type'     => 'icon',
-					'label'    => __( 'Tour Duration icon', 'tourfic' ),
-					'subtitle' => __( 'Choose icon', 'tourfic' ),
+					'label'    => esc_html__( 'Tour Duration icon', 'tourfic' ),
+					'subtitle' => esc_html__( 'Choose icon', 'tourfic' ),
 					'default'  => 'ri-history-line',
 					'field_width' => '33',
 				),
 				array(
 					'id'       => 'tf-tour-group-icon',
 					'type'     => 'icon',
-					'label'    => __( 'Tour Group Size icon', 'tourfic' ),
-					'subtitle' => __( 'Choose icon', 'tourfic' ),
+					'label'    => esc_html__( 'Tour Group Size icon', 'tourfic' ),
+					'subtitle' => esc_html__( 'Choose icon', 'tourfic' ),
 					'default'  => 'ri-team-line',
 					'field_width' => '33',
 				),
 				array(
 					'id'       => 'tf-tour-lang-icon',
 					'type'     => 'icon',
-					'label'    => __( 'Tour Language icon', 'tourfic' ),
-					'subtitle' => __( 'Choose icon', 'tourfic' ),
+					'label'    => esc_html__( 'Tour Language icon', 'tourfic' ),
+					'subtitle' => esc_html__( 'Choose icon', 'tourfic' ),
 					'default'  => 'ri-global-line',
 					'field_width' => '33',
 				),
 				array(
-					'id'    => 'highlights-sections',
-					'type'  => 'heading',
-					'title' => esc_html__( 'Tour Highlights', 'tourfic' ),
+					'id'      => 'highlights-sections',
+					'type'    => 'heading',
+					'content' => esc_html__( 'Tour Highlights', 'tourfic' ),
+					'class'   => 'tf-field-class',
 				),
 				array(
 					'id'    => 'highlights-section-title',
 					'type'  => 'text',
-					'label' => __( 'Title of the Section ', 'tourfic' ),
-					'subtitle'    => __( 'This text will appear as the heading of the highlights section on the frontend.', 'tourfic' ),
-					'default' => __("Highlights", 'tourfic'),
+					'label' => esc_html__( 'Title of the Section ', 'tourfic' ),
+					'subtitle'    => esc_html__( 'This text will appear as the heading of the highlights section on the frontend.', 'tourfic' ),
+					'default' => esc_html__("Highlights", 'tourfic'),
 				),
 				array(
 					'id'       => 'additional_information',
 					'type'     => 'editor',
-					'label'    => __( 'Tour Highlights', 'tourfic' ),
-					'subtitle' => __( 'Provide a brief overview of your tour package.', 'tourfic' ),
+					'label'    => esc_html__( 'Tour Highlights', 'tourfic' ),
+					'subtitle' => esc_html__( 'Provide a brief overview of your tour package.', 'tourfic' ),
 				),
 				array(
 					'id'      => 'hightlights_thumbnail',
 					'type'    => 'image',
-					'label'   => __( 'Tour Highlights Thumbnail', 'tourfic' ),
-					'subtitle'    => __( 'Please upload an image to be displayed as the Thumbnail for this section.', 'tourfic' ),
+					'label'   => esc_html__( 'Tour Highlights Thumbnail', 'tourfic' ),
+					'subtitle'    => esc_html__( 'Please upload an image to be displayed as the Thumbnail for this section.', 'tourfic' ),
 					'library' => 'image',
 				),
 				array(
 					'id'         => 'features',
 					'type'       => 'select2',
 					'multiple'   => true,
-					'label'      => __( 'Select features', 'tourfic' ),
-					'subtitle'   => __( 'For instance, select amenities like a Breakfast, AC Bus, Tour Guide, and more as applicable. You need to create these features from the ', 'tourfic' ) . ' <a href="'.admin_url('edit-tags.php?taxonomy=tour_features&post_type=tf_tours').'" target="_blank"><strong>' . __( '“Features”', 'tourfic' ) . '</strong></a> tab.',
+					'label'      => esc_html__( 'Select features', 'tourfic' ),
+					'subtitle'   => esc_html__( 'For instance, select amenities like a Breakfast, AC Bus, Tour Guide, and more as applicable. You need to create these features from the ', 'tourfic' ) . ' <a href="'.admin_url('edit-tags.php?taxonomy=tour_features&post_type=tf_tours').'" target="_blank"><strong>' . esc_html__( '“Features”', 'tourfic' ) . '</strong></a> tab.',
 					'options'    => 'terms',
 					'query_args' => array(
 						'taxonomy'   => 'tour_features',
@@ -287,64 +304,68 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 		),
 		// Contact Info
 		'contact_info'         => array(
-			'title'  => __( 'Contact Info', 'tourfic' ),
+			'title'  => esc_html__( 'Contact Info', 'tourfic' ),
 			'icon'   => 'fa-solid fa-address-book',
 			'fields' => array(
 				array(
 					'id'    => 'tour-continfo-heading',
 					'type'  => 'heading',
-					'title' => esc_html__( 'Contact Info Section', 'tourfic' ),
-					'content' => esc_html__( 'How can potential or existing customers reach out for more details about your tour? Please share your contact information here.', 'tourfic' ),
-					'docs' => esc_url('https://themefic.com/docs/tourfic/tours/tour-contact-info/')
+					'label' => 'Contact Info Section',
+					'subtitle' => esc_html__( 'How can potential or existing customers reach out for more details about your tour? Please share your contact information here.', 'tourfic' ),
+				),
+				array(
+					'id'      => 'tour-continfo-docs',
+					'type'    => 'notice',
+					'style'   => 'success',
+					'content' => esc_html__( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tours/tour-contact-info/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . esc_html__( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
 				),
 				array(
 					'id'    => 'contact-info-section-title',
 					'type'  => 'text',
-					'label' => __( 'Title of the Section', 'tourfic' ),
-					'subtitle' => __( 'This text will appear as the heading of the Contact info section on the frontend.', 'tourfic' ),
-					'default' => __("Contact Information", 'tourfic'),
+					'label' => esc_html__( 'Title of the Section', 'tourfic' ),
+					'subtitle' => esc_html__( 'This text will appear as the heading of the Contact info section on the frontend.', 'tourfic' ),
+					'default' => esc_html__("Contact Information", 'tourfic'),
 				),
 				array(
 					'id'          => 'email',
 					'type'        => 'text',
-					'label'       => __( 'Email address', 'tourfic' ),
-					'subtitle'       => __( 'This will be displayed in the Contact Section. Leave it blank if it is not necessary.', 'tourfic' ),
+					'label'       => esc_html__( 'Email address', 'tourfic' ),
+					'subtitle'       => esc_html__( 'This will be displayed in the Contact Section. Leave it blank if it is not necessary.', 'tourfic' ),
 					'field_width' => '50',
 				),
 				array(
 					'id'          => 'phone',
 					'type'        => 'text',
-					'label'       => __( 'Phone Number', 'tourfic' ),
-					'subtitle'       => __( 'This will be displayed in the Contact Section. Leave it blank if it is not necessary.', 'tourfic' ),
+					'label'       => esc_html__( 'Phone Number', 'tourfic' ),
+					'subtitle'       => esc_html__( 'This will be displayed in the Contact Section. Leave it blank if it is not necessary.', 'tourfic' ),
 					'field_width' => '50',
 				),
 				array(
 					'id'          => 'website',
 					'type'        => 'text',
-					'label'       => __( 'Website Url', 'tourfic' ),
-					'subtitle'       => __( 'This will be displayed in the Contact Section. Leave it blank if it is not necessary.', 'tourfic' ),
+					'label'       => esc_html__( 'Website Url', 'tourfic' ),
+					'subtitle'       => esc_html__( 'This will be displayed in the Contact Section. Leave it blank if it is not necessary.', 'tourfic' ),
 					'field_width' => '50',
 				),
 				array(
 					'id'          => 'fax',
 					'type'        => 'text',
-					'label'       => __( 'Fax Number', 'tourfic' ),
-					'subtitle'       => __( 'This will be displayed in the Contact Section. Leave it blank if it is not necessary.', 'tourfic' ),
+					'label'       => esc_html__( 'Fax Number', 'tourfic' ),
+					'subtitle'       => esc_html__( 'This will be displayed in the Contact Section. Leave it blank if it is not necessary.', 'tourfic' ),
 					'field_width' => '50',
 				),
 			),
 		),
 		// //  Tour Extra
 		'tour_extra'           => array(
-			'title'  => __( 'Tour Extras', 'tourfic' ),
+			'title'  => esc_html__( 'Tour Extras', 'tourfic' ),
 			'icon'   => 'fa-solid fa-route',
 			'fields' => array(
 				array(
 					'id'    => 'tour-extras-heading',
 					'type'  => 'heading',
-					'title' => esc_html__( 'Offer Tour Extras', 'tourfic' ),
-					'content' => esc_html__( 'If you wish to provide additional services that are not included in your current tour package, you can list them here.', 'tourfic' ),
-					'docs' => esc_url('https://themefic.com/docs/tourfic/tours/tour-extra/')
+					'label' => 'Offer Tour Extras',
+					'subtitle' => esc_html__( 'If you wish to provide additional services that are not included in your current tour package, you can list them here.', 'tourfic' ),
 				),
 				array(
 					'id'    => 'tf-pro-notice',
@@ -359,52 +380,37 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 
 		// // Price
 		'price'                => array(
-			'title'  => __( 'Pricing', 'tourfic' ),
+			'title'  => esc_html__( 'Price Settings', 'tourfic' ),
 			'icon'   => 'fa-solid fa-money-check',
 			'fields' => array(
 				array(
 					'id'    => 'tour-pricing-heading',
 					'type'  => 'heading',
-					'title' => esc_html__( 'Pricing', 'tourfic' ),
-					'content' => esc_html__( 'Smart pricing attracts more guests. Configure packages, discounts, and deposits below.', 'tourfic' ),
-					'docs' => esc_url('https://themefic.com/docs/tourfic/tours/tourfic-price-settings/')
+					'label' => esc_html__( 'Tour Pricing Settings', 'tourfic' ),
+					'subtitle' => esc_html__( 'The pricing of a tour package plays a crucial role. Make sure you set it correctly.', 'tourfic' ),
+				),
+				array(
+					'id'      => 'tour-pricing-docs',
+					'type'    => 'notice',
+					'style'   => 'success',
+					'content' => esc_html__( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tours/tourfic-price-settings/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . esc_html__( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
 				),
 				array(
 					'id'       => 'pricing',
 					'type'     => 'select',
-					'label'    => esc_html__( 'How will you charge guests?', 'tourfic' ),
-					'subtitle' => esc_html__('Best for fixed itineraries', 'tourfic'),
+					'label'    => esc_html__( 'Pricing rule for the Tour', 'tourfic' ),
+					'subtitle' => esc_html__( 'Select your pricing logic.', 'tourfic' ),
 					'class'    => 'pricing',
 					'options'  => [
-						'person' => __( 'Per Person', 'tourfic' ),
+						'person' => esc_html__( 'Per Person', 'tourfic' ),
 					],
 					'default'  => 'person',
-					'attributes' => array(
-						'class' => 'tf_tour_pricing_type',
-					),
-				),
-				array(
-					'id'          => 'disable_adult_price',
-					'type'        => 'switch',
-					'label'       => esc_html__( 'Adult Disable', 'tourfic' ),
-					'field_width' => 33.33,
-				),
-				array(
-					'id'          => 'disable_child_price',
-					'type'        => 'switch',
-					'label'       => esc_html__( 'Child Disable', 'tourfic' ),
-					'field_width' => 33.33,
-				),
-				array(
-					'id'          => 'disable_infant_price',
-					'type'        => 'switch',
-					'label'       => esc_html__( 'Infant Disable', 'tourfic' ),
-					'field_width' => 33.33,
 				),
 				array(
 					'id'          => 'adult_price',
 					'type'        => 'number',
-					'description'    => esc_html__( 'Type number only, ex. 250', 'tourfic' ),
+					'label'       => esc_html__( 'Price for Adult', 'tourfic' ),
+					'subtitle'    => esc_html__( 'Insert amount only', 'tourfic' ),
 					'dependency'  => [
 						array( 'pricing', '==', 'person' ),
 						[ 'disable_adult_price', '==', 'false' ]
@@ -412,7 +418,7 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'attributes'  => array(
 						'min' => '0',
 					),
-					'field_width' => 33.33,
+					'field_width' => '33.33',
 				),
 				array(
 					'id'          => 'child_price',
@@ -421,11 +427,12 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 						array( 'pricing', '==', 'person' ),
 						[ 'disable_child_price', '==', 'false' ]
 					],
-					'description'    => esc_html__( 'Type number only, ex. 200', 'tourfic' ),
+					'label'       => esc_html__( 'Price for Child', 'tourfic' ),
+					'subtitle'    => esc_html__( 'Insert amount only', 'tourfic' ),
 					'attributes'  => array(
 						'min' => '0',
 					),
-					'field_width' => 33.33,
+					'field_width' => '33.33',
 				),
 				array(
 					'id'          => 'infant_price',
@@ -435,49 +442,61 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 						[ 'disable_infant_price', '==', 'false' ],
 						[ 'disable_adult_price', '==', 'false' ],
 					],
-					'description'    => esc_html__( 'Type number only, ex. 150', 'tourfic' ),
+					'label'       => esc_html__( 'Price for Infant', 'tourfic' ),
+					'subtitle'    => esc_html__( 'Insert amount only', 'tourfic' ),
 					'attributes'  => array(
 						'min' => '0',
 					),
-					'field_width' => 33.33,
+					'field_width' => '33.33',
 				),
 				array(
-					'id'         => 'min_person',
-					'type'       => 'number',
-					'icon'		 => 'fa-regular fa-user',
-					'label'      => esc_html__( 'Number of Persons', 'tourfic' ),
-					'placeholder' => esc_html__( 'Min', 'tourfic' ),
-					'attributes' => array(
-						'min' => '0',
+					'id'       => 'discount_type',
+					'type'     => 'select',
+					'label'    => esc_html__( 'Discount Type', 'tourfic' ),
+					'subtitle' => esc_html__( 'Set a discount for this tour to incentivize bookings. Choose between a fixed amount off or a percentage-based reduction.', 'tourfic' ),
+					'options'  => array(
+						'none'    => esc_html__( 'None', 'tourfic' ),
+						'percent' => esc_html__( 'Percent', 'tourfic' ),
+						'fixed'   => esc_html__( 'Fixed', 'tourfic' ),
 					),
-					'range'   => true,
-					'related_name' => 'max_person',
-					'related_placeholder' => esc_html__( 'Max', 'tourfic' ),
-					'description' => esc_html__('Indicate the minimum and maximum number of persons this package can be booked for each booking.','tourfic'),
-					'dependency' => array( 'pricing', '!=', 'package' ),
-				),
-				array(
-					'id'      => 'allow_discount',
-					'type'    => 'switch',
-					'label'   => esc_html__( 'Discount', 'tourfic' ),
-					'description' => esc_html__( 'Limited-time offers work best! Use discounts for early birds, groups, or last-minute deals.', 'tourfic' ),
+					'default'  => 'none',
 				),
 				array(
 					'id'         => 'discount_price',
 					'type'       => 'number',
-					'description'   => esc_html__( 'Enter value (e.g., ‘50’ for $50 off or 10% off)', 'tourfic' ),
+					'label'      => esc_html__( 'Discount Price', 'tourfic' ),
+					'subtitle'   => esc_html__( 'Insert amount only', 'tourfic' ),
 					'attributes' => array(
 						'min' => '0',
 					),
-					'placeholder' => esc_html__('Amount', 'tourfic'),
-					'dependency'  => array( 'allow_discount', '!=', 'false' ),
-					'related'   => true,
-					'related_name' => 'discount_type',
-					'related_options'  => array(
-						'percent' => esc_html__( 'Percent', 'tourfic' ),
-						'fixed'   => esc_html__( 'Fixed', 'tourfic' ),
+					'dependency' => array(
+						array( 'discount_type', '!=', 'none' ),
 					),
 				),
+				array(
+					'id'          => 'disable_adult_price',
+					'type'        => 'switch',
+					'label'       => esc_html__( 'Disable adult price', 'tourfic' ),
+					'field_width' => '33.33',
+				),
+				array(
+					'id'          => 'disable_child_price',
+					'type'        => 'switch',
+					'label'       => esc_html__( 'Disable children price', 'tourfic' ),
+					'field_width' => '33.33',
+				),
+				array(
+					'id'          => 'disable_infant_price',
+					'type'        => 'switch',
+					'label'       => esc_html__( 'Disable infant price', 'tourfic' ),
+					'field_width' => '33.33',
+				),
+				array(
+					'id'      => 'price_deposit',
+					'type'    => 'heading',
+					'content' => esc_html__( 'Deposit', 'tourfic' ),
+				),
+
 				array(
 					'id'    => 'tf-pro-notice',
 					'type'  => 'notice',
@@ -491,73 +510,158 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 
 		// // Availability
 		'availability'         => array(
-			'title'  => __( 'Availability', 'tourfic' ),
+			'title'  => esc_html__( 'Availability', 'tourfic' ),
 			'icon'   => 'fa-solid fa-clipboard',
 			'fields' => array(
 				array(
 					'id'    => 'tour-availability-heading',
 					'type'  => 'heading',
-					'title' => esc_html__( 'Availability', 'tourfic' ),
-					'content' => esc_html__( 'Set up your tour schedule so customers know exactly when they can book.', 'tourfic' ),
-					'docs' => esc_url('https://themefic.com/docs/tourfic/tours/tour-availability/')
+					'label' => 'Tour Availability Settings',
+					'subtitle' => esc_html__( 'This section provides crucial information on the dates and times when the tour is open for booking.', 'tourfic' ),
+				),
+				array(
+					'id'      => 'tour-availablity-docs',
+					'type'    => 'notice',
+					'style'   => 'success',
+					'content' => esc_html__( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tours/tour-availability/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . esc_html__( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
 				),
 				array(
 					'id'       => 'type',
 					'type'     => 'select',
-					'label'    => esc_html__( 'How often does this Tour run?', 'tourfic' ),
-					'description' => esc_html__( "Continuous: runs regularly (e.g., daily whale watching). Fixed: Specific dates only (e.g., New Year's cruise)", 'tourfic' ),
+					'label'    => esc_html__( 'Tour Type', 'tourfic' ),
+					'subtitle' => esc_html__( 'Continuous: The package will be available every month within the mentioned range. Fixed: The Tour package will be available on a fixed date. ', 'tourfic' ),
 					'class'    => 'tour-type',
 					'options'  => [
-						'continuous' => __( 'Continuous', 'tourfic' ),
+						'continuous' => esc_html__( 'Continuous', 'tourfic' ),
 					],
 					'default'  => 'continuous',
-					'attributes' => array(
-						'class' => 'tf_tour_avail_type',
+
+				),
+				/**
+				 * Custom: No
+				 *
+				 * Continuous Availability
+				 */
+				array(
+					'id'          => 'cont_min_people',
+					'type'        => 'number',
+					'label'       => esc_html__( 'Minimum Person (Required for Search)', 'tourfic' ),
+					'subtitle'    => esc_html__( 'Specify the minimum person required to book this tour.', 'tourfic' ),
+					'dependency'  => array(
+						array( 'type', '==', 'continuous' ),
+					),
+					'default'     => 1,
+					'field_width' => '50',
+				),
+				array(
+					'id'          => 'cont_max_people',
+					'type'        => 'number',
+					'label'       => esc_html__( 'Maximum Person (Required for Search)', 'tourfic' ),
+					'subtitle'    => esc_html__( 'Indicate the maximum number of persons this package can be booked for each booking.', 'tourfic' ),
+					'dependency'  => array(
+						array( 'type', '==', 'continuous' ),
+					),
+					'field_width' => '50',
+				),
+				array(
+					'id'          => 'cont_max_capacity',
+					'type'        => 'number',
+					'label'       => esc_html__( 'Maximum Capacity', 'tourfic' ),
+					'subtitle'    => esc_html__( 'Indicate the maximum number of people (including adults and children) allowed per day for this tour.', 'tourfic' ),
+					'dependency'  => array(
+						array( 'type', '==', 'continuous' ),
 					),
 				),
 				array(
-					'id'         => 'tour_availability',
-					'type'       => 'tourAvailabilityCal',
+					'id'         => 'Disabled_Dates',
+					'type'       => 'heading',
+					'content'    => esc_html__( 'Disable Days & Dates', 'tourfic' ),
+					'dependency' => array(
+						array( 'type', '==', 'continuous' ),
+					),
 				),
+				array(
+					'id'           => 'disable_range',
+					'type'         => 'repeater',
+					'label'        => esc_html__( 'Disable Date Range', 'tourfic' ),
+					'button_title' => esc_html__( 'Add New Date', 'tourfic' ),
+					'max'          => 2,
+					'dependency'   => array(
+						array( 'type', '==', 'continuous' ),
+					),
+					'field_title'  => 'date',
+					'fields'       => array(
+
+						array(
+							'id'         => 'date',
+							'type'       => 'date',
+							'label'      => esc_html__( 'Select date range', 'tourfic' ),
+							'subtitle'    => esc_html__( 'Specify the date range when this tour will be unavailable for booking.', 'tourfic' ),
+							'format'     => 'Y/m/d',
+							'range'      => true,
+							'label_from' => 'Start Date',
+							'label_to'   => 'End Date',
+							'multiple'   => true,
+							'attributes' => array(
+								'autocomplete' => 'off',
+							),
+						),
+
+					),
+				),
+				array(
+					'id'    => 'tf-pro-notice',
+					'type'  => 'notice',
+					'class' => 'tf-pro-notice',
+					'notice' => 'info',
+					'icon' => 'ri-information-fill',
+					'content' => wp_kses_post(__( 'We\'re offering some extra features like <b>fixed tour type</b>, <b>custom availability</b>, <b>allowed time</b>, <b>select day to disable</b>, <b>disable specific dates</b> in our pro plan. <a href="https://tourfic.com/" target="_blank">Upgrade to our pro package today to take advantage of these fantastic options!</a>', 'tourfic' )),
+				),
+
 			),
 		),
 
 		// // Booking
 		'booking'              => array(
-			'title'  => __( 'Booking', 'tourfic' ),
+			'title'  => esc_html__( 'Booking', 'tourfic' ),
 			'icon'   => 'fa-solid fa-person-walking-luggage',
 			'fields' => array(
 				array(
 					'id'    => 'tour-booking-heading',
 					'type'  => 'heading',
-					'title' => esc_html__( 'Booking Settings', 'tourfic' ),
-					'content' => esc_html__( 'This section offers the option to customize the booking process for your tours.', 'tourfic' ),
-					'docs' => esc_url('https://themefic.com/docs/tourfic/tours/booking/')
+					'label' => 'Booking Settings',
+					'subtitle' => esc_html__( 'This section offers the option to customize the booking process for your tours.', 'tourfic' ),
+				),
+				array(
+					'id'      => 'tour-booking-docs',
+					'type'    => 'notice',
+					'style'   => 'success',
+					'content' => esc_html__( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tours/booking/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . esc_html__( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
 				),
 				array(
 					'id'        => 'disable_same_day',
 					'type'      => 'switch',
-					'label'     => __( 'Do you want to disable same-day booking?', 'tourfic' ),
-					'subtitle'  => __( 'If enabled,  the tour cannot be booked on the same day.', 'tourfic' ),
-					'label_on'  => __( 'Yes', 'tourfic' ),
-					'label_off' => __( 'No', 'tourfic' ),
+					'label'     => esc_html__( 'Do you want to disable same-day booking?', 'tourfic' ),
+					'subtitle'  => esc_html__( 'If enabled,  the tour cannot be booked on the same day.', 'tourfic' ),
+					'label_on'  => esc_html__( 'Yes', 'tourfic' ),
+					'label_off' => esc_html__( 'No', 'tourfic' ),
 				),
 				array(
 					'id'      => 'booking-by',
 					'type'    => 'select',
-					'label'   => __( 'Booking Type', 'tourfic' ),
-					'subtitle'  => __( 'Choose the type of booking you would like to implement for this tour.', 'tourfic' ),
+					'label'   => esc_html__( 'Booking Type', 'tourfic' ),
+					'subtitle'  => esc_html__( 'Choose the type of booking you would like to implement for this tour.', 'tourfic' ),
 					'options' => array(
-						'1' => __( 'Default Booking (WooCommerce)', 'tourfic' ),
+						'1' => esc_html__( 'Default Booking (WooCommerce)', 'tourfic' ),
 					),
 					'default' => '1',
 				),
 				array(
 					'id'       => 'single_tour_booking_form_button_text',
 					'type'     => 'text',
-					'label'    => __( 'Change Booking Form Button Text', 'tourfic' ),
-					'subtitle'  => __( 'With this option, you can change the text of the booking form button for this tour', 'tourfic' ),
-					'default'    => __('Book Now', 'tourfic'),
+					'label'    => esc_html__( 'Change Booking Form Button Text', 'tourfic' ),
+					'subtitle'  => esc_html__( 'With this option, you can change the text of the booking form button for this tour', 'tourfic' ),
+					'default'    => esc_html__('Book Now', 'tourfic'),
 				),
 				array(
 					'id'    => 'tf-pro-notice',
@@ -571,8 +675,8 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 				array(
 					'id'    => 'tour-cancellation-heading',
 					'type'  => 'heading',
-					'title' => esc_html__( 'Cancellation Condition', 'tourfic' ),
-					'content' => esc_html__( 'Define and customize booking cancellation policies for your offerings. This section allows you to set different cancellation rules, such as timeframes for free cancellations, partial refunds, or no refunds.', 'tourfic' ),
+					'label' => 'Cancellation Condition',
+					'subtitle' => esc_html__( 'Define and customize booking cancellation policies for your offerings. This section allows you to set different cancellation rules, such as timeframes for free cancellations, partial refunds, or no refunds.', 'tourfic' ),
 				),
 				array(
 					'id'    => 'tf-pro-notice',
@@ -586,63 +690,68 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 		),
 		// // Exclude/Include
 		'exclude_Include'      => array(
-			'title'  => __( 'Include & Exclude', 'tourfic' ),
+			'title'  => esc_html__( 'Include & Exclude', 'tourfic' ),
 			'icon'   => 'fa-solid fa-square-check',
 			'fields' => array(
 				array(
 					'id'    => 'tour-inc-heading',
 					'type'  => 'heading',
-					'title' => esc_html__( 'Include & Exclude Section', 'tourfic' ),
-					'content' => esc_html__( 'Each tour includes certain items, while others are not part of the package. Clearly define these inclusions and exclusions to prevent any misunderstandings during your tour.', 'tourfic' ),
-					'docs' => esc_url('https://themefic.com/docs/tourfic/tours/tour-include-exclude/')
+					'label' => 'Include & Exclude Section',
+					'subtitle' => esc_html__( 'Each tour includes certain items, while others are not part of the package. Clearly define these inclusions and exclusions to prevent any misunderstandings during your tour.', 'tourfic' ),
+				),
+				array(
+					'id'      => 'tour-inc-docs',
+					'type'    => 'notice',
+					'style'   => 'success',
+					'content' => esc_html__( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tours/tour-include-exclude/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . esc_html__( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
 				),
 				array(
 					'id'           => 'inc',
 					'type'         => 'repeater',
-					'label'        => __( 'Items Included', 'tourfic' ),
-					'subtitle'     => __( 'Add all the items/features included in this tour package.', 'tourfic' ),
-					'button_title' => __( 'Add New Include', 'tourfic' ),
+					'label'        => esc_html__( 'Items Included', 'tourfic' ),
+					'subtitle'     => esc_html__( 'Add all the items/features included in this tour package.', 'tourfic' ),
+					'button_title' => esc_html__( 'Add New Include', 'tourfic' ),
 					'field_title'  => 'inc',
 					'fields'       => array(
 						array(
 							'id'    => 'inc',
 							'type'  => 'text',
-							'label' => __( 'Insert your item', 'tourfic' ),
+							'label' => esc_html__( 'Insert your item', 'tourfic' ),
 						),
 					),
 				),
 				array(
 					'id'       => 'inc_icon',
 					'type'     => 'icon',
-					'label'    => __( 'Icon for Included Item', 'tourfic' ),
-					'subtitle' => __( 'Choose icon', 'tourfic' ),
+					'label'    => esc_html__( 'Icon for Included Item', 'tourfic' ),
+					'subtitle' => esc_html__( 'Choose icon', 'tourfic' ),
 				),
 				array(
 					'id'           => 'exc',
 					'type'         => 'repeater',
-					'label'        => __( 'Items Excluded', 'tourfic' ),
-					'subtitle'        => __( 'List all the items/features excluded in this tour package.', 'tourfic' ),
-					'button_title' => __( 'Add New Exclude', 'tourfic' ),
+					'label'        => esc_html__( 'Items Excluded', 'tourfic' ),
+					'subtitle'        => esc_html__( 'List all the items/features excluded in this tour package.', 'tourfic' ),
+					'button_title' => esc_html__( 'Add New Exclude', 'tourfic' ),
 					'field_title'  => 'exc',
 					'fields'       => array(
 						array(
 							'id'    => 'exc',
 							'type'  => 'text',
-							'label' => __( 'Insert your item', 'tourfic' ),
+							'label' => esc_html__( 'Insert your item', 'tourfic' ),
 						),
 					),
 				),
 				array(
 					'id'       => 'exc_icon',
 					'type'     => 'icon',
-					'label'    => __( 'Icon for Excluded item', 'tourfic' ),
-					'subtitle' => __( 'Choose icon', 'tourfic' ),
+					'label'    => esc_html__( 'Icon for Excluded item', 'tourfic' ),
+					'subtitle' => esc_html__( 'Choose icon', 'tourfic' ),
 				),
 				array(
 					'id'      => 'include-exclude-bg',
 					'type'    => 'image',
-					'label'   => __( 'Background Image', 'tourfic' ),
-					'subtitle'    => __( 'This will be added as the background image of this section.', 'tourfic' ),
+					'label'   => esc_html__( 'Background Image', 'tourfic' ),
+					'subtitle'    => esc_html__( 'This will be added as the background image of this section.', 'tourfic' ),
 					'library' => 'image',
 				),
 			),
@@ -650,65 +759,70 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 
 		// // Itinerary
 		'itinerary'            => array(
-			'title'  => __( 'Itenerary', 'tourfic' ),
+			'title'  => esc_html__( 'Itinerary Builder', 'tourfic' ),
 			'icon'   => 'fa-solid fa-clipboard-list',
 			'fields' => array(
 				array(
 					'id'    => 'tour-itibuilder-heading',
 					'type'  => 'heading',
-					'title' => esc_html__( 'Tour Itinerary Builder', 'tourfic' ),
-					'content' => esc_html__( 'Create a detailed schedule for a tour. This builder allows for the organization of various components of a tour into a coherent and structured timeline.', 'tourfic' ),
-					'docs' => esc_url('https://themefic.com/docs/tourfic/tours/tourfic-itinerary-builder/')
+					'label' => 'Tour Itinerary Builder',
+					'subtitle' => esc_html__( 'Create a detailed schedule for a tour. This builder allows for the organization of various components of a tour into a coherent and structured timeline.', 'tourfic' ),
+				),
+				array(
+					'id'      => 'tour-itibuilder-docs',
+					'type'    => 'notice',
+					'style'   => 'success',
+					'content' => esc_html__( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tours/tourfic-itinerary-builder/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . esc_html__( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
 				),
 				array(
 					'id'    => 'itinerary-section-title',
 					'type'  => 'text',
-					'label' => __( 'Title of the section', 'tourfic' ),
-					'subtitle' => __( 'This text will appear as the heading of the Tour Itinerary section on the frontend.', 'tourfic' ),
-					'default' => __("Travel Itinerary", 'tourfic'),
+					'label' => esc_html__( 'Title of the section', 'tourfic' ),
+					'subtitle' => esc_html__( 'This text will appear as the heading of the Tour Itinerary section on the frontend.', 'tourfic' ),
+					'default' => esc_html__("Travel Itinerary", 'tourfic'),
 				),
 				array(
 					'id'           => 'itinerary',
 					'type'         => 'repeater',
-					'button_title' => __( 'Add New Itinerary', 'tourfic' ),
-					'label'        => __( 'Create your Travel Itinerary', 'tourfic' ),
+					'button_title' => esc_html__( 'Add New Itinerary', 'tourfic' ),
+					'label'        => esc_html__( 'Create your Travel Itinerary', 'tourfic' ),
 					'field_title'  => 'title',
 					'fields'       => array(
 						array(
 							'id'          => 'time',
 							'type'        => 'text',
-							'label'       => __( 'Time or Day', 'tourfic' ),
-							'subtitle'    => __( 'e.g. Day 1 or 9:00 am', 'tourfic' ),
+							'label'       => esc_html__( 'Time or Day', 'tourfic' ),
+							'subtitle'    => esc_html__( 'e.g. Day 1 or 9:00 am', 'tourfic' ),
 							'field_width' => '50',
 						),
 						array(
 							'id'          => 'title',
 							'type'        => 'text',
-							'label'       => __( 'Itinerary Title', 'tourfic' ),
-							'subtitle'    => __( 'Input the title here', 'tourfic' ),
+							'label'       => esc_html__( 'Itinerary Title', 'tourfic' ),
+							'subtitle'    => esc_html__( 'Input the title here', 'tourfic' ),
 							'field_width' => '50',
 						),
 						array(
 							'id'           => 'image',
 							'type'         => 'image',
-							'label'        => __( 'Upload Image for the Description', 'tourfic' ),
+							'label'        => esc_html__( 'Upload Image for the Description', 'tourfic' ),
 							'library'      => 'image',
 							'placeholder'  => 'http://',
-							'button_title' => __( 'Add Image', 'tourfic' ),
-							'remove_title' => __( 'Remove Image', 'tourfic' ),
+							'button_title' => esc_html__( 'Add Image', 'tourfic' ),
+							'remove_title' => esc_html__( 'Remove Image', 'tourfic' ),
 						),
 						array(
 							'id'    => 'desc',
 							'type'  => 'editor',
-							'label' => __( 'Itinerary Description', 'tourfic' ),
+							'label' => esc_html__( 'Itinerary Description', 'tourfic' ),
 						),
 					),
 				),
 				array(
 					'id'      => 'itinerary-downloader-settings',
 					'type'    => 'heading',
-					'title' => __( 'Itinerary Downloader Settings', 'tourfic' ),
-					'description' => __( 'These are some additional settings specific to the Itinerary PDF downloader. Note that some of these settings may override the global settings. ', 'tourfic' ),
+					'label' => esc_html__( 'Itinerary Downloader Settings', 'tourfic' ),
+					'subtitle' => esc_html__( 'These are some additional settings specific to the Itinerary PDF downloader. Note that some of these settings may override the global settings. ', 'tourfic' ),
 				),
 				array(
 					'id'    => 'tf-pro-notice',
@@ -723,40 +837,45 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 
 		// FAQs
 		'faqs'                 => array(
-			'title'  => __( 'FAQ', 'tourfic' ),
+			'title'  => esc_html__( 'FAQ Section', 'tourfic' ),
 			'icon'   => 'fa-solid fa-clipboard-question',
 			'fields' => array(
 				array(
 					'id'    => 'tour-faq-heading',
 					'type'  => 'heading',
-					'title' => esc_html__( 'FAQ Section', 'tourfic' ),
-					'content' => esc_html__( 'This section is designed to help users find answers to common questions.', 'tourfic' ),
-					'docs' => esc_url('https://themefic.com/docs/tourfic/tours/tour-faqs/')
+					'label' => 'FAQ Section',
+					'subtitle' => esc_html__( 'This section is designed to help users find answers to common questions.', 'tourfic' ),
+				),
+				array(
+					'id'      => 'tour-faq-docs',
+					'type'    => 'notice',
+					'style'   => 'success',
+					'content' => esc_html__( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tours/tour-faqs/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . esc_html__( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
 				),
 				array(
 					'id'    => 'faq-section-title',
 					'type'  => 'text',
-					'label' => __( 'Title of the Section', 'tourfic' ),
-					'subtitle' => __( 'This text will appear as the heading of the FAQ section on the frontend.', 'tourfic' ),
+					'label' => esc_html__( 'Title of the Section', 'tourfic' ),
+					'subtitle' => esc_html__( 'This text will appear as the heading of the FAQ section on the frontend.', 'tourfic' ),
 					'default' => "Frequently Asked Questions"
 				),
 				array(
 					'id'           => 'faqs',
 					'type'         => 'repeater',
-					'label'        => __( 'Add Your Questions', 'tourfic' ),
-					'subtitle' 	   => __( 'Click the button below to add Frequently Asked Questions (FAQs) for your tour. Feel free to add as many as needed. Additionally, you can duplicate or rearrange each FAQ using the icons on the right side.', 'tourfic' ),
-					'button_title' => __( 'Add New FAQ', 'tourfic' ),
+					'label'        => esc_html__( 'Add Your Questions', 'tourfic' ),
+					'subtitle' 	   => esc_html__( 'Click the button below to add Frequently Asked Questions (FAQs) for your tour. Feel free to add as many as needed. Additionally, you can duplicate or rearrange each FAQ using the icons on the right side.', 'tourfic' ),
+					'button_title' => esc_html__( 'Add New FAQ', 'tourfic' ),
 					'field_title'  => 'title',
 					'fields'       => array(
 						array(
 							'id'    => 'title',
 							'type'  => 'text',
-							'label' => __( 'Single FAQ Title', 'tourfic' ),
+							'label' => esc_html__( 'Single FAQ Title', 'tourfic' ),
 						),
 						array(
 							'id'    => 'desc',
 							'type'  => 'editor',
-							'label' => __( 'Single FAQ Description', 'tourfic' ),
+							'label' => esc_html__( 'Single FAQ Description', 'tourfic' ),
 						),
 					),
 				),
@@ -764,49 +883,49 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 		),
 		// Tour Enquiry
 		't_enquiry'  => array(
-			'title'  => __( 'Enquiry', 'tourfic' ),
+			'title'  => esc_html__( 'Tour Enquiry', 'tourfic' ),
 			'icon'   => 'fa-solid fa-question-circle',
 			'fields' => array(
 				array(
 					'id'      => 'enquiry-section',
 					'type'    => 'heading',
-					'title' => __( 'Tour Enquiry Form', 'tourfic' ),
+					'content' => esc_html__( 'Tour Enquiry Form', 'tourfic' ),
 					'class'   => 'tf-field-class',
 				),
 				array(
 					'id'        => 't-enquiry-section',
 					'type'      => 'switch',
-					'label'     => __( 'Enable Tour Enquiry', 'tourfic' ),
-					'label_on'  => __( 'Yes', 'tourfic' ),
-					'label_off' => __( 'No', 'tourfic' ),
+					'label'     => esc_html__( 'Enable Tour Enquiry', 'tourfic' ),
+					'label_on'  => esc_html__( 'Yes', 'tourfic' ),
+					'label_off' => esc_html__( 'No', 'tourfic' ),
 					'default'   => true
 				),
 				array(
 					'id'       => 't-enquiry-option-icon',
 					'type'     => 'icon',
-					'label'    => __( 'Tour Enquiry icon', 'tourfic' ),
-					'subtitle' => __( 'Choose icon', 'tourfic' ),
+					'label'    => esc_html__( 'Tour Enquiry icon', 'tourfic' ),
+					'subtitle' => esc_html__( 'Choose icon', 'tourfic' ),
 					'default'  => 'fa fa-question-circle-o',
 					'dependency' => array( 't-enquiry-section', '==', '1' ),
 				),
 				array(
 					'id'    => 't-enquiry-option-title',
 					'type'  => 'text',
-					'label' => __( 'Enquiry Title', 'tourfic' ),
+					'label' => esc_html__( 'Enquiry Title', 'tourfic' ),
 					'default' => "Have a question in mind",
 					'dependency' => array( 't-enquiry-section', '==', '1' ),
 				),
 				array(
 					'id'    => 't-enquiry-option-content',
 					'type'  => 'text',
-					'label' => __( 'Enquiry Description', 'tourfic' ),
+					'label' => esc_html__( 'Enquiry Description', 'tourfic' ),
 					'default' => "Looking for more info? Send a question to the tour agent to find out more.",
 					'dependency' => array( 't-enquiry-section', '==', '1' ),
 				),
 				array(
 					'id'    => 't-enquiry-option-btn',
 					'type'  => 'text',
-					'label' => __( 'Enquiry Button Text', 'tourfic' ),
+					'label' => esc_html__( 'Enquiry Button Text', 'tourfic' ),
 					'default' => "Ask a Question",
 					'dependency' => array( 't-enquiry-section', '==', '1' ),
 				),
@@ -815,41 +934,41 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 
 		// Multiple tags for tours
 		'tours_multiple_tags' => array(
-			'title'  => __( 'Promotional Tags', 'tourfic' ),
+			'title'  => esc_html__( 'Promotional Tags', 'tourfic' ),
 			'icon'   => 'fa fa-list',
 			'fields' => array(
 				array(
 					'id'      => 'tf-tour-tags-heading',
 					'type'    => 'heading',
-					'title' => __( 'Tour tags', 'tourfic' ),
+					'label' => esc_html__( 'Tour tags', 'tourfic' ),
 					'class'   => 'tf-field-class',
 				),
 				array(
 					'id'           => 'tf-tour-tags',
 					'type'         => 'repeater',
-					'label'        => __( 'Promotional Tags', 'tourfic' ),
-					'subtitle' => __('Add some keywords that highlight your tour\'s Unique Selling Point (USP). This tag will be displayed on both the Archive Page and the Search Results Page.', 'tourfic'),
-					'button_title' => __( 'Add / Insert New Tag', 'tourfic' ),
+					'label'        => esc_html__( 'Promotional Tags', 'tourfic' ),
+					'subtitle' => esc_html__('Add some keywords that highlight your tour\'s Unique Selling Point (USP). This tag will be displayed on both the Archive Page and the Search Results Page.', 'tourfic'),
+					'button_title' => esc_html__( 'Add / Insert New Tag', 'tourfic' ),
 					'field_title'  => 'tour-tag-title',
 					'fields'       => array(
 
 						array(
 							'id'    => 'tour-tag-title',
 							'type'  => 'text',
-							'label' => __( 'Tag Title', 'tourfic' ),
+							'label' => esc_html__( 'Tag Title', 'tourfic' ),
 						),
 
 						array(
 							'id'       => 'tour-tag-color-settings',
 							'type'     => 'color',
 							'class'    => 'tf-label-field',
-							'label'    => __( 'Tag Colors', 'tourfic' ),
-							'subtitle' => __( 'Colors of Tag Background and Font', 'tourfic' ),
+							'label'    => esc_html__( 'Tag Colors', 'tourfic' ),
+							'subtitle' => esc_html__( 'Colors of Tag Background and Font', 'tourfic' ),
 							'multiple' => true,
 							'inline'   => true,
 							'colors'   => array(
-								'background' => __( 'Background', 'tourfic' ),
-								'font'   => __( 'Font', 'tourfic' ),
+								'background' => esc_html__( 'Background', 'tourfic' ),
+								'font'   => esc_html__( 'Font', 'tourfic' ),
 							),
 							'default' => array(
 								'background' => '#003162',
@@ -863,28 +982,33 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 
 		// Terms & Conditions
 		'terms_and_conditions' => array(
-			'title'  => __( 'Policy', 'tourfic' ),
+			'title'  => esc_html__( 'Terms & Conditions', 'tourfic' ),
 			'icon'   => 'fa-regular fa-square-check',
 			'fields' => array(
 				array(
 					'id'    => 'tour-tnc-heading',
 					'type'  => 'heading',
-					'title' => 'Terms & Conditions Section',
-					'description' => __( 'Include your set of regulations and guidelines that customers must agree to in order to use the service provided in your tour package. ', 'tourfic' ),
-					'docs' => esc_url('https://themefic.com/docs/tourfic/tours/tour-terms-conditions/')
+					'label' => 'Terms & Conditions Section',
+					'subtitle' => esc_html__( 'Include your set of regulations and guidelines that customers must agree to in order to use the service provided in your tour package. ', 'tourfic' ),
+				),
+				array(
+					'id'      => 'tour-tnc-docs',
+					'type'    => 'notice',
+					'style'   => 'success',
+					'content' => esc_html__( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tours/tour-terms-conditions/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . esc_html__( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
 				),
 				array(
 					'id'    => 'tc-section-title',
 					'type'  => 'text',
-					'label' => __( 'Title of the Section', 'tourfic' ),
-					'subtitle' => __( 'This text will appear as the heading of the T&C section on the frontend.', 'tourfic' ),
-					'default' => __( "Tour Terms & Conditions", 'tourfic' ),
+					'label' => esc_html__( 'Title of the Section', 'tourfic' ),
+					'subtitle' => esc_html__( 'This text will appear as the heading of the T&C section on the frontend.', 'tourfic' ),
+					'default' => esc_html__( "Tour Terms & Conditions", 'tourfic' ),
 				),
 				array(
 					'id'    => 'terms_conditions',
 					'type'  => 'editor',
-					'label' => __( 'Terms & Conditions of this tour', 'tourfic' ),
-					'subtitle' => __( "Enter your tour's terms and conditions in the text editor provided below.", 'tourfic' ),
+					'label' => esc_html__( 'Terms & Conditions of this tour', 'tourfic' ),
+					'subtitle' => esc_html__( "Enter your tour's terms and conditions in the text editor provided below.", 'tourfic' ),
 				),
 			),
 		),
@@ -892,53 +1016,58 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 
 		// // Settings
 		'settings'             => array(
-			'title'  => __( 'Settings', 'tourfic' ),
+			'title'  => esc_html__( 'Settings', 'tourfic' ),
 			'icon'   => 'fa-solid fa-viruses',
 			'fields' => array(
 				array(
 					'id'    => 'settings_headding',
 					'type'  => 'heading',
-					'title' =>  esc_html__('Other Settings', 'tourfic' ),
-					'content' => esc_html__( 'These are some additional settings specific to this Tour Package. Note that some of these settings may override the global settings. ', 'tourfic' ),
-					'docs' => esc_url('https://themefic.com/docs/tourfic/tours/tour-settings/')
+					'label' =>  esc_html__('Other Settings', 'tourfic' ),
+					'subtitle' => esc_html__( 'These are some additional settings specific to this Tour Package. Note that some of these settings may override the global settings. ', 'tourfic' ),
+				),
+				array(
+					'id'      => 'tour-setting-docs',
+					'type'    => 'notice',
+					'style'   => 'success',
+					'content' => esc_html__( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/tours/tour-settings/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . esc_html__( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
 				),
 				array(
 					'id'        => 't-review',
 					'type'      => 'switch',
-					'label'     => __( 'Disable Review Section', 'tourfic' ),
-					'label_on'  => __( 'Yes', 'tourfic' ),
-					'label_off' => __( 'No', 'tourfic' ),
+					'label'     => esc_html__( 'Disable Review Section', 'tourfic' ),
+					'label_on'  => esc_html__( 'Yes', 'tourfic' ),
+					'label_off' => esc_html__( 'No', 'tourfic' ),
 					'default'   => false
 				),
 				array(
 					'id'        => 't-share',
 					'type'      => 'switch',
-					'label'     => __( 'Disable Share Option', 'tourfic' ),
-					'label_on'  => __( 'Yes', 'tourfic' ),
-					'label_off' => __( 'No', 'tourfic' ),
+					'label'     => esc_html__( 'Disable Share Option', 'tourfic' ),
+					'label_on'  => esc_html__( 'Yes', 'tourfic' ),
+					'label_off' => esc_html__( 'No', 'tourfic' ),
 					'default'   => false
 				),
 				array(
 					'id'        => 't-wishlist',
 					'type'      => 'switch',
-					'label'     => __( 'Disable Wishlist Option', 'tourfic' ),
-					'label_on'  => __( 'Yes', 'tourfic' ),
-					'label_off' => __( 'No', 'tourfic' ),
+					'label'     => esc_html__( 'Disable Wishlist Option', 'tourfic' ),
+					'label_on'  => esc_html__( 'Yes', 'tourfic' ),
+					'label_off' => esc_html__( 'No', 'tourfic' ),
 					'default'   => false
 				),
 				array(
 					'id'        => 't-related',
 					'type'      => 'switch',
-					'label'     => __( 'Disable Related Tour Section', 'tourfic' ),
-					'label_on'  => __( 'Yes', 'tourfic' ),
-					'label_off' => __( 'No', 'tourfic' ),
+					'label'     => esc_html__( 'Disable Related Tour Section', 'tourfic' ),
+					'label_on'  => esc_html__( 'Yes', 'tourfic' ),
+					'label_off' => esc_html__( 'No', 'tourfic' ),
 					'default'   => false
 				),
 				array(
 					'id'          => 'require_adult_child_booking',
 					'type'        => 'switch',
-					'label'       => __( 'Adult Required for Child Booking', 'tourfic' ),
-					'subtitle'       => __( 'By enabling this option, an adult will be required when booking a child. By default, an adult is required for infant bookings.', 'tourfic' ),
+					'label'       => esc_html__( 'Adult Required for Child Booking', 'tourfic' ),
+					'subtitle'       => esc_html__( 'By enabling this option, an adult will be required when booking a child. By default, an adult is required for infant bookings.', 'tourfic' ),
 					'field_width' => '50%',
 					'default' => 0
 				),
@@ -946,40 +1075,40 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 				array(
 					'id'      => 'tour-booking-section',
 					'type'    => 'heading',
-					'title' => __( 'Titles / Heading of Different Sections', 'tourfic' ),
+					'content' => esc_html__( 'Titles / Heading of Different Sections', 'tourfic' ),
 					'class'   => 'tf-field-class',
 				),
 				array(
 					'id'    => 'booking-section-title',
 					'type'  => 'text',
-					'label' => __( 'Title of the Booking Section', 'tourfic' ),
-					'default' => __("Book This Tour", 'tourfic'),
+					'label' => esc_html__( 'Title of the Booking Section', 'tourfic' ),
+					'default' => esc_html__("Book This Tour", 'tourfic'),
 				),
 				array(
 					'id'    => 'description-section-title',
 					'type'  => 'text',
-					'label' => __( 'Title of the Description Section', 'tourfic' ),
-					'default' => __("Description", 'tourfic'),
+					'label' => esc_html__( 'Title of the Description Section', 'tourfic' ),
+					'default' => esc_html__("Description", 'tourfic'),
 				),
 
 				array(
 					'id'    => 'tour-features-section-title',
 					'type'  => 'text',
-					'label' => __( 'Title of the Features Section', 'tourfic' ),
-					'default' => __("Popular Features", 'tourfic'),
+					'label' => esc_html__( 'Title of the Features Section', 'tourfic' ),
+					'default' => esc_html__("Popular Features", 'tourfic'),
 				),
 				
 				array(
 					'id'    => 'map-section-title',
 					'type'  => 'text',
-					'label' => __( 'Title of the Map Section', 'tourfic' ),
-					'default' => __("Maps", 'tourfic'),
+					'label' => esc_html__( 'Title of the Map Section', 'tourfic' ),
+					'default' => esc_html__("Maps", 'tourfic'),
 				),
 				array(
 					'id'    => 'review-section-title',
 					'type'  => 'text',
-					'label' => __( 'Title of the Reviews Section', 'tourfic' ),
-					'default' => __( 'Average Guest Reviews', 'tourfic' ),
+					'label' => esc_html__( 'Title of the Reviews Section', 'tourfic' ),
+					'default' => esc_html__( 'Average Guest Reviews', 'tourfic' ),
 				),
 			),
 		),
