@@ -257,7 +257,8 @@
                 action: 'tf_apt_room_details_qv',
                 _nonce: tf_params.nonce,
                 post_id: post_id,
-                id: id
+                id: id,
+                design: 'default'
             };
 
             $.ajax({
@@ -291,7 +292,8 @@
                 action: 'tf_apt_room_details_qv',
                 _nonce: tf_params.nonce,
                 post_id: post_id,
-                id: id
+                id: id,
+                design: 'design-1'
             };
 
             $.ajax({

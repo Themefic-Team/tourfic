@@ -4367,6 +4367,7 @@ class Hotel {
 			return;
 		}
 		$post_id = isset( $_POST['post_id'] ) ? intval( wp_unslash( $_POST['post_id'] ) ) : 0;
+		$design = isset( $_POST['design'] ) ? sanitize_text_field( wp_unslash( $_POST['design'] ) ) : '';
 		$meta = get_post_meta( $post_id, 'tf_hotels_opt', true );
 
 		// Single Template Style
@@ -4378,7 +4379,7 @@ class Hotel {
 
 		$tf_hotel_selected_check = ! empty( $tf_hotel_single_template ) ? $tf_hotel_single_template : $tf_hotel_global_template;
 
-		$tf_hotel_selected_template = $tf_hotel_selected_check;
+		$tf_hotel_selected_template = !empty($design) ? $design : $tf_hotel_selected_check;
 		$adults_name = apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) );
 
 		$rooms                       = Room::get_hotel_rooms( $post_id );
