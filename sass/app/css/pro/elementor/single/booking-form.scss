@@ -1,8 +1,12 @@
 @import '../../../../../common/variable';
 @import '../../../../../common/mixin';
 
-.tf-single-hotel-booking-form__style-1{
+.tf-single-hotel-booking-form__style-1.tf-single-template__one{
     padding: 0;
+
+    .tf-tour-booking-box{
+        margin-bottom: 0;
+    }
 }
 .tf-single-hotel-booking-form__style-2{
     padding: 0;

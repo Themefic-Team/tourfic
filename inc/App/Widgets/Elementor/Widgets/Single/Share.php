@@ -81,7 +81,7 @@ class Share extends Widget_Base {
 		$this->add_control('share_icon',[
 			'label' => esc_html__('Share Icon', 'tourfic'),
 			'default' => [
-				'value' => 'fas fa-share-nodes',
+				'value' => 'fas fa-share-alt',
 				'library' => 'fa-solid',
 			],
 			'label_block' => true,

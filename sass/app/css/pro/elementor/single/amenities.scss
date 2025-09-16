@@ -50,7 +50,12 @@
 }
 
 .tf-single-hotel-amenities-style2.tf-hotel-facilities-section{
-    
+    .section-heading {
+        margin-bottom: 15px;
+        font-size: 1.875rem;
+        line-height: 1.5;
+        color: var(--tf-text-heading);
+    }
     .tf-hotel-facilities-title {
         display: flex;
         justify-content: space-between;

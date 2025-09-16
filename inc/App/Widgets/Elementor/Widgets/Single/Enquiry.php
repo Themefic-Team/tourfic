@@ -312,9 +312,6 @@ class Enquiry extends Widget_Base {
             $tf_enquiry_section_cont   = ! empty( $meta['enquiry-content'] ) ? $meta['enquiry-content'] : '';
             $tf_enquiry_section_button = ! empty( $meta['enquiry-btn'] ) ? $meta['enquiry-btn'] : '';
 			
-        } elseif($post_type == 'tf_carrental'){
-			$meta = get_post_meta($post_id, 'tf_carrental_opt', true);
-            
         } else {
 			return;
 		}

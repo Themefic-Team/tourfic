@@ -843,7 +843,7 @@ class Review extends Widget_Base {
                     </div>
                 </div>
                 <!-- Tourfic review reply -->
-                <div class="tf-review-reply tf-mt-50 tf-mb-50">
+                <div class="tf-review-reply tf-mt-50">
                     <div class="tf-section-head">
                         <h2 class="tf-title tf-section-title"><?php esc_html_e( "Showing", "tourfic" ); ?> <span><?php echo count( $comments ); ?></span> <?php esc_html_e( "Review", "tourfic" ); ?></h2>
                     </div>

@@ -4,7 +4,10 @@
 
 //style 1
 .tf-single-enquiry-style-1.tf-ask-enquiry{
+    background-color: var(--tf-filling-foreground);
+    padding: 30px;
     text-align: center;
+
     i{
         text-align: center;
         background-color: $color-brand-lite;

@@ -2,6 +2,13 @@
 @import '../../../../../common/mixin';
 
 .tf-hotel-single-places.tf-hotel-single-places-style1{
+    .tf-section-title {
+        margin-bottom: 15px;
+        font-size: 1.875rem;
+        line-height: 1.5;
+        color: var(--tf-text-heading);
+    }
+
     ul{
         margin: 0;
         padding: 0;

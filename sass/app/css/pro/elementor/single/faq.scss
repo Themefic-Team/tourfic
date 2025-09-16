@@ -4,6 +4,12 @@
 
 //style 1
 .tf-single-faq-section.tf-single-faq-style1{
+    .tf-section-title {
+        margin-bottom: 15px;
+        font-size: 1.875rem;
+        line-height: 1.5;
+        color: var(--tf-text-heading);
+    }
     .tf-faq-inner{
         .tf-faq-single.has-devider{
             border-bottom: 1px solid $color-border-lite;
@@ -72,6 +78,29 @@
             margin-bottom: 0;
             font-size: 1.25rem;
             color: $color-heading;
+        }
+    }
+
+    .tf-faq-single {
+        border-bottom: 0px solid;
+        .tf-faq-single-inner{
+            margin: 0px 0px 30px 0px;
+            background: $color-filling-fg;
+            transition: .3s all ease;
+            @media #{$max768}{
+                margin: 0px 0px 20px 0px;
+            }
+            &:hover{
+                background: $color-brand-lite;
+            }
+            h3{
+                font-size: 1.25rem;
+            }
+        }
+    }
+    .tf-faq-single.active {
+        .tf-faq-single-inner{
+            background: $color-brand-lite;
         }
     }
 }
