@@ -1404,10 +1404,7 @@ class TF_Setup_Wizard {
 		$tf_car_archive = isset( $_POST['tf_car_archive'] ) ? sanitize_text_field( wp_unslash($_POST['tf_car_archive']) ) : 'design-1';
 
 		//skip steps
-        $skip_steps = isset( $_POST['tf-skip-steps'] ) 
-        ? array_map( 'sanitize_text_field', (array) wp_unslash( $_POST['tf-skip-steps'] ) ) 
-        : [];
-
+        $skip_steps = isset( $_POST['tf-skip-steps'] ) ? $_POST['tf-skip-steps'] : [];
 		$skip_steps = explode( ',', $skip_steps );
 
 		if ( ! in_array( 2, $skip_steps ) ) {
