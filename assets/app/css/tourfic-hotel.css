@@ -158,6 +158,13 @@
   margin-top: -20px;
 }
 
+@media only screen and (max-width: 768px) {
+  .single-tf_hotel .tf-single-template__legacy .tf-room-section {
+    margin-top: 0;
+    padding-bottom: 0;
+  }
+}
+
 .single-tf_hotel .tf-single-template__legacy .tf-room-section .tf-room-filter .tf-room-checkbox, .single-tf_hotel .tf-single-template__legacy .tf-room-section .tf-room-filter h3 {
   color: var(--tf-text-heading);
   list-style: none;
@@ -185,7 +192,7 @@
 }
 
 .single-tf_hotel .tf-single-template__legacy .tf-room-section ul.tf-room-checkbox label {
-  margin-left: 5px;
+  margin-left: 0;
   line-height: 1.2;
 }
 
@@ -212,8 +219,8 @@
 }
 
 .single-tf_hotel .tf-single-template__legacy .tf-room-section .availability-table thead {
-  background: var(--tf-primary);
-  color: #ffffff;
+  background: var(--tf-filling-foreground);
+  color: var(--tf-text-paragraph);
 }
 
 .single-tf_hotel .tf-single-template__legacy .tf-room-section .availability-table td,
@@ -474,12 +481,12 @@
 }
 
 .single-tf_hotel .tf-single-template__one .tf-rooms-sections .tf-rooms .tf-availability-table > thead {
-  background-color: var(--tf-primary);
+  background-color: var(--tf-filling-foreground);
 }
 
 .single-tf_hotel .tf-single-template__one .tf-rooms-sections .tf-rooms .tf-availability-table > thead tr th {
   text-align: left;
-  color: #ffffff;
+  color: var(--tf-text-paragraph);
   border: 0px solid;
   border-radius: 5px 5px 0px 0px;
   padding: 13px 30px;
@@ -833,7 +840,7 @@
 }
 
 .single-tf_hotel .tf-single-template__legacy .tf_features .tf-feature-list .single-feature-box i {
-  color: #198754;
+  color: var(--tf-text-paragraph);
 }
 
 .single-tf_hotel .tf-single-template__legacy .tf_features .tf-feature-list .single-feature-box .feature-list-title {
@@ -1031,68 +1038,89 @@
   }
 }
 
-.single-tf_hotel .tf-single-template__legacy .hotel-faq .tf-faq-sec-title {
-  text-align: left;
-  margin-bottom: 20px;
-}
-
-.single-tf_hotel .tf-single-template__one .tf-hotel-faqs-section .tf-hotel-enquiry {
+.single-tf_hotel .tf-single-template__legacy .tf-hotel-faqs-section .tf-hotel-enquiry, .single-tf_hotel .tf-single-template__one .tf-hotel-faqs-section .tf-hotel-enquiry {
   flex-basis: 32%;
   padding-right: 30px;
 }
 
 @media only screen and (max-width: 768px) {
-  .single-tf_hotel .tf-single-template__one .tf-hotel-faqs-section .tf-hotel-enquiry {
+  .single-tf_hotel .tf-single-template__legacy .tf-hotel-faqs-section .tf-hotel-enquiry, .single-tf_hotel .tf-single-template__one .tf-hotel-faqs-section .tf-hotel-enquiry {
     flex-basis: 100%;
     padding-right: 0px;
   }
 }
 
-.single-tf_hotel .tf-single-template__one .tf-hotel-faqs-section .tf-hotel-enquiry .tf-ask-enquiry {
+.single-tf_hotel .tf-single-template__legacy .tf-hotel-faqs-section .tf-hotel-enquiry .tf-ask-enquiry, .single-tf_hotel .tf-single-template__one .tf-hotel-faqs-section .tf-hotel-enquiry .tf-ask-enquiry {
   background-color: var(--tf-filling-foreground);
   padding: 30px;
+  text-align: center;
 }
 
-.single-tf_hotel .tf-single-template__one .tf-hotel-faqs-section .tf-hotel-enquiry .tf-ask-enquiry h3 {
-  font-size: 1.563rem;
+.single-tf_hotel .tf-single-template__legacy .tf-hotel-faqs-section .tf-hotel-enquiry .tf-ask-enquiry i, .single-tf_hotel .tf-single-template__one .tf-hotel-faqs-section .tf-hotel-enquiry .tf-ask-enquiry i {
+  text-align: center;
+  background-color: var(--tf-brand-lite);
+  border-radius: 50%;
+  color: var(--tf-primary);
+  margin: auto;
+  margin-bottom: 25px;
+  font-size: 1.875rem;
+  height: 80px;
+  width: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.single-tf_hotel .tf-single-template__one .tf-hotel-faqs-section .tf-hotel-faqs {
+.single-tf_hotel .tf-single-template__legacy .tf-hotel-faqs-section .tf-hotel-enquiry .tf-ask-enquiry h3, .single-tf_hotel .tf-single-template__one .tf-hotel-faqs-section .tf-hotel-enquiry .tf-ask-enquiry h3 {
+  font-size: 1.5rem;
+  color: var(--tf-text-heading);
+}
+
+.single-tf_hotel .tf-single-template__legacy .tf-hotel-faqs-section .tf-hotel-enquiry .tf-ask-enquiry p, .single-tf_hotel .tf-single-template__one .tf-hotel-faqs-section .tf-hotel-enquiry .tf-ask-enquiry p {
+  margin-top: 5px;
+  margin-bottom: 25px;
+}
+
+.single-tf_hotel .tf-single-template__legacy .tf-hotel-faqs-section .tf-hotel-enquiry .tf-ask-enquiry .tf-btn a:hover, .single-tf_hotel .tf-single-template__one .tf-hotel-faqs-section .tf-hotel-enquiry .tf-ask-enquiry .tf-btn a:hover {
+  background-color: var(--tf-brand-dark);
+}
+
+.single-tf_hotel .tf-single-template__one .tf-hotel-faqs {
   flex-basis: 68%;
 }
 
 @media only screen and (max-width: 768px) {
-  .single-tf_hotel .tf-single-template__one .tf-hotel-faqs-section .tf-hotel-faqs {
+  .single-tf_hotel .tf-single-template__one .tf-hotel-faqs {
     flex-basis: 100%;
     margin-top: 30px;
   }
 }
 
-.single-tf_hotel .tf-single-template__one .tf-hotel-faqs-section .tf-hotel-faqs .tf-faq-wrapper .tf-faq-single {
+.single-tf_hotel .tf-single-template__one .tf-hotel-faqs .tf-faq-wrapper .tf-faq-single {
   border-bottom: 0px solid;
 }
 
-.single-tf_hotel .tf-single-template__one .tf-hotel-faqs-section .tf-hotel-faqs .tf-faq-wrapper .tf-faq-single .tf-faq-single-inner {
+.single-tf_hotel .tf-single-template__one .tf-hotel-faqs .tf-faq-wrapper .tf-faq-single .tf-faq-single-inner {
   margin: 0px 0px 30px 0px;
   background: var(--tf-filling-foreground);
   transition: .3s all ease;
 }
 
 @media only screen and (max-width: 768px) {
-  .single-tf_hotel .tf-single-template__one .tf-hotel-faqs-section .tf-hotel-faqs .tf-faq-wrapper .tf-faq-single .tf-faq-single-inner {
+  .single-tf_hotel .tf-single-template__one .tf-hotel-faqs .tf-faq-wrapper .tf-faq-single .tf-faq-single-inner {
     margin: 0px 0px 20px 0px;
   }
 }
 
-.single-tf_hotel .tf-single-template__one .tf-hotel-faqs-section .tf-hotel-faqs .tf-faq-wrapper .tf-faq-single .tf-faq-single-inner:hover {
+.single-tf_hotel .tf-single-template__one .tf-hotel-faqs .tf-faq-wrapper .tf-faq-single .tf-faq-single-inner:hover {
   background: var(--tf-brand-lite);
 }
 
-.single-tf_hotel .tf-single-template__one .tf-hotel-faqs-section .tf-hotel-faqs .tf-faq-wrapper .tf-faq-single .tf-faq-single-inner h3 {
+.single-tf_hotel .tf-single-template__one .tf-hotel-faqs .tf-faq-wrapper .tf-faq-single .tf-faq-single-inner h3 {
   font-size: 1.25rem;
 }
 
-.single-tf_hotel .tf-single-template__one .tf-hotel-faqs-section .tf-hotel-faqs .tf-faq-wrapper .tf-faq-single.active .tf-faq-single-inner {
+.single-tf_hotel .tf-single-template__one .tf-hotel-faqs .tf-faq-wrapper .tf-faq-single.active .tf-faq-single-inner {
   background: var(--tf-brand-lite);
 }
 
@@ -1215,7 +1243,13 @@
 
 .single-tf_hotel .tf-single-template__one .tf-review-wrapper .tf-review-reply {
   border-bottom: 1px solid var(--tf-border-lite);
-  padding-bottom: 50px;
+  padding-bottom: 30px;
+}
+
+@media only screen and (max-width: 768px) {
+  .single-tf_hotel .tf-single-template__legacy .review-section {
+    padding-bottom: 0;
+  }
 }
 
 @media only screen and (max-width: 768px) {
@@ -1237,7 +1271,6 @@
 @media only screen and (max-width: 1024px) {
   .single-tf_hotel .tf-single-template__legacy .popupmap-for-mobile {
     display: block;
-    margin-top: 15px;
   }
 }
 
@@ -1245,10 +1278,9 @@
   display: none;
 }
 
-@media only screen and (max-width: 1024px) {
+@media only screen and (max-width: 768px) {
   .single-tf_hotel .tf-single-template__legacy .map-for-mobile {
     display: block;
-    margin-top: 15px;
   }
 }
 
@@ -1263,12 +1295,17 @@
   gap: 10px;
 }
 
+@media only screen and (max-width: 768px) {
+  .single-tf_hotel .tf-single-template__legacy .show-on-map {
+    margin-bottom: 0;
+  }
+}
+
 .single-tf_hotel .tf-single-template__legacy .show-on-map iframe {
   height: 130px;
 }
 
 .single-tf_hotel .tf-single-template__legacy .show-on-map .tf_btn {
-  background: linear-gradient(to bottom, var(--tf-primary) 0, var(--tf-brand-dark) 100%);
   border: none;
   text-transform: uppercase;
   font-weight: bold;
@@ -1279,7 +1316,7 @@
   font-size: 0.938rem;
 }
 
-@media only screen and (max-width: 1024px) {
+@media only screen and (max-width: 768px) {
   .single-tf_hotel .tf-single-template__legacy .hero-right .show-on-map {
     display: none;
   }
@@ -1295,7 +1332,6 @@
 .single-tf_hotel .tf-single-template__one .tf-hotel-location-map .tf-hotel-location-preview {
   position: relative;
   margin-bottom: 0px;
-  border: 1px solid var(--tf-border-lite);
   line-height: 0;
 }
 
@@ -1343,11 +1379,24 @@
   padding: 0px;
 }
 
+@media only screen and (max-width: 768px) {
+  .fancybox-slide #tour_room_details_qv.tf-hotel-design-1-popup .tf-hotel-quick-view {
+    flex-direction: column;
+    overflow-x: hidden;
+  }
+}
+
 .fancybox-slide #tour_room_details_qv.tf-hotel-design-1-popup .tf-hotel-details-qc-gallelry {
   width: 545px;
 }
 
 @media only screen and (max-width: 1024px) {
+  .fancybox-slide #tour_room_details_qv.tf-hotel-design-1-popup .tf-hotel-details-qc-gallelry {
+    width: 55%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
   .fancybox-slide #tour_room_details_qv.tf-hotel-design-1-popup .tf-hotel-details-qc-gallelry {
     width: 100%;
   }
@@ -1370,8 +1419,21 @@
   max-height: 50px;
 }
 
+@media only screen and (max-width: 768px) {
+  .fancybox-slide #tour_room_details_qv.tf-hotel-design-1-popup .tf-details-qc-slider-nav .slick-next {
+    right: 5px;
+  }
+}
+
 .fancybox-slide #tour_room_details_qv.tf-hotel-design-1-popup .fancybox-button.fancybox-close-small {
   right: 20px;
+  color: var(--tf-primary);
+}
+
+@media only screen and (max-width: 768px) {
+  .fancybox-slide #tour_room_details_qv.tf-hotel-design-1-popup .fancybox-button.fancybox-close-small {
+    right: 5px;
+  }
 }
 
 .fancybox-slide #tour_room_details_qv.tf-hotel-design-1-popup .tf-hotel-details-info {
@@ -1385,12 +1447,19 @@
 
 @media only screen and (max-width: 1024px) {
   .fancybox-slide #tour_room_details_qv.tf-hotel-design-1-popup .tf-hotel-details-info {
-    padding-right: 10px;
-    padding-left: 10px;
+    padding-right: 16px;
+    padding-left: 16px;
     margin: 0;
     overflow: auto;
     max-height: none;
     width: 100%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .fancybox-slide #tour_room_details_qv.tf-hotel-design-1-popup .tf-hotel-details-info {
+    padding-left: 10px;
+    padding-right: 10px;
   }
 }
 

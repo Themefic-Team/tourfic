@@ -8,6 +8,9 @@
  * @author Foysal
  */
 
+// Don't load directly
+defined( 'ABSPATH' ) || exit;
+
  use \Tourfic\Classes\Helper;
 
 

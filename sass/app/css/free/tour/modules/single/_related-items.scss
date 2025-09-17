@@ -54,11 +54,6 @@
         }
         &__one{
             .upcomming-tours{
-                padding-top: 56px;
-                border-top: 1px solid $color-border-lite;
-                @media #{$max768}{
-                    margin-top: 30px;
-                }
                 .section-title{
                     h2{
                         font-size: 1.875rem;
@@ -72,6 +67,7 @@
                     @media #{$max1024}{
                         .tf-post-box-lists{
                             flex-basis: calc(100%/2 - 12px);
+                            margin: 0 8px!important;
                         }
                     }
                 }
@@ -129,9 +125,10 @@
                         height: auto;
                         padding: 0;
                         display: flow-root;
-                        margin: 0 15px 15px;
-                        margin-left: 15px;
-                        margin-left: 0;
+                        margin: 0 8px;
+                        &:last-child{
+                            margin-right: 0;
+                        }
                     }  
                 }
             }

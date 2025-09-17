@@ -163,7 +163,7 @@ elseif( ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-2
     <!--Available rooms start -->
     <div class="tf-available-archive-hetels-wrapper tf-available-rooms-wrapper" id="tf-hotel-rooms">
         <div class="tf-archive-available-rooms-head tf-available-rooms-head">
-            <span class="tf-total-results"><?php esc_html_e("Total", "tourfic"); ?> <span><?php echo esc_html($total_posts); ?></span>
+            <h3 class="tf-total-results"><?php esc_html_e("Total", "tourfic"); ?> <span><?php echo esc_html($total_posts); ?></span>
             <?php if($post_type == "tf_hotel"){
                 esc_html_e("hotels available", "tourfic");
             }elseif($post_type == "tf_apartment"){
@@ -171,7 +171,7 @@ elseif( ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-2
             }else{
                 esc_html_e("tours available", "tourfic");
             } ?>
-            </span>
+            </h3>
             <div class="tf-archive-filter-showing">
                 <i class="ri-equalizer-line"></i>
             </div>
@@ -530,7 +530,7 @@ elseif( ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-2
                                                     'content' => base64_encode($infoWindowtext)
                                                 ];
                                             }
-                                            echo apply_filters("tf_apartment_archive_single_featured_card_design_one", Apartment::tf_apartment_archive_single_item());
+                                            echo wp_kses(apply_filters("tf_apartment_archive_single_featured_card_design_one", Apartment::tf_apartment_archive_single_item()), Helper::tf_custom_wp_kses_allow_tags());
                                         }
                                     }
                                     while ( $loop->have_posts() ) {
@@ -750,7 +750,7 @@ elseif( ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-2
                                                     'content' => base64_encode($infoWindowtext)
                                                 ];
                                             }
-                                            echo apply_filters("tf_apartment_archive_single_featured_card_design_one", Apartment::tf_apartment_archive_single_item());
+                                            echo wp_kses(apply_filters("tf_apartment_archive_single_featured_card_design_one", Apartment::tf_apartment_archive_single_item()), Helper::tf_custom_wp_kses_allow_tags());
                                         }
                                     }
                                     wp_reset_query();
@@ -828,6 +828,7 @@ elseif( ( $post_type == "tf_hotel" && $tf_hotel_arc_selected_template=="design-2
                         <option value="price-high"><?php echo esc_html__( 'Sort By Price: High to Low', 'tourfic' ); ?></option>
                         <option value="price-low"><?php echo esc_html__( 'Sort By Price: Low to High', 'tourfic' ); ?></option>
                     </select>
+                    <i class="fas fa-chevron-down"></i>
                 </form>
             </div>
         </div>

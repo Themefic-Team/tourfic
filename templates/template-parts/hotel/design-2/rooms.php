@@ -1,5 +1,6 @@
 <?php
-
+// Don't load directly
+defined( 'ABSPATH' ) || exit;
 use \Tourfic\Classes\Helper;
 use \Tourfic\Classes\Hotel\Pricing;
 use \Tourfic\Classes\Hotel\Hotel;
@@ -45,6 +46,7 @@ if ( 2 == $tf_booking_type && ! empty( $tf_booking_url ) ) {
 		}
 	}
 }
+$feature_filter = ! empty( Helper::tfopt( 'feature-filter' ) ) ? Helper::tfopt( 'feature-filter' ) : false;
 $price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings' ) ) ? Helper::tfopt( 'hotel_archive_price_minimum_settings' ) : 'all';
 ?>
 <div id="room-availability" class="tf-pt-16">
@@ -70,10 +72,12 @@ $price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings'
 <!--Available rooms start -->
 <div class="tf-available-rooms-wrapper" id="tf-hotel-rooms">
     <div class="tf-available-rooms-head">
-        <span class=""><?php echo ! empty( $meta["room-section-title"] ) ? esc_html( $meta["room-section-title"] ) : ''; ?></span>
-        <div class="tf-filter">
-            <i class="ri-equalizer-line"></i>
-        </div>
+        <h3 class=""><?php echo ! empty( $meta["room-section-title"] ) ? esc_html( $meta["room-section-title"] ) : ''; ?></h3>
+        <?php if($feature_filter): ?>
+			<div class="tf-filter">
+				<i class="ri-equalizer-line"></i>
+			</div>
+		<?php endif; ?>
     </div>
 	<?php do_action( 'tf_hotel_features_filter', $rm_features, 10 ) ?>
     <!--Available rooms start -->
@@ -188,7 +192,10 @@ $price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings'
                                                     <li><i class="ri-hotel-bed-line"></i> <?php echo esc_html( $bed ); ?><?php esc_html_e( ' Beds', 'tourfic' ); ?></li>
 												<?php } ?>
 												<?php if ( $adult_number ) { ?>
-                                                    <li><i class="ri-user-2-line"></i> <?php echo esc_html( $adult_number ); ?><?php echo esc_html(" ") . apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) ) . 's'; ?>
+                                                    <li><i class="ri-user-2-line"></i> <?php echo esc_html( $adult_number ); ?>
+													<?php 
+													echo ' ' . esc_html( apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) ) ) . 's';
+													?>
 												<?php } ?>
 												<?php if ( $child_number ) { ?>
                                                     <li><i class="ri-user-smile-line"></i> <?php echo esc_html( $child_number ); ?><?php esc_html_e( ' Child', 'tourfic' ); ?></li>
@@ -271,7 +278,11 @@ $price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings'
                                             <li><i class="ri-hotel-bed-line"></i> <?php echo esc_html( $bed ); ?><?php esc_html_e( ' Beds', 'tourfic' ); ?></li>
 										<?php } ?>
 										<?php if ( $adult_number ) { ?>
-                                            <li><i class="ri-user-2-line"></i> <?php echo esc_html( $adult_number ); ?><?php echo esc_html(" ") . apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) ) . 's'; ?></li>
+                                            <li><i class="ri-user-2-line"></i> <?php echo esc_html( $adult_number ); ?>
+											<?php 
+											echo ' ' . esc_html( apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) ) ) . 's';
+											?>
+											</li>
 										<?php } ?>
 										<?php if ( $child_number ) { ?>
                                             <li><i class="ri-user-smile-line"></i> <?php echo esc_html( $child_number ); ?><?php esc_html_e( ' Child', 'tourfic' ); ?></li>
@@ -442,7 +453,10 @@ $price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings'
                                                     <li><i class="ri-hotel-bed-line"></i> <?php echo esc_html( $bed ); ?><?php esc_html_e( ' Beds', 'tourfic' ); ?></li>
 			                                    <?php } ?>
 			                                    <?php if ( $adult_number ) { ?>
-                                                    <li><i class="ri-user-2-line"></i> <?php echo esc_html( $adult_number ); ?><?php echo esc_html(" ") . apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) ) . 's'; ?></li>
+                                                    <li><i class="ri-user-2-line"></i> <?php echo esc_html( $adult_number ); ?><?php 
+													echo ' ' . esc_html( apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) ) ) . 's';
+													?>
+													</li>
 			                                    <?php } ?>
 			                                    <?php if ( $child_number ) { ?>
                                                     <li><i class="ri-user-smile-line"></i><?php echo esc_html( $child_number ); ?><?php esc_html_e( ' Child', 'tourfic' ); ?></li>
@@ -518,7 +532,10 @@ $price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings'
                                             <li><i class="ri-hotel-bed-line"></i> <?php echo esc_html( $bed ); ?><?php esc_html_e( ' Beds', 'tourfic' ); ?></li>
 										<?php } ?>
 										<?php if ( $adult_number ) { ?>
-                                            <li><i class="ri-user-2-line"></i> <?php echo esc_html( $adult_number ); ?><?php echo esc_html(" ") . apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) ) . 's'; ?></li>
+                                            <li><i class="ri-user-2-line"></i> <?php echo esc_html( $adult_number ); ?><?php 
+											echo ' ' . esc_html( apply_filters( 'tf_hotel_adults_title_change', esc_html__( 'Adult', 'tourfic' ) ) ) . 's';
+											?>
+											</li>
 										<?php } ?>
 										<?php if ( $child_number ) { ?>
                                             <li><i class="ri-user-smile-line"></i><?php echo esc_html( $child_number ); ?><?php esc_html_e( ' Child', 'tourfic' ); ?></li>

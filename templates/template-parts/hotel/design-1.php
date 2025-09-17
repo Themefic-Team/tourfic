@@ -1,4 +1,6 @@
 <?php
+// Don't load directly
+defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\Classes\Helper;
 use \Tourfic\App\TF_Review;
@@ -81,7 +83,7 @@ if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) {
                             <div class="tf-share">
                                 <a href="#dropdown-share-center" class="share-toggle tf-icon tf-social-box"
                                 data-toggle="true">
-                                <i class="fa-solid fa-share-nodes"></i>
+                                    <i class="ri-share-line"></i>
                                 </a>
 
                                 <div id="dropdown-share-center" class="share-tour-content">

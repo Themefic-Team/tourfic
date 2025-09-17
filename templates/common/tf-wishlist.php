@@ -1,4 +1,7 @@
 <?php
+// Don't load directly
+defined( 'ABSPATH' ) || exit;
+
 /*
 Template Name: Tourfic - Wishlist
 */

@@ -1,7 +1,7 @@
 .search-result-wrapper {
     padding: 30px 0;
 }
-.search-result-inner{
+.search-result-inner {
     display: grid;
     grid-template-columns: 73% 27%;
     @media #{$max1024} {
@@ -10,9 +10,6 @@
     @media #{$max768} {
         grid-template-columns: 100%;
     }
-}
-.tf-archive-listing__legacy,
-.search-result-inner {
     .tf-search-left {
         padding-right: 16px;
         @media #{$max768} {
@@ -24,7 +21,7 @@
             justify-content: space-between;
             padding: 10px 0;
             margin-bottom: 15px;
-
+          
             .tf-result-counter-info{
                 display: flex;
                 .tf-counter-title{
@@ -33,7 +30,7 @@
             }
             @media #{$max575} {
                 gap: 8px;
-
+               
             }
             .tf-list-grid {
                 display: flex;
@@ -45,33 +42,39 @@
                     margin-left: 10px;
                     font-size: 1.25rem;
                     text-decoration: none;
-                    justify-content: center;
-                    align-items: center;
                     color: $color-primary;
                     @media #{$max768}{
                         display: none;
                     }
                 }
             
-                .tf-archive-ordering #tf-orderby{
-                    height: 100%;
-                    padding: 8px 30px 8px 8px;
-                    background-position: calc(100% - 8px) 54%;
-                    border-radius: 4px;
-                    background-color: $color-filling-bg;
-                    border-color: $color-border-lite;
-                    -webkit-appearance: none;
-                    appearance: none;
-                    -moz-appearance: none;
-                    background-image: url('https://www.svgrepo.com/show/80156/down-arrow.svg');
-                    background-repeat: no-repeat;
-                    background-size: 12px 12px;
-                    cursor: pointer;
-
-                    @media #{$max575}{
-                        max-width: 160px;
+                .tf-archive-ordering{
+                    position: relative;
+                    #tf-orderby{
+                        height: 100%;
+                        padding: 8px 30px 8px 8px;
+                        background-position: calc(100% - 8px) 54%;
+                        border-radius: 4px;
+                        font-size: 1rem;
+                        color: $color-text;
+                        background-color: $color-filling-bg;
+                        border-color: $color-border-lite;
+                        -webkit-appearance: none;
+                        appearance: none;
+                        -moz-appearance: none;
+                        cursor: pointer;
+            
+                        @media #{$max575}{
+                            max-width: 160px;
+                        }
                     }
-                }
+                    i{
+                        position: absolute;
+                        top: 50%;
+                        right: 12px;
+                        transform: translateY(-50%);
+                    }
+                } 
             }
         }
         
@@ -80,7 +83,7 @@
                 .single-tour-wrap {
                     width: 100%;
                     flex: none;
-                    margin-bottom: 0px;
+                    margin-bottom: 20px;
                 }
                 .tourfic-single-left {
                     margin-bottom: 16px;
@@ -92,7 +95,7 @@
                 }
                 .tourfic-single-right {
                     padding: 0;
-                    height: 100%;
+                    height: auto;
                 }
                 .roomrow_flex {
                     padding: 0;
@@ -159,17 +162,6 @@
                 display: grid;
                 grid-template-columns: 1fr 1fr;
                 gap: 10px;
-
-                &.tf-grid-1{
-                    grid-template-columns: 1fr;
-                    gap: 0;
-                }
-                &.tf-grid-3{
-                    grid-template-columns: 1fr 1fr 1fr;
-                }
-                &.tf-grid-4{
-                    grid-template-columns: 1fr 1fr 1fr 1fr;
-                }
                 .single-tour-wrap {
                     width: 100%;
                     padding: 0 5px;
@@ -238,7 +230,6 @@
     }
 }
 .single-tour-wrap{
-    margin: 16px 0;
     transition: all 0.3s ease-out;
     * {
         transition: all 0.3s ease-out;
@@ -246,26 +237,12 @@
     @media #{$max768} {
         margin-bottom: 0px;
     }
-
-    &:first-child {
-        margin-top: 0;
-    }
-
-    .tf-map-link{
-        i{
-            margin-right: 4px;
-        }
-        svg{
-            margin-right: 4px;
-            width: 16px;
-            height: 16px;
-        }
-    }
     .single-tour-inner {
         overflow: hidden;
         width: 100%;
         min-height: 149px;
         padding: 20px;
+        margin: 16px 0;
         border: 1px solid $color-border-lite;
         background: $color-filling-fg;
         border-radius: 4px;
@@ -365,7 +342,7 @@
             padding: 0 0 0 16px;
             .tf-archive-rating-wrapper {
                 @media #{$max768} {
-                    margin-top: 20px;
+                    margin: 15px 0;
                 }
                 .tf-archive-rating {
                     width: 40px;
@@ -416,17 +393,11 @@
                     font-weight: bold;
                     margin-left: 5px;
                 }
-                ins{
-                    background-color: transparent;
-                }
             }
             .tf-tour-price {
                 .amount {
                     font-weight: bold;
                     margin-left: 5px;
-                }
-                ins{
-                    background-color: transparent;
                 }
             }
             .tf_property_block_main_row {
@@ -445,10 +416,12 @@
                     flex-grow: 1;
                     .tf-hotel__title-wrap {
                         margin-bottom: 4px;
-                        .tourfic_hotel-title{
-                            margin: 0;
-                            a{
-                                display: block;
+                        a{
+                            display: block;
+                            color: inherit;
+                            .tourfic_hotel-title {
+                                display: inline-block;
+                                margin: 0;
                                 padding-right: 2px;
                                 font-size: 1.5rem;
                                 color: $color-heading;
@@ -459,6 +432,14 @@
                                     color: $color-brand-dark;
                                 }
                             }
+                            &:hover {
+                                color: $color-primary;
+                            }
+                        }
+                    }
+                    .tf-map-link {
+                        i{
+                            margin-right: 5px;
                         }
                     }
                 }
@@ -527,6 +508,11 @@
         .single-tour-inner {
             background: $color-filling-fg;
             border-color: $color-border-lite;
+        }
+    }
+    &:first-child {
+        .single-tour-inner {
+            margin-top: 0;
         }
     }
 }
@@ -638,6 +624,10 @@
                 display: inline-block;
                 padding-left: 25px;
                 font-weight: 400;
+                @media #{$max1024} {
+                    padding-right: 25px;
+                    line-height: 1.5;
+                }
                 input{
                     display: none;
                 }
@@ -651,6 +641,9 @@
                 background-color: $color-white;
                 border-radius: 5px;
                 border: 1px solid $color-border-lite;
+                @media #{$max1024} {
+                    top: 0px;
+                }
             }
     
             input[type=checkbox] {
@@ -713,6 +706,10 @@
 }
 
 .tf-room-filter{
+    display: none;
+    &.tf-filter-show{
+        display: block;
+    }
     .tf-room-checkbox {
         display: flex;
         gap: 10px 30px;
@@ -724,12 +721,13 @@
             cursor: pointer;
             width: 100%;
             display: inline-block;
-            padding-left: 25px;
+            padding-left: 30px;
             font-weight: 400;
+            line-height: 1.2;
         }
         .tf-checkmark {
             position: absolute;
-            top: 4px;
+            top: 0px;
             left: 1px;
             height: 20px;
             width: 20px;
@@ -779,6 +777,7 @@
 .page-template-tf-search{
     .tf-archive-template{
         &__one{
+            padding: 0;
             .tf-archive-car-banner{
                 background: $color-gray-light;
                 height: 350px;
@@ -787,7 +786,7 @@
                 background-size: cover;
                 background-position: center;
                 @media #{$max575}{
-                    margin: 0 16px;
+                    margin: 16px 16px 0;
                 }
                 .tf-banner-content{
                     height: 100%;
@@ -835,6 +834,14 @@
                             font-size: 1rem;
                             font-weight: 400;
                         }
+                        .tf-archive-filter-showing{
+                            display: none;
+                            cursor: pointer;
+                            @media #{$max1024}{
+                                display: block;
+                                margin-left: 10px;
+                            }
+                        }
                     }
                 }
 
@@ -844,15 +851,22 @@
                         border-radius: 16px;
                         background: $color-filling-fg;
                         padding: 32px;
+                        position: relative;
                         @media #{$max1024}{
-                            width: 280px;
+                            width: 100%;
+                            display: none;
                         }
                         @media #{$max768}{
                             width: 100%;
                         }
 
+                        &.tf-filter-show{
+                            display: block;
+                        }
+                        
                         .tf-sidebar-header{
                             margin-bottom: 32px;
+                           
                             h4{
                                 color: $color-heading;
                                 font-size: 1rem;
@@ -868,6 +882,16 @@
                                 border: 0px solid;
                                 cursor: pointer;
                                 display: none;
+                            }
+                            .tf-close-sidebar {
+                                display: none;
+                                @media #{$max1024}{
+                                    position: absolute;
+                                    right: 17px;
+                                    top: 12px;
+                                    display: block;
+                                    color: $color-danger;
+                                }
                             }
                         }
                         .tf_widget{
@@ -928,7 +952,7 @@
                                             -moz-user-select: none;
                                             -ms-user-select: none;
                                             user-select: none;
-
+                                            
                                             input{
                                                 position: absolute;
                                                 opacity: 0;
@@ -1035,6 +1059,7 @@
                                             &.active{
                                                 label{
                                                     background: $color-primary;
+                                                    color: $color-white;
                                                 }
                                             }
                                         }

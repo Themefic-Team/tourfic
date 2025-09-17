@@ -1,3 +1,6 @@
+<?php // Don't load directly
+defined( 'ABSPATH' ) || exit;
+?>
 <?php if($inc || $exc){ ?>
 <!-- Include Exclude srart -->
 <div class="tf-include-exclude-wrapper">

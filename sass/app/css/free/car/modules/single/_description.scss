@@ -13,10 +13,14 @@
                     margin: 0;
                     
                 }
-                span.tf-see-description,
-                span.tf-see-less-description{
+                .tf-see-description,
+                .tf-see-less-description{
                     color: $color-primary;
                     cursor: pointer;
+                    display: inline-block;
+                    &:hover{
+                        color: $color-brand-dark;
+                    }
                 }
             }
             .tf-full-description{

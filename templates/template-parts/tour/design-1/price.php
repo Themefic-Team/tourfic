@@ -1,3 +1,7 @@
+<?php
+// Don't load directly
+defined( 'ABSPATH' ) || exit;
+?>
 <!-- Single Tour Trip informations -->
 <div class="tf-trip-info tf-box tf-mb-56 tf-template-section">
     <div class="tf-trip-info-inner tf-flex tf-flex-space-bttn tf-flex-align-center tf-flex-gap-8">
@@ -11,11 +15,11 @@
 						<?php
 						if ( $tour_duration > 1 ) {
 							$dur_string         = 's';
-							$duration_time_html = $duration_time . $dur_string;
+							$_duration_time = $duration_time . $dur_string;
 						} else {
-							$duration_time_html = $duration_time;
+							$_duration_time = $duration_time;
 						}
-						echo " " . esc_html( $duration_time_html );
+						echo " " . esc_html( $_duration_time );
 						?>
                     </li>
 				<?php }

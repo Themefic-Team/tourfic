@@ -3,19 +3,21 @@
         &__legacy{
             .tf-tour-booking-wrap {
                 border-radius: 4px;
-                padding: 10px;
+                padding: 12px;
                 margin: 0 auto;
                 background: $color-white;
                 box-shadow: 0px 5px 10px rgba(0, 44, 102, 0.2);
-                width: 80%;
                 font-size: 1rem;
+                width: fit-content;
                 @media #{$max1024}{
-                    width: 95%;
                     font-size: 0.875rem;
                 }
                 @media #{$max768}{
-                    max-width: 450px;
-                    display: none;
+                    padding: 10px;
+                }
+                @media #{$max575}{
+                    width: 95%;
+                    padding-bottom: 20px;
                 }
                 .tf_btn {
                     border-radius: 2px;
@@ -32,13 +34,16 @@
                     width: 100%;
                     display: flex;
                     align-items: center;
-                    gap: 15px;
+                    gap: 20px;
                     margin: 0;
                     @media #{$max1024}{
                         flex-wrap: wrap;
                     }
+                    @media #{$max768}{
+                        gap: 12px;
+                    }
                     @media #{$max575}{
-                        flex-direction: column;;
+                        flex-direction: column;
                     }
                     @media #{$max768}{
                         display: none;
@@ -63,17 +68,18 @@
                     font-weight: 500;
                     border: none;
                     .tf_person-icon{
-                        margin-right: 12px;
+                        margin-right: 10px;
                     }
                     @media #{$max768}{
                         display: flex;
-                        justify-content: center;
                         flex: 1;
                         padding: 10px;
                         height: 40px;
                     }
                     @media #{$max575}{
-                        width: 80%;
+                        width: 90%;
+                        max-width: 280px;
+                        padding: 10px 0;
                     }
                 }
                 .tf_form-row {
@@ -82,7 +88,8 @@
                        flex: 1;
                     }
                     @media #{$max575}{
-                        width: 80%;
+                        width: 90%;
+                        max-width: 280px;
                     }
                     .tf_label-row {
                         margin-bottom: 0;
@@ -93,10 +100,16 @@
                     padding: 0;
                 }
                 .tf_form-inner {
+                    @include flexbox();
+                    align-items: center;
+                    i{
+                        margin-bottom: 1px;
+                    }
                     input[type="text"] {
                         background: transparent;
-                        padding: 5px 15px;
+                        padding: 0 10px;
                         border-radius: 2px;
+                        line-height: 1;
                         @media #{$max1024}{
                             font-size: 0.875rem;
                         }
@@ -139,12 +152,13 @@
                     width: 100%;
                     z-index: 9999;
                     background-color: $color-brand-dark;
-                    border-top: 4px solid $color-danger;
+                    border-top: 4px solid transparent;
                     padding: 8px 0;
                     position: fixed;
                     bottom: 0;
                     left: 0%;
                     right: 0;
+                    border-radius: 0;
                     @media #{$max768}{
                         padding: 8px 10px;
                         border-radius: 0;
@@ -181,7 +195,7 @@
                         padding: 16px;
                     }
                     form.tf_tours_booking {
-                        width: 55%;
+                        width: fit-content;
                         @media #{$max768}{
                             width: 100%;
                         }
@@ -192,6 +206,7 @@
                     .tf_form-inner {
                         background: $color-white;
                         border-radius: 2px;
+                        padding-left: 15px;
                     }
                     .btn-styled {
                         border: 1px solid $color-primary;

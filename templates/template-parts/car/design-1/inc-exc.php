@@ -1,4 +1,8 @@
-<?php if(!empty($inc_exc_status)){ ?>
+<?php 
+// Don't load directly
+defined( 'ABSPATH' ) || exit;
+
+if(!empty($inc_exc_status)){ ?>
 <div class="tf-car-inc-exc-section" id="tf-inc-exc">
     <div class="tf-inc-exe tf-flex tf-flex-gap-16">
         <?php if(!empty($includes)){ ?>

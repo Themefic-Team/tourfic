@@ -51,8 +51,8 @@ class TF_Review {
              *
              * v1.19.5
              */
-            wp_enqueue_script( 'jquery-validate', '//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js', array( 'jquery' ), TF_VERSION, true );
-    
+            wp_enqueue_script( 'jquery-validate', TF_ASSETS_APP_URL . 'libs/jquery-validate/jquery.validate.min.js', array( 'jquery' ), TF_VERSION, true );
+            
             $data = '
             
                 jQuery(document).ready(function($) {
@@ -107,7 +107,7 @@ class TF_Review {
         }
 
 		if ( ( isset( $_POST[ TF_COMMENT_META ] ) ) && ( '' !== $_POST[ TF_COMMENT_META ] ) ) {
-			$tf_comment_meta = $_POST[ TF_COMMENT_META ];
+			$tf_comment_meta =  sanitize_text_field( wp_unslash( $_POST[ TF_COMMENT_META ] ) );
 			add_comment_meta( $comment_id, TF_COMMENT_META, $tf_comment_meta );
 			add_comment_meta( $comment_id, TF_BASE_RATE, Helper::tfopt( 'r-base' ) ?? 5 );
 		}
@@ -174,7 +174,7 @@ class TF_Review {
 
         // Check if the current user has the required capability.
 		if (!current_user_can('manage_options')) {
-			wp_send_json_error(__('You do not have permission to access this resource.', 'tourfic'));
+			wp_send_json_error(esc_html__('You do not have permission to access this resource.', 'tourfic'));
 			return;
 		}
     
@@ -615,7 +615,7 @@ class TF_Review {
             <?php } elseif( ( "tf_carrental"==$tf_current_post && $tf_car_arc_selected_template=="design-1" ) ){ ?>
                 <div class="tf-reviews-box">
                     <span>
-                        <?php echo wp_kses_post( self::tf_average_ratings( array_values( $tf_overall_rate ?? [] ) ) ); ?> <i class="fa-solid fa-star"></i> (<?php echo Pricing::get_total_trips(get_the_ID()); ?> <?php esc_html_e( "Trips", "tourfic" ) ?>)</span>
+                        <?php echo wp_kses_post( self::tf_average_ratings( array_values( $tf_overall_rate ?? [] ) ) ); ?> <i class="fa-solid fa-star"></i> (<?php echo wp_kses_post( Pricing::get_total_trips(get_the_ID()) ); ?> <?php esc_html_e( "Trips", "tourfic" ) ?>)</span>
                 </div>
             <?php }else{ ?>
                 <div class="tf-archive-rating-wrapper">
@@ -667,7 +667,7 @@ class TF_Review {
                 </span>
             <?php } elseif( ( "tf_carrental"==$tf_current_post && $tf_car_arc_selected_template=="design-1" ) ){ ?>
                 <div class="tf-reviews-box">
-                    <span>0.0 <i class="fa-solid fa-star"></i> (<?php echo Pricing::get_total_trips(get_the_ID()); ?> <?php esc_html_e( "Trips", "tourfic" ) ?>)</span>
+                    <span>0.0 <i class="fa-solid fa-star"></i> (<?php echo wp_kses_post( Pricing::get_total_trips(get_the_ID())); ?> <?php esc_html_e( "Trips", "tourfic" ) ?>)</span>
                 </div>
             <?php }else{ ?>
                 <div class="tf-archive-rating-wrapper">
