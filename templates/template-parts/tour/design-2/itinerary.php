@@ -1,4 +1,6 @@
 <?php
+defined( 'ABSPATH' ) || exit;
+
 if ( function_exists('is_tf_pro') && is_tf_pro() ) {
     do_action( 'after_itinerary_builder', $itineraries, $itinerary_map );
 } else {

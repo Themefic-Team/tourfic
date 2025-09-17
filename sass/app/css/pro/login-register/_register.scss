@@ -5,22 +5,25 @@
     box-shadow: 0px 4px 40px rgba(24, 49, 83, 0.02);
     border-radius: 16px;
     padding: 56px;
-    margin: 0 auto;
+    margin: 60px auto;
 
-    @media #{$max575} {
-        padding: 30px;
+    @media #{$max768} {
+        padding: 24px;
+        width: auto;
+        margin: 40px 16px;
     }
 
     h3{
         font-weight: 600;
         font-size: 2rem;
         line-height: 38px;
-        color: #002043;
+        color: $color-heading;
+        margin-bottom: 30px;
     }
 
     .fancybox-close-small {
         background: transparent;
-        color: #333;
+        color: $color-text;
     }
 
     .tf-reg-response {
@@ -85,7 +88,7 @@
         label {
             font-size: 1rem;
             font-weight: 600;
-            color: #828C99;
+            color: $color-text;
             display: block;
             padding: 0 0 0 0;
             margin: 0 0 5px 0;
@@ -107,7 +110,7 @@
         input {
             outline: none;
             background: #F2F4F5;
-            border: 1px solid #828C99;
+            border: 1px solid $color-border-lite;
             box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
             border-radius: 8px;
             line-height: 1;
@@ -115,6 +118,7 @@
             padding: 14px 14px;
             margin: 0;
             width: 100%;
+            color: $color-text;
 
             &.error-input{
                 border-color: #b30000;
@@ -131,7 +135,7 @@
             height: 19px;
             line-height: 19px;
             border-radius: 50%;
-            border: 1px solid #c8e2fc;
+            border: 1px solid $color-border-lite;
             outline: none;
             margin: 0;
             cursor: pointer;
@@ -143,7 +147,7 @@
             height: 19px;
             line-height: 19px;
             border-radius: 2px;
-            border: 1px solid #c8e2fc;
+            border: 1px solid $color-border-lite;
             outline: none;
             margin: 0;
             cursor: pointer;
@@ -159,19 +163,19 @@
     }
 
     .tf-submit {
-        border: 1px solid #003162;
+        border: 1px solid $color-primary;
         border-radius: 4px;
         overflow: hidden;
         position: relative;
         color: $color-white;
         cursor: pointer;
         text-decoration: none;
-        background: #003162;
+        background: $color-primary;
         padding: 10px 18px;
         @include transition();
 
         &:hover {
-            background: #0054a8;
+            background: $color-brand-dark;
         }
         &.tf-btn-loading{
             padding-right: 40px;
@@ -182,16 +186,17 @@
         @include flexbox();
         @include justify-content(center);
         margin-top: 20px;
-        color: #828C99;
+        color: $color-text;
 
         a{
             font-weight: 600;
-            color: #002043;
+            color: $color-primary;
             text-decoration: none;
             margin-left: 5px;
             
             &:hover{
                 text-decoration: underline;
+                color: $color-brand-dark;
             }
         }
     }

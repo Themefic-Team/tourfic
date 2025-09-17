@@ -1,4 +1,7 @@
-<?php if ( $faqs ): ?>
+<?php
+// Don't load directly
+defined( 'ABSPATH' ) || exit;
+if ( $faqs ): ?>
 <!-- tourfic FAQ -->
 <div class="tf-faq-wrapper tf-mb-50 tf-template-section">
     <h2 class="tf-title tf-section-title" ><?php echo !empty($meta['faq-section-title']) ? esc_html($meta['faq-section-title']) : ''; ?></h2>

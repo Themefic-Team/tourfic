@@ -36,7 +36,7 @@ class Pricing {
                 $price = $entry['price'];
 
                 while ($startDate <= $endDate) {  // Adjusted to include the end date
-                    $dateKey = date("Y/m/d", $startDate);
+                    $dateKey = gmdate("Y/m/d", $startDate);
 
                     // Check if the date is already in the result array
                     if (isset($result[$dateKey])) {
@@ -57,7 +57,7 @@ class Pricing {
 
             // Loop through each day in the range
             while ($pickupDate <= $dropoffDate) {
-                $currentDate = date("Y/m/d", $pickupDate);
+                $currentDate = gmdate("Y/m/d", $pickupDate);
                 
                 // Check if the date exists in the $result array
                 if (isset($result[$currentDate])) {

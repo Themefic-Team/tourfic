@@ -3,6 +3,9 @@
  * Template: Single Car (Full Width)
  */
 
+ // Don't load directly
+defined( 'ABSPATH' ) || exit;
+
 use \Tourfic\Classes\Helper;
 use \Tourfic\App\Wishlist;
 

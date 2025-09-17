@@ -1,3 +1,7 @@
+<?php
+// Don't load directly
+defined( 'ABSPATH' ) || exit;
+?>
 <!--Overview Start -->
 <div class="tf-overview-wrapper">
     <div class="tf-overview-description">

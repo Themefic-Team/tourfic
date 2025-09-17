@@ -3,6 +3,10 @@
         &__legacy{
             .tf-room-section{
                 margin-top: -20px;
+                @media #{$max768}{
+                    margin-top: 0;
+                    padding-bottom: 0;
+                }
                 .tf-room-filter .tf-room-checkbox, .tf-room-filter h3 {
                     color: $color-heading;
                     list-style: none;
@@ -25,7 +29,7 @@
                         }
                     }
                     label{
-                        margin-left: 5px;
+                        margin-left: 0;
                         line-height: 1.2;
                     }
                 }
@@ -48,8 +52,8 @@
                     border: none;
                     margin-bottom: 0;
                     thead {
-                        background: $color-primary;
-                        color: $color-white;
+                        background: $color-filling-fg;
+                        color: $color-text;
                     }
                     td,
                     th {
@@ -284,11 +288,11 @@
                         width: 100%;
                         border-left: none;
                         &>thead{
-                            background-color: $color-primary;
+                            background-color: $color-filling-fg;
                             tr{
                                 th{
                                     text-align: left;
-                                    color: $color-white;
+                                    color: $color-text;
                                     border: 0px solid;
                                     border-radius: 5px 5px 0px 0px;
                                     padding: 13px 30px;

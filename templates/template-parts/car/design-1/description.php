@@ -1,3 +1,8 @@
+<?php
+// Don't load directly
+defined( 'ABSPATH' ) || exit;
+?>
+
 <div id="tf-description">
     <div class="tf-short-description">
         <?php

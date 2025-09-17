@@ -239,7 +239,7 @@ trait Action_Helper {
 		if ( ! current_user_can( 'edit_user', $user_id ) ) {
 			return false;
 		}
-		update_user_meta( $user_id, 'language', $_POST['language'] );
+		update_user_meta( $user_id, 'language', sanitize_text_field( wp_unslash($_POST['language']) ) );
 	}
 
 	/*
@@ -758,15 +758,15 @@ trait Action_Helper {
 		$tf_tour_types         = !empty( $_POST['tf_tour_types'] ) ? explode( ',', sanitize_text_field( $_POST['tf_tour_types'] ) ) : null;
 		$tf_apartment_features = !empty( $_POST['tf_apartment_features'] ) ? explode( ',', sanitize_text_field( $_POST['tf_apartment_features'] ) ) : null;
 		$tf_apartment_types    = !empty( $_POST['tf_apartment_types'] ) ? explode( ',', sanitize_text_field( $_POST['tf_apartment_types'] ) ) : null;
-		$posttype              = !empty( $_POST['type'] ) ? sanitize_text_field( $_POST['type'] ) : 'tf_hotel';
-		$ordering_type 		   = !empty( $_POST["tf_ordering"] ) ? $_POST["tf_ordering"] : 'default';
+		$posttype              = !empty( $_POST['type'] ) ? sanitize_text_field( wp_unslash($_POST['type']) ) : 'tf_hotel';
+		$ordering_type 		   = !empty( $_POST["tf_ordering"] ) ? sanitize_text_field(wp_unslash($_POST["tf_ordering"])) : 'default';
 		# Separate taxonomy input for filter query
 		$place_taxonomy  = $posttype == 'tf_tours' ? 'tour_destination' : ( $posttype == 'tf_apartment' ? 'apartment_location' : 'hotel_location' );
 		$filter_taxonomy = $posttype == 'tf_tours' ? 'null' : 'hotel_feature';
 		# Take dates for filter query
-		$checkin    = isset( $_POST['checkin'] ) ? trim( $_POST['checkin'] ) : array();
-		$startprice = ! empty( $_POST['startprice'] ) ? $_POST['startprice'] : '';
-		$endprice   = ! empty( $_POST['endprice'] ) ? $_POST['endprice'] : '';
+		$checkin    = isset( $_POST['checkin'] ) ? sanitize_text_field( wp_unslash( $_POST['checkin'] ) ) : array();
+		$startprice = ! empty( $_POST['startprice'] ) ? sanitize_text_field( wp_unslash( $_POST['startprice'] ) ) : '';
+		$endprice   = ! empty( $_POST['endprice'] ) ? sanitize_text_field( wp_unslash( $_POST['endprice'] ) ) : '';
 
         //Map Template only
         $mapFilter = !empty($_POST['mapFilter']) ? sanitize_text_field($_POST['mapFilter']) : false;
@@ -789,9 +789,12 @@ trait Action_Helper {
 		}
 		$tf_driver_age  = isset( $_POST['driver_age'] ) ? sanitize_text_field( $_POST['driver_age'] ) : '';
 
-		$category = ( $_POST['category'] ) ? explode( ',', sanitize_text_field( $_POST['category'] ) ) : null;
-		$fuel_type = ( $_POST['fuel_type'] ) ? explode( ',', sanitize_text_field( $_POST['fuel_type'] ) ) : null;
-		$engine_year = ( $_POST['engine_year'] ) ? explode( ',', sanitize_text_field( $_POST['engine_year'] ) ) : null;
+		$tf_category = !empty( $_POST['category'] ) ? sanitize_text_field( $_POST['category'] ) : null;
+		$category = !empty( $tf_category ) ? explode( ',', $tf_category ) : null;
+		$tf_fuel_type = !empty( $_POST['fuel_type'] ) ? sanitize_text_field( $_POST['fuel_type'] ) : null;
+		$fuel_type = !empty( $tf_fuel_type ) ? explode( ',', $tf_fuel_type ) : null;
+		$tf_engine_year = !empty( $_POST['engine_year'] ) ? sanitize_text_field( $_POST['engine_year'] ) : null;
+		$engine_year = !empty( $tf_engine_year ) ? explode( ',', $tf_engine_year ) : null;
 
 		$tf_startprice  = isset( $_POST['startprice'] ) ? sanitize_text_field( $_POST['startprice'] ) : '';
 		$tf_endprice  = isset( $_POST['endprice'] ) ? sanitize_text_field( $_POST['endprice'] ) : '';
@@ -804,8 +807,8 @@ trait Action_Helper {
 		
 		$elSettings = !empty($_POST['elSettings']) ? json_decode(stripslashes($_POST['elSettings']), true) : [];
 
-		// Author Id if any
-		$tf_author_ids = ! empty( $_POST['tf_author'] ) ? $_POST['tf_author'] : '';
+		// Author ID if any (single value)
+		$tf_author_ids = isset( $_POST['tf_author'] ) ? intval( $_POST['tf_author'] ) : 0;
 
 		if ( ! empty( $startprice ) && ! empty( $endprice ) ) {
 			if ( $posttype == "tf_tours" ) {
@@ -1263,10 +1266,10 @@ trait Action_Helper {
 				}
 				echo '<div class="tf-nothing-found" data-post-count="0">' . esc_html__( 'Nothing Found!', 'tourfic' ) . '</div>';
 			}
-			$post_per_page = self::tfopt( 'posts_per_page' ) ? self::tfopt( 'posts_per_page' ) : 10;
+			$post_per_page = self::tfopt( 'posts_per_page' ) ? absint( wp_unslash(self::tfopt( 'posts_per_page' ))) : 10;
 
 			//elementor settigns
-			$post_per_page = !empty($elSettings['posts_per_page']) ? $elSettings['posts_per_page'] : $post_per_page;
+			$post_per_page = !empty($elSettings['posts_per_page']) ? absint( wp_unslash($elSettings['posts_per_page'])) : $post_per_page;
 			$el_orderby = !empty($elSettings['orderby'] ) ? $elSettings['orderby'] : '';
 			$el_order = !empty($elSettings['order']) ? $elSettings['order'] : '';
 
@@ -2259,7 +2262,7 @@ trait Action_Helper {
 		//Nonce Verification
 		check_ajax_referer( 'updates', '_nonce' );
 
-		$term_name = $_POST['termName'] ? sanitize_text_field( $_POST['termName'] ) : 'tf_hotel';
+		$term_name = !empty($_POST['termName']) ? sanitize_text_field( $_POST['termName'] ) : 'tf_hotel';
 
 		$terms = get_terms( array(
 			'taxonomy'   => $term_name,
@@ -2349,7 +2352,7 @@ trait Action_Helper {
 				array(
 					'parent' => 'site-name',
 					'id'     => 'view-vendor-dashboard-link',
-					'title'  => __( 'Visit Vendor Dashboard', 'tourfic' ),
+					'title'  => esc_html__( 'Visit Vendor Dashboard', 'tourfic' ),
 					'href'   => $tf_dashboard_page_link,
 				)
 			);
@@ -2420,12 +2423,41 @@ trait Action_Helper {
 		if( !is_plugin_active( 'instantio/instantio.php' ) && ! file_exists( WP_PLUGIN_DIR . '/instantio/instantio.php' ) ) {
 			?>
 			<div id="message" class="notice notice-error">
-				<p><?php echo  wp_kses_post(sprintf(__( 'Instantio plugin is required for the %s"QUICK CHECKOUT"%s feature of Tourfic. Please install and activate Instantio to ensure this feature works seamlessly.', 'tourfic' ), '<strong>', '</strong>')); ?></p>
-				<p><a class="install-now button inc-install" href=<?php echo esc_url( admin_url( '/plugin-install.php?s=slug:instantio&tab=search&type=term' ) ); ?> data-plugin-slug="tourfic"><?php esc_attr_e( 'Install Now', 'tourfic' ); ?></a></p>
+			<p>
+			<?php
+			// translators: %1$s opening strong tag, %2$s closing strong tag, highlighting the "QUICK CHECKOUT" feature.
+			echo wp_kses_post( sprintf( esc_html__(
+						'Instantio plugin is required for the %1$s"QUICK CHECKOUT"%2$s feature of Tourfic. Please install and activate Instantio to ensure this feature works seamlessly.',
+						'tourfic'
+					),
+					'<strong>',
+					'</strong>'
+				)
+			);
+			?>
+
+			</p>
+			<p>
+				<a
+					class="install-now button inc-install"
+					href="<?php echo esc_url( admin_url( '/plugin-install.php?s=slug:instantio&tab=search&type=term' ) ); ?>"
+					data-plugin-slug="tourfic"
+				>
+					<?php esc_attr_e( 'Install Now', 'tourfic' ); ?>
+				</a>
+			</p>
+
 			</div>
 		<?php
 		} else {
-			$notice = sprintf( __( 'The %s Instantio%s plugin is inactive. Please activate it to enable the %s "QUICK CHECKOUT" %s for Tourfic.', 'tourfic' ), '<strong><a href="https://wordpress.org/plugins/instantio/" target="_blank">', '</a></strong>', '<b>', '</b>');
+			// translators: 1: opening <strong><a> tag, 2: closing </a></strong> tag, 3: opening <b> tag, 4: closing </b> tag.
+			$notice = sprintf( esc_html__( 'The %1$sInstantio%2$s plugin is inactive. Please activate it to enable the %3$s "QUICK CHECKOUT" %4$s for Tourfic.', 'tourfic' ),
+				'<strong><a href="https://wordpress.org/plugins/instantio/" target="_blank">',
+				'</a></strong>',
+				'<b>',
+				'</b>'
+			);
+
 			?>
 				<div id="message" class="notice notice-error">
 					<p><?php echo wp_kses_post( $notice ); ?></p>

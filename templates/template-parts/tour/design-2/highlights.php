@@ -1,3 +1,6 @@
+<?php // Don't load directly
+defined( 'ABSPATH' ) || exit;
+?>
 <!--Highlights Start -->
 <div class="tf-overview-wrapper">
     <div class="tf-highlights-wrapper">

@@ -1,3 +1,7 @@
+<?php
+// Don't load directly
+defined( 'ABSPATH' ) || exit;
+?>
 <div class="tf-archive-template__three">
     <?php
 

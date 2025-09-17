@@ -133,7 +133,7 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 
 		// Check if the current user has the required capability.
 		if (!current_user_can('manage_options')) {
-			wp_send_json_error(__('You do not have permission to access this resource.', 'tourfic'));
+			wp_send_json_error(esc_html__('You do not have permission to access this resource.', 'tourfic'));
 			return;
 		}
 

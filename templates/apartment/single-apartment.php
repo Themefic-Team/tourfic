@@ -2,6 +2,8 @@
 /**
  * Template: Single Apartment (Full Width)
  */
+// Don't load directly
+defined( 'ABSPATH' ) || exit;
 
  if(wp_is_block_theme()){
     wp_head();

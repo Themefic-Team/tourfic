@@ -10,6 +10,9 @@
             p{
                 margin-bottom: 0;
             }
+            table{
+                margin-top: 15px;
+            }
         }
         .tf-section-title{
             margin-bottom: 15px;
@@ -26,6 +29,9 @@
         .tf-single-head{
             .tf-head-info{
                 align-items: baseline;
+                @media #{$max768}{
+                    gap: 16px;
+                }
                 .tf-icon {
                     height: 50px;
                     width: 50px;
@@ -34,6 +40,17 @@
                     align-items: center;
                     justify-content: center;
                     border-radius: 50px;
+                    @media #{$max768}{
+                        width: 32px;
+                        height: 32px;
+                    }
+                    i{
+                        margin-right: 0;
+                        @media #{$max768}{
+                            font-size: 0.875rem;
+                        }
+                    }
+                    
                 }
                 .tf-icon:hover {
                     cursor: pointer;
@@ -51,6 +68,10 @@
                     align-items: center;
                     justify-content: center;
                     border-radius: 50px;
+                    @media #{$max768}{
+                        width: 32px;
+                        height: 32px;
+                    }
                 }
                 .tf-share{
                     a{
@@ -121,7 +142,11 @@
                     align-items: baseline;
                     @media #{$max575}{
                         font-size: 0.95rem;
-                  
+                    }
+                    .tf-address {
+                        i{
+                            margin-right: 5px;
+                        }
                     }
                 }
             }
@@ -290,6 +315,9 @@
                             text-align: center;
                             font-size: 0.75rem;
                         }
+                        @media #{$max575}{
+                            content: "→";
+                        }
                     }
                 }
             }
@@ -417,6 +445,16 @@
 
             //Tourfic review reply
             .tf-review-reply{
+                .tf-review-reply-data{
+                    border-bottom: 1px solid $color-border-lite;
+                    padding-bottom: 20px;
+                    margin-bottom: 20px;
+                    &:last-child{
+                        border-bottom: none;
+                        padding-bottom: 0px;
+                        margin-bottom: 0px;
+                    }
+                }
                 .tf-review-details{
                     .tf-review-ratings {
                         i {
@@ -428,9 +466,9 @@
                     }
                     .tf-review-date{
                         li{
-                            color: $color-heading;
+                            color: $color-text;
                             i{
-                                color: $color-heading;
+                                color: $color-text;
                             }
                         }
                     }
@@ -529,7 +567,7 @@
                             font-size: 0.875rem;
                             color: $color-text;
                             &::placeholder{
-                                color: $color-heading;
+                                color: $color-text;
                             }
                         }
                     }
@@ -582,37 +620,6 @@
                 }
             }
         }
-        // Enquiry Box
-        .tf-ask-enquiry{
-            text-align: center;
-            i{
-                text-align: center;
-                background-color: $color-brand-lite;
-                border-radius: 50%;
-                color: $color-primary;
-                margin: auto;
-                margin-bottom: 25px;
-                font-size: 1.875rem;
-                height: 80px;
-                width: 80px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-            h3{
-                font-size: 1.5rem;
-                color: $color-heading;
-            }
-            p{
-                margin-top: 5px;
-                margin-bottom: 25px;
-            }
-            .tf-btn{
-                a:hover{
-                    background-color: $color-brand-dark;
-                }
-            }
-        }
         // FAQ
         .tf-faq-wrapper {
             .tf-faq-inner{
@@ -652,9 +659,9 @@
                 }
                 .tf-faq-collaps{
                     padding: 24px;
+                    gap: 10px;
                     @media #{$max575}{
                         flex-wrap: nowrap;
-                        gap: 5px;
                     }
                     &:hover{
                         cursor: pointer;
@@ -674,6 +681,8 @@
                     margin-bottom: 0;
                     font-size: 1.25rem;
                     color: $color-heading;
+                    flex: 1;
+                    
                 }
             }
         }
@@ -743,6 +752,39 @@
                 margin-bottom: 0;
             }
         }
+
+     
+        // Inquery Box
+        .tf-ask-enquiry{
+            background: $color-filling-fg;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+            i{
+                font-size: 4rem;
+                line-height: 1;
+            }
+            h3{
+                color: $color-heading;
+                font-size: 2rem;
+                font-weight: 700;
+                line-height: 1.2;
+                margin: 0;
+                text-align: center;
+                @media #{$max1024}{
+                    font-size: 1.25rem;
+                }
+            }
+            p{
+                text-align: center;
+                font-size: 1rem;
+                margin: 0;
+                @media #{$max768}{
+                    font-size: 0.875rem;
+                }
+            }
+        }
     }
 }
 // Single Global End
@@ -768,28 +810,31 @@
                     }
                     form{
                         height: 100%;
+                        position: relative;
                         select {
                             border-radius: 5px;
                             -webkit-appearance: none;
                             appearance: none;
                             -moz-appearance: none;
-                            background-image: url('https://www.svgrepo.com/show/80156/down-arrow.svg');
-                            background-repeat: no-repeat;
-                            background-size: 12px 12px;
-                            background-position: calc(100% - 16px);
-                            padding: 14px;
-                            background-position: calc(100% - 12px) 50%;
-                            font-size: inherit;
-                            font-weight: inherit;
-                            color: inherit;
+                            padding: 6px 14px;
+                            font-size: 1rem;
+                            color: $color-text;
                             box-sizing: border-box;
                             border: 1px solid $color-border-lite;
                             background-color: $color-filling-bg;
                             cursor: pointer;
+                            height: 100%;
                             @media #{$max575}{
                                 height: auto;
                                 padding: 8px;
                             }
+                        }
+                        i{
+                            position: absolute;
+                            top: 50%;
+                            right: 12px;
+                            transform: translateY(-50%);
+                            color: $color-text;
                         }
                     }
                 }
@@ -1195,7 +1240,7 @@
                     padding: 20px $tf-space-30;
                    
                     @media #{$max768} {
-                        padding: $tf-space-24 $tf-space-24;
+                        padding: 20px;
                     }
                     @media #{$max575} {
                         flex-basis: 100%;
@@ -1232,6 +1277,9 @@
                         }
                     }
                     .tf-title {
+                        @media #{$max575}{
+                            margin-top: 10px;
+                        }
                         h2 {
                             font-size: 1.375rem;
                             line-height: 1.5;
@@ -1302,6 +1350,9 @@
                     .tf-reviews{
                         gap: 8px;
                         align-items: center;
+                        @media #{$max575}{
+                            margin-top: 5px;
+                        }
                         .tf-avarage-review{
                             font-size: 0.75rem;
                         }
@@ -1311,7 +1362,10 @@
                 .tf-post-footer {
                     border-top: 1px solid $color-border-lite;
                     padding-top: 16px;
-
+                    gap: 10px;
+                    .tf-pricing{
+                        flex: 1;
+                    }
                     ins{
                         background-color: transparent;
                     }
@@ -1376,10 +1430,8 @@
         /* Carrental archive listing */
         .tf-car-archive-result{
             width: calc(100% - 390px);
+            
             @media #{$max1024}{
-                width: calc(100% - 322px);
-            }
-            @media #{$max768}{
                 width: 100%;
             }
             &.tf-car-lists-widgets{
@@ -1415,7 +1467,7 @@
                     border-radius: 16px;
                     background: $color-filling-fg;
                     width: calc(50% - 16px);
-                    @media #{$max1024}{
+                    @media #{$max768}{
                         width: 100%;
                     }
                     .tf-car-image{
@@ -1446,7 +1498,7 @@
                                     font-size: 1rem;
                                     font-weight: 400;
                                     i{
-                                        color: $color-primary;
+                                        color: $color-mikado-yellow;
                                     }
                                 }
                             }
@@ -1766,6 +1818,14 @@
                 font-size: 1rem;
                 font-weight: 400;
             }
+            .tf-archive-filter-showing{
+                display: none;
+                cursor: pointer;
+                @media #{$max1024}{
+                    display: block;
+                    margin-left: 10px;
+                }
+            }
         }
     }
 }
@@ -1779,10 +1839,14 @@
             background: $color-filling-fg;
             padding: 32px;
             @media #{$max1024}{
-                width: 280px;
+                width: 100%;
+                display: none;
             }
             @media #{$max768}{
                 width: 100%;
+            }
+            &.tf-filter-show{
+                display: block;
             }
             
             .tf-sidebar-header{

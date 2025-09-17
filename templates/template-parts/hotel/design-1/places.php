@@ -1,4 +1,6 @@
 <?php 
+// Don't load directly
+defined( 'ABSPATH' ) || exit;
 
 use Tourfic\Classes\Helper;
 $places_section_title = !empty($meta["section-title"]) ? $meta["section-title"] : "";

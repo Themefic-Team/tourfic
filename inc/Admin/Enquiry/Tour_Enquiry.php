@@ -48,7 +48,7 @@ class Tour_Enquiry extends \Tourfic\Core\Enquiry {
                     </div>
                     <hr class="wp-header-end">
                     <div class="tf_enquiry_details_wrap_header">
-						<h1 class="wp-heading-inline"><?php echo  esc_html( apply_filters( 'tf_tour_enquiry_page_heading', __( 'Tour Enquiry Details', 'tourfic' ) ) ); ?></h1>
+						<h1 class="wp-heading-inline"><?php echo  esc_html( apply_filters( 'tf_tour_enquiry_page_heading', esc_html__( 'Tour Enquiry Details', 'tourfic' ) ) ); ?></h1>
                         <div class="tf_header_wrap_button">
                             <?php
                                 do_action( 'tf_before_enquiry_details' ); //old hook

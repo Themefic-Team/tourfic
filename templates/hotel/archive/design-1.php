@@ -1,4 +1,7 @@
 <?php
+// Don't load directly
+defined( 'ABSPATH' ) || exit;
+
 use \Tourfic\Classes\Helper;
 use \Tourfic\Classes\Hotel\Hotel;
 ?>
@@ -86,6 +89,7 @@ use \Tourfic\Classes\Hotel\Hotel;
                                     <option value="price-high"><?php echo esc_html__( 'Sort By Price: High to Low', 'tourfic' ); ?></option>
                                     <option value="price-low"><?php echo esc_html__( 'Sort By Price: Low to High', 'tourfic' ); ?></option>
                                 </select>
+                                <i class="fas fa-chevron-down"></i>
                             </form>
                         </div>
                     </div>

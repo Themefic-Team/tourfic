@@ -1,4 +1,7 @@
 <?php 
+// Don't load directly
+defined( 'ABSPATH' ) || exit;
+
 use \Tourfic\Classes\Helper;
 
 if(wp_is_block_theme()){

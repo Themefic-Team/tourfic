@@ -1,4 +1,7 @@
 <?php
+// Don't load directly
+defined( 'ABSPATH' ) || exit;
+
 use \Tourfic\App\TF_Review;
 if ( $comments && $disable_review_sec != 1 ) { ?>
 <!-- Hotel reviews Srart -->

@@ -1,3 +1,6 @@
+<?php // Don't load directly
+defined( 'ABSPATH' ) || exit;
+?>
 <!-- menu section Start -->
 
 <div class="tf-details-menu">

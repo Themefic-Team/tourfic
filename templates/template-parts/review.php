@@ -136,7 +136,7 @@ if ( ( get_post_type( $post_id ) == 'tf_tours' && $tf_tour_selected_template == 
             </div>
         </div>
         <!-- Tourfic review reply -->
-        <div class="tf-review-reply tf-mt-50 tf-mb-50">
+        <div class="tf-review-reply tf-mt-50 tf-mb-56">
             <div class="tf-section-head">
                 <?php if(get_post_type( $post_id ) == "tf_hotel" && $tf_hotel_selected_template == "design-3"): ?>
                     <h5 class="tf-section-title"><?php esc_html_e( "Guest’s reviews", "tourfic" ); ?></h5>
