@@ -3,7 +3,7 @@ Contributors: themefic, kamrul0424, jahidcse, mehedi890, mdashikul, mainulsunvi,
 Tags: travel-booking, hotel-booking, tour-booking, car-rental, multivendor-marketplace
 Requires at least: 5.4
 Tested up to: 6.8
-Stable tag: 2.17.4
+Stable tag: 2.18.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -404,6 +404,18 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 
 == Changelog ==
 
+= 2.18.0 – September 17, 2025 =
+
+- Improved: Removed unnecessary files.
+- Improved: Overall frontend design.
+- Improved: Demo import and demo layouts.
+- Fixed: Archive banner dynamic image issue.
+- Fixed: Mobile booking button issue.
+- Fixed: Responsive design issues.
+- Fixed: Search and filter issue.
+- Fixed: Hotel, tour, and apartment search price range issue.
+- Improved: System stability and performance.
+
 = 2.17.4 – September 15, 2025 =
 
 - Fixed: Archive Elementor widgets error.
@@ -411,11 +423,6 @@ We provide full support on the WordPress.org forums. In addition, please feel fr
 = 2.17.3 – September 14, 2025 =
 
 - Fixed: Quick setup button issue.
-- Improved: Plugin system stability.
-
-= 2.17.2 – September 12, 2025 =
-
-- Updated: readme.txt file information.
 - Improved: Plugin system stability.
 
 **Old Changelog can be found [here](https://themefic.com/tourfic/changelog/)**.
