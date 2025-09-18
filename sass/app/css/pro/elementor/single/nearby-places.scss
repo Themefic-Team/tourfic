@@ -54,6 +54,13 @@
 
 .tf-whats-around.tf-apartment-single-places-style1,
 .tf-whats-around.tf-hotel-single-places-style2 {
+    .tf-section-title {
+        margin-bottom: 15px;
+        font-size: 1.875rem;
+        line-height: 1.5;
+        color: var(--tf-text-heading);
+    }
+    
     ul {
         margin: 0;
         padding: 0;

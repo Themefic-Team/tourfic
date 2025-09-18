@@ -160,7 +160,7 @@ class Thumbnail extends Widget_Base {
 			$thumbnail_url = esc_url(TF_ASSETS_APP_URL.'images/feature-default.jpg');
 		}
 		?>
-		<div class="tf-single-thumbnail">
+		<div class="tf-single-thumbnail tf-flex">
 			<img src="<?php echo esc_url($thumbnail_url); ?>" alt="<?php the_title_attribute(); ?>" style="object-fit: <?php echo esc_attr($settings['object_fit']); ?>;" />
 		</div>
 		<?php

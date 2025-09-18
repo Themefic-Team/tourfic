@@ -1,0 +1,112 @@
+@import '../../../../../common/variable';
+@import '../../../../../common/mixin';
+
+.tf-single-template__two{
+    padding: 0;
+}
+
+.tf-details-menu.tf-hotel-details-menu,
+.tf-details-menu.tf-tour-details-menu,
+.tf-details-menu.tf-apartment-details-menu{
+    background: $color-filling-fg;
+    padding: 16px 30px;
+    position: sticky;
+    left: 0;
+    top: 0;
+    z-index: 99;
+    @media #{$max768}{
+        padding: 12px 16px;
+    }
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        gap: 32px;
+        flex-wrap: wrap;
+        @media #{$max768}{
+            gap: 16px;
+        }
+        li {
+            a {
+                text-decoration: none;
+                font-size: 1rem;
+                font-weight: 600;
+                color: $color-text;
+                border-bottom: 2px solid;
+                padding-bottom: 5px;
+                display: inline-block;
+                border-color: transparent;
+                @media #{$max1024}{
+                    font-size: 0.75rem;
+                }
+                &.tf-hashlink {
+                    border-color: $color-primary;
+                    color: $color-primary;
+                }
+            }
+        }
+    }
+
+    &.tf-sticky-menu {
+        position: fixed;
+        top: 175px;
+        box-shadow: 0 0 20px $color-border;
+        z-index: 9;
+        @media #{$max1024}{
+            top: 90px;
+        }
+    }
+}
+
+.tf-details-menu.tf-car-details-menu{
+    position: relative;
+    overflow: hidden;
+    &::before{
+        background: linear-gradient(90deg, rgba(255, 255, 255, 0.00) 0%, #FFF 100%);
+        position: absolute;
+        content: "";
+        right: 0;
+        top: 0;
+        height: 100%;
+        width: 92px;
+    }
+    ul{
+        margin: 0;
+        padding: 0;
+        overflow-x: auto;
+        overflow-y: hidden;
+        width: 100%;
+        display: block ruby;
+        scrollbar-width: thin;
+        scrollbar-color: $scrollbar-color;
+        display: flex;
+        flex-wrap: nowrap;
+        white-space: nowrap;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        user-select: none;
+        &::-webkit-scrollbar {
+            display: none;
+        }
+        
+        li{
+            display: inline-block;
+            margin-right: 8px;
+            a{
+                text-decoration: none;
+                color: $color-text;
+                font-size: 1rem;
+                font-weight: 400;
+                padding: 8px;
+                display: inline-block;
+            }
+            &.active{
+                a{
+                    color: $color-primary;
+                    border-bottom: 2px solid $color-primary;
+                }
+            }
+        }
+    }
+}
