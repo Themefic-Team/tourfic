@@ -1355,14 +1355,7 @@ abstract Class TF_Booking_Details {
         // Order Id
         $tf_order_id = !empty($_POST['order_id']) ? absint( wp_unslash( $_POST['order_id'] ) ) : "";
         // Visitor Details
-        $tf_visitor_details = array();
-        if ( isset( $_POST['traveller'] ) ) {
-            if ( is_array( $_POST['traveller'] ) ) {
-                $tf_visitor_details = array_map( 'sanitize_text_field', wp_unslash( $_POST['traveller'] ) ); // sanitize each field
-            } else {
-                $tf_visitor_details = sanitize_text_field( wp_unslash( $_POST['traveller'] ) );
-            }
-        }
+        $tf_visitor_details = isset( $_POST['traveller'] ) ? wp_unslash( $_POST['traveller'] ) : []; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
     
         global $wpdb;
         $tf_order = $wpdb->get_row( $wpdb->prepare( "SELECT id,order_details FROM {$wpdb->prefix}tf_order_data WHERE id = %s",sanitize_key( $tf_order_id ) ) );

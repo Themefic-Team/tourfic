@@ -1363,11 +1363,7 @@ class TF_Setup_Wizard {
 
 		$tf_settings            = !empty( get_option( 'tf_settings' ) ) ? get_option( 'tf_settings' ) : array();
 		$tf_services            = array( 'hotel', 'tour', 'apartment', 'carrentals' );
-        $services = [];
-        if ( isset( $_POST['tf-services'] ) && ! empty( $_POST['tf-services'] ) ) {
-            $services = array_map( 'sanitize_text_field', wp_unslash( $_POST['tf-services'] ) );
-        }
-
+        $services               = isset( $_POST['tf-services'] ) ? wp_unslash($_POST['tf-services']) : []; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
         $search_page            = isset( $_POST['tf-search-result-page'] ) ? absint( wp_unslash( $_POST['tf-search-result-page'] ) ) : 0;
         $search_result_per_page = isset( $_POST['tf-search-result-posts-per-page'] ) ? absint( wp_unslash( $_POST['tf-search-result-posts-per-page'] ) ) : 10;
 

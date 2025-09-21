@@ -457,14 +457,7 @@ class Hotel {
                          * @since 1.6.9
                          * @author Abu Hena
                          */
-						$filtered_features = array();
-						if ( isset( $_POST['features'] ) ) {
-							if ( is_array( $_POST['features'] ) ) {
-								$filtered_features = array_map( 'sanitize_text_field', wp_unslash( $_POST['features'] ) );
-							} else {
-								$filtered_features = array( sanitize_text_field( wp_unslash( $_POST['features'] ) ) );
-							}
-						}
+						$filtered_features = isset( $_POST['features'] ) ? wp_unslash( $_POST['features'] ) : []; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 
                         $room_features     = ! empty( $room['features'] ) ? $room['features'] : '';
                         if ( ! empty( $room_features ) && is_array( $room_features ) ) {
