@@ -114,6 +114,7 @@ abstract Class TF_Booking_Details {
 						'query'     => " $tf_filter_query ORDER BY id DESC LIMIT 15"
 					);
 					$tf_order_details_result = Helper::tourfic_order_table_data( $tf_orders_select );
+                    $total_pages = 1;
 				}
 			?>
             <div class="wrap tf_booking_details_wrap" style="margin-right: 20px;">
