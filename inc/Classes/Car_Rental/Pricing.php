@@ -206,9 +206,9 @@ class Pricing {
         $is_taxable = !empty($meta["is_taxable"]) ? $meta["is_taxable"] : '';
         $taxable_class = !empty($meta["taxable_class"]) ? $meta["taxable_class"] : '';
         if($is_taxable && !empty($taxable_class)){
-            return  esc_html_e("With Taxes", "tourfic");
+            return  esc_html__("With Taxes", "tourfic");
         }else{
-            return  esc_html_e("Without Taxes", "tourfic");
+            return  esc_html__("Without Taxes", "tourfic");
         }
     }
 
