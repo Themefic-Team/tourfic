@@ -1667,6 +1667,10 @@
   gap: 15px;
 }
 
+.single-tf_tours .tf-single-template__two .tf-itinerary-wrapper .tf-itinerary-wrapper .tf-itinerary-content-details .tf-itinerary-more-offer .tf-itinerary-single-meta {
+  position: relative;
+}
+
 .single-tf_tours .tf-single-template__two .tf-itinerary-wrapper .tf-itinerary-wrapper .tf-itinerary-content-details .tf-itinerary-more-offer .tf-itinerary-single-meta li {
   color: var(--tf-text-paragraph);
   font-size: 1rem;
