@@ -475,13 +475,14 @@ class Rooms extends Widget_Base {
                             </tbody>
                         </table>
                     </div>
+                    <input type="hidden" name="design" value="design-1"/>
                 </div>
             </div>
             <?php
         } elseif ($style == 'style2' && $rooms) {
             $feature_filter = ! empty( Helper::tfopt( 'feature-filter' ) ) ? Helper::tfopt( 'feature-filter' ) : false;
             ?>
-			<div class="tf-single-template__two">
+			<div class="tf-single-template__two tf-single-hotel-room__style-2">
                 <div class="tf-available-rooms-wrapper" id="tf-hotel-rooms">
                     <div class="tf-available-rooms-head">
                         <h3 class=""><?php echo ! empty( $meta["room-section-title"] ) ? esc_html( $meta["room-section-title"] ) : ''; ?></h3>
@@ -1011,6 +1012,7 @@ class Rooms extends Widget_Base {
                     </div>
                 </div>
 
+                <input type="hidden" name="design" value="design-2"/>
                 <div class="tf-popup-wrapper tf-room-popup"></div>
             </div>
 			<?php
@@ -1302,6 +1304,7 @@ class Rooms extends Widget_Base {
                             </table>
                         </div>
                     </div>
+                    <input type="hidden" name="design" value="default"/>
                 </div>
             </div>
 			<?php

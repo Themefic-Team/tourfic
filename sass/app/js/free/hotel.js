@@ -75,6 +75,7 @@
                 features: features,
                 children_ages: children_ages,
                 check_in_out: check_in_out,
+                design: $('input[name=design]').val(),
             };
 
             jQuery.ajax({

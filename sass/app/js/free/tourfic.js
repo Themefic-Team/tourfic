@@ -2299,7 +2299,7 @@
             e.preventDefault();
             $("#tour_room_details_loader").show();
             var post_id = $(this).attr("data-hotel");
-            var design = $(this).attr("data-design");
+            var design = $('input[name=design]').val();
             var uniqid_id = $(this).attr("data-uniqid");
             var data = {
                 action: 'tf_tour_details_qv',

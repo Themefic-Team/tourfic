@@ -239,7 +239,259 @@
         }
     }
 }
+.tf-single-hotel-room__style-2{
+    padding: 0;
 
+    .tf-available-rooms-wrapper{
+        @media only screen and (max-width: 1280px) {
+            padding: 16px;
+        }
+        .tf-available-room{
+            .tf-available-room-gallery{
+                @media only screen and (max-width: 1280px) {
+                    min-width: 222px;
+                    max-width: 222px;
+                }
+                @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                    min-height: auto;
+                    max-height: none;
+                    height: auto;
+                }
+                .tf-room-gallery{
+                    &:nth-child(n+2){
+                        @media only screen and (max-width: 1280px) {
+                            width: 105px;
+                        }
+                    }
+                }
+            }
+            .tf-available-room-content{
+                @media only screen and (max-width: 1600px) {
+                    width: calc(100% - 230px);
+                }
+                @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                    padding: 14px;
+                }
+                .tf-available-room-content-left{
+                    @media only screen and (max-width: 1280px) {
+                        width: calc(100% - 155px);
+                    }
+                    @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                        width: calc(100% - 154px);
+                    }
+                    h2{
+                        @media only screen and (max-width: 1280px) {
+                            font-size: 1.5rem;
+                        }
+                    }
+                    ul{
+                        li{
+                            @media only screen and (max-width: 1280px) {
+                                font-size: 0.875rem;
+                            }
+                            @media #{$max1024}{
+                                font-size: 1rem;
+                            }
+                            @media #{$max768}{
+                                font-size: 0.875rem;
+                            }
+                        }
+                    }
+                    .tf-card-heading-info{
+                        @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                            margin-bottom: 32px;
+                        }
+                    }
+                }
+                .tf-available-room-content-right{
+                    @media only screen and (max-width: 1280px) {
+                        width: 133px;
+                    }
+                    @media only screen and (min-width: 1025px) and (max-width: 1165px) {
+                        width: 130px;
+                    }
+                    .tf-available-room-price{
+                        .tf-price{
+                            @media only screen and (max-width: 1280px) {
+                                text-align: right;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .tf-available-room.tf-desktop-room{
+            @media #{$max1024}{
+                display: none;
+            }
+        }
+        .tf-available-room.tf-tabs-room{
+            display: none;
+            @media #{$max1024}{
+                display: flow-root;
+            }
+            .tf-available-room-gallery{
+                min-width: auto;
+                max-width: none;
+                display: grid;
+                grid-template-columns: 2fr 1fr;
+                @media #{$max1024}{
+                    grid-template-columns: 1fr;
+                }
+                .tf-room-image{
+                    height: 140px;
+                    position: relative;
+                    img{
+                        height: 140px;
+                        width: 100%;
+                        object-fit: cover;
+                    }
+                    .tf-available-room-off{
+                        position: absolute;
+                        top: 12px;
+                        left: 12px;
+                    }
+                }
+                .tf-room-gallerys{
+                    display: grid;
+                    gap: 10px;
+                    @media #{$max575}{
+                        display: flex;
+                    }
+                    .tf-room-gallery{
+                        height: 66px;
+                        width: 100%;
+                        @media #{$max1024}{
+                            height: auto;
+                            width: auto;
+                            flex: 1;
+                        }
+                        img{
+                            height: 66px;
+                            width: 100%;
+                            object-fit: cover;
+                            @media #{$max1024}{
+                                height: auto;
+                            }
+                        }
+                        &:last-child{
+                            @media #{$max1024}{
+                                height: 66px;
+                                width: 105px;
+                                flex: inherit;
+                            }
+                        }
+                    }
+                }
+            }
+            .tf-available-room-gallery.tf-no-room-gallery{
+                grid-template-columns: 1fr;
+            }
+            .tf-available-room-content{
+                width: auto;
+                display: flow-root;
+                padding: 16px;
+                @media #{$max768} {
+                    padding: 16px;
+                }
+                @media #{$max575} {
+                    padding-top: 5px;
+                }
+
+                .tf-available-room-content-left{
+                    width: 100%;
+                    .room-heading-price{
+                        display: flex;
+                        justify-content: space-between;
+                        gap: 30px;
+                        margin-bottom: 16px;
+                        @media #{$max575}{
+                            flex-direction: column;
+                            gap: 10px;
+                        }
+                        h2{
+                            margin: 0;
+                            font-size: 1.25rem;
+                        }
+                        .tf-available-room-price{
+                            display: flex;
+                            flex-direction: column;
+                            align-items: end;
+                            .tf-price{
+                                color: $color-text;
+                                font-weight: 400;
+                                .discount-price {
+                                    color: $color-text;
+                                    font-size: 1rem;
+                                    font-weight: 400;
+                                    line-height: 1.3;
+                                    display: flex;
+                                    gap: 2px;
+                                    justify-content: end;
+                                    .amount{
+                                    font-weight: 400;
+                                    }
+                                }
+                                .sale-price {
+                                    font-size: 1.5rem;
+                                    display: flex;
+                                    align-items: center;
+                                    gap: 2px;
+                                    justify-content: end;
+                                    .booking-type {
+                                        font-size: 1rem;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                .tf-available-room-content-right{
+                    width: 100%;
+                    align-items: start;
+                    a.availability{
+                        width: 100%;
+                        margin-top: 32px;
+                        font-size: 0.75rem;
+                        @media only screen and (max-width: 1280px) {
+                            min-width: 128px;
+                        }
+                    }
+                    a.tf_air_service,
+                    button{
+                        width: 100%;
+                        font-size: 0.75rem;
+                    }
+                    a.tf_air_service{
+                        @media only screen and (max-width: 1280px) {
+                            min-width: 128px;
+                        }
+                    }
+                    a{
+                        width: 100%;
+                        margin-top: 32px;
+                        @media #{$max768}{
+                            font-size: 0.75rem;
+                            margin-top: 16px;
+                            padding: 10px 16px;
+                            line-height: 1;
+                        }
+                    }
+                    .tf-available-room-select{
+                        margin-top: 32px;
+                        margin-bottom: 16px;
+                    }
+                    .room-submit-wrap{
+                        width: 100%;
+                        .tf-deposit-content{
+                            text-align: left;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 .tf-single-hotel-room__style-legacy{
     padding: 0;
 

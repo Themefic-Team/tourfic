@@ -61,6 +61,7 @@ class Hotel {
         $form_child        = ! empty( $_POST['child'] ) ? sanitize_text_field( $_POST['child'] ) : 0;
         $children_ages     = ! empty( $_POST['children_ages'] ) ? sanitize_text_field( $_POST['children_ages'] ) : '';
         $form_check_in_out = ! empty( $_POST['check_in_out'] ) ? sanitize_text_field( $_POST['check_in_out'] ) : '';
+        $design = ! empty( $_POST['design'] ) ? sanitize_text_field( $_POST['design'] ) : '';
 
 
         $form_total_person = $form_adult + $form_child;
@@ -114,7 +115,7 @@ class Hotel {
 
         $tf_hotel_selected_check = !empty($tf_hotel_single_template_check) ? $tf_hotel_single_template_check : $tf_hotel_global_template_check;
 
-        $tf_hotel_selected_template_check = $tf_hotel_selected_check;
+        $tf_hotel_selected_template_check = !empty($design) ? $design : $tf_hotel_selected_check;
 
         if( $tf_hotel_selected_template_check == "design-1" ){
         ?>
