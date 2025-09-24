@@ -2324,7 +2324,7 @@ class Helper {
 								</div>
 								<div class="info-select">
 									<h5><?php esc_html_e("Pick-up date", "tourfic"); ?></h5>
-									<input type="text" placeholder="Pick Up Date" id="tf_pickup_date" class="tf_pickup_date" value="<?php echo !empty($_GET['pickup-date']) ? esc_html(sanitize_text_field( wp_unslash($_GET['pickup-date']) )) : esc_attr(gmdate('Y/m/d', strtotime('+1 day'))); ?>" />
+									<input type="text" placeholder="Pick Up Date" id="tf_pickup_date" class="tf_pickup_date" value="<?php echo !empty($_GET['pickup-date']) ? esc_html(sanitize_text_field( wp_unslash($_GET['pickup-date']) )) : esc_attr(gmdate($date_format_for_users, strtotime('+1 day'))); ?>" />
 								</div>
 							</div>
 						</div>
@@ -2382,7 +2382,7 @@ class Helper {
 								</div>
 								<div class="info-select">
 									<h5><?php esc_html_e("Drop-off date", "tourfic"); ?></h5>
-									<input type="text" placeholder="Drop Off Date" id="tf_dropoff_date" class="tf_dropoff_date" value="<?php echo !empty($_GET['dropoff-date']) ? esc_html(sanitize_text_field( wp_unslash($_GET['dropoff-date']) )) : esc_attr(gmdate('Y-m-d', strtotime('+2 day'))); ?>" readonly='' />
+									<input type="text" placeholder="Drop Off Date" id="tf_dropoff_date" class="tf_dropoff_date" value="<?php echo !empty($_GET['dropoff-date']) ? esc_html(sanitize_text_field( wp_unslash($_GET['dropoff-date']) )) : esc_attr(gmdate($date_format_for_users, strtotime('+2 day'))); ?>" readonly='' />
 								</div>
 							</div>
 						</div>
@@ -2465,17 +2465,25 @@ class Helper {
 					<script>
 						(function ($) {
 							$(document).ready(function () {
+                                let today = new Date();
+                                let tomorrow = new Date();
+                                tomorrow.setDate(today.getDate() + 1);
+                                let dayAfter = new Date();
+                                dayAfter.setDate(today.getDate() + 2);
+
 								 // flatpickr locale first day of Week
                                 <?php self::tf_flatpickr_locale( "root" ); ?>
 
                                 $(".tf-archive-template__one .tf_dropoff_date").on("click", function () {
-                                    $("#tf_pickup_date").trigger("click");
+                                    $(".tf_pickup_date").trigger("click");
                                 });
                                 $(".tf-archive-template__one #tf_pickup_date").flatpickr({
                                     enableTime: false,
                                     mode: "range",
                                     dateFormat: "Y/m/d",
-                                    minDate: "today",
+                                    minDate: "today", 
+                                    altInput: true,
+                                    altFormat: '<?php echo esc_html( $date_format_for_users ); ?>',
                                     showMonths: $(window).width() >= 1240 ? 2 : 1,
                                     // flatpickr locale
                                     <?php self::tf_flatpickr_locale(); ?>
@@ -2485,21 +2493,26 @@ class Helper {
                                     },
 
                                     onChange: function (selectedDates, dateStr, instance) {
+                                        instance.element.value = dateStr.replace(/[a-z]+/g, '-');
+                                        instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
                                         dateSetToFields(selectedDates, instance);
                                     },
                                     <?php if(! empty( $check_in_out )){ ?>
                                         defaultDate: <?php echo wp_json_encode( explode( '-', $check_in_out ) ) ?>,
+                                    <?php } else { ?>
+                                        defaultDate: [tomorrow, dayAfter],
                                     <?php } ?>
                                 });
 
                                 function dateSetToFields(selectedDates, instance) {
+                                    const format = '<?php echo esc_html( $date_format_for_users ); ?>';
                                     if (selectedDates.length === 2) {
                                         if (selectedDates[0]) {
-                                            const startDate = flatpickr.formatDate(selectedDates[0], "Y/m/d");
-                                            $(".tf-archive-template__one #tf_pickup_date").val(startDate);
+                                            const startDate = flatpickr.formatDate(selectedDates[0], format);
+                                            $(".tf-archive-template__one .tf_pickup_date").val(startDate);
                                         }
                                         if (selectedDates[1]) {
-                                            const endDate = flatpickr.formatDate(selectedDates[1], "Y/m/d");
+                                            const endDate = flatpickr.formatDate(selectedDates[1], format);
                                             $(".tf-archive-template__one .tf-select-date #tf_dropoff_date").val(endDate);
                                         }
                                     }

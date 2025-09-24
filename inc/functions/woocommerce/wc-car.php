@@ -34,8 +34,8 @@ function tf_car_booking_callback() {
 	$post_id   = isset( $_POST['post_id'] ) ? intval( sanitize_text_field( $_POST['post_id'] ) ) : null;
 	$pickup   = isset( $_POST['pickup'] ) ? sanitize_text_field( $_POST['pickup'] ) : '';
 	$dropoff = isset( $_POST['dropoff'] ) ? sanitize_text_field( $_POST['dropoff'] ) : '';
-	$tf_pickup_date  = isset( $_POST['pickup_date'] ) ? sanitize_text_field( $_POST['pickup_date'] ) : '';
-	$tf_dropoff_date  = isset( $_POST['dropoff_date'] ) ? sanitize_text_field( $_POST['dropoff_date'] ) : '';
+	$tf_pickup_date  = isset( $_POST['pickup_date'] ) ? tf_normalize_date(sanitize_text_field( $_POST['pickup_date'] )) : '';
+	$tf_dropoff_date  = isset( $_POST['dropoff_date'] ) ? tf_normalize_date(sanitize_text_field( $_POST['dropoff_date'] )) : '';
 	$tf_pickup_time  = isset( $_POST['pickup_time'] ) ? sanitize_text_field( $_POST['pickup_time'] ) : '';
 	$tf_dropoff_time  = isset( $_POST['dropoff_time'] ) ? sanitize_text_field( $_POST['dropoff_time'] ) : '';
 	$tf_protection = isset( $_POST['protection'] ) && is_array( $_POST['protection'] ) ? wp_unslash( $_POST['protection'] ) : []; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized

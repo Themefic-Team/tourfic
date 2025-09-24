@@ -778,8 +778,8 @@ trait Action_Helper {
 		// Cars Data Start
 		$pickup   = isset( $_POST['pickup'] ) ? sanitize_text_field( $_POST['pickup'] ) : '';
 		$dropoff = isset( $_POST['dropoff'] ) ? sanitize_text_field( $_POST['dropoff'] ) : '';
-		$tf_pickup_date  = isset( $_POST['pickup_date'] ) ? sanitize_text_field( $_POST['pickup_date'] ) : '';
-		$tf_dropoff_date  = isset( $_POST['dropoff_date'] ) ? sanitize_text_field( $_POST['dropoff_date'] ) : '';
+		$tf_pickup_date  = ! empty( $_POST['pickup_date'] ) ? tf_normalize_date( sanitize_text_field( $_POST['pickup_date'] ) ) : '';
+		$tf_dropoff_date = ! empty( $_POST['dropoff_date'] ) ? tf_normalize_date( sanitize_text_field( $_POST['dropoff_date'] ) ) : '';
 		$tf_pickup_time  = isset( $_POST['pickup_time'] ) ? sanitize_text_field( $_POST['pickup_time'] ) : '';
 		$tf_dropoff_time  = isset( $_POST['dropoff_time'] ) ? sanitize_text_field( $_POST['dropoff_time'] ) : '';
 
