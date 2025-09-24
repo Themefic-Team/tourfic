@@ -3250,7 +3250,7 @@ class Hotel {
 														}
 														?>
                                                     </h5>
-													<p><?php echo esc_html($airport_service['title']); ?> = <?php echo wp_kses_post(wc_price( $airport_service['price'] )); ?></p>
+													<p><?php echo wp_kses_post($airport_service['title']); ?> = <?php echo wp_kses_post(wc_price( $airport_service['price'] )); ?></p>
                                                 </div>
                                             </label>
                                         </div>
