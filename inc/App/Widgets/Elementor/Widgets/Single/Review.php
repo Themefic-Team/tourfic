@@ -88,6 +88,42 @@ class Review extends Widget_Base {
 			'options' => $options,
 		]);
 
+        $this->add_control('show_review_states',[
+			'label' => esc_html__('Show Review States?', 'tourfic'),
+			'type' => Controls_Manager::SWITCHER,
+			'label_on' => esc_html__('Show', 'tourfic'),
+			'label_off' => esc_html__('Hide', 'tourfic'),
+			'return_value' => 'yes',
+			'default' => 'yes',
+            'condition' => [
+				'review_style' => ['design-2'],
+			],
+		]);
+
+        $this->add_control('show_reviews',[
+			'label' => esc_html__('Show Reviews?', 'tourfic'),
+			'type' => Controls_Manager::SWITCHER,
+			'label_on' => esc_html__('Show', 'tourfic'),
+			'label_off' => esc_html__('Hide', 'tourfic'),
+			'return_value' => 'yes',
+			'default' => 'yes',
+            'condition' => [
+				'review_style' => ['design-2'],
+			],
+		]);
+
+        $this->add_control('show_review_form',[
+			'label' => esc_html__('Show Review Form?', 'tourfic'),
+			'type' => Controls_Manager::SWITCHER,
+			'label_on' => esc_html__('Show', 'tourfic'),
+			'label_off' => esc_html__('Hide', 'tourfic'),
+			'return_value' => 'yes',
+			'default' => 'yes',
+            'condition' => [
+				'review_style' => ['design-2'],
+			],
+		]);
+
 	    do_action( 'tf/single-review/after-content/controls', $this );
 
         $this->end_controls_section();
@@ -142,6 +178,9 @@ class Review extends Widget_Base {
 
 	private function tf_hotel_review($settings) {
         $style = !empty($settings['review_style']) ? $settings['review_style'] : 'design-1';
+        $show_review_states = isset($settings['show_review_states']) ? $settings['show_review_states'] : '';
+        $show_reviews = isset($settings['show_reviews']) ? $settings['show_reviews'] : '';
+        $show_review_form = isset($settings['show_review_form']) ? $settings['show_review_form'] : '';
 		$meta = get_post_meta($this->post_id, 'tf_hotels_opt', true);
 		$s_review = ! empty( Helper::tfopt( 'h-review' ) ) ? Helper::tfopt( 'h-review' ) : 0;
 		$disable_review_sec   = ! empty( $meta['h-review'] ) ? $meta['h-review'] : '';
@@ -180,7 +219,7 @@ class Review extends Widget_Base {
                     // Get settings value
                     $tf_ratings_for = Helper::tfopt( 'r-for' ) ?? [ 'li', 'lo' ];
                     $tf_settings_base = ! empty ( Helper::tfopt( 'r-base' ) ) ? Helper::tfopt( 'r-base' ) : 5;
-                    if ( $comments ) :
+                    if ( $comments && $show_review_states == 'yes' ) :
                         $tf_overall_rate        = [];
                         TF_Review::tf_calculate_comments_rating( $comments, $tf_overall_rate, $total_rating );
                         TF_Review::tf_get_review_fields( $fields );
@@ -225,43 +264,45 @@ class Review extends Widget_Base {
                     <?php endif; ?>
 
                     <?php
-                    $tf_comment_counts = get_comments( array(
-                        'post_id' => $this->post_id,
-                        'user_id' => $current_user->ID,
-                        'count'   => true,
-                    ) );
-                    ?>
-                    <?php if( empty($tf_comment_counts) && $tf_comment_counts == 0 ) : ?>
-                        <button class="tf_btn tf_btn_full tf_btn_sharp tf_btn_large tf-review-open">
-                        <?php esc_html_e("Leave your review", "tourfic"); ?>
-                    </button>
-                    <?php endif; ?>
-                    <?php echo wp_kses_post( TF_Review::tf_pending_review_notice( $this->post_id ) ?? ''); ?>
-                    <?php
-                    if ( ! empty( $tf_ratings_for ) ) {
-                        if ( $is_user_logged_in ) {
-                        if ( in_array( 'li', $tf_ratings_for ) && ! TF_Review::tf_user_has_comments() ) {
+                    if($show_review_form == 'yes'):
+                        $tf_comment_counts = get_comments( array(
+                            'post_id' => $this->post_id,
+                            'user_id' => $current_user->ID,
+                            'count'   => true,
+                        ) );
                         ?>
-                    <div class="tf-review-form-wrapper" action="">
-                        <h3><?php esc_html_e("Leave your review", "tourfic"); ?></h3>
-                        <p><?php esc_html_e("Your email address will not be published. Required fields are marked.", "tourfic"); ?></p>
-                        <?php TF_Review::tf_review_form(); ?>
-                    </div>
-                    <?php
-                        }
-                    } else {
-                    if ( in_array( 'lo', $tf_ratings_for ) ) {
-                    ?>
-                    <div class="tf-review-form-wrapper" action="">
-                        <h3><?php esc_html_e("Leave your review", "tourfic"); ?></h3>
-                        <p><?php esc_html_e("Your email address will not be published. Required fields are marked.", "tourfic"); ?></p>
-                        <?php TF_Review::tf_review_form(); ?>
-                    </div>
-                    <?php } } } ?>
+                        <?php if( empty($tf_comment_counts) && $tf_comment_counts == 0 ) : ?>
+                            <button class="tf_btn tf_btn_full tf_btn_sharp tf_btn_large tf-review-open">
+                            <?php esc_html_e("Leave your review", "tourfic"); ?>
+                        </button>
+                        <?php endif; ?>
+                        <?php echo wp_kses_post( TF_Review::tf_pending_review_notice( $this->post_id ) ?? ''); ?>
+                        <?php
+                        if ( ! empty( $tf_ratings_for ) ) {
+                            if ( $is_user_logged_in ) {
+                            if ( in_array( 'li', $tf_ratings_for ) && ! TF_Review::tf_user_has_comments() ) {
+                            ?>
+                        <div class="tf-review-form-wrapper" action="">
+                            <h3><?php esc_html_e("Leave your review", "tourfic"); ?></h3>
+                            <p><?php esc_html_e("Your email address will not be published. Required fields are marked.", "tourfic"); ?></p>
+                            <?php TF_Review::tf_review_form(); ?>
+                        </div>
+                        <?php
+                            }
+                        } else {
+                        if ( in_array( 'lo', $tf_ratings_for ) ) {
+                        ?>
+                        <div class="tf-review-form-wrapper" action="">
+                            <h3><?php esc_html_e("Leave your review", "tourfic"); ?></h3>
+                            <p><?php esc_html_e("Your email address will not be published. Required fields are marked.", "tourfic"); ?></p>
+                            <?php TF_Review::tf_review_form(); ?>
+                        </div>
+                        <?php } } } ?>
+                    <?php endif; ?>
 
                 </div>
 
-                <?php if ( $comments ) { ?>
+                <?php if ( $comments && $show_reviews == 'yes' ) { ?>
                 <div class="tf-reviews-wrapper tf-section" id="tf-hotel-reviews">         
                     <h2 class="tf-section-title"><?php echo !empty( $meta['review-section-title'] ) ? esc_html($meta['review-section-title']) : ''; ?></h2>
                     <p><?php esc_html_e("Total", "tourfic"); ?> <?php TF_Review::tf_based_on_text( count( $comments ) ); ?></p>
@@ -315,6 +356,9 @@ class Review extends Widget_Base {
 
 	private function tf_tour_review($settings) {
 		$style = !empty($settings['review_style']) ? $settings['review_style'] : 'design-1';
+        $show_review_states = isset($settings['show_review_states']) ? $settings['show_review_states'] : '';
+        $show_reviews = isset($settings['show_reviews']) ? $settings['show_reviews'] : '';
+        $show_review_form = isset($settings['show_review_form']) ? $settings['show_review_form'] : '';
 		$meta = get_post_meta($this->post_id, 'tf_tours_opt', true);
 		$s_review = ! empty( Helper::tfopt( 't-review' ) ) ? Helper::tfopt( 't-review' ) : 0;
 		$disable_review_sec   = ! empty( $meta['t-review'] ) ? $meta['t-review'] : '';
@@ -488,6 +532,9 @@ class Review extends Widget_Base {
 
 	private function tf_apartment_review($settings) {
         $style = !empty($settings['review_style']) ? $settings['review_style'] : 'design-1';
+        $show_review_states = isset($settings['show_review_states']) ? $settings['show_review_states'] : '';
+        $show_reviews = isset($settings['show_reviews']) ? $settings['show_reviews'] : '';
+        $show_review_form = isset($settings['show_review_form']) ? $settings['show_review_form'] : '';
 		$meta = get_post_meta($this->post_id, 'tf_apartment_opt', true);
 		
 		$s_review = ! empty( Helper::tfopt( 'disable-apartment-review' ) ) ? Helper::tfopt( 'disable-apartment-review' ) : 0;

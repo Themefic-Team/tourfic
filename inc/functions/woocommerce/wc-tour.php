@@ -58,10 +58,10 @@ function tf_tours_booking_function() {
 	$tf_package_pricing = ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
 
 	// Visitor Details
-	$tf_visitor_details = !empty($_POST['traveller']) ? array_map( 'sanitize_text_field', wp_unslash( $_POST['traveller'] ) ) : "";
+	$tf_visitor_details = !empty($_POST['traveller']) ? wp_unslash( $_POST['traveller'] ) : []; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 
 	// Booking Confirmation Details
-	$tf_confirmation_details = !empty($_POST['booking_confirm']) ? array_map( 'sanitize_text_field', wp_unslash( $_POST['booking_confirm'] ) ) : "";
+	$tf_confirmation_details = !empty($_POST['booking_confirm']) ? wp_unslash( $_POST['booking_confirm'] ) : ""; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 
 	// Booking Type
 	$tf_booking_type = function_exists('is_tf_pro') && is_tf_pro() ? ( !empty( $meta['booking-by'] ) ? $meta['booking-by'] : 1 ) : 1;

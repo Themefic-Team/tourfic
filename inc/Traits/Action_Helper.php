@@ -778,8 +778,8 @@ trait Action_Helper {
 		// Cars Data Start
 		$pickup   = isset( $_POST['pickup'] ) ? sanitize_text_field( $_POST['pickup'] ) : '';
 		$dropoff = isset( $_POST['dropoff'] ) ? sanitize_text_field( $_POST['dropoff'] ) : '';
-		$tf_pickup_date  = isset( $_POST['pickup_date'] ) ? sanitize_text_field( $_POST['pickup_date'] ) : '';
-		$tf_dropoff_date  = isset( $_POST['dropoff_date'] ) ? sanitize_text_field( $_POST['dropoff_date'] ) : '';
+		$tf_pickup_date  = ! empty( $_POST['pickup_date'] ) ? tf_normalize_date( sanitize_text_field( $_POST['pickup_date'] ) ) : '';
+		$tf_dropoff_date = ! empty( $_POST['dropoff_date'] ) ? tf_normalize_date( sanitize_text_field( $_POST['dropoff_date'] ) ) : '';
 		$tf_pickup_time  = isset( $_POST['pickup_time'] ) ? sanitize_text_field( $_POST['pickup_time'] ) : '';
 		$tf_dropoff_time  = isset( $_POST['dropoff_time'] ) ? sanitize_text_field( $_POST['dropoff_time'] ) : '';
 
@@ -1259,15 +1259,16 @@ trait Action_Helper {
 			$total_filtered_results = count( $tf_total_filters );
 			$current_page           = ! empty( $_POST['page'] ) ? absint( $_POST['page'] ) : 1;
 			$offset                 = ( $current_page - 1 ) * $post_per_page;
-			$displayed_results      =  array_slice( $tf_total_filters, $offset, $post_per_page );
-			$sorting_data = $this->tf_get_sorting_data( $ordering_type, $displayed_results, $posttype );
+			// $displayed_results      =  array_slice( $tf_total_filters, $offset, $post_per_page );
+			$sorting_data = $this->tf_get_sorting_data( $ordering_type, $tf_total_filters, $posttype );
 
-			$displayed_results = !empty( $sorting_data ) ? $sorting_data : $displayed_results;
+			$displayed_results = !empty( $sorting_data ) ? $sorting_data : $tf_total_filters;
 
 			if ( ! empty( $displayed_results ) ) {
 				$filter_args = array(
 					'post_type'      => $posttype,
 					'posts_per_page' => $post_per_page,
+					'paged' 		 => $current_page,
 					'orderby' 		 => array( 'post__in' => 'ASC' ),
 					'post__in'       => $displayed_results,
 				);

@@ -458,14 +458,7 @@ class Hotel {
                          * @since 1.6.9
                          * @author Abu Hena
                          */
-						$filtered_features = array();
-						if ( isset( $_POST['features'] ) ) {
-							if ( is_array( $_POST['features'] ) ) {
-								$filtered_features = array_map( 'sanitize_text_field', wp_unslash( $_POST['features'] ) );
-							} else {
-								$filtered_features = array( sanitize_text_field( wp_unslash( $_POST['features'] ) ) );
-							}
-						}
+						$filtered_features = isset( $_POST['features'] ) ? wp_unslash( $_POST['features'] ) : []; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 
                         $room_features     = ! empty( $room['features'] ) ? $room['features'] : '';
                         if ( ! empty( $room_features ) && is_array( $room_features ) ) {
@@ -2193,7 +2186,7 @@ class Hotel {
                                     </div>
                                 </div>
                             </div>
-                            <input type="hidden" name="check-in-out-date" class="tf-check-in-out-date tf-check-inout-hidden" onkeypress="return false;" placeholder="<?php esc_attr_e('Check-in - Check-out', 'tourfic'); ?>" <?php echo Helper::tfopt('date_hotel_search') ? 'required' : ''; ?>>
+                            <input type="hidden" name="check-in-out-date" class="tf-check-in-out-date tf-check-inout-hidden" value="<?php echo esc_attr(gmdate('Y/m/d') . ' - ' . gmdate('Y/m/d', strtotime('+1 day'))); ?>" onkeypress="return false;" placeholder="<?php esc_attr_e('Check-in - Check-out', 'tourfic'); ?>" <?php echo Helper::tfopt('date_hotel_search') ? 'required' : ''; ?>>
                         </div>
                         <!-- label to -->
                         <div class="tf_checkin_to_label">
@@ -2218,10 +2211,10 @@ class Hotel {
                                     </svg>
                                 </div>
                                 <div class="tf_checkout_dates tf-flex tf-flex-align-center">
-                                    <span class="date field--title"><?php echo esc_html(gmdate('d')); ?></span>
+                                    <span class="date field--title"><?php echo esc_html(gmdate('d', strtotime('+1 day'))); ?></span>
                                     <div class="tf-search__form__field__mthyr">
-                                        <span class="month form--span"><?php echo esc_html(gmdate('M')); ?></span>
-                                        <span class="year form--span"><?php echo esc_html(gmdate('Y')); ?></span>
+                                        <span class="month form--span"><?php echo esc_html(gmdate('M'), strtotime('+1 day')); ?></span>
+                                        <span class="year form--span"><?php echo esc_html(gmdate('Y'), strtotime('+1 day')); ?></span>
                                     </div>
                                 </div>
 
@@ -2250,12 +2243,18 @@ class Hotel {
                         $(".tf_check_inout_dates").on("click", function() {
                             $(".tf-check-in-out-date").trigger("click");
                         });
+
+						// today + tomorrow
+						const today = new Date();
+						const tomorrow = new Date();
+						tomorrow.setDate(today.getDate() + 1);
+
                         $(".tf-check-in-out-date").flatpickr({
                             enableTime: false,
                             mode: "range",
                             dateFormat: "Y/m/d",
                             minDate: "today",
-
+							defaultDate: [today, tomorrow],
                             // flatpickr locale
                             <?php Helper::tf_flatpickr_locale(); ?>
 
@@ -3252,7 +3251,7 @@ class Hotel {
 														}
 														?>
                                                     </h5>
-													<p><?php echo esc_html($airport_service['title']); ?> = <?php echo wp_kses_post(wc_price( $airport_service['price'] )); ?></p>
+													<p><?php echo wp_kses_post($airport_service['title']); ?> = <?php echo wp_kses_post(wc_price( $airport_service['price'] )); ?></p>
                                                 </div>
                                             </label>
                                         </div>

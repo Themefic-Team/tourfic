@@ -585,7 +585,6 @@
             const marker = L.marker([tf_params.single_apartment_data.address_latitude, tf_params.single_apartment_data.address_longitude], {alt: tf_params.single_apartment_data.address}).addTo(map)
                 .bindPopup(tf_params.single_apartment_data.address);
         }
-
     });
 
 })(jQuery, window);

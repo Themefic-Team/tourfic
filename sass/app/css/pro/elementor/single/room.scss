@@ -243,6 +243,7 @@
     padding: 0;
 
     .tf-available-rooms-wrapper{
+        margin-bottom: 0;
         @media only screen and (max-width: 1280px) {
             padding: 16px;
         }

@@ -612,15 +612,26 @@
   flex: 0 0 49%;
 }
 
-.single-tf_tours .tf-single-template__legacy .tf-highlight-wrapper .tf-highlight-item .tf-highlight-text ul {
-  margin: 0;
-  padding: 0;
-  margin-top: 15px;
-  list-style-position: inside;
+.single-tf_tours .tf-single-template__legacy .tf-highlight-wrapper .tf-highlight-item .tf-highlight-text p {
+  margin: 0 0 15px 0;
 }
 
-.single-tf_tours .tf-single-template__legacy .tf-highlight-wrapper .tf-highlight-item .tf-highlight-text p {
-  margin-bottom: 0;
+.single-tf_tours .tf-single-template__legacy .tf-highlight-wrapper .tf-highlight-item .tf-highlight-text blockquote {
+  margin-bottom: 15px;
+}
+
+.single-tf_tours .tf-single-template__legacy .tf-highlight-wrapper .tf-highlight-item .tf-highlight-text ul,
+.single-tf_tours .tf-single-template__legacy .tf-highlight-wrapper .tf-highlight-item .tf-highlight-text ol {
+  margin: 0px 0px 15px 13px;
+  padding: 0;
+  display: flex;
+  gap: 16px;
+  flex-direction: column;
+}
+
+.single-tf_tours .tf-single-template__legacy .tf-highlight-wrapper .tf-highlight-item .tf-highlight-text ul li,
+.single-tf_tours .tf-single-template__legacy .tf-highlight-wrapper .tf-highlight-item .tf-highlight-text ol li {
+  list-style: unset;
 }
 
 .single-tf_tours .tf-single-template__legacy .tf-highlight-wrapper .tf-highlight-item .tf-highlight-text .section-heading {
@@ -664,8 +675,9 @@
   max-width: 300px;
 }
 
+.single-tf_tours .tf-single-template__one .tf-highlights-wrapper .highlights-list blockquote,
 .single-tf_tours .tf-single-template__one .tf-highlights-wrapper .highlights-list p {
-  margin-bottom: 0;
+  margin-bottom: 15px;
 }
 
 .single-tf_tours .tf-single-template__one .tf-highlights-wrapper .highlights-list ul {
@@ -1665,6 +1677,10 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 15px;
+}
+
+.single-tf_tours .tf-single-template__two .tf-itinerary-wrapper .tf-itinerary-wrapper .tf-itinerary-content-details .tf-itinerary-more-offer .tf-itinerary-single-meta {
+  position: relative;
 }
 
 .single-tf_tours .tf-single-template__two .tf-itinerary-wrapper .tf-itinerary-wrapper .tf-itinerary-content-details .tf-itinerary-more-offer .tf-itinerary-single-meta li {

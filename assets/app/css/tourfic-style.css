@@ -19945,12 +19945,16 @@ div#tf-destinationautocomplete-list div:before {
 }
 
 .tf-single-template__two .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-highlights-wrapper .ft-highlights-details p {
-  margin: 0;
+  margin: 0 0 15px 0;
+}
+
+.tf-single-template__two .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-highlights-wrapper .ft-highlights-details blockquote {
+  margin-bottom: 15px;
 }
 
 .tf-single-template__two .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-highlights-wrapper .ft-highlights-details ul,
 .tf-single-template__two .tf-content-wrapper .tf-details .tf-details-left .tf-overview-wrapper .tf-highlights-wrapper .ft-highlights-details ol {
-  margin: 0px 0px 0px 13px;
+  margin: 0px 0px 15px 13px;
   padding: 0;
   display: flex;
   gap: 16px;

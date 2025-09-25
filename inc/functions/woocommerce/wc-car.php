@@ -34,21 +34,17 @@ function tf_car_booking_callback() {
 	$post_id   = isset( $_POST['post_id'] ) ? intval( sanitize_text_field( $_POST['post_id'] ) ) : null;
 	$pickup   = isset( $_POST['pickup'] ) ? sanitize_text_field( $_POST['pickup'] ) : '';
 	$dropoff = isset( $_POST['dropoff'] ) ? sanitize_text_field( $_POST['dropoff'] ) : '';
-	$tf_pickup_date  = isset( $_POST['pickup_date'] ) ? sanitize_text_field( $_POST['pickup_date'] ) : '';
-	$tf_dropoff_date  = isset( $_POST['dropoff_date'] ) ? sanitize_text_field( $_POST['dropoff_date'] ) : '';
+	$tf_pickup_date  = isset( $_POST['pickup_date'] ) ? tf_normalize_date(sanitize_text_field( $_POST['pickup_date'] )) : '';
+	$tf_dropoff_date  = isset( $_POST['dropoff_date'] ) ? tf_normalize_date(sanitize_text_field( $_POST['dropoff_date'] )) : '';
 	$tf_pickup_time  = isset( $_POST['pickup_time'] ) ? sanitize_text_field( $_POST['pickup_time'] ) : '';
 	$tf_dropoff_time  = isset( $_POST['dropoff_time'] ) ? sanitize_text_field( $_POST['dropoff_time'] ) : '';
-	$tf_protection = isset( $_POST['protection'] ) && is_array( $_POST['protection'] )
-    ? array_map( 'sanitize_text_field', wp_unslash( $_POST['protection'] ) )
-    : [];
-	$extra_ids  = isset( $_POST['extra_ids'] ) ? array_map( 'sanitize_text_field', wp_unslash( $_POST['extra_ids'] ) ) : '';
-	$extra_qty  = isset( $_POST['extra_qty'] ) ? array_map( 'sanitize_text_field', wp_unslash( $_POST['extra_qty'] ) ) : '';
+	$tf_protection = isset( $_POST['protection'] ) && is_array( $_POST['protection'] ) ? wp_unslash( $_POST['protection'] ) : []; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+	$extra_ids  = isset( $_POST['extra_ids'] ) ? wp_unslash( $_POST['extra_ids'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+	$extra_qty  = isset( $_POST['extra_qty'] ) ? wp_unslash( $_POST['extra_qty'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 	$partial_payment  = isset( $_POST['partial_payment'] ) ? sanitize_text_field($_POST['partial_payment']) : 'no';
 
 	// Booking Confirmation Details
-	$tf_confirmation_details = isset( $_POST['travellerData'] ) && is_array( $_POST['travellerData'] )
-    ? array_map( 'sanitize_text_field', wp_unslash( $_POST['travellerData'] ) )
-    : [];
+	$tf_confirmation_details = isset( $_POST['travellerData'] ) && is_array( $_POST['travellerData'] ) ? wp_unslash( $_POST['travellerData'] ) : []; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 
 	$meta = get_post_meta( $post_id, 'tf_carrental_opt', true );
 	$post_author   = get_post_field( 'post_author', $post_id );

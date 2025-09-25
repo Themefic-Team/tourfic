@@ -337,16 +337,19 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 										<div class="tf-month-filter">
 											<span><?php esc_html_e("Year","tourfic"); ?></span>
 											<select name="tf-year-report" id="tf-year-report">
-												<option value="24"><?php esc_html_e("2024","tourfic"); ?></option>
-												<option value="23"><?php esc_html_e("2023","tourfic"); ?></option>
-												<option value="22"><?php esc_html_e("2022","tourfic"); ?></option>
-												<option value="21"><?php esc_html_e("2021","tourfic"); ?></option>
-												<option value="20"><?php esc_html_e("2020","tourfic"); ?></option>
-												<option value="19"><?php esc_html_e("2019","tourfic"); ?></option>
-												<option value="18"><?php esc_html_e("2018","tourfic"); ?></option>
-												<option value="17"><?php esc_html_e("2017","tourfic"); ?></option>
+												<?php
+												$current_year = (int) date('Y'); 
+												for ( $i = 0; $i <= 5; $i++ ) {
+													$year = $current_year - $i;
+													$value = substr( $year, -2 ); // last 2 digits
+													?>
+													<option value="<?php echo esc_attr( $value ); ?>"><?php echo esc_html( $year ); ?></option>
+													<?php
+												}
+												?>
 											</select>
 										</div>
+
 										<div class="tf-month-filter">
 											<span><?php esc_html_e("Month","tourfic"); ?></span>
 											<select name="tf-month-report" id="tf-month-report">

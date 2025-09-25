@@ -21,6 +21,7 @@ $start_time_str = '00:00';
 $end_time_str   = '23:30';
 $default_time_str = '10:00';
 $next_current_day = gmdate('l', strtotime('+1 day'));
+$date_format_for_users         = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 
 if($disable_car_time_slot){
     $time_interval = !empty(Helper::tfopt('car_time_interval')) ? intval(Helper::tfopt('car_time_interval')) : 30;
@@ -379,7 +380,7 @@ $tf_cars_slug = get_option('car_slug');
                                     </div>
                                     <div class="info-select">
                                         <h5><?php esc_html_e("Pick-up", "tourfic"); ?></h5>
-                                        <input type="text" placeholder="Pick Up Location" id="tf_pickup_location" value="<?php echo !empty($_GET['pickup']) ? esc_html(sanitize_text_field( wp_unslash($_GET['pickup']) )) : ''; ?>" />
+                                        <input type="text" placeholder="Pick Up Location" id="tf_pickup_location" value="<?php echo !empty($_GET['pickup']) ? esc_html(get_term_by( 'slug', sanitize_text_field( wp_unslash($_GET['pickup']) ), 'carrental_location' )->name) : ''; ?>" />
                                         <input type="hidden" id="tf_pickup_location_id" value="<?php echo !empty($_GET['pickup']) ? esc_html(sanitize_text_field( wp_unslash($_GET['pickup']) )) : ''; ?>" />
                                     </div>
                                 </div>
@@ -401,7 +402,7 @@ $tf_cars_slug = get_option('car_slug');
                                     </div>
                                     <div class="info-select">
                                         <h5><?php esc_html_e("Drop-off", "tourfic"); ?></h5>
-                                        <input type="text" placeholder="Drop Off Location" id="tf_dropoff_location" value="<?php echo !empty($_GET['dropoff']) ? esc_html(sanitize_text_field( wp_unslash($_GET['dropoff']) )) : ''; ?>" />
+                                        <input type="text" placeholder="Drop Off Location" id="tf_dropoff_location" value="<?php echo !empty($_GET['dropoff']) ? esc_html(get_term_by( 'slug', sanitize_text_field( wp_unslash($_GET['dropoff']) ), 'carrental_location' )->name) : ''; ?>" />
                                         <input type="hidden" id="tf_dropoff_location_id" value="<?php echo !empty($_GET['dropoff']) ? esc_html(sanitize_text_field( wp_unslash($_GET['dropoff']) )) : ''; ?>" />
                                     </div>
                                 </div>
@@ -418,7 +419,7 @@ $tf_cars_slug = get_option('car_slug');
                                     </div>
                                     <div class="info-select">
                                         <h5><?php esc_html_e("Pick-up date", "tourfic"); ?></h5>
-                                        <input type="text" placeholder="<?php esc_html_e("Pick Up Date", "tourfic"); ?>" id="tf_pickup_date" class="tf_pickup_date" value="<?php echo !empty($_GET['pickup_date']) ? esc_html(sanitize_text_field( wp_unslash($_GET['pickup_date']) )) : esc_attr(gmdate('Y/m/d', strtotime('+1 day'))); ?>" />
+                                        <input type="text" placeholder="<?php esc_html_e("Pick Up Date", "tourfic"); ?>" id="tf_pickup_date" class="tf_pickup_date" />
                                     </div>
                                 </div>
                             </div>
@@ -476,7 +477,7 @@ $tf_cars_slug = get_option('car_slug');
                                     </div>
                                     <div class="info-select">
                                         <h5><?php esc_html_e("Drop-off date", "tourfic"); ?></h5>
-                                        <input type="text" placeholder="Drop Off Date" id="tf_dropoff_date" class="tf_dropoff_date" value="<?php echo !empty($_GET['dropoff_date']) ? esc_html(sanitize_text_field( wp_unslash($_GET['dropoff_date']))) : esc_attr(gmdate('Y/m/d', strtotime('+2 day'))); ?>" />
+                                        <input type="text" placeholder="Drop Off Date" id="tf_dropoff_date" class="tf_dropoff_date" />
                                     </div>
                                 </div>
                             </div>
@@ -638,7 +639,7 @@ $tf_cars_slug = get_option('car_slug');
                             <img src="<?php echo esc_url( TF_ASSETS_APP_URL ) ?>images/thank-you.gif" alt="Thank You">
                             <h2>
                                 <?php
-                                $booking_confirmation_msg = ! empty( Helper::tfopt( 'car-booking-confirmation-msg' ) ) ? Helper::tfopt( 'car-booking-confirmation-msg' ) : 'Booked Successfully';
+                                $booking_confirmation_msg = ! empty( Helper::tfopt( 'car-booking-confirmation-msg' ) ) ? Helper::tfopt( 'car-booking-confirmation-msg' ) : esc_html__('Booked Successfully', 'tourfic');
                                 echo esc_html( $booking_confirmation_msg );
                                 ?>
                             </h2>
@@ -946,17 +947,25 @@ $tf_cars_slug = get_option('car_slug');
  <script>
     (function ($) {
         $(document).ready(function () {
+            let today = new Date();
+            let tomorrow = new Date();
+            tomorrow.setDate(today.getDate() + 1);
+            let dayAfter = new Date();
+            dayAfter.setDate(today.getDate() + 2);
+
             // flatpickr locale first day of Week
             <?php Helper::tf_flatpickr_locale( "root" ); ?>
 
             $(".tf-single-template__one #tf_dropoff_date").on("click", function () {
-                $(".tf-single-template__one #tf_pickup_date").trigger("click");
+                $(".tf-single-template__one .tf_pickup_date").trigger("click");
             });
             $(".tf-single-template__one #tf_pickup_date").flatpickr({
                 enableTime: false,
                 mode: "range",
                 dateFormat: "Y/m/d",
                 minDate: "today",
+                altInput: true,
+                altFormat: '<?php echo esc_html( $date_format_for_users ); ?>',
                 // flatpickr locale
                 <?php Helper::tf_flatpickr_locale(); ?>
 
@@ -966,22 +975,25 @@ $tf_cars_slug = get_option('car_slug');
                 onChange: function (selectedDates, dateStr, instance) {
                     dateSetToFields(selectedDates, instance);
                 },
-                <?php if(! empty( $check_in_out )){ ?>
-                    defaultDate: <?php echo wp_json_encode( explode( '-', $check_in_out ) ) ?>,
+                <?php if(! empty( $_GET['pickup_date'] ) && $_GET['dropoff_date']){ ?>
+                    defaultDate: ["<?php echo esc_js( sanitize_text_field( wp_unslash( $_GET['pickup_date'] ) ) ); ?>", "<?php echo esc_js( sanitize_text_field( wp_unslash( $_GET['dropoff_date'] ) ) ); ?>"],
+                <?php } else { ?>
+                    defaultDate: [tomorrow, dayAfter],
                 <?php } ?>
             });
 
             function dateSetToFields(selectedDates, instance) {
+                const format = '<?php echo esc_html( $date_format_for_users ); ?>';
                 if (selectedDates.length === 2) {
                     const startDay = flatpickr.formatDate(selectedDates[0], "l");
                     const endDay = flatpickr.formatDate(selectedDates[1], "l");
                     if (selectedDates[0]) {
-                        const startDate = flatpickr.formatDate(selectedDates[0], "Y/m/d");
-                        $(".tf-single-template__one #tf_pickup_date").val(startDate);
+                        const startDate = flatpickr.formatDate(selectedDates[0], format);
+                        $(".tf-single-template__one .tf_pickup_date").val(startDate);
                     }
                     if (selectedDates[1]) {
-                        const endDate = flatpickr.formatDate(selectedDates[1], "Y/m/d");
-                        $(".tf-single-template__one #tf_dropoff_date").val(endDate);
+                        const endDate = flatpickr.formatDate(selectedDates[1], format);
+                        $(".tf-single-template__one .tf_dropoff_date").val(endDate);
                     }
 
                     $.ajax({

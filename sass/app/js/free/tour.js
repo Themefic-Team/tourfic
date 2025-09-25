@@ -196,10 +196,10 @@
             }
         })
 
-        $(".tf-itinerary-single-meta li .fa-info-circle, .ininerary-other-info li .fa-info-circle").on("click", function (e) {
+        $(".tf-itinerary-single-meta li a, .ininerary-other-info li a").on("click", function (e) {
             e.preventDefault();
             e.stopPropagation();
-            var id = $(this).parent().attr("id");
+            var id = $(this).attr("id");
             $(".tour-itinerary-sleep").each(function () {
                 var elementId = $(this).attr("id"); 
                 if (id === elementId) {

@@ -429,6 +429,7 @@
                             grid-template-columns: 1fr 1fr;
                             gap: 15px;
                             .tf-itinerary-single-meta{
+                                position: relative;
                                 li{
                                     color: $color-text;
                                     font-size: 1rem;

@@ -354,7 +354,7 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                 <div class="tf-highlight-item">
                     <div class="tf-highlight-text">
                         <h2 class="section-heading"><?php echo !empty($meta['highlights-section-title']) ? esc_html($meta['highlights-section-title']) : ''; ?></h2>
-                        <p><?php echo wp_kses_post($highlights); ?></p>
+                        <?php echo wp_kses_post($highlights); ?>
                     </div>
                     <?php if ( ! empty( $meta['hightlights_thumbnail'] ) ): ?>
                         <div class="tf-highlight-image">

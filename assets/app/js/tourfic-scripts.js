@@ -589,7 +589,6 @@ var __webpack_exports__ = {};
             const marker = L.marker([tf_params.single_apartment_data.address_latitude, tf_params.single_apartment_data.address_longitude], {alt: tf_params.single_apartment_data.address}).addTo(map)
                 .bindPopup(tf_params.single_apartment_data.address);
         }
-
     });
 
 })(jQuery, window);
@@ -2763,10 +2762,10 @@ function convertTo24HourFormat(timeStr) {
             }
         })
 
-        $(".tf-itinerary-single-meta li .fa-info-circle, .ininerary-other-info li .fa-info-circle").on("click", function (e) {
+        $(".tf-itinerary-single-meta li a, .ininerary-other-info li a").on("click", function (e) {
             e.preventDefault();
             e.stopPropagation();
-            var id = $(this).parent().attr("id");
+            var id = $(this).attr("id");
             $(".tour-itinerary-sleep").each(function () {
                 var elementId = $(this).attr("id"); 
                 if (id === elementId) {
@@ -5523,13 +5522,7 @@ function convertTo24HourFormat(timeStr) {
             if (tf_hasErrorsFlag) {
                 return false;
             }
-            let active_steps = $('.tf_popup_stpes').val();
-            let stepsArray = active_steps.split(',').map(Number);
-            let currentStep = parseInt($(this).attr("data-step"));
-
-            let currentIndex = stepsArray.indexOf(currentStep);
-            let step = stepsArray[currentIndex + 1];
-
+            let step = $(this).attr("data-step");
             if (step > 1) {
                 for (let i = 1; i <= step; i++) {
                     $('.tf-booking-step-' + i).removeClass("active");
@@ -5547,16 +5540,7 @@ function convertTo24HourFormat(timeStr) {
         // Navigation Back
         $(document).on('click', '.tf-step-back', function (e) {
             e.preventDefault();
-            
-            let active_steps = $('.tf_popup_stpes').val();
-            let stepsArray = active_steps.split(',').map(Number);
-            let currentStep = parseInt($(this).attr("data-step"));
-
-            // Find the previous available step from active_steps
-            let currentIndex = stepsArray.indexOf(currentStep);
-            let step = (currentIndex > 0) ? stepsArray[currentIndex - 1] : 1;
-            
-            // let step = $(this).attr("data-step");
+            let step = $(this).attr("data-step");
             if (step == 1) {
                 $('.tf-booking-step').removeClass("active");
                 $('.tf-booking-step').removeClass("done");
