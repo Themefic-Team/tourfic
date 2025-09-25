@@ -1791,7 +1791,7 @@ class Helper {
                             </div>
                             <div class="acr-select">
                                 <div class="acr-dec">-</div>
-                                <input type="number" name="adults" id="adults" min="1" value="1">
+                                <input type="number" name="adults" id="adults" min="0" value="0">
                                 <div class="acr-inc">+</div>
                             </div>
                         </div>
@@ -1824,7 +1824,7 @@ class Helper {
                                 </div>
                                 <div class="acr-select">
                                     <div class="acr-dec">-</div>
-                                    <input type="number" name="room" id="room" min="1" value="1">
+                                    <input type="number" name="room" id="room" min="0" value="0">
                                     <div class="acr-inc">+</div>
                                 </div>
                             </div>
@@ -1984,7 +1984,7 @@ class Helper {
                                 <div class="tf-booking-form-guest-and-room-inner">
                                     <span class="tf-booking-form-title"><?php $post_type == "tf_hotel" ? esc_html_e( apply_filters("tf_hotel_guest_name_change", "Guest") . "s & rooms", "tourfic" ) : esc_html_e( "Guests & rooms", "tourfic" ); ?></span>
                                     <div class="tf-booking-guest-and-room-wrap tf-archive-guest-info">
-                                        <span class="tf-guest"><?php esc_html_e( "01", "tourfic" ); ?></span> 
+                                        <span class="tf-guest"><?php esc_html_e( "00", "tourfic" ); ?></span> 
                                         <?php 
                                         if ( $post_type == "tf_hotel" ) {
                                             /* translators: %s: Guest label, e.g. "guest" */
@@ -1993,7 +1993,7 @@ class Helper {
                                             echo esc_html__( 'guest', 'tourfic' );
                                         }
                                         ?>
-                                        <span class="tf-room"><?php esc_html_e( "01", "tourfic" ); ?></span> <?php esc_html_e( "rooms", "tourfic" ); ?>
+                                        <span class="tf-room"><?php esc_html_e( "00", "tourfic" ); ?></span> <?php esc_html_e( "rooms", "tourfic" ); ?>
                                     </div>
                                     <div class="tf-arrow-icons">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
@@ -2006,7 +2006,7 @@ class Helper {
                                     <span class="tf-booking-form-title"><?php echo $post_type == "tf_hotel" ? esc_html( $adults_name . 's') : esc_html__( "Guests", "tourfic" ); ?></span>
                                     <div class="tf-booking-guest-and-room-wrap">
                                 <span class="tf-guest tf-booking-date">
-                                    <?php esc_html_e( "01", "tourfic" ); ?>
+                                    <?php esc_html_e( "00", "tourfic" ); ?>
                                 </span>
                                         <span class="tf-booking-month">
                                     <span><?php echo $post_type == "tf_hotel" ? esc_html( $adults_name . 's') : esc_html__( "guest", "tourfic" ); ?></span>
@@ -2035,7 +2035,7 @@ class Helper {
                                                     </defs>
                                                 </svg>
                                             </div>
-                                            <input type="tel" name="adults" id="adults" min="1" value="1" readonly>
+                                            <input type="tel" name="adults" id="adults" min="0" value="0" readonly>
                                             <div class="acr-inc">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                                                     <g clip-path="url(#clip0_3229_13100)">
@@ -2101,7 +2101,7 @@ class Helper {
                                                         </defs>
                                                     </svg>
                                                 </div>
-                                                <input type="tel" name="room" id="room" min="1" value="1" readonly>
+                                                <input type="tel" name="room" id="room" min="0" value="0" readonly>
                                                 <div class="acr-inc">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                                                         <g clip-path="url(#clip0_3229_13100)">
@@ -2620,8 +2620,8 @@ class Helper {
                                 <div class="tf-search-field-content">
                                     <span class="tf-search-field-label"><?php esc_html_e( "Guests & rooms", "tourfic" ); ?></span>
                                     <div class="tf-archive-guest-info">
-                                        <span class="tf-guest"><?php esc_html_e( "01", "tourfic" ); ?></span> <?php echo esc_html( apply_filters("tf_hotel_guest_name_change", "guest") ); ?>
-                                        <span class="tf-room"><?php esc_html_e( "01", "tourfic" ); ?></span> <?php esc_html_e( "rooms", "tourfic" ); ?>
+                                        <span class="tf-guest"><?php esc_html_e( "00", "tourfic" ); ?></span> <?php echo esc_html( apply_filters("tf_hotel_guest_name_change", "guest") ); ?>
+                                        <span class="tf-room"><?php esc_html_e( "00", "tourfic" ); ?></span> <?php esc_html_e( "rooms", "tourfic" ); ?>
                                     </div>
                                 </div>
                             </div>
@@ -2637,7 +2637,7 @@ class Helper {
                                 <div class="tf-search-field-content">
                                     <span class="tf-search-field-label"><?php esc_html_e( "Persons", "tourfic" ); ?></span>
                                     <div class="tf-archive-guest-info">
-                                        <span class="tf-adult"><?php esc_html_e( "1", "tourfic" ); ?></span> <?php echo $post_type == "tf_hotels" ? esc_html( $adults_name ) : esc_html__( "adult", "tourfic" ) ; ?>
+                                        <span class="tf-adult"><?php esc_html_e( "0", "tourfic" ); ?></span> <?php echo $post_type == "tf_hotels" ? esc_html( $adults_name ) : esc_html__( "adult", "tourfic" ) ; ?>
                                         <?php if ( ($post_type == 'tf_tours' && empty( $disable_child_search )) ||
                                                 ( $post_type == 'tf_apartment' && empty( $disable_apartment_child_search ) )
                                         ) { ?>
@@ -2665,7 +2665,7 @@ class Helper {
                                                 </defs>
                                             </svg>
                                         </div>
-                                        <input type="tel" name="adults" id="adults" min="1" value="1" readonly>
+                                        <input type="tel" name="adults" id="adults" min="0" value="0" readonly>
                                         <div class="acr-inc">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                                                 <g clip-path="url(#clip0_3229_13100)">
@@ -2731,7 +2731,7 @@ class Helper {
                                                     </defs>
                                                 </svg>
                                             </div>
-                                            <input type="tel" name="room" id="room" min="1" value="1" readonly>
+                                            <input type="tel" name="room" id="room" min="0" value="0" readonly>
                                             <div class="acr-inc">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                                                     <g clip-path="url(#clip0_3229_13100)">
@@ -2844,6 +2844,7 @@ class Helper {
                             <i class="fas fa-user-friends"></i>
                             <select name="adults" id="adults" class="">
 								<?php
+								echo '<option value="0">0 ' .  esc_html($adults_name) . '</option>';
 								echo '<option value="1">1 ' .  esc_html($adults_name) . '</option>';
 								foreach ( range( 2, 8 ) as $value ) {
 									echo '<option value="' . esc_attr( $value ) . '">' . esc_html( $value ) . ' ' . esc_html( $adults_name . "s" ) . '</option>';
@@ -2902,6 +2903,7 @@ class Helper {
                                 <i class="fas fa-couch"></i>
                                 <select name="room" id="room" class="">
 									<?php
+									echo '<option value="0">0 ' . esc_html__( "Room", "tourfic" ) . '</option>';
 									echo '<option value="1">1 ' . esc_html__( "Room", "tourfic" ) . '</option>';
 									foreach ( range( 2, 8 ) as $value ) {
 										echo '<option value="' . esc_attr( $value ) . '">' . esc_html( $value ) . ' ' . esc_html__( "Rooms", "tourfic" ) . '</option>';
