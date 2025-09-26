@@ -345,7 +345,9 @@ $tf_cars_slug = get_option('car_slug');
                     <div class="tf-price-header tf-mb-30">
                         <h2><?php esc_html_e("Total:", "tourfic"); ?> 
                         <?php if(!empty($total_prices['regular_price'])){ ?><del><?php echo wp_kses_post(wc_price($total_prices['regular_price'])); ?></del>  <?php } ?>
-                        <?php echo $total_prices['sale_price'] ? wp_kses_post(wc_price($total_prices['sale_price'])) : '' ?> <?php if(!empty($total_prices['type'])){ ?><small class="pricing-type">/ <?php echo esc_html($total_prices['type']); ?></small> <?php } ?></h2>
+                        <?php echo $total_prices['sale_price'] ? wp_kses_post(wc_price($total_prices['sale_price'])) : '' ?> <?php if( empty($_GET['pickup_date']) && !empty($total_prices['type'])){ ?>
+                            <small class="pricing-type">/ <?php echo esc_html($total_prices['type']); ?></small> 
+                            <?php } ?></h2>
                         <p><?php echo wp_kses_post(Pricing::is_taxable($meta)); ?></p>
                     </div>
 

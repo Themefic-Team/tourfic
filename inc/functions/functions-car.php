@@ -371,7 +371,7 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 			<?php if($show_price == 'yes') : ?>
 			<div class="tf-price-info">
 				<?php
-				$total_prices = Pricing::set_total_price($meta, $pickup_date, $dropoff_date, $pickup_time, $dropoff_time);
+				$total_prices = Pricing::set_total_price($meta, $pickup_date, $dropoff_date, $pickup_time, $dropoff_time, $tf_archive = true);
 				?>
 				<h3><?php echo $total_prices['sale_price'] ? wp_kses_post(wc_price($total_prices['sale_price'])) : '' ?> <small>/ <?php echo esc_html($total_prices['type']); ?></small></h3>
 			</div>
