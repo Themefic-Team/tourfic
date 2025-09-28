@@ -509,6 +509,74 @@ class Helper {
 		}
 	}
 
+    /**
+     * Get status by label from template layout
+     *
+     * @param string $label The label to search for (e.g., 'FAQs').
+     * @param array  $data  The template layout
+     *
+     * @return string|null  Returns the status if found, otherwise null.
+     */
+    static function get_status_by_label( $label, $type ) {
+        if ( empty( $label ) || empty( $type ) ) {
+            return null;
+        }
+        if($type=='car'){
+            $data = ! empty(self::tf_data_types( self::tfopt( 'tf-template' ) )['single-car-layout']) ? self::tf_data_types( self::tfopt( 'tf-template' ) )['single-car-layout'] : [];
+        }
+        if($type=='tour'){
+            $part_1 = ! empty(self::tf_data_types( self::tfopt( 'tf-template' ) )['single-tour-layout-part-1']) ? self::tf_data_types( self::tfopt( 'tf-template' ) )['single-tour-layout-part-1'] : [];
+            $part_2 = ! empty(self::tf_data_types( self::tfopt( 'tf-template' ) )['single-tour-layout-part-2']) ? self::tf_data_types( self::tfopt( 'tf-template' ) )['single-tour-layout-part-2'] : [];
+            $data = array_merge( $part_1, $part_2 );
+        }
+
+        if($type=='apartment'){
+            $part_1 = ! empty(self::tf_data_types( self::tfopt( 'tf-template' ) )['single-aprtment-layout-part-1']) ? self::tf_data_types( self::tfopt( 'tf-template' ) )['single-aprtment-layout-part-1'] : [];
+            $part_2 = ! empty(self::tf_data_types( self::tfopt( 'tf-template' ) )['single-aprtment-layout-part-2']) ? self::tf_data_types( self::tfopt( 'tf-template' ) )['single-aprtment-layout-part-2'] : [];
+            $data = array_merge( $part_1, $part_2 );
+        }
+        if($type=='hotel'){
+            $part_1 = ! empty(self::tf_data_types( self::tfopt( 'tf-template' ) )['single-hotel-layout-part-1']) ? self::tf_data_types( self::tfopt( 'tf-template' ) )['single-hotel-layout-part-1'] : [];
+            $part_2 = ! empty(self::tf_data_types( self::tfopt( 'tf-template' ) )['single-hotel-layout-part-2']) ? self::tf_data_types( self::tfopt( 'tf-template' ) )['single-hotel-layout-part-2'] : [];
+            $data = array_merge( $part_1, $part_2 );
+        }
+        if(!empty($data)){
+            foreach ( $data as $item ) {
+                if ( isset( $item['label'], $item['status'] ) && $item['label'] === $label ) {
+                    return $item['status'];
+                }
+            }
+        }
+
+        return null; // Not found
+    }
+
+    /**
+     * Get status by label from template layout
+     *
+     * @param string $label The label to search for (e.g., 'FAQs').
+     *
+     * @return string|null  Returns the status if found, otherwise null.
+     */
+    static function label_exists_or_not( $label, $type ) {
+        if ( empty( $label ) || empty( $type ) ) {
+            return null;
+        }
+        if($type=='car'){
+            $data = ! empty(self::tf_data_types( self::tfopt( 'tf-template' ) )['single-car-layout']) ? self::tf_data_types( self::tfopt( 'tf-template' ) )['single-car-layout'] : [];
+        }
+        if(!empty($data)){
+            foreach ( $data as $item ) {
+                if ( $item['label'] === $label ) {
+                    return '1';
+                }
+            }
+        }
+
+        return null; // Not found
+    }
+
+
     function get_current_url() {
         $protocol = is_ssl() ? 'https://' : 'http://';
         $host     = isset( $_SERVER['HTTP_HOST'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ) ) : '';

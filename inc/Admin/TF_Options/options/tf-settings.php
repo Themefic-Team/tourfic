@@ -826,6 +826,16 @@ TF_Settings::option( 'tf_settings', array(
 											'label'  => esc_html__( 'FAQs', 'tourfic' ),
 											'slug'   => 'faq',
 											'status' => 1,
+										),
+										array(
+											'label'  => esc_html__( 'Terms & Conditions', 'tourfic' ),
+											'slug'   => 'tc',
+											'status' => 1,
+										),
+										array(
+											'label'  => esc_html__( 'Review', 'tourfic' ),
+											'slug'   => 'review',
+											'status' => 1,
 										)
 									),
 								),

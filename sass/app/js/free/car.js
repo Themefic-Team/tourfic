@@ -27,12 +27,21 @@
         });
 
         // Tabs Section
-        $('.tf-details-menu ul li').on("click", function () {
-            var $this = $(this);
-            $currentmenu = $this.attr('data-menu');
+        $(document).on('click', '.tf-details-menu ul li', function (e) {
+            var $clicked = $(this);
+            var key = String( $clicked.data('menu') || $clicked.attr('data-menu') ).trim();
+
+            if ( key === '' ) {
+                return;
+            }
+
+            // remove .active from all menu items in all menus
             $('.tf-details-menu ul li').removeClass('active');
 
-            $('.tf-details-menu ul li[data-menu="' + $currentmenu + '"]').addClass('active');
+            // add .active to every li whose data-menu matches the clicked one
+            $('.tf-details-menu ul li').filter(function () {
+                return String( $(this).data('menu') || $(this).attr('data-menu') ).trim() === key;
+            }).addClass('active');
         });
         
         // Car Location Autocomplete
