@@ -2256,3 +2256,10 @@ li.tf-filter-item {
         }
     }
 }
+
+.jconfirm .jconfirm-box {
+    @media #{$max575} {
+        width: auto !important;
+        max-width: 95%;
+    }
+}
