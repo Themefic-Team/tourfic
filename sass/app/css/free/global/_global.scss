@@ -340,12 +340,7 @@ Notice
 }
 
 // Jquery Confirm CSS
-.jconfirm .jconfirm-box {
-    @media #{$max575} {
-        width: auto !important;
-        max-width: 95%;
-    }
-}
+
 .jconfirm .jconfirm-box.jconfirm-type-orange {
   border: 1px solid #f1c40f;
 }
