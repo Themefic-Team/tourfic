@@ -848,6 +848,7 @@
                         $(".tf-final-submission-form").hide();
                         $(".tf-scanner-preloader").hide();
                         $(".tf-final-submission-feedback").show();
+                        $(".tf-tour-infos").html(response.tf_qr_code_result);
                     } else {
                         $(".tf-scanner-quick-review").html("");
                         $(".tf-final-submission-form").hide();
