@@ -1081,9 +1081,9 @@
             $('.tf-date-select-box').slideToggle( function () {
                 // Check visibility after the toggle animation completes
                 if ($(this).is(':visible')) {
-                    $button.text('Hide');
+                    $button.text(tf_params.car_mobile_button_hide);
                 } else {
-                    $button.text('Book Now');
+                    $button.text(tf_params.car_mobile_button_book_now);
                 }
             });
         });
