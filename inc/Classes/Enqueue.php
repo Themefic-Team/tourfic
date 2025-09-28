@@ -526,6 +526,8 @@ class Enqueue {
 				'single_hotel_data' => isset( $single_hotel_data ) ? $single_hotel_data : array(),
 				'single_apartment_data' => isset( $single_apartment_data ) ? $single_apartment_data : array(),
 				'single_car_data' => isset( $single_car_data ) ? $single_car_data : array(),
+				'car_mobile_button_hide' => esc_html__( 'Hide', 'tourfic' ),
+				'car_mobile_button_book_now' => esc_html__( 'Book Now', 'tourfic' ),
 			)
 		);
 

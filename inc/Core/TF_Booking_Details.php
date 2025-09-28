@@ -843,7 +843,18 @@ abstract Class TF_Booking_Details {
                                                 </td>
                                             </tr>
                                        <?php } ?>
-
+                                    <?php
+                                    $tf_order = wc_get_order( intval( $_GET['order_id'] ) );
+                                    if(!empty($tf_order->customer_note)){
+                                    ?>
+                                       <tr>
+                                            <th><?php esc_html_e("Order Note", "tourfic"); ?></th>
+                                            <td>:</td>
+                                            <td>
+                                                <?php echo esc_html($tf_order->customer_note); ?>
+                                            </td>
+                                        </tr>
+                                    <?php } ?>
                                     </table>
                                 </div>
                             </div>
