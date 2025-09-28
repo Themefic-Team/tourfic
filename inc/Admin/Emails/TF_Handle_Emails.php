@@ -659,6 +659,13 @@ class TF_Handle_Emails {
         }
         //get order details
         $order                   = wc_get_order( $order_id );
+        foreach ( $order->get_items() as $item_key => $item_values ) {
+            $order_type = wc_get_order_item_meta( $item_key, '_order_type', true );
+
+            if(empty($order_type)){
+                return;
+            }
+        }
         $order_billing_email     = $order->get_billing_email();
         $email_settings          = self::$tf_email_settings;
         $order_email_heading     = !empty( $email_settings['order_email_heading'] ) ? $email_settings['order_email_heading'] : esc_html__( 'Your order received' , 'tourfic' );
@@ -817,6 +824,13 @@ class TF_Handle_Emails {
         if( is_plugin_active( 'tourfic-pro/tourfic-pro.php' ) ) :
             //get order details
             $order = wc_get_order( $order_id );
+            foreach ( $order->get_items() as $item_key => $item_values ) {
+                $order_type = wc_get_order_item_meta( $item_key, '_order_type', true );
+    
+                if(empty($order_type)){
+                    return;
+                }
+            }
             //get customer email
             $order_billing_email    = $order->get_billing_email();
 
@@ -977,6 +991,13 @@ class TF_Handle_Emails {
         if( function_exists( 'is_tf_pro' ) && is_tf_pro() ):
             //get order details
             $order = wc_get_order( $order_id );
+            foreach ( $order->get_items() as $item_key => $item_values ) {
+                $order_type = wc_get_order_item_meta( $item_key, '_order_type', true );
+    
+                if(empty($order_type)){
+                    return;
+                }
+            }
             //get customer email
             $order_billing_email    = $order->get_billing_email();
 
