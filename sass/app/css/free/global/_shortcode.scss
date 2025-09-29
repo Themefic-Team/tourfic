@@ -1160,3 +1160,32 @@ div#tf-destinationautocomplete-list {
         border-radius: 4px;
     }
 }
+
+.tf-widget-slider.recent-hotel-slider,
+.tf-widget-slider.recent-apartment-slider,
+.tf-widget-slider.recent-tour-slider{
+    .slick-track {
+        display: -webkit-box !important;
+        display: -ms-flexbox !important;
+        display: flex !important;
+        @media #{$max768} {
+            margin-bottom: 15px !important;
+        }
+        >div {
+            height:auto;
+            min-height: -webkit-fill-available !important;
+            display: -webkit-box !important;
+            display: -ms-flexbox !important;
+            display: flex !important;
+            -webkit-box-align: end !important;
+                -ms-flex-align: end !important;
+                    align-items: flex-end !important;
+        }
+        .tf-slider-content {
+            margin-top: 200px !important;
+        }
+    }
+    .tf-slider-item {
+        height: auto;
+    }
+}
