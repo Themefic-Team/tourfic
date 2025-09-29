@@ -315,11 +315,10 @@
          * Apartment location autocomplete
          * @author Foysal
          */
-        var apartment_location_input = document.getElementById("tf-apartment-location");
         var apartment_locations = tf_params.apartment_locations;
-        if (apartment_location_input) {
-            tourfic_autocomplete(apartment_location_input, apartment_locations);
-        }
+        $(".tf-apartment-location").each(function () {
+            tourfic_autocomplete(this, apartment_locations);
+        });
        
         /**
          * Apartment Min and Max Range
@@ -3138,11 +3137,10 @@ function convertTo24HourFormat(timeStr) {
         });
 
         // Tour destination autocomplete
-        var tour_destination_input = document.getElementById("tf-destination");
         var tour_destinations = tf_params.tour_destinations;
-        if (tour_destination_input) {
-            tourfic_autocomplete(tour_destination_input, tour_destinations);
-        }
+        $(".tf-tour-destination").each(function () {
+            tourfic_autocomplete(this, tour_destinations);
+        });
 
         /**
          * Single tour sticky booking bar position fixed

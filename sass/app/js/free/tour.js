@@ -584,11 +584,10 @@
         });
 
         // Tour destination autocomplete
-        var tour_destination_input = document.getElementById("tf-destination");
         var tour_destinations = tf_params.tour_destinations;
-        if (tour_destination_input) {
-            tourfic_autocomplete(tour_destination_input, tour_destinations);
-        }
+        $(".tf-tour-destination").each(function () {
+            tourfic_autocomplete(this, tour_destinations);
+        });
 
         /**
          * Single tour sticky booking bar position fixed

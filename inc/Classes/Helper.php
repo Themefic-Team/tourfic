@@ -783,9 +783,9 @@ class Helper {
                                    placeholder="<?php echo esc_attr( $place_placeholder ) ?? esc_html__( 'Location/Destination', 'tourfic' ); ?>"
                                    value="<?php echo ! empty( $place_title ) ? esc_attr( $place_title ) : ''; ?>">
 						<?php } elseif ( $post_type == "tf_tours" ) { ?>
-                            <input type="text" id="<?php echo esc_attr( $place_input_id ) ?? ''; ?>" <?php echo $tour_location_field_required == 1 ? 'required=""' : '' ?> class="tf-field"
+                            <input type="text" id="<?php echo esc_attr( $place_input_id ) ?? ''; ?>" <?php echo $tour_location_field_required == 1 ? 'required=""' : '' ?> class="tf-field tf-tour-destination"
                                    placeholder="<?php echo esc_attr( $place_placeholder ) ?? esc_html__( 'Location/Destination', 'tourfic' ); ?>"
-                                   value="<?php echo ! empty( $place_title ) ? esc_attr( $place_title ) : ''; ?>">
+                                   value="<?php echo ! empty( $place_title ) ? esc_attr( $place_title ) : ''; ?>" >
 						<?php } else { ?>
                             <input type="text" id="<?php echo esc_attr( $place_input_id ) ?? ''; ?>" required class="tf-field"
                                    placeholder="<?php echo esc_attr( $place_placeholder ) ?? esc_html__( 'Location/Destination', 'tourfic' ); ?>"
@@ -929,11 +929,11 @@ class Helper {
                                    placeholder="<?php echo esc_attr( $place_placeholder ) ?? esc_html__( 'Location/Destination', 'tourfic' ); ?>"
                                    value="<?php echo ! empty( $place_title ) ? esc_attr( $place_title ) : ''; ?>">
 						<?php } elseif ( $post_type == "tf_tours" ) { ?>
-                            <input type="text" id="<?php echo esc_attr( $place_input_id ) ?? ''; ?>" <?php echo $tour_location_field_required == 1 ? 'required=""' : '' ?> class="tf-field"
+                            <input type="text" id="<?php echo esc_attr( $place_input_id ) ?? ''; ?>" <?php echo $tour_location_field_required == 1 ? 'required=""' : '' ?> class="tf-field tf-tour-destination"
                                    placeholder="<?php echo esc_attr( $place_placeholder ) ?? esc_html__( 'Location/Destination', 'tourfic' ); ?>"
                                    value="<?php echo ! empty( $place_title ) ? esc_attr( $place_title ) : ''; ?>">
 						<?php } else { ?>
-                            <input type="text" id="<?php echo esc_attr( $place_input_id ) ?? ''; ?>" required class="tf-field"
+                            <input type="text" id="<?php echo esc_attr( $place_input_id ) ?? ''; ?>" required class="tf-field <?php echo $post_type == 'tf_apartment' ? esc_attr('tf-apartment-location') : ''; ?>"
                                    placeholder="<?php echo esc_attr( $place_placeholder ) ?? esc_html__( 'Location/Destination', 'tourfic' ); ?>"
                                    value="<?php echo ! empty( $place_title ) ? esc_attr( $place_title ) : ''; ?>">
 						<?php } ?>
@@ -1298,7 +1298,7 @@ class Helper {
                     <label for="<?php echo esc_attr( $place_input_id ) ?? ''; ?>" class="tf-search-field-content">
                         <span class="tf-search-field-label"><?php echo $post_type == 'tf_hotel' || $post_type == 'tf_apartment' ? esc_html__( 'Location', 'tourfic' ) : esc_html__( 'Destination', 'tourfic' ); ?></span>
 
-                        <input type="text" id="<?php echo esc_attr( $place_input_id ) ?? ''; ?>" <?php echo $hotel_location_field_required == 1 ? 'required=""' : '' ?> class="tf-search-input <?php echo $post_type == 'tf_hotel' ? esc_attr('tf-hotel-location') : '' ; ?>" placeholder="<?php echo $post_type == 'tf_hotel' || $post_type == 'tf_apartment' ? esc_html__( 'Enter Location', 'tourfic' ) : esc_html__( 'Where are you going?', 'tourfic' ); ?>" value="<?php echo ! empty( $place_title ) ? esc_attr( $place_title ) : ''; ?>">
+                        <input type="text" id="<?php echo esc_attr( $place_input_id ) ?? ''; ?>" <?php echo $hotel_location_field_required == 1 ? 'required=""' : '' ?> class="tf-search-input <?php echo $post_type == 'tf_hotel' ? esc_attr('tf-hotel-location') : '' ; ?><?php echo $post_type == 'tf_tours' ? esc_attr('tf-tour-destination') : '' ; ?><?php echo $post_type == 'tf_apartment' ? esc_attr('tf-apartment-location') : ''; ?>" placeholder="<?php echo $post_type == 'tf_hotel' || $post_type == 'tf_apartment' ? esc_html__( 'Enter Location', 'tourfic' ) : esc_html__( 'Where are you going?', 'tourfic' ); ?>" value="<?php echo ! empty( $place_title ) ? esc_attr( $place_title ) : ''; ?>">
                         <input type="hidden" name="place" id="tf-place" value="<?php echo esc_attr( $place_value ) ?? ''; ?>"/>
                     </label>
                 </div>
@@ -1573,11 +1573,11 @@ class Helper {
                                        placeholder="<?php echo isset( $place_placeholder ) ? esc_attr( $place_placeholder ) : esc_html__( 'Location/Destination', 'tourfic' ); ?>"
                                        value="<?php echo ! empty( $place_title ) ? esc_attr( $place_title ) : ''; ?>">
 							<?php } elseif ( $post_type == "tf_tours" ) { ?>
-                                <input type="text" id="<?php echo isset( $place_input_id ) ? esc_attr( $place_input_id ) : ''; ?>" <?php echo $tour_location_field_required == 1 ? 'required=""' : '' ?> class=""
+                                <input type="text" id="<?php echo isset( $place_input_id ) ? esc_attr( $place_input_id ) : ''; ?>" <?php echo $tour_location_field_required == 1 ? 'required=""' : '' ?> class="tf-tour-destination"
                                        placeholder="<?php echo isset( $place_placeholder ) ? esc_attr( $place_placeholder ) : esc_html__( 'Location/Destination', 'tourfic' ); ?>"
                                        value="<?php echo ! empty( $place_title ) ? esc_attr( $place_title ) : ''; ?>">
 							<?php } else { ?>
-                                <input type="text" id="<?php echo isset( $place_input_id ) ? esc_attr( $place_input_id ) : ''; ?>" required class=""
+                                <input type="text" id="<?php echo isset( $place_input_id ) ? esc_attr( $place_input_id ) : ''; ?>" required class="<?php echo $post_type == 'tf_apartment' ? esc_attr('tf-apartment-location') : ''; ?>"
                                        placeholder="<?php echo isset( $place_placeholder ) ? esc_attr( $place_placeholder ) : esc_html__( 'Location/Destination', 'tourfic' ); ?>"
                                        value="<?php echo ! empty( $place_title ) ? esc_attr( $place_title ) : ''; ?>">
 							<?php } ?>
@@ -1839,10 +1839,10 @@ class Helper {
                         <i class="fa-solid fa-location-dot"></i>
 
 						<?php if ( is_post_type_archive( "tf_hotel" ) ) { ?>
-                            <input type="text" <?php echo $hotel_location_field_required == 1 ? 'required=""' : '' ?> id="<?php echo esc_attr( $place ); ?>" class="tf-field"
+                            <input type="text" <?php echo $hotel_location_field_required == 1 ? 'required=""' : '' ?> id="<?php echo esc_attr( $place ); ?>" class="tf-field tf-hotel-location"
                                    placeholder="<?php echo esc_attr( $place_text ); ?>" value="<?php echo ! empty( $taxonomy_name ) ? esc_attr( $taxonomy_name ) : ''; ?>">
 						<?php } elseif ( is_post_type_archive( "tf_tours" ) ) { ?>
-                            <input type="text" <?php echo $tour_location_field_required == 1 ? 'required=""' : '' ?> id="<?php echo esc_attr( $place ); ?>" class="tf-field"
+                            <input type="text" <?php echo $tour_location_field_required == 1 ? 'required=""' : '' ?> id="<?php echo esc_attr( $place ); ?>" class="tf-field tf-tour-destination"
                                    placeholder="<?php echo esc_attr( $place_text ); ?>" value="<?php echo ! empty( $taxonomy_name ) ? esc_attr( $taxonomy_name ) : ''; ?>">
 						<?php } else { ?>
                             <input type="text" required="" id="<?php echo esc_attr( $place ); ?>" class="tf-field" placeholder="<?php echo esc_attr( $place_text ); ?>"
@@ -1977,13 +1977,13 @@ class Helper {
                                         fill="#595349"/>
                                 </svg>
                                 <?php if ( is_post_type_archive( "tf_hotel" ) ) { ?>
-                                    <input type="text" <?php echo $hotel_location_field_required == 1 ? 'required=""' : '' ?> id="<?php echo esc_attr( $place ); ?>" class="tf-field"
+                                    <input type="text" <?php echo $hotel_location_field_required == 1 ? 'required=""' : '' ?> id="<?php echo esc_attr( $place ); ?>" class="tf-field tf-hotel-location"
                                         placeholder="<?php echo esc_attr( $place_text ); ?>" value="<?php echo ! empty( $taxonomy_name ) ? esc_attr( $taxonomy_name ) : ''; ?>">
                                 <?php } elseif ( is_post_type_archive( "tf_tours" ) ) { ?>
-                                    <input type="text" <?php echo $tour_location_field_required == 1 ? 'required=""' : '' ?> id="<?php echo esc_attr( $place ); ?>" class="tf-field"
+                                    <input type="text" <?php echo $tour_location_field_required == 1 ? 'required=""' : '' ?> id="<?php echo esc_attr( $place ); ?>" class="tf-field tf-tour-destination"
                                         placeholder="<?php echo esc_attr( $place_text ); ?>" value="<?php echo ! empty( $taxonomy_name ) ? esc_attr( $taxonomy_name ) : ''; ?>">
                                 <?php } else { ?>
-                                    <input type="text" required="" id="<?php echo esc_attr( $place ); ?>" class="tf-field" placeholder="<?php echo esc_attr( $place_text ); ?>"
+                                    <input type="text" required="" id="<?php echo esc_attr( $place ); ?>" class="tf-field <?php echo is_post_type_archive( "tf_apartment" ) ? esc_attr('tf-apartment-location') : ''; ?>" placeholder="<?php echo esc_attr( $place_text ); ?>"
                                         value="<?php echo ! empty( $taxonomy_name ) ? esc_attr( $taxonomy_name ) : ''; ?>">
                                 <?php } ?>
                                 <input type="hidden" id="tf-place" name="place" value="<?php echo ! empty( $taxonomy_slug ) ? esc_attr( $taxonomy_slug ) : ''; ?>"/>
@@ -2623,7 +2623,7 @@ class Helper {
                         <label for="<?php echo esc_attr($place); ?>" class="tf-search-field-content">
                             <span class="tf-search-field-label"><?php echo $post_type == 'tf_hotel' || $post_type == 'tf_apartment' ? esc_html__( 'Location', 'tourfic' ) : esc_html__( 'Destination', 'tourfic' ); ?></span>
 
-                            <input type="text" required="" id="<?php echo esc_attr($place); ?>" class="tf-search-input" placeholder="<?php echo $post_type == 'tf_hotel' || $post_type == 'tf_apartment' ? esc_html__( 'Enter Location', 'tourfic' ) : esc_html__( 'Where are you going?', 'tourfic' ); ?>" value="<?php echo ! empty( $taxonomy_name ) ? esc_attr($taxonomy_name) : ''; ?>">
+                            <input type="text" required="" id="<?php echo esc_attr($place); ?>" class="tf-search-input <?php echo $post_type == 'tf_hotel' ? esc_attr('tf-hotel-location') : ''; ?><?php echo $post_type == 'tf_tours' ? esc_attr('tf-tour-destination') : ''; ?><?php echo $post_type == 'tf_apartment' ? esc_attr('tf-apartment-location') : ''; ?>" placeholder="<?php echo $post_type == 'tf_hotel' || $post_type == 'tf_apartment' ? esc_html__( 'Enter Location', 'tourfic' ) : esc_html__( 'Where are you going?', 'tourfic' ); ?>" value="<?php echo ! empty( $taxonomy_name ) ? esc_attr($taxonomy_name) : ''; ?>">
                             <input type="hidden" id="tf-place" name="place" value="<?php echo ! empty( $taxonomy_slug ) ? esc_attr($taxonomy_slug) : ''; ?>"/>
                         </label>
                     </div>
@@ -2893,13 +2893,13 @@ class Helper {
                             <i class="fas fa-map-marker-alt"></i>
 
 							<?php if ( is_post_type_archive( "tf_hotel" ) ) { ?>
-                                <input type="text" <?php echo $hotel_location_field_required == 1 ? 'required=""' : '' ?> id="<?php echo esc_attr( $place ); ?>" class=""
+                                <input type="text" <?php echo $hotel_location_field_required == 1 ? 'required=""' : '' ?> id="<?php echo esc_attr( $place ); ?>" class="tf-hotel-location"
                                        placeholder="<?php echo esc_attr( $place_text ); ?>" value="<?php echo ! empty( $taxonomy_name ) ? esc_attr( $taxonomy_name ) : ''; ?>">
 							<?php } elseif ( is_post_type_archive( "tf_tours" ) ) { ?>
-                                <input type="text" <?php echo $tour_location_field_required == 1 ? 'required=""' : '' ?> id="<?php echo esc_attr( $place ); ?>" class=""
+                                <input type="text" <?php echo $tour_location_field_required == 1 ? 'required=""' : '' ?> id="<?php echo esc_attr( $place ); ?>" class="tf-tour-destination"
                                        placeholder="<?php echo esc_attr( $place_text ); ?>" value="<?php echo ! empty( $taxonomy_name ) ? esc_attr( $taxonomy_name ) : ''; ?>">
 							<?php } else { ?>
-                                <input type="text" required="" id="<?php echo esc_attr( $place ); ?>" class="" placeholder="<?php echo esc_attr( $place_text ); ?>"
+                                <input type="text" required="" id="<?php echo esc_attr( $place ); ?>" class="<?php echo $post_type == 'tf_apartment' ? esc_attr('tf-apartment-location') : ''; ?>" placeholder="<?php echo esc_attr( $place_text ); ?>"
                                        value="<?php echo ! empty( $taxonomy_name ) ? esc_attr( $taxonomy_name ) : ''; ?>">
 							<?php } ?>
 

@@ -312,11 +312,10 @@
          * Apartment location autocomplete
          * @author Foysal
          */
-        var apartment_location_input = document.getElementById("tf-apartment-location");
         var apartment_locations = tf_params.apartment_locations;
-        if (apartment_location_input) {
-            tourfic_autocomplete(apartment_location_input, apartment_locations);
-        }
+        $(".tf-apartment-location").each(function () {
+            tourfic_autocomplete(this, apartment_locations);
+        });
        
         /**
          * Apartment Min and Max Range
