@@ -2025,7 +2025,7 @@ class Search_Form extends Widget_Base {
                                     </div>
                                     <div class="info-select">
                                         <label><?php echo !empty($settings['pickup_loc_label']) ? esc_attr($settings['pickup_loc_label']) : esc_html__( 'Pick-up', 'tourfic' ); ?></label>
-                                        <input type="text" placeholder="<?php echo !empty($settings['pickup_loc_placeholder_text']) ? esc_attr($settings['pickup_loc_placeholder_text']) : esc_html__( 'Pick Up Location', 'tourfic' ); ?>" id="tf_pickup_location" value="<?php echo !empty($_GET['pickup-name']) ? esc_html(sanitize_text_field( wp_unslash($_GET['pickup-name']) ) ) : '' ?>" />
+                                        <input type="text" placeholder="<?php echo !empty($settings['pickup_loc_placeholder_text']) ? esc_attr($settings['pickup_loc_placeholder_text']) : esc_html__( 'Pick Up Location', 'tourfic' ); ?>" id="tf_pickup_location" value="<?php echo !empty($_GET['pickup-name']) ? esc_html(sanitize_text_field( wp_unslash($_GET['pickup-name']) ) ) : '' ?>" class="tf_pickup_location" />
                                         <input type="hidden" id="tf_pickup_location_id" value="<?php echo !empty($_GET['pickup']) ? esc_html(sanitize_text_field( wp_unslash($_GET['pickup']) ) ) : '' ?>" />
                                     </div>
                                 </div>
@@ -2038,7 +2038,7 @@ class Search_Form extends Widget_Base {
                                     </div>
                                     <div class="info-select">
                                         <label><?php echo !empty($settings['dropoff_loc_label']) ? esc_attr($settings['dropoff_loc_label']) : esc_html__( 'Drop-off', 'tourfic' ); ?></label>
-                                        <input type="text" placeholder="<?php echo !empty($settings['dropoff_loc_placeholder_text']) ? esc_attr($settings['dropoff_loc_placeholder_text']) : esc_html__( 'Drop Off Location', 'tourfic' ); ?>" id="tf_dropoff_location" value="<?php echo !empty($_GET['dropoff-name']) ? esc_html(sanitize_text_field( wp_unslash($_GET['dropoff-name']))) : '' ?>" />
+                                        <input type="text" placeholder="<?php echo !empty($settings['dropoff_loc_placeholder_text']) ? esc_attr($settings['dropoff_loc_placeholder_text']) : esc_html__( 'Drop Off Location', 'tourfic' ); ?>" id="tf_dropoff_location" value="<?php echo !empty($_GET['dropoff-name']) ? esc_html(sanitize_text_field( wp_unslash($_GET['dropoff-name']))) : '' ?>" class="tf_dropoff_location" />
                                         <input type="hidden" id="tf_dropoff_location_id" value="<?php echo !empty($_GET['dropoff']) ? esc_html(sanitize_text_field( wp_unslash($_GET['dropoff']))) : '' ?>" />
                                     </div>
                                 </div>

@@ -104,7 +104,7 @@ class Car_Rental
                                             <path d="M8 13.9317L11.2998 10.6318C13.1223 8.80943 13.1223 5.85464 11.2998 4.0322C9.4774 2.20975 6.52261 2.20975 4.70017 4.0322C2.87772 5.85464 2.87772 8.80943 4.70017 10.6318L8 13.9317ZM8 15.8173L3.75736 11.5747C1.41421 9.2315 1.41421 5.43254 3.75736 3.08939C6.10051 0.746245 9.89947 0.746245 12.2427 3.08939C14.5858 5.43254 14.5858 9.2315 12.2427 11.5747L8 15.8173ZM8 8.66536C8.7364 8.66536 9.33333 8.06843 9.33333 7.33203C9.33333 6.59565 8.7364 5.9987 8 5.9987C7.2636 5.9987 6.66667 6.59565 6.66667 7.33203C6.66667 8.06843 7.2636 8.66536 8 8.66536ZM8 9.9987C6.52724 9.9987 5.33333 8.80476 5.33333 7.33203C5.33333 5.85927 6.52724 4.66536 8 4.66536C9.47273 4.66536 10.6667 5.85927 10.6667 7.33203C10.6667 8.80476 9.47273 9.9987 8 9.9987Z"
                                                 fill="#FAEEDD" />
                                         </svg>
-                                        <input type="text" name="pickup-name" id="tf_pickup_location" class="" placeholder="<?php esc_html_e('Enter Pickup Location', 'tourfic'); ?>" value="">
+                                        <input type="text" name="pickup-name" id="tf_pickup_location" class="tf_pickup_location" placeholder="<?php esc_html_e('Enter Pickup Location', 'tourfic'); ?>" value="">
                                         <input type="hidden" name="pickup" class="tf-place-input">
                                     </div>
                                 </label>
@@ -118,7 +118,7 @@ class Car_Rental
                                             <path d="M8 13.9317L11.2998 10.6318C13.1223 8.80943 13.1223 5.85464 11.2998 4.0322C9.4774 2.20975 6.52261 2.20975 4.70017 4.0322C2.87772 5.85464 2.87772 8.80943 4.70017 10.6318L8 13.9317ZM8 15.8173L3.75736 11.5747C1.41421 9.2315 1.41421 5.43254 3.75736 3.08939C6.10051 0.746245 9.89947 0.746245 12.2427 3.08939C14.5858 5.43254 14.5858 9.2315 12.2427 11.5747L8 15.8173ZM8 8.66536C8.7364 8.66536 9.33333 8.06843 9.33333 7.33203C9.33333 6.59565 8.7364 5.9987 8 5.9987C7.2636 5.9987 6.66667 6.59565 6.66667 7.33203C6.66667 8.06843 7.2636 8.66536 8 8.66536ZM8 9.9987C6.52724 9.9987 5.33333 8.80476 5.33333 7.33203C5.33333 5.85927 6.52724 4.66536 8 4.66536C9.47273 4.66536 10.6667 5.85927 10.6667 7.33203C10.6667 8.80476 9.47273 9.9987 8 9.9987Z"
                                                 fill="#FAEEDD" />
                                         </svg>
-                                        <input type="text" name="dropoff-name" id="tf_dropoff_location" class="" placeholder="<?php esc_html_e('Enter Dropoff Location', 'tourfic'); ?>" value="">
+                                        <input type="text" name="dropoff-name" id="tf_dropoff_location" class="tf_dropoff_location" placeholder="<?php esc_html_e('Enter Dropoff Location', 'tourfic'); ?>" value="">
                                         <input type="hidden" name="dropoff" class="tf-place-input">
                                     </div>
                                 </label>
@@ -302,7 +302,7 @@ class Car_Rental
                                 </div>
                                 <div class="info-select">
                                     <h5><?php esc_html_e("Pick-up", "tourfic"); ?></h5>
-                                    <input type="text" placeholder="Pick Up Location" id="tf_pickup_location" name="pickup-name" />
+                                    <input type="text" placeholder="Pick Up Location" id="tf_pickup_location" name="pickup-name" class="tf_pickup_location" />
                                     <input type="hidden" name="pickup" class="tf-place-input">
                                 </div>
                             </div>
@@ -324,7 +324,7 @@ class Car_Rental
                                 </div>
                                 <div class="info-select">
                                     <h5><?php esc_html_e("Drop-off", "tourfic"); ?></h5>
-                                    <input type="text" placeholder="Drop Off Location" id="tf_dropoff_location" name="dropoff-name" />
+                                    <input type="text" placeholder="Drop Off Location" id="tf_dropoff_location" name="dropoff-name" class="tf_dropoff_location" />
                                     <input type="hidden" name="dropoff" class="tf-place-input">
                                 </div>
                             </div>
@@ -530,7 +530,7 @@ class Car_Rental
                                 <?php echo esc_html_e("Pick-up", "tourfic"); ?>
                             </label>
                             <div class="tf-search__form__field">
-                                <input type="text" id="tf_pickup_location" class="tf-search__form__input" name="pickup-name" placeholder="<?php esc_html_e('Pickup Location', 'tourfic'); ?>" />
+                                <input type="text" id="tf_pickup_location" class="tf-search__form__input" name="pickup-name" placeholder="<?php esc_html_e('Pickup Location', 'tourfic'); ?>" class="tf_pickup_location" />
                                 <input type="hidden" name="pickup" class="tf-place-input">
                                 <span class="tf-search__form__field__icon icon--location">
                                     <svg width="12" height="17" viewBox="0 0 12 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -545,7 +545,7 @@ class Car_Rental
                                 <?php echo esc_html_e("Drop-off", "tourfic"); ?>
                             </label>
                             <div class="tf-search__form__field">
-                                <input type="text" id="tf_dropoff_location" class="tf-search__form__input" name="dropoff-name" placeholder="<?php esc_html_e('Dropoff Location', 'tourfic'); ?>" />
+                                <input type="text" id="tf_dropoff_location" class="tf-search__form__input" name="dropoff-name" placeholder="<?php esc_html_e('Dropoff Location', 'tourfic'); ?>" class="tf_dropoff_location" />
                                 <input type="hidden" name="dropoff" class="tf-place-input">
                                 <span class="tf-search__form__field__icon icon--location">
                                     <svg width="12" height="17" viewBox="0 0 12 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -789,7 +789,7 @@ class Car_Rental
                                         <div class="tf-search-form-field-icon">
                                             <i class="fas fa-search"></i>
                                         </div>
-                                        <input type="text" name="pickup-name" id="tf_pickup_location" class="" placeholder="<?php esc_html_e('Enter Pickup Location', 'tourfic'); ?>" value="">
+                                        <input type="text" name="pickup-name" id="tf_pickup_location" class="tf_pickup_location" placeholder="<?php esc_html_e('Enter Pickup Location', 'tourfic'); ?>" value="">
                                         <input type="hidden" name="pickup" class="tf-place-input">
                                     </div>
                                 </label>
@@ -806,7 +806,7 @@ class Car_Rental
                                         <div class="tf-search-form-field-icon">
                                             <i class="fas fa-search"></i>
                                         </div>
-                                        <input type="text" name="dropoff-name" id="tf_dropoff_location" class="" placeholder="<?php esc_html_e('Enter Dropoff Location', 'tourfic'); ?>" value="">
+                                        <input type="text" name="dropoff-name" id="tf_dropoff_location" class="tf_dropoff_location" placeholder="<?php esc_html_e('Enter Dropoff Location', 'tourfic'); ?>" value="">
                                         <input type="hidden" name="dropoff" class="tf-place-input">
                                     </div>
                                 </label>

@@ -394,7 +394,7 @@ $tf_cars_slug = get_option('car_slug');
                                     </div>
                                     <div class="info-select">
                                         <h5><?php esc_html_e("Pick-up", "tourfic"); ?></h5>
-                                        <input type="text" placeholder="Pick Up Location" id="tf_pickup_location" value="<?php echo !empty($_GET['pickup']) ? esc_html(get_term_by( 'slug', sanitize_text_field( wp_unslash($_GET['pickup']) ), 'carrental_location' )->name) : ''; ?>" />
+                                        <input type="text" placeholder="Pick Up Location" id="tf_pickup_location" value="<?php echo !empty($_GET['pickup']) ? esc_html(get_term_by( 'slug', sanitize_text_field( wp_unslash($_GET['pickup']) ), 'carrental_location' )->name) : ''; ?>" class="tf_pickup_location" />
                                         <input type="hidden" id="tf_pickup_location_id" value="<?php echo !empty($_GET['pickup']) ? esc_html(sanitize_text_field( wp_unslash($_GET['pickup']) )) : ''; ?>" />
                                     </div>
                                 </div>
@@ -416,7 +416,7 @@ $tf_cars_slug = get_option('car_slug');
                                     </div>
                                     <div class="info-select">
                                         <h5><?php esc_html_e("Drop-off", "tourfic"); ?></h5>
-                                        <input type="text" placeholder="Drop Off Location" id="tf_dropoff_location" value="<?php echo !empty($_GET['dropoff']) ? esc_html(get_term_by( 'slug', sanitize_text_field( wp_unslash($_GET['dropoff']) ), 'carrental_location' )->name) : ''; ?>" />
+                                        <input type="text" placeholder="Drop Off Location" id="tf_dropoff_location" value="<?php echo !empty($_GET['dropoff']) ? esc_html(get_term_by( 'slug', sanitize_text_field( wp_unslash($_GET['dropoff']) ), 'carrental_location' )->name) : ''; ?>" class="tf_dropoff_location" />
                                         <input type="hidden" id="tf_dropoff_location_id" value="<?php echo !empty($_GET['dropoff']) ? esc_html(sanitize_text_field( wp_unslash($_GET['dropoff']) )) : ''; ?>" />
                                     </div>
                                 </div>

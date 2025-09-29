@@ -312,11 +312,25 @@
         const makeFilter = (page = 1, mapCoordinates = []) => {
             var dest = $('#tf-place').val();
             var page = page;
-            var adults = $('#adults').val();
-            var room = $('#room').val();
-            var children = $('#children').val();
-            var infant = $('#infant').val();
-            var checked = $('#check-in-out-date').val();
+            
+            let $parent = $('.tf-archive-template__legacy, .tf-archive-template__one, .tf-archive-template__two, .tf-archive-template__three');
+
+            let adults   = $parent.find('#adults').val();
+            let room     = $parent.find('#room').val();
+            let children = $parent.find('#children').val();
+            let infant   = $parent.find('#infant').val();
+            let checked  = $parent.find('#check-in-out-date').val();
+            let posttype = $parent.find('.tf-post-type').val();
+
+            let same_location = $parent.find('input[name="same_location"]:checked').val();
+            let driver_age = $parent.find('input[name="driver_age"]:checked').val();
+            let pickup_date = $parent.find('.tf_pickup_date').val();
+            let dropoff_date = $parent.find('.tf_dropoff_date').val();
+            let pickup_time = $parent.find('.tf_pickup_time').val();
+            let dropoff_time = $parent.find('.tf_dropoff_time').val();
+            let pickup_slug = $parent.find('#tf_pickup_location_id').val();
+            let dropoff_slug = $parent.find('#tf_dropoff_location_id').val();
+
             var startprice = $('.widget_tf_price_filters input[name="from"]').val();
             var endprice = $('.widget_tf_price_filters input[name="to"]').val();
             var tf_author = $('#tf_author').val();
@@ -324,7 +338,6 @@
             var checkedArr = checked ? checked.split(' - ') : '';
             var checkin = checkedArr[0];
             var checkout = checkedArr[1];
-            var posttype = $('.tf-post-type').val();
 
             let filters = termIdsByFeildName('tf_filters');
             let tfHotelTypes = termIdsByFeildName('tf_hotel_types');
@@ -342,14 +355,7 @@
             let engine_year = termIdsByFeildName('car_engine_year');
             let min_seat = $('.widget_tf_seat_filters input[name="from"]').val();
             let max_seat = $('.widget_tf_seat_filters input[name="to"]').val();
-            let same_location = $('input[name="same_location"]:checked').val();
-            let driver_age = $('input[name="driver_age"]:checked').val();
-            let pickup_date = $('.tf_pickup_date').val();
-            let dropoff_date = $('.tf_dropoff_date').val();
-            let pickup_time = $('.tf_pickup_time').val();
-            let dropoff_time = $('.tf_dropoff_time').val();
-            let pickup_slug = $('#tf_pickup_location_id').val();
-            let dropoff_slug = $('#tf_dropoff_location_id').val();
+            
             let elSettings = $('#tf-elementor-settings').text();
             
             var formData = new FormData();
@@ -639,39 +645,40 @@
         $(document).on('click', '.tf-filter-cars', function (e) {
             let $this = $(this);
             $this.addClass('tf-btn-loading');
-
+            const infoCar = $this.closest('.tf-archive-search-box-wrapper');
+            
             if(tf_params.location_car_search){
-                let same_location = $('input[name="same_location"]:checked').val();
+                let same_location = infoCar.find('input[name="same_location"]:checked').val();
                 if('on'==same_location){
-                    if ($.trim($('#tf_pickup_location').val()) == '') {
-                        if ($('#tf-required').length === 0) {
-                            if($('.tf-driver-location').length === 1){
-                                $('.tf-driver-location').append('<span id="tf-required" class="required"><b>Select Pickup & Dropoff Location</b></span>');
+                    if ($.trim(infoCar.find('#tf_pickup_location').val()) == '') {
+                        if (infoCar.find('#tf-required').length === 0) {
+                            if(infoCar.find('.tf-driver-location').length === 1){
+                                infoCar.find('.tf-driver-location').append('<span id="tf-required" class="required"><b>Select Pickup & Dropoff Location</b></span>');
                             }else{
-                                $("#tf_pickup_location").trigger("click");
+                                infoCar.find("#tf_pickup_location").trigger("click");
                             }
                         }
-                        $('.tf-filter-cars').removeClass('tf-btn-loading');
+                        infoCar.find('.tf-filter-cars').removeClass('tf-btn-loading');
                         return;
                     } else {
-                        if ($('#tf-required').length === 1) {
-                            $('.tf-driver-location .required').remove();
+                        if (infoCar.find('#tf-required').length === 1) {
+                            infoCar.find('.tf-driver-location .required').remove();
                         }
                     }
                 }else{
-                    if ($.trim($('#tf_pickup_location').val()) == '' || $.trim($('#tf_dropoff_location').val()) == '') {
-                        if ($('#tf-required').length === 0) {
-                            if($('.tf-driver-location').length === 1){
-                                $('.tf-driver-location').append('<span id="tf-required" class="required"><b>Select Pickup & Dropoff Location</b></span>');
+                    if ($.trim(infoCar.find('#tf_pickup_location').val()) == '' || $.trim(infoCar.find('#tf_dropoff_location').val()) == '') {
+                        if (infoCar.find('#tf-required').length === 0) {
+                            if(infoCar.find('.tf-driver-location').length === 1){
+                                infoCar.find('.tf-driver-location').append('<span id="tf-required" class="required"><b>Select Pickup & Dropoff Location</b></span>');
                             }else{
-                                $("#tf_pickup_location").trigger("click");
+                                infoCar.find("#tf_pickup_location").trigger("click");
                             }
                         }
-                        $('.tf-filter-cars').removeClass('tf-btn-loading');
+                        infoCar.find('.tf-filter-cars').removeClass('tf-btn-loading');
                         return;
                     } else {
-                        if ($('#tf-required').length === 1) {
-                            $('.tf-driver-location .required').remove();
+                        if (infoCar.find('#tf-required').length === 1) {
+                            infoCar.find('.tf-driver-location .required').remove();
                         }
                     }
                 }
@@ -680,19 +687,19 @@
             }
 
             if(tf_params.date_car_search){
-                if ($.trim($('.tf_pickup_date').val()) == '' || $.trim($('.tf_dropoff_date').val()) == '') {
-                    if ($('#tf-required').length === 0) {
-                        if($('.tf-driver-location').length === 1){
-                            $('.tf-driver-location').append('<span id="tf-required" class="required"><b>Select Pickup & Dropoff Date</b></span>');
+                if ($.trim(infoCar.find('.tf_pickup_date').val()) == '' || $.trim(infoCar.find('.tf_dropoff_date').val()) == '') {
+                    if (infoCar.find('#tf-required').length === 0) {
+                        if(infoCar.find('.tf-driver-location').length === 1){
+                            infoCar.find('.tf-driver-location').append('<span id="tf-required" class="required"><b>Select Pickup & Dropoff Date</b></span>');
                         }else{
-                            $(".tf_pickup_date").trigger("click");
+                            infoCar.find(".tf_pickup_date").trigger("click");
                         }
                     }
-                    $('.tf-filter-cars').removeClass('tf-btn-loading');
+                    infoCar.find('.tf-filter-cars').removeClass('tf-btn-loading');
                     return;
                 } else {
-                    if ($('#tf-required').length === 1) {
-                        $('.tf-driver-location .required').remove();
+                    if (infoCar.find('#tf-required').length === 1) {
+                        infoCar.find('.tf-driver-location .required').remove();
                     }
                 }
             }
@@ -1293,7 +1300,11 @@
          * Open/close horizontal search form persons panel
          */
         // Adult, Child, Room Selection toggle
-        $(".tf_selectperson-wrap .tf_input-inner,.tf_person-selection-wrap .tf_person-selection-inner").on("click", function () {
+        $(".tf_selectperson-wrap .tf_input-inner").on("click", function () {
+            $(this).closest(".tf_selectperson-wrap").find(".tf_acrselection-wrap").slideToggle("fast");
+        });
+
+        $(".tf_person-selection-wrap .tf_person-selection-inner").on("click", function () {
             $('.tf_acrselection-wrap').slideToggle('fast');
         });
         // Close
@@ -1339,39 +1350,45 @@
         $(document).on('change', '#adults', function () {
             let thisEml = $(this);
             let thisVal = thisEml.val();
-
+        
+            // find closest wrap
+            let wrap = thisEml.closest('.tf_selectperson-wrap');
+        
             if (thisVal > 1) {
-                $('.tf_selectperson-wrap').find('.adults-text').text(thisVal + " " + tf_params.adult + 's');
+                wrap.find('.adults-text').text(thisVal + " " + tf_params.adult + 's');
             } else {
-                $('.tf_selectperson-wrap').find('.adults-text').text(thisVal + " " + tf_params.adult);
+                wrap.find('.adults-text').text(thisVal + " " + tf_params.adult);
             }
-
-        });
+        });        
 
         // Children change trigger
         $(document).on('change', '#children', function () {
             let thisEml = $(this);
             let thisVal = thisEml.val();
-
+        
+            // find closest wrap
+            let wrap = thisEml.closest('.tf_selectperson-wrap');
+        
             if (thisVal > 1) {
-                $('.tf_selectperson-wrap').find('.child-text').text(thisVal + " " + tf_params.children);
+                wrap.find('.child-text').text(thisVal + " " + tf_params.children + 's');
             } else {
-                $('.tf_selectperson-wrap').find('.child-text').text(thisVal + " " + tf_params.children);
+                wrap.find('.child-text').text(thisVal + " " + tf_params.children);
             }
-
         });
 
         // Infant change trigger
         $(document).on('change', '#infant', function () {
             let thisEml = $(this);
             let thisVal = thisEml.val();
-
+        
+            // find closest wrap
+            let wrap = thisEml.closest('.tf_selectperson-wrap');
+        
             if (thisVal > 1) {
-                $('.tf_selectperson-wrap').find('.infant-text').text(thisVal + " " + tf_params.infant);
+                wrap.find('.infant-text').text(thisVal + " " + tf_params.infant + 's');
             } else {
-                $('.tf_selectperson-wrap').find('.infant-text').text(thisVal + " " + tf_params.infant);
+                wrap.find('.infant-text').text(thisVal + " " + tf_params.infant);
             }
-
         });
 
         // Shortcode Design 2 Adults change trigger
@@ -2006,10 +2023,34 @@
         // Popup Open
         const tourPopupBooking = () => {
             var $this = $(this);
-            let check_in_date = $('#check-in-out-date').val();
-            let adults = $('#adults').val();
-            let children = $('#children').val();
-            let infant = $('#infant').val();
+            let check_in_date = '';
+            if ($('.tf_tours_booking #check-in-out-date').length) {
+                check_in_date = $('.tf_tours_booking #check-in-out-date').val();
+            } else if ($('.tf-single-template__legacy #check-in-out-date').length) {
+                check_in_date = $('.tf-single-template__legacy #check-in-out-date').val();
+            }
+
+            let adults = '';
+            if ($('.tf_tours_booking #adults').length) {
+                adults = $('.tf_tours_booking #adults').val();
+            } else if ($('.tf-single-template__legacy #adults').length) {
+                adults = $('.tf-single-template__legacy #adults').val();
+            }
+
+            let children = '';
+            if ($('.tf_tours_booking #children').length) {
+                children = $('.tf_tours_booking #children').val();
+            } else if ($('.tf-single-template__legacy #children').length) {
+                children = $('.tf-single-template__legacy #children').val();
+            }
+
+            let infant = '';
+            if ($('.tf_tours_booking #infant').length) {
+                infant = $('.tf_tours_booking #infant').val();
+            } else if ($('.tf-single-template__legacy #infant').length) {
+                infant = $('.tf-single-template__legacy #infant').val();
+            }
+
             let post_id = $('input[name=post_id]').val();
             let check_in_time = $('select[name=check-in-time] option').filter(':selected').val();
             var deposit = $('input[name=deposit]').is(':checked');
@@ -2365,22 +2406,26 @@
             $('.tf-short-description').slideDown();
         });
 
-        $('.tf-single-template__two .acr-inc, .tf-archive-booking-form__style-2 .acr-inc, .tf-single-template__two .acr-dec, .tf-archive-booking-form__style-2 .acr-dec').on('click', function () {
-
-            if ($('input#infant').length) {
-                var guest = Number($('input#adults').val() ? $('input#adults').val() : 0) + Number($('input#children').val() ? $('input#children').val() : 0) + Number($('input#infant').val() ? $('input#infant').val() : 0);
+        $('.tf-single-template__two .acr-inc, .tf-archive-booking-form__style-2 .acr-inc, .tf-single-template__two .acr-dec, .tf-archive-booking-form__style-2 .acr-dec').on('click', function (e) {
+            let thisEml = $(this);
+            // find closest wrap
+            let wrap = thisEml.closest('.tf_acrselection-wrap');
+            let guest_info_wrap = thisEml.closest('.tf-booking-form-guest-and-room');
+            
+            if (wrap.find('input#infant').length) {
+                var guest = Number(wrap.find('input#adults').val() ? wrap.find('input#adults').val() : 0) + Number(wrap.find('input#children').val() ? wrap.find('input#children').val() : 0) + Number(wrap.find('input#infant').val() ? wrap.find('input#infant').val() : 0);
             } else {
-                var guest = Number($('input#adults').val() ? $('input#adults').val() : 0) + Number($('input#children').val() ? $('input#children').val() : 0);
+                var guest = Number(wrap.find('input#adults').val() ? wrap.find('input#adults').val() : 0) + Number(wrap.find('input#children').val() ? wrap.find('input#children').val() : 0);
             }
             if (guest.toString().length < 2) {
                 guest = '0' + guest;
             }
-            $('span.tf-guest').html(guest);
-            var room = Number($('input#room').val());
+            guest_info_wrap.find('span.tf-guest').html(guest);
+            var room = Number(wrap.find('input#room').val());
             if (room.toString().length < 2) {
                 room = '0' + room;
             }
-            $('span.tf-room').html(room);
+            guest_info_wrap.find('span.tf-room').html(room);
         })
 
         $(document).ready(function () {
@@ -2888,16 +2933,16 @@
         // Select time
         $('.tf-pickup-time li, .tf-dropoff-time li').on('click', function () {
             const selected = $(this).attr('value');
-            const $infoSelect = $(this).closest('.info-select');
+            const infoSelect = $(this).closest('.info-select');
 
             if ($(this).closest('ul').hasClass('tf-pickup-time')) {
-                $('.tf_pickup_time').val(selected);
-                $('.tf_dropoff_time').val(selected);
-                $('.selected-pickup-time .text').text(selected);
-                $('.selected-dropoff-time .text').text(selected);
+                infoSelect.find('.tf_pickup_time').val(selected);
+                infoSelect.find('.tf_dropoff_time').val(selected);
+                infoSelect.find('.selected-pickup-time .text').text(selected);
+                infoSelect.find('.selected-dropoff-time .text').text(selected);
             } else {
-                $('.tf_dropoff_time').val(selected);
-                $('.selected-dropoff-time .text').text(selected);
+                infoSelect.find('.tf_dropoff_time').val(selected);
+                infoSelect.find('.selected-dropoff-time .text').text(selected);
             }
 
             $('.time-options-list').slideUp(200);

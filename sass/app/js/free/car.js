@@ -192,23 +192,21 @@
 
             /*execute a function when someone clicks in the document:*/
             $(document).on('click', function (event) {
-                if (!$(event.target).closest("#tf_dropoff_location, #tf_pickup_location").length) {
+                if (!$(event.target).closest(".tf_dropoff_location, .tf_pickup_location").length) {
                     $("#tf_pickup_location-autocomplete-list,#tf_dropoff_location-autocomplete-list").hide();
                 }
             });
         }
 
         // Car location autocomplete
-        var car_pickup_input = document.getElementById("tf_pickup_location");
         var car_locations = tf_params.car_locations;
-        if (car_pickup_input) {
-            tourfic_car_autocomplete(car_pickup_input, car_locations);
-        }
+        $(".tf_pickup_location").each(function () {
+            tourfic_car_autocomplete(this, car_locations);
+        });
 
-        var car_dropoff_input = document.getElementById("tf_dropoff_location");
-        if (car_dropoff_input) {
-            tourfic_car_autocomplete(car_dropoff_input, car_locations);
-        }
+        $(".tf_dropoff_location").each(function () {
+            tourfic_car_autocomplete(this, car_locations);
+        });
         
         $(".tf-booking-popup-header .tf-close-popup").on("click", function (e) {
             e.preventDefault();
@@ -467,12 +465,14 @@
             }
     
             if($this.hasClass('tf-final-step')){
-                var pickup = $('#tf_pickup_location').val();
-                let dropoff = $('#tf_dropoff_location').val();
-                let pickup_date = $('.tf_pickup_date').val();
-                let dropoff_date = $('.tf_dropoff_date').val();
-                let pickup_time = $('.tf_pickup_time').val();
-                let dropoff_time = $('.tf_dropoff_time').val();
+                const infoCar = $this.closest('.tf-car-booking-form');
+
+                var pickup = infoCar.find('#tf_pickup_location').val();
+                let dropoff = infoCar.find('#tf_dropoff_location').val();
+                let pickup_date = infoCar.find('.tf_pickup_date').val();
+                let dropoff_date = infoCar.find('.tf_dropoff_date').val();
+                let pickup_time = infoCar.find('.tf_pickup_time').val();
+                let dropoff_time = infoCar.find('.tf_dropoff_time').val();
 
                 pickup_time = convertTo24HourFormat(pickup_time);
                 dropoff_time = convertTo24HourFormat(dropoff_time);
@@ -486,12 +486,14 @@
 
             $('.error-notice').hide();
 
-            var pickup = $('#tf_pickup_location').val();
-            let dropoff = $('#tf_dropoff_location').val();
-            let pickup_date = $('.tf_pickup_date').val();
-            let dropoff_date = $('.tf_dropoff_date').val();
-            let pickup_time = $('.tf_pickup_time').val();
-            let dropoff_time = $('.tf_dropoff_time').val();
+            const infoCar = $this.closest('.tf-car-booking-form');
+
+            var pickup = infoCar.find('#tf_pickup_location').val();
+            let dropoff = infoCar.find('#tf_dropoff_location').val();
+            let pickup_date = infoCar.find('.tf_pickup_date').val();
+            let dropoff_date = infoCar.find('.tf_dropoff_date').val();
+            let pickup_time = infoCar.find('.tf_pickup_time').val();
+            let dropoff_time = infoCar.find('.tf_dropoff_time').val();
 
             pickup_time = convertTo24HourFormat(pickup_time);
             dropoff_time = convertTo24HourFormat(dropoff_time);
@@ -848,14 +850,15 @@
         * @author Jahid
         */
         $('body').on('change', '.tf-car-booking-form .tf_pickup_date, .tf-car-booking-form .tf_dropoff_date', function (e) {
-            handleBookingInputChange();
+            handleBookingInputChange($(this));
         });
 
         $('body').on('click', '.tf-car-booking-form .tf-pickup-time li, .tf-car-booking-form .tf-dropoff-time li', function (e) {
-            handleBookingInputChange();
+            handleBookingInputChange($(this));
         });
 
-        function handleBookingInputChange() {
+        function handleBookingInputChange($el) {
+            const infoCar = $el.closest('.tf-car-booking-form')
             let extra_ids = $("input[name='selected_extra[]']").map(function() {
                 return $(this).val();
             }).get();
@@ -864,10 +867,10 @@
                 return $(this).val();
             }).get();
 
-            let pickup_date = $('.tf_pickup_date').val();
-            let dropoff_date = $('.tf_dropoff_date').val();
-            let pickup_time = $('.tf_pickup_time').val();
-            let dropoff_time = $('.tf_dropoff_time').val();
+            let pickup_date = infoCar.find('.tf_pickup_date').val();
+            let dropoff_date = infoCar.find('.tf_dropoff_date').val();
+            let pickup_time = infoCar.find('.tf_pickup_time').val();
+            let dropoff_time = infoCar.find('.tf_dropoff_time').val();
 
             pickup_time = convertTo24HourFormat(pickup_time);
             dropoff_time = convertTo24HourFormat(dropoff_time);

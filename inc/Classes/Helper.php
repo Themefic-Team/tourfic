@@ -779,7 +779,7 @@ class Helper {
                         <i class="fa-solid fa-location-dot"></i>
 
 						<?php if ( $post_type == "tf_hotel" ) { ?>
-                            <input type="text" id="<?php echo esc_attr( $place_input_id ) ?? ''; ?>" <?php echo $hotel_location_field_required == 1 ? 'required=""' : '' ?> class="tf-field"
+                            <input type="text" id="<?php echo esc_attr( $place_input_id ) ?? ''; ?>" <?php echo $hotel_location_field_required == 1 ? 'required=""' : '' ?> class="tf-field tf-hotel-location"
                                    placeholder="<?php echo esc_attr( $place_placeholder ) ?? esc_html__( 'Location/Destination', 'tourfic' ); ?>"
                                    value="<?php echo ! empty( $place_title ) ? esc_attr( $place_title ) : ''; ?>">
 						<?php } elseif ( $post_type == "tf_tours" ) { ?>
@@ -925,7 +925,7 @@ class Helper {
                         </svg>
 
 						<?php if ( $post_type == "tf_hotel" ) { ?>
-                            <input type="text" id="<?php echo esc_attr( $place_input_id ) ?? ''; ?>" <?php echo $hotel_location_field_required == 1 ? 'required=""' : '' ?> class="tf-field"
+                            <input type="text" id="<?php echo esc_attr( $place_input_id ) ?? ''; ?>" <?php echo $hotel_location_field_required == 1 ? 'required=""' : '' ?> class="tf-field tf-hotel-location"
                                    placeholder="<?php echo esc_attr( $place_placeholder ) ?? esc_html__( 'Location/Destination', 'tourfic' ); ?>"
                                    value="<?php echo ! empty( $place_title ) ? esc_attr( $place_title ) : ''; ?>">
 						<?php } elseif ( $post_type == "tf_tours" ) { ?>
@@ -1298,7 +1298,7 @@ class Helper {
                     <label for="<?php echo esc_attr( $place_input_id ) ?? ''; ?>" class="tf-search-field-content">
                         <span class="tf-search-field-label"><?php echo $post_type == 'tf_hotel' || $post_type == 'tf_apartment' ? esc_html__( 'Location', 'tourfic' ) : esc_html__( 'Destination', 'tourfic' ); ?></span>
 
-                        <input type="text" id="<?php echo esc_attr( $place_input_id ) ?? ''; ?>" <?php echo $hotel_location_field_required == 1 ? 'required=""' : '' ?> class="tf-search-input" placeholder="<?php echo $post_type == 'tf_hotel' || $post_type == 'tf_apartment' ? esc_html__( 'Enter Location', 'tourfic' ) : esc_html__( 'Where are you going?', 'tourfic' ); ?>" value="<?php echo ! empty( $place_title ) ? esc_attr( $place_title ) : ''; ?>">
+                        <input type="text" id="<?php echo esc_attr( $place_input_id ) ?? ''; ?>" <?php echo $hotel_location_field_required == 1 ? 'required=""' : '' ?> class="tf-search-input <?php echo $post_type == 'tf_hotel' ? esc_attr('tf-hotel-location') : '' ; ?>" placeholder="<?php echo $post_type == 'tf_hotel' || $post_type == 'tf_apartment' ? esc_html__( 'Enter Location', 'tourfic' ) : esc_html__( 'Where are you going?', 'tourfic' ); ?>" value="<?php echo ! empty( $place_title ) ? esc_attr( $place_title ) : ''; ?>">
                         <input type="hidden" name="place" id="tf-place" value="<?php echo esc_attr( $place_value ) ?? ''; ?>"/>
                     </label>
                 </div>
@@ -1569,7 +1569,7 @@ class Helper {
                             <i class="fas fa-map-marker-alt"></i>
 
 							<?php if ( $post_type == "tf_hotel" ) { ?>
-                                <input type="text" id="<?php echo isset( $place_input_id ) ? esc_attr( $place_input_id ) : ''; ?>" <?php echo $hotel_location_field_required == 1 ? 'required=""' : '' ?> class=""
+                                <input type="text" id="<?php echo isset( $place_input_id ) ? esc_attr( $place_input_id ) : ''; ?>" <?php echo $hotel_location_field_required == 1 ? 'required=""' : '' ?> class="tf-hotel-location"
                                        placeholder="<?php echo isset( $place_placeholder ) ? esc_attr( $place_placeholder ) : esc_html__( 'Location/Destination', 'tourfic' ); ?>"
                                        value="<?php echo ! empty( $place_title ) ? esc_attr( $place_title ) : ''; ?>">
 							<?php } elseif ( $post_type == "tf_tours" ) { ?>
@@ -2354,7 +2354,7 @@ class Helper {
 								</div>
 								<div class="info-select">
 									<h5><?php esc_html_e("Pick-up", "tourfic"); ?></h5>
-									<input type="text" placeholder="Pick Up Location" id="tf_pickup_location" value="<?php echo !empty($_GET['pickup-name']) ? esc_html(sanitize_text_field( wp_unslash($_GET['pickup-name']) ) ) : '' ?>" />
+									<input type="text" placeholder="Pick Up Location" id="tf_pickup_location" value="<?php echo !empty($_GET['pickup-name']) ? esc_html(sanitize_text_field( wp_unslash($_GET['pickup-name']) ) ) : '' ?>" class="tf_pickup_location" />
 									<input type="hidden" id="tf_pickup_location_id" value="<?php echo !empty($_GET['pickup']) ? esc_html(sanitize_text_field( wp_unslash($_GET['pickup']) )) : '' ?>" />
 								</div>
 							</div>
@@ -2375,7 +2375,7 @@ class Helper {
 								</div>
 								<div class="info-select">
 									<h5><?php esc_html_e("Drop-off", "tourfic"); ?></h5>
-									<input type="text" placeholder="Drop Off Location" id="tf_dropoff_location" value="<?php echo !empty($_GET['dropoff-name']) ? esc_html(sanitize_text_field( wp_unslash($_GET['dropoff-name']) )) : '' ?>" />
+									<input type="text" placeholder="Drop Off Location" id="tf_dropoff_location" value="<?php echo !empty($_GET['dropoff-name']) ? esc_html(sanitize_text_field( wp_unslash($_GET['dropoff-name']) )) : '' ?>" class="tf_dropoff_location" />
 									<input type="hidden" id="tf_dropoff_location_id" value="<?php echo !empty($_GET['dropoff']) ? esc_html(sanitize_text_field( wp_unslash($_GET['dropoff']) )) : '' ?>" />
 								</div>
 							</div>
@@ -2565,8 +2565,10 @@ class Helper {
                                         instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
                                         dateSetToFields(selectedDates, instance);
                                     },
-                                    <?php if(! empty( $check_in_out )){ ?>
-                                        defaultDate: <?php echo wp_json_encode( explode( '-', $check_in_out ) ) ?>,
+                                    <?php if( !empty($_GET['pickup-date']) && !empty($_GET['dropoff-date']) ){ ?>
+                                        defaultDate: <?php echo wp_json_encode( 
+                                            [sanitize_text_field(wp_unslash($_GET['pickup-date'])), sanitize_text_field(wp_unslash($_GET['dropoff-date']))]
+                                        ) ?>,
                                     <?php } else { ?>
                                         defaultDate: [tomorrow, dayAfter],
                                     <?php } ?>

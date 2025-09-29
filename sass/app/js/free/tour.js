@@ -928,7 +928,7 @@
         }
 
         if(tf_params.tour_form_data.tf_tour_selected_template === 'default') {
-            $("#check-in-out-date").flatpickr(tour_date_options);
+            $(".tf-single-template__legacy #check-in-out-date").flatpickr(tour_date_options);
         }
 
         $(document).on('click', "#tour-deposit > div > div.tf_button_group > button", function (e) {

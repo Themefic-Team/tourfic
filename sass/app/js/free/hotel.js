@@ -20,7 +20,7 @@
             // Child & Child Type
             var adult_field_type = $("#adults").attr('type');
             var child_field_type = $("#children").attr('type');
-            if ($.trim($('input[name=check-in-out-date]').val()) == '') {
+            if ($.trim($('.tf-booking-form input[name=check-in-out-date]').val()) == '') {
 
                 if ($('#tf-required').length === 0) {
                     if($('.tf_booking-dates .tf_label-row').length === 1){
@@ -31,7 +31,7 @@
                             $('.tf_booking-dates .tf_label-row').append('<span id="tf-required" class="required"><b>' + tf_params.field_required + '</b></span>');
                         }
                     }else{
-                        $(".tf-check-in-out-date").trigger("click");
+                        $(".tf-booking-form .tf-check-in-out-date").trigger("click");
                     }
                 }
                 return;
@@ -53,18 +53,18 @@
             var tf_room_avail_nonce = $("input[name=tf_room_avail_nonce]").val();
             var post_id = $('input[name=post_id]').val();
             if (adult_field_type == "number" || adult_field_type == "tel") {
-                var adult = $('#adults').val();
+                var adult = $('.tf-booking-form #adults').val();
             } else {
                 var adult = $('select[name=adults] option').filter(':selected').val();
             }
             if (child_field_type == "number" || child_field_type == "tel") {
-                var child = $('#children').val();
+                var child = $('.tf-booking-form #children').val();
             } else {
                 var child = $('select[name=children] option').filter(':selected').val();
             }
             //var features = $('input[name=features]').filter(':checked').val();
-            var children_ages = $('input[name=children_ages]').val();
-            var check_in_out = $('input[name=check-in-out-date]').val();
+            var children_ages = $('.tf-booking-form input[name=children_ages]').val();
+            var check_in_out = $('.tf-booking-form input[name=check-in-out-date]').val();
 
             var data = {
                 action: 'tf_room_availability',
@@ -563,7 +563,7 @@
 
             // Close when clicking outside
             $(document).on('click', function (event) {
-                if (!$(event.target).closest("#tf-location").length) {
+                if (!$(event.target).closest(".tf-hotel-location").length) {
                     $("#tf-locationautocomplete-list").hide();
                 }
             });
@@ -580,7 +580,7 @@
             $("#tf-place-destination").val(location);
         });
     
-        $('#tf-location').on("keyup", function (e) {
+        $('.tf-hotel-location').on("keyup", function (e) {
             var tf_location = $(this).val();
             $("#tf-search-hotel").val(tf_location);
         });
@@ -604,12 +604,12 @@
             }
         });
 
+
         // Hotel location autocomplete
-        var hotel_location_input = document.getElementById("tf-location");
         var hotel_locations = tf_params.locations;
-        if (hotel_location_input) {
-            tourfic_autocomplete(hotel_location_input, hotel_locations);
-        }
+        $(".tf-hotel-location").each(function () {
+            tourfic_autocomplete(this, hotel_locations);
+        });
 
         /*
         * Hotel without payment booking
@@ -634,16 +634,6 @@
                 $this.closest('.tf-room').find("input[name=hotel_room_depo]").val(hotel_deposit);
             }
 
-            /*if ($(this).closest('.room-submit-wrap').find('input[name=room_id]').val()) {
-                var room_id = $(this).closest('.room-submit-wrap').find('input[name=room_id]').val();
-            } else {
-                var room_id = $("#hotel_roomid").val();
-            }
-            if ($(this).closest('.room-submit-wrap').find('input[name=unique_id]').val()) {
-                var unique_id = $(this).closest('.room-submit-wrap').find('input[name=unique_id]').val();
-            } else {
-                var unique_id = $("#hotel_room_uniqueid").val();
-            }*/
             var location = $('input[name=place]').val();
             var adult = $('input[name=adult]').val();
             var child = $('input[name=child]').val();
