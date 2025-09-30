@@ -998,7 +998,7 @@ function tf_tours_cart_item_custom_data( $item_data, $cart_item ) {
 		if ( $tour_date ) {
 			$item_data[] = array(
 				'key'   => esc_html__( 'Tour Date', 'tourfic' ),
-				'value' => gmdate( "F j, Y", strtotime( $tour_date ) ),
+				'value' => date_i18n( "F j, Y", strtotime( $tour_date ) ),
 			);
 		}
 		if($tour_time){
@@ -1085,7 +1085,7 @@ function tf_tour_custom_order_data( $item, $cart_item_key, $values, $order ) {
 		}
 	} elseif ( $tour_type && $tour_type == 'continuous' ) {
 		if ( $tour_date ) {
-			$item->update_meta_data( 'Tour Date', gmdate( "Y/m/d", strtotime( $tour_date ) ) );
+			$item->update_meta_data( 'Tour Date', date_i18n( "Y/m/d", strtotime( $tour_date ) ) );
 		}
 	}
 	if($tour_time){
