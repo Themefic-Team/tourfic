@@ -33,7 +33,7 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 	/* translators: %s is the hotel name */
 	'title' => sprintf( esc_html__( '%s Settings', 'tourfic' ), $hotel_name ),
 	'post_type' => 'tf_hotel',
-	'sections'  => array(
+	'sections'  => apply_filters( 'tf_hotels_opt_sections', array(
 		'general' => array(
 			'title'  => esc_html__( 'General', 'tourfic' ),
 			'icon'   => 'fa fa-cog',
@@ -713,5 +713,5 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 				),
 			),
 		),
-	),
+	)),
 ) );
