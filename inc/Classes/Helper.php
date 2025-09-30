@@ -85,6 +85,12 @@ class Helper {
         add_action( 'wp_ajax_tf_archive_gallery_popup_qv', array( $this, 'tf_archive_gallery_popup_qv_callback' ) );
 		add_action( 'wp_ajax_nopriv_tf_archive_gallery_popup_qv', array( $this, 'tf_archive_gallery_popup_qv_callback' ) );
 
+        add_action( 'wp_head', function() {
+            if ( is_page_template( 'tf-search' ) ) {
+                echo '<meta name="robots" content="noindex,follow">';
+            }
+        });
+
 	}
 
 	static function tfopt( $option = '', $default = null ) {
