@@ -1949,7 +1949,7 @@ class Hotel {
 										<div class="tf_acrselection-wrap">
 											<div class="tf_acrselection-inner">
 												<div class="tf_acrselection">
-													<div class="acr-label"><?php esc_html( $adults_name . 's', 'tourfic' ); ?></div>
+													<div class="acr-label"><?php echo esc_html( $adults_name . 's', 'tourfic' ); ?></div>
 													<div class="acr-select">
 														<div class="acr-dec">-</div>
 														<input type="number" name="adults" id="adults" min="1" value="1" readonly>
