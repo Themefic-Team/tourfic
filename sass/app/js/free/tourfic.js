@@ -530,20 +530,21 @@
         $(document).on('submit', '.tf_archive_search_result', function (e) {
             e.preventDefault();
 
-            checked = $('#check-in-out-date').val();
+            checked = $(this).find('#check-in-out-date').val();
+
             var checkedArr = checked.split(' - ');
             var checkin = checkedArr[0];
             var checkout = checkedArr[1];
-            var posttype = $('.tf-post-type').val();
+            var posttype = $(this).find('.tf-post-type').val();
 
 
             if ($.trim(checkin) === '' && tf_params.date_hotel_search && posttype === 'tf_hotel') {
 
-                if ($('#tf-required').length === 0) {
-                    if($('.tf_booking-dates .tf_label-row').length === 1){
-                        $('.tf_booking-dates .tf_label-row').append('<span id="tf-required" class="required" style="color:white;"><b>' + tf_params.field_required + '</b></span>');
+                if ($(this).find('#tf-required').length === 0) {
+                    if($(this).find('.tf_booking-dates .tf_label-row').length === 1){
+                        $(this).find('.tf_booking-dates .tf_label-row').append('<span id="tf-required" class="required" style="color:white;"><b>' + tf_params.field_required + '</b></span>');
                     }else{
-                        $("#check-in-out-date").trigger("click");
+                        $(this).find("#check-in-out-date").trigger("click");
                     }
                 }
                 return;
@@ -551,11 +552,11 @@
 
             if ($.trim(checkin) === '' && tf_params.date_tour_search && posttype === 'tf_tours') {
 
-                if ($('#tf-required').length === 0) {
-                    if($('.tf_booking-dates .tf_label-row').length === 1){
-                        $('.tf_booking-dates .tf_label-row').append('<span id="tf-required" class="required" style="color:white;"><b>' + tf_params.field_required + '</b></span>');
+                if ($(this).find('#tf-required').length === 0) {
+                    if($(this).find('.tf_booking-dates .tf_label-row').length === 1){
+                        $(this).find('.tf_booking-dates .tf_label-row').append('<span id="tf-required" class="required" style="color:white;"><b>' + tf_params.field_required + '</b></span>');
                     }else{
-                        $("#check-in-out-date").trigger("click");
+                        $(this).find("#check-in-out-date").trigger("click");
                     }
                 }
                 return;
@@ -563,11 +564,11 @@
 
             if ($.trim(checkin) === '' && tf_params.date_apartment_search && posttype === 'tf_apartment') {
 
-                if ($('#tf-required').length === 0) {
-                    if($('.tf_booking-dates .tf_label-row').length === 1){
-                        $('.tf_booking-dates .tf_label-row').append('<span id="tf-required" class="required" style="color:white;"><b>' + tf_params.field_required + '</b></span>');
+                if ($(this).find('#tf-required').length === 0) {
+                    if($(this).find('.tf_booking-dates .tf_label-row').length === 1){
+                        $(this).find('.tf_booking-dates .tf_label-row').append('<span id="tf-required" class="required" style="color:white;"><b>' + tf_params.field_required + '</b></span>');
                     }else{
-                        $("#check-in-out-date").trigger("click");
+                        $(this).find("#check-in-out-date").trigger("click");
                     }
                 }
                 return;
@@ -1355,9 +1356,9 @@
             let wrap = thisEml.closest('.tf_selectperson-wrap');
         
             if (thisVal > 1) {
-                wrap.find('.adults-text').text(thisVal + " " + tf_params.adult + 's');
+                $('.tf_selectperson-wrap').find('.adults-text').text(thisVal + " " + tf_params.adult + 's');
             } else {
-                wrap.find('.adults-text').text(thisVal + " " + tf_params.adult);
+                $('.tf_selectperson-wrap').find('.adults-text').text(thisVal + " " + tf_params.adult);
             }
         });        
 
@@ -1370,9 +1371,9 @@
             let wrap = thisEml.closest('.tf_selectperson-wrap');
         
             if (thisVal > 1) {
-                wrap.find('.child-text').text(thisVal + " " + tf_params.children + 's');
+                $('.tf_selectperson-wrap').find('.child-text').text(thisVal + " " + tf_params.children + 's');
             } else {
-                wrap.find('.child-text').text(thisVal + " " + tf_params.children);
+                $('.tf_selectperson-wrap').find('.child-text').text(thisVal + " " + tf_params.children);
             }
         });
 
@@ -1385,9 +1386,9 @@
             let wrap = thisEml.closest('.tf_selectperson-wrap');
         
             if (thisVal > 1) {
-                wrap.find('.infant-text').text(thisVal + " " + tf_params.infant + 's');
+                $('.tf_selectperson-wrap').find('.infant-text').text(thisVal + " " + tf_params.infant + 's');
             } else {
-                wrap.find('.infant-text').text(thisVal + " " + tf_params.infant);
+                $('.tf_selectperson-wrap').find('.infant-text').text(thisVal + " " + tf_params.infant);
             }
         });
 
@@ -2429,21 +2430,24 @@
         })
 
         $(document).ready(function () {
-            if ($('input#infant').length) {
-                var guest = Number($('input#adults').val() ? $('input#adults').val() : 0) + Number($('input#children').val() ? $('input#children').val() : 0) + Number($('input#infant').val() ? $('input#infant').val() : 0);
-            } else {
-                var guest = Number($('input#adults').val() ? $('input#adults').val() : 0) + Number($('input#children').val() ? $('input#children').val() : 0);
-                var adult = Number($('input#adults').val() ? $('input#adults').val() : 0);
-                var children = Number($('input#children').val() ? $('input#children').val() : 0);
-            }
+            $(".tf_acrselection-wrap").each(function () {
+                const guestInfo = $(this).closest('.tf-booking-form-guest-and-room');
+                if (guestInfo.find('input#infant').length) {
+                    var guest = Number(guestInfo.find('input#adults').val() ? guestInfo.find('input#adults').val() : 0) + Number(guestInfo.find('input#children').val() ? guestInfo.find('input#children').val() : 0) + Number(guestInfo.find('input#infant').val() ? guestInfo.find('input#infant').val() : 0);
+                } else {
+                    var guest = Number(guestInfo.find('input#adults').val() ? guestInfo.find('input#adults').val() : 0) + Number(guestInfo.find('input#children').val() ? guestInfo.find('input#children').val() : 0);
+                    var adult = Number(guestInfo.find('input#adults').val() ? guestInfo.find('input#adults').val() : 0);
+                    var children = Number(guestInfo.find('input#children').val() ? guestInfo.find('input#children').val() : 0);
+                }
 
-            if (guest.toString().length < 2) {
-                guest = '0' + guest;
-            }
+                if (guest.toString().length < 2) {
+                    guest = '0' + guest;
+                }
 
-            $('span.tf-guest').html(guest);
-            $('span.tf-adult').html(adult);
-            $('span.tf-children').html(children);
+                guestInfo.find('span.tf-guest').html(guest);
+                guestInfo.find('span.tf-adult').html(adult);
+                guestInfo.find('span.tf-children').html(children);
+            })
         })
 
         $(document).on("mouseup", function (e) {

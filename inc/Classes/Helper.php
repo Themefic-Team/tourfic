@@ -750,9 +750,9 @@ class Helper {
 			$room = ! empty( $_GET['room'] ) ? sanitize_text_field( wp_unslash( $_GET['room'] ) ) : 0;
 		}
 
-		$adult      = ! empty( $_GET['adults'] ) ? sanitize_text_field( wp_unslash( $_GET['adults'] ) ) : 0;
-		$children   = ! empty( $_GET['children'] ) ? sanitize_text_field( wp_unslash( $_GET['children'] ) ) : 0;
-		$infant     = ! empty( $_GET['infant'] ) ? sanitize_text_field( wp_unslash( $_GET['infant'] ) ) : 0;
+		$adult      = ! empty( $_GET['adults'] ) ? absint( wp_unslash( $_GET['adults'] ) ) : 0;
+		$children   = ! empty( $_GET['children'] ) ? absint( wp_unslash( $_GET['children'] ) ) : 0;
+		$infant     = ! empty( $_GET['infant'] ) ? absint( wp_unslash( $_GET['infant'] ) ) : 0;
 		$date       = ! empty( $_GET['check-in-out-date'] ) ? sanitize_text_field( wp_unslash( $_GET['check-in-out-date'] ) ) : '';
 		$startprice = ! empty( $_GET['from'] ) ? sanitize_text_field( wp_unslash( $_GET['from'] ) ) : '';
 		$endprice   = ! empty( $_GET['to'] ) ? sanitize_text_field( wp_unslash( $_GET['to'] ) ) : '';
@@ -1151,9 +1151,9 @@ class Helper {
 							<?php self::tf_flatpickr_locale( "root" ); ?>
 
                             $(".tf-archive-template__two .tf-booking-date-wrap").on("click", function () {
-                                $("#check-in-out-date").trigger("click");
+                                $(".tf-archive-template__two #check-in-out-date").trigger("click");
                             });
-                            $("#check-in-out-date").flatpickr({
+                            $(".tf-archive-template__two #check-in-out-date").flatpickr({
                                 enableTime: false,
                                 mode: "range",
                                 dateFormat: "Y/m/d",
@@ -1227,9 +1227,9 @@ class Helper {
 							<?php self::tf_flatpickr_locale( "root" ); ?>
 
                             $(".tf-archive-template__two .tf-booking-date-wrap").on("click", function () {
-                                $("#check-in-out-date").trigger("click");
+                                $(".tf-archive-template__two #check-in-out-date").trigger("click");
                             });
-                            $("#check-in-out-date").flatpickr({
+                            $(".tf-archive-template__two #check-in-out-date").flatpickr({
                                 enableTime: false,
                                 mode: "range",
                                 dateFormat: "Y/m/d",
@@ -2202,10 +2202,9 @@ class Helper {
                                     <?php self::tf_flatpickr_locale( "root" ); ?>
 
                                     $(".tf-archive-booking-form__style-2 .tf-booking-date-wrap").on("click", function () {
-
-                                        $("#check-in-out-date").trigger("click");
+                                        $(".tf-archive-booking-form__style-2 #check-in-out-date").trigger("click");
                                     });
-                                    $("#check-in-out-date").flatpickr({
+                                    $(".tf-archive-booking-form__style-2 #check-in-out-date").flatpickr({
                                         enableTime: false,
                                         mode: "range",
                                         dateFormat: "Y/m/d",
@@ -2278,9 +2277,9 @@ class Helper {
 
                                     $(".tf-archive-booking-form__style-2 .tf-booking-date-wrap").on("click", function () {
 
-                                        $("#check-in-out-date").trigger("click");
+                                        $(".tf-archive-booking-form__style-2 #check-in-out-date").trigger("click");
                                     });
-                                    $("#check-in-out-date").flatpickr({
+                                    $(".tf-archive-booking-form__style-2 #check-in-out-date").flatpickr({
                                         enableTime: false,
                                         mode: "range",
                                         dateFormat: "Y/m/d",
