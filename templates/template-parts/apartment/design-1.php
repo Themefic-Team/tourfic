@@ -132,35 +132,37 @@ use \Tourfic\Classes\Apartment\Pricing as Apt_Pricing;
             <!-- menu section Start -->
             <div class="tf-details-menu">
                 <ul>
+                    <?php if( !empty(Helper::get_status_by_label('Description', 'apartment')) ){ ?>
                     <li><a class="tf-hashlink" href="#tf-apartment-overview">
                         <?php esc_html_e("Overview", "tourfic"); ?>
                     </a></li>
+                    <?php } ?>
 
-                    <?php if( !empty( $meta["rooms"])) : ?>
+                    <?php if( !empty(Helper::get_status_by_label('Apartment Rooms', 'apartment')) && !empty( $meta["rooms"])) : ?>
                         <li><a href="#tf-apartment-rooms">
                             <?php esc_html_e("Rooms", "tourfic"); ?>
                         </a></li>
                     <?php endif; ?>
 
-                    <?php if( !empty( $meta["house_rules"])) : ?>
+                    <?php if( !empty(Helper::get_status_by_label('House Rules', 'apartment')) && !empty( $meta["house_rules"])) : ?>
                         <li><a href="#tf-apartment-rules">
                             <?php esc_html_e("House Rules", "tourfic"); ?>
                         </a></li>
                     <?php endif; ?>
 
-                    <?php if(!empty( $meta["faq"])) : ?>
+                    <?php if(!empty(Helper::get_status_by_label('FAQ', 'apartment')) && !empty( $meta["faq"])) : ?>
                         <li><a href="#tf-apartment-faq">
                             <?php esc_html_e("FAQ's", "tourfic"); ?>
                         </a></li>
                     <?php endif; ?>
 
-                    <?php if( !empty($comments) ) : ?>
+                    <?php if( !empty(Helper::get_status_by_label('Review', 'apartment')) && !empty($comments) ) : ?>
                         <li><a href="#tf-apartment-reviews">
                             <?php esc_html_e("Reviews", "tourfic"); ?>
                         </a></li>
                     <?php endif; ?>
 
-                    <?php if( !empty( $meta["terms_and_conditions"]) ) : ?>
+                    <?php if( !empty(Helper::get_status_by_label('Terms & Conditions', 'apartment')) && !empty( $meta["terms_and_conditions"]) ) : ?>
                         <li><a href="#tf-apartment-policies">
                             <?php esc_html_e("Policies", "tourfic"); ?>
                         </a></li>
@@ -228,18 +230,7 @@ use \Tourfic\Classes\Apartment\Pricing as Apt_Pricing;
                         <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $address ); ?>&output=embed" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                     <?php } elseif( $address && $tf_openstreet_map=="default" && !empty($address_latitude) && !empty($address_longitude)) {
                     ?>
-                        <div id="hotel-location" style="height: 250px"></div>
-                        <script>
-                            const map = L.map('hotel-location').setView([<?php echo esc_html( $address_latitude ); ?>, <?php echo esc_html( $address_longitude ); ?>], <?php echo esc_html( $address_zoom ); ?>);
-
-                            const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                                maxZoom: 20,
-                                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                            }).addTo(map);
-
-                            const marker = L.marker([<?php echo esc_html( $address_latitude ); ?>, <?php echo esc_html( $address_longitude ); ?>], {alt: '<?php echo esc_html( $address ); ?>'}).addTo(map)
-                                .bindPopup('<?php echo esc_html( $address ); ?>');
-                        </script>
+                        <div id="apartment-location" style="height: 250px"></div>
                     <?php }else{ ?>
                         <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $address ); ?>&output=embed" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                     <?php } ?>
@@ -249,18 +240,7 @@ use \Tourfic\Classes\Apartment\Pricing as Apt_Pricing;
                         <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $address ); ?>&output=embed" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                     <?php } elseif( $address && $tf_openstreet_map=="default" && !empty($address_latitude) && !empty($address_longitude)) {
                     ?>
-                        <div id="hotel-location" style="height: 250px"></div>
-                        <script>
-                            const map = L.map('hotel-location').setView([<?php echo esc_html( $address_latitude ); ?>, <?php echo esc_html( $address_longitude ); ?>], <?php echo esc_html( $address_zoom ); ?>);
-
-                            const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                                maxZoom: 20,
-                                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                            }).addTo(map);
-
-                            const marker = L.marker([<?php echo esc_html( $address_latitude ); ?>, <?php echo esc_html( $address_longitude ); ?>], {alt: '<?php echo esc_html( $address ); ?>'}).addTo(map)
-                                .bindPopup('<?php echo esc_html( $address ); ?>');
-                        </script>
+                        <div id="apartment-location" style="height: 250px"></div>
                     <?php }else{ ?>
                         <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $address ); ?>&output=embed" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                     <?php } ?>

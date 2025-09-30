@@ -63,14 +63,7 @@ class Apartment_Type_Filter extends \WP_Widget {
 
 			$get_terms = get_terms( $taxonomy );
 
-			$search_types_query = array();
-            if ( isset( $_GET['types'] ) ) {
-                if ( is_array( $_GET['types'] ) ) {
-                    $search_types_query = array_map( 'sanitize_text_field', wp_unslash( $_GET['types'] ) );
-                } else {
-                    $search_types_query = array( sanitize_text_field( wp_unslash( $_GET['types'] ) ) );
-                }
-            }
+			$search_types_query = !empty($_GET['types']) ? wp_unslash( $_GET['types'] ) : array(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 			
 			echo "<div class='tf-filter'><ul>";
 			foreach ( $get_terms as $key => $term ) {

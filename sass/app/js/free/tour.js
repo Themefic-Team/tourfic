@@ -188,10 +188,10 @@
             }
         })
 
-        $(".tf-itinerary-single-meta li .fa-info-circle, .ininerary-other-info li .fa-info-circle").on("click", function (e) {
+        $(".tf-itinerary-single-meta li a, .ininerary-other-info li a").on("click", function (e) {
             e.preventDefault();
             e.stopPropagation();
-            var id = $(this).parent().attr("id");
+            var id = $(this).attr("id");
             $(".tour-itinerary-sleep").each(function () {
                 var elementId = $(this).attr("id"); 
                 if (id === elementId) {
@@ -942,6 +942,18 @@
             }
             form.submit();
         });
+
+        if ($('#tour-location').length) {
+            const map = L.map('tour-location').setView([tf_params.tour_form_data.location_latitude, tf_params.tour_form_data.location_longitude], tf_params.tour_form_data.location_zoom);
+            
+            const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 20,
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map);
+
+            const marker = L.marker([tf_params.tour_form_data.location_latitude, tf_params.tour_form_data.location_longitude], {alt: tf_params.tour_form_data.location}).addTo(map)
+                .bindPopup(tf_params.tour_form_data.location);
+        }
 
     });
 

@@ -409,8 +409,27 @@ h3.section-heading {
     }
 }
 #tf_car_booking{
+    .tf_homepage-booking{
+        @media #{$max991}{
+            display: inherit;
+            height: auto;
+        }
+    }
     .tf_destination-wrap {
         width: auto;
+        @media #{$max991}{
+            padding: 10px 5px;
+            width: 100%;
+            display: block;
+            border-bottom: 1px solid gray;
+        }
+    }
+    .tf_submit-wrap {
+        @media #{$max991}{
+            width: 100%;
+            display: block;
+            border-radius: 0 0 8px 8px;
+        }
     }
 }
 .tf_selectdate-wrap {
@@ -2235,5 +2254,12 @@ li.tf-filter-item {
                 }
             }
         }
+    }
+}
+
+.jconfirm .jconfirm-box {
+    @media #{$max575} {
+        width: auto !important;
+        max-width: 95%;
     }
 }

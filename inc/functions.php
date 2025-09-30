@@ -408,7 +408,28 @@ if(!function_exists('tf_tour_date_format_changer')) {
 		} else return;
 	}
 }
+function tf_normalize_date( $date ) {
+    $date = sanitize_text_field( $date );
+    if ( empty( $date ) ) {
+        return '';
+    }
 
+    // List of supported formats
+    $formats = [
+        'Y/m/d', 'd/m/Y', 'm/d/Y',
+        'Y-m-d', 'd-m-Y', 'm-d-Y',
+        'Y.m.d', 'd.m.Y', 'm.d.Y'
+    ];
+
+    foreach ( $formats as $format ) {
+        $dt = DateTime::createFromFormat( $format, $date );
+        if ( $dt && $dt->format($format) === $date ) {
+            return $dt->format( 'Y/m/d' ); // normalize
+        }
+    }
+
+    return ''; // return empty if no match
+}
 /**
  * Remove room order ids
  */

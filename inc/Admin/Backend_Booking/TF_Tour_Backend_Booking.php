@@ -90,7 +90,7 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 			'label'       => esc_html__( 'Tour Time', 'tourfic' ),
 			'type'        => 'select',
 			'options'     => array(
-				'10:00 AM' => '10:00 AM',
+				'' => 'Select Time',
 			),
 			'placeholder' => esc_html__( 'Select Time', 'tourfic' ),
 			'field_width' => 50,

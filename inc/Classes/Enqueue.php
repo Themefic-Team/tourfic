@@ -224,10 +224,54 @@ class Enqueue {
 		global $post;
 		$post_id   = ! empty( $post->ID ) ? $post->ID : '';
 		$post_type = ! empty( $post->post_type ) ? $post->post_type : '';
+		if ( $post_type == 'tf_hotel' && ! empty( $post_id ) && ! is_post_type_archive( 'tf_hotel' ) ) {
+			$single_hotel_data = array();
+			$meta = get_post_meta( $post_id, 'tf_hotels_opt', true );
+			if( !empty($meta['map']) && Helper::tf_data_types($meta['map'])){
+				$single_hotel_data['address'] = !empty( Helper::tf_data_types($meta['map'])['address'] ) ? Helper::tf_data_types($meta['map'])['address'] : '';
+				$single_hotel_data['address_latitude'] = !empty( Helper::tf_data_types($meta['map'])['latitude'] ) ? Helper::tf_data_types($meta['map'])['latitude'] : '';
+				$single_hotel_data['address_longitude'] = !empty( Helper::tf_data_types($meta['map'])['longitude'] ) ? Helper::tf_data_types($meta['map'])['longitude'] : '';
+				$single_hotel_data['address_zoom'] = !empty( Helper::tf_data_types($meta['map'])['zoom'] ) ? Helper::tf_data_types($meta['map'])['zoom'] : '';
+			}
+		}
+
+		if ( $post_type == 'tf_apartment' && ! empty( $post_id ) && ! is_post_type_archive( 'tf_apartment' ) ) {
+			$single_apartment_data = array();
+			$meta = get_post_meta( $post_id, 'tf_apartment_opt', true );
+
+			if( !empty($meta['map']) && Helper::tf_data_types($meta['map'])){
+				$single_apartment_data['address'] = !empty( Helper::tf_data_types($meta['map'])['address'] ) ? Helper::tf_data_types($meta['map'])['address'] : '';
+				$single_apartment_data['address_latitude'] = !empty( Helper::tf_data_types($meta['map'])['latitude'] ) ? Helper::tf_data_types($meta['map'])['latitude'] : '';
+				$single_apartment_data['address_longitude'] = !empty( Helper::tf_data_types($meta['map'])['longitude'] ) ? Helper::tf_data_types($meta['map'])['longitude'] : '';
+				$single_apartment_data['address_zoom'] = !empty( Helper::tf_data_types($meta['map'])['zoom'] ) ? Helper::tf_data_types($meta['map'])['zoom'] : '';
+			}
+		}
+
+		if ( $post_type == 'tf_carrental' && ! empty( $post_id ) && ! is_post_type_archive( 'tf_carrental' ) ) {
+			$single_car_data = array();
+			$meta = get_post_meta( $post_id, 'tf_carrental_opt', true );
+			if( !empty($meta['map']) && Helper::tf_data_types($meta['map'])){
+				$single_car_data['address'] = !empty( Helper::tf_data_types($meta['map'])['address'] ) ? Helper::tf_data_types($meta['map'])['address'] : '';
+
+				$single_car_data['address_latitude'] = !empty( Helper::tf_data_types($meta['map'])['latitude'] ) ? Helper::tf_data_types($meta['map'])['latitude'] : '';
+				$single_car_data['address_longitude'] = !empty( Helper::tf_data_types($meta['map'])['longitude'] ) ? Helper::tf_data_types($meta['map'])['longitude'] : '';
+				$single_car_data['address_zoom'] = !empty( Helper::tf_data_types($meta['map'])['zoom'] ) ? Helper::tf_data_types($meta['map'])['zoom'] : '';
+
+			}
+		}
 		if ( $post_type == 'tf_tours' && ! empty( $post_id ) && ! is_post_type_archive( 'tf_tours' ) ) {
 			$single_tour_form_data = array();
 
 			$meta                      = get_post_meta( $post_id, 'tf_tours_opt', true );
+			if( !empty($meta['location']) && Helper::tf_data_types($meta['location'])){
+				$single_tour_form_data['location'] = !empty( Helper::tf_data_types($meta['location'])['address'] ) ? Helper::tf_data_types($meta['location'])['address'] : '';
+
+				$single_tour_form_data['location_latitude'] = !empty( Helper::tf_data_types($meta['location'])['latitude'] ) ? Helper::tf_data_types($meta['location'])['latitude'] : '';
+				$single_tour_form_data['location_longitude'] = !empty( Helper::tf_data_types($meta['location'])['longitude'] ) ? Helper::tf_data_types($meta['location'])['longitude'] : '';
+				$single_tour_form_data['location_zoom'] = !empty( Helper::tf_data_types($meta['location'])['zoom'] ) ? Helper::tf_data_types($meta['location'])['zoom'] : '';
+
+			}
+
 			$tf_tour_layout_conditions = ! empty( $meta['tf_single_tour_layout_opt'] ) ? $meta['tf_single_tour_layout_opt'] : 'global';
 			if ( "single" == $tf_tour_layout_conditions ) {
 				$tf_tour_single_template = ! empty( $meta['tf_single_tour_template'] ) ? $meta['tf_single_tour_template'] : 'design-1';
@@ -479,6 +523,11 @@ class Enqueue {
 				'tf_car_max_seat' =>  isset( $tf_car_min_max_price['max_seat'] ) ? $tf_car_min_max_price['max_seat'] : 0,
 				'map_marker_width' => !empty(Helper::tfopt( 'map_marker_width' )) ? Helper::tfopt( 'map_marker_width' ) : '35',
 				'map_marker_height' => !empty(Helper::tfopt( 'map_marker_height' )) ? Helper::tfopt( 'map_marker_height' ) : '45',
+				'single_hotel_data' => isset( $single_hotel_data ) ? $single_hotel_data : array(),
+				'single_apartment_data' => isset( $single_apartment_data ) ? $single_apartment_data : array(),
+				'single_car_data' => isset( $single_car_data ) ? $single_car_data : array(),
+				'car_mobile_button_hide' => esc_html__( 'Hide', 'tourfic' ),
+				'car_mobile_button_book_now' => esc_html__( 'Book Now', 'tourfic' ),
 			)
 		);
 

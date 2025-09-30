@@ -15,7 +15,7 @@ if($highlights){ ?>
         <div class="ft-highlights-details">
             <h2 class="tf-section-title"><?php echo !empty($meta['highlights-section-title']) ? esc_html($meta['highlights-section-title']) : ''; ?></h2>
             <div class="highlights-list">
-            <p><?php echo wp_kses_post($highlights); ?></p>
+            <?php echo wp_kses_post($highlights); ?>
             </div>
         </div>
     </div>

@@ -27,12 +27,21 @@
         });
 
         // Tabs Section
-        $('.tf-details-menu ul li').on("click", function () {
-            var $this = $(this);
-            $currentmenu = $this.attr('data-menu');
+        $(document).on('click', '.tf-details-menu ul li', function (e) {
+            var $clicked = $(this);
+            var key = String( $clicked.data('menu') || $clicked.attr('data-menu') ).trim();
+
+            if ( key === '' ) {
+                return;
+            }
+
+            // remove .active from all menu items in all menus
             $('.tf-details-menu ul li').removeClass('active');
 
-            $('.tf-details-menu ul li[data-menu="' + $currentmenu + '"]').addClass('active');
+            // add .active to every li whose data-menu matches the clicked one
+            $('.tf-details-menu ul li').filter(function () {
+                return String( $(this).data('menu') || $(this).attr('data-menu') ).trim() === key;
+            }).addClass('active');
         });
         
         // Car Location Autocomplete
@@ -1072,14 +1081,24 @@
             $('.tf-date-select-box').slideToggle( function () {
                 // Check visibility after the toggle animation completes
                 if ($(this).is(':visible')) {
-                    $button.text('Hide');
+                    $button.text(tf_params.car_mobile_button_hide);
                 } else {
-                    $button.text('Book Now');
+                    $button.text(tf_params.car_mobile_button_book_now);
                 }
             });
         });
 
-    
+        if ($('#car-location').length) {
+            const map = L.map('car-location').setView([tf_params.single_car_data.address_latitude, tf_params.single_car_data.address_longitude], tf_params.single_car_data.address_zoom);
+
+            const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 20,
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map);
+
+            const marker = L.marker([tf_params.single_car_data.address_latitude, tf_params.single_car_data.address_longitude], {alt: tf_params.single_car_data.address}).addTo(map)
+                .bindPopup(tf_params.single_car_data.address);
+        }
     });
 
 })(jQuery, window);

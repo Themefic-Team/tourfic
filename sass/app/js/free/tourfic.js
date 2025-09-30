@@ -1865,8 +1865,10 @@
         * @author Jahid
         */
         let tf_hasErrorsFlag = false;
+        let tf_firstErrorElement = null; // track the first error field
         $('body').on('click', '.tf-traveller-error', function (e) {
             let hasErrors = [];
+            tf_firstErrorElement = null; // reset before validation
             let $this = $(this).closest('.tf-withoutpayment-booking');
             $('.error-text').text("");
             $this.find('.tf-single-travel').each(function () {
@@ -1881,6 +1883,7 @@
                             } else {
                                 errorContainer.removeClass('error-visible');
                             }
+                            if (!tf_firstErrorElement) tf_firstErrorElement = $(this); // save first invalid field
                         }
                     }
                 });
@@ -1898,6 +1901,7 @@
                             } else {
                                 errorContainer.removeClass('error-visible');
                             }
+                            if (!tf_firstErrorElement) tf_firstErrorElement = $(this);
                         }
                     }
                 });
@@ -1905,6 +1909,13 @@
             });
             if (hasErrors.includes(true)) {
                 tf_hasErrorsFlag = true;
+                if (tf_firstErrorElement) {
+                    $('html, body').animate({
+                        scrollTop: tf_firstErrorElement.offset().top - 100
+                    }, 500, function () {
+                        tf_firstErrorElement.focus(); // focus after scrolling
+                    });
+                }
                 return false;
             }
             tf_hasErrorsFlag = false;
@@ -1913,6 +1924,7 @@
         // Booking Confirmation Form Validation
         $('body').on('click', '.tf-book-confirm-error, .tf-hotel-book-confirm-error', function (e) {
             let hasErrors = [];
+            tf_firstErrorElement = null;
             let $this = $(this).closest('.tf-withoutpayment-booking');
             $('.error-text').text("");
             $this.find('.tf-confirm-fields').each(function () {
@@ -1927,6 +1939,7 @@
                             } else {
                                 errorContainer.removeClass('error-visible');
                             }
+                            if (!tf_firstErrorElement) tf_firstErrorElement = $(this);
                         }
                     }
                 });
@@ -1944,12 +1957,20 @@
                             } else {
                                 errorContainer.removeClass('error-visible');
                             }
+                            if (!tf_firstErrorElement) tf_firstErrorElement = $(this);
                         }
                     }
                 });
             });
             if (hasErrors.includes(true)) {
                 tf_hasErrorsFlag = true;
+                if (tf_firstErrorElement) {
+                    $('html, body').animate({
+                        scrollTop: tf_firstErrorElement.offset().top - 100
+                    }, 500, function () {
+                        tf_firstErrorElement.focus(); // focus after scrolling
+                    });
+                }
                 return false;
             }
         });
@@ -2089,6 +2110,13 @@
                         }
                         $('.tf-withoutpayment-booking').addClass('show');
                     }
+
+                    $('.tf-date-picker').each(function() {
+                        let format = $(this).data('format') || "Y/m/d";
+                        flatpickr(this, {
+                            dateFormat: format
+                        });
+                    });
                 },
                 error: function (data) {
                     console.log(data);
@@ -2932,6 +2960,7 @@
                 }
             }
         });
+
     });
 
 })(jQuery, window);
