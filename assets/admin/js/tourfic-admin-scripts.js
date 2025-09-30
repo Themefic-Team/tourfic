@@ -1721,6 +1721,12 @@
             });
         });
 
+        $('.tf-date-picker').each(function() {
+            let format = $(this).data('format') || "Y/m/d";
+            flatpickr(this, {
+                dateFormat: format
+            });
+        });
     });
 
 })(jQuery);

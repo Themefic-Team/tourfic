@@ -4848,6 +4848,22 @@ class Tour {
 
 			$response['traveller_info']    = '';
 			$response['traveller_summery'] = '';
+			$date_format = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
+
+			// Map PHP date format to JS-friendly placeholder
+			$placeholders = array(
+				'Y/m/d' => 'YYYY/MM/DD',
+				'd/m/Y' => 'DD/MM/YYYY',
+				'm/d/Y' => 'MM/DD/YYYY',
+				'Y-m-d' => 'YYYY-MM-DD',
+				'd-m-Y' => 'DD-MM-YYYY',
+				'm-d-Y' => 'MM-DD-YYYY',
+				'Y.m.d' => 'YYYY.MM.DD',
+				'd.m.Y' => 'DD.MM.YYYY',
+				'm.d.Y' => 'MM.DD.YYYY',
+			);
+			$placeholder = isset( $placeholders[ $date_format ] ) ? $placeholders[ $date_format ] : 'YYYY/MM/DD';
+
 			for ( $traveller_in = 1; $traveller_in <= $total_people; $traveller_in ++ ) {
 				$response['traveller_info'] .= '<div class="tf-single-tour-traveller tf-single-travel">
                 <h4>' . sprintf( esc_html__( 'Traveler ', 'tourfic' ) ) . $traveller_in . '</h4>
@@ -4860,7 +4876,12 @@ class Tour {
                     </div>
                     <div class="traveller-single-info">
                         <label for="tf_dob' . $traveller_in . '">' . sprintf( esc_html__( 'Date of birth', 'tourfic' ) ) . '</label>
-                        <input type="date" name="traveller[' . $traveller_in . '][tf_dob]" id="tf_dob' . $traveller_in . '" data-required="1" />
+                        <input type="text" class="tf-date-picker" 
+							name="traveller[' . $traveller_in . '][tf_dob]" 
+							id="tf_dob' . $traveller_in . '" 
+							data-required="1" 
+							placeholder="' . esc_attr( $placeholder ) . '" 
+							data-format="' . esc_attr( $date_format ) . '" />
                         <div class="error-text" data-error-for="tf_dob' . $traveller_in . '"></div>
                     </div>
                     <div class="traveller-single-info">
@@ -4871,12 +4892,21 @@ class Tour {
                     ';
 				} else {
 					foreach ( $traveller_info_fields as $field ) {
-						if ( "text" == $field['reg-fields-type'] || "email" == $field['reg-fields-type'] || "date" == $field['reg-fields-type'] ) {
+						if ( "text" == $field['reg-fields-type'] || "email" == $field['reg-fields-type'] ) {
 							$reg_field_required         = ! empty( $field['reg-field-required'] ) ? $field['reg-field-required'] : '';
 							$response['traveller_info'] .= '
                             <div class="traveller-single-info">
                                 <label for="' . $field['reg-field-name'] . $traveller_in . '">' . esc_html( $field['reg-field-label'] ) . '</label>
                                 <input type="' . $field['reg-fields-type'] . '" name="traveller[' . $traveller_in . '][' . $field['reg-field-name'] . ']" data-required="' . $reg_field_required . '" id="' . $field['reg-field-name'] . $traveller_in . '" />
+                                <div class="error-text" data-error-for="' . $field['reg-field-name'] . $traveller_in . '"></div>
+                            </div>';
+						}
+						if ( "date" == $field['reg-fields-type'] ) {
+							$reg_field_required         = ! empty( $field['reg-field-required'] ) ? $field['reg-field-required'] : '';
+							$response['traveller_info'] .= '
+                            <div class="traveller-single-info">
+                                <label for="' . $field['reg-field-name'] . $traveller_in . '">' . esc_html( $field['reg-field-label'] ) . '</label>
+                                <input type="text" class="tf-date-picker" name="traveller[' . $traveller_in . '][' . $field['reg-field-name'] . ']" data-required="' . $reg_field_required . '" id="' . $field['reg-field-name'] . $traveller_in . '" placeholder="' . esc_attr( $placeholder ) . '" data-format="' . esc_attr( $date_format ) . '" />
                                 <div class="error-text" data-error-for="' . $field['reg-field-name'] . $traveller_in . '"></div>
                             </div>';
 						}

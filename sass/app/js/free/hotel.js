@@ -719,6 +719,13 @@
                         }
                         $this.closest(".room-submit-wrap").siblings(".tf-withoutpayment-booking").find('.tf-control-pagination:first-child').show()
                     }
+
+                    $('.tf-date-picker').each(function() {
+                        let format = $(this).data('format') || "Y/m/d";
+                        flatpickr(this, {
+                            dateFormat: format
+                        });
+                    });
                 },
                 error: function (data) {
                     console.log(data);
