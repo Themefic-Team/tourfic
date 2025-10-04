@@ -371,7 +371,7 @@ function tf_car_archive_single_item($pickup = '', $dropoff = '', $pickup_date = 
 			<?php if($show_price == 'yes') : ?>
 			<div class="tf-price-info">
 				<?php
-				$total_prices = Pricing::set_total_price($meta, $pickup_date, $dropoff_date, $pickup_time, $dropoff_time);
+				$total_prices = Pricing::set_total_price($meta, $pickup_date, $dropoff_date, $pickup_time, $dropoff_time, $tf_archive = true);
 				?>
 				<h3><?php echo $total_prices['sale_price'] ? wp_kses_post(wc_price($total_prices['sale_price'])) : '' ?> <small>/ <?php echo esc_html($total_prices['type']); ?></small></h3>
 			</div>
@@ -1013,8 +1013,8 @@ function tf_car_price_calculation_callback() {
 	 * Get car meta values
 	 */
 	$post_id   = isset( $_POST['post_id'] ) ? intval( sanitize_text_field( $_POST['post_id'] ) ) : null;
-	$tf_pickup_date  = isset( $_POST['pickup_date'] ) ? sanitize_text_field( $_POST['pickup_date'] ) : '';
-	$tf_dropoff_date  = isset( $_POST['dropoff_date'] ) ? sanitize_text_field( $_POST['dropoff_date'] ) : '';
+	$tf_pickup_date  = isset( $_POST['pickup_date'] ) ? tf_normalize_date(sanitize_text_field( $_POST['pickup_date'] )) : '';
+	$tf_dropoff_date  = isset( $_POST['dropoff_date'] ) ? tf_normalize_date(sanitize_text_field( $_POST['dropoff_date'] )) : '';
 	$tf_pickup_time  = isset( $_POST['pickup_time'] ) ? sanitize_text_field( $_POST['pickup_time'] ) : '';
 	$tf_dropoff_time  = isset( $_POST['dropoff_time'] ) ? sanitize_text_field( $_POST['dropoff_time'] ) : '';
 

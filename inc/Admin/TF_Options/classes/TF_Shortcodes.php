@@ -166,7 +166,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                     <div class="tf-shortcode-field copy-shortcode">
                                         <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly/>
                                         <button type="button" class="tf-copy-btn tf-btn">
-                                            <span class="dashicons dashicons-category"></span>
+                                            <span class="dashicons dashicons-admin-page"></span>
                                         </button>
                                     </div>
                                 </div>
@@ -281,7 +281,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                     <div class="tf-shortcode-field copy-shortcode">
                                         <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly/>
                                         <button type="button" class="tf-copy-btn tf-btn">
-                                            <span class="dashicons dashicons-category"></span>
+                                            <span class="dashicons dashicons-admin-page"></span>
                                         </button>
                                     </div>
                                 </div>
@@ -350,7 +350,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                     <div class="tf-shortcode-field copy-shortcode">
                                         <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly/>
                                         <button type="button" class="tf-copy-btn tf-btn">
-                                            <span class="dashicons dashicons-category"></span>
+                                            <span class="dashicons dashicons-admin-page"></span>
                                         </button>
                                     </div>
                                 </div>
@@ -438,7 +438,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                     <div class="tf-shortcode-field copy-shortcode">
                                         <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly/>
                                         <button type="button" class="tf-copy-btn tf-btn">
-                                            <span class="dashicons dashicons-category"></span>
+                                            <span class="dashicons dashicons-admin-page"></span>
                                         </button>
                                     </div>
                                 </div>
@@ -529,7 +529,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                     <div class="tf-shortcode-field copy-shortcode">
                                         <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly/>
                                         <button type="button" class="tf-copy-btn tf-btn">
-                                            <span class="dashicons dashicons-category"></span>
+                                            <span class="dashicons dashicons-admin-page"></span>
                                         </button>
                                     </div>
                                 </div>
@@ -623,7 +623,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                     <div class="tf-shortcode-field copy-shortcode">
                                         <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly/>
                                         <button type="button" class="tf-copy-btn tf-btn">
-                                            <span class="dashicons dashicons-category"></span>
+                                            <span class="dashicons dashicons-admin-page"></span>
                                         </button>
                                     </div>
                                 </div>
@@ -710,7 +710,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                     <div class="tf-shortcode-field copy-shortcode">
                                         <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly/>
                                         <button type="button" class="tf-copy-btn tf-btn">
-                                            <span class="dashicons dashicons-category"></span>
+                                            <span class="dashicons dashicons-admin-page"></span>
                                         </button>
                                     </div>
                                 </div>
@@ -798,7 +798,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                     <div class="tf-shortcode-field copy-shortcode">
                                         <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly/>
                                         <button type="button" class="tf-copy-btn tf-btn">
-                                            <span class="dashicons dashicons-category"></span>
+                                            <span class="dashicons dashicons-admin-page"></span>
                                         </button>
                                     </div>
                                 </div>
@@ -889,7 +889,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                     <div class="tf-shortcode-field copy-shortcode">
                                         <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly/>
                                         <button type="button" class="tf-copy-btn tf-btn">
-                                            <span class="dashicons dashicons-category"></span>
+                                            <span class="dashicons dashicons-admin-page"></span>
                                         </button>
                                     </div>
                                 </div>
@@ -983,7 +983,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                     <div class="tf-shortcode-field copy-shortcode">
                                         <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly/>
                                         <button type="button" class="tf-copy-btn tf-btn">
-                                            <span class="dashicons dashicons-category"></span>
+                                            <span class="dashicons dashicons-admin-page"></span>
                                         </button>
                                     </div>
                                 </div>
@@ -1070,7 +1070,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                     <div class="tf-shortcode-field copy-shortcode">
                                         <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly/>
                                         <button type="button" class="tf-copy-btn tf-btn">
-                                            <span class="dashicons dashicons-category"></span>
+                                            <span class="dashicons dashicons-admin-page"></span>
                                         </button>
                                     </div>
                                 </div>
@@ -1158,7 +1158,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                     <div class="tf-shortcode-field copy-shortcode">
                                         <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly/>
                                         <button type="button" class="tf-copy-btn tf-btn">
-                                            <span class="dashicons dashicons-category"></span>
+                                            <span class="dashicons dashicons-admin-page"></span>
                                         </button>
                                     </div>
                                 </div>
@@ -1249,7 +1249,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                     <div class="tf-shortcode-field copy-shortcode">
                                         <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly/>
                                         <button type="button" class="tf-copy-btn tf-btn">
-                                            <span class="dashicons dashicons-category"></span>
+                                            <span class="dashicons dashicons-admin-page"></span>
                                         </button>
                                     </div>
                                 </div>
@@ -1343,7 +1343,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                     <div class="tf-shortcode-field copy-shortcode">
                                         <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly/>
                                         <button type="button" class="tf-copy-btn tf-btn">
-                                            <span class="dashicons dashicons-category"></span>
+                                            <span class="dashicons dashicons-admin-page"></span>
                                         </button>
                                     </div>
                                 </div>
@@ -1430,7 +1430,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                     <div class="tf-shortcode-field copy-shortcode">
                                         <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly/>
                                         <button type="button" class="tf-copy-btn tf-btn">
-                                            <span class="dashicons dashicons-category"></span>
+                                            <span class="dashicons dashicons-admin-page"></span>
                                         </button>
                                     </div>
                                 </div>
@@ -1509,7 +1509,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                     <div class="tf-shortcode-field copy-shortcode">
                                         <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_cars]" readonly/>
                                         <button type="button" class="tf-copy-btn tf-btn">
-                                            <span class="dashicons dashicons-category"></span>
+                                            <span class="dashicons dashicons-admin-page"></span>
                                         </button>
                                     </div>
                                 </div>
@@ -1600,7 +1600,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                     <div class="tf-shortcode-field copy-shortcode">
                                         <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_tours]" readonly/>
                                         <button type="button" class="tf-copy-btn tf-btn">
-                                            <span class="dashicons dashicons-category"></span>
+                                            <span class="dashicons dashicons-admin-page"></span>
                                         </button>
                                     </div>
                                 </div>
@@ -1697,7 +1697,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                     <div class="tf-shortcode-field copy-shortcode">
                                         <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_recent_cars]" readonly/>
                                         <button type="button" class="tf-copy-btn tf-btn">
-                                            <span class="dashicons dashicons-category"></span>
+                                            <span class="dashicons dashicons-admin-page"></span>
                                         </button>
                                     </div>
                                 </div>
@@ -1787,7 +1787,7 @@ if ( ! class_exists( 'TF_Shortcodes' ) ) {
                                     <div class="tf-shortcode-field copy-shortcode">
                                         <input type="text" id="tf-shortcode" name="tf_generated_shortcode" class="tf-shortcode-value" value="[tf_vendor_post]" readonly/>
                                         <button type="button" class="tf-copy-btn tf-btn">
-                                            <span class="dashicons dashicons-category"></span>
+                                            <span class="dashicons dashicons-admin-page"></span>
                                         </button>
                                     </div>
                                 </div>

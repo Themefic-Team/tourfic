@@ -148,11 +148,11 @@ class Hotel_Offline_Booking extends Without_Payment_Booking{
 
 			if ( $hotel_discount_type == "percent" ) {
 				if ( $pricing_by == 1 ) {
-					$room_price = floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $room_price - ( ( (int) $room_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) );
+					$room_price = floatval( preg_replace( '/[^\d.]/', '', number_format( (float) $room_price - ( ( (float) $room_price / 100 ) * (float) $hotel_discount_amount ), 2 ) ) );
 				}
 				if ( $pricing_by == 2 ) {
-					$adult_price = floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $adult_price - ( ( (int) $adult_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) );
-					$child_price = floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $child_price - ( ( (int) $child_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) );
+					$adult_price = floatval( preg_replace( '/[^\d.]/', '', number_format( (float) $adult_price - ( ( (float) $adult_price / 100 ) * (float) $hotel_discount_amount ), 2 ) ) );
+					$child_price = floatval( preg_replace( '/[^\d.]/', '', number_format( (float) $child_price - ( ( (float) $child_price / 100 ) * (float) $hotel_discount_amount ), 2 ) ) );
 				}
 			}
 
@@ -185,20 +185,20 @@ class Hotel_Offline_Booking extends Without_Payment_Booking{
 
 						if ( $hotel_discount_type == "percent" ) {
 							if ( $pricing_by == 1 ) {
-								$room_price = floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $room_price - ( ( (int) $room_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) );
+								$room_price = floatval( preg_replace( '/[^\d.]/', '', number_format( (float) $room_price - ( ( (float) $room_price / 100 ) * (float) $hotel_discount_amount ), 2 ) ) );
 							}
 							if ( $pricing_by == 2 ) {
-								$adult_price = floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $adult_price - ( ( (int) $adult_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) );
-								$child_price = floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $child_price - ( ( (int) $child_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) );
+								$adult_price = floatval( preg_replace( '/[^\d.]/', '', number_format( (float) $adult_price - ( ( (float) $adult_price / 100 ) * (float) $hotel_discount_amount ), 2 ) ) );
+								$child_price = floatval( preg_replace( '/[^\d.]/', '', number_format( (float) $child_price - ( ( (float) $child_price / 100 ) * (float) $hotel_discount_amount ), 2 ) ) );
 							}
 						}
 
-						$total_price += $pricing_by == '1' ? (int) $room_price : ( ( (int) $adult_price * (int) $adult ) + ( (int) $child_price * (int) $child ) );
+						$total_price += $pricing_by == '1' ? (float) $room_price : ( ( (float) $adult_price * (int) $adult ) + ( (float) $child_price * (int) $child ) );
 					};
 
 				}
 
-				$price_total = (int) $total_price * (int) $room_selected;
+				$price_total = (float) $total_price * (int) $room_selected;
 			} else {
 
 				if ( $pricing_by == '1' ) {
@@ -206,21 +206,21 @@ class Hotel_Offline_Booking extends Without_Payment_Booking{
 					$total_price = $room_meta['price'];
 
 					if ( $hotel_discount_type == "percent" ) {
-						$total_price = floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $total_price - ( ( (int) $total_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) );
+						$total_price = floatval( preg_replace( '/[^\d.]/', '', number_format( (float) $total_price - ( ( (float) $total_price / 100 ) * (float) $hotel_discount_amount ), 2 ) ) );
 					} else if ( $hotel_discount_type == "fixed" ) {
-						$total_price = floatval( preg_replace( '/[^\d.]/', '', number_format( ( (int) $adult_price - (int) $hotel_discount_amount ), 2 ) ) );
+						$total_price = floatval( preg_replace( '/[^\d.]/', '', number_format( ( (float) $adult_price - (float) $hotel_discount_amount ), 2 ) ) );
 					}
 				} elseif ( $pricing_by == '2' ) {
 					$adult_price = $room_meta['adult_price'];
 					$child_price = $room_meta['child_price'];
 
 					if ( $hotel_discount_type == "percent" ) {
-						$adult_price = floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $adult_price - ( ( (int) $adult_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) );
-						$child_price = floatval( preg_replace( '/[^\d.]/', '', number_format( (int) $child_price - ( ( (int) $child_price / 100 ) * (int) $hotel_discount_amount ), 2 ) ) );
+						$adult_price = floatval( preg_replace( '/[^\d.]/', '', number_format( (float) $adult_price - ( ( (float) $adult_price / 100 ) * (float) $hotel_discount_amount ), 2 ) ) );
+						$child_price = floatval( preg_replace( '/[^\d.]/', '', number_format( (float) $child_price - ( ( (float) $child_price / 100 ) * (float) $hotel_discount_amount ), 2 ) ) );
 					}
-					$adult_price = (int) $adult_price * (int) $adult;
-					$child_price = (int) $child_price * (int) $child;
-					$total_price = (int) $adult_price + (int) $child_price;
+					$adult_price = (float) $adult_price * (int) $adult;
+					$child_price = (float) $child_price * (int) $child;
+					$total_price = (float) $adult_price + (float) $child_price;
 				}
 
 				# Multiply pricing by night number
@@ -252,6 +252,22 @@ class Hotel_Offline_Booking extends Without_Payment_Booking{
 
 			$response['guest_info']            = '';
 			$response['hotel_booking_summery'] = '';
+			$date_format = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
+
+			// Map PHP date format to JS-friendly placeholder
+			$placeholders = array(
+				'Y/m/d' => 'YYYY/MM/DD',
+				'd/m/Y' => 'DD/MM/YYYY',
+				'm/d/Y' => 'MM/DD/YYYY',
+				'Y-m-d' => 'YYYY-MM-DD',
+				'd-m-Y' => 'DD-MM-YYYY',
+				'm-d-Y' => 'MM-DD-YYYY',
+				'Y.m.d' => 'YYYY.MM.DD',
+				'd.m.Y' => 'DD.MM.YYYY',
+				'm.d.Y' => 'MM.DD.YYYY',
+			);
+			$placeholder = isset( $placeholders[ $date_format ] ) ? $placeholders[ $date_format ] : 'YYYY/MM/DD';
+			
 			for ( $guest_in = 1; $guest_in <= $total_people; $guest_in ++ ) {
 				$response['guest_info'] .= '<div class="tf-single-tour-traveller tf-single-travel">
                 <h4>' . sprintf( esc_html__( 'Guest ', 'tourfic' ) ) . $guest_in . '</h4>
@@ -265,6 +281,12 @@ class Hotel_Offline_Booking extends Without_Payment_Booking{
                     <div class="traveller-single-info">
                         <label for="tf_dob' . $guest_in . '">' . sprintf( esc_html__( 'Date of birth', 'tourfic' ) ) . '</label>
                         <input type="date" name="guest[' . $guest_in . '][tf_dob]" id="tf_dob' . $guest_in . '" data-required="1" />
+						<input type="text" class="tf-date-picker" 
+							name="traveller[' . $guest_in . '][tf_dob]" 
+							id="tf_dob' . $guest_in . '" 
+							data-required="1" 
+							placeholder="' . esc_attr( $placeholder ) . '" 
+							data-format="' . esc_attr( $date_format ) . '" />
                         <div class="error-text" data-error-for="tf_dob' . $guest_in . '"></div>
                     </div>
                     <div class="traveller-single-info">
@@ -277,11 +299,19 @@ class Hotel_Offline_Booking extends Without_Payment_Booking{
 					foreach ( $hotel_guest_info_fields as $field ) {
 						$reg_field_required = !empty( $field['reg-field-required'] ) ? esc_attr( $field['reg-field-required'] ) : 0;
 						$number_field_min_attribuite = $field['reg-fields-type'] == "number" ? 'min="0"' : '';
-						if ( "text" == $field['reg-fields-type'] || "number" == $field['reg-fields-type'] || "email" == $field['reg-fields-type'] || "date" == $field['reg-fields-type'] ) {
+						if ( "text" == $field['reg-fields-type'] || "number" == $field['reg-fields-type'] || "email" == $field['reg-fields-type'] ) {
 							$response['guest_info'] .= '
                             <div class="traveller-single-info">
                                 <label for="' . $field['reg-field-name'] . $guest_in . '">' . esc_html( $field['reg-field-label'] ) . '</label>
                                 <input type="' . $field['reg-fields-type'] . '" name="guest[' . $guest_in . '][' . $field['reg-field-name'] . ']" data-required="' . $reg_field_required . '" id="' . $field['reg-field-name'] . $guest_in . '"' . $number_field_min_attribuite .' />
+                                <div class="error-text" data-error-for="' . $field['reg-field-name'] . $guest_in . '"></div>
+                            </div>';
+						}
+						if ( "date" == $field['reg-fields-type'] ) {
+							$response['guest_info'] .= '
+                            <div class="traveller-single-info">
+                                <label for="' . $field['reg-field-name'] . $guest_in . '">' . esc_html( $field['reg-field-label'] ) . '</label>
+                                <input type="date" class="tf-date-picker" name="guest[' . $guest_in . '][' . $field['reg-field-name'] . ']" data-required="' . $reg_field_required . '" id="' . $field['reg-field-name'] . $guest_in . '"' . $number_field_min_attribuite .' placeholder="' . esc_attr( $placeholder ) . '" data-format="' . esc_attr( $date_format ) . '" />
                                 <div class="error-text" data-error-for="' . $field['reg-field-name'] . $guest_in . '"></div>
                             </div>';
 						}

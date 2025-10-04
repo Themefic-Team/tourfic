@@ -51,11 +51,9 @@ function tf_hotel_booking_callback() {
 
 
 	// Without Payment Booking Data
-	$without_payment_guest_info = !empty( $_POST['guest'] ) ? sanitize_text_field( $_POST['guest'] ) : '';
-	$tf_without_payment_guest_info = !empty( $without_payment_guest_info ) ? explode( ',', $without_payment_guest_info ) : '';
+	$tf_without_payment_guest_info = !empty( $_POST['guest'] ) ? wp_unslash( $_POST['guest'] ) : []; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 
-	$without_payment_confirmation_details = !empty( $_POST['booking_confirm'] ) ? sanitize_text_field( $_POST['booking_confirm'] ) : array();
-	$tf_without_payment_confirmation_details = !empty( $without_payment_confirmation_details ) ? explode( ',', $without_payment_confirmation_details ) : array();
+	$tf_without_payment_confirmation_details = !empty( $_POST['booking_confirm'] ) ? wp_unslash( $_POST['booking_confirm'] ) : array(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 
 	$tf_without_payment_booking_fields = !empty( Helper::tfopt( 'hotel-book-confirm-field' ) ) ? Helper::tf_data_types( Helper::tfopt( 'hotel-book-confirm-field' ) ) : '';
 
@@ -570,7 +568,7 @@ function tf_hotel_booking_callback() {
 		}
 
 		if (!empty( $tf_without_payment_guest_info )) {
-			$tf_room_data['tf_hotel_data']['visitor_details']	=	json_encode($tf_without_payment_guest_info);
+			$tf_room_data['tf_hotel_data']['visitor_details']	=	wp_json_encode($tf_without_payment_guest_info);
 		}
 		// Booking Type
 		$tf_booking_type = $tf_booking_url = $tf_booking_query_url = $tf_booking_attribute = '';
@@ -612,7 +610,7 @@ function tf_hotel_booking_callback() {
 				'airport_service_fee'  => isset($airport_service_price_total) ? wc_price( $airport_service_price_total ) : '',
 				'total_price'          => !empty($tf_room_data['tf_hotel_data']['price_total']) ? $tf_room_data['tf_hotel_data']['price_total'] : 0,
 				'due_price'            => !empty($tf_room_data['tf_hotel_data']['due']) ? $tf_room_data['tf_hotel_data']['due'] : '',
-				'visitor_details' => json_encode($tf_without_payment_guest_info),
+				'visitor_details' => wp_json_encode($tf_without_payment_guest_info),
 			];
 	
 	

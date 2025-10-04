@@ -174,184 +174,184 @@ class Migrator {
 
 			$options["tf-template"]["single-hotel-layout"] = array(
 				array(
-					"hotel-section"        => "Description",
-					"hotel-section-slug"   => "description",
-					"hotel-section-status" => "1"
+					"label"        => "Description",
+					"slug"   => "description",
+					"status" => "1"
 				),
 				array(
-					"hotel-section"        => "Features",
-					"hotel-section-slug"   => "features",
-					"hotel-section-status" => "1"
+					"label"        => "Features",
+					"slug"   => "features",
+					"status" => "1"
 				),
 				array(
-					"hotel-section"        => "Room",
-					"hotel-section-slug"   => "rooms",
-					"hotel-section-status" => "1"
+					"label"        => "Room",
+					"slug"   => "rooms",
+					"status" => "1"
 				),
 				array(
-					"hotel-section"        => "Facilities",
-					"hotel-section-slug"   => "facilities",
-					"hotel-section-status" => "1"
+					"label"        => "Facilities",
+					"slug"   => "facilities",
+					"status" => "1"
 				),
 				array(
-					"hotel-section"        => "FAQ",
-					"hotel-section-slug"   => "faq",
-					"hotel-section-status" => "1"
+					"label"        => "FAQ",
+					"slug"   => "faq",
+					"status" => "1"
 				),
 				array(
-					"hotel-section"        => "Review",
-					"hotel-section-slug"   => "review",
-					"hotel-section-status" => "1"
+					"label"        => "Review",
+					"slug"   => "review",
+					"status" => "1"
 				),
 				array(
-					"hotel-section"        => "Terms & Conditions",
-					"hotel-section-slug"   => "trams-condition",
-					"hotel-section-status" => "1"
+					"label"        => "Terms & Conditions",
+					"slug"   => "trams-condition",
+					"status" => "1"
 				)
 			);
 
 			$options["tf-template"]["single-hotel-layout-part-1"] = array(
 				array(
-					"hotel-section"        => "Description",
-					"hotel-section-slug"   => "description",
-					"hotel-section-status" => "1"
+					"label"        => "Description",
+					"slug"   => "description",
+					"status" => "1"
 				),
 				array(
-					"hotel-section"        => "Features",
-					"hotel-section-slug"   => "features",
-					"hotel-section-status" => "1"
+					"label"        => "Features",
+					"slug"   => "features",
+					"status" => "1"
 				),
 				array(
-					"hotel-section"        => "Room",
-					"hotel-section-slug"   => "rooms",
-					"hotel-section-status" => "1"
+					"label"        => "Room",
+					"slug"   => "rooms",
+					"status" => "1"
 				)
 			);
 			$options["tf-template"]["single-hotel-layout-part-2"] = array(
 				array(
-					"hotel-section"        => "Facilities",
-					"hotel-section-slug"   => "facilities",
-					"hotel-section-status" => "1"
+					"label"        => "Facilities",
+					"slug"   => "facilities",
+					"status" => "1"
 				),
 				array(
-					"hotel-section"        => "Review",
-					"hotel-section-slug"   => "review",
-					"hotel-section-status" => "1"
+					"label"        => "Review",
+					"slug"   => "review",
+					"status" => "1"
 				),
 				array(
-					"hotel-section"        => "FAQ",
-					"hotel-section-slug"   => "faq",
-					"hotel-section-status" => "1"
+					"label"        => "FAQ",
+					"slug"   => "faq",
+					"status" => "1"
 				),
 				array(
-					"hotel-section"        => "Terms & Conditions",
-					"hotel-section-slug"   => "trams-condition",
-					"hotel-section-status" => "1"
+					"label"        => "Terms & Conditions",
+					"slug"   => "trams-condition",
+					"status" => "1"
 				)
 			);
 
 			$options["tf-template"]["single-tour-layout"] = array(
 				array(
-					"tour-section"        => "Gallery",
-					"tour-section-slug"   => "gallery",
-					"tour-section-status" => "1"
+					"label"        => "Gallery",
+					"slug"   => "gallery",
+					"status" => "1"
 				),
 				array(
-					"tour-section"        => "Price",
-					"tour-section-slug"   => "price",
-					"tour-section-status" => "1"
+					"label"        => "Price",
+					"slug"   => "price",
+					"status" => "1"
 				),
 				array(
-					"tour-section"        => "Description",
-					"tour-section-slug"   => "description",
-					"tour-section-status" => "1"
+					"label"        => "Description",
+					"slug"   => "description",
+					"status" => "1"
 				),
 				array(
-					"tour-section"        => "Information",
-					"tour-section-slug"   => "information",
-					"tour-section-status" => "1"
+					"label"        => "Information",
+					"slug"   => "information",
+					"status" => "1"
 				),
 				array(
-					"tour-section"        => "Highlights",
-					"tour-section-slug"   => "highlights",
-					"tour-section-status" => "1"
+					"label"        => "Highlights",
+					"slug"   => "highlights",
+					"status" => "1"
 				),
 				array(
-					"tour-section"        => "Include Exclude",
-					"tour-section-slug"   => "include-exclude",
-					"tour-section-status" => "1"
+					"label"        => "Include Exclude",
+					"slug"   => "include-exclude",
+					"status" => "1"
 				),
 				array(
-					"tour-section"        => "Itinerary",
-					"tour-section-slug"   => "itinerary",
-					"tour-section-status" => "1"
+					"label"        => "Itinerary",
+					"slug"   => "itinerary",
+					"status" => "1"
 				),
 				array(
-					"tour-section"        => "Map",
-					"tour-section-slug"   => "map",
-					"tour-section-status" => "1"
+					"label"        => "Map",
+					"slug"   => "map",
+					"status" => "1"
 				),
 				array(
-					"tour-section"        => "FAQ",
-					"tour-section-slug"   => "faq",
-					"tour-section-status" => "1"
+					"label"        => "FAQ",
+					"slug"   => "faq",
+					"status" => "1"
 				),
 				array(
-					"tour-section"        => "Terms & Conditions",
-					"tour-section-slug"   => "trams-condition",
-					"tour-section-status" => "1"
+					"label"        => "Terms & Conditions",
+					"slug"   => "trams-condition",
+					"status" => "1"
 				),
 				array(
-					"tour-section"        => "Review",
-					"tour-section-slug"   => "review",
-					"tour-section-status" => "1"
+					"label"        => "Review",
+					"slug"   => "review",
+					"status" => "1"
 				)
 			);
 
 
 			$options["tf-template"]["single-tour-layout-part-1"] = array(
 				array(
-					"tour-section"        => "Description",
-					"tour-section-slug"   => "description",
-					"tour-section-status" => "1"
+					"label"        => "Description",
+					"slug"   => "description",
+					"status" => "1"
 				),
 				array(
-					"tour-section"        => "Information",
-					"tour-section-slug"   => "information",
-					"tour-section-status" => "1"
+					"label"        => "Information",
+					"slug"   => "information",
+					"status" => "1"
 				),
 				array(
-					"tour-section"        => "Highlights",
-					"tour-section-slug"   => "highlights",
-					"tour-section-status" => "1"
+					"label"        => "Highlights",
+					"slug"   => "highlights",
+					"status" => "1"
 				),
 				array(
-					"tour-section"        => "Include & Exclude",
-					"tour-section-slug"   => "include-exclude",
-					"tour-section-status" => "1"
+					"label"        => "Include & Exclude",
+					"slug"   => "include-exclude",
+					"status" => "1"
 				),
 				array(
-					"tour-section"        => "Itinerary",
-					"tour-section-slug"   => "itinerary",
-					"tour-section-status" => "1"
+					"label"        => "Itinerary",
+					"slug"   => "itinerary",
+					"status" => "1"
 				)
 			);
 
 			$options["tf-template"]["single-tour-layout-part-2"] = array(
 				array(
-					"tour-section"        => "FAQ",
-					"tour-section-slug"   => "faq",
-					"tour-section-status" => "1"
+					"label"        => "FAQ",
+					"slug"   => "faq",
+					"status" => "1"
 				),
 				array(
-					"tour-section"        => "Review",
-					"tour-section-slug"   => "review",
-					"tour-section-status" => "1"
+					"label"        => "Review",
+					"slug"   => "review",
+					"status" => "1"
 				),
 				array(
-					"tour-section"        => "Terms & Conditions",
-					"tour-section-slug"   => "trams-condition",
-					"tour-section-status" => "1"
+					"label"        => "Terms & Conditions",
+					"slug"   => "trams-condition",
+					"status" => "1"
 				)
 			);
 
@@ -370,51 +370,51 @@ class Migrator {
 
 			$options["tf-template"]["single-aprtment-layout-part-1"] = array(
 				array(
-					"aprtment-section"        => "Description",
-					"aprtment-section-slug"   => "description",
-					"aprtment-section-status" => "1"
+					"label"        => "Description",
+					"slug"   => "description",
+					"status" => "1"
 				),
 				array(
-					"aprtment-section"        => "Highlights",
-					"aprtment-section-slug"   => "features",
-					"aprtment-section-status" => "1"
+					"label"        => "Highlights",
+					"slug"   => "features",
+					"status" => "1"
 				),
 				array(
-					"aprtment-section"        => "Apartment Rooms",
-					"aprtment-section-slug"   => "rooms",
-					"aprtment-section-status" => "1"
+					"label"        => "Apartment Rooms",
+					"slug"   => "rooms",
+					"status" => "1"
 				),
 				array(
-					"aprtment-section"        => "Place offer",
-					"aprtment-section-slug"   => "offer",
-					"aprtment-section-status" => "1"
+					"label"        => "Place offer",
+					"slug"   => "offer",
+					"status" => "1"
 				),
 				array(
-					"aprtment-section"        => "House Rules",
-					"aprtment-section-slug"   => "rules",
-					"aprtment-section-status" => "1"
+					"label"        => "House Rules",
+					"slug"   => "rules",
+					"status" => "1"
 				),
 				array(
-					"aprtment-section"        => "Amenities",
-					"aprtment-section-slug"   => "facilities",
-					"aprtment-section-status" => "1"
+					"label"        => "Amenities",
+					"slug"   => "facilities",
+					"status" => "1"
 				)
 			);
 			$options["tf-template"]["single-aprtment-layout-part-2"] = array(
 				array(
-					"aprtment-section"        => "Review",
-					"aprtment-section-slug"   => "review",
-					"aprtment-section-status" => "1"
+					"label"        => "Review",
+					"slug"   => "review",
+					"status" => "1"
 				),
 				array(
-					"aprtment-section"        => "FAQ",
-					"aprtment-section-slug"   => "faq",
-					"aprtment-section-status" => "1"
+					"label"        => "FAQ",
+					"slug"   => "faq",
+					"status" => "1"
 				),
 				array(
-					"aprtment-section"        => "Terms & Conditions",
-					"aprtment-section-slug"   => "trams-condition",
-					"aprtment-section-status" => "1"
+					"label"        => "Terms & Conditions",
+					"slug"   => "trams-condition",
+					"status" => "1"
 				)
 			);
 
@@ -425,113 +425,8 @@ class Migrator {
 
 		}
 
-		//Hotel Template 4
-		if ( empty( get_option( 'tf_template_4_migrate_data' ) ) ||
-		     ( ! empty( get_option( 'tf_template_4_migrate_data' ) ) && get_option( 'tf_template_4_migrate_data' ) < 1 ) ) {
-
-			$options = ! empty( get_option( 'tf_settings' ) ) ? get_option( 'tf_settings' ) : array();
-
-			$options["tf-template"]["single-hotel-layout-3"] = array(
-				array(
-					"hotel-section"        => "Description",
-					"hotel-section-slug"   => "description",
-					"hotel-section-status" => "1"
-				),
-				array(
-					"hotel-section"        => "Room",
-					"hotel-section-slug"   => "rooms",
-					"hotel-section-status" => "1"
-				),
-				array(
-					"hotel-section"        => "Facilities",
-					"hotel-section-slug"   => "facilities",
-					"hotel-section-status" => "1"
-				),
-				array(
-					"hotel-section"        => "FAQ",
-					"hotel-section-slug"   => "faq",
-					"hotel-section-status" => "1"
-				),
-				array(
-					"hotel-section"        => "Review",
-					"hotel-section-slug"   => "review",
-					"hotel-section-status" => "1"
-				),
-				array(
-					"hotel-section"        => "Terms & Conditions",
-					"hotel-section-slug"   => "trams-condition",
-					"hotel-section-status" => "1"
-				)
-			);
-
-			/*$options["tf-template"]["single-tour-layout-3"] = array(
-				array(
-					"tour-section"        => "Gallery",
-					"tour-section-slug"   => "gallery",
-					"tour-section-status" => "1"
-				),
-				array(
-					"tour-section"        => "Price",
-					"tour-section-slug"   => "price",
-					"tour-section-status" => "1"
-				),
-				array(
-					"tour-section"        => "Description",
-					"tour-section-slug"   => "description",
-					"tour-section-status" => "1"
-				),
-				array(
-					"tour-section"        => "Information",
-					"tour-section-slug"   => "information",
-					"tour-section-status" => "1"
-				),
-				array(
-					"tour-section"        => "Highlights",
-					"tour-section-slug"   => "highlights",
-					"tour-section-status" => "1"
-				),
-				array(
-					"tour-section"        => "Include Exclude",
-					"tour-section-slug"   => "include-exclude",
-					"tour-section-status" => "1"
-				),
-				array(
-					"tour-section"        => "Itinerary",
-					"tour-section-slug"   => "itinerary",
-					"tour-section-status" => "1"
-				),
-				array(
-					"tour-section"        => "Map",
-					"tour-section-slug"   => "map",
-					"tour-section-status" => "1"
-				),
-				array(
-					"tour-section"        => "FAQ",
-					"tour-section-slug"   => "faq",
-					"tour-section-status" => "1"
-				),
-				array(
-					"tour-section"        => "Terms & Conditions",
-					"tour-section-slug"   => "trams-condition",
-					"tour-section-status" => "1"
-				),
-				array(
-					"tour-section"        => "Review",
-					"tour-section-slug"   => "review",
-					"tour-section-status" => "1"
-				)
-			);*/
-
-
-			update_option( 'tf_settings', $options );
-			wp_cache_flush();
-			flush_rewrite_rules( true );
-			update_option( 'tf_template_4_migrate_data', 1 );
-
-		}
-
 		// Car
-		if ( empty( get_option( 'tf_template_1_car_migrate_data' ) ) ) {
+		if ( empty( get_option( 'tf_template_1_car_migrate_data' ) ) || ( ! empty( get_option( 'tf_template_1_car_migrate_data' ) ) && get_option( 'tf_template_1_car_migrate_data' ) < 2 ) ) {
 
 			$options = ! empty( get_option( 'tf_settings' ) ) ? get_option( 'tf_settings' ) : array();
 
@@ -541,36 +436,61 @@ class Migrator {
 			if(empty($options["tf-template"]["single-car-layout"])){
 				$options["tf-template"]["single-car-layout"] = array(
 					array(
-						"car-section"        => "Description",
-						"car-section-slug"   => "description",
-						"car-section-status" => "1"
+						"label"        => "Description",
+						"slug"   => "description",
+						"status" => "1"
 					),
 					array(
-						"car-section"        => "Car info",
-						"car-section-slug"   => "car-info",
-						"car-section-status" => "1"
+						"label"        => "Car info",
+						"slug"   => "car-info",
+						"status" => "1"
 					),
 					array(
-						"car-section"        => "Benefits",
-						"car-section-slug"   => "benefits",
-						"car-section-status" => "1"
+						"label"        => "Benefits",
+						"slug"   => "benefits",
+						"status" => "1"
 					),
 					array(
-						"car-section"        => "Include/Exclude",
-						"car-section-slug"   => "inc-exc",
-						"car-section-status" => "1"
+						"label"        => "Include/Exclude",
+						"slug"   => "inc-exc",
+						"status" => "1"
 					),
 					array(
-						"car-section"        => "Location",
-						"car-section-slug"   => "location",
-						"car-section-status" => "1"
+						"label"        => "Location",
+						"slug"   => "location",
+						"status" => "1"
 					),
 					array(
-						"car-section"        => "FAQs",
-						"car-section-slug"   => "faq",
-						"car-section-status" => "1"
+						"label"        => "FAQs",
+						"slug"   => "faq",
+						"status" => "1"
+					),
+					array(
+						'label'  => 'Terms & Conditions',
+						'slug'   => 'tc',
+						'status' => "1",
+					),
+					array(
+						'label'  => 'Review',
+						'slug'   => 'review',
+						'status' => "1",
 					)
 				);
+			}else{
+				if(empty(Helper::label_exists_or_not('Terms & Conditions', 'car'))){
+					$options["tf-template"]["single-car-layout"][] = array(
+						'label'  => 'Terms & Conditions',
+						'slug'   => 'tc',
+						'status' => "1",
+					);
+				}
+				if(empty(Helper::label_exists_or_not('Review', 'car'))){
+					$options["tf-template"]["single-car-layout"][] = array(
+						'label'  => 'Review',
+						'slug'   => 'review',
+						'status' => "1",
+					);
+				}
 			}
 			if(empty($options["tf-template"]["car-archive"])){
 				$options["tf-template"]["car-archive"] = 'design-1';
@@ -584,7 +504,7 @@ class Migrator {
 			update_option( 'tf_settings', $options );
 			wp_cache_flush();
 			flush_rewrite_rules( true );
-			update_option( 'tf_template_1_car_migrate_data', 1 );
+			update_option( 'tf_template_1_car_migrate_data', 2 );
 		}
 
 	}

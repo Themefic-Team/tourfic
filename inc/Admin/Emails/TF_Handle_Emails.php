@@ -26,9 +26,9 @@ class TF_Handle_Emails {
         
         //send mail if Tourfic pro is active
         //send confirmation mail
-        add_action( 'woocommerce_thankyou', array( $this, 'send_email' ), 10, 1 );
+        add_action( 'woocommerce_thankyou', array( $this, 'send_email' ), 7, 1 );
         //send pro confirmation mail
-        add_action( 'woocommerce_thankyou', array( $this, 'send_confirmation_email_pro' ), 10, 1 );
+        add_action( 'woocommerce_thankyou', array( $this, 'send_confirmation_email_pro' ), 7, 1 );
         //send cancellation mail
         add_action( 'woocommerce_order_status_cancelled', array( $this, 'send_cancellation_email_pro' ), 10, 1 );
         //Offline Payment send confirmation mail
@@ -659,6 +659,13 @@ class TF_Handle_Emails {
         }
         //get order details
         $order                   = wc_get_order( $order_id );
+        foreach ( $order->get_items() as $item_key => $item_values ) {
+            $order_type = wc_get_order_item_meta( $item_key, '_order_type', true );
+
+            if(empty($order_type)){
+                return;
+            }
+        }
         $order_billing_email     = $order->get_billing_email();
         $email_settings          = self::$tf_email_settings;
         $order_email_heading     = !empty( $email_settings['order_email_heading'] ) ? $email_settings['order_email_heading'] : esc_html__( 'Your order received' , 'tourfic' );
@@ -817,6 +824,13 @@ class TF_Handle_Emails {
         if( is_plugin_active( 'tourfic-pro/tourfic-pro.php' ) ) :
             //get order details
             $order = wc_get_order( $order_id );
+            foreach ( $order->get_items() as $item_key => $item_values ) {
+                $order_type = wc_get_order_item_meta( $item_key, '_order_type', true );
+    
+                if(empty($order_type)){
+                    return;
+                }
+            }
             //get customer email
             $order_billing_email    = $order->get_billing_email();
 
@@ -846,7 +860,7 @@ class TF_Handle_Emails {
                     $email_from_name         = ! empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
                     $email_from_email        = ! empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
                     $order_email_heading     = ! empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';
-                    $email_header_bg         = ! empty( $meta['email_header_bg'] ) ? $meta['email_header_bg'] : array();
+                    $email_header_bg         = ! empty( $meta['email_header_bg'] ) ? maybe_unserialize($meta['email_header_bg']) : array();
                     $email_header_bg         = ! empty( $email_header_bg['bg_color'] ) ? $email_header_bg['bg_color'] : '#0209af';
                    
                     //mail headers
@@ -895,7 +909,7 @@ class TF_Handle_Emails {
                         $email_from_name         = ! empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
                         $email_from_email        = ! empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
                         $order_email_heading     = ! empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';
-                        $email_header_bg         = ! empty( $meta['email_header_bg'] ) ? $meta['email_header_bg'] : array();
+                        $email_header_bg         = ! empty( $meta['email_header_bg'] ) ? maybe_unserialize($meta['email_header_bg']) : array();
                         $email_header_bg         = ! empty( $email_header_bg['bg_color'] ) ? $email_header_bg['bg_color'] : '#0209af';
                         //mail headers
                         $charset  = apply_filters( 'tourfic_mail_charset', 'Content-Type: text/html; charset=UTF-8' );
@@ -943,7 +957,7 @@ class TF_Handle_Emails {
                     $email_from_name         = ! empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
                     $email_from_email        = ! empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
                     $order_email_heading     = ! empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';
-                    $email_header_bg         = ! empty( $meta['email_header_bg'] ) ? $meta['email_header_bg'] : array();
+                    $email_header_bg         = ! empty( $meta['email_header_bg'] ) ? maybe_unserialize($meta['email_header_bg']) : array();
                     $email_header_bg         = ! empty( $email_header_bg['bg_color'] ) ? $email_header_bg['bg_color'] : '#0209af';
                     //mail headers
                     $charset  = apply_filters( 'tourfic_mail_charset', 'Content-Type: text/html; charset=UTF-8' );
@@ -977,6 +991,13 @@ class TF_Handle_Emails {
         if( function_exists( 'is_tf_pro' ) && is_tf_pro() ):
             //get order details
             $order = wc_get_order( $order_id );
+            foreach ( $order->get_items() as $item_key => $item_values ) {
+                $order_type = wc_get_order_item_meta( $item_key, '_order_type', true );
+    
+                if(empty($order_type)){
+                    return;
+                }
+            }
             //get customer email
             $order_billing_email    = $order->get_billing_email();
 
@@ -1004,7 +1025,7 @@ class TF_Handle_Emails {
                     $email_from_name         = ! empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
                     $email_from_email        = ! empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
                     $order_email_heading     = ! empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';
-                    $email_header_bg         = ! empty( $meta['email_header_bg'] ) ? $meta['email_header_bg'] : array();
+                    $email_header_bg         = ! empty( $meta['email_header_bg'] ) ? maybe_unserialize($meta['email_header_bg']) : array();
                     $email_header_bg         = ! empty( $email_header_bg['bg_color'] ) ? $email_header_bg['bg_color'] : '#0209af';
                     
                     //mail headers
@@ -1042,7 +1063,7 @@ class TF_Handle_Emails {
                     $email_from_name         = ! empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
                     $email_from_email        = ! empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
                     $order_email_heading     = ! empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';
-                    $email_header_bg         = ! empty( $meta['email_header_bg'] ) ? $meta['email_header_bg'] : array();
+                    $email_header_bg         = ! empty( $meta['email_header_bg'] ) ? maybe_unserialize($meta['email_header_bg']) : array();
                     $email_header_bg         = ! empty( $email_header_bg['bg_color'] ) ? $email_header_bg['bg_color'] : '#0209af';
                     
                     //mail headers
@@ -1081,7 +1102,7 @@ class TF_Handle_Emails {
                     $email_from_name         = ! empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
                     $email_from_email        = ! empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
                     $order_email_heading     = ! empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';
-                    $email_header_bg         = ! empty( $meta['email_header_bg'] ) ? $meta['email_header_bg'] : '';
+                    $email_header_bg         = ! empty( $meta['email_header_bg'] ) ? maybe_unserialize($meta['email_header_bg']) : '';
                     $email_header_bg         = ! empty( $email_header_bg['bg_color'] ) ? $email_header_bg['bg_color'] : '#0209af';
                     
                     //mail headers
@@ -1141,7 +1162,7 @@ class TF_Handle_Emails {
                     $email_from_name         = ! empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
                     $email_from_email        = ! empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
                     $order_email_heading     = ! empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';
-                    $email_header_bg         = ! empty( $meta['email_header_bg'] ) ? $meta['email_header_bg'] : array();
+                    $email_header_bg         = ! empty( $meta['email_header_bg'] ) ? maybe_unserialize($meta['email_header_bg']) : array();
                     $email_header_bg         = ! empty( $email_header_bg['bg_color'] ) ? $email_header_bg['bg_color'] : '#0209af';
                    
                     //mail headers
@@ -1188,7 +1209,7 @@ class TF_Handle_Emails {
                     $email_from_name         = ! empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
                     $email_from_email        = ! empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
                     $order_email_heading     = ! empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';
-                    $email_header_bg         = ! empty( $meta['email_header_bg'] ) ? $meta['email_header_bg'] : array();
+                    $email_header_bg         = ! empty( $meta['email_header_bg'] ) ? maybe_unserialize($meta['email_header_bg']) : array();
                     $email_header_bg         = ! empty( $email_header_bg['bg_color'] ) ? $email_header_bg['bg_color'] : '#0209af';
                     //mail headers
                     $charset  = apply_filters( 'tourfic_mail_charset', 'Content-Type: text/html; charset=UTF-8' );
@@ -1231,7 +1252,7 @@ class TF_Handle_Emails {
                     $email_from_name         = ! empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
                     $email_from_email        = ! empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
                     $order_email_heading     = ! empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';
-                    $email_header_bg         = ! empty( $meta['email_header_bg'] ) ? $meta['email_header_bg'] : array();
+                    $email_header_bg         = ! empty( $meta['email_header_bg'] ) ? maybe_unserialize($meta['email_header_bg']) : array();
                     $email_header_bg         = ! empty( $email_header_bg['bg_color'] ) ? $email_header_bg['bg_color'] : '#0209af';
                     //mail headers
                     $charset  = apply_filters( 'tourfic_mail_charset', 'Content-Type: text/html; charset=UTF-8' );
@@ -1319,7 +1340,7 @@ class TF_Handle_Emails {
                         $email_from_name         = ! empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
                         $email_from_email        = ! empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
                         $order_email_heading     = ! empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';
-                        $email_header_bg         = ! empty( $meta['email_header_bg'] ) ? $meta['email_header_bg'] : array();
+                        $email_header_bg         = ! empty( $meta['email_header_bg'] ) ? maybe_unserialize($meta['email_header_bg']) : array();
                         $email_header_bg         = ! empty( $email_header_bg['bg_color'] ) ? $email_header_bg['bg_color'] : '#0209af';
                         //mail headers
                         $charset  = apply_filters( 'tourfic_mail_charset', 'Content-Type: text/html; charset=UTF-8' );
@@ -1363,7 +1384,7 @@ class TF_Handle_Emails {
                         $email_from_name         = ! empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
                         $email_from_email        = ! empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
                         $order_email_heading     = ! empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';
-                        $email_header_bg         = ! empty( $meta['email_header_bg'] ) ? $meta['email_header_bg'] : array();
+                        $email_header_bg         = ! empty( $meta['email_header_bg'] ) ? maybe_unserialize($meta['email_header_bg']) : array();
                         $email_header_bg         = ! empty( $email_header_bg['bg_color'] ) ? $email_header_bg['bg_color'] : '#0209af';
                         //mail headers
                         $charset  = apply_filters( 'tourfic_mail_charset', 'Content-Type: text/html; charset=UTF-8' );
@@ -1415,7 +1436,7 @@ class TF_Handle_Emails {
                         $email_from_name         = ! empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
                         $email_from_email        = ! empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
                         $order_email_heading     = ! empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';
-                        $email_header_bg         = ! empty( $meta['email_header_bg'] ) ? $meta['email_header_bg'] : array();
+                        $email_header_bg         = ! empty( $meta['email_header_bg'] ) ? maybe_unserialize($meta['email_header_bg']) : array();
                         $email_header_bg         = ! empty( $email_header_bg['bg_color'] ) ? $email_header_bg['bg_color'] : '#0209af';
                         //mail headers
                         $charset  = apply_filters( 'tourfic_mail_charset', 'Content-Type: text/html; charset=UTF-8' );
@@ -1463,7 +1484,7 @@ class TF_Handle_Emails {
                         $email_from_name         = ! empty( $meta['email_from_name'] ) ? $meta['email_from_name'] : '';
                         $email_from_email        = ! empty( $meta['email_from_email'] ) ? $meta['email_from_email'] : '';
                         $order_email_heading     = ! empty( $meta['order_email_heading'] ) ? $meta['order_email_heading'] : '';
-                        $email_header_bg         = ! empty( $meta['email_header_bg'] ) ? $meta['email_header_bg'] : array();
+                        $email_header_bg         = ! empty( $meta['email_header_bg'] ) ? maybe_unserialize($meta['email_header_bg']) : array();
                         $email_header_bg         = ! empty( $email_header_bg['bg_color'] ) ? $email_header_bg['bg_color'] : '#0209af';
                         //mail headers
                         $charset  = apply_filters( 'tourfic_mail_charset', 'Content-Type: text/html; charset=UTF-8' );

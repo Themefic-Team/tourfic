@@ -1,33 +1,36 @@
 <?php // Don't load directly
 defined( 'ABSPATH' ) || exit;
+use \Tourfic\Classes\Helper;
 ?>
 <!-- menu section Start -->
 
 <div class="tf-details-menu">
     <ul>
+        <?php if( !empty(Helper::get_status_by_label('Description', 'tour')) ){ ?>
         <li><a class="tf-hashlink" href="#tf-tour-overview">
             <?php esc_html_e("Overview", "tourfic"); ?>
         </a></li>
+        <?php } ?>
 
-        <?php if( !empty( $meta["itinerary"] )) : ?>
+        <?php if( !empty(Helper::get_status_by_label('Itinerary', 'tour')) && !empty( $meta["itinerary"] )) : ?>
             <li><a href="#tf-tour-itinerary">
                 <?php esc_html_e("Tour Plan", "tourfic"); ?>
             </a></li>
         <?php endif; ?>
 
-        <?php if( !empty( $meta["faqs"] )) : ?>
+        <?php if( !empty(Helper::get_status_by_label('FAQ', 'tour')) && !empty( $meta["faqs"] )) : ?>
             <li><a href="#tf-tour-faq">
                 <?php esc_html_e("FAQ's", "tourfic"); ?>
             </a></li>
         <?php endif; ?>
 
-        <?php if(!empty( $meta["terms_conditions"] ) ) : ?>
+        <?php if(!empty(Helper::get_status_by_label('Terms & Conditions', 'tour')) && !empty( $meta["terms_conditions"] ) ) : ?>
             <li><a href="#tf-tour-policies">
                 <?php esc_html_e("Policies", "tourfic"); ?>
             </a></li>
         <?php endif; ?>
 
-        <?php if(!empty($comments)) : ?>
+        <?php if(!empty(Helper::get_status_by_label('Review', 'tour')) && !empty($comments)) : ?>
             <li><a href="#tf-tour-reviews">
                 <?php esc_html_e("Reviews", "tourfic"); ?>
             </a></li>

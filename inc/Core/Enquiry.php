@@ -832,8 +832,14 @@ abstract class Enquiry {
 			}
 		}
 
-		$subject     = esc_html__( 'Someone asked question on: ', 'tourfic' ) . esc_html( $post_title );
-		$message     = "{$question}";
+		$subject = sprintf(
+			esc_html__( '%1$s asked a question on: %2$s', 'tourfic' ),
+			$name,
+			esc_html( $post_title )
+		);
+		// Message with question, name, and email
+		$message = '<p><strong>' . esc_html__( 'From:', 'tourfic' ) . '</strong> ' . esc_html( $name ) . ' (' . esc_html( $email ) . ')</p>';
+		$message .= '<p><strong>' . esc_html__( 'Question:', 'tourfic' ) . '</strong> ' . nl2br( esc_html( $question ) ) . '</p>';
 		$headers[]   = 'Content-Type: text/html; charset=UTF-8';
 		$headers[]   = $from;
 
