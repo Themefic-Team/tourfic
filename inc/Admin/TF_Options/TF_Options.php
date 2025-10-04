@@ -487,9 +487,7 @@ class TF_Options {
 		$new_post   = isset( $_POST['new_post'] ) && ! empty( $_POST['new_post'] ) ? sanitize_text_field( $_POST['new_post'] ) : '';
 		$room_id    = isset( $_POST['room_id'] ) && ! empty( $_POST['room_id'] ) ? sanitize_text_field( $_POST['room_id'] ) : '';
 		$avail_date = isset( $_POST['avail_date'] ) && ! empty( $_POST['avail_date'] ) ? sanitize_text_field( $_POST['avail_date'] ) : '';
-		$option_arr = isset( $_POST['option_arr'] ) && ! empty( $_POST['option_arr'] )
-		? array_map( 'sanitize_text_field', wp_unslash( $_POST['option_arr'] ) )
-		: [];
+		$option_arr = isset( $_POST['option_arr'] ) && ! empty( $_POST['option_arr'] ) ? wp_unslash( $_POST['option_arr'] ) : []; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 		$room_meta  = get_post_meta( $room_id, 'tf_room_opt', true );
         $pricing_by = ! empty( $room_meta['pricing-by'] ) ? $room_meta['pricing-by'] : '1';
 		if ( $new_post != 'true' ) {

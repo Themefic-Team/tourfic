@@ -726,13 +726,11 @@
                         $('#tf-backend-hotel-book-btn').attr('disabled', 'disabled');
                     },
                     success: function (response) {
-                        if(!response.success){
-                            notyf.error(response.data)
-                        } else {
+                        if(response){
                             const obj = JSON.parse(response);
 
                             if (obj.custom_avail !== '1') {
-                                populateTimeSelect(obj.allowed_times)
+                                populateObjectTimeSelect(obj.allowed_times)
                             }
 
                             let flatpickerObj = {
@@ -808,18 +806,23 @@
 
                             $("[name='tf_tour_date']").flatpickr(flatpickerObj);
 
-                            if (obj.tour_extras_array.length > 0) {
+
+                            if (obj.tour_extras_array && Object.keys(obj.tour_extras_array).length > 0) {
                                 let extras = $('[name="tf_tour_extras[]"]');
                                 extras.removeAttr('disabled');
                                 extras.empty();
+                            
                                 $.each(obj.tour_extras_array, function (key, value) {
-                                    extras.append('<option value="' + key + '">' + value + '</option>');
+                                    extras.append($('<option>', {
+                                        value: key,
+                                        html: value // Use html to parse entities like &#36;
+                                    }));
                                 });
+                            
                                 extras.select2();
                             } else {
                                 let extras = $('[name="tf_tour_extras[]"]');
-                                extras.empty();
-                                extras.attr('disabled', 'disabled');
+                                extras.empty().attr('disabled', 'disabled');
                             }
 
                             $('#tf-backend-hotel-book-btn').removeAttr('disabled');
@@ -828,6 +831,23 @@
                 });
             }
         });
+
+        function populateObjectTimeSelect(times) {
+            let timeSelect = $('[name="tf_tour_time"]');
+            timeSelect.empty();
+
+            if (Object.keys(times).length > 0) {
+                // Use the keys and values from the object to populate the options
+                $.each(times, function (key, value) {
+                    timeSelect.append(`<option value="${key}">${value}</option>`);
+                });
+                timeSelect.attr('disabled', false);
+            } else {
+                timeSelect.append(`<option value="" selected>No Time Available</option>`);
+                timeSelect.attr('disabled', 'disabled');
+            }
+
+        }
 
         function populateTimeSelect(times) {
             let timeSelect = $('[name="tf_tour_time"]');
@@ -1701,6 +1721,12 @@
             });
         });
 
+        $('.tf-date-picker').each(function() {
+            let format = $(this).data('format') || "Y/m/d";
+            flatpickr(this, {
+                dateFormat: format
+            });
+        });
     });
 
 })(jQuery);

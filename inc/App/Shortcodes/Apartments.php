@@ -6,6 +6,7 @@ defined( 'ABSPATH' ) || exit;
 
 use \Tourfic\App\TF_Review;
 use \Tourfic\Classes\Apartment\Pricing;
+use \Tourfic\Classes\Helper;
 
 class Apartments extends \Tourfic\Core\Shortcodes {
 
@@ -86,7 +87,9 @@ class Apartments extends \Tourfic\Core\Shortcodes {
 							<div class="tf-slider-content">
 								<div class="tf-slider-desc">
 									<h3>
-										<a href="<?php the_permalink() ?>"><?php the_title() ?></a>
+										<a href="<?php the_permalink() ?>">
+											<?php echo esc_html( Helper::tourfic_character_limit_callback( get_the_title($post_id), 60 ) ) ?>
+										</a>
 									</h3>
 									<?php if ( $post_comments ) { ?>
 										<div class="tf-slider-rating-star">

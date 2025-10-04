@@ -13,10 +13,28 @@ defined( 'ABSPATH' ) || exit;
                 <p><?php echo esc_html( $tour_duration ); ?>
                 <?php
                 if ( $tour_duration > 1 ) {
-                    $dur_string         = 's';
-                    $duration_time_html = $duration_time . $dur_string;
+                    if($duration_time=='Day'){
+                        $dur_string         = esc_html__( 'Days', 'tourfic' );
+                    }
+                    if($duration_time=='Hour'){
+                        $dur_string         = esc_html__( 'Hours', 'tourfic' );
+                    }
+                    if($duration_time=='Minute'){
+                        $dur_string         = esc_html__( 'Minutes', 'tourfic' );
+                    }
+                    $duration_time_html = $dur_string;
                 } else {
-                    $duration_time_html = $duration_time;
+                    if($duration_time=='Day'){
+                        $dur_string         = esc_html__( 'Day', 'tourfic' );
+                    }
+                    if($duration_time=='Hour'){
+                        $dur_string         = esc_html__( 'Hour', 'tourfic' );
+                    }
+                    if($duration_time=='Minute'){
+                        $dur_string         = esc_html__( 'Minute', 'tourfic' );
+                    }
+
+                    $duration_time_html = $dur_string;
                 }
                 echo " " . esc_html( $duration_time_html );
                 ?>

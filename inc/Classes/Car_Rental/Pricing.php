@@ -12,7 +12,7 @@ class Pricing {
 	}
 
     // all price will be calculate here
-	static function set_total_price( $meta, $tf_pickup_date='', $tf_dropoff_date='', $tf_pickup_time='', $tf_dropoff_time='' ) {
+	static function set_total_price( $meta, $tf_pickup_date='', $tf_dropoff_date='', $tf_pickup_time='', $tf_dropoff_time='', $tf_archive='' ) {
 
 		$pricing_by = !empty($meta["price_by"]) ? $meta["price_by"] : 'day';
 		$initial_pricing = !empty($meta["car_rent"]) ? $meta["car_rent"] : 0;
@@ -110,9 +110,17 @@ class Pricing {
                     if ($interval->h > 0 || $interval->i > 0) {
                         $total_days += 1;  // Add an extra day for any remaining hours
                     }
-                    $total_multiply = $total_days;
+                    if(!empty($tf_archive)){
+                        $total_multiply = 1;
+                    }else{
+                        $total_multiply = $total_days;
+                    }
                 }else{
-                    $total_multiply = $total_hours;
+                    if(!empty($tf_archive)){
+                        $total_multiply = 1;
+                    }else{
+                        $total_multiply = $total_hours;
+                    }
                 }
 
                 if( $startDay <= $total_multiply  && $endDay >= $total_multiply ){
@@ -127,7 +135,11 @@ class Pricing {
             }else{
                 $totalPrice = $initial_pricing;
                 if('hour'==$pricing_by){
-                    $total_multiply = $total_hours;
+                    if(!empty($tf_archive)){
+                        $total_multiply = 1;
+                    }else{
+                        $total_multiply = $total_hours;
+                    }
                 }
                 if('day'==$pricing_by){
                     
@@ -138,7 +150,11 @@ class Pricing {
                     if ($interval->h > 0 || $interval->i > 0) {
                         $total_days += 1;  // Add an extra day for any remaining hours
                     }
-                    $total_multiply = $total_days;
+                    if(!empty($tf_archive)){
+                        $total_multiply = 1;
+                    }else{
+                        $total_multiply = $total_days;
+                    }
                     
                 }
             }
@@ -163,7 +179,11 @@ class Pricing {
                 $total_hours = ($interval->days * 24) + $interval->h + ($interval->i / 60);
                 
                 if('hour'==$pricing_by){
-                    $total_multiply = $total_hours;
+                    if(!empty($tf_archive)){
+                        $total_multiply = 1;
+                    }else{
+                        $total_multiply = $total_hours;
+                    }
                 }
                 if('day'==$pricing_by){
                     
@@ -174,7 +194,11 @@ class Pricing {
                     if ($interval->h > 0 || $interval->i > 0) {
                         $total_days += 1;  // Add an extra day for any remaining hours
                     }
-                    $total_multiply = $total_days;
+                    if(!empty($tf_archive)){
+                        $total_multiply = 1;
+                    }else{
+                        $total_multiply = $total_days;
+                    }
                     
                 }
             }else{
@@ -206,9 +230,9 @@ class Pricing {
         $is_taxable = !empty($meta["is_taxable"]) ? $meta["is_taxable"] : '';
         $taxable_class = !empty($meta["taxable_class"]) ? $meta["taxable_class"] : '';
         if($is_taxable && !empty($taxable_class)){
-            return  esc_html_e("With Taxes", "tourfic");
+            return  esc_html__("With Taxes", "tourfic");
         }else{
-            return  esc_html_e("Without Taxes", "tourfic");
+            return  esc_html__("Without Taxes", "tourfic");
         }
     }
 

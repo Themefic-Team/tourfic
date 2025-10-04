@@ -447,17 +447,6 @@ use \Tourfic\Classes\Apartment\Apartment;
 
 								<?php if ( $tf_openstreet_map == "default" && ! empty( $map["latitude"] ) && ! empty( $map["longitude"] ) ) { ?>
                                     <div id="apartment-location" style="height: 500px;"></div>
-                                    <script>
-                                        const map = L.map('apartment-location').setView([<?php echo esc_html( $map["latitude"] ); ?>, <?php echo esc_html( $map["longitude"] ); ?>], <?php echo esc_html( $map["zoom"] ); ?>);
-
-                                        const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                                            maxZoom: 20,
-                                            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                                        }).addTo(map);
-
-                                        const marker = L.marker([<?php echo esc_html( $map["latitude"] ); ?>, <?php echo esc_html( $map["longitude"] ); ?>], {alt: '<?php echo esc_html( $map["address"] ); ?>'}).addTo(map)
-                                            .bindPopup('<?php echo esc_html( $map["address"] ); ?>');
-                                    </script>
 								<?php } elseif ( $tf_openstreet_map != "default" && ! empty( $tf_google_map_key ) ){ ?>
                                     <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( str_replace( "#", "", $map["address"] ) ); ?>&output=embed" width="100%" height="600" style="border:0;"
                                             allowfullscreen=""

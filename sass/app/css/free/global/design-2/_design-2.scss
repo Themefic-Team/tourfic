@@ -3464,11 +3464,14 @@
                                     }
                                 }
                                 p{
-                                    margin: 0;
+                                    margin: 0 0 15px 0;
+                                }
+                                blockquote{
+                                    margin-bottom: 15px;
                                 }
                                 ul,
                                 ol {
-                                    margin: 0px 0px 0px 13px;;
+                                    margin: 0px 0px 15px 13px;;
                                     padding: 0;
                                     display: flex;
                                     gap: 16px;

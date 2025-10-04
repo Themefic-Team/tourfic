@@ -21,6 +21,7 @@ $start_time_str = '00:00';
 $end_time_str   = '23:30';
 $default_time_str = '10:00';
 $next_current_day = gmdate('l', strtotime('+1 day'));
+$date_format_for_users         = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
 
 if($disable_car_time_slot){
     $time_interval = !empty(Helper::tfopt('car_time_interval')) ? intval(Helper::tfopt('car_time_interval')) : 30;
@@ -56,55 +57,61 @@ $tf_cars_slug = get_option('car_slug');
             <div class="tf-top-booking-bar tf-flex tf-flex-space-bttn tf-flex-align-center">
                 <div class="tf-details-menu">
                     <ul>
+                    <?php if( !empty(Helper::get_status_by_label('Description', 'car')) ){ ?>
                         <li class="active" data-menu="<?php echo esc_attr('tf-description'); ?>">
                             <a class="tf-hashlink" href="#tf-description">
                                 <?php esc_html_e("Description", "tourfic"); ?>
                             </a>
                         </li>
+                        <?php } ?>
+                        <?php if( !empty(Helper::get_status_by_label('Car info', 'car')) ){ ?>
                         <li data-menu="<?php echo esc_attr('tf-car-info'); ?>">
                             <a class="tf-hashlink" href="#tf-car-info">
                                 <?php esc_html_e("Car info", "tourfic"); ?>
                             </a>
                         </li>
-                        <?php if(!empty($benefits)){ ?>
+                        <?php } ?>
+                        <?php if(!empty(Helper::get_status_by_label('Benefits', 'car')) && !empty($benefits)){ ?>
                         <li data-menu="<?php echo esc_attr('tf-benefits'); ?>">
                             <a class="tf-hashlink" href="#tf-benefits">
                                 <?php esc_html_e("Benefits", "tourfic"); ?>
                             </a>
                         </li>
                         <?php } ?>
-                        <?php if(!empty($includes) || !empty($excludes)){ ?>
+                        <?php if(!empty(Helper::get_status_by_label('Include/Exclude', 'car')) && (!empty($includes) || !empty($excludes))){ ?>
                         <li data-menu="<?php echo esc_attr('tf-inc-exc'); ?>">
                             <a class="tf-hashlink" href="#tf-inc-exc">
                                 <?php esc_html_e("Include/Excluce", "tourfic"); ?>
                             </a>
                         </li>
                         <?php } ?>
-                        <?php if(!empty($address)){ ?>
+                        <?php if(!empty(Helper::get_status_by_label('Location', 'car')) && !empty($address)){ ?>
                         <li data-menu="<?php echo esc_attr('tf-location'); ?>">
                             <a class="tf-hashlink" href="#tf-location">
                                 <?php esc_html_e("Location", "tourfic"); ?>
                             </a>
                         </li>
                         <?php } ?>
+                        <?php if(!empty(Helper::get_status_by_label('Review', 'car')) ){ ?>
                         <li data-menu="<?php echo esc_attr('tf-reviews'); ?>">
                             <a class="tf-hashlink" href="#tf-reviews">
                                 <?php esc_html_e("Reviews", "tourfic"); ?>
                             </a>
                         </li>
-                        <?php if(!empty($faqs)){ ?>
+                        <?php } ?>
+                        <?php if(!empty(Helper::get_status_by_label('FAQs', 'car')) && !empty($faqs)){ ?>
                         <li data-menu="<?php echo esc_attr('tf-faq'); ?>">
                             <a class="tf-hashlink" href="#tf-faq">
                                 <?php esc_html_e("FAQ's", "tourfic"); ?>
                             </a>
                         </li>
                         <?php } ?>
-                        <?php if(!empty($tc)){ ?>
-                            <li data-menu="<?php echo esc_attr('tf-tc'); ?>">
-                                <a class="tf-hashlink" href="#tf-tc">
-                                    <?php esc_html_e("Terms & Conditions", "tourfic"); ?>
-                                </a>
-                            </li>
+                        <?php if(!empty(Helper::get_status_by_label('Terms & Conditions', 'car')) && !empty($tc)){ ?>
+                        <li data-menu="<?php echo esc_attr('tf-tc'); ?>">
+                            <a class="tf-hashlink" href="#tf-tc">
+                                <?php esc_html_e("Terms & Conditions", "tourfic"); ?>
+                            </a>
+                        </li>
                         <?php } ?>
                     </ul>
                 </div>
@@ -266,50 +273,56 @@ $tf_cars_slug = get_option('car_slug');
 
                     <div class="tf-details-menu">
                         <ul>
+                            <?php if( !empty(Helper::get_status_by_label('Description', 'car')) ){ ?>
                             <li class="active" data-menu="<?php echo esc_attr('tf-description'); ?>">
                                 <a class="tf-hashlink" href="#tf-description">
                                     <?php esc_html_e("Description", "tourfic"); ?>
                                 </a>
                             </li>
+                            <?php } ?>
+                            <?php if( !empty(Helper::get_status_by_label('Car info', 'car')) ){ ?>
                             <li data-menu="<?php echo esc_attr('tf-car-info'); ?>">
                                 <a class="tf-hashlink" href="#tf-car-info">
                                     <?php esc_html_e("Car info", "tourfic"); ?>
                                 </a>
                             </li>
-                            <?php if(!empty($benefits)){ ?>
+                            <?php } ?>
+                            <?php if(!empty(Helper::get_status_by_label('Benefits', 'car')) && !empty($benefits)){ ?>
                             <li data-menu="<?php echo esc_attr('tf-benefits'); ?>">
                                 <a class="tf-hashlink" href="#tf-benefits">
                                     <?php esc_html_e("Benefits", "tourfic"); ?>
                                 </a>
                             </li>
                             <?php } ?>
-                            <?php if(!empty($includes) || !empty($excludes)){ ?>
+                            <?php if(!empty(Helper::get_status_by_label('Include/Exclude', 'car')) && (!empty($includes) || !empty($excludes))){ ?>
                             <li data-menu="<?php echo esc_attr('tf-inc-exc'); ?>">
                                 <a class="tf-hashlink" href="#tf-inc-exc">
                                     <?php esc_html_e("Include/Excluce", "tourfic"); ?>
                                 </a>
                             </li>
                             <?php } ?>
-                            <?php if(!empty($address)){ ?>
+                            <?php if(!empty(Helper::get_status_by_label('Location', 'car')) && !empty($address)){ ?>
                             <li data-menu="<?php echo esc_attr('tf-location'); ?>">
                                 <a class="tf-hashlink" href="#tf-location">
                                     <?php esc_html_e("Location", "tourfic"); ?>
                                 </a>
                             </li>
                             <?php } ?>
+                            <?php if(!empty(Helper::get_status_by_label('Review', 'car')) ){ ?>
                             <li data-menu="<?php echo esc_attr('tf-reviews'); ?>">
                                 <a class="tf-hashlink" href="#tf-reviews">
                                     <?php esc_html_e("Reviews", "tourfic"); ?>
                                 </a>
                             </li>
-                            <?php if(!empty($faqs)){ ?>
+                            <?php } ?>
+                            <?php if(!empty(Helper::get_status_by_label('FAQs', 'car')) && !empty($faqs)){ ?>
                             <li data-menu="<?php echo esc_attr('tf-faq'); ?>">
                                 <a class="tf-hashlink" href="#tf-faq">
                                     <?php esc_html_e("FAQ's", "tourfic"); ?>
                                 </a>
                             </li>
                             <?php } ?>
-                            <?php if(!empty($tc)){ ?>
+                            <?php if(!empty(Helper::get_status_by_label('Terms & Conditions', 'car')) && !empty($tc)){ ?>
                             <li data-menu="<?php echo esc_attr('tf-tc'); ?>">
                                 <a class="tf-hashlink" href="#tf-tc">
                                     <?php esc_html_e("Terms & Conditions", "tourfic"); ?>
@@ -344,7 +357,9 @@ $tf_cars_slug = get_option('car_slug');
                     <div class="tf-price-header tf-mb-30">
                         <h2><?php esc_html_e("Total:", "tourfic"); ?> 
                         <?php if(!empty($total_prices['regular_price'])){ ?><del><?php echo wp_kses_post(wc_price($total_prices['regular_price'])); ?></del>  <?php } ?>
-                        <?php echo $total_prices['sale_price'] ? wp_kses_post(wc_price($total_prices['sale_price'])) : '' ?> <?php if(!empty($total_prices['type'])){ ?><small class="pricing-type">/ <?php echo esc_html($total_prices['type']); ?></small> <?php } ?></h2>
+                        <?php echo $total_prices['sale_price'] ? wp_kses_post(wc_price($total_prices['sale_price'])) : '' ?> <?php if( empty($_GET['pickup_date']) && !empty($total_prices['type'])){ ?>
+                            <small class="pricing-type">/ <?php echo esc_html($total_prices['type']); ?></small> 
+                            <?php } ?></h2>
                         <p><?php echo wp_kses_post(Pricing::is_taxable($meta)); ?></p>
                     </div>
 
@@ -379,7 +394,7 @@ $tf_cars_slug = get_option('car_slug');
                                     </div>
                                     <div class="info-select">
                                         <h5><?php esc_html_e("Pick-up", "tourfic"); ?></h5>
-                                        <input type="text" placeholder="Pick Up Location" id="tf_pickup_location" value="<?php echo !empty($_GET['pickup']) ? esc_html(sanitize_text_field( wp_unslash($_GET['pickup']) )) : ''; ?>" />
+                                        <input type="text" placeholder="Pick Up Location" id="tf_pickup_location" value="<?php echo !empty($_GET['pickup']) ? esc_html(get_term_by( 'slug', sanitize_text_field( wp_unslash($_GET['pickup']) ), 'carrental_location' )->name) : ''; ?>" />
                                         <input type="hidden" id="tf_pickup_location_id" value="<?php echo !empty($_GET['pickup']) ? esc_html(sanitize_text_field( wp_unslash($_GET['pickup']) )) : ''; ?>" />
                                     </div>
                                 </div>
@@ -401,7 +416,7 @@ $tf_cars_slug = get_option('car_slug');
                                     </div>
                                     <div class="info-select">
                                         <h5><?php esc_html_e("Drop-off", "tourfic"); ?></h5>
-                                        <input type="text" placeholder="Drop Off Location" id="tf_dropoff_location" value="<?php echo !empty($_GET['dropoff']) ? esc_html(sanitize_text_field( wp_unslash($_GET['dropoff']) )) : ''; ?>" />
+                                        <input type="text" placeholder="Drop Off Location" id="tf_dropoff_location" value="<?php echo !empty($_GET['dropoff']) ? esc_html(get_term_by( 'slug', sanitize_text_field( wp_unslash($_GET['dropoff']) ), 'carrental_location' )->name) : ''; ?>" />
                                         <input type="hidden" id="tf_dropoff_location_id" value="<?php echo !empty($_GET['dropoff']) ? esc_html(sanitize_text_field( wp_unslash($_GET['dropoff']) )) : ''; ?>" />
                                     </div>
                                 </div>
@@ -418,7 +433,7 @@ $tf_cars_slug = get_option('car_slug');
                                     </div>
                                     <div class="info-select">
                                         <h5><?php esc_html_e("Pick-up date", "tourfic"); ?></h5>
-                                        <input type="text" placeholder="<?php esc_html_e("Pick Up Date", "tourfic"); ?>" id="tf_pickup_date" class="tf_pickup_date" value="<?php echo !empty($_GET['pickup_date']) ? esc_html(sanitize_text_field( wp_unslash($_GET['pickup_date']) )) : esc_attr(gmdate('Y/m/d', strtotime('+1 day'))); ?>" />
+                                        <input type="text" placeholder="<?php esc_html_e("Pick Up Date", "tourfic"); ?>" id="tf_pickup_date" class="tf_pickup_date" />
                                     </div>
                                 </div>
                             </div>
@@ -476,7 +491,7 @@ $tf_cars_slug = get_option('car_slug');
                                     </div>
                                     <div class="info-select">
                                         <h5><?php esc_html_e("Drop-off date", "tourfic"); ?></h5>
-                                        <input type="text" placeholder="Drop Off Date" id="tf_dropoff_date" class="tf_dropoff_date" value="<?php echo !empty($_GET['dropoff_date']) ? esc_html(sanitize_text_field( wp_unslash($_GET['dropoff_date']))) : esc_attr(gmdate('Y/m/d', strtotime('+2 day'))); ?>" />
+                                        <input type="text" placeholder="Drop Off Date" id="tf_dropoff_date" class="tf_dropoff_date" />
                                     </div>
                                 </div>
                             </div>
@@ -638,7 +653,7 @@ $tf_cars_slug = get_option('car_slug');
                             <img src="<?php echo esc_url( TF_ASSETS_APP_URL ) ?>images/thank-you.gif" alt="Thank You">
                             <h2>
                                 <?php
-                                $booking_confirmation_msg = ! empty( Helper::tfopt( 'car-booking-confirmation-msg' ) ) ? Helper::tfopt( 'car-booking-confirmation-msg' ) : 'Booked Successfully';
+                                $booking_confirmation_msg = ! empty( Helper::tfopt( 'car-booking-confirmation-msg' ) ) ? Helper::tfopt( 'car-booking-confirmation-msg' ) : esc_html__('Booked Successfully', 'tourfic');
                                 echo esc_html( $booking_confirmation_msg );
                                 ?>
                             </h2>
@@ -946,17 +961,25 @@ $tf_cars_slug = get_option('car_slug');
  <script>
     (function ($) {
         $(document).ready(function () {
+            let today = new Date();
+            let tomorrow = new Date();
+            tomorrow.setDate(today.getDate() + 1);
+            let dayAfter = new Date();
+            dayAfter.setDate(today.getDate() + 2);
+
             // flatpickr locale first day of Week
             <?php Helper::tf_flatpickr_locale( "root" ); ?>
 
             $(".tf-single-template__one #tf_dropoff_date").on("click", function () {
-                $(".tf-single-template__one #tf_pickup_date").trigger("click");
+                $(".tf-single-template__one .tf_pickup_date").trigger("click");
             });
             $(".tf-single-template__one #tf_pickup_date").flatpickr({
                 enableTime: false,
                 mode: "range",
                 dateFormat: "Y/m/d",
                 minDate: "today",
+                altInput: true,
+                altFormat: '<?php echo esc_html( $date_format_for_users ); ?>',
                 // flatpickr locale
                 <?php Helper::tf_flatpickr_locale(); ?>
 
@@ -966,22 +989,25 @@ $tf_cars_slug = get_option('car_slug');
                 onChange: function (selectedDates, dateStr, instance) {
                     dateSetToFields(selectedDates, instance);
                 },
-                <?php if(! empty( $check_in_out )){ ?>
-                    defaultDate: <?php echo wp_json_encode( explode( '-', $check_in_out ) ) ?>,
+                <?php if(! empty( $_GET['pickup_date'] ) && $_GET['dropoff_date']){ ?>
+                    defaultDate: ["<?php echo esc_js( sanitize_text_field( wp_unslash( $_GET['pickup_date'] ) ) ); ?>", "<?php echo esc_js( sanitize_text_field( wp_unslash( $_GET['dropoff_date'] ) ) ); ?>"],
+                <?php } else { ?>
+                    defaultDate: [tomorrow, dayAfter],
                 <?php } ?>
             });
 
             function dateSetToFields(selectedDates, instance) {
+                const format = '<?php echo esc_html( $date_format_for_users ); ?>';
                 if (selectedDates.length === 2) {
                     const startDay = flatpickr.formatDate(selectedDates[0], "l");
                     const endDay = flatpickr.formatDate(selectedDates[1], "l");
                     if (selectedDates[0]) {
-                        const startDate = flatpickr.formatDate(selectedDates[0], "Y/m/d");
-                        $(".tf-single-template__one #tf_pickup_date").val(startDate);
+                        const startDate = flatpickr.formatDate(selectedDates[0], format);
+                        $(".tf-single-template__one .tf_pickup_date").val(startDate);
                     }
                     if (selectedDates[1]) {
-                        const endDate = flatpickr.formatDate(selectedDates[1], "Y/m/d");
-                        $(".tf-single-template__one #tf_dropoff_date").val(endDate);
+                        const endDate = flatpickr.formatDate(selectedDates[1], format);
+                        $(".tf-single-template__one .tf_dropoff_date").val(endDate);
                     }
 
                     $.ajax({

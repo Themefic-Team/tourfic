@@ -2031,7 +2031,7 @@
   list-style: none;
   display: flex;
   flex-wrap: wrap;
-  gap: 0px 32px;
+  gap: 5px 32px;
 }
 
 .post-type-archive-tf_carrental .tf-archive-template__one .tf-archive-search-box .tf-driver-location-box .tf-driver-location ul li label,

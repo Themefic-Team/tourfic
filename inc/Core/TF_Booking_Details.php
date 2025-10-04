@@ -114,6 +114,7 @@ abstract Class TF_Booking_Details {
 						'query'     => " $tf_filter_query ORDER BY id DESC LIMIT 15"
 					);
 					$tf_order_details_result = Helper::tourfic_order_table_data( $tf_orders_select );
+                    $total_pages = 1;
 				}
 			?>
             <div class="wrap tf_booking_details_wrap" style="margin-right: 20px;">
@@ -842,7 +843,19 @@ abstract Class TF_Booking_Details {
                                                 </td>
                                             </tr>
                                        <?php } ?>
-
+                                    <?php
+                                    $tf_order = wc_get_order( intval( $_GET['order_id'] ) );
+                                    $customer_note = $tf_order->get_customer_note();
+                                    if(!empty($customer_note)){
+                                    ?>
+                                       <tr>
+                                            <th><?php esc_html_e("Order Note", "tourfic"); ?></th>
+                                            <td>:</td>
+                                            <td>
+                                                <?php echo esc_html($customer_note); ?>
+                                            </td>
+                                        </tr>
+                                    <?php } ?>
                                     </table>
                                 </div>
                             </div>
@@ -1167,7 +1180,24 @@ abstract Class TF_Booking_Details {
                     <div class="visitor-details-popup">
                     <input type="hidden" class="tf_single_order_id" name="order_id" value="<?php echo esc_attr($tf_order_details->id); ?>">
                     <?php 
-                    for($traveller_in = 1; $traveller_in <= $tf_total_visitor; $traveller_in++){ ?>
+                    for($traveller_in = 1; $traveller_in <= $tf_total_visitor; $traveller_in++){ 
+                        
+                        $date_format = ! empty( Helper::tfopt( "tf-date-format-for-users" ) ) ? Helper::tfopt( "tf-date-format-for-users" ) : "Y/m/d";
+
+                        // Map PHP date format to JS-friendly placeholder
+                        $placeholders = array(
+                            'Y/m/d' => 'YYYY/MM/DD',
+                            'd/m/Y' => 'DD/MM/YYYY',
+                            'm/d/Y' => 'MM/DD/YYYY',
+                            'Y-m-d' => 'YYYY-MM-DD',
+                            'd-m-Y' => 'DD-MM-YYYY',
+                            'm-d-Y' => 'MM-DD-YYYY',
+                            'Y.m.d' => 'YYYY.MM.DD',
+                            'd.m.Y' => 'DD.MM.YYYY',
+                            'm.d.Y' => 'MM.DD.YYYY',
+                        );
+                        $placeholder = isset( $placeholders[ $date_format ] ) ? $placeholders[ $date_format ] : 'YYYY/MM/DD';
+                        ?>
                         <div class="tf-single-tour-traveller tf-single-travel">
                             <h4><?php echo $tf_order_details->post_type == 'tour' ? esc_html__( 'Traveler ', 'tourfic' ) . esc_html($traveller_in) : ( $tf_order_details->post_type == 'hotel' ? esc_html__( 'Guest ', 'tourfic' ) . esc_html($traveller_in) : '' ) ?></h4>
                             <div class="traveller-info">
@@ -1180,7 +1210,16 @@ abstract Class TF_Booking_Details {
                             </div>
                             <div class="traveller-single-info">
                                 <label for="tf_dob<?php echo esc_attr($traveller_in); ?>"><?php esc_html_e( 'Date of birth', 'tourfic' ); ?></label>
-                                <input type="date" name="traveller[<?php echo esc_attr($traveller_in); ?>][tf_dob]" id="tf_dob<?php echo esc_attr($traveller_in); ?>" data-required="1" value="<?php echo !empty($tf_visitors_details->{$traveller_in}->{'tf_dob'}) ? esc_attr( $tf_visitors_details->{$traveller_in}->{'tf_dob'} ) : '' ?>"/>
+                                <input 
+                                    type="text" 
+                                    name="traveller[<?php echo esc_attr($traveller_in); ?>][tf_dob]" 
+                                    id="tf_dob<?php echo esc_attr($traveller_in); ?>" 
+                                    data-required="1" 
+                                    value="<?php echo !empty($tf_visitors_details->{$traveller_in}->{'tf_dob'}) ? esc_attr( $tf_visitors_details->{$traveller_in}->{'tf_dob'} ) : '' ?>"
+                                    placeholder="<?php echo esc_attr( $placeholder ); ?>" 
+                                    data-format="<?php echo esc_attr( $date_format ); ?>"
+                                    class="tf-date-picker"
+                                    />
                                 
                             </div>
                             <div class="traveller-single-info">
@@ -1191,12 +1230,29 @@ abstract Class TF_Booking_Details {
                         <?php
                         }else{
                             foreach($traveler_fields as $field){
-                                if("text"==$field['reg-fields-type'] || "email"==$field['reg-fields-type'] || "date"==$field['reg-fields-type']){
+                                if("text"==$field['reg-fields-type'] || "email"==$field['reg-fields-type']){
                                     $field_keys = $field['reg-field-name'];
                                     ?>
                                     <div class="traveller-single-info">
                                         <label for="<?php echo esc_attr($field['reg-field-name']).esc_attr($traveller_in) ?>"><?php echo esc_html( $field['reg-field-label'] ); ?></label>
                                         <input type="<?php echo esc_attr($field['reg-fields-type']); ?>" name="traveller[<?php echo esc_attr($traveller_in); ?>][<?php echo esc_attr($field['reg-field-name']); ?>]" id="<?php echo esc_attr($field['reg-field-name']).esc_attr($traveller_in); ?>" value="<?php echo !empty($tf_visitors_details->{$traveller_in}->{$field_keys}) ? esc_attr( $tf_visitors_details->{$traveller_in}->{$field_keys} ) : '' ?>" />
+                                    </div>
+                                <?php
+                                }
+                                if("date"==$field['reg-fields-type']){
+                                    $field_keys = $field['reg-field-name'];
+                                    ?>
+                                    <div class="traveller-single-info">
+                                        <label for="<?php echo esc_attr($field['reg-field-name']).esc_attr($traveller_in) ?>"><?php echo esc_html( $field['reg-field-label'] ); ?></label>
+                                        <input 
+                                            type="text" 
+                                            name="traveller[<?php echo esc_attr($traveller_in); ?>][<?php echo esc_attr($field['reg-field-name']); ?>]" 
+                                            id="<?php echo esc_attr($field['reg-field-name']).esc_attr($traveller_in); ?>" 
+                                            value="<?php echo !empty($tf_visitors_details->{$traveller_in}->{$field_keys}) ? esc_attr( $tf_visitors_details->{$traveller_in}->{$field_keys} ) : '' ?>" 
+                                            placeholder="<?php echo esc_attr( $placeholder ); ?>" 
+                                            data-format="<?php echo esc_attr( $date_format ); ?>"
+                                            class="tf-date-picker"
+                                            />
                                     </div>
                                 <?php
                                 }
@@ -1355,14 +1411,7 @@ abstract Class TF_Booking_Details {
         // Order Id
         $tf_order_id = !empty($_POST['order_id']) ? absint( wp_unslash( $_POST['order_id'] ) ) : "";
         // Visitor Details
-        $tf_visitor_details = array();
-        if ( isset( $_POST['traveller'] ) ) {
-            if ( is_array( $_POST['traveller'] ) ) {
-                $tf_visitor_details = array_map( 'sanitize_text_field', wp_unslash( $_POST['traveller'] ) ); // sanitize each field
-            } else {
-                $tf_visitor_details = sanitize_text_field( wp_unslash( $_POST['traveller'] ) );
-            }
-        }
+        $tf_visitor_details = isset( $_POST['traveller'] ) ? wp_unslash( $_POST['traveller'] ) : []; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
     
         global $wpdb;
         $tf_order = $wpdb->get_row( $wpdb->prepare( "SELECT id,order_details FROM {$wpdb->prefix}tf_order_data WHERE id = %s",sanitize_key( $tf_order_id ) ) );
