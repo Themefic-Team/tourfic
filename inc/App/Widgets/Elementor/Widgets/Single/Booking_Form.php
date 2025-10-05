@@ -355,6 +355,12 @@ class Booking_Form extends Widget_Base {
 						</div>
 					</div>
 				</div>
+
+				<div id="tour_room_details_loader">
+					<div id="tour-room-details-loader-img">
+						<img src="<?php echo esc_url( TF_ASSETS_APP_URL ) ?>images/loader.gif" alt="">
+					</div>
+				</div>
 			</div>
             <?php
         } elseif ($style == 'style2') {

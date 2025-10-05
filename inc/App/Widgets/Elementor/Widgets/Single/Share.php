@@ -267,10 +267,10 @@ class Share extends Widget_Base {
 	        $disable_share_opt    = ! empty( $post_meta['h-share'] ) ? $post_meta['h-share'] : '';
         } elseif ($post_type == 'tf_tours') {
             $post_meta = get_post_meta($post_id, 'tf_tours_opt', true);
-	        $disable_share_sec = ! empty( $post_meta['t-share'] ) ? $post_meta['t-share'] : 0;
+	        $disable_share_opt = ! empty( $post_meta['t-share'] ) ? $post_meta['t-share'] : 0;
         } elseif ($post_type == 'tf_carrental') {
             $post_meta = get_post_meta($post_id, 'tf_carrental_opt', true);
-	        $disable_share_sec = ! empty( $post_meta['c-share'] ) ? $post_meta['c-share'] : 0;
+	        $disable_share_opt = ! empty( $post_meta['c-share'] ) ? $post_meta['c-share'] : 0;
         } else {
             return;
         }

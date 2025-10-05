@@ -104,9 +104,94 @@
         }
     }
 }
+.tf-single-faq-style2.tf-questions-wrapper {
+    padding: 0;
+    h2{
+        color: $color-heading;
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 24px;
+        @media #{$max1024}{
+            font-size: 1.5rem;
+        }
+    }
+    .tf-questions {
+        display: grid;
+        gap: 40px;
+        grid-template-columns: 1fr 1fr;
+        @media #{$max768}{
+            grid-template-columns: 1fr;
+            gap: 0px;
+        }
+        .tf-questions-col {
+            .tf-question {
+                padding: 24px;
+                background: transparent;
+                padding: 0px 24px;
+                transition: 0.3s;
+                display: block;
+                margin-bottom: 16px;
+                position: relative;
+                cursor: pointer;
+                .faq-icon{
+                    svg{
+                        width: 16px;
+                        height: 16px;
+                    }
+                    .tf-faq-close-icon{
+                        display: block;
+                    }
+                    .tf-faq-open-icon{
+                        display: none;
+                    }
+                }
+                &.tf-active {
+                    background: $color-filling-bg;
+                    padding: 24px;
+                    display: flex;
+                    flex-direction: column;
+                    cursor: text;
+                    .faq-icon{
+                        .tf-faq-close-icon{
+                            display: none;
+                        }
+                        .tf-faq-open-icon{
+                            display: block;
+                        }
+                    }
+                }
+                .tf-faq-head{
+                    cursor: pointer;
+                    @include flexbox();
+                    gap: 16px;
+                    align-items: center;
 
-//style 2
-.tf-single-faq-section.tf-single-faq-style2{
+                    &.tf-faq-icon-right{
+                        @include justify-content(space-between);
+                    }
+
+                    span {
+                        color: $color-text;
+                        font-size: 1rem;
+                        font-weight: 600;
+                        margin-bottom: 8px;
+                    }
+                }
+                .tf-question-desc {
+                    display: none;
+                    @media #{$max768}{
+                        font-size: 0.875rem;
+                    }
+                }
+            }
+            .tf-question:last-child {
+                margin-bottom: 0px;
+            }
+        }
+    }
+}
+//style 3
+.tf-single-faq-section.tf-single-faq-style3{
     .tf-faq-col{
         margin-bottom: 16px;
         &:last-child{

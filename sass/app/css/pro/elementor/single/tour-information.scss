@@ -1,0 +1,71 @@
+@import '../../../../../common/variable';
+@import '../../../../../common/mixin';
+
+.tf-trip-info{
+    background-color: $color-filling-fg;
+    @include bd-radius(5px);
+
+    // trip info -
+    .person-info.active {
+        background: $color-brand-lite;
+    }
+    ul {
+        padding: 0;
+        list-style: none;
+    }
+    li {
+        color: $color-text;
+        margin-top: $tf-space-8;
+        align-items: center;
+        i{
+            margin-right: 0;
+        }
+    } 
+    // trip person info
+    .person-info {
+        border: 1px solid $color-border-lite;
+        @include bd-radius(6px);;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 8px;
+        width: 50px;
+        height: 60px;
+        margin-top: 0px;
+        &:hover{
+            cursor: pointer;
+        }
+        p {
+            font-size: 0.75rem;
+            color: $color-heading;
+            margin: 0;
+        }
+        i {
+            color: $color-primary;
+            margin-right: 0px;
+        }
+    }
+    //pricing
+    .tf-trip-pricing {
+        flex-direction: column;
+        text-align: right;
+        color: $color-text;
+        display: none;
+        @media #{$max1024}{
+            text-align: left;
+        }
+        .tf-price-amount {
+            color: $color-heading;
+            font-size: 1.625rem;
+            margin: 4px 0px;
+            
+            @media #{$max768}{
+                font-size: 1.375rem;
+            }
+        }
+    }
+    .tf-trip-pricing.active{
+        display: flex;
+    }
+}
