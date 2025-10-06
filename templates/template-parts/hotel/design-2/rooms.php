@@ -120,7 +120,7 @@ $price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings'
                                 </div>
 							<?php } ?>
 							<?php
-							if ( ! empty( $tour_room_details_gall ) ) {
+							if ( !empty($room_preview_img) && ! empty( $tour_room_details_gall ) ) {
 								if ( ! empty( $tour_room_details_gall ) ) {
 									$tf_room_gallery_ids = explode( ',', $tour_room_details_gall );
 								}
@@ -131,12 +131,63 @@ $price_settings = ! empty( Helper::tfopt( 'hotel_archive_price_minimum_settings'
 										?>
 										<?php
 										if ( count( $tf_room_gallery_ids ) > 1 ) { ?>
-											<?php if ( 1 == $gallery_limit ) { ?>
+											<?php if ( 1 == $gallery_limit ) { 
+												?>
                                                 <div class="tf-room-gallery">
                                                     <img src="<?php echo esc_url( $image_url ); ?>" alt="<?php esc_html_e( "Room Image", "tourfic" ); ?>">
                                                 </div>
 											<?php } ?>
 											<?php if ( 2 == $gallery_limit ) { ?>
+                                                <div class="tf-room-gallery tf-popup-buttons tf-room-detail-popup"
+                                                     data-uniqid="<?php echo ! empty( $room['unique_id'] ) ? esc_attr( $room['unique_id'] . $room_id ) : '' ?>" data-hotel="<?php echo esc_attr( $post_id ); ?>"
+                                                     style="background-image: url('<?php echo esc_url( $image_url ); ?>'); ">
+                                                    <svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <g id="content">
+                                                            <path id="Rectangle 2111"
+                                                                  d="M5.5 16.9745C5.6287 18.2829 5.91956 19.1636 6.57691 19.8209C7.75596 21 9.65362 21 13.4489 21C17.2442 21 19.1419 21 20.3209 19.8209C21.5 18.6419 21.5 16.7442 21.5 12.9489C21.5 9.15362 21.5 7.25596 20.3209 6.07691C19.6636 5.41956 18.7829 5.1287 17.4745 5"
+                                                                  stroke="#FDF9F4" stroke-width="1.5"></path>
+                                                            <path id="Rectangle 2109"
+                                                                  d="M1.5 9C1.5 5.22876 1.5 3.34315 2.67157 2.17157C3.84315 1 5.72876 1 9.5 1C13.2712 1 15.1569 1 16.3284 2.17157C17.5 3.34315 17.5 5.22876 17.5 9C17.5 12.7712 17.5 14.6569 16.3284 15.8284C15.1569 17 13.2712 17 9.5 17C5.72876 17 3.84315 17 2.67157 15.8284C1.5 14.6569 1.5 12.7712 1.5 9Z"
+                                                                  stroke="#FDF9F4" stroke-width="1.5"></path>
+                                                            <path id="Vector"
+                                                                  d="M1.5 10.1185C2.11902 10.0398 2.74484 10.001 3.37171 10.0023C6.02365 9.9533 8.61064 10.6763 10.6711 12.0424C12.582 13.3094 13.9247 15.053 14.5 17"
+                                                                  stroke="#FDF9F4" stroke-width="1.5" stroke-linejoin="round"></path>
+                                                            <path id="Vector_2" d="M12.4998 6H12.5088" stroke="#FDF9F4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                        </g>
+                                                    </svg>
+                                                </div>
+											<?php } ?>
+										<?php } ?>
+
+									<?php }
+									$gallery_limit ++;
+								}
+							} ?>
+							<?php
+							if ( empty($room_preview_img) && ! empty( $tour_room_details_gall ) ) {
+								if ( ! empty( $tour_room_details_gall ) ) {
+									$tf_room_gallery_ids = explode( ',', $tour_room_details_gall );
+								}
+								$gallery_limit = 1;
+								foreach ( $tf_room_gallery_ids as $key => $gallery_item_id ) {
+									$image_url = wp_get_attachment_url( $gallery_item_id, 'full' );
+									if ( $gallery_limit < 4) {
+										?>
+										<?php
+										if ( count( $tf_room_gallery_ids ) > 1 ) { ?>
+											<?php if ( 1 == $gallery_limit ) { 
+												?>
+                                                <div class="tf-room-gallery">
+                                                    <img src="<?php echo esc_url( $image_url ); ?>" alt="<?php esc_html_e( "Room Image", "tourfic" ); ?>">
+                                                </div>
+											<?php } ?>
+											<?php if ( 2 == $gallery_limit ) { 
+												?>
+                                                <div class="tf-room-gallery">
+                                                    <img src="<?php echo esc_url( $image_url ); ?>" alt="<?php esc_html_e( "Room Image", "tourfic" ); ?>">
+                                                </div>
+											<?php } ?>
+											<?php if ( 3 == $gallery_limit ) { ?>
                                                 <div class="tf-room-gallery tf-popup-buttons tf-room-detail-popup"
                                                      data-uniqid="<?php echo ! empty( $room['unique_id'] ) ? esc_attr( $room['unique_id'] . $room_id ) : '' ?>" data-hotel="<?php echo esc_attr( $post_id ); ?>"
                                                      style="background-image: url('<?php echo esc_url( $image_url ); ?>'); ">

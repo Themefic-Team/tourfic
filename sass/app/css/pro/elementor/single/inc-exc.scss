@@ -1,0 +1,203 @@
+@import '../../../../../common/variable';
+@import '../../../../../common/mixin';
+
+.tf-single-template{
+    &__legacy{
+        .tf-inc-exc-wrapper {
+            background-position: center center;
+            background-size: cover;
+            background-attachment: fixed;
+            .tf-inc-exc-content {
+                display: flex;
+                margin: auto;
+                gap: 35px;
+                @media #{$max768}{
+                    gap: 15px;
+                }
+                @media #{$max575}{
+                    display: block;
+                }
+                h4 {
+                    padding: 6px 0;
+                    margin-bottom: 10px;
+                    color: $color-white;
+                }
+                >* {
+                    flex: 1;
+                }
+                ul {
+                    margin: 0;
+                    padding: 0;
+                    list-style: none;
+                    li {
+                        padding-left: 0px;
+                        position: relative;
+                        margin-left: 0;
+                        i {
+                            margin-right: 20px;
+                        }
+                        &:before {
+                            content: "";
+                            position: absolute;
+                            height: 16px;
+                            width: 16px;
+                            left: 0;
+                            background-size: contain;
+                            top: 8px;
+                        }
+                    }
+                    i.fas {
+                        float: left;
+                        vertical-align: middle;
+                        margin-top: 6px;
+                    }
+                }
+            }
+            .tf-include-section {
+                background: $color-heading;
+                background-image: linear-gradient(to right, rgba(253, 97, 67, 0), rgb(0, 49, 98));
+                border-radius: 4px;
+                padding: 20px 30px 30px;
+                color: $color-white;
+                -webkit-backdrop-filter: blur(3px);
+                backdrop-filter: blur(3px);
+                @media #{$max768}{
+                    padding: 15px 20px 20px;
+                }
+                @media #{$max575}{
+                    margin-bottom: 15px;
+                }
+                h2{
+                    font-size: 1.25rem;
+                    color: $color-white;
+                }
+            }
+            .tf-exclude-section {
+                background: $color-heading;
+                background-image: linear-gradient(to right, rgba(253, 97, 67, 0), rgb(0, 49, 98));
+                border-radius: 4px;
+                padding: 20px 30px 30px;
+                color: $color-white;
+                -webkit-backdrop-filter: blur(3px);
+                backdrop-filter: blur(3px);
+                @media #{$max768}{
+                    padding: 15px 20px 20px;
+                }
+                h2{
+                    font-size: 1.25rem;
+                    color: $color-white;
+                }
+            }
+            .tf-include-section.custom-inc-icon {
+                ul {
+                    li {
+                        &:before {
+                            display: none;
+                        }
+                    }
+                }
+                h2{
+                    color: $color-white;
+                }
+            }
+            .tf-exclude-section.custom-exc-icon {
+                ul {
+                    li {
+                        &:before {
+                            display: none;
+                        }
+                    }
+                }
+                h2{
+                    color: $color-white;
+                }
+            }
+        }
+    }
+    &__one{
+        .tf-inex-wrapper {
+            .tf-inex {
+                width: 100%;
+                background: $color-filling-fg;
+                @include bd-radius(5px);;
+                ul{
+                    li{
+                        margin-top: 0px;
+                        margin-bottom: 12px;
+                        &:last-child{
+                            margin-bottom: 0px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &__two{
+        .tf-include-exclude-wrapper {
+            h2{
+                color: $color-heading;
+                font-size: 2rem;
+                font-weight: 700;
+                margin-bottom: 20px;
+                @media #{$max1024}{
+                    font-size: 1.5rem;
+                }
+            }
+            .tf-include-exclude-innter {
+                display: flex;
+                gap: 40px;
+                @media #{$max768}{
+                    flex-wrap: wrap;
+                    gap: 24px;
+                }
+                &>div {
+                    display: flex;
+                    gap: 16px;
+                    width: 50%;
+                    @media #{$max768}{
+                        width: 100%;
+                    }
+                }
+                ul {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 16px;
+                    margin: 0;
+                    padding: 0;
+                    @media #{$max768}{
+                        gap: 8px;
+                    }
+                    li {
+                        display: flex;
+                        gap: 16px;
+                        img {
+                            width: 16px;
+                            height: 16px;
+                            object-fit: contain;
+                        }
+                    }
+                }
+                .tf-include{
+                    ul{
+                        li{
+                            i{
+                                color: $color-success;
+                                line-height: 1.6;
+                            }
+                        }
+                    }
+                }
+                .tf-exclude{
+                    ul{
+                        li{
+                            i{
+                                color: $color-danger;
+                                line-height: 1.6;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -57,55 +57,61 @@ $tf_cars_slug = get_option('car_slug');
             <div class="tf-top-booking-bar tf-flex tf-flex-space-bttn tf-flex-align-center">
                 <div class="tf-details-menu">
                     <ul>
+                    <?php if( !empty(Helper::get_status_by_label('Description', 'car')) ){ ?>
                         <li class="active" data-menu="<?php echo esc_attr('tf-description'); ?>">
                             <a class="tf-hashlink" href="#tf-description">
                                 <?php esc_html_e("Description", "tourfic"); ?>
                             </a>
                         </li>
+                        <?php } ?>
+                        <?php if( !empty(Helper::get_status_by_label('Car info', 'car')) ){ ?>
                         <li data-menu="<?php echo esc_attr('tf-car-info'); ?>">
                             <a class="tf-hashlink" href="#tf-car-info">
                                 <?php esc_html_e("Car info", "tourfic"); ?>
                             </a>
                         </li>
-                        <?php if(!empty($benefits)){ ?>
+                        <?php } ?>
+                        <?php if(!empty(Helper::get_status_by_label('Benefits', 'car')) && !empty($benefits)){ ?>
                         <li data-menu="<?php echo esc_attr('tf-benefits'); ?>">
                             <a class="tf-hashlink" href="#tf-benefits">
                                 <?php esc_html_e("Benefits", "tourfic"); ?>
                             </a>
                         </li>
                         <?php } ?>
-                        <?php if(!empty($includes) || !empty($excludes)){ ?>
+                        <?php if(!empty(Helper::get_status_by_label('Include/Exclude', 'car')) && (!empty($includes) || !empty($excludes))){ ?>
                         <li data-menu="<?php echo esc_attr('tf-inc-exc'); ?>">
                             <a class="tf-hashlink" href="#tf-inc-exc">
                                 <?php esc_html_e("Include/Excluce", "tourfic"); ?>
                             </a>
                         </li>
                         <?php } ?>
-                        <?php if(!empty($address)){ ?>
+                        <?php if(!empty(Helper::get_status_by_label('Location', 'car')) && !empty($address)){ ?>
                         <li data-menu="<?php echo esc_attr('tf-location'); ?>">
                             <a class="tf-hashlink" href="#tf-location">
                                 <?php esc_html_e("Location", "tourfic"); ?>
                             </a>
                         </li>
                         <?php } ?>
+                        <?php if(!empty(Helper::get_status_by_label('Review', 'car')) ){ ?>
                         <li data-menu="<?php echo esc_attr('tf-reviews'); ?>">
                             <a class="tf-hashlink" href="#tf-reviews">
                                 <?php esc_html_e("Reviews", "tourfic"); ?>
                             </a>
                         </li>
-                        <?php if(!empty($faqs)){ ?>
+                        <?php } ?>
+                        <?php if(!empty(Helper::get_status_by_label('FAQs', 'car')) && !empty($faqs)){ ?>
                         <li data-menu="<?php echo esc_attr('tf-faq'); ?>">
                             <a class="tf-hashlink" href="#tf-faq">
                                 <?php esc_html_e("FAQ's", "tourfic"); ?>
                             </a>
                         </li>
                         <?php } ?>
-                        <?php if(!empty($tc)){ ?>
-                            <li data-menu="<?php echo esc_attr('tf-tc'); ?>">
-                                <a class="tf-hashlink" href="#tf-tc">
-                                    <?php esc_html_e("Terms & Conditions", "tourfic"); ?>
-                                </a>
-                            </li>
+                        <?php if(!empty(Helper::get_status_by_label('Terms & Conditions', 'car')) && !empty($tc)){ ?>
+                        <li data-menu="<?php echo esc_attr('tf-tc'); ?>">
+                            <a class="tf-hashlink" href="#tf-tc">
+                                <?php esc_html_e("Terms & Conditions", "tourfic"); ?>
+                            </a>
+                        </li>
                         <?php } ?>
                     </ul>
                 </div>
@@ -267,50 +273,56 @@ $tf_cars_slug = get_option('car_slug');
 
                     <div class="tf-details-menu">
                         <ul>
+                            <?php if( !empty(Helper::get_status_by_label('Description', 'car')) ){ ?>
                             <li class="active" data-menu="<?php echo esc_attr('tf-description'); ?>">
                                 <a class="tf-hashlink" href="#tf-description">
                                     <?php esc_html_e("Description", "tourfic"); ?>
                                 </a>
                             </li>
+                            <?php } ?>
+                            <?php if( !empty(Helper::get_status_by_label('Car info', 'car')) ){ ?>
                             <li data-menu="<?php echo esc_attr('tf-car-info'); ?>">
                                 <a class="tf-hashlink" href="#tf-car-info">
                                     <?php esc_html_e("Car info", "tourfic"); ?>
                                 </a>
                             </li>
-                            <?php if(!empty($benefits)){ ?>
+                            <?php } ?>
+                            <?php if(!empty(Helper::get_status_by_label('Benefits', 'car')) && !empty($benefits)){ ?>
                             <li data-menu="<?php echo esc_attr('tf-benefits'); ?>">
                                 <a class="tf-hashlink" href="#tf-benefits">
                                     <?php esc_html_e("Benefits", "tourfic"); ?>
                                 </a>
                             </li>
                             <?php } ?>
-                            <?php if(!empty($includes) || !empty($excludes)){ ?>
+                            <?php if(!empty(Helper::get_status_by_label('Include/Exclude', 'car')) && (!empty($includes) || !empty($excludes))){ ?>
                             <li data-menu="<?php echo esc_attr('tf-inc-exc'); ?>">
                                 <a class="tf-hashlink" href="#tf-inc-exc">
                                     <?php esc_html_e("Include/Excluce", "tourfic"); ?>
                                 </a>
                             </li>
                             <?php } ?>
-                            <?php if(!empty($address)){ ?>
+                            <?php if(!empty(Helper::get_status_by_label('Location', 'car')) && !empty($address)){ ?>
                             <li data-menu="<?php echo esc_attr('tf-location'); ?>">
                                 <a class="tf-hashlink" href="#tf-location">
                                     <?php esc_html_e("Location", "tourfic"); ?>
                                 </a>
                             </li>
                             <?php } ?>
+                            <?php if(!empty(Helper::get_status_by_label('Review', 'car')) ){ ?>
                             <li data-menu="<?php echo esc_attr('tf-reviews'); ?>">
                                 <a class="tf-hashlink" href="#tf-reviews">
                                     <?php esc_html_e("Reviews", "tourfic"); ?>
                                 </a>
                             </li>
-                            <?php if(!empty($faqs)){ ?>
+                            <?php } ?>
+                            <?php if(!empty(Helper::get_status_by_label('FAQs', 'car')) && !empty($faqs)){ ?>
                             <li data-menu="<?php echo esc_attr('tf-faq'); ?>">
                                 <a class="tf-hashlink" href="#tf-faq">
                                     <?php esc_html_e("FAQ's", "tourfic"); ?>
                                 </a>
                             </li>
                             <?php } ?>
-                            <?php if(!empty($tc)){ ?>
+                            <?php if(!empty(Helper::get_status_by_label('Terms & Conditions', 'car')) && !empty($tc)){ ?>
                             <li data-menu="<?php echo esc_attr('tf-tc'); ?>">
                                 <a class="tf-hashlink" href="#tf-tc">
                                     <?php esc_html_e("Terms & Conditions", "tourfic"); ?>
@@ -345,7 +357,9 @@ $tf_cars_slug = get_option('car_slug');
                     <div class="tf-price-header tf-mb-30">
                         <h2><?php esc_html_e("Total:", "tourfic"); ?> 
                         <?php if(!empty($total_prices['regular_price'])){ ?><del><?php echo wp_kses_post(wc_price($total_prices['regular_price'])); ?></del>  <?php } ?>
-                        <?php echo $total_prices['sale_price'] ? wp_kses_post(wc_price($total_prices['sale_price'])) : '' ?> <?php if(!empty($total_prices['type'])){ ?><small class="pricing-type">/ <?php echo esc_html($total_prices['type']); ?></small> <?php } ?></h2>
+                        <?php echo $total_prices['sale_price'] ? wp_kses_post(wc_price($total_prices['sale_price'])) : '' ?> <?php if( empty($_GET['pickup_date']) && !empty($total_prices['type'])){ ?>
+                            <small class="pricing-type">/ <?php echo esc_html($total_prices['type']); ?></small> 
+                            <?php } ?></h2>
                         <p><?php echo wp_kses_post(Pricing::is_taxable($meta)); ?></p>
                     </div>
 

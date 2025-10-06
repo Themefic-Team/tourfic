@@ -1,6 +1,7 @@
 <?php
 
 namespace Tourfic\App\Shortcodes;
+use \Tourfic\Classes\Helper;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -74,7 +75,9 @@ class Tours extends \Tourfic\Core\Shortcodes {
 							<div class="tf-slider-content">
 								<div class="tf-slider-desc">
 									<h3>
-										<a href="<?php the_permalink() ?>"><?php the_title() ?></a>
+										<a href="<?php the_permalink() ?>">
+											<?php echo esc_html( Helper::tourfic_character_limit_callback( get_the_title($post_id), 60 ) ) ?>
+										</a>
 									</h3>
 									<?php if ( $related_comments ) { ?>
 										<div class="tf-slider-rating-star">

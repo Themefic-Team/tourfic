@@ -730,6 +730,10 @@ var __webpack_exports__ = {};
                         if(response){
                             const obj = JSON.parse(response);
 
+                            if (obj.custom_avail !== '1') {
+                                populateObjectTimeSelect(obj.allowed_times)
+                            }
+
                             let flatpickerObj = {
                                 enableTime: false,
                                 dateFormat: "Y/m/d",
@@ -742,11 +746,11 @@ var __webpack_exports__ = {};
                                 .filter(([dateRange, data]) => data.status === "available")
                                 .map(([dateRange, data]) => {
                                     const [fromRaw, toRaw] = dateRange.split(' - ').map(str => str.trim());
-                    
+
                                     const today = new Date();
                                     const formattedToday = today.getFullYear() + '/' + (today.getMonth() + 1) + '/' + today.getDate();
                                     let fromDate = fromRaw;
-                    
+
                                     return {
                                         from: fromDate,
                                         to: toRaw
@@ -784,23 +788,25 @@ var __webpack_exports__ = {};
                                 }
 
                                 populateTimeSelect(times);
-                                
+
                                 instance.element.value = dateStr.replace(/[a-z]+/g, '-');
                             }
 
                             $("[name='tf_tour_date']").flatpickr(flatpickerObj);
+
+
                             if (obj.tour_extras_array && Object.keys(obj.tour_extras_array).length > 0) {
                                 let extras = $('[name="tf_tour_extras[]"]');
                                 extras.removeAttr('disabled');
                                 extras.empty();
-                            
+
                                 $.each(obj.tour_extras_array, function (key, value) {
                                     extras.append($('<option>', {
                                         value: key,
                                         html: value // Use html to parse entities like &#36;
                                     }));
                                 });
-                            
+
                                 extras.select2();
                             } else {
                                 let extras = $('[name="tf_tour_extras[]"]');
@@ -813,6 +819,23 @@ var __webpack_exports__ = {};
                 });
             }
         });
+
+        function populateObjectTimeSelect(times) {
+            let timeSelect = $('[name="tf_tour_time"]');
+            timeSelect.empty();
+
+            if (Object.keys(times).length > 0) {
+                // Use the keys and values from the object to populate the options
+                $.each(times, function (key, value) {
+                    timeSelect.append(`<option value="${key}">${value}</option>`);
+                });
+                timeSelect.attr('disabled', false);
+            } else {
+                timeSelect.append(`<option value="" selected>No Time Available</option>`);
+                timeSelect.attr('disabled', 'disabled');
+            }
+
+        }
 
         function populateTimeSelect(times) {
             let timeSelect = $('[name="tf_tour_time"]');
@@ -1687,6 +1710,12 @@ var __webpack_exports__ = {};
             });
         });
 
+        $('.tf-date-picker').each(function() {
+            let format = $(this).data('format') || "Y/m/d";
+            flatpickr(this, {
+                dateFormat: format
+            });
+        });
     });
 
 })(jQuery);

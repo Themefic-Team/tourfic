@@ -144,35 +144,36 @@ use \Tourfic\App\TF_Review;
             <!-- menu section Start -->
             <div class="tf-details-menu">
                 <ul>
+                    <?php if( !empty(Helper::get_status_by_label('Description', 'hotel')) ){ ?>
                     <li><a class="tf-hashlink" href="#tf-hotel-overview">
                         <?php esc_html_e("Overview", "tourfic"); ?>
                     </a></li>
-
-                   <?php if( !empty($meta['room']))  : ?>
+                    <?php } ?>
+                   <?php if( !empty(Helper::get_status_by_label('Room', 'hotel')) && !empty($meta['tf_rooms']))  : ?>
                         <li><a href="#tf-hotel-rooms">
                             <?php esc_html_e("Rooms", "tourfic"); ?>
                         </a></li>
                     <?php endif; ?>
 
-                    <?php if( !empty( $meta["hotel-facilities"] )) : ?>
+                    <?php if( !empty(Helper::get_status_by_label('Facilities', 'hotel')) && !empty( $meta["hotel-facilities"] )) : ?>
                         <li><a href="#tf-hotel-facilities">
                             <?php esc_html_e("Facilities", "tourfic"); ?>
                         </a></li>
                     <?php endif; ?>
 
-                    <?php if( !empty( $comments )) : ?>
+                    <?php if( !empty(Helper::get_status_by_label('Review', 'hotel')) && !empty( $comments )) : ?>
                         <li><a href="#tf-hotel-reviews">
                             <?php esc_html_e("Reviews", "tourfic"); ?>
                         </a></li>
                     <?php endif; ?>
 
-                    <?php if( !empty( $meta["faq"] )) : ?>
+                    <?php if( !empty(Helper::get_status_by_label('FAQ', 'hotel')) && !empty( $meta["faq"] )) : ?>
                         <li><a href="#tf-hotel-faq">
                             <?php esc_html_e("FAQ's", "tourfic"); ?>
                         </a></li>
                     <?php endif; ?>
 
-                    <?php if( !empty( $meta["tc"] )): ?>
+                    <?php if( !empty(Helper::get_status_by_label('Terms & Conditions', 'hotel')) && !empty( $meta["tc"] )): ?>
                         <li><a href="#tf-hotel-policies">
                             <?php esc_html_e("Policies", "tourfic"); ?>
                         </a></li>

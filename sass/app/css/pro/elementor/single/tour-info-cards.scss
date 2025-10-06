@@ -1,0 +1,79 @@
+@import '../../../../../common/variable';
+@import '../../../../../common/mixin';
+
+.tf-trip-feature-blocks{
+    .tf-features-block-inner {
+        display: flex;
+        flex-wrap: nowrap;
+    
+        @media #{$max1024}{
+            flex-wrap: wrap;
+        }
+        
+        .tf-feature-block {
+            width: 100%;
+            flex-basis: auto;
+            @media #{$max1024}{
+                flex-basis: calc(50% - 16px);
+            }
+            @media #{$max575}{
+                flex-basis: 100%;
+            }
+        }
+    }
+    .tf-feature-block {
+        background: $color-filling-fg;
+        @include bd-radius(5px);;
+        padding: 20px;
+        padding-top: 17px;
+        width: 100%;
+        align-items: baseline;
+        @media #{$max1024}{
+            padding: 24px;
+            padding-top: 21px;
+        }
+        .tf-feature-block-icon{
+            position: relative;
+            top: 3px;
+            i{
+                color: $color-primary;
+                font-size: 1.25rem;
+            }
+        }
+        
+        h3{
+            color: $color-heading;
+        }
+        h5{
+            color: $color-heading;
+            margin-bottom: 5px;
+            font-size: 1.25rem;
+            @media #{$max768}{
+                font-size: 1rem;
+            }
+        }
+        p{
+            color: $color-text;
+            margin-top: $tf-space-8;
+            margin-bottom: 0;
+            margin-top: 0;
+        }
+        .repeat-dates {
+            display: block;
+            padding-left: 0;
+            margin-bottom: 0;
+            margin-left: 0;
+            margin-top: 5px;
+
+            .repeat-date-list {
+                list-style: none;
+                background-color: $color-filling-fg;
+                padding: 0px 8px;
+                margin: 10px 5px;
+                text-align: center;
+                @include bd-radius(5px);;
+                font-size: 0.938rem;
+            }
+        }
+    }
+}

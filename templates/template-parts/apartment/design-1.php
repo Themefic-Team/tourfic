@@ -132,35 +132,37 @@ use \Tourfic\Classes\Apartment\Pricing as Apt_Pricing;
             <!-- menu section Start -->
             <div class="tf-details-menu">
                 <ul>
+                    <?php if( !empty(Helper::get_status_by_label('Description', 'apartment')) ){ ?>
                     <li><a class="tf-hashlink" href="#tf-apartment-overview">
                         <?php esc_html_e("Overview", "tourfic"); ?>
                     </a></li>
+                    <?php } ?>
 
-                    <?php if( !empty( $meta["rooms"])) : ?>
+                    <?php if( !empty(Helper::get_status_by_label('Apartment Rooms', 'apartment')) && !empty( $meta["rooms"])) : ?>
                         <li><a href="#tf-apartment-rooms">
                             <?php esc_html_e("Rooms", "tourfic"); ?>
                         </a></li>
                     <?php endif; ?>
 
-                    <?php if( !empty( $meta["house_rules"])) : ?>
+                    <?php if( !empty(Helper::get_status_by_label('House Rules', 'apartment')) && !empty( $meta["house_rules"])) : ?>
                         <li><a href="#tf-apartment-rules">
                             <?php esc_html_e("House Rules", "tourfic"); ?>
                         </a></li>
                     <?php endif; ?>
 
-                    <?php if(!empty( $meta["faq"])) : ?>
+                    <?php if(!empty(Helper::get_status_by_label('FAQ', 'apartment')) && !empty( $meta["faq"])) : ?>
                         <li><a href="#tf-apartment-faq">
                             <?php esc_html_e("FAQ's", "tourfic"); ?>
                         </a></li>
                     <?php endif; ?>
 
-                    <?php if( !empty($comments) ) : ?>
+                    <?php if( !empty(Helper::get_status_by_label('Review', 'apartment')) && !empty($comments) ) : ?>
                         <li><a href="#tf-apartment-reviews">
                             <?php esc_html_e("Reviews", "tourfic"); ?>
                         </a></li>
                     <?php endif; ?>
 
-                    <?php if( !empty( $meta["terms_and_conditions"]) ) : ?>
+                    <?php if( !empty(Helper::get_status_by_label('Terms & Conditions', 'apartment')) && !empty( $meta["terms_and_conditions"]) ) : ?>
                         <li><a href="#tf-apartment-policies">
                             <?php esc_html_e("Policies", "tourfic"); ?>
                         </a></li>

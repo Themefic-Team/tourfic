@@ -60,7 +60,7 @@ class Tour_Information extends Widget_Base {
 
 	protected function register_controls() {
 
-		$this->tf_content_layout_controls();
+		// $this->tf_content_layout_controls();
 
 		do_action( 'tf/single-tour-information/before-style-controls', $this );
 		$this->tf_tour_information_style_controls();
@@ -87,26 +87,27 @@ class Tour_Information extends Widget_Base {
 			'tab'   => Controls_Manager::TAB_STYLE,
 		]);
 
-        $this->add_responsive_control( "tf_nav_item_gap", [
-			'label'      => esc_html__( 'Nav Items Gap', 'tourfic' ),
-			'type'       => Controls_Manager::SLIDER,
-			'size_units' => [
-				'px',
-			],
-			'range'      => [
-				'px' => [
-					'min'  => 5,
-					'max'  => 50,
-					'step' => 1,
-				],
-			],
-			'selectors'  => [
-				"{{WRAPPER}} .tf-single-gallery__style-1.tf-hero-gallery .tf-gallery" => 'gap: {{SIZE}}{{UNIT}};',
-			],
-            'condition' => [
-				'tour_information_style' => ['style1'],
+		$this->add_control( "bg_color", [
+			'label'     => __( 'Background Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .tf-trip-info" => 'background-color: {{VALUE}};',
 			],
 		] );
+
+        // $this->add_control( "btn_color", [
+		// 	'label'     => __( 'Text Color', 'tourfic' ),
+		// 	'type'      => Controls_Manager::COLOR,
+		// 	'selectors' => [
+		// 		"{{WRAPPER}} .tf-single-action-btns a" => 'color: {{VALUE}};',
+		// 		"{{WRAPPER}} .tf-single-action-btns a svg path" => 'fill: {{VALUE}};',
+		// 	],
+		// ] );
+
+        // $this->add_group_control( Group_Control_Typography::get_type(), [
+		// 	'name'     => "btn_typography",
+		// 	'selector' => "{{WRAPPER}} .tf-single-action-btns a",
+		// ] );
 
 		$this->end_controls_section();
 	}

@@ -625,12 +625,21 @@ var __webpack_exports__ = {};
         });
 
         // Tabs Section
-        $('.tf-details-menu ul li').on("click", function () {
-            var $this = $(this);
-            $currentmenu = $this.attr('data-menu');
+        $(document).on('click', '.tf-details-menu ul li', function (e) {
+            var $clicked = $(this);
+            var key = String( $clicked.data('menu') || $clicked.attr('data-menu') ).trim();
+
+            if ( key === '' ) {
+                return;
+            }
+
+            // remove .active from all menu items in all menus
             $('.tf-details-menu ul li').removeClass('active');
 
-            $('.tf-details-menu ul li[data-menu="' + $currentmenu + '"]').addClass('active');
+            // add .active to every li whose data-menu matches the clicked one
+            $('.tf-details-menu ul li').filter(function () {
+                return String( $(this).data('menu') || $(this).attr('data-menu') ).trim() === key;
+            }).addClass('active');
         });
         
         // Car Location Autocomplete
@@ -1670,9 +1679,9 @@ var __webpack_exports__ = {};
             $('.tf-date-select-box').slideToggle( function () {
                 // Check visibility after the toggle animation completes
                 if ($(this).is(':visible')) {
-                    $button.text('Hide');
+                    $button.text(tf_params.car_mobile_button_hide);
                 } else {
-                    $button.text('Book Now');
+                    $button.text(tf_params.car_mobile_button_book_now);
                 }
             });
         });
@@ -2448,6 +2457,13 @@ function convertTo24HourFormat(timeStr) {
                         }
                         $this.closest(".room-submit-wrap").siblings(".tf-withoutpayment-booking").find('.tf-control-pagination:first-child').show()
                     }
+
+                    $('.tf-date-picker').each(function() {
+                        let format = $(this).data('format') || "Y/m/d";
+                        flatpickr(this, {
+                            dateFormat: format
+                        });
+                    });
                 },
                 error: function (data) {
                     console.log(data);
@@ -5427,8 +5443,10 @@ function convertTo24HourFormat(timeStr) {
         * @author Jahid
         */
         let tf_hasErrorsFlag = false;
+        let tf_firstErrorElement = null; // track the first error field
         $('body').on('click', '.tf-traveller-error', function (e) {
             let hasErrors = [];
+            tf_firstErrorElement = null; // reset before validation
             let $this = $(this).closest('.tf-withoutpayment-booking');
             $('.error-text').text("");
             $this.find('.tf-single-travel').each(function () {
@@ -5443,6 +5461,7 @@ function convertTo24HourFormat(timeStr) {
                             } else {
                                 errorContainer.removeClass('error-visible');
                             }
+                            if (!tf_firstErrorElement) tf_firstErrorElement = $(this); // save first invalid field
                         }
                     }
                 });
@@ -5460,6 +5479,7 @@ function convertTo24HourFormat(timeStr) {
                             } else {
                                 errorContainer.removeClass('error-visible');
                             }
+                            if (!tf_firstErrorElement) tf_firstErrorElement = $(this);
                         }
                     }
                 });
@@ -5467,6 +5487,13 @@ function convertTo24HourFormat(timeStr) {
             });
             if (hasErrors.includes(true)) {
                 tf_hasErrorsFlag = true;
+                if (tf_firstErrorElement) {
+                    $('html, body').animate({
+                        scrollTop: tf_firstErrorElement.offset().top - 100
+                    }, 500, function () {
+                        tf_firstErrorElement.focus(); // focus after scrolling
+                    });
+                }
                 return false;
             }
             tf_hasErrorsFlag = false;
@@ -5475,6 +5502,7 @@ function convertTo24HourFormat(timeStr) {
         // Booking Confirmation Form Validation
         $('body').on('click', '.tf-book-confirm-error, .tf-hotel-book-confirm-error', function (e) {
             let hasErrors = [];
+            tf_firstErrorElement = null;
             let $this = $(this).closest('.tf-withoutpayment-booking');
             $('.error-text').text("");
             $this.find('.tf-confirm-fields').each(function () {
@@ -5489,6 +5517,7 @@ function convertTo24HourFormat(timeStr) {
                             } else {
                                 errorContainer.removeClass('error-visible');
                             }
+                            if (!tf_firstErrorElement) tf_firstErrorElement = $(this);
                         }
                     }
                 });
@@ -5506,12 +5535,20 @@ function convertTo24HourFormat(timeStr) {
                             } else {
                                 errorContainer.removeClass('error-visible');
                             }
+                            if (!tf_firstErrorElement) tf_firstErrorElement = $(this);
                         }
                     }
                 });
             });
             if (hasErrors.includes(true)) {
                 tf_hasErrorsFlag = true;
+                if (tf_firstErrorElement) {
+                    $('html, body').animate({
+                        scrollTop: tf_firstErrorElement.offset().top - 100
+                    }, 500, function () {
+                        tf_firstErrorElement.focus(); // focus after scrolling
+                    });
+                }
                 return false;
             }
         });
@@ -5684,6 +5721,13 @@ function convertTo24HourFormat(timeStr) {
                         
                         $('.tf-withoutpayment-booking').addClass('show');
                     }
+
+                    $('.tf-date-picker').each(function() {
+                        let format = $(this).data('format') || "Y/m/d";
+                        flatpickr(this, {
+                            dateFormat: format
+                        });
+                    });
                 },
                 error: function (data) {
                     console.log(data);
@@ -6545,6 +6589,7 @@ function convertTo24HourFormat(timeStr) {
                 }
             }
         });
+
     });
 
 })(jQuery, window);

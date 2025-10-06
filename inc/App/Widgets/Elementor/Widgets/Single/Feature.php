@@ -218,17 +218,21 @@ class Feature extends Widget_Base {
         $this->post_type = get_post_type();
 
         if($this->post_type == 'tf_hotel'){
-            $meta = get_post_meta($this->post_id, 'tf_hotels_opt', true);
-            $feature_meta_key = 'tf_hotel_feature';
-            $feature_title = !empty($meta['popular-section-title']) ? esc_html($meta['popular-section-title']) : '';
-			$features = ! empty( get_the_terms( $this->post_id, 'hotel_feature' ) ) ? get_the_terms( $this->post_id, 'hotel_feature' ) : '';
-
+            $this->tf_hotel_features($settings);
+        } if($this->post_type == 'tf_tours'){
+            $this->tf_tour_features($settings);
         } else {
 			return;
 		}
+	}
 
-        //feature style
+	private function tf_hotel_features($settings) {
+		//feature style
         $style = !empty($settings['feature_style']) ? $settings['feature_style'] : 'style1';
+		$meta = get_post_meta($this->post_id, 'tf_hotels_opt', true);
+		$feature_meta_key = 'tf_hotel_feature';
+		$feature_title = !empty($meta['popular-section-title']) ? esc_html($meta['popular-section-title']) : '';
+		$features = ! empty( get_the_terms( $this->post_id, 'hotel_feature' ) ) ? get_the_terms( $this->post_id, 'hotel_feature' ) : '';
         
         if ($style == 'style1' && $features) {
             ?>
@@ -252,6 +256,74 @@ class Feature extends Widget_Base {
                         <?php } ?>
                     </ul>
                 </div>
+            </div>
+            <?php
+        } elseif ($style == 'style2' && $features) {
+            ?>
+            <div class="tf-single-feature-section tf-single-feature-style2">
+                <div class="tf-overview-popular-facilities">
+                    <span class="tf-popular-facilities-title"><?php echo esc_html($feature_title); ?></span>
+                    <ul>
+                        <?php foreach ( $features as $feature ) {
+                            $feature_meta = get_term_meta( $feature->term_taxonomy_id, $feature_meta_key, true );
+                            $f_icon_type  = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
+                            if ( $f_icon_type == 'fa' && ! empty( $feature_meta['icon-fa'] ) ) {
+                                $feature_icon = '<i class="' . $feature_meta['icon-fa'] . '"></i>';
+                            }
+                            if ( $f_icon_type == 'c' && ! empty( $feature_meta['icon-c'] ) ) {
+                                $feature_icon = '<img src="' . $feature_meta['icon-c'] . '" style="width: ' . $feature_meta['dimention'] . 'px; height: ' . $feature_meta['dimention'] . 'px;" />';
+                            }
+                            ?>
+                            <li>
+                                <?php echo ! empty( $feature_meta ) && ! empty( $feature_icon ) ? wp_kses_post( $feature_icon ) : ''; ?>
+                                <?php echo esc_html($feature->name); ?>
+                            </li>
+                        <?php } ?>
+                    </ul>
+                </div>
+            </div>
+			<?php
+        }
+	}
+
+	private function tf_tour_features($settings) {
+		//feature style
+        $style = !empty($settings['feature_style']) ? $settings['feature_style'] : 'style1';
+		$meta = get_post_meta($this->post_id, 'tf_tours_opt', true);
+		$feature_meta_key = 'tour_features';
+		$feature_title = !empty($meta['tour-features-section-title']) ? esc_html($meta['tour-features-section-title']) : '';
+		$features = ! empty( get_the_terms( $this->post_id, 'tour_features' ) ) ? get_the_terms( $this->post_id, 'tour_features' ) : '';
+        
+        if ($style == 'style1' && $features) {
+            ?>
+            <div class="tf-single-template__one tf-single-feature-style1">
+				<div class="tf-tour-features tf-template-section">
+					<div class="tf-tour-features-container">
+						<?php if (!empty($meta["tour-features-section-title"])) : ?>
+							<h2 class="tf-title tf-section-title"><?php echo esc_html( $meta["tour-features-section-title"] ); ?></h2>
+						<?php endif; ?>
+						<ul class="tf-tour-feature-list">
+
+							<?php foreach ( $features as $feature ) {
+								$feature_meta = get_term_meta( $feature->term_taxonomy_id, 'tour_features', true );
+								$f_icon_type  = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
+
+								if ( $f_icon_type == 'fa' && !empty($feature_meta['icon-fa']) ) {
+									$feature_icon = '<i class="' . $feature_meta['icon-fa'] . '"></i>';
+								} else if ( $f_icon_type == 'c' && !empty($feature_meta['icon-c']) ) {
+									$feature_icon = '<img src="' . $feature_meta['icon-c'] . '" style="width: ' . $feature_meta['dimention'] . 'px; height: ' . $feature_meta['dimention'] . 'px;" />';
+								} ?>
+
+							<?php if( !empty($feature->name) ) : ?>
+									<li class="single-feature-box">
+										<span class="tf-tour-features-icon"><?php echo !empty($feature_meta['icon-fa']) || !empty($feature_meta['icon-c'])  ? wp_kses_post($feature_icon) : ''; ?></span>
+										<span><?php echo esc_html($feature->name); ?></span>
+									</li>
+							<?php endif; ?>
+							<?php } ?>
+						</ul>
+					</div>
+				</div>
             </div>
             <?php
         } elseif ($style == 'style2' && $features) {

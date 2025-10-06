@@ -392,6 +392,8 @@ class Enqueue {
 				'single_hotel_data' => isset( $single_hotel_data ) ? $single_hotel_data : array(),
 				'single_apartment_data' => isset( $single_apartment_data ) ? $single_apartment_data : array(),
 				'single_car_data' => isset( $single_car_data ) ? $single_car_data : array(),
+				'car_mobile_button_hide' => esc_html__( 'Hide', 'tourfic' ),
+				'car_mobile_button_book_now' => esc_html__( 'Book Now', 'tourfic' ),
 			)
 		);
 
@@ -445,6 +447,9 @@ class Enqueue {
 			wp_register_style( 'tf-elementor-single-room', TF_PRO_ASSETS_URL . 'app/css/elementor/single/room.min.css', '', TF_VERSION );
 			wp_register_style( 'tf-elementor-single-sticky-nav', TF_PRO_ASSETS_URL . 'app/css/elementor/single/sticky-nav.min.css', '', TF_VERSION );
 			wp_register_style( 'tf-elementor-single-tour-information', TF_PRO_ASSETS_URL . 'app/css/elementor/single/tour-information.min.css', '', TF_VERSION );
+			wp_register_style( 'tf-elementor-single-tour-info-cards', TF_PRO_ASSETS_URL . 'app/css/elementor/single/tour-info-cards.min.css', '', TF_VERSION );
+			wp_register_style( 'tf-elementor-single-highlights', TF_PRO_ASSETS_URL . 'app/css/elementor/single/highlights.min.css', '', TF_VERSION );
+			wp_register_style( 'tf-elementor-single-inc-exc', TF_PRO_ASSETS_URL . 'app/css/elementor/single/inc-exc.min.css', '', TF_VERSION );
 		}
 	}
 

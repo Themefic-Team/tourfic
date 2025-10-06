@@ -533,7 +533,11 @@ class FAQ extends Widget_Base {
                                 }?>
                             </div>
                             <div class="tf-faq-content" style="<?php echo $faq_key==1 ? esc_attr( 'display: block;' ) : ''; ?>">
-                                <p><?php echo wp_kses_post( $faq['description'] ); ?></p>
+                                <?php if($post_type == 'tf_tours'): ?>
+                                    <p><?php echo wp_kses_post( $faq['desc'] ); ?></p>
+                                <?php else: ?>
+                                    <p><?php echo wp_kses_post( $faq['description'] ); ?></p>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>

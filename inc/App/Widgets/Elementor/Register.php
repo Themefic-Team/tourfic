@@ -74,6 +74,9 @@ class Register {
             $widgets_manager->register( \Tourfic\App\Widgets\Elementor\Widgets\Single\Terms_And_Conditions::instance() );
             $widgets_manager->register( \Tourfic\App\Widgets\Elementor\Widgets\Single\Sticky_Nav::instance() );
             $widgets_manager->register( \Tourfic\App\Widgets\Elementor\Widgets\Single\Tour_Information::instance() );
+            $widgets_manager->register( \Tourfic\App\Widgets\Elementor\Widgets\Single\Tour_Info_Cards::instance() );
+            $widgets_manager->register( \Tourfic\App\Widgets\Elementor\Widgets\Single\Highlights::instance() );
+            $widgets_manager->register( \Tourfic\App\Widgets\Elementor\Widgets\Single\Included_Excluded::instance() );
         }
     }
 
