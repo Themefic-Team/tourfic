@@ -534,7 +534,7 @@
         
         .tf-itinerary-map{
             margin-top: 16px;
-            margin-bottom: 32px;
+            margin-bottom: 0 !important;
             
             @media #{$max768}{
                 margin-top: 12px;

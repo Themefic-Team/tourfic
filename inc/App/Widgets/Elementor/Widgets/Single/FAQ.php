@@ -580,7 +580,11 @@ class FAQ extends Widget_Base {
                                 }?>
                             </div>
                             <div class="tf-question-desc" style="<?php echo $key == 0 ? 'display: block;' : ''; ?>">
-                            <?php echo wp_kses_post( $faq['description'] ); ?>
+                                <?php if($post_type == 'tf_tours'): ?>
+                                    <?php echo wp_kses_post( $faq['desc'] ); ?>
+                                <?php else: ?>
+                                    <?php echo wp_kses_post( $faq['description'] ); ?>
+                                <?php endif; ?>
                             </div>
                         </div>
                         <?php } ?>
@@ -636,7 +640,11 @@ class FAQ extends Widget_Base {
 
                         <?php if(!empty($faq['description'])){ ?>
                             <div class="tf-question-desc tf-faq-content" style="<?php echo $faq_key==1 ? esc_attr( 'display: block;' ) : ''; ?>">
-                                <?php echo wp_kses_post($faq['description']); ?>
+                                <?php if($post_type == 'tf_tours'): ?>
+                                    <?php echo wp_kses_post( $faq['desc'] ); ?>
+                                <?php else: ?>
+                                    <?php echo wp_kses_post( $faq['description'] ); ?>
+                                <?php endif; ?>
                             </div>
                         <?php } ?>
                     </div>

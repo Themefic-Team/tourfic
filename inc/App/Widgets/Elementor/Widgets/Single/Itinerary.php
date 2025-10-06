@@ -173,7 +173,7 @@ class Itinerary extends Widget_Base {
             }
             
             if( $style == "style1" ){ ?>
-                <div class="tf-single-template__one">
+                <div class="tf-single-template__one tf-single-itinerary-style1">
                     <div class="tf-itinerary-wrapper">
                         <div class="section-title">
                             <h2 class="tf-title tf-section-title"><?php echo !empty($meta['itinerary-section-title']) ? esc_html($meta['itinerary-section-title']) : ''; ?></h2>
@@ -393,7 +393,7 @@ class Itinerary extends Widget_Base {
                 <?php 
             } elseif( $style == "style2" ){ 
                 ?>
-                <div class="tf-single-template__two">
+                <div class="tf-single-template__two tf-single-itinerary-style2">
                     <div class="tf-itinerary-wrapper" id="tf-tour-itinerary">
                         <div class="section-title">
                             <h2 class="tf-title tf-section-title"><?php echo !empty($meta['itinerary-section-title']) ? esc_html($meta['itinerary-section-title']) : ''; ?></h2>
@@ -623,7 +623,7 @@ class Itinerary extends Widget_Base {
                 <?php 
             } elseif( $style == "style3" ) { 
                 ?>
-                <div class="tf-single-template__legacy">
+                <div class="tf-single-template__legacy tf-single-itinerary-legacy">
                     <div class="tf-travel-itinerary-wrapper gray-wrap">
                         <div class="tf-container">
                             <div class="tf-travel-itinerary-content">
@@ -855,6 +855,11 @@ class Itinerary extends Widget_Base {
                 </div>
                 <?php 
             }
+
+            $single_tour_location = !empty( Helper::tf_data_types($meta['location'])['address'] ) ? Helper::tf_data_types($meta['location'])['address'] : '';
+            $single_tour_location_latitude = !empty( Helper::tf_data_types($meta['location'])['latitude'] ) ? Helper::tf_data_types($meta['location'])['latitude'] : '';
+            $single_tour_location_longitude = !empty( Helper::tf_data_types($meta['location'])['longitude'] ) ? Helper::tf_data_types($meta['location'])['longitude'] : '';
+            $single_tour_location_zoom = !empty( Helper::tf_data_types($meta['location'])['zoom'] ) ? Helper::tf_data_types($meta['location'])['zoom'] : '';
             
             if ( \Elementor\Plugin::$instance->editor->is_edit_mode() ): ?>
             <script>
@@ -866,6 +871,17 @@ class Itinerary extends Widget_Base {
                         var chart = new Chart(ctx, {
                             type: 'line',
                         });
+                    }
+
+                    if ($('#tour-location').length) {
+                        const map = L.map('tour-location').setView([<?php echo esc_attr($single_tour_location_latitude); ?>, <?php echo esc_attr($single_tour_location_longitude); ?>], <?php echo esc_attr($single_tour_location_zoom); ?>);
+                        
+                        const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                            maxZoom: 20,
+                            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                        }).addTo(map);
+
+                        const marker = L.marker([<?php echo esc_attr($single_tour_location_latitude); ?>, <?php echo esc_attr($single_tour_location_longitude); ?>]).addTo(map);
                     }
                 });	
             </script>

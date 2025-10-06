@@ -54,7 +54,7 @@ class Tour_Info_Cards extends Widget_Base {
 
 	protected function register_controls() {
 
-		// $this->tf_content_layout_controls();
+		$this->tf_content_layout_controls();
 
 		do_action( 'tf/single-tour-info-cards/before-style-controls', $this );
 		$this->tf_tour_info_cards_style_controls();
@@ -68,7 +68,18 @@ class Tour_Info_Cards extends Widget_Base {
 
         do_action( 'tf/single-tour-info-cards/before-content/controls', $this );
 
-		
+		$this->add_responsive_control('grid_column', [
+			'label' => esc_html__('Columns', 'tourfic'),
+			'type' => Controls_Manager::SELECT,
+			'default' => '2',
+			'options' => [
+				'1' => esc_html__('1', 'tourfic'),
+				'2' => esc_html__('2', 'tourfic'),
+				'3' => esc_html__('3', 'tourfic'),
+				'4' => esc_html__('4', 'tourfic'),
+			],
+			'toggle' => true,
+		]);
 
 	    do_action( 'tf/single-tour-info-cards/after-content/controls', $this );
 
@@ -81,6 +92,19 @@ class Tour_Info_Cards extends Widget_Base {
 			'tab'   => Controls_Manager::TAB_STYLE,
 		]);
 
+		$this->add_responsive_control( "card_padding", [
+			'label'      => esc_html__( 'Padding', 'tourfic' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .tf-trip-feature-blocks .tf-feature-block" => $this->tf_apply_dim( 'padding' ),
+			],
+		] );
+
 		$this->add_control( "bg_color", [
 			'label'     => __( 'Card Background Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
@@ -88,6 +112,26 @@ class Tour_Info_Cards extends Widget_Base {
 				"{{WRAPPER}} .tf-trip-feature-blocks .tf-feature-block" => 'background-color: {{VALUE}};',
 			],
 		] );
+
+        $this->add_group_control( Group_Control_Border::get_type(), [
+			'name'     => "card_border",
+			'selector' => "{{WRAPPER}} .tf-trip-feature-blocks .tf-feature-block",
+		] );
+		$this->add_control( "card_border_radius", [
+			'label'      => esc_html__( 'Border Radius', 'tourfic' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .tf-trip-feature-blocks .tf-feature-block" => $this->tf_apply_dim( 'border-radius' ),
+			],
+		] );
+		$this->add_group_control(Group_Control_Box_Shadow::get_type(), [
+			'name' => 'card_shadow',
+			'selector' => '{{WRAPPER}} .tf-trip-feature-blocks .tf-feature-block',
+		]);
 
         // $this->add_control( "btn_color", [
 		// 	'label'     => __( 'Text Color', 'tourfic' ),
@@ -126,11 +170,12 @@ class Tour_Info_Cards extends Widget_Base {
         $tour_type_icon = ! empty( $meta['tf-tour-type-icon'] ) ? $meta['tf-tour-type-icon'] : 'ri-menu-unfold-line';    
         $tour_group_icon = ! empty( $meta['tf-tour-group-icon'] ) ? $meta['tf-tour-group-icon'] : 'ri-team-line';    
         $tour_lang_icon = ! empty( $meta['tf-tour-lang-icon'] ) ? $meta['tf-tour-lang-icon'] : 'ri-global-line';
+		$grid_column = isset( $settings['grid_column'] ) ? absint($settings['grid_column']) : 4;
        
         if ( $tour_duration || $info_tour_type || $group_size || $language ) {  
             ?>
             <div class="tf-trip-feature-blocks tf-template-section">
-                <div class="tf-features-block-inner tf-flex tf-flex-space-bttn tf-flex-gap-16">
+                <div class="tf-features-block-inner tf-flex tf-flex-space-bttn tf-flex-gap-16 tf-grid-<?php echo esc_attr($grid_column); ?>">
                     <?php if ( $tour_duration ) { ?>
                         <div class="tf-feature-block tf-flex tf-flex-gap-8 tf-first">
                             <div class="tf-feature-block-icon">

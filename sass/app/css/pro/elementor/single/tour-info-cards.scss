@@ -4,10 +4,27 @@
 .tf-trip-feature-blocks{
     .tf-features-block-inner {
         display: flex;
-        flex-wrap: nowrap;
-    
-        @media #{$max1024}{
             flex-wrap: wrap;
+
+        &.tf-grid-1{
+            .tf-feature-block {
+                flex-basis: 100%;
+            }
+        }
+        &.tf-grid-2{
+            .tf-feature-block {
+                flex-basis: calc(50% - 8px);
+            }
+        }
+        &.tf-grid-3{
+            .tf-feature-block {
+                flex-basis: calc(33.3333% - 10.6666px);
+            }
+        }
+        &.tf-grid-4{
+            .tf-feature-block {
+                flex-basis: calc(25% - 12px);
+            }
         }
         
         .tf-feature-block {

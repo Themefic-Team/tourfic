@@ -451,6 +451,7 @@ class Enqueue {
 			wp_register_style( 'tf-elementor-single-highlights', TF_PRO_ASSETS_URL . 'app/css/elementor/single/highlights.min.css', '', TF_VERSION );
 			wp_register_style( 'tf-elementor-single-inc-exc', TF_PRO_ASSETS_URL . 'app/css/elementor/single/inc-exc.min.css', '', TF_VERSION );
 			wp_register_style( 'tf-elementor-single-itinerary', TF_PRO_ASSETS_URL . 'app/css/elementor/single/itinerary.min.css', '', TF_VERSION );
+			wp_register_style( 'tf-elementor-single-tour-contact-information', TF_PRO_ASSETS_URL . 'app/css/elementor/single/tour-contact-information.min.css', '', TF_VERSION );
 
 			wp_enqueue_script( 'Chart-js',  TF_ASSETS_APP_URL . 'libs/chart/chart.js', array( 'jquery' ), '2.6.0', true );
 		}
