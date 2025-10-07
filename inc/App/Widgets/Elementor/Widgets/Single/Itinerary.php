@@ -624,7 +624,7 @@ class Itinerary extends Widget_Base {
             } elseif( $style == "style3" ) { 
                 ?>
                 <div class="tf-single-template__legacy tf-single-itinerary-legacy">
-                    <div class="tf-travel-itinerary-wrapper gray-wrap">
+                    <div class="tf-travel-itinerary-wrapper gray-wrap sp-50">
                         <div class="tf-container">
                             <div class="tf-travel-itinerary-content">
                                 <h2 class="section-heading"><?php echo !empty($meta['itinerary-section-title']) ? esc_html($meta['itinerary-section-title']) : ''; ?></h2>

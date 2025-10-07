@@ -68,10 +68,20 @@ class Tour_Info_Cards extends Widget_Base {
 
         do_action( 'tf/single-tour-info-cards/before-content/controls', $this );
 
+        $this->add_control('info_cards_style',[
+            'label' => esc_html__('Style', 'tourfic'),
+            'type' => \Elementor\Controls_Manager::SELECT,
+            'default' => 'style1',
+            'options' => [
+                'style1' => esc_html__('Style 1', 'tourfic'),
+                'style2' => esc_html__('Style 2', 'tourfic'),
+            ],
+        ]);
+
 		$this->add_responsive_control('grid_column', [
 			'label' => esc_html__('Columns', 'tourfic'),
 			'type' => Controls_Manager::SELECT,
-			'default' => '2',
+			'default' => '4',
 			'options' => [
 				'1' => esc_html__('1', 'tourfic'),
 				'2' => esc_html__('2', 'tourfic'),
@@ -170,11 +180,13 @@ class Tour_Info_Cards extends Widget_Base {
         $tour_type_icon = ! empty( $meta['tf-tour-type-icon'] ) ? $meta['tf-tour-type-icon'] : 'ri-menu-unfold-line';    
         $tour_group_icon = ! empty( $meta['tf-tour-group-icon'] ) ? $meta['tf-tour-group-icon'] : 'ri-team-line';    
         $tour_lang_icon = ! empty( $meta['tf-tour-lang-icon'] ) ? $meta['tf-tour-lang-icon'] : 'ri-global-line';
+
 		$grid_column = isset( $settings['grid_column'] ) ? absint($settings['grid_column']) : 4;
+        $style = !empty($settings['info_cards_style']) ? $settings['info_cards_style'] : 'style1';
        
-        if ( $tour_duration || $info_tour_type || $group_size || $language ) {  
+        if ( $style == 'style1' && ($tour_duration || $info_tour_type || $group_size || $language) ) {  
             ?>
-            <div class="tf-trip-feature-blocks tf-template-section">
+            <div class="tf-trip-feature-blocks tf-template-section tf-info-cards-style1">
                 <div class="tf-features-block-inner tf-flex tf-flex-space-bttn tf-flex-gap-16 tf-grid-<?php echo esc_attr($grid_column); ?>">
                     <?php if ( $tour_duration ) { ?>
                         <div class="tf-feature-block tf-flex tf-flex-gap-8 tf-first">
@@ -261,7 +273,82 @@ class Tour_Info_Cards extends Widget_Base {
                     <?php } ?>
                 </div>
             </div>
-        <?php 
+            <?php 
+        } elseif($style == 'style2' && ($tour_duration || $info_tour_type || $group_size || $language)) {
+            ?>
+            <div class="tf-square-block tf-info-cards-style2">
+                <div class="tf-square-block-content">
+                    <?php if ( $tour_duration ) { ?>
+                        <div class="tf-single-square-block first">
+                            <i class="<?php echo esc_attr($tour_duration_icon); ?>"></i>
+                            <h4><?php echo esc_html__( 'Duration', 'tourfic' ); ?></h4>
+                            <p><?php echo esc_html( $tour_duration ); ?>
+                            <span> 
+                                <?php
+                                if( $tour_duration > 1  ){
+                                    $dur_string = 's';
+                                    $duration_time_html = $duration_time . $dur_string;
+                                }else{
+                                    $duration_time_html = $duration_time;
+                                }
+                                echo " " . esc_html( $duration_time_html )?>
+                            </span></p>
+                            <?php if( $night ){ ?>
+                            <p>
+                                <?php echo esc_html( $night_count ); ?>
+                                <span>
+                                    <?php
+                                    if(!empty($night_count)){
+                                        if( $night_count > 1  ){
+                                            echo esc_html__( 'Nights', 'tourfic' );
+                                        }else{
+                                            echo esc_html__( 'Night', 'tourfic'  );
+                                        }	
+                                    }										
+                                    ?>
+                                </span>
+                            </p>
+                            <?php } ?>
+                        </div>
+                    <?php } ?>
+                    <?php if ( $info_tour_type ) {
+
+                        if ( gettype( $info_tour_type ) === 'string' ) {
+                            $info_tour_type = ucfirst( esc_html( $info_tour_type ) );
+                        } else if ( gettype( $info_tour_type ) === 'array' ) {
+                            $tour_types =[];
+                            $types = ! empty( get_the_terms( $this->post_id, 'tour_type' ) ) ? get_the_terms( $this->post_id, 'tour_type' ) : '';
+                            if ( ! empty( $types ) ) {
+                                foreach ( $types as $type ) {
+                                    $tour_types[] = $type->name;
+                                }
+                            }
+                            $info_tour_type = implode( ', ', $tour_types );
+                        }
+                        ?>
+                        <div class="tf-single-square-block second">
+                            <i class="<?php echo esc_attr($tour_type_icon); ?>"></i>
+                            <h4><?php echo esc_html__( 'Tour Type', 'tourfic' ); ?></h4>
+                            <p><?php echo esc_html( $info_tour_type ); ?></p>
+                        </div>
+                    <?php } ?>
+                    <?php if ( $group_size ) { ?>
+                        <div class="tf-single-square-block third">
+                            <i class="<?php echo esc_attr($tour_group_icon); ?>"></i>
+                            <h4><?php echo esc_html__( 'Group Size', 'tourfic' ); ?></h4>
+                            <p><?php echo esc_html( $group_size ) ?></p>
+                        </div>
+                    <?php } ?>
+                    <?php if ( $language ) { ?>
+                        <div class="tf-single-square-block fourth">
+                            <i class="<?php echo esc_attr($tour_lang_icon); ?>"></i>
+                            <h4><?php echo esc_html__( 'Language', 'tourfic' ); ?></h4>
+                            <p><?php echo esc_html( $language ) ?></p>
+                        </div>
+                    <?php } ?>
+                </div>
+            </div>
+            <?php
         }
     }
 

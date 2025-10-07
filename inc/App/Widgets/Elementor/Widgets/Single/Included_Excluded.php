@@ -128,6 +128,9 @@ class Included_Excluded extends Widget_Base {
         $exc             = !empty(Helper::tf_data_types($meta['exc'])) ? Helper::tf_data_types($meta['exc']) : null;
         $inc_icon        = ! empty( $meta['inc_icon'] ) ? $meta['inc_icon'] : null;
         $exc_icon        = ! empty( $meta['exc_icon'] ) ? $meta['exc_icon'] : null;
+        $custom_inc_icon = ! empty( $inc_icon ) ? "custom-inc-icon" : '';
+        $custom_exc_icon = ! empty( $exc_icon ) ? "custom-exc-icon" : '';
+        $inc_exc_bg = ! empty( $meta['include-exclude-bg'] ) ? $meta['include-exclude-bg'] : '';
         $style = !empty($settings['included_excluded_style']) ? $settings['included_excluded_style'] : 'style1';
        
         if($style == 'style1' && ($inc || $exc)){ ?>
@@ -196,6 +199,41 @@ class Included_Excluded extends Widget_Base {
                             </ul>
                         </div>
                         <?php } ?>
+                    </div>
+                </div>
+            </div>
+            <?php
+        } elseif($style == 'style3' && ($inc || $exc)){
+            ?>
+            <div class="tf-single-template__legacy">
+                <div class="tf-inc-exc-wrapper sp-70" style="background-image: url(<?php echo esc_url( $inc_exc_bg ) ?>);">
+                    <div class="tf-container">
+                        <div class="tf-inc-exc-content">
+                            <?php if ( $inc ) { ?>
+                                <div class="tf-include-section <?php echo esc_attr( $custom_inc_icon ); ?>">
+                                    <h2><?php esc_html_e( 'Included', 'tourfic' ); ?></h2>
+                                    <ul>
+                                        <?php
+                                        foreach ( $inc as $key => $val ) {
+                                            echo "<li><i class='" . esc_attr( $inc_icon ) . "'></i>" . wp_kses_post($val['inc']) . "</li>";
+                                        }
+                                        ?>
+                                    </ul>
+                                </div>
+                            <?php } ?>
+                            <?php if ( $exc ) { ?>
+                                <div class="tf-exclude-section <?php echo esc_attr( $custom_exc_icon ); ?>">
+                                    <h2><?php esc_html_e( 'Excluded', 'tourfic' ); ?></h2>
+                                    <ul>
+                                        <?php
+                                        foreach ( $exc as $key => $val ) {
+                                            echo "<li><i class='" . esc_attr( $exc_icon ) . "'></i>" . wp_kses_post($val['exc']) . "</li>";
+                                        }
+                                        ?>
+                                    </ul>
+                                </div>
+                            <?php } ?>
+                        </div>
                     </div>
                 </div>
             </div>

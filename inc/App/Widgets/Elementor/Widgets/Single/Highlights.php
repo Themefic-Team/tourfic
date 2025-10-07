@@ -146,7 +146,23 @@ class Highlights extends Widget_Base {
         	<?php 
 		} elseif ($style == 'style2') {
         	?>
-            
+            <div class="tf-single-template__legacy">
+				<div class="tf-highlight-wrapper">
+					<div class="tf-highlight-content">
+						<div class="tf-highlight-item">
+							<div class="tf-highlight-text">
+								<h2 class="section-heading"><?php echo !empty($meta['highlights-section-title']) ? esc_html($meta['highlights-section-title']) : ''; ?></h2>
+								<?php echo wp_kses_post($highlights); ?>
+							</div>
+							<?php if ( ! empty( $meta['hightlights_thumbnail'] ) ): ?>
+								<div class="tf-highlight-image">
+									<img src="<?php echo esc_url( $meta['hightlights_thumbnail'] ); ?>" alt="">
+								</div>
+							<?php endif; ?>
+						</div>
+					</div>
+				</div>
+			</div>
             <?php
         }
     }

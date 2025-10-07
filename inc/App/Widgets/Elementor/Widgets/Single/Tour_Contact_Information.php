@@ -133,6 +133,7 @@ class Tour_Contact_Information extends Widget_Base {
         $phone         = ! empty( $meta['phone'] ) ? $meta['phone'] : '';
         $fax           = ! empty( $meta['fax'] ) ? $meta['fax'] : '';
         $website       = ! empty( $meta['website'] ) ? $meta['website'] : '';
+		$style = !empty($settings['icon_style']) ? $settings['icon_style'] : 'style1';
 		
         if ( $email || $phone || $fax || $website ) {
             ?>
@@ -141,7 +142,7 @@ class Tour_Contact_Information extends Widget_Base {
                     <h3><?php echo ! empty( $meta['contact-info-section-title'] ) ? esc_html( $meta['contact-info-section-title'] ) : ''; ?></h3>
                 </div>
                 <div class="tf-booking-advantage-items">
-                    <ul class="tf-list">
+                    <ul class="tf-list tf-icon-<?php echo esc_attr($style); ?>">
                         <?php
                         if ( ! empty( $phone ) ) { ?>
                             <li><i class="fa-solid fa-headphones"></i> <a href="tel:<?php echo esc_html( $phone ) ?>"><?php echo esc_html( $phone ) ?></a></li>

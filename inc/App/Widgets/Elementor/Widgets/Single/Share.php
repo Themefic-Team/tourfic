@@ -268,6 +268,9 @@ class Share extends Widget_Base {
         } elseif ($post_type == 'tf_tours') {
             $post_meta = get_post_meta($post_id, 'tf_tours_opt', true);
 	        $disable_share_opt = ! empty( $post_meta['t-share'] ) ? $post_meta['t-share'] : 0;
+        } elseif ($post_type == 'tf_apartment') {
+            $post_meta = get_post_meta($post_id, 'tf_apartment_opt', true);
+	        $disable_share_opt   = ! empty( $post_meta['disable-apartment-share'] ) ? $post_meta['disable-apartment-share'] : '';
         } elseif ($post_type == 'tf_carrental') {
             $post_meta = get_post_meta($post_id, 'tf_carrental_opt', true);
 	        $disable_share_opt = ! empty( $post_meta['c-share'] ) ? $post_meta['c-share'] : 0;

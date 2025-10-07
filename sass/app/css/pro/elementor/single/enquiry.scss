@@ -35,6 +35,19 @@
             background-color: $color-brand-dark;
         }
     }
+
+    &.tf-icon-simple{
+        i{
+            background-color: transparent;
+            border-radius: 0;
+            color: var(--tf-text-paragraph);
+            height: auto;
+            width: auto;
+            font-size: 4rem;
+            line-height: 1;
+            margin-bottom: 15px;
+        }
+    }
 }
 
 //style 2

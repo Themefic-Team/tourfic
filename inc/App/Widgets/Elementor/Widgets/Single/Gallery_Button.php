@@ -67,6 +67,16 @@ class Gallery_Button extends Widget_Base {
 
         do_action( 'tf/single-gallery-bitton/before-content/controls', $this );
 
+		$this->add_control('style',[
+            'label' => esc_html__('Style', 'tourfic'),
+            'type' => \Elementor\Controls_Manager::SELECT,
+            'default' => 'style1',
+            'options' => [
+                'style1' => esc_html__('Style 1', 'tourfic'),
+                'style2' => esc_html__('Style 2', 'tourfic'),
+            ],
+        ]);
+
         $this->add_control('icon',[
             'label' => esc_html__('Icon', 'tourfic'),
             'default' => [
@@ -85,6 +95,9 @@ class Gallery_Button extends Widget_Base {
                 'active' => true,
             ],
             'default' => 'Gallery',
+            'condition' => [
+				'style' => ['style1'],
+			],
         ]);
 
 	    do_action( 'tf/single-gallery-bitton/after-content/controls', $this );
@@ -115,12 +128,17 @@ class Gallery_Button extends Widget_Base {
 			'selectors'  => [
 				"{{WRAPPER}} .tf-single-action-btns a i" => 'font-size: {{SIZE}}{{UNIT}}',
 				"{{WRAPPER}} .tf-single-action-btns a svg" => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}',
+				"{{WRAPPER}} .tf-hero-hotel a i" => 'font-size: {{SIZE}}{{UNIT}}',
+				"{{WRAPPER}} .tf-hero-hotel a svg" => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}',
 			],
 		] );
 
         $this->add_group_control( Group_Control_Typography::get_type(), [
 			'name'     => "btn_typography",
 			'selector' => "{{WRAPPER}} .tf-single-action-btns a",
+            'condition' => [
+				'style' => ['style1'],
+			],
 		] );
 		
 		$this->add_control( "tabs_btn_colors_heading", [
@@ -140,6 +158,8 @@ class Gallery_Button extends Widget_Base {
 			'selectors' => [
 				"{{WRAPPER}} .tf-single-action-btns a" => 'color: {{VALUE}};',
 				"{{WRAPPER}} .tf-single-action-btns a svg path" => 'fill: {{VALUE}};',
+				"{{WRAPPER}} .tf-hero-hotel" => 'color: {{VALUE}};',
+				"{{WRAPPER}} .tf-hero-hotel svg path" => 'fill: {{VALUE}};',
 			],
 		] );
 		$this->add_control( "btn_bg_color", [
@@ -147,11 +167,12 @@ class Gallery_Button extends Widget_Base {
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
 				"{{WRAPPER}} .tf-single-action-btns a" => 'background-color: {{VALUE}};',
+				"{{WRAPPER}} .tf-hero-hotel" => 'background-color: {{VALUE}};',
 			],
 		] );
 		$this->add_group_control( Group_Control_Border::get_type(), [
 			'name'     => "btn_border",
-			'selector' => "{{WRAPPER}} .tf-single-action-btns a",
+			'selector' => "{{WRAPPER}} .tf-single-action-btns a, {{WRAPPER}} .tf-hero-hotel",
 		] );
 		$this->add_control( "btn_border_radius", [
 			'label'      => __( 'Border Radius', 'tourfic' ),
@@ -162,6 +183,7 @@ class Gallery_Button extends Widget_Base {
 			],
 			'selectors'  => [
 				"{{WRAPPER}} .tf-single-action-btns a" => $this->tf_apply_dim( 'border-radius' ),
+				"{{WRAPPER}} .tf-hero-hotel" => $this->tf_apply_dim( 'border-radius' ),
 			],
 		] );
 		$this->end_controls_tab();
@@ -176,6 +198,8 @@ class Gallery_Button extends Widget_Base {
 			'selectors' => [
 				"{{WRAPPER}} .tf-single-action-btns a:hover" => 'color: {{VALUE}};',
 				"{{WRAPPER}} .tf-single-action-btns a:hover svg path" => 'fill: {{VALUE}};',
+				"{{WRAPPER}} .tf-hero-hotel:hover a" => 'color: {{VALUE}};',
+				"{{WRAPPER}} .tf-hero-hotel:hover svg path" => 'fill: {{VALUE}};',
 			],
 		] );
 		
@@ -184,6 +208,7 @@ class Gallery_Button extends Widget_Base {
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
 				"{{WRAPPER}} .tf-single-action-btns a:hover" => 'background-color: {{VALUE}};',
+				"{{WRAPPER}} .tf-hero-hotel:hover" => 'background-color: {{VALUE}};',
 			],
 		] );
 		$this->add_control( "btn_hover_border_color", [
@@ -191,6 +216,7 @@ class Gallery_Button extends Widget_Base {
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
 				"{{WRAPPER}} .tf-single-action-btns a:hover" => 'border-color: {{VALUE}};',
+				"{{WRAPPER}} .tf-hero-hotel:hover" => 'border-color: {{VALUE}};',
 			],
 		] );
 		$this->end_controls_tab();
@@ -217,6 +243,7 @@ class Gallery_Button extends Widget_Base {
 			],
 			'selectors'  => [
 				"{{WRAPPER}} .tf-single-action-btns a" => 'width: {{SIZE}}{{UNIT}};',
+				"{{WRAPPER}} .tf-hero-hotel" => 'width: {{SIZE}}{{UNIT}};',
 			],
 			'separator'  => 'before',
 		] );
@@ -240,6 +267,7 @@ class Gallery_Button extends Widget_Base {
 			],
 			'selectors'  => [
 				"{{WRAPPER}} .tf-single-action-btns a" => 'height: {{SIZE}}{{UNIT}};',
+				"{{WRAPPER}} .tf-hero-hotel" => 'height: {{SIZE}}{{UNIT}};',
 			],
 		] );
 
@@ -250,6 +278,7 @@ class Gallery_Button extends Widget_Base {
         $settings  = $this->get_settings_for_display();
         $post_id   = get_the_ID();
         $post_type = get_post_type();
+		$style = !empty($settings['style']) ? $settings['style'] : 'style1';
 
 		if($post_type == 'tf_hotel'){
             $meta = get_post_meta($post_id, 'tf_hotels_opt', true);
@@ -275,24 +304,60 @@ class Gallery_Button extends Widget_Base {
         } else {
 			return;
 		}
-		if ( ! empty( $gallery_ids ) ) :?>
-		<div class="tf-single-action-btns featured-column tf-gallery-box">
-			<a id="featured-gallery" href="#" class="tf-tour-gallery">
-				<?php
-                $icon_migrated = isset($settings['__fa4_migrated']['icon']);
-                $icon_is_new = empty($settings['icon_comp']);
+		if ( $style == 'style1' && ! empty( $gallery_ids ) ) :?>
+			<div class="tf-single-action-btns featured-column tf-gallery-box">
+				<a id="featured-gallery" href="#" class="tf-tour-gallery">
+					<?php
+					$icon_migrated = isset($settings['__fa4_migrated']['icon']);
+					$icon_is_new = empty($settings['icon_comp']);
 
-                if ( $icon_is_new || $icon_migrated ) {
-                    Icons_Manager::render_icon( $settings['icon'], [ 'aria-hidden' => 'true' ] );
-                } else {
-                    ?>
-                    <i class="<?php echo esc_attr($settings['icon_comp']); ?>" aria-hidden="true"></i>
-                    <?php
-                }?>
-				<?php echo isset($settings['label']) ? esc_html($settings['label']) : esc_html__('Gallery', 'tourfic'); ?>
-			</a>
-		</div>
-		<?php 
+					if ( $icon_is_new || $icon_migrated ) {
+						Icons_Manager::render_icon( $settings['icon'], [ 'aria-hidden' => 'true' ] );
+					} else {
+						?>
+						<i class="<?php echo esc_attr($settings['icon_comp']); ?>" aria-hidden="true"></i>
+						<?php
+					}?>
+					<?php echo isset($settings['label']) ? esc_html($settings['label']) : esc_html__('Gallery', 'tourfic'); ?>
+				</a>
+			</div>
+		<?php elseif($style == 'style2' && ! empty( $gallery_ids )) : ?>
+			<div class="tf-single-template__two tf-single-action-btns-style2">
+				<div class="tf-hero-hotel tf-popup-buttons">
+					<a href="#">
+						<?php
+						$icon_migrated = isset($settings['__fa4_migrated']['icon']);
+						$icon_is_new = empty($settings['icon_comp']);
+
+						if ( $icon_is_new || $icon_migrated ) {
+							Icons_Manager::render_icon( $settings['icon'], [ 'aria-hidden' => 'true' ] );
+						} else {
+							?>
+							<i class="<?php echo esc_attr($settings['icon_comp']); ?>" aria-hidden="true"></i>
+							<?php
+						}?>
+					</a>
+				</div>
+
+				<div class="tf-popup-wrapper tf-hotel-popup">
+					<div class="tf-popup-inner">
+						<div class="tf-popup-body">
+							<?php
+							if ( ! empty( $gallery_ids ) ) {
+								foreach ( $gallery_ids as $key => $gallery_item_id ) {
+									$image_url = wp_get_attachment_url( $gallery_item_id, 'full' );
+									?>
+									<img src="<?php echo esc_url( $image_url ); ?>" alt="" class="tf-popup-image">
+								<?php }
+							} ?>
+						</div>
+						<div class="tf-popup-close">
+							<i class="fa-solid fa-xmark"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php
 		endif; 
     }
 

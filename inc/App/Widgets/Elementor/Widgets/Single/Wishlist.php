@@ -238,7 +238,6 @@ class Wishlist extends Widget_Base {
         $post_id   = get_the_ID();
         $post_type = get_post_type();
         $has_in_wishlist = Wishlist_Class::tf_has_item_in_wishlist( $post_id );
-        $disable_wishlist_sec = 0;
         
         // Get post meta based on post type
         if ($post_type == 'tf_hotel') {
@@ -250,6 +249,8 @@ class Wishlist extends Widget_Base {
         } elseif ($post_type == 'tf_carrental') {
             $post_meta = get_post_meta($post_id, 'tf_carrental_opt', true);
 	        $disable_wishlist_sec = ! empty( $post_meta['c-wishlist'] ) ? $post_meta['c-wishlist'] : 0;
+        } elseif ($post_type == 'tf_apartment') {
+            $disable_wishlist_sec = 0;
         } else {
             return;
         }

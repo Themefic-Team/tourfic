@@ -77,6 +77,16 @@ class Enquiry extends Widget_Base {
             ],
         ]);
 
+		$this->add_control('icon_type',[
+			'type'     => Controls_Manager::SELECT,
+			'label'    => esc_html__( 'Icon Type', 'tourfic' ),
+			'options'  => [
+				'simple'     => esc_html__( 'Simple', 'tourfic' ),
+				'rounded'     => esc_html__( 'Rounded', 'tourfic' ),
+			],
+			'default'  => 'rounded',
+		]);
+
 	    do_action( 'tf/single-enquiry/after-content/controls', $this );
 
         $this->end_controls_section();
@@ -287,6 +297,7 @@ class Enquiry extends Widget_Base {
         $post_id   = get_the_ID();
         $post_type = get_post_type();
         $style = !empty($settings['enquiry_style']) ? $settings['enquiry_style'] : 'style1';
+        $icon_type = !empty($settings['icon_type']) ? $settings['icon_type'] : 'rounded';
 
 		if($post_type == 'tf_hotel'){
             $meta = get_post_meta($post_id, 'tf_hotels_opt', true);
@@ -316,60 +327,60 @@ class Enquiry extends Widget_Base {
 			return;
 		}
 		if ( $style == 'style1' && $tf_enquiry_section_status == '1' ) :?>
-        <div class="tf-single-enquiry-style-1 tf-ask-enquiry">
-            <?php if (!empty($tf_enquiry_section_icon)) { ?>
-                <i class="<?php echo esc_attr($tf_enquiry_section_icon); ?>" aria-hidden="true"></i>
-                <?php
-            }
-            if(!empty($tf_enquiry_section_title)) {
-                ?>
-                <h3 class="tf-enquiry-title"><?php echo wp_kses_post($tf_enquiry_section_title); ?></h3>
-                <?php
-            }
-            if(!empty($tf_enquiry_section_cont)) {
-                ?>
-                    <p class="tf-enquiry-content"><?php echo wp_kses_post($tf_enquiry_section_cont);  ?></p>
-                <?php
-            }
-            if( !empty( $tf_enquiry_section_button )) {
-                ?>
-                <div class="tf-btn-wrap">
-                    <a href="javaScript:void(0);" data-target="#tf-ask-modal" class="tf-modal-btn tf_btn">
-                        <span><?php echo esc_html($tf_enquiry_section_button); ?></span>
-                    </a>
-                </div>
-                <?php
-            }
-            ?>
-        </div>
+			<div class="tf-single-enquiry-style-1 tf-ask-enquiry tf-icon-<?php echo esc_attr($icon_type); ?>">
+				<?php if (!empty($tf_enquiry_section_icon)) { ?>
+					<i class="<?php echo esc_attr($tf_enquiry_section_icon); ?>" aria-hidden="true"></i>
+					<?php
+				}
+				if(!empty($tf_enquiry_section_title)) {
+					?>
+					<h3 class="tf-enquiry-title"><?php echo wp_kses_post($tf_enquiry_section_title); ?></h3>
+					<?php
+				}
+				if(!empty($tf_enquiry_section_cont)) {
+					?>
+						<p class="tf-enquiry-content"><?php echo wp_kses_post($tf_enquiry_section_cont);  ?></p>
+					<?php
+				}
+				if( !empty( $tf_enquiry_section_button )) {
+					?>
+					<div class="tf-btn-wrap">
+						<a href="javaScript:void(0);" data-target="#tf-ask-modal" class="tf-modal-btn tf_btn">
+							<span><?php echo esc_html($tf_enquiry_section_button); ?></span>
+						</a>
+					</div>
+					<?php
+				}
+				?>
+			</div>
 		<?php 
 		elseif ($style == 'style2' && $tf_enquiry_section_status == '1' ) : ?>
-		<div class="tf-single-enquiry-style-2 apartment-question">
-			<div class="tf-question-left">
-				<?php if ( ! empty( $tf_enquiry_section_icon ) ) : ?>
-					<div class="tf-apartment-question-icon">
-						<i class="<?php echo esc_attr( $tf_enquiry_section_icon ); ?>" aria-hidden="true"></i>
-					</div>
-				<?php endif; ?>
-				<div class="tf-question-left-inner">
-					<div class="default-enquiry-title-section">
-						<?php if ( ! empty( $tf_enquiry_section_title ) ) {?>
-							<h2 class="tf-enquiry-title"><?php echo esc_html( $tf_enquiry_section_title ) ?></h2>
+			<div class="tf-single-enquiry-style-2 apartment-question tf-icon-<?php echo esc_attr($icon_type); ?>">
+				<div class="tf-question-left">
+					<?php if ( ! empty( $tf_enquiry_section_icon ) ) : ?>
+						<div class="tf-apartment-question-icon">
+							<i class="<?php echo esc_attr( $tf_enquiry_section_icon ); ?>" aria-hidden="true"></i>
+						</div>
+					<?php endif; ?>
+					<div class="tf-question-left-inner">
+						<div class="default-enquiry-title-section">
+							<?php if ( ! empty( $tf_enquiry_section_title ) ) {?>
+								<h2 class="tf-enquiry-title"><?php echo esc_html( $tf_enquiry_section_title ) ?></h2>
+							<?php } ?>
+						</div>
+						<?php if ( ! empty( $tf_enquiry_section_cont ) ) {?>
+							<p class="tf-enquiry-content"><?php echo wp_kses_post( $tf_enquiry_section_cont ); ?></p>
 						<?php } ?>
 					</div>
-					<?php if ( ! empty( $tf_enquiry_section_cont ) ) {?>
-						<p class="tf-enquiry-content"><?php echo wp_kses_post( $tf_enquiry_section_cont ); ?></p>
-					<?php } ?>
 				</div>
+				<?php if ( ! empty( $tf_enquiry_section_button ) ) {?>
+					<div class="tf-btn-wrap">
+						<a href="#" data-target="#tf-ask-modal" class="tf-modal-btn tf_btn tf_btn_large">
+							<span><?php echo wp_kses_post( $tf_enquiry_section_button ) ?></span>
+						</a>
+					</div>
+				<?php } ?>
 			</div>
-			<?php if ( ! empty( $tf_enquiry_section_button ) ) {?>
-				<div class="tf-btn-wrap">
-					<a href="#" data-target="#tf-ask-modal" class="tf-modal-btn tf_btn tf_btn_large">
-						<span><?php echo wp_kses_post( $tf_enquiry_section_button ) ?></span>
-					</a>
-				</div>
-			<?php } ?>
-		</div>
 		<?php
 		endif; 
     }
