@@ -87,3 +87,45 @@
         }
     }
 }
+
+.tf-apartment-feature-style1.tf-place-offer-section{
+    @media #{$max768}{
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+    h2{
+        color: $color-heading;
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 24px;
+        @media #{$max768}{
+            font-size: 1.5rem;
+        }
+    }
+    .place-offer-items{
+        display: grid;
+        gap: 8px 16px;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        @media #{$max768}{
+            grid-template-columns: 1fr 1fr;
+        }
+        .tf-apt-amenity{
+            display: flex;
+            gap: 9px;
+            align-items: center;
+            .tf-apt-amenity-icon{
+                line-height: 0.69;
+                img{
+                    height: 16px;
+                    width: 16px;
+                }
+            }
+            span{
+                color: $color-text;
+                font-size: 0.875rem;
+                font-weight: 400;
+                line-height: 0.928;
+            }
+        }
+    }
+}

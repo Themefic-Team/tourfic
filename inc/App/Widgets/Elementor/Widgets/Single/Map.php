@@ -120,33 +120,31 @@ class Map extends Widget_Base {
 
 	protected function render() {
 		$settings  = $this->get_settings_for_display();
-        $show_icon   = !empty( $settings['show_icon'] ) ? $settings['show_icon'] : '';
-        // Map Type
-        $tf_openstreet_map = ! empty( Helper::tfopt( 'google-page-option' ) ) ? Helper::tfopt( 'google-page-option' ) : "default";
-        $post_id   = get_the_ID();
 		$post_type = get_post_type();
-        if($post_type == 'tf_hotel' || $post_type == 'tf_apartment' || $post_type == 'tf_carrental'){
-            $meta_key = $post_type == 'tf_hotel' ? 'tf_hotels_opt' : ( $post_type == 'tf_apartment' ? 'tf_apartment_opt' : 'tf_carrental_opt' );
-            $meta = get_post_meta($post_id, $meta_key, true);
-            if( !empty($meta['map']) && Helper::tf_data_types($meta['map'])){
-                $address = !empty( Helper::tf_data_types($meta['map'])['address'] ) ? Helper::tf_data_types($meta['map'])['address'] : '';
-                $address_latitude = !empty( Helper::tf_data_types($meta['map'])['latitude'] ) ? Helper::tf_data_types($meta['map'])['latitude'] : '';
-                $address_longitude = !empty( Helper::tf_data_types($meta['map'])['longitude'] ) ? Helper::tf_data_types($meta['map'])['longitude'] : '';
-                $address_zoom = !empty( Helper::tf_data_types($meta['map'])['zoom'] ) ? Helper::tf_data_types($meta['map'])['zoom'] : '';
-            }
 
+        if($post_type == 'tf_hotel'){
+            $this->tf_hotel_map($settings);
         } elseif($post_type == 'tf_tours'){
-			$meta = get_post_meta($post_id, 'tf_tours_opt', true);
-            if( !empty($meta['location']) && Helper::tf_data_types($meta['location'])){
-				$address = !empty( Helper::tf_data_types($meta['location'])['address'] ) ? Helper::tf_data_types($meta['location'])['address'] : '';
-				$address_latitude = !empty( Helper::tf_data_types($meta['location'])['latitude'] ) ? Helper::tf_data_types($meta['location'])['latitude'] : '';
-				$address_longitude = !empty( Helper::tf_data_types($meta['location'])['longitude'] ) ? Helper::tf_data_types($meta['location'])['longitude'] : '';
-				$address_zoom = !empty( Helper::tf_data_types($meta['location'])['zoom'] ) ? Helper::tf_data_types($meta['location'])['zoom'] : '';
-			}
-			
+            $this->tf_tour_map($settings);
+        } elseif($post_type == 'tf_apartment'){
+            $this->tf_apartment_map($settings);
+        } elseif($post_type == 'tf_carrental'){
+            $this->tf_car_map($settings);
         } else {
 			return;
 		}
+	}
+
+    private function tf_hotel_map($settings) {
+        $show_icon   = !empty( $settings['show_icon'] ) ? $settings['show_icon'] : '';
+        $tf_openstreet_map = ! empty( Helper::tfopt( 'google-page-option' ) ) ? Helper::tfopt( 'google-page-option' ) : "default";
+        $meta = get_post_meta(get_the_ID(), 'tf_hotels_opt', true);
+        if( !empty($meta['map']) && Helper::tf_data_types($meta['map'])){
+            $address = !empty( Helper::tf_data_types($meta['map'])['address'] ) ? Helper::tf_data_types($meta['map'])['address'] : '';
+            $address_latitude = !empty( Helper::tf_data_types($meta['map'])['latitude'] ) ? Helper::tf_data_types($meta['map'])['latitude'] : '';
+            $address_longitude = !empty( Helper::tf_data_types($meta['map'])['longitude'] ) ? Helper::tf_data_types($meta['map'])['longitude'] : '';
+            $address_zoom = !empty( Helper::tf_data_types($meta['map'])['zoom'] ) ? Helper::tf_data_types($meta['map'])['zoom'] : '';
+        }
 
         //map icon
 		$map_icon_html = '<i class="fa-solid fa-location-dot"></i>';
@@ -213,7 +211,6 @@ class Map extends Widget_Base {
             <?php } ?>
         </div>
 
-        
         <?php if ( \Elementor\Plugin::$instance->editor->is_edit_mode() ): ?>
         <script>
             jQuery(document).ready(function ($) {
@@ -240,7 +237,44 @@ class Map extends Widget_Base {
 
                     const markerMobile = L.marker([<?php echo esc_attr($address_latitude); ?>, <?php echo esc_attr($address_longitude); ?>]).addTo(map);
                 }
+            });	
+        </script>
+        <?php endif;
+    }
 
+    private function tf_tour_map($settings) {
+        $tf_openstreet_map = ! empty( Helper::tfopt( 'google-page-option' ) ) ? Helper::tfopt( 'google-page-option' ) : "default";
+	    $tf_google_map_key = !empty( Helper::tfopt( 'tf-googlemapapi' ) ) ? Helper::tfopt( 'tf-googlemapapi' ) : '';
+        $meta = get_post_meta(get_the_ID(), 'tf_tours_opt', true);
+        if( !empty($meta['location']) && Helper::tf_data_types($meta['location'])){
+            $address = !empty( Helper::tf_data_types($meta['location'])['address'] ) ? Helper::tf_data_types($meta['location'])['address'] : '';
+            $address_latitude = !empty( Helper::tf_data_types($meta['location'])['latitude'] ) ? Helper::tf_data_types($meta['location'])['latitude'] : '';
+            $address_longitude = !empty( Helper::tf_data_types($meta['location'])['longitude'] ) ? Helper::tf_data_types($meta['location'])['longitude'] : '';
+            $address_zoom = !empty( Helper::tf_data_types($meta['location'])['zoom'] ) ? Helper::tf_data_types($meta['location'])['zoom'] : '';
+        }
+        ?>
+        <?php if ( ! empty( $meta['location'] ) ): ?>
+            <div class="tf-trip-map-wrapper tf-single-map" id="tf-tour-map">
+                <h2 class="tf-title tf-section-title"><?php echo !empty($meta['map-section-title']) ? esc_html($meta['map-section-title']) : ''; ?></h2>
+                <div class="tf-map-area">
+                    <?php if ( $tf_openstreet_map=="default" && !empty($address_latitude) && !empty($address_longitude) && empty($tf_google_map_key) ) {  ?>
+                        <div id="tour-location" class="tf-single-map-div"></div>
+                    <?php } ?>
+                    <?php if ( $tf_openstreet_map=="default" && (empty($address_latitude) || empty($address_longitude)) && empty($tf_google_map_key) ) {  ?>
+                        <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( str_replace( "#", "", $address ) ); ?>&output=embed" width="100%" height="500" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    <?php } ?>
+                    <?php if( $tf_openstreet_map!="default" && !empty($tf_google_map_key) ){ ?>
+                    <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( str_replace( "#", "", $address ) ); ?>&output=embed" width="100%" height="500" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    <?php } ?>
+                </div>
+            </div>
+        <?php endif; ?>
+
+        <?php if ( \Elementor\Plugin::$instance->editor->is_edit_mode() ): ?>
+        <script>
+            jQuery(document).ready(function ($) {
+                'use strict';
+            
                 if ($('#tour-location').length) {
                     const map = L.map('tour-location').setView([<?php echo esc_attr($address_latitude); ?>, <?php echo esc_attr($address_longitude); ?>], <?php echo esc_attr($address_zoom); ?>);
                     
@@ -251,6 +285,41 @@ class Map extends Widget_Base {
 
                     const marker = L.marker([<?php echo esc_attr($address_latitude); ?>, <?php echo esc_attr($address_longitude); ?>]).addTo(map);
                 }
+            });	
+        </script>
+        <?php endif;
+    }
+
+    private function tf_apartment_map($settings) {
+        $tf_openstreet_map = ! empty( Helper::tfopt( 'google-page-option' ) ) ? Helper::tfopt( 'google-page-option' ) : "default";
+	    $tf_google_map_key = !empty( Helper::tfopt( 'tf-googlemapapi' ) ) ? Helper::tfopt( 'tf-googlemapapi' ) : '';
+        $meta = get_post_meta(get_the_ID(), 'tf_apartment_opt', true);
+        $map     = ! empty( $meta['map'] ) ? Helper::tf_data_types($meta['map']) : '';
+        if( !empty($meta['map']) && Helper::tf_data_types($meta['map'])){
+            $address = !empty( Helper::tf_data_types($meta['map'])['address'] ) ? Helper::tf_data_types($meta['map'])['address'] : '';
+            $address_latitude = !empty( Helper::tf_data_types($meta['map'])['latitude'] ) ? Helper::tf_data_types($meta['map'])['latitude'] : '';
+            $address_longitude = !empty( Helper::tf_data_types($meta['map'])['longitude'] ) ? Helper::tf_data_types($meta['map'])['longitude'] : '';
+            $address_zoom = !empty( Helper::tf_data_types($meta['map'])['zoom'] ) ? Helper::tf_data_types($meta['map'])['zoom'] : '';
+        }
+        ?>
+        <?php if ( ! empty( $map['address'] ) ): ?>
+            <div class="tf-apartment-map tf-single-map">
+                <h2 class="section-heading"><?php echo ! empty( $meta['location_title'] ) ? esc_html( $meta['location_title'] ) : ''; ?></h2>
+
+                <?php if ( $tf_openstreet_map == "default" && ! empty( $map["latitude"] ) && ! empty( $map["longitude"] ) ) { ?>
+                    <div id="apartment-location" class="tf-single-map-div"></div>
+                <?php } elseif ( $tf_openstreet_map != "default" && ! empty( $tf_google_map_key ) ){ ?>
+                    <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( str_replace( "#", "", $map["address"] ) ); ?>&output=embed" width="100%" height="600" style="border:0;"
+                            allowfullscreen=""
+                            loading="lazy"></iframe>
+                <?php } ?>
+            </div>
+        <?php endif; ?>
+
+        <?php if ( \Elementor\Plugin::$instance->editor->is_edit_mode() ): ?>
+        <script>
+            jQuery(document).ready(function ($) {
+                'use strict';
 
                 if ($('#apartment-location').length) {
                     const map = L.map('apartment-location').setView([<?php echo esc_attr($address_latitude); ?>, <?php echo esc_attr($address_longitude); ?>], <?php echo esc_attr($address_zoom); ?>);
@@ -262,7 +331,41 @@ class Map extends Widget_Base {
 
                     const marker = L.marker([<?php echo esc_attr($address_latitude); ?>, <?php echo esc_attr($address_longitude); ?>]).addTo(map);
                 }
+            });	
+        </script>
+        <?php endif;
+    }
 
+    private function tf_car_map($settings) {
+        $tf_openstreet_map = ! empty( Helper::tfopt( 'google-page-option' ) ) ? Helper::tfopt( 'google-page-option' ) : "default";
+        $meta = get_post_meta(get_the_ID(), 'tf_carrental_opt', true);
+        $map     = ! empty( $meta['map'] ) ? Helper::tf_data_types($meta['map']) : '';
+        if( !empty($meta['map']) && Helper::tf_data_types($meta['map'])){
+            $address = !empty( Helper::tf_data_types($meta['map'])['address'] ) ? Helper::tf_data_types($meta['map'])['address'] : '';
+            $address_latitude = !empty( Helper::tf_data_types($meta['map'])['latitude'] ) ? Helper::tf_data_types($meta['map'])['latitude'] : '';
+            $address_longitude = !empty( Helper::tf_data_types($meta['map'])['longitude'] ) ? Helper::tf_data_types($meta['map'])['longitude'] : '';
+            $address_zoom = !empty( Helper::tf_data_types($meta['map'])['zoom'] ) ? Helper::tf_data_types($meta['map'])['zoom'] : '';
+        }
+        ?>
+        <?php if ( ! empty( $map['address'] ) ): ?>
+            <div class="tf-apartment-map tf-single-map">
+                <h2 class="section-heading"><?php echo ! empty( $meta['location_title'] ) ? esc_html( $meta['location_title'] ) : ''; ?></h2>
+
+                <?php if ( $tf_openstreet_map == "default" && ! empty( $map["latitude"] ) && ! empty( $map["longitude"] ) ) { ?>
+                    <div id="apartment-location" class="tf-single-map-div"></div>
+                <?php } elseif ( $tf_openstreet_map != "default" && ! empty( $tf_google_map_key ) ){ ?>
+                    <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( str_replace( "#", "", $map["address"] ) ); ?>&output=embed" width="100%" height="600" style="border:0;"
+                            allowfullscreen=""
+                            loading="lazy"></iframe>
+                <?php } ?>
+            </div>
+        <?php endif; ?>
+
+        <?php if ( \Elementor\Plugin::$instance->editor->is_edit_mode() ): ?>
+        <script>
+            jQuery(document).ready(function ($) {
+                'use strict';
+            
                 if ($('#car-location').length) {
                     const map = L.map('car-location').setView([<?php echo esc_attr($address_latitude); ?>, <?php echo esc_attr($address_longitude); ?>], <?php echo esc_attr($address_zoom); ?>);
 
@@ -276,5 +379,5 @@ class Map extends Widget_Base {
             });	
         </script>
         <?php endif;
-	}
+    }
 }

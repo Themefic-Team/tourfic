@@ -9,6 +9,7 @@ use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Typography;
 use Elementor\Widget_Base;
+use Tourfic\Classes\Helper;
 
 // don't load directly
 defined( 'ABSPATH' ) || exit;
@@ -118,15 +119,22 @@ class Highlights extends Widget_Base {
         $this->post_id   = get_the_ID();
         $this->post_type = get_post_type();
 
-        if($this->post_type !== 'tf_tours'){
+        if($this->post_type == 'tf_tours'){
+            $this->tf_tour_highlight($settings);
+        }elseif($this->post_type == 'tf_apartment'){
+            $this->tf_apartment_highlight($settings);
+        }else{
             return;
         }
+    }
+
+	private function tf_tour_highlight($settings) {
 	    $meta = get_post_meta( $this->post_id, 'tf_tours_opt', true );
         $highlights = ! empty( $meta['additional_information'] ) ? $meta['additional_information'] : '';
 		$style = !empty($settings['highlights_style']) ? $settings['highlights_style'] : 'style1';
-       
-        if($style == 'style1' && $highlights){ ?>
-			<div class="tf-single-template__one">
+
+		if($style == 'style1' && $highlights){ ?>
+			<div class="tf-single-template__one tf-tour-highlights-style1">
 				<div class="tf-highlights-wrapper tf-box tf-template-section">
 					<div class="tf-highlights-inner tf-flex">
 						<div class="tf-highlights-icon">
@@ -146,7 +154,7 @@ class Highlights extends Widget_Base {
         	<?php 
 		} elseif ($style == 'style2') {
         	?>
-            <div class="tf-single-template__legacy">
+            <div class="tf-single-template__legacy tf-tour-highlights-style2">
 				<div class="tf-highlight-wrapper">
 					<div class="tf-highlight-content">
 						<div class="tf-highlight-item">
@@ -165,7 +173,67 @@ class Highlights extends Widget_Base {
 			</div>
             <?php
         }
-    }
+	}
+
+	private function tf_apartment_highlight($settings) {
+	    $meta = get_post_meta( $this->post_id, 'tf_apartment_opt', true );
+		$style = !empty($settings['highlights_style']) ? $settings['highlights_style'] : 'style1';
+		$tf_highlights_count = count(Helper::tf_data_types( $meta['highlights'] ));
+
+		if($style == 'style1' && ! empty( Helper::tf_data_types( $meta['highlights'] ) )){ ?>
+			<div class="tf-single-template__two tf-apartment-highlights-style1">
+				<div class="tf-overview-wrapper">
+					<div class="<?php echo $tf_highlights_count > 4 ? esc_attr('tf-features-block-slides tf-slick-slider') : esc_attr('tf-features-block-wrapper'); ?> tf-informations-secations">
+						
+						<?php
+						foreach ( Helper::tf_data_types( $meta['highlights'] ) as $highlight ) :
+						if ( empty( $highlight['title'] ) ) {
+							continue;
+						}
+						?>
+						<div class="tf-feature-block">
+							<?php echo ! empty( $highlight['icon'] ) ? "<i class='" . esc_attr( $highlight['icon'] ) . "'></i>" : ''; ?>
+							<div class="tf-feature-block-details">
+								<h5><?php echo esc_html( $highlight['title'] ); ?></h5>
+								<?php 
+								echo ! empty( $highlight['subtitle'] ) ? '<p>' . esc_html( $highlight['subtitle'] ) . '</p>' : ''; ?>
+							</div>
+						</div>
+						<?php endforeach; ?>
+						
+					</div>
+				</div>
+			</div>
+        	<?php 
+		} elseif ($style == 'style2' && ! empty( Helper::tf_data_types( $meta['highlights'] ) )) {
+        	?>
+            <div class="tf-single-template__legacy tf-apartment-highlights-style2">
+				<div class="tf-apt-highlights-wrapper">
+					<?php if ( ! empty( $meta['highlights_title'] ) ): ?>
+						<h2 class="section-heading"><?php echo esc_html( $meta['highlights_title'] ) ?></h2>
+					<?php endif; ?>
+
+					<div class="tf-apt-highlights <?php echo count( Helper::tf_data_types( $meta['highlights'] ) ) > 3 ? 'tf-apt-highlights-slider tf-slick-slider' : ''; ?>">
+						<?php
+						foreach ( Helper::tf_data_types( $meta['highlights'] ) as $highlight ) :
+							if ( empty( $highlight['title'] ) ) {
+								continue;
+							}
+							?>
+							<div class="tf-apt-highlight">
+								<div class="tf-apt-highlight-top">
+									<?php echo ! empty( $highlight['icon'] ) ? "<div class='tf-apt-highlight-icon'><i class='" . esc_attr( $highlight['icon'] ) . "'></i></div>" : ''; ?>
+									<h4><?php echo esc_html( $highlight['title'] ); ?></h4>
+								</div>
+								<?php echo ! empty( $highlight['subtitle'] ) ? '<p>' . esc_html( $highlight['subtitle'] ) . '</p>' : ''; ?>
+							</div>
+						<?php endforeach; ?>
+					</div>
+				</div>
+			</div>
+            <?php
+        }
+	}
 
     /**
 	 * Apply CSS property to the widget

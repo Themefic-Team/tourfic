@@ -2,7 +2,7 @@
 @import '../../../../../common/mixin';
 
 .tf-single-template{
-    &__legacy{
+    &__legacy.tf-tour-highlights-style2{
         padding: 0;
         .tf-highlight-wrapper{
             .tf-highlight-item {
@@ -48,7 +48,7 @@
             }
         }
     }
-    &__one{
+    &__one.tf-tour-highlights-style1{
         padding: 0;
         .tf-highlights-wrapper {
             background: $color-filling-fg;
@@ -87,6 +87,203 @@
                     i{
                         color: $color-primary;
                         width: 24px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.tf-single-template{
+    &__legacy.tf-apartment-highlights-style2{
+        padding: 0;
+        .tf-apt-highlights {
+            @include flexbox();
+            @include flex-wrap(wrap);
+            gap: 16px;
+
+            &.slick-dotted {
+                padding-bottom: 70px;
+            }
+
+            .slick-dots {
+                bottom: 24px;
+
+                li {
+                    width: 16px;
+                    height: 16px;
+
+                    button {
+                        background: $color-gray;
+                        border-radius: 30px;
+                        border: 1px solid $color-gray;
+                        height: 16px;
+                        width: 16px;
+
+                        &:before {
+                            opacity: 0;
+                            font-size: 0;
+                            width: 6px;
+                            height: 6px;
+                            background: $color-primary;
+                            top: 50%;
+                            left: 50%;
+                            border-radius: 100%;
+                            transform: translate(-50%, -50%);
+                        }
+                    }
+
+                    &.slick-active {
+                        button {
+                            background: transparent;
+                            border: 1px solid $color-primary;
+
+                            &:before {
+                                opacity: 1;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .tf-apt-highlight {
+                @include flex(0 0 calc(100% / 3 - 11px));
+                border: 1px solid $color-gray;
+                border-radius: 8px;
+                padding: 16px;
+                min-height: 72px;
+                box-sizing: border-box;
+
+                @media #{$max575} {
+                    @include flex(0 0 100%);
+                }
+
+                .tf-apt-highlight-top {
+                    @include flexbox();
+                    @include align-items(center);
+                    gap: 16px;
+                    margin-bottom: 8px;
+                }
+
+                .tf-apt-highlight-icon {
+                    @include flex(0 0 25px);
+
+                    i {
+                        font-size: 1.5rem;
+                        line-height: 1;
+                        color: $color-heading;
+                    }
+                }
+
+                h4 {
+                    color: $color-heading;
+                    margin: 0;
+                    font-size: 1.25rem;
+                    font-weight: 500;
+                    line-height: 1.5;
+                }
+
+                p {
+                    color: $color-text;
+                    font-size: 0.875rem;
+                    line-height: 1.5;
+                    font-weight: 400;
+                    margin: 0;
+                }
+            }
+        }
+    }
+    &__two.tf-apartment-highlights-style1{
+        padding: 0;
+
+        .tf-features-block-wrapper {
+            display: grid;
+            gap: 24px;
+            grid-template-columns: repeat(auto-fit, minmax(23%, 1fr));
+
+            @media #{$max1600}{
+                grid-template-columns: repeat(auto-fit, minmax(23%, 1fr));
+            }
+            @media only screen and (max-width: 1200px){
+                grid-template-columns: 1fr 1fr;
+            }
+            @media #{$max1024}{
+                grid-template-columns: 1fr 1fr;
+            }
+            @media #{$max575}{
+                grid-template-columns: 100%;
+            }
+            .tf-feature-block {
+                padding: 24px;
+                display: flex;
+                gap: 16px;
+                background: $color-filling-fg;
+                @media #{$max1024}{
+                    padding: 16px;
+                    gap: 8px;
+                }
+                i {
+                    font-size: 1.5rem;
+                    color: $color-primary;
+                    line-height: 1.5;
+                }
+                .tf-feature-block-details {
+                    h5 {
+                        color: $color-heading;
+                        font-size: 1.25rem;
+                        font-weight: 700;
+                        line-height: 1.5;
+                        margin-bottom: 5px;
+                        @media #{$max768}{
+                            font-size: 1rem;
+                        }
+                    }
+                    p{
+                        color: $color-text;
+                        font-size: 1rem;
+                        font-weight: 400;
+                        margin: 0;
+                    }
+                }
+            }
+        }
+        .tf-informations-secations{
+            .slick-dots {
+                bottom: -32px;
+                li {
+                    width: 16px;
+                    height: 16px;
+    
+                    button {
+                        background: transparent;
+                        border-radius: 30px;
+                        border: 1px solid $color-gray;
+                        height: 12px;
+                        width: 12px;
+    
+                        &:before {
+                            opacity: 0;
+                            font-size: 0;
+                            width: 6px;
+                            height: 6px;
+                            background: $color-primary;
+                            top: 50%;
+                            left: 50%;
+                            border-radius: 100%;
+                            transform: translate(-50%, -50%);
+                        }
+                    }
+    
+                    &.slick-active {
+                        button {
+                            background: transparent;
+                            border: 1px solid $color-primary;
+                            height: 16px;
+                            width: 16px;
+                            &:before {
+                                opacity: 1;
+                            }
+                        }
                     }
                 }
             }

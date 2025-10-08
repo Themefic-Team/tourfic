@@ -68,14 +68,21 @@ class Feature extends Widget_Base {
 
         do_action( 'tf/single-feature/before-content/controls', $this );
 		
+		$post_type = $this->get_current_post_type();
+		$options = [
+			'style1' => esc_html__('Style 1', 'tourfic'),
+			'style2' => esc_html__('Style 2', 'tourfic'),
+		];
+
+		if($post_type == 'tf_apartment'){
+			unset($options['style2']);
+		}
+
 		$this->add_control('feature_style',[
             'label' => esc_html__('Feature Style', 'tourfic'),
             'type' => \Elementor\Controls_Manager::SELECT,
             'default' => 'style1',
-            'options' => [
-                'style1' => esc_html__('Style 1', 'tourfic'),
-                'style2' => esc_html__('Style 2', 'tourfic'),
-            ],
+            'options' => $options,
         ]);
 
 	    do_action( 'tf/single-feature/after-content/controls', $this );
@@ -221,6 +228,8 @@ class Feature extends Widget_Base {
             $this->tf_hotel_features($settings);
         } if($this->post_type == 'tf_tours'){
             $this->tf_tour_features($settings);
+        } if($this->post_type == 'tf_apartment'){
+            $this->tf_apartment_features($settings);
         } else {
 			return;
 		}
@@ -354,6 +363,47 @@ class Feature extends Widget_Base {
         }
 	}
 
+	private function tf_apartment_features($settings) {
+		//feature style
+        $style = !empty($settings['feature_style']) ? $settings['feature_style'] : 'style1';
+		$meta = get_post_meta($this->post_id, 'tf_apartment_opt', true);
+		
+        
+        if ($style == 'style1' && Helper::tf_data_types( $meta['amenities'] ) ) {
+				$fav_amenities = array();
+				foreach ( Helper::tf_data_types( $meta['amenities'] ) as $amenity ) {
+					if ( ! isset( $amenity['favorite'] ) || $amenity['favorite'] !== '1' ) {
+						continue;
+					}
+					$fav_amenities[] = $amenity;
+				}
+				if ( ! empty( $fav_amenities ) ){
+				?>
+				<div class="tf-apartment-feature-style1 tf-place-offer-section">
+					<h2><?php echo ! empty( $meta['amenities_title'] ) ? esc_html($meta['amenities_title']) : ''; ?></h2>
+					<div class="place-offer-items">
+						<?php
+							foreach ( array_slice( $fav_amenities, 0, 10 ) as $amenity ) :
+								$feature = get_term_by( 'id', $amenity['feature'], 'apartment_feature' );
+								$feature_meta = get_term_meta( $amenity['feature'], 'tf_apartment_feature', true );
+								$f_icon_type = ! empty( $feature_meta['icon-type'] ) ? $feature_meta['icon-type'] : '';
+								if ( $f_icon_type == 'icon' && !empty($feature_meta['apartment-feature-icon']) ) {
+									$feature_icon = '<i class="' . $feature_meta['apartment-feature-icon'] . '"></i>';
+								} elseif ( $f_icon_type == 'custom' && !empty($feature_meta['apartment-feature-icon-custom']) ) {
+									$feature_icon = '<img src="' . esc_url( $feature_meta['apartment-feature-icon-custom'] ) . '" style="width: ' . $feature_meta['apartment-feature-icon-dimension'] . 'px; height: ' . $feature_meta['apartment-feature-icon-dimension'] . 'px;" />';
+								}
+								?>
+								<div class="tf-apt-amenity">
+									<?php echo ! empty( $feature_icon ) ? "<div class='tf-apt-amenity-icon'>" . wp_kses_post( $feature_icon ). "</div>" : ""; ?>
+									<span><?php echo esc_html( $feature->name ); ?></span>
+								</div>
+							<?php endforeach; ?>
+					</div>
+				</div>
+            <?php }
+        }
+	}
+
     /**
 	 * Apply CSS property to the widget
      * @param $css_property
@@ -361,5 +411,23 @@ class Feature extends Widget_Base {
      */
 	public function tf_apply_dim( $css_property, $important = false ) {
 		return "{$css_property}: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}} " . ($important ? '!important' : '') . ";";
+	}
+
+	/**
+	 * Get the current post type being previewed in Elementor editor
+	 */
+	protected function get_current_post_type() {
+		// Check if we're in Elementor editor and have a preview post ID
+		if (isset($_GET['tf_preview_post_id']) && !empty($_GET['tf_preview_post_id'])) {
+			$preview_post_id = intval($_GET['tf_preview_post_id']);
+			$preview_post = get_post($preview_post_id);
+			
+			if ($preview_post && in_array($preview_post->post_type, ['tf_hotel', 'tf_tours', 'tf_apartment', 'tf_carrental'])) {
+				return $preview_post->post_type;
+			}
+		}
+		
+		// Fallback to regular post type detection
+		return get_post_type();
 	}
 }

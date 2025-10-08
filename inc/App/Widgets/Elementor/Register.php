@@ -79,6 +79,7 @@ class Register {
             $widgets_manager->register( \Tourfic\App\Widgets\Elementor\Widgets\Single\Included_Excluded::instance() );
             $widgets_manager->register( \Tourfic\App\Widgets\Elementor\Widgets\Single\Itinerary::instance() );
             $widgets_manager->register( \Tourfic\App\Widgets\Elementor\Widgets\Single\Tour_Contact_Information::instance() );
+            $widgets_manager->register( \Tourfic\App\Widgets\Elementor\Widgets\Single\House_Rules::instance() );
         }
     }
 

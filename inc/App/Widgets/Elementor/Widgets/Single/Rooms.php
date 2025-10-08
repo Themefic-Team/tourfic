@@ -34,7 +34,7 @@ class Rooms extends Widget_Base {
 	}
 
 	public function get_icon() {
-		return 'tf eicon-contact';
+		return 'tf eicon-search-results';
 	}
 
 	public function get_categories() {
