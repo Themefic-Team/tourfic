@@ -1118,6 +1118,11 @@ class Tour {
                                 <a href="#" class="tf_btn tf_btn_full tf-booking-popup-btn" type="submit"><?php echo esc_html( $tf_tour_book_now_text ); ?></a>
                             </div>
 						<?php endif; ?>
+						<?php
+						if ( self::tf_booking_popup( $post_id ) ) {
+							echo wp_kses( self::tf_booking_popup( $post_id ), Helper::tf_custom_wp_kses_allow_tags() );
+						}
+						?>
                     </div>
 
                 </form>
@@ -1405,6 +1410,11 @@ class Tour {
                                 <a href="#" class="tf_btn tf_btn_full tf_btn_sharp tf-booking-popup-btn" type="submit"><?php echo esc_html( $tf_tour_book_now_text ); ?></a>
                             </div>
 						<?php endif; ?>
+						<?php
+						if ( self::tf_booking_popup( $post_id ) ) {
+							echo wp_kses( self::tf_booking_popup( $post_id ), Helper::tf_custom_wp_kses_allow_tags() );
+						}
+						?>
                     </div>
 
                     <!-- bottom bar -->

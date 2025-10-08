@@ -11399,6 +11399,9 @@ div#tf-destinationautocomplete-list div:before {
 .tf-single-template__one .tf-booking-form .tf-booking-form-inner .tf-field-group #check-in-out-date {
   width: 100%;
 }
+.tf-single-template__one .tf-booking-form .tf-booking-form-inner .tf-field-group.check-in-time-div {
+  display: none;
+}
 .tf-single-template__one .tf-booking-form .tf-booking-person .tf-field {
   align-items: center;
   justify-content: space-between;
