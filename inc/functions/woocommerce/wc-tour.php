@@ -556,8 +556,8 @@ function tf_tours_booking_function() {
 
 	if ( $pricing_rule=='package' && !empty($single_package) && $single_package['pricing_type'] == 'group' ) {
 		$pack_max_people = !empty($single_package['group_tabs'][3]['max_person']) ? $single_package['group_tabs'][3]['max_person'] : 0;
-
-		$max_text = sprintf( _n( '%s person', '%s people', $pack_max_people, 'tourfic' ), $pack_max_people );
+		/* translators: %s: maximum number of person */
+		$max_text = sprintf( __( '%s person', 'tourfic' ), $pack_max_people );
 		// echo $total_people_booking;
 		if ( $total_people_booking > $pack_max_people && $pack_max_people > 0 ) {
 			/* translators: %1$s: maximum number of people, %2$s: start date, %3$s: end date */
@@ -601,13 +601,14 @@ function tf_tours_booking_function() {
 		$pack_max_people = !empty($meta['max_person']) ? $meta['max_person'] : 0;
 		$pack_min_people = !empty($meta['min_person']) ? $meta['min_person'] : 0;
 
-		$max_text = sprintf( _n( '%s person', '%s people', $pack_max_people, 'tourfic' ), $pack_max_people );
+		/* translators: %s: maximum number of person */
+		$max_text = sprintf( __( '%s person', 'tourfic' ), $pack_max_people );
 		if ( $total_people_booking > $pack_max_people && $pack_max_people > 0 ) {
 			/* translators: %1$s: maximum number of people, %2$s: start date, %3$s: end date */
 			$response['errors'][] = sprintf( esc_html__( 'Maximum %1$s allowed', 'tourfic' ), $max_text );
 		}
-
-		$min_text = sprintf( _n( '%s person', '%s people', $pack_min_people, 'tourfic' ), $pack_min_people );
+		/* translators: %s: minimum number of person */
+		$min_text = sprintf( __( '%s person', 'tourfic' ), $pack_min_people );
 		if ( $total_people_booking < $pack_min_people && $pack_min_people > 0 ) {
 			/* translators: %1$s: Minimum number of people, %2$s: start date, %3$s: end date */
 			$response['errors'][] = sprintf( esc_html__( 'Minimum %1$s required', 'tourfic' ), $min_text );

@@ -1306,7 +1306,7 @@ class TF_Options {
         if($pricing_by == 'package' && function_exists( 'is_tf_pro' ) && is_tf_pro()){ ?>
 			<div class="tf-repeater">
 			<div class="tf-field" style="padding-top: 0px">
-				<label class="tf-field-label"><?php echo esc_html__('Packages', 'status'); ?></label>
+				<label class="tf-field-label"><?php echo esc_html__('Packages', 'tourfic'); ?></label>
 				<div class="tf-field-sub-title">
 					<?php echo esc_html__('You can add, customize any packages from here.', 'tourfic'); ?>
 				</div>

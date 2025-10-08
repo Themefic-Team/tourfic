@@ -3227,29 +3227,29 @@ class Hotel {
                         <div class="tf-booking-content tf-hotel-booking-content tf-booking-content-1">
 							<?php if ( ! empty( $airport_service_type ) ) { ?>
 								<div class="tf-hotel-services-text">
-									<h3><?php echo !empty( tfopt( 'hotel_service_popup_title' ) ) ? __( tfopt( 'hotel_service_popup_title' ), 'tourfic' ) : '' ?></h3>
-									<p><?php echo !empty( tfopt( 'hotel_service_popup_subtile') ) ? __( tfopt( 'hotel_service_popup_subtile'), 'tourfic' ) : '' ; ?></p>
+									<h3><?php echo !empty( tfopt( 'hotel_service_popup_title' ) ) ? esc_html( tfopt( 'hotel_service_popup_title' ) ) : '' ?></h3>
+									<p><?php echo !empty( tfopt( 'hotel_service_popup_subtile') ) ? esc_html( tfopt( 'hotel_service_popup_subtile') ) : '' ; ?></p>
 								</div>
 								<div class="tf-booking-content-service">
 									<select name="airport_service">
-										<option value=""><?php _e( '- Select Service -', 'tourfic' ) ?></option>
+										<option value=""><?php echo esc_html__( '- Select Service -', 'tourfic' ) ?></option>
 									<?php foreach ( $airport_service_type as $key => $single_service_type ) {
 										$airport_service = self::tf_hotel_airport_service_title_price( $post_id, $adult, $child, $single_service_type );
 										?>
 										<option value="<?php echo esc_attr( $single_service_type ); ?>">
 											<?php
 											if ( "pickup" == $single_service_type ) {
-												_e( 'Pickup Service', 'tourfic' );
+												echo esc_html__( 'Pickup Service', 'tourfic' );
 											}
 											if ( "dropoff" == $single_service_type ) {
-												_e( 'Drop-off Service', 'tourfic' );
+												echo esc_html__( 'Drop-off Service', 'tourfic' );
 											}
 											if ( "both" == $single_service_type ) {
-												_e( 'Pickup & Drop-off Service', 'tourfic' );
+												echo esc_html__( 'Pickup & Drop-off Service', 'tourfic' );
 											}
 											?>
 
-											<?php echo $airport_service['title']; ?> = <?php echo wc_price( $airport_service['price'] ); ?>
+											<?php echo esc_html($airport_service['title']); ?> = <?php echo wp_kses_post(wc_price( $airport_service['price'] )); ?>
 										</option>
 									<?php } ?>
 									</select>
@@ -3258,23 +3258,23 @@ class Hotel {
 							<!-- Hotel Extra -->
 							<?php if ( ! empty( $hotel_extras ) ) { ?>
 							<div class="tf-hotel-services-text">
-                                <h3><?php echo !empty( tfopt( 'hotel_extra_popup_title' ) ) ? __( tfopt( 'hotel_extra_popup_title' ), 'tourfic' ) : '' ?></h3>
-                                <p><?php echo !empty( tfopt( 'hotel_extra_popup_subtile') ) ? __( tfopt( 'hotel_extra_popup_subtile'), 'tourfic' ) : '' ; ?></p>
+                                <h3><?php echo !empty( tfopt( 'hotel_extra_popup_title' ) ) ? esc_html( tfopt( 'hotel_extra_popup_title' ) ) : '' ?></h3>
+                                <p><?php echo !empty( tfopt( 'hotel_extra_popup_subtile') ) ? esc_html( tfopt( 'hotel_extra_popup_subtile') ) : '' ; ?></p>
                             </div>
 							<div class="tf-booking-content-service">
 								<?php foreach ( $hotel_extras as $key => $extra ) {
 									$extra_service = Helper::tf_hotel_extras_title_price( $post_id, $adult, $child, $key );
 									?>
 									<div class="tf-single-hotel-service tour-extra-single">
-										<label for="service-<?php echo esc_attr( $key ) . '_' . $room_id; ?>">
+										<label for="service-<?php echo esc_attr( $key ) . '_' . esc_attr($room_id); ?>">
 											<div class="tf-service-radio">
-												<input type="checkbox" value="<?php echo esc_attr( $key ); ?>" id="service-<?php echo esc_attr( $key) . '_' . $room_id; ?>" name="extra_service">
+												<input type="checkbox" value="<?php echo esc_attr( $key ); ?>" id="service-<?php echo esc_attr( $key) . '_' . esc_attr($room_id); ?>" name="extra_service">
 											</div>
 											<div class="tf-service-content">
 												<h5>
-													<?php esc_html_e($extra['title']);?>
+													<?php echo esc_html($extra['title']);?>
 												</h5>
-												<p><?php echo $extra_service['title']; ?> = <?php echo wc_price( $extra_service['price'] ); ?></p>
+												<p><?php echo esc_html($extra_service['title']); ?> = <?php echo wp_kses_post(wc_price( $extra_service['price'] )); ?></p>
 											</div>
 										</label>
 									</div>
@@ -3453,7 +3453,7 @@ class Hotel {
                         <div class="tf-control-pagination tf-pagination-content-2 <?php echo empty( $airport_service_type ) && empty( $hotel_extras ) ? esc_attr( 'show' ) : ''; ?>">
 							<?php
 							if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ($airport_service_type || $hotel_extras) ) { ?>
-                                <a href="#" class="tf-back-control tf-step-back" data-step="1"><i class="fa fa-angle-left"></i><?php echo __( "Back", "tourfic" ); ?></a>
+                                <a href="#" class="tf-back-control tf-step-back" data-step="1"><i class="fa fa-angle-left"></i><?php echo esc_html__( "Back", "tourfic" ); ?></a>
 							<?php }
 							if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && 3 == $room_book_by ) {
 								?>
@@ -3470,7 +3470,7 @@ class Hotel {
                         <div class="tf-control-pagination tf-pagination-content-3 <?php echo empty( $airport_service_type ) && empty( $hotel_extras ) && empty( $enable_guest_info ) ? esc_attr( 'show' ) : ''; ?>">
 							<?php
 							if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && ( $airport_service_type || $hotel_extras || $enable_guest_info ) ) { ?>
-                                <a href="#" class="tf-back-control tf-step-back" data-step="2"><i class="fa fa-angle-left"></i><?php echo __( "Back", "tourfic" ); ?></a>
+                                <a href="#" class="tf-back-control tf-step-back" data-step="2"><i class="fa fa-angle-left"></i><?php echo esc_html__( "Back", "tourfic" ); ?></a>
 							<?php } ?>
                             <button type="submit" class="tf-hotel-book-confirm-error tf_btn"><?php echo esc_html__( "Continue", "tourfic" ); ?></button>
                         </div>

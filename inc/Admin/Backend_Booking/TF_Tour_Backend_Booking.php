@@ -741,6 +741,7 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 			}
 	
 			if ( $total_people > $max_allowed ) {
+				/* translators: %s minimum people allowed */
 				$response['errors'][] = sprintf( esc_html__( 'Maximum %1$s allowed', 'tourfic' ), $max_allowed );
 			} elseif ( $found_valid_option ) {
 				$group_price = $matched_price;
@@ -808,6 +809,7 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 			}
 
 			if ( $total_people > $max_allowed ) {
+				/* translators: %s minimum people allowed */
 				$response['errors'][] = sprintf( esc_html__( 'Maximum %1$s allowed', 'tourfic' ), $max_allowed );
 			} elseif ( $found_valid_option ) {
 				$group_price = $matched_price;

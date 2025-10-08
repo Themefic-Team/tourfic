@@ -614,9 +614,9 @@ $tf_cars_slug = get_option('car_slug');
                     <div class="tf-mobile-booking-btn">
                         <div class="tf-price-header">
                             <h2><?php esc_html_e("Total:", "tourfic"); ?> 
-                            <?php if(!empty($total_prices['regular_price'])){ ?><del><?php echo wc_price($total_prices['regular_price']); ?></del>  <?php } ?>
-                            <?php echo $total_prices['sale_price'] ? wc_price($total_prices['sale_price']) : '' ?> <?php if(!empty($total_prices['type'])){ ?><small class="pricing-type">/ <?php echo esc_html($total_prices['type']); ?></small> <?php } ?></h2>
-                            <p><?php echo Pricing::is_taxable($meta); ?></p>
+                            <?php if(!empty($total_prices['regular_price'])){ ?><del><?php echo wp_kses_post(wc_price($total_prices['regular_price'])); ?></del>  <?php } ?>
+                            <?php echo $total_prices['sale_price'] ? wp_kses_post(wc_price($total_prices['sale_price'])) : '' ?> <?php if(!empty($total_prices['type'])){ ?><small class="pricing-type">/ <?php echo esc_html($total_prices['type']); ?></small> <?php } ?></h2>
+                            <p><?php echo wp_kses_post(Pricing::is_taxable($meta)); ?></p>
                         </div>
                         <button><?php esc_html_e("Book Now", "tourfic"); ?></button>
                     </div>

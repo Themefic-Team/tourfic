@@ -33,7 +33,7 @@ if ( ! class_exists( 'TF_number' ) ) {
 			}else if(empty($this->field['related']) && !empty($this->field['range'])){ 
 				$field_icon = !empty($this->field['icon']) ? '<i class="'.$this->field['icon'].'"></i>' : '';
 				echo '<div class="tf-number-range">
-				<div class="tf-number-field-box">'. $field_icon . '
+				<div class="tf-number-field-box">'. wp_kses_post($field_icon) . '
 				<input type="' . esc_attr( $type ) . '" name="' . esc_attr( $this->field_name() ) . '" id="' . esc_attr( $this->field_name() ) . '" value="' . esc_attr($this->value) . '" ' . wp_kses_post($placeholder) . ' '. wp_kses_post($this->field_attributes()) .'/></div>';
 
 				echo '<svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -41,7 +41,7 @@ if ( ! class_exists( 'TF_number' ) ) {
 				<path d="M2.1665 10H18.8332" stroke="#95A3B2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 				</svg>';
 
-				echo '<div class="tf-number-field-box">'. $field_icon . '
+				echo '<div class="tf-number-field-box">'. wp_kses_post($field_icon) . '
 				<input type="' . esc_attr( $type ) . '" name="' . esc_attr( $this->related_field_name() ) . '" id="' . esc_attr( $this->related_field_name() ) . '" value="' . esc_attr($this->related_value) . '" ' . wp_kses_post($related_placeholder) . ' '. wp_kses_post($this->field_attributes()) .'/>';
 				echo '</div></div>';
 			}else{

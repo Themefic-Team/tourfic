@@ -555,7 +555,7 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                 <div class="tf-field-repeater tf-package-field-repeater" style="width: 100%">
                                 <div class="tf-repeater">
                                 <div class="tf-field" style="padding-top: 0px">
-                                    <label class="tf-field-label"><?php echo esc_html__('Packages', 'status'); ?></label>
+                                    <label class="tf-field-label"><?php echo esc_html__('Packages', 'tourfic'); ?></label>
                                     <div class="tf-field-sub-title">
                                         <?php echo esc_html__('You can add, customize any packages from here.', 'tourfic'); ?>
                                     </div>

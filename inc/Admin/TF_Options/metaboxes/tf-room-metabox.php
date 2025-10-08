@@ -29,8 +29,10 @@ TF_Metabox::metabox( 'tf_room_opt', array(
 					'id'          => 'tf_hotel',
 					'type'        => 'select2',
 					'placeholder' => esc_html__( 'Select a Hotel', 'tourfic' ),
-					'label'       => esc_html__( 'Select ' . $hotel_name . ' (Required)', 'tourfic' ),
-					'subtitle'    => esc_html__( 'Select the '. strtolower($hotel_name) . ' where this room will be added', 'tourfic' ),
+                    /* translators: %s is the hotel name */
+                    'label'       => sprintf( esc_html__( 'Select %s (Required)', 'tourfic' ), $hotel_name ),
+                    /* translators: %s is the lowercased hotel name */
+                    'subtitle'    => sprintf( esc_html__( 'Select the %s where this room will be added', 'tourfic' ), strtolower( $hotel_name ) ),
 					'options'     => 'posts',
 					'query_args'  => array(
 						'post_type'      => 'tf_hotel',

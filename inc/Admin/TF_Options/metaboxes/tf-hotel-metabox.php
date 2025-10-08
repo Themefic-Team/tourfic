@@ -364,7 +364,10 @@ TF_Metabox::metabox( 'tf_hotels_opt', array(
 
 		//  Hotel Extra
 		'hotel_extra'           => array(
-			'title'  => esc_html__( $hotel_name .' Extras', 'tourfic' ),
+			// translators: %s is the hotel name.
+			'title' => sprintf(esc_html__( '%s Extras', 'tourfic' ),
+				$hotel_name
+			),
 			'icon'   => 'fa-solid fa-route',
 			'fields' => array(
 				array(

@@ -338,7 +338,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 											<span><?php esc_html_e("Year","tourfic"); ?></span>
 											<select name="tf-year-report" id="tf-year-report">
 												<?php
-												$current_year = (int) date('Y'); 
+												$current_year = (int) gmdate('Y'); 
 												for ( $i = 0; $i <= 5; $i++ ) {
 													$year = $current_year - $i;
 													$value = substr( $year, -2 ); // last 2 digits
@@ -399,47 +399,47 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 				<div class="tf-customization-quote">
                     <div class="tf-quote-header">
                         <i class="fa-solid fa-code"></i>
-                        <h3><?php echo __('Need help building your Travel, Hotel, or Rental Website?', 'tourfic');  ?></h3>
+                        <h3><?php echo esc_html__('Need help building your Travel, Hotel, or Rental Website?', 'tourfic');  ?></h3>
                     </div>
                     <div class="tf-quote-content">
-                        <p><?php echo __('Let our expert team craft a custom WordPress site tailored to your business—whether you\'re running a hotel, tour agency, or vacation rental. Optimized for performance, bookings, and conversions.', 'tourfic'); ?></p>
-						<a href="<?php echo esc_url( Helper::tf_utm_generator( 'https://portal.themefic.com/hire-us/', array( 'utm_medium' => 'dashboard_free_quote' ) ) ); ?>" target="_blank" class="tf-admin-btn tf-btn-secondary"><?php echo __('Get Free Quote', 'tourfic');  ?></a>								
+                        <p><?php echo esc_html__('Let our expert team craft a custom WordPress site tailored to your business—whether you\'re running a hotel, tour agency, or vacation rental. Optimized for performance, bookings, and conversions.', 'tourfic'); ?></p>
+						<a href="<?php echo esc_url( Helper::tf_utm_generator( 'https://portal.themefic.com/hire-us/', array( 'utm_medium' => 'dashboard_free_quote' ) ) ); ?>" target="_blank" class="tf-admin-btn tf-btn-secondary"><?php echo esc_html__('Get Free Quote', 'tourfic');  ?></a>								
                     </div>
                 </div>
 
-				<?php echo $this->tf_get_sidebar_plugin_list(); ?>
+				<?php echo $this->tf_get_sidebar_plugin_list(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized ?>
 
 				<div class="tf-quick-access">
-					<h3><?php echo __('Helpful Resources', 'tourfic');  ?></h3>
+					<h3><?php echo esc_html__('Helpful Resources', 'tourfic');  ?></h3>
 					<div class="tf-quick-access-wrapper">
 						<div class="tf-access-item">
 							<a href="<?php echo esc_url( Helper::tf_utm_generator( 'https://themefic.com/docs/tourfic/', array( 'utm_medium' => 'dashboard_doc_link' ) ) ); ?>" target="_blank">
 								<span class="icon"><i class="fa-solid fa-folder-open"></i></span>
-								<?php echo _e( 'Documentation', 'tourfic' ); ?>
+								<?php echo esc_html__( 'Documentation', 'tourfic' ); ?>
 							</a>
 						</div>
 						<div class="tf-access-item">
 							<a href="<?php echo esc_url( Helper::tf_utm_generator( 'https://portal.themefic.com/support/', array( 'utm_medium' => 'dashboard_support_link' ) ) ); ?>" target="_blank">
 								<span class="icon"><i class="fa-solid fa-headset"></i></span>
-								<?php echo _e( 'Get Support', 'tourfic' ); ?>
+								<?php echo esc_html__( 'Get Support', 'tourfic' ); ?>
 							</a>
 						</div>
 						<div class="tf-access-item">
 							<a href="https://www.facebook.com/groups/tourfic/" target="_blank">
 								<span class="icon"><i class="fa-solid fa-users"></i></span>
-								<?php echo _e( 'Join our Community', 'tourfic' ); ?>
+								<?php echo esc_html__( 'Join our Community', 'tourfic' ); ?>
 							</a>
 						</div>
 						<div class="tf-access-item">
 							<a href="https://app.loopedin.io/tourfic" target="_blank">
 								<span class="icon"><i class="fa-solid fa-road-circle-check"></i></span>
-								<?php echo _e( 'See our Roadmap', 'tourfic' ); ?>
+								<?php echo esc_html__( 'See our Roadmap', 'tourfic' ); ?>
 							</a>
 						</div>
 						<div class="tf-access-item">
 							<a href="https://app.loopedin.io/tourfic#/ideas-board" target="_blank">
 								<span class="icon"><i class="fa-solid fa-lightbulb"></i></span>
-								<?php echo _e( 'Request a Feature', 'tourfic' ); ?>
+								<?php echo esc_html__( 'Request a Feature', 'tourfic' ); ?>
 							</a>
 						</div>
 					</div>
