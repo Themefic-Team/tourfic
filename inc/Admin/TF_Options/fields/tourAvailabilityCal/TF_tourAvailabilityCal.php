@@ -26,6 +26,20 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
 			if ( Helper::tf_is_woo_active() ) {
 				?>
                 <div class="tf-tour-cal-wrap">
+                    <?php if ( function_exists( 'is_tf_pro' ) && is_tf_pro() ) { ?>
+                    <div class="tf-tour-reset-refresh">
+                        <span class="tf_tour_cal_bulk_edit button button-secondary button-large">
+                            <?php echo esc_html__( 'Bulk Add', 'tourfic' ); ?>
+                        </span>
+                        <span class="tf_tour_cal_refresh button button-secondary button-large">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g id="Refresh">
+                            <path id="Vector" d="M5 7.99999L8.99999 12H5.99999C5.99999 15.31 8.69 18 12 18C13.01 18 13.97 17.75 14.8 17.3L16.26 18.76C15.03 19.54 13.57 20 12 20C7.58 20 4 16.42 4 12H1L5 7.99999ZM18 12C18 8.68999 15.31 6 12 6C10.99 6 10.03 6.25 9.2 6.7L7.73999 5.23999C8.96999 4.45999 10.43 4 12 4C16.42 4 20 7.57999 20 12H23L19 16L15 12H18Z" fill="#003c79"/>
+                            </g>
+                            </svg>
+                        </span>
+                    </div>
+                    <?php } ?>
                     <div class='tf-tour-cal'></div>
                     <div class="tf-tour-cal-field">
 
@@ -948,7 +962,7 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                     <path d="M16.5 3.50023C16.8978 3.1024 17.4374 2.87891 18 2.87891C18.2786 2.87891 18.5544 2.93378 18.8118 3.04038C19.0692 3.14699 19.303 3.30324 19.5 3.50023C19.697 3.69721 19.8532 3.93106 19.9598 4.18843C20.0665 4.4458 20.1213 4.72165 20.1213 5.00023C20.1213 5.2788 20.0665 5.55465 19.9598 5.81202C19.8532 6.06939 19.697 6.30324 19.5 6.50023L7 19.0002L3 20.0002L4 16.0002L16.5 3.50023Z" stroke="#003C79" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                     <path d="M15 5L18 8" stroke="#003C79" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>    
-                                    <?php echo esc_html__( 'Bulk Edit', 'tourfic' ); ?>
+                                    <?php echo esc_html__( 'Bulk Add', 'tourfic' ); ?>
                                 </span>
                                 <?php } ?>
                             </div>

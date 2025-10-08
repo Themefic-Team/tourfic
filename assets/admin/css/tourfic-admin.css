@@ -4378,6 +4378,10 @@ Steps
   margin-bottom: 16px;
   border-radius: 5px;
 }
+.tf-field-repeater .tf-repeater .tf-single-repeater.tf-single-repeater-group_discount_package .tf-repeater-header .tf-repeater-header-info .tf-repeater-title {
+  width: calc(100% - 104px);
+  margin-right: 0px;
+}
 .tf-field-repeater .tf-repeater .tf-field-notice-inner {
   margin-bottom: 24px;
 }
@@ -5036,9 +5040,13 @@ a.tf-import-btn, a.tf-export-btn {
 .tf-apt-cal-wrap .fc .fc-daygrid-event.tf_tour_disable_date,
 .tf-room-cal-wrap .fc .fc-daygrid-event.tf_tour_disable_date,
 .tf-tour-cal-wrap .fc .fc-daygrid-event.tf_tour_disable_date {
-  background-color: #003c79 !important;
-  border-color: #003c79 !important;
-  opacity: 0.3;
+  background-color: #e33529 !important;
+  border-color: #e33529 !important;
+}
+.tf-apt-cal-wrap .fc .fc-daygrid-event.tf_tour_disable_date .fc-event-main,
+.tf-room-cal-wrap .fc .fc-daygrid-event.tf_tour_disable_date .fc-event-main,
+.tf-tour-cal-wrap .fc .fc-daygrid-event.tf_tour_disable_date .fc-event-main {
+  opacity: 0;
 }
 .tf-apt-cal-wrap table,
 .tf-room-cal-wrap table,
@@ -5220,11 +5228,17 @@ a.tf-import-btn, a.tf-export-btn {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
-  max-height: 360px;
+  max-height: 500px;
   overflow-y: auto;
   scroll-behavior: smooth;
   scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
   scrollbar-width: thin;
+}
+@media only screen and (max-width: 768px) {
+  .tf-bulk-popup .bulk-popup-content .bulk-popup-content-box,
+  .tf-reset-confirmation-box .bulk-popup-content .bulk-popup-content-box {
+    max-height: 360px;
+  }
 }
 .tf-bulk-popup .bulk-popup-content .bulk-popup-content-box::-webkit-scrollbar,
 .tf-reset-confirmation-box .bulk-popup-content .bulk-popup-content-box::-webkit-scrollbar {
@@ -5352,6 +5366,30 @@ a.tf-import-btn, a.tf-export-btn {
   color: #FFFFFF;
 }
 
+.tf-tour-cal-wrap,
+.tf-apt-cal-wrap,
+.tf-room-cal-wrap {
+  position: relative;
+}
+.tf-tour-cal-wrap .tf-tour-reset-refresh,
+.tf-apt-cal-wrap .tf-tour-reset-refresh,
+.tf-room-cal-wrap .tf-tour-reset-refresh {
+  position: absolute;
+  right: 110px;
+  top: 25px;
+}
+.tf-tour-cal-wrap .tf-tour-reset-refresh span,
+.tf-apt-cal-wrap .tf-tour-reset-refresh span,
+.tf-room-cal-wrap .tf-tour-reset-refresh span {
+  height: 32px;
+  font-size: 12px;
+  padding: 0 12px !important;
+}
+.tf-tour-cal-wrap .tf-tour-reset-refresh span svg,
+.tf-apt-cal-wrap .tf-tour-reset-refresh span svg,
+.tf-room-cal-wrap .tf-tour-reset-refresh span svg {
+  height: 18px;
+}
 .tf-tour-cal-wrap .tf-tour-cal,
 .tf-tour-cal-wrap .tf-apt-cal,
 .tf-tour-cal-wrap .tf-room-cal,
@@ -6315,6 +6353,7 @@ a.tf-import-btn, a.tf-export-btn {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  padding-bottom: 15px;
 }
 
 .tf-backend-tour-booking h1,

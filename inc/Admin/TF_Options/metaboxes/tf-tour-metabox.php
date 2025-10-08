@@ -386,25 +386,13 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 				array(
 					'id'          => 'disable_adult_price',
 					'type'        => 'switch',
-					'label'       => esc_html__( 'Adult Disable', 'tourfic' ),
-					'field_width' => 33.33,
-				),
-				array(
-					'id'          => 'disable_child_price',
-					'type'        => 'switch',
-					'label'       => esc_html__( 'Child Disable', 'tourfic' ),
-					'field_width' => 33.33,
-				),
-				array(
-					'id'          => 'disable_infant_price',
-					'type'        => 'switch',
-					'label'       => esc_html__( 'Infant Disable', 'tourfic' ),
-					'field_width' => 33.33,
+					'label'       => esc_html__( 'Disable Adult', 'tourfic' ),
+					'dependency' => array( 'pricing', '!=', 'package' ),
 				),
 				array(
 					'id'          => 'adult_price',
 					'type'        => 'number',
-					'description'    => esc_html__( 'Type number only, ex. 250', 'tourfic' ),
+					'description'    => esc_html__( 'Number of adult price only, ex. 250', 'tourfic' ),
 					'dependency'  => [
 						array( 'pricing', '==', 'person' ),
 						[ 'disable_adult_price', '==', 'false' ]
@@ -412,7 +400,12 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 					'attributes'  => array(
 						'min' => '0',
 					),
-					'field_width' => 33.33,
+				),
+				array(
+					'id'          => 'disable_child_price',
+					'type'        => 'switch',
+					'label'       => esc_html__( 'Disable Child', 'tourfic' ),
+					'dependency' => array( 'pricing', '!=', 'package' ),
 				),
 				array(
 					'id'          => 'child_price',
@@ -421,11 +414,16 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 						array( 'pricing', '==', 'person' ),
 						[ 'disable_child_price', '==', 'false' ]
 					],
-					'description'    => esc_html__( 'Type number only, ex. 200', 'tourfic' ),
+					'description'    => esc_html__( 'Number of child price only, ex. 200', 'tourfic' ),
 					'attributes'  => array(
 						'min' => '0',
 					),
-					'field_width' => 33.33,
+				),
+				array(
+					'id'          => 'disable_infant_price',
+					'type'        => 'switch',
+					'label'       => esc_html__( 'Disable Infant', 'tourfic' ),
+					'dependency' => array( 'pricing', '!=', 'package' ),
 				),
 				array(
 					'id'          => 'infant_price',
@@ -435,11 +433,10 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 						[ 'disable_infant_price', '==', 'false' ],
 						[ 'disable_adult_price', '==', 'false' ],
 					],
-					'description'    => esc_html__( 'Type number only, ex. 150', 'tourfic' ),
+					'description'    => esc_html__( 'Number of infant price only, ex. 150', 'tourfic' ),
 					'attributes'  => array(
 						'min' => '0',
 					),
-					'field_width' => 33.33,
 				),
 				array(
 					'id'         => 'min_person',
@@ -518,6 +515,14 @@ TF_Metabox::metabox( 'tf_tours_opt', array(
 				array(
 					'id'         => 'tour_availability',
 					'type'       => 'tourAvailabilityCal',
+				),
+				array(
+					'id'    => 'tf-pro-notice',
+					'type'  => 'notice',
+					'class' => 'tf-pro-notice',
+					'notice' => 'info',
+					'icon' => 'ri-information-fill',
+					'content' => wp_kses_post(__( 'Are you interested in package pricing, per group pricing and bulk add? Our <b>bulk add</b> allows you to set multiple data using week, months, years, etc. <a href="https://tourfic.com/" target="_blank">Upgrade to our Pro package today to take advantage of this fantastic option!</a>', 'tourfic' ) ),
 				),
 			),
 		),

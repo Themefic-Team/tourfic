@@ -147,6 +147,16 @@
     .tf-single-repeater {
       margin-bottom: 16px;
       border-radius: 5px;
+      &.tf-single-repeater-group_discount_package{
+        .tf-repeater-header{
+          .tf-repeater-header-info{
+            .tf-repeater-title{
+              width: calc(100% - 104px);
+              margin-right: 0px;
+            }
+          }
+        }
+      }
     }
     .tf-field-notice-inner {
       margin-bottom: 24px;

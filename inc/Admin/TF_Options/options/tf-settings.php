@@ -1502,7 +1502,7 @@ TF_Settings::option( 'tf_settings', array(
 						'adult'   => esc_html__( 'Adult', 'tourfic' ),
 						'child'   => esc_html__( 'Child', 'tourfic' ),
 					),
-					'default'    => 'All',
+					'default'    => 'adult',
 				),
 				array(
 					'id'       => 'tour_booking_form_button_text',

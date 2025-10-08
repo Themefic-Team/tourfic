@@ -1456,6 +1456,7 @@
                 displayEventTime: true,
                 selectable: true,
                 select: function ({start, end, startStr, endStr, allDay, jsEvent, view, resource}) {
+                    tourResetForm('');
                     if (moment(start).isBefore(moment(), 'day') || moment(end).isBefore(moment(), 'day')) {
                         self.fullCalendar.unselect();
                         setTourCheckInOut("", "", self.tourCalData);
@@ -1650,7 +1651,7 @@
                                                 <input type="hidden" name="tf_repeater_count" value="${index + 1}">
                                                 <input type="hidden" name="tf_current_field" value="group_discount_package">
                                                 
-                                                <div class="tf-repeater-content-wrap" style="display: none;">
+                                                <div class="tf-repeater-content-wrap">
                                                     <div class="tf-field tf-field-number" style="width:calc(66% - 10px);">
                                                         <div class="tf-fieldset">
                                                             <div class="tf-number-range">
@@ -1704,7 +1705,7 @@
                                                 <input type="hidden" name="tf_parent_field" value="">
                                                 <input type="hidden" name="tf_repeater_count" value="${index + 1}">
                                                 <input type="hidden" name="tf_current_field" value="allowed_time">
-                                                <div class="tf-repeater-content-wrap" style="display: none;">
+                                                <div class="tf-repeater-content-wrap">
                                                     <div class="tf-field tf-field-time" style="width: calc(50% - 6px);">
                                                         <div class="tf-fieldset">
                                                             <input type="text" name="tf_option_${i}_allowed_time[time][]" placeholder="Select Time" value="${time}" class="flatpickr flatpickr-input" data-format="h:i K" readonly="readonly">
@@ -1786,7 +1787,7 @@
             .val('');
             $('.bulk-popup-content-box #adult_tabs input, .bulk-popup-content-box #child_tabs input, .bulk-popup-content-box #infant_tabs input, .bulk-popup-content-box #group_tabs input').val('');
 
-
+            $('.tf-tour-cal-field .tf_tour_allowed_times').html('');
 
             // More specific selector with error handling
             const container = document.querySelector('.tf_tour_allowed_times');
@@ -1898,6 +1899,12 @@
                     $('.tf-field-group-box .tf-tab-switch-box .tf-tab-field-content').hide();
                 },
             });
+        });
+
+        // Refresh Calendar
+        $(document).on("click", ".tf_tour_cal_refresh", function (e) {
+            e.preventDefault();
+            tfTourCalendar();
         });
 
         // Reset Calendar Data
@@ -2093,6 +2100,7 @@
             var ajaxData = {
                 action: 'save_tour_package_pricing',
                 post_id: $('#post_ID').val(),
+                pricing_type: $('.tf_tour_pricing_type').val(),
                 package_index: packageIndex,
                 package_data: packageData,
                 nonce: tf_admin_params.tf_nonce
@@ -2157,6 +2165,7 @@
 
         // Bulk Popup Open
         $(document).on("click", ".tf_tour_cal_bulk_edit", function (e) {
+            tourResetForm('');
             $('.tf-tour-cal-field').addClass('tf-bulk-popup');
             $('.tf-bulk-repeater-section').show();
             $('.tf-check-dates').hide();
@@ -2667,7 +2676,7 @@
 
         // Repeater show hide
         $(document).on('click', '.tf-avail-repeater-collapse', function () {
-            $(this).closest('.tf-single-repeater').find('.tf-repeater-content-wrap').slideToggle(200);
+            $(this).closest('.tf-single-repeater').find('.tf-repeater-content-wrap').first().slideToggle(200);
         });
 
         // TAB jquery

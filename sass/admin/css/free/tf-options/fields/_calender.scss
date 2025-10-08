@@ -17,9 +17,11 @@
     .fc .fc-daygrid-event {
         cursor: pointer;
         &.tf_tour_disable_date{
-            background-color: #003c79 !important;
-            border-color: #003c79 !important;
-            opacity: .3;
+            background-color: #e33529 !important;
+            border-color: #e33529 !important;
+            .fc-event-main{
+                opacity: 0;
+            }
         }
     }
 
@@ -166,11 +168,13 @@
             display: flex;
             gap: 10px;
             flex-wrap: wrap;
-            max-height: 360px;
+            max-height: 500px;
             overflow-y: auto;
             // Smooth scroll effect
             scroll-behavior: smooth;
-
+            @media #{$max768}{
+                max-height: 360px;
+            }
             // Webkit scrollbar styling
             &::-webkit-scrollbar {
                 width: 6px;
@@ -303,6 +307,20 @@
 .tf-tour-cal-wrap,
 .tf-apt-cal-wrap,
 .tf-room-cal-wrap{
+    position: relative;
+    .tf-tour-reset-refresh{
+        position: absolute;
+        right: 110px;
+        top: 25px;
+        span{
+            height: 32px;
+            font-size: 12px;
+            padding: 0 12px !important;
+            svg{
+                height: 18px;
+            }
+        }
+    }
     .tf-tour-cal,
     .tf-apt-cal,
     .tf-room-cal{

@@ -1153,27 +1153,16 @@ class TF_Options {
 				}
 			}
 
-			// if($pricing_type == 'group' && !empty($group_package_option) && !empty($group_package_pricing)) {
-			// 	if ( $group_options_count != 0 ) {
-			// 		$options_data = [
-			// 			'options_count' => $group_options_count,
-			// 		];
-			// 		for ( $j = 0; $j <= $group_options_count - 1; $j ++ ) {
-			// 			$options_data[ 'tf_option_title_' . $j ]        = isset( $_POST[ 'tf_option_title_' . $j ] ) && ! empty( $_POST[ 'tf_option_title_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_title_' . $j ] ) : '';
-			// 			$options_data[ 'tf_option_min_person_' . $j ]   = isset( $_POST[ 'tf_option_min_person_' . $j ] ) && ! empty( $_POST[ 'tf_option_min_person_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_min_person_' . $j ] ) : '';
-			// 			$options_data[ 'tf_option_max_person_' . $j ]   = isset( $_POST[ 'tf_option_max_person_' . $j ] ) && ! empty( $_POST[ 'tf_option_max_person_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_max_person_' . $j ] ) : '';
-			// 			$options_data[ 'tf_option_group_price_' . $j ]   = isset( $_POST[ 'tf_option_group_price_' . $j ] ) && ! empty( $_POST[ 'tf_option_group_price_' . $j ] ) ? sanitize_text_field( $_POST[ 'tf_option_group_price_' . $j ] ) : '';
-			// 		}
-			// 	}
-			// 	if ( ! empty( $options_data ) ) {
-			// 		$tf_tour_data = array_merge( $tf_tour_data, $options_data );
-			// 	}
-			// }
-
 			$tour_availability_data[$tf_tour_date] = $tf_tour_data;
 		}
 
 		$tour_data = get_post_meta( $tour_id, 'tf_tours_opt', true );
+		if(empty($tour_data)){
+			wp_send_json_error( [
+				'status'  => false,
+				'message' => __( 'Publish the Tour First!', 'tourfic' )
+			] );
+		}
 		if ( $new_post != 'true' ) {
 			$tour_availability = json_decode( $tour_data['tour_availability'], true );
 
@@ -1687,6 +1676,7 @@ class TF_Options {
 		}
 
 		$post_id = isset($_POST['post_id']) ? intval($_POST['post_id']) : 0;
+		$pricing_type = isset($_POST['pricing_type']) ? sanitize_text_field($_POST['pricing_type']) : '';
 		$package_index = isset($_POST['package_index']) ? intval($_POST['package_index']) : null;
 		$package_data = isset($_POST['package_data']) ? $_POST['package_data'] : array();
 
@@ -1696,6 +1686,11 @@ class TF_Options {
 
 		// Sanitize the incoming data
 		$sanitized_package = $this->recursive_sanitize_package($package_data);
+
+		// Update pricing type
+		if(!empty($pricing_type)){
+			$existing['pricing'] = $pricing_type;
+		}
 
 		// Update just this package
 		$existing['package_pricing'][$package_index] = $sanitized_package;

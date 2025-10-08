@@ -2502,7 +2502,7 @@ class Tour {
 		$adult_price                      = ! empty( $meta['adult_price'] ) ? $meta['adult_price'] : false;
 		$child_price                      = ! empty( $meta['child_price'] ) ? $meta['child_price'] : false;
 		$infant_price                     = ! empty( $meta['infant_price'] ) ? $meta['infant_price'] : false;
-		$tour_archive_page_price_settings = ! empty( Helper::tfopt( 'tour_archive_price_minimum_settings' ) ) ? Helper::tfopt( 'tour_archive_price_minimum_settings' ) : 'all';
+		$tour_archive_page_price_settings = ! empty( Helper::tfopt( 'tour_archive_price_minimum_settings' ) ) ? Helper::tfopt( 'tour_archive_price_minimum_settings' ) : 'adult';
 		$meta_disable_review 			  = !empty($meta["t-review"]) ? $meta["t-review"] : 0;
 		$tfopt_disable_review 			  = !empty(Helper::tfopt("t-review")) ? Helper::tfopt("t-review") : 0;
 		$disable_review 				  = $tfopt_disable_review == 1 || $meta_disable_review == 1 ? true : $tfopt_disable_review;
