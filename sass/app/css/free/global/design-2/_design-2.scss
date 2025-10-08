@@ -3102,8 +3102,11 @@
                     }
                 }
             }
-            .tf-field-calander.check-in-time-div .tf-field{
-                padding: 18.7px 40px;
+            .tf-field-calander.check-in-time-div{ 
+                display: none;
+                .tf-field{
+                    padding: 18.7px 40px;
+                }
             }
             .tf-tours-booking-btn.tf-booking-bttns{
                 a{
@@ -3153,7 +3156,7 @@
                 box-shadow: 0px 3px 60px 0px rgba(0, 0, 0, 0.10);
                 .tf-booking-tabs{
                     background-color: $color-white;
-                    border-bottom: 0.3px solid $color-border;
+                    border-bottom: 0.3px solid #CCCED1;
                     .tf-booking-tab-menu{
                         ul{
                             background-color: $color-text;

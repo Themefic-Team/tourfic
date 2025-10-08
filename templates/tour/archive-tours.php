@@ -25,11 +25,12 @@ if( $pricing_rule == 'group'){
 }else{
 	$price = !empty($meta['adult_price']) ? $meta['adult_price'] : null;
 }
+$allow_discount    = ! empty( $meta['allow_discount'] ) ? $meta['allow_discount'] : '';
 $discount_type = !empty($meta['discount_type']) ? $meta['discount_type'] : null;
 $discounted_price = !empty($meta['discount_price']) ? $meta['discount_price'] : NULL;
-if( $discount_type == 'percent' ){
+if( !empty($allow_discount) && $discount_type == 'percent' ){
 	$sale_price = number_format( $price - (( $price / 100 ) * $discounted_price) ,1 ); 
-}elseif( $discount_type == 'fixed'){
+}elseif( !empty($allow_discount) && $discount_type == 'fixed'){
 	$sale_price = number_format( ( $price - $discounted_price ),1 );
 }
 

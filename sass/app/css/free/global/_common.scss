@@ -1445,7 +1445,7 @@ li.tf-filter-item {
             margin: 0 10px;
         }
         background-color: $color-gray-info;
-        border-radius: 24px;
+        border-radius: 16px;
         text-align: left;
         .tf-single-hotel-service label {
             display: flex;
@@ -1454,9 +1454,9 @@ li.tf-filter-item {
             gap: 8px;
         }
         .tf-booking-tabs{
-            padding: 24px;
+            padding: 16px;
             border-bottom: 0.3px solid $color-gray;
-            border-radius: 24px;
+            border-radius: 16px 16px 0 0;
             background: $color-gray-info;
             display: flex;
             justify-content: space-between;
@@ -1480,7 +1480,7 @@ li.tf-filter-item {
                     }
                     li{
                         display: inline-block;
-                        padding: 16px 32px;
+                        padding: 8px 32px;
                         cursor: pointer;
                         color: $color-text;
                         @media #{$max768}{
@@ -1524,23 +1524,17 @@ li.tf-filter-item {
                             position: absolute;
                             background: transparent;
                             top: 0;
-                            right: -25px;
+                            right: -20px;
                             border-radius: 0px 10px 0px 0px;
                             width: 0;
                             height: 0;
-                            border-top: 28px solid transparent;
-                            border-left: 25px solid $color-primary;
-                            border-bottom: 28px solid transparent;
+                            border-top: 20px solid transparent;
+                            border-left: 20px solid $color-primary;
+                            border-bottom: 20px solid transparent;
                             @media #{$max768}{
                                 position: static;
                                 display: none;
                             }
-                        }
-                        &.done{
-                            &::before{
-                                border-left-color: $color-brand-lite;
-                            }
-                          
                         }
                         &:last-child{
                             border-radius: 0px 8px 8px 0px;
@@ -1553,6 +1547,30 @@ li.tf-filter-item {
                                 border: 1px solid $color-primary;
                             }
                         }
+                        &:only-child {
+                            border-radius: 8px;
+                            @media #{$max768} {
+                                border-radius: 16px;
+                            }
+                        }
+                    }
+                    li.done{
+                        position: relative;
+                        &::before{
+                            content: "";
+                            position: absolute;
+                            background: transparent;
+                            top: 0;
+                            right: -20px;
+                            border-radius: 0px 10px 0px 0px;
+                            width: 0;
+                            height: 0;
+                            border-top: 20px solid transparent;
+                            border-left: 20px solid $color-brand-lite;
+                            border-bottom: 20px solid transparent;
+                            z-index: 9;
+                        }
+                      
                     }
                 }
             }
@@ -1572,7 +1590,7 @@ li.tf-filter-item {
             @media #{$max575}{
                 max-height: 280px;
             }
-            padding: 0px 24px;
+            padding: 0px 16px;
             align-items: flex-start;
             align-content: flex-start;
             gap: 24px;
@@ -1585,6 +1603,14 @@ li.tf-filter-item {
                 @media #{$max768}{
                     width: calc(100% - 0px);
                 }
+                &.tf-booking-content-1{
+                    max-height: 380px;
+                    overflow-y: auto;
+                    @media #{$max768}{
+                        max-height: none;
+                        overflow: hidden;
+                    }
+                }
                 p{
                     color: $color-text;
                     font-size: 1rem;
@@ -1592,6 +1618,17 @@ li.tf-filter-item {
                     line-height: 1.2;
                     margin-top: 0px;
                     margin-bottom: 24px;
+                }
+                .tf-booking-content-service{
+                    select[name="airport_service"]{
+                        width: 100%;
+                        height: 45px;
+                        border: 1px solid var(--tf-border-lite);
+                        background: transparent;
+                        padding: 8px;
+                        border-radius: 5px;
+                        margin-bottom: 24px;
+                    }
                 }
                 .tf-booking-content-extra,
                 .tf-booking-content-traveller{
@@ -1803,10 +1840,152 @@ li.tf-filter-item {
                         }
                     }
                 }
+                .tf-booking-content-package{
+                    display: flex;
+                    gap: 16px;
+                    flex-direction: column;
+                    .tf-single-package{
+                        border-radius: 4px;
+                        background: #EBF5FF;
+                        display: flex;
+                        gap: 8px;
+                        padding: 8px 12px;
+                        .tf-package-select{
+                            input{
+                                accent-color: $color-brand-dark;
+                            }
+                        }
+                        .tf-package-content{
+                            width: calc(100% - 20px);
+                            h3{
+                                color: $color-heading;
+                                font-size: 1rem;
+                                font-weight: 500;
+                                margin: 0;
+                            }
+                            .tf-pacakge-persons{
+                                display: none;
+                                p{
+                                    color: $color-text;
+                                    font-size: 0.875rem;
+                                    margin: 0;
+                                }
+                                .tf-pacakge-times{
+                                    display: none;
+                                    gap: 16px;
+                                    justify-content: space-between;
+                                    align-items: center;
+                                    margin-top: 8px;
+                                    h5{
+                                        color: $color-heading;
+                                        font-size: 16px;
+                                        font-weight: 500;
+                                        line-height: 20px; /* 125% */
+                                        margin: 0;
+                                    }
+                                    .tf-package-time{
+                                        border-radius: 4px;
+                                        background: $tf_fill_white;
+                                        padding: 8px 24px;
+                                        display: flex;
+                                        gap: 4px;
+                                        align-items: center;
+                                        select{
+                                            border: 0px solid;
+                                            width: 72px;
+                                            height: 20px;
+                                            padding: 0;
+                                            color: $color-heading;
+                                            text-align: center;
+                                            font-size: 16px;
+                                            font-weight: 500;
+                                            line-height: 20px;
+                                            background: $tf_fill_white;
+                                        }
+                                    }
+                                }
+                                .tf-select-persons{
+                                    border-radius: 4px;
+                                    background: $color-white;
+                                    padding: 8px 16px;
+                                    margin-top: 8px;
+                                    .tf-single-person{
+                                        display: flex;
+                                        justify-content: space-between;
+                                        padding: 8px 0px;
+                                        border-bottom: .5px solid $color-border;
+                                        &:first-child{
+                                            padding-bottom: 16px;
+                                        }
+                                        &:nth-child(2){
+                                            padding: 16px 0;
+                                        }
+                                        &:last-child{
+                                            border: 0px solid;
+                                            padding-top: 16px;
+                                        }
+                                        h3{
+                                            color: $color-heading;
+                                            font-size: 1rem;
+                                            font-weight: 500;
+                                            margin: 0;
+                                        }
+                                        .inc-dec{
+                                            display: flex;
+                                            gap: 8px;
+                                            align-items: center;
+                                            .acr-dec,
+                                            .acr-inc{
+                                                border-radius: 4px;
+                                                border: 1px solid $color-border;
+                                                background: $color-white;
+                                                width: 24px;
+                                                height: 24px;
+                                                display: flex;
+                                                align-items: center;
+                                                justify-content: center;
+                                                font-size: 1rem;
+                                                cursor: pointer;
+                                                &.disable{
+                                                    pointer-events: none;
+                                                    opacity: .5;
+                                                }
+                                            }
+                                            input{
+                                                height: 20px;
+                                                width: 20px;
+                                                padding: 0;
+                                                text-align: center;
+                                                background: transparent;
+                                                color: $color-text;
+                                                font-size: 1rem;
+                                                font-weight: 500;
+                                                border: 0px solid;
+                                                -webkit-appearance : textfield;
+                                                -moz-appearance : textfield;
+                                                accent-color: $color-brand-dark;
+                                                &:focus{
+                                                    outline: none;
+                                                }
+                                            }
+                                            input::-webkit-outer-spin-button,
+                                            input::-webkit-inner-spin-button {
+                                                -webkit-appearance: none;
+                                                margin: 0;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .tf-single-package:has(.tf-package-radio:checked) .tf-pacakge-persons {
+                        display: block;
+                    }
+                }
             }
             .tf-booking-content.show{
                 display: block;
-                overflow: hidden;
             }
             .tf-booking-summery {
                 width: calc(38% - 24px);
@@ -1855,6 +2034,7 @@ li.tf-filter-item {
                     }
                     table{
                         border: 0px solid;
+                        margin-bottom: 0px;
                         thead{
                             background-color: transparent;
                             tr{
@@ -1900,7 +2080,8 @@ li.tf-filter-item {
             }
         }
         .tf-booking-pagination{
-            padding: 0 24px;
+            padding: 0 16px;
+            margin-top: 32px;
             .tf-tax-notice{
                 padding-bottom: 16px;
                 span{
@@ -2029,6 +2210,9 @@ li.tf-filter-item {
                 padding: 0px 0px 24px 0px;
                 align-items: end;
                 display: none;
+                a.tf_btn{
+                    border-radius: 5px;
+                }
                 a{
                     text-decoration: none;
                     display: inline-block;

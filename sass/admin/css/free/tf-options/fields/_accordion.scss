@@ -1,0 +1,63 @@
+.tf-field-accordion{
+    .tf-tab-switch-box{
+        .tf-tab-field-header{
+            border-radius: 4px 4px 0px 0px;
+            border-bottom: 1px solid $tf_border_default;
+            background: $tf_fill_background;
+            padding: 8px 12px;
+            display: flex;
+            justify-content: space-between;
+            gap: 8px;
+            align-items: center;
+            .tf-field-collapas{
+                display: flex;
+                width: 100%;
+                justify-content: space-between;
+                cursor: pointer;
+                &.rotated{
+                    i{
+                        transform: rotate(180deg);
+                    }
+                }
+                .field-label{
+                    color: $tf_text_title;
+                    font-size: 15px;
+                    font-weight: 400;
+                    line-height: 24px;
+                }
+                i{
+                    display: flex;
+                    width: 24px;
+                    height: 24px;
+                    justify-content: center;
+                    border-radius: 6px;
+                    border: 1px solid $tf_border_default;
+                    background: $tf_fill_white;
+                    line-height: 26px;
+                }
+            }
+
+            .tf-field.tf-field-switch{
+                padding: 0;
+                width: 32px !important;
+                .tf-inline-switch{
+                    justify-content: end;
+                    width: 32px;
+                    .tf-field-label{
+                        display: none !important;
+                    }
+                }
+            }
+        }
+
+        .tf-tab-field-content{
+            border-radius: 0px 0px 4px 4px;
+            border: 1px solid $tf_border_faint;
+            background: $tf_fill_foreground;
+            padding: 4px 16px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+    }
+}

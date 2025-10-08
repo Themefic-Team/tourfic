@@ -114,6 +114,13 @@
             formData.append('tour_extra', tour_extra_total);
             formData.append('tour_extra_quantity', tour_extra_quantity);
 
+            var selectedPackage = $('.tf-booking-content-package input[name="tf_package"]:checked').val();
+            if (selectedPackage !== undefined) {
+                formData.append('selectedPackage', selectedPackage);
+                var $selectedDiv = $('#package-' + selectedPackage).closest('.tf-single-package');
+                var check_in_time = $selectedDiv.find('select[name=package_start_time] option').filter(':selected').val();
+                formData.append('check-in-time', check_in_time);
+            }
             $.ajax({
                 type: 'post',
                 url: tf_params.ajax_url,
@@ -142,6 +149,7 @@
                     if (response.without_payment == 'false') {
                         if (response.status == 'error') {
                             $.fancybox.close();
+                            $('#tour_room_details_loader').hide();
                             if (response.errors) {
                                 response.errors.forEach(function (text) {
                                     notyf.error(text);
@@ -722,15 +730,6 @@
             }
         });
 
-        /**
-         * Single tour booking form
-         */
-        const allowed_times = tf_params.tour_form_data.allowed_times ? JSON.parse(tf_params.tour_form_data.allowed_times) : [];
-        const custom_avail = tf_params.tour_form_data.custom_avail;
-        if (custom_avail == false && Object.keys(allowed_times).length > 0) {
-            populateTimeSelect(allowed_times); // Pass the entire object, not just the values
-        }
-
         // First Day of Week
         //const first_day_of_week = tf_params.tour_form_data.flatpickr_locale;
 
@@ -766,16 +765,37 @@
                 instance.altInput.value = instance.altInput.value.replace(/[a-z]+/g, '-');
                 $(".tours-check-in-out").val(instance.altInput.value);
                 $('.tours-check-in-out[type="hidden"]').val(dateStr.replace(/[a-z]+/g, '-'));
-                if (custom_avail == true) {
-                    let times = Object.values(allowed_times).filter((v) => {
-                        let date_str = Date.parse(dateStr);
-                        let start_date = Date.parse(v.date.from);
-                        let end_date = Date.parse(v.date.to);
-                        return start_date <= date_str && end_date >= date_str;
-                    });
-                    times = times.length > 0 && times[0].times ? times[0].times : null;
-                    populateTimeSelect(times);
+                
+                // Initialize empty object for times
+                let times = {};
+                const selectedDate = selectedDates[0];
+                const timestamp = selectedDate.getTime();
+
+                const tourAvailability = tf_params.tour_form_data.tour_availability;
+
+                for (const key in tourAvailability) {
+                    const availability = tourAvailability[key];
+
+                    if (availability.status !== 'available') continue;
+
+                    const from = new Date(availability.check_in.trim()).getTime();
+                    const to   = new Date(availability.check_out.trim()).getTime();
+
+                    if (timestamp >= from && timestamp <= to) {
+                        const allowedTime = availability.allowed_time?.time || [];
+
+                        allowedTime.forEach((t) => {
+                            if (t && t.trim() !== '') {
+                                times[t] = t;
+                            }
+                        });
+
+                        break; // stop after first match
+                    }
                 }
+
+                populateTimeSelect(times);
+
                 
                 if(tf_params.tour_form_data.tf_tour_selected_template === 'design-2') {
                     dateSetToFields(selectedDates, instance);
@@ -783,77 +803,50 @@
             },
 
         };
-
-        if(tf_params.tour_form_data.tour_type == 'fixed'){
-            tour_date_options.defaultDate= tf_params.tour_form_data.defaultDate;
-            tour_date_options.enable= tf_params.tour_form_data.enable;
-        }
-
-        if(tf_params.tour_form_data.tour_type == 'continuous'){
+        
+        
+        if (!tf_params.tour_form_data.is_all_unavailable && typeof tf_params.tour_form_data.tour_availability === 'object' && tf_params.tour_form_data.tour_availability && Object.keys(tf_params.tour_form_data.tour_availability).length > 0) {
             tour_date_options.minDate = "today";
             tour_date_options.disableMobile = "true";
+            tour_date_options.enable = Object.entries(tf_params.tour_form_data.tour_availability)
+            .filter(([dateRange, data]) => data.status === "available")
+            .map(([dateRange, data]) => {
+                const [fromRaw, toRaw] = dateRange.split(' - ').map(str => str.trim());
 
-            if (custom_avail == true) {
-                tour_date_options.enable = Object.values(tf_params.tour_form_data.cont_custom_date).map((v) => {
+                const today = new Date();
+                const formattedToday = today.getFullYear() + '/' + (today.getMonth() + 1) + '/' + today.getDate();
+                let fromDate = fromRaw;
 
-                    let today = new Date();
-                    let from_date = '';
-                    let formattedDate = today.getFullYear() + '/' + (today.getMonth() + 1) + '/' + today.getDate();
-
-                    if( tf_params.tour_form_data.disable_same_day ) {
-                        if (v.date.from == formattedDate) {
-                            let date = new Date( v.date.from );
-                            let nextDay = new Date(date.setDate(date.getDate() + 1));
-                            from_date = nextDay.getFullYear() + '/' + (nextDay.getMonth() + 1) + '/' + nextDay.getDate();
-                        }  else {
-                            from_date = v.date.from;
-                        }
-                    } else {
-                        from_date = v.date.from;
-                    }
-
-                    return {
-                        from: from_date,
-                        to: v.date.to
-                    }
-                });
-            }
-
-            if (custom_avail == false) {
-                if (tf_params.tour_form_data.disabled_day || tf_params.tour_form_data.disable_range || tf_params.tour_form_data.disable_specific || tf_params.tour_form_data.disable_same_day) {
-                    tour_date_options.disable = [];
-                    if (tf_params.tour_form_data.disabled_day) {
-                        var disabledDays = tf_params.tour_form_data.disabled_day.map(Number);
-                        tour_date_options.disable.push(
-                            function (date) {
-                            return (date.getDay() === 8 || disabledDays.includes(date.getDay()));
-                        }
-                        );
-                    }
-                    if (tf_params.tour_form_data.disable_range) {
-                        Object.values(tf_params.tour_form_data.disable_range).forEach((d_item) => {
-                            tour_date_options.disable.push({
-                                from: d_item.date.from,
-                                to: d_item.date.to
-                            });
-                        });
-                    }
-                    if (tf_params.tour_form_data.disable_same_day) {
-                        tour_date_options.disable.push("today");
-                    }
-                    
-                    if (tf_params.tour_form_data.disable_specific) {
-                        var disable_specific_string = tf_params.tour_form_data.disable_specific.split(", ");
-                        disable_specific_string.forEach(function(date) {
-                            tour_date_options.disable.push(date);
-                        });
-                    }
-                }
-            }
+                return {
+                    from: fromDate,
+                    to: toRaw
+                };
+            });
+        }else{
+            tour_date_options.minDate = "today";
         }
-        
-        // remove empty attributes from tour_date_options object
-        // tour_date_options = Object.fromEntries(Object.entries(tour_date_options).filter(([_, v]) => v != '' ));
+
+        tour_date_options.disable = [];
+        if (tf_params.tour_form_data.is_all_unavailable && typeof tf_params.tour_form_data.tour_availability === 'object' && tf_params.tour_form_data.tour_availability && Object.keys(tf_params.tour_form_data.tour_availability).length > 0) {
+            tour_date_options.disable = Object.entries(tf_params.tour_form_data.tour_availability)
+            .filter(([dateRange, data]) => data.status === "unavailable")
+            .map(([dateRange, data]) => {
+                const [fromRaw, toRaw] = dateRange.split(' - ').map(str => str.trim());
+
+                const today = new Date();
+                const formattedToday = today.getFullYear() + '/' + (today.getMonth() + 1) + '/' + today.getDate();
+                let fromDate = fromRaw;
+
+                return {
+                    from: fromDate,
+                    to: toRaw
+                };
+            });
+        }
+
+        if (tf_params.tour_form_data.disable_same_day) {
+            tour_date_options.disable.push("today");
+        }
 
         if(tf_params.tour_form_data.tf_tour_selected_template === 'design-1') {
             $(".tours-check-in-out").flatpickr(tour_date_options);

@@ -6,11 +6,11 @@
 
     .select2-selection{
       width: 100%;
-      padding: 2px 8px 0 12px;
-      border: 1px solid $slate20;
-      background-color: $blue0;
+      padding: 4px 8px 0 12px;
+      border: 1px solid $tf_border_default;
+      background: $tf_fill_background;
       border-radius: 4px;
-      min-height: 48px;
+      min-height: 40px;
       color: $slate80;
       font-size: 0.875rem;
 
@@ -57,7 +57,7 @@
     }
   }
   .select2-container--default .select2-selection--single .select2-selection__arrow {
-    height: 48px;
+    height: 40px;
   }
   .tf-select-box-option {
     

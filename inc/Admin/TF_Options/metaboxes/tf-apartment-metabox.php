@@ -34,14 +34,9 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				array(
 					'id'    => 'apartment-general-heading',
 					'type'  => 'heading',
-					'label' => 'General Settings ',
-					'subtitle' => esc_html__( 'These are some common settings specific to this Apartment.', 'tourfic' ),
-				),
-				array(
-					'id'      => 'apartment-general-docs',
-					'type'    => 'notice',
-					'style'   => 'success',
-					'content' => esc_html__( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/add-new-apartment/general-settings/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . esc_html__( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
+					'title' => 'General Settings ',
+					'content' => esc_html__( 'These are some common settings specific to this Apartment.', 'tourfic' ),
+					'docs' => esc_url('https://themefic.com/docs/tourfic/add-new-apartment/general-settings/')
 				),
 				array(
 					'id'    => 'apartment_gallery',
@@ -108,14 +103,9 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				array(
 					'id'    => 'apartment-location-heading',
 					'type'  => 'heading',
-					'label' => 'Location Settings',
-					'subtitle' => esc_html__( 'The location of an apartment is a crucial element for every apartment. Set your apartment locations in this section.', 'tourfic' ),
-				),
-				array(
-					'id'      => 'apartment-location-docs',
-					'type'    => 'notice',
-					'style'   => 'success',
-					'content' => esc_html__( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/add-new-apartment/location-settings/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . esc_html__( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
+					'title' => 'Location Settings',
+					'content' => esc_html__( 'The location of an apartment is a crucial element for every apartment. Set your apartment locations in this section.', 'tourfic' ),
+					'docs' => esc_url('https://themefic.com/docs/tourfic/add-new-apartment/location-settings/')
 				),
 				array(
 					'id'       => 'location_title',
@@ -155,14 +145,9 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				array(
 					'id'    => 'apartment-booking-heading',
 					'type'  => 'heading',
-					'label' => 'Booking Settings',
-					'subtitle' => esc_html__( 'This section offer the options to customize the booking process for this apartment.', 'tourfic' ),
-				),
-				array(
-					'id'      => 'apartment-booking-docs',
-					'type'    => 'notice',
-					'style'   => 'success',
-					'content' => esc_html__( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/add-new-apartment/booking-settings/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . esc_html__( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
+					'title' => 'Booking Settings',
+					'content' => esc_html__( 'This section offer the options to customize the booking process for this apartment.', 'tourfic' ),
+					'docs' => esc_url('https://themefic.com/docs/tourfic/add-new-apartment/booking-settings/')
 				),
 				array(
 					'id'    => 'booking_form_title',
@@ -289,8 +274,9 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				array(
 					'id'    => 'apartment-cancellation-heading',
 					'type'  => 'heading',
-					'label' => 'Cancellation Condition',
-					'subtitle' => esc_html__( 'Define and customize booking cancellation policies for your offerings. This section allows you to set different cancellation rules, such as timeframes for free cancellations, partial refunds, or no refunds.', 'tourfic' ),
+					'title' => esc_html__( 'Cancellation Condition', 'tourfic' ),
+					'content' => __( 'Define and customize booking cancellation policies for your offerings. This section allows you to set different cancellation rules, such as timeframes for free cancellations, partial refunds, or no refunds.', 'tourfic' ),
+					'docs' => esc_url('https://themefic.com/docs/tourfic/settings/cancellation-settings/')
 				),
 				array(
 					'id'    => 'tf-pro-notice',
@@ -309,7 +295,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				array(
 					'id'      => 'Availability',
 					'type'    => 'heading',
-					'content' => esc_html__( 'Availability', 'tourfic' ),
+					'title' => esc_html__( 'Availability', 'tourfic' ),
 				),
 				array(
 					'id'    => 'tf-pro-notice',
@@ -330,14 +316,9 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				array(
 					'id'    => 'apartment-room-heading',
 					'type'  => 'heading',
-					'label' => 'Create & Manage Your Apartment Rooms',
-					'subtitle' => esc_html__( 'In this section, you are provided with the tools to create and manage your apartment room offerings.', 'tourfic' ),
-				),
-				array(
-					'id'      => 'apartment-room-docs',
-					'type'    => 'notice',
-					'style'   => 'success',
-					'content' => esc_html__( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/add-new-apartment/room-management/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . esc_html__( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
+					'title' => 'Create & Manage Your Apartment Rooms',
+					'content' => esc_html__( 'In this section, you are provided with the tools to create and manage your apartment room offerings.', 'tourfic' ),
+					'docs' => esc_url('https://themefic.com/docs/tourfic/add-new-apartment/room-management/')
 				),
 				array(
 					'id'    => 'room_details_title',
@@ -452,20 +433,9 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				array(
 					'id'    => 'apartment-info-heading',
 					'type'  => 'heading',
-					'label' => 'Information Section ',
-					'subtitle' => esc_html__( 'Ensure to furnish customers with all the essential information they need to fully understand your apartment offer.', 'tourfic' ),
-				),
-				array(
-					'id'      => 'apartment-info-docs',
-					'type'    => 'notice',
-					'style'   => 'success',
-					'content' => esc_html__( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/add-new-apartment/information-settings/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . esc_html__( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
-				),
-				//highlights
-				array(
-					'id'    => 'highlights_heading',
-					'type'  => 'heading',
-					'label' => esc_html__( 'Highlights', 'tourfic' ),
+					'title' => esc_html__('Information Section', 'tourfic'),
+					'content' => esc_html__( 'Ensure to furnish customers with all the essential information they need to fully understand your apartment offer.', 'tourfic' ),
+					'docs' => esc_url('https://themefic.com/docs/tourfic/add-new-apartment/information-settings/')
 				),
 				array(
 					'id'    => 'highlights_title',
@@ -502,7 +472,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				array(
 					'id'    => 'amenities_heading',
 					'type'  => 'heading',
-					'label' => esc_html__( 'Amenities', 'tourfic' ),
+					'title' => esc_html__( 'Amenities', 'tourfic' ),
 				),
 				array(
 					'id'    => 'amenities_title',
@@ -553,7 +523,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				array(
 					'id'    => 'house_rules_heading',
 					'type'  => 'heading',
-					'label' => esc_html__( 'House Rules', 'tourfic' ),
+					'title' => esc_html__( 'House Rules', 'tourfic' ),
 				),
 				array(
 					'id'    => 'house_rules_title',
@@ -599,19 +569,9 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				array(
 					'id'    => 'apartment-faq-heading',
 					'type'  => 'heading',
-					'label' => 'FAQ Section',
-					'subtitle' => esc_html__( 'This section is designed to help users find answers to common questions.', 'tourfic' ),
-				),
-				array(
-					'id'      => 'apartment-faq-docs',
-					'type'    => 'notice',
-					'style'   => 'success',
-					'content' => esc_html__( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/add-new-apartment/faq-terms/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . esc_html__( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
-				),
-				array(
-					'id'    => 'faq_heading',
-					'type'  => 'heading',
-					'label' => esc_html__( 'Frequently Asked Questions', 'tourfic' ),
+					'title' => esc_html__('FAQ Section', 'tourfic'),
+					'content' => esc_html__( 'This section is designed to help users find answers to common questions.', 'tourfic' ),
+					'docs' => esc_url('https://themefic.com/docs/tourfic/add-new-apartment/faq-terms/')
 				),
 				array(
 					'id'    => 'faq_title',
@@ -648,8 +608,8 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				array(
 					'id'    => 'terms_heading',
 					'type'  => 'heading',
-					'label' => esc_html__( 'Terms & Conditions', 'tourfic' ),
-					'subtitle' => esc_html__( 'Include your set of regulations and guidelines that guests must agree to in order to use the service provided in your apartment.', 'tourfic' ),
+					'title' => esc_html__( 'Terms & Conditions', 'tourfic' ),
+					'content' => esc_html__( 'Include your set of regulations and guidelines that guests must agree to in order to use the service provided in your apartment.', 'tourfic' ),
 				),
 				array(
 					'id'    => 'terms_title',
@@ -669,13 +629,13 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 
 		//enquiry section
 		'a_enquiry'  => array(
-			'title'  => esc_html__( 'Apartment Enquiry', 'tourfic' ),
+			'title'  => esc_html__( 'Enquiry', 'tourfic' ),
 			'icon'   => 'fa-solid fa-clipboard-question',
 			'fields' => array(
 				array(
 					'id'      => 'enquiry',
 					'type'    => 'heading',
-					'content' => esc_html__( 'Apartment Enquiry Form', 'tourfic' ),
+					'title' => esc_html__( 'Apartment Enquiry Form', 'tourfic' ),
 					'class'   => 'tf-field-class',
 				),
 				array(
@@ -726,7 +686,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				array(
 					'id'      => 'tf-apartment-tags-heading',
 					'type'    => 'heading',
-					'label' => esc_html__( 'Apartment tags', 'tourfic' ),
+					'title' => esc_html__( 'Apartment tags', 'tourfic' ),
 					'class'   => 'tf-field-class',
 				),
 				array(
@@ -772,21 +732,9 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				array(
 					'id'    => 'apartment--heading',
 					'type'  => 'heading',
-					'label' => 'Other Settings',
-					'subtitle' => esc_html__( 'These are some additional settings specific to this Apartment. Note that some of these settings may override the global settings.', 'tourfic' ),
-				),
-				array(
-					'id'      => 'apartment--docs',
-					'type'    => 'notice',
-					'style'   => 'success',
-					'content' => esc_html__( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/add-new-apartment/apartments-settings/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . esc_html__( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
-				),
-				//disable options
-				array(
-					'id'      => 'disable_options',
-					'type'    => 'heading',
-					'label'   => esc_html__( 'Disable Options', 'tourfic' ),
-					'content' => esc_html__( 'These settings will overwrite global settings', 'tourfic' ),
+					'title' => esc_html__('Other Settings', 'tourfic'),
+					'content' => esc_html__( 'These are some additional settings specific to this Apartment. Note that some of these settings may override the global settings.', 'tourfic' ),
+					'docs' => esc_url('https://themefic.com/docs/tourfic/add-new-apartment/apartments-settings/')
 				),
 				array(
 					'id'        => 'disable-apartment-review',
@@ -816,7 +764,7 @@ TF_Metabox::metabox( 'tf_apartment_opt', array(
 				array(
 					'id'    => 'description',
 					'type'  => 'heading',
-					'label' => esc_html__( 'Titles / Heading of Different Sections', 'tourfic' ),
+					'title' => esc_html__( 'Titles / Heading of Different Sections', 'tourfic' ),
 				),
 				array(
 					'id'      => 'description_title',
