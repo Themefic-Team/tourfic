@@ -26,24 +26,28 @@ if ( ( ! empty( $_GET['type'] ) && $_GET['type'] == "tf_carrental" && $tf_car_ar
         </div>
     </div>
 </div>
-<?php else: ?>
-<div class="tf-main-wrapper search-result-wrapper tf-archive-template__legacy" data-fullwidth="true">
-    <?php do_action( 'tf_before_container' ); ?>
-	<div class="tf-container">
-        <div class="search-result-inner">
-            <!-- Start Content -->           
-			<div class="tf-search-left">
-				<?php echo do_shortcode("[tf_search_result]"); ?>
-			</div>
-			<!-- End Content -->
+<?php else: 
+    ob_start();
+    ?>
 
-			<!-- Start Sidebar -->
-			<div class="tf-search-right">
-				<?php Helper::tf_search_result_sidebar_form( 'archive' ); ?>
-			</div>
-			<!-- End Sidebar -->
-		</div>
-	</div>
-	<?php do_action( 'tf_after_container' ); ?>
-</div>
+    <div class="tf-main-wrapper search-result-wrapper tf-archive-template__legacy" data-fullwidth="true">
+        <?php do_action( 'tf_before_container' ); ?>
+        <div class="tf-container">
+            <div class="search-result-inner">
+                <!-- Start Content -->           
+                <div class="tf-search-left">
+                    <?php echo do_shortcode("[tf_search_result]"); ?>
+                </div>
+                <!-- End Content -->
+
+                <!-- Start Sidebar -->
+                <div class="tf-search-right">
+                    <?php Helper::tf_search_result_sidebar_form( 'archive' ); ?>
+                </div>
+                <!-- End Sidebar -->
+            </div>
+        </div>
+        <?php do_action( 'tf_after_container' ); ?>
+    </div>
+<?php echo apply_filters( 'tf_search_result_legacy_template', ob_get_clean() ); ?>
 <?php endif; ?>
