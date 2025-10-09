@@ -2944,7 +2944,6 @@
         $('.tf-available-room-content-right .tf_btn').on('click', function(e){
             var target = $(this).attr('href');
             if (target.startsWith('#')) {
-                console.log('clicked');
                 e.preventDefault();
 
                 var offset = 200;
