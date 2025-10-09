@@ -663,47 +663,6 @@
 
         });
 
-
-        /*
-        * Check available tour by date
-        * Author @Foysal
-        */
-        /*$(document).on('change', '[name="tf_tour_date"], [name="tf_tour_adults_number"], [name="tf_tour_children_number"]', function (e) {
-            e.preventDefault();
-
-            var tourDate = $('[name="tf_tour_date"]').val();
-            var adults = $('[name="tf_tour_adults_number"]').val();
-            var children = $('[name="tf_tour_children_number"]').val();
-
-            if (tourDate.length > 0 && adults.length > 0) {
-                jQuery.ajax({
-                    type: 'post',
-                    url: tf_admin_params.ajax_url,
-                    data: {
-                        action: 'tf_check_available_tour',
-                        tourDate: tourDate,
-                        adults: adults,
-                        children: children
-                    },
-                    beforeSend: function () {
-                        $('#tf-backend-tour-book-btn').attr('disabled', 'disabled');
-                    },
-                    success: function (response) {
-                        var select2 = $('[name="tf_available_tours"]');
-                        select2.empty();
-                        select2.append('<option value="">' + tf_admin_params.select_tour + '</option>');
-                        $.each(response.data.tours, function (key, value) {
-                            select2.append('<option value="' + key + '">' + value + '</option>');
-                        });
-                        select2.select2();
-                        //select the first option
-                        select2.val(select2.find('option:eq(1)').val()).trigger('change');
-                        $('#tf-backend-tour-book-btn').removeAttr('disabled');
-                    }
-                });
-            }
-        });*/
-
         /*
         * Tour time and extra fields update
         * Author @Foysal
@@ -729,10 +688,6 @@
                         if(response){
                             const obj = JSON.parse(response);
 
-                            if (obj.custom_avail !== '1') {
-                                populateObjectTimeSelect(obj.allowed_times)
-                            }
-
                             let flatpickerObj = {
                                 enableTime: false,
                                 dateFormat: "Y/m/d",
@@ -755,6 +710,10 @@
                                         to: toRaw
                                     };
                                 });
+                            }
+
+                            if(obj.tour_packages_array){
+                                populatePackageSelect(obj.tour_packages_array);
                             }
 
                             flatpickerObj.onChange = function (selectedDates, dateStr, instance) {
@@ -818,19 +777,18 @@
             }
         });
 
-        function populateObjectTimeSelect(times) {
-            let timeSelect = $('[name="tf_tour_time"]');
-            timeSelect.empty();
+        function populatePackageSelect(packages) {
+            let packSelect = $('[name="tf_tour_packages"]');
+            packSelect.empty();
 
-            if (Object.keys(times).length > 0) {
+            if (Object.keys(packages).length > 0) {
                 // Use the keys and values from the object to populate the options
-                $.each(times, function (key, value) {
-                    timeSelect.append(`<option value="${key}">${value}</option>`);
+                $.each(packages, function (key, value) {
+                    packSelect.append(`<option value="${key}">${value}</option>`);
                 });
-                timeSelect.attr('disabled', false);
             } else {
-                timeSelect.append(`<option value="" selected>No Time Available</option>`);
-                timeSelect.attr('disabled', 'disabled');
+                packSelect.append(`<option value="" selected>No Package Available</option>`);
+                packSelect.attr('disabled', 'disabled');
             }
 
         }
@@ -904,8 +862,6 @@
                             }
                         }
                     } else {
-                        alert_popup.success(obj.message)
-
                         alert_popup.success(obj.message)
 
                         form[0].reset();
@@ -4291,8 +4247,7 @@ jQuery(function ($) {
             $('[name="tf_tour_max_person"]', tourCalData).val('');
             $('[name="tf_tour_max_capacity"]', tourCalData).val('');
             $('[name="tf_tour_repeat_day[]"], [name="tf_tour_repeat_month[]"], [name="tf_tour_repeat_year[]"], [name="tf_tour_repeat_week[]"]')
-            .prop('checked', false)
-            .val('');
+            .prop('checked', false);
             $('.bulk-popup-content-box #adult_tabs input, .bulk-popup-content-box #child_tabs input, .bulk-popup-content-box #infant_tabs input, .bulk-popup-content-box #group_tabs input').val('');
 
             $('.tf-tour-cal-field .tf_tour_allowed_times').html('');

@@ -845,7 +845,9 @@ abstract Class TF_Booking_Details {
                                        <?php } ?>
                                     <?php
                                     $tf_order = wc_get_order( intval( $_GET['order_id'] ) );
-                                    $customer_note = $tf_order->get_customer_note();
+                                    if($tf_order_details->payment_method!='offline'){
+                                        $customer_note = !empty($tf_order->get_customer_note()) ? $tf_order->get_customer_note() : '';
+                                    }
                                     if(!empty($customer_note)){
                                     ?>
                                        <tr>
