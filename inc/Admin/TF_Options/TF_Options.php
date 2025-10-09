@@ -48,6 +48,7 @@ class TF_Options {
 		add_action( 'wp_ajax_tf_add_tour_availability', array( $this, 'tf_add_tour_availability' ) );
 		add_action( 'wp_ajax_tf_get_tour_availability', array( $this, 'tf_get_tour_availability' ) );
 		add_action( 'wp_ajax_save_tour_package_pricing', array( $this, 'save_tour_package_pricing' ) );
+		add_action( 'wp_ajax_save_tour_pricing_type', array( $this, 'save_tour_pricing_type' ) );
 		add_action( 'wp_ajax_tf_reset_tour_availability', array( $this, 'tf_reset_tour_availability' ) );
 		add_action( 'save_post', array( $this, 'tf_update_apt_availability_price' ), 99, 2 );
 		add_action( 'wp_ajax_tf_insert_category_data', array( $this, 'tf_insert_category_data_callback' ) );
@@ -1699,6 +1700,40 @@ class TF_Options {
 		update_post_meta($post_id, 'tf_tours_opt', $existing);
 
 		wp_send_json_success('Package saved');
+	}
+
+	/*
+     * Save Tour Package
+     * @auther Jahid
+     */
+	function save_tour_pricing_type(){
+		// Add nonce for security and authentication.
+		check_ajax_referer( 'updates', 'nonce' );
+
+		// Check if the current user has the required capability.
+		if (!current_user_can('manage_options')) {
+			wp_send_json_error( [
+				'status'  => false,
+				'message' => __( 'You do not have permission to access this resource.', 'tourfic' )
+			] );
+			return;
+		}
+
+		$post_id = isset($_POST['post_id']) ? intval($_POST['post_id']) : 0;
+		$pricing_type = isset($_POST['pricing_type']) ? sanitize_text_field($_POST['pricing_type']) : '';
+
+		// Get existing data
+		$existing = get_post_meta($post_id, 'tf_tours_opt', true) ?: ['package_pricing' => []];
+
+		// Update pricing type
+		if(!empty($pricing_type)){
+			$existing['pricing'] = $pricing_type;
+		}
+
+		// Save back to post meta
+		update_post_meta($post_id, 'tf_tours_opt', $existing);
+
+		wp_send_json_success('Pricing saved');
 	}
 
 	private function recursive_sanitize_package($data) {

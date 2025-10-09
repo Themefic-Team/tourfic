@@ -2142,6 +2142,39 @@
             $box.toggle($(this).is(":checked"));
         });
 
+        // pricing type update when change
+        $(document).on('change', '#tf_tours_opt .tf_tour_pricing_type', function (e) {
+            let pricingType = $(this).val();
+            if(pricingType=='person'){
+                $('.tf-show-for-group').hide();
+                $('.tf-show-for-package').hide();
+                $('.tf-show-for-person').show();
+            }else if(pricingType=='group'){
+                $('.tf-show-for-package').hide();
+                $('.tf-show-for-person').hide();
+                $('.tf-show-for-group').show();
+            }else if(pricingType=='package'){
+                $('.tf-show-for-person').hide();
+                $('.tf-show-for-group').hide();
+                $('.tf-show-for-package').show();
+            }
+            // Prepare AJAX data
+            var ajaxData = {
+                action: 'save_tour_pricing_type',
+                post_id: $('#post_ID').val(),
+                pricing_type: pricingType,
+                nonce: tf_admin_params.tf_nonce
+            };
+
+            $.post(tf_options.ajax_url, ajaxData, function(response) {
+                if (response.success) {
+                    
+                } 
+            }).fail(function(xhr, status, error) {
+            });
+        });
+
+
         $(document).on('change', '.tf_tour_pricing_type', function (e) {
             let pricingType = $(this).val();
 
