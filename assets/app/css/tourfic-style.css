@@ -16883,6 +16883,25 @@ div#tf-destinationautocomplete-list div:before {
   background: var(--tf-filling-foreground);
   padding: 24px;
 }
+.tf-single-template__two .tf-search-date-wrapper.tf-box-loading {
+  position: relative;
+}
+@media only screen and (max-width: 768px) {
+  .tf-single-template__two .tf-search-date-wrapper.tf-box-loading {
+    position: fixed;
+  }
+}
+.tf-single-template__two .tf-search-date-wrapper.tf-box-loading::before {
+  position: absolute;
+  content: "";
+  right: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.5);
+  z-index: 99;
+  border-radius: 16px;
+}
 .tf-single-template__two .tf-search-date-wrapper .tf-booking-date-wrap {
   display: flex;
   flex-direction: row;

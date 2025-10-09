@@ -565,36 +565,6 @@ function tf_tours_booking_function() {
 		}
 	}
 
-	// if( $pricing_rule=='group' && !empty($allow_package_pricing) && !empty($group_package_pricing) ){
-	// 	$max_allowed = 0;
-	// 	$matched_price = '';
-	// 	$found_valid_option = false;
-
-	// 	for ( $i = 0; $i < (int) $matched_availability['options_count']; $i++ ) {
-	// 		$min = (int) $matched_availability[ 'tf_option_min_person_' . $i ];
-	// 		$max = (int) $matched_availability[ 'tf_option_max_person_' . $i ];
-	// 		$price = $matched_availability[ 'tf_option_group_price_' . $i ];
-	// 		$title = $matched_availability[ 'tf_option_title_' . $i ];
-
-	// 		// Keep track of the highest max_person across all options
-	// 		if ( $max > $max_allowed ) {
-	// 			$max_allowed = $max;
-	// 		}
-
-	// 		// Find a matching price bracket
-	// 		if ( $total_people >= $min && $total_people <= $max ) {
-	// 			$found_valid_option = true;
-	// 			$matched_price = $price;
-	// 			break;
-	// 		}
-	// 	}
-
-	// 	if ( $total_people > $max_allowed ) {
-	// 		$response['errors'][] = sprintf( esc_html__( 'Maximum %1$s allowed', 'tourfic' ), $max_allowed );
-	// 	} elseif ( $found_valid_option ) {
-	// 		$group_price = $matched_price;
-	// 	}
-	// }
 
 	// Min and check, when availability is empty
 	if ( $pricing_rule!='package' && empty($matched_availability) ) {

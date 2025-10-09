@@ -322,24 +322,6 @@ class Pricing {
 					}
 				}
 
-				// if($data['pricing_type'] == 'group' && !empty($allow_package_pricing) && !empty($group_package_pricing) ){
-				// 	if(!empty($data['options_count'])){
-				// 		for($i = 0; $i < $data['options_count']; $i++){
-				// 			if (!empty($data['tf_option_group_price_'.$i])) {
-				// 				if (is_null($min_group_price) || $data['tf_option_group_price_'.$i] < $min_group_price) {
-				// 					$min_group_price = $data['tf_option_group_price_'.$i];
-				// 				}
-				// 			}
-				// 		}
-				// 	}else{
-				// 		if(!empty($group_price)){
-				// 			if (is_null($min_group_price) || $group_price < $min_group_price) {
-				// 				$min_group_price = $group_price;
-				// 			}
-				// 		}
-				// 	}
-				// }
-
 				if($data['pricing_type'] == 'group'){
 					// Group Price
 					if (!empty($data['price'])) {
@@ -527,36 +509,6 @@ class Pricing {
 						}
 					}
 				}
-
-				// if($data['pricing_type'] == 'group' && !empty($allow_package_pricing) && !empty($group_package_pricing) ){
-				// 	if(!empty($data['options_count'])){
-				// 		for($i = 0; $i < $data['options_count']; $i++){
-				// 			if (!empty($data['tf_option_min_person_'.$i])) {
-				// 				if (is_null($min_person) || $data['tf_option_min_person_'.$i] < $min_person) {
-				// 					$min_person = $data['tf_option_min_person_'.$i];
-				// 				}
-				// 			}
-				// 			if (!empty($data['tf_option_max_person_'.$i])) {
-				// 				if (is_null($max_person) || $data['tf_option_max_person_'.$i] > $max_person) {
-				// 					$max_person = $data['tf_option_max_person_'.$i];
-				// 				}
-				// 			}
-				// 		}
-				// 	}
-				// }
-
-				// if($data['pricing_type'] == 'group' && (empty($allow_package_pricing) || empty($group_package_pricing)) ){
-				// 	if (!empty($data['min_person'])) {
-				// 		if (is_null($min_person) || $data['min_person'] < $min_person) {
-				// 			$min_person = $data['min_person'];
-				// 		}
-				// 	}
-				// 	if (!empty($data['max_person'])) {
-				// 		if (is_null($max_person) || $data['max_person'] > $max_person) {
-				// 			$max_person = $data['max_person'];
-				// 		}
-				// 	}
-				// }
 
 			}
 		}

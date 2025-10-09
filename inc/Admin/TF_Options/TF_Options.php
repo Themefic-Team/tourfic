@@ -1165,7 +1165,7 @@ class TF_Options {
 			] );
 		}
 		if ( $new_post != 'true' ) {
-			$tour_availability = json_decode( $tour_data['tour_availability'], true );
+			$tour_availability = !empty($tour_data['tour_availability']) ? json_decode( $tour_data['tour_availability'], true ) : [];
 
 			if ( isset( $tour_availability ) && ! empty( $tour_availability ) ) {
 				$tour_availability_data = array_merge( $tour_availability, $tour_availability_data );
