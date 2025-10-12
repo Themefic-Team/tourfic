@@ -3879,10 +3879,10 @@ li.tf-filter-item {
 .tf-withoutpayment-booking-confirm .tf-withoutpayment-popup .tf-booking-pagination .tf-diposit-switcher .switch .switcher::before {
   position: absolute;
   content: "";
-  height: 18px;
-  width: 18px;
-  left: 2px;
-  bottom: 1px;
+  height: 14px;
+  width: 14px;
+  left: 4px;
+  bottom: 3px;
   background-color: #ffffff;
   -webkit-transition: 0.4s;
   transition: 0.4s;

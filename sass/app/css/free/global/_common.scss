@@ -2180,10 +2180,10 @@ li.tf-filter-item {
                         &::before{
                             position: absolute;
                             content: "";
-                            height: 18px;
-                            width: 18px;
-                            left: 2px;
-                            bottom: 1px;
+                            height: 14px;
+                            width: 14px;
+                            left: 4px;
+                            bottom: 3px;
                             background-color: $color-white;
                             -webkit-transition: .4s;
                             transition: .4s;

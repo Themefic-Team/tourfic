@@ -3584,6 +3584,7 @@ class Tour {
 
 		$meta = get_post_meta( $post_id, 'tf_tours_opt', true );
 		$pricing_rule = ! empty( $meta['pricing'] ) ? $meta['pricing'] : '';
+		$package_pricing = ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
 		$tour_availability = ! empty( $meta['tour_availability'] ) ? json_decode($meta['tour_availability'], true) : '';
 
 		$matched_availability = null;
@@ -3706,7 +3707,7 @@ class Tour {
 				if(!empty($child_price)){
 					$all_prices[] = $child_price;
 				}
-				$min_price = min($all_prices);
+				$min_price = !empty($all_prices) ? min($all_prices) : '';
 			}
 		}
 
