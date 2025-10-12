@@ -550,52 +550,45 @@
             }
 
             .tf-quick-access {
-                background: #fff;
-                border-radius: 12px;
-                padding: 20px;
-                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+                background: #F7F8FA;
+                border-radius: 8px;
+                padding: 16px;
                 margin-top: 20px;
                 margin-bottom: 10px;
-
+                h3 {
+                    color: #06040C;
+                    font-size: 17px;
+                    font-style: normal;
+                    font-weight: 600;
+                    line-height: 150%; /* 25.5px */
+                    margin-bottom: 16px;
+                    margin-top: 0px;
+                }
                 .tf-quick-access-wrapper{
                     display: flex;
                     justify-content: flex-start;
                     align-items: center;
-                    gap: 5px;
+                    gap: 16px;
                     flex-direction: column;
-                    background-color: #F7F8FA;
-                    padding: 5px;
-
-                    h3 {
-                        font-size: 16px;
-                        font-weight: 600;
-                        margin-bottom: 15px;
-                        margin-top: 0px;
-                    }
 
                     .tf-access-item {
-                        background: #fff;
-                        border-radius: 8px;
+                        background: #FFF;
+                        box-shadow: 0 1px 4px 0 rgba(44, 39, 63, 0.01), 0 2px 2px 0 rgba(44, 39, 63, 0.02), 0 1px 1px 0 rgba(44, 39, 63, 0.04);
+                        border-radius: 6px;
                         transition: all ease-in-out 0.3s;
                         width: 100%;
-
-                        &:hover {
-                            box-shadow: 0px 4px 30px 0px rgba(6,4,12,.0784313725);
-                        }
 
                         a {
                             display: flex;
                             align-items: center;
-                            padding: 12px;
-                            font-size: 14px;
-                            font-weight: 500;
+                            padding: 12px 16px;
                             text-decoration: none;
-                            color: #333;
-                        }
-
-                        .icon {
-                            font-size: 18px;
-                            margin-right: 10px;
+                            color: #2C273F;
+                            font-size: 15px;
+                            font-style: normal;
+                            font-weight: 600;
+                            line-height: 24px; /* 160% */
+                            gap: 12px;
                         }
                     }
                 }

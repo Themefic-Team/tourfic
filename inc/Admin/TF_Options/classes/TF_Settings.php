@@ -383,7 +383,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 							<?php endif; ?>
 						</div>
 						<div class="tf-settings-sidebar">
-							<?php echo wp_kses_post($this->tf_settings_sidebar()); ?>
+							<?php echo $this->tf_settings_sidebar(); ?>
 						</div>
 					</div>
 				</div>
@@ -414,31 +414,45 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 					<div class="tf-quick-access-wrapper">
 						<div class="tf-access-item">
 							<a href="<?php echo esc_url( Helper::tf_utm_generator( 'https://themefic.com/docs/tourfic/', array( 'utm_medium' => 'dashboard_doc_link' ) ) ); ?>" target="_blank">
-								<span class="icon"><i class="fa-solid fa-folder-open"></i></span>
+								<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M12.0833 1.66663H4.99992C4.55789 1.66663 4.13397 1.84222 3.82141 2.15478C3.50885 2.46734 3.33325 2.89126 3.33325 3.33329V16.6666C3.33325 17.1087 3.50885 17.5326 3.82141 17.8451C4.13397 18.1577 4.55789 18.3333 4.99992 18.3333H14.9999C15.4419 18.3333 15.8659 18.1577 16.1784 17.8451C16.491 17.5326 16.6666 17.1087 16.6666 16.6666V6.24996L12.0833 1.66663Z" stroke="#5D5676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+								<path d="M11.6667 1.66663V6.66663H16.6667" stroke="#5D5676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+								<path d="M13.3334 10.8334H6.66675" stroke="#5D5676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+								<path d="M13.3334 14.1666H6.66675" stroke="#5D5676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+								<path d="M8.33341 7.5H6.66675" stroke="#5D5676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+								</svg>
 								<?php echo esc_html__( 'Documentation', 'tourfic' ); ?>
 							</a>
 						</div>
 						<div class="tf-access-item">
 							<a href="<?php echo esc_url( Helper::tf_utm_generator( 'https://portal.themefic.com/support/', array( 'utm_medium' => 'dashboard_support_link' ) ) ); ?>" target="_blank">
-								<span class="icon"><i class="fa-solid fa-headset"></i></span>
+								<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M2.5 9.16662H5C5.44203 9.16662 5.86595 9.34222 6.17851 9.65478C6.49107 9.96734 6.66667 10.3913 6.66667 10.8333V13.3333C6.66667 13.7753 6.49107 14.1992 6.17851 14.5118C5.86595 14.8244 5.44203 15 5 15H4.16667C3.72464 15 3.30072 14.8244 2.98816 14.5118C2.67559 14.1992 2.5 13.7753 2.5 13.3333V9.16662ZM2.5 9.16662C2.5 8.18171 2.69399 7.20644 3.0709 6.2965C3.44781 5.38656 4.00026 4.55976 4.6967 3.86332C5.39314 3.16689 6.21993 2.61444 7.12987 2.23753C8.03982 1.86062 9.01509 1.66663 10 1.66663C10.9849 1.66663 11.9602 1.86062 12.8701 2.23753C13.7801 2.61444 14.6069 3.16689 15.3033 3.86332C15.9997 4.55976 16.5522 5.38656 16.9291 6.2965C17.306 7.20644 17.5 8.18171 17.5 9.16662M17.5 9.16662V13.3333M17.5 9.16662H15C14.558 9.16662 14.134 9.34222 13.8215 9.65478C13.5089 9.96734 13.3333 10.3913 13.3333 10.8333V13.3333C13.3333 13.7753 13.5089 14.1992 13.8215 14.5118C14.134 14.8244 14.558 15 15 15H15.8333C16.2754 15 16.6993 14.8244 17.0118 14.5118C17.3244 14.1992 17.5 13.7753 17.5 13.3333M17.5 13.3333V15C17.5 15.884 17.1488 16.7319 16.5237 17.357C15.8986 17.9821 15.0507 18.3333 14.1667 18.3333H10" stroke="#5D5676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+								</svg>
 								<?php echo esc_html__( 'Get Support', 'tourfic' ); ?>
 							</a>
 						</div>
 						<div class="tf-access-item">
 							<a href="https://www.facebook.com/groups/tourfic/" target="_blank">
-								<span class="icon"><i class="fa-solid fa-users"></i></span>
+								<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M13.3334 17.5V15.8333C13.3334 14.9493 12.9822 14.1014 12.3571 13.4763C11.732 12.8512 10.8841 12.5 10.0001 12.5H5.00008C4.11603 12.5 3.26818 12.8512 2.64306 13.4763C2.01794 14.1014 1.66675 14.9493 1.66675 15.8333V17.5M13.3334 2.60667C14.0482 2.79197 14.6812 3.20939 15.1331 3.79339C15.5851 4.37738 15.8302 5.09491 15.8302 5.83333C15.8302 6.57176 15.5851 7.28928 15.1331 7.87328C14.6812 8.45728 14.0482 8.87469 13.3334 9.06M18.3334 17.5V15.8333C18.3329 15.0948 18.087 14.3773 17.6345 13.7936C17.1821 13.2099 16.5485 12.793 15.8334 12.6083M10.8334 5.83333C10.8334 7.67428 9.34103 9.16667 7.50008 9.16667C5.65913 9.16667 4.16675 7.67428 4.16675 5.83333C4.16675 3.99238 5.65913 2.5 7.50008 2.5C9.34103 2.5 10.8334 3.99238 10.8334 5.83333Z" stroke="#5D5676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+								</svg>
 								<?php echo esc_html__( 'Join our Community', 'tourfic' ); ?>
 							</a>
 						</div>
 						<div class="tf-access-item">
 							<a href="https://app.loopedin.io/tourfic" target="_blank">
-								<span class="icon"><i class="fa-solid fa-road-circle-check"></i></span>
+								<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M14.1667 11.6667V17.5M5.83341 11.6667V17.5M14.1667 2.5V5M5.83341 2.5V5M8.33341 11.6667L1.91675 5.25M11.6667 5L18.0834 11.4167M6.66675 5L13.3334 11.6667M2.50008 5H17.5001C17.9603 5 18.3334 5.3731 18.3334 5.83333V10.8333C18.3334 11.2936 17.9603 11.6667 17.5001 11.6667H2.50008C2.03984 11.6667 1.66675 11.2936 1.66675 10.8333V5.83333C1.66675 5.3731 2.03984 5 2.50008 5Z" stroke="#5D5676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+								</svg>
 								<?php echo esc_html__( 'See our Roadmap', 'tourfic' ); ?>
 							</a>
 						</div>
 						<div class="tf-access-item">
 							<a href="https://app.loopedin.io/tourfic#/ideas-board" target="_blank">
-								<span class="icon"><i class="fa-solid fa-lightbulb"></i></span>
+								<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M12.5 11.6666C12.6667 10.8333 13.0833 10.25 13.75 9.58329C14.5833 8.83329 15 7.74996 15 6.66663C15 5.34054 14.4732 4.06877 13.5355 3.13109C12.5979 2.19341 11.3261 1.66663 10 1.66663C8.67392 1.66663 7.40215 2.19341 6.46447 3.13109C5.52678 4.06877 5 5.34054 5 6.66663C5 7.49996 5.16667 8.49996 6.25 9.58329C6.83333 10.1666 7.33333 10.8333 7.5 11.6666M7.5 15H12.5M8.33333 18.3333H11.6667" stroke="#5D5676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+								</svg>
 								<?php echo esc_html__( 'Request a Feature', 'tourfic' ); ?>
 							</a>
 						</div>
