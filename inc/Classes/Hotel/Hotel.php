@@ -3191,24 +3191,31 @@ class Hotel {
                 <div class="tf-booking-tabs">
                     <div class="tf-booking-tab-menu">
                         <ul>
-							<?php if ( ($airport_service_type || $hotel_extras) && ( $room_book_by != 2 || empty( $room_book_url ) ) ) { ?>
+							<?php 
+							$active_steps = []; 
+							if ( ($airport_service_type || $hotel_extras) && ( $room_book_by != 2 || empty( $room_book_url ) ) ) { 
+								$active_steps[1] = 1;
+								?>
                                 <li class="tf-booking-step tf-booking-step-1 active">
                                     <i class="ri-price-tag-3-line"></i> <?php echo esc_html__( "Hotel Service", "tourfic" ); ?>
                                 </li>
 							<?php }
 							if ( $enable_guest_info ) {
+								$active_steps[2] = 2;
 								?>
                                 <li class="tf-booking-step tf-booking-step-2 <?php echo empty( $airport_service_type ) && empty( $hotel_extras ) ? esc_attr( 'active' ) : ''; ?> ">
                                     <i class="ri-group-line"></i> <?php echo esc_html__( "Guest details", "tourfic" ); ?>
                                 </li>
 							<?php }
 							if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && 3 == $room_book_by ) {
+								$active_steps[3] = 3;
 								?>
                                 <li class="tf-booking-step tf-booking-step-3 <?php echo empty( $airport_service_type ) && empty( $hotel_extras ) && empty( $enable_guest_info ) ? esc_attr( 'active' ) : ''; ?>">
                                     <i class="ri-calendar-check-line"></i> <?php echo esc_html__( "Booking Confirmation", "tourfic" ); ?>
                                 </li>
 							<?php } ?>
                         </ul>
+						<input type="hidden" value="<?php echo implode(",",$active_steps); ?>" class="tf_popup_stpes" />
                     </div>
                     <div class="tf-booking-times">
                         <span>
@@ -3443,7 +3450,7 @@ class Hotel {
                                 <button type="submit" class="hotel-room-book tf_btn"><?php echo !empty( tfopt( 'hotel_service_popup_action' ) ) ? esc_html(tfopt( 'hotel_service_popup_action' )) : esc_html__( "Continue", "tourfic" ); ?></button>
 							<?php } else { ?>
                                 <a href="#" class="tf-next-control tf-tabs-control tf_btn"
-                                   data-step="<?php echo 3 == $room_book_by && empty( $enable_guest_info ) ? esc_attr( "3" ) : esc_attr( "2" ); ?>"><?php echo !empty( tfopt( 'hotel_service_popup_action' ) ) ? esc_html(tfopt( 'hotel_service_popup_action' )) : esc_html__( "Continue", "tourfic" ); ?></a>
+                                   data-step="<?php echo 3 == $room_book_by && empty( $enable_guest_info ) ? esc_attr( "2" ) : esc_attr( "1" ); ?>"><?php echo !empty( tfopt( 'hotel_service_popup_action' ) ) ? esc_html(tfopt( 'hotel_service_popup_action' )) : esc_html__( "Continue", "tourfic" ); ?></a>
 							<?php } ?>
                         </div>
 					<?php }
@@ -3457,7 +3464,7 @@ class Hotel {
 							<?php }
 							if ( function_exists( 'is_tf_pro' ) && is_tf_pro() && 3 == $room_book_by ) {
 								?>
-                                <a href="#" class="tf-next-control tf-tabs-control tf_btn tf-traveller-error" data-step="3"><?php echo esc_html__( "Continue", "tourfic" ); ?></a>
+                                <a href="#" class="tf-next-control tf-tabs-control tf_btn tf-traveller-error" data-step="2"><?php echo esc_html__( "Continue", "tourfic" ); ?></a>
 							<?php } else { ?>
                                 <button type="submit" class="tf-traveller-error tf_btn <?php echo !empty( $room_book_by ) && 3 != $room_book_by ? 'hotel-room-book' : '';  ?>"><?php echo esc_html__( "Continue", "tourfic" ); ?></button>
 							<?php } ?>
