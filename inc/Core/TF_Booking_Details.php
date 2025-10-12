@@ -843,6 +843,18 @@ abstract Class TF_Booking_Details {
                                                 </td>
                                             </tr>
                                        <?php } ?>
+                                       <?php
+                                        $hotel_extra  = !empty( $tf_tour_details->hotel_extra ) ? $tf_tour_details->hotel_extra : '';
+                                        if(!empty($hotel_extra) && $hotel_extra != 'undefined' && $hotel_extra != 'null'){
+                                            ?>
+                                            <tr>
+                                                <th><?php esc_html_e("Extra Service", "tourfic"); ?></th>
+                                                <td>:</td>
+                                                <td>
+                                                    <?php echo esc_html($hotel_extra); ?>
+                                                </td>
+                                            </tr>
+                                       <?php } ?>
                                     <?php
                                     $tf_order = wc_get_order( intval( $_GET['order_id'] ) );
                                     if($tf_order_details->payment_method!='offline'){
@@ -920,6 +932,14 @@ abstract Class TF_Booking_Details {
                                                 <th><?php esc_html_e("Airport Service Fee", "tourfic"); ?></th>
                                                 <td>:</td>
                                                 <td><?php echo wp_kses_post($tf_tour_details->airport_service_fee); ?></td>
+                                            </tr>
+                                        <?php } ?>
+                                        
+                                        <?php if(!empty($tf_tour_details->hotel_extra_fee)){ ?>
+                                            <tr>
+                                                <th><?php esc_html_e("Extra Service Fee", "tourfic"); ?></th>
+                                                <td>:</td>
+                                                <td><?php echo wp_kses_post($tf_tour_details->hotel_extra_fee); ?></td>
                                             </tr>
                                         <?php } ?>
 

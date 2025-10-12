@@ -50,6 +50,10 @@ function tf_hotel_booking_callback() {
 		$instantio_is_active = 1;
 	}
 
+	if(!empty($_POST['extras'])){
+		$extras = explode( ',', $_POST['extras'] );
+	}
+
 
 	// Without Payment Booking Data
 	$tf_without_payment_guest_info = !empty( $_POST['guest'] ) ? wp_unslash( $_POST['guest'] ) : []; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
@@ -223,7 +227,7 @@ function tf_hotel_booking_callback() {
 			}
 		}
 		$total_extras_titles = implode(',', $total_extras_title);
-		
+
 		$tf_room_data['tf_hotel_data']['order_type']         = 'hotel';
 		$tf_room_data['tf_hotel_data']['post_id']            = $post_id;
 		$tf_room_data['tf_hotel_data']['unique_id']          = $unique_id;
@@ -1083,6 +1087,8 @@ function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data,
 			$children_ages        = $item->get_meta( 'Children Ages', true );
 			$airport_service_type = $item->get_meta( 'Airport Service', true );
 			$airport_service_fee  = $item->get_meta( 'Airport Service Fee', true );
+			$total_extras_titles  = $item->get_meta( 'Hotel Extra Service', true );
+			$total_extras_price  = $item->get_meta( 'Hotel Extra Service Fee', true );
 			$guest_details = $item->get_meta( '_visitor_details', true );
 
 			$iteminfo = [
@@ -1097,6 +1103,8 @@ function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data,
 				'children_ages'        => $children_ages,
 				'airport_service_type' => $airport_service_type,
 				'airport_service_fee'  => $airport_service_fee,
+				'hotel_extra' => $total_extras_titles,
+				'hotel_extra_fee'  => $total_extras_price,
 				'total_price'          => $price,
 				'due_price'            => $due,
 				'tax_info'             => wp_json_encode( $fee_sums ),
@@ -1114,6 +1122,8 @@ function tf_add_order_id_room_checkout_order_processed( $order_id, $posted_data,
 				'children_ages'        => $children_ages,
 				'airport_service_type' => $airport_service_type,
 				'airport_service_fee'  => $airport_service_fee,
+				'hotel_extra' => $total_extras_titles,
+				'hotel_extra_fee'  => $total_extras_price,
 				'total_price'          => $price,
 				'due_price'            => $due,
 				'customer_id'          => $order->get_customer_id(),

@@ -764,11 +764,15 @@
             // }
             var deposit = $this.find("input[name=hotel_room_depo]").val();
             var airport_service = $this.find('[name="airport_service"]').val();
-
+            let selectedExtras = [];
+            $($this.find('input[name="extra_service"]:checked')).each(function() {
+                selectedExtras.push($(this).val());
+            });
             formData.append('action', 'tf_hotel_booking');
             formData.append('_ajax_nonce', tf_params.nonce);
             formData.append('deposit', deposit);
             formData.append('airport_service', airport_service);
+            formData.append('extras', selectedExtras);
 
 
             $.ajax({
