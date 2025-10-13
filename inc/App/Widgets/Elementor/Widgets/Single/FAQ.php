@@ -76,6 +76,7 @@ class FAQ extends Widget_Base {
                 'style1' => esc_html__('Style 1', 'tourfic'),
                 'style2' => esc_html__('Style 2', 'tourfic'),
                 'style3' => esc_html__('Style 3', 'tourfic'),
+                'style4' => esc_html__('Style 4', 'tourfic'),
             ],
         ]);
 
@@ -649,6 +650,39 @@ class FAQ extends Widget_Base {
                         <?php } ?>
                     </div>
                 <?php $faq_key++; endforeach; ?>
+            </div>
+			<?php
+        } elseif ($style == 'style4') {
+            ?>
+            <div class="tf-faq-wrapper tf-apartment-faq">
+                <div class="tf-faq-sec-title">
+					<?php echo ! empty( $meta['faq_title'] ) ? '<h2 class="section-heading">' . esc_html( $meta['faq_title'] ) . '</h2>' : ''; ?>
+					<?php echo isset($meta['faq_desc']) && ! empty( $meta['faq_desc'] ) ? '<p>' . wp_kses_post( $meta['faq_desc'] ) . '</p>' : ''; ?>
+                </div>
+
+                <div class="tf-faq-content-wrapper">
+                    <div class="tf-faq-items-wrapper">
+						<?php foreach ( Helper::tf_data_types( $meta['faq'] ) as $key => $faq ): ?>
+                            <div id="tf-faq-item">
+                                <?php if(!empty($faq['title'])){ ?>
+                                    <div class="tf-faq-title tf-faq-head <?php echo $key==0 ? esc_attr( 'active' ) : ''; ?> <?php echo $settings['tf_faq_icon_postion'] === 'right' ? esc_attr('tf-faq-icon-right'): ''; ?>">
+                                        <?php if ($settings['tf_faq_icon_postion'] === '') {
+                                            $this->tf_faq_toggle_icon($settings); 
+                                        }?>
+                                        <h4 class="tf-faq-label"><?php echo esc_html($faq['title']); ?></h4>
+                                        <?php if ($settings['tf_faq_icon_postion'] === 'right') {
+                                            $this->tf_faq_toggle_icon($settings); 
+                                        }?>
+                                    </div>
+                                <?php } ?>
+                                
+                                <div class="tf-faq-desc" <?php echo $key === 0 ? 'style="display: block;"' : ''; ?>>
+									<?php echo wp_kses_post( $faq['description'] ); ?>
+                                </div>
+                            </div>
+						<?php endforeach; ?>
+                    </div>
+                </div>
             </div>
 			<?php
         }

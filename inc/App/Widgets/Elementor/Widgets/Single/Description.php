@@ -133,11 +133,19 @@ class Description extends Widget_Base {
 	}
 
 	protected function render() {
+        $post_type = get_post_type();
 		$settings  = $this->get_settings_for_display();
         $limit_content   = !empty( $settings['limit_content'] ) ? $settings['limit_content'] : '';
         $content_length   = !empty( $settings['content_length'] ) ? $settings['content_length'] : '300';
         ?>
         <div class="tf-single-template__two tf-single-description">
+			<?php 
+			if($post_type == 'tf_apartment'){
+				$meta = get_post_meta( get_the_ID(), 'tf_apartment_opt', true );
+				$description_title = ! empty( $meta['description_title'] ) ? esc_html( $meta['description_title'] ) : '';
+				echo '<h2 class="section-heading">'. esc_html($description_title) .'</h2>';
+			} 
+			?>
 			<?php if($limit_content == 'yes'):  ?>
             <div class="tf-short-description">
                 <?php 

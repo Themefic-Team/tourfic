@@ -3,6 +3,7 @@
 
 .tf-single-template{
     &__legacy{
+        padding: 0;
         .tf-inc-exc-wrapper {
             background-position: center center;
             background-size: cover;
@@ -115,6 +116,7 @@
         }
     }
     &__one{
+        padding: 0;
         .tf-inex-wrapper {
             .tf-inex {
                 width: 100%;
@@ -133,6 +135,7 @@
         }
     }
     &__two{
+        padding: 0;
         .tf-include-exclude-wrapper {
             h2{
                 color: $color-heading;

@@ -1401,7 +1401,7 @@ class Rooms extends Widget_Base {
                      * Apartment room slider
                      * @author Foysal
                      */
-                    $('.tf-apartment-room-slider').slick({
+                    $('.tf-single-apartment-room__style-1 .tf-apartment-room-slider').slick({
                         dots: true,
                         arrows: false,
                         infinite: true,
@@ -1418,6 +1418,47 @@ class Rooms extends Widget_Base {
                                     slidesToScroll: 1,
                                     infinite: true,
                                     dots: true
+                                }
+                            },
+                            {
+                                breakpoint: 600,
+                                settings: {
+                                    slidesToShow: 2,
+                                    slidesToScroll: 1
+                                }
+                            },
+                            {
+                                breakpoint: 480,
+                                settings: {
+                                    slidesToShow: 1,
+                                    slidesToScroll: 1
+                                }
+                            }
+                        ]
+                    });
+
+                    $('.tf-single-apartment-room__style-legacy .tf-apartment-default-design-room-slider').slick({
+                        arrows: true,
+                        infinite: true,
+                        speed: 300,
+                        autoplay: false,
+                        autoplaySpeed: 3000,
+                        slidesToShow: 3,
+                        slidesToScroll: 1,
+                        prevArrow:"<button type='button' class='slick-prev'><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\">\n" +
+                            "  <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M16.2071 5.29289C16.5976 5.68342 16.5976 6.31658 16.2071 6.70711L10.9142 12L16.2071 17.2929C16.5976 17.6834 16.5976 18.3166 16.2071 18.7071C15.8166 19.0976 15.1834 19.0976 14.7929 18.7071L8.79289 12.7071C8.40237 12.3166 8.40237 11.6834 8.79289 11.2929L14.7929 5.29289C15.1834 4.90237 15.8166 4.90237 16.2071 5.29289Z\" fill=\"#2A3343\"/>\n" +
+                            "</svg></button>",
+                        nextArrow:"<button type='button' class='slick-next'><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\">\n" +
+                            "  <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M8.79289 5.29289C9.18342 4.90237 9.81658 4.90237 10.2071 5.29289L16.2071 11.2929C16.5976 11.6834 16.5976 12.3166 16.2071 12.7071L10.2071 18.7071C9.81658 19.0976 9.18342 19.0976 8.79289 18.7071C8.40237 18.3166 8.40237 17.6834 8.79289 17.2929L14.0858 12L8.79289 6.70711C8.40237 6.31658 8.40237 5.68342 8.79289 5.29289Z\" fill=\"#2A3343\"/>\n" +
+                            "</svg></button>",
+
+                        responsive: [
+                            {
+                                breakpoint: 1024,
+                                settings: {
+                                    slidesToShow: 2,
+                                    slidesToScroll: 1,
+                                    infinite: true,
                                 }
                             },
                             {
