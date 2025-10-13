@@ -383,7 +383,7 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 							<?php endif; ?>
 						</div>
 						<div class="tf-settings-sidebar">
-							<?php echo $this->tf_settings_sidebar(); ?>
+							<?php echo $this->tf_settings_sidebar(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized ?>
 						</div>
 					</div>
 				</div>
@@ -396,18 +396,31 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 			ob_start();
 			?>
 			<div class="tf-sidebar-content">
+
+				<div class="tf-plugin-lists">
+					<h3>Power up your website</h3>
+					<?php echo $this->tf_get_sidebar_plugin_list(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized ?>
+				</div>
+
 				<div class="tf-customization-quote">
-                    <div class="tf-quote-header">
-                        <i class="fa-solid fa-code"></i>
-                        <h3><?php echo esc_html__('Need help building your Travel, Hotel, or Rental Website?', 'tourfic');  ?></h3>
-                    </div>
                     <div class="tf-quote-content">
+						<h3><?php echo esc_html__('Need help building your Travel, Hotel, or Rental Website?', 'tourfic');  ?></h3>
                         <p><?php echo esc_html__('Let our expert team craft a custom WordPress site tailored to your business—whether you\'re running a hotel, tour agency, or vacation rental. Optimized for performance, bookings, and conversions.', 'tourfic'); ?></p>
-						<a href="<?php echo esc_url( Helper::tf_utm_generator( 'https://portal.themefic.com/hire-us/', array( 'utm_medium' => 'dashboard_free_quote' ) ) ); ?>" target="_blank" class="tf-admin-btn tf-btn-secondary"><?php echo esc_html__('Get Free Quote', 'tourfic');  ?></a>								
+						<a href="<?php echo esc_url( Helper::tf_utm_generator( 'https://portal.themefic.com/hire-us/', array( 'utm_medium' => 'dashboard_free_quote' ) ) ); ?>" target="_blank" class="tf-admin-btn tf-btn-secondary">
+						<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<g clip-path="url(#clip0_1066_1543)">
+							<path d="M8.3334 7.49995L5.8334 9.99995L8.3334 12.4999M11.6667 12.4999L14.1667 9.99995L11.6667 7.49995M2.4934 13.6183C2.61593 13.9274 2.64321 14.2661 2.57173 14.5908L1.68423 17.3324C1.65564 17.4715 1.66303 17.6155 1.70571 17.7509C1.7484 17.8863 1.82495 18.0085 1.92812 18.106C2.03129 18.2035 2.15766 18.273 2.29523 18.308C2.43281 18.343 2.57704 18.3422 2.71423 18.3058L5.5584 17.4741C5.86483 17.4133 6.18218 17.4399 6.47423 17.5508C8.25372 18.3818 10.2695 18.5576 12.166 18.0472C14.0625 17.5368 15.7178 16.373 16.8398 14.7611C17.9618 13.1492 18.4785 11.1928 18.2986 9.23707C18.1188 7.28136 17.254 5.45201 15.8568 4.07178C14.4596 2.69155 12.6198 1.84915 10.6621 1.6932C8.70429 1.53724 6.75435 2.07777 5.15627 3.2194C3.55819 4.36103 2.41468 6.0304 1.92748 7.93298C1.44028 9.83556 1.64071 11.8491 2.4934 13.6183Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+						</g>
+						<defs>
+							<clipPath id="clip0_1066_1543">
+							<rect width="20" height="20" fill="white"/>
+							</clipPath>
+						</defs>
+						</svg>	
+						<?php echo esc_html__('Get Free Quote', 'tourfic');  ?>
+						</a>								
                     </div>
                 </div>
-
-				<?php echo $this->tf_get_sidebar_plugin_list(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized ?>
 
 				<div class="tf-quick-access">
 					<h3><?php echo esc_html__('Helpful Resources', 'tourfic');  ?></h3>
@@ -515,13 +528,26 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 
 					<li class="tf-plugin-item <?php echo esc_attr($plugin['slug'] == 'instantio' ? 'featured' : ''); ?>" data-plugin-slug="<?php echo esc_attr($plugin['slug']); ?>">
 						<div class="tf-plugin-info-wrapper">
-							<div class="tf-plugin-info">
-								<img src="<?php echo esc_url($plugin['image']); ?>" alt="<?php echo esc_attr($plugin['name']); ?>" class="<?php echo esc_attr($plugin['name'] == 'BEAF' ? 'beaf-logo' : ''); ?>" width="40" height="40">
+							<div class="tf-plugin-content">
+								<div class="tf-plugin-image">
+									<img src="<?php echo esc_url($plugin['image']); ?>" alt="<?php echo esc_attr($plugin['name']); ?>" class="<?php echo esc_attr($plugin['name'] == 'BEAF' ? 'beaf-logo' : ''); ?>" width="40" height="40">
+								</div>
+								<div class="tf-plugin-title">
+									<h4><?php echo esc_html($plugin['name']); ?>
+									<span class="badge free">Free</span></h4>
+									<p><?php echo esc_html($plugin['subtitle']); ?></p>
+									<strong></strong>
+								</div>
+
 								<div class="tf-plugin-btn">
-									<span class="badge free">Free</span>
 									<?php if (!$installed): ?>
 										<button class="tf-plugin-button install" data-action="install" data-plugin="<?php echo esc_attr($plugin['slug']); ?>" data-plugin_filename="<?php echo esc_attr($plugin['file_name']); ?>">
-											Install <span class="loader"></span>
+											Install 
+											<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M4.66675 4.66663H11.3334V11.3333" stroke="#382673" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+											<path d="M4.66675 11.3333L11.3334 4.66663" stroke="#382673" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+											</svg>
+											<span class="loader"></span>
 										</button>
 									<?php elseif (!$activated): ?>
 										<button class="tf-plugin-button activate" data-action="activate" data-plugin="<?php echo esc_attr($plugin['slug']); ?>" data-plugin_filename="<?php echo esc_attr($plugin['file_name']); ?>" >
@@ -543,11 +569,6 @@ if ( ! class_exists( 'TF_Settings' ) ) {
 										<?php endif; ?>
 									<?php endif; ?>
 								</div>
-							</div>
-							<div class="tf-plugin-content">
-								<h4><?php echo esc_html($plugin['name']); ?></h4>
-								<p><?php echo esc_html($plugin['subtitle']); ?></p>
-								<strong></strong>
 							</div>
 						</div>
 					</li>
