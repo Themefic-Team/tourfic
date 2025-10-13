@@ -549,7 +549,7 @@ class Review extends Widget_Base {
         ) );
         $comments       = $comments_query->comments;
 		
-		if ($style == 'design-1' && $disable_review_sec != 1) {
+		if ($style == 'design-2' && $disable_review_sec != 1) {
             ?>
 			<div class="tf-single-template__two">
                 <div class="tf-sitebar-widgets tf-single-widgets">
@@ -681,7 +681,7 @@ class Review extends Widget_Base {
                 <?php } ?>
             </div>
 			<?php
-        } elseif ($style == 'design-2' && ! $disable_review_sec == 1) {
+        } elseif ($style == 'design-1' && ! $disable_review_sec == 1) {
             ?>
             <div class="tf-single-template__legacy tf-single-review__style-legacy">
                 <div id="tf-review" class="review-section">
@@ -845,7 +845,7 @@ class Review extends Widget_Base {
 
         if ( ( get_post_type( $this->post_id ) == 'tf_tours' && $style == "design-1" ) ||
             ( get_post_type( $this->post_id ) == "tf_hotel" && $style == "design-1" ) ||
-            ( get_post_type( $this->post_id ) == "tf_apartment" && $style == "design-1" ) ) {
+            ( get_post_type( $this->post_id ) == "tf_apartment" && $style == "design-2" ) ) {
 
             if ( $comments ) {
                 $tf_overall_rate = [];

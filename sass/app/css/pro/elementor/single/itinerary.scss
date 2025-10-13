@@ -3,6 +3,7 @@
 
 .tf-single-template{
     &__legacy{
+        padding: 0;
         .tf-travel-itinerary-wrapper{
             .tf-travel-itinerary-content {
                 h2 {
@@ -128,6 +129,7 @@
         }
     }
     &__one{
+        padding: 0;
         .tf-itinerary-wrapper{
             .tf-itinerary-box {
                 background: $color-filling-fg;
@@ -309,6 +311,7 @@
         }
     }
     &__two{
+        padding: 0;
         .tf-itinerary-wrapper {
             display: flex;
             flex-direction: column;

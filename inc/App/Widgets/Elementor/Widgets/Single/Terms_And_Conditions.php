@@ -170,8 +170,8 @@ class Terms_And_Conditions extends Widget_Base {
 			
         } elseif($post_type == 'tf_apartment'){
 			$meta = get_post_meta($post_id, 'tf_apartment_opt', true);
-			$tc_title = !empty($meta['tc-section-title']) ? esc_html($meta['tc-section-title']) : esc_html__("Terms & Conditions","tourfic");
-	        $tc = ! empty( $meta['tc'] ) ? $meta['tc'] : '';
+			$tc_title = !empty($meta['terms_title']) ? esc_html($meta['terms_title']) : esc_html__("Terms & Conditions","tourfic");
+	        $tc = ! empty( $meta['terms_and_conditions'] ) ? $meta['terms_and_conditions'] : '';
 			
         } elseif($post_type == 'tf_carrental'){
 			$meta = get_post_meta($post_id, 'tf_carrental_opt', true);

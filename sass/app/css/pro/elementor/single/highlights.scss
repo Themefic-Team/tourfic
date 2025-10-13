@@ -101,6 +101,7 @@
             @include flexbox();
             @include flex-wrap(wrap);
             gap: 16px;
+            margin-bottom: 0;
 
             &.slick-dotted {
                 padding-bottom: 70px;

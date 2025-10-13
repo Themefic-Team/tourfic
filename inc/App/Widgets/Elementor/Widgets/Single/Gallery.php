@@ -74,6 +74,7 @@ class Gallery extends Widget_Base {
             'options' => [
                 'style1' => esc_html__('Style 1 - Bottom Nav', 'tourfic'),
                 'style2' => esc_html__('Style 2 - Slider', 'tourfic'),
+                'style3' => esc_html__('Style 3 - Grid', 'tourfic'),
             ],
         ]);
 
@@ -84,6 +85,9 @@ class Gallery extends Widget_Base {
 			'label_off' => esc_html__('Hide', 'tourfic'),
 			'return_value' => 'yes',
 			'default' => 'yes',
+            'condition' => [
+				'gallery_style' => ['style1', 'style2'],
+			],
 		]);
 
 	    do_action( 'tf/single-gallery/after-content/controls', $this );
@@ -292,6 +296,69 @@ class Gallery extends Widget_Base {
 			</script>
 			<?php endif;
         }
+		elseif( $style == 'style3'){
+			?>
+			<div class="tf-apt-hero-section tf-single-gallery__style-3">
+				<div class="tf-apt-hero-wrapper">
+					<?php if ( ! empty( $gallery_ids ) ) :
+						$first_image = ! empty( $gallery_ids[0] ) ? wp_get_attachment_image( $gallery_ids[0], 'tf_apartment_gallery_large' ) : '';
+						$second_image = ! empty( $gallery_ids[1] ) ? wp_get_attachment_image( $gallery_ids[1], 'tf_apartment_gallery_small' ) : '';
+						$third_image = ! empty( $gallery_ids[2] ) ? wp_get_attachment_image( $gallery_ids[2], 'tf_apartment_gallery_small' ) : '';
+						?>
+						<div class="tf-apt-hero-gallery">
+							<div class="tf-apt-hero-left <?php echo ( ! empty( $second_image ) || ! empty( $third_image ) ) ? 'has-right' : ''; ?>">
+								<a href="<?php echo esc_url( wp_get_attachment_image_url( $gallery_ids[0], 'full' ) ); ?>"
+								data-fancybox="hotel-gallery" class="hero-first-image">
+									<?php echo wp_kses_post( $first_image ); ?>
+								</a>
+							</div>
+							<?php if ( $second_image || $third_image ): ?>
+								<div class="tf-apt-hero-right">
+									<?php if ( ! empty( $second_image ) ): ?>
+										<a href="<?php echo esc_url( wp_get_attachment_image_url( $gallery_ids[1], 'full' ) ); ?>"
+										data-fancybox="hotel-gallery" class="hero-second-image">
+											<?php echo wp_kses_post( $second_image ); ?>
+										</a>
+									<?php endif; ?>
+									<?php if ( ! empty( $third_image ) ): ?>
+										<a href="<?php echo esc_url( wp_get_attachment_image_url( $gallery_ids[2], 'full' ) ); ?>"
+										data-fancybox="hotel-gallery" class="hero-third-image <?php echo count( $gallery_ids ) > 3 ? 'has-more' : ''; ?>">
+											<?php echo wp_kses_post( $third_image ); ?>
+										</a>
+									<?php endif; ?>
+								</div>
+								<?php if ( count( $gallery_ids ) > 3 ): ?>
+									<div class="gallery-all-photos">
+										<a href="<?php echo esc_url( wp_get_attachment_image_url( $gallery_ids[3], 'full' ) ); ?>"
+										class="tf_btn" data-fancybox="hotel-gallery">
+											<?php esc_html_e( 'All Photos', 'tourfic' ) ?>
+										</a>
+										<?php foreach ( $gallery_ids as $key => $item ) :
+											if ( $key < 4 ) {
+												continue;
+											}
+											?>
+											<a href="<?php echo esc_url( wp_get_attachment_image_url( $item, 'full' ) ); ?>"
+											data-fancybox="hotel-gallery"></a>
+										<?php endforeach; ?>
+									</div>
+								<?php endif; ?>
+							<?php endif; ?>
+						</div>
+					<?php else: ?>
+						<?php
+						if ( has_post_thumbnail() ) {
+							the_post_thumbnail( 'tf_apartment_single_thumb' );
+						} else {
+							echo '<img src="' . esc_url( TF_ASSETS_APP_URL . 'images/feature-default.jpg' ) . '" alt="feature-default">';
+						}
+						?>
+					<?php endif; ?>
+
+				</div>
+			</div>
+			<?php
+		}
     }
 
     /**
