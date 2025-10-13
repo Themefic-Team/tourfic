@@ -77,6 +77,17 @@ class Share extends Widget_Base {
                 'style3' => esc_html__('Style 3 - Dropdown with Labels', 'tourfic'),
             ],
         ]);
+
+		//icon type
+        $this->add_control('icon_type',[
+			'type'     => Controls_Manager::SELECT,
+			'label'    => esc_html__( 'Icon Type', 'tourfic' ),
+			'options'  => [
+				'simple'     => esc_html__( 'Simple', 'tourfic' ),
+				'rounded'     => esc_html__( 'Rounded', 'tourfic' ),
+			],
+			'default'  => 'rounded',
+		]);
 		
 		$this->add_control('share_icon',[
 			'label' => esc_html__('Share Icon', 'tourfic'),
@@ -294,6 +305,7 @@ class Share extends Widget_Base {
 
         //icon type
         $style = !empty($settings['share_style']) ? $settings['share_style'] : 'style1';
+        $icon_type = !empty($settings['icon_type']) ? $settings['icon_type'] : 'rounded';
         
         if ( $disable_share_opt !== '1' ):
             // Common social share links
@@ -308,7 +320,7 @@ class Share extends Widget_Base {
             if ($style == 'style1') {
                 ?>
                 <div class="tf-share">
-                    <a href="#dropdown-share-center" class="share-toggle tf-icon tf-social-box" data-toggle="true">
+                    <a href="#dropdown-share-center" class="share-toggle tf-icon tf-social-box tf-icon-type-<?php echo esc_attr($icon_type); ?>" data-toggle="true">
                         <?php echo wp_kses($share_icon_html, Helper::tf_custom_wp_kses_allow_tags()); ?>
                     </a>
 
@@ -362,7 +374,7 @@ class Share extends Widget_Base {
                             <input type="text" id="share_link_input" class="share-center-url share-center-url-input" value="<?php echo esc_attr($share_link); ?>" readonly>
                         </li>
                     </ul>
-                    <a href="#dropdown-share-center" class="tf-share-toggle tf-icon tf-social-box" data-toggle="true">
+                    <a href="#dropdown-share-center" class="tf-share-toggle tf-icon tf-social-box tf-icon-type-<?php echo esc_attr($icon_type); ?>" data-toggle="true">
                         <?php echo wp_kses($share_icon_html, Helper::tf_custom_wp_kses_allow_tags()); ?>
                     </a>
                 </div>
@@ -378,7 +390,7 @@ class Share extends Widget_Base {
                 ];
                 ?>
                 <div class="tf-share">
-                    <a href="#dropdown-share-center" class="share-toggle" data-toggle="true">
+                    <a href="#dropdown-share-center" class="share-toggle tf-icon-type-<?php echo esc_attr($icon_type); ?>" data-toggle="true">
                         <?php echo wp_kses($share_icon_html, Helper::tf_custom_wp_kses_allow_tags()); ?>
                     </a>
                     <div id="dropdown-share-center" class="share-tour-content">

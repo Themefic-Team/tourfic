@@ -487,18 +487,23 @@ class FAQ extends Widget_Base {
         if($post_type == 'tf_hotel'){
             $meta = get_post_meta($post_id, 'tf_hotels_opt', true);
 			$faqs = ! empty( Helper::tf_data_types($meta['faq']) ) ? Helper::tf_data_types($meta['faq']) : '';
-
+            $title = !empty($meta['faq-section-title']) ? esc_html($meta['faq-section-title']) : '';
+            
         } elseif($post_type == 'tf_tours'){
-			$meta = get_post_meta($post_id, 'tf_tours_opt', true);
+            $meta = get_post_meta($post_id, 'tf_tours_opt', true);
 			$faqs = ! empty( Helper::tf_data_types($meta['faqs']) ) ? Helper::tf_data_types($meta['faqs']) : '';
-
+            $title = !empty($meta['faq-section-title']) ? esc_html($meta['faq-section-title']) : '';
+            
         } elseif($post_type == 'tf_apartment'){
-			$meta = get_post_meta($post_id, 'tf_apartment_opt', true);
+            $meta = get_post_meta($post_id, 'tf_apartment_opt', true);
 			$faqs = ! empty( Helper::tf_data_types($meta['faq']) ) ? Helper::tf_data_types($meta['faq']) : '';
-
+            $title = !empty($meta['faq_title']) ? esc_html($meta['faq_title']) : '';
+            $desc = !empty($meta['faq_desc']) ? esc_html($meta['faq_desc']) : '';
+            
         } elseif($post_type == 'tf_carrental'){
-			$meta = get_post_meta($post_id, 'tf_carrental_opt', true);
+            $meta = get_post_meta($post_id, 'tf_carrental_opt', true);
 			$faqs = ! empty( Helper::tf_data_types($meta['faq']) ) ? Helper::tf_data_types($meta['faq']) : '';
+            $title = !empty($meta['faq_sec_title']) ? esc_html($meta['faq_sec_title']) : '';
             
         } else {
 			return;
@@ -511,7 +516,9 @@ class FAQ extends Widget_Base {
         if ($style == 'style1') {
             ?>
             <div class="tf-single-faq-section tf-single-faq-style1">
-                <h2 class="tf-title tf-section-title" ><?php echo !empty($meta['faq-section-title']) ? esc_html($meta['faq-section-title']) : ''; ?></h2>
+                <?php echo ! empty( $title ) ? '<h2 class="tf-title tf-section-title">' . esc_html( $title ) . '</h2>' : ''; ?>
+				<?php echo isset($desc) && ! empty( $desc ) ? '<p>' . wp_kses_post( $desc ) . '</p>' : ''; ?>
+
                 <div class="tf-faq-inner">
                     <?php 
                     $faq_key = 1;    
@@ -549,7 +556,9 @@ class FAQ extends Widget_Base {
         } elseif ($style == 'style2') {
             ?>
             <div class="tf-single-template__two tf-questions-wrapper tf-single-faq-style2" id="tf-hotel-faq">
-                <h2 class="tf-section-title"><?php echo !empty($meta['faq-section-title']) ? esc_html($meta['faq-section-title']) : esc_html__( "Faq's", 'tourfic' ); ?></h2>            
+                <?php echo ! empty( $title ) ? '<h2 class="tf-section-title">' . esc_html( $title ) . '</h2>' : ''; ?>
+				<?php echo isset($desc) && ! empty( $desc ) ? '<p>' . wp_kses_post( $desc ) . '</p>' : ''; ?>
+
                 <div class="tf-questions">
                     <?php 
                     if (count($faqs) >= 2) {
@@ -622,7 +631,9 @@ class FAQ extends Widget_Base {
         } elseif ($style == 'style3') {
             ?>
             <div class="tf-single-faq-section tf-car-faq-section tf-single-faq-style3">
-                <h2 class="tf-title tf-section-title" ><?php echo !empty($meta['faq-section-title']) ? esc_html($meta['faq-section-title']) : ''; ?></h2>
+                <?php echo ! empty( $title ) ? '<h2 class="tf-title tf-section-title">' . esc_html( $title ) . '</h2>' : ''; ?>
+				<?php echo isset($desc) && ! empty( $desc ) ? '<p>' . wp_kses_post( $desc ) . '</p>' : ''; ?>
+                
                 <?php 
                 $faq_key = 1;
                 foreach ( $faqs as $key => $faq ): ?>
@@ -654,10 +665,10 @@ class FAQ extends Widget_Base {
 			<?php
         } elseif ($style == 'style4') {
             ?>
-            <div class="tf-faq-wrapper tf-apartment-faq">
+            <div class="tf-single-template__legacy tf-faq-wrapper tf-apartment-faq tf-single-faq-style4">
                 <div class="tf-faq-sec-title">
-					<?php echo ! empty( $meta['faq_title'] ) ? '<h2 class="section-heading">' . esc_html( $meta['faq_title'] ) . '</h2>' : ''; ?>
-					<?php echo isset($meta['faq_desc']) && ! empty( $meta['faq_desc'] ) ? '<p>' . wp_kses_post( $meta['faq_desc'] ) . '</p>' : ''; ?>
+					<?php echo ! empty( $title ) ? '<h2 class="section-heading">' . esc_html( $title ) . '</h2>' : ''; ?>
+					<?php echo isset($desc) && ! empty( $desc ) ? '<p>' . wp_kses_post( $desc ) . '</p>' : ''; ?>
                 </div>
 
                 <div class="tf-faq-content-wrapper">

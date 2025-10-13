@@ -11,6 +11,7 @@ use Elementor\Group_Control_Typography;
 use Elementor\Widget_Base;
 use Tourfic\App\TF_Review;
 use Tourfic\Classes\Helper;
+use \Tourfic\Classes\Car_Rental\Pricing;
 
 // don't load directly
 defined( 'ABSPATH' ) || exit;
@@ -168,6 +169,17 @@ class Gallery extends Widget_Base {
 				$gallery_ids = explode( ',', $gallery ); // Comma seperated list to array
 			}
 			
+        } elseif($post_type == 'tf_carrental'){
+			$meta = get_post_meta($post_id, 'tf_carrental_opt', true);
+			$disable_share_opt    = ! empty( $meta['c-share'] ) ? $meta['c-share'] : '';
+			$disable_wishlist_sec = ! empty( $meta['c-wishlist'] ) ? $meta['c-wishlist'] : 0;
+			$s_review  = ! empty( Helper::tfopt( 'disable-apartment-review' ) ) ? Helper::tfopt( 'disable-apartment-review' ) : 0;
+			$disable_review_sec  = ! empty( $meta['disable-apartment-review'] ) ? $meta['disable-apartment-review'] : '';
+			$gallery = ! empty( $meta['car_gallery'] ) ? $meta['car_gallery'] : '';
+			if ( $gallery ) {
+				$gallery_ids = explode( ',', $gallery ); // Comma seperated list to array
+			}
+			
         } else {
 			return;
 		}
@@ -178,7 +190,7 @@ class Gallery extends Widget_Base {
         $show_review = isset($settings['show_review']) ? $settings['show_review'] : '';
 
         // Style 1: Bottom Nav
-        if ($style == 'style1') {
+        if ($style == 'style1' && $post_type !== 'tf_carrental') {
             ?>
             <div class="tf-single-gallery__style-1 tf-hero-gallery">
 				<div class="tf-gallery-featured <?php echo empty($gallery_ids) ? esc_attr('tf-without-gallery-featured') : ''; ?>">
@@ -212,6 +224,45 @@ class Gallery extends Widget_Base {
 						<?php $gallery_count++; 
 						endforeach;
 					endif; ?>
+				</div>
+			</div>
+            <?php
+        }
+        elseif ($style == 'style1' && $post_type == 'tf_carrental') {
+            ?>
+			<div class="tf-single-template__one tf-single-car-gallery-style-1">
+				<div class="tf-car-hero-gallery">
+					<div class="tf-featured-car">
+						<img src="<?php echo !empty(wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' )) ? esc_url( wp_get_attachment_url( get_post_thumbnail_id(), 'tf_gallery_thumb' ) ) : esc_url(TF_ASSETS_APP_URL.'images/feature-default.jpg'); ?>" alt="<?php esc_html_e( 'Car Image', 'tourfic' ); ?>">
+
+						<div class="tf-featured-reviews">
+							<a href="#tf-reviews" class="tf-single-rating">
+								<span>
+									<?php 
+									if($comments){
+									echo wp_kses_post( TF_Review::tf_total_avg_rating( $comments )); 
+									}else{ 
+									?>
+									0.0
+									<?php } ?>
+									<i class="fa-solid fa-star"></i>
+								</span> (<?php echo wp_kses_post( Pricing::get_total_trips($post_id) ); ?> <?php esc_html_e( "trips", "tourfic" ) ?>)
+							</a>
+						</div>
+					</div>
+
+					<div class="tf-gallery tf-flex tf-flex-gap-16">
+					<?php 
+					$gallery_count = 1;
+						if ( ! empty( $gallery_ids ) ) {
+						foreach ( $gallery_ids as $key => $gallery_item_id ) {
+						$image_url = wp_get_attachment_url( $gallery_item_id, 'full' );
+					?>
+						<a class="<?php echo $gallery_count==4 ? esc_attr( 'tf-gallery-more' ) : ''; ?> " href="<?php echo esc_url($image_url); ?>" id="tour-gallery" data-fancybox="tour-gallery">
+							<img src="<?php echo esc_url($image_url); ?>">
+						</a>
+					<?php $gallery_count++; } } ?>
+					</div>
 				</div>
 			</div>
             <?php

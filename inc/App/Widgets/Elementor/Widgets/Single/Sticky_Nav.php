@@ -126,7 +126,7 @@ class Sticky_Nav extends Widget_Base {
     private function tf_hotel_sticky_nav($comments) {
 		$meta = get_post_meta($this->post_id, 'tf_hotels_opt', true);
         ?>
-        <div class="tf-single-template__two">
+        <div class="tf-single-hotel-sticky-nav tf-single-template__two">
             <div class="tf-details-menu tf-hotel-details-menu">
                 <ul>
                     <li><a class="tf-hashlink" href="#tf-hotel-overview">
@@ -171,7 +171,7 @@ class Sticky_Nav extends Widget_Base {
 	private function tf_tour_sticky_nav($comments) {
 		$meta = get_post_meta($this->post_id, 'tf_tours_opt', true);
         ?>
-        <div class="tf-single-template__two">
+        <div class="tf-single-tour-sticky-nav tf-single-template__two">
             <div class="tf-details-menu tf-tour-details-menu">
                 <ul>
                     <li><a class="tf-hashlink" href="#tf-tour-overview">
@@ -210,7 +210,7 @@ class Sticky_Nav extends Widget_Base {
 	private function tf_apartment_sticky_nav($comments) {
 		$meta = get_post_meta($this->post_id, 'tf_apartment_opt', true);
         ?>
-        <div class="tf-single-template__two">
+        <div class="tf-single-apartment-sticky-nav tf-single-template__two">
             <div class="tf-details-menu tf-apartment-details-menu">
                 <ul>
                     <li><a class="tf-hashlink" href="#tf-apartment-overview">
@@ -261,7 +261,7 @@ class Sticky_Nav extends Widget_Base {
         $faqs = ! empty( $meta['faq'] ) ? $meta['faq'] : '';
         $tc = ! empty( $meta['terms_conditions'] ) ? $meta['terms_conditions'] : '';
 		?>
-        <div class="tf-single-template__one">
+        <div class="tf-single-car-sticky-nav tf-single-template__one">
             <div class="tf-details-menu tf-car-details-menu">
                 <ul>
                     <li class="active" data-menu="<?php echo esc_attr('tf-description'); ?>">

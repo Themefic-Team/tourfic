@@ -169,7 +169,7 @@ class House_Rules extends Widget_Base {
 
         if ( $style == 'style1' && ! empty( Helper::tf_data_types( $meta['house_rules'] ) ) ) {  
             ?>
-            <div class="tf-single-template__two">
+            <div class="tf-single-template__two tf-single-apartment-house-rules-style1">
                 <div class="tf-aprtment-rules-section" id="tf-apartment-rules">
                     <h2><?php echo ! empty( $meta['house_rules_title'] ) ? esc_html($meta['house_rules_title']) : ''; ?></h2>
                     <div class="aprtment-inc-exc <?php echo empty( $included_house_rules ) || empty( $not_included_house_rules ) ? esc_attr('tf-inc-exc-full') : ''; ?>">
@@ -220,7 +220,7 @@ class House_Rules extends Widget_Base {
             <?php 
         } elseif($style == 'style2' && ! empty( Helper::tf_data_types( $meta['house_rules'] ) )) {
             ?>
-            <div class="tf-single-template__legacy">
+            <div class="tf-single-template__legacy tf-single-apartment-house-rules-style-legacy">
                 <div class="tf-house-rules">
                     <h2 class="section-heading"><?php echo ! empty( $meta['house_rules_title'] ) ? esc_html( $meta['house_rules_title'] ) : ''; ?></h2>
                     <div class="tf-house-rules-wrapper <?php echo empty( $included_house_rules ) || empty( $not_included_house_rules ) ? 'tf-house-rules-full' : ''; ?>">

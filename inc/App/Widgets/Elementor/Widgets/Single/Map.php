@@ -340,24 +340,29 @@ class Map extends Widget_Base {
         $tf_openstreet_map = ! empty( Helper::tfopt( 'google-page-option' ) ) ? Helper::tfopt( 'google-page-option' ) : "default";
         $meta = get_post_meta(get_the_ID(), 'tf_carrental_opt', true);
         $map     = ! empty( $meta['map'] ) ? Helper::tf_data_types($meta['map']) : '';
+        $location_title = ! empty( $meta['location_title'] ) ? $meta['location_title'] : '';
         if( !empty($meta['map']) && Helper::tf_data_types($meta['map'])){
             $address = !empty( Helper::tf_data_types($meta['map'])['address'] ) ? Helper::tf_data_types($meta['map'])['address'] : '';
+
             $address_latitude = !empty( Helper::tf_data_types($meta['map'])['latitude'] ) ? Helper::tf_data_types($meta['map'])['latitude'] : '';
             $address_longitude = !empty( Helper::tf_data_types($meta['map'])['longitude'] ) ? Helper::tf_data_types($meta['map'])['longitude'] : '';
             $address_zoom = !empty( Helper::tf_data_types($meta['map'])['zoom'] ) ? Helper::tf_data_types($meta['map'])['zoom'] : '';
+
         }
         ?>
         <?php if ( ! empty( $map['address'] ) ): ?>
-            <div class="tf-apartment-map tf-single-map">
-                <h2 class="section-heading"><?php echo ! empty( $meta['location_title'] ) ? esc_html( $meta['location_title'] ) : ''; ?></h2>
-
-                <?php if ( $tf_openstreet_map == "default" && ! empty( $map["latitude"] ) && ! empty( $map["longitude"] ) ) { ?>
-                    <div id="apartment-location" class="tf-single-map-div"></div>
-                <?php } elseif ( $tf_openstreet_map != "default" && ! empty( $tf_google_map_key ) ){ ?>
-                    <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( str_replace( "#", "", $map["address"] ) ); ?>&output=embed" width="100%" height="600" style="border:0;"
-                            allowfullscreen=""
-                            loading="lazy"></iframe>
+            <div class="tf-car-location" id="tf-location">
+                <?php if(!empty($location_title)){ ?>   
+                <h3><?php echo esc_html($location_title); ?></h3>
                 <?php } ?>
+
+                <div class="tf-car-location-map">
+                    <?php if ( $tf_openstreet_map=="default" && !empty($address_latitude) && !empty($address_longitude) ) {  ?>
+                        <div id="car-location"></div>
+                    <?php }else{ ?>
+                        <iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( str_replace( "#", "", $address ) ); ?>&output=embed" width="100%" height="260" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    <?php } ?>
+                </div>
             </div>
         <?php endif; ?>
 

@@ -146,13 +146,30 @@ class Title extends Widget_Base {
 
 	protected function render() {
 		$settings  = $this->get_settings_for_display();
+		$tf_cars_slug = get_option('car_slug');
+		$post_type = get_post_type();
+		if($post_type == 'tf_carrental'):
         ?>
-		<div class="tf-head-title">
-        <?php 
-		/* translators: %1$s title Tag, %2$s post title */
-		printf('<%1$s class="tf-post-title">%2$s</%1$s>', esc_attr( $settings['tf-title-tag'], 'h1' ), esc_html(get_the_title())); 
-		?>
-		</div>
+			<div class="tf-car-title">
+				<h1><?php the_title(); ?></h1>
+				<div class="breadcrumb">
+					<ul>
+						<li><a href="<?php echo esc_url(site_url()); ?>"><?php esc_html_e( "Home", "tourfic" ) ?></a></li>
+						<li>/</li>
+						<li><a href="<?php echo esc_url(site_url()); ?>/<?php echo esc_attr($tf_cars_slug); ?>"><?php esc_html_e( "Cars", "tourfic" ) ?></a></li>
+						<li>/</li>
+						<li><?php the_title(); ?></li>
+					</ul>
+				</div>
+			</div>
+		<?php else: ?>
+			<div class="tf-head-title">
+			<?php 
+			/* translators: %1$s title Tag, %2$s post title */
+			printf('<%1$s class="tf-post-title">%2$s</%1$s>', esc_attr( $settings['tf-title-tag'], 'h1' ), esc_html(get_the_title())); 
+			?>
+			</div>
         <?php
+		endif;
 	}
 }

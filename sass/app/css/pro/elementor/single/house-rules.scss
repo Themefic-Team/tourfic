@@ -2,9 +2,10 @@
 @import '../../../../../common/mixin';
 
 .tf-single-template{
-    &__legacy{
+    &__legacy.tf-single-apartment-house-rules-style-legacy{
+        padding: 0;
         .tf-house-rules {
-            margin-bottom: 80px;
+            margin-bottom: 0px;
         
             .tf-house-rules-wrapper {
                 @include flexbox();
@@ -99,7 +100,8 @@
             }
         }
     }
-    &__two{
+    &__two.tf-single-apartment-house-rules-style1{
+        padding: 0;
         .tf-aprtment-rules-section{
             @media #{$max768}{
                 padding-left: 16px;

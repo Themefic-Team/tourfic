@@ -15,6 +15,7 @@
         align-items: center;
         justify-content: center;
         border-radius: 50px;
+        color: var(--tf-primary);
     }
 
     &:hover {
@@ -22,7 +23,14 @@
 
         i {
             transform: scale(1.2);
-            color: var(--tf-primary);
+        }
+    }
+}
+.tf-wishlist-icon{
+    i {
+        color: var(--tf-primary);
+        &.tf-text-red {
+            color: #ff6055;
         }
     }
 }

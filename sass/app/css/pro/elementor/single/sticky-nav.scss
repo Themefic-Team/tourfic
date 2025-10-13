@@ -1,7 +1,10 @@
 @import '../../../../../common/variable';
 @import '../../../../../common/mixin';
 
-.tf-single-template__two{
+.tf-single-hotel-sticky-nav.tf-single-template__two,
+.tf-single-tour-sticky-nav.tf-single-template__two,
+.tf-single-apartment-sticky-nav.tf-single-template__two,
+.tf-single-car-sticky-nav.tf-single-template__one{
     padding: 0;
 }
 

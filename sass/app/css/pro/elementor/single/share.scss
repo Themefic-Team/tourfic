@@ -48,6 +48,18 @@
                 color: var(--tf-primary);
             }
         }
+
+        &.tf-icon-type-simple{
+            background: transparent;
+            height: auto;
+            width: auto;
+            border-radius: 0;
+
+            svg{
+                height: 26px;
+                width: 26px;
+            }
+        }
     }
 
     .share-toggle{

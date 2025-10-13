@@ -40,6 +40,10 @@ class Terms_And_Conditions extends Widget_Base {
         ];
     }
 
+	public function get_style_depends(){
+		return ['tf-elementor-single-terms-and-conditions'];
+	}
+
 	protected function register_controls() {
 
 		$this->tf_content_layout_controls();
@@ -182,15 +186,32 @@ class Terms_And_Conditions extends Widget_Base {
 			return;
 		}
 
-        if ( $tc ) { ?>
-        <div class="tf-toc-wrapper">
-            <div class="tf-section-head">
-                <h2 class="tf-section-title"><?php echo esc_html($tc_title); ?></h2>
+        if ( !empty($tc) && $post_type == 'tf_carrental') { ?>
+			<div class="tf-single-template__one tf-single-car-terms-and-conditions-style-1">
+				<div class="tf-car-conditions-section" id="tf-tc">
+					<?php if(!empty($tc_title)){ ?>
+						<h3><?php echo esc_html($tc_title); ?></h3>
+					<?php } ?>
+					<table>
+						<?php 
+						foreach($tc as $singletc){ ?>
+						<tr>
+							<th><?php echo !empty($singletc['title']) ? esc_html($singletc['title']) : ''; ?></th>
+							<td><?php echo !empty($singletc['content']) ? wp_kses_post($singletc['content']) : ''; ?></td>
+						</tr>
+						<?php } ?>
+					</table>
+				</div>
             </div>
-            <div class="tf-toc-content">
-                <?php echo wp_kses_post(wpautop( $tc )); ?>
-            </div>
-        </div>
+		<?php }elseif(!empty($tc)){ ?>
+			<div class="tf-toc-wrapper">
+				<div class="tf-section-head">
+					<h2 class="tf-section-title"><?php echo esc_html($tc_title); ?></h2>
+				</div>
+				<div class="tf-toc-content">
+					<?php echo wp_kses_post(wpautop( $tc )); ?>
+				</div>
+			</div>
         <?php 
         }
 	}

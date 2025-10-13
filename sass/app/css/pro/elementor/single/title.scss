@@ -1,7 +1,37 @@
+@import '../../../../../common/variable';
+@import '../../../../../common/mixin';
+
 .tf-head-title .tf-post-title {
     color: var(--tf-text-heading);
     margin-bottom: 6px;
 }
 .tf-head-title h1 {
     font-size: 2.375rem;
+}
+
+.tf-car-title{
+    h1{
+        color: $color-heading;
+        font-size: 1.75rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+    .breadcrumb{
+        ul{
+            margin: 0;
+            padding: 0;
+            li{
+                color: $color-text;
+                font-size: 1rem;
+                font-weight: 400;
+                display: inline-block;
+                a{
+                    color: $color-text;
+                }
+                &:last-child{
+                    font-weight: 700;
+                }
+            }
+        }
+    }
 }
