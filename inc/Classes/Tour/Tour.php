@@ -2033,7 +2033,7 @@ class Tour {
                                 </li>
 							<?php } ?>
                         </ul>
-						<input type="hidden" value="<?php echo implode(",",$active_steps); ?>" class="tf_popup_stpes" />
+						<input type="hidden" value="<?php echo esc_attr(implode(",",$active_steps)); ?>" class="tf_popup_stpes" />
                     </div>
 					
                     <div class="tf-booking-times">

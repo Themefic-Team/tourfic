@@ -110,12 +110,12 @@ class TF_Tour_Backend_Booking extends TF_Backend_Booking {
 		);
 		$tf_tour_packages = array(
 			'id'          => 'tf_tour_packages',
-			'label'       => esc_html__( 'Tour Packages', 'litt-travels' ),
+			'label'       => esc_html__( 'Tour Packages', 'tourfic' ),
 			'type'        => 'select',
 			'options'     => array(
 				'' => 'No Package Available',
 			),
-			'placeholder' => esc_html__( 'Select Package', 'litt-travels' ),
+			'placeholder' => esc_html__( 'Select Package', 'tourfic' ),
 			'field_width' => 50,
 		);
 

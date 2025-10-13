@@ -2094,7 +2094,7 @@ Steps
   }
 }
 .tf-setting-dashboard .tf-setting-performace-section .tf-order-report canvas {
-  width: 100%;
+  width: 100% !important;
 }
 .tf-setting-dashboard .tf-setting-performace-section .tf-report-filter {
   display: flex;
