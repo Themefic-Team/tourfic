@@ -193,6 +193,13 @@
 }
 //style 3
 .tf-single-faq-section.tf-single-faq-style3{
+    h2{
+        color: $color-heading;
+        font-size: 1.313rem;
+        font-weight: 400;
+        margin-bottom: 16px;
+        margin-top: 0px;
+    }
     .tf-faq-col{
         margin-bottom: 16px;
         &:last-child{

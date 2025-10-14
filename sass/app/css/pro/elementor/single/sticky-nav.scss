@@ -113,3 +113,63 @@
         }
     }
 }
+.tf-single-car-sticky-nav.tf-single-template__one{
+    .tf-single-booking-bar{
+        background: $color-white;
+        padding: 16px 0px;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        z-index: 9999;
+        display: none;
+        box-shadow: 0 48px 64px 0 rgba(2, 12, 21, 0.05);
+        .tf-top-booking-bar{
+            @media #{$max1024}{
+                gap: 16px;
+                flex-wrap: wrap;
+            }
+        }
+        .tf-top-bar-booking{
+            @media #{$max1024}{
+                justify-content: space-between;
+                width: 100%;
+            }
+            @media #{$max768}{
+                display: none;
+            }
+            .tf-price-header{
+                h2{
+                    color: $color-primary;
+                    font-size: 1.313rem;
+                    font-weight: 700;
+                    margin: 0;
+                }
+                p{
+                    color: $color-text;
+                    margin: 0;
+                }
+            }
+            button{
+                padding: 16px 32px;
+                border-radius: 8px;
+                background: $color-primary;
+                color: $color-white;
+                font-size: 1rem;
+                font-weight: 700;
+                cursor: pointer;
+                border: 0px solid;
+                transition: .3s all ease;
+                &:hover{
+                    background: $color-brand-dark;
+                }
+            }
+        }
+        .tf-details-menu{
+            width: 668px;
+            @media #{$max1024}{
+                width: 100%;
+            }
+        }
+    }
+}

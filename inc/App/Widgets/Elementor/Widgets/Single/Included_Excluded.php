@@ -68,15 +68,19 @@ class Included_Excluded extends Widget_Base {
 
         do_action( 'tf/single-included-excluded/before-content/controls', $this );
 
+        $post_type = $this->get_current_post_type();
+		$options = [
+			'style1' => esc_html__('Style 1', 'tourfic')
+		];
+		if($post_type == 'tf_tours'){
+			$options['style2'] = esc_html__('Style 2', 'tourfic');
+			$options['style3'] = esc_html__('Style 3', 'tourfic');
+		}
 		$this->add_control('included_excluded_style',[
             'label' => esc_html__('Style', 'tourfic'),
             'type' => \Elementor\Controls_Manager::SELECT,
             'default' => 'style1',
-            'options' => [
-                'style1' => esc_html__('Style 1', 'tourfic'),
-                'style2' => esc_html__('Style 2', 'tourfic'),
-                'style3' => esc_html__('Style 3', 'tourfic'),
-            ],
+            'options' => $options,
         ]);
 
 	    do_action( 'tf/single-included-excluded/after-content/controls', $this );
@@ -120,20 +124,30 @@ class Included_Excluded extends Widget_Base {
         $this->post_id   = get_the_ID();
         $this->post_type = get_post_type();
 
-        if($this->post_type !== 'tf_tours'){
+        if($this->post_type == 'tf_tours'){
+            $meta = get_post_meta( $this->post_id, 'tf_tours_opt', true );
+            $inc             = !empty(Helper::tf_data_types($meta['inc'])) ? Helper::tf_data_types($meta['inc']) : null;
+            $exc             = !empty(Helper::tf_data_types($meta['exc'])) ? Helper::tf_data_types($meta['exc']) : null;
+            $inc_icon        = ! empty( $meta['inc_icon'] ) ? $meta['inc_icon'] : null;
+            $exc_icon        = ! empty( $meta['exc_icon'] ) ? $meta['exc_icon'] : null;
+            $custom_inc_icon = ! empty( $inc_icon ) ? "custom-inc-icon" : '';
+            $custom_exc_icon = ! empty( $exc_icon ) ? "custom-exc-icon" : '';
+            $inc_exc_bg = ! empty( $meta['include-exclude-bg'] ) ? $meta['include-exclude-bg'] : '';
+        }elseif($this->post_type == 'tf_carrental'){
+            $meta = get_post_meta( $this->post_id, 'tf_carrental_opt', true );
+            $inc_exc_status = ! empty( $meta['inc_exc_section'] ) ? $meta['inc_exc_section'] : '';
+            $includes = ! empty( $meta['inc'] ) ? $meta['inc'] : '';
+            $include_icon = ! empty( $meta['inc_icon'] ) ? $meta['inc_icon'] : '';
+            $excludes = ! empty( $meta['exc'] ) ? $meta['exc'] : '';
+            $exclude_icon = ! empty( $meta['exc_icon'] ) ? $meta['exc_icon'] : '';
+            $inc_sec_title = ! empty( $meta['inc_sec_title'] ) ? $meta['inc_sec_title'] : '';
+            $exc_sec_title = ! empty( $meta['exc_sec_title'] ) ? $meta['exc_sec_title'] : '';
+        } else {
             return;
         }
-	    $meta = get_post_meta( $this->post_id, 'tf_tours_opt', true );
-        $inc             = !empty(Helper::tf_data_types($meta['inc'])) ? Helper::tf_data_types($meta['inc']) : null;
-        $exc             = !empty(Helper::tf_data_types($meta['exc'])) ? Helper::tf_data_types($meta['exc']) : null;
-        $inc_icon        = ! empty( $meta['inc_icon'] ) ? $meta['inc_icon'] : null;
-        $exc_icon        = ! empty( $meta['exc_icon'] ) ? $meta['exc_icon'] : null;
-        $custom_inc_icon = ! empty( $inc_icon ) ? "custom-inc-icon" : '';
-        $custom_exc_icon = ! empty( $exc_icon ) ? "custom-exc-icon" : '';
-        $inc_exc_bg = ! empty( $meta['include-exclude-bg'] ) ? $meta['include-exclude-bg'] : '';
         $style = !empty($settings['included_excluded_style']) ? $settings['included_excluded_style'] : 'style1';
        
-        if($style == 'style1' && ($inc || $exc)){ ?>
+        if($this->post_type == 'tf_tours' && $style == 'style1' && ($inc || $exc)){ ?>
             <div class="tf-single-template__one">
                 <div class="tf-inex-wrapper tf-template-section">
                     <div class="tf-inex-inner tf-flex tf-flex-gap-24">
@@ -169,7 +183,7 @@ class Included_Excluded extends Widget_Base {
                 </div>
             </div>
             <?php 
-        } elseif($style == 'style2' && ($inc || $exc)){
+        } elseif($this->post_type == 'tf_tours' && $style == 'style2' && ($inc || $exc)){
             ?>
             <div class="tf-single-template__two">
                 <div class="tf-include-exclude-wrapper">
@@ -203,7 +217,7 @@ class Included_Excluded extends Widget_Base {
                 </div>
             </div>
             <?php
-        } elseif($style == 'style3' && ($inc || $exc)){
+        } elseif($this->post_type == 'tf_tours' && $style == 'style3' && ($inc || $exc)){
             ?>
             <div class="tf-single-template__legacy">
                 <div class="tf-inc-exc-wrapper sp-70" style="background-image: url(<?php echo esc_url( $inc_exc_bg ) ?>);">
@@ -235,6 +249,44 @@ class Included_Excluded extends Widget_Base {
                             <?php } ?>
                         </div>
                     </div>
+                </div>
+            </div>
+            <?php
+        } elseif($this->post_type == 'tf_carrental' && $style == 'style1' && !empty($inc_exc_status) &&($includes || $excludes)){
+            ?>
+            <div class="tf-car-inc-exc-section" id="tf-inc-exc">
+                <div class="tf-inc-exe tf-flex tf-flex-gap-16">
+                    <?php if(!empty($includes)){ ?>
+                    <div class="tf-inc-list">
+                        <?php if(!empty($inc_sec_title)){ ?>   
+                            <h3><?php echo esc_html($inc_sec_title); ?></h3>
+                        <?php } ?>
+                        <ul class="tf-flex tf-flex-gap-16 tf-flex-direction-column">
+                        <?php foreach($includes as $inc){ ?>
+                            <li class="tf-flex tf-flex-align-center tf-flex-gap-8">
+                                <i class="<?php echo !empty($include_icon) ? esc_attr($include_icon) : 'ri-check-double-line'; ?>"></i>
+                                <?php echo !empty($inc['title']) ? esc_html($inc['title']) : ''; ?>
+                            </li>
+                            <?php } ?>
+                        </ul>
+                    </div>
+                    <?php } ?>
+                    <?php if(!empty($excludes)){ ?>
+                    <div class="tf-exc-list">
+                        <?php if(!empty($exc_sec_title)){ ?>   
+                            <h3><?php echo esc_html($exc_sec_title); ?></h3>
+                        <?php } ?>
+                        <ul class="tf-flex tf-flex-gap-16 tf-flex-direction-column">
+                            <?php foreach($excludes as $exc){ ?>
+                            <li class="tf-flex tf-flex-align-center tf-flex-gap-8">
+                                <i class="<?php echo !empty($exclude_icon) ? esc_attr($exclude_icon) : 'ri-close-circle-line'; ?>"></i>
+                                <?php echo !empty($exc['title']) ? esc_html($exc['title']) : ''; ?>
+                            </li>
+                            <?php } ?>
+                        </ul>
+                    </div>
+                    <?php } ?>
+
                 </div>
             </div>
             <?php

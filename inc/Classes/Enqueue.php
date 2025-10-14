@@ -454,6 +454,9 @@ class Enqueue {
 			wp_register_style( 'tf-elementor-single-tour-contact-information', TF_PRO_ASSETS_URL . 'app/css/elementor/single/tour-contact-information.min.css', '', TF_VERSION );
 			wp_register_style( 'tf-elementor-single-house-rules', TF_PRO_ASSETS_URL . 'app/css/elementor/single/house-rules.min.css', '', TF_VERSION );
 			wp_register_style( 'tf-elementor-single-terms-and-conditions', TF_PRO_ASSETS_URL . 'app/css/elementor/single/terms-and-conditions.min.css', '', TF_VERSION );
+			wp_register_style( 'tf-elementor-single-car-info', TF_PRO_ASSETS_URL . 'app/css/elementor/single/car-info.min.css', '', TF_VERSION );
+			wp_register_style( 'tf-elementor-single-car-benefits', TF_PRO_ASSETS_URL . 'app/css/elementor/single/car-benefits.min.css', '', TF_VERSION );
+			wp_register_style( 'tf-elementor-single-car-driver-info', TF_PRO_ASSETS_URL . 'app/css/elementor/single/car-driver-info.min.css', '', TF_VERSION );
 
 			wp_enqueue_script( 'Chart-js',  TF_ASSETS_APP_URL . 'libs/chart/chart.js', array( 'jquery' ), '2.6.0', true );
 		}

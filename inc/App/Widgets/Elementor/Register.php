@@ -80,6 +80,10 @@ class Register {
             $widgets_manager->register( \Tourfic\App\Widgets\Elementor\Widgets\Single\Itinerary::instance() );
             $widgets_manager->register( \Tourfic\App\Widgets\Elementor\Widgets\Single\Tour_Contact_Information::instance() );
             $widgets_manager->register( \Tourfic\App\Widgets\Elementor\Widgets\Single\House_Rules::instance() );
+            $widgets_manager->register( \Tourfic\App\Widgets\Elementor\Widgets\Single\Car_Info::instance() );
+            $widgets_manager->register( \Tourfic\App\Widgets\Elementor\Widgets\Single\Car_Benefits::instance() );
+            $widgets_manager->register( \Tourfic\App\Widgets\Elementor\Widgets\Single\Car_Driver_Info::instance() );
+            $widgets_manager->register( \Tourfic\App\Widgets\Elementor\Widgets\Single\Car_Contact_Info::instance() );
         }
     }
 
