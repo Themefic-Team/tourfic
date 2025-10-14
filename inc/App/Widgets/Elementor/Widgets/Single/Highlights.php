@@ -89,27 +89,63 @@ class Highlights extends Widget_Base {
 			'tab'   => Controls_Manager::TAB_STYLE,
 		]);
 
-		$this->add_control( "bg_color", [
-			'label'     => __( 'Card Background Color', 'tourfic' ),
-			'type'      => Controls_Manager::COLOR,
-			'selectors' => [
-				"{{WRAPPER}} .tf-trip-feature-blocks .tf-feature-block" => 'background-color: {{VALUE}};',
-			],
+		$this->add_control( 'tf_title_heading', [
+			'type'  => Controls_Manager::HEADING,
+			'label' => __( 'Title', 'tourfic' ),
 		] );
 
-        // $this->add_control( "btn_color", [
-		// 	'label'     => __( 'Text Color', 'tourfic' ),
-		// 	'type'      => Controls_Manager::COLOR,
-		// 	'selectors' => [
-		// 		"{{WRAPPER}} .tf-single-action-btns a" => 'color: {{VALUE}};',
-		// 		"{{WRAPPER}} .tf-single-action-btns a svg path" => 'fill: {{VALUE}};',
-		// 	],
-		// ] );
+        $this->add_responsive_control('title_align',[
+			'label' => esc_html__('Alignment', 'tourfic'),
+			'type' => Controls_Manager::CHOOSE,
+			'options' => [
+				'left' => [
+					'title' => esc_html__('Left', 'tourfic'),
+					'icon' => 'eicon-text-align-left',
+				],
+				'center' => [
+					'title' => esc_html__('Center', 'tourfic'),
+					'icon' => 'eicon-text-align-center',
+				],
+				'right' => [
+					'title' => esc_html__('Right', 'tourfic'),
+					'icon' => 'eicon-text-align-right',
+				],
+			],
+			'toggle' => true,
+            'selectors'  => [
+				'{{WRAPPER}} .tf-section-title' => 'text-align: {{VALUE}};',
+				'{{WRAPPER}} h2.section-heading' => 'text-align: {{VALUE}};',
+			],
+		]);
 
-        // $this->add_group_control( Group_Control_Typography::get_type(), [
-		// 	'name'     => "btn_typography",
-		// 	'selector' => "{{WRAPPER}} .tf-single-action-btns a",
-		// ] );
+        $this->add_responsive_control( "title_margin", [
+			'label'      => __( 'Margin', 'tourfic' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				'{{WRAPPER}} .tf-section-title' => $this->tf_apply_dim( 'margin' ),
+				'{{WRAPPER}} h2.section-heading' => $this->tf_apply_dim( 'margin' ),
+			],
+		]);
+
+		$this->add_control( 'tf_title_color', [
+			'label'     => esc_html__( 'Title Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors'  => [
+				'{{WRAPPER}} .tf-section-title' => 'color: {{VALUE}};',
+				'{{WRAPPER}} h2.section-heading' => 'color: {{VALUE}};',
+			],
+		]);
+
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+            'label'    => esc_html__( 'Title Typography', 'tourfic' ),
+			'name'     => "tf_title_typography",
+			'selector' => "{{WRAPPER}} .tf-section-title, {{WRAPPER}} .section-heading",
+		]);
 
 		$this->end_controls_section();
 	}

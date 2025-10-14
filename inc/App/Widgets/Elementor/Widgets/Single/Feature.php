@@ -95,6 +95,44 @@ class Feature extends Widget_Base {
 			'label' => esc_html__( 'Feature Title Style', 'tourfic' ),
 			'tab'   => Controls_Manager::TAB_STYLE,
 		]);
+		
+		$this->add_responsive_control('title_align',[
+			'label' => esc_html__('Alignment', 'tourfic'),
+			'type' => Controls_Manager::CHOOSE,
+			'options' => [
+				'left' => [
+					'title' => esc_html__('Left', 'tourfic'),
+					'icon' => 'eicon-text-align-left',
+				],
+				'center' => [
+					'title' => esc_html__('Center', 'tourfic'),
+					'icon' => 'eicon-text-align-center',
+				],
+				'right' => [
+					'title' => esc_html__('Right', 'tourfic'),
+					'icon' => 'eicon-text-align-right',
+				],
+			],
+			'toggle' => true,
+            'selectors'  => [
+				'{{WRAPPER}} .tf-section-title' => 'text-align: {{VALUE}};',
+				'{{WRAPPER}} h2.section-heading' => 'text-align: {{VALUE}};',
+			],
+		]);
+
+        $this->add_responsive_control( "title_margin", [
+			'label'      => __( 'Margin', 'tourfic' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				'{{WRAPPER}} .tf-section-title' => $this->tf_apply_dim( 'margin' ),
+				'{{WRAPPER}} h2.section-heading' => $this->tf_apply_dim( 'margin' ),
+			],
+		]);
 
 		$this->add_control( 'tf_title_color', [
 			'label'     => esc_html__( 'Title Color', 'tourfic' ),
@@ -380,7 +418,7 @@ class Feature extends Widget_Base {
 				if ( ! empty( $fav_amenities ) ){
 				?>
 				<div class="tf-apartment-feature-style1 tf-place-offer-section">
-					<h2><?php echo ! empty( $meta['amenities_title'] ) ? esc_html($meta['amenities_title']) : ''; ?></h2>
+					<h2 class="tf-section-title"><?php echo ! empty( $meta['amenities_title'] ) ? esc_html($meta['amenities_title']) : ''; ?></h2>
 					<div class="place-offer-items">
 						<?php
 							foreach ( array_slice( $fav_amenities, 0, 10 ) as $amenity ) :

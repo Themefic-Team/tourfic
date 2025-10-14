@@ -159,7 +159,7 @@ class Gallery_Button extends Widget_Base {
 				"{{WRAPPER}} .tf-single-action-btns a" => 'color: {{VALUE}};',
 				"{{WRAPPER}} .tf-single-action-btns a svg path" => 'fill: {{VALUE}};',
 				"{{WRAPPER}} .tf-hero-hotel" => 'color: {{VALUE}};',
-				"{{WRAPPER}} .tf-hero-hotel svg path" => 'fill: {{VALUE}};',
+				"{{WRAPPER}} .tf-hero-hotel svg" => 'fill: {{VALUE}};',
 			],
 		] );
 		$this->add_control( "btn_bg_color", [
@@ -199,7 +199,7 @@ class Gallery_Button extends Widget_Base {
 				"{{WRAPPER}} .tf-single-action-btns a:hover" => 'color: {{VALUE}};',
 				"{{WRAPPER}} .tf-single-action-btns a:hover svg path" => 'fill: {{VALUE}};',
 				"{{WRAPPER}} .tf-hero-hotel:hover a" => 'color: {{VALUE}};',
-				"{{WRAPPER}} .tf-hero-hotel:hover svg path" => 'fill: {{VALUE}};',
+				"{{WRAPPER}} .tf-hero-hotel:hover svg" => 'fill: {{VALUE}};',
 			],
 		] );
 		

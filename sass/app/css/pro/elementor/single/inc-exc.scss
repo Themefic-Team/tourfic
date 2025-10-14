@@ -2,7 +2,7 @@
 @import '../../../../../common/mixin';
 
 .tf-single-template{
-    &__legacy{
+    &__legacy.tf-single-tour-inc-exc-legacy{
         padding: 0;
         .tf-inc-exc-wrapper {
             background-position: center center;
@@ -115,7 +115,7 @@
             }
         }
     }
-    &__one{
+    &__one.tf-single-tour-inc-exc-style1{
         padding: 0;
         .tf-inex-wrapper {
             .tf-inex {
@@ -134,7 +134,7 @@
             }
         }
     }
-    &__two{
+    &__two.tf-single-tour-inc-exc-style2{
         padding: 0;
         .tf-include-exclude-wrapper {
             h2{

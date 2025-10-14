@@ -697,6 +697,11 @@
             padding: 0;
         }
         .tf_form-inner {
+            @include flexbox();
+            align-items: center;
+            i{
+                margin-bottom: 1px;
+            }
             input[type="text"] {
                 background: transparent;
                 padding: 5px 15px;

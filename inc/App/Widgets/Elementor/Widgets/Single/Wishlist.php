@@ -203,14 +203,14 @@ class Wishlist extends Widget_Base {
 			'label'     => esc_html__( 'Icon Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
-				"{{WRAPPER}} .tf-wishlist-icon:hover i" => 'color: {{VALUE}};',
+				"{{WRAPPER}} .tf-wishlist-icon i.tf-text-red" => 'color: {{VALUE}};',
 			],
 		] );
 		$this->add_control( 'wishlist_icon_bg_color_hover', [
 			'label'     => esc_html__( 'Background Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
-				"{{WRAPPER}} .tf-wishlist-icon i:hover" => 'background-color: {{VALUE}};',
+				"{{WRAPPER}} .tf-wishlist-icon i.tf-text-red" => 'background-color: {{VALUE}};',
 			],
             'condition' => [
 				'icon_type' => 'rounded',
@@ -220,7 +220,7 @@ class Wishlist extends Widget_Base {
 			'label'     => esc_html__( 'Border Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
-				"{{WRAPPER}} .tf-wishlist-icon i:hover" => 'border-color: {{VALUE}};',
+				"{{WRAPPER}} .tf-wishlist-icon i.tf-text-red" => 'border-color: {{VALUE}};',
 			],
             'condition' => [
 				'icon_type' => 'rounded',

@@ -94,27 +94,63 @@ class Included_Excluded extends Widget_Base {
 			'tab'   => Controls_Manager::TAB_STYLE,
 		]);
 
-		$this->add_control( "bg_color", [
-			'label'     => __( 'Card Background Color', 'tourfic' ),
-			'type'      => Controls_Manager::COLOR,
-			'selectors' => [
-				"{{WRAPPER}} .tf-trip-feature-blocks .tf-feature-block" => 'background-color: {{VALUE}};',
-			],
+		$this->add_control( 'tf_title_heading', [
+			'type'  => Controls_Manager::HEADING,
+			'label' => __( 'Title', 'tourfic' ),
 		] );
 
-        // $this->add_control( "btn_color", [
-		// 	'label'     => __( 'Text Color', 'tourfic' ),
-		// 	'type'      => Controls_Manager::COLOR,
-		// 	'selectors' => [
-		// 		"{{WRAPPER}} .tf-single-action-btns a" => 'color: {{VALUE}};',
-		// 		"{{WRAPPER}} .tf-single-action-btns a svg path" => 'fill: {{VALUE}};',
-		// 	],
-		// ] );
+        $this->add_responsive_control('title_align',[
+			'label' => esc_html__('Alignment', 'tourfic'),
+			'type' => Controls_Manager::CHOOSE,
+			'options' => [
+				'left' => [
+					'title' => esc_html__('Left', 'tourfic'),
+					'icon' => 'eicon-text-align-left',
+				],
+				'center' => [
+					'title' => esc_html__('Center', 'tourfic'),
+					'icon' => 'eicon-text-align-center',
+				],
+				'right' => [
+					'title' => esc_html__('Right', 'tourfic'),
+					'icon' => 'eicon-text-align-right',
+				],
+			],
+			'toggle' => true,
+            'selectors'  => [
+				'{{WRAPPER}} .tf-section-title' => 'text-align: {{VALUE}};',
+				'{{WRAPPER}} h2.section-heading' => 'text-align: {{VALUE}};',
+			],
+		]);
 
-        // $this->add_group_control( Group_Control_Typography::get_type(), [
-		// 	'name'     => "btn_typography",
-		// 	'selector' => "{{WRAPPER}} .tf-single-action-btns a",
-		// ] );
+        $this->add_responsive_control( "title_margin", [
+			'label'      => __( 'Margin', 'tourfic' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				'{{WRAPPER}} .tf-section-title' => $this->tf_apply_dim( 'margin' ),
+				'{{WRAPPER}} h2.section-heading' => $this->tf_apply_dim( 'margin' ),
+			],
+		]);
+
+		$this->add_control( 'tf_title_color', [
+			'label'     => esc_html__( 'Title Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors'  => [
+				'{{WRAPPER}} .tf-section-title' => 'color: {{VALUE}};',
+				'{{WRAPPER}} h2.section-heading' => 'color: {{VALUE}};',
+			],
+		]);
+
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+            'label'    => esc_html__( 'Title Typography', 'tourfic' ),
+			'name'     => "tf_title_typography",
+			'selector' => "{{WRAPPER}} .tf-section-title, {{WRAPPER}} .section-heading",
+		]);
 
 		$this->end_controls_section();
 	}
@@ -148,7 +184,7 @@ class Included_Excluded extends Widget_Base {
         $style = !empty($settings['included_excluded_style']) ? $settings['included_excluded_style'] : 'style1';
        
         if($this->post_type == 'tf_tours' && $style == 'style1' && ($inc || $exc)){ ?>
-            <div class="tf-single-template__one">
+            <div class="tf-single-template__one tf-single-tour-inc-exc-style1">
                 <div class="tf-inex-wrapper tf-template-section">
                     <div class="tf-inex-inner tf-flex tf-flex-gap-24">
                         <?php if ( $inc ) { ?>
@@ -185,7 +221,7 @@ class Included_Excluded extends Widget_Base {
             <?php 
         } elseif($this->post_type == 'tf_tours' && $style == 'style2' && ($inc || $exc)){
             ?>
-            <div class="tf-single-template__two">
+            <div class="tf-single-template__two tf-single-tour-inc-exc-style2">
                 <div class="tf-include-exclude-wrapper">
                     <h2 class="tf-section-title"><?php esc_html_e("Include/Exclude", "tourfic"); ?></h2>
                     <div class="tf-include-exclude-innter">
@@ -219,13 +255,13 @@ class Included_Excluded extends Widget_Base {
             <?php
         } elseif($this->post_type == 'tf_tours' && $style == 'style3' && ($inc || $exc)){
             ?>
-            <div class="tf-single-template__legacy">
+            <div class="tf-single-template__legacy tf-single-tour-inc-exc-legacy">
                 <div class="tf-inc-exc-wrapper sp-70" style="background-image: url(<?php echo esc_url( $inc_exc_bg ) ?>);">
                     <div class="tf-container">
                         <div class="tf-inc-exc-content">
                             <?php if ( $inc ) { ?>
                                 <div class="tf-include-section <?php echo esc_attr( $custom_inc_icon ); ?>">
-                                    <h2><?php esc_html_e( 'Included', 'tourfic' ); ?></h2>
+                                    <h2 class="tf-section-title"><?php esc_html_e( 'Included', 'tourfic' ); ?></h2>
                                     <ul>
                                         <?php
                                         foreach ( $inc as $key => $val ) {
@@ -237,7 +273,7 @@ class Included_Excluded extends Widget_Base {
                             <?php } ?>
                             <?php if ( $exc ) { ?>
                                 <div class="tf-exclude-section <?php echo esc_attr( $custom_exc_icon ); ?>">
-                                    <h2><?php esc_html_e( 'Excluded', 'tourfic' ); ?></h2>
+                                    <h2 class="tf-section-title"><?php esc_html_e( 'Excluded', 'tourfic' ); ?></h2>
                                     <ul>
                                         <?php
                                         foreach ( $exc as $key => $val ) {
@@ -259,7 +295,7 @@ class Included_Excluded extends Widget_Base {
                     <?php if(!empty($includes)){ ?>
                     <div class="tf-inc-list">
                         <?php if(!empty($inc_sec_title)){ ?>   
-                            <h3><?php echo esc_html($inc_sec_title); ?></h3>
+                            <h3 class="tf-section-title"><?php echo esc_html($inc_sec_title); ?></h3>
                         <?php } ?>
                         <ul class="tf-flex tf-flex-gap-16 tf-flex-direction-column">
                         <?php foreach($includes as $inc){ ?>
@@ -274,7 +310,7 @@ class Included_Excluded extends Widget_Base {
                     <?php if(!empty($excludes)){ ?>
                     <div class="tf-exc-list">
                         <?php if(!empty($exc_sec_title)){ ?>   
-                            <h3><?php echo esc_html($exc_sec_title); ?></h3>
+                            <h3 class="tf-section-title"><?php echo esc_html($exc_sec_title); ?></h3>
                         <?php } ?>
                         <ul class="tf-flex tf-flex-gap-16 tf-flex-direction-column">
                             <?php foreach($excludes as $exc){ ?>

@@ -2,7 +2,7 @@
 @import '../../../../../common/mixin';
 
 .tf-single-template{
-    &__legacy{
+    &__legacy.tf-single-itinerary-legacy{
         padding: 0;
         .tf-travel-itinerary-wrapper{
             .tf-travel-itinerary-content {
@@ -128,7 +128,7 @@
             }
         }
     }
-    &__one{
+    &__one.tf-single-itinerary-style1{
         padding: 0;
         .tf-itinerary-wrapper{
             .tf-itinerary-box {
@@ -310,7 +310,7 @@
             }
         }
     }
-    &__two{
+    &__two.tf-single-itinerary-style2{
         padding: 0;
         .tf-itinerary-wrapper {
             display: flex;

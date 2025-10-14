@@ -210,7 +210,7 @@ class Review extends Widget_Base {
             <?php
         } elseif ($style == 'design-2' && $disable_review_sec != 1) {
             ?>
-			<div class="tf-single-template__two">
+			<div class="tf-single-template__two tf-single-review__style-2">
                 <div class="tf-sitebar-widgets tf-single-widgets">
                     <?php
                     global $current_user;
@@ -388,7 +388,7 @@ class Review extends Widget_Base {
             <?php
         } elseif ($style == 'design-2' && $disable_review_sec != 1) {
             ?>
-			<div class="tf-single-template__two">
+			<div class="tf-single-template__two tf-single-review__style-2">
                 <div class="tf-sitebar-widgets tf-single-widgets">
                     <?php
                     global $current_user;
@@ -551,7 +551,7 @@ class Review extends Widget_Base {
 		
 		if ($style == 'design-2' && $disable_review_sec != 1) {
             ?>
-			<div class="tf-single-template__two">
+			<div class="tf-single-template__two tf-single-review__style-2">
                 <div class="tf-sitebar-widgets tf-single-widgets">
                     <?php
                     global $current_user;

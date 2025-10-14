@@ -204,7 +204,7 @@ class Terms_And_Conditions extends Widget_Base {
 				</div>
             </div>
 		<?php }elseif(!empty($tc)){ ?>
-			<div class="tf-toc-wrapper">
+			<div class="tf-toc-wrapper" id="tf-hotel-policies">
 				<div class="tf-section-head">
 					<h2 class="tf-section-title"><?php echo esc_html($tc_title); ?></h2>
 				</div>

@@ -134,7 +134,7 @@ class Sticky_Nav extends Widget_Base {
                         <?php esc_html_e("Overview", "tourfic"); ?>
                     </a></li>
 
-                    <?php if( !empty($meta['room']))  : ?>
+                    <?php if( !empty($meta['tf_rooms']))  : ?>
                         <li><a href="#tf-hotel-rooms">
                             <?php esc_html_e("Rooms", "tourfic"); ?>
                         </a></li>

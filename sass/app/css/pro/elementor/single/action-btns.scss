@@ -26,10 +26,6 @@
             background-color: $color-primary;
             color: $color-white;
             transition: all .6s ease;
-
-            svg path{
-                fill: $color-white;
-            }
         }
         i{
             line-height: inherit;
