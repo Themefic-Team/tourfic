@@ -56,7 +56,11 @@ class Enquiry extends Widget_Base {
 		$this->tf_content_layout_controls();
 
 		do_action( 'tf/single-enquiry/before-style-controls', $this );
-		$this->tf_enquiry_style_controls();
+		$this->tf_card_style_controls();
+		$this->tf_icon_style_controls();
+		$this->tf_title_style_controls();
+		$this->tf_content_style_controls();
+		$this->tf_button_style_controls();
 		do_action( 'tf/single-enquiry/after-style-controls', $this );
 	}
 
@@ -92,14 +96,66 @@ class Enquiry extends Widget_Base {
         $this->end_controls_section();
     }
 
-    protected function tf_enquiry_style_controls() {
-		$this->start_controls_section( 'enquiry_style_section', [
-			'label' => esc_html__( 'Style', 'tourfic' ),
+	protected function tf_card_style_controls() {
+		$this->start_controls_section( 'card_style', [
+			'label' => esc_html__( 'Card Style', 'tourfic' ),
+			'tab'   => Controls_Manager::TAB_STYLE,
+			'condition' => [
+				'enquiry_style' => 'style1',
+			],
+		] );
+
+		$this->add_responsive_control( "card_padding", [
+			'label'      => esc_html__( 'Padding', 'tourfic' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .tf-single-enquiry-style-1.tf-ask-enquiry" => $this->tf_apply_dim( 'padding' ),
+			],
+		] );
+
+		$this->add_control( 'card_bg_color', [
+			'label'     => esc_html__( 'Background Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .tf-single-enquiry-style-1.tf-ask-enquiry" => 'background-color: {{VALUE}};',
+			],
+		] );
+		$this->add_group_control( Group_Control_Border::get_type(), [
+			'name'     => "card_border",
+			'selector' => "{{WRAPPER}} .tf-single-enquiry-style-1.tf-ask-enquiry",
+		] );
+		$this->add_control( "card_border_radius", [
+			'label'      => esc_html__( 'Border Radius', 'tourfic' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .tf-single-enquiry-style-1.tf-ask-enquiry" => $this->tf_apply_dim( 'border-radius' ),
+			],
+		] );
+		$this->add_group_control(Group_Control_Box_Shadow::get_type(), [
+			'name' => 'card_shadow',
+			'selector' => '{{WRAPPER}} .tf-single-enquiry-style-1.tf-ask-enquiry',
+		]);
+		
+		$this->end_controls_section();
+	}
+
+    protected function tf_icon_style_controls() {
+		$this->start_controls_section( 'icon_style_section', [
+			'label' => esc_html__( 'Icon Style', 'tourfic' ),
 			'tab'   => Controls_Manager::TAB_STYLE,
 		]);
 
         $this->add_responsive_control( "tf_icon_size", [
-			'label'      => esc_html__( 'Icon Size', 'tourfic' ),
+			'label'      => esc_html__( 'Size', 'tourfic' ),
 			'type'       => Controls_Manager::SLIDER,
 			'size_units' => [
 				'px',
@@ -119,21 +175,36 @@ class Enquiry extends Widget_Base {
 		] );
 
         $this->add_control( 'tf_icon_color', [
-			'label'     => esc_html__( 'Icon Color', 'tourfic' ),
+			'label'     => esc_html__( 'Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors'  => [
 				'{{WRAPPER}} .tf-ask-enquiry i' => 'color: {{VALUE}};',
 				'{{WRAPPER}} .tf-apartment-question-icon i' => 'color: {{VALUE}};',
 			],
 		]);
+		
+		$this->add_control( 'tf_icon_bg_color', [
+			'label'     => esc_html__( 'Background Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors'  => [
+				'{{WRAPPER}} .tf-single-enquiry-style-1.tf-ask-enquiry i' => 'background-color: {{VALUE}};',
+			],
+			'condition' => [
+				'icon_type' => 'rounded',
+			],
+		]);
 
-		$this->add_control( 'tf_title_heading', [
-			'type'  => Controls_Manager::HEADING,
-			'label' => __( 'Title', 'tourfic' ),
+		$this->end_controls_section();
+	}
+
+    protected function tf_title_style_controls() {
+		$this->start_controls_section( 'title_style', [
+			'label' => esc_html__( 'Title Style', 'tourfic' ),
+			'tab'   => Controls_Manager::TAB_STYLE,
 		] );
 
         $this->add_control( 'tf_title_color', [
-			'label'     => esc_html__( 'Title Color', 'tourfic' ),
+			'label'     => esc_html__( 'Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors'  => [
 				'{{WRAPPER}} .tf-enquiry-title' => 'color: {{VALUE}};',
@@ -141,14 +212,17 @@ class Enquiry extends Widget_Base {
 		]);
 
 		$this->add_group_control( Group_Control_Typography::get_type(), [
-            'label'    => esc_html__( 'Title Typography', 'tourfic' ),
+            'label'    => esc_html__( 'Typography', 'tourfic' ),
 			'name'     => "tf_title_typography",
 			'selector' => "{{WRAPPER}} .tf-enquiry-title",
 		]);
+		$this->end_controls_section();
+	}
 
-        $this->add_control( 'tf_content_heading', [
-			'type'  => Controls_Manager::HEADING,
-			'label' => __( 'Content', 'tourfic' ),
+    protected function tf_content_style_controls() {
+        $this->start_controls_section( 'content_style', [
+			'label' => esc_html__( 'Content Style', 'tourfic' ),
+			'tab'   => Controls_Manager::TAB_STYLE,
 		] );
 
 		$this->add_control( 'tf_enquiry_content_color', [
@@ -164,10 +238,13 @@ class Enquiry extends Widget_Base {
 			'name'     => "tf_enquiry_content_typography",
 			'selector' => "{{WRAPPER}} .tf-enquiry-content",
 		]);
+		$this->end_controls_section();
+	}
 
-        $this->add_control( 'tf_btn_heading', [
-			'type'  => Controls_Manager::HEADING,
-			'label' => __( 'Button', 'tourfic' ),
+    protected function tf_button_style_controls() {
+        $this->start_controls_section( 'button_style', [
+			'label' => esc_html__( 'Button Style', 'tourfic' ),
+			'tab'   => Controls_Manager::TAB_STYLE,
 		] );
 
         $this->add_group_control( Group_Control_Typography::get_type(), [
@@ -288,7 +365,6 @@ class Enquiry extends Widget_Base {
 				"{{WRAPPER}} .tf_btn" => 'height: {{SIZE}}{{UNIT}};',
 			],
 		] );
-
 		$this->end_controls_section();
 	}
 

@@ -46,7 +46,7 @@ class Terms_And_Conditions extends Widget_Base {
 
 	protected function register_controls() {
 
-		$this->tf_content_layout_controls();
+		//$this->tf_content_layout_controls();
 
 		do_action( 'tf/single-terms-and-conditions/before-style-controls', $this );
 		$this->tf_terms_and_conditions_style_controls();
@@ -59,51 +59,7 @@ class Terms_And_Conditions extends Widget_Base {
         ]);
 
         do_action( 'tf/single-terms-and-conditions/before-content/controls', $this );
-
-		$this->add_responsive_control('title-align',[
-			'label' => esc_html__('Title Alignment', 'tourfic'),
-			'type' => Controls_Manager::CHOOSE,
-			'options' => [
-				'left' => [
-					'title' => esc_html__('Left', 'tourfic'),
-					'icon' => 'eicon-text-align-left',
-				],
-				'center' => [
-					'title' => esc_html__('Center', 'tourfic'),
-					'icon' => 'eicon-text-align-center',
-				],
-				'right' => [
-					'title' => esc_html__('Right', 'tourfic'),
-					'icon' => 'eicon-text-align-right',
-				],
-			],
-			'toggle' => true,
-			'selectors' => [
-				'{{WRAPPER}} .tf-section-title' => 'text-align: {{VALUE}};',
-			]
-		]);
-		$this->add_responsive_control('content-align',[
-			'label' => esc_html__('Content Alignment', 'tourfic'),
-			'type' => Controls_Manager::CHOOSE,
-			'options' => [
-				'left' => [
-					'title' => esc_html__('Left', 'tourfic'),
-					'icon' => 'eicon-text-align-left',
-				],
-				'center' => [
-					'title' => esc_html__('Center', 'tourfic'),
-					'icon' => 'eicon-text-align-center',
-				],
-				'right' => [
-					'title' => esc_html__('Right', 'tourfic'),
-					'icon' => 'eicon-text-align-right',
-				],
-			],
-			'toggle' => true,
-			'selectors' => [
-				'{{WRAPPER}} .tf-toc-content' => 'text-align: {{VALUE}};',
-			]
-		]);
+		
 
 	    do_action( 'tf/single-terms-and-conditions/after-content/controls', $this );
 
@@ -135,6 +91,44 @@ class Terms_And_Conditions extends Widget_Base {
 			'selector' => "{{WRAPPER}} .tf-section-title",
 		]);
 
+		$this->add_responsive_control('title_align',[
+			'label' => esc_html__('Alignment', 'tourfic'),
+			'type' => Controls_Manager::CHOOSE,
+			'options' => [
+				'left' => [
+					'title' => esc_html__('Left', 'tourfic'),
+					'icon' => 'eicon-text-align-left',
+				],
+				'center' => [
+					'title' => esc_html__('Center', 'tourfic'),
+					'icon' => 'eicon-text-align-center',
+				],
+				'right' => [
+					'title' => esc_html__('Right', 'tourfic'),
+					'icon' => 'eicon-text-align-right',
+				],
+			],
+			'toggle' => true,
+            'selectors'  => [
+				'{{WRAPPER}} .tf-section-title' => 'text-align: {{VALUE}};',
+				'{{WRAPPER}} h2.section-heading' => 'text-align: {{VALUE}};',
+			],
+		]);
+
+        $this->add_responsive_control( "title_margin", [
+			'label'      => __( 'Margin', 'tourfic' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				'{{WRAPPER}} .tf-section-title' => $this->tf_apply_dim( 'margin' ),
+				'{{WRAPPER}} h2.section-heading' => $this->tf_apply_dim( 'margin' ),
+			],
+		]);
+
         $this->add_control( 'tf_content_heading', [
 			'type'  => Controls_Manager::HEADING,
 			'label' => __( 'Content', 'tourfic' ),
@@ -152,6 +146,29 @@ class Terms_And_Conditions extends Widget_Base {
             'label'    => esc_html__( 'Typography', 'tourfic' ),
 			'name'     => "tf_terms_typography",
 			'selector' => "{{WRAPPER}} .tf-toc-content",
+		]);
+
+		$this->add_responsive_control('content-align',[
+			'label' => esc_html__('Content Alignment', 'tourfic'),
+			'type' => Controls_Manager::CHOOSE,
+			'options' => [
+				'left' => [
+					'title' => esc_html__('Left', 'tourfic'),
+					'icon' => 'eicon-text-align-left',
+				],
+				'center' => [
+					'title' => esc_html__('Center', 'tourfic'),
+					'icon' => 'eicon-text-align-center',
+				],
+				'right' => [
+					'title' => esc_html__('Right', 'tourfic'),
+					'icon' => 'eicon-text-align-right',
+				],
+			],
+			'toggle' => true,
+			'selectors' => [
+				'{{WRAPPER}} .tf-toc-content' => 'text-align: {{VALUE}};',
+			]
 		]);
 
 		$this->end_controls_section();
@@ -214,5 +231,14 @@ class Terms_And_Conditions extends Widget_Base {
 			</div>
         <?php 
         }
+	}
+
+	/**
+	 * Apply CSS property to the widget
+     * @param $css_property
+     * @return string
+     */
+	public function tf_apply_dim( $css_property, $important = false ) {
+		return "{$css_property}: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}} " . ($important ? '!important' : '') . ";";
 	}
 }
