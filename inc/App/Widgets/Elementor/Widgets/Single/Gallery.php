@@ -124,14 +124,12 @@ class Gallery extends Widget_Base {
 					'step' => 1,
 				],
 			],
-			'default'   => [
-				'unit' => 'px',
-				'size' => 474,
-			],
 			'size_units' => ['px', 'em', '%'],
 			'selectors'  => [
 				'{{WRAPPER}} .tf-single-gallery__style-1.tf-hero-gallery .tf-gallery-featured>img' => 'max-height: {{SIZE}}{{UNIT}}; min-height: {{SIZE}}{{UNIT}};',
 				'{{WRAPPER}} .tf-single-gallery__style-2.tf-hero-gallery .single-slider-wrapper .slick-slide img' => 'height: {{SIZE}}{{UNIT}};',
+				'{{WRAPPER}} .tf-single-template__one.tf-single-car-gallery-style-1 .tf-car-hero-gallery .tf-featured-car img' => 'height: {{SIZE}}{{UNIT}};',
+				'{{WRAPPER}} .tf-apt-hero-section.tf-single-gallery__style-3 .tf-apt-hero-wrapper .tf-apt-hero-gallery .tf-apt-hero-left .hero-first-image' => 'height: {{SIZE}}{{UNIT}};',
 			],
 		]);
 
@@ -143,8 +141,10 @@ class Gallery extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				'{{WRAPPER}} .tf-single-gallery__style-1.tf-hero-gallery .tf-gallery-featured>img' => $this->tf_apply_dim( 'border-radius' ), //default
-				'{{WRAPPER}} .tf-single-gallery__style-2.tf-hero-gallery .single-slider-wrapper .slick-slide img' => $this->tf_apply_dim( 'border-radius' ), //default
+				'{{WRAPPER}} .tf-single-gallery__style-1.tf-hero-gallery .tf-gallery-featured>img' => $this->tf_apply_dim( 'border-radius' ),
+				'{{WRAPPER}} .tf-single-gallery__style-2.tf-hero-gallery .single-slider-wrapper .slick-slide img' => $this->tf_apply_dim( 'border-radius' ),
+				'{{WRAPPER}} .tf-single-template__one.tf-single-car-gallery-style-1 .tf-car-hero-gallery .tf-featured-car img' => $this->tf_apply_dim( 'border-radius' ),
+				'{{WRAPPER}} .tf-apt-hero-section.tf-single-gallery__style-3 .tf-apt-hero-wrapper .tf-apt-hero-gallery .tf-apt-hero-left .hero-first-image img' => $this->tf_apply_dim( 'border-radius' ),
 			],
 		] );
 
@@ -161,12 +161,9 @@ class Gallery extends Widget_Base {
 					'step' => 1,
 				],
 			],
-			'default'   => [
-				'unit' => 'px',
-				'size' => 18,
-			],
 			'selectors'  => [
 				"{{WRAPPER}} .tf-single-gallery__style-1.tf-hero-gallery .tf-gallery-featured" => 'margin-bottom: {{SIZE}}{{UNIT}};',
+				"{{WRAPPER}} .tf-single-template__one.tf-single-car-gallery-style-1 .tf-car-hero-gallery .tf-gallery" => 'margin-top: {{SIZE}}{{UNIT}};',
 			],
 			'condition' => [
 				'gallery_style' => 'style1',
@@ -181,7 +178,7 @@ class Gallery extends Widget_Base {
 			'label' => esc_html__( 'Nav Item Style', 'tourfic' ),
 			'tab'   => Controls_Manager::TAB_STYLE,
 			'condition' => [
-				'gallery_style' => 'style1',
+				'gallery_style' => ['style1', 'style3'],
 			],
 		] );
 		
@@ -205,13 +202,12 @@ class Gallery extends Widget_Base {
 					'step' => 1,
 				],
 			],
-			'default'   => [
-				'unit' => 'px',
-				'size' => 112,
-			],
 			'size_units' => ['px', 'em', '%'],
 			'selectors'  => [
 				'{{WRAPPER}} .tf-single-gallery__style-1.tf-hero-gallery .tf-gallery a img' => 'max-height: {{SIZE}}{{UNIT}}; min-height: {{SIZE}}{{UNIT}};',
+				'{{WRAPPER}} .tf-single-template__one.tf-single-car-gallery-style-1 .tf-car-hero-gallery .tf-gallery a' => 'height: {{SIZE}}{{UNIT}};',
+				'{{WRAPPER}} .tf-apt-hero-section.tf-single-gallery__style-3 .tf-apt-hero-wrapper .tf-apt-hero-gallery .tf-apt-hero-right .hero-second-image' => 'height: {{SIZE}}{{UNIT}};',
+				'{{WRAPPER}} .tf-apt-hero-section.tf-single-gallery__style-3 .tf-apt-hero-wrapper .tf-apt-hero-gallery .tf-apt-hero-right .hero-third-image' => 'height: {{SIZE}}{{UNIT}};',
 			],
 		]);
 
@@ -223,8 +219,12 @@ class Gallery extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				'{{WRAPPER}} .tf-single-gallery__style-1.tf-hero-gallery .tf-gallery a img' => $this->tf_apply_dim( 'border-radius' ), //default
-				'{{WRAPPER}} .tf-single-gallery__style-1.tf-hero-gallery .tf-gallery a.tf-gallery-more::before' => $this->tf_apply_dim( 'border-radius' ), //default
+				'{{WRAPPER}} .tf-single-gallery__style-1.tf-hero-gallery .tf-gallery a img' => $this->tf_apply_dim( 'border-radius' ),
+				'{{WRAPPER}} .tf-single-gallery__style-1.tf-hero-gallery .tf-gallery a.tf-gallery-more::before' => $this->tf_apply_dim( 'border-radius' ),
+				'{{WRAPPER}} .tf-single-template__one.tf-single-car-gallery-style-1 .tf-car-hero-gallery .tf-gallery a img' => $this->tf_apply_dim( 'border-radius' ),
+				'{{WRAPPER}} .tf-single-template__one.tf-single-car-gallery-style-1 .tf-car-hero-gallery .tf-gallery a.tf-gallery-more::before' => $this->tf_apply_dim( 'border-radius' ),
+				'{{WRAPPER}} .tf-apt-hero-section.tf-single-gallery__style-3 .tf-apt-hero-wrapper .tf-apt-hero-gallery .tf-apt-hero-right .hero-second-image img' => $this->tf_apply_dim( 'border-radius' ),
+				'{{WRAPPER}} .tf-apt-hero-section.tf-single-gallery__style-3 .tf-apt-hero-wrapper .tf-apt-hero-gallery .tf-apt-hero-right .hero-third-image img' => $this->tf_apply_dim( 'border-radius' ),
 			],
 		] );
 
@@ -236,17 +236,15 @@ class Gallery extends Widget_Base {
 			],
 			'range'      => [
 				'px' => [
-					'min'  => 5,
+					'min'  => 0,
 					'max'  => 100,
 					'step' => 1,
 				],
 			],
-			'default'   => [
-				'unit' => 'px',
-				'size' => 10,
-			],
 			'selectors'  => [
 				"{{WRAPPER}} .tf-single-gallery__style-1.tf-hero-gallery .tf-gallery" => 'gap: {{SIZE}}{{UNIT}};',
+				"{{WRAPPER}} .tf-single-template__one.tf-single-car-gallery-style-1 .tf-car-hero-gallery .tf-gallery" => 'gap: {{SIZE}}{{UNIT}};',
+				"{{WRAPPER}} .tf-apt-hero-section.tf-single-gallery__style-3 .tf-apt-hero-wrapper .tf-apt-hero-gallery .tf-apt-hero-right" => 'gap: {{SIZE}}{{UNIT}};',
 			],
 		] );
 
@@ -259,6 +257,7 @@ class Gallery extends Widget_Base {
 			'tab'   => Controls_Manager::TAB_STYLE,
 			'condition' => [
 				'show_review' => 'yes',
+				'gallery_style' => ['style1', 'style2'],
 			],
 		]);
 
@@ -267,6 +266,7 @@ class Gallery extends Widget_Base {
 			'type'      => Controls_Manager::COLOR,
 			'selectors'  => [
 				'{{WRAPPER}} .tf-hero-gallery .tf-single-rating' => 'color: {{VALUE}};',
+				'{{WRAPPER}} .tf-single-template__one.tf-single-car-gallery-style-1 .tf-car-hero-gallery .tf-featured-car .tf-featured-reviews a' => 'color: {{VALUE}};',
 			],
 		]);
 
@@ -275,7 +275,9 @@ class Gallery extends Widget_Base {
 			'name'     => "tf_review_typography",
 			'selector' => "{{WRAPPER}} .tf-single-gallery__style-1.tf-hero-gallery .tf-gallery-featured .tf-single-review-box .tf-single-rating, 
 						   {{WRAPPER}} .tf-hero-gallery .tf-single-rating,
-						   {{WRAPPER}} .tf-hero-gallery .tf-single-rating span",
+						   {{WRAPPER}} .tf-hero-gallery .tf-single-rating span,
+						   {{WRAPPER}} .tf-single-template__one.tf-single-car-gallery-style-1 .tf-car-hero-gallery .tf-featured-car .tf-featured-reviews a,
+						   {{WRAPPER}} .tf-single-template__one.tf-single-car-gallery-style-1 .tf-car-hero-gallery .tf-featured-car .tf-featured-reviews a span",
 		]);
 
 		$this->add_responsive_control( "tf_review_icon_size", [
@@ -294,10 +296,11 @@ class Gallery extends Widget_Base {
 			],
 			'selectors'  => [
 				"{{WRAPPER}} .tf-hero-gallery .tf-single-rating i" => 'font-size: {{SIZE}}{{UNIT}}',
+				"{{WRAPPER}} .tf-single-template__one.tf-single-car-gallery-style-1 .tf-car-hero-gallery .tf-featured-car .tf-featured-reviews a i" => 'font-size: {{SIZE}}{{UNIT}}',
 			],
-			'condition' => [
-				'gallery_style' => 'style2',
-			],
+			// 'condition' => [
+			// 	'gallery_style' => 'style2',
+			// ],
 		] );
 
 		$this->add_control( "tf_review_icon_color", [
@@ -305,10 +308,11 @@ class Gallery extends Widget_Base {
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
 				"{{WRAPPER}} .tf-hero-gallery .tf-single-rating i" => 'color: {{VALUE}}',
+				"{{WRAPPER}} .tf-single-template__one.tf-single-car-gallery-style-1 .tf-car-hero-gallery .tf-featured-car .tf-featured-reviews a i" => 'color: {{VALUE}}',
 			],
-			'condition' => [
-				'gallery_style' => 'style2',
-			],
+			// 'condition' => [
+			// 	'gallery_style' => 'style2',
+			// ],
 		] );
 
 		$this->add_control( "review_bg_color", [
@@ -316,12 +320,14 @@ class Gallery extends Widget_Base {
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
 				"{{WRAPPER}} .tf-hero-gallery .tf-single-rating" => 'background-color: {{VALUE}}',
+				"{{WRAPPER}} .tf-single-template__one.tf-single-car-gallery-style-1 .tf-car-hero-gallery .tf-featured-car .tf-featured-reviews a" => 'background-color: {{VALUE}}',
 			],
 		] );
 
 		$this->add_group_control( Group_Control_Border::get_type(), [
 			'name'     => "review_border",
-			'selector' => "{{WRAPPER}} .tf-hero-gallery .tf-single-rating",
+			'selector' => "{{WRAPPER}} .tf-hero-gallery .tf-single-rating,
+						   {{WRAPPER}} .tf-single-template__one.tf-single-car-gallery-style-1 .tf-car-hero-gallery .tf-featured-car .tf-featured-reviews a",
 		]);
 
 		$this->add_control( "review_border_radius", [
@@ -333,12 +339,14 @@ class Gallery extends Widget_Base {
 			],
 			'selectors'  => [
 				'{{WRAPPER}} .tf-hero-gallery .tf-single-rating' => $this->tf_apply_dim( 'border-radius' ),
+				'{{WRAPPER}} .tf-single-template__one.tf-single-car-gallery-style-1 .tf-car-hero-gallery .tf-featured-car .tf-featured-reviews a' => $this->tf_apply_dim( 'border-radius' ),
 			],
 		]);
 
 		$this->add_group_control(Group_Control_Box_Shadow::get_type(), [
 			'name' => 'review_shadow',
-			'selector' => "{{WRAPPER}} .tf-hero-gallery .tf-single-rating",
+			'selector' => "{{WRAPPER}} .tf-hero-gallery .tf-single-rating,
+						   {{WRAPPER}} .tf-single-template__one.tf-single-car-gallery-style-1 .tf-car-hero-gallery .tf-featured-car .tf-featured-reviews a",
 		]);
 
 		$this->end_controls_section();
