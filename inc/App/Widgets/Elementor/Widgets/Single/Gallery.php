@@ -57,7 +57,9 @@ class Gallery extends Widget_Base {
 		$this->tf_content_layout_controls();
 
 		do_action( 'tf/single-gallery/before-style-controls', $this );
-		$this->tf_gallery_style_controls();
+		$this->tf_thumbnail_style_controls();
+		$this->tf_nav_items_style_controls();
+		$this->tf_review_style_controls();
 		do_action( 'tf/single-gallery/after-style-controls', $this );
 	}
 
@@ -96,14 +98,58 @@ class Gallery extends Widget_Base {
         $this->end_controls_section();
     }
 
-    protected function tf_gallery_style_controls() {
-		$this->start_controls_section( 'gallery_style_section', [
-			'label' => esc_html__( 'Style', 'tourfic' ),
+	protected function tf_thumbnail_style_controls() {
+		$this->start_controls_section( 'thumbnail_style', [
+			'label' => esc_html__( 'Thumbnail Style', 'tourfic' ),
 			'tab'   => Controls_Manager::TAB_STYLE,
+		] );
+		
+		$this->add_responsive_control('thumbnail_height',[
+			'label'      => esc_html__('Thumbnail Height', 'tourfic'),
+			'type'       => Controls_Manager::SLIDER,
+			'range'      => [
+				'px' => [
+					'min'  => 0,
+					'max'  => 700,
+					'step' => 1,
+				],
+				'em' => [
+					'min'  => 0,
+					'max'  => 50,
+					'step' => 1,
+				],
+				'%'  => [
+					'min'  => 0,
+					'max'  => 100,
+					'step' => 1,
+				],
+			],
+			'default'   => [
+				'unit' => 'px',
+				'size' => 474,
+			],
+			'size_units' => ['px', 'em', '%'],
+			'selectors'  => [
+				'{{WRAPPER}} .tf-single-gallery__style-1.tf-hero-gallery .tf-gallery-featured>img' => 'max-height: {{SIZE}}{{UNIT}}; min-height: {{SIZE}}{{UNIT}};',
+				'{{WRAPPER}} .tf-single-gallery__style-2.tf-hero-gallery .single-slider-wrapper .slick-slide img' => 'height: {{SIZE}}{{UNIT}};',
+			],
 		]);
 
-        $this->add_responsive_control( "tf_nav_item_gap", [
-			'label'      => esc_html__( 'Nav Items Gap', 'tourfic' ),
+		$this->add_control( "thumbnail_border_radius", [
+			'label'      => esc_html__( 'Border Radius', 'tourfic' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'%',
+			],
+			'selectors'  => [
+				'{{WRAPPER}} .tf-single-gallery__style-1.tf-hero-gallery .tf-gallery-featured>img' => $this->tf_apply_dim( 'border-radius' ), //default
+				'{{WRAPPER}} .tf-single-gallery__style-2.tf-hero-gallery .single-slider-wrapper .slick-slide img' => $this->tf_apply_dim( 'border-radius' ), //default
+			],
+		] );
+
+		$this->add_responsive_control( "tf_gap_between_nav_items", [
+			'label'      => esc_html__( 'Gap between nav items', 'tourfic' ),
 			'type'       => Controls_Manager::SLIDER,
 			'size_units' => [
 				'px',
@@ -111,17 +157,189 @@ class Gallery extends Widget_Base {
 			'range'      => [
 				'px' => [
 					'min'  => 5,
+					'max'  => 100,
+					'step' => 1,
+				],
+			],
+			'default'   => [
+				'unit' => 'px',
+				'size' => 18,
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .tf-single-gallery__style-1.tf-hero-gallery .tf-gallery-featured" => 'margin-bottom: {{SIZE}}{{UNIT}};',
+			],
+			'condition' => [
+				'gallery_style' => 'style1',
+			],
+		] );
+
+		$this->end_controls_section();
+	}
+
+	protected function tf_nav_items_style_controls() {
+		$this->start_controls_section( 'nav_style', [
+			'label' => esc_html__( 'Nav Item Style', 'tourfic' ),
+			'tab'   => Controls_Manager::TAB_STYLE,
+			'condition' => [
+				'gallery_style' => 'style1',
+			],
+		] );
+		
+		$this->add_responsive_control('nav_height',[
+			'label'      => esc_html__('Nav Item Height', 'tourfic'),
+			'type'       => Controls_Manager::SLIDER,
+			'range'      => [
+				'px' => [
+					'min'  => 0,
+					'max'  => 300,
+					'step' => 1,
+				],
+				'em' => [
+					'min'  => 0,
+					'max'  => 50,
+					'step' => 1,
+				],
+				'%'  => [
+					'min'  => 0,
+					'max'  => 100,
+					'step' => 1,
+				],
+			],
+			'default'   => [
+				'unit' => 'px',
+				'size' => 112,
+			],
+			'size_units' => ['px', 'em', '%'],
+			'selectors'  => [
+				'{{WRAPPER}} .tf-single-gallery__style-1.tf-hero-gallery .tf-gallery a img' => 'max-height: {{SIZE}}{{UNIT}}; min-height: {{SIZE}}{{UNIT}};',
+			],
+		]);
+
+		$this->add_control( "nav_border_radius", [
+			'label'      => esc_html__( 'Border Radius', 'tourfic' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'%',
+			],
+			'selectors'  => [
+				'{{WRAPPER}} .tf-single-gallery__style-1.tf-hero-gallery .tf-gallery a img' => $this->tf_apply_dim( 'border-radius' ), //default
+				'{{WRAPPER}} .tf-single-gallery__style-1.tf-hero-gallery .tf-gallery a.tf-gallery-more::before' => $this->tf_apply_dim( 'border-radius' ), //default
+			],
+		] );
+
+		$this->add_responsive_control( "tf_nav_items_gap", [
+			'label'      => esc_html__( 'Nav items gap', 'tourfic' ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [
+				'px',
+			],
+			'range'      => [
+				'px' => [
+					'min'  => 5,
+					'max'  => 100,
+					'step' => 1,
+				],
+			],
+			'default'   => [
+				'unit' => 'px',
+				'size' => 10,
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .tf-single-gallery__style-1.tf-hero-gallery .tf-gallery" => 'gap: {{SIZE}}{{UNIT}};',
+			],
+		] );
+
+		$this->end_controls_section();
+	}
+	
+	protected function tf_review_style_controls() {
+		$this->start_controls_section( 'review_style', [
+			'label' => esc_html__( 'Review Style', 'tourfic' ),
+			'tab'   => Controls_Manager::TAB_STYLE,
+			'condition' => [
+				'show_review' => 'yes',
+			],
+		]);
+
+		$this->add_control( 'tf_review_color', [
+			'label'     => esc_html__( 'Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors'  => [
+				'{{WRAPPER}} .tf-hero-gallery .tf-single-rating' => 'color: {{VALUE}};',
+			],
+		]);
+
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+            'label'    => esc_html__( 'Typography', 'tourfic' ),
+			'name'     => "tf_review_typography",
+			'selector' => "{{WRAPPER}} .tf-single-gallery__style-1.tf-hero-gallery .tf-gallery-featured .tf-single-review-box .tf-single-rating, 
+						   {{WRAPPER}} .tf-hero-gallery .tf-single-rating,
+						   {{WRAPPER}} .tf-hero-gallery .tf-single-rating span",
+		]);
+
+		$this->add_responsive_control( "tf_review_icon_size", [
+			'label'      => esc_html__( 'Icon Size', 'tourfic' ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [
+				'px',
+				'rem',
+			],
+			'range'      => [
+				'px' => [
+					'min'  => 0,
 					'max'  => 50,
 					'step' => 1,
 				],
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .tf-single-gallery__style-1.tf-hero-gallery .tf-gallery" => 'gap: {{SIZE}}{{UNIT}};',
+				"{{WRAPPER}} .tf-hero-gallery .tf-single-rating i" => 'font-size: {{SIZE}}{{UNIT}}',
 			],
-            'condition' => [
-				'gallery_style' => ['style1'],
+			'condition' => [
+				'gallery_style' => 'style2',
 			],
 		] );
+
+		$this->add_control( "tf_review_icon_color", [
+			'label'     => esc_html__( 'Icon Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .tf-hero-gallery .tf-single-rating i" => 'color: {{VALUE}}',
+			],
+			'condition' => [
+				'gallery_style' => 'style2',
+			],
+		] );
+
+		$this->add_control( "review_bg_color", [
+			'label'     => esc_html__( 'Background Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .tf-hero-gallery .tf-single-rating" => 'background-color: {{VALUE}}',
+			],
+		] );
+
+		$this->add_group_control( Group_Control_Border::get_type(), [
+			'name'     => "review_border",
+			'selector' => "{{WRAPPER}} .tf-hero-gallery .tf-single-rating",
+		]);
+
+		$this->add_control( "review_border_radius", [
+			'label'      => esc_html__( 'Border Radius', 'tourfic' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'%',
+			],
+			'selectors'  => [
+				'{{WRAPPER}} .tf-hero-gallery .tf-single-rating' => $this->tf_apply_dim( 'border-radius' ),
+			],
+		]);
+
+		$this->add_group_control(Group_Control_Box_Shadow::get_type(), [
+			'name' => 'review_shadow',
+			'selector' => "{{WRAPPER}} .tf-hero-gallery .tf-single-rating",
+		]);
 
 		$this->end_controls_section();
 	}
