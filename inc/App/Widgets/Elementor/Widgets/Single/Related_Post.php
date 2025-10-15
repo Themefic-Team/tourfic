@@ -304,50 +304,7 @@ class Related_Post extends Widget_Base {
                 wp_reset_postdata();
                 ?>
             </div>
-
-            <?php if ( \Elementor\Plugin::$instance->editor->is_edit_mode() ): ?>
-			<script>
-				jQuery(document).ready(function ($) {
-					'use strict';
-				
-					jQuery('.tf-slider-items-wrapper,.tf-slider-activated').slick({
-                        dots: true,
-                        arrows: false,
-                        infinite: true,
-                        speed: 300,
-                        //autoplay: true,
-                        autoplaySpeed: 2000,
-                        slidesToShow: 3,
-                        slidesToScroll: 1,
-                        responsive: [
-                            {
-                                breakpoint: 1024,
-                                settings: {
-                                    slidesToShow: 3,
-                                    slidesToScroll: 1,
-                                    infinite: true,
-                                    dots: true
-                                }
-                            },
-                            {
-                                breakpoint: 767,
-                                settings: {
-                                    slidesToShow: 2,
-                                    slidesToScroll: 1
-                                }
-                            },
-                            {
-                                breakpoint: 480,
-                                settings: {
-                                    slidesToShow: 1,
-                                    slidesToScroll: 1
-                                }
-                            }
-                        ]
-                    });
-				});	
-			</script>
-			<?php endif; 
+			<?php
         } elseif($this->post_type == 'tf_tours' && $style == 'style2' && ! $disable_related_tour == '1'){
             ?>
             <div class="tf-single-template__two tf-single-tour-related-post-style2">
@@ -470,49 +427,7 @@ class Related_Post extends Widget_Base {
                 wp_reset_postdata();
                 ?>
             </div>
-
-            <?php if ( \Elementor\Plugin::$instance->editor->is_edit_mode() ): ?>
-			<script>
-				jQuery(document).ready(function ($) {
-					'use strict';
-				
-					jQuery('.tf-design-2-slider-items-wrapper, .tf-design-3-slider-items-wrapper').slick({
-                        dots: false,
-                        arrows: true,
-                        infinite: true,
-                        speed: 300,
-                        autoplaySpeed: 2000,
-                        slidesToShow: 3,
-                        slidesToScroll: 1,
-                        responsive: [
-                            {
-                                breakpoint: 1024,
-                                settings: {
-                                    slidesToShow: 2,
-                                    slidesToScroll: 1,
-                                    infinite: true,
-                                    dots: false
-                                }
-                            },
-                            {
-                                breakpoint: 600,
-                                settings: {
-                                    slidesToShow: 1,
-                                    slidesToScroll: 1
-                                }
-                            },
-                            {
-                                breakpoint: 480,
-                                settings: {
-                                    slidesToShow: 1,
-                                    slidesToScroll: 1
-                                }
-                            }
-                        ]
-                    });
-				});	
-			</script>
-			<?php endif;
+			<?php
         } elseif($this->post_type == 'tf_tours' && $style == 'style3' && ! $disable_related_tour == '1'){
             ?>
             <div class="tf-single-template__legacy tf-single-tour-related-post-style3">
@@ -645,50 +560,7 @@ class Related_Post extends Widget_Base {
                 wp_reset_postdata();
                 ?>
             </div>
-
-            <?php if ( \Elementor\Plugin::$instance->editor->is_edit_mode() ): ?>
-			<script>
-				jQuery(document).ready(function ($) {
-					'use strict';
-				
-					jQuery('.tf-slider-items-wrapper,.tf-slider-activated').slick({
-                        dots: true,
-                        arrows: false,
-                        infinite: true,
-                        speed: 300,
-                        //autoplay: true,
-                        autoplaySpeed: 2000,
-                        slidesToShow: 3,
-                        slidesToScroll: 1,
-                        responsive: [
-                            {
-                                breakpoint: 1024,
-                                settings: {
-                                    slidesToShow: 3,
-                                    slidesToScroll: 1,
-                                    infinite: true,
-                                    dots: true
-                                }
-                            },
-                            {
-                                breakpoint: 767,
-                                settings: {
-                                    slidesToShow: 2,
-                                    slidesToScroll: 1
-                                }
-                            },
-                            {
-                                breakpoint: 480,
-                                settings: {
-                                    slidesToShow: 1,
-                                    slidesToScroll: 1
-                                }
-                            }
-                        ]
-                    });
-				});	
-			</script>
-			<?php endif; 
+			<?php 
         } elseif($this->post_type == 'tf_apartment' && $style == 'style1' && $disable_related_sec !== '1'){
             ?>
             <div class="tf-single-template__two tf-single-apartment-related-post-style1">
@@ -763,37 +635,7 @@ class Related_Post extends Widget_Base {
                     <?php } ?>
                 <?php } ?>
             </div>
-            
-            <?php if ( \Elementor\Plugin::$instance->editor->is_edit_mode() ): ?>
-			<script>
-				jQuery(document).ready(function ($) {
-					'use strict';
-				
-					var sbp = $('.swiper-button-prev'),
-						sbn = $('.swiper-button-next');
-
-					$('.single-slider-wrapper .tf_slider-for').slick({
-						slide: '.slick-slide-item',
-						slidesToShow: 1,
-						slidesToScroll: 1,
-						arrows: false,
-						fade: false,
-						dots: false,
-						centerMode: false,
-						variableWidth: false,
-						adaptiveHeight: true
-					});
-
-					sbp.on("click", function () {
-						$(this).closest(".single-slider-wrapper").find('.tf_slider-for').slick('slickPrev');
-					});
-
-					sbn.on("click", function () {
-						$(this).closest(".single-slider-wrapper").find('.tf_slider-for').slick('slickNext');
-					});
-				});	
-			</script>
-			<?php endif;
+			<?php
         } elseif($this->post_type == 'tf_apartment' && $style == 'style2' && $disable_related_sec !== '1'){
             ?>
             <div class="tf-single-template__legacy tf-single-apartment-related-post-style2">
@@ -848,38 +690,123 @@ class Related_Post extends Widget_Base {
                     </div>
                 <?php endif; ?>
             </div>
-            
-            <?php if ( \Elementor\Plugin::$instance->editor->is_edit_mode() ): ?>
-			<script>
-				jQuery(document).ready(function ($) {
-					'use strict';
-				
-					var sbp = $('.swiper-button-prev'),
-						sbn = $('.swiper-button-next');
-
-					$('.single-slider-wrapper .tf_slider-for').slick({
-						slide: '.slick-slide-item',
-						slidesToShow: 1,
-						slidesToScroll: 1,
-						arrows: false,
-						fade: false,
-						dots: false,
-						centerMode: false,
-						variableWidth: false,
-						adaptiveHeight: true
-					});
-
-					sbp.on("click", function () {
-						$(this).closest(".single-slider-wrapper").find('.tf_slider-for').slick('slickPrev');
-					});
-
-					sbn.on("click", function () {
-						$(this).closest(".single-slider-wrapper").find('.tf_slider-for').slick('slickNext');
-					});
-				});	
-			</script>
-			<?php endif;
+			<?php
         }
+        
+        if ( \Elementor\Plugin::$instance->editor->is_edit_mode() ): ?>
+        <script>
+            jQuery(document).ready(function ($) {
+                'use strict';
+
+                jQuery('.tf-design-2-slider-items-wrapper, .tf-design-3-slider-items-wrapper').slick({
+                    dots: false,
+                    arrows: true,
+                    infinite: true,
+                    speed: 300,
+                    autoplaySpeed: 2000,
+                    slidesToShow: 3,
+                    slidesToScroll: 1,
+                    responsive: [
+                        {
+                            breakpoint: 1024,
+                            settings: {
+                                slidesToShow: 2,
+                                slidesToScroll: 1,
+                                infinite: true,
+                                dots: false
+                            }
+                        },
+                        {
+                            breakpoint: 600,
+                            settings: {
+                                slidesToShow: 1,
+                                slidesToScroll: 1
+                            }
+                        },
+                        {
+                            breakpoint: 480,
+                            settings: {
+                                slidesToShow: 1,
+                                slidesToScroll: 1
+                            }
+                        }
+                    ]
+                });
+            
+                jQuery('.tf-slider-items-wrapper,.tf-slider-activated').slick({
+                    dots: true,
+                    arrows: false,
+                    infinite: true,
+                    speed: 300,
+                    //autoplay: true,
+                    autoplaySpeed: 2000,
+                    slidesToShow: 3,
+                    slidesToScroll: 1,
+                    responsive: [
+                        {
+                            breakpoint: 1024,
+                            settings: {
+                                slidesToShow: 3,
+                                slidesToScroll: 1,
+                                infinite: true,
+                                dots: true
+                            }
+                        },
+                        {
+                            breakpoint: 767,
+                            settings: {
+                                slidesToShow: 2,
+                                slidesToScroll: 1
+                            }
+                        },
+                        {
+                            breakpoint: 480,
+                            settings: {
+                                slidesToShow: 1,
+                                slidesToScroll: 1
+                            }
+                        }
+                    ]
+                });
+
+                jQuery('.tf-related-apartment-slider').slick({
+                    dots: true,
+                    arrows: false,
+                    infinite: true,
+                    speed: 300,
+                    autoplay: true,
+                    autoplaySpeed: 3000,
+                    slidesToShow: 4,
+                    slidesToScroll: 1,
+                    responsive: [
+                        {
+                            breakpoint: 1024,
+                            settings: {
+                                slidesToShow: 3,
+                                slidesToScroll: 1,
+                                infinite: true,
+                                dots: true
+                            }
+                        },
+                        {
+                            breakpoint: 600,
+                            settings: {
+                                slidesToShow: 2,
+                                slidesToScroll: 1
+                            }
+                        },
+                        {
+                            breakpoint: 480,
+                            settings: {
+                                slidesToShow: 1,
+                                slidesToScroll: 1
+                            }
+                        }
+                    ]
+                });
+            });	
+        </script>
+        <?php endif;
     }
 
     /**

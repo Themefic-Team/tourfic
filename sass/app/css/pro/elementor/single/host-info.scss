@@ -1,0 +1,123 @@
+@import '../../../../../common/variable';
+@import '../../../../../common/mixin';
+
+.host-details {
+    background: $color-brand-dark;
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 25px;
+
+    .tf-host-rating-wrapper {
+        @include flexbox();
+        @include align-items(center);
+        gap: 4px;
+        color: $color-white;
+    
+        .tf-host-rating {
+            font-weight: 600;
+        }
+    
+        h6 {
+            margin-bottom: 0;
+            color: $color-white;
+        }
+    }
+    
+    .host-top {
+        @include flexbox();
+        gap: 11px;
+        align-items: center;
+        margin-bottom: 24px;
+
+        img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 40px;
+        }
+    }
+
+    .host-meta {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        h4 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: $color-white;
+            margin: 0;
+        }
+
+        .tf-apartment-joined-text {
+            font-size: 0.75rem;
+            font-weight: 400;
+            letter-spacing: 0.2px;
+            margin: 0;
+            color: $color-white;
+            @include flexbox();
+
+            span {
+                letter-spacing: 0.2px;
+                padding-left: 8px;
+            }
+        }
+
+        i {
+            color: $color-primary;
+        }
+
+        span {
+            font-weight: bold;
+        }
+    }
+
+    .host-bottom {
+        @include flexbox();
+        flex-direction: column;
+        gap: 8px;
+
+        h5 {
+            font-size: 1.125rem;
+            font-weight: 500;
+            line-height: 1.5;
+            letter-spacing: 0.5px;
+            color: $color-gray-light;
+            margin: 0;
+        }
+
+        p {
+            color: $color-gray;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+            letter-spacing: 0.2px;
+            margin: 0;
+        }
+
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+
+            li {
+                padding: 8px 0;
+                color: $color-gray;
+
+                span {
+                    text-align: right;
+                    float: right;
+                    font-weight: 500;
+                    font-size: 0.875rem;
+                    line-height: 1.5;
+                    letter-spacing: 0.5px;
+                    color: $color-text;
+                }
+
+                &:last-child {
+                    margin-bottom: 0px;
+                }
+            }
+        }
+    }
+}

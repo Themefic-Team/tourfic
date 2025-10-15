@@ -216,6 +216,7 @@ class FAQ extends Widget_Base {
             'selectors'  => [
                 '{{WRAPPER}} .tf-faq-head i'   => 'font-size: {{SIZE}}{{UNIT}};',
                 '{{WRAPPER}} .tf-faq-head svg'   => 'height: {{SIZE}}{{UNIT}};width: {{SIZE}}{{UNIT}};line-height: {{SIZE}}{{UNIT}};',
+                '{{WRAPPER}} #tf-faq-item .tf-faq-title svg'   => 'height: {{SIZE}}{{UNIT}};width: {{SIZE}}{{UNIT}};line-height: {{SIZE}}{{UNIT}};',
             ],
         ]);
 
@@ -304,6 +305,7 @@ class FAQ extends Widget_Base {
             'selectors' => [
                 '{{WRAPPER}} .tf-faq-single .tf-faq-head .tf-faq-label' => 'color: {{VALUE}};',
                 '{{WRAPPER}} .tf-questions-col .tf-question .tf-faq-head span.tf-faq-label' => 'color: {{VALUE}};',
+                '{{WRAPPER}} #tf-faq-item .tf-faq-title.active h4' => 'color: {{VALUE}};',
             ],
         ]);
         $this->add_control('tf_faq_tab_icon_color',[

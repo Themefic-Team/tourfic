@@ -458,6 +458,8 @@ class Enqueue {
 			wp_register_style( 'tf-elementor-single-car-benefits', TF_PRO_ASSETS_URL . 'app/css/elementor/single/car-benefits.min.css', '', TF_VERSION );
 			wp_register_style( 'tf-elementor-single-car-driver-info', TF_PRO_ASSETS_URL . 'app/css/elementor/single/car-driver-info.min.css', '', TF_VERSION );
 			wp_register_style( 'tf-elementor-single-related-post', TF_PRO_ASSETS_URL . 'app/css/elementor/single/related-post.min.css', '', TF_VERSION );
+			wp_register_style( 'tf-elementor-single-tour-price', TF_PRO_ASSETS_URL . 'app/css/elementor/single/tour-price.min.css', '', TF_VERSION );
+			wp_register_style( 'tf-elementor-single-host-info', TF_PRO_ASSETS_URL . 'app/css/elementor/single/host-info.min.css', '', TF_VERSION );
 
 			wp_enqueue_script( 'Chart-js',  TF_ASSETS_APP_URL . 'libs/chart/chart.js', array( 'jquery' ), '2.6.0', true );
 		}

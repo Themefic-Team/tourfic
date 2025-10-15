@@ -143,3 +143,116 @@
         background-color: transparent;
     }
 }
+
+.tf-single-template__two.tf-single-apartment-related-post-style1{
+    padding: 0;
+
+    .tf-related-items-section{
+        padding: 0;
+        background-color: transparent;
+    }
+}
+.tf-single-template__legacy.tf-single-apartment-related-post-style2{
+    padding: 0;
+    
+    .tf-related-apartment {
+        .slick-track {
+            margin: 0;
+        }
+    
+        .slick-arrow {
+            z-index: 999;
+        }
+    
+        .slick-dotted.slick-slider {
+            margin-bottom: 0;
+            padding-bottom: 40px;
+        }
+    
+        .slick-dots {
+            bottom: 0;
+    
+            li {
+                width: 16px;
+                height: 16px;
+    
+                button {
+                    background: $color-gray;
+                    border-radius: 30px;
+                    border: 1px solid $color-gray;
+                    height: 16px;
+                    width: 16px;
+    
+                    &:before {
+                        opacity: 0;
+                        font-size: 0;
+                        width: 6px;
+                        height: 6px;
+                        background: $color-primary;
+                        top: 50%;
+                        left: 50%;
+                        border-radius: 100%;
+                        transform: translate(-50%, -50%);
+                    }
+                }
+    
+                &.slick-active {
+                    button {
+                        background: transparent;
+                        border: 1px solid $color-primary;
+    
+                        &:before {
+                            opacity: 1;
+                        }
+                    }
+                }
+            }
+        }
+    
+        .tf-apartment-item {
+            margin: 0 8px;
+    
+            .tf-apartment-item-thumb {
+                overflow: hidden;
+                border-radius: 8px;
+                margin-bottom: 8px;
+    
+                img {
+                    height: 170px;
+                    object-fit: cover;
+                    width: 100%;
+                    transition: all 0.3s ease-in-out;
+                }
+    
+                &:hover {
+                    img {
+                        transform: scale(1.1);
+                    }
+                }
+            }
+    
+            .tf-related-apartment-content {
+                h3 {
+                    font-size: 1.125rem;
+                    color: $color-heading;
+                    margin: 0;
+                }
+                a {
+                    text-decoration: none;
+                    color: inherit;
+                    &:hover{
+                        color: $color-primary;
+                    }
+                }
+    
+                
+    
+                span {
+                    font-size: 0.875rem;
+                    color: $color-text;
+                    margin: 0;
+                }
+            }
+        }
+    }
+}
