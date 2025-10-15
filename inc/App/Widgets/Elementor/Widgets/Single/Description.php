@@ -175,21 +175,21 @@ class Description extends Widget_Base {
 
 		$this->add_control( 'tf_desc_heading', [
 			'type'  => Controls_Manager::HEADING,
-			'label' => __( 'Descriptio', 'tourfic' ),
+			'label' => __( 'Description', 'tourfic' ),
 		] );
 
 		$this->add_control( 'tf_description_color', [
 			'label'     => esc_html__( 'Description Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors'  => [
-				'{{WRAPPER}} .tf-post-title' => 'color: {{VALUE}};',
+				'{{WRAPPER}} .tf-post-content' => 'color: {{VALUE}};',
 			],
 		]);
 
 		$this->add_group_control( Group_Control_Typography::get_type(), [
             'label'    => esc_html__( 'Description Typography', 'tourfic' ),
 			'name'     => "tf_description_typography",
-			'selector' => "{{WRAPPER}} .tf-post-title",
+			'selector' => "{{WRAPPER}} .tf-post-content",
 		]);
 
 		$this->end_controls_section();
@@ -210,7 +210,7 @@ class Description extends Widget_Base {
 			} 
 			?>
 			<?php if($limit_content == 'yes'):  ?>
-            <div class="tf-short-description">
+            <div class="tf-short-description tf-post-content">
                 <?php 
                 if(strlen(get_the_content()) > $content_length ){
                     echo esc_html( wp_strip_all_tags(\Tourfic\Classes\Helper::tourfic_character_limit_callback(get_the_content(), $content_length)) ) . '<span class="tf-see-description">See more</span>';
@@ -219,14 +219,16 @@ class Description extends Widget_Base {
                 }
                 ?>
             </div>
-            <div class="tf-full-description">
+            <div class="tf-full-description tf-post-content">
                 <?php 
                     the_content();
                     echo '<span class="tf-see-less-description"> See less</span>';
                 ?>
             </div>
 			<?php else: ?>
-				<?php the_content(); ?>
+				<div class="tf-post-content">
+					<?php the_content(); ?>
+				</div>
 			<?php endif; ?>
         </div>
         <?php
