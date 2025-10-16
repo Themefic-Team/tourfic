@@ -4442,9 +4442,9 @@ jQuery(function ($) {
         });
 
         // add pacakge
-        $(document).on("click", ".tf-repeater-add-package_pricing", function (e) {
-            $(this).hide(); // Hide the popup
-        });
+        // $(document).on("click", ".tf-repeater-add-package_pricing", function (e) {
+        //     $(this).hide(); // Hide the popup
+        // });
         // Save Package
         $(document).on('click', ".tf_tour_package_save", function(e) {
             e.preventDefault();
@@ -4584,7 +4584,7 @@ jQuery(function ($) {
                     $repeater.find('.tf-repeater-header').removeClass('active-repeater');
 
                     $repeater.find('.tf-repeater-header .package-action-hide').addClass('show');
-                    $('.tf-repeater-add-package_pricing').show();
+                    // $('.tf-repeater-add-package_pricing').show();
                     notyf.success('Package saved successfully!');
                 } else {
                     notyf.error('There is an error!');
@@ -5176,12 +5176,12 @@ jQuery(function ($) {
         $(document).on('click', '.tf-action-button-group .tf_tour_package_cancel', function () {
             $(this).closest('.tf-repeater-content-wrap').hide();
             $(this).closest('.tf-single-repeater').find('.tf-repeater-header').removeClass('active-repeater');
-            $('.tf-repeater-add-package_pricing').show();
+            // $('.tf-repeater-add-package_pricing').show();
         });
 
         $(document).on('click', '.tf-action-button-group .tf_tour_package_deleted', function () {
             $(this).closest('.tf-single-repeater').empty();
-            $('.tf-repeater-add-package_pricing').show();
+            // $('.tf-repeater-add-package_pricing').show();
         });
 
         // Repeater show hide
