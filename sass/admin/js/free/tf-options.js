@@ -2114,7 +2114,7 @@
                     $repeater.find(' > .tf-repeater-header .tf-repeater-title').html(packageData.pack_title);
                     $repeater.find('.tf-repeater-content-wrap').hide();
                     $repeater.find('.tf-repeater-header').removeClass('active-repeater');
-                    
+
                     $repeater.find('.tf-repeater-header .package-action-hide').addClass('show');
                     $('.tf-repeater-add-package_pricing').show();
                     notyf.success('Package saved successfully!');
@@ -2717,7 +2717,7 @@
         });
 
         // Repeater show hide
-        $(document).on('click', '.tf-avail-repeater-collapse', function () {
+        $(document).on('click', '.tf-avail-repeater-collapse, .tf-avail-repeater-title', function () {
             $(this).closest('.tf-single-repeater').find('.tf-repeater-content-wrap').first().slideToggle(200);
         });
 

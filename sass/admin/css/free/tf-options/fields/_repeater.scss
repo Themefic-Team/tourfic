@@ -177,6 +177,13 @@
             }
           }
         }
+        .tf-repeater-content-wrap{
+          .tf-field{
+            &:nth-child(1){
+              padding-top: 12px;
+            }
+          }
+        }
       }
     }
     .tf-field-notice-inner {

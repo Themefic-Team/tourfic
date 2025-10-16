@@ -4399,6 +4399,9 @@ Steps
   width: calc(100% - 104px);
   margin-right: 0px;
 }
+.tf-field-repeater .tf-repeater .tf-single-repeater.tf-single-repeater-group_discount_package .tf-repeater-content-wrap .tf-field:nth-child(1) {
+  padding-top: 12px;
+}
 .tf-field-repeater .tf-repeater .tf-field-notice-inner {
   margin-bottom: 24px;
 }
@@ -5866,10 +5869,31 @@ a.tf-import-btn, a.tf-export-btn {
 .tf-room-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater:last-child {
   margin-bottom: 0px;
 }
+.tf-tour-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-header .tf-repeater-title,
+.tf-apt-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-header .tf-repeater-title,
+.tf-room-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-header .tf-repeater-title {
+  width: calc(100% - 30px) !important;
+}
 .tf-tour-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-content-wrap,
 .tf-apt-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-content-wrap,
 .tf-room-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-content-wrap {
-  padding-left: 0px;
+  padding: 8px;
+  margin: 0;
+}
+.tf-tour-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-content-wrap .tf-tab-switch-box .tf-tab-field-content .tf-field:first-child,
+.tf-apt-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-content-wrap .tf-tab-switch-box .tf-tab-field-content .tf-field:first-child,
+.tf-room-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-content-wrap .tf-tab-switch-box .tf-tab-field-content .tf-field:first-child {
+  padding-bottom: 0px;
+}
+.tf-tour-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-content-wrap #group_tabs .tf-tab-field-content .tf-field:first-child,
+.tf-apt-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-content-wrap #group_tabs .tf-tab-field-content .tf-field:first-child,
+.tf-room-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-content-wrap #group_tabs .tf-tab-field-content .tf-field:first-child {
+  padding: 12px 0;
+}
+.tf-tour-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-content-wrap #group_tabs .tf-tab-field-content .tf-field .tf-repeater-content-wrap,
+.tf-apt-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-content-wrap #group_tabs .tf-tab-field-content .tf-field .tf-repeater-content-wrap,
+.tf-room-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-content-wrap #group_tabs .tf-tab-field-content .tf-field .tf-repeater-content-wrap {
+  border: 0px solid;
 }
 .tf-tour-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset,
 .tf-apt-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset,
