@@ -24,9 +24,19 @@
           opacity: 1;
         }
       }
+      &.active-repeater{
+        .tf-repeater-header-info{
+          border-radius: 4px 4px 0 0;
+          background: $tf_blue_dark;
+          .tf-repeater-title{
+            font-weight: 600;
+          }
+        }
+      }
       .tf-repeater-header-info{
         border-radius: 4px;
         background: $tf_fill_background;
+        border: 1px solid $tf_border_faint;
         width: 100%;
         padding: 8px 12px;
         display: flex;
@@ -64,12 +74,13 @@
 
       .tf-repeater-title {
         display: inline-block;
-        margin-right: 120px;
         font-style: normal;
         font-weight: 400;
         font-size: 15px;
         line-height: 24px;
         cursor: pointer;
+        color: $tf_text_title;
+        width: calc(100% - 108px);
       }
 
       .tf-repeater-icon-absulate {
@@ -100,10 +111,20 @@
 
     .tf-repeater-content-wrap {
       background-color: #ffffff;
-      padding: 10px 1px 0px 15px;
+      padding: 8px;
       @include flexbox();
       @include flex-wrap(wrap);
       @include justify-content(space-between);
+      border-left: 1px solid $tf_border_faint;
+      border-right: 1px solid $tf_border_faint;
+      border-bottom: 1px solid $tf_border_faint;
+      margin-left: 15px;
+      border-radius: 0 0 4px 4px;
+      .tf-field{
+        &:nth-child(1){
+          padding-top: 0px;
+        }
+      }
       .tf-action-button-group{
         display: flex;
         gap: 24px;

@@ -4577,6 +4577,8 @@ jQuery(function ($) {
                 if (response.success) {
                     $repeater.find(' > .tf-repeater-header .tf-repeater-title').html(packageData.pack_title);
                     $repeater.find('.tf-repeater-content-wrap').hide();
+                    $repeater.find('.tf-repeater-header').removeClass('active-repeater');
+                    
                     $repeater.find('.tf-repeater-header .package-action-hide').addClass('show');
                     $('.tf-repeater-add-package_pricing').show();
                     notyf.success('Package saved successfully!');
@@ -5094,6 +5096,12 @@ jQuery(function ($) {
         // Repeater show hide
         $(document).on('click', '.tf-repeater-icon-collapse, .tf-repeater-title', function () {
             var tf_repater_fieldname = $(this).closest('.tf-single-repeater').find('input[name=tf_current_field]').val();
+
+            // Toggle Class for Header
+            $(this).closest('.tf-single-repeater').find('.tf-repeater-header').toggleClass('active-repeater');
+            $(this).closest('.tf-single-repeater').find('.tf-tab-switch-box').toggleClass('active-repeater');
+
+
             $(this).closest('.tf-single-repeater-' + tf_repater_fieldname + '').find('.tf-repeater-content-wrap').slideToggle();
             $(this).closest('.tf-single-repeater-' + tf_repater_fieldname + '').children('.tf-repeater-content-wrap').toggleClass('hide');
             if ($(this).closest('.tf-single-repeater-' + tf_repater_fieldname + '').children('.tf-repeater-content-wrap').hasClass('hide') == true) {
@@ -5151,6 +5159,7 @@ jQuery(function ($) {
         // Repeater show hide
         $(document).on('click', '.tf-field-accordion .tf-tab-field-header .tf-field-collapas', function () {
             $(this).toggleClass('rotated');
+            $(this).closest('.tf-tab-switch-box').toggleClass('active-repeater');
             $(this).closest('.tf-tab-switch-box').find('.tf-tab-field-content').slideToggle(200, function () {
                 if ($(this).is(':visible')) {
                     $(this).css('display', 'flex');
@@ -5162,6 +5171,7 @@ jQuery(function ($) {
         // Repeater Pacakge Cancel
         $(document).on('click', '.tf-action-button-group .tf_tour_package_cancel', function () {
             $(this).closest('.tf-repeater-content-wrap').hide();
+            $(this).closest('.tf-single-repeater').find('.tf-repeater-header').removeClass('active-repeater');
             $('.tf-repeater-add-package_pricing').show();
         });
 
