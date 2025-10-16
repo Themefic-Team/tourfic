@@ -2111,7 +2111,11 @@
     
             $.post(tf_options.ajax_url, ajaxData, function(response) {
                 if (response.success) {
-                    $repeater.find(' > .tf-repeater-header .tf-repeater-title').html(packageData.pack_title);
+                    if(packageData.pack_title){
+                        $repeater.find(' > .tf-repeater-header .tf-repeater-title').html(packageData.pack_title);
+                    }else{
+                        $repeater.find(' > .tf-repeater-header .tf-repeater-title').html('Create your Tour Packages');
+                    }
                     $repeater.find('.tf-repeater-content-wrap').hide();
                     $repeater.find('.tf-repeater-header').removeClass('active-repeater');
 

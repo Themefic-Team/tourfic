@@ -5092,7 +5092,7 @@ a.tf-import-btn, a.tf-export-btn {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  margin-bottom: 14px;
+  padding-bottom: 14px;
   position: sticky;
   top: 0;
   z-index: 99;

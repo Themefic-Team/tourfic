@@ -382,7 +382,7 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                             <div class="tf-field tf-field-accordion tf-field-group-box tf-show-for-person tf-show-for-group" style="width: 100%; display: <?php echo esc_attr( $pricing_type == 'person' || $pricing_type == 'group' ? 'block' : 'none' ) ?>;">
                                 <div class="tf-fieldset">
 
-                                    <div id="adult_tabs" class="tf-tab-switch-box tf-show-for-person"  style="width: 100%; display: <?php echo esc_attr( $pricing_type == 'person' ? 'block' : 'none' ) ?>;">
+                                    <div id="adult_tabs" class="tf-tab-switch-box tf-show-for-person active-repeater"  style="width: 100%; display: <?php echo esc_attr( $pricing_type == 'person' ? 'block' : 'none' ) ?>;">
                                         <div class="tf-tab-field-header">
                                             <div class="tf-field-collapas">
                                                 <div class="field-label"><?php echo esc_html__( 'Adult', 'tourfic' ); ?></div>
@@ -418,7 +418,7 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                         </div> <!-- .tf-tab-field-content -->
                                     </div> <!-- #adult_tabs -->
 
-                                    <div id="child_tabs" class="tf-tab-switch-box tf-show-for-person"  style="width: 100%; display: <?php echo esc_attr( $pricing_type == 'person' ? 'block' : 'none' ) ?>;">
+                                    <div id="child_tabs" class="tf-tab-switch-box tf-show-for-person active-repeater"  style="width: 100%; display: <?php echo esc_attr( $pricing_type == 'person' ? 'block' : 'none' ) ?>;">
                                         <div class="tf-tab-field-header">
                                             <div class="tf-field-collapas">
                                                 <div class="field-label"><?php echo esc_html__( 'Child', 'tourfic' ); ?></div>
@@ -454,7 +454,7 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                         </div> <!-- .tf-tab-field-content -->
                                     </div> <!-- #child_tabs -->
 
-                                    <div id="infant_tabs" class="tf-tab-switch-box tf-show-for-person"  style="width: 100%; display: <?php echo esc_attr( $pricing_type == 'person' ? 'block' : 'none' ) ?>;">
+                                    <div id="infant_tabs" class="tf-tab-switch-box tf-show-for-person active-repeater"  style="width: 100%; display: <?php echo esc_attr( $pricing_type == 'person' ? 'block' : 'none' ) ?>;">
                                         <div class="tf-tab-field-header">
                                             <div class="tf-field-collapas">
                                                 <div class="field-label"><?php echo esc_html__( 'Infant', 'tourfic' ); ?></div>
@@ -490,7 +490,7 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                         </div> <!-- .tf-tab-field-content -->
                                     </div> <!-- #infant_tabs -->
 
-                                    <div id="group_tabs" class="tf-tab-switch-box tf-show-for-group" style="width: 100%; display: <?php echo esc_attr( $pricing_type == 'group' ? 'block' : 'none' ) ?>;">
+                                    <div id="group_tabs" class="tf-tab-switch-box tf-show-for-group active-repeater" style="width: 100%; display: <?php echo esc_attr( $pricing_type == 'group' ? 'block' : 'none' ) ?>;">
                                         <div class="tf-tab-field-header">
                                             <div class="tf-field-collapas">
                                                 <div class="field-label"><?php echo esc_html__( 'Group', 'tourfic' ); ?></div>
