@@ -20,6 +20,7 @@ defined( 'ABSPATH' ) || exit;
 class Address extends Widget_Base {
 
 	use \Tourfic\Traits\Singleton;
+	use \Tourfic\App\Widgets\Elementor\Support\Utils;
 
 	public function get_name() {
 		return 'tf-single-address';

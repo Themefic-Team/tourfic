@@ -15,6 +15,7 @@ defined( 'ABSPATH' ) || exit;
 class Terms_And_Conditions extends Widget_Base {
 
 	use \Tourfic\Traits\Singleton;
+	use \Tourfic\App\Widgets\Elementor\Support\Utils;
 
 	public function get_name() {
 		return 'tf-single-terms-and-conditions';
@@ -231,14 +232,5 @@ class Terms_And_Conditions extends Widget_Base {
 			</div>
         <?php 
         }
-	}
-
-	/**
-	 * Apply CSS property to the widget
-     * @param $css_property
-     * @return string
-     */
-	public function tf_apply_dim( $css_property, $important = false ) {
-		return "{$css_property}: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}} " . ($important ? '!important' : '') . ";";
 	}
 }

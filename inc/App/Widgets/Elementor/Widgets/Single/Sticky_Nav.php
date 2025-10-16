@@ -21,6 +21,7 @@ defined( 'ABSPATH' ) || exit;
 class Sticky_Nav extends Widget_Base {
 
 	use \Tourfic\Traits\Singleton;
+	use \Tourfic\App\Widgets\Elementor\Support\Utils;
 
     protected $post_id;
 	protected $post_type;
@@ -440,23 +441,5 @@ class Sticky_Nav extends Widget_Base {
         </div>
 		<?php
         
-	}
-
-    /**
-	 * Get the current post type being previewed in Elementor editor
-	 */
-	protected function get_current_post_type() {
-		// Check if we're in Elementor editor and have a preview post ID
-		if (isset($_GET['tf_preview_post_id']) && !empty($_GET['tf_preview_post_id'])) {
-			$preview_post_id = intval($_GET['tf_preview_post_id']);
-			$preview_post = get_post($preview_post_id);
-			
-			if ($preview_post && in_array($preview_post->post_type, ['tf_hotel', 'tf_tours', 'tf_apartment', 'tf_carrental'])) {
-				return $preview_post->post_type;
-			}
-		}
-		
-		// Fallback to regular post type detection
-		return get_post_type();
 	}
 }

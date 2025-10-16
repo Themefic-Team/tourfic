@@ -20,6 +20,7 @@ defined( 'ABSPATH' ) || exit;
 class Sidebar extends Widget_Base {
 
 	use \Tourfic\Traits\Singleton;
+	use \Tourfic\App\Widgets\Elementor\Support\Utils;
 
 	public function get_name() {
 		return 'tf-sidebar';
@@ -288,14 +289,5 @@ class Sidebar extends Widget_Base {
                 </div>
             </div>
         <?php endif;
-	}
-
-    /**
-	 * Apply CSS property to the widget
-     * @param $css_property
-     * @return string
-     */
-	public function tf_apply_dim( $css_property ) {
-		return "{$css_property}: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};";
 	}
 }

@@ -26,6 +26,7 @@ defined( 'ABSPATH' ) || exit;
 class Listings extends Widget_Base {
 
 	use \Tourfic\Traits\Singleton;
+	use \Tourfic\App\Widgets\Elementor\Support\Utils;
 
 	public function get_name() {
 		return 'tf-listings';
@@ -5076,84 +5077,5 @@ class Listings extends Widget_Base {
 			<div id="tf-elementor-settings" style="display: none"><?php echo !empty($elementor_settings) ? wp_json_encode($elementor_settings, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP) : wp_json_encode([]); ?></div>
 		</div>
 		<?php
-	}
-
-	/**
-     * Generates conditional display rules for controls based on service and design
-     * 
-     * @param array $design Array of design conditions in format ['service' => 'design_value']
-     * @return array Condition array for Elementor controls
-     */
-    protected function tf_display_conditionally($design, $extra_conditions = []) {
-        $terms = [];
-        
-        foreach ($design as $service_key => $design_values) {
-			// Detect if this is a "NOT" condition
-            $is_not = false;
-            if ( substr( $service_key, -1 ) === '!' ) {
-                $is_not = true;
-                $service = rtrim( $service_key, '!' );
-            } else {
-                $service = $service_key;
-            }
-
-            // Convert to array if it's not already
-            $design_values = (array) $design_values;
-            $design_control = 'design_' . str_replace('tf_', '', $service);
-
-            foreach ($design_values as $design_value) {
-                $service_terms = [
-					[
-						'name' => 'service',
-						'operator' => $is_not ? '!=' : '==',
-						'value' => $service,
-					],
-					[
-						'name' => $design_control,
-						'operator' => '==',
-						'value' => $design_value,
-					]
-				];
-
-				// Add extra conditions if provided
-				if (!empty($extra_conditions)) {
-					foreach ($extra_conditions as $key => $value) {
-						$operator = '==';
-						$actual_key = $key;
-						
-						// Handle negation operator
-						if (substr($key, -1) === '!') {
-							$operator = '!=';
-							$actual_key = substr($key, 0, -1);
-						}
-						
-						$service_terms[] = [
-							'name' => $actual_key,
-							'operator' => $operator,
-							'value' => $value,
-						];
-					}
-				}
-				
-				$terms[] = [
-					'relation' => 'and',
-					'terms' => $service_terms,
-				];
-            }
-        }
-
-        return [
-            'relation' => 'or',
-            'terms' => $terms,
-        ];
-    }
-
-	/**
-	 * Apply CSS property to the widget
-     * @param $css_property
-     * @return string
-     */
-	public function tf_apply_dim( $css_property, $important = false ) {
-		return "{$css_property}: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}} " . ($important ? '!important' : '') . ";";
 	}
 }

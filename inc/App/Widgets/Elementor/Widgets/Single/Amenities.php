@@ -20,6 +20,8 @@ defined( 'ABSPATH' ) || exit;
 class Amenities extends Widget_Base {
 
 	use \Tourfic\Traits\Singleton;
+	use \Tourfic\App\Widgets\Elementor\Support\Utils;
+    
 	protected $post_id;
 	protected $post_type;
 
@@ -472,14 +474,5 @@ class Amenities extends Widget_Base {
             </div>
 			<?php
         }
-	}
-
-    /**
-	 * Apply CSS property to the widget
-     * @param $css_property
-     * @return string
-     */
-	public function tf_apply_dim( $css_property, $important = false ) {
-		return "{$css_property}: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}} " . ($important ? '!important' : '') . ";";
 	}
 }

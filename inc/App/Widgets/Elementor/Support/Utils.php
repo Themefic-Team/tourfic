@@ -1,0 +1,185 @@
+<?php
+namespace Tourfic\App\Widgets\Elementor\Support;
+
+// don't load directly
+defined( 'ABSPATH' ) || exit;
+
+trait Utils {
+
+    /**
+	 * Apply CSS property to the widget
+     * @param $css_property
+     * @return string
+     */
+	public function tf_apply_dim( $css_property, $important = false ) {
+		return "{$css_property}: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}} " . ($important ? '!important' : '') . ";";
+	}
+
+	/**
+	 * Get the current post type being previewed in Elementor editor
+	 */
+	protected function get_current_post_type() {
+		// Check if we're in Elementor editor and have a preview post ID
+		if (isset($_GET['tf_preview_post_id']) && !empty($_GET['tf_preview_post_id'])) {
+			$preview_post_id = intval($_GET['tf_preview_post_id']);
+			$preview_post = get_post($preview_post_id);
+			
+			if ($preview_post && in_array($preview_post->post_type, ['tf_hotel', 'tf_tours', 'tf_apartment', 'tf_carrental'])) {
+				return $preview_post->post_type;
+			}
+		}
+		
+		// Fallback to regular post type detection
+		return get_post_type();
+	}
+
+    /**
+     * Single-template conditional builder without a "service" control.
+     *
+     * Usage:
+     * 'conditions' => $this->tf_display_conditionally_single([
+     *     'tf_hotel' => [
+     *         'booking_form_style' => ['style2','style3'],
+     *         'another_control'    => 'on',
+     *     ],
+     *     'tf_apartment' => [
+     *         'booking_form_style' => ['style1','default'],
+     *     ],
+     *     'tf_carrental!' => [
+     *         'layout_style' => ['compact'],
+     *     ],
+     * ]),
+     */
+    protected function tf_display_conditionally_single(array $service_map): array {
+        $current = $this->get_current_post_type();
+        $groups  = [];
+
+        foreach ($service_map as $svc_key => $controls) {
+            $is_not = false;
+            if (substr($svc_key, -1) === '!') {
+                $is_not = true;
+                $svc_key = rtrim($svc_key, '!');
+            }
+
+            $matches = ($current === $svc_key && !$is_not) || ($current !== $svc_key && $is_not);
+            if (!$matches) {
+                continue;
+            }
+
+            // AND across different control keys
+            $and_terms = [];
+
+            foreach ($controls as $control_key => $values) {
+                $vals = (array) $values;
+
+                if (count($vals) <= 1) {
+                    // Single value => simple equality
+                    $and_terms[] = [
+                        'name'     => $control_key,
+                        'operator' => '==',
+                        'value'    => reset($vals),
+                    ];
+                } else {
+                    // Multiple values => OR group for this control key
+                    $or_group = ['relation' => 'or', 'terms' => []];
+                    foreach ($vals as $val) {
+                        $or_group['terms'][] = [
+                            'name'     => $control_key,
+                            'operator' => '==',
+                            'value'    => $val,
+                        ];
+                    }
+                    $and_terms[] = $or_group;
+                }
+            }
+
+            // Only add if we produced conditions
+            if (!empty($and_terms)) {
+                $groups[] = [
+                    'relation' => 'and',
+                    'terms'    => $and_terms,
+                ];
+            }
+        }
+
+        // If no group matched, default to "show" (empty AND group)
+        if (empty($groups)) {
+            $groups[] = ['relation' => 'and', 'terms' => []];
+        }
+
+        return [
+            'relation' => 'or',
+            'terms'    => $groups,
+        ];
+    }
+
+    /**
+     * Generates conditional display rules for controls based on service and design
+     * 
+     * @param array $design Array of design conditions in format ['service' => 'design_value']
+     * @return array Condition array for Elementor controls
+     */
+    protected function tf_display_conditionally($design, $extra_conditions = []) {
+        $terms = [];
+        
+        foreach ($design as $service_key => $design_values) {
+			// Detect if this is a "NOT" condition
+            $is_not = false;
+            if ( substr( $service_key, -1 ) === '!' ) {
+                $is_not = true;
+                $service = rtrim( $service_key, '!' );
+            } else {
+                $service = $service_key;
+            }
+
+            // Convert to array if it's not already
+            $design_values = (array) $design_values;
+            $design_control = 'design_' . str_replace('tf_', '', $service);
+
+            foreach ($design_values as $design_value) {
+                $service_terms = [
+					[
+						'name' => 'service',
+						'operator' => $is_not ? '!=' : '==',
+						'value' => $service,
+					],
+					[
+						'name' => $design_control,
+						'operator' => '==',
+						'value' => $design_value,
+					]
+				];
+
+				// Add extra conditions if provided
+				if (!empty($extra_conditions)) {
+					foreach ($extra_conditions as $key => $value) {
+						$operator = '==';
+						$actual_key = $key;
+						
+						// Handle negation operator
+						if (substr($key, -1) === '!') {
+							$operator = '!=';
+							$actual_key = substr($key, 0, -1);
+						}
+						
+						$service_terms[] = [
+							'name' => $actual_key,
+							'operator' => $operator,
+							'value' => $value,
+						];
+					}
+				}
+				
+				$terms[] = [
+					'relation' => 'and',
+					'terms' => $service_terms,
+				];
+            }
+        }
+
+        return [
+            'relation' => 'or',
+            'terms' => $terms,
+        ];
+    }
+}
