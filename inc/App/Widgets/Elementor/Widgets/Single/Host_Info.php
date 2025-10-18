@@ -59,7 +59,11 @@ class Host_Info extends Widget_Base {
 		// $this->tf_content_layout_controls();
 
 		do_action( 'tf/single-host-info/before-style-controls', $this );
-		$this->tf_host_info_style_controls();
+		$this->tf_card_style_controls();
+		$this->tf_avatar_style_controls();
+		$this->tf_title_style_controls();
+		$this->tf_content_style_controls();
+		$this->tf_button_style_controls();
 		do_action( 'tf/single-host-info/after-style-controls', $this );
 	}
 
@@ -86,42 +90,116 @@ class Host_Info extends Widget_Base {
         $this->end_controls_section();
     }
 
-    protected function tf_host_info_style_controls() {
-		$this->start_controls_section( 'host_info_style_section', [
-			'label' => esc_html__( 'Style', 'tourfic' ),
+    protected function tf_card_style_controls() {
+		$this->start_controls_section( 'card_style', [
+			'label' => esc_html__( 'Card Style', 'tourfic' ),
 			'tab'   => Controls_Manager::TAB_STYLE,
-		]);
-
-		$this->add_control( 'tf_title_heading', [
-			'type'  => Controls_Manager::HEADING,
-			'label' => __( 'Title', 'tourfic' ),
 		] );
 
-        $this->add_responsive_control('title_align',[
-			'label' => esc_html__('Alignment', 'tourfic'),
-			'type' => Controls_Manager::CHOOSE,
-			'options' => [
-				'left' => [
-					'title' => esc_html__('Left', 'tourfic'),
-					'icon' => 'eicon-text-align-left',
-				],
-				'center' => [
-					'title' => esc_html__('Center', 'tourfic'),
-					'icon' => 'eicon-text-align-center',
-				],
-				'right' => [
-					'title' => esc_html__('Right', 'tourfic'),
-					'icon' => 'eicon-text-align-right',
+		$this->add_responsive_control( "card_padding", [
+			'label'      => esc_html__( 'Padding', 'tourfic' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .host-details" => $this->tf_apply_dim( 'padding' ),
+			],
+		] );
+
+		$this->add_control( 'card_bg_color', [
+			'label'     => esc_html__( 'Background Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .host-details" => 'background-color: {{VALUE}};',
+			],
+		] );
+		$this->add_group_control( Group_Control_Border::get_type(), [
+			'name'     => "card_border",
+			'selector' => "{{WRAPPER}} .host-details",
+		] );
+		$this->add_control( "card_border_radius", [
+			'label'      => esc_html__( 'Border Radius', 'tourfic' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .host-details" => $this->tf_apply_dim( 'border-radius' ),
+			],
+		] );
+		$this->add_group_control(Group_Control_Box_Shadow::get_type(), [
+			'name' => 'card_shadow',
+			'selector' => '{{WRAPPER}} .host-details',
+		]);
+		
+		$this->end_controls_section();
+	}
+
+	protected function tf_avatar_style_controls() {
+		$this->start_controls_section( 'avatart_style', [
+			'label' => esc_html__( 'Avatar Style', 'tourfic' ),
+			'tab'   => Controls_Manager::TAB_STYLE,
+		] );
+		
+		$this->add_responsive_control( "tf_avatar_size", [
+			'label'      => esc_html__( 'Size', 'tourfic' ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [
+				'px',
+				'rem',
+			],
+			'range'      => [
+				'px' => [
+					'min'  => 20,
+					'max'  => 400,
+					'step' => 1,
 				],
 			],
-			'toggle' => true,
-            'selectors'  => [
-				'{{WRAPPER}} .tf-section-title' => 'text-align: {{VALUE}};',
-				'{{WRAPPER}} h2.section-heading' => 'text-align: {{VALUE}};',
+			'selectors'  => [
+				"{{WRAPPER}} .host-details .host-top img" => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
+			],
+		] );
+
+		$this->add_control( "avatar_border_radius", [
+			'label'      => esc_html__( 'Border Radius', 'tourfic' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'%',
+			],
+			'selectors'  => [
+				'{{WRAPPER}} .host-details .host-top img' => $this->tf_apply_dim( 'border-radius'),
+			],
+		] );
+
+		$this->end_controls_section();
+	}
+
+    protected function tf_title_style_controls() {
+		$this->start_controls_section( 'title_style', [
+			'label' => esc_html__( 'Title Style', 'tourfic' ),
+			'tab'   => Controls_Manager::TAB_STYLE,
+		] );
+
+        $this->add_control( 'tf_title_color', [
+			'label'     => esc_html__( 'Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors'  => [
+				'{{WRAPPER}} .host-details .host-meta h4' => 'color: {{VALUE}};',
 			],
 		]);
 
-        $this->add_responsive_control( "title_margin", [
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+            'label'    => esc_html__( 'Typography', 'tourfic' ),
+			'name'     => "tf_title_typography",
+			'selector' => "{{WRAPPER}} .host-details .host-meta h4",
+		]);
+
+		$this->add_responsive_control( "title_margin", [
 			'label'      => __( 'Margin', 'tourfic' ),
 			'type'       => Controls_Manager::DIMENSIONS,
 			'size_units' => [
@@ -130,26 +208,159 @@ class Host_Info extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				'{{WRAPPER}} .tf-section-title' => $this->tf_apply_dim( 'margin' ),
-				'{{WRAPPER}} h2.section-heading' => $this->tf_apply_dim( 'margin' ),
+				'{{WRAPPER}} .host-details .host-meta h4' => $this->tf_apply_dim( 'margin' ),
 			],
 		]);
 
-		$this->add_control( 'tf_title_color', [
-			'label'     => esc_html__( 'Title Color', 'tourfic' ),
+		$this->end_controls_section();
+	}
+
+    protected function tf_content_style_controls() {
+        $this->start_controls_section( 'content_style', [
+			'label' => esc_html__( 'Content Style', 'tourfic' ),
+			'tab'   => Controls_Manager::TAB_STYLE,
+		] );
+
+		$this->add_control( 'tf_content_color', [
+			'label'     => esc_html__( 'Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors'  => [
-				'{{WRAPPER}} .tf-section-title' => 'color: {{VALUE}};',
-				'{{WRAPPER}} h2.section-heading' => 'color: {{VALUE}};',
+				'{{WRAPPER}} .tf-apartment-joined-text' => 'color: {{VALUE}};',
 			],
 		]);
 
 		$this->add_group_control( Group_Control_Typography::get_type(), [
-            'label'    => esc_html__( 'Title Typography', 'tourfic' ),
-			'name'     => "tf_title_typography",
-			'selector' => "{{WRAPPER}} .tf-section-title, {{WRAPPER}} .section-heading",
+            'label'    => esc_html__( 'Typography', 'tourfic' ),
+			'name'     => "tf_content_typography",
+			'selector' => "{{WRAPPER}} .tf-apartment-joined-text",
 		]);
+		$this->end_controls_section();
+	}
 
+    protected function tf_button_style_controls() {
+        $this->start_controls_section( 'button_style', [
+			'label' => esc_html__( 'Button Style', 'tourfic' ),
+			'tab'   => Controls_Manager::TAB_STYLE,
+		] );
+
+        $this->add_group_control( Group_Control_Typography::get_type(), [
+			'name'     => "btn_typography",
+			'selector' => "{{WRAPPER}} .tf_btn",
+		] );
+
+		$this->start_controls_tabs( "tabs_btn_style" );
+		/*-----Button NORMAL state------ */
+		$this->start_controls_tab( "tab_btn_normal", [
+			'label' => __( 'Normal', 'tourfic' ),
+		] );
+		$this->add_control( "btn_color", [
+			'label'     => __( 'Text Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .tf_btn" => 'color: {{VALUE}};',
+				"{{WRAPPER}} .tf_btn svg path" => 'fill: {{VALUE}};',
+			],
+		] );
+		$this->add_control( "btn_bg_color", [
+			'label'     => __( 'Background Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .tf_btn" => 'background-color: {{VALUE}};',
+			],
+		] );
+		$this->add_group_control( Group_Control_Border::get_type(), [
+			'name'     => "btn_border",
+			'selector' => "{{WRAPPER}} .tf_btn",
+		] );
+		$this->add_control( "btn_border_radius", [
+			'label'      => __( 'Border Radius', 'tourfic' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .tf_btn" => $this->tf_apply_dim( 'border-radius' ),
+			],
+		] );
+		$this->end_controls_tab();
+
+		/*-----Button HOVER state------ */
+		$this->start_controls_tab( "tab_button_hover", [
+			'label' => __( 'Hover', 'tourfic' ),
+		] );
+		$this->add_control( "button_color_hover", [
+			'label'     => __( 'Text Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .tf_btn:hover" => 'color: {{VALUE}};',
+				"{{WRAPPER}} .tf_btn:hover svg path" => 'fill: {{VALUE}};',
+			],
+		] );
+		
+		$this->add_control( "btn_hover_bg_color", [
+			'label'     => __( 'Background Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .tf_btn:hover" => 'background-color: {{VALUE}};',
+			],
+		] );
+		$this->add_control( "btn_hover_border_color", [
+			'label'     => __( 'Border Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .tf_btn:hover" => 'border-color: {{VALUE}};',
+			],
+		] );
+		$this->end_controls_tab();
+		$this->end_controls_tabs();
+		/*-----ends Button tabs--------*/
+
+		$this->add_responsive_control( "btn_width", [
+			'label'      => esc_html__( 'Button width', 'tourfic' ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [
+				'px',
+				'%',
+			],
+			'range'      => [
+				'px' => [
+					'min'  => 0,
+					'max'  => 800,
+					'step' => 5,
+				],
+				'%'  => [
+					'min' => 0,
+					'max' => 100,
+				],
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .tf_btn" => 'width: {{SIZE}}{{UNIT}};',
+			],
+			'separator'  => 'before',
+		] );
+		$this->add_responsive_control( "btn_height", [
+			'label'      => esc_html__( 'Button Height', 'tourfic' ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [
+				'px',
+				'%',
+			],
+			'range'      => [
+				'px' => [
+					'min'  => 0,
+					'max'  => 500,
+					'step' => 5,
+				],
+				'%'  => [
+					'min' => 0,
+					'max' => 100,
+				],
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .tf_btn" => 'height: {{SIZE}}{{UNIT}};',
+			],
+		] );
 		$this->end_controls_section();
 	}
 

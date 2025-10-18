@@ -58,7 +58,7 @@ class Tour_Info_Cards extends Widget_Base {
 		$this->tf_content_layout_controls();
 
 		do_action( 'tf/single-tour-info-cards/before-style-controls', $this );
-		$this->tf_tour_info_cards_style_controls();
+		$this->tf_card_style_controls();
 		do_action( 'tf/single-tour-info-cards/after-style-controls', $this );
 	}
 
@@ -97,7 +97,7 @@ class Tour_Info_Cards extends Widget_Base {
         $this->end_controls_section();
     }
 
-    protected function tf_tour_info_cards_style_controls() {
+    protected function tf_card_style_controls() {
 		$this->start_controls_section( 'tour_info_cards_style_section', [
 			'label' => esc_html__( 'Style', 'tourfic' ),
 			'tab'   => Controls_Manager::TAB_STYLE,
@@ -143,20 +143,6 @@ class Tour_Info_Cards extends Widget_Base {
 			'name' => 'card_shadow',
 			'selector' => '{{WRAPPER}} .tf-trip-feature-blocks .tf-feature-block',
 		]);
-
-        // $this->add_control( "btn_color", [
-		// 	'label'     => __( 'Text Color', 'tourfic' ),
-		// 	'type'      => Controls_Manager::COLOR,
-		// 	'selectors' => [
-		// 		"{{WRAPPER}} .tf-single-action-btns a" => 'color: {{VALUE}};',
-		// 		"{{WRAPPER}} .tf-single-action-btns a svg path" => 'fill: {{VALUE}};',
-		// 	],
-		// ] );
-
-        // $this->add_group_control( Group_Control_Typography::get_type(), [
-		// 	'name'     => "btn_typography",
-		// 	'selector' => "{{WRAPPER}} .tf-single-action-btns a",
-		// ] );
 
 		$this->end_controls_section();
 	}
