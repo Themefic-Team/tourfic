@@ -58,7 +58,9 @@ class House_Rules extends Widget_Base {
 		$this->tf_content_layout_controls();
 
 		do_action( 'tf/single-house-rules/before-style-controls', $this );
-		$this->tf_house_rules_style_controls();
+		$this->tf_general_style_controls();
+		$this->tf_card_style_controls();
+		$this->tf_content_style_controls();
 		do_action( 'tf/single-house-rules/after-style-controls', $this );
 	}
 
@@ -84,7 +86,7 @@ class House_Rules extends Widget_Base {
         $this->end_controls_section();
     }
 
-    protected function tf_house_rules_style_controls() {
+    protected function tf_general_style_controls() {
 		$this->start_controls_section( 'house_rules_style_section', [
 			'label' => esc_html__( 'Style', 'tourfic' ),
 			'tab'   => Controls_Manager::TAB_STYLE,
@@ -148,6 +150,18 @@ class House_Rules extends Widget_Base {
 			'selector' => "{{WRAPPER}} .tf-section-title, {{WRAPPER}} .section-heading",
 		]);
 
+		$this->end_controls_section();
+	}
+
+	protected function tf_card_style_controls() {
+		$this->start_controls_section( 'card_style', [
+			'label' => esc_html__( 'Card Style', 'tourfic' ),
+			'tab'   => Controls_Manager::TAB_STYLE,
+			'condition' => [
+				'house_rules_style' => 'style2'
+			]
+		] );
+
 		$this->add_responsive_control( "card_padding", [
 			'label'      => esc_html__( 'Padding', 'tourfic' ),
 			'type'       => Controls_Manager::DIMENSIONS,
@@ -157,7 +171,7 @@ class House_Rules extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .tf-trip-feature-blocks .tf-feature-block" => $this->tf_apply_dim( 'padding' ),
+				"{{WRAPPER}} .tf-house-rules .tf-house-rules-wrapper" => $this->tf_apply_dim( 'padding' ),
 			],
 		] );
 
@@ -165,13 +179,13 @@ class House_Rules extends Widget_Base {
 			'label'     => __( 'Card Background Color', 'tourfic' ),
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
-				"{{WRAPPER}} .tf-trip-feature-blocks .tf-feature-block" => 'background-color: {{VALUE}};',
+				"{{WRAPPER}} .tf-house-rules .tf-house-rules-wrapper" => 'background-color: {{VALUE}};',
 			],
 		] );
 
         $this->add_group_control( Group_Control_Border::get_type(), [
 			'name'     => "card_border",
-			'selector' => "{{WRAPPER}} .tf-trip-feature-blocks .tf-feature-block",
+			'selector' => "{{WRAPPER}} .tf-house-rules .tf-house-rules-wrapper",
 		] );
 		$this->add_control( "card_border_radius", [
 			'label'      => esc_html__( 'Border Radius', 'tourfic' ),
@@ -181,14 +195,90 @@ class House_Rules extends Widget_Base {
 				'%',
 			],
 			'selectors'  => [
-				"{{WRAPPER}} .tf-trip-feature-blocks .tf-feature-block" => $this->tf_apply_dim( 'border-radius' ),
+				"{{WRAPPER}} .tf-house-rules .tf-house-rules-wrapper" => $this->tf_apply_dim( 'border-radius' ),
 			],
 		] );
 		$this->add_group_control(Group_Control_Box_Shadow::get_type(), [
 			'name' => 'card_shadow',
-			'selector' => '{{WRAPPER}} .tf-trip-feature-blocks .tf-feature-block',
+			'selector' => '{{WRAPPER}} .tf-house-rules .tf-house-rules-wrapper',
+		]);
+		
+		$this->end_controls_section();
+	}
+
+	protected function tf_content_style_controls() {
+		$this->start_controls_section( 'content_style', [
+			'label' => esc_html__( 'Content Style', 'tourfic' ),
+			'tab'   => Controls_Manager::TAB_STYLE,
+		] );
+
+		$this->add_control( "icon_heading", [
+			'type'      => Controls_Manager::HEADING,
+			'label'     => __( 'Icon', 'tourfic' ),
+		] );
+
+		$this->add_control( 'tf_inc_icon_color', [
+			'label'     => esc_html__( 'Include Icon Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors'  => [
+				'{{WRAPPER}} .tf-aprtment-rules-section .aprtment-inc-exc .aprtment-single-rules ul.tf-apartment-inc-items li .rules-icon svg path' => 'fill: {{VALUE}};',
+				'{{WRAPPER}} .tf-house-rules .tf-house-rules-wrapper .tf-included-house-rules li::before' => 'color: {{VALUE}};',
+				'{{WRAPPER}} .tf-house-rules .tf-house-rules-wrapper .tf-included-house-rules li::after' => 'background: {{VALUE}};',
+			],
 		]);
 
+		$this->add_control( 'tf_exc_icon_color', [
+			'label'     => esc_html__( 'Exclude Icon Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors'  => [
+				'{{WRAPPER}} .tf-aprtment-rules-section .aprtment-inc-exc .aprtment-single-rules ul.tf-apartment-exc-items li .rules-icon svg path' => 'fill: {{VALUE}};',
+				'{{WRAPPER}} .tf-house-rules .tf-house-rules-wrapper .tf-not-included-house-rules li::before' => 'color: {{VALUE}};',
+				'{{WRAPPER}} .tf-house-rules .tf-house-rules-wrapper .tf-not-included-house-rules li::after' => 'background: {{VALUE}};',
+			],
+		]);
+
+		$this->add_control( "title_heading", [
+			'type'      => Controls_Manager::HEADING,
+			'label'     => __( 'Title', 'tourfic' ),
+		] );
+
+		$this->add_control( 'tf_item_title_color', [
+			'label'     => esc_html__( 'Title Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors'  => [
+				'{{WRAPPER}} .tf-aprtment-rules-section .aprtment-inc-exc .aprtment-single-rules ul li .rules-content span' => 'color: {{VALUE}};',
+				'{{WRAPPER}} .tf-house-rules .tf-house-rules-wrapper .tf-included-house-rules li h6' => 'color: {{VALUE}};',
+			],
+		]);
+
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+            'label'    => esc_html__( 'Title Typography', 'tourfic' ),
+			'name'     => "tf_item_title_typography",
+			'selector' => "{{WRAPPER}} .tf-aprtment-rules-section .aprtment-inc-exc .aprtment-single-rules ul li .rules-content span,
+						   {{WRAPPER}} .tf-house-rules .tf-house-rules-wrapper .tf-included-house-rules li h6",
+		]);
+
+		$this->add_control( "desc_heading", [
+			'type'      => Controls_Manager::HEADING,
+			'label'     => __( 'Description', 'tourfic' ),
+		] );
+
+		$this->add_control( 'tf_desc_color', [
+			'label'     => esc_html__( 'Description Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors'  => [
+				'{{WRAPPER}} .tf-aprtment-rules-section .aprtment-inc-exc .aprtment-single-rules ul li .rules-content p' => 'color: {{VALUE}};',
+				'{{WRAPPER}} .tf-house-rules .tf-house-rules-wrapper .tf-included-house-rules li p' => 'color: {{VALUE}};',
+			],
+		]);
+
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+            'label'    => esc_html__( 'Description Typography', 'tourfic' ),
+			'name'     => "tf_desc_typography",
+			'selector' => "{{WRAPPER}} .tf-aprtment-rules-section .aprtment-inc-exc .aprtment-single-rules ul li .rules-content p,
+						   {{WRAPPER}} .tf-house-rules .tf-house-rules-wrapper .tf-included-house-rules li span",
+		]);
+		
 		$this->end_controls_section();
 	}
 
@@ -220,7 +310,7 @@ class House_Rules extends Widget_Base {
                     <div class="aprtment-inc-exc <?php echo empty( $included_house_rules ) || empty( $not_included_house_rules ) ? esc_attr('tf-inc-exc-full') : ''; ?>">
                         <?php if ( ! empty( $included_house_rules ) ): ?>
                         <div class="aprtment-single-rules">
-                            <ul>
+                            <ul class="tf-apartment-inc-items">
                                 <?php
                                 foreach ( $included_house_rules as $item ) { ?>
                                 <li>
@@ -241,7 +331,7 @@ class House_Rules extends Widget_Base {
 
                         <?php if ( ! empty( $not_included_house_rules ) ): ?>
                         <div class="aprtment-single-rules">
-                            <ul>
+                            <ul class="tf-apartment-exc-items">
                                 <?php
                                 foreach ( $not_included_house_rules as $item ) { ?>
                                 <li>
