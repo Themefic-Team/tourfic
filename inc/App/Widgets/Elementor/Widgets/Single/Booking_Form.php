@@ -103,7 +103,7 @@ class Booking_Form extends Widget_Base {
     }
 
     protected function tf_general_style_controls() {
-		$this->start_controls_section( 'card_style', [
+		$this->start_controls_section( 'form_style', [
 			'label' => esc_html__( 'General', 'tourfic' ),
 			'tab'   => Controls_Manager::TAB_STYLE,
 		] );
@@ -118,6 +118,12 @@ class Booking_Form extends Widget_Base {
 			],
 			'selectors'  => [
 				"{{WRAPPER}} .tf-single-template__one .tf-tour-booking-box" => $this->tf_apply_dim( 'padding' ),
+				"{{WRAPPER}} .tf-single-template__two .tf-booking-form-wrapper .tf-booking-form" => $this->tf_apply_dim( 'padding' ),
+				"{{WRAPPER}} .tf_booking-widget" => $this->tf_apply_dim( 'padding' ),
+				"{{WRAPPER}} .tf-single-template__two .tf-search-date-wrapper" => $this->tf_apply_dim( 'padding' ), //tour design-2
+				"{{WRAPPER}} .tf-single-template__legacy .tf-tour-booking-wrap" => $this->tf_apply_dim( 'padding' ), //tour default
+				"{{WRAPPER}} .tf-single-template__legacy #tf-apartment-booking" => $this->tf_apply_dim( 'padding' ), //apartment default
+				"{{WRAPPER}} .tf-single-template__one .tf-date-select-box" => $this->tf_apply_dim( 'padding' ), //car design 1
 			],
 		] );
 
@@ -126,12 +132,26 @@ class Booking_Form extends Widget_Base {
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
 				"{{WRAPPER}} .tf-single-template__one .tf-tour-booking-box" => 'background-color: {{VALUE}};',
+				"{{WRAPPER}} .tf-single-template__two .tf-booking-form-wrapper .tf-booking-form" => 'background-color: {{VALUE}};',
+				"{{WRAPPER}} .tf_booking-widget" => 'background: {{VALUE}};',
+				"{{WRAPPER}} .tf-single-template__two .tf-search-date-wrapper" => 'background: {{VALUE}};', //tour design-2
+				"{{WRAPPER}} .tf-single-template__legacy .tf-tour-booking-wrap" => 'background: {{VALUE}};', //tour default
+				"{{WRAPPER}} .tf-single-template__legacy #tf-apartment-booking" => 'background: {{VALUE}};', //apartment default
+				"{{WRAPPER}} .tf-single-template__one .tf-date-select-box" => 'background: {{VALUE}};', //apartment default
 			],
 		] );
+
 		$this->add_group_control( Group_Control_Border::get_type(), [
 			'name'     => "card_border",
-			'selector' => "{{WRAPPER}} .tf-single-template__one .tf-tour-booking-box",
+			'selector' => "{{WRAPPER}} .tf-single-template__one .tf-tour-booking-box,
+						   {{WRAPPER}} .tf-single-template__two .tf-booking-form-wrapper .tf-booking-form,
+						   {{WRAPPER}} .tf_booking-widget,
+						   {{WRAPPER}} .tf-single-template__two .tf-search-date-wrapper,
+						   {{WRAPPER}} .tf-single-template__legacy .tf-tour-booking-wrap,
+						   {{WRAPPER}} .tf-single-template__legacy #tf-apartment-booking,
+						   {{WRAPPER}} .tf-single-template__one .tf-date-select-box",
 		] );
+
 		$this->add_control( "card_border_radius", [
 			'label'      => esc_html__( 'Border Radius', 'tourfic' ),
 			'type'       => Controls_Manager::DIMENSIONS,
@@ -141,11 +161,23 @@ class Booking_Form extends Widget_Base {
 			],
 			'selectors'  => [
 				"{{WRAPPER}} .tf-single-template__one .tf-tour-booking-box" => $this->tf_apply_dim( 'border-radius' ),
+				"{{WRAPPER}} .tf-single-template__two .tf-booking-form-wrapper .tf-booking-form" => $this->tf_apply_dim( 'border-radius' ),
+				"{{WRAPPER}} .tf_booking-widget" => $this->tf_apply_dim( 'border-radius' ),
+				"{{WRAPPER}} .tf-single-template__two .tf-search-date-wrapper" => $this->tf_apply_dim( 'border-radius' ), //tour design-2
+				"{{WRAPPER}} .tf-single-template__legacy .tf-tour-booking-wrap" => $this->tf_apply_dim( 'border-radius' ), //tour default
+				"{{WRAPPER}} .tf-single-template__legacy #tf-apartment-booking" => $this->tf_apply_dim( 'border-radius' ), //apartment default
+				"{{WRAPPER}} .tf-single-template__one .tf-date-select-box" => $this->tf_apply_dim( 'border-radius' ), //car design 1
 			],
 		] );
 		$this->add_group_control(Group_Control_Box_Shadow::get_type(), [
 			'name' => 'card_shadow',
-			'selector' => '{{WRAPPER}} .tf-single-template__one .tf-tour-booking-box',
+			'selector' => '{{WRAPPER}} .tf-single-template__one .tf-tour-booking-box,
+						   {{WRAPPER}} .tf-single-template__two .tf-booking-form-wrapper .tf-booking-form,
+						   {{WRAPPER}} .tf_booking-widget,
+						   {{WRAPPER}} .tf-single-template__two .tf-search-date-wrapper,
+						   {{WRAPPER}} .tf-single-template__legacy .tf-tour-booking-wrap,
+						   {{WRAPPER}} .tf-single-template__legacy #tf-apartment-booking,
+						   {{WRAPPER}} .tf-single-template__one .tf-date-select-box',
 		]);
 		
 		$this->end_controls_section();
@@ -160,17 +192,17 @@ class Booking_Form extends Widget_Base {
 		$this->add_group_control( Group_Control_Typography::get_type(), [
             'label'    => esc_html__( 'Label Typography', 'tourfic' ),
 			'name'     => "tf_label_typography",
-			'selector' => "{{WRAPPER}} .tf-field .acr-label, 
+			'selector' => "{{WRAPPER}} .tf-field .acr-label, {{WRAPPER}} .tf-field .acr-label span, 
 						   {{WRAPPER}} span.tf-booking-form-title, 
 						   {{WRAPPER}} .tf-search-field-label, 
 						   {{WRAPPER}} .tf-select-date .info-select label, 
 						   {{WRAPPER}} .tf-driver-location ul li label",
             'conditions' => $this->tf_display_conditionally_single([
      			'tf_hotel' => [
-     			    'booking_form_style' => ['style1', 'style2'],
+     			    'booking_form_style!' => ['style3'],
      			],
      			'tf_tours' => [
-     			    'booking_form_style' => ['style1', 'style2'],
+     			    'booking_form_style!' => ['style3'],
      			],
      		]),
 		]);
@@ -180,16 +212,24 @@ class Booking_Form extends Widget_Base {
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
 				"{{WRAPPER}} .tf-field-group .tf-field" => 'color: {{VALUE}};',
+				"{{WRAPPER}} .tf-field-group .tf-field span" => 'color: {{VALUE}};',
 				"{{WRAPPER}} .tf_acrselection .acr-select input[type=number]" => 'color: {{VALUE}};',
 				"{{WRAPPER}} .tf_acrselection .acr-inc" => 'color: {{VALUE}}; border-color: {{VALUE}};',
 				"{{WRAPPER}} .tf_acrselection .acr-dec" => 'color: {{VALUE}}; border-color: {{VALUE}};',
 				"{{WRAPPER}} span.tf-booking-form-title" => 'color: {{VALUE}};', //design-2
-				"{{WRAPPER}} .tf-search-field-label" => 'color: {{VALUE}};', //design-3
 				"{{WRAPPER}} .tf_form-inner select" => 'color: {{VALUE}};', //default
 				"{{WRAPPER}} .tf-select-date .info-select label" => 'color: {{VALUE}};', //car design-1
 				"{{WRAPPER}} .tf-driver-location ul li label" => 'color: {{VALUE}};', //car design-1
 				"{{WRAPPER}} .tf-driver-location ul li label .tf-checkmark" => 'border-color: {{VALUE}};', //car design-1
 			],
+			'conditions' => $this->tf_display_conditionally_single([
+     			'tf_hotel' => [
+     			    'booking_form_style!' => ['style3'],
+     			],
+     			'tf_tours' => [
+     			    'booking_form_style!' => ['style3'],
+     			],
+     		]),
 		] );
 
         $this->add_group_control( Group_Control_Typography::get_type(), [
@@ -197,21 +237,9 @@ class Booking_Form extends Widget_Base {
 			'name'     => "tf_placeholder_typography",
 			'selector' => "{{WRAPPER}} .tf-booking-date-wrap span, 
                             {{WRAPPER}} span.tf-booking-date, 
-                            {{WRAPPER}} .tf-booking-form .tf-booking-form-fields .tf-booking-form-guest-and-room .tf-booking-form-guest-and-room-inner .tf-booking-guest-and-room-wrap.tf-archive-guest-info span, 
-                            {{WRAPPER}} .tf-booking-guest-and-room-wrap, 
-                            {{WRAPPER}} .tf-search-input, 
-                            {{WRAPPER}} .tf-archive-guest-info",
-			'conditions' => $this->tf_display_conditionally_single([
-     			'tf_hotel' => [
-     			    'booking_form_style' => ['style2'],
-     			],
-     			'tf_tours' => [
-     			    'booking_form_style' => ['style2'],
-     			],
-     			'tf_apartment' => [
-     			    'booking_form_style' => ['style1'],
-     			],
-     		]),
+                            {{WRAPPER}} .tf_form-row .tf_form-inner select, 
+                            {{WRAPPER}} .tf_form-row .tf_form-inner input[type=text]::placeholder, 
+                            {{WRAPPER}} .tf-field-group .tf-field::placeholder",
 		] );
 		
         $this->add_control( 'tf_input_field_placeholder_color', [
@@ -219,9 +247,8 @@ class Booking_Form extends Widget_Base {
 			'type'      => Controls_Manager::COLOR,
 			'selectors' => [
 				"{{WRAPPER}} .tf-field-group input.tf-field::placeholder" => 'color: {{VALUE}};',
-				"{{WRAPPER}} .tf-booking-location-wrap input.tf-field::placeholder, {{WRAPPER}} .tf-booking-date-wrap span, {{WRAPPER}} .tf-booking-guest-and-room-wrap, {{WRAPPER}} .tf-booking-guest-and-room-wrap span" => 'color: {{VALUE}} !important;', //design-2
-				"{{WRAPPER}} .tf-booking-date-wrap svg path, {{WRAPPER}} .tf-booking-guest-and-room-wrap svg path" => 'fill: {{VALUE}} !important;', //design-2
-				"{{WRAPPER}} .tf-search-field .tf-search-input::placeholder, {{WRAPPER}} .tf-archive-guest-info" => 'color: {{VALUE}} !important;', //design-3
+				"{{WRAPPER}} .tf-booking-location-wrap input.tf-field::placeholder, {{WRAPPER}} .tf-booking-date-wrap span, " => 'color: {{VALUE}} !important;', //design-2
+				"{{WRAPPER}} .tf_form-row .tf_form-inner select" => 'color: {{VALUE}} !important;', //design-2
 				"{{WRAPPER}} .tf_form-inner input[type=text]::placeholder" => 'color: {{VALUE}} !important;', //legacy
 				"{{WRAPPER}} .tf-select-date .info-select input[type=text]::placeholder" => 'color: {{VALUE}} !important;', //legacy
 			],
@@ -249,13 +276,23 @@ class Booking_Form extends Widget_Base {
 				"{{WRAPPER}} .tf-field-group svg" => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}',
 				"{{WRAPPER}} .tf-booking-location-wrap i" => 'font-size: {{SIZE}}{{UNIT}}', //design-2
 				"{{WRAPPER}} .tf-booking-location-wrap svg" => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}', //design-2
-				"{{WRAPPER}} .tf-search-field-icon i" => 'font-size: {{SIZE}}{{UNIT}}', //design-3
-				"{{WRAPPER}} .tf-search-field-icon svg" => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}', //design-3
 				"{{WRAPPER}} .tf_form-inner i" => 'font-size: {{SIZE}}{{UNIT}}', //design-3
 				"{{WRAPPER}} .tf_form-inner svg" => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}', //design-3
+				"{{WRAPPER}} .tf_selectperson-wrap .tf_input-inner i" => 'font-size: {{SIZE}}{{UNIT}};', //legacy
 				"{{WRAPPER}} .tf-date-single-select .tf-select-date i" => 'font-size: {{SIZE}}{{UNIT}}', //design-3
 				"{{WRAPPER}} .tf-date-single-select .tf-select-date svg" => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}', //design-3
 			],
+			'conditions' => $this->tf_display_conditionally_single([
+     			'tf_hotel' => [
+     			    'booking_form_style!' => ['style2'],
+     			],
+     			'tf_tours' => [
+     			    'booking_form_style!' => ['style2'],
+     			],
+     			'tf_apartment' => [
+     			    'booking_form_style!' => ['style1', 'style2'],
+     			],
+     		]),
 		] );
 
 		$this->add_control( "tf_icon_color", [
@@ -268,13 +305,23 @@ class Booking_Form extends Widget_Base {
 				"{{WRAPPER}} .tf-field-group svg path" => 'fill: {{VALUE}}',
 				"{{WRAPPER}} .tf-booking-location-wrap i" => 'color: {{VALUE}}', //design-2
 				"{{WRAPPER}} .tf-booking-location-wrap svg path" => 'fill: {{VALUE}}', //design-2
-				"{{WRAPPER}} .tf-search-field-icon i" => 'color: {{VALUE}}', //design-3
-				"{{WRAPPER}} .tf-search-field-icon svg path" => 'fill: {{VALUE}}', //design-3
 				"{{WRAPPER}} .tf_form-inner i" => 'color: {{VALUE}}', //design-3
 				"{{WRAPPER}} .tf_form-inner svg path" => 'fill: {{VALUE}}', //design-3
+				"{{WRAPPER}} .tf_selectperson-wrap .tf_input-inner i" => 'color: {{VALUE}}', //legacy
 				"{{WRAPPER}} .tf-date-single-select .tf-select-date i" => 'color: {{VALUE}}', //design-3
 				"{{WRAPPER}} .tf-date-single-select .tf-select-date svg path" => 'fill: {{VALUE}}', //design-3
 			],
+			'conditions' => $this->tf_display_conditionally_single([
+     			'tf_hotel' => [
+     			    'booking_form_style!' => ['style2'],
+     			],
+     			'tf_tours' => [
+     			    'booking_form_style!' => ['style2'],
+     			],
+     			'tf_apartment' => [
+     			    'booking_form_style!' => ['style1', 'style2'],
+     			],
+     		]),
 		] );
 
 		$this->add_responsive_control( "tc_icon_gap", [
@@ -298,10 +345,21 @@ class Booking_Form extends Widget_Base {
 				"{{WRAPPER}} .tf-field-group svg" => 'margin-right: {{SIZE}}px;',
 				"{{WRAPPER}} .tf-booking-location-wrap i" => 'margin-right: {{SIZE}}px;',
 				"{{WRAPPER}} .tf-booking-location-wrap svg" => 'margin-right: {{SIZE}}px;',
-				"{{WRAPPER}} .tf-search-fields .tf-search-field" => 'gap: {{SIZE}}px;',
 				"{{WRAPPER}} .tf_form-inner" => 'gap: {{SIZE}}px;',
+				"{{WRAPPER}} .tf_selectperson-wrap .tf_input-inner i" => 'margin-right: {{SIZE}}px;',
 				"{{WRAPPER}} .tf-date-single-select .tf-select-date .tf-flex-gap-4" => 'gap: {{SIZE}}px;',
 			],
+			'conditions' => $this->tf_display_conditionally_single([
+     			'tf_hotel' => [
+     			    'booking_form_style!' => ['style2'],
+     			],
+     			'tf_tours' => [
+     			    'booking_form_style!' => ['style2'],
+     			],
+     			'tf_apartment' => [
+     			    'booking_form_style!' => ['style1', 'style2'],
+     			],
+     		]),
 		] );
 
 		$this->end_controls_section();

@@ -525,6 +525,11 @@ class FAQ extends Widget_Base {
         $post_id   = get_the_ID();
         $post_type = get_post_type();
 
+        $description_key = 'description';
+        if($post_type == 'tf_tours'){
+            $description_key = 'desc';
+        }
+
         if($post_type == 'tf_hotel'){
             $meta = get_post_meta($post_id, 'tf_hotels_opt', true);
 			$faqs = ! empty( Helper::tf_data_types($meta['faq']) ) ? Helper::tf_data_types($meta['faq']) : '';
@@ -582,11 +587,7 @@ class FAQ extends Widget_Base {
                                 }?>
                             </div>
                             <div class="tf-faq-content" style="<?php echo $faq_key==1 ? esc_attr( 'display: block;' ) : ''; ?>">
-                                <?php if($post_type == 'tf_tours'): ?>
-                                    <p><?php echo wp_kses_post( $faq['desc'] ); ?></p>
-                                <?php else: ?>
-                                    <p><?php echo wp_kses_post( $faq['description'] ); ?></p>
-                                <?php endif; ?>
+                                <p><?php echo wp_kses_post( $faq[$description_key] ); ?></p>
                             </div>
                         </div>
                     </div>
@@ -631,11 +632,7 @@ class FAQ extends Widget_Base {
                                 }?>
                             </div>
                             <div class="tf-question-desc" style="<?php echo $key == 0 ? 'display: block;' : ''; ?>">
-                                <?php if($post_type == 'tf_tours'): ?>
-                                    <?php echo wp_kses_post( $faq['desc'] ); ?>
-                                <?php else: ?>
-                                    <?php echo wp_kses_post( $faq['description'] ); ?>
-                                <?php endif; ?>
+                                <?php echo wp_kses_post( $faq[$description_key] ); ?>
                             </div>
                         </div>
                         <?php } ?>
@@ -660,7 +657,7 @@ class FAQ extends Widget_Base {
                                 }?>
                             </div>
                             <div class="tf-question-desc" style="<?php echo $key == 0 ? 'display: block;' : ''; ?>">
-                            <?php echo wp_kses_post( $faq['description'] ); ?>
+                                <?php echo wp_kses_post( $faq[$description_key] ); ?>
                             </div>
                         </div>
                         <?php } ?>
@@ -691,15 +688,9 @@ class FAQ extends Widget_Base {
                             </div>
                         <?php } ?>
 
-                        <?php if(!empty($faq['description'])){ ?>
-                            <div class="tf-question-desc tf-faq-content" style="<?php echo $faq_key==1 ? esc_attr( 'display: block;' ) : ''; ?>">
-                                <?php if($post_type == 'tf_tours'): ?>
-                                    <?php echo wp_kses_post( $faq['desc'] ); ?>
-                                <?php else: ?>
-                                    <?php echo wp_kses_post( $faq['description'] ); ?>
-                                <?php endif; ?>
-                            </div>
-                        <?php } ?>
+                        <div class="tf-question-desc tf-faq-content" style="<?php echo $faq_key==1 ? esc_attr( 'display: block;' ) : ''; ?>">
+                            <?php echo wp_kses_post( $faq[$description_key] ); ?>
+                        </div>
                     </div>
                 <?php $faq_key++; endforeach; ?>
             </div>
@@ -729,7 +720,7 @@ class FAQ extends Widget_Base {
                                 <?php } ?>
                                 
                                 <div class="tf-faq-desc" <?php echo $key === 0 ? 'style="display: block;"' : ''; ?>>
-									<?php echo wp_kses_post( $faq['description'] ); ?>
+									<?php echo wp_kses_post( $faq[$description_key] ); ?>
                                 </div>
                             </div>
 						<?php endforeach; ?>

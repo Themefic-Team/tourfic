@@ -34,6 +34,104 @@ trait Utils {
 	}
 
     /**
+     * Return Elementor "conditions" array for single widgets (no service control).
+     * - Supports service keys: 'tf_hotel', 'tf_tours', 'tf_apartment', 'tf_carrental' (and '...!' negation on service)
+     * - Supports control-key negation: e.g. 'booking_form_style!' => ['style3'] means "NOT style3"
+     * - If no service block matches, returns null => Elementor shows the control with no conditions (no warnings).
+     *
+     * Example:
+     * 'conditions' => $this->tf_display_conditionally_single([
+     *   'tf_hotel' => [ 'booking_form_style!' => ['style3'] ],
+     *   'tf_tours' => [ 'booking_form_style!' => ['style3'] ],
+     * ]),
+     */
+    protected function tf_display_conditionally_single(array $service_map): ?array {
+        // Detect current service from post type
+        $current = method_exists($this, 'get_current_post_type') ? $this->get_current_post_type() : (function_exists('get_post_type') ? get_post_type() : null);
+        if (!in_array($current, ['tf_hotel','tf_tours','tf_apartment','tf_carrental'], true)) {
+            $current = 'tf_hotel'; // safe fallback
+        }
+
+        $groups = [];
+
+        foreach ($service_map as $svc_key => $controls) {
+            $svc_not = false;
+            if (substr($svc_key, -1) === '!') {
+                $svc_not = true;
+                $svc_key = rtrim($svc_key, '!');
+            }
+
+            $matches = ($current === $svc_key && !$svc_not) || ($current !== $svc_key && $svc_not);
+            if (!$matches) {
+                continue; // skip this service block
+            }
+
+            // AND across different control keys for this service
+            $and_terms = [];
+
+            foreach ($controls as $control_key_raw => $values) {
+                $ctrl_not = false;
+                $control_key = $control_key_raw;
+
+                // Support key-level negation like 'booking_form_style!'
+                if (substr($control_key_raw, -1) === '!') {
+                    $ctrl_not    = true;
+                    $control_key = rtrim($control_key_raw, '!');
+                }
+
+                $vals = (array) $values;
+
+                if ($ctrl_not) {
+                    // Exclusion: all values must be != (AND of !=)
+                    foreach ($vals as $val) {
+                        $and_terms[] = [
+                            'name'     => $control_key,
+                            'operator' => '!=',
+                            'value'    => $val,
+                        ];
+                    }
+                } else {
+                    // Inclusion: single value => == ; multiple => OR of ==
+                    if (count($vals) <= 1) {
+                        $and_terms[] = [
+                            'name'     => $control_key,
+                            'operator' => '==',
+                            'value'    => reset($vals),
+                        ];
+                    } else {
+                        $or_group = ['relation' => 'or', 'terms' => []];
+                        foreach ($vals as $val) {
+                            $or_group['terms'][] = [
+                                'name'     => $control_key,
+                                'operator' => '==',
+                                'value'    => $val,
+                            ];
+                        }
+                        $and_terms[] = $or_group;
+                    }
+                }
+            }
+
+            if (!empty($and_terms)) {
+                $groups[] = [
+                    'relation' => 'and',
+                    'terms'    => $and_terms,
+                ];
+            }
+        }
+
+        // If no service block matched (e.g., apartment/car not listed), return null (no conditions) => show control.
+        if (empty($groups)) {
+            return null;
+        }
+
+        return [
+            'relation' => 'or',
+            'terms'    => $groups,
+        ];
+    }
+
+    /**
      * Single-template conditional builder without a "service" control.
      *
      * Usage:
@@ -50,7 +148,7 @@ trait Utils {
      *     ],
      * ]),
      */
-    protected function tf_display_conditionally_single(array $service_map): array {
+    protected function tf_display_conditionally_single_old(array $service_map): array {
         $current = $this->get_current_post_type();
         $groups  = [];
 
