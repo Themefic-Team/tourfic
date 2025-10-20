@@ -5809,6 +5809,12 @@ a.tf-import-btn, a.tf-export-btn {
   padding: 0;
   margin: 0;
 }
+.tf-tour-cal-wrap .tf-date-time-selection .tf-field-repeater .tf-repeater-content-wrap,
+.tf-apt-cal-wrap .tf-date-time-selection .tf-field-repeater .tf-repeater-content-wrap,
+.tf-room-cal-wrap .tf-date-time-selection .tf-field-repeater .tf-repeater-content-wrap {
+  margin: 0;
+  border: 0px solid;
+}
 .tf-tour-cal-wrap .tf-date-time-selection .tf-field-repeater .tf-fieldset,
 .tf-apt-cal-wrap .tf-date-time-selection .tf-field-repeater .tf-fieldset,
 .tf-room-cal-wrap .tf-date-time-selection .tf-field-repeater .tf-fieldset {

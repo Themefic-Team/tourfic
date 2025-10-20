@@ -506,6 +506,10 @@
             border: 0;
             padding: 0;
             margin: 0;
+            .tf-repeater-content-wrap{
+                margin: 0;
+                border: 0px solid;
+            }
             .tf-fieldset{
                 border: 0px solid #f2f5f7;
                 background: #fff;

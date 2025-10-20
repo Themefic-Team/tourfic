@@ -1600,42 +1600,60 @@ class Migrator {
 									'min_person'   => $cont_min_people,
 									'max_person'   => $cont_max_people,
 									'max_capacity' => $cont_max_capacity,
-									'allowed_time' => '',
+									'allowed_time' => !empty($tf_tour_allowed_time) ? $tf_tour_allowed_time : '',
 									'status'       => 'available'
 								];
-								$tour_availability_data[$tf_tour_date] = $tf_tour_data;
+								$tour_availability_data[ $tf_tour_date ] = $tf_tour_data;
 							}
 						}
 
-						if(!empty($disable_range)){
-							foreach($disable_range as $disable){
-								if(!empty($disable['date']['from'])){
-									$tf_checkin_date = $disable['date']['from'];
-									$tf_checkout_date = !empty($disable['date']['to']) ? $disable['date']['to'] : $disable['date']['from'];
-									$tf_tour_date = $tf_checkin_date . ' - ' . $tf_checkout_date;
-									$tf_tour_data = [
-										'check_in'     => $tf_checkin_date,
-										'check_out'    => $tf_checkout_date,
-										'pricing_type' => $pricing_rule,
-										'price'        => '',
-										'adult_price'  => '',
-										'child_price'  => '',
-										'infant_price' => '',
-										'min_person'   => '',
-										'max_person'   => '',
-										'max_capacity' => '',
-										'allowed_time' => '',
-										'status'       => 'unavailable'
-									];
-
-									$tour_availability_data[$tf_tour_date] = $tf_tour_data;
+						if ( ! empty( $disable_range ) ) {
+							foreach ( $disable_range as $disable ) {
+								if ( ! empty( $disable['date']['from'] ) ) {
+									$tf_checkin_date  = $disable['date']['from'];
+									$tf_checkout_date = ! empty( $disable['date']['to'] ) ? $disable['date']['to'] : $disable['date']['from'];
+						
+									// Convert to DateTime objects
+									$start = \DateTime::createFromFormat('d/m/Y', $tf_checkin_date);
+									$end   = \DateTime::createFromFormat('d/m/Y', $tf_checkout_date);
+						
+									if ( $start && $end ) {
+						
+										$period = new \DatePeriod($start, new \DateInterval('P1D'), $end);
+						
+										foreach ( $period as $date ) {
+											$current_date = $date->format('d/m/Y');
+						
+											$tf_tour_date = trim($current_date) . ' - ' . trim($current_date);
+											$tf_tour_data = [
+												'check_in'     => $current_date,
+												'check_out'    => $current_date,
+												'pricing_type' => $pricing_rule,
+												'price'        => '',
+												'adult_price'  => '',
+												'child_price'  => '',
+												'infant_price' => '',
+												'min_person'   => '',
+												'max_person'   => '',
+												'max_capacity' => '',
+												'allowed_time' => '',
+												'status'       => 'unavailable'
+											];
+						
+											if ( ! array_key_exists( $tf_tour_date, $tour_availability_data ) ) {
+												$tour_availability_data[ $tf_tour_date ] = $tf_tour_data;
+											}
+										}
+									}
 								}
 							}
 						}
+						
 
+						// var_dump($tour_availability_data); exit;
 						if(!empty($disable_specific)){
 							foreach($disable_specific as $disable){
-								$tf_tour_date = $disable . ' - ' . $disable;
+								$tf_tour_date = trim($disable) . ' - ' . trim($disable);
 								$tf_tour_data = [
 									'check_in'     => $disable,
 									'check_out'    => $disable,
@@ -1650,17 +1668,19 @@ class Migrator {
 									'allowed_time' => '',
 									'status'       => 'unavailable'
 								];
-								$tour_availability_data[$tf_tour_date] = $tf_tour_data;
+								if ( ! array_key_exists( $tf_tour_date, $tour_availability_data ) ) {
+									$tour_availability_data[ $tf_tour_date ] = $tf_tour_data;
+								}
 							}
 						}
 
 						if(!empty($disabled_day)){
-							for ( $i = 0; $i <= 50; $i ++ ) {
+							for ( $i = 0; $i <= 350; $i ++ ) {
 								$tf_room_date                     = gmdate( 'Y/m/d', strtotime( "+$i day" ) );
 								$day_number = gmdate( 'w', strtotime( $tf_room_date ) );
 								
 								if (in_array($day_number, $disabled_day)){
-									$tf_tour_date = $tf_room_date . ' - ' . $tf_room_date;
+									$tf_tour_date = trim($tf_room_date) . ' - ' . trim($tf_room_date);
 									$tf_tour_data = [
 										'check_in'    => $tf_room_date,
 										'check_out'   => $tf_room_date,
@@ -1675,7 +1695,7 @@ class Migrator {
 										'allowed_time' => '',
 										'status'       => 'unavailable'
 									];
-									$tour_availability_data[$tf_tour_date] = $tf_tour_data;
+									$tour_availability_data[ $tf_tour_date ] = $tf_tour_data;
 								}
 							}
 						}
