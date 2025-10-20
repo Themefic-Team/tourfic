@@ -34,6 +34,241 @@ trait Utils {
 	}
 
     /**
+     * Elementor conditions for single widgets (no "service" control).
+     * - Service keys: tf_hotel, tf_tours, tf_apartment, tf_carrental (+ '!' for NOT)
+     * - Control-key negation: e.g. 'highlights_style!' => ['style2']
+     * - $fallback_show_on_miss:
+     *      false (default) => if current service doesn't match any block, control is HIDDEN
+     *      true            => if current service doesn't match any block, control is SHOWN
+     */
+    protected function tf_display_conditionally_single_old2(array $service_map, bool $fallback_show_on_miss = false): array {
+        // --- Resolve current service (editor + frontend) ---
+        $current = null;
+
+        if (method_exists($this, 'get_current_post_type')) {
+            $current = $this->get_current_post_type();
+        }
+        if (!$current && isset($_GET['tf_preview_post_id'])) {
+            $preview_id = intval($_GET['tf_preview_post_id']);
+            if ($preview_id) {
+                $p = get_post($preview_id);
+                if ($p && isset($p->post_type)) $current = $p->post_type;
+            }
+        }
+        if (!$current && function_exists('get_post_type')) {
+            $maybe = get_post_type();
+            if ($maybe) $current = $maybe;
+        }
+        if (!$current && isset($GLOBALS['post']) && $GLOBALS['post'] instanceof \WP_Post) {
+            $current = $GLOBALS['post']->post_type;
+        }
+
+        $groups = [];
+
+        foreach ($service_map as $svc_key => $controls) {
+            $svc_not = false;
+            if (substr($svc_key, -1) === '!') {
+                $svc_not = true;
+                $svc_key = rtrim($svc_key, '!');
+            }
+
+            $matches = $current
+                ? (($current === $svc_key && !$svc_not) || ($current !== $svc_key && $svc_not))
+                : false;
+
+            if (!$matches) continue;
+
+            // AND across control keys for this matched service
+            $and_terms = [];
+
+            foreach ($controls as $control_key_raw => $values) {
+                $ctrl_not    = false;
+                $control_key = $control_key_raw;
+
+                if (substr($control_key_raw, -1) === '!') {
+                    $ctrl_not    = true;
+                    $control_key = rtrim($control_key_raw, '!');
+                }
+
+                $vals = (array) $values;
+
+                if ($ctrl_not) {
+                    // Exclusion => AND of "!="
+                    foreach ($vals as $val) {
+                        $and_terms[] = [
+                            'name'     => $control_key,
+                            'operator' => '!=',
+                            'value'    => $val,
+                        ];
+                    }
+                } else {
+                    // Inclusion => single "==" OR group (OR of "==")
+                    if (count($vals) <= 1) {
+                        $and_terms[] = [
+                            'name'     => $control_key,
+                            'operator' => '==',
+                            'value'    => reset($vals),
+                        ];
+                    } else {
+                        $or_group = ['relation' => 'or', 'terms' => []];
+                        foreach ($vals as $val) {
+                            $or_group['terms'][] = [
+                                'name'     => $control_key,
+                                'operator' => '==',
+                                'value'    => $val,
+                            ];
+                        }
+                        $and_terms[] = $or_group;
+                    }
+                }
+            }
+
+            if (!empty($and_terms)) {
+                $groups[] = [
+                    'relation' => 'and',
+                    'terms'    => $and_terms,
+                ];
+            }
+        }
+
+        // --- Fallback when no service block matched or service unknown ---
+        if (empty($groups)) {
+            if ($fallback_show_on_miss) {
+                // Always-true (Elementor-safe)
+                return [
+                    'relation' => 'or',
+                    'terms'    => [
+                        ['relation' => 'and', 'terms' => []],
+                    ],
+                ];
+            }
+            // Always-false (Elementor-safe)
+            return [
+                'relation' => 'or',
+                'terms'    => [
+                    [
+                        'relation' => 'and',
+                        'terms'    => [
+                            ['name' => '__tf_dummy__', 'operator' => '==', 'value' => '__never__'],
+                        ],
+                    ],
+                ],
+            ];
+        }
+
+        return [
+            'relation' => 'or',
+            'terms'    => $groups,
+        ];
+    }
+
+
+    /**
+     * Return Elementor "conditions" for single widgets (no service control).
+     * - Service keys: tf_hotel, tf_tours, tf_apartment, tf_carrental (+ '!').
+     * - Control-key negation supported: e.g. 'booking_form_style!' => ['style3'].
+     * - If service can't be resolved OR no blocks match, returns null (no conditions).
+     */
+    protected function tf_display_conditionally_single_old1(array $service_map): ?array {
+        // Resolve current service/post type robustly in editor & frontend
+        $current = null;
+
+        if (method_exists($this, 'get_current_post_type')) {
+            $current = $this->get_current_post_type();
+        }
+
+        if (!$current && isset($_GET['tf_preview_post_id'])) {
+            $preview_id = intval($_GET['tf_preview_post_id']);
+            if ($preview_id) {
+                $p = get_post($preview_id);
+                if ($p && isset($p->post_type)) {
+                    $current = $p->post_type;
+                }
+            }
+        }
+
+        if (!$current && function_exists('get_post_type')) {
+            $maybe = get_post_type();
+            if ($maybe) {
+                $current = $maybe;
+            }
+        }
+
+        // Only proceed if we’re on one of the TF services; otherwise, no conditions
+        $services = ['tf_hotel','tf_tours','tf_apartment','tf_carrental'];
+        if (!in_array($current, $services, true)) {
+            return null; // show control; avoids Elementor warnings
+        }
+
+        $groups = [];
+
+        foreach ($service_map as $svc_key => $controls) {
+            // Build AND across control keys for this matched service
+            $and_terms = [];
+
+            foreach ($controls as $control_key_raw => $values) {
+                $ctrl_not   = false;
+                $control_key = $control_key_raw;
+
+                // Support 'key!' negation (NOT)
+                if (substr($control_key_raw, -1) === '!') {
+                    $ctrl_not   = true;
+                    $control_key = rtrim($control_key_raw, '!');
+                }
+                $vals = (array) $values;
+
+                if ($ctrl_not) {
+                    // Exclusion => AND of "!="
+                    foreach ($vals as $val) {
+                        $and_terms[] = [
+                            'name'     => $control_key,
+                            'operator' => '!=',
+                            'value'    => $val,
+                        ];
+                    }
+                } else {
+                    // Inclusion => single "==" OR group of "=="
+                    if (count($vals) <= 1) {
+                        $and_terms[] = [
+                            'name'     => $control_key,
+                            'operator' => '==',
+                            'value'    => reset($vals),
+                        ];
+                    } else {
+                        $or_group = ['relation' => 'or', 'terms' => []];
+                        foreach ($vals as $val) {
+                            $or_group['terms'][] = [
+                                'name'     => $control_key,
+                                'operator' => '==',
+                                'value'    => $val,
+                            ];
+                        }
+                        $and_terms[] = $or_group;
+                    }
+                }
+            }
+
+            if (!empty($and_terms)) {
+                $groups[] = [
+                    'relation' => 'and',
+                    'terms'    => $and_terms,
+                ];
+            }
+        }
+
+        // If no service block matched (e.g., you only specified hotel/tour and we're on apartment), show control
+        if (empty($groups)) {
+            return null;
+        }
+
+        return [
+            'relation' => 'or',
+            'terms'    => $groups,
+        ];
+    }
+
+
+    /**
      * Return Elementor "conditions" array for single widgets (no service control).
      * - Supports service keys: 'tf_hotel', 'tf_tours', 'tf_apartment', 'tf_carrental' (and '...!' negation on service)
      * - Supports control-key negation: e.g. 'booking_form_style!' => ['style3'] means "NOT style3"
