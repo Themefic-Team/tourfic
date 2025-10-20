@@ -1502,7 +1502,7 @@ class Migrator {
 							$custom_pricing_by = ! empty( $meta['custom_pricing_by'] ) ? $meta['custom_pricing_by'] : 'person';
 							foreach($cont_custom_date as $date){
 								$tf_start_date = ! empty( $date['date']['from'] ) ? $date['date']['from'] : '';
-								$tf_end_date = ! empty( $date['date']['to'] ) ? $date['date']['to'] : '';
+								$tf_end_date = ! empty( $date['date']['to'] ) ? $date['date']['to'] : $tf_start_date;
 
 								$min_seat = ! empty( $date['min_people'] ) ? $date['min_people'] : '';
 								$max_seat = ! empty( $date['max_people'] ) ? $date['max_people'] : '';
@@ -1513,39 +1513,52 @@ class Migrator {
 								$infant_price = ! empty( $date['infant_price'] ) ? $date['infant_price'] : '';
 								$group_price = ! empty( $date['group_price'] ) ? $date['group_price'] : '';
 
-								if(!empty($tf_start_date) && !empty($tf_end_date)){
-									$allowed_time = ! empty( $date['allowed_time'] ) ? $date['allowed_time'] : '';
-									$tf_tour_allowed_time = [];
-									if(!empty($allowed_time)){
-										$times = [];
-										$max_capacity = [];
-										foreach($allowed_time as $time){
-											$times[$time['time']] = $time['time'];
-											$max_capacity[$time['max_capacity']] = $time['max_capacity'];
-										}
-										$tf_tour_allowed_time = [
-											'time' => $times,
-											'cont_max_capacity' => $max_capacity
-										];
-									}
-									$tf_tour_date = $tf_start_date . ' - ' . $tf_end_date;
-									$tf_tour_data = [
-										'check_in'     => $tf_start_date,
-										'check_out'    => $tf_end_date,
-										'pricing_type' => $custom_pricing_by,
-										'price'        => $group_price,
-										'adult_price'  => $adult_price,
-										'child_price'  => $child_price,
-										'infant_price' => $infant_price,
-										'min_person'   => $min_seat,
-										'max_person'   => $max_seat,
-										'max_capacity' => $total_capacity,
-										'allowed_time' => !empty($tf_tour_allowed_time) ? $tf_tour_allowed_time : '',
-										'status'       => 'available'
-									];
+								// Convert to DateTime objects
+								$start = \DateTime::createFromFormat('Y/m/d', $tf_start_date);
+								$end   = \DateTime::createFromFormat('Y/m/d', $tf_end_date);
 
-									$tour_availability_data[$tf_tour_date] = $tf_tour_data;
+								if ( $start && $end ) {
+									$period = new \DatePeriod($start, new \DateInterval('P1D'), $end);
+									foreach ( $period as $pdate ) {
+										$current_date = $pdate->format('Y/m/d');
+					
+										$tf_tour_date = trim($current_date) . ' - ' . trim($current_date);
+
+										$allowed_time = ! empty( $date['allowed_time'] ) ? $date['allowed_time'] : '';
+
+										$tf_tour_allowed_time = [];
+										if(!empty($allowed_time)){
+											$times = [];
+											$max_capacity = [];
+											foreach($allowed_time as $time){
+												$times[$time['time']] = $time['time'];
+												$max_capacity[$time['max_capacity']] = $time['max_capacity'];
+											}
+											$tf_tour_allowed_time = [
+												'time' => $times,
+												'cont_max_capacity' => $max_capacity
+											];
+										}
+										
+										$tf_tour_data = [
+											'check_in'     => $current_date,
+											'check_out'    => $current_date,
+											'pricing_type' => $custom_pricing_by,
+											'price'        => $group_price,
+											'adult_price'  => $adult_price,
+											'child_price'  => $child_price,
+											'infant_price' => $infant_price,
+											'min_person'   => $min_seat,
+											'max_person'   => $max_seat,
+											'max_capacity' => $total_capacity,
+											'allowed_time' => !empty($tf_tour_allowed_time) ? $tf_tour_allowed_time : '',
+											'status'       => 'available'
+										];
+
+										$tour_availability_data[$tf_tour_date] = $tf_tour_data;
+									}
 								}
+
 							}
 						}
 					}else{
@@ -1649,8 +1662,6 @@ class Migrator {
 							}
 						}
 						
-
-						// var_dump($tour_availability_data); exit;
 						if(!empty($disable_specific)){
 							foreach($disable_specific as $disable){
 								$tf_tour_date = trim($disable) . ' - ' . trim($disable);
