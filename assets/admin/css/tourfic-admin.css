@@ -4378,6 +4378,9 @@ Steps
   background: linear-gradient(180deg, #0051A3 0%, #003C79 100%);
   color: #FFFFFF;
 }
+.tf-field-repeater .tf-repeater .tf-repeater-header.active-repeater + .tf-repeater-content-wrap {
+  background-color: #FBFCFE;
+}
 .tf-field-repeater .tf-repeater .tf-repeater-add {
   margin-left: 16px;
 }

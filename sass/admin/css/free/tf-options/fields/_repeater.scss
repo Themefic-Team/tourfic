@@ -151,6 +151,10 @@
       }
     }
 
+    .tf-repeater-header.active-repeater + .tf-repeater-content-wrap {
+      background-color: #FBFCFE;
+    }
+    
     .tf-repeater-add {
       margin-left: 16px;
       .tf-repeater-icon {
