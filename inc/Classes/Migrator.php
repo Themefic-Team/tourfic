@@ -1538,6 +1538,7 @@ class Migrator {
 								$end   = \DateTime::createFromFormat('Y/m/d', $tf_end_date);
 
 								if ( $start && $end ) {
+									$end = $end->modify('+1 day');
 									$period = new \DatePeriod($start, new \DateInterval('P1D'), $end);
 									foreach ( $period as $pdate ) {
 										$current_date = $pdate->format('Y/m/d');
