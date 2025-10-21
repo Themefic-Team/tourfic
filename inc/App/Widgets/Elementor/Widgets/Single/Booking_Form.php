@@ -97,6 +97,12 @@ class Booking_Form extends Widget_Base {
 			'options' => $options,
 		]);
 
+		$this->add_control('service',[
+			'label' => esc_html__( 'Service', 'tourfic' ),
+			'type' => \Elementor\Controls_Manager::HIDDEN,
+			'default' => $this->get_current_post_type(),
+		]);
+
 	    do_action( 'tf/single-booking-form/after-content/controls', $this );
 
         $this->end_controls_section();

@@ -61,6 +61,7 @@ class Highlights extends Widget_Base {
 		$this->tf_section_title_style_controls();
 		$this->tf_card_style_controls();
 		$this->tf_thumbnail_style_controls();
+		$this->tf_icon_style_controls();
 		$this->tf_title_style_controls();
 		$this->tf_content_style_controls();
 		do_action( 'tf/single-highlights/after-style-controls', $this );
@@ -72,6 +73,12 @@ class Highlights extends Widget_Base {
         ]);
 
         do_action( 'tf/single-highlights/before-content/controls', $this );
+
+		$this->add_control('service',[
+			'label' => esc_html__( 'Service', 'tourfic' ),
+			'type' => \Elementor\Controls_Manager::HIDDEN,
+			'default' => $this->get_current_post_type(),
+		]);
 
 		$this->add_control('highlights_style',[
             'label' => esc_html__('Highlights Style', 'tourfic'),
@@ -129,6 +136,7 @@ class Highlights extends Widget_Base {
 			'selectors'  => [
 				'{{WRAPPER}} .tf-section-title' => 'color: {{VALUE}};',
 				'{{WRAPPER}} .tf-highlight-wrapper .tf-highlight-item .tf-highlight-text .section-heading' => 'color: {{VALUE}};',
+				'{{WRAPPER}} .section-heading' => 'color: {{VALUE}};',
 			],
 		]);
 
@@ -160,9 +168,8 @@ class Highlights extends Widget_Base {
 			'label' => esc_html__( 'Card Style', 'tourfic' ),
 			'tab'   => Controls_Manager::TAB_STYLE,
 			'conditions' => $this->tf_display_conditionally_single([
-     			'tf_tours!' => [
-     			    'highlights_style!' => ['style2'],
-     			],
+     			'tf_tours' => ['highlights_style' => ['style1']],
+     			'tf_apartment' => ['highlights_style' => ['style1', 'style2']],
      		]),
 		] );
 
@@ -226,6 +233,11 @@ class Highlights extends Widget_Base {
 		$this->start_controls_section( 'thumbnail_style', [
 			'label' => esc_html__( 'Thumbnail Style', 'tourfic' ),
 			'tab'   => Controls_Manager::TAB_STYLE,
+			'conditions' => $this->tf_display_conditionally_single([
+     			'tf_tours' => [
+     			    'highlights_style' => ['style1', 'style2'],
+     			],
+     		]),
 		] );
 
 		$this->add_responsive_control('image_align',[
@@ -347,6 +359,66 @@ class Highlights extends Widget_Base {
 		$this->end_controls_section();
 	}
 
+	protected function tf_icon_style_controls() {
+		$this->start_controls_section( 'icon_style', [
+			'label' => esc_html__( 'Icon Style', 'tourfic' ),
+			'tab'   => Controls_Manager::TAB_STYLE,
+			'conditions' => $this->tf_display_conditionally_single([
+     			'tf_apartment' => [
+     			    'highlights_style' => ['style1', 'style2'],
+     			],
+     		]),
+		] );
+
+		$this->add_responsive_control( "tf_icon_size", [
+			'label'      => esc_html__( 'Icon Size', 'tourfic' ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [
+				'px',
+				'rem',
+				'%',
+			],
+			'range'      => [
+				'px' => [
+					'min'  => 0,
+					'max'  => 50,
+					'step' => 1,
+				],
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .tf-features-block-wrapper .tf-feature-block i" => 'font-size: {{SIZE}}{{UNIT}}',
+				"{{WRAPPER}} .tf-apt-highlights .tf-apt-highlight .tf-apt-highlight-icon i" => 'font-size: {{SIZE}}{{UNIT}}',
+			],
+		] );
+
+		$this->add_control( "tf_icon_color", [
+			'label'     => esc_html__( 'Icon Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors' => [
+				"{{WRAPPER}} .tf-features-block-wrapper .tf-feature-block i" => 'color: {{VALUE}}',
+				"{{WRAPPER}} .tf-apt-highlights .tf-apt-highlight .tf-apt-highlight-icon i" => 'color: {{VALUE}}',
+			],
+		] );
+
+		$this->add_responsive_control( "tc_icon_gap", [
+			'label'     => esc_html__( 'Icon Gap', 'tourfic' ),
+			'type'      => Controls_Manager::SLIDER,
+			'range'     => [
+				'px' => [
+					'min'  => 0,
+					'max'  => 50,
+					'step' => 1,
+				],
+			],
+			'selectors' => [
+				"{{WRAPPER}} .tf-features-block-wrapper .tf-feature-block" => 'gap: {{SIZE}}px;',
+				"{{WRAPPER}} .tf-apt-highlight .tf-apt-highlight-top" => 'gap: {{SIZE}}px;',
+			],
+		] );
+
+		$this->end_controls_section();
+	}
+
     protected function tf_title_style_controls() {
 		$this->start_controls_section( 'title_style', [
 			'label' => esc_html__( 'Title Style', 'tourfic' ),
@@ -374,6 +446,8 @@ class Highlights extends Widget_Base {
             'selectors'  => [
 				'{{WRAPPER}} .tf-section-title' => 'text-align: {{VALUE}};',
 				'{{WRAPPER}} h2.section-heading' => 'text-align: {{VALUE}};',
+				'{{WRAPPER}} .tf-feature-block .tf-feature-block-details h5' => 'text-align: {{VALUE}};',
+				'{{WRAPPER}} .tf-apt-highlights .tf-apt-highlight h4' => 'text-align: {{VALUE}};',
 			],
 		]);
 
@@ -383,13 +457,17 @@ class Highlights extends Widget_Base {
 			'selectors'  => [
 				'{{WRAPPER}} .tf-section-title' => 'color: {{VALUE}};',
 				'{{WRAPPER}} .tf-highlight-wrapper .tf-highlight-item .tf-highlight-text .section-heading' => 'color: {{VALUE}};',
+				'{{WRAPPER}} .tf-feature-block .tf-feature-block-details h5' => 'color: {{VALUE}};',
+				'{{WRAPPER}} .tf-apt-highlights .tf-apt-highlight h4' => 'color: {{VALUE}};',
 			],
 		]);
 
 		$this->add_group_control( Group_Control_Typography::get_type(), [
             'label'    => esc_html__( 'Typography', 'tourfic' ),
 			'name'     => "tf_title_typography",
-			'selector' => "{{WRAPPER}} .tf-section-title, {{WRAPPER}} h2.section-heading",
+			'selector' => "{{WRAPPER}} .tf-section-title, {{WRAPPER}} h2.section-heading, 
+						   {{WRAPPER}} .tf-feature-block .tf-feature-block-details h5,
+						   {{WRAPPER}} .tf-apt-highlights .tf-apt-highlight h4",
 		]);
 
 		$this->add_responsive_control( "title_margin", [
@@ -403,6 +481,8 @@ class Highlights extends Widget_Base {
 			'selectors'  => [
 				'{{WRAPPER}} .tf-section-title' => $this->tf_apply_dim( 'margin' ),
 				'{{WRAPPER}} h2.section-heading' => $this->tf_apply_dim( 'margin' ),
+				'{{WRAPPER}} .tf-feature-block .tf-feature-block-details h5' => $this->tf_apply_dim( 'margin' ),
+				'{{WRAPPER}} .tf-apt-highlights .tf-apt-highlight h4' => $this->tf_apply_dim( 'margin' ),
 			],
 		]);
 
@@ -436,6 +516,8 @@ class Highlights extends Widget_Base {
             'selectors'  => [
 				'{{WRAPPER}} .highlights-list' => 'text-align: {{VALUE}};',
 				'{{WRAPPER}} .tf-highlight-description' => 'text-align: {{VALUE}};',
+				'{{WRAPPER}} .tf-feature-block .tf-feature-block-details p' => 'text-align: {{VALUE}};',
+				'{{WRAPPER}} .tf-apt-highlights .tf-apt-highlight p' => 'text-align: {{VALUE}};',
 			],
 		]);
 
@@ -445,13 +527,17 @@ class Highlights extends Widget_Base {
 			'selectors'  => [
 				'{{WRAPPER}} .highlights-list' => 'color: {{VALUE}};',
 				'{{WRAPPER}} .tf-highlight-description' => 'color: {{VALUE}};',
+				'{{WRAPPER}} .tf-feature-block .tf-feature-block-details p' => 'color: {{VALUE}};',
+				'{{WRAPPER}} .tf-apt-highlights .tf-apt-highlight p' => 'color: {{VALUE}};',
 			],
 		]);
 
 		$this->add_group_control( Group_Control_Typography::get_type(), [
             'label'    => esc_html__( 'Typography', 'tourfic' ),
 			'name'     => "tf_content_typography",
-			'selector' => "{{WRAPPER}} .highlights-list, {{WRAPPER}} .tf-highlight-description",
+			'selector' => "{{WRAPPER}} .highlights-list, {{WRAPPER}} .tf-highlight-description, 
+						   {{WRAPPER}} .tf-feature-block .tf-feature-block-details p,
+						   {{WRAPPER}} .tf-apt-highlights .tf-apt-highlight p",
 		]);
 
 		$this->end_controls_section();

@@ -1,6 +1,8 @@
 <?php
 namespace Tourfic\App\Widgets\Elementor\Support;
 
+use Tourfic\Classes\Helper;
+
 // don't load directly
 defined( 'ABSPATH' ) || exit;
 
@@ -32,6 +34,175 @@ trait Utils {
 		// Fallback to regular post type detection
 		return get_post_type();
 	}
+
+    /**
+     * Generates conditional display rules for controls based on service and design
+     * 
+     * @param array $design Array of design conditions in format ['service' => 'design_value']
+     * @return array Condition array for Elementor controls
+     */
+    protected function tf_display_conditionally_single($design, $extra_conditions = []) {
+        $terms = [];
+        
+        foreach ($design as $service_key => $design_values) {
+			// Detect if this is a "NOT" condition
+            $is_service_not = false;
+            if ( substr( $service_key, -1 ) === '!' ) {
+                $is_service_not = true;
+                $service = rtrim( $service_key, '!' );
+            } else {
+                $service = $service_key;
+            }
+
+            // Convert to array if it's not already
+            $design_values = (array) $design_values;
+
+            foreach ($design_values as $design_control => $design_value) {
+                $is_control_not = false;
+                if ( substr( $design_control, -1 ) === '!' ) {
+                    $is_control_not = true;
+                    $design_control = rtrim( $design_control, '!' );
+                } else {
+                    $design_control = $design_control;
+                }
+
+                $service_terms = [
+					[
+						'name' => 'service',
+						'operator' => $is_service_not ? '!=' : '==',
+						'value' => $service,
+					],
+				];
+
+                if (is_array($design_value) && count($design_value) == 1) {
+                    $service_terms[] = [
+						'name' => $design_control,
+						'operator' => $is_control_not ? '!=' : '==',
+						'value' => $design_value[0],
+					];
+                } elseif (!is_array($design_value)) {
+                    $service_terms[] = [
+						'name' => $design_control,
+						'operator' => $is_control_not ? '!=' : '==',
+						'value' => $design_value,
+					];
+                } else {
+                    $or_group = ['relation' => 'or', 'terms' => []];
+                    foreach ($design_value as $val) {
+                        $or_group['terms'][] = [
+                            'name' => $design_control,
+                            'operator' => $is_control_not ? '!=' : '==',
+						'value' => $val,
+					];
+                    }
+                    $service_terms[] = $or_group;
+                }
+
+				// Add extra conditions if provided
+				if (!empty($extra_conditions)) {
+					foreach ($extra_conditions as $key => $value) {
+						$operator = '==';
+						$actual_key = $key;
+						
+						// Handle negation operator
+						if (substr($key, -1) === '!') {
+							$operator = '!=';
+							$actual_key = substr($key, 0, -1);
+						}
+						
+						$service_terms[] = [
+							'name' => $actual_key,
+							'operator' => $operator,
+							'value' => $value,
+						];
+					}
+				}
+				
+				$terms[] = [
+					'relation' => 'and',
+					'terms' => $service_terms,
+				];
+            }
+        }
+
+        return [
+            'relation' => 'or',
+            'terms' => $terms,
+        ];
+    }
+
+    /**
+     * Generates conditional display rules for controls based on service and design
+     * 
+     * @param array $design Array of design conditions in format ['service' => 'design_value']
+     * @return array Condition array for Elementor controls
+     */
+    protected function tf_display_conditionally($design, $extra_conditions = []) {
+        $terms = [];
+        
+        foreach ($design as $service_key => $design_values) {
+			// Detect if this is a "NOT" condition
+            $is_not = false;
+            if ( substr( $service_key, -1 ) === '!' ) {
+                $is_not = true;
+                $service = rtrim( $service_key, '!' );
+            } else {
+                $service = $service_key;
+            }
+
+            // Convert to array if it's not already
+            $design_values = (array) $design_values;
+            $design_control = 'design_' . str_replace('tf_', '', $service);
+
+            foreach ($design_values as $design_value) {
+                $service_terms = [
+					[
+						'name' => 'service',
+						'operator' => $is_not ? '!=' : '==',
+						'value' => $service,
+					],
+					[
+						'name' => $design_control,
+						'operator' => '==',
+						'value' => $design_value,
+					]
+				];
+
+				// Add extra conditions if provided
+				if (!empty($extra_conditions)) {
+					foreach ($extra_conditions as $key => $value) {
+						$operator = '==';
+						$actual_key = $key;
+						
+						// Handle negation operator
+						if (substr($key, -1) === '!') {
+							$operator = '!=';
+							$actual_key = substr($key, 0, -1);
+						}
+						
+						$service_terms[] = [
+							'name' => $actual_key,
+							'operator' => $operator,
+							'value' => $value,
+						];
+					}
+				}
+				
+				$terms[] = [
+					'relation' => 'and',
+					'terms' => $service_terms,
+				];
+            }
+        }
+
+        return [
+            'relation' => 'or',
+            'terms' => $terms,
+        ];
+    }
+
+
+
 
     /**
      * Elementor conditions for single widgets (no "service" control).
@@ -267,122 +438,6 @@ trait Utils {
         ];
     }
 
-
-    /**
-     * Return Elementor "conditions" array for single widgets (no service control).
-     * - Supports service keys: 'tf_hotel', 'tf_tours', 'tf_apartment', 'tf_carrental' (and '...!' negation on service)
-     * - Supports control-key negation: e.g. 'booking_form_style!' => ['style3'] means "NOT style3"
-     * - If no service block matches, returns null => Elementor shows the control with no conditions (no warnings).
-     *
-     * Example:
-     * 'conditions' => $this->tf_display_conditionally_single([
-     *   'tf_hotel' => [ 'booking_form_style!' => ['style3'] ],
-     *   'tf_tours' => [ 'booking_form_style!' => ['style3'] ],
-     * ]),
-     */
-    protected function tf_display_conditionally_single(array $service_map): ?array {
-        // Detect current service from post type
-        $current = method_exists($this, 'get_current_post_type') ? $this->get_current_post_type() : (function_exists('get_post_type') ? get_post_type() : null);
-        if (!in_array($current, ['tf_hotel','tf_tours','tf_apartment','tf_carrental'], true)) {
-            $current = 'tf_hotel'; // safe fallback
-        }
-
-        $groups = [];
-
-        foreach ($service_map as $svc_key => $controls) {
-            $svc_not = false;
-            if (substr($svc_key, -1) === '!') {
-                $svc_not = true;
-                $svc_key = rtrim($svc_key, '!');
-            }
-
-            $matches = ($current === $svc_key && !$svc_not) || ($current !== $svc_key && $svc_not);
-            if (!$matches) {
-                continue; // skip this service block
-            }
-
-            // AND across different control keys for this service
-            $and_terms = [];
-
-            foreach ($controls as $control_key_raw => $values) {
-                $ctrl_not = false;
-                $control_key = $control_key_raw;
-
-                // Support key-level negation like 'booking_form_style!'
-                if (substr($control_key_raw, -1) === '!') {
-                    $ctrl_not    = true;
-                    $control_key = rtrim($control_key_raw, '!');
-                }
-
-                $vals = (array) $values;
-
-                if ($ctrl_not) {
-                    // Exclusion: all values must be != (AND of !=)
-                    foreach ($vals as $val) {
-                        $and_terms[] = [
-                            'name'     => $control_key,
-                            'operator' => '!=',
-                            'value'    => $val,
-                        ];
-                    }
-                } else {
-                    // Inclusion: single value => == ; multiple => OR of ==
-                    if (count($vals) <= 1) {
-                        $and_terms[] = [
-                            'name'     => $control_key,
-                            'operator' => '==',
-                            'value'    => reset($vals),
-                        ];
-                    } else {
-                        $or_group = ['relation' => 'or', 'terms' => []];
-                        foreach ($vals as $val) {
-                            $or_group['terms'][] = [
-                                'name'     => $control_key,
-                                'operator' => '==',
-                                'value'    => $val,
-                            ];
-                        }
-                        $and_terms[] = $or_group;
-                    }
-                }
-            }
-
-            if (!empty($and_terms)) {
-                $groups[] = [
-                    'relation' => 'and',
-                    'terms'    => $and_terms,
-                ];
-            }
-        }
-
-        // If no service block matched (e.g., apartment/car not listed), return null (no conditions) => show control.
-        if (empty($groups)) {
-            return null;
-        }
-
-        return [
-            'relation' => 'or',
-            'terms'    => $groups,
-        ];
-    }
-
-    /**
-     * Single-template conditional builder without a "service" control.
-     *
-     * Usage:
-     * 'conditions' => $this->tf_display_conditionally_single([
-     *     'tf_hotel' => [
-     *         'booking_form_style' => ['style2','style3'],
-     *         'another_control'    => 'on',
-     *     ],
-     *     'tf_apartment' => [
-     *         'booking_form_style' => ['style1','default'],
-     *     ],
-     *     'tf_carrental!' => [
-     *         'layout_style' => ['compact'],
-     *     ],
-     * ]),
-     */
     protected function tf_display_conditionally_single_old(array $service_map): array {
         $current = $this->get_current_post_type();
         $groups  = [];
@@ -443,76 +498,6 @@ trait Utils {
         return [
             'relation' => 'or',
             'terms'    => $groups,
-        ];
-    }
-
-    /**
-     * Generates conditional display rules for controls based on service and design
-     * 
-     * @param array $design Array of design conditions in format ['service' => 'design_value']
-     * @return array Condition array for Elementor controls
-     */
-    protected function tf_display_conditionally($design, $extra_conditions = []) {
-        $terms = [];
-        
-        foreach ($design as $service_key => $design_values) {
-			// Detect if this is a "NOT" condition
-            $is_not = false;
-            if ( substr( $service_key, -1 ) === '!' ) {
-                $is_not = true;
-                $service = rtrim( $service_key, '!' );
-            } else {
-                $service = $service_key;
-            }
-
-            // Convert to array if it's not already
-            $design_values = (array) $design_values;
-            $design_control = 'design_' . str_replace('tf_', '', $service);
-
-            foreach ($design_values as $design_value) {
-                $service_terms = [
-					[
-						'name' => 'service',
-						'operator' => $is_not ? '!=' : '==',
-						'value' => $service,
-					],
-					[
-						'name' => $design_control,
-						'operator' => '==',
-						'value' => $design_value,
-					]
-				];
-
-				// Add extra conditions if provided
-				if (!empty($extra_conditions)) {
-					foreach ($extra_conditions as $key => $value) {
-						$operator = '==';
-						$actual_key = $key;
-						
-						// Handle negation operator
-						if (substr($key, -1) === '!') {
-							$operator = '!=';
-							$actual_key = substr($key, 0, -1);
-						}
-						
-						$service_terms[] = [
-							'name' => $actual_key,
-							'operator' => $operator,
-							'value' => $value,
-						];
-					}
-				}
-				
-				$terms[] = [
-					'relation' => 'and',
-					'terms' => $service_terms,
-				];
-            }
-        }
-
-        return [
-            'relation' => 'or',
-            'terms' => $terms,
         ];
     }
 }
