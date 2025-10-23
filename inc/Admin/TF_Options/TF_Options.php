@@ -1313,7 +1313,7 @@ class TF_Options {
 				<div class="tf-single-repeater">
 					<div class="tf-repeater-header">
 						<div class="tf-repeater-header-info">
-							<span class="tf-repeater-title"><?php echo esc_html( $item['title'] ); ?></span>
+							<span class="tf-repeater-title tf-avail-repeater-title"><?php echo esc_html( $item['title'] ); ?></span>
 							<div class="tf-repeater-icon-absulate">
 								<span class="tf-repeater-icon tf-repeater-icon-collapse tf-avail-repeater-collapse">
 									<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">

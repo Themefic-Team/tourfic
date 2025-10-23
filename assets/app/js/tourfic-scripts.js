@@ -3416,12 +3416,19 @@ function convertTo24HourFormat(timeStr) {
 
                     if (timestamp >= from && timestamp <= to) {
                         const allowedTime = availability.allowed_time?.time || [];
-
-                        allowedTime.forEach((t) => {
-                            if (t && t.trim() !== '') {
-                                times[t] = t;
-                            }
-                        });
+                        if (Array.isArray(allowedTime)) {
+                            allowedTime.forEach((t) => {
+                                if (t && t.trim() !== '') {
+                                    times[t] = t;
+                                }
+                            });
+                        } else if (typeof allowedTime === 'object' && allowedTime !== null) {
+                            Object.values(allowedTime).forEach((t) => {
+                                if (t && t.trim() !== '') {
+                                    times[t] = t;
+                                }
+                            });
+                        }
 
                         break; // stop after first match
                     }

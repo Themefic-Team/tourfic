@@ -3336,34 +3336,34 @@ Steps
 .tf-field-ical input::-webkit-input-placeholder,
 .tf-field-ical_export input::-webkit-input-placeholder,
 .tf-field-text input::-webkit-input-placeholder, .tf-field-password input::-webkit-input-placeholder {
-  color: #27333F;
+  color: #95A3B2;
 }
 .tf-field-ical input::-ms-input-placeholder,
 .tf-field-ical_export input::-ms-input-placeholder,
 .tf-field-text input::-ms-input-placeholder, .tf-field-password input::-ms-input-placeholder {
-  color: #27333F;
+  color: #95A3B2;
 }
 .tf-field-ical input input:-ms-input-placeholder,
 .tf-field-ical_export input input:-ms-input-placeholder,
 .tf-field-text input input:-ms-input-placeholder, .tf-field-password input input:-ms-input-placeholder {
-  color: #27333F;
+  color: #95A3B2;
 }
 .tf-field-ical input::-moz-placeholder,
 .tf-field-ical_export input::-moz-placeholder,
 .tf-field-text input::-moz-placeholder, .tf-field-password input::-moz-placeholder {
   opacity: 1;
-  color: #27333F;
+  color: #95A3B2;
 }
 .tf-field-ical input:-moz-placeholder,
 .tf-field-ical_export input:-moz-placeholder,
 .tf-field-text input:-moz-placeholder, .tf-field-password input:-moz-placeholder {
   opacity: 1;
-  color: #27333F;
+  color: #95A3B2;
 }
 .tf-field-ical input::placeholder,
 .tf-field-ical_export input::placeholder,
 .tf-field-text input::placeholder, .tf-field-password input::placeholder {
-  color: #27333F;
+  color: #95A3B2;
 }
 .tf-field-ical input:read-only,
 .tf-field-ical_export input:read-only,
@@ -4264,9 +4264,17 @@ Steps
 .tf-field-repeater .tf-repeater .tf-repeater-header:hover .tf-repeater-icon-move {
   opacity: 1;
 }
+.tf-field-repeater .tf-repeater .tf-repeater-header.active-repeater .tf-repeater-header-info {
+  border-radius: 4px 4px 0 0;
+  background: #DBEAFE;
+}
+.tf-field-repeater .tf-repeater .tf-repeater-header.active-repeater .tf-repeater-header-info .tf-repeater-title {
+  font-weight: 600;
+}
 .tf-field-repeater .tf-repeater .tf-repeater-header .tf-repeater-header-info {
   border-radius: 4px;
   background: #F5F9FF;
+  border: 1px solid #F2F5F7;
   width: 100%;
   padding: 8px 12px;
   display: flex;
@@ -4293,12 +4301,13 @@ Steps
 }
 .tf-field-repeater .tf-repeater .tf-repeater-header .tf-repeater-title {
   display: inline-block;
-  margin-right: 120px;
   font-style: normal;
   font-weight: 400;
   font-size: 15px;
   line-height: 24px;
   cursor: pointer;
+  color: #27333F;
+  width: calc(100% - 108px);
 }
 .tf-field-repeater .tf-repeater .tf-repeater-header .tf-repeater-icon-absulate {
   position: absolute;
@@ -4325,7 +4334,7 @@ Steps
 }
 .tf-field-repeater .tf-repeater .tf-repeater-content-wrap {
   background-color: #ffffff;
-  padding: 10px 1px 0px 15px;
+  padding: 8px;
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -4336,6 +4345,14 @@ Steps
   flex-wrap: wrap;
   -webkit-justify-content: space-between;
   justify-content: space-between;
+  border-left: 1px solid #F2F5F7;
+  border-right: 1px solid #F2F5F7;
+  border-bottom: 1px solid #F2F5F7;
+  margin-left: 15px;
+  border-radius: 0 0 4px 4px;
+}
+.tf-field-repeater .tf-repeater .tf-repeater-content-wrap .tf-field:nth-child(1) {
+  padding-top: 0px;
 }
 .tf-field-repeater .tf-repeater .tf-repeater-content-wrap .tf-action-button-group {
   display: flex;
@@ -4361,6 +4378,9 @@ Steps
   background: linear-gradient(180deg, #0051A3 0%, #003C79 100%);
   color: #FFFFFF;
 }
+.tf-field-repeater .tf-repeater .tf-repeater-header.active-repeater + .tf-repeater-content-wrap {
+  background-color: #FBFCFE;
+}
 .tf-field-repeater .tf-repeater .tf-repeater-add {
   margin-left: 16px;
 }
@@ -4381,6 +4401,9 @@ Steps
 .tf-field-repeater .tf-repeater .tf-single-repeater.tf-single-repeater-group_discount_package .tf-repeater-header .tf-repeater-header-info .tf-repeater-title {
   width: calc(100% - 104px);
   margin-right: 0px;
+}
+.tf-field-repeater .tf-repeater .tf-single-repeater.tf-single-repeater-group_discount_package .tf-repeater-content-wrap .tf-field:nth-child(1) {
+  padding-top: 12px;
 }
 .tf-field-repeater .tf-repeater .tf-field-notice-inner {
   margin-bottom: 24px;
@@ -4795,24 +4818,24 @@ Steps
   border: 1px solid #D9E0E8;
 }
 .tf-field-number input::-webkit-input-placeholder {
-  color: #27333F;
+  color: #95A3B2;
 }
 .tf-field-number input::-ms-input-placeholder {
-  color: #27333F;
+  color: #95A3B2;
 }
 .tf-field-number input input:-ms-input-placeholder {
-  color: #27333F;
+  color: #95A3B2;
 }
 .tf-field-number input::-moz-placeholder {
   opacity: 1;
-  color: #27333F;
+  color: #95A3B2;
 }
 .tf-field-number input:-moz-placeholder {
   opacity: 1;
-  color: #27333F;
+  color: #95A3B2;
 }
 .tf-field-number input::placeholder {
-  color: #27333F;
+  color: #95A3B2;
 }
 .tf-field-number input::-webkit-outer-spin-button, .tf-field-number input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -5072,7 +5095,7 @@ a.tf-import-btn, a.tf-export-btn {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  margin-bottom: 14px;
+  padding-bottom: 14px;
   position: sticky;
   top: 0;
   z-index: 99;
@@ -5786,6 +5809,12 @@ a.tf-import-btn, a.tf-export-btn {
   padding: 0;
   margin: 0;
 }
+.tf-tour-cal-wrap .tf-date-time-selection .tf-field-repeater .tf-repeater-content-wrap,
+.tf-apt-cal-wrap .tf-date-time-selection .tf-field-repeater .tf-repeater-content-wrap,
+.tf-room-cal-wrap .tf-date-time-selection .tf-field-repeater .tf-repeater-content-wrap {
+  margin: 0;
+  border: 0px solid;
+}
 .tf-tour-cal-wrap .tf-date-time-selection .tf-field-repeater .tf-fieldset,
 .tf-apt-cal-wrap .tf-date-time-selection .tf-field-repeater .tf-fieldset,
 .tf-room-cal-wrap .tf-date-time-selection .tf-field-repeater .tf-fieldset {
@@ -5849,10 +5878,31 @@ a.tf-import-btn, a.tf-export-btn {
 .tf-room-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater:last-child {
   margin-bottom: 0px;
 }
+.tf-tour-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-header .tf-repeater-title,
+.tf-apt-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-header .tf-repeater-title,
+.tf-room-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-header .tf-repeater-title {
+  width: calc(100% - 30px) !important;
+}
 .tf-tour-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-content-wrap,
 .tf-apt-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-content-wrap,
 .tf-room-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-content-wrap {
-  padding-left: 0px;
+  padding: 8px;
+  margin: 0;
+}
+.tf-tour-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-content-wrap .tf-tab-switch-box .tf-tab-field-content .tf-field:first-child,
+.tf-apt-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-content-wrap .tf-tab-switch-box .tf-tab-field-content .tf-field:first-child,
+.tf-room-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-content-wrap .tf-tab-switch-box .tf-tab-field-content .tf-field:first-child {
+  padding-bottom: 0px;
+}
+.tf-tour-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-content-wrap #group_tabs .tf-tab-field-content .tf-field:first-child,
+.tf-apt-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-content-wrap #group_tabs .tf-tab-field-content .tf-field:first-child,
+.tf-room-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-content-wrap #group_tabs .tf-tab-field-content .tf-field:first-child {
+  padding: 12px 0;
+}
+.tf-tour-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-content-wrap #group_tabs .tf-tab-field-content .tf-field .tf-repeater-content-wrap,
+.tf-apt-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-content-wrap #group_tabs .tf-tab-field-content .tf-field .tf-repeater-content-wrap,
+.tf-room-cal-wrap .tf-package-field-repeater .tf-repeater-wrap .tf-single-repeater .tf-repeater-content-wrap #group_tabs .tf-tab-field-content .tf-field .tf-repeater-content-wrap {
+  border: 0px solid;
 }
 .tf-tour-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset,
 .tf-apt-cal-wrap .tf-package-field-repeater .tf-field-accordion .tf-fieldset,
@@ -6299,9 +6349,25 @@ a.tf-import-btn, a.tf-export-btn {
   opacity: 0;
 }
 
-.tf-field-accordion .tf-tab-switch-box .tf-tab-field-header {
-  border-radius: 4px 4px 0px 0px;
+.tf-field-accordion .tf-tab-switch-box.active-repeater .tf-tab-field-header {
+  border-radius: 4px 4px 0 0;
+  border-top: 1px solid #D9E0E8;
+  border-bottom: 1px solid transparent;
+  border-left: 1px solid #D9E0E8;
+  border-right: 1px solid #D9E0E8;
+}
+.tf-field-accordion .tf-tab-switch-box.active-repeater .tf-tab-field-content {
   border-bottom: 1px solid #D9E0E8;
+  border-top: 0px solid;
+  border-left: 1px solid #D9E0E8;
+  border-right: 1px solid #D9E0E8;
+}
+.tf-field-accordion .tf-tab-switch-box .tf-tab-field-header {
+  border-radius: 4px;
+  border-bottom: 1px solid #D9E0E8;
+  border-left: 1px solid transparent;
+  border-right: 1px solid transparent;
+  border-top: 1px solid transparent;
   background: #F5F9FF;
   padding: 8px 12px;
   display: flex;

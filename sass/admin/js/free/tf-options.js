@@ -1978,9 +1978,9 @@
         });
 
         // add pacakge
-        $(document).on("click", ".tf-repeater-add-package_pricing", function (e) {
-            $(this).hide(); // Hide the popup
-        });
+        // $(document).on("click", ".tf-repeater-add-package_pricing", function (e) {
+        //     $(this).hide(); // Hide the popup
+        // });
         // Save Package
         $(document).on('click', ".tf_tour_package_save", function(e) {
             e.preventDefault();
@@ -2111,10 +2111,16 @@
     
             $.post(tf_options.ajax_url, ajaxData, function(response) {
                 if (response.success) {
-                    $repeater.find(' > .tf-repeater-header .tf-repeater-title').html(packageData.pack_title);
+                    if(packageData.pack_title){
+                        $repeater.find(' > .tf-repeater-header .tf-repeater-title').html(packageData.pack_title);
+                    }else{
+                        $repeater.find(' > .tf-repeater-header .tf-repeater-title').html('Create your Tour Packages');
+                    }
                     $repeater.find('.tf-repeater-content-wrap').hide();
+                    $repeater.find('.tf-repeater-header').removeClass('active-repeater');
+
                     $repeater.find('.tf-repeater-header .package-action-hide').addClass('show');
-                    $('.tf-repeater-add-package_pricing').show();
+                    // $('.tf-repeater-add-package_pricing').show();
                     notyf.success('Package saved successfully!');
                 } else {
                     notyf.error('There is an error!');
@@ -2630,6 +2636,12 @@
         // Repeater show hide
         $(document).on('click', '.tf-repeater-icon-collapse, .tf-repeater-title', function () {
             var tf_repater_fieldname = $(this).closest('.tf-single-repeater').find('input[name=tf_current_field]').val();
+
+            // Toggle Class for Header
+            $(this).closest('.tf-single-repeater').find('.tf-repeater-header').toggleClass('active-repeater');
+            $(this).closest('.tf-single-repeater').find('.tf-tab-switch-box').toggleClass('active-repeater');
+
+
             $(this).closest('.tf-single-repeater-' + tf_repater_fieldname + '').find('.tf-repeater-content-wrap').slideToggle();
             $(this).closest('.tf-single-repeater-' + tf_repater_fieldname + '').children('.tf-repeater-content-wrap').toggleClass('hide');
             if ($(this).closest('.tf-single-repeater-' + tf_repater_fieldname + '').children('.tf-repeater-content-wrap').hasClass('hide') == true) {
@@ -2687,6 +2699,7 @@
         // Repeater show hide
         $(document).on('click', '.tf-field-accordion .tf-tab-field-header .tf-field-collapas', function () {
             $(this).toggleClass('rotated');
+            $(this).closest('.tf-tab-switch-box').toggleClass('active-repeater');
             $(this).closest('.tf-tab-switch-box').find('.tf-tab-field-content').slideToggle(200, function () {
                 if ($(this).is(':visible')) {
                     $(this).css('display', 'flex');
@@ -2698,16 +2711,17 @@
         // Repeater Pacakge Cancel
         $(document).on('click', '.tf-action-button-group .tf_tour_package_cancel', function () {
             $(this).closest('.tf-repeater-content-wrap').hide();
-            $('.tf-repeater-add-package_pricing').show();
+            $(this).closest('.tf-single-repeater').find('.tf-repeater-header').removeClass('active-repeater');
+            // $('.tf-repeater-add-package_pricing').show();
         });
 
         $(document).on('click', '.tf-action-button-group .tf_tour_package_deleted', function () {
             $(this).closest('.tf-single-repeater').empty();
-            $('.tf-repeater-add-package_pricing').show();
+            // $('.tf-repeater-add-package_pricing').show();
         });
 
         // Repeater show hide
-        $(document).on('click', '.tf-avail-repeater-collapse', function () {
+        $(document).on('click', '.tf-avail-repeater-collapse, .tf-avail-repeater-title', function () {
             $(this).closest('.tf-single-repeater').find('.tf-repeater-content-wrap').first().slideToggle(200);
         });
 

@@ -40,7 +40,7 @@
             align-items: center;
             justify-content: space-between;
             width: 100%;
-            margin-bottom: 14px;
+            padding-bottom: 14px;
 
             position: sticky;
             top: 0;
@@ -506,6 +506,10 @@
             border: 0;
             padding: 0;
             margin: 0;
+            .tf-repeater-content-wrap{
+                margin: 0;
+                border: 0px solid;
+            }
             .tf-fieldset{
                 border: 0px solid #f2f5f7;
                 background: #fff;
@@ -552,8 +556,35 @@
                 &:last-child{
                     margin-bottom: 0px;
                 }
+                .tf-repeater-header{
+                    .tf-repeater-title{
+                        width: calc(100% - 30px) !important;
+                    }
+                }
                 .tf-repeater-content-wrap{
-                    padding-left: 0px;
+                    padding: 8px;
+                    margin: 0;
+                    .tf-tab-switch-box{
+                        .tf-tab-field-content{
+                            .tf-field{
+                                &:first-child{
+                                    padding-bottom: 0px;
+                                }
+                            }
+                        }
+                    }
+                    #group_tabs{
+                        .tf-tab-field-content{
+                            .tf-field{
+                                &:first-child{
+                                    padding: 12px 0;
+                                }
+                                .tf-repeater-content-wrap{
+                                    border: 0px solid;
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
