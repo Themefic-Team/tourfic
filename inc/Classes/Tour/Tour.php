@@ -3374,7 +3374,7 @@ class Tour {
 		if ( ! empty( $max_person ) && $max_person >= $total_people && $max_person != 0 && ! empty( $min_person ) && $min_person <= $total_people && $min_person != 0 ) {
 			$people_counter ++;
 		}
-		if ( $people_counter > 0 ) {
+		// if ( $people_counter > 0 ) {
 			$show_fixed_tour = [];
 			if ( ! empty( $first_match ) ) {
 				$show_fixed_tour[] = 1;
@@ -3448,7 +3448,7 @@ class Tour {
 					}
 				}
 			}
-		}
+		// }
 		
 		if ( $has_tour ) {
 
@@ -3502,7 +3502,7 @@ class Tour {
 		// Set initial tour availability status
 		$has_tour = false;
 
-		if ( $people_counter > 0 ) {
+		// if ( $people_counter > 0 ) {
 			if ( ! empty( $startprice ) && ! empty( $endprice ) ) {
 				if($pricing_type=='person'){
 					if ( ! empty( $meta['adult_price'] ) ) {
@@ -3555,7 +3555,7 @@ class Tour {
 			} else {
 				$has_tour = true;
 			}
-		}
+		// }
 		
 		if ( $has_tour ) {
 
