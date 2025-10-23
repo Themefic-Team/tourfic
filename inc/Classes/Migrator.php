@@ -1552,8 +1552,8 @@ class Migrator {
 											$times = [];
 											$max_capacity = [];
 											foreach($allowed_time as $time){
-												$times[$time['time']] = $time['time'];
-												$max_capacity[$time['max_capacity']] = $time['max_capacity'];
+												$times[] = $time['time'];
+												$max_capacity[] = $time['max_capacity'];
 											}
 											$tf_tour_allowed_time = [
 												'time' => $times,
@@ -1596,8 +1596,8 @@ class Migrator {
 							$times = [];
 							$max_capacity = [];
 							foreach($allowed_time as $time){
-								$times[$time['time']] = $time['time'];
-								$max_capacity[$time['cont_max_capacity']] = $time['cont_max_capacity'];
+								$times[] = $time['time'];
+								$max_capacity[] = $time['cont_max_capacity'];
 							}
 							$tf_tour_allowed_time = [
 								'time' => $times,
