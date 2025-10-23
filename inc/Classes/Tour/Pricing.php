@@ -281,7 +281,7 @@ class Pricing {
 		$min_infant_sale_price = null;
 		$min_group_price = null;
 		$min_group_sale_price = null;
-		if(!empty($tour_availability_data) && Helper::is_all_unavailable($tour_availability_data)){
+		if(!empty($tour_availability_data)){
 			foreach ($tour_availability_data as $data) {
 				if ($data['status'] !== 'available') {
 					continue;
