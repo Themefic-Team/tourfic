@@ -37,6 +37,13 @@ while ( have_posts() ) : the_post();
 
 	// Get Tour Meta
 	$meta = get_post_meta( $post_id, 'tf_tours_opt', true );
+	// $tour_availability_data = isset( $meta['tour_availability'] ) && ! empty( $meta['tour_availability'] ) ? json_decode( $meta['tour_availability'], true ) : [];
+	// $tf_package_pricing = ! empty( $meta['package_pricing'] ) ? $meta['package_pricing'] : '';
+	// Helper::tf_var_dump($tf_package_pricing);
+	// Helper::tf_var_dump($tour_availability_data['2025/11/03 - 2025/11/04']);
+	// echo '<pre>';
+	// print_r($tour_availability_data["2025/10/29 - 2025/10/31"]);
+	// echo '</pre>';
 	/**
 	 * Show/hide sections
 	 */
