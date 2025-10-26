@@ -58,7 +58,9 @@ class Included_Excluded extends Widget_Base {
 		$this->tf_content_layout_controls();
 
 		do_action( 'tf/single-included-excluded/before-style-controls', $this );
-		$this->tf_included_excluded_style_controls();
+		$this->tf_card_style_controls();
+		$this->tf_title_style_controls();
+		$this->tf_content_style_controls();
 		do_action( 'tf/single-included-excluded/after-style-controls', $this );
 	}
 
@@ -84,21 +86,84 @@ class Included_Excluded extends Widget_Base {
             'options' => $options,
         ]);
 
+        $this->add_control('service',[
+			'label' => esc_html__( 'Service', 'tourfic' ),
+			'type' => \Elementor\Controls_Manager::HIDDEN,
+			'default' => $this->get_current_post_type(),
+		]);
+
 	    do_action( 'tf/single-included-excluded/after-content/controls', $this );
 
         $this->end_controls_section();
     }
 
-    protected function tf_included_excluded_style_controls() {
-		$this->start_controls_section( 'included_excluded_style_section', [
-			'label' => esc_html__( 'Style', 'tourfic' ),
+    protected function tf_card_style_controls() {
+		$this->start_controls_section( 'card_style', [
+			'label' => esc_html__( 'Card Style', 'tourfic' ),
 			'tab'   => Controls_Manager::TAB_STYLE,
+			'conditions' => $this->tf_display_conditionally_single([
+     			'tf_tours' => ['included_excluded_style' => ['style1', 'style3']],
+     		]),
 		]);
 
-		$this->add_control( 'tf_title_heading', [
-			'type'  => Controls_Manager::HEADING,
-			'label' => __( 'Title', 'tourfic' ),
+		$this->add_responsive_control( "card_padding", [
+			'label'      => esc_html__( 'Padding', 'tourfic' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .tf-inex-wrapper .tf-inex" => $this->tf_apply_dim( 'padding' ),
+				"{{WRAPPER}} .tf-inc-exc-card" => $this->tf_apply_dim( 'padding' ),
+			],
 		] );
+
+        $this->add_group_control( Group_Control_Background::get_type(), [
+			'name'      => "tf_card_bg_color",
+			'label'     => esc_html__( 'Background Color', 'tourfic' ),
+			'types'     => [
+				'classic',
+				'gradient',
+			],
+			'selector'  => "{{WRAPPER}} .tf-inex-wrapper .tf-inex,
+                            {{WRAPPER}} .tf-inc-exc-card",
+		] );
+
+		$this->add_group_control( Group_Control_Border::get_type(), [
+			'name'     => "card_border",
+			'selector' => "{{WRAPPER}} .tf-inex-wrapper .tf-inex,
+						   {{WRAPPER}} .tf-inc-exc-card",
+		] );
+
+		$this->add_control( "card_border_radius", [
+			'label'      => esc_html__( 'Border Radius', 'tourfic' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .tf-inex-wrapper .tf-inex" => $this->tf_apply_dim( 'border-radius' ),
+				"{{WRAPPER}} .tf-inc-exc-card" => $this->tf_apply_dim( 'border-radius' ),
+			],
+		] );
+
+		$this->add_group_control(Group_Control_Box_Shadow::get_type(), [
+			'name' => 'card_shadow',
+			'selector' => '{{WRAPPER}} .tf-inex-wrapper .tf-inex,
+						   {{WRAPPER}} .tf-inc-exc-card',
+		]);
+		
+		$this->end_controls_section();
+	}
+
+    protected function tf_title_style_controls() {
+		$this->start_controls_section( 'included_excluded_title_style_section', [
+			'label' => esc_html__( 'Title Style', 'tourfic' ),
+			'tab'   => Controls_Manager::TAB_STYLE,
+		]);
 
         $this->add_responsive_control('title_align',[
 			'label' => esc_html__('Alignment', 'tourfic'),
@@ -120,7 +185,7 @@ class Included_Excluded extends Widget_Base {
 			'toggle' => true,
             'selectors'  => [
 				'{{WRAPPER}} .tf-section-title' => 'text-align: {{VALUE}};',
-				'{{WRAPPER}} h2.section-heading' => 'text-align: {{VALUE}};',
+				'{{WRAPPER}} .tf-inc-exe h3' => 'text-align: {{VALUE}};',
 			],
 		]);
 
@@ -134,7 +199,7 @@ class Included_Excluded extends Widget_Base {
 			],
 			'selectors'  => [
 				'{{WRAPPER}} .tf-section-title' => $this->tf_apply_dim( 'margin' ),
-				'{{WRAPPER}} h2.section-heading' => $this->tf_apply_dim( 'margin' ),
+				'{{WRAPPER}} .tf-inc-exe h3' => $this->tf_apply_dim( 'margin' ),
 			],
 		]);
 
@@ -143,16 +208,133 @@ class Included_Excluded extends Widget_Base {
 			'type'      => Controls_Manager::COLOR,
 			'selectors'  => [
 				'{{WRAPPER}} .tf-section-title' => 'color: {{VALUE}};',
-				'{{WRAPPER}} h2.section-heading' => 'color: {{VALUE}};',
+				'{{WRAPPER}} .tf-inc-exc-wrapper .tf-include-section.custom-inc-icon h2' => 'color: {{VALUE}};',
+				'{{WRAPPER}} .tf-inc-exc-wrapper .tf-exclude-section.custom-exc-icon h2' => 'color: {{VALUE}};',
+				'{{WRAPPER}} .tf-inc-exe h3' => 'color: {{VALUE}};',
 			],
 		]);
 
 		$this->add_group_control( Group_Control_Typography::get_type(), [
             'label'    => esc_html__( 'Title Typography', 'tourfic' ),
 			'name'     => "tf_title_typography",
-			'selector' => "{{WRAPPER}} .tf-section-title, {{WRAPPER}} .section-heading",
+			'selector' => "{{WRAPPER}} .tf-section-title, {{WRAPPER}} .tf-inc-exc-wrapper .tf-include-section h2, {{WRAPPER}} .tf-inc-exc-wrapper .tf-exclude-section h2, {{WRAPPER}} .tf-inc-exe h3",
 		]);
 
+		$this->end_controls_section();
+	}
+
+	protected function tf_content_style_controls() {
+		$this->start_controls_section( 'content_style', [
+			'label' => esc_html__( 'Content Style', 'tourfic' ),
+			'tab'   => Controls_Manager::TAB_STYLE,
+		] );
+
+        $this->add_control( "item_heading", [
+			'type'      => Controls_Manager::HEADING,
+			'label'     => __( 'Item', 'tourfic' ),
+		] );
+
+        $this->add_responsive_control( "tf_items_gap", [
+			'label'      => esc_html__( 'Items gap', 'tourfic' ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [
+				'px',
+			],
+			'range'      => [
+				'px' => [
+					'min'  => 0,
+					'max'  => 100,
+					'step' => 1,
+				],
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .tf-inex-wrapper .tf-inex ul li" => 'margin-bottom: {{SIZE}}{{UNIT}};',
+				"{{WRAPPER}} .tf-include-exclude-wrapper .tf-include-exclude-innter ul" => 'gap: {{SIZE}}{{UNIT}};',
+				"{{WRAPPER}} .tf-inc-exc-wrapper .tf-inc-exc-content ul li" => 'margin-bottom: {{SIZE}}{{UNIT}};',
+				"{{WRAPPER}} .tf-inc-exe ul" => 'gap: {{SIZE}}{{UNIT}};',
+			],
+		] );
+
+
+        $this->add_responsive_control( "item_padding", [
+			'label'      => esc_html__( 'Padding', 'tourfic' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [
+				'px',
+				'em',
+				'%',
+			],
+			'selectors'  => [
+				"{{WRAPPER}} .tf-inc-exe ul li" => $this->tf_apply_dim( 'padding' ),
+			],
+            'conditions' => $this->tf_display_conditionally_single([
+     			'tf_carrental' => ['included_excluded_style' => ['style1']],
+     		]),
+		] );
+
+        $this->add_control( 'tf_item_bg_color', [
+			'label'     => esc_html__( 'Background Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors'  => [
+				'{{WRAPPER}} .tf-inc-exe ul li' => 'background-color: {{VALUE}};',
+			],
+            'conditions' => $this->tf_display_conditionally_single([
+     			'tf_carrental' => ['included_excluded_style' => ['style1']],
+     		]),
+		]);
+
+		$this->add_control( "icon_heading", [
+			'type'      => Controls_Manager::HEADING,
+			'label'     => __( 'Icon', 'tourfic' ),
+		] );
+
+		$this->add_control( 'tf_inc_icon_color', [
+			'label'     => esc_html__( 'Include Icon Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors'  => [
+				'{{WRAPPER}} .tf-tour-include li i' => 'color: {{VALUE}};',
+				'{{WRAPPER}} .tf-include ul li i' => 'color: {{VALUE}};',
+				'{{WRAPPER}} .tf-include-section ul li i' => 'color: {{VALUE}};',
+				'{{WRAPPER}} .tf-inc-exe .tf-inc-list ul li i' => 'color: {{VALUE}};',
+			],
+		]);
+
+		$this->add_control( 'tf_exc_icon_color', [
+			'label'     => esc_html__( 'Exclude Icon Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors'  => [
+				'{{WRAPPER}} .tf-tour-exclude li i' => 'color: {{VALUE}};',
+				'{{WRAPPER}} .tf-exclude ul li i' => 'color: {{VALUE}};',
+				'{{WRAPPER}} .tf-exclude-section ul li i' => 'color: {{VALUE}};',
+				'{{WRAPPER}} .tf-inc-exe .tf-exc-list ul li i' => 'color: {{VALUE}};',
+			],
+		]);
+
+		$this->add_control( "content_heading", [
+			'type'      => Controls_Manager::HEADING,
+			'label'     => __( 'Content', 'tourfic' ),
+		] );
+
+		$this->add_control( 'tf_item_content_color', [
+			'label'     => esc_html__( 'Content Color', 'tourfic' ),
+			'type'      => Controls_Manager::COLOR,
+			'selectors'  => [
+				'{{WRAPPER}} .tf-inex-wrapper .tf-inex ul li' => 'color: {{VALUE}};',
+				'{{WRAPPER}} .tf-include-exclude-innter ul li' => 'color: {{VALUE}};',
+				'{{WRAPPER}} .tf-inc-exc-content ul li' => 'color: {{VALUE}};',
+				'{{WRAPPER}} .tf-inc-exe ul li' => 'color: {{VALUE}};',
+			],
+		]);
+
+		$this->add_group_control( Group_Control_Typography::get_type(), [
+            'label'    => esc_html__( 'Content Typography', 'tourfic' ),
+			'name'     => "tf_item_content_typography",
+			'selector' => "{{WRAPPER}} .tf-inex-wrapper .tf-inex ul li,
+						   {{WRAPPER}} .tf-include-exclude-innter ul li,
+						   {{WRAPPER}} .tf-inc-exc-content ul li,
+						   {{WRAPPER}} .tf-inc-exe ul li",
+		]);
+		
 		$this->end_controls_section();
 	}
 
@@ -261,7 +443,7 @@ class Included_Excluded extends Widget_Base {
                     <div class="tf-container">
                         <div class="tf-inc-exc-content">
                             <?php if ( $inc ) { ?>
-                                <div class="tf-include-section <?php echo esc_attr( $custom_inc_icon ); ?>">
+                                <div class="tf-include-section tf-inc-exc-card <?php echo esc_attr( $custom_inc_icon ); ?>">
                                     <h2 class="tf-section-title"><?php esc_html_e( 'Included', 'tourfic' ); ?></h2>
                                     <ul>
                                         <?php
@@ -273,7 +455,7 @@ class Included_Excluded extends Widget_Base {
                                 </div>
                             <?php } ?>
                             <?php if ( $exc ) { ?>
-                                <div class="tf-exclude-section <?php echo esc_attr( $custom_exc_icon ); ?>">
+                                <div class="tf-exclude-section tf-inc-exc-card <?php echo esc_attr( $custom_exc_icon ); ?>">
                                     <h2 class="tf-section-title"><?php esc_html_e( 'Excluded', 'tourfic' ); ?></h2>
                                     <ul>
                                         <?php
