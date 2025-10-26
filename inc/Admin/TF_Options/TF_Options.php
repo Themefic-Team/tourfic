@@ -421,6 +421,14 @@ class TF_Options {
 		$avail_date          = isset( $_POST['avail_date'] ) && ! empty( $_POST['avail_date'] ) ? sanitize_text_field( $_POST['avail_date'] ) : '';
 		$options_count       = isset( $_POST['options_count'] ) && ! empty( $_POST['options_count'] ) ? sanitize_text_field( $_POST['options_count'] ) : '';
 
+		$room_meta = get_post_meta( $room_id, 'tf_room_opt', true );
+		if(empty($room_meta)){
+			wp_send_json_error( [
+				'status'  => false,
+				'message' => __( 'Publish the Room First!', 'tourfic' )
+			] );
+		}
+
 		if ( empty( $check_in ) || empty( $check_out ) ) {
 			wp_send_json_error( [
 				'status'  => false,
@@ -473,7 +481,6 @@ class TF_Options {
 			$room_avail_data[ $tf_room_date ] = $tf_room_data;
 		}
 
-		$room_meta = get_post_meta( $room_id, 'tf_room_opt', true );
 		if ( $new_post != 'true' ) {
 			$avail_date = json_decode( $room_meta['avail_date'], true );
 			if ( isset( $avail_date ) && ! empty( $avail_date ) ) {
@@ -730,6 +737,14 @@ class TF_Options {
 		$tf_apt_infant_price = isset( $_POST['tf_apt_infant_price'] ) && ! empty( $_POST['tf_apt_infant_price'] ) ? sanitize_text_field( $_POST['tf_apt_infant_price'] ) : '';
 		$apt_availability    = isset( $_POST['apt_availability'] ) && ! empty( $_POST['apt_availability'] ) ? sanitize_text_field( $_POST['apt_availability'] ) : '';
 
+		$apartment_data = get_post_meta( $apartment_id, 'tf_apartment_opt', true );
+		if(empty($apartment_meta)){
+			wp_send_json_error( [
+				'status'  => false,
+				'message' => __( 'Publish the Apartment First!', 'tourfic' )
+			] );
+		}
+
 		if ( empty( $check_in ) || empty( $check_out ) ) {
 			wp_send_json_error( [
 				'status'  => false,
@@ -771,7 +786,6 @@ class TF_Options {
 			$apt_availability_data[ $tf_apt_date ] = $tf_apt_data;
 		}
 
-		$apartment_data = get_post_meta( $apartment_id, 'tf_apartment_opt', true );
 		if ( $new_post != 'true' ) {
 			$apt_availability = json_decode( $apartment_data['apt_availability'], true );
 			if ( isset( $apt_availability ) && ! empty( $apt_availability ) ) {
