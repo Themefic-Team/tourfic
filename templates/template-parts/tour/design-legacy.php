@@ -5,6 +5,7 @@ use \Tourfic\Classes\Helper;
 use \Tourfic\App\TF_Review;
 use \Tourfic\Classes\Tour\Tour;
 use \Tourfic\Classes\Tour\Tour_Price;
+use \Tourfic\Classes\Tour\Pricing;
 
 $tf_booking_type = '1';
 $tf_booking_url = $tf_booking_query_url = $tf_booking_attribute = $tf_hide_booking_form = $tf_hide_price = '';
@@ -178,46 +179,48 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                 </div>
 
                 <div class="tf-title-right" style="align-items: flex-end">
-                    <?php if(($tf_booking_type == 2 && $tf_hide_price !== '1') || $tf_booking_type == 1 || $tf_booking_type == 3) : ?>
+                    <?php 
+                    $avail_prices = Pricing::instance( $post_id )->get_avail_price();
+                    if(($tf_booking_type == 2 && $tf_hide_price !== '1') || $tf_booking_type == 1 || $tf_booking_type == 3) : ?>
                         <div class="tf-single-tour-pricing">
                             <?php if ( $pricing_rule == 'group' ) { ?>
 
                                 <div class="tf-price group-price">
                                     <span class="sale-price">
-                                        <?php echo !empty($tour_price->wc_sale_group) ? wp_kses_post($tour_price->wc_sale_group) : wp_kses_post($tour_price->wc_group); ?>
+                                        <?php echo wp_kses_post(wp_strip_all_tags(wc_price($avail_prices['group_price']))) ?>
                                     </span>
-                                    <?php echo ( $discount_type != 'none' ) ? '<del>' . wp_kses_post($tour_price->wc_group) . '</del>' : ''; ?>
+                                    <?php echo ( !empty($avail_prices['sale_group_price']) ) ? '<del>' . wp_kses_post(wp_strip_all_tags(wc_price($avail_prices['sale_group_price']))) . '</del>' : ''; ?>
                                 </div>
 
                             <?php } elseif ( $pricing_rule == 'person' ) { ?>
 
-                                <?php if ( ! $disable_adult && ! empty( $tour_price->adult ) ) { ?>
+                                <?php if ( ! $disable_adult && ! empty( $avail_prices['adult_price'] ) ) { ?>
 
                                     <div class="tf-price adult-price">
                                         <span class="sale-price">
-                                            <?php echo !empty($tour_price->wc_sale_adult) ? wp_kses_post($tour_price->wc_sale_adult) : wp_kses_post($tour_price->wc_adult); ?>
+                                            <?php echo wp_kses_post(wp_strip_all_tags(wc_price($avail_prices['adult_price']))); ?>
                                         </span>
-                                        <?php echo ( $discount_type != 'none' ) ? '<del>' . wp_kses_post($tour_price->wc_adult) . '</del>' : ''; ?>
+                                        <?php echo ( !empty($avail_prices['sale_adult_price']) ) ? '<del>' . wp_kses_post(wp_strip_all_tags(wc_price($avail_prices['sale_adult_price']))) . '</del>' : ''; ?>
                                     </div>
 
                                 <?php }
-                                if ( ! $disable_child && ! empty( $tour_price->child ) ) { ?>
+                                if ( ! $disable_child && ! empty( $avail_prices['child_price'] ) ) { ?>
 
                                     <div class="tf-price child-price tf-d-n">
                                         <span class="sale-price">
-                                            <?php echo !empty($tour_price->wc_sale_child) ? wp_kses_post($tour_price->wc_sale_child) : wp_kses_post($tour_price->wc_child); ?>
+                                            <?php echo wp_kses_post(wp_strip_all_tags(wc_price($avail_prices['child_price']))); ?>
                                         </span>
-                                        <?php echo ( $discount_type != 'none' ) ? '<del>' . wp_kses_post($tour_price->wc_child) . '</del>' : ''; ?>
+                                        <?php echo ( !empty($avail_prices['sale_child_price']) ) ? '<del>' . wp_kses_post(wp_strip_all_tags(wc_price($avail_prices['sale_child_price']))) . '</del>' : ''; ?>
                                     </div>
 
                             <?php }
-                            if ( !$disable_adult && (! $disable_infant && ! empty( $tour_price->infant )) ) { ?>
+                            if ( !$disable_adult && (! $disable_infant && ! empty( $avail_prices['infant_price'] )) ) { ?>
 
                                     <div class="tf-price infant-price tf-d-n">
                                         <span class="sale-price">
-                                            <?php echo !empty($tour_price->wc_sale_infant) ? wp_kses_post($tour_price->wc_sale_infant) : wp_kses_post($tour_price->wc_infant); ?>
+                                            <?php echo wp_kses_post(wp_strip_all_tags(wc_price($avail_prices['infant_price']))); ?>
                                         </span>
-                                        <?php echo ( $discount_type != 'none' ) ? '<del>' . wp_kses_post($tour_price->wc_infant) . '</del>' : ''; ?>
+                                        <?php echo ( !empty($avail_prices['sale_infant_price']) ) ? '<del>' . wp_kses_post(wp_strip_all_tags(wc_price($avail_prices['sale_infant_price']))) . '</del>' : ''; ?>
                                     </div>
 
                                 <?php } ?>
@@ -232,13 +235,13 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
 
                                 } elseif ( $pricing_rule == 'person' ) {
 
-                                if ( ! $disable_adult && ! empty( $tour_price->adult ) ) {
+                                if ( ! $disable_adult && ! empty( $avail_prices['adult_price'] ) ) {
                                     echo '<li id="adult" class="active">' . esc_html__( "Adult", "tourfic" ) . '</li>';
                                 }
-                                if ( ! $disable_child && ! empty( $tour_price->child ) ) {
+                                if ( ! $disable_child && ! empty( $avail_prices['child_price'] ) ) {
                                     echo '<li id="child">' . esc_html__( "Child", "tourfic" ) . '</li>';
                                 }
-                                if ( !$disable_adult && (! $disable_infant && ! empty( $tour_price->infant )) ) {
+                                if ( !$disable_adult && (! $disable_infant && ! empty( $avail_prices['infant_price'] )) ) {
                                     echo '<li id="infant">' . esc_html__( "Infant", "tourfic" ) . '</li>';
                                 }
 
@@ -694,6 +697,13 @@ if( 2==$tf_booking_type && !empty($tf_booking_url) ){
                                         <?php if ( $pricing_rule == 'group' ) {
                                             echo !empty( $tour_price->wc_sale_group ) ? wp_kses_post($tour_price->wc_sale_group) : wp_kses_post($tour_price->wc_group);
                                         } else if ( $pricing_rule == 'person' ) {
+                                            if ( ! $disable_adult && ! empty( $tour_price->adult ) ) {
+                                                echo !empty($tour_price->wc_sale_adult) ? wp_kses_post($tour_price->wc_sale_adult) : wp_kses_post($tour_price->wc_adult);
+                                            } else if ( ! $disable_child && ! empty( $tour_price->child ) ) {
+                                                echo !empty( $tour_price->wc_sale_child ) ? wp_kses_post($tour_price->wc_sale_child) : wp_kses_post($tour_price->wc_child);
+
+                                            }
+                                        } else if ( $pricing_rule == 'package' ) {
                                             if ( ! $disable_adult && ! empty( $tour_price->adult ) ) {
                                                 echo !empty($tour_price->wc_sale_adult) ? wp_kses_post($tour_price->wc_sale_adult) : wp_kses_post($tour_price->wc_adult);
                                             } else if ( ! $disable_child && ! empty( $tour_price->child ) ) {

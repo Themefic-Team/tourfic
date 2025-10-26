@@ -17,7 +17,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'    => 'car-General-heading',
 					'type'  => 'heading',
-					'label' => 'General Information',
+					'title' => 'General Information',
 				),
 				array(
 					'id'    => 'car_gallery',
@@ -55,14 +55,9 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'    => 'car-location-heading',
 					'type'  => 'heading',
-					'label' => 'Location Settings',
-					'subtitle' => esc_html__( 'This is the location of your store or company (Note: this is not the pickup or search location, which can be set under Car Rentals -> Locations).', 'tourfic' ),
-				),
-				array(
-					'id'      => 'car-location-docs',
-					'type'    => 'notice',
-					'style'   => 'success',
-					'content' => esc_html__( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/car-rental/general/#Location_Setting" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . esc_html__( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
+					'title' => 'Location Settings',
+					'content' => esc_html__( 'This is the location of your store or company (Note: this is not the pickup or search location, which can be set under Car Rentals -> Locations).', 'tourfic' ),
+					'docs' => esc_url('https://themefic.com/docs/tourfic/car-rental/general/#Location_Setting')
 				),
 				array(
 					'id'       => 'location_title',
@@ -94,14 +89,9 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'    => 'car-car-details-heading',
 					'type'  => 'heading',
-					'label' => 'Car Info',
-					'subtitle' => esc_html__( 'This section includes the basic information related to your car.', 'tourfic' ),
-				),
-				array(
-					'id'      => 'car-booking-docs',
-					'type'    => 'notice',
-					'style'   => 'success',
-					'content' => esc_html__( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/car-rental/car-info/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . esc_html__( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
+					'title' => 'Car Info',
+					'content' => esc_html__( 'This section includes the basic information related to your car.', 'tourfic' ),
+					'docs' => esc_url('https://themefic.com/docs/tourfic/car-rental/car-info/')
 				),
 				array(
 					'id'          => 'car_info_sec_title',
@@ -240,8 +230,8 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'    => 'car-car-details-heading',
 					'type'  => 'heading',
-					'label' => 'Mileage Limit',
-					'subtitle' => esc_html__( 'Enter the mileage limit allowed by your rental package.', 'tourfic' ),
+					'title' => 'Mileage Limit',
+					'content' => esc_html__( 'Enter the mileage limit allowed by your rental package.', 'tourfic' ),
 					'dependency'  => [
 						array( 'unlimited_mileage', '==', 'false' )
 					],
@@ -280,8 +270,8 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
                 array(
 					'id'    => 'car-driverinfo-heading',
 					'type'  => 'heading',
-					'label' => 'Driver Details Section',
-					'subtitle' => esc_html__( 'Add all your driver related information here.', 'tourfic' ),
+					'title' => esc_html__( 'Driver Details Section', 'tourfic'),
+					'content' => __( 'Add all your driver related information here.', 'tourfic' ),
 				),
 				array(
 					'id'       => 'driver_included',
@@ -375,14 +365,9 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'    => 'car-add-info-heading',
 					'type'  => 'heading',
-					'label' => 'Benefits',
-					'subtitle' => esc_html__( 'Include all the benefits or features of your rental package.', 'tourfic' ),
-				),
-				array(
-					'id'      => 'car-add-info-docs',
-					'type'    => 'notice',
-					'style'   => 'success',
-					'content' => esc_html__( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/car-rental/additional-information/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . esc_html__( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
+					'title' => esc_html__( 'Benefits', 'tourfic' ),
+					'content' => __( 'Include all the benefits or features of your rental package.', 'tourfic' ),
+					'docs' => esc_url('https://themefic.com/docs/tourfic/car-rental/additional-information/')
 				),
 				array(
 					'id'       => 'benefits_section',
@@ -427,8 +412,8 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'    => 'car-inc-heading',
 					'type'  => 'heading',
-					'label' => 'Include & Exclude Section',
-					'subtitle' => esc_html__( 'Each rental package includes certain items. Clearly define these inclusions and exclusions to prevent any misunderstandings during your rental period.', 'tourfic' ),
+					'title' => esc_html__('Include & Exclude Section', 'tourfic'),
+					'content' => __( 'Each rental package includes certain items. Clearly define these inclusions and exclusions to prevent any misunderstandings during your rental period.', 'tourfic' ),
 				),
 				array(
 					'id'       => 'inc_exc_section',
@@ -521,14 +506,9 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'    => 'car-faq-heading',
 					'type'  => 'heading',
-					'label' => 'Badge Section',
-					'subtitle' => esc_html__( 'These badges are for marketing purposes and will be visible on the listing page. e.g. Hot Deals, 20% Discount, etc.', 'tourfic' ),
-				),
-				array(
-					'id'      => 'car-faq-docs',
-					'type'    => 'notice',
-					'style'   => 'success',
-					'content' => esc_html__( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/car-rental/badges/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . esc_html__( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
+					'title' => esc_html__('Badge Section', 'tourfic' ),
+					'content' => __( 'These badges are for marketing purposes and will be visible on the listing page. e.g. Hot Deals, 20% Discount, etc.', 'tourfic' ),
+					'docs' => esc_url('https://themefic.com/docs/tourfic/car-rental/badges/')
 				),
 				array(
 					'id'           => 'badge',
@@ -567,14 +547,9 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'    => 'car-continfo-heading',
 					'type'  => 'heading',
-					'label' => 'Contact Info',
-					'subtitle' => esc_html__( 'Please share your contact information here.', 'tourfic' ),
-				),
-				array(
-					'id'      => 'car-continfo-docs',
-					'type'    => 'notice',
-					'style'   => 'success',
-					'content' => esc_html__( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/car-rental/contact-info/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . esc_html__( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
+					'title' =>  esc_html__( 'Contact Info', 'tourfic' ),
+					'content' => __( 'Please share your contact information here.', 'tourfic' ),
+					'docs' => esc_url('https://themefic.com/docs/tourfic/car-rental/contact-info/')
 				),
 				array(
 					'id'       => 'information_section',
@@ -657,14 +632,9 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'    => 'car-pricing-heading',
 					'type'  => 'heading',
-					'label' => 'Pricing Settings',
-					'subtitle' => esc_html__( 'The pricing of a rental package plays a crucial role. Make sure you set it correctly.', 'tourfic' ),
-				),
-				array(
-					'id'      => 'car-pricing-docs',
-					'type'    => 'notice',
-					'style'   => 'success',
-					'content' => esc_html__( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/car-rental/pricing/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . esc_html__( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
+					'title' => esc_html__( 'Pricing Settings', 'tourfic' ),
+					'content' => __( 'The pricing of a rental package plays a crucial role. Make sure you set it correctly.', 'tourfic' ),
+					'docs' => esc_url('https://themefic.com/docs/tourfic/car-rental/pricing/')
 				),
 				array(
 					'id'       => 'price_by',
@@ -720,7 +690,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'      => 'car_availability',
 					'type'    => 'heading',
-					'content' => esc_html__( 'Inventory Management', 'tourfic' ),
+					'title' => esc_html__( 'Inventory Management', 'tourfic' ),
 				),
 				array(
 					'id'          => 'car_numbers',
@@ -733,7 +703,7 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'      => 'price_deposit',
 					'type'    => 'heading',
-					'content' => esc_html__( 'Deposit', 'tourfic' ),
+					'title' => esc_html__( 'Deposit', 'tourfic' ),
 				),
 				array(
 					'id'    => 'tf-pro-notice',
@@ -754,8 +724,8 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'    => 'car-extra-heading',
 					'type'  => 'heading',
-					'label' => 'Rental Extras',
-					'subtitle' => esc_html__( 'Include the extras you want to sell with this package. e.g. Baby child seat, navigation system, etc.', 'tourfic' ),
+					'title' => esc_html__('Rental Extras', 'tourfic'),
+					'content' => esc_html__( 'Include the extras you want to sell with this package. e.g. Baby child seat, navigation system, etc.', 'tourfic' ),
 				),
 				array(
 					'id'    => 'tf-pro-notice',
@@ -776,14 +746,9 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'    => 'car-protection-heading',
 					'type'  => 'heading',
-					'label' => 'Protection Plan',
-					'subtitle' => esc_html__( 'Add and customize protection plans for your car rentals, offering coverage for damage, theft, or accidents. Enhance customer security by providing tailored protection options during the booking process.', 'tourfic' ),
-				),
-				array(
-					'id'      => 'car-protection-docs',
-					'type'    => 'notice',
-					'style'   => 'success',
-					'content' => esc_html__( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/car-rental/protection-plan/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . esc_html__( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
+					'title' => esc_html__( 'Protection Plan', 'tourfic' ),
+					'content' => __( 'Add and customize protection plans for your car rentals, offering coverage for damage, theft, or accidents. Enhance customer security by providing tailored protection options during the booking process.', 'tourfic' ),
+					'docs' => esc_url('https://themefic.com/docs/tourfic/car-rental/protection-plan/')
 				),
 				array(
 					'id'       => 'protection_section',
@@ -881,8 +846,8 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'    => 'car-cancellation-heading',
 					'type'  => 'heading',
-					'label' => 'Cancellation Condition',
-					'subtitle' => esc_html__( 'Define and customize booking cancellation policies for your offerings. This section allows you to set different cancellation rules, such as timeframes for free cancellations, partial refunds, or no refunds.', 'tourfic' ),
+					'title' => esc_html__( 'Cancellation Condition', 'tourfic' ),
+					'content' => esc_html__( 'Define and customize booking cancellation policies for your offerings. This section allows you to set different cancellation rules, such as timeframes for free cancellations, partial refunds, or no refunds.', 'tourfic' ),
 				),
 				array(
 					'id'    => 'tf-pro-notice',
@@ -903,14 +868,9 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'    => 'tour-booking-heading',
 					'type'  => 'heading',
-					'label' => 'Booking Settings',
-					'subtitle' => esc_html__( 'This section offer the options to customize the booking process for your rental package.', 'tourfic' ),
-				),
-				array(
-					'id'      => 'tour-booking-docs',
-					'type'    => 'notice',
-					'style'   => 'success',
-					'content' => esc_html__( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/car-rental/booking/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . esc_html__( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
+					'title' => 'Booking Settings',
+					'content' => esc_html__( 'This section offer the options to customize the booking process for your rental package.', 'tourfic' ),
+					'docs' => esc_url('https://themefic.com/docs/tourfic/car-rental/booking/')
 				),
 				
 				array(
@@ -942,14 +902,9 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'    => 'car-faq-heading',
 					'type'  => 'heading',
-					'label' => 'FAQ Section',
-					'subtitle' => esc_html__( 'This section is designed to help users find answers to common questions.', 'tourfic' ),
-				),
-				array(
-					'id'      => 'car-faq-docs',
-					'type'    => 'notice',
-					'style'   => 'success',
-					'content' => esc_html__( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/car-rental/faq-section/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . esc_html__( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
+					'title' => esc_html__( 'FAQ Section', 'tourfic' ),
+					'content' => esc_html__( 'This section is designed to help users find answers to common questions.', 'tourfic' ),
+					'docs' => esc_url('https://themefic.com/docs/tourfic/car-rental/faq-section/')
 				),
 				array(
 					'id'          => 'faq_sec_title',
@@ -983,20 +938,15 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 
 		// Terms & Conditions
 		'terms_and_conditions' => array(
-			'title'  => esc_html__( 'Terms & Conditions', 'tourfic' ),
+			'title'  => esc_html__( 'Policy', 'tourfic' ),
 			'icon'   => 'fa-regular fa-square-check',
 			'fields' => array(
 				array(
 					'id'    => 'car-tnc-heading',
 					'type'  => 'heading',
-					'label' => 'Terms & Conditions Section',
-					'subtitle' => esc_html__( 'Include your set of regulations and guidelines that customers must agree to in order to use the service provided in your rental package. ', 'tourfic' ),
-				),
-				array(
-					'id'      => 'car-tnc-docs',
-					'type'    => 'notice',
-					'style'   => 'success',
-					'content' => esc_html__( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/car-rental/terms-conditions/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . esc_html__( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
+					'title' => esc_html__( 'Terms & Conditions Section', 'tourfic' ),
+					'content' => esc_html__( 'Include your set of regulations and guidelines that customers must agree to in order to use the service provided in your rental package. ', 'tourfic' ),
+					'docs' => esc_url('https://themefic.com/docs/tourfic/car-rental/terms-conditions/')
 				),
 				array(
 					'id'    => 'car-tc-section-title',
@@ -1036,14 +986,9 @@ TF_Metabox::metabox( 'tf_carrental_opt', array(
 				array(
 					'id'    => 'settings_headding',
 					'type'  => 'heading',
-					'label' =>  esc_html__('Other Settings', 'tourfic' ),
-					'subtitle' => esc_html__( 'These are some additional settings specific to this Car Package. Note that some of these settings may override the global settings. ', 'tourfic' ),
-				),
-				array(
-					'id'      => 'tour-setting-docs',
-					'type'    => 'notice',
-					'style'   => 'success',
-					'content' => esc_html__( 'If anything is not clear, please', 'tourfic' ) . ' <a href="https://themefic.com/docs/tourfic/car-rental/settings/" target="_blank" class="tf-admin-btn tf-btn-secondary tf-small-btn"><strong>' . esc_html__( 'Check our Documentation', 'tourfic' ) . '</strong></a>',
+					'title' =>  esc_html__('Other Settings', 'tourfic' ),
+					'content' => esc_html__( 'These are some additional settings specific to this Car Package. Note that some of these settings may override the global settings. ', 'tourfic' ),
+					'docs' => esc_url('https://themefic.com/docs/tourfic/car-rental/settings/')
 				),
 				array(
 					'id'          => 'review_sec_title',

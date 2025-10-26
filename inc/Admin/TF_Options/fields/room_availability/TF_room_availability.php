@@ -25,41 +25,41 @@ if ( ! class_exists( 'TF_room_availability' ) ) {
 				?>
                 <div class="tf-room-cal-wrap">
                     <div class='tf-room-cal'></div>
-                    <div class="tf-room-cal-field" style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px;">
+                    <div class="tf-room-cal-field">
 
-                        <div class="tf-field-date" style="width: calc(50% - 5px)">
+                        <div class="tf-field-text" style="width: calc(50% - 12px)">
                             <label class="tf-field-label"><?php echo esc_html__( 'From', 'tourfic' ); ?></label>
-                            <div class="tf-fieldset" style="margin-top: 0;">
+                            <div class="tf-field-text-group">
+                                <i class="fa-solid fa-calendar-days"></i>
                                 <input readonly="readonly" type="text" class="tf_room_check_in" name="tf_room_check_in" placeholder="<?php echo esc_html__( 'From', 'tourfic' ); ?>">
-                                <i class="fa-solid fa-calendar-days"></i>
                             </div>
                         </div>
 
-                        <div class="tf-field-date" style="width: calc(50% - 5px)">
+                        <div class="tf-field-text" style="width: calc(50% - 12px)">
                             <label class="tf-field-label"><?php echo esc_html__( 'To', 'tourfic' ); ?></label>
-                            <div class="tf-fieldset" style="margin-top: 0;">
-                                <input readonly="readonly" type="text" class="tf_room_check_out" name="tf_room_check_out" placeholder="<?php echo esc_html__( 'To', 'tourfic' ); ?>">
+                            <div class="tf-field-text-group">
                                 <i class="fa-solid fa-calendar-days"></i>
+                                <input readonly="readonly" type="text" class="tf_room_check_out" name="tf_room_check_out" placeholder="<?php echo esc_html__( 'To', 'tourfic' ); ?>">
                             </div>
                         </div>
 
-                        <div class="tf-field-text tf-price-by-room" style="display: <?php echo $pricing_by == '1' ? 'block' : 'none' ?>; width: calc(50% - 5px)">
+                        <div class="tf-field-number tf-price-by-room" style="display: <?php echo $pricing_by == '1' ? 'block' : 'none' ?>; width: calc(50% - 12px)">
                             <label class="tf-field-label"><?php echo esc_html__( 'Price', 'tourfic' ); ?></label>
                             <input type="number" min="0" name="tf_room_price" placeholder="<?php echo esc_html__( 'Price', 'tourfic' ); ?>">
                         </div>
 
-                        <div class="tf-field-text tf-price-by-person" style="display: <?php echo $pricing_by == '2' ? 'block' : 'none' ?>; width: calc(50% - 5px)">
+                        <div class="tf-field-number tf-price-by-person" style="display: <?php echo $pricing_by == '2' ? 'block' : 'none' ?>; width: calc(50% - 12px)">
                             <label class="tf-field-label"><?php echo esc_html__( 'Adult Price', 'tourfic' ); ?></label>
                             <input type="number" min="0" name="tf_room_adult_price" placeholder="<?php echo esc_html__( 'Adult Price', 'tourfic' ); ?>">
                         </div>
 
-                        <div class="tf-field-text tf-price-by-person" style="display: <?php echo $pricing_by == '2' ? 'block' : 'none' ?>; width: calc(50% - 5px)">
+                        <div class="tf-field-number tf-price-by-person" style="display: <?php echo $pricing_by == '2' ? 'block' : 'none' ?>; width: calc(50% - 12px)">
                             <label class="tf-field-label"><?php echo esc_html__( 'Child Price', 'tourfic' ); ?></label>
                             <input type="number" min="0" name="tf_room_child_price" placeholder="<?php echo esc_html__( 'Child Price', 'tourfic' ); ?>">
                         </div>
+						<?php if ( $pricing_by == '3' ) { ?>
                         <div class="tf-single-options">
-						<?php if ( $pricing_by == '3' ) {
-							if ( ! empty( $room_options ) ) {
+							<?php if ( ! empty( $room_options ) ) {
 								foreach ( $room_options as $key => $room_option ) {
 									$option_pricing_type = ! empty( $room_option['option_pricing_type'] ) ? $room_option['option_pricing_type'] : 'per_room';
 									?>
@@ -77,19 +77,19 @@ if ( ! class_exists( 'TF_room_availability' ) ) {
                                                 </label>
                                             </div>
                                         </div>
-                                        <div class="tf-field-text tf_option_pricing_type_room" style="display: <?php echo $option_pricing_type == 'per_room' ? 'block' : 'none' ?>; width: calc(100% - 90px)">
+                                        <div class="tf-field-number tf_option_pricing_type_room" style="display: <?php echo $option_pricing_type == 'per_room' ? 'block' : 'none' ?>; width: calc(100% - 90px)">
                                             <label class="tf-field-label"><?php echo esc_html__( 'Room Price', 'tourfic' ); ?></label>
                                             <div class="tf-fieldset">
                                                 <input type="number" min="0" name="tf_option_room_price_<?php echo esc_attr( $key ); ?>" placeholder="<?php echo esc_attr__( 'Room Price', 'tourfic' ); ?>">
                                             </div>
                                         </div>
-                                        <div class="tf-field-text tf_option_pricing_type_person" style="display: <?php echo $option_pricing_type == 'per_person' ? 'block' : 'none' ?>; width: calc((100% - 80px)/2 - -5px)">
+                                        <div class="tf-field-number tf_option_pricing_type_person" style="display: <?php echo $option_pricing_type == 'per_person' ? 'block' : 'none' ?>; width: calc((100% - 80px)/2 - -5px)">
                                             <label class="tf-field-label"><?php echo esc_html__( 'Adult Price', 'tourfic' ); ?></label>
                                             <div class="tf-fieldset">
                                                 <input type="number" min="0" name="tf_option_adult_price_<?php echo esc_attr( $key ); ?>" placeholder="<?php echo esc_attr__( 'Adult Price', 'tourfic' ); ?>">
                                             </div>
                                         </div>
-                                        <div class="tf-field-text tf_option_pricing_type_person" style="display: <?php echo $option_pricing_type == 'per_person' ? 'block' : 'none' ?>; width: calc((100% - 80px)/2 - -5px)">
+                                        <div class="tf-field-number tf_option_pricing_type_person" style="display: <?php echo $option_pricing_type == 'per_person' ? 'block' : 'none' ?>; width: calc((100% - 80px)/2 - -5px)">
                                             <label class="tf-field-label"><?php echo esc_html__( 'Child Price', 'tourfic' ); ?></label>
                                             <div class="tf-fieldset">
                                                 <input type="number" min="0" name="tf_option_child_price_<?php echo esc_attr( $key ); ?>" placeholder="<?php echo esc_attr__( 'Child Price', 'tourfic' ); ?>">
@@ -100,10 +100,10 @@ if ( ! class_exists( 'TF_room_availability' ) ) {
                                     </div>
 									<?php
 								}
-							}
-						} ?>
+							} ?>
                         </div>
-                        <div class="tf-field-select" style="width: calc(50% - 5px)">
+						<?php } ?>
+                        <div class="tf-field-select" style="width: calc(50% - 12px)">
                             <label class="tf-field-label"><?php echo esc_html__( 'Status', 'tourfic' ); ?></label>
                             <select name="tf_room_status" class="tf-select">
                                 <option value="available"><?php echo esc_html__( 'Available', 'tourfic' ); ?></option>
@@ -111,10 +111,28 @@ if ( ! class_exists( 'TF_room_availability' ) ) {
                             </select>
                         </div>
 
-                        <div style="width: 100%">
+                        <div class="tf-reset-confirmation-box">
+                            <div class="tf-confirmation-content">
+                                <div class="tf-confirmation-header">
+                                    <h3><?php echo esc_html__( 'Are you sure you want to reset this calendar?', 'tourfic' ); ?></h3>
+                                    <span class="tf_reset_confirmation_close">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M18 6L6 18M6 6L18 18" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </span>
+                                </div>
+                                <div class="tf-confirmation-actions">
+                                    <button class="tf-cancel-btn"><?php echo esc_html__( 'Cancel', 'tourfic' ); ?></button>
+                                    <button class="tf-confirmed-btn"><?php echo esc_html__( 'Confirmed', 'tourfic' ); ?></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tf-calendar-save tf-save-calendar" style="width: 100%">
                             <input type="hidden" name="new_post" value="<?php echo $this->value ? 'false' : 'true'; ?>">
                             <input type="hidden" name="room_id" value="<?php echo esc_attr( get_the_ID() ); ?>">
                             <span class="tf_room_cal_update button button-primary button-large"><?php echo esc_html__( 'Save Calendar', 'tourfic' ); ?></span>
+                            <span class="tf_room_cal_reset button button-secondary button-large"><?php echo esc_html__( 'Reset Calendar', 'tourfic' ); ?></span>
                         </div>
 
                     </div>

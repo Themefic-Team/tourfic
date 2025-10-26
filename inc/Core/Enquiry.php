@@ -831,9 +831,8 @@ abstract class Enquiry {
 				}
 			}
 		}
-
-		$subject = sprintf(
-			esc_html__( '%1$s asked a question on: %2$s', 'tourfic' ),
+		/* translators: %1$s name of user %2$s name of post title */
+		$subject = sprintf( esc_html__( '%1$s asked a question on: %2$s', 'tourfic' ),
 			$name,
 			esc_html( $post_title )
 		);

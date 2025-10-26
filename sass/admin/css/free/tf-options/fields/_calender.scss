@@ -1,5 +1,6 @@
 .tf-apt-cal-wrap,
-.tf-room-cal-wrap {
+.tf-room-cal-wrap,
+.tf-tour-cal-wrap {
     .fc-view-harness {
         height: 395px !important;
     }
@@ -15,10 +16,118 @@
 
     .fc .fc-daygrid-event {
         cursor: pointer;
+        &.tf_tour_disable_date{
+            background-color: #e33529 !important;
+            border-color: #e33529 !important;
+            .fc-event-main{
+                opacity: 0;
+            }
+        }
     }
 
     table {
         margin-bottom: 0 !important;
+    }
+    .bulk-popup-content{
+        margin-top: 15px;
+        .bulk-popup-content-box{
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .tf-bulk-edit-header{
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding-bottom: 14px;
+
+            position: sticky;
+            top: 0;
+            z-index: 99;
+            left: 0;
+            width: 100%;
+            background: #fff;
+            h3{
+                margin: 0;
+                font-size: 24px;
+                color: $tf_text_title;
+                color: #27333F;
+                font-weight: 600;
+                line-height: 32px;
+                letter-spacing: -0.75px;
+            }
+            .tf_tour_bulk_close{
+                cursor: pointer;
+            }
+        }
+        .tf-bulk-repeater-section{
+            display: none;
+            border-radius: 8px;
+            border: 1px solid $tf_border_faint;
+            background: $tf_fill_white;
+            padding: 24px;
+            .tf-field-checkbox{
+                margin-bottom: 16px;
+                > label{
+                    margin-bottom: 8px;
+                }
+            }
+            .tf-checkbox-group{
+                display: flex;
+                gap: 16px;
+                flex-wrap: wrap;
+                margin: 0;
+                li{
+                    margin: 0;
+                    label{
+                        color: $tf_text_title;
+                        font-size: 13px;
+                        font-weight: 400;
+                        line-height: 20px;
+                        padding-left: 26px;
+                        &::before{
+                            top: -2px;
+                            height: 16px;
+                            width: 16px;
+                            border: 2px solid $tf_border_default;
+                            border-radius: 4px;
+                        }
+                        &::after{
+                            top: -1px;
+                        }
+                    }
+                }
+            }
+            .tf-weeks-checkbox{
+                ul{
+                    li{
+                        width: calc(100%/4 - 16px);
+                    }
+                }
+            }
+            .tf-days-checkbox{
+                ul{
+                    li{
+                        width: calc(100%/11 - 16px);
+                    }
+                }
+            }
+            .tf-months-checkbox,
+            .tf-years-checkbox{
+                ul{
+                    li{
+                        width: calc(100%/6 - 16px);
+                    }
+                }
+            }
+            .tf-years-checkbox{
+                margin-bottom: 0px;
+            }
+        }
+        .tf-field.tf-field-repeater{
+            padding-bottom: 0px;
+        }
     }
 }
 
@@ -36,6 +145,89 @@
     @include flexbox();
     gap: 10px;
     flex-wrap: wrap;
+}
+.tf-bulk-popup,
+.tf-reset-confirmation-box{
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba($color: #000000, $alpha: .5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+    .bulk-popup-content{
+        background-color: $color-white;
+        border-radius: 16px;
+        box-shadow: 0px 4px 140px 0px rgba(0, 0, 0, 0.25);
+        padding: 24px;
+        width: 736px;
+        .bulk-popup-content-box{
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            max-height: 500px;
+            overflow-y: auto;
+            // Smooth scroll effect
+            scroll-behavior: smooth;
+            @media #{$max768}{
+                max-height: 360px;
+            }
+            // Webkit scrollbar styling
+            &::-webkit-scrollbar {
+                width: 6px;
+            }
+
+            &::-webkit-scrollbar-track {
+                background: transparent;
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background-color: rgba(0, 0, 0, 0.3);
+                border-radius: 4px;
+            }
+
+            // Firefox scrollbar styling
+            scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+            scrollbar-width: thin;
+            .tf-date-time-selection{
+                border: 0px solid;
+                padding: 0px;
+                .tf-field-select{
+                    width: calc(100% - 2px) !important;
+                }
+            }
+        }
+
+        .tf-repeater .tf-repeater-add .tf-repeater-icon{
+            font-size: 12px;
+        }
+        .tf-mb-5{
+            margin-bottom: 10px;
+        }
+    }
+}
+.tf-single-package{
+    .tf-field-switch{
+        width: 160px;
+    }
+    .tf-form-fields{
+        width: calc(100% - 160px);
+        display: flex;
+        gap: 12px;
+        .tf_option_pricing_type_person{
+            width: 33%
+        }
+    }
+}
+.tf-tour-limitation-group {
+    display: flex;
+    gap: 8px;
+    flex-wrap: nowrap;
 }
 .tf-single-option{
     @include flexbox();
@@ -68,7 +260,473 @@
     }
 
 }
+.tf-reset-confirmation-box{
+    display: none;
+    .tf-confirmation-content{
+        width: 320px;
+        padding: 40px;
+        background-color: $color-white;
+        border-radius: 10px;
+        .tf-confirmation-header{
+            display: flex;
+            gap: 8px;
+            h3{
+                margin: 0 0 35px 0;
+            }
+            .tf_reset_confirmation_close{
+                svg{
+                    cursor: pointer;
+                }
+            }
+        }
+        .tf-confirmation-actions{
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            button{
+                border-radius: 8px;
+                background: $tf_fill_alternative;
+                color: $tf_primary_default;
+                border-radius: 8px;
+                padding: 12px 32px !important;
+                font-size: 15px;
+                font-weight: 600;
+                line-height: 24px !important;
+                border: 0px solid;
+                cursor: pointer;
+                &.tf-confirmed-btn{
+                    background: linear-gradient(180deg, #0051A3 0%, #003C79 100%);
+                    color: $tf_fill_white;
+                }
+            }
+        }
+    }
+}
 
+// Tour Calender
+.tf-tour-cal-wrap,
+.tf-apt-cal-wrap,
+.tf-room-cal-wrap{
+    position: relative;
+    .tf-tour-reset-refresh{
+        position: absolute;
+        right: 110px;
+        top: 25px;
+        span{
+            height: 32px;
+            font-size: 12px;
+            padding: 0 12px !important;
+            svg{
+                height: 18px;
+            }
+        }
+    }
+    .tf-tour-cal,
+    .tf-apt-cal,
+    .tf-room-cal{
+        border-radius: 8px;
+        border: 1px solid $tf_border_faint;
+        background: $tf_fill_white;
+        padding: 24px;
+        .fc-header-toolbar{
+            margin-bottom: 16px;
+            .fc-toolbar-title{
+                padding: 0 !important;
+                color: $tf_text_title;
+                font-size: 15px !important;
+                font-weight: 600;
+                line-height: 24px;
+            }
+            .fc-button-group{
+                border-radius: 8px;
+                border: 0.5px solid $tf_border_faint;
+                background: $tf_fill_white;
+                padding: 6px 8px;
+                gap: 20px;
+                height: 32px;
+                align-items: center;
+                .fc-button{
+                    background-color: transparent;
+                    border: 0px;
+                    padding: 0;
+                    position: relative;
+                    top: -1px;
+                    .fc-icon-chevron-left::before,
+                    .fc-icon-chevron-right::before {
+                        color: $tf_text_paragraph;
+                    }
+                    &:focus{
+                        outline: none;
+                        box-shadow: none;
+                    }
+                    &.fc-next-button{
+                        position: relative;
+                        &::after{
+                            position: absolute;
+                            content: "";
+                            width: 8px;
+                            height: 8px;
+                            background-color: $tf_text_paragraph;
+                            border-radius: 50%;
+                            left: -14px;
+                            top: 8.5px;
+                        }
+                    }
+                }
+            }
+        }
+        .fc-view-harness{
+            table{
+                border: 0px;
+                .fc-scrollgrid-section-header{
+                    th{
+                        border: 0px;
+                    }
+                    .fc-scroller{
+                        // Smooth scroll effect
+                        scroll-behavior: smooth;
+
+                        // Webkit scrollbar styling
+                        &::-webkit-scrollbar {
+                            width: 6px;
+                        }
+
+                        &::-webkit-scrollbar-track {
+                            background: transparent;
+                            margin-top: 20px;
+                            margin-bottom: 20px;
+                        }
+
+                        &::-webkit-scrollbar-thumb {
+                            background-color: rgba(0, 0, 0, 0.3);
+                            border-radius: 4px;
+                        }
+
+                        // Firefox scrollbar styling
+                        scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+                        scrollbar-width: thin;
+                    }
+                    .fc-col-header {
+                        border-top: 0.5px solid $tf_border_faint;
+                        margin-bottom: 16px !important;
+                        tr{
+                            th{
+                                border: 0px;
+                                padding-top: 12px;
+                                a{
+                                    color: $tf_text_title;
+                                    font-size: 13px;
+                                    font-weight: 400;
+                                    line-height: 20px;
+                                    padding: 0;
+                                }
+                            }
+                        }
+                    }
+                }
+                .fc-scrollgrid-section-body{
+                    > td{
+                        border: 0px solid;
+                    }
+                    .fc-daygrid-body{
+                        .fc-scrollgrid-sync-table{
+                            tbody{
+                                tr{
+                                    display: flex;
+                                    gap: 8px;
+                                    margin-bottom: 8px;
+                                    &:last-child{
+                                        margin-bottom: 0px;
+                                    }
+                                    td{
+                                        width: calc((100% - 48px) / 7); 
+                                        border-radius: 8px;
+                                        border: 0.5px solid $tf_border_faint;
+                                        background: $tf_fill_white;
+                                        &.fc-day-today{
+                                            background-color: rgba(255,220,40,.15);
+                                        }
+                                        .fc-daygrid-day-top{
+                                            flex-direction: row;
+                                            a{
+                                                padding: 8px;
+                                                color: $tf_text_title;
+                                                font-size: 15px;
+                                                font-weight: 600;
+                                                line-height: 24px; 
+                                            }
+                                        }
+                                        .fc-h-event{
+                                            border-radius: 4px;
+                                            border: 0px;
+                                            border-left: 1px solid $tf_info_text;
+                                            background: $tf_info_background;
+                                            padding-top: 6px;
+                                            padding-bottom: 6px;
+                                            padding-left: 8px;
+                                            .fc-event-title{
+                                                color: $tf_info_text;
+                                                font-size: 11px;
+                                                font-weight: 600;
+                                                line-height: 16px;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .tf-apt-cal-field,
+    .tf-room-cal-field{
+        border-radius: 8px;
+        border: 1px solid $tf_border_faint;
+        background: $tf_fill_white;
+        padding: 24px;
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 24px;
+        box-sizing: border-box;
+        justify-content: space-between;
+    }
+    .tf-date-time-selection{
+        border-radius: 8px;
+        border: 1px solid $tf_border_faint;
+        background: $tf_fill_white;
+        padding: 24px;
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 24px;
+        .tf-field-repeater{
+            border: 0;
+            padding: 0;
+            margin: 0;
+            .tf-repeater-content-wrap{
+                margin: 0;
+                border: 0px solid;
+            }
+            .tf-fieldset{
+                border: 0px solid #f2f5f7;
+                background: #fff;
+                padding:0px;
+                .tf-repeater-add{
+                    margin-left: 0px;
+                }
+            }
+            .tf-repeater-content-wrap{
+                padding: 0 1px 0 0;
+                flex-wrap: nowrap;
+                align-items: center;
+                gap: 16px;
+                .tf-field{
+                    padding: 0;
+                }
+                .tf-repeater-icon-delete{
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+    .tf-field-group-box{
+        padding: 24px;
+        border-radius: 8px;
+        border: 1px solid $tf_border_faint;
+        background: $tf_fill_white;
+        .tf-fieldset{
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            .tf-field{
+                padding: 0;
+            }
+        }
+    }
+    .tf-package-field-repeater{
+        padding: 24px;
+        border-radius: 8px;
+        border: 1px solid $tf_border_faint;
+        background: $tf_fill_white;
+        .tf-repeater-wrap{
+            .tf-single-repeater{
+                &:last-child{
+                    margin-bottom: 0px;
+                }
+                .tf-repeater-header{
+                    .tf-repeater-title{
+                        width: calc(100% - 30px) !important;
+                    }
+                }
+                .tf-repeater-content-wrap{
+                    padding: 8px;
+                    margin: 0;
+                    .tf-tab-switch-box{
+                        .tf-tab-field-content{
+                            .tf-field{
+                                &:first-child{
+                                    padding-bottom: 0px;
+                                }
+                            }
+                        }
+                    }
+                    #group_tabs{
+                        .tf-tab-field-content{
+                            .tf-field{
+                                &:first-child{
+                                    padding: 12px 0;
+                                }
+                                .tf-repeater-content-wrap{
+                                    border: 0px solid;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .tf-field-accordion{
+            .tf-fieldset{
+                display: flex;
+                gap: 16px;
+                flex-direction: column;
+                .tf-package-time-fields{
+                    margin: 0;
+                    padding: 0;
+                    .tf-fieldset{
+                        padding: 0;
+                        border: 0px solid;
+                        .tf_tour_allowed_times{
+                            .tf-single-repeater{
+                                margin-bottom: 16px;
+                                .tf-repeater-content-wrap{
+                                    display: flex;
+                                    flex-wrap: nowrap;
+                                    align-items: center;
+                                    gap: 16px;
+                                    padding: 0;
+                                    .tf-field{
+                                        padding: 0;
+                                    }
+                                    .tf-repeater-icon-delete{
+                                        svg{
+                                            cursor: pointer;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        .tf-repeater-add{
+                            margin: 0;
+                        }
+                    }
+                }
+                #group_tabs{
+                    .tf-field-repeater{
+                        padding-bottom: 16px;
+                        margin: 0;
+                        padding: 0;
+                        .tf-fieldset{
+                            padding: 0;
+                            border: 0px solid;
+                            background: transparent;
+                            .group_discount_package{
+                                .tf-single-repeater{
+                                    margin-bottom: 16px;
+                                    .tf-repeater-content-wrap{
+                                        padding: 0;
+                                        align-items: center;
+                                        gap: 16px;
+                                        flex-wrap: nowrap;
+                                        background-color: transparent;
+                                        .tf-field{
+                                            padding: 0;
+                                        }
+                                    }
+                                }
+                            }
+                            .tf-repeater-add{
+                                margin: 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .tf-save-calendar{
+        display: flex;
+        gap: 16px;
+    }
+    .button-primary,
+    .button-secondary{
+        border-radius: 8px;
+        background: $tf_fill_alternative;
+        color: $tf_primary_default;
+        border-radius: 8px;
+        padding: 12px 32px !important;
+        font-size: 15px;
+        font-weight: 600;
+        line-height: 24px !important;
+        border: 0px solid;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+    .button-primary{
+        background: linear-gradient(180deg, #0051A3 0%, #003C79 100%);
+        color: $tf_fill_white;
+    }
+    .tf-single-options{
+        .tf-single-repeater{
+            &:last-child{
+                margin-bottom: 0px;
+            }
+            .tf-field-accordion{
+                .tf-fieldset{
+                    display: flex;
+                    flex-direction: column;
+                    gap: 16px;
+                    .tf-field-repeater{
+                        padding: 16px;
+                        .tf-single-repeater{
+                            &:last-child{
+                                margin-bottom: 16px;
+                            }
+                            .tf-repeater-content-wrap{
+                                padding: 0;
+                                align-items: center;
+                                gap: 16px;
+                                flex-wrap: nowrap;
+                                .tf-field{
+                                    padding: 0;
+                                }
+                                .tf-repeater-icon-delete{
+                                    cursor: pointer;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.tf-apt-cal-wrap,
+.tf-room-cal-wrap{
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    width: 100%;
+    .tf-apt-cal,
+    .tf-room-cal{
+        width: 100%;
+    }
+}
 @-webkit-keyframes tf-rotate {
     100% {
         -webkit-transform: rotate(360deg);
