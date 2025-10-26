@@ -5364,7 +5364,7 @@ a.tf-import-btn, a.tf-export-btn {
 .tf-reset-confirmation-box .tf-confirmation-content .tf-confirmation-header h3 {
   margin: 0 0 35px 0;
 }
-.tf-reset-confirmation-box .tf-confirmation-content .tf-confirmation-header .tf_tour_bulk_close svg {
+.tf-reset-confirmation-box .tf-confirmation-content .tf-confirmation-header .tf_reset_confirmation_close svg {
   cursor: pointer;
 }
 .tf-reset-confirmation-box .tf-confirmation-content .tf-confirmation-actions {

@@ -4379,11 +4379,13 @@ jQuery(function ($) {
         });
 
         // Reset Calendar Data
-        $(document).on("click", ".tf_tour_cal_reset", function (e) {
+        $(document).on("click", ".tf_tour_cal_reset, .tf_room_cal_reset, .tf_apt_cal_reset", function (e) {
             e.preventDefault();
             $('.tf-reset-confirmation-box').css('display', 'flex');
         });
-        $(document).on('click', '.tf-reset-confirmation-box .tf-confirmed-btn', function (e) {
+
+        //tour availability calander reset
+        $(document).on('click', '.tf-tour-cal-field .tf-reset-confirmation-box .tf-confirmed-btn', function (e) {
             e.preventDefault();
             let btn = $(this);
             let container = btn.closest('.tf-tour-cal-wrap');
@@ -4414,11 +4416,11 @@ jQuery(function ($) {
                         if (tour.fullCalendar) {
                             tour.fullCalendar.refetchEvents();
                         }
-                        $('.tf-reset-confirmation-box').hide();
                     } else {
                         notyf.error(response.data.message);
                     }
 
+                    $('.tf-reset-confirmation-box').hide();
                     container.css({'pointer-events': 'auto', 'opacity': '1'})
                     cal.removeClass('tf-content-loading');
                     btn.removeClass('tf-btn-loading');
@@ -4438,7 +4440,117 @@ jQuery(function ($) {
             });
         });
 
-        $(document).on("click", ".tf-reset-confirmation-box .tf-cancel-btn, .tf-reset-confirmation-box .tf_tour_bulk_close svg", function (e) {
+        //room availability calander reset
+        $(document).on('click', '.tf-room-cal-field .tf-reset-confirmation-box .tf-confirmed-btn', function (e) {
+            e.preventDefault();
+            let btn = $(this);
+            let container = btn.closest('.tf-room-cal-wrap');
+            let containerEl = btn.closest('.tf-room-cal-wrap')[0];
+            let cal = container.find('.tf-room-cal');
+            let roomAvailability = container.find('avail_date');
+            $.ajax({
+                url: tf_options.ajax_url,
+                type: 'POST',
+                data: {
+                    'action': 'tf_reset_room_availability',
+                    '_nonce': tf_admin_params.tf_nonce,
+                    'room_id': $('#post_ID').val()
+                },
+                beforeSend: function () {
+                    container.css({'pointer-events': 'none', 'opacity': '0.5'})
+                    cal.addClass('tf-content-loading');
+                    btn.addClass('tf-btn-loading');
+                },
+                success: function (response) {
+                    if (response.data.status === true) {
+                        roomAvailability.val(response.data.avail_date)
+                        notyf.success(response.data.message);
+                        roomResetForm(container);
+
+                        var room_cal = new roomCal(containerEl);
+                        room_cal.init();
+                        if (room_cal.fullCalendar) {
+                            room_cal.fullCalendar.refetchEvents();
+                        }
+                    } else {
+                        notyf.error(response.data.message);
+                    }
+                    
+                    $('.tf-reset-confirmation-box').hide();
+                    container.css({'pointer-events': 'auto', 'opacity': '1'})
+                    cal.removeClass('tf-content-loading');
+                    btn.removeClass('tf-btn-loading');
+                },
+                error: function (e) {
+                    container.css({'pointer-events': 'auto', 'opacity': '1'})
+                    cal.removeClass('tf-content-loading');
+                    btn.removeClass('tf-btn-loading');
+                },
+                complete: function () {
+                    container.css({'pointer-events': 'auto', 'opacity': '1'});
+                    cal.removeClass('tf-content-loading');
+                    btn.removeClass('tf-btn-loading');
+                },
+            });
+        });
+
+        //apartment availability calander reset
+        $(document).on('click', '.tf-apt-cal-field .tf-reset-confirmation-box .tf-confirmed-btn', function (e) {
+            e.preventDefault();
+            let btn = $(this);
+            let container = btn.closest('.tf-apt-cal-wrap');
+            let containerEl = btn.closest('.tf-apt-cal-wrap')[0];
+            let cal = container.find('.tf-apt-cal');
+            let aptAvailability = container.find('.apt_availability');
+            $.ajax({
+                url: tf_options.ajax_url,
+                type: 'POST',
+                data: {
+                    'action': 'tf_reset_apt_availability',
+                    '_nonce': tf_admin_params.tf_nonce,
+                    'apartment_id': $('#post_ID').val()
+                },
+                beforeSend: function () {
+                    container.css({'pointer-events': 'none', 'opacity': '0.5'})
+                    cal.addClass('tf-content-loading');
+                    btn.addClass('tf-btn-loading');
+                },
+                success: function (response) {
+                    if (response.data.status === true) {
+                        aptAvailability.val(response.data.apt_availability)
+                        notyf.success(response.data.message);
+                        aptResetForm(container);
+
+                        var apt_cal = new apartmentCal(containerEl);
+                        apt_cal.init();
+                        if (apt_cal.fullCalendar) {
+                            apt_cal.fullCalendar.refetchEvents();
+                        }
+                    } else {
+                        notyf.error(response.data.message);
+                    }
+                    
+                    $('.tf-reset-confirmation-box').hide();
+                    container.css({'pointer-events': 'auto', 'opacity': '1'})
+                    cal.removeClass('tf-content-loading');
+                    btn.removeClass('tf-btn-loading');
+
+                },
+                error: function (e) {
+                    container.css({'pointer-events': 'auto', 'opacity': '1'})
+                    cal.removeClass('tf-content-loading');
+                    btn.removeClass('tf-btn-loading');
+                },
+                complete: function () {
+                    container.css({'pointer-events': 'auto', 'opacity': '1'});
+                    cal.removeClass('tf-content-loading');
+                    btn.removeClass('tf-btn-loading');
+                    $('.tf-tour-cal-field').removeClass('tf-bulk-popup');
+                },
+            });
+        });
+
+        $(document).on("click", ".tf-reset-confirmation-box .tf-cancel-btn, .tf-reset-confirmation-box .tf_reset_confirmation_close svg", function (e) {
             e.preventDefault();
             $('.tf-reset-confirmation-box').hide();
         });

@@ -891,7 +891,7 @@ if ( ! class_exists( 'TF_tourAvailabilityCal' ) ) {
                                     <div class="tf-confirmation-content">
                                         <div class="tf-confirmation-header">
                                             <h3><?php echo esc_html__( 'Are you sure you want to reset this calendar?', 'tourfic' ); ?></h3>
-                                            <span class="tf_tour_bulk_close">
+                                            <span class="tf_reset_confirmation_close">
                                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M18 6L6 18M6 6L18 18" stroke="#566676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                                 </svg>

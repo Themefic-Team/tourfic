@@ -41,9 +41,11 @@ class TF_Options {
 
 		add_action( 'wp_ajax_tf_add_hotel_room_availability', array( $this, 'tf_add_hotel_room_availability' ) );
 		add_action( 'wp_ajax_tf_get_hotel_room_availability', array( $this, 'tf_get_hotel_room_availability' ) );
+		add_action( 'wp_ajax_tf_reset_room_availability', array( $this, 'tf_reset_room_availability' ) );
 		add_action( 'save_post', array( $this, 'tf_update_room_avail_date_price' ), 9999, 2 );
 		add_action( 'wp_ajax_tf_add_apartment_availability', array( $this, 'tf_add_apartment_availability' ) );
 		add_action( 'wp_ajax_tf_get_apartment_availability', array( $this, 'tf_get_apartment_availability' ) );
+		add_action( 'wp_ajax_tf_reset_apt_availability', array( $this, 'tf_reset_apt_availability' ) );
 
 		add_action( 'wp_ajax_tf_add_tour_availability', array( $this, 'tf_add_tour_availability' ) );
 		add_action( 'wp_ajax_tf_get_tour_availability', array( $this, 'tf_get_tour_availability' ) );
@@ -670,6 +672,35 @@ class TF_Options {
 	}
 
 	/*
+     * Reset room availability calendar
+     * @auther Foysal
+     */
+	function tf_reset_room_availability() {
+		// Add nonce for security and authentication.
+		check_ajax_referer( 'updates', '_nonce' );
+
+		$room_id     = isset( $_POST['room_id'] ) && ! empty( $_POST['room_id'] ) ? sanitize_text_field( $_POST['room_id'] ) : '';
+		$room_data = get_post_meta( $room_id, 'tf_room_opt', true );
+
+		if(empty($room_data)){
+			wp_send_json_error( [
+				'status'  => false,
+				'message' => __( 'Publish the Room First!', 'tourfic' )
+			] );
+		}
+
+		$room_data['avail_date'] = [];
+
+		update_post_meta( $room_id, 'tf_room_opt', $room_data );
+		wp_send_json_success( [
+			'status'     => true,
+			'message'    => __( 'Availability Reset Successfully.', 'tourfic' ),
+			'avail_date' => [],
+		] );
+		wp_die();
+	}
+
+	/*
 	 * Apartment availability calendar update
 	 * @auther Foysal
 	 */
@@ -810,10 +841,38 @@ class TF_Options {
 		die();
 	}
 
+	/*
+     * Reset apartment availability calendar
+     * @auther Foysal
+     */
+	function tf_reset_apt_availability() {
+		// Add nonce for security and authentication.
+		check_ajax_referer( 'updates', '_nonce' );
+
+		$apartment_id     = isset( $_POST['apartment_id'] ) && ! empty( $_POST['apartment_id'] ) ? sanitize_text_field( $_POST['apartment_id'] ) : '';
+		$apartment_data = get_post_meta( $apartment_id, 'tf_apartment_opt', true );
+
+		if(empty($apartment_data)){
+			wp_send_json_error( [
+				'status'  => false,
+				'message' => __( 'Publish the Apartment First!', 'tourfic' )
+			] );
+		}
+		
+		$apartment_data['apt_availability'] = [];
+
+		update_post_meta( $apartment_id, 'tf_apartment_opt', $apartment_data );
+		wp_send_json_success( [
+			'status'     => true,
+			'message'    => __( 'Availability Reset Successfully.', 'tourfic' ),
+			'apt_availability' => [],
+		] );
+		wp_die();
+	}
 
 	/*
-	 * Apartment availability calendar update
-	 * @auther Foysal
+	 * Tour availability calendar update
+	 * @auther Jahid
 	 */
 	function tf_add_tour_availability() {
 		// Add nonce for security and authentication.
@@ -1789,10 +1848,16 @@ class TF_Options {
 		check_ajax_referer( 'updates', '_nonce' );
 
 		$tour_id     = isset( $_POST['tour_id'] ) && ! empty( $_POST['tour_id'] ) ? sanitize_text_field( $_POST['tour_id'] ) : '';
-		
 		$tour_data = get_post_meta( $tour_id, 'tf_tours_opt', true );
+		
+		if(empty($tour_data)){
+			wp_send_json_error( [
+				'status'  => false,
+				'message' => __( 'Publish the Tour First!', 'tourfic' )
+			] );
+		}
+		
 		$tour_data['tour_availability'] = [];
-
 		update_post_meta( $tour_id, 'tf_tours_opt', $tour_data );
 		wp_send_json_success( [
 			'status'           => true,
